@@ -1,4 +1,4 @@
-all: extractstrtbltbl txt2strtbl cattbl
+all: extractstrtbltbl extractrostertbltbl txt2strtbl cattbl
 
 clean:
-	rm -f extractstrtbltbl txt2strtbl cattbl
+	rm -f extractstrtbltbl extractrostertbltbl txt2strtbl cattbl
