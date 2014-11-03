@@ -19,7 +19,7 @@ TBLS = \
 	text/0x1d8c300.bin \
 	text/battleeffects.bin \
 	text/academy/selectclasspokemon.bin \
-	text/0x1d8def0.bin \
+	text/betweenbattles.bin \
 	text/0x1d8e4e0.bin \
 	text/prizes.bin \
 	text/0x1d8e8b0.bin \
