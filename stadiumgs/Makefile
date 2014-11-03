@@ -97,7 +97,7 @@ TBLS = \
 	text/gymleadercastle/rocket/executivef1.bin \
 	text/gymleadercastle/rocket/executivem1.bin \
 	text/gymleadercastle/mahogany/alvin1.bin \
-	text/gymleadercastle/mahogany/kathy1.bin \
+	text/gymleadercastle/mahogany/carol1.bin \
 	text/gymleadercastle/mahogany/pryce1.bin \
 	text/gymleadercastle/blackthorn/gloria1.bin \
 	text/gymleadercastle/blackthorn/vince1.bin \
@@ -189,10 +189,10 @@ TBLS = \
 	text/littlecup/cora1.bin \
 	text/littlecup/tina1.bin \
 	text/littlecup/rex1.bin \
-	text/primecup/teresa1.bin \
+	text/primecup/terry1.bin \
 	text/primecup/yang1.bin \
 	text/primecup/adam1.bin \
-	text/primecup/flora1.bin \
+	text/primecup/floria1.bin \
 	text/primecup/chase1.bin \
 	text/primecup/craig1.bin \
 	text/primecup/kathy1.bin \
@@ -216,7 +216,7 @@ TBLS = \
 	text/gymleadercastle/rocket/executivef2.bin \
 	text/gymleadercastle/rocket/executivem2.bin \
 	text/gymleadercastle/mahogany/alvin2.bin \
-	text/gymleadercastle/mahogany/kathy2.bin \
+	text/gymleadercastle/mahogany/carol2.bin \
 	text/gymleadercastle/mahogany/pryce2.bin \
 	text/gymleadercastle/blackthorn/gloria2.bin \
 	text/gymleadercastle/blackthorn/vince2.bin \
@@ -310,7 +310,7 @@ TBLS = \
 	text/primecup/terry2.bin \
 	text/primecup/yang2.bin \
 	text/primecup/adam2.bin \
-	text/primecup/flora2.bin \
+	text/primecup/floria2.bin \
 	text/primecup/chase2.bin \
 	text/primecup/craig2.bin \
 	text/primecup/kathy2.bin \
@@ -321,7 +321,7 @@ TBLS = \
 	text/academy/skilltest/trainer/carson.bin \
 	text/academy/skilltest/trainer/clayton.bin \
 	text/academy/skilltest/trainer/jonathan.bin \
-	text/academy/skilltest/trainer/cindy.bin \
+	text/academy/skilltest/trainer/cyndy.bin \
 	text/academy/skilltest/trainer/nancy.bin \
 	text/academy/skilltest/gymleader/joseph.bin \
 	text/academy/skilltest/gymleader/naomi.bin \
