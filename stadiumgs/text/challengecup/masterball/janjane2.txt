@@ -1,0 +1,79 @@
+<FACE,13,0>We're JAN and JANE. We work hard together.
+
+<FACE,13,0>Treating us like babies is a big no-no!
+
+<FACE,13,0>We're serious about battling. You'd better get ready.
+
+<FACE,13,0>#26, get out there!
+
+<FACE,13,0>Next, #26! Go!
+
+<FACE,13,0>#26, try as hard as you can!
+
+<FACE,13,0>#26, you can win!
+
+<FACE,13,0>#26, knock 'em out!
+
+<FACE,13,0>No, no, no! Come on back!
+
+<FACE,13,0>#26, welcome back!
+
+<FACE,13,0>#26, you come on back!
+
+<FACE,13,0>You are good, #26!
+
+<FACE,13,0>Uh-oh. Oh, no!
+
+<FACE,13,0>Uh-oh. Oh, no!
+
+<FACE,13,0>Critical hit! Ooh, I'm so happy!
+
+<FACE,13,0>Oh! A critical hit is a no-no!
+
+<FACE,13,0>Ooh, that's scary!
+
+<FACE,13,0>Ooh, how exciting!
+
+<FACE,13,0>Oh, you poor thing!
+
+<FACE,13,0>Oh, oh, oh...
+
+<FACE,13,0>Eeyaah! Nooooo!
+
+<FACE,13,0>Do you like your POKéMON a lot?
+
+<FACE,13,0>We raised our POKéMON together.
+
+<FACE,13,0>We don't even lose to grownups.
+
+<FACE,13,0>We'll keep trying. Yes, we will.
+
+<FACE,13,0>We won. Good for us!
+
+<FACE,13,0>JAN and JANE. We're strong!
+
+<FACE,13,0>We won! That was really exciting.
+
+<FACE,13,0>JAN and JANE, did we lose?
+
+<FACE,13,0>Oh, we lost. We're so sad.
+
+<FACE,13,0>That's a big no-no. You're strong.
+
+<FACE,13,0>It's a tie. We're not happy about this.
+
+<FACE,13,0>Do you give up? It is still JAN and JANE's win.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,13,0>

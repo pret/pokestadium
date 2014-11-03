@@ -1,0 +1,81 @@
+<FACE,26,0>Initiate <COL1,PUSH,146,195,255,255>ACID ARMOR<COL1,POP> & <COL1,PUSH,146,195,255,255>BARRIER<COL1,POP> plan!...Come on, let's boogie!
+
+<FACE,26,1>Initiate <COL1,PUSH,146,195,255,255>ACID ARMOR<COL1,POP> & <COL1,PUSH,146,195,255,255>BARRIER<COL1,POP> plan! Ready or not, here I come!
+
+<FACE,26,0>Ah, soak it up! Initiate <COL1,PUSH,146,195,255,255>ACID ARMOR<COL1,POP> & <COL1,PUSH,146,195,255,255>BARRIER<COL1,POP> plan!
+
+<FACE,26,1>Tweet! Operation, start!
+
+<FACE,26,1>#26, dash!
+
+<FACE,26,0>#26, let's do it!
+
+<FACE,26,0>How about #26?
+
+<FACE,26,0>#26 can come out!
+
+<FACE,26,1>Change. Change!
+
+<FACE,26,1>Maybe I won't use this one.
+
+<FACE,26,1>I'll change it!
+
+<FACE,26,1>I'll pull it from battle.
+
+<FACE,26,0>Gwaaah! It's rocking!
+
+<FACE,26,1>Ker-splash!
+
+<FACE,26,1>Weak spot? Swamped ya!
+
+<FACE,26,0>Got the weak spot? Groovy!
+
+<FACE,26,1>I'm feelin' it!
+
+<FACE,26,0>Say, hey. That'll do.
+
+<FACE,26,1>Glub...
+
+<FACE,26,0>Yes... Makes me happy...
+
+<FACE,26,1>Glub, glub, glub...
+
+<FACE,26,1><WAZA,151,2>Foam away and melt!
+
+<FACE,26,1><WAZA,112,2>Put up a BARRIER!
+
+<FACE,26,1><WAZA,57,4>You ridin' that SURF?
+
+<FACE,26,1><WAZA,127,4>I remember the time I swam up a waterfall...
+
+<FACE,26,1>The plan worked! I hope I get extra credit!
+
+<FACE,26,0>Defense is the greatest offense!
+
+<FACE,26,1>Wasn't that a good plan? I wish I had shown it to a lady
+SWIMMER...
+
+<FACE,26,1>A move that isn't affected by defense... Is there such a thing?
+
+<FACE,26,1>Snivel... My plan failed...
+
+<FACE,26,0>Okay! I'll be training in the tropical seas! Then again, I don't
+have the travel budget!
+
+<FACE,26,1>Neither of us were serious enough.
+
+<FACE,26,1>Let's go to an indoor pool where it's warm.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+The official POKéMON League tournament.
+Hone your skills to become the champ!
+
+A tournament with many cute Pokémon, but don't let down
+your guard -- you will be tested.
+
+!no use!
+
+A CUP tournament open to the lowest-level Pokémon.
+Strategy is the key here.
+
+!no use!
+
+The ultimate tournament without level restrictions.
+Let it all hang out!
+
+The Battle Time and Move Selection Time can be set in this
+tournament.
+
+Return to the Select screen.
+
+EVENT BATTLE
+
+The combined levels of the three
+lowest-level Pokémon exceed #03.
+
+At least one Pokémon is not eligible.
+
+Event Battle Settings
+
+On
+
+Off
+
+Time Limits
+
+#02 min.
+
+Battle Time
+
+Move Selection Time
+
+#02 sec.
+
+OK
+
+TRAINER
+
+POKé CUP
+
+POKé CUP
+
+POKé CUP
+
+PETIT CUP
+
+PIKA CUP
+
+PRIME CUP
+
+EVENT BATTLE Settings
+
+Cancel
+
+Battle
+
+Rules
+
+Quit

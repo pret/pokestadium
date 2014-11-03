@@ -1,0 +1,47 @@
+\CU to Menu
+
+Loading...
+
+Saving...
+
+Menu
+
+\RContinue
+
+         Exit this Menu\n       and continue with\n   the Game Boy POKéMON.
+
+\RQuit
+
+   Quit Game Boy POKéMON\n         and return to\n       POKéMON STADIUM 2.
+
+        Did you save?
+
+        Is it OK to quit?
+
+\RYes
+
+\RNo
+
+\RHelp/Settings
+
+   The START and SELECT\n settings may be changed.
+
+\CR Button to\ndouble the speed
+
+Settings
+
+None
+
+    Press once to double \nthe POKéMON game's speed.
+
+    Each time you press,\n     the POKéMON game's\n         speed changes.
+
+\B Button to cancel
+
+Save Error
+
+Leaving your N64 turned ON,\ndetach the GB Game Pak,\nthen re-attach it.
+
+The GB Game Pak or\nthe data has been changed.
+
+Loading... Please, wait.

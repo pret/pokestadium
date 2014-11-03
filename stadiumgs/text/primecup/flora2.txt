@@ -1,0 +1,80 @@
+<FACE,9,2>I study extensively. That makes me strong.
+
+<FACE,9,2>I'm not going to pull any punches! Ready?
+
+<FACE,9,2>Let's have a battle for practice's sake.
+
+<FACE,9,2>Number one! #26!
+
+<FACE,9,2>#26, let's go!
+
+<FACE,9,2>It has to be #26!
+
+<FACE,9,2>#26 will do.
+
+<FACE,9,2>#26 will tend to you.
+
+<FACE,9,2>Draw back for now!
+
+<FACE,9,2>#26, it's over!
+
+<FACE,9,2>#26, finish!
+
+<FACE,9,2>It's all over, #26!
+
+<FACE,9,0>Aack! I misplayed that!
+
+<FACE,9,1>Bingo! Exactly as planned!
+
+<FACE,9,1>Yes! That hit the weak spot! Just as I
+planned it!
+
+<FACE,9,2>Critical hit? That one couldn't be helped.
+
+<FACE,9,0>Oh! That's a little annoying!
+
+<FACE,9,2>So... We do this now and...
+
+<FACE,9,0>Awww, that's so tedious.
+
+<FACE,9,1>And that's the game! Ha, ha, ha...
+
+<FACE,9,0>Oh... How could this happen...?
+
+<FACE,9,2><WAZA,95,2>I want you to sleep for a while...
+
+<FACE,9,2><WAZA,94,2>PSYCHIC! It will torture you!
+
+<FACE,9,2>Excessive training is a problem.
+
+<FACE,9,1><NEMURI,2>Good night!
+
+<FACE,9,1>That was a foregone conclusion.
+
+<FACE,9,1>For some reason, I don't feel like I've battled.
+
+<FACE,9,1>That was quite good. You should keep working at this, too.
+
+<FACE,9,0>Arrrgh... I won't forgive you for this!
+
+<FACE,9,2>This must mean that I still have much to learn.
+
+<FACE,9,0>I'm going to use this disappointment to motivate me!
+
+<FACE,9,2>How could this happen, I wonder?
+
+<FACE,9,2>Oh? But why?
+
+HYANCE
+
+UTORANCE
+
+DASHANCE
+
+TOEDANCE
+
+MR.MANCE
+
+ESPANCE
+
+<FACE,9,0>

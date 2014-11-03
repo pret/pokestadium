@@ -1,0 +1,295 @@
+Cancel selections
+
+Switch
+
+Flip page
+
+POKéMON
+
+AREA
+
+MOVE 1
+
+MOVE 2
+
+MOVE 3
+
+MOVE 4
+
+PARTY
+
+GB
+
+N64
+
+List A to Z
+
+List by POKéDEX No.
+
+List by new POKéDEX No.
+
+Gather POKéMON that can be moved to <TEX,1>
+
+Group POKéMON by CUP
+
+Use item
+
+Select POKéMON to be listed
+
+List by No.
+
+List in descending order
+
+List in ascending order
+
+Group by Level
+
+List A to Z
+
+List by Area
+
+Group #25
+
+Cancel #25
+
+Group by Type
+
+Cancel Type
+
+Move
+
+Check
+
+Use item
+
+Hold item
+
+Take item
+
+Exchange items
+
+Read Mail
+
+MAIL
+
+Color POKéMON
+
+Infected with POKéRUS
+
+Recovered from POKéRUS
+
+Other
+
+???
+
+Check which list?
+
+Move from #37
+to where?
+
+PARTY
+
+GB BOXes
+
+N64 BOXes
+
+OK!
+
+Enter Level
+
+~
+
+Group
+
+Cancel
+
+Group by TYPE
+
+Group by MOVE
+
+POKéMON that could be moved to
+<TEX,1>Game Paks have been
+selected.
+
+The destination has no room.
+
+-------
+
+----
+
+Group what kind of POKéMON?
+
+Movable POKéMON
+
+POKéMON that can be moved after deleting move(s)
+
+Unmovable POKéMON(new POKéMON)
+
+Cancel
+
+♂
+
+♀
+
+Unknown
+
+Not at all
+
+Not quite
+
+A little bit
+
+Pretty good
+
+Very good
+
+Excellent
+
+Exchange items
+
+<LINE,26><FONT,LOAD,20><COL1,PUSH,0,230,40,255>#26 <COL1,POP><FONT,LOAD,16>'s
+<FONT,LOAD,20><COL1,PUSH,0,200,0,255>#27 <COL1,POP><FONT,LOAD,16><LINE,28>
+with what item?
+
+Group by CUP
+
+LITTLE CUP
+
+POKé CUP
+
+PRIME CUP
+
+Edit rules
+
+Cancel
+
+White
+
+Green
+
+Red
+
+May be entered.
+
+Level too low
+
+Level too high
+
+POKéMON names are color-coded.
+
+There are no registered
+rules. Please register
+rules using Rule Edit under
+the Option menu.
+
+Items usable on #25
+
+Useable items
+
+Use which item?
+
+Use on which POKéMON?
+
+Use on which move?
+
+Forget which move?
+
+Is this OK?
+
+Hold item(s) <COL1,PUSH,255,200,20,255>(Usable in battle)<COL1,POP>
+
+Hold which item?
+
+#30's PP is
+maxed out.
+
+#29's #30
+PP increased.
+
+It won't have any effect.
+
+If it learns #30,
+it can't be moved
+to <TEX,1>.
+
+#26 doesn't like this!
+
+Remove the held #24
+to make it HOLD another item.
+
+GB MAILBOX
+
+N64 MAILBOX
+
+PACK
+
+#21's PC
+
+N64 Metal Case<FONT,PUSH,16>(<TEX,0>'s Item Box)<FONT,POP>
+
+#24 was placed in the
+N64 Metal Case (<TEX,0>'s Item Box).
+
+Store #24 where?
+
+It is full.
+
+The contents will be lost. Is that OK?
+
+Yes
+
+No
+
+#24 was placed in
+#25.
+
+#24's contents were erased,
+and it was placed in #25.
+
+#24's contents were erased,
+and it was placed in N64's
+Metal Case (<TEX,0>'s Item Box).
+
+#24's contents
+
+#26 was moved from #37 to #40.
+It was moved to an unselected spot, so it can't
+be seen.
+
+#26 changed from L#02 to L#03.
+It exceeded the group level, so it will no longer
+be visible.
+
+#26 forgot the group move, so it will
+no longer be visible.
+
+#26 evolved and lost the group type,
+so it will no longer be visible.
+
+#26 evolved into #27. As
+#28 is being grouped, it will no longer
+be visible.
+
+#26 doesn't qualify for the group CUP,
+so it will no longer be visible.
+
+#26 cannot be moved to <TEX,1>
+as is, so it will no longer be visible.
+
+#26 cannot be moved to <TEX,1>
+even if forgets move(s), so it will
+no longer be visible.
+
+#26 can be moved <TEX,1>
+without forgetting move(s), so it will
+no longer be visible.
+
+#26 can now be moved to <TEX,1>,
+so it will no longer be visible.
+
+POKéMON holding MAIL are being grouped.
+#26 will no longer be visible.
+
+#26 will become invisible.
+
+??

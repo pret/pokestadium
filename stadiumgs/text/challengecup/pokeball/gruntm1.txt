@@ -1,0 +1,80 @@
+<FACE,48,2>Huh? You're challenging me? Are you serious?
+
+<FACE,48,2>I won't care if anything happens to your POKéMON.
+
+<FACE,48,2>Ha, ha, ha... I'll bring you down slowly but surely.
+
+<FACE,48,2>Here goes!
+
+<FACE,48,2>How about this one!
+
+<FACE,48,2>Feeling pressured?
+
+<FACE,48,1>This one's in the bag!
+
+<FACE,48,1>Okay, you're mine!
+
+<FACE,48,2>Doggone it! It's not working!
+
+<FACE,48,2>You just watch!
+
+<FACE,48,1>Ha, ha, ha...
+
+<FACE,48,2>And, now...
+
+<FACE,48,0>Blithering fool!
+
+<FACE,48,2>So... Are you mad?
+
+<FACE,48,1>There! Critical hit! Aren't you lucky!
+
+<FACE,48,0>Critical hit? Ha!
+
+<FACE,48,0>What do you think you're doing?
+
+<FACE,48,1>Hurry up and lose!
+
+<FACE,48,2>So what?
+
+<FACE,48,1>There! Give up?
+
+<FACE,48,0>Oh! What the...?
+
+<FACE,48,1><DOKU,2>Ha, ha, ha... Suffer slowly.
+
+<FACE,48,1><DOKUDOKU,2>Feel it! Suffer. Suffer.
+
+<FACE,48,2>Hey, brat, you'd better not show us any
+disrespect.
+
+<FACE,48,2>Tenacious, aren't you?
+
+<FACE,48,1>Wah, ha, ha! Too bad for you, eh?
+
+<FACE,48,1>You did the best you could, eh?
+
+<FACE,48,1>Why are you still wandering around? Get lost!
+
+<FACE,48,0>No way! This couldn't have happened!
+
+<FACE,48,0>What? This is bad news.
+
+<FACE,48,2>Hmph. Happy now?
+
+<FACE,48,2>Boring...
+
+<FACE,48,2>What in the world are you doing?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,48,0>

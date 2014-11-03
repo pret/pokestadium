@@ -1,0 +1,82 @@
+<FACE,34,1>Hi. You into POKéMON, too? Then you've gotta battle me!
+
+<FACE,34,1>Among POKéMANIACs, ----- is hip. You can fill in the blanks.
+
+<FACE,34,1>You want to see my POKéMON? Oh, okay. Sure.
+
+<FACE,34,1>I'll start!
+
+<FACE,34,1>Nice, huh? It's #26.
+
+<FACE,34,1>I love this #26!
+
+<FACE,34,1>Have you ever seen a #25 that
+looked as sweet as this one?
+
+<FACE,34,1>#26! Gorgeous, eh?
+
+<FACE,34,1>Okay, come back.
+
+<FACE,34,1>Are you tired? Come back.
+
+<FACE,34,0>Good going. That's enough.
+
+<FACE,34,0>You were awesome, #26!
+
+<FACE,34,2>Waah! Waaah! Waaaah!
+
+<FACE,34,0>Oh, beautiful!
+
+<FACE,34,0>That hit the weak spot! Oh, fantastic!
+
+<FACE,34,2>Aiyeee! Eeyaah! Please--not the weak spot!
+
+<FACE,34,2>No! Don't do stuff like that!
+
+<FACE,34,0>Oooh! Fabulous!
+
+<FACE,34,2>No! Please stop!
+
+<FACE,34,0>I'm overjoyed!
+
+<FACE,34,2>Aiyeeeeeee!
+
+<FACE,34,1><WAZA,162,4>This will chop its HP in half! SUPER FANG!
+
+<FACE,34,1><WAZA,7,4>Burn up! FIRE PUNCH!
+
+<FACE,34,1><WAZA,72,4>Steal its HP! MEGA DRAIN!
+
+<FACE,34,1><WAZA,95,4>Take that! Go to sleep!
+
+<FACE,34,1>Hmm... That was inspiring. Such a neat victory.
+
+<FACE,34,1>When it comes down to the wire, my POKéMON become even more
+wonderful.
+
+<FACE,34,1>Ooh, that was so, like, subtle and deep. Don't you think it was a
+memorable battle?
+
+<FACE,34,2>Waaah! My POKéMON! You're so mean!
+
+<FACE,34,2>Wh-what have you done...? I'm speechless...
+
+<FACE,34,2>No... ...groan...
+
+<FACE,34,1>So, was this a wasted battle?
+
+<FACE,34,1>I concur. It's better this way.
+
+DRAMANIA
+
+PUPIMANIA
+
+KINGMANIA
+
+CATEMANIA
+
+NOCMANIA
+
+TANGMANIA
+
+<FACE,34,2>

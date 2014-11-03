@@ -1,0 +1,81 @@
+<FACE,45,1>Must we do this? I don't like being cruel.
+
+<FACE,45,1>I pity you... You're not going home safely.
+
+<FACE,45,0>Ahahahaha... You? Defeat me? Ahahaha...That's so laughable!
+
+<FACE,45,1>Let's go!
+
+<FACE,45,1>#26, go!
+
+<FACE,45,1>#26!
+
+<FACE,45,1>Knock it out!
+
+<FACE,45,1>Prepare for the end!
+
+<FACE,45,1>The real battle starts now!
+
+<FACE,45,1>#26, come back!
+
+<FACE,45,0>Good! You can return!
+
+<FACE,45,0>Good job!
+
+<FACE,45,1>Arrrgh! What are you doing?!?
+
+<FACE,45,0>Magnificent!
+
+<FACE,45,1>Ha, ha, ha! That hit its weak spot! What?
+What's with that look?
+
+<FACE,45,1>What are you doing?!? Why did you let it hit
+you there?
+
+<FACE,45,1>So what? Who cares about that?
+
+<FACE,45,1>I can do things this way, too.
+
+<FACE,45,1>How boring.
+
+<FACE,45,0>There! The end!
+
+<FACE,45,0>What? What are you saying?
+
+<FACE,45,0><HIRUMI,2>Now what, kid?
+
+<FACE,45,1>Kids like you are a rare breed.
+
+<FACE,45,1>You have some nerve.
+
+<FACE,45,1>Don't do anything useless.
+
+<FACE,45,0>You made me get serious. That's something to be proud of.
+
+<FACE,45,0>You're not too bad. I applaud you.
+
+<FACE,45,0>Stick to battling your friends.
+
+<FACE,45,1>Waaaait! Who is this? This kid?
+
+<FACE,45,1>I must be dreaming this.
+
+<FACE,45,1>...Not possible...
+
+<FACE,45,1>Hey, what's this? What's this supposed to mean?
+
+<FACE,45,1>That's right... That's the right move.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,45,1>

@@ -1,0 +1,82 @@
+<FACE,1,2>Yep, I'm JANINE. You're saying you beat my father?
+
+<FACE,1,2>My POKéMON are masters of poisonous moves.
+
+<FACE,1,2>I know you're tough. This is deadly serious!
+
+<FACE,1,2>#26, go!
+
+<FACE,1,2>There, that's #26!
+
+<FACE,1,2>#26, give it your best shot!
+
+<FACE,1,2>Good, #26!
+
+<FACE,1,2>#26, put it away!
+
+<FACE,1,2>You're no good for this!
+
+<FACE,1,2>#26, come back!
+
+<FACE,1,1>You did well, #26!
+
+<FACE,1,2>All right, that's good enough, #26!
+
+<FACE,1,2>No! Really?!?
+
+<FACE,1,1>That's the way I like it!
+
+<FACE,1,2>Taking that critical hit... You have no luck
+at all.
+
+<FACE,1,0>What! That was a critical hit? What do you
+mean?!?
+
+<FACE,1,0>Aww, don't take that.
+
+<FACE,1,1>That'll do.
+
+<FACE,1,0>That's not nice.
+
+<FACE,1,1>I avenged our honor!
+
+<FACE,1,0>I give!
+
+<FACE,1,2><WAZA,226,2>BATON PASS!
+
+<FACE,1,1><WAZA,104,2>DOUBLE TEAM, #26!
+
+<FACE,1,2><WAZA,213,4>There, turn on the CHARM!
+
+<FACE,1,1><DOKUDOKU,2>Poisonous moves sap you steadily.
+
+<FACE,1,1>I did it! Not too shabby!
+
+<FACE,1,1>Heh! Sure, winning makes me happy.
+
+<FACE,1,1>There, there. It went just as I expected. I'll battle someone
+tougher next time.
+
+<FACE,1,0>Why? How could this happen?
+
+<FACE,1,0>I can understand losing to Father, but losing to you?
+
+<FACE,1,2>Aren't you something. Where did you train?
+
+<FACE,1,2>Whew. We can't end it this way.
+
+<FACE,1,2>Ha, ha, ha! Is that a ninja escape technique?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,1,0>

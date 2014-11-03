@@ -1,0 +1,93 @@
+<FACE,7,0>My POKéMON are very smart.
+
+<FACE,7,0>Whatever the attack, it doesn't hurt if it doesn't hit.
+
+<FACE,7,0>Come on, everyone. It's time for you to make an appearance.
+
+<FACE,7,0>My dear #26 will start.
+
+<FACE,7,0>It's #26's turn.
+
+<FACE,7,0>#26, fight!
+
+<FACE,7,0>#26, be brave!
+
+<FACE,7,0>#26, you can win.
+
+<FACE,7,0>That was too much to ask of #26.
+
+<FACE,7,0>Good work, #26.
+
+<FACE,7,0>Thank you, #26.
+
+<FACE,7,0>#26, you were fabulous!
+
+<FACE,7,0>Wow, #28. That's super!
+
+<FACE,7,1>Oh! Sorry, #28!
+
+<FACE,7,1>That happened to hit the weak spot.
+#28! Did that hurt?
+
+<FACE,7,1>Eeyaah! That was right on the weak spot!
+#26, are you all right?
+
+<FACE,7,1>Be strong, #26!
+
+<FACE,7,1>#28, I'm so sorry!
+
+<FACE,7,1>I can only tell it to hang on...
+
+<FACE,7,0>Ohh... This is nerve-wracking...
+
+<FACE,7,1>Aiyee! #26!
+
+<FACE,7,1><WAZA,104,1>Please, make their attacks miss...
+
+<FACE,7,0>#25 is so cute!
+
+<FACE,7,0>#25, you're fabulous!
+
+<FACE,7,0>Try hard, #25!
+
+<FACE,7,0>All my POKéMON are impressive.
+
+<FACE,7,0>You worked so hard, everyone!
+
+<FACE,7,0>Oh, you all look so happy!
+
+<FACE,7,1>Oh... Why are you so rough?
+
+<FACE,7,1>If a POKéMON is cute, then that's good enough!
+
+<FACE,7,1>Oh, my... What am I to do?
+
+<FACE,7,0>A tie? That's fine, isn't it?
+
+<FACE,7,0>You're protective of your POKéMON, too, aren't you?
+
+TYROGAN
+
+PARAN
+
+GEODAN
+
+SPINARAN
+
+ZUBAN
+
+SHREWAN
+
+<FACE,7,1>
+
+
+
+
+
+
+
+
+
+
+
+

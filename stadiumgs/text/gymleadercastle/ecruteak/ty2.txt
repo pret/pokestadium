@@ -1,0 +1,79 @@
+<FACE,22,0>Hi-yaaah! Do you believe in unseen powers?
+
+<FACE,22,1>Hmm... I can see your future!
+
+<FACE,22,2>Hmm... I sense something in you...
+
+<FACE,22,0>Waaaah!
+
+<FACE,22,0>Hi-yah!
+
+<FACE,22,0>Hoohah!
+
+<FACE,22,0>Towaaaa!
+
+<FACE,22,0>Yaaaah!
+
+<FACE,22,0>Hmm...
+
+<FACE,22,2>Ack... Argh...
+
+<FACE,22,1>Mmmm...
+
+<FACE,22,2>Ugggggh...
+
+<FACE,22,1>Ayeeeah!
+
+<FACE,22,2>Critical hit? Ha, ha, ha...
+
+<FACE,22,2>It took a critical hit? Hi-yah!
+
+<FACE,22,0>It took a critical hit? Kiiiyah!
+
+<FACE,22,2>Nnnn...
+
+<FACE,22,2>Hwoar!
+
+<FACE,22,2>Ugh... Arrrgh...
+
+<FACE,22,0>Kaah!
+
+<FACE,22,1>Gyaaah... Ugh.
+
+<FACE,22,0><DOKU,2>Hah, there!
+
+<FACE,22,1>I can see into your soul.
+
+<FACE,22,1>You cannot read my mind.
+
+<FACE,22,1>Training isn't easy.
+
+<FACE,22,0>You haven't learned to focus your mind!
+
+<FACE,22,0>Not good enough! You've much to learn!
+
+<FACE,22,0>Come again another time.
+
+<FACE,22,1>Oh... I'm shattered...
+
+<FACE,22,1>I'm exhausted, body and soul.
+
+<FACE,22,1>This is not good. I must try again...
+
+<FACE,22,1>I couldn't beat the likes of you?
+
+<FACE,22,1>How pathetic of you.
+
+GASTIUM
+
+NOCTIUM
+
+WEEPINIUM
+
+QWILIUM
+
+KINGIUM
+
+DITIUM
+
+<FACE,22,1>

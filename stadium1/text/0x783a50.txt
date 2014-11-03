@@ -1,0 +1,46 @@
+This is a sophisticated PC.
+You can study Pokémon on it,
+organize your items and so on.
+
+This is a machine for trading Pokémon.
+You can trade directly with a friend's
+Game Boy Game Pak.
+
+Use this machine to select a
+currently inserted Game Boy
+Game Pak.
+
+This machine lets you check out your
+POKéDEX in detail.
+It also identifies where Pokémon live.
+
+You won a Pokémon as a prize!
+That's quite an accomplishment.
+Here you go!
+
+I was entrusted with a Pokémon
+for you.
+
+It's in this Poké Ball.
+Take good care of it. Take the BALL
+and tell me where you want to put it.
+
+This seems to be a new Game Pak,
+or its SAVE file is corrupted.@
+
+The chosen Game Pak hasn't been
+saved at a POKéMON CENTER.
+
+You don't have a POKéDEX.
+You'd better get one from a Game Boy
+Game Pak.
+
+You don't have a POKéDEX.
+This machine won't work without one.
+
+You need to have two Game Paks if you
+want to trade.
+
+It's too bad, but that BOX is full.
+Change over to a different BOX using
+the PC.

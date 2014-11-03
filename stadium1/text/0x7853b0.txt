@@ -1,0 +1,229 @@
+AREA 1
+
+AREA 2
+
+AREA 3
+
+CENTER AREA
+
+#25's NEST
+
+GB MAP
+
+GB MAP OFF
+
+AREA UNKNOWN
+
+Use an OLD ROD anywhere.
+
+Level
+
+Probability
+
+Maybe
+
+Rarely
+
+Not Often
+
+Sometimes
+
+Often
+
+Abundant
+
+Always
+
+Surely
+
+ROUTE 1
+
+ROUTE 2
+
+VIRIDIAN FOREST
+
+DIGLETT'S CAVE
+
+ROUTE 3
+
+MT. MOON
+
+ROUTE 4
+
+ROUTE 24
+
+ROUTE 25
+
+ROUTE 5
+
+ROUTE 6
+
+ROUTE 9
+
+ROCK TUNNEL
+
+ROUTE 10
+
+POKéMON TOWER
+
+ROUTE 8
+
+ROUTE 7
+
+ROUTE 11
+
+ROUTE 12
+
+ROUTE 13
+
+ROUTE 14
+
+ROUTE 15
+
+ROUTE 16
+
+ROUTE 17
+
+ROUTE 18
+
+SAFARI ZONE
+
+ROUTE 19
+
+SEAFOAM ISLAND
+
+ROUTE 20
+
+POKéMON MANSION
+
+ROUTE 21
+
+ROUTE 22
+
+ROUTE 23
+
+VICTORY ROAD
+
+POWER PLANT
+
+UNKNOWN DUNGEON
+
+~
+
+2F
+
+3F
+
+B1F
+
+AREA 1
+
+AREA 2
+
+AREA 3
+
+CENTER AREA
+
+2F
+
+B1F
+
+1F
+
+B2F
+
+B1F
+
+B2F
+
+B3F
+
+B4F
+
+
+
+1F
+
+B1F
+
+B2F
+
+
+
+3F
+
+B1F
+
+
+
+1F
+
+2F
+
+1F
+
+1F
+
+2F
+
+3F
+
+4F
+
+5F
+
+6F
+
+7F
+
+1F
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

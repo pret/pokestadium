@@ -1,0 +1,77 @@
+RULE EDIT
+
+Make rules
+
+Change rules
+
+Delete rules
+
+Re-ordering
+
+Cancel
+
+Rule name
+
+Qualifying POKéMON
+
+POKéMON level
+
+Maximum 3 POKéMON level total
+
+Use items?
+
+Hold identical items?
+
+OK
+
+#03 <FONT,PUSH,16>kind(s)<FONT,POP>
+
+(No restrictions)
+
+Up to
+
+
+
+Use
+
+Don't use
+
+Hold
+
+Don't hold
+
+<COL1,PUSH,100,130,255,255><COL1,PUSH,100,130,255,255>Blue panels<COL1,POP> (qualifying POKéMON)
+
+Select/Deselect
+
+The rules devised here may be used for
+Event Battles and Free Battles.
+
+There is no more room for rules. If you
+want to add more rules, delete
+unnecessary rules.
+
+Change which rules?
+
+There are no rules.
+
+The rules can't be re-ordered.
+
+Delete which rule?
+
+Re-order which rule?
+
+Delete this rule?
+
+Exchange with which rule?
+
+Yes
+
+No
+
+---------
+
+Please select at least six
+kinds.
+
+Edit rule #01

@@ -1,0 +1,28 @@
+STEREO
+
+MONO
+
+ON
+
+OFF
+
+OPTIONS
+
+SOUND
+
+VOICE
+
+DELETE SAVED DATA
+
+QUIT
+
+The N64 Game Pak data will be deleted. OK?
+
+All GB items & Pokémon transferred to the
+N64 Game Pak will also be lost. Are you sure?
+
+Yes
+
+No
+
+Saved data deleted.

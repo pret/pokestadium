@@ -1,0 +1,61 @@
+Level
+
+Type
+
+HP
+
+Attack
+
+Defense
+
+Speed
+
+Spcl. Atk
+
+Spcl. Def
+
+Item
+
+ID
+
+OT
+
+Exp. Points
+
+#06 more to
+
+Status
+
+
+
+Power
+
+Accuracy
+
+No.
+
+Type 1
+
+Type 2
+
+ID No.
+
+L
+
+/
+
+?
+
+Nickname
+
+Gender
+
+L
+
+Tame
+
+:
+
+♂
+
+♀

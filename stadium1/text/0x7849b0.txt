@@ -1,0 +1,209 @@
+LIST
+
+Move Cursor
+
+Page #01/3
+
+Pokémon
+
+Nickname
+
+ID
+
+OT
+
+AREA
+
+TYPE1
+
+TYPE2
+
+MOVE 1
+
+MOVE 2
+
+MOVE 3
+
+MOVE 4
+
+LEVEL
+
+HP
+
+ATTACK
+
+DEFENSE
+
+SPEED
+
+SPECIAL
+
+PARTY
+
+GB
+
+N64
+
+List A to Z
+
+List by No.
+
+Group Pokémon by CUP
+
+Use item
+
+Select Pokémon to be listed
+
+Cancel selections
+
+List by No.
+
+List in descending order
+
+List in ascending order
+
+Group by LEVEL
+
+List A to Z
+
+List by AREA
+
+Group #25
+
+Cancel #25
+
+Group by TYPE
+
+Cancel TYPE
+
+Move
+
+Use item
+
+Check
+
+Group Pokémon by CUP
+
+Color-coding
+
+PETIT CUP
+
+PIKA CUP
+
+POKé CUP
+
+POKé CUP
+
+POKé CUP
+
+Cancel
+
+White
+
+Green
+
+Red
+
+May be entered.
+
+Level too low
+
+Level too high
+
+Pokémon names are color-coded.
+
+Check which Pokémon list.
+
+Move from #37
+to where?
+
+PARTY
+
+GB BOXes
+
+64 BOXes
+
+BOX 1
+
+BOX 2
+
+BOX 3
+
+BOX 4
+
+BOX 5
+
+BOX 6
+
+BOX 7
+
+BOX 8
+
+OK
+
+Enter Level
+
+From
+
+Group
+
+Cancel
+
+Group by TYPE
+
+Group by move
+
+Items Usable on #25
+
+Usable Items
+
+Items Held
+
+PC
+
+N64
+
+Use which item?
+
+Use on which Pokémon?
+
+Use on which move?
+
+Forget which move?
+
+Is this OK?
+
+Yes
+
+No
+
+Return to Menu?
+
+Yes
+
+No
+
+#26 was moved from #37 to #40.
+Because it moved to an unselected BOX,
+it will not be displayed.
+
+#26 forgot #29
+and learned #30.
+Because the grouped move was forgotten,
+this Pokémon will not be listed.
+
+#26 leveled up from L#02 to L#03.
+Because it exceeded the grouped level, this Pokémon
+will not be listed.
+
+BOX
+
+GB Game Pak
+
+64 Game Pak
+
+GB BOX
+
+64 BOX
+
+×

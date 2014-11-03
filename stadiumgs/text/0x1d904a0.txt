@@ -1,0 +1,76 @@
+<LINE,26><DIST,1>The Transfer Pak is not set
+properly. Please turn the N64
+Control Deck OFF and check all
+connections.
+
+<DIST,1>There is a problem with the GB Game
+Pak's connector. Please turn the N64
+Control Deck OFF and consult the
+Transfer Pak Instruction Booklet.
+
+<DIST,1>The saved data has been corrupted,
+so it is impossible to CONTINUE.
+Please reset the game and choose
+NEW GAME.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

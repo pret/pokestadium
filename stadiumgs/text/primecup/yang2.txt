@@ -1,0 +1,79 @@
+<FACE,28,2>Hi-yah! I've dedicated my life to fighting POKéMON!
+
+<FACE,28,2>Hi-yah! Come at me as hard as you can!
+
+<FACE,28,2>Hi-yah! I'll drop you before you can say, "Boo!"
+
+<FACE,28,0>Hi-yah!
+
+<FACE,28,0>Gah! Go, #26!
+
+<FACE,28,0>Shatter it, #26!
+
+<FACE,28,0>Destroy, #26!
+
+<FACE,28,0>Blow it away, #26!
+
+<FACE,28,1>Arrrgh! What a wasted effort!
+
+<FACE,28,2>#26, get back here!
+
+<FACE,28,2>Good going!
+
+<FACE,28,2>Well done!
+
+<FACE,28,1>Gwah!
+
+<FACE,28,0>Hi-yah!
+
+<FACE,28,0>There! Hammered its weak spot!
+
+<FACE,28,1>Aiyee! No! Hammered where it hurts!
+
+<FACE,28,0>What!?!
+
+<FACE,28,0>Yes!
+
+<FACE,28,1>Arrrgh...
+
+<FACE,28,0>Hi-yah! Keep it up!
+
+<FACE,28,1>Gwaaaaah!
+
+<FACE,28,2><WAZA,243,4>Try MIRROR COAT!
+
+<FACE,28,0><HIRUMU,4>Yeah! Just as I planned!
+
+<FACE,28,2><KONRAN,4>It's confused! What'll it do?
+
+<FACE,28,2><WAZA,170,4>This should work! #26! MIND READER!
+
+<FACE,28,0>Thank you! That was a memorable match!
+
+<FACE,28,0>Nice one! It's the ultimate!
+
+<FACE,28,0>I'll always dedicate myself to fighting POKéMON!
+
+<FACE,28,1>This must be some sort of mistake!
+
+<FACE,28,1>Please tell me this is a lie!
+
+<FACE,28,1>I won't give up because of this!
+
+<FACE,28,2>Gimme more! Bring it on! I'm not quitting!
+
+<FACE,28,2>Aye! I'll accept your challenge anytime!
+
+BUFF
+
+BLAST
+
+CRUEL
+
+PRIME
+
+CROSS
+
+WRATH
+
+<FACE,28,1>

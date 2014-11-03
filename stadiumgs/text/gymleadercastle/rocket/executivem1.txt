@@ -1,0 +1,82 @@
+<FACE,46,0>Oh? You've come all this way? Fine. I accept your challenge.
+
+<FACE,46,0>I have received reports that your skills are not insignificant.
+
+<FACE,46,0>I'm sorry to say it, but this is the end. I will eliminate you.
+
+<FACE,46,0>#26!
+
+<FACE,46,0>#26!
+
+<FACE,46,0>Then #26 it is!
+
+<FACE,46,0>Next #26!
+
+<FACE,46,0>And #26 for the finale!
+
+<FACE,46,0>A failed gambit.
+
+<FACE,46,0>Merely acceptable, no?
+
+<FACE,46,0>It's not quite there yet.
+
+<FACE,46,0>Good. Well done.
+
+<FACE,46,0>Oh, I see.
+
+<FACE,46,0>Oh, the poor thing.
+
+<FACE,46,0>Ah, there's its weak spot. Quite good,
+wouldn't you agree?
+
+<FACE,46,0>Oh, you hit its weak spot. Nicely done.
+
+<FACE,46,0>Hmm...
+
+<FACE,46,0>Oh. My, my...
+
+<FACE,46,0>Hmm?
+
+<FACE,46,0>How disappointing for you.
+
+<FACE,46,0>Rubbed out...
+
+<FACE,46,0>TEAM ROCKET is poised to take over the
+world.
+
+<FACE,46,0>We are a tremendously large organization.
+
+<FACE,46,0><NOROI,2>Allow me to show you a horrific technique.
+
+<FACE,46,0><DOKU,2>Ah... My condolences...
+
+<FACE,46,0>What do you think? International-level POKéMON are marvelous,
+aren't they?
+
+<FACE,46,0>May I invite you to join TEAM ROCKET for a career in crime?
+
+<FACE,46,0>You may have the qualities to become an EXECUTIVE.
+
+<FACE,46,0>This does not mean that you have dashed our grand designs.
+
+<FACE,46,0>As reported, you are indeed talented.
+
+<FACE,46,0>It pains me to see your talent go to waste!
+
+<FACE,46,0>I must say, I had great confidence before the match.
+
+<FACE,46,0>Is that so? You're quitting?
+
+DOOMAP
+
+GOLBAP
+
+PERSIAP
+
+MISDREAVAP
+
+VICTREAP
+
+WOBBUFFAP
+
+<FACE,46,0>

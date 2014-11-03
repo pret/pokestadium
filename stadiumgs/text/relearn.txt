@@ -1,0 +1,58 @@
+Congratulations! You beat the champ!
+Here's a special present for you!
+
+A previously forgotten TM can be
+learned once again. Here's your
+chance!
+
+One of your party POKéMON can now
+relearn a TM.
+
+Yes
+
+No
+
+Select POKéMON
+
+Select TM to learn
+
+Which move should be forgotten
+instead of #65?
+
+#66 will be forgotten and
+#65 will be learned. OK?
+
+Don't let your POKéMON learn the TM?
+
+#25 can learn these TMs.
+
+#25 wants to
+forget #65.
+
+1, 2 and...
+
+1, 2 and...Poof!
+
+#25 forgot how to
+use #65!
+
+And...
+
+#25 learned 
+#66!
+
+Thank you very much for
+coming.
+
+Is it OK to learn #65?
+
+There are no moves to relearn.
+
+This is an important Move. You can't
+make your POKéMON forget it.
+
+Your POKéMON can't learn Moves while
+challenging the Battle Tower in the 
+Crystal version.
+
+Rental POKéMON can't learn TMs.

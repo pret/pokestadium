@@ -1,0 +1,80 @@
+<FACE,5,0>Greetings. How good of you to come. Shall we get started?
+
+<FACE,5,0>First, calm your emotions and concentrate.
+
+<FACE,5,0>I consider this battle to be part of my training.
+
+<FACE,5,0>#26!
+
+<FACE,5,0>How about #26?
+
+<FACE,5,0>I will go with #26!
+
+<FACE,5,0>I share your pain, but this, too, is a trial!
+#26!
+
+<FACE,5,0>The finish is important! #26!
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>Ah! How impressive!
+
+<FACE,5,0>Forgive me!
+
+<FACE,5,0>Ah, well, well... It got the weak spot.
+
+<FACE,5,0>My goodness! It hit the weak spot.
+
+<FACE,5,0>There is nothing to fear.
+
+<FACE,5,0>There is nothing to fear.
+
+<FACE,5,0>One must endure...
+
+<FACE,5,0>And now it will rest.
+
+<FACE,5,0>Oh, my...
+
+<FACE,5,0><KONRAN,2>One mustn't be misled...
+
+<FACE,5,0><WAZA,212,2>A MEAN LOOK will do.
+
+<FACE,5,0><KOHRI,2>The bitter cold is yet another test.
+
+<FACE,5,0><NOROI,2>It appears to be possessed.
+
+<FACE,5,0>I am grateful for this.
+
+<FACE,5,0>I still need much training.
+
+<FACE,5,0>You should return later.
+
+<FACE,5,0>I am grateful for this.
+
+<FACE,5,0>My training is insufficient.
+
+<FACE,5,0>I must meditate over this.
+
+<FACE,5,0>Ah, your efforts are inspiring.
+
+<FACE,5,0>I believe that withdrawal is a form of etiquette.
+
+ZUBAGE
+
+SMOOCHAGE
+
+GASTAGE
+
+GOLAGE
+
+MISDREAGE
+
+HAUNTAGE
+
+<FACE,5,0>

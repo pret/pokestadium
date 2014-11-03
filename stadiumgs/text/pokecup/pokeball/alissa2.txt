@@ -1,0 +1,80 @@
+<FACE,41,1>I'll make your POKéMON infatuated.
+
+<FACE,41,1>I'll show you how grownups battle.
+
+<FACE,41,1>You learn from experience. Let's battle!
+
+<FACE,41,1>Are you ready? Here we go!
+
+<FACE,41,1>Let me see... #26!
+
+<FACE,41,1>How about #26?
+
+<FACE,41,1>Maybe I'll go with #26.
+
+<FACE,41,1>You may be cute, but I still won't go easy
+on you.
+
+<FACE,41,1>That's no good.
+
+<FACE,41,1>Come back now.
+
+<FACE,41,1>Good job, dear.
+
+<FACE,41,1>You're such a good baby!
+
+<FACE,41,0>Hey, wait!
+
+<FACE,41,1>I'm sorry, honey.
+
+<FACE,41,1>That was a critical hit. Please forgive me.
+
+<FACE,41,0>No! Was that a critical hit?
+
+<FACE,41,0>That wasn't nice.
+
+<FACE,41,1>You'll have to forgive me.
+
+<FACE,41,0>That was bad.
+
+<FACE,41,1>I feel sorry for you, but...
+
+<FACE,41,0>You must be joking!
+
+<FACE,41,1><WAZA,213,1>I'll go with my favorite move.
+
+<FACE,41,1><WAZA,217,4>Would you accept this?
+
+<FACE,41,1>This girl's going to get serious.
+
+<FACE,41,1><WAZA,204,4>Treat it nicely.
+
+<FACE,41,1>Don't be so hard on yourself.
+
+<FACE,41,1>The way you battle is really nice.
+
+<FACE,41,1>Maybe I was unfairly harsh on a young person like you.
+
+<FACE,41,1>Yes, you sure are tough. Keep it up!
+
+<FACE,41,1>Well, I'll be seeing you.
+
+<FACE,41,1>Well, I guess the way you do things is all right.
+
+<FACE,41,1>Is that right... A draw?
+
+<FACE,41,1>You're surrendering?
+
+SUDODY
+
+WIGGYDY
+
+DELIBIDY
+
+GETICDY
+
+GEOTTODY
+
+MARODY
+
+<FACE,41,0>

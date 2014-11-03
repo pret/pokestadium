@@ -1,0 +1,143 @@
+The ultimate tournament without level restrictions.
+Let it all hang out!
+
+The official POKéMON League tournament.
+Hone your skills to become the champ!
+
+This tournament is exclusively for Level 5 POKéMON.
+Your true skill will be unveiled!
+
+The battle POKéMON have already been set.
+Can you handle these POKéMON?
+
+Let's battle with your friend with your original rules!
+Please make the rules at Rule Edit.
+
+The Battle Time and Move Selection Time can be set in
+this tournament.
+
+L1 to L100
+
+L50 to L55
+
+Only L5
+
+Prime
+
+Cup
+
+Poké
+
+Cup
+
+Little
+
+Cup
+
+Challenge
+
+Cup
+
+Edit
+
+Rule
+
+Event
+
+Battle
+
+Settings
+
+Check rules with R Button
+
+Event Battle Settings
+
+Time Limits
+
+Battle Time
+
+Move Selection Time
+
+OK
+
+Off
+
+On
+
+min.
+
+#02<FONT,LOAD,20>m.
+
+#02<FONT,LOAD,20>m.
+
+#02<FONT,LOAD,20>s.
+
+Poké Ball
+
+Great Ball
+
+Ultra Ball
+
+Master Ball
+
+
+
+
+
+#21
+
+ID #22
+
+L#03
+
+♂
+
+♀
+
+Battle
+
+Rules
+
+Quit
+
+???
+
+?
+
+The controller is not
+connected.
+
+The GB Game Pak is not set.
+
+This Game Pak can't be used.
+
+You don't have six POKéMON
+in your party.
+
+Saved file
+not found.
+
+A POKéMON is violating the rules.
+
+The combined levels of the three 
+lowest-level POKéMON are too high.
+
+
+
+Event Battle
+
+Rule Select
+
+Prime Cup
+
+Poké Cup
+
+Little Cup
+
+Challenge Cup
+
+Rule Edit
+
+Event Battle Settings
+
+

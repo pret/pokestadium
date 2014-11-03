@@ -1,0 +1,577 @@
+The best BALL. It never misses.
+
+A BALL with a high rate of success.
+
+Lowers the foe's accuracy. (HOLD)
+
+A BALL with a decent success rate.
+
+An item for catching POKéMON.
+
+
+
+A collapsible bike for fast movement.
+
+Evolves certain kinds of POKéMON.
+
+Cures poisoned POKéMON.
+
+Heals burned POKéMON.
+
+Defrosts frozen POKéMON.
+
+Awakens sleeping POKéMON.
+
+Heals paralyzed POKéMON.
+
+Fully restores HP & status.
+
+Fully restores POKéMON HP.
+
+Restores POKéMON HP by 200.
+
+Restores POKéMON HP by 50.
+
+Restores POKéMON HP by 20.
+
+Use for escaping from caves, etc.
+
+Repels weak POKéMON for 100 steps.
+
+Fully restores the PP of one POKéMON.
+
+Evolves certain kinds of POKéMON.
+
+Evolves certain kinds of POKéMON.
+
+Evolves certain kinds of POKéMON.
+
+
+
+Raises the HP of one POKéMON.
+
+Raises ATTACK of one POKéMON.
+
+Raises DEFENSE of one POKéMON.
+
+Raises SPEED of one POKéMON.
+
+Ups critical hit ratio of CHANSEY.
+
+Ups SPECIAL stats of one POKéMON.
+
+Raises level of a POKéMON by one.
+
+Raises accuracy. (1 BTL)
+
+Evolves certain kinds of POKéMON.
+
+Raises DEFENSE of DITTO. (HOLD)
+
+Made of pure gold. Sell high.
+
+Use to escape from a wild POKéMON.
+
+Eliminates all status problems.
+
+Restores a fainted POKéMON to 1/2 HP.
+
+Fully restores a fainted POKéMON.
+
+Prevents stat reduction. (1 BTL)
+
+Repels weak POKéMON for 200 steps.
+
+Repels weak POKéMON for 250 steps.
+
+Ups critical hit ratio. (1 BTL)
+
+
+
+Restores POKéMON HP by 50.
+
+Restores POKéMON HP by 60.
+
+Restores POKéMON HP by 80.
+
+Raises ATTACK. (1 BTL)
+
+
+
+Raises DEFENSE. (1 BTL) 
+
+Raises SPEED. (1 BTL)
+
+Raises SPECIAL stats. (1 BTL)
+
+Holds up to 9,999 game coins.
+
+Checks for unseen items in the area.
+
+
+
+Shares battle EXP. points. (HOLD)
+
+Use by water to fish for POKéMON.
+
+A good ROD for catching POKéMON.
+
+A strange, silver-colored leaf.
+
+The best ROD for catching POKéMON.
+
+Raises max PP of a selected move.
+
+Restores PP of one move by 10.
+
+Fully restores PP of one move.
+
+Restores PP of all moves by 10.
+
+A scale from the red GYARADOS.
+
+Fully heals any POKéMON.
+
+A ticket for the S.S.AQUA.
+
+An EGG obtained from
+MR. POKéMON.
+
+Makes gentle ringing.
+
+A strange, silver-colored feather.
+
+Restores POKéMON HP by 100.
+
+Raises 1st strike ratio. (HOLD)
+
+A self-cure for poison. (HOLD)
+
+A strange, gold-colored leaf.
+
+Powers up GROUND-type moves. (HOLD)
+
+Powers up FLYING-type moves. (HOLD)
+
+A self-cure for paralysis. (HOLD)
+
+A self-cure for freezing. (HOLD)
+
+A self-heal for a burn. (HOLD)
+
+Powers up POISON-type moves. (HOLD)
+
+May make the foe flinch. (HOLD)
+
+A self-cure for confusion. (HOLD)
+
+A self-awakening for sleep. (HOLD)
+
+A red APRICORN.
+
+An ordinary mushroom. Sell low.
+
+A rare mushroom. Sell high.
+
+Powers up BUG-type moves. (HOLD)
+
+A blue APRICORN.
+
+
+
+Doubles monetary earnings. (HOLD)
+
+A yellow APRICORN.
+
+A green APRICORN.
+
+Helps repel wild POKéMON. (HOLD)
+
+Powers up WATER-type moves. (HOLD)
+
+Powers up PSYCHIC-type moves. (HOLD)
+
+A white APRICORN.
+
+Boosts FIGHTING-type moves. (HOLD)
+
+A black APRICORN.
+
+
+
+A pink APRICORN.
+
+Powers up DARK-type moves. (HOLD)
+
+Very tasty. Sell high.
+
+Powers up NORMAL-type moves. (HOLD)
+
+An ordinary stick. Sell low.
+
+Escape from wild POKéMON. (HOLD)
+
+Powers up ICE-type moves. (HOLD)
+
+Boosts ELECTRIC-type moves. (HOLD)
+
+Cures all status problems. (HOLD)
+
+A beautiful pearl. Sell low.
+
+A big, beautiful pearl. Sell high.
+
+Stops evolution. (HOLD)
+
+Powers up GHOST-type moves. (HOLD)
+
+Restores POKéMON HP by 20.
+
+The mysterious BALL.
+
+The card which keeps the points of key-
+word.
+
+Powers up GRASS-type moves. (HOLD)
+
+A bone of some sort. Sell low.
+
+May prevent fainting. (HOLD)
+
+
+
+Restores POKéMON HP by 50.
+Bitter.
+
+Restores POKéMON HP by 200.
+Bitter.
+
+Cures all status problems. Bitter.
+
+Revives fainted POKéMON. Bitter.
+
+Powers up ROCK-type moves. (HOLD)
+
+Earns extra EXP. points. (HOLD)
+
+Opens shutters in the RADIO TOWER.
+
+A machine part for the POWER PLANT.
+
+Might be used at the Pokémon Center at
+Goldenrod City.
+
+The POKé DOLL lost by the
+COPYCAT.
+
+Pretty, red sand. Sell high.
+
+A hunk of red gem. Sell very high.
+
+Opens doors.
+
+A ticket for the MAGNET TRAIN.
+
+
+
+
+
+
+
+Powers up FIRE-type moves. (HOLD)
+
+Restores POKéMON HP by 20.
+
+Raises critical hit ratio. (HOLD)
+
+
+
+
+
+Powers up STEEL-type moves. (HOLD)
+
+Powers up DRAGON-type moves. (HOLD) 
+
+
+
+Restores HP during battle. (HOLD)
+
+
+
+
+
+
+
+A self-restore for PP. (HOLD)
+
+A rare DRAGON-type item.
+
+Boosts ATTACK but causes confusion.
+
+
+
+
+
+
+
+Fully revives all fainted
+POKéMON.
+
+A BALL for catching heavy
+POKéMON.
+
+Flower-print MAIL. (HOLD)
+
+A BALL for lower-level POKéMON.
+
+A BALL for POKéMON hooked by
+a ROD.
+
+A BALL for catching fast
+POKéMON.
+
+
+
+An odd, electrical orb. (HOLD)
+
+A BALL that makes POKéMON
+friendly.
+
+A BALL for MOONSTONE evolvers.
+
+A BALL for catching the opposite
+gender.
+
+Open it and see what's inside.
+
+Open it and see what's inside.
+
+Evolves certain kinds of
+POKéMON.
+
+Powers up NORMAL-type moves. (HOLD)
+
+
+
+A mysterious box made by SILPH CO.
+
+A self-restore item. (10HP, HOLD)
+
+A self-restore item. (30HP, HOLD)
+
+A bottle used for watering plants.
+
+
+
+The Bug-Catching Contest BALL.
+
+A mystical feather of rainbow colors.
+
+
+
+A rare chunk of brick.
+
+LAPRAS-print MAIL. (HOLD)
+
+DRATINI-print MAIL. (HOLD)
+
+MAIL featuring the holder's likeness.
+
+Heart-print MAIL. (HOLD)
+
+EEVEE-print MAIL. (HOLD)
+
+DITTO-print MAIL. (HOLD)
+
+Sky-print MAIL. (HOLD)
+
+NATU-print MAIL. (HOLD)
+
+MEW-print MAIL. (HOLD)
+
+
+
+DYNAMICPUNCH / FIGHTING
+PP/5 PWR/100 ACCURACY/50
+
+HEADBUTT / NORMAL
+PP/15 PWR/70 ACCURACY/100
+
+CURSE / N & G
+PP/10 PWR/-- ACCURACY/--
+
+ROLLOUT / ROCK 
+PP/20 PWR/30 ACCURACY/90
+
+
+
+ROAR / NORMAL
+PP/20 PWR/-- ACCURACY/100
+
+TOXIC / POISON
+PP/10 PWR/-- ACCURACY/85
+
+ZAP CANNON / ELECTRIC
+PP/5 PWR/100 ACCURACY/50
+
+ROCK SMASH / FIGHTING
+PP/15 PWR/ 20 ACCURACY/100
+
+PSYCH UP / NORMAL
+PP/10 PWR/-- ACCURACY/--
+
+HIDDEN POWER / NORMAL
+PP/15 PWR/1 ACCURACY/100
+
+SUNNY DAY / FIRE
+PP/5 PWR/-- ACCURACY/--
+
+SWEET SCENT / NORMAL
+PP/20 PWR/-- ACCURACY/100
+
+SNORE / NORMAL
+PP/15 PWR/40 ACCURACY/100
+
+BLIZZARD / ICE
+PP/5 PWR/120 ACCURACY/70
+
+HYPER BEAM / NORMAL
+PP/5 PWR/150 ACCURACY/90
+
+ICY WIND / ICE
+PP/15 PWR/55 ACCURACY/95
+
+PROTECT / NORMAL
+PP/10 PWR/-- ACCURACY/--
+
+RAIN DANCE / WATER
+PP/5 PWR/-- ACCURACY/--
+
+GIGA DRAIN / GRASS
+PP/5 PWR/-- ACCURACY/100
+
+ENDURE / NORMAL
+PP/10 PWR/-- ACCURACY/--
+
+FRUSTRATION / NORMAL
+PP/20 PWR/1 ACCURACY/100
+
+SOLARBEAM / GRASS
+PP/10 PWR/120 ACCURACY/100
+
+IRON TAIL / STEEL
+PP/15 PWR/100 ACCURACY/75
+
+DRAGONBREATH / DRAGON
+PP/20 PWR/60 ACCURACY/100
+
+THUNDER / ELECTRIC
+PP/10 PWR/120 ACCURACY/70
+
+EARTHQUAKE / GROUND
+PP/10 PWR/100 ACCURACY/100
+
+RETURN / NORMAL
+PP/20 PWR/1 ACCURACY/100
+
+DIG / GROUND
+PP/10 PWR/60 ACCURACY/100
+
+
+
+PSYCHIC / PSYCHIC
+PP/10 PWR/90 ACCURACY/100
+
+SHADOW BALL / GHOST
+PP/15 PWR/80 ACCURACY/100
+
+MUD-SLAP / GROUND
+PP/10 PWR/20 ACCURACY/100
+
+DOUBLE TEAM / NORMAL
+PP/15 PWR/-- ACCURACY/--
+
+ICE PUNCH / ICE
+PP/15 PWR/75 ACCURACY/100
+
+SWAGGER / NORMAL
+PP/15 PWR/-- ACCURACY/90
+
+SLEEP TALK / NORMAL
+PP/10 PWR/-- ACCURACY/--
+
+SLUDGE BOMB / POISON
+PP/10 PWR/90 ACCURACY/100
+
+SANDSTORM / ROCK
+PP/10 PWR/-- ACCURACY/--
+
+FIRE BLAST / FIRE
+PP/5 PWR/120 ACCURACY/85
+
+SWIFT / NORMAL
+PP/20 PWR/60 ACCURACY/--
+
+DEFENSE CURL / NORMAL
+PP/40 PWR/-- ACCURACY/--
+
+THUNDERPUNCH / ELECTRIC
+PP/15 PWR/75 ACCURACY/100
+
+DREAM EATER / PSYCHIC 
+PP/15 PWR/100 ACCURACY/100
+
+DETECT / FIGHTING
+PP/5 PWR/-- ACCURACY/--
+
+REST / PSYCHIC
+PP/10 PWR/-- ACCURACY/--
+
+ATTRACT / NORMAL
+PP/15 PWR/-- ACCURACY/100
+
+THIEF / DARK
+PP/10 PWR/40 ACCURACY/100
+
+STEEL WING / STEEL
+PP/25 PWR/70 ACCURACY/90
+
+FIRE PUNCH / FIRE
+PP/15 PWR/75 ACCURACY/100
+
+FURY CUTTER / BUG
+PP/20 PWR/10 ACCURACY/95
+
+NIGHTMARE / GHOST
+PP/15 PWR/-- ACCURACY/100
+
+CUT / NORMAL
+PP/30 PWR/50 ACCURACY/95
+
+FLY/ FLYING
+PP/15 PWR/70 ACCURACY/95
+
+SURF / WATER
+PP/15 PWR/95 ACCURACY/100
+
+STRENGTH / NORMAL
+PP/15 PWR/80 ACCURACY/100
+
+FLASH / NORMAL
+PP/20 PWR/-- ACCURACY/70
+
+WHIRLPOOL / WATER
+PP/15 PWR/15 ACCURACY/70
+
+WATERFALL / WATER
+PP/15 PWR/80 ACCURACY/100
+
+
+
+
+
+
+
+
+
+

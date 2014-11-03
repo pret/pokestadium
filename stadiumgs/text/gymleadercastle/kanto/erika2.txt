@@ -1,0 +1,79 @@
+<FACE,11,2>Ah... Are you my partner? I hope that's okay with you.
+
+<FACE,11,2>...Oh? I beg your pardon. I seem to have dozed off...
+
+<FACE,11,2>Seeing flowers in a garden is so soothing.
+
+<FACE,11,2>Please allow me to begin.
+
+<FACE,11,1>#26, please go on.
+
+<FACE,11,1>#26, it's your turn.
+
+<FACE,11,1>#26, please entertain our guest.
+
+<FACE,11,1>#26, it's up to you.
+
+<FACE,11,1>Come back, #26.
+
+<FACE,11,1>That's fine, #26.
+
+<FACE,11,1>Very nicely done, #26.
+
+<FACE,11,1>A marvelous effort, #26.
+
+<FACE,11,0>Oh, my goodness.
+
+<FACE,11,1>I beg your forgiveness.
+
+<FACE,11,1>Oh. A critical hit. I beg your pardon.
+
+<FACE,11,0>Oh. So strong. It hit the weak spot.
+
+<FACE,11,2>Oh, oh dear.
+
+<FACE,11,2>Oh dear.
+
+<FACE,11,2>One must endure.
+
+<FACE,11,1>Oh... Is that all?
+
+<FACE,11,0>Oh, you are strong.
+
+<FACE,11,2><WAZA,214,2>#26, did you say something?
+
+<FACE,11,2><WAZA,079,1>Pleasant dreams.
+
+<FACE,11,2><WAZA,156,2>Pleasant dreams.
+
+<FACE,11,1><NEMURI,4>Has it really drifted off to sleep?
+
+<FACE,11,1>I thank you for your demonstration.
+
+<FACE,11,1>Thank you for bearing with me.
+
+<FACE,11,1>It became a match I won't forget.
+
+<FACE,11,2>Your skills surpass mine. I concede defeat.
+
+<FACE,11,2>Oh... How foolish of me.
+
+<FACE,11,2>There will be days like this.
+
+<FACE,11,2>Isn't this remarkable?
+
+<FACE,11,2>Oh? What on earth are you planning to do?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,11,0>

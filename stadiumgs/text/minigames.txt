@@ -1,0 +1,2054 @@
+<LINE,4>
+<LINE,15>Tap the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> repeatedly to go up.
+Use the <COL1,PUSH,160,141,255,255>Control Stick<COL1,POP> to move from side
+to side. <COL1,PUSH,240,200,40,255>The one with the most hearts wins.<COL1,POP>
+Your hearts will scatter if you hit a MAG-
+NEMITE or get hit hard by an opponent.
+
+<LINE,2>
+<LINE,15>Press the <COL1,PUSH,160,141,255,255>+ Control Pad<COL1,POP> to move into the
+grass. Release it to move back to the
+center. Press the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> to shoot the
+ball forward. <COL1,PUSH,240,200,40,255>Get the most points to win.<COL1,POP>
+
+<LINE,4>
+<LINE,15>When an electrode pops out, press and
+hold the <COL1,PUSH,160,141,255,255>+ Control Pad<COL1,POP> in the same direc-
+tion. If the lamp is blue, repeatedly tap
+the <COL1,PUSH,145,170,255,255>A Button<COL1,POP>. If the lamp is green, tap the 
+<COL1,PUSH,90,240,80,255>B Button<COL1,POP>. <COL1,PUSH,240,200,40,255>The first to fully charge wins.<COL1,POP>
+
+<LINE,4>
+<LINE,15>Run downward, using the <COL1,PUSH,160,141,255,255>Control Stick<COL1,POP> to
+avoid flowers, boulders and logs.
+Step on an arrow to speed up. You can
+jump over logs, but you will slow down.
+<COL1,PUSH,240,200,40,255>The first one to the goal wins.<COL1,POP>
+
+<LINE,4>
+<LINE,15>Press the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> and count the POKé-
+MON visiting the studio. There are five
+questions. Even if you don't get the right
+answer, you could still earn points for
+getting close. <COL1,PUSH,240,200,40,255>Get the highest score to win.<COL1,POP>
+
+<LINE,2>
+<LINE,15>When AIPOM opens the lid, dash to the
+fruit with the <COL1,PUSH,145,170,255,255>A Button<COL1,POP>. Press the
+<COL1,PUSH,90,240,80,255>B Button<COL1,POP> to fake a dash. The race is run
+five times. <COL1,PUSH,240,200,40,255>Get the highest score to win.<COL1,POP>
+
+<LINE,4>
+<LINE,15>Use the <COL1,PUSH,160,141,255,255>+ Control Pad<COL1,POP> to run around the
+track. <COL1,PUSH,240,200,40,255>The first to complete nine laps wins.<COL1,POP>
+Press the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> to leave a dust cloud.
+You can earn and save up to three dust
+clouds per lap, depending on your rank.
+
+<LINE,14>Fill the sack with up to five gifts using the
+<COL1,PUSH,160,141,255,255>Control Stick<COL1,POP> and carry it up to the top.
+<COL1,PUSH,240,200,40,255>Highest score wins.<COL1,POP> Earn extra points
+for picking up the same items in a row.
+
+<LINE,4>
+<LINE,15>Press the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> to cut falling logs at
+the white line. There are five logs in all.
+Time your cuts--cutting above the white
+line will cost you points. <COL1,PUSH,240,200,40,255>The one with the
+highest total score wins.<COL1,POP>
+
+<LINE,7>
+<LINE,14>Use the <COL1,PUSH,160,141,255,255>Control Stick<COL1,POP> to strike the oppo-
+nent. <COL1,PUSH,240,200,40,255>Knock your opponent out of the ring
+five times to win.<COL1,POP> Press the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> to use
+RAPID SPIN. Use this move to knock your
+opponent out of the ring.
+
+<LINE,4>
+<LINE,15>Use the <COL1,PUSH,160,141,255,255>Control Stick<COL1,POP> to move and hit the
+ball back. Press the <COL1,PUSH,145,170,255,255>A Button<COL1,POP> to hit a
+smash. Earn a point for getting the ball in
+an opponent's court, and lose a point
+when scored on. <COL1,PUSH,240,200,40,255>Get five points to win.<COL1,POP>
+
+<LINE,4>
+<LINE,15>Catch the falling eggs! Use the <COL1,PUSH,160,141,255,255>L and R
+Buttons<COL1,POP> to move from side to side. Avoid
+the VOLTORB, or you'll lose some of your
+eggs. There are 100 eggs in all. <COL1,PUSH,240,200,40,255>The player
+who catches the most eggs wins!<COL1,POP>
+
+Start game
+
+Move
+
+Fly up
+
+Move
+
+Hit
+
+Angle
+
+Zap
+
+Run
+
+Feint
+
+Count
+
+Dash
+
+Angle
+
+Dirt
+
+Move
+
+Cut log
+
+Move
+
+Spin
+
+L / R
+
+Hit
+
+L
+
+R
+
+
+
+
+
+
+
+
+
+
+
+<LINE,14>There are twelve Mini-Games that
+you can play with adorable
+POKéMON. Come play the
+Mini-Games of your choice!
+
+<LINE,14>Become the Mini-Game champ!
+See what happens if you leave
+your POKéMON Game Boy Game Pak
+inserted in the Transfer Pak.
+
+<LINE,14>Take the single-player POKéMON
+Quiz Challenge! How many correct
+answers can you get before time
+runs out?
+
+<LINE,14>Multi-player POKéMON Quiz
+Challenge! Get ten questions
+right to win. Who is the 
+POKéMON Prof.?
+
+<LINE,14>
+Who wants to play? Press the
+<TEX,0> Button if you want to play.
+
+<LINE,14>If DIGLETT keeps moving even when
+the Control Stick is untouched,
+press the <TEX,1><TEX,4><TEX,2> + <TEX,3> Buttons.
+
+<LINE,14>
+Checking for POKéMON that can
+play in the Mini-Game...
+
+<LINE,14>
+No one has joined. Do you want
+to watch the COM play?
+
+<LINE,7>
+<LINE,14><COL1,PUSH,255,212,0,255>Two to four players<COL1,POP> can take
+part. Press the <TEX,0> Button
+if you want to play.
+
+<LINE,14>
+Move along when all the players
+have entered.
+
+
+
+
+
+<LINE,21>
+Choose the COM level.
+
+<LINE,7>
+<LINE,14>Single-player quiz..."#83"
+The record is...<TEX,7><TEX,8>questions!
+Will you try to break that record?
+
+<LINE,7>
+<LINE,14>How many coins should you earn
+to win? #01 coins should take about
+#02 minutes.
+
+<LINE,21>
+Choose the COM level.
+
+<LINE,21>
+Choose the quiz difficulty level.
+
+Hard
+
+Normal
+
+Easy
+
+<LINE,21>
+Who's going to roll the die?
+
+<LINE,21>
+Who's going to be ripped off?
+
+
+
+ <LINE,16>Earn lots of coins!
+<LINE,13><TEX,5>#21, press the <TEX,0> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <LINE,16>It's critical!
+<LINE,13><TEX,5>#21, press the <TEX,0> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <LINE,16>Almost done!
+<LINE,13><TEX,5>#21, press the <TEX,0> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <LINE,16>Here's your chance!
+<LINE,13><TEX,5>#21, press the <TEX,0> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <LINE,16>Who will take the lead?
+<LINE,13><TEX,5>#21, press the <TEX,0> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <LINE,16>Keep blocking to change the bonus! 
+<LINE,13><TEX,5>#21, press the <TEX,0> Button
+ to roll the die.
+ This will determine the next bonus.
+
+
+
+<LINE,14>
+The winner of the next Mini-Game
+earns one coin!
+
+<LINE,14>
+The winner of the next Mini-Game
+earns two coins!
+
+<LINE,14>
+The winner of the next Mini-Game
+earns three coins!
+
+<LINE,14>The winner of the next Mini-Game
+gets to rip off one coin from the
+top player. The leader has to
+prevent being ripped off.
+
+<LINE,14>The winner of the next Mini-Game
+gets to rip off two coins from
+the top player. The leader has to
+prevent being ripped off.
+
+<LINE,14>The winner of the next Mini-Game
+gets to rip off three coins from
+the top player. The leader has to
+prevent being ripped off.
+
+<LINE,7>
+<LINE,14>If the leader doesn't win,
+everyone else gets one coin!
+The leader has to prevent that!
+
+<LINE,7>
+<LINE,14>If the leader doesn't win,
+everyone else gets two coins!
+The leader has to prevent that!
+
+<LINE,21>
+<TEX,5>#21 gets one coin!
+
+<LINE,21>
+<TEX,5>#21 gets two coins!
+
+<LINE,21>
+<TEX,5>#21 gets three coins!
+
+<LINE,14>
+<TEX,5>#21 gets to rip off
+ one coin from the leader!
+
+<LINE,14>
+<TEX,5>#21 gets to rip off
+ two coins from the leader!
+
+<LINE,14>
+<TEX,5>#21 gets to rip off
+ three coins from the leader!
+
+<LINE,21>
+<TEX,5>#21 avoided losing coins!
+
+<LINE,14>
+Other than the leader, everyone
+got one coin!
+
+<LINE,14>
+Other than the leader, everyone
+gets two coins!
+
+ <LINE,14>
+<TEX,5>#21, kept the others
+ from winning coins!
+
+<LINE,7>
+Quit?
+
+<LINE,14>
+Congratulations, <TEX,5>#21!
+You're the champion!
+
+<LINE,14><TEX,5>#21 gets coins
+ for the Game Boy POKéMON
+ GAME CORNER!
+ Your POKéMON are delighted too!
+
+ <LINE,6>
+ <LINE,16>What an impressive victory!
+<LINE,14><TEX,5>#21's POKéMON are
+ delighted too!
+
+ <LINE,7>
+<LINE,14><TEX,5>#21 gets coins
+ for the Game Boy POKéMON
+ GAME CORNER!
+
+<LINE,14>If you had a COIN CASE, you would
+have received the coins you won...
+Make sure to get a COIN CASE from
+the Game Boy POKéMON.
+
+<LINE,21>
+Please play again!
+
+<LINE,14>
+This match ended in a tie so
+there is no bonus!
+
+<LINE,14>
+Saving to <TEX,5>#21's
+Game Boy POKéMON Game Pak.
+
+
+
+min.
+
+min.
+
+<COL1,PUSH,0,0,0,100><LINE,14>There are twelve Mini-Games that
+you can play with adorable
+POKéMON. Come play the
+Mini-Games of your choice!
+
+<COL1,PUSH,0,0,0,100><LINE,14>Become the Mini-Game champ!
+See what happens if you leave
+your POKéMON Game Boy Game Pak
+inserted in the Transfer Pak.
+
+<COL1,PUSH,0,0,0,70><LINE,14>Take the single-player POKéMON
+Quiz Challenge! How many correct
+answers can you get before time
+runs out?
+
+<COL1,PUSH,0,0,0,70><LINE,14>Multi-player POKéMON Quiz
+Challenge! Get ten questions
+right to win. Who is the 
+POKéMON Prof.?
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+Who wants to play? Press the
+<TEX,4><TEX,4><TEX,4><TEX,4> Button if you want to play.
+
+<COL1,PUSH,0,0,0,100><LINE,14>If DIGLETT keeps moving even when
+the Control Stick is untouched,
+press the <TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4> + <TEX,4><TEX,4><TEX,4><TEX,4> Buttons.
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+Checking for POKéMON that can
+play in the Mini-Game...
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+No one has joined. Do you want
+to watch the COM play?
+
+<COL1,PUSH,0,0,0,70><LINE,7>
+<LINE,14>Two to four players can take
+part. Press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+if you want to play.
+
+<COL1,PUSH,0,0,0,70><LINE,14>
+Move along when all the players
+have entered.
+
+
+
+
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+Choose the COM level.
+
+<COL1,PUSH,0,0,0,70><LINE,7>
+<LINE,14>Single-player quiz..."#83"
+The record is...<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>questions!
+Will you try to break that record?
+
+<COL1,PUSH,0,0,0,100><LINE,7>
+<LINE,14>How many coins should you earn
+to win? #01 coins should take about
+#02 minutes.
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+Choose the COM level.
+
+<COL1,PUSH,0,0,0,70><LINE,21>
+Choose the quiz difficulty level.
+
+
+
+
+
+
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+Who's going to roll the die?
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+Who's going to be ripped off?
+
+
+
+ <COL1,PUSH,0,0,0,100><LINE,16>Earn lots of coins!
+<LINE,13><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <COL1,PUSH,0,0,0,100><LINE,16>It's critical!
+<LINE,13><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <COL1,PUSH,0,0,0,100><LINE,16>Almost done!
+<LINE,13><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <COL1,PUSH,0,0,0,100><LINE,16>Here's your chance!
+<LINE,13><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <COL1,PUSH,0,0,0,100><LINE,16>Who will take the lead?
+<LINE,13><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+ to roll the die.
+ This will determine the next bonus.
+
+ <COL1,PUSH,0,0,0,100><LINE,16>Keep blocking to change the bonus! 
+<LINE,13><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, press the <TEX,4><TEX,4><TEX,4><TEX,4> Button
+ to roll the die.
+ This will determine the next bonus.
+
+
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+The winner of the next Mini-Game
+earns one coin!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+The winner of the next Mini-Game
+earns two coins!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+The winner of the next Mini-Game
+earns three coins!
+
+<COL1,PUSH,0,0,0,100><LINE,14>The winner of the next Mini-Game
+gets to rip off one coin from the
+top player. The leader has to
+prevent being ripped off.
+
+<COL1,PUSH,0,0,0,100><LINE,14>The winner of the next Mini-Game
+gets to rip off two coins from
+the top player. The leader has to
+prevent being ripped off.
+
+<COL1,PUSH,0,0,0,100><LINE,14>The winner of the next Mini-Game
+gets to rip off three coins from
+the top player. The leader has to
+prevent being ripped off.
+
+<COL1,PUSH,0,0,0,100><LINE,7>
+<LINE,14>If the leader doesn't win,
+everyone else gets one coin!
+The leader has to prevent that!
+
+<COL1,PUSH,0,0,0,100><LINE,7>
+<LINE,14>If the leader doesn't win,
+everyone else gets two coins!
+The leader has to prevent that!
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets one coin!
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets two coins!
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets three coins!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets to rip off
+ one coin from the leader!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets to rip off
+ two coins from the leader!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets to rip off
+ three coins from the leader!
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 avoided losing coins!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+Other than the leader, everyone
+got one coin!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+Other than the leader, everyone
+gets two coins!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+<TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21, kept the others
+ from winning coins!
+
+
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+Congratulations, <TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21!
+You're the champion!
+
+<COL1,PUSH,0,0,0,100><LINE,14><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets coins
+ for the Game Boy POKéMON
+ GAME CORNER!
+ Your POKéMON are delighted too!
+
+<COL1,PUSH,0,0,0,100><LINE,6>
+ <LINE,16>What an impressive victory!
+<LINE,14><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21's POKéMON are
+ delighted too!
+
+<COL1,PUSH,0,0,0,100><LINE,7>
+<LINE,14><TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21 gets coins
+ for the Game Boy POKéMON
+ GAME CORNER!
+
+<COL1,PUSH,0,0,0,100><LINE,14>If you had a COIN CASE, you would
+have received the coins you won...
+Make sure to get a COIN CASE from
+the Game Boy POKéMON.
+
+<COL1,PUSH,0,0,0,100><LINE,21>
+Please play again!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+This match ended in a tie so
+there is no bonus!
+
+<COL1,PUSH,0,0,0,100><LINE,14>
+Saving to <TEX,4><TEX,4><TEX,4><TEX,4><TEX,4>#21's
+Game Boy POKéMON Game Pak.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

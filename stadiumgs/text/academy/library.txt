@@ -1,0 +1,608 @@
+LIBRARY
+
+POKéMON
+
+MOVES
+
+TYPE MATCH-UPS
+
+ITEMS
+
+EGG GROUPS
+
+CONTROLS
+
+<DIST,1>Check POKéMON here.
+
+<DIST,1>Check moves here.
+
+<DIST,1>Check type match-ups here.
+
+<DIST,1>Check items here.
+
+<DIST,1>Check EGG groups here.
+
+<DIST,1>Check controls here.
+
+Check by name
+
+Check by type
+
+Check by effect
+
+Check by group
+
+Check by baby
+
+A - C
+
+D - F
+
+G - H
+
+I - L
+
+M - N
+
+O - R
+
+S
+
+T - Z
+
+end
+
+
+
+<DIST,1>There are #02 POKéMON.
+
+HT
+
+WT
+
+HP
+
+ATTACK
+
+DEFENSE
+
+SPCL.ATK
+
+SPCL.DEF
+
+SPEED
+
+TYPE MATCH-UPS
+
+CUP QUALIFICATION
+
+FOUND IN:
+
+CHECK EVOLUTION
+
+CHECK MOVES
+
+NO. #03
+
+#44
+
+#45lbs
+
+#46 POKéMON
+
+#47
+
+Moves learned by #25
+
+LEVEL
+
+MOVES
+
+TYPE/ #47
+
+POWER/ #48
+
+PP/ #49
+
+ACCURACY/ #50
+
+LEVEL
+
+EGG, FATHER
+
+TM
+
+TM#02
+
+HM#02
+
+<DIST,1>These #03 moves can be learned.
+
+<DIST,1>They are the same type, so the power is multiplied by 1.5.
+
+Basic
+
+#51
+
+#52
+
+#53
+
+#54
+
+#55
+
+#56
+
+#57
+
+#58
+
+---
+
+#25's evolved form
+
+L#59
+
+L#60
+
+Loyal to trainer
+Level up.
+
+Loyal to trainer 
+Level up in 
+morning/day.
+
+Loyal to trainer 
+Level up at night.
+
+Link trade
+
+Link trade 
+KING's ROCK
+
+Link trade 
+METAL COAT
+
+Link trade 
+DRAGON SCALE
+
+Link trade 
+UP-GRADE
+
+L20 DEFENSE <TEX,0> ATTACK
+
+L20 ATTACK <TEX,0> DEFENSE
+
+L20 ATTACK<COL1,PUSH,255,255,255,255> = <COL1,POP>DEFENSE
+
+Does not evolve.
+
+<DIST,1>#25 doesn't evolve.
+
+<DIST,1>#25 is a 1-evolution POKéMON.
+
+<DIST,1>#25 is a 2-evolution POKéMON.
+
+<DIST,1>#25 can evolve into different POKéMON.
+
+<DIST,1>#25 evolves in a special way.
+
+<DIST,1>EEVEE evolves into a variety of POKéMON.
+
+<DIST,1>#25 can evolve into different POKéMON.
+
+A - B
+
+C - D
+
+E - F
+
+G - K
+
+L - O
+
+P - R
+
+S
+
+T - Z
+
+end
+
+
+
+<DIST,1>There are #02 moves.
+
+physical attack
+
+special attack
+
+special effect
+
+special damage
+
+self-protection
+
+status problem
+
+stat change
+
+recovery
+
+various
+
+All
+
+Strikes first
+
+High critical-hit ratio
+
+Always hits
+
+Takes damage
+
+Variable power
+
+User faints
+
+2 to 5-turn attack
+
+2-turn attack
+
+Multiple attack
+
+Other
+
+Double-damage retaliation
+
+Set damage
+
+One-hit KO
+
+Halves HP
+
+Status, stats
+
+Halves damage
+
+Evades attack
+
+Sleep
+
+Paralysis
+
+Poison
+
+Freeze
+
+Burn
+
+Confusion
+
+Flinch
+
+Other
+
+Raises ATTACK
+
+Lowers ATTACK
+
+Raises DEFENSE
+
+Lowers DEFENSE
+
+Raises SPEED
+
+Lowers SPEED
+
+Raises SPCL.ATK
+
+Raises SPCL.DEF
+
+Lowers SPCL.DEF
+
+Lowers accuracy
+
+Raises evasiveness
+
+Lowers evasiveness
+
+Other
+
+HP
+
+Status, stats
+
+Changes the weather
+
+Changes the type
+
+Prevents switching
+
+Forces switching
+
+Other
+
+#61's moves
+
+#47-type moves
+
+#62
+
+<DIST,1>Its effect is different than it was three years ago.
+
+#63
+
+POKéMON that learn #29
+
+How #25 learns it
+
+<DIST,1>#03 POKéMON can learn it.
+
+Learned as an EGG move <TEX,1>
+
+Double the power on POKéMON 
+using FLY.
+
+Strikes even POKéMON using FLY.
+
+Double the power on POKéMON 
+using MINIMIZE.
+
+No charging needed if sunny. 
+Half power if raining.
+
+Strikes even POKéMON using FLY. 
+Sure to hit in rain. 
+Accuracy falls if sunny.
+
+Double the power on POKéMON 
+using DIG.
+
+Strikes even POKéMON using DIG.
+Won't hit a higher-level POKéMON.
+
+Can be used while frozen. 
+Thaws out user.
+
+Double the power if used after 
+using DEFENSE CURL.
+
+Can be used while frozen. 
+Thaws out user.
+
+Double the power on POKéMON 
+using DIG.
+
+Enables escape 
+from multi-turn moves like WRAP.
+
+Double power if sunny. 
+Half power in rain or SANDSTORM.
+
+Double power if sunny. 
+Half power in rain or SANDSTORM.
+
+Double power if sunny. 
+Half power in rain or SANDSTORM.
+
+Double the power on POKéMON 
+using FLY.
+
+Halves fire attack power.
+
+Halves water attack power. 
+Prevents freezing.
+
+Won't hit a higher-level POKéMON.
+
+Won't hit a higher-level POKéMON.
+
+Has no effect on GRASS-type 
+POKéMON.
+
+Type match-ups
+
+POKéMON type
+
+Move 
+type
+
+POKéMON 
+list
+
+Move 
+list
+
+2-type list
+
+#61-type POKéMON
+
+#61 POKéMON
+
+#62-TYPE moves
+
+Moves unaffected by type match-ups
+
+A - B
+
+C - E
+
+F - G
+
+H - L
+
+M - N
+
+O - P
+
+Q - R
+
+S
+
+T - Z
+
+end
+
+<DIST,1>There are #02 items.
+
+Can be used in battle.
+
+TM, HM
+
+Recovery
+
+Stat enhancement
+
+BALL
+
+Important
+
+Other
+
+#61's items
+
+#67
+
+Weak against ROCK- and STEEL-type POKéMON. 
+Ineffective against GHOST-type POKéMON.
+
+Super-effective against GRASS-, ICE-, BUG- and STEEL-type POKéMON. 
+Weak against FIRE-, WATER-, ROCK- and DRAGON-type POKéMON.
+
+Super-effective against FIRE-, GROUND- and ROCK-type POKéMON. 
+Weak against WATER-, GRASS- and DRAGON-type POKéMON.
+
+Super-effective against WATER-, GROUND- and ROCK-type POKéMON. 
+Weak against FIRE-, GRASS-, POISON-, FLYING-, BUG-, DRAGON- and 
+STEEL-type POKéMON.
+
+Super-effective against WATER- and FLYING-type POKéMON. 
+Weak against GRASS-, ELECTRIC- and DRAGON-type POKéMON. 
+Ineffective against GROUND-type POKéMON.
+
+Super-effective against GRASS-, GROUND-, FLYING- and 
+DRAGON-type POKéMON. 
+Weak against FIRE-, WATER-, ICE- and STEEL-type POKéMON.
+
+Super-effective against NORMAL-, ICE-, ROCK-, DARK- and 
+STEEL-type POKéMON. Weak against POISON-, FLYING-, PSYCHIC- and 
+BUG-type POKéMON. Ineffective against GHOST-type POKéMON.
+
+Super-effective against GRASS-type POKéMON. 
+Weak against POISON-, GROUND-, ROCK- and GHOST-type POKéMON. 
+Ineffective against STEEL-type POKéMON.
+
+Super-effective against FIRE-, ELECTRIC-, POISON-, ROCK- and 
+STEEL-type POKéMON. Weak against GRASS- and BUG-type POKéMON. 
+Ineffective against FLYING-type POKéMON.
+
+Super-effective against GRASS-, FIGHTING- and BUG-type POKéMON. 
+Weak against ELECTRIC-, ROCK- and STEEL-type POKéMON.
+
+Super-effective against FIGHTING- and POISON-type POKéMON. 
+Weak against PSYCHIC- and STEEL-type POKéMON. 
+Ineffective against DARK-type POKéMON.
+
+Super-effective against GRASS-, PSYCHIC- and DARK-type POKéMON. 
+Weak against FIRE-, FIGHTING-, POISON-, FLYING-, GHOST- and 
+STEEL-type POKéMON.
+
+Super-effective against FIRE-, ICE-, FLYING- and BUG-type POKéMON. 
+Weak against FIGHTING-, GROUND- and STEEL-type POKéMON.
+
+Super-effective against PSYCHIC- and GHOST-type POKéMON. 
+Weak against DARK- and STEEL-type POKéMON. 
+Ineffective against NORMAL-type POKéMON.
+
+Super-effective against DRAGON-type POKéMON. 
+Weak against STEEL-type POKéMON.
+
+Super-effective against PSYCHIC- and GHOST-type POKéMON. 
+Weak against FIGHTING-, DARK- and STEEL-type POKéMON.
+
+Super-effective against ICE- and ROCK-type POKéMON. 
+Weak against FIRE-, WATER-, ELECTRIC- and STEEL-type POKéMON.
+
+Monster
+
+Water 1
+
+Bug
+
+Flying
+
+Ground
+
+Fairy
+
+Plant
+
+Humanshape
+
+Water 3
+
+Mineral
+
+Indeterminate
+
+Water 2
+
+DITTO
+
+Dragon
+
+No EGGs
+
+Gender unknown
+
+#68 group
+
+#69-group POKéMON
+
+POKéMON of the same group as #25
+
+<DIST,1>An EGG will not be made.
+
+<DIST,1>#25's gender is unknown.
+
+Combinations for making #25 EGGs
+
+Male
+
+Female
+
+<DIST,1>Place it in DAY CARE with #25. 
+
+<DIST,1>Choose a female POKéMON.
+
+<DIST,1>There are only males.
+
+<DIST,1>There are only females.
+
+<DIST,1>The gender is unknown.
+
+Contents
+
+<TEX,0>'s items
+
+<TEX,1>'s items
+
+???
+
+EGG
+
+MOVE TUTOR
+
+Learned as an EGG move <TEX,2>
+
+MOVE TUTOR
+
+<TEX,1>'s items
+
+<TEX,0>'s items
+
+Item only for <TEX,2>
+
+<DIST,1>Let's deposit many kinds of POKéMON.

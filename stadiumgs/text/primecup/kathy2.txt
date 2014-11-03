@@ -1,0 +1,80 @@
+<FACE,55,2>Do you play any winter sports?
+
+<FACE,55,2>Hi! I'm KATHY. Pleased to meet you.
+
+<FACE,55,2>You'll freeze if you're not careful.
+
+<FACE,55,2>I'm going with #26!
+
+<FACE,55,2>My choice is #26!
+
+<FACE,55,2>#26 ought to do it.
+
+<FACE,55,2>Play it cool, #26.
+
+<FACE,55,2>#26 might be the one.
+
+<FACE,55,2>#26 might not be right.
+
+<FACE,55,2>#26 gets the hook.
+
+<FACE,55,2>I'm switching #26 out.
+
+<FACE,55,2>I'm pulling #26.
+
+<FACE,55,0>Oh, no! My #26!
+
+<FACE,55,1>Ooh, fabulous!
+
+<FACE,55,1>Look, look! Isn't it super? Now that's a
+critical hit!
+
+<FACE,55,0>Critical hit? That one doesn't count! No?
+
+<FACE,55,0>Huh? You can do that?
+
+<FACE,55,1>Look. Look! Did you see that?
+
+<FACE,55,0>That's really dull.
+
+<FACE,55,1>There! I did it!
+
+<FACE,55,0>Oh! My poor #26!
+
+<FACE,55,1><KOHRI,2>I did it! Fantastic!
+
+<FACE,55,2><WAZA,196,2>#26! ICY WIND!
+
+<FACE,55,2>Ice POKéMON... Do you like them?
+
+<FACE,55,2>Pure white snow is beautiful.
+
+<FACE,55,1>Extreme! Aren't I tough?
+
+<FACE,55,1>I ended up winning! Maybe you don't have the talent...
+
+<FACE,55,1>I'm really happy! Thanks so much!
+
+<FACE,55,0>Awwww. I'll go look for someone weaker.
+
+<FACE,55,0>Oh, boring...
+
+<FACE,55,0>I lost... Oh well, no biggie.
+
+<FACE,55,2>Do you want to keep going?
+
+<FACE,55,2>You're quitting?
+
+SUICOW
+
+NITAROW
+
+SNOROW
+
+KINGDROW
+
+SCIZOW
+
+JOLTOW
+
+<FACE,55,0>

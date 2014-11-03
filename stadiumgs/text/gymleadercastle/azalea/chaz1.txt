@@ -1,0 +1,81 @@
+<FACE,39,2>Don't you dare make fun of bug POKéMON.
+
+<FACE,39,2>Heh, heh. You might want to rethink your opinion of these guys.
+
+<FACE,39,2>I'll bet you don't know how great bug POKéMON are.
+
+<FACE,39,2>Here I come!
+
+<FACE,39,2>There, #26!
+
+<FACE,39,2>I'm counting on you, #26!
+
+<FACE,39,1>This is it, #26!
+
+<FACE,39,1>Here's your chance, #26!
+
+<FACE,39,2>Retreat, #26!
+
+<FACE,39,2>#26, back!
+
+<FACE,39,2>Good, #26! Come back!
+
+<FACE,39,1>Good going, #26!
+
+<FACE,39,0>Aack! #26!
+
+<FACE,39,1>Ha, ha! That's it!
+
+<FACE,39,1>Critical hit! Excellent, #26!
+
+<FACE,39,0>Aww! You goof! That was your weak spot!
+
+<FACE,39,0>Oh, rats!
+
+<FACE,39,2>That was plain unlucky.
+
+<FACE,39,2>#26!
+
+<FACE,39,1>#26! You did it!
+
+<FACE,39,0>#26!
+
+<FACE,39,1><HIRUMI,2>Yes! What a chance!
+
+<FACE,39,1><MAHI,1>So, #26 is pretty good, huh?
+
+<FACE,39,2>I had a hard time catching this guy.
+
+<FACE,39,2>You don't think bug POKéMON are gross,
+do you?
+
+<FACE,39,1>I did it! See? Didn't I tell you they were tough?
+
+<FACE,39,2>I'd better take them home and let them rest... What? You want to
+battle again?
+
+<FACE,39,2>I think you should study a bit more.
+
+<FACE,39,2>Hmm. I need to train them better...
+
+<FACE,39,2>Let's have another battle sometime.
+
+<FACE,39,2>I didn't expect this to happen...
+
+<FACE,39,2>A draw, huh? You're pretty good.
+
+<FACE,39,2>Why are you giving up? Let's finish this.
+
+YANMY
+
+SPINARY
+
+SHUCKLY
+
+RATTATY
+
+PARASY
+
+GEODY
+
+<FACE,39,0>

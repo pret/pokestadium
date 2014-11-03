@@ -1,0 +1,81 @@
+<FACE,6,1>Do you know the weaknesses of GRASS-type POKéMON?
+
+<FACE,6,1>Do you know the weaknesses of GRASS-type POKéMON?
+
+<FACE,6,1>I'll teach you the strengths of the grass type!
+
+<FACE,6,1>Let's have a warm-up battle!
+
+<FACE,6,1>How about this?!?
+
+<FACE,6,1>All right!
+
+<FACE,6,1>Hey!
+
+<FACE,6,1>This is the one.
+
+<FACE,6,1>Whoa!
+
+<FACE,6,1>Ha, ha, ha...
+
+<FACE,6,1>How about this?
+
+<FACE,6,1>This ought to do it.
+
+<FACE,6,0>Oh no!
+
+<FACE,6,1>Oh? What's the matter?
+
+<FACE,6,1>Ha, ha, ha...Weak spot!
+
+<FACE,6,0>Whaaat!?!Weak spot?
+
+<FACE,6,0>Hmm...
+
+<FACE,6,1>Uh-huh, yup...
+
+<FACE,6,0>Awwww...
+
+<FACE,6,1>What! Game over already?
+
+<FACE,6,0>Owwww!
+
+<FACE,6,1><WAZA,202,4>Take a shot of GIGA DRAIN!
+
+<FACE,6,1><WAZA,72,4>MEGA DRAIN!
+
+<FACE,6,1><WAZA,89,4>This is my ace card.
+
+<FACE,6,0><WAZA,75,4>Nail the weak spot!
+
+<FACE,6,1>See? Aren't GRASS-type POKéMON tough?
+
+<FACE,6,1>GRASS-type POKéMON match up favorably against many other
+POKéMON types.
+
+<FACE,6,1>Did you see that? The GRASS-type is the best!
+
+<FACE,6,1>Waaah! You're better than me.
+
+<FACE,6,1>Waaah! You taught me a lesson instead!
+
+<FACE,6,1>Waaah! Maybe my team's type was a bad match for yours.
+
+<FACE,6,1>That was a good battle. By the way, do you like camping?
+
+<FACE,6,1>You should go to the LIBRARY to study the advantages of
+different POKéMON-type match ups.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+Check BOX
+
+Move BOX
+
+Re-order BOXes
+
+Exchange BOXes
+
+Name the BOX
+
+There are no POKéMON to move.
+
+There are no POKéMON to re-order.
+
+There are no POKéMON to exchange.
+
+There are no POKéMON to check.
+
+The destination is full.
+
+N64 Box contains POKéMON
+that can't be moved to <TEX,1>.
+
+There are no BOXes to exchange.
+
+This BOX already contains POKéMON.
+
+A POKéMON is holding MAIL.
+The BOX can't be moved.
+
+A POKéMON is holding MAIL.
+The BOXes can't be exchanged.
+
+Game Pak <TEX,1>'s BOX can't be named.
+
+Move the named BOX?
+
+Re-order the named BOXes?
+
+Exchange the named BOXes?
+
+Yes
+
+No
+
+GB Game Pak
+
+N64 Game Pak
+
+L/R-Button: Switch windows

@@ -1,0 +1,81 @@
+<FACE,54,2>I'm CHUCK! Come on! Hi-yah!
+
+<FACE,54,2>Hah! You want to challenge me? Are you brave or just ignorant?
+
+<FACE,54,2>You didn't falter at the sight of us. You must have guts. Come on!
+
+<FACE,54,2>Brace yourself!
+
+<FACE,54,2>It's #26!
+
+<FACE,54,2>Right! #26!
+
+<FACE,54,2>#26! Go!
+
+<FACE,54,2>#26! Finish it!
+
+<FACE,54,0>Tch! Come back!
+
+<FACE,54,2>Come back here!
+
+<FACE,54,2>Okay! Next!
+
+<FACE,54,2>Next!
+
+<FACE,54,0>No! That can't be!
+
+<FACE,54,1>There! Did you see that?!?
+
+<FACE,54,2>Right! That hit the weak spot.
+
+<FACE,54,0>What's that?!? Critical hit?
+
+<FACE,54,0>Don't get cute!
+
+<FACE,54,1>Wah, ha, ha...
+
+<FACE,54,0>Ah, clever.
+
+<FACE,54,1>See that?!?
+
+<FACE,54,2>What! How...?!?
+
+<FACE,54,2>Do you like to battle?
+
+<FACE,54,0><WAZA,223,2>Eat this! DYNAMICPUNCH!
+
+<FACE,54,2><KONRAN,2>My #26's got a heavy punch,
+doesn't it?
+
+<FACE,54,2><DOKU,2>That should work well.
+
+<FACE,54,2>There. Do you realize how much more powerful I am than you?
+
+<FACE,54,1>That's it! I win! I enjoyed that!
+
+<FACE,54,2>That was like a pillow fight.
+
+<FACE,54,0>Why...!?! All right, then! I'll raise my POKéMON to be even
+stronger!
+
+<FACE,54,2>You're strong! Would you please make me your apprentice?
+
+<FACE,54,0>I lost! I... I lost! Me!
+
+<FACE,54,0>Something's wrong! This just isn't right...
+
+<FACE,54,2>What? Well then, I may as well go home and take a nap...
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,54,0>

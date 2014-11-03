@@ -1,0 +1,80 @@
+<FACE,58,2>Bird POKéMON are found in the skies all around the world.
+
+<FACE,58,2>Have you caught any bird POKéMON?
+
+<FACE,58,2>Taking proper care of bird POKéMON is rewarding.
+
+<FACE,58,2>All right! Go, #26!
+
+<FACE,58,2>Take flight, #26!
+
+<FACE,58,1>Go, #26!
+
+<FACE,58,1>Here's your chance, #26!
+
+<FACE,58,1>It's yours, #26. Go!
+
+<FACE,58,2>This is pointless. Come back, #26!
+
+<FACE,58,2>#26, come back!
+
+<FACE,58,2>That's good enough! Get back, #26!
+
+<FACE,58,2>Well done, #26!
+
+<FACE,58,0>What!? No way!
+
+<FACE,58,1>I'm sorry to see that.
+
+<FACE,58,2>That's good, #26! You nailed its
+weak spot!
+
+<FACE,58,0>Critical hit?!? Rats!
+
+<FACE,58,0>Tch. How disappointing!
+
+<FACE,58,1>Good one, #26!
+
+<FACE,58,0>Uh-oh... Rats!
+
+<FACE,58,1>Tee, hee, hee...
+
+<FACE,58,0>What!? Why?!?
+
+<FACE,58,2><WAZA,65,2>Dreadful DRILL PECK!
+
+<FACE,58,2>My POKéMON have powerful beaks.
+
+<FACE,58,2>I wish I could fly, too...
+
+<FACE,58,2><WAZA,65,2>This will hurt! DRILL PECK!
+
+<FACE,58,1>It feels like I'm lifting off in flight.
+
+<FACE,58,1>You're never going to beat me that way.
+
+<FACE,58,1>Did you have a proper strategy worked out?
+
+<FACE,58,0>Wait! Let's go again! That's not allowed?
+
+<FACE,58,2>I lost? Tch, I'll go play with these guys...
+
+<FACE,58,2>I don't care. So what if I lost? I still like bird POKéMON.
+
+<FACE,58,2>Pretty decent, aren't you?
+
+<FACE,58,2>Oh! So you're gonna run...
+
+NITEASH
+
+XASH
+
+DACTASH
+
+MOLTASH
+
+ZAPASH
+
+ARTASH
+
+<FACE,58,0>

@@ -1,0 +1,61 @@
+Controller 1 is not connected. Turn the N64 Control Deck OFF and plug Controller 1 into Controller Socket 1.
+
+ZEPHYR
+
+HIVE
+
+PLAIN
+
+FOG
+
+MINERAL
+
+STORM
+
+GLACIER
+
+RISING
+
+TEAM ROCKET
+
+ELITE FOUR 1
+
+ELITE FOUR 2
+
+ELITE FOUR 3
+
+ELITE FOUR 4
+
+LANCE
+
+LT.SURGE
+
+SABRINA
+
+ERIKA
+
+JANINE
+
+MISTY
+
+BROCK
+
+BLAINE
+
+BLUE
+
+RED
+
+Heavy Cup
+
+Challenge Cup
+
+Poké Cup
+
+Prime Cup
+
+Class Room
+
+Free Battle
+
+Rival

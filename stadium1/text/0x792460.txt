@@ -1,0 +1,357 @@
+#25 has no moves left!
+
+No PP for this move!
+
+The move is disabled!
+
+There's no will to fight!
+
+#25 is already out!
+
+It's hurt by poison!
+
+It's hurt by the burn!
+
+LEECH SEED sapped HP!
+
+#25 fainted!
+
+Hit #02 times!
+
+It's fast asleep!
+
+It woke up!
+
+It's frozen solid!
+
+It can't move!
+
+It flinched!
+
+It has to recharge!
+
+It's no longer disabled!
+
+It's no longer confused!
+
+It's confused!
+
+It attacked itself!
+
+Its #29 is disabled!
+
+It's fully paralyzed!
+
+It unleashed energy!
+
+It's thrashing about!
+
+Its attack continues!
+
+#25 used #29!
+
+#25 used #29!
+
+#25 used #29!
+
+#25 used #29!
+
+#25 used #29!
+
+It's unaffected!
+
+Its attack missed!
+
+It has no effect...
+
+It crashed!
+
+It's unaffected!
+
+Its attack missed!
+
+It has no effect...
+
+It crashed!
+
+Critical hit!
+
+One-hit KO!
+
+Its RAGE is building!
+
+MIRROR MOVE failed!
+
+Go! #25!
+
+Do it! #25!
+
+Get'em! #25!
+
+The enemy's weak! Go!
+
+Enough! Come back!
+
+Enough! Come back!
+
+OK! Come back!
+
+Good! Come back!
+
+It's super effective!
+
+It's not very effective...
+
+The SUBSTITUTE took the attack!
+
+The SUBSTITUTE broke!
+
+It lost to #21!
+
+It's already asleep!
+
+But, it failed!
+
+It fell asleep!
+
+It had no effect!
+
+It's badly poisoned!
+
+It was poisoned!
+
+But, it failed!
+
+Ate its dream!
+
+It sucked HP!
+
+The ice melted!
+
+It was burned!
+
+It was burned!
+
+It was frozen solid!
+
+It may not attack!
+
+ATTACK greatly increased!
+
+DEFENSE greatly increased!
+
+SPEED greatly increased!
+
+SPECIAL greatly increased!
+
+Accuracy greatly increased!
+
+Evasiveness greatly increased!
+
+ATTACK increased!
+
+DEFENSE increased!
+
+SPEED increased!
+
+SPECIAL increased!
+
+Accuracy increased!
+
+Evasiveness increased!
+
+Nothing happened!
+
+ATTACK greatly fell!
+
+DEFENSE greatly fell!
+
+SPEED greatly fell!
+
+SPECIAL greatly fell!
+
+Accuracy greatly fell!
+
+Evasiveness greatly fell!
+
+ATTACK fell!
+
+DEFENSE fell!
+
+SPEED fell!
+
+SPECIAL fell!
+
+Accuracy fell!
+
+Evasiveness fell!
+
+Nothing happened!
+
+But, it failed!
+
+But, it failed!
+
+It had no effect!
+
+#25 ran from battle!
+
+#25 ran away scared!
+
+It was blown away!
+
+But, it failed!
+
+It's unaffected!
+
+It made a spiral wind!
+
+It took in sunlight!
+
+It withdrew its head!
+
+It's glowing!
+
+It flew up high!
+
+It dug a hole!
+
+But, it failed!
+
+It's shrouded in mist!
+
+But, it failed!
+
+It's getting pumped!
+
+It's hit with recoil!
+
+It became confused!
+
+It became confused!
+
+But, it failed!
+
+It's paralyzed! It may not attack!
+
+But, it failed!
+
+It had no effect!
+
+It learned #30!
+
+But, it failed!
+
+It was seeded!
+
+It evaded the attack!
+
+No effect!
+
+#30 was disabled!
+
+But, it failed!
+
+Coins scattered everywhere!
+
+It converted its type!
+
+But, it failed!
+
+All STATUS changes were eliminated!
+
+It fell asleep and was healed!
+
+It started sleeping!
+
+It regained health!
+
+But, it failed!
+
+It transformed into #27!
+
+But, it failed!
+
+It couldn't transform into DITTO!
+
+It's protected from SPECIAL attacks!
+
+But, it failed!
+
+It gained armor!
+
+But, it failed!
+
+It has a SUBSTITUTE!
+
+Not enough HP!
+
+It created a SUBSTITUTE!
+
+Congratulations!
+You won a DODUO GAME BOY!
+
+It speeds up the
+GAME BOY in the GB TOWER!
+
+Awesome!
+You won a DODRIO GAME BOY!
+
+The GAME BOY in
+the GB TOWER went hyper!
+
+Magnificent!
+You just won #31!
+
+For your 151 Pokémon
+HALL OF FAME, you won
+AMNESIA PSYDUCK!
+
+Received #31!
+
+Please go to PROF. OAK's
+LAB and receive your
+Pokémon now.
+
+Uh-oh. PROF. OAK is
+already holding a
+Pokémon for you.
+
+PROF. OAK can only hold
+one Pokémon for you,
+unfortunately.
+
+Would you like to release
+#32 and receive
+#31?
+
+Released #32
+and got #31!
+
+Gave up on #31.
+
+ BATTLE
+
+POKéMON
+
+RUN
+
+QUIT?
+
+YES
+
+NO
+
+TIME LIMIT
+
+Receive #31?
+
+Yes
+
+No
+
+Check
+
+Cancel
+
+READY!

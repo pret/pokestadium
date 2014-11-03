@@ -1,0 +1,144 @@
+PEWTER GYM
+
+CERULEAN CITY
+
+VERMILION CITY
+
+CELADON CITY
+
+FUCHSIA CITY
+
+SAFFRON GYM
+
+CINNABAR GYM
+
+VIRIDIAN CITY
+
+GYM LEADER
+
+TO GIOVANNI's TOWER
+
+ELITE FOUR
+
+RIVAL
+
+Obtained the key from GIOVANNI and opened the
+gates to the final castle.
+
+JOHTO GYM LEADER CASTLE
+
+JOHTO GYM LEADER CASTLE
+
+KANTO GYM LEADER CASTLE
+
+FALKNER
+
+BUGSY
+
+WHITNEY
+
+MORTY
+
+CHUCK
+
+JASMINE
+
+TEAM ROCKET
+
+PRYCE
+
+CLAIR
+
+ELITE FOUR
+
+LANCE
+
+LT.SURGE
+
+SABRINA
+
+MISTY
+
+ERIKA
+
+JANINE
+
+BROCK
+
+BLAINE
+
+BLUE
+
+RED
+
+ROUND-2
+
+Rules
+
+KANTO GYM LEADER CASTLE
+
+Cancel
+
+JOHTO GYM LEADER CASTLE
+
+#35 LEADER
+
+<LINE,26><DIST,1>Before you go any further, let's see
+how you'll fare against us, TEAM ROCKET!
+
+<LINE,26><DIST,1>You won through the ranks to reach me.
+I'm impressed. We, the ELITE FOUR,
+will face you from here.
+
+<LINE,26><DIST,1>It looks like even the ELITE FOUR couldn't stop you.
+I'm your last opponent in the JOHTO CASTLE!
+
+<LINE,26><DIST,1>You defeated all eight of us. 
+You've earned the right to challenge the final
+trainer in the KANTO GYM LEADER CASTLE.
+
+VIOLET GYM
+
+AZALEA GYM
+
+GOLDENROD GYM
+
+ECRUTEAK GYM
+
+CIANWOOD GYM
+
+OLIVINE GYM
+
+TEAM ROCKET
+
+MAHOGANY GYM
+
+BLACKTHORN GYM
+
+ELITE FOUR
+
+PEWTER GYM
+
+CERULEAN GYM
+
+VERMILION GYM
+
+CELADON GYM
+
+FUCHSIA GYM
+
+SAFFRON GYM
+
+CINNABAR GYM
+
+VIRIDIAN GYM
+
+CHAMPION
+
+???
+
+<LINE,26><DIST,1>I concede defeat. You might have what it takes
+to prevail over KANTO's GYM LEADERs.
+
+<LINE,26><DIST,1>So you're the trainer who conquered
+JOHTO CASTLE. Come on, I'll take you on anytime.

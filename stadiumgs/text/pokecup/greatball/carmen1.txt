@@ -1,0 +1,81 @@
+<FACE,7,0>There is no possibility of my POKéMON losing.
+
+<FACE,7,0>Would you be so kind as to show me your POKéMON?
+
+<FACE,7,0>My POKéMON are so much stronger and cuter than your POKéMON!
+
+<FACE,7,0>My dear #26 will start.
+
+<FACE,7,0>It's #26's turn.
+
+<FACE,7,0>#26, fight!
+
+<FACE,7,0>#26, be brave!
+
+<FACE,7,0>#26, you can win.
+
+<FACE,7,0>That was too much to ask of #26.
+
+<FACE,7,0>Good work, #26.
+
+<FACE,7,0>Thank you, #26.
+
+<FACE,7,0>#26, you were fabulous!
+
+<FACE,7,0>Wow, #28. That's super!
+
+<FACE,7,1>Oh! Sorry, #28!
+
+<FACE,7,1>That happened to hit the weak spot.
+#28! Did that hurt?
+
+<FACE,7,1>Eeyaah! That was right on the weak spot!
+#26, are you all right?
+
+<FACE,7,1>Be strong, #26!
+
+<FACE,7,1>#28, I'm so sorry!
+
+<FACE,7,1>I can only tell it to hang on...
+
+<FACE,7,0>Ohh... This is nerve-wracking...
+
+<FACE,7,1>Aiyee! #26!
+
+<FACE,7,0>Wonderful, #26! Hang in there.
+
+<FACE,7,0><WAZA,6,4>#26, PAY DAY.
+
+<FACE,7,0>#26, we'll have a nice dinner tonight.
+
+<FACE,7,0><WAZA,227,1>Ooh, ooh! Please do that move again!
+
+<FACE,7,0>We won! Oh, I'm so glad! Thank you, everyone!
+
+<FACE,7,0>Are your POKéMON all right?
+
+<FACE,7,0>Now let's go home for dinner.
+
+<FACE,7,1>My poor POKéMON...
+
+<FACE,7,1>Oh, did that hurt? I'm so sorry. It's all Mommy's fault.
+
+<FACE,7,1>I hate battles! I'll never do it again!
+
+<FACE,7,0>I don't care about winning or losing.
+
+<FACE,7,0>You want to quit battling? Yes, yes. Let's stop!
+
+PIKACHAN
+
+MEOWAN
+
+FAIRYAN
+
+SHUCKAN
+
+TOGEPAN
+
+MR.MIMAN
+
+<FACE,7,1>

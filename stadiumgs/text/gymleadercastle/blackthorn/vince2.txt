@@ -1,0 +1,80 @@
+<FACE,10,2>Come face my thoroughly toughened POKéMON!
+
+<FACE,10,2>I can see that you're a skilled trainer. Let's give it a go!
+
+<FACE,10,2>Go a round with me before you shoot for the top!
+
+<FACE,10,2>Go, #26!
+
+<FACE,10,2>#26, get out there!
+
+<FACE,10,2>I'm counting on you, #26!
+
+<FACE,10,2>#26, it's you!
+
+<FACE,10,2>#26, what a chance!
+
+<FACE,10,2>Come back, #26!
+
+<FACE,10,2>Enough, #26!
+
+<FACE,10,1>Way to work, #26!
+
+<FACE,10,1>I tip my hat to you, #26!
+
+<FACE,10,0>Whoa! That was powerful!
+
+<FACE,10,1>Whew, that was electrifying!
+
+<FACE,10,1>Yeah! Popped it where it hurts the most!
+That's the idea!
+
+<FACE,10,0>Yikes! Took it where it hurts! 
+
+<FACE,10,0>Whoa, no!
+
+<FACE,10,1>Looking good.
+
+<FACE,10,0>Uh-oh... Hang tough!
+
+<FACE,10,1>And there we have it. Thanks so much!
+
+<FACE,10,0>Ack... My #26...
+
+<FACE,10,1><YAKEDO,2>Heh, sorry about that.
+
+<FACE,10,2><WAZA,113,2>That's LIGHT SCREEN.
+
+<FACE,10,2><WAZA,115,2>That's REFLECT.
+
+<FACE,10,1><MEROMERO,2>Quite elegant, wouldn't you say?
+
+<FACE,10,1>Thanks! I'm sure you'll get tougher, too.
+
+<FACE,10,2>Well, I'd better go look for my next opponent.
+
+<FACE,10,2>You know, you're not necessarily a bad trainer.
+
+<FACE,10,0>I surrender! I was totally defeated!
+
+<FACE,10,2>I'm sorry. I took you for granted, but you are tough after all.
+
+<FACE,10,2>I suppose there must be many tough trainers.
+
+<FACE,10,2>Whew... We must be evenly matched.
+
+<FACE,10,2>Okay. See you some other time.
+
+IVYSTOR
+
+WARSTOR
+
+MELEOSTOR
+
+LEEFSTOR
+
+CROCOSTOR
+
+LAVASTOR
+
+<FACE,10,0>

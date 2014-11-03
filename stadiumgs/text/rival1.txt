@@ -1,0 +1,81 @@
+<FACE,51,1>Yo! You finally got here. Now we'll decide things once and for all!
+
+<FACE,51,1>You just get on my nerves! I'll whip you right now!
+
+<FACE,51,1>There's room for only one CHAMP! I'll make you understand that!
+
+<FACE,51,1>Prepare to lose!
+
+<FACE,51,1>#26!
+
+<FACE,51,1>#26! Smash it!
+
+<FACE,51,1>Do it, #26!
+
+<FACE,51,1>#26, finish it!
+
+<FACE,51,1>Pull back, #26!
+
+<FACE,51,1>Switch, #26!
+
+<FACE,51,1>Good! Switch, #26!
+
+<FACE,51,1>Next!
+
+<FACE,51,0>Ugh! That's impossible!
+
+<FACE,51,2>Hey! You're looking pale!
+
+<FACE,51,2>Drill that home! It can do that, too!
+
+<FACE,51,0>Hmph! So you got a critical hit. Don't start
+celebrating just yet!
+
+<FACE,51,0>What do you mean by that?
+
+<FACE,51,1>Did it get careless?
+
+<FACE,51,0>What are you doing?
+
+<FACE,51,2>Ha! So much for your big talk.
+
+<FACE,51,0>Arrrrgh! #26!
+
+<FACE,51,1><WAZA,219,1>Quit showing off!
+
+<FACE,51,1><WAZA,105,4>The world belongs to the strong!
+
+<FACE,51,0>Lose to you? Never!
+
+<FACE,51,0>What are you thinking?
+
+<FACE,51,2>Do you see? I'm the best!
+
+<FACE,51,2>The bottom line is that you can't beat me, no matter what you do.
+
+<FACE,51,2>You're wasting your time playing with those wimpy POKéMON.
+
+<FACE,51,0>What... Why?!? This should have been perfect!
+
+<FACE,51,0>Are you happy that you won? Hmph! Sure. Go ahead and brag
+about it.
+
+<FACE,51,0>What? What is it that I lack?
+
+<FACE,51,1>Hmph! How could I have only tied against the likes of you?
+
+<FACE,51,2>There you go. Go on home to your mommy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,51,0>

@@ -1,0 +1,45 @@
+Check moves
+
+Re-order moves
+
+Check the move in detail
+
+Select the move to be re-ordered
+
+Release this Pokémon?
+
+Yes
+
+No
+
+TYPE
+
+HP
+
+ATTACK
+
+DEFENSE
+
+SPEED
+
+SPECIAL
+
+ID/
+
+OT/
+
+EXP. POINTS/
+
+#06 to
+
+STATUS/
+
+TYPE/
+
+POWER/
+
+ACCURACY/
+
+L
+
+No.

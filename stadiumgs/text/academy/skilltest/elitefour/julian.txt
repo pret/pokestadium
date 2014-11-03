@@ -1,0 +1,82 @@
+<FACE,2,2>I wonder if you could beat me.
+
+<FACE,2,2>I've taught my POKéMON <COL1,PUSH,146,195,255,255>MINIMIZE<COL1,POP>. Heh, heh. We're perfect!
+
+<FACE,2,2>Do you like rainy days?
+
+<FACE,2,2>My POKéMON are tough!
+
+<FACE,2,2>Maybe #26?
+
+<FACE,2,2>#26 might be it.
+
+<FACE,2,2>I think I'll go with #26.
+
+<FACE,2,2>#26 has to be it.
+
+<FACE,2,2>I'm switching out!
+
+<FACE,2,2>Wait a second.
+
+<FACE,2,2>Maybe I'll switch.
+
+<FACE,2,2>Come back, #26.
+
+<FACE,2,0>What? What was that all about?
+
+<FACE,2,1>#26, good! Very good!
+
+<FACE,2,1>A direct hit on the weak spot. Ahhh... That
+felt wonderful.
+
+<FACE,2,0>Oh, no. Wait! I don't like you hitting the weak
+spot.
+
+<FACE,2,0>What? What is that?
+
+<FACE,2,2>That'll do.
+
+<FACE,2,0>Is that how you do things?
+
+<FACE,2,1>That's fantastic!
+
+<FACE,2,0>Eeyaah! That's terrible!
+
+<FACE,2,2><WAZA,107,4>Don't step on it!
+
+<FACE,2,2><WAZA,240,4>Do you like it when it rains?
+
+<FACE,2,2><WAZA,87,4>Drop some THUNDER!
+
+<FACE,2,1><WAZA,57,4>I belong to a swim club!
+
+<FACE,2,1>When it rains,  <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP> always rolls!
+
+<FACE,2,1>No, no. Not a chance. You'll never beat me that way!
+
+<FACE,2,1>See? Didn't <COL1,PUSH,146,195,255,255>MINIMIZE<COL1,POP> make it hard to hit my POKéMON?
+
+<FACE,2,0>I've been attending the ACADEMY since I was little. It makes me
+furious to lose!
+
+<FACE,2,2>Of course, I also like sunny days. Then I can go swimming!
+
+<FACE,2,0>I've been a student here since I was little... EARL!
+
+<FACE,2,1>Oh, sheesh. What was I doing?
+
+<FACE,2,2>You're too obvious!
+
+
+
+
+
+
+
+
+
+
+
+
+
+

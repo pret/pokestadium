@@ -1,0 +1,82 @@
+<FACE,38,2><COL1,PUSH,146,195,255,255>SWIFT<COL1,POP> is about the only attack that will hit!
+
+<FACE,38,2>Could you even hit me?
+
+<FACE,38,2>Quicker than the eye! Here comes my feared <COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP>!
+
+<FACE,38,2>I'll do my best!
+
+<FACE,38,2>#26, go sweetie!
+
+<FACE,38,2>Next, my darling #26!
+
+<FACE,38,2>#26, honey. I'm counting on you!
+
+<FACE,38,1>#26, honey. Here's your chance!
+
+<FACE,38,2>#26, I'm pulling you back.
+
+<FACE,38,2>#26, you were so good!
+
+<FACE,38,2>Okay, #26. Come back!
+
+<FACE,38,1>#26, I'm so proud of you! That's
+good enough!
+
+<FACE,38,0>Eeyaah! My darling, #26!
+
+<FACE,38,1>You did it, #26! You're so cool!
+
+<FACE,38,1>Critical hit! Lucky!
+
+<FACE,38,0>What! How dare you! That hit its weak spot!
+
+<FACE,38,0>Oh, no! Don't give up!
+
+<FACE,38,1>That's it!
+
+<FACE,38,0>Oh! Quit it!
+
+<FACE,38,1>Yay!
+
+<FACE,38,0>Eeyaah! #26!
+
+<FACE,38,2><WAZA,104,4>Quicker than the eye! DOUBLE TEAM!
+
+<FACE,38,2><WAZA,28,4>Kick up some dust! SAND-ATTACK!
+
+<FACE,38,2><WAZA,108,4>Whoosh! SMOKESCREEN!
+
+<FACE,38,2>Cute POKéMON are absolutely the best. Don't
+you think so?
+
+<FACE,38,2><COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP>'s effect can be lifted.
+I've heard that there's a move that can do that.
+
+<FACE,38,1>I've heard that <COL1,PUSH,146,195,255,255>SWIFT<COL1,POP> never misses. Is that true?
+
+<FACE,38,2>I think that there are moves that restore elusiveness to normal.
+
+<FACE,38,0>I... I lost. Sob... Just joking!
+
+<FACE,38,0>You did it... Grrrrr...
+
+<FACE,38,0>This is the first time that we were hit so often.
+
+<FACE,38,2>Well, this might be okay, too.
+
+<FACE,38,2>Excuse me? What's the matter? That's so boring!
+
+
+
+
+
+
+
+
+
+
+
+
+
+

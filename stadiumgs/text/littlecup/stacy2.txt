@@ -1,0 +1,79 @@
+<FACE,42,2>Battle? Okay, but just for a little while.
+
+<FACE,42,2>A battle? Certainly.
+
+<FACE,42,2>Let's keep our battle clean and refreshing.
+
+<FACE,42,2>Ready?
+
+<FACE,42,2>#26, please do it!
+
+<FACE,42,2>Get out there, #26!
+
+<FACE,42,1>We can do it, #26!
+
+<FACE,42,1>#26! Here's your chance!
+
+<FACE,42,2>Come back, #26!
+
+<FACE,42,2>Switch out, #26!
+
+<FACE,42,1>That's good, #26. Come back!
+
+<FACE,42,1>That's wonderful, #26! Come back!
+
+<FACE,42,0>Aiyeeee! That's not fair!
+
+<FACE,42,1>Yippee, yippee, yippee!
+
+<FACE,42,1>Hit the weak spot! I'm so happy!
+
+<FACE,42,0>Critical hit? Are you all right, #26?!?
+
+<FACE,42,0>No! That was nasty!
+
+<FACE,42,2>Look, look!
+
+<FACE,42,0>Don't give up, #26!
+
+<FACE,42,1>Outstanding! Outstanding!
+
+<FACE,42,0>Nooooo!
+
+<FACE,42,2>Walking is excellent for your health.
+
+<FACE,42,2>Do you take your POKéMON outside?
+
+<FACE,42,2>A while ago, a terrible downpour drenched us.
+
+<FACE,42,2>It's so relaxing to go somewhere quiet.
+
+<FACE,42,1>Hee, hee... Sorry.
+
+<FACE,42,1>Ahhh... That was so refreshing.
+
+<FACE,42,1>I guess this demonstrates our skill levels.
+
+<FACE,42,0>I feel like I blew it...
+
+<FACE,42,0>Ow, ow, ow...
+
+<FACE,42,2>I couldn't avoid that... Let's do this again.
+
+<FACE,42,2>These things happen.
+
+<FACE,42,2>Oh, well. Whatever.
+
+HORSBASK
+
+PHANBASK
+
+BULBASK
+
+DEENBASK
+
+SPEARBASK
+
+QUILBASK
+
+<FACE,42,0>

@@ -1,0 +1,83 @@
+<FACE,29,0>I am KAREN. Would you care for a showdown with my DARK-type
+POKéMON?
+
+<FACE,29,0>You've assembled a charming team. Our battle should be a
+good one.
+
+<FACE,29,0>I am unlike the three you've already met.
+
+<FACE,29,0>There!
+
+<FACE,29,0>#26, go!
+
+<FACE,29,0>#26, please!
+
+<FACE,29,0>#26, don't fail me!
+
+<FACE,29,0>#26, you know what to do!
+
+<FACE,29,0>You're no good for this!
+
+<FACE,29,0>Switch out!
+
+<FACE,29,0>That should be enough!
+
+<FACE,29,0>Good, that's enough!
+
+<FACE,29,0>Hmm... Is that how you want to play it?
+
+<FACE,29,0>It's a lot less complicated this way.
+
+<FACE,29,0>We weren't deliberately aiming for the weak
+spot.
+
+<FACE,29,0>It hit the weak spot precisely. You're good.
+
+<FACE,29,0>That was a smart move.
+
+<FACE,29,0>That showed subtle elegance.
+
+<FACE,29,0>Nothing can be done about that.
+
+<FACE,29,0>It's working well.
+
+<FACE,29,0>This can't be happening!
+
+<FACE,29,0><KONRAN,2>So? Isn't it outstanding?
+
+<FACE,29,0><MEROMERO,4>Oh, look. It's infatuated.
+
+<FACE,29,0><MAHI,2>I was hoping for that.
+
+<FACE,29,0>Wouldn't you agree that DARK-type POKéMON
+have their charms?
+
+<FACE,29,0>That's about what I expected.
+
+<FACE,29,0>Well, that was relatively entertaining.
+
+<FACE,29,0>Come visit me anytime.
+
+<FACE,29,0>The CHAMPION is looking forward to meeting you.
+
+<FACE,29,0>No! I can't win. How did you become so strong?
+
+<FACE,29,0>I will not stray from my chosen path.
+
+<FACE,29,0>A draw...? But how...?
+
+<FACE,29,0>You're going to reappraise matters, aren't you?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,29,0>

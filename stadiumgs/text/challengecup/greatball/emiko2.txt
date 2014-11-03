@@ -1,0 +1,81 @@
+<FACE,33,1>A battle? That sounds rather frightening.
+
+<FACE,33,1>Aren't my POKéMON attractive? Would you care to see them
+perform?
+
+<FACE,33,1>I can't beat my mother or the senior girls in our troupe.
+
+<FACE,33,1>May I begin?
+
+<FACE,33,1>Go on. Get out there.
+
+<FACE,33,1>#26, you're my choice.
+
+<FACE,33,1>#26, I'm depending on you.
+
+<FACE,33,1>Your opponent is close to falling.
+
+<FACE,33,1>No, I'm giving you the hook.
+
+<FACE,33,1>Wait. Please wait.
+
+<FACE,33,1>May I have a moment?
+
+<FACE,33,1>I beg your pardon.
+
+<FACE,33,2>Aiyee! You're a tough audience!
+
+<FACE,33,1>I'm elated!
+
+<FACE,33,1>My, a critical hit. Please forgive me.
+
+<FACE,33,0>Critical hit? No! How dare you!
+
+<FACE,33,2>That was so unpleasant.
+
+<FACE,33,1>This could be my big break!
+
+<FACE,33,0>You have to endure this!
+
+<FACE,33,1>Oh! I'm so happy!
+
+<FACE,33,2>That was a terrible performance!
+
+<FACE,33,1>Do you know of Kyoto?
+
+<FACE,33,1>We all love POKéMON.
+
+<FACE,33,1>POKéMON really are adorable, aren't they?
+
+<FACE,33,1>We play with our POKéMON every day.
+
+<FACE,33,1>Wouldn't you agree that I am quite good?
+
+<FACE,33,1>Don't you think you should be a little more diligent and
+determined?
+
+<FACE,33,1>I can finally beat someone. I'm delighted!
+
+<FACE,33,2>What should I do? My mother will be disappointed.
+
+<FACE,33,0>I don't like inflexible people like you! I don't want to know you!
+
+<FACE,33,1>Please book us for a performance... How old did you say you were?
+
+<FACE,33,1>Oh, a draw? I've never had one before.
+
+<FACE,33,1>What's wrong? You're leaving?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,33,2>

@@ -1,0 +1,50 @@
+NAME
+
+LEVEL
+
+OT
+
+RENTAL
+
+HALL OF FAME
+
+#03 Pokémon are
+represented.
+
+Congratulations!
+
+POKé CUP
+
+POKé CUP
+
+POKé CUP
+
+PETIT CUP
+
+PIKA CUP
+
+PRIME CUP
+
+GYM LEADER CASTLE
+
+The Game Pak
+can't be used.
+
+Save file
+not found.
+
+The Game Pak
+wasn't saved 
+at a POKéMON
+CENTER.
+
+POKéDEX
+not found.
+
+Please select a Game Boy Game Pak.
+
+A Pokémon Game Pak is not inserted.
+Turn the N64 Control Deck OFF, then insert
+the Game Pak.
+
+PRESS START

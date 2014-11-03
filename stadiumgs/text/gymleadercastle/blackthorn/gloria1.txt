@@ -1,0 +1,83 @@
+<FACE,9,2>I train by battling as many trainers as I can.
+
+<FACE,9,2>I'm in heavy training with my sights on the summit! Would you
+spar with me?
+
+<FACE,9,2>I'm hoping to discover something through my battles.
+
+<FACE,9,2>Number one! #26!
+
+<FACE,9,2>#26, let's go!
+
+<FACE,9,2>It has to be #26!
+
+<FACE,9,2>#26 will do.
+
+<FACE,9,2>#26 will tend to you.
+
+<FACE,9,2>Draw back for now!
+
+<FACE,9,2>#26, it's over!
+
+<FACE,9,2>#26, finish!
+
+<FACE,9,2>It's all over, #26!
+
+<FACE,9,0>Aack! I misplayed that!
+
+<FACE,9,1>Bingo! Exactly as planned!
+
+<FACE,9,1>Yes! That hit the weak spot! Just as I
+planned it!
+
+<FACE,9,2>Critical hit? That one couldn't be helped.
+
+<FACE,9,0>Oh! That's a little annoying!
+
+<FACE,9,2>So... We do this now and...
+
+<FACE,9,0>Awww, that's so tedious.
+
+<FACE,9,1>And that's the game! Ha, ha, ha...
+
+<FACE,9,0>Oh... How could this happen...?
+
+<FACE,9,2>There are many kinds of trainers out there,
+don't you think?
+
+<FACE,9,2>Some people prefer raising POKéMON to
+battling.
+
+<FACE,9,1><NEMURI,4>Hush. Be good, and stay asleep.
+
+<FACE,9,1><DOKU,2>Isn't that gooey feeling horrible?
+
+<FACE,9,1>I did it! I am so great!
+
+<FACE,9,1>Thank you. I didn't learn much from this, though.
+
+<FACE,9,2>Your power? Eh, I'd say it's all right. For what it is...
+
+<FACE,9,0>I'm furious! I can't help myself--losing steams me!
+
+<FACE,9,0>I lost because of that one move. That has to be it.
+
+<FACE,9,0>I've never been beaten this way.
+
+<FACE,9,0>Arrrgh! So close! If only that had worked...
+
+<FACE,9,2>Bye-bye!
+
+JIGGLANCE
+
+VENONANCE
+
+SKIPLANCE
+
+CLEFANCE
+
+EXEGANCE
+
+ODDANCE
+
+<FACE,9,0>

@@ -1,0 +1,83 @@
+<FACE,52,0>Who are you to challenge a teacher?
+
+<FACE,52,0>All of the students in my class are crazy about POKéMON.
+
+<FACE,52,0>I know it's not a grown-up thing to do, but I don't want to
+lose either!
+
+<FACE,52,0>Shall we start?
+
+<FACE,52,0>Will #26 do?
+
+<FACE,52,0>Then I'll use #26.
+
+<FACE,52,0>#26 will go.
+
+<FACE,52,0>#26 is good.
+
+<FACE,52,0>I'm going to switch.
+
+<FACE,52,0>Let's switch.
+
+<FACE,52,0>I'm changing POKéMON.
+
+<FACE,52,0>Well then, I'll do it this way.
+
+<FACE,52,0>Oh, my goodness. Your POKéMON are
+tremendous!
+
+<FACE,52,0>Don't be crushed!
+
+<FACE,52,0>It hit the weak spot. Think about what you
+should do next.
+
+<FACE,52,0>Hmm... Aim for the weak spot? Not too bad.
+
+<FACE,52,0>Was that planned?
+
+<FACE,52,0>Now, think about it.
+
+<FACE,52,0>That's the way.
+
+<FACE,52,0>Oh... How did it get this way?
+
+<FACE,52,0>Oh... How terrible.
+
+<FACE,52,0><WAZA,104,4>It's important to avoid being hit.
+
+<FACE,52,0><WAZA,86,4>Let's try paralyzing. Will it work?
+
+<FACE,52,0><WAZA,226,4>I'm using BATON PASS. Watch closely.
+
+<FACE,52,0><WAZA,097,4>Agility is very important.
+
+<FACE,52,0>What did you do wrong? Your homework is to figure that out.
+
+<FACE,52,0>I should have gone easier on you. Sorry!
+
+<FACE,52,0>You have to try harder. I'll be cheering you on!
+
+<FACE,52,0>You're really gifted! What school did you say you're from?
+
+<FACE,52,0>Oh my. I lost. It wasn't on purpose, either.
+
+<FACE,52,0>With your skill level, I can recommend you for national
+tournaments.
+
+<FACE,52,0>That's too bad. You were so close, too.
+
+<FACE,52,0>What's wrong? You shouldn't run away.
+
+LEDIED
+
+KADABED
+
+AIPOMED
+
+GIRFED
+
+MANTED
+
+NAIRED
+
+<FACE,52,0>

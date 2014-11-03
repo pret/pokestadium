@@ -1,0 +1,81 @@
+<FACE,57,1>We're gonna do it with <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>!
+
+<FACE,57,1>Contact! We're gonna <COL1,PUSH,146,195,255,255>FLY<COL1,POP>!
+
+<FACE,57,1><COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP> are gonna knock you outta your socks!
+
+<FACE,57,1>Go! Go!
+
+<FACE,57,2>It's #26!
+
+<FACE,57,2>Ha, ha... Here's #26!
+
+<FACE,57,2>#26 is the one!
+
+<FACE,57,2>#26, here and now!
+
+<FACE,57,2>Get back, #26!
+
+<FACE,57,2>#26, get back here!
+
+<FACE,57,1>Way to go, #26!
+
+<FACE,57,2>That's good! Come back!
+
+<FACE,57,0>I'm in danger!
+
+<FACE,57,1>Yeah! That's good!
+
+<FACE,57,1>Pow! Socked the weak spot! Good going,
+#26!
+
+<FACE,57,0>Oh! You goof! Don't get hit there!
+
+<FACE,57,2>Ohh... That's not good...
+
+<FACE,57,1>Yeah! Exactly as planned!
+
+<FACE,57,0>Shucks!
+
+<FACE,57,1>Ta-daaaah!
+
+<FACE,57,2>No, no, no, nooooo!
+
+<FACE,57,1>Have you collected a lot of POKéMON?
+
+<FACE,57,1><WAZA,19,4>I wish I could FLY freely in the skies.
+
+<FACE,57,2><WAZA,91,4>I'd like to DIG underground and skip class!
+
+<FACE,57,1>You must like battling POKéMON, too.
+
+<FACE,57,1>It's a move that combines both defense and offense!
+
+<FACE,57,1>As promised, I knocked your socks off!
+
+<FACE,57,1>Heh. Makes it hard to attack, doesn't it?
+
+<FACE,57,0>I got beaten! ...I guess I was a little too complacent.
+
+<FACE,57,2>What moves can be used against a POKéMON that uses <COL1,PUSH,146,195,255,255>FLY<COL1,POP> or <COL1,PUSH,146,195,255,255>DIG<COL1,POP>?
+I'm not telling!
+
+<FACE,57,2>Well, I did lose. But I, DUSTIN, gained some valuable experience.
+
+<FACE,57,2>That's strange. A draw?
+
+<FACE,57,1>You're giving up already? Too easy!
+
+
+
+
+
+
+
+
+
+
+
+
+
+

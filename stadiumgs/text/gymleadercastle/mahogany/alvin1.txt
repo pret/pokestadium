@@ -1,0 +1,80 @@
+<FACE,3,1>The colder it gets, the tougher our POKÃ©MON get!
+
+<FACE,3,1>Chill out! I'll keep you frozen 'til spring!
+
+<FACE,3,1>Even in a blizzard, we're still blazing hot!
+
+<FACE,3,1>Gonna roll over you like an avalanche!
+
+<FACE,3,1>Chill, man!
+
+<FACE,3,1>Get in there, #26!
+
+<FACE,3,1>Woosh, woosh! #26!
+
+<FACE,3,1>Do your thing, #26!
+
+<FACE,3,2>Yo! That's totally uncool!
+
+<FACE,3,1>Switch out!
+
+<FACE,3,1>Quick change!
+
+<FACE,3,1>Here comes the finisher!
+
+<FACE,3,2>Lost the edge there!
+
+<FACE,3,0>Ow! Right on the money!
+
+<FACE,3,0>Yeah, critical hit! Groovy!
+
+<FACE,3,2>Huh? Critical hit? You're kidding me!
+
+<FACE,3,0>Sweat drops...
+
+<FACE,3,0>Light it up!
+
+<FACE,3,2>Bummer...
+
+<FACE,3,0>Way cool, junior!
+
+<FACE,3,2>Hey! Total wipeout!
+
+<FACE,3,0><KOHRI,4>Heh, heh. Cold, isn't it?
+
+<FACE,3,0><MAHI,4>Gotta keep moving if you don't want to
+freeze!
+
+<FACE,3,0><HIRUMI,4>Heh, the cold shut it down?
+
+<FACE,3,1>Hey, you do any boarding yourself?
+
+<FACE,3,0>All right then. Time for another run!
+
+<FACE,3,1>You've got all the substance of slush!
+
+<FACE,3,0>I feel like I nailed a 1080º!
+
+<FACE,3,2>Shoot! Well then, I'm switching to summer. Watch me as a SWIMMER!
+
+<FACE,3,1>I'm out of here!
+
+<FACE,3,2>I should've known--it's all about balance...
+
+<FACE,3,1>Hey! Let's have another go!
+
+<FACE,3,1>Come again, okay?
+
+AIRSEEL
+
+AIRSWIN
+
+AIRSHELL
+
+AIRSMOOCH
+
+AIRKING
+
+AIRFLAAF
+
+<FACE,3,2>

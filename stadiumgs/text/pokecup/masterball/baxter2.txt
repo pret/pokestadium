@@ -1,0 +1,83 @@
+<FACE,8,2>How would you like to battle a joker like me? I guarantee you'll be
+surprised!
+
+<FACE,8,2>My POKéMON are the best in the world! I'm not blinded by love,
+either!
+
+<FACE,8,2>I can't embarrass my club. I can't afford to lose.
+
+<FACE,8,2>How about #26 to start?
+
+<FACE,8,2>#26, my pride and joy!
+
+<FACE,8,2>There! Surprise you?
+
+<FACE,8,2>My precious #26!
+
+<FACE,8,2>My #26 has been raised with tender
+loving care!
+
+<FACE,8,2>Come back to me!
+
+<FACE,8,2>Come on home!
+
+<FACE,8,1>My baby did very well!
+
+<FACE,8,2>Yes, sir! Come on!
+
+<FACE,8,0>Aaargh! #26!
+
+<FACE,8,1>Fantastic, #26!
+
+<FACE,8,1>Good! Good! That dinged the weak spot.
+
+<FACE,8,0>Wha...? How dare you! That hit its weak spot!
+
+<FACE,8,0>Hmm... I'm worried...
+
+<FACE,8,1>Ho, ho, ho...
+
+<FACE,8,0>Aww, that's cruel!
+
+<FACE,8,1>Seems like I won!
+
+<FACE,8,0>Doggone it!
+
+<FACE,8,2><WAZA,89,4>#26, give it a shake with EARTHQUAKE!
+
+<FACE,8,2><WAZA,216,4>It's time for RETURN, #26!
+
+<FACE,8,2>My team is the greatest after all!
+
+<FACE,8,2>We'll go to the beauty salon this weekend.
+
+<FACE,8,1>Mmm... Beautiful and strong, too! How sweet it is!
+
+<FACE,8,2>Oh, how cute! What? Who says someone like me can't say "cute"?
+
+<FACE,8,1>I don't care about the match! My POKéMON!
+
+<FACE,8,0>You monster! Savage! How could you do such a thing!
+
+<FACE,8,0>Aaargh! My POKéMON! I need a POKéMON CENTER!
+
+<FACE,8,0>M-my POKéMON... I f-feel f-faint... (Thud!)
+
+<FACE,8,2>Listen, let's stop this now.
+
+<FACE,8,2>You're quitting, huh? That's for the best. Definitely for the
+best.
+
+RAPIDAL
+
+CUNEAL
+
+ALAKAZAL
+
+AEROAL
+
+MAROWAL
+
+ECTRODAL
+
+<FACE,8,0>

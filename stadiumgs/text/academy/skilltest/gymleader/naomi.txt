@@ -1,0 +1,80 @@
+<FACE,33,1>I'll start with <COL1,PUSH,207,134,251,255>MURKROW<COL1,POP>.
+
+<FACE,33,1>My starting POKéMON will be <COL1,PUSH,207,134,251,255>MURKROW<COL1,POP>.
+
+<FACE,33,1>My first POKéMON will be <COL1,PUSH,207,134,251,255>MURKROW<COL1,POP>.
+
+<FACE,33,1>Fine... As always...
+
+<FACE,33,1>Go on. Get out there.
+
+<FACE,33,1>#26, you're my choice.
+
+<FACE,33,1>#26, I'm depending on you.
+
+<FACE,33,1>Your opponent is close to falling.
+
+<FACE,33,1>No, I'm giving you the hook.
+
+<FACE,33,1>Wait. Please wait.
+
+<FACE,33,1>May I have a moment?
+
+<FACE,33,1>I beg your pardon.
+
+<FACE,33,2>Aiyee! You're a tough audience!
+
+<FACE,33,1>I'm elated!
+
+<FACE,33,1>My, a critical hit. Please forgive me.
+
+<FACE,33,0>Critical hit? No! How dare you!
+
+<FACE,33,2>That was so unpleasant.
+
+<FACE,33,1>This could be my big break!
+
+<FACE,33,0>You have to endure this!
+
+<FACE,33,1>Oh! That's fabulous!
+
+<FACE,33,2>That was a terrible performance!
+
+<FACE,33,1><DOKUDOKU, 3>Now what shall you do?
+
+<FACE,33,1><WAZA,138,4>DREAM EATER... It's a nightmarish move...
+
+<FACE,33,1><WAZA,218,4>Forgive me! It's showing its FRUSTRATION!
+
+<FACE,33,1>We play with our POKéMON every day.
+
+<FACE,33,1>We play with our POKéMON every day.
+
+<FACE,33,1>My POKéMON are adept at using DREAM EATER.
+
+<FACE,33,1>Could your POKéMON be holding items that aren't appropriate?
+
+<FACE,33,2>What should I do? My mother will be disappointed.
+
+<FACE,33,0>I dislike brutes who combine items and moves. I don't want to play
+with you!
+
+<FACE,33,0>Please teach me how to combine moves and items!
+
+<FACE,33,1>Oh, a draw? I've never had one before.
+
+<FACE,33,1>What's wrong? You're leaving?
+
+
+
+
+
+
+
+
+
+
+
+
+
+

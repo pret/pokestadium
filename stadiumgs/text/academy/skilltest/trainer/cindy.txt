@@ -1,0 +1,81 @@
+<FACE,42,2>Aren't my POKéMON nice? But they're very...uh...forgetful.
+
+<FACE,42,2>Have you ever experienced the power of <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP>?
+
+<FACE,42,2>Do you find my POKéMON nice? They're very forgetful.
+
+<FACE,42,1>Hip, hip, hooray!
+
+<FACE,42,2>#26, please do it!
+
+<FACE,42,2>Get out there, #26!
+
+<FACE,42,1>We can do it, #26!
+
+<FACE,42,1>#26! Here's your chance!
+
+<FACE,42,0>That's not right... Come back, #26!
+
+<FACE,42,2>Switch out, #26!
+
+<FACE,42,1>That's good, #26. Come back!
+
+<FACE,42,1>That's wonderful, #26! Come back!
+
+<FACE,42,0>Aiyeeee! That's not fair!
+
+<FACE,42,1>Yippee, yippee, yippee!
+
+<FACE,42,1>Hit the weak spot! I'm so happy!
+
+<FACE,42,0>Critical hit? Are you all right, #26?!?
+
+<FACE,42,0>No! That was nasty!
+
+<FACE,42,2>Look, look!
+
+<FACE,42,0>Don't give up, #26!
+
+<FACE,42,1>Outstanding! Outstanding!
+
+<FACE,42,0>No fair!
+
+<FACE,42,2><WAZA,133,4>I often get scolded for forgetting things.
+
+<FACE,42,2><WAZA,57,4>I'd like to SURF in the sea in summertime.
+
+<FACE,42,2><WAZA,70,4>I wish I could go on a picnic with muscular
+POKéMON. 
+
+<FACE,42,2><WAZA,53,4>We use this to light the fire when we're
+cooking outside.
+
+<FACE,42,1><FACE,42,1>See? Isn't <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP> amazing?
+
+<FACE,42,1><COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP> makes my SPECIAL DEFENSE complete!
+
+<FACE,42,1>With <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP>, SPECIAL DEFENSE is assured!
+
+<FACE,42,0>Waaaaah! I'm going to tell EARL!
+
+<FACE,42,0>Aaah! That's so annoying. After all the effort of using <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP>!
+
+<FACE,42,1>I've already forgotten about losing! ...Just kidding!
+
+<FACE,42,2>Hmm... I guess these things happen.
+
+<FACE,42,2>It must be about time for me to go on my picnic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,80 @@
+<FACE,61,2>I've been waiting for you. Allow me to test your skill.
+
+<FACE,61,2>I am still the CHAMPION. I won't hold anything back.
+
+<FACE,61,2>I thought that you would be able to get this far. Let's get this
+started.
+
+<FACE,61,2>I'll lead with #26!
+
+<FACE,61,2>Fine, #26!
+
+<FACE,61,2>#26 for the win!
+
+<FACE,61,2>Okay, #26!
+
+<FACE,61,2>Then #26 will go!
+
+<FACE,61,2>#26, I'm pulling you back!
+
+<FACE,61,2>That's it. Come back!
+
+<FACE,61,2>Good job. Come back here!
+
+<FACE,61,1>Excellent showing!
+
+<FACE,61,0>Ow, bad news!
+
+<FACE,61,1>That's right! That's what I want!
+
+<FACE,61,1>Critical hit! Nice one!
+
+<FACE,61,2>Ow, a critical hit... Not bad...
+
+<FACE,61,0>Not good...
+
+<FACE,61,1>That's clever.
+
+<FACE,61,0>Ugh... Um...
+
+<FACE,61,1>Gotcha!
+
+<FACE,61,0>It's all over!
+
+<FACE,61,2>Balance--that's the key.
+
+<FACE,61,2>Learn everything you can about POKéMON.
+
+<FACE,61,2><WAZA,063,1>HYPER BEAM!
+
+<FACE,61,1><MAHI,2>Yes! We own this match now!
+
+<FACE,61,2>That was close. Want to try again?
+
+<FACE,61,2>I successfully defended my CHAMPIONSHIP.
+
+<FACE,61,2>It's not that you are weak. Don't let it bother you.
+
+<FACE,61,2>You got me. You are magnificent!
+
+<FACE,61,2>This is the emergence of a new CHAMPION.
+
+<FACE,61,2>I never expected another trainer to beat me... I'm surprised.
+
+<FACE,61,2>That was an intense battle.
+
+<FACE,61,2>I never expected you to do that.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,61,0>

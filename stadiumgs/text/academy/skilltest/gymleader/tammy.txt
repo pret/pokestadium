@@ -1,0 +1,82 @@
+<FACE,38,1>I have DUAL-type POKéMON. Will you be able to exploit the
+weaknesses of both types?
+
+<FACE,38,1>Will you be able to take advantage of both weaknesses that some
+POKéMON have?
+
+<FACE,38,1>Here we go, <COL1,PUSH,207,134,251,255>GYARADOS<COL1,POP> and <COL1,PUSH,207,134,251,255>MAGCARGO<COL1,POP>!
+
+<FACE,38,1>Now, #26!
+
+<FACE,38,2>#26, go sweetie!
+
+<FACE,38,2>Next, my darling #26!
+
+<FACE,38,2>#26, honey. I'm counting on you!
+
+<FACE,38,1>#26, honey. Here's your chance!
+
+<FACE,38,2>It's not working! #26, come back!
+
+<FACE,38,1>#26, good job!
+
+<FACE,38,2>Okay, #26. Come back!
+
+<FACE,38,1>#26, you worked so hard!
+
+<FACE,38,0>Eeyaah! My darling, #26!
+
+<FACE,38,1>You did it, #26! You're so cool!
+
+<FACE,38,1>Critical hit! Lucky!
+
+<FACE,38,0>What! How dare you! That hit its weak spot!
+
+<FACE,38,0>Oh, no! Don't give up!
+
+<FACE,38,1>That's it!
+
+<FACE,38,0>Oh! Quit it!
+
+<FACE,38,1>Yay!
+
+<FACE,38,0>Wh... Why, you!
+
+<FACE,38,2><WAZA,53,4>Show us how hot your heart burns!
+
+<FACE,38,1><WAZA,82,4>Have a taste of DRAGON RAGE!
+
+<FACE,38,1><WAZA,202,4>GIGA DRAIN!
+
+<FACE,38,2>Cute POKéMON are absolutely the best. Don't
+you think so?
+
+<FACE,38,1><COL1,PUSH,207,134,251,255>GYARADOS<COL1,POP> is my ace POKéMON!
+
+<FACE,38,1><COL1,PUSH,207,134,251,255>MAGCARGO<COL1,POP> is my trump card POKéMON.
+
+<FACE,38,2>Whew, I'm all sweaty. Wasn't that a good battle?
+
+<FACE,38,0>You're joking! TAMMY can't lose...
+
+<FACE,38,0>TAMMY lost? Unbelievable!
+
+<FACE,38,0>I... I'm not angry! ...grrrr...
+
+<FACE,38,2>Well, this might be okay, too.
+
+<FACE,38,2>Let's battle again. I'll keep my schedule open.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

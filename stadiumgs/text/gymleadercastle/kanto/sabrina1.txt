@@ -1,0 +1,79 @@
+<FACE,40,2>I am SABRINA. I will foresee everything that you try to do.
+
+<FACE,40,2>Psychics aren't flashy, but they are terrifying, nonetheless.
+
+<FACE,40,2>The unseen power that is psychic force... Let us begin.
+
+<FACE,40,2>#26!
+
+<FACE,40,2>#26!
+
+<FACE,40,2>#26!
+
+<FACE,40,2>#26!
+
+<FACE,40,2>#26!
+
+<FACE,40,2>Come back, #26!
+
+<FACE,40,2>Come back, #26!
+
+<FACE,40,2>Come back, #26!
+
+<FACE,40,2>Come back, #26!
+
+<FACE,40,0>...
+
+<FACE,40,1>...
+
+<FACE,40,1>...Weak spot?
+
+<FACE,40,0>...Weak spot?
+
+<FACE,40,2>...
+
+<FACE,40,2>...
+
+<FACE,40,2>...
+
+<FACE,40,1>...
+
+<FACE,40,0>...
+
+<FACE,40,2><WAZA,248,2>FUTURE SIGHT...
+
+<FACE,40,2>...
+
+<FACE,40,2>...
+
+<FACE,40,2>...
+
+<FACE,40,2>This turned out exactly as I had predicted.
+
+<FACE,40,1>Your power is quite considerable.
+
+<FACE,40,1>There is no need to be saddened by your loss.
+
+<FACE,40,2>I never envisioned this happening.
+
+<FACE,40,0>Psychic power isn't infallible...
+
+<FACE,40,2>I am not embittered by this. I knew it was coming...
+
+<FACE,40,2>This is peculiar...
+
+<FACE,40,2>Are you saying you concede? I question that...
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,40,0>

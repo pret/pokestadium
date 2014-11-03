@@ -1,0 +1,36 @@
+Quit?
+
+Quit?
+#71Data has been changed.
+
+You have no POKéMON suitable for battle in your party.
+
+Saving...
+
+Save and quit
+
+Quit without saving
+
+Cancel
+
+Yes
+
+No
+
+Saving...
+
+Data can't be saved in #01P's Game Pak. 
+
+The Game Pak or the data has been changed.
+
+<COL1,PUSH,240,120,30,255>Without turning off <COL1,POP>the N64 Control Deck,
+remove the Game Boy Game Pak and set the
+Game Pak in the Transfer Pak again.
+
+
+
+
+
+
+
+ 

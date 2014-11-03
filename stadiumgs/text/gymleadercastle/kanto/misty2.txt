@@ -1,0 +1,80 @@
+<FACE,30,2>It's my turn! I'm MISTY, the water POKéMON trainer!
+
+<FACE,30,2>It sounds like you're pretty good, but I won't lose!
+
+<FACE,30,2>So you're here! My water POKéMON are ready for you!
+
+<FACE,30,2>Get going, #26!
+
+<FACE,30,2>#26!
+
+<FACE,30,2>#26, it's up to you!
+
+<FACE,30,2>#26, I'm counting on you!
+
+<FACE,30,2>#26, here's your chance!
+
+<FACE,30,2>No good! Come back!
+
+<FACE,30,2>#26, come back!
+
+<FACE,30,2>That's good! Come back!
+
+<FACE,30,1>Good going, #26!
+
+<FACE,30,0>Hey! What was that for?!?
+
+<FACE,30,1>Yippee! Wasn't that great?
+
+<FACE,30,1>There! That hit its weak spot! Surprised?
+
+<FACE,30,0>That hit the soft spot? Aack! That hurt!
+
+<FACE,30,0>You're joking!
+
+<FACE,30,2>Oh, oh...
+
+<FACE,30,0>Ow! Sheesh!
+
+<FACE,30,1>Yaaaay! That feels great!
+
+<FACE,30,0>Stupid!
+
+<FACE,30,2><WAZA,240,4>That boosts the power of WATER-type
+moves!
+
+<FACE,30,2>You sure are good.
+
+<FACE,30,2>Just you watch!
+
+<FACE,30,1><AME,4>Okay! Watch me!
+
+<FACE,30,1>See? Didn't I tell you that I'm better than you?
+
+<FACE,30,1>MISTY's number one! Ha, HA!
+
+<FACE,30,2>You weren't too bad yourself.
+
+<FACE,30,0>Aiyeee! That makes me so angry!
+
+<FACE,30,0>How could I lose to someone like you?!?
+
+<FACE,30,2>No! I was no match for you at all. Who are you?
+
+<FACE,30,0>What? A draw? No way! That's not allowed!
+
+<FACE,30,1>Did the mighty MISTY scare you off?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,30,0>

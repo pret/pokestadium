@@ -1,0 +1,136 @@
+Pokémon
+
+Choose left BOX
+
+Choose right BOX
+
+Move Pokémon
+
+Check Pokémon
+
+Exchange Pokémon
+
+Re-order Pokémon
+
+Return to Menu
+
+Release Pokémon
+
+Receive prize Pokémon
+
+Select which
+BOX?
+
+There are no Pokémon to move.
+
+There are no Pokémon to re-order.
+
+There are no Pokémon to exchange.
+
+There are no Pokémon to check.
+
+There are no Pokémon to release.
+
+The destination is full of Pokémon.
+
+Stored in #37.
+
+HP:
+
+ATTACK
+
+DEFENSE
+
+SPEED
+
+SPECIAL
+
+STADIUM
+
+PARTY
+
+GB BOXes
+
+64 BOXes
+
+BOX 1
+
+BOX 2
+
+BOX 3
+
+BOX 4
+
+BOX 5
+
+BOX 6
+
+BOX 7
+
+BOX 8
+
+BOX 9
+
+BOX 10
+
+BOX 11
+
+BOX 12
+
+PARTY
+
+GB BOX 1
+
+GB BOX 2
+
+GB BOX 3
+
+GB BOX 4
+
+GB BOX 5
+
+GB BOX 6
+
+GB BOX 7
+
+GB BOX 8
+
+GB BOX 9
+
+GB BOX 10
+
+GB BOX 11
+
+GB BOX 12
+
+64 BOX 1
+
+64 BOX 2
+
+64 BOX 3
+
+64 BOX 4
+
+64 BOX 5
+
+64 BOX 6
+
+64 BOX 7
+
+64 BOX 8
+
+64 BOX 9
+
+64 BOX 10
+
+64 BOX 11
+
+64 BOX 12
+
+PROF. OAK
+
+BOX
+
+GB BOX
+
+64 BOX

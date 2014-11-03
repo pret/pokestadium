@@ -1,0 +1,87 @@
+<FACE,21,0>I am CLAIR, the dragon user. You're challenging me?
+
+<FACE,21,0>So, you're aiming for the top? Well, we'll just see about that.
+
+<FACE,21,0>Do you know who I am? And you still dare to challenge me?
+
+<FACE,21,0>#26!
+
+<FACE,21,0>#26!
+
+<FACE,21,0>#26!
+
+<FACE,21,0>#26!
+
+<FACE,21,0>#26!
+
+<FACE,21,0>Get back, #26!
+
+<FACE,21,0>Get back, #26!
+
+<FACE,21,0>Get back, #26!
+
+<FACE,21,0>Get back, #26!
+
+<FACE,21,0>Hmm... Well done.
+
+<FACE,21,0>Forgive me.
+
+<FACE,21,0>Forgive me. It happened to hit the weak
+spot.
+
+<FACE,21,0>So you got a critical hit. Is that the best
+you can do?
+
+<FACE,21,0>That's about it.
+
+<FACE,21,0>Forgive me.
+
+<FACE,21,0>...
+
+<FACE,21,0>That's that.
+
+<FACE,21,0>It's all over...
+
+<FACE,21,0><MAHI,2>That should do.
+
+<FACE,21,0><KOHRI,2>The outcome is clear now.
+
+<FACE,21,0>I'm trying to learn all there is to know about
+dragons.
+
+<FACE,21,0>Could there be a stronger type than the
+dragon type?
+
+<FACE,21,0>You disappoint me. It's futile for you to try for the top at your
+skill level.
+
+<FACE,21,0>I'm having a hard time understanding how you could have come
+this far.
+
+<FACE,21,0>I would say you're ten years too early to be challenging the
+ELITE FOUR.
+
+<FACE,21,0>I'm amazed... I never expected anyone to beat me...
+
+<FACE,21,0>You're skilled enough to hold your own against the ELITE FOUR.
+
+<FACE,21,0>I wonder how far you can go at your skill level. This should be
+fascinating.
+
+<FACE,21,0>If you stall here, can you imagine what it would be like ahead?
+
+<FACE,21,0>Good. That's an intelligent decision.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,21,0>

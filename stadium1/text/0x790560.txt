@@ -1,0 +1,1 @@
+Controller 1 is not connected. Turn the N64 Control Deck OFF and plug Controller 1 into Controller Socket 1.

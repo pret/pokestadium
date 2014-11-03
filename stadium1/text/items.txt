@@ -1,0 +1,499 @@
+MASTER BALL
+
+ULTRA BALL
+
+GREAT BALL
+
+POKé BALL
+
+TOWN MAP
+
+BICYCLE
+
+
+
+SAFARI BALL
+
+POKéDEX
+
+MOON STONE
+
+ANTIDOTE
+
+BURN HEAL
+
+ICE HEAL
+
+AWAKENING
+
+PARLYZ HEAL
+
+FULL RESTORE
+
+MAX POTION
+
+HYPER POTION
+
+SUPER POTION
+
+POTION
+
+BOULDERBADGE
+
+CASCADEBADGE
+
+THUNDERBADGE
+
+RAINBOWBADGE
+
+SOULBADGE
+
+MARSHBADGE
+
+VOLCANOBADGE
+
+EARTHBADGE
+
+ESCAPE ROPE
+
+REPEL
+
+OLD AMBER
+
+FIRE STONE
+
+THUNDERSTONE
+
+WATER STONE
+
+HP UP
+
+PROTEIN
+
+IRON
+
+CARBOS
+
+CALCIUM
+
+RARE CANDY
+
+DOME FOSSIL
+
+HELIX FOSSIL
+
+SECRET KEY
+
+
+
+BIKE VOUCHER
+
+X ACCURACY
+
+LEAF STONE
+
+CARD KEY
+
+NUGGET
+
+
+
+POKé DOLL
+
+FULL HEAL
+
+REVIVE
+
+MAX REVIVE
+
+GUARD SPEC.
+
+SUPER REPEL
+
+MAX REPEL
+
+DIRE HIT
+
+
+
+FRESH WATER
+
+SODA POP
+
+LEMONADE
+
+S.S.TICKET
+
+GOLD TEETH
+
+X ATTACK
+
+X DEFEND
+
+X SPEED
+
+X SPECIAL
+
+COIN CASE
+
+OAK'S PARCEL
+
+ITEMFINDER
+
+SILPH SCOPE
+
+POKé FLUTE
+
+LIFT KEY
+
+EXP.ALL
+
+OLD ROD
+
+GOOD ROD
+
+SUPER ROD
+
+PP UP
+
+ETHER
+
+MAX ETHER
+
+ELIXER
+
+MAX ELIXER
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HM1
+
+HM2
+
+HM3
+
+HM4
+
+HM5
+
+TM01
+
+TM02
+
+TM03
+
+TM04
+
+TM05
+
+TM06
+
+TM07
+
+TM08
+
+TM09
+
+TM10
+
+TM11
+
+TM12
+
+TM13
+
+TM14
+
+TM15
+
+TM16
+
+TM17
+
+TM18
+
+TM19
+
+TM20
+
+TM21
+
+TM22
+
+TM23
+
+TM24
+
+TM25
+
+TM26
+
+TM27
+
+TM28
+
+TM29
+
+TM30
+
+TM31
+
+TM32
+
+TM33
+
+TM34
+
+TM35
+
+TM36
+
+TM37
+
+TM38
+
+TM39
+
+TM40
+
+TM41
+
+TM42
+
+TM43
+
+TM44
+
+TM45
+
+TM46
+
+TM47
+
+TM48
+
+TM49
+
+TM50

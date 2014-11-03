@@ -1,0 +1,80 @@
+<FACE,27,0>You wanna know who I am? You honestly think I could, like,
+tell you?
+
+<FACE,27,0>I'm busy. Can we get started, like, in a hurry?
+
+<FACE,27,0>A battle? Like, sure! I'm like working, but...
+
+<FACE,27,0>Like, hustle, hustle!
+
+<FACE,27,0>Like pronto, please!
+
+<FACE,27,0>Whoa, #26!
+
+<FACE,27,0>Hey, #26!
+
+<FACE,27,0>Let's go, #26!
+
+<FACE,27,0>Awwww, no!
+
+<FACE,27,0>Retreat! Slick and quick!
+
+<FACE,27,0>Quick, back out!
+
+<FACE,27,0>Come out now!
+
+<FACE,27,0>No! That's pitiful!
+
+<FACE,27,0>That's it! Next! Next!
+
+<FACE,27,0>Critical hit! That's right!
+
+<FACE,27,0>Weak point? Tch. What the...?
+
+<FACE,27,0>What are you doing?
+
+<FACE,27,0>That's how you do it!
+
+<FACE,27,0>What? No!?!
+
+<FACE,27,0>That's it--over and done with.
+
+<FACE,27,0>Whoa, whoa! Aaargh!
+
+<FACE,27,0><WAZA,168,1>Oh, my. That's nice.
+
+<FACE,27,0><WAZA,34,4>Press 'em!
+
+<FACE,27,0><WAZA,126,4>Burn!
+
+<FACE,27,0><YAKEDO,2>Oh no...
+
+<FACE,27,0>That's it. Bye!
+
+<FACE,27,0>See ya!
+
+<FACE,27,0>Buh-bye!
+
+<FACE,27,0>Run away!
+
+<FACE,27,0>Tch!
+
+<FACE,27,0>Work, work, work...
+
+<FACE,27,0>Let me be!
+
+<FACE,27,0>Can I disappear now?
+
+PERLAR
+
+ELIXLAR
+
+KROWLAR
+
+PINLAR
+
+RADOSLAR
+
+TRESLAR
+
+<FACE,27,0>

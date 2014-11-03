@@ -1,0 +1,85 @@
+<FACE,50,1>The weaknesses of FIRE-type POKéMON? ...I can't tell you that.
+
+<FACE,50,1>Effective moves against FIRE-type POKéMON? ...I can't tell you
+that.
+
+<FACE,50,1>I'll use you for experimentation.
+
+<FACE,50,1>Start the experiment!
+
+<FACE,50,1>Here, #26!
+
+<FACE,50,0>And that brings out #26!
+
+<FACE,50,0>Is that so? #26, then!
+
+<FACE,50,0>Well then, #26!
+
+<FACE,50,2>I changed my mind.
+
+<FACE,50,2>Wait a second.
+
+<FACE,50,2>I have to change them...
+
+<FACE,50,1>What next...?
+
+<FACE,50,0>Eeyaah! #26!
+
+<FACE,50,1>Yes. My hypothesis has been proven
+correct.
+
+<FACE,50,1>That hit its weak spot. Wasn't that
+effective?
+
+<FACE,50,0>Aiming for the weak spot... Isn't that a
+penalty?
+
+<FACE,50,2>That event was within the realm of
+possibility...
+
+<FACE,50,1>See? I knew that would work.
+
+<FACE,50,0>Arrrgh...
+
+<FACE,50,1>Thanks.
+
+<FACE,50,0>Arrrrrgh... I fried my circuits...
+
+<FACE,50,1><WAZA,53,4>Don't play with fire, kid.
+
+<FACE,50,0>Everyone's so rough.
+
+<FACE,50,2>POKéMON are my only friends.
+
+<FACE,50,0>Everyone's so rough.
+
+<FACE,50,1>The secret behind my power? ...I can't tell you that.
+
+<FACE,50,1>How do you like the power of FIRE-type POKéMON? Hee, hee...
+
+<FACE,50,1>Ha, ha, ha! Everything went according to logic!
+
+<FACE,50,0>Was there a type disadvantage? A chemical reaction might affect
+my team...
+
+<FACE,50,2>Maybe they went wild from the intense heat...
+
+<FACE,50,0>I relied too much on a single type. I'm a failure as a scientist...
+
+<FACE,50,0>Everyone's so rough.
+
+<FACE,50,1>The path of logic is unforgiving.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

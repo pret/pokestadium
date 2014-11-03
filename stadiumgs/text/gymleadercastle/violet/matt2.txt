@@ -1,0 +1,81 @@
+<FACE,58,2>Can you appreciate the beauty of bird POKéMON in flight?
+
+<FACE,58,2>Have you ever dreamed of flying?
+
+<FACE,58,2>Nothing in the world can match the beauty of bird POKéMON.
+
+<FACE,58,2>All right! Go, #26!
+
+<FACE,58,2>Take flight, #26!
+
+<FACE,58,1>Go, #26!
+
+<FACE,58,1>Here's your chance, #26!
+
+<FACE,58,1>It's yours, #26. Go!
+
+<FACE,58,2>This is pointless. Come back, #26!
+
+<FACE,58,2>#26, come back!
+
+<FACE,58,2>That's good enough! Get back, #26!
+
+<FACE,58,2>Well done, #26!
+
+<FACE,58,0>What!? No way!
+
+<FACE,58,1>I'm sorry to see that.
+
+<FACE,58,2>That's good, #26! You nailed its
+weak spot!
+
+<FACE,58,0>Critical hit?!? Rats!
+
+<FACE,58,0>Tch. How disappointing!
+
+<FACE,58,1>Good one, #26!
+
+<FACE,58,0>Uh-oh... Rats!
+
+<FACE,58,1>Tee, hee, hee...
+
+<FACE,58,0>What!? Why?!?
+
+<FACE,58,1>What do you think? Aren't bird
+POKéMON beautiful?
+
+<FACE,58,2>Speed is my top priority.
+
+<FACE,58,2>Have you seen the legendary bird POKéMON?
+
+<FACE,58,1><KONRAN,2>That's clever, #26!
+
+<FACE,58,1>Fantastic! Bird POKéMON are the greatest!
+
+<FACE,58,2>Maybe you should retrain your POKéMON.
+
+<FACE,58,1>Your POKéMON aren't bad at all.
+
+<FACE,58,2>I'm still going to continue living with these guys.
+
+<FACE,58,2>FALKNER is a lot tougher than I am.
+
+<FACE,58,2>Hmm. You raised your POKéMON better than I did mine.
+
+<FACE,58,1>That was a good match. Would you like to battle again?
+
+<FACE,58,2>That's disappointing. I thought we could have a good battle.
+
+OTTOASH
+
+GETICASH
+
+FEARASH
+
+FARFASH
+
+OWLASH
+
+KROWASH
+
+<FACE,58,0>

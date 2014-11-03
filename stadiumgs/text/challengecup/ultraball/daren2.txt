@@ -1,0 +1,82 @@
+<FACE,16,2>I let my guitar do the talkin'! I'll rock 'n' roll right over you!
+
+<FACE,16,2>Overdrive riff! Rock is a full-body experience.
+
+<FACE,16,2>Guitars are my life! But unplugged is wimpy!
+
+<FACE,16,2>We'll leave you shocked and rocked.
+#26!
+
+<FACE,16,2>Spark, #26!
+
+<FACE,16,2>Electrify it, #26!
+
+<FACE,16,2>Thunder power, #26!
+
+<FACE,16,2>Crank up the voltage, #26!
+
+<FACE,16,2>Massive feedback!
+
+<FACE,16,2>Massive feedback!
+
+<FACE,16,2>Massive feedback!
+
+<FACE,16,2>Massive feedback!
+
+<FACE,16,0>Hammered!
+
+<FACE,16,1>Smash!
+
+<FACE,16,1>Critical hit!
+
+<FACE,16,0>Oh! Took it hard on the weak spot!
+
+<FACE,16,0>Got tripped up!
+
+<FACE,16,1>I gotcha!
+
+<FACE,16,0>Ow, that hurts!
+
+<FACE,16,1>Thank you!
+
+<FACE,16,0>Watch out! Aaaaaaah!
+
+<FACE,16,2>I've got 300 guitars!
+
+<FACE,16,2>I've got guitar-playing buddies in other
+countries.
+
+<FACE,16,2><MAHI,4>Was that electrifying or what?
+
+<FACE,16,2>You betcha my hair's dyed!
+
+<FACE,16,1>...And the power chord to end the show! Come on, let's hear it for
+me! Encore, encore!
+
+<FACE,16,1>Come see my next live gig. I'll sneak ya in through the back door.
+
+<FACE,16,2>Want to meet the members of my band?
+
+<FACE,16,0>I'll just go home and work on a ballad.
+
+<FACE,16,0>Fade out! You can't do that live, though.
+
+<FACE,16,2>Next time, I'll bring the whole band instead of playing solo.
+
+<FACE,16,2>I guess I got careless in the battle.
+
+<FACE,16,2>Hey, wait! Hear my performance out, will you?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,16,0>

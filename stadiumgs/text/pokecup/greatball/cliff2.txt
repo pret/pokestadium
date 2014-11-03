@@ -1,0 +1,80 @@
+<FACE,19,0>To earn recognition as a FIREBREATHER, you have to be familiar
+with fire!
+
+<FACE,19,0>Firebreathing was tough to learn. Check it out!
+
+<FACE,19,0>You'll come to fear the power of red-hot flames!
+
+<FACE,19,0>Burn, #26!
+
+<FACE,19,0>Get hot, #26!
+
+<FACE,19,0>Catch fire, #26!
+
+<FACE,19,0>White-hot, #26!
+
+<FACE,19,0>Firestorm, #26!
+
+<FACE,19,0>Change strategy!
+
+<FACE,19,0>Alter course!
+
+<FACE,19,0>Command change!
+
+<FACE,19,0>It's an order change!
+
+<FACE,19,0>Waaah!
+
+<FACE,19,0>I'm on fire, baby!
+
+<FACE,19,0>Right on the weak spot! My soul is on fire!
+
+<FACE,19,0>Blasted the weak spot! Burning fever!
+
+<FACE,19,0>Feel the burn!
+
+<FACE,19,0>It's getting hot!
+
+<FACE,19,0>It's still burning...
+
+<FACE,19,0>Burnt out... Battle's over.
+
+<FACE,19,0>Kaboom!
+
+<FACE,19,0><WAZA,241,4>Let the sun shine!
+
+<FACE,19,0><HARE,2>Here goes!
+
+<FACE,19,0><WAZA,53,4>Fire as art! FLAMETHROWER!
+
+<FACE,19,0><WAZA,126,4>The ultimate! FIRE BLAST!
+
+<FACE,19,0>That was so hot!
+
+<FACE,19,0>It's a fiery victory!
+
+<FACE,19,0>That was hot!
+
+<FACE,19,0>Going down in flames!
+
+<FACE,19,0>Children shouldn't play with matches!
+
+<FACE,19,0>Fizzle...
+
+<FACE,19,0>We both were hot!
+
+<FACE,19,0>The fire's going out!
+
+HOTGMAR
+
+HOTARGO
+
+HOTITUNG
+
+HOTETALES
+
+HOTONTOP
+
+HOTLOSSOM
+
+<FACE,19,0>

@@ -1,0 +1,86 @@
+<FACE,24,0>Let me see your combos!
+
+<FACE,24,0>I'd like to see some elegant combos. My DRAGONITE and
+TYRANITAR will take you on.
+
+<FACE,24,0>Come try your combos on me.
+
+<FACE,24,1>Okay, it's showtime!
+
+<FACE,24,1>#26 shall do.
+
+<FACE,24,1>Perhaps #26.
+
+<FACE,24,1>#26, go!
+
+<FACE,24,1>#26 shall put this to rest.
+
+<FACE,24,1>Well, then...
+
+<FACE,24,1>Another one will take its place.
+
+<FACE,24,1>How's this?
+
+<FACE,24,1>...And now...
+
+<FACE,24,0>Argh! I blew that!
+
+<FACE,24,1>There! ...There it goes.
+
+<FACE,24,0>Ha, ha, ha. Weak spot, eh? This is unfolding
+exactly as I had envisioned it.
+
+<FACE,24,1>Argh... What? A critical hit? How did that
+happen?
+
+<FACE,24,1>Feeling stressed?
+
+<FACE,24,0>Oh, devious.
+
+<FACE,24,1>My, my, my...
+
+<FACE,24,1>I'd say my mood is buoyant!
+
+<FACE,24,0>Ack... I slipped up!
+
+<FACE,24,1><WAZA,17,4>DRAGONITE, WING ATTACK!
+
+<FACE,24,1><WAZA,157,4>TYRANITAR, create a ROCK SLIDE!
+
+<FACE,24,1><WAZA,57,4>SURF!
+
+<FACE,24,1><WAZA,53,4>Burn!
+
+<FACE,24,0>Didn't I tell you? You don't stand a chance if you can't pull off
+combos.
+
+<FACE,24,0>Why don't you join me on the road? I could teach you about
+combos.
+
+<FACE,24,0>Heh, what do you know? I started studying battle strategies only
+recently.
+
+<FACE,24,1>I guess it's about time for me to move on from here...
+
+<FACE,24,1>I just got here... How could I lose so quickly?
+
+<FACE,24,1>My performance still needs some work. I'm going home to train by
+juggling 100 times.
+
+<FACE,24,0>A draw is no good! Let's do it again!
+
+<FACE,24,0>Join me on the road sometime.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

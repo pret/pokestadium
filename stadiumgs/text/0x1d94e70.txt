@@ -1,0 +1,133 @@
+Select the DEX mode.
+
+OPTION
+
+SEARCH
+
+SEEN
+
+CAUGHT
+
+OWN
+
+ POKéMON
+
+HT
+
+WT
+
+
+
+lbs
+
+New POKéDEX
+
+Old POKéDEX
+
+A to Z
+
+Sequence caught
+
+A to Z
+
+Cancel
+
+New POKéDEX
+
+Old POKéDEX
+
+A to Z
+
+UNOWNDEX
+
+Start search
+
+Cancel
+
+Select POKéMON to
+be listed
+
+Search results
+
+#01 kind(s) found
+
+Choose the POKéMON Type(s) to be searched
+and start.
+
+List by evolved forms of POKéMON
+
+List POKéMON by No.
+
+List POKéMON in alphabetical order
+
+Record UNOWN in the sequence caught
+
+Re-order
+
+Enlarge
+
+Search Type 1
+
+Search Type 2
+
+That Type was not found in the POKéDEX.
+
+None
+
+Searching...
+
+???
+
+???
+
+angry
+
+bear
+
+chase
+
+direct
+
+engage
+
+find
+
+give
+
+help
+
+increase
+
+join
+
+keep
+
+laugh
+
+make
+
+nuzzle
+
+observe
+
+perform
+
+quicken
+
+reassure
+
+search
+
+tell
+
+undo
+
+vanish
+
+want
+
+xxxxx
+
+yield
+
+zoom

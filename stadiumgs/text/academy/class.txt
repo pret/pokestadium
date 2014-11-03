@@ -1,0 +1,2472 @@
+#02
+
+TRAINER CLASS
+
+GYM LEADER CLASS
+
+ELITE FOUR CLASS
+
+#71Rule<COL1,POP><COL2,POP>
+
+#71New Features<COL1,POP><COL2,POP>
+
+#71Status Problems<COL1,POP><COL2,POP>
+
+#71Type Match-Ups
+
+#71Moves<COL1,POP><COL2,POP>
+
+#71Battles<COL1,POP><COL2,POP>
+
+Common rules
+
+Battle rules
+
+Pre-battle
+
+Level evolution notes
+
+Special evolutions
+
+HOLDing an item
+
+Type changes
+
+Move changes
+
+Residual-effect changes
+
+SPCL.ATK & SPCL.DEF
+
+Status problems
+
+Type combinations
+
+Exploiting weaknesses
+
+Moves & POKéMON types
+
+Support moves
+
+Added effects of moves
+
+Recovery moves
+
+Set damage moves
+
+Moves & tactics
+
+Switching
+
+Physical & special attacks
+
+Dual-type POKéMON
+
+Multiplied damage
+
+Multi-type moves
+
+Reading the situation
+
+Move combos
+
+Situational combos
+
+Reading the foe's moves
+
+<COL1,PUSH,110,150,255,255>*<COL1,POP>
+
+<COL1,PUSH,146,195,255,255>SEISMIC TOSS<COL1,POP>!!
+
+Not thrown!
+
+<LINE,33>Depending on the moves your POKéMON can
+use, there are a number of tactics you can
+devise. Yes, I'm talking about your battle
+strategy. Now listen closely--I'm about to
+discuss the relationship between moves and
+tactics.
+
+<LINE,33>Take, for example, the moves <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+It flew up high!
+
+It dug a hole!
+
+<LINE,33>Both moves protect the user most of the time
+from taking damage on the first turn. <COL1,PUSH,146,195,255,255>FLY<COL1,POP>
+makes the user fly high into the sky, while
+<COL1,PUSH,146,195,255,255>DIG<COL1,POP> lets the user hide underground. On the
+next turn, the user POKéMON can strike.
+
+<LINE,33>Let me demonstrate how useful a two-turn
+attack can be. Remember that the user won't
+take a hit on the first turn.
+
+<LINE,33>Suppose your opponent uses a move such as
+<COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP> or <COL1,PUSH,146,195,255,255>SKULL BASH<COL1,POP> that requires the
+user to charge up for one turn before
+striking. If you immediately use <COL1,PUSH,146,195,255,255>DIG<COL1,POP> or <COL1,PUSH,146,195,255,255>FLY<COL1,POP>,
+your opponent's attack won't strike--it'll
+strike out!
+
+<LINE,33>Since the user won't be hit for an entire
+turn, you can also use these moves just to
+waste time.
+
+<LINE,33>For example, you could poison your opponent,
+inflicting damage on every turn, then use <COL1,PUSH,146,195,255,255>FLY<COL1,POP>
+or <COL1,PUSH,146,195,255,255>DIG<COL1,POP>. Even though your POKéMON won't be
+able to attack, it will avoid getting hit and
+damage will still be done to the opponent.
+
+<LINE,33>Similarly, if the opponent uses a protective
+move such as <COL1,PUSH,146,195,255,255>SAFEGUARD<COL1,POP> or <COL1,PUSH,146,195,255,255>REFLECT<COL1,POP>, keep
+using two-turn moves to waste time over
+the five turns that the protective move
+lasts.
+
+<LINE,33>Are you starting to get the hang of it?
+There is always a way to beat a POKéMON and
+its moves. Try coming up with your own good
+plan before you go for a battle.
+
+<LINE,33>If you win a STADIUM battle without any of
+your POKéMON fainting, you'll earn a continue.
+
+<LINE,33>Of course that would be wonderful, but don't
+just switch POKéMON without first giving it
+some thought. Why, you ask? Let me explain.
+
+<LINE,33>When a POKéMON is in trouble, the trainer's
+first instinct is to switch it. Keeping your
+POKéMON safe certainly is important, but
+don't forget that it takes one full turn to
+switch.
+
+<LINE,33>That means that the POKéMON you bring
+out will be immediately vulnerable to attack.
+Ouch!
+
+<LINE,33>And if that attack inflicts major damage, the
+new POKéMON could be history in just one
+more turn! So instead of helping you,
+switching could put you even deeper in the
+hole.
+
+<LINE,33>Although it may be painful, you might be
+better off to keep the hurt POKéMON in the
+battle until it faints. Although that POKéMON
+will become useless to you, the next POKéMON
+will enter the battle with all of its HP intact.
+
+<LINE,33>I believe that while it's hard to leave a hurt
+POKéMON in battle, it's also a sign of love.
+#71There are times when one must learn to
+endure<COL1,POP><COL2,POP>.
+
+<COL1,PUSH,207,134,251,255>VULPIX<COL1,POP>
+
+<COL1,PUSH,207,134,251,255>NINETALES<COL1,POP>
+
+<LINE,33>Today's topic is "Battling for Beginners."
+I'll teach you everything you need to know,
+from picking your POKéMON to choosing their
+attacks.
+
+This is not a
+waste of time!
+
+2 x 1/2 = 1!
+
+(
+
+)
+
+<LINE,33>Greetings! I'm #71EARL<COL1,POP><COL2,POP>. Whether you want to
+become a mighty trainer or just learn how to
+win more battles, I'm the man to see! Let's
+get started. Today's theme is
+"Brushing up on Basic Rules."
+
+<LINE,33>At the STADIUM there are several CUP
+tournaments and a variety of battles.
+Although each has different restrictions on
+which POKéMON may enter, #71the battle rules
+are virtually identical<COL1,POP><COL2,POP>. Let me begin with
+these basic rules.
+
+<LINE,33>First, choose six POKéMON from your list of
+qualifiers. These six POKéMON will form your
+team.
+
+<LINE,33>Choose the three POKéMON that you want to
+battle from the six on your team. Once you
+have chosen your combatants, the battle will
+get underway!
+
+<LINE,33>To win the tournament, you must defeat all of
+your opponents.
+
+<LINE,33>OK! Give it your best shot!
+
+<LINE,33>There are several battle rules that every
+trainer must obey. It would be best if you
+learn the rules that must be followed #71in all
+battles<COL1,POP><COL2,POP>.
+
+<LINE,33>Two or more POKéMON cannot be frozen
+or asleep at the same time. However, it is
+OK for one POKéMON to be asleep and
+another one to be frozen.
+
+<LINE,33>You cannot use <COL1,PUSH,146,195,255,255>SELFDESTRUCT<COL1,POP> or
+<COL1,PUSH,146,195,255,255>EXPLOSION<COL1,POP> when you and your opponent
+are down to your last POKéMON. If you
+do, you'll automatically lose, even if your
+opponent's POKéMON faints. Also,
+<COL1,PUSH,146,195,255,255>DESTINY BOND<COL1,POP> and <COL1,PUSH,146,195,255,255>PERISH SONG<COL1,POP> will fail.
+
+<LINE,33>Your POKéMON's evolution is a time for
+celebration! It becomes stronger and more
+attractive, so what could there possibly be
+to complain about? Well for one thing,
+POKéMON that evolve by leveling up learn
+moves much more slowly than they did before
+they evolved.
+
+<LINE,33>For example, <COL1,PUSH,207,134,251,255>CUBONE<COL1,POP> can learn <COL1,PUSH,146,195,255,255>BONE RUSH<COL1,POP>
+at Level 41. But its evolved form, <COL1,PUSH,207,134,251,255>MAROWAK<COL1,POP>,
+can't learn that move until it reaches
+Level 53.
+
+<LINE,33>Even though some CUP tournaments have level
+restrictions, you should consider #71canceling
+evolution<COL1,POP><COL2,POP> until your POKéMON have learned
+some desirable moves.
+
+#71Canceling evolution<COL1,POP><COL2,POP>...
+
+To stop an evolution that is in
+progress, simply press the
+B Button.
+
+<LINE,33>Before you let your POKéMON evolve, check
+when it will learn new moves. No need to evolve
+your POKéMON hastily. This kind of preliminary
+work is where your battle actually begins.
+
+<LINE,33>POKéMON that evolve using a STONE such as
+<COL1,PUSH,180,255,134,255>FIRE STONE<COL1,POP> or <COL1,PUSH,180,255,134,255>WATER STONE<COL1,POP> often learn
+extremely few moves after evolution. Even
+though some CUPS have level restrictions,
+rushing evolution may not be a good idea.
+
+<LINE,33>Here's an example. <COL1,PUSH,207,134,251,255>VULPIX<COL1,POP> can use a
+<COL1,PUSH,180,255,134,255>FIRE STONE<COL1,POP> to evolve into <COL1,PUSH,207,134,251,255>NINETALES<COL1,POP>. But 
+<COL1,PUSH,207,134,251,255>NINETALES<COL1,POP> can learn only one move,
+<COL1,PUSH,146,195,255,255>FIRE SPIN<COL1,POP>.
+
+<LINE,33>Make your POKéMON learn the moves you want
+them to know before you make them evolve.
+
+<LINE,33>On the other hand, there are some moves that
+can be learned only after evolution. This
+makes for quite a dilemma.
+
+<LINE,33>Moves learned before evolution or those
+learned after evolution? Which should be
+learned and at what levels? Be sure to weigh
+all the options carefully before you evolve
+your POKéMON.
+
+<LINE,33>The same goes for POKéMON that evolve
+through trading or tameness.
+I recommend that you time your
+evolutions based on the #71levels at which your
+POKéMON learn moves<COL1,POP><COL2,POP>.
+
+<LINE,33>Now, everyone. Did you know that a POKéMON
+can battle while HOLDing an item?
+
+<LINE,33>There are many kinds of HOLD items, such as
+those that restore HP and those that
+enhance abilities.
+
+<LINE,33>Take, for example, HOLD items that raise the
+power of specific types of moves.
+<COL1,PUSH,180,255,134,255>MYSTIC WATER<COL1,POP> and <COL1,PUSH,180,255,134,255>BLACK BELT<COL1,POP> are two such
+items. HOLDing these items boosts the power
+of a POKéMON's moves by about ten percent.
+
+<LINE,33><COL1,PUSH,180,255,134,255>HARD STONE<COL1,POP> raises
+the power of ROCK-type
+moves. Suppose we give it to
+the WATER-type POKéMON,
+<COL1,PUSH,207,134,251,255>MARILL<COL1,POP>.
+
+<LINE,33>Be careful! According to #71STADIUM rules<COL1,POP><COL2,POP>,
+#71each POKéMON in your party must HOLD a
+different kind of item <COL1,POP><COL2,POP>. Think about your
+strategy before you hand out items to your
+POKéMON.
+
+<LINE,33>Did you know that two new types
+appeared in the Gold and Silver
+versions? The DARK- and STEEL- types!
+
+<LINE,33>The DARK-type is tough against the
+PSYCHIC-type but weak against the
+FIGHTING-type. STEEL-types are unaf-
+fected by poison but weak against fire.
+
+<LINE,33>There are also some POKéMON that have
+changed types.
+
+<LINE,33><COL1,PUSH,207,134,251,255>MAGNEMITE<COL1,POP> and <COL1,PUSH,207,134,251,255>MAGNETON<COL1,POP> are two such
+POKéMON.
+
+<LINE,33>Type match-ups have changed slightly
+as well.
+
+<LINE,33>GHOST-type moves are now effective
+against PSYCHIC-type POKéMON. BUG-
+type moves are not as effective against
+POISON-type POKéMON as they were
+before. These are some changes.
+
+<LINE,33>Pardon? Oh, you want to know more, do you?
+Then off you go to the LIBRARY! There you
+will find a whole variety of reference
+materials, so it's an excellent place to study
+and review data.
+
+<COL1,PUSH,207,134,251,255>CLEFAIRY<COL1,POP>
+
+<LINE,33>Instead of being just the ELECTRIC-
+type, now they are ELECTRIC- & STEEL-
+type POKéMON. What do you think? Does
+the enhanced DEFENSE this gives them
+make this a welcome change? Or do the
+additional match-up weaknesses outweigh
+the positive aspects?
+
+<LINE,33>*
+
+<LINE,33>The effects and/or damage ratings for some
+moves have also changed. Yes, things are
+certainly a bit different since the days of
+the POKéMON Red, Blue, and Yellow. Be sure to
+learn all you can about these changes! 
+
+<LINE,33>First let's review some moves that have
+changed type. <COL1,PUSH,146,195,255,255>BITE<COL1,POP> became a DARK-type
+move, while <COL1,PUSH,146,195,255,255>KARATE CHOP<COL1,POP> became a
+FIGHTING move. Likewise, <COL1,PUSH,146,195,255,255>GUST<COL1,POP> is now a
+FLYING-type move.
+
+<LINE,33>The damage ratings for some moves,
+such as <COL1,PUSH,146,195,255,255>DOUBLE-EDGE<COL1,POP>, <COL1,PUSH,146,195,255,255>WING ATTACK<COL1,POP>, and
+<COL1,PUSH,146,195,255,255>DIG<COL1,POP>, have changed.
+
+<LINE,33>The accuracy has also changed for some
+moves, such as <COL1,PUSH,146,195,255,255>BLIZZARD<COL1,POP>, <COL1,PUSH,146,195,255,255>WHIRLWIND<COL1,POP>,
+and <COL1,PUSH,146,195,255,255>ROCK THROW<COL1,POP>.
+
+<LINE,33>Moves such as <COL1,PUSH,146,195,255,255>WRAP<COL1,POP>, <COL1,PUSH,146,195,255,255>BIND<COL1,POP>, and <COL1,PUSH,146,195,255,255>CLAMP<COL1,POP>
+have changed greatly. These can now
+prevent an opponent from switching out!
+
+<LINE,33>The moves <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP> and <COL1,PUSH,146,195,255,255>REFLECT<COL1,POP> are
+now effective for five turns each. They
+create barriers on the spot, so they
+remain in place even if the target
+POKéMON switches out.
+
+<LINE,33>There are added effects and altered
+probabilities for other moves, too. Your
+homework assignment is to look these up
+yourself!
+
+<LINE,33>It is important to try and see what the
+moves do.
+
+<LINE,33>In the past, if a target POKéMON's type was
+identical to an attack move's type, the
+attack move's added effect would never work.
+
+<LINE,33>Now, even if the defending POKéMON's type
+is identical to the attack move's type, the
+added effect may or may not work.
+
+<LINE,33>That means that the
+ELECTRIC-type <COL1,PUSH,207,134,251,255>ELECTABUZZ<COL1,POP>
+could become paralyzed by
+<COL1,PUSH,146,195,255,255>SPARK<COL1,POP>, an ELECTRIC-type
+attack.
+
+There are still some exceptions...
+
+<LINE,33>Attacking a POISON-type POKéMON with a
+POISON-type move will not poison it! In the
+same manner, an ICE-type POKéMON cannot
+easily be frozen by an ICE-type move!
+
+<LINE,33>Other than those exceptions, the added
+effects of moves will affect all POKéMON,
+even if attack and defender's type match.
+
+<LINE,33>The Gold and Silver versions have changed
+things a bit.
+
+<LINE,33>Did you know that the POKéMON stat SPECIAL
+split into #71SPCL.ATK<COL1,POP><COL2,POP> and #71SPCL.DEF<COL1,POP><COL2,POP>? Oh, you
+knew that already? Ah, but perhaps you don't
+know everything about it.
+
+<LINE,33>Before, SPECIAL combined both attack and
+defense. Now, #71SPCL.ATK<COL1,POP><COL2,POP> stands for
+SPECIAL ATTACK, and #71SPCL.DEF<COL1,POP><COL2,POP> stands for
+SPECIAL DEFENSE. You see? 
+
+This split affects certain moves.
+
+<LINE,33>For example, the move <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP> used to
+sharply raise SPECIAL. Now it strongly
+boosts #71SPCL.DEF<COL1,POP><COL2,POP> alone. It has no effect on
+SPCL.ATK.
+
+<LINE,33>In contrast, the move <COL1,PUSH,146,195,255,255>GROWTH<COL1,POP> has been 
+altered to raise only #71SPCL.ATK<COL1,POP><COL2,POP>. It doesn't
+affect SPCL.DEF at all.
+
+<LINE,33>Strategy is becoming more and more
+important, but don't worry. As long as you pay
+close attention to my lessons, you should
+have no problems.
+
+<LINE,33>At the very least, you should have <COL1,PUSH,207,134,251,255>VULPIX<COL1,POP>
+learn <COL1,PUSH,146,195,255,255>FLAMETHROWER<COL1,POP> before letting it evolve.
+
+<LINE,33>I'm sure you know about status problems.
+They are conditions such as poison, sleep, and
+burn that put you at a disadvantage in
+battle. But did you also know that there are
+other conditions that are similar to status
+problems? Allow me to explain.
+
+<LINE,33>ATTRACT could cause infatuation, pre-
+venting a male POKéMON from attacking a
+female half the time and vice-versa.
+
+<LINE,33>The move NIGHTMARE works only on
+sleeping opponents. Each turn, it steals
+away a quarter of the victim's HP.
+
+<LINE,33>The move CURSE, when used by a
+GHOST-type POKéMON, causes the victim
+to lose a quarter of its HP every turn.
+These are only a few examples.
+
+<LINE,33>When certain moves such as <COL1,PUSH,146,195,255,255>HEADBUTT<COL1,POP> or
+<COL1,PUSH,146,195,255,255>BITE<COL1,POP> strike first, the defending POKéMON
+may flinch and be unable to respond in the
+same turn. Yes, this too is a type of added
+effect.
+
+<LINE,33>Now this part is very important, so listen
+closely. #71Some status problems even affect a
+POKéMON's stats<COL1,POP><COL2,POP>!
+
+<LINE,33>For example, not only does a burn cause
+damage every turn, it also weakens ATTACK
+power.
+
+<LINE,33>Paralysis may immobilize a POKéMON,
+but it also sharply reduces SPEED.
+
+<LINE,33>Knowing that, you could deliberately use a
+status problem to make up for your own
+POKéMON's weaknesses. But regardless of
+whether your POKéMON is weak or strong...
+Whatever POKéMON you use, your love and
+strategy will help you win. 
+
+<LINE,33>Before I conclude, let me tell you about
+status problems that wear off during battle.
+
+<LINE,33>There are exactly four: asleep, confused,
+having a NIGHTMARE, and frozen. That's
+right! Now a frozen POKéMON will thaw out
+over time.
+
+That would shock
+even <COL1,PUSH,207,134,251,255>ELECTABUZZ<COL1,POP>!
+
+<LINE,33>POKéMON are not affected as often by status
+problems that match their own types.
+
+<LINE,33>POKéMON and moves come in a variety of
+types, such as NORMAL, FIRE, WATER, GRASS,
+ELECTRIC, and GHOST. There are seventeen
+types in all. The key point is that not only are
+POKéMON classified by type, but there are
+types for moves, too.
+
+<LINE,33>The combination of the type of POKéMON
+under attack and the type of the attack
+move is referred to as the type match-up.
+
+<LINE,33>If the type match-up is good, it may be
+possible to inflict double the damage. On the
+other hand, if the type match-up is bad, an
+attack may not have any effect at all.
+
+<LINE,33>Here's an example. WATER-type POKéMON
+are strong against FIRE-type attacks but
+weak against GRASS-type attacks.
+
+<LINE,33>WATER-type POKéMON:
+<COL1,PUSH,207,134,251,255>TOTODILE<COL1,POP>
+
+<LINE,33>As you can see, a POKéMON's type is
+very important when it is under attack.
+
+<LINE,33>We have here a FIRE-type move. It is
+super-effective against GRASS-type
+POKéMON but weak against WATER-type
+POKéMON.
+
+<LINE,33>FIRE-type move: 
+<COL1,PUSH,146,195,255,255>FLAMETHROWER<COL1,POP>
+
+<LINE,33>As you can see, a move's type becomes
+important when it is used for attack.
+
+<LINE,33>The key point here is that there is no link
+between the item and the type of POKéMON
+using it.
+
+<LINE,33>Exploiting the opponent's weakness... This is
+a basic strategy for POKéMON battles. If you
+use an attack that matches up favorably
+against the defender's type, you can inflict
+double the damage.
+
+<LINE,33>For example, let's attack a FLYING-type
+POKéMON with an ELECTRIC-type move.
+
+<LINE,33>Ah! See? It picked on a weak spot to cause
+double the damage. Even FALKNER, the bird
+user, would be aghast! Similarly, attacking a
+WATER-type POKéMON with a GRASS-type
+move, or attacking a GRASS-type POKéMON
+with a FIRE-type move, will be
+"super-effective."
+
+<LINE,33>In contrast, if an attack is "not very 
+effective,"  the type match-up is bad.
+That means the move's impact will be half its
+usual level.
+
+<LINE,33>If a move has "no effect," then the type
+match-up is simply the worst. The move's
+power will drop to zero, so it will be unable to
+inflict any damage at all.
+
+<LINE,33>For example, <COL1,PUSH,146,195,255,255>SELFDESTRUCT<COL1,POP> is a NORMAL-type
+move. It has no effect on GHOST-type
+POKéMON because that type match-up is the
+worst.
+
+<LINE,33>To avoid such an embarrassing situation, read
+and review the material on type match-ups in
+the LIBRARY.
+
+<COL1,PUSH,146,195,255,255>THUNDER<COL1,POP>!!
+
+It's super-effective!
+
+<LINE,33>As you know, POKéMON and moves come in a
+variety of types. When a POKéMON is
+attacking, if its type is the same as its move
+type, the move's impact will increase to
+1.5 times its usual level.
+
+<LINE,33>For example, if the
+ELECTRIC-type <COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP> uses
+an ELECTRIC-type move, the
+attack will have 1.5 times its
+usual power.
+
+<COL1,PUSH,146,195,255,255>THUNDERBOLT<COL1,POP>!!
+
+<LINE,33>In the same manner, if a NORMAL-type move is
+used by a NORMAL-type POKéMON, the attack
+will also be 1.5 times more powerful than it
+would be if a POKéMON of a different type
+used it. Don't forget this important point!
+
+<LINE,33>Of course, since this combination only
+multiplies the power of attack moves by 1.5,
+support moves that aren't used for attack
+are not affected.
+
+<LINE,33>Lets say <COL1,PUSH,207,134,251,255>GENGAR<COL1,POP> uses a GHOST-type move
+such as <COL1,PUSH,146,195,255,255>SPITE<COL1,POP> or <COL1,PUSH,146,195,255,255>CONFUSE RAY<COL1,POP>. In such a
+case, the move's accuracy or effect will not
+be boosted by the identical type combination.
+
+<LINE,33>There are also moves that inflict fixed
+amounts of damage. These will not be
+multiplied by a factor of 1.5 either. I will
+cover this topic in greater detail a bit later,
+so please keep this point in mind.
+
+<LINE,33>Support moves--do you use them effectively
+in battle? When used correctly, they can
+greatly improve your chance of winning. There
+are a great deal of support moves. If you
+learn to use them properly, you could become
+a modern-day ninja!
+
+<COL1,PUSH,146,195,255,255>DREAM EATER<COL1,POP>!!
+
+<LINE,33>Try a move that causes status problems.
+If the foe becomes paralyzed, burned, or
+falls asleep, the battle will be much easier.
+
+<LINE,33>For example, <COL1,PUSH,146,195,255,255>THUNDER WAVE<COL1,POP> and <COL1,PUSH,146,195,255,255>CONFUSE RAY<COL1,POP>
+are very powerful.
+
+<LINE,33>As a countermeasure, you could use
+<COL1,PUSH,146,195,255,255>SAFEGUARD<COL1,POP> to prevent status problems for
+five turns.
+
+<LINE,33>Or you could use <COL1,PUSH,146,195,255,255>HEAL BELL<COL1,POP>
+to cure all your POKéMON
+of status problems.
+
+<LINE,33>There are some stats, such as ATTACK,
+DEFENSE, and accuracy, that can be
+temporarily affected by moves during battle.
+
+<LINE,33>Use moves like <COL1,PUSH,146,195,255,255>BELLY DRUM<COL1,POP> and <COL1,PUSH,146,195,255,255>SWORDS DANCE<COL1,POP>
+on your own POKéMON before attacking. These
+moves strongly boost ATTACK power.
+
+<LINE,33>To counteract such moves, use <COL1,PUSH,146,195,255,255>HAZE<COL1,POP>. It will
+return any POKéMON stat change back to
+normal. However, be aware that this move will
+work on both your POKéMON and the opponent,
+and it will reset stats regardless of whether
+the ability is up or down.
+
+<LINE,33>Ah, yes. Any altered stat will return to
+normal if the POKéMON is switched out. It may
+be effective to obstruct switching by using a
+move such as <COL1,PUSH,146,195,255,255>SPIDER WEB<COL1,POP> or <COL1,PUSH,146,195,255,255>MEAN LOOK<COL1,POP>.
+
+<LINE,33>Two other moves that you may find useful are
+<COL1,PUSH,146,195,255,255>REFLECT<COL1,POP> and <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP>. <COL1,PUSH,146,195,255,255>REFLECT<COL1,POP> halves
+the damage from physical attacks over five
+turns, and <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP> halves the damage
+from special attacks.
+
+<LINE,33><COL1,PUSH,146,195,255,255>FORESIGHT<COL1,POP> is another good move. It returns
+the opponent's evasiveness to normal. Sigh...
+There are far too many moves for me to
+describe them all. Your homework assignment
+is to study the rest on your own.
+
+<LINE,33>When you attack, how do you choose which
+moves to use? Do you base your decision
+solely on the move's POWER? I recommend that
+you consider moves that have #71added
+effects<COL1,POP><COL2,POP>.
+Truth be told, they can be very convenient.
+
+<LINE,33>For example, there are moves that give the
+target status problems. These moves don't
+just inflict damage, they also cause status
+problems like paralysis, poison, freezing,
+burn, and confusion.
+
+<LINE,30><COL1,PUSH,146,195,255,255>DIZZY PUNCH<COL1,POP> is a good example. It has a
+one-in-five chance of confusing the
+target--a very nice bonus!
+
+<COL1,PUSH,146,195,255,255>DIZZY PUNCH<COL1,POP>!!
+
+#71Dmg/Cnf<COL1,POP><COL2,POP>
+
+G' night
+
+<LINE,33>There are also moves that inflict
+damage and lower stats like DEFENSE and
+evasiveness.
+
+<LINE,33>For example, <COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP> has a one-in-ten
+chance of reducing the target's SPCL.DEF.
+
+<LINE,33>Some moves raise the attacker's stats after
+inflicting damage on the target.
+
+<LINE,33><COL1,PUSH,146,195,255,255>STEEL WING<COL1,POP> is one example. It has a
+one-in-ten chance of raising the user's
+DEFENSE.
+
+<LINE,33>Are you getting all this? Moves with added
+effects can be very convenient. I suggest
+you try them yourself.
+
+<LINE,33>POKéMON moves are not only for attack.
+There are also those that heal POKéMON. Let
+me describe some to you.
+
+<LINE,33>First, moves that restore HP include
+<COL1,PUSH,146,195,255,255>RECOVER<COL1,POP>, <COL1,PUSH,146,195,255,255>MILK DRINK<COL1,POP>, and <COL1,PUSH,146,195,255,255>SOFTBOILED<COL1,POP>. Each
+of these restores HP by exactly one-half the
+maximum HP.
+
+<LINE,33><COL1,PUSH,146,195,255,255>MORNING SUN<COL1,POP>, <COL1,PUSH,146,195,255,255>SYNTHESIS<COL1,POP>, and <COL1,PUSH,146,195,255,255>MOONLIGHT<COL1,POP>
+are HP-restoring moves that vary in effect-
+iveness depending on the time they are used.
+
+<LINE,33>In battle, however, these moves restore
+HP by one-half the maximum HP no matter what
+time of day it is.
+
+<LINE,33>Oh, yes. There are also <COL1,PUSH,146,195,255,255>LEECH LIFE<COL1,POP>,
+<COL1,PUSH,146,195,255,255>MEGA DRAIN<COL1,POP>, <COL1,PUSH,146,195,255,255>GIGA DRAIN<COL1,POP>, <COL1,PUSH,146,195,255,255>DREAM EATER<COL1,POP>
+and <COL1,PUSH,146,195,255,255>ABSORB<COL1,POP>.
+
+<LINE,33>But it's not only about restoring HP. There
+are moves that get rid of status problems,
+too. <COL1,PUSH,146,195,255,255>HEAL BELL<COL1,POP>, for example, eliminates all
+status problems for all the POKéMON on your
+party.
+
+<LINE,33>The move <COL1,PUSH,146,195,255,255>REST<COL1,POP> fully restores HP and gets rid
+of any status problems. Your POKéMON sleeps
+for two turns to rid itself of problems like
+burn and paralysis.
+
+<LINE,33>Simultaneously, any stats that
+were affected by problems--
+such as a lowered ATTACK due
+to a burn or reduced SPEED due
+to paralysis--will be fixed.
+
+<LINE,33>However, even <COL1,PUSH,146,195,255,255>REST<COL1,POP> can't change stats that
+were altered by other support moves or by
+other means. So ATTACK raised by using
+<COL1,PUSH,146,195,255,255>MEDITATE<COL1,POP> would remain unchanged, as would
+accuracy reduced by an opponent's <COL1,PUSH,146,195,255,255>FLASH<COL1,POP>. 
+
+<LINE,33>Incidentally, to restore altered stats, you
+can either switch POKéMON or use <COL1,PUSH,146,195,255,255>HAZE<COL1,POP>. I 
+already described this move in my lesson on
+#71support moves<COL1,POP><COL2,POP>. Remember?
+
+<LINE,33>Do you know about set damage attacks?
+#71These moves inflict fixed amounts of
+damage regardless of the user's ATTACK
+power and the target's DEFENSE<COL1,POP><COL2,POP>.
+Let me give you some examples.
+
+<LINE,33>The NORMAL-type move <COL1,PUSH,146,195,255,255>SONICBOOM<COL1,POP>
+always inflicts 20HP damage.
+
+<LINE,33>Similarly, the DRAGON-type move
+<COL1,PUSH,146,195,255,255>DRAGON RAGE<COL1,POP> consistently inflicts 40HP
+damage.
+
+<LINE,33>The GHOST-type move <COL1,PUSH,146,195,255,255>NIGHT SHADE<COL1,POP>
+and the FIGHTING-type move
+<COL1,PUSH,146,195,255,255>SEISMIC TOSS<COL1,POP> also work similarly. These
+moves hit the target with the same
+amount of HP damage as the user's level.
+
+<LINE,33>How were my lectures for the
+TRAINER CLASS? Were they interesting? If
+you're confident, try out our tests. This will
+be it for now!
+
+<LINE,33>There is something I need to tell you.
+
+<LINE,33>Even if your POKéMON's type and its
+attack-move type are identical, the
+move's power will not be multiplied x 1.5.
+
+<LINE,33>The move's power will also not change,
+even if the type match-up is good or bad.
+In other words, the move will be neither
+"super-effective" nor
+"not very effective."
+
+The move also will not hit a weak spot.
+
+<LINE,33>Of course, since they are #71set damage<COL1,POP><COL2,POP> moves,
+it's only natural that their power is not
+doubled, multiplied by 1.5 or halved.
+
+<LINE,33>That said, #71whether the move works or not
+does depend on type match-ups<COL1,POP><COL2,POP>.
+
+<LINE,33>For example, <COL1,PUSH,146,195,255,255>SEISMIC TOSS<COL1,POP> is a
+FIGHTING-type move, so it won't work on
+GHOST-type POKéMON. In that regard, it's
+no different from other moves. Similarly,
+<COL1,PUSH,146,195,255,255>STRENGTH<COL1,POP> and <COL1,PUSH,146,195,255,255>MEGA PUNCH<COL1,POP> are also
+ineffective against GHOST-type POKéMON.
+Be aware of this important point.
+
+<LINE,33>Be sure to check
+the opposing POKéMON's type.
+
+<LINE,33>Did you know that there are two kinds of
+attacks? #71Physical attacks<COL1,POP><COL2,POP> and #71special
+attacks<COL1,POP><COL2,POP>. The type of move determines
+whether an attack is physical or special. This
+is a very important point to remember.
+
+<LINE,33>The amount of damage inflicted is determined
+based on the difference between physical and
+special attacks.
+
+<LINE,33>The amount of damage inflicted by a
+#71physical attack<COL1,POP><COL2,POP> depends on the
+attacker's #71ATTACK<COL1,POP><COL2,POP> and the target's
+#71DEFENSE<COL1,POP><COL2,POP> stats.
+
+<LINE,33>The amount of damage caused by a
+#71special attack<COL1,POP><COL2,POP> depends on the
+attacker's #71SPCL.ATK<COL1,POP><COL2,POP> and the target's
+#71SPCL.DEF<COL1,POP><COL2,POP>.
+
+<LINE,33>Quite simple, isn't it? Now you see the
+relationship between POKéMON stats and the
+power of moves. Now let me explain what types
+of moves would be physical and what would be
+special.
+
+<LINE,33>Every NORMAL-, FIGHTING-, BUG-,
+FLYING-, GROUND-, ROCK-, GHOST-,
+POISON-, and STEEL-type move is a
+physical attack.
+
+<LINE,33>Every FIRE-, WATER-, ELECTRIC-,
+GRASS-, ICE-, PSYCHIC-, DRAGON-, and
+DARK-type move is a special attack.
+
+<LINE,33>Consider BUG-type moves. Since
+they are physical attacks, they
+will be more powerful when used
+by a POKéMON with a high ATTACK
+stat.
+
+<COL1,PUSH,146,195,255,255>MEGAHORN<COL1,POP>!!
+
+<LINE,33>Did you understand the distinction between
+physical and special attacks? Whether you
+understand or not will make a huge difference
+in battle.
+
+<LINE,33>You do know that a POKéMON can go into
+battle while HOLDing an item? Next, we'll delve
+a little further into this topic with a lesson
+I call "Introducing Items." I will teach you
+how to battle by combining moves and items.
+
+<LINE,33>#71Combining moves and items<COL1,POP><COL2,POP>...
+What could this mean?
+
+<LINE,33>If a POKéMON is HOLDing a <COL1,PUSH,180,255,134,255>PSNCUREBERRY<COL1,POP> or
+<COL1,PUSH,180,255,134,255>PRZCUREBERRY<COL1,POP>, it will automatically use that
+item during battle to heal itself of poison or
+paralysis. I suggest that you deliberately
+combine such items with certain moves.
+
+<LINE,33>Take, for example, the DRAGON-type move
+<COL1,PUSH,146,195,255,255>OUTRAGE<COL1,POP>. Although it is powerful, the user
+becomes confused after two to three turns.
+
+<LINE,33>But try making the POKéMON using <COL1,PUSH,146,195,255,255>OUTRAGE<COL1,POP>
+HOLD a <COL1,PUSH,180,255,134,255>BITTER BERRY<COL1,POP>. As soon as the
+POKéMON becomes confused, it will auto-
+matically use the held item to get rid of its
+confusion. Isn't that convenient?
+
+There are other combinations, too.
+
+<LINE,33>Consider the Psychic-type move <COL1,PUSH,146,195,255,255>REST<COL1,POP>.
+If you were to equip a POKéMON that knows
+this move with a <COL1,PUSH,180,255,134,255>MINT BERRY<COL1,POP> in advance...
+
+<LINE,33>When it falls asleep, its HP will be restored
+and any status problems eliminated. Then it
+will use the <COL1,PUSH,180,255,134,255>MINT BERRY<COL1,POP> to wake up. So
+instead of having to wait two turns, it will be
+ready to battle right away!
+
+<LINE,33>This move is sure to annoy your foe. The only
+saving grace from your foe's point of view is
+that <COL1,PUSH,180,255,134,255>MINT BERRY<COL1,POP> can be used only once.
+
+If tired, use <COL1,PUSH,146,195,255,255>REST<COL1,POP>!
+
+#71Rise and shine!<COL1,POP><COL2,POP>
+
+<LINE,33>Under #71STADIUM rules<COL1,POP><COL2,POP>, #71your party
+POKéMON are not allowed to HOLD the same
+kinds of items. The HOLD items must all be
+different<COL1,POP><COL2,POP>. Therefore, you should carefully
+consider the combinations of items and
+POKéMON.
+
+<LINE,33>Normally, status problems do not double up.
+However, I imagine you have experienced
+situations in which a POKéMON suffers from
+more than one kind of status problem.
+I personally have had a POKéMON that was
+both paralyzed and confused at the same
+time.
+
+<LINE,33>Status problems can be largely divided into
+two categories. The categorization depends
+on whether the status problem is #71indicated
+or not<COL1,POP><COL2,POP>.
+
+<LINE,33>#71Those that are indicated on the screen<COL1,POP><COL2,POP>
+are poison, paralysis, burn, sleep, and
+freeze. These are the #71real status
+problems<COL1,POP><COL2,POP>.
+
+<LINE,33>#71Those that aren't indicated on the
+screen are similar in nature to real
+status problems<COL1,POP><COL2,POP>. These include
+CONFUSION, CURSE, NIGHTMARE,
+ATTRACT, flinch, and LEECH SEED.
+
+<LINE,33>This is an important part. Those conditions
+that are indicated on the screen
+--the real status problems-- do not double
+up. If a POKéMON already has a status
+problem, it can't be hit with another one.
+
+<LINE,33>For example, a sleeping POKéMON's status
+would be indicated as "Sp". In that
+situation, it is not vulnerable to any other
+status problem such as poison, paralysis,
+burn, or freeze.
+
+<LINE,33>However, a POKéMON with a status problem is
+still susceptible to any other kind of
+abnormality. For instance, a frozen POKéMON
+can still be confused or made infatuated.
+
+<LINE,33>Incidentally, #71it is possible for a POKéMON
+to be afflicted with multiple kinds of abnor-
+malities that aren't real status problems<COL1,POP><COL2,POP>.
+
+<LINE,33>So a POKéMON can be simultaneously afflicted
+with such conditions as CURSE, NIGHTMARE,
+CONFUSION, and ATTRACT.
+
+<LINE,33>However, these abnormalities are entirely
+lifted if the affected POKéMON switches out.
+Please don't forget that.
+
+<LINE,33>(Of course, if it were me, I would use
+<COL1,PUSH,146,195,255,255>MEAN LOOK<COL1,POP> to make it impossible for the
+affected POKéMON to switch! Ho, ho, ho...)
+
+<LINE,33>Here's another important point. Any move
+that could cause a burn will thaw out a frozen
+POKéMON. The heat causes the ice to melt,
+naturally.
+
+<LINE,33>You already know that some POKéMON have two
+types. For example, consider a GRASS- &
+POISON-type POKéMON. The power of its
+GRASS- and POISON-type moves will be
+multiplied by 1.5. Ah, you knew that already?
+Good. Then I'll explain further.
+
+<LINE,33>A dual-type POKéMON also has two sets of
+type match-ups. This is especially important
+when it is attacked.
+
+<LINE,33>Do you know type match-ups? Double damage
+is inflicted if a move is "super-effective."
+If it's "not very effective," the power is
+halved. If it has "no effect," its power is
+zero.
+
+<LINE,33>When a dual-type POKéMON is attacked, the
+two type match-ups are multiplied. This is how
+it works: Type 1 x Type 2. Perhaps I should
+explain a bit further.
+
+<LINE,33>Say a dual-type POKéMON is hit by an attack.
+Also assume that the type match-up of the
+attack move is good against both types. In
+this case, Type 1 takes double damage, and
+Type 2 takes double damage. Now, multiply the
+two damage multipliers: 2 x 2 = 4. In other
+words, the move's power is quadrupled!
+
+<LINE,33>For example, let's say a FIRE- & ROCK-type
+<COL1,PUSH,207,134,251,255>MAGCARGO<COL1,POP> is hit by a WATER-type attack. As a
+WATER attack is "super-effective" against
+both POKéMON types, the damage would be
+four times greater
+than normal.
+
+Quadruple!
+
+<LINE,33>The opposite could also occur. Consider this: 
+Type 1 halves the damage, and Type 2
+halves the damage. Multiplying these, we get
+1/2 x 1/2 = 1/4. So in this case, the POKéMON
+would be hit with only 1/4 the usual power.
+
+<LINE,33>An example would be a BUG- & POISON-type
+<COL1,PUSH,207,134,251,255>SPINARAK<COL1,POP> hit by a GRASS-type attack that's
+"not very effective" against either type.
+
+A mere scrape!
+
+<LINE,33>How about this situation? Type 1 takes
+double the damage; Type 2 halves the damage.
+Multiplying the damage multipliers, 2 x 1/2,
+we get the combined damage multiplier of one. 
+In this case, the poor Type 1 match-up is
+rectified by the favorable Type 2 match-up.
+
+<LINE,33>The WATER- & ELECTRIC-type <COL1,PUSH,207,134,251,255>LANTURN<COL1,POP>
+and similar POKéMON manage to protect
+themselves against ELECTRIC-type attacks.
+
+<LINE,33>This one should be obvious. Type 1 takes
+double the damage; Type 2 takes no damage at
+all. In this situation, the multiplication of
+damage multipliers is 2 x 0 = 0. In other words,
+the move will have "no effect."
+
+<LINE,33>Let's say a POISON- & FLYING-type <COL1,PUSH,207,134,251,255>GOLBAT<COL1,POP>
+is attacked by <COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>, a GROUND-type
+move. According to type match-ups, POISON-
+type POKéMON take double damage from
+GROUND-type attacks. But because GROUND-
+type attacks have no effect on FLYING-type
+POKéMON, the multiplier is 2 x 0 = 0. The
+GROUND-type attack can't inflict any damage.
+
+<LINE,33>As I have just shown, dual-type POKéMON
+may have more weaknesses and/or cleverly
+cover for weaknesses. This is just one of the
+wonderful mysteries that surround POKéMON. 
+
+<LINE,33>OK! This lesson is on everyone's favorite
+topic: "Match-up Math"! I will show you how
+much damage can vary due to POKéMON types
+and type match-ups.
+
+<LINE,33>Previously, I told you about POKéMON that
+have two types. Did you understand that
+topic?
+
+<LINE,33>A dual-type POKéMON multiplies the damage
+multipliers of two type match-ups. At most,
+the damage could be quadrupled. At worst, it
+may not inflict any damage. Obviously, the
+amount of damage inflicted could vary a lot.
+
+<LINE,33>Actually, there are other multipliers!
+
+<LINE,33>If the POKéMON's type and the move
+type are the same, the move's attack
+power is multiplied by 1.5.
+
+Hitting a weak spot means double damage.
+
+These factors are also multiplied.
+
+<LINE,33>Let me give you an example. Let's say an
+ELECTRIC-type <COL1,PUSH,207,134,251,255>AMPHAROS<COL1,POP> is battling a
+WATER- & FLYING-type <COL1,PUSH,207,134,251,255>GYARADOS<COL1,POP>.
+
+<COL1,PUSH,207,134,251,255>AMPHAROS<COL1,POP> used <COL1,PUSH,146,195,255,255>THUNDERBOLT<COL1,POP>!
+
+ELECTRIC
+
+WATER/FLYING
+
+<COL1,PUSH,207,134,251,255>AMPHAROS<COL1,POP>
+
+<COL1,PUSH,207,134,251,255>GYARADOS<COL1,POP>
+
+<COL1,PUSH,207,134,251,255>AMPHAROS<COL1,POP>
+used an
+ELECTRIC
+-type move,
+which matches
+its own type.
+
+The ELECTRIC
+-move strikes a
+WATER- &
+FLYING-type
+POKéMON. The
+combined damage
+multiplier is
+2 x 2 = 4, or
+x 4 the damage.
+
+And let's
+say the
+move
+strikes a
+weak spot.
+
+1.5 times
+
+Quadruple
+
+Double
+
+x
+
+<LINE,33>If the attack becomes a "critical hit."
+
+<LINE,33>Multiplying these factors out we get:
+1.5 x 4 x 2 = 12 Ka-pow! That's twelve times
+the normal damage! So if you're lucky, an
+attack could inflict up to #71twelve times<COL1,POP><COL2,POP> the
+move's normal damage!
+
+<COL1,PUSH,207,134,251,255>GENGAR<COL1,POP>!
+
+vs
+
+<LINE,33>If a move's base power is 10, its power would
+be multiplied by 12 to make it 120. Isn't that
+spectacular? That's why it's critical that you
+pay attention to type match-ups in battle.
+
+<LINE,33>Do you remember the set damage moves?
+Those are the moves that inflict fixed
+amounts of damage regardless of the
+attacker's and the target's types.
+
+<LINE,33>Moves like <COL1,PUSH,146,195,255,255>SONICBOOM<COL1,POP>, <COL1,PUSH,146,195,255,255>DRAGON RAGE<COL1,POP>,
+<COL1,PUSH,146,195,255,255>NIGHT SHADE<COL1,POP> and <COL1,PUSH,146,195,255,255>SEISMIC TOSS<COL1,POP>...
+Do you remember them now?
+
+<LINE,33>With these moves, there is #71no need to worry
+about ATTACK or SPCL.ATK stats<COL1,POP><COL2,POP>. Here's why.
+
+<LINE,33>For example, let's say a <COL1,PUSH,207,134,251,255>GENGAR<COL1,POP>
+uses a GHOST-type move. The
+move's power is multiplied by 1.5.
+However, <COL1,PUSH,207,134,251,255>GENGAR<COL1,POP>'s ATTACK
+stat is relatively low.
+
+<LINE,33>In that case, it may be more effective to
+inflict a set amount of damage using
+<COL1,PUSH,146,195,255,255>NIGHT SHADE<COL1,POP>.
+
+<LINE,33>When is a move most effective? Find out, then
+use your moves accordingly. Then, you'll be
+ready for the GYM LEADER CLASS!
+
+<LINE,33>Let me explain some key points on set
+damage moves.
+
+<LINE,33>The power stays the same even if stats
+are raised or lowered by support moves.
+
+<LINE,33>However, it is possible to change
+accuracy or evasiveness using support
+moves.
+
+<LINE,33>Even if <COL1,PUSH,146,195,255,255>REFLECT<COL1,POP> or <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP> is
+used, the damage inflicted by set
+damage moves remains unaffected.
+
+<LINE,33>When I was discussing moves and tactics in
+the TRAINER CLASS, I covered the two moves
+of <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>. Do you remember?
+
+<LINE,33>I taught you that both moves avoid damage on
+the first turn, and I described some tactics
+that take advantage of that fact.
+
+<LINE,33>Of course, even these moves do not protect
+the user against status abnormalities such
+as CURSE or POISON.
+
+<LINE,33>But there's more. There are actually moves
+that can strike a POKéMON while it's using
+<COL1,PUSH,146,195,255,255>FLY<COL1,POP> or <COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+<LINE,33>Moves that can strike a
+POKéMON that's using <COL1,PUSH,146,195,255,255>FLY<COL1,POP>...
+
+<LINE,33>They include <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP>, <COL1,PUSH,146,195,255,255>GUST<COL1,POP>, <COL1,PUSH,146,195,255,255>TWISTER<COL1,POP>
+and <COL1,PUSH,146,195,255,255>WHIRLWIND<COL1,POP>.
+
+<LINE,33>In particular, <COL1,PUSH,146,195,255,255>GUST<COL1,POP> and <COL1,PUSH,146,195,255,255>TWISTER<COL1,POP> double
+in power when the target uses <COL1,PUSH,146,195,255,255>FLY<COL1,POP>.
+
+<LINE,33>If a <COL1,PUSH,146,195,255,255>SANDSTORM<COL1,POP> is blowing when a
+POKéMON uses <COL1,PUSH,146,195,255,255>FLY<COL1,POP>, the POKéMON will be
+hurt.
+
+<LINE,33>There are also moves that
+can attack a POKéMON
+that's using <COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+<LINE,33>They include <COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>, <COL1,PUSH,146,195,255,255>MAGNITUDE<COL1,POP>
+and <COL1,PUSH,146,195,255,255>FISSURE<COL1,POP>.
+
+<LINE,33>The moves <COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP> and <COL1,PUSH,146,195,255,255>MAGNITUDE<COL1,POP>
+are doubled in power when the target
+POKéMON is using <COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+<LINE,33>Oh yes, even if the opponent is using <COL1,PUSH,146,195,255,255>WRAP<COL1,POP>
+or <COL1,PUSH,146,195,255,255>CLAMP<COL1,POP>, it's still possible to use <COL1,PUSH,146,195,255,255>DIG<COL1,POP> or
+<COL1,PUSH,146,195,255,255>FLY<COL1,POP>. However, your POKéMON will still be hurt
+by these restraining attacks while flying or
+underground.
+
+<LINE,33>So, as you have seen, the range of tactics
+open to you has widened even further. That's
+why it is so important to try to predict what
+your opponent might do in battle.
+
+<LINE,33>A key point for winning at the STADIUM is to
+teach your POKéMON a variety of move types.
+Let me explain.
+
+<LINE,33>If a POKéMON's type matches the move type,
+the move's power is multiplied by 1.5,
+correct? But this could trip you up. If a
+POKéMON has only this one type of move, it
+would be at a great disadvantage against a
+POKéMON with a poor type match-up.
+
+<LINE,33>For example, take the FIRE-type
+POKéMON <COL1,PUSH,207,134,251,255>TYPHLOSION<COL1,POP>. It certainly is a tough
+POKéMON. But what if its opponent is a
+WATER-type POKéMON? If <COL1,PUSH,207,134,251,255>TYPHLOSION<COL1,POP>
+knows only FIRE-type moves, it can inflict
+only half the usual damage on the opponent.
+
+<LINE,33>What if it also knew <COL1,PUSH,146,195,255,255>THUNDERPUNCH<COL1,POP>? Ah, yes.
+This inflicts double the damage. You could
+catch your opponent off guard.
+
+<LINE,33>If <COL1,PUSH,207,134,251,255>TYPHLOSION<COL1,POP> also knew the move
+<COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>, it could hit FIRE-, POISON-,
+ELECTRIC-, ROCK-, and STEEL-type POKéMON
+with "super-effective" attacks.
+
+<LINE,33>Think of balance when making POKéMON
+learn moves.
+
+<LINE,33>In CUP competition, you will face a wide
+variety of POKéMON. It would be very hard to
+win all the battles without first preparing
+your team to contend with every type of
+POKéMON.
+
+<LINE,33>It is extremely important to balance your
+team with a variety of POKéMON.
+
+<LINE,33>In conclusion... The key to battling is #71to use
+different types of POKéMON and moves<COL1,POP><COL2,POP>. If
+you heed this advice when assembling your
+team, I am certain you will conquer the
+STADIUM tournaments. On to victory!
+
+<COL1,PUSH,146,195,255,255>THUNDERPUNCH<COL1,POP>!!
+
+#71Super-effective!<COL1,POP><COL2,POP>
+
+<LINE,33>An unnecessary POKéMON switch could be
+disastrous. Haven't I taught you that?
+Because switching uses up a turn, the
+opponent may hit the switched-in POKéMON as
+soon as it appears.
+
+<LINE,33>But there is such a thing as waste-free
+switching. What do you suppose that could be?
+
+<LINE,33>Here's one example. #71Switch in a POKéMON
+that is unaffected by the opponent's attack<COL1,POP><COL2,POP>.
+This switch is one that gives priority to
+defense.
+
+<LINE,33>Try this scenario. Let's say your opponent
+sends out a GROUND-type <COL1,PUSH,207,134,251,255>DUGTRIO<COL1,POP>. It's
+highly likely that this POKéMON will know
+powerful GROUND-type attacks such as
+<COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP> or <COL1,PUSH,146,195,255,255>MAGNITUDE<COL1,POP>.
+
+<LINE,33>In that case, switch in a FLYING-type
+POKéMON. Because a GROUND-type move has no
+effect on FLYING-type POKéMON, you can
+switch in without taking any damage.
+
+<LINE,33>Even if the opponent launches
+an attack at the switched-in
+POKéMON, if it is unaffected,
+then the switching wasn't a
+waste of time.
+
+<LINE,33>Switching in this way gives you a
+distinct advantage. The opponent's best
+moves are made totally ineffective against
+you. Of course, this might prompt your
+opponent to switch out, as well.
+
+<LINE,33>This is why switching in battle requires some
+careful consideration.
+
+<LINE,33>If you master switching, you can master
+battles.
+
+<LINE,33>In battle, it is extremely important to be
+able to analyze both your POKéMON's
+situation and that of your opponent's
+POKéMON.
+
+<LINE,33>Let me explain what I mean in detail.
+
+<LINE,33>If a PSYCHIC-type <COL1,PUSH,207,134,251,255>ALAKAZAM<COL1,POP> uses
+the PSYCHIC-type move <COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP>,
+the move's power is multiplied
+by 1.5.
+
+<LINE,33>That is the expected conclusion. However,
+that assumption could come back to haunt
+you.
+
+<LINE,33>For example, what if the opponent were a
+NORMAL-type <COL1,PUSH,207,134,251,255>BLISSEY<COL1,POP>?
+
+<LINE,33>The type match-up against
+<COL1,PUSH,207,134,251,255>BLISSEY<COL1,POP> is neither good nor
+bad. The problem lies with
+POKéMON stats.
+
+<LINE,33>Do you know <COL1,PUSH,207,134,251,255>BLISSEY<COL1,POP>'s stats? While
+its #71SPCL.DEF<COL1,POP><COL2,POP> is high, its #71DEFENSE<COL1,POP><COL2,POP> is
+very low.
+
+<LINE,33>Though <COL1,PUSH,207,134,251,255>ALAKAZAM<COL1,POP> is good at PSYCHIC-type
+moves, they do little damage against <COL1,PUSH,207,134,251,255>BLISSEY<COL1,POP>.
+
+<LINE,33>This is why you must consider the stats of
+opposing POKéMON along with type match-ups
+in battle.
+
+<COL1,PUSH,207,134,251,255>ALAKAZAM<COL1,POP>!
+
+<COL1,PUSH,207,134,251,255>BLISSEY<COL1,POP>!
+
+<LINE,33>Welcome to the ELITE FOUR CLASS!
+(This student must like me...)
+
+<LINE,33>Welcome to the ELITE FOUR CLASS!
+(This student must like me...) Let's get
+started right away. Now I will cover a very
+interesting topic: "Double-Duty Damage"?
+
+<LINE,33>Have you ever noticed a POKéMON HOLDing an
+item even though you never gave one to it?
+
+<LINE,33>Actually, #71some wild POKéMON are already
+HOLDing items<COL1,POP><COL2,POP>. In very rare cases, they may
+even be HOLDing exceedingly rare items.
+
+<LINE,33>For example, my own experience tells me that
+about one in every four wild <COL1,PUSH,207,134,251,255>CLEFAIRY<COL1,POP> HOLDs
+a <COL1,PUSH,180,255,134,255>MYSTERYBERRY<COL1,POP>.
+
+<LINE,33>In very rare cases, a
+wild <COL1,PUSH,207,134,251,255>CLEFAIRY<COL1,POP> may be
+HOLDing a <COL1,PUSH,180,255,134,255>MOON STONE<COL1,POP>.
+Wouldn't that
+be wonderful?
+
+(I certainly would like to use <COL1,PUSH,146,195,255,255>THIEF<COL1,POP> on it!)
+
+<LINE,33>Also, a POKéMON that is traded from Red,
+Blue, or Yellow into the world of Gold and
+Silver will always be HOLDing an item of
+some sort. What a great deal!
+
+<LINE,33>The item differs from POKéMON to POKéMON.
+For example, <COL1,PUSH,207,134,251,255>TANGELA<COL1,POP> is always HOLDing
+<COL1,PUSH,180,255,134,255>BITTERBERRY<COL1,POP>!
+
+<LINE,33>The kind of item held by a POKéMON doesn't
+change if the POKéMON evolves. Also, the
+POKéMON won't switch its held item with
+another item.
+
+<LINE,33>The item a wild POKéMON prefers won't
+change. Let's say you catch a wild NIDORAN♀
+and evolve it into <COL1,PUSH,207,134,251,255>NIDORINA<COL1,POP> or <COL1,PUSH,207,134,251,255>NIDOQUEEN<COL1,POP>.
+The evolved forms will still be HOLDing the
+same item as the unevolved NIDORAN♀. Its
+held item will always be <COL1,PUSH,180,255,134,255>TM43 DETECT<COL1,POP>.
+
+<LINE,33>If you catch a wild <COL1,PUSH,207,134,251,255>NIDORINA<COL1,POP>, its held item
+won't change if it evolves into a <COL1,PUSH,207,134,251,255>NIDOQUEEN<COL1,POP>.
+The item it HOLDs will still remain the same as
+for <COL1,PUSH,207,134,251,255>NIDORINA<COL1,POP> , a <COL1,PUSH,180,255,134,255>BERRY<COL1,POP>.
+
+<LINE,33>There are also items that are held only by
+specific POKéMON. For instance, there is an
+item that is held only by wild <COL1,PUSH,207,134,251,255>KADABRA<COL1,POP> in the
+Yellow version. Can you find others?
+
+<LINE,33>Before I finish,#71 I have to tell you about
+items that are useless unless held by specific
+POKéMON<COL1,POP><COL2,POP>. I'll give you just a few examples.
+
+<LINE,33>One example is <COL1,PUSH,180,255,134,255>LIGHT BALL<COL1,POP>. This item
+doubles the power of special attacks but
+only if it is held by a <COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP>.
+
+<LINE,33>The HOLD item <COL1,PUSH,180,255,134,255>THICK CLUB<COL1,POP> is only for
+<COL1,PUSH,207,134,251,255>CUBONE<COL1,POP> and <COL1,PUSH,207,134,251,255>MAROWAK<COL1,POP>. It doubles the
+power of physical attacks. There are
+others too.
+
+<LINE,33>(Hmm... I wish I had one...)
+
+<LINE,33>If the move's and the POKéMON's types match,
+damage is x 1.5. If the move's type match-up
+is good against both of the target's types,
+damage is x 4. For a critical hit, it is x 2.
+
+<LINE,33>By multiplying all these damage multipliers
+together, we get: 1.5 x 4 x 2 = 12 times the
+damage. I explained this part earlier.
+
+<LINE,33>Actually, there are two other multipliers that
+may also be applied. Let me explain.
+
+Number 1, the weather.
+
+<LINE,33>For five turns after using <COL1,PUSH,146,195,255,255>SUNNY DAY<COL1,POP>,
+the power of FIRE-type moves is x 1.5.
+
+<LINE,33>Likewise, for five turns after using
+<COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP>, the power of WATER-type
+moves is multiplied by 1.5.
+
+<LINE,33>Three moves change the weather: <COL1,PUSH,146,195,255,255>SANDSTORM<COL1,POP>,
+<COL1,PUSH,146,195,255,255>SUNNY DAY<COL1,POP> and <COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP>. Don't worry--
+these weather conditions will not double or
+triple. Let's see what happens to the damage
+multiplier of 12 if these occur. The multiplier
+is 12 x 1.5 = 18. So, with the right conditions,
+a move could inflict x 18 the usual damage.
+
+Number 2, held items.
+
+<LINE,33>Certain items, like <COL1,PUSH,180,255,134,255>MIRACLE SEED<COL1,POP> or
+<COL1,PUSH,180,255,134,255>CHARCOAL<COL1,POP>, boost specific types of moves 
+x 1.1. This multiplier also applies to the
+combined damage, including the weather.
+
+<LINE,33>There are also items that affect only
+specific kinds of POKéMON. For instance,
+<COL1,PUSH,180,255,134,255>LIGHT BALL<COL1,POP> doubles the power of
+<COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP>'s special attacks.
+
+<LINE,33>Let's see how the combined damage multiplier
+works. Consider a case in which a
+<COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP> HOLDs a <COL1,PUSH,180,255,134,255>LIGHT BALL<COL1,POP>.
+
+<LINE,33>Wow, that certainly is extreme. So be wary of
+these three POKéMON: <COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP>, <COL1,PUSH,207,134,251,255>CUBONE<COL1,POP>,
+and <COL1,PUSH,207,134,251,255>MAROWAK<COL1,POP>.
+
+Pika? Pika?
+
+<LINE,33>The PSYCHIC-type move <COL1,PUSH,146,195,255,255>PSYWAVE<COL1,POP> is an
+interesting move. At its weakest, it can
+inflict only 1HP damage. At its
+strongest, it inflicts damage that is
+1.5 times the normal level.
+
+<LINE,33>Also, if a move like <COL1,PUSH,146,195,255,255>MIND READER<COL1,POP> or <COL1,PUSH,146,195,255,255>LOCK-ON<COL1,POP>
+is used, the attack move in the next turn will
+strike even a flying POKéMON, or a POKéMON
+under the ground.
+
+<LINE,33>Do you use support moves? These include
+moves that lower the opponent's stats,
+induce sleep, cause confusion, and so on. I
+love them. Did you know that, by and large,
+there are two major kinds of support moves
+that are intended for use against
+opponents?
+
+<LINE,33>There are two types of support moves.
+Ones that:
+-Work regardless of the type match-up
+-Are affected by the type match-up
+
+<LINE,33>You do remember type match-ups, I hope? For
+example, PSYCHIC-type moves have zero
+effect on DARK-type POKéMON. So in this
+case, moves such as <COL1,PUSH,146,195,255,255>PSYBEAM<COL1,POP> and <COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP>
+won't work.
+
+<LINE,33>However, there are also support moves that
+aren't affected by type match-ups. These
+moves will work on any type of POKéMON. For
+example, <COL1,PUSH,146,195,255,255>HYPNOSIS<COL1,POP> will make even DARK-type
+POKéMON sleep.
+
+<LINE,33>There are other exceptional moves besides
+these, so please do be careful.
+
+
+
+<LINE,33>There are also support moves that are
+affected by type match-ups. Depending on
+the POKéMON's type, these moves may not
+work at all.
+
+<LINE,33>For example, <COL1,PUSH,146,195,255,255>THUNDER WAVE<COL1,POP> will never have
+any effect on GROUND-type POKéMON. After
+all, the type match-up of an ELECTRIC-type
+move on a GROUND-type POKéMON is the
+worst--it won't have any effect.
+
+<LINE,33>In a similar fashion, the POISON-type
+support moves <COL1,PUSH,146,195,255,255>POISON GAS<COL1,POP>, <COL1,PUSH,146,195,255,255>TOXIC<COL1,POP>, and
+<COL1,PUSH,146,195,255,255>POISONPOWDER<COL1,POP> have no effect on STEEL-type
+POKéMON. There are other support moves of
+this nature.
+
+<LINE,33>So how do you tell these two kinds of support
+moves apart? Look at the message that
+appears if a move doesn't work. It could say,
+"It didn't affect (POKéMON)" or
+"It doesn't affect (POKéMON)."
+
+<LINE,33>If "It didn't affect (POKéMON)"
+appears, your move was not affected by
+the type match-up. It just failed.
+
+<LINE,33>If "It doesn't affect (POKéMON)"
+appears, your move is affected by the
+type match-up. It will never work on
+that type of POKéMON.
+
+It gets confused!
+
+<COL1,PUSH,146,195,255,255>CONFUSE RAY<COL1,POP>!!
+
+<LINE,33>In general, a speedy POKéMON
+enjoys an advantage since it can attack
+first. However, you can make up for slowness
+by using the right moves and tactics. Let me
+share some of my best tactics.
+
+If you wish to attack before your opponent...
+
+<LINE,33>The three moves <COL1,PUSH,146,195,255,255>QUICK ATTACK<COL1,POP>,
+<COL1,PUSH,146,195,255,255>EXTREMESPEED<COL1,POP> and <COL1,PUSH,146,195,255,255>MACH PUNCH<COL1,POP> enable
+the user to attack first.
+
+<LINE,33><COL1,PUSH,146,195,255,255>AGILITY<COL1,POP> boosts the user's SPEED.
+
+<LINE,33>You can also lower the opponent's SPEED
+by using a support move like <COL1,PUSH,146,195,255,255>SCARY FACE<COL1,POP>
+or the added effects of a move such as
+<COL1,PUSH,146,195,255,255>ICY WIND<COL1,POP>.
+
+<LINE,33>Paralyzing the opponent also sharply
+reduces its SPEED.
+
+Use these tactics to move before your foe.
+
+<LINE,33>If your POKéMON can act first, you won't
+have to fear moves like <COL1,PUSH,146,195,255,255>PAIN SPLIT<COL1,POP> or
+<COL1,PUSH,146,195,255,255>REVERSAL<COL1,POP>. Just make sure you knock out the
+opponent before it can use these moves.
+
+<LINE,33>You can also avoid <COL1,PUSH,146,195,255,255>DESTINY BOND<COL1,POP>, a move that
+makes the foe faint if the user faints. Again,
+just defeat the foe before it can use this.
+
+<LINE,33>Incidentally, #71there are also moves and
+tactics that don't depend on SPEED or which
+POKéMON moves first<COL1,POP><COL2,POP>. Let's examine some of
+these.
+
+<LINE,33>The move <COL1,PUSH,146,195,255,255>PERISH SONG<COL1,POP> causes both POKéMON
+to faint three turns later. However, its
+effect wears off if the POKéMON switch out.
+Therefore, you should make it impossible
+for the opponent to switch beforehand.
+
+<LINE,33>If a POKéMON uses <COL1,PUSH,146,195,255,255>BIDE<COL1,POP>, it takes whatever
+damage the foe inflicts for two to three
+turns, then releases that built-up energy to
+inflict double the damage it's taken.
+
+<LINE,33><COL1,PUSH,146,195,255,255>COUNTER<COL1,POP> and <COL1,PUSH,146,195,255,255>MIRROR COAT<COL1,POP> are retaliation
+moves. One strikes back with double damage
+against physical attacks, one against special
+attacks. Also, these moves are always used in
+the bottom of the turn after the foe's move.
+
+<LINE,33><COL1,PUSH,146,195,255,255>FUTURE SIGHT<COL1,POP> is an attack move that strikes
+two turns after use. It is not affected by
+type match-ups. Therefore, its effect is not
+multiplied by 1.5 if used by a PSYCHIC-type
+POKéMON. It works on all
+POKéMON types including
+DARK and FIGHTING.
+
+<LINE,33>That about wraps it up. Pardon?
+You want to know more?
+Well, um... 
+Oh, look at the time! 
+I have to go!
+
+<LINE,33>A POKéMON that has learned different types
+of moves should be able to battle effectively
+against any type of POKéMON. You'll come to
+appreciate this, I'm sure.
+
+<LINE,33>Perhaps I should use some examples to
+show you what I mean?
+
+1 - #71Teach a POKéMON a move it hates<COL1,POP><COL2,POP>
+
+<LINE,33>Try teaching your POKéMON moves that they
+themselves are vulnerable to. For example,
+take a WATER-type POKéMON that is weak
+against ELECTRIC moves. A <COL1,PUSH,207,134,251,255>STARMIE<COL1,POP>,
+perhaps. We'll teach it the ELECTRIC move
+<COL1,PUSH,146,195,255,255>THUNDER<COL1,POP>.
+
+<LINE,33>If it battles an opponent of the same type,
+this move gives it a strong edge. Even better,
+it can catch the opponent completely off
+guard.
+
+<LINE,33>There are many other combinations.
+-<COL1,PUSH,207,134,251,255>CUBONE<COL1,POP> with the ICE-type <COL1,PUSH,146,195,255,255>BLIZZARD<COL1,POP>
+-<COL1,PUSH,207,134,251,255>ARBOK<COL1,POP> with the GROUND-type move
+<COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>...
+
+2 - #71Aim for the weak spots of POKéMON<COL1,POP><COL2,POP>
+
+<LINE,33>Teach your POKéMON a move that will exploit
+the weak point of a POKéMON that has a type
+match-up advantage. For example, WATER-
+type POKéMON are weak against ELECTRIC
+attacks. So, teach a WATER POKéMON a 
+GROUND-type move, which is super-effective.
+
+<LINE,33>A foe who chooses to use an ELECTRIC type
+against your WATER type will be surprised. A
+GROUND-type move like <COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP> that the
+ELECTRIC-type hates is suddenly sprung...
+
+There are other combinations, too.
+
+<LINE,33>The GRASS-type POKéMON <COL1,PUSH,207,134,251,255>MEGANIUM<COL1,POP> is weak
+against ICE-type attacks. A good remedy
+would be to teach it a STEEL-type move
+<COL1,PUSH,146,195,255,255>IRON TAIL<COL1,POP>, which is "super-effective"
+against ICE-type POKéMON.
+
+<LINE,33>The DARK-type POKéMON <COL1,PUSH,207,134,251,255>UMBREON<COL1,POP> is at a
+disadvantage against FIGHTING-type
+POKéMON. So teach it a PSYCHIC-type move
+like <COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP>. FIGHTING-type POKéMON are
+weak against PSYCHIC-type moves, correct?
+
+<LINE,33>Using these kinds of methods, it may be
+possible to take on a POKéMON that has a
+type advantage. At least it never hurts to
+try.
+
+ELECTRIC-type <COL1,PUSH,207,134,251,255>FLAAFFY<COL1,POP>!
+
+But here comes an
+<COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>!
+
+Ah, yes.
+
+<LINE,33>Have you heard the term "Combo"?  It refers
+to a combination of moves. Today, I will teach
+you some very effective combos.
+
+<LINE,33>For example, try this combo: <COL1,PUSH,146,195,255,255>DEFENSE CURL<COL1,POP>
+and <COL1,PUSH,146,195,255,255>ROLLOUT<COL1,POP>. The ROCK-type move <COL1,PUSH,146,195,255,255>ROLLOUT<COL1,POP>,
+when used after <COL1,PUSH,146,195,255,255>DEFENSE CURL<COL1,POP>...
+
+<LINE,33>Or try these. I call them sure-hit combos.
+
+<LINE,33>First, use a move that ensures that the next
+attack will hit. Try a move like <COL1,PUSH,146,195,255,255>LOCK-ON<COL1,POP> or
+<COL1,PUSH,146,195,255,255>MIND READER<COL1,POP>. Complete the combo with
+an inaccurate but powerful move such as
+<COL1,PUSH,146,195,255,255>ZAP CANNON<COL1,POP> or <COL1,PUSH,146,195,255,255>DYNAMICPUNCH<COL1,POP>.
+
+<LINE,33>The power of the combo will be incredible. I
+would switch to a POKéMON that is hopefully
+unaffected by the attack move's type.
+
+<LINE,33>Now, endurance combos. <COL1,PUSH,146,195,255,255>ENDURE<COL1,POP> leaves the
+user with at least 1HP after any attack.
+Combine it with moves that become more
+powerful if the user's HP falls, such as
+<COL1,PUSH,146,195,255,255>REVERSAL<COL1,POP>, <COL1,PUSH,146,195,255,255>FLAIL<COL1,POP> and <COL1,PUSH,146,195,255,255>PAIN SPLIT<COL1,POP>.
+
+<LINE,33>However, these combos are vulnerable if your
+POKéMON is attacked first. I think the smart
+thing to do is to raise your SPEED in advance.
+
+<LINE,33>Sleeper combos... These are combos that
+involve healing moves. If HP is low after using
+a move such as <COL1,PUSH,146,195,255,255>BELLY DRUM<COL1,POP> or <COL1,PUSH,146,195,255,255>CURSE<COL1,POP>, use
+<COL1,PUSH,146,195,255,255>REST<COL1,POP>.
+
+<LINE,33>It would be even more effective if the sleep-
+ing POKéMON had an attack move like <COL1,PUSH,146,195,255,255>SLEEP
+TALK<COL1,POP> or <COL1,PUSH,146,195,255,255>SNORE<COL1,POP> or was HOLDing a <COL1,PUSH,180,255,134,255>MINT BERRY<COL1,POP>.
+
+<LINE,33>Creeper combos... Start with a move that
+inflicts damage every turn, such as <COL1,PUSH,146,195,255,255>TOXIC<COL1,POP> or
+<COL1,PUSH,146,195,255,255>SANDSTORM<COL1,POP>.
+
+<LINE,33>The last half of the combo could be a move
+that causes a status problem like confusion
+or sleep. Or you could concentrate on your
+own defense. Either way, you're certain to
+infuriate your opponent!
+
+<COL1,PUSH,146,195,255,255>SANDSTORM<COL1,POP> + <COL1,PUSH,146,195,255,255>BIND<COL1,POP>!!
+
+
+
+<LINE,33>The <COL1,PUSH,146,195,255,255>PURSUIT<COL1,POP> combo. The DARK-type move
+<COL1,PUSH,146,195,255,255>PURSUIT<COL1,POP> inflicts double damage if the
+opponent switches out.
+
+<LINE,33>So, the thing to do beforehand is to use
+a move that prompts switching.
+
+<LINE,33>For example, lead with a move like
+<COL1,PUSH,146,195,255,255>PERISH SONG<COL1,POP> or <COL1,PUSH,146,195,255,255>SANDSTORM<COL1,POP>. Moves that
+cause status problems are also effective.
+
+<LINE,33>There are many other combos. Try to devise
+your own! (If you do, keep them a secret to
+share with just me.)
+
+<LINE,33>Did you know that there are moves that vary
+with the target's status or the weather? And
+there are combos that depend on the
+situation. Let me explain.
+
+Combinations with the opponent's status
+
+<LINE,33>If the opponent uses <COL1,PUSH,146,195,255,255>MINIMIZE<COL1,POP>,
+<COL1,PUSH,146,195,255,255>STOMP<COL1,POP> it to inflict double the damage.
+
+<LINE,33>Against a sleeping opponent,
+moves like <COL1,PUSH,146,195,255,255>NIGHTMARE<COL1,POP> and
+<COL1,PUSH,146,195,255,255>DREAM EATER<COL1,POP> work superbly.
+If the opponent uses <COL1,PUSH,146,195,255,255>REST<COL1,POP>,
+these moves will come as
+nasty surprises.
+
+<LINE,33>Next, combos that work with the weather.
+First, combos that start with <COL1,PUSH,146,195,255,255>SUNNY DAY<COL1,POP>.
+
+<LINE,33>When the sunlight turns harsh after using
+<COL1,PUSH,146,195,255,255>SUNNY DAY<COL1,POP>...
+
+<LINE,33>The power of FIRE-type moves is
+multiplied by 1.5. In contrast, the power
+of WATER-type moves is halved.
+
+<LINE,33><COL1,PUSH,146,195,255,255>MORNING SUN<COL1,POP>, <COL1,PUSH,146,195,255,255>SYNTHESIS<COL1,POP> and
+<COL1,PUSH,146,195,255,255>MOONLIGHT<COL1,POP> will provide double the usual
+HP-restoring power. In STADIUM, these
+moves will fully heal HP.
+
+<LINE,33><COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP>, which normally takes two
+turns, will be useable every turn. In
+contrast, <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP>'s accuracy will drop,
+so it would hit only about half the time.
+
+Also, POKéMON will not become frozen.
+
+When it is pouring after using <COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP>...
+
+<LINE,33>The power of WATER-type moves is
+multiplied by 1.5. Conversely, the power of
+FIRE-type moves is cut in half.
+
+<LINE,33>The HP-recovery moves <COL1,PUSH,146,195,255,255>MORNING SUN<COL1,POP>,
+<COL1,PUSH,146,195,255,255>SYNTHESIS<COL1,POP> and <COL1,PUSH,146,195,255,255>MOONLIGHT<COL1,POP> are affected
+by the downpour. Their performance is cut
+in half. In STADIUM, these moves will only
+heal one quarter of the 
+user's maximum HP.
+
+<LINE,33>The power of <COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP> will be cut in
+half, but <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP> won't miss.
+
+<LINE,33>If your POKéMON is weak against FIRE-type
+moves, you can use this move for added
+defense. Incidentally, a weather-altering
+move never fails, so there's nothing to worry
+about when using it.
+
+<LINE,33>Now, here are some combos that can be
+performed under special situations. Quite
+often, a single POKéMON won't be able to do
+them. If so, switch to another POKéMON.
+
+<LINE,33>For example, make <COL1,PUSH,207,134,251,255>TOGEPI<COL1,POP> use <COL1,PUSH,146,195,255,255>SAFEGUARD<COL1,POP>,
+then switch it with <COL1,PUSH,207,134,251,255>MANKEY<COL1,POP>. Make this
+POKéMON use <COL1,PUSH,146,195,255,255>THRASH<COL1,POP>. This will prevent
+<COL1,PUSH,207,134,251,255>MANKEY<COL1,POP> from becoming confused after it uses
+<COL1,PUSH,146,195,255,255>THRASH<COL1,POP>. This is an example of a combo
+featuring a move that remains in effect if
+the user switches out.
+
+<LINE,33>Combos represent the skill and wisdom
+of trainers. I hope you will try to create
+your own beautiful combos like the ones I
+demonstrated for you.
+
+<LINE,33>If you are willing to waste one turn to switch
+POKéMON in battle, it is best to bring out a
+POKéMON that is completely unaffected by
+the opponent's attack. That is the
+defense-first switching style which appears
+to be popular now. I believe I taught you this
+already?
+
+<LINE,33>However, it goes without saying that you will
+never win by just defending. You should
+consider #71offense-minded switching<COL1,POP><COL2,POP>.
+
+<LINE,33>Let me illustrate. Let's assume you have an
+ELECTRIC-type POKéMON out.
+
+Pika!
+
+And let's assume the foe uses a GROUND type.
+
+Cuuu!
+
+<LINE,33>Your ELECTRIC type is at an obvious dis-
+advantage. Your first instinct would probably
+be to switch it with a FLYING type that is
+unaffected by GROUND-type moves... Ahem!
+Let's stop and think about this.
+
+<LINE,33>While it is true that the FLYING type is
+unaffected by GROUND-type attacks, the
+type match-up of the FLYING type against
+the GROUND type is neutral. In other words,
+you won't be able to attack effectively.
+
+<LINE,33>If I were you, I would not hesitate to send
+out a GRASS-type POKéMON.
+
+Suuuuun!
+
+<LINE,33>GROUND-type moves can only inflict half
+their usual damage on GRASS-type POKéMON.
+On the other hand, GRASS-type attacks
+inflict double the usual damage on GROUND-
+type POKéMON. This is what I mean by
+#71offense-minded switching<COL1,POP><COL2,POP>. Wonderful!
+
+<LINE,33>However, do keep in mind that the opponent's
+attacks are only reduced in power, not made
+ineffective.
+
+<LINE,33>Do you choose to give priority to defense or
+take offense even at the expense of some
+damage? You should evaluate your current
+situation before choosing between them.
+
+<LINE,33>Hm? It's no good unless you have different
+kinds of POKéMON.
+
+<LINE,33>For example, <COL1,PUSH,207,134,251,255>SUNKERN<COL1,POP> learns <COL1,PUSH,146,195,255,255>GIGA DRAIN<COL1,POP> at
+Level 46. However, if it evolves into
+<COL1,PUSH,207,134,251,255>SUNFLORA<COL1,POP>...
+
+<LINE,33>Attacking the type match-up weaknesses of
+POKéMON is a basic strategy. However,
+depending on the situation, doing so isn't
+necessarily the best course of action. Allow
+me to explain.
+
+<LINE,33>For example, consider a battle between a
+<COL1,PUSH,207,134,251,255>TAUROS<COL1,POP> and a <COL1,PUSH,207,134,251,255>MANTINE<COL1,POP>.
+
+NORMAL
+
+WATER/FLYING
+
+<LINE,33>Let's assume <COL1,PUSH,207,134,251,255>TAUROS<COL1,POP> used a TM to learn the
+ELECTRIC-type move <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP>. You would
+probably consider yourself lucky. After all,
+<COL1,PUSH,207,134,251,255>MANTINE<COL1,POP>'s two types, WATER and FLYING,
+are both weak against ELECTRIC-type
+attacks. That means the ELECTRIC-type
+move will have its power quadrupled.
+
+<LINE,33>That certainly sounds wonderful. But hold on
+just one second. Don't be fooled by the
+situation's allure. <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP> is a special
+attack. That means the amount of damage is
+determined by the stats SPCL.ATK and
+SPCL.DEF.
+
+<LINE,33>Let's check these stats. <COL1,PUSH,207,134,251,255>TAUROS<COL1,POP>'s SPCL.ATK
+is rather low. On the other hand, consider
+<COL1,PUSH,207,134,251,255>MANTINE<COL1,POP>'s SPCL.DEF. It is very high. All of a
+sudden, the move loses its appeal.
+Furthermore, I don't think <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP> is a move
+that will hit very often.
+
+<LINE,33>In this case, rather than exploiting a type
+match-up weakness, it may be better to use a
+NORMAL-type move. The power of the
+NORMAL-type move will be multiplied by
+1.5 because of the type match. For example,
+moves like <COL1,PUSH,146,195,255,255>DOUBLE-EDGE<COL1,POP> and <COL1,PUSH,146,195,255,255>BODY SLAM<COL1,POP>
+may be more effective.
+
+<LINE,33>The type match-up and stats... Which kind of
+weakness should be exploited? Learn to read
+the situation thoroughly before committing
+yourself to the next move.
+
+<LINE,33>Today's topic is rather difficult, so listen
+carefully. Pardon? They're always hard? Oh,
+please don't be that way. Just think of it as
+tough love.
+
+<LINE,33>Today's topic is "Reading Your Rival." I'll
+teach you to predict your opponent's next
+move, then attack accordingly. 
+
+<COL1,PUSH,207,134,251,255>MEGANIUM<COL1,POP>'s case
+
+<LINE,33>A battle has gotten underway with the
+GRASS-type <COL1,PUSH,207,134,251,255>MEGANIUM<COL1,POP> facing off against the
+WATER-type <COL1,PUSH,207,134,251,255>AZUMARILL<COL1,POP>.
+
+<LINE,33>Naturally, people would want to
+use a GRASS-type move that is super-
+effective against WATER-type POKéMON. For
+instance, a move like <COL1,PUSH,146,195,255,255>RAZOR LEAF<COL1,POP> would be
+dandy.
+
+<LINE,33>But wait just a moment. Consider things from
+your opponent's perspective. If it were you,
+wouldn't you want to switch out? Not only
+that, wouldn't you think about sending out a
+FIRE-type POKéMON that is strong against
+the GRASS-type?
+
+<LINE,33>Against a FIRE-type POKéMON, a GRASS-type
+move's power is halved. It's rather vexing.
+What should you do about it?
+
+<LINE,33>I would use a NORMAL-type move that is
+equally effective against the WATER type and
+FIRE type. In other words, a move that would
+be just as effective whether the opponent
+switches out or not. For example, I would use
+a NORMAL-type move such as <COL1,PUSH,146,195,255,255>BODY SLAM<COL1,POP>.
+
+<LINE,33>Against most POKéMON types, a NORMAL-type
+move's damage multiplier is one. So if you want
+to be sure to inflict damage, a NORMAL-type
+move works quite well.
+
+<COL1,PUSH,207,134,251,255>FERALIGATR<COL1,POP>'s case
+
+<LINE,33>Let's look at another battle. Suppose you
+have sent out the WATER-type <COL1,PUSH,207,134,251,255>FERALIGATR<COL1,POP>.
+Your opponent has led with the FIRE-type
+<COL1,PUSH,207,134,251,255>RAPIDASH<COL1,POP>.
+
+<LINE,33>Again, let's try to guess what your opponent
+is thinking. It's likely that your opponent will
+switch out and put in an ELECTRIC-type
+POKéMON that is tough against your
+WATER-type POKéMON.
+
+<LINE,33>I would suggest using a GROUND-type move
+that is super-effective against both FIRE-
+type and ELECTRIC-type POKéMON. By doing
+so, it wouldn't matter if my opponent
+switched or not. For example, I would use a
+move like <COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>.
+
+<LINE,33>Do you see? A <COL1,PUSH,207,134,251,255>FERALIGATR<COL1,POP> with <COL1,PUSH,146,195,255,255>EARTHQUAKE<COL1,POP>.
+Outsmarting your foes begins with the moves
+you choose to teach to your POKéMON.
+
+<LINE,33>This is how trainers will try to anticipate
+each other's actions in high-level battles.
+Determine what POKéMON your opponent has
+chosen, then use moves in anticipation of
+what he or she may do in battle.
+
+<LINE,33>Ah, I seem to have run out of topics. You
+must stop relying on me for all the answers.
+To become a full-fledged POKéMON trainer in
+your own right, you must think and decide for
+yourself. Now...
+
+<LINE,33>It is up to you to do your best from now on!
+
+<LINE,33>That boosts the power of the ROCK-type
+move <COL1,PUSH,146,195,255,255>ROLLOUT<COL1,POP> by ten percent.
+
+<LINE,33>&
+
+<LINE,33>A GHOST-type move is a physical attack. Its
+power depends on its ATTACK stats.
+
+<LINE,33>Not only that, its SPCL.ATK stat is high.
+PSYCHIC-type moves should make your
+POKéMON a tough customer indeed.
+
+<COL1,PUSH,230,220,100,255>TRAINER CLASS<COL1,LOAD,255,255,255,255> LECTURES
+
+<COL1,PUSH,100,219,100,255>GYM LEADER CLASS<COL1,LOAD,255,255,255,255> LECTURES
+
+<COL1,PUSH,70,160,255,255>ELITE FOUR CLASS<COL1,LOAD,255,255,255,255> LECTURES
+
+<LINE,33>Here it comes... Here it
+comes... And there it
+goes! Ka-boom! The
+damage is multiplied
+#7124 times<COL1,POP><COL2,POP>!
+
+<COL1,PUSH,146,195,255,255>FUTURE SIGHT<COL1,POP>
+
+<COL1,PUSH,146,195,255,255>BONE RUSH<COL1,POP>!!
+
+<LINE,33>I suggest deliberately delaying evolution
+till your POKéMON learn some good moves.
+
+<LINE,33>If you switch out a POKéMON, then switch
+it in again, it will be cured of any status
+problem. Don't forget that.
+
+<LINE,33>At Level 31, it learns <COL1,PUSH,146,195,255,255>PETAL DANCE<COL1,POP>. If
+you want it to learn this move, it can't
+learn <COL1,PUSH,146,195,255,255>GIGA DRAIN<COL1,POP>.
+
+<LINE,33>These moves inflict damage, but they also
+return half the HP of that damage to
+the user. So in a way, they can be
+considered healing moves.
+
+<LINE,33>Rather than the special attack <COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP>,
+the physical attack <COL1,PUSH,146,195,255,255>HEADBUTT<COL1,POP> should be
+able to inflict more damage.
+
+<LINE,33>The attack's power is doubled! This kind
+of move combination is known as a combo,
+and it can be very useful in battle.
+
+<LINE,33>You can also create combos using moves
+like <COL1,PUSH,146,195,255,255>MEAN LOOK<COL1,POP>, <COL1,PUSH,146,195,255,255>WRAP<COL1,POP> and <COL1,PUSH,146,195,255,255>WHIRLPOOL<COL1,POP>.
+
+<LINE,33>For example, you'll be able to see a
+<COL1,PUSH,207,134,251,255>HOPPIP<COL1,POP> that knows <COL1,PUSH,146,195,255,255>PAY DAY<COL1,POP>.
+
+<LINE,33><COL1,PUSH,180,255,134,255>THICK CLUB<COL1,POP> doubles the physical attack
+power of <COL1,PUSH,207,134,251,255>CUBONE<COL1,POP> and <COL1,PUSH,207,134,251,255>MAROWAK<COL1,POP>.
+
+<LINE,33>If <COL1,PUSH,146,195,255,255>THUNDERBOLT<COL1,POP> hits the weak spot of
+the WATER- & FLYING-type <COL1,PUSH,207,134,251,255>GYARADOS<COL1,POP>...
+
+
+
+
+
+<LINE,33>When choosing three POKéMON for battle,
+do you know what to do?
+
+<LINE,33>Do you know what to do once the
+battle starts?
+
+<LINE,33>When this screen appears, choose a
+POKéMON by pressing the button shown
+beside it.
+
+<LINE,33>For example, to choose <COL1,PUSH,207,134,251,255>LICKITUNG<COL1,POP>,
+press the <COL1,PUSH,110,154,255,255>B Button<COL1,POP>. If you want to use
+<COL1,PUSH,207,134,251,255>FLAAFFY<COL1,POP>, press the <COL1,PUSH,110,154,255,255>A Button<COL1,POP>.
+
+<LINE,33>To check your choices, press the
+<COL1,PUSH,110,154,255,255>R Button<COL1,POP>. Their names will become yellow.
+
+<LINE,33>You can see details about your party
+POKéMON, such as their stats and moves.
+Hold down the <COL1,PUSH,110,154,255,255>R Button<COL1,POP>, then select the
+POKéMON you want to check.
+
+<LINE,33>If you want to pick different battle
+POKéMON, press the <COL1,PUSH,110,154,255,255>L Button<COL1,POP>. That will
+cancel all of your previous selections.
+
+<LINE,33>Once you have chosen your three battle
+POKéMON, you're ready for showtime!
+
+<LINE,33>Remember, POKéMON line up in the order
+they are chosen. That means the first
+POKéMON you choose will also be the first
+to battle. Think hard before you choose
+the order.
+
+<LINE,33>You'll choose your action on this screen.
+If you choose to battle by pressing
+the <COL1,PUSH,110,154,255,255>A Button<COL1,POP>...
+
+<LINE,33>This menu will appear. Press the <COL1,PUSH,110,154,255,255>L Button<COL1,POP>
+to return to the previous screen.
+Press the <COL1,PUSH,110,154,255,255>R Button<COL1,POP> to check your moves.
+
+<LINE,33>For a detailed description of a move,
+press the <COL1,PUSH,110,154,255,255>+ Control Pad<COL1,POP> in the same
+direction as the move's position.
+
+<LINE,33>When you have decided which move to use,
+press the appropriate <COL1,PUSH,110,154,255,255>C Button<COL1,POP>
+to use it.
+
+<LINE,33>Even after you choose, as long as your
+opponent hasn't chosen a move yet, you
+can press the <COL1,PUSH,110,154,255,255>L Button<COL1,POP> to cancel your
+selection.
+
+<LINE,33>You may also decide to switch POKéMON.
+This step is not much different than
+choosing a move.
+
+<LINE,33>Press the <COL1,PUSH,110,154,255,255>R Button<COL1,POP> to choose the
+POKéMON to be switched in. Press
+the <COL1,PUSH,110,154,255,255>+ Control  Pad<COL1,POP> to get detailed
+information on your POKéMON.
+
+<LINE,33>Press the appropriate <COL1,PUSH,110,154,255,255>C Button<COL1,POP> to
+select a POKéMON. Press the <COL1,PUSH,110,154,255,255>L Button<COL1,POP> to
+cancel the switch. As you can see, the
+controls are almost identical.
+
+<LINE,33>There is one exception: you can press
+<COL1,PUSH,110,154,255,255>START<COL1,POP> to quit a battle. If a battle looks
+hopeless, it might be best to accept
+your loss.
+
+During
+
+Notes on EGGs
+
+Lead-off POKéMON
+
+Ack...
+
+<LINE,33>This window appears
+when <COL1,PUSH,207,134,251,255>LICKITUNG<COL1,POP> is
+chosen while holding the
+<COL1,PUSH,110,154,255,255>R Button<COL1,POP>.
+
+<LINE,33>This will be shown when up is pressed on
+the <COL1,PUSH,110,154,255,255>+ Control Pad<COL1,POP>. It shows a description of
+the move <COL1,PUSH,146,195,255,255>STRENGTH<COL1,POP>.
+
+Start-of-the-turn screen
+
+<COL1,PUSH,110,154,255,255>R Button<COL1,POP>
+
+This window will appear when the <COL1,PUSH,110,154,255,255>R Button<COL1,POP> is pressed. 
+Check your POKéMON's moves and button assignments.
+
+<COL1,PUSH,110,150,255,255>+ Control Pad<COL1,POP>
+
+<LINE,33>There is a DAY CARE business on ROUTE 34. If
+you leave a male and a female POKéMON there,
+you might find an EGG when you return. Under
+what conditions will an EGG be made? Let me
+tell you.
+
+<LINE,33>An EGG may be found if the male and female
+POKéMON are somewhat similar in appearance.
+For example, the pair could be a <COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP> and
+a <COL1,PUSH,207,134,251,255>SANDSLASH<COL1,POP>, or an <COL1,PUSH,207,134,251,255>ELECTABUZZ<COL1,POP> and a
+<COL1,PUSH,207,134,251,255>MAGMAR<COL1,POP>.
+
+<LINE,33>POKéMON that do not look anything like each
+other, such as a <COL1,PUSH,207,134,251,255>BUTTERFREE<COL1,POP> and a
+<COL1,PUSH,207,134,251,255>GIRAFARIG<COL1,POP>, will show no interest in each
+other. A pair like that will not make an EGG.
+
+<LINE,33>A POKéMON pair that has a possibility of
+making an EGG is called an #71EGG group<COL1,POP><COL2,POP>. If a
+POKéMON pair is not of the same #71EGG group<COL1,POP><COL2,POP>,
+they will not make an EGG. You can study EGG
+groups at the LIBRARY.
+
+<LINE,33>By the way, a POKéMON that hatched from an
+EGG may have more moves by the time it
+reaches Level 5 than a regular POKéMON
+would. It may even have the same moves as its
+parents. What kinds of extra moves may be
+learned?
+
+<LINE,33>Number one, #71TM moves<COL1,POP><COL2,POP>. If the
+POKéMON in the EGG can learn a TM
+move and its male parent knows that
+same move, the baby will be born with
+that move.
+
+<LINE,33>Number two, #71moves learned by
+leveling up<COL1,POP><COL2,POP>. If the POKéMON in the
+EGG can learn a certain move by
+leveling up and both parents know the
+same move, the baby will be born with
+that move already learned.
+
+<LINE,33>If four or more moves can be inherited, moves
+the POKéMON would normally learn before
+Level 5 will be forgotten, starting with the
+one learned at the oldest.
+
+<LINE,33>Incidentally, a POKéMON that comes from an
+EGG will be hatched as a completely unevolved
+form of the female parent.
+
+<LINE,33>If, for example, the female POKéMON is a
+<COL1,PUSH,207,134,251,255>RATICATE<COL1,POP>, the EGG baby will be a <COL1,PUSH,207,134,251,255>RATTATA<COL1,POP>. All
+baby POKéMON will hatch at level 5. That will
+give you plenty of opportunities to raise
+them the way you want. Some POKéMON only
+hatch from EGGs. Wouldn't you like to see
+them?
+
+<LINE,33>As you know, if you leave a male and female
+POKéMON of the same EGG group at a
+DAY CARE, you might come back to find an EGG.
+Let me tell you a few additional things I know
+about EGGs.
+
+<LINE,33>If you're wondering why your POKéMON have
+not made an EGG, go out into the DAY CARE's
+yard to see how well they are getting along.
+
+<LINE,33>There is a possibility that you will find an
+EGG if your POKéMON:
+-Appears to care for (POKéMON)
+-Is friendly with (POKéMON)
+-It shows interest in (POKéMON)
+
+<LINE,33>An EGG will never be found if your POKéMON:
+-It has no interest in (POKéMON)
+-It's brimming with energy
+
+<LINE,33>My own experience tells me that a male and a
+female of the same kind of POKéMON tend to
+become friendly toward each other.
+
+<LINE,33>The paired POKéMON also tend to become
+friendly toward each other if they were
+caught by different trainers. Using these
+tips should help you find EGGS.
+
+<LINE,33>Now let me tell you about a big secret.
+
+<LINE,33>A POKéMON hatched from an EGG may know
+moves that it normally wouldn't learn by
+leveling up or by using a TM!
+
+<LINE,33>It appears that baby POKéMON inherit moves
+from their male parents. My, EGGS are so
+strange! These oddly inherited moves are
+known as #71EGG moves<COL1,POP><COL2,POP>.
+
+<LINE,33>An #71EGG move<COL1,POP><COL2,POP> is a move that a baby POKéMON
+has inherited from its male parent when it
+hatches. The #71EGG moves<COL1,POP><COL2,POP> that a baby
+POKéMON can learn depends on what kind of
+POKéMON it is. If the male parent knows the
+same kind of move, the baby POKéMON will
+already know the move when it hatches.
+
+<LINE,33>If you teach EGG moves properly, you could
+breed a <COL1,PUSH,207,134,251,255>HORSEA<COL1,POP> that knows <COL1,PUSH,146,195,255,255>OCTAZOOKA<COL1,POP>...
+
+<LINE,33>Does that surprise you? Why don't you go to
+the LIBRARY and check the EGG moves that
+various kinds of POKéMON can learn.
+
+<LINE,33>Like everything else, you should start off on
+the right foot in a POKéMON battle. If three
+POKéMON are to go into battle, you should
+be excited from the moment you send out your
+lead-off POKéMON. Wouldn't you agree?
+
+<LINE,33>Fine. Then what kind of POKéMON would be
+ideal as your leading battler?
+
+<LINE,33>Now, some of you may think that you should
+just send out your favorite POKéMON
+whenever you like. And you certainly can do
+that. But hold on just one second. Wouldn't
+you feel sad if your POKéMON were defeated
+right away because its weaknesses were
+exploited?
+
+<LINE,33>That's why I personally use a POKéMON
+with few weak aspects as my lead-off
+battler.
+
+<LINE,33>For example, I recommend a NORMAL-type or
+an ELECTRIC-type POKéMON because they
+have few type match-up weaknesses.
+
+<LINE,33>If a POKéMON has few type mismatches,
+it means that there is less chance that its
+weak points will be exploited. In turn, that
+also means you won't have to switch it out to
+get away from a type mismatch.
+
+<LINE,33>If you don't know what kind of POKéMON your
+opponent will send out first, you should
+consider my recommendation.
+
+ELECTRIC-type POKéMON : <COL1,PUSH,207,134,251,255>FLAAFFY<COL1,POP>
+
+Flaaf? Flaaf?
+
+<LINE,33>Also, from my own experience, it is convenient
+for your party to have at least one POKéMON
+that would be unaffected by a certain type
+of move, depending on the type match-up.
+
+<LINE,33>For example, a GROUND-type POKéMON that is
+unaffected by any ELECTRIC-type move or a
+FLYING-type POKéMON that can't be hit by a
+GROUND-type move. If a POKéMON can avoid
+damage entirely due to a type match-up, the
+battle is likely to be tipped in your favor.
+
+<LINE,33>Welcome to the GYM LEADER CLASS! Since you
+keep attending my classes, I guess you must
+like what I have to offer. I certainly am glad!
+Today I would like to talk about types. The
+lesson is a little long, so please do try to
+stay awake.
+
+CONTROLS
+
+Pre-battle controls
+
+In-battle controls
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+@@@@@@
+
+-
+
+Which CLASS are you in?
+
+#03
+
+<COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>Rules
+
+<COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>New Features
+
+<COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>Status problems
+
+<COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>Type match-ups
+
+<COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>Moves
+
+<COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>Trainer battles
+
+<LINE,33>A FIRE-type attack won't
+easily burn a FIRE-type POKéMON!
+
+<COL1,PUSH,146,195,255,255>HEAL BELL<COL1,POP>!
+
+
+
+Pre-battle
+
+#02
+
+-
+
+#03
+
+<LINE,33>Did you understand what I said? Well,
+lets test you with some questions.
+
+Yes
+
+No

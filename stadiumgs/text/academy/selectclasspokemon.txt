@@ -1,0 +1,35 @@
+ Please select three POKéMON using the indicated buttons.
+
+ Choose the order in which POKéMON are to appear.
+The order is determined by the buttons.
+
+Cancel
+
+Check
+
+Is this OK?
+
+Yes
+
+Re-select
+
+The combined levels
+exceed #03.
+
+All ready!
+
+<TEX,0>Button to return to the class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

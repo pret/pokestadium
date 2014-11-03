@@ -1,0 +1,84 @@
+<FACE,2,2>I'm going to challenge your POKéMON. It's obvious you're proud
+of them.
+
+<FACE,2,2>You don't think I'm up to this, do you? You're going to regret
+that.
+
+<FACE,2,2>I'm going to finish this quickly, then go for a swim!
+
+<FACE,2,2>How's this to start?
+
+<FACE,2,2>Maybe #26?
+
+<FACE,2,2>#26 might be it.
+
+<FACE,2,2>I think I'll go with #26.
+
+<FACE,2,2>#26 has to be it.
+
+<FACE,2,2>I'm switching out!
+
+<FACE,2,2>Something else!
+
+<FACE,2,2>That one's done!
+
+<FACE,2,2>I'm pulling this one back!
+
+<FACE,2,0>What? What was that all about?
+
+<FACE,2,1>Oh, that was so refreshing!
+
+<FACE,2,1>A direct hit on the weak spot. Ahhh... That
+felt wonderful.
+
+<FACE,2,0>Oh, no. Wait! I don't like you hitting the weak
+spot.
+
+<FACE,2,0>What? What is that?
+
+<FACE,2,2>That'll do.
+
+<FACE,2,0>Is that how you do things?
+
+<FACE,2,1>That's fantastic!
+
+<FACE,2,0>Waaah! You meanie!
+
+<FACE,2,2><MEROMERO,4>Ha, ha, ha... Stay that way for a while.
+
+<FACE,2,2>There are many POKéMON in the sea.
+
+<FACE,2,2>I want to see the seas of foreign countries.
+
+<FACE,2,2>A sandy beach at night is wonderful.
+
+<FACE,2,1>See? Aren't my POKéMON tough?
+
+<FACE,2,1>It doesn't matter how you battle--a win is a win.
+
+<FACE,2,1>Well, I'm going for a swim! Thanks for playing!
+
+<FACE,2,0>It doesn't matter. No big deal. I still love these babies.
+
+<FACE,2,2>You're really wild. I'm surprised!
+
+<FACE,2,2>If I had known this would happen, I would have gone for a swim
+instead.
+
+<FACE,2,2>This turned out strangely.
+
+<FACE,2,2>I see. So this is the end?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,2,0>

@@ -1,0 +1,69 @@
+Select Mode
+
+LIST
+
+POKéMON
+
+BOXES
+
+ITEM
+
+MAIL
+
+See a list of all owned POKéMON. Check levels
+and use TMs and HMs.
+
+Re-order POKéMON. Move POKéMON to N64 Game
+Pak. Return POKéMON to Game Boy Game Pak.
+
+Re-order BOXES. Move boxed POKéMON to N64
+Game Pak. Return BOXES to Game Boy Game Pak.
+
+Re-order ITEMS on hand. Move ITEMS to
+N64 Game Pak. Return ITEMS to Game Boy
+Game Pak.
+
+Transfer MAIL between Game Boy and N64 Game
+Paks. Accept MAIL from POKéMON. Write MAIL
+and have POKéMON hold it.
+
+PP/
+
+POWER/
+
+ACCURACY/
+
+---
+
+A POKéMON holding mail can't be left in the
+Game Boy BOX.
+
+A POKéMON holding mail can't be left in this
+Game Pak.
+
+The N64 Game Pak BOX has room for up to
+30 POKéMON holding mail.30 POKéMON are already
+in the BOX.
+
+The POKéMON can't be transferred between
+<TEX,0> and an N64 BOX.
+This will be possible once the POKéDEX shows 
+that 150 POKéMON have been CAUGHT.
+
+The N64 Game Pak BOX has room for up to
+30 POKéMON holding mail. There is room for
+#04 more.
+
+#23 is holding #24.
+
+X
+
+Items Held
+
+PACK
+
+PC
+
+METAL CASE
+
+COLOR CASE

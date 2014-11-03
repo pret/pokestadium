@@ -1,0 +1,80 @@
+<FACE,10,2>I will be your last opponent! Let's do it!
+
+<FACE,10,2>You seem quite skilled. I'm looking forward to this.
+
+<FACE,10,2>I hate to say this, but I can't afford to lose to you.
+
+<FACE,10,2>Go, #26!
+
+<FACE,10,2>#26, get out there!
+
+<FACE,10,2>I'm counting on you, #26!
+
+<FACE,10,2>#26, it's you!
+
+<FACE,10,2>#26, what a chance!
+
+<FACE,10,2>Come back, #26!
+
+<FACE,10,2>Enough, #26!
+
+<FACE,10,1>Way to work, #26!
+
+<FACE,10,1>I tip my hat to you, #26!
+
+<FACE,10,0>Whoa! That was powerful!
+
+<FACE,10,1>Whew, that was electrifying!
+
+<FACE,10,1>Yeah! Popped it where it hurts the most!
+That's the idea!
+
+<FACE,10,0>Yikes! Took it where it hurts! 
+
+<FACE,10,0>Whoa, no!
+
+<FACE,10,1>Looking good.
+
+<FACE,10,0>Uh-oh... Hang tough!
+
+<FACE,10,1>And there we have it. Thanks so much!
+
+<FACE,10,0>Ack... My #26...
+
+<FACE,10,2>A balanced team is my highest priority.
+
+<FACE,10,2>You have to be prepared for any situation...
+
+<FACE,10,2>Do you consider type advantages in battle?
+
+<FACE,10,2>You do have what it takes to get this far.
+
+<FACE,10,1>Well, I think you did quite fine yourself.
+
+<FACE,10,1>That was great for practice. Bye now.
+
+<FACE,10,1>You came this close. There's no need to be disappointed.
+
+<FACE,10,0>Arrrgh... Defeated!
+
+<FACE,10,0>That's disappointing after all the time I spent training.
+
+<FACE,10,1>Congratulations! You've conquered the PRIME CUP!
+
+<FACE,10,2>You wouldn't be satisfied with a tie?
+
+<FACE,10,2>You came all this way just to quit?
+
+MEWSTOR
+
+URSASTOR
+
+MIESTOR
+
+UMBSTOR
+
+MUKSTOR
+
+TYRASTOR
+
+<FACE,10,0>

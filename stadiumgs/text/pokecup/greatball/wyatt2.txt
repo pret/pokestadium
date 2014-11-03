@@ -1,0 +1,82 @@
+<FACE,57,2>You're weird. I look pretty tough, don't I?
+
+<FACE,57,2>Are you sure you want to battle? I'm number one at my school.
+
+<FACE,57,2>There are no more opponents in my neighborhood.
+
+<FACE,57,2>Ready?
+
+<FACE,57,2>It's #26!
+
+<FACE,57,2>Ha, ha... Here's #26!
+
+<FACE,57,2>#26 is the one!
+
+<FACE,57,2>#26, here and now!
+
+<FACE,57,2>Get back, #26!
+
+<FACE,57,2>#26, get back here!
+
+<FACE,57,1>Way to go, #26!
+
+<FACE,57,2>That's good! Come back!
+
+<FACE,57,0>Aaack! No way!
+
+<FACE,57,1>Yeah! That's good!
+
+<FACE,57,1>Pow! Socked the weak spot! Good going,
+#26!
+
+<FACE,57,0>Oh! You goof! Don't get hit there!
+
+<FACE,57,2>Ohh... That's not good...
+
+<FACE,57,1>Yeah! Exactly as planned!
+
+<FACE,57,0>Shucks!
+
+<FACE,57,1>I did it! I won!
+
+<FACE,57,0>No way!
+
+<FACE,57,1><WAZA,184,4>How would you like a SCARY FACE?
+
+<FACE,57,1>You'd be better off if you had lots of
+POKéMON.
+
+<FACE,57,1>You can catch lots of POKéMON if you go into
+tall grass.
+
+<FACE,57,1><WAZA,144,1>I'll show you a really neat move.
+
+<FACE,57,1>Ha, ha, ha--yeah! I sure am tough, ain't I?
+
+<FACE,57,1>Yeah. You're not too bad yourself.
+
+<FACE,57,2>What? Is that all? I want to battle someone tougher.
+
+<FACE,57,0>Rats! I'm going to catch some more POKéMON.
+
+<FACE,57,0>Huh? I lost? You're kidding, right?
+
+<FACE,57,0>Beating me doesn't make you great!
+
+<FACE,57,2>That's strange. A draw?
+
+<FACE,57,2>Huh, you're surrendering? That stinks!
+
+GRANBINY
+
+ARIADINY
+
+GLERINY
+
+DITINY
+
+FEAROINY
+
+RHYHINY
+
+<FACE,57,0>

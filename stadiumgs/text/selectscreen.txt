@@ -1,0 +1,175 @@
+POKé BALL
+
+GREAT BALL
+
+ULTRA BALL
+
+MASTER BALL
+
+BATTLE 1
+
+BATTLE 2
+
+BATTLE 3
+
+BATTLE 4
+
+BATTLE 5
+
+BATTLE 6
+
+SEMIFINAL
+
+FINAL BATTLE
+
+PEWTER GYM
+
+CERULEAN GYM
+
+VERMILION GYM
+
+CELADON GYM
+
+FUCHSIA GYM
+
+SAFFRON GYM
+
+CINNABAR GYM
+
+VIRIDIAN GYM
+
+ELITE FOUR
+
+RIVAL
+
+Game Pak
+
+Check
+
+None
+
+<LINE,20>Saved file
+not found.
+
+<LINE,20>Please save
+at a POKéMON
+CENTER.
+
+<LINE,20>This Game Pak
+can't be used.@
+
+<LINE,26><COL1,LOAD,255,255,0,255><DIST,1>Turn the N64 Control Deck OFF before
+attaching or removing a GB Game Pak,
+N64 Transfer Pak<TEX,0> or a Controller.
+
+OK
+
+Suspended battle data will be
+deleted. Is this OK?
+
+ 
+
+Yes
+
+No
+
+Suspended battle data exists.
+
+CONTINUE?
+
+Yes
+
+No
+
+Delete suspended battle.
+
+If you choose CONTINUE, your suspended
+battle data will be deleted.
+
+Continue = #01
+
+
+
+
+
+The suspended battle data will be
+deleted if CONTINUE is chosen.
+
+The GB Game Pak is not set.
+
+This Game Pak can't be
+used.
+
+You don't have six POKéMON
+in your party.
+
+The Controller is not
+connected.
+
+<LINE,26><DIST,1>Find the STADIUM, CLASSes,
+the LAB and Mini-Games here.
+
+<LINE,26><DIST,1>This is a 2-player arena.
+
+<LINE,26><DIST,1>Change settings,
+clear data, etc.
+
+<LINE,26><DIST,1>This is an arena for when you
+want to BATTLE NOW.
+
+Please Select
+
+STADIUM
+
+Switch
+
+POKéMON STADIUM
+
+BATTLE
+NOW!
+
+EVENT
+BATTLE
+
+OPTIONS
+
+<DIST,1><DIST,1>1P Battle
+
+<DIST,1><DIST,1>2P Battle
+
+Game Pak Check
+
+#21
+
+ID #22
+
+???
+
+*****
+
+<LINE,20>Warp to the
+present time.
+
+MYSTERY GIFT
+
+STADIUM ROUND 1
+
+STADIUM ROUND 2
+
+MOBILE STADIUM
+
+<LINE,26><DIST,1>Get a MYSTERY GIFT from the girl
+at GOLDENROD DEPT. STORE
+
+<LINE,26><DIST,1>Load the Crystal version
+data and play here.
+
+<DIST,1>Who wants to battle?
+
+<DIST,1>Please select COM's skill level.
+
+<DIST,1>Easy
+
+<DIST,1>Normal
+
+<DIST,1>Hard

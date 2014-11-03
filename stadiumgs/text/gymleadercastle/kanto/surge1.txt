@@ -1,0 +1,81 @@
+<FACE,35,2>Ten-hut! I'm SURGE! So you want to battle?
+
+<FACE,35,2>Electric POKéMON are the best! Do you still want to try me?
+
+<FACE,35,2>Okay! So you want to be electrified?
+
+<FACE,35,2>Go, #26!
+
+<FACE,35,2>Change over to #26!
+
+<FACE,35,2>#26, take charge!
+
+<FACE,35,1>Fry 'em, #26!
+
+<FACE,35,1>This one's in the bag!
+
+<FACE,35,2>#26, drop back!
+
+<FACE,35,2>At ease, #26!
+
+<FACE,35,2>#26, time to go home!
+
+<FACE,35,2>#26, draw back!
+
+<FACE,35,0>Oh! That's no good.
+
+<FACE,35,1>Great!
+
+<FACE,35,1>Pinpoint strike on the weak spot! Wonderful!
+
+<FACE,35,0>No! That's an emphatic, "No!" Not the weak
+spot!
+
+<FACE,35,0>That could be heavy.
+
+<FACE,35,1>Fine! Fine!
+
+<FACE,35,0>No! No!
+
+<FACE,35,1>Boo-hah! Excellent!
+
+<FACE,35,0>Oh, no!
+
+<FACE,35,2>Is there a slang word for "electric" where
+you're from?
+
+<FACE,35,2>Electrifying POKéMON are tough!
+
+<FACE,35,1><MAHI,4>Ha! That one shorted out!
+
+<FACE,35,2>Do you enjoy battling?
+
+<FACE,35,1>Thank you for a good battle!
+
+<FACE,35,1>Hey, wasn't that electrifying?
+
+<FACE,35,1>Nice one! My POKéMON have become even mightier!
+
+<FACE,35,0>Okay! I'll have to go back to camp and brush up on my training.
+
+<FACE,35,2>I don't believe this! I've been defeated?
+
+<FACE,35,2>This must be a bad dream.
+
+<FACE,35,2>A draw? No! Come on. Battle me again!
+
+<FACE,35,2>Surrender? I don't know the meaning of the word!
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,35,0>

@@ -1,0 +1,80 @@
+<FACE,17,2>POKéMON research is very extensive.
+
+<FACE,17,2>I began a new research project. Let me show you.
+
+<FACE,17,2>I haven't battled in a while. I wonder how I will fare.
+
+<FACE,17,2>#26, it is!
+
+<FACE,17,2>It's my #26!
+
+<FACE,17,2>It's this one in this situation!
+
+<FACE,17,2>I'll go with #26.
+
+<FACE,17,2>#26! Go get 'em!
+
+<FACE,17,2>I'll have to switch out...
+
+<FACE,17,2>I'm changing POKéMON.
+
+<FACE,17,2>Change!
+
+<FACE,17,2>Good, #26. Come back.
+
+<FACE,17,0>What!?!
+
+<FACE,17,1>Yes!
+
+<FACE,17,1>Hit the weak spot! Outstanding!
+
+<FACE,17,0>Oh, no! It took that on its weak spot!
+
+<FACE,17,0>Hmm... How vexing!
+
+<FACE,17,1>Good. That's good.
+
+<FACE,17,0>Rats...
+
+<FACE,17,1>Yeah! Eureka!
+
+<FACE,17,0>Ooh-la-la...
+
+<FACE,17,1><KONRAN,2>Uh-oh, it's confused.
+
+<FACE,17,2>Now is the time to unleash everything you've
+learned.
+
+<FACE,17,2><WAZA,109,2>Watch this...
+
+<FACE,17,2>This is much more demanding than research.
+
+<FACE,17,1>Yeah, sorry about that. I've got to win.
+
+<FACE,17,1>Boy, am I glad! Now I can go home proudly.
+
+<FACE,17,1>I know, you tried your best.
+
+<FACE,17,0>This, too, is a possible outcome. I have to accept this.
+
+<FACE,17,0>I've had a streak of bad luck.
+
+<FACE,17,0>I guess this is what they call a "loss"...
+
+<FACE,17,2>I thought this might happen.
+
+<FACE,17,2>Okay, good-bye.
+
+MIELAB
+
+BREONLAB
+
+MISDRELAB
+
+STANTLAB
+
+CROBLAB
+
+TRODLAB
+
+<FACE,17,0>

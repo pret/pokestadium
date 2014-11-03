@@ -1,0 +1,73 @@
+Welcome to Pokémon TRADE SERVICE!
+
+Game Paks for Trading Pokémon
+
+Choose the Game Paks for trading.
+
+Are these OK?
+
+Yes
+
+No
+
+This Game Pak cannot be used.
+
+Save file not found.
+
+This Game Pak wasn't saved at a
+POKéMON CENTER.
+
+POKéDEX not found.
+
+PARTY
+
+GB BOX #01
+
+TYPE
+
+ATTACK
+
+DEFENSE
+
+SPEED
+
+SPECIAL
+
+Trade this Pokémon?
+
+Yes
+
+No
+
+NAME
+
+OT
+
+Trade?
+
+Yes
+
+No
+
+#33 evolved into #34.
+
+Save and quit
+
+Save and continue
+
+Quit without saving
+
+The trade was successful.
+
+Saving...
+
+Saving...
+
+Save failed on #01P's Game Pak.
+
+The GB Game Pak or the data has been
+changed.
+
+Leaving your N64 turned ON, detach
+the GB Game Pak, clean the connector
+section and re-attach it.

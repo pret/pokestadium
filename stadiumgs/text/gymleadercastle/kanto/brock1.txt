@@ -1,0 +1,83 @@
+<FACE,56,2>So you finally made it this far. I'm BROCK. Bring it on!
+
+<FACE,56,2>Have you ever seen the durability of rock POKéMON? Here goes!
+
+<FACE,56,2>When it comes to rock POKéMON, I'm the best! Come on!
+
+<FACE,56,2>Here! #26 is leading off!
+
+<FACE,56,2>#26 is next!
+
+<FACE,56,2>#26, go for it!
+
+<FACE,56,2>#26, it's your call!
+
+<FACE,56,2>Here's your chance, #26!
+
+<FACE,56,2>It's futile! Come back!
+
+<FACE,56,2>Good! Come back, #26!
+
+<FACE,56,1>That's good, #26!
+
+<FACE,56,1>Well done! #26, come back!
+
+<FACE,56,0>Aack! That hurts!
+
+<FACE,56,1>There! Fantastic!
+
+<FACE,56,1>Good job, #26! You rocked its weak
+spot!
+
+<FACE,56,0>Argh! Bad news! That landed on the weak
+spot!
+
+<FACE,56,0>Blew it!
+
+<FACE,56,1>Yes, #26!
+
+<FACE,56,0>Arrrgh...
+
+<FACE,56,1>Looking good.
+
+<FACE,56,0>#26! We're done!
+
+<FACE,56,2>What do you think of rock POKéMON?
+
+<FACE,56,2>Wouldn't you agree that defense is
+essential?
+
+<FACE,56,1>Your POKéMON are good, too.
+
+<FACE,56,1>It's been a while since I had a battle like this.
+
+<FACE,56,2>Defense is crucial, after all.
+
+<FACE,56,1>Yeah, that was quite fun.
+
+<FACE,56,1>You're tough, too. And you've got the potential to get even
+better.
+
+<FACE,56,2>How could anyone break through my rock-hard defense...
+
+<FACE,56,2>I was done in... I didn't know about that style of battling...
+
+<FACE,56,2>The world is huge! I'm glad to have met you.
+
+<FACE,56,2>A draw? How is that possible?
+
+<FACE,56,2>It's not like you to run.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,56,0>

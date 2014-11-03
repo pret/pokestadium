@@ -1,0 +1,180 @@
+GALLERY
+
+ALBUM
+
+FILM
+
+Select a picture
+
+Select a Pokémon@
+
+Snap photo!
+
+Move photo
+
+Pick photo
+
+Sticker(s)
+
+Print
+
+Quit
+
+Take a photo of your favorite Pokémon and 
+create some Pokémon stickers!
+
+You can organize, swap or delete the photos 
+you have taken.
+
+Choose photos from the ALBUM to make
+stickers.
+
+You can rearrange the photos for the 
+sticker sheet.
+
+Print the photos in the GALLERY to make
+stickers. You must choose 4 photos.
+
+This will exit the GALLERY.
+
+You must have a photo in the 
+ALBUM.
+
+You must have a photo in the 
+ALBUM.
+
+You must have a photo in the 
+GALLERY.
+
+You must have 4 photos in the GALLERY.
+
+This option is only available at a Pokémon
+Snap Station TM.
+
+Press the A Button to place the photo(s).
+
+Is this OK?
+A Button: Yes     B Button: No
+
+
+
+You can place your photos in any order 
+you wish.
+
+Press the A Button to select or place the
+photo(s).
+
+Print stickers and save game?
+A Button: Yes     B Button: No
+
+
+
+If you like these photos, please make sure a
+Print Credit exists, then press the A Button 
+to print.
+
+Mark the photo(s) you would like to
+keep in the ALBUM. Press the A
+Button to place or remove the mark.
+
+
+
+#02 left
+
+The ALBUM is full. Delete a photo
+from the ALBUM to allow space for 
+another photo.
+
+This will open the ALBUM. If you are
+unable to place a mark, remove a
+photo from the ALBUM to make room.
+
+This will enter the GALLERY.
+The marked photo(s) will be placed
+in the ALBUM.
+
+Photo(s) without a mark will 
+be deleted. Is this OK?
+A Button: YES     B Button: NO
+
+You can place your photos in any
+order you wish. Press the A Button
+to select or place a photo.
+
+The selected photo will be deleted.
+Press the A Button to confirm.
+
+Return to the GALLERY.
+
+Return to FILM.
+
+Press the A Button to select the 
+photo you wish to make into a sticker.
+
+Photo(s) you have taken are here.
+
+Go to the FILM screen
+
+Go to the GALLERY
+
+Cancel
+
+The content has been changed.
+
+Save and quit
+
+Quit without saving
+
+Cancel
+
+Select a Pokémon
+
+Rental Pokémon only
+
+How to snap
+
+Choose from where?
+
+The unmarked photo(s) will be deleted.
+
+Go to
+Gallery
+
+Go to
+Film
+
+Go to
+Album
+
+PAGE
+
+Trash Can
+
+Enlarge
+
+4x4 or 16x1
+
+This will change the layout of the stickers.
+4 Pokémon (4 stickers per Pokémon) or
+16 Pokémon (1 sticker per Pokémon).
+
+Print the photos in the GALLERY to make
+stickers. You must choose 16 photos.
+
+You must have 16 photos in the GALLERY.
+
+Saving
+
+Pokémon in your party
+
+Pokémon in the GB BOX
+
+Bonus
+
+Print "Bonus Stickers"
+and save game?
+A Button: Yes     B Button: No
+
+Congratulations!
+You've cleared all stages! Take these
+Bonus Stickers as your special reward!

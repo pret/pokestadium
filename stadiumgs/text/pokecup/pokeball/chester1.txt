@@ -1,0 +1,81 @@
+<FACE,62,0>She'll be comin' round the mountain... Huh? Battle?
+
+<FACE,62,0>The mountains are the greatest! It's inspiring to see a sunrise
+from the summit!
+
+<FACE,62,0>When I'm up in the mountains, the annoying things in life become
+insignificant.
+
+<FACE,62,0>How's that?
+
+<FACE,62,0>There. Go!
+
+<FACE,62,0>There!
+
+<FACE,62,0>Yes, sir!
+
+<FACE,62,0>Hoo hah!
+
+<FACE,62,0>Wah, ha, ha!
+
+<FACE,62,0>Gah, ha, ha!
+
+<FACE,62,0>Wah, ha, ha!
+
+<FACE,62,0>Dah, ha, ha!
+
+<FACE,62,0>Wah, ha, ha! No problem. No problem at all!
+
+<FACE,62,0>Yahoo! Gah, ha, ha!
+
+<FACE,62,0>Weak spot! Yahoo! Wah, ha, ha!
+
+<FACE,62,0>That's a weak spot? Wah, ha, ha! No big deal!
+
+<FACE,62,0>Gah, ha, ha! Fine, fine!
+
+<FACE,62,0>Yahoo! Wah, ha, ha!
+
+<FACE,62,0>No worries. No worries at all!
+
+<FACE,62,0>Great, great!
+
+<FACE,62,0>You got me!
+
+<FACE,62,0><WAZA,205,4>Here goes! Rock 'n' roll over 'em!
+
+<FACE,62,0><WAZA,69,2>Mountains? It can flip the world!
+
+<FACE,62,0>HIKERs are downright solid citizens!
+
+<FACE,62,0>We HIKERs are well mannered!
+
+<FACE,62,0>Gah, ha, ha! Come up and see me again!
+
+<FACE,62,0>Wah, ha, ha! I was going to let you win!
+
+<FACE,62,0>Wah, ha, ha! I don't care about winning or losing!
+
+<FACE,62,0>Gah, ha, ha! It's no big deal! ...On second thought, rats!
+
+<FACE,62,0>Wah, ha, ha! I lost on purpose!
+
+<FACE,62,0>Wah, ha, ha! I don't care about winning or losing!
+
+<FACE,62,0>Wah, ha, ha! That's the way it goes!
+
+<FACE,62,0>Okay then! I'll be seeing you!
+
+HICHOP
+
+HINIX
+
+HIGRAVEL
+
+HIWOODO
+
+HIHORN
+
+HIPHAN
+
+<FACE,62,0>

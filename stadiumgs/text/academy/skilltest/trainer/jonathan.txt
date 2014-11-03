@@ -1,0 +1,81 @@
+<FACE,57,2>Bang, bang, bang! Try a blast of <COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP>!
+
+<FACE,57,2>Let's see you dodge this one!
+
+<FACE,57,2>Can you dodge my <COL1,PUSH,146,195,255,255>SKULL BASH<COL1,POP>?
+
+<FACE,57,2>Bang, bang, bang!
+
+<FACE,57,2>It's #26!
+
+<FACE,57,2>Ha, ha... Here's #26!
+
+<FACE,57,2>#26 is the one!
+
+<FACE,57,2>#26, here and now!
+
+<FACE,57,2>Get back, #26!
+
+<FACE,57,2>#26, get back here!
+
+<FACE,57,1>Way to go, #26!
+
+<FACE,57,2>That's good! Come back!
+
+<FACE,57,0>Aaack! No way!
+
+<FACE,57,1>There! How do you like that power?
+
+<FACE,57,1>There's the weak spot! It's yours,
+#26!
+
+<FACE,57,0>Oh! You goof! Don't get hit there!
+
+<FACE,57,2>Ohh... That's not good...
+
+<FACE,57,1>Yeah! Exactly as planned!
+
+<FACE,57,0>Shucks!
+
+<FACE,57,1>I did it! I won!
+
+<FACE,57,0>...You're terrible!
+
+<FACE,57,2><WAZA,76,4>Bang, bang, bang!
+
+<FACE,57,2><WAZA,130,4>Charge!
+
+<FACE,57,1><WAZA,231,4>#26! IRON TAIL!
+
+<FACE,57,1><WAZA,144,1>I'll show you a really neat move.
+
+<FACE,57,1>Ha, ha, ha! It took the shot without blinking! Isn't its power
+awesome?
+
+<FACE,57,1>Nothing can dodge this move! It's a knockout every time!
+
+<FACE,57,1>Ha, ha, ha! I told you you couldn't dodge it!
+
+<FACE,57,0>Huh? I lost? You're kidding, right?
+
+<FACE,57,2>Those were my favorite moves...
+
+<FACE,57,2>I relied too heavily on <COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP> and <COL1,PUSH,146,195,255,255>SKULL BASH<COL1,POP>...
+
+<FACE,57,2>That's strange. A draw?
+
+<FACE,57,0>Huh? You're surrendering already? That was simple!
+
+
+
+
+
+
+
+
+
+
+
+
+
+

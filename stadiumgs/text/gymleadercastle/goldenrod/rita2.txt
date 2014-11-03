@@ -1,0 +1,80 @@
+<FACE,41,1>Well, all right then... I'll play with you for a little while.
+
+<FACE,41,1>Oh, aren't you cute! A battle? Certainly.
+
+<FACE,41,1>Hi, you cute little trainer. How about a battle?
+
+<FACE,41,1>Are you ready? Here we go!
+
+<FACE,41,1>Let me see... #26!
+
+<FACE,41,1>How about #26?
+
+<FACE,41,1>Maybe I'll go with #26.
+
+<FACE,41,1>You may be cute, but I still won't go easy
+on you.
+
+<FACE,41,1>That's no good.
+
+<FACE,41,1>Come back now.
+
+<FACE,41,1>Good job, dear.
+
+<FACE,41,1>You're such a good baby!
+
+<FACE,41,0>Hey, wait!
+
+<FACE,41,1>I'm sorry, honey.
+
+<FACE,41,1>That was a critical hit. Please forgive me.
+
+<FACE,41,0>No! Was that a critical hit?
+
+<FACE,41,0>That wasn't nice.
+
+<FACE,41,1>You'll have to forgive me.
+
+<FACE,41,0>That was bad.
+
+<FACE,41,1>I feel sorry for you, but...
+
+<FACE,41,0>Is this for real?
+
+<FACE,41,1><WAZA,213,4>How about this?
+
+<FACE,41,1><MEROMERO,2>Oh, my...
+
+<FACE,41,1><MAHI,2>Oh, sorry!
+
+<FACE,41,1><WAZA,217,4>Here's a nice PRESENT for you.
+
+<FACE,41,1>Oh! Oh, my! I won! Sorry, sweetie.
+
+<FACE,41,1>I hope you get better.
+
+<FACE,41,1>You're trying to become the CHAMPION, aren't you? Go for it!
+
+<FACE,41,1>That's good. That's the way to do it.
+
+<FACE,41,1>You're strong. I like that.
+
+<FACE,41,1>I'll play with you again.
+
+<FACE,41,1>Oh, wow. A friendly draw.
+
+<FACE,41,1>What's wrong? You're going home already?
+
+PIKADY
+
+TOGEDY
+
+ABLEDY
+
+TUFFDY
+
+AZUMDY
+
+DELIDY
+
+<FACE,41,0>

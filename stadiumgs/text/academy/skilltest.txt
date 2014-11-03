@@ -1,0 +1,736 @@
+<LINE,24>I just love GRASS-type POKéMON. Betcha don't know what
+types of POKéMON are tough against the GRASS type!
+
+<LINE,24>Wow, you really showed me the weak points of GRASS-type
+POKéMON.
+
+<LINE,24>Your win earlier was just a fluke. I'll use my GRASS-type
+POKéMON again!
+
+<LINE,24>Wow, you really know how to exploit the weaknesses of
+GRASS-type POKéMON...
+
+<LINE,24>A decisive victory without a single
+KO'd POKéMON! How beautiful!
+
+<LINE,24>You picked your POKéMON
+perfectly! That was a beautiful
+victory!
+
+<LINE,24>Shucks! I lost this time, but just you wait!
+I won't let it happen again!
+
+<LINE,24>Hmm... Not too beautiful. It seems
+that not all of your POKéMON are
+tough against the GRASS type. 
+
+<LINE,24>Don't you know the weak points of GRASS-type POKéMON?
+Maybe you should look up type match-ups at the LIBRARY.
+
+<LINE,24>What's the matter?
+You chose POKéMON that are
+strong against the GRASS type,
+right?
+
+<LINE,24>I'm studying the weaknesses of FIRE-type POKéMON.
+Would you help me, please?
+
+<LINE,24>Thank you for showing me some moves that are tough
+against FIRE POKéMON... (...fizzle...)
+
+<LINE,24>Uh-oh. The test we performed earlier was a failure. Try
+another move that's tough against FIRE-type POKéMON?
+
+<LINE,24>I finally know the weak points of FIRE POKéMON... But now
+I'm all burnt out from studying... (fizzle...)
+
+<LINE,24>Magnificent! A perfect victory!
+You are quite good. Beautiful!
+
+<LINE,24>Your POKéMON choices were just
+right. You came so close to a
+perfect victory.
+
+<LINE,24>It was sheer coincidence that you beat me. Logic proves
+my point!
+
+<LINE,24>Hmm... Not too beautiful. I believe
+you could choose better POKéMON
+combinations.
+
+<LINE,24>Hee, hee, hee! Don't you even know type match-ups? Well,
+if you don't know, I'm not about to tell you!
+
+<LINE,24>Oh? Do you know what types of
+moves are super-effective against
+FIRE-type POKéMON?
+
+<LINE,24>There are many different types of POKéMON in my party.
+There's no way you can pick on a weak point!
+
+<LINE,24>You picked on our weak points perfectly! I'm surprised
+you know so much about type match-ups.
+
+<LINE,24>You have to be smart and go after my POKéMON's weak
+spots. Otherwise, you're never gonna hurt my team!
+
+<LINE,24>This isn't good... I never imagined there could be someone
+who would know so much about type match-ups...
+
+<LINE,24>Bravo! You did an excellent job of
+exploiting your opponent's
+weaknesses. That certainly was a
+perfect victory.
+
+<LINE,24>Your POKéMON choices were right
+on the mark! You zeroed in on your
+opponent's weak points perfectly!
+
+<LINE,24>This... This must be a mistake! I'm not going to lose like
+that next time!
+
+<LINE,24>Hmm... Not too beautiful. Perhaps
+you should think a little harder
+when choosing your POKéMON.
+
+<LINE,24>Ha, ha, ha! That was pretty sad! Go check type match-ups
+at the LIBRARY.
+
+<LINE,24>You should switch your POKéMON
+during battle to gain type
+match-up advantages over your
+opponent.
+
+<LINE,24>Listen here! <COL1,PUSH,146,195,255,255>ACID ARMOR<COL1,POP> and <COL1,PUSH,146,195,255,255>BARRIER<COL1,POP> add up to the
+perfect defense! Let's see you try to break through it!
+
+<LINE,24>...You won! I should have remembered about set damage
+moves.
+
+<LINE,24>I fooled around last time. But now my <COL1,PUSH,146,195,255,255>ACID ARMOR<COL1,POP> and
+<COL1,PUSH,146,195,255,255>BARRIER<COL1,POP> plan is ready for Round 2!
+
+<LINE,24>It doesn't matter how high you raise your defenses if
+your opponent uses set damage moves... (...glub...)
+
+<LINE,24>A perfect victory earned by seeing
+through the opponent's strategy.
+Magnificent! And beautiful!
+
+<LINE,24>Your POKéMON choices were
+impeccable. You were smart to use
+set damage moves!
+
+<LINE,24>I got careless and lost. The way you won just isn't fair!
+
+<LINE,24>Hmm... Not too pretty. Perhaps
+there are better ways to choose
+POKéMON. Wouldn't you agree?
+
+<LINE,24>You're not helping me train... I'll try these moves on a
+lady swimmer next time.
+
+<LINE,24>Oh? Don't you know about moves
+that inflict damage regardless of
+defensive stats?
+
+<LINE,24><COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP> and <COL1,PUSH,146,195,255,255>SKULL BASH<COL1,POP>... If they hit, they'll KO
+anything! Think you can dodge 'em?
+
+<LINE,24>The way you dodged my <COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP> and <COL1,PUSH,146,195,255,255>SKULL BASH<COL1,POP>...
+You're incredible!
+
+<LINE,24>Oh, it's you again! My <COL1,PUSH,146,195,255,255>SOLARBEAM<COL1,POP> and <COL1,PUSH,146,195,255,255>SKULL BASH<COL1,POP> aren't
+beaten yet!
+
+<LINE,24>Oh, right... You could dodge an attack by using <COL1,PUSH,146,195,255,255>FLY<COL1,POP> or
+<COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+<LINE,24>You saw through your opponent's
+plan and came through for a
+flawless win. Beautiful!
+
+<LINE,24>Your POKéMON choices were right
+on! You were able to read your
+opponent's plan exactly! Beautiful!
+
+<LINE,24>Rats! But my strategy wasn't a total failure!
+
+<LINE,24>Hmm... Not too beautiful. Think
+about the way you chose your
+party... Perhaps you left an open-
+ing for your opponent to exploit?
+
+<LINE,24>Yeah! That worked perfectly! What do you think? Wasn't it
+a great move?
+
+<LINE,24>There are moves that, if timed
+properly, will avoid an attack, then
+strike the opponent.
+
+<LINE,24><COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP> is an amazing move. How do you plan to
+counter it?
+
+<LINE,24>You beat my <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP>? I'll have to train even harder.
+
+<LINE,24>This doesn't mean that <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP> was defeated. Face me
+again!
+
+<LINE,24>I went to all the effort of using <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP>... And you just
+used physical attacks? It's not fair!
+
+<LINE,24>A perfect win without a single
+POKéMON going down! Your skills
+are fabulous!
+
+<LINE,24>Your POKéMON choices couldn't
+have been better. Those physical
+attacks scored knockouts!
+
+<LINE,24>Not bad... But wait 'til next time. I think you still have
+weak spots.
+
+<LINE,24>Hmm...  Not too beautiful. Your
+POKéMON choices left something to
+be desired.
+
+<LINE,24>Oh, yeah! See? Didn't I tell you <COL1,PUSH,146,195,255,255>AMNESIA<COL1,POP> was great?
+
+<LINE,24>Hmm... Do you understand the
+difference between physical and
+special attacks?
+
+<LINE,24>Hey, hey! I'm gonna <COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP> ya! You won't even touch
+my POKéMON!
+
+<LINE,24>So there's more than one way to make a move hit...? I've
+gotta work harder at this!
+
+<LINE,24>It was a coincidence that you hit my POKéMON earlier!
+I'm gonna go with <COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP> again, I say. Again!
+
+<LINE,24>There is a way to hit my POKéMON even after I use
+<COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP>? That makes me double angry!
+
+<LINE,24>You weren't fazed at all by your
+opponent's strategy. Your perfect
+win was beautiful!
+
+<LINE,24>Your choice of POKéMON was
+perfect, too. You broke up the
+<COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP> in a most exemplary
+manner!
+
+<LINE,24>Hmph! I may have lost this time, but if we battle again,
+watch out! That's right. Watch out!
+
+<LINE,24>Not too beautiful! Perhaps you
+should consider using only POKéMON
+that can handle opponents that
+have heightened evasiveness.
+
+<LINE,24>How do you like the power of <COL1,PUSH,146,195,255,255>DOUBLE TEAM<COL1,POP>? Your moves
+missed over and over!
+
+<LINE,24>There is a move that always hits.
+Perhaps you've heard of <COL1,PUSH,146,195,255,255>SWIFT<COL1,POP>?
+
+If you can't tell the difference between a real status
+problem and one that's only similar, you'll never beat me!
+
+<LINE,24>I've had enough of status problems like those. You really
+are something special.
+
+<LINE,24>No, no. My POKéMON can take a lot more than that.
+
+<LINE,24>You certainly gave me a harsh lesson on POKéMON
+conditions. (...sniff...)
+
+<LINE,24>You have very good grasp on the
+distinction between status
+problems and similar conditions.
+
+<LINE,24>You have a beautiful knowledge of
+conditions that are similar to
+status problems.
+
+<LINE,24>You'll have to be a lot more thorough if you really want to
+beat me.
+
+<LINE,24>Hmm... The way you choose POKéMON
+tells me that you are still showing
+some mercy toward your opponent.
+That's not beautiful!
+
+<LINE,24>I don't think you know the distinction between real
+status problems and conditions that only appear similar.
+
+<LINE,24>Performance-affecting conditions
+that aren't real status problems
+can be doubled up on a POKéMON.
+Did you know that?
+
+<LINE,24>I shall lead with <COL1,PUSH,207,134,251,255>MURKROW<COL1,POP>, then follow with GHOST
+POKéMON. How will you vanquish such a diabolical team?
+
+<LINE,24>Combining items and moves... I see. I shall have EARL
+instruct me.
+
+<LINE,24>I shall use the same lineup--<COL1,PUSH,207,134,251,255>MURKROW<COL1,POP> followed by
+GHOST-type POKéMON.
+
+<LINE,24>Using combinations of items and moves... My, that's
+wicked.
+
+<LINE,24>An excellent demonstration of how
+to use items! You showed me a
+splendid shutout win!
+
+<LINE,24>You attained a grand victory using
+only certain POKéMON and items.
+Beautiful!  
+
+<LINE,24>That wasn't my best performance. May I battle you again?@
+
+<LINE,24>Hmm... Not too beautiful. When
+choosing your battlers, take note
+of the items they are holding.
+
+<LINE,24>You couldn't win even after I told you my lineup...? That
+is amazing in its own way...
+
+<LINE,24>When choosing your POKéMON, pay
+attention to the items they are
+holding.
+
+<LINE,24>I have dual-type POKéMON. Think you can pick on the
+weaknesses?
+
+<LINE,24>I'm going to study every day so I won't lose to you!
+
+<LINE,24>Last time was some kind of mistake! Let's see you hit the
+weak spots!
+
+<LINE,24>Oh... When there are two types, you end up with more weak
+points...
+
+<LINE,24>A perfect victory by maximally
+exploiting type match-up
+advantages! This is too beautiful!
+
+<LINE,24>You earned that win by maximally
+exploiting type match-up
+advantages. Beautiful!
+
+<LINE,24>What do you mean by that? If we battled again, I'd win
+for sure! Grrr...
+
+<LINE,24>Hmm... Not too beautiful. Perhaps
+you should choose POKéMON that
+can exploit the weaknesses of both
+of a dual-type POKéMON's types.
+
+<LINE,24>(...giggle...) Unless you pick at my weak spots, there's no
+chance of me losing.
+
+<LINE,24>If you hit both of the weak
+aspects of a dual-type POKéMON,
+you'll inflict quadruple the damage.
+
+<LINE,24>I use only <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>! I won't use anything else. Can you
+overcome them?
+
+<LINE,24>Wow, there are moves that work on a POKéMON that's
+using <COL1,PUSH,146,195,255,255>FLY<COL1,POP> or <COL1,PUSH,146,195,255,255>DIG<COL1,POP>! ...Whew! DUSTIN got a good lesson here!
+
+<LINE,24>I stand by my decision to use <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>. Come on, let's
+battle again!
+
+<LINE,24>Moves that hit while I'm using <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>... I never
+knew! No one ever told me about them!
+
+<LINE,24>You used your opponent's moves
+and strategy against them to get
+that perfect win! Beautiful!
+
+<LINE,24>You used your opponent's moves
+and strategy to earn the win!
+Beautiful!
+
+<LINE,24>Argh! No! But if we battle again, I'm confident that I'll
+win.
+
+<LINE,24>Not too beautiful! Consider
+choosing POKéMON with moves that
+can strike an opponent that's
+using <COL1,PUSH,146,195,255,255>FLY<COL1,POP> or <COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+<LINE,24>How do you like the power of <COL1,PUSH,146,195,255,255>FLY<COL1,POP> and <COL1,PUSH,146,195,255,255>DIG<COL1,POP>? As long as I
+have them, I can't lose!
+
+<LINE,24>You should investigate moves that
+can strike POKéMON that are using
+<COL1,PUSH,146,195,255,255>FLY<COL1,POP> or <COL1,PUSH,146,195,255,255>DIG<COL1,POP>.
+
+<LINE,24>Not only do my POKéMON have high SPCL.DEF stats, but
+they also know <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP>.
+
+<LINE,24>Ack... My party was much too weak against physical
+attacks... It's a total wipeout.
+
+<LINE,24>My POKéMON have high SPCL.DEF stats, and they know how
+to use <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP>. Come on. Battle me again!
+
+<LINE,24><COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP>-type POKéMON using physical attacks? I
+haven't learned formulas like that yet...
+
+<LINE,24>Using physical attacks when your
+opponent didn't expect them! That
+was a beautiful, perfect win!
+
+<LINE,24>Sometimes it can be more effective
+for <COL1,PUSH,146,195,255,255>PSYCHIC<COL1,POP>-type POKéMON to use
+physical attacks. Expertly done!
+
+<LINE,24>This isn't what I was taught! If we battle again, I'll win!
+
+<LINE,24>Hmm... Your choices of POKéMON are
+still somewhat lax. Not too
+beautiful.
+
+<LINE,24>Ha, ha, ha! Didn't I tell you? My POKéMON's SPCL.DEF
+stats are perfect!
+
+<LINE,24>If the opponent has high SPCL.DEF
+stats, using physical attacks is
+one possible approach.
+
+<LINE,24>I rely solely on <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>! Only the toughest POKéMON
+will be able to withstand it.
+
+<LINE,24>...That was a wash-out. I'll have to watch for a <COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP>
+holding a <COL1,PUSH,180,255,134,255>LIGHT BALL<COL1,POP> and a <COL1,PUSH,207,134,251,255>CUBONE<COL1,POP> holding a <COL1,PUSH,180,255,134,255>THICK CLUB<COL1,POP>.
+
+With my <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>, I'm ready for more! Only the
+toughest POKéMON will be able to withstand it.
+
+A <COL1,PUSH,207,134,251,255>PIKACHU<COL1,POP> holding a <COL1,PUSH,180,255,134,255>LIGHT BALL<COL1,POP> and a <COL1,PUSH,207,134,251,255>CUBONE<COL1,POP> holding a
+<COL1,PUSH,180,255,134,255>THICK CLUB<COL1,POP>... Well thought. I lost completely.
+
+<LINE,24>You earned a magnificently perfect
+win by using every factor to your
+advantage. It's too amazing!
+
+<LINE,24>You used a variety of factors to
+your advantage. You clearly
+understand how items work!
+
+<LINE,24>Darn it! I lost by sheer coincidence, but it won't be this
+way next time. I challenge you to another battle!
+
+<LINE,24>Hmm... Not too beautiful. You need
+to be a little more clever when
+choosing your POKéMON.
+
+<LINE,24>After using <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>, POKéMON get tired and have to
+rest. That leaves them vulnerable.
+
+<LINE,24>If a tough POKéMON is hit with
+<COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>, you can switch out
+while the opponent is recharging.
+
+<LINE,24>First I raise my ATTACK stat, then I use <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>.
+Can your POKéMON safely weather such a blast?
+
+<LINE,24>I was going to beat <COL1,PUSH,146,195,255,255>REVERSAL<COL1,POP> using speedy POKéMON... I
+hate to admit it, but you win.
+
+<LINE,24>I'm going to raise my ATTACK stat, then let loose a
+<COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>. Can you stay safe this time?
+
+<LINE,24>An <COL1,PUSH,146,195,255,255>ENDURE<COL1,POP> and <COL1,PUSH,146,195,255,255>REVERSAL<COL1,POP> combo...? Could you teach me
+how to do that?
+
+<LINE,24>You know exactly how moves work.
+That was a beautiful shutout!
+
+<LINE,24>Your POKéMON choices were right
+on the money. You earned that
+beautiful win by boosting your
+SPEED.
+
+<LINE,24>I lost... but I'm going to win next time! You should be more
+careful when choosing your POKéMON.
+
+<LINE,24>Not too beautiful! Be very careful
+when choosing POKéMON. Try to
+create a team in which every
+member has a chance of winning.
+
+<LINE,24>So slow! Your POKéMON are way too slow. They make
+fantastic targets!
+
+<LINE,24>Watch for the instant when your
+opponent uses <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>. That's
+when you should use <COL1,PUSH,146,195,255,255>ENDURE<COL1,POP>.
+
+<LINE,24>Show me some beautiful combos. <COL1,PUSH,207,134,251,255>DRAGONITE<COL1,POP>! <COL1,PUSH,207,134,251,255>TYRANITAR<COL1,POP>!
+Assist us in this demonstration!
+
+<LINE,24>Whew... There's no beating that. I'm awed by your superb
+combo performance!
+
+<LINE,24>Let me see your combos again. <COL1,PUSH,207,134,251,255>DRAGONITE<COL1,POP>! <COL1,PUSH,207,134,251,255>TYRANITAR<COL1,POP>!
+Go!
+
+<LINE,24>I never knew such an inspired combo existed... I've got to
+keep polishing my act.
+
+<LINE,24>You obviously know your combos.
+Your perfect victory was almost
+as beautiful as I am!
+
+<LINE,24>You made excellent use of combos.
+You are quite a beautiful student!
+
+<LINE,24>Wha... I... I lost? Tch... I won't take you for granted
+next time! Prepare to lose!
+
+<LINE,24>Hmm... Not too beautiful. Perhaps
+you ought to choose only those
+POKéMON that possess effective
+combos?
+
+<LINE,24>If you want to measure up to my act, come at me with
+some beautiful combos!
+
+<LINE,24>Try to hit each of your opponent's
+POKéMON with combos that are
+effective against them
+specifically.
+
+<LINE,24>I'm feeling sort of blue. I'll show you my <COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP> and
+<COL1,PUSH,146,195,255,255>THUNDER<COL1,POP> combo.
+
+<LINE,24>Controlling the weather is a clever way to give yourself
+the advantage in battle.
+
+<LINE,24>I'm going to be serious this time... I'll demonstrate the
+power of the <COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP> and <COL1,PUSH,146,195,255,255>THUNDER<COL1,POP> combo!
+
+<LINE,24>A team that becomes stronger with <COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP> is very
+weak against <COL1,PUSH,146,195,255,255>SUNNY DAY<COL1,POP>... You're so mean!
+
+<LINE,24>It's clear you understand combos
+that rely on the weather. A
+beautifully executed perfect
+victory!
+
+<LINE,24>Your POKéMON choices were
+precisely correct. You clearly
+understand the relationship bet-
+ween weather and certain moves.
+
+<LINE,24>I've been attending this academy for a long time. I won't
+lose! Battle me once more!
+
+<LINE,24>Hmm... Not too beautiful. I have a
+feeling that the way you chose
+your POKéMON was a bit careless.
+
+<LINE,24>Haven't you been paying any attention to EARL's lessons?
+What a waste.
+
+<LINE,24>Use <COL1,PUSH,146,195,255,255>SUNNY DAY<COL1,POP> against the
+opponent's <COL1,PUSH,146,195,255,255>RAIN DANCE<COL1,POP>. Use <COL1,PUSH,146,195,255,255>STOMP<COL1,POP>
+for <COL1,PUSH,146,195,255,255>MINIMIZE<COL1,POP>.
+
+Would you like to battle against my students? They're eager to try out what they've learned. Let's see how you fare!
+
+Battle?
+
+You've already battled this trainer. Battle again?
+
+Yes
+
+No
+
+<LINE,24>You can pick up hints when you attend a lecture. Would you like to listen to one?
+
+<LINE,24>Congratulations. You've done well. No one in this
+CLASS can touch you now. 
+
+You win a prize as your reward!
+
+<LINE,24>You should keep honing your skills in the
+next CLASS.
+
+was obtained.
+
+CAMPER
+
+SUPER NERD
+
+SCHOOLBOY
+
+SWIMMER♂
+
+YOUNGSTER
+
+PICNICKER
+
+LASS
+
+POKéMANIAC
+
+KIMONO GIRL
+
+LASS
+
+YOUNGSTER
+
+SCHOOLBOY
+
+COOLTRAINER♂
+
+COOLTRAINER♀
+
+JUGGLER
+
+SWIMMER♀
+
+CAMPER COLE
+
+SUPER NERD MELVIN
+
+SCHOOLBOY CARSON
+
+SWIMMER♂ CLAYTON
+
+YOUNGSTER JONATHAN
+
+PICNICKER CYNDY
+
+LASS NANCY
+
+POKéMANIAC JOSEPH
+
+KIMONO GIRL NAOMI
+
+LASS TAMMY
+
+YOUNGSTER DUSTIN
+
+SCHOOLBOY NOLAN
+
+COOLTRAINER♂ CONNOR
+
+COOLTRAINER♀ BECKY
+
+JUGGLER FERRIS
+
+SWIMMER♀ JULIAN
+
+Whom would you like to pick?
+
+<COL1,PUSH,230,220,100,255>TRAINER CLASS<COL1,POP> Skill Test
+
+<COL1,PUSH,100,219,100,255>GYM LEADER CLASS <COL1,POP>Skill Test
+
+<COL1,PUSH,90,180,255,255>ELITE FOUR CLASS <COL1,POP>Skill Test
+
+<LINE,33>The students are eager to try out what they've learned
+from EARL. The rules are simple. You will be provided with a
+team of POKéMON from which you will choose three correct 
+POKéMON. Then you will battle. If you win with correct
+POKéMON, you'll get<TEX,1>.
+If you win with other POKéMON, you'll get<TEX,0>.
+
+Skill Test
+
+Which Skill Test would you like to take?
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<LINE,24>Yahoo! You did it! You defeated all
+your opponents! Congratulations!
+
+<LINE,24>Skill-wise, you are fully qualified.
+Now I will give you a <TEX,1>.
+
+<LINE,24>Skill-wise, you are fully qualified.
+Now I will give you a <TEX,1>.
+
+<LINE,24>Skill-wise, you are fully qualified.
+Now I will give you a <TEX,1>.
+
+<LINE,24>You did extremely well on your
+challenges. Wonderful!!
+
+<LINE,33>A battle is already underway when you start choosing your
+POKéMON. You can't make intelligent choices if you don't
+know what kinds of moves your POKéMON have.
+Do you know <COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>how to check moves<COL1,POP><COL1,POP>?
+
+<LINE,33>When choosing battle POKéMON, <COL1,PUSH,255,160,210,255><COL1,PUSH,255,91,198,255>hold down the <TEX,2>Button
+while selecting. This will show you the moves of the selected
+POKéMON<COL1,POP><COL1,POP>. Use this feature on your quest to <TEX,1>every
+student.
+
+to return
+
+to go next
+
+Which wisdom test would you like to take?
+
+Battle
+
+Hint
+
+Cancel
+
+Test your strength against other
+students! Whom would you like to battle?
+
+<LINE,24>Battle against
+#12?
+
+#12 #13
+
+Give up!
+
+<COL1,PUSH,160,200,255,255>Before starting<COL1,POP>
+
+Skill Test

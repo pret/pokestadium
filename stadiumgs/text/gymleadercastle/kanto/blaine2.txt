@@ -1,0 +1,82 @@
+<FACE,31,2>I'm BLAINE, the fire expert! Let's get cookin'!
+
+<FACE,31,2>Men who have burning ambition use fire POKéMON! Say your
+prayers!
+
+<FACE,31,2>My next opponent? It's none other than you!
+
+<FACE,31,2>#26!
+
+<FACE,31,2>This is my choice!
+
+<FACE,31,2>Take it down, #26!
+
+<FACE,31,2>#26, burn it down!
+
+<FACE,31,2>#26, do it!
+
+<FACE,31,0>What? No! Come back!
+
+<FACE,31,2>Good. Come back!
+
+<FACE,31,1>Good going! Come back!
+
+<FACE,31,1>Excellent! Come back!
+
+<FACE,31,0>Arrrgh! What's going on here?
+
+<FACE,31,1>Arrrgh! Shocking, huh?
+
+<FACE,31,1>Yes! Scorched the weak spot! That's what I
+want!
+
+<FACE,31,0>Critical hit? Arrrgh! You bum!
+
+<FACE,31,2>That was sly!
+
+<FACE,31,2>How's that?
+
+<FACE,31,0>Arrrgh... Tarnation...
+
+<FACE,31,1>Stupendous! That's the way to do it!
+
+<FACE,31,0>Aaargh! Done in!
+
+<FACE,31,0><WAZA,241,4>Let the sun shine!
+
+<FACE,31,1><HARE,2>Get ready to burn!
+
+<FACE,31,1><YAKEDO,4>I'd say this is one hot battle!
+
+<FACE,31,0><WAZA,126,4>Duck and cover! FIRE BLAST!
+
+<FACE,31,2>How do you like feeling the true power of BLAINE, the firebrand
+trainer!
+
+<FACE,31,2>Come on, you! Be more passionate! Feel the burn!
+
+<FACE,31,2>Fire symbolizes our burning ambition!
+
+<FACE,31,2>I burnt out... There's nothing but ashes left...
+
+<FACE,31,2>Didn't I stoke the flames high enough?
+
+<FACE,31,2>I'll go back and work on my basic skills again.
+
+<FACE,31,2>Hmm. You impress me.
+
+<FACE,31,2>Hee, hee... This still counts as a win for me.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,31,0>

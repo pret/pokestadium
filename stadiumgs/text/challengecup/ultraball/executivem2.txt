@@ -1,0 +1,80 @@
+<FACE,46,0>My, my... An energetic child has come along.
+
+<FACE,46,0>You apparently have no knowledge of my fearsomeness.
+
+<FACE,46,0>What would you like to do? Turning back is a viable option.
+
+<FACE,46,0>#26!
+
+<FACE,46,0>#26!
+
+<FACE,46,0>Then #26 it is!
+
+<FACE,46,0>Next #26!
+
+<FACE,46,0>And #26 for the finale!
+
+<FACE,46,0>A failed gambit.
+
+<FACE,46,0>Merely acceptable, no?
+
+<FACE,46,0>It's not quite there yet.
+
+<FACE,46,0>Good. Well done.
+
+<FACE,46,0>Oh, I see.
+
+<FACE,46,0>Oh, the poor thing.
+
+<FACE,46,0>Ah, there's its weak spot. Quite good,
+wouldn't you agree?
+
+<FACE,46,0>Oh, you hit its weak spot. Nicely done.
+
+<FACE,46,0>Hmm...
+
+<FACE,46,0>Oh. My, my...
+
+<FACE,46,0>Hmm?
+
+<FACE,46,0>How disappointing for you.
+
+<FACE,46,0>Urrrrrmmm...
+
+<FACE,46,0>TEAM ROCKET fails to terrify you?
+
+<FACE,46,0>POKéMON are cute?...I see.
+
+<FACE,46,0>I ask you to not meddle in our affairs.
+
+<FACE,46,0>You made me rather irritated.
+
+<FACE,46,0>Learn not to resist us.
+
+<FACE,46,0>Yes, correct. Keeping quiet is the best for your sake.
+
+<FACE,46,0>I hope you learned something about the terrifying TEAM ROCKET.
+
+<FACE,46,0>This is meaningless to us.
+
+<FACE,46,0>Well, I wish you all the best of much-needed luck.
+
+<FACE,46,0>Ah, you are indeed strong, but... I wonder...
+
+<FACE,46,0>It resulted in a draw. What shall we do?
+
+<FACE,46,0>Ah... Very good. A wise philosophy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,46,0>

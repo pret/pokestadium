@@ -1,0 +1,185 @@
+Debug Menu
+
+Model Viewer
+
+Screen Viewer
+
+POKéMON Editor
+
+GB-SRAM Editor
+
+Ogawanoyu
+
+AI Editor
+
+Back Up Editor
+
+Creating Icon
+
+Music Room
+
+Trainer Viewer
+
+Creating Registrate POKéMON
+
+Creating VS.
+
+Message Debug
+
+Room of Legend
+
+Clock Editor
+
+Item Editor
+
+
+
+
+
+What can I do for you?
+
+Eye Catcher
+
+POKéDEX
+
+Icon
+
+Number:
+
+POKéMON:
+
+X point:
+
+Y point:
+
+Z point:
+
+Angle:
+
+Scale:
+
+Animation:
+
+Save on ROM
+
+Mini-Game
+
+Creating Icon
+
+Normal POKéMON
+
+Rare POKéMON
+
+SMEARGLE
+
+
+
+
+
+
+
+Sound Track #03
+
+Exit
+
+Current Music #03
+
+Current Music None
+
+
+
+
+
+
+
+Resolution Change
+
+Low-Res
+
+Hi-Res
+
+Trainer:
+
+Face:
+
+
+
+Debugger
+
+Main Battle
+
+Lab
+
+POKéMON Class
+
+Stadium Battle
+
+GYM LEADER CASTLE
+
+Mystery Gift
+
+Area
+
+Mini-Game
+
+GB Emulator
+
+GB Demo
+
+POKéMON Presents
+
+Cup Clear Demo
+
+Staff Roll
+
+Move-Teaching Machine
+
+Mobile Stadium
+
+Ending
+
+Rival Demo
+
+Move-Teaching Demo
+
+Gym Clear
+
+
+
+
+
+BAKKATSUKUN
+
+POKéMON1 GB EMU SPEED
+
+POKéMON2 GB EMU SPEED
+
+ROUND ONE
+
+ROUND TWO
+
+RIVAL ARRIVES
+
+RIVAL DEFEATED
+
+LITTLECUP
+
+POKéCUP
+
+CHALLENGECUP
+
+PRIMECUP
+
+GYM LEADER-JYOTO
+
+GYM LEADER-KANTO
+
+GYMLEADER-ELITE FOUR
+
+GYMLEADER-DEMO
+
+MOBILE STADIUM APPEARS
+
+MINI-GAME GREAT APPEARS
+
+<TEX,0>ROUND SWITCH

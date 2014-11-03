@@ -1,0 +1,79 @@
+<FACE,0,1>Hi, I'm WHITNEY! Let's get this battle going!
+
+<FACE,0,1>Hey! Don't you think POKéMON are, like, super cute?
+
+<FACE,0,1>I'm ready whenever you are. You look pretty tough yourself.
+
+<FACE,0,1>I'm starting with this one!
+
+<FACE,0,1>This one's next!
+
+<FACE,0,1>Just a bit more!
+
+<FACE,0,1>#26, get going!
+
+<FACE,0,1>Just squash it!
+
+<FACE,0,1>Nothing doing! Come back here!
+
+<FACE,0,1>Come on back!
+
+<FACE,0,0>Good, baby! That's enough!
+
+<FACE,0,0>Way to go! Come on back!
+
+<FACE,0,2>Huh? Why?
+
+<FACE,0,0>Yes! That feels great!
+
+<FACE,0,0>That was its weak spot! Good going!
+
+<FACE,0,2>Did that hit badly? That's no good!
+
+<FACE,0,1>What do you think you're doing?!?
+
+<FACE,0,0>Great! Great!
+
+<FACE,0,1>Arrgh, no! Speed it up!
+
+<FACE,0,0>And that's that!
+
+<FACE,0,2>What?!? No!
+
+<FACE,0,0><MAHI,2>That's right!
+
+<FACE,0,0><HIRUMI,2>Hah! Your POKéMON sure was surprised!
+
+<FACE,0,0><WAZA,208,4>#26, drink milk.
+
+<FACE,0,0><KOHRI,2>Brrr, that looks chilly...
+
+<FACE,0,1>What's wrong? I mean, your POKéMON are good...
+
+<FACE,0,0>What do you say? I'm darn tough, hey?
+
+<FACE,0,1>I wonder if there's anyone anywhere who's tougher than me?
+
+<FACE,0,2>...sob... You didn't have to play so rough!
+
+<FACE,0,2>Waaaaah! I can't believe I lost!
+
+<FACE,0,2>Waaah! Waaah! You're so mean!
+
+<FACE,0,1>What do you mean, it's a tie? I'm supposed to win!
+
+<FACE,0,1>You're giving up? No way. That's unbelievable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,0,2>

@@ -1,0 +1,86 @@
+<FACE,53,1>I'm BRUNO. As one of the ELITE FOUR, I will stand up to your
+challenge!
+
+<FACE,53,1>You appear to be quite skilled, but this is your last stop!
+
+<FACE,53,1>It would disturb me for you to underestimate my fighting
+POKéMON. Get ready!
+
+<FACE,53,1>Hah!
+
+<FACE,53,1>How's that!?!
+
+<FACE,53,1>Here it comes!
+
+<FACE,53,1>#26, make me proud!
+
+<FACE,53,1>It's yours, #26!
+
+<FACE,53,1>Blast it! Come back, #26!
+
+<FACE,53,1>That's good! Come back!
+
+<FACE,53,1>That's good enough!
+
+<FACE,53,1>Good job!
+
+<FACE,53,0>That can't be!
+
+<FACE,53,1>There! #26!
+
+<FACE,53,1>Critical hit! That's how you do it!
+
+<FACE,53,0>Why! Why take that critical hit?
+
+<FACE,53,1>That's not good!
+
+<FACE,53,1>Good, #26!
+
+<FACE,53,0>Arrrgh...
+
+<FACE,53,1>There it is! That has to hurt!
+
+<FACE,53,0>Argh... No!
+
+<FACE,53,0><WAZA,179,1>Come on! Nail it!
+
+<FACE,53,1>We are the most powerful trainers in the
+world!
+
+<FACE,53,1>Let me show you what ultimate power is all
+about!
+
+<FACE,53,1><KONRAN,2>Right! What an opportunity!
+
+<FACE,53,1>Hoo hah!
+
+<FACE,53,1>Now do you understand?!? That's the real power of the
+ELITE FOUR!
+
+<FACE,53,1>You can challenge me all you like, but the results will never
+change!
+
+<FACE,53,0>Why!?! This just can't be happening!
+
+<FACE,53,0>The world is huge! I must redo my training!
+
+<FACE,53,1>Your next adversary, KAREN, has a battle style that is entirely
+unlike mine. Now what will you do?
+
+<FACE,53,1>A draw!?! Who in the world are you?
+
+<FACE,53,1>You must have realized the extent of our power.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,53,0>

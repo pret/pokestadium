@@ -1,0 +1,33 @@
+Message Debug
+
+Battle Message
+
+Trainer Message
+
+Check Battle Message
+
+Check Trainer Message
+
+Quit
+
+Next
+
+Trainer
+
+No.
+
+Check Done
+
+Ally PKMN
+
+Foe PKMN
+
+
+
+
+
+
+
+
+
+ 

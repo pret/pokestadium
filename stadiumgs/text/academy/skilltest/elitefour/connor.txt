@@ -1,0 +1,83 @@
+<FACE,10,2><COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>'s power is outrageous.
+Which POKéMON wants to take it?
+
+<FACE,10,2><COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP> can KO most POKéMON with one shot.
+
+<FACE,10,2>Have a blast of <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>. It's a one-hit KO for most POKéMON.
+
+<FACE,10,2>#26, it's your job!
+
+<FACE,10,2>#26, get out there!
+
+<FACE,10,2>I'm counting on you, #26!
+
+<FACE,10,2>#26, it's you!
+
+<FACE,10,2>#26, what a chance!
+
+<FACE,10,2>Come back, #26!
+
+<FACE,10,2>Enough, #26!
+
+<FACE,10,1>Way to work, #26!
+
+<FACE,10,1>I tip my hat to you, #26!
+
+<FACE,10,2>Whoa! That was radical!
+
+<FACE,10,1>How's that!
+
+<FACE,10,1>Yeah! Popped it where it hurts the most!
+That's the idea!
+
+<FACE,10,0>Yikes! Took it where it hurts! 
+
+<FACE,10,0>Whoa, no!
+
+<FACE,10,1>Looking good.
+
+<FACE,10,0>Uh-oh... Hang tough!
+
+<FACE,10,1>And there we have it. Thanks so much!
+
+<FACE,10,0>Waaah... Down and out...
+
+<FACE,10,2><WAZA,63,3>Go! HYPER BEAM!
+
+<FACE,10,2>Your POKéMON are well trained.
+
+<FACE,10,2>Your POKéMON have been raised meticulously.
+
+<FACE,10,1><MEROMERO,2>Quite elegant, wouldn't you say?
+
+<FACE,10,1>The items that POKéMON hold are pretty important.
+
+<FACE,10,2>Apparently, some items have no effect unless they are held by
+certain POKéMON.
+
+<FACE,10,1>...Your POKéMON are holding some nice items.
+
+<FACE,10,0>I'm going to learn from this and move on! ...What's that look
+you're giving me?
+
+<FACE,10,2>What? How could you battle that way? I... I can't believe it...
+
+<FACE,10,0>This can't be possible... How could I lose with my level advantage?
+
+<FACE,10,2>Whew... We must be evenly matched.
+
+<FACE,10,1>Oh, you're quitting? Lucky for me!
+
+
+
+
+
+
+
+
+
+
+
+
+
+

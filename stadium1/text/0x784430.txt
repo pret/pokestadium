@@ -1,0 +1,54 @@
+ITEMS
+
+Choose left BOX
+
+Choose right BOX
+
+Move item
+
+Re-order items
+
+Exchange items
+
+Return to Menu
+
+Select which BOX?
+
+There are no items to move.
+
+There are no items to re-order.
+
+There are no items to exchange.
+
+The destination is full of items.
+
+That item is needed by GB Pokémon.
+
+There is no space on the N64 Game Pak.
+There are only item BOXes for four GB
+Game Paks.
+
+Items Held
+
+#21's PC
+
+N64 Game Pak
+
+Check items
+
+Delete this BOX
+
+Only four item BOXes are permitted.
+Choose BOX to be deleted.
+
+NAME/
+
+ID No/
+
+Delete this BOX?
+
+Yes
+
+No
+
+×

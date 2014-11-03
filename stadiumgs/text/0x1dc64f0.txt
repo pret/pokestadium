@@ -1,0 +1,175 @@
+Battle Data
+
+Friend's Data
+
+Organize Data
+
+The battle data of the N64 Game Pak
+or the GB Crystal Game Pak may be
+used for watching battles and
+battling trainers.
+
+You may battle using your Friend's
+Data that was traded peer to peer.
+
+Move or delete Battle Data, Friend's
+Data or Rule Data to and from the
+N64 Game Pak.
+
+Battle Data
+
+Crystal version
+
+N64 Game Pak
+
+Friend's Data
+
+Crystal version
+
+N64 Game Pak
+
+Organize Data
+
+Battle Data
+
+Friend's Data
+
+Rule Data
+
+Select VS Battle Data
+
+Battle
+
+Rules
+
+Quit
+
+Watch Battle
+
+Battle
+
+Check Rules
+
+Battle Data of POKéMON Crystal.
+
+Stadium Battle Data
+
+Select a Friend's Data
+
+VS Battle
+
+Cancel
+
+Crystal version Friend's Data
+
+N64 Friend's Data
+
+Organize Data/Battle Data
+
+Organize Data/Friend's Data
+
+Organize Data/Rule Data
+
+Move to N64
+
+View
+
+Re-order
+
+Void
+
+Crystal version
+
+N64 Game Pak
+
+Move Crystal version Battle Data to N64 Game Pak
+
+Move Crystal version Friend's Data to N64 Game Pak
+
+Move Crystal version Rule Data to N64 Game Pak
+
+Check Battle Data
+
+Check Friend's Data
+
+Check Rule Data
+
+Re-order N64 Game Pak data
+
+Delete N64 Game Pak data
+
+VS
+
+There is no data to re-order.
+
+There is no data to delete.
+
+There is no data to check.
+
+There is no data to move.
+
+The N64 Game Pak is full of Battle Data.
+
+The N64 Game Pak is full of Friend's Data.
+
+The N64 Game Pak is full of Rule Data.
+
+Select rules.
+
+Battle against which side?
+
+There is no data.
+
+No POKéMON are in your party.
+
+Your party POKéMON can't battle.
+
+How to play
+
+Mobile Stadium Instructions
+
+How to Play 1
+
+How to Play 2
+
+How to Play 3
+
+Level
+
+Hard
+
+Normal
+
+Easy
+
+COM's Level
+
+It can't be returned to Crystal version. Is that OK?
+
+Delete data?
+
+Yes
+
+No
+
+Is it OK to change the data organize?
+
+Save and quit.
+
+Quit without saving.
+
+Cancel
+
+A POKéMON does not meet the rule.
+
+No POKéMON are in your party.
+
+You need six POKéMON in the party.
+
+The combined levels of the three lowest-level POKéMON exceed #01.
+
+Choose your destination.
+
+Saving over the N64 Game Pak
+
+Saving...

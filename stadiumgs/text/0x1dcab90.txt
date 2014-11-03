@@ -1,0 +1,33 @@
+Making VS
+
+Initialize
+
+Save
+
+Done
+
+Suck up
+
+Battle Name
+
+Long Name
+
+AI
+
+This Game Pak can't be used as carrier.
+
+Not initialized as a carrier.
+
+No VS data exist.
+
+Game Pak can't be found.
+
+Battle name is not set.
+
+Long Name is not set.
+
+AI number is not set.
+
+
+
+ 

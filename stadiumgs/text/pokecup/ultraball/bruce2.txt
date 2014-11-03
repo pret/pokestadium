@@ -1,0 +1,83 @@
+<FACE,26,1>Summer means the beach, and POKéMON means battle! Let's do it!
+
+<FACE,26,1>When I watch the sea, my troubles get washed away. A battle?
+Okay!
+
+<FACE,26,1>Aren't the ladies here lovely? Oh, you want to battle?
+
+<FACE,26,1>Tweet! Start!
+
+<FACE,26,1>#26, dash!
+
+<FACE,26,0>#26, let's do it!
+
+<FACE,26,0>How about #26?
+
+<FACE,26,0>#26 can come out!
+
+<FACE,26,1>Maybe I'll change!
+
+<FACE,26,1>Maybe I won't use this one.
+
+<FACE,26,1>I'll change it!
+
+<FACE,26,1>I'll pull it from battle.
+
+<FACE,26,0>Gwaaah! It's rocking!
+
+<FACE,26,1>Ker-splash!
+
+<FACE,26,1>Weak spot? Swamped ya!
+
+<FACE,26,0>Got the weak spot? Groovy!
+
+<FACE,26,1>I'm feelin' it!
+
+<FACE,26,0>Say, hey. That'll do.
+
+<FACE,26,1>Glub...
+
+<FACE,26,0>Yes... Makes me happy...
+
+<FACE,26,1>It's over?
+
+<FACE,26,1><WAZA,240,4>Let it rain!
+
+<FACE,26,0><WAZA,57,2>If you're in the sea, you have to SURF!
+
+<FACE,26,0>The waves at night are so romantic!
+
+<FACE,26,0>I'd love to go to a tropical beach!
+
+<FACE,26,0>I'm blissfully exhausted, like after a good swim.
+
+<FACE,26,0>I was just goofin' around, but I won anyway. I guess you're
+just weak.
+
+<FACE,26,1>You're not even good to practice on. I'll go challenge one of
+these other trainers.
+
+<FACE,26,1>Argh... I should become a BOARDER and wait for winter.
+
+<FACE,26,1>I was just goofin' around and ended up losing.
+
+<FACE,26,1>Okay! I'll be training in the tropical seas! Then again, I don't
+have the travel budget!
+
+<FACE,26,1>Neither of us were serious enough.
+
+<FACE,26,1>You're going? Bye-bye.
+
+MANTMER
+
+CORSMER
+
+RAICHMER
+
+PARCEMER
+
+CLOYMER
+
+AKINGMER
+
+<FACE,26,1>

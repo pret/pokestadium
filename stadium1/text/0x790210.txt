@@ -1,0 +1,30 @@
+Please select three Pokémon using the indicated buttons.
+
+Choose the order in which Pokémon are to appear.
+The order is determined by the buttons.
+
+Button to cancel
+
+Button to check
+
+Is this OK?
+
+Yes
+
+Re-select
+
+The combined levels exceed #03.
+
+All ready!
+
+ATTACK
+
+DEFENSE
+
+SPEED
+
+SPECIAL
+
+TYPE1/
+
+TYPE2/

@@ -1,0 +1,82 @@
+<FACE,25,2>I always get perfect scores on tests! You don't stand a chance!
+
+<FACE,25,2>I'm the best at school and in all my clubs. Do you still want to
+battle?
+
+<FACE,25,2>Which POKéMON is the most popular at your school?
+
+<FACE,25,2>Here goes!
+
+<FACE,25,2>It has to be #26!
+
+<FACE,25,2>I learned that I should go with #26.
+
+<FACE,25,2>#26 fits the formula!
+
+<FACE,25,2>My teacher tells me #26!
+
+<FACE,25,2>I'd better switch out.
+
+<FACE,25,2>Gotta take this one out!
+
+<FACE,25,2>In this situation...
+
+<FACE,25,2>I'm pulling it back.
+
+<FACE,25,0>Whaaat! That's ridiculous!
+
+<FACE,25,1>Oh, yeah! Just like they taught me!
+
+<FACE,25,1>Hitting the weak point? That was just lucky.
+
+<FACE,25,0>Why! Why did it hit the weak spot?
+
+<FACE,25,0>What are you supposed to do when this
+happens?
+
+<FACE,25,1>That certainly worked.
+
+<FACE,25,0>Oh, there's nothing I can do.
+
+<FACE,25,1>This is great! Battles are so much fun!
+
+<FACE,25,0>Aiyee! Eeyaah!
+
+<FACE,25,1>The kids in my class are tough, too.
+
+<FACE,25,1>Some kids have lots of POKéMON.
+
+<FACE,25,1>Everyone loves POKéMON.
+
+<FACE,25,1>Actually, I think even my teacher likes
+POKéMON.
+
+<FACE,25,1>Ha, ha, ha... Give up?
+
+<FACE,25,1>I did it! Now I'm cool!
+
+<FACE,25,1>Yes! I'm gonna go brag to all my friends!
+
+<FACE,25,0>Okay! I'm going to become strong like you!
+
+<FACE,25,0>That's strange... I did exactly as I was taught...
+
+<FACE,25,0>Waaah! I wonder what I should tell my friends.
+
+<FACE,25,2>That's disappointing. What did I do wrong?
+
+<FACE,25,2>You're quitting? Why?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,25,0>

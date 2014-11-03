@@ -1,0 +1,81 @@
+<FACE,32,2>Ah, so it is you who defeated WILL? Interesting...
+
+<FACE,32,2>Your arrival is indeed impressive, as is your look of resolve.
+
+<FACE,32,2>Would you care for a glimpse into the world of the ninja?
+
+<FACE,32,2>#26! How's that?
+
+<FACE,32,2>#26 will take you on.
+
+<FACE,32,2>There, #26!
+
+<FACE,32,2>It can't be easy with #28.
+
+<FACE,32,2>I pity you, but here's #26!
+
+<FACE,32,0>This can't be helped!
+
+<FACE,32,2>Enough!
+
+<FACE,32,1>Well done, #26!
+
+<FACE,32,1>#26, you make me proud!
+
+<FACE,32,2>Ah... You've done well.
+
+<FACE,32,1>Wah, ha, ha!
+
+<FACE,32,2>That critical hit was by mere chance! It was
+nothing!
+
+<FACE,32,2>Landing a critical hit is merely a fluke,
+that's all!
+
+<FACE,32,0>How impudent!
+
+<FACE,32,2>How do you like that?
+
+<FACE,32,2>So? What good is this?
+
+<FACE,32,1>You have lost.
+
+<FACE,32,0>This cannot be!
+
+<FACE,32,2><WAZA,104,4>The ninja technique of DOUBLE TEAM!
+
+<FACE,32,1><WAZA,092,2>Savor it! TOXIC!
+
+<FACE,32,2>The human soul is but weak.
+
+<FACE,32,2>Even you must fear the dark.
+
+<FACE,32,2>You lack disciplined training!
+
+<FACE,32,2>Have you learned to fear the techniques of the ninja?
+
+<FACE,32,2>You expect to battle the ELITE FOUR with your current skills?
+
+<FACE,32,2>Never have I met the likes of you.
+
+<FACE,32,2>It stands to reason that you defeated WILL!
+
+<FACE,32,2>I, too, must pursue further discipline.
+
+<FACE,32,2>Hmm... You don't appear to be a raw amateur after all.
+
+<FACE,32,2>It would be better for you to try at another time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,32,0>

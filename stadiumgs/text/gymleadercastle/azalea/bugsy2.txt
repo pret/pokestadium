@@ -1,0 +1,79 @@
+<FACE,59,2>I'm the bug POKéMON researcher, BUGSY! Ready to get started?
+
+<FACE,59,2>You probably don't know very much about bug POKéMON.
+
+<FACE,59,2>Ready? I'll show you just how tough bug POKéMON can be!
+
+<FACE,59,2>I'll start with #26!
+
+<FACE,59,2>Next! #26!
+
+<FACE,59,2>It's #26's turn!
+
+<FACE,59,2>Now it's #26!
+
+<FACE,59,2>#26, wrap it up!
+
+<FACE,59,2>It's useless! Get back!
+
+<FACE,59,2>Good! Come back!
+
+<FACE,59,1>Well done, #26!
+
+<FACE,59,2>Okay! Come back, #26!
+
+<FACE,59,0>Arrrgh! Nailed!
+
+<FACE,59,1>That's the way! Good going!
+
+<FACE,59,1>There! Hit the weak spot! That's it!
+
+<FACE,59,2>What! You hit its weak spot?
+
+<FACE,59,0>You're kidding!
+
+<FACE,59,1>Yeah, that's it.
+
+<FACE,59,0>...groan...
+
+<FACE,59,1>What do you think of that?
+
+<FACE,59,0>Why?!? This can't be happening!
+
+<FACE,59,1><DOKU,1>Yes! It worked!
+
+<FACE,59,2>Do you like bug POKéMON?
+
+<FACE,59,2><WAZA,224,4>#26! MEGAPHONE!
+
+<FACE,59,2><HIRUMI,2>Yeah! That was good!
+
+<FACE,59,2>See? Aren't bug POKéMON tough?
+
+<FACE,59,2>Things just didn't go your way, did they?
+
+<FACE,59,1>My research is correct!
+
+<FACE,59,0>I was just unlucky.
+
+<FACE,59,2>I give up! You're tough.
+
+<FACE,59,2>I need to do some more research.
+
+<FACE,59,2>You're good, too!
+
+<FACE,59,2>Huh? Are you going to quit?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,59,0>

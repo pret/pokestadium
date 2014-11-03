@@ -1,0 +1,169 @@
+More detail
+
+Check rule #38
+
+Rule #39
+
+<COL1,PUSH,100,130,255,255>Blue Panels<COL1,POP> (qualifying POKéMON)
+
+#03<FONT,PUSH,16> kinds<FONT,POP>
+
+The move has no effect
+
+Qualifying conditions
+
+No two POKéMON asleep or frozen
+
+Enter with six POKéMON
+
+Battle using six provided POKéMON
+
+Enter with the desired no. of POKéMON
+
+Disqualified POKéMON: #03 kinds
+
+Opponent's POKéMON level(s)
+
+Same items cannot be held
+
+Same items can be held
+
+Items can't be used
+
+Rules on the final POKéMON
+
+Qualifying POKéMON: #03 kinds
+
+Open to all POKéMON
+
+POKéMON level #03
+
+POKéMON level #02 to #03
+
+No level restrictions
+
+Four level classes
+
+Maximum three-POKéMON level total #03
+
+Get a CONTINUE for a perfect match
+
+One to four players may compete
+
+Choose three out of six POKéMON
+
+Time limits can be set
+
+Multiplayer
+
+Tag team battles
+
+Open only to completely unevolved POKéMON that can be
+hatched from EGGs and are capable of evolution.
+
+DRAGON RAGE and SONICBOOM will have no effect.
+
+If one POKéMON falls asleep, none of the others in the
+same party can be put to sleep by an opponent. The same
+goes for freezing. It is possible to have one POKéMON
+asleep and one frozen.
+
+Choose six POKéMON before going to battle.
+You may not choose more than one of a certain kind of
+POKéMON.
+
+Choose six POKéMON before going to battle. You may not
+choose more than one of a certain kind of POKéMON.
+
+Battle using six provided POKéMON. This mode will test your
+ability as a trainer.
+
+One to six POKéMON may be used. Once you have entered the
+desired number of POKéMON, press START. All entered
+POKéMON must go into battle. You may not choose more
+than one of a certain kind of POKéMON.
+
+One to six POKéMON may be used. Once you have entered the
+desired number of POKéMON, press START. All entered
+POKéMON must go into battle. For the ANYTHING GOES
+rules, you may choose more than one of a certain kind of
+POKéMON.
+
+MEWTWO, MEW, LUGIA, HO-OH and CELEBI may not attend.
+
+The GYM LEADERs and their underlings will use level 50
+POKéMON. However, if you use any POKéMON over level 50,
+their POKéMON will be of the same level as your highest
+level POKéMON.
+
+The items held by POKéMON must all be different.
+
+The same kind of item can be held by two or more POKéMON.
+
+A held item will not have any effect.
+
+If your last remaining POKéMON uses SELFDESTRUCT or
+EXPLOSION, you lose, even if the opponent's last POKéMON
+faints. Likewise, PERISH SONG or DESTINY BOND will always
+fail.
+
+All 251 POKéMON may enter.
+
+Only level #03 POKéMON may enter.
+
+Only level #03 POKéMON may enter. If you don't have six
+POKéMON, you may add Rental POKéMON.
+
+POKéMON of levels #02 to #03 may be used.
+
+POKéMON of levels #02 to #03 may be used. If you don't
+have six POKéMON, you may add Rental POKéMON.
+
+Any POKéMON up to level 100 may be used.
+
+Any POKéMON up to level 100 may be used. The opposing
+trainers will all use level 100 POKéMON.
+
+POKé BALL is level 30.
+GREAT BALL is level 45.
+ULTRA BALL is level 60.
+MASTER BALL is level 75.
+
+The combined levels of the three battle POKéMON may not
+exceed #03.
+
+You earn a CONTINUE for every battle won without a
+fainted POKéMON. If you have a CONTINUE, you may try
+again after losing a battle.
+
+Each player must have a Controller. Players may form two
+teams. The COM may also play. The COM players are available
+in three skill levels.
+
+Out of the six POKéMON chosen, choose the three that are
+to be used in battle. Try to choose the three battle
+POKéMON that have advantages over the likely opponents.
+
+Out of the six POKéMON provided, choose the three that
+are to be used in battle. Try to choose the three battle
+POKéMON that have advantages over the likely opponents.
+
+Restrictions can be placed on the length of battle and
+amount of time set aside for choosing moves under the
+"Event Battle Settings" in the menu. All time restrictions
+could be turned off, also.
+
+Choose Anything Goes to play a multiplayer game, such as
+1 vs 2 or 2 vs COM. Choose three POKéMON to battle from
+the six provided. If those three POKéMON faint, you lose.
+
+Team up with a friend to play a 2-on-2 Tag Battle. Choose
+three POKéMON to battle from the six provided. During
+battle you can only replace your POKéMON with your
+partner's POKéMON. If all of either player's POKéMON
+faint, your team loses.
+
+If your last remaining POKéMON uses SELFDESTRUCT or
+EXPLOSION, you lose, even if the opponent's last POKéMON
+faints. Likewise, PERISH SONG or DESTINY BOND will always
+fail.

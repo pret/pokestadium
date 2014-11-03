@@ -1,0 +1,82 @@
+<FACE,25,2>I see all sorts of POKéMON in the grass on the way home from my
+tutor's.
+
+<FACE,25,2>Oh, you have some good POKéMON with you. Let's battle.
+
+<FACE,25,2>I was just looking for an opponent.
+
+<FACE,25,2>Here goes!
+
+<FACE,25,2>It has to be #26!
+
+<FACE,25,2>I learned that I should go with #26.
+
+<FACE,25,2>#26 fits the formula!
+
+<FACE,25,2>My teacher tells me #26!
+
+<FACE,25,2>I'd better switch out.
+
+<FACE,25,2>Gotta take this one out!
+
+<FACE,25,2>In this situation...
+
+<FACE,25,2>I'm pulling it back.
+
+<FACE,25,0>Whaaat! That's ridiculous!
+
+<FACE,25,1>Oh, yeah! Just like they taught me!
+
+<FACE,25,1>Hitting the weak point? That was just lucky.
+
+<FACE,25,0>Why! Why did it hit the weak spot?
+
+<FACE,25,0>What are you supposed to do when this
+happens?
+
+<FACE,25,1>That certainly worked.
+
+<FACE,25,0>Oh, there's nothing I can do.
+
+<FACE,25,1>This is great! Battles are so much fun!
+
+<FACE,25,0>I blew it!
+
+<FACE,25,1><WAZA,237,2>This move is pretty neat, huh?
+
+<FACE,25,1>Are any of your friends good?
+
+<FACE,25,1>You should come over to my house sometime.
+
+<FACE,25,1>Once you've battled, you become friends.
+Isn't that so?
+
+<FACE,25,1>Thank you, thank you!
+
+<FACE,25,1>Wow... That's perplexing. I won!
+
+<FACE,25,1>Well, I might not be so bad after all.
+
+<FACE,25,0>I'll get my tutor to teach me some more about this.
+
+<FACE,25,0>Hmm... There must be something wrong with my combinations.
+
+<FACE,25,0>I'm going to be more diligent with my studies.
+
+<FACE,25,2>And I was sure I had you beat...
+
+<FACE,25,2>Well, I know how you feel.
+
+PICHLING
+
+ORITALING
+
+CLEFFALING
+
+MARILING
+
+PIXLING
+
+TRETLING
+
+<FACE,25,0>

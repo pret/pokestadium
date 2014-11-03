@@ -1,0 +1,79 @@
+<FACE,13,0>We're little, but we try hard!
+
+<FACE,13,0>We've even beaten grownups before!
+
+<FACE,13,0>You'll be surprised at how strong we are!
+
+<FACE,13,0>#26, get out there!
+
+<FACE,13,0>Next, #26! Go!
+
+<FACE,13,0>#26, try as hard as you can!
+
+<FACE,13,0>#26, you can win!
+
+<FACE,13,0>#26, knock 'em out!
+
+<FACE,13,0>No, no, no! Come on back!
+
+<FACE,13,0>#26, welcome back!
+
+<FACE,13,0>#26, you come on back!
+
+<FACE,13,0>You are good, #26!
+
+<FACE,13,0>Uh-oh. Oh, no!
+
+<FACE,13,0>Uh-oh. Oh, no!
+
+<FACE,13,0>Critical hit! Ooh, I'm so happy!
+
+<FACE,13,0>Oh! A critical hit is a no-no!
+
+<FACE,13,0>Ooh, that's scary!
+
+<FACE,13,0>Ooh, how exciting!
+
+<FACE,13,0>Oh, you poor thing!
+
+<FACE,13,0>Oh, oh, oh...
+
+<FACE,13,0>Eeyaah! Nooooo!
+
+<FACE,13,0><WAZA,204,2>What CHARM! Oh, dear me.
+
+<FACE,13,0><MAHI,2>Uh-oh! Is it paralyzed?
+
+<FACE,13,0><SHIBARI,2>Uh-oh! That move's harmless now!
+
+<FACE,13,0><WAZA,230,2>We'll make it smell nice.
+
+<FACE,13,0>Oh, wow! We won!
+
+<FACE,13,0>Uh-oh!
+
+<FACE,13,0>Are you surprised?
+
+<FACE,13,0>Oh, dear. We lost!
+
+<FACE,13,0>Uh-oh!
+
+<FACE,13,0>We were surprised.
+
+<FACE,13,0>We're all friends!
+
+<FACE,13,0>What's the matter?
+
+LEDILEDI
+
+EEVEEV
+
+PONYPONY
+
+PINEPINE
+
+SNUBSNUB
+
+RINARINA
+
+<FACE,13,0>

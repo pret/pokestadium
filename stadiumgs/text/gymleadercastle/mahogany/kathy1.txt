@@ -1,0 +1,81 @@
+<FACE,55,2>Skiing has to be the ultimate winter sport.
+
+<FACE,55,2>Lots of trainers take their POKéMON to the ski slopes.
+
+<FACE,55,2>You don't even notice the cold when you're having fun. Isn't
+that strange?
+
+<FACE,55,2>I'm going with #26!
+
+<FACE,55,2>My choice is #26!
+
+<FACE,55,2>#26 ought to do it.
+
+<FACE,55,2>Play it cool, #26.
+
+<FACE,55,2>#26 might be the one.
+
+<FACE,55,2>#26 might not be right.
+
+<FACE,55,2>#26 gets the hook.
+
+<FACE,55,2>I'm switching #26 out.
+
+<FACE,55,2>I'm pulling #26.
+
+<FACE,55,0>Oh, no! Wait a second!
+
+<FACE,55,1>Ooh, fabulous!
+
+<FACE,55,1>Look, look! Isn't it super? Now that's a
+critical hit!
+
+<FACE,55,0>Critical hit? That one doesn't count! No?
+
+<FACE,55,0>Huh? You can do that?
+
+<FACE,55,1>Look. Look! Did you see that?
+
+<FACE,55,0>That's really dull.
+
+<FACE,55,1>There! I did it!
+
+<FACE,55,0>Oh! #26!
+
+<FACE,55,1><WAZA,217,1>This is a gift!
+
+<FACE,55,1><KOHRI,2>Cool! It's frozen!
+
+<FACE,55,2><WAZA,196,2>Don't you like the cold?
+
+<FACE,55,2><HIRUMI,2>Oh, I'm sorry.
+
+<FACE,55,1>Yahoo! Hey, this might be more fun than skiing.
+
+<FACE,55,1>Now that that's done, I can get back to the slopes.
+
+<FACE,55,2>My POKéMON are spectacular, aren't they?
+
+<FACE,55,0>Aiyee! That was no fun! I'm hitting the slopes.
+
+<FACE,55,2>I guess my plan just got swept away.
+
+<FACE,55,2>No matter how much I fall, I just keep bouncing back for more...
+
+<FACE,55,2>That's enough battling. I'm off to the slopes.
+
+<FACE,55,2>What's that? Where are you going?
+
+DELIOW
+
+AZUMAROW
+
+CUBONOW
+
+QWILOW
+
+DRATINOW
+
+SEADROW
+
+<FACE,55,0>

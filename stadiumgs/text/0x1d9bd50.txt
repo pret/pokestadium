@@ -1,0 +1,71 @@
+Welcome to POKéMON TRADE SERVICE!
+
+PARTY
+
+Game Paks for trading POKéMON
+
+Choose the Game Paks for trading.
+
+?????
+
+*****
+
+Are these OK?
+
+Yes
+
+No
+
+This Game Pak can't be used.
+
+No save file found.
+
+This Game Pak wasn't saved at a
+POKéMON CENTER.
+
+There is no POKéDEX.
+
+NAME/
+
+OT/
+
+ID/
+
+?????
+
+Trade?
+
+Yes
+
+No
+
+Save and quit
+
+Save and continue
+
+Quit without saving
+
+The trade was successful.
+
+Saving...
+
+Your trading partner's Game Pak is <TEX,0>.
+Because of it, you can't trade:
+-New POKéMON
+-Any POKéMON with a new move
+-Any POKéMON holding MAIL
+-An EGG
+
+Your trading partner's POKéMON is
+holding MAIL. It can only be traded
+with a POKéMON in your party.
+
+Your trading partner's POKéMON is not
+in the party. It cannot be traded
+with your POKéMON holding MAIL.
+
+You can't trade because there won't be a single useable
+POKéMON in your party.
+
+This POKéMON's data is corrupted.
+It cannot be traded.

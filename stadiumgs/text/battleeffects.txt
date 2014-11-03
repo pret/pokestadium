@@ -1,0 +1,384 @@
+BATTLE
+
+CANCEL
+
+CHECK
+
+RUN
+
+POKéMON
+
+NO
+
+YES
+
+QUIT?
+
+ABILITIES
+
+ATTACK
+
+EVASION
+
+DEFENSE
+
+ACCURACY
+
+SPEED
+
+SPCL. ATK
+
+SPCL. DEF
+
+Go for it, #26!
+
+#26, OK! Come back!
+
+Do it, #26!
+
+#26, come back!
+
+#26, that's enough! Come back!
+
+#26, good! Come back!
+
+Go! #26!
+
+There's no will to battle!
+
+An EGG can't battle!
+
+The move is DISABLED!
+
+There's no PP left for this move!
+
+#26 can't be recalled!
+
+#26 is already out.
+
+Can't use own POKéMON!
+
+#28 started to have a NIGHTMARE!
+
+#26 has a NIGHTMARE!
+
+#28 is already asleep!
+
+The rain stopped.
+
+Rain continues to fall.
+
+A downpour started!
+
+#26 dug a hole!
+
+It's super-effective!
+
+#26 kept going and crashed!
+
+Your foe's weak! Get'm, #26!
+
+#26's PERISH count is #01!
+
+A critical hit!
+
+#29 is DISABLED!
+
+#26's #29!
+
+It's hurt by poison!
+
+#42 was stolen!
+
+SKETCHED #30!
+
+#26 is shrouded in MIST!
+
+#28 is protected by MIST.
+
+The ENCORE ended!
+
+#28 got an ENCORE!
+
+#28 was blown away!
+
+#26's attack!
+
+#26 is storing energy!
+
+#26 unleashed energy!
+
+#26 is glowing!
+
+It's hit with recoil!
+
+#26 cut its HP and maximized ATTACK!
+
+The sunlight faded.
+
+The sunlight is strong.
+
+#26 transformed into the #47 type!
+
+#26 TRANSFORMED into #27!
+
+One-hit KO!
+
+Both POKéMON will faint in three turns!
+
+It recovered a little with #42.
+
+It was frozen solid!
+
+It's frozen solid!
+
+Its RAGE is building!
+
+It's not very effective...
+
+#28 was dragged out!
+
+The battlers shared their pain!
+
+It's protected by #42.
+
+#28 recovered using #42!
+
+It copied the stat changes of #28!
+
+Its LIGHT SCREEN fell!
+
+#26's SPCL.DEF rose!
+
+#26's DEFENSE rose!
+
+#26 was defrosted!
+
+#26 went to sleep!
+
+It fell asleep and became healthy!
+
+#26 regained health!
+
+#26 made a whirlwind!
+
+#30 was DISABLED!
+
+It was CLAMPED by #26!
+
+#26 must recharge!
+
+But #26's attack missed!
+
+#26's attack missed!
+
+#28 evaded the attack!
+
+#26 is getting pumped!
+
+#26's SAFEGUARD faded!
+
+#26 flinched!
+
+#26 is confused!
+
+It hurt itself in its confusion!
+
+#26 is confused no more!
+
+#28 became confused!
+
+It got rid of its confusion with #42.
+
+#28 is already confused!
+
+It braced itself!
+
+#28 ENDURED the hit!
+
+#43 won't rise anymore!
+
+#43 won't drop anymore!
+
+#26's #29 attack!
+
+It doesn't affect #28!
+
+#26 cut its own HP and put a CURSE on
+#28!
+
+All stat changes were eliminated!
+
+#26 flew up high!
+
+#26 took aim!
+
+Magnitude #01!
+
+It's paralyzed! Maybe it can't attack!
+
+It's fully paralyzed!
+
+#28 is already paralyzed!
+
+#26 fainted!
+
+SPIKES scattered all around!
+
+It's hurt by SPIKES!
+
+#28 was WRAPPED by #26!
+
+It's protected by SAFEGUARD!
+
+It PROTECTED itself!
+
+#28 is PROTECTing itself!
+
+#26's HP is full!
+
+#28 was defrosted!
+
+#26 is ATTRACTED to #28!
+
+Its ATTRACTION kept it from attacking!
+
+#28 is ATTRACTED!
+
+#28's SUBSTITUTE faded!
+
+#26 made a SUBSTITUTE!
+
+The SUBSTITUTE took the hit!
+
+#26 already has a SUBSTITUTE!
+
+It's too weak to make a SUBSTITUTE!
+
+#26 foresaw an attack!
+
+It was hit by FUTURE SIGHT!
+
+#26 is trying to take its opponent with it!
+
+#28 took #26 down with it!
+
+It identified #28!
+
+#26 learned #30!
+
+It hung on with #42!
+
+But nothing happened.
+
+Coins scattered everywhere!
+
+#28 fled in fear!
+
+The sunlight got bright!
+
+#26 is hurt by the CURSE!
+
+The MIRROR MOVE failed!
+
+#43 fell!
+
+#43 sharply fell!
+
+#43 went up!
+
+#43 went way up!
+
+There's no moves left!
+
+But no PP is left for the move!
+
+It has no PP left for #29!
+
+#28 was poisoned!
+
+#28 was badly poisoned!
+
+#28 is already poisoned!
+
+#26's #42 activated!
+
+#28's #30 was reduced #01!
+
+It recovered PP using #42.
+
+It couldn't receive the gift!
+
+REFLECT faded!
+
+Hit #01 times!
+
+#26 fled from battle!
+
+#26 lowered its head!
+
+It's disabled no more!
+
+#26 used BIND on #28!
+
+It's hurt by #30!
+
+It was released from #30!
+
+#26 is covered by a veil!
+
+But it didn't affect #28!
+
+It didn't affect #28!
+
+#26 used #29!
+
+#28 fell asleep!
+
+#26 is fast asleep!
+
+#26 woke up!
+
+#26 took in sunlight!
+
+It was released by #28!
+
+It shed LEECH SEED!
+
+It blew away the SPIKES!
+
+#28 can't escape now!
+
+Sucked health from #28!
+
+The SANDSTORM subsided.
+
+The SANDSTORM rages.
+
+A SANDSTORM brewed!
+
+The SANDSTORM hits #26!
+
+A bell chimed!
+
+But it failed!
+
+It failed!
+
+It was trapped!
+
+#26 used #29!
+
+#26 used #29!
+
+#28 was seeded!
+
+LEECH SEED saps #26!
+
+#28 was burned!
+
+It's hurt by its burn!
+
+#28's dream was eaten!
+
+#28 is unaffected!

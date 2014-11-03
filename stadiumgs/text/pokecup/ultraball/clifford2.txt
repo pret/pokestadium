@@ -1,0 +1,85 @@
+<FACE,50,2>...mutter...POKéMON and...entropy... Huh? Don't disturb me!
+
+<FACE,50,2>Any battle can be won by applying logic. What? You want to test
+my hypothesis?
+
+<FACE,50,2>Huh? Battle? I don't want to. Can't I just refuse?
+
+<FACE,50,2>I don't want to see any rough stuff.
+
+<FACE,50,2>Don't do anything mean to #26.
+
+<FACE,50,2>Be nice. I really adore #26.
+
+<FACE,50,2>I'm very protective of my #26.
+
+<FACE,50,2>It's my #26.
+
+<FACE,50,2>Retrieval and recovery.
+
+<FACE,50,2>Wait a second.
+
+<FACE,50,2>I have to change them...
+
+<FACE,50,2>That's it for this baby.
+
+<FACE,50,0>Eeyaah! #26!
+
+<FACE,50,1>Yes. My hypothesis has been proven
+correct.
+
+<FACE,50,1>That hit its weak spot. Wasn't that
+effective?
+
+<FACE,50,0>Aiming for the weak spot... Isn't that a
+penalty?
+
+<FACE,50,2>That event was within the realm of
+possibility...
+
+<FACE,50,1>See? I knew that would work.
+
+<FACE,50,0>Arrrgh...
+
+<FACE,50,1>Eureka!
+
+<FACE,50,0>Oh... Oh... My consciousness is fading...
+
+<FACE,50,2><WAZA,109,2>What about this?
+
+<FACE,50,1><WAZA,92,2>TOXIC...
+
+<FACE,50,1><DOKUDOKU,4>TOXIC...
+
+<FACE,50,2>Only my POKéMON won't betray me.
+
+<FACE,50,2>My logic is perfect! I don't like to battle, but I absolutely will
+not lose!
+
+<FACE,50,2>You can't win because you rely solely on instinct.
+
+<FACE,50,2>I think that you need to study a whole lot more.
+
+<FACE,50,0>Eeeek! How did my logic fail me?
+
+<FACE,50,2>My logic wasn't faulty! There must still be a missing element.
+
+<FACE,50,2>Yeah, sure. Go on doing things in your savage way.
+
+<FACE,50,2>What happens in this case? Referee?
+
+<FACE,50,2>Whew, am I relieved.
+
+2PORYGON
+
+CATERATI
+
+ETRESSFORR
+
+TURNLAN
+
+NETONMAG
+
+RIODUGT
+
+<FACE,50,0>

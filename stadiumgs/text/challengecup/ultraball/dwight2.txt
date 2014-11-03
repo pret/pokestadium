@@ -1,0 +1,86 @@
+<FACE,24,1>Working on my juggling and polishing my battle skills--they're
+similar in a way.
+
+<FACE,24,1>Do you know the FIREBREATHER? We're kindred spirits.
+
+<FACE,24,1>These balls contain VOLTORB. Juggling them is such a rush.
+
+<FACE,24,1>Let's start, shall we?
+
+<FACE,24,1>#26 shall do.
+
+<FACE,24,1>Perhaps #26.
+
+<FACE,24,1>#26, go!
+
+<FACE,24,1>#26 shall put this to rest.
+
+<FACE,24,1>I'll switch out.
+
+<FACE,24,1>Another one will take its place.
+
+<FACE,24,1>This one's done.
+
+<FACE,24,1>...And now...
+
+<FACE,24,0>Aaaah... How could this happen?
+
+<FACE,24,1>That's right.
+
+<FACE,24,0>Ooh, the weak spot. That worked perfectly.
+
+<FACE,24,1>Argh... What? A critical hit? How did that
+happen?
+
+<FACE,24,1>Feeling stressed?
+
+<FACE,24,0>Oh, devious.
+
+<FACE,24,1>My, my, my...
+
+<FACE,24,1>I'd say my mood is buoyant!
+
+<FACE,24,0>I was sunk! Rats!
+
+<FACE,24,1>My act is something that I will refine
+throughout my life.
+
+<FACE,24,1>You meet all sorts of people when you travel.
+
+<FACE,24,1>I've tasted gourmet food from all over the
+world.
+
+<FACE,24,1>I can get by without any money.
+
+<FACE,24,1>I wonder which country I should visit next?
+
+<FACE,24,1>Were you taking that battle seriously? You must have
+underestimated me.
+
+<FACE,24,1>I'm pleased with how that turned out. I hope to build on my
+success.
+
+<FACE,24,0>I can't go home like this...
+
+<FACE,24,0>If that's the way you want it, I'll SELFDESTRUCT with my
+VOLTORB!
+
+<FACE,24,0>I should never have signed up for a tournament like this!
+
+<FACE,24,0>A draw is no good! Let's do it again!
+
+<FACE,24,1>Oh... I understand...
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,24,0>

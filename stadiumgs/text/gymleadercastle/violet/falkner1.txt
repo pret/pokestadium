@@ -1,0 +1,81 @@
+<FACE,18,2>I'm FALKNER! I'm going to be the toughest bird master ever!
+
+<FACE,18,2>I can't let you get past me. The honor of bird trainers
+everywhere is at stake! 
+
+<FACE,18,2>Sorry, but there's no way I'll lose to your POKéMON!
+
+<FACE,18,2>All right! Get going, #26!
+
+<FACE,18,2>This time, it's #26.
+
+<FACE,18,2>Shall we toy with them, #26?
+
+<FACE,18,2>#26! It's your show!
+
+<FACE,18,2>Playtime is over, #26!
+
+<FACE,18,0>Tch! Come back, #26!
+
+<FACE,18,1>Okay, switch out, #26!
+
+<FACE,18,1>That's enough, #26! Come back!
+
+<FACE,18,1>Good job! Come back!
+
+<FACE,18,0>What!? Shoot!
+
+<FACE,18,2>Outstanding!
+
+<FACE,18,2>Hit the weak spot! That's right!
+
+<FACE,18,0>Ooh, critical hit! Not bad!
+
+<FACE,18,0>Argh. That was bad!
+
+<FACE,18,2>Gotcha!
+
+<FACE,18,0>Argh!
+
+<FACE,18,2>How's that!?
+
+<FACE,18,0>Aack! #26!
+
+<FACE,18,1>There are many kinds of bird POKéMON.
+
+<FACE,18,1>Lots of trainers are passionate about bird
+POKéMON.
+
+<FACE,18,1><WAZA,189,2>#26! MUD-SLAP!
+
+<FACE,18,1>Do you like bird POKéMON, too?
+
+<FACE,18,2>Whew! That was a good battle.
+
+<FACE,18,2>You did pretty well, too.
+
+<FACE,18,2>Bird POKéMON are the best after all!
+
+<FACE,18,0>What'll you do if my POKéMON's wings get damaged?!?
+
+<FACE,18,0>...Shoot! Yeah, I lost.
+
+<FACE,18,1>Can't I win using only FLYING-type POKéMON?
+
+<FACE,18,1>I guess these things happen.
+
+<FACE,18,1>Ha, ha, ha! So, you're just going to turn tail and run?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,18,0>

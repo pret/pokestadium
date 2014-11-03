@@ -1,0 +1,82 @@
+<FACE,39,2>What do I really like...? Bug POKéMON!
+
+<FACE,39,2>Can you effectively control bug POKéMON?
+
+<FACE,39,2>I raised my bug POKéMON carefully. They'll take you on!
+
+<FACE,39,2>Here I come!
+
+<FACE,39,2>There, #26!
+
+<FACE,39,2>I'm counting on you, #26!
+
+<FACE,39,1>This is it, #26!
+
+<FACE,39,1>Here's your chance, #26!
+
+<FACE,39,2>Retreat, #26!
+
+<FACE,39,2>#26, back!
+
+<FACE,39,2>Good, #26! Come back!
+
+<FACE,39,1>Good going, #26!
+
+<FACE,39,0>Aack! #26!
+
+<FACE,39,1>Ha, ha! That's it!
+
+<FACE,39,1>Critical hit! Excellent, #26!
+
+<FACE,39,0>Aww! You goof! That was your weak spot!
+
+<FACE,39,0>Oh, rats!
+
+<FACE,39,2>That was plain unlucky.
+
+<FACE,39,2>#26!
+
+<FACE,39,1>#26! You did it!
+
+<FACE,39,0>#26!
+
+<FACE,39,2>If you go into the forest early in the
+morning, you'll find good bug POKéMON.
+
+<FACE,39,2><WAZA,48,2>Listen closely! SUPERSONIC!
+
+<FACE,39,2>Have you ever participated in a bug-catching
+contest?
+
+<FACE,39,1><KONRAN,2>Yes, yes, yes!
+
+<FACE,39,1>That's what you get for making fun of bug POKéMON.
+
+<FACE,39,1>Waaah! Did I win? I won, didn't I?
+
+<FACE,39,1>What do you think about my battle technique? Did you learn
+anything?
+
+<FACE,39,0>Shoot! I choked!
+
+<FACE,39,2>I guess these things happen.
+
+<FACE,39,2>Did I lose? You're joking, right?
+
+<FACE,39,2>A draw? Really?
+
+<FACE,39,2>Hey, don't run away.
+
+LEDBY
+
+SPINARAY
+
+CATERPY
+
+WEEDLY
+
+YAMY
+
+VENONATY
+
+<FACE,39,0>

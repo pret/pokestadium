@@ -1,0 +1,27 @@
+PC
+
+Organize
+
+Pokémon
+
+Items
+
+BOXes
+
+See List
+
+Re-order Pokémon.
+Move Pokémon to N64 Game Pak.
+Return Pokémon to Game Boy Game Pak.
+
+Re-order items on hand.
+Move items to N64 Game Pak.
+Return items to Game Boy Game Pak.
+
+Re-order BOXes.
+Move boxed Pokémon to N64 Game Pak.
+Return BOXes to Game Boy Game Pak.
+
+See a list of all owned Pokémon.
+Check levels and use items such
+as TMs and HMs.

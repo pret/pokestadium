@@ -1,0 +1,81 @@
+<FACE,42,2>I think you would make a good practice partner.
+
+<FACE,42,2>I train even when I go on picnics.
+
+<FACE,42,2>It feels wonderful to battle POKéMON outside!
+
+<FACE,42,2>Ready?
+
+<FACE,42,2>#26, please do it!
+
+<FACE,42,2>Get out there, #26!
+
+<FACE,42,1>We can do it, #26!
+
+<FACE,42,1>#26! Here's your chance!
+
+<FACE,42,2>Come back, #26!
+
+<FACE,42,2>Switch out, #26!
+
+<FACE,42,1>That's good, #26. Come back!
+
+<FACE,42,1>That's wonderful, #26! Come back!
+
+<FACE,42,0>Aiyeeee! That's not fair!
+
+<FACE,42,1>Yippee, yippee, yippee!
+
+<FACE,42,1>Hit the weak spot! I'm so happy!
+
+<FACE,42,0>Critical hit? Are you all right, #26?!?
+
+<FACE,42,0>No! That was nasty!
+
+<FACE,42,2>Look, look!
+
+<FACE,42,0>Don't give up, #26!
+
+<FACE,42,1>Outstanding! Outstanding!
+
+<FACE,42,0>Nooooo!
+
+<FACE,42,2>Do you like picnics?
+
+<FACE,42,2>Lunches outside are delicious!
+
+<FACE,42,2>Letting my POKéMON go outside makes them
+happy.
+
+<FACE,42,2>We run around outside with our POKéMON.
+
+<FACE,42,2>Sorry I beat you. But your POKéMON are cute.
+
+<FACE,42,2>You should let your POKéMON spend some more time outside.
+
+<FACE,42,2>After a battle, we take a nap on the grass.
+
+<FACE,42,0>Huh? It's over already? That makes me so angry!
+
+<FACE,42,2>I'll have to work much, much harder. That was good practice,
+though.
+
+<FACE,42,2>That was fun. Thank you. I have to go outside now.
+
+<FACE,42,2>Hmm... I guess these things happen.
+
+<FACE,42,2>See you later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,42,0>

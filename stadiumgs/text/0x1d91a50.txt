@@ -1,0 +1,156 @@
+#01P
+
+ID
+
+This is a machine for trading POKéMON.
+The highlighted parts show new POKéMON
+or new MOVEs.
+
+Use this machine for switching
+Game Boy Game Paks.
+
+This new POKéDEX lets you check out your
+POKéMON in detail. It also identifies where
+POKéMON live.
+
+This is a machine for organizing POKéMON and
+ITEMS. The highlighted parts show new
+POKéMON and new MOVEs.
+
+You got an item from MYSTERY GIFT.
+Here you go!
+
+You got a POKéMON as a present!?
+I'm rather envious! Here you go!
+
+This is POKéDEX. You need to catch more
+POKéMON to find out where POKéMON live.
+
+This PC allows you to organize your POKéMON
+and ITEMS. No new POKéMON can be
+transferred.
+
+Oh! I got a delivery for you.
+
+This is the item. Select the BOX and tell me
+where you want to put it.
+
+I was entrusted with a POKéMON
+for you.
+
+It's this POKéMON.
+Take good care of it. Take the BALL
+and tell me where you want to put it.
+
+I was entrusted with a POKéMON and item
+for you.
+
+Wow! You have two prized POKéMON!
+That's really amazing.
+
+Where do you want to move #42?
+
+PACK
+
+#21's PC
+
+N64 METAL CASE (<TEX,0>'s Item Box)
+
+Received #42
+at #74.
+
+Where do you want to
+move #25?
+
+PARTY
+
+GB BOX
+
+N64 BOX
+
+Received #25
+at #75.
+
+Stadium
+
+Saving...
+
+The chosen Game Pak hasn't been
+saved at a POKéMON CENTER.
+
+You need to have two Game Paks if you
+want to trade.
+
+It's too bad, but that BOX is full.
+Change over to a different BOX using
+the PC.
+
+It's too bad, but that BOX is full.
+Change over to a different BOX using
+the PC.
+
+Please come again after you deliver the
+MYSTERY EGG to PROF. ELM.
+
+You don't have a POKéDEX.
+You'd better get one from a Game Boy
+Game Pak.
+
+You don't have a POKéDEX.
+This machine won't work without one.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

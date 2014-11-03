@@ -1,0 +1,83 @@
+<FACE,36,0>You can bear witness to the fruits of my training.
+
+<FACE,36,0>Whether you choose to believe or not, mystic power does exist.
+
+<FACE,36,0>You must make your soul one with that of POKéMON. Can you
+do this?
+
+<FACE,36,0>#26!
+
+<FACE,36,0>#26!
+
+<FACE,36,0>#26!
+
+<FACE,36,0>#26!
+
+<FACE,36,0>#26!
+
+<FACE,36,0>Back, #26!
+
+<FACE,36,0>Back, #26!
+
+<FACE,36,0>Back, #26!
+
+<FACE,36,0>Back, #26!
+
+<FACE,36,0>...
+
+<FACE,36,0>...
+
+<FACE,36,0>...Critical hit.
+
+<FACE,36,0>...Critical hit?
+
+<FACE,36,0>...
+
+<FACE,36,0>...
+
+<FACE,36,0>...
+
+<FACE,36,0>... Fufufu...
+
+<FACE,36,0>...argh...
+
+<FACE,36,0><HIRUMI,1>There.
+
+<FACE,36,0><DOKU,1>That's good.
+
+<FACE,36,0><MAHI,1>Yes, excellent.
+
+<FACE,36,0><KONRAN,1>That's so-so.
+
+<FACE,36,0>How unfortunate. But it's not enough.
+
+<FACE,36,0>In addition to strengthening your POKéMON's moves, you must
+also strengthen your own soul.
+
+<FACE,36,0>If the trainer isn't focused, his POKéMON can't concentrate,
+either.
+
+<FACE,36,0>That's good. The POKéMON look happy, too.
+
+<FACE,36,0>I lost. I will have to increase my training.
+
+<FACE,36,0>That's how to do it. I look forward to seeing you become even
+stronger.
+
+<FACE,36,0>Let's try that one more time.
+
+<FACE,36,0>What are you intending to do?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,36,0>

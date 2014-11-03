@@ -1,0 +1,81 @@
+<FACE,20,2>Wanna find out how good you are? Sure thing!
+
+<FACE,20,2>Boy, are you impatient! All right, here I come!
+
+<FACE,20,2>Hey! Let's battle!
+
+<FACE,20,2>Ready? Go, #26!
+
+<FACE,20,2>#26, I'm counting on you!
+
+<FACE,20,2>#26!
+
+<FACE,20,2>You can do it! Go, #26!
+
+<FACE,20,1>Here's your chance, #26!
+
+<FACE,20,0>Oh, no! Come back!
+
+<FACE,20,2>#26, come back!
+
+<FACE,20,2>Good going, #26! Come back!
+
+<FACE,20,1>Way to go, #26!
+
+<FACE,20,0>Argh! Bummer, man!
+
+<FACE,20,2>Take that!
+
+<FACE,20,1>You hit the weak spot! Good, #26!
+
+<FACE,20,0>Argh! Hit it where it hurts!
+
+<FACE,20,0>Oh, no!
+
+<FACE,20,1>There! Yes!
+
+<FACE,20,0>Ooh. That hurt...
+
+<FACE,20,1>Okay!
+
+<FACE,20,0>Argh! This can't be happening!
+
+<FACE,20,2>You're really supposed to use your own
+POKéMON.
+
+<FACE,20,2>It's no good if you can't use any kind of
+POKéMON.
+
+<FACE,20,2>Isn't it boring to win using tough POKéMON?
+
+<FACE,20,2>Are you trying to become a POKéMON MASTER?
+
+<FACE,20,1>Yes! I win! What's the matter with you?
+
+<FACE,20,2>Work on your skills at the STADIUM, then come back and see me.
+
+<FACE,20,2>You can get lessons on battle techniques.
+
+<FACE,20,1>You did it! Now you can aim for the CHAMPIONSHIP.
+
+<FACE,20,1>You're pretty tough. Keep sluggin' away!
+
+<FACE,20,1>There are many trainers at the STADIUM who are much stronger.
+
+<FACE,20,2>You won't get anywhere if you can only tie me.
+
+<FACE,20,2>What? You're giving up? Hmph...
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,20,1>

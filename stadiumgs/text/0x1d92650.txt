@@ -1,0 +1,51 @@
+Party
+
+Check the window contents
+
+Check POKéMON
+
+Move POKéMON
+
+Re-order POKéMON
+
+Exchange POKéMON
+
+Release POKéMON
+
+Change window with L/R Buttons.
+
+There are no POKéMON to move.
+
+There are no POKéMON to exchange.
+
+There are no POKéMON to exchange.
+
+There are no POKéMON to check.
+
+There are no POKéMON to release.
+
+The destination BOX is full.
+
+That POKéMON can't be moved to <TEX,1>.
+
+The POKéMON with mail can't be released.
+
+PARTY
+
+GB BOX
+
+N64 BOX
+
+HP:
+
+TYPE1 /
+
+TYPE2 /
+
+ITEM /
+
+???
+
+??
+
+L.??

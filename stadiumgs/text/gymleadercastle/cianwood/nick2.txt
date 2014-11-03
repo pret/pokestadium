@@ -1,0 +1,79 @@
+<FACE,28,2>Hi-yah! I'll battle you with powerful FIGHTING-type POKéMON!
+
+<FACE,28,2>Hi-yah! I hate picky little things! Come on!
+
+<FACE,28,2>Hi-yah! My fists are harder than stone! Do you want to try me?
+
+<FACE,28,0>Hi-yah!
+
+<FACE,28,0>Gah! Go, #26!
+
+<FACE,28,0>Shatter it, #26!
+
+<FACE,28,0>Destroy, #26!
+
+<FACE,28,0>Blow it away, #26!
+
+<FACE,28,1>Arrrgh! What a wasted effort!
+
+<FACE,28,2>#26, get back here!
+
+<FACE,28,2>Good going!
+
+<FACE,28,2>Well done!
+
+<FACE,28,1>Gwah!
+
+<FACE,28,0>Hi-yah!
+
+<FACE,28,0>There! Hammered its weak spot!
+
+<FACE,28,1>Aiyee! No! Hammered where it hurts!
+
+<FACE,28,0>What!?!
+
+<FACE,28,0>Yes!
+
+<FACE,28,1>Arrrgh...
+
+<FACE,28,0>Hi-yah! Keep it up!
+
+<FACE,28,1>Gwaaaaah!
+
+<FACE,28,2>I do 10,000 push-ups a day with these guys.
+
+<FACE,28,0><WAZA,90,1>Come on! Work!
+
+<FACE,28,2>I do 10,000 squats every day with my team.
+
+<FACE,28,0><WAZA,32,1>Come on, hit!
+
+<FACE,28,0>Yes, sir! That's the reward for my dedication to training!
+
+<FACE,28,0>Wah, ha, ha, ha! It's all about power! Power!
+
+<FACE,28,0>Hi-yah! Might makes right!
+
+<FACE,28,1>Waaaah! Why?!?
+
+<FACE,28,0>Aiyeee! I lost! We'll sprint back to the dojo as punishment!
+
+<FACE,28,1>Arrrgh! How humiliating!
+
+<FACE,28,2>When it comes to sheer power, I'm better than you are!
+
+<FACE,28,2>You're forfeiting? Hah! It's still a win for me!
+
+CHOKE
+
+GRAVEL
+
+GLER
+
+BOK
+
+GONAIR
+
+SIR
+
+<FACE,28,1>

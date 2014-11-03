@@ -1,0 +1,85 @@
+<FACE,52,0>Oh, hello. What kinds of POKéMON do you like?
+
+<FACE,52,0>I would like to evaluate your skill level. But don't worry. This
+isn't a test.
+
+<FACE,52,0>We should both work our hardest so there won't be any regrets
+afterwards.
+
+<FACE,52,0>Shall we start?
+
+<FACE,52,0>Will #26 do?
+
+<FACE,52,0>Then I'll use #26.
+
+<FACE,52,0>#26 will go.
+
+<FACE,52,0>#26 is good.
+
+<FACE,52,0>I'm going to switch.
+
+<FACE,52,0>Let's switch.
+
+<FACE,52,0>I'm changing POKéMON.
+
+<FACE,52,0>Well then, I'll do it this way.
+
+<FACE,52,0>Oh, my goodness. Your POKéMON are
+tremendous!
+
+<FACE,52,0>Don't be crushed!
+
+<FACE,52,0>It hit the weak spot. Think about what you
+should do next.
+
+<FACE,52,0>Hmm... Aim for the weak spot? Not too bad.
+
+<FACE,52,0>Was that planned?
+
+<FACE,52,0>Now, think about it.
+
+<FACE,52,0>That's the way.
+
+<FACE,52,0>Oh... How did it get this way?
+
+<FACE,52,0>Oh...
+
+<FACE,52,0><WAZA,98,2>Personally, I like this move very much.
+
+<FACE,52,0>I hope you learn all kinds of things through
+your battles.
+
+<FACE,52,0>There are teachers who have many POKéMON.
+
+<FACE,52,0>Do you name your POKéMON?
+
+<FACE,52,0>Close, but no cookie. Try harder next time, dear.
+
+<FACE,52,0>I battled as hard as I could, too.
+
+<FACE,52,0>I hope the experience you've gained here will help you in your
+next battle.
+
+<FACE,52,0>You're a genius. There isn't anything else that I could teach you.
+
+<FACE,52,0>Well done, dear. Keep up the good work.
+
+<FACE,52,0>We should all be friends after battles.
+
+<FACE,52,0>Hmm... Just a little bit more, I think.
+
+<FACE,52,0>What's wrong? Are you feeling sick?
+
+EEVED
+
+NATED
+
+PONYED
+
+TATAED
+
+DODUED
+
+TYRED
+
+<FACE,52,0>

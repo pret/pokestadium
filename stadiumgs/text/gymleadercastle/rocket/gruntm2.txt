@@ -1,0 +1,79 @@
+<FACE,48,2>What are you doing here? There's something fishy about you...
+
+<FACE,48,2>What? Battle? Challenging TEAM ROCKET? ...Oh, all right.
+
+<FACE,48,2>Do you know where you are?
+
+<FACE,48,2>Here goes!
+
+<FACE,48,2>How about this one!
+
+<FACE,48,2>Feeling pressured?
+
+<FACE,48,1>This one's in the bag!
+
+<FACE,48,1>Okay, you're mine!
+
+<FACE,48,2>Doggone it! It's not working!
+
+<FACE,48,2>You just watch!
+
+<FACE,48,1>Ha, ha, ha...
+
+<FACE,48,2>And, now...
+
+<FACE,48,0>Blithering fool!
+
+<FACE,48,2>So... Are you mad?
+
+<FACE,48,1>There! Critical hit! Aren't you lucky!
+
+<FACE,48,0>Critical hit? Ha!
+
+<FACE,48,0>What do you think you're doing?
+
+<FACE,48,1>Hurry up and lose!
+
+<FACE,48,2>So what?
+
+<FACE,48,1>There! Give up?
+
+<FACE,48,2>Just how I planned it.
+
+<FACE,48,1><WAZA,153,2>Kaboom! Come on, be scared!
+
+<FACE,48,1><DOKU,4>I'm going to take my time and enjoy this.
+
+<FACE,48,2>Don't you dare dis TEAM ROCKET!
+
+<FACE,48,1><MAHI,2>There. You be quiet now.
+
+<FACE,48,2>Now get lost!
+
+<FACE,48,2>Don't get any more funny ideas!
+
+<FACE,48,2>Don't try to stop TEAM ROCKET!
+
+<FACE,48,0>Wh-wh-what?!? Bad news!
+
+<FACE,48,0>Oh, no! I'll have to report this! Come in...
+
+<FACE,48,0>Who in the world are you?
+
+<FACE,48,2>Stop! This match isn't over yet!
+
+<FACE,48,1>Wah, ha, ha...
+
+WEEZACT2
+
+TRODEACT2
+
+CLOYSACT2
+
+WOODACT2
+
+FORRETACT2
+
+GOLACT2
+
+<FACE,48,0>

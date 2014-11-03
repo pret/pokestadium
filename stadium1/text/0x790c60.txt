@@ -1,0 +1,165 @@
+ENTER
+
+EXCHANGE
+
+Use this
+Pokémon?
+
+Yes
+
+No
+
+ATTACK
+
+DEFENSE
+
+SPEED
+
+SPECIAL
+
+TYPE 1
+
+TYPE 2
+
+Choose from where?
+
+Rental Only
+
+Rental Only
+
+Registered Pokémon
+
+#02 Set(s)
+
+Check which Pokémon?
+
+Delete which Pokémon?
+
+Usable Pokémon in Own Party
+
+Rental Pokémon
+
+Usable Pokémon in GB BOX #01
+
+OK
+
+OK to Register
+
+Reselect some Pokémon
+
+Reselect all Pokémon
+
+OK
+
+Select again
+
+Check
+
+Delete this set.
+
+Check
+
+Cancel
+
+Delete more
+
+Quit
+
+Exchange which Pokémon?
+
+Registration complete
+
+File full --
+registration failed.
+
+The transformed DITTO
+changed back to normal.
+
+DITTO finished transforming.
+
+Continue registration.
+
+The combined levels of the three 
+lowest-level Pokémon are too high.
+
+Please exchange Pokémon.
+
+This Game Pak can't be used.
+
+Save file not found.
+
+1 Pokémon
+
+2 Pokémon
+
+3 Pokémon
+
+4 Pokémon
+
+5 Pokémon
+
+6 Pokémon
+
+Entry
+
+Registration
+
+START
+
+ENTRY
+
+Registration
+
+Pokémon
+
+Select entry Pokémon
+
+Register Pokémon
+
+Check registered Pokémon
+
+Delete registered Pokémon
+
+FREE BATTLE
+
+POKéMON STADIUM
+
+GYM LEADER CASTLE
+
+VS MEWTWO
+
+ANYTHING GOES
+
+POKé CUP
+
+POKé CUP
+
+POKé CUP
+
+PETIT CUP
+
+PIKA CUP
+
+PRIME CUP
+
+GYM LEADER CASTLE
+
+VS MEWTWO
+
+Registration
+
+Register Pokémon
+
+Check registered Pokémon
+
+Delete registered Pokémon
+
+Quit
+
+Once registered, the registered Pokémon may easily enter
+battles. Rental Pokémon may be registered.
+Up to 10 sets may be registered.
+
+ 's turn
+
+TRAINER

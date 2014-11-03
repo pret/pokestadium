@@ -1,0 +1,81 @@
+<FACE,47,2>Don't you run from me! I'm taking you down, brat!
+
+<FACE,47,2>What was he doing!?! How'd he lose to a brat like you?
+
+<FACE,47,2>Are you listening? I'm going to rub you out and become an
+EXECUTIVE.
+
+<FACE,47,2>Try this for a start!
+
+<FACE,47,2>It's you!
+
+<FACE,47,2>I'm depending on you!
+
+<FACE,47,2>Rub it out!
+
+<FACE,47,2>Put it out of its misery!
+
+<FACE,47,2>You're no good for this!
+
+<FACE,47,2>Switch out!
+
+<FACE,47,2>That's enough, you!
+
+<FACE,47,1>Yes! Good job!
+
+<FACE,47,0>Kyaaah! You idiot!
+
+<FACE,47,1>Excellent, #26!
+
+<FACE,47,1>Got its weak spot! Good one, #26!
+
+<FACE,47,0>You aimed for the weak spot! You battle
+dirty!
+
+<FACE,47,0>Ack! That was so foul!
+
+<FACE,47,1>Good going, #26!
+
+<FACE,47,2>Do you have personality problems?
+
+<FACE,47,1>Ha, ha... Sorry, kid.
+
+<FACE,47,0>You're joking!
+
+<FACE,47,1><MAHI,2>Okay now, don't move a muscle.
+
+<FACE,47,1><DOKUDOKU,2>I'm going to take my time and enjoy this.
+
+<FACE,47,2><WAZA,92,2>#26! TOXIC!
+
+<FACE,47,1><WAZA,195,2>We'll show you a rare move.
+
+<FACE,47,1>Yes! I'm that much closer to becoming an EXECUTIVE!
+
+<FACE,47,1>Yes! I'd better report this to my boss!
+
+<FACE,47,1>Yes! My future looks bright!
+
+<FACE,47,0>You vermin! I won't forsake my dream over this!
+
+<FACE,47,0>Complacency did me in! Guess I'd better report this.
+
+<FACE,47,2>Maybe I should go back home...
+
+<FACE,47,0>What! You just got lucky, brat!
+
+<FACE,47,1>Look at the little coward running away!
+
+DOURNO2
+
+SHUCKNO2
+
+AZUMNO2
+
+SHELLNO2
+
+ONINO2
+
+GONGNO2
+
+<FACE,47,0>

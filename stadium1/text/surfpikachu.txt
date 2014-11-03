@@ -1,0 +1,46 @@
+Congratulations! You won using PIKACHU!
+
+Special reward! PIKACHU may now learn SURF!
+
+Would you like your PIKACHU to learn SURF?
+
+Give up on PIKACHU learning SURF?
+
+PIKACHU did not learn SURF.
+
+PIKACHU is trying to learn SURF!
+
+But, PIKACHU can't learn more than 4 moves!
+
+Forget a move to make room for SURF?
+
+Don't let your PIKACHU learn SURF?
+
+Which move should be forgotten?
+
+1, 2 and...
+
+1, 2 and... Poof!
+
+PIKACHU forgot how to use #29!
+
+And...
+
+PIKACHU learned SURF!
+
+Take good care of PIKACHU!
+
+Yes
+
+No
+
+Saving...
+
+Leaving your N64 turned ON, detach
+the GB Game Pak, clean connector
+section and re-attach.
+
+Save Error
+
+The GB Game Pak or the data has been
+changed.

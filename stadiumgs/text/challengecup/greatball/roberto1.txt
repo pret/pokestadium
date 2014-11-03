@@ -1,0 +1,84 @@
+<FACE,17,2>It's time to test my research results! Sorry, but you will be my
+test subject.
+
+<FACE,17,2>I was cooped up in the lab. I needed a break, so here I am.
+
+<FACE,17,2>You study POKéMON, too? Let's compare our abilities!
+
+<FACE,17,2>#26, it is!
+
+<FACE,17,2>It's my #26!
+
+<FACE,17,2>It's this one in this situation!
+
+<FACE,17,2>I'll go with #26.
+
+<FACE,17,2>#26! Go get 'em!
+
+<FACE,17,2>I'll have to switch out...
+
+<FACE,17,2>I'm changing POKéMON.
+
+<FACE,17,2>Change!
+
+<FACE,17,2>Good, #26. Come back.
+
+<FACE,17,0>What!?!
+
+<FACE,17,1>Yes!
+
+<FACE,17,1>Hit the weak spot! Outstanding!
+
+<FACE,17,0>Oh, no! It took that on its weak spot!
+
+<FACE,17,0>Hmm... How vexing!
+
+<FACE,17,1>Good. That's good.
+
+<FACE,17,0>Rats...
+
+<FACE,17,1>Yeah! Eureka!
+
+<FACE,17,0>What is this phenomenon?!?
+
+<FACE,17,2>What am I studying? That's top secret!
+
+<FACE,17,2>Why am I a rogue? Who knows?
+
+<FACE,17,2>Lack of research funding is a major
+concern.
+
+<FACE,17,2>My research is sure to evoke controversy in
+society.
+
+<FACE,17,1>Ha, ha, ha... My hypothesis was correct.
+
+<FACE,17,1>Maybe this will persuade them to raise my research budget.
+
+<FACE,17,1>Did you see the fruits of my research?
+
+<FACE,17,0>Waaah! I sneaked out of the lab for this... The chief's going to
+chew me out again...
+
+<FACE,17,2>What? Did I make an error? That's odd. I'll have to review my
+research notes.
+
+<FACE,17,0>What a disaster! I can't present this to the Academy...
+
+<FACE,17,2>I didn't lose, that's what matters. But, then again, I didn't win...
+
+<FACE,17,2>Huh? You're running off?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,17,0>

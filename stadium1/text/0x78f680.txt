@@ -1,0 +1,160 @@
+POKé CUP
+
+POKé CUP
+
+POKé CUP
+
+PETIT CUP
+
+PIKA CUP
+
+PRIME CUP
+
+GYM LEADER CASTLE
+
+POKé BALL
+
+GREAT BALL
+
+ULTRA BALL
+
+MASTER BALL
+
+BATTLE 1
+
+BATTLE 2
+
+BATTLE 3
+
+BATTLE 4
+
+BATTLE 5
+
+BATTLE 6
+
+SEMI-FINAL
+
+FINAL BATTLE
+
+PEWTER GYM
+
+CERULEAN GYM
+
+VERMILION GYM
+
+CELADON GYM
+
+FUCHSIA GYM
+
+SAFFRON GYM
+
+CINNABAR GYM
+
+VIRIDIAN GYM
+
+ELITE FOUR
+
+RIVAL
+
+Game Pak
+
+Check
+
+None
+
+Saved file
+not found.
+
+This Game Pak 
+wasn't saved 
+at a POKéMON
+CENTER.
+
+This Game Pak
+can't be used.@
+
+Turn the N64 Control Deck OFF before
+attaching or removing a GB Game Pak,
+Transfer Pak or a Controller.
+
+OK?
+
+Saved battle data will be
+deleted.
+
+Is this OK?
+
+Yes
+
+No
+
+Saved battle data exists.
+
+CONTINUE?
+
+Yes
+
+No
+
+Delete saved battle data.
+
+TRAINER #01
+
+GYM LEADER
+
+ELITE FOUR #01
+
+CONTINUE=#01
+
+The saved battle data will be deleted if
+CONTINUE is chosen.
+
+The GB Game Pak is not set.
+
+This Game Pak is unusable.
+
+You don't have six Pokémon
+in your party.
+
+The Controller is not
+connected.
+
+Find the STADIUM, battle sites, POKéMON LAB and
+mini-games here.
+
+This is a battle arena for the trainer parties in
+the Game Paks set in Controllers 1 and 2.
+
+Change sound settings, clear the N64 Game Pak's
+data, etc.
+
+This is a battle arena for people who want to try
+a BATTLE NOW.
+
+Please Select
+
+STADIUM
+
+Switch
+
+POKéMON STADIUM
+
+BATTLE
+NOW!
+
+EVENT
+BATTLE
+
+OPTIONS
+
+1P Battle
+
+2P Battle
+
+GALLERY
+
+Snap your Pokémon photos here. Use a Pokémon
+Snap Station to print your photos.
+
+This can not be selected
+on the Pokémon Snap Station.

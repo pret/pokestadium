@@ -1,0 +1,22 @@
+The data has been altered.
+
+You have no Pokémon with you at all.
+
+Saving...
+
+Save and quit
+
+Quit without saving
+
+Cancel
+
+Saving...
+
+Save Error
+
+The GB Game Pak or
+the data has been changed.
+
+Leaving your N64 turned ON, detach the
+GB Game Pak, clean the connector section
+and re-attach it.

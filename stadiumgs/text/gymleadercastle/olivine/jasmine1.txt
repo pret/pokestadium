@@ -1,0 +1,80 @@
+<FACE,37,1>Um, I'm JASMINE. Pleased to meet you.
+
+<FACE,37,1>Oh... Your POKéMON are impressive. I think I will enjoy this.
+
+<FACE,37,1>You must be quite strong to make it this far.
+
+<FACE,37,1>May we please get started?
+
+<FACE,37,1>Go! #26.
+
+<FACE,37,1>I'm sending out #26.
+
+<FACE,37,1>Here's #26.
+
+<FACE,37,1>#26, are you ready?
+
+<FACE,37,0>I'm recalling #26.
+
+<FACE,37,1>I'm exchanging #26.
+
+<FACE,37,1>That's enough.
+
+<FACE,37,1>Let's switch out.
+
+<FACE,37,0>Oh. How impressive.
+
+<FACE,37,0>Tee, hee, hee...
+
+<FACE,37,0>It exploited a weakness perfectly.
+
+<FACE,37,0>Oh. Well played. That connected with a weak
+spot.
+
+<FACE,37,1>Oh, no...
+
+<FACE,37,0>Oh...
+
+<FACE,37,1>It's working.
+
+<FACE,37,0>Tee, hee, hee...
+
+<FACE,37,1>Oh! That means...
+
+<FACE,37,1>You must like POKéMON very much.
+
+<FACE,37,1>Have you been a trainer long?
+
+<FACE,37,0><KOHRI,2>Oh, it's become frozen.
+
+<FACE,37,0><MAHI,2>Oh, it's become paralyzed.
+
+<FACE,37,0>Thank you so much.
+
+<FACE,37,0>I never expected to win.
+
+<FACE,37,0>I was merely lucky.
+
+<FACE,37,0>I hope you do as well in your next battle.
+
+<FACE,37,1>You are truly strong. I'll have to try much harder, too.
+
+<FACE,37,1>Perhaps I should step down as a GYM LEADER...
+
+<FACE,37,1>We should have no hard feelings over this.
+
+<FACE,37,1>You're forfeiting? You must have important business to tend to.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,37,0>

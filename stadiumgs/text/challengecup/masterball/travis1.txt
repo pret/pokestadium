@@ -1,0 +1,82 @@
+<FACE,14,0>POKéMON are popular in my country. How are they perceived here?
+
+<FACE,14,0>On my travels, I often practice against SAILORs.
+
+<FACE,14,0>Ah, you look determined. Would you care to join me in a battle?
+
+<FACE,14,0>Perhaps I will start with #26.
+
+<FACE,14,0>This one will do.
+
+<FACE,14,0>I'll go with this one.
+
+<FACE,14,0>Will this one do?
+
+<FACE,14,0>This must be it.
+
+<FACE,14,0>I must recover this one...
+
+<FACE,14,0>So, if I switch out...
+
+<FACE,14,0>Next...
+
+<FACE,14,0>Given the present circumstances...
+
+<FACE,14,0>Oh, my!
+
+<FACE,14,0>Hmm...
+
+<FACE,14,0>Hmm... That struck the weak spot, did it?
+
+<FACE,14,0>Whoa! It struck the weak spot.
+
+<FACE,14,0>Oh, I see...
+
+<FACE,14,0>Hmm...
+
+<FACE,14,0>Is that so...
+
+<FACE,14,0>I see. Forgive me.
+
+<FACE,14,0>Hmm...
+
+<FACE,14,0>Travel is rewarding.
+
+<FACE,14,0>POKéMON are wonderful creatures.
+
+<FACE,14,0>Battles make a person better.
+
+<FACE,14,0>POKéMON make people more compassionate.
+
+<FACE,14,0>Hmm... Good battle. You were outstanding.
+
+<FACE,14,0>I forgot about my age and became serious. I owe it all to you.
+
+<FACE,14,0>Thank you. I understand that there are magnificent trainers
+everywhere.
+
+<FACE,14,0>Although I lost, I feel exhilarated. Thank you.
+
+<FACE,14,0>I did the best I could, so I don't feel any resentment. You truly
+are strong.
+
+<FACE,14,0>I feel fortunate to have met someone like you. Traveling is good
+for me.
+
+<FACE,14,0>Hmm... These things sometimes happen.
+
+<FACE,14,0>I see... It can't be helped.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,14,0>

@@ -1,0 +1,298 @@
+♂
+
+♀
+
+L
+
+NO.
+
+TYPE 1/
+
+TYPE 2/
+
+HP:
+
+/
+
+STATUS/
+
+ATTACK
+
+DEFENSE
+
+SPCL.ATK
+
+SPCL.DEF
+
+SPEED
+
+ID/
+
+OT/
+
+EXP. POINTS/
+
+#06 to L#07
+
+ITEM/
+
+???
+
+POKéRUS
+
+TYPE/
+
+POWER/
+
+ACCURACY/
+
+---
+
+Yes
+
+No
+
+Check move
+
+Re-order moves
+
+Select the move to be re-positioned.
+
+Put it where?
+
+Exchange this POKéMON?
+
+Release this POKéMON?
+
+Return
+
+This POKéMON can't be traded.
+
+It has a move that forbids trading.
+
+It has an item. Release anyway?
+
+It can't be traded with MAIL.
+
+It's making noises
+inside! It's going to
+hatch soon!
+
+It appears to be moving
+inside sometimes. It
+should hatch soon.
+
+Wonder what's inside?
+It will be a while yet to
+hatch.
+
+This EGG will take quite
+some time to hatch.
+
+???
+
+??
+
+Encounter time / #81  Area / #82  L/??
+
+Encounter time / #81  Area / #82  L/#02
+
+??
+
+Morning
+
+Day
+
+Night
+
+??????
+
+NEW BARK TOWN
+
+ROUTE 29
+
+CHERRYGROVE CITY
+
+ROUTE 30
+
+ROUTE 31
+
+VIOLET CITY
+
+SPROUT TOWER
+
+ROUTE 32
+
+RUINS OF ALPH
+
+UNION CAVE
+
+ROUTE 33
+
+AZALEA TOWN
+
+SLOPOKE WELL
+
+ILEX FOREST
+
+ROUTE 34
+
+GOLDENROD CITY
+
+RADIO TOWER
+
+ROUTE 35
+
+NATIONAL PARK
+
+ROUTE 36
+
+ROUTE 37
+
+ECRUTEAK CITY
+
+TIN TOWER
+
+BURNED TOWER
+
+ROUTE 38
+
+ROUTE 39
+
+OLIVINE CITY
+
+LIGHTHOUSE
+
+BATTLE TOWER
+
+ROUTE 40
+
+WHIRL ISLANDS
+
+ROUTE 41
+
+CIANWOOD CITY
+
+ROUTE 42
+
+MT. MORTAR
+
+MAHOGANY TOWN
+
+ROUTE 43
+
+LAKE OF RAGE
+
+ROUTE 44
+
+ICE PATH
+
+BLACKTHORN CITY
+
+DRAGON's DEN
+
+ROUTE 45
+
+DARK CAVE
+
+ROUTE 46
+
+MT. SILVER
+
+PALLET TOWN
+
+ROUTE 1
+
+VIRIDIAN CITY
+
+ROUTE 2
+
+PEWTER CITY
+
+ROUTE 3
+
+MT. MOON
+
+ROUTE 4
+
+CERULEAN CITY
+
+ROUTE 24
+
+ROUTE 25
+
+ROUTE 5
+
+UNDERGROUND PATH
+
+ROUTE 6
+
+VERMILION CITY
+
+DIGLETT's CAVE
+
+ROUTE 7
+
+ROUTE 8
+
+ROUTE 9
+
+ROCK TUNNEL
+
+ROUTE 10
+
+POWER PLANT
+
+LAVENDER TOWN
+
+RADIO TOWER
+
+CELADON CITY
+
+SAFFRON CITY
+
+ROUTE 11
+
+ROUTE 12
+
+ROUTE 13
+
+ROUTE 14
+
+ROUTE 15
+
+ROUTE 16
+
+ROUTE 17
+
+ROUTE 18
+
+FUCHSIA CITY
+
+ROUTE 19
+
+ROUTE 20
+
+SEAFOAM ISLANDS
+
+CINNABAR ISLAND
+
+ROUTE 21
+
+ROUTE 22
+
+VICTORY ROAD
+
+ROUTE 23
+
+INDIGO PLATEAU
+
+ROUTE 26
+
+ROUTE 27
+
+TOHJO FALLS
+
+ROUTE 28
+
+FAST SHIP

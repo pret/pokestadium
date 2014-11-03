@@ -1,0 +1,81 @@
+<FACE,8,2>When it comes to POKéMON, I can't lose!
+
+<FACE,8,2>What do you think? Do you want to have a quick battle?
+
+<FACE,8,2>These babies are tough. Oh, you don't believe me?
+
+<FACE,8,2>How about #26 to start?
+
+<FACE,8,2>#26, my pride and joy!
+
+<FACE,8,2>There! Surprise you?
+
+<FACE,8,2>My precious #26!
+
+<FACE,8,2>My #26 has been raised with tender
+loving care!
+
+<FACE,8,2>Come back to me!
+
+<FACE,8,2>Come on home!
+
+<FACE,8,1>My baby did very well!
+
+<FACE,8,2>Yes, sir! Come on!
+
+<FACE,8,0>Aaargh! #26!
+
+<FACE,8,1>Fantastic, #26!
+
+<FACE,8,1>Good! Good! That dinged the weak spot.
+
+<FACE,8,0>Wha...? How dare you! That hit its weak spot!
+
+<FACE,8,0>Hmm... I'm worried...
+
+<FACE,8,1>Ho, ho, ho...
+
+<FACE,8,0>Aww, that's cruel!
+
+<FACE,8,1>Seems like I won!
+
+<FACE,8,0>Doggone it!
+
+<FACE,8,2><WAZA,87,2>Flash of THUNDER!
+
+<FACE,8,2>Did you see that? Now that's a good POKéMON,
+huh?
+
+<FACE,8,2>Mmm... Isn't its loveliness breathtaking?
+
+<FACE,8,2>Just watching POKéMON makes me happy!
+
+<FACE,8,1>Yes, my babies! You were awesome!
+
+<FACE,8,1>Ohhhh... I'm... I'm all choked up...
+
+<FACE,8,1>Happy! I'm just... Totally happy!
+
+<FACE,8,0>Waaaah! My POKéMON...
+
+<FACE,8,0>Okay, I get it! I lost! No more, please!
+
+<FACE,8,2>It doesn't matter if they lose...
+
+<FACE,8,2>Well, uh... How about that? Not bad.
+
+<FACE,8,2>Try again some other time.
+
+ELEKAL
+
+PORYGAL
+
+NIXAL
+
+OWPOKAL
+
+SCYTHAL
+
+CHANAL
+
+<FACE,8,0>

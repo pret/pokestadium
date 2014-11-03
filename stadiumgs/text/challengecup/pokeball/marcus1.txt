@@ -1,0 +1,83 @@
+<FACE,6,1>I'll show you the power of the great outdoors. It's truly wild!
+
+<FACE,6,1>I practice even when I'm camping. I can't lose!
+
+<FACE,6,1>The POKéMON I caught in the mountains and forests are tough!
+
+<FACE,6,1>Here goes!
+
+<FACE,6,1>How about this?!?
+
+<FACE,6,1>All right!
+
+<FACE,6,1>Hey!
+
+<FACE,6,1>This is the one.
+
+<FACE,6,1>Whoa!
+
+<FACE,6,1>Ha, ha, ha...
+
+<FACE,6,1>How about this?
+
+<FACE,6,1>This ought to do it.
+
+<FACE,6,0>Oh no!
+
+<FACE,6,1>Oh, yes!
+
+<FACE,6,1>Ha, ha, ha...Weak spot!
+
+<FACE,6,0>Whaaat!?!Weak spot?
+
+<FACE,6,0>Hmm...
+
+<FACE,6,1>Uh-huh, yup...
+
+<FACE,6,0>Awwww...
+
+<FACE,6,1>What! Game over already?
+
+<FACE,6,0>Owwww!
+
+<FACE,6,1><YAKEDO,4>Yippee! Things are going my way.
+
+<FACE,6,1>I like to fish when I go camping!
+
+<FACE,6,1>You can see many POKéMON when you go
+camping.
+
+<FACE,6,1>The beach is nice, but the mountains are the
+best.
+
+<FACE,6,1>See? Aren't my POKéMON tough? 
+
+<FACE,6,1>If you want tough POKéMON, you should go to the seas and
+mountains.
+
+<FACE,6,1>I won! It was bound to happen, really. Your training was no match
+for mine.
+
+<FACE,6,0>How could this happen? I trained really, really hard.
+
+<FACE,6,1>What? I lost? That's weird...
+
+<FACE,6,1>Should I go look for stronger POKéMON?
+
+<FACE,6,1>That was a good battle. By the way, do you like camping?
+
+<FACE,6,1>Oh, wait! Where are you going?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,6,0>

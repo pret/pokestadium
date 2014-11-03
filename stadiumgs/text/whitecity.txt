@@ -1,0 +1,68 @@
+<LINE,23><DIST,1>The STADIUM where battles are held. Test the mettle
+of your POKéMON with four sets of rules.
+
+<LINE,23><DIST,1>Play your Game Boy POKéMON here. Insert the Game Pak
+into your Transfer Pak while the N64 is off.
+
+<LINE,23><DIST,1>The GYM LEADERs await your arrival.
+Whoever reaches the top is the ultimate trainer.
+
+<LINE,23><DIST,1>You can play Mini-Games here.
+New POKéMON hope you'll join them for fun!
+
+<LINE,23><DIST,1>This is your room.
+Try redecorating it for a change of pace.
+
+<LINE,23><DIST,1>Battle here with your friends.
+Up to four players may take part in free battles.
+
+<LINE,23><DIST,1>PROF. OAK's research lab. He can help check your
+POKéDEX, organize items and trade POKéMON. 
+
+<LINE,23><DIST,1>EARL's POKéMON ACADEMY.
+He'll teach you how to battle effectively.
+
+<LINE,23><DIST,1>Rival awaits your challenge.
+Make it a hot, memorable showdown!
+
+ STADIUM
+
+GB TOWER
+
+ GYM LEADER CASTLE
+
+MINI-GAMES
+
+MY ROOM
+
+FREE BATTLE
+
+POKéMON LAB
+
+POKéMON ACADEMY
+
+ VS RIVAL
+
+<TEX,0> STADIUM
+
+<TEX,0> GYM LEADER CASTLE
+
+<TEX,0> VS RIVAL
+
+<LINE,26><DIST,1><TEX,0><TEX,1><TEX,2> Game Pak
+ Switch with <TEX,3> Button to 
+double the game speed.
+
+DODUO GB
+
+DODRIO GB
+
+<LINE,26><DIST,1>Congratulations!
+You got the DODUO Game Boy!
+
+<LINE,26><DIST,1>Awesome! 
+You got the DODRIO Game Boy!
+
+<LINE,26><DIST,1><TEX,0><TEX,1><TEX,2> Game Pak 
+Switch with <TEX,3> Button to 
+quadruple the game speed.

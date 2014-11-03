@@ -1,0 +1,623 @@
+Director
+
+Takao Shimizu
+
+Art Director
+
+Tatsuya Hishida
+
+3-DCG Directors
+
+Shinya Takahashi
+
+Tsuyoshi Watanabe
+
+Program Director
+
+Tsutomu Kaneshige
+
+Battle Scene Programmer
+
+Kenji Yamamoto
+
+Battle Effects Programmer
+
+Yasuhiro Kawaguchi
+
+Battle System Programmer
+
+Satoru Osako
+
+2D Programmers
+
+Yuzuru Ogawa
+
+Eiichi Shirakawa
+
+POKéMON Lab. Programmer
+
+Shiro Mouri
+
+Mini-Game Programmers
+
+Yoshikazu Yamashita
+
+Naoya Morimura
+
+Jyunya Kameda
+
+2DCG Designers
+
+Tokihiko Toyoda
+
+Ren Uehara
+
+Yo Ohnishi
+
+
+
+Yusuke Akifusa
+
+Akiko Hirono
+
+Kenta Motokura
+
+3-DCG Designers
+
+Makoto Miyanaga
+
+Hiroshi Matsunaga
+
+
+
+Emi Tomita
+
+Hirotake Ohtsubo
+
+Hidekazu Ohta
+
+Satomi Maekawa
+
+Yoshiyuki Oyama
+
+Battle Effects Designers
+
+Tomoaki Kuroume
+
+Keijiro Inoue
+
+Battle Data Director
+
+Yasuyuki Ohyagi
+
+Battle Data Designers
+
+Koji Doi
+
+Yasuhiro Suenaga
+
+Battle Sequence Director
+
+Kimiharu Hyodo
+
+Battle Sequence Designers
+
+Naotaka Matsumoto
+
+Seiji Ochiba
+
+Norihide Okamura
+
+Norihiko Morikawa
+
+POKéMON Class Director
+
+Hajime Takahashi
+
+Mini-Game Director
+
+Kiyoshi Mizuki
+
+Sound Director
+
+Masafumi Kawamura
+
+Sound Composer
+
+Hajime Wakai
+
+Sound Programmer
+
+Mitsuhiro Hikino
+
+GB System Programmer
+
+Tomohiro Kawase
+
+Data Management Programmer
+
+Shunsaku Kitamura
+
+Assistant Programmer
+
+Masahiro Nitta
+
+3-D POKéMON Director
+
+Benimaru Ito
+
+POKéMON Modelers
+
+Hiroaki Takenaka
+
+Jin Ikeda
+
+Daisuke Kageyama
+
+Junji Morii
+
+Ryuichi Yamamoto
+
+POKéMON Modelers
+
+Kazuo Yazawa
+
+Hiroaki Ito
+
+Shinichi Yoshikawa
+
+Hikaru Jinguji
+
+Kei Hoshiba
+
+POKéMON Modelers
+
+Toru Kurashige
+
+Atsuko Ujiie
+
+Yuichi Sawayama
+
+Jungo Suzuki
+
+Yosuke Hirata
+
+POKéMON Modelers
+
+Ryuta Kusumi
+
+Nachi Sugiyama
+
+Takemi Ichikawa
+
+Sou Yoshimura
+
+Masahiro Abeki
+
+POKéMON Modelers
+
+Tomohiro Sato
+
+Yuji Kawarada
+
+Junko Ariga
+
+Yoshiyuki Tagawa
+
+Pikachu Voice
+
+Ikue Otani
+
+Stadium Announcer
+
+Ted Lewis
+
+
+
+Original Game Design
+
+Satoshi Tajiri
+
+Advisement & Original Sound
+
+Junichi Masuda
+
+Advisement & Original Character Design
+
+Shigeki Morimoto
+
+Original Character Design
+
+& Character Art
+
+Ken Sugimori
+
+Original Character Design
+
+Motofumi Fujiwara
+
+Hironobu Yoshida
+
+Satoshi Ota
+
+Original Character Design
+
+Atsuko Nishida
+
+Muneo Saito
+
+Rena Yoshikawa
+
+Advisor
+
+Koji Nishino
+
+Coordination
+
+Hiroyuki Jinnai
+
+Coordination Assistants
+
+Gakuji Nomoto
+
+Hiroki Enomoto
+
+Character Supervisor
+
+Yoichi Kotabe
+
+Progress Management
+
+Shinichi Todori
+
+Keizo Kato
+
+Producers
+
+Kenji Miki
+
+Tsunekazu Ishihara
+
+Satoru Iwata
+
+Shigeru Miyamoto
+
+Executive Producer
+
+Hiroshi Yamauchi
+
+
+
+Technical Support
+
+Yoshihito Ikebata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+POKéMON STADIUM
+
+Staff
+
+
+
+Yasunari Nishida
+
+Kensuke Tanabe
+
+Makoto Wada
+
+Shigefumi Hino
+
+Masanao Arimoto
+
+Yasushi Matsubara
+
+Tomoaki Nakahara
+
+Noriko Ikegawa
+
+Ryuji Kobayashi
+
+Makoto Tanaka
+
+Hideaki Shimizu
+
+Kenta Nagata
+
+Toru Minegishi
+
+
+
+
+
+
+
+Hitoshi Kobayashi
+
+Akira Yamazaki
+
+Shizu Higashiyama
+
+Takeshi Iizuka
+
+Hajime Kuroyanagi
+
+Tomoaki Imakuni
+
+Mitsuteru Sato
+
+Satomi Kokubo
+
+Akira Matsumoto
+
+Masaya Kano
+
+Masato Nagashima
+
+Ken Ikuji
+
+Naotoshi Shike
+
+Kazumi Nishino
+
+Hiroshi Ishikawa
+
+Tomomi Takeda
+
+Hideki Ono
+
+Shinya Ohata
+
+Shigeo Kushida
+
+Akiko Shibata
+
+Akio Shibutani
+
+Yukio Seike
+
+Tomono Nishigori
+
+Hiroyuki Fujiwara
+
+Kenji Matsuura
+
+Junpei Mizusaki
+
+Mari Yamasaki
+
+Hideo Yamato
+
+Tomoyoshi Yamane
+
+Shinya Sano
+
+Takashi Ohishi
+
+
+
+
+
+
+
+Kazuo Koshima
+
+Yuji Kimijima
+
+Kenichiro Ashida
+
+Kazunori Koshiishi
+
+Koji Mitsunari
+
+
+
+
+
+
+
+Takashi Sakuma
+
+Koichi Koyasu
+
+Satoshi Kikkawa
+
+Shigefumi Kawase
+
+Jun Yamazaki
+
+Chiharu Ito
+
+
+
+
+
+Hirohito Yoshimoto
+
+Yoshinori Tanimoto
+
+Yasuki Tawaraishi
+
+
+
+
+
+Technical Support
+
+Hironobu Kakui
+
+Hiroyasu Sasano
+
+Yosuke Hamada
+
+Yoshinori Kiuchi
+
+Shingo Okamoto
+
+Keisuke Matsui
+
+Yoshinobu Mantani
+
+Takuya Kuribayashi
+
+Debug
+
+Super Mario Club NCL
+
+Naoki Inoue
+
+Tadazumi Ueno
+
+Yoshifumi Ogawa
+
+Hideki Katsui
+
+Keiji Kawabe
+
+Kayo Komaki
+
+Junko Komaki
+
+Tomohiko Komada
+
+Teruko Shigeyama
+
+Fumiaki Shimada
+
+Takuya Sugita
+
+Naoki Takami
+
+Atsushi Tada
+
+Yuko Tokuyama
+
+Keiichiro Nishimoto
+
+Satomi Hasuike
+
+Junya Hanai
+
+Tomoharu Hizakae
+
+Yuji Fujisaki
+
+Toshimune Hosoi
+
+Yoshihiro Maruyama
+
+Hifumi Miyazaki
+
+Special Thanks
+
+Katsuhito Yamauchi
+
+Kenji Saiki
+
+Takanao Kondo
+
+Teruki Murakawa
+
+Minoru Narita
+
+Ai Mashima
+
+Atsushi Tejima
+
+Daisuke Tsujimura
+
+Artwork
+
+Makoto Kano
+
+Naruhisa Kawano
+
+Wataru Yamaguchi
+
+Yusuke Nakano
+
+Masanori Sato
+
+Michiyo Ohshio
+
+Masao Kamada
+
+Yoshitomo Kitamura
+
+Manual Editor
+
+Naoyuki Kayama
+
+
+
+
+
+
+
+US Coordination
+
+Gail Tilden
+
+Hiro Nakamura
+
+Seth McMahill
+
+Hiroto Alexander
+
+Kiyohiko Ando
+
+
+
+
+
+
+
+Text Editor
+
+Michelle Powers
+
+Teresa Lillygren
+
+
+
+
+
+Text Translation
+
+Nob Ogasawara
+
+
+
+
+
+
+
+Product Testing
+
+Michael Kelbaugh
+
+Kyle Hudson
+
+Randy Shoemake
+
+Joel Simon
+
+Teresa Lillygren
+
+
+
+
+
+

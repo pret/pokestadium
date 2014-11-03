@@ -1,0 +1,79 @@
+<FACE,6,1>I'll take you on with my patented strategy!
+
+<FACE,6,1>I won't be responsible for what happens to your POKéMON.
+
+<FACE,6,1>I may not look like much, but I do have self-confidence.
+
+<FACE,6,1>Here goes!
+
+<FACE,6,1>How about this?!?
+
+<FACE,6,1>All right!
+
+<FACE,6,1>Hey!
+
+<FACE,6,1>This is the one.
+
+<FACE,6,1>Whoa!
+
+<FACE,6,1>Ha, ha, ha...
+
+<FACE,6,1>How about this?
+
+<FACE,6,1>This ought to do it.
+
+<FACE,6,0>Oh no!
+
+<FACE,6,1>Oh, yes!
+
+<FACE,6,1>Ha, ha, ha...Weak spot!
+
+<FACE,6,0>Whaaat!?!Weak spot?
+
+<FACE,6,0>Hmm...
+
+<FACE,6,1>Uh-huh, yup...
+
+<FACE,6,0>Awwww...
+
+<FACE,6,1>What! Game over already?
+
+<FACE,6,0>Owwww!
+
+<FACE,6,1><KONRAN,4>There! It's feeling it!
+
+<FACE,6,1>Do you like to barbecue when you go camping?
+
+<FACE,6,1>Do you like pasta when you're camping?
+
+<FACE,6,1>Do you like chili when you're camping?
+
+<FACE,6,1>How's that? You're no match for me at all.
+
+<FACE,6,1>My training is so much better than yours.
+
+<FACE,6,1>Heh, that was so-so.
+
+<FACE,6,0>Why? What went wrong?
+
+<FACE,6,1>I'd rather be camping!
+
+<FACE,6,0>Tch! Tch, tch, tch!
+
+<FACE,6,1>We can't let it end like this.
+
+<FACE,6,1>Well, if that's what you want...
+
+CHIKOTENT
+
+TOTOTENT
+
+CYNDATENT
+
+DIGTENT
+
+CHINTENT
+
+BELLSTENT
+
+<FACE,6,0>

@@ -1,0 +1,62 @@
+STEREO
+
+MONO
+
+ON
+
+OFF
+
+OPTIONS
+
+SOUND
+
+VOICE
+
+DELETE SAVED DATA
+
+QUIT
+
+The N64 Game Pak data will be deleted. 
+
+
+
+Yes
+
+No
+
+
+
+WIDE
+
+HEADPHONE
+
+DOLBY
+
+RULE EDIT
+
+All saved POKéMON and items in the N64 Game
+Pak will be lost. Is it really OK?
+
+The content has been changed.
+
+Save and quit
+
+Quit without saving
+
+Cancel
+
+Sound setting. Same sound will come out from both speakers when MONO is selected.
+
+Sound setting. Different sound will come out from each speaker when STEREO is selected.
+
+Sound setting. Broad sound will come out from speakers when WIDE is selected.
+
+Sound setting. Sound will come out from front and rear speakers when DOLBY is selected.
+
+Sound setting. When HEADPHONE is selected, gentle sounds will come out.
+
+Selection of announcer voice ON or OFF during the battle.
+
+The rules of EVENT BATTLE can be set.
+
+N64 Game Pak data can be deleted. The entire data will be deleted.

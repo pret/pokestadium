@@ -1,0 +1,78 @@
+Check/Move MAIL
+
+Re-order MAIL
+
+Exchange MAIL
+
+Write MAIL
+
+Accept MAIL
+
+Assign MAIL
+
+Delete MAIL
+
+L/R-Button: Switch windows
+
+GB MAILBOX
+
+N64 MAILBOX
+
+There is no MAIL to move.
+
+The destination is full.
+
+There is no MAIL to re-order.
+
+There is no MAIL to exchange.
+
+There is no MAIL to delete.
+
+There is no MAIL to give POKéMON.
+
+There is no more room for items.
+
+The MAILBOX is full.
+
+PACK
+
+PC
+
+METAL CASE
+
+#25's content
+will be deleted. Where
+should it be returned?
+
+Assign #25
+where?
+
+The #25 it's
+holding must be
+stored for it to
+accept #24.
+
+The blank MAIL was placed in #26.
+
+Store where?
+
+Use which MAIL?
+
+Usable MAIL
+
+Accept which MAIL?
+
+POKéMON holding MAIL
+
+Assign to which POKéMON?
+
+POKéMON able to hold MAIL
+
+PARTY
+
+GB
+
+N64
+
+The N64 box can hold #04 more POKéMON
+holding MAIL.

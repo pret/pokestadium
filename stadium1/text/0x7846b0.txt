@@ -1,0 +1,103 @@
+BOXes
+
+Move BOX
+
+Re-order BOX
+
+Exchange BOX
+
+Check BOX
+
+Return to Menu
+
+There are no BOXes to move.
+
+There are no BOXes to re-order.
+
+There are no BOXes to exchange.
+
+There are no BOXes to check.
+
+The destination BOX is full.
+
+GB Game Pak
+
+64 Game Pak
+
+BOX 1
+
+BOX 2
+
+BOX 3
+
+BOX 4
+
+BOX 5
+
+BOX 6
+
+BOX 7
+
+BOX 8
+
+BOX 9
+
+BOX 10
+
+BOX 11
+
+BOX 12
+
+GB BOX 1
+
+GB BOX 2
+
+GB BOX 3
+
+GB BOX 4
+
+GB BOX 5
+
+GB BOX 6
+
+GB BOX 7
+
+GB BOX 8
+
+GB BOX 9
+
+GB BOX 10
+
+GB BOX 11
+
+GB BOX 12
+
+64 BOX 1
+
+64 BOX 2
+
+64 BOX 3
+
+64 BOX 4
+
+64 BOX 5
+
+64 BOX 6
+
+64 BOX 7
+
+64 BOX 8
+
+64 BOX 9
+
+64 BOX 10
+
+64 BOX 11
+
+64 BOX 12
+
+BOX
+
+GB BOX
+
+64 BOX

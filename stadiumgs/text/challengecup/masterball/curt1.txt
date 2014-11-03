@@ -1,0 +1,84 @@
+<FACE,12,2>We men of the sea are proud of our muscles! I'm also proud of my
+POKéMON!
+
+<FACE,12,2>When we're out at sea, POKéMON battles are our favorite
+entertainment. Come on!
+
+<FACE,12,2>I often battle passengers from other countries. I do all the
+winning, though.
+
+<FACE,12,2>Okay, time to set sail!
+
+<FACE,12,2>#26, out you go!
+
+<FACE,12,2>#26, ahoy!
+
+<FACE,12,2>#26, let's go!
+
+<FACE,12,2>Ahoy there, #26!
+
+<FACE,12,2>Salvage time!
+
+<FACE,12,2>Withdraw, #26!
+
+<FACE,12,2>You're not right for this!
+
+<FACE,12,2>Switch with the next in line!
+
+<FACE,12,0>Whoooah! That was an eyeopener!
+
+<FACE,12,1>Utterly perfect!
+
+<FACE,12,1>Oh, aye! Lucked out! Critical hit!
+
+<FACE,12,0>A critical hit? These things happen.
+
+<FACE,12,0>Cruel...
+
+<FACE,12,1>Aye!
+
+<FACE,12,0>That was cowardly!
+
+<FACE,12,1>And boom! Down it goes!
+
+<FACE,12,0>Is this for real?
+
+<FACE,12,2>There are POKéMON all over the world.
+
+<FACE,12,2>Foreign POKéMON are pretty good, too.
+
+<FACE,12,2>A lot of our passengers board with POKéMON
+in tow.
+
+<FACE,12,2><KOHRI,4>It's not going to move while it's frozen.
+
+<FACE,12,1>Wah, ha, ha! I say, you didn't have much of an impact.
+
+<FACE,12,1>We won't be departing anytime soon. I'll take you on anytime!
+
+<FACE,12,2>You can hear strange cries at night while on a cruise. Want to
+hear them?
+
+<FACE,12,0>I blew it! I'll have to refine my skills by battling my shipmates.
+
+<FACE,12,2>I've got to find tougher POKéMON in foreign countries.
+
+<FACE,12,0>I feel like I was battered by vicious waves...
+
+<FACE,12,2>Ohhh... You're not half bad.
+
+<FACE,12,2>What's wrong? Feeling seasick?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,12,0>

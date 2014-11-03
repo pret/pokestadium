@@ -1,0 +1,82 @@
+<FACE,43,0>Even we officers can participate. After all, I'm on my break.
+
+<FACE,43,0>Battles are perfectly legal, but POKéMON abuse is not.
+
+<FACE,43,0>The streets have been quiet, so I've had time to thoroughly train
+my squad.
+
+<FACE,43,0>Can I count on your cooperation?
+
+<FACE,43,0>It's #26!
+
+<FACE,43,0>It's #26!
+
+<FACE,43,0>It's #26!
+
+<FACE,43,0>It's #26!
+
+<FACE,43,0>POKéMON change!
+
+<FACE,43,0>POKéMON change!
+
+<FACE,43,0>POKéMON change!
+
+<FACE,43,0>POKéMON change!
+
+<FACE,43,0>Ow, good one!
+
+<FACE,43,0>Oh, sorry!
+
+<FACE,43,0>Oh, sorry! That bopped it on its weak spot.
+
+<FACE,43,0>You hit its weak spot? Good one!
+
+<FACE,43,0>Not too shabby.
+
+<FACE,43,0>Whoops! Excuse me.
+
+<FACE,43,0>I can't make a move.
+
+<FACE,43,0>Yes! Case closed!
+
+<FACE,43,0>Whoa, whoa, whoa!
+
+<FACE,43,0><NEMURI,4>It fell asleep, I see...
+
+<FACE,43,0><KONRAN,4>Confusion is hard to take...
+
+<FACE,43,0>You have some dandy POKéMON.
+
+<FACE,43,0>On my off-duty days, I groom my POKéMON.
+
+<FACE,43,0>Oh, sorry I beat you. Don't give up!
+
+<FACE,43,0>You're pretty good yourself. You just need to apply yourself a
+little harder.
+
+<FACE,43,0>That was like an open-and-shut case. Thanks for your
+cooperation!
+
+<FACE,43,0>What's that? You've seen a BURGLAR around here?
+
+<FACE,43,0>You're a tough one. Would you care to join the police force?
+
+<FACE,43,0>Oops, my break is almost over. Thanks for your time.
+
+<FACE,43,0>Well, that was a good battle.
+
+<FACE,43,0>Be careful on your way home.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,43,0>

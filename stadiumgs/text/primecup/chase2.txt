@@ -1,0 +1,81 @@
+<FACE,60,2>Which is the key in fishing, equipment or skill? The answer is both!
+
+<FACE,60,2>Assessing the situation and the opponent... Fishing is like
+battling.
+
+<FACE,60,2>Different kinds of fishermen go after different kinds of fish.
+
+<FACE,60,2>I'll start with #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>I'll change equipment.
+
+<FACE,60,2>Let me change the fly.
+
+<FACE,60,2>I'll try a different spot.
+
+<FACE,60,2>How about some different bait?
+
+<FACE,60,0>Aiyee!
+
+<FACE,60,1>There! What a hit!
+
+<FACE,60,1>Weak spot! There's the hit!
+
+<FACE,60,0>Hi-yah! Critical hit, huh?
+
+<FACE,60,0>Hey, hey...
+
+<FACE,60,1>That's doing the trick.
+
+<FACE,60,0>What'll I do?
+
+<FACE,60,1>Yes, it's a big one!
+
+<FACE,60,0>Waaaah! I lost it!
+
+<FACE,60,1><AME,2>Oh... It's a nice rain...
+
+<FACE,60,0><WAZA,240,2>I need rain here...
+
+<FACE,60,1>All fishermen are early risers.
+
+<FACE,60,0>If you get seasick, fishing off a boat isn't
+an option.
+
+<FACE,60,1>Mmm. What a haul, what a haul...
+
+<FACE,60,1>Your view of the situation must've been too narrow.
+
+<FACE,60,1>My feelings are on the up and up!
+
+<FACE,60,0>Tch, lose to a kid like this?
+
+<FACE,60,0>Gotta get home and get some rest...
+
+<FACE,60,0>Arrrgh... Just couldn't pull it off...
+
+<FACE,60,2>There are days when you go home empty-handed.
+
+<FACE,60,2>You're bailing already?
+
+OMASISH
+
+ALIGISH
+
+TURNISH
+
+WEEZISH
+
+QUAGISH
+
+BROISH
+
+<FACE,60,0>

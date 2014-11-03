@@ -1,0 +1,213 @@
+SELECT ITEM
+
+ENTER
+
+EXCHANGE
+
+Use this item?
+
+Yes
+
+No
+
+ITEM
+
+to check TM
+
+to quit
+
+No item
+
+PARTY
+
+GB BOX 1
+
+GB BOX 2
+
+GB BOX 3
+
+GB BOX 4
+
+GB BOX 5
+
+GB BOX 6
+
+GB BOX 7
+
+GB BOX 8
+
+GB BOX 9
+
+GB BOX 10
+
+GB BOX 11
+
+GB BOX 12
+
+GB BOX 13
+
+GB BOX 14
+
+RENTAL POKéMON
+
+OK
+
+OK to Register
+
+Reselect some POKéMON
+
+Reselect all POKéMON
+
+Change Item
+
+Exchange which POKéMON?
+
+Exchange which POKéMON's item?
+
+Registration complete
+
+File full --
+registration failed.
+
+The combined levels of the three
+lowest-level POKéMON are too high.
+
+DITTO finished transforming.
+
+First POKéMON
+
+Second POKéMON
+
+Third POKéMON
+
+Fourth POKéMON
+
+Fifth POKéMON
+
+Sixth POKéMON
+
+Entry POKéMON
+
+LITTLE CUP
+
+POKé CUP
+
+CHALLENGE CUP
+
+PRIME CUP
+
+FREE BATTLE
+
+GYM LEADER CASTLE
+
+VS RIVAL
+
+Choose from which entry?
+
+Choose from which register?
+
+Registered
+POKéMON
+
+Register
+POKéMON
+
+Rental Only
+(Enter)
+
+Rental Only
+(register)
+
+This Game Pak can't be used.
+
+Save file not found.
+
+1 POKéMON
+
+2 POKéMON
+
+3 POKéMON
+
+4 POKéMON
+
+5 POKéMON
+
+6 POKéMON
+
+TRAINER
+
+Continue registration.
+
+Quit
+
+Delete more
+
+Quit
+
+Register POKéMON
+
+Check registered POKéMON
+
+Delete registered POKéMON
+
+Quit
+
+Once registered, the registered POKéMON
+may easily enter battles. Rental POKéMON
+may be registered. Up to 10 sets may be
+registered.
+
+Registration
+
+Delete POKéMON?
+
+Registered POKéMON / #20
+
+The transformed DITTO
+changed back to normal.
+
+Delete this set
+
+Check
+
+Cancel
+
+OK
+
+Select again
+
+Check
+
+Check which one?
+
+Registered POKéMON
+
+Old POKéDEX
+
+New POKéDEX
+
+A to Z
+
+No sort
+
+(#20)
+
+#04 set(s)
+
+Register
+
+Checking...
+
+Anything Goes
+
+There is no POKéMON Game Pak to choose.
+
+COM
+
+1P
+
+2P
+
+3P
+
+4P

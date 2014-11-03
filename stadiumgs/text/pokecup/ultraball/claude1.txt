@@ -1,0 +1,79 @@
+<FACE,3,1>All right! I'm gonna freeze your POKéMON solid, man!
+
+<FACE,3,1>Lemme tell ya--our hearts burn hot!
+
+<FACE,3,1>You know, you can't move if you're frozen.
+
+<FACE,3,1>Gonna roll over you like an avalanche!
+
+<FACE,3,1>Chill, man!
+
+<FACE,3,1>Get in there, #26!
+
+<FACE,3,1>Woosh, woosh! #26!
+
+<FACE,3,1>Do your thing, #26!
+
+<FACE,3,2>Yo! That's totally uncool!
+
+<FACE,3,1>Switch out!
+
+<FACE,3,1>Quick change!
+
+<FACE,3,1>Here comes the finisher!
+
+<FACE,3,2>Lost the edge there!
+
+<FACE,3,0>Ow! Right on the money!
+
+<FACE,3,0>Yeah, critical hit! Groovy!
+
+<FACE,3,2>Huh? Critical hit? You're kidding me!
+
+<FACE,3,0>Sweat drops...
+
+<FACE,3,0>Light it up!
+
+<FACE,3,2>Bummer...
+
+<FACE,3,0>Way cool, junior!
+
+<FACE,3,2>Hey! Total wipeout!
+
+<FACE,3,0><WAZA,217,4>Special delivery!
+
+<FACE,3,1>I can't sit still when we get snow.
+
+<FACE,3,1><WAZA,44,4>Take a crunchy BITE out of it!
+
+<FACE,3,1><WAZA,196,2>Gonna make you shiver like a wind chill!
+
+<FACE,3,0>Better think up some measures against ice.
+
+<FACE,3,0>Totally exhilarating, man.
+
+<FACE,3,0>Scored a "ten"! Maximum cool!
+
+<FACE,3,1>How about that? Eh, it's no big deal.
+
+<FACE,3,1>Huh? You're all right.
+
+<FACE,3,1>Heh. These things happen.
+
+<FACE,3,1>Let's settle the score, man!
+
+<FACE,3,1>Let's do this again, huh?
+
+AIRSEL
+
+AIRBIRD
+
+AIRBLAST
+
+AIRJOLT
+
+AIRVAPOR
+
+AIRFLARE
+
+<FACE,3,2>

@@ -1,0 +1,81 @@
+<FACE,38,2>Would you like to see my POKéMON cuties?
+
+<FACE,38,2>Oh, your POKéMON are adorable, too.
+
+<FACE,38,2>Did you beat BUGSY? I don't really like bug POKéMON.
+
+<FACE,38,2>Ready, set, go!
+
+<FACE,38,2>#26, go sweetie!
+
+<FACE,38,2>Next, my darling #26!
+
+<FACE,38,2>#26, honey. I'm counting on you!
+
+<FACE,38,1>#26, honey. Here's your chance!
+
+<FACE,38,2>It's not working! #26, come back!
+
+<FACE,38,2>#26, honey. You're done!
+
+<FACE,38,2>Okay, #26. Come back!
+
+<FACE,38,1>#26, I'm so proud of you! That's
+good enough!
+
+<FACE,38,0>Eeyaah! My darling, #26!
+
+<FACE,38,1>You did it, #26! You're so cool!
+
+<FACE,38,1>Critical hit! Lucky!
+
+<FACE,38,0>What! How dare you! That hit its weak spot!
+
+<FACE,38,0>Oh, no! Don't give up!
+
+<FACE,38,1>That's it!
+
+<FACE,38,0>Oh! Quit it!
+
+<FACE,38,1>Yay!
+
+<FACE,38,0>Eeyaah! #26!
+
+<FACE,38,1><MAHI,2>Uh-oh. It's paralyzed! Now what'll you do?
+
+<FACE,38,1><KOHRI,1>Oh, dear. So sorry!
+
+<FACE,38,2>What's your POKéMON's favorite move?
+
+<FACE,38,2>Cute POKéMON are absolutely the best. Don't
+you think so?
+
+<FACE,38,2>My darling POKéMON are more than just cute.
+
+<FACE,38,1>Ha, ha, ha! How disappointing for you.
+
+<FACE,38,2>Would you like to challenge me again?
+
+<FACE,38,0>Ahhh... My poor POKéMON...
+
+<FACE,38,0>You didn't have to be so mean!
+
+<FACE,38,0>Hmph! I'm not upset!
+
+<FACE,38,2>Well, this might be okay, too.
+
+<FACE,38,2>Excuse me? What's the matter? That's so boring!
+
+TEDDIETTE
+
+MARILLETTE
+
+MEOWETTE
+
+PHANPETTE
+
+WAGETTE
+
+SNUBETTE
+
+<FACE,38,0>

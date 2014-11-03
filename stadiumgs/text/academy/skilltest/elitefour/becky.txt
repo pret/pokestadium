@@ -1,0 +1,83 @@
+<FACE,9,2>Oh my... Will those POKéMON be able to keep up with our speed?
+
+<FACE,9,2>Your POKéMON look rather languid. Can they keep up with our
+speed?
+
+<FACE,9,2>My POKéMON are wickedly fast!
+
+<FACE,9,2>Number one! #26!
+
+<FACE,9,2>#26, let's go!
+
+<FACE,9,2>It has to be #26!
+
+<FACE,9,2>#26 will do.
+
+<FACE,9,2>#26 will tend to you.
+
+<FACE,9,2>Draw back for now!
+
+<FACE,9,2>#26, come back!
+
+<FACE,9,2>#26, you were good!
+
+<FACE,9,2>#26, you worked hard!
+
+<FACE,9,0>...Oh... What power!?!
+
+<FACE,9,1>Bingo! Just as I imagined!
+
+<FACE,9,1>Yes! That hit the weak spot! Just as I
+planned it!
+
+<FACE,9,2>Critical hit? That one couldn't be helped.
+
+<FACE,9,0>Oh! That's a little annoying!
+
+<FACE,9,2>So... We do this now and...
+
+<FACE,9,0>Awww, that's so tedious.
+
+<FACE,9,1>And that's the game! Ha, ha, ha...
+
+<FACE,9,0>Owww... Crash and burn...
+
+<FACE,9,2><WAZA,63,3>How's this!?! HYPER BEAM!
+
+<FACE,9,2><WAZA,96,3>We'll MEDITATE... Now we're all ready!
+
+<FACE,9,2><WAZA,14,3>SWORDS DANCE gets it raring to go!
+
+<FACE,9,2>Some people would rather collect POKéMON.
+
+<FACE,9,1>It could have been dangerous if you had used <COL1,PUSH,146,195,255,255>ENDURE<COL1,POP> smartly.
+Oh, um... Never mind.
+
+<FACE,9,1>Ha, ha, ha! That was a cakewalk!
+
+<FACE,9,2>If you get hit squarely by <COL1,PUSH,146,195,255,255>HYPER BEAM<COL1,POP>, of course you're going
+to lose.
+
+<FACE,9,0>I'm so angry! I don't think I can eat tonight.
+
+<FACE,9,0>You're atrocious! I'm going to tell EARL!
+
+<FACE,9,0>Waaaah! I don't like you at all! Yuck!
+
+<FACE,9,0>Arrrgh! So close! If only that had worked...
+
+<FACE,9,2>...Will you battle with me again?
+
+
+
+
+
+
+
+
+
+
+
+
+
+

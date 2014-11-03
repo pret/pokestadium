@@ -1,0 +1,127 @@
+POKé CUP
+
+POKé CUP
+
+POKé CUP
+
+PETIT CUP
+
+PIKA CUP
+
+PRIME CUP
+
+GYM LEADER CASTLE
+
+POKé BALL
+
+GREAT BALL
+
+ULTRA BALL
+
+MASTER BALL
+
+BATTLE 1
+
+BATTLE 2
+
+BATTLE 3
+
+BATTLE 4
+
+BATTLE 5
+
+BATTLE 6
+
+SEMI-FINAL
+
+FINAL BATTLE
+
+PEWTER GYM
+
+CERULEAN GYM
+
+VERMILION GYM
+
+CELADON GYM
+
+FUCHSIA GYM
+
+SAFFRON GYM
+
+CINNABAR GYM
+
+VIRIDIAN GYM
+
+ELITE FOUR
+
+RIVAL
+
+BROCK
+
+MISTY
+
+SURGE
+
+ERIKA
+
+KOGA
+
+SABRINA
+
+BLAINE
+
+GIOVANI
+
+LORELEI
+
+BRUNO
+
+AGATHA
+
+LANCE
+
+Keep battling?
+
+Continue
+
+Save and Quit
+
+Continue =
+
+Continue
+
+Save
+
+Re-enter
+
+From the start
+
+Quit
+
+Re-start at this GYM
+
+Try once more
+
+Change team combination
+
+Battle again
+
+BATTLE
+
+TRAINER
+
+Record
+
+win(s)
+
+Current saved battle data.
+
+Overwrite previous battle data?
+
+Save
+
+Continue w/o saving
+
+GYM LEADER
+
+Previous saved data will be deleted.

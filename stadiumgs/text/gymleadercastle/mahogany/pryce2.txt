@@ -1,0 +1,82 @@
+<FACE,63,0>Youth alone does not ensure victory! Experience is what counts.
+
+<FACE,63,0>Fine. I will help you improve.
+
+<FACE,63,0>The rigors of youth are certain to improve your character.
+
+<FACE,63,0>Ready!
+
+<FACE,63,0>#26 it is!
+
+<FACE,63,0>There can be none other than #26!
+
+<FACE,63,0>#26 is the one!
+
+<FACE,63,0>#26 is the only choice!
+
+<FACE,63,0>Fine, then...
+
+<FACE,63,0>Now, then...
+
+<FACE,63,0>Well, that means...
+
+<FACE,63,0>Hmm. In other words...
+
+<FACE,63,0>That's it! Magnificent!
+
+<FACE,63,0>I've known this to happen!
+
+<FACE,63,0>To take a critical hit like that...That's
+sloppy!
+
+<FACE,63,0>Hitting the weak spot is effective, but don't
+rely on luck!
+
+<FACE,63,0>What comes next?
+
+<FACE,63,0>There! Now what will you do?
+
+<FACE,63,0>Hmm. That was clever.
+
+<FACE,63,0>Just as I envisioned.
+
+<FACE,63,0>No good...
+
+<FACE,63,0>Brute force isn't the only way to do battle!
+
+<FACE,63,0>Draw out the abilities of your POKéMON!
+
+<FACE,63,0><MAHI,2>Think. Think deeply.
+
+<FACE,63,0><KOHRI,2>Your roster took a hit.
+
+<FACE,63,0>You have raw potential, but you need more seasoning.
+
+<FACE,63,0>Think about your mistakes.
+
+<FACE,63,0>The anger of losing will spur you to work harder.
+
+<FACE,63,0>Outstanding! That was perfect. Try not to forget what you
+feel now.
+
+<FACE,63,0>Did you train all by yourself? That's incredible!
+
+<FACE,63,0>Yes, I think that you have the potential to climb even higher.
+
+<FACE,63,0>A draw, is it? I may have underestimated you.
+
+<FACE,63,0>There is no shame in withdrawing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,63,0>

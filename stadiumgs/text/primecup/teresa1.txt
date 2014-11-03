@@ -1,0 +1,85 @@
+<FACE,38,2>A battle? Certainly!
+
+<FACE,38,2>I absolutely will not lose to you!
+
+<FACE,38,2>I know. You want to battle.
+But I, TERRY, have confidence in myself.
+
+<FACE,38,2>Ready, set, go!
+
+<FACE,38,2>#26, go sweetie!
+
+<FACE,38,2>Next, my darling #26!
+
+<FACE,38,2>#26, honey. I'm counting on you!
+
+<FACE,38,1>#26, honey. Here's your chance!
+
+<FACE,38,2>It's not working! #26, come back!
+
+<FACE,38,2>#26, honey. You're done!
+
+<FACE,38,2>Okay, #26. Come back!
+
+<FACE,38,1>#26, I'm so proud of you! That's
+good enough!
+
+<FACE,38,0>Eeyaah! My darling, #26!
+
+<FACE,38,1>You did it, #26! You're so cool!
+
+<FACE,38,1>Critical hit! Lucky!
+
+<FACE,38,0>What! How dare you! That hit its weak spot!
+
+<FACE,38,0>Oh, no! Don't give up!
+
+<FACE,38,1>That's it!
+
+<FACE,38,0>Oh! Quit it!
+
+<FACE,38,1>Yay!
+
+<FACE,38,0>Eeyaah! #26!
+
+<FACE,38,2>I think I especially like #26.
+
+<FACE,38,2>POKéMON... I never get tired of watching
+them.
+
+<FACE,38,2>See, look. Isn't it adorable?
+
+<FACE,38,2>When I chat with friends, all we talk about is
+POKéMON.
+
+<FACE,38,1>I told you so. It's my win.
+
+<FACE,38,1>Tough, aren't I? Does it tick you off?
+
+<FACE,38,1>Thank you. I think you can get much better, too.
+
+<FACE,38,0>My poor POKéMON...
+
+<FACE,38,0>Oh, no... That's so cruel...
+
+<FACE,38,0>Whatever. It doesn't really matter if I win or not...
+
+<FACE,38,2>Hmm... A draw. How interesting...
+
+<FACE,38,2>Ha, ha, ha... Chickened out! Bok, bok, bok!
+
+LOSSOMETTE
+
+AZUMARETTE
+
+PHAROSETTE
+
+FURRETTE
+
+TUFFETTE
+
+TOGETTE
+
+<FACE,38,0>
+
+

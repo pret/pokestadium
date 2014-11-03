@@ -1,0 +1,82 @@
+<FACE,25,1>Our special defense is secure! <COL1,PUSH,146,195,255,255>LIGHT SCREEN<COL1,POP>, we've got it!
+
+<FACE,25,1>Our special defense is secure!
+
+<FACE,25,1>Oh? Coming at me with PSYCHIC-type POKéMON? I've prepared
+for that!
+
+<FACE,25,1>How you lead is important!
+
+<FACE,25,2>It has to be #26!
+
+<FACE,25,2>I learned that I should go with #26.
+
+<FACE,25,2>#26 fits the formula!
+
+<FACE,25,2>My teacher tells me #26!
+
+<FACE,25,2>Switch out.
+
+<FACE,25,2>I'll switch this.
+
+<FACE,25,2>This is where it gets interesting.
+
+<FACE,25,2>I'm pulling it back.
+
+<FACE,25,0>Whaaat! That's ridiculous!
+
+<FACE,25,1>Oh, yeah! Just like they taught me!
+
+<FACE,25,1>Hitting the weak point? That was just lucky.
+
+<FACE,25,0>Why! Why did it hit the weak spot?
+
+<FACE,25,0>What are you supposed to do when this
+happens?
+
+<FACE,25,1>That certainly worked.
+
+<FACE,25,0>Oh, there's nothing I can do.
+
+<FACE,25,1>This is great! Battles are so much fun!
+
+<FACE,25,0>Aiyee! Aiyaiyaiyeee!
+
+<FACE,25,1><WAZA,113,3>Form a LIGHT SCREEN!
+
+<FACE,25,1><DOKUDOKU, 3>Ha, ha, ha... Gotcha!
+
+<FACE,25,1><WAZA,94,4>PSYCHIC, now!
+
+<FACE,25,1><WAZA,9,4>Go with a THUNDERPUNCH!
+
+<FACE,25,1>Perfection!
+
+<FACE,25,1>I did it! A victory of brain over brawn!
+
+<FACE,25,1>I won again! You obviously haven't done your homework.
+
+<FACE,25,0>Whaaaat!?! Th-that's allowed?
+
+<FACE,25,0>That's strange... I did exactly as I was taught...
+
+<FACE,25,0>I haven't been taught that yet...
+
+<FACE,25,2>That's disappointing. What did I do wrong?
+
+<FACE,25,1>You're going to do your homework? You're surprisingly
+responsible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

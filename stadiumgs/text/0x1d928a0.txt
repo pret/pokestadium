@@ -1,0 +1,77 @@
+Select the contents.
+
+Check/Move item.
+
+Re-order items.
+
+Exchange items.
+
+Organize items.
+
+There are no items to move.
+
+There are no items to re-order.
+
+There are no items to exchange.
+
+The destination is full of items.
+
+This item is needed by the Game Boy POKéMON.
+
+TMs and HMs in the PACK can't be re-ordered.
+
+The maximum number of a TM / HM in the PACK is 99.
+
+METAL CASE is used to store items for <TEX,0> only.
+<TEX,1>'s item can't be placed here.
+
+COLOR CASE is used to store items from <TEX,1> only.
+<TEX,0>'s item can't be placed here.
+
+METAL CASE is used to store items from <TEX,0> only.
+The item can't be moved to <TEX,1>.
+
+COLOR CASE is used to store items from <TEX,1> only.
+The item can't be moved to <TEX,0>.
+
+METAL CASE is used for the N64 Game Pak <TEX,0> only.
+COLOR CASE is used for the N64 Game Pak <TEX,1> only. The
+items can't be transferred between these two cases.
+
+Items Held
+
+Items in PACK
+
+#21's PC
+
+Metal Case
+
+Color Case
+
+Held items in the Game Boy Game Pak.
+
+Items in the PACK of the Game Boy Game Pak.
+
+Items in the PC of the Game Boy Game Pak.
+
+<TEX,0>'s ITEM BOX in the N64 Game Pak.
+
+<TEX,1>'s ITEM BOX in the N64 Game Pak.
+
+How would you like to organize #74?
+
+Sort by kinds.
+
+Sort by A to Z.
+
+X
+
+L/R-Button: Switch windows
+
+ITEMS
+
+BALLS
+
+TMs
+
+KEY ITEMS

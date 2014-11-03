@@ -1,0 +1,80 @@
+<FACE,15,2>I'm BLUE, the VIRIDIAN GYM LEADER. Let's get going!
+
+<FACE,15,2>I don't know about your strategy, but balance is the key!
+
+<FACE,15,2>You must be pretty good to get this far.
+
+<FACE,15,2>There!
+
+<FACE,15,2>It's #26!
+
+<FACE,15,2>#26, it's your show!
+
+<FACE,15,2>#26, it's yours for the taking!
+
+<FACE,15,1>Get it, #26!
+
+<FACE,15,2>This is pointless! Get back here!
+
+<FACE,15,2>Switch, #26!
+
+<FACE,15,1>#26, that's good!
+
+<FACE,15,1>Way to go, #26!
+
+<FACE,15,0>Arrrgh! You jerk!
+
+<FACE,15,1>There! Yes!
+
+<FACE,15,1>Yes! Critical hit! Ha, ha, ha! Lucky!
+
+<FACE,15,0>Waaah! No luck there! Took it where it's weak!
+
+<FACE,15,0>What? You can't be serious.
+
+<FACE,15,1>Okay!
+
+<FACE,15,0>Man, that's frustrating.
+
+<FACE,15,1>That's mine!
+
+<FACE,15,0>Wh-what? Wait a sec!
+
+<FACE,15,2><MAHI,2>OK!
+
+<FACE,15,2><YAKEDO,2>Heh, that's working!
+
+<FACE,15,2><KOHRI,2>Look at that! All frozen.
+
+<FACE,15,2>It's really something that you made it this
+far.
+
+<FACE,15,2>Sorry to say it, but this is it for you.
+
+<FACE,15,1>See? My power is what got me here.
+
+<FACE,15,2>It all comes down to your sense of balance.
+
+<FACE,15,0>Lost? I lost? No way!
+
+<FACE,15,2>You really are tough. I have to hand it to you.
+
+<FACE,15,2>I've only lost to him and now to you... Him? Hee, hee...
+
+<FACE,15,2>You just got lucky.
+
+<FACE,15,2>What? How boring is that?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,15,0>

@@ -1,0 +1,156 @@
+#01P
+
+ID
+
+Go beep with many people. You'll get all
+sorts of gifts.
+
+MYSTERY GIFT. With just a little beep, you
+get a gift.
+
+You can only go beep with five people a day.
+
+You can only get one MYSTERY GIFT from
+the same person in one day.
+
+Press the A Button to complete the link. If
+you press the B Button, the link will be
+cancelled.
+
+Quit MYSTERY GIFT. See you later.
+
+A girl transferred <COL1,PUSH,255,200,0,255>#70<COL1,POP> to
+<COL1,PUSH,130,170,255,255>#21<COL1,POP>'s house! 
+
+The little girl sent <COL1,PUSH,255,200,0,255>#70<COL1,POP>.
+
+Okay. See you tomorrow.
+
+Sunday
+
+Monday
+
+Tuesday
+
+Wednesday
+
+Thursday
+
+Friday
+
+Saturday
+
+Good morning.
+
+Hello.
+
+Good evening.
+
+Oh? You came yesterday, too.
+
+Thank you for visiting me every day.
+
+Oh, hello. Glad to meet you. I'm always here
+every day. Would you be my MYSTERY GIFT
+friend?
+
+Dazzling... You have a lot of decoration.
+
+I want a lot of decoration, too.
+
+Oh, hello. Long time no see.
+
+Oh, hello. This is your first visit to see me
+today isn't it?
+
+Oh, hello again.
+
+I'm sorry. I can't exchange gifts with you
+today.
+
+Ah! TENTACOOL!? Terrific! Terrific!
+
+Yaah! A PIKACHU BED! Great Great!
+I can go show this off.
+
+Mine is #70. Thank you.
+
+Oh, it's #70 again.
+Thank you.
+
+Thank you very much. It's my first
+#70 I received.
+
+It's a #70 again.
+Thank you very much.
+
+It's #70. Dazzling!
+Thank you. I'm so happy.
+
+Dazzling! I received #70
+again. I'll use it with care.
+
+Yaah! Dazzling. It's #70!
+Yaah! Yaah!
+
+Yaah! It's #70.
+I received once again.
+
+You're kidding!?
+#21 has #70! My first
+time ever to see it!
+
+N/A
+
+I received #70!
+Now I will decorate my room. Thank you.
+
+Mine is #70. I'm so happy.
+Thank you so much.
+
+Wow, #70 is so dazzling!
+This is my first one I received.
+Thank you.
+
+Yaah! I did it! It's #70!
+I hope this isn't a dream!
+
+Yaah! #21! I have a UNOWN DOLL.
+Yaah! Yaah!
+
+Do you know this rumor? There might be a
+way to receive a PIKACHU BED.
+
+Do you know this rumor? There might be a
+way to receive a TENTACOOL DOLL.
+
+You have #70! I'm jealous.
+
+I have received #70
+before. Are you jealous?
+
+I want #70. I'll be here
+tomorrow. Please come again.
+
+Today is a very happy day.
+
+That's so nice. I don't have that.
+
+Wow! #70 amazed me.
+I want that, too.
+
+You show up on #79 every week.
+
+It has been a week. How have you been?
+
+You used to come every day. Were you busy?
+
+Beep... Saving MYSTERY GIFT...
+
+N/A
+
+N/A
+
+N/A
+
+CARRIE

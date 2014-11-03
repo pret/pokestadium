@@ -1,0 +1,83 @@
+<FACE,34,0>All of my POKéMON are girls! So lovely!
+
+<FACE,34,0>Did you know that there are conditions that are similar to status
+problems?
+
+<FACE,34,0>I made a team of only female POKéMON!
+
+<FACE,34,1>Here they come!
+
+<FACE,34,1>Nice, huh? It's #26.
+
+<FACE,34,1>I love this #26!
+
+<FACE,34,1>Have you ever seen a #25 that
+looked as sweet as this one?
+
+<FACE,34,1>#26! Gorgeous, eh?
+
+<FACE,34,1>Okay, come back.
+
+<FACE,34,1>Are you tired? Come back.
+
+<FACE,34,0>Good going. That's enough.
+
+<FACE,34,0>You were awesome, #26!
+
+<FACE,34,2>Waah! Waaah! Waaaah!
+
+<FACE,34,0>Oh, beautiful!
+
+<FACE,34,0>That hit the weak spot! Oh, fantastic!
+
+<FACE,34,2>Aiyeee! Eeyaah! Please--not the weak spot!
+
+<FACE,34,2>Hmm... Interesting.
+
+<FACE,34,0>Oooh! Fabulous!
+
+<FACE,34,2>No! Please stop!
+
+<FACE,34,0>Tee, hee, hee...
+
+<FACE,34,2>Oh, wow. You're really not bad.
+
+<FACE,34,1><WAZA,214,2>Even while asleep, it never forgets about
+battling.
+
+<FACE,34,1><WAZA,23,4>#26, STOMP it!
+
+<FACE,34,1><WAZA,168,4>#26, THIEF!
+
+<FACE,34,1><WAZA,104,4>Take a big chomp!
+
+<FACE,34,0>All my POKéMON know how to <COL1,PUSH,146,195,255,255>SLEEP TALK<COL1,POP>.
+
+<FACE,34,0>As long as you don't pull any funny stuff, there's no question
+that I'll win!
+
+<FACE,34,1>Actually, I even taught it <COL1,PUSH,146,195,255,255>SLEEP TALK<COL1,POP>.
+
+<FACE,34,2>Waaah! My POKéMON! You're terrible!
+
+<FACE,34,2>You... You did some horrible things...
+
+<FACE,34,2>I don't want to lose like this!
+
+<FACE,34,1>So, was this a wasted battle?
+
+<FACE,34,0>You should take some of Earl's lectures.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,316 @@
+<LINE,24>Would you like to sit in on some CLASSes?
+You're sure to learn something useful.
+
+<LINE,24>How about some mental gymnastics?
+Quiz yourself or challenge some friends.
+
+<LINE,24>The LIBRARY has all sorts of handy reference
+materials--from details on POKéMON and their
+moves to info on items and type match-ups.
+
+<LINE,24>Exercise your battle skills. Grow smarter
+and stronger to go to the next CLASS.
+
+Which CLASS are you in?
+
+Test your battle knowledge. Grow smarter
+and stronger to go to the next CLASS.
+
+Which CLASS would you like to try?
+
+TEST
+
+BADGE
+
+CLASS
+
+LIBRARY
+
+CLASSROOM
+
+SKILL TEST
+
+WISDOM TEST
+
+CLASS
+
+EARL's POKéMON CLASS
+
+LIBRARY
+
+QUIZ
+
+SKILL TEST
+
+WISDOM TEST
+
+EARL's CLASS
+
+<COL1,PUSH,230,220,100,255>TRAINER
+CLASS<COL1,POP>
+
+<COL1,PUSH,100,219,100,255>GYM LEADER
+CLASS<COL1,POP>
+
+<COL1,PUSH,70,160,255,255>ELITE FOUR
+CLASS<COL1,POP>
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+<LINE,24>Would you like to study in a CLASSROOM? You
+could sit in on a lecture or take a test just for
+practice. Feel free to drop by any time!
+
+<LINE,24>The LIBRARY has all sorts of handy reference
+materials--from details on POKéMON and their
+moves to info on items and type match-ups.
+
+ 
+
+ 
+
+ 
+
+Do your best!
+
+<LINE,24>You passed both tests with flying colors.
+Congratulations!
+
+<LINE,24>In honor of your outstanding achievement, I
+award you this MEDAL for advancement!
+
+<LINE,24>Now move ahead to the next CLASS. And be
+sure to keep up the good work!
+
+<LINE,24>Sorry, but I have nothing
+ left to teach you.
+
+<LINE,24>Now head over to the STADIUM and work on
+improving your skill. Best of luck!
+
+<LINE,24>Come to my CLASSROOM! Listen to my lecture
+or practice in battle. If you pass the tests,
+you can go to the next CLASS.
+
+<LINE,24>Attend the TRAINER CLASS lecture, then try
+out your new-found knowledge in battle!
+
+<LINE,24>This one-on-one lesson is perfect for
+students in the GYM LEADER CLASS.
+
+<LINE,24>I recommend that all students in the
+ELITE FOUR CLASS attend this lecture.
+
+<LINE,24>Test your wisdom with this simple quiz.
+
+<LINE,24>Test your wisdom with these challenging
+questions. 
+
+<LINE,24>Test your wisdom with this advanced-level
+exam.
+
+<LINE,24>Test your skill in a battle against your
+classmates.
+
+<LINE,24>Test your skill in a battle against new,
+tougher students.
+
+<LINE,24>Test your skill in a battle against the
+Academy's most advanced students.
+
+You are in the TRAINER CLASS.
+
+You are in the GYM LEADER CLASS.
+
+You are in the ELITE FOUR CLASS.
+
+<LINE,24>The TRAINER CLASS lecture. Thanks for
+paying attention to the whole thing! 
+
+<LINE,24>The GYM LEADER CLASS lecture. I am happy
+that you always pay attention. 
+
+<LINE,24>The ELITE FOUR CLASS lecture. Thank you
+very much for listening to everything.
+
+<LINE,24>Test your wisdom... You've already passed!
+It's good to review, though.
+
+<LINE,24>Test your wisdom... You've already passed!
+Review to make your knowledge stronger.
+
+<LINE,24>Test your wisdom... You've already passed!
+Review so you don't forget what you learned.
+
+<LINE,24>Test your skill... You've already passed!
+JONATHAN and NANCY were disappointed!
+
+<LINE,24>Test your skill... You've already passed!
+Were TAMMY and DUSTIN strong opponents?
+
+<LINE,24>Test your skill... You've already passed!
+You're the toughest student at the Academy!
+
+<COL1,PUSH,255,160,210,255><COL2,PUSH,255,91,198,255>CLASS<COL1,POP><COL2,POP>
+
+<COL1,PUSH,255,160,210,255><COL2,PUSH,255,91,198,255>LECTURE<COL1,POP><COL2,POP>
+
+<COL1,PUSH,255,160,210,255><COL2,PUSH,255,91,198,255>TEST<COL1,POP><COL2,POP>
+
+<COL1,PUSH,255,160,210,255><COL2,PUSH,255,91,198,255>MEDAL<COL1,POP><COL2,POP>
+
+<LINE,24>Since you have collected all the <TEX,1>s
+ from this class, you've earned this gift!
+
+<LINE,24>I present to you this CLASS-advancement
+MEDAL!
+
+<LINE,24>Now you can study harder in a higher CLASS.
+
+<LINE,24>Since you passed all the classes...
+
+<LINE,24>You can now read more <TEX,0> 
+at the LIBRARY!!
+
+<LINE,24>Now go on outside and keep working toward
+your goals! Good luck!
+
+<LINE,24>If you collect the three TRAINER CLASS<TEX,1>,
+you will receive a medal here.
+
+<LINE,24>If you collect the three GYM LEADER CLASS<TEX,1>,
+you will receive a medal here.
+
+<LINE,24>If you collect the three ELITE FOUR CLASS<TEX,1>,
+you will receive a medal here.
+
+<LINE,24>A PICHU MEDAL! It's a reward for all your
+hard work!
+
+<LINE,24>A shiny PIKACHU MEDAL! Carry it as proof of
+your determined efforts!
+
+<LINE,24>The RAICHU MEDAL represents your toil
+and effort. Congratulations! You earned it!
+
+1 -Mobile Stadium
+
+2 -Play with Battle Data
+
+3 -Play with a Friend's Data
+
+4 -Rules Data
+
+5 -Organize Data
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>
+
+<LINE,33>
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>
+
+<LINE,33>
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>What is Battle Data?<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>
+
+<LINE,33>This is information on other trainers, such as which
+POKéMON they used and how they did in battle. You can
+get this data from the Crystal version.
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>What can you do with a Battle Data?<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>
+What can you do with Battle Data?
+
+<LINE,33>You can check to see how the
+other trainers are doing in
+their battles.
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>How many different Battle Data files are there?
+
+<LINE,33>You can have three Battle Data files on the
+Crystal Game Pak and six files on the N64 Game Pak.
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>What is a Friend's Data?
+
+<LINE,33>
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>What can you do with your Friend's Data?<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>
+
+<LINE,33>
+
+<LINE,33>You can get new Battle Rules from the Crystal
+Game Pak. Just choose Rule Select on the Options
+menu, then save up to eight rules settings on your N64
+Game Pak.
+
+<LINE,33>Battle Data, Friend's Data and Rule Data can be saved
+to or deleted from the N64  Game Pak. 
+These  data cannot be saved back to the Crystal
+Game Pak. 
+
+<LINE,33>
+
+<LINE,33>
+
+<LINE,33>
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>What is Rule Data?
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>How do I organize data?
+
+
+
+
+
+<LINE,33>A PLAY icon will appear during the demo.
+Press START to quit at any time. You can also
+challenge that trainer.
+
+<LINE,33>
+
+6 -Others
+
+<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL1,POP><FONT,POP>Others<FONT,PUSH,20><COL1,PUSH,110,150,255,255>***<COL2,POP><FONT,POP>
+
+<LINE,33>Once you have saved your Crystal data to the N64, you
+can play without the Crystal Game Pak. You can watch
+a match between the trainers saved in your battle
+data files or play against a Red, Blue or Yellow
+version.
+
+<LINE,33>
+
+
+
+<LINE,33>
+
+<LINE,33>
+
+<LINE,33>
+
+<LINE,34>
+
+<LINE,33>

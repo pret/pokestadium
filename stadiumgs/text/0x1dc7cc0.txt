@@ -1,0 +1,46 @@
+Yes
+
+No
+
+TYPE/
+
+POWER/
+
+ACCURACY/
+
+---
+
+What? #26 is evolving!
+
+Huh? #26 stopped evolving!
+
+Congratulations! Your #26
+evolved into #34!
+
+#32 was sent to #21.
+
+#26 learned #65!
+
+#26 is trying to learn
+#65.
+
+But #26 can't learn more than
+four moves.
+
+Delete an older move to make room for
+#65?
+
+#26 did not learn #65.
+
+Stop learning #65?
+
+If #65 is learned, this POKéMON
+cannot be moved to <TEX,1>.
+Is that OK?
+
+Which move should
+be forgotten?
+
+OK?
+
+?????

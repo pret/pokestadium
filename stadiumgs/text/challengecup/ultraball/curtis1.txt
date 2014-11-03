@@ -1,0 +1,82 @@
+<FACE,60,2>Some fishermen have no patience at all! Hurry up, already!
+
+<FACE,60,2>When I have a line in the water, I don't just stand there doing
+nothing.
+
+<FACE,60,2>Have you ever gone fishing? Isn't it addictive?
+
+<FACE,60,2>I'll start with #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>Let's try #26.
+
+<FACE,60,2>I'll change equipment.
+
+<FACE,60,2>Let me change the fly.
+
+<FACE,60,2>I'll try a different spot.
+
+<FACE,60,2>How about some different bait?
+
+<FACE,60,0>Aiyee!
+
+<FACE,60,1>There! What a hit!
+
+<FACE,60,1>Weak spot! There's the hit!
+
+<FACE,60,0>Hi-yah! Critical hit, huh?
+
+<FACE,60,0>Hey, hey...
+
+<FACE,60,1>That's doing the trick.
+
+<FACE,60,0>What'll I do?
+
+<FACE,60,1>Yes, it's a big one!
+
+<FACE,60,0>Waaaah! That's not right!
+
+<FACE,60,1>I'd love to go fishing every day.
+
+<FACE,60,1>Fishing is the ultimate hobby!
+
+<FACE,60,1>The seas, the streams--both have their
+charms.
+
+<FACE,60,1>Fishing at night is fun, too.
+
+<FACE,60,1>It feels great to win a battle!
+
+<FACE,60,1>I feel like I've just landed a big one!
+
+<FACE,60,1>If you use good equipment, your technique will improve.
+
+<FACE,60,0>I feel as if a big one got away and took my rod with it...
+
+<FACE,60,0>My preparation was all wrong. I'll fix that for next time!
+
+<FACE,60,0>Battles are fun, but so is fishing. Join me sometime!
+
+<FACE,60,2>A tie, huh? Well, that's fine, too. I don't worry about the little
+things.
+
+<FACE,60,2>What? You're leaving? I guess the tide has changed...
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,60,0>

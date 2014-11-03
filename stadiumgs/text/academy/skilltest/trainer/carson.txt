@@ -1,0 +1,83 @@
+<FACE,25,2>A battle is waged with three POKéMON per side.
+
+<FACE,25,2>A move won't work unless it exploits a weakness. ...Do you want to
+try me?
+
+<FACE,25,2>I'll negate any attack that doesn't exploit a weakness!
+
+<FACE,25,1>Initiate action!
+
+<FACE,25,2>It has to be #26!
+
+<FACE,25,2>I learned that I should go with #26.
+
+<FACE,25,2>#26 fits the formula!
+
+<FACE,25,2>My teacher tells me #26!
+
+<FACE,25,2>Not this one.
+
+<FACE,25,2>Gotta take this one out!
+
+<FACE,25,2>In this situation...
+
+<FACE,25,2>I'm pulling it back.
+
+<FACE,25,0>Whaaat! That's ridiculous!
+
+<FACE,25,1>Oh, yeah! Just like they taught me!
+
+<FACE,25,1>Hitting the weak point? That was just lucky.
+
+<FACE,25,0>Why! Why did it hit the weak spot?
+
+<FACE,25,0>What are you supposed to do when this
+happens?
+
+<FACE,25,1>That certainly worked.
+
+<FACE,25,0>Oh, there's nothing I can do.
+
+<FACE,25,1>This is great! Battles are so much fun!
+
+<FACE,25,0>...What! What do you mean?
+
+<FACE,25,1><WAZA,185,2>FAINT ATTACK!
+
+<FACE,25,1><WAZA,231,2>Lash out with your IRON TAIL!
+
+<FACE,25,1><WAZA,211,2>SCIZOR, STEEL WING!
+
+<FACE,25,1><WAZA,89,3>DONPHAN, EARTHQUAKE!
+
+<FACE,25,1>Did you successfully exploit weaknesses?
+
+<FACE,25,1>That was a textbook battle.
+
+<FACE,25,2>If you want to beat me, you'll have to attack my weak points
+precisely.
+
+<FACE,25,0>You know more about type alignments than I do?
+
+<FACE,25,0>That's strange... I did exactly as I was taught...
+
+<FACE,25,0>Waaaaah! What am I going to tell my friends?
+
+<FACE,25,2>That's disappointing. What did I do wrong?
+
+<FACE,25,2>Make sure you study before you come back. Let's go to the
+LIBRARY.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

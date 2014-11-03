@@ -1,0 +1,375 @@
+DIRECTOR
+
+Takao Shimizu
+
+PROGRAM DIRECTOR
+
+Yasunari Nishida
+
+ART DIRECTOR
+
+Tatsuya Hishida
+
+2D CG DIRECTOR
+
+Masanao Arimoto
+
+3D CG DIRECTOR
+
+Shinya Takahashi
+
+MINI-GAME DIRECTOR
+
+Makoto Wada
+
+BATTLE SCENE PROGRAMMER
+
+Kenji Yamamoto
+
+EFFECTS PROGRAMMER
+
+Yasuhiro Kawaguchi
+
+MINI-GAME PROGRAMMER
+
+Yuzuru Ogawa
+
+Tsutomu Kaneshige
+
+Shiro Mouri
+
+DATA MANAGEMENT PROGRAMMER
+
+Shunsaku Kitamura
+
+AI PROGRAMMER
+
+Satoru Osako
+
+GB SYSTEM PROGRAMMER
+
+Tomohiro Kawase
+
+2D CG DESIGNERS
+
+Tokihiko Toyoda
+
+Makoto Tanaka
+
+Shigefumi Hino
+
+Yasushi Matsubara
+
+Tomoaki Nakahara
+
+3D CG DESIGNERS
+
+Noriko Ikegawa
+
+Junji Morii
+
+Ryuji Kobayashi
+
+Makoto Miyanaga
+
+POKéMON MODELING DIRECTORS
+
+Tsuyoshi Watanabe
+
+Benimaru Itou
+
+POKéMON MODELERS
+
+Hitoshi Kobayashi
+
+Toru Kurashige
+
+Akira Yamazaki
+
+Shizu Higashiyama
+
+Takeshi Iizuka
+
+Hajime Kuroyanagi
+
+Tomoaki Imakuni
+
+Kazuo Yazawa
+
+POKéMON MODELERS
+
+Shinichi Yoshikawa
+
+Mitsuteru Satou
+
+Takemi Ichikawa
+
+Atsuko Ujiie
+
+Satomi Kokubo
+
+Hikaru Jinguji
+
+Hiroaki Itou
+
+Ryuta Kusumi
+
+POKéMON MODELERS
+
+Nachi Sugiyama
+
+Yuichi Sawayama
+
+Jungo Suzuki
+
+Akira Matsumoto
+
+Masaya Kanou
+
+Masato Nagashima
+
+Ken Ikuji
+
+Naotoshi Shike
+
+POKéMON MODELERS
+
+Kazumi Nishino
+
+Hiroshi Ishikawa
+
+Tomomi Takeda
+
+Hideki Ono
+
+Shinya Ohata
+
+Shigeo Kushida
+
+Akiko Shibata
+
+Akio Shibutani
+
+POKéMON MODELERS
+
+Yukio Seike
+
+Tomono Nishigori
+
+Hiroyuki Fujiwara
+
+Kei Hoshiba
+
+Kenji Matsuura
+
+Junpei Mizusaki
+
+Mari Yamasaki
+
+Hideo Yamato
+
+POKéMON MODELERS
+
+Hiroaki Takenaka
+
+Tomoyoshi Yamane
+
+Shinya Sano
+
+BATTLE DATA DIRECTOR
+
+Yasuyuki Oyagi
+
+BATTLE DATA DESIGNERS
+
+Kouji Doi
+
+Takashi Oishi
+
+BATTLE SEQUENCE DIRECTOR
+
+Kimiharu Hyodo
+
+BATTLE SEQUENCE DESIGNERS
+
+Naotaka Matsumoto
+
+Seiji Ochiba
+
+SOUND DIRECTOR
+
+Masafumi Kawamura
+
+SOUND PROGRAMMERS
+
+Mitsuhiro Hikino
+
+Hideaki Shimizu
+
+SOUND COMPOSERS
+
+Hajime Wakai
+
+Kenta Nagata
+
+Toru Minegishi
+
+PIKACHU VOICE
+
+Ikue Otani
+
+STADIUM ANNOUNCER
+
+Ted Lewis
+
+RECORDING ENGINEER
+
+Questar Welsh
+
+(Real to Reel Recording, Inc.)
+
+TRANSFER PAK STAFF
+
+Kazuo Koushima
+
+Yuji Kimijima
+
+Kenichirou Ashida
+
+Kazunori Koshiishi
+
+Kouji Mitsunari
+
+TECHNICAL SUPPORT
+
+Takashi Sakuma
+
+Yoshiyuki Tagawa
+
+Kouichi Koyasu
+
+Satoshi Kikkawa
+
+
+
+Shigefumi Kawase
+
+Jun Yamazaki
+
+Chiharu Itou
+
+TECHNICAL SUPPORT
+
+Hironobu Kakui
+
+Hirohito Yoshimoto
+
+Yoshinori Tanimoto
+
+Tetsuya Sasaki
+
+Shin Hasegawa
+
+Yasuki Tawaraishi
+
+CHARACTER SUPERVISOR
+
+Youichi Kotabe
+
+ORIGINAL GAME DESIGN
+
+Satoshi Tajiri
+
+ORIGINAL CHARACTERS
+
+Ken Sugimori
+
+Shigeki Morimoto
+
+Motofumi Fujiwara
+
+Atsuko Nishida
+
+ADVISORS
+
+Takenori Ota
+
+Junichi Masuda
+
+Kouji Nishino
+
+Hiroyuki Jinnai
+
+SPECIAL THANKS
+
+Kenji Saiki
+
+Katsuhito Yamauchi
+
+Tadashi Inoue
+
+
+
+Kensuke Tanabe
+
+Keisuke Terasaki
+
+Naruhisa Kawano
+
+Yasuhiro Sakai
+
+Atsushi Tejima
+
+Wataru Yamaguchi
+
+SPECIAL THANKS
+
+Yusuke Nakano
+
+Masanori Satou
+
+Michiyo Oshio
+
+Hiroto Alexander
+
+Kiyohiko Ando
+
+PRODUCT TESTING
+
+Randy Shoemake
+
+Kathy Huguenard
+
+TESTING
+
+SUPER MARIO CLUB
+
+U.S. COORDINATION
+
+Gail Tilden
+
+Hiro Nakamura
+
+Kenji Okubo
+
+PROGRESS MANAGEMENT
+
+Kimiyoshi Fukui
+
+Keizou Katou
+
+PRODUCERS
+
+Kenji Miki
+
+Tsunekazu Ishihara
+
+Satoru Iwata
+
+Shigeru Miyamoto
+
+EXECUTIVE PRODUCER
+
+Hiroshi Yamauchi
+
+

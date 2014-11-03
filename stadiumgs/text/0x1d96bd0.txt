@@ -1,0 +1,45 @@
+LITTLE CUP
+
+POKé CUP
+
+CHALLENGE CUP
+
+PRIME CUP
+
+L5 only
+
+L50 ~ 55
+
+L1 ~ 100
+
+
+
+<LINE,23><DIST,1>A tournament open only to L5 POKéMON.
+Your true abilities may become apparent.
+
+<LINE,23><DIST,1>The official POKéMON League tournament.
+Hone your skills to become the champ!
+
+<LINE,23><DIST,1>Battle in this CUP tournament using a preselected team.
+Can you handle lots of different kinds of POKéMON?
+
+<LINE,23><DIST,1>The ultimate tournament without level restrictions.
+Let it all hang out!
+
+
+
+STADIUM
+
+COM
+
+RULES
+
+ 
+
+
+
+
+
+
+
+

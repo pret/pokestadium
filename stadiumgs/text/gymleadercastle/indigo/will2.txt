@@ -1,0 +1,83 @@
+<FACE,23,0>So, you have finally reached me. All right. Prepare for battle!
+
+<FACE,23,0>Have you studied up on PSYCHIC-type POKéMON?
+
+<FACE,23,0>I have observed your battle techniques. I'm ready for you!
+
+<FACE,23,0>Start!
+
+<FACE,23,0>Switch to #26!
+
+<FACE,23,0>#26, go!
+
+<FACE,23,0>#26, fight!
+
+<FACE,23,0>Attack, #26!
+
+<FACE,23,0>Come back, #26!
+
+<FACE,23,0>#26, that will do!
+
+<FACE,23,0>That was good!
+
+<FACE,23,0>You earned a reward!
+
+<FACE,23,0>Hmm... Not bad.
+
+<FACE,23,0>Did that surprise you?
+
+<FACE,23,0>We're taking aim at its weak spot. How do you
+like that?
+
+<FACE,23,0>I felt that. That connected with a weak
+spot.
+
+<FACE,23,0>Oh... This is vexing.
+
+<FACE,23,0>Now what are your options?
+
+<FACE,23,0>Hmm... This can't be helped.
+
+<FACE,23,0>That decided it.
+
+<FACE,23,0>I blew it all!
+
+<FACE,23,0>You lived up to the rumors.
+
+<FACE,23,0>You may be good enough to join the
+ELITE FOUR.
+
+<FACE,23,0><WAZA,094,4>Here's an attack on the psyche!
+
+<FACE,23,0><MAHI,2>You really are unlucky.
+
+<FACE,23,0>That was close. I wonder what it is that you lack.
+
+<FACE,23,0>Sorry about that, but I'm shooting for the top myself.
+
+<FACE,23,0>I never thought you could come this far.
+
+<FACE,23,0>I'm impressed. I have no regrets about this. Go on ahead.
+
+<FACE,23,0>Of all the opponents I've faced, you're the best without a doubt.
+
+<FACE,23,0>I've expended all my power. I have no regrets about losing
+this way.
+
+<FACE,23,0>This battle will go down in history. I'm sure of it...
+
+<FACE,23,0>You're quitting? After all you've done to get here?
+
+
+
+
+
+
+
+
+
+
+
+
+
+<FACE,23,0>

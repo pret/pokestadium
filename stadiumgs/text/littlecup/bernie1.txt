@@ -1,0 +1,80 @@
+<FACE,57,2>In this tournament, you can't win unless you're really good.
+
+<FACE,57,2>Hey! What's with that look of scorn?
+
+<FACE,57,2>Okay then! I'll settle this in a cool way!
+
+<FACE,57,2>Ready?
+
+<FACE,57,2>It's #26!
+
+<FACE,57,2>Ha, ha... Here's #26!
+
+<FACE,57,2>#26 is the one!
+
+<FACE,57,2>#26, here and now!
+
+<FACE,57,2>Get back, #26!
+
+<FACE,57,2>#26, get back here!
+
+<FACE,57,1>Way to go, #26!
+
+<FACE,57,2>That's good! Come back!
+
+<FACE,57,0>Aaack! No way!
+
+<FACE,57,1>Yeah! That's good!
+
+<FACE,57,1>Pow! Socked the weak spot! Good going,
+#26!
+
+<FACE,57,0>Oh! You goof! Don't get hit there!
+
+<FACE,57,2>Ohh... That's not good...
+
+<FACE,57,1>Yeah! Exactly as planned!
+
+<FACE,57,0>Shucks!
+
+<FACE,57,1>I did it! I won!
+
+<FACE,57,0>No way!
+
+<FACE,57,1>I'm not going to go easy on you.
+
+<FACE,57,1>Do you have any rare POKéMON?
+
+<FACE,57,1>I like cool POKéMON.
+
+<FACE,57,1>If I win, I'm gonna brag to all my friends.
+
+<FACE,57,1>I won! I won! Ha, ha, ha! I won!
+
+<FACE,57,1>Ha, ha, ha! I'm gonna tell all my friends!
+
+<FACE,57,1>I did it. That's so cool!
+
+<FACE,57,0>Awww, shucks! That was so close!
+
+<FACE,57,2>That's strange. I'm gonna catch better POKéMON!
+
+<FACE,57,0>Hmph! So what!
+
+<FACE,57,2>Ending like this is no good at all.
+
+<FACE,57,2>I've never seen anyone surrender before.
+
+TOGEPINY
+
+OMANINY
+
+KERNINY
+
+SLUGINY
+
+SQUIRTINY
+
+MANKINY
+
+<FACE,57,0>

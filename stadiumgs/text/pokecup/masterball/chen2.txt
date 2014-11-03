@@ -1,0 +1,82 @@
+<FACE,5,0>To be able to dedicate myself to training--should I be grateful
+for that?
+
+<FACE,5,0>The struggle to achieve inner peace is another battle.
+
+<FACE,5,0>One must not try to flee from misery.
+
+<FACE,5,0>#26!
+
+<FACE,5,0>How about #26?
+
+<FACE,5,0>I will go with #26!
+
+<FACE,5,0>I share your pain, but this, too, is a trial!
+#26!
+
+<FACE,5,0>The finish is important! #26!
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>I shall switch out.
+
+<FACE,5,0>Ah! How impressive!
+
+<FACE,5,0>Forgive me!
+
+<FACE,5,0>Ah, well, well... It got the weak spot.
+
+<FACE,5,0>My goodness! It hit the weak spot.
+
+<FACE,5,0>There is nothing to fear.
+
+<FACE,5,0>There is nothing to fear.
+
+<FACE,5,0>One must endure...
+
+<FACE,5,0>And now it will rest.
+
+<FACE,5,0>It is over...
+
+<FACE,5,0><WAZA,212,2>MEAN LOOK. What are you going to do?
+
+<FACE,5,0><WAZA,195,2>How about PERISH SONG?
+
+<FACE,5,0><WAZA,109,4>There are lots of mysteries in the world.
+
+<FACE,5,0>You must overcome what is within your own
+soul.
+
+<FACE,5,0>Thank you for this opportunity.
+
+<FACE,5,0>I will face you as often as you wish.
+
+<FACE,5,0>That was an honorable battle.
+
+<FACE,5,0>I will return.
+
+<FACE,5,0>That was a good experience for me.
+
+<FACE,5,0>I will try never to forget what happened today.
+
+<FACE,5,0>At least I made a fair effort.
+
+<FACE,5,0>Ah... A matter of some urgency has arisen?
+
+CROBAGE
+
+UMBRAGE
+
+ENTEAGE
+
+JYAGE
+
+DREAGE
+
+LAPRAGE
+
+<FACE,5,0>

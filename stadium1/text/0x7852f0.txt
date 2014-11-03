@@ -1,0 +1,35 @@
+DISPLAY ORDER
+
+A to Z
+
+By No.
+
+DATA
+
+CRY
+
+AREA
+
+QUIT
+
+ID/
+
+SEEN
+
+OWN
+
+CAUGHT
+
+No. of POKéMON
+
+HT
+
+WT
+
+ ''
+
+ lbs.
+
+No.
+
+ '

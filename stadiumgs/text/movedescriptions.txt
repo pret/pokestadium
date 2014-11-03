@@ -1,0 +1,1000 @@
+A NORMAL-type attack. Slightly
+stronger than TACKLE.
+Many POKéMON know this move.
+
+A FIGHTING-type attack. Often
+turns into a critical hit and
+inflicts double the damage.
+
+Although each slap is weak, this
+attack hits the target two to
+five times in succession.
+
+Although each slap is weak, this
+attack hits the target two to
+five times in succession.
+
+A NORMAL-type attack move.
+It is highly accurate and
+relatively powerful.
+
+A move that nets money at the
+end of battle. How much depends
+on attack frequency and level.
+
+A special FIRE-type attack.
+Has a one-in-ten chance of
+inflicting a burn on the target.
+
+A special ICE-type attack.
+Has a one-in-ten chance of
+freezing the target.
+
+A special ELECTRIC-type
+attack. Has a one-in-ten shot
+at paralyzing the target.
+
+A NORMAL-type attack.
+Sharp claws are used to inflict
+damage on the target.
+
+A NORMAL-type attack used only
+by POKéMON with pincers. The
+target is gripped and injured.
+
+A single-hit knockout attack.
+Learned only by POKéMON that
+have large pincers.
+
+A two-turn attack with the wind
+attack in the second turn.
+Learned by many FLYING types.
+
+A special move that boosts
+the user's ATTACK power.
+Normally used up to three times.
+
+A NORMAL-type attack.
+Also used for cutting small
+bushes to open new paths.
+
+A FLYING-type attack. The bird
+POKéMON flaps its wings to
+create a powerful wind.
+
+A FLYING-type attack. The
+attacking  POKéMON spreads its
+wings and charges.
+
+A powerful wind that blows the
+target away. The opposing
+trainer must use a new POKéMON.
+
+The POKéMON flies high, then
+strikes in the next turn. Used
+to fly to places already visited.
+
+Traps and squeezes the target
+over several turns. The target
+cannot move while under attack.
+
+A NORMAL-type attack move. The
+attacker uses an appendage
+to slam the target hard.
+
+A GRASS-type attack.
+The POKéMON uses its cruel
+whips to strike the opponent.
+
+A NORMAL-type attack. Has a
+one-in-three chance of making
+the target flinch if it hits.
+
+A FIGHTING-type attack. As the
+name implies, it is actually two
+quick kicks in succession.
+
+A NORMAL-type attack. Out of
+all the POKéMON kicking attacks,
+this is the strongest.
+
+A forceful FIGHTING-type
+attack. If it misses, however,
+the attacker gets hurt.
+
+A sharp FIGHTING-type attack.
+Has a one-in-three shot at
+making the target flinch.
+
+An attack in which sand is used
+to blind the target and reduce
+its attack accuracy.
+
+A NORMAL-type attack. Has a
+one-in-three chance of making
+the target flinch if it hits.
+
+A NORMAL-type attack. A sharp
+horn is driven hard into the
+target to inflict damage.
+
+A NORMAL-type attack.
+The POKéMON rapidly jabs at its
+opponent several times.
+
+A single-hit knockout attack.
+Learned only by POKéMON with a
+horn or horns.
+
+A NORMAL-type attack. Many
+POKéMON know this attack right
+from the start.
+
+A NORMAL-type attack. Has a
+one-in-three chance of para-
+lyzing the target if it hits.
+
+Traps and squeezes the target
+over two to five turns, making
+the target unable to move.
+
+A charging attack. One quarter
+of the damage it inflicts comes
+back to hurt the attacker.
+
+An attack that lasts two to
+three turns. Afterwards, the
+attacker becomes confused.
+
+A charging tackle attack. One
+quarter of the damage comes
+back to hurt the attacker.
+
+A move that lowers the target's
+DEFENSE. Useful against tough,
+armored POKéMON.
+
+A POISON-type attack. Has a
+one-in-three chance of leaving
+the target poisoned.
+
+An attack that strikes twice.
+The target may occasionally
+become poisoned.
+
+An attack that fires many 
+needle-like projectiles from
+the body. Strikes several times.
+
+A move that lowers the target's
+DEFENSE. Useful against tough,
+armored POKéMON.
+
+A bite made using sharp fangs.
+This may cause the opponent to
+flinch, and it might not attack.
+
+A move that lowers the target's
+ATTACK power. Can normally be
+used up to six times.
+
+A terrifying roar that drives
+the target away. The opposing 
+trainer must use a new POKéMON.
+
+A special NORMAL-type move.
+A soothing melody lulls the
+target to sleep.
+
+A special NORMAL-type move.
+Supersonic sound waves are
+used to confuse the target.
+
+A NORMAL-type attack. It
+always inflicts a set amount of
+damage.
+
+A move that disables one of the
+target's moves. That move can't
+be used until it wears off.
+
+A POISON-type attack. Has a
+one-in-ten chance of lowering
+the target's DEFENSE.
+
+A FIRE-type attack. Has a one-
+in-ten chance of leaving the
+target with a damaging burn.
+
+A powerful FIRE-type attack.
+Has a one-in-ten chance of
+leaving the target with a burn.
+
+Provides full protection
+against any enemy status
+attack.
+
+A WATER-type attack. Stronger
+than BUBBLE. Many WATER-type
+POKéMON learn this move.
+
+The strongest WATER-type
+attack. While it is powerful, it
+may miss the target.
+
+A WATER-type attack. This move
+is strong and highly accurate.
+
+An ICE-type attack.
+Has a one-in-ten chance of
+freezing the target solid.
+
+The strongest ICE-type
+attack. Has a one-in-ten
+chance of freezing the target.
+
+A PSYCHIC-type attack. Has a
+one-in-ten chance of making
+the target confused.
+
+A WATER-type attack. Has a
+one-in-ten chance of reducing
+the target's SPEED.
+
+An ICE-type attack. Has a 
+one-in-ten chance of reducing
+the target's ATTACK power.
+
+An extremely powerful attack.
+The attacker becomes so tired,
+it has to rest the next turn.
+
+A standard FLYING-type
+attack. It is favored by
+POKéMON with beaks or horns.
+
+A standard FLYING-type
+attack. It is strong and highly
+likely to hit the target.
+
+Strongest FIGHTING attack.
+One quarter of the damage also
+hurts the attacker.
+
+A FIGHTING-type attack. Has a
+one-in-three chance of making
+the target flinch if it hits.
+
+A retaliation move that pays
+back double the damage of a
+physical attack. Very accurate.
+
+A FIGHTING-type attack.
+Throws the target with enough
+force to flip the world.
+
+A very powerful NORMAL-type
+attack. Also used for moving
+obstacles like boulders.
+
+A GRASS-type attack. It adds
+half the HP it drained from the
+target to the attacker's HP.
+
+A GRASS-type attack. It adds
+half the HP it drained from the
+target to the attacker's HP.
+
+Plants a seed on the target
+POKéMON. It slowly drains the
+target's HP for the attacker.
+
+A NORMAL-type move that raises
+SPCL.ATK. Normally used up to
+six times.
+
+A GRASS-type attack that
+uses sharp-edged leaves.
+Likely to get a critical hit.
+
+Strongest GRASS-type attack.
+Energy is absorbed in the first
+turn, then fired on the next.
+
+A move that poisons the target.
+If poisoned, the victim loses HP
+steadily.
+
+Special move that causes para-
+lysis. The victim has a one-in-
+four chance of immobility.
+
+Induces sleep. A POKéMON will
+stay asleep for several turns
+if an item isn't used to wake it.
+
+A dance-like attack that lasts
+two to three turns. The
+attacker becomes confused.
+
+Strings are sprayed out and
+wrapped around the target to
+reduce its SPEED.
+
+A DRAGON-type attack. It
+always inflicts a set amount of
+damage.
+
+A FIRE-type attack that lasts
+two to five turns. The flames
+make the target unable to move.
+
+An ELECTRIC-type attack. Has a
+one-in-ten chance of
+paralyzing the target.
+
+An ELECTRIC-type attack. Has a
+one-in-ten chance of
+paralyzing the target.
+
+A special move that causes
+paralysis. The victim has a one-
+in-four chance of immobility.
+
+Strongest of all ELECTRIC-type
+attacks. Has a one-in-ten
+shot at paralyzing the target.
+
+A ROCK-type attack. As the
+name implies, a huge boulder is
+dropped on the target.
+
+An attack that inflicts damage
+by shaking the ground. Useless
+against the FLYING type.
+
+Causes a single-hit knockout if
+it hits. Useless against FLYING-
+type POKéMON.
+
+The attacker digs underground
+in the first turn, then pops up
+in the next turn to attack.
+
+A move that badly poisons the
+target. The amount of poison
+damage increases every turn.
+
+A PSYCHIC-type attack. Has a
+one-in-ten chance of leaving
+the target confused.
+
+A PSYCHIC-type attack. Has a
+one-in-ten chance of lowering
+the target's SPCL.DEF rating.
+
+A special PSYCHIC-type move.
+The target is hypnotized into a
+deep sleep.
+
+A special move that boosts the
+user's ATTACK power. Can
+normally be used up to six times.
+
+A special move that greatly
+boosts the user's SPEED.
+Normally used up to three times.
+
+Always strikes first. If both
+POKéMON use this, the one with
+higher SPEED attacks first.
+
+A non-stop attack move. The
+user's ATTACK power increases
+every time it sustains damage.
+
+A special move for instantly
+escaping from wild POKéMON.
+Useful in the wild only.
+
+A GHOST-type attack. Highly
+accurate, it always inflicts
+damage.
+
+A move for learning one of the
+opponent's moves, for use
+during that battle only.
+
+A move that makes a horrible
+noise. It sharply reduces the
+target's DEFENSE.
+
+Creates illusionary copies of
+the user. They disorient the
+enemy, reducing its accuracy.
+
+Half of the user's maximum HP is
+restored. Few POKéMON learn
+this move on their own.
+
+Raises the user's DEFENSE.
+Useful when battling physically
+strong POKéMON.
+
+Reduces the user's size and
+makes it harder to hit. Can
+normally be used up to six times.
+
+Creates an obscuring cloud of
+smoke that reduces the enemy's
+accuracy.
+
+A sinister flash of light makes
+the target confused.
+A special GHOST-type move.
+
+Used mainly by POKéMON with
+shells. By withdrawing into the
+shell, DEFENSE is increased.
+
+Raises the user's DEFENSE. Can
+normally be used up to six times
+in a row.
+
+Instantly forms a barrier
+between the user and the
+opponent. DEFENSE is increased.
+
+Reduces damage from special
+attacks by about half.
+A special PSYCHIC-type move.
+
+Eliminates all changes affecting
+stats, such as SPEED, of both
+POKéMON in battle.
+
+Reduces damage from physical
+attacks by about half.
+A special PSYCHIC-type move.
+
+Raises the likelihood of nailing
+the opponent's weak spot for a
+critical hit.
+
+The user waits for several
+turns. At the end, it returns
+double the damage it received.
+
+The user waggles its finger,
+triggering a move. There is no
+telling what will happen.
+
+A move that strikes back with
+the opponent's last move. It
+comes after the enemy's move.
+
+The user explodes, damaging the
+enemy, then faints. Useless
+against the GHOST type.
+
+A NORMAL-type attack. An
+egg is launched at the target.
+It may miss, however.
+
+A GHOST-type attack. Has a
+one-in-three chance of leaving
+the target with paralysis.
+
+Smog is spewed as a cloud.
+Has a fifty-fifty chance of
+poisoning the target.
+
+A POISON-type attack. Has a
+one-in-three chance of
+poisoning the target.
+
+A physical attack using a bone
+as a club. If it connects, it may
+cause the target to flinch.
+
+Strongest FIRE-type attack.
+Has a one-in-ten chance of
+inflicting a burn on the target.
+
+A WATER-type attack. Hits with
+a blow packing the power of fish
+traveling up waterfalls.
+
+Grips the target in the
+attacker's shell for two to five
+turns.
+
+A NORMAL-type attack. It is
+highly accurate, so it can be
+counted on to inflict damage.
+
+In the first turn, the attacker
+tucks its head. The next turn,
+it head-butts at full steam.
+
+A physical attack consisting of
+two to five consecutive hits.
+Highly accurate.
+
+A NORMAL-type attack. Has a
+one-in-ten chance of reducing
+the target's SPEED.
+
+A move that increases the
+user's SPCL.DEF stat. It is
+normally used up to three times.
+
+A special move of bending
+spoons to confound the enemy.
+Makes the user harder to hit.
+
+Half of the user's maximum HP is
+restored.
+May also be used in the field.
+
+Stronger than JUMP KICK. If it
+misses, the attacker takes 1/8
+the damage it would've caused.
+
+Transfixes the enemy with
+terrifying sharp eyes, 
+frightening it into paralysis.
+
+Works only on sleeping POKéMON.
+Steals the target's HP and adds
+50%% of it to the user's HP.
+
+A poisonous cloud of gas is
+forcefully expelled to poison
+the target.
+
+Several spheres are thrown
+consecutively at the target to
+inflict damage.
+
+An HP-draining attack. It adds
+half the HP it drained from  the
+target to the attacker's HP.
+
+A special move that puts the
+target to sleep with a big kiss.
+(Actually, the victim faints.)
+
+Strongest FLYING-type attack.
+Stores energy in the first
+turn, then fires in the next.
+
+Transforms user into a copy of
+the target, including the type.
+All moves have only five PP each.
+
+A WATER-type attack. Has a
+one-in-ten chance of reducing
+the target's SPEED.
+
+A NORMAL-type attack. Has a 
+one-in-five chance of leaving
+the target confused.
+
+Special spores are scattered
+from mushrooms. If the foe
+inhales them, it will fall asleep.
+
+Blinds the target with a bright
+flash of light, reducing the 
+opponent's accuracy.
+
+A PSYCHIC-type attack of
+varying intensity. It occasion-
+ally inflicts heavy damage.
+
+A move that involves only
+flopping and SPLASHing around.
+It has no effect.
+
+Melts the user's body for
+protection. A move that sharply
+raises DEFENSE.
+
+A move that is used only by
+POKéMON with pincers. Likely to
+get a critical hit.
+
+The most powerful attack of all.
+However, the attacker faints
+after using this move.
+
+The target is scratched by
+sharp claws two to five times in
+quick succession.
+
+A boomerang made of bone is
+thrown to inflict damage twice,
+on the way out and on return.
+
+The user takes a nap to fully
+restore its HP and recover
+from any status abnormalities.
+
+A ROCK-type attack that hits
+the target with an avalanche of
+rocks and boulders.
+
+A NORMAL-type attack.
+Has a one-in-ten chance of
+making the target flinch.
+
+Raises the user's ATTACK power.
+The edges of the POKéMON are
+made harder for more impact.
+
+A special move that switches
+the user's elemental type into 
+one of the user's attack types.
+
+A NORMAL-type attack. A
+triangular field of energy is
+created and launched.
+
+If it hits, this attack cuts the
+target's HP in half. Learned by
+POKéMON with developed fangs.
+
+A NORMAL-type attack. It has a
+high probability of a critical hit
+for inflicting double damage.
+
+Uses 1/4 of the user's maximum
+HP to create a substitute that
+takes the opponent's attacks.
+
+Used only if the user is totally
+out of PP. The user is hit with
+1/4 the damage it inflicts.
+
+A move that allows the user to
+copy a move used by an
+opponent and learn that move.
+
+A three-kick attack that
+inflicts increasing damage. When
+one kick misses, the move ends.
+
+A DARK-type attack. The
+attacking POKéMON may steal an
+item held by the target.
+
+Sticky strings that prevent
+the target from escaping until
+the attacking POKéMON is gone.
+
+It predicts the opponent's
+movement. The user's next
+attack will never miss.
+
+A move that makes a sleeping
+target have bad dreams. The
+victim will steadily lose HP.
+
+A FIRE-type attack. Has a
+one-in-ten chance of inflicting
+a burn on the target.
+
+Has a one-in-three chance of
+making the target flinch. Can be
+used only by a sleeping POKéMON.
+
+Raises ATTACK and DEFENSE at
+the expense of SPEED. It works
+differently for the GHOST type.
+
+An attack that increases in
+power if the user's HP is low. It
+could turn the tide in battle.
+
+A move that changes the user's
+type into one that is resistant
+to the opponent's last move.
+
+A powerful FLYING-type attack.
+It often becomes a critical hit.
+
+Spores that cling to the
+target, sharply reducing the
+opponent's SPEED.
+
+An attack that increases in
+power if the user's HP is low. It
+could turn the tide in battle.
+
+A vengeful move that slightly
+reduces the PP of the
+opponent's last move.
+
+An ICE-type attack. Has a
+one-in-ten chance of freezing
+the target.
+
+Completely foils an opponent's
+attack. If used consecutively,
+its success rate decreases.
+
+An incredibly fast punch that
+always lands first.
+
+A horrific look that scares the
+victim, sharply reducing the
+target's SPEED.
+
+A DARK-type attack. The move
+catches the opponent off
+guard, so it never misses.
+
+A sweet little kiss that causes
+the target to become giddy and
+confused.
+
+A move that allows the user to
+consume half of its own HP in
+order to maximize its ATTACK.
+
+A POISON-type attack. Has a
+one-in-three chance of leaving
+the target poisoned.
+
+An attack that fires dirt,
+inflicting damage and reducing
+the target's accuracy.
+
+An attack that shoots ink. Has
+a fifty-fifty chance of reduc-
+ing the target's accuracy.
+
+An attack that scatters
+SPIKES and injures opponent
+POKéMON when they switch.
+
+An ELECTRIC-type attack.
+Inaccurate but is guaranteed
+to cause paralysis if it hits.
+
+Neutralizes the foe's evasive-
+ness. Also makes the GHOST type
+vulnerable to physical attacks.
+
+A move that causes the
+opponent to faint if the user
+faints after using this move.
+
+A malevolent melody that causes
+both the user and the opponent
+to faint in three turns.
+
+An ICE-type attack. It is
+guaranteed to reduce the
+target's SPEED if it hits.
+
+Allows user to completely evade
+attack. If used consecutively,
+its success rate decreases.
+
+A GROUND-type attack. The
+attacker uses a bone to club
+the foe two to five times.
+
+An attack that locks on to the
+target to ensure that the next
+attack will hit without fail.
+
+An attack that lasts two to
+three turns. Afterwards, the
+attacker will become confused.
+
+An attack that creates a sand-
+storm. The effect causes
+damage to both combatants.
+
+Half of the HP drained from the
+target is added to the
+attacker's HP.
+
+Always leaves the user with
+at least one HP. Success rate
+decreases if used repeatedly.
+
+A move that charms the target
+into complacency, sharply
+reducing its ATTACK power.
+
+Attacks for five turns, growing
+more powerful each time. Power
+returns to normal if it misses.
+
+A move that adjusts ATTACK so
+that the foe has one HP left. 
+Can't cause the foe to faint.
+
+A move that infuriates and 
+confuses the opponent, but it
+increases the target's ATTACK.
+
+A move that restores HP by half
+of the user's max HP. This move
+may also be used in the field.
+
+An ELECTRIC-type attack. Has a
+one-in-three chance of para-
+lyzing the target.
+
+A BUG-type attack that grows
+more powerful with every hit.
+Returns to normal if it misses.
+
+Strikes the target with stiff
+wings. Has a one-in-ten chance
+of raising the user's DEFENSE.
+
+A probing stare that prevents
+the target from escaping until
+the attacking POKéMON is gone.
+
+Infatuates targets, making it
+hard for them to attack foes
+of the opposite gender.
+
+Randomly chooses one of the
+user's moves. Can be used only
+by a sleeping POKéMON.
+
+The soothing ringing of a bell
+that eliminates all status
+problems for the entire party.
+
+A NORMAL-type attack. The
+tamer the user, the more
+powerful the move.
+
+A move that inflicts major
+damage but may restore the
+target's HP.
+
+A NORMAL-type attack. The more
+the user dislikes its trainer,
+the more powerful the move.
+
+A mystic power that protects
+the user from status problems
+for five turns.
+
+A move that adds the HPs of the
+user and the target, then
+divides the total between them.
+
+A FIRE-type attack. Has a one-
+in-two chance of leaving the
+target with a burn.
+
+A GROUND-type attack. The
+power of the attack will vary
+each time it is used.
+
+A FIGHTING-type attack. In-
+accurate but guaranteed to
+confuse the opponent if it hits.
+
+A BUG-type attack that uses a
+stiff horn or horns. It is
+rarely learned.
+
+A DRAGON-type attack. Has a 
+one-in-three chance of
+paralyzing the target.
+
+A move that transfers the
+user's status changes to the
+next POKéMON when switching.
+
+Forces the target to continue
+to use the move it used last for
+the next two to six turns.
+
+A DARK-type attack. It inflicts
+major damage if the target
+switches out in the same turn.
+
+A NORMAL-type attack. By spin-
+ning quickly, the user can
+escape from restraining moves.
+
+A pleasant aroma that
+distracts the target, making
+the opponent easier to hit.
+
+Strikes the target with a stiff
+tail. Has a one-in-three shot at
+lowering the target's DEFENSE.
+
+Strikes the target with sharp
+claws. Has a one-in-ten shot at
+raising the user's ATTACK.
+
+A FIGHTING-type attack. Always
+comes after the target's
+attack but never misses.
+
+Allows HP to be restored by the
+morning sunlight. In battle, half
+the user's max HP is restored.
+
+Allows HP to be restored by the
+sunlight. In battle, half the
+user's max HP is restored.
+
+Allows HP to be restored by the
+moonlight. In battle, half the
+user's max HP is restored.
+
+A peculiar move that changes
+type and power depending on
+the POKéMON using it.
+
+A FIGHTING-type attack. It is
+powerful and often lands a
+critical hit.
+
+A DRAGON-type attack. Has a 
+one-in-five chance of causing
+the target to flinch.
+
+Summons rain for five turns.
+While it is raining, the power of
+WATER-type moves increases.@
+
+Makes the weather sunny for
+five turns. When sunny, FIRE-
+type moves are more powerful.
+
+A DARK-type attack. Has a
+one-in-five chance of reducing
+the target's SPCL.DEF.
+
+The foe will receive double the
+damage the user sustained from
+a special attack. High accuracy.
+
+Self-hypnosis move that copies
+the foe's stats changes,
+then applies them to the user.
+
+An attack that always strikes
+first. It can be learned by only
+a few POKéMON.
+
+A ROCK-type attack. This
+prehistoric move may boost all
+of the user's stats.
+
+A GHOST-type attack. Has a 
+one-in-five chance of reducing
+the target's SPCL.DEF.
+
+A special PSYCHIC-type attack.
+It strikes the target two
+turns after it is used.
+
+A FIGHTING-type attack. In the
+field, it can be used to shatter
+rocks to open new paths.
+
+Lasts two to five turns. Foe
+becomes trapped in a vortex,
+making it impossible to switch.
+
+A DARK-type attack. The user's
+fellow party POKéMON appear to
+pummel the target.

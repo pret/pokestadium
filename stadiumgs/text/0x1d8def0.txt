@@ -1,0 +1,216 @@
+ZEPHYRBADGE
+
+HIVEBADGE
+
+PLAINBADGE
+
+FOGBADGE
+
+STORMBADGE
+
+MINERALBADGE
+
+GLACIERBADGE
+
+RISINGBADGE
+
+Win(s)
+
+#01P
+
+#01P & #02P
+
+COM
+
+#02 win(s)
+
+Try Again
+
+Change team combination
+
+Cancel
+
+Keep battling?
+
+Continue
+
+Suspend
+
+Continue = #02
+
+Continue
+
+Re-enter
+
+From the start
+
+
+
+GYM
+
+Battle again
+
+Try once more
+
+Change team combination
+
+#01P & #02P
+
+#01P
+
+COM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Continue = #01
+
+Suspended battle data exists.
+
+Suspend battle?
+
+Suspend
+
+Continue w/o suspending
+
+If you choose "Suspend," your previously
+suspended data will be deleted.
+
+#10 #11
+
+VIOLET GYM BATTLE
+
+AZALEA GYM BATTLE
+
+GOLDENROD GYM BATTLE
+
+ECRUTEAK GYM BATTLE
+
+CIANWOOD GYM BATTLE
+
+OLIVINE GYM BATTLE
+
+TEAM ROCKET
+
+MAHOGANY GYM BATTLE
+
+BLACKTHORN GYM
+
+ELITE FOUR BATTLE
+
+PEWTER GYM BATTLE
+
+CERULEAN GYM BATTLE
+
+VERMILION GYM BATTLE
+
+CELADON GYM BATTLE
+
+FUCHSIA GYM BATTLE
+
+SAFFRON GYM BATTLE
+
+CINNABAR GYM BATTLE
+
+VIRIDIAN GYM BATTLE
+
+Battle #01
+
+Trainer #01
+
+Leader
+
+Elite Four #01
+
+Champion
+
+Lance
+
+Red
+
+???
+
+Poké Cup
+
+Challenge Cup
+
+Little Cup
+
+Prime Cup
+
+Final Battle
+
+Semifinal Battle
+
+VS Rival
+
+Poké Ball
+
+Great Ball
+
+Ultra Ball
+
+Master Ball
+
+Gym Leader Castle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+<FACE,4,2>Yo! Do you realize who you're challenging?
+
+<FACE,4,2>I've raised my group really well. I'll teach you a lesson!
+
+<FACE,4,2>Heh, you're not allowed to pass without showing us some respect.
+
+<FACE,4,2>Here goes! Brace yourself!
+
+<FACE,4,2>How's this one?
+
+<FACE,4,2>Don't wimp out!
+
+<FACE,4,2>It's going to blow you away!
+
+<FACE,4,2>Don't choke!
+
+<FACE,4,2>Tch!
+
+<FACE,4,2>Just you watch...
+
+<FACE,4,2>Yeah, you wait...
+
+<FACE,4,2>I'm warning you...
+
+<FACE,4,0>Argh! You're gonna regret that!
+
+<FACE,4,1>Wah, ha, ha! Sorry, kid!
+
+<FACE,4,1>Whoops! My, my... That went straight to the
+weak spot.
+
+<FACE,4,0>What! That was the weak spot! You're not
+getting away with that!
+
+<FACE,4,0>Oh yeah? Think you're clever, don't ya?
+
+<FACE,4,1>I can do things this way, too.
+
+<FACE,4,0>Tch!
+
+<FACE,4,1>Do you get it now, punk?
+
+<FACE,4,0>Gaaah!
+
+<FACE,4,2><WAZA,92,2>I'll present you a nasty TOXIC!
+
+<FACE,4,1><DOKUDOKU,2>Enjoying the poison?
+
+<FACE,4,2><WAZA,182,2>I can do things this way, too.
+
+<FACE,4,2>Quit struggling!
+
+<FACE,4,2>Ptooey! Heh, that was dull.
+
+<FACE,4,1>Wah, ha, ha! Why don't you call your mommy for help?
+
+<FACE,4,2>Some opponent you were! Learned your lesson, eh?
+
+<FACE,4,0>I'm sorry! I won't be bad again!
+
+<FACE,4,0>I'll be back! Shoot!
+
+<FACE,4,2>Don't get cocky just because you won!
+
+<FACE,4,2>Wa-hey! We'll do it again!
+
+<FACE,4,2>Huh? You catch on quick.
+
+ZING-WEE
+
+ORY-SKARM
+
+ING-NIDOK
+
+AROS-AMPH
+
+TER-CLOYS
+
+ECT-PARAS
+
+<FACE,4,0>

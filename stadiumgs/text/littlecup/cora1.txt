@@ -1,0 +1,82 @@
+<FACE,2,2>I hear the sea calling me... Of course, in the winter, it's just the
+pool.
+
+<FACE,2,2>Wait 'til you see my strategy. You're in for a big surprise!
+
+<FACE,2,2>Let's get started, shall we?
+
+<FACE,2,2>How's this to start?
+
+<FACE,2,2>Maybe #26?
+
+<FACE,2,2>#26 might be it.
+
+<FACE,2,2>I think I'll go with #26.
+
+<FACE,2,2>#26 has to be it.
+
+<FACE,2,2>I'm switching out!
+
+<FACE,2,2>Something else!
+
+<FACE,2,2>That one's done!
+
+<FACE,2,2>I'm pulling this one back!
+
+<FACE,2,0>What? What was that all about?
+
+<FACE,2,1>Oh, that was so refreshing!
+
+<FACE,2,1>A direct hit on the weak spot. Ahhh... That
+felt wonderful.
+
+<FACE,2,0>Oh, no. Wait! I don't like you hitting the weak
+spot.
+
+<FACE,2,0>What? What is that?
+
+<FACE,2,2>That'll do.
+
+<FACE,2,0>Is that how you do things?
+
+<FACE,2,1>That's fantastic!
+
+<FACE,2,0>But... Noooooooo!
+
+<FACE,2,1><MEROMERO,2>How do you like that?
+
+<FACE,2,2>I'd love to relax at a seaside resort...
+
+<FACE,2,2>When I hear waves, I get drowsy.
+
+<FACE,2,2>Napping in a sea breeze is pleasant, too.
+
+<FACE,2,1>So? Had enough?
+
+<FACE,2,1>That was perfect. Amazing, don't you think?
+
+<FACE,2,1>Oh, there's no reason to be that disappointed.
+
+<FACE,2,0>Awwww! I lost it.
+
+<FACE,2,0>I lost, didn't I...?
+
+<FACE,2,2>I'll be fine. Don't worry about me.
+
+<FACE,2,2>Oh. A nice, friendly tie.
+
+<FACE,2,2>My, aren't you strange?
+
+CLEFFAPS
+
+TINIAPS
+
+HOOTHAPS
+
+ODDAPS
+
+WOOPAPS
+
+KABUAPS
+
+<FACE,2,0>

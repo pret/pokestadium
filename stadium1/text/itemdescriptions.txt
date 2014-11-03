@@ -1,0 +1,622 @@
+A BALL that captures any wild Pokémon
+without fail.
+
+A BALL for catching wild Pokémon.
+More effective than a GREAT BALL.
+
+A BALL for catching wild Pokémon.
+More effective than a POKé BALL.
+
+A BALL thrown at wild Pokémon to catch
+them.
+
+A map of the local area.
+It identifies your present location.
+
+Lets you travel twice as fast as walking.
+
+
+
+A BALL used in the SAFARI ZONE for
+catching wild Pokémon.
+
+
+
+A STONE used for making certain kinds of
+Pokémon evolve.
+
+An antidote for curing a poisoned
+Pokémon.
+
+Medicine for curing a Pokémon that is 
+suffering from a burn.
+
+Thaws out a Pokémon that has been frozen
+solid.
+
+Awakens a Pokémon that has fallen asleep.
+
+Cures a Pokémon that is suffering from
+paralysis.
+
+Fully restores HP and cures all ailments,
+such as poisoning.
+
+Fully restores HP that have been lost in
+battle.
+
+Restores HP that have been lost in battle
+by 200 HP.
+
+Restores HP that have been lost in battle
+by 50 HP.
+
+Restores HP that have been lost in battle
+by 20 HP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+When in a place like a cave, this returns
+you to the last Pokémon Center visited.
+
+An aerosol spray that keeps wild Pokémon
+away.
+
+The fossilized resin of a tree from
+prehistoric times.
+
+A STONE used for making certain kinds of
+Pokémon evolve.
+
+A STONE used for making certain kinds of
+Pokémon evolve.
+
+A STONE used for making certain kinds of
+Pokémon evolve.
+
+Increases the maximum HP of the selected
+Pokémon.
+
+Increases the ATTACK power of the
+selected Pokémon.
+
+Increases the DEFENSE rating of the
+selected Pokémon.
+
+Increases the SPEED of the selected
+Pokémon.
+
+Increases the SPECIAL rating of the
+selected Pokémon.
+
+Raises the level of the selected Pokémon
+by one.
+
+A fossil of a Pokémon that lived in
+prehistoric times.
+
+A fossil of a Pokémon that lived in
+prehistoric times.
+
+The key required to enter a Pokémon
+Gym somewhere.
+
+
+
+To be exchanged for a BIKE at the BIKE
+SHOP in CERULEAN CITY.
+
+Temporarily heightens accuracy for one
+battle.
+
+A STONE used for making certain kinds of
+Pokémon evolve.
+
+The security card key for opening doors 
+in a certain building.
+
+Can be sold for a very good price at any
+POKéMON MART.
+
+
+
+Use during a battle against a wild Pokémon
+to make a getaway.
+
+Cures a Pokémon of any ailment except for
+fainting.
+
+Revives a fainted Pokémon and restores
+half its maximum HP.
+
+Revives a fainted Pokémon, fully restoring
+its HP.
+
+Temporarily heightens defense against
+special attacks for one battle.
+
+Keeps wild Pokémon away. Longer lasting
+than REPEL.
+
+Keeps wild Pokémon away. Longer lasting
+than SUPER REPEL.
+
+Temporarily heightens the probability of
+scoring critical hits in one battle.
+
+
+
+Restores HP that have been lost in battle
+by 50 HP.
+
+Restores HP that have been lost in battle
+by 60 HP.
+
+Restores HP that have been lost in battle
+by 80 HP.
+
+The invitation card required to board the
+luxury liner, S.S. ANNE.
+
+Apparently lost and desperately sought by
+the SAFARI ZONE WARDEN.
+
+Temporarily increases ATTACK power for
+one battle.
+
+Temporarily increases DEFENSE for
+one battle.
+
+Temporarily increases SPEED for
+one battle.
+
+Temporarily increases SPECIAL for
+one battle.
+
+Required for playing slot machines.
+Up to 9,999 coins may be carried.
+
+A parcel from a POKéMON MART for delivery
+to PROF. OAK.
+
+A machine for searching for items on the
+ground.
+
+An item that makes ghosts clearly
+distinguishable.
+
+Plays a pleasant melody that rouses
+Pokémon from sleep.
+
+The key used for operating the elevator 
+in a certain building.
+
+Gives EXP. POINTS to all Pokémon in a
+party, even those not in battle.
+
+Use in front of the sea, a river, etc.,
+to fish for Pokémon.
+
+Use in front of the sea, a river, etc.,
+to fish for Pokémon.
+
+Use in front of the sea, a river, etc.,
+to fish for Pokémon.
+
+Increases the PP of the selected move by
+20 percent.
+
+Restores the PP of the selected move
+by 10.
+
+Fully restores the PP of the selected
+move.
+
+Restores the PP of all the selected
+Pokémon's moves by 10.
+
+Fully restores the PP of all the selected
+Pokémon's moves.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CUT
+NORMAL PP/30 PWR/50 ACCURACY/95
+
+FLY
+FLYING PP/15 PWR/70 ACCURACY/95
+
+SURF
+WATER PP/15 PWR/95 ACCURACY/100
+
+STRENGTH
+NORMAL PP/15 PWR/80 ACCURACY/100
+
+FLASH
+NORMAL PP/20 PWR /-- ACCURACY/70
+
+MEGA PUNCH
+NORMAL PP/20 PWR/80 ACCURACY/85
+
+RAZOR WIND
+NORMAL PP/10 PWR/80 ACCURACY/75
+
+SWORDS DANCE
+NORMAL PP/30 PWR/-- ACCURACY/100
+
+WHIRLWIND
+NORMAL PP/20 PWR/-- ACCURACY/85
+
+MEGA KICK
+NORMAL PP/5 PWR/120 ACCURACY/75
+
+TOXIC
+POISON PP/10 PWR/-- ACCURACY/85
+
+HORN DRILL
+NORMAL PP/5 PWR/-- ACCURACY/30
+
+BODY SLAM
+NORMAL PP/15 PWR/85 ACCURACY/100
+
+TAKE DOWN
+NORMAL PP/20 PWR/90 ACCURACY/85
+
+DOUBLE-EDGE
+NORMAL PP/15 PWR/100 ACCURACY/100
+
+BUBBLEBEAM
+WATER PP/20 PWR/65 ACCURACY/100
+
+WATER GUN
+WATER PP/25 PWR/40 ACCURACY/100
+
+ICE BEAM
+ICE PP/10 PWR/95 ACCURACY/100
+
+BLIZZARD
+ICE PP/5 PWR/120 ACCURACY/90
+
+HYPER BEAM
+NORMAL PP/5 PWR/150 ACCURACY/90
+
+PAY DAY
+NORMAL PP/20 PWR/40 ACCURACY/100
+
+SUBMISSION
+FIGHTING PP/25 PWR/80 ACCURACY/80
+
+COUNTER
+FIGHTING PP/20 PWR/-- ACCURACY/100
+
+SEISMIC TOSS
+FIGHTING PP/20 PWR/-- ACCURACY/100
+
+RAGE
+NORMAL PP/20 PWR/20 ACCURACY/100
+
+MEGA DRAIN
+GRASS PP/10 PWR/40 ACCURACY/100
+
+SOLARBEAM
+GRASS PP/10 PWR/120 ACCURACY/100
+
+DRAGON RAGE
+DRAGON PP/10 PWR/-- ACCURACY/100
+
+THUNDERBOLT
+ELECTRIC PP/15 PWR/95 ACCURACY/100
+
+THUNDER
+ELECTRIC PP/10 PWR/120 ACCURACY/70
+
+EARTHQUAKE
+GROUND PP/10 PWR/100 ACCURACY/100
+
+FISSURE
+GROUND PP/5 PWR/-- ACCURACY/30
+
+DIG
+GROUND PP/10 PWR/100 ACCURACY/100
+
+PSYCHIC
+PSYCHIC PP/10 PWR/90 ACCURACY/100
+
+TELEPORT
+PSYCHIC PP/20 PWR/-- ACCURACY/100
+
+MIMIC
+NORMAL PP/10 PWR/-- ACCURACY/100
+
+DOUBLE TEAM
+NORMAL PP/15 PWR/-- ACCURACY/100
+
+REFLECT
+PSYCHIC PP/20 PWR/-- ACCURACY/100
+
+BIDE
+NORMAL PP/10 PWR/-- ACCURACY/100
+
+METRONOME
+NORMAL PP/10 PWR/-- ACCURACY/100
+
+SELFDESTRUCT
+NORMAL PP/5 PWR/260 ACCURACY/100
+
+EGG BOMB
+NORMAL PP/10 PWR/100 ACCURACY/75
+
+FIRE BLAST
+FIRE PP/5 PWR/120 ACCURACY/85
+
+SWIFT
+NORMAL PP/20 PWR/60 ACCURACY/100
+
+SKULL BASH
+NORMAL PP/15 PWR/100 ACCURACY/100
+
+SOFTBOILED
+NORMAL PP/10 PWR/-- ACCURACY/100
+
+DREAM EATER
+PSYCHIC PP/15 PWR/100 ACCURACY/100
+
+SKY ATTACK
+FLYING PP/5 PWR/140 ACCURACY/90
+
+REST
+PSYCHIC PP/10 PWR/-- ACCURACY/100
+
+THUNDER WAVE
+ELECTRIC PP/20 PWR/-- ACCURACY/100
+
+PSYWAVE
+PSYCHIC PP/15 PWR/-- ACCURACY/80
+
+EXPLOSION
+NORMAL PP/5 PWR/340 ACCURACY/100
+
+ROCK SLIDE
+ROCK PP/10 PWR/75 ACCURACY/90
+
+TRI ATTACK
+NORMAL PP/10 PWR/80 ACCURACY/100
+
+SUBSTITUTE
+NORMAL PP/10 PWR/-- ACCURACY/100

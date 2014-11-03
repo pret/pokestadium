@@ -1,0 +1,80 @@
+<FACE,44,0>I perceived a jolt. You possess inordinate power.
+
+<FACE,44,0>Let me look into your soul... What! Defeat me?
+
+<FACE,44,0>...I see... Fine. Let's get started.
+
+<FACE,44,0>#26.
+
+<FACE,44,0>#26
+
+<FACE,44,0>#26.
+
+<FACE,44,0>#26.
+
+<FACE,44,0>#26.
+
+<FACE,44,0>POKéMON change.
+
+<FACE,44,0>POKéMON change.
+
+<FACE,44,0>POKéMON change.
+
+<FACE,44,0>POKéMON change.
+
+<FACE,44,0>...
+
+<FACE,44,0>...
+
+<FACE,44,0>...It hit the weak spot.
+
+<FACE,44,0>...It hit the weak spot.
+
+<FACE,44,0>...
+
+<FACE,44,0>...
+
+<FACE,44,0>...
+
+<FACE,44,0>...
+
+<FACE,44,0>...Sigh...
+
+<FACE,44,0><WAZA,95,4>Sleep... Sleep...
+
+<FACE,44,0>I must concentrate while in battle.
+
+<FACE,44,0>I must concentrate while in battle.
+
+<FACE,44,0><WAZA,94,4>PSYCHIC...
+
+<FACE,44,0>Yes. Just as I predicted. I foresaw the expression you have now.
+
+<FACE,44,0>People don't seem to understand how powerful psychics are.
+
+<FACE,44,0>Sorry, but don't talk to me. I'm completely exhausted.
+
+<FACE,44,0>I never predicted I would lose. Is it impossible to see one's
+own fate?
+
+<FACE,44,0>I had a feeling I would lose. I got it when I saw your POKéMON.
+
+<FACE,44,0>...Whatever... It doesn't matter...
+
+<FACE,44,0>I'm worn out. I've had enough.
+
+<FACE,44,0>I can't read your soul.
+
+BROENZA
+
+STANTENZA
+
+APEENZA
+
+SIRENZA
+
+MEGANENZA
+
+SMEARNZA
+
+<FACE,44,0>
