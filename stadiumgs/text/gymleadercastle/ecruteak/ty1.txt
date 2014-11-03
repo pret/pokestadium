@@ -1,79 +1,80 @@
-<FACE,22,0>Hi-yaaah! Do you believe in unseen powers?
+<FACE,5,0>Greetings. How good of you to come. Shall we get started?
 
-<FACE,22,1>Hmm... I can see your future!
+<FACE,5,0>First, calm your emotions and concentrate.
 
-<FACE,22,2>Hmm... I sense something in you...
+<FACE,5,0>I consider this battle to be part of my training.
 
-<FACE,22,0>Waaaah!
+<FACE,5,0>#26!
 
-<FACE,22,0>Hi-yah!
+<FACE,5,0>How about #26?
 
-<FACE,22,0>Hoohah!
+<FACE,5,0>I will go with #26!
 
-<FACE,22,0>Towaaaa!
+<FACE,5,0>I share your pain, but this, too, is a trial!
+#26!
 
-<FACE,22,0>Yaaaah!
+<FACE,5,0>The finish is important! #26!
 
-<FACE,22,0>Hmm...
+<FACE,5,0>I shall switch out.
 
-<FACE,22,2>Ack... Argh...
+<FACE,5,0>I shall switch out.
 
-<FACE,22,1>Mmmm...
+<FACE,5,0>I shall switch out.
 
-<FACE,22,2>Ugggggh...
+<FACE,5,0>I shall switch out.
 
-<FACE,22,1>Ayeeeah!
+<FACE,5,0>Ah! How impressive!
 
-<FACE,22,2>Critical hit? Ha, ha, ha...
+<FACE,5,0>Forgive me!
 
-<FACE,22,2>It took a critical hit? Hi-yah!
+<FACE,5,0>Ah, well, well... It got the weak spot.
 
-<FACE,22,0>It took a critical hit? Kiiiyah!
+<FACE,5,0>My goodness! It hit the weak spot.
 
-<FACE,22,2>Nnnn...
+<FACE,5,0>There is nothing to fear.
 
-<FACE,22,2>Hwoar!
+<FACE,5,0>There is nothing to fear.
 
-<FACE,22,2>Ugh... Arrrgh...
+<FACE,5,0>One must endure...
 
-<FACE,22,0>Kaah!
+<FACE,5,0>And now it will rest.
 
-<FACE,22,1>Gyaaah... Ugh.
+<FACE,5,0>Oh, my...
 
-<FACE,22,0><DOKU,2>Hah, there!
+<FACE,5,0><KONRAN,2>One mustn't be misled...
 
-<FACE,22,1>I can see into your soul.
+<FACE,5,0><WAZA,212,2>A MEAN LOOK will do.
 
-<FACE,22,1>You cannot read my mind.
+<FACE,5,0><KOHRI,2>The bitter cold is yet another test.
 
-<FACE,22,1>Training isn't easy.
+<FACE,5,0><NOROI,2>It appears to be possessed.
 
-<FACE,22,0>You haven't learned to focus your mind!
+<FACE,5,0>I am grateful for this.
 
-<FACE,22,0>Not good enough! You've much to learn!
+<FACE,5,0>I still need much training.
 
-<FACE,22,0>Come again another time.
+<FACE,5,0>You should return later.
 
-<FACE,22,1>Oh... I'm shattered...
+<FACE,5,0>I am grateful for this.
 
-<FACE,22,1>I'm exhausted, body and soul.
+<FACE,5,0>My training is insufficient.
 
-<FACE,22,1>This is not good. I must try again...
+<FACE,5,0>I must meditate over this.
 
-<FACE,22,1>I couldn't beat the likes of you?
+<FACE,5,0>Ah, your efforts are inspiring.
 
-<FACE,22,1>How pathetic of you.
+<FACE,5,0>I believe that withdrawal is a form of etiquette.
 
-SPROUTIUM
+ZUBAGE
 
-HOOTIUM
+SMOOCHAGE
 
-LEDIUM
+GASTAGE
 
-DITTIUM
+GOLAGE
 
-RINAIUM
+MISDREAGE
 
-OWNIUM
+HAUNTAGE
 
-<FACE,22,1>
+<FACE,5,0>

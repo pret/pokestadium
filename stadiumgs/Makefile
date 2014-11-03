@@ -86,8 +86,8 @@ TBLS = \
 	text/gymleadercastle/goldenrod/lois1.bin \
 	text/gymleadercastle/goldenrod/rita1.bin \
 	text/gymleadercastle/goldenrod/whitney1.bin \
-	text/gymleadercastle/ecruteak/holly1.bin \
 	text/gymleadercastle/ecruteak/ty1.bin \
+	text/gymleadercastle/ecruteak/holly1.bin \
 	text/gymleadercastle/ecruteak/morty1.bin \
 	text/gymleadercastle/cianwood/nick1.bin \
 	text/gymleadercastle/cianwood/chuck1.bin \
@@ -205,8 +205,8 @@ TBLS = \
 	text/gymleadercastle/goldenrod/lois2.bin \
 	text/gymleadercastle/goldenrod/rita2.bin \
 	text/gymleadercastle/goldenrod/whitney2.bin \
-	text/gymleadercastle/ecruteak/holly2.bin \
 	text/gymleadercastle/ecruteak/ty2.bin \
+	text/gymleadercastle/ecruteak/holly2.bin \
 	text/gymleadercastle/ecruteak/morty2.bin \
 	text/gymleadercastle/cianwood/nick2.bin \
 	text/gymleadercastle/cianwood/chuck2.bin \
