@@ -1483,6 +1483,7 @@ main(int argc, char *argv[])
 			printf("%d entries (first bytes %x %x)\n", nentries, first, second);
 		}
 
+		fputc('\n', outfile);
 		fclose(outfile);
 	}
 }
