@@ -1,4 +1,4 @@
-all: text.tbl rosters.tbl
+all: text.tbl rosters.tbl backgrounds.tbl
 
 ROSTERS = \
 	rentals/littlecup.bin \
@@ -407,6 +407,56 @@ STRTBLS = \
 	text/academy/skilltest/elitefour/ferris.bin \
 	text/academy/skilltest/elitefour/julian.bin
 
+BACKGROUNDS = \
+	backgrounds/title1.bin \
+	backgrounds/title2.bin \
+	backgrounds/whitecity1.bin \
+	backgrounds/lab.bin \
+	backgrounds/classroom1.bin \
+	backgrounds/pokedex.bin \
+	backgrounds/gamepakcheck.bin \
+	backgrounds/pleaseselect.bin \
+	backgrounds/selectpokemon/littlecup.bin \
+	backgrounds/selectpokemon/pokecup.bin \
+	backgrounds/selectpokemon/primecup.bin \
+	backgrounds/selectpokemon/challengecup.bin \
+	backgrounds/stadium.bin \
+	backgrounds/castlekanto.bin \
+	backgrounds/classroom2.bin \
+	backgrounds/0x1f079c0.bin \
+	backgrounds/library1.bin \
+	backgrounds/myroom.bin \
+	backgrounds/minigames.bin \
+	backgrounds/0x1f225e0.bin \
+	backgrounds/labmachine.bin \
+	backgrounds/whitecity2.bin \
+	backgrounds/freebattle.bin \
+	backgrounds/0x1f449b0.bin \
+	backgrounds/0x1f48620.bin \
+	backgrounds/0x1f4eca0.bin \
+	backgrounds/castlejohto.bin \
+	backgrounds/castleplateau.bin \
+	backgrounds/hoohlugia.bin \
+	backgrounds/quiz.bin \
+	backgrounds/library2.bin \
+	backgrounds/credits/lancevsclair.bin \
+	backgrounds/library3.bin \
+	backgrounds/credits/bugsyvskaren.bin \
+	backgrounds/credits/falknervserika.bin \
+	backgrounds/credits/mistyvswhitney.bin \
+	backgrounds/credits/surgevsmorty.bin \
+	backgrounds/credits/jasminevsbrock.bin \
+	backgrounds/credits/blainevspryce.bin \
+	backgrounds/credits/sabrinavswill.bin \
+	backgrounds/credits/janinevskoga.bin \
+	backgrounds/credits/chuckvsbruno.bin \
+	backgrounds/credits/rivalvskris.bin \
+	backgrounds/credits/redvsblue.bin \
+	backgrounds/0x1fe3520.bin \
+	backgrounds/0x1fea540.bin \
+	backgrounds/battlenow.bin \
+	backgrounds/mysterygift.bin
+
 .SUFFIXES: .txt .json .bin
 
 .txt.bin:
@@ -423,5 +473,9 @@ text.tbl: ${STRTBLS}
 rosters.tbl: ${ROSTERS}
 	../utils/cattbl 0x10000 ${ROSTERS} > $@
 
+# md5 of backgrounds.tbl: 2cc2be44dbc656c371cb9a7d4d464ca9
+backgrounds.tbl: ${BACKGROUNDS}
+	../utils/cattbl 0x190000 ${BACKGROUNDS} > $@
+
 clean:
-	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS}
+	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS} backgrounds.tbl
