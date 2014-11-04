@@ -1,6 +1,80 @@
-all: text.tbl
+all: text.tbl rosters.tbl
 
-TBLS = \
+ROSTERS = \
+	rentals/littlecup.bin \
+	rentals/primecup1.bin \
+	rentals/primecup2.bin \
+	rentals/pokecup.bin \
+	rentals/pokecup.bin \
+	rosters/0x170d240.bin \
+	rosters/0x170d5e0.bin \
+	rosters/pokecup/pokeball1.bin \
+	rosters/pokecup/greatball1.bin \
+	rosters/pokecup/ultraball1.bin \
+	rosters/pokecup/masterball1.bin \
+	rosters/littlecup1.bin \
+	rosters/primecup1.bin \
+	rosters/gymleadercastle/violet1.bin \
+	rosters/gymleadercastle/azalea1.bin \
+	rosters/gymleadercastle/goldenrod1.bin \
+	rosters/gymleadercastle/ecruteak1.bin \
+	rosters/gymleadercastle/cianwood1.bin \
+	rosters/gymleadercastle/olivine1.bin \
+	rosters/gymleadercastle/rocket1.bin \
+	rosters/gymleadercastle/mahogany1.bin \
+	rosters/gymleadercastle/blackthorn1.bin \
+	rosters/gymleadercastle/elitefour1.bin \
+	rosters/gymleadercastle/champion1.bin \
+	rosters/gymleadercastle/vermilion1.bin \
+	rosters/gymleadercastle/saffron1.bin \
+	rosters/gymleadercastle/cerulean1.bin \
+	rosters/gymleadercastle/celadon1.bin \
+	rosters/gymleadercastle/fuchsia1.bin \
+	rosters/gymleadercastle/pewter1.bin \
+	rosters/gymleadercastle/cinnabar1.bin \
+	rosters/gymleadercastle/viridian1.bin \
+	rosters/gymleadercastle/red1.bin \
+	rosters/rival1.bin \
+	rosters/pokecup/pokeball2.bin \
+	rosters/pokecup/greatball2.bin \
+	rosters/pokecup/ultraball2.bin \
+	rosters/pokecup/masterball2.bin \
+	rosters/littlecup2.bin \
+	rosters/primecup2.bin \
+	rosters/gymleadercastle/violet2.bin \
+	rosters/gymleadercastle/azalea2.bin \
+	rosters/gymleadercastle/goldenrod2.bin \
+	rosters/gymleadercastle/ecruteak2.bin \
+	rosters/gymleadercastle/cianwood2.bin \
+	rosters/gymleadercastle/olivine2.bin \
+	rosters/gymleadercastle/rocket2.bin \
+	rosters/gymleadercastle/mahogany2.bin \
+	rosters/gymleadercastle/blackthorn2.bin \
+	rosters/gymleadercastle/elitefour2.bin \
+	rosters/gymleadercastle/champion2.bin \
+	rosters/gymleadercastle/vermilion2.bin \
+	rosters/gymleadercastle/saffron2.bin \
+	rosters/gymleadercastle/cerulean2.bin \
+	rosters/gymleadercastle/celadon2.bin \
+	rosters/gymleadercastle/fuchsia2.bin \
+	rosters/gymleadercastle/pewter2.bin \
+	rosters/gymleadercastle/cinnabar2.bin \
+	rosters/gymleadercastle/viridian2.bin \
+	rosters/gymleadercastle/red2.bin \
+	rosters/rival2.bin \
+	rosters/challengecup/pokeball1.bin \
+	rosters/challengecup/greatball1.bin \
+	rosters/challengecup/ultraball1.bin \
+	rosters/challengecup/masterball1.bin \
+	rosters/challengecup/pokeball2.bin \
+	rosters/challengecup/greatball2.bin \
+	rosters/challengecup/ultraball2.bin \
+	rosters/challengecup/masterball2.bin \
+	rosters/academy/trainer.bin \
+	rosters/academy/gymleader.bin \
+	rosters/academy/elitefour.bin
+
+STRTBLS = \
 	text/pokemon.bin \
 	text/pokedex/theblankpokemon.bin \
 	text/pokedex/heights.bin \
@@ -333,14 +407,21 @@ TBLS = \
 	text/academy/skilltest/elitefour/ferris.bin \
 	text/academy/skilltest/elitefour/julian.bin
 
-.SUFFIXES: .txt .bin
+.SUFFIXES: .txt .json .bin
 
 .txt.bin:
 	../utils/txt2strtbl $< > $@
 
-# md5 of text.tbl: a8c362b564cd2ca2d48f54dd663ca959
-text.tbl: ${TBLS}
-	../utils/cattbl 0xd0000 ${TBLS} > $@
+.json.bin:
+	../utils/json2rostertbl $< > $@
+
+# md5 of text.tbl: 2c7b645e6c6d43fd16b73b00a5202075
+text.tbl: ${STRTBLS}
+	../utils/cattbl 0xd0000 ${STRTBLS} > $@
+
+# md5 of rosters.tbl: afa0dc919e83d6803a404f08c1517f4c
+rosters.tbl: ${ROSTERS}
+	../utils/cattbl 0x10000 ${ROSTERS} > $@
 
 clean:
-	rm -f text.tbl ${TBLS}
+	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS}
