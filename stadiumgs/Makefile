@@ -719,3 +719,4 @@ backgrounds.tbl: ${BACKGROUNDS}
 
 clean:
 	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS} backgrounds.tbl
+	rm -f 0x1e40000.tbl
