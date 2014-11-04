@@ -1,5 +1,19 @@
-all: text.tbl rosters.tbl backgrounds.tbl faces.tbl 0x1e40000.tbl \
-	presjpegs.tbl 0x1898000.tbl 0x1718000.tbl
+all: tables.bin
+
+TABLES = \
+	rosters.tbl \
+	0x1718000.tbl \
+	0x1898000.tbl \
+	text.tbl \
+	0x1e40000.tbl \
+	backgrounds.tbl \
+	0x2000000.tbl \
+	presjpegs.tbl \
+	faces.tbl
+
+# md5 of tables.bin: 9771bc97a32a71d6153dda1e30acf1e0
+tables.bin: ${TABLES}
+	cat ${TABLES} > $@
 
 FACES = \
 	faces/0x2268440.bin \
@@ -1826,7 +1840,7 @@ backgrounds.tbl: ${BACKGROUNDS}
 
 # md5 of 0x2000000.tbl: 26cf7fddade6692bb7b52c14169c9eff
 0x2000000.tbl: ${X0x2000000}
-	../utils/cattbl -f 0x180000 ${X0x2000000} > $@
+	../utils/cattbl -f 0x230000 ${X0x2000000} > $@
 
 # md5 of presjpegs.tbl: 4c6b9a153190ed45d85c391d62f47050
 presjpegs.tbl: ${PRESJPEGS}
@@ -1839,4 +1853,4 @@ faces.tbl: ${FACES}
 clean:
 	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS} backgrounds.tbl
 	rm -f 0x1e40000.tbl presjpegs.tbl faces.tbl 0x2000000.tbl 0x1898000.tbl
-	rm -f 0x1718000.tbl
+	rm -f 0x1718000.tbl 0x2000000.tbl tables.bin
