@@ -1,3 +1,6 @@
 [submodule "stadiumgs/backgrounds"]
 	path = stadiumgs/backgrounds
 	url = https://github.com/iimarckus/stadiumgs-backgrounds/
+[submodule "stadiumgs/0x1e40000"]
+	path = stadiumgs/0x1e40000
+	url = https://github.com/iimarckus/stadiumgs-0x1e40000
