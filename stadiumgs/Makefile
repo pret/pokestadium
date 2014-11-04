@@ -340,7 +340,7 @@ TBLS = \
 
 # md5 of text.tbl: a8c362b564cd2ca2d48f54dd663ca959
 text.tbl: ${TBLS}
-	../utils/cattbl ${TBLS} > $@
+	../utils/cattbl 0xd0000 ${TBLS} > $@
 
 clean:
 	rm -f text.tbl ${TBLS}

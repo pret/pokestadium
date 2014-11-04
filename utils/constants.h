@@ -1,33 +1,3 @@
-/*
- * Copyright © 2014 IIMarckus <imarckus@gmail.com>
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- */
-
-/*
- * Dump a table of roster tables to individual text files.
- * One table per text file.
- */
-
-#include <err.h>
-#include <errno.h>
-#include <limits.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-/* 0x1708000 in Stadium GS */
-
 char pokemon[][11] = {
 	"",
 	"Bulbasaur",
@@ -716,6 +686,259 @@ char trainers[][15] = {
 	"Carrie"
 };
 
+char items[][20] = {
+	"",
+	"Master Ball",
+	"Ultra Ball",
+	"Bright Powder",
+	"Great Ball",
+	"Poké Ball",
+	"teru-sama",
+	"Bicycle",
+	"Moon Stone",
+	"Antidote",
+	"Burn Heal",
+	"Ice Heal",
+	"Awakening",
+	"Parlyz Heal",
+	"Full Restore",
+	"Max Potion",
+	"Hyper Potion",
+	"Super Potion",
+	"Potion",
+	"Escape Rope",
+	"Repel",
+	"Max Elixer",
+	"Fire Stone",
+	"Thunderstone",
+	"Water Stone",
+	"teru-sama",
+	"HP Up",
+	"Protein",
+	"Iron",
+	"Carbos",
+	"Lucky Punch",
+	"Calcium",
+	"Rare Candy",
+	"X Accuracy",
+	"Leaf Stone",
+	"Metal Powder",
+	"Nugget",
+	"PokÉ Doll",
+	"Full Heal",
+	"Revive",
+	"Max Revive",
+	"Guard Spec.",
+	"Super Repel",
+	"Max Repel",
+	"Dire Hit",
+	"teru-sama",
+	"Fresh Water",
+	"Soda Pop",
+	"Lemonade",
+	"X Attack",
+	"teru-sama",
+	"X Defend",
+	"X Speed",
+	"X Special",
+	"Coin Case",
+	"Itemfinder",
+	"teru-sama",
+	"Exp. Share",
+	"Old Rod",
+	"Good Rod",
+	"Silver Leaf",
+	"Super Rod",
+	"PP Up",
+	"Ether",
+	"Max Ether",
+	"Elixer",
+	"Red Scale",
+	"Secretpotion",
+	"S.S. Ticket",
+	"Mystery Egg",
+	"Clear Bell",
+	"Silver Wing",
+	"Moomoo Milk",
+	"Quick Claw",
+	"Psncureberry",
+	"Gold Leaf",
+	"Soft Sand",
+	"Sharp Beak",
+	"Przcureberry",
+	"Burnt Berry",
+	"Ice Berry",
+	"Poison Barb",
+	"King's Rock",
+	"Bitter Berry",
+	"Mint Berry",
+	"Red Apricorn",
+	"Tinymushroom",
+	"Big Mushroom",
+	"Silverpowder",
+	"Blu Apricorn",
+	"teru-sama",
+	"Amulet Coin",
+	"Ylw Apricorn",
+	"Grn Apricorn",
+	"Cleanse Tag",
+	"Mystic Water",
+	"Twistedspoon",
+	"Wht Apricorn",
+	"Black Belt",
+	"Blk Apricorn",
+	"teru-sama",
+	"Pnk Apricorn",
+	"Blackglasses",
+	"Slowpoketail",
+	"Pink Bow",
+	"Stick",
+	"Smoke Ball",
+	"Nevermeltice",
+	"Magnet",
+	"Miracleberry",
+	"Pearl",
+	"Big Pearl",
+	"Everstone",
+	"Spell Tag",
+	"Ragecandybar",
+	"Gs Ball",
+	"Blue Card",
+	"Miracle Seed",
+	"Thick Club",
+	"Focus Band",
+	"teru-sama",
+	"Energypowder",
+	"Energy Root",
+	"Heal Powder",
+	"Revival Herb",
+	"Hard Stone",
+	"Lucky Egg",
+	"Card Key",
+	"Machine Part",
+	"Egg Ticket",
+	"Lost Item",
+	"Stardust",
+	"Star Piece",
+	"Basement Key",
+	"Pass",
+	"teru-sama",
+	"teru-sama",
+	"teru-sama",
+	"Charcoal",
+	"Berry Juice",
+	"Scope Lens",
+	"teru-sama",
+	"teru-sama",
+	"Metal Coat",
+	"Dragon Fang",
+	"teru-sama",
+	"Leftovers",
+	"teru-sama",
+	"teru-sama",
+	"teru-sama",
+	"Mysteryberry",
+	"Dragon Scale",
+	"Berserk Gene",
+	"teru-sama",
+	"teru-sama",
+	"teru-sama",
+	"Sacred Ash",
+	"Heavy Ball",
+	"Flower Mail",
+	"Level Ball",
+	"Lure Ball",
+	"Fast Ball",
+	"teru-sama",
+	"Light Ball",
+	"Friend Ball",
+	"Moon Ball",
+	"Love Ball",
+	"Normal Box",
+	"Gorgeous Box",
+	"Sun Stone",
+	"Polkadot Bow",
+	"teru-sama",
+	"Up-Grade",
+	"Berry",
+	"Gold Berry",
+	"Squirtbottle",
+	"teru-sama",
+	"Park Ball",
+	"Rainbow Wing",
+	"teru-sama",
+	"Brick Piece",
+	"Surf Mail",
+	"Liteblue Mail",
+	"Portrait Mail",
+	"Lovely Mail",
+	"Eon Mail",
+	"Morph Mail",
+	"Bluesky Mail",
+	"Music Mail",
+	"Mirage Mail",
+	"teru-sama",
+	"TM01",
+	"TM02",
+	"TM03",
+	"TM04",
+	"teru-sama",
+	"TM05",
+	"TM06",
+	"TM07",
+	"TM08",
+	"TM09",
+	"TM10",
+	"TM11",
+	"TM12",
+	"TM13",
+	"TM14",
+	"TM15",
+	"TM16",
+	"TM17",
+	"TM18",
+	"TM19",
+	"TM20",
+	"TM21",
+	"TM22",
+	"TM23",
+	"TM24",
+	"TM25",
+	"TM26",
+	"TM27",
+	"TM28",
+	"teru-sama",
+	"TM29",
+	"TM30",
+	"TM31",
+	"TM32",
+	"TM33",
+	"TM34",
+	"TM35",
+	"TM36",
+	"TM37",
+	"TM38",
+	"TM39",
+	"TM40",
+	"TM41",
+	"TM42",
+	"TM43",
+	"TM44",
+	"TM45",
+	"TM46",
+	"TM47",
+	"TM48",
+	"TM49",
+	"TM50",
+	"HM01",
+	"HM02",
+	"HM03",
+	"HM04",
+	"HM05",
+	"HM06",
+	"HM07"
+};
+
 char texts[][50] = {
 	"text/cal.txt",
 	"text/gymleadercastle/violet/matt1.txt",
@@ -974,515 +1197,68 @@ char texts[][50] = {
 	"text/academy/skilltest/elitefour/julian.txt"
 };
 
-char items[][20] = {
-	"",
-	"Master Ball",
-	"Ultra Ball",
-	"Bright Powder",
-	"Great Ball",
-	"Poké Ball",
-	"teru-sama",
-	"Bicycle",
-	"Moon Stone",
-	"Antidote",
-	"Burn Heal",
-	"Ice Heal",
-	"Awakening",
-	"Parlyz Heal",
-	"Full Restore",
-	"Max Potion",
-	"Hyper Potion",
-	"Super Potion",
-	"Potion",
-	"Escape Rope",
-	"Repel",
-	"Max Elixer",
-	"Fire Stone",
-	"Thunderstone",
-	"Water Stone",
-	"teru-sama",
-	"HP Up",
-	"Protein",
-	"Iron",
-	"Carbos",
-	"Lucky Punch",
-	"Calcium",
-	"Rare Candy",
-	"X Accuracy",
-	"Leaf Stone",
-	"Metal Powder",
-	"Nugget",
-	"PokÉ Doll",
-	"Full Heal",
-	"Revive",
-	"Max Revive",
-	"Guard Spec.",
-	"Super Repel",
-	"Max Repel",
-	"Dire Hit",
-	"teru-sama",
-	"Fresh Water",
-	"Soda Pop",
-	"Lemonade",
-	"X Attack",
-	"teru-sama",
-	"X Defend",
-	"X Speed",
-	"X Special",
-	"Coin Case",
-	"Itemfinder",
-	"teru-sama",
-	"Exp. Share",
-	"Old Rod",
-	"Good Rod",
-	"Silver Leaf",
-	"Super Rod",
-	"PP Up",
-	"Ether",
-	"Max Ether",
-	"Elixer",
-	"Red Scale",
-	"Secretpotion",
-	"S.S. Ticket",
-	"Mystery Egg",
-	"Clear Bell",
-	"Silver Wing",
-	"Moomoo Milk",
-	"Quick Claw",
-	"Psncureberry",
-	"Gold Leaf",
-	"Soft Sand",
-	"Sharp Beak",
-	"Przcureberry",
-	"Burnt Berry",
-	"Ice Berry",
-	"Poison Barb",
-	"King's Rock",
-	"Bitter Berry",
-	"Mint Berry",
-	"Red Apricorn",
-	"Tinymushroom",
-	"Big Mushroom",
-	"Silverpowder",
-	"Blu Apricorn",
-	"teru-sama",
-	"Amulet Coin",
-	"Ylw Apricorn",
-	"Grn Apricorn",
-	"Cleanse Tag",
-	"Mystic Water",
-	"Twistedspoon",
-	"Wht Apricorn",
-	"Black Belt",
-	"Blk Apricorn",
-	"teru-sama",
-	"Pnk Apricorn",
-	"Blackglasses",
-	"Slowpoketail",
-	"Pink Bow",
-	"Stick",
-	"Smoke Ball",
-	"Nevermeltice",
-	"Magnet",
-	"Miracleberry",
-	"Pearl",
-	"Big Pearl",
-	"Everstone",
-	"Spell Tag",
-	"Ragecandybar",
-	"Gs Ball",
-	"Blue Card",
-	"Miracle Seed",
-	"Thick Club",
-	"Focus Band",
-	"teru-sama",
-	"Energypowder",
-	"Energy Root",
-	"Heal Powder",
-	"Revival Herb",
-	"Hard Stone",
-	"Lucky Egg",
-	"Card Key",
-	"Machine Part",
-	"Egg Ticket",
-	"Lost Item",
-	"Stardust",
-	"Star Piece",
-	"Basement Key",
-	"Pass",
-	"teru-sama",
-	"teru-sama",
-	"teru-sama",
-	"Charcoal",
-	"Berry Juice",
-	"Scope Lens",
-	"teru-sama",
-	"teru-sama",
-	"Metal Coat",
-	"Dragon Fang",
-	"teru-sama",
-	"Leftovers",
-	"teru-sama",
-	"teru-sama",
-	"teru-sama",
-	"Mysteryberry",
-	"Dragon Scale",
-	"Berserk Gene",
-	"teru-sama",
-	"teru-sama",
-	"teru-sama",
-	"Sacred Ash",
-	"Heavy Ball",
-	"Flower Mail",
-	"Level Ball",
-	"Lure Ball",
-	"Fast Ball",
-	"teru-sama",
-	"Light Ball",
-	"Friend Ball",
-	"Moon Ball",
-	"Love Ball",
-	"Normal Box",
-	"Gorgeous Box",
-	"Sun Stone",
-	"Polkadot Bow",
-	"teru-sama",
-	"Up-Grade",
-	"Berry",
-	"Gold Berry",
-	"Squirtbottle",
-	"teru-sama",
-	"Park Ball",
-	"Rainbow Wing",
-	"teru-sama",
-	"Brick Piece",
-	"Surf Mail",
-	"Liteblue Mail",
-	"Portrait Mail",
-	"Lovely Mail",
-	"Eon Mail",
-	"Morph Mail",
-	"Bluesky Mail",
-	"Music Mail",
-	"Mirage Mail",
-	"teru-sama",
-	"TM01",
-	"TM02",
-	"TM03",
-	"TM04",
-	"teru-sama",
-	"TM05",
-	"TM06",
-	"TM07",
-	"TM08",
-	"TM09",
-	"TM10",
-	"TM11",
-	"TM12",
-	"TM13",
-	"TM14",
-	"TM15",
-	"TM16",
-	"TM17",
-	"TM18",
-	"TM19",
-	"TM20",
-	"TM21",
-	"TM22",
-	"TM23",
-	"TM24",
-	"TM25",
-	"TM26",
-	"TM27",
-	"TM28",
-	"teru-sama",
-	"TM29",
-	"TM30",
-	"TM31",
-	"TM32",
-	"TM33",
-	"TM34",
-	"TM35",
-	"TM36",
-	"TM37",
-	"TM38",
-	"TM39",
-	"TM40",
-	"TM41",
-	"TM42",
-	"TM43",
-	"TM44",
-	"TM45",
-	"TM46",
-	"TM47",
-	"TM48",
-	"TM49",
-	"TM50",
-	"HM01",
-	"HM02",
-	"HM03",
-	"HM04",
-	"HM05",
-	"HM06",
-	"HM07"
-};
-
-uint32_t
-getint32BE(FILE *f)
+int
+strtopokemon(const char *s)
 {
-	uint32_t n;
-	n  = fgetc(f) << 24;
-	n |= fgetc(f) << 16;
-	n |= fgetc(f) << 8;
-	n |= fgetc(f);
-
-	return n;
+	int i;
+	for (i = 0; i < 254; ++i) {
+		if (strcasecmp(s, pokemon[i]) == 0) {
+			return i;
+		}
+	}
 }
 
 int
-main(int argc, char *argv[])
+strtoitem(const char *s)
 {
-	FILE *rom;
-	FILE *outfile;
-	uint32_t ntables, nentries;
-	uint32_t *tableptrs, *stringptrs;
-	int i, x, table, entry;
-	char outfilename[16];
-	char *ep;
-	unsigned long long dataoff;
-
-	if (argc != 3) {
-		errx(1, "Usage: extractrostertbltbl file offset");
-	}
-
-	rom = fopen(argv[1], "rb");
-	if (rom == NULL) {
-		err(1, "Error opening file '%s'", argv[1]);
-	}
-
-	dataoff = strtoull(argv[2], &ep, 0);
-	if (argv[2][0] == '\0' || *ep != '\0') {
-		err(1, "invalid offset '%s'", argv[2]);
-	}
-	if (errno == ERANGE && dataoff == ULLONG_MAX) {
-		err(1, "invalid offset '%s'", argv[2]);
-	}
-	if (dataoff > 64 * 1024 * 1024) {
-		err(1, "invalid offset '%s'", argv[2]);
-	}
-
-	fseek(rom, dataoff + 0xc, SEEK_SET);
-	ntables = getint32BE(rom);
-	tableptrs = reallocarray(NULL, ntables, sizeof(uint32_t));
-	if (tableptrs == NULL) {
-		err(1, "Could not allocate memory for table table");
-	}
-
-	for (i = 0; i < ntables; ++i) {
-		tableptrs[i] = getint32BE(rom);
-		getint32BE(rom);
-		getint32BE(rom);
-		getint32BE(rom);
-	}
-	printf("%d tables\n", ntables);
-
-	for (table = 0; table < ntables; ++table) {
-		fseek(rom, dataoff + tableptrs[table], SEEK_SET);
-		snprintf(outfilename, sizeof outfilename, "0x%x.json", ftell(rom));
-		outfile = fopen(outfilename, "wb");
-		nentries = fgetc(rom);
-		fgetc(rom);
-		fgetc(rom);
-		fgetc(rom);
-		if (table < 5) {
-			fprintf(outfile, "[");
-			for (entry = 0; entry < nentries; ++entry) {
-				int byte;
-				if (entry != 0) {
-					fprintf(outfile, ",");
-				}
-				fprintf(outfile, "{\n");
-				fprintf(outfile, "\t\"level\": %d,\n", fgetc(rom));
-				fprintf(outfile, "\t\"species\": \"%s\",\n", pokemon[fgetc(rom)]);
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"item\": \"%d\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown1\": \"0x%x\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"move1\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"move2\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"move3\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"move4\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown2\": \"0x%x\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown3\": \"0x%x\",\n", byte);
-				}
-
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\"hp exp\": \"0x%04x\",\n", byte);
-
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\"attack exp\": \"0x%04x\",\n", byte);
-
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\"defense exp\": \"0x%04x\",\n", byte);
-
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\"speed exp\": \"0x%04x\",\n", byte);
-
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\"special exp\": \"0x%04x\",\n", byte);
-
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\"dvs\": \"0x%04x\"", byte);
-
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, ",\n\t\"unknown4\": \"0x%x\"", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, ",\n\t\"unknown5\": \"0x%x\"", byte);
-				}
-				fprintf(outfile, "\n}");
-			}
-			fprintf(outfile, "]\n");
-		} else {
-			fprintf(outfile, "[");
-			for (entry = 0; entry < nentries; ++entry) {
-				int byte;
-				if (entry != 0) {
-					fprintf(outfile, ",");
-				}
-				fprintf(outfile, "{\n");
-				fprintf(outfile, "\t\"group\": \"%s\",\n", groups[fgetc(rom)]);
-				fprintf(outfile, "\t\"trainer\": \"%s\",\n", trainers[fgetc(rom)]);
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown1\": \"0x%x\",\n", byte);
-				}
-				fprintf(outfile, "\t\"text\": \"%s\",\n", texts[fgetc(rom)]);
-				int mon, nmons;
-				nmons = fgetc(rom);
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown3\": \"0x%x\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown4\": \"0x%x\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown5\": \"0x%x\",\n", byte);
-				}
-				fprintf(outfile, "\t\"pokemon\": [");
-				for (mon = 0; mon < nmons; ++mon) {
-				fprintf(outfile, "{\n");
-				fprintf(outfile, "\t\t\"level\": %d,\n", fgetc(rom));
-				fprintf(outfile, "\t\t\"species\": \"%s\",\n", pokemon[fgetc(rom)]);
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"item\": \"%s\",\n", items[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"unknown1\": \"0x%x\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"move1\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"move2\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"move3\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"move4\": \"%s\",\n", moves[byte]);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"unknown2\": \"0x%x\",\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"unknown3\": \"0x%x\",\n", byte);
-				}
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\t\"hp exp\": \"0x%04x\",\n", byte);
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\t\"attack exp\": \"0x%04x\",\n", byte);
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\t\"defense exp\": \"0x%04x\",\n", byte);
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\t\"speed exp\": \"0x%04x\",\n", byte);
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\t\"special exp\": \"0x%04x\",\n", byte);
-				byte = fgetc(rom) << 8;
-				byte |= fgetc(rom);
-				fprintf(outfile, "\t\t\"dvs\": \"0x%04x\"\n", byte);
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, ",\t\t\"unknown4\": \"0x%x\"\n", byte);
-				}
-				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, ",\t\t\"unknown4\": \"0x%x\"\n", byte);
-				}
-				fprintf(outfile, "\t}");
-				if (mon != nmons - 1) {
-					fprintf(outfile, ",");
-				}
-				}
-
-				for (; mon < 6; ++mon) {
-				/* if a team has less than six mons, the blank spaces are filled by: level1 bulbasaur, unknown3 = 0x7f, DVs = 0x6777 */
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-					fgetc(rom);
-				}
-				fprintf(outfile, "]\n");
-				fprintf(outfile, "}");
-			}
-			fprintf(outfile, "]");
-			int first, second;
-			first = fgetc(rom);
-			second = fgetc(rom);
-			printf("%d entries (first bytes %x %x)\n", nentries, first, second);
+	int i;
+	for (i = 0; i < 250; ++i) {
+		if (strcasecmp(s, items[i]) == 0) {
+			return i;
 		}
+	}
+}
 
-		fclose(outfile);
+int
+strtomove(const char *s)
+{
+	int i;
+	for (i = 0; i < 252; ++i) {
+		if (strcasecmp(s, moves[i]) == 0) {
+			return i;
+		}
+	}
+}
+
+int
+strtogroup(const char *s)
+{
+	int i;
+	for (i = 0; i < 63; ++i) {
+		if (strcasecmp(s, groups[i]) == 0) {
+			return i;
+		}
+	}
+}
+
+int
+strtotrainer(const char *s)
+{
+	int i;
+	for (i = 0; i < 106; ++i) {
+		if (strcasecmp(s, trainers[i]) == 0) {
+			return i;
+		}
+	}
+}
+
+int
+strtotext(const char *s)
+{
+	int i;
+	for (i = 0; i < 255; ++i) {
+		if (strcasecmp(s, texts[i]) == 0) {
+			return i;
+		}
 	}
 }
