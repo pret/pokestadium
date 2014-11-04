@@ -17,6 +17,7 @@
 #include <err.h>
 #include <errno.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,6 +35,7 @@ putuint32BE(uint32_t n, FILE *f)
 int
 main(int argc, char *argv[])
 {
+	bool efflag;
 	int i, runsum, numptrs;
 	long size;
 	uint32_t *ptrs, *runsums;
@@ -42,7 +44,15 @@ main(int argc, char *argv[])
 	char *ep;
 
 	if (argc < 3) {
-		errx(1, "Usage: cattbl size file ...");
+		errx(1, "Usage: cattbl [-f] size file ...");
+	}
+
+	if (strcmp(argv[1], "-f") == 0) {
+		efflag = true;
+		argv += 1;
+		argc -= 1;
+	} else {
+		efflag = false;
 	}
 
 	size = strtol(argv[1], &ep, 0);
@@ -61,7 +71,11 @@ main(int argc, char *argv[])
 	runsums = reallocarray(NULL, argc, sizeof *runsums);
 	numptrs = 0;
 
-	putuint32BE(0, stdout);
+	if (efflag) {
+		putuint32BE(0xef, stdout);
+	} else {
+		putuint32BE(0, stdout);
+	}
 	putuint32BE(0, stdout);
 
 	runsum = 16 + 16 * (argc);

@@ -4,3 +4,18 @@
 [submodule "stadiumgs/0x1e40000"]
 	path = stadiumgs/0x1e40000
 	url = https://github.com/iimarckus/stadiumgs-0x1e40000
+[submodule "stadiumgs/0x1718000"]
+	path = stadiumgs/0x1718000
+	url = https://github.com/iimarckus/stadiumgs-0x1718000
+[submodule "stadiumgs/0x1898000"]
+	path = stadiumgs/0x1898000
+	url = https://github.com/iimarckus/stadiumgs-0x1898000
+[submodule "stadiumgs/0x2000000"]
+	path = stadiumgs/0x2000000
+	url = https://github.com/iimarckus/stadiumgs-0x2000000
+[submodule "stadiumgs/presjpeg"]
+	path = stadiumgs/presjpeg
+	url = https://github.com/iimarckus/stadiumgs-presjpeg
+[submodule "stadiumgs/faces"]
+	path = stadiumgs/faces
+	url = https://github.com/iimarckus/stadiumgs-faces
