@@ -19,6 +19,16 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+uint16_t
+getint16BE(FILE *f)
+{
+	uint16_t n;
+	n  = fgetc(f) << 8;
+	n |= fgetc(f);
+
+	return n;
+}
+
 uint32_t
 getint32BE(FILE *f)
 {
@@ -88,57 +98,21 @@ printpng(uint16_t **pixels, int height, int width)
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
-int
-main(int argc, char *argv[])
+/*
+ * read a face from offset in f and store it into pixels.
+ */
+void
+getface(FILE *f, long offset, int height, int width, uint16_t **pixels)
 {
-	FILE *f;
-	int x, y;
-	uint16_t **pixels;
-	int height, width;
-	uint32_t nfaces;
-	uint32_t *offsets;
-
-	if (argc != 2) {
-		errx(1, "Usage: face2png file");
-	}
-
-	f = fopen(argv[1], "rb");
-	if (f == NULL) {
-		err(1, "Could not open file '%s'", argv[1]);
-	}
-
-	height = 64;
-	width = 64;
-
-	nfaces = getint32BE(f);
-	offsets = reallocarray(NULL, nfaces, sizeof *offsets);
-
-	for (y = 0; y < nfaces; ++y) {
-		offsets[y] = getint32BE(f);
-	}
-	for (y = 0; y < nfaces; ++y) {
-		getint32BE(f);
-	}
-
-	fseek(f, offsets[nfaces - 1], SEEK_SET);
-
-	pixels = reallocarray(NULL, width, sizeof *pixels);
-	if (pixels == NULL) {
-		err(1, "Could not allocate memory");
-	}
-	for (x = 0; x < width; ++x) {
-		pixels[x] = reallocarray(NULL, height, sizeof
-		    *pixels[x]);
-		if (pixels[x] == NULL) {
-			err(1, "Could not allocate memory");
-		}
-	}
-
 	/*
 	 * In the original format, on every other line, every other pair of
 	 * pixels is swapped. Here we transpose it into top-bottom left-right.
 	 */
 	uint16_t q[4];
+	int x, y;
+
+	fseek(f, offset, SEEK_SET);
+
 	for (y = 0; y < height; ++y) {
 		for (x = 0; x < width; ++x) {
 			if (y % 2 == 0) {
@@ -156,6 +130,68 @@ main(int argc, char *argv[])
 			}
 		}
 	}
+}
+
+int
+main(int argc, char *argv[])
+{
+	FILE *f;
+	int x, y;
+	uint16_t **pixels;
+	int height, width;
+	uint32_t nfaces;
+	uint32_t *offsets;
+	uint16_t *heights, *widths;
+
+	if (argc != 2) {
+		errx(1, "Usage: face2png file");
+	}
+
+	f = fopen(argv[1], "rb");
+	if (f == NULL) {
+		err(1, "Could not open file '%s'", argv[1]);
+	}
+
+	nfaces = getint32BE(f);
+	offsets = reallocarray(NULL, nfaces, sizeof *offsets);
+	heights = reallocarray(NULL, nfaces, sizeof *heights);
+	widths = reallocarray(NULL, nfaces, sizeof *widths);
+	if (offsets == NULL || heights == NULL || widths == NULL) {
+		err(1, "Could not allocate memory");
+	}
+
+	for (y = 0; y < nfaces; ++y) {
+		offsets[y] = getint32BE(f);
+	}
+	for (y = 0; y < nfaces; ++y) {
+		fseek(f, offsets[y] - 8, SEEK_SET);
+
+		/*
+		 * XXX
+		 * check whether height follows width or width follows height
+		 */
+		heights[y] = getint16BE(f);
+		widths[y] = getint16BE(f);
+
+		getint32BE(f);
+	}
+
+	height = heights[nfaces - 1];
+	width = widths[nfaces - 1];
+
+	pixels = reallocarray(NULL, width, sizeof *pixels);
+	if (pixels == NULL) {
+		err(1, "Could not allocate memory");
+	}
+	for (x = 0; x < width; ++x) {
+		pixels[x] = reallocarray(NULL, height, sizeof
+		    *pixels[x]);
+		if (pixels[x] == NULL) {
+			err(1, "Could not allocate memory");
+		}
+	}
+
+	getface(f, offsets[nfaces - 1], height, width, pixels);
 
 	printpng(pixels, height, width);
 
