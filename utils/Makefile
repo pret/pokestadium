@@ -5,7 +5,8 @@ BINARIES = \
 	cattbl \
 	json2rostertbl \
 	extractbin \
-	face2png
+	face2png \
+	padff
 
 all: ${BINARIES}
 
