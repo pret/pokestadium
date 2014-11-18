@@ -27,6 +27,20 @@ backgrounds/ and presjpeg/:
 
 * what is this?
 
-pics/:
+faces/:
 
-* write a converter
+* have been dumped to png
+* need to write a converter from png
+
+0x3fd5000/:
+
+* contains .pers.szp files that in turn contain yay0-compressed data
+* what is the decompressed data?
+* need to write a yay0/pers-szp compressor/decompressor
+
+0x3fed000/:
+
+* just one file
+* looks like 253 entries, 16 bytes per entry
+* 253 is awfully close to 251
+* so it probably has something to do with pokémon species

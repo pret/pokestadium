@@ -22,3 +22,6 @@
 [submodule "stadiumgs/0x3fd5000"]
 	path = stadiumgs/0x3fd5000
 	url = https://github.com/iimarckus/stadiumgs-0x3fd5000
+[submodule "stadiumgs/0x3fed000"]
+	path = stadiumgs/0x3fed000
+	url = https://github.com/iimarckus/stadiumgs-0x3fed000

@@ -1,4 +1,4 @@
-all: tables.bin
+all: part2.bin part4.bin
 
 TABLES = \
 	rosters.tbl \
@@ -11,9 +11,13 @@ TABLES = \
 	presjpegs.tbl \
 	faces.tbl
 
-# md5 of tables.bin: 9771bc97a32a71d6153dda1e30acf1e0
-tables.bin: ${TABLES}
+# md5 of part2.bin: 9771bc97a32a71d6153dda1e30acf1e0
+part2.bin: ${TABLES}
 	cat ${TABLES} > $@
+
+# md5 of part4.bin: dd75790cae613b8a72da350b4fcdeddd
+part4.bin: 0x3fd5000.tbl 0x3fed000.bin
+	cat 0x3fd5000.tbl 0x3fed000.bin > $@
 
 X0x3fd5000 = \
 	0x3fd5000/empty1.pers.szp \
@@ -2134,11 +2138,16 @@ presjpegs.tbl: ${PRESJPEGS}
 faces.tbl: ${FACES}
 	../utils/cattbl -f 0x13d000 ${FACES} > $@
 
-# md5 of 0x3fd5000.tbl: 
+# md5 of 0x3fd5000.tbl: a49dc59176b380ccf34fede7ff64ff2b
 0x3fd5000.tbl: ${X0x3fd5000}
 	../utils/cattbl -f 0x18000 ${X0x3fd5000} > $@
+
+# md5 of 0x3fed000.bin: 5d2b0e4dcd62b592b456bfb60357f580
+0x3fed000.bin: 0x3fed000/0x3fed000.bin
+	../utils/padff 0x13000 0x3fed000/0x3fed000.bin > $@
 
 clean:
 	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS} backgrounds.tbl
 	rm -f 0x1e40000.tbl presjpegs.tbl faces.tbl 0x2000000.tbl 0x1898000.tbl
-	rm -f 0x1718000.tbl 0x2000000.tbl tables.bin
+	rm -f 0x1718000.tbl 0x2000000.tbl part2.bin 0x3fed000.bin part4.bin
+	rm -f 0x3fd5000.tbl
