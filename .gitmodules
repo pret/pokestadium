@@ -19,3 +19,6 @@
 [submodule "stadiumgs/faces"]
 	path = stadiumgs/faces
 	url = https://github.com/iimarckus/stadiumgs-faces
+[submodule "stadiumgs/0x3fd5000"]
+	path = stadiumgs/0x3fd5000
+	url = https://github.com/iimarckus/stadiumgs-0x3fd5000

@@ -35,7 +35,7 @@ putuint32BE(uint32_t n, FILE *f)
 int
 main(int argc, char *argv[])
 {
-	bool efflag;
+	bool efflag, sameptrflag;
 	int i, runsum, numptrs;
 	long size;
 	uint32_t *ptrs, *runsums;
@@ -44,7 +44,7 @@ main(int argc, char *argv[])
 	char *ep;
 
 	if (argc < 3) {
-		errx(1, "Usage: cattbl [-f] size file ...");
+		errx(1, "Usage: cattbl [-fx] size file ...");
 	}
 
 	if (strcmp(argv[1], "-f") == 0) {
@@ -53,6 +53,19 @@ main(int argc, char *argv[])
 		argc -= 1;
 	} else {
 		efflag = false;
+	}
+
+	if (strcmp(argv[1], "-x") == 0) {
+		sameptrflag = true;
+		argv += 1;
+		argc -= 1;
+	} else {
+		sameptrflag = false;
+	}
+
+	if (strcmp(argv[1], "-fx") == 0) {
+		sameptrflag = true;
+		efflag = true;
 	}
 
 	size = strtol(argv[1], &ep, 0);
@@ -80,7 +93,8 @@ main(int argc, char *argv[])
 
 	runsum = 16 + 16 * (argc);
 	for (i = 0; i < argc; ++i) {
-		if (i > 0 && strcmp(argv[i], argv[i - 1]) == 0) {
+		if (sameptrflag && i > 0 && strcmp(argv[i], argv[i - 1]) == 0)
+		    {
 			runsums[i] = runsums[i - 1];
 			ptrs[i] = ptrs[i - 1];
 			continue;
@@ -111,7 +125,8 @@ main(int argc, char *argv[])
 	}
 
 	for (i = 0; i < argc; ++i) {
-		if (i > 0 && strcmp(argv[i], argv[i - 1]) == 0) {
+		if (sameptrflag && i > 0 && strcmp(argv[i], argv[i - 1]) == 0)
+		    {
 			continue;
 		}
 		size_t n;
