@@ -35,7 +35,7 @@ faces/:
 0x3fd5000/:
 
 * contains .pers.szp files that in turn contain yay0-compressed data
-* what is the decompressed data?
+* these have been decompressed into the .bin files. but what is their format?
 * need to write a yay0/pers-szp compressor/decompressor
 
 0x3fed000/:
