@@ -102,7 +102,8 @@ printpng(uint16_t **pixels, int height, int width)
  * read a face from offset in f and store it into pixels.
  */
 void
-getface(FILE *f, long offset, int height, int width, uint16_t **pixels)
+getface(FILE *f, long offset, int height, int width, uint16_t **pixels,
+    int inset)
 {
 	/*
 	 * In the original format, on every other line, every other pair of
@@ -114,7 +115,7 @@ getface(FILE *f, long offset, int height, int width, uint16_t **pixels)
 	fseek(f, offset, SEEK_SET);
 
 	for (y = 0; y < height; ++y) {
-		for (x = 0; x < width; ++x) {
+		for (x = inset; x < width + inset; ++x) {
 			if (y % 2 == 0) {
 				pixels[x][y] = fgetc(f) << 8;
 				pixels[x][y] |= fgetc(f);
@@ -142,6 +143,7 @@ main(int argc, char *argv[])
 	uint32_t nfaces;
 	uint32_t *offsets;
 	uint16_t *heights, *widths;
+	int inset;
 
 	if (argc != 2) {
 		errx(1, "Usage: face2png file");
@@ -163,6 +165,8 @@ main(int argc, char *argv[])
 	for (y = 0; y < nfaces; ++y) {
 		offsets[y] = getint32BE(f);
 	}
+	height = 0;
+	width = 0;
 	for (y = 0; y < nfaces; ++y) {
 		fseek(f, offsets[y] - 8, SEEK_SET);
 
@@ -174,10 +178,12 @@ main(int argc, char *argv[])
 		widths[y] = getint16BE(f);
 
 		getint32BE(f);
-	}
 
-	height = heights[nfaces - 1];
-	width = widths[nfaces - 1];
+		/* height equals the largest height */
+		height = heights[y] > height ? heights[y] : height;
+		/* width equals the sum of the widths */
+		width += widths[y];
+	}
 
 	pixels = reallocarray(NULL, width, sizeof *pixels);
 	if (pixels == NULL) {
@@ -191,7 +197,11 @@ main(int argc, char *argv[])
 		}
 	}
 
-	getface(f, offsets[nfaces - 1], height, width, pixels);
+	inset = 0;
+	for (y = 0; y < nfaces; ++y) {
+		getface(f, offsets[y], heights[y], widths[y], pixels, inset);
+		inset += widths[y];
+	}
 
 	printpng(pixels, height, width);
 
