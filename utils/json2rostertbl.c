@@ -172,7 +172,7 @@ printpokemon(struct json_object *k)
 	optional8id(k, l, "move3", strtomove);
 	optional8id(k, l, "move4", strtomove);
 	optional8strint(k, l, "unknown2");
-	optional8strint(k, l, "unknown3");
+	optional8strint(k, l, "happiness");
 	required16strint(k, l, "hp exp");
 	required16strint(k, l, "attack exp");
 	required16strint(k, l, "defense exp");

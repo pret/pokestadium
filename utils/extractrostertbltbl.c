@@ -1326,7 +1326,7 @@ main(int argc, char *argv[])
 					fprintf(outfile, "\t\"unknown2\": \"0x%x\",\n", byte);
 				}
 				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\"unknown3\": \"0x%x\",\n", byte);
+					fprintf(outfile, "\t\"happiness\": \"0x%x\",\n", byte);
 				}
 
 				byte = fgetc(rom) << 8;
@@ -1414,7 +1414,7 @@ main(int argc, char *argv[])
 					fprintf(outfile, "\t\t\"unknown2\": \"0x%x\",\n", byte);
 				}
 				if ((byte = fgetc(rom)) != 0) {
-					fprintf(outfile, "\t\t\"unknown3\": \"0x%x\",\n", byte);
+					fprintf(outfile, "\t\t\"happiness\": \"0x%x\",\n", byte);
 				}
 				byte = fgetc(rom) << 8;
 				byte |= fgetc(rom);
@@ -1447,7 +1447,7 @@ main(int argc, char *argv[])
 				}
 
 				for (; mon < 6; ++mon) {
-				/* if a team has less than six mons, the blank spaces are filled by: level1 bulbasaur, unknown3 = 0x7f, DVs = 0x6777 */
+				/* if a team has less than six mons, the blank spaces are filled by: level1 bulbasaur, happiness = 0x7f, DVs = 0x6777 */
 					fgetc(rom);
 					fgetc(rom);
 					fgetc(rom);
