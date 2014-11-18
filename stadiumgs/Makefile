@@ -80,7 +80,7 @@ FACES = \
 	faces/lance.bin \
 	faces/hiker.bin \
 	faces/pryce.bin \
-	faces/femaleplayer.bin \
+	faces/player.bin \
 	faces/dual.bin \
 	faces/pichu.bin
 
