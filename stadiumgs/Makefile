@@ -2068,7 +2068,7 @@ BACKGROUNDS = \
 	backgrounds/labmachine.bin \
 	backgrounds/whitecity2.bin \
 	backgrounds/freebattle.bin \
-	backgrounds/0x1f449b0.bin \
+	backgrounds/selectpokemon/0x1f449b0.bin \
 	backgrounds/0x1f48620.bin \
 	backgrounds/0x1f4eca0.bin \
 	backgrounds/castlejohto.bin \
@@ -2091,7 +2091,7 @@ BACKGROUNDS = \
 	backgrounds/credits/redvsblue.bin \
 	backgrounds/0x1fe3520.bin \
 	backgrounds/0x1fea540.bin \
-	backgrounds/battlenow.bin \
+	backgrounds/selectpokemon/battlenow.bin \
 	backgrounds/mysterygift.bin
 
 .SUFFIXES: .txt .json .bin
