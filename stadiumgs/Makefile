@@ -2060,17 +2060,17 @@ BACKGROUNDS = \
 	backgrounds/stadium.presjpeg \
 	backgrounds/castlekanto.presjpeg \
 	backgrounds/classroom2.presjpeg \
-	backgrounds/0x1f079c0.presjpeg \
+	backgrounds/minigames/clearcut.presjpeg \
 	backgrounds/library1.presjpeg \
 	backgrounds/myroom.presjpeg \
 	backgrounds/minigames.presjpeg \
-	backgrounds/0x1f225e0.presjpeg \
+	backgrounds/minigames/emergency.presjpeg \
 	backgrounds/labmachine.presjpeg \
 	backgrounds/whitecity2.presjpeg \
 	backgrounds/freebattle.presjpeg \
 	backgrounds/selectpokemon/0x1f449b0.presjpeg \
-	backgrounds/0x1f48620.presjpeg \
-	backgrounds/0x1f4eca0.presjpeg \
+	backgrounds/mysterygift1.presjpeg \
+	backgrounds/rival.presjpeg \
 	backgrounds/castlejohto.presjpeg \
 	backgrounds/castleplateau.presjpeg \
 	backgrounds/hoohlugia.presjpeg \
@@ -2089,10 +2089,10 @@ BACKGROUNDS = \
 	backgrounds/credits/chuckvsbruno.presjpeg \
 	backgrounds/credits/rivalvskris.presjpeg \
 	backgrounds/credits/redvsblue.presjpeg \
-	backgrounds/0x1fe3520.presjpeg \
-	backgrounds/0x1fea540.presjpeg \
+	backgrounds/minigames/eager.presjpeg \
+	backgrounds/mysterygift2.presjpeg \
 	backgrounds/selectpokemon/battlenow.presjpeg \
-	backgrounds/mysterygift.presjpeg
+	backgrounds/deptstore.presjpeg
 
 .SUFFIXES: .txt .json .bin .presjpeg .jpg
 
