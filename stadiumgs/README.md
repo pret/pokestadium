@@ -4,12 +4,13 @@ rosters/ is done.
 
 rentals/ is done.
 
+backgrounds/ is done.
+
+academygfx/ is done.
+
+(but for all of the above, some files could use better names)
 
 Todo:
-
-backgrounds/ and presjpeg/:
-
-* write a presjpeg compressor/decompressor
 
 0x1718000/:
 
@@ -26,6 +27,8 @@ backgrounds/ and presjpeg/:
 0x2000000/:
 
 * what is this?
+* answer: .pers.szp, containing yay0, containing FRAGMENT
+* but what is it?
 
 faces/:
 
