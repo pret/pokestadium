@@ -8,7 +8,7 @@ TABLES = \
 	0x1e40000.tbl \
 	backgrounds.tbl \
 	0x2000000.tbl \
-	presjpegs.tbl \
+	academygfx.tbl \
 	faces.tbl
 
 # md5 of part2.bin: 9771bc97a32a71d6153dda1e30acf1e0
@@ -372,66 +372,66 @@ FACES = \
 	faces/dual.bin \
 	faces/pichu.bin
 
-PRESJPEGS = \
-	presjpeg/0x22303c0.bin \
-	presjpeg/0x2230c10.bin \
-	presjpeg/0x22314c0.bin \
-	presjpeg/0x2231e60.bin \
-	presjpeg/0x2232990.bin \
-	presjpeg/0x2233520.bin \
-	presjpeg/0x2233eb0.bin \
-	presjpeg/0x22348f0.bin \
-	presjpeg/0x2235310.bin \
-	presjpeg/0x2235c30.bin \
-	presjpeg/0x22363a0.bin \
-	presjpeg/0x22372e0.bin \
-	presjpeg/0x2237eb0.bin \
-	presjpeg/0x2238970.bin \
-	presjpeg/0x22394e0.bin \
-	presjpeg/0x2239fe0.bin \
-	presjpeg/0x223a9b0.bin \
-	presjpeg/0x223b2a0.bin \
-	presjpeg/0x223bc10.bin \
-	presjpeg/0x223c650.bin \
-	presjpeg/0x223ce00.bin \
-	presjpeg/0x223d4c0.bin \
-	presjpeg/0x223dc20.bin \
-	presjpeg/0x223e500.bin \
-	presjpeg/0x223f150.bin \
-	presjpeg/0x223f9a0.bin \
-	presjpeg/0x2240480.bin \
-	presjpeg/0x2241050.bin \
-	presjpeg/0x2241b30.bin \
-	presjpeg/0x2242510.bin \
-	presjpeg/0x2242f80.bin \
-	presjpeg/0x22438e0.bin \
-	presjpeg/0x2243fe0.bin \
-	presjpeg/0x22447b0.bin \
-	presjpeg/0x2244d60.bin \
-	presjpeg/0x22452b0.bin \
-	presjpeg/0x2245a20.bin \
-	presjpeg/0x22460c0.bin \
-	presjpeg/0x2246a50.bin \
-	presjpeg/0x2247350.bin \
-	presjpeg/0x2247c00.bin \
-	presjpeg/0x2248410.bin \
-	presjpeg/0x2248db0.bin \
-	presjpeg/0x2249730.bin \
-	presjpeg/0x224a210.bin \
-	presjpeg/0x224bcc0.bin \
-	presjpeg/0x224d680.bin \
-	presjpeg/0x224ec50.bin \
-	presjpeg/0x224f3f0.bin \
-	presjpeg/0x224f9c0.bin \
-	presjpeg/0x2252960.bin \
-	presjpeg/0x2255980.bin \
-	presjpeg/0x2257c50.bin \
-	presjpeg/0x2258620.bin \
-	presjpeg/0x2258e00.bin \
-	presjpeg/0x225a270.bin \
-	presjpeg/0x225a3d0.bin \
-	presjpeg/0x225a540.bin \
-	presjpeg/0x225a6b0.bin
+ACADEMYGFX = \
+	academygfx/0x22303c0.presjpeg \
+	academygfx/0x2230c10.presjpeg \
+	academygfx/0x22314c0.presjpeg \
+	academygfx/0x2231e60.presjpeg \
+	academygfx/0x2232990.presjpeg \
+	academygfx/0x2233520.presjpeg \
+	academygfx/0x2233eb0.presjpeg \
+	academygfx/0x22348f0.presjpeg \
+	academygfx/0x2235310.presjpeg \
+	academygfx/0x2235c30.presjpeg \
+	academygfx/0x22363a0.presjpeg \
+	academygfx/0x22372e0.presjpeg \
+	academygfx/0x2237eb0.presjpeg \
+	academygfx/0x2238970.presjpeg \
+	academygfx/0x22394e0.presjpeg \
+	academygfx/0x2239fe0.presjpeg \
+	academygfx/0x223a9b0.presjpeg \
+	academygfx/0x223b2a0.presjpeg \
+	academygfx/0x223bc10.presjpeg \
+	academygfx/0x223c650.presjpeg \
+	academygfx/0x223ce00.presjpeg \
+	academygfx/0x223d4c0.presjpeg \
+	academygfx/0x223dc20.presjpeg \
+	academygfx/0x223e500.presjpeg \
+	academygfx/0x223f150.presjpeg \
+	academygfx/0x223f9a0.presjpeg \
+	academygfx/0x2240480.presjpeg \
+	academygfx/0x2241050.presjpeg \
+	academygfx/0x2241b30.presjpeg \
+	academygfx/0x2242510.presjpeg \
+	academygfx/0x2242f80.presjpeg \
+	academygfx/0x22438e0.presjpeg \
+	academygfx/0x2243fe0.presjpeg \
+	academygfx/0x22447b0.presjpeg \
+	academygfx/0x2244d60.presjpeg \
+	academygfx/0x22452b0.presjpeg \
+	academygfx/0x2245a20.presjpeg \
+	academygfx/0x22460c0.presjpeg \
+	academygfx/0x2246a50.presjpeg \
+	academygfx/0x2247350.presjpeg \
+	academygfx/0x2247c00.presjpeg \
+	academygfx/0x2248410.presjpeg \
+	academygfx/0x2248db0.presjpeg \
+	academygfx/0x2249730.presjpeg \
+	academygfx/0x224a210.presjpeg \
+	academygfx/0x224bcc0.presjpeg \
+	academygfx/0x224d680.presjpeg \
+	academygfx/0x224ec50.presjpeg \
+	academygfx/0x224f3f0.presjpeg \
+	academygfx/0x224f9c0.presjpeg \
+	academygfx/0x2252960.presjpeg \
+	academygfx/0x2255980.presjpeg \
+	academygfx/0x2257c50.presjpeg \
+	academygfx/0x2258620.presjpeg \
+	academygfx/0x2258e00.presjpeg \
+	academygfx/0x225a270.presjpeg \
+	academygfx/0x225a3d0.presjpeg \
+	academygfx/0x225a540.presjpeg \
+	academygfx/0x225a6b0.presjpeg
 
 X0x1898000 = \
 	0x1898000/0x1899c90.bin \
@@ -2045,62 +2045,65 @@ STRTBLS = \
 	text/academy/skilltest/elitefour/julian.bin
 
 BACKGROUNDS = \
-	backgrounds/title1.bin \
-	backgrounds/title2.bin \
-	backgrounds/whitecity1.bin \
-	backgrounds/lab.bin \
-	backgrounds/classroom1.bin \
-	backgrounds/pokedex.bin \
-	backgrounds/gamepakcheck.bin \
-	backgrounds/pleaseselect.bin \
-	backgrounds/selectpokemon/littlecup.bin \
-	backgrounds/selectpokemon/pokecup.bin \
-	backgrounds/selectpokemon/primecup.bin \
-	backgrounds/selectpokemon/challengecup.bin \
-	backgrounds/stadium.bin \
-	backgrounds/castlekanto.bin \
-	backgrounds/classroom2.bin \
-	backgrounds/0x1f079c0.bin \
-	backgrounds/library1.bin \
-	backgrounds/myroom.bin \
-	backgrounds/minigames.bin \
-	backgrounds/0x1f225e0.bin \
-	backgrounds/labmachine.bin \
-	backgrounds/whitecity2.bin \
-	backgrounds/freebattle.bin \
-	backgrounds/selectpokemon/0x1f449b0.bin \
-	backgrounds/0x1f48620.bin \
-	backgrounds/0x1f4eca0.bin \
-	backgrounds/castlejohto.bin \
-	backgrounds/castleplateau.bin \
-	backgrounds/hoohlugia.bin \
-	backgrounds/quiz.bin \
-	backgrounds/library2.bin \
-	backgrounds/credits/lancevsclair.bin \
-	backgrounds/library3.bin \
-	backgrounds/credits/bugsyvskaren.bin \
-	backgrounds/credits/falknervserika.bin \
-	backgrounds/credits/mistyvswhitney.bin \
-	backgrounds/credits/surgevsmorty.bin \
-	backgrounds/credits/jasminevsbrock.bin \
-	backgrounds/credits/blainevspryce.bin \
-	backgrounds/credits/sabrinavswill.bin \
-	backgrounds/credits/janinevskoga.bin \
-	backgrounds/credits/chuckvsbruno.bin \
-	backgrounds/credits/rivalvskris.bin \
-	backgrounds/credits/redvsblue.bin \
-	backgrounds/0x1fe3520.bin \
-	backgrounds/0x1fea540.bin \
-	backgrounds/selectpokemon/battlenow.bin \
-	backgrounds/mysterygift.bin
+	backgrounds/title1.presjpeg \
+	backgrounds/title2.presjpeg \
+	backgrounds/whitecity1.presjpeg \
+	backgrounds/lab.presjpeg \
+	backgrounds/classroom1.presjpeg \
+	backgrounds/pokedex.presjpeg \
+	backgrounds/gamepakcheck.presjpeg \
+	backgrounds/pleaseselect.presjpeg \
+	backgrounds/selectpokemon/littlecup.presjpeg \
+	backgrounds/selectpokemon/pokecup.presjpeg \
+	backgrounds/selectpokemon/primecup.presjpeg \
+	backgrounds/selectpokemon/challengecup.presjpeg \
+	backgrounds/stadium.presjpeg \
+	backgrounds/castlekanto.presjpeg \
+	backgrounds/classroom2.presjpeg \
+	backgrounds/0x1f079c0.presjpeg \
+	backgrounds/library1.presjpeg \
+	backgrounds/myroom.presjpeg \
+	backgrounds/minigames.presjpeg \
+	backgrounds/0x1f225e0.presjpeg \
+	backgrounds/labmachine.presjpeg \
+	backgrounds/whitecity2.presjpeg \
+	backgrounds/freebattle.presjpeg \
+	backgrounds/selectpokemon/0x1f449b0.presjpeg \
+	backgrounds/0x1f48620.presjpeg \
+	backgrounds/0x1f4eca0.presjpeg \
+	backgrounds/castlejohto.presjpeg \
+	backgrounds/castleplateau.presjpeg \
+	backgrounds/hoohlugia.presjpeg \
+	backgrounds/quiz.presjpeg \
+	backgrounds/library2.presjpeg \
+	backgrounds/credits/lancevsclair.presjpeg \
+	backgrounds/library3.presjpeg \
+	backgrounds/credits/bugsyvskaren.presjpeg \
+	backgrounds/credits/falknervserika.presjpeg \
+	backgrounds/credits/mistyvswhitney.presjpeg \
+	backgrounds/credits/surgevsmorty.presjpeg \
+	backgrounds/credits/jasminevsbrock.presjpeg \
+	backgrounds/credits/blainevspryce.presjpeg \
+	backgrounds/credits/sabrinavswill.presjpeg \
+	backgrounds/credits/janinevskoga.presjpeg \
+	backgrounds/credits/chuckvsbruno.presjpeg \
+	backgrounds/credits/rivalvskris.presjpeg \
+	backgrounds/credits/redvsblue.presjpeg \
+	backgrounds/0x1fe3520.presjpeg \
+	backgrounds/0x1fea540.presjpeg \
+	backgrounds/selectpokemon/battlenow.presjpeg \
+	backgrounds/mysterygift.presjpeg
 
-.SUFFIXES: .txt .json .bin
+.SUFFIXES: .txt .json .bin .presjpeg .jpg
 
 .txt.bin:
 	../utils/txt2strtbl $< > $@
 
 .json.bin:
 	../utils/json2rostertbl $< > $@
+
+.jpg.presjpeg:
+	../utils/presjpeg $< > $@
 
 # md5 of rosters.tbl: afa0dc919e83d6803a404f08c1517f4c
 rosters.tbl: ${ROSTERS}
@@ -2130,9 +2133,9 @@ backgrounds.tbl: ${BACKGROUNDS}
 0x2000000.tbl: ${X0x2000000}
 	../utils/cattbl -f 0x230000 ${X0x2000000} > $@
 
-# md5 of presjpegs.tbl: 4c6b9a153190ed45d85c391d62f47050
-presjpegs.tbl: ${PRESJPEGS}
-	../utils/cattbl -f 0x38000 ${PRESJPEGS} > $@
+# md5 of academygfx.tbl: 4c6b9a153190ed45d85c391d62f47050
+academygfx.tbl: ${ACADEMYGFX}
+	../utils/cattbl -f 0x38000 ${ACADEMYGFX} > $@
 
 # md5 of faces.tbl: 70e499025672e8758db4ed2094354b77
 faces.tbl: ${FACES}
@@ -2148,6 +2151,6 @@ faces.tbl: ${FACES}
 
 clean:
 	rm -f text.tbl ${STRTBLS} rosters.tbl ${ROSTERS} backgrounds.tbl
-	rm -f 0x1e40000.tbl presjpegs.tbl faces.tbl 0x2000000.tbl 0x1898000.tbl
+	rm -f 0x1e40000.tbl academygfx.tbl faces.tbl 0x2000000.tbl 0x1898000.tbl
 	rm -f 0x1718000.tbl 0x2000000.tbl part2.bin 0x3fed000.bin part4.bin
 	rm -f 0x3fd5000.tbl
