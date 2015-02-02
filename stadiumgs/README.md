@@ -47,3 +47,9 @@ faces/:
 * looks like 253 entries, 16 bytes per entry
 * 253 is awfully close to 251
 * so it probably has something to do with pokémon species
+
+There is a table at 0x04377d0 (contains .pers-szp containing yay0)
+
+There is a table at 0x04494c0 (contains .pers-szp containing yay0)
+
+There is a table at 0x1638000 (contains .pers-szp containing yay0)
