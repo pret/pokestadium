@@ -1,4 +1,9 @@
-all: text.tbl
+all: pokestadium.n64
+
+pokestadium.n64: main.s
+	armips main.s
+
+#all: text.tbl
 
 TBLS = \
 	text/0x783a50.bin \
