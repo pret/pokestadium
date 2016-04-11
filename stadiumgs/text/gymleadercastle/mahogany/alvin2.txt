@@ -53,7 +53,7 @@ freeze!
 
 <FACE,3,1>You've got all the substance of slush!
 
-<FACE,3,0>I feel like I nailed a 1080º!
+<FACE,3,0>I feel like I nailed a 1080Â°!
 
 <FACE,3,2>Shoot! Well then, I'm switching to summer. Watch me as a SWIMMER!
 
