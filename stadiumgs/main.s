@@ -2,6 +2,7 @@
 .n64
 .include "constants/type_constants.s"
 .include "constants/move_constants.s"
+.include "constants/item_constants.s"
 .incbin "baseromgs.n64",0,0x98a14
 
 TMHMMoves:
@@ -184,24 +185,24 @@ TypeMatchup:
 
 .incbin "baseromgs.n64",0x98bd8,0x98ef0-0x98bd8
 
-Types98EF0: ; XXX what is this?
-	.db 0x32, NORMAL
-	.db 0x33, FIGHTING
-	.db 0x34, FLYING
-	.db 0x35, POISON
-	.db 0x36, GROUND
-	.db 0x37, ROCK
-	.db 0x38, BUG
-	.db 0x39, GHOST
-	.db 0x3A, FIRE
-	.db 0x3B, WATER
-	.db 0x3C, GRASS
-	.db 0x3D, ELECTRIC
-	.db 0x3E, PSYCHIC
-	.db 0x3F, ICE
-	.db 0x40, DRAGON
-	.db 0x41, DARK
-	.db 0x42, STEEL
+TypeBoostItems:
+	.db HELD_NORMAL_BOOST,   NORMAL   ; Pink/Polkadot Bow
+	.db HELD_FIGHTING_BOOST, FIGHTING ; Blackbelt
+	.db HELD_FLYING_BOOST,   FLYING   ; Sharp Beak
+	.db HELD_POISON_BOOST,   POISON   ; Poison Barb
+	.db HELD_GROUND_BOOST,   GROUND   ; Soft Sand
+	.db HELD_ROCK_BOOST,     ROCK     ; Hard Stone
+	.db HELD_BUG_BOOST,      BUG      ; Silverpowder
+	.db HELD_GHOST_BOOST,    GHOST    ; Spell Tag
+	.db HELD_FIRE_BOOST,     FIRE     ; Charcoal
+	.db HELD_WATER_BOOST,    WATER    ; Mystic Water
+	.db HELD_GRASS_BOOST,    GRASS    ; Miracle Seed
+	.db HELD_ELECTRIC_BOOST, ELECTRIC ; Magnet
+	.db HELD_PSYCHIC_BOOST,  PSYCHIC  ; Twistedspoon
+	.db HELD_ICE_BOOST,      ICE      ; Nevermeltice
+	.db HELD_DRAGON_BOOST,   DRAGON   ; Dragon Scale
+	.db HELD_DARK_BOOST,     DARK     ; Blackglasses
+	.db HELD_STEEL_BOOST,    STEEL    ; Metal Coat
 	.db -1
 	.align 16
 
