@@ -116,7 +116,27 @@ CharMap3:
 	.db 0xA5,0xD7,0x2E,0x2F,0x2C,0xBE,0x30,0x31 ; ¥  ×  .  /  ,  ♀  0  1
 	.db 0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39 ; 2  3  4  5  6  7  8  9
 
-.incbin "baseromgs.n64",0x98280,0x98370-0x98280
+UnknownData0x98290: ; XXX what is this?
+	.dw 0x80097380
+
+TimeCapsuleAltItems:
+	.db ITEM_19, LEFTOVERS
+	.db ITEM_2D, BITTER_BERRY
+	.db ITEM_32, GOLD_BERRY
+	.db ITEM_5A, BERRY
+	.db ITEM_64, BERRY
+	.db ITEM_78, BERRY
+	.db ITEM_87, BERRY
+	.db ITEM_BE, BERRY
+	.db ITEM_C3, BERRY
+	.db ITEM_DC, BERRY
+	.db HM_08,   BERRY
+	.db -1,      BERRY
+	.db 0
+
+	.align
+
+.incbin "baseromgs.n64",0x982a0,0x98370-0x982a0
 
 Pokered_MonIndices:
 	.db RHYDON
