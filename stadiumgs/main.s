@@ -218,7 +218,366 @@ BaseStats:
 ; TM/HMs (not including move tutor)
 .incbin "baseromgs.n64",0x98f20,0x9a4b2-0x98f20
 
-.incbin "baseromgs.n64",0x9a4b2,0x23a5000-0x9a4b2
+.incbin "baseromgs.n64",0x9a4b2,0x3f4ca0-0x9a4b2
+
+StatLevelMultipliers:
+        db 25, 100 ; 0.25×
+        db 28, 100 ; 0.28×
+        db 33, 100 ; 0.33×
+        db 40, 100 ; 0.40×
+        db 50, 100 ; 0.50×
+        db 66, 100 ; 0.66×
+        db  1,   1 ; 1.00×
+        db 15,  10 ; 1.50×
+        db  2,   1 ; 2.00×
+        db 25,  10 ; 2.50×
+        db  3,   1 ; 3.00×
+        db 35,  10 ; 3.50×
+        db  4,   1 ; 4.00×
+
+	.align
+
+AccuracyProbabilities:
+	.db  33, 100 ;  33% −6
+	.db  36, 100 ;  36% −5
+	.db  43, 100 ;  43% −4
+	.db  50, 100 ;  50% −3
+	.db  60, 100 ;  60% −2
+	.db  75, 100 ;  75% −1
+	.db   1,   1 ; 100%  0
+	.db 133, 100 ; 133% +1
+	.db 166, 100 ; 166% +2
+	.db   2,   1 ; 200% +3
+	.db 233, 100 ; 233% +4
+	.db 133,  50 ; 266% +5
+	.db   3,   1 ; 300% +6
+
+	.align
+
+.incbin "baseromgs.n64",0x3f4cd8,0x3f4d0c-0x3f4cd8
+
+CriticalMoves:
+	.db KARATE_CHOP
+	.db RAZOR_WIND
+	.db RAZOR_LEAF
+	.db CRABHAMMER
+	.db SLASH
+	.db AEROBLAST
+	.db CROSS_CHOP
+	.db -1
+
+CriticalChances:
+	.db 0x11 ; 6.25%
+	.db 0x20 ; 12.1%
+	.db 0x40 ; 24.6%
+	.db 0x55 ; 33.2%
+	.db 0x80 ; 49.6%
+	.db 0x80 ; 49.6%
+	.db 0x80 ; 49.6%
+
+	.align
+
+MetronomeExcepts:
+	.db METRONOME
+	.db STRUGGLE
+	.db SKETCH
+	.db MIMIC
+	.db COUNTER
+	.db MIRROR_COAT
+	.db PROTECT
+	.db DETECT
+	.db ENDURE
+	.db DESTINY_BOND
+	.db SLEEP_TALK
+	.db THIEF
+	.db -1
+
+	.align
+
+ConsumableEffects:
+	.db HELD_BERRY
+	.db HELD_2
+	.db HELD_5
+	.db HELD_HEAL_POISON
+	.db HELD_HEAL_FREEZE
+	.db HELD_HEAL_BURN
+	.db HELD_HEAL_SLEEP
+	.db HELD_HEAL_PARALYZE
+	.db HELD_HEAL_STATUS
+	.db HELD_30
+	.db HELD_ATTACK_UP
+	.db HELD_DEFENSE_UP
+	.db HELD_SPEED_UP
+	.db HELD_SP_ATTACK_UP
+	.db HELD_SP_DEFENSE_UP
+	.db HELD_ACCURACY_UP
+	.db HELD_EVASION_UP
+	.db HELD_38
+	.db HELD_71
+	.db HELD_ESCAPE
+	.db HELD_CRITICAL_UP
+	.db -1
+
+	.align
+
+MoveGrammar0:
+	.db SWORDS_DANCE
+	.db GROWTH
+	.db STRENGTH
+	.db HARDEN
+	.db MINIMIZE
+	.db SMOKESCREEN
+	.db WITHDRAW
+	.db DEFENSE_CURL
+	.db EGG_BOMB
+	.db SMOG
+	.db BONE_CLUB
+	.db FLASH
+	.db SPLASH
+	.db ACID_ARMOR
+	.db BONEMERANG
+	.db REST
+	.db SHARPEN
+	.db SUBSTITUTE
+	.db MIND_READER
+	.db SNORE
+	.db PROTECT
+	.db SPIKES
+	.db ENDURE
+	.db ROLLOUT
+	.db SWAGGER
+	.db SLEEP_TALK
+	.db HIDDEN_POWER
+	.db PSYCH_UP
+	.db EXTREMESPEED
+	.db -1
+
+	.align
+
+MoveGrammar1:
+	.db RECOVER
+	.db TELEPORT
+	.db BIDE
+	.db SELFDESTRUCT
+	.db AMNESIA
+	.db FLAIL
+	.db -1
+
+	.align
+
+MoveGrammar2:
+	.db MEDITATE
+	.db AGILITY
+	.db MIMIC
+	.db DOUBLE_TEAM
+	.db BARRAGE
+	.db TRANSFORM
+	.db STRUGGLE
+	.db SCARY_FACE
+	.db -1
+
+	.align
+
+MoveGrammar3:
+	.db POUND
+	.db SCRATCH
+	.db VICEGRIP
+	.db WING_ATTACK
+	.db FLY
+	.db BIND
+	.db SLAM
+	.db HORN_ATTACK
+	.db WRAP
+	.db THRASH
+	.db TAIL_WHIP
+	.db LEER
+	.db BITE
+	.db GROWL
+	.db ROAR
+	.db SING
+	.db PECK
+	.db ABSORB
+	.db STRING_SHOT
+	.db EARTHQUAKE
+	.db FISSURE
+	.db DIG
+	.db TOXIC
+	.db SCREECH
+	.db METRONOME
+	.db LICK
+	.db CLAMP
+	.db CONSTRICT
+	.db POISON_GAS
+	.db BUBBLE
+	.db SLASH
+	.db SPIDER_WEB
+	.db NIGHTMARE
+	.db CURSE
+	.db FORESIGHT
+	.db CHARM
+	.db ATTRACT
+	.db ROCK_SMASH
+	.db -1
+
+	.align
+
+BattleData0x03F4DA0: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x03
+	.db 0x04
+	.db 0x59
+	.db 0x05
+	.db 0x06
+	.db 0x07
+	.db 0xa1
+	.db 0x08
+	.db 0x09
+	.db 0x0a
+	.db 0x0b
+	.db 0xa2
+	.db 0x0c
+	.db 0x0d
+	.db 0x44
+	.db -1
+
+	.align
+
+BattleData0x03F4DB4: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x07
+	.db 0xA1
+	.db 0x5C
+	.db 0x0F
+	.db -1
+
+	.align
+
+BattleData0x03F4DBC: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x03
+	.db 0x04
+	.db 0x59
+	.db 0x05
+	.db 0x06
+	.db 0x07
+	.db 0x87
+	.db 0xa1
+	.db 0x08
+	.db 0x09
+	.db 0x0a
+	.db 0x0b
+	.db 0xa2
+	.db 0x0c
+	.db 0x0d
+	.db 0x0e
+	.db -1
+
+	.align
+
+BattleData0x03F4DD0: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x03
+	.db 0x04
+	.db 0x59
+	.db 0x05
+	.db 0x06
+	.db 0x07
+	.db 0xa1
+	.db 0x08
+	.db 0x09
+	.db 0x0a
+	.db 0x0b
+	.db 0xa2
+	.db 0x10
+	.db 0x0c
+	.db 0x0d
+	.db 0x44
+	.db -1
+
+	.align
+
+BattleData0x03F4DE4: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x03
+	.db 0x04
+	.db 0x59
+	.db 0x05
+	.db 0x06
+	.db 0x07
+	.db 0x87
+	.db 0xa1
+	.db 0x08
+	.db 0x09
+	.db 0x0a
+	.db 0x0b
+	.db 0xa2
+	.db 0x0c
+	.db 0x0d
+	.db 0x12
+	.db -1
+
+	.align
+
+BattleData0x03F4DF8: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x03
+	.db 0x04
+	.db 0x59
+	.db 0x05
+	.db 0x06
+	.db 0x07
+	.db 0x87
+	.db 0xa1
+	.db 0x08
+	.db 0x09
+	.db 0x0a
+	.db 0x0b
+	.db 0xa2
+	.db 0x0c
+	.db 0x0d
+	.db 0x13
+	.db -1
+
+	.align
+
+BattleData0x03F4E0C: ; XXX what is this?
+	.db 0x01
+	.db 0x02
+	.db 0x03
+	.db 0x04
+	.db 0x59
+	.db 0x05
+	.db 0x06
+	.db 0x07
+	.db 0x87
+	.db 0xa1
+	.db 0x08
+	.db 0x09
+	.db 0x0a
+	.db 0x0b
+	.db 0xa2
+	.db 0x0c
+	.db 0x0d
+	.db 0x14
+	.db -1
+
+	.align
+
+; arrays like the above continue in the same vein until 0x3f54cc
+.incbin "baseromgs.n64",0x3f4e20,0x3f54cc-0x3f4e20
+
+; XXX what is this?
+; appears to be a repetitive array of 32-bit data?
+.incbin "baseromgs.n64",0x3f54cc,0x3f59e0-0x3f54cc
+
+
+.incbin "baseromgs.n64",0x3f59e0,0x23a5000-0x3f59e0
 
 Unknown0x23A5000:
 
