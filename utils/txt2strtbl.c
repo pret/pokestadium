@@ -49,6 +49,17 @@ getrecord(FILE *f)
 
 	for (;;) {
 		x = fgetc(f);
+		/*
+		 * UTF-8 characters are mapped as follows:
+		 *
+		 *     ¥ → 0xa5
+		 *     ♂ → 0xa9
+		 *     ° → 0xba
+		 *     · → 0xb7
+		 *     ♀ → 0xbe
+		 *     × → 0xd7
+		 *     é → 0xe9
+		 */
 		if (x == -1) {
 			return NULL;
 		} else if (x == '@') {
