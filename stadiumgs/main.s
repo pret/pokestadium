@@ -1210,7 +1210,138 @@ BattleData0x03F4E0C: ; XXX what is this?
 .incbin "baseromgs.n64",0x3f54cc,0x3f59e0-0x3f54cc
 
 
-.incbin "baseromgs.n64",0x3f59e0,0x23a5000-0x3f59e0
+.incbin "baseromgs.n64",0x3f59e0,0x437450-0x3f59e0
+
+CarrieTeam1:
+	.db 50
+	.db TYPHLOSION
+	.db FLAME_WHEEL
+	.db SWIFT
+	.db LEER
+	.db SMOKESCREEN
+
+	.db 50
+	.db KINGLER
+	.db CRABHAMMER
+	.db VICEGRIP
+	.db GUILLOTINE
+	.db HARDEN
+
+	.db 50
+	.db ELECTRODE
+	.db THUNDER
+	.db SWIFT
+	.db ROLLOUT
+	.db LIGHT_SCREEN
+
+	.db 50
+	.db SCIZOR
+	.db METAL_CLAW
+	.db SLASH
+	.db AGILITY
+	.db FOCUS_ENERGY
+
+	.db 50
+	.db PORYGON2
+	.db TRI_ATTACK
+	.db PSYBEAM
+	.db CONVERSION2
+	.db SHARPEN
+
+	.db 50
+	.db LEDIAN
+	.db SWIFT
+	.db ICE_PUNCH
+	.db DIG
+	.db SAFEGUARD
+
+CarrieTeam2:
+	.db 50
+	.db FERALIGATR
+	.db WATER_GUN
+	.db SLASH
+	.db BITE
+	.db SCREECH
+
+	.db 50
+	.db CROBAT
+	.db WING_ATTACK
+	.db BITE
+	.db CONFUSE_RAY
+	.db SCREECH
+
+	.db 50
+	.db HERACROSS
+	.db HORN_ATTACK
+	.db REVERSAL
+	.db COUNTER
+	.db ENDURE
+
+	.db 50
+	.db TANGELA
+	.db MEGA_DRAIN
+	.db SLAM
+	.db STUN_SPORE
+	.db GROWTH
+
+	.db 50
+	.db NIDOQUEEN
+	.db BODY_SLAM
+	.db BITE
+	.db DOUBLE_KICK
+	.db TAIL_WHIP
+
+	.db 50
+	.db GLIGAR
+	.db SLASH
+	.db FAINT_ATTACK
+	.db GUILLOTINE
+	.db SAND_ATTACK
+
+CarrieTeam3:
+	.db 50
+	.db MEGANIUM
+	.db RAZOR_LEAF
+	.db BODY_SLAM
+	.db REFLECT
+	.db POISONPOWDER
+
+	.db 50
+	.db STANTLER
+	.db TAKE_DOWN
+	.db DREAM_EATER
+	.db HYPNOSIS
+	.db SAND_ATTACK
+
+	.db 50
+	.db XATU
+	.db FLY
+	.db NIGHT_SHADE
+	.db FUTURE_SIGHT
+	.db CONFUSE_RAY
+
+	.db 50
+	.db SCYTHER
+	.db WING_ATTACK
+	.db SLASH
+	.db PURSUIT
+	.db DOUBLE_TEAM
+
+	.db 50
+	.db POLITOED
+	.db HYDRO_PUMP
+	.db DOUBLESLAP
+	.db HYPNOSIS
+	.db PERISH_SONG
+
+	.db 50
+	.db MAROWAK
+	.db BONEMERANG
+	.db THRASH
+	.db FOCUS_ENERGY
+	.db GROWL
+
+.incbin "baseromgs.n64",0x4374bc,0x23a5000-0x4374bc
 
 Unknown0x23A5000:
 
