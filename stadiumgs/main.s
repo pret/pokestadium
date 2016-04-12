@@ -836,7 +836,331 @@ GameBoyHeaderLogo:
 	.db 0xBB,0xBB,0x67,0x63,0x6E,0x0E,0xEC,0xCC
 	.db 0xDD,0xDC,0x99,0x9F,0xBB,0xB9,0x33,0x3E
 
-.incbin "baseromgs.n64",0xa2280,0x172320-0xa2280
+.incbin "baseromgs.n64",0xa2280,0xa2400-0xa2280
+
+	.db "MEM(4M): +%08XH (+%4dK)",0
+	.align
+	.db "MEM(4M): -%08XH (-%4dK)",0
+	.align
+	.db "MEM(8M): +%08XH (+%4dK)",0
+	.align
+	.db "MEM(8M): -%08XH (-%4dK)",0
+	.align
+
+.incbin "baseromgs.n64",0xa2460,0xa2510-0xa2460
+
+	.db "Interrupt",0
+	.align
+	.db "TLB modification",0
+	.align
+	.db "TLB exception on load",0
+	.align
+	.db "TLB exception on store",0
+	.align
+	.db "Address error on load",0
+	.align
+	.db "Address error on store",0
+	.align
+	.db "Bus error on inst.",0
+	.align
+	.db "Bus error on data",0
+	.align
+	.db "System call exception",0
+	.align
+	.db "Breakpoint exception",0
+	.align
+	.db "Reserved instruction",0
+	.align
+	.db "Coprocessor unusable",0
+	.align
+	.db "Arithmetic overflow",0
+	.align
+	.db "Trap exception",0
+	.align
+	.db "Virtual coherency on inst.",0
+	.align
+	.db "Floating point exception",0
+	.align
+	.db "Watchpoint exception",0
+	.align
+	.db "Virtual coherency on data",0
+	.align
+	.db "Unimplemented operation",0
+	.align
+	.db "Invalid operation",0
+	.align
+	.db "Division by zero",0
+	.align
+	.db "Overflow",0
+	.align
+	.db "Underflow",0
+	.align
+	.db "Inexact operation",0
+	.align
+	.db "F%02d:%+.3e",0
+	.align
+	.db "F%02d:---------",0
+	.align
+	.db "FPCSR:%08XH",0
+	.align
+	.db "(%s)",0
+	.align
+	.db "THREAD:%d  (%s)",0
+	.align
+	.db "PC:%08XH   SR:%08XH   VA:%08XH",0
+	.align
+	.db "AT:%08XH   V0:%08XH   V1:%08XH",0
+	.align
+	.db "A0:%08XH   A1:%08XH   A2:%08XH",0
+	.align
+	.db "A3:%08XH   T0:%08XH   T1:%08XH",0
+	.align
+	.db "T2:%08XH   T3:%08XH   T4:%08XH",0
+	.align
+	.db "T5:%08XH   T6:%08XH   T7:%08XH",0
+	.align
+	.db "S0:%08XH   S1:%08XH   S2:%08XH",0
+	.align
+	.db "S3:%08XH   S4:%08XH   S5:%08XH",0
+	.align
+	.db "S6:%08XH   S7:%08XH   T8:%08XH",0
+	.align
+	.db "T9:%08XH   GP:%08XH   SP:%08XH",0
+	.align
+	.db "S8:%08XH   RA:%08XH",0
+	.align
+	.db "F-PC:%08XH",0
+	.align
+	.db "F-RA:%08XH",0
+	.align
+	.db "MM:%08XH",0
+	.align 16
+
+	.db "MAXA:%5.3f",0
+	.align
+	.db "CPU:%5.3f",0
+	.align
+	.db "RCP:%5.3f",0
+	.align
+
+.incbin "baseromgs.n64",0xa28f4,0xa4ee0-0xa28f4
+
+; text strings representing commands to the text engine
+	.db "FONT",0
+	.align
+	.db "COL1",0
+	.align
+	.db "COL2",0
+	.align
+	.db "TEX",0
+	.align
+	.db "LINE",0
+	.align
+	.db "FACE",0
+	.align
+	.db "DIST",0
+	.align
+	.db "WAZA",0
+	.align
+	.db "KOKA",0
+	.align
+	.db "NEMURI",0
+	.align
+	.db "DOKU",0
+	.align
+	.db "DOKUDOKU",0
+	.align
+	.db "YAKEDO",0
+	.align
+	.db "KOHRI",0
+	.align
+	.db "MAHI",0
+	.align
+	.db "HIRUMI",0
+	.align
+	.db "SHIBARI",0
+	.align
+	.db "KONRAN",0
+	.align
+	.db "MEROMERO",0
+	.align
+	.db "NOROI",0
+	.align
+	.db "AKUMU",0
+	.align
+	.db "YADORIGI",0
+	.align
+	.db "HARE",0
+	.align
+	.db "AME",0
+	.align
+	.db "SUNA",0
+	.align
+	.db "LOAD",0
+	.align
+	.db "PUSH",0
+	.align
+	.db "POP",0
+	.align
+
+.incbin "baseromgs.n64",0xa4fc0,0x15de24-0xa4fc0
+
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "Beat the rival",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "Beat the rival",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "Beat the rival",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "Stadium",0
+	.align
+	.db "GB building",0
+	.align
+	.db "School",0
+	.align
+	.db "Gym leaders",0
+	.align
+	.db "Laboratory",0
+	.align
+	.db "X",0
+	.align
+	.db "Beat the rival",0
+	.align
+	.db "My room",0
+	.align
+	.db "Free battle",0
+	.align
+	.db "---",0
+	.align
+	.db "n_wis_wislif_END%d %d",0x0A,0
+	.align
+
+.incbin "baseromgs.n64",0x15e0fc,0x172320-0x15e0fc
 
 GiftFarfetchdMoves:
 	.db BATON_PASS
@@ -1211,7 +1535,534 @@ BattleData0x03F4E0C: ; XXX what is this?
 .incbin "baseromgs.n64",0x3f54cc,0x3f59e0-0x3f54cc
 
 
-.incbin "baseromgs.n64",0x3f59e0,0x437450-0x3f59e0
+.incbin "baseromgs.n64",0x3f59e0,0x3f9690-0x3f59e0
+
+	.db "SearchTable",0x0A,0
+	.align
+	.db "fight_rnd",0x0A,0
+	.align
+	.db "lose_check",0x0A,0
+	.align
+	.db "SwapByte",0x0A,0
+	.align
+	.db "NSCheck",0x0A,0
+	.align
+	.db "critical_judge",0x0A,0
+	.align
+	.db "waza_param_set",0x0A,0
+	.align
+	.db "waza_restart",0x0A,0
+	.align
+	.db "next_search",0x0A,0
+	.align
+	.db "back_search",0x0A,0
+	.align
+	.db "kougeki_exit",0x0A,0
+	.align
+	.db "cond_param_set_single",0x0A,0
+	.align
+	.db "cond_param_set",0x0A,0
+	.align
+	.db "item_cure",0x0A,0
+	.align
+	.db "konran_cure",0x0A,0
+	.align
+	.db "chk_cond_up_down",0x0A,0
+	.align
+	.db "cond_up_down",0x0A,0
+	.align
+	.db "cond_up_down_self",0x0A,0
+	.align
+	.db "chk_hikae_ready",0x0A,0
+	.align
+	.db "chk_attack_order",0x0A,0
+	.align
+	.db "chk_type",0x0A,0
+	.align
+	.db "chk_have_waza",0x0A,0
+	.align
+	.db "chk_tame",0x0A,0
+	.align
+	.db "reset_renzoku",0x0A,0
+	.align
+	.db "kougeki_ng",0x0A,0
+	.align
+	.db "jibun_kougeki_c",0x0A,0
+	.align
+	.db "get_kougeki",0x0A,0
+	.align
+	.db "kezuru_per",0x0A,0
+	.align
+	.db "fuyasu_per",0x0A,0
+	.align
+	.db "hp_kezuru",0x0A,0
+	.align
+	.db "hp_fuyasu",0x0A,0
+	.align
+	.db "jibun_kougeki",0x0A,0
+	.align
+	.db "mons_ctrl_clr",0x0A,0
+	.align
+	.db "mons_cond_clr",0x0A,0
+	.align
+	.db "meromero_clr",0x0A,0
+	.align
+	.db "SippaiEFFandMSG",0x0A,0
+	.align
+	.db "SippaiEFFandMSG",0x0A,0
+	.align
+	.db "umakukimaran2",0x0A,0
+	.align
+	.db "umakukimaran2",0x0A,0
+	.align
+	.db "umakukimaran3",0x0A,0
+	.align
+	.db "kougeki_init",0x0A,0
+	.align
+	.db "attack_message",0x0A,0
+	.align
+	.db "pp_dec",0x0A,0
+	.align
+	.db "critical_check",0x0A,0
+	.align
+	.db "power_set",0x0A,0
+	.align
+	.db "zokusei_check",0x0A,0
+	.align
+	.db "power_rnd",0x0A,0
+	.align
+	.db "attack_avoid",0x0A,0
+	.align
+	.db "lockon_check",0x0A,0
+	.align
+	.db "kieteiru_check",0x0A,0
+	.align
+	.db "kaminari_check",0x0A,0
+	.align
+	.db "hitritsu_henka",0x0A,0
+	.align
+	.db "avoid_check",0x0A,0
+	.align
+	.db "avoid_msg_chk",0x0A,0
+	.align
+	.db "gaman_store",0x0A,0
+	.align
+	.db "hp_sub",0x0A,0
+	.align
+	.db "critical_message",0x0A,0
+	.align
+	.db "aisyou",0x0A,0
+	.align
+	.db "life_check",0x0A,0
+	.align
+	.db "special_check",0x0A,0
+	.align
+	.db "sp_add_poison",0x0A,0
+	.align
+	.db "sp_sleep_only",0x0A,0
+	.align
+	.db "sp_suck",0x0A,0
+	.align
+	.db "sp_yumekui",0x0A,0
+	.align
+	.db "sp_add_yakedo",0x0A,0
+	.align
+	.db "sp_add_ice",0x0A,0
+	.align
+	.db "sp_add_mahi",0x0A,0
+	.align
+	.db "jibaku_chk",0x0A,0
+	.align
+	.db "oumu_chk",0x0A,0
+	.align
+	.db "sp_nekonikoban",0x0A,0
+	.align
+	.db "chk_texture",0x0A,0
+	.align
+	.db "sp_texture",0x0A,0
+	.align
+	.db "sp_kuroikiri",0x0A,0
+	.align
+	.db "gaman_chk",0x0A,0
+	.align
+	.db "sp_gaman",0x0A,0
+	.align
+	.db "sp_fukitobashi",0x0A,0
+	.align
+	.db "sp_renzoku",0x0A,0
+	.align
+	.db "sp_add_kizetsu",0x0A,0
+	.align
+	.db "sp_sentoufunou",0x0A,0
+	.align
+	.db "sp_tosshin",0x0A,0
+	.align
+	.db "sp_effect_gird",0x0A,0
+	.align
+	.db "sp_kiaidame",0x0A,0
+	.align
+	.db "sp_konran",0x0A,0
+	.align
+	.db "sp_add_konran",0x0A,0
+	.align
+	.db "sp_jikosaisei",0x0A,0
+	.align
+	.db "sp_henshin",0x0A,0
+	.align
+	.db "sp_kabe",0x0A,0
+	.align
+	.db "sp_poison_only",0x0A,0
+	.align
+	.db "sp_mahi_only",0x0A,0
+	.align
+	.db "sp_migawari",0x0A,0
+	.align
+	.db "sp_katamaru",0x0A,0
+	.align
+	.db "chk_monomane",0x0A,0
+	.align
+	.db "sp_monomane",0x0A,0
+	.align
+	.db "chk_yubifuri",0x0A,0
+	.align
+	.db "sp_yubifuri",0x0A,0
+	.align
+	.db "sp_yadorigi",0x0A,0
+	.align
+	.db "sp_haneru",0x0A,0
+	.align
+	.db "sp_kanashibari",0x0A,0
+	.align
+	.db "sp_tame",0x0A,0
+	.align
+	.db "tame_chk",0x0A,0
+	.align
+	.db "sp_shimetsukeru",0x0A,0
+	.align
+	.db "sp_abareru",0x0A,0
+	.align
+	.db "abareru_chk",0x0A,0
+	.align
+	.db "kotei_damage",0x0A,0
+	.align
+	.db "sp_counter",0x0A,0
+	.align
+	.db "sp_encore",0x0A,0
+	.align
+	.db "sp_itamiwake",0x0A,0
+	.align
+	.db "ibiki_chk",0x0A,0
+	.align
+	.db "chk_texture2",0x0A,0
+	.align
+	.db "sp_texture2",0x0A,0
+	.align
+	.db "sp_lock_on",0x0A,0
+	.align
+	.db "sp_dubbing",0x0A,0
+	.align
+	.db "sp_atsukunaru",0x0A,0
+	.align
+	.db "chk_negoto",0x0A,0
+	.align
+	.db "allow_negoto",0x0A,0
+	.align
+	.db "sp_negoto",0x0A,0
+	.align
+	.db "sp_mitizure",0x0A,0
+	.align
+	.db "sp_kezuru",0x0A,0
+	.align
+	.db "sp_mineuti",0x0A,0
+	.align
+	.db "sp_tiryou",0x0A,0
+	.align
+	.db "sp_item_kizetsu",0x0A,0
+	.align
+	.db "sp_triple",0x0A,0
+	.align
+	.db "effect_cnt_inc",0x0A,0
+	.align
+	.db "sp_dorobou",0x0A,0
+	.align
+	.db "sp_stalker",0x0A,0
+	.align
+	.db "sp_akumu",0x0A,0
+	.align
+	.db "sp_kaenguruma",0x0A,0
+	.align
+	.db "sp_kugi",0x0A,0
+	.align
+	.db "mamoru_sub",0x0A,0
+	.align
+	.db "sp_mamoru",0x0A,0
+	.align
+	.db "sp_makibishi",0x0A,0
+	.align
+	.db "sp_miyaburu",0x0A,0
+	.align
+	.db "sp_horobi",0x0A,0
+	.align
+	.db "sp_sunaarashi",0x0A,0
+	.align
+	.db "sp_koraeru",0x0A,0
+	.align
+	.db "sp_korogaru_chk",0x0A,0
+	.align
+	.db "sp_korogaru",0x0A,0
+	.align
+	.db "sp_ibaru",0x0A,0
+	.align
+	.db "sp_renzokugiri",0x0A,0
+	.align
+	.db "chk_meromero",0x0A,0
+	.align
+	.db "sp_meromero",0x0A,0
+	.align
+	.db "sp_ongaeshi",0x0A,0
+	.align
+	.db "sp_present",0x0A,0
+	.align
+	.db "get_damage",0x0A,0
+	.align
+	.db "sp_yatsuatari",0x0A,0
+	.align
+	.db "sp_shinpi",0x0A,0
+	.align
+	.db "sp_shinpi_chk",0x0A,0
+	.align
+	.db "sp_magnitude",0x0A,0
+	.align
+	.db "sp_batontouch",0x0A,0
+	.align
+	.db "sp_oiuchi",0x0A,0
+	.align
+	.db "sp_kousokuspin",0x0A,0
+	.align
+	.db "hizashi_main",0x0A,0
+	.align
+	.db "sp_asanohizashi",0x0A,0
+	.align
+	.db "sp_kougousei",0x0A,0
+	.align
+	.db "sp_tsukinohikari",0x0A,0
+	.align
+	.db "sp_rndpower",0x0A,0
+	.align
+	.db "sp_amagoi",0x0A,0
+	.align
+	.db "sp_nihonbare",0x0A,0
+	.align
+	.db "sp_condup_a1",0x0A,0
+	.align
+	.db "sp_condup_d1",0x0A,0
+	.align
+	.db "sp_condup_q1",0x0A,0
+	.align
+	.db "sp_condup_sa1",0x0A,0
+	.align
+	.db "sp_condup_sd1",0x0A,0
+	.align
+	.db "sp_condup_h1",0x0A,0
+	.align
+	.db "sp_condup_k1",0x0A,0
+	.align
+	.db "sp_condup_a2",0x0A,0
+	.align
+	.db "sp_condup_d2",0x0A,0
+	.align
+	.db "sp_condup_q2",0x0A,0
+	.align
+	.db "sp_condup_sa2",0x0A,0
+	.align
+	.db "sp_condup_sd2",0x0A,0
+	.align
+	.db "sp_condup_h2",0x0A,0
+	.align
+	.db "sp_condup_k2",0x0A,0
+	.align
+	.db "sp_conddown_a1",0x0A,0
+	.align
+	.db "sp_conddown_d1",0x0A,0
+	.align
+	.db "sp_conddown_q1",0x0A,0
+	.align
+	.db "sp_conddown_sa1",0x0A,0
+	.align
+	.db "sp_conddown_sd1",0x0A,0
+	.align
+	.db "sp_conddown_h1",0x0A,0
+	.align
+	.db "sp_conddown_k1",0x0A,0
+	.align
+	.db "sp_conddown_a2",0x0A,0
+	.align
+	.db "sp_conddown_d2",0x0A,0
+	.align
+	.db "sp_conddown_q2",0x0A,0
+	.align
+	.db "sp_conddown_sa2",0x0A,0
+	.align
+	.db "sp_conddown_sd2",0x0A,0
+	.align
+	.db "sp_conddown_h2",0x0A,0
+	.align
+	.db "sp_conddown_k2",0x0A,0
+	.align
+	.db "up_seikou_msg",0x0A,0
+	.align
+	.db "down_seikou_msg",0x0A,0
+	.align
+	.db "condup_ng_msg",0x0A,0
+	.align
+	.db "conddown_ng_msg",0x0A,0
+	.align
+	.db "tsuika_check",0x0A,0
+	.align
+	.db "turn_change",0x0A,0
+	.align
+	.db "sp_kizetsu",0x0A,0
+	.align
+	.db "sp_haradaiko",0x0A,0
+	.align
+	.db "sp_jikoanji",0x0A,0
+	.align
+	.db "sp_ikari",0x0A,0
+	.align
+	.db "sp_tatsumaki",0x0A,0
+	.align
+	.db "sp_jishin",0x0A,0
+	.align
+	.db "sp_mirrorcoat",0x0A,0
+	.align
+	.db "sp_mirai_chk",0x0A,0
+	.align
+	.db "sp_mirai",0x0A,0
+	.align
+	.db "sp_fumitsuke",0x0A,0
+	.align
+	.db "sp_solar_chk",0x0A,0
+	.align
+	.db "sp_kaminari",0x0A,0
+	.align
+	.db "sp_teleport",0x0A,0
+	.align
+	.db "sp_fukuro",0x0A,0
+	.align
+	.db "ikari_power_up",0x0A,0
+	.align
+	.db "simple_zokusei",0x0A,0
+	.align
+	.db "sp_condup_all",0x0A,0
+	.align
+	.db "sippai_message",0x0A,0
+	.align
+	.db "fukuro_ng",0x0A,0
+	.align
+	.db "power_check",0x0A,0
+	.align
+	.db "sp_add3",0x0A,0
+	.align
+	.db "renzoku_aisyou",0x0A,0
+	.align
+	.db "renzoku_init",0x0A,0
+	.align
+	.db "sp_marukunaru",0x0A,0
+	.align
+	.db "mv_damage",0x0A,0
+	.align
+	.db "mv_renzoku_damage",0x0A,0
+	.align
+	.db "kougeki_main",0x0A,0
+	.align
+	.db "kougeki",0x0A,0
+	.align
+	.db "hakainoidenshi",0x0A,0
+	.align
+	.db "set_monsdata",0x0A,0
+	.align
+	.db "set_monsdata_from_cmd",0x0A,0
+	.align
+	.db "lifedoku_chk",0x0A,0
+	.align
+	.db "makibishi_check",0x0A,0
+	.align
+	.db "check_atosaki",0x0A,0
+	.align
+	.db "check_waza_turn",0x0A,0
+	.align
+	.db "normal_judge",0x0A,0
+	.align
+	.db "decide_turn",0x0A,0
+	.align
+	.db "both_life_chk",0x0A,0
+	.align
+	.db "miraiyochi_check",0x0A,0
+	.align
+	.db "weather_check",0x0A,0
+	.align
+	.db "shime_check",0x0A,0
+	.align
+	.db "horobi_check",0x0A,0
+	.align
+	.db "item_hp_add",0x0A,0
+	.align
+	.db "item_pp_add",0x0A,0
+	.align
+	.db "melt_check",0x0A,0
+	.align
+	.db "shinpi_check",0x0A,0
+	.align
+	.db "kabe_check",0x0A,0
+	.align
+	.db "item_power_up",0x0A,0
+	.align
+	.db "soubi_kaifuku",0x0A,0
+	.align
+	.db "encore_check",0x0A,0
+	.align
+	.db "oiuchi_check",0x0A,0
+	.align
+	.db "check_many",0x0A,0
+	.align
+	.db "kaisyuu",0x0A,0
+	.align
+	.db "syutsudou",0x0A,0
+	.align
+	.db "kuridashi_init",0x0A,0
+	.align
+	.db "kuri_fukitobashi",0x0A,0
+	.align
+	.db "kuridashi",0x0A,0
+	.align
+	.db "torikae",0x0A,0
+	.align
+	.db "kachi",0x0A,0
+	.align
+	.db "call_kougeki",0x0A,0
+	.align
+	.db "stat_check",0x0A,0
+	.align
+	.db "waza_select",0x0A,0
+	.align
+	.db "fight_init",0x0A,0
+	.align
+	.db "FightSequence",0x0A,0
+	.align
+	.db "fight_main",0x0A,0
+	.align
+	.db "CreateFightThread",0x0A,0
+	.align
+	.db "StartFightThread",0x0A,0
+	.align
+	.db "StartFightThread",0x0A,0
+	.align
+	.db "WaitFightThread",0x0A,0
+	.align
+	.db "SendFightThread",0x0A,0
+	.align
+
+.incbin "baseromgs.n64",0x3fa624,0x437450-0x3fa624
 
 CarrieTeam1:
 	.db 50

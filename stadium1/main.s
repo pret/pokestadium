@@ -1,5 +1,5 @@
 .n64
-.open baserom.n64,pokestadium.n64,0
+.open "baserom.n64","pokestadium.n64",0
 
 ; moves legality checker
 .orga 0x2ecb38
