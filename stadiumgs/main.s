@@ -4,6 +4,7 @@
 .include "constants/type_constants.s"
 .include "constants/move_constants.s"
 .include "constants/item_constants.s"
+.include "constants/decoration_constants.s"
 .incbin "baseromgs.n64",0,0x97f54
 
 CarrierCartridgeString:
@@ -1341,7 +1342,89 @@ CarrieTeam3:
 	.db FOCUS_ENERGY
 	.db GROWL
 
-.incbin "baseromgs.n64",0x4374bc,0x23a5000-0x4374bc
+MysteryGiftItems:
+	.db BERRY
+	.db PRZCUREBERRY
+	.db MINT_BERRY
+	.db ICE_BERRY
+	.db BURNT_BERRY
+	.db PSNCUREBERRY
+	.db GUARD_SPEC
+	.db X_DEFEND
+	.db X_ATTACK
+	.db BITTER_BERRY
+	.db DIRE_HIT
+	.db X_SPECIAL
+	.db X_ACCURACY
+	.db EON_MAIL
+	.db MORPH_MAIL
+	.db MUSIC_MAIL
+	.db MIRACLEBERRY
+	.db GOLD_BERRY
+	.db REVIVE
+	.db GREAT_BALL
+	.db SUPER_REPEL
+	.db MAX_REPEL
+	.db ELIXER
+	.db ETHER
+	.db WATER_STONE
+	.db FIRE_STONE
+	.db LEAF_STONE
+	.db THUNDERSTONE
+	.db MAX_ETHER
+	.db MAX_ELIXER
+	.db MAX_REVIVE
+	.db SCOPE_LENS
+	.db HP_UP
+	.db PP_UP
+	.db RARE_CANDY
+	.db BLUESKY_MAIL
+	.db MIRAGE_MAIL
+
+	.align
+
+MysteryGiftDecorations:
+	.db PIKACHU_DOLL
+	.db BULBASAUR_DOLL
+	.db CHARMANDER_DOLL
+	.db SQUIRTLE_DOLL
+	.db POLIWAG_DOLL
+	.db DIGLETT_DOLL
+	.db STARMIE_DOLL
+	.db MAGIKARP_DOLL
+	.db ODDISH_DOLL
+	.db GENGAR_DOLL
+	.db CLEFAIRY_POSTER
+	.db JIGGLYPUFF_POSTER
+	.db SNES
+	.db SHELLDER_DOLL
+	.db VOLTORB_DOLL
+	.db WEEDLE_DOLL
+	.db MAGNAPLANT
+	.db TROPICPLANT
+	.db FAMICOM
+	.db N64
+	.db SURF_PIKACHU_DOLL
+	.db JIGGLYPUFF_DOLL
+	.db PINK_BED
+	.db POLKADOT_BED
+	.db RED_CARPET
+	.db BLUE_CARPET
+	.db YELLOW_CARPET
+	.db GREEN_CARPET
+	.db JUMBOPLANT
+	.db VIRTUAL_BOY
+	.db MACHOP_DOLL
+	.db PIKACHU_POSTER
+	.db TENTACOOL_DOLL
+	.db BIG_ONIX_DOLL
+	.db PIKACHU_BED
+	.db GRIMER_DOLL
+	.db UNOWN_DOLL
+
+	.align
+
+.incbin "baseromgs.n64",0x43750c,0x23a5000-0x43750c
 
 Unknown0x23A5000:
 
