@@ -2073,7 +2073,7 @@ BACKGROUNDS = \
 	backgrounds/rival.presjpeg \
 	backgrounds/castlejohto.presjpeg \
 	backgrounds/castleplateau.presjpeg \
-	backgrounds/hoohlugia.presjpeg \
+	backgrounds/title3.presjpeg \
 	backgrounds/quiz.presjpeg \
 	backgrounds/library2.presjpeg \
 	backgrounds/credits/lancevsclair.presjpeg \
