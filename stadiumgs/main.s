@@ -835,7 +835,23 @@ GameBoyHeaderLogo:
 	.db 0xBB,0xBB,0x67,0x63,0x6E,0x0E,0xEC,0xCC
 	.db 0xDD,0xDC,0x99,0x9F,0xBB,0xB9,0x33,0x3E
 
-.incbin "baseromgs.n64",0xa2280,0x3f4ca0-0xa2280
+.incbin "baseromgs.n64",0xa2280,0x172320-0xa2280
+
+GiftFarfetchdMoves:
+	.db BATON_PASS
+	.db AGILITY
+	.db SWORDS_DANCE
+	.db SLASH
+
+GiftGligarMoves:
+	.db EARTHQUAKE
+	.db POISON_STING
+	.db WING_ATTACK
+	.db COUNTER
+
+	.align 16
+
+.incbin "baseromgs.n64",0x172330,0x3f4ca0-0x172330
 
 StatLevelMultipliers:
         db 25, 100 ; 0.25×
