@@ -2873,7 +2873,14 @@ AlphabeticalRGBYItemOrderInverse:
 
 	.align
 
-.incbin "baseromgs.n64",0xa0c68,0xa2250-0xa0c68
+.incbin "baseromgs.n64",0xa0c68,0xa0d90-0xa0c68
+
+; XXX what is the data at 0xa0d90?
+; it is 5 * 16 bytes per entry (total of 56 entries)
+; notice how 0xa0d90, 0xa0de0, 0xa0e30, 0xa0e80 are 0, 1, 2, 3…
+.incbin "baseromgs.n64",0xa0d90,0xa1f10-0xa0d90
+
+.incbin "baseromgs.n64",0xa1f10,0xa2250-0xa1f10
 
 GameBoyHeaderLogo:
 	.db 0xCE,0xED,0x66,0x66,0xCC,0x0D,0x00,0x0B
@@ -3050,7 +3057,214 @@ GameBoyHeaderLogo:
 	.db "POP",0
 	.align
 
-.incbin "baseromgs.n64",0xa4fc0,0x15de24-0xa4fc0
+.incbin "baseromgs.n64",0xa4fc0,0xa55b0-0xa4fc0
+
+	.db "POKEMON R",0
+	.align
+	.db "POKEMON G",0
+	.align
+	.db "POKEMON B",0
+	.align
+	.db "POKEMON Y",0
+	.align
+	.db "POKEMON_G",0
+	.align
+	.db "POKEMON_S",0
+	.align
+	.db "PM_CRYSTA",0
+	.align
+
+	.align 16
+
+	.db "POKEMON",0
+	.align
+	.db "RED",0
+	.align
+	.db "GREEN",0
+	.align
+	.db "BLUE",0
+	.align
+	.db "Y",0
+	.align
+	.db "G",0
+	.align
+	.db "S",0
+	.align
+	.db "PM_CRYS",0
+	.align
+
+.incbin "baseromgs.n64",0xa5640,0xa6500-0xa5640
+
+	.db "og_monster_eff_init() err!  og_init_kemuri_eff_all = NULL",0x0A,0
+	.align
+	.db "0x%08x ",0
+	.align
+	.db 0x0A,0
+	.align
+	.db 0x0A,0
+	.align
+	.db "%10.4f  ",0
+	.align
+	.db 0x0A,0
+	.align
+	.db 0x0A,0
+	.align
+
+.incbin "baseromgs.n64",0xa6560,0xa6610-0xa6560
+
+	.db "can't `ModelBank_Register' when no freezone.",0x0A,0
+	.align
+	.db "Can't get hms cause no load : %d/%d",0x0A,0
+	.align
+	.db "Out of Index %d : (0-%d)",0x0A,0
+	.align
+	.db "Can't get node cause no load : %d/%d",0x0A,0
+	.align
+	.db "Out of Index %d : (0-%d)",0x0A,0
+	.align
+
+	.align 16
+
+	.db "PokeMonFlags %08x",0x0A,0
+	.align
+	.db "%16s : %s ",0
+	.align
+	.db "o",0
+	.align
+	.db "x",0
+	.align
+	.db 0x0A,0
+	.align
+
+	.align 16
+
+.incbin "baseromgs.n64",0xa6700,0xa6b20-0xa6700
+
+	.db "ReadMem @ %08x for %d",0x0A,0
+	.align
+	.db "WriteMem",0x0A,0
+	.align
+	.db "Long unaligned write...",0x0A,0
+	.align
+	.db "RCP write not an integral number of words",0x0A,0
+	.align
+	.db "ListProcesses",0x0A,0
+	.align
+	.db "LoadProgram",0x0A,0
+	.align
+	.db "GetExeName",0x0A,0
+	.align
+	.db "imem",0
+	.align
+	.db "rmon",0
+	.align
+	.db "GetRegionCount",0x0A,0
+	.align
+	.db "GetRegions",0x0A,0
+	.align
+
+	.align 16
+
+	.db "rmon: Thread %d created",0x0A,0
+	.align
+	.db "rmon: Thread %d destroyed",0x0A,0
+	.align
+
+	.align 16
+
+	.db "StopThreads %d",0x0A,0
+	.align
+	.db "Couldn't stop thread %d",0x0A,0
+	.align
+	.db "Couldn't stop thread %d",0x0A,0
+	.align
+	.db "ListThreads",0x0A,0
+	.align
+	.db "ThreadStatus %d method %d",0x0A,0
+	.align
+	.db "StopThread %d",0x0A,0
+	.align
+	.db "RunThread %d",0x0A,0
+	.align
+
+	.align 16
+
+	.db "SetFault",0x0A,0
+	.align
+	.db "PANIC!!",0x0A,0
+	.align
+	.db "SetComm",0x0A,0
+	.align
+
+	.align 16
+
+	.db "Set temp BP at %08x",0
+	.align
+	.db " and %08x",0
+	.align
+	.db 0x0A,0
+	.align
+	.db "ClearTempBreak @ %08x",0x0A,0
+	.align
+	.db "ClearTempBreak @ %08x",0x0A,0
+	.align
+	.db "SetBreak at %08x, method %d",0x0A,0
+	.align
+	.db "* (%08x) = %08x (was %08x)",0x0A,0
+	.align
+	.db "ListBreak",0x0A,0
+	.align
+	.db "ClearBreak",0x0A,0
+	.align
+	.db "SingleStep",0x0A,0
+	.align
+	.db "Break %d in thread %d",0x0A,0
+	.align
+	.db "HitBreak",0x0A,0
+	.align
+	.db "Hit SP Break",0x0A,0
+	.align
+	.db "HitCpuFault",0x0A,0
+	.align
+	.db "Brk in thread %d @ %08x, inst %08x",0x0D,0x0A,0
+	.align
+
+.incbin "baseromgs.n64",0xa6e20,0xa6ed0-0xa6e20
+
+	.db "GetGRegisters",0x0A,0
+	.align
+	.db "SetGRegisters",0x0A,0
+	.align
+	.db "GetFRegisters",0x0A,0
+	.align
+	.db "SetFRegisters",0x0A,0
+	.align
+	.db "GetSRegisters",0x0A,0
+	.align
+	.db "SetSRegisters",0x0A,0
+	.align
+	.db "GetVRegisters",0x0A,0
+	.align
+	.db "SetVRegs",0x0A,0
+	.align
+
+	.align 16
+
+.incbin "baseromgs.n64",0xa6f50,0xa8738-0xa6f50
+
+	.db "RSP Gfx ucode F3DEX       fifo 2.08  Yoshitaka Yasumoto/Kawasedo 1999.",0x0A,0
+	.align
+
+.incbin "baseromgs.n64",0xa8780,0xb96e0-0xa8780
+
+	.db "sizeof(PickFolder) = %d",0x0A,0
+	.align
+	.db "sizeof(PickRegMenu) = %d",0x0A,0
+	.align
+	.db "sizeof(PickCartSelector) = %d",0x0A,0
+	.align
+
+.incbin "baseromgs.n64",0xb9738,0x15de24-0xb9738
 
 	.db "Stadium",0
 	.align
@@ -4322,10 +4536,61 @@ MysteryGiftDecorations:
 
 	.align
 
-.incbin "baseromgs.n64",0x43750c,0x23a5000-0x43750c
+.incbin "baseromgs.n64",0x43750c,0x437750-0x43750c
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x437750,0x446e30-0x437750
+
+.incbin "baseromgs.n64",0x446e30,0x4494c0-0x446e30
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x4494c0,0x47b920-0x4494c0
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x47b920,0x47d310-0x47b920
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x47d310,0x48b920-0x47d310
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x48b920,0x49b780-0x48b920
+
+.incbin "baseromgs.n64",0x49b780,0x16061c0-0x49b780
+
+; nothing (just 0xFF)
+.incbin "baseromgs.n64",0x16061c0,0x1638000-0x16061c0
+
+; stadium models table
+.incbin "baseromgs.n64",0x1638000,0x1708000-0x1638000
+
+; rosters table
+.incbin "baseromgs.n64",0x1708000,0x1718000-0x1708000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x1718000,0x1898000-0x1718000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x1898000,0x1d70000-0x1898000
+
+; texts table
+.incbin "baseromgs.n64",0x1d70000,0x1e40000-0x1d70000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x1e40000,0x1e70000-0x1e40000
+
+; backgrounds table
+.incbin "baseromgs.n64",0x1e70000,0x2000000-0x1e70000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x2000000,0x2230000-0x2000000
+
+; academy graphics table
+.incbin "baseromgs.n64",0x2230000,0x2268000-0x2230000
+
+; faces table
+.incbin "baseromgs.n64",0x2268000,0x23a5000-0x2268000
 
 Unknown0x23A5000:
-
 .incbin "baseromgs.n64",0x23a5000,0x23a554c-0x23a5000
 
 GameBoyHeaders:
@@ -4668,6 +4933,29 @@ UnknownGameBoy0x23ad50c: ; Red Spain
 UnknownGameBoy0x23ad92c: ; Blue Spain
 .incbin "gameboy/1f.bin"
 
-.incbin "baseromgs.n64",0x23add4c
+.incbin "baseromgs.n64",0x23add4c,0x258d000-0x23add4c
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x258d000,0x266b000-0x258d000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x266b000,0x2675000-0x266b000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x2675000,0x267d000-0x2675000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x267d000,0x27ed000-0x267d000
+
+; pokemon models table
+.incbin "baseromgs.n64",0x27ed000,0x2d7d000-0x27ed000
+
+; pokemon poses table
+.incbin "baseromgs.n64",0x2d7d000,0x3fd5000-0x2d7d000
+
+; XXX what is this table?
+.incbin "baseromgs.n64",0x3fd5000,0x3fed000-0x3fd5000
+
+.incbin "baseromgs.n64",0x3fed000
 
 .close
