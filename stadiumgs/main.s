@@ -135,7 +135,7 @@ TimeCapsuleAltItems:
 	.db -1,      BERRY
 	.db 0
 
-	.align
+	.align 4
 
 RBYTMHMMoves1:
 	.db MEGA_PUNCH
@@ -194,7 +194,7 @@ RBYTMHMMoves1:
 	.db STRENGTH
 	.db FLASH
 
-	.align
+	.align 4
 
 Pokered_MonIndices1:
 	.db RGBY_BULBASAUR
@@ -349,7 +349,7 @@ Pokered_MonIndices1:
 	.db RGBY_MEWTWO
 	.db RGBY_MEW
 
-	.align
+	.align 4
 
 Pokered_MonIndices2:
 	.db RHYDON
@@ -543,7 +543,7 @@ Pokered_MonIndices2:
 	.db WEEPINBELL
 	.db VICTREEBEL
 
-	.align
+	.align 4
 
 Moves:
 ; effect
@@ -614,7 +614,7 @@ GSCTMHMMoves:
 	.db FLASH
 	.db WHIRLPOOL
 	.db WATERFALL
-	.align
+	.align 4
 
 RBYTMHMMoves2:
 	.db MEGA_PUNCH
@@ -789,7 +789,7 @@ TypeMatchup:
 	.db STEEL,     ROCK,      SUPER_EFFECTIVE
 	.db STEEL,     STEEL,     NOT_VERY_EFFECTIVE
 	.db -1
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0x98bd8,0x98ef0-0x98bd8
 
@@ -1084,7 +1084,7 @@ AlphabeticalPokemonOrder:
 	.db ZUBAT
 	.db PKMN_252
 
-	.align
+	.align 4
 
 AlphabeticalPokemonOrderInverse:
 ; Each Pokémon's position in AlphabeticalPokemonOrder.
@@ -1342,7 +1342,7 @@ AlphabeticalPokemonOrderInverse:
 	.db ABC_PKMN_252
 	.db ABC_EGG
 
-	.align
+	.align 4
 
 AlphabeticalMoveOrder:
 	.db ABSORB
@@ -1597,7 +1597,7 @@ AlphabeticalMoveOrder:
 	.db WRAP
 	.db ZAP_CANNON
 
-	.align
+	.align 4
 
 AlphabeticalMoveOrderInverse:
 ; Each move's position in AlphabeticalMoveOrder.
@@ -1853,7 +1853,7 @@ AlphabeticalMoveOrderInverse:
 	.db ABC_WHIRLPOOL
 	.db ABC_BEAT_UP
 
-	.align
+	.align 4
 
 AlphabeticalGSCItemOrder:
 	.db AMULET_COIN
@@ -2107,7 +2107,7 @@ AlphabeticalGSCItemOrder:
 	.db ITEM_DC
 	.db HM_08
 
-	.align
+	.align 4
 
 AlphabeticalGSCItemOrderInverse:
 ; Each move's position in AlphabeticalGSCItemOrder.
@@ -2362,7 +2362,7 @@ AlphabeticalGSCItemOrderInverse:
 	.db ABC_HM_07
 	.db ABC_HM_08
 
-	.align
+	.align 4
 
 AlphabeticalRGBYItemOrder:
 	.db RGBY_ANTIDOTE
@@ -2616,7 +2616,7 @@ AlphabeticalRGBYItemOrder:
 	.db RGBY_ITEM_C2
 	.db RGBY_ITEM_C3
 
-	.align
+	.align 4
 
 AlphabeticalRGBYItemOrderInverse:
 ; Each move's position in AlphabeticalRGBYItemOrder.
@@ -2871,7 +2871,7 @@ AlphabeticalRGBYItemOrderInverse:
 	.db ABC_RGBY_TM_49
 	.db ABC_RGBY_TM_50
 
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa0c68,0xa0d90-0xa0c68
 
@@ -2893,533 +2893,533 @@ GameBoyHeaderLogo:
 .incbin "baseromgs.n64",0xa2280,0xa2400-0xa2280
 
 	.db "MEM(4M): +%08XH (+%4dK)",0
-	.align
+	.align 4
 	.db "MEM(4M): -%08XH (-%4dK)",0
-	.align
+	.align 4
 	.db "MEM(8M): +%08XH (+%4dK)",0
-	.align
+	.align 4
 	.db "MEM(8M): -%08XH (-%4dK)",0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa2460,0xa2510-0xa2460
 
 	.db "Interrupt",0
-	.align
+	.align 4
 	.db "TLB modification",0
-	.align
+	.align 4
 	.db "TLB exception on load",0
-	.align
+	.align 4
 	.db "TLB exception on store",0
-	.align
+	.align 4
 	.db "Address error on load",0
-	.align
+	.align 4
 	.db "Address error on store",0
-	.align
+	.align 4
 	.db "Bus error on inst.",0
-	.align
+	.align 4
 	.db "Bus error on data",0
-	.align
+	.align 4
 	.db "System call exception",0
-	.align
+	.align 4
 	.db "Breakpoint exception",0
-	.align
+	.align 4
 	.db "Reserved instruction",0
-	.align
+	.align 4
 	.db "Coprocessor unusable",0
-	.align
+	.align 4
 	.db "Arithmetic overflow",0
-	.align
+	.align 4
 	.db "Trap exception",0
-	.align
+	.align 4
 	.db "Virtual coherency on inst.",0
-	.align
+	.align 4
 	.db "Floating point exception",0
-	.align
+	.align 4
 	.db "Watchpoint exception",0
-	.align
+	.align 4
 	.db "Virtual coherency on data",0
-	.align
+	.align 4
 	.db "Unimplemented operation",0
-	.align
+	.align 4
 	.db "Invalid operation",0
-	.align
+	.align 4
 	.db "Division by zero",0
-	.align
+	.align 4
 	.db "Overflow",0
-	.align
+	.align 4
 	.db "Underflow",0
-	.align
+	.align 4
 	.db "Inexact operation",0
-	.align
+	.align 4
 	.db "F%02d:%+.3e",0
-	.align
+	.align 4
 	.db "F%02d:---------",0
-	.align
+	.align 4
 	.db "FPCSR:%08XH",0
-	.align
+	.align 4
 	.db "(%s)",0
-	.align
+	.align 4
 	.db "THREAD:%d  (%s)",0
-	.align
+	.align 4
 	.db "PC:%08XH   SR:%08XH   VA:%08XH",0
-	.align
+	.align 4
 	.db "AT:%08XH   V0:%08XH   V1:%08XH",0
-	.align
+	.align 4
 	.db "A0:%08XH   A1:%08XH   A2:%08XH",0
-	.align
+	.align 4
 	.db "A3:%08XH   T0:%08XH   T1:%08XH",0
-	.align
+	.align 4
 	.db "T2:%08XH   T3:%08XH   T4:%08XH",0
-	.align
+	.align 4
 	.db "T5:%08XH   T6:%08XH   T7:%08XH",0
-	.align
+	.align 4
 	.db "S0:%08XH   S1:%08XH   S2:%08XH",0
-	.align
+	.align 4
 	.db "S3:%08XH   S4:%08XH   S5:%08XH",0
-	.align
+	.align 4
 	.db "S6:%08XH   S7:%08XH   T8:%08XH",0
-	.align
+	.align 4
 	.db "T9:%08XH   GP:%08XH   SP:%08XH",0
-	.align
+	.align 4
 	.db "S8:%08XH   RA:%08XH",0
-	.align
+	.align 4
 	.db "F-PC:%08XH",0
-	.align
+	.align 4
 	.db "F-RA:%08XH",0
-	.align
+	.align 4
 	.db "MM:%08XH",0
 	.align 16
 
 	.db "MAXA:%5.3f",0
-	.align
+	.align 4
 	.db "CPU:%5.3f",0
-	.align
+	.align 4
 	.db "RCP:%5.3f",0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa28f4,0xa4ee0-0xa28f4
 
 ; text strings representing commands to the text engine
 	.db "FONT",0
-	.align
+	.align 4
 	.db "COL1",0
-	.align
+	.align 4
 	.db "COL2",0
-	.align
+	.align 4
 	.db "TEX",0
-	.align
+	.align 4
 	.db "LINE",0
-	.align
+	.align 4
 	.db "FACE",0
-	.align
+	.align 4
 	.db "DIST",0
-	.align
+	.align 4
 	.db "WAZA",0
-	.align
+	.align 4
 	.db "KOKA",0
-	.align
+	.align 4
 	.db "NEMURI",0
-	.align
+	.align 4
 	.db "DOKU",0
-	.align
+	.align 4
 	.db "DOKUDOKU",0
-	.align
+	.align 4
 	.db "YAKEDO",0
-	.align
+	.align 4
 	.db "KOHRI",0
-	.align
+	.align 4
 	.db "MAHI",0
-	.align
+	.align 4
 	.db "HIRUMI",0
-	.align
+	.align 4
 	.db "SHIBARI",0
-	.align
+	.align 4
 	.db "KONRAN",0
-	.align
+	.align 4
 	.db "MEROMERO",0
-	.align
+	.align 4
 	.db "NOROI",0
-	.align
+	.align 4
 	.db "AKUMU",0
-	.align
+	.align 4
 	.db "YADORIGI",0
-	.align
+	.align 4
 	.db "HARE",0
-	.align
+	.align 4
 	.db "AME",0
-	.align
+	.align 4
 	.db "SUNA",0
-	.align
+	.align 4
 	.db "LOAD",0
-	.align
+	.align 4
 	.db "PUSH",0
-	.align
+	.align 4
 	.db "POP",0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa4fc0,0xa55b0-0xa4fc0
 
 	.db "POKEMON R",0
-	.align
+	.align 4
 	.db "POKEMON G",0
-	.align
+	.align 4
 	.db "POKEMON B",0
-	.align
+	.align 4
 	.db "POKEMON Y",0
-	.align
+	.align 4
 	.db "POKEMON_G",0
-	.align
+	.align 4
 	.db "POKEMON_S",0
-	.align
+	.align 4
 	.db "PM_CRYSTA",0
-	.align
+	.align 4
 
 	.align 16
 
 	.db "POKEMON",0
-	.align
+	.align 4
 	.db "RED",0
-	.align
+	.align 4
 	.db "GREEN",0
-	.align
+	.align 4
 	.db "BLUE",0
-	.align
+	.align 4
 	.db "Y",0
-	.align
+	.align 4
 	.db "G",0
-	.align
+	.align 4
 	.db "S",0
-	.align
+	.align 4
 	.db "PM_CRYS",0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa5640,0xa6500-0xa5640
 
 	.db "og_monster_eff_init() err!  og_init_kemuri_eff_all = NULL",0x0A,0
-	.align
+	.align 4
 	.db "0x%08x ",0
-	.align
+	.align 4
 	.db 0x0A,0
-	.align
+	.align 4
 	.db 0x0A,0
-	.align
+	.align 4
 	.db "%10.4f  ",0
-	.align
+	.align 4
 	.db 0x0A,0
-	.align
+	.align 4
 	.db 0x0A,0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa6560,0xa6610-0xa6560
 
 	.db "can't `ModelBank_Register' when no freezone.",0x0A,0
-	.align
+	.align 4
 	.db "Can't get hms cause no load : %d/%d",0x0A,0
-	.align
+	.align 4
 	.db "Out of Index %d : (0-%d)",0x0A,0
-	.align
+	.align 4
 	.db "Can't get node cause no load : %d/%d",0x0A,0
-	.align
+	.align 4
 	.db "Out of Index %d : (0-%d)",0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 	.db "PokeMonFlags %08x",0x0A,0
-	.align
+	.align 4
 	.db "%16s : %s ",0
-	.align
+	.align 4
 	.db "o",0
-	.align
+	.align 4
 	.db "x",0
-	.align
+	.align 4
 	.db 0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 .incbin "baseromgs.n64",0xa6700,0xa6b20-0xa6700
 
 	.db "ReadMem @ %08x for %d",0x0A,0
-	.align
+	.align 4
 	.db "WriteMem",0x0A,0
-	.align
+	.align 4
 	.db "Long unaligned write...",0x0A,0
-	.align
+	.align 4
 	.db "RCP write not an integral number of words",0x0A,0
-	.align
+	.align 4
 	.db "ListProcesses",0x0A,0
-	.align
+	.align 4
 	.db "LoadProgram",0x0A,0
-	.align
+	.align 4
 	.db "GetExeName",0x0A,0
-	.align
+	.align 4
 	.db "imem",0
-	.align
+	.align 4
 	.db "rmon",0
-	.align
+	.align 4
 	.db "GetRegionCount",0x0A,0
-	.align
+	.align 4
 	.db "GetRegions",0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 	.db "rmon: Thread %d created",0x0A,0
-	.align
+	.align 4
 	.db "rmon: Thread %d destroyed",0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 	.db "StopThreads %d",0x0A,0
-	.align
+	.align 4
 	.db "Couldn't stop thread %d",0x0A,0
-	.align
+	.align 4
 	.db "Couldn't stop thread %d",0x0A,0
-	.align
+	.align 4
 	.db "ListThreads",0x0A,0
-	.align
+	.align 4
 	.db "ThreadStatus %d method %d",0x0A,0
-	.align
+	.align 4
 	.db "StopThread %d",0x0A,0
-	.align
+	.align 4
 	.db "RunThread %d",0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 	.db "SetFault",0x0A,0
-	.align
+	.align 4
 	.db "PANIC!!",0x0A,0
-	.align
+	.align 4
 	.db "SetComm",0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 	.db "Set temp BP at %08x",0
-	.align
+	.align 4
 	.db " and %08x",0
-	.align
+	.align 4
 	.db 0x0A,0
-	.align
+	.align 4
 	.db "ClearTempBreak @ %08x",0x0A,0
-	.align
+	.align 4
 	.db "ClearTempBreak @ %08x",0x0A,0
-	.align
+	.align 4
 	.db "SetBreak at %08x, method %d",0x0A,0
-	.align
+	.align 4
 	.db "* (%08x) = %08x (was %08x)",0x0A,0
-	.align
+	.align 4
 	.db "ListBreak",0x0A,0
-	.align
+	.align 4
 	.db "ClearBreak",0x0A,0
-	.align
+	.align 4
 	.db "SingleStep",0x0A,0
-	.align
+	.align 4
 	.db "Break %d in thread %d",0x0A,0
-	.align
+	.align 4
 	.db "HitBreak",0x0A,0
-	.align
+	.align 4
 	.db "Hit SP Break",0x0A,0
-	.align
+	.align 4
 	.db "HitCpuFault",0x0A,0
-	.align
+	.align 4
 	.db "Brk in thread %d @ %08x, inst %08x",0x0D,0x0A,0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa6e20,0xa6ed0-0xa6e20
 
 	.db "GetGRegisters",0x0A,0
-	.align
+	.align 4
 	.db "SetGRegisters",0x0A,0
-	.align
+	.align 4
 	.db "GetFRegisters",0x0A,0
-	.align
+	.align 4
 	.db "SetFRegisters",0x0A,0
-	.align
+	.align 4
 	.db "GetSRegisters",0x0A,0
-	.align
+	.align 4
 	.db "SetSRegisters",0x0A,0
-	.align
+	.align 4
 	.db "GetVRegisters",0x0A,0
-	.align
+	.align 4
 	.db "SetVRegs",0x0A,0
-	.align
+	.align 4
 
 	.align 16
 
 .incbin "baseromgs.n64",0xa6f50,0xa8738-0xa6f50
 
 	.db "RSP Gfx ucode F3DEX       fifo 2.08  Yoshitaka Yasumoto/Kawasedo 1999.",0x0A,0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xa8780,0xb96e0-0xa8780
 
 	.db "sizeof(PickFolder) = %d",0x0A,0
-	.align
+	.align 4
 	.db "sizeof(PickRegMenu) = %d",0x0A,0
-	.align
+	.align 4
 	.db "sizeof(PickCartSelector) = %d",0x0A,0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0xb9738,0x15de24-0xb9738
 
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "Beat the rival",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "Beat the rival",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "Beat the rival",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "Stadium",0
-	.align
+	.align 4
 	.db "GB building",0
-	.align
+	.align 4
 	.db "School",0
-	.align
+	.align 4
 	.db "Gym leaders",0
-	.align
+	.align 4
 	.db "Laboratory",0
-	.align
+	.align 4
 	.db "X",0
-	.align
+	.align 4
 	.db "Beat the rival",0
-	.align
+	.align 4
 	.db "My room",0
-	.align
+	.align 4
 	.db "Free battle",0
-	.align
+	.align 4
 	.db "---",0
-	.align
+	.align 4
 	.db "n_wis_wislif_END%d %d",0x0A,0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0x15e0fc,0x172320-0x15e0fc
 
@@ -3454,7 +3454,7 @@ StatLevelMultipliers:
         db 35,  10 ; 3.50×
         db  4,   1 ; 4.00×
 
-	.align
+	.align 4
 
 AccuracyProbabilities:
 	.db  33, 100 ;  33% −6
@@ -3471,7 +3471,7 @@ AccuracyProbabilities:
 	.db 133,  50 ; 266% +5
 	.db   3,   1 ; 300% +6
 
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0x3f4cd8,0x3f4d0c-0x3f4cd8
 
@@ -3494,7 +3494,7 @@ CriticalChances:
 	.db 0x80 ; 49.6%
 	.db 0x80 ; 49.6%
 
-	.align
+	.align 4
 
 MetronomeExcepts:
 	.db METRONOME
@@ -3511,7 +3511,7 @@ MetronomeExcepts:
 	.db THIEF
 	.db -1
 
-	.align
+	.align 4
 
 ConsumableEffects:
 	.db HELD_BERRY
@@ -3537,7 +3537,7 @@ ConsumableEffects:
 	.db HELD_CRITICAL_UP
 	.db -1
 
-	.align
+	.align 4
 
 MoveGrammar0:
 	.db SWORDS_DANCE
@@ -3571,7 +3571,7 @@ MoveGrammar0:
 	.db EXTREMESPEED
 	.db -1
 
-	.align
+	.align 4
 
 MoveGrammar1:
 	.db RECOVER
@@ -3582,7 +3582,7 @@ MoveGrammar1:
 	.db FLAIL
 	.db -1
 
-	.align
+	.align 4
 
 MoveGrammar2:
 	.db MEDITATE
@@ -3595,7 +3595,7 @@ MoveGrammar2:
 	.db SCARY_FACE
 	.db -1
 
-	.align
+	.align 4
 
 MoveGrammar3:
 	.db POUND
@@ -3638,7 +3638,7 @@ MoveGrammar3:
 	.db ROCK_SMASH
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4DA0: ; XXX what is this?
 	.db 0x01
@@ -3660,7 +3660,7 @@ BattleData0x03F4DA0: ; XXX what is this?
 	.db 0x44
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4DB4: ; XXX what is this?
 	.db 0x01
@@ -3671,7 +3671,7 @@ BattleData0x03F4DB4: ; XXX what is this?
 	.db 0x0F
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4DBC: ; XXX what is this?
 	.db 0x01
@@ -3694,7 +3694,7 @@ BattleData0x03F4DBC: ; XXX what is this?
 	.db 0x0e
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4DD0: ; XXX what is this?
 	.db 0x01
@@ -3717,7 +3717,7 @@ BattleData0x03F4DD0: ; XXX what is this?
 	.db 0x44
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4DE4: ; XXX what is this?
 	.db 0x01
@@ -3740,7 +3740,7 @@ BattleData0x03F4DE4: ; XXX what is this?
 	.db 0x12
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4DF8: ; XXX what is this?
 	.db 0x01
@@ -3763,7 +3763,7 @@ BattleData0x03F4DF8: ; XXX what is this?
 	.db 0x13
 	.db -1
 
-	.align
+	.align 4
 
 BattleData0x03F4E0C: ; XXX what is this?
 	.db 0x01
@@ -3786,7 +3786,7 @@ BattleData0x03F4E0C: ; XXX what is this?
 	.db 0x14
 	.db -1
 
-	.align
+	.align 4
 
 ; arrays like the above continue in the same vein until 0x3f54cc
 .incbin "baseromgs.n64",0x3f4e20,0x3f54cc-0x3f4e20
@@ -3799,529 +3799,529 @@ BattleData0x03F4E0C: ; XXX what is this?
 .incbin "baseromgs.n64",0x3f59e0,0x3f9690-0x3f59e0
 
 	.db "SearchTable",0x0A,0
-	.align
+	.align 4
 	.db "fight_rnd",0x0A,0
-	.align
+	.align 4
 	.db "lose_check",0x0A,0
-	.align
+	.align 4
 	.db "SwapByte",0x0A,0
-	.align
+	.align 4
 	.db "NSCheck",0x0A,0
-	.align
+	.align 4
 	.db "critical_judge",0x0A,0
-	.align
+	.align 4
 	.db "waza_param_set",0x0A,0
-	.align
+	.align 4
 	.db "waza_restart",0x0A,0
-	.align
+	.align 4
 	.db "next_search",0x0A,0
-	.align
+	.align 4
 	.db "back_search",0x0A,0
-	.align
+	.align 4
 	.db "kougeki_exit",0x0A,0
-	.align
+	.align 4
 	.db "cond_param_set_single",0x0A,0
-	.align
+	.align 4
 	.db "cond_param_set",0x0A,0
-	.align
+	.align 4
 	.db "item_cure",0x0A,0
-	.align
+	.align 4
 	.db "konran_cure",0x0A,0
-	.align
+	.align 4
 	.db "chk_cond_up_down",0x0A,0
-	.align
+	.align 4
 	.db "cond_up_down",0x0A,0
-	.align
+	.align 4
 	.db "cond_up_down_self",0x0A,0
-	.align
+	.align 4
 	.db "chk_hikae_ready",0x0A,0
-	.align
+	.align 4
 	.db "chk_attack_order",0x0A,0
-	.align
+	.align 4
 	.db "chk_type",0x0A,0
-	.align
+	.align 4
 	.db "chk_have_waza",0x0A,0
-	.align
+	.align 4
 	.db "chk_tame",0x0A,0
-	.align
+	.align 4
 	.db "reset_renzoku",0x0A,0
-	.align
+	.align 4
 	.db "kougeki_ng",0x0A,0
-	.align
+	.align 4
 	.db "jibun_kougeki_c",0x0A,0
-	.align
+	.align 4
 	.db "get_kougeki",0x0A,0
-	.align
+	.align 4
 	.db "kezuru_per",0x0A,0
-	.align
+	.align 4
 	.db "fuyasu_per",0x0A,0
-	.align
+	.align 4
 	.db "hp_kezuru",0x0A,0
-	.align
+	.align 4
 	.db "hp_fuyasu",0x0A,0
-	.align
+	.align 4
 	.db "jibun_kougeki",0x0A,0
-	.align
+	.align 4
 	.db "mons_ctrl_clr",0x0A,0
-	.align
+	.align 4
 	.db "mons_cond_clr",0x0A,0
-	.align
+	.align 4
 	.db "meromero_clr",0x0A,0
-	.align
+	.align 4
 	.db "SippaiEFFandMSG",0x0A,0
-	.align
+	.align 4
 	.db "SippaiEFFandMSG",0x0A,0
-	.align
+	.align 4
 	.db "umakukimaran2",0x0A,0
-	.align
+	.align 4
 	.db "umakukimaran2",0x0A,0
-	.align
+	.align 4
 	.db "umakukimaran3",0x0A,0
-	.align
+	.align 4
 	.db "kougeki_init",0x0A,0
-	.align
+	.align 4
 	.db "attack_message",0x0A,0
-	.align
+	.align 4
 	.db "pp_dec",0x0A,0
-	.align
+	.align 4
 	.db "critical_check",0x0A,0
-	.align
+	.align 4
 	.db "power_set",0x0A,0
-	.align
+	.align 4
 	.db "zokusei_check",0x0A,0
-	.align
+	.align 4
 	.db "power_rnd",0x0A,0
-	.align
+	.align 4
 	.db "attack_avoid",0x0A,0
-	.align
+	.align 4
 	.db "lockon_check",0x0A,0
-	.align
+	.align 4
 	.db "kieteiru_check",0x0A,0
-	.align
+	.align 4
 	.db "kaminari_check",0x0A,0
-	.align
+	.align 4
 	.db "hitritsu_henka",0x0A,0
-	.align
+	.align 4
 	.db "avoid_check",0x0A,0
-	.align
+	.align 4
 	.db "avoid_msg_chk",0x0A,0
-	.align
+	.align 4
 	.db "gaman_store",0x0A,0
-	.align
+	.align 4
 	.db "hp_sub",0x0A,0
-	.align
+	.align 4
 	.db "critical_message",0x0A,0
-	.align
+	.align 4
 	.db "aisyou",0x0A,0
-	.align
+	.align 4
 	.db "life_check",0x0A,0
-	.align
+	.align 4
 	.db "special_check",0x0A,0
-	.align
+	.align 4
 	.db "sp_add_poison",0x0A,0
-	.align
+	.align 4
 	.db "sp_sleep_only",0x0A,0
-	.align
+	.align 4
 	.db "sp_suck",0x0A,0
-	.align
+	.align 4
 	.db "sp_yumekui",0x0A,0
-	.align
+	.align 4
 	.db "sp_add_yakedo",0x0A,0
-	.align
+	.align 4
 	.db "sp_add_ice",0x0A,0
-	.align
+	.align 4
 	.db "sp_add_mahi",0x0A,0
-	.align
+	.align 4
 	.db "jibaku_chk",0x0A,0
-	.align
+	.align 4
 	.db "oumu_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_nekonikoban",0x0A,0
-	.align
+	.align 4
 	.db "chk_texture",0x0A,0
-	.align
+	.align 4
 	.db "sp_texture",0x0A,0
-	.align
+	.align 4
 	.db "sp_kuroikiri",0x0A,0
-	.align
+	.align 4
 	.db "gaman_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_gaman",0x0A,0
-	.align
+	.align 4
 	.db "sp_fukitobashi",0x0A,0
-	.align
+	.align 4
 	.db "sp_renzoku",0x0A,0
-	.align
+	.align 4
 	.db "sp_add_kizetsu",0x0A,0
-	.align
+	.align 4
 	.db "sp_sentoufunou",0x0A,0
-	.align
+	.align 4
 	.db "sp_tosshin",0x0A,0
-	.align
+	.align 4
 	.db "sp_effect_gird",0x0A,0
-	.align
+	.align 4
 	.db "sp_kiaidame",0x0A,0
-	.align
+	.align 4
 	.db "sp_konran",0x0A,0
-	.align
+	.align 4
 	.db "sp_add_konran",0x0A,0
-	.align
+	.align 4
 	.db "sp_jikosaisei",0x0A,0
-	.align
+	.align 4
 	.db "sp_henshin",0x0A,0
-	.align
+	.align 4
 	.db "sp_kabe",0x0A,0
-	.align
+	.align 4
 	.db "sp_poison_only",0x0A,0
-	.align
+	.align 4
 	.db "sp_mahi_only",0x0A,0
-	.align
+	.align 4
 	.db "sp_migawari",0x0A,0
-	.align
+	.align 4
 	.db "sp_katamaru",0x0A,0
-	.align
+	.align 4
 	.db "chk_monomane",0x0A,0
-	.align
+	.align 4
 	.db "sp_monomane",0x0A,0
-	.align
+	.align 4
 	.db "chk_yubifuri",0x0A,0
-	.align
+	.align 4
 	.db "sp_yubifuri",0x0A,0
-	.align
+	.align 4
 	.db "sp_yadorigi",0x0A,0
-	.align
+	.align 4
 	.db "sp_haneru",0x0A,0
-	.align
+	.align 4
 	.db "sp_kanashibari",0x0A,0
-	.align
+	.align 4
 	.db "sp_tame",0x0A,0
-	.align
+	.align 4
 	.db "tame_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_shimetsukeru",0x0A,0
-	.align
+	.align 4
 	.db "sp_abareru",0x0A,0
-	.align
+	.align 4
 	.db "abareru_chk",0x0A,0
-	.align
+	.align 4
 	.db "kotei_damage",0x0A,0
-	.align
+	.align 4
 	.db "sp_counter",0x0A,0
-	.align
+	.align 4
 	.db "sp_encore",0x0A,0
-	.align
+	.align 4
 	.db "sp_itamiwake",0x0A,0
-	.align
+	.align 4
 	.db "ibiki_chk",0x0A,0
-	.align
+	.align 4
 	.db "chk_texture2",0x0A,0
-	.align
+	.align 4
 	.db "sp_texture2",0x0A,0
-	.align
+	.align 4
 	.db "sp_lock_on",0x0A,0
-	.align
+	.align 4
 	.db "sp_dubbing",0x0A,0
-	.align
+	.align 4
 	.db "sp_atsukunaru",0x0A,0
-	.align
+	.align 4
 	.db "chk_negoto",0x0A,0
-	.align
+	.align 4
 	.db "allow_negoto",0x0A,0
-	.align
+	.align 4
 	.db "sp_negoto",0x0A,0
-	.align
+	.align 4
 	.db "sp_mitizure",0x0A,0
-	.align
+	.align 4
 	.db "sp_kezuru",0x0A,0
-	.align
+	.align 4
 	.db "sp_mineuti",0x0A,0
-	.align
+	.align 4
 	.db "sp_tiryou",0x0A,0
-	.align
+	.align 4
 	.db "sp_item_kizetsu",0x0A,0
-	.align
+	.align 4
 	.db "sp_triple",0x0A,0
-	.align
+	.align 4
 	.db "effect_cnt_inc",0x0A,0
-	.align
+	.align 4
 	.db "sp_dorobou",0x0A,0
-	.align
+	.align 4
 	.db "sp_stalker",0x0A,0
-	.align
+	.align 4
 	.db "sp_akumu",0x0A,0
-	.align
+	.align 4
 	.db "sp_kaenguruma",0x0A,0
-	.align
+	.align 4
 	.db "sp_kugi",0x0A,0
-	.align
+	.align 4
 	.db "mamoru_sub",0x0A,0
-	.align
+	.align 4
 	.db "sp_mamoru",0x0A,0
-	.align
+	.align 4
 	.db "sp_makibishi",0x0A,0
-	.align
+	.align 4
 	.db "sp_miyaburu",0x0A,0
-	.align
+	.align 4
 	.db "sp_horobi",0x0A,0
-	.align
+	.align 4
 	.db "sp_sunaarashi",0x0A,0
-	.align
+	.align 4
 	.db "sp_koraeru",0x0A,0
-	.align
+	.align 4
 	.db "sp_korogaru_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_korogaru",0x0A,0
-	.align
+	.align 4
 	.db "sp_ibaru",0x0A,0
-	.align
+	.align 4
 	.db "sp_renzokugiri",0x0A,0
-	.align
+	.align 4
 	.db "chk_meromero",0x0A,0
-	.align
+	.align 4
 	.db "sp_meromero",0x0A,0
-	.align
+	.align 4
 	.db "sp_ongaeshi",0x0A,0
-	.align
+	.align 4
 	.db "sp_present",0x0A,0
-	.align
+	.align 4
 	.db "get_damage",0x0A,0
-	.align
+	.align 4
 	.db "sp_yatsuatari",0x0A,0
-	.align
+	.align 4
 	.db "sp_shinpi",0x0A,0
-	.align
+	.align 4
 	.db "sp_shinpi_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_magnitude",0x0A,0
-	.align
+	.align 4
 	.db "sp_batontouch",0x0A,0
-	.align
+	.align 4
 	.db "sp_oiuchi",0x0A,0
-	.align
+	.align 4
 	.db "sp_kousokuspin",0x0A,0
-	.align
+	.align 4
 	.db "hizashi_main",0x0A,0
-	.align
+	.align 4
 	.db "sp_asanohizashi",0x0A,0
-	.align
+	.align 4
 	.db "sp_kougousei",0x0A,0
-	.align
+	.align 4
 	.db "sp_tsukinohikari",0x0A,0
-	.align
+	.align 4
 	.db "sp_rndpower",0x0A,0
-	.align
+	.align 4
 	.db "sp_amagoi",0x0A,0
-	.align
+	.align 4
 	.db "sp_nihonbare",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_a1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_d1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_q1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_sa1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_sd1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_h1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_k1",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_a2",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_d2",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_q2",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_sa2",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_sd2",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_h2",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_k2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_a1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_d1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_q1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_sa1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_sd1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_h1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_k1",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_a2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_d2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_q2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_sa2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_sd2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_h2",0x0A,0
-	.align
+	.align 4
 	.db "sp_conddown_k2",0x0A,0
-	.align
+	.align 4
 	.db "up_seikou_msg",0x0A,0
-	.align
+	.align 4
 	.db "down_seikou_msg",0x0A,0
-	.align
+	.align 4
 	.db "condup_ng_msg",0x0A,0
-	.align
+	.align 4
 	.db "conddown_ng_msg",0x0A,0
-	.align
+	.align 4
 	.db "tsuika_check",0x0A,0
-	.align
+	.align 4
 	.db "turn_change",0x0A,0
-	.align
+	.align 4
 	.db "sp_kizetsu",0x0A,0
-	.align
+	.align 4
 	.db "sp_haradaiko",0x0A,0
-	.align
+	.align 4
 	.db "sp_jikoanji",0x0A,0
-	.align
+	.align 4
 	.db "sp_ikari",0x0A,0
-	.align
+	.align 4
 	.db "sp_tatsumaki",0x0A,0
-	.align
+	.align 4
 	.db "sp_jishin",0x0A,0
-	.align
+	.align 4
 	.db "sp_mirrorcoat",0x0A,0
-	.align
+	.align 4
 	.db "sp_mirai_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_mirai",0x0A,0
-	.align
+	.align 4
 	.db "sp_fumitsuke",0x0A,0
-	.align
+	.align 4
 	.db "sp_solar_chk",0x0A,0
-	.align
+	.align 4
 	.db "sp_kaminari",0x0A,0
-	.align
+	.align 4
 	.db "sp_teleport",0x0A,0
-	.align
+	.align 4
 	.db "sp_fukuro",0x0A,0
-	.align
+	.align 4
 	.db "ikari_power_up",0x0A,0
-	.align
+	.align 4
 	.db "simple_zokusei",0x0A,0
-	.align
+	.align 4
 	.db "sp_condup_all",0x0A,0
-	.align
+	.align 4
 	.db "sippai_message",0x0A,0
-	.align
+	.align 4
 	.db "fukuro_ng",0x0A,0
-	.align
+	.align 4
 	.db "power_check",0x0A,0
-	.align
+	.align 4
 	.db "sp_add3",0x0A,0
-	.align
+	.align 4
 	.db "renzoku_aisyou",0x0A,0
-	.align
+	.align 4
 	.db "renzoku_init",0x0A,0
-	.align
+	.align 4
 	.db "sp_marukunaru",0x0A,0
-	.align
+	.align 4
 	.db "mv_damage",0x0A,0
-	.align
+	.align 4
 	.db "mv_renzoku_damage",0x0A,0
-	.align
+	.align 4
 	.db "kougeki_main",0x0A,0
-	.align
+	.align 4
 	.db "kougeki",0x0A,0
-	.align
+	.align 4
 	.db "hakainoidenshi",0x0A,0
-	.align
+	.align 4
 	.db "set_monsdata",0x0A,0
-	.align
+	.align 4
 	.db "set_monsdata_from_cmd",0x0A,0
-	.align
+	.align 4
 	.db "lifedoku_chk",0x0A,0
-	.align
+	.align 4
 	.db "makibishi_check",0x0A,0
-	.align
+	.align 4
 	.db "check_atosaki",0x0A,0
-	.align
+	.align 4
 	.db "check_waza_turn",0x0A,0
-	.align
+	.align 4
 	.db "normal_judge",0x0A,0
-	.align
+	.align 4
 	.db "decide_turn",0x0A,0
-	.align
+	.align 4
 	.db "both_life_chk",0x0A,0
-	.align
+	.align 4
 	.db "miraiyochi_check",0x0A,0
-	.align
+	.align 4
 	.db "weather_check",0x0A,0
-	.align
+	.align 4
 	.db "shime_check",0x0A,0
-	.align
+	.align 4
 	.db "horobi_check",0x0A,0
-	.align
+	.align 4
 	.db "item_hp_add",0x0A,0
-	.align
+	.align 4
 	.db "item_pp_add",0x0A,0
-	.align
+	.align 4
 	.db "melt_check",0x0A,0
-	.align
+	.align 4
 	.db "shinpi_check",0x0A,0
-	.align
+	.align 4
 	.db "kabe_check",0x0A,0
-	.align
+	.align 4
 	.db "item_power_up",0x0A,0
-	.align
+	.align 4
 	.db "soubi_kaifuku",0x0A,0
-	.align
+	.align 4
 	.db "encore_check",0x0A,0
-	.align
+	.align 4
 	.db "oiuchi_check",0x0A,0
-	.align
+	.align 4
 	.db "check_many",0x0A,0
-	.align
+	.align 4
 	.db "kaisyuu",0x0A,0
-	.align
+	.align 4
 	.db "syutsudou",0x0A,0
-	.align
+	.align 4
 	.db "kuridashi_init",0x0A,0
-	.align
+	.align 4
 	.db "kuri_fukitobashi",0x0A,0
-	.align
+	.align 4
 	.db "kuridashi",0x0A,0
-	.align
+	.align 4
 	.db "torikae",0x0A,0
-	.align
+	.align 4
 	.db "kachi",0x0A,0
-	.align
+	.align 4
 	.db "call_kougeki",0x0A,0
-	.align
+	.align 4
 	.db "stat_check",0x0A,0
-	.align
+	.align 4
 	.db "waza_select",0x0A,0
-	.align
+	.align 4
 	.db "fight_init",0x0A,0
-	.align
+	.align 4
 	.db "FightSequence",0x0A,0
-	.align
+	.align 4
 	.db "fight_main",0x0A,0
-	.align
+	.align 4
 	.db "CreateFightThread",0x0A,0
-	.align
+	.align 4
 	.db "StartFightThread",0x0A,0
-	.align
+	.align 4
 	.db "StartFightThread",0x0A,0
-	.align
+	.align 4
 	.db "WaitFightThread",0x0A,0
-	.align
+	.align 4
 	.db "SendFightThread",0x0A,0
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0x3fa624,0x437450-0x3fa624
 
@@ -4493,7 +4493,7 @@ MysteryGiftItems:
 	.db BLUESKY_MAIL
 	.db MIRAGE_MAIL
 
-	.align
+	.align 4
 
 MysteryGiftDecorations:
 	.db PIKACHU_DOLL
@@ -4534,7 +4534,7 @@ MysteryGiftDecorations:
 	.db GRIMER_DOLL
 	.db UNOWN_DOLL
 
-	.align
+	.align 4
 
 .incbin "baseromgs.n64",0x43750c,0x437750-0x43750c
 
