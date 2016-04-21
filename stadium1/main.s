@@ -22,7 +22,7 @@
 	bne v1, t0, 0x002ecb64          ; if starting move id ? known move id, branch to 0x2ecb64
 	nop
 	sb r0, 0x0715 (t1)
-	(0x2ecb64) bnez at, 0x002ecb3c  ; if the 4 starting moves have not been checked, branch to 0x2ecb3c
+	bnez at, 0x002ecb3c             ; if the 4 starting moves have not been checked, branch to 0x2ecb3c
 	addiu v0, v0, 0x0001            ; increase the starting moves pointer
 	
 	; level-up moves
