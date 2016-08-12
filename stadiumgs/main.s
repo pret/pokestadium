@@ -4590,8 +4590,477 @@ MysteryGiftDecorations:
 ; faces table
 .incbin "baseromgs.n64",0x2268000,0x23a5000-0x2268000
 
-Unknown0x23A5000:
-.incbin "baseromgs.n64",0x23a5000,0x23a554c-0x23a5000
+Base0x23A5000:
+	.dh (EndComparisonEntries - ComparisonEntries) / (ComparisonEntrySize - ComparisonEntries) ; number of comparison table entries
+	.dh (EndGameBoyHeaders - GameBoyHeaders) / (GameBoyHeaderSize - GameBoyHeaders) ; number of header entries
+
+	; Crystal ROM banks
+ComparisonEntries:
+	.dw (CrystalBank02 - Base0x23A5000) << 8
+	.dh CrystalBank02End - CrystalBank02
+ComparisonEntrySize:
+	.dw (CrystalBank05 - Base0x23A5000) << 8
+	.dh CrystalBank05End - CrystalBank05
+	.dw (CrystalBank06 - Base0x23A5000) << 8
+	.dh CrystalBank06End - CrystalBank06
+	.dw (CrystalBank07 - Base0x23A5000) << 8
+	.dh CrystalBank07End - CrystalBank07
+	.dw (CrystalBank09 - Base0x23A5000) << 8
+	.dh CrystalBank09End - CrystalBank09
+	.dw (CrystalBank0a - Base0x23A5000) << 8
+	.dh CrystalBank0aEnd - CrystalBank0a
+	.dw (CrystalBank0b - Base0x23A5000) << 8
+	.dh CrystalBank0bEnd - CrystalBank0b
+	.dw (CrystalBank0c - Base0x23A5000) << 8
+	.dh CrystalBank0cEnd - CrystalBank0c
+	.dw (CrystalBank0e - Base0x23A5000) << 8
+	.dh CrystalBank0eEnd - CrystalBank0e
+	.dw (CrystalBank11 - Base0x23A5000) << 8
+	.dh CrystalBank11End - CrystalBank11
+	.dw (CrystalBank12 - Base0x23A5000) << 8
+	.dh CrystalBank12End - CrystalBank12
+	.dw (CrystalBank13 - Base0x23A5000) << 8
+	.dh CrystalBank13End - CrystalBank13
+	.dw (CrystalBank14 - Base0x23A5000) << 8
+	.dh CrystalBank14End - CrystalBank14
+	.dw (CrystalBank16 - Base0x23A5000) << 8
+	.dh CrystalBank16End - CrystalBank16
+	.dw (CrystalBank17 - Base0x23A5000) << 8
+	.dh CrystalBank17End - CrystalBank17
+	.dw (CrystalBank18 - Base0x23A5000) << 8
+	.dh CrystalBank18End - CrystalBank18
+	.dw (CrystalBank19 - Base0x23A5000) << 8
+	.dh CrystalBank19End - CrystalBank19
+	.dw (CrystalBank1a - Base0x23A5000) << 8
+	.dh CrystalBank1aEnd - CrystalBank1a
+	.dw (CrystalBank1b - Base0x23A5000) << 8
+	.dh CrystalBank1bEnd - CrystalBank1b
+	.dw (CrystalBank1d - Base0x23A5000) << 8
+	.dh CrystalBank1dEnd - CrystalBank1d
+	.dw (CrystalBank1e - Base0x23A5000) << 8
+	.dh CrystalBank1eEnd - CrystalBank1e
+	.dw (CrystalBank1f - Base0x23A5000) << 8
+	.dh CrystalBank1fEnd - CrystalBank1f
+	.dw (CrystalBank20 - Base0x23A5000) << 8
+	.dh CrystalBank20End - CrystalBank20
+	.dw (CrystalBank22 - Base0x23A5000) << 8
+	.dh CrystalBank22End - CrystalBank22
+	.dw (CrystalBank26 - Base0x23A5000) << 8
+	.dh CrystalBank26End - CrystalBank26
+	.dw (CrystalBank27 - Base0x23A5000) << 8
+	.dh CrystalBank27End - CrystalBank27
+	.dw (CrystalBank28 - Base0x23A5000) << 8
+	.dh CrystalBank28End - CrystalBank28
+	.dw (CrystalBank29 - Base0x23A5000) << 8
+	.dh CrystalBank29End - CrystalBank29
+	.dw (CrystalBank2a - Base0x23A5000) << 8
+	.dh CrystalBank2aEnd - CrystalBank2a
+	.dw (CrystalBank2b - Base0x23A5000) << 8
+	.dh CrystalBank2bEnd - CrystalBank2b
+	.dw (CrystalBank2c - Base0x23A5000) << 8
+	.dh CrystalBank2cEnd - CrystalBank2c
+	.dw (CrystalBank2e - Base0x23A5000) << 8
+	.dh CrystalBank2eEnd - CrystalBank2e
+	.dw (CrystalBank2f - Base0x23A5000) << 8
+	.dh CrystalBank2fEnd - CrystalBank2f
+	.dw (CrystalBank30 - Base0x23A5000) << 8
+	.dh CrystalBank30End - CrystalBank30
+	.dw (CrystalBank31 - Base0x23A5000) << 8
+	.dh CrystalBank31End - CrystalBank31
+	.dw (CrystalBank32 - Base0x23A5000) << 8
+	.dh CrystalBank32End - CrystalBank32
+	.dw (CrystalBank33 - Base0x23A5000) << 8
+	.dh CrystalBank33End - CrystalBank33
+	.dw (CrystalBank34 - Base0x23A5000) << 8
+	.dh CrystalBank34End - CrystalBank34
+	.dw (CrystalBank35 - Base0x23A5000) << 8
+	.dh CrystalBank35End - CrystalBank35
+	.dw (CrystalBank36 - Base0x23A5000) << 8
+	.dh CrystalBank36End - CrystalBank36
+	.dw (CrystalBank37 - Base0x23A5000) << 8
+	.dh CrystalBank37End - CrystalBank37
+	.dw (CrystalBank38 - Base0x23A5000) << 8
+	.dh CrystalBank38End - CrystalBank38
+	.dw (CrystalBank39 - Base0x23A5000) << 8
+	.dh CrystalBank39End - CrystalBank39
+	.dw (CrystalBank3a - Base0x23A5000) << 8
+	.dh CrystalBank3aEnd - CrystalBank3a
+	.dw (CrystalBank3b - Base0x23A5000) << 8
+	.dh CrystalBank3bEnd - CrystalBank3b
+	.dw (CrystalBank3d - Base0x23A5000) << 8
+	.dh CrystalBank3dEnd - CrystalBank3d
+	.dw (CrystalBank3e - Base0x23A5000) << 8
+	.dh CrystalBank3eEnd - CrystalBank3e
+	.dw (CrystalBank3f - Base0x23A5000) << 8
+	.dh CrystalBank3fEnd - CrystalBank3f
+	.dw (CrystalBank41 - Base0x23A5000) << 8
+	.dh CrystalBank41End - CrystalBank41
+	.dw (CrystalBank42 - Base0x23A5000) << 8
+	.dh CrystalBank42End - CrystalBank42
+	.dw (CrystalBank43 - Base0x23A5000) << 8
+	.dh CrystalBank43End - CrystalBank43
+	.dw (CrystalBank44 - Base0x23A5000) << 8
+	.dh CrystalBank44End - CrystalBank44
+	.dw (CrystalBank46 - Base0x23A5000) << 8
+	.dh CrystalBank46End - CrystalBank46
+	.dw (CrystalBank47 - Base0x23A5000) << 8
+	.dh CrystalBank47End - CrystalBank47
+	.dw (CrystalBank48 - Base0x23A5000) << 8
+	.dh CrystalBank48End - CrystalBank48
+	.dw (CrystalBank49 - Base0x23A5000) << 8
+	.dh CrystalBank49End - CrystalBank49
+	.dw (CrystalBank4a - Base0x23A5000) << 8
+	.dh CrystalBank4aEnd - CrystalBank4a
+	.dw (CrystalBank4b - Base0x23A5000) << 8
+	.dh CrystalBank4bEnd - CrystalBank4b
+	.dw (CrystalBank4c - Base0x23A5000) << 8
+	.dh CrystalBank4cEnd - CrystalBank4c
+	.dw (CrystalBank4d - Base0x23A5000) << 8
+	.dh CrystalBank4dEnd - CrystalBank4d
+	.dw (CrystalBank4e - Base0x23A5000) << 8
+	.dh CrystalBank4eEnd - CrystalBank4e
+	.dw (CrystalBank4f - Base0x23A5000) << 8
+	.dh CrystalBank4fEnd - CrystalBank4f
+	.dw (CrystalBank50 - Base0x23A5000) << 8
+	.dh CrystalBank50End - CrystalBank50
+	.dw (CrystalBank51 - Base0x23A5000) << 8
+	.dh CrystalBank51End - CrystalBank51
+	.dw (CrystalBank52 - Base0x23A5000) << 8
+	.dh CrystalBank52End - CrystalBank52
+	.dw (CrystalBank53 - Base0x23A5000) << 8
+	.dh CrystalBank53End - CrystalBank53
+	.dw (CrystalBank54 - Base0x23A5000) << 8
+	.dh CrystalBank54End - CrystalBank54
+	.dw (CrystalBank55 - Base0x23A5000) << 8
+	.dh CrystalBank55End - CrystalBank55
+	.dw (CrystalBank56 - Base0x23A5000) << 8
+	.dh CrystalBank56End - CrystalBank56
+	.dw (CrystalBank57 - Base0x23A5000) << 8
+	.dh CrystalBank57End - CrystalBank57
+	.dw (CrystalBank58 - Base0x23A5000) << 8
+	.dh CrystalBank58End - CrystalBank58
+	.dw (CrystalBank59 - Base0x23A5000) << 8
+	.dh CrystalBank59End - CrystalBank59
+	.dw (CrystalBank5a - Base0x23A5000) << 8
+	.dh CrystalBank5aEnd - CrystalBank5a
+	.dw (CrystalBank5b - Base0x23A5000) << 8
+	.dh CrystalBank5bEnd - CrystalBank5b
+	.dw (CrystalBank5c - Base0x23A5000) << 8
+	.dh CrystalBank5cEnd - CrystalBank5c
+	.dw (CrystalBank5d - Base0x23A5000) << 8
+	.dh CrystalBank5dEnd - CrystalBank5d
+	.dw (CrystalBank5e - Base0x23A5000) << 8
+	.dh CrystalBank5eEnd - CrystalBank5e
+	.dw (CrystalBank5f - Base0x23A5000) << 8
+	.dh CrystalBank5fEnd - CrystalBank5f
+	.dw (CrystalBank60 - Base0x23A5000) << 8
+	.dh CrystalBank60End - CrystalBank60
+	.dw (CrystalBank61 - Base0x23A5000) << 8
+	.dh CrystalBank61End - CrystalBank61
+	.dw (CrystalBank62 - Base0x23A5000) << 8
+	.dh CrystalBank62End - CrystalBank62
+	.dw (CrystalBank63 - Base0x23A5000) << 8
+	.dh CrystalBank63End - CrystalBank63
+	.dw (CrystalBank64 - Base0x23A5000) << 8
+	.dh CrystalBank64End - CrystalBank64
+	.dw (CrystalBank65 - Base0x23A5000) << 8
+	.dh CrystalBank65End - CrystalBank65
+	.dw (CrystalBank67 - Base0x23A5000) << 8
+	.dh CrystalBank67End - CrystalBank67
+	.dw (CrystalBank68 - Base0x23A5000) << 8
+	.dh CrystalBank68End - CrystalBank68
+	.dw (CrystalBank69 - Base0x23A5000) << 8
+	.dh CrystalBank69End - CrystalBank69
+	.dw (CrystalBank6b - Base0x23A5000) << 8
+	.dh CrystalBank6bEnd - CrystalBank6b
+	.dw (CrystalBank6c - Base0x23A5000) << 8
+	.dh CrystalBank6cEnd - CrystalBank6c
+	.dw (CrystalBank6d - Base0x23A5000) << 8
+	.dh CrystalBank6dEnd - CrystalBank6d
+	.dw (CrystalBank6e - Base0x23A5000) << 8
+	.dh CrystalBank6eEnd - CrystalBank6e
+	.dw (CrystalBank6f - Base0x23A5000) << 8
+	.dh CrystalBank6fEnd - CrystalBank6f
+	.dw (CrystalBank70 - Base0x23A5000) << 8
+	.dh CrystalBank70End - CrystalBank70
+	.dw (CrystalBank71 - Base0x23A5000) << 8
+	.dh CrystalBank71End - CrystalBank71
+	.dw (CrystalBank72 - Base0x23A5000) << 8
+	.dh CrystalBank72End - CrystalBank72
+	.dw (CrystalBank73 - Base0x23A5000) << 8
+	.dh CrystalBank73End - CrystalBank73
+	.dw (CrystalBank74 - Base0x23A5000) << 8
+	.dh CrystalBank74End - CrystalBank74
+	.dw (CrystalBank77 - Base0x23A5000) << 8
+	.dh CrystalBank77End - CrystalBank77
+	.dw (CrystalBank78 - Base0x23A5000) << 8
+	.dh CrystalBank78End - CrystalBank78
+	.dw (CrystalBank7d - Base0x23A5000) << 8
+	.dh CrystalBank7dEnd - CrystalBank7d
+	.dw (CrystalBank7e - Base0x23A5000) << 8
+	.dh CrystalBank7eEnd - CrystalBank7e
+
+	; Gold ROM banks
+	.dw (GoldBank04 - Base0x23A5000) << 8
+	.dh GoldBank04End - GoldBank04
+	.dw (GoldBank05 - Base0x23A5000) << 8
+	.dh GoldBank05End - GoldBank05
+	.dw (GoldBank06 - Base0x23A5000) << 8
+	.dh GoldBank06End - GoldBank06
+	.dw (GoldBank07 - Base0x23A5000) << 8
+	.dh GoldBank07End - GoldBank07
+	.dw (GoldBank08 - Base0x23A5000) << 8
+	.dh GoldBank08End - GoldBank08
+	.dw (GoldBank09 - Base0x23A5000) << 8
+	.dh GoldBank09End - GoldBank09
+	.dw (GoldBank0a - Base0x23A5000) << 8
+	.dh GoldBank0aEnd - GoldBank0a
+	.dw (GoldBank0b - Base0x23A5000) << 8
+	.dh GoldBank0bEnd - GoldBank0b
+	.dw (GoldBank0e - Base0x23A5000) << 8
+	.dh GoldBank0eEnd - GoldBank0e
+	.dw ((CrystalBank11 - Base0x23A5000) << 8) + 1
+	.dh CrystalBank11End - CrystalBank11
+	.dw (GoldBank14 - Base0x23A5000) << 8
+	.dh GoldBank14End - GoldBank14
+	.dw (GoldBank15 - Base0x23A5000) << 8
+	.dh GoldBank15End - GoldBank15
+	.dw (GoldBank16 - Base0x23A5000) << 8
+	.dh GoldBank16End - GoldBank16
+	.dw (GoldBank17 - Base0x23A5000) << 8
+	.dh GoldBank17End - GoldBank17
+	.dw (GoldBank18 - Base0x23A5000) << 8
+	.dh GoldBank18End - GoldBank18
+	.dw (GoldBank19 - Base0x23A5000) << 8
+	.dh GoldBank19End - GoldBank19
+	.dw (GoldBank1a - Base0x23A5000) << 8
+	.dh GoldBank1aEnd - GoldBank1a
+	.dw (GoldBank1b - Base0x23A5000) << 8
+	.dh GoldBank1bEnd - GoldBank1b
+	.dw (GoldBank1c - Base0x23A5000) << 8
+	.dh GoldBank1cEnd - GoldBank1c
+	.dw (GoldBank1d - Base0x23A5000) << 8
+	.dh GoldBank1dEnd - GoldBank1d
+	.dw (GoldBank1e - Base0x23A5000) << 8
+	.dh GoldBank1eEnd - GoldBank1e
+	.dw (GoldBank1f - Base0x23A5000) << 8
+	.dh GoldBank1fEnd - GoldBank1f
+	.dw (GoldBank20 - Base0x23A5000) << 8
+	.dh GoldBank20End - GoldBank20
+	.dw (GoldBank21 - Base0x23A5000) << 8
+	.dh GoldBank21End - GoldBank21
+	.dw (GoldBank23 - Base0x23A5000) << 8
+	.dh GoldBank23End - GoldBank23
+	.dw (GoldBank24 - Base0x23A5000) << 8
+	.dh GoldBank24End - GoldBank24
+	.dw (GoldBank25 - Base0x23A5000) << 8
+	.dh GoldBank25End - GoldBank25
+	.dw (GoldBank26 - Base0x23A5000) << 8
+	.dh GoldBank26End - GoldBank26
+	.dw ((CrystalBank2a - Base0x23A5000) << 8) + 1
+	.dh CrystalBank2aEnd - CrystalBank2a
+	.dw ((CrystalBank2b - Base0x23A5000) << 8) + 1
+	.dh CrystalBank2bEnd - CrystalBank2b
+	.dw (GoldBank2e - Base0x23A5000) << 8
+	.dh GoldBank2eEnd - GoldBank2e
+	.dw ((CrystalBank31 - Base0x23A5000) << 8) + 1
+	.dh CrystalBank31End - CrystalBank31
+	.dw (GoldBank32 - Base0x23A5000) << 8
+	.dh GoldBank32End - GoldBank32
+	.dw (GoldBank33 - Base0x23A5000) << 8
+	.dh GoldBank33End - GoldBank33
+	.dw (GoldBank36 - Base0x23A5000) << 8
+	.dh GoldBank36End - GoldBank36
+	.dw (GoldBank3e - Base0x23A5000) << 8
+	.dh GoldBank3eEnd - GoldBank3e
+	.dw (GoldBank3f - Base0x23A5000) << 8
+	.dh GoldBank3fEnd - GoldBank3f
+	.dw (GoldBank40 - Base0x23A5000) << 8
+	.dh GoldBank40End - GoldBank40
+	.dw (GoldBank41 - Base0x23A5000) << 8
+	.dh GoldBank41End - GoldBank41
+	.dw (GoldBank42 - Base0x23A5000) << 8
+	.dh GoldBank42End - GoldBank42
+	.dw (GoldBank43 - Base0x23A5000) << 8
+	.dh GoldBank43End - GoldBank43
+	.dw (GoldBank44 - Base0x23A5000) << 8
+	.dh GoldBank44End - GoldBank44
+	.dw (GoldBank45 - Base0x23A5000) << 8
+	.dh GoldBank45End - GoldBank45
+	.dw (GoldBank46 - Base0x23A5000) << 8
+	.dh GoldBank46End - GoldBank46
+	.dw (GoldBank47 - Base0x23A5000) << 8
+	.dh GoldBank47End - GoldBank47
+	.dw (GoldBank48 - Base0x23A5000) << 8
+	.dh GoldBank48End - GoldBank48
+	.dw (GoldBank49 - Base0x23A5000) << 8
+	.dh GoldBank49End - GoldBank49
+	.dw (GoldBank4a - Base0x23A5000) << 8
+	.dh GoldBank4aEnd - GoldBank4a
+	.dw (GoldBank4c - Base0x23A5000) << 8
+	.dh GoldBank4cEnd - GoldBank4c
+	.dw (GoldBank4d - Base0x23A5000) << 8
+	.dh GoldBank4dEnd - GoldBank4d
+	.dw (GoldBank4e - Base0x23A5000) << 8
+	.dh GoldBank4eEnd - GoldBank4e
+	.dw (GoldBank4f - Base0x23A5000) << 8
+	.dh GoldBank4fEnd - GoldBank4f
+	.dw (GoldBank50 - Base0x23A5000) << 8
+	.dh GoldBank50End - GoldBank50
+	.dw (GoldBank51 - Base0x23A5000) << 8
+	.dh GoldBank51End - GoldBank51
+	.dw (GoldBank52 - Base0x23A5000) << 8
+	.dh GoldBank52End - GoldBank52
+	.dw (GoldBank53 - Base0x23A5000) << 8
+	.dh GoldBank53End - GoldBank53
+	.dw (GoldBank54 - Base0x23A5000) << 8
+	.dh GoldBank54End - GoldBank54
+	.dw (GoldBank55 - Base0x23A5000) << 8
+	.dh GoldBank55End - GoldBank55
+	.dw (GoldBank59 - Base0x23A5000) << 8
+	.dh GoldBank59End - GoldBank59
+	.dw (GoldBank5a - Base0x23A5000) << 8
+	.dh GoldBank5aEnd - GoldBank5a
+	.dw (GoldBank5c - Base0x23A5000) << 8
+	.dh GoldBank5cEnd - GoldBank5c
+	.dw (GoldBank5d - Base0x23A5000) << 8
+	.dh GoldBank5dEnd - GoldBank5d
+	.dw (GoldBank5f - Base0x23A5000) << 8
+	.dh GoldBank5fEnd - GoldBank5f
+	.dw (GoldBank60 - Base0x23A5000) << 8
+	.dh GoldBank60End - GoldBank60
+	.dw (GoldBank61 - Base0x23A5000) << 8
+	.dh GoldBank61End - GoldBank61
+	.dw (GoldBank62 - Base0x23A5000) << 8
+	.dh GoldBank62End - GoldBank62
+	.dw (GoldBank64 - Base0x23A5000) << 8
+	.dh GoldBank64End - GoldBank64
+	.dw (GoldBank65 - Base0x23A5000) << 8
+	.dh GoldBank65End - GoldBank65
+	.dw (GoldBank66 - Base0x23A5000) << 8
+	.dh GoldBank66End - GoldBank66
+	.dw (GoldBank68 - Base0x23A5000) << 8
+	.dh GoldBank68End - GoldBank68
+	.dw (GoldBank69 - Base0x23A5000) << 8
+	.dh GoldBank69End - GoldBank69
+	.dw (GoldBank6a - Base0x23A5000) << 8
+	.dh GoldBank6aEnd - GoldBank6a
+	.dw (GoldBank6b - Base0x23A5000) << 8
+	.dh GoldBank6bEnd - GoldBank6b
+	.dw (GoldBank6d - Base0x23A5000) << 8
+	.dh GoldBank6dEnd - GoldBank6d
+	.dw (GoldBank6e - Base0x23A5000) << 8
+	.dh GoldBank6eEnd - GoldBank6e
+	.dw (GoldBank70 - Base0x23A5000) << 8
+	.dh GoldBank70End - GoldBank70
+
+	; Silver ROM banks
+	.dw ((GoldBank04 - Base0x23A5000) << 8) + 1
+	.dh GoldBank04End - GoldBank04
+	.dw ((GoldBank05 - Base0x23A5000) << 8) + 1
+	.dh GoldBank05End - GoldBank05
+	.dw ((GoldBank09 - Base0x23A5000) << 8) + 1
+	.dh GoldBank09End - GoldBank09
+	.dw ((GoldBank0a - Base0x23A5000) << 8) + 1
+	.dh GoldBank0aEnd - GoldBank0a
+	.dw ((GoldBank0b - Base0x23A5000) << 8) + 1
+	.dh GoldBank0bEnd - GoldBank0b
+	.dw ((CrystalBank11 - Base0x23A5000) << 8) + 2
+	.dh CrystalBank11End - CrystalBank11
+	.dw ((GoldBank14 - Base0x23A5000) << 8) + 1
+	.dh GoldBank14End - GoldBank14
+	.dw (SilverBank15 - Base0x23A5000) << 8
+	.dh SilverBank15End - SilverBank15
+	.dw (SilverBank16 - Base0x23A5000) << 8
+	.dh SilverBank16End - SilverBank16
+	.dw (SilverBank17 - Base0x23A5000) << 8
+	.dh SilverBank17End - SilverBank17
+	.dw (SilverBank18 - Base0x23A5000) << 8
+	.dh SilverBank18End - SilverBank18
+	.dw (SilverBank19 - Base0x23A5000) << 8
+	.dh SilverBank19End - SilverBank19
+	.dw (SilverBank1a - Base0x23A5000) << 8
+	.dh SilverBank1aEnd - SilverBank1a
+	.dw (SilverBank1b - Base0x23A5000) << 8
+	.dh SilverBank1bEnd - SilverBank1b
+	.dw (SilverBank1c - Base0x23A5000) << 8
+	.dh SilverBank1cEnd - SilverBank1c
+	.dw (SilverBank1d - Base0x23A5000) << 8
+	.dh SilverBank1dEnd - SilverBank1d
+	.dw (SilverBank1e - Base0x23A5000) << 8
+	.dh SilverBank1eEnd - SilverBank1e
+	.dw (SilverBank1f - Base0x23A5000) << 8
+	.dh SilverBank1fEnd - SilverBank1f
+	.dw (SilverBank20 - Base0x23A5000) << 8
+	.dh SilverBank20End - SilverBank20
+	.dw ((GoldBank21 - Base0x23A5000) << 8) + 1
+	.dh GoldBank21End - GoldBank21
+	.dw (SilverBank23 - Base0x23A5000) << 8
+	.dh SilverBank23End - SilverBank23
+	.dw ((GoldBank24 - Base0x23A5000) << 8) + 1
+	.dh GoldBank24End - GoldBank24
+	.dw ((GoldBank25 - Base0x23A5000) << 8) + 1
+	.dh GoldBank25End - GoldBank25
+	.dw ((GoldBank26 - Base0x23A5000) << 8) + 1
+	.dh GoldBank26End - GoldBank26
+	.dw (SilverBank2e - Base0x23A5000) << 8
+	.dh SilverBank2eEnd - SilverBank2e
+	.dw ((CrystalBank31 - Base0x23A5000) << 8) + 2
+	.dh CrystalBank31End - CrystalBank31
+	.dw ((GoldBank33 - Base0x23A5000) << 8) + 1
+	.dh GoldBank33End - GoldBank33
+	.dw ((GoldBank3f - Base0x23A5000) << 8) + 1
+	.dh GoldBank3fEnd - GoldBank3f
+	.dw ((GoldBank40 - Base0x23A5000) << 8) + 1
+	.dh GoldBank40End - GoldBank40
+	.dw (SilverBank68 - Base0x23A5000) << 8
+	.dh SilverBank68End - SilverBank68
+	.dw (SilverBank69 - Base0x23A5000) << 8
+	.dh SilverBank69End - SilverBank69
+	.dw (SilverBank6a - Base0x23A5000) << 8
+	.dh SilverBank6aEnd - SilverBank6a
+	.dw (SilverBank6b - Base0x23A5000) << 8
+	.dh SilverBank6bEnd - SilverBank6b
+	.dw ((GoldBank70 - Base0x23A5000) << 8) + 1
+	.dh GoldBank70End - GoldBank70
+
+	; Yellow ROM banks
+	.dw (YellowBank07 - Base0x23A5000) << 8
+	.dh YellowBank07End - YellowBank07
+	.dw (YellowBank17 - Base0x23A5000) << 8
+	.dh YellowBank17End - YellowBank17
+	.dw (YellowBank18 - Base0x23A5000) << 8
+	.dh YellowBank18End - YellowBank18
+	.dw (YellowBank30 - Base0x23A5000) << 8
+	.dh YellowBank30End - YellowBank30
+	.dw (YellowBank32 - Base0x23A5000) << 8
+	.dh YellowBank32End - YellowBank32
+	.dw (YellowBank34 - Base0x23A5000) << 8
+	.dh YellowBank34End - YellowBank34
+
+	; Red/Blue ROM banks
+	.dw (RedBank17 - Base0x23A5000) << 8
+	.dh RedBank17End - RedBank17
+	.dw (RedBank18 - Base0x23A5000) << 8
+	.dh RedBank18End - RedBank18
+	.dw (RedBank24 - Base0x23A5000) << 8
+	.dh RedBank24End - RedBank24
+	.dw (RedBank25 - Base0x23A5000) << 8
+	.dh RedBank25End - RedBank25
+	.dw (RedBank2a - Base0x23A5000) << 8
+	.dh RedBank2aEnd - RedBank2a
+	.dw (RedBank2c - Base0x23A5000) << 8
+	.dh RedBank2cEnd - RedBank2c
+
+	; Blue ROM banks
+	.dw (BlueBank01 - Base0x23A5000) << 8
+	.dh BlueBank01End - BlueBank01
+	.dw (BlueBank08 - Base0x23A5000) << 8
+	.dh BlueBank08End - BlueBank08
+
+EndComparisonEntries:
+
+	.align 4
 
 GameBoyHeaders:
 ; game id
@@ -4599,7 +5068,9 @@ GameBoyHeaders:
 ; region
 ; revision
 ; checksum
-; unknown1, pointer (to what?), unknown2
+; four bytes from 0x9C001 in the ROM
+; pointer to the checksum table
+; flags?
 
 JAPAN     EQU 0
 NON_JAPAN EQU 1
@@ -4612,13 +5083,19 @@ POKEMON_GOLD    EQU 5
 POKEMON_SILVER  EQU 6
 POKEMON_CRYSTAL EQU 7
 
+COLOR_GEN EQU 0x0010
+
 ; no-intro: Pocket Monsters - Crystal Version (Japan)
 	.db POKEMON_CRYSTAL
 	.db "PM_CRYSTAL",0,"BXTJ"
 	.db JAPAN
 	.db 0
 	.dh 0x9a40
-	.dw 0x0d400000, UnknownGameBoy0x23a594c - Unknown0x23A5000, 0x000b0000
+	.dw 0x0d400000
+	.dw CrystalJapan0Checksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
+GameBoyHeaderSize:
 
 ; no-intro: Pocket Monsters Gin (Japan) (Rev A)
 	.db POKEMON_SILVER
@@ -4626,7 +5103,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 1
 	.dh 0x1d34
-	.dw 0x00520840, UnknownGameBoy0x23a5d6c - Unknown0x23A5000, 0x000b0000
+	.dw 0x00520840
+	.dw SilverJapan1Checksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pocket Monsters Gin (Japan)
 	.db POKEMON_SILVER
@@ -4634,7 +5114,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 0
 	.dh 0x7691
-	.dw 0x00520840, UnknownGameBoy0x23a618c - Unknown0x23A5000, 0x000b0000
+	.dw 0x00520840
+	.dw SilverJapan0Checksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pocket Monsters Kin (Japan)
 	.db POKEMON_GOLD
@@ -4642,7 +5125,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 0
 	.dh 0x8a70
-	.dw 0x00520840, UnknownGameBoy0x23a65ac - Unknown0x23A5000, 0x000b0000
+	.dw 0x00520840
+	.dw GoldJapan0Checksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pocket Monsters Kin (Japan) (Rev A)
 	.db POKEMON_GOLD
@@ -4650,7 +5136,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 1
 	.dh 0x8460
-	.dw 0x00520840, UnknownGameBoy0x23a69cc - Unknown0x23A5000, 0x000b0000
+	.dw 0x00520840
+	.dw GoldJapan1Checksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pocket Monsters - Pikachu (Japan) (Rev D)
 	.db POKEMON_YELLOW
@@ -4658,7 +5147,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 3
 	.dh 0xd984
-	.dw 0x00000000, UnknownGameBoy0x23a6dec - Unknown0x23A5000, 0x00160000
+	.dw 0x00000000
+	.dw YellowJapan3Checksums - Base0x23A5000
+	.dh 0x0006 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Pikachu (Japan) (Rev C)
 	.db POKEMON_YELLOW
@@ -4666,7 +5158,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 2
 	.dh 0xedd9
-	.dw 0x52fd2599, UnknownGameBoy0x23a720c - Unknown0x23A5000, 0x00160000
+	.dw 0x52fd2599
+	.dw YellowJapan2Checksums - Base0x23A5000
+	.dh 0x0006 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Pikachu (Japan) (Rev B)
 	.db POKEMON_YELLOW
@@ -4674,7 +5169,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 1
 	.dh 0x8858
-	.dw 0x5afd2d99, UnknownGameBoy0x23a762c - Unknown0x23A5000, 0x00160000
+	.dw 0x5afd2d99
+	.dw YellowJapan1Checksums - Base0x23A5000
+	.dh 0x0006 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Pikachu (Japan) (Rev 0A)
 	.db POKEMON_YELLOW
@@ -4682,7 +5180,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 0
 	.dh 0x9c29
-	.dw 0xcef7dddb, UnknownGameBoy0x23a7a4c - Unknown0x23A5000, 0x00160000
+	.dw 0xcef7dddb
+	.dw YellowJapan0Checksums - Base0x23A5000
+	.dh 0x0006 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Ao (Japan)
 	.db POKEMON_BLUE
@@ -4690,7 +5191,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 0
 	.dh 0xdc36
-	.dw 0x00000000, UnknownGameBoy0x23a7e6c - Unknown0x23A5000, 0x00150000
+	.dw 0x00000000
+	.dw BlueJapan0Checksums - Base0x23A5000
+	.dh 0x0005 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Aka (Japan) (Rev A)
 	.db POKEMON_RED
@@ -4698,7 +5202,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 1
 	.dh 0xb866
-	.dw 0x00000000, UnknownGameBoy0x23a828c - Unknown0x23A5000, 0x00150000
+	.dw 0x00000000
+	.dw RedJapan1Checksums - Base0x23A5000
+	.dh 0x0005 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Midori (Japan) (Rev A)
 	.db POKEMON_GREEN
@@ -4706,7 +5213,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 1
 	.dh 0xf547
-	.dw 0x00000000, UnknownGameBoy0x23a86ac - Unknown0x23A5000, 0x00160000
+	.dw 0x00000000
+	.dw GreenJapan1Checksums - Base0x23A5000
+	.dh 0x0006 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Midori (Japan)
 	.db POKEMON_GREEN
@@ -4714,7 +5224,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 0
 	.dh 0xddd5
-	.dw 0x00000000, UnknownGameBoy0x23a8acc - Unknown0x23A5000, 0x00160000
+	.dw 0x00000000
+	.dw GreenJapan0Checksums - Base0x23A5000
+	.dh 0x0006 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pocket Monsters - Aka (Japan)
 	.db POKEMON_RED
@@ -4722,7 +5235,10 @@ POKEMON_CRYSTAL EQU 7
 	.db JAPAN
 	.db 0
 	.dh 0xa2c1
-	.dw 0x00000000, UnknownGameBoy0x23a8eec - Unknown0x23A5000, 0x00150000
+	.dw 0x00000000
+	.dw RedJapan0Checksums - Base0x23A5000
+	.dh 0x0005 | COLOR_GEN
+	.align 4
 
 ; not in no-intro
 	.db POKEMON_CRYSTAL
@@ -4730,7 +5246,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x5e1c
-	.dw 0x000c0000, UnknownGameBoy0x23a930c - Unknown0x23A5000, 0x000b0000
+	.dw 0x000c0000
+	.dw CrystalUSAChecksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pokemon - Gold Version (USA, Europe)
 	.db POKEMON_GOLD
@@ -4738,7 +5257,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x682d
-	.dw 0x00000000, UnknownGameBoy0x23a972c - Unknown0x23A5000, 0x000b0000
+	.dw 0x00000000
+	.dw GoldUSAChecksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pokemon - Silver Version (USA, Europe)
 	.db POKEMON_SILVER
@@ -4746,7 +5268,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x0dae
-	.dw 0x00000000, UnknownGameBoy0x23a9b4c - Unknown0x23A5000, 0x000b0000
+	.dw 0x00000000
+	.dw SilverUSAChecksums - Base0x23A5000
+	.dh 0x000b
+	.align 4
 
 ; no-intro: Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe)
 	.db POKEMON_YELLOW
@@ -4754,7 +5279,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x047c
-	.dw 0x8f918492, UnknownGameBoy0x23a9f6c - Unknown0x23A5000, 0x00180000
+	.dw 0x8f918492
+	.dw YellowUSAChecksums - Base0x23A5000
+	.dh 0x0008 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Red Version (USA, Europe)
 	.db POKEMON_RED
@@ -4762,7 +5290,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x91e6
-	.dw 0x807faba8, UnknownGameBoy0x23aa38c - Unknown0x23A5000, 0x00170000
+	.dw 0x807faba8
+	.dw RedUSAChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Blue Version (USA, Europe)
 	.db POKEMON_BLUE
@@ -4770,7 +5301,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x9d0a
-	.dw 0x807faba8, UnknownGameBoy0x23aa7ac - Unknown0x23A5000, 0x00170000
+	.dw 0x807faba8
+	.dw BlueUSAChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Version Jaune - Edition Speciale Pikachu (France)
 	.db POKEMON_YELLOW
@@ -4778,7 +5312,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0xb7c1
-	.dw 0x8f83869c, UnknownGameBoy0x23aabcc - Unknown0x23A5000, 0x00180000
+	.dw 0x8f83869c
+	.dw YellowFranceChecksums - Base0x23A5000
+	.dh 0x0008 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Version Rouge (France)
 	.db POKEMON_RED
@@ -4786,7 +5323,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x7afc
-	.dw 0x94ad7fda, UnknownGameBoy0x23aafec - Unknown0x23A5000, 0x00170000
+	.dw 0x94ad7fda
+	.dw RedFranceChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Version Bleue (France)
 	.db POKEMON_BLUE
@@ -4794,7 +5334,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x56a4
-	.dw 0x94ad7fda, UnknownGameBoy0x23ab40c - Unknown0x23A5000, 0x00170000
+	.dw 0x94ad7fda
+	.dw BlueFranceChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Gelbe Edition - Special Pikachu Edition (Germany)
 	.db POKEMON_YELLOW
@@ -4802,7 +5345,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x66fb
-	.dw 0x8f91c092, UnknownGameBoy0x23ab82c - Unknown0x23A5000, 0x00180000
+	.dw 0x8f91c092
+	.dw YellowGermanyChecksums - Base0x23A5000
+	.dh 0x0008 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Rote Edition (Germany)
 	.db POKEMON_RED
@@ -4810,7 +5356,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x5cdc
-	.dw 0x88a2a77f, UnknownGameBoy0x23abc4c - Unknown0x23A5000, 0x00170000
+	.dw 0x88a2a77f
+	.dw RedGermanyChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Blaue Edition (Germany)
 	.db POKEMON_BLUE
@@ -4818,7 +5367,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x2ebc
-	.dw 0x88a2a77f, UnknownGameBoy0x23ac06c - Unknown0x23A5000, 0x00170000
+	.dw 0x88a2a77f
+	.dw BlueGermanyChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Versione Gialla - Speciale Edizione Pikachu (Italy)
 	.db POKEMON_YELLOW
@@ -4826,7 +5378,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x4e8f
-	.dw 0x8f918492, UnknownGameBoy0x23ac48c - Unknown0x23A5000, 0x00180000
+	.dw 0x8f918492
+	.dw YellowItalyChecksums - Base0x23A5000
+	.dh 0x0008 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Versione Rossa (Italy)
 	.db POKEMON_RED
@@ -4834,7 +5389,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x89d2
-	.dw 0x95aea6ab, UnknownGameBoy0x23ac8ac - Unknown0x23A5000, 0x00170000
+	.dw 0x95aea6ab
+	.dw RedItalyChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Versione Blu (Italy)
 	.db POKEMON_BLUE
@@ -4842,7 +5400,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x5e9c
-	.dw 0x95aea6ab, UnknownGameBoy0x23acccc - Unknown0x23A5000, 0x00170000
+	.dw 0x95aea6ab
+	.dw BlueItalyChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Edicion Amarilla - Edicion Especial Pikachu (Spain)
 	.db POKEMON_YELLOW
@@ -4850,7 +5411,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x5637
-	.dw 0x8f918492, UnknownGameBoy0x23ad0ec - Unknown0x23A5000, 0x00180000
+	.dw 0x8f918492
+	.dw YellowSpainChecksums - Base0x23A5000
+	.dh 0x0008 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Edicion Roja (Spain)
 	.db POKEMON_RED
@@ -4858,7 +5422,10 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x384a
-	.dw 0xe593a47f, UnknownGameBoy0x23ad50c - Unknown0x23A5000, 0x00170000
+	.dw 0xe593a47f
+	.dw RedSpainChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
 ; no-intro: Pokemon - Edicion Azul (Spain)
 	.db POKEMON_BLUE
@@ -4866,74 +5433,1129 @@ POKEMON_CRYSTAL EQU 7
 	.db NON_JAPAN
 	.db 0
 	.dh 0x14d7
-	.dw 0xe593a47f, UnknownGameBoy0x23ad92c - Unknown0x23A5000, 0x00170000
+	.dw 0xe593a47f
+	.dw BlueSpainChecksums - Base0x23A5000
+	.dh 0x0007 | COLOR_GEN
+	.align 4
 
-UnknownGameBoy0x23a594c: ; Crystal Japan rev 0
+EndGameBoyHeaders:
+
+CrystalJapan0Checksums: ; Crystal Japan rev 0
 .incbin "gameboy/00.bin"
-UnknownGameBoy0x23a5d6c: ; Silver Japan rev 1
+SilverJapan1Checksums:  ; Silver Japan rev 1
 .incbin "gameboy/01.bin"
-UnknownGameBoy0x23a618c: ; Silver Japan rev 0
+SilverJapan0Checksums:  ; Silver Japan rev 0
 .incbin "gameboy/02.bin"
-UnknownGameBoy0x23a65ac: ; Gold Japan rev 0
+GoldJapan0Checksums:    ; Gold Japan rev 0
 .incbin "gameboy/03.bin"
-UnknownGameBoy0x23a69cc: ; Gold Japan rev 1
+GoldJapan1Checksums:    ; Gold Japan rev 1
 .incbin "gameboy/04.bin"
-UnknownGameBoy0x23a6dec: ; Yellow Japan rev 3
+YellowJapan3Checksums:  ; Yellow Japan rev 3
 .incbin "gameboy/05.bin"
-UnknownGameBoy0x23a720c: ; Yellow Japan rev 2
+YellowJapan2Checksums:  ; Yellow Japan rev 2
 .incbin "gameboy/06.bin"
-UnknownGameBoy0x23a762c: ; Yellow Japan rev 1
+YellowJapan1Checksums:  ; Yellow Japan rev 1
 .incbin "gameboy/07.bin"
-UnknownGameBoy0x23a7a4c: ; Yellow Japan rev 0
+YellowJapan0Checksums:  ; Yellow Japan rev 0
 .incbin "gameboy/08.bin"
-UnknownGameBoy0x23a7e6c: ; Blue Japan rev 0
+BlueJapan0Checksums:    ; Blue Japan rev 0
 .incbin "gameboy/09.bin"
-UnknownGameBoy0x23a828c: ; Red Japan rev 1
+RedJapan1Checksums:     ; Red Japan rev 1
 .incbin "gameboy/0a.bin"
-UnknownGameBoy0x23a86ac: ; Green Japan rev 1
+GreenJapan1Checksums:   ; Green Japan rev 1
 .incbin "gameboy/0b.bin"
-UnknownGameBoy0x23a8acc: ; Green Japan rev 0
+GreenJapan0Checksums:   ; Green Japan rev 0
 .incbin "gameboy/0c.bin"
-UnknownGameBoy0x23a8eec: ; Red Japan rev 0
+RedJapan0Checksums:     ; Red Japan rev 0
 .incbin "gameboy/0d.bin"
-UnknownGameBoy0x23a930c: ; Crystal USA
+CrystalUSAChecksums:    ; Crystal USA
 .incbin "gameboy/0e.bin"
-UnknownGameBoy0x23a972c: ; Gold USA
+GoldUSAChecksums:       ; Gold USA
 .incbin "gameboy/0f.bin"
-UnknownGameBoy0x23a9b4c: ; Silver USA
+SilverUSAChecksums:     ; Silver USA
 .incbin "gameboy/10.bin"
-UnknownGameBoy0x23a9f6c: ; Yellow USA
+YellowUSAChecksums:     ; Yellow USA
 .incbin "gameboy/11.bin"
-UnknownGameBoy0x23aa38c: ; Red USA
+RedUSAChecksums:        ; Red USA
 .incbin "gameboy/12.bin"
-UnknownGameBoy0x23aa7ac: ; Blue USA
+BlueUSAChecksums:       ; Blue USA
 .incbin "gameboy/13.bin"
-UnknownGameBoy0x23aabcc: ; Yellow France
+YellowFranceChecksums:  ; Yellow France
 .incbin "gameboy/14.bin"
-UnknownGameBoy0x23aafec: ; Red France
+RedFranceChecksums:     ; Red France
 .incbin "gameboy/15.bin"
-UnknownGameBoy0x23ab40c: ; Blue France
+BlueFranceChecksums:    ; Blue France
 .incbin "gameboy/16.bin"
-UnknownGameBoy0x23ab82c: ; Yellow Germany
+YellowGermanyChecksums: ; Yellow Germany
 .incbin "gameboy/17.bin"
-UnknownGameBoy0x23abc4c: ; Red Germany
+RedGermanyChecksums:    ; Red Germany
 .incbin "gameboy/18.bin"
-UnknownGameBoy0x23ac06c: ; Blue Germany
+BlueGermanyChecksums:   ; Blue Germany
 .incbin "gameboy/19.bin"
-UnknownGameBoy0x23ac48c: ; Yellow Italy
+YellowItalyChecksums:   ; Yellow Italy
 .incbin "gameboy/1a.bin"
-UnknownGameBoy0x23ac8ac: ; Red Italy
+RedItalyChecksums:      ; Red Italy
 .incbin "gameboy/1b.bin"
-UnknownGameBoy0x23acccc: ; Blue Italy
+BlueItalyChecksums:     ; Blue Italy
 .incbin "gameboy/1c.bin"
-UnknownGameBoy0x23ad0ec: ; Yellow Spain
+YellowSpainChecksums:   ; Yellow Spain
 .incbin "gameboy/1d.bin"
-UnknownGameBoy0x23ad50c: ; Red Spain
+RedSpainChecksums:      ; Red Spain
 .incbin "gameboy/1e.bin"
-UnknownGameBoy0x23ad92c: ; Blue Spain
+BlueSpainChecksums:     ; Blue Spain
 .incbin "gameboy/1f.bin"
 
-.incbin "baseromgs.n64",0x23add4c,0x258d000-0x23add4c
+; Yay0‐compressed Game Boy ROM banks.
+; Banks that are reused by multiple games may be followed by patches.
+
+BlueBank01:
+.incbin "baseromgs.n64",0x23add4c,0x3212
+BlueBank01End:
+	.align 4
+
+CrystalBank02:
+.incbin "baseromgs.n64",0x23b0f60,0x2705
+CrystalBank02End:
+	.align 4
+
+GoldBank04:
+.incbin "baseromgs.n64",0x23B3668,0x2B72
+GoldBank04End:
+.incbin "baseromgs.n64",0x23b61da,0x82
+	.align 4
+
+CrystalBank05:
+.incbin "baseromgs.n64",0x23B625C,0x2939
+CrystalBank05End:
+	.align 4
+
+GoldBank05:
+.incbin "baseromgs.n64",0x23B8B98,0x2C0E
+GoldBank05End:
+.incbin "baseromgs.n64",0x23bb7a6,0x46
+	.align 4
+
+CrystalBank06:
+.incbin "baseromgs.n64",0x23BB7EC,0x28C8
+CrystalBank06End:
+	.align 4
+
+GoldBank06:
+.incbin "baseromgs.n64",0x23BE0B4,0x1F2F
+GoldBank06End:
+	.align 4
+
+CrystalBank07:
+.incbin "baseromgs.n64",0x23BFFE4,0x2F6D
+CrystalBank07End:
+	.align 4
+
+GoldBank07:
+.incbin "baseromgs.n64",0x23C2F54,0x2CAB
+GoldBank07End:
+	.align 4
+
+YellowBank07:
+.incbin "baseromgs.n64",0x23C5C00,0x1DB8
+YellowBank07End:
+	.align 4
+
+GoldBank08:
+.incbin "baseromgs.n64",0x23C79B8,0x2AF3
+GoldBank08End:
+	.align 4
+
+BlueBank08:
+.incbin "baseromgs.n64",0x23CA4AC,0x2E63
+BlueBank08End:
+	.align 4
+
+CrystalBank09:
+.incbin "baseromgs.n64",0x23CD310,0x26C0
+CrystalBank09End:
+	.align 4
+
+GoldBank09:
+.incbin "baseromgs.n64",0x23CF9D0,0x2803
+GoldBank09End:
+.incbin "baseromgs.n64",0x23d21d3,0x11
+	.align 4
+
+CrystalBank0a:
+.incbin "baseromgs.n64",0x23D21E4,0x2BA2
+CrystalBank0aEnd:
+	.align 4
+
+GoldBank0a:
+.incbin "baseromgs.n64",0x23D4D88,0x2ADC
+GoldBank0aEnd:
+.incbin "baseromgs.n64",0x23d7864,0x350
+	.align 4
+
+CrystalBank0b:
+.incbin "baseromgs.n64",0x23D7BB4,0x1A67
+CrystalBank0bEnd:
+	.align 4
+
+GoldBank0b:
+.incbin "baseromgs.n64",0x23D961C,0x09C2
+GoldBank0bEnd:
+.incbin "baseromgs.n64",0x23d9fde,0x16
+	.align 4
+
+CrystalBank0c:
+.incbin "baseromgs.n64",0x23D9FF4,0x24BB
+CrystalBank0cEnd:
+	.align 4
+
+CrystalBank0e:
+.incbin "baseromgs.n64",0x23DC4B0,0x2A12
+CrystalBank0eEnd:
+	.align 4
+
+GoldBank0e:
+.incbin "baseromgs.n64",0x23DEEC4,0x2709
+GoldBank0eEnd:
+	.align 4
+
+CrystalBank11:
+.incbin "baseromgs.n64",0x23E15D0,0x09A4
+CrystalBank11End:
+.incbin "baseromgs.n64",0x23e1f74,0xCA4
+	.align 4
+
+CrystalBank12:
+.incbin "baseromgs.n64",0x23E2C18,0x221A
+CrystalBank12End:
+	.align 4
+
+CrystalBank13:
+.incbin "baseromgs.n64",0x23E4E34,0x26F2
+CrystalBank13End:
+	.align 4
+
+CrystalBank14:
+.incbin "baseromgs.n64",0x23E7528,0x2D77
+CrystalBank14End:
+	.align 4
+
+GoldBank14:
+.incbin "baseromgs.n64",0x23EA2A0,0x2B9E
+GoldBank14End:
+.incbin "baseromgs.n64",0x23ece3e,0x32
+	.align 4
+
+GoldBank15:
+.incbin "baseromgs.n64",0x23ECE70,0x4403
+GoldBank15End:
+	.align 4
+
+SilverBank15:
+.incbin "baseromgs.n64",0x23F1274,0x43FC
+SilverBank15End:
+	.align 4
+
+CrystalBank16:
+.incbin "baseromgs.n64",0x23F5670,0x24B3
+CrystalBank16End:
+	.align 4
+
+GoldBank16:
+.incbin "baseromgs.n64",0x23F7B24,0x43F5
+GoldBank16End:
+	.align 4
+
+SilverBank16:
+.incbin "baseromgs.n64",0x23FBF1C,0x43C3
+SilverBank16End:
+	.align 4
+
+CrystalBank17:
+.incbin "baseromgs.n64",0x24002E0,0x2113
+CrystalBank17End:
+	.align 4
+
+GoldBank17:
+.incbin "baseromgs.n64",0x24023F4,0x435E
+GoldBank17End:
+	.align 4
+
+SilverBank17:
+.incbin "baseromgs.n64",0x2406754,0x434C
+SilverBank17End:
+	.align 4
+
+YellowBank17:
+.incbin "baseromgs.n64",0x240AAA0,0x1913
+YellowBank17End:
+	.align 4
+
+RedBank17:
+.incbin "baseromgs.n64",0x240C3B4,0x18F6
+RedBank17End:
+	.align 4
+
+CrystalBank18:
+.incbin "baseromgs.n64",0x240DCAC,0x2108
+CrystalBank18End:
+	.align 4
+
+GoldBank18:
+.incbin "baseromgs.n64",0x240FDB4,0x427B
+GoldBank18End:
+	.align 4
+
+SilverBank18:
+.incbin "baseromgs.n64",0x2414030,0x42DE
+SilverBank18End:
+	.align 4
+
+YellowBank18:
+.incbin "baseromgs.n64",0x2418310,0x1B8F
+YellowBank18End:
+	.align 4
+
+RedBank18:
+.incbin "baseromgs.n64",0x2419EA0,0x1A9F
+RedBank18End:
+	.align 4
+
+CrystalBank19:
+.incbin "baseromgs.n64",0x241B940,0x1C2F
+CrystalBank19End:
+	.align 4
+
+GoldBank19:
+.incbin "baseromgs.n64",0x241D570,0x4289
+GoldBank19End:
+.incbin "baseromgs.n64",0x24217f9,0x3
+	.align 4
+
+SilverBank19:
+.incbin "baseromgs.n64",0x24217FC,0x42DC
+SilverBank19End:
+	.align 4
+
+CrystalBank1a:
+.incbin "baseromgs.n64",0x2425AD8,0x22FA
+CrystalBank1aEnd:
+	.align 4
+
+GoldBank1a:
+.incbin "baseromgs.n64",0x2427DD4,0x4309
+GoldBank1aEnd:
+	.align 4
+
+SilverBank1a:
+.incbin "baseromgs.n64",0x242C0E0,0x42D0
+SilverBank1aEnd:
+	.align 4
+
+CrystalBank1b:
+.incbin "baseromgs.n64",0x24303B0,0x2501
+CrystalBank1bEnd:
+	.align 4
+
+GoldBank1b:
+.incbin "baseromgs.n64",0x24328B4,0x42D2
+GoldBank1bEnd:
+	.align 4
+
+SilverBank1b:
+.incbin "baseromgs.n64",0x2436B88,0x42FD
+SilverBank1bEnd:
+	.align 4
+
+GoldBank1c:
+.incbin "baseromgs.n64",0x243AE88,0x42AC
+GoldBank1cEnd:
+	.align 4
+
+SilverBank1c:
+.incbin "baseromgs.n64",0x243F134,0x42CE
+SilverBank1cEnd:
+	.align 4
+
+CrystalBank1d:
+.incbin "baseromgs.n64",0x2443404,0x2298
+CrystalBank1dEnd:
+	.align 4
+
+GoldBank1d:
+.incbin "baseromgs.n64",0x244569C,0x41C8
+GoldBank1dEnd:
+	.align 4
+
+SilverBank1d:
+.incbin "baseromgs.n64",0x2449864,0x41A9
+SilverBank1dEnd:
+	.align 4
+
+CrystalBank1e:
+.incbin "baseromgs.n64",0x244DA10,0x25B3
+CrystalBank1eEnd:
+	.align 4
+
+GoldBank1e:
+.incbin "baseromgs.n64",0x244FFC4,0x41A7
+GoldBank1eEnd:
+	.align 4
+
+SilverBank1e:
+.incbin "baseromgs.n64",0x245416C,0x4192
+SilverBank1eEnd:
+	.align 4
+
+CrystalBank1f:
+.incbin "baseromgs.n64",0x2458300,0x2696
+CrystalBank1fEnd:
+	.align 4
+
+GoldBank1f:
+.incbin "baseromgs.n64",0x245A998,0x4454
+GoldBank1fEnd:
+	.align 4
+
+SilverBank1f:
+.incbin "baseromgs.n64",0x245EDEC,0x444C
+SilverBank1fEnd:
+	.align 4
+
+CrystalBank20:
+.incbin "baseromgs.n64",0x2463238,0x190C
+CrystalBank20End:
+	.align 4
+
+GoldBank20:
+.incbin "baseromgs.n64",0x2464B44,0x43AC
+GoldBank20End:
+	.align 4
+
+SilverBank20:
+.incbin "baseromgs.n64",0x2468EF0,0x43D4
+SilverBank20End:
+	.align 4
+
+GoldBank21:
+.incbin "baseromgs.n64",0x246D2C4,0x31A1
+GoldBank21End:
+.incbin "baseromgs.n64",0x2470465,0x3B
+	.align 4
+
+CrystalBank22:
+.incbin "baseromgs.n64",0x24704A0,0x28C2
+CrystalBank22End:
+	.align 4
+
+GoldBank23:
+.incbin "baseromgs.n64",0x2472D64,0x2F74
+GoldBank23End:
+	.align 4
+
+SilverBank23:
+.incbin "baseromgs.n64",0x2475CD8,0x2F6F
+SilverBank23End:
+	.align 4
+
+GoldBank24:
+.incbin "baseromgs.n64",0x2478C48,0x310F
+GoldBank24End:
+.incbin "baseromgs.n64",0x247bd57,0x5
+	.align 4
+
+RedBank24:
+.incbin "baseromgs.n64",0x247BD5C,0x18FE
+RedBank24End:
+	.align 4
+
+GoldBank25:
+.incbin "baseromgs.n64",0x247D65C,0x2F44
+GoldBank25End:
+.incbin "baseromgs.n64",0x24805a0,0x4C
+	.align 4
+
+RedBank25:
+.incbin "baseromgs.n64",0x24805EC,0x1A51
+RedBank25End:
+	.align 4
+
+CrystalBank26:
+.incbin "baseromgs.n64",0x2482040,0x274C
+CrystalBank26End:
+	.align 4
+
+GoldBank26:
+.incbin "baseromgs.n64",0x248478C,0x0839
+GoldBank26End:
+.incbin "baseromgs.n64",0x2484fc5,0x50F
+	.align 4
+
+CrystalBank27:
+.incbin "baseromgs.n64",0x24854D4,0x24C5
+CrystalBank27End:
+	.align 4
+
+CrystalBank28:
+.incbin "baseromgs.n64",0x248799C,0x1619
+CrystalBank28End:
+	.align 4
+
+CrystalBank29:
+.incbin "baseromgs.n64",0x2488FB8,0x1312
+CrystalBank29End:
+	.align 4
+
+CrystalBank2a:
+.incbin "baseromgs.n64",0x248A2CC,0x250C
+CrystalBank2aEnd:
+.incbin "baseromgs.n64",0x248c7d8,0xC8
+	.align 4
+
+RedBank2a:
+.incbin "baseromgs.n64",0x248C8A0,0x0302
+RedBank2aEnd:
+	.align 4
+
+CrystalBank2b:
+.incbin "baseromgs.n64",0x248CBA4,0x263F
+CrystalBank2bEnd:
+.incbin "baseromgs.n64",0x248f1e3,0x6E5
+	.align 4
+
+CrystalBank2c:
+.incbin "baseromgs.n64",0x248F8C8,0x1107
+CrystalBank2cEnd:
+	.align 4
+
+RedBank2c:
+.incbin "baseromgs.n64",0x24909D0,0x0561
+RedBank2cEnd:
+	.align 4
+
+CrystalBank2e:
+.incbin "baseromgs.n64",0x2490F34,0x18FB
+CrystalBank2eEnd:
+	.align 4
+
+GoldBank2e:
+.incbin "baseromgs.n64",0x2492830,0x286E
+GoldBank2eEnd:
+	.align 4
+
+SilverBank2e:
+.incbin "baseromgs.n64",0x24950A0,0x27E0
+SilverBank2eEnd:
+	.align 4
+
+CrystalBank2f:
+.incbin "baseromgs.n64",0x2497880,0x1ED1
+CrystalBank2fEnd:
+	.align 4
+
+CrystalBank30:
+.incbin "baseromgs.n64",0x2499754,0x2456
+CrystalBank30End:
+	.align 4
+
+YellowBank30:
+.incbin "baseromgs.n64",0x249BBAC,0x0D9F
+YellowBank30End:
+	.align 4
+
+CrystalBank31:
+.incbin "baseromgs.n64",0x249C94C,0x27F1
+CrystalBank31End:
+.incbin "baseromgs.n64",0x249f13d,0x55F
+	.align 4
+
+CrystalBank32:
+.incbin "baseromgs.n64",0x249F69C,0x295A
+CrystalBank32End:
+	.align 4
+
+GoldBank32:
+.incbin "baseromgs.n64",0x24A1FF8,0x2926
+GoldBank32End:
+	.align 4
+
+YellowBank32:
+.incbin "baseromgs.n64",0x24A4920,0x1366
+YellowBank32End:
+	.align 4
+
+CrystalBank33:
+.incbin "baseromgs.n64",0x24A5C88,0x2C23
+CrystalBank33End:
+	.align 4
+
+GoldBank33:
+.incbin "baseromgs.n64",0x24A88AC,0x2BBF
+GoldBank33End:
+.incbin "baseromgs.n64",0x24ab46b,0x5
+	.align 4
+
+CrystalBank34:
+.incbin "baseromgs.n64",0x24AB470,0x2A54
+CrystalBank34End:
+	.align 4
+
+YellowBank34:
+.incbin "baseromgs.n64",0x24ADEC4,0x118B
+YellowBank34End:
+	.align 4
+
+CrystalBank35:
+.incbin "baseromgs.n64",0x24AF050,0x166D
+CrystalBank35End:
+	.align 4
+
+CrystalBank36:
+.incbin "baseromgs.n64",0x24B06C0,0x11FB
+CrystalBank36End:
+	.align 4
+
+GoldBank36:
+.incbin "baseromgs.n64",0x24B18BC,0x0364
+GoldBank36End:
+	.align 4
+
+CrystalBank37:
+.incbin "baseromgs.n64",0x24B1C20,0x29A1
+CrystalBank37End:
+	.align 4
+
+CrystalBank38:
+.incbin "baseromgs.n64",0x24B45C4,0x2C03
+CrystalBank38End:
+	.align 4
+
+CrystalBank39:
+.incbin "baseromgs.n64",0x24B71C8,0x31D1
+CrystalBank39End:
+	.align 4
+
+CrystalBank3a:
+.incbin "baseromgs.n64",0x24BA39C,0x3243
+CrystalBank3aEnd:
+	.align 4
+
+CrystalBank3b:
+.incbin "baseromgs.n64",0x24BD5E0,0x3022
+CrystalBank3bEnd:
+	.align 4
+
+CrystalBank3d:
+.incbin "baseromgs.n64",0x24C0604,0x324F
+CrystalBank3dEnd:
+	.align 4
+
+CrystalBank3e:
+.incbin "baseromgs.n64",0x24C3854,0x212E
+CrystalBank3eEnd:
+	.align 4
+
+GoldBank3e:
+.incbin "baseromgs.n64",0x24C5984,0x21CD
+GoldBank3eEnd:
+	.align 4
+
+CrystalBank3f:
+.incbin "baseromgs.n64",0x24C7B54,0x0D68
+CrystalBank3fEnd:
+	.align 4
+
+GoldBank3f:
+.incbin "baseromgs.n64",0x24C88BC,0x1699
+GoldBank3fEnd:
+.incbin "baseromgs.n64",0x24c9f55,0xB
+	.align 4
+
+GoldBank40:
+.incbin "baseromgs.n64",0x24C9F60,0x15C8
+GoldBank40End:
+.incbin "baseromgs.n64",0x24cb528,0xC
+	.align 4
+
+CrystalBank41:
+.incbin "baseromgs.n64",0x24CB534,0x1E3D
+CrystalBank41End:
+	.align 4
+
+GoldBank41:
+.incbin "baseromgs.n64",0x24CD374,0x1339
+GoldBank41End:
+	.align 4
+
+CrystalBank42:
+.incbin "baseromgs.n64",0x24CE6B0,0x2184
+CrystalBank42End:
+	.align 4
+
+GoldBank42:
+.incbin "baseromgs.n64",0x24D0834,0x1599
+GoldBank42End:
+	.align 4
+
+CrystalBank43:
+.incbin "baseromgs.n64",0x24D1DD0,0x1CEA
+CrystalBank43End:
+	.align 4
+
+GoldBank43:
+.incbin "baseromgs.n64",0x24D3ABC,0x216E
+GoldBank43End:
+	.align 4
+
+CrystalBank44:
+.incbin "baseromgs.n64",0x24D5C2C,0x2E25
+CrystalBank44End:
+	.align 4
+
+GoldBank44:
+.incbin "baseromgs.n64",0x24D8A54,0x220A
+GoldBank44End:
+	.align 4
+
+GoldBank45:
+.incbin "baseromgs.n64",0x24DAC60,0x2047
+GoldBank45End:
+	.align 4
+
+CrystalBank46:
+.incbin "baseromgs.n64",0x24DCCA8,0x2822
+CrystalBank46End:
+	.align 4
+
+GoldBank46:
+.incbin "baseromgs.n64",0x24DF4CC,0x19ED
+GoldBank46End:
+	.align 4
+
+CrystalBank47:
+.incbin "baseromgs.n64",0x24E0EBC,0x27AF
+CrystalBank47End:
+	.align 4
+
+GoldBank47:
+.incbin "baseromgs.n64",0x24E366C,0x0979
+GoldBank47End:
+	.align 4
+
+CrystalBank48:
+.incbin "baseromgs.n64",0x24E3FE8,0x4592
+CrystalBank48End:
+	.align 4
+
+GoldBank48:
+.incbin "baseromgs.n64",0x24E857C,0x1AE1
+GoldBank48End:
+	.align 4
+
+CrystalBank49:
+.incbin "baseromgs.n64",0x24EA060,0x4528
+CrystalBank49End:
+	.align 4
+
+GoldBank49:
+.incbin "baseromgs.n64",0x24EE588,0x1701
+GoldBank49End:
+	.align 4
+
+CrystalBank4a:
+.incbin "baseromgs.n64",0x24EFC8C,0x44E9
+CrystalBank4aEnd:
+	.align 4
+
+GoldBank4a:
+.incbin "baseromgs.n64",0x24F4178,0x16D3
+GoldBank4aEnd:
+	.align 4
+
+CrystalBank4b:
+.incbin "baseromgs.n64",0x24F584C,0x44E4
+CrystalBank4bEnd:
+	.align 4
+
+CrystalBank4c:
+.incbin "baseromgs.n64",0x24F9D30,0x44C7
+CrystalBank4cEnd:
+	.align 4
+
+GoldBank4c:
+.incbin "baseromgs.n64",0x24FE1F8,0x1660
+GoldBank4cEnd:
+	.align 4
+
+CrystalBank4d:
+.incbin "baseromgs.n64",0x24FF858,0x448C
+CrystalBank4dEnd:
+	.align 4
+
+GoldBank4d:
+.incbin "baseromgs.n64",0x2503CE4,0x1676
+GoldBank4dEnd:
+	.align 4
+
+CrystalBank4e:
+.incbin "baseromgs.n64",0x250535C,0x447B
+CrystalBank4eEnd:
+	.align 4
+
+GoldBank4e:
+.incbin "baseromgs.n64",0x25097D8,0x18E0
+GoldBank4eEnd:
+	.align 4
+
+CrystalBank4f:
+.incbin "baseromgs.n64",0x250B0B8,0x4439
+CrystalBank4fEnd:
+	.align 4
+
+GoldBank4f:
+.incbin "baseromgs.n64",0x250F4F4,0x1A86
+GoldBank4fEnd:
+	.align 4
+
+CrystalBank50:
+.incbin "baseromgs.n64",0x2510F7C,0x43F5
+CrystalBank50End:
+	.align 4
+
+GoldBank50:
+.incbin "baseromgs.n64",0x2515374,0x122B
+GoldBank50End:
+	.align 4
+
+CrystalBank51:
+.incbin "baseromgs.n64",0x25165A0,0x4448
+CrystalBank51End:
+	.align 4
+
+GoldBank51:
+.incbin "baseromgs.n64",0x251A9E8,0x15CD
+GoldBank51End:
+	.align 4
+
+CrystalBank52:
+.incbin "baseromgs.n64",0x251BFB8,0x43C2
+CrystalBank52End:
+	.align 4
+
+GoldBank52:
+.incbin "baseromgs.n64",0x252037C,0x1446
+GoldBank52End:
+	.align 4
+
+CrystalBank53:
+.incbin "baseromgs.n64",0x25217C4,0x4339
+CrystalBank53End:
+	.align 4
+
+GoldBank53:
+.incbin "baseromgs.n64",0x2525B00,0x15B8
+GoldBank53End:
+	.align 4
+
+CrystalBank54:
+.incbin "baseromgs.n64",0x25270B8,0x4306
+CrystalBank54End:
+	.align 4
+
+GoldBank54:
+.incbin "baseromgs.n64",0x252B3C0,0x1326
+GoldBank54End:
+	.align 4
+
+CrystalBank55:
+.incbin "baseromgs.n64",0x252C6E8,0x42BE
+CrystalBank55End:
+	.align 4
+
+GoldBank55:
+.incbin "baseromgs.n64",0x25309A8,0x0FD9
+GoldBank55End:
+	.align 4
+
+CrystalBank56:
+.incbin "baseromgs.n64",0x2531984,0x429F
+CrystalBank56End:
+	.align 4
+
+CrystalBank57:
+.incbin "baseromgs.n64",0x2535C24,0x42D3
+CrystalBank57End:
+	.align 4
+
+CrystalBank58:
+.incbin "baseromgs.n64",0x2539EF8,0x4124
+CrystalBank58End:
+	.align 4
+
+CrystalBank59:
+.incbin "baseromgs.n64",0x253E01C,0x26D6
+CrystalBank59End:
+	.align 4
+
+GoldBank59:
+.incbin "baseromgs.n64",0x25406F4,0x167D
+GoldBank59End:
+	.align 4
+
+CrystalBank5a:
+.incbin "baseromgs.n64",0x2541D74,0x26D6
+CrystalBank5aEnd:
+	.align 4
+
+GoldBank5a:
+.incbin "baseromgs.n64",0x254444C,0x161E
+GoldBank5aEnd:
+	.align 4
+
+CrystalBank5b:
+.incbin "baseromgs.n64",0x2545A6C,0x0E8A
+CrystalBank5bEnd:
+	.align 4
+
+CrystalBank5c:
+.incbin "baseromgs.n64",0x25468F8,0x2565
+CrystalBank5cEnd:
+	.align 4
+
+GoldBank5c:
+.incbin "baseromgs.n64",0x2548E60,0x1021
+GoldBank5cEnd:
+	.align 4
+
+CrystalBank5d:
+.incbin "baseromgs.n64",0x2549E84,0x1D26
+CrystalBank5dEnd:
+	.align 4
+
+GoldBank5d:
+.incbin "baseromgs.n64",0x254BBAC,0x1570
+GoldBank5dEnd:
+	.align 4
+
+CrystalBank5e:
+.incbin "baseromgs.n64",0x254D11C,0x2215
+CrystalBank5eEnd:
+	.align 4
+
+CrystalBank5f:
+.incbin "baseromgs.n64",0x254F334,0x21FD
+CrystalBank5fEnd:
+	.align 4
+
+GoldBank5f:
+.incbin "baseromgs.n64",0x2551534,0x0DB8
+GoldBank5fEnd:
+	.align 4
+
+CrystalBank60:
+.incbin "baseromgs.n64",0x25522EC,0x206D
+CrystalBank60End:
+	.align 4
+
+GoldBank60:
+.incbin "baseromgs.n64",0x255435C,0x1A5C
+GoldBank60End:
+	.align 4
+
+CrystalBank61:
+.incbin "baseromgs.n64",0x2555DB8,0x1A4A
+CrystalBank61End:
+	.align 4
+
+GoldBank61:
+.incbin "baseromgs.n64",0x2557804,0x12BD
+GoldBank61End:
+	.align 4
+
+CrystalBank62:
+.incbin "baseromgs.n64",0x2558AC4,0x25C7
+CrystalBank62End:
+	.align 4
+
+GoldBank62:
+.incbin "baseromgs.n64",0x255B08C,0x0BD9
+GoldBank62End:
+	.align 4
+
+CrystalBank63:
+.incbin "baseromgs.n64",0x255BC68,0x24C8
+CrystalBank63End:
+	.align 4
+
+CrystalBank64:
+.incbin "baseromgs.n64",0x255E130,0x2537
+CrystalBank64End:
+	.align 4
+
+GoldBank64:
+.incbin "baseromgs.n64",0x2560668,0x140B
+GoldBank64End:
+	.align 4
+
+CrystalBank65:
+.incbin "baseromgs.n64",0x2561A74,0x25F8
+CrystalBank65End:
+	.align 4
+
+GoldBank65:
+.incbin "baseromgs.n64",0x256406C,0x124E
+GoldBank65End:
+	.align 4
+
+GoldBank66:
+.incbin "baseromgs.n64",0x25652BC,0x07B6
+GoldBank66End:
+	.align 4
+
+CrystalBank67:
+.incbin "baseromgs.n64",0x2565A74,0x2634
+CrystalBank67End:
+	.align 4
+
+CrystalBank68:
+.incbin "baseromgs.n64",0x25680A8,0x231A
+CrystalBank68End:
+	.align 4
+
+GoldBank68:
+.incbin "baseromgs.n64",0x256A3C4,0x124E
+GoldBank68End:
+	.align 4
+
+SilverBank68:
+.incbin "baseromgs.n64",0x256B614,0x1238
+SilverBank68End:
+	.align 4
+
+CrystalBank69:
+.incbin "baseromgs.n64",0x256C84C,0x2464
+CrystalBank69End:
+	.align 4
+
+GoldBank69:
+.incbin "baseromgs.n64",0x256ECB0,0x1336
+GoldBank69End:
+	.align 4
+
+SilverBank69:
+.incbin "baseromgs.n64",0x256FFE8,0x1341
+SilverBank69End:
+	.align 4
+
+GoldBank6a:
+.incbin "baseromgs.n64",0x257132C,0x1281
+GoldBank6aEnd:
+	.align 4
+
+SilverBank6a:
+.incbin "baseromgs.n64",0x25725B0,0x12E1
+SilverBank6aEnd:
+	.align 4
+
+CrystalBank6b:
+.incbin "baseromgs.n64",0x2573894,0x1D32
+CrystalBank6bEnd:
+	.align 4
+
+GoldBank6b:
+.incbin "baseromgs.n64",0x25755C8,0x11EF
+GoldBank6bEnd:
+	.align 4
+
+SilverBank6b:
+.incbin "baseromgs.n64",0x25767B8,0x118A
+SilverBank6bEnd:
+	.align 4
+
+CrystalBank6c:
+.incbin "baseromgs.n64",0x2577944,0x110D
+CrystalBank6cEnd:
+	.align 4
+
+CrystalBank6d:
+.incbin "baseromgs.n64",0x2578A54,0x158D
+CrystalBank6dEnd:
+	.align 4
+
+GoldBank6d:
+.incbin "baseromgs.n64",0x2579FE4,0x0E9B
+GoldBank6dEnd:
+	.align 4
+
+CrystalBank6e:
+.incbin "baseromgs.n64",0x257AE80,0x1221
+CrystalBank6eEnd:
+	.align 4
+
+GoldBank6e:
+.incbin "baseromgs.n64",0x257C0A4,0x0AE0
+GoldBank6eEnd:
+	.align 4
+
+CrystalBank6f:
+.incbin "baseromgs.n64",0x257CB84,0x137F
+CrystalBank6fEnd:
+	.align 4
+
+CrystalBank70:
+.incbin "baseromgs.n64",0x257DF04,0x12F8
+CrystalBank70End:
+	.align 4
+
+GoldBank70:
+.incbin "baseromgs.n64",0x257F1FC,0x119D
+GoldBank70End:
+.incbin "baseromgs.n64",0x2580399,0x1D7
+	.align 4
+
+CrystalBank71:
+.incbin "baseromgs.n64",0x2580570,0x1378
+CrystalBank71End:
+	.align 4
+
+CrystalBank72:
+.incbin "baseromgs.n64",0x25818E8,0x1BBF
+CrystalBank72End:
+	.align 4
+
+CrystalBank73:
+.incbin "baseromgs.n64",0x25834A8,0x122B
+CrystalBank73End:
+	.align 4
+
+CrystalBank74:
+.incbin "baseromgs.n64",0x25846D4,0x1178
+CrystalBank74End:
+	.align 4
+
+CrystalBank77:
+.incbin "baseromgs.n64",0x258584C,0x1E65
+CrystalBank77End:
+	.align 4
+
+CrystalBank78:
+.incbin "baseromgs.n64",0x25876B4,0x03F5
+CrystalBank78End:
+	.align 4
+
+CrystalBank7d:
+.incbin "baseromgs.n64",0x2587AAC,0x1518
+CrystalBank7dEnd:
+	.align 4
+
+CrystalBank7e:
+.incbin "baseromgs.n64",0x2588FC4,0x042E
+CrystalBank7eEnd:
+	.align 4
+
+	.align 16
+
+; empty space
+.incbin "baseromgs.n64",0x2589400,0x258d000-0x2589400
 
 ; XXX what is this table?
 .incbin "baseromgs.n64",0x258d000,0x266b000-0x258d000
