@@ -5,7 +5,10 @@
 .include "constants/move_constants.s"
 .include "constants/item_constants.s"
 .include "constants/decoration_constants.s"
-.incbin "baseromgs.n64",0,0x97f54
+
+.include "rom_header.s"
+
+.incbin "baseromgs.n64",0x40,0x97f14
 
 CarrierCartridgeString:
 	.ascii "PokeMonStadium3CarrierCartridge",0
