@@ -8,7 +8,10 @@
 
 .include "rom_header.s"
 
-.incbin "baseromgs.n64",0x40,0x97f14
+.incbin "baseromgs.n64",0x40,0x95CE0
+
+; XXX What are these monotonically increasing 16‐bit values?
+.incbin "baseromgs.n64",0x95D20,0x2234
 
 CarrierCartridgeString:
 	.ascii "PokeMonStadium3CarrierCartridge",0
