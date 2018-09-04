@@ -797,7 +797,287 @@ TypeMatchup:
 	.db -1
 	.align 4
 
-.incbin "baseromgs.n64",0x98bd8,0x98ef0-0x98bd8
+Unknown98bd8: ; XXX What is this?
+	.db 0
+	.db 1
+	.db 2
+	.db 3
+	.db 4
+	.db 5
+	.db 6
+	.db 7
+	.db 8
+	.db 9
+	.db 10
+	.db 11
+	.db 12
+	.db 13
+	.db 14
+	.db 15
+	.db 16
+	.db 17
+	.db 18
+
+	.align 8
+
+ItemAttributes:
+	.db HELD_NONE,             0, BALL  ; MASTER_BALL
+	.db HELD_NONE,             0, BALL  ; ULTRA_BALL
+	.db HELD_BRIGHTPOWDER,    20, ITEM  ; BRIGHTPOWDER
+	.db HELD_NONE,             0, BALL  ; GREAT_BALL
+	.db HELD_NONE,             0, BALL  ; POKE_BALL
+	.db HELD_NONE,             0, ITEM  ; TOWN_MAP
+	.db HELD_NONE,             0, KEY   ; BICYCLE
+	.db HELD_NONE,             0, ITEM  ; MOON_STONE
+	.db HELD_NONE,             0, ITEM  ; ANTIDOTE
+	.db HELD_NONE,             0, ITEM  ; BURN_HEAL
+	.db HELD_NONE,             0, ITEM  ; ICE_HEAL
+	.db HELD_NONE,             0, ITEM  ; AWAKENING
+	.db HELD_NONE,             0, ITEM  ; PARLYZ_HEAL
+	.db HELD_NONE,            -1, ITEM  ; FULL_RESTORE
+	.db HELD_NONE,            -1, ITEM  ; MAX_POTION
+	.db HELD_NONE,           200, ITEM  ; HYPER_POTION
+	.db HELD_NONE,            50, ITEM  ; SUPER_POTION
+	.db HELD_NONE,            20, ITEM  ; POTION
+	.db HELD_NONE,             0, ITEM  ; ESCAPE_ROPE
+	.db HELD_NONE,             0, ITEM  ; REPEL
+	.db HELD_NONE,            -1, ITEM  ; MAX_ELIXER
+	.db HELD_NONE,             0, ITEM  ; FIRE_STONE
+	.db HELD_NONE,             0, ITEM  ; THUNDERSTONE
+	.db HELD_NONE,             0, ITEM  ; WATER_STONE
+	.db HELD_NONE,             0, ITEM  ; ITEM_19
+	.db HELD_NONE,             0, ITEM  ; HP_UP
+	.db HELD_NONE,             0, ITEM  ; PROTEIN
+	.db HELD_NONE,             0, ITEM  ; IRON
+	.db HELD_NONE,             0, ITEM  ; CARBOS
+	.db HELD_NONE,             0, ITEM  ; LUCKY_PUNCH
+	.db HELD_NONE,             0, ITEM  ; CALCIUM
+	.db HELD_NONE,             0, ITEM  ; RARE_CANDY
+	.db HELD_NONE,             0, ITEM  ; X_ACCURACY
+	.db HELD_NONE,             0, ITEM  ; LEAF_STONE
+	.db HELD_METAL_POWDER,    10, ITEM  ; METAL_POWDER
+	.db HELD_NONE,             0, ITEM  ; NUGGET
+	.db HELD_NONE,             0, ITEM  ; POKE_DOLL
+	.db HELD_NONE,             0, ITEM  ; FULL_HEAL
+	.db HELD_NONE,             0, ITEM  ; REVIVE
+	.db HELD_NONE,             0, ITEM  ; MAX_REVIVE
+	.db HELD_NONE,             0, ITEM  ; GUARD_SPEC
+	.db HELD_NONE,             0, ITEM  ; SUPER_REPEL
+	.db HELD_NONE,             0, ITEM  ; MAX_REPEL
+	.db HELD_NONE,             0, ITEM  ; DIRE_HIT
+	.db HELD_NONE,             0, ITEM  ; ITEM_2D
+	.db HELD_NONE,            50, ITEM  ; FRESH_WATER
+	.db HELD_NONE,            60, ITEM  ; SODA_POP
+	.db HELD_NONE,            80, ITEM  ; LEMONADE
+	.db HELD_NONE,             0, ITEM  ; X_ATTACK
+	.db HELD_NONE,             0, ITEM  ; ITEM_32
+	.db HELD_NONE,             0, ITEM  ; X_DEFEND
+	.db HELD_NONE,             0, ITEM  ; X_SPEED
+	.db HELD_NONE,             0, ITEM  ; X_SPECIAL
+	.db HELD_NONE,             0, KEY   ; COIN_CASE
+	.db HELD_NONE,             0, KEY   ; ITEMFINDER
+	.db HELD_NONE,             0, ITEM  ; POKE_FLUTE
+	.db HELD_NONE,             0, ITEM  ; EXP_SHARE
+	.db HELD_NONE,             0, KEY   ; OLD_ROD
+	.db HELD_NONE,             0, KEY   ; GOOD_ROD
+	.db HELD_NONE,             0, ITEM  ; SILVER_LEAF
+	.db HELD_NONE,             0, KEY   ; SUPER_ROD
+	.db HELD_NONE,             0, ITEM  ; PP_UP
+	.db HELD_NONE,            10, ITEM  ; ETHER
+	.db HELD_NONE,            -1, ITEM  ; MAX_ETHER
+	.db HELD_NONE,            10, ITEM  ; ELIXER
+	.db HELD_NONE,             0, KEY   ; RED_SCALE
+	.db HELD_NONE,             0, KEY   ; SECRETPOTION
+	.db HELD_NONE,             0, KEY   ; S_S_TICKET
+	.db HELD_NONE,             0, KEY   ; MYSTERY_EGG
+	.db HELD_NONE,             0, KEY   ; CLEAR_BELL
+	.db HELD_NONE,             0, KEY   ; SILVER_WING
+	.db HELD_NONE,           100, ITEM  ; MOOMOO_MILK
+	.db HELD_QUICK_CLAW,      60, ITEM  ; QUICK_CLAW
+	.db HELD_HEAL_POISON,      0, ITEM  ; PSNCUREBERRY
+	.db HELD_NONE,             0, ITEM  ; GOLD_LEAF
+	.db HELD_GROUND_BOOST,    10, ITEM  ; SOFT_SAND
+	.db HELD_FLYING_BOOST,    10, ITEM  ; SHARP_BEAK
+	.db HELD_HEAL_PARALYZE,    0, ITEM  ; PRZCUREBERRY
+	.db HELD_HEAL_FREEZE,      0, ITEM  ; BURNT_BERRY
+	.db HELD_HEAL_BURN,        0, ITEM  ; ICE_BERRY
+	.db HELD_POISON_BOOST,    10, ITEM  ; POISON_BARB
+	.db HELD_FLINCH,          30, ITEM  ; KINGS_ROCK
+	.db HELD_HEAL_CONFUSION,   0, ITEM  ; BITTER_BERRY
+	.db HELD_HEAL_SLEEP,       0, ITEM  ; MINT_BERRY
+	.db HELD_NONE,             0, ITEM  ; RED_APRICORN
+	.db HELD_NONE,             0, ITEM  ; TINYMUSHROOM
+	.db HELD_NONE,             0, ITEM  ; BIG_MUSHROOM
+	.db HELD_BUG_BOOST,       10, ITEM  ; SILVERPOWDER
+	.db HELD_NONE,             0, ITEM  ; BLU_APRICORN
+	.db HELD_NONE,             0, ITEM  ; ITEM_5A
+	.db HELD_AMULET_COIN,     10, ITEM  ; AMULET_COIN
+	.db HELD_NONE,             0, ITEM  ; YLW_APRICORN
+	.db HELD_NONE,             0, ITEM  ; GRN_APRICORN
+	.db HELD_CLEANSE_TAG,      0, ITEM  ; CLEANSE_TAG
+	.db HELD_WATER_BOOST,     10, ITEM  ; MYSTIC_WATER
+	.db HELD_PSYCHIC_BOOST,   10, ITEM  ; TWISTEDSPOON
+	.db HELD_NONE,             0, ITEM  ; WHT_APRICORN
+	.db HELD_FIGHTING_BOOST,  10, ITEM  ; BLACKBELT
+	.db HELD_NONE,             0, ITEM  ; BLK_APRICORN
+	.db HELD_NONE,             0, ITEM  ; ITEM_64
+	.db HELD_NONE,             0, ITEM  ; PNK_APRICORN
+	.db HELD_DARK_BOOST,      10, ITEM  ; BLACKGLASSES
+	.db HELD_NONE,             0, ITEM  ; SLOWPOKETAIL
+	.db HELD_NORMAL_BOOST,    10, ITEM  ; PINK_BOW
+	.db HELD_NONE,             0, ITEM  ; STICK
+	.db HELD_ESCAPE,           0, ITEM  ; SMOKE_BALL
+	.db HELD_ICE_BOOST,       10, ITEM  ; NEVERMELTICE
+	.db HELD_ELECTRIC_BOOST,  10, ITEM  ; MAGNET
+	.db HELD_HEAL_STATUS,      0, ITEM  ; MIRACLEBERRY
+	.db HELD_NONE,             0, ITEM  ; PEARL
+	.db HELD_NONE,             0, ITEM  ; BIG_PEARL
+	.db HELD_NONE,             0, ITEM  ; EVERSTONE
+	.db HELD_GHOST_BOOST,     10, ITEM  ; SPELL_TAG
+	.db HELD_NONE,            20, ITEM  ; RAGECANDYBAR
+	.db HELD_NONE,             0, KEY   ; GS_BALL
+	.db HELD_NONE,             0, KEY   ; BLUE_CARD
+	.db HELD_GRASS_BOOST,     10, ITEM  ; MIRACLE_SEED
+	.db HELD_NONE,             0, ITEM  ; THICK_CLUB
+	.db HELD_FOCUS_BAND,      30, ITEM  ; FOCUS_BAND
+	.db HELD_NONE,             0, ITEM  ; ITEM_78
+	.db HELD_NONE,             0, ITEM  ; ENERGYPOWDER
+	.db HELD_NONE,             0, ITEM  ; ENERGY_ROOT
+	.db HELD_NONE,             0, ITEM  ; HEAL_POWDER
+	.db HELD_NONE,             0, ITEM  ; REVIVAL_HERB
+	.db HELD_ROCK_BOOST,      10, ITEM  ; HARD_STONE
+	.db HELD_NONE,             0, ITEM  ; LUCKY_EGG
+	.db HELD_NONE,             0, KEY   ; CARD_KEY
+	.db HELD_NONE,             0, KEY   ; MACHINE_PART
+	.db HELD_NONE,             0, KEY   ; EGG_TICKET
+	.db HELD_NONE,             0, KEY   ; LOST_ITEM
+	.db HELD_NONE,             0, ITEM  ; STARDUST
+	.db HELD_NONE,             0, ITEM  ; STAR_PIECE
+	.db HELD_NONE,             0, KEY   ; BASEMENT_KEY
+	.db HELD_NONE,             0, KEY   ; PASS
+	.db HELD_NONE,             0, ITEM  ; ITEM_87
+	.db HELD_NONE,             0, ITEM  ; ITEM_88
+	.db HELD_NONE,             0, ITEM  ; ITEM_89
+	.db HELD_FIRE_BOOST,      10, ITEM  ; CHARCOAL
+	.db HELD_BERRY,           20, ITEM  ; BERRY_JUICE
+	.db HELD_CRITICAL_UP,      0, ITEM  ; SCOPE_LENS
+	.db HELD_NONE,             0, ITEM  ; ITEM_8D
+	.db HELD_NONE,             0, ITEM  ; ITEM_8E
+	.db HELD_STEEL_BOOST,     10, ITEM  ; METAL_COAT
+	.db HELD_DRAGON_BOOST,    10, ITEM  ; DRAGON_FANG
+	.db HELD_NONE,             0, ITEM  ; ITEM_91
+	.db HELD_LEFTOVERS,       10, ITEM  ; LEFTOVERS
+	.db HELD_NONE,             0, ITEM  ; ITEM_93
+	.db HELD_NONE,             0, ITEM  ; ITEM_94
+	.db HELD_NONE,             0, ITEM  ; ITEM_95
+	.db HELD_RESTORE_PP,      -1, ITEM  ; MYSTERYBERRY
+	.db HELD_DRAGON_BOOST,    10, ITEM  ; DRAGON_SCALE
+	.db HELD_BERSERK_GENE,     0, ITEM  ; BERSERK_GENE
+	.db HELD_NONE,             0, ITEM  ; ITEM_99
+	.db HELD_NONE,             0, ITEM  ; ITEM_9A
+	.db HELD_NONE,             0, ITEM  ; ITEM_9B
+	.db HELD_NONE,             0, ITEM  ; SACRED_ASH
+	.db HELD_NONE,             0, BALL  ; HEAVY_BALL
+	.db HELD_NONE,             0, ITEM  ; FLOWER_MAIL
+	.db HELD_NONE,             0, BALL  ; LEVEL_BALL
+	.db HELD_NONE,             0, BALL  ; LURE_BALL
+	.db HELD_NONE,             0, BALL  ; FAST_BALL
+	.db HELD_NONE,             0, ITEM  ; ITEM_A2
+	.db HELD_NONE,             0, ITEM  ; LIGHT_BALL
+	.db HELD_NONE,             0, BALL  ; FRIEND_BALL
+	.db HELD_NONE,             0, BALL  ; MOON_BALL
+	.db HELD_NONE,             0, BALL  ; LOVE_BALL
+	.db HELD_NONE,             0, ITEM  ; NORMAL_BOX
+	.db HELD_NONE,             0, ITEM  ; GORGEOUS_BOX
+	.db HELD_NONE,             0, ITEM  ; SUN_STONE
+	.db HELD_NORMAL_BOOST,    10, ITEM  ; POLKADOT_BOW
+	.db HELD_NONE,             0, ITEM  ; ITEM_AB
+	.db HELD_NONE,             0, ITEM  ; UP_GRADE
+	.db HELD_BERRY,           10, ITEM  ; BERRY
+	.db HELD_BERRY,           30, ITEM  ; GOLD_BERRY
+	.db HELD_NONE,             0, KEY   ; SQUIRTBOTTLE
+	.db HELD_NONE,             0, ITEM  ; ITEM_B0
+	.db HELD_NONE,             0, BALL  ; PARK_BALL
+	.db HELD_NONE,             0, KEY   ; RAINBOW_WING
+	.db HELD_NONE,             0, ITEM  ; ITEM_B3
+	.db HELD_NONE,             0, ITEM  ; BRICK_PIECE
+	.db HELD_NONE,             0, ITEM  ; SURF_MAIL
+	.db HELD_NONE,             0, ITEM  ; LITEBLUEMAIL
+	.db HELD_NONE,             0, ITEM  ; PORTRAITMAIL
+	.db HELD_NONE,             0, ITEM  ; LOVELY_MAIL
+	.db HELD_NONE,             0, ITEM  ; EON_MAIL
+	.db HELD_NONE,             0, ITEM  ; MORPH_MAIL
+	.db HELD_NONE,             0, ITEM  ; BLUESKY_MAIL
+	.db HELD_NONE,             0, ITEM  ; MUSIC_MAIL
+	.db HELD_NONE,             0, ITEM  ; MIRAGE_MAIL
+	.db HELD_NONE,             0, ITEM  ; ITEM_BE
+	.db HELD_NONE,             0, TM_HM ; TM01
+	.db HELD_NONE,             0, TM_HM ; TM02
+	.db HELD_NONE,             0, TM_HM ; TM03
+	.db HELD_NONE,             0, TM_HM ; TM04
+	.db HELD_NONE,             0, ITEM  ; ITEM_C3
+	.db HELD_NONE,             0, TM_HM ; TM05
+	.db HELD_NONE,             0, TM_HM ; TM06
+	.db HELD_NONE,             0, TM_HM ; TM07
+	.db HELD_NONE,             0, TM_HM ; TM08
+	.db HELD_NONE,             0, TM_HM ; TM09
+	.db HELD_NONE,             0, TM_HM ; TM10
+	.db HELD_NONE,             0, TM_HM ; TM11
+	.db HELD_NONE,             0, TM_HM ; TM12
+	.db HELD_NONE,             0, TM_HM ; TM13
+	.db HELD_NONE,             0, TM_HM ; TM14
+	.db HELD_NONE,             0, TM_HM ; TM15
+	.db HELD_NONE,             0, TM_HM ; TM16
+	.db HELD_NONE,             0, TM_HM ; TM17
+	.db HELD_NONE,             0, TM_HM ; TM18
+	.db HELD_NONE,             0, TM_HM ; TM19
+	.db HELD_NONE,             0, TM_HM ; TM20
+	.db HELD_NONE,             0, TM_HM ; TM21
+	.db HELD_NONE,             0, TM_HM ; TM22
+	.db HELD_NONE,             0, TM_HM ; TM23
+	.db HELD_NONE,             0, TM_HM ; TM24
+	.db HELD_NONE,             0, TM_HM ; TM25
+	.db HELD_NONE,             0, TM_HM ; TM26
+	.db HELD_NONE,             0, TM_HM ; TM27
+	.db HELD_NONE,             0, TM_HM ; TM28
+	.db HELD_NONE,             0, ITEM  ; ITEM_DC
+	.db HELD_NONE,             0, TM_HM ; TM29
+	.db HELD_NONE,             0, TM_HM ; TM30
+	.db HELD_NONE,             0, TM_HM ; TM31
+	.db HELD_NONE,             0, TM_HM ; TM32
+	.db HELD_NONE,             0, TM_HM ; TM33
+	.db HELD_NONE,             0, TM_HM ; TM34
+	.db HELD_NONE,             0, TM_HM ; TM35
+	.db HELD_NONE,             0, TM_HM ; TM36
+	.db HELD_NONE,             0, TM_HM ; TM37
+	.db HELD_NONE,             0, TM_HM ; TM38
+	.db HELD_NONE,             0, TM_HM ; TM39
+	.db HELD_NONE,             0, TM_HM ; TM40
+	.db HELD_NONE,             0, TM_HM ; TM41
+	.db HELD_NONE,             0, TM_HM ; TM42
+	.db HELD_NONE,             0, TM_HM ; TM43
+	.db HELD_NONE,             0, TM_HM ; TM44
+	.db HELD_NONE,             0, TM_HM ; TM45
+	.db HELD_NONE,             0, TM_HM ; TM46
+	.db HELD_NONE,             0, TM_HM ; TM47
+	.db HELD_NONE,             0, TM_HM ; TM48
+	.db HELD_NONE,             0, TM_HM ; TM49
+	.db HELD_NONE,             0, TM_HM ; TM50
+	.db HELD_NONE,             0, TM_HM ; HM01
+	.db HELD_NONE,             0, TM_HM ; HM02
+	.db HELD_NONE,             0, TM_HM ; HM03
+	.db HELD_NONE,             0, TM_HM ; HM04
+	.db HELD_NONE,             0, TM_HM ; HM05
+	.db HELD_NONE,             0, TM_HM ; HM06
+	.db HELD_NONE,             0, TM_HM ; HM07
+	.db HELD_NONE,             0, ITEM  ; 0xFA
+	.db HELD_NONE,             0, ITEM  ; 0xFB
+	.db HELD_NONE,             0, ITEM  ; 0xFC
+	.db HELD_NONE,             0, ITEM  ; 0xFD
+	.db HELD_NONE,             0, ITEM  ; 0xFE
+	.db HELD_NONE,             0, ITEM  ; 0xFF
+
+	.align 4
 
 TypeBoostItems:
 	.db HELD_NORMAL_BOOST,   NORMAL   ; Pink/Polkadot Bow
