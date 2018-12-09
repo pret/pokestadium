@@ -12,7 +12,74 @@
 	lw t8,0x4(a0)
 	add a3,a3,a0
 
-.incbin "baserom.n64",0xC400,0x73C30-0xC400
+.incbin "baserom.n64",0xC400,0x43478-0xC400
+
+Normal43478:
+	jr ra
+	or $v0,$r0,$r0
+
+Fire43478:
+	jr ra
+	addiu $v0,$r0,1
+
+Water43478:
+	jr ra
+	addiu $v0,$r0,2
+
+Electric43478:
+	jr ra
+	addiu $v0,$r0,3
+
+Grass43478:
+	jr ra
+	addiu $v0,$r0,4
+
+Ice43478:
+	jr ra
+	addiu $v0,$r0,5
+
+Fighting43478:
+	jr ra
+	addiu $v0,$r0,6
+
+Poison43478:
+	jr ra
+	addiu $v0,$r0,7
+
+Ground43478:
+	jr ra
+	addiu $v0,$r0,8
+
+Flying43478:
+	jr ra
+	addiu $v0,$r0,9
+
+Psychic43478:
+	jr ra
+	addiu $v0,$r0,10
+
+Bug43478:
+	jr ra
+	addiu $v0,$r0,11
+
+Rock43478:
+	jr ra
+	addiu $v0,$r0,12
+
+Ghost43478:
+	jr ra
+	addiu $v0,$r0,13
+
+Dragon43478:
+	jr ra
+	addiu $v0,$r0,14
+
+Invalid43478:
+	or $v0,$r0,$r0
+	jr ra
+	nop
+
+.incbin "baserom.n64",0x434FC,0x73C30-0x434FC
 
 CharMap:
 	.db 0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20 ;
@@ -1578,7 +1645,37 @@ MoveIndices2:
 
 	.align 16
 
-.incbin "baserom.n64",0x7D1B0,0x7F388-0x7D1B0
+.incbin "baserom.n64",0x7D1B0,0x7D794-0x7D1B0
+
+	.dw 0x80000000 + Normal43478   - 0xC00
+	.dw 0x80000000 + Fighting43478 - 0xC00
+	.dw 0x80000000 + Flying43478   - 0xC00
+	.dw 0x80000000 + Poison43478   - 0xC00
+	.dw 0x80000000 + Ground43478   - 0xC00
+	.dw 0x80000000 + Rock43478     - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Bug43478      - 0xC00
+	.dw 0x80000000 + Ghost43478    - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Invalid43478  - 0xC00
+	.dw 0x80000000 + Fire43478     - 0xC00
+	.dw 0x80000000 + Water43478    - 0xC00
+	.dw 0x80000000 + Grass43478    - 0xC00
+	.dw 0x80000000 + Electric43478 - 0xC00
+	.dw 0x80000000 + Psychic43478  - 0xC00
+	.dw 0x80000000 + Ice43478      - 0xC00
+	.dw 0x80000000 + Dragon43478   - 0xC00
+
+.incbin "baserom.n64",0x7D800,0x7F388-0x7D800
 
 	.db "RSP Gfx ucode F3DEX       fifo 2.06  Yoshitaka Yasumoto 1998 Nintendo.",0x0A,0
 	.align 4
