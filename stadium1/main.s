@@ -79,7 +79,196 @@ Invalid43478:
 	jr ra
 	nop
 
-.incbin "baserom.n64",0x434FC,0x73C30-0x434FC
+.incbin "baserom.n64",0x434FC,0x71BA0-0x434FC
+
+BaseStats:
+.incbin "baserom.n64",0x71BA0,23*152
+	.align 16
+
+; There are 23 8-byte entries in the following array.
+; There are 23 bytes for each entry in the preceding base stats array.
+; Coincidence...?
+.incbin "baserom.n64",0x72950,8*23
+	.align 16
+
+Comment165Times:
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+	.ascii "comment",0
+
+MoveTypeIconData:
+.incbin "baserom.n64",0x72F38,12*165
+	.align 16
+
+MoveData:
+.incbin "baserom.n64",0x73700,6*165
+	.align 16
+
+Pointers73AE0:
+.incbin "baserom.n64",0x73AE0,4*83
+	.align 16
 
 CharMap:
 	.db 0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20 ;
@@ -115,7 +304,39 @@ CharMap:
 	.db 0xA5,0xD7,0x2E,0x2F,0x2C,0xBE,0x30,0x31 ; ¥  ×  .  /  ,  ♀  0  1
 	.db 0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39 ; 2  3  4  5  6  7  8  9
 
-.incbin "baserom.n64",0x73D30,0x100
+InverseCharMap:
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0xE7,0x00,0x00,0x00,0x00,0x00,0xE0 ;    !           '
+	.db 0x9A,0x9B,0x00,0xE4,0xF4,0xE3,0xF2,0xF3 ; (  )     +  ,  -  .  /
+	.db 0xF6,0xF7,0xF8,0xF9,0xFA,0xFB,0xFC,0xFD ; 0  1  2  3  4  5  6  7
+	.db 0xFE,0xFF,0x9C,0x9D,0x00,0x00,0x00,0xE6 ; 8  9  :  ;           ?
+	.db 0x00,0x80,0x81,0x82,0x83,0x84,0x85,0x86 ;    A  B  C  D  E  F  G
+	.db 0x87,0x88,0x89,0x8A,0x8B,0x8C,0x8D,0x8E ; H  I  J  K  L  M  N  O
+	.db 0x8F,0x90,0x91,0x92,0x93,0x94,0x95,0x96 ; P  Q  R  S  T  U  V  W
+	.db 0x97,0x98,0x99,0x9E,0x00,0x9F,0x00,0x00 ; X  Y  Z  [     ]
+	.db 0x00,0xA0,0xA1,0xA2,0xA3,0xA4,0xA5,0xA6 ;    a  b  c  d  e  f  g
+	.db 0xA7,0xA8,0xA9,0xAA,0xAB,0xAC,0xAD,0xAE ; h  i  j  k  l  m  n  o
+	.db 0xAF,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6 ; p  q  r  s  t  u  v  w
+	.db 0xB7,0xB8,0xB9,0x00,0x00,0x00,0x00,0x00 ; x  y  z
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0xF0,0x00,0x00 ;                ¥
+	.db 0x00,0xEF,0x00,0x00,0x00,0x00,0x00,0x00 ;    ♂
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0xE1,0xE2,0xF5,0x00 ;             ¼  ½  ♀
+	.db 0x00,0x00,0x00,0x00,0xC0,0x00,0x00,0x00 ;                Ä
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 ;
+	.db 0x00,0x00,0x00,0x00,0x00,0x00,0xC1,0xF1 ;                   Ö  ×
+	.db 0x00,0x00,0x00,0x00,0xC2,0x00,0x00,0xBE ;             Ü        ß
+	.db 0xBA,0x00,0xC8,0x00,0xC3,0x00,0x00,0xBF ; à     â     ä        ç
+	.db 0xBB,0xBC,0xCB,0xC6,0x00,0x00,0xCC,0xC7 ; è  é  ê  ë        î  ï
+	.db 0x00,0x00,0x00,0x00,0xC9,0x00,0xC4,0x00 ;             ô     ö
+	.db 0x00,0xBD,0x00,0xCA,0xC5,0x00,0x00,0x00 ;    ù     û  ü
 
 TMHMMoves:
 	.db MEGA_PUNCH
