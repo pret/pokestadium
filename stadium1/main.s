@@ -1578,6 +1578,11 @@ MoveIndices2:
 
 	.align 16
 
-.incbin "baserom.n64",0x7D1B0,0x2000000-0x7D1B0
+.incbin "baserom.n64",0x7D1B0,0x7F388-0x7D1B0
+
+	.db "RSP Gfx ucode F3DEX       fifo 2.06  Yoshitaka Yasumoto 1998 Nintendo.",0x0A,0
+	.align 4
+
+.incbin "baserom.n64",0x7F3D0,0x2000000-0x7F3D0
 
 .close
