@@ -21,4 +21,4 @@
 	url = https://github.com/iimarckus/stadiumgs-0x3fed000
 [submodule "stadiumgs/gameboy"]
 	path = stadiumgs/gameboy
-	url = https://github.com/iimarckus/stadiumgs-gameboy/
+	url = https://github.com/iimarckus/stadiumgs-gameboy
