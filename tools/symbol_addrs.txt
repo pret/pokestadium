@@ -1,0 +1,12 @@
+__osDisableInt = 0x80062A90;
+__osRestoreInt = 0x80062B00;
+__osRunningThread = 0x80079630;
+__osEnqueueAndYield = 0x80057CEC; // !
+osStartThread = 0x80065370;
+__osPopThread = 0x80057E34; // !
+osSendMesg = 0x800568C0;
+__osDispatchThread = 0x80057E44; // !
+osStopThread = 0x80056A10;
+__osDequeueThread = 0x80056CB0;
+osRecvMesg = 0x80056AD0;
+osSetIntMask = 0x80056C10;
