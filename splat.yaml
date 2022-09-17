@@ -4,6 +4,8 @@ options:
   find-file-boundaries: True
   compiler: IDO
   symbol_addrs_path: tools/symbol_addrs.txt
+  target_path: baserom.z64
+  ld_script_path: pokemonstadium.ld
 segments:
   - name: header
     type: header
