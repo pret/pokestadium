@@ -1,24 +1,3 @@
-[submodule "stadiumgs/0x1e40000"]
-	path = stadiumgs/0x1e40000
-	url = https://github.com/iimarckus/stadiumgs-0x1e40000
-[submodule "stadiumgs/0x1718000"]
-	path = stadiumgs/0x1718000
-	url = https://github.com/iimarckus/stadiumgs-0x1718000
-[submodule "stadiumgs/0x1898000"]
-	path = stadiumgs/0x1898000
-	url = https://github.com/iimarckus/stadiumgs-0x1898000
-[submodule "stadiumgs/0x2000000"]
-	path = stadiumgs/0x2000000
-	url = https://github.com/iimarckus/stadiumgs-0x2000000
-[submodule "stadiumgs/faces"]
-	path = stadiumgs/faces
-	url = https://github.com/iimarckus/stadiumgs-faces
-[submodule "stadiumgs/0x3fd5000"]
-	path = stadiumgs/0x3fd5000
-	url = https://github.com/iimarckus/stadiumgs-0x3fd5000
-[submodule "stadiumgs/0x3fed000"]
-	path = stadiumgs/0x3fed000
-	url = https://github.com/iimarckus/stadiumgs-0x3fed000
-[submodule "stadiumgs/gameboy"]
-	path = stadiumgs/gameboy
-	url = https://github.com/iimarckus/stadiumgs-gameboy
+[submodule "tools/n64splat"]
+	path = tools/n64splat
+	url = https://github.com/ethteck/n64splat.git
