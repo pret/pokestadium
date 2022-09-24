@@ -12,7 +12,7 @@ ROM := $(TARGET).z64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/os
+ASM_DIRS := asm asm/os asm/libleo asm/libultra
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell find src -type d)
 
@@ -52,7 +52,11 @@ OPTFLAGS := -O2
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
 
-build/src/os/O1/%.o: OPTFLAGS := -O1
+# Libultra O1 files
+build/src/os/O1/osSendMesg.c.o: OPTFLAGS := -O1
+build/src/os/O1/osStopThread.c.o: OPTFLAGS := -O1
+build/src/os/O1/osRecvMesg.c.o: OPTFLAGS := -O1
+build/src/os/O1/pigetcmdq.c.o: OPTFLAGS := -O1
 
 default: all
 
