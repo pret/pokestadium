@@ -118,7 +118,7 @@ segments:
     - [0x517A0, asm] # yay0 audio decoder
     - [0x518A0, asm]
     - [0x51B20, asm]
-    - [0x51BC0, asm]
+    - [0x51BC0, asm, libleo/readwrite]
     - [0x51C50, asm, libleo/leofunc]
     - [0x520C0, asm, libleo/leoint]
     - [0x52AC0, asm, libleo/leocmdex]
