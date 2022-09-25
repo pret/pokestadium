@@ -1,5 +1,5 @@
 BASEROM = baserom.z64
-TARGET = pokemonstadium
+TARGET = pokestadium
 NON_MATCHING = 0
 
 # Fail early if baserom does not exist
@@ -62,10 +62,10 @@ default: all
 
 LD_SCRIPT = $(TARGET).ld
 
-all: $(BUILD_DIR) $(TARGET).z64 verify
+all: $(BUILD_DIR) $(BUILD_DIR)/$(ROM) verify
 
 clean:
-	rm -rf asm bin assets $(BUILD_DIR) $(TARGET).z64
+	rm -rf asm bin assets $(BUILD_DIR)
 
 submodules:
 	git submodule update --init --recursive
@@ -99,10 +99,10 @@ $(BUILD_DIR)/%.bin.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
 # final z64 updates checksum
-$(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
+$(BUILD_DIR)/$(ROM): $(BUILD_DIR)/$(TARGET).bin
 	@cp $< $@
 
-verify: $(TARGET).z64
+verify: $(BUILD_DIR)/$(ROM)
 	md5sum -c checksum.md5
 
 .PHONY: all clean default split setup
