@@ -9,22 +9,23 @@ Note: To use this repository, you must already have a rom for the game.
 
 # Prerequisites
 
-* python3
+Under Debian / Ubuntu (which we recommend using), you can install them with the following commands:
 
-Because running Splat is required for this repository, please install the following Python 3 PIP packages:
+```bash
+sudo apt update
+sudo apt install make git build-essential binutils-mips-linux-gnu python3 python3-pip
+```
 
-* PyYAML
-* pylibyaml
-* pypng
-* colorama
-* spimdisasm>=1.2.1
-* rabbitizer
-* pygfxd
-* tqdm
-* intervaltree
+The build process has a few python packages required that are located in `requirements.txt`.
+
+To install them simply run in a terminal:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
 
 # To use
-1. Place the US Pokemon Stadium rom into the root of the repository as "baserom.z64".
+1. Place the US Pokemon Stadium 1.0 rom into the root of the repository as "baserom.z64".
 2. Set up tools and extract the rom: `make setup`
 3. Re-assemble the rom: `make`
 
