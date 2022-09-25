@@ -3,7 +3,7 @@ A WIP decomp of Pokemon Stadium (US).
 
 It builds the following ROMs:
 
-* pokemonstadium.z64: `md5: ed1378bc12115f71209a77844965ba50`
+* pokestadium.z64: `md5: ed1378bc12115f71209a77844965ba50`
 
 Note: To use this repository, you must already have a rom for the game.
 
