@@ -271,3 +271,4 @@ __ull_to_f = 0x80065828;
 alSynAllocFX = 0x80065860;
 alSynDelete = 0x80065900;
 __osSetHWIntrRoutine = 0x80065F50;
+entry_point = 0x80000400;

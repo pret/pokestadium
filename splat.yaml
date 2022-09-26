@@ -25,7 +25,7 @@ segments:
     start: 0x1000
     vram: 0x80000400
     subsegments:
-    - [0x1000, asm] # bootloader
+    - [0x1000, hasm, entry] # bootloader
     - [0x1060, asm, main] # rsp graphics
     - [0x11C0, asm] # rsp audio
     - [0x1A80, asm] # DMA transfer
@@ -47,7 +47,9 @@ segments:
     - [0xC030, asm] # extra sprites loader
     - [0xC3D0, asm] #
     - [0xC3F0, asm] # yay0 decoder
-    - [0xC4B0, bin] # 
+    - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
+    - [0xC910, bin, libleo_bootstrap] # have issues being disassembled, so are bins for now.
+    - [0xC970, asm]
     - [0xCE80, asm] #
     - [0xD470, asm] #
     - [0xDDC0, asm] #
@@ -107,8 +109,7 @@ segments:
     - [0x4F870, asm]
     - [0x4FDB0, asm]
     - [0x4FE60, asm]
-    - [0x4FF50, bin]
-    - [0x50000, asm]
+    - [0x4FF50, asm]
     - [0x50120, asm]
     - [0x50860, asm]
     - [0x50990, asm]
