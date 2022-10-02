@@ -20,7 +20,7 @@ segments:
     subsegments:
     - [0x0040, asm, boot]
     - [0x0B70, bin, bootcode_font]
-  - name: code
+  - name: text
     type: code
     start: 0x1000
     vram: 0x80000400
