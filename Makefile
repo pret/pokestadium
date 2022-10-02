@@ -12,7 +12,7 @@ ROM := $(TARGET).z64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/os asm/libleo asm/libultra
+ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell find src -type d)
 
@@ -53,10 +53,10 @@ OPTFLAGS := -O2
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
 
 # Libultra O1 files
-build/src/os/O1/osSendMesg.c.o: OPTFLAGS := -O1
-build/src/os/O1/osStopThread.c.o: OPTFLAGS := -O1
-build/src/os/O1/osRecvMesg.c.o: OPTFLAGS := -O1
-build/src/os/O1/pigetcmdq.c.o: OPTFLAGS := -O1
+build/src/libultra/os/osSendMesg.c.o: OPTFLAGS := -O1
+build/src/libultra/os/osStopThread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/osRecvMesg.c.o: OPTFLAGS := -O1
+build/src/libultra/io/pigetcmdq.c.o: OPTFLAGS := -O1
 
 default: all
 
@@ -65,7 +65,7 @@ LD_SCRIPT = $(TARGET).ld
 all: $(BUILD_DIR) $(BUILD_DIR)/$(ROM) verify
 
 clean:
-	rm -rf asm bin assets $(BUILD_DIR)
+	rm -rf asm bin assets $(BUILD_DIR) undefined_syms_auto.txt undefined_funcs_auto.txt
 
 submodules:
 	git submodule update --init --recursive
