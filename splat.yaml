@@ -1,0 +1,310 @@
+name: Pokemon Stadium (North America)
+basename: pokestadium
+options:
+  find-file-boundaries: True
+  compiler: IDO
+  symbol_addrs_path: tools/symbol_addrs.txt
+  target_path: baserom.z64
+  ld_script_path: pokestadium.ld
+segments:
+  - name: header
+    type: header
+    start: 0x00
+    vram: 0
+    subsegments:
+    - [0x0000, header, header]
+  - name: boot
+    type: code
+    start: 0x0040
+    vram: 0xA4000040
+    subsegments:
+    - [0x0040, asm, boot]
+    - [0x0B70, bin, bootcode_font]
+  - name: code
+    type: code
+    start: 0x1000
+    vram: 0x80000400
+    subsegments:
+    - [0x1000, hasm, entry] # bootloader
+    - [0x1060, asm, main] # rsp graphics
+    - [0x11C0, asm] # rsp audio
+    - [0x1A80, asm] # DMA transfer
+    - [0x1F80, asm] # dp intro code
+    - [0x28E0, asm] # dp code
+    - [0x2EC0, asm] # intro loader
+    - [0x3640, asm] #
+    - [0x3A80, asm] # transition loader
+    - [0x3FB0, asm] # PRES-JPEG decoder
+    - [0x60A0, asm] # 
+    - [0x6430, asm] # controller code
+    - [0x6A40, asm] #
+    - [0x6BC0, asm] # 
+    - [0x75F0, asm] # stage loader
+    - [0x8EC0, asm] # crash handler
+    - [0x9D20, asm] #
+    - [0xAF00, asm] # camera code
+    - [0xB130, asm] # dp code for text
+    - [0xC030, asm] # extra sprites loader
+    - [0xC3D0, asm] #
+    - [0xC3F0, asm] # yay0 decoder
+    - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
+    - [0xC910, bin, libleo_bootstrap] # have issues being disassembled, so are bins for now.
+    - [0xC970, asm]
+    - [0xCE80, asm] #
+    - [0xD470, asm] #
+    - [0xDDC0, asm] #
+    - [0xE1C0, asm] #
+    - [0xE570, asm] #
+    - [0xE890, asm] #
+    - [0x11BA0, asm] #  
+    - [0x12D80, asm] # 
+    - [0x17300, asm] #
+    - [0x18140, asm] # dp model animations
+    - [0x18480, asm] # dp model animations
+    - [0x19840, asm] # alternative pkm textures
+    - [0x1AB70, asm] # vs screen code
+    - [0x1C720, asm] #
+    - [0x1CF30, asm] # dp list code
+    - [0x20330, asm] # some cache cleaner
+    - [0x20470, asm] # dp list for UI and icons
+    - [0x225A0, asm] #
+    - [0x22630, asm] # registered pkm stats
+    - [0x26820, asm] # save data code
+    - [0x29BA0, asm] # scenary code
+    - [0x2C1C0, asm] # scenary cache cleaner
+    - [0x2D340, asm] # pkm lab pc code
+    - [0x2E110, asm] # stack cleaner
+    - [0x2E460, asm] # pkm lab pokedex code
+    - [0x2FEA0, asm] # minigames code
+    - [0x30640, asm] # gallery code
+    - [0x32D10, asm]
+    - [0x334D0, asm]
+    - [0x33E30, asm]
+    - [0x33FE0, asm]
+    - [0x37370, asm]
+    - [0x373A0, asm]  # battle code
+    - [0x38BB0, asm]  #
+    - [0x3D140, asm]  # music code
+    - [0x43520, c] # 
+    - [0x435B0, c] # 
+    - [0x435D0, asm]  # pkm lab cries code
+    - [0x45720, asm]  # music code
+    - [0x46680, asm]  # speech code
+    - [0x47B60, asm]  # sound code
+    - [0x485C0, asm]  # moves code 
+    - [0x48C60, asm]  # move effects code
+    - [0x490A0, asm]  # audio functions to 0x50C00
+    - [0x49190, bin]
+    - [0x49790, asm]
+    - [0x49BA0, asm]
+    - [0x49DC0, asm]
+    - [0x4A360, asm]
+    - [0x4A3E0, asm]
+    - [0x4B940, asm]
+    - [0x4BA90, asm]
+    - [0x4BDC0, asm]
+    - [0x4CBC0, asm]
+    - [0x4F410, asm]
+    - [0x4F7F0, asm]
+    - [0x4F870, asm]
+    - [0x4FDB0, asm]
+    - [0x4FE60, asm]
+    - [0x4FF50, asm]
+    - [0x50120, asm]
+    - [0x50860, asm]
+    - [0x50990, asm]
+    - [0x50A00, asm]
+    - [0x50C20, asm]
+    - [0x50CC0, asm]
+    - [0x517A0, asm] # yay0 audio decoder
+    - [0x518A0, asm]
+    - [0x51B20, asm]
+    - [0x51BC0, asm, libleo/readwrite]
+    - [0x51C50, asm, libleo/leofunc]
+    - [0x520C0, asm, libleo/leoint]
+    - [0x52AC0, asm, libleo/leocmdex]
+    - [0x53150, asm, libleo/leoread]
+    - [0x53310, asm, libleo/lbatobyte]
+    - [0x53460, asm, libleo/driverominit]
+    - [0x535C0, asm, libleo/inquiry]
+    - [0x53710, asm, libleo/readdiskid]
+    - [0x53770, asm, libleo/leord_diskid]
+    - [0x53900, asm, libleo/leomecha]
+    - [0x54250, asm, libleo/spdlmotor]
+    - [0x54310, asm, libleo/leoc2ecc]
+    - [0x55400, asm, libleo/setrtc]
+    - [0x55570, asm, libleo/leomseq_tbl]
+    - [0x55720, asm, libleo/leomotor]
+    - [0x55810, asm, libleo/leomode_sel]
+    - [0x558C0, asm, libleo/leord_capa]
+    - [0x55960, asm, libleo/leoutil]
+    - [0x55BB0, asm, libleo/rezero]
+    - [0x55C50, asm, libleo/bytetolba]
+    - [0x55DB0, asm, libleo/leoreset]
+    - [0x55ED0, asm, libleo/leotranslat]
+    - [0x56170, asm, libleo/leotimer]
+    - [0x56680, asm, libleo/leowrite]
+    - [0x567B0, asm, libleo/cjcreateleomanager]
+    - [0x569F0, asm, libleo/leointerrupt]
+    - [0x570C0, asm, libleo/driveexist]
+    - [0x57190, asm, libleo/testunitready]
+    - [0x57230, asm, libleo/leotestunit]
+    - [0x57270, asm, libleo/readrtc]
+    - [0x572D0, asm, libleo/leoseek]
+    - [0x57390, asm, libleo/seek]
+    - [0x573F0, asm, libultra/piacs]
+    - [0x574B0, asm, libultra/setcause]
+    - [0x574C0, c, os/O1/osSendMesg]
+    - [0x57610, c, os/O1/osStopThread]
+    - [0x576D0, c, os/O1/osRecvMesg]
+    - [0x57810, asm, libultra/setintmask]
+    - [0x578B0, asm, libultra/thread]
+    - [0x578F0, asm, libultra/scale]
+    - [0x57990, asm, libultra/sinf]
+    - [0x57B50, asm, libultra/sl]
+    - [0x57C10, asm, libultra/sptask]
+    - [0x57F00, asm, libultra/destroythread]
+    - [0x58010, asm, libultra/ll]
+    - [0x582D0, asm, libultra/exceptasm]
+    - [0x58BD0, asm, libultra/bzero]
+    - [0x58C70, asm] # unknown file(s)
+    - [0x58EC0, asm, libultra/gbpakcheckconnector]
+    - [0x59350, asm, libultra/gbpakpower]
+    - [0x59460, asm, libultra/controller]
+    - [0x597A0, asm, libultra/siacs]
+    - [0x598C0, asm, libultra/createthread]
+    - [0x59A10, asm, libultra/contreaddata]
+    - [0x59BF0, asm, libultra/setcount]
+    - [0x59C00, asm, libultra/conteeplongread]
+    - [0x59C90, asm, libultra/virtualtophysical]
+    - [0x59D10, asm, libultra/setsr]
+    - [0x59D20, asm, libultra/writebackdcache]
+    - [0x59DA0, asm, libultra/initialize]
+    - [0x5A0F0, asm, libultra/getsr]
+    - [0x5A100, asm, libultra/gbpakinit]
+    - [0x5A330, asm, libultra/pfsgetstatus]
+    - [0x5A560, asm, libultra/reverb]
+    - [0x5B1C0, asm, libultra/perspective]
+    - [0x5B450, asm, libultra/sprawdma]
+    - [0x5B4E0, asm, libultra/sirawdma]
+    - [0x5B590, asm] # unknown file(s)
+    - [0x5B5E0, asm, libultra/viblack]
+    - [0x5B650, asm, libultra/sirawread]
+    - [0x5B6A0, asm, libultra/sptaskyield]
+    - [0x5B6C0, asm, libultra/lookatref]
+    - [0x5BB50, asm, libultra/mtxutil]
+    - [0x5BDC0, asm, libultra/visetmode]
+    - [0x5BE30, asm] # unknown file(s)
+    - [0x5C1E0, asm, libultra/probetlb]
+    - [0x5C2A0, asm] # unknown file(s)
+    - [0x5C420, asm, libultra/devmgr]
+    - [0x5C830, asm, libultra/pirawdma]
+    - [0x5C900, hasm, libultra/osGetCount]  # RNG
+    - [0x5C910, asm, libultra/conteepprobe]
+    - [0x5C980, asm, libultra/conteepwrite]
+    - [0x5CD50, asm, libultra/getmemsize]
+    - [0x5CE70, asm, libultra/contpfs]
+    - [0x5D9F0, asm, libultra/seteventmesg]
+    - [0x5DAB0, asm, libultra/sqrtf]
+    - [0x5DAC0, asm, libultra/afterprenmi]
+    - [0x5DAE0, asm, libultra/mtxcatf]
+    - [0x5DCF0, asm, libultra/mtxcatl]
+    - [0x5DDB0, asm, libultra/random]
+    - [0x5DDE0, asm, libultra/xprintf]
+    - [0x5EAA0, asm, libultra/gbpakgetstatus]
+    - [0x5EC20, asm, libultra/sprintf]
+    - [0x5ECA0, asm, libultra/unmaptlball]
+    - [0x5ECF0, asm] # unknown file(s)
+    - [0x5EDD0, asm, libultra/heapinit]
+    - [0x5EE10, asm, libultra/syncprintf]
+    - [0x5EE50, asm, libultra/string]
+    - [0x5EEF0, asm, libultra/invalidcache]
+    - [0x5EFA0, asm, libultra/createmesgqueue]
+    - [0x5EFD0, asm, libultra/invalicache]
+    - [0x5F050, asm] # unknown file(s)
+    - [0x5F140, asm, libultra/sp]
+    - [0x5F170, asm, libultra/si]
+    - [0x5F1A0, asm, libultra/translate]
+    - [0x5F240, asm, libultra/jammesg]
+    - [0x5F390, asm, libultra/setthreadpri]
+    - [0x5F470, asm, libultra/getthreadpri]
+    - [0x5F490, asm, libultra/epirawread]
+    - [0x5F5F0, asm, libultra/viswapbuf]
+    - [0x5F640, asm, libultra/epirawdma]
+    - [0x5F820, asm, libultra/sptaskyielded]
+    - [0x5F8A0, asm] # unknown file(s)
+    - [0x5FA40, asm, libultra/bcmp]
+    - [0x5FB60, asm] # unknown file(s)
+    - [0x5FD50, asm, libultra/gettime]
+    - [0x5FDE0, asm, libultra/timerintr]
+    - [0x601E0, asm, libultra/synthesizer]
+    - [0x60860, asm, libultra/drvrNew]
+    - [0x61010, asm, libultra/mainbus]
+    - [0x61160, asm, libultra/auxbus]
+    - [0x61270, asm, libultra/env]
+    - [0x61EF0, asm, libultra/resample]
+    - [0x621F0, asm] # unknown file(s). might be load.o from AL library, but it's too different to tell.
+    - [0x62D40, asm, libultra/filter]
+    - [0x62D60, asm, libultra/save]
+    - [0x62E20, asm, libultra/setglobalintmask]
+    - [0x62E70, asm, libultra/aisetfreq]
+    - [0x62FC0, asm, libultra/dpctr]
+    - [0x63010, asm, libultra/getactivequeue]
+    - [0x63020, asm, libultra/normalize]
+    - [0x630B0, asm, libultra/setcompare]
+    - [0x630C0, asm, libultra/aigetstat]
+    - [0x630D0, asm, libultra/dpsetstat]
+    - [0x630E0, asm, libultra/copy]
+    - [0x63160, asm, libultra/bcopy]
+    - [0x63470, asm, libultra/resetglobalintmask]
+    - [0x634D0, asm, libultra/ortho]
+    - [0x63690, asm, libultra/interrupt]
+    - [0x63720, asm, libultra/vi]
+    - [0x63860, asm, libultra/viswapcontext]
+    - [0x63B60, c, os/O1/pigetcmdq]
+    - [0x63B90, asm, libultra/cosf]
+    - [0x63D00, asm, libultra/epiread]
+    - [0x63D50, asm, libultra/visetspecial]
+    - [0x63EB0, asm, libultra/settime]
+    - [0x63EE0, asm, libultra/visetevent]
+    - [0x63F50, asm, libultra/gbpakreadid]
+    - [0x64110, asm, libultra/cartrominit]
+    - [0x64270, asm, libultra/pfsselectbank]
+    - [0x642F0, asm, libultra/setfpccsr]
+    - [0x64300, asm, libultra/aigetlen]
+    - [0x64310, asm, libultra/epiwrite]
+    - [0x64360, asm, libultra/maptlbrdb]
+    - [0x643C0, asm, libultra/yieldthread]
+    - [0x64410, asm, libultra/contramwrite]
+    - [0x64660, asm, libultra/contramread]
+    - [0x64890, asm, libultra/crc]
+    - [0x64A00, hasm, libultra/__osGetCause]
+    - [0x64A10, asm, libultra/epirawwrite]
+    - [0x64B70, asm, libultra/settimer]
+    - [0x64C50, asm] # unknown file(s)
+    - [0x65710, asm, libultra/ldiv]
+    - [0x658A0, asm, libultra/xlitob]
+    - [0x65B40, asm, libultra/sirawwrite]
+    - [0x65B90, asm, libultra/spsetstat]
+    - [0x65BA0, asm, libultra/spgetstat]
+    - [0x65BC0, asm, libultra/vimgr]
+    - [0x65ED0, asm, libultra/vigetcurrcontext]
+    - [0x65EE0, asm, libultra/writebackdcacheall]
+    - [0x65F10, asm, libultra/heapalloc]
+    - [0x65F70, asm, libultra/startthread]
+    - [0x660C0, asm, libultra/visetxscale]
+    - [0x661F0, asm, libultra/visetyscale]
+    - [0x66250, asm, libultra/llcvt]
+    - [0x66460, asm, libultra/synallocfx]
+    - [0x66500, asm, libultra/syndelete]
+    - [0x66510, asm, libultra/gbpakreadwrite]
+    - [0x666D0, asm, libultra/gbpakselectbank]
+    - [0x667A0, asm, libultra/aisetnextbuf]
+    - [0x66850, asm, libultra/ai]
+    - [0x66880, asm, libultra/conteepread]
+    - [0x66AD0, asm, libultra/vigetcurrframebuf]
+    - [0x66B10, asm, libultra/spsetpc]
+    - [0x66B50, asm, libultra/sethwinterrupt]
+    #- [0x66BC0, asm]
+  - [0x66BC0, bin]
+  - [0x2000000]
