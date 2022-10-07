@@ -5,6 +5,8 @@ options:
   compiler: IDO
   symbol_addrs_path: tools/symbol_addrs.txt
   target_path: baserom.z64
+  basename: pokestadium
+  base_path: .
   ld_script_path: pokestadium.ld
 segments:
   - name: header
@@ -28,7 +30,7 @@ segments:
     - [0x1000, hasm, entry] # bootloader
     - [0x1060, c, main] # rsp graphics
     - [0x11B0, bin, noppad_11B0] # There's an extra nop align here, but cant reproduce it with just splat functionality alone. need a . += 0x10 in the linker script at this spot.
-    - [0x11C0, asm] # rsp audio
+    - [0x11C0, c, rsp] # rsp audio
     - [0x1A80, asm] # DMA transfer
     - [0x1F80, asm] # dp intro code
     - [0x28E0, asm] # dp code
@@ -307,5 +309,10 @@ segments:
     - [0x66B10, asm, libultra/io/spsetpc]
     - [0x66B50, asm, libultra/os/sethwinterrupt]
     #- [0x66BC0, asm]
-  - [0x66BC0, bin]
+    - [0x66BC0, bin] # rest of rom part 1
+    
+    # Start of .rodata
+    - [0x7BAC0, .rodata, rsp] # rsp.c rodata
+    - [0x7BB10, bin, rom_rodata] # rest of rodata
+  - [0x7F980, bin] # rest of rom part 2
   - [0x2000000]
