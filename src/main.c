@@ -1,10 +1,17 @@
 #include <ultra64.h>
 
-extern OSThread D_8007F180;
-extern OSThread D_8007F730;
 extern void func_80000460(); // thread 1 function
 extern void func_8002B330(); // thread 6 function
-extern u8 D_800818E0[];
+
+// entry .bss
+u8 D_8007ED80[0xF180-0xED80]; // unknown, start of .bss
+OSThread D_8007F180;
+u8 unk_8007F330[0x400];
+OSThread D_8007F730;
+u8 unk_8007F8E0[0x720];
+u8 D_80080000[0x18E0];
+u8 D_800818E0[0x18];
+u8 D_800818F8[0x8];
 
 void func_80000460(s32 arg0) {
     osCreateViManager(0xFE);

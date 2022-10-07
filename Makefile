@@ -26,7 +26,7 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.c.o)) \
            $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o)) \
 
 SPLAT_YAML := splat.yaml
-SPLAT = $(PYTHON) tools/n64splat/split.py --target $(BASEROM) --basedir . $(SPLAT_YAML)
+SPLAT = $(PYTHON) tools/n64splat/split.py $(SPLAT_YAML)
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
@@ -43,8 +43,11 @@ CC = tools/ido_recomp/linux/7.1/cc
 CC_OLD = tools/ido_recomp/linux/5.3/cc
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -Iinclude
-CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Wab,-r4300_mul -D _LANGUAGE_C
-LDFLAGS = -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
+
+# we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
+CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Wab,-r4300_mul -D _LANGUAGE_C -woff 649,838,712
+
+LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
 
 OPTFLAGS := -O2
 
@@ -71,7 +74,7 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py --target baserom.z64 --basedir . $(SPLAT_YAML)
+	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py $(SPLAT_YAML)
 
 setup: clean submodules split
 	
