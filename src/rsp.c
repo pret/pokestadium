@@ -1,38 +1,6 @@
 #include <ultra64.h>
-
-struct UnkStruct800006C4_2 {
-    char unk0;
-    char filler1[0x1B];
-    s32 unk1C;
-    void* unk20;
-    s32 unk24;
-    s32 unk28;
-};
-
-struct UnkStruct800006C4_1 {
-    s16 sp20;
-    s8 sp22;
-    OSMesgQueue* sp24;
-    void* sp28;
-    s32 sp2C;
-    s32 sp30;
-    s32 unk34;
-};
-
-struct UnkStruct80000A80 {
-    LEOCmd cmd;
-    union {
-        u32 lba;
-        struct {
-            char filler0[0x3];
-            LEOSpdlMode mode;
-        };
-    };
-    void *addr;
-};
-
-void func_80057FD0(void *, int);
-s32 func_8005A990(OSPiHandle*);
+#include "common.h"
+#include "rsp.h"
 
 // All from n64 programming manual section 27.2
 #define SRAM_START_ADDR  0x08000000 
@@ -41,13 +9,6 @@ s32 func_8005A990(OSPiHandle*);
 #define SRAM_pulse       0x0c 
 #define SRAM_pageSize    0xd 
 #define SRAM_relDuration 0x2
-
-struct UnkStruct80083BD0 {
-    OSMesg unk0;
-    u8 unk4[0x18];
-    OSMesgQueue queue1;
-    OSMesgQueue queue2;
-};
 
 OSThread D_80081900;
 u8 unk_80081AB0[0x2000];
@@ -58,10 +19,6 @@ OSMesg D_80083B8C;
 u8 unk_80083B90[0x3C];
 OSMesg D_80083BCC;
 struct UnkStruct80083BD0 D_80083BD0;
-//OSMesg D_80083BD0;
-//u8 D_80083BD4[0x18];
-//OSMesgQueue D_80083BEC;
-//OSMesgQueue &D_80083BD0.queue2;
 s16 D_80083C1C;
 
 s32 func_800005C0(void) {
@@ -80,7 +37,7 @@ s32 func_800005C0(void) {
 }
 
 OSPiHandle* func_80000628(void) {
-    static OSPiHandle sramHandle; // D_80083C20
+    static OSPiHandle sramHandle;
 
     void* baseAddr = OS_PHYSICAL_TO_K1(SRAM_START_ADDR);
     if (baseAddr != (void*)sramHandle.baseAddress) {
