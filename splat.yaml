@@ -31,7 +31,8 @@ segments:
     - [0x1060, c, main] # rsp graphics
     - [0x11B0, bin, noppad_11B0] # There's an extra nop align here, but cant reproduce it with just splat functionality alone. need a . += 0x10 in the linker script at this spot.
     - [0x11C0, c, rsp] # rsp audio
-    - [0x1A80, asm] # DMA transfer
+    - [0x1A80, c, dma] # DMA transfer
+    - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
     - [0x1F80, asm] # dp intro code
     - [0x28E0, asm] # dp code
     - [0x2EC0, asm] # intro loader
