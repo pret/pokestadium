@@ -310,6 +310,9 @@ segments:
     - [0x66B50, asm, libultra/os/sethwinterrupt]
     #- [0x66BC0, asm]
     - [0x66BC0, bin] # rest of rom part 1
+    
+    # Start of .rodata
     - [0x7BAC0, .rodata, rsp] # rsp.c rodata
-  - [0x7BB10, bin] # rest of rom part 2
+    - [0x7BB10, bin, rom_rodata] # rest of rodata
+  - [0x7F980, bin] # rest of rom part 2
   - [0x2000000]
