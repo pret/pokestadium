@@ -283,3 +283,7 @@ alUnlink = 0x80056F50;
 alLink = 0x80056F80;
 alClose = 0x80056FA4;
 alInit = 0x80056FDC;
+_VirtualToPhysicalTask = 0x80057010;
+osSpTaskLoad = 0x8005712C;
+osSpTaskStartGo = 0x800572BC;
+sTmpTask = 0x80102100;

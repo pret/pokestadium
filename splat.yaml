@@ -166,7 +166,7 @@ segments:
     - [0x578F0, asm, libultra/gu/scale]
     - [0x57990, asm, libultra/gu/sinf]
     - [0x57B50, asm, libultra/al/sl]
-    - [0x57C10, asm, libultra/io/sptask]
+    - [0x57C10, c, libultra/io/sptask]
     - [0x57F00, asm, libultra/os/destroythread]
     - [0x58010, asm, libultra/libc/ll]
     - [0x582D0, asm, libultra/os/exceptasm]
