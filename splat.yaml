@@ -33,7 +33,7 @@ segments:
     - [0x11C0, c, rsp] # rsp audio
     - [0x1A80, c, dma] # DMA transfer
     - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
-    - [0x1F80, asm] # dp intro code
+    - [0x1F80, c, dp_intro] # dp intro code
     - [0x28E0, asm] # dp code
     - [0x2EC0, asm] # intro loader
     - [0x3640, asm] #
