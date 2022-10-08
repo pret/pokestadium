@@ -45,7 +45,7 @@ CC_OLD = tools/ido_recomp/linux/5.3/cc
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -Iinclude
 
 # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Wab,-r4300_mul -D _LANGUAGE_C -woff 649,838,712 -mips2
+CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Wab,-r4300_mul -D _LANGUAGE_C -D F3DEX_GBI -woff 649,838,712 -mips2
 
 LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
 
@@ -60,6 +60,7 @@ build/src/libultra/os/osSendMesg.c.o: OPTFLAGS := -O1
 build/src/libultra/os/osStopThread.c.o: OPTFLAGS := -O1
 build/src/libultra/os/osRecvMesg.c.o: OPTFLAGS := -O1
 build/src/libultra/io/pigetcmdq.c.o: OPTFLAGS := -O1
+build/src/libultra/io/sptask.c.o: OPTFLAGS := -O1
 
 default: all
 
