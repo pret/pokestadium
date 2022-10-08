@@ -5,8 +5,8 @@ struct UnkStruct800006C4_2 {
     char unk0;
     char filler1[0x1B];
     s32 unk1C;
-    void* unk20;
-    s32 unk24;
+    void* vaddr;
+    s32 size;
     s32 unk28;
 };
 
@@ -55,8 +55,8 @@ void *func_80000AB0(struct UnkStruct80000A80* arg0);
 void *func_80000AE0(struct UnkStruct80000A80* arg0);
 s32 func_80000B10(struct UnkStruct80000A80* arg0);
 void *func_80000B74(struct UnkStruct80000A80* arg0);
-void func_80000BA4(void *arg);
-void func_80000D54(void);
+void thread20_rsp(void *arg);
+void rsp_init(void);
 void func_80000DF4(void);
 void func_80000E2C(void* arg0, s32 arg1);
 
