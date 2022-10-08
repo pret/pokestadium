@@ -1,6 +1,10 @@
 #ifndef _RCP_H_
 #define _RCP_H_
 
+#ifdef _LANGUAGE_C
+#define HW_REG(reg, type) *(volatile type*)((reg) | 0xA0000000)
+#endif
+
 /**************************************************************************
  *                                                                        *
  *               Copyright (C) 1995, Silicon Graphics, Inc.               *
@@ -599,7 +603,6 @@ The Indy development board use cartridge domain 1:
 #define VI_NTSC_CLOCK		48681812        /* Hz = 48.681812 MHz */
 #define VI_PAL_CLOCK		49656530        /* Hz = 49.656530 MHz */
 #define VI_MPAL_CLOCK		48628316        /* Hz = 48.628316 MHz */
-
 
 /*************************************************************************
  * Audio Interface (AI) Registers 
