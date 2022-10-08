@@ -10,9 +10,9 @@
 #define SRAM_pageSize    0xd 
 #define SRAM_relDuration 0x2
 
-OSThread D_80081900;
+OSThread gRspThread;
 u8 unk_80081AB0[0x2000];
-u8 D_80083AB0[0x9C];
+u8 gRspThreadStack[0x9C];
 OSMesg D_80083B4C;
 u8 unk_80081B50[0x3C];
 OSMesg D_80083B8C;
@@ -62,10 +62,10 @@ s32 func_800006C4(struct UnkStruct800006C4_2* arg0) {
 
     unkStruct.sp22 = 0;
     unkStruct.sp24 = &D_80083BD0.queue2;
-    unkStruct.sp28 = arg0->unk20;
+    unkStruct.sp28 = arg0->vaddr;
     unkStruct.sp2C = arg0->unk1C;
-    unkStruct.sp30 = arg0->unk24;
-    osInvalDCache(arg0->unk20, arg0->unk24);
+    unkStruct.sp30 = arg0->size;
+    osInvalDCache(arg0->vaddr, arg0->size);
     func_8005E0F0(unk1C, &unkStruct.sp20, 0);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
     return 0;
@@ -77,12 +77,12 @@ s32 func_8000074C(struct UnkStruct800006C4_2* arg0) {
 
     unkStruct.sp22 = 0;
     unkStruct.sp24 = &D_80083BD0.queue2;
-    unkStruct.sp28 = arg0->unk20;
+    unkStruct.sp28 = arg0->vaddr;
     unkStruct.sp2C = arg0->unk1C;
-    unkStruct.sp30 = arg0->unk24;
-    osWritebackDCache(arg0->unk20, arg0->unk24);
+    unkStruct.sp30 = arg0->size;
+    osWritebackDCache(arg0->vaddr, arg0->size);
     func_8005E0F0(unk1C, &unkStruct.sp20, 1);
-    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
+    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
 
@@ -97,12 +97,12 @@ s32 func_800007D4(struct UnkStruct800006C4_2* arg0, s32 arg1) {
 
     unkStruct.sp22 = 0;
     unkStruct.sp24 = &D_80083BD0.queue2;
-    unkStruct.sp28 = arg0->unk20;
+    unkStruct.sp28 = arg0->vaddr;
     unkStruct.sp2C = arg0->unk1C;
-    unkStruct.sp30 = arg0->unk24;
-    osInvalDCache(arg0->unk20, arg0->unk24);
+    unkStruct.sp30 = arg0->size;
+    osInvalDCache(arg0->vaddr, arg0->size);
     func_8005E0F0(handle, &unkStruct.sp20, 0);
-    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
+    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
 
@@ -113,12 +113,12 @@ s32 func_8000087C(struct UnkStruct800006C4_2* arg0) {
     handle = osCartRomInit();
     unkStruct.sp22 = 0;
     unkStruct.sp24 = &D_80083BD0.queue2;
-    unkStruct.sp28 = arg0->unk20;
+    unkStruct.sp28 = arg0->vaddr;
     unkStruct.sp2C = arg0->unk1C;
-    unkStruct.sp30 = arg0->unk24;
-    osWritebackDCache(arg0->unk20, arg0->unk24);
+    unkStruct.sp30 = arg0->size;
+    osWritebackDCache(arg0->vaddr, arg0->size);
     func_8005E0F0(handle, &unkStruct.sp20, 1);
-    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
+    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
 
@@ -126,9 +126,9 @@ s32 func_80000904(struct UnkStruct800006C4_2* arg0) {
     s32 arr[5];
     s32 sp20;
 
-    osInvalDCache(arg0->unk20, 0x80);
-    func_8000D0B4(&sp20, 0, arg0->unk1C, arg0->unk20, 1, &D_80083BD0.queue2);
-    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
+    osInvalDCache(arg0->vaddr, 0x80);
+    func_8000D0B4(&sp20, 0, arg0->unk1C, arg0->vaddr, 1, &D_80083BD0.queue2);
+    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
 
@@ -137,25 +137,25 @@ s32 func_80000974(struct UnkStruct800006C4_2* arg0) {
     s32 sp20_4;
     s32 sp20_5;
 
-    func_8000CEE4(&sp20_4, 0, arg0->unk20, &D_80083BD0.queue2);
-    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
+    func_8000CEE4(&sp20_4, 0, arg0->vaddr, &D_80083BD0.queue2);
+    osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
 
 void* func_800009C8(void) {
-    void* sp1C;
+    void* msg;
 
-    osRecvMesg(&D_80083BD0.queue2, &sp1C, 1);
-    return sp1C;
+    osRecvMesg(&D_80083BD0.queue2, &msg, OS_MESG_BLOCK);
+    return msg;
 }
 
 void *func_800009F8(struct UnkStruct800006C4_2* arg0) {
-    func_80050FC0(arg0, 0, arg0->unk1C, arg0->unk20, arg0->unk24, &D_80083BD0.queue2);
+    func_80050FC0(arg0, 0, arg0->unk1C, arg0->vaddr, arg0->size, &D_80083BD0.queue2);
     return func_800009C8();
 }
 
 void *func_80000A3C(struct UnkStruct800006C4_2* arg0) {
-    func_80050FC0(arg0, 1, arg0->unk1C, arg0->unk20, arg0->unk24, &D_80083BD0.queue2);
+    func_80050FC0(arg0, 1, arg0->unk1C, arg0->vaddr, arg0->size, &D_80083BD0.queue2);
     return func_800009C8();
 }
 
@@ -190,14 +190,14 @@ void *func_80000B74(struct UnkStruct80000A80* arg0) {
     return func_800009C8();
 }
 
-void func_80000BA4(void *arg) {
+void thread20_rsp(void *arg) {
     struct UnkStruct800006C4_2* sp2C;
     void* var_v0;
 
     func_800005C0();
     func_8000C8F8();
     while(1) {
-        osRecvMesg(&D_80083BD0.queue1, (void*)&sp2C, 1);
+        osRecvMesg(&D_80083BD0.queue1, (void*)&sp2C, OS_MESG_BLOCK);
         switch (sp2C->unk0) {
         case 0xF0:
             var_v0 = func_800007D4(sp2C, 0);
@@ -254,12 +254,12 @@ void func_80000BA4(void *arg) {
     }
 }
 
-void func_80000D54(void) {
+void rsp_init(void) {
     osCreateMesgQueue(&D_80083BD0.queue2, &D_80083BCC, 1);
-    osCreateMesgQueue(&D_80083BD0.queue1, &D_80083B8C, 0x10);
-    func_8005B6A0(0x96, &D_80083BD0.unk4, &D_80083AB0[0x1C], 0x20);
-    osCreateThread(&D_80081900, 0x14, func_80000BA4, NULL, D_80083AB0, 0x5A);
-    osStartThread(&D_80081900);
+    osCreateMesgQueue(&D_80083BD0.queue1, &D_80083B8C, 16);
+    func_8005B6A0(0x96, &D_80083BD0.unk4, &gRspThreadStack[0x1C], 0x20);
+    osCreateThread(&gRspThread, 20, thread20_rsp, NULL, gRspThreadStack, 90);
+    osStartThread(&gRspThread);
 }
 
 void func_80000DF4(void) {
@@ -271,8 +271,8 @@ void func_80000DF4(void) {
 
 void func_80000E2C(void* arg0, s32 arg1) {
     if (arg1 == 1) {
-        osJamMesg(&D_80083BD0.queue1, arg0, 1);
+        osJamMesg(&D_80083BD0.queue1, arg0, OS_MESG_BLOCK);
         return;
     }
-    osSendMesg(&D_80083BD0.queue1, arg0, 1);
+    osSendMesg(&D_80083BD0.queue1, arg0, OS_MESG_BLOCK);
 }
