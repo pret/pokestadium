@@ -17,7 +17,7 @@
  *
  *  $Revision: 1.32 $
  *  $Date: 1997/02/11 08:16:37 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/abi.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/abi.h,v $
  *
  **************************************************************************/
 

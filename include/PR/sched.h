@@ -24,7 +24,7 @@
  *
  *  $Revision: 1.7 $
  *  $Date: 1997/02/11 08:32:02 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/sched.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/sched.h,v $
  *
  **************************************************************************/
 
@@ -38,8 +38,11 @@
 #define OS_SC_RETRACE_MSG       1
 #define OS_SC_DONE_MSG          2
 #define OS_SC_RDP_DONE_MSG      3
-#define OS_SC_PRE_NMI_MSG       4
-#define OS_SC_LAST_MSG          4	/* this should have highest number */
+#define OS_SC_RSP_MSG           4  // custom - tells audiomgr it's time to do an audio frame
+#define OS_SC_PRE_NMI_MSG       5
+#define OS_SC_QUIT_MSG          10
+#define OS_SC_LAST_MSG          10	/* this should have highest number */
+
 #define OS_SC_MAX_MESGS         8
 
 typedef struct {
@@ -56,11 +59,7 @@ typedef struct OSScTask_s {
     OSTask              list;
     OSMesgQueue         *msgQ;
     OSMesg              msg;
-#ifndef _FINALROM                       /* all #ifdef items should    */
-    OSTime              startTime;      /* remain at the end!!, or    */
-    OSTime              totalTime;      /* possible conflict if       */
-#endif                                  /* FINALROM library used with */
-} OSScTask;                             /* non FINALROM code          */
+} OSScTask;
 
 /*
  * OSScTask flags:
@@ -84,6 +83,7 @@ typedef struct OSScTask_s {
 typedef struct SCClient_s {
     struct SCClient_s   *next;  /* next client in the list      */
     OSMesgQueue         *msgQ;  /* where to send the frame msg  */
+    s32                 is8mb;
 } OSScClient;
 
 typedef struct {
@@ -93,7 +93,7 @@ typedef struct {
     OSMesg      intBuf[OS_SC_MAX_MESGS];
     OSMesgQueue cmdQ;
     OSMesg      cmdMsgBuf[OS_SC_MAX_MESGS];
-    OSThread    thread;
+    OSThread    *thread;
     OSScClient  *clientList;
     OSScTask    *audioListHead;
     OSScTask    *gfxListHead;
@@ -105,9 +105,8 @@ typedef struct {
     s32         doAudio;
 } OSSched;
 
-void            osCreateScheduler(OSSched *s, void *stack, OSPri priority,
-                                  u8 mode, u8 numFields);
-void            osScAddClient(OSSched *s, OSScClient *c, OSMesgQueue *msgQ);
+void            osCreateScheduler(OSSched *s, OSThread *thread, u8 mode, u32 numFields);
+void            osScAddClient(OSSched *s, OSScClient *c, OSMesgQueue *msgQ, int is8mb);
 void            osScRemoveClient(OSSched *s, OSScClient *c);
 OSMesgQueue     *osScGetCmdQ(OSSched *s);
 

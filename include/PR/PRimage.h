@@ -2,7 +2,7 @@
  *
  *  $Revision: 1.4 $
  *  $Date: 1997/11/26 00:30:50 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/PRimage.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/PRimage.h,v $
  *
  **************************************************************************/
 
