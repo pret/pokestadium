@@ -17,7 +17,7 @@
  *
  *  $Revision: 1.20 $
  *  $Date: 1997/02/11 08:26:47 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/ramrom.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ramrom.h,v $
  *
  **************************************************************************/
 

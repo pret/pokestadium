@@ -20,9 +20,9 @@
 
 /**************************************************************************
  *
- *  $Revision: 1.23 $
- *  $Date: 1997/02/11 08:38:08 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/ultraerror.h,v $
+ *  $Revision: 1.24 $
+ *  $Date: 1998/01/27 23:52:11 $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ultraerror.h,v $
  *
  **************************************************************************/
 
@@ -150,7 +150,9 @@ extern "C" {
 #define ERR_ALCSPVNOTFREE		130
 #define ERR_ALSEQOVERRUN		131
 #define ERR_OSAISETNEXTBUFFER_ENDADDR	132
-#define ERR_ALMODDELAYOVERFLOW          133
+#define ERR_ALMODDELAYOVERFLOW		133
+#define ERR_OSVIEXTENDVSTART_VIMGR	134
+#define ERR_OSVIEXTENDVSTART_VALUE	135
 
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 typedef	void (*OSErrorHandler)(s16, s16, ...);

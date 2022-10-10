@@ -42,25 +42,62 @@ CPP := cpp
 CC = tools/ido_recomp/linux/7.1/cc
 CC_OLD = tools/ido_recomp/linux/5.3/cc
 
-ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -Iinclude
-
-# we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Wab,-r4300_mul -D _LANGUAGE_C -D F3DEX_GBI -woff 649,838,712 -mips2
-
-LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
+MIPS_VERSION := -mips2
 
 OPTFLAGS := -O2
+
+OBJDUMP_FLAGS := -d -r -z -Mreg-names=32
 
 ######################## Targets #############################
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
 
 # Libultra O1 files
-build/src/libultra/os/osSendMesg.c.o: OPTFLAGS := -O1
-build/src/libultra/os/osStopThread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/osRecvMesg.c.o: OPTFLAGS := -O1
+build/src/libultra/os/sendmesg.c.o: OPTFLAGS := -O1
+build/src/libultra/os/stopthread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/recvmesg.c.o: OPTFLAGS := -O1
+build/src/libultra/os/destroythread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/dequeuethread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/createthread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/virtualtophysical.c.o: OPTFLAGS := -O1
+build/src/libultra/os/initialize.c.o: OPTFLAGS := -O1
 build/src/libultra/io/pigetcmdq.c.o: OPTFLAGS := -O1
 build/src/libultra/io/sptask.c.o: OPTFLAGS := -O1
+build/src/libultra/io/controller.c.o: OPTFLAGS := -O1
+build/src/libultra/io/conteeplongread.c.o: OPTFLAGS := -O1
+build/src/libultra/libc/ll.c.o: OPTFLAGS := -O1
+build/src/libultra/libc/ll.c.o: MIPS_VERSION := -mips3 -32
+
+# cheap hack. TODO: Make the override better
+build/src/libultra/io/gbpakpower.c.o: OPTFLAGS += -Wo,-loopunroll,0
+build/src/libultra/io/gbpakinit.c.o: OPTFLAGS += -Wo,-loopunroll,0
+
+# Libultra misc
+build/src/libultra/gu/scale.c.o: CC := $(CC_OLD)
+build/src/libultra/gu/scale.c.o: OPTFLAGS := -O3
+build/src/libultra/gu/sinf.c.o: CC := $(CC_OLD)
+build/src/libultra/io/controller.c.o: CC := $(CC_OLD)
+build/src/libultra/io/contreaddata.c.o: CC := $(CC_OLD)
+build/src/libultra/os/initialize.c.o: CC := $(CC_OLD)
+build/src/libultra/io/pfsgetstatus.c.o: CC := $(CC_OLD)
+build/src/libultra/al/reverb.c.o: CC := $(CC_OLD)
+build/src/libultra/al/bnkf.c.o: CC := $(CC_OLD)
+build/src/libultra/al/bnkf.c.o: OPTFLAGS := -O3
+build/src/libultra/al/load.c.o: CC := $(CC_OLD)
+build/src/libultra/al/load.c.o: OPTFLAGS := -O3
+
+build/src/libultra/io/gbpakcheckconnector.c.o: CC := $(CC_OLD)
+
+######################## Flags #############################
+
+ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -Iinclude -Iinclude/PR -Iinclude/audio -32
+
+# we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
+CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Iinclude/PR -Iinclude/audio -Wab,-r4300_mul -D_LANGUAGE_C -DF3DEX_GBI -DNDEBUG -woff 649,838,712 $(MIPS_VERSION)
+
+LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
+
+######################## Build #############################
 
 default: all
 
@@ -95,6 +132,11 @@ $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT)
 
 $(BUILD_DIR)/%.c.o: %.c
 	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $^
+
+$(BUILD_DIR)/src/libultra/libc/ll.c.o: src/libultra/libc/ll.c
+	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $^
+	python3 tools/set_o32abi_bit.py $@
+	@$(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
 
 $(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<

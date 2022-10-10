@@ -38,4 +38,8 @@
 #include <PR/ultralog.h>
 #include <PR/leo.h>
 
+#include "ultra64/thread.h"
+
+#include "macros.h"
+
 #endif

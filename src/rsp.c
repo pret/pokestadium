@@ -14,7 +14,7 @@ OSThread gRspThread;
 u8 unk_80081AB0[0x2000];
 u8 gRspThreadStack[0x9C];
 OSMesg D_80083B4C;
-u8 unk_80081B50[0x3C];
+u8 unk_80083B50[0x3C];
 OSMesg D_80083B8C;
 u8 unk_80083B90[0x3C];
 OSMesg D_80083BCC;
@@ -50,7 +50,7 @@ OSPiHandle* func_80000628(void) {
 
         sramHandle.domain = PI_DOMAIN2;
         sramHandle.speed = 0;
-        func_80057FD0(&sramHandle.transferInfo, sizeof(sramHandle.transferInfo));
+        bzero(&sramHandle.transferInfo, sizeof(sramHandle.transferInfo));
         func_8005A990(&sramHandle);
     }
     return &sramHandle;
@@ -66,7 +66,7 @@ s32 func_800006C4(struct UnkStruct800006C4_2* arg0) {
     unkStruct.sp2C = arg0->unk1C;
     unkStruct.sp30 = arg0->size;
     osInvalDCache(arg0->vaddr, arg0->size);
-    func_8005E0F0(unk1C, &unkStruct.sp20, 0);
+    osEPiStartDma(unk1C, &unkStruct.sp20, 0);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, 1);
     return 0;
 }
@@ -81,7 +81,7 @@ s32 func_8000074C(struct UnkStruct800006C4_2* arg0) {
     unkStruct.sp2C = arg0->unk1C;
     unkStruct.sp30 = arg0->size;
     osWritebackDCache(arg0->vaddr, arg0->size);
-    func_8005E0F0(unk1C, &unkStruct.sp20, 1);
+    osEPiStartDma(unk1C, &unkStruct.sp20, 1);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
@@ -101,7 +101,7 @@ s32 func_800007D4(struct UnkStruct800006C4_2* arg0, s32 arg1) {
     unkStruct.sp2C = arg0->unk1C;
     unkStruct.sp30 = arg0->size;
     osInvalDCache(arg0->vaddr, arg0->size);
-    func_8005E0F0(handle, &unkStruct.sp20, 0);
+    osEPiStartDma(handle, &unkStruct.sp20, 0);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
@@ -117,7 +117,7 @@ s32 func_8000087C(struct UnkStruct800006C4_2* arg0) {
     unkStruct.sp2C = arg0->unk1C;
     unkStruct.sp30 = arg0->size;
     osWritebackDCache(arg0->vaddr, arg0->size);
-    func_8005E0F0(handle, &unkStruct.sp20, 1);
+    osEPiStartDma(handle, &unkStruct.sp20, 1);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
@@ -257,7 +257,7 @@ void thread20_rsp(void *arg) {
 void rsp_init(void) {
     osCreateMesgQueue(&D_80083BD0.queue2, &D_80083BCC, 1);
     osCreateMesgQueue(&D_80083BD0.queue1, &D_80083B8C, 16);
-    func_8005B6A0(0x96, &D_80083BD0.unk4, &gRspThreadStack[0x1C], 0x20);
+    osCreatePiManager(0x96, &D_80083BD0.unk4, &gRspThreadStack[0x1C], 0x20);
     osCreateThread(&gRspThread, 20, thread20_rsp, NULL, gRspThreadStack, 90);
     osStartThread(&gRspThread);
 }
