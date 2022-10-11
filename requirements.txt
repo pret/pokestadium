@@ -8,3 +8,4 @@ rabbitizer>=1.2.0
 pygfxd
 tqdm
 intervaltree
+n64img
