@@ -51,7 +51,7 @@ OSPiHandle* func_80000628(void) {
         sramHandle.domain = PI_DOMAIN2;
         sramHandle.speed = 0;
         bzero(&sramHandle.transferInfo, sizeof(sramHandle.transferInfo));
-        func_8005A990(&sramHandle);
+        osEPiLinkHandle(&sramHandle);
     }
     return &sramHandle;
 }
