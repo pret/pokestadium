@@ -4,7 +4,7 @@
 void __osPfsRequestOneChannel(int channel, u8 cmd);
 void __osPfsGetOneChannelData(int channel, OSContStatus *data);
 
-extern u8 g_PfsPrevBank;
+extern u8 __osPfsInodeCacheBank;
 
 s32 __osPfsGetStatus(OSMesgQueue *queue, int channel)
 {
@@ -13,7 +13,7 @@ s32 __osPfsGetStatus(OSMesgQueue *queue, int channel)
 	OSContStatus data;
 
 	ret = 0;
-	g_PfsPrevBank = 0xfa;
+	__osPfsInodeCacheBank = 0xfa;
 
 	__osPfsRequestOneChannel(channel, CONT_CMD_REQUEST_STATUS);
 	ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);

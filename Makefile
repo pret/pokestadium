@@ -61,10 +61,16 @@ build/src/libultra/os/dequeuethread.c.o: OPTFLAGS := -O1
 build/src/libultra/os/createthread.c.o: OPTFLAGS := -O1
 build/src/libultra/os/virtualtophysical.c.o: OPTFLAGS := -O1
 build/src/libultra/os/initialize.c.o: OPTFLAGS := -O1
+build/src/libultra/os/epilinkhandle.c.o: OPTFLAGS := -O1
+build/src/libultra/os/getmemsize.c.o: OPTFLAGS := -O1
 build/src/libultra/io/pigetcmdq.c.o: OPTFLAGS := -O1
 build/src/libultra/io/sptask.c.o: OPTFLAGS := -O1
 build/src/libultra/io/controller.c.o: OPTFLAGS := -O1
 build/src/libultra/io/conteeplongread.c.o: OPTFLAGS := -O1
+build/src/libultra/io/viblack.c.o: OPTFLAGS := -O1
+build/src/libultra/io/visetmode.c.o: OPTFLAGS := -O1
+build/src/libultra/io/virepeatline.c.o: OPTFLAGS := -O1
+build/src/libultra/io/pfsisplug.c.o: OPTFLAGS := -O1
 build/src/libultra/libc/ll.c.o: OPTFLAGS := -O1
 build/src/libultra/libc/ll.c.o: MIPS_VERSION := -mips3 -32
 
@@ -78,6 +84,7 @@ build/src/libultra/gu/scale.c.o: OPTFLAGS := -O3
 build/src/libultra/gu/sinf.c.o: CC := $(CC_OLD)
 build/src/libultra/io/controller.c.o: CC := $(CC_OLD)
 build/src/libultra/io/contreaddata.c.o: CC := $(CC_OLD)
+build/src/libultra/io/devmgr.c.o: CC := $(CC_OLD)
 build/src/libultra/os/initialize.c.o: CC := $(CC_OLD)
 build/src/libultra/io/pfsgetstatus.c.o: CC := $(CC_OLD)
 build/src/libultra/al/reverb.c.o: CC := $(CC_OLD)
@@ -85,6 +92,12 @@ build/src/libultra/al/bnkf.c.o: CC := $(CC_OLD)
 build/src/libultra/al/bnkf.c.o: OPTFLAGS := -O3
 build/src/libultra/al/load.c.o: CC := $(CC_OLD)
 build/src/libultra/al/load.c.o: OPTFLAGS := -O3
+build/src/libultra/gu/mtxutil.c.o: CC := $(CC_OLD)
+build/src/libultra/gu/mtxutil.c.o: OPTFLAGS := -O3
+build/src/libultra/io/pfsisplug.c.o: CC := $(CC_OLD)
+build/src/libultra/io/conteepprobe.c.o: CC := $(CC_OLD)
+build/src/libultra/io/conteepwrite.c.o: CC := $(CC_OLD)
+build/src/libultra/io/contpfs.c.o: CC := $(CC_OLD)
 
 build/src/libultra/io/gbpakcheckconnector.c.o: CC := $(CC_OLD)
 
