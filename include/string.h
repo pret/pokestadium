@@ -46,7 +46,7 @@ typedef unsigned long	size_t;
 #endif
 
 extern void *memcpy(void *, const void *, size_t);
-extern char *strchr(const char *, int);
+extern const char *strchr(const char *, int);
 extern size_t strlen(const char *);
 
 #ifdef __cplusplus
