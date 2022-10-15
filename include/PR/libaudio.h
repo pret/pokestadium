@@ -22,7 +22,7 @@
  *
  *  $Revision: 1.173 $
  *  $Date: 1997/12/01 12:42:21 $
- *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/libaudio.h,v $
+ *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/libaudio.h,v $
  *
  **************************************************************************/
 
@@ -35,10 +35,10 @@ extern "C" {
 
 #include <PR/ultratypes.h>
 #include <PR/mbi.h>
-
+    
 /***********************************************************************
  * misc defines
- ***********************************************************************/
+ ***********************************************************************/    
 #ifndef _EMULATOR
 #	ifdef AUD_PROFILE
 
@@ -63,10 +63,10 @@ extern "C" {
 
 #define AL_FX_BUFFER_SIZE       8192
 #define AL_FRAME_INIT           -1
-#define AL_USEC_PER_FRAME       (VERSION >= VERSION_PAL_BETA ? 20000 : 16000)
+#define AL_USEC_PER_FRAME       16000
 #define AL_MAX_PRIORITY         127
-#define AL_GAIN_CHANGE_TIME     1000
-
+#define AL_GAIN_CHANGE_TIME     1000    
+    
 typedef s32     ALMicroTime;
 typedef u8      ALPan;
 
@@ -171,7 +171,7 @@ enum    {AL_ADPCM_WAVE = 0,
 typedef struct {
     s32 order;
     s32 npredictors;
-    s16 book[128];        /* Actually variable size. Must be 8-byte aligned */
+    s16 book[1];        /* Actually variable size. Must be 8-byte aligned */
 } ALADPCMBook;
 
 typedef struct {
@@ -299,11 +299,8 @@ typedef struct {
     void                *dmaproc;
     ALHeap              *heap;
     s32                 outputRate;     /* output sample rate */
-    ALFxId              fxTypes[4];
-
-	// This should be [4], but this causes too much stack usage in sndInit.
-	// May have to figure out what sndInit's sp7c is before this can be fixed.
-    s32                 *params[1];
+    ALFxId              fxType;
+    s32                 *params;
 } ALSynConfig;
 
 typedef struct ALPlayer_s {
@@ -340,9 +337,9 @@ typedef struct {
     s32         curSamples;     /* samples from start of game           */
     ALDMANew    dma;
     ALHeap      *heap;
-
+    
     struct ALParam_s    *paramList;
-
+    
     struct ALMainBus_s  *mainBus;
     struct ALAuxBus_s   *auxBus;        /* ptr to array of aux bus structs */
     struct ALFilter_s   *outputFilter;  /* last filter in the filter chain */
@@ -402,12 +399,9 @@ Acmd    *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen);
 /*
  * Play states
  */
-#define AL_STOPPED  0
-#define AL_PLAYING  1
-#define AL_STOPPING 2
-#define AL_STATE3   3
-#define AL_STATE4   4
-#define AL_STATE5   5
+#define AL_STOPPED      0
+#define AL_PLAYING      1
+#define AL_STOPPING     2
 
 #define AL_DEFAULT_PRIORITY     5
 #define AL_DEFAULT_VOICE        0
@@ -417,32 +411,30 @@ Acmd    *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen);
  * Audio Library event type definitions
  */
 enum ALMsg {
-    /*0x00*/ AL_SEQ_REF_EVT,	/* Reference to a pending event in the sequence. */
-    /*0x01*/ AL_SEQ_MIDI_EVT,
-    /*0x02*/ AL_SEQP_MIDI_EVT,
-    /*0x03*/ AL_TEMPO_EVT,
-    /*0x04*/ AL_SEQ_END_EVT,
-    /*0x05*/ AL_NOTE_END_EVT,
-    /*0x06*/ AL_SEQP_ENV_EVT,
-    /*0x07*/ AL_SEQP_META_EVT,
-    /*0x08*/ AL_SEQP_PROG_EVT,
-    /*0x09*/ AL_SEQP_API_EVT,
-    /*0x0a*/ AL_SEQP_VOL_EVT,
-    /*0x0b*/ AL_SEQP_LOOP_EVT,
-    /*0x0c*/ AL_SEQP_PRIORITY_EVT,
-    /*0x0d*/ AL_SEQP_SEQ_EVT,
-    /*0x0e*/ AL_SEQP_BANK_EVT,
-    /*0x0f*/ AL_SEQP_PLAY_EVT,
-    /*0x10*/ AL_SEQP_STOP_EVT,
-    /*0x11*/ AL_SEQP_STOPPING_EVT,
-    /*0x12*/ AL_TRACK_END,
-    /*0x13*/ AL_CSP_LOOPSTART,
-    /*0x14*/ AL_CSP_LOOPEND,
-    /*0x15*/ AL_CSP_NOTEOFF_EVT,
-    /*0x16*/ AL_TREM_OSC_EVT,
-    /*0x17*/ AL_VIB_OSC_EVT,
-    /*0x18*/ AL_18_EVT,
-    /*0x19*/ AL_19_EVT
+    AL_SEQ_REF_EVT,	/* Reference to a pending event in the sequence. */
+    AL_SEQ_MIDI_EVT,
+    AL_SEQP_MIDI_EVT,
+    AL_TEMPO_EVT,
+    AL_SEQ_END_EVT,
+    AL_NOTE_END_EVT,
+    AL_SEQP_ENV_EVT,
+    AL_SEQP_META_EVT,
+    AL_SEQP_PROG_EVT,
+    AL_SEQP_API_EVT,
+    AL_SEQP_VOL_EVT,
+    AL_SEQP_LOOP_EVT,
+    AL_SEQP_PRIORITY_EVT,
+    AL_SEQP_SEQ_EVT,
+    AL_SEQP_BANK_EVT,
+    AL_SEQP_PLAY_EVT,
+    AL_SEQP_STOP_EVT,
+    AL_SEQP_STOPPING_EVT,
+    AL_TRACK_END,
+    AL_CSP_LOOPSTART,
+    AL_CSP_LOOPEND,
+    AL_CSP_NOTEOFF_EVT,
+    AL_TREM_OSC_EVT,
+    AL_VIB_OSC_EVT
 };
 
 /*
@@ -535,7 +527,7 @@ typedef struct {
 typedef struct {
     s32         ticks;    /* MIDI, Tempo and End events must start with ticks */
     u8          status;
-    u8          byte1;
+    u8          byte1; 
     u8          byte2;
     u32         duration;
 } ALMIDIEvent;
@@ -667,34 +659,8 @@ typedef struct {
     u8                  priority;       /* priority for this chan           */
     u8                  vol;            /* current volume for this chan     */
     u8                  fxmix;          /* current fx mix for this chan     */
-    u8                  unk0b;
     u8                  sustain;        /* current sustain pedal state      */
-    u8 unk0d;
-    u8 unk0e;
-    u8 unk0f;
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
-    f32 pitchBend;      /* current pitch bend val in cents  */
-    ALMicroTime attackTime;
-    ALMicroTime decayTime;
-    ALMicroTime releaseTime;
-    u8 unk24;
-    u8 attackVolume;
-    u8 decayVolume;
-    s8 unk27;
-    u8 tremType;
-    u8 tremRate;
-    u8 tremDepth;
-    u8 tremDelay;
-    u8 vibType;
-    u8 vibRate;
-    u8 vibDepth;
-    u8 vibDelay;
-    u8 unk30;
-    u8 unk31;
-    u8 unk32;
+    f32                 pitchBend;      /* current pitch bend val in cents  */
 } ALChanState;
 
 typedef struct ALSeq_s {
@@ -756,7 +722,7 @@ typedef struct {
 } ALSeqpConfig;
 
 typedef ALMicroTime   (*ALOscInit)(void **oscState,f32 *initVal, u8 oscType,
-                                   u8 oscRate, u8 oscDepth, u8 oscDelay, u8 unk07);
+                                   u8 oscRate, u8 oscDepth, u8 oscDelay);
 typedef ALMicroTime   (*ALOscUpdate)(void *oscState, f32 *updateVal);
 typedef void          (*ALOscStop)(void *oscState);
 
@@ -834,7 +800,7 @@ f32     alCSeqTicksToSec(ALCSeq *seq, s32 ticks, u32 tempo);
 u32     alCSeqSecToTicks(ALCSeq *seq, f32 sec, u32 tempo);
 void    alCSeqNewMarker(ALCSeq *seq, ALCSeqMarker *m, u32 ticks);
 void    alCSeqSetLoc(ALCSeq *seq, ALCSeqMarker *marker);
-void    alCSeqGetLoc(ALCSeq *seq, ALCSeqMarker *marker);
+void    alCSeqGetLoc(ALCSeq *seq, ALCSeqMarker *marker); 
 
 /*
  * Sequence Player routines
@@ -927,11 +893,9 @@ void    alCSPSendMidi(ALCSPlayer *seqp, s32 ticks, u8 status,
  ***********************************************************************/
 
 typedef struct {
-    s32         maxStates;
+    s32         maxSounds;
     s32         maxEvents;
-	s32         maxSounds;
     ALHeap      *heap;
-    u16         unk10;
 } ALSndpConfig;
 
 typedef struct {
@@ -948,7 +912,7 @@ typedef struct {
 } ALSndPlayer;
 
 typedef s16   ALSndId;
-
+    
 void            alSndpNew(ALSndPlayer *sndp, ALSndpConfig *c);
 void            alSndpDelete(ALSndPlayer *sndp);
 

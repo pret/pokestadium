@@ -24,6 +24,7 @@ segments:
     - [0x0B70, bin, bootcode_font]
   - name: text
     type: code
+    bss_size: 0x85E30
     start: 0x1000
     vram: 0x80000400
     subsegments:
@@ -241,36 +242,36 @@ segments:
     - [0x5F820, c, libultra/io/sptaskyielded]
     - [0x5F8A0, c, libultra/gu/rotateRPY]
     - [0x5FA40, hasm, libultra/libc/bcmp]
-    - [0x5FB60, asm, libultra/gu/rotate]
-    - [0x5FD50, asm, libultra/os/gettime]
-    - [0x5FDE0, asm, libultra/os/timerintr]
-    - [0x601E0, asm, libultra/al/synthesizer]
-    - [0x60860, asm, libultra/al/drvrNew]
-    - [0x61010, asm, libultra/al/mainbus]
-    - [0x61160, asm, libultra/al/auxbus]
-    - [0x61270, asm, libultra/al/env]
-    - [0x61EF0, asm, libultra/al/resample]
+    - [0x5FB60, c, libultra/gu/rotate]
+    - [0x5FD50, c, libultra/os/gettime]
+    - [0x5FDE0, c, libultra/os/timerintr]
+    - [0x601E0, c, libultra/al/synthesizer]
+    - [0x60860, c, libultra/al/drvrNew]
+    - [0x61010, c, libultra/al/mainbus]
+    - [0x61160, c, libultra/al/auxbus]
+    - [0x61270, c, libultra/al/env]
+    - [0x61EF0, c, libultra/al/resample]
     - [0x621F0, c, libultra/al/load]
-    - [0x62D40, asm, libultra/al/filter]
-    - [0x62D60, asm, libultra/al/save]
-    - [0x62E20, asm, libultra/os/setglobalintmask]
-    - [0x62E70, asm, libultra/io/aisetfreq]
-    - [0x62FC0, asm, libultra/io/dpctr]
-    - [0x63010, asm, libultra/os/getactivequeue]
-    - [0x63020, asm, libultra/gu/normalize]
-    - [0x630B0, asm, libultra/os/setcompare]
-    - [0x630C0, asm, libultra/io/aigetstat]
-    - [0x630D0, asm, libultra/io/dpsetstat]
-    - [0x630E0, asm, libultra/al/copy]
-    - [0x63160, asm, libultra/libc/bcopy]
-    - [0x63470, asm, libultra/os/resetglobalintmask]
-    - [0x634D0, asm, libultra/gu/ortho]
-    - [0x63690, asm, libultra/os/interrupt]
-    - [0x63720, asm, libultra/io/vi]
-    - [0x63860, asm, libultra/io/viswapcontext]
+    - [0x62D40, c, libultra/al/filter]
+    - [0x62D60, c, libultra/al/save]
+    - [0x62E20, c, libultra/os/setglobalintmask]
+    - [0x62E70, c, libultra/io/aisetfreq]
+    - [0x62FC0, c, libultra/io/dpctr]
+    - [0x63010, c, libultra/os/getactivequeue]
+    - [0x63020, c, libultra/gu/normalize]
+    - [0x630B0, hasm, libultra/os/setcompare]
+    - [0x630C0, c, libultra/io/aigetstat]
+    - [0x630D0, c, libultra/io/dpsetstat]
+    - [0x630E0, c, libultra/al/copy]
+    - [0x63160, hasm, libultra/libc/bcopy]
+    - [0x63470, c, libultra/os/resetglobalintmask]
+    - [0x634D0, c, libultra/gu/ortho]
+    - [0x63690, hasm, libultra/os/interrupt]
+    - [0x63720, c, libultra/io/vi]
+    - [0x63860, c, libultra/io/viswapcontext]
     - [0x63B60, c, libultra/io/pigetcmdq]
-    - [0x63B90, asm, libultra/gu/cosf]
-    - [0x63D00, asm, libultra/io/epiread]
+    - [0x63B90, c, libultra/gu/cosf]
+    - [0x63D00, c, libultra/io/epiread]
     - [0x63D50, asm, libultra/io/visetspecial]
     - [0x63EB0, asm, libultra/os/settime]
     - [0x63EE0, asm, libultra/io/visetevent]
@@ -321,7 +322,11 @@ segments:
     - [0x7A2E0, bin, rom_data_7A2E0]
     - [0x7B550, .data, libultra/gu/random]
     - [0x7B560, .data, libultra/libc/xprintf]
-    - [0x7B5B0, bin, rom_data_7B5B0]
+    - [0x7B5B0, .data, libultra/os/timerintr]
+    - [0x7B5C0, .data, libultra/al/drvrNew]
+    - [0x7B750, .data, libultra/al/env]
+    - [0x7B890, .data, libultra/io/vi]
+    - [0x7B900, bin, rom_data_7B900]
     
     # Start of .rodata
     - [0x7BAC0, .rodata, rsp] # rsp.c rodata
@@ -333,7 +338,22 @@ segments:
     - [0x7EF70, .rodata, libultra/io/devmgr]
     - [0x7EF90, .rodata, libultra/libc/xprintf]
     - [0x7F090, .rodata, libultra/gu/rotateRPY]
-    - [0x7F0A0, bin, rom_rodata_7F0A0] # this is libultra/gu/rotate, but cant migrate due to bss splat issues
-    - [0x7F0B0, bin, rom_rodata_7F0B0]
-  - [0x7F980, bin] # rest of rom part 2
+    - [0x7F0A0, .rodata, libultra/gu/rotate]
+    - [0x7F0B0, .rodata, libultra/al/synthesizer]
+    - [0x7F0C0, .rodata, libultra/al/drvrNew]
+    - [0x7F0E0, .rodata, libultra/al/env]
+    - [0x7F130, .rodata, libultra/al/resample]
+    - [0x7F180, .rodata, libultra/gu/cosf]
+    - [0x7F1D0, bin, rom_rodata_7F1D0]
+    - [0x7F980]
+    
+    # .bss
+    - {vram: 0x8007F190, type: .bss, name: main}
+    - {vram: 0x80081900, type: .bss, name: rsp}
+    - {vram: 0x80083CA0, type: .bss, name: unk_bss}
+    - {vram: 0x80103880, type: .bss, name: libultra/gu/rotate}
+    - {vram: 0x80103890, type: .bss, name: libultra/os/timerintr}
+    
+  # rest of the ROM
+  - [0x7F980, bin]
   - [0x2000000]
