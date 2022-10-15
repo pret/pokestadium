@@ -19,7 +19,7 @@ OSTime osClockRate = 62500000;
 
 s32 osViClock = VI_NTSC_CLOCK;
 
-u32 _osShutdown = 0;
+u32 __osShutdown = 0;
 u32 __osGlobalIntMask = OS_IM_ALL;
 
 u32 var8005cf74 = 0;

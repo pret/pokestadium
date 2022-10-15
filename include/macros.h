@@ -1,6 +1,9 @@
 #ifndef _MACROS_H_
 #define _MACROS_H_
 
+#define true 1
+#define false 0
+
 #ifndef __sgi
 #define GLOBAL_ASM(...)
 #endif

@@ -40,6 +40,8 @@
 
 #include "ultra64/thread.h"
 
+#include "functions.h"
 #include "macros.h"
+#include "variables.h"
 
 #endif
