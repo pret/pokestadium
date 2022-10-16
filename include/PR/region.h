@@ -18,7 +18,7 @@
  *  $Revision: 1.8 $
  *  $Date: 1997/11/26 00:30:56 $
  *  $Author: mitu $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/region.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/region.h,v $
  *
  *  Description:
  *      This file contains macros and structure definitions for the region

@@ -22,7 +22,7 @@
  *
  *  $Revision: 1.6 $
  *  $Date: 1997/02/11 08:39:05 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/ultralog.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ultralog.h,v $
  *
  **************************************************************************/
 

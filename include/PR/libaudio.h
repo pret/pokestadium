@@ -22,7 +22,7 @@
  *
  *  $Revision: 1.173 $
  *  $Date: 1997/12/01 12:42:21 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/libaudio.h,v $
+ *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/libaudio.h,v $
  *
  **************************************************************************/
 
