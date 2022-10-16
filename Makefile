@@ -71,6 +71,11 @@ build/src/libultra/os/gettime.c.o: OPTFLAGS := -O1
 build/src/libultra/os/timerintr.c.o: OPTFLAGS := -O1
 build/src/libultra/os/setglobalintmask.c.o: OPTFLAGS := -O1
 build/src/libultra/os/resetglobalintmask.c.o: OPTFLAGS := -O1
+build/src/libultra/os/settime.c.o: OPTFLAGS := -O1
+build/src/libultra/os/yieldthread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/settimer.c.o: OPTFLAGS := -O1
+build/src/libultra/os/startthread.c.o: OPTFLAGS := -O1
+build/src/libultra/os/sethwinterrupt.c.o: OPTFLAGS := -O1
 build/src/libultra/io/pigetcmdq.c.o: OPTFLAGS := -O1
 build/src/libultra/io/sptask.c.o: OPTFLAGS := -O1
 build/src/libultra/io/controller.c.o: OPTFLAGS := -O1
@@ -87,12 +92,20 @@ build/src/libultra/io/sp.c.o: OPTFLAGS := -O1
 build/src/libultra/io/viswapbuf.c.o: OPTFLAGS := -O1
 build/src/libultra/io/sptaskyielded.c.o: OPTFLAGS := -O1
 build/src/libultra/io/vi.c.o: OPTFLAGS := -O1
+build/src/libultra/io/visetevent.c.o: OPTFLAGS := -O1
+build/src/libultra/io/aisetnextbuf.c.o: OPTFLAGS := -O1
+build/src/libultra/io/ai.c.o: OPTFLAGS := -O1
+build/src/libultra/io/vigetcurrframebuf.c.o: OPTFLAGS := -O1
+build/src/libultra/io/spsetpc.c.o: OPTFLAGS := -O1
 build/src/libultra/libc/ll.c.o: OPTFLAGS := -O1
 build/src/libultra/libc/ll.c.o: MIPS_VERSION := -mips3 -32
+build/src/libultra/libc/llcvt.c.o: OPTFLAGS := -O1
+build/src/libultra/libc/llcvt.c.o: MIPS_VERSION := -mips3 -32
 
 # cheap hack. TODO: Make the override better
 build/src/libultra/io/gbpakpower.c.o: OPTFLAGS += -Wo,-loopunroll,0
 build/src/libultra/io/gbpakinit.c.o: OPTFLAGS += -Wo,-loopunroll,0
+build/src/libultra/io/gbpakselectbank.c.o: OPTFLAGS += -Wo,-loopunroll,0
 
 # Libultra misc
 build/src/libultra/gu/scale.c.o: CC := $(CC_OLD)
@@ -114,6 +127,10 @@ build/src/libultra/gu/cosf.c.o: CC := $(CC_OLD)
 build/src/libultra/gu/random.c.o: CC := $(CC_OLD)
 build/src/libultra/libc/xprintf.c.o: CC := $(CC_OLD)
 build/src/libultra/libc/xprintf.c.o: OPTFLAGS := -O3
+build/src/libultra/libc/xldtob.c.o: CC := $(CC_OLD)
+build/src/libultra/libc/xldtob.c.o: OPTFLAGS := -O3
+build/src/libultra/libc/xlitob.c.o: CC := $(CC_OLD)
+build/src/libultra/libc/xlitob.c.o: OPTFLAGS := -O3
 build/src/libultra/libc/string.c.o: CC := $(CC_OLD)
 build/src/libultra/libc/string.c.o: OPTFLAGS := -O3
 build/src/libultra/io/controller.c.o: CC := $(CC_OLD)
@@ -137,15 +154,31 @@ build/src/libultra/al/env.c.o: CC := $(CC_OLD)
 build/src/libultra/al/resample.c.o: CC := $(CC_OLD)
 build/src/libultra/al/resample.c.o: OPTFLAGS := -O3
 build/src/libultra/al/save.c.o: CC := $(CC_OLD)
+build/src/libultra/al/heapalloc.c.o: CC := $(CC_OLD)
 build/src/libultra/gu/mtxutil.c.o: CC := $(CC_OLD)
 build/src/libultra/gu/mtxutil.c.o: OPTFLAGS := -O3
 build/src/libultra/io/pfsisplug.c.o: CC := $(CC_OLD)
 build/src/libultra/io/conteepprobe.c.o: CC := $(CC_OLD)
 build/src/libultra/io/conteepwrite.c.o: CC := $(CC_OLD)
+build/src/libultra/io/conteepread.c.o: CC := $(CC_OLD)
 build/src/libultra/io/contpfs.c.o: CC := $(CC_OLD)
 build/src/libultra/io/viswapcontext.c.o: CC := $(CC_OLD)
+build/src/libultra/io/contramwrite.c.o: CC := $(CC_OLD)
+build/src/libultra/io/contramread.c.o: CC := $(CC_OLD)
+build/src/libultra/io/crc.c.o: CC := $(CC_OLD)
+build/src/libultra/libc/ldiv.c.o: CC := $(CC_OLD)
+build/src/libultra/io/vimgr.c.o: CC := $(CC_OLD)
+build/src/libultra/io/visetxscale.c.o: CC := $(CC_OLD)
+build/src/libultra/io/visetxscale.c.o: OPTFLAGS := -O1
+build/src/libultra/io/visetyscale.c.o: CC := $(CC_OLD)
+build/src/libultra/io/visetyscale.c.o: OPTFLAGS := -O1
+build/src/libultra/al/synallocfx.c.o: CC := $(CC_OLD)
+build/src/libultra/al/synallocfx.c.o: OPTFLAGS := -O3
 
 build/src/libultra/io/gbpakcheckconnector.c.o: CC := $(CC_OLD)
+build/src/libultra/io/gbpakreadid.c.o: CC := $(CC_OLD)
+build/src/libultra/io/gbpakreadwrite.c.o: CC := $(CC_OLD)
+build/src/libultra/io/gbpakselectbank.c.o: CC := $(CC_OLD)
 
 ######################## Flags #############################
 
@@ -193,6 +226,11 @@ $(BUILD_DIR)/%.c.o: %.c
 	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $^
 
 $(BUILD_DIR)/src/libultra/libc/ll.c.o: src/libultra/libc/ll.c
+	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $^
+	python3 tools/set_o32abi_bit.py $@
+	@$(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
+
+$(BUILD_DIR)/src/libultra/libc/llcvt.c.o: src/libultra/libc/llcvt.c
 	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $^
 	python3 tools/set_o32abi_bit.py $@
 	@$(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
