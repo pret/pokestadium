@@ -16,3 +16,7 @@ __pycache__/
 
 undefined_funcs_auto.txt
 undefined_syms_auto.txt
+
+# qemu-irix compilers
+tools/ido5.3_compiler/
+tools/ido7.1_compiler/

@@ -24,7 +24,7 @@
  *
  *  $Revision: 1.12 $
  *  $Date: 1997/02/11 08:40:49 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/uportals.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/uportals.h,v $
  *
  **************************************************************************/
 

@@ -76,7 +76,7 @@ extern u64 D_80084C68[0x1];
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
-extern s32 D_80000300;
+extern s32 osTvType;
 extern char D_80068B74[];
 extern f32 D_8007AF10;
 
@@ -132,7 +132,7 @@ void func_80001444(struct UnkStruct80001380* arg0, struct UnkArray4* arg1, s32 a
 void func_80001474(s8 arg0, s8 arg1) {
     s32 var_v0;
 
-    if (D_80000300 == 2) {
+    if (osTvType == 2) {
         var_v0 = (arg0 * 2) + arg1 + 8;
     } else {
         var_v0 = (arg0 * 2) + arg1 + 4;
@@ -142,7 +142,7 @@ void func_80001474(s8 arg0, s8 arg1) {
     osViSetSpecialFeatures(0x40U);
     osViSetSpecialFeatures(2U);
     osViSetSpecialFeatures(0x10U);
-    if (D_80000300 == 0) {
+    if (osTvType == 0) {
         osViSetYScale(D_8007AF10);
     }
 }
@@ -191,7 +191,7 @@ void func_800015A8(void) {
     }
     if (D_80083CA0.unkAA8 != NULL) {
         osViSwapBuffer(D_80083CA0.unkAA8->unk8);
-        func_8005B230(0);
+        osViRepeatLine(0);
         if ((D_80083CA0.unkA9D != D_80083CA0.unkAAD) || (D_80083CA0.unkA9E != D_80083CA0.unkAAE)) {
             func_80001474((s8) D_80083CA0.unkA9D, (s8) D_80083CA0.unkA9E);
         }
@@ -202,7 +202,7 @@ void func_800015A8(void) {
         }
         func_80008F54(D_80083CA0.unkAA8->unk8, *(u16 *)&D_80083CA0.unkAA8->unk4, 0x10);
     } else {
-        func_8005B230(1);
+        osViRepeatLine(1);
         osViSwapBuffer(D_80083CA0.unk9E0->unk8);
         if ((D_80083CA0.unkA9D != D_80083CA0.unkAAD) || (D_80083CA0.unkA9E != D_80083CA0.unkAAE)) {
             func_80001474((s8) D_80083CA0.unkA9D, (s8) D_80083CA0.unkA9E);
@@ -253,7 +253,7 @@ void func_8000183C(void* arg) {
 }
 
 void func_800019C8(void) {
-    s32 temp_v0 = D_80000300;
+    s32 temp_v0 = osTvType;
 
     if ((temp_v0 != 1) && (temp_v0 != 2)) {
         osViBlack(1U);

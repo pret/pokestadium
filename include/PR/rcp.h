@@ -1,10 +1,6 @@
 #ifndef _RCP_H_
 #define _RCP_H_
 
-#ifdef _LANGUAGE_C
-#define HW_REG(reg, type) *(volatile type*)((reg) | 0xA0000000)
-#endif
-
 /**************************************************************************
  *                                                                        *
  *               Copyright (C) 1995, Silicon Graphics, Inc.               *
@@ -22,9 +18,9 @@
  *  File: rcp.h
  *
  *  This file contains register and bit definitions for RCP memory map.
- *  $Revision: 1.20 $
- *  $Date: 1997/07/23 08:35:21 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/rcp.h,v $
+ *  $Revision: 1.21 $
+ *  $Date: 1998/07/31 11:08:29 $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/rcp.h,v $
  *
  **************************************************************************/
 
@@ -165,6 +161,8 @@ The Indy development board use cartridge domain 1:
 #define DEVICE_TYPE_BULK	1	/* ROM bulk */
 #define DEVICE_TYPE_64DD	2	/* 64 Disk Drive */
 #define DEVICE_TYPE_SRAM	3	/* SRAM */
+/* 4-6 are reserved */
+#define DEVICE_TYPE_INIT	7	/* initial value */
 
 /*************************************************************************
  * SP Memory
@@ -603,6 +601,7 @@ The Indy development board use cartridge domain 1:
 #define VI_NTSC_CLOCK		48681812        /* Hz = 48.681812 MHz */
 #define VI_PAL_CLOCK		49656530        /* Hz = 49.656530 MHz */
 #define VI_MPAL_CLOCK		48628316        /* Hz = 48.628316 MHz */
+
 
 /*************************************************************************
  * Audio Interface (AI) Registers 

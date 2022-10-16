@@ -12,9 +12,9 @@
 
 /**************************************************************************
  *
- *  $Revision: 1.8 $
- *  $Date: 1997/11/10 10:48:35 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/sptask.h,v $
+ *  $Revision: 1.9 $
+ *  $Date: 1998/03/05 06:40:29 $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/sptask.h,v $
  *
  **************************************************************************/
 
@@ -50,7 +50,7 @@ extern "C" {
  *	- pointer to ucode
  *	- size of ucode
  *	- pointer to initial DMEM data
- *	- size of initial DMEM data 
+ *	- size of initial DMEM data
  *	- pointer to DRAM stack
  *	- size of DRAM stack (max)
  *	- pointer to output buffer
@@ -131,13 +131,14 @@ typedef u32 OSYieldResult;
 #define OS_TASK_USR3			0x0080
 
 /*
- * Size of Yield buffer.  The taskHdrPtr->t.yield_data_ptr must point to a 
+ * Size of Yield buffer.  The taskHdrPtr->t.yield_data_ptr must point to a
  * buffer of this size.  (The size is in bytes).  ONLY If the task will NEVER
  * yield it may be a null pointer.  The buffer must be aligned to a 64 bit
  * boundary.  The taskHdrPtr->t.yield_data_ptr must be set to point to the
  * buffer BEFORE the task is started.
  */
-#if	(defined(F3DEX_GBI)||defined(F3DLP_GBI))
+// @todo: Remove this || 1 hack
+#if	(defined(F3DEX_GBI)||defined(F3DLP_GBI)||defined(F3DEX_GBI_2) || 1)
 #define	OS_YIELD_DATA_SIZE		0xc00
 #else
 #define OS_YIELD_DATA_SIZE		0x900

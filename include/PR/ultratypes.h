@@ -23,7 +23,7 @@
  *
  *  $Revision: 1.6 $
  *  $Date: 1997/12/17 04:02:06 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/ultratypes.h,v $
+ *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ultratypes.h,v $
  *
  **************************************************************************/
 
@@ -34,15 +34,15 @@
  */
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 
-typedef unsigned char			u8;	/* unsigned  8-bit */
-typedef unsigned short			u16;	/* unsigned 16-bit */
-typedef unsigned long			u32;	/* unsigned 32-bit */
-typedef unsigned long long		u64;	/* unsigned 64-bit */
+typedef unsigned char           u8;  /* unsigned  8-bit */
+typedef unsigned short int      u16; /* unsigned 16-bit */
+typedef unsigned int            u32; /* unsigned 32-bit */
+typedef unsigned long long int  u64; /* unsigned 64-bit */
 
-typedef signed char			s8;	/* signed  8-bit */
-typedef short				s16;	/* signed 16-bit */
-typedef long				s32;	/* signed 32-bit */
-typedef long long			s64;	/* signed 64-bit */
+typedef signed char             s8;  /* signed  8-bit */
+typedef signed short int        s16; /* signed 16-bit */
+typedef signed int              s32; /* signed 32-bit */
+typedef signed long long int    s64; /* signed 64-bit */
 
 typedef volatile unsigned char		vu8;	/* unsigned  8-bit */
 typedef volatile unsigned short		vu16;	/* unsigned 16-bit */
