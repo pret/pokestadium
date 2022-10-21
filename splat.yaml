@@ -35,7 +35,7 @@ segments:
     - [0x1A80, c, dma] # DMA transfer
     - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
     - [0x1F80, c, dp_intro] # dp intro code
-    - [0x28E0, asm] # dp code
+    - [0x28E0, c, dp] # dp code
     - [0x2EC0, asm] # intro loader
     - [0x3640, asm] #
     - [0x3A80, asm] # transition loader
@@ -50,7 +50,7 @@ segments:
     - [0xAF00, asm] # camera code
     - [0xB130, asm] # dp code for text
     - [0xC030, asm] # extra sprites loader
-    - [0xC3D0, asm] #
+    - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, asm] # yay0 decoder
     - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
     - [0xC910, bin, libleo_bootstrap] # have issues being disassembled, so are bins for now.
@@ -366,6 +366,7 @@ segments:
     - {vram: 0x80103890, type: .bss, name: libultra/os/timerintr}
     - {vram: 0x801038E4, type: .bss, name: libultra/io/cartrominit}
     - {vram: 0x80103950, type: .bss, name: libultra/io/vimgr}
+    - {vram: 0x80104b70, type: .bss, name: libultra/io/conteepread}
     
   # rest of the ROM
   - [0x7F980, bin]

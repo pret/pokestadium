@@ -4,8 +4,8 @@
 #include "siint.h"
 
 void __osPackEepReadData(u8 address);
-extern OSPifRam __osEepPifRam;
-extern s32 __osEepromRead16K;
+OSPifRam __osEepPifRam;
+s32 __osEepromRead16K;
 
 #define CONT_RANGE_ERROR               -1
 

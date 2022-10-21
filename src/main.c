@@ -37,7 +37,7 @@ void thread1_idle(void *arg0) {
 void main_func(void) {
     osInitialize();
     osCartRomInit();
-    func_8000B7D0(0);
+    set_watch_lohi(0);
     func_80002F58();
     osCreateThread(&gIdleThread, 1, &thread1_idle, 0, &pThreads, 100);
     osStartThread(&gIdleThread);
