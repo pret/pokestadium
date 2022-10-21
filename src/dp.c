@@ -1,5 +1,7 @@
 #include <ultra64.h>
 
+typedef unsigned long uintptr_t;
+
 struct UnkStruct800A5870 {
     u32 vaddr;
     u32 size;
@@ -16,21 +18,18 @@ extern struct UnkStruct800A5870 D_800A58F0[]; // might be 16 too
 
 struct RelocTable {
     /* 0x00 */ u32 nRelocations;
-    /* 0x04 */ u32 relocations[1];
+    /* 0x04 */ u32 relocations[]; // variable size
 };
 
 struct Fragment {
-    union {
-        struct FragmentHeader {
-            char filler0[0x8];
-            char str[8]; // "FRAGMENT"
-            u32 unk10;
-            u32 relocOffset; // relocOffset
-            u32 unk18;
-            u32 unk1C;
-        };
-        u8 raw[1]; // unk size
-    };
+    u32 ep1, ep2;    // MIPS instructions to jump to the main function,
+                     // typically something like "j 0x8xx00020; nop"
+    char str[8];     // "FRAGMENT"
+    u32 entrypoint;  // typically 0x20
+    u32 relocOffset; // relocOffset
+    u32 sizeInRom;
+    u32 sizeInRam;
+    char data[]; // variable size
 };
 
 void func_800020B0(u32 id, u32 vaddr, u32 size);
@@ -99,16 +98,16 @@ void func_80001E50(u32 id, struct Fragment* fragment) {
     s32 pad;
 
     relocOffset = fragment->relocOffset;
-    relocSize = fragment->unk1C - fragment->relocOffset;
-    relocInfo = (struct RelocTable *)(fragment->relocOffset + fragment->raw);
+    relocSize = fragment->sizeInRam - fragment->relocOffset;
+    relocInfo = (struct RelocTable *)((uintptr_t)fragment->relocOffset + (uintptr_t)fragment);
 
-    osInvalICache(fragment, fragment->unk1C);
-    osInvalDCache(fragment, fragment->unk1C);
-    func_800020B0(id, fragment, fragment->unk1C);
+    osInvalICache(fragment, fragment->sizeInRam);
+    osInvalDCache(fragment, fragment->sizeInRam);
+    func_800020B0(id, fragment, fragment->sizeInRam);
 
     for(i = 0; i < relocInfo->nRelocations; i++) {
         reloc = relocInfo->relocations[i];
-        relocDataP = (u32*)((reloc & 0xFFFFFF) + fragment->raw);
+        relocDataP = (u32*)((reloc & 0xFFFFFF) + (uintptr_t)fragment);
 
         switch ((reloc & 0x7F000000) >> 24) {
             case R_MIPS_32:
@@ -146,9 +145,9 @@ void func_80001E50(u32 id, struct Fragment* fragment) {
         }
     }
     if (relocSize != 0) {
-        bzero(fragment->relocOffset + fragment->raw, relocSize);
+        bzero(((uintptr_t)fragment->relocOffset + (uintptr_t)fragment), relocSize);
     }
-    osWritebackDCache(fragment, fragment->unk1C);
+    osWritebackDCache(fragment, fragment->sizeInRam);
 }
 
 void func_800020B0(u32 id, u32 vaddr, u32 size) {
