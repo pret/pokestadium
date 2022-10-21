@@ -388,3 +388,5 @@ viEventBuf = 0x80104B18;
 viRetraceMsg = 0x80104B30;
 viCounterMsg = 0x80104B48;
 __osHwIntTable = 0x80079650;
+set_watch_lohi = 0x8000B7D0;
+trigger_fault = 0x8000B7E0;
