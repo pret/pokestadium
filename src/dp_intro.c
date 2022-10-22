@@ -71,7 +71,6 @@ extern u64 D_80066090[0x1];
 extern u64 D_8007E650[0x1];
 extern u64 D_80084860[0x1];
 extern u64 D_80085870[0x1];
-extern u64 D_800A5870[0x1];
 extern u64 D_80084C68[0x1];
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
@@ -118,8 +117,8 @@ void func_80001380(struct UnkStruct80001380* arg0) {
     arg0->task.t.dram_stack_size  = 0x400;
     arg0->task.t.yield_data_ptr   = ALIGN16((u32)D_80084C68);
     arg0->task.t.yield_data_size  = 0xC00;
-    arg0->task.t.output_buff      = D_80085870;
-    arg0->task.t.output_buff_size = D_800A5870;
+    arg0->task.t.output_buff      = (D_80085870);
+    arg0->task.t.output_buff_size = (D_80085870 + (0x20000/sizeof(u64)));
     osCreateMesgQueue(&arg0->queue, &arg0->mesg, 1);
 }
 

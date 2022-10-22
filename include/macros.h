@@ -19,4 +19,10 @@
 
 #define assert
 
+// global typings
+typedef unsigned long uintptr_t;
+
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
 #endif
