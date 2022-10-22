@@ -1,25 +1,11 @@
 #include <ultra64.h>
 #include "stdarg.h"
-
-typedef unsigned long uintptr_t;
+#include "crash_screen.h"
+#include "memmap.h"
 
 extern u32 D_80068BA0[];
-extern u16 D_80069790[];
 
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
-
-typedef struct {
-    /* 0x000 */ OSThread thread;
-    /* 0x1B0 */ char stack[0x800];
-    /* 0x9B0 */ OSMesgQueue queue;
-    /* 0x9C8 */ OSMesg mesg;
-    /* 0x9CC */ u16* frameBuf;
-    /* 0x9D0 */ u16 width;
-    /* 0x9D2 */ u16 height;
-} CrashScreen; // size = 0x9D4
-
-extern CrashScreen gCrashScreen; // bss, externed for now until issues are figured out
+CrashScreen gCrashScreen;
 
 u8 gCrashScreenCharToGlyph[128] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -71,6 +57,23 @@ const char* gFPCSRFaultCauses[6] = {
     "Inexact operation",
 };
 
+/*
+ * To unlock the screen for viewing, press these buttons in sequence
+ * on controller 1 once the game crashes.
+ */
+u16 gCrashScreenUnlockInputs[] = {
+    U_JPAD,
+    D_JPAD,
+    L_JPAD,
+    R_JPAD,
+    U_CBUTTONS,
+    D_CBUTTONS,
+    L_CBUTTONS,
+    R_CBUTTONS,
+    B_BUTTON,
+    A_BUTTON
+};
+
 void crash_screen_sleep(s32 ms) {
     u64 cycles = (ms * 1000LL) * 3000 / 64ULL;
     osSetTime(0);
@@ -78,7 +81,7 @@ void crash_screen_sleep(s32 ms) {
     }
 }
 
-void func_80008388(void) {
+void crash_screen_wait_for_button_combo(void) {
     s32 breakloop = FALSE;
     s32 i = 0;
     
@@ -86,7 +89,7 @@ void func_80008388(void) {
         func_80005A84();
         func_80005AB0();
         if (((u16*)D_80068BA0[0])[4] != 0) {
-            if (((u16*)D_80068BA0[0])[4] == D_80069790[i++]) {
+            if (((u16*)D_80068BA0[0])[4] == gCrashScreenUnlockInputs[i++]) {
                 // have we reached the end of the array? exit the sleep loop.
                 if (i == 10) {
                     breakloop = TRUE;
@@ -294,14 +297,14 @@ void crash_screen_draw(OSThread* faultedThread) {
     crash_screen_print_fpr(210, 210, 28, &ctx->fp28.f.f_even);
     crash_screen_print_fpr(30, 220, 30, &ctx->fp30.f.f_even);
 
-    ret = func_800021A8(ctx->pc);
+    ret = Memmap_GetLoadedFragmentVaddr(ctx->pc);
     if(ret != 0) {
-        crash_screen_printf(0x78, 0xDC, "F-PC:%08XH", ret-0x20);
+        crash_screen_printf(120, 220, "F-PC:%08XH", ret-0x20);
     }
 
-    ret = func_800021A8((u32)ctx->ra);
+    ret = Memmap_GetLoadedFragmentVaddr((u32)ctx->ra);
     if(ret != 0) {
-        crash_screen_printf(0xD2, 0xDC, "F-RA:%08XH", ret-0x20);
+        crash_screen_printf(210, 220, "F-RA:%08XH", ret-0x20);
     }
     
     crash_screen_sleep(500);
@@ -338,7 +341,7 @@ void crash_screen_thread_entry(void* unused) {
     } while (faultedThread == NULL);
 
     osStopThread(faultedThread);
-    func_80008388();
+    crash_screen_wait_for_button_combo();
     crash_screen_draw(faultedThread);
 
     while(TRUE){}
@@ -356,7 +359,7 @@ void crash_screen_init(void) {
     gCrashScreen.height = 16;
     osCreateMesgQueue(&gCrashScreen.queue, &gCrashScreen.mesg, 1);
     osCreateThread(&gCrashScreen.thread, 2, crash_screen_thread_entry, NULL,
-                   gCrashScreen.stack + sizeof(gCrashScreen.stack), 0x80);
+                   gCrashScreen.stack + sizeof(gCrashScreen.stack), 128);
     osStartThread(&gCrashScreen.thread);
 }
 
