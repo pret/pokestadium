@@ -1,8 +1,6 @@
 #include <ultra64.h>
 #include "ultra64/controller.h"
 
-typedef unsigned long uintptr_t;
-
 extern u8 __osPfsInodeCacheBank;
 extern s32 __osPfsInodeCacheChannel;
 
