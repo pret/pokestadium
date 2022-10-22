@@ -8,7 +8,7 @@ struct UnkStruct800A5870 {
 };
 
 extern struct UnkStruct800A5870 D_800A5870[16];
-extern struct UnkStruct800A5870 D_800A58F0[]; // might be 16 too
+extern struct UnkStruct800A5870 D_800A58F0[60]; // might be 16 too
 
 /* MIPS Relocation Types */
 #define R_MIPS_32 2
@@ -82,11 +82,14 @@ void func_80001DB8(Gfx** gfxDl) {
     *gfxDl = gfx;
 }
 
-void func_80001E50(u32 id, struct Fragment* fragment) {
+/*
+ * Perform fragment relocation on a given Fragment.
+ */
+void Fragment_Relocate(u32 id, struct Fragment* fragment) {
     u32 isLoNeg;
     u32 *luiRefs[32];
     u32 luiVals[32];
-    u32* luiInstRef;
+    u32 *luiInstRef;
     u32 *relocDataP;
     u32 relocSize;
     struct RelocTable* relocInfo;
