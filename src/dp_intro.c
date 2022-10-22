@@ -200,7 +200,7 @@ void func_800015A8(void) {
         } else {
             osViBlack(0U);
         }
-        func_80008F54(D_80083CA0.unkAA8->unk8, *(u16 *)&D_80083CA0.unkAA8->unk4, 0x10);
+        crash_screen_set_draw_info(D_80083CA0.unkAA8->unk8, *(u16 *)&D_80083CA0.unkAA8->unk4, 0x10);
     } else {
         osViRepeatLine(1);
         osViSwapBuffer(D_80083CA0.unk9E0->unk8);

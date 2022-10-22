@@ -45,7 +45,7 @@ segments:
     - [0x6A40, asm] #
     - [0x6BC0, asm] # 
     - [0x75F0, asm] # stage loader
-    - [0x8EC0, asm] # crash handler
+    - [0x8EC0, c, crash_screen] # crash handler
     - [0x9D20, asm] #
     - [0xAF00, asm] # camera code
     - [0xB130, asm] # dp code for text
@@ -318,6 +318,8 @@ segments:
     - [0x66BC0, bin] # rest of rom part 1
     
     # .data is somewhere in here
+    - [0x6A1B0, .data, crash_screen]
+    - [0x6A390, bin, rom_data_6A390]
     - [0x7A2A0, .data, libultra/os/initialize]
     - [0x7A2C0, .data, libultra/al/reverb]
     - [0x7A2E0, bin, rom_data_7A2E0]
@@ -337,8 +339,10 @@ segments:
     - [0x7BAC0, bin, rom_data_7BAC0]
     
     # Start of .rodata
-    - [0x7BAC0, .rodata, rsp] # rsp.c rodata
+    - [0x7BAC0, .rodata, rsp]
     - [0x7BB10, bin, rom_rodata_7BB10]
+    - [0x7BBE0, .rodata, crash_screen]
+    - [0x7BFA0, bin, rom_rodata_7BFA0]
     - [0x7EE90, .rodata, libultra/gu/sinf]
     - [0x7EEE0, bin, rom_rodata_7EEE0]
     - [0x7EF30, .rodata, libultra/al/reverb]
