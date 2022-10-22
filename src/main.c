@@ -20,7 +20,7 @@ void thread1_idle(void *arg0) {
     osCreateViManager(OS_PRIORITY_VIMGR);
     func_80001474(0, 1);
     osViBlack(TRUE);
-    func_80008F7C();
+    crash_screen_init();
     rsp_init();
     func_800052B4();
     func_8000D564();
