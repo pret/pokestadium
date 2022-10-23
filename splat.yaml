@@ -41,7 +41,7 @@ segments:
     - [0x3A80, asm] # transition loader
     - [0x3FB0, asm] # PRES-JPEG decoder
     - [0x60A0, asm] # 
-    - [0x6430, asm] # controller code
+    - [0x6430, c, controller] # controller code
     - [0x6A40, asm] #
     - [0x6BC0, asm] # 
     - [0x75F0, asm] # stage loader
@@ -366,6 +366,8 @@ segments:
     - {vram: 0x8007F190, type: .bss, name: main}
     - {vram: 0x80081900, type: .bss, name: rsp}
     - {vram: 0x80083CA0, type: .bss, name: unk_bss}
+    - {vram: 0x800A7320, type: .bss, name: controller}
+    - {vram: 0x800A7420, type: .bss, name: unk_bss_3}
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
     - {vram: 0x800A7EA0, type: .bss, name: unk_bss_2}
     - {vram: 0x80103880, type: .bss, name: libultra/gu/rotate}
