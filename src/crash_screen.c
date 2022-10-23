@@ -86,8 +86,8 @@ void crash_screen_wait_for_button_combo(void) {
     s32 i = 0;
     
     do {
-        func_80005A84();
-        func_80005AB0();
+        Cont_StartReadInputs();
+        Cont_ReadInputs();
         if (((u16*)D_80068BA0[0])[4] != 0) {
             if (((u16*)D_80068BA0[0])[4] == gCrashScreenUnlockInputs[i++]) {
                 // have we reached the end of the array? exit the sleep loop.
