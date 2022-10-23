@@ -66,9 +66,8 @@ extern struct UnkArray4 D_8008474C;
 
 extern s32 D_80068B70;
 
-extern u64 D_80084760[0x1];
-extern u64 D_80066090[0x1];
-extern u64 D_8007E650[0x1];
+extern u64 F3DEX2_bin[];
+extern u64 F3DEX2_data_bin[]; // F3DEX2_data.bin
 extern u64 D_80084860[0x1];
 extern u64 D_80085870[0x1];
 extern u64 D_80084C68[0x1];
@@ -93,6 +92,9 @@ extern OSMesg D_80084688;
 
 extern s32 D_80084758;
 
+// .bss?
+extern u64 D_80084760[0x100/sizeof(u64)];
+
 struct UnkStruct800A62E0 {
     char filler0[0xA38];
     s16 unkA38;
@@ -109,8 +111,8 @@ void func_80001380(struct UnkStruct80001380* arg0) {
     arg0->task.t.flags = 0;
     arg0->task.t.ucode_boot       = D_80084760;
     arg0->task.t.ucode_boot_size  = 0x100;
-    arg0->task.t.ucode            = D_80066090;
-    arg0->task.t.ucode_data       = D_8007E650;
+    arg0->task.t.ucode            = F3DEX2_bin;
+    arg0->task.t.ucode_data       = F3DEX2_data_bin;
     arg0->task.t.ucode_size       = 0x1000;
     arg0->task.t.ucode_data_size  = 0x800;
     arg0->task.t.dram_stack       = ALIGN16((u32)D_80084860);

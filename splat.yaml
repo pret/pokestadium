@@ -40,6 +40,7 @@ segments:
     - [0x3640, asm] #
     - [0x3A80, asm] # transition loader
     - [0x3FB0, asm] # PRES-JPEG decoder
+    - [0x5580, asm] # there's a split here according to PAL
     - [0x60A0, asm] # 
     - [0x6430, c, controller] # controller code
     - [0x6A40, asm] #
@@ -315,7 +316,9 @@ segments:
     - [0x66B10, c, libultra/io/spsetpc]
     - [0x66B50, c, libultra/os/sethwinterrupt]
     #- [0x66BC0, asm]
-    - [0x66BC0, bin] # rest of rom part 1
+    - [0x66BC0, bin]
+    - [0x66C90, bin, F3DEX2]
+    - [0x68020, bin] # rest of rom part 1
     
     # .data is somewhere in here
     - [0x6A1B0, .data, crash_screen]
@@ -359,7 +362,8 @@ segments:
     - [0x7F1D0, bin, rom_rodata_7F1D0]
     - [0x7F1E0, .rodata, libultra/libc/xldtob]
     - [0x7F240, .rodata, libultra/libc/llcvt]
-    - [0x7F250, bin, rom_rodata_7F250]
+    - [0x7F250, bin, F3DEX2_data] # F3DEX2 data
+    - [0x7F670, bin, rom_rodata_7F670]
     - [0x7F980]
     
     # .bss
