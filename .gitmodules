@@ -1,3 +1,6 @@
 [submodule "tools/n64splat"]
 	path = tools/n64splat
 	url = https://github.com/ethteck/n64splat.git
+[submodule "tools/m2c"]
+	path = tools/m2c
+	url = https://github.com/matt-kempster/m2c.git
