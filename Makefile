@@ -52,6 +52,9 @@ OBJDUMP_FLAGS := -d -r -z -Mreg-names=32
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
 
+# The reimplementations of the string functions need to treat char as signed.
+build/src/hal_libc.c.o: CFLAGS += -signed
+
 # Libultra O1 files
 build/src/libultra/os/sendmesg.c.o: OPTFLAGS := -O1
 build/src/libultra/os/stopthread.c.o: OPTFLAGS := -O1
