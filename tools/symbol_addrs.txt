@@ -443,3 +443,7 @@ Cont_BlockEepromQueue = 0x80005D1C;
 Cont_NoBlockEepromQueue = 0x80005D48;
 Cont_InitEepromQueue = 0x80005D74;
 Cont_SetupControllers = 0x80005DB8;
+HAL_Strcpy = 0x8000A530;
+HAL_Strcpy2 = 0x8000A560;
+HAL_Strcmp = 0x8000A5B8;
+HAL_Memset = 0x8000A5FC;

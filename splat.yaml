@@ -49,7 +49,8 @@ segments:
     - [0x8EC0, c, crash_screen] # crash handler
     - [0x9D20, asm] #
     - [0xAF00, asm] # camera code
-    - [0xB130, asm] # dp code for text
+    - [0xB130, c, hal_libc]
+    - [0xB230, c, gb_tower]
     - [0xC030, asm] # extra sprites loader
     - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, asm] # yay0 decoder
@@ -323,6 +324,8 @@ segments:
     # .data is somewhere in here
     - [0x6A1B0, .data, crash_screen]
     - [0x6A3B0, bin, rom_data_6A3B0]
+    - [0x6A3D0, .data, gb_tower]
+    - [0x6A3E0, bin, rom_data_6A3E0]
     - [0x7A2A0, .data, libultra/os/initialize]
     - [0x7A2C0, .data, libultra/al/reverb]
     - [0x7A2E0, bin, rom_data_7A2E0]
@@ -346,6 +349,8 @@ segments:
     - [0x7BB10, bin, rom_rodata_7BB10]
     - [0x7BBE0, .rodata, crash_screen]
     - [0x7BFA0, bin, rom_rodata_7BFA0]
+    - [0x7BFC0, .rodata, gb_tower]
+    - [0x7C000, bin, rom_rodata_7C000]
     - [0x7EE90, .rodata, libultra/gu/sinf]
     - [0x7EEE0, bin, rom_rodata_7EEE0]
     - [0x7EF30, .rodata, libultra/al/reverb]
