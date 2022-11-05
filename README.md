@@ -16,6 +16,8 @@ sudo apt update
 sudo apt install make git build-essential binutils-mips-linux-gnu python3 python3-pip
 ```
 
+**Please also ensure that the Python version installed is >3.7.**
+
 The build process has a few python packages required that are located in `requirements.txt`.
 
 To install them simply run in a terminal:
