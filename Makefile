@@ -7,6 +7,15 @@ ifeq ($(wildcard $(BASEROM)),)
 $(error Baserom `$(BASEROM)' not found.)
 endif
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+  HOST_OS := linux
+else ifeq ($(UNAME_S),Darwin)
+  HOST_OS := macos
+else
+  $(error Unsupported buiding OS <$(UNAME_S)>)
+endif
+
 BUILD_DIR := build
 ROM := $(TARGET).z64
 ELF := $(BUILD_DIR)/$(TARGET).elf
@@ -29,18 +38,31 @@ SPLAT_YAML := splat.yaml
 SPLAT = $(PYTHON) tools/n64splat/split.py $(SPLAT_YAML)
 
 ##################### Compiler Options #######################
-CROSS = mips-linux-gnu-
+findcmd = $(shell type $(1) >/dev/null 2>/dev/null; echo $$?)
+
+ifeq ($(call findcmd,mips-linux-gnu-ld),0)
+  CROSS := mips-linux-gnu-
+else ifeq ($(call findcmd,mips64-elf-ld),0)
+  CROSS := mips64-elf-
+else
+  $(error Missing cross compilation toolchain)
+endif
+
 AS = $(CROSS)as
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
-CPP := cpp
+ifeq ($(HOST_OS),macos)
+  CPP := clang -E -P -x c
+else
+  CPP := cpp
+endif
 
 #CC         := $(QEMU_IRIX) -L tools/ido7.1_compiler tools/ido7.1_compiler/usr/bin/cc
 #CC_OLD     := $(QEMU_IRIX) -L tools/ido5.3_compiler tools/ido5.3_compiler/usr/bin/cc
 
-CC = tools/ido_recomp/linux/7.1/cc
-CC_OLD = tools/ido_recomp/linux/5.3/cc
+CC = tools/ido_recomp/$(HOST_OS)/7.1/cc
+CC_OLD = tools/ido_recomp/$(HOST_OS)/5.3/cc
 
 MIPS_VERSION := -mips2
 
