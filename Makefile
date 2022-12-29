@@ -63,6 +63,8 @@ endif
 
 CC = tools/ido_recomp/$(HOST_OS)/7.1/cc
 CC_OLD = tools/ido_recomp/$(HOST_OS)/5.3/cc
+ASMPROC = python3 tools/asmproc/build.py
+ASMPROC_FLAGS :=
 
 MIPS_VERSION := -mips2
 
@@ -213,6 +215,10 @@ ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -Iinclude -Iinclude/PR -Iinclude/audio
 CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm -Iinclude -Iinclude/PR -Iinclude/audio -Wab,-r4300_mul -D_LANGUAGE_C -DF3DEX_GBI_2 -DNDEBUG -woff 649,838,712,807 $(MIPS_VERSION)
 
 LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
+
+
+# run ASM-processor on non-libultra source files
+build/src/%.c.o: CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 ######################## Build #############################
 
