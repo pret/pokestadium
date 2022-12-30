@@ -1,9 +1,13 @@
 #include <ultra64.h>
+#include <string.h>
+#include <PR/xstdio.h>
+#include <PR/os_internal_thread.h>
 #include "stdarg.h"
 #include "crash_screen.h"
 #include "memmap.h"
+#include "controller.h"
 
-extern u32 D_80068BA0[];
+extern void *D_80068BA0[];
 
 CrashScreen gCrashScreen;
 
@@ -182,7 +186,7 @@ void crash_screen_printf(s32 x, s32 y, const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
 
-    size = _Printf(crash_screen_copy_to_buf, buf, fmt, args);
+    size = _Printf(crash_screen_copy_to_buf, (char *)buf, fmt, args);
 
     if (size > 0) {
         ptr = buf;
@@ -311,7 +315,7 @@ void crash_screen_draw(OSThread* faultedThread) {
 
     // all of these null terminators needed to pad the rodata section for this file
     // can potentially fix this problem in another way?
-    crash_screen_printf(210, 140, "MM:%08XH", *(u32*)ctx->pc);
+    crash_screen_printf(210, 140, "MM:%08XH", *(u32 *)(uintptr_t)ctx->pc);
 }
 
 OSThread* crash_screen_get_faulted_thread(void) {
@@ -328,7 +332,7 @@ OSThread* crash_screen_get_faulted_thread(void) {
     return NULL;
 }
 
-void crash_screen_thread_entry(void* unused) {
+void crash_screen_thread_entry(UNUSED void* unused) {
     OSMesg mesg;
     OSThread* faultedThread;
 
@@ -354,7 +358,7 @@ void crash_screen_set_draw_info(u16* frameBufPtr, u16 width, u16 height) {
 }
 
 void crash_screen_init(void) {
-    gCrashScreen.frameBuf = (u16*)((osMemSize | 0xA0000000) - ((SCREEN_WIDTH * SCREEN_HEIGHT) * 2));
+    gCrashScreen.frameBuf = (u16*)(uintptr_t)((osMemSize | 0xA0000000) - ((SCREEN_WIDTH * SCREEN_HEIGHT) * 2));
     gCrashScreen.width = SCREEN_WIDTH;
     gCrashScreen.height = 16;
     osCreateMesgQueue(&gCrashScreen.queue, &gCrashScreen.mesg, 1);
@@ -372,7 +376,7 @@ void crash_screen_printf_with_bg(s16 x, s16 y, const char* fmt, ...) {
 
     va_start(args, fmt);
 
-    size = _Printf(crash_screen_copy_to_buf, buf, fmt, args);
+    size = _Printf(crash_screen_copy_to_buf, (char *)buf, fmt, args);
 
     if (size > 0) {
         crash_screen_draw_rect(x - 6, y - 6, (size + 2) * 6, 19);

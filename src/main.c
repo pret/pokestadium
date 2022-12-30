@@ -1,6 +1,10 @@
 #include <ultra64.h>
 
-extern void thread1_idle(); // thread 1 function
+#include "common.h"
+#include "dp_intro.h"
+#include "crash_screen.h"
+#include "rsp.h"
+
 extern void func_8002B330(); // thread 6 function
 
 // entry .bss
@@ -16,7 +20,7 @@ u8 D_800818F8[0x8];
 /**
  * Initialize hardware, start main thread, then idle.
  */
-void thread1_idle(void *arg0) {
+void thread1_idle(UNUSED void *arg0) {
     osCreateViManager(OS_PRIORITY_VIMGR);
     func_80001474(0, 1);
     osViBlack(TRUE);
