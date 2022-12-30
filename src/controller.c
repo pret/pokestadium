@@ -1,5 +1,6 @@
 #include <ultra64.h>
 #include "controller.h"
+#include "gb_tower.h"
 
 // TODO: Identify/move to header
 extern s16 func_8000A360(float, float);

@@ -10,16 +10,6 @@ struct UnkStruct800006C4_2 {
     s32 unk28;
 };
 
-struct UnkStruct800006C4_1 {
-    s16 sp20;
-    s8 sp22;
-    OSMesgQueue* sp24;
-    void* sp28;
-    s32 sp2C;
-    s32 sp30;
-    s32 unk34;
-};
-
 struct UnkStruct80000A80 {
     LEOCmd cmd;
     union {
@@ -53,7 +43,7 @@ void *func_80000A3C(struct UnkStruct800006C4_2* arg0);
 void *func_80000A80(struct UnkStruct80000A80* arg0);
 void *func_80000AB0(struct UnkStruct80000A80* arg0);
 void *func_80000AE0(struct UnkStruct80000A80* arg0);
-s32 func_80000B10(struct UnkStruct80000A80* arg0);
+void *func_80000B10(struct UnkStruct80000A80* arg0);
 void *func_80000B74(struct UnkStruct80000A80* arg0);
 void thread20_rsp(void *arg);
 void rsp_init(void);

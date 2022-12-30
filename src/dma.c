@@ -1,6 +1,7 @@
 #include <ultra64.h>
 #include "common.h"
 #include "dma.h"
+#include "rsp.h"
 
 extern u32 D_800818E0;
 extern s16 D_80083C1C;
@@ -30,9 +31,9 @@ s32 func_80000F0C(s32 arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
     temp_v0 = func_80002FDC(0x2C);
     if (temp_v0 != NULL) {
         temp_v0->unk0 = 0xF4;
-        temp_v0->unk1C = arg1;
+        temp_v0->unk1C = (uintptr_t)arg1;
         temp_v0->unk24 = arg2;
-        temp_v0->unk20 = arg0;
+        temp_v0->unk20 = (void *)(uintptr_t)arg0;
         temp_v0->unk28 = arg3;
         func_80000E2C(temp_v0, arg4);
     }
