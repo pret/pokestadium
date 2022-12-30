@@ -36,7 +36,7 @@ segments:
     - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
     - [0x1F80, c, dp_intro] # dp intro code
     - [0x28E0, c, memmap]
-    - [0x2EC0, asm] # intro loader
+    - [0x2EC0, c, intro_loader] # intro loader
     - [0x3640, asm] #
     - [0x3A80, asm] # transition loader
     - [0x3FB0, asm] # PRES-JPEG decoder
