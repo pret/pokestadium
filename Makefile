@@ -263,8 +263,11 @@ LD_SCRIPT = $(TARGET).ld
 
 all: $(BUILD_DIR) $(BUILD_DIR)/$(ROM) verify
 
-clean:
+distclean:
 	rm -rf asm bin assets $(BUILD_DIR) undefined_syms_auto.txt undefined_funcs_auto.txt
+
+clean:
+	rm -rf $(BUILD_DIR)
 
 submodules:
 	git submodule update --init --recursive
@@ -272,7 +275,7 @@ submodules:
 split:
 	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py $(SPLAT_YAML)
 
-setup: clean submodules split
+setup: distclean submodules split
 	
 $(BUILD_DIR):
 	echo $(C_FILES)
@@ -315,7 +318,7 @@ $(BUILD_DIR)/$(ROM): $(BUILD_DIR)/$(TARGET).bin
 verify: $(BUILD_DIR)/$(ROM)
 	md5sum -c checksum.md5
 
-.PHONY: all clean default split setup
+.PHONY: all clean distclean default split setup
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
