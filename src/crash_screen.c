@@ -1,7 +1,11 @@
 #include <ultra64.h>
+#include <string.h>
+#include <PR/xstdio.h>
+#include <PR/os_internal_thread.h>
 #include "stdarg.h"
 #include "crash_screen.h"
 #include "memmap.h"
+#include "controller.h"
 
 extern u32 D_80068BA0[];
 

@@ -1,5 +1,8 @@
 #include <ultra64.h>
+#include <PR/os_internal_reg.h>
 #include "common.h"
+#include "dp_intro.h"
+#include "crash_screen.h"
 
 // dp_intro.c
 
