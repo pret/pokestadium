@@ -4,6 +4,13 @@
 #define true 1
 #define false 0
 
+// Avoid compiler warnings for unused variables
+#ifdef __GNUC__
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
+
 #ifndef __sgi
 #define GLOBAL_ASM(...)
 #endif
