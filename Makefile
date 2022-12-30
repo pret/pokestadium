@@ -245,7 +245,7 @@ build/src/libultra/io/gbpakreadwrite.c.o: CC := $(CC_OLD)
 build/src/libultra/io/gbpakselectbank.c.o: CC := $(CC_OLD)
 
 # run ASM-processor on non-libultra source files
-DECOMP_C_OBJS := $(filter %.c.o,$(filter-out build/src/libultra%,$(O_FILES)))
+DECOMP_C_OBJS := $(filter %.c.o,$(filter-out $(BUILD_DIR)/src/libultra%,$(O_FILES)))
 $(DECOMP_C_OBJS): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 # turn off syntax checking errors for libultra
