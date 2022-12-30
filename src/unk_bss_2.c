@@ -1,3 +1,4 @@
 #include <ultra64.h>
+#include <macros.h>
 
-static u8 unk_bss[0x80103880-0x800A7EA0];
+UNUSED static u8 unk_bss[0x80103880-0x800A7EA0];

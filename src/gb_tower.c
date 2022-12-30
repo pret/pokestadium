@@ -28,10 +28,10 @@ s32 func_8000A630(s32 arg0, void* arg1) {
     u8 sp47;
     u8 sp24[0x20];
     s32 sp20 = 0;
-    u8 padding[8];
+    UNUSED u8 padding[8];
 
     if ((func_8000AF40(arg0, arg1, 0, 0x20) == 0) 
-        && (func_8000AEBC(arg0, &sp24, 0, 0x20) == 0) 
+        && (func_8000AEBC(arg0, (uintptr_t)&sp24, 0, 0x20) == 0) 
         && (bcmp(&sp24, arg1, 0x20) == 0) 
         && (osGbpakGetStatus(&D_800A8100[arg0], &sp47) == 0)) 
     {
@@ -47,12 +47,12 @@ s32 func_8000A6D8(s32 arg0, u8* arg1) {
     if (arg1 == NULL) {
         arg1 = sp34;
     }
-    HAL_Memset(arg1, 0x55, 0x20);
+    HAL_Memset((char *)arg1, 0x55, 0x20);
     if (func_8000A630(arg0, arg1) != 0) {
-        HAL_Memset(arg1, 0xAA, 0x20);
+        HAL_Memset((char *)arg1, 0xAA, 0x20);
         if (func_8000A630(arg0, arg1) != 0) {
             s32 i;
-            for (i = 0; i < sizeof(sp34); i++) {
+            for (i = 0; i < ARRAY_COUNT(sp34); i++) {
                 arg1[i] = osGetCount();
             } 
             var_s0 = func_8000A630(arg0, arg1);
@@ -61,7 +61,7 @@ s32 func_8000A6D8(s32 arg0, u8* arg1) {
     return var_s0;
 }
 
-s32 func_8000A798(s32 arg0, u8* arg1, s32 arg2) {
+s32 func_8000A798(s32 arg0, u8 *arg1, u8 *arg2) {
     u8 status;
     OSGbpakId gbpakId;
     s32 sp28 = 0;
@@ -119,16 +119,16 @@ s32 func_8000A9D0(OSGbpakId* header) {
     // is the cartridge non-Japanese?
     if (header->country_code == 1) {
         // Which supported POKeMON version is this?
-        if (HAL_Strcmp(header->game_title, "POKEMON RED") == 0) {
+        if (HAL_Strcmp((char *)header->game_title, "POKEMON RED") == 0) {
             return 1;
         }
-        if (HAL_Strcmp(header->game_title, "POKEMON GREEN") == 0) {
+        if (HAL_Strcmp((char *)header->game_title, "POKEMON GREEN") == 0) {
             return 1;
         }
-        if (HAL_Strcmp(header->game_title, "POKEMON BLUE") == 0) {
+        if (HAL_Strcmp((char *)header->game_title, "POKEMON BLUE") == 0) {
             return 1;
         }
-        if (HAL_Strcmp(header->game_title, "POKEMON YELLOW") == 0) {
+        if (HAL_Strcmp((char *)header->game_title, "POKEMON YELLOW") == 0) {
             return 1;
         }
     }
@@ -187,7 +187,7 @@ s32 func_8000AA7C(void) {
 s32 func_8000AC7C(s32 arg0) {
     u8 status;
     s32 ret = osGbpakGetStatus(&D_800A8100[arg0], &status);
-    u8 filler;
+    UNUSED u8 filler;
 
     // check the error code returned (if applicable) by the osGbpakGetStatus
     // call.
@@ -212,7 +212,7 @@ s32 func_8000ACF4(s32 arg0) {
 }
 
 s32 func_8000AD68(s32 arg0) {
-    u8 filler[4];
+    UNUSED u8 filler[4];
     u8 status;
     OSGbpakId sp28;
 
@@ -235,7 +235,7 @@ s32 func_8000AE28(s32 arg0, void* arg1) {
     s32 sp18;
 
     sp18 = 0;
-    if ((func_8000AEBC(arg0, &sp1C, 0, 0x20) == 0) && (bcmp(&sp1C, arg1, 0x20) == 0) 
+    if ((func_8000AEBC(arg0, (uintptr_t)&sp1C, 0, 0x20) == 0) && (bcmp(&sp1C, arg1, 0x20) == 0) 
         && (osGbpakGetStatus(&D_800A8100[arg0], &status) == 0) 
         && !(status & OS_GBPAK_RSTB_DETECTION)) {
         sp18 = 1;
@@ -258,7 +258,7 @@ s32 func_8000AF40(s32 arg0, void* arg1, u16 arg2, u16 arg3) {
 
     var_v1 = 1;
     if (D_800A82A5 & (1 << arg0)) {
-        var_v1 = func_8000DAFC(&D_800A8100[arg0], 1, arg2, arg1, arg3);
+        var_v1 = func_8000DAFC(&D_800A8100[arg0], 1, arg2, (uintptr_t)arg1, arg3);
     }
     return var_v1;
 }

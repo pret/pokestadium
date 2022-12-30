@@ -67,7 +67,7 @@ void Memmap_SetSegments(Gfx** gfxDl) {
     Gfx* gfx = *gfxDl;
 
     for(i = 0; i < 16; i++) {
-        gSPSegment(gfx++, i, osVirtualToPhysical(gSegments[i].vaddr));
+        gSPSegment(gfx++, i, osVirtualToPhysical((void *)gSegments[i].vaddr));
     }
     *gfxDl = gfx;
 }
@@ -83,12 +83,12 @@ void Memmap_RelocateFragment(u32 id, struct Fragment* fragment) {
     u32 *relocDataP;
     u32 relocSize;
     struct RelocTable* relocInfo;
-    u32 relocOffset;
+    UNUSED u32 relocOffset;
     u32 reloc;
     u32 temp_v0_5;
     u32 i;
     u32 *regValP;
-    s32 pad;
+    UNUSED s32 pad;
 
     relocOffset = fragment->relocOffset;
     relocSize = fragment->sizeInRam - fragment->relocOffset;
@@ -96,7 +96,7 @@ void Memmap_RelocateFragment(u32 id, struct Fragment* fragment) {
 
     osInvalICache(fragment, fragment->sizeInRam);
     osInvalDCache(fragment, fragment->sizeInRam);
-    Memmap_SetFragmentMap(id, fragment, fragment->sizeInRam);
+    Memmap_SetFragmentMap(id, (uintptr_t)fragment, fragment->sizeInRam);
 
     for(i = 0; i < relocInfo->nRelocations; i++) {
         reloc = relocInfo->relocations[i];
@@ -138,7 +138,7 @@ void Memmap_RelocateFragment(u32 id, struct Fragment* fragment) {
         }
     }
     if (relocSize != 0) {
-        bzero(((uintptr_t)fragment->relocOffset + (uintptr_t)fragment), relocSize);
+        bzero((void *)((uintptr_t)fragment->relocOffset + (uintptr_t)fragment), relocSize);
     }
     osWritebackDCache(fragment, fragment->sizeInRam);
 }
@@ -207,7 +207,7 @@ void Memmap_ClearFragmentMemmap(u32 id) {
  */
 uintptr_t Memmap_GetLoadedFragmentVaddr(uintptr_t addr) {
     struct MemoryMap* fraglist = gFragments;
-    int i, j;
+    int i, UNUSED j;
 
     for(i = 0, fraglist = gFragments; i < 0xF0; i++, fraglist++) {
         if (addr >= fraglist->vaddr) {

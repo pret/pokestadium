@@ -29,6 +29,8 @@
 // global typings
 typedef unsigned long uintptr_t;
 
+#define INT2VOID(i) ((void *)(uintptr_t)(i))
+
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
