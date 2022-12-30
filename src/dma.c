@@ -1,6 +1,7 @@
 #include <ultra64.h>
 #include "common.h"
 #include "dma.h"
+#include "rsp.h"
 
 extern u32 D_800818E0;
 extern s16 D_80083C1C;

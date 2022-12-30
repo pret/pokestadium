@@ -1,4 +1,5 @@
 #include <ultra64.h>
+#include <string.h>
 #include "hal_libc.h"
 
 /*
