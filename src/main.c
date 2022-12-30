@@ -20,7 +20,7 @@ u8 D_800818F8[0x8];
 /**
  * Initialize hardware, start main thread, then idle.
  */
-void thread1_idle(void *arg0) {
+void thread1_idle(UNUSED void *arg0) {
     osCreateViManager(OS_PRIORITY_VIMGR);
     func_80001474(0, 1);
     osViBlack(TRUE);

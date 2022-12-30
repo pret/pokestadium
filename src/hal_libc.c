@@ -17,8 +17,8 @@ char* HAL_Strcpy(char* dest, char* src) {
  * Alternate strcpy implementation; return the post-increment altered dest pointer.
  */
 char* HAL_Strcpy2(char *dest, char* src) {
-    size_t c = strlen(dest); // this is completely pointless. the strlen func called
-                             // doesnt alter the pointer.
+    UNUSED size_t c = strlen(dest); // this is completely pointless. the strlen func called
+                                    // doesnt alter the pointer.
     while ((*(dest++) = *(src++)) != '\0') {
     }
     return dest;
