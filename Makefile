@@ -1,7 +1,8 @@
 BASEROM = baserom.z64
 TARGET = pokestadium
-NON_MATCHING := 0
-RUN_CC_CHECK := 1
+NON_MATCHING ?= 0
+RUN_CC_CHECK ?= 1
+WERROR ?= 0
 
 # Fail early if baserom does not exist
 ifeq ($(wildcard $(BASEROM)),)
@@ -89,6 +90,10 @@ ifneq ($(RUN_CC_CHECK),0)
 
   ifeq ($(HOST_OS),linux)
     CC_CHECK += -m32
+  endif
+
+  ifneq ($(WERROR),0)
+    CHECK_WARNINGS += -Werror
   endif
 else
   CC_CHECK := @:
@@ -240,7 +245,8 @@ build/src/libultra/io/gbpakreadwrite.c.o: CC := $(CC_OLD)
 build/src/libultra/io/gbpakselectbank.c.o: CC := $(CC_OLD)
 
 # run ASM-processor on non-libultra source files
-$(filter-out src/libultra%,$(C_FILES)): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+DECOMP_C_OBJS := $(filter %.c.o,$(filter-out build/src/libultra%,$(O_FILES)))
+$(DECOMP_C_OBJS): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 # turn off syntax checking errors for libultra
 build/src/libultra/al/%.c.o: CHECK_WARNINGS := -w
