@@ -1,42 +1,13 @@
 #include <ultra64.h>
 #include <macros.h>
+#include "intro_loader.h"
+
+// local to this file
+extern struct Unk800A6070 D_800A6070;
+
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
-
-struct UnkNodeThing {
-    /* 0x00 */ struct UnkNodeThing *unk00;
-    /* 0x04 */ struct UnkNodeThing *unk04;
-    // this looks like it can be any type of pointer? 
-    // or are there multiple list node types in a union?
-    /* 0x08 */ void (*unk08)(struct UnkNodeThing *, s32);
-    /* 0x0C */ s32 unk0C;
-}; // sizeof == 0x10
-
-// "known" types for +08 and +0C:
-// fn pointer
-//  void (*unk08)(struct UnkNodeThing *, s32
-//  s32 unk0C
-// more nodes
-//  struct UnkNodeThing *unk08
-//  struct UnkNodeThing *unk0C
-
-struct Unk800A6070 {
-    /* 0x00 */ OSMesg msgs[1];
-    /* 0x04 */ OSMesgQueue queue;
-    /* 0x1C */ uintptr_t unk1C;
-    // these pointers are all probably to a 4 member struct?
-    /* 0x20 */ struct UnkNodeThing *unk20;
-    /* 0x24 */ struct UnkNodeThing *unk24;
-    /* 0x28 */ struct UnkNodeThing *unk28;
-    /* 0x2C */ struct UnkNodeThing *unk2C;
-    /* 0x30 */ struct UnkNodeThing *unk30;
-}; // sizeof >= 0x34
-
-extern struct Unk800A6070 D_800A6070;
-// D_800A6074 is 0x04 queue;
-// D_800A608C is field 0x1C of above;
-
 
 void func_800022C0(void *arg0, void *arg1) {
     D_800A6070.unk20 = (void *)(ALIGN16((uintptr_t)arg0) + 0x10);
@@ -93,7 +64,7 @@ struct UnkNodeThing *func_80002380(u32 arg0, s32 arg1) {
     return ret;
 }
 
-uintptr_t func_80002764(void);
+
 uintptr_t func_80002430(struct UnkNodeThing *arg0, s32 arg1);
 
 #ifdef NON_MATCHING
@@ -140,10 +111,8 @@ uintptr_t func_80002430(struct UnkNodeThing *arg0, s32 arg1) {
 }
 
 #else
-#pragma GLOBAL_ASM("src/nonmatchings/intro_loader/func_80002430.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/intro_loader/func_80002430.s")
 #endif
-
-void func_80002A14(struct UnkNodeThing *, s32, void *);
 
 struct UnkNodeThing *func_8000254C(u32 arg0, s32 arg1, s32 arg2, void *arg3) {
     struct UnkNodeThing *node;
@@ -176,7 +145,6 @@ void func_80002620(struct UnkNodeThing *arg0) {
     func_80002764();
 }
 
-struct UnkNodeThing *func_80002680(struct UnkNodeThing *arg0, uintptr_t arg1);
 #ifdef NON_MATCHING
 struct UnkNodeThing *func_80002680(struct UnkNodeThing *arg0, uintptr_t arg1) {
     uintptr_t diff;
@@ -215,7 +183,7 @@ struct UnkNodeThing *func_80002680(struct UnkNodeThing *arg0, uintptr_t arg1) {
     return sp28;
 }
 #else
-#pragma GLOBAL_ASM("src/nonmatchings/intro_loader/func_80002680.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/intro_loader/func_80002680.s")
 #endif
 
 // this is a weird type, so maybe it should be cast into UnkNodeThing?
@@ -296,6 +264,7 @@ void func_80002838(struct UnkNodeThing *arg0) {
 }
 
 #ifdef MIPS_TO_C
+// unused function?
 struct UnkNodeThing *func_80002960(uintptr_t arg0, s32 *arg1) {
     struct UnkNodeThing *node; // v0?
     struct UnkNodeThing *otherNode;
@@ -328,7 +297,7 @@ struct UnkNodeThing *func_80002960(uintptr_t arg0, s32 *arg1) {
     return NULL;
 }
 #else
-#pragma GLOBAL_ASM("src/nonmatchings/intro_loader/func_80002960.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/intro_loader/func_80002960.s")
 #endif
 
 void func_80002A14(struct UnkNodeThing *arg0, s32 arg1, void *arg2) {
