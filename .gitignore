@@ -20,3 +20,6 @@ undefined_syms_auto.txt
 # qemu-irix compilers
 tools/ido5.3_compiler/
 tools/ido7.1_compiler/
+
+# diffing directory
+expected/
