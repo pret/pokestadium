@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 if len(sys.argv) != 4:
-    print(f"Usage: {sys.argv[0]} <ASM file> <non-matching dir> <C output dir>")
+    print(f"Usage: {sys.argv[0]} <ASM file> <C output dir>")
     exit()
 
 def fail(msg):
@@ -74,11 +74,10 @@ def write_split_files(nm_dir, c_out, routines):
 
 def main():
     s_in = Path(sys.argv[1])
-    s_out_base = Path(sys.argv[2])
-    c_out_dir = Path(sys.argv[3])
+    c_out_dir = Path(sys.argv[2])
     
     input_filename = s_in.stem
-    s_out_dir = s_out_base / Path(*c_out_dir.parts[1:]) / input_filename
+    s_out_dir = Path('asm/nonmatchings') / Path(*c_out_dir.parts[2:]) / input_filename
     c_out_file = c_out_dir / s_in.with_suffix('.c').name
 
     s_out_dir.relative_to
