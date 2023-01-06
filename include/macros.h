@@ -28,7 +28,7 @@
 
 // global typings
 typedef unsigned long uintptr_t;
-
+// cast thru uintptr_t for integer to pointer casts
 #define INT2VOID(i) ((void *)(uintptr_t)(i))
 
 #define SCREEN_WIDTH 320
