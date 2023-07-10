@@ -50,6 +50,8 @@ ifeq ($(call findcmd,mips-linux-gnu-ld),0)
   CROSS := mips-linux-gnu-
 else ifeq ($(call findcmd,mips64-elf-ld),0)
   CROSS := mips64-elf-
+else ifeq ($(call findcmd,mips-elf-ld),0)
+  CROSS := mips-elf-
 else
   $(error Missing cross compilation toolchain)
 endif
