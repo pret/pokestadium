@@ -23,3 +23,6 @@ tools/ido7.1_compiler/
 
 # diffing directory
 expected/
+
+# misc
+.DS_Store

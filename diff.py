@@ -273,7 +273,7 @@ if args.source:
         fail(MISSING_PREREQUISITES.format(e.name))
 
 if objdump_executable is None:
-    for objdump_cand in ["mips-linux-gnu-objdump", "mips64-elf-objdump"]:
+    for objdump_cand in ["mips-linux-gnu-objdump", "mips64-elf-objdump", "mips-elf-objdump"]:
         try:
             subprocess.check_call(
                 [objdump_cand, "--version"],
