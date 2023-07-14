@@ -6,6 +6,9 @@
 extern void func_80057FD0(void *, int);
 extern s32 func_8005A990(OSPiHandle *);
 
+// bcopy.s
+extern void _bcopy(void *, void *, u32);
+
 // 3A80.s
 extern void func_80002F58(void);
 extern void *func_80002FDC(s32);
@@ -50,8 +53,5 @@ extern void func_8002B274(s32, s32);
 
 // exception_set.s
 extern void set_watch_lohi(s32);
-
-// readwrite.s
-extern void func_80050FC0(void *, s32, s32, void *, s32, OSMesgQueue *);
 
 #endif
