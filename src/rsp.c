@@ -156,12 +156,12 @@ void* func_800009C8(void) {
 }
 
 void *func_800009F8(struct UnkStruct800006C4_2* arg0) {
-    func_80050FC0(arg0, 0, arg0->unk1C, arg0->vaddr, arg0->size, &D_80083BD0.queue2);
+    LeoReadWrite(arg0, 0, arg0->unk1C, arg0->vaddr, arg0->size, &D_80083BD0.queue2);
     return func_800009C8();
 }
 
 void *func_80000A3C(struct UnkStruct800006C4_2* arg0) {
-    func_80050FC0(arg0, 1, arg0->unk1C, arg0->vaddr, arg0->size, &D_80083BD0.queue2);
+    LeoReadWrite(arg0, 1, arg0->unk1C, arg0->vaddr, arg0->size, &D_80083BD0.queue2);
     return func_800009C8();
 }
 
