@@ -30,19 +30,15 @@ s32 LeoSetRTC(LEOCmd* cmdBlock, LEODiskTime* RTCdata, OSMesgQueue* mq) {
  */
 // https://decomp.me/scratch/NUHIy
 s32 leoVerifyRTC(u8 yearhi, u8 yearlo) {
-    u32 year;
-    s32 hiMask;
-    u32 loMask;
-    hiMask = yearhi & 0xFF;
-    loMask = yearlo & 0xFF;
-    if (((loMask & 0xF) >= 0xA) || ((loMask & 0xF0) >= 0x91) || ((hiMask & 0xF) >= 0xA) || ((hiMask & 0xF0) >= 0x91)) {
-        return  1;
-    }
-    year = (((hiMask - ((hiMask >> 4) * 6)) * 0x64) + loMask) - ((loMask >> 4) * 6);
-    if ((year < 0x7CCU) || (year >= 0x830U)) {
-        return 1;
-    }
-    return 0;
+  u32 year;
+  if (((yearlo & 0xF) >= 0xA) || ((yearlo & 0xF0) >= 0x91) || ((yearhi & 0xF) >= 0xA) || ((yearhi & 0xF0) >= 0x91)) {
+    return  1;
+  }
+  year = (((yearhi - ((yearhi >> 4) * 6)) * 0x64) + yearlo) - ((yearlo >> 4) * 6);
+  if ((year < 0x7CCU) || (year >= 0x830U)) {
+    return 1;
+  }
+  return 0;
 }
 #else
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/setrtc/leoVerifyRTC.s")
