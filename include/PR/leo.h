@@ -32,8 +32,8 @@ typedef u8	LEOStatus;
 
 typedef struct
 {
-  u8    drive;			/* version of hw */
-  u8    driver;			/* version of sw */
+  u8    driver;			/* version of hw */
+  u8    drive;			/* version of sw */
   u8	deviceType;		/* dev type, always 00 */
   u8	ndevices;		/* # of devices, always 01 */
 } LEOVersion;
