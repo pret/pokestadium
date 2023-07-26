@@ -1,7 +1,8 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
-#ifdef NON_MATCHING
+extern u16 LEOrw_flags; // NOT volatile in this file!
+
 void leoWrite(void) {
     u32 message;
     u32 start_lba;
@@ -49,6 +50,3 @@ void leoWrite(void) {
     LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
     LEOcur_command->header.status = LEO_STATUS_GOOD;
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leowrite/leoWrite.s")
-#endif

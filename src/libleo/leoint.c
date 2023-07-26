@@ -1,7 +1,7 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoint/leointerrupt.s")
+extern vu16 LEOrw_flags;
 
 void* read_write_track();
 

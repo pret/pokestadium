@@ -1,6 +1,8 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
+extern vu16 LEOrw_flags;
+
 void leoRead(void) {
     LEOrw_flags = 0;
     leoRead_common(0x18);
