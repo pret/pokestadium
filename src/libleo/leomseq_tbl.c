@@ -1,6 +1,8 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
+extern vu16 LEOrw_flags;
+
 u32 mseq_tbl[0x10];
 
 const u32 rd_mseq_code[0x10] = {

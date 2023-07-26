@@ -218,6 +218,7 @@ extern tgt_param_form LEOtgt_param;
 extern leo_sys_form LEO_sys_data;
 
 extern vu8 LEOclr_que_flag;
-extern vu16 LEOrw_flags;
+// needs to not be volatile in some files
+// extern vu16 LEOrw_flags;
 
 #endif
