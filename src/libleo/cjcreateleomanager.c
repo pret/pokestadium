@@ -4,8 +4,6 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/OYMx2
 s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg *cmdBuf, s32 cmdMsgCnt) {
   OSPiHandle* driveRomHandle;
   OSPiHandle* leoDiskHandle;
@@ -81,6 +79,3 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg *cmdBuf, s32 cmdMsg
 
   return LEO_ERROR_GOOD;
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/cjcreateleomanager/LeoCJCreateLeoManager.s")
-#endif
