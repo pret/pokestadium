@@ -22,5 +22,3 @@ void leoRd_capacity(void) {
     }
     LEOcur_command->header.status = LEO_STATUS_GOOD;
 }
-
-// #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leord_capa/leoRd_capacity.s")

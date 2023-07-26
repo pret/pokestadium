@@ -37,6 +37,8 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.c.o)) \
            $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o)) \
 
 DECOMP_C_OBJS := $(filter %.c.o,$(filter-out $(BUILD_DIR)/src/libultra%,$(O_FILES)))
+DECOMP_POKE_STADIUM := $(filter %.c.o,$(filter-out $(BUILD_DIR)/src/libleo%,$(DECOMP_C_OBJS)))
+DECOMP_LIBLEO := $(filter $(BUILD_DIR)/src/libleo/%.c.o,$(O_FILES))
 
 DEP_FILES := $(O_FILES:.o=.d) $(DECOMP_C_OBJS:.o=.asmproc.d)
 
@@ -249,7 +251,8 @@ build/src/libultra/io/gbpakreadwrite.c.o: CC := $(CC_OLD)
 build/src/libultra/io/gbpakselectbank.c.o: CC := $(CC_OLD)
 
 # run ASM-processor on non-libultra source files
-$(DECOMP_C_OBJS): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+$(DECOMP_POKE_STADIUM): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+$(DECOMP_LIBLEO): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
 
 # turn off syntax checking errors for libultra
 build/src/libultra/al/%.c.o: CHECK_WARNINGS := -w

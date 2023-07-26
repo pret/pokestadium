@@ -1,8 +1,6 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
-void leoRead_common(u32 offset);
-
 void leoRead(void) {
     LEOrw_flags = 0;
     leoRead_common(0x18);
