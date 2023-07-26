@@ -215,7 +215,14 @@ u8 leoRecal_w(void) {
   return leoSend_asic_cmd_w(ASIC_RECAL, 0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomecha/leoSeek_i.s")
+u8 leoSeek_i(u16 rwmode) {
+    u32 tgt_tk = ((LEOtgt_param.head << 0xC) + LEOtgt_param.cylinder) << 0x10;
+
+    if (rwmode == 0) {
+        return leoSend_asic_cmd_i(0x10001, tgt_tk);
+    }
+    return leoSend_asic_cmd_i(0x20001, tgt_tk);
+}
 
 u8 leoSeek_w(void) {
   u8 sksense = leoSeek_i(0);
@@ -231,7 +238,7 @@ s32 leoRecv_event_mesg(s32 control) {
   u32 done_mesg;
 
   if (osRecvMesg(&LEOevent_que, (OSMesg*)&done_mesg, control) == 0) {
-    if (done_mesg == 0xA0000) {
+    if (done_mesg == ASIC_SOFT_RESET_CODE) {
       leoDrive_reset();
       return 0xFF;
     }
@@ -239,12 +246,63 @@ s32 leoRecv_event_mesg(s32 control) {
   return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomecha/leoChk_err_retry.s")
+#ifdef NON_MATCHING
+// https://decomp.me/scratch/BFO8S
+u32 leoChk_err_retry(u32 sense) {
+    if ((currentCommand == LEO_COMMAND_READ_DISK_ID) || (currentCommand == LEO_COMMAND_START_STOP)) {
+        switch (sense) {
+            case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
+                unit_atten |= 2;
+            case LEO_SENSE_DIAGNOSTIC_FAILURE:
+            case LEO_SENSE_COMMAND_PHASE_ERROR:
+            case LEO_SENSE_WAITING_NMI:
+            case LEO_SENSE_DEVICE_COMMUNICATION_FAILURE:
+            case LEO_SENSE_MEDIUM_NOT_PRESENT:
+            case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
+                LEOdrive_flag = 0;
+                return -1;
+        }
+    } else {
+        switch (sense) {
+            case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
+                unit_atten |= 2;
+            break;
+            case LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED:
+                unit_atten |= 1;
+            break;
+            case LEO_SENSE_DIAGNOSTIC_FAILURE:
+            case LEO_SENSE_COMMAND_PHASE_ERROR:
+            case LEO_SENSE_WAITING_NMI:
+            case LEO_SENSE_DEVICE_COMMUNICATION_FAILURE:
+            case LEO_SENSE_MEDIUM_NOT_PRESENT:
+            case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
+                LEOdrive_flag = 0;
+                return -1;
+        }
+    }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomecha/leoChk_cur_drvmode.s")
+    return 0;
+}
+#else
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomecha/leoChk_err_retry.s")
+#endif
+
+u8 leoChk_cur_drvmode(void) {
+    u8 devstat = 0;
+    if (!(asic_cur_status & 0x1000000)) {
+        devstat = 1;
+    }
+    if (asic_cur_status & 0x80000) {
+        devstat |= 2;
+    }
+    if (asic_cur_status & 0x100000) {
+        devstat |= 4;
+    }
+    return devstat;
+}
 
 void leoDrive_reset() {
-  osEPiWriteIo(LEOPiInfo, LEO_HARD_RESET, 0xAAAA0000);
+  osEPiWriteIo(LEOPiInfo, LEO_HARD_RESET, ASIC_HARD_RESET_CODE);
 }
 
 u32 leoChkUnit_atten(void) {

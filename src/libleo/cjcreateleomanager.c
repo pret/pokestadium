@@ -1,13 +1,16 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
+
 #ifdef NON_MATCHING
 // https://decomp.me/scratch/OYMx2
 s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg *cmdBuf, s32 cmdMsgCnt) {
   OSPiHandle* driveRomHandle;
   OSPiHandle* leoDiskHandle;
-  volatile LEOCmdInquiry cmdBlockInq;
-  volatile LEOCmd cmdBlockID;
+  UNUSED volatile LEOCmdInquiry cmdBlockInq;
+  UNUSED volatile LEOCmd cmdBlockID;
   LEODiskID thisID;
   u32 stat;
   u32 data;
@@ -24,7 +27,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg *cmdBuf, s32 cmdMsg
   driveRomHandle = osDriveRomInit();
   __leoActive = 1;
 
-  __osSetHWIntrRoutine(1, __osLeoInterrupt, leoDiskStack + 0xFF0);
+  __osSetHWIntrRoutine(1, __osLeoInterrupt, leoDiskStack);
   leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
 
   if (osResetType == 1) {

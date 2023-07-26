@@ -22,13 +22,11 @@ s32 LeoSetRTC(LEOCmd* cmdBlock, LEODiskTime* RTCdata, OSMesgQueue* mq) {
   return 0;
 }
 
-#ifdef NON_MATCHING
 /*
  * The "year" is expressed in 4 digits with the high 2 digits being yearhi and low 2 digits being yearlo. 2023 = 0x20, 0x23
  * The "hour" member uses the 24-hour clock.
  * Return 0 if year is between ranges from 1996 to 2095
  */
-// https://decomp.me/scratch/NUHIy
 s32 leoVerifyRTC(u8 yearhi, u8 yearlo) {
   u32 year;
   if (((yearlo & 0xF) >= 0xA) || ((yearlo & 0xF0) >= 0x91) || ((yearhi & 0xF) >= 0xA) || ((yearhi & 0xF0) >= 0x91)) {
@@ -40,6 +38,3 @@ s32 leoVerifyRTC(u8 yearhi, u8 yearlo) {
   }
   return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/setrtc/leoVerifyRTC.s")
-#endif
