@@ -72,7 +72,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg *cmdBuf, s32 cmdMsg
 
     dummy *= data;
     dummy -= (u32)&cmdBlockInq;
-    LEO_country_code = -0x17B72CEA;
+    LEO_country_code = 0xE848D316;
   } else {
     while (1) {}
   }
