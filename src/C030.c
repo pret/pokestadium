@@ -1,5 +1,6 @@
 #include "ultra64.h"
 #include "ultra64/controller.h"
+#include "controller.h"
 
 extern s32 D_800697E0;
 extern u8 D_800A82B0[32];
