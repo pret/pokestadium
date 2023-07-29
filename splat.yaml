@@ -51,7 +51,7 @@ segments:
     - [0xAF00, asm] # camera code
     - [0xB130, c, hal_libc]
     - [0xB230, c, gb_tower]
-    - [0xC030, asm] # extra sprites loader
+    - [0xC030, c] # extra sprites loader
     - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, asm] # yay0 decoder
     - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but

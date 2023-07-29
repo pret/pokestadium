@@ -177,6 +177,8 @@ build/src/libultra/io/gbpakpower.c.o: OPTFLAGS += -Wo,-loopunroll,0
 build/src/libultra/io/gbpakinit.c.o: OPTFLAGS += -Wo,-loopunroll,0
 build/src/libultra/io/gbpakselectbank.c.o: OPTFLAGS += -Wo,-loopunroll,0
 
+build/src/C030.c.o: OPTFLAGS += -Wo,-loopunroll,0
+
 # Libultra misc
 build/src/libultra/gu/scale.c.o: CC := $(CC_OLD)
 build/src/libultra/gu/scale.c.o: OPTFLAGS := -O3
