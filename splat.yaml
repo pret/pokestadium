@@ -112,7 +112,7 @@ segments:
     - [0x4BDC0, asm]
     - [0x4CBC0, asm]
     - [0x4F410, asm]
-    - [0x4F7F0, asm]
+    - [0x4F7F0, c]
     - [0x4F870, asm]
     - [0x4FDB0, asm]
     - [0x4FE60, asm]

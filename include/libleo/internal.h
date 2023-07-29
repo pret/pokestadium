@@ -186,6 +186,7 @@ extern u16 leoLba_to_phys(u32 lba);
 extern s32 __leoActive;
 extern s32 __leoResetCalled;
 extern s32 __leoQueuesCreated;
+extern s32 currentCommand;
 extern u32 LEO_country_code;
 extern u32 LEOasic_bm_ctl_shadow;
 extern u32 LEOasic_seq_ctl_shadow;
