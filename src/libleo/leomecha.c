@@ -1,7 +1,6 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
-extern s32 currentCommand;
 extern u32 asic_cur_status; // static?
 extern u32 unit_atten; // static?
 
