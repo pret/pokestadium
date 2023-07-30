@@ -327,6 +327,8 @@ segments:
     - [0x6A3B0, bin, rom_data_6A3B0]
     - [0x6A3D0, .data, gb_tower]
     - [0x6A3E0, bin, rom_data_6A3E0]
+    - [0x7A180, .data, libleo/driverominit]
+    - [0x7A190, bin, rom_data_7A190]
     - [0x7A2A0, .data, libultra/os/initialize]
     - [0x7A2C0, .data, libultra/al/reverb]
     - [0x7A2E0, bin, rom_data_7A2E0]
