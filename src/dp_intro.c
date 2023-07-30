@@ -228,7 +228,7 @@ void func_8000183C(UNUSED void *arg) {
     __osSetFpcCsr(0x01000C01);
     func_80001C1C(&D_8008474C, 0, 1, 2, 0xFF, 0, 0, 0);
     func_80001C1C(&D_8008473C, 0, 1, 2, 0xFF, 0, 0, 0);
-    func_80004CC0(&D_80083CA0, 0, 4);
+    func_80004CC0(&D_80083CA0.thread, 0, 4);
     func_80005328(&D_80083CA0);
     func_80001380(&D_800846C0);
     while(1) {
