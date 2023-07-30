@@ -18,7 +18,7 @@ extern void func_80003004(void *); // type unknown
 extern void func_80003B30(void *, s32, s32, s32); // types unknown
 
 // 5580.s
-extern void func_80004CC0(void *, s32, s32); // types unknown
+extern void func_80004CC0(OSThread *, s32, s32);
 extern void func_80004CF4(void *); // types unknown
 extern void func_80004D20(void *); // types unknown
 extern void func_800052B4(void);
