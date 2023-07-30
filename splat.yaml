@@ -59,7 +59,7 @@ segments:
     - [0xC970, asm]
     - [0xCE80, asm] #
     - [0xD470, asm] #
-    - [0xDDC0, asm] #
+    - [0xDDC0, c]
     - [0xE1C0, asm] #
     - [0xE570, asm] #
     - [0xE890, asm] #
