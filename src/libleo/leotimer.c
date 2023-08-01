@@ -1,6 +1,9 @@
 #include <ultra64.h>
 #include "libleo/internal.h"
 
+static const u8 ymdupper[6] = {99,12,31,23,59,59};
+static const u8 dayupper[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+
 void leoReadTimer(void) {
 	UNUSED u8* rdparam;
 	UNUSED u8 data[4];
@@ -25,7 +28,99 @@ void leoReadTimer(void) {
     LEOcur_command->header.status = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leotimer/leoSetTimer.s")
+void leoSetTimer(void) {
+    UNUSED LEOCmdReadTimer rd_timer;
+    u8* p_tmp = &LEOcur_command->data.time.yearlo;
+    u32 year;
+    u32 month;
+    u32 temp;
+    u32 ymd;
+    u8 result;
+    __LOCTime time;
+
+    //Verify values (if they're correct BCD or within limits)
+
+    for (ymd = 0; ymd < 6; ymd++) {
+        temp = *p_tmp;
+        
+        //Verify right nybble (only right nybble for some reason)
+        if ((temp & 0xF) > 9) {
+            //nybble is above 0x9 therefore the BCD value is invalid
+            LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
+            LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+            return;
+        }
+
+        //Convert BCD value to binary value
+        temp = temp - ((temp >> 4) * 6);
+
+        switch (ymd) {
+            case 2:
+                //Day value check
+                if ((dayupper[month] < temp) && ((temp != 0x1D) || (year & 3))) {
+                    LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
+                    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+                    return;
+                }
+            case 1:
+                //Month value cannot be 0
+                if (temp == 0) {
+                    LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
+                    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+                    return;
+                }
+            default:
+                //Verify max value of each time info
+                if (ymdupper[ymd] < temp) {
+                    LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
+                    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+                    return;
+                }
+        }
+
+        year = month;
+        month = temp;
+        p_tmp++;
+    }
+
+    //Every value has been ymd good, now set the values in hardware
+
+    //Prepare the time info to use
+    time.year = LEOcur_command->data.time.yearlo;
+    time.month = LEOcur_command->data.time.month;
+    time.day = LEOcur_command->data.time.day;
+    time.hour = LEOcur_command->data.time.hour;
+    time.minute = LEOcur_command->data.time.minute;
+    time.second = LEOcur_command->data.time.second;
+    
+    //Set the new time
+    result = __locSetTimer(&time);
+    if (result != 0) {
+        LEOcur_command->header.sense = result;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+        return;
+    }
+    //Get the time
+    result = __locReadTimer(&time);
+    if (result != 0) {
+        LEOcur_command->header.sense = result;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+        return;
+    }
+    //Check if the time is set correctly
+    if ((time.year != LEOcur_command->data.time.yearlo)
+        || (time.month != LEOcur_command->data.time.month)
+        || (time.day != LEOcur_command->data.time.day)
+        || (time.hour != LEOcur_command->data.time.hour)
+        || (time.minute != LEOcur_command->data.time.minute)
+        || (time.second != LEOcur_command->data.time.second)) {
+        LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+        return;
+    }
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
+}
+
 
 u8 __locReadTimer(__LOCTime* time) {
     u32 data;

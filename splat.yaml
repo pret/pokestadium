@@ -354,6 +354,8 @@ segments:
     - [0x7BFA0, bin, rom_rodata_7BFA0]
     - [0x7BFC0, .rodata, gb_tower]
     - [0x7C000, bin, rom_rodata_7C000]
+    - [0x7EDF0, .rodata, libleo/leotimer]
+    - [0x7EE10, bin, rom_rodata_7EE10]
     - [0x7EE90, .rodata, libultra/gu/sinf]
     - [0x7EEE0, bin, rom_rodata_7EEE0]
     - [0x7EF30, .rodata, libultra/al/reverb]
