@@ -2,8 +2,8 @@
 #include "libleo/internal.h"
 
 void leoReadTimer(void) {
-	UNUSED u8* filler;
-	UNUSED u8 padding[4];
+	UNUSED u8* rdparam;
+	UNUSED u8 data[4];
     __LOCTime time;
     u8 sense_code = __locReadTimer(&time);
     LEOcur_command->data.time.yearlo = time.year;
