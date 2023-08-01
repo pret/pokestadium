@@ -178,6 +178,7 @@ extern void leoSetUA_MEDIUM_CHANGED(void);
 extern int leoC2_Correction(void);
 extern s32 leoVerifyRTC(u8 yearhi, u8 yearlo);
 extern u8 __locReadTimer(__LOCTime* time);
+extern u8 __locSetTimer(__LOCTime* time);
 extern s32 __leoSetReset(void);
 extern s32 __osLeoInterrupt(void);
 extern u16 leoLba_to_vzone(u32 lba);
