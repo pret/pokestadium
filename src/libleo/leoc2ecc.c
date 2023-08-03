@@ -1,5 +1,9 @@
 #include "common.h"
 
+//Tables to add here
+extern u8 ganlog[512];
+extern u8 glog[512];
+
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 
@@ -15,4 +19,9 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoAlpha_mult.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoAlpha_div.s")
+s32 leoAlpha_div(s32 i, s32 k) {
+    if ((i == 0) || (k == 0)) {
+        return 0;
+    }
+    return ganlog[0xFF + (glog[i] - glog[k])];
+}
