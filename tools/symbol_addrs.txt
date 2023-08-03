@@ -142,6 +142,7 @@ leoDiskStack = 0x801020D0;
 LEOdisk_type = 0x801006D8;
 LEO_country_code = 0x801006EC;
 LEOrw_flags = 0x801006D6;
+LEOc2_param = 0x80101080;
 leoC2_Correction = 0x80053710;
 leoC2_single_ecc = 0x8005379C;
 leoC2_double_ecc = 0x80053870;
