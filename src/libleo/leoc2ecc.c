@@ -17,7 +17,12 @@ extern u8 glog[512];
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_4_ecc.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoAlpha_mult.s")
+s32 leoAlpha_mult(s32 i, s32 k) {
+    if ((i == 0) || (k == 0)) {
+        return 0;
+    }
+    return ganlog[(glog[i] + glog[k])];
+}
 
 s32 leoAlpha_div(s32 i, s32 k) {
     if ((i == 0) || (k == 0)) {
