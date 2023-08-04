@@ -21,7 +21,7 @@ struct UnkStruct8004EBF0 {
 };
 void func_80047500(void*, u8, void*, void*);
 struct UnkArray4* func_800495F8();
-struct UnkArray4* D_80078584;
+extern struct UnkArray4* D_80078584; // who did this? fix later
 
 void func_8004EBF0(struct UnkStruct8004EBF0* arg0, f32 arg1) {
     struct UnkArray4 *temp_v0;

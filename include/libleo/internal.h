@@ -41,14 +41,14 @@ typedef struct {
 } __LOCTime; // size = 0x6
 
 /* libleo conversion tables */
-extern const u8 LEOBYTE_TBL1[];
-extern const u16 LEOBYTE_TBL2[];
+extern const u8 LEOBYTE_TBL1[9];
+extern const u16 LEOBYTE_TBL2[9];
 extern const u16 LEOVZONE_TBL[][0x10];
-extern const u16 LEOZONE_SCYL_TBL[];
+extern const u16 LEOZONE_SCYL_TBL[16];
 extern const u8 LEOVZONE_PZONEHD_TBL[][0x10];
-extern const u16 LEOZONE_OUTERCYL_TBL[];
-extern const u16 LEORAM_START_LBA[];
-extern const s32 LEORAM_BYTE[];
+extern const u16 LEOZONE_OUTERCYL_TBL[8];
+extern const u16 LEORAM_START_LBA[7];
+extern const s32 LEORAM_BYTE[7];
 
 /* Memory Map */
 #define LEO_BASE_REG 0x05000000
