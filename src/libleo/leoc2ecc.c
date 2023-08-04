@@ -1,17 +1,19 @@
-#include "common.h"
+#include <ultra64.h>
+#include "libleo/internal.h"
 
 //Tables to add here
 extern u8 ganlog[512];
 extern u8 glog[512];
-//To be determined, should be a struct
-extern u8 LEOc2_param[16];
+
+extern block_param_form LEOc2_param;
+extern u8 LEOC2_Syndrome[2][0xE8*4];
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 
 #ifdef NON_MATCHING
 s32 leoC2_Correction(void) {
-    switch (LEOc2_param[12]) {
+    switch (LEOc2_param.err_num) {
         case 1:
             leoC2_single_ecc();
             return 0;
