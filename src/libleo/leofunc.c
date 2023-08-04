@@ -4,8 +4,6 @@
 
 const u8 LEO_ZERO_MESG[] = { 0 };
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/dB2K5
 void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_buff_size) {
     u32 savedMask;
     OSPri oldPri;
@@ -35,11 +33,10 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_
     osCreateMesgQueue(&LEOdma_que, LEOdma_que_buf, ARRAY_COUNT(LEOdma_que_buf));
     osCreateMesgQueue(&LEOblock_que, LEOblock_que_buf, ARRAY_COUNT(LEOblock_que_buf));
     osCreateMesgQueue(&LEOpost_que, LEOpost_que_buf, ARRAY_COUNT(LEOpost_que_buf));
-    osCreateThread(&LEOcommandThread, 1, leomain, NULL, LEOcommandThreadStack + sizeof(LEOcommandThreadStack), compri);
+    osCreateThread(&LEOcommandThread, 1, leomain, NULL, LEOcommandThreadStack, compri);
     osStartThread(&LEOcommandThread);
-	// LEOinterruptThreadStack reused the same memory address (D_80100638) as LEOcommand_que
-	// This won't compile
-    osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL, LEOinterruptThreadStack + sizeof(LEOinterruptThreadStack), intpri);
+    osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL,
+                   LEOinterruptThreadStack, intpri);
     osStartThread(&LEOinterruptThread);
     osSetEventMesg(OS_EVENT_CART, &LEOevent_que, (OSMesg)0x30000);
     osSendMesg(&LEOblock_que, NULL, 0);
@@ -49,9 +46,6 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_
         osSetThreadPri(NULL, oldPri);
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leofunc/leoInitialize.s")
-#endif
 
 void leoCommand(void* cmd_blk_addr) {
     if (__leoResetCalled != 0) {

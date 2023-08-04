@@ -23,7 +23,7 @@ ROM := $(TARGET).z64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al
+ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/data
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell find src -type d)
 
@@ -314,7 +314,7 @@ $(BUILD_DIR)/src/libultra/libc/llcvt.c.o: src/libultra/libc/llcvt.c
 	@$(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
 
 $(BUILD_DIR)/%.s.o: %.s
-	$(AS) $(ASFLAGS) -o $@ $<
+	iconv --from UTF-8 --to EUC-JP $^ | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.bin.o: %.bin
 	$(LD) -r -b binary -o $@ $<
