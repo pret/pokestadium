@@ -425,7 +425,91 @@ segments:
     - {vram: 0x801038E4, type: .bss, name: libultra/io/cartrominit}
     - {vram: 0x80103950, type: .bss, name: libultra/io/vimgr}
     - {vram: 0x80104b70, type: .bss, name: libultra/io/conteepread}
+  - [0x7F980]
     
-  # rest of the ROM
-  - [0x7F980, bin]
+  # rest of the ROM, assets usually
+  - name: assets
+    type: bin
+    bss_size: 0x0
+    start: 0x7F980
+    vram: 0x80000000 # I dunno
+    subsegments:
+    - [0x7F980,  bin, fragment1]   # todo: disassemble fragment
+    - [0x107FA0, bin, fragment2]  # todo: disassemble fragment
+    - [0x118990, bin, fragment3]  # todo: disassemble fragment
+    - [0x11F560, bin, fragment4]  # todo: disassemble fragment
+    - [0x120920, bin, fragment5]  # todo: disassemble fragment
+    - [0x120A10, bin, fragment6]  # todo: disassemble fragment
+    - [0x1278D0, bin, fragment7]  # todo: disassemble fragment
+    - [0x12DF40, bin, fragment8]  # todo: disassemble fragment
+    - [0x1329E0, bin, fragment9]  # todo: disassemble fragment
+    - [0x134680, bin, fragment10] # todo: disassemble fragment
+    - [0x138F20, bin, fragment11] # todo: disassemble fragment
+    - [0x142B10, bin, fragment12] # todo: disassemble fragment
+    - [0x143700, bin, fragment13] # todo: disassemble fragment
+    - [0x1442E0, bin, fragment14] # todo: disassemble fragment
+    - [0x14CA50, bin, fragment15] # todo: disassemble fragment
+    - [0x1589E0, bin, fragment16] # todo: disassemble fragment
+    - [0x15F990, bin, fragment17] # todo: disassemble fragment
+    - [0x1708B0, bin, fragment18] # todo: disassemble fragment
+    - [0x17FB40, bin, fragment19] # todo: disassemble fragment
+    - [0x1802B0, bin, fragment20] # todo: disassemble fragment
+    - [0x185A10, bin, fragment21] # todo: disassemble fragment
+    - [0x191660, bin, fragment22] # todo: disassemble fragment
+    - [0x1A8570, bin, fragment23] # todo: disassemble fragment
+    - [0x1CE9E0, bin, fragment24] # todo: disassemble fragment
+    - [0x1EA640, bin, fragment25] # todo: disassemble fragment
+    - [0x1EA860, bin, fragment26] # todo: disassemble fragment
+    - [0x1F7C90, bin, fragment27] # todo: disassemble fragment
+    - [0x214900, bin, fragment28] # todo: disassemble fragment
+    - [0x23C250, bin, fragment29] # todo: disassemble fragment
+    - [0x255230, bin, fragment30] # todo: disassemble fragment
+    - [0x2552C0, bin, fragment31] # todo: disassemble fragment
+    - [0x25A740, bin, fragment32] # todo: disassemble fragment
+    - [0x25B0D0, bin, fragment33] # todo: disassemble fragment
+    - [0x261F70, bin, fragment34] # todo: disassemble fragment
+    - [0x271260, bin, fragment35] # todo: disassemble fragment
+    - [0x2717E0, bin, fragment36] # todo: disassemble fragment
+    - [0x272830, bin, fragment37] # todo: disassemble fragment
+    - [0x275CE0, bin, fragment38] # todo: disassemble fragment
+    - [0x27BCA0, bin, fragment39] # todo: disassemble fragment
+    - [0x285DC0, bin, fragment40] # todo: disassemble fragment
+    - [0x287EB0, bin, fragment41] # todo: disassemble fragment
+    - [0x29DD30, bin, fragment42] # todo: disassemble fragment
+    - [0x2A1B30, bin, fragment43] # todo: disassemble fragment
+    - [0x2A4DF0, bin, fragment44] # todo: disassemble fragment
+    - [0x2A9790, bin, fragment45] # todo: disassemble fragment
+    - [0x2AD270, bin, fragment46] # todo: disassemble fragment
+    - [0x2AD8F0, bin, fragment47] # todo: disassemble fragment
+    - [0x2B3F70, bin, fragment48] # todo: disassemble fragment
+    - [0x2B46F0, bin, fragment49] # todo: disassemble fragment
+    - [0x2B5350, bin, fragment50] # todo: disassemble fragment
+    - [0x2BD0A0, bin, fragment51] # todo: disassemble fragment
+    - [0x2BD130, bin, fragment52] # todo: disassemble fragment
+    - [0x2BD6E0, bin, fragment53] # todo: disassemble fragment
+    - [0x2BDAC0, bin, fragment54] # todo: disassemble fragment
+    - [0x2BED20, bin, fragment55] # todo: disassemble fragment
+    - [0x2C3220, bin, fragment56] # todo: disassemble fragment
+    - [0x2C49D0, bin, fragment57] # todo: disassemble fragment
+    - [0x2CF350, bin, fragment58] # todo: disassemble fragment
+    - [0x2D24C0, bin, fragment59] # todo: disassemble fragment
+    - [0x2D5CB0, bin, fragment60] # todo: disassemble fragment
+    - [0x2D7890, bin, fragment61] # todo: disassemble fragment
+    - [0x2EA8C0, bin, fragment62] # todo: disassemble fragment
+    - [0x394100, bin, fragment63] # todo: disassemble fragment
+    - [0x3AEE50, bin, fragment64] # todo: disassemble fragment
+    - [0x3B2AE0, bin, fragment65] # todo: disassemble fragment
+    - [0x3B6130, bin, fragment66] # todo: disassemble fragment
+    - [0x3B8530, bin, fragment67] # todo: disassemble fragment
+    - [0x3B8570, bin, fragment68] # todo: disassemble fragment
+    - [0x3B8600, bin, fragment69] # todo: disassemble fragment
+    - [0x3B8690, bin, fragment70] # todo: disassemble fragment
+    - [0x3B8720, bin, fragment71] # todo: disassemble fragment
+    - [0x3B87B0, bin, fragment72] # todo: disassemble fragment
+    - [0x3B8840, bin, fragment73] # todo: disassemble fragment
+    - [0x3B88D0, bin, fragment74] # todo: disassemble fragment
+    - [0x3B8960, bin, fragment75] # todo: disassemble fragment
+    - [0x3B9590, bin, fragment76] # todo: disassemble fragment
+    - [0x3B9620, bin, fragment77] # todo: disassemble fragment
+  - [0x3B96B0, bin]
   - [0x2000000]
