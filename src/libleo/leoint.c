@@ -2,6 +2,7 @@
 #include "libleo/internal.h"
 
 extern vu16 LEOrw_flags;
+extern u8 LEOC2_Syndrome[2][0xE8*4];
 
 void* read_write_track();
 
