@@ -36,7 +36,21 @@ s32 leoC2_Correction(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_Correction.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_single_ecc.s")
+void leoC2_single_ecc(void) {
+    u8* pointer;
+    u32 byte;
+    u8* p_s;
+
+    if (LEOc2_param.err_pos[0] < 0x55) {
+        byte = LEOc2_param.bytes;
+        pointer = &LEOc2_param.pntr[(LEOc2_param.err_pos[0] + 1) * byte];
+        p_s = LEOc2_param.c2buff_e;
+
+        do {
+            *(--pointer) ^= *(p_s -= 4);
+        } while(--byte != 0);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_double_ecc.s")
 
