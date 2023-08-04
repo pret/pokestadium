@@ -4,18 +4,18 @@
 
 extern u16 LEOrw_flags;
 
+// D_8007DA40
+const u8 leo_sys_form_lbas[] = {0, 1, 8, 9, 0, 0, 0, 0}; // EXTRA 0 IS A HACK
+
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leocmdex/leomain.s")
 
 /*const LEOCmdRead leo_sys_read_cmd =
 {
 	{LEO_COMMAND_READ,0x00,0x00,0x00, 0x00,0x00,0x00,0x00, 0x00000000},
 	12,1,0,0
-};
-
-const u8 leo_sys_form_lbas[] = {0, 1, 8, 9};*/
+};*/
 
 extern LEOCmdRead leo_sys_read_cmd;
-extern u8 leo_sys_form_lbas[];
 
 u8 leoRead_system_area(void) {
     LEOCmdRead temp_cmd;
