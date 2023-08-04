@@ -15,6 +15,15 @@ typedef struct {
   /* 0xA */ u8 start_block;
 } tgt_param_form; // size = 0xC
 
+typedef struct {
+    /* 0x00 */ u8* pntr;
+    /* 0x04 */ u8* c2buff_e;
+    /* 0x08 */ u8 err_pos[4];
+    /* 0x0C */ u8 err_num;
+    /* 0x0D */ u8 bytes;
+    /* 0x0E */ u16 blkbytes;
+} block_param_form; // size = 0x10
+
 typedef union {
     /* 0x00 */ struct {
         /* 0x00 */ u32 country;

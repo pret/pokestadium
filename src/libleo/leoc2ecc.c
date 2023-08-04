@@ -1,17 +1,19 @@
-#include "common.h"
+#include <ultra64.h>
+#include "libleo/internal.h"
 
 //Tables to add here
 extern u8 ganlog[512];
 extern u8 glog[512];
-//To be determined, should be a struct
-extern u8 LEOc2_param[16];
+
+extern block_param_form LEOc2_param;
+extern u8 LEOC2_Syndrome[2][0xE8*4];
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 
 #ifdef NON_MATCHING
 s32 leoC2_Correction(void) {
-    switch (LEOc2_param[12]) {
+    switch (LEOc2_param.err_num) {
         case 1:
             leoC2_single_ecc();
             return 0;
@@ -34,7 +36,21 @@ s32 leoC2_Correction(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_Correction.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_single_ecc.s")
+void leoC2_single_ecc(void) {
+    u8* pointer;
+    u32 byte;
+    u8* p_s;
+
+    if (LEOc2_param.err_pos[0] < 0x55) {
+        byte = LEOc2_param.bytes;
+        pointer = &LEOc2_param.pntr[(LEOc2_param.err_pos[0] + 1) * byte];
+        p_s = LEOc2_param.c2buff_e;
+
+        do {
+            *(--pointer) ^= *(p_s -= 4);
+        } while(--byte != 0);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_double_ecc.s")
 
