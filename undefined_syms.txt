@@ -11,3 +11,4 @@ LeoDiskHandle = 0x801024A8;
 piThreadStack = 0x801026D0;
 LEOZONE_OUTERCYL_TBL = 0x8007DD08;
 LEOinterruptThreadStack = 0x80100638;
+.L8120A860 = 0x8120A860;
