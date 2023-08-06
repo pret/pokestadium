@@ -105,7 +105,114 @@ c2_2_1:
     } while (--byte != 0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_3_ecc.s")
+void leoC2_3_ecc(void) {
+    register u32 s0;
+    register u32 error_i;
+    register u32 error_j;
+    register u32 error_k;
+    u8* pointer1;
+    u8* pointer2;
+    u8* pointer3;
+    u32 byte;
+    u32 ii;
+    u32 jj;
+    u32 kk;
+    u32 c;
+    u32 f;
+    u32 o;
+    u32 b;
+    u32 d;
+    u32 h;
+    u32 a;
+    u32 e;
+    u32 g;
+    u32 p;
+    u8* p_s;
+
+    ii = 0x58 - LEOc2_param.err_pos[0];
+    jj = 0x58 - LEOc2_param.err_pos[1];
+    kk = 0x58 - LEOc2_param.err_pos[2];
+    ii = ganlog[ii];
+    jj = ganlog[jj];
+    kk = ganlog[kk];
+    c = leoAlpha_mult(kk, kk);
+    f = leoAlpha_mult(jj, jj);
+    o = leoAlpha_mult(ii, ii);
+    b = c ^ f;
+    d = c ^ o;
+    h = f ^ o;
+    a = leoAlpha_mult(jj, c) ^ leoAlpha_mult(kk, f);
+    e = leoAlpha_mult(kk, o) ^ leoAlpha_mult(ii, c);
+    g = leoAlpha_mult(jj, o) ^ leoAlpha_mult(ii, f);
+    c = jj ^ kk;
+    f = kk ^ ii;
+    o = ii ^ jj;
+    p = a ^ e ^ g;
+    p = leoAlpha_div(1, p);
+    a = glog[a];
+    b = glog[b];
+    c = glog[c];
+    d = glog[d];
+    e = glog[e];
+    f = glog[f];
+    g = glog[g];
+    h = glog[h];
+    o = glog[o];
+    p = glog[p];
+    byte = LEOc2_param.bytes;
+    if (LEOc2_param.err_pos[2] < 0x55) goto c2_3_3;
+    pointer3 = &LEO_TempBuffer[sizeof(LEO_TempBuffer)];
+    if (LEOc2_param.err_pos[1] < 0x55) goto c2_3_2;
+    pointer2 = &LEO_TempBuffer[sizeof(LEO_TempBuffer)];
+    if (LEOc2_param.err_pos[0] < 0x55) goto c2_3_1;
+    return;
+c2_3_3:
+    pointer3 = &LEOc2_param.pntr[(LEOc2_param.err_pos[2] + 1) * byte];
+c2_3_2:
+    pointer2 = &LEOc2_param.pntr[(LEOc2_param.err_pos[1] + 1) * byte];
+c2_3_1:
+    pointer1 = &LEOc2_param.pntr[(LEOc2_param.err_pos[0] + 1) * byte];
+    p_s = LEOc2_param.c2buff_e;
+    
+    do {
+        p_s -= 4;
+        s0 = p_s[0];
+        if (s0) {
+            s0 = glog[s0];
+            error_i = ganlog[s0 + a];
+            error_j = ganlog[s0 + e];
+            error_k = ganlog[s0 + g];
+        } else {
+            error_i = error_j = error_k = 0;
+        }
+        s0 = p_s[1];
+        if (s0) {
+            s0 = glog[s0];
+            error_i ^= ganlog[s0 + b];
+            error_j ^= ganlog[s0 + d];
+            error_k ^= ganlog[s0 + h];
+        }
+        s0 = p_s[2];
+        if (s0) {
+            s0 = glog[s0];
+            error_i ^= ganlog[s0 + c];
+            error_j ^= ganlog[s0 + f];
+            error_k ^= ganlog[s0 + o];
+        }
+        pointer1--;
+        pointer2--;
+        pointer3--;
+        if (error_i) {
+            *pointer1 ^= ganlog[glog[error_i] + p];
+        }
+        if (error_j) {
+            *pointer2 ^= ganlog[glog[error_j] + p];
+        }
+        if (error_k) {
+            *pointer3 ^= ganlog[glog[error_k] + p];
+        }
+    } while (--byte != 0);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_4_ecc.s")
 
