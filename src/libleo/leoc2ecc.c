@@ -5,6 +5,7 @@
 extern u8 ganlog[512];
 extern u8 glog[512];
 
+extern u8 LEO_TempBuffer[0xE8];
 extern block_param_form LEOc2_param;
 extern u8 LEOC2_Syndrome[2][0xE8*4];
 
@@ -52,7 +53,57 @@ void leoC2_single_ecc(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_double_ecc.s")
+void leoC2_double_ecc(void) {
+    register u32 s0;
+    register u32 error_k;
+    u8* pointer1;
+    u8* pointer2;
+    u32 k;
+    u32 m;
+    u32 a;
+    u32 d;
+    u32 byte;
+    u8* p_s;
+
+    k = 0x58 - LEOc2_param.err_pos[0];
+    m = 0x58 - LEOc2_param.err_pos[1];
+    d = ganlog[k] ^ ganlog[m];
+    d = glog[leoAlpha_div(1, d)];
+    byte = LEOc2_param.bytes; 
+
+    if (LEOc2_param.err_pos[1] < 0x55) {
+        goto c2_2_2;
+    }
+    pointer2 = &LEO_TempBuffer[sizeof(LEO_TempBuffer)];
+    if (LEOc2_param.err_pos[0] < 0x55) {
+        goto c2_2_1;
+    }
+    return;
+c2_2_2:
+    pointer2 = &LEOc2_param.pntr[(LEOc2_param.err_pos[1] + 1) * byte];
+c2_2_1:
+    pointer1 = &LEOc2_param.pntr[(LEOc2_param.err_pos[0] + 1) * byte];
+    p_s = LEOc2_param.c2buff_e;
+    
+    do {
+        s0 = (p_s -= 4)[0];    
+        if (s0 != 0) {
+            a = ganlog[m + glog[s0]] ^ p_s[1];
+        } else {
+            a = p_s[1];
+        }
+        pointer1--;
+        pointer2--;
+        if (a != 0) {
+            error_k = ganlog[glog[a] + d];
+            *pointer1 ^= error_k;
+            *pointer2 ^= error_k ^ s0;
+        } else {
+            *pointer1;
+            *pointer2 ^= s0;
+        }
+    } while (--byte != 0);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoc2ecc/leoC2_3_ecc.s")
 
