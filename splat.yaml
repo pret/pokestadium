@@ -515,20 +515,107 @@ segments:
     - [0x12CC90, rodata, fragments/7/fragment7_rodata]
     - [0x12CD50, bin,    fragments/7/fragment7_reloc]
 
-  - name: assets
+  - name: fragment8
     type: code
     bss_size: 0x0
     start: 0x12DF40
-    vram: 0x81299010 # I dunno part 2
+    vram: 0x86200000 # unknown vram
     subsegments:
-    - [0x12DF40, bin, fragment8]  # todo: disassemble fragment
-    - [0x1329E0, bin, fragment9]  # todo: disassemble fragment
-    - [0x134680, bin, fragment10] # todo: disassemble fragment
-    - [0x138F20, bin, fragment11] # todo: disassemble fragment
-    - [0x142B10, bin, fragment12] # todo: disassemble fragment
-    - [0x143700, bin, fragment13] # todo: disassemble fragment
-    - [0x1442E0, bin, fragment14] # todo: disassemble fragment
-    - [0x14CA50, bin, fragment15] # todo: disassemble fragment
+    - [0x12DF40, hasm,   fragments/8/fragment8_header]
+    - [0x12DF60, asm,    fragments/8/fragment8_code]
+    - [0x131800, data,   fragments/8/fragment8_data]
+    - [0x131AE0, rodata, fragments/8/fragment8_rodata]
+    - [0x131D70, bin,    fragments/8/fragment8_reloc]
+
+  - name: fragment9
+    type: code
+    bss_size: 0x0
+    start: 0x1329E0
+    vram: 0x86300000 # unknown vram
+    subsegments:
+    - [0x1329E0, hasm,   fragments/9/fragment9_header]
+    - [0x132A00, asm,    fragments/9/fragment9_code]
+    - [0x133FE0, data,   fragments/9/fragment9_data]
+    - [0x1340A0, rodata, fragments/9/fragment9_rodata]
+    - [0x1340F0, bin,    fragments/9/fragment9_reloc]
+
+  - name: fragment10
+    type: code
+    bss_size: 0x0
+    start: 0x134680
+    vram: 0x86400000 # unknown vram
+    subsegments:
+    - [0x134680, hasm, fragments/10/fragment10_header]
+    - [0x1346A0, asm,  fragments/10/fragment10_code]
+    - [0x136E40, data, fragments/10/fragment10_data]
+    - [0x1386F0, bin,  fragments/10/fragment10_reloc]
+
+  - name: fragment11
+    type: code
+    bss_size: 0x0
+    start: 0x138F20
+    vram: 0x86500000 # unknown vram
+    subsegments:
+    - [0x138F20, hasm,   fragments/11/fragment11_header]
+    - [0x138F40, asm,    fragments/11/fragment11_code]
+    - [0x13BB40, data,   fragments/11/fragment11_data]
+    - [0x142170, rodata, fragments/11/fragment11_rodata]
+    - [0x142200, bin,    fragments/11/fragment11_reloc]
+
+  - name: fragment12
+    type: code
+    bss_size: 0x0
+    start: 0x142B10
+    vram: 0x86600000 # unknown vram
+    subsegments:
+    - [0x142B10, hasm,   fragments/12/fragment12_header]
+    - [0x142B30, asm,    fragments/12/fragment12_code]
+    - [0x143360, data,   fragments/12/fragment12_data]
+    - [0x143400, rodata, fragments/12/fragment12_rodata]
+    - [0x143450, bin,    fragments/12/fragment12_reloc]
+
+  - name: fragment13
+    type: code
+    bss_size: 0x0
+    start: 0x143700
+    vram: 0x86700000 # unknown vram
+    subsegments:
+    - [0x143700, hasm,   fragments/13/fragment13_header]
+    - [0x143720, asm,    fragments/13/fragment13_code]
+    - [0x143F40, data,   fragments/13/fragment13_data]
+    - [0x143FE0, rodata, fragments/13/fragment13_rodata]
+    - [0x144030, bin,    fragments/13/fragment13_reloc]
+
+  - name: fragment14
+    type: code
+    bss_size: 0x0
+    start: 0x1442E0
+    vram: 0x86800000 # unknown vram
+    subsegments:
+    - [0x1442E0, hasm,   fragments/14/fragment14_header]
+    - [0x144300, asm,    fragments/14/fragment14_code]
+    - [0x14AFB0, data,   fragments/14/fragment14_data]
+    - [0x14B660, rodata, fragments/14/fragment14_rodata]
+    - [0x14B7E0, bin,    fragments/14/fragment14_reloc]
+
+  - name: fragment15
+    type: code
+    bss_size: 0x0
+    start: 0x14CA50
+    vram: 0x86900000 # unknown vram
+    subsegments:
+    - [0x14CA50, hasm,   fragments/15/fragment15_header]
+    - [0x14CA70, asm,    fragments/15/fragment15_code]
+    - [0x1554D0, data,   fragments/15/fragment15_data]
+    - [0x156EB0, rodata, fragments/15/fragment15_rodata]
+    - [0x157060, bin,    fragments/15/fragment15_reloc]
+
+  - name: assets
+    type: code
+    bss_size: 0x0
+    start: 0x1589E0
+    vram: 0x80000000 # unknown vram
+    subsegments:
     - [0x1589E0, bin, fragment16] # todo: disassemble fragment
     - [0x15F990, bin, fragment17] # todo: disassemble fragment
     - [0x1708B0, bin, fragment18] # todo: disassemble fragment
