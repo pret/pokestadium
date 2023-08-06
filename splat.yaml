@@ -432,10 +432,10 @@ segments:
     type: code
     bss_size: 0x0
     start: 0x7F980
-    vram: 0x81200000 # I dunno
+    vram: 0x81200000
     subsegments:
-    - [0x7F980,  hasm,   fragments/1/fragment1_header]   # todo: disassemble fragment
-    - [0x7F9A0,  asm,    fragments/1/fragment1_code]     # todo: disassemble fragment
+    - [0x7F980,  hasm,   fragments/1/fragment1_header]
+    - [0x7F9A0,  asm,    fragments/1/fragment1_code]
     - [0x89020,  hasm,   fragments/1/fragment1_code_asm]
     - [0x8D1A0,  data,   fragments/1/fragment1_data]
     - [0xA8E80,  rodata, fragments/1/fragment1_rodata]
@@ -452,8 +452,8 @@ segments:
     start: 0x107FA0
     vram: 0x87800000
     subsegments:
-    - [0x107FA0, hasm,   fragments/2/fragment2_header]  # todo: disassemble fragment
-    - [0x107FC0, asm,    fragments/2/fragment2_code]    # todo: disassemble fragment
+    - [0x107FA0, hasm,   fragments/2/fragment2_header]
+    - [0x107FC0, asm,    fragments/2/fragment2_code]
     - [0x10E2D0, data,   fragments/2/fragment2_data]
     - [0x117850, rodata, fragments/2/fragment2_rodata]
     - [0x1179C0, bin,    fragments/2/fragment2_relocs]
@@ -464,22 +464,64 @@ segments:
     start: 0x118990
     vram: 0x87900000
     subsegments:
-    - [0x118990, hasm,   fragments/3/fragment3_header]  # todo: disassemble fragment
-    - [0x1189B0, asm,    fragments/3/fragment3_code]    # todo: disassemble fragment
+    - [0x118990, hasm,   fragments/3/fragment3_header]
+    - [0x1189B0, asm,    fragments/3/fragment3_code]
     - [0x11C730, data,   fragments/3/fragment3_data]
     - [0x11E810, rodata, fragments/3/fragment3_rodata]
     - [0x11E9D0, bin,    fragments/3/fragment3_reloc]
 
-  - name: assets
+  - name: fragment4
     type: code
     bss_size: 0x0
     start: 0x11F560
+    vram: 0x87A00000
+    subsegments:
+    - [0x11F560, hasm, fragments/4/fragment4_header]
+    - [0x11F580, asm,  fragments/4/fragment4_code]
+    - [0x120670, data, fragments/4/fragment4_data]
+    - [0x120860, bin,  fragments/4/fragment4_reloc]
+
+  - name: fragment5
+    type: code
+    bss_size: 0x0
+    start: 0x120920
+    vram: 0x87B00000 # unknown. we dont actually know this fragment's vaddr yet, but we need a unique vaddr so the linker doesnt complain.
+    subsegments:
+    - [0x120920, hasm, fragments/5/fragment5_header]
+    - [0x120940, asm,  fragments/5/fragment5_code]
+    - [0x1209E0, data, fragments/5/fragment5_data]
+    - [0x120A00, bin,  fragments/5/fragment5_reloc]
+
+  - name: fragment6
+    type: code
+    bss_size: 0x0
+    start: 0x120A10
+    vram: 0x86000000
+    subsegments:
+    - [0x120A10, hasm,   fragments/6/fragment6_header]
+    - [0x120A30, asm,    fragments/6/fragment6_code]
+    - [0x123330, data,   fragments/6/fragment6_data]
+    - [0x123890, rodata, fragments/6/fragment6_rodata]
+    - [0x123940, bin,    fragments/6/fragment6_reloc]
+
+  - name: fragment7
+    type: code
+    bss_size: 0x0
+    start: 0x1278D0
+    vram: 0x86100000
+    subsegments:
+    - [0x1278D0, hasm,   fragments/7/fragment7_header]
+    - [0x1278F0, asm,    fragments/7/fragment7_code]
+    - [0x12BF10, data,   fragments/7/fragment7_data]
+    - [0x12CC90, rodata, fragments/7/fragment7_rodata]
+    - [0x12CD50, bin,    fragments/7/fragment7_reloc]
+
+  - name: assets
+    type: code
+    bss_size: 0x0
+    start: 0x12DF40
     vram: 0x81299010 # I dunno part 2
     subsegments:
-    - [0x11F560, bin, fragment4]  # todo: disassemble fragment
-    - [0x120920, bin, fragment5]  # todo: disassemble fragment
-    - [0x120A10, bin, fragment6]  # todo: disassemble fragment
-    - [0x1278D0, bin, fragment7]  # todo: disassemble fragment
     - [0x12DF40, bin, fragment8]  # todo: disassemble fragment
     - [0x1329E0, bin, fragment9]  # todo: disassemble fragment
     - [0x134680, bin, fragment10] # todo: disassemble fragment
