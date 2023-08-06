@@ -86,7 +86,8 @@ c2_2_1:
     p_s = LEOc2_param.c2buff_e;
     
     do {
-        s0 = (p_s -= 4)[0];    
+        p_s -= 4;
+        s0 = p_s[0];    
         if (s0 != 0) {
             a = ganlog[m + glog[s0]] ^ p_s[1];
         } else {
