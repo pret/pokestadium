@@ -23,8 +23,9 @@ ROM := $(TARGET).z64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/data
-DATA_DIRS := bin assets
+# TODO: Recursively make fragment folders correctly.
+ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/data asm/fragments asm/data/fragments/1/ asm/data/fragments/2/ asm/data/fragments/3/ asm/fragments/1/ asm/fragments/2/ asm/fragments/3/
+DATA_DIRS := bin assets assets/fragments assets/fragments/1/ assets/fragments/2/ assets/fragments/3/
 SRC_DIRS := $(shell find src -type d)
 
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))

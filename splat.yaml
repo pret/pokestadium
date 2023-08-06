@@ -427,16 +427,55 @@ segments:
     - {vram: 0x80104b70, type: .bss, name: libultra/io/conteepread}
   - [0x7F980]
     
-  # rest of the ROM, assets usually
-  - name: assets
-    type: bin
+  # Probably the GB Tower Emulator
+  - name: fragment1
+    type: code
     bss_size: 0x0
     start: 0x7F980
-    vram: 0x80000000 # I dunno
+    vram: 0x81200000 # I dunno
     subsegments:
-    - [0x7F980,  bin, fragment1]   # todo: disassemble fragment
-    - [0x107FA0, bin, fragment2]  # todo: disassemble fragment
-    - [0x118990, bin, fragment3]  # todo: disassemble fragment
+    - [0x7F980,  hasm,   fragments/1/fragment1_header]   # todo: disassemble fragment
+    - [0x7F9A0,  asm,    fragments/1/fragment1_code]     # todo: disassemble fragment
+    - [0x89020,  hasm,   fragments/1/fragment1_code_asm]
+    - [0x8D1A0,  data,   fragments/1/fragment1_data]
+    - [0xA8E80,  rodata, fragments/1/fragment1_rodata]
+    - [0xAAB60,  bin,    fragments/1/fragment1_relocs]
+    - [0xADC80,  bin,    fragments/1/fragment1_yay0_0]
+    - [0xF4920,  bin,    fragments/1/fragment1_yay0_1]
+    - [0xF5450,  bin,    fragments/1/fragment1_yay0_2]
+    - [0xFDE40,  bin,    fragments/1/fragment1_yay0_3]
+    - [0x102BA0, bin,    fragments/1/fragment1_yay0_4]
+
+  - name: fragment2
+    type: code
+    bss_size: 0x0
+    start: 0x107FA0
+    vram: 0x87800000
+    subsegments:
+    - [0x107FA0, hasm,   fragments/2/fragment2_header]  # todo: disassemble fragment
+    - [0x107FC0, asm,    fragments/2/fragment2_code]    # todo: disassemble fragment
+    - [0x10E2D0, data,   fragments/2/fragment2_data]
+    - [0x117850, rodata, fragments/2/fragment2_rodata]
+    - [0x1179C0, bin,    fragments/2/fragment2_relocs]
+    
+  - name: fragment3
+    type: code
+    bss_size: 0x0
+    start: 0x118990
+    vram: 0x87900000
+    subsegments:
+    - [0x118990, hasm,   fragments/3/fragment3_header]  # todo: disassemble fragment
+    - [0x1189B0, asm,    fragments/3/fragment3_code]    # todo: disassemble fragment
+    - [0x11C730, data,   fragments/3/fragment3_data]
+    - [0x11E810, rodata, fragments/3/fragment3_rodata]
+    - [0x11E9D0, bin,    fragments/3/fragment3_reloc]
+
+  - name: assets
+    type: code
+    bss_size: 0x0
+    start: 0x11F560
+    vram: 0x81299010 # I dunno part 2
+    subsegments:
     - [0x11F560, bin, fragment4]  # todo: disassemble fragment
     - [0x120920, bin, fragment5]  # todo: disassemble fragment
     - [0x120A10, bin, fragment6]  # todo: disassemble fragment
@@ -511,5 +550,6 @@ segments:
     - [0x3B8960, bin, fragment75] # todo: disassemble fragment
     - [0x3B9590, bin, fragment76] # todo: disassemble fragment
     - [0x3B9620, bin, fragment77] # todo: disassemble fragment
+    - [0x3B96B0]
   - [0x3B96B0, bin]
   - [0x2000000]
