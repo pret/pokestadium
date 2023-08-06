@@ -545,10 +545,10 @@ segments:
     start: 0x134680
     vram: 0x86400000
     subsegments:
-    - [0x134680, hasm, fragments/10/fragment10_header]
-    - [0x1346A0, asm,  fragments/10/fragment10_code]
-    - [0x136E40, data, fragments/10/fragment10_data]
-    - [0x1386F0, bin,  fragments/10/fragment10_reloc]
+    - [0x134680, hasm,   fragments/10/fragment10_header]
+    - [0x1346A0, asm,    fragments/10/fragment10_code]
+    - [0x136E40, data,   fragments/10/fragment10_data]
+    - [0x1386F0, bin,    fragments/10/fragment10_reloc]
 
   - name: fragment11
     type: code
@@ -724,27 +724,134 @@ segments:
     start: 0x1EA640
     vram: 0x88400000
     subsegments:
-    - [0x1EA640, hasm, fragments/25/fragment25_header]
-    - [0x1EA660, asm,  fragments/25/fragment25_code]
-    - [0x1EA740, data, fragments/25/fragment25_data]
-    - [0x1EA840, bin,  fragments/25/fragment25_reloc]
+    - [0x1EA640, hasm,   fragments/25/fragment25_header]
+    - [0x1EA660, asm,    fragments/25/fragment25_code]
+    - [0x1EA740, data,   fragments/25/fragment25_data]
+    - [0x1EA840, bin,    fragments/25/fragment25_reloc]
+
+  - name: fragment26
+    type: code
+    bss_size: 0x0
+    start: 0x1EA860
+    vram: 0x88500000
+    subsegments:
+    - [0x1EA860, hasm,   fragments/26/fragment26_header]
+    - [0x1EA880, asm,    fragments/26/fragment26_code]
+    - [0x1F77E0, data,   fragments/26/fragment26_data]
+    - [0x1F7810, rodata, fragments/26/fragment26_rodata]
+    - [0x1F7840, bin,    fragments/26/fragment26_reloc]
+
+  - name: fragment27
+    type: code
+    bss_size: 0x0
+    start: 0x1F7C90
+    vram: 0x88600000
+    subsegments:
+    - [0x1F7C90, hasm,   fragments/27/fragment27_header]
+    - [0x1F7CB0, asm,    fragments/27/fragment27_code]
+    - [0x1FD750, data,   fragments/27/fragment27_data]
+    - [0x214060, rodata, fragments/27/fragment27_rodata]
+    - [0x2141A0, bin,    fragments/27/fragment27_reloc]
+
+  - name: fragment28
+    type: code
+    bss_size: 0x0
+    start: 0x214900
+    vram: 0x88800000
+    subsegments:
+    - [0x214900, hasm,   fragments/28/fragment28_header]
+    - [0x214920, asm,    fragments/28/fragment28_code]
+    - [0x21CA50, data,   fragments/28/fragment28_data]
+    - [0x23AF80, rodata, fragments/28/fragment28_rodata]
+    - [0x23B0A0, bin,    fragments/28/fragment28_reloc]
+
+  - name: fragment29
+    type: code
+    bss_size: 0x0
+    start: 0x23C250
+    vram: 0x88900000
+    subsegments:
+    - [0x23C250, hasm,   fragments/29/fragment29_header]
+    - [0x23C270, asm,    fragments/29/fragment29_code]
+    - [0x23D3C0, data,   fragments/29/fragment29_data]
+    - [0x23D430, bin,    fragments/29/fragment29_reloc]
+    - [0x23D500, bin,    fragments/29/fragment29_unk_bin_1] # PERS-SZP file
+
+  - name: fragment30
+    type: code
+    bss_size: 0x0
+    start: 0x255230
+    vram: 0x88A00000 # unknown vram, since nothing loads this. probably 88A00000?
+    subsegments:
+    - [0x255230, hasm,   fragments/30/fragment30_header]
+    - [0x255250, asm,    fragments/30/fragment30_code]
+    - [0x2552B0, bin,    fragments/30/fragment30_reloc]
+
+  - name: fragment31
+    type: code
+    bss_size: 0x0
+    start: 0x2552C0
+    vram: 0x81000000
+    subsegments:
+    - [0x2552C0, hasm,   fragments/31/fragment31_header]
+    - [0x2552E0, bin,    fragments/31/fragment31_unk_table] # what is this?
+    - [0x2554C0, asm,    fragments/31/fragment31_code]
+    - [0x259290, data,   fragments/31/fragment31_data]
+    - [0x259480, rodata, fragments/31/fragment31_rodata]
+    - [0x259AA0, bin,    fragments/31/fragment31_reloc]
+
+  - name: fragment32
+    type: code
+    bss_size: 0x0
+    start: 0x25A740
+    vram: 0x81100000
+    subsegments:
+    - [0x25A740, hasm,   fragments/32/fragment32_header]
+    - [0x25A760, asm,    fragments/32/fragment32_code]
+    - [0x25B060, data,   fragments/32/fragment32_data]
+    - [0x25B070, bin,    fragments/32/fragment32_reloc]
+
+  - name: fragment33
+    type: code
+    bss_size: 0x0
+    start: 0x25B0D0
+    vram: 0x81300000
+    subsegments:
+    - [0x25B0D0, hasm,   fragments/33/fragment33_header]
+    - [0x25B0F0, asm,    fragments/33/fragment33_code]
+    - [0x25ECF0, data,   fragments/33/fragment33_data]
+    - [0x25F020, rodata, fragments/33/fragment33_rodata]
+    - [0x25F070, bin,    fragments/33/fragment33_reloc]
+    - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG
+
+  - name: fragment34
+    type: code
+    bss_size: 0x0
+    start: 0x261F70
+    vram: 0x81400000
+    subsegments:
+    - [0x261F70, hasm,   fragments/34/fragment34_header]
+    - [0x261F90, asm,    fragments/34/fragment34_code]
+    - [0x26F9C0, data,   fragments/34/fragment34_data]
+    - [0x270570, rodata, fragments/34/fragment34_rodata]
+    - [0x270590, bin,    fragments/34/fragment34_reloc]
+
+  - name: fragment35
+    type: code
+    bss_size: 0x0
+    start: 0x271260
+    vram: 0x82000000
+    subsegments:
+    - [0x271260, hasm,   fragments/35/fragment35_header]
+    - [0x271280, asm,    fragments/35/fragment35_code]
+    - [0x2717C0, bin,    fragments/35/fragment35_reloc]
 
   - name: assets
     type: code
     bss_size: 0x0
-    start: 0x1EA860
+    start: 0x2717E0
     vram: 0x80000000 # unknown vram
     subsegments:
-    - [0x1EA860, bin, fragment26] # todo: disassemble fragment
-    - [0x1F7C90, bin, fragment27] # todo: disassemble fragment
-    - [0x214900, bin, fragment28] # todo: disassemble fragment
-    - [0x23C250, bin, fragment29] # todo: disassemble fragment
-    - [0x255230, bin, fragment30] # todo: disassemble fragment
-    - [0x2552C0, bin, fragment31] # todo: disassemble fragment
-    - [0x25A740, bin, fragment32] # todo: disassemble fragment
-    - [0x25B0D0, bin, fragment33] # todo: disassemble fragment
-    - [0x261F70, bin, fragment34] # todo: disassemble fragment
-    - [0x271260, bin, fragment35] # todo: disassemble fragment
     - [0x2717E0, bin, fragment36] # todo: disassemble fragment
     - [0x272830, bin, fragment37] # todo: disassemble fragment
     - [0x275CE0, bin, fragment38] # todo: disassemble fragment
