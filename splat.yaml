@@ -426,89 +426,906 @@ segments:
     - {vram: 0x80104b70, type: .bss, name: libultra/io/conteepread}
   - [0x7F980]
     
-  # rest of the ROM, assets usually
-  - name: assets
-    type: bin
+  # Probably the GB Tower Emulator. This fragment is built very strangely.
+  - name: fragment1
+    type: code
     bss_size: 0x0
     start: 0x7F980
-    vram: 0x80000000 # I dunno
+    vram: 0x81200000
     subsegments:
-    - [0x7F980,  bin, fragment1]   # todo: disassemble fragment
-    - [0x107FA0, bin, fragment2]  # todo: disassemble fragment
-    - [0x118990, bin, fragment3]  # todo: disassemble fragment
-    - [0x11F560, bin, fragment4]  # todo: disassemble fragment
-    - [0x120920, bin, fragment5]  # todo: disassemble fragment
-    - [0x120A10, bin, fragment6]  # todo: disassemble fragment
-    - [0x1278D0, bin, fragment7]  # todo: disassemble fragment
-    - [0x12DF40, bin, fragment8]  # todo: disassemble fragment
-    - [0x1329E0, bin, fragment9]  # todo: disassemble fragment
-    - [0x134680, bin, fragment10] # todo: disassemble fragment
-    - [0x138F20, bin, fragment11] # todo: disassemble fragment
-    - [0x142B10, bin, fragment12] # todo: disassemble fragment
-    - [0x143700, bin, fragment13] # todo: disassemble fragment
-    - [0x1442E0, bin, fragment14] # todo: disassemble fragment
-    - [0x14CA50, bin, fragment15] # todo: disassemble fragment
-    - [0x1589E0, bin, fragment16] # todo: disassemble fragment
-    - [0x15F990, bin, fragment17] # todo: disassemble fragment
-    - [0x1708B0, bin, fragment18] # todo: disassemble fragment
-    - [0x17FB40, bin, fragment19] # todo: disassemble fragment
-    - [0x1802B0, bin, fragment20] # todo: disassemble fragment
-    - [0x185A10, bin, fragment21] # todo: disassemble fragment
-    - [0x191660, bin, fragment22] # todo: disassemble fragment
-    - [0x1A8570, bin, fragment23] # todo: disassemble fragment
-    - [0x1CE9E0, bin, fragment24] # todo: disassemble fragment
-    - [0x1EA640, bin, fragment25] # todo: disassemble fragment
-    - [0x1EA860, bin, fragment26] # todo: disassemble fragment
-    - [0x1F7C90, bin, fragment27] # todo: disassemble fragment
-    - [0x214900, bin, fragment28] # todo: disassemble fragment
-    - [0x23C250, bin, fragment29] # todo: disassemble fragment
-    - [0x255230, bin, fragment30] # todo: disassemble fragment
-    - [0x2552C0, bin, fragment31] # todo: disassemble fragment
-    - [0x25A740, bin, fragment32] # todo: disassemble fragment
-    - [0x25B0D0, bin, fragment33] # todo: disassemble fragment
-    - [0x261F70, bin, fragment34] # todo: disassemble fragment
-    - [0x271260, bin, fragment35] # todo: disassemble fragment
-    - [0x2717E0, bin, fragment36] # todo: disassemble fragment
-    - [0x272830, bin, fragment37] # todo: disassemble fragment
-    - [0x275CE0, bin, fragment38] # todo: disassemble fragment
-    - [0x27BCA0, bin, fragment39] # todo: disassemble fragment
-    - [0x285DC0, bin, fragment40] # todo: disassemble fragment
-    - [0x287EB0, bin, fragment41] # todo: disassemble fragment
-    - [0x29DD30, bin, fragment42] # todo: disassemble fragment
-    - [0x2A1B30, bin, fragment43] # todo: disassemble fragment
-    - [0x2A4DF0, bin, fragment44] # todo: disassemble fragment
-    - [0x2A9790, bin, fragment45] # todo: disassemble fragment
-    - [0x2AD270, bin, fragment46] # todo: disassemble fragment
-    - [0x2AD8F0, bin, fragment47] # todo: disassemble fragment
-    - [0x2B3F70, bin, fragment48] # todo: disassemble fragment
-    - [0x2B46F0, bin, fragment49] # todo: disassemble fragment
-    - [0x2B5350, bin, fragment50] # todo: disassemble fragment
-    - [0x2BD0A0, bin, fragment51] # todo: disassemble fragment
-    - [0x2BD130, bin, fragment52] # todo: disassemble fragment
-    - [0x2BD6E0, bin, fragment53] # todo: disassemble fragment
-    - [0x2BDAC0, bin, fragment54] # todo: disassemble fragment
-    - [0x2BED20, bin, fragment55] # todo: disassemble fragment
-    - [0x2C3220, bin, fragment56] # todo: disassemble fragment
-    - [0x2C49D0, bin, fragment57] # todo: disassemble fragment
-    - [0x2CF350, bin, fragment58] # todo: disassemble fragment
-    - [0x2D24C0, bin, fragment59] # todo: disassemble fragment
-    - [0x2D5CB0, bin, fragment60] # todo: disassemble fragment
-    - [0x2D7890, bin, fragment61] # todo: disassemble fragment
-    - [0x2EA8C0, bin, fragment62] # todo: disassemble fragment
-    - [0x394100, bin, fragment63] # todo: disassemble fragment
-    - [0x3AEE50, bin, fragment64] # todo: disassemble fragment
-    - [0x3B2AE0, bin, fragment65] # todo: disassemble fragment
-    - [0x3B6130, bin, fragment66] # todo: disassemble fragment
-    - [0x3B8530, bin, fragment67] # todo: disassemble fragment
-    - [0x3B8570, bin, fragment68] # todo: disassemble fragment
-    - [0x3B8600, bin, fragment69] # todo: disassemble fragment
-    - [0x3B8690, bin, fragment70] # todo: disassemble fragment
-    - [0x3B8720, bin, fragment71] # todo: disassemble fragment
-    - [0x3B87B0, bin, fragment72] # todo: disassemble fragment
-    - [0x3B8840, bin, fragment73] # todo: disassemble fragment
-    - [0x3B88D0, bin, fragment74] # todo: disassemble fragment
-    - [0x3B8960, bin, fragment75] # todo: disassemble fragment
-    - [0x3B9590, bin, fragment76] # todo: disassemble fragment
-    - [0x3B9620, bin, fragment77] # todo: disassemble fragment
-  - [0x3B96B0, bin]
+    - [0x7F980,  hasm,   fragments/1/fragment1_header]
+    - [0x7F9A0,  asm,    fragments/1/fragment1_code]
+    - [0x89020,  hasm,   fragments/1/fragment1_code_asm]
+    - [0x8D1A0,  data,   fragments/1/fragment1_data]
+    - [0xA8E80,  rodata, fragments/1/fragment1_rodata]
+    - [0xAAB60,  bin,    fragments/1/fragment1_relocs]
+    - [0xADC80,  bin,    fragments/1/fragment1_yay0_0]
+    - [0xF4920,  bin,    fragments/1/fragment1_yay0_1]
+    - [0xF5450,  bin,    fragments/1/fragment1_yay0_2]
+    - [0xFDE40,  bin,    fragments/1/fragment1_yay0_3]
+    - [0x102BA0, bin,    fragments/1/fragment1_yay0_4]
+
+  - name: fragment2
+    type: code
+    bss_size: 0x0
+    start: 0x107FA0
+    vram: 0x87800000
+    subsegments:
+    - [0x107FA0, hasm,   fragments/2/fragment2_header]
+    - [0x107FC0, asm,    fragments/2/fragment2_code]
+    - [0x10E2D0, data,   fragments/2/fragment2_data]
+    - [0x117850, rodata, fragments/2/fragment2_rodata]
+    - [0x1179C0, bin,    fragments/2/fragment2_relocs]
+    
+  - name: fragment3
+    type: code
+    bss_size: 0x0
+    start: 0x118990
+    vram: 0x87900000
+    subsegments:
+    - [0x118990, hasm,   fragments/3/fragment3_header]
+    - [0x1189B0, asm,    fragments/3/fragment3_code]
+    - [0x11C730, data,   fragments/3/fragment3_data]
+    - [0x11E810, rodata, fragments/3/fragment3_rodata]
+    - [0x11E9D0, bin,    fragments/3/fragment3_reloc]
+
+  - name: fragment4
+    type: code
+    bss_size: 0x0
+    start: 0x11F560
+    vram: 0x87A00000
+    subsegments:
+    - [0x11F560, hasm, fragments/4/fragment4_header]
+    - [0x11F580, asm,  fragments/4/fragment4_code]
+    - [0x120670, data, fragments/4/fragment4_data]
+    - [0x120860, bin,  fragments/4/fragment4_reloc]
+
+  - name: fragment5
+    type: code
+    bss_size: 0x0
+    start: 0x120920
+    vram: 0x87B00000 # unknown. we dont actually know this fragment's vaddr yet, but we need a unique vaddr so the linker doesnt complain. Might be an unused fragment, as it's very very small, and seems to only poll the controller.
+    subsegments:
+    - [0x120920, hasm, fragments/5/fragment5_header]
+    - [0x120940, asm,  fragments/5/fragment5_code]
+    - [0x1209E0, data, fragments/5/fragment5_data]
+    - [0x120A00, bin,  fragments/5/fragment5_reloc]
+
+  - name: fragment6
+    type: code
+    bss_size: 0x0
+    start: 0x120A10
+    vram: 0x86000000
+    subsegments:
+    - [0x120A10, hasm,   fragments/6/fragment6_header]
+    - [0x120A30, asm,    fragments/6/fragment6_code]
+    - [0x123330, data,   fragments/6/fragment6_data]
+    - [0x123890, rodata, fragments/6/fragment6_rodata]
+    - [0x123940, bin,    fragments/6/fragment6_reloc]
+
+  - name: fragment7
+    type: code
+    bss_size: 0x0
+    start: 0x1278D0
+    vram: 0x86100000
+    subsegments:
+    - [0x1278D0, hasm,   fragments/7/fragment7_header]
+    - [0x1278F0, asm,    fragments/7/fragment7_code]
+    - [0x12BF10, data,   fragments/7/fragment7_data]
+    - [0x12CC90, rodata, fragments/7/fragment7_rodata]
+    - [0x12CD50, bin,    fragments/7/fragment7_reloc]
+
+  - name: fragment8
+    type: code
+    bss_size: 0x0
+    start: 0x12DF40
+    vram: 0x86200000
+    subsegments:
+    - [0x12DF40, hasm,   fragments/8/fragment8_header]
+    - [0x12DF60, asm,    fragments/8/fragment8_code]
+    - [0x131800, data,   fragments/8/fragment8_data]
+    - [0x131AE0, rodata, fragments/8/fragment8_rodata]
+    - [0x131D70, bin,    fragments/8/fragment8_reloc]
+
+  - name: fragment9
+    type: code
+    bss_size: 0x0
+    start: 0x1329E0
+    vram: 0x86300000
+    subsegments:
+    - [0x1329E0, hasm,   fragments/9/fragment9_header]
+    - [0x132A00, asm,    fragments/9/fragment9_code]
+    - [0x133FE0, data,   fragments/9/fragment9_data]
+    - [0x1340A0, rodata, fragments/9/fragment9_rodata]
+    - [0x1340F0, bin,    fragments/9/fragment9_reloc]
+
+  - name: fragment10
+    type: code
+    bss_size: 0x0
+    start: 0x134680
+    vram: 0x86400000
+    subsegments:
+    - [0x134680, hasm,   fragments/10/fragment10_header]
+    - [0x1346A0, asm,    fragments/10/fragment10_code]
+    - [0x136E40, data,   fragments/10/fragment10_data]
+    - [0x1386F0, bin,    fragments/10/fragment10_reloc]
+
+  - name: fragment11
+    type: code
+    bss_size: 0x0
+    start: 0x138F20
+    vram: 0x86500000
+    subsegments:
+    - [0x138F20, hasm,   fragments/11/fragment11_header]
+    - [0x138F40, asm,    fragments/11/fragment11_code]
+    - [0x13BB40, data,   fragments/11/fragment11_data]
+    - [0x142170, rodata, fragments/11/fragment11_rodata]
+    - [0x142200, bin,    fragments/11/fragment11_reloc]
+
+  - name: fragment12
+    type: code
+    bss_size: 0x0
+    start: 0x142B10
+    vram: 0x86600000
+    subsegments:
+    - [0x142B10, hasm,   fragments/12/fragment12_header]
+    - [0x142B30, asm,    fragments/12/fragment12_code]
+    - [0x143360, data,   fragments/12/fragment12_data]
+    - [0x143400, rodata, fragments/12/fragment12_rodata]
+    - [0x143450, bin,    fragments/12/fragment12_reloc]
+
+  - name: fragment13
+    type: code
+    bss_size: 0x0
+    start: 0x143700
+    vram: 0x86700000
+    subsegments:
+    - [0x143700, hasm,   fragments/13/fragment13_header]
+    - [0x143720, asm,    fragments/13/fragment13_code]
+    - [0x143F40, data,   fragments/13/fragment13_data]
+    - [0x143FE0, rodata, fragments/13/fragment13_rodata]
+    - [0x144030, bin,    fragments/13/fragment13_reloc]
+
+  - name: fragment14
+    type: code
+    bss_size: 0x0
+    start: 0x1442E0
+    vram: 0x86800000
+    subsegments:
+    - [0x1442E0, hasm,   fragments/14/fragment14_header]
+    - [0x144300, asm,    fragments/14/fragment14_code]
+    - [0x14AFB0, data,   fragments/14/fragment14_data]
+    - [0x14B660, rodata, fragments/14/fragment14_rodata]
+    - [0x14B7E0, bin,    fragments/14/fragment14_reloc]
+
+  - name: fragment15
+    type: code
+    bss_size: 0x0
+    start: 0x14CA50
+    vram: 0x86900000
+    subsegments:
+    - [0x14CA50, hasm,   fragments/15/fragment15_header]
+    - [0x14CA70, asm,    fragments/15/fragment15_code]
+    - [0x1554D0, data,   fragments/15/fragment15_data]
+    - [0x156EB0, rodata, fragments/15/fragment15_rodata]
+    - [0x157060, bin,    fragments/15/fragment15_reloc]
+
+  - name: fragment16
+    type: code
+    bss_size: 0x0
+    start: 0x1589E0
+    vram: 0x86A00000
+    subsegments:
+    - [0x1589E0, hasm,   fragments/16/fragment16_header]
+    - [0x158A00, asm,    fragments/16/fragment16_code]
+    - [0x15AF80, data,   fragments/16/fragment16_data]
+    - [0x15EB20, rodata, fragments/16/fragment16_rodata]
+    - [0x15EB50, bin,    fragments/16/fragment16_reloc]
+
+  - name: fragment17
+    type: code
+    bss_size: 0x0
+    start: 0x15F990
+    vram: 0x86B00000
+    subsegments:
+    - [0x15F990, hasm,   fragments/17/fragment17_header]
+    - [0x15F9B0, asm,    fragments/17/fragment17_code]
+    - [0x16B580, data,   fragments/17/fragment17_data]
+    - [0x16DD70, rodata, fragments/17/fragment17_rodata]
+    - [0x16DF60, bin,    fragments/17/fragment17_reloc]
+
+  - name: fragment18
+    type: code
+    bss_size: 0x0
+    start: 0x1708B0
+    vram: 0x86C00000
+    subsegments:
+    - [0x1708B0, hasm,   fragments/18/fragment18_header]
+    - [0x1708D0, asm,    fragments/18/fragment18_code]
+    - [0x1750F0, data,   fragments/18/fragment18_data]
+    - [0x17EC60, rodata, fragments/18/fragment18_rodata]
+    - [0x17ED30, bin,    fragments/18/fragment18_reloc]
+
+  - name: fragment19
+    type: code
+    bss_size: 0x0
+    start: 0x17FB40
+    vram: 0x86D00000
+    subsegments:
+    - [0x17FB40, hasm,   fragments/19/fragment19_header]
+    - [0x17FB60, asm,    fragments/19/fragment19_code]
+    - [0x180070, data,   fragments/19/fragment19_data]
+    - [0x180100, rodata, fragments/19/fragment19_rodata]
+    - [0x180110, bin,    fragments/19/fragment19_reloc]
+
+  - name: fragment20
+    type: code
+    bss_size: 0x0
+    start: 0x1802B0
+    vram: 0x86E00000
+    subsegments:
+    - [0x1802B0, hasm,   fragments/20/fragment20_header]
+    - [0x1802D0, asm,    fragments/20/fragment20_code]
+    - [0x183260, data,   fragments/20/fragment20_data]
+    - [0x184FA0, rodata, fragments/20/fragment20_rodata]
+    - [0x185010, bin,    fragments/20/fragment20_reloc]
+
+  - name: fragment21
+    type: code
+    bss_size: 0x0
+    start: 0x185A10
+    vram: 0x86F00000
+    subsegments:
+    - [0x185A10, hasm,   fragments/21/fragment21_header]
+    - [0x185A30, asm,    fragments/21/fragment21_code]
+    - [0x1880A0, data,   fragments/21/fragment21_data]
+    - [0x190B90, rodata, fragments/21/fragment21_rodata]
+    - [0x190C00, bin,    fragments/21/fragment21_reloc]
+
+  - name: fragment22
+    type: code
+    bss_size: 0x0
+    start: 0x191660
+    vram: 0x88000000
+    subsegments:
+    - [0x191660, hasm,   fragments/22/fragment22_header]
+    - [0x191680, asm,    fragments/22/fragment22_code]
+    - [0x193EA0, data,   fragments/22/fragment22_data]
+    - [0x1A8320, rodata, fragments/22/fragment22_rodata]
+    - [0x1A8350, bin,    fragments/22/fragment22_reloc]
+
+  - name: fragment23
+    type: code
+    bss_size: 0x0
+    start: 0x1A8570
+    vram: 0x88200000
+    subsegments:
+    - [0x1A8570, hasm,   fragments/23/fragment23_header]
+    - [0x1A8590, asm,    fragments/23/fragment23_code]
+    - [0x1C0160, data,   fragments/23/fragment23_data]
+    - [0x1CD3C0, rodata, fragments/23/fragment23_rodata]
+    - [0x1CD500, bin,    fragments/23/fragment23_reloc]
+
+  - name: fragment24
+    type: code
+    bss_size: 0x0
+    start: 0x1CE9E0
+    vram: 0x88300000
+    subsegments:
+    - [0x1CE9E0, hasm,   fragments/24/fragment24_header]
+    - [0x1CEA00, asm,    fragments/24/fragment24_code]
+    - [0x1E5BB0, data,   fragments/24/fragment24_data]
+    - [0x1E8C40, rodata, fragments/24/fragment24_rodata]
+    - [0x1E8EA0, bin,    fragments/24/fragment24_reloc]
+
+  - name: fragment25
+    type: code
+    bss_size: 0x0
+    start: 0x1EA640
+    vram: 0x88400000
+    subsegments:
+    - [0x1EA640, hasm,   fragments/25/fragment25_header]
+    - [0x1EA660, asm,    fragments/25/fragment25_code]
+    - [0x1EA740, data,   fragments/25/fragment25_data]
+    - [0x1EA840, bin,    fragments/25/fragment25_reloc]
+
+  - name: fragment26
+    type: code
+    bss_size: 0x0
+    start: 0x1EA860
+    vram: 0x88500000
+    subsegments:
+    - [0x1EA860, hasm,   fragments/26/fragment26_header]
+    - [0x1EA880, asm,    fragments/26/fragment26_code]
+    - [0x1F77E0, data,   fragments/26/fragment26_data]
+    - [0x1F7810, rodata, fragments/26/fragment26_rodata]
+    - [0x1F7840, bin,    fragments/26/fragment26_reloc]
+
+  - name: fragment27
+    type: code
+    bss_size: 0x0
+    start: 0x1F7C90
+    vram: 0x88600000
+    subsegments:
+    - [0x1F7C90, hasm,   fragments/27/fragment27_header]
+    - [0x1F7CB0, asm,    fragments/27/fragment27_code]
+    - [0x1FD750, data,   fragments/27/fragment27_data]
+    - [0x214060, rodata, fragments/27/fragment27_rodata]
+    - [0x2141A0, bin,    fragments/27/fragment27_reloc]
+
+  - name: fragment28
+    type: code
+    bss_size: 0x0
+    start: 0x214900
+    vram: 0x88800000
+    subsegments:
+    - [0x214900, hasm,   fragments/28/fragment28_header]
+    - [0x214920, asm,    fragments/28/fragment28_code]
+    - [0x21CA50, data,   fragments/28/fragment28_data]
+    - [0x23AF80, rodata, fragments/28/fragment28_rodata]
+    - [0x23B0A0, bin,    fragments/28/fragment28_reloc]
+
+  - name: fragment29
+    type: code
+    bss_size: 0x0
+    start: 0x23C250
+    vram: 0x88900000
+    subsegments:
+    - [0x23C250, hasm,   fragments/29/fragment29_header]
+    - [0x23C270, asm,    fragments/29/fragment29_code]
+    - [0x23D3C0, data,   fragments/29/fragment29_data]
+    - [0x23D430, bin,    fragments/29/fragment29_reloc]
+    - [0x23D500, bin,    fragments/29/fragment29_unk_bin_1] # PERS-SZP file
+
+  - name: fragment30
+    type: code
+    bss_size: 0x0
+    start: 0x255230
+    vram: 0x88A00000 # unknown vram, since nothing loads this. probably 88A00000?
+    subsegments:
+    - [0x255230, hasm,   fragments/30/fragment30_header]
+    - [0x255250, asm,    fragments/30/fragment30_code]
+    - [0x2552B0, bin,    fragments/30/fragment30_reloc]
+
+  - name: fragment31
+    type: code
+    bss_size: 0x0
+    start: 0x2552C0
+    vram: 0x81000000
+    subsegments:
+    - [0x2552C0, hasm,   fragments/31/fragment31_header]
+    - [0x2552E0, bin,    fragments/31/fragment31_unk_table] # what is this?
+    - [0x2554C0, asm,    fragments/31/fragment31_code]
+    - [0x259290, data,   fragments/31/fragment31_data]
+    - [0x259480, rodata, fragments/31/fragment31_rodata]
+    - [0x259AA0, bin,    fragments/31/fragment31_reloc]
+
+  - name: fragment32
+    type: code
+    bss_size: 0x0
+    start: 0x25A740
+    vram: 0x81100000
+    subsegments:
+    - [0x25A740, hasm,   fragments/32/fragment32_header]
+    - [0x25A760, asm,    fragments/32/fragment32_code]
+    - [0x25B060, data,   fragments/32/fragment32_data]
+    - [0x25B070, bin,    fragments/32/fragment32_reloc]
+
+  - name: fragment33
+    type: code
+    bss_size: 0x0
+    start: 0x25B0D0
+    vram: 0x81300000
+    subsegments:
+    - [0x25B0D0, hasm,   fragments/33/fragment33_header]
+    - [0x25B0F0, asm,    fragments/33/fragment33_code]
+    - [0x25ECF0, data,   fragments/33/fragment33_data]
+    - [0x25F020, rodata, fragments/33/fragment33_rodata]
+    - [0x25F070, bin,    fragments/33/fragment33_reloc]
+    - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG
+
+  - name: fragment34
+    type: code
+    bss_size: 0x0
+    start: 0x261F70
+    vram: 0x81400000
+    subsegments:
+    - [0x261F70, hasm,   fragments/34/fragment34_header]
+    - [0x261F90, asm,    fragments/34/fragment34_code]
+    - [0x26F9C0, data,   fragments/34/fragment34_data]
+    - [0x270570, rodata, fragments/34/fragment34_rodata]
+    - [0x270590, bin,    fragments/34/fragment34_reloc]
+
+  - name: fragment35
+    type: code
+    bss_size: 0x0
+    start: 0x271260
+    vram: 0x82000000
+    subsegments:
+    - [0x271260, hasm,   fragments/35/fragment35_header]
+    - [0x271280, asm,    fragments/35/fragment35_code]
+    - [0x2717C0, bin,    fragments/35/fragment35_reloc]
+
+  - name: fragment36
+    type: code
+    bss_size: 0x0
+    start: 0x2717E0
+    vram: 0x82100000
+    subsegments:
+    - [0x2717E0, hasm,   fragments/36/fragment36_header]
+    - [0x271800, asm,    fragments/36/fragment36_code]
+    - [0x2725A0, data,   fragments/36/fragment36_data]
+    - [0x272660, rodata, fragments/36/fragment36_rodata]
+    - [0x272680, bin,    fragments/36/fragment36_reloc]
+
+  - name: fragment37
+    type: code
+    bss_size: 0x0
+    start: 0x272830
+    vram: 0x82200000
+    subsegments:
+    - [0x272830, hasm,   fragments/37/fragment37_header]
+    - [0x272850, asm,    fragments/37/fragment37_code]
+    - [0x2757D0, data,   fragments/37/fragment37_data]
+    - [0x275900, rodata, fragments/37/fragment37_rodata]
+    - [0x275920, bin,    fragments/37/fragment37_reloc]
+
+  - name: fragment38
+    type: code
+    bss_size: 0x0
+    start: 0x275CE0
+    vram: 0x82300000
+    subsegments:
+    - [0x275CE0, hasm,   fragments/38/fragment38_header]
+    - [0x275D00, asm,    fragments/38/fragment38_code]
+    - [0x27B600, data,   fragments/38/fragment38_data]
+    - [0x27B6B0, rodata, fragments/38/fragment38_rodata]
+    - [0x27B700, bin,    fragments/38/fragment38_reloc]
+
+  - name: fragment39
+    type: code
+    bss_size: 0x0
+    start: 0x27BCA0
+    vram: 0x82500000
+    subsegments:
+    - [0x27BCA0, hasm,   fragments/39/fragment39_header]
+    - [0x27BCC0, asm,    fragments/39/fragment39_code]
+    - [0x281E50, data,   fragments/39/fragment39_data]
+    - [0x2846C0, rodata, fragments/39/fragment39_rodata]
+    - [0x284790, bin,    fragments/39/fragment39_reloc]
+
+  - name: fragment40
+    type: code
+    bss_size: 0x0
+    start: 0x285DC0
+    vram: 0x83100000
+    subsegments:
+    - [0x285DC0, hasm,   fragments/40/fragment40_header]
+    - [0x285DE0, asm,    fragments/40/fragment40_code]
+    - [0x2879A0, data,   fragments/40/fragment40_data]
+    - [0x287C80, rodata, fragments/40/fragment40_rodata]
+    - [0x287CA0, bin,    fragments/40/fragment40_reloc]
+
+  - name: fragment41
+    type: code
+    bss_size: 0x0
+    start: 0x287EB0
+    vram: 0x82F00000
+    subsegments:
+    - [0x287EB0, hasm,   fragments/41/fragment41_header]
+    - [0x287ED0, asm,    fragments/41/fragment41_code]
+    - [0x29BA20, data,   fragments/41/fragment41_data]
+    - [0x29BF80, rodata, fragments/41/fragment41_rodata]
+    - [0x29C2D0, bin,    fragments/41/fragment41_reloc]
+
+  - name: fragment42
+    type: code
+    bss_size: 0x0
+    start: 0x29DD30
+    vram: 0x83300000
+    subsegments:
+    - [0x29DD30, hasm,   fragments/42/fragment42_header]
+    - [0x29DD50, asm,    fragments/42/fragment42_code]
+    - [0x2A0EB0, data,   fragments/42/fragment42_data]
+    - [0x2A0FE0, rodata, fragments/42/fragment42_rodata]
+    - [0x2A1010, bin,    fragments/42/fragment42_reloc]
+
+  - name: fragment43
+    type: code
+    bss_size: 0x0
+    start: 0x2A1B30
+    vram: 0x83400000
+    subsegments:
+    - [0x2A1B30, hasm,   fragments/43/fragment43_header]
+    - [0x2A1B50, asm,    fragments/43/fragment43_code]
+    - [0x2A4950, data,   fragments/43/fragment43_data]
+    - [0x2A49F0, rodata, fragments/43/fragment43_rodata]
+    - [0x2A4A10, bin,    fragments/43/fragment43_reloc]
+
+  - name: fragment44
+    type: code
+    bss_size: 0x0
+    start: 0x2A4DF0
+    vram: 0x83500000
+    subsegments:
+    - [0x2A4DF0, hasm,   fragments/44/fragment44_header]
+    - [0x2A4E10, asm,    fragments/44/fragment44_code]
+    - [0x2A8C60, rodata, fragments/44/fragment44_rodata]
+    - [0x2A8DB0, bin,    fragments/44/fragment44_reloc]
+
+  - name: fragment45
+    type: code
+    bss_size: 0x0
+    start: 0x2A9790
+    vram: 0x83600000
+    subsegments:
+    - [0x2A9790, hasm,   fragments/45/fragment45_header]
+    - [0x2A97B0, asm,    fragments/45/fragment45_code]
+    - [0x2ACA10, data,   fragments/45/fragment45_data]
+    - [0x2ACA70, rodata, fragments/45/fragment45_rodata]
+    - [0x2ACA80, bin,    fragments/45/fragment45_reloc]
+
+  - name: fragment46
+    type: code
+    bss_size: 0x0
+    start: 0x2AD270
+    vram: 0x83700000
+    subsegments:
+    - [0x2AD270, hasm,   fragments/46/fragment46_header]
+    - [0x2AD290, asm,    fragments/46/fragment46_code]
+    - [0x2AD720, data,   fragments/46/fragment46_data]
+    - [0x2AD730, bin,    fragments/46/fragment46_reloc]
+
+  - name: fragment47
+    type: code
+    bss_size: 0x0
+    start: 0x2AD8F0
+    vram: 0x83800000
+    subsegments:
+    - [0x2AD8F0, hasm,   fragments/47/fragment47_header]
+    - [0x2AD910, asm,    fragments/47/fragment47_code]
+    - [0x2B25A0, data,   fragments/47/fragment47_data]
+    - [0x2B2E50, rodata, fragments/47/fragment47_rodata]
+    - [0x2B2F40, bin,    fragments/47/fragment47_reloc]
+
+  # Gallery Debugger (unused)
+  - name: fragment48
+    type: code
+    bss_size: 0x0
+    start: 0x2B3F70
+    vram: 0x83900000 # apparently not used either, but VRAM is an estimate based on the patterns around this fragment.
+    subsegments:
+    - [0x2B3F70, hasm,   fragments/48/fragment48_header]
+    - [0x2B3F90, asm,    fragments/48/fragment48_code]
+    - [0x2B45A0, data,   fragments/48/fragment48_data]
+    - [0x2B45C0, rodata, fragments/48/fragment48_rodata]
+    - [0x2B4620, bin,    fragments/48/fragment48_reloc]
+
+  - name: fragment49
+    type: code
+    bss_size: 0x0
+    start: 0x2B46F0
+    vram: 0x83A00000
+    subsegments:
+    - [0x2B46F0, hasm,   fragments/49/fragment49_header]
+    - [0x2B4710, asm,    fragments/49/fragment49_code]
+    - [0x2B5240, data,   fragments/49/fragment49_data]
+    - [0x2B5260, bin,    fragments/49/fragment49_reloc]
+
+  - name: fragment50
+    type: code
+    bss_size: 0x0
+    start: 0x2B5350
+    vram: 0x82600000
+    subsegments:
+    - [0x2B5350, hasm,   fragments/50/fragment50_header]
+    - [0x2B5370, asm,    fragments/50/fragment50_code]
+    - [0x2B91D0, data,   fragments/50/fragment50_data]
+    - [0x2BC690, rodata, fragments/50/fragment50_rodata]
+    - [0x2BC760, bin,    fragments/50/fragment50_reloc]
+
+  - name: fragment51
+    type: code
+    bss_size: 0x0
+    start: 0x2BD0A0
+    vram: 0x82800000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82800000.
+    subsegments:
+    - [0x2BD0A0, bin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BD0C0, asm,    fragments/51/fragment51_code]
+    - [0x2BD120, bin,    fragments/51/fragment51_reloc]
+
+  - name: fragment52
+    type: code
+    bss_size: 0x0
+    start: 0x2BD130
+    vram: 0x82900000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82900000.
+    subsegments:
+    - [0x2BD130, bin,  fragments/52/fragment52_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BD150, asm,  fragments/52/fragment52_code]
+    - [0x2BD600, data, fragments/52/fragment52_data]
+    - [0x2BD660, bin,  fragments/52/fragment52_reloc]
+
+  - name: fragment53
+    type: code
+    bss_size: 0x0
+    start: 0x2BD6E0
+    vram: 0x82A00000
+    subsegments:
+    - [0x2BD6E0, hasm, fragments/53/fragment53_header]
+    - [0x2BD700, asm,  fragments/53/fragment53_code]
+    - [0x2BDA40, data, fragments/53/fragment53_data]
+    - [0x2BDA50, bin,  fragments/53/fragment53_reloc]
+
+  - name: fragment54
+    type: code
+    bss_size: 0x0
+    start: 0x2BDAC0
+    vram: 0x82B00000
+    subsegments:
+    - [0x2BDAC0, bin,  fragments/54/fragment54_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BDAE0, asm,  fragments/54/fragment54_code]
+    - [0x2BEBE0, data, fragments/54/fragment54_data]
+    - [0x2BEC00, bin,  fragments/54/fragment54_reloc]
+
+  - name: fragment55
+    type: code
+    bss_size: 0x0
+    start: 0x2BED20
+    vram: 0x83000000
+    subsegments:
+    - [0x2BED20, hasm,   fragments/55/fragment55_header]
+    - [0x2BED40, asm,    fragments/55/fragment55_code]
+    - [0x2C26E0, data,   fragments/55/fragment55_data]
+    - [0x2C28A0, rodata, fragments/55/fragment55_rodata]
+    - [0x2C29A0, bin,    fragments/55/fragment55_reloc]
+
+  - name: fragment56
+    type: code
+    bss_size: 0x0
+    start: 0x2C3220
+    vram: 0x82C00000
+    subsegments:
+    - [0x2C3220, hasm, fragments/56/fragment56_header]
+    - [0x2C3240, asm,  fragments/56/fragment56_code]
+    - [0x2C4880, bin,  fragments/56/fragment56_reloc]
+
+  - name: fragment57
+    type: code
+    bss_size: 0x0
+    start: 0x2C49D0
+    vram: 0x82D00000
+    subsegments:
+    - [0x2C49D0, hasm,   fragments/57/fragment57_header]
+    - [0x2C49F0, asm,    fragments/57/fragment57_code]
+    - [0x2CB970, data,   fragments/57/fragment57_data]
+    - [0x2CE950, rodata, fragments/57/fragment57_rodata]
+    - [0x2CE9C0, bin,    fragments/57/fragment57_reloc]
+
+  - name: fragment58
+    type: code
+    bss_size: 0x0
+    start: 0x2CF350
+    vram: 0x84000000
+    subsegments:
+    - [0x2CF350, hasm,   fragments/58/fragment58_header]
+    - [0x2CF370, asm,    fragments/58/fragment58_code]
+    - [0x2D1F30, data,   fragments/58/fragment58_data]
+    - [0x2D2000, rodata, fragments/58/fragment58_rodata]
+    - [0x2D2050, bin,    fragments/58/fragment58_reloc]
+
+  - name: fragment59
+    type: code
+    bss_size: 0x0
+    start: 0x2D24C0
+    vram: 0x84100000
+    subsegments:
+    - [0x2D24C0, hasm,   fragments/59/fragment59_header]
+    - [0x2D24E0, asm,    fragments/59/fragment59_code]
+    - [0x2D48F0, data,   fragments/59/fragment59_data]
+    - [0x2D58F0, rodata, fragments/59/fragment59_rodata]
+    - [0x2D5900, bin,    fragments/59/fragment59_reloc]
+
+  - name: fragment60
+    type: code
+    bss_size: 0x0
+    start: 0x2D5CB0
+    vram: 0x82E00000
+    subsegments:
+    - [0x2D5CB0, hasm,   fragments/60/fragment60_header]
+    - [0x2D5CD0, asm,    fragments/60/fragment60_code]
+    - [0x2D6DC0, data,   fragments/60/fragment60_data]
+    - [0x2D7650, rodata, fragments/60/fragment60_rodata]
+    - [0x2D7660, bin,    fragments/60/fragment60_reloc]
+
+  - name: fragment61
+    type: code
+    bss_size: 0x0
+    start: 0x2D7890
+    vram: 0x84200000
+    subsegments:
+    - [0x2D7890, hasm,   fragments/61/fragment61_header]
+    - [0x2D78B0, asm,    fragments/61/fragment61_code]
+    - [0x2E85D0, data,   fragments/61/fragment61_data]
+    - [0x2E9120, rodata, fragments/61/fragment61_rodata]
+    - [0x2E93C0, bin,    fragments/61/fragment61_reloc]
+
+  - name: fragment62
+    type: code
+    bss_size: 0x0
+    start: 0x2EA8C0
+    vram: 0x84300000
+    subsegments:
+    - [0x2EA8C0, hasm,   fragments/62/fragment62_header]
+    - [0x2EA8E0, asm,    fragments/62/fragment62_code]
+    - [0x36EC10, data,   fragments/62/fragment62_data]
+    - [0x3759C0, rodata, fragments/62/fragment62_rodata]
+    - [0x378D00, bin,    fragments/62/fragment62_reloc]
+
+  - name: fragment63
+    type: code
+    bss_size: 0x0
+    start: 0x394100
+    vram: 0x84B00000
+    subsegments:
+    - [0x394100, hasm,   fragments/63/fragment63_header]
+    - [0x394120, asm,    fragments/63/fragment63_code]
+    - [0x3A3C10, data,   fragments/63/fragment63_data]
+    - [0x3AD980, rodata, fragments/63/fragment63_rodata]
+    - [0x3ADA10, bin,    fragments/63/fragment63_reloc]
+
+  - name: fragment64
+    type: code
+    bss_size: 0x0
+    start: 0x3AEE50
+    vram: 0x84800000
+    subsegments:
+    - [0x3AEE50, hasm,   fragments/64/fragment64_header]
+    - [0x3AEE70, asm,    fragments/64/fragment64_code]
+    - [0x3B2390, data,   fragments/64/fragment64_data]
+    - [0x3B2530, rodata, fragments/64/fragment64_rodata]
+    - [0x3B25B0, bin,    fragments/64/fragment64_reloc]
+
+  - name: fragment65
+    type: code
+    bss_size: 0x0
+    start: 0x3B2AE0
+    vram: 0x84A00000
+    subsegments:
+    - [0x3B2AE0, hasm,   fragments/65/fragment65_header]
+    - [0x3B2B00, asm,    fragments/65/fragment65_code]
+    - [0x3B59E0, data,   fragments/65/fragment65_data]
+    - [0x3B5BE0, rodata, fragments/65/fragment65_rodata]
+    - [0x3B5C10, bin,    fragments/65/fragment65_reloc]
+
+  - name: fragment66
+    type: code
+    bss_size: 0x0
+    start: 0x3B6130
+    vram: 0x83200000
+    subsegments:
+    - [0x3B6130, hasm,   fragments/66/fragment66_header]
+    - [0x3B6150, asm,    fragments/66/fragment66_code]
+    - [0x3B8080, data,   fragments/66/fragment66_data]
+    - [0x3B8140, bin,    fragments/66/fragment66_reloc]
+
+  - name: fragment67
+    type: code
+    bss_size: 0x0
+    start: 0x3B8530
+    vram: 0x8F000000
+    subsegments:
+    - [0x3B8530, hasm,   fragments/67/fragment67_header]
+    - [0x3B8550, asm,    fragments/67/fragment67_code]
+    - [0x3B8560, bin,    fragments/67/fragment67_reloc]
+
+  # These are a bunch of seemingly unused(?) fragments which all they do is access or load fragment 67.
+  - name: fragment68
+    type: code
+    bss_size: 0x0
+    start: 0x3B8570
+    vram: 0x8F100000 # unknown vram. Another unused one? Might be 8F100000?
+    subsegments:
+    - [0x3B8570, hasm, fragments/68/fragment68_header]
+    - [0x3B8590, asm,  fragments/68/fragment68_code]
+    - [0x3B85F0, bin,  fragments/68/fragment68_reloc]
+
+  - name: fragment69
+    type: code
+    bss_size: 0x0
+    start: 0x3B8600
+    vram: 0x8F200000 # unknown vram. Another unused one? Might be 8F200000?
+    subsegments:
+    - [0x3B8600, hasm,   fragments/69/fragment69_header]
+    - [0x3B8620, asm,    fragments/69/fragment69_code]
+    - [0x3B8680, bin,    fragments/69/fragment69_reloc]
+
+  - name: fragment70
+    type: code
+    bss_size: 0x0
+    start: 0x3B8690
+    vram: 0x8F300000 # unknown vram. Another unused one? Might be 8F300000?
+    subsegments:
+    - [0x3B8690, hasm,   fragments/70/fragment70_header]
+    - [0x3B86B0, asm,    fragments/70/fragment70_code]
+    - [0x3B8710, bin,    fragments/70/fragment70_reloc]
+
+  - name: fragment71
+    type: code
+    bss_size: 0x0
+    start: 0x3B8720
+    vram: 0x8F400000 # unknown vram. Another unused one? Might be 8F400000?
+    subsegments:
+    - [0x3B8720, hasm,   fragments/71/fragment71_header]
+    - [0x3B8740, asm,    fragments/71/fragment71_code]
+    - [0x3B87A0, bin,    fragments/71/fragment71_reloc]
+
+  - name: fragment72
+    type: code
+    bss_size: 0x0
+    start: 0x3B87B0
+    vram: 0x8F500000 # unknown vram. Another unused one? Might be 8F500000?
+    subsegments:
+    - [0x3B87B0, hasm, fragments/72/fragment72_header]
+    - [0x3B87D0, asm,  fragments/72/fragment72_code]
+    - [0x3B8830, bin,  fragments/72/fragment72_reloc]
+
+  - name: fragment73
+    type: code
+    bss_size: 0x0
+    start: 0x3B8840
+    vram: 0x8F600000 # unknown vram. Another unused one? Might be 8F600000?
+    subsegments:
+    - [0x3B8840, hasm, fragments/73/fragment73_header]
+    - [0x3B8860, asm,  fragments/73/fragment73_code]
+    - [0x3B88C0, bin,  fragments/73/fragment73_reloc]
+
+  - name: fragment74
+    type: code
+    bss_size: 0x0
+    start: 0x3B88D0
+    vram: 0x8F700000 # unknown vram. Another unused one? Might be 8F700000?
+    subsegments:
+    - [0x3B88D0, hasm, fragments/74/fragment74_header]
+    - [0x3B88F0, asm,  fragments/74/fragment74_code]
+    - [0x3B8950, bin,  fragments/74/fragment74_reloc]
+
+  - name: fragment75
+    type: code
+    bss_size: 0x0
+    start: 0x3B8960
+    vram: 0x8FA00000
+    subsegments:
+    - [0x3B8960, hasm, fragments/75/fragment75_header]
+    - [0x3B8980, asm,  fragments/75/fragment75_code]
+    - [0x3B9350, data, fragments/75/fragment75_data]
+    - [0x3B9380, bin,  fragments/75/fragment75_reloc]
+
+  - name: fragment76
+    type: code
+    bss_size: 0x0
+    start: 0x3B9590
+    vram: 0x8FB00000 # unknown vram. Another unused one? Might be 8FB00000?
+    subsegments:
+    - [0x3B9590, hasm, fragments/76/fragment76_header]
+    - [0x3B95B0, asm,  fragments/76/fragment76_code]
+    - [0x3B9610, bin,  fragments/76/fragment76_reloc]
+
+  - name: fragment77
+    type: code
+    bss_size: 0x0
+    start: 0x3B9620
+    vram: 0x8FC00000 # unknown vram. Another unused one? Might be 8FC00000?
+    subsegments:
+    - [0x3B9620, bin,  fragments/77/fragment77_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x3B9640, asm,  fragments/77/fragment77_code]
+    - [0x3B96A0, bin,  fragments/77/fragment77_reloc]
+
+  # Rest of the ROM
+  - name: assets
+    type: code
+    bss_size: 0x0
+    start: 0x3B96B0
+    vram: 0x80000000 # unknown vram
+    subsegments:
+    - [0x3B96B0, bin]
   - [0x2000000]
