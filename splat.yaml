@@ -445,6 +445,7 @@ segments:
     - [0xFDE40,  bin,    fragments/1/fragment1_yay0_3]
     - [0x102BA0, bin,    fragments/1/fragment1_yay0_4]
 
+# text code
   - name: fragment2
     type: code
     bss_size: 0x0
@@ -456,7 +457,8 @@ segments:
     - [0x10E2D0, data,   fragments/2/fragment2_data]
     - [0x117850, rodata, fragments/2/fragment2_rodata]
     - [0x1179C0, bin,    fragments/2/fragment2_relocs]
-    
+
+ # model animation code   
   - name: fragment3
     type: code
     bss_size: 0x0
@@ -562,6 +564,7 @@ segments:
     - [0x142170, rodata, fragments/11/fragment11_rodata]
     - [0x142200, bin,    fragments/11/fragment11_reloc]
 
+# transfer pak error code
   - name: fragment12
     type: code
     bss_size: 0x0
@@ -622,6 +625,7 @@ segments:
     - [0x15EB20, rodata, fragments/16/fragment16_rodata]
     - [0x15EB50, bin,    fragments/16/fragment16_reloc]
 
+# stage loader code
   - name: fragment17
     type: code
     bss_size: 0x0
@@ -787,6 +791,7 @@ segments:
     - [0x255250, asm,    fragments/30/fragment30_code]
     - [0x2552B0, bin,    fragments/30/fragment30_reloc]
 
+# transfer pak checker
   - name: fragment31
     type: code
     bss_size: 0x0
@@ -824,6 +829,7 @@ segments:
     - [0x25F070, bin,    fragments/33/fragment33_reloc]
     - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG
 
+# unknown code placed but not executed
   - name: fragment34
     type: code
     bss_size: 0x0
@@ -846,6 +852,7 @@ segments:
     - [0x271280, asm,    fragments/35/fragment35_code]
     - [0x2717C0, bin,    fragments/35/fragment35_reloc]
 
+# title screen code
   - name: fragment36
     type: code
     bss_size: 0x0
@@ -930,6 +937,7 @@ segments:
     - [0x2A0FE0, rodata, fragments/42/fragment42_rodata]
     - [0x2A1010, bin,    fragments/42/fragment42_reloc]
 
+# gallery code
   - name: fragment43
     type: code
     bss_size: 0x0
@@ -1079,6 +1087,7 @@ segments:
     - [0x2C28A0, rodata, fragments/55/fragment55_rodata]
     - [0x2C29A0, bin,    fragments/55/fragment55_reloc]
 
+# options code
   - name: fragment56
     type: code
     bss_size: 0x0
@@ -1089,6 +1098,7 @@ segments:
     - [0x2C3240, asm,  fragments/56/fragment56_code]
     - [0x2C4880, bin,  fragments/56/fragment56_reloc]
 
+# rental registration code
   - name: fragment57
     type: code
     bss_size: 0x0
@@ -1148,7 +1158,8 @@ segments:
     - [0x2E85D0, data,   fragments/61/fragment61_data]
     - [0x2E9120, rodata, fragments/61/fragment61_rodata]
     - [0x2E93C0, bin,    fragments/61/fragment61_reloc]
-
+    
+# battle system code
   - name: fragment62
     type: code
     bss_size: 0x0
