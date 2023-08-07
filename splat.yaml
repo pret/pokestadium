@@ -965,22 +965,126 @@ segments:
     - [0x2ACA70, rodata, fragments/45/fragment45_rodata]
     - [0x2ACA80, bin,    fragments/45/fragment45_reloc]
 
-  - name: assets
+  - name: fragment46
     type: code
     bss_size: 0x0
     start: 0x2AD270
+    vram: 0x83700000
+    subsegments:
+    - [0x2AD270, hasm,   fragments/46/fragment46_header]
+    - [0x2AD290, asm,    fragments/46/fragment46_code]
+    - [0x2AD720, data,   fragments/46/fragment46_data]
+    - [0x2AD730, bin,    fragments/46/fragment46_reloc]
+
+  - name: fragment47
+    type: code
+    bss_size: 0x0
+    start: 0x2AD8F0
+    vram: 0x83800000
+    subsegments:
+    - [0x2AD8F0, hasm,   fragments/47/fragment47_header]
+    - [0x2AD910, asm,    fragments/47/fragment47_code]
+    - [0x2B25A0, data,   fragments/47/fragment47_data]
+    - [0x2B2E50, rodata, fragments/47/fragment47_rodata]
+    - [0x2B2F40, bin,    fragments/47/fragment47_reloc]
+
+  # Gallery Debugger (unused)
+  - name: fragment48
+    type: code
+    bss_size: 0x0
+    start: 0x2B3F70
+    vram: 0x83900000 # apparently not used either, but VRAM is an estimate based on the patterns around this fragment.
+    subsegments:
+    - [0x2B3F70, hasm,   fragments/48/fragment48_header]
+    - [0x2B3F90, asm,    fragments/48/fragment48_code]
+    - [0x2B45A0, data,   fragments/48/fragment48_data]
+    - [0x2B45C0, rodata, fragments/48/fragment48_rodata]
+    - [0x2B4620, bin,    fragments/48/fragment48_reloc]
+
+  - name: fragment49
+    type: code
+    bss_size: 0x0
+    start: 0x2B46F0
+    vram: 0x83A00000
+    subsegments:
+    - [0x2B46F0, hasm,   fragments/49/fragment49_header]
+    - [0x2B4710, asm,    fragments/49/fragment49_code]
+    - [0x2B5240, data,   fragments/49/fragment49_data]
+    - [0x2B5260, bin,    fragments/49/fragment49_reloc]
+
+  - name: fragment50
+    type: code
+    bss_size: 0x0
+    start: 0x2B5350
+    vram: 0x82600000
+    subsegments:
+    - [0x2B5350, hasm,   fragments/50/fragment50_header]
+    - [0x2B5370, asm,    fragments/50/fragment50_code]
+    - [0x2B91D0, data,   fragments/50/fragment50_data]
+    - [0x2BC690, rodata, fragments/50/fragment50_rodata]
+    - [0x2BC760, bin,    fragments/50/fragment50_reloc]
+
+  - name: fragment51
+    type: code
+    bss_size: 0x0
+    start: 0x2BD0A0
+    vram: 0x82800000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82800000.
+    subsegments:
+    - [0x2BD0A0, bin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BD0C0, asm,    fragments/51/fragment51_code]
+    - [0x2BD120, bin,    fragments/51/fragment51_reloc]
+
+  - name: fragment52
+    type: code
+    bss_size: 0x0
+    start: 0x2BD130
+    vram: 0x82900000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82900000.
+    subsegments:
+    - [0x2BD130, bin,  fragments/52/fragment52_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BD150, asm,  fragments/52/fragment52_code]
+    - [0x2BD600, data, fragments/52/fragment52_data]
+    - [0x2BD660, bin,  fragments/52/fragment52_reloc]
+
+  - name: fragment53
+    type: code
+    bss_size: 0x0
+    start: 0x2BD6E0
+    vram: 0x82A00000
+    subsegments:
+    - [0x2BD6E0, hasm, fragments/53/fragment53_header]
+    - [0x2BD700, asm,  fragments/53/fragment53_code]
+    - [0x2BDA40, data, fragments/53/fragment53_data]
+    - [0x2BDA50, bin,  fragments/53/fragment53_reloc]
+
+  - name: fragment54
+    type: code
+    bss_size: 0x0
+    start: 0x2BDAC0
+    vram: 0x84100000
+    subsegments:
+    - [0x2BDAC0, bin,  fragments/54/fragment54_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BDAE0, asm,  fragments/54/fragment54_code]
+    - [0x2BEBE0, data, fragments/54/fragment54_data]
+    - [0x2BEC00, bin,  fragments/54/fragment54_reloc]
+
+  - name: fragment55
+    type: code
+    bss_size: 0x0
+    start: 0x2BED20
+    vram: 0x83000000
+    subsegments:
+    - [0x2BED20, hasm,   fragments/55/fragment55_header]
+    - [0x2BED40, asm,    fragments/55/fragment55_code]
+    - [0x2C26E0, data,   fragments/55/fragment55_data]
+    - [0x2C28A0, rodata, fragments/55/fragment55_rodata]
+    - [0x2C29A0, bin,    fragments/55/fragment55_reloc]
+
+  - name: assets
+    type: code
+    bss_size: 0x0
+    start: 0x2C3220
     vram: 0x80000000 # unknown vram
     subsegments:
-    - [0x2AD270, bin, fragment46] # todo: disassemble fragment
-    - [0x2AD8F0, bin, fragment47] # todo: disassemble fragment
-    - [0x2B3F70, bin, fragment48] # todo: disassemble fragment
-    - [0x2B46F0, bin, fragment49] # todo: disassemble fragment
-    - [0x2B5350, bin, fragment50] # todo: disassemble fragment
-    - [0x2BD0A0, bin, fragment51] # todo: disassemble fragment
-    - [0x2BD130, bin, fragment52] # todo: disassemble fragment
-    - [0x2BD6E0, bin, fragment53] # todo: disassemble fragment
-    - [0x2BDAC0, bin, fragment54] # todo: disassemble fragment
-    - [0x2BED20, bin, fragment55] # todo: disassemble fragment
     - [0x2C3220, bin, fragment56] # todo: disassemble fragment
     - [0x2C49D0, bin, fragment57] # todo: disassemble fragment
     - [0x2CF350, bin, fragment58] # todo: disassemble fragment
