@@ -1208,23 +1208,124 @@ segments:
     - [0x3B8080, data,   fragments/66/fragment66_data]
     - [0x3B8140, bin,    fragments/66/fragment66_reloc]
 
-  - name: assets
+  - name: fragment67
     type: code
     bss_size: 0x0
     start: 0x3B8530
+    vram: 0x8F000000
+    subsegments:
+    - [0x3B8530, hasm,   fragments/67/fragment67_header]
+    - [0x3B8550, asm,    fragments/67/fragment67_code]
+    - [0x3B8560, bin,    fragments/67/fragment67_reloc]
+
+  # These are a bunch of seemingly unused(?) fragments which all they do is access or load fragment 67.
+  - name: fragment68
+    type: code
+    bss_size: 0x0
+    start: 0x3B8570
+    vram: 0x8F100000 # unknown vram. Another unused one? Might be 8F100000?
+    subsegments:
+    - [0x3B8570, hasm, fragments/68/fragment68_header]
+    - [0x3B8590, asm,  fragments/68/fragment68_code]
+    - [0x3B85F0, bin,  fragments/68/fragment68_reloc]
+
+  - name: fragment69
+    type: code
+    bss_size: 0x0
+    start: 0x3B8600
+    vram: 0x8F200000 # unknown vram. Another unused one? Might be 8F200000?
+    subsegments:
+    - [0x3B8600, hasm,   fragments/69/fragment69_header]
+    - [0x3B8620, asm,    fragments/69/fragment69_code]
+    - [0x3B8680, bin,    fragments/69/fragment69_reloc]
+
+  - name: fragment70
+    type: code
+    bss_size: 0x0
+    start: 0x3B8690
+    vram: 0x8F300000 # unknown vram. Another unused one? Might be 8F300000?
+    subsegments:
+    - [0x3B8690, hasm,   fragments/70/fragment70_header]
+    - [0x3B86B0, asm,    fragments/70/fragment70_code]
+    - [0x3B8710, bin,    fragments/70/fragment70_reloc]
+
+  - name: fragment71
+    type: code
+    bss_size: 0x0
+    start: 0x3B8720
+    vram: 0x8F400000 # unknown vram. Another unused one? Might be 8F400000?
+    subsegments:
+    - [0x3B8720, hasm,   fragments/71/fragment71_header]
+    - [0x3B8740, asm,    fragments/71/fragment71_code]
+    - [0x3B87A0, bin,    fragments/71/fragment71_reloc]
+
+  - name: fragment72
+    type: code
+    bss_size: 0x0
+    start: 0x3B87B0
+    vram: 0x8F500000 # unknown vram. Another unused one? Might be 8F500000?
+    subsegments:
+    - [0x3B87B0, hasm, fragments/72/fragment72_header]
+    - [0x3B87D0, asm,  fragments/72/fragment72_code]
+    - [0x3B8830, bin,  fragments/72/fragment72_reloc]
+
+  - name: fragment73
+    type: code
+    bss_size: 0x0
+    start: 0x3B8840
+    vram: 0x8F600000 # unknown vram. Another unused one? Might be 8F600000?
+    subsegments:
+    - [0x3B8840, hasm, fragments/73/fragment73_header]
+    - [0x3B8860, asm,  fragments/73/fragment73_code]
+    - [0x3B88C0, bin,  fragments/73/fragment73_reloc]
+
+  - name: fragment74
+    type: code
+    bss_size: 0x0
+    start: 0x3B88D0
+    vram: 0x8F700000 # unknown vram. Another unused one? Might be 8F700000?
+    subsegments:
+    - [0x3B88D0, hasm, fragments/74/fragment74_header]
+    - [0x3B88F0, asm,  fragments/74/fragment74_code]
+    - [0x3B8950, bin,  fragments/74/fragment74_reloc]
+
+  - name: fragment75
+    type: code
+    bss_size: 0x0
+    start: 0x3B8960
+    vram: 0x8FA00000
+    subsegments:
+    - [0x3B8960, hasm, fragments/75/fragment75_header]
+    - [0x3B8980, asm,  fragments/75/fragment75_code]
+    - [0x3B9350, data, fragments/75/fragment75_data]
+    - [0x3B9380, bin,  fragments/75/fragment75_reloc]
+
+  - name: fragment76
+    type: code
+    bss_size: 0x0
+    start: 0x3B9590
+    vram: 0x8FB00000 # unknown vram. Another unused one? Might be 8FB00000?
+    subsegments:
+    - [0x3B9590, hasm, fragments/76/fragment76_header]
+    - [0x3B95B0, asm,  fragments/76/fragment76_code]
+    - [0x3B9610, bin,  fragments/76/fragment76_reloc]
+
+  - name: fragment77
+    type: code
+    bss_size: 0x0
+    start: 0x3B9620
+    vram: 0x8FC00000 # unknown vram. Another unused one? Might be 8FC00000?
+    subsegments:
+    - [0x3B9620, bin,  fragments/77/fragment77_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x3B9640, asm,  fragments/77/fragment77_code]
+    - [0x3B96A0, bin,  fragments/77/fragment77_reloc]
+
+  # Rest of the ROM
+  - name: assets
+    type: code
+    bss_size: 0x0
+    start: 0x3B96B0
     vram: 0x80000000 # unknown vram
     subsegments:
-    - [0x3B8530, bin, fragment67] # todo: disassemble fragment
-    - [0x3B8570, bin, fragment68] # todo: disassemble fragment
-    - [0x3B8600, bin, fragment69] # todo: disassemble fragment
-    - [0x3B8690, bin, fragment70] # todo: disassemble fragment
-    - [0x3B8720, bin, fragment71] # todo: disassemble fragment
-    - [0x3B87B0, bin, fragment72] # todo: disassemble fragment
-    - [0x3B8840, bin, fragment73] # todo: disassemble fragment
-    - [0x3B88D0, bin, fragment74] # todo: disassemble fragment
-    - [0x3B8960, bin, fragment75] # todo: disassemble fragment
-    - [0x3B9590, bin, fragment76] # todo: disassemble fragment
-    - [0x3B9620, bin, fragment77] # todo: disassemble fragment
-    - [0x3B96B0]
-  - [0x3B96B0, bin]
+    - [0x3B96B0, bin]
   - [0x2000000]
