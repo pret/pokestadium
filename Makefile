@@ -18,14 +18,99 @@ else
   $(error Unsupported host/building OS <$(UNAME_S)>)
 endif
 
+FRAGMENT_DIRS :=    \
+    fragments/1/    \
+    fragments/2/    \
+    fragments/3/    \
+    fragments/4/    \
+    fragments/5/    \
+    fragments/6/    \
+    fragments/7/    \
+    fragments/8/    \
+    fragments/9/    \
+    fragments/10/   \
+    fragments/11/   \
+    fragments/12/   \
+    fragments/13/   \
+    fragments/14/   \
+    fragments/15/   \
+    fragments/16/   \
+    fragments/17/   \
+    fragments/18/   \
+    fragments/19/   \
+    fragments/20/   \
+    fragments/21/   \
+    fragments/22/   \
+    fragments/23/   \
+    fragments/24/   \
+    fragments/25/   \
+    fragments/26/   \
+    fragments/27/   \
+    fragments/28/   \
+    fragments/29/   \
+    fragments/30/   \
+    fragments/31/   \
+    fragments/32/   \
+    fragments/33/   \
+    fragments/34/   \
+    fragments/35/   \
+    fragments/36/   \
+    fragments/37/   \
+    fragments/38/   \
+    fragments/39/   \
+    fragments/40/   \
+    fragments/41/   \
+    fragments/42/   \
+    fragments/43/   \
+    fragments/44/   \
+    fragments/45/   \
+    fragments/46/   \
+    fragments/47/   \
+    fragments/48/   \
+    fragments/49/   \
+    fragments/50/   \
+    fragments/51/   \
+    fragments/52/   \
+    fragments/53/   \
+    fragments/54/   \
+    fragments/55/   \
+    fragments/56/   \
+    fragments/57/   \
+    fragments/58/   \
+    fragments/59/   \
+    fragments/60/   \
+    fragments/61/   \
+    fragments/62/   \
+    fragments/63/   \
+    fragments/64/   \
+    fragments/65/   \
+    fragments/66/   \
+    fragments/67/   \
+    fragments/68/   \
+    fragments/69/   \
+    fragments/70/   \
+    fragments/71/   \
+    fragments/72/   \
+    fragments/73/   \
+    fragments/74/   \
+    fragments/75/   \
+    fragments/76/   \
+    fragments/77/
+
 BUILD_DIR := build
 ROM := $(TARGET).z64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
+# TODO: Recursively make fragment folders correctly.
 ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/data
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell find src -type d)
+
+# Append FRAGMENT_DIRS to each dirs.
+ASM_DIRS += $(addprefix asm/,$(FRAGMENT_DIRS))
+ASM_DIRS += $(addprefix asm/data/,$(FRAGMENT_DIRS))
+DATA_DIRS += $(addprefix assets/,$(FRAGMENT_DIRS))
 
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
