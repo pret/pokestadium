@@ -471,6 +471,7 @@ segments:
     - [0x11E810, rodata, fragments/3/fragment3_rodata]
     - [0x11E9D0, bin,    fragments/3/fragment3_reloc]
 
+# MINIGAMES unknown code placed but not executed
   - name: fragment4
     type: code
     bss_size: 0x0
@@ -482,6 +483,7 @@ segments:
     - [0x120670, data, fragments/4/fragment4_data]
     - [0x120860, bin,  fragments/4/fragment4_reloc]
 
+# DROWZEE MINIGAME unknown code placed but not executed, might be something about other controllers
   - name: fragment5
     type: code
     bss_size: 0x0
@@ -493,6 +495,7 @@ segments:
     - [0x1209E0, data, fragments/5/fragment5_data]
     - [0x120A00, bin,  fragments/5/fragment5_reloc]
 
+# magikarp minigame code
   - name: fragment6
     type: code
     bss_size: 0x0
@@ -505,6 +508,7 @@ segments:
     - [0x123890, rodata, fragments/6/fragment6_rodata]
     - [0x123940, bin,    fragments/6/fragment6_reloc]
 
+# clefairy minigame code
   - name: fragment7
     type: code
     bss_size: 0x0
@@ -517,6 +521,7 @@ segments:
     - [0x12CC90, rodata, fragments/7/fragment7_rodata]
     - [0x12CD50, bin,    fragments/7/fragment7_reloc]
 
+# rattata minigame code
   - name: fragment8
     type: code
     bss_size: 0x0
@@ -541,6 +546,7 @@ segments:
     - [0x1340A0, rodata, fragments/9/fragment9_rodata]
     - [0x1340F0, bin,    fragments/9/fragment9_reloc]
 
+# drowzee minigame code
   - name: fragment10
     type: code
     bss_size: 0x0
@@ -552,6 +558,7 @@ segments:
     - [0x136E40, data,   fragments/10/fragment10_data]
     - [0x1386F0, bin,    fragments/10/fragment10_reloc]
 
+# pikachu minigame code
   - name: fragment11
     type: code
     bss_size: 0x0
@@ -589,6 +596,7 @@ segments:
     - [0x143FE0, rodata, fragments/13/fragment13_rodata]
     - [0x144030, bin,    fragments/13/fragment13_reloc]
 
+# lickitung minigame code
   - name: fragment14
     type: code
     bss_size: 0x0
@@ -601,6 +609,7 @@ segments:
     - [0x14B660, rodata, fragments/14/fragment14_rodata]
     - [0x14B7E0, bin,    fragments/14/fragment14_reloc]
 
+# gallery camera code
   - name: fragment15
     type: code
     bss_size: 0x0
@@ -613,6 +622,7 @@ segments:
     - [0x156EB0, rodata, fragments/15/fragment15_rodata]
     - [0x157060, bin,    fragments/15/fragment15_reloc]
 
+# credits loader
   - name: fragment16
     type: code
     bss_size: 0x0
@@ -638,6 +648,7 @@ segments:
     - [0x16DD70, rodata, fragments/17/fragment17_rodata]
     - [0x16DF60, bin,    fragments/17/fragment17_reloc]
 
+# ekans minigame code
   - name: fragment18
     type: code
     bss_size: 0x0
@@ -662,6 +673,7 @@ segments:
     - [0x180100, rodata, fragments/19/fragment19_rodata]
     - [0x180110, bin,    fragments/19/fragment19_reloc]
 
+# metapod minigame code
   - name: fragment20
     type: code
     bss_size: 0x0
@@ -674,6 +686,7 @@ segments:
     - [0x184FA0, rodata, fragments/20/fragment20_rodata]
     - [0x185010, bin,    fragments/20/fragment20_reloc]
 
+# sandshrew minigame code
   - name: fragment21
     type: code
     bss_size: 0x0
@@ -686,6 +699,7 @@ segments:
     - [0x190B90, rodata, fragments/21/fragment21_rodata]
     - [0x190C00, bin,    fragments/21/fragment21_reloc]
 
+# pokemon lab loader
   - name: fragment22
     type: code
     bss_size: 0x0
@@ -698,6 +712,7 @@ segments:
     - [0x1A8320, rodata, fragments/22/fragment22_rodata]
     - [0x1A8350, bin,    fragments/22/fragment22_reloc]
 
+# pokemon lab PC loader
   - name: fragment23
     type: code
     bss_size: 0x0
@@ -710,6 +725,7 @@ segments:
     - [0x1CD3C0, rodata, fragments/23/fragment23_rodata]
     - [0x1CD500, bin,    fragments/23/fragment23_reloc]
 
+# pokemon lab PC: list code
   - name: fragment24
     type: code
     bss_size: 0x0
@@ -722,6 +738,7 @@ segments:
     - [0x1E8C40, rodata, fragments/24/fragment24_rodata]
     - [0x1E8EA0, bin,    fragments/24/fragment24_reloc]
 
+# POKEMON LAB unknown code placed but not executed
   - name: fragment25
     type: code
     bss_size: 0x0
@@ -733,6 +750,7 @@ segments:
     - [0x1EA740, data,   fragments/25/fragment25_data]
     - [0x1EA840, bin,    fragments/25/fragment25_reloc]
 
+# POKEMON LAB unknown code placed but not executed
   - name: fragment26
     type: code
     bss_size: 0x0
@@ -745,6 +763,7 @@ segments:
     - [0x1F7810, rodata, fragments/26/fragment26_rodata]
     - [0x1F7840, bin,    fragments/26/fragment26_reloc]
 
+# pokemon lab PC: pokemon, item, boxes etc
   - name: fragment27
     type: code
     bss_size: 0x0
@@ -757,6 +776,7 @@ segments:
     - [0x214060, rodata, fragments/27/fragment27_rodata]
     - [0x2141A0, bin,    fragments/27/fragment27_reloc]
 
+# pokemon lab: pokedex loader
   - name: fragment28
     type: code
     bss_size: 0x0
@@ -769,6 +789,7 @@ segments:
     - [0x23AF80, rodata, fragments/28/fragment28_rodata]
     - [0x23B0A0, bin,    fragments/28/fragment28_reloc]
 
+# POKEMON LAB PC some text functions but not executed
   - name: fragment29
     type: code
     bss_size: 0x0
@@ -779,7 +800,7 @@ segments:
     - [0x23C270, asm,    fragments/29/fragment29_code]
     - [0x23D3C0, data,   fragments/29/fragment29_data]
     - [0x23D430, bin,    fragments/29/fragment29_reloc]
-    - [0x23D500, bin,    fragments/29/fragment29_unk_bin_1] # PERS-SZP file
+    - [0x23D500, bin,    fragments/29/fragment29_unk_bin_1] # PERS-SZP file, pokeball, c buttons etc textures
 
   - name: fragment30
     type: code
@@ -804,7 +825,8 @@ segments:
     - [0x259290, data,   fragments/31/fragment31_data]
     - [0x259480, rodata, fragments/31/fragment31_rodata]
     - [0x259AA0, bin,    fragments/31/fragment31_reloc]
-
+    
+# drowzee minigame stage animations
   - name: fragment32
     type: code
     bss_size: 0x0
@@ -816,6 +838,7 @@ segments:
     - [0x25B060, data,   fragments/32/fragment32_data]
     - [0x25B070, bin,    fragments/32/fragment32_reloc]
 
+# transfer pak code
   - name: fragment33
     type: code
     bss_size: 0x0
@@ -827,9 +850,9 @@ segments:
     - [0x25ECF0, data,   fragments/33/fragment33_data]
     - [0x25F020, rodata, fragments/33/fragment33_rodata]
     - [0x25F070, bin,    fragments/33/fragment33_reloc]
-    - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG
+    - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG, transfer machine background
 
-# unknown code placed but not executed
+# unknown code placed A LOT OF TIMES IN THE GAME but not executed
   - name: fragment34
     type: code
     bss_size: 0x0
@@ -842,6 +865,7 @@ segments:
     - [0x270570, rodata, fragments/34/fragment34_rodata]
     - [0x270590, bin,    fragments/34/fragment34_reloc]
 
+# n64 logo code
   - name: fragment35
     type: code
     bss_size: 0x0
@@ -865,6 +889,7 @@ segments:
     - [0x272660, rodata, fragments/36/fragment36_rodata]
     - [0x272680, bin,    fragments/36/fragment36_reloc]
 
+# stadium field loader
   - name: fragment37
     type: code
     bss_size: 0x0
@@ -876,6 +901,7 @@ segments:
     - [0x2757D0, data,   fragments/37/fragment37_data]
     - [0x275900, rodata, fragments/37/fragment37_rodata]
     - [0x275920, bin,    fragments/37/fragment37_reloc]
+
 
   - name: fragment38
     type: code
@@ -889,6 +915,7 @@ segments:
     - [0x27B6B0, rodata, fragments/38/fragment38_rodata]
     - [0x27B700, bin,    fragments/38/fragment38_reloc]
 
+# minigames loader
   - name: fragment39
     type: code
     bss_size: 0x0
@@ -925,6 +952,7 @@ segments:
     - [0x29BF80, rodata, fragments/41/fragment41_rodata]
     - [0x29C2D0, bin,    fragments/41/fragment41_reloc]
 
+# gallery loader
   - name: fragment42
     type: code
     bss_size: 0x0
@@ -950,6 +978,7 @@ segments:
     - [0x2A49F0, rodata, fragments/43/fragment43_rodata]
     - [0x2A4A10, bin,    fragments/43/fragment43_reloc]
 
+# gallery album code
   - name: fragment44
     type: code
     bss_size: 0x0
@@ -961,6 +990,7 @@ segments:
     - [0x2A8C60, rodata, fragments/44/fragment44_rodata]
     - [0x2A8DB0, bin,    fragments/44/fragment44_reloc]
 
+# gallery enlarge code
   - name: fragment45
     type: code
     bss_size: 0x0
@@ -984,6 +1014,7 @@ segments:
     - [0x2AD720, data,   fragments/46/fragment46_data]
     - [0x2AD730, bin,    fragments/46/fragment46_reloc]
 
+# gallery rental pokemon loader
   - name: fragment47
     type: code
     bss_size: 0x0
@@ -1020,6 +1051,7 @@ segments:
     - [0x2B5240, data,   fragments/49/fragment49_data]
     - [0x2B5260, bin,    fragments/49/fragment49_reloc]
 
+# hall of fame loader
   - name: fragment50
     type: code
     bss_size: 0x0
@@ -1032,6 +1064,7 @@ segments:
     - [0x2BC690, rodata, fragments/50/fragment50_rodata]
     - [0x2BC760, bin,    fragments/50/fragment50_reloc]
 
+
   - name: fragment51
     type: code
     bss_size: 0x0
@@ -1041,6 +1074,7 @@ segments:
     - [0x2BD0A0, bin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x2BD0C0, asm,    fragments/51/fragment51_code]
     - [0x2BD120, bin,    fragments/51/fragment51_reloc]
+
 
   - name: fragment52
     type: code
@@ -1064,6 +1098,7 @@ segments:
     - [0x2BDA40, data, fragments/53/fragment53_data]
     - [0x2BDA50, bin,  fragments/53/fragment53_reloc]
 
+# RENTAL battle, rules, registration loader
   - name: fragment54
     type: code
     bss_size: 0x0
@@ -1075,6 +1110,8 @@ segments:
     - [0x2BEBE0, data, fragments/54/fragment54_data]
     - [0x2BEC00, bin,  fragments/54/fragment54_reloc]
 
+
+# RENTAL rules loader
   - name: fragment55
     type: code
     bss_size: 0x0
@@ -1098,7 +1135,7 @@ segments:
     - [0x2C3240, asm,  fragments/56/fragment56_code]
     - [0x2C4880, bin,  fragments/56/fragment56_reloc]
 
-# rental registration code
+# RENTAL registration code
   - name: fragment57
     type: code
     bss_size: 0x0
@@ -1111,6 +1148,7 @@ segments:
     - [0x2CE950, rodata, fragments/57/fragment57_rodata]
     - [0x2CE9C0, bin,    fragments/57/fragment57_reloc]
 
+# sandshrew minigame stage animation
   - name: fragment58
     type: code
     bss_size: 0x0
@@ -1123,6 +1161,7 @@ segments:
     - [0x2D2000, rodata, fragments/58/fragment58_rodata]
     - [0x2D2050, bin,    fragments/58/fragment58_reloc]
 
+# stadium loader
   - name: fragment59
     type: code
     bss_size: 0x0
@@ -1135,6 +1174,7 @@ segments:
     - [0x2D58F0, rodata, fragments/59/fragment59_rodata]
     - [0x2D5900, bin,    fragments/59/fragment59_reloc]
 
+# cup code
   - name: fragment60
     type: code
     bss_size: 0x0
@@ -1147,6 +1187,7 @@ segments:
     - [0x2D7650, rodata, fragments/60/fragment60_rodata]
     - [0x2D7660, bin,    fragments/60/fragment60_reloc]
 
+# RENTAL pokemon loader
   - name: fragment61
     type: code
     bss_size: 0x0
@@ -1172,6 +1213,7 @@ segments:
     - [0x3759C0, rodata, fragments/62/fragment62_rodata]
     - [0x378D00, bin,    fragments/62/fragment62_reloc]
 
+# battle preparation flags, rules, code
   - name: fragment63
     type: code
     bss_size: 0x0
@@ -1184,6 +1226,7 @@ segments:
     - [0x3AD980, rodata, fragments/63/fragment63_rodata]
     - [0x3ADA10, bin,    fragments/63/fragment63_reloc]
 
+# menu selector before battle code
   - name: fragment64
     type: code
     bss_size: 0x0
@@ -1196,6 +1239,7 @@ segments:
     - [0x3B2530, rodata, fragments/64/fragment64_rodata]
     - [0x3B25B0, bin,    fragments/64/fragment64_reloc]
 
+# gym leader castle loader
   - name: fragment65
     type: code
     bss_size: 0x0
