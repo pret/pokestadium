@@ -243,7 +243,6 @@ void leosetup_BM(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow);
 }
 
-#ifdef NON_MATCHING
 u32 leochk_err_reg(void) {
     u32 sense;
     u32 index_status;
@@ -272,6 +271,3 @@ u32 leochk_err_reg(void) {
     }
     return 0x18;
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leoint/leochk_err_reg.s")
-#endif

@@ -130,6 +130,7 @@ segments:
     - [0x51BC0, c, libleo/readwrite]
     - [0x51C50, c, libleo/leofunc]
     - [0x520C0, c, libleo/leoint]
+    - [0x52AB0, bin, noppad_52AB0] # again with the weird nop padding.
     - [0x52AC0, c, libleo/leocmdex]
     - [0x53150, c, libleo/leoread]
     - [0x53310, c, libleo/lbatobyte]
