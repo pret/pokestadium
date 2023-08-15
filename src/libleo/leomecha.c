@@ -3,6 +3,7 @@
 
 extern u32 asic_cur_status; // static?
 extern u32 unit_atten; // static?
+extern s32 currentCommand;
 
 s32 osEPiWriteIo(OSPiHandle *, u32 , u32 );
 
@@ -245,8 +246,6 @@ s32 leoRecv_event_mesg(s32 control) {
   return 0;
 }
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/BFO8S
 u32 leoChk_err_retry(u32 sense) {
     if ((currentCommand == LEO_COMMAND_READ_DISK_ID) || (currentCommand == LEO_COMMAND_START_STOP)) {
         switch (sense) {
@@ -265,10 +264,8 @@ u32 leoChk_err_retry(u32 sense) {
         switch (sense) {
             case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
                 unit_atten |= 2;
-            break;
             case LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED:
                 unit_atten |= 1;
-            break;
             case LEO_SENSE_DIAGNOSTIC_FAILURE:
             case LEO_SENSE_COMMAND_PHASE_ERROR:
             case LEO_SENSE_WAITING_NMI:
@@ -282,9 +279,6 @@ u32 leoChk_err_retry(u32 sense) {
 
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomecha/leoChk_err_retry.s")
-#endif
 
 u8 leoChk_cur_drvmode(void) {
     u8 devstat = 0;
