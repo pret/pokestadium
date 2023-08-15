@@ -198,6 +198,7 @@ extern s32 __leoSetReset(void);
 extern s32 __osLeoInterrupt(void);
 extern u16 leoLba_to_vzone(u32 lba);
 extern u16 leoLba_to_phys(u32 lba);
+extern void leoSet_mseq(u16 rwmode);
 
 extern s32 __leoActive;
 extern s32 __leoResetCalled;
