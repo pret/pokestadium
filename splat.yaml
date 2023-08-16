@@ -853,7 +853,7 @@ segments:
     - [0x25F070, bin,    fragments/33/fragment33_reloc]
     - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG, transfer machine background
 
-# unknown code placed A LOT OF TIMES IN THE GAME but not executed
+# alternative pokemon textures pointer loader
   - name: fragment34
     type: code
     bss_size: 0x0
@@ -903,7 +903,7 @@ segments:
     - [0x275900, rodata, fragments/37/fragment37_rodata]
     - [0x275920, bin,    fragments/37/fragment37_reloc]
 
-
+# event battle loader
   - name: fragment38
     type: code
     bss_size: 0x0
@@ -929,6 +929,7 @@ segments:
     - [0x2846C0, rodata, fragments/39/fragment39_rodata]
     - [0x284790, bin,    fragments/39/fragment39_reloc]
 
+# gym leader castle clear / pokemon gift code
   - name: fragment40
     type: code
     bss_size: 0x0
@@ -941,6 +942,7 @@ segments:
     - [0x287C80, rodata, fragments/40/fragment40_rodata]
     - [0x287CA0, bin,    fragments/40/fragment40_reloc]
 
+# pokemon trade machine loader
   - name: fragment41
     type: code
     bss_size: 0x0
@@ -991,7 +993,7 @@ segments:
     - [0x2A8C60, rodata, fragments/44/fragment44_rodata]
     - [0x2A8DB0, bin,    fragments/44/fragment44_reloc]
 
-# gallery enlarge code
+# might be print code
   - name: fragment45
     type: code
     bss_size: 0x0
@@ -1004,6 +1006,7 @@ segments:
     - [0x2ACA70, rodata, fragments/45/fragment45_rodata]
     - [0x2ACA80, bin,    fragments/45/fragment45_reloc]
 
+# gallery enlarge code
   - name: fragment46
     type: code
     bss_size: 0x0
