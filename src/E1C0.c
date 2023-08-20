@@ -1,5 +1,6 @@
 #include <ultra64.h>
 #include "dp_intro.h"
+#include "fragments.h"
 
 struct UnkInputStruct8000D738 {
     s32 unk0;
@@ -28,8 +29,6 @@ extern char D_800AA668;
 extern u8 D_81200000[];
 
 // ROM offsets
-extern u8 D_7F980[]; // fragment 1 ROM start
-extern u8 D_ADC80[]; // fragment 1 ROM end
 extern u8 D_3BA190[];
 extern u8 D_3CB130[];
 
@@ -79,14 +78,14 @@ void func_8000D738(struct UnkInputStruct8000D738* arg0) {
     func_80002784(0x4742454D);
     D_800AA660 = (void*)func_800025C4(0x2210, 0);
     D_800AA664 = (void*)func_800025C4(0x21E0, 0);
-    func_80004454(((u32) ((u32) &D_81200000 & 0x0FF00000) >> 0x14) - 0x10, &D_7F980, &D_ADC80);
+    func_80004454(((u32) ((u32) &fragment1_TEXT_START & 0x0FF00000) >> 0x14) - 0x10, &fragment1_ROM_START, &fragment1_ROM_END);
     temp_v0 = func_800044F4(&D_3BA190, &D_3CB130, 1, 1);
     D_800AA660->unk21FC = func_8000484C(temp_v0, 0);
     D_800AA660->unk2200 = func_8000484C(temp_v0, 1);
     D_800AA660->unk2204 = *arg0;
     osCreateMesgQueue(&D_800AA660->queue, &D_800AA660->mesg, 1);
-    osCreateThread(&D_800AA664->thread, 0xA, func_8000D5C0, NULL, (u32)D_800AA664 + 0x21E0, 0x11);
-    osCreateThread(&D_800AA660->thread, 8, func_8000D678, NULL,   (u32)D_800AA660 + 0x21E0, 0xF);
+    osCreateThread(&D_800AA664->thread, 10,  func_8000D5C0, NULL, (u32)D_800AA664 + 0x21E0, 0x11);
+    osCreateThread(&D_800AA660->thread, 8,   func_8000D678, NULL, (u32)D_800AA660 + 0x21E0, 0xF);
     D_800AA668 = func_8000B318(0);
     osStartThread(&D_800AA660->thread);
 }
