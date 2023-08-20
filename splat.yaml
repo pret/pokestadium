@@ -440,6 +440,13 @@ segments:
     - [0x8D1A0,  data,   fragments/1/fragment1_data]
     - [0xA8E80,  rodata, fragments/1/fragment1_rodata]
     - [0xAAB60,  bin,    fragments/1/fragment1_relocs]
+    
+  - name: fragment1_misc_yay0
+    type: code
+    bss_size: 0x0
+    start: 0xADC80
+    vram: 0x81800000 # unknown VRAM, need a value here to stop linker complaints
+    subsegments:
     - [0xADC80,  bin,    fragments/1/fragment1_yay0_0]
     - [0xF4920,  bin,    fragments/1/fragment1_yay0_1]
     - [0xF5450,  bin,    fragments/1/fragment1_yay0_2]
