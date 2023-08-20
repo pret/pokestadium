@@ -38,7 +38,7 @@ segments:
     - [0x28E0, c, memmap]
     - [0x2EC0, c, intro_loader] # intro loader
     - [0x3640, asm] #
-    - [0x3A80, asm] # transition loader
+    - [0x3A80, c]
     - [0x3FB0, asm] # PRES-JPEG decoder
     - [0x5580, asm] # there's a split here according to PAL
     - [0x60A0, asm] # 
@@ -352,7 +352,7 @@ segments:
     # Start of .rodata
     - [0x7BAC0, .rodata, rsp]
     - [0x7BB10, rodata, rom_rodata_7BB10]
-    - [0x7BB20, rodata, rom_rodata_7BB20]
+    - [0x7BB20, .rodata, 3A80]
     - [0x7BB50, rodata, rom_rodata_7BB50]
     - [0x7BBE0, .rodata, crash_screen]
     - [0x7BFA0, rodata, rom_rodata_7BFA0]
