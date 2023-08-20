@@ -9,6 +9,9 @@ extern s32 func_8005A990(OSPiHandle *);
 // bcopy.s
 extern void _bcopy(void *, void *, u32);
 
+// 3640.s
+extern void* func_80002AF8(s32, void*);
+
 // 3A80.s
 extern void func_80002F58(void);
 extern void *func_80002FDC(s32);
@@ -30,6 +33,9 @@ extern void func_800057C0(void);
 
 // 6BC0.s
 extern u32 func_80006314(s32, s32, s32, s32, s32); // types unknown
+
+// 75F0.s
+extern void func_80008154(s32, s32, char*, ...);
 
 // 9D20.s
 extern void func_80009120(s32);
