@@ -6,6 +6,11 @@ extern s32 D_80068B90;
 extern u8 D_80104BB0[];
 extern s32 D_800A60B0;
 
+void func_80003860(void);
+s32 func_80002A40(s32, s32);
+void func_80002BD0(s32, void *); // type unknown
+s32 func_80007A58(void);
+
 uintptr_t func_80002E80(uintptr_t addr) {
     uintptr_t retaddr = 0x00000000;
 

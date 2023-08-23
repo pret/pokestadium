@@ -1,3 +1,4 @@
+#include <PR/os_internal_reg.h>
 #include "ultra64.h"
 #include "dp_intro.h"
 
@@ -20,6 +21,19 @@ extern s32 D_800A847C;
 extern OSThread D_800A8480;
 
 extern u8 D_800AA660[];
+
+s32 func_800484E0(void);
+void func_80009210(void);
+void func_800373D8(void);
+void func_8004FD44(void);
+void func_8004B1CC();
+void func_8004B9C4();
+void func_80037340(void *);
+void func_8004FCD8(s32);
+void func_8003D4A0(s32);
+void func_8004AF24(s32);
+void func_8004FD64(s32);
+void func_8004AE90(s32, s32);
 
 void func_8000D1C0(void) {
 
