@@ -12,5 +12,6 @@ extern struct UnkStruct800A62E0 D_800A62E0;
 
 void func_80001474(s8, s8);
 void func_800019C8(void);
+void func_80001C64(void);
 
 #endif /* _SRC_DP_INTRO_H_ */
