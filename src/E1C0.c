@@ -1,6 +1,9 @@
 #include <ultra64.h>
+#include <PR/os_internal_reg.h>
 #include "dp_intro.h"
 #include "fragments.h"
+#include "intro_loader.h"
+#include "dp_intro.h"
 
 struct UnkInputStruct8000D738 {
     s32 unk0;
@@ -36,6 +39,15 @@ extern u8 D_3CB130[];
 void func_81206D9C(void);
 void func_81206E64(void);
 void func_81206F38(void);
+
+// from 3A80.c
+extern uintptr_t func_80002E80(uintptr_t addr);
+
+void func_80005370(struct UnkStruct800AA660 *);
+void func_80004454(u32, void *, void *);
+char func_8000B318(char);
+s32 func_800044F4(void *, void *, s32, s32);
+s32 func_8000484C(s32, s32);
 
 void func_8000D5C0(void* unused) {
     void (*func)(void *) = func_80002E80(&func_81206F38);
