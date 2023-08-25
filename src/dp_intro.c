@@ -3,6 +3,7 @@
 #include "common.h"
 #include "dp_intro.h"
 #include "crash_screen.h"
+#include "profiler.h"
 
 // dp_intro.c
 
@@ -210,7 +211,7 @@ void func_800015A8(void) {
     }
     D_8008474C = D_8008473C;
     D_8008473C = D_8008472C;
-    func_80009120(3);
+    profiler_log_thread5_time(THREAD5_END);
     func_80004CF4(&D_80083CA0);
 }
 
@@ -237,12 +238,12 @@ void func_8000183C(UNUSED void *arg) {
             func_800017E4();
             continue;
         }
-        func_80009120(0);
+        profiler_log_thread5_time(THREAD5_START);
         D_80083CA0.unkA8A = 1;
         osRecvMesg(&D_8008468C, &sp4C, 1);
         D_80083CA0.unkA8A = 0;
-        func_80009120(1);
-        func_80009120(2);
+        profiler_log_thread5_time(UNK_EVENT_1);
+        profiler_log_thread5_time(UNK_EVENT_2);
         func_8000152C(sp4C);
         func_800015A8();
         osSendMesg(&D_800846A4, (void* )0x444F4E45, 0);

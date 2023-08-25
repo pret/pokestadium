@@ -89,7 +89,7 @@ void func_8000310C(Gfx** dlist)
         func_8000302C(dlist, sp48, sp44, 0xFFCB);
         func_8000302C(dlist, sp44, sp40, 0x2ABF);
         func_8000302C(dlist, sp40, sp3C, 0xFFCB);
-        func_80008154(coord, 0x14, "MEM: +%XH (+%dK)",  temp_s1, temp_s1 / 1024);
+        HAL_Printf(coord, 0x14, "MEM: +%XH (+%dK)",  temp_s1, temp_s1 / 1024);
     }
     else
     {
@@ -102,7 +102,7 @@ void func_8000310C(Gfx** dlist)
         func_8000302C(dlist, sp34, sp2C, 0xFFCB);
         func_8000302C(dlist, sp2C, sp30, 0xF94B);
         func_8000302C(dlist, sp30, sp28, 0xFFCB);
-        func_80008154(coord, 0x14, "MEM: -%XH (-%dK)", -temp_s1, -temp_s1 / 1024);
+        HAL_Printf(coord, 0x14, "MEM: -%XH (-%dK)", -temp_s1, -temp_s1 / 1024);
     }
 }
 
