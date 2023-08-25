@@ -563,3 +563,4 @@ HAL_Printf = 0x80008154;
 print_profiler_metrics = 0x8000A0FC;
 clear_profiler_data = 0x8000A21C;
 draw_profiler_bar_cpu_keep_max = 0x80009630;
+Yay0_Decompress = 0x8000B7F0;
