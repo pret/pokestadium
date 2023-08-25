@@ -1,5 +1,6 @@
 #include "ultra64.h"
 #include "dp_intro.h"
+#include "profiler.h"
 
 extern s32 D_800A83A0;
 
@@ -114,13 +115,13 @@ void func_8000D3A8(void *unused) {
     // thread loop
     while(1) {
         func_80004CF4(&D_800A8480);
-        func_80009210();
+        profiler_log_thread4_time();
         if ((D_800A83A0 != 0) && (D_800A62E0.unkA38 < 0x15)) {
             func_80037340(&D_800A83A8[D_800A8478].mesg20);
             func_800053B4(&D_800A83A8[D_800A8478].mesg, 0);
         }
         D_800A8478 ^= 1;
-        func_80009210();
+        profiler_log_thread4_time();
     }
 }
 
