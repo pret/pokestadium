@@ -35,10 +35,7 @@ extern void func_800057C0(void);
 extern u32 func_80006314(s32, s32, s32, s32, s32); // types unknown
 
 // 75F0.s
-extern void func_80008154(s32, s32, char*, ...);
-
-// 9D20.s
-extern void func_80009120(s32);
+extern void HAL_Printf(s32 x, s32 y, char *str, ...);
 
 // C030.s
 extern s32 func_8000B4C4(void);
