@@ -40,6 +40,9 @@ extern void HAL_Printf(s32 x, s32 y, char *str, ...);
 // C030.s
 extern s32 func_8000B4C4(void);
 
+// Yay0.s
+extern void Yay0_Decompress(void* src, void* dst);
+
 // D470.s
 extern void func_8000C8F8(void);
 extern void func_8000CEE4(s32, s32, void *, OSMesgQueue *);
