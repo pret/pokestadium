@@ -79,7 +79,7 @@ u16 gCrashScreenUnlockInputs[] = {
 };
 
 void crash_screen_sleep(s32 ms) {
-    u64 cycles = (ms * 1000LL) * 3000 / 64ULL;
+    u64 cycles = (ms * 1000LL) * 3000ULL / 64ULL;
     osSetTime(0);
     while (osGetTime() < cycles) {
     }
