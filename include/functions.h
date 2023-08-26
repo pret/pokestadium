@@ -1,5 +1,5 @@
-#ifndef _FUNCTIONS_H
-#define _FUNCTIONS_H
+#ifndef _FUNCTIONS_H_
+#define _FUNCTIONS_H_
 
 #include "ultra64.h"
 
@@ -12,10 +12,11 @@ extern void _bcopy(void *, void *, u32);
 // 3640.s
 extern void* func_80002AF8(s32, void*);
 
-// 3A80.s
+// 3A80.c
+extern uintptr_t convert_addr_to_virt_addr(uintptr_t addr);
 extern void func_80002F58(void);
 extern void *func_80002FDC(s32);
-extern void func_80003004(void *); // type unknown
+extern void func_80003004(void *);
 
 // 3FB0.s
 extern void func_80003B30(void *, s32, s32, s32); // types unknown
