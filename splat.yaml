@@ -416,6 +416,8 @@ segments:
     - {vram: 0x8007F190, type: .bss, name: main}
     - {vram: 0x80081900, type: .bss, name: rsp}
     - {vram: 0x80083CA0, type: .bss, name: unk_bss}
+    - {vram: 0x800A6070, type: .bss, name: memory}
+    - {vram: 0x800A60B0, type: .bss, name: unk_bss_4}
     - {vram: 0x800A7320, type: .bss, name: controller}
     - {vram: 0x800A7420, type: .bss, name: unk_bss_3}
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
