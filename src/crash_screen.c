@@ -79,7 +79,8 @@ u16 gCrashScreenUnlockInputs[] = {
 };
 
 void crash_screen_sleep(s32 ms) {
-    u64 cycles = (ms * 1000LL) * 3000ULL / 64ULL;
+    u64 cycles = OS_USEC_TO_CYCLES(ms * 1000LL); // why not just do OS_NSEC_TO_CYCLES and not multiply by 1000LL?
+
     osSetTime(0);
     while (osGetTime() < cycles) {
     }
@@ -222,22 +223,18 @@ void crash_screen_print_fpr(s32 x, s32 y, s32 regNum, void *addr) {
     }
 }
 
-void crash_screen_print_fpcsr(u32 value) {
+void crash_screen_print_fpcsr(u32 fpcsr) {
     s32 i;
-    u32 flag = 0x20000;
+    u32 bit = 1 << 17;
 
-    crash_screen_printf(30, 155, "FPCSR:%08XH", value);
+    crash_screen_printf(30, 155, "FPCSR:%08XH", fpcsr);
 
-    for (i = 0; i < 6;) {
-        if (value & flag) {
+    for (i = 0; i < 6; i++) {
+        if (fpcsr & bit) {
             crash_screen_printf(132, 155, "(%s)", gFPCSRFaultCauses[i]);
             break;
-
-            do {} while (0);
         }
-
-        i++;
-        flag >>= 1;
+        bit >>= 1;
     }
 }
 

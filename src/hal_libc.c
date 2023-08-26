@@ -53,12 +53,11 @@ size_t HAL_Strcmp(char* dest, char* src) {
  * this value for every byte across a given specified size. Return the original
  * pointer used.
  */
-char* HAL_Memset(char* dest, s32 c, s32 nsize) {
+char* HAL_Memset(char* dest, s32 c, u32 nsize) {
     char* newDest = dest;
 
-    // While the size is not 0, keep decrementing. Oddly, HAL seems to have
-    // xor'd the result instead of checking the logical result.
-    while((nsize-- == 0) ^ 1) {
+    // While the size is not 0, keep decrementing.
+    while( nsize --> 0 ) {
         *newDest++ = c;
     }
     return dest;
