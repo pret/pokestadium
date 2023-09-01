@@ -36,8 +36,8 @@ segments:
     - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
     - [0x1F80, c, dp_intro] # dp intro code
     - [0x28E0, c, memmap]
-    - [0x2EC0, c, memory]
-    - [0x3640, asm] #
+    - [0x2EC0, c, memory_main] # handles the main global pool
+    - [0x3640, c, memory] # memory_pool
     - [0x3A80, c]
     - [0x3FB0, asm] # PRES-JPEG decoder
     - [0x5580, asm] # there's a split here according to PAL
@@ -325,6 +325,8 @@ segments:
     - [0x68020, bin] # rest of rom part 1
     
     # .data is somewhere in here
+    - [0x69790, .data, 3A80]
+    - [0x697A0, bin, rom_data_697A0]
     - [0x6A1B0, .data, crash_screen]
     - [0x6A3B0, .data, profiler]
     - [0x6A3D0, .data, gb_tower]
@@ -416,7 +418,7 @@ segments:
     - {vram: 0x8007F190, type: .bss, name: main}
     - {vram: 0x80081900, type: .bss, name: rsp}
     - {vram: 0x80083CA0, type: .bss, name: unk_bss}
-    - {vram: 0x800A6070, type: .bss, name: memory}
+    - {vram: 0x800A6070, type: .bss, name: memory_main}
     - {vram: 0x800A60B0, type: .bss, name: unk_bss_4}
     - {vram: 0x800A7320, type: .bss, name: controller}
     - {vram: 0x800A7420, type: .bss, name: unk_bss_3}
@@ -428,6 +430,16 @@ segments:
     - {vram: 0x801038E4, type: .bss, name: libultra/io/cartrominit}
     - {vram: 0x80103950, type: .bss, name: libultra/io/vimgr}
     - {vram: 0x80104b70, type: .bss, name: libultra/io/conteepread}
+  - [0x7F980]
+
+  - name: heap
+    type: code
+    bss_size: 0x0 # This heap extends to the end of RAM.
+    start: 0x7F980
+    vram: 0x80104BB0
+    subsegments:
+    # .bss
+    - {vram: 0x80104BB0, type: .bss, name: heap}
   - [0x7F980]
     
   # Probably the GB Tower Emulator. This fragment is built very strangely.

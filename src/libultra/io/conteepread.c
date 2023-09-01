@@ -5,7 +5,6 @@
 
 void __osPackEepReadData(u8 address);
 OSPifRam __osEepPifRam;
-s32 __osEepromRead16K;
 
 #define CONT_RANGE_ERROR               -1
 
@@ -37,12 +36,14 @@ s32 osEepromRead(OSMesgQueue *mq, u8 address, u8 *buffer)
 			// @bug: Should be > EEP16K_MAXBLOCKS
 			if (address >= EEP16K_MAXBLOCKS) {
 				ret = -1;
-			}
+			} else {
+                // __osEepromRead16K support seems to have been removed from this particular
+                // revision.
+                //__osEepromRead16K = -1;
+            }
 			break;
 		default:
-			if (1);
 			ret = CONT_NO_RESPONSE_ERROR;
-			break;
 		}
 	}
 
