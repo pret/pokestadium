@@ -2,16 +2,21 @@
 #include "memmap.h"
 #include "memory.h"
 
-extern s32 D_80068B90;
-extern u8 D_80104BB0[];
-extern s32 D_800A60B0;
+/**
+ * Based on the context of this variable's usage, it appears to be intended to
+ * be non-0 whenever the expansion RAM is in, however it is never initialized
+ * properly. It seems to serve as whereever the new start of memory will be
+ * located whenever plugged in, but its only functional with the debug profiler.
+ * It will, however, allocate a much bigger pool if set to non-0.
+ */
+s32 gExpansionRAMStart = FALSE;
+
+extern struct MainPool **gMainPool; // gMainPool
 
 void func_80003860(void);
-s32 func_80002A40(s32, s32);
-void func_80002BD0(s32, void *); // type unknown
 s32 func_80007A58(void);
 
-/*
+/**
  * Convert any valid address to its virtual (KSEG0) counterpart.
  */
 uintptr_t convert_addr_to_virt_addr(uintptr_t addr) {
@@ -45,22 +50,24 @@ void HAL_Memcpy(u32* dest, u32* src, int size) {
 
 void func_80002F58(void) {
     // wat? mem sizes are only ever 0x400000 or 0x800000. This check makes no sense.
-    if ((D_80068B90 != 0) && ((u32) osMemSize > 0x600000U)) {
-        main_pool_init(&D_80104BB0, 0x80600000);
+    // Effectively, it checks if the expansion RAM is in. But why not just use all
+    // of it, or at least do the correct check of osMemSize == 0x800000?
+    if ((gExpansionRAMStart != 0) && ((u32) osMemSize > 0x600000U)) {
+        main_pool_init(&gPool, POOL_END_6MB);
     } else {
-        main_pool_init(&D_80104BB0, 0x80400000);
-        D_80068B90 = 0;
+        main_pool_init(&gPool, POOL_END_4MB);
+        gExpansionRAMStart = 0;
     }
     func_80003860();
-    D_800A60B0 = func_80002A40(0x10000, 0);
+    gMainPool = mem_pool_try_init(0x10000, 0);
 }
 
-void *func_80002FDC(s32 arg0) {
-    return func_80002AF8(D_800A60B0, arg0);
+void *func_80002FDC(s32 size) {
+    return mem_pool_alloc(gMainPool, size);
 }
 
 void func_80003004(void *arg0) {
-    func_80002BD0(D_800A60B0, arg0);
+    mem_pool_free(gMainPool, arg0);
 }
 
 void HAL_DrawRect(Gfx** dlist, s32 ulx, s32 lrx, u16 color) {
@@ -83,15 +90,15 @@ void HAL_DrawRect(Gfx** dlist, s32 ulx, s32 lrx, u16 color) {
 
 void func_8000310C(Gfx** dlist) {
     struct MainPool *pool = main_pool_get_pool();
-    s32 temp_s1 = main_pool_get_available() - D_80068B90;
+    s32 temp_s1 = main_pool_get_available() - gExpansionRAMStart;
 
     if (temp_s1 >= 0) 
     {
         s32 base = 30;
         s32 sp48 = ((u32) ( K0_TO_PHYS(pool->start)) >> 15) + base;
         s32 sp44 = ((u32) ( K0_TO_PHYS(pool->listHeadL)) >> 15) + base;
-        s32 sp40 = ((u32) ( K0_TO_PHYS(pool->listHeadR) - D_80068B90) >> 15) + base;
-        s32 sp3C = ((u32) ( K0_TO_PHYS(pool->end) - D_80068B90) >> 15) + base;
+        s32 sp40 = ((u32) ( K0_TO_PHYS(pool->listHeadR) - gExpansionRAMStart) >> 15) + base;
+        s32 sp3C = ((u32) ( K0_TO_PHYS(pool->end) - gExpansionRAMStart) >> 15) + base;
 
         HAL_DrawRect(dlist, base, sp48, 0xFBCB);
         HAL_DrawRect(dlist, sp48, sp44, 0xFFCB);
@@ -104,8 +111,8 @@ void func_8000310C(Gfx** dlist) {
         s32 base = 30;
         s32 sp34 = ((u32) ( K0_TO_PHYS(pool->start)) >> 15) + base;
         s32 sp30 = ((u32) ( K0_TO_PHYS(pool->listHeadL)) >> 15) + base;
-        s32 sp2C = ((u32) ( K0_TO_PHYS(pool->listHeadR) - D_80068B90) >> 15) + base;
-        s32 sp28 = ((u32) ( K0_TO_PHYS(pool->end) - D_80068B90) >> 15) + base;
+        s32 sp2C = ((u32) ( K0_TO_PHYS(pool->listHeadR) - gExpansionRAMStart) >> 15) + base;
+        s32 sp28 = ((u32) ( K0_TO_PHYS(pool->end) - gExpansionRAMStart) >> 15) + base;
         HAL_DrawRect(dlist, base, sp34, 0xFBCB);
         HAL_DrawRect(dlist, sp34, sp2C, 0xFFCB);
         HAL_DrawRect(dlist, sp2C, sp30, 0xF94B);
