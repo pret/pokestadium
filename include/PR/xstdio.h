@@ -1,6 +1,6 @@
 #ifndef _XSTDIO_H
 #define _XSTDIO_H
-#include <ultratypes.h>
+#include "ultratypes.h"
 #include <stdlib.h>
 #include <stdarg.h>
 

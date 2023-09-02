@@ -9,18 +9,18 @@ s32 LeoSpdlMotor(LEOCmd* cmdBlock, u8 mode, OSMesgQueue* mq) {
     cmdBlock->header.reserve1 = 0;
 
     switch (mode) {
-    case LEO_MOTOR_ACTIVE:
-        cmdBlock->header.control = LEO_CONTROL_START;
-        break;
-    case LEO_MOTOR_STANDBY:
-        cmdBlock->header.control = LEO_CONTROL_STBY;
-        break;
-    case LEO_MOTOR_SLEEP:
-        cmdBlock->header.control = 0;
-        break;
-    case LEO_MOTOR_BRAKE:
-        cmdBlock->header.control = LEO_CONTROL_BRAKE;
-        break;
+        case LEO_MOTOR_ACTIVE:
+            cmdBlock->header.control = LEO_CONTROL_START;
+            break;
+        case LEO_MOTOR_STANDBY:
+            cmdBlock->header.control = LEO_CONTROL_STBY;
+            break;
+        case LEO_MOTOR_SLEEP:
+            cmdBlock->header.control = 0;
+            break;
+        case LEO_MOTOR_BRAKE:
+            cmdBlock->header.control = LEO_CONTROL_BRAKE;
+            break;
     }
     cmdBlock->header.reserve3 = 0;
 
