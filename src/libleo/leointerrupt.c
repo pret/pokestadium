@@ -4,12 +4,12 @@
 #include "PR/os_system.h"
 
 extern OSThread* __osRunQueue;
-extern OSThread *__osPopThread(OSThread **);
-extern void __osEnqueueThread(OSThread **, OSThread *);
+extern OSThread* __osPopThread(OSThread**);
+extern void __osEnqueueThread(OSThread**, OSThread*);
 extern OSIntMask __osGlobalIntMask;
 void __osLeoAbnormalResume(void);
 void __osLeoResume(void);
-extern s32 osEPiRawStartDma(OSPiHandle *, s32, u32, void *, u32);
+extern s32 osEPiRawStartDma(OSPiHandle*, s32, u32, void*, u32);
 
 s32 __osLeoInterrupt(void) {
     u32 stat = 0;

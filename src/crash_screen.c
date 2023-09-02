@@ -7,28 +7,27 @@
 #include "memmap.h"
 #include "controller.h"
 
-extern void *D_80068BA0[];
+extern void* D_80068BA0[];
 
 CrashScreen gCrashScreen;
 
 u8 gCrashScreenCharToGlyph[128] = {
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 41, -1, -1, -1, 43, -1, -1, 37, 38, -1, 42,
-    -1, 39, 44, -1, 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  36, -1, -1, -1, -1, 40, -1, 10,
-    11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-    33, 34, 35, -1, -1, -1, -1, -1, -1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, 41, -1, -1, -1, 43, -1, -1, 37, 38, -1, 42, -1, 39, 44, -1, 0,  1,  2,  3,
+    4,  5,  6,  7,  8,  9,  36, -1, -1, -1, -1, 40, -1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1, -1, 10, 11, 12, 13, 14, 15, 16,
+    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1,
 };
 
 u32 gCrashScreenFont[] = {
-    0x70871C30, 0x8988A250, 0x88808290, 0x88831C90, 0x888402F8, 0x88882210, 0x71CF9C10, 0xF9CF9C70, 0x8228A288,
-    0xF200A288, 0x0BC11C78, 0x0A222208, 0x8A222288, 0x71C21C70, 0x23C738F8, 0x5228A480, 0x8A282280, 0x8BC822F0,
-    0xFA282280, 0x8A28A480, 0x8BC738F8, 0xF9C89C08, 0x82288808, 0x82088808, 0xF2EF8808, 0x82288888, 0x82288888,
-    0x81C89C70, 0x8A08A270, 0x920DA288, 0xA20AB288, 0xC20AAA88, 0xA208A688, 0x9208A288, 0x8BE8A270, 0xF1CF1CF8,
-    0x8A28A220, 0x8A28A020, 0xF22F1C20, 0x82AA0220, 0x82492220, 0x81A89C20, 0x8A28A288, 0x8A28A288, 0x8A289488,
-    0x8A2A8850, 0x894A9420, 0x894AA220, 0x70852220, 0xF8011000, 0x08020800, 0x10840400, 0x20040470, 0x40840400,
-    0x80020800, 0xF8011000, 0x70800000, 0x88822200, 0x08820400, 0x108F8800, 0x20821000, 0x00022200, 0x20800020,
-    0x00000000,
+    0x70871C30, 0x8988A250, 0x88808290, 0x88831C90, 0x888402F8, 0x88882210, 0x71CF9C10, 0xF9CF9C70,
+    0x8228A288, 0xF200A288, 0x0BC11C78, 0x0A222208, 0x8A222288, 0x71C21C70, 0x23C738F8, 0x5228A480,
+    0x8A282280, 0x8BC822F0, 0xFA282280, 0x8A28A480, 0x8BC738F8, 0xF9C89C08, 0x82288808, 0x82088808,
+    0xF2EF8808, 0x82288888, 0x82288888, 0x81C89C70, 0x8A08A270, 0x920DA288, 0xA20AB288, 0xC20AAA88,
+    0xA208A688, 0x9208A288, 0x8BE8A270, 0xF1CF1CF8, 0x8A28A220, 0x8A28A020, 0xF22F1C20, 0x82AA0220,
+    0x82492220, 0x81A89C20, 0x8A28A288, 0x8A28A288, 0x8A289488, 0x8A2A8850, 0x894A9420, 0x894AA220,
+    0x70852220, 0xF8011000, 0x08020800, 0x10840400, 0x20040470, 0x40840400, 0x80020800, 0xF8011000,
+    0x70800000, 0x88822200, 0x08820400, 0x108F8800, 0x20821000, 0x00022200, 0x20800020, 0x00000000,
 };
 
 const char* gFaultCauses[18] = {
@@ -53,43 +52,27 @@ const char* gFaultCauses[18] = {
 };
 
 const char* gFPCSRFaultCauses[6] = {
-    "Unimplemented operation",
-    "Invalid operation",
-    "Division by zero",
-    "Overflow",
-    "Underflow",
-    "Inexact operation",
+    "Unimplemented operation", "Invalid operation", "Division by zero", "Overflow", "Underflow", "Inexact operation",
 };
 
 /*
  * To unlock the screen for viewing, press these buttons in sequence
  * on controller 1 once the game crashes.
  */
-u16 gCrashScreenUnlockInputs[] = {
-    U_JPAD,
-    D_JPAD,
-    L_JPAD,
-    R_JPAD,
-    U_CBUTTONS,
-    D_CBUTTONS,
-    L_CBUTTONS,
-    R_CBUTTONS,
-    B_BUTTON,
-    A_BUTTON
-};
+u16 gCrashScreenUnlockInputs[] = { U_JPAD,     D_JPAD,     L_JPAD,     R_JPAD,   U_CBUTTONS,
+                                   D_CBUTTONS, L_CBUTTONS, R_CBUTTONS, B_BUTTON, A_BUTTON };
 
 void crash_screen_sleep(s32 ms) {
     u64 cycles = OS_USEC_TO_CYCLES(ms * 1000LL); // why not just do OS_NSEC_TO_CYCLES and not multiply by 1000LL?
 
     osSetTime(0);
-    while (osGetTime() < cycles) {
-    }
+    while (osGetTime() < cycles) {}
 }
 
 void crash_screen_wait_for_button_combo(void) {
     s32 breakloop = FALSE;
     s32 i = 0;
-    
+
     do {
         Cont_StartReadInputs();
         Cont_ReadInputs();
@@ -174,12 +157,12 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
     }
 }
 
-char *crash_screen_copy_to_buf(char *buffer, const char *data, size_t size) {
-    return (char *) memcpy(buffer, data, size) + size;
+char* crash_screen_copy_to_buf(char* buffer, const char* data, size_t size) {
+    return (char*)memcpy(buffer, data, size) + size;
 }
 
-void crash_screen_printf(s32 x, s32 y, const char *fmt, ...) {
-    signed char *ptr;
+void crash_screen_printf(s32 x, s32 y, const char* fmt, ...) {
+    signed char* ptr;
     u32 glyph;
     s32 size;
     signed char buf[0x100];
@@ -187,7 +170,7 @@ void crash_screen_printf(s32 x, s32 y, const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
 
-    size = _Printf(crash_screen_copy_to_buf, (char *)buf, fmt, args);
+    size = _Printf(crash_screen_copy_to_buf, (char*)buf, fmt, args);
 
     if (size > 0) {
         ptr = buf;
@@ -210,14 +193,14 @@ void crash_screen_printf(s32 x, s32 y, const char *fmt, ...) {
     va_end(args);
 }
 
-void crash_screen_print_fpr(s32 x, s32 y, s32 regNum, void *addr) {
+void crash_screen_print_fpr(s32 x, s32 y, s32 regNum, void* addr) {
     u32 bits;
     s32 exponent;
 
-    bits = *(u32 *) addr;
+    bits = *(u32*)addr;
     exponent = ((bits & 0x7f800000U) >> 0x17) - 0x7f;
     if ((exponent >= -0x7e && exponent <= 0x7f) || bits == 0) {
-        crash_screen_printf(x, y, "F%02d:%+.3e", regNum, *(f32 *) addr);
+        crash_screen_printf(x, y, "F%02d:%+.3e", regNum, *(f32*)addr);
     } else {
         crash_screen_printf(x, y, "F%02d:---------", regNum);
     }
@@ -299,20 +282,20 @@ void crash_screen_draw(OSThread* faultedThread) {
     crash_screen_print_fpr(30, 220, 30, &ctx->fp30.f.f_even);
 
     ret = Memmap_GetLoadedFragmentVaddr(ctx->pc);
-    if(ret != 0) {
-        crash_screen_printf(120, 220, "F-PC:%08XH", ret-0x20);
+    if (ret != 0) {
+        crash_screen_printf(120, 220, "F-PC:%08XH", ret - 0x20);
     }
 
     ret = Memmap_GetLoadedFragmentVaddr((u32)ctx->ra);
-    if(ret != 0) {
-        crash_screen_printf(210, 220, "F-RA:%08XH", ret-0x20);
+    if (ret != 0) {
+        crash_screen_printf(210, 220, "F-RA:%08XH", ret - 0x20);
     }
-    
+
     crash_screen_sleep(500);
 
     // all of these null terminators needed to pad the rodata section for this file
     // can potentially fix this problem in another way?
-    crash_screen_printf(210, 140, "MM:%08XH", *(u32 *)(uintptr_t)ctx->pc);
+    crash_screen_printf(210, 140, "MM:%08XH", *(u32*)(uintptr_t)ctx->pc);
 }
 
 OSThread* crash_screen_get_faulted_thread(void) {
@@ -345,7 +328,7 @@ void crash_screen_thread_entry(UNUSED void* unused) {
     crash_screen_wait_for_button_combo();
     crash_screen_draw(faultedThread);
 
-    while(TRUE){}
+    while (TRUE) {}
 }
 
 void crash_screen_set_draw_info(u16* frameBufPtr, u16 width, u16 height) {
@@ -373,7 +356,7 @@ void crash_screen_printf_with_bg(s16 x, s16 y, const char* fmt, ...) {
 
     va_start(args, fmt);
 
-    size = _Printf(crash_screen_copy_to_buf, (char *)buf, fmt, args);
+    size = _Printf(crash_screen_copy_to_buf, (char*)buf, fmt, args);
 
     if (size > 0) {
         crash_screen_draw_rect(x - 6, y - 6, (size + 2) * 6, 19);
@@ -394,4 +377,3 @@ void crash_screen_printf_with_bg(s16 x, s16 y, const char* fmt, ...) {
 
     va_end(args);
 }
-

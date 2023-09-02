@@ -178,7 +178,9 @@ def main():
         files = args.files
         extra_files = []
     else:
-        files = glob.glob("src/**/*.c", recursive=True)
+        # Ignore libultra files. They cause too many formatter issues so we just wont format libultra for now and only
+        # format the game specific files. We can format libleo however.
+        files = [file for file in glob.glob("src/**/*.c", recursive=True) if not file.startswith('src/libultra/')]
         extra_files = glob.glob("assets/**/*.xml", recursive=True)
 
     format_files(files, extra_files, nb_jobs)
