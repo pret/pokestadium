@@ -1,5 +1,4 @@
 #include <ultra64.h>
-
 #include "common.h"
 #include "dp_intro.h"
 #include "crash_screen.h"
@@ -8,7 +7,7 @@
 extern void func_8002B330(); // thread 6 function
 
 // entry .bss
-u8 D_8007ED80[0xF180-0xED80]; // unknown, start of .bss
+u8 D_8007ED80[0xF180 - 0xED80]; // unknown, start of .bss
 OSThread gIdleThread;
 u8 unk_8007F330[0x400];
 OSThread pThreads;
@@ -20,7 +19,7 @@ u8 D_800818F8[0x8];
 /**
  * Initialize hardware, start main thread, then idle.
  */
-void thread1_idle(UNUSED void *arg0) {
+void Idle_ThreadEntry(UNUSED void* unused) {
     osCreateViManager(OS_PRIORITY_VIMGR);
     func_80001474(0, 1);
     osViBlack(TRUE);
@@ -35,14 +34,20 @@ void thread1_idle(UNUSED void *arg0) {
     osSetThreadPri(NULL, 0);
 
     // Halt
-    while(TRUE);
+    while (TRUE) {
+        ;
+    }
 }
 
-void main_func(void) {
+/**
+ * C entrypoint from the boot/entry code. Starts the libultra OS library and
+ * creates the idle thread which bootstraps the rest of the game.
+ */
+void Main(void) {
     osInitialize();
     osCartRomInit();
     set_watch_lohi(0);
-    func_80002F58();
-    osCreateThread(&gIdleThread, 1, &thread1_idle, 0, &pThreads, 100);
+    Util_InitMainPools();
+    osCreateThread(&gIdleThread, THREAD_ID_IDLE, &Idle_ThreadEntry, NULL, &pThreads, THREAD_PRI_IDLE_INIT);
     osStartThread(&gIdleThread);
 }

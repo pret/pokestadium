@@ -6,9 +6,9 @@ void leoSeek(void) {
     u8 retry_cntr = 20;
 
     if (LEOcur_command->data.seek.lba > LEO_LBA_MAX) {
-		LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
-		LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
-		return;
+        LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+        return;
     }
 
     leoLba_to_phys(LEOcur_command->data.seek.lba + 0x18);

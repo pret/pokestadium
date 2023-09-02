@@ -30,11 +30,8 @@ s32 func_8000A630(s32 arg0, void* arg1) {
     s32 sp20 = 0;
     UNUSED u8 padding[8];
 
-    if ((func_8000AF40(arg0, arg1, 0, 0x20) == 0) 
-        && (func_8000AEBC(arg0, (uintptr_t)&sp24, 0, 0x20) == 0) 
-        && (bcmp(&sp24, arg1, 0x20) == 0) 
-        && (osGbpakGetStatus(&D_800A8100[arg0], &sp47) == 0)) 
-    {
+    if ((func_8000AF40(arg0, arg1, 0, 0x20) == 0) && (func_8000AEBC(arg0, (uintptr_t)&sp24, 0, 0x20) == 0) &&
+        (bcmp(&sp24, arg1, 0x20) == 0) && (osGbpakGetStatus(&D_800A8100[arg0], &sp47) == 0)) {
         sp20 = ((sp47 & 4) != 0) == 0;
     }
     return sp20;
@@ -47,25 +44,25 @@ s32 func_8000A6D8(s32 arg0, u8* arg1) {
     if (arg1 == NULL) {
         arg1 = sp34;
     }
-    HAL_Memset((char *)arg1, 0x55, 0x20);
+    HAL_Memset((char*)arg1, 0x55, 0x20);
     if (func_8000A630(arg0, arg1) != 0) {
-        HAL_Memset((char *)arg1, 0xAA, 0x20);
+        HAL_Memset((char*)arg1, 0xAA, 0x20);
         if (func_8000A630(arg0, arg1) != 0) {
             s32 i;
             for (i = 0; i < ARRAY_COUNT(sp34); i++) {
                 arg1[i] = osGetCount();
-            } 
+            }
             var_s0 = func_8000A630(arg0, arg1);
         }
     }
     return var_s0;
 }
 
-s32 func_8000A798(s32 arg0, u8 *arg1, u8 *arg2) {
+s32 func_8000A798(s32 arg0, u8* arg1, u8* arg2) {
     u8 status;
     OSGbpakId gbpakId;
     s32 sp28 = 0;
-    
+
     if (arg1 != NULL) {
         *arg1 = D_800A82A0[arg0];
     }
@@ -104,7 +101,7 @@ s32 func_8000A888(s32 arg0, u8 arg1) {
 void func_8000A924(void) {
     s32 i;
 
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         if (D_800A82A4 & (1 << i)) {
             osGbpakPower(&D_800A8100[i], 0);
             D_800A82A0[i] = 0;
@@ -119,16 +116,16 @@ s32 func_8000A9D0(OSGbpakId* header) {
     // is the cartridge non-Japanese?
     if (header->country_code == 1) {
         // Which supported POKeMON version is this?
-        if (HAL_Strcmp((char *)header->game_title, "POKEMON RED") == 0) {
+        if (HAL_Strcmp((char*)header->game_title, "POKEMON RED") == 0) {
             return 1;
         }
-        if (HAL_Strcmp((char *)header->game_title, "POKEMON GREEN") == 0) {
+        if (HAL_Strcmp((char*)header->game_title, "POKEMON GREEN") == 0) {
             return 1;
         }
-        if (HAL_Strcmp((char *)header->game_title, "POKEMON BLUE") == 0) {
+        if (HAL_Strcmp((char*)header->game_title, "POKEMON BLUE") == 0) {
             return 1;
         }
-        if (HAL_Strcmp((char *)header->game_title, "POKEMON YELLOW") == 0) {
+        if (HAL_Strcmp((char*)header->game_title, "POKEMON YELLOW") == 0) {
             return 1;
         }
     }
@@ -148,7 +145,7 @@ s32 func_8000AA7C(void) {
     D_800A82A8 = 0;
     osPfsIsPlug(&gSIEventMesgQueue, &D_800A82A6);
 
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         if ((D_800A82A6 & (1 << i)) && ((i != 3) || (func_8000B4C4() == 0))) {
             if (osGbpakInit(&gSIEventMesgQueue, &D_800A8100[i], i) == 0) {
                 D_800A82A4 |= (1 << i);
@@ -191,11 +188,9 @@ s32 func_8000AC7C(s32 arg0) {
 
     // check the error code returned (if applicable) by the osGbpakGetStatus
     // call.
-    if ((ret == PFS_ERR_NOPACK) 
-     || (ret == PFS_ERR_DEVICE) 
-     || (ret == PFS_ERR_CONTRFAIL)) {
+    if ((ret == PFS_ERR_NOPACK) || (ret == PFS_ERR_DEVICE) || (ret == PFS_ERR_CONTRFAIL)) {
         func_8002B274(arg0, 1);
-     }
+    }
     return !((status & OS_GBPAK_GBCART_ON) != 0);
 }
 
@@ -203,9 +198,7 @@ s32 func_8000ACF4(s32 arg0) {
     u8 status;
     s32 ret = osGbpakGetStatus(&D_800A8100[arg0], &status);
 
-    if ((ret == PFS_ERR_NOPACK) 
-     || (ret == PFS_ERR_DEVICE) 
-     || (ret == PFS_ERR_CONTRFAIL)) {
+    if ((ret == PFS_ERR_NOPACK) || (ret == PFS_ERR_DEVICE) || (ret == PFS_ERR_CONTRFAIL)) {
         func_8002B274(arg0, 1);
     }
     return ((status & OS_GBPAK_GBCART_ON) != 0);
@@ -217,15 +210,14 @@ s32 func_8000AD68(s32 arg0) {
     OSGbpakId sp28;
 
     D_800A82A0[arg0] = 0;
-       if ((osGbpakInit(&gSIEventMesgQueue, &D_800A8100[arg0], arg0) == 0) 
-        && (osGbpakReadId(&D_800A8100[arg0], &sp28, &status) == 0) 
-        && (status & OS_GBPAK_RSTB_STATUS) 
-        && (osGbpakCheckConnector(&D_800A8100[arg0], &status) == 0)) {
-        
+    if ((osGbpakInit(&gSIEventMesgQueue, &D_800A8100[arg0], arg0) == 0) &&
+        (osGbpakReadId(&D_800A8100[arg0], &sp28, &status) == 0) && (status & OS_GBPAK_RSTB_STATUS) &&
+        (osGbpakCheckConnector(&D_800A8100[arg0], &status) == 0)) {
+
         func_8000D970(&D_800A8100[arg0]);
         D_800A82A0[arg0] = 1;
     }
-    
+
     return D_800A82A0[arg0] == 1;
 }
 
@@ -235,9 +227,8 @@ s32 func_8000AE28(s32 arg0, void* arg1) {
     s32 sp18;
 
     sp18 = 0;
-    if ((func_8000AEBC(arg0, (uintptr_t)&sp1C, 0, 0x20) == 0) && (bcmp(&sp1C, arg1, 0x20) == 0) 
-        && (osGbpakGetStatus(&D_800A8100[arg0], &status) == 0) 
-        && !(status & OS_GBPAK_RSTB_DETECTION)) {
+    if ((func_8000AEBC(arg0, (uintptr_t)&sp1C, 0, 0x20) == 0) && (bcmp(&sp1C, arg1, 0x20) == 0) &&
+        (osGbpakGetStatus(&D_800A8100[arg0], &status) == 0) && !(status & OS_GBPAK_RSTB_DETECTION)) {
         sp18 = 1;
     }
     return sp18;
@@ -263,7 +254,7 @@ s32 func_8000AF40(s32 arg0, void* arg1, u16 arg2, u16 arg3) {
     return var_v1;
 }
 
-s32 func_8000AFC4(s32 arg0, u8 *arg1, u16 arg2, u16 arg3) {
+s32 func_8000AFC4(s32 arg0, u8* arg1, u16 arg2, u16 arg3) {
     s32 var_v1;
 
     var_v1 = 1;
@@ -273,7 +264,7 @@ s32 func_8000AFC4(s32 arg0, u8 *arg1, u16 arg2, u16 arg3) {
     return var_v1;
 }
 
-s32 func_8000B048(s32 arg0, u8 *arg1, u16 arg2, u16 arg3) {
+s32 func_8000B048(s32 arg0, u8* arg1, u16 arg2, u16 arg3) {
     s32 var_v1;
 
     var_v1 = 1;
@@ -288,21 +279,21 @@ int func_8000B0CC(s32 arg0, s32 arg1) {
     int i;
     int ret;
 
-    for(i = 0; i < 0x20; i++) {
+    for (i = 0; i < 0x20; i++) {
         sp28[i] = 0;
     }
     ret = func_8000B048(arg0, sp28, 0x5000U, 0x20U);
     if (ret) {
         return ret;
     }
-    for(i = 0; i < 0x20; i++) {
+    for (i = 0; i < 0x20; i++) {
         sp28[i] = (arg1 / 32);
     }
     ret = func_8000B048(arg0, sp28, 0x4000U, 0x20U);
     if (ret) {
         return ret;
     }
-    for(i = 0; i < 0x20; i++) {
+    for (i = 0; i < 0x20; i++) {
         sp28[i] = (arg1 % 32);
     }
     return func_8000B048(arg0, sp28, 0x2000U, 0x20U);
@@ -312,7 +303,7 @@ s32 func_8000B1C4(s32 arg0, u8* arg1, s32 arg2, s32 arg3) {
     s32 ret = 1;
     u32 temp_s1 = (arg2 & ~0x1F);
     u32 temp_s4 = ((arg2 + arg3) + 0x1F) & ~0x1F;
-    
+
     s32 temp_s1_2;
     s32 temp_v0_4;
     u32 temp_v0_5;

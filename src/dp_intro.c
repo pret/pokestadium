@@ -28,11 +28,11 @@ struct UnkStruct80083CA0_2 {
     OSThread thread;
     char filler1B0[0x18];
     s32 unk1C8;
-    u8 filler1CC[0x9E0-0x1CC];
-    struct UnkArray4 *unk9E0;
-    char filler9E4[0xA2C-0x9E4];
+    u8 filler1CC[0x9E0 - 0x1CC];
+    struct UnkArray4* unk9E0;
+    char filler9E4[0xA2C - 0x9E4];
     s32 unkA2C;
-    char fillerA30[0xA88-0xA30];
+    char fillerA30[0xA88 - 0xA30];
     u16 unkA88;
     u8 unkA8A;
     u8 unkA8B;
@@ -82,7 +82,7 @@ extern s32 osTvType;
 extern char D_80068B74[];
 extern f32 D_8007AF10;
 
-extern OSViMode	D_800796E0[]; // osViModeTable
+extern OSViMode D_800796E0[]; // osViModeTable
 
 extern void func_8000183C(void*);
 
@@ -97,7 +97,7 @@ extern OSMesg D_80084688;
 extern s32 D_80084758;
 
 // .bss?
-extern u64 D_80084760[0x100/sizeof(u64)];
+extern u64 D_80084760[0x100 / sizeof(u64)];
 
 // function prototypes
 void func_80001AD4(u16 arg0);
@@ -106,23 +106,23 @@ void func_80001C1C(struct UnkArray4* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, s
 void func_80001380(struct UnkStruct80001380* arg0) {
     arg0->task.t.type = 1;
     arg0->task.t.flags = 0;
-    arg0->task.t.ucode_boot       = D_80084760;
-    arg0->task.t.ucode_boot_size  = 0x100;
-    arg0->task.t.ucode            = F3DEX2_bin;
-    arg0->task.t.ucode_data       = F3DEX2_data_bin;
-    arg0->task.t.ucode_size       = 0x1000;
-    arg0->task.t.ucode_data_size  = 0x800;
-    arg0->task.t.dram_stack       = (void *)ALIGN16((uintptr_t)D_80084860);
-    arg0->task.t.dram_stack_size  = 0x400;
-    arg0->task.t.yield_data_ptr   = (void *)ALIGN16((uintptr_t)D_80084C68);
-    arg0->task.t.yield_data_size  = 0xC00;
-    arg0->task.t.output_buff      = (D_80085870);
-    arg0->task.t.output_buff_size = (D_80085870 + (0x20000/sizeof(u64)));
+    arg0->task.t.ucode_boot = D_80084760;
+    arg0->task.t.ucode_boot_size = 0x100;
+    arg0->task.t.ucode = F3DEX2_bin;
+    arg0->task.t.ucode_data = F3DEX2_data_bin;
+    arg0->task.t.ucode_size = 0x1000;
+    arg0->task.t.ucode_data_size = 0x800;
+    arg0->task.t.dram_stack = (void*)ALIGN16((uintptr_t)D_80084860);
+    arg0->task.t.dram_stack_size = 0x400;
+    arg0->task.t.yield_data_ptr = (void*)ALIGN16((uintptr_t)D_80084C68);
+    arg0->task.t.yield_data_size = 0xC00;
+    arg0->task.t.output_buff = (D_80085870);
+    arg0->task.t.output_buff_size = (D_80085870 + (0x20000 / sizeof(u64)));
     osCreateMesgQueue(&arg0->queue, &arg0->mesg, 1);
 }
 
 void func_80001444(struct UnkStruct80001380* arg0, struct UnkArray4* arg1, s32 arg2) {
-    arg0->task.t.data_ptr  = (void *)(uintptr_t)arg1->unk4;
+    arg0->task.t.data_ptr = (void*)(uintptr_t)arg1->unk4;
     arg0->task.t.data_size = arg1->unk8;
     func_800053B4(arg0, arg2);
 }
@@ -135,7 +135,7 @@ void func_80001474(s8 arg0, s8 arg1) {
     } else {
         var_v0 = (arg0 * 2) + arg1 + 4;
     }
-    
+
     osViSetMode(&D_800796E0[(s32)D_80068B74[var_v0]]);
     osViSetSpecialFeatures(0x40U);
     osViSetSpecialFeatures(2U);
@@ -172,7 +172,8 @@ void func_800015A8(void) {
     if (D_80083CA0.unkAA0 != 0) {
         func_800049AC(&D_800846C0);
     }
-    if ((D_80083CA0.unkA90 != 0) && (D_80083CA0.unkAB8 != D_80083CA0.unkA98) && (D_80083CA0.unkAAF != D_80083CA0.unkA8F)) {
+    if ((D_80083CA0.unkA90 != 0) && (D_80083CA0.unkAB8 != D_80083CA0.unkA98) &&
+        (D_80083CA0.unkAAF != D_80083CA0.unkA8F)) {
         func_80001444(&D_800846C0, &D_8008472C, 1);
         sp20 = 1;
     }
@@ -188,22 +189,22 @@ void func_800015A8(void) {
         } while (D_80083CA0.unk1C8 > 0);
     }
     if (D_80083CA0.unkAA8 != NULL) {
-        osViSwapBuffer((void *)(uintptr_t)D_80083CA0.unkAA8->unk8);
+        osViSwapBuffer((void*)(uintptr_t)D_80083CA0.unkAA8->unk8);
         osViRepeatLine(0);
         if ((D_80083CA0.unkA9D != D_80083CA0.unkAAD) || (D_80083CA0.unkA9E != D_80083CA0.unkAAE)) {
-            func_80001474((s8) D_80083CA0.unkA9D, (s8) D_80083CA0.unkA9E);
+            func_80001474((s8)D_80083CA0.unkA9D, (s8)D_80083CA0.unkA9E);
         }
         if (D_80068B70 != 0) {
             osViBlack(1U);
         } else {
             osViBlack(0U);
         }
-        crash_screen_set_draw_info((void *)(uintptr_t)D_80083CA0.unkAA8->unk8, *(u16 *)&D_80083CA0.unkAA8->unk4, 0x10);
+        crash_screen_set_draw_info((void*)(uintptr_t)D_80083CA0.unkAA8->unk8, *(u16*)&D_80083CA0.unkAA8->unk4, 0x10);
     } else {
         osViRepeatLine(1);
-        osViSwapBuffer((void *)(uintptr_t)D_80083CA0.unk9E0->unk8);
+        osViSwapBuffer((void*)(uintptr_t)D_80083CA0.unk9E0->unk8);
         if ((D_80083CA0.unkA9D != D_80083CA0.unkAAD) || (D_80083CA0.unkA9E != D_80083CA0.unkAAE)) {
-            func_80001474((s8) D_80083CA0.unkA9D, (s8) D_80083CA0.unkA9E);
+            func_80001474((s8)D_80083CA0.unkA9D, (s8)D_80083CA0.unkA9E);
         }
     }
     if ((sp20 == 0) && (D_80083CA0.unkA90 != 0)) {
@@ -225,14 +226,14 @@ void func_800017E4(void) {
     func_80004CF4(&D_80083CA0);
 }
 
-void func_8000183C(UNUSED void *arg) {
+void func_8000183C(UNUSED void* arg) {
     __osSetFpcCsr(0x01000C01);
     func_80001C1C(&D_8008474C, 0, 1, 2, 0xFF, 0, 0, 0);
     func_80001C1C(&D_8008473C, 0, 1, 2, 0xFF, 0, 0, 0);
     func_80004CC0(&D_80083CA0.thread, 0, 4);
     func_80005328(&D_80083CA0);
     func_80001380(&D_800846C0);
-    while(1) {
+    while (1) {
         void* sp4C;
         if (D_800A62E0.unkA38 > 0) {
             func_800017E4();
@@ -246,7 +247,7 @@ void func_8000183C(UNUSED void *arg) {
         profiler_log_thread5_time(UNK_EVENT_2);
         func_8000152C(sp4C);
         func_800015A8();
-        osSendMesg(&D_800846A4, (void* )0x444F4E45, 0);
+        osSendMesg(&D_800846A4, (void*)0x444F4E45, 0);
     }
 }
 
@@ -255,7 +256,9 @@ void func_800019C8(void) {
 
     if ((temp_v0 != 1) && (temp_v0 != 2)) {
         osViBlack(1U);
-        while(1);
+        while (1) {
+            ;
+        }
     }
     osCreateThread(&D_80083CA0.thread, 5, func_8000183C, NULL, &D_80084680, 0x28);
     osStartThread(&D_80083CA0.thread);
@@ -270,26 +273,27 @@ void func_800019C8(void) {
 
 void func_80001AD4(u16 arg0) {
     s32 i = 0x280;
-    u16 *arr = (void *)(uintptr_t)D_80083CA0.unk9E0->unk8;
+    u16* arr = (void*)(uintptr_t)D_80083CA0.unk9E0->unk8;
 
-    while(i --> 0) {
+    while (i-- > 0) {
         *(arr)++ = arg0;
     }
 
-    osWritebackDCache((void *)(uintptr_t)D_80083CA0.unk9E0->unk8, 0x500);
+    osWritebackDCache((void*)(uintptr_t)D_80083CA0.unk9E0->unk8, 0x500);
 }
 
 u16 func_80001B2C(void) {
     // YIKES. What is this typing?!?
-    u16 *ptr = (u16*)(uintptr_t)((u32 *)(uintptr_t)D_80084680[0])[2];
+    u16* ptr = (u16*)(uintptr_t)((u32*)(uintptr_t)D_80084680[0])[2];
     return *ptr;
 }
 
 s32 func_80001B40(void) {
     s32 result = 0;
 
-    if (osViGetCurrentFramebuffer() == ((void **)(uintptr_t)D_80084680[0])[2]) 
+    if (osViGetCurrentFramebuffer() == ((void**)(uintptr_t)D_80084680[0])[2]) {
         result = 1;
+    }
 
     return result;
 }
@@ -303,9 +307,9 @@ void func_80001BA8(void* arg0) {
 }
 
 void func_80001BD4(s32 arg0) {
-    while(arg0 --> 0) {
+    while (arg0-- > 0) {
         func_80001BA8(0);
-        func_80001B7C();        
+        func_80001B7C();
     }
 }
 

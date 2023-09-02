@@ -25,7 +25,7 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph);
 char *crash_screen_copy_to_buf(char *buffer, const char *data, size_t size);
 void crash_screen_printf(s32 x, s32 y, const char *fmt, ...);
 void crash_screen_print_fpr(s32 x, s32 y, s32 regNum, void *addr);
-void crash_screen_print_fpcsr(u32 value);
+void crash_screen_print_fpcsr(u32 fpcsr);
 void crash_screen_draw(OSThread* faultedThread);
 OSThread* crash_screen_get_faulted_thread(void);
 void crash_screen_thread_entry(void* unused);

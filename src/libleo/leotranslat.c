@@ -11,7 +11,6 @@ void leoTranslate(void) {
     u8 flag; // boolean
     if (LEOcur_command->data.readwrite.lba >= NUM_LBAS) {
 
-
         LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
@@ -28,8 +27,9 @@ void leoTranslate(void) {
             if (flag || (LEOVZONE_TBL[LEOdisk_type][vzone] == lba)) {
                 vzone = leoLba_to_vzone(lba);
                 zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone];
-                if (zone >= 8) 
+                if (zone >= 8) {
                     zone -= 7;
+                }
                 byte_p_blk = LEOBYTE_TBL2[zone];
             }
             if (calc_bytes < byte_p_blk) {
@@ -55,8 +55,9 @@ void leoTranslate(void) {
             if (flag || (LEOVZONE_TBL[LEOdisk_type][vzone] == lba)) {
                 vzone = leoLba_to_vzone(lba);
                 zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone];
-                if (zone >= 8)
+                if (zone >= 8) {
                     zone -= 7;
+                }
                 byte_p_blk = LEOBYTE_TBL2[zone];
             }
             calc_bytes += byte_p_blk;

@@ -1,6 +1,7 @@
 #include <ultra64.h>
 #include "memmap.h"
 #include "memory.h"
+#include "util.h"
 
 /**
  * Based on the context of this variable's usage, it appears to be intended to
@@ -19,7 +20,7 @@ s32 func_80007A58(void);
 /**
  * Convert any valid address to its virtual (KSEG0) counterpart.
  */
-uintptr_t convert_addr_to_virt_addr(uintptr_t addr) {
+uintptr_t Util_ConvertAddrToVirtAddr(uintptr_t addr) {
     uintptr_t retaddr = NULL; // any invalid cases are treated as NULL return.
 
     // convert physical (in installed memory range) to virtual.
@@ -43,14 +44,17 @@ uintptr_t convert_addr_to_virt_addr(uintptr_t addr) {
 /**
  * Copy memory from one address to the other.
  */
-void HAL_Memcpy(u32* dest, u32* src, int size) {
+void Util_Memcpy(u32* dest, u32* src, int size) {
     while (size-- > 0) {
         *(dest++) = *(src++);
     }
 }
 
-// init_main_pools ?
-void func_80002F58(void) {
+/**
+ * Initialize the global memory pools and set the main pool after the
+ * global pool.
+ */
+void Util_InitMainPools(void) {
     /**
      * wat? mem sizes are only ever 0x400000 or 0x800000. This check makes no sense
      * in normal contexts. However, since osGetMemSize checks each MB at a time, if
@@ -68,17 +72,25 @@ void func_80002F58(void) {
     gMainPool = mem_pool_try_init(0x10000, 0);
 }
 
-// main_malloc ?
-void* func_80002FDC(s32 size) {
+/**
+ * Allocate memory from the main pool.
+ */
+void* Util_Malloc(s32 size) {
     return mem_pool_alloc(gMainPool, size);
 }
 
-// main_free ?
-void func_80003004(void* arg0) {
-    mem_pool_free(gMainPool, arg0);
+/**
+ * Free a pointer being used in the main pool.
+ */
+void Util_Free(void* ptr) {
+    mem_pool_free(gMainPool, ptr);
 }
 
-void HAL_DrawRect(Gfx** dlist, s32 ulx, s32 lrx, u16 color) {
+/**
+ * Draws a profiler rectangle with given coordinates. Solely used by the next function
+ * which facilitates the tacked on memory profiler.
+ */
+void Util_DrawRect(Gfx** dlist, s32 ulx, s32 lrx, u16 color) {
     s32 uly = 15;
     s32 lry = 17;
     Gfx* gfx = *dlist;
@@ -97,9 +109,11 @@ void HAL_DrawRect(Gfx** dlist, s32 ulx, s32 lrx, u16 color) {
 }
 
 /**
- * Render the memory profiler bar and print the MEM display.
+ * Render the memory profiler bar and print the MEM display. For some reason, this
+ * is not within profiler.c itself but added in this "util" file. This seems to be
+ * tacked onto the profiler by HAL instead of EAD.
  */
-void profiler_draw_mem_display(Gfx** dlist) {
+void Util_DrawMemProfiler(Gfx** dlist) {
     struct MainPool* pool = main_pool_get_pool(); // get pool pointer
     /**
      * Get the available memory offset by gExpansionRAMStart variable. This variable is weird; it
@@ -122,10 +136,10 @@ void profiler_draw_mem_display(Gfx** dlist) {
         s32 endX = ((u32)(K0_TO_PHYS(pool->end) - gExpansionRAMStart) >> 15) + baseX;
 
         // draw the rects.
-        HAL_DrawRect(dlist, baseX, startX, GPACK_RGBA5551(248, 120, 40, 1));  // orange
-        HAL_DrawRect(dlist, startX, headLX, GPACK_RGBA5551(248, 248, 40, 1)); // yellow
-        HAL_DrawRect(dlist, headLX, headRX, GPACK_RGBA5551(40, 80, 248, 1));  // blue
-        HAL_DrawRect(dlist, headRX, endX, GPACK_RGBA5551(248, 248, 40, 1));   // yellow
+        Util_DrawRect(dlist, baseX, startX, GPACK_RGBA5551(248, 120, 40, 1));  // orange
+        Util_DrawRect(dlist, startX, headLX, GPACK_RGBA5551(248, 248, 40, 1)); // yellow
+        Util_DrawRect(dlist, headLX, headRX, GPACK_RGBA5551(40, 80, 248, 1));  // blue
+        Util_DrawRect(dlist, headRX, endX, GPACK_RGBA5551(248, 248, 40, 1));   // yellow
 
         // how many bytes and kilobytes are available?
         HAL_Printf(baseX, 20, "MEM: +%XH (+%dK)", available, available / 1024);
@@ -139,10 +153,10 @@ void profiler_draw_mem_display(Gfx** dlist) {
 
         // draw the rects. if we are negative in the memory, we are using red for the backwards
         // allocations to indicate too much memory is being used.
-        HAL_DrawRect(dlist, baseX, startX, GPACK_RGBA5551(248, 120, 40, 1));  // orange
-        HAL_DrawRect(dlist, startX, headRX, GPACK_RGBA5551(248, 248, 40, 1)); // yellow
-        HAL_DrawRect(dlist, headRX, headLX, GPACK_RGBA5551(248, 40, 40, 1));  // red
-        HAL_DrawRect(dlist, headLX, endX, GPACK_RGBA5551(248, 248, 40, 1));   // yellow
+        Util_DrawRect(dlist, baseX, startX, GPACK_RGBA5551(248, 120, 40, 1));  // orange
+        Util_DrawRect(dlist, startX, headRX, GPACK_RGBA5551(248, 248, 40, 1)); // yellow
+        Util_DrawRect(dlist, headRX, headLX, GPACK_RGBA5551(248, 40, 40, 1));  // red
+        Util_DrawRect(dlist, headLX, endX, GPACK_RGBA5551(248, 248, 40, 1));   // yellow
 
         // how many bytes and kilobytes are available?
         HAL_Printf(baseX, 20, "MEM: -%XH (-%dK)", -available, -available / 1024);
@@ -152,7 +166,7 @@ void profiler_draw_mem_display(Gfx** dlist) {
 /**
  * Clear memory address area.
  */
-void HAL_Memclear(u64* dest, u32 size) {
+void Util_Memclear(u64* dest, u32 size) {
     while (size-- > 0) {
         *(dest++) = -1;
     }
@@ -164,8 +178,7 @@ void HAL_Memclear(u64* dest, u32 size) {
  * the code for such a test is not present in this ROM, so we can only guess this function's
  * intended usage.
  */
-// check_stub_mem_area ?
-s32 func_80003348(u64* ptr) {
+s32 Util_CheckStubMemArea(u64* ptr) {
     s32 ret = 0;
 
     while (*(ptr++) == 0x8040000080400000) {
