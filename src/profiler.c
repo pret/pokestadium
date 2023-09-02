@@ -2,7 +2,7 @@
 #include "profiler.h"
 
 extern OSTime D_800A6CE8;
-extern Gfx *gDisplayListHead;
+extern Gfx* gDisplayListHead;
 
 struct Profiler gProfiler;
 
@@ -14,7 +14,7 @@ struct Profiler gProfiler;
  *
  * TODO: Is there any way to derive this value correctly?
  */
-#define UNK_FPS_60_APPROX_VALUE  770296
+#define UNK_FPS_60_APPROX_VALUE 770296
 
 // log the current osTime to the appropriate idx for current thread5 processes.
 void profiler_log_thread5_time(enum ProfilerGameEvent eventID) {
@@ -38,10 +38,10 @@ void profiler_log_thread5_time(enum ProfilerGameEvent eventID) {
 
 // log the audio system before and after osTimes in pairs to the soundTimes array.
 void profiler_log_thread4_time(void) {
-    struct ProfilerFrameData *profiler = &gProfiler.profiler_data[gProfiler.frameIdx1];
+    struct ProfilerFrameData* profiler = &gProfiler.profiler_data[gProfiler.frameIdx1];
 
-    if(profiler->numSoundTimes < ARRAY_COUNT(profiler->soundTimes)) {
-       profiler->soundTimes[profiler->numSoundTimes++] = osGetTime();
+    if (profiler->numSoundTimes < ARRAY_COUNT(profiler->soundTimes)) {
+        profiler->soundTimes[profiler->numSoundTimes++] = osGetTime();
     }
 }
 
@@ -60,7 +60,7 @@ void profiler_log_gfx_time(enum ProfilerGfxEvent eventID) {
 
 // log the times between vblank started and ended.
 void profiler_log_vblank_time(void) {
-    struct ProfilerFrameData *profiler = &gProfiler.profiler_data[gProfiler.frameIdx2];
+    struct ProfilerFrameData* profiler = &gProfiler.profiler_data[gProfiler.frameIdx2];
 
     if (profiler->numVblankTimes < ARRAY_COUNT(profiler->vblankTimes)) {
         profiler->vblankTimes[profiler->numVblankTimes++] = osGetTime();
@@ -104,7 +104,7 @@ void draw_profiler_bar_cpu(OSTime clockBase, OSTime clockStart, OSTime clockEnd,
     // convert the cycles to microseconds, but multiply by 3 before converting them
     // to nanoseconds. So why not just use OS_CYCLES_TO_NSEC?
     rectX1 = ((OS_CYCLES_TO_USEC(durationStart)) * 3ULL / 1000ULL) + 30;
-    rectX2 = ((OS_CYCLES_TO_USEC(durationEnd))   * 3ULL / 1000ULL) + 30;
+    rectX2 = ((OS_CYCLES_TO_USEC(durationEnd)) * 3ULL / 1000ULL) + 30;
 
     if (rectX1 > 225) {
         rectX1 = 225;
@@ -131,23 +131,23 @@ void draw_profiler_bar_cpu_keep_max(OSTime start, OSTime end, s16 posY, s16* las
 
     // set the duration, and floor to 0 if the result is below 0.
     if ((duration = end - start) < 0) {
-         duration = 0;
+        duration = 0;
     }
 
     // like earlier, multiply by 3 and convert to nsec by dividing by 1000.
     // why not just use OS_CYCLES_TO_NSEC?
     lrx = (OS_CYCLES_TO_USEC(duration) * 3ULL / 1000ULL) + 30;
-    if(lrx > 225) {
-       lrx = 225;
+    if (lrx > 225) {
+        lrx = 225;
     }
 
     // Keep the maximum lrx seen in the last 16 calls. If a new max is seen, reset
     // the counter to start over and set the new observed maximum.
-    if(++*reset_ctr > 15 || *last_max < lrx) {
+    if (++*reset_ctr > 15 || *last_max < lrx) {
         *reset_ctr = 0;
         *last_max = lrx;
     }
-    
+
     // now that we have a max, build the coordinates to make the rect.
     lrx = *last_max;
     ulx = lrx - 4;
@@ -162,10 +162,10 @@ void draw_profiler_bar_cpu_keep_max(OSTime start, OSTime end, s16 posY, s16* las
 
 void draw_reference_profiler_bars(void) {
     // Draws the reference "max" bars underneath the real thing.
-    draw_profiler_rect(30,   79, 220, GPACK_RGBA5551(40,  80,  255, 1)); // Blue
-    draw_profiler_rect(79,  128, 220, GPACK_RGBA5551(255, 255, 40,  1)); // Yellow
-    draw_profiler_rect(128, 177, 220, GPACK_RGBA5551(255, 120, 40,  1)); // Orange
-    draw_profiler_rect(177, 226, 220, GPACK_RGBA5551(255, 40,  40,  1)); // Red
+    draw_profiler_rect(30, 79, 220, GPACK_RGBA5551(40, 80, 255, 1));    // Blue
+    draw_profiler_rect(79, 128, 220, GPACK_RGBA5551(255, 255, 40, 1));  // Yellow
+    draw_profiler_rect(128, 177, 220, GPACK_RGBA5551(255, 120, 40, 1)); // Orange
+    draw_profiler_rect(177, 226, 220, GPACK_RGBA5551(255, 40, 40, 1));  // Red
 }
 
 /*
@@ -174,22 +174,24 @@ void draw_reference_profiler_bars(void) {
  */
 void draw_profiler_mode_1(void) {
     s32 i;
-    struct ProfilerFrameData *profiler;
-    struct ProfilerFrameData *profiler_2;
+    struct ProfilerFrameData* profiler;
+    struct ProfilerFrameData* profiler_2;
     OSTime clockBase;
 
     // set profiler pointers. first pointer is for game+sound profiler and 2nd is for gfx and vblank.
-    profiler   = &gProfiler.profiler_data[(gProfiler.frameIdx1 == 0) ? 2 : gProfiler.frameIdx1 - 1];
+    profiler = &gProfiler.profiler_data[(gProfiler.frameIdx1 == 0) ? 2 : gProfiler.frameIdx1 - 1];
     profiler_2 = &gProfiler.profiler_data[(gProfiler.frameIdx2 == 0) ? 2 : gProfiler.frameIdx2 - 1];
 
     // calculate the clockBase.
     clockBase = profiler->gameTimes[0] - UNK_FPS_60_APPROX_VALUE;
 
     // (yellow)
-    draw_profiler_bar_cpu(clockBase, profiler->gameTimes[0], profiler->gameTimes[1], 212, GPACK_RGBA5551(255, 255, 40, 1));
-    
+    draw_profiler_bar_cpu(clockBase, profiler->gameTimes[0], profiler->gameTimes[1], 212,
+                          GPACK_RGBA5551(255, 255, 40, 1));
+
     // (orange)
-    draw_profiler_bar_cpu(clockBase, profiler->gameTimes[1], profiler->gameTimes[2], 212, GPACK_RGBA5551(255, 120, 40, 1));
+    draw_profiler_bar_cpu(clockBase, profiler->gameTimes[1], profiler->gameTimes[2], 212,
+                          GPACK_RGBA5551(255, 120, 40, 1));
 
     // we need to get the amount of finished numSoundTimes pairs, so get rid of the odd bit to get the
     // limit of finished pairs.
@@ -197,22 +199,26 @@ void draw_profiler_mode_1(void) {
 
     // draw the sound update times. (red)
     for (i = 0; i < profiler->numSoundTimes; i += 2) {
-        draw_profiler_bar_cpu(clockBase, profiler->soundTimes[i], profiler->soundTimes[i + 1], 212, GPACK_RGBA5551(255, 40, 40, 1));
+        draw_profiler_bar_cpu(clockBase, profiler->soundTimes[i], profiler->soundTimes[i + 1], 212,
+                              GPACK_RGBA5551(255, 40, 40, 1));
     }
 
     //! RSP and RDP run in parallel, so while they are not absolutely guaranteed to return in order,
     //  it is theoretically possible they might not. In all cases, the RDP should finish later than RSP.
     //  Thus, this is not really a bug in practice, but should still be noted that the C doesn't check
     //  this.
-    draw_profiler_bar_cpu(clockBase, profiler_2->gfxTimes[0], profiler_2->gfxTimes[1], 216, GPACK_RGBA5551(255, 255, 40, 1));
-    draw_profiler_bar_cpu(clockBase, profiler_2->gfxTimes[1], profiler_2->gfxTimes[2], 216, GPACK_RGBA5551(255, 120, 40, 1));
+    draw_profiler_bar_cpu(clockBase, profiler_2->gfxTimes[0], profiler_2->gfxTimes[1], 216,
+                          GPACK_RGBA5551(255, 255, 40, 1));
+    draw_profiler_bar_cpu(clockBase, profiler_2->gfxTimes[1], profiler_2->gfxTimes[2], 216,
+                          GPACK_RGBA5551(255, 120, 40, 1));
 
     // like earlier, toss the odd bit.
     profiler_2->numVblankTimes &= 0xFFFE;
 
     // render the vblank time pairs. (red)
     for (i = 0; i < profiler_2->numVblankTimes; i += 2) {
-        draw_profiler_bar_cpu(clockBase, profiler_2->vblankTimes[i], profiler_2->vblankTimes[i + 1], 216, GPACK_RGBA5551(255, 40, 40, 1));
+        draw_profiler_bar_cpu(clockBase, profiler_2->vblankTimes[i], profiler_2->vblankTimes[i + 1], 216,
+                              GPACK_RGBA5551(255, 40, 40, 1));
     }
 
     draw_reference_profiler_bars();
@@ -223,21 +229,23 @@ void draw_profiler_mode_1(void) {
  * easier to see which processes take the longest.
  */
 void draw_profiler_mode_0(void) {
-    s32 i;                 // set profiler pointers. first pointer is for game+sound profiler and 2nd is for gfx and vblank.
-    struct ProfilerFrameData *profiler   = &gProfiler.profiler_data[(gProfiler.frameIdx1 == 0) ? 2 : gProfiler.frameIdx1 - 1];
-    OSTime clockStart = profiler->gameTimes[0] <= profiler->soundTimes[0] ? profiler->gameTimes[0]
-                                                                       : profiler->soundTimes[0];
+    s32 i; // set profiler pointers. first pointer is for game+sound profiler and 2nd is for gfx and vblank.
+    struct ProfilerFrameData* profiler =
+        &gProfiler.profiler_data[(gProfiler.frameIdx1 == 0) ? 2 : gProfiler.frameIdx1 - 1];
+    OSTime clockStart =
+        profiler->gameTimes[0] <= profiler->soundTimes[0] ? profiler->gameTimes[0] : profiler->soundTimes[0];
     OSTime gameDuration = profiler->gameTimes[1] - clockStart;
     OSTime renderDuration = profiler->gameTimes[2] - profiler->gameTimes[1];
     OSTime taskStart = 0;
-    struct ProfilerFrameData *profiler_2 = &gProfiler.profiler_data[(gProfiler.frameIdx2 == 0) ? 2 : gProfiler.frameIdx2 - 1];
+    struct ProfilerFrameData* profiler_2 =
+        &gProfiler.profiler_data[(gProfiler.frameIdx2 == 0) ? 2 : gProfiler.frameIdx2 - 1];
     OSTime rspDuration = profiler_2->gfxTimes[1] - profiler_2->gfxTimes[0];
     OSTime rdpDuration = profiler_2->gfxTimes[2] - profiler_2->gfxTimes[0];
     OSTime vblank = 0;
-    static s16 sRenderLastMax  = 0;
+    static s16 sRenderLastMax = 0;
     static s16 sRenderResetCtr = 0;
-    static s16 sRDPLastMax     = 0;
-    static s16 sRDPResetCtr    = 0;
+    static s16 sRDPLastMax = 0;
+    static s16 sRDPResetCtr = 0;
 
     // like above functions, toss the odd bit.
     profiler->numSoundTimes &= 0xFFFE;
@@ -270,13 +278,11 @@ void draw_profiler_mode_0(void) {
 
     // draw game execution duration. (yellow)
     clockStart += taskStart;
-    draw_profiler_bar_cpu(0, clockStart, clockStart + gameDuration, 212,
-                      GPACK_RGBA5551(255, 255, 40, 1));
+    draw_profiler_bar_cpu(0, clockStart, clockStart + gameDuration, 212, GPACK_RGBA5551(255, 255, 40, 1));
 
     // draw render duration. (orange)
     clockStart += gameDuration;
-    draw_profiler_bar_cpu(0, clockStart, clockStart + renderDuration, 212,
-                      GPACK_RGBA5551(255, 120, 40, 1));
+    draw_profiler_bar_cpu(0, clockStart, clockStart + renderDuration, 212, GPACK_RGBA5551(255, 120, 40, 1));
 
     draw_profiler_bar_cpu_keep_max(0, clockStart + renderDuration, 212, &sRenderLastMax, &sRenderResetCtr);
 
@@ -305,14 +311,14 @@ void draw_profiler(s32 profiler_mode) {
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
     gDPSetRenderMode(gDisplayListHead++, G_RM_NOOP, G_RM_NOOP2);
 
-    ulx     = 30;
-    uly     = 211;
+    ulx = 30;
+    uly = 211;
     ulx_off = 196;
     uly_off = 9;
 
     if (func_80007A58() != 0) {
-        ulx     <<= 1;
-        uly     <<= 1;
+        ulx <<= 1;
+        uly <<= 1;
         ulx_off <<= 1;
         uly_off <<= 1;
     }
@@ -334,12 +340,16 @@ void draw_profiler(s32 profiler_mode) {
  * used to measure for undesired lag (values above 1.0) when printed to the screen.
  */
 void print_profiler_metrics(void) {
-    struct ProfilerFrameData *profiler   = &gProfiler.profiler_data[(gProfiler.frameIdx1 == 0) ? 2 : gProfiler.frameIdx1 - 1];
-    struct ProfilerFrameData *profiler_2 = &gProfiler.profiler_data[(gProfiler.frameIdx2 == 0) ? 2 : gProfiler.frameIdx2 - 1];
+    struct ProfilerFrameData* profiler =
+        &gProfiler.profiler_data[(gProfiler.frameIdx1 == 0) ? 2 : gProfiler.frameIdx1 - 1];
+    struct ProfilerFrameData* profiler_2 =
+        &gProfiler.profiler_data[(gProfiler.frameIdx2 == 0) ? 2 : gProfiler.frameIdx2 - 1];
     s32 pad[3]; // i dont understand. but ok.
 
-    HAL_Printf(240, 210, "CPU:%5.3f", ((profiler->gameTimes[2]  - profiler->gameTimes[0]))  * (1/(float)UNK_FPS_60_APPROX_VALUE));
-    HAL_Printf(240, 220, "RCP:%5.3f", ((profiler_2->gfxTimes[2] - profiler_2->gfxTimes[0])) * (1/(float)UNK_FPS_60_APPROX_VALUE));
+    HAL_Printf(240, 210, "CPU:%5.3f",
+               ((profiler->gameTimes[2] - profiler->gameTimes[0])) * (1 / (float)UNK_FPS_60_APPROX_VALUE));
+    HAL_Printf(240, 220, "RCP:%5.3f",
+               ((profiler_2->gfxTimes[2] - profiler_2->gfxTimes[0])) * (1 / (float)UNK_FPS_60_APPROX_VALUE));
 }
 
 // reset the profiler data to uninitialized 0s.
@@ -355,7 +365,7 @@ u32 set_get_time_diff(enum SetGetTimeDiff state) {
     u32 ret = 0;
     static OSTime sBackupTime = 0ULL;
 
-    switch(state) {
+    switch (state) {
         case SET_TIME:
             sBackupTime = osGetTime();
             ret = 0;

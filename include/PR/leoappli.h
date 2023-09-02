@@ -40,8 +40,8 @@
 /*-----------------------------------*/
 /*   LEO FUNCTION DEFINITIONS        */
 /*-----------------------------------*/
-extern void leoInitialize(OSPri PRI_WRK, OSPri PRI_INT, OSMesg *command_que_buf, u32 cmd_buff_size);
-extern void leoCommand(void *CDB);
+extern void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_buff_size);
+extern void leoCommand(void* cmd_blk_addr);
 extern void LeoReset(void);
 extern s32  LeoResetClear(void);
 

@@ -35,8 +35,7 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_
     osCreateMesgQueue(&LEOpost_que, LEOpost_que_buf, ARRAY_COUNT(LEOpost_que_buf));
     osCreateThread(&LEOcommandThread, 1, leomain, NULL, LEOcommandThreadStack, compri);
     osStartThread(&LEOcommandThread);
-    osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL,
-                   LEOinterruptThreadStack, intpri);
+    osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL, LEOinterruptThreadStack, intpri);
     osStartThread(&LEOinterruptThread);
     osSetEventMesg(OS_EVENT_CART, &LEOevent_que, (OSMesg)0x30000);
     osSendMesg(&LEOblock_que, NULL, 0);

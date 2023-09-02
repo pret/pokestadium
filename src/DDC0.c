@@ -29,7 +29,7 @@ void func_800373D8(void);
 void func_8004FD44(void);
 void func_8004B1CC();
 void func_8004B9C4();
-void func_80037340(void *);
+void func_80037340(void*);
 void func_8004FCD8(s32);
 void func_8003D4A0(s32);
 void func_8004AF24(s32);
@@ -37,19 +37,15 @@ void func_8004FD64(s32);
 void func_8004AE90(s32, s32);
 
 void func_8000D1C0(void) {
-
 }
 
 void func_8000D1C8(void) {
-
 }
 
 void func_8000D1D0(void) {
-
 }
 
 void func_8000D1D8(void) {
-
 }
 
 void func_8000D1E0(void) {
@@ -82,7 +78,7 @@ void func_8000D278(void) {
 
 s32 func_8000D2B4(s32 arg0) {
     s32 retvar = 0;
-    
+
     if (arg0 != 0) {
         func_8004FCD8(2);
     }
@@ -111,7 +107,7 @@ void func_8000D380(void) {
     D_800A83A0 = 1;
 }
 
-void func_8000D3A8(void *unused) {
+void func_8000D3A8(void* unused) {
     __osSetFpcCsr(0x01000C01);
     func_80004CC0(&D_800A8480, 1, 1);
     func_80005328(&D_800A8480);
@@ -120,14 +116,14 @@ void func_8000D3A8(void *unused) {
     D_800A8478 = 0;
     osCreateMesgQueue(&D_800A83A8[0].queue, &D_800A83A8[0].mesg, 1);
     osCreateMesgQueue(&D_800A83A8[1].queue, &D_800A83A8[1].mesg, 1);
-    osSendMesg(&D_800A83A8[0].queue, (void* )0x444F4E45, 0);
-    osSendMesg(&D_800A83A8[1].queue, (void* )0x444F4E45, 0);
+    osSendMesg(&D_800A83A8[0].queue, (void*)0x444F4E45, 0);
+    osSendMesg(&D_800A83A8[1].queue, (void*)0x444F4E45, 0);
     func_800373D8();
     func_8004AF24(0);
     func_8004AE90(3, 4);
 
     // thread loop
-    while(1) {
+    while (1) {
         func_80004CF4(&D_800A8480);
         profiler_log_thread4_time();
         if ((D_800A83A0 != 0) && (D_800A62E0.unkA38 < 0x15)) {

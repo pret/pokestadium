@@ -2,7 +2,7 @@
 #include "libleo/internal.h"
 
 extern vu16 LEOrw_flags;
-extern u8 LEOC2_Syndrome[2][0xE8*4];
+extern u8 LEOC2_Syndrome[2][0xE8 * 4];
 extern block_param_form LEOc2_param;
 
 u32 read_write_track();
@@ -62,11 +62,11 @@ u32 read_write_track(void) {
     u16 bnum;
     u8* temp;
     u32 c2datasize;
-    
+
     block_param.bytes = LEOtgt_param.sec_bytes;
     block_param.blkbytes = LEOtgt_param.blk_bytes;
     if (LEOrw_flags & 0x2000) {
-        //Sector Mode
+        // Sector Mode
         block_param.blkbytes = block_param.bytes;
     }
     block_param.pntr = LEOwrite_pointer;
@@ -83,22 +83,23 @@ u32 read_write_track(void) {
         LEOPiInfo->transferInfo.block[0].dramAddr = block_param.pntr;
         LEOPiInfo->transferInfo.block[0].C2Addr = &LEOC2_Syndrome[0];
         if (LEOrw_flags & 0x2000) {
-            //Sector Mode
+            // Sector Mode
             LEOtgt_param.rdwr_blocks = 1;
             LEOPiInfo->transferInfo.transferMode = 3;
         } else if (LEOtgt_param.rdwr_blocks == 2) {
             LEOPiInfo->transferInfo.transferMode = 2;
             LEOPiInfo->transferInfo.block[1] = LEOPiInfo->transferInfo.block[0];
             LEOPiInfo->transferInfo.block[1].C2Addr = &LEOC2_Syndrome[1];
-            LEOPiInfo->transferInfo.block[1].dramAddr = ((u8*)LEOPiInfo->transferInfo.block[1].dramAddr + block_param.blkbytes);
+            LEOPiInfo->transferInfo.block[1].dramAddr =
+                ((u8*)LEOPiInfo->transferInfo.block[1].dramAddr + block_param.blkbytes);
         }
         message = leoChk_mecha_int();
         if (message == 0) {
             if (LEOrw_flags & 0x8000) {
-                //Write Mode
+                // Write Mode
                 leoSet_mseq(1);
             } else {
-                //Read Mode
+                // Read Mode
                 leoSet_mseq(0);
             }
             leosetup_BM();
@@ -146,7 +147,7 @@ u32 read_write_track(void) {
                                     goto track_end;
                                 }
                             }
-                            
+
                             if (block == 0) {
                                 temp = LEOC2_Syndrome[0];
                             } else {
@@ -163,11 +164,12 @@ u32 read_write_track(void) {
                             osRecvMesg(&LEOc2ctrl_que, NULL, 1);
                             LEOrw_flags |= 0x4000;
                             LEOc2_param = block_param;
-                            osSendMesg(&LEOcontrol_que, (void* )0x80000, 1);
+                            osSendMesg(&LEOcontrol_que, (void*)0x80000, 1);
                         }
                     } else {
                         if (LEOtgt_param.rdwr_blocks == 1) {
-                            if ((*(u32*)&LEOC2_Syndrome[block][0x00] | *(u32*)&LEOC2_Syndrome[block][0x04] | *(u32*)&LEOC2_Syndrome[block][0x08] | *(u32*)&LEOC2_Syndrome[block][0x0C]) != 0) {
+                            if ((*(u32*)&LEOC2_Syndrome[block][0x00] | *(u32*)&LEOC2_Syndrome[block][0x04] |
+                                 *(u32*)&LEOC2_Syndrome[block][0x08] | *(u32*)&LEOC2_Syndrome[block][0x0C]) != 0) {
                                 message = 0x17;
                                 goto track_end;
                             }
@@ -181,11 +183,11 @@ u32 read_write_track(void) {
             }
             return 0;
         }
-track_end:
+    track_end:
         if (message == 0x16) {
             message = leochk_err_reg();
         }
-do_retry:
+    do_retry:
         if (leoChk_err_retry(message) || (LEOrw_flags & 0x1000) || retry_cntr++ == 0x40) {
             break;
         }

@@ -23,17 +23,17 @@ void Cont_InitControllers(void) {
     int i;
 
     // clear each gControllers member.
-    for(i = 0; i < MAXCONTROLLERS; i++) {
+    for (i = 0; i < MAXCONTROLLERS; i++) {
         bzero((void*)&gControllers[i], sizeof(struct Controller));
     }
 
     // Initialize each connected controller.
-    for(i = 0; i < MAXCONTROLLERS; i++) {
+    for (i = 0; i < MAXCONTROLLERS; i++) {
         // If the bit is set in this bitfield for each iteration, it means
         // the controller is connected. Set the ID and pointers respectively.
-        if(gControllerBits & (1 << i)) {
-            gControllers[i].contId = (i+1); // indexed by 1. (cont 1, cont 2, etc)
-            gControllers[i].statusData     = &gControllerStatuses[i];
+        if (gControllerBits & (1 << i)) {
+            gControllers[i].contId = (i + 1); // indexed by 1. (cont 1, cont 2, etc)
+            gControllers[i].statusData = &gControllerStatuses[i];
             gControllers[i].controllerData = &gControllerPads[i];
         }
     }
@@ -43,7 +43,7 @@ void Cont_InitControllers(void) {
  * Take the updated controller struct and calculate
  * the new x, y, and distance floats.
  */
-void Cont_AdjustAnalogStick(struct Controller *controller) {
+void Cont_AdjustAnalogStick(struct Controller* controller) {
     // reset the controller's x and y floats.
     controller->stickX = 0.0f;
     controller->stickY = 0.0f;
@@ -66,8 +66,7 @@ void Cont_AdjustAnalogStick(struct Controller *controller) {
     }
 
     // calculate f32 magnitude from the center by vector length.
-    controller->stickMag =
-        sqrtf(controller->stickX * controller->stickX + controller->stickY * controller->stickY);
+    controller->stickMag = sqrtf(controller->stickX * controller->stickX + controller->stickY * controller->stickY);
 
     // magnitude cannot exceed 64.0f: if it does, modify the values appropriately to
     // flatten the values down to the allowed maximum value.
@@ -77,7 +76,6 @@ void Cont_AdjustAnalogStick(struct Controller *controller) {
         controller->stickMag = 64;
     }
 
-    
     if (controller->stickMag > 0.0f) {
         controller->unkE = func_8000A360(-controller->stickY, controller->stickX);
     }
@@ -97,23 +95,22 @@ void Cont_StartReadInputs(void) {
  */
 void Cont_ReadInputs(void) {
     s32 i;
-    struct Controller *controller = &gControllers[0];
+    struct Controller* controller = &gControllers[0];
 
     osRecvMesg(&gSIEventMesgQueue, NULL, OS_MESG_BLOCK);
     osContGetReadData(&gControllerPads[0]);
     Cont_NoBlockEepromQueue();
 
-    for(i = 0; i < 4; i++, controller++) {
+    for (i = 0; i < 4; i++, controller++) {
         // if the contId is not 0, it means the controller is initialized.
-        if(controller->contId != 0) {
+        if (controller->contId != 0) {
             controller->rawStickX = controller->controllerData->stick_x;
             controller->rawStickY = controller->controllerData->stick_y;
-            controller->buttonPressed = controller->controllerData->button
-                                        & (controller->controllerData->button ^ controller->buttonDown);
-            controller->unkA = controller->buttonDown 
-                                        & (controller->controllerData->button ^ controller->buttonDown);
+            controller->buttonPressed =
+                controller->controllerData->button & (controller->controllerData->button ^ controller->buttonDown);
+            controller->unkA = controller->buttonDown & (controller->controllerData->button ^ controller->buttonDown);
             controller->buttonDown = controller->controllerData->button;
-            
+
             Cont_AdjustAnalogStick(controller);
         } else {
             controller->buttonPressed = 0;
@@ -156,7 +153,7 @@ s32 Cont_AttemptReadEeprom(u8* buffer, u32 size, s32 inaddr) {
             // specified by http://n64devkit.square7.ch/n64man/os/osEepromLongRead.htm.
             // Force the value to be a multiple of 8 to adhere to the restrictions.
             s32 address = ALIGN8(inaddr);
-            i --;
+            i--;
             // once the result is 0 (success), exit from the loop since the write was successful.
             result = osEepromLongRead(&gSIEventMesgQueue, count, buffer, address);
         } while (i > 0 && result);
@@ -182,7 +179,7 @@ s32 Cont_AttemptWriteEeprom(u8* buffer, u32 size, s32 inaddr) {
             // specified by http://n64devkit.square7.ch/n64man/os/osEepromLongRead.htm.
             // Force the value to be a multiple of 8 to adhere to the restrictions.
             s32 address = ALIGN8(inaddr);
-            i --;
+            i--;
             // once the result is 0 (success), exit from the loop since the write was successful.
             result = osEepromLongWrite(&gSIEventMesgQueue, count, buffer, address);
         } while (i > 0 && result);

@@ -9,12 +9,6 @@ extern s32 func_8005A990(OSPiHandle *);
 // bcopy.s
 extern void _bcopy(void *, void *, u32);
 
-// 3A80.c
-extern uintptr_t convert_addr_to_virt_addr(uintptr_t addr);
-extern void func_80002F58(void);
-extern void *func_80002FDC(s32);
-extern void func_80003004(void *);
-
 // 3FB0.s
 extern void func_80003B30(void *, s32, s32, s32); // types unknown
 

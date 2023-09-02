@@ -18,7 +18,7 @@ void leoWrite(void) {
 
     start_lba += 0x18;
     if ((start_lba >= 0x10DC) || (start_lba + xfer_blk > 0x10DC)) {
-        invalid_lba:
+    invalid_lba:
         LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;

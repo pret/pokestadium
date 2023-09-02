@@ -4,6 +4,7 @@
 #include "fragments.h"
 #include "memory.h"
 #include "dp_intro.h"
+#include "util.h"
 
 struct UnkInputStruct8000D738 {
     s32 unk0;
@@ -25,8 +26,8 @@ struct UnkStruct800AA664 {
     char padding1B0[0x2030];
 };
 
-extern struct UnkStruct800AA660 *D_800AA660;
-extern struct UnkStruct800AA664 *D_800AA664;
+extern struct UnkStruct800AA660* D_800AA660;
+extern struct UnkStruct800AA664* D_800AA664;
 extern char D_800AA668;
 
 extern u8 D_81200000[];
@@ -40,20 +41,20 @@ void func_81206D9C(void);
 void func_81206E64(void);
 void func_81206F38(void);
 
-void func_80005370(struct UnkStruct800AA660 *);
-void func_80004454(u32, void *, void *);
+void func_80005370(struct UnkStruct800AA660*);
+void func_80004454(u32, void*, void*);
 char func_8000B318(char);
-s32 func_800044F4(void *, void *, s32, s32);
+s32 func_800044F4(void*, void*, s32, s32);
 s32 func_8000484C(s32, s32);
 
 void func_8000D5C0(void* unused) {
-    void (*func)(void *) = convert_addr_to_virt_addr(&func_81206F38);
-    
+    void (*func)(void*) = Util_ConvertAddrToVirtAddr(&func_81206F38);
+
     __osSetFpcCsr(0x01000C01);
     func_80004CC0(D_800AA664, 0, 1);
     func_80005328(D_800AA664);
 
-    while(1) {
+    while (1) {
         func_80004CF4(D_800AA664);
         if (D_800A62E0.unkA38 >= 0x15) {
             continue;
@@ -62,9 +63,9 @@ void func_8000D5C0(void* unused) {
     }
 }
 
-void func_8000D678(void *unused) {
-    void (*func1)(void *func) = convert_addr_to_virt_addr(&func_81206D9C);
-    void (*func2)(void *func) = convert_addr_to_virt_addr(&func_81206E64);
+void func_8000D678(void* unused) {
+    void (*func1)(void* func) = Util_ConvertAddrToVirtAddr(&func_81206D9C);
+    void (*func2)(void* func) = Util_ConvertAddrToVirtAddr(&func_81206E64);
 
     __osSetFpcCsr(0x01000C01);
     func_80004CC0(D_800AA660, 0, 1);
@@ -72,7 +73,7 @@ void func_8000D678(void *unused) {
     func1(D_800AA660);
     osStartThread(D_800AA664);
 
-    while(1) {
+    while (1) {
         func_80004CF4(D_800AA660);
         if (D_800A62E0.unkA38 >= 0x15) {
             continue;
@@ -87,14 +88,15 @@ void func_8000D738(struct UnkInputStruct8000D738* arg0) {
     main_pool_push_state('GBEM');
     D_800AA660 = (void*)main_pool_alloc_node_no_func(0x2210, 0);
     D_800AA664 = (void*)main_pool_alloc_node_no_func(0x21E0, 0);
-    func_80004454(((u32) ((u32) &fragment1_TEXT_START & 0x0FF00000) >> 0x14) - 0x10, &fragment1_ROM_START, &fragment1_ROM_END);
+    func_80004454(((u32)((u32)&fragment1_TEXT_START & 0x0FF00000) >> 0x14) - 0x10, &fragment1_ROM_START,
+                  &fragment1_ROM_END);
     temp_v0 = func_800044F4(&D_3BA190, &D_3CB130, 1, 1);
     D_800AA660->unk21FC = func_8000484C(temp_v0, 0);
     D_800AA660->unk2200 = func_8000484C(temp_v0, 1);
     D_800AA660->unk2204 = *arg0;
     osCreateMesgQueue(&D_800AA660->queue, &D_800AA660->mesg, 1);
-    osCreateThread(&D_800AA664->thread, 10,  func_8000D5C0, NULL, (u32)D_800AA664 + 0x21E0, 0x11);
-    osCreateThread(&D_800AA660->thread, 8,   func_8000D678, NULL, (u32)D_800AA660 + 0x21E0, 0xF);
+    osCreateThread(&D_800AA664->thread, 10, func_8000D5C0, NULL, (u32)D_800AA664 + 0x21E0, 0x11);
+    osCreateThread(&D_800AA660->thread, 8, func_8000D678, NULL, (u32)D_800AA660 + 0x21E0, 0xF);
     D_800AA668 = func_8000B318(0);
     osStartThread(&D_800AA660->thread);
 }
