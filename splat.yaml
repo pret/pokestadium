@@ -43,7 +43,7 @@ segments:
     - [0x5580, asm] # there's a split here according to PAL
     - [0x60A0, asm] # 
     - [0x6430, c, controller] # controller code
-    - [0x6A40, asm] #
+    - [0x6A40, c]
     - [0x6BC0, asm] # 
     - [0x75F0, asm] # stage loader
     - [0x8EC0, c, crash_screen] # crash handler
