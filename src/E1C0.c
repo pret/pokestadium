@@ -86,8 +86,8 @@ void func_8000D738(struct UnkInputStruct8000D738* arg0) {
     s32 temp_v0;
 
     main_pool_push_state('GBEM');
-    D_800AA660 = (void*)main_pool_alloc_node_no_func(0x2210, 0);
-    D_800AA664 = (void*)main_pool_alloc_node_no_func(0x21E0, 0);
+    D_800AA660 = main_pool_alloc(0x2210, 0);
+    D_800AA664 = main_pool_alloc(0x21E0, 0);
     func_80004454(((u32)((u32)&fragment1_TEXT_START & 0x0FF00000) >> 0x14) - 0x10, &fragment1_ROM_START,
                   &fragment1_ROM_END);
     temp_v0 = func_800044F4(&D_3BA190, &D_3CB130, 1, 1);
