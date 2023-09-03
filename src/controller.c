@@ -1,9 +1,7 @@
 #include <ultra64.h>
 #include "controller.h"
 #include "gb_tower.h"
-
-// TODO: Identify/move to header
-extern s16 func_8000A360(float, float);
+#include "math_util.h"
 
 struct Controller gControllers[4];
 OSMesgQueue gSIEventMesgQueue;
@@ -77,7 +75,7 @@ void Cont_AdjustAnalogStick(struct Controller* controller) {
     }
 
     if (controller->stickMag > 0.0f) {
-        controller->unkE = func_8000A360(-controller->stickY, controller->stickX);
+        controller->unkE = MathUtil_Atan2s(-controller->stickY, controller->stickX);
     }
 }
 
