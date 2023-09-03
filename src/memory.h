@@ -48,12 +48,13 @@ struct MemoryPool {
     /* 0x24 */ struct MemoryBlock freeList;
 };
 
+// memory_main.c
 void main_pool_init(void *start, void *end);
-void *main_pool_alloc(u32 size, u32 side);
+void *main_pool_alloc_from_pool(u32 size, u32 side);
 u32 main_pool_free(void *addr, u32 runBlockFunc);
-void *main_pool_alloc_node(u32 size, s32 side, s32 arg, void *func);
-void *main_pool_alloc_node_no_func(u32 size, s32 side);
-u32 main_pool_try_free(struct MainPoolBlock *addr);
+void *main_pool_alloc_with_func(u32 size, s32 side, s32 arg, void *func);
+void *main_pool_alloc(u32 size, s32 side);
+u32 main_pool_try_free(void *addr);
 void *main_pool_realloc(void *addr, size_t size);
 u32 main_pool_get_available(void);
 u32 main_pool_push_state(u32 arg);
@@ -63,7 +64,7 @@ void main_pool_set_func(void *block, s32 arg, void *func);
 size_t main_pool_get_block_dist(struct MainPoolBlock *block);
 struct MainPool *main_pool_get_pool(void);
 
-// 3640.s
+// memory.c
 struct MemoryPool *mem_pool_try_init(u32 size, s32 side);
 struct MainPool* mem_pool_init(struct MainPool *pool, s32 size);
 void *mem_pool_alloc(struct MainPool *node, s32 size);
