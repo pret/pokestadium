@@ -19,13 +19,13 @@ void main_pool_init(void* start, void* end) {
     sMemPool.listHeadL->prev = NULL;
     sMemPool.listHeadL->next = NULL;
     sMemPool.listHeadL->func = NULL;
-    sMemPool.listHeadL->arg = 0;
+    sMemPool.listHeadL->arg = '\0';
 
     sMemPool.listHeadR = sMemPool.end;
     sMemPool.listHeadR->prev = NULL;
     sMemPool.listHeadR->next = NULL;
     sMemPool.listHeadL->func = NULL;
-    sMemPool.listHeadL->arg = 0;
+    sMemPool.listHeadL->arg = '\0';
 
     osCreateMesgQueue(&sMemPool.queue, sMemPool.msgs, ARRAY_COUNT(sMemPool.msgs));
     osSendMesg(&sMemPool.queue, NULL, OS_MESG_NOBLOCK);
@@ -36,30 +36,34 @@ void main_pool_init(void* start, void* end) {
  * specified side of the pool (MEMORY_POOL_LEFT or MEMORY_POOL_RIGHT).
  * If there is not enough space, return NULL.
  */
-void* main_pool_alloc(u32 size, u32 side) {
+void* main_pool_alloc_from_pool(u32 size, u32 side) {
     struct MainPoolBlock* newListHead;
     void* addr = NULL;
 
     size = ALIGN16(size) + sizeof(struct MainPoolBlock);
-    if (size != 0 && sMemPool.available >= size) {
+    
+    // do we have enough space?
+    if (size > 0 && size <= sMemPool.available) {
         if (side == MEMORY_POOL_LEFT) {
+            // reduce available size.
             sMemPool.available -= size;
             newListHead = (void*)((uintptr_t)sMemPool.listHeadL + size);
             sMemPool.listHeadL->next = newListHead;
             newListHead->prev = sMemPool.listHeadL;
             newListHead->next = NULL;
-            newListHead->func = 0;
-            newListHead->arg = 0;
+            newListHead->func = NULL;
+            newListHead->arg = '\0';
             addr = ((u8*)sMemPool.listHeadL + sizeof(struct MainPoolBlock));
             sMemPool.listHeadL = newListHead;
         } else if (side == MEMORY_POOL_RIGHT) {
+            // reduce available size.
             sMemPool.available -= size;
             newListHead = (void*)((uintptr_t)sMemPool.listHeadR - size);
             sMemPool.listHeadR->prev = newListHead;
             newListHead->next = sMemPool.listHeadR;
             newListHead->prev = NULL;
-            newListHead->func = 0;
-            newListHead->arg = 0;
+            newListHead->func = NULL;
+            newListHead->arg = '\0';
             sMemPool.listHeadR = newListHead;
             addr = ((u8*)newListHead + sizeof(struct MainPoolBlock));
         }
@@ -84,7 +88,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
                 // TODO: Fakematch
                 void (*func)(struct MainPoolBlock*, u32) = block->func;
                 if (func != 0) {
-                    block->func(block + 1, block->arg);
+                    block->func((u8*)block + sizeof(struct MainPoolBlock), block->arg);
                     // TODO: fake here too
                     if ((!(&sMemPool)) && (!(&sMemPool))) {}
                 }
@@ -99,7 +103,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
                 if (runBlockFunc) {
                     void (*func)(struct MainPoolBlock*, u32) = block->func;
                     if (func != NULL) {
-                        func(block + 1, block->arg);
+                        func((u8*)block + sizeof(struct MainPoolBlock), block->arg);
                         block = sMemPool.listHeadR;
                     }
                 }
@@ -118,27 +122,27 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
  * Manually allocate and initialize a block given a size and side and its
  * function+arguments.
  */
-void* main_pool_alloc_node(u32 size, s32 side, s32 arg, void* func) {
-    struct MainPoolBlock* node;
+void* main_pool_alloc_with_func(u32 size, s32 side, s32 arg, void* func) {
+    struct MainPoolBlock* addr;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
-    node = main_pool_alloc(size, side);
-    if (node != NULL) {
-        main_pool_set_func(node, arg, func);
+    addr = main_pool_alloc_from_pool(size, side);
+    if (addr != NULL) {
+        main_pool_set_func(addr, arg, func);
     }
     osSendMesg(&sMemPool.queue, NULL, OS_MESG_NOBLOCK);
 
-    return node;
+    return addr;
 }
 
 /**
  * Same as above but no function/argument is set.
  */
-void* main_pool_alloc_node_no_func(u32 size, s32 side) {
+void* main_pool_alloc(u32 size, s32 side) {
     struct MainPoolBlock* node;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
-    node = main_pool_alloc(size, side);
+    node = main_pool_alloc_from_pool(size, side);
     osSendMesg(&sMemPool.queue, NULL, OS_MESG_NOBLOCK);
 
     return node;
@@ -148,10 +152,10 @@ void* main_pool_alloc_node_no_func(u32 size, s32 side) {
  * Tries to free a block of memory that was allocated from the pool. Return
  * the new available amount of the pool.
  */
-u32 main_pool_try_free(struct MainPoolBlock* addr) {
+u32 main_pool_try_free(void* addr) {
     if (addr != NULL) {
         osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
-        main_pool_free(addr, 1);
+        main_pool_free(addr, TRUE);
         osSendMesg(&sMemPool.queue, NULL, OS_MESG_NOBLOCK);
     }
 
@@ -170,14 +174,17 @@ void* main_pool_realloc(void* addr, size_t size) {
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
 
+    // most recently allocated block?
     if (prior->next == sMemPool.listHeadL) {
         size_t diff = ((uintptr_t)prior->next - (uintptr_t)addr);
         size = ALIGN16(size);
+
+        // is there enough room to expand/realloc the area?
         if (diff >= size || sMemPool.available >= (size - diff)) {
             s32 arg = prior->arg;
             void* func = prior->func;
-            main_pool_free(addr, 0);
-            newaddr = main_pool_alloc(size, MEMORY_POOL_LEFT);
+            main_pool_free(addr, FALSE); // do not run the func as we are merely reallocating it.
+            newaddr = main_pool_alloc_from_pool(size, MEMORY_POOL_LEFT);
             main_pool_set_func(newaddr, arg, func);
         }
     }
@@ -189,8 +196,12 @@ void* main_pool_realloc(void* addr, size_t size) {
  * Return the amount of available memory to use in the pool.
  */
 u32 main_pool_get_available(void) {
+    // account for the block struct. Any newly allocated pools have this struct as its "true"
+    // header, so subtract the size to get the real amount of available space.
     s32 available = sMemPool.available - sizeof(struct MainPoolBlock);
 
+    // if it was less than 0, then we do not have enough to allocate a single pool. Floor the
+    // practical amount of available space to 0.
     if (available < 0) {
         available = 0;
     }
@@ -215,11 +226,19 @@ u32 main_pool_push_state(u32 arg) {
     listHeadL = sMemPool.listHeadL;
     listHeadR = sMemPool.listHeadR;
 
-    state = main_pool_alloc(sizeof(struct MainPoolState), MEMORY_POOL_LEFT);
+    /**
+     * We are essentially allocating a block that looks like this:
+     *
+     * struct AllocatedBlock {
+     *     struct MainPoolBlock block;
+     *     struct MainPoolState state; <---- the pointer is pointing here.
+     * };
+     */
+    state = main_pool_alloc_from_pool(sizeof(struct MainPoolState), MEMORY_POOL_LEFT);
     if (state != NULL) {
         /**
          * Why is this line here? What this line is doing is backing the pointer up to the
-         * previous block before this one. in the block alloc function, addr is determined
+         * previous block before the state. In the block alloc function, addr is determined
          * by the head plus the size of the block struct, meaning it is returning the
          * pointer to the head.
          */
@@ -250,7 +269,6 @@ u32 main_pool_pop_state(u32 arg) {
     void* listHeadR;
     struct MainPoolState* state;
 
-    argptr = (u32)arg;
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
 
     do {
@@ -260,38 +278,49 @@ u32 main_pool_pop_state(u32 arg) {
         sMemPool.available = node->freeSpace;
         sMemPool.mainState = node->prev;
 
-        // was the argument passed in 0?
-        if (argptr == 0) {
+        // was the argument passed in blank?
+        if (arg == '\0') {
             break;
         }
 
-        // odd reuse of the variable, but what this is doing is backing the ptr up to the
-        // pool block. Thus, to check the arg variable on the pool block located before the state,
-        // we will need to cast the next if check.
+        /**
+         * Odd reuse of the variable, but what this is doing is backing the ptr up to the
+         * pool block. Thus, to check the arg variable on the pool block located before the state,
+         * we will need to cast the next if check.
+         */
         node = (void*)((u8*)node - sizeof(struct MainPoolState));
 
-        if ((uintptr_t)argptr == (uintptr_t)((struct MainPoolBlock*)node)->arg) {
-            // we found the block with the matching string! break.
+        if (arg == (uintptr_t)((struct MainPoolBlock*)node)->arg) {
+            // we found the block with the matching string! That means we are now at the
+            // beginning of the pool area and can begin to run the function loops. Break.
             break;
         }
     } while (sMemPool.mainState != NULL);
 
+    /**
+     * For every block pool in the main pool being popped, try to run the function set by its
+     * main pool state. Repeat until we have cleared the right pool side.
+     */
     argptr = sMemPool.listHeadR;
     while ((uintptr_t)listHeadR > (uintptr_t)argptr) {
         if (argptr->func != NULL) {
-            argptr->func(argptr + 1, argptr->arg);
+            argptr->func((u8*)argptr + sizeof(struct MainPoolBlock), argptr->arg);
         }
         argptr = argptr->next;
     }
 
+    /**
+     * Same as above, but for the left side.
+     */
     argptr = sMemPool.listHeadL->prev;
     while ((uintptr_t)listHeadL <= (uintptr_t)argptr) {
         if (argptr->func != NULL) {
-            argptr->func(argptr + 1, argptr->arg);
+            argptr->func((u8*)argptr + sizeof(struct MainPoolBlock), argptr->arg);
         }
         argptr = argptr->prev;
     }
 
+    // set the new left and right sides and queue and return.
     sMemPool.listHeadL = listHeadL;
     sMemPool.listHeadR = listHeadR;
     osSendMesg(&sMemPool.queue, NULL, OS_MESG_NOBLOCK);
