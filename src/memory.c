@@ -14,7 +14,7 @@ struct MemoryPool* mem_pool_try_init(u32 size, s32 side) {
     struct MemoryPool* ret;
 
     size = ALIGN4(size);
-    block = main_pool_alloc_node_no_func(size, side);
+    block = main_pool_alloc(size, side);
     if (block != NULL) {
         ret = mem_pool_init(block, size);
     }
@@ -128,7 +128,7 @@ void* func_80002D10(u32 size, s32 side) {
 
     size = ALIGN4(size);
     ptr = 0;
-    block = main_pool_alloc_node_no_func(size, side);
+    block = main_pool_alloc(size, side);
     if (block != NULL) {
         ptr = func_80002DA4(block, size);
     }
