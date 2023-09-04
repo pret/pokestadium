@@ -116,8 +116,8 @@ void func_8000D3A8(void* unused) {
     D_800A8478 = 0;
     osCreateMesgQueue(&D_800A83A8[0].queue, &D_800A83A8[0].mesg, 1);
     osCreateMesgQueue(&D_800A83A8[1].queue, &D_800A83A8[1].mesg, 1);
-    osSendMesg(&D_800A83A8[0].queue, (void*)0x444F4E45, 0);
-    osSendMesg(&D_800A83A8[1].queue, (void*)0x444F4E45, 0);
+    osSendMesg(&D_800A83A8[0].queue, (void*)'DONE', 0);
+    osSendMesg(&D_800A83A8[1].queue, (void*)'DONE', 0);
     func_800373D8();
     func_8004AF24(0);
     func_8004AE90(3, 4);

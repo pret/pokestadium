@@ -5,9 +5,11 @@
 
 // thread pris
 #define THREAD_PRI_IDLE_INIT 100
+#define THREAD_PRI_RESET 30
 
 // thread IDs
 #define THREAD_ID_IDLE 1
+#define THREAD_ID_RESET 21
 
 #define POOL_END_4MB 0x80400000
 #define POOL_END_6MB 0x80600000

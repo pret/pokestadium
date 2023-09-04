@@ -41,7 +41,7 @@ segments:
     - [0x3A80, c, util]
     - [0x3FB0, asm] # PRES-JPEG decoder
     - [0x5580, asm] # there's a split here according to PAL
-    - [0x60A0, asm] # 
+    - [0x60A0, c, reset] # soft reset effect
     - [0x6430, c, controller] # controller code
     - [0x6A40, c]
     - [0x6BC0, asm] # 
