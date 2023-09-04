@@ -20,9 +20,6 @@ extern void func_800052B4(void);
 extern void func_800053B4(void *, s32); // types unknown
 extern void func_80005328(void *); // types unknown
 
-// 60A0.s
-extern void func_800057C0(void);
-
 // 6BC0.s
 extern u32 func_80006314(s32, s32, s32, s32, s32); // types unknown
 

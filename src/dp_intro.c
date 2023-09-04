@@ -247,7 +247,7 @@ void func_8000183C(UNUSED void* arg) {
         profiler_log_thread5_time(UNK_EVENT_2);
         func_8000152C(sp4C);
         func_800015A8();
-        osSendMesg(&D_800846A4, (void*)0x444F4E45, 0);
+        osSendMesg(&D_800846A4, (void*)'DONE', 0);
     }
 }
 
@@ -271,12 +271,15 @@ void func_800019C8(void) {
     func_80003B30(&D_80084760, 0xB0000B70, 0xB0000C70, 0);
 }
 
-void func_80001AD4(u16 arg0) {
-    s32 i = 0x280;
-    u16* arr = (void*)(uintptr_t)D_80083CA0.unk9E0->unk8;
+/**
+ * Write a specific color to a line on the framebuffer for a 640x480 resolution.
+ */
+void func_80001AD4(u16 color) {
+    s32 width = 640;
+    u16* buf = (void*)(uintptr_t)D_80083CA0.unk9E0->unk8;
 
-    while (i-- > 0) {
-        *(arr)++ = arg0;
+    while (width-- > 0) {
+        *(buf)++ = color;
     }
 
     osWritebackDCache((void*)(uintptr_t)D_80083CA0.unk9E0->unk8, 0x500);

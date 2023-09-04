@@ -3,6 +3,7 @@
 #include "dp_intro.h"
 #include "crash_screen.h"
 #include "rsp.h"
+#include "reset.h"
 
 extern void func_8002B330(); // thread 6 function
 
@@ -28,7 +29,7 @@ void Idle_ThreadEntry(UNUSED void* unused) {
     func_800052B4();
     func_8000D564();
     func_800019C8();
-    func_800057C0();
+    SoftReset_CreateThread();
     osCreateThread(&pThreads, 6, &func_8002B330, 0, &D_800818E0, 20);
     osStartThread(&pThreads);
     osSetThreadPri(NULL, 0);
