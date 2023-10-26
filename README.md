@@ -7,7 +7,20 @@ It builds the following ROMs:
 
 Note: To use this repository, you must already have a rom for the game.
 
-# Prerequisites
+## Installation
+
+### Windows
+
+Install WSL and a distro of your choice following
+[Windows Subsystem for Linux Installation Guide for Windows 10.](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+We recommend either Debian or Ubuntu 20.04 Linux distributions under WSL.
+
+Next, clone the Pokemon Stadium repo from within the Linux shell, this step is important:
+`git clone https://github.com/pret/pokestadium.git`
+
+Then continue following the directions in the [Linux](#linux) installation section below.
+
+### Linux
 
 Under Debian / Ubuntu (which we recommend using), you can install them with the following commands:
 
