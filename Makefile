@@ -366,9 +366,12 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py $(SPLAT_YAML)
+	rm -rf $(DATA_DIRS) $(ASM_DIRS)
 
-setup: distclean submodules split
+splat:
+	$(SPLAT)
+
+setup: distclean submodules split splat
 	
 $(BUILD_DIR):
 	echo $(C_FILES)
@@ -411,7 +414,7 @@ $(BUILD_DIR)/$(ROM): $(BUILD_DIR)/$(TARGET).bin
 verify: $(BUILD_DIR)/$(ROM)
 	md5sum -c checksum.md5
 
-.PHONY: all clean distclean default split setup
+.PHONY: all clean distclean default split splat setup
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
