@@ -4,5 +4,6 @@
 .endm
 
 .macro jlabel label
+    .global \label
     \label:
 .endm
