@@ -1,13 +1,14 @@
 name: Pokemon Stadium (North America)
 basename: pokestadium
 options:
-  find-file-boundaries: True
   compiler: IDO
   symbol_addrs_path: tools/symbol_addrs.txt
   target_path: baserom.z64
   basename: pokestadium
   base_path: .
   ld_script_path: pokestadium.ld
+  platform: n64
+  ld_legacy_generation: true
 segments:
   - name: header
     type: header
@@ -39,13 +40,13 @@ segments:
     - [0x2EC0, c, memory_main] # handles the main global pool
     - [0x3640, c, memory] # memory_pool
     - [0x3A80, c, util]
-    - [0x3FB0, asm] # PRES-JPEG decoder
-    - [0x5580, asm] # there's a split here according to PAL
+    - [0x3FB0, c] # PRES-JPEG decoder
+    - [0x5580, c] # there's a split here according to PAL
     - [0x60A0, c, reset] # soft reset effect
     - [0x6430, c, controller] # controller code
     - [0x6A40, c]
-    - [0x6BC0, asm] # 
-    - [0x75F0, asm] # stage loader
+    - [0x6BC0, c] # 
+    - [0x75F0, c] # stage loader
     - [0x8EC0, c, crash_screen] # crash handler
     - [0x9D20, c, profiler]
     - [0xAF00, c, math_util]
@@ -56,77 +57,77 @@ segments:
     - [0xC3F0, hasm, yay0] # Yay0 decoder
     - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
     - [0xC910, bin, libleo_bootstrap] # have issues being disassembled, so are bins for now.
-    - [0xC970, asm]
-    - [0xCE80, asm] #
-    - [0xD470, asm] #
+    - [0xC970, c]
+    - [0xCE80, c] #
+    - [0xD470, c] #
     - [0xDDC0, c]
     - [0xE1C0, c]
-    - [0xE570, asm] #
-    - [0xE890, asm] #
-    - [0x11BA0, asm] #  
-    - [0x12D80, asm] # 
-    - [0x17300, asm] #
-    - [0x18140, asm] # dp model animations
-    - [0x18480, asm] # dp model animations
-    - [0x19840, asm] # alternative pkm textures
-    - [0x1AB70, asm] # vs screen code
-    - [0x1C720, asm] #
-    - [0x1CF30, asm] # dp list code
-    - [0x20330, asm] # some cache cleaner
-    - [0x20470, asm] # dp list for UI and icons
-    - [0x225A0, asm] #
-    - [0x22630, asm] # registered pkm stats
-    - [0x26820, asm] # save data code
-    - [0x29BA0, asm] # scenary code
-    - [0x2C1C0, asm] # scenary cache cleaner
-    - [0x2D340, asm] # pkm lab pc code
-    - [0x2E110, asm] # stack cleaner
-    - [0x2E460, asm] # pkm lab pokedex code
-    - [0x2FEA0, asm] # minigames code
-    - [0x30640, asm] # gallery code
-    - [0x32D10, asm]
-    - [0x334D0, asm]
-    - [0x33E30, asm]
-    - [0x33FE0, asm]
-    - [0x37370, asm]
-    - [0x373A0, asm]  # battle code
-    - [0x38BB0, asm]  #
-    - [0x3D140, asm]  # music code
+    - [0xE570, c] #
+    - [0xE890, c] #
+    - [0x11BA0, c] #  
+    - [0x12D80, c] # 
+    - [0x17300, c] #
+    - [0x18140, c] # dp model animations
+    - [0x18480, c] # dp model animations
+    - [0x19840, c] # alternative pkm textures
+    - [0x1AB70, c] # vs screen code
+    - [0x1C720, c] #
+    - [0x1CF30, c] # dp list code
+    - [0x20330, c] # some cache cleaner
+    - [0x20470, c] # dp list for UI and icons
+    - [0x225A0, c] #
+    - [0x22630, c] # registered pkm stats
+    - [0x26820, c] # save data code
+    - [0x29BA0, c] # scenary code
+    - [0x2C1C0, c] # scenary cache cleaner
+    - [0x2D340, c] # pkm lab pc code
+    - [0x2E110, c] # stack cleaner
+    - [0x2E460, c] # pkm lab pokedex code
+    - [0x2FEA0, c] # minigames code
+    - [0x30640, c] # gallery code
+    - [0x32D10, c]
+    - [0x334D0, c]
+    - [0x33E30, c]
+    - [0x33FE0, c]
+    - [0x37370, c]
+    - [0x373A0, c]  # battle code
+    - [0x38BB0, c]  #
+    - [0x3D140, c]  # music code
     - [0x43520, c] # 
     - [0x435B0, c] # 
-    - [0x435D0, asm]  # pkm lab cries code
-    - [0x45720, asm]  # music code
-    - [0x46680, asm]  # speech code
-    - [0x47B60, asm]  # sound code
-    - [0x485C0, asm]  # moves code 
-    - [0x48C60, asm]  # move effects code
-    - [0x490A0, asm]  # audio functions to 0x50C00
+    - [0x435D0, c]  # pkm lab cries code
+    - [0x45720, c]  # music code
+    - [0x46680, c]  # speech code
+    - [0x47B60, c]  # sound code
+    - [0x485C0, c]  # moves code 
+    - [0x48C60, c]  # move effects code
+    - [0x490A0, c]  # audio functions to 0x50C00
     - [0x49190, bin]
-    - [0x49790, asm]
-    - [0x49BA0, asm]
-    - [0x49DC0, asm]
-    - [0x4A360, asm]
-    - [0x4A3E0, asm]
-    - [0x4B940, asm]
-    - [0x4BA90, asm]
-    - [0x4BDC0, asm]
-    - [0x4CBC0, asm]
-    - [0x4F410, asm]
+    - [0x49790, c]
+    - [0x49BA0, c]
+    - [0x49DC0, c]
+    - [0x4A360, c]
+    - [0x4A3E0, c]
+    - [0x4B940, c]
+    - [0x4BA90, c]
+    - [0x4BDC0, c]
+    - [0x4CBC0, c]
+    - [0x4F410, c]
     - [0x4F7F0, c]
-    - [0x4F870, asm]
-    - [0x4FDB0, asm]
-    - [0x4FE60, asm]
-    - [0x4FF50, asm]
-    - [0x50120, asm]
-    - [0x50860, asm]
-    - [0x50990, asm]
-    - [0x50A00, asm]
-    - [0x50C20, asm]
-    - [0x50CC0, asm]
-    - [0x517A0, asm] # yay0 audio decoder
-    - [0x51850, asm]
-    - [0x518A0, asm]
-    - [0x51B20, asm]
+    - [0x4F870, c]
+    - [0x4FDB0, c]
+    - [0x4FE60, c]
+    - [0x4FF50, c]
+    - [0x50120, c]
+    - [0x50860, c]
+    - [0x50990, c]
+    - [0x50A00, c]
+    - [0x50C20, c]
+    - [0x50CC0, c]
+    - [0x517A0, c] # yay0 audio decoder
+    - [0x51850, c]
+    - [0x518A0, c]
+    - [0x51B20, c]
     - [0x51BC0, c, libleo/readwrite]
     - [0x51C50, c, libleo/leofunc]
     - [0x520C0, c, libleo/leoint]
@@ -355,9 +356,9 @@ segments:
     
     # Start of .rodata
     - [0x7BAC0, .rodata, rsp]
-    - [0x7BB10, rodata, rom_rodata_7BB10]
+    - [0x7BB10, rodata]
     - [0x7BB20, .rodata, util]
-    - [0x7BB50, rodata, rom_rodata_7BB50]
+    - [0x7BB50, rodata]
     - [0x7BBE0, .rodata, crash_screen]
     - [0x7BFA0, .rodata, profiler]
     - [0x7BFC0, .rodata, gb_tower]
@@ -419,14 +420,18 @@ segments:
     # .bss
     - {vram: 0x8007F190, type: .bss, name: main}
     - {vram: 0x80081900, type: .bss, name: rsp}
-    - {vram: 0x80083CA0, type: .bss, name: unk_bss}
+    - {vram: 0x80083CA0, type:  bss, name: unk_bss}
     - {vram: 0x800A6070, type: .bss, name: memory_main}
-    - {vram: 0x800A60B0, type: .bss, name: unk_bss_4}
+    - {vram: 0x800A60B0, type:  bss, name: unk_bss_4}
     - {vram: 0x800A7320, type: .bss, name: controller}
-    - {vram: 0x800A7420, type: .bss, name: unk_bss_3}
+    - {vram: 0x800A7420, type:  bss, name: unk_bss_3}
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
     - {vram: 0x800A7EA0, type: .bss, name: profiler}
-    - {vram: 0x800A8100, type: .bss, name: unk_bss_2}
+    - {vram: 0x800A8100, type:  bss, name: unk_bss_2}
+    - {vram: 0x80100740, type: .bss, name: libleo/driverominit}
+    - {vram: 0x801007C0, type:  bss, name: unk_bss_5}
+    - {vram: 0x80101090, type: .bss, name: libleo/leomseq_tbl}
+    - {vram: 0x801010D0, type:  bss, name: unk_bss_6}
     - {vram: 0x80103880, type: .bss, name: libultra/gu/rotate}
     - {vram: 0x80103890, type: .bss, name: libultra/os/timerintr}
     - {vram: 0x801038E4, type: .bss, name: libultra/io/cartrominit}
