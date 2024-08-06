@@ -55,8 +55,9 @@ segments:
     - [0xC030, c] # extra sprites loader
     - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, hasm, yay0] # Yay0 decoder
-    - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
-    - [0xC910, bin, libleo_bootstrap] # have issues being disassembled, so are bins for now.
+    - [0xC4A0, hasm, abs] # abs function
+    - [0xC4B0, asm, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
+    - [0xC910, hasm, libleo/bootstrap]
     - [0xC970, c]
     - [0xCE80, c] #
     - [0xD470, c] #
@@ -1485,11 +1486,17 @@ segments:
   - [0x798CD0, bin]
   - [0x7994B0, bin]
   - [0x79AFB0, bin]
-  - [0x79B8F0, bin] # not a file, just so it doesnt complain
-  - [0x7C0000]
+  - [0x79B8F0]
   
   # rest of ROM.. part 2. This area and beyond NEEDS to be hard-aligned to this address.
   # for the ROM to be shiftable, we need a way to fix this area beyond here to this address and for the prior area
   # to be filled with FFs instead of being binned. TODO: Make it shift
-  - [0x7C0000, bin]
+  - name: late_assets
+    type: code
+    bss_size: 0x0
+    start: 0x7C0000
+    vram: 0x8FC00000 # unknown vram. Another unused one? Might be 8FC00000?
+    ld_align_segment_start: 0x7C0000
+    subsegments:
+    - [0x7C0000, bin]
   - [0x2000000]

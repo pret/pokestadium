@@ -19,7 +19,7 @@ CPP_FLAGS = [
     "-DVERSION_US",
     "-DTARGET_N64",
     "-D_LANGUAGE_C",
-    "-DF3DEX_GBI",
+    "-DF3DEX_GBI_2",
     "-D_MIPS_SZLONG=32",
     "-ffreestanding",
     "-nostdinc",
