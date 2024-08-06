@@ -55,8 +55,9 @@ segments:
     - [0xC030, c] # extra sprites loader
     - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, hasm, yay0] # Yay0 decoder
-    - [0xC4B0, bin, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
-    - [0xC910, bin, libleo_bootstrap] # have issues being disassembled, so are bins for now.
+    - [0xC4A0, hasm, abs] # abs function
+    - [0xC4B0, asm, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
+    - [0xC910, hasm, libleo/bootstrap]
     - [0xC970, c]
     - [0xCE80, c] #
     - [0xD470, c] #

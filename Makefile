@@ -354,6 +354,8 @@ default: all
 
 LD_SCRIPT = $(TARGET).ld
 
+rom: $(ROM)
+
 all: $(BUILD_DIR) $(BUILD_DIR)/$(ROM) verify
 
 distclean:
@@ -369,7 +371,12 @@ split:
 	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py $(SPLAT_YAML)
 
 setup: distclean submodules split
-	
+
+expected: 
+	$(RM) -r expected/
+	mkdir -p expected/
+	cp -r $(BUILD_DIR) expected/$(BUILD_DIR)
+
 $(BUILD_DIR):
 	echo $(C_FILES)
 	mkdir $(BUILD_DIR)
