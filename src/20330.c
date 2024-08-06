@@ -1,4 +1,5 @@
 #include "common.h"
+#include "20330.h"
 
 void func_8001F730(void) {
 }

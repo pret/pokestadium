@@ -741,3 +741,5 @@ _7994B0_ROM_START = 0x7994B0; // defined:true
 _79AFB0_ROM_START = 0x79AFB0; // defined:true
 _79AFB0_ROM_END = 0x79B8F0; // defined:true
 abs = 0x8000B8A0; // defined:true
+D_86002B84 = 0x86002B84; // size:3
+D_86002B88 = 0x86002B88; // size:3
