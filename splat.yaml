@@ -9,6 +9,7 @@ options:
   ld_script_path: pokestadium.ld
   platform: n64
   ld_legacy_generation: true
+  ld_fill_value: 0xFFFFFFFF
 segments:
   - name: header
     type: header
@@ -1433,6 +1434,7 @@ segments:
     bss_size: 0x0
     start: 0x3B9620
     vram: 0x8FC00000 # unknown vram. Another unused one? Might be 8FC00000?
+    ld_fill_value: 0xFFFFFFFF
     subsegments:
     - [0x3B9620, bin,  fragments/77/fragment77_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x3B9640, c,    fragments/77/fragment77_code]
@@ -1485,11 +1487,26 @@ segments:
   - [0x798CD0, bin]
   - [0x7994B0, bin]
   - [0x79AFB0, bin]
-  - [0x79B8F0, bin] # not a file, just so it doesnt complain
-  - [0x7C0000]
+  
+  - name: padding # this is dumb...
+    type: code
+    bss_size: 0x0
+    start: 0x79B8F0
+    vram: 0x8FC00000
+    ld_fill_value: 0xFFFFFFFF
+    subsegments:
+    - [0x79B8F0, pad] # not a file, just so it doesnt complain
   
   # rest of ROM.. part 2. This area and beyond NEEDS to be hard-aligned to this address.
   # for the ROM to be shiftable, we need a way to fix this area beyond here to this address and for the prior area
   # to be filled with FFs instead of being binned. TODO: Make it shift
-  - [0x7C0000, bin]
+  - name: late_assets
+    type: code
+    bss_size: 0x0
+    start: 0x7C0000
+    vram: 0x8FC00000 # unknown vram. Another unused one? Might be 8FC00000?
+    ld_fill_value: 0xFFFFFFFF
+    ld_align_segment_start: 0x7C0000
+    subsegments:
+    - [0x7C0000, bin]
   - [0x2000000]
