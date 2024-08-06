@@ -354,6 +354,8 @@ default: all
 
 LD_SCRIPT = $(TARGET).ld
 
+rom: $(ROM)
+
 all: $(BUILD_DIR) $(BUILD_DIR)/$(ROM) verify
 
 distclean:
@@ -369,7 +371,12 @@ split:
 	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py $(SPLAT_YAML)
 
 setup: distclean submodules split
-	
+
+expected: 
+	$(RM) -r expected/
+	mkdir -p expected/
+	cp -r $(BUILD_DIR) expected/$(BUILD_DIR)
+
 $(BUILD_DIR):
 	echo $(C_FILES)
 	mkdir $(BUILD_DIR)
@@ -379,7 +386,7 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
-	$(OBJCOPY) $< $@ -O binary
+	$(OBJCOPY) $< $@ -O binary --gap-fill 0xFF
 
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -o $@
