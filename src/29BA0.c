@@ -1,8 +1,17 @@
-#include "common.h"
+#include <ultra64.h>
+#include "memory.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/29BA0/func_80028FA0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/29BA0/func_80029008.s")
+s32 func_80029008(s32 arg0, s32 romStart, s32 romEnd, s32 arg3, s32 arg4) {
+    s32 result;
+    s32 (*func)(s32, s32);
+
+    func = func_80004454(arg0, romStart, romEnd);
+    result = func(arg3, arg4);
+    main_pool_try_free(func);
+    return result;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/29BA0/func_80029048.s")
 

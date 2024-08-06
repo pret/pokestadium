@@ -44,4 +44,6 @@
 #include "functions.h"
 #include "variables.h"
 
+#include "sections.h"
+
 #endif
