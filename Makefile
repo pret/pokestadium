@@ -174,7 +174,7 @@ IINCS := $(foreach d,$(INC_DIRS),-I$d)
 CDEFS := -D_LANGUAGE_C -DF3DEX_GBI_2 -DNDEBUG 
 
 ifneq ($(RUN_CC_CHECK),0)
-  CHECK_WARNINGS := -Wall -Wextra
+  CHECK_WARNINGS := -Wall -Wextra -Wno-unknown-pragmas
   CHECK_DEFS := -D_MIPS_SZLONG=32 -DNON_MATCHING
   CHECK_FLAGS := -fno-builtin -funsigned-char -fdiagnostics-color -std=gnu89 $(CDEFS) $(CHECK_DEFS) $(IINCS) -nostdinc
   CC_CHECK := gcc -fsyntax-only
