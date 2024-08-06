@@ -1,5 +1,5 @@
-#ifndef _FRAGMENTS_H_
-#define _FRAGMENTS_H_
+#ifndef _SECTIONS_H_
+#define _SECTIONS_H_
 
 // fragment 1
 extern u8 fragment1_TEXT_START[];
@@ -386,4 +386,26 @@ extern u8 fragment77_TEXT_START[];
 extern u8 fragment77_ROM_START[];
 extern u8 fragment77_ROM_END[];
 
-#endif // _FRAGMENTS_H_
+// Asset externs
+
+extern u8 _3B96B0_ROM_START[];
+extern u8 _3BA190_ROM_START[];
+extern u8 _3CB130_ROM_START[];
+extern u8 _45B580_ROM_START[];
+extern u8 _4A21C0_ROM_START[];
+extern u8 _4BD6B0_ROM_START[];
+extern u8 _4BE810_ROM_START[];
+extern u8 _4D1330_ROM_START[];
+extern u8 _4EB0C0_ROM_START[];
+extern u8 _5046B0_ROM_START[];
+extern u8 _52ABA0_ROM_START[];
+extern u8 _52F6D0_ROM_START[];
+extern u8 _533B20_ROM_START[];
+extern u8 _56E7D0_ROM_START[];
+extern u8 _5C7A70_ROM_START[];
+extern u8 _5C7AD0_ROM_START[];
+extern u8 _5F6790_ROM_START[];
+extern u8 _5F92A0_ROM_START[];
+extern u8 _5FFC30_ROM_START[];
+
+#endif // _SECTIONS_H_
