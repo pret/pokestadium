@@ -11,6 +11,7 @@ extern void _bcopy(void *, void *, u32);
 
 // 3FB0.s
 extern void func_80003B30(void *, s32, s32, s32); // types unknown
+extern void func_80004200();
 
 // 5580.s
 extern void func_80004CC0(OSThread *, s32, s32);
