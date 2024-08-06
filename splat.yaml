@@ -830,7 +830,30 @@ segments:
     - [0x23C270, c,      fragments/29/fragment29_code]
     - [0x23D3C0, data,   fragments/29/fragment29_data]
     - [0x23D430, bin,    fragments/29/fragment29_reloc]
+    
+  - name: fragment29_misc_1
+    type: code
+    bss_size: 0x0
+    start: 0x23D500
+    vram: 0x88910000 # unk VRAM, shuts linker up
+    subsegments:
     - [0x23D500, bin,    fragments/29/fragment29_unk_bin_1] # PERS-SZP file, pokeball, c buttons etc textures
+
+  - name: fragment29_misc_2
+    type: code
+    bss_size: 0x0
+    start: 0x23FB60
+    vram: 0x88920000 # unk VRAM, shuts linker up
+    subsegments:
+    - [0x23FB60, bin,    fragments/29/fragment29_unk_bin_2] # PERS-SZP file, pokeball, c buttons etc textures
+
+  - name: fragment29_misc_3
+    type: code
+    bss_size: 0x0
+    start: 0x24F430
+    vram: 0x88920000 # unk VRAM, shuts linker up
+    subsegments:
+    - [0x24F430, bin,    fragments/29/fragment29_unk_bin_3] # PERS-SZP file, pokeball, c buttons etc textures
 
   - name: fragment30
     type: code
@@ -880,6 +903,13 @@ segments:
     - [0x25ECF0, data,   fragments/33/fragment33_data]
     - [0x25F020, rodata, fragments/33/fragment33_rodata]
     - [0x25F070, bin,    fragments/33/fragment33_reloc]
+
+  - name: fragment33_misc
+    type: code
+    bss_size: 0x0
+    start: 0x25F440
+    vram: 0x81310000 # unk vram, shuts linker up
+    subsegments:
     - [0x25F440, bin,    fragments/33/fragment33_unk_bin_1] # PRES-JPEG, transfer machine background
 
 # alternative pokemon textures pointer loader
@@ -1408,12 +1438,58 @@ segments:
     - [0x3B9640, c,    fragments/77/fragment77_code]
     - [0x3B96A0, bin,  fragments/77/fragment77_reloc]
 
-  # Rest of the ROM
-  - name: assets
-    type: code
-    bss_size: 0x0
-    start: 0x3B96B0
-    vram: 0x80000000 # unknown vram
-    subsegments:
-    - [0x3B96B0, bin]
+  - [0x3B96B0, bin]
+  - [0x3BA190, bin]
+  - [0x3CB130, bin]
+  - [0x45B580, bin]
+  - [0x4A21C0, bin]
+  - [0x4BD6B0, bin]
+  - [0x4BE810, bin]
+  - [0x4D1330, bin]
+  - [0x4EB0C0, bin]
+  - [0x5046B0, bin]
+  - [0x52ABA0, bin]
+  - [0x52F6D0, bin]
+  - [0x533B20, bin]
+  - [0x56E7D0, bin]
+  - [0x5C7A70, bin]
+  - [0x5C7AD0, bin]
+  - [0x5F6790, bin]
+  - [0x5F92A0, bin]
+  - [0x5FFC30, bin]
+  - [0x613110, bin]
+  - [0x6230D0, bin]
+  - [0x66E1D0, bin]
+  - [0x66F540, bin]
+  - [0x66FD80, bin]
+  - [0x675FA0, bin]
+  - [0x696350, bin]
+  - [0x69D090, bin]
+  - [0x6A9750, bin]
+  - [0x6AE1D0, bin]
+  - [0x6B0FB0, bin]
+  - [0x6B4F00, bin]
+  - [0x6C1AB0, bin]
+  - [0x6C4CE0, bin]
+  - [0x6C4E50, bin]
+  - [0x6CA730, bin]
+  - [0x6E2FC0, bin]
+  - [0x6E8910, bin]
+  - [0x6EB340, bin]
+  - [0x6EC4D0, bin]
+  - [0x6ECE80, bin]
+  - [0x701E50, bin]
+  - [0x70D3A0, bin]
+  - [0x7820E0, bin]
+  - [0x783760, bin]
+  - [0x798CD0, bin]
+  - [0x7994B0, bin]
+  - [0x79AFB0, bin]
+  - [0x79B8F0, bin] # not a file, just so it doesnt complain
+  - [0x7C0000]
+  
+  # rest of ROM.. part 2. This area and beyond NEEDS to be hard-aligned to this address.
+  # for the ROM to be shiftable, we need a way to fix this area beyond here to this address and for the prior area
+  # to be filled with FFs instead of being binned. TODO: Make it shift
+  - [0x7C0000, bin]
   - [0x2000000]
