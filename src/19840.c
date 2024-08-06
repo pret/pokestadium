@@ -1,4 +1,5 @@
 #include "common.h"
+#include "19840.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/19840/func_80018C40.s")
 
