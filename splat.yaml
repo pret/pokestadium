@@ -56,8 +56,8 @@ segments:
     - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, hasm, yay0] # Yay0 decoder
     - [0xC4A0, hasm, abs] # abs function
-    - [0xC4B0, asm, libleo_bootdisk]  # These are libleo's bootdisk and bootstrap files, but
-    - [0xC910, hasm, libleo/bootstrap]
+    - [0xC4B0, c, libleo/bootdisk]
+    - [0xC910, hasm, ../src/libleo/bootstrap]
     - [0xC970, c]
     - [0xCE80, c] #
     - [0xD470, c] #
