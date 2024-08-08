@@ -1,4 +1,5 @@
 #include "common.h"
+#include "17300.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/17300/func_80016700.s")
 
