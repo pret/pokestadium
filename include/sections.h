@@ -155,6 +155,7 @@ extern u8 fragment30_ROM_END[];
 extern u8 fragment31_TEXT_START[];
 extern u8 fragment31_ROM_START[];
 extern u8 fragment31_ROM_END[];
+extern u8 fragment31_VRAM[];
 
 // fragment 32
 extern u8 fragment32_TEXT_START[];
@@ -407,5 +408,7 @@ extern u8 _5C7AD0_ROM_START[];
 extern u8 _5F6790_ROM_START[];
 extern u8 _5F92A0_ROM_START[];
 extern u8 _5FFC30_ROM_START[];
+
+extern u8 D_124570[];
 
 #endif // _SECTIONS_H_

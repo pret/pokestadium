@@ -1,4 +1,5 @@
-#include <ultra64.h>
+#include "common.h"
+#include "6A40.h"
 
 struct UnkStruct800A7428 {
     u32 *unk0;
@@ -9,7 +10,6 @@ struct UnkStruct800A7428 {
 };
 
 extern struct UnkStruct800A7428 D_800A7428;
-extern Gfx* gDisplayListHead;
 
 void func_80005EDC(void);
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "1C720.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/1C720/func_8001BB20.s")
 
