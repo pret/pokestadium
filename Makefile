@@ -160,6 +160,7 @@ CC = tools/ido_recomp/$(HOST_OS)/7.1/cc
 CC_OLD = tools/ido_recomp/$(HOST_OS)/5.3/cc
 ASMPROC = python3 tools/asmproc/build.py
 ASMPROC_FLAGS :=
+ENCRYPT_LIBLEO := python3 tools/encrypt_libleo.py
 
 MIPS_VERSION := -mips2
 
@@ -203,6 +204,13 @@ LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_au
 ######################## Targets #############################
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
+
+###################### Ugly hacksz #############################
+
+# This is unsanitary to do, -but-, because this file is encrypted we cant have splat decrypt it
+# on split. This requires us to include this manually, but it needs to be in the dependency
+# list. So we add it.
+O_FILES += build/src/libleo/bootstrap.s.o
 
 # The reimplementations of the string functions need to treat char as signed.
 build/src/hal_libc.c.o: CFLAGS += -signed
@@ -413,7 +421,8 @@ $(BUILD_DIR)/%.bin.o: %.bin
 
 # final z64 updates checksum
 $(BUILD_DIR)/$(ROM): $(BUILD_DIR)/$(TARGET).bin
-	@cp $< $@
+	cp $< $@
+	$(ENCRYPT_LIBLEO) $@ $(LD_MAP)
 
 verify: $(BUILD_DIR)/$(ROM)
 	md5sum -c checksum.md5
