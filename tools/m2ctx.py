@@ -28,6 +28,7 @@ CPP_FLAGS = [
     "-Iinclude/PR",
     "-Isrc",
     "-I.",
+    "-DM2C",
 ]
 
 import os
