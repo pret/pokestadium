@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 #include "6A40.h"
 
 struct UnkStruct800A7428 {

@@ -1,7 +1,7 @@
 #ifndef _20330_H_
 #define _20330_H_
 
-#include "common.h"
+#include "global.h"
 
 void func_8001F730(void);
 

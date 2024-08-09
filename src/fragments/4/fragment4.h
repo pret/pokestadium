@@ -1,7 +1,7 @@
 #ifndef _FRAGMENT4_H_
 #define _FRAGMENT4_H_
 
-#include "common.h"
+#include "global.h"
 
 void func_87A00020(unk_D_86002F34_00C*);
 Gfx* func_87A0002C(Gfx*);

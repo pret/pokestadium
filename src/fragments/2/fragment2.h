@@ -1,7 +1,7 @@
 #ifndef _FRAGMENT2_H_
 #define _FRAGMENT2_H_
 
-#include "common.h"
+#include "global.h"
 
 extern s32 D_87806330;
 extern s16 D_8780FA2A;
