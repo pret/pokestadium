@@ -1,7 +1,7 @@
 #ifndef _49790_H_
 #define _49790_H_
 
-#include "common.h"
+#include "global.h"
 
 void func_80048B90(s32);
 

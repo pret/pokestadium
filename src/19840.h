@@ -1,7 +1,7 @@
 #ifndef _19840_H_
 #define _19840_H_
 
-#include "common.h"
+#include "global.h"
 #include "src/memory.h"
 
 void func_8001987C(void);

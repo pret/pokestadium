@@ -1,9 +1,8 @@
-#include "common.h"
+#include "global.h"
 #include "20330.h"
 
-void func_8001F730(void) {
-}
+#pragma GLOBAL_ASM("asm/us/nonmatchings/20330/func_8001F730.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/20330/func_8001F738.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/20330/func_8001F738.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/20330/func_8001F750.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/20330/func_8001F750.s")

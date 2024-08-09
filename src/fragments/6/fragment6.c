@@ -482,7 +482,7 @@ void func_86000020(void) {
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/nonmatchings/fragments/6/fragment6/func_86000020.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86000020.s")
 #endif
 
 s32 func_86000410(void) {
@@ -646,7 +646,7 @@ static u8 D_86002B88[] = {
     150,
 };
 void func_860005B8(s32 arg0);
-#pragma GLOBAL_ASM("asm/nonmatchings/fragments/6/fragment6/func_860005B8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_860005B8.s")
 #endif
 
 static Gfx D_86002B90[] = {
@@ -1144,7 +1144,7 @@ void func_86001C90(void) {
 }
 #else
 void func_86001C90(void);
-#pragma GLOBAL_ASM("asm/nonmatchings/fragments/6/fragment6/func_86001C90.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86001C90.s")
 #endif
 
 s32 func_86001EEC(void) {
@@ -1296,7 +1296,7 @@ void func_86001F64(void) {
 }
 #else
 void func_86001F64(void);
-#pragma GLOBAL_ASM("asm/nonmatchings/fragments/6/fragment6/func_86001F64.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86001F64.s")
 #endif
 
 void func_86002264(void) {
@@ -1426,7 +1426,7 @@ void func_86002440(void) {
 }
 #else
 void func_86002440(void);
-#pragma GLOBAL_ASM("asm/nonmatchings/fragments/6/fragment6/func_86002440.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86002440.s")
 #endif
 
 void func_86002778(UNUSED s32 arg0, UNUSED s32 arg1) {

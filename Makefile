@@ -1,427 +1,351 @@
-BASEROM = baserom.z64
-TARGET = pokestadium
-NON_MATCHING ?= 0
-RUN_CC_CHECK ?= 1
-WERROR ?= 0
+# Build options can be changed by modifying the makefile or by building with 'make SETTING=value'.
+# It is also possible to override the settings in Defaults in a file called .make_options as 'SETTING=value'.
 
-# Fail early if baserom does not exist
-ifeq ($(wildcard $(BASEROM)),)
-$(error Baserom `$(BASEROM)' not found.)
-endif
+-include .make_options
 
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-  HOST_OS := linux
-else ifeq ($(UNAME_S),Darwin)
-  HOST_OS := macos
+MAKEFLAGS += --no-builtin-rules
+
+# Ensure the build fails if a piped command fails
+SHELL = /bin/bash
+.SHELLFLAGS = -o pipefail -c
+
+# OS Detection
+ifeq ($(OS),Windows_NT)
+$(error Native Windows is currently unsupported for building this repository, use WSL instead c:)
 else
-  $(error Unsupported host/building OS <$(UNAME_S)>)
+  UNAME_S := $(shell uname -s)
+  ifeq ($(UNAME_S),Linux)
+    DETECTED_OS = linux
+    MAKE = make
+    VENV_BIN_DIR = bin
+  endif
+  ifeq ($(UNAME_S),Darwin)
+    DETECTED_OS = macos
+    MAKE = gmake
+    VENV_BIN_DIR = bin
+  endif
 endif
 
-FRAGMENT_DIRS :=    \
-    fragments/1/    \
-    fragments/2/    \
-    fragments/3/    \
-    fragments/4/    \
-    fragments/5/    \
-    fragments/6/    \
-    fragments/7/    \
-    fragments/8/    \
-    fragments/9/    \
-    fragments/10/   \
-    fragments/11/   \
-    fragments/12/   \
-    fragments/13/   \
-    fragments/14/   \
-    fragments/15/   \
-    fragments/16/   \
-    fragments/17/   \
-    fragments/18/   \
-    fragments/19/   \
-    fragments/20/   \
-    fragments/21/   \
-    fragments/22/   \
-    fragments/23/   \
-    fragments/24/   \
-    fragments/25/   \
-    fragments/26/   \
-    fragments/27/   \
-    fragments/28/   \
-    fragments/29/   \
-    fragments/30/   \
-    fragments/31/   \
-    fragments/32/   \
-    fragments/33/   \
-    fragments/34/   \
-    fragments/35/   \
-    fragments/36/   \
-    fragments/37/   \
-    fragments/38/   \
-    fragments/39/   \
-    fragments/40/   \
-    fragments/41/   \
-    fragments/42/   \
-    fragments/43/   \
-    fragments/44/   \
-    fragments/45/   \
-    fragments/46/   \
-    fragments/47/   \
-    fragments/48/   \
-    fragments/49/   \
-    fragments/50/   \
-    fragments/51/   \
-    fragments/52/   \
-    fragments/53/   \
-    fragments/54/   \
-    fragments/55/   \
-    fragments/56/   \
-    fragments/57/   \
-    fragments/58/   \
-    fragments/59/   \
-    fragments/60/   \
-    fragments/61/   \
-    fragments/62/   \
-    fragments/63/   \
-    fragments/64/   \
-    fragments/65/   \
-    fragments/66/   \
-    fragments/67/   \
-    fragments/68/   \
-    fragments/69/   \
-    fragments/70/   \
-    fragments/71/   \
-    fragments/72/   \
-    fragments/73/   \
-    fragments/74/   \
-    fragments/75/   \
-    fragments/76/   \
-    fragments/77/
+#### Defaults ####
+# Target game version. Currently only the following version is supported:
+#   us   N64 US (default)
+VERSION ?= us
+# If COMPARE is 1, check the output md5sum after building
+COMPARE ?= 1
+# If NON_MATCHING is 1, define the NON_MATCHING C flag when building
+NON_MATCHING ?= 0
+# if WERROR is 1, pass -Werror to CC_CHECK, so warnings would be treated as errors
+WERROR ?= 0
+# Keep .mdebug section in build
+KEEP_MDEBUG ?= 0
+# Check code syntax with host compiler
+RUN_CC_CHECK ?= 1
+CC_CHECK_COMP ?= gcc
+# Dump build object files
+OBJDUMP_BUILD ?= 0
+# Number of threads to compress with
+N_THREADS ?= $(shell nproc)
+# Not meant to be used by normal users. Toggles some options to improve the use of the warning checker system
+WARNINGS_CHECK ?= 0
+# Disassembles matched functions and migrated data as well
+FULL_DISASM ?= 0
+# Python virtual environment
+VENV ?= .venv
+# Python interpreter
+PYTHON ?= $(VENV)/$(VENV_BIN_DIR)/python3
+# Emulator w/ flags
+N64_EMULATOR ?=
+# Set prefix to mips binutils binaries (mips-linux-gnu-ld => 'mips-linux-gnu-') - Change at your own risk!
+# In nearly all cases, not having 'mips-linux-gnu-*' binaries on the PATH is indicative of missing dependencies
+MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
+
+TARGET  := pokestadium
+
+BASEROM_DIR := baseroms/$(VERSION)
+BASEROM     := $(BASEROM_DIR)/baserom.z64
+
+ULTRALIB_VERSION     := L
+ULTRALIB_TARGET      := libultra_rom
+
+### Output ###
 
 BUILD_DIR := build
-ROM := $(TARGET).z64
-ELF := $(BUILD_DIR)/$(TARGET).elf
-LD_SCRIPT := $(TARGET).ld
-LD_MAP := $(BUILD_DIR)/$(TARGET).map
-# TODO: Recursively make fragment folders correctly.
-ASM_DIRS := asm asm/os asm/libleo asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/data
-DATA_DIRS := bin assets
-SRC_DIRS := $(shell find src -type d)
+ROM       := $(BUILD_DIR)/$(TARGET)-$(VERSION).z64
+ELF       := $(ROM:.z64=.elf)
+MAP       := $(ROM:.z64=.map)
+LDSCRIPT  := $(ROM:.z64=.ld)
 
-# Append FRAGMENT_DIRS to each dirs.
-ASM_DIRS += $(addprefix asm/,$(FRAGMENT_DIRS))
-ASM_DIRS += $(addprefix asm/data/,$(FRAGMENT_DIRS))
-DATA_DIRS += $(addprefix assets/,$(FRAGMENT_DIRS))
 
-C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
-S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
-DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
+#### Setup ####
 
-# Object files
-O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.c.o)) \
-           $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.s.o)) \
-           $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o)) \
+BUILD_DEFINES ?=
 
-DECOMP_C_OBJS := $(filter %.c.o,$(filter-out $(BUILD_DIR)/src/libultra%,$(O_FILES)))
-DECOMP_POKE_STADIUM := $(filter %.c.o,$(filter-out $(BUILD_DIR)/src/libleo%,$(DECOMP_C_OBJS)))
-DECOMP_LIBLEO := $(filter $(BUILD_DIR)/src/libleo/%.c.o,$(O_FILES))
-
-DEP_FILES := $(O_FILES:.o=.d) $(DECOMP_C_OBJS:.o=.asmproc.d)
-
-SPLAT_YAML := splat.yaml
-SPLAT = $(PYTHON) tools/n64splat/split.py $(SPLAT_YAML)
-
-##################### Compiler Options #######################
-findcmd = $(shell type $(1) >/dev/null 2>/dev/null; echo $$?)
-
-ifeq ($(call findcmd,mips-linux-gnu-ld),0)
-  CROSS := mips-linux-gnu-
-else ifeq ($(call findcmd,mips64-elf-ld),0)
-  CROSS := mips64-elf-
-else ifeq ($(call findcmd,mips-elf-ld),0)
-  CROSS := mips-elf-
+ifeq ($(VERSION),us)
+  BUILD_DEFINES   += -DVERSION_US=1
 else
-  $(error Missing cross compilation toolchain)
+$(error Invalid VERSION variable detected. Please use 'us')
 endif
 
-AS = $(CROSS)as
-LD = $(CROSS)ld
-OBJDUMP = $(CROSS)objdump
-OBJCOPY = $(CROSS)objcopy
-ifeq ($(HOST_OS),macos)
-  CPP := clang -E -P -x c
-else
-  CPP := cpp
+
+ifeq ($(NON_MATCHING),1)
+  BUILD_DEFINES   += -DNON_MATCHING -DAVOID_UB
+  COMPARE  := 0
 endif
 
-#CC         := $(QEMU_IRIX) -L tools/ido7.1_compiler tools/ido7.1_compiler/usr/bin/cc
-#CC_OLD     := $(QEMU_IRIX) -L tools/ido5.3_compiler tools/ido5.3_compiler/usr/bin/cc
+MAKE = make
+CPPFLAGS += -fno-dollars-in-identifiers -P
+LDFLAGS  := --no-check-sections --accept-unknown-input-arch --emit-relocs
 
-CC = tools/ido_recomp/$(HOST_OS)/7.1/cc
-CC_OLD = tools/ido_recomp/$(HOST_OS)/5.3/cc
-ASMPROC = python3 tools/asmproc/build.py
-ASMPROC_FLAGS :=
+ifeq ($(DETECTED_OS), macos)
+  CPPFLAGS += -xc++
+endif
 
-MIPS_VERSION := -mips2
+#### Tools ####
+ifneq ($(shell type $(MIPS_BINUTILS_PREFIX)ld >/dev/null 2>/dev/null; echo $$?), 0)
+$(error Unable to find $(MIPS_BINUTILS_PREFIX)ld. Please install or build MIPS binutils, commonly mips-linux-gnu. (or set MIPS_BINUTILS_PREFIX if your MIPS binutils install uses another prefix))
+endif
 
-OPTFLAGS := -O2
 
-OBJDUMP_FLAGS := -d -r -z -Mreg-names=32
+CC              := tools/ido/$(DETECTED_OS)/7.1/cc
+CC_OLD          := tools/ido/$(DETECTED_OS)/5.3/cc
 
-# include locations
-INC_DIRS := include include/PR include/audio .
-IINCS := $(foreach d,$(INC_DIRS),-I$d)
-# defines for SGI IDO
-CDEFS := -D_LANGUAGE_C -DF3DEX_GBI_2 -DNDEBUG 
+AS              := $(MIPS_BINUTILS_PREFIX)as
+LD              := $(MIPS_BINUTILS_PREFIX)ld
+OBJCOPY         := $(MIPS_BINUTILS_PREFIX)objcopy
+OBJDUMP         := $(MIPS_BINUTILS_PREFIX)objdump
+NM              := $(MIPS_BINUTILS_PREFIX)nm
 
+AR              := ar
+CPP             := cpp
+ICONV           := iconv
+CAT             := cat
+
+ASM_PROC        := $(PYTHON) tools/asm-processor/build.py
+ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename
+
+SPLAT           := $(PYTHON) -m splat split
+SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
+
+IINC := -Iinclude -Isrc -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
+IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
+IINC += -Iinclude/
+
+ifeq ($(KEEP_MDEBUG),0)
+  RM_MDEBUG = $(OBJCOPY) --remove-section .mdebug $@
+else
+  RM_MDEBUG = @:
+endif
+
+# Check code syntax with host compiler
+CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized -Wno-unused-label
+# Have CC_CHECK pretend to be a MIPS compiler
+MIPS_BUILTIN_DEFS := -DMIPSEB -D_MIPS_FPSET=16 -D_MIPS_ISA=2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZPTR=32
 ifneq ($(RUN_CC_CHECK),0)
-  CHECK_WARNINGS := -Wall -Wextra -Wno-unknown-pragmas
-  CHECK_DEFS := -D_MIPS_SZLONG=32 -DNON_MATCHING
-  CHECK_FLAGS := -fno-builtin -funsigned-char -fdiagnostics-color -std=gnu89 $(CDEFS) $(CHECK_DEFS) $(IINCS) -nostdinc
-  CC_CHECK := gcc -fsyntax-only
-
-  ifeq ($(HOST_OS),linux)
-    CC_CHECK += -m32
-  endif
-
-  ifneq ($(WERROR),0)
-    CHECK_WARNINGS += -Werror
+#   The -MMD flags additionaly creates a .d file with the same name as the .o file.
+  CC_CHECK          := $(CC_CHECK_COMP)
+  CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
+  ifneq ($(WERROR), 0)
+    CHECK_WARNINGS  += -Werror
   endif
 else
-  CC_CHECK := @:
+  CC_CHECK          := @:
 endif
 
-######################## Flags #############################
 
-ASFLAGS = -EB -mtune=vr4300 -march=vr4300 $(IINCS) -32
+CFLAGS          += -G 0 -non_shared -Xcpluscomm -nostdinc -Wab,-r4300_mul
 
-# we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-CFLAGS  = -G 0 -non_shared -Xfullwarn -Xcpluscomm $(IINCS) -Wab,-r4300_mul $(CDEFS) -woff 624,649,838,712,516,513,596,564,594,807  $(MIPS_VERSION)
+WARNINGS         := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594
+ASFLAGS          := -march=vr4300 -32 -G0
+COMMON_DEFINES   := -D_MIPS_SZLONG=32
+GBI_DEFINES      := -DF3DEX_GBI_2
+RELEASE_DEFINES  := -DNDEBUG -D_FINALROM
+AS_DEFINES       := -DMIPSEB -D_LANGUAGE_ASSEMBLY -D_ULTRA64
+C_DEFINES        := -DLANGUAGE_C -D_LANGUAGE_C
+LIBULTRA_DEFINES := -DBUILD_VERSION=VERSION_$(ULTRALIB_VERSION)
+ENDIAN           := -EB
 
-LDFLAGS = -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
+OPTFLAGS        := -O2 -g3
+MIPS_VERSION    := -mips2
+ICONV_FLAGS     := --from-code=UTF-8 --to-code=EUC-JP
 
-######################## Targets #############################
+# Use relocations and abi fpr names in the dump
+OBJDUMP_FLAGS := --disassemble --reloc --disassemble-zeroes -Mreg-names=32 -Mno-aliases
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
+ifneq ($(OBJDUMP_BUILD), 0)
+  OBJDUMP_CMD = $(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
+  OBJCOPY_BIN = $(OBJCOPY) -O binary $@ $@.bin
+  LIBDUMP_CMD = $(AR) xo --output $(@:.a=) $@
+else
+  OBJDUMP_CMD = @:
+  OBJCOPY_BIN = @:
+  LIBDUMP_CMD = @:
+endif
 
-# The reimplementations of the string functions need to treat char as signed.
-build/src/hal_libc.c.o: CFLAGS += -signed
+SPLAT_FLAGS ?=
+ifneq ($(WARNINGS_CHECK), 0)
+  SPLAT_FLAGS += --stdout-only
+endif
 
-# Libultra O1 files
-build/src/libultra/os/sendmesg.c.o: OPTFLAGS := -O1
-build/src/libultra/os/stopthread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/recvmesg.c.o: OPTFLAGS := -O1
-build/src/libultra/os/destroythread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/dequeuethread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/createthread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/virtualtophysical.c.o: OPTFLAGS := -O1
-build/src/libultra/os/initialize.c.o: OPTFLAGS := -O1
-build/src/libultra/os/epilinkhandle.c.o: OPTFLAGS := -O1
-build/src/libultra/os/getmemsize.c.o: OPTFLAGS := -O1
-build/src/libultra/os/seteventmesg.c.o: OPTFLAGS := -O1
-build/src/libultra/os/createmesgqueue.c.o: OPTFLAGS := -O1
-build/src/libultra/os/jammesg.c.o: OPTFLAGS := -O1
-build/src/libultra/os/setthreadpri.c.o: OPTFLAGS := -O1
-build/src/libultra/os/gettime.c.o: OPTFLAGS := -O1
-build/src/libultra/os/timerintr.c.o: OPTFLAGS := -O1
-build/src/libultra/os/setglobalintmask.c.o: OPTFLAGS := -O1
-build/src/libultra/os/resetglobalintmask.c.o: OPTFLAGS := -O1
-build/src/libultra/os/settime.c.o: OPTFLAGS := -O1
-build/src/libultra/os/yieldthread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/settimer.c.o: OPTFLAGS := -O1
-build/src/libultra/os/startthread.c.o: OPTFLAGS := -O1
-build/src/libultra/os/sethwinterrupt.c.o: OPTFLAGS := -O1
-build/src/libultra/io/pigetcmdq.c.o: OPTFLAGS := -O1
-build/src/libultra/io/sptask.c.o: OPTFLAGS := -O1
-build/src/libultra/io/controller.c.o: OPTFLAGS := -O1
-build/src/libultra/io/conteeplongread.c.o: OPTFLAGS := -O1
-build/src/libultra/io/viblack.c.o: OPTFLAGS := -O1
-build/src/libultra/io/visetmode.c.o: OPTFLAGS := -O1
-build/src/libultra/io/virepeatline.c.o: OPTFLAGS := -O1
-build/src/libultra/io/pfsisplug.c.o: OPTFLAGS := -O1
-build/src/libultra/io/epidma.c.o: OPTFLAGS := -O1
-build/src/libultra/io/dpctr.c.o: OPTFLAGS := -O1
-build/src/libultra/io/conteeplongwrite.c.o: OPTFLAGS := -O1
-build/src/libultra/io/si.c.o: OPTFLAGS := -O1
-build/src/libultra/io/sp.c.o: OPTFLAGS := -O1
-build/src/libultra/io/viswapbuf.c.o: OPTFLAGS := -O1
-build/src/libultra/io/sptaskyielded.c.o: OPTFLAGS := -O1
-build/src/libultra/io/vi.c.o: OPTFLAGS := -O1
-build/src/libultra/io/visetevent.c.o: OPTFLAGS := -O1
-build/src/libultra/io/aisetnextbuf.c.o: OPTFLAGS := -O1
-build/src/libultra/io/ai.c.o: OPTFLAGS := -O1
-build/src/libultra/io/vigetcurrframebuf.c.o: OPTFLAGS := -O1
-build/src/libultra/io/spsetpc.c.o: OPTFLAGS := -O1
-build/src/libultra/libc/ll.c.o: OPTFLAGS := -O1
-build/src/libultra/libc/ll.c.o: MIPS_VERSION := -mips3 -32
-build/src/libultra/libc/llcvt.c.o: OPTFLAGS := -O1
-build/src/libultra/libc/llcvt.c.o: MIPS_VERSION := -mips3 -32
+ifneq ($(FULL_DISASM), 0)
+  SPLAT_FLAGS += --disassemble-all
+endif
 
-# cheap hack. TODO: Make the override better
-build/src/libultra/io/gbpakpower.c.o: OPTFLAGS += -Wo,-loopunroll,0
-build/src/libultra/io/gbpakinit.c.o: OPTFLAGS += -Wo,-loopunroll,0
-build/src/libultra/io/gbpakselectbank.c.o: OPTFLAGS += -Wo,-loopunroll,0
+#### Files ####
 
-build/src/C030.c.o: OPTFLAGS += -Wo,-loopunroll,0
+$(shell mkdir -p asm/$(VERSION) assets/$(VERSION) linker_scripts/$(VERSION)/auto)
 
-# Libultra misc
-build/src/libultra/gu/scale.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/scale.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/translate.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/translate.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/mtxcatf.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/mtxcatf.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/mtxcatl.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/mtxcatl.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/rotateRPY.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/rotateRPY.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/rotate.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/rotate.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/ortho.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/ortho.c.o: OPTFLAGS := -O3
-build/src/libultra/gu/sinf.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/cosf.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/random.c.o: CC := $(CC_OLD)
-build/src/libultra/libc/xprintf.c.o: CC := $(CC_OLD)
-build/src/libultra/libc/xprintf.c.o: OPTFLAGS := -O3
-build/src/libultra/libc/xldtob.c.o: CC := $(CC_OLD)
-build/src/libultra/libc/xldtob.c.o: OPTFLAGS := -O3
-build/src/libultra/libc/xlitob.c.o: CC := $(CC_OLD)
-build/src/libultra/libc/xlitob.c.o: OPTFLAGS := -O3
-build/src/libultra/libc/string.c.o: CC := $(CC_OLD)
-build/src/libultra/libc/string.c.o: OPTFLAGS := -O3
-build/src/libultra/io/controller.c.o: CC := $(CC_OLD)
-build/src/libultra/io/contreaddata.c.o: CC := $(CC_OLD)
-build/src/libultra/io/devmgr.c.o: CC := $(CC_OLD)
-build/src/libultra/os/initialize.c.o: CC := $(CC_OLD)
-build/src/libultra/io/pfsgetstatus.c.o: CC := $(CC_OLD)
-build/src/libultra/io/epiread.c.o: CC := $(CC_OLD)
-build/src/libultra/al/reverb.c.o: CC := $(CC_OLD)
-build/src/libultra/al/bnkf.c.o: CC := $(CC_OLD)
-build/src/libultra/al/bnkf.c.o: OPTFLAGS := -O3
-build/src/libultra/al/load.c.o: CC := $(CC_OLD)
-build/src/libultra/al/load.c.o: OPTFLAGS := -O3
-build/src/libultra/al/synthesizer.c.o: CC := $(CC_OLD)
-build/src/libultra/al/drvrNew.c.o: CC := $(CC_OLD)
-build/src/libultra/al/mainbus.c.o: CC := $(CC_OLD)
-build/src/libultra/al/mainbus.c.o: OPTFLAGS := -O3
-build/src/libultra/al/auxbus.c.o: CC := $(CC_OLD)
-build/src/libultra/al/auxbus.c.o: OPTFLAGS := -O3
-build/src/libultra/al/env.c.o: CC := $(CC_OLD)
-build/src/libultra/al/resample.c.o: CC := $(CC_OLD)
-build/src/libultra/al/resample.c.o: OPTFLAGS := -O3
-build/src/libultra/al/save.c.o: CC := $(CC_OLD)
-build/src/libultra/al/heapalloc.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/mtxutil.c.o: CC := $(CC_OLD)
-build/src/libultra/gu/mtxutil.c.o: OPTFLAGS := -O3
-build/src/libultra/io/pfsisplug.c.o: CC := $(CC_OLD)
-build/src/libultra/io/conteepprobe.c.o: CC := $(CC_OLD)
-build/src/libultra/io/conteepwrite.c.o: CC := $(CC_OLD)
-build/src/libultra/io/conteepread.c.o: CC := $(CC_OLD)
-build/src/libultra/io/contpfs.c.o: CC := $(CC_OLD)
-build/src/libultra/io/viswapcontext.c.o: CC := $(CC_OLD)
-build/src/libultra/io/contramwrite.c.o: CC := $(CC_OLD)
-build/src/libultra/io/contramread.c.o: CC := $(CC_OLD)
-build/src/libultra/io/crc.c.o: CC := $(CC_OLD)
-build/src/libultra/libc/ldiv.c.o: CC := $(CC_OLD)
-build/src/libultra/io/vimgr.c.o: CC := $(CC_OLD)
-build/src/libultra/io/visetxscale.c.o: CC := $(CC_OLD)
-build/src/libultra/io/visetxscale.c.o: OPTFLAGS := -O1
-build/src/libultra/io/visetyscale.c.o: CC := $(CC_OLD)
-build/src/libultra/io/visetyscale.c.o: OPTFLAGS := -O1
-build/src/libultra/al/synallocfx.c.o: CC := $(CC_OLD)
-build/src/libultra/al/synallocfx.c.o: OPTFLAGS := -O3
+ULTRALIB_DIR  := lib/ultralib
+ULTRALIB_LIB  := $(ULTRALIB_DIR)/build/$(ULTRALIB_VERSION)/$(ULTRALIB_TARGET)/$(ULTRALIB_TARGET).a
+LIBULTRA_DIR  := lib/libultra
+LIBULTRA_LIB  := $(BUILD_DIR)/$(LIBULTRA_DIR).a
 
-build/src/libultra/io/gbpakcheckconnector.c.o: CC := $(CC_OLD)
-build/src/libultra/io/gbpakreadid.c.o: CC := $(CC_OLD)
-build/src/libultra/io/gbpakreadwrite.c.o: CC := $(CC_OLD)
-build/src/libultra/io/gbpakselectbank.c.o: CC := $(CC_OLD)
+SRC_DIRS      := $(shell find src -type d)
+ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*" -not -path "asm/$(VERSION)/lib/*")
+ASSET_DIRS    := $(shell find assets/$(VERSION) -type d)
+LIB_DIRS      := $(foreach f, $(LIBULTRA_DIR), $f)
 
-# run ASM-processor on non-libultra source files
-$(DECOMP_POKE_STADIUM): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
-$(DECOMP_LIBLEO): CC := $(ASMPROC) $(ASMPROC_FLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
+C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
+BIN_FILES     := $(foreach dir,$(ASSET_DIRS),$(wildcard $(dir)/*.bin))
+O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
+                 $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
+                 $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
 
-# turn off syntax checking errors for libultra
-build/src/libultra/al/%.c.o: CHECK_WARNINGS := -w
-build/src/libultra/gu/%.c.o: CHECK_WARNINGS := -w
-build/src/libultra/io/%.c.o: CHECK_WARNINGS := -w
-build/src/libultra/libc/%.c.o: CHECK_WARNINGS := -w
-build/src/libultra/os/%.c.o: CHECK_WARNINGS := -w
+ASSET_PNGS := $(foreach dir,$(ASSET_DIRS),$(wildcard $(dir)/*.png))
+ASSET_BINS := $(foreach f,$(ASSET_PNGS:.png=.bin),$(BUILD_DIR)/$f)
+ASSET_INC_C := $(foreach f,$(ASSET_PNGS:.png=.inc.c),$(BUILD_DIR)/$f)
 
-######################## Build #############################
 
-default: all
+# Automatic dependency files
+DEP_FILES := $(O_FILES:.o=.d) \
+             $(O_FILES:.o=.asmproc.d)
 
-LD_SCRIPT = $(TARGET).ld
+# create build directories
+$(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(BUILD_DIR)/linker_scripts/$(VERSION)/auto $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(ASSET_DIRS) $(LIB_DIRS),$(BUILD_DIR)/$(dir)))
+
+
+# directory flags
+build/src/boot/O2/%.o: OPTFLAGS := -O2
+build/src/boot/libc/%.o: OPTFLAGS := -O2
+build/src/boot/libc64/%.o: OPTFLAGS := -O2
+build/src/boot/libm/%.o: OPTFLAGS := -O2
+build/src/boot/libu64/%.o: OPTFLAGS := -O2
+
+# per-file flags
+
+build/src/boot/fault.o: CFLAGS += -trapuv
+build/src/boot/fault_drawer.o: CFLAGS += -trapuv
+
+# cc & asm-processor
+build/src/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+
+
+#### Main Targets ###
+
+all: rom
 
 rom: $(ROM)
-
-all: $(BUILD_DIR) $(BUILD_DIR)/$(ROM) verify
-
-distclean:
-	rm -rf asm bin assets $(BUILD_DIR) undefined_syms_auto.txt undefined_funcs_auto.txt
+ifneq ($(COMPARE),0)
+	@md5sum $(ROM)
+	@md5sum -c $(BASEROM_DIR)/checksum.md5
+endif
 
 clean:
-	rm -rf $(BUILD_DIR)
+	$(RM) -r $(BUILD_DIR)
 
-submodules:
-	git submodule update --init --recursive
+libclean:
+	$(MAKE) -C lib/ultralib clean VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET)
 
-split:
-	rm -rf $(DATA_DIRS) $(ASM_DIRS) && ./tools/n64splat/split.py $(SPLAT_YAML)
+distclean: clean libclean
+	$(RM) -r $(BUILD_DIR) asm/ assets/ .splat/
+	$(RM) -r linker_scripts/$(VERSION)/auto $(LDSCRIPT)
+	$(MAKE) -C tools distclean
 
-tools:
-	make -s -C tools
+venv:
+	test -d $(VENV) || python3 -m venv $(VENV)
+	$(PYTHON) -m pip install -U pip
+	$(PYTHON) -m pip install -U -r requirements.txt
 
-expected: 
+setup:
+	$(MAKE) -C tools WARNINGS_CHECK=$(WARNINGS_CHECK)
+
+extract:
+	$(RM) -r asm/$(VERSION) assets/$(VERSION)
+	$(CAT) yamls/$(VERSION)/header.yaml yamls/$(VERSION)/rom.yaml > $(SPLAT_YAML)
+	$(SPLAT) $(SPLAT_FLAGS) $(SPLAT_YAML)
+
+lib: $(ULTRALIB_LIB)
+
+diff-init: rom
 	$(RM) -r expected/
 	mkdir -p expected/
 	cp -r $(BUILD_DIR) expected/$(BUILD_DIR)
 
-setup: distclean submodules split tools all expected
+init: distclean
+	$(MAKE) venv
+	$(MAKE) setup
+	$(MAKE) extract
+	$(MAKE) all
+	$(MAKE) diff-init
 
-$(BUILD_DIR):
-	echo $(C_FILES)
-	mkdir $(BUILD_DIR)
+run: $(ROM)
+ifeq ($(N64_EMULATOR),)
+	$(error Emulator path not set. Set N64_EMULATOR in the Makefile, .make_options, or define it as an environment variable)
+endif
+	$(N64_EMULATOR) $<
 
-$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
-	@mkdir -p $(shell dirname $@)
-	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+.PHONY: all rom clean libclean distclean venv setup extract lib diff-init init run
+.DEFAULT_GOAL := rom
+# Prevent removing intermediate files
+.SECONDARY:
 
-$(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
-	$(OBJCOPY) $< $@ -O binary --gap-fill 0xFF
 
-$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT)
-	@$(LD) $(LDFLAGS) -o $@
+#### Various Recipes ####
 
-$(BUILD_DIR)/%.c.o: %.c
-	$(CC_CHECK) $(CHECK_FLAGS) $(CHECK_WARNINGS) -MMD -MP -MT $@ -MF $(@:.o=.d) $<
-	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $<
+$(ROM): $(ELF)
+	$(OBJCOPY) -O binary --gap-fill=0xFF $< $@
+# TODO: update rom header checksum
 
-$(BUILD_DIR)/src/libultra/libc/ll.c.o: src/libultra/libc/ll.c
-	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $<
-	python3 tools/set_o32abi_bit.py $@
-	@$(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
+# TODO: avoid using auto/undefined
+$(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
+	$(LD) $(LDFLAGS) -T $(LDSCRIPT) \
+		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld \
+		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld -T $(BUILD_DIR)/linker_scripts/common_undef_syms.ld \
+		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld \
+		-Map $(MAP) $(LIBULTRA_LIB) -o $@
 
-$(BUILD_DIR)/src/libultra/libc/llcvt.c.o: src/libultra/libc/llcvt.c
-	$(CC) -c $(CFLAGS) $(OPTFLAGS) -o $@ $<
-	python3 tools/set_o32abi_bit.py $@
-	@$(OBJDUMP) $(OBJDUMP_FLAGS) $@ > $(@:.o=.s)
+$(LDSCRIPT): linker_scripts/$(VERSION)/$(TARGET).ld
+	cp $< $@
 
-$(BUILD_DIR)/%.s.o: %.s
-	iconv --from UTF-8 --to EUC-JP $^ | $(AS) $(ASFLAGS) -o $@
+$(BUILD_DIR)/%.ld: %.ld
+	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $< > $@
 
-$(BUILD_DIR)/%.bin.o: %.bin
-	$(LD) -r -b binary -o $@ $<
+$(LIBULTRA_LIB): $(ULTRALIB_LIB)
+	cp $< $@
+	$(LIBDUMP_CMD)
 
-# final z64 updates checksum
-$(BUILD_DIR)/$(ROM): $(BUILD_DIR)/$(TARGET).bin
-	@cp $< $@
+$(ULTRALIB_LIB):
+	$(MAKE) -C lib/ultralib VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET) FIXUPS=1 CROSS=$(MIPS_BINUTILS_PREFIX) CC=../../$(CC_OLD)
 
-verify: $(BUILD_DIR)/$(ROM)
-	md5sum -c checksum.md5
+$(BUILD_DIR)/%.o: %.bin
+	$(OBJCOPY) -I binary -O elf32-big $< $@
 
-.PHONY: all clean distclean default split setup
+$(BUILD_DIR)/%.o: %.s
+	$(ICONV) $(ICONV_FLAGS) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) -o $@
+	$(OBJDUMP_CMD)
 
-print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
+$(BUILD_DIR)/%.o: %.c
+	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
+	$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
+	$(OBJDUMP_CMD)
+	$(RM_MDEBUG)
+
+# Add these as a dependency for .o files
+asset_files: $(ASSET_INC_C)
+$(O_FILES): | asset_files
+.PHONY: asset_files
 
 -include $(DEP_FILES)
+
+# Print target for debugging
+print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
