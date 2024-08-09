@@ -1,6 +1,12 @@
 #ifndef _MEMMAP_H_
 #define _MEMMAP_H_
 
+#ifdef M2C
+#define RELOCATIONS_SIZE 1
+#else
+#define RELOCATIONS_SIZE
+#endif
+
 struct MemoryMap {
     uintptr_t vaddr;
     size_t size;
@@ -19,7 +25,7 @@ extern struct MemoryMap gFragments[240];
 
 struct RelocTable {
     /* 0x00 */ u32 nRelocations;
-    /* 0x04 */ u32 relocations[]; // variable size
+    /* 0x04 */ u32 relocations[RELOCATIONS_SIZE]; // variable size
 };
 
 struct Fragment {
@@ -30,7 +36,7 @@ struct Fragment {
     u32 relocOffset; // relocOffset
     u32 sizeInRom;
     u32 sizeInRam;
-    char data[]; // variable size
+    char data[RELOCATIONS_SIZE]; // variable size
 };
 
 void Memmap_SetSegmentMap(u32 id, uintptr_t vaddr, u32 size);

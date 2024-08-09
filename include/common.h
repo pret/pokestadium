@@ -6,6 +6,7 @@
 #include "functions.h"
 #include "variables.h"
 #include "gfx.h"
+#include "color.h"
 
 typedef struct unk_D_86002F58_004 {
     /* 0x000 */ char pad0[0xC];

@@ -46,7 +46,8 @@ segments:
     - [0x6430, c, controller] # controller code
     - [0x6A40, c]
     - [0x6BC0, c] # 
-    - [0x75F0, c] # stage loader
+    - [0x75F0, c, stage_loader] # stage loader
+    - [0x8EB0, c] # empty file/padding?
     - [0x8EC0, c, crash_screen] # crash handler
     - [0x9D20, c, profiler]
     - [0xAF00, c, math_util]
@@ -329,6 +330,7 @@ segments:
     # .data is somewhere in here
     - [0x69790, .data, util]
     - [0x697A0, bin, rom_data_697A0]
+    - [0x697C0, .data, stage_loader]
     - [0x6A1B0, .data, crash_screen]
     - [0x6A3B0, .data, profiler]
     - [0x6A3D0, .data, gb_tower]
