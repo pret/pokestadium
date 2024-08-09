@@ -377,7 +377,7 @@ expected:
 	mkdir -p expected/
 	cp -r $(BUILD_DIR) expected/$(BUILD_DIR)
 
-setup: distclean submodules split tools all expected
+setup: distclean submodules split
 
 $(BUILD_DIR):
 	echo $(C_FILES)
