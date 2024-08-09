@@ -1,0 +1,27 @@
+compiler_type = "ido"
+
+[preserve_macros]
+NULL = "int"
+"g[DS]P.*" = "void"
+"gs[DS]P.*" = "void"
+"gDma.*" = "void"
+"G_IM_SIZ_.*" = "int"
+"G_IM_FMT_.*" = "int"
+"G_TX_.*" = "int"
+"G_[AC]C.*" = "int"
+OPEN_DISPS = "void"
+CLOSE_DISPS = "void"
+OVERLAY_DISP = "int"
+POLY_OPA_DISP = "int"
+POLY_XLU_DISP = "int"
+UNK_2B0_DISP = "int"
+UNK_2C0_DISP = "int"
+LIGHT_DISP = "int"
+
+[decompme.compilers]
+"tools/ido_recomp/linux/7.1/cc" = "ido7.1"
+"tools/ido_recomp/macos/7.1/cc" = "ido7.1"
+"tools/ido_recomp/windows/7.1/cc" = "ido7.1"
+"tools/ido_recomp/linux/5.3/cc" = "ido5.3"
+"tools/ido_recomp/macos/5.3/cc" = "ido5.3"
+"tools/ido_recomp/windows/5.3/cc" = "ido5.3"

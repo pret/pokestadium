@@ -21,12 +21,6 @@ extern void func_800052B4(void);
 extern void func_800053B4(void *, s32); // types unknown
 extern void func_80005328(void *); // types unknown
 
-// 6BC0.s
-extern u32 func_80006314(s32, s32, s32, s32, s32); // types unknown
-
-// 75F0.s
-extern void HAL_Printf(s32 x, s32 y, char *str, ...);
-
 // C030.s
 extern s32 func_8000B4C4(void);
 

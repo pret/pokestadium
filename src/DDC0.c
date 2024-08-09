@@ -2,6 +2,7 @@
 #include "ultra64.h"
 #include "dp_intro.h"
 #include "profiler.h"
+#include "4BDC0.h"
 
 extern s32 D_800A83A0;
 
@@ -27,7 +28,6 @@ s32 func_800484E0(void);
 void func_80009210(void);
 void func_800373D8(void);
 void func_8004FD44(void);
-void func_8004B1CC();
 void func_8004B9C4();
 void func_80037340(void*);
 void func_8004FCD8(s32);
@@ -64,14 +64,14 @@ void func_8000D1F0(s32 arg0) {
 
 void func_8000D23C(s32 arg0) {
     if (arg0 != D_800A847C) {
-        func_8004B1CC();
+        func_8004B1CC(arg0);
         D_800A847C = arg0;
     }
 }
 
-void func_8000D278(void) {
+void func_8000D278(s32 arg0) {
     if (D_800A847C >= 0) {
-        func_8004B9C4();
+        func_8004B9C4(arg0);
         D_800A847C = -1;
     }
 }

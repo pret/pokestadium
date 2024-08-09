@@ -1,4 +1,5 @@
 #include "common.h"
+#include "E890.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/E890/func_8000DC90.s")
 

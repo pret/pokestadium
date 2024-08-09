@@ -35,10 +35,10 @@ struct MainPool {
 };
 
 // structs used for the smaller pools allocated from the global pool.
-struct MemoryBlock {
+typedef struct MemoryBlock {
     /* 0x00 */ struct MemoryBlock *next;
     /* 0x04 */ u32 size;
-};
+} MemoryBlock;
 
 struct MemoryPool {
     /* 0x00 */ OSMesg msgs[1];

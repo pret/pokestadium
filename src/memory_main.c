@@ -41,7 +41,7 @@ void* main_pool_alloc_from_pool(u32 size, u32 side) {
     void* addr = NULL;
 
     size = ALIGN16(size) + sizeof(struct MainPoolBlock);
-    
+
     // do we have enough space?
     if (size > 0 && size <= sMemPool.available) {
         if (side == MEMORY_POOL_LEFT) {
