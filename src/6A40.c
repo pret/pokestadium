@@ -1,15 +1,15 @@
-#include <ultra64.h>
+#include "common.h"
+#include "6A40.h"
 
 struct UnkStruct800A7428 {
-    u32 *unk0;
-    u32 *unk4;
+    u32* unk0;
+    u32* unk4;
     u32 unk8;
     s32 unkC;
     s16 unk10;
 };
 
 extern struct UnkStruct800A7428 D_800A7428;
-extern Gfx* gDisplayListHead;
 
 void func_80005EDC(void);
 
@@ -27,7 +27,7 @@ void func_80005EAC(void) {
 }
 
 void func_80005EDC(void) {
-    s32 *temp_v0 = (s32*)&D_800A7428;
+    s32* temp_v0 = (s32*)&D_800A7428;
 
     D_800A7428.unk10 ^= 1;
     temp_v0 += D_800A7428.unk10;
@@ -37,7 +37,7 @@ void func_80005EDC(void) {
 }
 
 void func_80005F1C(s32* arg0, s32* arg1) {
-    s32 *ptr = (s32*)&D_800A7428;
+    s32* ptr = (s32*)&D_800A7428;
     *arg1 = (uintptr_t)gDisplayListHead - ptr[D_800A7428.unk10];
     *arg0 = ptr[D_800A7428.unk10];
 }

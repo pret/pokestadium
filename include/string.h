@@ -3,7 +3,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#ifndef M2C
 #ident "$Revision: 1.23 $"
+#endif
 /*
 *
 * Copyright 1992, Silicon Graphics, Inc.

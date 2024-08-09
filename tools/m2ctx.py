@@ -10,7 +10,6 @@ from pathlib import Path
 # assuming that this util is in tools/
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
-print(root_dir)
 
 # Project-specific
 CPP_FLAGS = [
@@ -29,6 +28,7 @@ CPP_FLAGS = [
     "-Iinclude/PR",
     "-Isrc",
     "-I.",
+    "-DM2C",
 ]
 
 import os

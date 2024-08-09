@@ -1,4 +1,5 @@
 #include "common.h"
+#include "1CF30.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/1CF30/func_8001C330.s")
 

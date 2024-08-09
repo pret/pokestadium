@@ -100,7 +100,7 @@ extern s32 D_80084758;
 extern u64 D_80084760[0x100 / sizeof(u64)];
 
 // function prototypes
-void func_80001AD4(u16 arg0);
+void func_80001AD4(u16 color);
 void func_80001C1C(struct UnkArray4* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, s32 arg5, s32 arg6, s32 arg7);
 
 void func_80001380(struct UnkStruct80001380* arg0) {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "6BC0.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/6BC0/func_80005FC0.s")
 
