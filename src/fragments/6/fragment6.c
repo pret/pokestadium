@@ -1,7 +1,7 @@
 #include "src/memory.h"
 #include "src/3FB0.h"
 #include "src/6A40.h"
-#include "src/75F0.h"
+#include "src/stage_loader.h"
 #include "src/1CF30.h"
 #include "src/4BDC0.h"
 #include "src/fragments/2/fragment2.h"
@@ -31,192 +31,254 @@ typedef struct unk_D_86002920 {
 } unk_D_86002920; // size = 0xC
 
 static unk_D_86002920 D_86002920[31] = {
-    {0x87A0,
-    0x1190,
-    0x0032,
-    0x0028,
-    0x0005,
-    0x0000,},
-    {0x87A0,
-    0x1178,
-    0x004B,
-    0x0037,
-    0x0014,
-    0x0000,},
-    {0x87A0,
-    0x1180,
-    0x005C,
-    0x003C,
-    0x001E,
-    0x0000,},
-    {0x87A0,
-    0x11A4,
-    0x0063,
-    0x005A,
-    0x0028,
-    0x0000,},
-    {0xFFFF,
-    0xFFE2,
-    0xFFFF,
-    0xFFF5,
-    0x0000,
-    0x0007,},
-    {0x0000,
-    0x0019,
-    0x000D,
-    0x000D,
-    0x000B,
-    0x000C,},
-    {0x000F,
-    0x000F,
-    0x000D,
-    0x000E,
-    0x0011,
-    0x0011,},
-    {0x000F,
-    0x0010,
-    0x0013,
-    0x0013,
-    0x0011,
-    0x0012,},
-    {0xA5B3,
-    0xA5A4,
-    0xA5AD,
-    0xA5F3,
-    0xA5B0,
-    0xA4CE,},
-    {0xA4CF,
-    0xA4CD,
-    0xA4EB,
-    0xA4C7,
-    0xA5DD,
-    0xA5F3,},
-    {0x0000,
-    0x0000,
-    0xA1A1,
-    0xA1A1,
-    0xA1A1,
-    0xA1A1,},
-    {0xA4C7,
-    0xA1A1,
-    0xA5B8,
-    0xA5E3,
-    0xA5F3,
-    0xA5D7,},
-    {0xA4B7,
-    0xA4C6,
-    0xA1A1,
-    0xA4A6,
-    0xA4A8,
-    0xA4CE,},
-    {0xA5AB,
-    0xA5A6,
-    0xA5F3,
-    0xA5BF,
-    0xA1BC,
-    0xA4F2,},
-    {0x0000,
-    0x0000,
-    0xA4BF,
-    0xA4AF,
-    0xA4B5,
-    0xA4F3,},
-    {0xA1A1,
-    0xA4BF,
-    0xA4BF,
-    0xA4A4,
-    0xA4BF,
-    0xA4D2,},
-    {0xA4C8,
-    0xA4AC,
-    0xA1A1,
-    0xA4AB,
-    0xA4C1,
-    0xA1A3,},
-    {0x0000,
-    0x0000,
-    0xA1A1,
-    0xA1A1,
-    0xA1A1,
-    0xA1A1,},
-    {0xA4F2,
-    0xA1A1,
-    0xA4CA,
-    0xA4AC,
-    0xA4AF,
-    0xA1A1,},
-    {0xA4AA,
-    0xA4B5,
-    0xA4CA,
-    0xA4A4,
-    0xA4C8,
-    0xA1A1,},
-    {0xA5AB,
-    0xA5A6,
-    0xA5F3,
-    0xA5BF,
-    0xA1BC,
-    0xA4DE,},
-    {0xA4C7,
-    0x0000,
-    0xA4C8,
-    0xA4C9,
-    0xA4AB,
-    0xA4CA,},
-    {0xA4A4,
-    0xA4E8,
-    0xA1A3,
-    0x0000,
-    0xA4C1,
-    0xA4E3,},
-    {0xA4AF,
-    0xA4C1,
-    0xA4B9,
-    0xA4EB,
-    0xA1A1,
-    0xA5BF,},
-    {0xA5A4,
-    0xA5DF,
-    0xA5F3,
-    0xA5B0,
-    0xA4CB,
-    0xA4A2,},
-    {0xA4EF,
-    0xA4BB,
-    0xA4C6,
-    0xA1A1,
-    0xA5C6,
-    0xA5F3,},
-    {0xA5DD,
-    0xA4E8,
-    0xA4AF,
-    0x0000,
-    0xA5DC,
-    0xA5BF,},
-    {0xA5F3,
-    0xA4F2,
-    0xA4AA,
-    0xA4B9,
-    0xA4CE,
-    0xA4AC,},
-    {0xA1A1,
-    0xA4B8,
-    0xA4E7,
-    0xA4A6,
-    0xA4BA,
-    0xA4CB,},
-    {0xA5B8,
-    0xA5E3,
-    0xA5F3,
-    0xA5D7,
-    0xA4B9,
-    0xA4EB,},
-    {0xA5B3,
-    0xA5C4,
-    0xA4C0,
-    0xA1A3,
-    0x0000,
-    0x0000,},
+    {
+        0x87A0,
+        0x1190,
+        0x0032,
+        0x0028,
+        0x0005,
+        0x0000,
+    },
+    {
+        0x87A0,
+        0x1178,
+        0x004B,
+        0x0037,
+        0x0014,
+        0x0000,
+    },
+    {
+        0x87A0,
+        0x1180,
+        0x005C,
+        0x003C,
+        0x001E,
+        0x0000,
+    },
+    {
+        0x87A0,
+        0x11A4,
+        0x0063,
+        0x005A,
+        0x0028,
+        0x0000,
+    },
+    {
+        0xFFFF,
+        0xFFE2,
+        0xFFFF,
+        0xFFF5,
+        0x0000,
+        0x0007,
+    },
+    {
+        0x0000,
+        0x0019,
+        0x000D,
+        0x000D,
+        0x000B,
+        0x000C,
+    },
+    {
+        0x000F,
+        0x000F,
+        0x000D,
+        0x000E,
+        0x0011,
+        0x0011,
+    },
+    {
+        0x000F,
+        0x0010,
+        0x0013,
+        0x0013,
+        0x0011,
+        0x0012,
+    },
+    {
+        0xA5B3,
+        0xA5A4,
+        0xA5AD,
+        0xA5F3,
+        0xA5B0,
+        0xA4CE,
+    },
+    {
+        0xA4CF,
+        0xA4CD,
+        0xA4EB,
+        0xA4C7,
+        0xA5DD,
+        0xA5F3,
+    },
+    {
+        0x0000,
+        0x0000,
+        0xA1A1,
+        0xA1A1,
+        0xA1A1,
+        0xA1A1,
+    },
+    {
+        0xA4C7,
+        0xA1A1,
+        0xA5B8,
+        0xA5E3,
+        0xA5F3,
+        0xA5D7,
+    },
+    {
+        0xA4B7,
+        0xA4C6,
+        0xA1A1,
+        0xA4A6,
+        0xA4A8,
+        0xA4CE,
+    },
+    {
+        0xA5AB,
+        0xA5A6,
+        0xA5F3,
+        0xA5BF,
+        0xA1BC,
+        0xA4F2,
+    },
+    {
+        0x0000,
+        0x0000,
+        0xA4BF,
+        0xA4AF,
+        0xA4B5,
+        0xA4F3,
+    },
+    {
+        0xA1A1,
+        0xA4BF,
+        0xA4BF,
+        0xA4A4,
+        0xA4BF,
+        0xA4D2,
+    },
+    {
+        0xA4C8,
+        0xA4AC,
+        0xA1A1,
+        0xA4AB,
+        0xA4C1,
+        0xA1A3,
+    },
+    {
+        0x0000,
+        0x0000,
+        0xA1A1,
+        0xA1A1,
+        0xA1A1,
+        0xA1A1,
+    },
+    {
+        0xA4F2,
+        0xA1A1,
+        0xA4CA,
+        0xA4AC,
+        0xA4AF,
+        0xA1A1,
+    },
+    {
+        0xA4AA,
+        0xA4B5,
+        0xA4CA,
+        0xA4A4,
+        0xA4C8,
+        0xA1A1,
+    },
+    {
+        0xA5AB,
+        0xA5A6,
+        0xA5F3,
+        0xA5BF,
+        0xA1BC,
+        0xA4DE,
+    },
+    {
+        0xA4C7,
+        0x0000,
+        0xA4C8,
+        0xA4C9,
+        0xA4AB,
+        0xA4CA,
+    },
+    {
+        0xA4A4,
+        0xA4E8,
+        0xA1A3,
+        0x0000,
+        0xA4C1,
+        0xA4E3,
+    },
+    {
+        0xA4AF,
+        0xA4C1,
+        0xA4B9,
+        0xA4EB,
+        0xA1A1,
+        0xA5BF,
+    },
+    {
+        0xA5A4,
+        0xA5DF,
+        0xA5F3,
+        0xA5B0,
+        0xA4CB,
+        0xA4A2,
+    },
+    {
+        0xA4EF,
+        0xA4BB,
+        0xA4C6,
+        0xA1A1,
+        0xA5C6,
+        0xA5F3,
+    },
+    {
+        0xA5DD,
+        0xA4E8,
+        0xA4AF,
+        0x0000,
+        0xA5DC,
+        0xA5BF,
+    },
+    {
+        0xA5F3,
+        0xA4F2,
+        0xA4AA,
+        0xA4B9,
+        0xA4CE,
+        0xA4AC,
+    },
+    {
+        0xA1A1,
+        0xA4B8,
+        0xA4E7,
+        0xA4A6,
+        0xA4BA,
+        0xA4CB,
+    },
+    {
+        0xA5B8,
+        0xA5E3,
+        0xA5F3,
+        0xA5D7,
+        0xA4B9,
+        0xA4EB,
+    },
+    {
+        0xA5B3,
+        0xA5C4,
+        0xA4C0,
+        0xA1A3,
+        0x0000,
+        0x0000,
+    },
 };
 
 static f32 D_86002A94 = 50.0f;
@@ -231,86 +293,58 @@ typedef struct unk_D_86002A98 {
 } unk_D_86002A98; // size = 0xC
 
 static unk_D_86002A98 D_86002A98[4] = {
-    {0x0014,
-    0x00D7,
-    0xFFFF,
-    0xFFFF,
-    0x0000,
-    0xFFFF,},
-    {0x005A,
-    0x00D7,
-    0xFFFF,
-    0xFFFF,
-    0x00FF,
-    0x00FF,},
-    {0x00A0,
-    0x00D7,
-    0xFFFF,
-    0xFFFF,
-    0xFF00,
-    0x00FF,},
-    {0x00E6,
-    0x00D7,
-    0xFFFF,
-    0xFFFF,
-    0xFFFF,
-    0x00FF,},
+    {
+        0x0014,
+        0x00D7,
+        0xFFFF,
+        0xFFFF,
+        0x0000,
+        0xFFFF,
+    },
+    {
+        0x005A,
+        0x00D7,
+        0xFFFF,
+        0xFFFF,
+        0x00FF,
+        0x00FF,
+    },
+    {
+        0x00A0,
+        0x00D7,
+        0xFFFF,
+        0xFFFF,
+        0xFF00,
+        0x00FF,
+    },
+    {
+        0x00E6,
+        0x00D7,
+        0xFFFF,
+        0xFFFF,
+        0xFFFF,
+        0x00FF,
+    },
 };
 
 static u8 D_86002AC8[] = {
-    0x03, 0x03, 0xED, 0x80,
-    0x00, 0x0E, 0x00, 0x00,
-    0x03, 0x03, 0xF1, 0x80,
-    0x00, 0x02, 0x00, 0x00,
-    0x03, 0x03, 0xF5, 0x80,
-    0x00, 0x06, 0x00, 0x00,
-    0x03, 0x03, 0xF1, 0x80,
-    0x00, 0x02, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x03, 0xED, 0x80, 0x00, 0x0E, 0x00, 0x00, 0x03, 0x03, 0xF1, 0x80, 0x00, 0x02,
+    0x00, 0x00, 0x03, 0x03, 0xF5, 0x80, 0x00, 0x06, 0x00, 0x00, 0x03, 0x03, 0xF1, 0x80,
+    0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
 static u8 D_86002AF0[] = {
-    0x03, 0x04, 0x05, 0x80,
-    0x00, 0x12, 0x00, 0x00,
-    0x03, 0x04, 0x09, 0x80,
-    0x00, 0x02, 0x00, 0x00,
-    0x03, 0x04, 0x0D, 0x80,
-    0x00, 0x08, 0x00, 0x00,
-    0x03, 0x04, 0x09, 0x80,
-    0x00, 0x02, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
+    0x03, 0x04, 0x05, 0x80, 0x00, 0x12, 0x00, 0x00, 0x03, 0x04, 0x09, 0x80, 0x00, 0x02,
+    0x00, 0x00, 0x03, 0x04, 0x0D, 0x80, 0x00, 0x08, 0x00, 0x00, 0x03, 0x04, 0x09, 0x80,
+    0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
 static u32 D_86002B18[] = {
-    0x0C00FFFF,
-    (u32)&D_5000000,
-    0x0B00001E,
-    0x00000000,
-    0x014000F0,
-    0x0000000F,
-    0x00000000,
-    0x00000000,
-    (u32)&D_5000000,
-    0x0D000000,
-    (u32)&D_5000000,
-    0x0F000002,
-    0x14000000,
-    0x002B0012,
-    0xFFFFFF32,
-    0x16FFFFFF,
-    0x0F000003,
-    (u32)&D_5000000,
-    0x0A000000,
-    (u32)&D_800AC840,
-    (u32)&D_6000000,
-    (u32)&D_6000000,
-    (u32)&D_6000000,
-    (u32)&D_3000000,
-    0x87806398,
-    (u32)&D_6000000,
-    (u32)&D_1000000,
+    0x0C00FFFF, (u32)&D_5000000,  0x0B00001E,      0x00000000,      0x014000F0,      0x0000000F,
+    0x00000000, 0x00000000,       (u32)&D_5000000, 0x0D000000,      (u32)&D_5000000, 0x0F000002,
+    0x14000000, 0x002B0012,       0xFFFFFF32,      0x16FFFFFF,      0x0F000003,      (u32)&D_5000000,
+    0x0A000000, (u32)&D_800AC840, (u32)&D_6000000, (u32)&D_6000000, (u32)&D_6000000, (u32)&D_3000000,
+    0x87806398, (u32)&D_6000000,  (u32)&D_1000000,
 };
 
 typedef struct unk_D_86002F30 {
@@ -371,12 +405,11 @@ void func_86000020(void) {
         D_86002F58[a].unk_17A = D_80068BA0[a]->unk_08;
         D_86002F58[a].unk_174 = D_80068BA0[a]->unk_06;
     }
-    
+
     for (i = 0; i < 4; i++) {
         D_86003B5C = &D_86002F58[i];
         if (D_86003B5C->unk_000 == 0) {
-            if ((D_86002F48 != 0) && (D_86002F48 != 2) && 
-                (D_86002F48 != 3) && (D_86002F48 != 5)) {
+            if ((D_86002F48 != 0) && (D_86002F48 != 2) && (D_86002F48 != 3) && (D_86002F48 != 5)) {
                 D_86003B5C->unk_174 = 0;
                 D_86003B5C->unk_17A = 0;
             }
@@ -398,28 +431,28 @@ void func_86000020(void) {
                     break;
 
                 case 8:
-                    if ((D_86003B5C->unk_004.unk_048 > 0x90000) && 
+                    if ((D_86003B5C->unk_004.unk_048 > 0x90000) &&
                         (func_878001E8(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
                     break;
 
                 case 9:
-                    if ((D_86003B5C->unk_004.unk_048 > 0xD0000) && 
+                    if ((D_86003B5C->unk_004.unk_048 > 0xD0000) &&
                         (func_878001E8(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
                     break;
 
                 case 10:
-                    if ((D_86003B5C->unk_004.unk_048 > 0xB0000) && 
+                    if ((D_86003B5C->unk_004.unk_048 > 0xB0000) &&
                         (func_878001E8(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
                     break;
 
                 case 11:
-                    if ((D_86003B5C->unk_004.unk_048 > 0xF0000) && 
+                    if ((D_86003B5C->unk_004.unk_048 > 0xF0000) &&
                         (func_878001E8(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
@@ -432,8 +465,8 @@ void func_86000020(void) {
         for (i = 0; i < 4; i++) {
             D_86003B5C = &D_86002F58[i];
             for (j = 1; j > 0; j--) {
-                D_86003B5C->unk_176[j] = D_86003B5C->unk_176[j-1];
-                D_86003B5C->unk_17C[j] = D_86003B5C->unk_17C[j-1];
+                D_86003B5C->unk_176[j] = D_86003B5C->unk_176[j - 1];
+                D_86003B5C->unk_17C[j] = D_86003B5C->unk_17C[j - 1];
             }
             D_86003B5C->unk_176[0] = D_86003B5C->unk_174;
             D_86003B5C->unk_17C[0] = D_86003B5C->unk_17A;
@@ -491,10 +524,14 @@ void func_86000564(void) {
 void func_860005B8(s32 arg0) {
     s32 i;
     UNUSED u8 sp68[] = {
-        0, 0, 30, 
+        0,
+        0,
+        30,
     };
     UNUSED u8 sp64[] = {
-        0, 0, 150, 
+        0,
+        0,
+        150,
     };
 
     if (arg0 != 0) {
@@ -537,7 +574,8 @@ void func_860005B8(s32 arg0) {
             func_8001F3B4(0xC);
             func_8001F324(0xFF, 0xFF, 0xFF, 0xFF);
             func_8001F36C(0xF9, 0xF4, 0, 0xFF);
-            func_8001F1E8(0xA0 - (func_878013D4(D_86003B7C, func_8002D7C0(0, 0, D_87806330, 0x15)) / 2), 0x20, func_8002D7C0(0, 0, D_87806330, 0x15));
+            func_8001F1E8(0xA0 - (func_878013D4(D_86003B7C, func_8002D7C0(0, 0, D_87806330, 0x15)) / 2), 0x20,
+                          func_8002D7C0(0, 0, D_87806330, 0x15));
             func_8001F324(0xFF, 0xFF, 0xFF, 0xFF);
             func_8001F36C(0xFF, 0xFF, 0xFF, 0xFF);
             func_8001F1E8(0x28, 0x34, func_8002D7C0(0, 0, D_87806330, 0x16));
@@ -545,9 +583,9 @@ void func_860005B8(s32 arg0) {
             func_8001F1E8(0x28, 0x7C, func_8002D7C0(0, 0, D_87806330, 0x18));
             func_8001F324(0xC8, 0xC8, 0xFF, 0xFF);
             func_8001F36C(0x50, 0x50, 0xFF, 0xFF);
-            
+
             temp_s0_2 = func_8002D7C0(0, 0, D_87806330, 0x5F);
-            
+
             func_87801290(&sp50, &sp4C, func_8002D7C0(0, 0, D_87806330, 0x16), temp_s0_2, 0xC);
             if (sp50 >= 0) {
                 func_8001F1E8(sp50 + 0x28, sp4C + 0x34, temp_s0_2);
@@ -581,7 +619,8 @@ void func_860005B8(s32 arg0) {
             func_8001EBE0(0x20, -2);
             func_8001F324(0xFF, 0xFF, 0xFF, 0xFF);
             func_8001F36C(0x1E, 0x1E, 0xFF, 0xFF);
-            func_8001F1E8(0xA0 - (func_878013D4(D_86003B7C, func_8002D7C0(0, 0, D_87806330, 0x5A)) / 2), 0x64, func_8002D7C0(0, 0, D_87806330, 0x5A));
+            func_8001F1E8(0xA0 - (func_878013D4(D_86003B7C, func_8002D7C0(0, 0, D_87806330, 0x5A)) / 2), 0x64,
+                          func_8002D7C0(0, 0, D_87806330, 0x5A));
             func_8001F4C4();
             break;
     }
@@ -597,10 +636,14 @@ void func_860005B8(s32 arg0) {
 }
 #else
 static u8 D_86002B84[] = {
-    0, 0, 30, 
+    0,
+    0,
+    30,
 };
 static u8 D_86002B88[] = {
-    0, 0, 150, 
+    0,
+    0,
+    150,
 };
 void func_860005B8(s32 arg0);
 #pragma GLOBAL_ASM("asm/nonmatchings/fragments/6/fragment6/func_860005B8.s")
@@ -611,134 +654,21 @@ static Gfx D_86002B90[] = {
 };
 
 static u32 D_86002B98[] = {
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x000A000F,
-    0x00140014,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x0000000A,
-    0x00190021,
-    0x002A0033,
-    0x0036003B,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x0000000A,
-    0x0019002A,
-    0x003B004B,
-    0x00550060,
-    0x00640067,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00140025,
-    0x003B0052,
-    0x00670076,
-    0x0082008B,
-    0x00900094,
-    0x00000000,
-    0x00000000,
-    0x00000014,
-    0x002F0046,
-    0x00600079,
-    0x008D009F,
-    0x00A900B1,
-    0x00B600B9,
-    0x00000000,
-    0x00000000,
-    0x00140033,
-    0x0052006D,
-    0x0088009F,
-    0x00B100C1,
-    0x00CA00D1,
-    0x00D400D6,
-    0x00000000,
-    0x00000014,
-    0x002F0052,
-    0x0071008D,
-    0x00A900BE,
-    0x00CF00D9,
-    0x00E200E6,
-    0x00EA00EA,
-    0x00000000,
-    0x000A0025,
-    0x0046006D,
-    0x008D00AD,
-    0x00C400D6,
-    0x00E300EC,
-    0x00F100F4,
-    0x00F600F7,
-    0x00000000,
-    0x0019003B,
-    0x00600088,
-    0x00A900C4,
-    0x00D900E6,
-    0x00F000F6,
-    0x00F900FB,
-    0x00FC00FC,
-    0x0000000A,
-    0x002A0052,
-    0x0079009F,
-    0x00BE00D6,
-    0x00E600F2,
-    0x00F800FC,
-    0x00FD00FE,
-    0x00FE00FE,
-    0x00000019,
-    0x003B0067,
-    0x008D00B1,
-    0x00CF00E3,
-    0x00F000F8,
-    0x00FC00FE,
-    0x00FE00FF,
-    0x00FF00FF,
-    0x00000021,
-    0x004B0076,
-    0x009F00C1,
-    0x00D900EC,
-    0x00F600FC,
-    0x00FE00FE,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x000A002A,
-    0x00550082,
-    0x00A900CA,
-    0x00E200F1,
-    0x00F900FD,
-    0x00FE00FF,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x000F0033,
-    0x0060008B,
-    0x00B100D1,
-    0x00E600F4,
-    0x00FB00FE,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x00140036,
-    0x00640090,
-    0x00B600D4,
-    0x00EA00F6,
-    0x00FC00FE,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x0014003B,
-    0x00670094,
-    0x00B900D6,
-    0x00EA00F7,
-    0x00FC00FE,
-    0x00FF00FF,
-    0x00FF00FF,
-    0x00FF00FF,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000A000F, 0x00140014, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x0000000A, 0x00190021, 0x002A0033, 0x0036003B, 0x00000000, 0x00000000,
+    0x00000000, 0x0000000A, 0x0019002A, 0x003B004B, 0x00550060, 0x00640067, 0x00000000, 0x00000000, 0x00000000,
+    0x00140025, 0x003B0052, 0x00670076, 0x0082008B, 0x00900094, 0x00000000, 0x00000000, 0x00000014, 0x002F0046,
+    0x00600079, 0x008D009F, 0x00A900B1, 0x00B600B9, 0x00000000, 0x00000000, 0x00140033, 0x0052006D, 0x0088009F,
+    0x00B100C1, 0x00CA00D1, 0x00D400D6, 0x00000000, 0x00000014, 0x002F0052, 0x0071008D, 0x00A900BE, 0x00CF00D9,
+    0x00E200E6, 0x00EA00EA, 0x00000000, 0x000A0025, 0x0046006D, 0x008D00AD, 0x00C400D6, 0x00E300EC, 0x00F100F4,
+    0x00F600F7, 0x00000000, 0x0019003B, 0x00600088, 0x00A900C4, 0x00D900E6, 0x00F000F6, 0x00F900FB, 0x00FC00FC,
+    0x0000000A, 0x002A0052, 0x0079009F, 0x00BE00D6, 0x00E600F2, 0x00F800FC, 0x00FD00FE, 0x00FE00FE, 0x00000019,
+    0x003B0067, 0x008D00B1, 0x00CF00E3, 0x00F000F8, 0x00FC00FE, 0x00FE00FF, 0x00FF00FF, 0x00000021, 0x004B0076,
+    0x009F00C1, 0x00D900EC, 0x00F600FC, 0x00FE00FE, 0x00FF00FF, 0x00FF00FF, 0x000A002A, 0x00550082, 0x00A900CA,
+    0x00E200F1, 0x00F900FD, 0x00FE00FF, 0x00FF00FF, 0x00FF00FF, 0x000F0033, 0x0060008B, 0x00B100D1, 0x00E600F4,
+    0x00FB00FE, 0x00FF00FF, 0x00FF00FF, 0x00FF00FF, 0x00140036, 0x00640090, 0x00B600D4, 0x00EA00F6, 0x00FC00FE,
+    0x00FF00FF, 0x00FF00FF, 0x00FF00FF, 0x0014003B, 0x00670094, 0x00B900D6, 0x00EA00F7, 0x00FC00FE, 0x00FF00FF,
+    0x00FF00FF, 0x00FF00FF,
 };
 
 static Vtx D_86002D98[] = {
@@ -758,7 +688,8 @@ static Gfx D_86002DD8[] = {
     gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_PASS2),
     gsDPSetPrimColor(0, 0, 0, 0, 0, 200),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(D_86002B98, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(D_86002B98, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsSPVertex(D_86002D98, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -767,7 +698,6 @@ static Gfx D_86002DD8[] = {
 };
 
 void func_86000C10(void) {
-
 }
 
 void func_86000C18(void) {
@@ -874,7 +804,7 @@ s32 func_86000FD4(void) {
         D_86003B5C = &D_86002F58[i];
         D_86003B5C->unk_000 = (D_8780FA30[i] == 0) ? 0 : D_8780FA38 + 1;
     }
-    
+
     D_86002F48 = 0;
 
     var_s0_2 = true;
@@ -883,17 +813,17 @@ s32 func_86000FD4(void) {
             if (D_80068BA0[0]->unk_08 & 0x1000) {
                 var_s0_2 = false;
             }
-            
+
             if ((D_8780FA2A == 0) && (D_80068BA0[0]->unk_08 & 0x4000)) {
                 func_80048B90(3);
                 func_87802EB8(2);
                 return -1;
             }
         }
-    
+
         func_86000D88(D_86002F48);
     }
-    
+
     return 0;
 }
 
@@ -908,7 +838,6 @@ void func_86001204(void) {
         D_86003B60->unk_048 = func_878001E8(0x14) << 0x10;
         D_86003B70[i] = 0;
     }
-
 
     D_86003B68 = 1;
     D_86003B6A = 90;
@@ -1125,8 +1054,8 @@ void func_860017C0(s32 arg0) {
                 break;
         }
 
-        if (((D_86003B5C->unk_004.unk_168 == 9) && ((D_86003B60->unk_048 >> 0x10) == 2)) || 
-            ((D_86003B5C->unk_004.unk_168 == 10) && ((D_86003B60->unk_048 >> 0x10) == 2)) || 
+        if (((D_86003B5C->unk_004.unk_168 == 9) && ((D_86003B60->unk_048 >> 0x10) == 2)) ||
+            ((D_86003B5C->unk_004.unk_168 == 10) && ((D_86003B60->unk_048 >> 0x10) == 2)) ||
             ((D_86003B5C->unk_004.unk_168 == 11) && ((D_86003B60->unk_048 >> 0x10) == 2))) {
             if (D_86003B70[arg0] == 0) {
                 D_86003B64->unk_16A++;
@@ -1222,7 +1151,7 @@ s32 func_86001EEC(void) {
     s32 var_v0 = 0;
     s32 i;
 
-    for (i = 0; i < 4 ; i++) {
+    for (i = 0; i < 4; i++) {
         D_86003B5C = &D_86002F58[i];
         switch (D_86003B5C->unk_004.unk_168) {
             case 5:
@@ -1332,7 +1261,7 @@ void func_86001F64(void) {
             var_s3_4 -= 1;
         }
 
-        if (var_s3_4 <= 0) { 
+        if (var_s3_4 <= 0) {
             break;
         }
     }
@@ -1490,7 +1419,7 @@ void func_86002440(void) {
         func_8001BD04(D_86003B60, 0);
         func_800173CC(D_86003B60);
     }
-    
+
     D_86002F50 = func_80004258(0, (u32)&D_124570, (u32)fragment7_ROM_START, 0);
     func_86000478();
     func_87802528();
@@ -1501,14 +1430,15 @@ void func_86002440(void);
 #endif
 
 void func_86002778(UNUSED s32 arg0, UNUSED s32 arg1) {
-    s32 sp24;
+    unk_func_80007444* sp24;
 
     main_pool_push_state(0x4D494E49);
     func_80005E40(0x20000, 0);
-    sp24 = func_80007444(0, 1, 3, 1, 2, 1);
+    sp24 = (unk_func_80007444*)func_80007444(0, 1, 3, 1, 2, 1);
     D_86003B7C = func_8001E94C(0x36, 0);
     func_80004258(((u32)&D_1000000 & 0x0F000000) >> 0x18, (u32)_4BD6B0_ROM_START, (u32)_4BE810_ROM_START, 0);
-    func_80004454((((u32)fragment31_VRAM & 0x0FF00000) >> 0x14) - 0x10, (u32)fragment31_ROM_START, (u32)fragment32_ROM_START);
+    func_80004454((((u32)fragment31_VRAM & 0x0FF00000) >> 0x14) - 0x10, (u32)fragment31_ROM_START,
+                  (u32)fragment32_ROM_START);
     func_80004454((((u32)&D_8D000000 & 0x0FF00000) >> 0x14) - 0x10, (u32)_5C7A70_ROM_START, (u32)_5C7AD0_ROM_START);
     func_86002440();
     func_878029C0();
@@ -1519,7 +1449,7 @@ void func_86002778(UNUSED s32 arg0, UNUSED s32 arg1) {
         func_860022F8(5);
         func_86001204();
         func_86001C90();
-        
+
         if (D_8780FC92 == 0) {
             func_86001F64();
         }
