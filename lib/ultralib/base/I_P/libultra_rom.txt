@@ -366,5 +366,6 @@ xlitob.o
 xldtob.o
 xprintf.o
 sprintf.o
+gbpakgetstatus.o
 syncprintf.o
 sched.o

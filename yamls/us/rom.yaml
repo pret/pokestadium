@@ -19,10 +19,10 @@
     subsegments:
     - [0x1000, hasm, entry] # bootloader
     - [0x1060, c, main] # rsp graphics
-    - [0x11B0, bin, noppad_11B0] # There's an extra nop align here, but cant reproduce it with just splat functionality alone. need a . += 0x10 in the linker script at this spot.
+    - [0x11B0, pad] # There's an extra nop align here, but cant reproduce it with just splat functionality alone. need a . += 0x10 in the linker script at this spot.
     - [0x11C0, c, rsp] # rsp audio
     - [0x1A80, c, dma] # DMA transfer
-    - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
+    - [0x1F70, pad] # Extra nop align like earlier. Weird
     - [0x1F80, c, dp_intro] # dp intro code
     - [0x28E0, c, memmap]
     - [0x2EC0, c, memory_main] # handles the main global pool
@@ -92,7 +92,7 @@
     - [0x485C0, c]  # moves code 
     - [0x48C60, c]  # move effects code
     - [0x490A0, c]  # audio functions to 0x50C00
-    - [0x49190, bin]
+    - [0x49190, hasm, code_49190]
     - [0x49790, c]
     - [0x49BA0, c]
     - [0x49DC0, c]
@@ -123,7 +123,7 @@
     - [0x51BC0, c, libleo/readwrite]
     - [0x51C50, c, libleo/leofunc]
     - [0x520C0, c, libleo/leoint]
-    - [0x52AB0, bin, noppad_52AB0] # again with the weird nop padding.
+    - [0x52AB0, pad] # again with the weird nop padding.
     - [0x52AC0, c, libleo/leocmdex]
     - [0x53150, c, libleo/leoread]
     - [0x53310, c, libleo/lbatobyte]
@@ -207,7 +207,7 @@
     - [0x5C410, pad]
     - [0x5C420, lib, libultra, devmgr]
     - [0x5C830, lib, libultra, pirawdma]
-    - [0x5C900, lib, libultra, osGetCount]
+    - [0x5C900, lib, libultra, getcount]
     - [0x5C910, lib, libultra, conteepprobe]
     - [0x5C980, lib, libultra, conteepwrite]
     - [0x5CD50, lib, libultra, getmemsize]
@@ -240,7 +240,7 @@
     - [0x5F5F0, lib, libultra, viswapbuf]
     - [0x5F640, lib, libultra, epirawdma]
     - [0x5F820, lib, libultra, sptaskyielded]
-    - [0x5F8A0, lib, libultra, rotateRPY]
+    - [0x5F8A0, lib, libultra, rotaterpy]
     - [0x5FA40, lib, libultra, bcmp]
     - [0x5FB60, lib, libultra, rotate]
     - [0x5FD50, lib, libultra, gettime]
