@@ -7,7 +7,7 @@ extern u16 LEOrw_flags;
 // D_8007DA40
 const u8 leo_sys_form_lbas[] = { 0, 1, 8, 9, 0, 0, 0, 0 }; // EXTRA 0 IS A HACK
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leocmdex/leomain.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/libleo/leocmdex/leomain.s")
 
 /*const LEOCmdRead leo_sys_read_cmd =
 {

@@ -1,5 +1,5 @@
 #include <ultra64.h>
-#include "common.h"
+#include "global.h"
 #include "rsp.h"
 
 // All from n64 programming manual section 27.2

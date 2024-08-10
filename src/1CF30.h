@@ -1,7 +1,7 @@
 #ifndef _1CF30_H_
 #define _1CF30_H_
 
-#include "common.h"
+#include "global.h"
 
 s32 func_8001E94C(s32, s32);
 void func_8001E9CC(void);

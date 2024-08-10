@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 #include "stage_loader.h"
 #include "memory.h"
 #include "string.h"
@@ -230,7 +230,7 @@ void func_800069F0(void) {
 }
 #else
 void func_800069F0(void);
-#pragma GLOBAL_ASM("asm/nonmatchings/stage_loader/func_800069F0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/stage_loader/func_800069F0.s")
 #endif
 
 s32 func_80006C04(s32 arg0) {

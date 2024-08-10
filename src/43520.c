@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 
 void func_800491C0(s32 arg0);
 void func_8004FD90(void);

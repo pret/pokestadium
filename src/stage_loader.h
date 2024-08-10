@@ -1,7 +1,7 @@
 #ifndef _STAGE_LOADER_H_
 #define _STAGE_LOADER_H_
 
-#include "common.h"
+#include "global.h"
 
 s32 func_80006C6C(s32);
 s32 func_80006CB4(s32);

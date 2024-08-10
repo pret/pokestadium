@@ -1,5 +1,5 @@
 #include <ultra64.h>
-#include "common.h"
+#include "global.h"
 #include "dp_intro.h"
 #include "crash_screen.h"
 #include "rsp.h"

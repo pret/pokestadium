@@ -1,7 +1,7 @@
 #ifndef _6A40_H_
 #define _6A40_H_
 
-#include "common.h"
+#include "global.h"
 
 void func_80005E40(u32 arg0, s32 arg1);
 void func_80005EAC(void);

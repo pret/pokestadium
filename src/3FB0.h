@@ -1,7 +1,7 @@
 #ifndef _3FB0_H_
 #define _3FB0_H_
 
-#include "common.h"
+#include "global.h"
 
 void* func_80003DC4(uintptr_t romStart, uintptr_t romEnd, s32 arg2, s32 arg3);
 s32 func_80004258(s32 id, s32 arg1, s32 arg2, s32 arg3);

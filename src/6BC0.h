@@ -1,7 +1,7 @@
 #ifndef _6BC0_H_
 #define _6BC0_H_
 
-#include "common.h"
+#include "global.h"
 
 void func_800060E0(Gfx**, s32, s32, s16, s16);
 void* func_80006314(s32, s32, s32, s32, s32);
