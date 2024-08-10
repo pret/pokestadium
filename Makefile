@@ -94,7 +94,7 @@ endif
 
 MAKE = make
 CPPFLAGS += -fno-dollars-in-identifiers -P
-LDFLAGS  := --no-check-sections --accept-unknown-input-arch --emit-relocs
+LDFLAGS  := --no-check-sections --accept-unknown-input-arch --emit-relocs --whole-archive
 
 ifeq ($(DETECTED_OS), macos)
   CPPFLAGS += -xc++

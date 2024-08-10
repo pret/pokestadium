@@ -96,7 +96,7 @@ getnextfaultthread.o
 initrdb.o
 rdbsend.o
 getmemsize.o
-drvrNew.o
+drvrnew.o
 load.o
 auxbus.o
 bnkf.o
@@ -366,6 +366,14 @@ xlitob.o
 xldtob.o
 xprintf.o
 sprintf.o
+gbpakcheckconnector.o
+gbpakgetbank.o
 gbpakgetstatus.o
+gbpakinit.o
+gbpakpower.o
+gbpakreadid.o
+gbpakreadwrite.o
+gbpaksetbank.o
+afterprenmi.o
 syncprintf.o
 sched.o
