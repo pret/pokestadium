@@ -64,7 +64,7 @@ TARGET  := pokestadium
 BASEROM_DIR := baseroms/$(VERSION)
 BASEROM     := $(BASEROM_DIR)/baserom.z64
 
-ULTRALIB_VERSION     := I
+ULTRALIB_VERSION     := I_P
 ULTRALIB_TARGET      := libultra_rom
 
 ### Output ###
