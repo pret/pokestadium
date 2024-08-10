@@ -14,12 +14,12 @@ IINC = -I . -I $(WORKING_DIR)/include -I $(WORKING_DIR)/include/gcc -I $(WORKING
 MIPS_VERSION := -mips3
 ASOPTFLAGS :=
 
-ifneq ($(filter $(VERSION),D E F G H I J),)
+ifneq ($(filter $(VERSION),D E F G H I I_P J),)
 CFLAGS += -funsigned-char
 endif
 
 # 2.0I libgultra_rom was not compiled with -DNDEBUG and instead libgultra had -DNDEBUG
-ifneq ($(filter $(VERSION),I),)
+ifneq ($(filter $(VERSION),I I_P),)
 ifeq ($(findstring _rom,$(TARGET)),_rom)
 DEBUGFLAG :=
 else ifeq ($(findstring _d,$(TARGET)),_d)
@@ -48,7 +48,7 @@ export VR4300MUL := ON
 $(BUILD_DIR)/src/os/initialize_isv.marker: OPTFLAGS := -O2
 $(BUILD_DIR)/src/os/initialize_isv.marker: STRIP = && tools/gcc/strip-2.7 -N initialize_isv.c $(WORKING_DIR)/$(@:.marker=.o)
 $(BUILD_DIR)/src/os/assert.marker: OPTFLAGS := -O0
-ifeq ($(filter $(VERSION),D E F G H I),)
+ifeq ($(filter $(VERSION),D E F G H I I_P),)
 $(BUILD_DIR)/src/os/seterrorhandler.marker: OPTFLAGS := -O0
 endif
 $(BUILD_DIR)/src/mgu/%.marker: export VR4300MUL := OFF

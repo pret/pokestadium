@@ -29,9 +29,10 @@ VERSION_F := 3
 VERSION_G := 4
 VERSION_H := 5
 VERSION_I := 6
-VERSION_J := 7
-VERSION_K := 8
-VERSION_L := 9
+VERSION_I_P := 7
+VERSION_J := 8
+VERSION_K := 9
+VERSION_L := 10
 
 VERSION_DEFINE := -DBUILD_VERSION=$(VERSION_$(VERSION)) -DBUILD_VERSION_STRING=\"2.0$(VERSION)\"
 
@@ -59,7 +60,7 @@ S_FILES  := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.s))
 
 # Versions J and below used the C matrix math implementations
 MGU_MATRIX_FILES := mtxcatf normalize scale translate
-ifneq ($(filter $(VERSION),D E F G H I J),)
+ifneq ($(filter $(VERSION),D E F G H I I_P J),)
 S_FILES := $(filter-out $(addprefix src/mgu/,$(MGU_MATRIX_FILES:=.s)),$(S_FILES))
 else
 C_FILES := $(filter-out $(addprefix src/gu/,$(MGU_MATRIX_FILES:=.c)),$(C_FILES))
