@@ -11,6 +11,8 @@ u8 leoDiskStack[OS_PIM_STACKSIZE] ALIGNED(16);
 static void __osLeoAbnormalResume(void);
 static void __osLeoResume(void);
 
+#if BUILD_VERSION >= VERSION_J
+
 s32 __osLeoInterrupt() {
     u32 stat = 0;
     volatile u32 pi_stat;
@@ -192,3 +194,5 @@ static void __osLeoResume(void) {
         __osEnqueueThread(&__osRunQueue, __osPopThread(&mq->mtqueue));
     }
 }
+
+#endif

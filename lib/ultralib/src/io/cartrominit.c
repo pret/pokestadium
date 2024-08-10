@@ -5,7 +5,7 @@
 #include "PR/rcp.h"
 #include "piint.h"
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 OSPiHandle __CartRomHandle ALIGNED(8);
 OSPiHandle* osCartRomInit(void) {
     u32 value = 0;

@@ -2,6 +2,7 @@
 #include "PR/rcp.h"
 #include "macros.h"
 
+#if BUILD_VERSION != VERSION_I_P
 OSPiHandle DriveRomHandle ALIGNED(8);
 
 OSPiHandle *osDriveRomInit() {
@@ -29,3 +30,4 @@ OSPiHandle *osDriveRomInit() {
 
     return &DriveRomHandle;
 }
+#endif

@@ -334,7 +334,7 @@ s32             _timeToSamples(ALSynth *ALSynth, s32 micros);
 ALMicroTime     _samplesToTime(ALSynth *synth, s32 samples);
 
 // This was renamed to have a leading underscore in 2.0J
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
 #define _init_lpfilter init_lpfilter
 #endif
 
