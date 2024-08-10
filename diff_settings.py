@@ -2,6 +2,6 @@
 
 def apply(config, args):
     config['baseimg'] = 'baserom.z64'
-    config['myimg'] = 'build/pokestadium.z64'
-    config['mapfile'] = 'build/pokestadium.map'
+    config['myimg'] = 'build/pokestadium-us.z64'
+    config['mapfile'] = 'build/pokestadium-us.map'
     config['source_directories'] = ['.']
