@@ -19,10 +19,10 @@
     subsegments:
     - [0x1000, hasm, entry] # bootloader
     - [0x1060, c, main] # rsp graphics
-    - [0x11B0, bin, noppad_11B0] # There's an extra nop align here, but cant reproduce it with just splat functionality alone. need a . += 0x10 in the linker script at this spot.
+    - [0x11B0, pad]
     - [0x11C0, c, rsp] # rsp audio
     - [0x1A80, c, dma] # DMA transfer
-    - [0x1F70, bin, noppad_1F70] # Extra nop align like earlier. Weird
+    - [0x1F70, pad]
     - [0x1F80, c, dp_intro] # dp intro code
     - [0x28E0, c, memmap]
     - [0x2EC0, c, memory_main] # handles the main global pool
@@ -92,7 +92,7 @@
     - [0x485C0, c]  # moves code 
     - [0x48C60, c]  # move effects code
     - [0x490A0, c]  # audio functions to 0x50C00
-    - [0x49190, bin]
+    - [0x49190, hasm, ../../src/unk_49190]
     - [0x49790, c]
     - [0x49BA0, c]
     - [0x49DC0, c]
@@ -123,7 +123,7 @@
     - [0x51BC0, c, libleo/readwrite]
     - [0x51C50, c, libleo/leofunc]
     - [0x520C0, c, libleo/leoint]
-    - [0x52AB0, bin, noppad_52AB0] # again with the weird nop padding.
+    - [0x52AB0, pad]
     - [0x52AC0, c, libleo/leocmdex]
     - [0x53150, c, libleo/leoread]
     - [0x53310, c, libleo/lbatobyte]
@@ -163,7 +163,7 @@
     - [0x57610, lib, libultra, stopthread]
     - [0x576D0, lib, libultra, recvmesg]
     - [0x57810, lib, libultra, setintmask]
-    - [0x578B0, lib, libultra, dequeuethread]
+    - [0x578B0, lib, libultra, thread]
     - [0x578F0, lib, libultra, scale]
     - [0x57990, lib, libultra, sinf]
     - [0x57B50, lib, libultra, sl]
@@ -207,7 +207,7 @@
     - [0x5C410, pad]
     - [0x5C420, lib, libultra, devmgr]
     - [0x5C830, lib, libultra, pirawdma]
-    - [0x5C900, lib, libultra, osGetCount]
+    - [0x5C900, lib, libultra, getcount]
     - [0x5C910, lib, libultra, conteepprobe]
     - [0x5C980, lib, libultra, conteepwrite]
     - [0x5CD50, lib, libultra, getmemsize]
@@ -226,7 +226,7 @@
     - [0x5EDD0, lib, libultra, heapinit]
     - [0x5EE10, lib, libultra, syncprintf]
     - [0x5EE50, lib, libultra, string]
-    - [0x5EEF0, lib, libultra, invalidcache]
+    - [0x5EEF0, lib, libultra, invaldcache]
     - [0x5EFA0, lib, libultra, createmesgqueue]
     - [0x5EFD0, lib, libultra, invalicache]
     - [0x5F050, lib, libultra, conteeplongwrite]
@@ -240,13 +240,13 @@
     - [0x5F5F0, lib, libultra, viswapbuf]
     - [0x5F640, lib, libultra, epirawdma]
     - [0x5F820, lib, libultra, sptaskyielded]
-    - [0x5F8A0, lib, libultra, rotateRPY]
+    - [0x5F8A0, lib, libultra, rotaterpy]
     - [0x5FA40, lib, libultra, bcmp]
     - [0x5FB60, lib, libultra, rotate]
     - [0x5FD50, lib, libultra, gettime]
     - [0x5FDE0, lib, libultra, timerintr]
     - [0x601E0, lib, libultra, synthesizer]
-    - [0x60860, lib, libultra, drvrNew]
+    - [0x60860, lib, libultra, drvrnew]
     - [0x61010, lib, libultra, mainbus]
     - [0x61160, lib, libultra, auxbus]
     - [0x61270, lib, libultra, env]
@@ -286,7 +286,7 @@
     - [0x64410, lib, libultra, contramwrite]
     - [0x64660, lib, libultra, contramread]
     - [0x64890, lib, libultra, crc]
-    - [0x64A00, lib, libultra, __osGetCause]
+    - [0x64A00, lib, libultra, getcause]
     - [0x64A10, lib, libultra, epirawwrite]
     - [0x64B70, lib, libultra, settimer]
     - [0x64C50, lib, libultra, xldtob]
@@ -307,7 +307,7 @@
     - [0x66460, lib, libultra, synallocfx]
     - [0x66500, lib, libultra, syndelete]
     - [0x66510, lib, libultra, gbpakreadwrite]
-    - [0x666D0, lib, libultra, gbpakselectbank]
+    - [0x666D0, lib, libultra, gbpaksetbank]
     - [0x667A0, lib, libultra, aisetnextbuf]
     - [0x66850, lib, libultra, ai]
     - [0x66880, lib, libultra, conteepread]
@@ -351,7 +351,7 @@
     - [0x7B550, lib, libultra, random,         .data]
     - [0x7B560, lib, libultra, xprintf,        .data]
     - [0x7B5B0, lib, libultra, timerintr,      .data]
-    - [0x7B5C0, lib, libultra, drvrNew,        .data]
+    - [0x7B5C0, lib, libultra, drvrnew,        .data]
     - [0x7B750, lib, libultra, env,            .data]
     - [0x7B890, lib, libultra, vi,             .data]
     - [0x7B890, lib, libultra, vimodepallan1,  .data]
@@ -417,10 +417,10 @@
     - [0x7EF60, lib, libultra, perspective, .rodata]
     - [0x7EF70, lib, libultra, devmgr, .rodata]
     - [0x7EF90, lib, libultra, xprintf, .rodata]
-    - [0x7F090, lib, libultra, rotateRPY, .rodata]
+    - [0x7F090, lib, libultra, rotaterpy, .rodata]
     - [0x7F0A0, lib, libultra, rotate, .rodata]
     - [0x7F0B0, lib, libultra, synthesizer, .rodata]
-    - [0x7F0C0, lib, libultra, drvrNew, .rodata]
+    - [0x7F0C0, lib, libultra, drvrnew, .rodata]
     - [0x7F0E0, lib, libultra, env, .rodata]
     - [0x7F130, lib, libultra, resample, .rodata]
     - [0x7F180, lib, libultra, cosf, .rodata]
@@ -458,13 +458,14 @@
     - {type: lib, vram: 0x801021D0, name: libultra, object: siacs, section: .bss}
     - {type: lib, vram: 0x801021F0, name: libultra, object: initialize, section: .bss}
     - {type: lib, vram: 0x80102200, name: libultra, object: gbpakinit, section: .bss}
+    - {type: lib, vram: 0x80102240, name: libultra, object: kdebugserver, section: .bss}
     - {type: lib, vram: 0x801023F0, name: libultra, object: pfsisplug, section: .bss}
     - {type: lib, vram: 0x80102430, name: libultra, object: cartrominit, section: .bss}
     - {type: lib, vram: 0x801024A8, name: libultra, object: leodiskinit, section: .bss}
     - {type: lib, vram: 0x80102520, name: libultra, object: pimgr, section: .bss}
     - {type: lib, vram: 0x801036F0, name: libultra, object: contpfs, section: .bss}
     - {type: lib, vram: 0x801037F0, name: libultra, object: seteventmesg, section: .bss}
-    - {vram: 0x80103830, type:  bss, name: unk_bss_9}
+    - {type: lib, vram: 0x80103830, name: libultra, object: rotaterpy, section: .bss}
     - {type: lib, vram: 0x80103880, name: libultra, object: rotate, section: .bss}
     - {type: lib, vram: 0x80103890, name: libultra, object: timerintr, section: .bss}
     - {type: lib, vram: 0x801038E4, name: libultra, object: cartrominit, section: .bss}

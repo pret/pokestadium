@@ -1,0 +1,13 @@
+EXTERN(__osSetCause);
+EXTERN(_bzero);
+EXTERN(alBnkfNew);
+EXTERN(__osSetCause);
+EXTERN(fsin);
+EXTERN(alUnlink);
+EXTERN(alLink);
+EXTERN(alClose);
+EXTERN(alInit);
+EXTERN(_VirtualToPhysicalTask);
+EXTERN(osSpTaskLoad);
+EXTERN(osSpTaskStartGo);
+EXTERN(osGbpakReadWrite);

@@ -16,9 +16,10 @@
 #define VERSION_G 4
 #define VERSION_H 5
 #define VERSION_I 6
-#define VERSION_J 7
-#define VERSION_K 8
-#define VERSION_L 9
+#define VERSION_I_P 7
+#define VERSION_J 8
+#define VERSION_K 9
+#define VERSION_L 10
 
 #define OS_MAJOR_VERSION	BUILD_VERSION_STRING /* major version */
 #define OS_MINOR_VERSION	0 /* patch level */

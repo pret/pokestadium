@@ -37,7 +37,7 @@ NON_MATCHING ?= 0
 # if WERROR is 1, pass -Werror to CC_CHECK, so warnings would be treated as errors
 WERROR ?= 0
 # Keep .mdebug section in build
-KEEP_MDEBUG ?= 0
+KEEP_MDEBUG ?= 1
 # Check code syntax with host compiler
 RUN_CC_CHECK ?= 1
 CC_CHECK_COMP ?= gcc
@@ -64,7 +64,7 @@ TARGET  := pokestadium
 BASEROM_DIR := baseroms/$(VERSION)
 BASEROM     := $(BASEROM_DIR)/baserom.z64
 
-ULTRALIB_VERSION     := I
+ULTRALIB_VERSION     := I_P
 ULTRALIB_TARGET      := libultra_rom
 
 ### Output ###
@@ -94,7 +94,7 @@ endif
 
 MAKE = make
 CPPFLAGS += -fno-dollars-in-identifiers -P
-LDFLAGS  := --no-check-sections --accept-unknown-input-arch --emit-relocs
+LDFLAGS  := --no-check-sections --accept-unknown-input-arch --emit-relocs 
 
 ifeq ($(DETECTED_OS), macos)
   CPPFLAGS += -xc++
@@ -164,7 +164,7 @@ C_DEFINES        := -DLANGUAGE_C -D_LANGUAGE_C
 LIBULTRA_DEFINES := -DBUILD_VERSION=VERSION_$(ULTRALIB_VERSION)
 ENDIAN           := -EB
 
-OPTFLAGS        := -O2 -g3
+OPTFLAGS        := -O2
 MIPS_VERSION    := -mips2
 ICONV_FLAGS     := --from-code=UTF-8 --to-code=EUC-JP
 
@@ -236,9 +236,16 @@ build/src/boot/libu64/%.o: OPTFLAGS := -O2
 build/src/boot/fault.o: CFLAGS += -trapuv
 build/src/boot/fault_drawer.o: CFLAGS += -trapuv
 
-# cc & asm-processor
-build/src/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+build/src/C030.o: OPTFLAGS += -Wo,-loopunroll,0
 
+# cheap hack. TODO: Make the override better
+build/src/libultra/io/gbpakpower.c.o: OPTFLAGS += -Wo,-loopunroll,0
+build/src/libultra/io/gbpakinit.c.o: OPTFLAGS += -Wo,-loopunroll,0
+build/src/libultra/io/gbpakselectbank.c.o: OPTFLAGS += -Wo,-loopunroll,0
+
+# cc & asm-processor
+build/src/libleo/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
+build/src/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 #### Main Targets ###
 

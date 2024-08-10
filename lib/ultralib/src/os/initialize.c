@@ -35,7 +35,11 @@ void* __printfunc = NULL;
 
 #define INITIALIZE_FUNC osInitialize
 #define SPEED_PARAM_FUNC createSpeedParam
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION == VERSION_I_P
+extern OSPiHandle CartRomHandle;
+extern OSPiHandle LeoDiskHandle;
+static OSPiHandle* __osCartRomInit(void);
+#elif BUILD_VERSION >= VERSION_J
 static void ptstart(void);
 static void SPEED_PARAM_FUNC(void);
 #endif
@@ -87,7 +91,12 @@ void INITIALIZE_FUNC() {
     *(__osExceptionVector*)E_VEC = *__osExceptionPreamble;
     osWritebackDCache((void*)UT_VEC, E_VEC - UT_VEC + sizeof(__osExceptionVector));
     osInvalICache((void*)UT_VEC, E_VEC - UT_VEC + sizeof(__osExceptionVector));
-#if BUILD_VERSION >= VERSION_J
+
+#ifdef BUILD_VERSION == VERSION_I_P
+    __osCartRomInit();
+    osUnmapTLBAll();
+	osMapTLBRdb();
+#elif BUILD_VERSION >= VERSION_J
     SPEED_PARAM_FUNC();
     osUnmapTLBAll();
     osMapTLBRdb();
@@ -114,7 +123,7 @@ void INITIALIZE_FUNC() {
         osViClock = VI_NTSC_CLOCK;
     }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     // Wait until there are no RCP interrupts
     if (__osGetCause() & CAUSE_IP5) {
         while (TRUE) {
@@ -206,6 +215,20 @@ void __osInitialize_autodetect() {
         __osInitialize_emu();
     }
 #endif
+}
+#elif BUILD_VERSION == VERSION_I_P
+static OSPiHandle *__osCartRomInit(void) {
+	CartRomHandle.type = DEVICE_TYPE_INIT;
+	CartRomHandle.latency = IO_READ(PI_BSD_DOM1_LAT_REG);
+	CartRomHandle.pulse = IO_READ(PI_BSD_DOM1_PWD_REG);
+	CartRomHandle.pageSize = IO_READ(PI_BSD_DOM1_PGS_REG);
+	CartRomHandle.relDuration = IO_READ(PI_BSD_DOM1_RLS_REG);
+
+	LeoDiskHandle.type = DEVICE_TYPE_INIT;
+	LeoDiskHandle.latency = IO_READ(PI_BSD_DOM2_LAT_REG);
+	LeoDiskHandle.pulse = IO_READ(PI_BSD_DOM2_PWD_REG);
+	LeoDiskHandle.pageSize = IO_READ(PI_BSD_DOM2_PGS_REG);
+	LeoDiskHandle.relDuration = IO_READ(PI_BSD_DOM2_RLS_REG);
 }
 #elif BUILD_VERSION == VERSION_J
 static void SPEED_PARAM_FUNC(void) {
