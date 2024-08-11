@@ -7,7 +7,7 @@ extern OSPiHandle* __osDiskHandle;
 extern OSPiHandle* __osPiTable;
 
 OSPiHandle* osLeoDiskInit(void) {
-    u32 prevInt;
+    u32 saveMask;
 
     __LeoDiskHandle.type = DEVICE_TYPE_64DD;
     __LeoDiskHandle.baseAddress = PHYS_TO_K1(PI_DOM2_ADDR1);
@@ -19,13 +19,12 @@ OSPiHandle* osLeoDiskInit(void) {
     __LeoDiskHandle.speed = 0;
 
     bzero(&__LeoDiskHandle.transferInfo, sizeof(__OSTranxInfo));
-    prevInt = __osDisableInt();
-
+    
+    saveMask = __osDisableInt();
     __LeoDiskHandle.next = __osPiTable;
     __osPiTable = &__LeoDiskHandle;
     __osDiskHandle = &__LeoDiskHandle;
-
-    __osRestoreInt(prevInt);
+    __osRestoreInt(saveMask);
 
     return &__LeoDiskHandle;
 }

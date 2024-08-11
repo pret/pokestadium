@@ -1,6 +1,6 @@
 #include <ultra64.h>
 #include <PR/os_internal_reg.h>
-#include "common.h"
+#include "global.h"
 #include "dp_intro.h"
 #include "crash_screen.h"
 #include "profiler.h"

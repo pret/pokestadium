@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 
 struct UnkArray4 {
     u32 unk0;

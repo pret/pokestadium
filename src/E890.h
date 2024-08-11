@@ -1,7 +1,7 @@
 #ifndef _E890_H_
 #define _E890_H_
 
-#include "common.h"
+#include "global.h"
 
 void func_80010354(f32*, f32*, f32, s16, s32);
 

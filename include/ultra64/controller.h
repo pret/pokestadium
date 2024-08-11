@@ -153,9 +153,7 @@ s32 __osCheckPackId(OSPfs* pfs, __OSPackId* check);
 s32 __osGetId(OSPfs *pfs);
 s32 __osCheckId(OSPfs *pfs);
 s32 __osPfsRWInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
-s32 __osPfsSelectBank(OSPfs *pfs, u8 bank);
 s32 __osPfsDeclearPage(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int *first_page, u8 bank, int *decleared, int *last_page);
-s32 __osPfsReleasePages(OSPfs *pfs, __OSInode *inode, u8 start_page, u8 bank, __OSInodeUnit *last_page);
 s32 __osBlockSum(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank);
 s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
 s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
@@ -166,7 +164,7 @@ void __osPfsGetInitData(u8* pattern, OSContStatus* data);
 u8 __osContAddressCrc(u16 addr);
 u8 __osContDataCrc(u8 *data);
 s32 __osPfsGetStatus(OSMesgQueue *queue, int channel);
-s32 __osGbpakSelectBank(OSPfs *pfs, u8 bank);
+s32 __osGbpakSetBank(OSPfs *pfs, u8 bank);
 
 extern u8 __osContLastCmd;
 extern OSTimer __osEepromTimer;
@@ -182,13 +180,6 @@ extern u8 __osMaxControllers;
 	ret = fn;     \
 	if (ret != 0) \
 		return ret;
-
-#define SET_ACTIVEBANK_TO_ZERO        \
-	if (pfs->activebank != 0)         \
-	{                                 \
-		pfs->activebank = 0;          \
-		ERRCK(__osPfsSelectBank(pfs)) \
-	}
 
 #define PFS_CHECK_ID                              \
 	if (__osCheckId(pfs) == PFS_ERR_NEW_PACK) \

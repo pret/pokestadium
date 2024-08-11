@@ -1,5 +1,5 @@
 #include <ultra64.h>
-#include "common.h"
+#include "global.h"
 #include "dma.h"
 #include "rsp.h"
 

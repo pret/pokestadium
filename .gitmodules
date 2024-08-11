@@ -1,6 +1,3 @@
 [submodule "tools/n64splat"]
 	path = tools/n64splat
 	url = https://github.com/ethteck/n64splat.git
-[submodule "tools/asmproc"]
-	path = tools/asmproc
-	url = https://github.com/simonlindholm/asm-processor.git

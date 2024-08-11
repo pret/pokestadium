@@ -1,5 +1,5 @@
-#include "common.h"
+#include "global.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/225A0/func_800219A0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/225A0/func_800219A0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/225A0/func_800219FC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/225A0/func_800219FC.s")
