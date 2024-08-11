@@ -1,0 +1,54 @@
+name: Pokemon Stadium (North America)
+sha1: ed7bef5a306f88c0a6e96b15e71fee2ef32058f3
+options:
+  basename: pokestadium
+  target_path: baseroms/us/baserom.z64
+  ld_script_path: linker_scripts/us/pokestadium.ld
+  base_path: .
+  compiler: IDO
+  find_file_boundaries: False
+  header_encoding: ASCII
+  platform: n64
+
+  undefined_funcs_auto_path: linker_scripts/us/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/us/auto/undefined_syms_auto.ld
+
+  symbol_addrs_path:
+    - linker_scripts/us/symbol_addrs.txt
+    - linker_scripts/us/ignored_addresses.txt
+  reloc_addrs_path:
+    - relocs/reloc_addrs-us.txt
+
+  asm_path: asm/us
+  src_path: src
+  asset_path: assets/us
+
+  build_path: build
+  lib_path: build/lib
+
+  extensions_path: tools/splat_ext
+  mips_abi_float_regs: o32
+
+  do_c_func_detection: True
+  o_as_suffix: True
+  gfx_ucode: f3dex2
+  mnemonic_ljust: 12
+  rom_address_padding: True
+  dump_symbols: True
+  generated_c_preamble: |
+    #include "global.h"
+  asm_inc_header: ""
+  use_legacy_include_asm: False
+  create_asm_dependencies: True
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  include_macro_inc: False
+  libultra_symbols: True
+  hardware_regs: True
+  asm_emit_size_directive: False
+  segment_end_before_align: True
+  ld_align_section_vram_end: False
+  image_type_in_extension: true
+
+segments:

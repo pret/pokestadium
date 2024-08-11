@@ -4,7 +4,7 @@
 void __osPiRelAccess(void);
 void __osPiGetAccess(void);
 
-OSPiHandle __DriveRomHandle;
+OSPiHandle DriveRomHandle;
 
 OSPiHandle* osDriveRomInit(void) {
     register s32 status;
@@ -16,15 +16,15 @@ OSPiHandle* osDriveRomInit(void) {
     __osPiGetAccess();
     if (!first) {
         __osPiRelAccess();
-        return &__DriveRomHandle;
+        return &DriveRomHandle;
     }
 
     first = 0;
-    __DriveRomHandle.type = DEVICE_TYPE_BULK;
-    __DriveRomHandle.baseAddress = PHYS_TO_K1(PI_DOM1_ADDR1);
-    __DriveRomHandle.domain = PI_DOMAIN1;
-    __DriveRomHandle.speed = 0;
-    bzero(&__DriveRomHandle.transferInfo, sizeof(__OSTranxInfo));
+    DriveRomHandle.type = DEVICE_TYPE_BULK;
+    DriveRomHandle.baseAddress = PHYS_TO_K1(PI_DOM1_ADDR1);
+    DriveRomHandle.domain = PI_DOMAIN1;
+    DriveRomHandle.speed = 0;
+    bzero(&DriveRomHandle.transferInfo, sizeof(__OSTranxInfo));
 
     while (status = HW_REG(PI_STATUS_REG, u32), status & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
 
@@ -40,12 +40,12 @@ OSPiHandle* osDriveRomInit(void) {
     HW_REG(PI_BSD_DOM1_RLS_REG, u32) = 3;
     HW_REG(PI_BSD_DOM1_PWD_REG, u32) = 0xff;
 
-    // Read the PI settings from DDROM and put it in __DriveRomHandle
-    value = HW_REG(__DriveRomHandle.baseAddress, u32);
-    __DriveRomHandle.latency = value & 0xFF;
-    __DriveRomHandle.pageSize = (value >> 0x10) & 0xF;
-    __DriveRomHandle.relDuration = (value >> 0x14) & 0xF;
-    __DriveRomHandle.pulse = (value >> 8) & 0xFF;
+    // Read the PI settings from DDROM and put it in DriveRomHandle
+    value = HW_REG(DriveRomHandle.baseAddress, u32);
+    DriveRomHandle.latency = value & 0xFF;
+    DriveRomHandle.pageSize = (value >> 0x10) & 0xF;
+    DriveRomHandle.relDuration = (value >> 0x14) & 0xF;
+    DriveRomHandle.pulse = (value >> 8) & 0xFF;
 
     // Put back the previous PI settings
     HW_REG(PI_BSD_DOM1_LAT_REG, u32) = latency;
@@ -54,10 +54,10 @@ OSPiHandle* osDriveRomInit(void) {
     HW_REG(PI_BSD_DOM1_PWD_REG, u32) = pulse;
 
     saveMask = __osDisableInt();
-    __DriveRomHandle.next = __osPiTable;
-    __osPiTable = &__DriveRomHandle;
+    DriveRomHandle.next = __osPiTable;
+    __osPiTable = &DriveRomHandle;
     __osRestoreInt(saveMask);
     __osPiRelAccess();
 
-    return &__DriveRomHandle;
+    return &DriveRomHandle;
 }

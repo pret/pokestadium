@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 
 typedef struct {
     /* 0x00 */ char unk_00[0x16];
