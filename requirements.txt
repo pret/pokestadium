@@ -9,7 +9,7 @@ tqdm
 intervaltree
 n64img
 crunch64
-splat64[mips]==0.24.0
+splat64[mips]==0.25.0
 mapfile-parser>=2.4.0,<3.0.0
 libyaz0
 ipl3checksum>=1.2.0,<2.0.0
