@@ -4,7 +4,7 @@
 #include "controller.h"
 #include "siint.h"
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 static OSPifRam __MotorDataBuf[MAXCONTROLLERS] ALIGNED(8);
 
 #define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))

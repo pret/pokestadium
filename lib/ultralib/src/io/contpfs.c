@@ -4,7 +4,7 @@
 #include "controller.h"
 #include "PR/rmon.h"
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 __OSInode __osPfsInodeCache ALIGNED(8);
 s32 __osPfsInodeCacheChannel = -1;
 u8 __osPfsInodeCacheBank = 250;
@@ -17,12 +17,12 @@ u16 __osSumcalc(u8* ptr, int length) {
 
     for (i = 0; i < length; i++) {
         sum += *tmp++;
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
         sum = sum & 0xFFFF;
 #endif
     }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     return sum & 0xFFFF;
 #else
     return sum;
@@ -53,7 +53,7 @@ s32 __osRepairPackId(OSPfs* pfs, __OSPackId* badid, __OSPackId* newid) {
     int j;
     u16 index[4];
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     j = 0;
 #else
     SET_ACTIVEBANK_TO_ZERO();
@@ -64,7 +64,7 @@ s32 __osRepairPackId(OSPfs* pfs, __OSPackId* badid, __OSPackId* newid) {
     newid->serial_mid = badid->serial_mid;
     newid->serial_low = badid->serial_low;
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     SET_ACTIVEBANK_TO_ZERO();
 #else
     j = 0;
@@ -104,7 +104,7 @@ s32 __osRepairPackId(OSPfs* pfs, __OSPackId* badid, __OSPackId* newid) {
         j++;
     } while (j < PFS_MAX_BANKS);
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     SET_ACTIVEBANK_TO_ZERO();
 #else
     ERRCK(SELECT_BANK(pfs, 0));
@@ -129,7 +129,7 @@ s32 __osRepairPackId(OSPfs* pfs, __OSPackId* badid, __OSPackId* newid) {
 
     for (i = 0; i < BLOCKSIZE; i++) {
         if (temp[i] != ((u8*)newid)[i]) {
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
             return PFS_ERR_DEVICE;
 #else
             return PFS_ERR_ID_FATAL;
@@ -174,7 +174,7 @@ s32 __osCheckPackId(OSPfs* pfs, __OSPackId* temp) {
 }
 
 s32 __osGetId(OSPfs* pfs) {
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     int k;
 #endif
     u16 sum;
@@ -209,7 +209,7 @@ s32 __osGetId(OSPfs* pfs) {
         }
     }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     bcopy(id, pfs->id, BLOCKSIZE);
 #else
     for (k = 0; k < ARRLEN(pfs->id); k++) {
@@ -228,13 +228,13 @@ s32 __osGetId(OSPfs* pfs) {
 }
 
 s32 __osCheckId(OSPfs* pfs) {
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     int k;
 #endif
     u8 temp[BLOCKSIZE];
     s32 ret;
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (pfs->activebank != 0) {
         ret = __osPfsSelectBank(pfs, 0);
 
@@ -259,7 +259,7 @@ s32 __osCheckId(OSPfs* pfs) {
         ERRCK(__osContRamRead(pfs->queue, pfs->channel, PFS_ID_0AREA, (u8*)temp));
     }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (bcmp(pfs->id, temp, BLOCKSIZE) != 0) {
         return PFS_ERR_NEW_PACK;
     }
@@ -280,7 +280,7 @@ s32 __osPfsRWInode(OSPfs* pfs, __OSInode* inode, u8 flag, u8 bank) {
     int offset;
     u8* addr;
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (flag == PFS_READ && bank == __osPfsInodeCacheBank && (pfs->channel == __osPfsInodeCacheChannel)) {
         bcopy(&__osPfsInodeCache, inode, sizeof(__OSInode));
         return 0;
@@ -319,7 +319,7 @@ s32 __osPfsRWInode(OSPfs* pfs, __OSInode* inode, u8 flag, u8 bank) {
                 ret = __osContRamRead(pfs->queue, pfs->channel, pfs->minode_table + bank * PFS_ONE_PAGE + j, addr);
             }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
             sum = __osSumcalc((u8*)&inode->inode_page[offset], (PFS_INODE_SIZE_PER_PAGE - offset) * 2);
 #endif
 
@@ -333,7 +333,7 @@ s32 __osPfsRWInode(OSPfs* pfs, __OSInode* inode, u8 flag, u8 bank) {
                     __osContRamWrite(pfs->queue, pfs->channel, pfs->inode_table + bank * PFS_ONE_PAGE + j, addr, FALSE);
             }
         }
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
         else
         {
             for (j = 0; j < PFS_ONE_PAGE; j++)
@@ -345,7 +345,7 @@ s32 __osPfsRWInode(OSPfs* pfs, __OSInode* inode, u8 flag, u8 bank) {
 #endif
     }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     __osPfsInodeCacheBank = bank;
     bcopy(inode, &__osPfsInodeCache, sizeof(__OSInode));
     __osPfsInodeCacheChannel = pfs->channel;
@@ -355,7 +355,7 @@ s32 __osPfsRWInode(OSPfs* pfs, __OSInode* inode, u8 flag, u8 bank) {
 }
 
 // This was moved into it's own file in 2.0J
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
 s32 __osPfsSelectBank(OSPfs* pfs) {
     u8 temp[BLOCKSIZE];
     int i;

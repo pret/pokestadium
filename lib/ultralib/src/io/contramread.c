@@ -5,7 +5,7 @@
 
 #define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 s32 __osPfsLastChannel = -1;
 
 s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
@@ -38,7 +38,7 @@ s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
             ptr += channel;
         }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
         READFORMAT(ptr)->addrh = address >> 3;
         READFORMAT(ptr)->addrl = (u8)((address << 5) | __osContAddressCrc(address));
 #else

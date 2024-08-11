@@ -11,3 +11,4 @@ EXTERN(_VirtualToPhysicalTask);
 EXTERN(osSpTaskLoad);
 EXTERN(osSpTaskStartGo);
 EXTERN(osViModeMpalLpn1);
+EXTERN(__osPfsSelectBank);

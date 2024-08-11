@@ -6,7 +6,7 @@
 #include "../os/osint.h"
 
 OSDevMgr __osViDevMgr = { 0 };
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 u32 __additional_scanline = 0;
 #endif
 static OSThread viThread;
@@ -33,7 +33,7 @@ void osCreateViManager(OSPri pri) {
         return;
     }
     __osTimerServicesInit();
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     __additional_scanline = 0;
 #endif
     osCreateMesgQueue(&viEventQueue, viEventBuf, ARRLEN(viEventBuf));

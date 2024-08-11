@@ -269,6 +269,7 @@ pfsreadwritefile.o
 pfsfilestate.o
 pfssearchfile.o
 pfssetlabel.o
+pfsselectbank.o
 pfsgetlabel.o
 pfsisplug.o
 pfsfreeblocks.o

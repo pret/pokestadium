@@ -55,7 +55,7 @@
 s32 __osSiRawStartDma(s32 direction, void* dramAddr) {
     assert(((u32)dramAddr & 0x3) == 0);
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (IO_READ(SI_STATUS_REG) & (SI_STATUS_DMA_BUSY | SI_STATUS_RD_BUSY)) {
         return -1;
     }

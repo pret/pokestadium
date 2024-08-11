@@ -58,3 +58,50 @@ $(BUILD_DIR)/src/audio/%.marker: OPTFLAGS := -O3
 $(BUILD_DIR)/src/rg/%.marker: OPTFLAGS := -O3
 $(BUILD_DIR)/src/gt/%.marker: OPTFLAGS := -O3
 endif
+
+ifneq ($(filter $(VERSION),I_P),)
+$(BUILD_DIR)/src/audio/reverb.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/audio/synthesizer.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/audio/drvrnew.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/audio/env.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/audio/save.marker: OPTFLAGS := -O2
+
+$(BUILD_DIR)/src/io/gbpakgetstatus.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/gbpakcheckconnector.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/gbpakpower.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/contreaddata.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/gbpakinit.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/pfsgetstatus.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/pimgr.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/devmgr.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/pirawdma.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/conteepprobe.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/conteepwrite.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/contpfs.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/epirawread.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/epirawdma.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/aisetfreq.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/viswapcontext.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/visetspecial.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/gbpakreadid.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/cartrominit.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/pfsselectbank.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/contramwrite.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/contramread.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/crc.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/epirawwrite.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/vimgr.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/gbpakreadwrite.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/gbpaksetbank.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/conteepread.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/sprawdma.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/sirawdma.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/sirawread.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/epiread.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/epiwrite.marker: OPTFLAGS := -O2
+
+
+$(BUILD_DIR)/src/libc/syncprintf.marker: OPTFLAGS := -O2
+
+
+endif

@@ -43,9 +43,11 @@ s32 osGbpakReadId(OSPfs* pfs, OSGbpakId* id, u8* status) {
             return ret;
         }
 
+#if BUILD_VERSION >= VERSION_J
         if (!(*status & OS_GBPAK_RSTB_STATUS)) {
             return PFS_ERR_CONTRFAIL;
         }
+#endif
 
 #if BUILD_VERSION >= VERSION_K
         if (bcmp(nintendo, buf + 4, ARRLEN(nintendo))) {
@@ -68,12 +70,12 @@ s32 osGbpakReadId(OSPfs* pfs, OSGbpakId* id, u8* status) {
             }
 
             if (bcmp(nintendo, buf + 4, ARRLEN(nintendo))) {
-                return 4;
+                return PFS_ERR_CONTRFAIL;
             }
         }
 #else
         if (bcmp(nintendo, buf + 4, ARRLEN(nintendo))) {
-            return 4;
+            return PFS_ERR_CONTRFAIL;
         }
 #endif
         for (i = 0x34, isum = 0; i < 0x4E; i++) {
@@ -81,7 +83,7 @@ s32 osGbpakReadId(OSPfs* pfs, OSGbpakId* id, u8* status) {
         }
 
         if ((isum + 0x19) & 0xFF) {
-            return 4;
+            return PFS_ERR_CONTRFAIL;
         }
 
         bcopy(buf, id, 0x50);

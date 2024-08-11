@@ -68,7 +68,7 @@ EXPORT(__osCauseTable_pt)
 
 .data
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 EXPORT(__osHwIntTable)
     .word 0, 0
     .word 0, 0
@@ -559,7 +559,7 @@ STAY2(mtc0  t1, C0_COMPARE)
     b       next_interrupt
 
 cart:
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     and     s0, s0, ~CAUSE_IP4
     la      t1, __osHwIntTable
     add     t1, HWINTR_SIZE

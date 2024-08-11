@@ -4,7 +4,7 @@
 #include "osint.h"
 
 __OSEventState __osEventStateTab[OS_NUM_EVENTS] ALIGNED(8);
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 u32 __osPreNMI = FALSE;
 #endif
 
@@ -26,7 +26,7 @@ void osSetEventMesg(OSEvent event, OSMesgQueue* mq, OSMesg msg) {
     es->messageQueue = mq;
     es->message = msg;
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (event == OS_EVENT_PRENMI) {
         if (__osShutdown && !__osPreNMI) {
             osSendMesg(mq, msg, OS_MESG_NOBLOCK);

@@ -1,7 +1,7 @@
 #include "PR/os_internal.h"
 
 // A stack frame was added to hardware interrupt handlers in 2.0J
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 
 struct __osHwInt {
     s32 (*handler)(void);

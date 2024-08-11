@@ -4,10 +4,10 @@
 #include "PR/rcp.h"
 #include "macros.h"
 
-#if BUILD_VERSION >= VERSION_J
+OSPiHandle CartRomHandle ALIGNED(8);
 OSPiHandle LeoDiskHandle ALIGNED(8);
+#if BUILD_VERSION >= VERSION_J
 OSPiHandle *__osDiskHandle;
-
 OSPiHandle *osLeoDiskInit(void) {
     u32 saveMask;
 
