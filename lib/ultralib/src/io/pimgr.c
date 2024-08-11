@@ -4,7 +4,7 @@
 #include "piint.h"
 #include "PR/rdb.h"
 
-static OSThread piThread ALIGNED(8);
+OSThread piThread ALIGNED(8);
 static char piThreadStack[OS_PIM_STACKSIZE] ALIGNED(16);
 
 #ifndef _FINALROM

@@ -1,6 +1,6 @@
 #include "PR/os_internal.h"
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 
 u8 __osContAddressCrc(u16 addr) {
     u32 temp = 0;

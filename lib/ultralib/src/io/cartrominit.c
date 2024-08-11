@@ -63,6 +63,7 @@ OSPiHandle* osCartRomInit(void) {
 
     return &__CartRomHandle;
 }
+
 #else
 
 OSPiHandle CartRomHandle ALIGNED(8);

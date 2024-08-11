@@ -236,6 +236,7 @@ build/src/boot/libu64/%.o: OPTFLAGS := -O2
 build/src/boot/fault.o: CFLAGS += -trapuv
 build/src/boot/fault_drawer.o: CFLAGS += -trapuv
 build/src/C030.o: OPTFLAGS += -Wo,-loopunroll,0
+build/src/hal_libc.o: CFLAGS += -signed
 
 # cc & asm-processor
 build/src/libleo/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
@@ -257,6 +258,11 @@ clean:
 
 libclean:
 	$(MAKE) -C lib/ultralib clean VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET)
+	$(RM) -rf $(BUILD_DIR)/lib
+	$(RM) -r build/$(TARGET)-$(VERSION).elf
+	$(RM) -r build/$(TARGET)-$(VERSION).ld
+	$(RM) -r build/$(TARGET)-$(VERSION).map
+	$(RM) -r build/$(TARGET)-$(VERSION).z64
 
 distclean: clean libclean
 	$(RM) -r $(BUILD_DIR) asm/ assets/ .splat/

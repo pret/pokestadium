@@ -39,7 +39,7 @@ s32 osPfsDeleteFile(OSPfs* pfs, u16 company_code, u32 game_code, u8* game_name, 
 
     for (bank = dir.start_page.inode_t.bank; bank < pfs->banks;) {
         ERRCK(__osPfsRWInode(pfs, &inode, OS_READ, bank));
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
         ERRCK(__osPfsReleasePages(pfs, &inode, startpage, bank, &last_page));
 #else
         ERRCK(__osPfsReleasePages(pfs, &inode, startpage, &sum, bank, &last_page, TRUE));
@@ -81,7 +81,7 @@ s32 osPfsDeleteFile(OSPfs* pfs, u16 company_code, u32 game_code, u8* game_name, 
     return ret;
 }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 
 s32 __osPfsReleasePages(OSPfs* pfs, __OSInode* inode, u8 start_page, u8 bank, __OSInodeUnit* last_page) {
     __OSInodeUnit next_page;

@@ -6,7 +6,7 @@
 static void __osPackEepWriteData(u8 address, u8* buffer);
 s32 osEepromWrite(OSMesgQueue* mq, u8 address, u8* buffer) {
     s32 ret = 0;
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     int i;
 #endif
     u16 type;
@@ -19,13 +19,13 @@ s32 osEepromWrite(OSMesgQueue* mq, u8 address, u8* buffer) {
 
     __osSiGetAccess();
     ret = __osEepStatus(mq, &sdata);
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     ret = __osEepStatus(mq, &sdata); // Duplicate that was removed in 2.0J
 #endif
 
     type = sdata.type & (CONT_EEPROM | CONT_EEP16K);
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (ret == 0) {
         switch (type) {
             case CONT_EEPROM:
@@ -95,7 +95,7 @@ s32 osEepromWrite(OSMesgQueue* mq, u8 address, u8* buffer) {
     osRecvMesg(mq, NULL, OS_MESG_BLOCK);
 
     // skip the first 4 bytes
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     ptr += 4;
 #else
     for (i = 0; i < 4; i++) {
@@ -116,7 +116,7 @@ static void __osPackEepWriteData(u8 address, u8* buffer) {
     __OSContEepromFormat eepromformat;
     int i;
 
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     for (i = 0; i < ARRLEN(__osEepPifRam.ramarray); i++) {
         __osEepPifRam.ramarray[i] = CONT_CMD_NOP;
     }
@@ -172,7 +172,7 @@ s32 __osEepStatus(OSMesgQueue* mq, OSContStatus* data) {
 
     ret = __osSiRawStartDma(OS_WRITE, &__osEepPifRam);
     osRecvMesg(mq, NULL, OS_MESG_BLOCK);
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     __osContLastCmd = CONT_CMD_END;
 #else
     __osContLastCmd = CONT_CMD_REQUEST_STATUS;

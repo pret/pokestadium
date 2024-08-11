@@ -6,7 +6,11 @@
 
 extern OSPiHandle *__osDiskHandle;
 
+#if BUILD_VERSION == VERSION_I_P
+u8 leoDiskStack[0x10] ALIGNED(16);
+#else
 u8 leoDiskStack[OS_PIM_STACKSIZE] ALIGNED(16);
+#endif
 
 static void __osLeoAbnormalResume(void);
 static void __osLeoResume(void);

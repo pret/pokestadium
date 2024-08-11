@@ -6,7 +6,7 @@
 #define SIZE_4MB 0x400000
 #define SIZE_8MB 0x800000
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 
 u32 osGetMemSize(void) {
     vu32* ptr;

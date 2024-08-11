@@ -7,7 +7,7 @@ OSPifRam __osEepPifRam ALIGNED(16);
 #if BUILD_VERSION >= VERSION_L
 s32 __osEepromRead16K;
 #endif
-static void __osPackEepReadData(u8 address);
+void __osPackEepReadData(u8 address);
 
 s32 osEepromRead(OSMesgQueue* mq, u8 address, u8* buffer) {
     s32 ret = 0;
@@ -22,7 +22,7 @@ s32 osEepromRead(OSMesgQueue* mq, u8 address, u8* buffer) {
     ret = __osEepStatus(mq, &sdata);
     type = sdata.type & (CONT_EEPROM | CONT_EEP16K);
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     if (ret == 0) {
         switch (type) {
             case CONT_EEPROM:
@@ -105,12 +105,12 @@ s32 osEepromRead(OSMesgQueue* mq, u8 address, u8* buffer) {
     return ret;
 }
 
-static void __osPackEepReadData(u8 address) {
+void __osPackEepReadData(u8 address) {
     u8* ptr = (u8*)&__osEepPifRam.ramarray;
     __OSContEepromFormat eepromformat;
     int i;
 
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     for (i = 0; i < ARRLEN(__osEepPifRam.ramarray); i++) {
         __osEepPifRam.ramarray[i] = CONT_CMD_NOP;
     }
@@ -123,7 +123,7 @@ static void __osPackEepReadData(u8 address) {
     eepromformat.cmd = CONT_CMD_READ_EEPROM;
     eepromformat.address = address;
 
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_I_P
     for (i = 0; i < ARRLEN(eepromformat.data); i++) {
         eepromformat.data[i] = 0;
     }

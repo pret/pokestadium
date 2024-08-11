@@ -9,7 +9,7 @@ struct __osHwInt {
 
 extern struct __osHwInt __osHwIntTable[];
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 void __osGetHWIntrRoutine(OSHWIntr interrupt, s32 (**handler)(void), void** stackEnd) {
 #else
 void __osGetHWIntrRoutine(OSHWIntr interrupt, s32 (**handler)(void)) {

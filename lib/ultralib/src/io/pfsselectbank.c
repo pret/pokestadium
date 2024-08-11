@@ -1,7 +1,7 @@
 #include "PR/os_internal.h"
 #include "controller.h"
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 s32 __osPfsSelectBank(OSPfs* pfs, u8 bank) {
     u8 temp[BLOCKSIZE];
     int i;

@@ -10,7 +10,7 @@ void __osViSwapContext() {
     register __OSViContext* vc;
     u32 origin;
     u32 hStart;
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     u32 vStart;
 #endif
     u32 nomValue;
@@ -37,7 +37,7 @@ void __osViSwapContext() {
         vc->y.scale = vm->fldRegs[field].yScale;
     }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     vStart = (vm->fldRegs[field].vStart - (__additional_scanline << 0x10)) + __additional_scanline;
 #endif
     hStart = vm->comRegs.hStart;
@@ -63,7 +63,7 @@ void __osViSwapContext() {
     IO_WRITE(VI_H_SYNC_REG, vm->comRegs.hSync);
     IO_WRITE(VI_LEAP_REG, vm->comRegs.leap);
     IO_WRITE(VI_H_START_REG, hStart);
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
     IO_WRITE(VI_V_START_REG, vStart);
 #else
     IO_WRITE(VI_V_START_REG, vm->fldRegs[field].vStart);

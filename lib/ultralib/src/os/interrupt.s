@@ -6,7 +6,7 @@
 .text
 .set noreorder
 LEAF(__osDisableInt)
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 	la    t2, __OSGlobalIntMask
 	lw    t3, (t2)
 	andi  t3, 0xFF00

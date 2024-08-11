@@ -134,7 +134,7 @@ OSMesgQueue *osPiGetCmdQueue(void);
     if (cHandle->var != pihandle->var) \
         IO_WRITE(reg, pihandle->var)
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_I_P
 
 #define EPI_SYNC(pihandle, stat, domain)                             \
                                                                      \
