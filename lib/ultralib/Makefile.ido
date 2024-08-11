@@ -99,6 +99,7 @@ $(BUILD_DIR)/src/io/sirawdma.marker: OPTFLAGS := -O2
 $(BUILD_DIR)/src/io/sirawread.marker: OPTFLAGS := -O2
 $(BUILD_DIR)/src/io/epiread.marker: OPTFLAGS := -O2
 $(BUILD_DIR)/src/io/epiwrite.marker: OPTFLAGS := -O2
+$(BUILD_DIR)/src/io/sirawwrite.marker: OPTFLAGS := -O2
 
 
 $(BUILD_DIR)/src/libc/syncprintf.marker: OPTFLAGS := -O2
