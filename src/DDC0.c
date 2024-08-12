@@ -1,5 +1,5 @@
 #include <PR/os_internal_reg.h>
-#include "ultra64.h"
+#include "global.h"
 #include "dp_intro.h"
 #include "profiler.h"
 #include "4BDC0.h"

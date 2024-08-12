@@ -29,6 +29,9 @@ CPP_FLAGS = [
     "-Isrc",
     "-I.",
     "-DM2C",
+    "-Ilib/ultralib/include",
+    "-Ilib/ultralib/include/PR",
+    "-Ilib/ultralib/include/ido",
 ]
 
 import os

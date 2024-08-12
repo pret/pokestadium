@@ -8,7 +8,7 @@
 #include "memmap.h"
 #include "util.h"
 #include "profiler.h"
-#include "PR/xstdio.h"
+#include "stdarg.h"
 
 typedef struct unk_D_80068CA0 {
     /* 0x00 */ struct unk_D_80068CA0* next;

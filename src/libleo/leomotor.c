@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "libleo/internal.h"
 
 void leoStart_stop(void) {

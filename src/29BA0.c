@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "memory.h"
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/29BA0/func_80028FA0.s")

@@ -1,6 +1,8 @@
 #ifndef _RSP_H_
 #define _RSP_H_
 
+#include "PR/leo.h"
+
 struct UnkStruct800006C4_2 {
     char unk0;
     char filler1[0x1B];

@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "libleo/internal.h"
 
 u16 leoLba_to_phys(u32 lba) {

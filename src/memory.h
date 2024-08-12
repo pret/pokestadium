@@ -1,8 +1,7 @@
 #ifndef _MEMORY_H_
 #define _MEMORY_H_
 
-#include <PR/ultratypes.h>
-#include <PR/os.h>
+#include <ultra64.h>
 #include <macros.h>
 
 #define MEMORY_POOL_LEFT  0

@@ -1,6 +1,7 @@
 #ifndef LIBLEO_INTERNAL_H
 #define LIBLEO_INTERNAL_H
 
+#include "PR/leo.h"
 #include "PR/os_internal.h"
 #include "PR/rcp.h"
 

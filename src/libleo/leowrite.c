@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "libleo/internal.h"
 
 extern u16 LEOrw_flags; // NOT volatile in this file!
