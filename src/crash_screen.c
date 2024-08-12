@@ -1,11 +1,11 @@
-#include <ultra64.h>
+#include "global.h"
 #include <string.h>
-#include <PR/xstdio.h>
 #include <PR/os_internal_thread.h>
 #include "stdarg.h"
 #include "crash_screen.h"
 #include "memmap.h"
 #include "controller.h"
+#include "stdarg.h"
 
 CrashScreen gCrashScreen;
 

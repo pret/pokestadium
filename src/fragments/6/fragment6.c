@@ -1,3 +1,4 @@
+#include "global.h"
 #include "src/memory.h"
 #include "src/3FB0.h"
 #include "src/6A40.h"

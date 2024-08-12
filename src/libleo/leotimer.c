@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "libleo/internal.h"
 
 static const u8 ymdupper[6] = { 99, 12, 31, 23, 59, 59 };

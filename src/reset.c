@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "reset.h"
 
 // this file handles the soft reset effect.

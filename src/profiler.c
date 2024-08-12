@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "profiler.h"
 
 extern OSTime D_800A6CE8;

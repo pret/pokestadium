@@ -39,14 +39,14 @@ struct Fragment {
     char data[RELOCATIONS_SIZE]; // variable size
 };
 
-void Memmap_SetSegmentMap(u32 id, uintptr_t vaddr, u32 size);
+void Memmap_SetSegmentMap(u32 id, uintptr_t vaddr, size_t size);
 uintptr_t Memmap_GetSegmentBaseVaddr(u32 id);
 uintptr_t Memmap_GetSegmentVaddr(u32 mask);
 u32 Memmap_GetSegmentVaddrMask(u32 i, uintptr_t addr);
 void Memmap_ClearSegmentMemmap(u32 id);
 void Memmap_SetSegments(Gfx** gfxDl);
 void Memmap_RelocateFragment(u32 id, struct Fragment* fragment);
-void Memmap_SetFragmentMap(u32 id, uintptr_t vaddr, u32 size);
+void Memmap_SetFragmentMap(u32 id, uintptr_t vaddr, size_t size);
 uintptr_t Memmap_GetFragmentBaseVaddr(u32 id);
 uintptr_t Memmap_GetFragmentVaddr(u32 mask);
 u32 Memmap_GetFragmentVaddrMask(u32 i, uintptr_t addr);
