@@ -395,7 +395,7 @@ void func_80007304(void) {
 }
 
 unk_func_80007444* func_80007444(s8 arg0, s8 arg1, s8 arg2, s8 arg3, s8 arg4, s32 arg5) {
-    unk_func_80007444* temp_v0 = main_pool_alloc(0x24, 0);
+    unk_func_80007444* temp_v0 = main_pool_alloc(sizeof(unk_func_80007444), 0);
 
     if (temp_v0 != NULL) {
         if (arg0 == 1) {
@@ -425,11 +425,13 @@ unk_func_80007444* func_80007444(s8 arg0, s8 arg1, s8 arg2, s8 arg3, s8 arg4, s3
             s32 i;
 
             for (i = 0; i < temp_v0->unk_0E; i++) {
-                temp_v0->unk_18[i] = func_80006314(0, 2, temp_v0->unk_00, temp_v0->unk_02, 1);
+                temp_v0->unk_18[i] =
+                    func_80006314(0, IMAGE_SIZE_BITS_16b, temp_v0->unk_00, temp_v0->unk_02, MEMORY_POOL_RIGHT);
             }
 
             if (temp_v0->unk_0F == 1) {
-                void* temp_s3 = func_80006314(0, 2, temp_v0->unk_00, temp_v0->unk_02, 0);
+                void* temp_s3 =
+                    func_80006314(0, IMAGE_SIZE_BITS_16b, temp_v0->unk_00, temp_v0->unk_02, MEMORY_POOL_LEFT);
 
                 for (i = 0; i < temp_v0->unk_0E; i++) {
                     func_80006414(temp_v0->unk_18[i], temp_s3);

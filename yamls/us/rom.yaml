@@ -33,7 +33,7 @@
     - [0x60A0, c, reset] # soft reset effect
     - [0x6430, c, controller] # controller code
     - [0x6A40, c]
-    - [0x6BC0, c] # 
+    - [0x6BC0, c, 6BC0] # 
     - [0x75F0, c, stage_loader] # stage loader
     - [0x8EB0, c] # empty file/padding?
     - [0x8EC0, c, crash_screen] # crash handler
@@ -323,6 +323,7 @@
     # .data is somewhere in here
     - [0x69790, .data, util]
     - [0x697A0, bin, rom_data_697A0]
+    - [0x697B0, .data, 6BC0]
     - [0x697C0, .data, stage_loader]
     - [0x6A1B0, .data, crash_screen]
     - [0x6A3B0, .data, profiler]

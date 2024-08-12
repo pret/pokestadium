@@ -79,4 +79,12 @@ extern unk_func_80007444* D_800A7464;
 
 extern Gfx* D_800A74B0;
 
+typedef struct unk_D_800A7440 {
+	/* 0x00 */ s16 x1;
+	/* 0x02 */ s16 y1;
+	/* 0x04 */ s16 x2;
+	/* 0x06 */ s16 y2;
+} unk_D_800A7440; // size >= 0x8
+extern unk_D_800A7440 D_800A7440;
+
 #endif
