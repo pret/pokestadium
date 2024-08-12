@@ -483,6 +483,7 @@ void func_86000020(void) {
     }
 }
 #else
+void func_86000020(void);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86000020.s")
 #endif
 
