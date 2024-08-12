@@ -2,8 +2,10 @@
 #include <PR/os_internal_reg.h>
 #include "global.h"
 #include "dp_intro.h"
+#include "6BC0.h"
 #include "crash_screen.h"
 #include "profiler.h"
+#include "memory.h"
 
 // dp_intro.c
 
@@ -266,7 +268,7 @@ void func_800019C8(void) {
     osCreateMesgQueue(&D_800846A4, &D_80084688, 1);
     D_80083CA0.unkA88 = 0;
     D_80083CA0.unkA8A = 0;
-    D_80084680[0] = func_80006314(0, 2, 0x280, 1, 1);
+    D_80084680[0] = func_80006314(0, IMAGE_SIZE_BITS_16b, 0x280, 1, MEMORY_POOL_RIGHT);
     func_80001AD4(1);
     func_80003B30(&D_80084760, 0xB0000B70, 0xB0000C70, 0);
 }

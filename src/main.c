@@ -3,6 +3,7 @@
 #include "crash_screen.h"
 #include "rsp.h"
 #include "reset.h"
+#include "util.h"
 
 extern void func_8002B330(); // thread 6 function
 
