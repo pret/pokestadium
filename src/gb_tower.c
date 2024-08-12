@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "hal_libc.h"
 #include "controller.h"
 

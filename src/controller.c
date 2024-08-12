@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "controller.h"
 #include "gb_tower.h"
 #include "math_util.h"

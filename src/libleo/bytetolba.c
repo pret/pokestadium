@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "libleo/internal.h"
 
 s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {

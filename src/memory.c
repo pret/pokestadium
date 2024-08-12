@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "memory.h"
 
 // seems to allocate a pool area, and init it's MainPool struct?

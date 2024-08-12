@@ -1,10 +1,16 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
-#include "ultra64.h"
+#include <ultra64.h>
+
+typedef unsigned int uintptr_t;
+
+#include "macros.h"
+
 #include "attributes.h"
 #include "functions.h"
 #include "variables.h"
+#include "sections.h"
 #include "gfx.h"
 #include "color.h"
 

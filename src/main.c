@@ -1,4 +1,3 @@
-#include <ultra64.h>
 #include "global.h"
 #include "dp_intro.h"
 #include "crash_screen.h"

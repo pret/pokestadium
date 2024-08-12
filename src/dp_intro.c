@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include <PR/os_internal_reg.h>
 #include "global.h"
 #include "dp_intro.h"

@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include <macros.h>
 
 // used for padding. Splat cant auto gen these I guess
