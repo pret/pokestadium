@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "libleo/internal.h"
 
 s32 LeoReadRTC(LEOCmd* cmdBlock, OSMesgQueue* mq) {

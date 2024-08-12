@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "PR/R4300.h"
 #include "libleo/internal.h"
 

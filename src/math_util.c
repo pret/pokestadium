@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include "global.h"
 #include "math_util.h"
 
 // this file might be the leftovers of math_util.c from sm64/mk64.

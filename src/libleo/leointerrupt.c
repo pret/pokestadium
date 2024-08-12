@@ -1,7 +1,7 @@
-#include <ultra64.h>
-#include "ultra64/internal.h"
+#include "global.h"
 #include "libleo/internal.h"
 #include "PR/os_system.h"
+#include "../../../lib/ultralib/src/os/osint.h" // haaaack
 
 extern OSThread* __osRunQueue;
 extern OSThread* __osPopThread(OSThread**);
@@ -193,12 +193,12 @@ void __osLeoResume(void) {
     s32 last;
 
     es = &__osEventStateTab[8];
-    mq = es->queue;
+    mq = es->messageQueue;
     if ((mq == 0) || (mq->validCount >= mq->msgCount)) {
         return;
     }
     last = (mq->first + mq->validCount) % mq->msgCount;
-    mq->msg[last] = es->msg;
+    mq->msg[last] = es->message;
     mq->validCount++;
     if (mq->mtqueue->next != NULL) {
         __osEnqueueThread(&__osRunQueue, __osPopThread(&mq->mtqueue));
