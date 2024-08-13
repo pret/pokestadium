@@ -14,10 +14,42 @@ typedef unsigned int uintptr_t;
 #include "gfx.h"
 #include "color.h"
 
+typedef struct unk_D_86002F58_004_00C_028 {
+    /* 0x00 */ char pad0[4];
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ char pad6[6];
+    /* 0x0C */ s32* unk_0C;
+    /* 0x10 */ s32* unk_10;
+} unk_D_86002F58_004_00C_028; // size >= 0x14
+
+typedef unk_D_86002F58_004_00C_028* (*unk_D_86002F58_004_00C_028_func)(s32, s32);
+
+typedef struct unk_D_86002F58_004_00C {
+    /* 0x00 */ char unk_00[0x28];
+    /* 0x28 */ unk_D_86002F58_004_00C_028_func unk_28;
+} unk_D_86002F58_004_00C; // size >= 0x2C
+
+typedef struct unk_D_86002F58_004_010 {
+	/* 0x00 */ u8 unk_00;
+	/* 0x01 */ char unk_01[0x23];
+	/* 0x24 */ s32 unk_24;
+	/* 0x28 */ s32 unk_28;
+} unk_D_86002F58_004_010; // size >= 0x2C
+
 typedef struct unk_D_86002F58_004 {
-    /* 0x000 */ char pad0[0xC];
-    /* 0x00C */ s32 unk_00C;
-    /* 0x010 */ s8 unk_010[0x10];
+    /* 0x000 */ char pad0[1];
+    /* 0x001 */ u8 unk_001;
+    /* 0x002 */ u8 unk_002;
+    /* 0x003 */ char pad3[9];
+    /* 0x00C */ unk_D_86002F58_004_00C* unk_00C;
+    /* 0x010 */ unk_D_86002F58_004_010* unk_010;
+    /* 0x014 */ char unk014[0x4];
+    /* 0x018 */ s16 unk_018;
+    /* 0x01A */ s16 unk_01A;
+    /* 0x01C */ u8 unk_01C;
+    /* 0x01D */ u8 unk_01D;
+    /* 0x01E */ char unk01E[0x2];
     /* 0x020 */ s16 unk_020;
     /* 0x024 */ f32 unk_024;
     /* 0x028 */ f32 unk_028;
@@ -25,10 +57,19 @@ typedef struct unk_D_86002F58_004 {
     /* 0x030 */ f32 unk_030;
     /* 0x034 */ f32 unk_034;
     /* 0x038 */ f32 unk_038;
-    /* 0x03C */ char pad3C[0xC];
+    /* 0x03C */ s32 unk_03C;
+    /* 0x040 */ s16 unk_040;
+    /* 0x044 */ s32 unk_044;
     /* 0x048 */ s32 unk_048;
     /* 0x04C */ u32 unk_04C;
-    /* 0x050 */ char pad50[0x56];
+    /* 0x050 */ char pad50[4];
+    /* 0x054 */ s16 unk_054;
+    /* 0x058 */ s32 unk_058;
+    /* 0x05C */ char pad5C[4];
+    /* 0x060 */ s32 unk_060;
+    /* 0x064 */ char pad64[0x3C];
+    /* 0x0A0 */ s32 unk_0A0;
+    /* 0x0A4 */ char padA4[2];
     /* 0x0A6 */ s8 unk_0A6;
     /* 0x0A7 */ char padA7[5];
     /* 0x0AC */ f32 unk_0AC;

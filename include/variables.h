@@ -1,7 +1,7 @@
 #ifndef _VARIABLES_H_
 #define _VARIABLES_H_
 
-#include "ultra64.h"
+#include "global.h"
 
 // thread pris
 #define THREAD_PRI_IDLE_INIT 100
@@ -27,7 +27,6 @@ extern u32 D_1000000;
 extern u32 D_3000000;
 extern u32 D_5000000;
 extern u32 D_6000000;
-extern u32 D_800AC840;
 extern u32 D_8D000000;
 
 typedef struct unk_D_80068BA0 {
@@ -86,5 +85,21 @@ typedef struct unk_D_800A7440 {
 	/* 0x06 */ s16 y2;
 } unk_D_800A7440; // size >= 0x8
 extern unk_D_800A7440 D_800A7440;
+
+extern struct unk_D_86002F58_004 D_800AC840;
+extern struct unk_D_86002F58_004 D_800AC858;
+extern struct unk_D_86002F58_004* D_8006F09C;
+
+extern s32 D_8006F050[];
+extern s16 D_8006F05C[];
+extern f32 D_8006F064[];
+
+typedef struct unk_D_8006FF00 {
+	/* 0x00 */ char unk_00[0x10];
+	/* 0x10 */ s16 unk_10;
+	/* 0x12 */ s16 unk_12;
+	/* 0x14 */ char unk_14[0x8];
+} unk_D_8006FF00; // size = 0x1C
+extern unk_D_8006FF00 D_8006FF00[];
 
 #endif

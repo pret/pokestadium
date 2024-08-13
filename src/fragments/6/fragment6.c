@@ -350,7 +350,7 @@ static u32 D_86002B18[] = {
 
 typedef struct unk_D_86002F30 {
     /* 0x00 */ char unk_00[0x8];
-    /* 0x08 */ u32* unk_08;
+    /* 0x08 */ unk_D_86002F58_004** unk_08;
 } unk_D_86002F30; // size >= 0xC
 
 extern unk_D_86002F30* D_86002F30;
@@ -690,8 +690,8 @@ static Gfx D_86002DD8[] = {
     gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_PASS2),
     gsDPSetPrimColor(0, 0, 0, 0, 0, 200),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(D_86002B98, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
-                         G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+     gsDPLoadTextureBlock(D_86002B98, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
+                          G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsSPVertex(D_86002D98, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -1401,8 +1401,8 @@ void func_86002440(void) {
     D_86002F30 = (unk_D_86002F30*)func_80019D18(0xAE);
 
     for (i = 0; i < 4; i++) {
-        D_86003B64 = &D_86003598[i];
         D_86003B60 = &D_86003598[i];
+        D_86003B64 = D_86003B60;
 
         func_8001BB58(D_86003B64);
         func_8001BC34(D_86003B60, 0, 0xAE, *D_86002F30->unk_08);
