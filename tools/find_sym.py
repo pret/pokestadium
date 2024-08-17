@@ -15,14 +15,14 @@ if len(sys.argv) > 2 and sys.argv[2] == "v":
 elif len(sys.argv) > 2 and sys.argv[2] == "p":
     is_vram = False
 
-with open("splat.yaml", "r") as f:
+with open("yamls/us/rom.yaml", "r") as f:
     splat = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
 min_seg = None
 min_subseg = 99999
 min_diff = 0xFFFFFFFF
 
-for segment in splat["segments"]:
+for segment in splat:
     if type(segment) == dict and "subsegments" in segment:
         for i,subseg in enumerate(segment["subsegments"]):
             if type(subseg) == list:
@@ -35,7 +35,8 @@ for segment in splat["segments"]:
                 if is_vram:
                     diff = addr - segment["vram"]
             else:
-                print(f"Unknown subsegment {subseg}")
+                #print(f"Unknown subsegment {subseg}")
+                pass
 
             if diff >= 0 and diff < min_diff:
                 min_seg = segment

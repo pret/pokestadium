@@ -34,7 +34,7 @@ typedef struct unk_func_8001C07C_arg0 {
 void func_8001BB20(void);
 void func_8001BB58(unk_D_86002F58_004* arg0);
 void func_8001BBC8(unk_D_86002F58_004* arg0);
-void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_D_86002F58_004* arg3);
+void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_func_8001BCF0* arg3);
 void func_8001BCF0(unk_D_86002F58_004* arg0);
 s32 func_8001BD04(unk_D_86002F58_004* arg0, s32 arg1);
 s32 func_8001BD9C(unk_D_86002F58_004* arg0, s32 arg1);

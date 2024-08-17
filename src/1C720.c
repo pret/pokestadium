@@ -27,7 +27,7 @@ void func_8001BBC8(unk_D_86002F58_004* arg0) {
     arg0->unk_001 &= ~1;
 }
 
-void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_D_86002F58_004* arg3) {
+void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_func_8001BCF0* arg3) {
     func_80012094(arg0, arg3);
     func_8000ED98(&arg0->unk_060);
     arg0->unk_018 = arg1;
@@ -58,12 +58,12 @@ void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_D_86002F58_
 }
 
 void func_8001BCF0(unk_D_86002F58_004* arg0) {
-    arg0->unk_00C = NULL;
+    arg0->unk_004.unk_08 = NULL;
     arg0->unk_001 &= ~1;
 }
 
 s32 func_8001BD04(unk_D_86002F58_004* arg0, s32 arg1) {
-	unk_D_86002F58_004_00C* tmp = arg0->unk_00C;
+    unk_D_86002F58_004_00C* tmp = arg0->unk_004.unk_08;
     unk_D_86002F58_004_00C_028* temp_v0 = tmp->unk_28(0, 0);
 
     if (arg1 == -1) {
@@ -77,7 +77,7 @@ s32 func_8001BD04(unk_D_86002F58_004* arg0, s32 arg1) {
 }
 
 s32 func_8001BD9C(unk_D_86002F58_004* arg0, s32 arg1) {
-    unk_D_86002F58_004_00C* temp_v0 = arg0->unk_00C;
+    unk_D_86002F58_004_00C* temp_v0 = arg0->unk_004.unk_08;
     unk_D_86002F58_004_00C_028* temp_v1 = temp_v0->unk_28(0, 0);
 
     if (arg1 == -1) {
@@ -110,7 +110,7 @@ unk_D_86002F58_004_00C_028* func_8001BE90(unk_D_86002F58_004* arg0, s32 arg1) {
     }
 
     if (arg0 != NULL) {
-    	unk_D_86002F58_004_00C* tmp = arg0->unk_00C;
+        unk_D_86002F58_004_00C* tmp = arg0->unk_004.unk_08;
 
         var_v1 = tmp->unk_28(arg1, 0);
     }
@@ -140,17 +140,19 @@ void func_8001BEE8(s32* arg0, unk_func_8001BEE8* arg1) {
         var_a0 = (arg1->unk_0E >> 8) + arg1->unk_0E;
 
         var_v1 = arg1->unk_30;
-		while (*var_v1 != 0) {
-    		t = *var_v1++;
-	        var_a0 += t;
-		}
+        while (*var_v1 != 0) {
+            t = *var_v1++;
+            var_a0 += t;
+        }
 
         var_v1 = arg1->unk_3B;
-		while (*var_v1 != 0) {
-    		t = *var_v1++;
-	        var_a0 += t;
-	        do { var_a0 += t; } while (0);
-		}
+        while (*var_v1 != 0) {
+            t = *var_v1++;
+            var_a0 += t;
+            do {
+                var_a0 += t;
+            } while (0);
+        }
 
         *(s16*)&sp34 = ((((sp30->unk_12 - sp30->unk_10) << 6) * var_a0) / 255) + (sp30->unk_10 << 6);
     }
@@ -162,10 +164,10 @@ void func_8001BEE8(s32* arg0, unk_func_8001BEE8* arg1) {
 #endif
 
 void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2) {
-	unk_func_8001BEE8 stack;
+    unk_func_8001BEE8 stack;
 
-	stack.unk_00 = arg2;
-	stack.unk_0E = arg1->unk_02;
+    stack.unk_00 = arg2;
+    stack.unk_0E = arg1->unk_02;
 
     _bcopy(arg1->unk_04, stack.unk_30, 0x10);
     _bcopy(arg1->unk_14, stack.unk_3B, 0x10);
@@ -174,10 +176,10 @@ void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2) {
 
 #ifdef NON_MATCHING
 typedef struct stack_func_8001C07C {
-	/* 0x00 */ s32 unk_00;
-	/* 0x06 */ s16 unk_06;
-	/* 0x08 */ s16 unk_08;
-	/* 0x0C */ s32 unk_0C;
+    /* 0x00 */ s32 unk_00;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0C */ s32 unk_0C;
 } stack_func_8001C07C; // size == 0x30
 
 void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
@@ -195,9 +197,7 @@ void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
         }
 
         if (!(arg0->unk_10->unk_00 & 4)) {
-        	while (func_80001C90() == 0) {
-
-            } 
+            while (func_80001C90() == 0) {}
         }
 
         stack.unk_00 = stack.unk_0C;

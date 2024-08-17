@@ -5,6 +5,7 @@
 
 void func_80015094(unk_D_86002F34*);
 void func_80015348(void);
+s32 func_80015390(unk_D_86002F58_004*, s16, Vec3f*);
 
 
 #endif // _12D80_H_

@@ -4,6 +4,7 @@
 #include "sections.h"
 #include "memory.h"
 #include "dp_intro.h"
+#include "3FB0.h"
 #include "util.h"
 
 struct UnkInputStruct8000D738 {
@@ -38,9 +39,7 @@ void func_81206E64(void);
 void func_81206F38(void);
 
 void func_80005370(struct UnkStruct800AA660*);
-void func_80004454(u32, void*, void*);
 char func_8000B318(char);
-s32 func_800044F4(void*, void*, s32, s32);
 s32 func_8000484C(s32, s32);
 
 void func_8000D5C0(void* unused) {

@@ -74,8 +74,8 @@ void crash_screen_wait_for_button_combo(void) {
     do {
         Cont_StartReadInputs();
         Cont_ReadInputs();
-        if (D_80068BA0[0]->unk_08 != 0) {
-            if (D_80068BA0[0]->unk_08 == gCrashScreenUnlockInputs[i++]) {
+        if (D_80068BA0->unk_08 != 0) {
+            if (D_80068BA0->unk_08 == gCrashScreenUnlockInputs[i++]) {
                 // have we reached the end of the array? exit the sleep loop.
                 if (i == 10) {
                     breakloop = TRUE;

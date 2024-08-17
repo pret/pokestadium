@@ -348,11 +348,6 @@ static u32 D_86002B18[] = {
     0x87806398, (u32)&D_6000000,  (u32)&D_1000000,
 };
 
-typedef struct unk_D_86002F30 {
-    /* 0x00 */ char unk_00[0x8];
-    /* 0x08 */ unk_D_86002F58_004** unk_08;
-} unk_D_86002F30; // size >= 0xC
-
 extern unk_D_86002F30* D_86002F30;
 extern unk_D_86002F34* D_86002F34;
 extern unk_D_86002F34_00C* D_86002F38;
@@ -365,10 +360,51 @@ extern s32 D_86002F48;
 extern s16 D_86002F4C;
 extern s32 D_86002F50;
 
+typedef struct unk_D_86002F58_004_frag6 {
+    /* 0x000 */ u8 unk_000;
+    /* 0x001 */ u8 unk_001;
+    /* 0x002 */ u8 unk_002;
+    /* 0x004 */ unk_func_8001BCF0 unk_004;
+    /* 0x010 */ char unk010[0x8];
+    /* 0x018 */ s16 unk_018;
+    /* 0x01A */ s16 unk_01A;
+    /* 0x01C */ u8 unk_01C;
+    /* 0x01D */ u8 unk_01D;
+    /* 0x01E */ char unk01E[0x2];
+    /* 0x020 */ s16 unk_020;
+    /* 0x024 */ f32 unk_024;
+    /* 0x028 */ f32 unk_028;
+    /* 0x02C */ f32 unk_02C;
+    /* 0x030 */ f32 unk_030;
+    /* 0x034 */ f32 unk_034;
+    /* 0x038 */ f32 unk_038;
+    /* 0x03C */ s32 unk_03C;
+    /* 0x040 */ s16 unk_040;
+    /* 0x044 */ s32 unk_044;
+    /* 0x048 */ s32 unk_048;
+    /* 0x04C */ u32 unk_04C;
+    /* 0x050 */ char pad50[4];
+    /* 0x054 */ s16 unk_054;
+    /* 0x058 */ s32 unk_058;
+    /* 0x05C */ char pad5C[4];
+    /* 0x060 */ s32 unk_060;
+    /* 0x064 */ char pad64[0x3C];
+    /* 0x0A0 */ s32 unk_0A0;
+    /* 0x0A4 */ char padA4[2];
+    /* 0x0A6 */ s8 unk_0A6;
+    /* 0x0A7 */ char padA7[5];
+    /* 0x0AC */ f32 unk_0AC;
+    /* 0x0B0 */ f32 unk_0B0;
+    /* 0x0B4 */ char padB4[0xB4];
+    /* 0x168 */ s16 unk_168;
+    /* 0x16A */ u16 unk_16A;
+    /* 0x16C */ s16 unk_16C;
+} unk_D_86002F58_004_frag6; // size = 0x170
+
 typedef struct unk_D_86002F58 {
     /* 0x000 */ s16 unk_000;
     /* 0x002 */ char pad2[2];
-    /* 0x004 */ unk_D_86002F58_004 unk_004;
+    /* 0x004 */ unk_D_86002F58_004_frag6 unk_004;
     /* 0x174 */ u16 unk_174;
     /* 0x176 */ u16 unk_176[2];
     /* 0x17A */ u16 unk_17A;
@@ -384,11 +420,11 @@ typedef struct unk_D_86002F58 {
 } unk_D_86002F58; // size = 0x190
 
 extern unk_D_86002F58 D_86002F58[4];
-extern unk_D_86002F58_004 D_86003598[4];
+extern unk_D_86002F58_004_frag6 D_86003598[4];
 extern u32 D_86003B58;
 extern unk_D_86002F58* D_86003B5C;
-extern unk_D_86002F58_004* D_86003B60;
-extern unk_D_86002F58_004* D_86003B64;
+extern unk_D_86002F58_004_frag6* D_86003B60;
+extern unk_D_86002F58_004_frag6* D_86003B64;
 extern s16 D_86003B68;
 extern s16 D_86003B6A;
 extern s16 D_86003B70[4];
@@ -402,10 +438,15 @@ void func_86000020(void) {
     s32 j;
     s32 a;
 
-    for (a = 0; a < 4; a++) {
-        D_86002F58[a].unk_17A = D_80068BA0[a]->unk_08;
-        D_86002F58[a].unk_174 = D_80068BA0[a]->unk_06;
-    }
+    D_86002F58[0].unk_17A = D_80068BA0[0].unk_08;
+    D_86002F58[1].unk_17A = D_80068BA0[1].unk_08;
+    D_86002F58[2].unk_17A = D_80068BA0[2].unk_08;
+    D_86002F58[3].unk_17A = D_80068BA0[3].unk_08;
+
+    D_86002F58[0].unk_174 = D_80068BA0[0].unk_06;
+    D_86002F58[1].unk_174 = D_80068BA0[1].unk_06;
+    D_86002F58[2].unk_174 = D_80068BA0[2].unk_06;
+    D_86002F58[3].unk_174 = D_80068BA0[3].unk_06;
 
     for (i = 0; i < 4; i++) {
         D_86003B5C = &D_86002F58[i];
@@ -463,8 +504,8 @@ void func_86000020(void) {
     }
 
     if (D_86002F48 == 2) {
-        for (i = 0; i < 4; i++) {
-            D_86003B5C = &D_86002F58[i];
+        for (a = 0; a < 4; a++) {
+            D_86003B5C = &D_86002F58[a];
             for (j = 1; j > 0; j--) {
                 D_86003B5C->unk_176[j] = D_86003B5C->unk_176[j - 1];
                 D_86003B5C->unk_17C[j] = D_86003B5C->unk_17C[j - 1];
@@ -473,8 +514,8 @@ void func_86000020(void) {
             D_86003B5C->unk_17C[0] = D_86003B5C->unk_17A;
         }
     } else {
-        for (i = 0; i < 4; i++) {
-            D_86003B5C = &D_86002F58[i];
+        for (a = 0; a < 4; a++) {
+            D_86003B5C = &D_86002F58[a];
             for (j = 0; j < 2; j++) {
                 D_86003B5C->unk_176[j] = 0;
                 D_86003B5C->unk_17C[j] = 0;
@@ -690,8 +731,8 @@ static Gfx D_86002DD8[] = {
     gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_PASS2),
     gsDPSetPrimColor(0, 0, 0, 0, 0, 200),
     gsDPSetTextureLUT(G_TT_NONE),
-     gsDPLoadTextureBlock(D_86002B98, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
-                          G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(D_86002B98, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsSPVertex(D_86002D98, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -812,11 +853,11 @@ s32 func_86000FD4(void) {
     var_s0_2 = true;
     while (var_s0_2 == true) {
         if (func_86000410() == 0) {
-            if (D_80068BA0[0]->unk_08 & 0x1000) {
+            if (D_80068BA0->unk_08 & 0x1000) {
                 var_s0_2 = false;
             }
 
-            if ((D_8780FA2A == 0) && (D_80068BA0[0]->unk_08 & 0x4000)) {
+            if ((D_8780FA2A == 0) && (D_80068BA0->unk_08 & 0x4000)) {
                 func_80048B90(3);
                 func_87802EB8(2);
                 return -1;
@@ -1358,7 +1399,7 @@ void func_86002440(void) {
     MemoryBlock* temp_v0;
 
     temp_v0 = (MemoryBlock*)func_80002D10(main_pool_get_available(), 0);
-    D_86002F34 = (unk_D_86002F34*)func_80018B70(temp_v0, (uintptr_t)&D_86002B18);
+    D_86002F34 = (unk_D_86002F34*)func_80018B70(temp_v0, D_86002B18);
     func_80002D60(temp_v0);
     func_8001BB20();
     func_8001987C();
@@ -1370,7 +1411,7 @@ void func_86002440(void) {
         D_86003B60 = &D_86003B5C->unk_004;
 
         func_8001BB58(D_86003B60);
-        func_8001BC34(D_86003B60, 0, 0xAD, *D_86002F30->unk_08);
+        func_8001BC34(D_86003B60, 0, 0xAD, D_86002F30->unk_08);
 
         D_86003B60->unk_024 = (i - 1.5f) * D_86002A94;
 
@@ -1405,7 +1446,7 @@ void func_86002440(void) {
         D_86003B64 = D_86003B60;
 
         func_8001BB58(D_86003B64);
-        func_8001BC34(D_86003B60, 0, 0xAE, *D_86002F30->unk_08);
+        func_8001BC34(D_86003B60, 0, 0xAE, D_86002F30->unk_08);
         D_86003B60->unk_024 = (i - 1.5f) * D_86002A94;
         D_86003B60->unk_02C = 0.0f;
         D_86003B60->unk_028 = 200.0f;
