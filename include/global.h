@@ -13,6 +13,7 @@ typedef unsigned int uintptr_t;
 #include "sections.h"
 #include "gfx.h"
 #include "color.h"
+#include "math.h"
 
 typedef struct unk_D_86002F58_004_00C_028 {
     /* 0x00 */ char pad0[4];
@@ -37,14 +38,19 @@ typedef struct unk_D_86002F58_004_010 {
 	/* 0x28 */ s32 unk_28;
 } unk_D_86002F58_004_010; // size >= 0x2C
 
+typedef struct unk_func_8001BCF0 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x04 */ unk_D_86002F58_004_00C* unk_04;
+    /* 0x08 */ unk_D_86002F58_004_010* unk_08;
+} unk_func_8001BCF0; // size >= 0x0C
+
 typedef struct unk_D_86002F58_004 {
-    /* 0x000 */ char pad0[1];
+    /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
     /* 0x002 */ u8 unk_002;
-    /* 0x003 */ char pad3[9];
-    /* 0x00C */ unk_D_86002F58_004_00C* unk_00C;
-    /* 0x010 */ unk_D_86002F58_004_010* unk_010;
-    /* 0x014 */ char unk014[0x4];
+    /* 0x004 */ unk_func_8001BCF0 unk_004;
+    /* 0x010 */ char unk010[0x8];
     /* 0x018 */ s16 unk_018;
     /* 0x01A */ s16 unk_01A;
     /* 0x01C */ u8 unk_01C;
@@ -75,22 +81,19 @@ typedef struct unk_D_86002F58_004 {
     /* 0x0AC */ f32 unk_0AC;
     /* 0x0B0 */ f32 unk_0B0;
     /* 0x0B4 */ char padB4[0xB4];
-    /* 0x168 */ s16 unk_168;
-    /* 0x16A */ u16 unk_16A;
-    /* 0x16C */ s16 unk_16C;
-    /* 0x16E */ char pad16E[2];
-} unk_D_86002F58_004; // size = 0x170
+} unk_D_86002F58_004; // size = 0x168
 
 // possibly unk_D_86002F58_004
 typedef struct unk_D_86002F34_00C {
-    /* 0x00 */ char pad00[0x2C];
+    /* 0x00 */ char pad0[0x2C];
     /* 0x2C */ f32 unk_02C;
-    /* 0x30 */ char pad30[0x4];
+    /* 0x30 */ char pad30[4];
     /* 0x34 */ f32 unk_034;
     /* 0x38 */ f32 unk_038;
     /* 0x3C */ char pad3C[0x6C];
     /* 0xA8 */ f32 unk_0A8;
-    /* 0xAC */ char padAC[0x8];
+    /* 0xAC */ f32 unk_0AC;
+    /* 0xB0 */ f32 unk_0B0;
     /* 0xB4 */ f32 unk_0B4;
     /* 0xB8 */ f32 unk_0B8;
     /* 0xBC */ f32 unk_0BC;
@@ -101,6 +104,10 @@ typedef struct unk_D_86002F34 {
     /* 0x0C */ unk_D_86002F34_00C* unk_0C;
 } unk_D_86002F34; // size >= 0x10
 
+typedef struct unk_D_86002F30 {
+    /* 0x00 */ char unk_00[0x8];
+    /* 0x08 */ unk_func_8001BCF0** unk_08;
+} unk_D_86002F30; // size >= 0xC
 
 
 #endif

@@ -590,10 +590,10 @@
     vram: 0x86100000
     subsegments:
     - [0x1278D0, textbin,   fragments/7/fragment7_header]
-    - [0x1278F0, c,      fragments/7/fragment7]
-    - [0x12BF10, data,   fragments/7/fragment7_data]
-    - [0x12CC90, rodata, fragments/7/fragment7_rodata]
-    - [0x12CD50, rodatabin,    fragments/7/fragment7_reloc]
+    - [0x1278F0, c,         fragments/7/fragment7]
+    - [0x12BF10, .data,     fragments/7/fragment7]
+    - [0x12CC90, .rodata,   fragments/7/fragment7]
+    - [0x12CD50, rodatabin, fragments/7/fragment7_reloc]
 
 # rattata minigame code
   - name: fragment8
