@@ -27,6 +27,7 @@ extern u32 D_1000000;
 extern u32 D_3000000;
 extern u32 D_5000000;
 extern u32 D_6000000;
+extern u32 D_81000000;
 extern u32 D_8D000000;
 
 typedef struct unk_D_80068BA0 {
@@ -35,7 +36,10 @@ typedef struct unk_D_80068BA0 {
     /* 0x08 */ u16 unk_08;
 } unk_D_80068BA0; // size >= 0xC
 
-extern unk_D_80068BA0* D_80068BA0[4];
+extern unk_D_80068BA0* D_80068BA0;
+extern unk_D_80068BA0* D_80068BA4;
+extern unk_D_80068BA0* D_80068BA8;
+extern unk_D_80068BA0* D_80068BAC;
 extern Gfx D_8006F518[];
 extern Gfx D_8006F630[];
 
@@ -101,5 +105,10 @@ typedef struct unk_D_8006FF00 {
 	/* 0x14 */ char unk_14[0x8];
 } unk_D_8006FF00; // size = 0x1C
 extern unk_D_8006FF00 D_8006FF00[];
+
+extern s16 D_8780FA2C;
+extern s16 D_8780FA32;
+extern s16 D_8780FA34;
+extern s16 D_8780FA36;
 
 #endif

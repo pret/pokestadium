@@ -13,11 +13,13 @@ extern u16 D_8780FC96;
 extern u16 D_8780FC98;
 
 u32 func_878001E8(s32);
+void func_8780024C(s32, s32, s32, s32, s32);
 void func_87801290(s32*, s32*, s32, s32, s32);
 s32 func_878013D4(s32, s32);
 void func_87801644(s32, s16, s16, f32);
 void func_87801684(s32, s32, u8*);
 void func_87801824(s32, s32, u8*);
+void func_87801C8C(s32, s32, s32*);
 void func_87801F48(s32, s32, s32);
 void func_87802528(void);
 void func_878025D0(void);
