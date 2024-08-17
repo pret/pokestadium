@@ -126,6 +126,8 @@ ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=globa
 SPLAT           := $(PYTHON) -m splat split
 SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
+ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
+
 IINC := -Iinclude -Isrc -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
 IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
 IINC += -Iinclude/
@@ -242,6 +244,12 @@ build/src/hal_libc.o: CFLAGS += -signed
 build/src/libleo/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
 build/src/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
+###################### Ugly hacksz #############################
+
+# This is unsanitary to do, -but-, because this file is encrypted we cant have splat decrypt it
+# on split. This requires us to include this manually, but it needs to be in the dependency
+# list. So we add it.
+O_FILES += build/src/libleo/bootstrap.s.o
 
 #### Main Targets ###
 
@@ -312,6 +320,8 @@ endif
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill=0xFF $< $@
+	$(ENCRYPT_LIBLEO) $@ $(MAP)
+
 # TODO: update rom header checksum
 
 # TODO: avoid using auto/undefined
