@@ -49,8 +49,6 @@ game2_addr_int = int(game2_addr, 16)
 # Calculate the encryption key.
 key = ((game2_addr_int & 0xFF000000) >> 0x18) + ((game2_addr_int & 0x00FF0000) >> 0x10) + ((game2_addr_int & 0x0000FF00) >> 0x08) + ((game2_addr_int & 0x000000FF)) & 0xFF
 
-print(key)
-
 # TODO: The sizes are hardcoded for __LeoBootGame2 and __LeoBootGame3. TODO: Don't hardcode?
 encrypt_func(rom_file, game2_addr, game2_rom_addr, key, 804) # __LeoBootGame2
 encrypt_func(rom_file, game3_addr, game3_rom_addr, key, 96)  # __LeoBootGame3
