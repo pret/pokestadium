@@ -488,7 +488,7 @@
   # Probably the GB Tower Emulator. This fragment is built very strangely.
   - name: fragment1
     type: code
-    bss_size: 0x0
+    bss_size: 0x9530
     start: 0x7F980
     vram: 0x81200000
     subsegments:
@@ -497,7 +497,11 @@
     - [0x89020,  hasm,   fragments/1/fragment1_code_asm]
     - [0x8D1A0,  data,   fragments/1/fragment1_data]
     - [0xA8E80,  rodata, fragments/1/fragment1_rodata]
-    - [0xAAB60,  rodatabin,    fragments/1/fragment1_reloc]
+
+    - {vram: 0x8122B1E0, type:  bss, name: unk_frag1_bss}
+
+    # relocations
+    - { start: 0xAAB60,  type: rodatabin,  name: fragments/1/fragment1_reloc, linker_section: .bss }
     
   - name: fragment1_misc_yay0
     type: code
