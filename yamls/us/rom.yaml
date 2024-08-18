@@ -604,8 +604,8 @@
     subsegments:
     - [0x12DF40, textbin,   fragments/8/fragment8_header]
     - [0x12DF60, c,      fragments/8/fragment8]
-    - [0x131800, data,   fragments/8/fragment8_data]
-    - [0x131AE0, rodata, fragments/8/fragment8_rodata]
+    - [0x131800, .data,   fragments/8/fragment8]
+    - [0x131D00, .rodata, fragments/8/fragment8]
     - [0x131D70, rodatabin,    fragments/8/fragment8_reloc]
 
   - name: fragment9

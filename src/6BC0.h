@@ -27,6 +27,7 @@ void func_80006414(unk_D_80068BB0*, unk_D_80068BB0*);
 void func_80006450(void);
 void func_80006498(Gfx**, unk_D_80068BB0*);
 void func_800067E4(Gfx**, s32, s32, s32, s32);
+void func_8000699C(Gfx**, u16);
 
 
 #endif // _6BC0_H_
