@@ -28,7 +28,7 @@ s32 func_80019C08(unk_D_86002F58_004_010*, unk_func_8001C248*);
 s32 func_80019C58(unk_D_86002F58_004_010*, unk_func_8001C248*);
 s32 func_80019CA8(unk_D_86002F58_004_010*);
 void func_80019CE0(unk_D_86002F58_004_010*);
-void* func_80019D18(s32);
+unk_D_86002F30* func_80019D18(s32);
 void func_800198E4(unk_D_86002F58_004_010*, u16, s32);
 
 

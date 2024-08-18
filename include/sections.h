@@ -408,6 +408,8 @@ extern u8 _5C7AD0_ROM_START[];
 extern u8 _5F6790_ROM_START[];
 extern u8 _5F92A0_ROM_START[];
 extern u8 _5FFC30_ROM_START[];
+extern u8 _6C4CE0_ROM_START[];
+extern u8 _6C4E50_ROM_START[];
 
 extern u8 D_124570[];
 

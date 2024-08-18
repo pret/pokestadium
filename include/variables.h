@@ -25,6 +25,11 @@ extern Gfx* gDisplayListHead;
 
 extern u32 D_1000000;
 extern u32 D_3000000;
+extern u32 D_4000000;
+extern u32 D_4000008;
+extern u32 D_4000810;
+extern u32 D_4001018;
+extern u32 D_4001820;
 extern u32 D_5000000;
 extern u32 D_6000000;
 extern u32 D_81000000;
