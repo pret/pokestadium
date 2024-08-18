@@ -68,6 +68,7 @@ extern s32  LeoResetClear(void);
 #define LEO_COMMAND_READ_DISK_ID      0x0c
 #define LEO_COMMAND_READ_TIMER        0x0d
 #define LEO_COMMAND_SET_TIMER         0x0e
+#define LEO_COMMAND_RESET_CLEAR       0x0f // manually added
 
 /*-----------------------------------*/
 /* CONTROL BIT                       */
