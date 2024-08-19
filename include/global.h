@@ -90,7 +90,9 @@ typedef struct unk_D_86002F34_00C {
     /* 0x30 */ char pad30[4];
     /* 0x34 */ f32 unk_034;
     /* 0x38 */ f32 unk_038;
-    /* 0x3C */ char pad3C[0x6C];
+    /* 0x3C */ char pad3C[0x28];
+    /* 0x64 */ Vec3f unk_064;
+    /* 0x70 */ char pad70[0x38];
     /* 0xA8 */ f32 unk_0A8;
     /* 0xAC */ f32 unk_0AC;
     /* 0xB0 */ f32 unk_0B0;

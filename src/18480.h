@@ -4,7 +4,7 @@
 #include "global.h"
 #include "src/memory.h"
 
-s32 func_80018B70(MemoryBlock*, void*);
+unk_D_86002F34* func_80018B70(MemoryBlock*, void*);
 
 
 #endif // _18480_H_
