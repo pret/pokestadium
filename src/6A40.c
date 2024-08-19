@@ -42,7 +42,7 @@ void func_80005F1C(s32* arg0, s32* arg1) {
     *arg0 = ptr[D_800A7428.unk10];
 }
 
-u32 func_80005F5C(s32 arg0) {
+void* func_80005F5C(s32 arg0) {
     u32 temp_v0;
     u32 ret;
 
