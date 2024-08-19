@@ -6,7 +6,7 @@
 extern OSThread* __osRunQueue;
 extern OSThread* __osPopThread(OSThread**);
 extern void __osEnqueueThread(OSThread**, OSThread*);
-extern OSIntMask __osGlobalIntMask;
+extern OSIntMask __OSGlobalIntMask;
 void __osLeoAbnormalResume(void);
 void __osLeoResume(void);
 extern s32 osEPiRawStartDma(OSPiHandle*, s32, u32, void*, u32);
@@ -20,7 +20,7 @@ s32 __osLeoInterrupt(void) {
 
     pi_stat = HW_REG(PI_STATUS_REG, u32);
     if (pi_stat & PI_STATUS_DMA_BUSY) {
-        __osGlobalIntMask &= ~0x800;
+        __OSGlobalIntMask &= ~0x800;
         blockInfo->errStatus = 0x1D;
         __osLeoResume();
         return 1;
@@ -55,7 +55,7 @@ s32 __osLeoInterrupt(void) {
         blockInfo->errStatus = 0x16;
         __osLeoResume();
         HW_REG(PI_STATUS_REG, u32) = 2;
-        __osGlobalIntMask |= 0x100401;
+        __OSGlobalIntMask |= 0x100401;
         return 1;
     }
     if (info->cmdType == 1) {
@@ -66,7 +66,7 @@ s32 __osLeoInterrupt(void) {
                 return 1;
             }
             HW_REG(PI_STATUS_REG, u32) = 2;
-            __osGlobalIntMask |= 0x100401;
+            __OSGlobalIntMask |= 0x100401;
             blockInfo->errStatus = 0;
             __osLeoResume();
             return 1;
@@ -121,7 +121,7 @@ s32 __osLeoInterrupt(void) {
                 blockInfo->errStatus = 0x16;
             } else {
                 HW_REG(PI_STATUS_REG, u32) = 2;
-                __osGlobalIntMask |= 0x100401;
+                __OSGlobalIntMask |= 0x100401;
                 info->cmdType = 2;
                 blockInfo->errStatus = 0;
             }
@@ -184,7 +184,7 @@ void __osLeoAbnormalResume(void) {
     HW_REG(0x5000510, u32) = info->bmCtlShadow;
     __osLeoResume();
     HW_REG(PI_STATUS_REG, u32) = 2;
-    __osGlobalIntMask |= 0x100401;
+    __OSGlobalIntMask |= 0x100401;
 }
 
 void __osLeoResume(void) {
