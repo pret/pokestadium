@@ -17,7 +17,8 @@ typedef struct unk_D_80068CA0 {
     /* 0x08 */ s8 unk_08[4];
 } unk_D_80068CA0; // size = 0xC
 
-static s32 D_80068BC0_Pad[2] = { 0, 0 };
+s32 gShowCPUProfiler = 0;
+s32 gShowMEMProfiler = 0;
 
 static Mtx D_80068BC8 = { {
     {
