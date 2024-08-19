@@ -85,12 +85,15 @@ typedef struct unk_D_86002F58_004 {
 
 // possibly unk_D_86002F58_004
 typedef struct unk_D_86002F34_00C {
-    /* 0x00 */ char pad0[0x2C];
+    /* 0x00 */ char pad0[0x24];
+    /* 0x24 */ MtxF* unk_024;
+    /* 0x28 */ u16 unk_028;
     /* 0x2C */ f32 unk_02C;
     /* 0x30 */ char pad30[4];
     /* 0x34 */ f32 unk_034;
     /* 0x38 */ f32 unk_038;
-    /* 0x3C */ char pad3C[0x28];
+    /* 0x3C */ char pad3C[0x24];
+    /* 0x60 */ MtxF* unk_060;
     /* 0x64 */ Vec3f unk_064;
     /* 0x70 */ char pad70[0x38];
     /* 0xA8 */ f32 unk_0A8;
