@@ -573,7 +573,7 @@
     subsegments:
     - [0x11F560, textbin, fragments/4/fragment4_header]
     - [0x11F580, c,    fragments/4/fragment4]
-    - [0x120670, data, fragments/4/fragment4_data]
+    - [0x120670, .data, fragments/4/fragment4]
 
     - {vram: 0x87A01300, type:  bss, name: unk_frag4_bss}
 

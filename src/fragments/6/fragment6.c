@@ -745,7 +745,7 @@ void func_86000C10(void) {
 
 void func_86000C18(void) {
     Gfx* gfx = gDisplayListHead;
-    Mtx* var_s1 = (Mtx*)func_80005F5C(0x100);
+    Mtx* var_s1 = (Mtx*)func_80005F5C(sizeof(MtxF) * 4);
     Mtx sp100;
     Mtx spC0;
     UNUSED Mtx sp80;
