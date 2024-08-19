@@ -52,5 +52,5 @@ options:
   segment_end_before_align: True
   ld_align_section_vram_end: False
   image_type_in_extension: true
-
+  check_consecutive_segment_types: False
 segments:
