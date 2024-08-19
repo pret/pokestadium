@@ -84,7 +84,7 @@ void func_8000D738(struct UnkInputStruct8000D738* arg0) {
     D_800AA660 = main_pool_alloc(0x2210, 0);
     D_800AA664 = main_pool_alloc(0x21E0, 0);
     func_80004454(((u32)((u32)&fragment1_TEXT_START & 0x0FF00000) >> 0x14) - 0x10, &fragment1_ROM_START,
-                  &fragment1_ROM_END);
+                  &fragment1_relocs_ROM_END);
     temp_v0 = func_800044F4(&_3BA190_ROM_START, &_3CB130_ROM_START, 1, 1);
     D_800AA660->unk21FC = func_8000484C(temp_v0, 0);
     D_800AA660->unk2200 = func_8000484C(temp_v0, 1);
