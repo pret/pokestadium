@@ -321,8 +321,8 @@ extern unk_D_86002F58_004 D_86105BD0;
 extern unk_D_86002F58_004 D_86105D38;
 
 typedef struct unk_D_86105EA0 {
-    /* 0x0000 */ char unk000[0x4];
-    /* 0x0004 */ unk_D_86002F58_004 unk_004;
+    /* 0x000 */ char unk000[0x4];
+    /* 0x004 */ unk_D_86002F58_004 unk_004;
 } unk_D_86105EA0; // size = 0x16C
 extern unk_D_86105EA0 D_86105EA0[4];
 
