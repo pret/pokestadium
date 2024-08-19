@@ -488,7 +488,7 @@
   # Probably the GB Tower Emulator. This fragment is built very strangely.
   - name: fragment1
     type: code
-    bss_size: 0x0
+    bss_size: 0x9530
     start: 0x7F980
     vram: 0x81200000
     subsegments:
@@ -497,8 +497,17 @@
     - [0x89020,  hasm,   fragments/1/fragment1_code_asm]
     - [0x8D1A0,  data,   fragments/1/fragment1_data]
     - [0xA8E80,  rodata, fragments/1/fragment1_rodata]
+
+    - {vram: 0x8122B1E0, type:  bss, name: unk_frag1_bss}
+
+  - name: fragment1_relocs
+    type: code
+    bss_size: 0x0
+    start: 0xAAB60
+    vram: 0x00000000
+    subsegments:
     - [0xAAB60,  rodatabin,    fragments/1/fragment1_reloc]
-    
+
   - name: fragment1_misc_yay0
     type: code
     bss_size: 0x0
@@ -514,7 +523,7 @@
 # text code
   - name: fragment2
     type: code
-    bss_size: 0x0
+    bss_size: 0x430
     start: 0x107FA0
     vram: 0x87800000
     subsegments:
@@ -522,12 +531,21 @@
     - [0x107FC0, c,      fragments/2/fragment2]
     - [0x10E2D0, data,   fragments/2/fragment2_data]
     - [0x117850, rodata, fragments/2/fragment2_rodata]
-    - [0x1179C0, rodatabin,    fragments/2/fragment2_reloc]
+
+    - {vram: 0x8780FA20, type:  bss, name: unk_frag2_bss}
+
+  - name: fragment2_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1179C0
+    vram: 0x00000000
+    subsegments:
+    - [0x1179C0,  rodatabin,    fragments/2/fragment2_reloc]
 
  # model animation code   
   - name: fragment3
     type: code
-    bss_size: 0x0
+    bss_size: 0xF0
     start: 0x118990
     vram: 0x87900000
     subsegments:
@@ -535,36 +553,63 @@
     - [0x1189B0, c,      fragments/3/fragment3]
     - [0x11C730, data,   fragments/3/fragment3_data]
     - [0x11E810, rodata, fragments/3/fragment3_rodata]
-    - [0x11E9D0, rodatabin,    fragments/3/fragment3_reloc]
+
+    - {vram: 0x87906040, type:  bss, name: unk_frag3_bss}
+
+  - name: fragment3_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x11E9D0
+    vram: 0x00000000
+    subsegments:
+    - [0x11E9D0,  rodatabin,    fragments/3/fragment3_reloc]
 
 # MINIGAMES unknown code placed but not executed
   - name: fragment4
     type: code
-    bss_size: 0x0
+    bss_size: 0x40
     start: 0x11F560
     vram: 0x87A00000
     subsegments:
     - [0x11F560, textbin, fragments/4/fragment4_header]
     - [0x11F580, c,    fragments/4/fragment4]
     - [0x120670, data, fragments/4/fragment4_data]
-    - [0x120860, rodatabin,  fragments/4/fragment4_reloc]
+
+    - {vram: 0x87A01300, type:  bss, name: unk_frag4_bss}
+
+  - name: fragment4_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x120860
+    vram: 0x00000000
+    subsegments:
+    - [0x120860,  rodatabin,    fragments/4/fragment4_reloc]
 
 # DROWZEE MINIGAME unknown code placed but not executed, might be something about other controllers
   - name: fragment5
     type: code
-    bss_size: 0x0
+    bss_size: 0x20
     start: 0x120920
     vram: 0x87B00000 # unknown. we dont actually know this fragment's vaddr yet, but we need a unique vaddr so the linker doesnt complain. Might be an unused fragment, as it's very very small, and seems to only poll the controller.
     subsegments:
     - [0x120920, textbin, fragments/5/fragment5_header]
     - [0x120940, c,    fragments/5/fragment5]
     - [0x1209E0, data, fragments/5/fragment5_data]
-    - [0x120A00, rodatabin,  fragments/5/fragment5_reloc]
+
+    - {vram: 0x87B000E0, type:  bss, name: unk_frag5_bss}
+
+  - name: fragment5_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x120A00
+    vram: 0x00000000
+    subsegments:
+    - [0x120A00,  rodatabin,    fragments/5/fragment5_reloc]
 
 # magikarp minigame code
   - name: fragment6
     type: code
-    bss_size: 0x0
+    bss_size: 0x1200
     start: 0x120A10
     vram: 0x86000000
     subsegments:
@@ -572,7 +617,16 @@
     - [0x120A30, c,      fragments/6/fragment6]
     - [0x123330, .data,   fragments/6/fragment6]
     - [0x123890, .rodata, fragments/6/fragment6]
-    - [0x123940, rodatabin,    fragments/6/fragment6_reloc]
+
+    - {vram: 0x86002F30, type:  bss, name: unk_frag6_bss}
+
+  - name: fragment6_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x123940
+    vram: 0x00000000
+    subsegments:
+    - [0x123940,  rodatabin,    fragments/6/fragment6_reloc]
 
   - name: fragment6_misc
     type: code
@@ -585,7 +639,7 @@
 # clefairy minigame code
   - name: fragment7
     type: code
-    bss_size: 0x0
+    bss_size: 0x2120
     start: 0x1278D0
     vram: 0x86100000
     subsegments:
@@ -593,12 +647,21 @@
     - [0x1278F0, c,         fragments/7/fragment7]
     - [0x12BF10, .data,     fragments/7/fragment7]
     - [0x12CC90, .rodata,   fragments/7/fragment7]
-    - [0x12CD50, rodatabin, fragments/7/fragment7_reloc]
+
+    - {vram: 0x86105480, type:  bss, name: unk_frag7_bss}
+
+  - name: fragment7_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x12CD50
+    vram: 0x00000000
+    subsegments:
+    - [0x12CD50,  rodatabin,    fragments/7/fragment7_reloc]
 
 # rattata minigame code
   - name: fragment8
     type: code
-    bss_size: 0x0
+    bss_size: 0x4480
     start: 0x12DF40
     vram: 0x86200000
     subsegments:
@@ -606,11 +669,20 @@
     - [0x12DF60, c,      fragments/8/fragment8]
     - [0x131800, .data,   fragments/8/fragment8]
     - [0x131D00, .rodata, fragments/8/fragment8]
-    - [0x131D70, rodatabin,    fragments/8/fragment8_reloc]
+
+    - {vram: 0x86203E30, type:  bss, name: unk_frag8_bss}
+
+  - name: fragment8_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x131D70
+    vram: 0x00000000
+    subsegments:
+    - [0x131D70,  rodatabin,    fragments/8/fragment8_reloc]
 
   - name: fragment9
     type: code
-    bss_size: 0x0
+    bss_size: 0x7B0
     start: 0x1329E0
     vram: 0x86300000
     subsegments:
@@ -618,24 +690,42 @@
     - [0x132A00, c,      fragments/9/fragment9]
     - [0x133FE0, data,   fragments/9/fragment9_data]
     - [0x1340A0, rodata, fragments/9/fragment9_rodata]
-    - [0x1340F0, rodatabin,    fragments/9/fragment9_reloc]
+
+    - {vram: 0x86301710, type:  bss, name: unk_frag9_bss}
+
+  - name: fragment9_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1340F0
+    vram: 0x00000000
+    subsegments:
+    - [0x1340F0,  rodatabin,    fragments/9/fragment9_reloc]
 
 # drowzee minigame code
   - name: fragment10
     type: code
-    bss_size: 0x0
+    bss_size: 0x1270
     start: 0x134680
     vram: 0x86400000
     subsegments:
     - [0x134680, textbin,   fragments/10/fragment10_header]
     - [0x1346A0, c,      fragments/10/fragment10]
     - [0x136E40, data,   fragments/10/fragment10_data]
+
+    - {vram: 0x86404070, type:  bss, name: unk_frag10_bss}
+
+  - name: fragment10_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1386F0
+    vram: 0x00000000
+    subsegments:
     - [0x1386F0, rodatabin,    fragments/10/fragment10_reloc]
 
 # pikachu minigame code
   - name: fragment11
     type: code
-    bss_size: 0x0
+    bss_size: 0x1AB0
     start: 0x138F20
     vram: 0x86500000
     subsegments:
@@ -643,12 +733,21 @@
     - [0x138F40, c,      fragments/11/fragment11]
     - [0x13BB40, data,   fragments/11/fragment11_data]
     - [0x142170, rodata, fragments/11/fragment11_rodata]
+
+    - {vram: 0x865092E0, type:  bss, name: unk_frag11_bss}
+
+  - name: fragment11_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x142200
+    vram: 0x00000000
+    subsegments:
     - [0x142200, rodatabin,    fragments/11/fragment11_reloc]
 
 # transfer pak error code
   - name: fragment12
     type: code
-    bss_size: 0x0
+    bss_size: 0x180
     start: 0x142B10
     vram: 0x86600000
     subsegments:
@@ -656,11 +755,20 @@
     - [0x142B30, c,      fragments/12/fragment12]
     - [0x143360, data,   fragments/12/fragment12_data]
     - [0x143400, rodata, fragments/12/fragment12_rodata]
+
+    - {vram: 0x86600940, type:  bss, name: unk_frag12_bss}
+
+  - name: fragment12_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x143450
+    vram: 0x00000000
+    subsegments:
     - [0x143450, rodatabin,    fragments/12/fragment12_reloc]
 
   - name: fragment13
     type: code
-    bss_size: 0x0
+    bss_size: 0x180
     start: 0x143700
     vram: 0x86700000
     subsegments:
@@ -668,12 +776,21 @@
     - [0x143720, c,      fragments/13/fragment13]
     - [0x143F40, data,   fragments/13/fragment13_data]
     - [0x143FE0, rodata, fragments/13/fragment13_rodata]
+
+    - {vram: 0x86700930, type:  bss, name: unk_frag13_bss}
+
+  - name: fragment13_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x144030
+    vram: 0x00000000
+    subsegments:
     - [0x144030, rodatabin,    fragments/13/fragment13_reloc]
 
 # lickitung minigame code
   - name: fragment14
     type: code
-    bss_size: 0x0
+    bss_size: 0x2530
     start: 0x1442E0
     vram: 0x86800000
     subsegments:
@@ -681,12 +798,21 @@
     - [0x144300, c,      fragments/14/fragment14]
     - [0x14AFB0, data,   fragments/14/fragment14_data]
     - [0x14B660, rodata, fragments/14/fragment14_rodata]
+
+    - {vram: 0x86807500, type:  bss, name: unk_frag14_bss}
+
+  - name: fragment14_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x14B7E0
+    vram: 0x00000000
+    subsegments:
     - [0x14B7E0, rodatabin,    fragments/14/fragment14_reloc]
 
 # gallery camera code
   - name: fragment15
     type: code
-    bss_size: 0x0
+    bss_size: 0x1020
     start: 0x14CA50
     vram: 0x86900000
     subsegments:
@@ -694,12 +820,21 @@
     - [0x14CA70, c,      fragments/15/fragment15]
     - [0x1554D0, data,   fragments/15/fragment15_data]
     - [0x156EB0, rodata, fragments/15/fragment15_rodata]
+
+    - {vram: 0x8690A610, type:  bss, name: unk_frag15_bss}
+
+  - name: fragment15_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x157060
+    vram: 0x00000000
+    subsegments:
     - [0x157060, rodatabin,    fragments/15/fragment15_reloc]
 
 # credits loader
   - name: fragment16
     type: code
-    bss_size: 0x0
+    bss_size: 0xF0
     start: 0x1589E0
     vram: 0x86A00000
     subsegments:
@@ -707,12 +842,21 @@
     - [0x158A00, c,      fragments/16/fragment16]
     - [0x15AF80, data,   fragments/16/fragment16_data]
     - [0x15EB20, rodata, fragments/16/fragment16_rodata]
+
+    - {vram: 0x86A06170, type:  bss, name: unk_frag16_bss}
+
+  - name: fragment16_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x15EB50
+    vram: 0x00000000
+    subsegments:
     - [0x15EB50, rodatabin,    fragments/16/fragment16_reloc]
 
 # stage loader code
   - name: fragment17
     type: code
-    bss_size: 0x0
+    bss_size: 0x2630
     start: 0x15F990
     vram: 0x86B00000
     subsegments:
@@ -720,12 +864,21 @@
     - [0x15F9B0, c,      fragments/17/fragment17]
     - [0x16B580, data,   fragments/17/fragment17_data]
     - [0x16DD70, rodata, fragments/17/fragment17_rodata]
+
+    - {vram: 0x86B0E5D0, type:  bss, name: unk_frag17_bss}
+
+  - name: fragment17_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x16DF60
+    vram: 0x00000000
+    subsegments:
     - [0x16DF60, rodatabin,    fragments/17/fragment17_reloc]
 
 # ekans minigame code
   - name: fragment18
     type: code
-    bss_size: 0x0
+    bss_size: 0x3C10
     start: 0x1708B0
     vram: 0x86C00000
     subsegments:
@@ -733,6 +886,15 @@
     - [0x1708D0, c,      fragments/18/fragment18]
     - [0x1750F0, data,   fragments/18/fragment18_data]
     - [0x17EC60, rodata, fragments/18/fragment18_rodata]
+
+    - {vram: 0x86C0E480, type:  bss, name: unk_frag18_bss}
+
+  - name: fragment18_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x17ED30
+    vram: 0x00000000
+    subsegments:
     - [0x17ED30, rodatabin,    fragments/18/fragment18_reloc]
 
   - name: fragment19
@@ -745,12 +907,21 @@
     - [0x17FB60, c,      fragments/19/fragment19]
     - [0x180070, data,   fragments/19/fragment19_data]
     - [0x180100, rodata, fragments/19/fragment19_rodata]
+
+    - {vram: 0x86D005D0, type:  bss, name: unk_frag19_bss}
+
+  - name: fragment19_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x180110
+    vram: 0x00000000
+    subsegments:
     - [0x180110, rodatabin,    fragments/19/fragment19_reloc]
 
 # metapod minigame code
   - name: fragment20
     type: code
-    bss_size: 0x0
+    bss_size: 0x40F0
     start: 0x1802B0
     vram: 0x86E00000
     subsegments:
@@ -758,12 +929,21 @@
     - [0x1802D0, c,      fragments/20/fragment20]
     - [0x183260, data,   fragments/20/fragment20_data]
     - [0x184FA0, rodata, fragments/20/fragment20_rodata]
+
+    - {vram: 0x86E04D60, type:  bss, name: unk_frag20_bss}
+
+  - name: fragment20_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x185010
+    vram: 0x00000000
+    subsegments:
     - [0x185010, rodatabin,    fragments/20/fragment20_reloc]
 
 # sandshrew minigame code
   - name: fragment21
     type: code
-    bss_size: 0x0
+    bss_size: 0x2080
     start: 0x185A10
     vram: 0x86F00000
     subsegments:
@@ -771,12 +951,21 @@
     - [0x185A30, c,      fragments/21/fragment21]
     - [0x1880A0, data,   fragments/21/fragment21_data]
     - [0x190B90, rodata, fragments/21/fragment21_rodata]
+
+    - {vram: 0x86F0B1F0, type:  bss, name: unk_frag21_bss}
+
+  - name: fragment21_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x190C00
+    vram: 0x00000000
+    subsegments:
     - [0x190C00, rodatabin,    fragments/21/fragment21_reloc]
 
 # pokemon lab loader
   - name: fragment22
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x191660
     vram: 0x88000000
     subsegments:
@@ -784,12 +973,21 @@
     - [0x191680, c,      fragments/22/fragment22]
     - [0x193EA0, data,   fragments/22/fragment22_data]
     - [0x1A8320, rodata, fragments/22/fragment22_rodata]
+
+    - {vram: 0x88016CF0, type:  bss, name: unk_frag22_bss}
+
+  - name: fragment22_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1A8350
+    vram: 0x00000000
+    subsegments:
     - [0x1A8350, rodatabin,    fragments/22/fragment22_reloc]
 
 # pokemon lab PC loader
   - name: fragment23
     type: code
-    bss_size: 0x0
+    bss_size: 0x40
     start: 0x1A8570
     vram: 0x88200000
     subsegments:
@@ -797,12 +995,21 @@
     - [0x1A8590, c,      fragments/23/fragment23]
     - [0x1C0160, data,   fragments/23/fragment23_data]
     - [0x1CD3C0, rodata, fragments/23/fragment23_rodata]
+
+    - {vram: 0x88224F90, type:  bss, name: unk_frag23_bss}
+
+  - name: fragment23_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1CD500
+    vram: 0x00000000
+    subsegments:
     - [0x1CD500, rodatabin,    fragments/23/fragment23_reloc]
 
 # pokemon lab PC: list code
   - name: fragment24
     type: code
-    bss_size: 0x0
+    bss_size: 0x60
     start: 0x1CE9E0
     vram: 0x88300000
     subsegments:
@@ -810,6 +1017,15 @@
     - [0x1CEA00, c,      fragments/24/fragment24]
     - [0x1E5BB0, data,   fragments/24/fragment24_data]
     - [0x1E8C40, rodata, fragments/24/fragment24_rodata]
+
+    - {vram: 0x8831A4C0, type:  bss, name: unk_frag24_bss}
+
+  - name: fragment24_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1E8EA0
+    vram: 0x00000000
+    subsegments:
     - [0x1E8EA0, rodatabin,    fragments/24/fragment24_reloc]
 
 # POKEMON LAB unknown code placed but not executed
@@ -822,6 +1038,15 @@
     - [0x1EA640, textbin,   fragments/25/fragment25_header]
     - [0x1EA660, c,      fragments/25/fragment25]
     - [0x1EA740, data,   fragments/25/fragment25_data]
+
+    - {vram: 0x88400200, type:  bss, name: unk_frag25_bss}
+
+  - name: fragment25_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1EA840
+    vram: 0x00000000
+    subsegments:
     - [0x1EA840, rodatabin,    fragments/25/fragment25_reloc]
 
 # POKEMON LAB unknown code placed but not executed
@@ -835,12 +1060,21 @@
     - [0x1EA880, c,      fragments/26/fragment26]
     - [0x1F77E0, data,   fragments/26/fragment26_data]
     - [0x1F7810, rodata, fragments/26/fragment26_rodata]
+
+    - {vram: 0x8850CFE0, type:  bss, name: unk_frag26_bss}
+
+  - name: fragment26_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x1F7840
+    vram: 0x00000000
+    subsegments:
     - [0x1F7840, rodatabin,    fragments/26/fragment26_reloc]
 
 # pokemon lab PC: pokemon, item, boxes etc
   - name: fragment27
     type: code
-    bss_size: 0x0
+    bss_size: 0x20
     start: 0x1F7C90
     vram: 0x88600000
     subsegments:
@@ -848,12 +1082,21 @@
     - [0x1F7CB0, c,      fragments/27/fragment27]
     - [0x1FD750, data,   fragments/27/fragment27_data]
     - [0x214060, rodata, fragments/27/fragment27_rodata]
+
+    - {vram: 0x8861C510, type:  bss, name: unk_frag27_bss}
+
+  - name: fragment27_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2141A0
+    vram: 0x00000000
+    subsegments:
     - [0x2141A0, rodatabin,    fragments/27/fragment27_reloc]
 
 # pokemon lab: pokedex loader
   - name: fragment28
     type: code
-    bss_size: 0x0
+    bss_size: 0xA60
     start: 0x214900
     vram: 0x88800000
     subsegments:
@@ -861,6 +1104,15 @@
     - [0x214920, c,      fragments/28/fragment28]
     - [0x21CA50, data,   fragments/28/fragment28_data]
     - [0x23AF80, rodata, fragments/28/fragment28_rodata]
+
+    - {vram: 0x888267A0, type:  bss, name: unk_frag28_bss}
+
+  - name: fragment28_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x23B0A0
+    vram: 0x00000000
+    subsegments:
     - [0x23B0A0, rodatabin,    fragments/28/fragment28_reloc]
 
 # POKEMON LAB PC some text functions but not executed
@@ -873,8 +1125,17 @@
     - [0x23C250, textbin,   fragments/29/fragment29_header]
     - [0x23C270, c,      fragments/29/fragment29]
     - [0x23D3C0, data,   fragments/29/fragment29_data]
+
+    - {vram: 0x889011E0, type:  bss, name: unk_frag29_bss}
+
+  - name: fragment29_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x23D430
+    vram: 0x00000000
+    subsegments:
     - [0x23D430, rodatabin,    fragments/29/fragment29_reloc]
-    
+
   - name: fragment29_misc_1
     type: code
     bss_size: 0x0
@@ -901,18 +1162,27 @@
 
   - name: fragment30
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x255230
     vram: 0x88A00000 # unknown vram, since nothing loads this. probably 88A00000?
     subsegments:
     - [0x255230, textbin,   fragments/30/fragment30_header]
     - [0x255250, c,      fragments/30/fragment30]
+
+    - {vram: 0x88A00080, type:  bss, name: unk_frag30_bss}
+
+  - name: fragment30_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2552B0
+    vram: 0x00000000
+    subsegments:
     - [0x2552B0, rodatabin,    fragments/30/fragment30_reloc]
 
 # transfer pak checker
   - name: fragment31
     type: code
-    bss_size: 0x0
+    bss_size: 0x400
     start: 0x2552C0
     vram: 0x81000000
     subsegments:
@@ -921,24 +1191,42 @@
     - [0x2554C0, c,      fragments/31/fragment31]
     - [0x259290, data,   fragments/31/fragment31_data]
     - [0x259480, rodata, fragments/31/fragment31_rodata]
+
+    - {vram: 0x810047E0, type:  bss, name: unk_frag31_bss}
+
+  - name: fragment31_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x259AA0
+    vram: 0x00000000
+    subsegments:
     - [0x259AA0, rodatabin,    fragments/31/fragment31_reloc]
-    
+
 # drowzee minigame stage animations
   - name: fragment32
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x25A740
     vram: 0x81100000
     subsegments:
     - [0x25A740, textbin,   fragments/32/fragment32_header]
     - [0x25A760, c,      fragments/32/fragment32]
     - [0x25B060, data,   fragments/32/fragment32_data]
+
+    - {vram: 0x81100930, type:  bss, name: unk_frag32_bss}
+
+  - name: fragment32_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x25B070
+    vram: 0x00000000
+    subsegments:
     - [0x25B070, rodatabin,    fragments/32/fragment32_reloc]
 
 # transfer pak code
   - name: fragment33
     type: code
-    bss_size: 0x0
+    bss_size: 0xAD0
     start: 0x25B0D0
     vram: 0x81300000
     subsegments:
@@ -946,6 +1234,15 @@
     - [0x25B0F0, asm,    fragments/33/fragment33]
     - [0x25ECF0, data,   fragments/33/fragment33_data]
     - [0x25F020, rodata, fragments/33/fragment33_rodata]
+
+    - {vram: 0x81303FA0, type:  bss, name: unk_frag33_bss}
+
+  - name: fragment33_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x25F070
+    vram: 0x00000000
+    subsegments:
     - [0x25F070, rodatabin,    fragments/33/fragment33_reloc]
 
   - name: fragment33_misc
@@ -959,7 +1256,7 @@
 # alternative pokemon textures pointer loader
   - name: fragment34
     type: code
-    bss_size: 0x0
+    bss_size: 0x120
     start: 0x261F70
     vram: 0x81400000
     subsegments:
@@ -967,6 +1264,15 @@
     - [0x261F90, c,      fragments/34/fragment34]
     - [0x26F9C0, data,   fragments/34/fragment34_data]
     - [0x270570, rodata, fragments/34/fragment34_rodata]
+
+    - {vram: 0x8140E620, type:  bss, name: unk_frag34_bss}
+
+  - name: fragment34_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x270590
+    vram: 0x00000000
+    subsegments:
     - [0x270590, rodatabin,    fragments/34/fragment34_reloc]
 
 # n64 logo code
@@ -978,12 +1284,21 @@
     subsegments:
     - [0x271260, textbin,   fragments/35/fragment35_header]
     - [0x271280, c,      fragments/35/fragment35]
+
+    - {vram: 0x82000560, type:  bss, name: unk_frag35_bss}
+
+  - name: fragment35_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2717C0
+    vram: 0x00000000
+    subsegments:
     - [0x2717C0, rodatabin,    fragments/35/fragment35_reloc]
 
 # title screen code
   - name: fragment36
     type: code
-    bss_size: 0x0
+    bss_size: 0x30
     start: 0x2717E0
     vram: 0x82100000
     subsegments:
@@ -991,12 +1306,21 @@
     - [0x271800, c,      fragments/36/fragment36]
     - [0x2725A0, data,   fragments/36/fragment36_data]
     - [0x272660, rodata, fragments/36/fragment36_rodata]
+
+    - {vram: 0x82100EA0, type:  bss, name: unk_frag36_bss}
+
+  - name: fragment36_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x272680
+    vram: 0x00000000
+    subsegments:
     - [0x272680, rodatabin,    fragments/36/fragment36_reloc]
 
 # stadium field loader
   - name: fragment37
     type: code
-    bss_size: 0x0
+    bss_size: 0x100
     start: 0x272830
     vram: 0x82200000
     subsegments:
@@ -1004,12 +1328,21 @@
     - [0x272850, c,      fragments/37/fragment37]
     - [0x2757D0, data,   fragments/37/fragment37_data]
     - [0x275900, rodata, fragments/37/fragment37_rodata]
+
+    - {vram: 0x822030F0, type:  bss, name: unk_frag37_bss}
+
+  - name: fragment37_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x275920
+    vram: 0x00000000
+    subsegments:
     - [0x275920, rodatabin,    fragments/37/fragment37_reloc]
 
 # event battle loader
   - name: fragment38
     type: code
-    bss_size: 0x0
+    bss_size: 0x9B30
     start: 0x275CE0
     vram: 0x82300000
     subsegments:
@@ -1017,12 +1350,21 @@
     - [0x275D00, c,      fragments/38/fragment38]
     - [0x27B600, data,   fragments/38/fragment38_data]
     - [0x27B6B0, rodata, fragments/38/fragment38_rodata]
+
+    - {vram: 0x82305A20, type:  bss, name: unk_frag38_bss}
+
+  - name: fragment38_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x27B700
+    vram: 0x00000000
+    subsegments:
     - [0x27B700, rodatabin,    fragments/38/fragment38_reloc]
 
 # minigames loader
   - name: fragment39
     type: code
-    bss_size: 0x0
+    bss_size: 0x19F0
     start: 0x27BCA0
     vram: 0x82500000
     subsegments:
@@ -1030,12 +1372,21 @@
     - [0x27BCC0, c,      fragments/39/fragment39]
     - [0x281E50, data,   fragments/39/fragment39_data]
     - [0x2846C0, rodata, fragments/39/fragment39_rodata]
+
+    - {vram: 0x82508AF0, type:  bss, name: unk_frag39_bss}
+
+  - name: fragment39_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x284790
+    vram: 0x00000000
+    subsegments:
     - [0x284790, rodatabin,    fragments/39/fragment39_reloc]
 
 # gym leader castle clear / pokemon gift code
   - name: fragment40
     type: code
-    bss_size: 0x0
+    bss_size: 0x350
     start: 0x285DC0
     vram: 0x83100000
     subsegments:
@@ -1043,12 +1394,21 @@
     - [0x285DE0, c,      fragments/40/fragment40]
     - [0x2879A0, data,   fragments/40/fragment40_data]
     - [0x287C80, rodata, fragments/40/fragment40_rodata]
+
+    - {vram: 0x83101EE0, type:  bss, name: unk_frag40_bss}
+
+  - name: fragment40_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x287CA0
+    vram: 0x00000000
+    subsegments:
     - [0x287CA0, rodatabin,    fragments/40/fragment40_reloc]
 
 # pokemon trade machine loader
   - name: fragment41
     type: code
-    bss_size: 0x0
+    bss_size: 0xCE50
     start: 0x287EB0
     vram: 0x82F00000
     subsegments:
@@ -1056,12 +1416,21 @@
     - [0x287ED0, c,      fragments/41/fragment41]
     - [0x29BA20, data,   fragments/41/fragment41_data]
     - [0x29BF80, rodata, fragments/41/fragment41_rodata]
+
+    - {vram: 0x82F14420, type:  bss, name: unk_frag41_bss}
+
+  - name: fragment41_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x29C2D0
+    vram: 0x00000000
+    subsegments:
     - [0x29C2D0, rodatabin,    fragments/41/fragment41_reloc]
 
 # gallery loader
   - name: fragment42
     type: code
-    bss_size: 0x0
+    bss_size: 0x170
     start: 0x29DD30
     vram: 0x83300000
     subsegments:
@@ -1069,12 +1438,21 @@
     - [0x29DD50, c,      fragments/42/fragment42]
     - [0x2A0EB0, data,   fragments/42/fragment42_data]
     - [0x2A0FE0, rodata, fragments/42/fragment42_rodata]
+
+    - {vram: 0x833032E0, type:  bss, name: unk_frag42_bss}
+
+  - name: fragment42_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2A1010
+    vram: 0x00000000
+    subsegments:
     - [0x2A1010, rodatabin,    fragments/42/fragment42_reloc]
 
 # gallery code
   - name: fragment43
     type: code
-    bss_size: 0x0
+    bss_size: 0x4D30
     start: 0x2A1B30
     vram: 0x83400000
     subsegments:
@@ -1082,24 +1460,42 @@
     - [0x2A1B50, c,      fragments/43/fragment43]
     - [0x2A4950, data,   fragments/43/fragment43_data]
     - [0x2A49F0, rodata, fragments/43/fragment43_rodata]
+
+    - {vram: 0x83402EE0, type:  bss, name: unk_frag43_bss}
+
+  - name: fragment43_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2A4A10
+    vram: 0x00000000
+    subsegments:
     - [0x2A4A10, rodatabin,    fragments/43/fragment43_reloc]
 
 # gallery album code
   - name: fragment44
     type: code
-    bss_size: 0x0
+    bss_size: 0x120
     start: 0x2A4DF0
     vram: 0x83500000
     subsegments:
     - [0x2A4DF0, textbin,   fragments/44/fragment44_header]
     - [0x2A4E10, c,      fragments/44/fragment44]
     - [0x2A8C60, rodata, fragments/44/fragment44_rodata]
+
+    - {vram: 0x83503FC0, type:  bss, name: unk_frag44_bss}
+
+  - name: fragment44_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2A8DB0
+    vram: 0x00000000
+    subsegments:
     - [0x2A8DB0, rodatabin,    fragments/44/fragment44_reloc]
 
 # might be print code
   - name: fragment45
     type: code
-    bss_size: 0x0
+    bss_size: 0xE0
     start: 0x2A9790
     vram: 0x83600000
     subsegments:
@@ -1107,24 +1503,42 @@
     - [0x2A97B0, c,      fragments/45/fragment45]
     - [0x2ACA10, data,   fragments/45/fragment45_data]
     - [0x2ACA70, rodata, fragments/45/fragment45_rodata]
+
+    - {vram: 0x836032F0, type:  bss, name: unk_frag45_bss}
+
+  - name: fragment45_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2ACA80
+    vram: 0x00000000
+    subsegments:
     - [0x2ACA80, rodatabin,    fragments/45/fragment45_reloc]
 
 # gallery enlarge code
   - name: fragment46
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x2AD270
     vram: 0x83700000
     subsegments:
     - [0x2AD270, textbin,   fragments/46/fragment46_header]
     - [0x2AD290, c,      fragments/46/fragment46]
     - [0x2AD720, data,   fragments/46/fragment46_data]
+
+    - {vram: 0x837004C0, type:  bss, name: unk_frag46_bss}
+
+  - name: fragment46_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2AD730
+    vram: 0x00000000
+    subsegments:
     - [0x2AD730, rodatabin,    fragments/46/fragment46_reloc]
 
 # gallery rental pokemon loader
   - name: fragment47
     type: code
-    bss_size: 0x0
+    bss_size: 0x1E230
     start: 0x2AD8F0
     vram: 0x83800000
     subsegments:
@@ -1132,12 +1546,21 @@
     - [0x2AD910, c,      fragments/47/fragment47]
     - [0x2B25A0, data,   fragments/47/fragment47_data]
     - [0x2B2E50, rodata, fragments/47/fragment47_rodata]
+
+    - {vram: 0x83805650, type:  bss, name: unk_frag47_bss}
+
+  - name: fragment47_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2B2F40
+    vram: 0x00000000
+    subsegments:
     - [0x2B2F40, rodatabin,    fragments/47/fragment47_reloc]
 
   # Gallery Debugger (unused)
   - name: fragment48
     type: code
-    bss_size: 0x0
+    bss_size: 0x20D0
     start: 0x2B3F70
     vram: 0x83900000 # apparently not used either, but VRAM is an estimate based on the patterns around this fragment.
     subsegments:
@@ -1145,23 +1568,41 @@
     - [0x2B3F90, c,      fragments/48/fragment48]
     - [0x2B45A0, data,   fragments/48/fragment48_data]
     - [0x2B45C0, rodata, fragments/48/fragment48_rodata]
+
+    - {vram: 0x839006B0, type:  bss, name: unk_frag48_bss}
+
+  - name: fragment48_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2B4620
+    vram: 0x00000000
+    subsegments:
     - [0x2B4620, rodatabin,    fragments/48/fragment48_reloc]
 
   - name: fragment49
     type: code
-    bss_size: 0x0
+    bss_size: 0x20
     start: 0x2B46F0
     vram: 0x83A00000
     subsegments:
     - [0x2B46F0, textbin,   fragments/49/fragment49_header]
     - [0x2B4710, c,      fragments/49/fragment49]
     - [0x2B5240, data,   fragments/49/fragment49_data]
+
+    - {vram: 0x83A00B70, type:  bss, name: unk_frag49_bss}
+
+  - name: fragment49_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2B5260
+    vram: 0x00000000
+    subsegments:
     - [0x2B5260, rodatabin,    fragments/49/fragment49_reloc]
 
 # hall of fame loader
   - name: fragment50
     type: code
-    bss_size: 0x0
+    bss_size: 0x77360
     start: 0x2B5350
     vram: 0x82600000
     subsegments:
@@ -1169,8 +1610,16 @@
     - [0x2B5370, c,      fragments/50/fragment50]
     - [0x2B91D0, data,   fragments/50/fragment50_data]
     - [0x2BC690, rodata, fragments/50/fragment50_rodata]
-    - [0x2BC760, rodatabin,    fragments/50/fragment50_reloc]
 
+    - {vram: 0x82607410, type:  bss, name: unk_frag50_bss}
+
+  - name: fragment50_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2BC760
+    vram: 0x00000000
+    subsegments:
+    - [0x2BC760, rodatabin,    fragments/50/fragment50_reloc]
 
   - name: fragment51
     type: code
@@ -1180,48 +1629,82 @@
     subsegments:
     - [0x2BD0A0, textbin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x2BD0C0, c,      fragments/51/fragment51]
-    - [0x2BD120, rodatabin,    fragments/51/fragment51_reloc]
 
+    - {vram: 0x82800080, type:  bss, name: unk_frag51_bss}
+
+  - name: fragment51_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2BD120
+    vram: 0x00000000
+    subsegments:
+    - [0x2BD120, rodatabin,    fragments/51/fragment51_reloc]
 
   - name: fragment52
     type: code
-    bss_size: 0x0
+    bss_size: 0x180
     start: 0x2BD130
     vram: 0x82900000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82900000.
     subsegments:
     - [0x2BD130, textbin,  fragments/52/fragment52_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x2BD150, c,    fragments/52/fragment52]
     - [0x2BD600, data, fragments/52/fragment52_data]
+
+    - {vram: 0x82900530, type:  bss, name: unk_frag52_bss}
+
+  - name: fragment52_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2BD660
+    vram: 0x00000000
+    subsegments:
     - [0x2BD660, rodatabin,  fragments/52/fragment52_reloc]
 
   - name: fragment53
     type: code
-    bss_size: 0x0
+    bss_size: 0x200
     start: 0x2BD6E0
     vram: 0x82A00000
     subsegments:
     - [0x2BD6E0, textbin, fragments/53/fragment53_header]
     - [0x2BD700, c,    fragments/53/fragment53]
     - [0x2BDA40, data, fragments/53/fragment53_data]
+
+    - {vram: 0x82A00370, type:  bss, name: unk_frag53_bss}
+
+  - name: fragment53_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2BDA50
+    vram: 0x00000000
+    subsegments:
     - [0x2BDA50, rodatabin,  fragments/53/fragment53_reloc]
 
 # RENTAL battle, rules, registration loader
   - name: fragment54
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x2BDAC0
     vram: 0x82B00000
     subsegments:
     - [0x2BDAC0, textbin,  fragments/54/fragment54_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x2BDAE0, c,    fragments/54/fragment54]
     - [0x2BEBE0, data, fragments/54/fragment54_data]
-    - [0x2BEC00, rodatabin,  fragments/54/fragment54_reloc]
 
+    - {vram: 0x82B01140, type:  bss, name: unk_frag54_bss}
+
+  - name: fragment54_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2BEC00
+    vram: 0x00000000
+    subsegments:
+    - [0x2BEC00, rodatabin,  fragments/54/fragment54_reloc]
 
 # RENTAL rules loader
   - name: fragment55
     type: code
-    bss_size: 0x0
+    bss_size: 0x762D0
     start: 0x2BED20
     vram: 0x83000000
     subsegments:
@@ -1229,23 +1712,41 @@
     - [0x2BED40, c,      fragments/55/fragment55]
     - [0x2C26E0, data,   fragments/55/fragment55_data]
     - [0x2C28A0, rodata, fragments/55/fragment55_rodata]
+
+    - {vram: 0x83003C80, type:  bss, name: unk_frag55_bss}
+
+  - name: fragment55_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2C29A0
+    vram: 0x00000000
+    subsegments:
     - [0x2C29A0, rodatabin,    fragments/55/fragment55_reloc]
 
 # options code
   - name: fragment56
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x2C3220
     vram: 0x82C00000
     subsegments:
     - [0x2C3220, textbin, fragments/56/fragment56_header]
     - [0x2C3240, c,    fragments/56/fragment56]
+
+    - {vram: 0x82C01660, type:  bss, name: unk_frag56_bss}
+
+  - name: fragment56_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2C4880
+    vram: 0x00000000
+    subsegments:
     - [0x2C4880, rodatabin,  fragments/56/fragment56_reloc]
 
 # RENTAL registration code
   - name: fragment57
     type: code
-    bss_size: 0x0
+    bss_size: 0xC20
     start: 0x2C49D0
     vram: 0x82D00000
     subsegments:
@@ -1253,12 +1754,21 @@
     - [0x2C49F0, c,      fragments/57/fragment57]
     - [0x2CB970, data,   fragments/57/fragment57_data]
     - [0x2CE950, rodata, fragments/57/fragment57_rodata]
+
+    - {vram: 0x82D09FF0, type:  bss, name: unk_frag57_bss}
+
+  - name: fragment57_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2CE9C0
+    vram: 0x00000000
+    subsegments:
     - [0x2CE9C0, rodatabin,    fragments/57/fragment57_reloc]
 
 # sandshrew minigame stage animation
   - name: fragment58
     type: code
-    bss_size: 0x0
+    bss_size: 0x40
     start: 0x2CF350
     vram: 0x84000000
     subsegments:
@@ -1266,12 +1776,21 @@
     - [0x2CF370, c,      fragments/58/fragment58]
     - [0x2D1F30, data,   fragments/58/fragment58_data]
     - [0x2D2000, rodata, fragments/58/fragment58_rodata]
+
+    - {vram: 0x84002D00, type:  bss, name: unk_frag58_bss}
+
+  - name: fragment58_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2D2050
+    vram: 0x00000000
+    subsegments:
     - [0x2D2050, rodatabin,    fragments/58/fragment58_reloc]
 
 # stadium loader
   - name: fragment59
     type: code
-    bss_size: 0x0
+    bss_size: 0x8C0
     start: 0x2D24C0
     vram: 0x84100000
     subsegments:
@@ -1279,12 +1798,21 @@
     - [0x2D24E0, c,      fragments/59/fragment59]
     - [0x2D48F0, data,   fragments/59/fragment59_data]
     - [0x2D58F0, rodata, fragments/59/fragment59_rodata]
+
+    - {vram: 0x84103440, type:  bss, name: unk_frag59_bss}
+
+  - name: fragment59_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2D5900
+    vram: 0x00000000
+    subsegments:
     - [0x2D5900, rodatabin,    fragments/59/fragment59_reloc]
 
 # cup code
   - name: fragment60
     type: code
-    bss_size: 0x0
+    bss_size: 0xA00
     start: 0x2D5CB0
     vram: 0x82E00000
     subsegments:
@@ -1292,25 +1820,43 @@
     - [0x2D5CD0, c,      fragments/60/fragment60]
     - [0x2D6DC0, data,   fragments/60/fragment60_data]
     - [0x2D7650, rodata, fragments/60/fragment60_rodata]
+
+    - {vram: 0x82E019B0, type:  bss, name: unk_frag60_bss}
+
+  - name: fragment60_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2D7660
+    vram: 0x00000000
+    subsegments:
     - [0x2D7660, rodatabin,    fragments/60/fragment60_reloc]
 
 # RENTAL pokemon loader
   - name: fragment61
     type: code
-    bss_size: 0x0
+    bss_size: 0x2CA60
     start: 0x2D7890
     vram: 0x84200000
     subsegments:
     - [0x2D7890, textbin,   fragments/61/fragment61_header]
     - [0x2D78B0, c,      fragments/61/fragment61]
     - [0x2E85D0, data,   fragments/61/fragment61_data]
-    - [0x2E9120, rodata, fragments/61/fragment61_rodata]
+    - [0x2E9120, rodata, fragments/61/fragment61_rodata]    
+
+    - {vram: 0x84211B30, type:  bss, name: unk_frag61_bss}
+
+  - name: fragment61_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x2E93C0
+    vram: 0x00000000
+    subsegments:
     - [0x2E93C0, rodatabin,    fragments/61/fragment61_reloc]
-    
+
 # battle system code
   - name: fragment62
     type: code
-    bss_size: 0x0
+    bss_size: 0x37D20
     start: 0x2EA8C0
     vram: 0x84300000
     subsegments:
@@ -1318,12 +1864,21 @@
     - [0x2EA8E0, c,      fragments/62/fragment62]
     - [0x36EC10, data,   fragments/62/fragment62_data]
     - [0x3759C0, rodata, fragments/62/fragment62_rodata]
+
+    - {vram: 0x8438E440, type:  bss, name: unk_frag62_bss}
+
+  - name: fragment62_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x378D00
+    vram: 0x00000000
+    subsegments:
     - [0x378D00, rodatabin,    fragments/62/fragment62_reloc]
 
 # battle preparation flags, rules, code
   - name: fragment63
     type: code
-    bss_size: 0x0
+    bss_size: 0xCD70
     start: 0x394100
     vram: 0x84B00000
     subsegments:
@@ -1331,12 +1886,21 @@
     - [0x394120, c,      fragments/63/fragment63]
     - [0x3A3C10, data,   fragments/63/fragment63_data]
     - [0x3AD980, rodata, fragments/63/fragment63_rodata]
+
+    - {vram: 0x84B19910, type:  bss, name: unk_frag63_bss}
+
+  - name: fragment63_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3ADA10
+    vram: 0x00000000
+    subsegments:
     - [0x3ADA10, rodatabin,    fragments/63/fragment63_reloc]
 
 # menu selector before battle code
   - name: fragment64
     type: code
-    bss_size: 0x0
+    bss_size: 0x12D00
     start: 0x3AEE50
     vram: 0x84800000
     subsegments:
@@ -1344,12 +1908,21 @@
     - [0x3AEE70, c,      fragments/64/fragment64]
     - [0x3B2390, data,   fragments/64/fragment64_data]
     - [0x3B2530, rodata, fragments/64/fragment64_rodata]
+
+    - {vram: 0x84803760, type:  bss, name: unk_frag64_bss}
+
+  - name: fragment64_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B25B0
+    vram: 0x00000000
+    subsegments:
     - [0x3B25B0, rodatabin,    fragments/64/fragment64_reloc]
 
 # gym leader castle loader
   - name: fragment65
     type: code
-    bss_size: 0x0
+    bss_size: 0x60
     start: 0x3B2AE0
     vram: 0x84A00000
     subsegments:
@@ -1357,17 +1930,35 @@
     - [0x3B2B00, c,      fragments/65/fragment65]
     - [0x3B59E0, data,   fragments/65/fragment65_data]
     - [0x3B5BE0, rodata, fragments/65/fragment65_rodata]
+
+    - {vram: 0x84A03130, type:  bss, name: unk_frag65_bss}
+
+  - name: fragment65_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B5C10
+    vram: 0x00000000
+    subsegments:
     - [0x3B5C10, rodatabin,    fragments/65/fragment65_reloc]
 
   - name: fragment66
     type: code
-    bss_size: 0x0
+    bss_size: 0x810
     start: 0x3B6130
     vram: 0x83200000
     subsegments:
     - [0x3B6130, textbin,   fragments/66/fragment66_header]
     - [0x3B6150, c,      fragments/66/fragment66]
     - [0x3B8080, data,   fragments/66/fragment66_data]
+
+    - {vram: 0x83202010, type:  bss, name: unk_frag66_bss}
+
+  - name: fragment66_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B8140
+    vram: 0x00000000
+    subsegments:
     - [0x3B8140, rodatabin,    fragments/66/fragment66_reloc]
 
   - name: fragment67
@@ -1378,6 +1969,15 @@
     subsegments:
     - [0x3B8530, textbin,   fragments/67/fragment67_header]
     - [0x3B8550, c,      fragments/67/fragment67]
+
+    - {vram: 0x8F000030, type:  bss, name: unk_frag67_bss}
+
+  - name: fragment67_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B8560
+    vram: 0x00000000
+    subsegments:
     - [0x3B8560, rodatabin,    fragments/67/fragment67_reloc]
 
   # These are a bunch of seemingly unused(?) fragments which all they do is access or load fragment 67.
@@ -1389,6 +1989,15 @@
     subsegments:
     - [0x3B8570, textbin, fragments/68/fragment68_header]
     - [0x3B8590, c,    fragments/68/fragment68]
+
+    - {vram: 0x8F100080, type:  bss, name: unk_frag68_bss}
+
+  - name: fragment68_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B85F0
+    vram: 0x00000000
+    subsegments:
     - [0x3B85F0, rodatabin,  fragments/68/fragment68_reloc]
 
   - name: fragment69
@@ -1399,6 +2008,15 @@
     subsegments:
     - [0x3B8600, textbin,   fragments/69/fragment69_header]
     - [0x3B8620, c,      fragments/69/fragment69]
+
+    - {vram: 0x8F200080, type:  bss, name: unk_frag69_bss}
+
+  - name: fragment69_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B8680
+    vram: 0x00000000
+    subsegments:
     - [0x3B8680, rodatabin,    fragments/69/fragment69_reloc]
 
   - name: fragment70
@@ -1409,6 +2027,15 @@
     subsegments:
     - [0x3B8690, textbin,   fragments/70/fragment70_header]
     - [0x3B86B0, c,      fragments/70/fragment70]
+
+    - {vram: 0x8F300080, type:  bss, name: unk_frag70_bss}
+
+  - name: fragment70_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B8710
+    vram: 0x00000000
+    subsegments:
     - [0x3B8710, rodatabin,    fragments/70/fragment70_reloc]
 
   - name: fragment71
@@ -1419,6 +2046,15 @@
     subsegments:
     - [0x3B8720, textbin,   fragments/71/fragment71_header]
     - [0x3B8740, c,      fragments/71/fragment71]
+
+    - {vram: 0x8F400080, type:  bss, name: unk_frag71_bss}
+
+  - name: fragment71_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B87A0
+    vram: 0x00000000
+    subsegments:
     - [0x3B87A0, rodatabin,    fragments/71/fragment71_reloc]
 
   - name: fragment72
@@ -1429,16 +2065,34 @@
     subsegments:
     - [0x3B87B0, textbin, fragments/72/fragment72_header]
     - [0x3B87D0, c,    fragments/72/fragment72]
+
+    - {vram: 0x8F500080, type:  bss, name: unk_frag72_bss}
+
+  - name: fragment72_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B8830
+    vram: 0x00000000
+    subsegments:
     - [0x3B8830, rodatabin,  fragments/72/fragment72_reloc]
 
   - name: fragment73
     type: code
-    bss_size: 0x0
+    bss_size: 0x1990
     start: 0x3B8840
     vram: 0x8F600000 # unknown vram. Another unused one? Might be 8F600000?
     subsegments:
     - [0x3B8840, textbin, fragments/73/fragment73_header]
     - [0x3B8860, c,    fragments/73/fragment73]
+
+    - {vram: 0x8F600080, type:  bss, name: unk_frag73_bss}
+
+  - name: fragment73_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B88C0
+    vram: 0x00000000
+    subsegments:
     - [0x3B88C0, rodatabin,  fragments/73/fragment73_reloc]
 
   - name: fragment74
@@ -1449,17 +2103,35 @@
     subsegments:
     - [0x3B88D0, textbin, fragments/74/fragment74_header]
     - [0x3B88F0, c,    fragments/74/fragment74]
+
+    - {vram: 0x8F700080, type:  bss, name: unk_frag74_bss}
+
+  - name: fragment74_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B8950
+    vram: 0x00000000
+    subsegments:
     - [0x3B8950, rodatabin,  fragments/74/fragment74_reloc]
 
   - name: fragment75
     type: code
-    bss_size: 0x0
+    bss_size: 0x10
     start: 0x3B8960
     vram: 0x8FA00000
     subsegments:
     - [0x3B8960, textbin, fragments/75/fragment75_header]
     - [0x3B8980, c,    fragments/75/fragment75]
     - [0x3B9350, data, fragments/75/fragment75_data]
+
+    - {vram: 0x8FA00A20, type:  bss, name: unk_frag75_bss}
+
+  - name: fragment75_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B9380
+    vram: 0x00000000
+    subsegments:
     - [0x3B9380, rodatabin,  fragments/75/fragment75_reloc]
 
   - name: fragment76
@@ -1470,6 +2142,15 @@
     subsegments:
     - [0x3B9590, textbin, fragments/76/fragment76_header]
     - [0x3B95B0, c,    fragments/76/fragment76]
+
+    - {vram: 0x8FB00080, type:  bss, name: unk_frag76_bss}
+
+  - name: fragment76_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B9610
+    vram: 0x00000000
+    subsegments:
     - [0x3B9610, rodatabin,  fragments/76/fragment76_reloc]
 
   - name: fragment77
@@ -1480,6 +2161,15 @@
     subsegments:
     - [0x3B9620, textbin,  fragments/77/fragment77_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x3B9640, c,    fragments/77/fragment77]
+
+    - {vram: 0x8FC00080, type:  bss, name: unk_frag77_bss}
+
+  - name: fragment77_relocs
+    type: code
+    bss_size: 0x0
+    start: 0x3B96A0
+    vram: 0x00000000
+    subsegments:
     - [0x3B96A0, rodatabin,  fragments/77/fragment77_reloc]
 
   - [0x3B96B0, bin]

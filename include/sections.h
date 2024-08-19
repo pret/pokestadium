@@ -413,4 +413,6 @@ extern u8 _6C4E50_ROM_START[];
 
 extern u8 D_124570[];
 
+extern u32 fragment1_relocs_ROM_END[];
+
 #endif // _SECTIONS_H_
