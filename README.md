@@ -13,7 +13,7 @@ Under Debian / Ubuntu (which we recommend using), you can install them with the 
 
 ```bash
 sudo apt update
-sudo apt install make git build-essential binutils-mips-linux-gnu python3 python3-pip
+sudo apt install make git build-essential binutils-mips-linux-gnu python3 python3-pip python3-venv
 ```
 
 **Please also ensure that the Python version installed is >3.7.**
@@ -27,8 +27,8 @@ python3 -m pip install -r requirements.txt
 ```
 
 # To use
-1. Place the US Pokemon Stadium 1.0 rom into the root of the repository as "baserom.z64".
-2. Set up tools and extract the rom: `make setup`
+1. Place the US Pokemon Stadium 1.0 rom into the repository's "/baseroms/us/" folder as "baserom.z64".
+2. Set up tools and extract the rom: `make init`
 3. Re-assemble the rom: `make`
 
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
