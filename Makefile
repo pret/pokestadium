@@ -279,6 +279,7 @@ distclean: clean libclean
 
 venv:
 	test -d $(VENV) || python3 -m venv $(VENV)
+	$(PYTHON) -m ensurepip --upgrade
 	$(PYTHON) -m pip install -U pip
 	$(PYTHON) -m pip install -U -r requirements.txt
 
