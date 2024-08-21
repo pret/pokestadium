@@ -116,4 +116,24 @@ extern s16 D_8780FA32;
 extern s16 D_8780FA34;
 extern s16 D_8780FA36;
 
+typedef struct unk_D_800AC870_sub {
+	/* 0x00 */ s16 unk_00;
+	/* 0x02 */ s16 unk_02;
+	/* 0x04 */ u8* unk_04;
+	/* 0x08 */ u8* unk_08;
+} unk_D_800AC870_sub; // size = 0xC
+
+typedef struct unk_D_800AC870 {
+    /* 0x00 */ unk_D_800AC870_sub unk_00[6];
+    /* 0x48 */ void* unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ u8 unk_50;
+    /* 0x51 */ s8 unk_51;
+    /* 0x52 */ u8 unk_52;
+    /* 0x53 */ u8 unk_53;
+} unk_D_800AC870; // size = 0x54
+extern unk_D_800AC870* D_800AC870;
+
+extern Gfx D_8006F498[];
+
 #endif

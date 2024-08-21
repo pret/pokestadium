@@ -114,5 +114,19 @@ typedef struct unk_D_86002F30 {
     /* 0x08 */ unk_func_8001BCF0** unk_08;
 } unk_D_86002F30; // size >= 0xC
 
+struct UnkInputStruct8000D738 {
+    s32 unk0;
+    s32 unk4;
+};
+
+struct UnkStruct800AA660 {
+    /* 0x0000 */ OSThread thread;
+    char padding1B0[0x2030];
+    /* 0x21E0 */ OSMesg mesg;
+    /* 0x21E4 */ OSMesgQueue queue;
+    /* 0x21FC */ s32 unk21FC;
+    /* 0x2200 */ s32 unk2200;
+    /* 0x2204 */ struct UnkInputStruct8000D738 unk2204;
+};
 
 #endif
