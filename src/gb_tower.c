@@ -1,4 +1,4 @@
-#include "global.h"
+#include "gb_tower.h"
 #include "hal_libc.h"
 #include "controller.h"
 

@@ -5,22 +5,10 @@
 #include "memory.h"
 #include "dp_intro.h"
 #include "3FB0.h"
+#include "5580.h"
 #include "util.h"
-
-struct UnkInputStruct8000D738 {
-    s32 unk0;
-    s32 unk4;
-};
-
-struct UnkStruct800AA660 {
-    /* 0x0000 */ OSThread thread;
-    char padding1B0[0x2030];
-    /* 0x21E0 */ OSMesg mesg;
-    /* 0x21E4 */ OSMesgQueue queue;
-    /* 0x21FC */ s32 unk21FC;
-    /* 0x2200 */ s32 unk2200;
-    /* 0x2204 */ struct UnkInputStruct8000D738 unk2204;
-};
+#include "src/gb_tower.h"
+#include "src/fragments/1/fragment1.h"
 
 struct UnkStruct800AA664 {
     /* 0x0000 */ OSThread thread;
@@ -32,15 +20,6 @@ extern struct UnkStruct800AA664* D_800AA664;
 extern char D_800AA668;
 
 extern u8 D_81200000[];
-
-// from fragment 1
-void func_81206D9C(void);
-void func_81206E64(void);
-void func_81206F38(void);
-
-void func_80005370(struct UnkStruct800AA660*);
-char func_8000B318(char);
-s32 func_8000484C(s32, s32);
 
 void func_8000D5C0(void* unused) {
     void (*func)(void*) = Util_ConvertAddrToVirtAddr(&func_81206F38);
