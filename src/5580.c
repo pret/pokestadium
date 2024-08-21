@@ -1,4 +1,4 @@
-#include "global.h"
+#include "5580.h"
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/5580/func_80004980.s")
 
