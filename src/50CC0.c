@@ -1,4 +1,4 @@
-#include "global.h"
+#include "50CC0.h"
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/50CC0/func_800500C0.s")
 
