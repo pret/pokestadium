@@ -27,9 +27,44 @@
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3FB0/func_80003BE0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3FB0/func_80003C80.s")
+// PERSJPEG header
+struct UnkInputStruct80003C80 {
+	char filler0[0x8];
+	u32 unk8;
+	u32 unkC;
+};
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3FB0/func_80003D18.s")
+s32 func_80003C80(s32 arg0, struct UnkInputStruct80003C80* arg1, s32 side) {
+	s32 addr = main_pool_alloc(arg1->unkC + 0x100, side);
+
+	if (addr != 0) {
+		s32 size = func_80003680(addr, arg1->unkC + 0x100, (u32)arg1 + arg1->unk8, arg1);
+		if (size == 0) {
+			main_pool_try_free(addr);
+			addr = NULL;
+		} else if (side == 0) {
+			main_pool_realloc(addr, size);
+		}
+	}
+	main_pool_try_free(arg0);
+	return addr;
+}
+
+// PERS-SZP header
+struct UnkInputStruct80003D18 {
+    char filler0[0x10];
+    u32 unk10;
+};
+
+s32 func_80003D18(s32 arg0, struct UnkInputStruct80003D18* arg1, s32 side) {
+    s32 vaddr = main_pool_alloc(arg1->unk10, side);
+
+    if (vaddr != NULL) {
+        func_80003890(arg1, vaddr);
+    }
+    main_pool_try_free(arg0);
+    return vaddr;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3FB0/func_80003D64.s")
 
