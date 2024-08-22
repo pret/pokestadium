@@ -14,20 +14,20 @@ void func_8001BB20(void) {
     func_8001103C(0, &D_800AC858);
 }
 
-void func_8001BB58(unk_D_86002F58_004* arg0) {
+void func_8001BB58(unk_D_86002F58_004_000* arg0) {
     func_80011938(0, arg0, 0, D_8006F050, D_8006F05C, D_8006F064);
     func_80012094(&D_800AC840, arg0);
     arg0->unk_0A6 = 0;
     arg0->unk_001 &= ~1;
 }
 
-void func_8001BBC8(unk_D_86002F58_004* arg0) {
+void func_8001BBC8(unk_D_86002F58_004_000* arg0) {
     func_80011938(0, arg0, 0, D_8006F050, D_8006F05C, D_8006F064);
     func_80012094(&D_800AC858, arg0);
     arg0->unk_001 &= ~1;
 }
 
-void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_func_8001BCF0* arg3) {
+void func_8001BC34(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, unk_D_86002F58_004_000_004* arg3) {
     func_80012094(arg0, arg3);
     func_8000ED98(&arg0->unk_060);
     arg0->unk_018 = arg1;
@@ -57,14 +57,14 @@ void func_8001BC34(unk_D_86002F58_004* arg0, s16 arg1, s16 arg2, unk_func_8001BC
     }
 }
 
-void func_8001BCF0(unk_D_86002F58_004* arg0) {
-    arg0->unk_004.unk_08 = NULL;
+void func_8001BCF0(unk_D_86002F58_004_000* arg0) {
+    arg0->unk_00C = NULL;
     arg0->unk_001 &= ~1;
 }
 
-s32 func_8001BD04(unk_D_86002F58_004* arg0, s32 arg1) {
-    unk_D_86002F58_004_00C* tmp = arg0->unk_004.unk_08;
-    unk_D_86002F58_004_00C_028* temp_v0 = tmp->unk_28(0, 0);
+s32 func_8001BD04(unk_D_86002F58_004_000* arg0, s32 arg1) {
+    unk_D_86002F58_004_000_00C* tmp = arg0->unk_00C;
+    unk_D_86002F58_004_000_00C_028* temp_v0 = tmp->unk_28(0, 0);
 
     if (arg1 == -1) {
         func_800173CC(arg0);
@@ -76,9 +76,9 @@ s32 func_8001BD04(unk_D_86002F58_004* arg0, s32 arg1) {
     return 0;
 }
 
-s32 func_8001BD9C(unk_D_86002F58_004* arg0, s32 arg1) {
-    unk_D_86002F58_004_00C* temp_v0 = arg0->unk_004.unk_08;
-    unk_D_86002F58_004_00C_028* temp_v1 = temp_v0->unk_28(0, 0);
+s32 func_8001BD9C(unk_D_86002F58_004_000* arg0, s32 arg1) {
+    unk_D_86002F58_004_000_00C* temp_v0 = arg0->unk_00C;
+    unk_D_86002F58_004_000_00C_028* temp_v1 = temp_v0->unk_28(0, 0);
 
     if (arg1 == -1) {
         func_80017788(arg0);
@@ -90,27 +90,27 @@ s32 func_8001BD9C(unk_D_86002F58_004* arg0, s32 arg1) {
     return 0;
 }
 
-void func_8001BE34(unk_D_86002F58_004* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
+void func_8001BE34(unk_D_86002F58_004_000* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
     func_8000E840(&arg0->unk_0A0, arg1, arg2, arg3, arg4);
 }
 
-void func_8001BE78(unk_D_86002F58_004* arg0, u8 arg1) {
+void func_8001BE78(unk_D_86002F58_004_000* arg0, u8 arg1) {
     arg0->unk_01D = arg1;
 }
 
-void func_8001BE84(unk_D_86002F58_004* arg0, u8 arg1) {
+void func_8001BE84(unk_D_86002F58_004_000* arg0, u8 arg1) {
     arg0->unk_01C = arg1;
 }
 
-unk_D_86002F58_004_00C_028* func_8001BE90(unk_D_86002F58_004* arg0, s32 arg1) {
-    unk_D_86002F58_004_00C_028* var_v1 = NULL;
+unk_D_86002F58_004_000_00C_028* func_8001BE90(unk_D_86002F58_004_000* arg0, s32 arg1) {
+    unk_D_86002F58_004_000_00C_028* var_v1 = NULL;
 
     if (arg0 == NULL) {
         arg0 = D_8006F09C;
     }
 
     if (arg0 != NULL) {
-        unk_D_86002F58_004_00C* tmp = arg0->unk_004.unk_08;
+        unk_D_86002F58_004_000_00C* tmp = arg0->unk_00C;
 
         var_v1 = tmp->unk_28(arg1, 0);
     }
