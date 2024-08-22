@@ -44,4 +44,6 @@ void func_8002B274(s32, s32);
 // exception_set.s
 void set_watch_lohi(s32);
 
+unsigned long long __ull_rem(unsigned long long a0, unsigned long long a1);
+
 #endif

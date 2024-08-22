@@ -95,8 +95,6 @@ typedef struct unk_D_800A7440 {
 } unk_D_800A7440; // size >= 0x8
 extern unk_D_800A7440 D_800A7440;
 
-
-
 extern struct unk_D_800AC840 D_800AC840;
 extern struct unk_D_800AC840 D_800AC858;
 extern struct unk_D_86002F58_004_000* D_8006F09C;
@@ -146,5 +144,36 @@ extern s8 D_80077DE4;
 extern s32 D_80078E60;
 extern s32 D_80078E64;
 extern s32 D_80078E68;
+
+extern u8 D_8007840C;
+extern s32 D_80078E70;
+extern s32 D_80078ECC;
+extern u8 D_80078ED0;
+extern s32 D_80078FA8;
+extern s32 D_800FF9B4;
+extern u8 D_80078390[];
+extern u32 D_80078404;
+extern s32 D_80078408;
+extern s32 D_80078E74;
+extern u8 D_80078E78;
+extern u8 D_80078E7C;
+extern u8 D_80078E80;
+extern s32 D_80078EC8;
+extern s32 D_800FC680;
+extern s32 D_800FC684;
+extern s32 D_800FC6DC;
+extern s32 D_80078ED4;
+extern s32 D_80078ED8;
+extern s32 D_80078EDC;
+
+typedef struct unk_D_800FC6E4 {
+	/* 0x00 */ char pad00[0x8];
+	/* 0x08 */ s32 unk_08;
+	/* 0x0C */ s32 unk_0C[2];
+} unk_D_800FC6E4; // size >= 0x10
+
+extern unk_D_800FC6E4* D_800FC6E0;
+extern unk_D_800FC6E4* D_800FC6E4;
+extern s32 D_800FF9B0;
 
 #endif

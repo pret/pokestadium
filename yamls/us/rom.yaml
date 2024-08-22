@@ -396,7 +396,7 @@
     - [0x7DFD0, rodata, rom_rodata_7DFD0]
     - [0x7E0D0, rodata, rom_rodata_7E0D0]
     - [0x7E0E0, .rodata, 4BA90]
-    - [0x7E110, rodata, rom_rodata_7E110]
+    - [0x7E110, .rodata, 4BDC0]
     - [0x7E2F0, rodata, rom_rodata_7E2F0]
     - [0x7E560, rodata, rom_rodata_7E560]
     - [0x7E5D0, rodata, rom_rodata_7E5D0]
