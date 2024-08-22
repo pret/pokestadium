@@ -152,7 +152,7 @@ void* func_80002DA4(struct MainPoolState* block, s32 size) {
     return block;
 }
 
-s32 func_80002DCC(struct MainPoolState* state, s32 arg1, s32 arg2) {
+void* func_80002DCC(struct MainPoolState* state, s32 arg1, s32 arg2) {
     s32 temp_a2;
     s32 temp_a3;
     s32 var_v0;

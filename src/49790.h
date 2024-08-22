@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void func_80048B90(s32);
+s32 func_80048B90(s32);
 
 
 #endif // _49790_H_
