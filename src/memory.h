@@ -8,12 +8,12 @@
 #define MEMORY_POOL_RIGHT 1
 
 // structs for the main pool.
-struct MainPoolState {
+typedef struct MainPoolState {
     /* 0x00 */ s32 freeSpace;
     /* 0x04 */ struct MainPoolBlock *listHeadL;
     /* 0x08 */ struct MainPoolBlock *listHeadR;
     /* 0x0C */ struct MainPoolState *prev;
-};
+} MainPoolState;
 
 struct MainPoolBlock {
     /* 0x00 */ struct MainPoolBlock *prev;
@@ -72,7 +72,7 @@ void mem_pool_free(struct MemoryPool* pool, void* addr);
 void *func_80002D10(u32 size, s32 side);
 void func_80002D60(struct MemoryBlock* block);
 void* func_80002DA4(struct MainPoolState* block, s32 size);
-s32 func_80002DCC(struct MainPoolState* state, s32 arg1, s32 arg2);
+void* func_80002DCC(struct MainPoolState* state, s32 arg1, s32 arg2);
 void func_80002E3C(struct MainPoolState* state, s32 size);
 void func_80002E64(struct MainPoolState* state);
 
