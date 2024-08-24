@@ -9,6 +9,15 @@
 #define SHT_MAX 32767.0f
 #define SHT_MINV (1.0f / SHT_MAX)
 
+extern long long __d_to_ll(double d);
+extern long long __f_to_ll(float f);
+extern unsigned long long __d_to_ull(double d);
+extern unsigned long long __f_to_ull(float f);
+extern double __ll_to_d(long long s);
+extern float __ll_to_f(long long s);
+extern double __ull_to_d(unsigned long long u);
+extern float __ull_to_f(unsigned long long u);
+
 typedef float MtxF_t[4][4];
 typedef union {
     MtxF_t mf;
