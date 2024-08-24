@@ -144,13 +144,10 @@ extern s8 D_80077DE4;
 extern s32 D_80078E60;
 extern s32 D_80078E64;
 extern s32 D_80078E68;
-
 extern u8 D_8007840C;
 extern s32 D_80078E70;
 extern s32 D_80078ECC;
 extern u8 D_80078ED0;
-extern s32 D_80078FA8;
-extern s32 D_800FF9B4;
 extern u8 D_80078390[];
 extern u32 D_80078404;
 extern s32 D_80078408;
@@ -161,7 +158,7 @@ extern u8 D_80078E80;
 extern s32 D_80078EC8;
 extern s32 D_800FC680;
 extern s32 D_800FC684;
-extern s32 D_800FC6DC;
+extern u32 D_800FC6DC;
 extern s32 D_80078ED4;
 extern s32 D_80078ED8;
 extern s32 D_80078EDC;
@@ -169,11 +166,37 @@ extern s32 D_80078EDC;
 typedef struct unk_D_800FC6E4 {
 	/* 0x00 */ char pad00[0x8];
 	/* 0x08 */ s32 unk_08;
-	/* 0x0C */ s32 unk_0C[2];
+	/* 0x0C */ u32 unk_0C[2];
 } unk_D_800FC6E4; // size >= 0x10
 
 extern unk_D_800FC6E4* D_800FC6E0;
 extern unk_D_800FC6E4* D_800FC6E4;
-extern s32 D_800FF9B0;
+
+extern s32 D_800FC688;
+extern s32 D_800FC68C;
+extern s32 D_800FC6A4;
+extern s32 D_800FC6A8;
+
+typedef struct unk_D_800FC6F4 {
+    /* 0x00 */ char pad00[0x14];
+    /* 0x14 */ u32 unk_14;
+    /* 0x18 */ char pad18[0x4];
+    /* 0x1C */ u32 unk_1C;
+    /* 0x20 */ char pad20[0x4];
+    /* 0x24 */ u32 unk_24;
+} unk_D_800FC6F4; /// size >= 0x28
+extern unk_D_800FC6F4* D_800FC6F4;
+
+typedef struct unk_D_800FC6F8 {
+    /* 0x00 */ u32 unk_00[2];
+} unk_D_800FC6F8; // size = 0x8
+extern unk_D_800FC6F8* D_800FC6F8;
+
+typedef struct unk_D_800FC798 {
+    /* 0x00 */ u32 unk_00;
+    /* 0x04 */ u32 unk_04;
+    /* 0x08 */ u32 unk_08;
+} unk_D_800FC798; // size >= 0xC
+extern unk_D_800FC798* D_800FC798;
 
 #endif
