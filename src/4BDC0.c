@@ -7,6 +7,9 @@
 #include "src/50CC0.h"
 #include "src/3D140.h"
 
+static s32 D_800FF9B0;
+static s32 D_800FF9B4;
+
 void func_8004B1C0(s32 arg0) {
     D_80078EC8 = arg0;
 }
@@ -53,11 +56,11 @@ s32 func_8004B1CC(s32 arg0) {
         func_800393DC(D_80078ECC, 0);
         D_80078ED0 = 1;
     } else {
-	    func_80039940();
-	    D_80078E70 = 0;
-	    func_800392A8(D_80078ECC, 1);
-	    D_80078ED0 = 0;
-	}
+        func_80039940();
+        D_80078E70 = 0;
+        func_800392A8(D_80078ECC, 1);
+        D_80078ED0 = 0;
+    }
 
     if (arg0 == 0x32) {
         if ((D_80078404 < 0xC) && (D_80078390[0] > 0) && (D_80078390[1] == 0) && (D_80078408 == 8)) {
@@ -430,7 +433,7 @@ s32 func_8004B1CC(s32 arg0) {
     } else if (sp2C == D_800FC6E4->unk_08 - 1) {
         var_a2 = D_800FC6E0->unk_08 - D_800FC6E4->unk_0C[sp2C];
     } else {
-    	return 0;
+        return 0;
     }
 
     func_8004ADB0(D_800FC6E4->unk_0C[sp2C], D_800FC6DC, var_a2);
@@ -473,9 +476,9 @@ void func_8004B9C4(s32 arg0) {
     func_8003DB84(0);
 
     if (D_800FF9B4 != 0x50) {
-    	for (i = 0; i < 2; i++) {
+        for (i = 0; i < 2; i++) {
             func_80044D78(i, arg0);
-    	}
+        }
     }
 }
 
@@ -503,7 +506,7 @@ s32 func_8004BC84(s32 arg0, u32 arg1) {
                         if (arg1 == 0) {
                             return func_8004B1CC(0x1E);
                         }
-                    	return 0;
+                        return 0;
                     }
                     return 0;
             }
@@ -577,13 +580,13 @@ s32 func_8004BC84(s32 arg0, u32 arg1) {
                             D_80078ED4 = 3;
                             D_80078EDC = 0;
                         } else {
-	                        func_8004B1C0(0x46);
-	                        D_80078ED4 = 3;
-	                        D_80078EDC = func_8004B1CC(0x20);
-            				return D_80078EDC;
-	                    }
+                            func_8004B1C0(0x46);
+                            D_80078ED4 = 3;
+                            D_80078EDC = func_8004B1CC(0x20);
+                            return D_80078EDC;
+                        }
                     }
-            		return 0;
+                    return 0;
 
                 case 3:
                     return 0;

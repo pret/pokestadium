@@ -98,10 +98,10 @@
     - [0x49DC0, c]
     - [0x4A360, c]
     - [0x4A3E0, c]
-    - [0x4B940, c]
+    - [0x4B940, c, 4B940]
     - [0x4BA90, c, 4BA90]
-    - [0x4BDC0, c]
-    - [0x4CBC0, c]
+    - [0x4BDC0, c, 4BDC0]
+    - [0x4CBC0, c, 4CBC0]
     - [0x4F410, c]
     - [0x4F7F0, c]
     - [0x4F870, c]
@@ -331,6 +331,8 @@
     - [0x6A3E0, data, rom_data_6A3E0]
     - [0x6A3F0, .data, math_util]
     - [0x6FC00, data, rom_data_6FC00]
+    - [0x79AE0, .data, 4CBC0]
+    - [0x79C70, data, rom_data_79C70]
 
     # libleo
     - [0x7A180, .data, libleo/driverominit]
@@ -397,7 +399,7 @@
     - [0x7E0D0, rodata, rom_rodata_7E0D0]
     - [0x7E0E0, .rodata, 4BA90]
     - [0x7E110, .rodata, 4BDC0]
-    - [0x7E2F0, rodata, rom_rodata_7E2F0]
+    - [0x7E2F0, .rodata, 4CBC0]
     - [0x7E560, rodata, rom_rodata_7E560]
     - [0x7E5D0, rodata, rom_rodata_7E5D0]
     - [0x7E600, rodata, rom_rodata_7E600]
@@ -446,6 +448,9 @@
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
     - {vram: 0x800A7EA0, type: .bss, name: profiler}
     - {vram: 0x800A8100, type:  bss, name: unk_bss_2}
+    - {vram: 0x800FF990, type:  .bss, name: 4B940}
+    - {vram: 0x800FF9B0, type:  .bss, name: 4BDC0}
+    - {vram: 0x800FF9C0, type:  bss, name: unk_bss_10}
 
     # libleo
     - {vram: 0x80100740, type: .bss, name: libleo/driverominit}
