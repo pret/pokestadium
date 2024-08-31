@@ -534,10 +534,17 @@
     subsegments:
     - [0x107FA0, textbin,   fragments/2/fragment2_header]
     - [0x107FC0, c,      fragments/2/fragment2]
-    - [0x10E2D0, data,   fragments/2/fragment2_data]
-    - [0x117850, rodata, fragments/2/fragment2_rodata]
+    - [0x10A300, c,      fragments/2/fragment2_1]
+    - [0x10A960, c,      fragments/2/fragment2_2]
+    - [0x10E2D0, .data,   fragments/2/fragment2]
+    - [0x10E330, .data,   fragments/2/fragment2_1]
+    - [0x10E490, .data,   fragments/2/fragment2_2]
+    - [0x117970, .rodata, fragments/2/fragment2_1]
+    - [0x117980, .rodata, fragments/2/fragment2_2]
 
-    - {vram: 0x8780FA20, type:  bss, name: unk_frag2_bss}
+    - {vram: 0x8780FA20, type:  .bss, name: fragments/2/fragment2}
+    - {vram: 0x8780FAC0, type:  .bss, name: fragments/2/fragment2_1}
+    - {vram: 0x8780FC40, type:  .bss, name: fragments/2/fragment2_2}
 
   - name: fragment2_relocs
     type: code

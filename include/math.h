@@ -29,13 +29,13 @@ typedef union {
     };
 } MtxF;
 
-typedef struct {
+typedef struct Vec3f {
     /* 0x0 */ f32 x;
     /* 0x4 */ f32 y;
     /* 0x8 */ f32 z;
 } Vec3f; // size = 0xC
 
-typedef struct {
+typedef struct Vec3s {
     /* 0x0 */ s16 x;
     /* 0x2 */ s16 y;
     /* 0x4 */ s16 z;

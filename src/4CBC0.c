@@ -952,7 +952,7 @@ s32 func_8004D3B0(s32 arg0, s32 arg1, s32 arg2) {
 void func_8004D848(UNUSED s32 arg0, UNUSED s32 arg1, UNUSED s32 arg2) {
 }
 
-s32 func_8004D858(s32 arg0, s32 arg1) {
+s32 func_8004D858(s32 arg0, u32 arg1) {
     static s32 D_80079008 = 0x00000000;
     static s32 D_8007900C = 0x00000000;
     static s32 D_80079010 = 0x00000000;

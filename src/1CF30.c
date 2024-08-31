@@ -58,7 +58,7 @@ void func_8001C604(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0, 0, 0);
 }
 
-void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_16b, arg5, arg3, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
@@ -66,7 +66,7 @@ void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_32b, arg5, arg3, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
@@ -74,40 +74,40 @@ void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001CADC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001CADC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_IA, G_IM_SIZ_8b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001CCF8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001CCF8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_IA, G_IM_SIZ_16b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001CF10(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001CF10(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, arg4, G_IM_FMT_I, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                            G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001D12C(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001D12C(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_I, G_IM_SIZ_8b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001D348(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, s16 arg5, s32 arg6) {
+void func_8001D348(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_I, G_IM_SIZ_16b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001D560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, u32 arg5, s16 arg6, s32 arg7) {
+void func_8001D560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, u32* arg5, s16 arg6, s32 arg7) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_16b, arg6, arg3, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
@@ -260,11 +260,11 @@ void func_8001E000(s16 arg0, s16 arg1, s16 arg2, f32 arg3, Vtx* arg4, u32 arg5) 
 }
 
 #ifdef NON_MATCHING
-unk_func_8001E680* func_8001E490(void) {
+Vtx* func_8001E490(void) {
     s16 i;
     s16 j;
-    unk_func_8001E680* sp54;
-    unk_func_8001E680* var_s0;
+    Vtx* sp54;
+    Vtx* var_s0;
 
     sp54 = main_pool_alloc(0x4B00, 0);
     if (sp54 != NULL) {
@@ -283,22 +283,21 @@ unk_func_8001E680* func_8001E490(void) {
     return sp54;
 }
 #else
-unk_func_8001E680* func_8001E490(void);
+Vtx* func_8001E490(void);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1CF30/func_8001E490.s")
 #endif
 
-void func_8001E680(unk_func_8001E680* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u8 arg6, u8 arg7, u8 arg8,
-                   u8 arg9) {
-    arg0->unk_00 = arg1;
-    arg0->unk_02 = arg2;
-    arg0->unk_04 = arg3;
-    arg0->unk_06 = 0;
-    arg0->unk_08 = arg4;
-    arg0->unk_0A = arg5;
-    arg0->unk_0C = arg6;
-    arg0->unk_0D = arg7;
-    arg0->unk_0E = arg8;
-    arg0->unk_0F = arg9;
+void func_8001E680(Vtx* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9) {
+    arg0->v.ob[0] = arg1;
+    arg0->v.ob[1] = arg2;
+    arg0->v.ob[2] = arg3;
+    arg0->v.flag = 0;
+    arg0->v.tc[0] = arg4;
+    arg0->v.tc[1] = arg5;
+    arg0->v.cn[0] = arg6;
+    arg0->v.cn[1] = arg7;
+    arg0->v.cn[2] = arg8;
+    arg0->v.cn[3] = arg9;
 }
 
 void func_8001E6E8(Vp* arg0, s16 arg1, s16 arg2) {
