@@ -37,4 +37,16 @@
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN64(val) (((val) + 0x3F) & ~0x3F)
 
+#define DECR(x) ((x) == 0 ? 0 : --(x))
+
+//! checks min first
+#define CLAMP(x, min, max) ((x) < (min) ? (min) : (x) > (max) ? (max) : (x))
+//! checks max first
+#define CLAMP_ALT(x, min, max) ((x) > (max) ? (max) : (x) < (min) ? (min) : (x))
+#define CLAMP_MAX(x, max) ((x) > (max) ? (max) : (x))
+#define CLAMP_MIN(x, min) ((x) < (min) ? (min) : (x))
+
+#define ABS(x) ((x) >= 0 ? (x) : -(x))
+#define ABS_ALT(x) ((x) < 0 ? -(x) : (x))
+
 #endif
