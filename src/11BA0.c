@@ -1,25 +1,25 @@
 #include "global.h"
 #include "11BA0.h"
 
-void func_80010FA0(unk_D_86002F58_004_000* arg0, u8 arg1) {
+void func_80010FA0(unk_D_86002F58_004_000_000* arg0, u8 arg1) {
     if (arg0 != NULL) {
-        arg0->unk_000 = arg1;
-        arg0->unk_001 = 0x11;
-        arg0->unk_002 = 0;
-        arg0->unk_003 = 0;
-        arg0->unk_004 = arg0;
-        arg0->unk_008 = arg0;
-        arg0->unk_00C = NULL;
-        arg0->unk_010 = 0;
-        arg0->unk_014 = 0;
+        arg0->unk_00 = arg1;
+        arg0->unk_01 = 0x11;
+        arg0->unk_02 = 0;
+        arg0->unk_03 = 0;
+        arg0->unk_04 = arg0;
+        arg0->unk_08 = arg0;
+        arg0->unk_0C = NULL;
+        arg0->unk_10 = 0;
+        arg0->unk_14 = 0;
     }
 }
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80010FDC.s")
 
-unk_D_86002F58_004_000* func_8001103C(MainPoolState* arg0, void* arg1) {
+unk_D_86002F58_004_000_000* func_8001103C(MainPoolState* arg0, void* arg1) {
     if (arg0 != 0) {
-        arg1 = func_80002DCC(arg0, 0x18, 4);
+        arg1 = func_80002DCC(arg0, sizeof(unk_D_86002F58_004_000_000), 4);
     }
 
     if (arg1 != NULL) {
@@ -67,10 +67,10 @@ unk_D_86002F58_004_000* func_8001103C(MainPoolState* arg0, void* arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_800118D0.s")
 
-unk_D_86002F58_004_000* func_80011938(s32 arg0, unk_D_86002F58_004_000* arg1, s16 arg2, Vec3f* arg3, Vec3s* arg4,
-                                      Vec3f* arg5) {
+unk_D_86002F58_004_000* func_80011938(MainPoolState* arg0, unk_D_86002F58_004_000* arg1, s16 arg2, Vec3f* arg3,
+                                      Vec3s* arg4, Vec3f* arg5) {
     if (arg0 != 0) {
-        arg1 = func_80002DCC(arg0, 0x168, 4);
+        arg1 = func_80002DCC(arg0, sizeof(unk_D_86002F58_004_000), 4);
     }
 
     if (arg1 != NULL) {
@@ -93,8 +93,8 @@ unk_D_86002F58_004_000* func_80011938(s32 arg0, unk_D_86002F58_004_000* arg1, s1
         arg1->unk_058 = 0;
         arg1->unk_05C = 0;
         arg1->unk_05E = 0;
-        func_80010FA0(arg1, 0x16);
-        arg1->unk_002 |= 0x60;
+        func_80010FA0(&arg1->unk_000, 0x16);
+        arg1->unk_000.unk_02 |= 0x60;
     }
 
     return arg1;
@@ -124,21 +124,21 @@ unk_D_86002F58_004_000* func_80011938(s32 arg0, unk_D_86002F58_004_000* arg1, s1
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80012044.s")
 
-void func_80012094(unk_D_800AC840* arg0, unk_D_86002F58_004_000* arg1) {
-    unk_D_86002F58_004_000* temp_v0;
-    unk_D_86002F58_004_000_004* temp_v1;
+void func_80012094(unk_D_86002F58_004_000_000* arg0, unk_D_86002F58_004_000_000* arg1) {
+    unk_D_86002F58_004_000_000* temp_v0;
+    unk_D_86002F58_004_000_000* temp_v1;
 
     if ((arg0 != NULL) && (arg1 != NULL)) {
         temp_v0 = arg0->unk_0C;
         if (temp_v0 == NULL) {
             arg0->unk_0C = arg1;
-            arg1->unk_004 = arg1;
-            arg1->unk_008 = arg1;
+            arg1->unk_04 = arg1;
+            arg1->unk_08 = arg1;
         } else {
-            temp_v1 = temp_v0->unk_004;
-            arg1->unk_008 = temp_v0;
-            arg1->unk_004 = temp_v1;
-            temp_v0->unk_004 = arg1;
+            temp_v1 = temp_v0->unk_04;
+            arg1->unk_08 = temp_v0;
+            arg1->unk_04 = temp_v1;
+            temp_v0->unk_04 = arg1;
             temp_v1->unk_08 = arg1;
         }
     }
