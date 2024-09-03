@@ -700,10 +700,10 @@
     subsegments:
     - [0x1329E0, textbin,   fragments/9/fragment9_header]
     - [0x132A00, c,      fragments/9/fragment9]
-    - [0x133FE0, data,   fragments/9/fragment9_data]
-    - [0x1340A0, rodata, fragments/9/fragment9_rodata]
+    - [0x133FE0, .data,   fragments/9/fragment9]
+    - [0x1340A0, .rodata, fragments/9/fragment9]
 
-    - {vram: 0x86301710, type:  bss, name: unk_frag9_bss}
+    - {vram: 0x86301710, type:  .bss, name: fragments/9/fragment9}
 
   - name: fragment9_relocs
     type: code
