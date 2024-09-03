@@ -10,7 +10,7 @@ void func_8000ED98(s32*);
 void func_8000F2C4(MtxF*, MtxF*, Vec3s*);
 void func_8000FDE4(MtxF*, MtxF*, Vec3f*);
 void func_80010090(MtxF*, MtxF*);
-void func_80010354(f32*, f32*, f32, s16, s32);
+void func_80010354(Vec3f*, Vec3f*, f32, s16, s32);
 
 
 #endif // _E890_H_

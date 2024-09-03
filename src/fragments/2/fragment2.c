@@ -253,7 +253,7 @@ void func_8780118C(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     gDPFillRectangle(gDisplayListHead++, arg0, arg1, arg0 + arg2, arg1 + arg3);
 }
 
-void func_87801290(s32* arg0, s32* arg1, s8* arg2, s8* arg3, s32 arg4) {
+void func_87801290(s32* arg0, s32* arg1, char* arg2, char* arg3, s32 arg4) {
     s32 var_a1;
     s32 var_t2;
     s8 sp38[0x100];
