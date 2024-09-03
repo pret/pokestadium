@@ -36,7 +36,8 @@ extern u32 D_81000000;
 extern u32 D_8D000000;
 
 typedef struct unk_D_80068BA0 {
-    /* 0x00 */ char pad00[0x4];
+    /* 0x00 */ char pad00[0x2];
+    /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ u16 unk_06;
     /* 0x08 */ u16 unk_08;
