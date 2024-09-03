@@ -519,9 +519,11 @@ void func_86000478(void) {
     D_86002F38->unk_034 = 100.0f;
     D_86002F38->unk_038 = 12800.0f;
     D_86002F38->unk_02C = 10.0f;
-    D_86002F38->unk_0B4 = 0.0f;
-    D_86002F38->unk_0B8 = 70.0f;
-    D_86002F38->unk_0BC = 0.0f;
+
+    D_86002F38->unk_0B4.x = 0.0f;
+    D_86002F38->unk_0B4.y = 70.0f;
+    D_86002F38->unk_0B4.z = 0.0f;
+
     func_80010354(&D_86002F38->unk_0B4, &D_86002F38->unk_0A8, D_86002F40, D_86002F3C, D_86002F3E);
 }
 
@@ -720,8 +722,8 @@ void func_86000C18(void) {
 
     for (i = 0; i < 4; i++) {
         D_86003B60 = &D_86002F58[i].unk_004;
-        temp_f20 = (410.0f - D_86003B60->unk_000.unk_0B0) / 510.0f;
-        guTranslate(&sp100, D_86003B60->unk_000.unk_0AC, 0.0f, 0.0f);
+        temp_f20 = (410.0f - D_86003B60->unk_000.unk_0AC.y) / 510.0f;
+        guTranslate(&sp100, D_86003B60->unk_000.unk_0AC.x, 0.0f, 0.0f);
         guScale(&spC0, temp_f20, temp_f20, temp_f20);
         guMtxCatL(&spC0, &sp100, var_s1);
 
