@@ -35,7 +35,7 @@ void func_8780024C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_878009BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_878010C8(s16 arg0);
 void func_8780118C(s16 arg0, s16 arg1, s16 arg2, s16 arg3);
-void func_87801290(s32* arg0, s32* arg1, s8* arg2, s8* arg3, s32 arg4);
+void func_87801290(s32* arg0, s32* arg1, char* arg2, char* arg3, s32 arg4);
 s32 func_878013D4(UNUSED unk_D_800AC870* arg0, char* arg1);
 void func_87801400(s32 arg0, s16 arg1, s16 arg2, f32 arg3, f32 arg4);
 void func_87801644(s32 arg0, s16 arg1, s16 arg2, f32 arg3);
