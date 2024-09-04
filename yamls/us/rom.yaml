@@ -722,9 +722,12 @@
     subsegments:
     - [0x134680, textbin,   fragments/10/fragment10_header]
     - [0x1346A0, c,      fragments/10/fragment10]
-    - [0x136E40, data,   fragments/10/fragment10_data]
+    - [0x136D50, c,      fragments/10/fragment10_1]
+    - [0x136E40, .data,   fragments/10/fragment10]
+    - [0x137070, .data,   fragments/10/fragment10_1]
+    - [0x1386E0, .rodata,   fragments/10/fragment10]
 
-    - {vram: 0x86404070, type:  bss, name: unk_frag10_bss}
+    - {vram: 0x86404070, type:  .bss, name: fragments/10/fragment10}
 
   - name: fragment10_relocs
     type: code
