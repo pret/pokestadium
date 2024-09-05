@@ -19,12 +19,11 @@
 #define HW_REG(reg, type) *(volatile type*)((reg) | 0xA0000000)
 #endif
 
+#define assert
+
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
 #define SQ(x) ((x) * (x))
-#define ROUND(x) (s32)(((x) >= 0.0) ? ((x) + 0.5) : ((x) - 0.5))
-
-#define assert
 
 // cast thru uintptr_t for integer to pointer casts
 #define INT2VOID(i) ((void *)(uintptr_t)(i))
@@ -45,6 +44,8 @@
 #define CLAMP_ALT(x, min, max) ((x) > (max) ? (max) : (x) < (min) ? (min) : (x))
 #define CLAMP_MAX(x, max) ((x) > (max) ? (max) : (x))
 #define CLAMP_MIN(x, min) ((x) < (min) ? (min) : (x))
+
+#define ROUND_MAX(x) (((x) > 0.0f ? 0.5f : -0.5f) + (x))
 
 #define ABS(x) ((x) >= 0 ? (x) : -(x))
 #define ABS_ALT(x) ((x) < 0 ? -(x) : (x))
