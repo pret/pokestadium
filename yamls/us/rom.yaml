@@ -761,14 +761,18 @@
     vram: 0x86500000
     subsegments:
     - [0x138F20, textbin,   fragments/11/fragment11_header]
-    - [0x138F40, c,      fragments/11/fragment11_138F40]
-    - [0x13B030, c,      fragments/11/fragment11_13B030]
-    - [0x13BB40, data,   fragments/11/fragment11_data]
-    - [0x142170, rodata, fragments/11/fragment11_rodata_142170]
-    - [0x142190, rodata, fragments/11/fragment11_rodata_142190]
-    - [0x1421D0, rodata, fragments/11/fragment11_rodata_1421D0]
+    - [0x138F40, c,      fragments/11/fragment11]
+    - [0x13B030, c,      fragments/11/fragment11_1]
+    - [0x13B8E0, c,      fragments/11/fragment11_2]
+    - [0x13BB40, .data,   fragments/11/fragment11]
+    - [0x13BE70, .data,   fragments/11/fragment11_1]
+    - [0x1420F0, .data,   fragments/11/fragment11_2]
+    - [0x142190, .rodata, fragments/11/fragment11]
+    - [0x1421D0, .rodata, fragments/11/fragment11_1]
+    - [0x1421E0, .rodata, fragments/11/fragment11_2]
 
-    - {vram: 0x865092E0, type:  bss, name: fragment11_bss}
+    - {vram: 0x865092E0, type:  .bss, name: fragments/11/fragment11}
+    - {vram: 0x8650AD80, type:  .bss, name: fragments/11/fragment11_2}
 
   - name: fragment11_relocs
     type: code
