@@ -32,254 +32,22 @@ typedef struct unk_D_86002920 {
 } unk_D_86002920; // size = 0xC
 
 static unk_D_86002920 D_86002920[31] = {
-    {
-        0x87A0,
-        0x1190,
-        0x0032,
-        0x0028,
-        0x0005,
-        0x0000,
-    },
-    {
-        0x87A0,
-        0x1178,
-        0x004B,
-        0x0037,
-        0x0014,
-        0x0000,
-    },
-    {
-        0x87A0,
-        0x1180,
-        0x005C,
-        0x003C,
-        0x001E,
-        0x0000,
-    },
-    {
-        0x87A0,
-        0x11A4,
-        0x0063,
-        0x005A,
-        0x0028,
-        0x0000,
-    },
-    {
-        0xFFFF,
-        0xFFE2,
-        0xFFFF,
-        0xFFF5,
-        0x0000,
-        0x0007,
-    },
-    {
-        0x0000,
-        0x0019,
-        0x000D,
-        0x000D,
-        0x000B,
-        0x000C,
-    },
-    {
-        0x000F,
-        0x000F,
-        0x000D,
-        0x000E,
-        0x0011,
-        0x0011,
-    },
-    {
-        0x000F,
-        0x0010,
-        0x0013,
-        0x0013,
-        0x0011,
-        0x0012,
-    },
-    {
-        0xA5B3,
-        0xA5A4,
-        0xA5AD,
-        0xA5F3,
-        0xA5B0,
-        0xA4CE,
-    },
-    {
-        0xA4CF,
-        0xA4CD,
-        0xA4EB,
-        0xA4C7,
-        0xA5DD,
-        0xA5F3,
-    },
-    {
-        0x0000,
-        0x0000,
-        0xA1A1,
-        0xA1A1,
-        0xA1A1,
-        0xA1A1,
-    },
-    {
-        0xA4C7,
-        0xA1A1,
-        0xA5B8,
-        0xA5E3,
-        0xA5F3,
-        0xA5D7,
-    },
-    {
-        0xA4B7,
-        0xA4C6,
-        0xA1A1,
-        0xA4A6,
-        0xA4A8,
-        0xA4CE,
-    },
-    {
-        0xA5AB,
-        0xA5A6,
-        0xA5F3,
-        0xA5BF,
-        0xA1BC,
-        0xA4F2,
-    },
-    {
-        0x0000,
-        0x0000,
-        0xA4BF,
-        0xA4AF,
-        0xA4B5,
-        0xA4F3,
-    },
-    {
-        0xA1A1,
-        0xA4BF,
-        0xA4BF,
-        0xA4A4,
-        0xA4BF,
-        0xA4D2,
-    },
-    {
-        0xA4C8,
-        0xA4AC,
-        0xA1A1,
-        0xA4AB,
-        0xA4C1,
-        0xA1A3,
-    },
-    {
-        0x0000,
-        0x0000,
-        0xA1A1,
-        0xA1A1,
-        0xA1A1,
-        0xA1A1,
-    },
-    {
-        0xA4F2,
-        0xA1A1,
-        0xA4CA,
-        0xA4AC,
-        0xA4AF,
-        0xA1A1,
-    },
-    {
-        0xA4AA,
-        0xA4B5,
-        0xA4CA,
-        0xA4A4,
-        0xA4C8,
-        0xA1A1,
-    },
-    {
-        0xA5AB,
-        0xA5A6,
-        0xA5F3,
-        0xA5BF,
-        0xA1BC,
-        0xA4DE,
-    },
-    {
-        0xA4C7,
-        0x0000,
-        0xA4C8,
-        0xA4C9,
-        0xA4AB,
-        0xA4CA,
-    },
-    {
-        0xA4A4,
-        0xA4E8,
-        0xA1A3,
-        0x0000,
-        0xA4C1,
-        0xA4E3,
-    },
-    {
-        0xA4AF,
-        0xA4C1,
-        0xA4B9,
-        0xA4EB,
-        0xA1A1,
-        0xA5BF,
-    },
-    {
-        0xA5A4,
-        0xA5DF,
-        0xA5F3,
-        0xA5B0,
-        0xA4CB,
-        0xA4A2,
-    },
-    {
-        0xA4EF,
-        0xA4BB,
-        0xA4C6,
-        0xA1A1,
-        0xA5C6,
-        0xA5F3,
-    },
-    {
-        0xA5DD,
-        0xA4E8,
-        0xA4AF,
-        0x0000,
-        0xA5DC,
-        0xA5BF,
-    },
-    {
-        0xA5F3,
-        0xA4F2,
-        0xA4AA,
-        0xA4B9,
-        0xA4CE,
-        0xA4AC,
-    },
-    {
-        0xA1A1,
-        0xA4B8,
-        0xA4E7,
-        0xA4A6,
-        0xA4BA,
-        0xA4CB,
-    },
-    {
-        0xA5B8,
-        0xA5E3,
-        0xA5F3,
-        0xA5D7,
-        0xA4B9,
-        0xA4EB,
-    },
-    {
-        0xA5B3,
-        0xA5C4,
-        0xA4C0,
-        0xA1A3,
-        0x0000,
-        0x0000,
-    },
+    { 0x87A0, 0x1190, 0x0032, 0x0028, 0x0005, 0x0000 }, { 0x87A0, 0x1178, 0x004B, 0x0037, 0x0014, 0x0000 },
+    { 0x87A0, 0x1180, 0x005C, 0x003C, 0x001E, 0x0000 }, { 0x87A0, 0x11A4, 0x0063, 0x005A, 0x0028, 0x0000 },
+    { 0xFFFF, 0xFFE2, 0xFFFF, 0xFFF5, 0x0000, 0x0007 }, { 0x0000, 0x0019, 0x000D, 0x000D, 0x000B, 0x000C },
+    { 0x000F, 0x000F, 0x000D, 0x000E, 0x0011, 0x0011 }, { 0x000F, 0x0010, 0x0013, 0x0013, 0x0011, 0x0012 },
+    { 0xA5B3, 0xA5A4, 0xA5AD, 0xA5F3, 0xA5B0, 0xA4CE }, { 0xA4CF, 0xA4CD, 0xA4EB, 0xA4C7, 0xA5DD, 0xA5F3 },
+    { 0x0000, 0x0000, 0xA1A1, 0xA1A1, 0xA1A1, 0xA1A1 }, { 0xA4C7, 0xA1A1, 0xA5B8, 0xA5E3, 0xA5F3, 0xA5D7 },
+    { 0xA4B7, 0xA4C6, 0xA1A1, 0xA4A6, 0xA4A8, 0xA4CE }, { 0xA5AB, 0xA5A6, 0xA5F3, 0xA5BF, 0xA1BC, 0xA4F2 },
+    { 0x0000, 0x0000, 0xA4BF, 0xA4AF, 0xA4B5, 0xA4F3 }, { 0xA1A1, 0xA4BF, 0xA4BF, 0xA4A4, 0xA4BF, 0xA4D2 },
+    { 0xA4C8, 0xA4AC, 0xA1A1, 0xA4AB, 0xA4C1, 0xA1A3 }, { 0x0000, 0x0000, 0xA1A1, 0xA1A1, 0xA1A1, 0xA1A1 },
+    { 0xA4F2, 0xA1A1, 0xA4CA, 0xA4AC, 0xA4AF, 0xA1A1 }, { 0xA4AA, 0xA4B5, 0xA4CA, 0xA4A4, 0xA4C8, 0xA1A1 },
+    { 0xA5AB, 0xA5A6, 0xA5F3, 0xA5BF, 0xA1BC, 0xA4DE }, { 0xA4C7, 0x0000, 0xA4C8, 0xA4C9, 0xA4AB, 0xA4CA },
+    { 0xA4A4, 0xA4E8, 0xA1A3, 0x0000, 0xA4C1, 0xA4E3 }, { 0xA4AF, 0xA4C1, 0xA4B9, 0xA4EB, 0xA1A1, 0xA5BF },
+    { 0xA5A4, 0xA5DF, 0xA5F3, 0xA5B0, 0xA4CB, 0xA4A2 }, { 0xA4EF, 0xA4BB, 0xA4C6, 0xA1A1, 0xA5C6, 0xA5F3 },
+    { 0xA5DD, 0xA4E8, 0xA4AF, 0x0000, 0xA5DC, 0xA5BF }, { 0xA5F3, 0xA4F2, 0xA4AA, 0xA4B9, 0xA4CE, 0xA4AC },
+    { 0xA1A1, 0xA4B8, 0xA4E7, 0xA4A6, 0xA4BA, 0xA4CB }, { 0xA5B8, 0xA5E3, 0xA5F3, 0xA5D7, 0xA4B9, 0xA4EB },
+    { 0xA5B3, 0xA5C4, 0xA4C0, 0xA1A3, 0x0000, 0x0000 },
 };
 
 static f32 D_86002A94 = 50.0f;
@@ -294,38 +62,10 @@ typedef struct unk_D_86002A98 {
 } unk_D_86002A98; // size = 0xC
 
 static unk_D_86002A98 D_86002A98[4] = {
-    {
-        0x0014,
-        0x00D7,
-        0xFFFF,
-        0xFFFF,
-        0x0000,
-        0xFFFF,
-    },
-    {
-        0x005A,
-        0x00D7,
-        0xFFFF,
-        0xFFFF,
-        0x00FF,
-        0x00FF,
-    },
-    {
-        0x00A0,
-        0x00D7,
-        0xFFFF,
-        0xFFFF,
-        0xFF00,
-        0x00FF,
-    },
-    {
-        0x00E6,
-        0x00D7,
-        0xFFFF,
-        0xFFFF,
-        0xFFFF,
-        0x00FF,
-    },
+    { 0x0014, 0x00D7, 0xFFFF, 0xFFFF, 0x0000, 0xFFFF },
+    { 0x005A, 0x00D7, 0xFFFF, 0xFFFF, 0x00FF, 0x00FF },
+    { 0x00A0, 0x00D7, 0xFFFF, 0xFFFF, 0xFF00, 0x00FF },
+    { 0x00E6, 0x00D7, 0xFFFF, 0xFFFF, 0xFFFF, 0x00FF },
 };
 
 static u8 D_86002AC8[] = {
@@ -348,17 +88,17 @@ static u32 D_86002B18[] = {
     0x87806398, (u32)&D_6000000,  (u32)&D_1000000,
 };
 
-extern unk_D_86002F30* D_86002F30;
-extern unk_D_86002F34* D_86002F34;
-extern unk_D_86002F34_00C* D_86002F38;
-extern s16 D_86002F3C;
-extern s16 D_86002F3E;
-extern s16 D_86002F40;
-extern u16 D_86002F42;
-extern s16 D_86002F44;
-extern s32 D_86002F48;
-extern s16 D_86002F4C;
-extern s32 D_86002F50;
+static unk_D_86002F30* D_86002F30;
+static unk_D_86002F34* D_86002F34;
+static unk_D_86002F34_00C* D_86002F38;
+static s16 D_86002F3C;
+static s16 D_86002F3E;
+static s16 D_86002F40;
+static u16 D_86002F42;
+static s16 D_86002F44;
+static s32 D_86002F48;
+static s16 D_86002F4C;
+static s32 D_86002F50;
 
 typedef struct unk_D_86002F58_004 {
     /* 0x000 */ unk_D_86002F58_004_000 unk_000;
@@ -385,39 +125,41 @@ typedef struct unk_D_86002F58 {
     /* 0x18E */ char pad18E[2];
 } unk_D_86002F58; // size = 0x190
 
-extern unk_D_86002F58 D_86002F58[4];
-extern unk_D_86002F58_004 D_86003598[4];
-extern u32 D_86003B58;
-extern unk_D_86002F58* D_86003B5C;
-extern unk_D_86002F58_004* D_86003B60;
-extern unk_D_86002F58_004* D_86003B64;
-extern s16 D_86003B68;
-extern s16 D_86003B6A;
-extern s16 D_86003B70[4];
-extern s16 D_86003B78;
-extern unk_D_800AC870* D_86003B7C;
-extern s32 D_86003B80;
+static unk_D_86002F58 D_86002F58[4];
+static unk_D_86002F58_004 D_86003598[4];
+static u32 D_86003B58;
+static unk_D_86002F58* D_86003B5C;
+static unk_D_86002F58_004* D_86003B60;
+static unk_D_86002F58_004* D_86003B64;
+static s16 D_86003B68;
+static s16 D_86003B6A;
+static s16 D_86003B70[4];
+static s16 D_86003B78;
+static unk_D_800AC870* D_86003B7C;
+static s32 D_86003B80;
+static unk_D_86002F58_004_000 D_86003B84[4];
 
-#ifdef NON_MATCHING
 void func_86000020(void) {
     s32 i;
     s32 j;
-    s32 a;
 
-    D_86002F58[0].unk_17A = D_80068BA0[0].unk_08;
-    D_86002F58[1].unk_17A = D_80068BA0[1].unk_08;
-    D_86002F58[2].unk_17A = D_80068BA0[2].unk_08;
-    D_86002F58[3].unk_17A = D_80068BA0[3].unk_08;
+    D_86002F58[0].unk_17A = D_80068BA0->unk_08;
+    D_86002F58[1].unk_17A = D_80068BA4->unk_08;
+    D_86002F58[2].unk_17A = D_80068BA8->unk_08;
+    D_86002F58[3].unk_17A = D_80068BAC->unk_08;
 
-    D_86002F58[0].unk_174 = D_80068BA0[0].unk_06;
-    D_86002F58[1].unk_174 = D_80068BA0[1].unk_06;
-    D_86002F58[2].unk_174 = D_80068BA0[2].unk_06;
-    D_86002F58[3].unk_174 = D_80068BA0[3].unk_06;
+    D_86002F58[0].unk_174 = D_80068BA0->unk_06;
+    D_86002F58[1].unk_174 = D_80068BA4->unk_06;
+    D_86002F58[2].unk_174 = D_80068BA8->unk_06;
+    D_86002F58[3].unk_174 = D_80068BAC->unk_06;
 
     for (i = 0; i < 4; i++) {
         D_86003B5C = &D_86002F58[i];
+
         if (D_86003B5C->unk_000 == 0) {
-            if ((D_86002F48 != 0) && (D_86002F48 != 2) && (D_86002F48 != 3) && (D_86002F48 != 5)) {
+            s32 temp = D_86002F48;
+
+            if ((temp != 0) && (temp != 2) && (temp != 3) && (temp != 5)) {
                 D_86003B5C->unk_174 = 0;
                 D_86003B5C->unk_17A = 0;
             }
@@ -470,29 +212,27 @@ void func_86000020(void) {
     }
 
     if (D_86002F48 == 2) {
-        for (a = 0; a < 4; a++) {
-            D_86003B5C = &D_86002F58[a];
-            for (j = 1; j > 0; j--) {
-                D_86003B5C->unk_176[j] = D_86003B5C->unk_176[j - 1];
-                D_86003B5C->unk_17C[j] = D_86003B5C->unk_17C[j - 1];
+        for (j = 0; j < 4; j++) {
+            D_86003B5C = &D_86002F58[j];
+
+            for (i = 1; i > 0; i--) {
+                D_86003B5C->unk_176[i] = D_86003B5C->unk_176[i - 1];
+                D_86003B5C->unk_17C[i] = D_86003B5C->unk_17C[i - 1];
             }
             D_86003B5C->unk_176[0] = D_86003B5C->unk_174;
             D_86003B5C->unk_17C[0] = D_86003B5C->unk_17A;
         }
     } else {
-        for (a = 0; a < 4; a++) {
-            D_86003B5C = &D_86002F58[a];
-            for (j = 0; j < 2; j++) {
-                D_86003B5C->unk_176[j] = 0;
-                D_86003B5C->unk_17C[j] = 0;
+        for (j = 0; j < 4; j++) {
+            D_86003B5C = &D_86002F58[j];
+
+            for (i = 0; i < 2; i++) {
+                D_86003B5C->unk_176[i] = 0;
+                D_86003B5C->unk_17C[i] = 0;
             }
         }
     }
 }
-#else
-void func_86000020(void);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86000020.s")
-#endif
 
 s32 func_86000410(void) {
     if (func_80007604() != 0) {
@@ -1091,7 +831,6 @@ void func_860017C0(s32 arg0) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_86001C90(void) {
     s32 i;
     s32 temp_lo;
@@ -1103,10 +842,13 @@ void func_86001C90(void) {
     for (i = 0; i < 4; i++) {
         D_86003B5C = &D_86002F58[i];
         D_86003B60 = &D_86003B5C->unk_004;
-        D_86003B60->unk_16C = 0;
+
+        D_86003B5C->unk_004.unk_168 = 0;
         func_8001BD04(&D_86003B60->unk_000, 0);
         D_86003B60->unk_000.unk_04C = 0x10000;
+
         D_86003B70[i] = 0;
+
         D_86003B5C->unk_18C = 1;
     }
 
@@ -1131,14 +873,17 @@ void func_86001C90(void) {
 
             D_86003B58++;
             if (D_86003B58 >= 0x258) {
-                var_s6 = 0;
                 func_87A010D4(0x20009, 0, 0);
+                var_s6 = 0;
             } else {
                 temp_v1 = 0x258 - D_86003B58;
                 if ((temp_v1 % 30) == 0) {
                     temp_lo = temp_v1 / 30;
                     if ((temp_lo < 6) && (temp_lo > 0)) {
                         func_87A010D4(0x2000A, 0, 0);
+                        if (1) {}
+                        if (1) {}
+                        if (1) {}
                     }
                 }
             }
@@ -1153,10 +898,6 @@ void func_86001C90(void) {
 
     func_8004B9C4(0xA);
 }
-#else
-void func_86001C90(void);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86001C90.s")
-#endif
 
 s32 func_86001EEC(void) {
     s32 var_v0 = 0;
@@ -1187,9 +928,9 @@ s32 func_86001EEC(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
 void func_86001F64(void) {
     s32 i;
+    s32 j;
     s32 var_s1;
     s32 var_s3_4;
     s32 var_s5;
@@ -1198,7 +939,7 @@ void func_86001F64(void) {
     D_86002F48 = 3;
     var_s1 = 1;
 
-    while (true) {
+    while (var_s1 != 0) {
         func_86000410();
         func_86000564();
 
@@ -1214,10 +955,6 @@ void func_86001F64(void) {
 
         if (D_8780FC92 != 0) {
             return;
-        }
-
-        if (var_s1 == 0) {
-            break;
         }
     }
 
@@ -1253,8 +990,8 @@ void func_86001F64(void) {
         D_86003B60->unk_000.unk_04C = 0x10000;
     }
 
-    var_s3_4 = 30;
-    while (true) {
+    j = 30;
+    while (j > 0) {
         func_86000410();
         func_86000564();
 
@@ -1269,17 +1006,13 @@ void func_86001F64(void) {
         }
 
         if (D_8780FC94 != 1) {
-            var_s3_4 -= 1;
-        }
-
-        if (var_s3_4 <= 0) {
-            break;
+            j -= 1;
         }
     }
 
     func_87802EB8(1);
 
-    while (true) {
+    while (var_s5 != 0) {
         func_86000410();
         func_86000564();
 
@@ -1299,16 +1032,8 @@ void func_86001F64(void) {
         if (D_8780FC92 != 0) {
             return;
         }
-
-        if (var_s5 == 0) {
-            break;
-        }
     }
 }
-#else
-void func_86001F64(void);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86001F64.s")
-#endif
 
 void func_86002264(void) {
     s32 i;
@@ -1361,7 +1086,6 @@ void func_8600235C(void) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_86002440(void) {
     s32 i;
     MemoryBlock* temp_v0;
@@ -1410,10 +1134,10 @@ void func_86002440(void) {
     D_86002F30 = (unk_D_86002F30*)func_80019D18(0xAE);
 
     for (i = 0; i < 4; i++) {
-        D_86003B60 = &D_86003598[i];
-        D_86003B64 = D_86003B60;
+        D_86003B64 = &D_86003598[i];
+        D_86003B60 = D_86003B64;
 
-        func_8001BB58(&D_86003B64->unk_000);
+        func_8001BB58(&D_86003B60->unk_000);
         func_8001BC34(&D_86003B60->unk_000, 0, 0xAE, D_86002F30->unk_08[0]->unk_00);
         D_86003B60->unk_000.unk_024.x = (i - 1.5f) * D_86002A94;
         D_86003B60->unk_000.unk_024.z = 0.0f;
@@ -1435,10 +1159,6 @@ void func_86002440(void) {
     func_86000478();
     func_87802528();
 }
-#else
-void func_86002440(void);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/6/fragment6/func_86002440.s")
-#endif
 
 void func_86002778(UNUSED s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
