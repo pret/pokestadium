@@ -646,7 +646,7 @@
     - [0x123330, .data,   fragments/6/fragment6]
     - [0x123890, .rodata, fragments/6/fragment6]
 
-    - {vram: 0x86002F30, type:  bss, name: fragment6_bss}
+    - {vram: 0x86002F30, type:  .bss, name: fragments/6/fragment6}
 
   - name: fragment6_relocs
     type: code
