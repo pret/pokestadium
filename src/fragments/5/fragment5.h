@@ -12,7 +12,7 @@ extern s16 D_87B000F2;
 extern s16 D_87B000F4;
 
 void func_87B00020(void);
-s32 func_87B00050(u32);
+u32 func_87B00050(u32);
 
 
 #endif // _FRAGMENT5_H_

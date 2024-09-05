@@ -75,20 +75,24 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x044 */ unk_D_86002F58_004_000_044* unk_044;
     /* 0x048 */ s32 unk_048;
     /* 0x04C */ u32 unk_04C;
-    /* 0x050 */ char pad50[2];
+    /* 0x050 */ char pad050[2];
     /* 0x052 */ s16 unk_052;
     /* 0x054 */ s16 unk_054;
     /* 0x058 */ s32 unk_058;
     /* 0x05C */ s16 unk_05C;
     /* 0x05E */ s16 unk_05E;
     /* 0x060 */ s32 unk_060;
-    /* 0x064 */ char pad64[0x3C];
+    /* 0x064 */ char pad064[0x3C];
     /* 0x0A0 */ s32 unk_0A0;
-    /* 0x0A4 */ char padA4[2];
+    /* 0x0A4 */ char pad0A4[2];
     /* 0x0A6 */ s8 unk_0A6;
-    /* 0x0A7 */ char padA7[5];
+    /* 0x0A7 */ char pad0A7[5];
     /* 0x0AC */ Vec3f unk_0AC;
-    /* 0x0B8 */ char padB8[0xB0];
+    /* 0x0B8 */ char pad0B8[0x24];
+    /* 0x0DC */ Vec3f unk_0DC;
+    /* 0x0E0 */ char pad0E0[0x4];
+    /* 0x0EC */ Vec3f unk_0EC;
+    /* 0x0F8 */ char pad0F8[0x70];
 } unk_D_86002F58_004_000; // size = 0x168
 
 typedef struct unk_D_86002F34_00C {
@@ -132,5 +136,17 @@ struct UnkStruct800AA660 {
     /* 0x2200 */ s32 unk2200;
     /* 0x2204 */ struct UnkInputStruct8000D738 unk2204;
 };
+
+typedef struct unk_D_864027C0 {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ s16 unk_1C;
+} unk_D_864027C0; // size = 0x20
 
 #endif
