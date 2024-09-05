@@ -24,6 +24,8 @@ def getProgressFromMapFile(mapFile: mapfile_parser.MapFile, asmPath: Path, nonma
                 continue
 
             folder = file.filepath.parts[pathIndex]
+            if folder == "fragments":
+                folder = folder + "/" + file.filepath.parts[pathIndex + 1]
 
             if ".a" in folder:
                 folder = folder.split('.a')[0]
