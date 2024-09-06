@@ -23,6 +23,7 @@ void func_8000B430(long ms) {
     }
 }
 
+// Is this a Sticker Station?
 s32 func_8000B4C4(void) {
     s32 i;
     s32 ret;
@@ -31,6 +32,7 @@ s32 func_8000B4C4(void) {
     if (D_800697E0 == 0) {
         u8* buffer;
         osPfsIsPlug(&gSIEventMesgQueue, &sp2F);
+        // is controller 4 plugged in? (why?)
         if (sp2F & 8) {
             Cont_BlockEepromQueue();
             for (buffer = D_800A82B0, i = 0; i < 32; i++) {

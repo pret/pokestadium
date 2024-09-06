@@ -14,6 +14,31 @@
 #define POOL_END_4MB 0x80400000
 #define POOL_END_6MB 0x80600000
 
+// game states
+#define STATE_N64_LOGO_INTRO        0x01 // N64 Logo + Intro
+#define STATE_TITLE_SCREEN          0x02 // Title screen
+#define STATE_N64DD_BOOT_UNUSED     0x03 // seems to be unused, but boots an N64DD disk. Leftover from JP.
+#define STATE_MENU_SELECT           0x04 // Menu Select (select Battle Now!, POKeMON Stadium, etc)
+#define STATE_AREA_SELECT           0x10 // Area Select (select Stadium, GB Tower, Gym Leader Castle, etc)
+#define STATE_GALLERY               0x11 // Gallery
+#define STATE_EVENT_BATTLE          0x12 // Event Battle
+#define STATE_OPTIONS               0x13 // Options
+#define STATE_FAST_N64_LOGO         0x40 // N64 Logo but no Intro. The Sticker Station might use this for booting quickly and into Gallery mode.
+#define STATE_STADIUM_MENU          0x20 // POKeMON Stadium (the main Stadium mode) 
+#define STATE_FREE_BATTLE           0x21 // Free Battle
+#define STATE_VS_MEWTWO             0x22 // VS Mewtwo
+#define STATE_KIDS_CLUB             0x23 // Kids Club
+#define STATE_VICTORY_PALACE        0x24 // Victory Palace
+#define STATE_POKEMON_LAB           0x25 // POKeMON Lab
+#define STATE_GB_TOWER              0x26 // GB Tower
+#define STATE_GYM_LEADER_CASTLE     0x27 // Gym Leader Castle
+#define STATE_BATTLE_NOW_1P         0x28 // Battle Now! (1P)
+#define STATE_BATTLE_NOW_2P         0x29 // Battle Now! (2P)
+#define STATE_BATTLE_FROM_EVENT     0x2A // Battle menu from Event Battle
+#define STATE_STUBBED_DEBUG         0x80 // stubbed/removed debug menu. This could have been the Early Pokedex Menu seen in the JP version.
+#define STATE_FAST_BATTLE           0x81 // most likely the P97/P98 mode(s) and uses GB Pak 1 and 2 for the teams for an immediate battle; skips even the VS screen and Battle Rule screen. However, the music/stadium used is probably set by some other menu, because it seems to use the outdoor Free Battle area + Poke Cup 1-3, which isnt correct.
+#define STATE_KIDS_CLUB_TITLE       0x82 // Kids Club, but it returns to the title screen. Possibly for a Kiosk/demo version.
+
 /*
  * Dynamic heap with an indetermate amount of space. This pool can either end at 4MB or
  * 6MB depending on osMemSize, which is really strange as it should be using the whole
@@ -218,5 +243,9 @@ extern u8 D_87B000C8;
 extern u8 D_87B000CC;
 extern u8 D_87B000D0;
 extern u8 D_87B000D4;
+
+extern s32 gCurrentGameState;
+extern s32 gLastGameState;
+extern s8 D_800AF732;
 
 #endif
