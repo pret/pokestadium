@@ -386,6 +386,7 @@
     - [0x7CD10, rodata, rom_rodata_7CD10]
     - [0x7CD40, rodata, rom_rodata_7CD40]
     - [0x7CEC0, rodata, rom_rodata_7CEC0]
+    - [0x7CED0, .rodata, 29BA0]
     - [0x7CFD0, rodata, rom_rodata_7CFD0]
     - [0x7D030, rodata, rom_rodata_7D030]
     - [0x7D040, rodata, rom_rodata_7D040]

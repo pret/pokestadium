@@ -5,7 +5,7 @@
 #include "reset.h"
 #include "util.h"
 
-extern void func_8002B330(); // thread 6 function
+extern void Game_Thread(void *arg); // thread 6 function
 
 // entry .bss
 u8 D_8007ED80[0xF180 - 0xED80]; // unknown, start of .bss
@@ -30,7 +30,7 @@ void Idle_ThreadEntry(UNUSED void* unused) {
     func_8000D564();
     func_800019C8();
     SoftReset_CreateThread();
-    osCreateThread(&pThreads, 6, &func_8002B330, 0, &D_800818E0, 20);
+    osCreateThread(&pThreads, 6, &Game_Thread, 0, &D_800818E0, 20);
     osStartThread(&pThreads);
     osSetThreadPri(NULL, 0);
 
