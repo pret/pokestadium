@@ -316,13 +316,15 @@
     - [0x66B50, lib, libultra, sethwinterrupt]
 
     #- [0x66BC0, asm]
-    - [0x66BC0, bin]
-    - [0x66C90, bin, F3DEX2]
-    - [0x68020, bin] # rest of rom part 1
+    - [0x66BC0, data]
+    - [0x66C90, data, F3DEX2]
+    - [0x68020, data, unk_F3DEX2_68020]
+    - [0x68C80, data, unk_F3DEX2_68C80]
     
-    # .data is somewhere in here
+    # .data
+    - [0x69770, data, rom_data_69770] # dp_intro
     - [0x69790, .data, util]
-    - [0x697A0, bin, rom_data_697A0]
+    - [0x697A0, data, rom_data_697A0]
     - [0x697B0, .data, 6BC0]
     - [0x697C0, .data, stage_loader]
     - [0x6A1B0, .data, crash_screen]
@@ -488,6 +490,7 @@
     bss_size: 0x0 # This heap extends to the end of RAM.
     start: 0x7F980
     vram: 0x80104BB0
+    follows_vram: text
     subsegments:
     # .bss
     - {vram: 0x80104BB0, type: .bss, name: heap}
@@ -2419,6 +2422,7 @@
   - [0x7994B0, bin]
   - [0x79AFB0, bin]
   - [0x79B8F0]
+  
   
   # rest of ROM.. part 2. This area and beyond NEEDS to be hard-aligned to this address.
   # for the ROM to be shiftable, we need a way to fix this area beyond here to this address and for the prior area
