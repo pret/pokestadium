@@ -44,7 +44,7 @@
  * 6MB depending on osMemSize, which is really strange as it should be using the whole
  * 8MB of the expansion pak.
  */
-extern u8 gPool[1];
+extern u8 gPool[];
 
 extern Gfx* gDisplayListHead;
 
