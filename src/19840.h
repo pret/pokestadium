@@ -22,14 +22,15 @@ typedef struct unk_func_8001C248 {
     /* 0x024 */ s32 unk_024;
 } unk_func_8001C248;
 
+void func_800196DC(void);
 void func_8001987C(void);
+void func_800198E4(unk_D_86002F58_004_000_010*, u16, s32);
 void func_80019A7C(unk_D_86002F58_004_000_010*, s32, s32, unk_func_8001C248*);
 s32 func_80019C08(unk_D_86002F58_004_000_010*, unk_func_8001C248*);
 s32 func_80019C58(unk_D_86002F58_004_000_010*, unk_func_8001C248*);
 s32 func_80019CA8(unk_D_86002F58_004_000_010*);
 void func_80019CE0(unk_D_86002F58_004_000_010*);
 unk_D_86002F30* func_80019D18(s32);
-void func_800198E4(unk_D_86002F58_004_000_010*, u16, s32);
 
 
 #endif // _19840_H_
