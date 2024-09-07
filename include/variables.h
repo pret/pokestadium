@@ -15,29 +15,31 @@
 #define POOL_END_6MB 0x80600000
 
 // game states
-#define STATE_N64_LOGO_INTRO        0x01 // N64 Logo + Intro
-#define STATE_TITLE_SCREEN          0x02 // Title screen
-#define STATE_N64DD_BOOT_UNUSED     0x03 // seems to be unused, but boots an N64DD disk. Leftover from JP.
-#define STATE_MENU_SELECT           0x04 // Menu Select (select Battle Now!, POKeMON Stadium, etc)
-#define STATE_AREA_SELECT           0x10 // Area Select (select Stadium, GB Tower, Gym Leader Castle, etc)
-#define STATE_GALLERY               0x11 // Gallery
-#define STATE_EVENT_BATTLE          0x12 // Event Battle
-#define STATE_OPTIONS               0x13 // Options
-#define STATE_FAST_N64_LOGO         0x40 // N64 Logo but no Intro. The Sticker Station might use this for booting quickly and into Gallery mode.
-#define STATE_STADIUM_MENU          0x20 // POKeMON Stadium (the main Stadium mode) 
-#define STATE_FREE_BATTLE           0x21 // Free Battle
-#define STATE_VS_MEWTWO             0x22 // VS Mewtwo
-#define STATE_KIDS_CLUB             0x23 // Kids Club
-#define STATE_VICTORY_PALACE        0x24 // Victory Palace
-#define STATE_POKEMON_LAB           0x25 // POKeMON Lab
-#define STATE_GB_TOWER              0x26 // GB Tower
-#define STATE_GYM_LEADER_CASTLE     0x27 // Gym Leader Castle
-#define STATE_BATTLE_NOW_1P         0x28 // Battle Now! (1P)
-#define STATE_BATTLE_NOW_2P         0x29 // Battle Now! (2P)
-#define STATE_BATTLE_FROM_EVENT     0x2A // Battle menu from Event Battle
-#define STATE_STUBBED_DEBUG         0x80 // stubbed/removed debug menu. This could have been the Early Pokedex Menu seen in the JP version.
-#define STATE_FAST_BATTLE           0x81 // most likely the P97/P98 mode(s) and uses GB Pak 1 and 2 for the teams for an immediate battle; skips even the VS screen and Battle Rule screen. However, the music/stadium used is probably set by some other menu, because it seems to use the outdoor Free Battle area + Poke Cup 1-3, which isnt correct.
-#define STATE_KIDS_CLUB_TITLE       0x82 // Kids Club, but it returns to the title screen. Possibly for a Kiosk/demo version.
+typedef enum {
+    STATE_N64_LOGO_INTRO      = 0x01, // N64 Logo + Intro
+    STATE_TITLE_SCREEN        = 0x02, // Title screen
+    STATE_N64DD_BOOT_UNUSED   = 0x03, // seems to be unused, but boots an N64DD disk. Leftover from JP.
+    STATE_MENU_SELECT         = 0x04, // Menu Select (select Battle Now!, POKeMON Stadium, etc)
+    STATE_AREA_SELECT         = 0x10, // Area Select (select Stadium, GB Tower, Gym Leader Castle, etc)
+    STATE_GALLERY             = 0x11, // Gallery
+    STATE_EVENT_BATTLE        = 0x12, // Event Battle
+    STATE_OPTIONS             = 0x13, // Options
+    STATE_FAST_N64_LOGO       = 0x40, // N64 Logo but no Intro. The Sticker Station might use this for booting quickly and into Gallery mode.
+    STATE_STADIUM_MENU        = 0x20, // POKeMON Stadium (the main Stadium mode) 
+    STATE_FREE_BATTLE         = 0x21, // Free Battle
+    STATE_VS_MEWTWO           = 0x22, // VS Mewtwo
+    STATE_KIDS_CLUB           = 0x23, // Kids Club
+    STATE_VICTORY_PALACE      = 0x24, // Victory Palace
+    STATE_POKEMON_LAB         = 0x25, // POKeMON Lab
+    STATE_GB_TOWER            = 0x26, // GB Tower
+    STATE_GYM_LEADER_CASTLE   = 0x27, // Gym Leader Castle
+    STATE_BATTLE_NOW_1P       = 0x28, // Battle Now! (1P)
+    STATE_BATTLE_NOW_2P       = 0x29, // Battle Now! (2P)
+    STATE_BATTLE_FROM_EVENT   = 0x2A, // Battle menu from Event Battle
+    STATE_STUBBED_DEBUG       = 0x80, // stubbed/removed debug menu. This could have been the Early Pokedex Menu seen in the JP version.
+    STATE_FAST_BATTLE         = 0x81, // most likely the P97/P98 mode(s) and uses GB Pak 1 and 2 for the teams for an immediate battle; skips even the VS screen and Battle Rule screen. However, the music/stadium used is probably set by some other menu, because it seems to use the outdoor Free Battle area + Poke Cup 1-3, which isnt correct.
+    STATE_KIDS_CLUB_TITLE     = 0x82, // Kids Club, but it returns to the title screen. Possibly for a Kiosk/demo version.
+} GameState;
 
 /*
  * Dynamic heap with an indetermate amount of space. This pool can either end at 4MB or
@@ -48,17 +50,19 @@ extern u8 gPool[];
 
 extern Gfx* gDisplayListHead;
 
-extern u32 D_1000000;
-extern u32 D_3000000;
-extern u32 D_4000000;
-extern u32 D_4000008;
-extern u32 D_4000810;
-extern u32 D_4001018;
-extern u32 D_4001820;
-extern u32 D_5000000;
-extern u32 D_6000000;
-extern u32 D_81000000;
-extern u32 D_8D000000;
+extern u8 D_1000000[];
+extern u8 D_3000000[];
+extern u8 D_4000000[];
+extern u8 D_4000008[];
+extern u8 D_4000810[];
+extern u8 D_4001018[];
+extern u8 D_4001820[];
+extern u8 D_5000000[];
+extern u8 D_6000000[];
+extern u8 D_8D000000[];
+
+extern void* D_800AA688;
+
 
 typedef struct unk_D_80068BA0 {
     /* 0x00 */ char pad00[0x2];
@@ -76,44 +80,17 @@ extern unk_D_80068BA0* D_80068BAC;
 extern Gfx D_8006F518[];
 extern Gfx D_8006F630[];
 
-typedef struct unk_D_800A7450 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ void* unk_0C;
-} unk_D_800A7450; // size >= 0x10
-extern unk_D_800A7450 D_800A7450;
-
-extern Mtx D_800A7468;
-extern s32 gShowCPUProfiler;
-extern s32 gShowMEMProfiler;
-
-
-typedef struct unk_func_80007444 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s8 unk_0C;
-    /* 0x0D */ s8 unk_0D;
-    /* 0x0E */ s8 unk_0E;
-    /* 0x0F */ s8 unk_0F;
-    /* 0x10 */ s8 unk_10;
-    /* 0x11 */ u8 unk_11;
-    /* 0x12 */ u8 unk_12;
-    /* 0x13 */ u8 unk_13;
-    /* 0x14 */ u16 unk_14;
-    /* 0x16 */ s8 unk_16;
-    /* 0x18 */ void* unk_18[3];
-} unk_func_80007444; // size = 0x24
-extern unk_func_80007444* D_800A7464;
-
-extern Gfx* D_800A74B0;
+extern u8 D_82000000;
+extern u8 D_81400000;
+extern u8 D_86B00000;
+extern u8 D_87800000;
+extern u8 D_87900000;
+extern u8 D_82100000;
+extern u8 D_84300000;
+extern u8 D_86200000;
+extern u8 D_86800000;
+extern u8 D_86C00000;
+extern u8 D_87A00000;
 
 typedef struct unk_D_800A7440 {
 	/* 0x00 */ s16 x1;
@@ -243,9 +220,5 @@ extern u8 D_87B000C8;
 extern u8 D_87B000CC;
 extern u8 D_87B000D0;
 extern u8 D_87B000D4;
-
-extern s32 gCurrentGameState;
-extern s32 gLastGameState;
-extern s8 D_800AF732;
 
 #endif

@@ -1,4 +1,4 @@
-#include "global.h"
+#include "E1C0.h"
 #include <PR/os_internal_reg.h>
 #include "dp_intro.h"
 #include "sections.h"
@@ -56,15 +56,16 @@ void func_8000D678(void* unused) {
     }
 }
 
-void func_8000D738(struct UnkInputStruct8000D738* arg0) {
+void func_8000D738(UnkInputStruct8000D738* arg0) {
     s32 temp_v0;
 
     main_pool_push_state('GBEM');
     D_800AA660 = main_pool_alloc(0x2210, 0);
     D_800AA664 = main_pool_alloc(0x21E0, 0);
-    func_80004454(((u32)((u32)&fragment1_TEXT_START & 0x0FF00000) >> 0x14) - 0x10, &fragment1_ROM_START,
-                  &fragment1_relocs_ROM_END);
-    temp_v0 = func_800044F4(&_3BA190_ROM_START, &_3CB130_ROM_START, 1, 1);
+
+    func_80004454(FRAGMENT_ID(fragment1), fragment1_ROM_START, fragment1_relocs_ROM_END);
+    temp_v0 = ASSET_LOAD2(func_800044F4, _3BA190, 1, 1);
+
     D_800AA660->unk21FC = func_8000484C(temp_v0, 0);
     D_800AA660->unk2200 = func_8000484C(temp_v0, 1);
     D_800AA660->unk2204 = *arg0;
@@ -82,7 +83,7 @@ OSMesg* func_8000D8A8(void) {
     return mesg;
 }
 
-void func_8000D8DC(struct UnkInputStruct8000D738* arg0) {
+void func_8000D8DC(UnkInputStruct8000D738* arg0) {
     *arg0 = D_800AA660->unk2204;
     func_8000B318(D_800AA668);
     osViBlack(1U);

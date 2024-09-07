@@ -5,7 +5,7 @@
 #include "reset.h"
 #include "util.h"
 
-extern void Game_Thread(void *arg); // thread 6 function
+extern void Game_Thread(void* arg); // thread 6 function
 
 // entry .bss
 u8 D_8007ED80[0xF180 - 0xED80]; // unknown, start of .bss
