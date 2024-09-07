@@ -946,12 +946,13 @@ void func_86402130(void) {
 void func_864025A0(UNUSED s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
-    main_pool_push_state(0x4D494E49);
+    main_pool_push_state('MINI');
+
     func_80005E40(0x18000, 0);
     sp24 = func_80007444(0, 1, 3, 1, 2, 1);
     D_87B000E0 = func_8001E94C(0x16, 0);
-    func_80004258(((u32)&D_1000000 & 0x0F000000) >> 0x18, _4BD6B0_ROM_START, _4BE810_ROM_START, 0);
-    func_80004454((((u32)&D_81000000 & 0x0FF00000) >> 0x14) - 0x10, fragment31_ROM_START, fragment32_ROM_START);
+    ASSET_LOAD(D_1000000, _4BD6B0, 0);
+    FRAGMENT_LOAD(func_80004454, fragment31);
     func_86402130();
     func_80007678(sp24);
     func_86401B3C();
@@ -960,6 +961,8 @@ void func_864025A0(UNUSED s32 arg0, UNUSED s32 arg1) {
     func_800076C0();
     func_8001E9CC();
     func_80005EAC();
-    main_pool_pop_state(0x4D494E49);
+
+    main_pool_pop_state('MINI');
+
     func_87803118();
 }

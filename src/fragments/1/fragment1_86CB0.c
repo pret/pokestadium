@@ -1,6 +1,5 @@
 #include "global.h"
 
-
 void func_81207330(void) {
 }
 

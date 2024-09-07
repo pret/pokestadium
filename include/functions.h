@@ -9,10 +9,6 @@ s32 func_8005A990(OSPiHandle *);
 // bcopy.s
 void _bcopy(void *, void *, u32);
 
-// 3FB0.s
-void func_80003B30(void *, s32, s32, s32); // types unknown
-void func_80004200();
-
 // 5580.s
 void func_80004CC0(OSThread *, s32, s32);
 void func_80004CF4(void *); // types unknown
@@ -37,9 +33,6 @@ void func_8000D564(void);
 
 // E570.s
 void func_8000D970(OSPfs *);
-
-// 29BA0.s
-void func_8002B274(s32, s32);
 
 // exception_set.s
 void set_watch_lohi(s32);
