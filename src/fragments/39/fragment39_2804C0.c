@@ -1,6 +1,5 @@
 #include "global.h"
 
-
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/39/fragment39_2804C0/func_82504820.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/39/fragment39_2804C0/func_82504838.s")

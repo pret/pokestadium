@@ -122,10 +122,10 @@ typedef struct unk_D_86002F30 {
     /* 0x08 */ unk_D_86002F58_004_000_004* unk_08[4];
 } unk_D_86002F30; // size = 0x18 ??
 
-struct UnkInputStruct8000D738 {
-    s32 unk0;
-    s32 unk4;
-};
+typedef struct UnkInputStruct8000D738 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x00 */ s32 unk_04;
+} UnkInputStruct8000D738; // size = 0x8
 
 struct UnkStruct800AA660 {
     /* 0x0000 */ OSThread thread;

@@ -170,6 +170,12 @@ static u32 D_80068CB0[] = {
     0x00111001, 0x11000011, 0x00011110, 0x11001101, 0x11001111, 0x10000110, 0x00110001, 0x10000000, 0x00000000,
 };
 
+static unk_D_800A7450 D_800A7450;
+static unk_func_80007444* D_800A7464;
+static Mtx D_800A7468;
+static char pad_D_800A74A8[0x8];
+static Gfx* D_800A74B0;
+
 s32 func_80007A58(void);
 void func_80007FC4(Gfx**, s32);
 void func_800080E0(void);

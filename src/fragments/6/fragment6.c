@@ -68,16 +68,50 @@ static unk_D_86002A98 D_86002A98[4] = {
     { 0x00E6, 0x00D7, 0xFFFF, 0xFFFF, 0xFFFF, 0x00FF },
 };
 
-static u8 D_86002AC8[] = {
-    0x03, 0x03, 0xED, 0x80, 0x00, 0x0E, 0x00, 0x00, 0x03, 0x03, 0xF1, 0x80, 0x00, 0x02,
-    0x00, 0x00, 0x03, 0x03, 0xF5, 0x80, 0x00, 0x06, 0x00, 0x00, 0x03, 0x03, 0xF1, 0x80,
-    0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+static unk_func_87801684 D_86002AC8[] = {
+    {
+        0x0303ED80,
+        0x000E,
+    },
+    {
+        0x0303F180,
+        0x0002,
+    },
+    {
+        0x0303F580,
+        0x0006,
+    },
+    {
+        0x0303F180,
+        0x0002,
+    },
+    {
+        NULL,
+        0x0000,
+    },
 };
 
-static u8 D_86002AF0[] = {
-    0x03, 0x04, 0x05, 0x80, 0x00, 0x12, 0x00, 0x00, 0x03, 0x04, 0x09, 0x80, 0x00, 0x02,
-    0x00, 0x00, 0x03, 0x04, 0x0D, 0x80, 0x00, 0x08, 0x00, 0x00, 0x03, 0x04, 0x09, 0x80,
-    0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+static unk_func_87801684 D_86002AF0[] = {
+    {
+        0x03040580,
+        0x0012,
+    },
+    {
+        0x03040980,
+        0x0002,
+    },
+    {
+        0x03040D80,
+        0x0008,
+    },
+    {
+        0x03040980,
+        0x0002,
+    },
+    {
+        NULL,
+        0x0000,
+    },
 };
 
 static u32 D_86002B18[] = {
@@ -932,7 +966,6 @@ void func_86001F64(void) {
     s32 i;
     s32 j;
     s32 var_s1;
-    s32 var_s3_4;
     s32 var_s5;
 
     var_s5 = 1;
@@ -1163,14 +1196,17 @@ void func_86002440(void) {
 void func_86002778(UNUSED s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
-    main_pool_push_state(0x4D494E49);
+    main_pool_push_state('MINI');
+
     func_80005E40(0x20000, 0);
     sp24 = (unk_func_80007444*)func_80007444(0, 1, 3, 1, 2, 1);
     D_86003B7C = func_8001E94C(0x36, 0);
-    func_80004258(((u32)&D_1000000 & 0x0F000000) >> 0x18, (void*)_4BD6B0_ROM_START, (void*)_4BE810_ROM_START, 0);
-    func_80004454((((u32)fragment31_VRAM & 0x0FF00000) >> 0x14) - 0x10, (void*)fragment31_ROM_START,
-                  (void*)fragment32_ROM_START);
-    func_80004454((((u32)&D_8D000000 & 0x0FF00000) >> 0x14) - 0x10, (void*)_5C7A70_ROM_START, (void*)_5C7AD0_ROM_START);
+
+    ASSET_LOAD(D_1000000, _4BD6B0, 0);
+    FRAGMENT_LOAD(func_80004454, fragment31);
+
+    func_80004454((((u32)D_8D000000 & 0x0FF00000) >> 0x14) - 0x10, _5C7A70_ROM_START, _5C7A70_ROM_END);
+
     func_86002440();
     func_878029C0();
     func_80007678(sp24);
@@ -1194,6 +1230,8 @@ void func_86002778(UNUSED s32 arg0, UNUSED s32 arg1) {
     func_800076C0();
     func_8001E9CC();
     func_80005EAC();
-    main_pool_pop_state(0x4D494E49);
+
+    main_pool_pop_state('MINI');
+
     func_87803118();
 }
