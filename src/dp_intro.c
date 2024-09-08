@@ -2,18 +2,13 @@
 #include <PR/os_internal_reg.h>
 #include "global.h"
 #include "dp_intro.h"
+#include "5580.h"
 #include "6BC0.h"
 #include "crash_screen.h"
 #include "profiler.h"
 #include "memory.h"
 
 // dp_intro.c
-
-struct UnkStruct80001380 {
-    OSMesg mesg;
-    OSMesgQueue queue;
-    OSTask task;
-};
 
 struct UnkArray4 {
     u8 unk0;
@@ -62,9 +57,7 @@ struct UnkStruct80083CA0_2 {
 
 extern struct UnkStruct80083CA0_2 D_80083CA0;
 
-extern struct UnkStruct80001380 D_800846C0;
-
-extern void func_800049AC();
+extern UnkStruct80001380 D_800846C0;
 
 extern struct UnkArray4 D_8008472C;
 extern struct UnkArray4 D_8008473C;
@@ -72,7 +65,6 @@ extern struct UnkArray4 D_8008474C;
 
 extern s32 D_80068B70;
 
-extern u64 _binary_assets_us_F3DEX2_bin_start[];
 extern u64 F3DEX2_data_bin[]; // F3DEX2_data.bin
 extern u64 D_80084860[0x1];
 extern u64 D_80085870[0x1];
@@ -105,7 +97,7 @@ extern u64 D_80084760[0x100 / sizeof(u64)];
 void func_80001AD4(u16 color);
 void func_80001C1C(struct UnkArray4* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, s32 arg5, s32 arg6, s32 arg7);
 
-void func_80001380(struct UnkStruct80001380* arg0) {
+void func_80001380(UnkStruct80001380* arg0) {
     arg0->task.t.type = 1;
     arg0->task.t.flags = 0;
     arg0->task.t.ucode_boot = D_80084760;
@@ -123,7 +115,7 @@ void func_80001380(struct UnkStruct80001380* arg0) {
     osCreateMesgQueue(&arg0->queue, &arg0->mesg, 1);
 }
 
-void func_80001444(struct UnkStruct80001380* arg0, struct UnkArray4* arg1, s32 arg2) {
+void func_80001444(UnkStruct80001380* arg0, struct UnkArray4* arg1, s32 arg2) {
     arg0->task.t.data_ptr = (void*)(uintptr_t)arg1->unk4;
     arg0->task.t.data_size = arg1->unk8;
     func_800053B4(arg0, arg2);
