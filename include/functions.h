@@ -14,7 +14,6 @@ void func_80004CC0(OSThread *, s32, s32);
 void func_80004CF4(void *); // types unknown
 void func_80004D20(void *); // types unknown
 void func_800052B4(void);
-void func_800053B4(void *, s32); // types unknown
 void func_80005328(void *); // types unknown
 
 // C030.s
