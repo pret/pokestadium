@@ -3,6 +3,7 @@
 
 #include "global.h"
 
+void func_8003D68C(s32);
 void func_8003D918(u32 arg0, u32 arg1);
 void func_8003DB84(s32 arg0);
 void func_80041A98(void);

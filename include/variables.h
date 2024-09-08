@@ -52,6 +52,7 @@ extern Gfx* gDisplayListHead;
 extern u64 _binary_assets_us_F3DEX2_bin_start[];
 
 extern u8 D_1000000[];
+extern u8 D_2000000[];
 extern u8 D_3000000[];
 extern u8 D_4000000[];
 extern u8 D_4000008[];
@@ -61,7 +62,6 @@ extern u8 D_4001820[];
 extern u8 D_5000000[];
 extern u8 D_6000000[];
 extern u8 D_8D000000[];
-
 extern void* D_800AA688;
 
 

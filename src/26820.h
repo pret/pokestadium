@@ -16,6 +16,7 @@ typedef struct unk_func_80027F24 {
 void func_80026684(s32, s32);
 void func_80027F24(unk_func_80027F24*);
 void func_80027F40(unk_func_80027F24*);
+void func_80028070(u16*);
 void func_800280D4(s32);
 void func_800284B4(s32);
 void func_80028AFC(s32);
