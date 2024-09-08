@@ -49,6 +49,7 @@ typedef enum {
 extern u8 gPool[];
 
 extern Gfx* gDisplayListHead;
+extern u64 _binary_assets_us_F3DEX2_bin_start[];
 
 extern u8 D_1000000[];
 extern u8 D_3000000[];
