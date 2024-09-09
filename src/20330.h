@@ -4,6 +4,8 @@
 #include "global.h"
 
 void func_8001F730(void);
+void func_8001F738(unk_D_80068BA0*);
+void func_8001F750(void);
 
 
 #endif // _20330_H_

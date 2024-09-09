@@ -58,7 +58,7 @@ void func_8001C604(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0, 0, 0);
 }
 
-void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_16b, arg5, arg3, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
