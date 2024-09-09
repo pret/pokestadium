@@ -15,7 +15,7 @@ void func_8001CF10(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, 
 void func_8001D12C(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6);
 void func_8001D348(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6);
 void func_8001D560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, u32* arg5, s16 arg6, s32 arg7);
-void func_8001D924(u32 arg0);
+void func_8001D924(u8* arg0);
 void func_8001DBDC(u32 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
 void func_8001E000(s16 arg0, s16 arg1, s16 arg2, f32 arg3, Vtx* arg4, u32 arg5);
 Vtx* func_8001E490(void);

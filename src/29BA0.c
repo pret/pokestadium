@@ -518,7 +518,7 @@ void func_8002A6C0(void) {
 void func_8002A728(void) {
     s32 sp34;
     UnkInputStruct8000D738 sp2C;
-    unk_func_80027F24 sp24;
+    unk_func_8002A728 sp24;
 
     main_pool_push_state('EMU0');
 
