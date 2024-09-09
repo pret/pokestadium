@@ -39,7 +39,7 @@ typedef struct unk_D_86002F58_004_000_010 {
 } unk_D_86002F58_004_000_010; // size >= 0x2C
 
 typedef struct unk_D_86002F58_004_000_004 {
-    /* 0x00 */ struct unk_D_86002F58_004_000_004* unk_00;
+    /* 0x00 */ struct unk_D_86002F58_004_000_004* unk_00[4];
     /* 0x04 */ unk_D_86002F58_004_000_00C* unk_04;
     /* 0x08 */ unk_D_86002F58_004_000_010* unk_08;
 } unk_D_86002F58_004_000_004; // size >= 0x0C
@@ -119,7 +119,7 @@ typedef struct unk_D_86002F34 {
 // Are unk_D_86002F30 and unk_D_800AC840 the same?
 typedef struct unk_D_86002F30 {
     /* 0x00 */ char unk00[0x8];
-    /* 0x08 */ unk_D_86002F58_004_000_004* unk_08[4];
+    /* 0x08 */ unk_D_86002F58_004_000_004* unk_08;
 } unk_D_86002F30; // size = 0x18 ??
 
 typedef struct UnkInputStruct8000D738 {
