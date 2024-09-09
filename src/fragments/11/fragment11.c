@@ -754,9 +754,9 @@ void func_86501AAC(void) {
                 func_8001BB58(D_8650AB2C);
 
                 if (i == 0) {
-                    func_8001BC34(D_8650AB2C, 0, 0xC5, D_87B000E4->unk_08[0]->unk_00);
+                    func_8001BC34(D_8650AB2C, 0, 0xC5, D_87B000E4->unk_08->unk_00[0]);
                 } else {
-                    func_8001BC34(D_8650AB2C, 0, 0xC6, D_87B000E4->unk_08[0]->unk_00);
+                    func_8001BC34(D_8650AB2C, 0, 0xC6, D_87B000E4->unk_08->unk_00[0]);
                 }
 
                 D_8650AB28->unk_008 = 0;
@@ -804,7 +804,7 @@ void func_86501AAC(void) {
             D_8650AB2C = D_86502CA0[j];
 
             func_8001BB58(D_8650AB2C);
-            func_8001BC34(D_8650AB2C, 0, sp5C[j], D_87B000E4->unk_08[0]->unk_00);
+            func_8001BC34(D_8650AB2C, 0, sp5C[j], D_87B000E4->unk_08->unk_00[0]);
             func_8001BD04(D_8650AB2C, 0);
             func_80017464(D_8650AB2C, D_8650AB2C->unk_044->unk_0A);
         }
