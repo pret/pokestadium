@@ -525,7 +525,7 @@
     - [0xAA6D0,  rodata, fragments/1/fragment1_rodata_AA6D0]
     - [0xAA8F0,  rodata, fragments/1/fragment1_rodata_AA8F0]
 
-    - {vram: 0x8122B1E0, type:  bss, name: fragment1_bss}
+    - {vram: 0x8122B1E0, type:  bss, name: fragments/1/fragment1_bss}
 
   - name: fragment1_relocs
     type: code
@@ -594,7 +594,7 @@
     - [0x11E950, rodata,  fragments/3/fragment3_rodata_11E950]
     - [0x11E9A0, rodata,  fragments/3/fragment3_rodata_11E9A0]
 
-    - {vram: 0x87906040, type:  bss, name: fragment3_bss}
+    - {vram: 0x87906040, type:  bss, name: fragments/3/fragment3_bss}
 
   - name: fragment3_relocs
     type: code
@@ -615,7 +615,7 @@
     - [0x11F580, c,    fragments/4/fragment4]
     - [0x120670, .data, fragments/4/fragment4]
 
-    - {vram: 0x87A01300, type:  bss, name: fragment4_bss}
+    - {vram: 0x87A01300, type:  bss, name: fragments/4/fragment4_bss}
 
   - name: fragment4_relocs
     type: code
@@ -636,7 +636,7 @@
     - [0x120940, c,    fragments/5/fragment5]
     - [0x1209E0, data, fragments/5/fragment5_data]
 
-    - {vram: 0x87B000E0, type:  bss, name: fragment5_bss}
+    - {vram: 0x87B000E0, type:  bss, name: fragments/5/fragment5_bss}
 
   - name: fragment5_relocs
     type: code
@@ -688,7 +688,7 @@
     - [0x12BF10, .data,     fragments/7/fragment7]
     - [0x12CC90, .rodata,   fragments/7/fragment7]
 
-    - {vram: 0x86105480, type:  bss, name: fragment7_bss}
+    - {vram: 0x86105480, type:  .bss, name: fragments/7/fragment7}
 
   - name: fragment7_relocs
     type: code
@@ -710,7 +710,7 @@
     - [0x131800, .data,   fragments/8/fragment8]
     - [0x131D00, .rodata, fragments/8/fragment8]
 
-    - {vram: 0x86203E30, type:  bss, name: fragment8_bss}
+    - {vram: 0x86203E30, type:  .bss, name: fragments/8/fragment8}
 
   - name: fragment8_relocs
     type: code
@@ -806,7 +806,7 @@
     - [0x143360, data,   fragments/12/fragment12_data]
     - [0x143400, rodata, fragments/12/fragment12_rodata]
 
-    - {vram: 0x86600940, type:  bss, name: unk_frag12_bss}
+    - {vram: 0x86600940, type:  bss, name: fragments/12/fragment12_bss}
 
   - name: fragment12_relocs
     type: code
@@ -827,7 +827,7 @@
     - [0x143F40, data,   fragments/13/fragment13_data]
     - [0x143FE0, rodata, fragments/13/fragment13_rodata]
 
-    - {vram: 0x86700930, type:  bss, name: unk_frag13_bss}
+    - {vram: 0x86700930, type:  bss, name: fragments/13/fragment13_bss}
 
   - name: fragment13_relocs
     type: code
@@ -853,7 +853,7 @@
     - [0x14B6A0, rodata, fragments/14/fragment14_rodata_14B6A0]
     - [0x14B790, rodata, fragments/14/fragment14_rodata_14B790]
 
-    - {vram: 0x86807500, type:  bss, name: fragment14_bss}
+    - {vram: 0x86807500, type:  bss, name: fragments/14/fragment14_bss}
 
   - name: fragment14_relocs
     type: code
@@ -879,7 +879,7 @@
     - [0x156F00, rodata, fragments/15/fragment15_rodata_156F00]
     - [0x156F70, rodata, fragments/15/fragment15_rodata_156F70]
 
-    - {vram: 0x8690A610, type:  bss, name: fragment15_bss}
+    - {vram: 0x8690A610, type:  bss, name: fragments/15/fragment15_bss}
 
   - name: fragment15_relocs
     type: code
@@ -904,7 +904,7 @@
     - [0x15AF80, data,   fragments/16/fragment16_data]
     - [0x15EB20, rodata, fragments/16/fragment16_rodata]
 
-    - {vram: 0x86A06170, type:  bss, name: fragment16_bss}
+    - {vram: 0x86A06170, type:  bss, name: fragments/16/fragment16_bss}
 
   - name: fragment16_relocs
     type: code
@@ -942,7 +942,7 @@
     - [0x16DEA0, rodata, fragments/17/fragment17_rodata_16DEA0]
     - [0x16DF30, rodata, fragments/17/fragment17_rodata_16DF30]
 
-    - {vram: 0x86B0E5D0, type:  bss, name: fragment17_bss}
+    - {vram: 0x86B0E5D0, type:  bss, name: fragments/17/fragment17_bss}
 
   - name: fragment17_relocs
     type: code
@@ -964,7 +964,7 @@
     - [0x1750F0, data,   fragments/18/fragment18_data]
     - [0x17EC60, rodata, fragments/18/fragment18_rodata]
 
-    - {vram: 0x86C0E480, type:  bss, name: fragment18_bss}
+    - {vram: 0x86C0E480, type:  bss, name: fragments/18/fragment18_bss}
 
   - name: fragment18_relocs
     type: code
@@ -985,7 +985,7 @@
     - [0x180070, data,   fragments/19/fragment19_data]
     - [0x180100, rodata, fragments/19/fragment19_rodata]
 
-    - {vram: 0x86D005D0, type:  bss, name: fragment19_bss}
+    - {vram: 0x86D005D0, type:  bss, name: fragments/19/fragment19_bss}
 
   - name: fragment19_relocs
     type: code
@@ -1007,7 +1007,7 @@
     - [0x183260, data,   fragments/20/fragment20_data]
     - [0x184FA0, rodata, fragments/20/fragment20_rodata]
 
-    - {vram: 0x86E04D60, type:  bss, name: fragment20_bss}
+    - {vram: 0x86E04D60, type:  bss, name: fragments/20/fragment20_bss}
 
   - name: fragment20_relocs
     type: code
@@ -1029,7 +1029,7 @@
     - [0x1880A0, data,   fragments/21/fragment21_data]
     - [0x190B90, rodata, fragments/21/fragment21_rodata]
 
-    - {vram: 0x86F0B1F0, type:  bss, name: fragment21_bss}
+    - {vram: 0x86F0B1F0, type:  bss, name: fragments/21/fragment21_bss}
 
   - name: fragment21_relocs
     type: code
@@ -1051,7 +1051,7 @@
     - [0x193EA0, data,   fragments/22/fragment22_data]
     - [0x1A8320, rodata, fragments/22/fragment22_rodata]
 
-    - {vram: 0x88016CF0, type:  bss, name: fragment22_bss}
+    - {vram: 0x88016CF0, type:  bss, name: fragments/22/fragment22_bss}
 
   - name: fragment22_relocs
     type: code
@@ -1080,7 +1080,7 @@
     - [0x1CD400, rodata, fragments/23/fragment23_rodata_1CD400]
     - [0x1CD470, rodata, fragments/23/fragment23_rodata_1CD470]
 
-    - {vram: 0x88224F90, type:  bss, name: fragment23_bss}
+    - {vram: 0x88224F90, type:  bss, name: fragments/23/fragment23_bss}
 
   - name: fragment23_relocs
     type: code
@@ -1104,7 +1104,7 @@
     - [0x1E8C40, rodata, fragments/24/fragment24_rodata_1E8C40]
     - [0x1E8DB0, rodata, fragments/24/fragment24_rodata_1E8DB0]
 
-    - {vram: 0x8831A4C0, type:  bss, name: fragment24_bss}
+    - {vram: 0x8831A4C0, type:  bss, name: fragments/24/fragment24_bss}
 
   - name: fragment24_relocs
     type: code
@@ -1125,7 +1125,7 @@
     - [0x1EA660, c,      fragments/25/fragment25]
     - [0x1EA740, data,   fragments/25/fragment25_data]
 
-    - {vram: 0x88400200, type:  bss, name: fragment25_bss}
+    - {vram: 0x88400200, type:  bss, name: fragments/25/fragment25_bss}
 
   - name: fragment25_relocs
     type: code
@@ -1147,7 +1147,7 @@
     - [0x1F77E0, data,   fragments/26/fragment26_data]
     - [0x1F7810, rodata, fragments/26/fragment26_rodata]
 
-    - {vram: 0x8850CFE0, type:  bss, name: fragment26_bss}
+    - {vram: 0x8850CFE0, type:  bss, name: fragments/26/fragment26_bss}
 
   - name: fragment26_relocs
     type: code
@@ -1169,7 +1169,7 @@
     - [0x1FD750, data,   fragments/27/fragment27_data]
     - [0x214060, rodata, fragments/27/fragment27_rodata]
 
-    - {vram: 0x8861C510, type:  bss, name: fragment27_bss}
+    - {vram: 0x8861C510, type:  bss, name: fragments/27/fragment27_bss}
 
   - name: fragment27_relocs
     type: code
@@ -1193,7 +1193,7 @@
     - [0x23AF80, rodata, fragments/28/fragment28_rodata_23AF80]
     - [0x23AFE0, rodata, fragments/28/fragment28_rodata_23AFE0]
 
-    - {vram: 0x888267A0, type:  bss, name: fragment28_bss}
+    - {vram: 0x888267A0, type:  bss, name: fragments/28/fragment28_bss}
 
   - name: fragment28_relocs
     type: code
@@ -1214,7 +1214,7 @@
     - [0x23C270, c,      fragments/29/fragment29]
     - [0x23D3C0, data,   fragments/29/fragment29_data]
 
-    - {vram: 0x889011E0, type:  bss, name: fragment29_bss}
+    - {vram: 0x889011E0, type:  bss, name: fragments/29/fragment29_bss}
 
   - name: fragment29_relocs
     type: code
@@ -1257,7 +1257,7 @@
     - [0x255230, textbin,   fragments/30/fragment30_header]
     - [0x255250, c,      fragments/30/fragment30]
 
-    - {vram: 0x88A00080, type:  bss, name: fragment30_bss}
+    - {vram: 0x88A00080, type:  bss, name: fragments/30/fragment30_bss}
 
   - name: fragment30_relocs
     type: code
@@ -1294,7 +1294,7 @@
     - [0x2594E0, rodata, fragments/31/fragment31_rodata_2594E0]
     - [0x259A90, rodata, fragments/31/fragment31_rodata_259A90]
 
-    - {vram: 0x810047E0, type:  bss, name: fragment31_bss}
+    - {vram: 0x810047E0, type:  bss, name: fragments/31/fragment31_bss}
 
   - name: fragment31_relocs
     type: code
@@ -1315,7 +1315,7 @@
     - [0x25A760, c,      fragments/32/fragment32]
     - [0x25B060, data,   fragments/32/fragment32_data]
 
-    - {vram: 0x81100930, type:  bss, name: fragment32_bss}
+    - {vram: 0x81100930, type:  bss, name: fragments/32/fragment32_bss}
 
   - name: fragment32_relocs
     type: code
@@ -1337,7 +1337,7 @@
     - [0x25ECF0, data,   fragments/33/fragment33_data]
     - [0x25F020, rodata, fragments/33/fragment33_rodata]
 
-    - {vram: 0x81303FA0, type:  bss, name: fragment33_bss}
+    - {vram: 0x81303FA0, type:  bss, name: fragments/33/fragment33_bss}
 
   - name: fragment33_relocs
     type: code
@@ -1372,7 +1372,7 @@
     - [0x26F9C0, data,   fragments/34/fragment34_data]
     - [0x270570, rodata, fragments/34/fragment34_rodata]
 
-    - {vram: 0x8140E620, type:  bss, name: fragment34_bss}
+    - {vram: 0x8140E620, type:  bss, name: fragments/34/fragment34_bss}
 
   - name: fragment34_relocs
     type: code
@@ -1392,7 +1392,7 @@
     - [0x271260, textbin,   fragments/35/fragment35_header]
     - [0x271280, c,      fragments/35/fragment35]
 
-    - {vram: 0x82000560, type:  bss, name: fragment35_bss}
+    - {vram: 0x82000560, type:  bss, name: fragments/35/fragment35_bss}
 
   - name: fragment35_relocs
     type: code
@@ -1458,7 +1458,7 @@
     - [0x27B600, data,   fragments/38/fragment38_data]
     - [0x27B6B0, rodata, fragments/38/fragment38_rodata]
 
-    - {vram: 0x82305A20, type:  bss, name: fragment38_bss}
+    - {vram: 0x82305A20, type:  bss, name: fragments/38/fragment38_bss}
 
   - name: fragment38_relocs
     type: code
@@ -1483,7 +1483,7 @@
     - [0x2846C0, rodata, fragments/39/fragment39_rodata_2846C0]
     - [0x284780, rodata, fragments/39/fragment39_rodata_284780]
 
-    - {vram: 0x82508AF0, type:  bss, name: fragment39_bss}
+    - {vram: 0x82508AF0, type:  bss, name: fragments/39/fragment39_bss}
 
   - name: fragment39_relocs
     type: code
@@ -1505,7 +1505,7 @@
     - [0x2879A0, data,   fragments/40/fragment40_data]
     - [0x287C80, rodata, fragments/40/fragment40_rodata]
 
-    - {vram: 0x83101EE0, type:  bss, name: fragment40_bss}
+    - {vram: 0x83101EE0, type:  bss, name: fragments/40/fragment40_bss}
 
   - name: fragment40_relocs
     type: code
@@ -1536,7 +1536,7 @@
     - [0x29C140, rodata, fragments/41/fragment41_rodata_29C140]
     - [0x29C180, rodata, fragments/41/fragment41_rodata_29C180]
 
-    - {vram: 0x82F14420, type:  bss, name: fragment41_bss}
+    - {vram: 0x82F14420, type:  bss, name: fragments/41/fragment41_bss}
 
   - name: fragment41_relocs
     type: code
@@ -1558,7 +1558,7 @@
     - [0x2A0EB0, data,   fragments/42/fragment42_data]
     - [0x2A0FE0, rodata, fragments/42/fragment42_rodata]
 
-    - {vram: 0x833032E0, type:  bss, name: fragment42_bss}
+    - {vram: 0x833032E0, type:  bss, name: fragments/42/fragment42_bss}
 
   - name: fragment42_relocs
     type: code
@@ -1582,7 +1582,7 @@
     - [0x2A4950, data,   fragments/43/fragment43_data]
     - [0x2A49F0, rodata, fragments/43/fragment43_rodata]
 
-    - {vram: 0x83402EE0, type:  bss, name: fragment43_bss}
+    - {vram: 0x83402EE0, type:  bss, name: fragments/43/fragment43_bss}
 
   - name: fragment43_relocs
     type: code
@@ -1604,7 +1604,7 @@
     - [0x2A8C60, rodata, fragments/44/fragment44_rodata_2A8C60]
     - [0x2A8D60, rodata, fragments/44/fragment44_rodata_2A8D60]
 
-    - {vram: 0x83503FC0, type:  bss, name: fragment44_bss}
+    - {vram: 0x83503FC0, type:  bss, name: fragments/44/fragment44_bss}
 
   - name: fragment44_relocs
     type: code
@@ -1626,7 +1626,7 @@
     - [0x2ACA10, data,   fragments/45/fragment45_data]
     - [0x2ACA70, rodata, fragments/45/fragment45_rodata]
 
-    - {vram: 0x836032F0, type:  bss, name: fragment45_bss}
+    - {vram: 0x836032F0, type:  bss, name: fragments/45/fragment45_bss}
 
   - name: fragment45_relocs
     type: code
@@ -1647,7 +1647,7 @@
     - [0x2AD290, c,      fragments/46/fragment46]
     - [0x2AD720, data,   fragments/46/fragment46_data]
 
-    - {vram: 0x837004C0, type:  bss, name: fragment46_bss}
+    - {vram: 0x837004C0, type:  bss, name: fragments/46/fragment46_bss}
 
   - name: fragment46_relocs
     type: code
@@ -1673,7 +1673,7 @@
     - [0x2B2E90, rodata, fragments/47/fragment47_rodata_2B2E90]
     - [0x2B2F10, rodata, fragments/47/fragment47_rodata_2B2F10]
 
-    - {vram: 0x83805650, type:  bss, name: fragment47_bss}
+    - {vram: 0x83805650, type:  bss, name: fragments/47/fragment47_bss}
 
   - name: fragment47_relocs
     type: code
@@ -1695,7 +1695,7 @@
     - [0x2B45A0, data,   fragments/48/fragment48_data]
     - [0x2B45C0, rodata, fragments/48/fragment48_rodata]
 
-    - {vram: 0x839006B0, type:  bss, name: fragment48_bss}
+    - {vram: 0x839006B0, type:  bss, name: fragments/48/fragment48_bss}
 
   - name: fragment48_relocs
     type: code
@@ -1715,7 +1715,7 @@
     - [0x2B4710, c,      fragments/49/fragment49]
     - [0x2B5240, data,   fragments/49/fragment49_data]
 
-    - {vram: 0x83A00B70, type:  bss, name: fragment49_bss}
+    - {vram: 0x83A00B70, type:  bss, name: fragments/49/fragment49_bss}
 
   - name: fragment49_relocs
     type: code
@@ -1737,7 +1737,7 @@
     - [0x2B91D0, data,   fragments/50/fragment50_data]
     - [0x2BC690, rodata, fragments/50/fragment50_rodata]
 
-    - {vram: 0x82607410, type:  bss, name: fragment50_bss}
+    - {vram: 0x82607410, type:  bss, name: fragments/50/fragment50_bss}
 
   - name: fragment50_relocs
     type: code
@@ -1756,7 +1756,7 @@
     - [0x2BD0A0, textbin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x2BD0C0, c,      fragments/51/fragment51]
 
-    - {vram: 0x82800080, type:  bss, name: fragment51_bss}
+    - {vram: 0x82800080, type:  bss, name: fragments/51/fragment51_bss}
 
   - name: fragment51_relocs
     type: code
@@ -1776,7 +1776,7 @@
     - [0x2BD150, c,    fragments/52/fragment52]
     - [0x2BD600, data, fragments/52/fragment52_data]
 
-    - {vram: 0x82900530, type:  bss, name: fragment52_bss}
+    - {vram: 0x82900530, type:  bss, name: fragments/52/fragment52_bss}
 
   - name: fragment52_relocs
     type: code
@@ -1796,7 +1796,7 @@
     - [0x2BD700, c,    fragments/53/fragment53]
     - [0x2BDA40, data, fragments/53/fragment53_data]
 
-    - {vram: 0x82A00370, type:  bss, name: fragment53_bss}
+    - {vram: 0x82A00370, type:  bss, name: fragments/53/fragment53_bss}
 
   - name: fragment53_relocs
     type: code
@@ -1817,7 +1817,7 @@
     - [0x2BDAE0, c,    fragments/54/fragment54]
     - [0x2BEBE0, data, fragments/54/fragment54_data]
 
-    - {vram: 0x82B01140, type:  bss, name: fragment54_bss}
+    - {vram: 0x82B01140, type:  bss, name: fragments/54/fragment54_bss}
 
   - name: fragment54_relocs
     type: code
@@ -1841,7 +1841,7 @@
     - [0x2C26E0, data,   fragments/55/fragment55_data]
     - [0x2C28A0, rodata, fragments/55/fragment55_rodata]
 
-    - {vram: 0x83003C80, type:  bss, name: fragment55_bss}
+    - {vram: 0x83003C80, type:  bss, name: fragments/55/fragment55_bss}
 
   - name: fragment55_relocs
     type: code
@@ -1861,7 +1861,7 @@
     - [0x2C3220, textbin, fragments/56/fragment56_header]
     - [0x2C3240, c,    fragments/56/fragment56]
 
-    - {vram: 0x82C01660, type:  bss, name: fragment56_bss}
+    - {vram: 0x82C01660, type:  bss, name: fragments/56/fragment56_bss}
 
   - name: fragment56_relocs
     type: code
@@ -1883,7 +1883,7 @@
     - [0x2CB970, data,   fragments/57/fragment57_data]
     - [0x2CE950, rodata, fragments/57/fragment57_rodata]
 
-    - {vram: 0x82D09FF0, type:  bss, name: fragment57_bss}
+    - {vram: 0x82D09FF0, type:  bss, name: fragments/57/fragment57_bss}
 
   - name: fragment57_relocs
     type: code
@@ -1905,7 +1905,7 @@
     - [0x2D1F30, data,   fragments/58/fragment58_data]
     - [0x2D2000, rodata, fragments/58/fragment58_rodata]
 
-    - {vram: 0x84002D00, type:  bss, name: fragment58_bss}
+    - {vram: 0x84002D00, type:  bss, name: fragments/58/fragment58_bss}
 
   - name: fragment58_relocs
     type: code
@@ -1927,7 +1927,7 @@
     - [0x2D48F0, data,   fragments/59/fragment59_data]
     - [0x2D58F0, rodata, fragments/59/fragment59_rodata]
 
-    - {vram: 0x84103440, type:  bss, name: fragment59_bss}
+    - {vram: 0x84103440, type:  bss, name: fragments/59/fragment59_bss}
 
   - name: fragment59_relocs
     type: code
@@ -1949,7 +1949,7 @@
     - [0x2D6DC0, data,   fragments/60/fragment60_data]
     - [0x2D7650, rodata, fragments/60/fragment60_rodata]
 
-    - {vram: 0x82E019B0, type:  bss, name: fragment60_bss}
+    - {vram: 0x82E019B0, type:  bss, name: fragments/60/fragment60_bss}
 
   - name: fragment60_relocs
     type: code
@@ -1981,7 +1981,7 @@
     - [0x2E92E0, rodata, fragments/61/fragment61_rodata_2E92E0]
     - [0x2E9350, rodata, fragments/61/fragment61_rodata_2E9350]
 
-    - {vram: 0x84211B30, type:  bss, name: fragment61_bss}
+    - {vram: 0x84211B30, type:  bss, name: fragments/61/fragment61_bss}
 
   - name: fragment61_relocs
     type: code
@@ -2074,7 +2074,7 @@
     - [0x378540, rodata, fragments/62/fragment62_rodata_378540]
     - [0x3786B0, rodata, fragments/62/fragment62_rodata_3786B0]
 
-    - {vram: 0x8438E440, type:  bss, name: fragment62_bss}
+    - {vram: 0x8438E440, type:  bss, name: fragments/62/fragment62_bss}
 
   - name: fragment62_relocs
     type: code
@@ -2101,7 +2101,7 @@
     - [0x3A3C10, data,   fragments/63/fragment63_data]
     - [0x3AD980, rodata, fragments/63/fragment63_rodata]
 
-    - {vram: 0x84B19910, type:  bss, name: fragment63_bss}
+    - {vram: 0x84B19910, type:  bss, name: fragments/63/fragment63_bss}
 
   - name: fragment63_relocs
     type: code
@@ -2123,7 +2123,7 @@
     - [0x3B2390, data,   fragments/64/fragment64_data]
     - [0x3B2530, rodata, fragments/64/fragment64_rodata]
 
-    - {vram: 0x84803760, type:  bss, name: fragment64_bss}
+    - {vram: 0x84803760, type:  bss, name: fragments/64/fragment64_bss}
 
   - name: fragment64_relocs
     type: code
@@ -2145,7 +2145,7 @@
     - [0x3B59E0, data,   fragments/65/fragment65_data]
     - [0x3B5BE0, rodata, fragments/65/fragment65_rodata]
 
-    - {vram: 0x84A03130, type:  bss, name: fragment65_bss}
+    - {vram: 0x84A03130, type:  bss, name: fragments/65/fragment65_bss}
 
   - name: fragment65_relocs
     type: code
@@ -2165,7 +2165,7 @@
     - [0x3B6150, c,      fragments/66/fragment66]
     - [0x3B8080, data,   fragments/66/fragment66_data]
 
-    - {vram: 0x83202010, type:  bss, name: fragment66_bss}
+    - {vram: 0x83202010, type:  bss, name: fragments/66/fragment66_bss}
 
   - name: fragment66_relocs
     type: code
@@ -2184,7 +2184,7 @@
     - [0x3B8530, textbin,   fragments/67/fragment67_header]
     - [0x3B8550, c,      fragments/67/fragment67]
 
-    - {vram: 0x8F000030, type:  bss, name: fragment67_bss}
+    - {vram: 0x8F000030, type:  bss, name: fragments/67/fragment67_bss}
 
   - name: fragment67_relocs
     type: code
@@ -2204,7 +2204,7 @@
     - [0x3B8570, textbin, fragments/68/fragment68_header]
     - [0x3B8590, c,    fragments/68/fragment68]
 
-    - {vram: 0x8F100080, type:  bss, name: fragment68_bss}
+    - {vram: 0x8F100080, type:  bss, name: fragments/68/fragment68_bss}
 
   - name: fragment68_relocs
     type: code
@@ -2223,7 +2223,7 @@
     - [0x3B8600, textbin,   fragments/69/fragment69_header]
     - [0x3B8620, c,      fragments/69/fragment69]
 
-    - {vram: 0x8F200080, type:  bss, name: fragment69_bss}
+    - {vram: 0x8F200080, type:  bss, name: fragments/69/fragment69_bss}
 
   - name: fragment69_relocs
     type: code
@@ -2242,7 +2242,7 @@
     - [0x3B8690, textbin,   fragments/70/fragment70_header]
     - [0x3B86B0, c,      fragments/70/fragment70]
 
-    - {vram: 0x8F300080, type:  bss, name: fragment70_bss}
+    - {vram: 0x8F300080, type:  bss, name: fragments/70/fragment70_bss}
 
   - name: fragment70_relocs
     type: code
@@ -2261,7 +2261,7 @@
     - [0x3B8720, textbin,   fragments/71/fragment71_header]
     - [0x3B8740, c,      fragments/71/fragment71]
 
-    - {vram: 0x8F400080, type:  bss, name: fragment71_bss}
+    - {vram: 0x8F400080, type:  bss, name: fragments/71/fragment71_bss}
 
   - name: fragment71_relocs
     type: code
@@ -2280,7 +2280,7 @@
     - [0x3B87B0, textbin, fragments/72/fragment72_header]
     - [0x3B87D0, c,    fragments/72/fragment72]
 
-    - {vram: 0x8F500080, type:  bss, name: fragment72_bss}
+    - {vram: 0x8F500080, type:  bss, name: fragments/72/fragment72_bss}
 
   - name: fragment72_relocs
     type: code
@@ -2299,7 +2299,7 @@
     - [0x3B8840, textbin, fragments/73/fragment73_header]
     - [0x3B8860, c,    fragments/73/fragment73]
 
-    - {vram: 0x8F600080, type:  bss, name: fragment73_bss}
+    - {vram: 0x8F600080, type:  bss, name: fragments/73/fragment73_bss}
 
   - name: fragment73_relocs
     type: code
@@ -2318,7 +2318,7 @@
     - [0x3B88D0, textbin, fragments/74/fragment74_header]
     - [0x3B88F0, c,    fragments/74/fragment74]
 
-    - {vram: 0x8F700080, type:  bss, name: fragment74_bss}
+    - {vram: 0x8F700080, type:  bss, name: fragments/74/fragment74_bss}
 
   - name: fragment74_relocs
     type: code
@@ -2338,7 +2338,7 @@
     - [0x3B8980, c,    fragments/75/fragment75]
     - [0x3B9350, data, fragments/75/fragment75_data]
 
-    - {vram: 0x8FA00A20, type:  bss, name: fragment75_bss}
+    - {vram: 0x8FA00A20, type:  bss, name: fragments/75/fragment75_bss}
 
   - name: fragment75_relocs
     type: code
@@ -2357,7 +2357,7 @@
     - [0x3B9590, textbin, fragments/76/fragment76_header]
     - [0x3B95B0, c,    fragments/76/fragment76]
 
-    - {vram: 0x8FB00080, type:  bss, name: fragment76_bss}
+    - {vram: 0x8FB00080, type:  bss, name: fragments/76/fragment76_bss}
 
   - name: fragment76_relocs
     type: code
@@ -2376,7 +2376,7 @@
     - [0x3B9620, textbin,  fragments/77/fragment77_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x3B9640, c,    fragments/77/fragment77]
 
-    - {vram: 0x8FC00080, type:  bss, name: fragment77_bss}
+    - {vram: 0x8FC00080, type:  bss, name: fragments/77/fragment77_bss}
 
   - name: fragment77_relocs
     type: code

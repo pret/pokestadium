@@ -47,6 +47,8 @@ typedef struct unk_D_86203E50 {
     /* 0x1CA */ char pad1CA[6];
 } unk_D_86203E50; // size = 0x1D0
 
+extern u32 D_862082A0[4];
+
 void func_86200020(unk_D_86203E50* arg0);
 void func_86200034(void);
 void func_862002EC(void);
