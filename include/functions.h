@@ -37,6 +37,7 @@ void func_8000D970(OSPfs *);
 void set_watch_lohi(s32);
 
 u32 osGetCount(void);
+OSIntMask osSetIntMask(OSIntMask);;
 
 unsigned long long __ull_rshift(unsigned long long a0, unsigned long long a1);
 unsigned long long __ull_rem(unsigned long long a0, unsigned long long a1);
