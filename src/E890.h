@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void func_8000E840(s32*, u8, u8, u8, u8);
+void func_8000E840(Color_RGBA8*, u8, u8, u8, u8);
 void func_8000E88C(Vec3f*, f32, f32, f32);
 void func_8000EB70(Vec3s*, s16, s16, s16);
 void func_8000ED98(s32*);

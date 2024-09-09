@@ -63,7 +63,13 @@ extern u8 D_5000000[];
 extern u8 D_6000000[];
 extern u8 D_8D000000[];
 extern void* D_800AA688;
-
+extern u8 D_20144E0[];
+extern u8 D_3044260[];
+extern u8 D_20289E0[];
+extern u8 D_2028A20[];
+extern u8 D_2028A60[];
+extern u8 D_2028AA0[];
+extern u32 D_B0000D10;
 
 typedef struct unk_D_80068BA0 {
     /* 0x00 */ char pad00[0x2];
