@@ -36,6 +36,8 @@ void func_8000D970(OSPfs *);
 // exception_set.s
 void set_watch_lohi(s32);
 
+u32 osGetCount(void);
+
 unsigned long long __ull_rshift(unsigned long long a0, unsigned long long a1);
 unsigned long long __ull_rem(unsigned long long a0, unsigned long long a1);
 unsigned long long __ull_div(unsigned long long a0, unsigned long long a1);
