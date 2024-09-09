@@ -20,6 +20,41 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 
+typedef struct unk_D_861054C0 {
+    /* 0x000 */ s16 unk_000;
+    /* 0x002 */ s16 unk_002;
+    /* 0x004 */ char pad4[4];
+    /* 0x008 */ unk_D_86002F58_004_000 unk_008;
+    /* 0x170 */ s16 unk_170;
+    /* 0x172 */ u16 unk_172;
+    /* 0x174 */ s16 unk_174[0xC];
+    /* 0x18C */ s16 unk_18C;
+    /* 0x18E */ s16 unk_18E[0xC];
+    /* 0x1A6 */ s16 unk_1A6;
+    /* 0x1A8 */ s16 unk_1A8;
+    /* 0x1AA */ s16 unk_1AA;
+    /* 0x1AC */ s16 unk_1AC;
+    /* 0x1AE */ s16 unk_1AE;
+    /* 0x1B0 */ s16 unk_1B0;
+    /* 0x1B2 */ s16 unk_1B2;
+    /* 0x1B4 */ s16 unk_1B4;
+    /* 0x1B6 */ char pad1B6[2];
+    /* 0x1B8 */ f32 unk_1B8;
+    /* 0x1BC */ f32 unk_1BC;
+} unk_D_861054C0; // size = 0x1C0
+
+typedef struct unk_D_86105EA0 {
+    /* 0x000 */ char unk000[0x4];
+    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+} unk_D_86105EA0; // size = 0x16C
+
+typedef struct unk_D_86106450 {
+    /* 0x000 */ s16 unk_000;
+    /* 0x002 */ s16 unk_002;
+    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+    /* 0x16C */ unk_D_86002F58_004_000_004* unk_16C;
+} unk_D_86106450; // size = 0x170
+
 void func_86102370(void);
 void func_861023E4(void);
 
@@ -92,16 +127,16 @@ static s16 D_861049B4[5][6] = {
 
 static u8 D_861049F0[] = { 0, 5, 0, 10 };
 
-static u8 D_861049F4[] = {
-    3, 4, 5, 0x80, 0, 0x12, 0, 0,    3, 4, 9, 0x80, 0, 2, 0, 0, 3, 4, 0xD, 0x80,
-    0, 8, 0, 0,    3, 4,    9, 0x80, 0, 2, 0, 0,    0, 0, 0, 0, 0, 0, 0,   0,
+static unk_func_87801684 D_861049F4[] = {
+    { 0x3040580, 0x12 }, { 0x3040980, 2 }, { 0x3040D80, 8 }, { 0x3040980, 2 }, { 0x0, 0x0 },
 };
 
-static s32 D_86104A1C[] = {
-    0x03042E00, 0x00060000, 0x03044360, 0x00020000, 0x03044A80, 0x00060000, 0x03044360, 0x00020000, 0x03042E00,
-    0x00060000, 0x03041180, 0x00020000, 0x030418A0, 0x00060000, 0x03041180, 0x00020000, 0x03042E00, 0x00060000,
-    0x03043520, 0x00020000, 0x03043C40, 0x00060000, 0x03043520, 0x00020000, 0x03042E00, 0x00060000, 0x03041FC0,
-    0x00020000, 0x030426E0, 0x00060000, 0x03041FC0, 0x00020000, 0x00000000, 0x00000000,
+static unk_func_87801684 D_86104A1C[] = {
+    { 0x03042E00, 0x0006 }, { 0x03044360, 0x0002 }, { 0x03044A80, 0x0006 }, { 0x03044360, 0x0002 },
+    { 0x03042E00, 0x0006 }, { 0x03041180, 0x0002 }, { 0x030418A0, 0x0006 }, { 0x03041180, 0x0002 },
+    { 0x03042E00, 0x0006 }, { 0x03043520, 0x0002 }, { 0x03043C40, 0x0006 }, { 0x03043520, 0x0002 },
+    { 0x03042E00, 0x0006 }, { 0x03041FC0, 0x0002 }, { 0x030426E0, 0x0006 }, { 0x03041FC0, 0x0002 },
+    { 0x00000000, 0x0000 },
 };
 
 static u32 D_86104AA4[] = {
@@ -259,76 +294,38 @@ u32 D_861052C8[] = {
     0xFFFEFFFE, 0xFFFED6B5, 0xD6B5D6B5, 0xD6B5FFFE, 0xFFFEFFFE, 0xFFFEFFFE, 0x00000000, 0x00000000,
 };
 
-// Mapped into reloc
-
-extern unk_D_86002F30* D_86105480;
-extern unk_D_86002F34* D_86105484;
-extern unk_D_86002F34_00C* D_86105488;
-extern unk_D_86002F30* D_8610548C;
-extern s16 D_86105490;
-extern s16 D_86105492;
-extern s16 D_86105494;
-extern u16 D_86105496;
-extern s32 D_86105498;
-extern s32 D_8610549C;
-extern s16 D_861054A0;
-extern s16 D_861054A2;
-extern s16 D_861054A4;
-extern s16 D_861054A6;
-extern s16 D_861054A8;
-extern s32 D_861054AC;
-extern s32 D_861054B0;
-extern unk_D_800AC870* D_861054B4;
-extern s16 D_861054B8;
-extern s16 D_861054BA;
-extern s32 D_861054BC;
-
-typedef struct unk_D_861054C0 {
-    /* 0x000 */ s16 unk_000;
-    /* 0x002 */ s16 unk_002;
-    /* 0x004 */ char pad4[4];
-    /* 0x008 */ unk_D_86002F58_004_000 unk_008;
-    /* 0x170 */ s16 unk_170;
-    /* 0x172 */ u16 unk_172;
-    /* 0x174 */ s16 unk_174[0xC];
-    /* 0x18C */ s16 unk_18C;
-    /* 0x18E */ s16 unk_18E[0xC];
-    /* 0x1A6 */ s16 unk_1A6;
-    /* 0x1A8 */ s16 unk_1A8;
-    /* 0x1AA */ s16 unk_1AA;
-    /* 0x1AC */ s16 unk_1AC;
-    /* 0x1AE */ s16 unk_1AE;
-    /* 0x1B0 */ s16 unk_1B0;
-    /* 0x1B2 */ s16 unk_1B2;
-    /* 0x1B4 */ s16 unk_1B4;
-    /* 0x1B6 */ char pad1B6[2];
-    /* 0x1B8 */ f32 unk_1B8;
-    /* 0x1BC */ f32 unk_1BC;
-} unk_D_861054C0; // size = 0x1C0
-
-extern unk_D_861054C0 D_861054C0[4];
-extern s32 D_86105BC0;
-extern unk_D_861054C0* D_86105BC4;
-extern unk_D_86002F58_004_000* D_86105BC8;
-extern s16 D_86105BCC;
-extern s16 D_86105BCE;
-extern unk_D_86002F58_004_000 D_86105BD0;
-extern unk_D_86002F58_004_000 D_86105D38;
-
-typedef struct unk_D_86105EA0 {
-    /* 0x000 */ char unk000[0x4];
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
-} unk_D_86105EA0; // size = 0x16C
-extern unk_D_86105EA0 D_86105EA0[4];
-
-typedef struct unk_D_86106450 {
-    /* 0x000 */ s16 unk_000;
-    /* 0x002 */ s16 unk_002;
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
-    /* 0x16C */ unk_D_86002F58_004_000_004* unk_16C;
-} unk_D_86106450; // size = 0x170
-extern unk_D_86106450 D_86106450[12];
-extern s16 D_86107590;
+static unk_D_86002F30* D_86105480;
+static unk_D_86002F34* D_86105484;
+static unk_D_86002F34_00C* D_86105488;
+static unk_D_86002F30* D_8610548C;
+static s16 D_86105490;
+static s16 D_86105492;
+static s16 D_86105494;
+static u16 D_86105496;
+static s32 D_86105498;
+static s32 D_8610549C;
+static s16 D_861054A0;
+static s16 D_861054A2;
+static s16 D_861054A4;
+static s16 D_861054A6;
+static s16 D_861054A8;
+static s32 D_861054AC;
+static s32 D_861054B0;
+static unk_D_800AC870* D_861054B4;
+static s16 D_861054B8;
+static s16 D_861054BA;
+static s32 D_861054BC;
+static unk_D_861054C0 D_861054C0[4];
+static s32 D_86105BC0;
+static unk_D_861054C0* D_86105BC4;
+static unk_D_86002F58_004_000* D_86105BC8;
+static s16 D_86105BCC;
+static s16 D_86105BCE;
+static unk_D_86002F58_004_000 D_86105BD0;
+static unk_D_86002F58_004_000 D_86105D38;
+static unk_D_86105EA0 D_86105EA0[4];
+static unk_D_86106450 D_86106450[12];
+static s16 D_86107590;
 
 void func_86100020(void) {
     func_86102370();
@@ -385,7 +382,6 @@ unk_D_861047B8* func_86100084(s32 arg0, s32 arg1) {
     return sp34;
 }
 
-#ifdef NON_MATCHING
 void func_86100170(void) {
     unk_D_86106450* ptr;
     s32 var_a1;
@@ -402,6 +398,7 @@ void func_86100170(void) {
     var_a0 = D_861047B8;
     var_a1 = 1;
     var_a3 = var_a3;
+    ptr = &D_86106450[0];
 
     while (var_a1 != 0) {
         if (var_a0->unk_00[0] != 0xFF) {
@@ -418,12 +415,10 @@ void func_86100170(void) {
 
     temp_v0_2 = func_86100084(var_s2, var_a3);
 
-    ptr = &D_86106450[0];
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 6; i++, ptr++) {
         ptr->unk_000 = temp_v0_2->unk_00[i];
         ptr->unk_002 = 0;
-        ptr->unk_16C = D_8610548C->unk_08[ptr->unk_000];
-        ptr++;
+        ptr->unk_16C = D_8610548C->unk_08->unk_00[ptr->unk_000];
     }
 
     var_v0 = func_86100084(var_s2, var_a3);
@@ -434,14 +429,10 @@ void func_86100170(void) {
     for (i = 0; i < 6; i++) {
         ptr->unk_000 = var_v0->unk_00[i];
         ptr->unk_002 = 0;
-        ptr->unk_16C = D_8610548C->unk_08[ptr->unk_000];
+        ptr->unk_16C = D_8610548C->unk_08->unk_00[ptr->unk_000];
         ptr++;
     }
 }
-#else
-void func_86100170(void);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/7/fragment7/func_86100170.s")
-#endif
 
 void func_86100480(s16 arg0, s16 arg1, s16 arg2, s16 arg3, f32 arg4) {
     Gfx* gfx = gDisplayListHead;
@@ -689,6 +680,7 @@ void func_86101434(void) {
 
     for (i = 0; i < 4; i++) {
         D_86105BC4 = &D_861054C0[i];
+
         if (D_86105BC4->unk_1AC == 0) {
             for (j = 0; j < D_86105BC4->unk_1A6; j++) {
                 func_86100798(((j % 6) * 8) + (i * 0x46) + 0x28, ((j / 6) * 8) + 0x82, 1.0f);
@@ -703,6 +695,7 @@ void func_86101560(void) {
 
     for (i = 0; i < 4; i++) {
         D_86105BC4 = &D_861054C0[i];
+
         if (D_86105BC4->unk_1AC == 0) {
             for (j = 0; j < D_861054A0; j++) {
                 s16 a = j % 6;
@@ -1770,7 +1763,7 @@ void func_86103E9C(void) {
         D_86105BC8 = &D_86105BC4->unk_008;
 
         func_8001BB58(D_86105BC8);
-        func_8001BC34(D_86105BC8, 0, 0xB1, D_86105480->unk_08[0]->unk_00);
+        func_8001BC34(D_86105BC8, 0, 0xB1, D_86105480->unk_08->unk_00[0]);
 
         D_86105BC8->unk_024.x = (i - 1.5f) * 40.0f;
         D_86105BC8->unk_024.y = 0.0f;
@@ -1791,7 +1784,7 @@ void func_86103E9C(void) {
     D_86105480 = func_80019D18(0xB2);
     D_86105BC8 = &D_86105BD0;
     func_8001BB58(D_86105BC8);
-    func_8001BC34(D_86105BC8, 0, 0xB2, D_86105480->unk_08[0]->unk_00);
+    func_8001BC34(D_86105BC8, 0, 0xB2, D_86105480->unk_08->unk_00[0]);
     D_86105BC8->unk_024.x = 0.0f;
     D_86105BC8->unk_024.y = 10.0f;
     D_86105BC8->unk_024.z = -145.0f;
@@ -1803,7 +1796,7 @@ void func_86103E9C(void) {
     D_86105480 = func_80019D18(0xB3);
     D_86105BC8 = &D_86105D38;
     func_8001BB58(D_86105BC8);
-    func_8001BC34(D_86105BC8, 0, 0xB3, D_86105480->unk_08[0]->unk_00);
+    func_8001BC34(D_86105BC8, 0, 0xB3, D_86105480->unk_08->unk_00[0]);
     D_8610548C = func_80019D18(0xB4);
 
     for (i = 0; i < 12; i++) {
@@ -1817,7 +1810,7 @@ void func_86103E9C(void) {
     for (i = 0; i < 4; i++) {
         D_86105BC8 = &D_86105EA0[i].unk_004;
         func_8001BB58(D_86105BC8);
-        func_8001BC34(D_86105BC8, 0, 0xB5, D_86105480->unk_08[0]->unk_00);
+        func_8001BC34(D_86105BC8, 0, 0xB5, D_86105480->unk_08->unk_00[0]);
         D_86105BC8->unk_024.x = (i - 1.5f) * 40.0f;
         D_86105BC8->unk_024.y = 0.0f;
         D_86105BC8->unk_024.z = 0.0f;
