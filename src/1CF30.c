@@ -118,7 +118,7 @@ void func_8001D560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, u32* arg5,
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg7);
 }
 
-void func_8001D924(u32 arg0) {
+void func_8001D924(u8* arg0) {
     s32 i;
     s32 j;
 

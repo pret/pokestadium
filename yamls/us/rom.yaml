@@ -1433,10 +1433,10 @@
     subsegments:
     - [0x272830, textbin,   fragments/37/fragment37_header]
     - [0x272850, c,      fragments/37/fragment37]
-    - [0x2757D0, data,   fragments/37/fragment37_data]
-    - [0x275900, rodata, fragments/37/fragment37_rodata]
+    - [0x2757D0, .data,   fragments/37/fragment37]
+    - [0x275900, .rodata, fragments/37/fragment37]
 
-    - {vram: 0x822030F0, type:  bss, name: fragment37_bss}
+    - {vram: 0x822030F0, type:  .bss, name: fragments/37/fragment37}
 
   - name: fragment37_relocs
     type: code
