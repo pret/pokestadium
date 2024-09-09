@@ -29,7 +29,7 @@ static s32 gLastGameState = STATE_N64_LOGO_INTRO;
 static s32 pad_D_80075670 = 0;
 static s16 D_80075674 = 0;
 static s16 D_80075678 = 0;
-static s32 D_8007567C = 0;
+static s16 D_8007567C = 0;
 
 unk_D_800AE520 D_800AE520;
 unk_D_800AE540 D_800AE540;

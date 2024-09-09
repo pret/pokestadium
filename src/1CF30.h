@@ -7,7 +7,7 @@ void func_8001C330(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s
 void func_8001C4E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 void func_8001C560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6);
 void func_8001C604(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
-void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6);
+void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6);
 void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6);
 void func_8001CADC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6);
 void func_8001CCF8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6);
