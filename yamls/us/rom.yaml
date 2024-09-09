@@ -1411,10 +1411,10 @@
     subsegments:
     - [0x2717E0, textbin,   fragments/36/fragment36_header]
     - [0x271800, c,      fragments/36/fragment36]
-    - [0x2725A0, data,   fragments/36/fragment36_data]
-    - [0x272660, rodata, fragments/36/fragment36_rodata]
+    - [0x2725A0, .data,   fragments/36/fragment36]
+    - [0x272660, .rodata, fragments/36/fragment36]
 
-    - {vram: 0x82100EA0, type:  bss, name: fragment36_bss}
+    - {vram: 0x82100EA0, type:  .bss, name: fragments/36/fragment36}
 
   - name: fragment36_relocs
     type: code
