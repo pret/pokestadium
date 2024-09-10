@@ -15,12 +15,13 @@ typedef struct unk_func_80027FA0 {
 } unk_func_80027FA0; // size = 0x8
 
 void func_80026684(s32, s32);
+void func_8002707C(s32 arg0, s32 arg1);
 void func_80027F24(unk_func_8002A728*);
 void func_80027F40(unk_func_8002A728*);
-void func_80027FA0(unk_func_80027FA0*, s32);
+void func_80027FA0(unk_func_80027FA0*, s16);
 void func_80028070(u16*);
-void func_800280D4(s32);
-void func_800284B4(s32);
-void func_80028AFC(s32);
+void func_800280D4(u8);
+s32 func_800284B4(s16);
+s32 func_80028AFC(s16);
 
 #endif // _26820_H_
