@@ -6,6 +6,7 @@
 void func_80038E98(s32, s32);
 s32 func_80038F30(s32, s32);
 s32 func_80039024(s32, s32, s32, s32, u32, s32);
+void func_8003916C(s32, s32);
 void func_800392A8(s32, s32);
 s32 func_80039354(s32);
 void func_800393DC(s32, s32);

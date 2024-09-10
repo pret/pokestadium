@@ -228,4 +228,7 @@ extern u8 D_87B000CC;
 extern u8 D_87B000D0;
 extern u8 D_87B000D4;
 
+extern s32 D_800FC820;
+extern s32 D_800FF9C0;
+
 #endif

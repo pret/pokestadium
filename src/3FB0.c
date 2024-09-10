@@ -266,8 +266,8 @@ s32 func_80003A14(u8* arg0, s16 arg1, s16 arg2, s32 arg3) {
     return 0;
 }
 
-void func_80003B04(s16 arg0) {
-    func_8000CDB8(arg0 << 7);
+s32 func_80003B04(s16 arg0) {
+    return func_8000CDB8(arg0 << 7);
 }
 
 void func_80003B30(u8* arg0, u8* arg1, u8* arg2, s32 arg3) {
@@ -526,7 +526,7 @@ void func_800043BC(s32 arg0, Fragment* addr) {
     }
 }
 
-void* func_80004454(s32 arg0, u8* romStart, u8* romEnd) {
+ret_func_80004454 func_80004454(s32 arg0, u8* romStart, u8* romEnd) {
     void* addr = func_80003DC4(romStart, romEnd, 0, 0);
 
     if (addr != NULL) {
