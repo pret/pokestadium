@@ -105,8 +105,8 @@ typedef struct unk_D_86002F34_00C {
     /* 0x38 */ f32 unk_038;
     /* 0x3C */ char pad3C[0x24];
     /* 0x60 */ MtxF* unk_060;
-    /* 0x64 */ Vec3f unk_064;
-    /* 0x70 */ char pad70[0x38];
+    /* 0x64 */ MtxF unk_064;
+    /* 0xA4 */ char padA4[0x4];
     /* 0xA8 */ Vec3f unk_0A8;
     /* 0xB4 */ Vec3f unk_0B4;
 } unk_D_86002F34_00C; // size >= 0xC0

@@ -86,7 +86,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
             block = (sMemPool.listHeadL = sMemPool.listHeadL->prev);
             if (runBlockFunc) {
                 // TODO: Fakematch
-                void (*func)(struct MainPoolBlock*, u32) = block->func;
+                AllocateFunc func = block->func;
                 if (func != 0) {
                     block->func((u8*)block + sizeof(struct MainPoolBlock), block->arg);
                     // TODO: fake here too
@@ -101,7 +101,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
         if (oldListHead >= block && oldListHead >= block) {
             do {
                 if (runBlockFunc) {
-                    void (*func)(struct MainPoolBlock*, u32) = block->func;
+                    AllocateFunc func = block->func;
                     if (func != NULL) {
                         func((u8*)block + sizeof(struct MainPoolBlock), block->arg);
                         block = sMemPool.listHeadR;
@@ -122,7 +122,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
  * Manually allocate and initialize a block given a size and side and its
  * function+arguments.
  */
-void* main_pool_alloc_with_func(u32 size, s32 side, s32 arg, void* func) {
+void* main_pool_alloc_with_func(u32 size, s32 side, s32 arg, AllocateFunc func) {
     struct MainPoolBlock* addr;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
@@ -182,7 +182,7 @@ void* main_pool_realloc(void* addr, size_t size) {
         // is there enough room to expand/realloc the area?
         if (diff >= size || sMemPool.available >= (size - diff)) {
             s32 arg = prior->arg;
-            void* func = prior->func;
+            AllocateFunc func = prior->func;
             main_pool_free(addr, FALSE); // do not run the func as we are merely reallocating it.
             newaddr = main_pool_alloc_from_pool(size, MEMORY_POOL_LEFT);
             main_pool_set_func(newaddr, arg, func);
@@ -377,7 +377,7 @@ void* main_pool_search(uintptr_t addr, s32* argPtr) {
 /**
  * Set the block function and its argument(s) for a given block.
  */
-void main_pool_set_func(void* block, s32 arg, void* func) {
+void main_pool_set_func(void* block, s32 arg, AllocateFunc func) {
     struct MainPoolBlock* node = (void*)((uintptr_t)block - sizeof(struct MainPoolBlock));
     node->func = func;
     node->arg = arg;

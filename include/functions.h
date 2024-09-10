@@ -7,7 +7,7 @@ void func_80057FD0(void *, int);
 s32 func_8005A990(OSPiHandle *);
 
 // bcopy.s
-void _bcopy(void *, void *, u32);
+void _bcopy(void *, void *, s32);
 
 // 5580.s
 void func_80004CC0(OSThread *, s32, s32);
@@ -37,7 +37,7 @@ void func_8000D970(OSPfs *);
 void set_watch_lohi(s32);
 
 u32 osGetCount(void);
-OSIntMask osSetIntMask(OSIntMask);;
+OSIntMask osSetIntMask(OSIntMask);
 
 unsigned long long __ull_rshift(unsigned long long a0, unsigned long long a1);
 unsigned long long __ull_rem(unsigned long long a0, unsigned long long a1);

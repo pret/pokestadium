@@ -169,13 +169,13 @@ void func_86200020(unk_D_86203E50* arg0) {
 
 void func_86200034(void) {
     UNUSED s32 pad[3];
-    f32 spDC[4][4];
+    MtxF spDC;
     Mtx sp98;
     s32 i;
     UNUSED s32 pad2[1];
 
-    func_80031EF4(spDC, &D_86203E3C->unk_064);
-    guMtxF2L(spDC, &sp98);
+    func_80031EF4(&spDC, &D_86203E3C->unk_064);
+    guMtxF2L(spDC.mf, &sp98);
 
     for (i = 0; i < 4; i++) {
         D_86204590 = &D_86203E50[i];
