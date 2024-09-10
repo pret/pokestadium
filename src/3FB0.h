@@ -76,6 +76,8 @@ typedef struct unk_func_80003680_sp90 {
     /* 0x14 */ s32 unk_14;
 } unk_func_80003680_sp90; // size >= 0x18
 
+typedef void (*ret_func_80004454)(void);
+
 s32 func_800033B0(u8* arg0);
 void func_800033C8(unk_func_80003680_sp300* arg0, u8* arg1);
 void func_80003558(UnkStruct80001380* arg0, unk_func_80003680_sp90* arg1);
@@ -86,7 +88,7 @@ void func_80003860(void);
 void func_80003890(u8* in_header, u8* memory);
 void func_80003964(u8* arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_80003A14(u8* arg0, s16 arg1, s16 arg2, s32 arg3);
-void func_80003B04(s16 arg0);
+s32 func_80003B04(s16 arg0);
 void func_80003B30(u8* arg0, u8* arg1, u8* arg2, s32 arg3);
 void func_80003BE0(u8* arg0, u8* arg1, u8* arg2);
 void* func_80003C80(u8* addr, PRESJPEG* arg1, s32 side);
@@ -102,7 +104,7 @@ s32 func_80004258(s32 id, u8* rom_start, u8* rom_end, s32 arg3);
 struct MainPoolBlock* func_800042E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_80004364(u32 base_addr, u32 addr);
 void func_800043BC(s32 arg0, Fragment* addr);
-void* func_80004454(s32 arg0, u8* romStart, u8* romEnd);
+ret_func_80004454 func_80004454(s32 arg0, u8* romStart, u8* romEnd);
 void* func_800044A8(s32 arg0, s32 arg1, s32 arg2);
 void* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3);
 void* func_80004660(s32 arg0, s32 arg1, s32 arg2, s32 arg3);

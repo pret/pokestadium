@@ -335,6 +335,9 @@
     - [0x6FC00, data, rom_data_6FC00]
     - [0x76260, .data, 29BA0]
     - [0x76280, data, rom_data_76280]
+    - [0x79630, .data, 49790]
+    - [0x79660, data, rom_data_79660]
+
     - [0x79AE0, .data, 4CBC0]
     - [0x79C70, data, rom_data_79C70]
 
@@ -389,12 +392,12 @@
     - [0x7C750, rodata, rom_rodata_7C750]
     - [0x7CCA0, rodata, rom_rodata_7CCA0]
     - [0x7CD10, rodata, rom_rodata_7CD10]
-    - [0x7CD40, rodata, rom_rodata_7CD40]
+    - [0x7CD40, .rodata, 26820]
     - [0x7CEC0, .rodata, 29BA0]
     - [0x7CFD0, rodata, rom_rodata_7CFD0]
     - [0x7D030, rodata, rom_rodata_7D030]
     - [0x7D040, rodata, rom_rodata_7D040]
-    - [0x7D0F0, rodata, rom_rodata_7D0F0]
+    - [0x7D0F0, .rodata, 30640]
     - [0x7D110, rodata, rom_rodata_7D110]
     - [0x7D1B0, rodata, rom_rodata_7D1B0]
     - [0x7D230, rodata, rom_rodata_7D230]
@@ -402,7 +405,8 @@
     - [0x7D3E0, rodata, rom_rodata_7D3E0]
     - [0x7D880, rodata, rom_rodata_7D880]
     - [0x7DF80, rodata, rom_rodata_7DF80]
-    - [0x7DFD0, rodata, rom_rodata_7DFD0]
+    - [0x7DFD0, .rodata, 49790]
+    - [0x7E0C0, rodata, rom_rodata_7E0C0]
     - [0x7E0D0, rodata, rom_rodata_7E0D0]
     - [0x7E0E0, .rodata, 4BA90]
     - [0x7E110, .rodata, 4BDC0]
@@ -458,6 +462,8 @@
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
     - {vram: 0x800A7EA0, type: .bss, name: profiler}
     - {vram: 0x800A8100, type:  bss, name: unk_bss_2}
+    - {vram: 0x800AC880, type:  .bss, name: 20330}
+    - {vram: 0x800AC890, type:  bss, name: unk_bss_11}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}
     - {vram: 0x800AF740, type:  bss, name: unk_bss_7}
     - {vram: 0x800FF990, type:  .bss, name: 4B940}

@@ -7,6 +7,8 @@
 #define MEMORY_POOL_LEFT  0
 #define MEMORY_POOL_RIGHT 1
 
+typedef void (*AllocateFunc)(struct MainPoolBlock*, u32);
+
 // structs for the main pool.
 typedef struct MainPoolState {
     /* 0x00 */ s32 freeSpace;
@@ -18,7 +20,7 @@ typedef struct MainPoolState {
 struct MainPoolBlock {
     /* 0x00 */ struct MainPoolBlock *prev;
     /* 0x04 */ struct MainPoolBlock *next;
-    /* 0x08 */ void (*func)(struct MainPoolBlock *block, s32 arg);
+    /* 0x08 */ AllocateFunc func;
     /* 0x0C */ s32 arg; // passed into func as the 2nd argument.
 };
 
@@ -51,7 +53,7 @@ struct MemoryPool {
 void main_pool_init(void *start, void *end);
 void *main_pool_alloc_from_pool(u32 size, u32 side);
 u32 main_pool_free(void *addr, u32 runBlockFunc);
-void *main_pool_alloc_with_func(u32 size, s32 side, s32 arg, void *func);
+void *main_pool_alloc_with_func(u32 size, s32 side, s32 arg, AllocateFunc func);
 void *main_pool_alloc(u32 size, s32 side);
 u32 main_pool_try_free(void *addr);
 void *main_pool_realloc(void *addr, size_t size);
@@ -59,7 +61,7 @@ u32 main_pool_get_available(void);
 u32 main_pool_push_state(u32 arg);
 u32 main_pool_pop_state(u32 arg);
 void *main_pool_search(uintptr_t addr, s32 *argPtr);
-void main_pool_set_func(void *block, s32 arg, void *func);
+void main_pool_set_func(void *block, s32 arg, AllocateFunc func);
 size_t main_pool_get_block_dist(struct MainPoolBlock *block);
 struct MainPool *main_pool_get_pool(void);
 
