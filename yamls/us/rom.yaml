@@ -335,11 +335,13 @@
     - [0x6FC00, data, rom_data_6FC00]
     - [0x76260, .data, 29BA0]
     - [0x76280, data, rom_data_76280]
+    - [0x78570, .data, 373A0]
+    - [0x78890, data, rom_data_78890]
     - [0x79630, .data, 49790]
     - [0x79660, data, rom_data_79660]
-
     - [0x79AE0, .data, 4CBC0]
     - [0x79C70, data, rom_data_79C70]
+    - [0x79F70, data, rom_data_79F70]
 
     # libleo
     - [0x7A180, .data, libleo/driverominit]
@@ -400,7 +402,7 @@
     - [0x7D0F0, .rodata, 30640]
     - [0x7D110, rodata, rom_rodata_7D110]
     - [0x7D1B0, rodata, rom_rodata_7D1B0]
-    - [0x7D230, rodata, rom_rodata_7D230]
+    - [0x7D230, .rodata, 373A0]
     - [0x7D340, rodata, rom_rodata_7D340]
     - [0x7D3E0, rodata, rom_rodata_7D3E0]
     - [0x7D880, rodata, rom_rodata_7D880]
@@ -466,6 +468,8 @@
     - {vram: 0x800AC890, type:  bss, name: unk_bss_11}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}
     - {vram: 0x800AF740, type:  bss, name: unk_bss_7}
+    - {vram: 0x800B32A0, type:  .bss, name: 373A0}
+    - {vram: 0x800FC7A0, type:  bss, name: unk_bss_12}
     - {vram: 0x800FF990, type:  .bss, name: 4B940}
     - {vram: 0x800FF9B0, type:  .bss, name: 4BDC0}
     - {vram: 0x800FF9C0, type:  bss, name: unk_bss_10}

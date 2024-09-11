@@ -1,21 +1,16 @@
 #include "global.h"
 #include "reset.h"
+#include "5580.h"
 
 // this file handles the soft reset effect.
-
-struct UnkStruct800A62E0 {
-    char filler0[0xA38];
-    s16 unkA38;
-};
-
-struct UnkStruct800A6D20 {
+typedef struct UnkStruct800A6D20 {
     OSThread thread;
     char filler1B0[0x5E0 - 0x1B0];
     u32 unk5E0;
-};
+} UnkStruct800A6D20;
 
-extern struct UnkStruct800A62E0 D_800A62E0;
-extern struct UnkStruct800A6D20 D_800A6D20;
+extern UnkStruct800A62E0 D_800A62E0;
+extern UnkStruct800A6D20 D_800A6D20;
 
 struct UnkStruct4 {
     s32 unk0;
@@ -108,7 +103,7 @@ void SoftReset_Thread(void* unused) {
     // thread loop
     while (1) {
         func_80004CF4(&D_800A6D20.thread); // hangs here until gets a soft reset.
-        if (D_800A62E0.unkA38 == 0) {
+        if (D_800A62E0.unk_A38 == 0) {
             continue;
         }
         if ((u32)D_800A6D20.unk5E0 < 0x10U) {

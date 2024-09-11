@@ -142,7 +142,6 @@ void func_80003648(unk_func_80003680_sp90* arg0, u8(arg1)[2][0x80], unk_func_800
 }
 
 s32 func_80003680(u32 addr, s32 arg1, u8* arg2) {
-    UNUSED s32 pad;
     UnkStruct80001380 sp318;
     unk_func_80003680_sp300 sp300;
     u8 sp200[2][0x80];
