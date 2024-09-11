@@ -84,15 +84,15 @@ unk_D_86002F58_004_000* func_80011938(MainPoolState* arg0, unk_D_86002F58_004_00
         arg1->unk_0A6 = 0;
         arg1->unk_0A0 = -0x100;
         arg1->unk_03C = -0x100;
-        arg1->unk_040 = 0;
-        arg1->unk_044 = NULL;
-        arg1->unk_048 = 0;
-        arg1->unk_04C = 0x10000;
+        arg1->unk_040.unk_00 = 0;
+        arg1->unk_040.unk_04 = NULL;
+        arg1->unk_040.unk_08 = 0;
+        arg1->unk_040.unk_0C = 0x10000;
         arg1->unk_052 = 0;
-        arg1->unk_054 = 0;
-        arg1->unk_058 = 0;
-        arg1->unk_05C = 0;
-        arg1->unk_05E = 0;
+        arg1->unk_054.unk_00 = 0;
+        arg1->unk_054.unk_04 = NULL;
+        arg1->unk_054.unk_08 = 0;
+        arg1->unk_054.unk_0A = 0;
         func_80010FA0(&arg1->unk_000, 0x16);
         arg1->unk_000.unk_02 |= 0x60;
     }

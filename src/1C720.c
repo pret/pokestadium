@@ -45,10 +45,10 @@ void func_8001BC34(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, unk_D_86002
 
     arg0->unk_0A0 = -0x100;
     arg0->unk_03C = -0x100;
-    arg0->unk_040 = -1;
-    arg0->unk_044 = NULL;
-    arg0->unk_054 = -1;
-    arg0->unk_058 = 0;
+    arg0->unk_040.unk_00 = -1;
+    arg0->unk_040.unk_04 = NULL;
+    arg0->unk_054.unk_00 = -1;
+    arg0->unk_054.unk_04 = NULL;
 
     arg0->unk_000.unk_02 &= ~0x8;
 
@@ -83,7 +83,7 @@ s32 func_8001BD9C(unk_D_86002F58_004_000* arg0, s32 arg1) {
     if (arg1 == -1) {
         func_80017788(arg0);
     } else if (arg1 < temp_v1->unk_05) {
-        func_80017798(arg0, arg1, temp_v1->unk_10[arg1], arg1);
+        func_80017798(arg0, arg1, temp_v1->unk_10[arg1]);
         return 1;
     }
 
