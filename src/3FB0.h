@@ -6,6 +6,7 @@
 #include "C970.h"
 #include "CE80.h"
 #include "src/memmap.h"
+#include "src/memory.h"
 
 typedef struct ret_func_8000484C {
 	/* 0x00 */ char unk00[0x90];
@@ -101,7 +102,7 @@ unk_func_800041C0* func_800040EC(unk_func_800041C0* arg0, u32 arg1, u32 offset, 
 void func_800041C0(s32 arg0, s32 arg1, s32 arg2);
 void func_80004200(u32 block_addr, u32 addr);
 s32 func_80004258(s32 id, u8* rom_start, u8* rom_end, s32 arg3);
-struct MainPoolBlock* func_800042E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+MainPoolBlock* func_800042E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_80004364(u32 base_addr, u32 addr);
 void func_800043BC(s32 arg0, Fragment* addr);
 ret_func_80004454 func_80004454(s32 arg0, u8* romStart, u8* romEnd);

@@ -9,29 +9,29 @@
 
 typedef void (*AllocateFunc)(struct MainPoolBlock*, u32);
 
-// structs for the main pool.
-typedef struct MainPoolState {
-    /* 0x00 */ s32 freeSpace;
-    /* 0x04 */ struct MainPoolBlock *listHeadL;
-    /* 0x08 */ struct MainPoolBlock *listHeadR;
-    /* 0x0C */ struct MainPoolState *prev;
-} MainPoolState;
-
-struct MainPoolBlock {
+typedef struct MainPoolBlock {
     /* 0x00 */ struct MainPoolBlock *prev;
     /* 0x04 */ struct MainPoolBlock *next;
     /* 0x08 */ AllocateFunc func;
     /* 0x0C */ s32 arg; // passed into func as the 2nd argument.
-};
+} MainPoolBlock; // size = 0x10
+
+// structs for the main pool.
+typedef struct MainPoolState {
+    /* 0x00 */ s32 freeSpace;
+    /* 0x04 */ MainPoolBlock *listHeadL;
+    /* 0x08 */ MainPoolBlock *listHeadR;
+    /* 0x0C */ struct MainPoolState *prev;
+} MainPoolState;
 
 struct MainPool {
     /* 0x00 */ OSMesg msgs[1];
     /* 0x04 */ OSMesgQueue queue;
     /* 0x1C */ size_t available;
-    /* 0x20 */ struct MainPoolBlock *start;
-    /* 0x24 */ struct MainPoolBlock *end;
-    /* 0x28 */ struct MainPoolBlock *listHeadL;
-    /* 0x2C */ struct MainPoolBlock *listHeadR;
+    /* 0x20 */ MainPoolBlock *start;
+    /* 0x24 */ MainPoolBlock *end;
+    /* 0x28 */ MainPoolBlock *listHeadL;
+    /* 0x2C */ MainPoolBlock *listHeadR;
     /* 0x30 */ struct MainPoolState *mainState;
 };
 
@@ -62,7 +62,7 @@ u32 main_pool_push_state(u32 arg);
 u32 main_pool_pop_state(u32 arg);
 void *main_pool_search(uintptr_t addr, s32 *argPtr);
 void main_pool_set_func(void *block, s32 arg, AllocateFunc func);
-size_t main_pool_get_block_dist(struct MainPoolBlock *block);
+size_t main_pool_get_block_dist(MainPoolBlock *block);
 struct MainPool *main_pool_get_pool(void);
 
 // memory.c
