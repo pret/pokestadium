@@ -6,6 +6,7 @@
 #include "src/45720.h"
 #include "src/50CC0.h"
 #include "src/3D140.h"
+#include "src/373A0.h"
 
 static s32 D_800FF9B0;
 static s32 D_800FF9B4;
@@ -428,15 +429,15 @@ s32 func_8004B1CC(s32 arg0) {
             return 0;
     }
 
-    if (sp2C < D_800FC6E4->unk_08 - 1) {
-        var_a2 = D_800FC6E4->unk_0C[sp2C + 1] - D_800FC6E4->unk_0C[sp2C];
-    } else if (sp2C == D_800FC6E4->unk_08 - 1) {
-        var_a2 = D_800FC6E0->unk_08 - D_800FC6E4->unk_0C[sp2C];
+    if (sp2C < D_800FC6E4->num_files - 1) {
+        var_a2 = D_800FC6E4->files[sp2C + 1] - D_800FC6E4->files[sp2C];
+    } else if (sp2C == D_800FC6E4->num_files - 1) {
+        var_a2 = D_800FC6E0[2] - D_800FC6E4->files[sp2C];
     } else {
         return 0;
     }
 
-    func_8004ADB0(D_800FC6E4->unk_0C[sp2C], D_800FC6DC, var_a2);
+    func_8004ADB0(D_800FC6E4->files[sp2C], D_800FC6DC, var_a2);
     func_80050B40(D_800FC6DC, D_800FC680, 0x98D8);
 
     if (D_80078EC8 <= 0) {

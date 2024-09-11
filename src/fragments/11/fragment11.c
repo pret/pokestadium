@@ -186,8 +186,8 @@ void func_86500238(void) {
                             break;
                     }
                 } else if ((D_8650AB28->unk_008 == 6) &&
-                           (((D_86502E6C != 0) && ((D_8650AB28->unk_014.unk_048 >> 0x10) == 0x37)) ||
-                            ((D_86502E70 != 0) && ((D_8650AB28->unk_014.unk_048 >> 0x10) == 0x5E)))) {
+                           (((D_86502E6C != 0) && ((D_8650AB28->unk_014.unk_040.unk_08 >> 0x10) == 0x37)) ||
+                            ((D_86502E70 != 0) && ((D_8650AB28->unk_014.unk_040.unk_08 >> 0x10) == 0x5E)))) {
                     var_s1 = 1;
                 }
             } else if ((D_86502CD4 == 0) && (D_8650AB28->unk_00E >= 3) &&
@@ -253,9 +253,9 @@ void func_86500238(void) {
                         func_80017804(&D_8650AB28->unk_014, 0x4B);
                     }
                 } else if (var_s1 == 2) {
-                    func_80017464(&D_8650AB28->unk_014, D_8650AB28->unk_014.unk_048 >> 0x10);
+                    func_80017464(&D_8650AB28->unk_014, D_8650AB28->unk_014.unk_040.unk_08 >> 0x10);
                     if (D_8650AB28->unk_008 != 0) {
-                        func_80017804(&D_8650AB28->unk_014, D_8650AB28->unk_014.unk_048 >> 0x10);
+                        func_80017804(&D_8650AB28->unk_014, D_8650AB28->unk_014.unk_040.unk_08 >> 0x10);
                     }
                 } else {
                     func_80017464(&D_8650AB28->unk_014, 0);
@@ -761,7 +761,7 @@ void func_86501AAC(void) {
 
                 D_8650AB28->unk_008 = 0;
                 func_8001BD04(D_8650AB2C, D_8650AB28->unk_008);
-                func_80017464(D_8650AB2C, func_87B00050(D_8650AB2C->unk_044->unk_0A));
+                func_80017464(D_8650AB2C, func_87B00050(D_8650AB2C->unk_040.unk_04->unk_0A));
 
                 D_8650AB2C->unk_024.x = D_86502C20[j].unk_00;
                 D_8650AB2C->unk_024.y = D_86502C20[j].unk_04;
@@ -806,7 +806,7 @@ void func_86501AAC(void) {
             func_8001BB58(D_8650AB2C);
             func_8001BC34(D_8650AB2C, 0, sp5C[j], D_87B000E4->unk_08->unk_00[0]);
             func_8001BD04(D_8650AB2C, 0);
-            func_80017464(D_8650AB2C, D_8650AB2C->unk_044->unk_0A);
+            func_80017464(D_8650AB2C, D_8650AB2C->unk_040.unk_04->unk_0A);
         }
     }
 

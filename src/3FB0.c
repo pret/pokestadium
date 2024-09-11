@@ -4,7 +4,6 @@
 #include "src/D470.h"
 #include "src/dma.h"
 #include "src/dp_intro.h"
-#include "src/memory.h"
 #include "src/util.h"
 #include "lib/ultralib/include/PR/leo.h"
 
@@ -143,7 +142,6 @@ void func_80003648(unk_func_80003680_sp90* arg0, u8(arg1)[2][0x80], unk_func_800
 }
 
 s32 func_80003680(u32 addr, s32 arg1, u8* arg2) {
-    UNUSED s32 pad;
     UnkStruct80001380 sp318;
     unk_func_80003680_sp300 sp300;
     u8 sp200[2][0x80];
@@ -486,10 +484,10 @@ s32 func_80004258(s32 id, u8* rom_start, u8* rom_end, s32 arg3) {
     return vaddr;
 }
 
-struct MainPoolBlock* func_800042E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+MainPoolBlock* func_800042E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     UNUSED s32 pad;
     unk_func_800041C0 sp28;
-    struct MainPoolBlock* temp_v0 = func_80003F54(func_80004098(&sp28, arg1, arg2), arg3);
+    MainPoolBlock* temp_v0 = func_80003F54(func_80004098(&sp28, arg1, arg2), arg3);
 
     if ((temp_v0 != NULL) && (arg0 > 0)) {
         Memmap_SetSegmentMap(arg0, temp_v0, main_pool_get_block_dist(temp_v0));
