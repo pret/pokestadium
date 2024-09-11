@@ -229,7 +229,7 @@ void func_8000183C(UNUSED void* arg) {
     func_80001380(&D_800846C0);
     while (1) {
         void* sp4C;
-        if (D_800A62E0.unkA38 > 0) {
+        if (D_800A62E0.unk_A38 > 0) {
             func_800017E4();
             continue;
         }
