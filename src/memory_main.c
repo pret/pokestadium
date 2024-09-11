@@ -15,7 +15,7 @@ void main_pool_init(void* start, void* end) {
     sMemPool.available = (uintptr_t)sMemPool.end - (uintptr_t)sMemPool.start;
     sMemPool.mainState = NULL;
 
-    sMemPool.listHeadL = ((u8*)sMemPool.start - sizeof(struct MainPoolBlock));
+    sMemPool.listHeadL = ((u8*)sMemPool.start - sizeof(MainPoolBlock));
     sMemPool.listHeadL->prev = NULL;
     sMemPool.listHeadL->next = NULL;
     sMemPool.listHeadL->func = NULL;
@@ -37,10 +37,10 @@ void main_pool_init(void* start, void* end) {
  * If there is not enough space, return NULL.
  */
 void* main_pool_alloc_from_pool(u32 size, u32 side) {
-    struct MainPoolBlock* newListHead;
+    MainPoolBlock* newListHead;
     void* addr = NULL;
 
-    size = ALIGN16(size) + sizeof(struct MainPoolBlock);
+    size = ALIGN16(size) + sizeof(MainPoolBlock);
 
     // do we have enough space?
     if (size > 0 && size <= sMemPool.available) {
@@ -53,7 +53,7 @@ void* main_pool_alloc_from_pool(u32 size, u32 side) {
             newListHead->next = NULL;
             newListHead->func = NULL;
             newListHead->arg = '\0';
-            addr = ((u8*)sMemPool.listHeadL + sizeof(struct MainPoolBlock));
+            addr = ((u8*)sMemPool.listHeadL + sizeof(MainPoolBlock));
             sMemPool.listHeadL = newListHead;
         } else if (side == MEMORY_POOL_RIGHT) {
             // reduce available size.
@@ -65,7 +65,7 @@ void* main_pool_alloc_from_pool(u32 size, u32 side) {
             newListHead->func = NULL;
             newListHead->arg = '\0';
             sMemPool.listHeadR = newListHead;
-            addr = ((u8*)newListHead + sizeof(struct MainPoolBlock));
+            addr = ((u8*)newListHead + sizeof(MainPoolBlock));
         }
     }
     return addr;
@@ -78,8 +78,8 @@ void* main_pool_alloc_from_pool(u32 size, u32 side) {
  * Return the amount of free space left in the pool.
  */
 u32 main_pool_free(void* addr, u32 runBlockFunc) {
-    struct MainPoolBlock* block = (struct MainPoolBlock*)((u8*)addr - sizeof(struct MainPoolBlock));
-    struct MainPoolBlock* oldListHead = (struct MainPoolBlock*)((u8*)addr - sizeof(struct MainPoolBlock));
+    MainPoolBlock* block = (MainPoolBlock*)((u8*)addr - sizeof(MainPoolBlock));
+    MainPoolBlock* oldListHead = (MainPoolBlock*)((u8*)addr - sizeof(MainPoolBlock));
 
     if (oldListHead < sMemPool.listHeadL) {
         do {
@@ -88,7 +88,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
                 // TODO: Fakematch
                 AllocateFunc func = block->func;
                 if (func != 0) {
-                    block->func((u8*)block + sizeof(struct MainPoolBlock), block->arg);
+                    block->func((u8*)block + sizeof(MainPoolBlock), block->arg);
                     // TODO: fake here too
                     if ((!(&sMemPool)) && (!(&sMemPool))) {}
                 }
@@ -103,7 +103,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
                 if (runBlockFunc) {
                     AllocateFunc func = block->func;
                     if (func != NULL) {
-                        func((u8*)block + sizeof(struct MainPoolBlock), block->arg);
+                        func((u8*)block + sizeof(MainPoolBlock), block->arg);
                         block = sMemPool.listHeadR;
                     }
                 }
@@ -123,7 +123,7 @@ u32 main_pool_free(void* addr, u32 runBlockFunc) {
  * function+arguments.
  */
 void* main_pool_alloc_with_func(u32 size, s32 side, s32 arg, AllocateFunc func) {
-    struct MainPoolBlock* addr;
+    MainPoolBlock* addr;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
     addr = main_pool_alloc_from_pool(size, side);
@@ -139,7 +139,7 @@ void* main_pool_alloc_with_func(u32 size, s32 side, s32 arg, AllocateFunc func) 
  * Same as above but no function/argument is set.
  */
 void* main_pool_alloc(u32 size, s32 side) {
-    struct MainPoolBlock* node;
+    MainPoolBlock* node;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
     node = main_pool_alloc_from_pool(size, side);
@@ -169,7 +169,7 @@ u32 main_pool_try_free(void* addr) {
  * The block does not move.
  */
 void* main_pool_realloc(void* addr, size_t size) {
-    struct MainPoolBlock* prior = (struct MainPoolBlock*)((u8*)addr - sizeof(struct MainPoolBlock));
+    MainPoolBlock* prior = (MainPoolBlock*)((u8*)addr - sizeof(MainPoolBlock));
     void* newaddr = NULL;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
@@ -198,7 +198,7 @@ void* main_pool_realloc(void* addr, size_t size) {
 u32 main_pool_get_available(void) {
     // account for the block struct. Any newly allocated pools have this struct as its "true"
     // header, so subtract the size to get the real amount of available space.
-    s32 available = sMemPool.available - sizeof(struct MainPoolBlock);
+    s32 available = sMemPool.available - sizeof(MainPoolBlock);
 
     // if it was less than 0, then we do not have enough to allocate a single pool. Floor the
     // practical amount of available space to 0.
@@ -215,8 +215,8 @@ u32 main_pool_get_available(void) {
  */
 u32 main_pool_push_state(u32 arg) {
     struct MainPoolState* state;
-    struct MainPoolBlock* listHeadL;
-    struct MainPoolBlock* listHeadR;
+    MainPoolBlock* listHeadL;
+    MainPoolBlock* listHeadR;
     uintptr_t available;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
@@ -230,7 +230,7 @@ u32 main_pool_push_state(u32 arg) {
      * We are essentially allocating a block that looks like this:
      *
      * struct AllocatedBlock {
-     *     struct MainPoolBlock block;
+     *     MainPoolBlock block;
      *     struct MainPoolState state; <---- the pointer is pointing here.
      * };
      */
@@ -242,7 +242,7 @@ u32 main_pool_push_state(u32 arg) {
          * by the head plus the size of the block struct, meaning it is returning the
          * pointer to the head.
          */
-        ((struct MainPoolBlock*)((u8*)state - sizeof(struct MainPoolBlock)))->arg = arg;
+        ((MainPoolBlock*)((u8*)state - sizeof(MainPoolBlock)))->arg = arg;
 
         // now that the previous block's argument is set, set the newly allocated state's
         // fields.
@@ -264,7 +264,7 @@ u32 main_pool_push_state(u32 arg) {
  */
 u32 main_pool_pop_state(u32 arg) {
     struct MainPoolState* node;
-    struct MainPoolBlock* argptr;
+    MainPoolBlock* argptr;
     void* listHeadL;
     void* listHeadR;
     struct MainPoolState* state;
@@ -290,7 +290,7 @@ u32 main_pool_pop_state(u32 arg) {
          */
         node = (void*)((u8*)node - sizeof(struct MainPoolState));
 
-        if (arg == (uintptr_t)((struct MainPoolBlock*)node)->arg) {
+        if (arg == (uintptr_t)((MainPoolBlock*)node)->arg) {
             // we found the block with the matching string! That means we are now at the
             // beginning of the pool area and can begin to run the function loops. Break.
             break;
@@ -304,7 +304,7 @@ u32 main_pool_pop_state(u32 arg) {
     argptr = sMemPool.listHeadR;
     while ((uintptr_t)listHeadR > (uintptr_t)argptr) {
         if (argptr->func != NULL) {
-            argptr->func((u8*)argptr + sizeof(struct MainPoolBlock), argptr->arg);
+            argptr->func((u8*)argptr + sizeof(MainPoolBlock), argptr->arg);
         }
         argptr = argptr->next;
     }
@@ -315,7 +315,7 @@ u32 main_pool_pop_state(u32 arg) {
     argptr = sMemPool.listHeadL->prev;
     while ((uintptr_t)listHeadL <= (uintptr_t)argptr) {
         if (argptr->func != NULL) {
-            argptr->func((u8*)argptr + sizeof(struct MainPoolBlock), argptr->arg);
+            argptr->func((u8*)argptr + sizeof(MainPoolBlock), argptr->arg);
         }
         argptr = argptr->prev;
     }
@@ -334,12 +334,12 @@ u32 main_pool_pop_state(u32 arg) {
  * function.
  */
 void* main_pool_search(uintptr_t addr, s32* argPtr) {
-    struct MainPoolBlock* node;
-    struct MainPoolBlock* otherNode;
+    MainPoolBlock* node;
+    MainPoolBlock* otherNode;
 
     node = sMemPool.listHeadL->prev;
     while (node != NULL) {
-        int isAddrLater = (addr >= ((uintptr_t)((u8*)node + sizeof(struct MainPoolBlock))));
+        int isAddrLater = (addr >= ((uintptr_t)((u8*)node + sizeof(MainPoolBlock))));
         otherNode = node->next;
         // seems to be checking for an addr within a block region? Since this function
         // is unused, we wont be able to check for the intended context of what could
@@ -349,7 +349,7 @@ void* main_pool_search(uintptr_t addr, s32* argPtr) {
                 *argPtr = node->arg;
             }
             // return the pointer to its block contents.
-            return (void*)((u8*)(node) + sizeof(struct MainPoolBlock));
+            return (void*)((u8*)(node) + sizeof(MainPoolBlock));
         }
         node = node->prev;
     }
@@ -358,15 +358,15 @@ void* main_pool_search(uintptr_t addr, s32* argPtr) {
     node = sMemPool.listHeadR;
     otherNode = node->next;
     while (otherNode != NULL) {
-        int isAddrLater = (addr >= ((uintptr_t)((u8*)node + sizeof(struct MainPoolBlock))));
-        struct MainPoolBlock* new_var = otherNode; // bit of a fakematch to force the move reload.
+        int isAddrLater = (addr >= ((uintptr_t)((u8*)node + sizeof(MainPoolBlock))));
+        MainPoolBlock* new_var = otherNode; // bit of a fakematch to force the move reload.
         // same as above.
         if (isAddrLater && (addr < ((uintptr_t)new_var & 0xFFFFFFFF))) {
             if (argPtr != NULL) {
                 *argPtr = node->arg;
             }
             // return the pointer to its block contents.
-            return (void*)((u8*)(node) + sizeof(struct MainPoolBlock));
+            return (void*)((u8*)(node) + sizeof(MainPoolBlock));
         }
         otherNode = (node = otherNode)->next;
     }
@@ -378,7 +378,7 @@ void* main_pool_search(uintptr_t addr, s32* argPtr) {
  * Set the block function and its argument(s) for a given block.
  */
 void main_pool_set_func(void* block, s32 arg, AllocateFunc func) {
-    struct MainPoolBlock* node = (void*)((uintptr_t)block - sizeof(struct MainPoolBlock));
+    MainPoolBlock* node = (void*)((uintptr_t)block - sizeof(MainPoolBlock));
     node->func = func;
     node->arg = arg;
 }
@@ -386,8 +386,8 @@ void main_pool_set_func(void* block, s32 arg, AllocateFunc func) {
 /**
  * Get the distance offset from the block's state listHeadL pointer to the current block.
  */
-size_t main_pool_get_block_dist(struct MainPoolBlock* block) {
-    struct MainPoolState* state = ((u8*)block - sizeof(struct MainPoolBlock));
+size_t main_pool_get_block_dist(MainPoolBlock* block) {
+    struct MainPoolState* state = ((u8*)block - sizeof(MainPoolBlock));
 
     return (size_t)((uintptr_t)state->listHeadL - (uintptr_t)block);
 }

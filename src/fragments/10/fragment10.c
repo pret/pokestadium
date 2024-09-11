@@ -245,7 +245,7 @@ void func_864005EC(u8 arg0) {
 
     D_864029B4--;
     if (D_864029B4 < 2) {
-        D_864052CC->unk_004.unk_04C = 0;
+        D_864052CC->unk_004.unk_040.unk_0C = 0;
         D_87B000C8 = 1;
 
         func_8004B9C4(0xA);
@@ -293,7 +293,7 @@ void func_86400860(UNUSED s32 arg0) {
         D_864052C8->unk_190->unk_18 = temp_v0;
 
         if ((D_864052C8->unk_010 == 0) || (D_864052C8->unk_00C == 1)) {
-            temp_a3 = D_864052C8->unk_028.unk_048 >> 0x10;
+            temp_a3 = D_864052C8->unk_028.unk_040.unk_08 >> 0x10;
 
             gSPDisplayList(temp_v0++, D_86403F30);
             gDPSetTileSize(temp_v0++, G_TX_RENDERTILE, 0x0000, (0x40 - (D_87B000C0 % 64)) << 2, 0x007C,
@@ -370,7 +370,7 @@ void func_86400BE8(s32 arg0) {
         if (arg0 == 2) {
             static u8 D_864029C0 = 0;
 
-            D_864052D6 = D_864052CC->unk_004.unk_048 >> 0x10;
+            D_864052D6 = D_864052CC->unk_004.unk_040.unk_08 >> 0x10;
             D_864052D4 = 0;
 
             for (i = 0; i < 8; i++) {
@@ -446,7 +446,7 @@ void func_86400EB4(void) {
 
     if ((D_8780FC92 == 0) && (D_8780FC94 == 0)) {
         D_864052CC->unk_16D = D_864052CC->unk_16C;
-        if (D_864052D6 < (D_864052CC->unk_004.unk_044->unk_0A / 2)) {
+        if (D_864052D6 < (D_864052CC->unk_004.unk_040.unk_04->unk_0A / 2)) {
             D_864052CC->unk_16C = 0;
         } else {
             D_864052CC->unk_16C = 1;
@@ -867,7 +867,7 @@ void func_86402130(void) {
         func_8001BC34(D_864052D0, 0, 0xC4, D_87B000E4->unk_08->unk_00[0]);
         D_864052C8->unk_004 = 0;
         func_8001BD04(D_864052D0, D_864052C8->unk_004);
-        func_80017464(D_864052D0, func_87B00050(D_864052D0->unk_044->unk_0A));
+        func_80017464(D_864052D0, func_87B00050(D_864052D0->unk_040.unk_04->unk_0A));
 
         D_864052D0->unk_024.x = D_864027C0[i].unk_00;
         D_864052D0->unk_024.y = D_864027C0[i].unk_04;
@@ -907,7 +907,7 @@ void func_86402130(void) {
     D_864052CC->unk_001 = D_864052CC->unk_000 = 0;
 
     func_8001BD04(D_864052D0, D_864052CC->unk_000);
-    func_80017464(D_864052D0, D_864052D0->unk_044->unk_0A);
+    func_80017464(D_864052D0, D_864052D0->unk_040.unk_04->unk_0A);
 
     D_864052D0->unk_024.y = 20.0f;
     D_864052D0->unk_030.x = 1.0f;
@@ -925,7 +925,7 @@ void func_86402130(void) {
         func_8001BB58(D_864052D0);
         func_8001BC34(D_864052D0, 0, 0xD2, D_87B000E4->unk_08->unk_00[0]);
         func_8001BD04(D_864052D0, 0);
-        func_80017464(D_864052D0, D_864052D0->unk_044->unk_0A);
+        func_80017464(D_864052D0, D_864052D0->unk_040.unk_04->unk_0A);
 
         D_864052D0->unk_024.x = D_864027C0[i].unk_00;
         D_864052D0->unk_024.y = 25.0f;

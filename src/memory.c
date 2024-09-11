@@ -10,7 +10,7 @@
  * Return NULL if there is not enough space in the main pool.
  */
 struct MemoryPool* mem_pool_try_init(u32 size, s32 side) {
-    struct MainPoolBlock* block;
+    MainPoolBlock* block;
     struct MemoryPool* ret;
 
     size = ALIGN4(size);
@@ -123,7 +123,7 @@ void mem_pool_free(struct MemoryPool* pool, void* addr) {
 }
 
 void* func_80002D10(u32 size, s32 side) {
-    struct MainPoolBlock* block;
+    MainPoolBlock* block;
     void* ptr = NULL;
 
     size = ALIGN4(size);

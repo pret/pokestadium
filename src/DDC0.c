@@ -3,19 +3,12 @@
 #include "dp_intro.h"
 #include "profiler.h"
 #include "4BDC0.h"
+#include "5580.h"
+#include "373A0.h"
 
 extern s32 D_800A83A0;
 
-struct Unk800A83A8 {
-    OSMesg mesg;
-    OSMesgQueue queue;
-    char filler1C[0x4];
-    OSMesg mesg20;
-    OSMesgQueue queue24;
-    char filler3C[0x2C];
-};
-
-extern struct Unk800A83A8 D_800A83A8[];
+extern UnkStruct80001380 D_800A83A8[];
 
 extern s32 D_800A8478;
 extern s32 D_800A847C;
@@ -26,10 +19,8 @@ extern u8 D_800AA660[];
 
 s32 func_800484E0(void);
 void func_80009210(void);
-void func_800373D8(void);
 void func_8004FD44(void);
 void func_8004B9C4();
-void func_80037340(void*);
 void func_8004FCD8(s32);
 void func_8003D4A0(s32);
 void func_8004AF24(s32);
@@ -126,9 +117,9 @@ void func_8000D3A8(void* unused) {
     while (1) {
         func_80004CF4(&D_800A8480);
         profiler_log_thread4_time();
-        if ((D_800A83A0 != 0) && (D_800A62E0.unkA38 < 0x15)) {
-            func_80037340(&D_800A83A8[D_800A8478].mesg20);
-            func_800053B4(&D_800A83A8[D_800A8478].mesg, 0);
+        if ((D_800A83A0 != 0) && (D_800A62E0.unk_A38 < 0x15)) {
+            func_80037340(&D_800A83A8[D_800A8478].task);
+            func_800053B4(&D_800A83A8[D_800A8478], 0);
         }
         D_800A8478 ^= 1;
         profiler_log_thread4_time();
