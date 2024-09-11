@@ -116,7 +116,7 @@ extern u32 D_80073650[];
 extern s16 D_800AE4E0;
 extern unk_D_800AE4E8 D_800AE4E8[4];
 
-void func_80025C20(UNUSED struct MainPoolBlock* arg0, u32 arg1) {
+void func_80025C20(UNUSED MainPoolBlock* arg0, u32 arg1) {
     u32 bank_num = arg1 - 'BNK0';
     unk_D_800AE4E8* temp_v0 = &D_800AE4E8[bank_num];
 
