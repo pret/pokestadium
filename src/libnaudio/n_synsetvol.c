@@ -21,10 +21,9 @@
 #include <ultraerror.h>
 #include "n_synthInternals.h"
 
-void n_alSynSetVol(N_ALVoice *v, s16 volume, ALMicroTime t)
-{
-    ALParam  *update;
-    ALFilter *f;
+void n_alSynSetVol(N_ALVoice* v, s16 volume, ALMicroTime t) {
+    ALParam* update;
+    ALFilter* f;
 
     if (v->pvoice) {
         /*
@@ -37,21 +36,20 @@ void n_alSynSetVol(N_ALVoice *v, s16 volume, ALMicroTime t)
          * set offset and volume data
          */
 #ifdef SAMPLE_ROUND
-	update->delta  = SAMPLE184( n_syn->paramSamples + v->pvoice->offset);
+        update->delta = SAMPLE184(n_syn->paramSamples + v->pvoice->offset);
 #else
-        update->delta  = n_syn->paramSamples + v->pvoice->offset;
+        update->delta = n_syn->paramSamples + v->pvoice->offset;
 #endif
-        update->type            = AL_FILTER_SET_VOLUME;
-        update->data.i          = volume;
+        update->type = AL_FILTER_SET_VOLUME;
+        update->data.i = volume;
 
 #ifdef SAMPLE_ROUND
-	update->moredata.i = SAMPLE184( _n_timeToSamples(t) );
+        update->moredata.i = SAMPLE184(_n_timeToSamples(t));
 #else
-	update->moredata.i = _n_timeToSamples(t);
+        update->moredata.i = _n_timeToSamples(t);
 #endif
-        update->next            = 0;
+        update->next = 0;
 
-	n_alEnvmixerParam(v->pvoice, AL_FILTER_ADD_UPDATE, update);
+        n_alEnvmixerParam(v->pvoice, AL_FILTER_ADD_UPDATE, update);
     }
 }
-

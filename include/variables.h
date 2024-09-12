@@ -116,7 +116,9 @@ extern struct Vec3s D_8006F05C;
 extern struct Vec3f D_8006F064;
 
 typedef struct unk_D_8006FF00 {
-	/* 0x00 */ char unk_00[0x10];
+	/* 0x00 */ char unk_00[0x4];
+	/* 0x04 */ char* name;
+	/* 0x08 */ char unk_08[0x8];
 	/* 0x10 */ s16 unk_10;
 	/* 0x12 */ s16 unk_12;
 	/* 0x14 */ char unk_14[0x8];
@@ -143,11 +145,6 @@ extern unk_D_800AC870* D_800AC870;
 
 extern Gfx D_8006F498[];
 
-extern f32 D_80077DD4;
-extern f32 D_80077DD8;
-extern f32 D_80077DDC;
-extern f32 D_80077DE0;
-extern s8 D_80077DE4;
 extern s32 D_80078E60;
 extern s32 D_80078E64;
 extern s32 D_80078E68;
@@ -191,6 +188,6 @@ extern u8 D_87B000D0;
 extern u8 D_87B000D4;
 
 extern s32 D_800FC820;
-extern s32 D_800FF9C0;
+extern u8* D_800FF9C0;
 
 #endif

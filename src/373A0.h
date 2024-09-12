@@ -65,7 +65,7 @@ extern ALSeqFile* D_800FC714;
 extern u32* D_800FC798;
 
 s32 func_800367A0(u32, s32, s32);
-s32 func_80037234(s32, s32);
+s32 func_80037234(s32, u32);
 void func_80037360(u32*, u32, s32);
 
 #endif // _373A0_H_
