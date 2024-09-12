@@ -5,7 +5,7 @@
 #include "src/38BB0.h"
 #include "src/4B940.h"
 #include "src/4BA90.h"
-#include "src/50CC0.h"
+#include "src/51740.h"
 #include "src/4F410.h"
 #include "src/485C0.h"
 
@@ -428,7 +428,7 @@ s32 func_800367A0(u32 arg0, s32 arg1, s32 arg2) {
     return sp2C;
 }
 
-s32 func_80037234(s32 arg0, s32 arg1) {
+s32 func_80037234(s32 arg0, u32 arg1) {
     switch (arg0) {
         case 0x0:
             if (arg1 == 0) {
@@ -487,6 +487,8 @@ void func_80037360(u32* arg0, u32 arg1, s32 arg2) {
     }
 }
 
+#define AUDIO_HEAP_SIZE 300000
+
 s32 func_800373D8(void) {
     s32 i;
     FileHeaders* sp78;
@@ -498,9 +500,9 @@ s32 func_800373D8(void) {
     sp38.unk_04 = 0x34;
     sp38.unk_08 = 0x18;
     sp38.unk_0C = D_800B32A0;
-    sp38.unk_10 = 0x493E0;
+    sp38.unk_10 = AUDIO_HEAP_SIZE;
     sp38.unk_14 = 0x100;
-    sp38.unk_18 = 0x7D00;
+    sp38.unk_18 = 32000;
     sp38.unk_1C = 0x440;
     sp38.unk_20 = 1;
     sp38.unk_24 = 0x30;
@@ -510,9 +512,9 @@ s32 func_800373D8(void) {
     func_80038B68(&sp38);
     func_8004AD40(2);
 
-    D_800FC6DC = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x61A8);
-    D_800FC798 = alHeapDBAlloc(NULL, 0, D_800FC810, 8, 4);
-    D_800FC6E0 = alHeapDBAlloc(NULL, 0, D_800FC810, 7, 4);
+    D_800FC6DC = alHeapAlloc(D_800FC810, 1, 0x61A8);
+    D_800FC798 = alHeapAlloc(D_800FC810, 8, 4);
+    D_800FC6E0 = alHeapAlloc(D_800FC810, 7, 4);
 
     // Copy rom data from 0x15C0000 into D_800FC6E0
     func_8004ADB0(&D_15C0000, D_800FC6E0, sizeof(u8*) * 7);
@@ -526,7 +528,7 @@ s32 func_800373D8(void) {
     num_files = sp78->file1.num_files;
     // Allocate vram, copy rom bytes, and add address to make absolute,
     // for all of the first archive's files, including header.
-    D_800FC6E4 = alHeapDBAlloc(NULL, 0, D_800FC810, (0xC / sizeof(u32)) + num_files, sizeof(u32));
+    D_800FC6E4 = alHeapAlloc(D_800FC810, (0xC / sizeof(u32)) + num_files, sizeof(u32));
     func_8004ADB0(D_800FC6E0[1], D_800FC6E4, 0xC + (num_files * 4));
     // Update just the first 2 pointers from the header,
     // pointer to first file, and pointer to N64 wave tables.
@@ -538,7 +540,7 @@ s32 func_800373D8(void) {
     func_8004ADB0(D_800FC6E4->offset1, D_800FC6DC, D_800FC6E4->wave_tables_offset - D_800FC6E4->offset1);
 
     // Decompressed first file memory.
-    D_800FC684 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x4120);
+    D_800FC684 = alHeapAlloc(D_800FC810, 1, 0x4120);
 
     // Decompress first file Yay0 from D_800FC6DC, into D_800FC684
     func_80050B40(D_800FC6DC, D_800FC684, 0x4120);
@@ -546,27 +548,27 @@ s32 func_800373D8(void) {
     // ??
     func_8003979C(D_800FC684, D_800FC6E4->wave_tables_offset);
 
-    D_800FC680 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x98D8);
+    D_800FC680 = alHeapAlloc(D_800FC810, 1, 0x98D8);
 
     // Load second archive header at 0x16F27E0
     func_8004ADB0(D_800FC6E0[2], sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
     // Memory to hold archive toc
-    D_800FC6E8 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC6E8 = alHeapAlloc(D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
     // Read the alSeqFile into D_800FC6E8
     func_8004ADB0(D_800FC6E0[2], D_800FC6E8, 4 + (num_files * sizeof(ALSeqData)));
     // Initialise the memory as an alSeqFile
     alSeqFileNew(D_800FC6E8, D_800FC6E0[2]);
 
     // Read the first archive sub header from 0x16F2804, into D_800FC6EC
-    D_800FC6EC = alHeapDBAlloc(NULL, 0, D_800FC810, 3, 4);
+    D_800FC6EC = alHeapAlloc(D_800FC810, 3, 4);
     func_8004ADB0(D_800FC6E8->seqArray[0].offset, D_800FC6EC, sizeof(File2SubHeader1));
     func_80037360(D_800FC6EC, D_800FC6E8->seqArray[0].offset, sizeof(File2SubHeader1) / sizeof(u32));
 
     // Read the first file from the sub header into D_800FC6DC (0x16F2814)
     func_8004ADB0(D_800FC6EC->offset1, D_800FC6DC, D_800FC6EC->offset2 - D_800FC6EC->offset1);
     // Decompress the yay0 file into D_800FC688
-    D_800FC688 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0xBB8);
+    D_800FC688 = alHeapAlloc(D_800FC810, 1, 0xBB8);
     func_80050B40(D_800FC6DC, D_800FC688, 0xBB8);
     // ???
     func_800397BC(D_800FC688);
@@ -574,7 +576,7 @@ s32 func_800373D8(void) {
     // Read the second file from the sub header into D_800FC6DC (0x16F2BD0)
     func_8004ADB0(D_800FC6EC->offset2, D_800FC6DC, D_800FC6EC->wave_tables_offset - D_800FC6EC->offset2);
     // Decompress the yay0 file into D_800FC688
-    D_800FC68C = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x157C);
+    D_800FC68C = alHeapAlloc(D_800FC810, 1, 0x157C);
     func_80050B40(D_800FC6DC, D_800FC68C, 0x157C);
     // ???
     func_8003979C(D_800FC68C, D_800FC6EC->wave_tables_offset);
@@ -583,42 +585,42 @@ s32 func_800373D8(void) {
     func_8004ADB0(D_800FC6E8->seqArray[1].offset, sp78, sizeof(File2SubHeader2));
     num_files = sp78->file2sub2.num_files;
 
-    D_800FC6F0 = alHeapDBAlloc(NULL, 0, D_800FC810, 4, (sizeof(File2SubHeader2) / sizeof(u32)) + num_files);
+    D_800FC6F0 = alHeapAlloc(D_800FC810, 4, (sizeof(File2SubHeader2) / sizeof(u32)) + num_files);
     func_8004ADB0(D_800FC6E8->seqArray[1].offset, D_800FC6F0, sizeof(File2SubHeader2) + (num_files * sizeof(u32)));
     func_80037360(&D_800FC6F0->offset1, D_800FC6E8->seqArray[1].offset, num_files + 2);
     func_8004ADB0(D_800FC6F0->offset1, D_800FC6DC, D_800FC6F0->wave_tables_offset - D_800FC6F0->offset1);
     // Decompress the yay0 file into D_800FC688
-    D_800FC690 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x2EE0);
+    D_800FC690 = alHeapAlloc(D_800FC810, 1, 0x2EE0);
     func_80050B40(D_800FC6DC, D_800FC690, 0x2EE0);
     // ???
     func_8003979C(D_800FC690, D_800FC6F0->wave_tables_offset);
 
-    D_800FC698[0] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x258);
-    D_800FC698[1] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x258);
-    D_800FC698[2] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x258);
+    D_800FC698[0] = alHeapAlloc(D_800FC810, 1, 0x258);
+    D_800FC698[1] = alHeapAlloc(D_800FC810, 1, 0x258);
+    D_800FC698[2] = alHeapAlloc(D_800FC810, 1, 0x258);
 
     // Read the second seq array (0x17C9C24)
     func_8004ADB0(D_800FC6E8->seqArray[2].offset, sp78, sizeof(File2SubHeader2));
     num_files = sp78->file2sub2.num_files;
 
-    D_800FC6FC = alHeapDBAlloc(NULL, 0, D_800FC810, 4, num_files + 3);
+    D_800FC6FC = alHeapAlloc(D_800FC810, 4, num_files + 3);
     func_8004ADB0(D_800FC6E8->seqArray[2].offset, D_800FC6FC, sizeof(File2SubHeader2) + (num_files * sizeof(u32)));
     func_80037360(&D_800FC6FC->offset1, D_800FC6E8->seqArray[2].offset, num_files + 2);
     func_8004ADB0(D_800FC6FC->offset1, D_800FC6DC, D_800FC6FC->wave_tables_offset - D_800FC6FC->offset1);
-    D_800FC6AC = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x9C4);
+    D_800FC6AC = alHeapAlloc(D_800FC810, 1, 0x9C4);
     // Decompress
     func_80050B40(D_800FC6DC, D_800FC6AC, 0x9C4);
     func_8003979C(D_800FC6AC, D_800FC6FC->wave_tables_offset);
 
-    D_800FC6B0[0] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x3E8);
-    D_800FC6B0[1] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x3E8);
-    D_800FC6B0[2] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x3E8);
+    D_800FC6B0[0] = alHeapAlloc(D_800FC810, 1, 0x3E8);
+    D_800FC6B0[1] = alHeapAlloc(D_800FC810, 1, 0x3E8);
+    D_800FC6B0[2] = alHeapAlloc(D_800FC810, 1, 0x3E8);
 
     // Read seq header from 0x17DC304
     func_8004ADB0(D_800FC6E8->seqArray[3].offset, sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
 
-    D_800FC6F4 = alHeapDBAlloc(NULL, 0, D_800FC810, 4, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC6F4 = alHeapAlloc(D_800FC810, 4, 4 + (num_files * sizeof(ALSeqData)));
     func_8004ADB0(D_800FC6E8->seqArray[3].offset, D_800FC6F4, 4 + (num_files * sizeof(ALSeqData)));
     alSeqFileNew(D_800FC6F4, D_800FC6E8->seqArray[3].offset);
 
@@ -626,18 +628,18 @@ s32 func_800373D8(void) {
     func_8004ADB0(D_800FC6F4->seqArray[1].offset, sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
 
-    D_800FC6F8 = alHeapDBAlloc(NULL, 0, D_800FC810, 4, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC6F8 = alHeapAlloc(D_800FC810, 4, 4 + (num_files * sizeof(ALSeqData)));
     func_8004ADB0(D_800FC6F4->seqArray[1].offset, D_800FC6F8, 4 + (num_files * sizeof(ALSeqData)));
     alSeqFileNew(D_800FC6F8, D_800FC6F4->seqArray[1].offset);
 
-    D_800FC6A4 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x1388);
-    D_800FC6A8 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0xBB8);
+    D_800FC6A4 = alHeapAlloc(D_800FC810, 1, 0x1388);
+    D_800FC6A8 = alHeapAlloc(D_800FC810, 1, 0xBB8);
 
     // load third archive from the main list, archive is at 0x1978820
     func_8004ADB0(D_800FC6E0[3], sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
 
-    D_800FC700 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC700 = alHeapAlloc(D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
     func_8004ADB0(D_800FC6E0[3], D_800FC700, 4 + (num_files * sizeof(ALSeqData)));
     alSeqFileNew(D_800FC700, D_800FC6E0[3]);
 
@@ -645,18 +647,18 @@ s32 func_800373D8(void) {
     func_8004ADB0(D_800FC6E0[4], sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
 
-    D_800FC704 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC704 = alHeapAlloc(D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
     func_8004ADB0(D_800FC6E0[4], D_800FC704, 4 + (num_files * sizeof(ALSeqData)));
     alSeqFileNew(D_800FC704, D_800FC6E0[4]);
 
-    D_800FC6C0[0] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x44C);
-    D_800FC6C0[1] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x44C);
-    D_800FC6C0[2] = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 0x44C);
+    D_800FC6C0[0] = alHeapAlloc(D_800FC810, 1, 0x44C);
+    D_800FC6C0[1] = alHeapAlloc(D_800FC810, 1, 0x44C);
+    D_800FC6C0[2] = alHeapAlloc(D_800FC810, 1, 0x44C);
 
     // load the fourth archive's first seq, at 0x197C1FC
     func_8004ADB0(D_800FC704->seqArray[0].offset, sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
-    D_800FC708 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC708 = alHeapAlloc(D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
     func_8004ADB0(D_800FC704->seqArray[0].offset, D_800FC708, 4 + (num_files * sizeof(ALSeqData)));
     alSeqFileNew(D_800FC708, D_800FC704->seqArray[0].offset);
 
@@ -665,25 +667,25 @@ s32 func_800373D8(void) {
     // load the fourth archive's third seq at 0x1A2AD20
     func_8004ADB0(D_800FC704->seqArray[2].offset, sp78, 4 + 4);
     num_files = sp78->seq.seqCount;
-    D_800FC714 = alHeapDBAlloc(NULL, 0, D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
+    D_800FC714 = alHeapAlloc(D_800FC810, 1, 4 + (num_files * sizeof(ALSeqData)));
     func_8004ADB0(D_800FC704->seqArray[2].offset, D_800FC714, 4 + (num_files * sizeof(ALSeqData)));
     alSeqFileNew(D_800FC714, D_800FC704->seqArray[2].offset);
 
-    D_800FC6D8 = alHeapDBAlloc(NULL, 0, D_800FC810, 0xB80, 2);
+    D_800FC6D8 = alHeapAlloc(D_800FC810, 0xB80, 2);
 
     // load the 5th main archive at 0x1FBA260
-    D_800FC6D4 = alHeapDBAlloc(NULL, 0, D_800FC810, 0x1388, 1);
+    D_800FC6D4 = alHeapAlloc(D_800FC810, 0x1388, 1);
     func_8004ADB0(D_800FC6E0[5], D_800FC6D4, D_800FC6E0[6] - D_800FC6E0[5]);
 
     // load the 6th main archive at 0x1FBB220
-    D_800FC6CC = alHeapDBAlloc(NULL, 0, D_800FC810, 0x100, 1);
+    D_800FC6CC = alHeapAlloc(D_800FC810, 0x100, 1);
     func_8004ADB0(D_800FC6E0[6], D_800FC6CC, 0x100);
 
     for (i = 0; i < 32; i++) {
         D_800FC6CC[i].unk_00 += D_800FC6E0[6];
     }
 
-    D_800FC6D0 = alHeapDBAlloc(NULL, 0, D_800FC810, 0x2328, 1);
+    D_800FC6D0 = alHeapAlloc(D_800FC810, 0x2328, 1);
 
     func_8004AE90(2, 2);
     func_8004AE90(1, 3);

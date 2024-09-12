@@ -21,9 +21,8 @@
 #include <ultraerror.h>
 #include "n_synthInternals.h"
 
-void n_alSynSetPan(N_ALVoice *v, u8 pan)
-{
-    ALParam  *update;
+void n_alSynSetPan(N_ALVoice* v, u8 pan) {
+    ALParam* update;
 
     if (v->pvoice) {
 
@@ -37,15 +36,14 @@ void n_alSynSetPan(N_ALVoice *v, u8 pan)
          * set offset and pan data
          */
 #ifdef SAMPLE_ROUND
-	update->delta  = SAMPLE184( n_syn->paramSamples + v->pvoice->offset);
+        update->delta = SAMPLE184(n_syn->paramSamples + v->pvoice->offset);
 #else
-        update->delta  = n_syn->paramSamples + v->pvoice->offset;
+        update->delta = n_syn->paramSamples + v->pvoice->offset;
 #endif
-        update->type   = AL_FILTER_SET_PAN;
+        update->type = AL_FILTER_SET_PAN;
         update->data.i = pan;
-        update->next   = 0;
+        update->next = 0;
 
-	n_alEnvmixerParam(v->pvoice, AL_FILTER_ADD_UPDATE, update);        
+        n_alEnvmixerParam(v->pvoice, AL_FILTER_ADD_UPDATE, update);
     }
 }
-

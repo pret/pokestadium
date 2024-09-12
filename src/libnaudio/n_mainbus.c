@@ -28,49 +28,47 @@ extern u32 D_800FD6F0;
 extern u8* D_800FCF28[];
 extern u32 D_800FCF30[];
 
-Acmd *n_alMainBusPull(s32 sampleOffset, Acmd *p) 
-{
-  Acmd        *ptr = p;
+Acmd* n_alMainBusPull(s32 sampleOffset, Acmd* p) {
+    Acmd* ptr = p;
     s32 i;
 
-  aClearBuffer(ptr++, N_AL_MAIN_L_OUT, N_AL_DIVIDED<<1);
+    aClearBuffer(ptr++, N_AL_MAIN_L_OUT, N_AL_DIVIDED << 1);
 
-  ptr = (n_syn->mainBus->filter.handler)(sampleOffset,ptr);
+    ptr = (n_syn->mainBus->filter.handler)(sampleOffset, ptr);
 
-  aMix(ptr++, 0, 0x7fff, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
-  aMix(ptr++, 0, 0x7fff, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
+    aMix(ptr++, 0, 0x7fff, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
+    aMix(ptr++, 0, 0x7fff, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
 
-  // theres more code after?
-  if (D_800FC824 != 0) {
-      aClearBuffer(ptr++, 0x7C0, 0x2E0);
-      n_aLoadBuffer(ptr++, 0x170, 0x7C0, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0 * 2]));
-      n_aLoadBuffer(ptr++, 0x170, 0x930, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0 * 2]));
+    // theres more code after?
+    if (D_800FC824 != 0) {
+        aClearBuffer(ptr++, 0x7C0, 0x2E0);
+        n_aLoadBuffer(ptr++, 0x170, 0x7C0, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0 * 2]));
+        n_aLoadBuffer(ptr++, 0x170, 0x930, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0 * 2]));
 
-      D_800FD6F0 += 0xB8;
+        D_800FD6F0 += 0xB8;
         if (D_800FD6F0 >= 0xB80) {
             D_800FD6F0 = 0;
         }
-      aMix(ptr++, 0, 0x7fff, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
-      aMix(ptr++, 0, 0x7fff, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
-      aClearBuffer(ptr++, 0x7C0, 0x2E0);
-  }
-
-  if (D_80077D98 != 0) {
-    for (i = 0; i < 2; i++) {
-          aClearBuffer(ptr++, 0x7C0, 0x2E0);
-          n_aLoadBuffer(ptr++, 0x170, 0x7C0, osVirtualToPhysical(&D_800FCF28[i][D_800FCF30[i] * 2]));
-          n_aLoadBuffer(ptr++, 0x170, 0x930, osVirtualToPhysical(&D_800FCF28[i][D_800FCF30[i] * 2]));
-
-        D_800FCF30[i] += 0xB8;
-        if (D_800FCF30[i] >= 0x8A0) {
-            D_800FCF30[i] = 0;
-        }
-        
-          aMix(ptr++, 0, 0x7fff, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
-          aMix(ptr++, 0, 0x7fff, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
+        aMix(ptr++, 0, 0x7fff, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
+        aMix(ptr++, 0, 0x7fff, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
+        aClearBuffer(ptr++, 0x7C0, 0x2E0);
     }
-  }
-  
-  return ptr;
-}
 
+    if (D_80077D98 != 0) {
+        for (i = 0; i < 2; i++) {
+            aClearBuffer(ptr++, 0x7C0, 0x2E0);
+            n_aLoadBuffer(ptr++, 0x170, 0x7C0, osVirtualToPhysical(&D_800FCF28[i][D_800FCF30[i] * 2]));
+            n_aLoadBuffer(ptr++, 0x170, 0x930, osVirtualToPhysical(&D_800FCF28[i][D_800FCF30[i] * 2]));
+
+            D_800FCF30[i] += 0xB8;
+            if (D_800FCF30[i] >= 0x8A0) {
+                D_800FCF30[i] = 0;
+            }
+
+            aMix(ptr++, 0, 0x7fff, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
+            aMix(ptr++, 0, 0x7fff, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
+        }
+    }
+
+    return ptr;
+}

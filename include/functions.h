@@ -3,6 +3,8 @@
 
 #include "ultra64.h"
 
+f32 __sinf(f32);
+
 void func_80057FD0(void *, int);
 s32 func_8005A990(OSPiHandle *);
 

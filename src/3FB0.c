@@ -1,5 +1,4 @@
 #include "3FB0.h"
-#include "include/functions.h"
 #include "src/3FB0.h"
 #include "src/D470.h"
 #include "src/dma.h"
@@ -96,15 +95,14 @@ void func_800033C8(unk_func_80003680_sp300* arg0, u8* arg1) {
     arg0->height = (arg0->start_of_frame[1] << 8) | arg0->start_of_frame[2];
 }
 
-extern u64 D_80065FC0[];
 extern u64 D_80068080[];
 extern u64 D_8007ED20[];
 
 void func_80003558(UnkStruct80001380* arg0, unk_func_80003680_sp90* arg1) {
     arg0->task.t.type = 4;
     arg0->task.t.flags = 0;
-    arg0->task.t.ucode_boot = D_80065FC0;
-    arg0->task.t.ucode_boot_size = (u32)_binary_assets_us_F3DEX2_bin_start - (u32)D_80065FC0;
+    arg0->task.t.ucode_boot = rspbootTextStart;
+    arg0->task.t.ucode_boot_size = (u32)_binary_assets_us_F3DEX2_bin_start - (u32)rspbootTextStart;
     arg0->task.t.ucode = D_80068080;
     arg0->task.t.ucode_size = 0x1000;
     arg0->task.t.ucode_data = D_8007ED20;

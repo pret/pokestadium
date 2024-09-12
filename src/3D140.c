@@ -1,12 +1,70 @@
 #include "3D140.h"
-#include "373A0.h"
-#include "45720.h"
+#include "lib/ultralib/include/PR/leo.h"
+#include "src/373A0.h"
+#include "src/38BB0.h"
+#include "src/3D140.h"
+#include "src/435D0.h"
+#include "src/libnaudio/n_libaudio_sc.h"
+#include "src/libnaudio/n_libaudio_sn_sc.h"
+#include "src/45720.h"
+#include "src/4A3E0.h"
+#include "src/4BDC0.h"
+
+typedef union {
+    struct {
+        s16 type;
+    } gen;
+    struct {
+        s16 type;
+        struct AudioInfo* info;
+    } done;
+} AudioMsg; // size = 0x8
+
+typedef struct AudioInfo {
+    /* 0x00 */ s16* data;
+    /* 0x04 */ s16 frameSamples;
+    /* 0x08 */ AudioMsg msg;
+} AudioInfo; // size = 0x10
+
+#define NUM_ACMD_LISTS 2
+#define NUM_OUTPUT_BUFFERS 2
+#define MAX_MESGS 3
+#define NUM_DMA_BUFFERS 48
+#define SAMPLES 184
+
+typedef struct AMAudioMgr {
+    /* 0x000 */ Acmd* ACMDList[NUM_ACMD_LISTS];
+    /* 0x008 */ AudioInfo* audioInfo[NUM_OUTPUT_BUFFERS];
+    /* 0x010 */ char unk10[0x228];
+    ///* 0x010 */ OSThread thread;
+    ///* 0x1C0 */ OSMesgQueue audioFrameMsgQ;
+    ///* 0x1D8 */ OSMesg audioFrameMsgBuf[MAX_MESGS];
+    ///* 0x1E0 */ OSMesgQueue audioReplyMsgQ;
+    ///* 0x1F8 */ OSMesg audioReplyMsgBuf[MAX_MESGS];
+    /* 0x238 */ ALGlobals g;
+} AMAudioMgr; // size = 0x284 ??
+
+typedef struct AMDMABuffer {
+    /* 0x00 */ ALLink node;
+    /* 0x08 */ u32 startAddr;
+    /* 0x0C */ u32 lastFrame;
+    /* 0x10 */ char* ptr;
+} AMDMABuffer; // size = 0x14
+
+typedef struct AMDMAState {
+    /* 0x00 */ u8 initialized;
+    /* 0x04 */ AMDMABuffer* firstUsed;
+    /* 0x08 */ AMDMABuffer* firstFree;
+} AMDMAState; // size = 0xC
 
 extern u8 D_800783FC;
 extern u8 D_80078400;
 extern u16 D_80078410[1][9];
 extern u16 D_80078446[1][9];
 extern u16 D_800784EA[1][9];
+extern s32 D_80077DC4;
+extern f32 D_80077DC8;
+extern u8 D_80077DCC;
 extern u16 D_80077DF0[];
 extern u16 D_80077E00[];
 extern u16 D_80077E10[];
@@ -29,7 +87,7 @@ extern u16 D_800780A8[];
 extern u8 D_800783BC;
 extern u8 D_800783C0;
 extern u8 D_800783C4;
-extern s32 D_800783C8;
+extern u32 D_800783C8;
 extern u32 D_800783CC;
 extern u8 D_800783D4;
 extern u8 D_800783D8;
@@ -42,6 +100,16 @@ extern f64 D_8007C7E8;
 extern f64 D_8007C7F0;
 extern f64 D_8007C7F8;
 extern u8 D_800FCD18[];
+extern u8 D_80077D90;
+extern u8 D_80077D98;
+extern u8 D_80077D9C;
+extern u8 D_80077DA8;
+extern s32 D_80077DAC;
+extern u32 audFrameCt;
+extern AudioInfo* lastInfo;
+extern s32 min_only_one;
+extern u8 D_800FC825;
+extern s32 D_800FC828;
 
 typedef struct unk_D_800FCB18 {
     /* 0x00 */ char pad00[0xC];
@@ -67,8 +135,9 @@ typedef struct unk_D_800FCB48 {
     /* 0x7C */ s32 unk_7C;
     /* 0x80 */ char pad80[0x4];
 } unk_D_800FCB48; // size = 0x84
+
 extern unk_D_800FCB48 D_800FCB48[2];
-extern s32 D_800FCCA4;
+extern u32 D_800FCCA4;
 extern u8 D_800FCCAE;
 extern u8 D_800FCCAF;
 extern u8 D_800FCCB0;
@@ -87,8 +156,8 @@ extern u8 D_800FCB38[2][8];
 extern s32 D_800FCC50[];
 extern s8 D_800FCCA0;
 extern s8 D_800FCCA1;
-extern s8 D_800FCCA2;
-extern s8 D_800FCCAC;
+extern u8 D_800FCCA2;
+extern u8 D_800FCCAC;
 extern s8 D_800FCCB7;
 extern s8 D_800FCCB8[];
 extern s8 D_800FCCBA[];
@@ -102,28 +171,400 @@ extern s8 D_800FCCD8[];
 extern s32 D_80078388;
 extern u32 D_800783A4[4];
 extern s32 D_800783B8;
+extern u32 nextDMA;
+extern u16 D_80077DA0;
+extern u32 D_80077DA4;
+extern s8 D_800FC824;
+extern AMAudioMgr __am;
+extern AMDMAState dmaState;
+extern s32 minFrameSize;
+extern u32 frameSize;
+extern s32 maxFrameSize;
+extern s32 maxRSPCmds;
+extern s32 D_800FCAD4;
+extern s32 D_800FCAD8;
+extern OSMesgQueue audDMAMessageQ;
+extern AMDMABuffer (*dmaBuffs)[NUM_DMA_BUFFERS];
+extern OSIoMesg (*audDMAIOMesgBuf)[NUM_DMA_BUFFERS];
+extern OSMesg (*audDMAMessageBuf)[NUM_DMA_BUFFERS];
+extern u32 dmaBufferLen;
+extern OSPiHandle* D_800FCB08;
+extern u32 curAcmdList;
+extern u16 D_80077E98;
+extern u16 D_80077EA4;
+extern u16 D_80077EB4;
+extern u16 D_80077F04;
+extern u16 D_80077F44;
+extern u16 D_80077F60;
+extern u32 D_800783B4;
+extern s32 D_800FCCA8;
+extern u8 D_800FCCAD;
 
-void func_80041A98(void);
-void func_80041C70(u32);
-void func_800420C0(u16*);
+ALDMAproc __amDmaNew(AMDMAState** state);
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003C540.s")
+#ifdef NON_MATCHING
+void amCreateAudioMgr(ALSynConfig* c, amConfig* amc, u32 num_dma_buffers, s32 arg3, s32 arg4) {
+    u32 i;
+    f32 fsize;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003C8DC.s")
+    D_800FCB08 = osCartRomInit();
+    dmaBufferLen = arg3;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003CADC.s")
+    dmaState.initialized = FALSE;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D128.s")
+    c->dmaproc = __amDmaNew;
+    c->outputRate = amc->outputRate;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D160.s")
+    dmaBuffs = alHeapAlloc(c->heap, 1, num_dma_buffers * sizeof(AMDMABuffer));
+    audDMAIOMesgBuf = alHeapAlloc(c->heap, 1, (num_dma_buffers << 1) * sizeof(OSIoMesg));
+    audDMAMessageBuf = alHeapAlloc(c->heap, 1, (num_dma_buffers << 1) * sizeof(OSMesg));
+
+    fsize = (f32)amc->framesPerField * c->outputRate / arg4;
+    frameSize = (s32)fsize;
+    if (frameSize < fsize) {
+        frameSize++;
+    }
+
+    frameSize = ((frameSize / SAMPLES) + 1) * SAMPLES;
+    minFrameSize = frameSize - SAMPLES;
+    maxFrameSize = frameSize + 0x100;
+
+    alInit(&__am.g, c);
+
+    (*dmaBuffs)[0].node.prev = NULL;
+    (*dmaBuffs)[0].node.next = NULL;
+
+    for (i = 0; i < num_dma_buffers - 1; i++) {
+        alLink(&(*dmaBuffs)[i + 1].node, &(*dmaBuffs)[i].node);
+        (*dmaBuffs)[i].ptr = alHeapAlloc(c->heap, 1, arg3);
+    }
+
+    (*dmaBuffs)[i].ptr = alHeapAlloc(c->heap, 1, arg3);
+
+    for (i = 0; i < 2; i++) {
+        __am.ACMDList[i] = alHeapAlloc(c->heap, 1, amc->maxACMDSize * 8);
+    }
+
+    maxRSPCmds = amc->maxACMDSize;
+
+    for (i = 0; i < 2; i++) {
+        __am.audioInfo[i] = alHeapAlloc(c->heap, 1, sizeof(AudioInfo));
+        __am.audioInfo[i]->msg.done.type = 0;
+        __am.audioInfo[i]->msg.done.info = __am.audioInfo[i];
+        __am.audioInfo[i]->data = alHeapAlloc(c->heap, 1, maxFrameSize * 4);
+    }
+
+    osCreateMesgQueue(&audDMAMessageQ, audDMAMessageBuf, num_dma_buffers << 1);
+
+    D_800FCAD4 = c->outputRate;
+    D_800FCAD8 = c->maxVVoices;
+    D_800FC824 = 0;
+
+    func_80044B20(c->heap, minFrameSize, maxFrameSize);
+}
+#else
+#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/amCreateAudioMgr.s")
+#endif
+
+s32 __amDMA(s32 addr, s32 len, void* state) {
+    void* foundBuffer;
+    s32 delta;
+    AMDMABuffer* sp34;
+    OSIoMesg* ioMesg;
+    AMDMABuffer* dmaPtr;
+    AMDMABuffer* lastDmaPtr;
+    OSPiHandle* sp2C;
+    s32 buffEnd;
+
+    if (D_800FC820 & 0x80000000) {
+        return osVirtualToPhysical(addr);
+    }
+
+    sp2C = D_800FCB08;
+    dmaPtr = dmaState.firstUsed;
+    lastDmaPtr = NULL;
+    while (dmaPtr) {
+        buffEnd = dmaPtr->startAddr + dmaBufferLen;
+
+        if (dmaPtr->startAddr > addr) {
+            break;
+        }
+
+        if (buffEnd >= (addr + len)) {
+            dmaPtr->lastFrame = audFrameCt;
+            return osVirtualToPhysical(dmaPtr->ptr + addr - dmaPtr->startAddr);
+        }
+
+        lastDmaPtr = dmaPtr;
+        dmaPtr = dmaPtr->node.next;
+    }
+
+    dmaPtr = dmaState.firstFree;
+    if (!dmaPtr) {
+        return osVirtualToPhysical(dmaState.firstUsed);
+    }
+
+    dmaState.firstFree = dmaPtr->node.next;
+    alUnlink(&dmaPtr->node);
+
+    if (lastDmaPtr != NULL) {
+        alLink(&dmaPtr->node, &lastDmaPtr->node);
+    } else if (dmaState.firstUsed) {
+        lastDmaPtr = dmaState.firstUsed;
+
+        dmaState.firstUsed = dmaPtr;
+        dmaPtr->node.next = lastDmaPtr;
+        dmaPtr->node.prev = NULL;
+
+        lastDmaPtr->node.prev = &dmaPtr->node;
+    } else {
+        dmaState.firstUsed = dmaPtr;
+        dmaPtr->node.next = NULL;
+        dmaPtr->node.prev = NULL;
+    }
+
+    foundBuffer = dmaPtr->ptr;
+    delta = addr & 1;
+    addr -= delta;
+    dmaPtr->startAddr = addr;
+    dmaPtr->lastFrame = audFrameCt;
+
+    ioMesg = (*audDMAIOMesgBuf) + nextDMA++;
+    ioMesg->hdr.pri = OS_MESG_PRI_HIGH;
+    ioMesg->hdr.retQueue = &audDMAMessageQ;
+    ioMesg->devAddr = addr;
+    ioMesg->dramAddr = foundBuffer;
+    ioMesg->size = dmaBufferLen;
+
+    osInvalDCache(foundBuffer, dmaBufferLen);
+    osEPiStartDma(sp2C, ioMesg, OS_READ);
+
+    return osVirtualToPhysical(foundBuffer) + delta;
+}
+
+OSTask* func_8003CADC(OSTask* arg0) {
+    s16* audioPtr;
+    Acmd* cmdp;
+    s32 cmdLen;
+    s32 samplesLeft;
+    OSTask sp38;
+    s32 pad[2];
+    AudioInfo* info;
+    AMAudioMgr* mgr;
+
+    info = __am.audioInfo[audFrameCt % 3];
+    audioPtr = osVirtualToPhysical(info->data);
+    samplesLeft = HW_REG(AI_LEN_REG, u32) >> 2;
+
+    if ((D_80077DA8 == 0) && (lastInfo != NULL)) {
+        osAiSetNextBuffer(lastInfo->data, lastInfo->frameSamples << 2);
+    }
+
+    if ((samplesLeft >= 0x1A9) && (min_only_one != 0)) {
+        info->frameSamples = minFrameSize;
+        min_only_one = 0;
+    } else {
+        info->frameSamples = frameSize;
+        min_only_one = 1;
+    }
+
+    __clearAudioDMA();
+
+    if (D_80077DAC != 0) {
+        D_800FC828 = LeoTestUnitReady(&D_800FC825);
+    }
+
+    cmdp = alAudioFrame(__am.ACMDList[curAcmdList], &cmdLen, audioPtr, info->frameSamples);
+    sp38.t.data_ptr = __am.ACMDList[curAcmdList];
+    sp38.t.data_size = (cmdp - __am.ACMDList[curAcmdList]) * sizeof(Acmd);
+
+    sp38.t.type = M_AUDTASK;
+    sp38.t.ucode_boot = &rspbootTextStart;
+    sp38.t.ucode_boot_size = (s32)_binary_assets_us_F3DEX2_bin_start - (s32)rspbootTextStart;
+    sp38.t.flags = 0;
+    sp38.t.ucode = &aspMainTextStart;
+    sp38.t.ucode_data = &aspMainDataStart;
+    sp38.t.ucode_data_size = SP_UCODE_DATA_SIZE;
+    sp38.t.dram_stack = NULL;
+    sp38.t.dram_stack_size = 0;
+    sp38.t.output_buff = NULL;
+    sp38.t.output_buff_size = 0;
+    sp38.t.yield_data_ptr = NULL;
+    sp38.t.yield_data_size = 0;
+
+    curAcmdList ^= 1;
+    lastInfo = __am.audioInfo[audFrameCt % 3];
+    audFrameCt++;
+
+    if (D_80077D9C != 0) {
+        func_8003D32C();
+    }
+
+    if (D_80077D90 != 0) {
+        func_800429D0();
+        if (lastInfo != NULL) {
+            func_800497E0(lastInfo->data, 0, ((audFrameCt % 3) == 0) ? 0x216 : 0x215, 0);
+        }
+    }
+
+    if (D_80077D98 != 0) {
+        func_80044EA4();
+    }
+
+    func_800416BC();
+
+    if (D_80077DC4 != 0) {
+        D_80077DC8 += D_80077DD0;
+        if (D_80077DD0 > 0.0f) {
+            if (D_80077DCC <= D_80077DC8) {
+                D_80077DC8 = D_80077DCC;
+            }
+        } else {
+            if (D_80077DC8 <= D_80077DCC) {
+                D_80077DC8 = D_80077DCC;
+            }
+        }
+
+        func_800393DC(D_80077DC4, (u32)D_80077DC8 & 0xFF);
+
+        if (D_80077DC8 == D_80077DCC) {
+            D_80077DC4 = 0;
+        }
+    }
+
+    if (D_80077DD4 != 0.0f) {
+        D_80077DD4 -= D_80077DD8;
+        if (D_80077DD4 <= 0) {
+            D_80077DD4 = 0.0f;
+            func_8003916C(2, 1);
+        }
+        func_80038E98(2, D_80077DD4);
+    }
+
+    if (D_80077DDC != 0.0f) {
+        D_80077DDC -= D_80077DE0;
+        if (D_80077DDC <= 0) {
+            D_80077DDC = 0.0f;
+            func_8003916C(1, 1);
+        }
+        func_80038E98(1, D_80077DDC);
+    }
+
+    if (D_80077DA8 != 0) {
+        sp38.t.data_size = 0;
+    }
+
+    *arg0 = sp38;
+
+    return arg0;
+}
+
+ALDMAproc __amDmaNew(AMDMAState** state) {
+    if (!dmaState.initialized) {
+        dmaState.firstUsed = NULL;
+        dmaState.firstFree = &dmaBuffs[0];
+        dmaState.initialized = TRUE;
+    }
+
+    *state = &dmaState;
+
+    return __amDMA;
+}
+
+#define FRAME_LAG 1
+
+void __clearAudioDMA(void) {
+    s32 i;
+    void* sp40;
+    AMDMABuffer* var_s0_2;
+    ALLink* node;
+
+    for (i = 0; i < nextDMA; i++) {
+        osRecvMesg(&audDMAMessageQ, &sp40, 0);
+    }
+
+    var_s0_2 = dmaState.firstUsed;
+    while (var_s0_2 != NULL) {
+        node = var_s0_2->node.next;
+
+        if ((var_s0_2->lastFrame + FRAME_LAG) < audFrameCt) {
+            if (var_s0_2 == dmaState.firstUsed) {
+                dmaState.firstUsed = var_s0_2->node.next;
+            }
+
+            alUnlink(var_s0_2);
+
+            if (dmaState.firstFree != NULL) {
+                alLink(var_s0_2, dmaState.firstFree);
+            } else {
+                dmaState.firstFree = var_s0_2;
+                var_s0_2->node.next = NULL;
+                var_s0_2->node.prev = NULL;
+            }
+        }
+
+        var_s0_2 = node;
+    }
+
+    nextDMA = 0;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D264.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D2B8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D32C.s")
+#ifdef NON_MATCHING
+void func_8003D32C(void) {
+    switch (D_80077D9C) {
+        case 1:
+            func_80039B88(D_80078E70, 0x50, 0x18, 3);
+            func_80042AB0(D_80077DA0);
+            D_80077D9C++;
+            D_80077DA4 = 0;
+            break;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D494.s")
+        case 2:
+            D_80077DA4++;
+            if (D_80077DA4 >= 2) {
+                D_80077DA4 = 0;
+                D_80077D9C++;
+                D_800FC824 = 1;
+            }
+            break;
+
+        case 3:
+            if (func_800449F8() == 0) {
+                D_80077D9C++;
+                D_80077DA4 = 0;
+            }
+            break;
+
+        case 4:
+            if (D_80077DA4 == 0) {
+                func_80039B88(D_80078E70, 0x18, 0x50, 0x14);
+            }
+
+            if (D_80077DA4 >= 0x1F) {
+                D_80077D9C++;
+            }
+
+            D_80077DA4++;
+            break;
+
+        case 5:
+            D_80077D9C = 0;
+            D_80077D90 = 0;
+            D_800FC824 = 0;
+            break;
+    }
+}
+#else
+#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D32C.s")
+#endif
+
+s32 func_8003D494(void) {
+    return D_80077D90;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D4A0.s")
 
@@ -135,7 +576,13 @@ void func_800420C0(u16*);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D624.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D68C.s")
+void func_8003D68C(s32 arg0) {
+    if (arg0 != 0) {
+        D_80078388 = 1;
+    } else {
+        D_80078388 = 0;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D6B0.s")
 
@@ -652,7 +1099,70 @@ void func_8003DB84(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80041688.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800416BC.s")
+void func_800416BC(void) {
+    u8* seq;
+
+    if ((D_800783B4 < D_800783B8) && (D_80078388 != 0) && (func_80044E54(1) == 0)) {
+        if (D_800783A4[D_800783B4 & 3] != 0) {
+            seq = D_800FC714->seqArray[D_800783A4[D_800783B4 & 3] - 1].offset;
+            func_80044CBC(1, seq, 0x7E, 0);
+        }
+        D_800783B4++;
+    }
+
+    if (D_800783BC != 0) {
+        if ((D_800783C8 >= 0x3E9) && (D_800783C0 == 0) && (D_800783CC != 0)) {
+            func_80041C70(0x248);
+            D_800783C0 = 1;
+        } else if ((D_800783C8 >= 0x7D1) && (D_800783C0 == 0) && (D_800783CC == 0)) {
+            func_80041C70(0x248);
+            D_800783C0 = 1;
+            D_800783C8 = 0x3E8;
+        } else if ((D_800783C8 >= 0x641) && (D_800783C0 == 1)) {
+            func_80041C70(0x249);
+            if (D_800783C4 == 0) {
+                func_800367A0(0x5B, D_80078400, 0);
+                D_800783C4 = 1;
+            }
+            D_800783C0 = 2;
+        } else if ((D_800783C8 >= 0x899) && (D_800783C0 == 2)) {
+            func_80041C70(0x24A);
+            D_800783C8 = 0x3E8;
+            D_800783C0 = 1;
+        }
+
+        D_800783C8++;
+    }
+
+    if (D_800FCCA2 != 0) {
+        if (D_800FCCA2 == 1) {
+            if (D_800FCCA4 != 0) {
+                if (D_800FCCA4 >= 0x29) {
+                    if (((D_800FCCAD == 0x10) || (D_800FCCAD == 0x11) || (D_800FCCAD == 0x12) || (D_800FCCAD == 0x15) ||
+                         (D_800FCCAD == 0x16) || (D_800FCCAD == 0x53) || (D_800FCCAD == 0x54) ||
+                         (D_800FCCAD == 0x55)) &&
+                        ((D_800FCCAC == 0x34) || (D_800FCCAC == 0x35) || (D_800FCCAC == 0x7E))) {
+                        func_800420C0(&D_80077F44);
+                    } else {
+                        func_800420C0(&D_80077E98);
+                    }
+                } else if (D_800FCCA4 >= 6) {
+                    if ((D_800FCB18[0]->unk_0C > 0) && (D_800FCB18[1]->unk_0C > 0)) {
+                        func_800420C0(&D_80077EA4);
+                    } else {
+                        func_800420C0(&D_80077F60);
+                    }
+                } else if ((D_800FCB18[0]->unk_0C > 0) && (D_800FCB18[1]->unk_0C > 0)) {
+                    func_800420C0(&D_80077EB4);
+                } else {
+                    func_800420C0(&D_80077F04);
+                }
+            }
+            D_800FCCA8 = D_800FCCA4;
+        }
+        D_800FCCA2--;
+    }
+}
 
 #ifdef NON_MATCHING
 void func_80041A98(void) {

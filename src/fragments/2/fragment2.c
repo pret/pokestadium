@@ -36,7 +36,6 @@ static s32 pad_D_8780FA4C;
 s16 D_8780FA50;
 s16 D_8780FA52[2][4];
 s16 D_8780FA68[4];
-u32* D_8780FA70;
 
 void func_87800020(void) {
     func_8002D510();
@@ -93,13 +92,11 @@ u32 func_878001E8(s32 arg0) {
     return var_v1;
 }
 
-#ifdef NON_MATCHING
 void func_8780024C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    s32 temp_lo;
-    s32 spF0;
-
-    spF0 = arg2 - 2;
-    temp_lo = ((arg4 - arg3) * spF0) / arg4;
+    UNUSED s32 pad;
+    s32 spF0 = arg2 - 2;
+    s32 temp_lo = ((arg4 - arg3) * spF0) / arg4;
+    s32 sp1C = (arg2 - temp_lo) - 2;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
@@ -126,13 +123,11 @@ void func_8780024C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     gSPTextureRectangle(gDisplayListHead++, ((arg0 + spF0) + 2) << 2, arg1 << 2, ((arg0 + spF0) + 4) << 2,
                         (arg1 + 0xC) << 2, G_TX_RENDERTILE, 0x00C0, 0, 0x0400, 0x0400);
 
-    spF0 = (arg2 - temp_lo) - 2;
-
-    if (spF0 > 0) {
+    if (sp1C > 0) {
         gDPLoadTextureBlock(gDisplayListHead++, D_87806730, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 12, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        gSPTextureRectangle(gDisplayListHead++, (arg0 + 2) << 2, arg1 << 2, ((arg0 + 2) + spF0) << 2, (arg1 + 0xC) << 2,
+        gSPTextureRectangle(gDisplayListHead++, (arg0 + 2) << 2, arg1 << 2, ((arg0 + 2) + sp1C) << 2, (arg1 + 0xC) << 2,
                             G_TX_RENDERTILE, 0, 0, 0, 0x0400);
     }
 
@@ -140,21 +135,17 @@ void func_8780024C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         gDPLoadTextureBlock(gDisplayListHead++, D_878065B0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 12, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        gSPTextureRectangle(gDisplayListHead++, ((arg0 + 2) + spF0) << 2, arg1 << 2,
-                            (((arg0 + 2) + spF0) + temp_lo) << 2, (arg1 + 0xC) << 2, G_TX_RENDERTILE, 0, 0, 0, 0x0400);
+        gSPTextureRectangle(gDisplayListHead++, ((arg0 + 2) + sp1C) << 2, arg1 << 2,
+                            (((arg0 + 2) + sp1C) + temp_lo) << 2, (arg1 + 0xC) << 2, G_TX_RENDERTILE, 0, 0, 0, 0x0400);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/2/fragment2/func_8780024C.s")
-#endif
 
-#ifdef NON_MATCHING
 void func_878009BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32* spCC;
-    s32 sp14;
-    s32 temp_lo;
+    s32 temp_lo = ((arg3 - arg2) * 0x30) / arg3;
+    s32 sp14 = 0x30 - temp_lo;
 
     if (arg2 < ((arg3 * 0xA) / 48)) {
         spCC = D_87806730;
@@ -178,9 +169,6 @@ void func_878009BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     gSPTextureRectangle(gDisplayListHead++, (arg0 + 0x40) << 2, arg1 << 2, (arg0 + 0x41) << 2, (arg1 + 5) << 2,
                         G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
 
-    temp_lo = ((arg3 - arg2) * 0x30) / arg3;
-    sp14 = 0x30 - temp_lo;
-
     if (sp14 > 0) {
         gDPLoadTextureBlock(gDisplayListHead++, spCC, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 5, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -198,9 +186,6 @@ void func_878009BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/2/fragment2/func_878009BC.s")
-#endif
 
 s16 D_87806338 = -1;
 u32* D_8780633C[] = { D_878067F0, D_87807690, D_87808530, D_878093D0 };
@@ -321,8 +306,11 @@ s32 func_878013D4(UNUSED unk_D_800AC870* arg0, char* arg1) {
     return func_8001F5B0(0, 0, arg1);
 }
 
+// Needs in-function static to match, but D_8780FA70 is referenced in fragment 20 and 39?
 #ifdef NON_MATCHING
 void func_87801400(s32 arg0, s16 arg1, s16 arg2, f32 arg3, f32 arg4) {
+    static u32* D_8780FA70;
+
     f32 temp_fa0;
     f32 temp_fv1;
     s16 a;
@@ -332,36 +320,23 @@ void func_87801400(s32 arg0, s16 arg1, s16 arg2, f32 arg3, f32 arg4) {
     if ((arg3 != 0.0f) && (arg4 != 0.0f)) {
         if (arg0 < 0) {
             arg0 = -1 - arg0;
-            var_t3 = D_8780634C[arg0];
+            D_8780FA70 = D_8780634C[arg0];
         } else {
-            var_t3 = D_8780633C[arg0 % 4];
+            D_8780FA70 = D_8780633C[arg0 % 4];
         }
 
-        gDPLoadTextureBlock(gDisplayListHead++, var_t3, G_IM_FMT_RGBA, G_IM_SIZ_32b, 36, 26, 0,
+        gDPLoadTextureBlock(gDisplayListHead++, D_8780FA70, G_IM_FMT_RGBA, G_IM_SIZ_32b, 36, 26, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        D_8780FA70 = var_t3;
 
-        temp_fa0 = 36.0f * arg3;
-        if (temp_fa0 > 0.0f) {
-            temp_fv1 = 0.5f;
-        } else {
-            temp_fv1 = -0.5f;
-        }
-        a = temp_fv1 + temp_fa0;
-
-        temp_fa0 = 26.0f * arg4;
-        if (temp_fa0 > 0.0f) {
-            temp_fv1 = 0.5f;
-        } else {
-            temp_fv1 = -0.5f;
-        }
-        b = temp_fv1 + temp_fa0;
+        a = ROUND_MAX(36.0f * arg3);
+        b = ROUND_MAX(26.0f * arg4);
 
         func_8001C330(arg1, arg2, a, b, 0, 0, 1024.0f / arg3, 1024.0f / arg4, 0);
     }
 }
 #else
+u32* D_8780FA70;
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/2/fragment2/func_87801400.s")
 #endif
 
