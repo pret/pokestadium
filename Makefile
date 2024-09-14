@@ -128,7 +128,7 @@ SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
 ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
 
-IINC := -Iinclude -Isrc -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
+IINC := -Iinclude -Isrc -Isrc/libnaudio -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
 IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
 IINC += -Iinclude/
 

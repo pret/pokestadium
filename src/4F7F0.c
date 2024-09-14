@@ -1,4 +1,5 @@
 #include "global.h"
+#include "n_synthInternals.h"
 
 struct UnkArray4 {
     u32 unk0;
@@ -21,7 +22,6 @@ struct UnkStruct8004EBF0 {
 };
 void func_80047500(void*, u8, void*, void*);
 struct UnkArray4* func_800495F8();
-extern struct UnkArray4* D_80078584; // who did this? fix later
 
 void func_8004EBF0(struct UnkStruct8004EBF0* arg0, f32 arg1) {
     struct UnkArray4* temp_v0;
@@ -29,7 +29,7 @@ void func_8004EBF0(struct UnkStruct8004EBF0* arg0, f32 arg1) {
     if (arg0->unk8 != NULL) {
         temp_v0 = func_800495F8();
         if (temp_v0 != NULL) {
-            temp_v0->unk4 = (s32)(D_80078584->unk1C + arg0->unk8->unk88);
+            temp_v0->unk4 = (s32)(n_syn->paramSamples + arg0->unk8->unk88);
             temp_v0->unk8 = 7;
             temp_v0->unkC = arg1;
             temp_v0->unk0 = 0;
