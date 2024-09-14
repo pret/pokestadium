@@ -20,7 +20,6 @@ struct UnkStruct8004EBF0 {
     char filler[0x8];
     struct UnkStructUnk8* unk8;
 };
-void func_80047500(void*, u8, void*, void*);
 
 void func_8004EBF0(struct UnkStruct8004EBF0* arg0, f32 arg1) {
     struct UnkArray4* temp_v0;
@@ -32,7 +31,7 @@ void func_8004EBF0(struct UnkStruct8004EBF0* arg0, f32 arg1) {
             temp_v0->unk8 = 7;
             temp_v0->unkC = arg1;
             temp_v0->unk0 = 0;
-            func_80047500(arg0->unk8, 3, temp_v0, arg0);
+            n_alEnvmixerParam(arg0->unk8, 3, temp_v0);
         }
     }
 }
