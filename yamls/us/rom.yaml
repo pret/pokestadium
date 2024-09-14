@@ -105,7 +105,7 @@
     - [0x4F410, c]
     - [0x4F7F0, c]
     - [0x4F870, c, libnaudio/n_drvrNew]
-    - [0x4FDB0, c]
+    - [0x4FDB0, c, libnaudio/n_auxbus]
     - [0x4FE60, c]
     - [0x4FF50, c]
     - [0x50120, c]

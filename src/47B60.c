@@ -1,6 +1,6 @@
 #include "global.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/47B60/func_80046F60.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/47B60/n_alEnvmixerPull.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/47B60/func_80047500.s")
 
