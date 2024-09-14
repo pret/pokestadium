@@ -114,7 +114,8 @@
     - [0x509A0, c, libnaudio/n_synallocfx]
     - [0x50A00, c]
     - [0x50C20, c]
-    - [0x50CC0, c]
+    - [0x50CC0, c, libnaudio/n_reverb]
+    - [0x51740, c]
     - [0x517A0, c] # yay0 audio decoder
     - [0x51850, c]
     - [0x518A0, c]
@@ -345,7 +346,8 @@
     - [0x79AE0, .data, 4CBC0]
     - [0x79C70, data, rom_data_79C70]
     - [0x79F70, .data, libnaudio/n_drvrNew]
-    - [0x7A100, data, rom_data_7A100]
+    - [0x7A100, .data, libnaudio/n_reverb]
+    - [0x7A110, data, rom_data_7A110]
 
     # libleo
     - [0x7A180, .data, libleo/driverominit]
@@ -420,7 +422,7 @@
     - [0x7E560, rodata, rom_rodata_7E560]
     - [0x7E5D0, .rodata, libnaudio/n_drvrNew]
     - [0x7E5F0, rodata, rom_rodata_7E5F0]
-    - [0x7E600, rodata, rom_rodata_7E600]
+    - [0x7E600, .rodata, libnaudio/n_reverb]
 
     # libleo
     - [0x7E630, .rodata, libleo/leofunc]
