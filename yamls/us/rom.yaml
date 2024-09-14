@@ -104,7 +104,7 @@
     - [0x4CBC0, c, 4CBC0]
     - [0x4F410, c]
     - [0x4F7F0, c]
-    - [0x4F870, c]
+    - [0x4F870, c, libnaudio/n_drvrNew]
     - [0x4FDB0, c]
     - [0x4FE60, c]
     - [0x4FF50, c]
@@ -343,7 +343,8 @@
     - [0x79660, data, rom_data_79660]
     - [0x79AE0, .data, 4CBC0]
     - [0x79C70, data, rom_data_79C70]
-    - [0x79F70, data, rom_data_79F70]
+    - [0x79F70, .data, libnaudio/n_drvrNew]
+    - [0x7A100, data, rom_data_7A100]
 
     # libleo
     - [0x7A180, .data, libleo/driverominit]
@@ -416,7 +417,8 @@
     - [0x7E110, .rodata, 4BDC0]
     - [0x7E2F0, .rodata, 4CBC0]
     - [0x7E560, rodata, rom_rodata_7E560]
-    - [0x7E5D0, rodata, rom_rodata_7E5D0]
+    - [0x7E5D0, .rodata, libnaudio/n_drvrNew]
+    - [0x7E5F0, rodata, rom_rodata_7E5F0]
     - [0x7E600, rodata, rom_rodata_7E600]
 
     # libleo
