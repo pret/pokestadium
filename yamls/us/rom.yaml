@@ -83,7 +83,7 @@
     - [0x373A0, c]  # battle code
     - [0x38BB0, c]  #
     - [0x3D140, c]  # music code
-    - [0x43520, c] # 
+    - [0x43520, c, libnaudio/n_sl]
     - [0x435B0, c] # 
     - [0x435D0, c]  # pkm lab cries code
     - [0x45720, c]  # music code
@@ -337,6 +337,8 @@
     - [0x76280, data, rom_data_76280]
     - [0x78570, .data, 373A0]
     - [0x78890, data, rom_data_78890]
+    - [0x79180, .data, libnaudio/n_sl]
+    - [0x79190, data, rom_data_79190]
     - [0x79630, .data, 49790]
     - [0x79660, data, rom_data_79660]
     - [0x79AE0, .data, 4CBC0]
