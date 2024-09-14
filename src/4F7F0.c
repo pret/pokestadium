@@ -21,13 +21,12 @@ struct UnkStruct8004EBF0 {
     struct UnkStructUnk8* unk8;
 };
 void func_80047500(void*, u8, void*, void*);
-struct UnkArray4* func_800495F8();
 
 void func_8004EBF0(struct UnkStruct8004EBF0* arg0, f32 arg1) {
     struct UnkArray4* temp_v0;
 
     if (arg0->unk8 != NULL) {
-        temp_v0 = func_800495F8();
+        temp_v0 = (struct UnkArray4*)__n_allocParam(); // TODO: Fix this
         if (temp_v0 != NULL) {
             temp_v0->unk4 = (s32)(n_syn->paramSamples + arg0->unk8->unk88);
             temp_v0->unk8 = 7;

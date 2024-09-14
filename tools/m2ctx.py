@@ -27,6 +27,7 @@ CPP_FLAGS = [
     "-Ibuild",
     "-Iinclude/PR",
     "-Isrc",
+    "-Isrc/libnaudio",
     "-I.",
     "-DM2C",
     "-Ilib/ultralib/include",
