@@ -89,7 +89,7 @@
     - [0x45720, c]  # music code
     - [0x46680, c]  # speech code
     - [0x47AF0, c, libnaudio/n_synstopvoice]
-    - [0x47B60, c]  # sound code
+    - [0x47B60, c, libnaudio/n_env]  # sound code
     - [0x485C0, c]  # moves code 
     - [0x48C60, c]  # move effects code
     - [0x490A0, c]  # audio functions to 0x50C00
@@ -344,6 +344,8 @@
     - [0x78890, data, rom_data_78890]
     - [0x79180, .data, libnaudio/n_sl]
     - [0x79190, data, rom_data_79190]
+    - [0x79200, .data, libnaudio/n_env]
+    - [0x79300, data, rom_data_79300]
     - [0x79630, .data, 49790]
     - [0x79660, data, rom_data_79660]
     - [0x79AE0, .data, 4CBC0]
@@ -414,7 +416,8 @@
     - [0x7D230, .rodata, 373A0]
     - [0x7D340, rodata, rom_rodata_7D340]
     - [0x7D3E0, rodata, rom_rodata_7D3E0]
-    - [0x7D880, rodata, rom_rodata_7D880]
+    - [0x7D880, .rodata, libnaudio/n_env]
+    - [0x7D8D0, rodata, rom_rodata_7D8D0]
     - [0x7DF80, rodata, rom_rodata_7DF80]
     - [0x7DFD0, .rodata, 49790]
     - [0x7E0C0, .rodata, libnaudio/n_synthesizer]
