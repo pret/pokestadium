@@ -88,6 +88,7 @@
     - [0x435D0, c]  # pkm lab cries code
     - [0x45720, c]  # music code
     - [0x46680, c]  # speech code
+    - [0x47AF0, c, libnaudio/n_synstopvoice]
     - [0x47B60, c]  # sound code
     - [0x485C0, c]  # moves code 
     - [0x48C60, c]  # move effects code
