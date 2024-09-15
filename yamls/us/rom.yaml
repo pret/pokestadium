@@ -120,7 +120,7 @@
     - [0x50CC0, c, libnaudio/n_reverb]
     - [0x51740, c]
     - [0x517A0, c] # yay0 audio decoder
-    - [0x51850, c]
+    - [0x51850, c, libnaudio/n_save]
     - [0x518A0, c]
     - [0x51B20, c]
 
