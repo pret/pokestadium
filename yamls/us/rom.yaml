@@ -123,7 +123,7 @@
     - [0x51740, c]
     - [0x517A0, c] # yay0 audio decoder
     - [0x51850, c, libnaudio/n_save]
-    - [0x518A0, c] # this is n_alMainBusPull but the function appears to have changed.
+    - [0x518A0, c, libnaudio/n_mainbus]
     - [0x51B20, c, libnaudio/n_synsetvol]
 
     # libleo
