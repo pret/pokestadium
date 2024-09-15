@@ -95,7 +95,7 @@
     - [0x490A0, c]  # audio functions to 0x50C00
     - [0x49190, hasm, ../../src/unk_49190]
     - [0x49790, c]
-    - [0x49BA0, c]
+    - [0x49BA0, c, libnaudio/n_synallocvoice]
     - [0x49DC0, c, libnaudio/n_synthesizer]
     - [0x4A360, c, libnaudio/n_synsetpan]
     - [0x4A3E0, c]
