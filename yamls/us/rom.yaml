@@ -122,7 +122,7 @@
     - [0x517A0, c] # yay0 audio decoder
     - [0x51850, c, libnaudio/n_save]
     - [0x518A0, c]
-    - [0x51B20, c]
+    - [0x51B20, c, libnaudio/n_synsetvol]
 
     # libleo
     - [0x51BC0, c, libleo/readwrite]
