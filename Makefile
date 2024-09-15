@@ -128,7 +128,7 @@ SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
 ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
 
-IINC := -Iinclude -Isrc -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
+IINC := -Iinclude -Isrc -Isrc/libnaudio -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
 IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
 IINC += -Iinclude/
 
@@ -145,7 +145,7 @@ MIPS_BUILTIN_DEFS := -DMIPSEB -D_MIPS_FPSET=16 -D_MIPS_ISA=2 -D_ABIO32=1 -D_MIPS
 ifneq ($(RUN_CC_CHECK),0)
 #   The -MMD flags additionaly creates a .d file with the same name as the .o file.
   CC_CHECK          := $(CC_CHECK_COMP)
-  CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
+  CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING -DAVOID_UB -DCC_CHECK
   ifneq ($(WERROR), 0)
     CHECK_WARNINGS  += -Werror
   endif
@@ -160,7 +160,7 @@ WARNINGS         := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594
 ASFLAGS          := -march=vr4300 -32 -G0
 COMMON_DEFINES   := -D_MIPS_SZLONG=32
 GBI_DEFINES      := -DF3DEX_GBI_2
-RELEASE_DEFINES  := -DNDEBUG -D_FINALROM
+RELEASE_DEFINES  := -DNDEBUG -D_FINALROM -DN_MICRO
 AS_DEFINES       := -DMIPSEB -D_LANGUAGE_ASSEMBLY -D_ULTRA64
 C_DEFINES        := -DLANGUAGE_C -D_LANGUAGE_C
 LIBULTRA_DEFINES := -DBUILD_VERSION=VERSION_$(ULTRALIB_VERSION)

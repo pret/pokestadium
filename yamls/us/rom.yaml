@@ -83,41 +83,48 @@
     - [0x373A0, c]  # battle code
     - [0x38BB0, c]  #
     - [0x3D140, c]  # music code
-    - [0x43520, c] # 
+    
+    # libnaudiosc. Why are there so many gaps?
+    - [0x43520, c, libnaudio/n_sl]
     - [0x435B0, c] # 
     - [0x435D0, c]  # pkm lab cries code
     - [0x45720, c]  # music code
     - [0x46680, c]  # speech code
-    - [0x47B60, c]  # sound code
+    - [0x47AF0, c, libnaudio/n_synstopvoice]
+    - [0x47B60, c, libnaudio/n_env]  # sound code
     - [0x485C0, c]  # moves code 
     - [0x48C60, c]  # move effects code
     - [0x490A0, c]  # audio functions to 0x50C00
     - [0x49190, hasm, ../../src/unk_49190]
     - [0x49790, c]
-    - [0x49BA0, c]
-    - [0x49DC0, c]
-    - [0x4A360, c]
+    - [0x49BA0, c, libnaudio/n_synallocvoice]
+    - [0x49DC0, c, libnaudio/n_synthesizer]
+    - [0x4A360, c, libnaudio/n_synsetpan]
     - [0x4A3E0, c]
     - [0x4B940, c, 4B940]
     - [0x4BA90, c, 4BA90]
     - [0x4BDC0, c, 4BDC0]
     - [0x4CBC0, c, 4CBC0]
     - [0x4F410, c]
-    - [0x4F7F0, c]
-    - [0x4F870, c]
-    - [0x4FDB0, c]
-    - [0x4FE60, c]
-    - [0x4FF50, c]
-    - [0x50120, c]
+    - [0x4F7F0, c, libnaudio/n_synsetpitch]
+    - [0x4F870, c, libnaudio/n_drvrNew]
+    - [0x4FDB0, c, libnaudio/n_auxbus]
+    - [0x4FE60, c, libnaudio/n_synsetfxmix]
+    - [0x4FEF0, c, libnaudio/n_synaddplayer]
+    - [0x4FF50, c, libnaudio/n_resample]
+    - [0x50120, c, libnaudio/n_load]
     - [0x50860, c]
-    - [0x50990, c]
+    - [0x50990, c, libnaudio/n_syndelete]
+    - [0x509A0, c, libnaudio/n_synallocfx]
     - [0x50A00, c]
-    - [0x50C20, c]
-    - [0x50CC0, c]
+    - [0x50B40, c, libnaudio/n_synstartvoiceparam]
+    - [0x50C20, c, libnaudio/n_synfreevoice]
+    - [0x50CC0, c, libnaudio/n_reverb]
+    - [0x51740, c]
     - [0x517A0, c] # yay0 audio decoder
-    - [0x51850, c]
-    - [0x518A0, c]
-    - [0x51B20, c]
+    - [0x51850, c, libnaudio/n_save]
+    - [0x518A0, c] # this is n_alMainBusPull but the function appears to have changed.
+    - [0x51B20, c, libnaudio/n_synsetvol]
 
     # libleo
     - [0x51BC0, c, libleo/readwrite]
@@ -337,11 +344,17 @@
     - [0x76280, data, rom_data_76280]
     - [0x78570, .data, 373A0]
     - [0x78890, data, rom_data_78890]
+    - [0x79180, .data, libnaudio/n_sl]
+    - [0x79190, data, rom_data_79190]
+    - [0x79200, .data, libnaudio/n_env]
+    - [0x79300, data, rom_data_79300]
     - [0x79630, .data, 49790]
     - [0x79660, data, rom_data_79660]
     - [0x79AE0, .data, 4CBC0]
     - [0x79C70, data, rom_data_79C70]
-    - [0x79F70, data, rom_data_79F70]
+    - [0x79F70, .data, libnaudio/n_drvrNew]
+    - [0x7A100, .data, libnaudio/n_reverb]
+    - [0x7A110, data, rom_data_7A110]
 
     # libleo
     - [0x7A180, .data, libleo/driverominit]
@@ -405,17 +418,19 @@
     - [0x7D230, .rodata, 373A0]
     - [0x7D340, rodata, rom_rodata_7D340]
     - [0x7D3E0, rodata, rom_rodata_7D3E0]
-    - [0x7D880, rodata, rom_rodata_7D880]
+    - [0x7D880, .rodata, libnaudio/n_env]
+    - [0x7D8D0, rodata, rom_rodata_7D8D0]
     - [0x7DF80, rodata, rom_rodata_7DF80]
     - [0x7DFD0, .rodata, 49790]
-    - [0x7E0C0, rodata, rom_rodata_7E0C0]
+    - [0x7E0C0, .rodata, libnaudio/n_synthesizer]
     - [0x7E0D0, rodata, rom_rodata_7E0D0]
     - [0x7E0E0, .rodata, 4BA90]
     - [0x7E110, .rodata, 4BDC0]
     - [0x7E2F0, .rodata, 4CBC0]
     - [0x7E560, rodata, rom_rodata_7E560]
-    - [0x7E5D0, rodata, rom_rodata_7E5D0]
-    - [0x7E600, rodata, rom_rodata_7E600]
+    - [0x7E5D0, .rodata, libnaudio/n_drvrNew]
+    - [0x7E5F0, .rodata, libnaudio/n_resample]
+    - [0x7E600, .rodata, libnaudio/n_reverb]
 
     # libleo
     - [0x7E630, .rodata, libleo/leofunc]
