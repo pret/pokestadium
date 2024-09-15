@@ -114,6 +114,7 @@
     - [0x50990, c, libnaudio/n_syndelete]
     - [0x509A0, c, libnaudio/n_synallocfx]
     - [0x50A00, c]
+    - [0x50B40, c, libnaudio/n_synstartvoiceparam]
     - [0x50C20, c]
     - [0x50CC0, c, libnaudio/n_reverb]
     - [0x51740, c]
