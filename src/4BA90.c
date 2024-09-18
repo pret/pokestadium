@@ -1,6 +1,7 @@
 #include "4BA90.h"
 #include "src/49790.h"
 #include "src/38BB0.h"
+#include "src/3D140.h"
 
 void func_8004AE90(s32 arg0, u32 arg1) {
     s32 var_a1;

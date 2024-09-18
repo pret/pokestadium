@@ -2,6 +2,7 @@
 #define _COMMON_H
 
 #include <ultra64.h>
+#include <PR/sched.h>
 
 typedef unsigned int uintptr_t;
 
@@ -13,6 +14,7 @@ typedef unsigned int uintptr_t;
 #include "sections.h"
 #include "gfx.h"
 #include "color.h"
+#include "sound.h"
 #include "math.h"
 
 typedef struct unk_D_86002F58_004_000_00C_028 {

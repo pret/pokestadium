@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void func_8004FE00(void*);
+s32 func_8004FE00(u8*);
 void func_8004FF20(void);
 
 

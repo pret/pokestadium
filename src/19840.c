@@ -1,5 +1,11 @@
-#include "global.h"
 #include "19840.h"
+#include "src/18480.h"
+#include "src/1C720.h"
+#include "src/3FB0.h"
+#include "src/dma.h"
+#include "src/memmap.h"
+#include "src/memory.h"
+#include "src/util.h"
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/19840/func_80018C40.s")
 
