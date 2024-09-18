@@ -20,7 +20,7 @@
 #ifndef __N_SYNTHINTERNALS__
 #define __N_SYNTHINTERNALS__
 
-#include <synthInternals.h>
+#include "synthInternals.h"
 #include "n_libaudio_sc.h"
 #include "n_abi.h"
 

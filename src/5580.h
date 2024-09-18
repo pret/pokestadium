@@ -8,7 +8,7 @@ typedef struct UnkStruct80001380 {
     /* 0x04 */ OSMesgQueue queue;
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ s16 unk_1E;
-    /* 0x1C */ OSTask task;
+    /* 0x20 */ OSTask task;
     /* 0x60 */ char unk60[0x8];
 } UnkStruct80001380; // size = 0x68
 

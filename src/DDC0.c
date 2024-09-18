@@ -5,6 +5,7 @@
 #include "4BDC0.h"
 #include "5580.h"
 #include "373A0.h"
+#include "src/50860.h"
 
 extern s32 D_800A83A0;
 
@@ -21,7 +22,6 @@ s32 func_800484E0(void);
 void func_80009210(void);
 void func_8004FD44(void);
 void func_8004B9C4();
-void func_8004FCD8(s32);
 void func_8003D4A0(s32);
 void func_8004AF24(s32);
 void func_8004FD64(s32);

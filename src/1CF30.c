@@ -3,6 +3,7 @@
 #include "include/string.h"
 #include "src/3FB0.h"
 #include "src/6A40.h"
+#include "src/20470.h"
 #include "src/6BC0.h"
 #include "src/E890.h"
 #include "src/memory.h"
@@ -10,7 +11,6 @@
 #include "lib/ultralib/src/libc/xstdio.h"
 
 extern Gfx D_8006F4C0[];
-extern Gfx D_8006F610[];
 extern Gfx D_8006F710[];
 extern Gfx D_8006F750[];
 extern Gfx D_8006F768[];
@@ -66,7 +66,7 @@ void func_8001C6AC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_32b, arg5, arg3, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
@@ -74,40 +74,40 @@ void func_8001C8C4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001CADC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001CADC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_IA, G_IM_SIZ_8b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001CCF8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001CCF8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_IA, G_IM_SIZ_16b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001CF10(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001CF10(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, arg4, G_IM_FMT_I, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                            G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001D12C(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001D12C(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_I, G_IM_SIZ_8b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001D348(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, s16 arg5, s32 arg6) {
+void func_8001D348(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, s16 arg5, s32 arg6) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_I, G_IM_SIZ_16b, arg5, arg3, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     func_8001C330(arg0, arg1, arg2, arg3, 0, 0, 0x400, 0x400, arg6);
 }
 
-void func_8001D560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32* arg4, u32* arg5, s16 arg6, s32 arg7) {
+void func_8001D560(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8* arg4, u8* arg5, s16 arg6, s32 arg7) {
     gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_16b, arg6, arg3, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
@@ -315,9 +315,9 @@ u8 func_8001E730(u16 arg0) {
     u8 var_v1 = 0;
 
     if ((arg0 >= 0x20) && (arg0 < 0x80)) {
-        var_v1 = ((u8*)D_8006F630)[arg0 + 0];
+        var_v1 = ((u8*)D_8006F630)[arg0];
     } else if ((arg0 >= 0xA0) && (arg0 < 0x100)) {
-        var_v1 = ((u8*)D_8006F610)[arg0 + 0];
+        var_v1 = ((u8*)D_8006F608)[sizeof(Gfx) + arg0];
     }
 
     return var_v1;
