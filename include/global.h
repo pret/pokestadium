@@ -104,7 +104,7 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x064 */ char pad064[0x3C];
     /* 0x0A0 */ s32 unk_0A0;
     /* 0x0A4 */ char pad0A4[2];
-    /* 0x0A6 */ s8 unk_0A6;
+    /* 0x0A6 */ u8 unk_0A6;
     /* 0x0A7 */ char pad0A7[5];
     /* 0x0AC */ Vec3f unk_0AC;
     /* 0x0B8 */ char pad0B8[0x24];
