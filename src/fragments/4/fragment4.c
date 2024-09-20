@@ -86,9 +86,9 @@ void func_87A00020(unk_D_86002F34_00C* arg0) {
 }
 
 Gfx* func_87A0002C(Gfx* arg0) {
-    gSPPerspNormalize(arg0++, D_87A01330->unk_028);
-    gSPMatrix(arg0++, (u32)D_87A01330->unk_024 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(arg0++, (u32)D_87A01330->unk_060 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    gSPPerspNormalize(arg0++, D_87A01330->unk_24.perspNorm);
+    gSPMatrix(arg0++, (u32)D_87A01330->unk_24.mtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(arg0++, (u32)D_87A01330->unk_60.p_mtxf & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
     return arg0;
 }

@@ -3050,10 +3050,10 @@ _DW({									\
 }
 
 #define	gsDPSetCombine(muxs0, muxs1)					\
-{{									\
+{									\
 	_SHIFTL(G_SETCOMBINE, 24, 8) | _SHIFTL(muxs0, 0, 24),		\
 	(unsigned int)(muxs1)						\
-}}
+}
 
 #define	GCCc0w0(saRGB0, mRGB0, saA0, mA0)				\
 		(_SHIFTL((saRGB0), 20, 4) | _SHIFTL((mRGB0), 15, 5) | 	\
