@@ -712,18 +712,19 @@ void func_86501964(void) {
 }
 
 void func_865019E4(void) {
-    D_87B000EC = D_87B000E8->unk_0C;
+    D_87B000EC = D_87B000E8->unk_00.unk_0C;
 
     D_87B000F0 = -0x200;
     D_87B000F2 = 0;
     D_87B000F4 = 0xBE;
 
-    D_87B000EC->unk_034 = 50.0f;
-    D_87B000EC->unk_038 = 6400.0f;
-    D_87B000EC->unk_02C = 40.0f;
-    D_87B000EC->unk_0B4.y = 51.0f;
+    D_87B000EC->unk_24.near = 50.0f;
+    D_87B000EC->unk_24.far = 6400.0f;
+    D_87B000EC->unk_24.fovy = 40.0f;
 
-    func_80010354(&D_87B000EC->unk_0B4, &D_87B000EC->unk_0A8, D_87B000F4, D_87B000F0, D_87B000F2);
+    D_87B000EC->unk_60.at.y = 51.0f;
+
+    func_80010354(&D_87B000EC->unk_60.at, &D_87B000EC->unk_60.eye, D_87B000F4, D_87B000F0, D_87B000F2);
 }
 
 void func_86501AAC(void) {

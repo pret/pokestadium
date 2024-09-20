@@ -290,3 +290,7 @@ rspbootTextStart = 0x80065FC0;
 aspMainTextStart = 0x80067420;
 aspMainDataStart = 0x8007EA70;
 audDMAMessageQ = 0x800FCAE0;
+D_8006F010 = 0x8006F010; // size:0x40
+D_8006F050 = 0x8006F050; // size:0xC
+D_8006F05C = 0x8006F05C; // size:0x6
+D_8006F064 = 0x8006F064; // size:0xC

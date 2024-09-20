@@ -82,8 +82,8 @@ unk_D_86002F58_004_000* func_80011938(MainPoolState* arg0, unk_D_86002F58_004_00
         arg1->unk_01D = 0xFF;
         arg1->unk_01C = 0;
         arg1->unk_0A6 = 0;
-        arg1->unk_0A0 = -0x100;
-        arg1->unk_03C = -0x100;
+        arg1->unk_0A0.rgba = 0xFFFFFF00;
+        arg1->unk_03C.rgba = 0xFFFFFF00;
         arg1->unk_040.unk_00 = 0;
         arg1->unk_040.unk_04 = NULL;
         arg1->unk_040.unk_08 = 0;
