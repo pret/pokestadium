@@ -7,19 +7,16 @@
 #include "src/6A40.h"
 #include "src/6BC0.h"
 #include "src/32D10.h"
-#include "src/E890.h"
+#include "src/F420.h"
 #include "src/memmap.h"
 #include "src/util.h"
 
 typedef void (*func_D_8006F0A4)(unk_D_86002F34_000* arg0);
 
 typedef struct unk_D_800AA8C8 {
-    /* 0x0000 */ MtxF unk_0000[1];
-    /* 0x0040 */ char unk0040[0xFC0];
-    /* 0x1000 */ MtxF* unk_1000[1];
-    /* 0x1004 */ char unk1004[0x7C];
-    /* 0x1080 */ s8 unk_1080[1];
-    /* 0x1081 */ char unk1081[0x1F];
+    /* 0x0000 */ MtxF unk_0000[64];
+    /* 0x1000 */ MtxF* unk_1000[32];
+    /* 0x1080 */ s8 unk_1080[32];
     /* 0x10A0 */ s32 unk_10A0;
 } unk_D_800AA8C8; // size >= 0x10A4
 
@@ -125,7 +122,7 @@ s32 D_800ABCBC;
 void func_80012180(void) {
     D_800AA8C8.unk_10A0 = 0;
     D_800AA8C8.unk_1080[0] = 0;
-    func_8000ED98(D_800AA8C8.unk_0000);
+    func_8000ED98(&D_800AA8C8.unk_0000[0]);
     D_800AA8C8.unk_1000[0] = func_80005F5C(sizeof(Mtx) * 1);
     func_80010090(D_800AA8C8.unk_1000[0], D_800AA8C8.unk_0000);
 }
@@ -265,8 +262,8 @@ void func_80012870(Vtx* arg0, unk_D_86002F34_00C_0CC* arg1, s16 arg2, s16 arg3, 
     s16 tmp2;
 
     a4 = arg4;
-    temp_fv1 = gCosineTable[idx >> 4];
-    temp_fa0 = gSineTable[idx >> 4];
+    temp_fv1 = COSS(idx);
+    temp_fa0 = SINS(idx);
     a5 = arg5;
 
     tmp1 = ((a4 * temp_fv1) - (temp_fa0 * a5));
@@ -589,9 +586,9 @@ void func_80013D34(unk_D_86002F34_000* arg0) {
     *(u32*)light->l.col = arg->unk_18.rgba;
     *(u32*)light->l.colc = arg->unk_18.rgba;
 
-    light->l.dir[0] = (120.0f * gCosineTable[arg->unk_1C >> 4]) * gSineTable[arg->unk_1E >> 4];
-    light->l.dir[1] = (120.0f) * gSineTable[arg->unk_1C >> 4];
-    light->l.dir[2] = (120.0f * gCosineTable[arg->unk_1C >> 4]) * gCosineTable[arg->unk_1E >> 4];
+    light->l.dir[0] = (120.0f * COSS(arg->unk_1C)) * SINS(arg->unk_1E);
+    light->l.dir[1] = (120.0f) * SINS(arg->unk_1C);
+    light->l.dir[2] = (120.0f * COSS(arg->unk_1C)) * COSS(arg->unk_1E);
 
     temp_a4->l.col[0] += ((arg->unk_18.r * arg->unk_18.a) / 100);
     if (temp_a4->l.col[0] > 0xFF) {

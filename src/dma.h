@@ -5,7 +5,7 @@ struct UnkStruct80000E80 {
     char unk0;
     char filler4[0x18];
     s32 unk1C;
-    void *unk20;
+    u8* unk20;
     s32 unk24;
     s32 unk28;
 };
