@@ -240,9 +240,13 @@ build/src/boot/fault_drawer.o: CFLAGS += -trapuv
 build/src/C030.o: OPTFLAGS += -Wo,-loopunroll,0
 build/src/hal_libc.o: CFLAGS += -signed
 
-# cc & asm-processor
-build/src/libleo/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
-build/src/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+build/src/libleo/%.o: CC := $(CC_OLD)
+
+DECOMP_POKESTADIUM := $(filter-out src/libleo/%,$(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)))
+DECOMP_POKESTADIUM_FILTERED := $(patsubst %.c,%.o,$(addprefix build/,$(shell find $(DECOMP_POKESTADIUM) -type f -exec grep -l "GLOBAL_ASM" {} \;)))
+
+# only run asm processor on files that need it.
+$(DECOMP_POKESTADIUM_FILTERED): CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 ###################### Ugly hacksz #############################
 
