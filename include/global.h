@@ -84,7 +84,12 @@ typedef struct unk_D_86002F58_004_000_054 {
     /* 0x04 */ unk_D_86002F58_004_000_054_004* unk_04;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
-} unk_D_86002F58_004_000_054; // size >= 0xC
+} unk_D_86002F58_004_000_054; // size = 0xC
+
+typedef struct unk_D_86002F58_004_000_0A8 {
+    /* 0x00 */ u16 unk_00;
+    /* 0x04 */ Vec3f unk_04;
+} unk_D_86002F58_004_000_0A8; // size = 0x10
 
 typedef struct unk_D_86002F58_004_000 {
     /* 0x000 */ unk_D_86002F58_004_000_000 unk_000;
@@ -95,18 +100,17 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x01E */ Vec3s unk_01E;
     /* 0x024 */ Vec3f unk_024;
     /* 0x030 */ Vec3f unk_030;
-    /* 0x03C */ s32 unk_03C;
+    /* 0x03C */ Color_RGBA8_u32 unk_03C;
     /* 0x040 */ unk_D_86002F58_004_000_040 unk_040;
     /* 0x050 */ char pad050[2];
     /* 0x052 */ s16 unk_052;
     /* 0x054 */ unk_D_86002F58_004_000_054 unk_054;
-    /* 0x060 */ s32 unk_060;
-    /* 0x064 */ char pad064[0x3C];
-    /* 0x0A0 */ s32 unk_0A0;
+    /* 0x060 */ MtxF unk_060;
+    /* 0x0A0 */ Color_RGBA8_u32 unk_0A0;
     /* 0x0A4 */ char pad0A4[2];
-    /* 0x0A6 */ s8 unk_0A6;
-    /* 0x0A7 */ char pad0A7[5];
-    /* 0x0AC */ Vec3f unk_0AC;
+    /* 0x0A6 */ u8 unk_0A6;
+    /* 0x0A7 */ u8 unk_0A7;
+    /* 0x0A8 */ unk_D_86002F58_004_000_0A8 unk_0A8[1];
     /* 0x0B8 */ char pad0B8[0x24];
     /* 0x0DC */ Vec3f unk_0DC;
     /* 0x0E0 */ char pad0E0[0x4];
@@ -114,26 +118,182 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x0F8 */ char pad0F8[0x70];
 } unk_D_86002F58_004_000; // size = 0x168
 
+typedef struct unk_D_86002F34_000 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ char pad04[0x4];
+    /* 0x08 */ struct unk_D_86002F34_000* unk_08;
+    /* 0x0C */ struct unk_D_86002F34_000* unk_0C;
+    /* 0x10 */ s32 (*unk_10)(s32, struct unk_D_86002F34_000*);
+    /* 0x14 */ char unk14[0x4];
+} unk_D_86002F34_000; // size >= 0x18
+
+typedef struct unk_D_86002F34_00C_018 {
+    /* 0x00 */ Vp* vp;
+    /* 0x04 */ s16 x;
+    /* 0x06 */ s16 y;
+    /* 0x08 */ s16 width;
+    /* 0x0A */ s16 height;
+} unk_D_86002F34_00C_018; // size = 0xC
+
+typedef struct unk_D_86002F34_00C_024 {
+    /* 0x00 */ Mtx* mtx;
+    /* 0x04 */ u16 perspNorm;
+    /* 0x08 */ f32 fovy;
+    /* 0x0C */ f32 aspect;
+    /* 0x10 */ f32 near;
+    /* 0x14 */ f32 far;
+    /* 0x18 */ f32 scale;
+} unk_D_86002F34_00C_024; // size = 0x1C
+
+typedef struct unk_D_86002F34_00C_040 {
+    /* 0x00 */ Mtx* mtx;
+    /* 0x04 */ f32 l;
+    /* 0x08 */ f32 r;
+    /* 0x0C */ f32 b;
+    /* 0x10 */ f32 t;
+    /* 0x14 */ f32 n;
+    /* 0x18 */ f32 f;
+    /* 0x1C */ f32 scale;
+} unk_D_86002F34_00C_040; // size = 0x20
+
+typedef struct unk_D_86002F34_00C_060 {
+    /* 0x00 */ MtxF* p_mtxf;
+    /* 0x04 */ MtxF mtxf;
+    /* 0x44 */ LookAt* lookat;
+    /* 0x48 */ Vec3f eye;
+    /* 0x54 */ Vec3f at;
+    /* 0x60 */ Vec3f up;
+} unk_D_86002F34_00C_060; // size >= 0x6C
+
+typedef struct unk_D_86002F34_00C_0CC {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ u16 unk_02;
+    /* 0x04 */ Color_RGBA8_u32 color;
+    /* 0x08 */ u16 unk_08;
+    /* 0x0A */ u16 unk_0A;
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ s16 unk_0E;
+    /* 0x10 */ s16 unk_10;
+    /* 0x12 */ s16 unk_12;
+    /* 0x14 */ s16 unk_14;
+    /* 0x16 */ s16 unk_16;
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ u8* texture;
+} unk_D_86002F34_00C_0CC; // size >= 0x20
+
 typedef struct unk_D_86002F34_00C {
-    /* 0x00 */ char pad0[0x24];
-    /* 0x24 */ MtxF* unk_024;
-    /* 0x28 */ u16 unk_028;
-    /* 0x2C */ f32 unk_02C;
-    /* 0x30 */ char pad30[4];
-    /* 0x34 */ f32 unk_034;
-    /* 0x38 */ f32 unk_038;
-    /* 0x3C */ char pad3C[0x24];
-    /* 0x60 */ MtxF* unk_060;
-    /* 0x64 */ MtxF unk_064;
-    /* 0xA4 */ char padA4[0x4];
-    /* 0xA8 */ Vec3f unk_0A8;
-    /* 0xB4 */ Vec3f unk_0B4;
-} unk_D_86002F34_00C; // size >= 0xC0
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ unk_D_86002F34_00C_018 unk_18;
+    /* 0x24 */ unk_D_86002F34_00C_024 unk_24;
+    /* 0x40 */ unk_D_86002F34_00C_040 unk_40;
+    /* 0x60 */ unk_D_86002F34_00C_060 unk_60;
+    /* 0xCC */ unk_D_86002F34_00C_0CC unk_CC;
+} unk_D_86002F34_00C; // size >= 0xEC
+
+typedef struct unk_D_86002F34_alt1 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ u16 unk_1A;
+    /* 0x1C */ s8 unk_1C;
+    /* 0x1D */ s8 unk_1D;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ Lights7* lights;
+} unk_D_86002F34_alt1; // size >= 0x28
+
+typedef struct unk_D_86002F34_alt2 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ u32 unk_18;
+} unk_D_86002F34_alt2; // size >= 0x1C
+
+typedef struct unk_D_86002F34_alt3 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ s32 unk_1C;
+} unk_D_86002F34_alt3; // size >= 0x20
+
+typedef struct unk_D_86002F34_alt4 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ Color_RGBA8_u32 unk_18;
+    /* 0x1C */ u16 unk_1C;
+    /* 0x1E */ u16 unk_1E;
+} unk_D_86002F34_alt4; // size >= 0x20
+
+typedef struct unk_D_86002F34_alt5 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ Vec3s unk_24;
+} unk_D_86002F34_alt5; // size >= 0x2C
+
+typedef struct unk_D_86002F34_alt6 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ Vec3s unk_18;
+    /* 0x1E */ Vec3s unk_1E;
+    /* 0x24 */ Vec3f unk_24;
+    /* 0x30 */ u8 unk_30;
+    /* 0x31 */ u8 unk_31;
+    /* 0x32 */ s16 unk_32;
+} unk_D_86002F34_alt6; // size >= 0x58
+
+typedef struct unk_D_86002F34_alt7 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ Gfx* unk_18;
+    /* 0x1C */ s16 unk_1C;
+} unk_D_86002F34_alt7; // size >= 0x20
+
+typedef struct unk_D_86002F34_alt8 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ Gfx* unk_18;
+    /* 0x1C */ MtxF unk_1C;
+} unk_D_86002F34_alt8; // size >= 0x5C
+
+typedef struct unk_D_86002F34_alt9 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ Gfx* unk_18;
+    /* 0x1C */ Vec3f unk_1C;
+    /* 0x28 */ f32 unk_28;
+} unk_D_86002F34_alt9; // size >= 0x2C
+
+typedef struct unk_D_86002F34_alt10 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s16 unk_1C;
+    /* 0x1E */ s16 unk_1E;
+    /* 0x20 */ s16 unk_20;
+    /* 0x22 */ u8 unk_22;
+    /* 0x24 */ Color_RGBA8_u32 unk_24;
+} unk_D_86002F34_alt10; // size >= 0x28
+
+typedef struct unk_D_86002F34_alt11_018 {
+    /* 0x00 */ u8 fmt;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ char unk04[0x4];
+    /* 0x08 */ u8* texture;
+} unk_D_86002F34_alt11_018; // size >= 0xC
+
+typedef struct unk_D_86002F34_alt11 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ unk_D_86002F34_alt11_018* unk_18;
+    /* 0x1C */ unk_D_86002F34_alt11_018* unk_1C;
+} unk_D_86002F34_alt11; // size >= 0x20
+
+typedef struct unk_D_86002F34_alt12 {
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ s16 unk_1C;
+    /* 0x1E */ s16 unk_1E;
+} unk_D_86002F34_alt12; // size >= 0x20
 
 typedef struct unk_D_86002F34 {
-    /* 0x00 */ char pad00[0xC];
-    /* 0x0C */ unk_D_86002F34_00C* unk_0C;
-} unk_D_86002F34; // size >= 0x10
+    /* 0x00 */ unk_D_86002F34_000 unk_00;
+    /* 0x18 */ unk_D_86002F34_000* unk_18;
+} unk_D_86002F34; // size >= 0x1C
 
 // Are unk_D_86002F30 and unk_D_800AC840 the same?
 typedef struct unk_D_86002F30 {

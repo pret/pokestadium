@@ -14,7 +14,7 @@
 #include "src/6BC0.h"
 #include "src/4BDC0.h"
 #include "src/6A40.h"
-#include "src/E890.h"
+#include "src/F420.h"
 #include "src/4BA90.h"
 #include "src/490A0.h"
 #include "src/30640.h"
@@ -174,7 +174,7 @@ void func_86200034(void) {
     s32 i;
     UNUSED s32 pad2[1];
 
-    func_80031EF4(&spDC, &D_86203E3C->unk_064);
+    func_80031EF4(&spDC, &D_86203E3C->unk_60.mtxf);
     guMtxF2L(spDC.mf, &sp98);
 
     for (i = 0; i < 4; i++) {
@@ -269,20 +269,22 @@ void func_862004D8(void) {
 
 void func_86200528(void) {
     D_8620829C = 0;
-    D_86203E3C = D_86203E38->unk_0C;
+    D_86203E3C = D_86203E38->unk_00.unk_0C;
+
     func_87A00020(D_86203E3C);
     D_86203E40 = 0x1300;
     D_86203E42 = -0x6700;
     D_86203E44 = 0x14A;
-    D_86203E3C->unk_034 = 50.0f;
-    D_86203E3C->unk_038 = 6400.0f;
-    D_86203E3C->unk_02C = 30.0f;
 
-    D_86203E3C->unk_0B4.x = 0.0f;
-    D_86203E3C->unk_0B4.y = 0.0f;
-    D_86203E3C->unk_0B4.z = 5.0f;
+    D_86203E3C->unk_24.near = 50.0f;
+    D_86203E3C->unk_24.far = 6400.0f;
+    D_86203E3C->unk_24.fovy = 30.0f;
 
-    func_80010354(&D_86203E3C->unk_0B4, &D_86203E3C->unk_0A8, D_86203E44, D_86203E40, D_86203E42);
+    D_86203E3C->unk_60.at.x = 0.0f;
+    D_86203E3C->unk_60.at.y = 0.0f;
+    D_86203E3C->unk_60.at.z = 5.0f;
+
+    func_80010354(&D_86203E3C->unk_60.at, &D_86203E3C->unk_60.eye, D_86203E44, D_86203E40, D_86203E42);
 }
 
 void func_86200620(void) {
@@ -367,7 +369,7 @@ void func_86200620(void) {
         D_86203E44 = 0x32;
     }
 
-    func_80010354(&D_86203E3C->unk_0B4, &D_86203E3C->unk_0A8, D_86203E44, D_86203E40, D_86203E42);
+    func_80010354(&D_86203E3C->unk_60.at, &D_86203E3C->unk_60.eye, D_86203E44, D_86203E40, D_86203E42);
 }
 
 void func_86200938(void) {

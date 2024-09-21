@@ -12,7 +12,7 @@
 #include "src/3FB0.h"
 #include "src/6A40.h"
 #include "src/6BC0.h"
-#include "src/E890.h"
+#include "src/F420.h"
 #include "src/controller.h"
 #include "src/fragments/2/fragment2.h"
 #include "src/fragments/4/fragment4.h"
@@ -107,21 +107,21 @@ void func_8630011C(void) {
 }
 
 void func_86300154(void) {
-    D_86301718 = D_86301714->unk_0C;
+    D_86301718 = D_86301714->unk_00.unk_0C;
 
     D_8630171C = 0x600;
     D_8630171E = 0;
     D_86301720 = 0x15E;
 
-    D_86301718->unk_034 = 100.0f;
-    D_86301718->unk_038 = 12800.0f;
-    D_86301718->unk_02C = 30.0f;
+    D_86301718->unk_24.near = 100.0f;
+    D_86301718->unk_24.far = 12800.0f;
+    D_86301718->unk_24.fovy = 30.0f;
 
-    D_86301718->unk_0B4.x = 0.0f;
-    D_86301718->unk_0B4.y = 70.0f;
-    D_86301718->unk_0B4.z = 0.0f;
+    D_86301718->unk_60.at.x = 0.0f;
+    D_86301718->unk_60.at.y = 70.0f;
+    D_86301718->unk_60.at.z = 0.0f;
 
-    func_80010354(&D_86301718->unk_0B4, &D_86301718->unk_0A8, D_86301720, D_8630171C, D_8630171E);
+    func_80010354(&D_86301718->unk_60.at, &D_86301718->unk_60.eye, D_86301720, D_8630171C, D_8630171E);
 }
 
 void func_86300230(void) {

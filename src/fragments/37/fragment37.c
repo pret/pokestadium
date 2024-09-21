@@ -9,7 +9,7 @@
 #include "src/4F410.h"
 #include "src/6A40.h"
 #include "src/DDC0.h"
-#include "src/E890.h"
+#include "src/F420.h"
 #include "src/controller.h"
 #include "src/memory.h"
 #include "src/stage_loader.h"
@@ -230,8 +230,8 @@ void func_82200A5C(void) {
 
         temp_fv0 = (D_82203160[0].unk_06 * D_82203160[0].unk_04) / 100;
 
-        D_82203160[i].unk_0C[0].unk_00 = D_82203160[0].unk_00 + (gCosineTable[(var_v0 & 0xFFFF) >> 4] * temp_fv0);
-        D_82203160[i].unk_0C[0].unk_02 = D_82203160[0].unk_02 + (gSineTable[(var_v0 & 0xFFFF) >> 4] * temp_fv0);
+        D_82203160[i].unk_0C[0].unk_00 = D_82203160[0].unk_00 + (COSS((var_v0)) * temp_fv0);
+        D_82203160[i].unk_0C[0].unk_02 = D_82203160[0].unk_02 + (SINS((var_v0)) * temp_fv0);
         D_82203160[i].unk_0C[0].unk_04 = (D_82203160[0].unk_06 * 0x48) / 100;
 
         var_v0 -= 0x5555;

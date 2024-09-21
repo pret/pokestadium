@@ -54,6 +54,7 @@
     - [0xE1C0, c]
     - [0xE570, c] #
     - [0xE890, c] #
+    - [0xF420, c] #
     - [0x11BA0, c] #  
     - [0x12D80, c] # 
     - [0x17300, c] #
@@ -340,8 +341,12 @@
     - [0x6A3E0, data, rom_data_6A3E0]
     - [0x6A3F0, .data, math_util]
     - [0x6FC00, data, rom_data_6FC00]
+    - [0x6FC50, .data, F420]
+    - [0x6FC80, .data, 12D80]
+    - [0x6FEB0, data, rom_data_6FEB0]
     - [0x70070, .data, 20470]
     - [0x703E0, data, rom_data_703E0]
+    - [0x74260, data, rom_data_74260]
     - [0x76260, .data, 29BA0]
     - [0x76280, data, rom_data_76280]
     - [0x78570, .data, 373A0]
@@ -404,7 +409,7 @@
     - [0x7BFA0, .rodata, profiler]
     - [0x7BFC0, .rodata, gb_tower]
     - [0x7C000, rodata, rom_rodata_7C000]
-    - [0x7C180, rodata, rom_rodata_7C180]
+    - [0x7C180, .rodata, F420]
     - [0x7C190, rodata, rom_rodata_7C190]
     - [0x7C220, rodata, rom_rodata_7C220]
     - [0x7C750, rodata, rom_rodata_7C750]
@@ -483,6 +488,8 @@
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
     - {vram: 0x800A7EA0, type: .bss, name: profiler}
     - {vram: 0x800A8100, type:  bss, name: unk_bss_2}
+    - {vram: 0x800AA6C0, type:  .bss, name: 12D80}
+    - {vram: 0x800ABCC0, type:  bss, name: unk_bss_13}
     - {vram: 0x800AC880, type:  .bss, name: 20330}
     - {vram: 0x800AC890, type:  bss, name: unk_bss_11}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}

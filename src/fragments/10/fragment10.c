@@ -15,7 +15,7 @@
 #include "src/50860.h"
 #include "src/6A40.h"
 #include "src/6BC0.h"
-#include "src/E890.h"
+#include "src/F420.h"
 #include "src/fragments/2/fragment2.h"
 #include "src/memory.h"
 #include "src/stage_loader.h"
@@ -350,7 +350,7 @@ void func_86400860(UNUSED s32 arg0) {
 
         gSPEndDisplayList(temp_v0++);
 
-        D_864052C8->unk_190->unk_1C = D_864052C8->unk_028.unk_0AC;
+        D_864052C8->unk_190->unk_1C = D_864052C8->unk_028.unk_0A8[0].unk_04;
     }
 }
 
@@ -813,19 +813,19 @@ void func_86401EEC(void) {
 }
 
 void func_86401F74(void) {
-    D_87B000EC = D_87B000E8->unk_0C;
+    D_87B000EC = D_87B000E8->unk_00.unk_0C;
 
     D_87B000F0 = 0x900;
     D_87B000F2 = 0;
     D_87B000F4 = 0x190;
 
-    D_87B000EC->unk_034 = 50.0f;
-    D_87B000EC->unk_038 = 6400.0f;
-    D_87B000EC->unk_02C = 27.5f;
+    D_87B000EC->unk_24.near = 50.0f;
+    D_87B000EC->unk_24.far = 6400.0f;
+    D_87B000EC->unk_24.fovy = 27.5f;
 
-    D_87B000EC->unk_0B4.y = 25.0f;
+    D_87B000EC->unk_60.at.y = 25.0f;
 
-    func_80010354(&D_87B000EC->unk_0B4, &D_87B000EC->unk_0A8, D_87B000F4, D_87B000F0, D_87B000F2);
+    func_80010354(&D_87B000EC->unk_60.at, &D_87B000EC->unk_60.eye, D_87B000F4, D_87B000F0, D_87B000F2);
 }
 
 void func_8640203C(void) {
