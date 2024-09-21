@@ -2,7 +2,7 @@
 #include "1C720.h"
 #include "11BA0.h"
 #include "17300.h"
-#include "E890.h"
+#include "F420.h"
 #include "18140.h"
 #include "32D10.h"
 #include "22630.h"
@@ -43,8 +43,8 @@ void func_8001BC34(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, unk_D_86002
     arg0->unk_000.unk_02 |= 0x40;
     arg0->unk_000.unk_02 &= ~0x2;
 
-    arg0->unk_0A0 = -0x100;
-    arg0->unk_03C = -0x100;
+    arg0->unk_0A0.rgba = 0xFFFFFF00;
+    arg0->unk_03C.rgba = 0xFFFFFF00;
     arg0->unk_040.unk_00 = -1;
     arg0->unk_040.unk_04 = NULL;
     arg0->unk_054.unk_00 = -1;

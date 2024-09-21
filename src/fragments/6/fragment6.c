@@ -18,7 +18,7 @@
 #include "src/20470.h"
 #include "src/6BC0.h"
 #include "src/2E110.h"
-#include "src/E890.h"
+#include "src/F420.h"
 #include "src/12D80.h"
 #include "src/17300.h"
 
@@ -285,24 +285,25 @@ s32 func_86000410(void) {
 }
 
 void func_86000478(void) {
-    D_86002F38 = D_86002F34->unk_0C;
+    D_86002F38 = D_86002F34->unk_00.unk_0C;
     func_87A00020(D_86002F38);
     D_86002F3C = 0x600;
     D_86002F3E = 0;
     D_86002F40 = 1000;
-    D_86002F38->unk_034 = 100.0f;
-    D_86002F38->unk_038 = 12800.0f;
-    D_86002F38->unk_02C = 10.0f;
 
-    D_86002F38->unk_0B4.x = 0.0f;
-    D_86002F38->unk_0B4.y = 70.0f;
-    D_86002F38->unk_0B4.z = 0.0f;
+    D_86002F38->unk_24.near = 100.0f;
+    D_86002F38->unk_24.far = 12800.0f;
+    D_86002F38->unk_24.fovy = 10.0f;
 
-    func_80010354(&D_86002F38->unk_0B4, &D_86002F38->unk_0A8, D_86002F40, D_86002F3C, D_86002F3E);
+    D_86002F38->unk_60.at.x = 0.0f;
+    D_86002F38->unk_60.at.y = 70.0f;
+    D_86002F38->unk_60.at.z = 0.0f;
+
+    func_80010354(&D_86002F38->unk_60.at, &D_86002F38->unk_60.eye, D_86002F40, D_86002F3C, D_86002F3E);
 }
 
 void func_86000564(void) {
-    func_80010354(&D_86002F38->unk_0B4, &D_86002F38->unk_0A8, D_86002F40, D_86002F3C, D_86002F3E);
+    func_80010354(&D_86002F38->unk_60.at, &D_86002F38->unk_60.eye, D_86002F40, D_86002F3C, D_86002F3E);
 }
 
 #ifdef NON_MATCHING
@@ -496,8 +497,8 @@ void func_86000C18(void) {
 
     for (i = 0; i < 4; i++) {
         D_86003B60 = &D_86002F58[i].unk_004;
-        temp_f20 = (410.0f - D_86003B60->unk_000.unk_0AC.y) / 510.0f;
-        guTranslate(&sp100, D_86003B60->unk_000.unk_0AC.x, 0.0f, 0.0f);
+        temp_f20 = (410.0f - D_86003B60->unk_000.unk_0A8[0].unk_04.y) / 510.0f;
+        guTranslate(&sp100, D_86003B60->unk_000.unk_0A8[0].unk_04.x, 0.0f, 0.0f);
         guScale(&spC0, temp_f20, temp_f20, temp_f20);
         guMtxCatL(&spC0, &sp100, var_s1);
 

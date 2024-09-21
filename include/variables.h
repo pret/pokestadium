@@ -51,7 +51,15 @@ extern u8 gPool[];
 extern Gfx* gDisplayListHead;
 extern u64 _binary_assets_us_F3DEX2_bin_start[];
 
+extern f32 gSineTable[];
+extern f32 gCosineTable[0x1000];
+extern s16 gArctanTable[0x401];
+
 extern u8 D_1000000[];
+extern u8 D_1001800[];
+extern Gfx D_1002480[];
+extern Gfx D_1002508[];
+extern Gfx D_1002590[];
 extern u8 D_2000000[];
 extern u8 D_3000000[];
 extern u8 D_4000000[];
@@ -71,6 +79,8 @@ extern u8 D_2028A60[];
 extern u8 D_2028AA0[];
 extern u32 D_B0000D10;
 
+extern u8 D_800818E0[0x20];
+
 typedef struct unk_D_80068BA0 {
     /* 0x00 */ char pad00[0x2];
     /* 0x02 */ s16 unk_02;
@@ -86,7 +96,6 @@ extern unk_D_80068BA0* D_80068BA8;
 extern unk_D_80068BA0* D_80068BAC;
 extern Gfx D_8006F518[];
 extern Gfx D_8006F630[];
-
 extern u8 D_82000000;
 extern u8 D_81400000;
 extern u8 D_86B00000;
@@ -110,10 +119,6 @@ extern unk_D_800A7440 D_800A7440;
 extern struct unk_D_86002F58_004_000_000 D_800AC840;
 extern struct unk_D_86002F58_004_000_000 D_800AC858;
 extern struct unk_D_86002F58_004_000* D_8006F09C;
-
-extern struct Vec3f D_8006F050;
-extern struct Vec3s D_8006F05C;
-extern struct Vec3f D_8006F064;
 
 typedef struct unk_D_8006FF00 {
 	/* 0x00 */ char unk_00[0x4];
