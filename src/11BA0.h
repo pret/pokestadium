@@ -18,7 +18,7 @@ typedef struct unk_D_86404778_190 {
 
 unk_D_86002F58_004_000_000* func_8001103C(MainPoolState*, void*);
 unk_D_86002F58_004_000* func_80011938(MainPoolState* arg0, unk_D_86002F58_004_000* arg1, s16 arg2, Vec3f* arg3, Vec3s* arg4, Vec3f* arg5);
-unk_func_80011B94* func_80011B94(MainPoolState*, void*, s32, Gfx*);
+unk_func_80011B94* func_80011B94(MainPoolState*, unk_func_80011B94*, s32, Gfx*);
 unk_D_86404778_190* func_80011B10(MainPoolState*, s32, s32, s32, Vec3f*, f32);
 void func_80012094(unk_D_86002F58_004_000_000*, unk_D_86002F58_004_000_000*);
 
