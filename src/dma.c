@@ -2,7 +2,6 @@
 #include "dma.h"
 #include "rsp.h"
 
-extern u32 D_800818E0;
 extern s16 D_80083C1C;
 
 s32 func_80000E80(s32 arg0, void* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -102,7 +101,7 @@ s32 func_80001124(s32 arg0, s32 arg1) {
     temp_v0 = Util_Malloc(0x2C);
     if (temp_v0 != NULL) {
         temp_v0->unk0 = 0xC;
-        temp_v0->unk20 = &D_800818E0;
+        temp_v0->unk20 = D_800818E0;
         temp_v0->unk28 = arg0;
         func_80000E2C(temp_v0, arg1);
     }

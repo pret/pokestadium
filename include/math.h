@@ -18,6 +18,9 @@ extern float __ll_to_f(long long s);
 extern double __ull_to_d(unsigned long long u);
 extern float __ull_to_f(unsigned long long u);
 
+#define SINS(x) gSineTable[(u16) (x) >> 4]
+#define COSS(x) gCosineTable[(u16) (x) >> 4]
+
 typedef float MtxF_t[4][4];
 typedef union {
     MtxF_t mf;
@@ -40,5 +43,26 @@ typedef struct Vec3s {
     /* 0x2 */ s16 y;
     /* 0x4 */ s16 z;
 } Vec3s; // size = 0x6
+
+typedef union Vec2s_s32 {
+    struct {
+        /* 0x0 */ s16 x;
+        /* 0x2 */ s16 y;
+    };
+    s32 xy;
+} Vec2s_s32; // size = 0x6
+
+typedef union AllTypeS32 {
+    struct {
+        s16 rg;
+        s16 ba;
+    };
+    struct {
+        s8 r;
+        s8 g;
+        s8 b;
+        s8 a;
+    };
+} AllTypeS32;
 
 #endif

@@ -33,6 +33,13 @@ typedef union Color_RGBA8_u32 {
     u32 rgba;
 } Color_RGBA8_u32;
 
+typedef union Color_RGBA8_s32 {
+    struct {
+        s8 r, g, b, a;
+    };
+    s32 rgba;
+} Color_RGBA8_s32;
+
 typedef struct {
     f32 r, g, b, a;
 } Color_RGBAf;
