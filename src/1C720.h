@@ -2,7 +2,6 @@
 #define _1C720_H_
 
 #include "global.h"
-#include "19840.h"
 
 typedef struct unk_func_8001C014 {
 	/* 0x00 */ char unk_00[0x2];
@@ -30,6 +29,17 @@ typedef struct unk_func_8001C07C_arg0 {
     /* 0x10 */ unk_D_86002F58_004_000_010* unk_10;
     /* 0x14 */ s32 unk_14;
 } unk_func_8001C07C_arg0; // size >= 0x18
+
+typedef struct unk_func_8001C248 {
+    /* 0x000 */ unk_D_86002F58_004_000_000 unk_000;
+    /* 0x018 */ s16 unk_018;
+    /* 0x01A */ s16 unk_01A;
+    /* 0x01C */ u8 unk_01C;
+    /* 0x01D */ u8 unk_01D;
+    /* 0x01E */ char unk01E[0x2];
+    /* 0x020 */ s32 unk_020;
+    /* 0x024 */ s32* unk_024;
+} unk_func_8001C248; // size >= 0x28
 
 void func_8001BB20(void);
 void func_8001BB58(unk_D_86002F58_004_000* arg0);

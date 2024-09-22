@@ -3,6 +3,15 @@
 
 #include "global.h"
 
+typedef union arg1_func_80010CA8 {
+    struct {
+        /* 0x00 */ s16 unk_00;
+        /* 0x02 */ s8 unk_02;
+        /* 0x03 */ s8 unk_03;
+    };
+    u32 raw;
+} arg1_func_80010CA8; // size = 0x4
+
 extern Vec3f D_8006F050;
 extern Vec3s D_8006F05C;
 extern Vec3f D_8006F064;
@@ -56,7 +65,7 @@ f32 func_800107F0(f32 arg0, f32 arg1, f32 arg2);
 void func_80010930(f32* arg0, f32* arg1, f32* arg2, Vec3f* arg3);
 u16 func_80010B20(Vec3f* arg0);
 Color_RGBA8_u32* func_80010BD4(Color_RGBA8_u32* arg0, Vec3f* arg1, s32 arg2);
-u16 func_80010CA8(u16 arg0, AllTypeS32 arg1);
-Color_RGBA8_u32* func_80010E20(Color_RGBA8_u32 arg0, AllTypeS32 arg1);
+u16 func_80010CA8(u16 arg0, arg1_func_80010CA8 arg1);
+u32 func_80010E20(u32 arg0, arg1_func_80010CA8 arg1);
 
 #endif // _F420_H_
