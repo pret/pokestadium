@@ -31,11 +31,11 @@ struct RelocTable {
 typedef struct Fragment {
     /* 0x00 */ u32 inst[2];     // MIPS instructions to jump to the main function, typically something like "j 0x8xx00020; nop"
     /* 0x08 */ char magic[8];   // "FRAGMENT"
-    /* 0x10 */ u32 entrypoint;  // typically 0x20
+    /* 0x10 */ u32 headerSize;  // typically 0x20
     /* 0x14 */ u32 relocOffset; // relocOffset
     /* 0x18 */ u32 sizeInRom;
     /* 0x1C */ u32 sizeInRam;
-    /* 0x00 */ char data[RELOCATIONS_SIZE]; // variable size
+    /* 0x20 */ char data[RELOCATIONS_SIZE]; // variable size
 } Fragment;
 
 void Memmap_SetSegmentMap(u32 id, uintptr_t vaddr, size_t size);
