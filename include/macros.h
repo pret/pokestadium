@@ -24,6 +24,7 @@
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
 #define SQ(x) ((x) * (x))
+#define CB(x) ((x) * (x) * (x))
 
 // cast thru uintptr_t for integer to pointer casts
 #define INT2VOID(i) ((void *)(uintptr_t)(i))
