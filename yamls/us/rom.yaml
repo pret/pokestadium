@@ -2438,12 +2438,12 @@
   - [0x4D1330, bin, area_select_ui]
   - [0x4EB0C0, bin, menu_select_ui]
   - [0x5046B0, bin, stadium_select_ui]
-  - [0x52ABA0, bin]
-  - [0x52F6D0, bin]
-  - [0x533B20, bin]
-  - [0x56E7D0, bin]
-  - [0x5C7A70, bin]
-  - [0x5C7AD0, bin]
+  - [0x52ABA0, bin, title_ui]
+  - [0x52F6D0, bin] # unused. Not loaded UI graphics. Could be leftovers from Stadium 0 (JP)?
+  - [0x533B20, bin, battle_portraits]
+  - [0x56E7D0, bin, stadium_models] # stadium models?
+  - [0x5C7A70, bin] # very small piece of data and doesnt appear to be loaded by anything...
+  - [0x5C7AD0, bin, pokedex_area_model]
   - [0x5F6790, bin]
   - [0x5F92A0, bin]
   - [0x5FFC30, bin]
