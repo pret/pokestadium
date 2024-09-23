@@ -2471,7 +2471,7 @@
   - [0x701E50, bin]
   - [0x70D3A0, bin]
   - [0x7820E0, bin]
-  - [0x783760, bin]
+  - [0x783760, bin, textdata]
   - [0x798CD0, bin]
   - [0x7994B0, bin]
   - [0x79AFB0, bin]

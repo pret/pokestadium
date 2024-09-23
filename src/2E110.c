@@ -8,7 +8,7 @@ static char** D_800AF744;
 void func_8002D510(void) {
     s32 i;
 
-    D_800AF740 = func_800044F4(_783760_ROM_START, NULL, 1, 0);
+    D_800AF740 = func_800044F4(textdata_ROM_START, NULL, 1, 0);
     D_800AF744 = main_pool_alloc(0xA8, 0);
 
     for (i = 0; i < 42; i++) {
