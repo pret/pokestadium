@@ -1,7 +1,7 @@
 #include "F420.h"
 #include "src/math_util.h"
 
-extern u16 D_80073660[];
+extern u16 D_80073660[1][0x100];
 
 Vec3f D_8006F050 = { 0.0f, 0.0f, 0.0f };
 Vec3s D_8006F05C = { 0, 0, 0 };
@@ -867,8 +867,7 @@ Color_RGBA8_u32* func_80010BD4(Color_RGBA8_u32* arg0, Vec3f* arg1, s32 arg2) {
     return arg0;
 }
 
-#ifdef NON_MATCHING
-u16 func_80010CA8(u16 arg0, AllTypeS32 arg1) {
+u16 func_80010CA8(u16 arg0, arg1_func_80010CA8 arg1) {
     Vec3f sp24;
     s32 a;
     s32 b;
@@ -876,74 +875,71 @@ u16 func_80010CA8(u16 arg0, AllTypeS32 arg1) {
     if (arg0 & 1) {
         func_80010780(arg0, &sp24);
 
-        if (arg1.rg != 0) {
-            sp24.x += (arg1.b * 0.015625f);
+        if (arg1.unk_00 != 0) {
+            sp24.x += (arg1.unk_00 * 0.015625f);
         }
 
-        if (arg1.b != 0) {
-            if (arg1.a > 0) {
-                sp24.y += ((1.0f - sp24.y) * arg1.a * 0.125f);
+        if (arg1.unk_02 != 0) {
+            if (arg1.unk_02 > 0) {
+                sp24.y += ((1.0f - sp24.y) * arg1.unk_02 * 0.125f);
             } else {
-                sp24.y += (sp24.y * arg1.a * 0.125f);
+                sp24.y += (sp24.y * arg1.unk_02 * 0.125f);
             }
         }
 
-        if (arg1.a != 0) {
+        if (arg1.unk_03 != 0) {
             a = (((sp24.z + 1.0f) * 0.5f * 255.0f));
-            b = (((arg1.a > 0) ? arg1.a + 7 : arg1.a + 8) << 8);
+            if (arg1.unk_03 > 0) {
+                b = arg1.unk_03 + 7;
+            } else {
+                b = arg1.unk_03 + 8;
+            }
 
-            sp24.z = (2.0f * (D_80073660[b + a] / 65535.0f)) - 1.0f;
+            sp24.z = (2.0f * (D_80073660[b][a] / 65535.0f)) - 1.0f;
         }
 
         arg0 = func_80010B20(&sp24);
     }
     return arg0;
 }
-#else
-// const f32 D_8007B580 = 65535.0f;
-#pragma GLOBAL_ASM("asm/us/nonmatchings/F420/func_80010CA8.s")
-#endif
 
-#ifdef NON_MATCHING
-Color_RGBA8_u32* func_80010E20(Color_RGBA8_u32 arg0, AllTypeS32 arg1) {
+u32 func_80010E20(u32 arg0, arg1_func_80010CA8 arg1) {
     Vec3f sp2C;
-    Color_RGBA8_u32* a0 = &arg0;
-    s32 var_v1;
+    Color_RGBA8_u32 arg;
     s32 a;
+    s32 b;
 
-    if (a0->a > 0) {
-        func_80010720(arg0, &sp2C);
+    arg.rgba = arg0;
 
-        if (arg1.rg != 0) {
-            sp2C.x += (arg1.b * 0.015625f);
+    if (arg.a > 0) {
+        func_80010720(arg, &sp2C);
+
+        if (arg1.unk_00 != 0) {
+            sp2C.x += (arg1.unk_00 * 0.015625f);
         }
 
-        if (arg1.b != 0) {
-            if (arg1.a > 0) {
-                sp2C.y += ((1.0f - sp2C.y) * arg1.a * 0.125f);
+        if (arg1.unk_02 != 0) {
+            if (arg1.unk_02 > 0) {
+                sp2C.y += ((1.0f - sp2C.y) * arg1.unk_02 * 0.125f);
             } else {
-                sp2C.y += (sp2C.y * arg1.a * 0.125f);
+                sp2C.y += (sp2C.y * arg1.unk_02 * 0.125f);
             }
         }
 
-        if (arg1.a != 0) {
+        if (arg1.unk_03 != 0) {
             a = (((sp2C.z + 1.0f) * 0.5f * 255.0f));
 
-            if (arg1.a > 0) {
-                var_v1 = arg1.a + 7;
+            if (arg1.unk_03 > 0) {
+                b = arg1.unk_03 + 7;
             } else {
-                var_v1 = arg1.a + 8;
+                b = arg1.unk_03 + 8;
             }
 
-            sp2C.z = (2.0f * (D_80073660[(var_v1 << 8) + a] / 65535.0f)) - 1.0f;
+            sp2C.z = (2.0f * (D_80073660[b][a] / 65535.0f)) - 1.0f;
         }
 
-        func_80010BD4(a0, &sp2C, arg0.a);
+        func_80010BD4(&arg, &sp2C, arg.a);
     }
 
-    return a0;
+    return arg.rgba;
 }
-#else
-// const f32 D_8007B584 = 65535.0f;
-#pragma GLOBAL_ASM("asm/us/nonmatchings/F420/func_80010E20.s")
-#endif

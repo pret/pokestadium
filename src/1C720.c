@@ -6,6 +6,7 @@
 #include "18140.h"
 #include "32D10.h"
 #include "22630.h"
+#include "19840.h"
 #include "dp_intro.h"
 #include "hal_libc.h"
 
@@ -176,17 +177,17 @@ void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2) {
 
 #ifdef NON_MATCHING
 typedef struct stack_func_8001C07C {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ unk_D_86002F58_004_000_010_02C unk_00;
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ s16 unk_08;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x0C */ unk_D_86002F58_004_000_010_02C unk_0C;
 } stack_func_8001C07C; // size == 0x30
 
 void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
     stack_func_8001C07C stack;
 
     stack.unk_08 = arg0->unk_02;
-    stack.unk_0C = 0;
+    stack.unk_0C.raw = 0;
 
     if (!(arg0->unk_00 & 0x40) && (arg0->unk_00 & 0x80)) {
         if (arg0->unk_04 != NULL && stack.unk_08 == arg0->unk_04->unk_00) {
@@ -218,37 +219,37 @@ void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
 #endif
 
 void func_8001C198(unk_func_8001C248* arg0) {
-    if (func_80019C08(arg0->unk_010, arg0)) {
-        arg0->unk_014 = arg0->unk_010->unk_24;
-        arg0->unk_000 &= ~0xE0;
-        arg0->unk_000 |= 0x10;
+    if (func_80019C08(arg0->unk_000.unk_10)) {
+        arg0->unk_000.unk_14 = arg0->unk_000.unk_10->unk_24;
+        arg0->unk_000.unk_00 &= ~0xE0;
+        arg0->unk_000.unk_00 |= 0x10;
     }
 }
 
 void func_8001C1E8(unk_func_8001C248* arg0) {
-    if (arg0->unk_000 & 0x40 && func_80019CA8(arg0->unk_010) != 0) {
-        arg0->unk_014 = arg0->unk_010->unk_24;
-        arg0->unk_000 &= ~0xE0;
-        arg0->unk_000 |= 0x10;
+    if (arg0->unk_000.unk_00 & 0x40 && func_80019CA8(arg0->unk_000.unk_10) != 0) {
+        arg0->unk_000.unk_14 = arg0->unk_000.unk_10->unk_24;
+        arg0->unk_000.unk_00 &= ~0xE0;
+        arg0->unk_000.unk_00 |= 0x10;
     }
 }
 
 void func_8001C248(unk_func_8001C248* arg0) {
     if (!(arg0->unk_01D & 0x40) && (arg0->unk_01D & 0x80)) {
-        func_80019A7C(arg0->unk_010, arg0->unk_020, arg0->unk_024, arg0);
+        func_80019A7C(arg0->unk_000.unk_10, arg0->unk_020, arg0->unk_024);
         arg0->unk_01D |= 0x40;
         arg0->unk_01D &= ~0x10;
         if (arg0->unk_01D & 0x20) {
-            func_80019CE0(arg0->unk_010);
-            arg0->unk_024 = arg0->unk_010->unk_28;
+            func_80019CE0(arg0->unk_000.unk_10);
+            arg0->unk_024 = arg0->unk_000.unk_10->unk_28;
             arg0->unk_01D &= ~0xE0;
         }
     }
 }
 
 void func_8001C2D8(unk_func_8001C248* arg0) {
-    if (func_80019C58(arg0->unk_010, arg0) != 0) {
-        arg0->unk_024 = arg0->unk_010->unk_28;
+    if (func_80019C58(arg0->unk_000.unk_10) != 0) {
+        arg0->unk_024 = arg0->unk_000.unk_10->unk_28;
         arg0->unk_01D &= ~0xE0;
         arg0->unk_01D |= 0x10;
     }

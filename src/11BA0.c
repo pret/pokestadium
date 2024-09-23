@@ -88,7 +88,7 @@ unk_D_86002F58_004_000* func_80011938(MainPoolState* arg0, unk_D_86002F58_004_00
         arg1->unk_040.unk_04 = NULL;
         arg1->unk_040.unk_08 = 0;
         arg1->unk_040.unk_0C = 0x10000;
-        arg1->unk_052 = 0;
+        arg1->unk_040.unk_12 = 0;
         arg1->unk_054.unk_00 = 0;
         arg1->unk_054.unk_04 = NULL;
         arg1->unk_054.unk_08 = 0;
@@ -106,7 +106,19 @@ unk_D_86002F58_004_000* func_80011938(MainPoolState* arg0, unk_D_86002F58_004_00
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80011B10.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80011B94.s")
+unk_func_80011B94* func_80011B94(MainPoolState* arg0, unk_func_80011B94* arg1, s32 arg2, Gfx* arg3) {
+    if (arg0 != NULL) {
+        arg1 = func_80002DCC(arg0, sizeof(unk_func_80011B94), 4);
+    }
+
+    if (arg1 != NULL) {
+        arg1->unk_18 = arg3;
+        func_80010FA0(arg1, 0x19);
+        arg1->unk_00.unk_03 = arg2;
+    }
+
+    return arg1;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80011BF4.s")
 

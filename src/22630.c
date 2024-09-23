@@ -2,23 +2,10 @@
 #include "include/string.h"
 #include "src/22630.h"
 #include "src/26820.h"
-#include "src/29BA0.h"
 #include "src/2E110.h"
 #include "src/gb_tower.h"
 #include "src/hal_libc.h"
 #include "src/util.h"
-
-typedef struct unk_D_80070F84 {
-    /* 0x00 */ char unk00[0x6];
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ u8 unk_08;
-    /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ char unk0B[0x8];
-    /* 0x13 */ u8 unk_13;
-    /* 0x14 */ char unk14[0x3];
-} unk_D_80070F84; // size = 0x17
 
 typedef struct unk_D_800AC910_50 {
     /* 0x000 */ char unk000[0x18];
@@ -152,7 +139,7 @@ char* func_80021C80(char* arg0, char* arg1) {
     return arg0;
 }
 
-char* func_80021CA4(char* arg0, u32 arg1) {
+char* func_80021CA4(char* arg0, s32 arg1) {
     func_80021C80(arg0, (char*)*(u32*)D_8006FEE8[arg1]);
     return arg0;
 }

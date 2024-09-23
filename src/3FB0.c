@@ -542,8 +542,8 @@ void* func_800044A8(s32 arg0, s32 arg1, s32 arg2) {
     return sp2C;
 }
 
-void* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3) {
-    u32* ret = NULL;
+BinArchive* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3) {
+    BinArchive* ret = NULL;
     u32 sp28;
     u32 sp28_2;
     u16* newaddr;
@@ -561,7 +561,7 @@ void* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3) {
             newaddr = func_80003DC4(romStart, romStart + 0x20, 0, 0);
             ret = newaddr;
             if (newaddr != NULL) {
-                sp28 = (ret[3] * 0x10) + 0x10;
+                sp28 = (ret->num_files * 0x10) + 0x10;
                 main_pool_try_free(ret);
                 newaddr = func_80003DC4(romStart, romStart + sp28, 0, 0);
                 ret = newaddr;
@@ -578,7 +578,7 @@ void* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3) {
             newaddr = func_80003DC4(romStart, romStart + 0x20, 1, 0);
             ret = newaddr;
             if (newaddr != NULL) {
-                sp28_2 = (ret[3] * 0x10) + 0x10;
+                sp28_2 = (ret->num_files * 0x10) + 0x10;
                 main_pool_try_free(ret);
                 newaddr = func_80003DC4(romStart, romStart + sp28_2, 1, 0);
                 ret = newaddr;
@@ -590,7 +590,7 @@ void* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3) {
     }
 
     if (ret != NULL) {
-        ret[1] = romStart;
+        ret->unk_04 = romStart;
     }
 
     return ret;

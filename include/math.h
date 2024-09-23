@@ -52,17 +52,4 @@ typedef union Vec2s_s32 {
     s32 xy;
 } Vec2s_s32; // size = 0x6
 
-typedef union AllTypeS32 {
-    struct {
-        s16 rg;
-        s16 ba;
-    };
-    struct {
-        s8 r;
-        s8 g;
-        s8 b;
-        s8 a;
-    };
-} AllTypeS32;
-
 #endif
