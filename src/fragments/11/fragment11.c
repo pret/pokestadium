@@ -830,7 +830,7 @@ void func_86501E9C(UNUSED s32 arg0, UNUSED s32 arg1) {
     D_87B000E0 = func_8001E94C(0x16, 0);
 
     ASSET_LOAD(D_1000000, _4BD6B0, 0);
-    FRAGMENT_LOAD(func_80004454, fragment31);
+    FRAGMENT_LOAD(fragment31);
 
     func_86501AAC();
     func_80007678(sp24);

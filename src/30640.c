@@ -38,8 +38,8 @@ void func_8002FA40(void) {
     main_pool_push_state('SNPM');
     func_8004B1CC(0x4B);
 
-    FRAGMENT_LOAD(func_80004454, fragment43)();
-    FRAGMENT_LOAD(func_80004454, fragment34);
+    FRAGMENT_LOAD(fragment43)();
+    FRAGMENT_LOAD(fragment34);
 
     do {
         temp_s0 = Util_ConvertAddrToVirtAddr(val);
@@ -72,10 +72,10 @@ void func_8002FA40(void) {
 
             case 1:
             case 6:
-                FRAGMENT_LOAD(func_80004454, fragment2)();
+                FRAGMENT_LOAD(fragment2)();
                 ASSET_LOAD(D_3000000, _675FA0, 0);
-                FRAGMENT_LOAD(func_80004454, fragment3);
-                FRAGMENT_LOAD(func_80004454, fragment31);
+                FRAGMENT_LOAD(fragment3);
+                FRAGMENT_LOAD(fragment31);
 
                 if (var_s5 == 1) {
                     var_s0 = 0;
@@ -144,7 +144,7 @@ void func_8002FA40(void) {
                 break;
 
             case 5:
-                FRAGMENT_LOAD(func_80004454, fragment61);
+                FRAGMENT_LOAD(fragment61);
                 switch (var_s2) {
                     case 1:
                         var_s0 = 1;

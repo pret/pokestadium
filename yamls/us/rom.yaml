@@ -420,7 +420,8 @@
     - [0x7CEC0, .rodata, 29BA0]
     - [0x7CFD0, .rodata, 2C1C0]
     - [0x7D030, .rodata, 2E110]
-    - [0x7D040, rodata, rom_rodata_7D040]
+    - [0x7D040, rodata, rom_rodata_7D040] # 2E460
+    - [0x7D090, .rodata, 2FEA0]
     - [0x7D0F0, .rodata, 30640]
     - [0x7D110, rodata, rom_rodata_7D110]
     - [0x7D1B0, rodata, rom_rodata_7D1B0]
