@@ -86,6 +86,7 @@ void func_800238D8(UNUSED MainPoolBlock* arg0, u32 arg1);
 void func_80023990(s32 arg0);
 s32 func_80023A04(s32 arg0);
 void func_80023AF8(s32);
+void func_80023D60(s32);
 void func_80023F78(s32 arg0);
 void func_80024040(s32 arg0);
 s32 func_800240A0(void);

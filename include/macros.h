@@ -54,8 +54,8 @@
 #define FRAGMENT_ID(fragment) ((((u32)fragment##_TEXT_START & 0x0FF00000) >> 0x14) - 0x10)
 #define ASSET_ID(asset) (((u32)asset & 0x0F000000) >> 0x18)
 
-#define FRAGMENT_LOAD(load_func, fragment) ( \
-    load_func(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END) \
+#define FRAGMENT_LOAD(fragment) ( \
+    func_80004454(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END) \
 )
 
 #define FRAGMENT_LOAD_AND_CALL(fragment, arg0, arg1) (\

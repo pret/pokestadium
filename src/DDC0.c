@@ -6,6 +6,9 @@
 #include "5580.h"
 #include "373A0.h"
 #include "src/50860.h"
+#include "src/490A0.h"
+#include "src/4BA90.h"
+#include "src/4BDC0.h"
 
 extern s32 D_800A83A0;
 
@@ -17,15 +20,6 @@ extern s32 D_800A847C;
 extern OSThread D_800A8480;
 
 extern u8 D_800AA660[];
-
-s32 func_800484E0(void);
-void func_80009210(void);
-void func_8004FD44(void);
-void func_8004B9C4();
-void func_8003D4A0(s32);
-void func_8004AF24(s32);
-void func_8004FD64(s32);
-void func_8004AE90(s32, s32);
 
 void func_8000D1C0(void) {
 }
