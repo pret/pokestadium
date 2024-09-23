@@ -32,7 +32,9 @@ static s16 D_80075678 = 0;
 static s16 D_8007567C = 0;
 
 unk_D_800AE520 D_800AE520;
+s32 pad_D_800AE534[2];
 unk_D_800AE540 D_800AE540;
+BinArchive* D_800AF738;
 
 s32 Game_DoCopyProtection(s32 state) {
     u32 intr = osSetIntMask(1);
