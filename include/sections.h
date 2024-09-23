@@ -483,5 +483,6 @@ extern u32 fragment1_relocs_ROM_END[];
 
 extern u8 _675FA0_ROM_START[];
 extern u8 _675FA0_ROM_END[];
+extern u8 _783760_ROM_START[];
 
 #endif // _SECTIONS_H_
