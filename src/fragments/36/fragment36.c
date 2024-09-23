@@ -343,7 +343,7 @@ void func_82100B1C(s32 arg0) {
 
 void func_82100B98(void) {
     ASSET_LOAD(D_1000000, _4BD6B0, 0);
-    ASSET_LOAD(D_2000000, _52ABA0, 0);
+    ASSET_LOAD(D_2000000, title_ui, 0); // bin contains a JP logo and press start, but this bin is loaded for the "Press Start" gfx
 
     D_82100EB8 = main_pool_alloc(0x4510, 0);
     D_82100EBC = main_pool_alloc(0x100000, 0);

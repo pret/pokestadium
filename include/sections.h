@@ -454,18 +454,18 @@ extern u8 menu_select_ui_ROM_START[];    // 4EB0C0
 extern u8 menu_select_ui_ROM_END[];      // 4EB0C0
 extern u8 stadium_select_ui_ROM_START[]; // 5046B0
 extern u8 stadium_select_ui_ROM_END[];   // 5046B0
-extern u8 _52ABA0_ROM_START[];
-extern u8 _52ABA0_ROM_END[];
+extern u8 title_ui_ROM_START[];          // 52ABA0
+extern u8 title_ui_ROM_END[];            // 52ABA0
 extern u8 _52F6D0_ROM_START[];
 extern u8 _52F6D0_ROM_END[];
-extern u8 _533B20_ROM_START[];
-extern u8 _533B20_ROM_END[];
-extern u8 _56E7D0_ROM_START[];
-extern u8 _56E7D0_ROM_END[];
+extern u8 battle_portraits_ROM_START[];  // 533B20
+extern u8 battle_portraits_ROM_END[];    // 533B20
+extern u8 stadium_models_ROM_START[];    // 56E7D0
+extern u8 stadium_models_ROM_END[];      // 56E7D0
 extern u8 _5C7A70_ROM_START[];
 extern u8 _5C7A70_ROM_END[];
-extern u8 _5C7AD0_ROM_START[];
-extern u8 _5C7AD0_ROM_END[];
+extern u8 pokedex_area_model_ROM_START[]; // 5C7AD0
+extern u8 pokedex_area_model_ROM_END[];   // 5C7AD0
 extern u8 _5F6790_ROM_START[];
 extern u8 _5F6790_ROM_END[];
 extern u8 _5F92A0_ROM_START[];
