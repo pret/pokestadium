@@ -434,10 +434,10 @@ extern u8 fragment77_ROM_END[];
 
 // Asset externs
 
-extern u8 _3B96B0_ROM_START[];
-extern u8 _3B96B0_ROM_END[];
-extern u8 _3BA190_ROM_START[];
-extern u8 _3BA190_ROM_END[];
+extern u8 n64_logo_texture_ROM_START[]; // 3B96B0
+extern u8 n64_logo_texture_ROM_END[];   // 3B96B0
+extern u8 fonts_ROM_START[];            // 3BA190
+extern u8 fonts_ROM_END[];              // 3BA190
 extern u8 _3CB130_ROM_START[];
 extern u8 _3CB130_ROM_END[];
 extern u8 _45B580_ROM_START[];

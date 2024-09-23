@@ -2423,12 +2423,13 @@
     subsegments:
     - [0x3B96A0, rodatabin,  fragments/77/fragment77_reloc]
 
-  - [0x3B96B0, bin]
-  - [0x3BA190, bin]
+  # assets
+  - [0x3B96B0, bin, n64_logo_texture]
+  - [0x3BA190, bin, fonts]
   - [0x3CB130, bin]
   - [0x45B580, bin]
   - [0x4A21C0, bin]
-  - [0x4BD6B0, bin]
+  - [0x4BD6B0, bin] # like a common assets bin?
   - [0x4BE810, bin]
   - [0x4D1330, bin]
   - [0x4EB0C0, bin]
