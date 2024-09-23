@@ -27,7 +27,7 @@ void func_8002F2A0(void) {
         if (sp60 != 0) {
             main_pool_push_state('mini');
 
-            ASSET_LOAD(D_3000000, _675FA0, 0);
+            ASSET_LOAD(D_3000000, kids_club_game_ui, 0);
             FRAGMENT_LOAD(fragment34);
 
             switch (sp60) {
