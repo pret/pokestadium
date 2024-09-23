@@ -8,7 +8,7 @@ typedef struct unk_func_87801684 {
     /* 0x04 */ s16 unk_04;
 } unk_func_87801684; // size = 0x8
 
-extern s32 D_87806330;
+extern char** D_87806330;
 extern s16 D_87806338;
 extern u32* D_8780633C[];
 extern u32* D_8780634C[];
