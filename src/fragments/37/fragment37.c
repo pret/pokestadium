@@ -819,7 +819,7 @@ s32 func_82202DC4(UNUSED s32 arg0, UNUSED s32 arg1) {
     func_8001E94C(0x1C, 0);
 
     ASSET_LOAD(D_1000000, _4BD6B0, 0);
-    ASSET_LOAD(D_3000000, _4D1330, 0);
+    ASSET_LOAD(D_3000000, area_select_ui, 0);
     ASSET_LOAD(D_2000000, _4BE810, 0);
 
     func_8002D510();
