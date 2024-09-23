@@ -73,7 +73,9 @@ void func_8002FA40(void) {
             case 1:
             case 6:
                 FRAGMENT_LOAD(fragment2)();
-                ASSET_LOAD(D_3000000, _675FA0, 0);
+                // loaded, but doesnt use any GFX from it. speculated to have intended using the
+                // button GFX for How to Snap, but it doesnt use them.
+                ASSET_LOAD(D_3000000, kids_club_game_ui, 0);
                 FRAGMENT_LOAD(fragment3);
                 FRAGMENT_LOAD(fragment31);
 

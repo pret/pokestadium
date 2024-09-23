@@ -152,7 +152,7 @@ void func_800293CC(void) {
             FRAGMENT_LOAD(fragment34);
             FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
         } else {
-            ASSET_LOAD(D_3000000, _675FA0, 0);
+            ASSET_LOAD(D_3000000, kids_club_game_ui, 0); // borrows the Stadium logo from it
             FRAGMENT_LOAD(fragment2);
             FRAGMENT_LOAD(fragment34);
 
