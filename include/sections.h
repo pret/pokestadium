@@ -440,8 +440,8 @@ extern u8 fonts_ROM_START[];            // 3BA190
 extern u8 fonts_ROM_END[];              // 3BA190
 extern u8 backgrounds_ROM_START[];      // 3CB130
 extern u8 backgrounds_ROM_END[];        // 3CB130
-extern u8 _45B580_ROM_START[];
-extern u8 _45B580_ROM_END[];
+extern u8 battle_headers_ROM_START[];   // 45B580
+extern u8 battle_headers_ROM_END[];     // 45B580
 extern u8 _4A21C0_ROM_START[];
 extern u8 _4A21C0_ROM_END[];
 extern u8 _4BD6B0_ROM_START[];
