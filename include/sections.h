@@ -448,10 +448,10 @@ extern u8 _4BD6B0_ROM_START[];
 extern u8 _4BD6B0_ROM_END[];
 extern u8 _4BE810_ROM_START[];
 extern u8 _4BE810_ROM_END[];
-extern u8 _4D1330_ROM_START[];
-extern u8 _4D1330_ROM_END[];
-extern u8 _4EB0C0_ROM_START[];
-extern u8 _4EB0C0_ROM_END[];
+extern u8 area_select_ui_ROM_START[];   // 4D1330
+extern u8 area_select_ui_ROM_END[];     // 4D1330
+extern u8 menu_select_ui_ROM_START[];   // 4EB0C0
+extern u8 menu_select_ui_ROM_END[];     // 4EB0C0
 extern u8 _5046B0_ROM_START[];
 extern u8 _5046B0_ROM_END[];
 extern u8 _52ABA0_ROM_START[];
