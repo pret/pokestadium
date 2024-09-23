@@ -434,26 +434,26 @@ extern u8 fragment77_ROM_END[];
 
 // Asset externs
 
-extern u8 n64_logo_texture_ROM_START[]; // 3B96B0
-extern u8 n64_logo_texture_ROM_END[];   // 3B96B0
-extern u8 fonts_ROM_START[];            // 3BA190
-extern u8 fonts_ROM_END[];              // 3BA190
-extern u8 backgrounds_ROM_START[];      // 3CB130
-extern u8 backgrounds_ROM_END[];        // 3CB130
-extern u8 battle_headers_ROM_START[];   // 45B580
-extern u8 battle_headers_ROM_END[];     // 45B580
+extern u8 n64_logo_texture_ROM_START[];  // 3B96B0
+extern u8 n64_logo_texture_ROM_END[];    // 3B96B0
+extern u8 fonts_ROM_START[];             // 3BA190
+extern u8 fonts_ROM_END[];               // 3BA190
+extern u8 backgrounds_ROM_START[];       // 3CB130
+extern u8 backgrounds_ROM_END[];         // 3CB130
+extern u8 battle_headers_ROM_START[];    // 45B580
+extern u8 battle_headers_ROM_END[];      // 45B580
 extern u8 _4A21C0_ROM_START[];
 extern u8 _4A21C0_ROM_END[];
 extern u8 _4BD6B0_ROM_START[];
 extern u8 _4BD6B0_ROM_END[];
 extern u8 _4BE810_ROM_START[];
 extern u8 _4BE810_ROM_END[];
-extern u8 area_select_ui_ROM_START[];   // 4D1330
-extern u8 area_select_ui_ROM_END[];     // 4D1330
-extern u8 menu_select_ui_ROM_START[];   // 4EB0C0
-extern u8 menu_select_ui_ROM_END[];     // 4EB0C0
-extern u8 _5046B0_ROM_START[];
-extern u8 _5046B0_ROM_END[];
+extern u8 area_select_ui_ROM_START[];    // 4D1330
+extern u8 area_select_ui_ROM_END[];      // 4D1330
+extern u8 menu_select_ui_ROM_START[];    // 4EB0C0
+extern u8 menu_select_ui_ROM_END[];      // 4EB0C0
+extern u8 stadium_select_ui_ROM_START[]; // 5046B0
+extern u8 stadium_select_ui_ROM_END[];   // 5046B0
 extern u8 _52ABA0_ROM_START[];
 extern u8 _52ABA0_ROM_END[];
 extern u8 _52F6D0_ROM_START[];

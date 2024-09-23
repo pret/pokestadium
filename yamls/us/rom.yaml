@@ -2436,7 +2436,7 @@
   - [0x4BE810, bin]
   - [0x4D1330, bin, area_select_ui]
   - [0x4EB0C0, bin, menu_select_ui]
-  - [0x5046B0, bin]
+  - [0x5046B0, bin, stadium_select_ui]
   - [0x52ABA0, bin]
   - [0x52F6D0, bin]
   - [0x533B20, bin]
