@@ -379,7 +379,7 @@ void func_8001E884(s32 arg0, s32 arg1, s32 arg2) {
 unk_D_800AC870* func_8001E94C(s32 arg0, s32 arg1) {
     D_800AC870 = main_pool_alloc_with_func(sizeof(*D_800AC870), arg1, 'PRNT', func_8001E7C0);
     bzero(D_800AC870, sizeof(*D_800AC870));
-    D_800AC870->unk_48 = ASSET_LOAD2(func_800044F4, _3BA190, 1, 1);
+    D_800AC870->unk_48 = ASSET_LOAD2(func_800044F4, fonts, 1, 1);
     func_8001E9F0(arg0);
 
     return D_800AC870;
