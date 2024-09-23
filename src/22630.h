@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "memory.h"
+#include "29BA0.h"
 
 typedef enum {
     POKEMON_ROM_NONE = 0,
@@ -12,39 +13,21 @@ typedef enum {
     POKEMON_ROM_YELLOW = 7,
 } PokemonRomType;
 
-typedef struct unk_func_80026268_arg0 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ u8 unk_04;
+typedef struct unk_D_80070F84 {
+    /* 0x00 */ char unk00[0x5];
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
-    /* 0x09 */ u8 unk_09[4];
-    /* 0x0E */ u16 unk_0E;
-    /* 0x10 */ u32 unk_10;
-    /* 0x14 */ u16 unk_14;
-    /* 0x16 */ u16 unk_16;
-    /* 0x18 */ u16 unk_18;
-    /* 0x1A */ u16 unk_1A;
-    /* 0x1C */ u16 unk_1C;
-    /* 0x1E */ u16 unk_1E;
-    /* 0x20 */ u8 unk_20[4];
-    /* 0x24 */ u8 unk_24;
-    /* 0x25 */ u8 unk_25;
-    /* 0x26 */ u16 unk_26;
-    /* 0x28 */ u16 unk_28;
-    /* 0x2A */ u16 unk_2A;
-    /* 0x2C */ u16 unk_2C;
-    /* 0x2E */ u16 unk_2E;
-    /* 0x30 */ u8 unk_30[11];
-    /* 0x3B */ u8 unk_3B[11];
-    /* 0x46 */ u8 unk_46[11];
-    /* 0x51 */ char unk51[0x1];
-    /* 0x52 */ u8 unk_52;
-    /* 0x52 */ u8 unk_53;
-} unk_func_80026268_arg0; // size >= 0x54
+    /* 0x09 */ u8 unk_09;
+    /* 0x0A */ u8 unk_0A;
+    /* 0x0B */ char unk0B[0x8];
+    /* 0x13 */ u8 unk_13;
+    /* 0x14 */ char unk14[0x3];
+} unk_D_80070F84; // size = 0x17
+
+extern unk_D_80070F84 D_80070F84[];
+extern unk_D_80070F84 D_80070FA0[];
 
 typedef struct unk_D_800AE4E8_004_1_000_010 {
     /* 0x00 */ u8 unk_00;
@@ -73,10 +56,12 @@ u32 func_80021A48(u8* arg0);
 void func_80021A68(u8* arg0, s32 arg1);
 void func_80021A78(u8* arg0, s32 arg1);
 char* func_80021A90(char* arg0, char* arg1);
+void func_80021B5C(char*, char*);
 char* func_80021B7C(char* arg0, char* arg1);
+void func_80021C20(char*, char*);
 void func_80021C40(char* arg0, char* arg1);
 char* func_80021C80(char* arg0, char* arg1);
-char* func_80021CA4(char* arg0, u32 arg1);
+char* func_80021CA4(char* arg0, s32 arg1);
 char* func_80021CE0(s32 arg0, s8* arg1);
 void func_80021D9C(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* arg1);
 void func_80021F04(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* arg1);
@@ -88,6 +73,9 @@ u32 func_800224B8(s32 arg0, u16 arg1);
 u16 func_800226C0(s32 arg0, u32 arg1);
 u8 func_80022A38(s32 arg0);
 u8 func_80022A60(s32 arg0);
+s32 func_80022C28(s32, s32, s32, s32);
+void func_80022D8C(void*);
+s32 func_80022E18(unk_func_80026268_arg0*, s32, void*);
 void func_80023068(void);
 char* func_8002311C(s32 arg0);
 s32 func_80023130(u8* arg0);
@@ -97,10 +85,12 @@ s32 func_80023480(s32 arg0);
 void func_800238D8(UNUSED MainPoolBlock* arg0, u32 arg1);
 void func_80023990(s32 arg0);
 s32 func_80023A04(s32 arg0);
+void func_80023AF8(s32);
 void func_80023F78(s32 arg0);
 void func_80024040(s32 arg0);
 s32 func_800240A0(void);
 s32 func_80024FB0(s32 arg0);
+void func_800251B0(s32, s8*);
 
 
 #endif // _6BC0_H_
