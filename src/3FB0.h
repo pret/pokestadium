@@ -107,7 +107,7 @@ void func_80004364(u32 base_addr, u32 addr);
 void func_800043BC(s32 arg0, Fragment* addr);
 ret_func_80004454 func_80004454(s32 arg0, u8* romStart, u8* romEnd);
 void* func_800044A8(s32 arg0, s32 arg1, s32 arg2);
-void* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3);
+BinArchive* func_800044F4(u8* romStart, u8* romEnd, s32 arg2, s32 arg3);
 void* func_80004660(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_800047A4(void* arg0);
 Fragment* func_800047C4(BinArchive* arg0, BinArchiveFile* arg1);
