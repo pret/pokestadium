@@ -97,9 +97,9 @@ s32 func_800290E4(s16 arg0) {
 
     main_pool_push_state('Demo');
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
-    FRAGMENT_LOAD(func_80004454, fragment2);
-    FRAGMENT_LOAD(func_80004454, fragment3);
+    FRAGMENT_LOAD(fragment34);
+    FRAGMENT_LOAD(fragment2);
+    FRAGMENT_LOAD(fragment3);
 
     D_800AE540.unk_0000 = arg0;
 
@@ -113,9 +113,9 @@ s32 func_800290E4(s16 arg0) {
 void func_800291E0(void) {
     main_pool_push_state('demo');
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
-    FRAGMENT_LOAD(func_80004454, fragment2);
-    FRAGMENT_LOAD(func_80004454, fragment3);
+    FRAGMENT_LOAD(fragment34);
+    FRAGMENT_LOAD(fragment2);
+    FRAGMENT_LOAD(fragment3);
 
     if (D_800AE540.unk_11F2 != 0) {
         FRAGMENT_LOAD_AND_CALL(fragment16, 0, 0);
@@ -149,26 +149,26 @@ void func_800293CC(void) {
         main_pool_push_state('DEMO');
 
         if (D_800AE540.unk_0000 == 0x10) {
-            FRAGMENT_LOAD(func_80004454, fragment34);
+            FRAGMENT_LOAD(fragment34);
             FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
         } else {
             ASSET_LOAD(D_3000000, _675FA0, 0);
-            FRAGMENT_LOAD(func_80004454, fragment2);
-            FRAGMENT_LOAD(func_80004454, fragment34);
+            FRAGMENT_LOAD(fragment2);
+            FRAGMENT_LOAD(fragment34);
 
             switch (D_800AE540.unk_0003) {
                 case 3:
-                    FRAGMENT_LOAD(func_80004454, fragment4);
+                    FRAGMENT_LOAD(fragment4);
                     FRAGMENT_LOAD_AND_CALL(fragment8, 1, 0);
                     break;
 
                 case 9:
-                    FRAGMENT_LOAD(func_80004454, fragment3);
+                    FRAGMENT_LOAD(fragment3);
                     FRAGMENT_LOAD_AND_CALL(fragment14, 1, 0);
                     break;
 
                 case 13:
-                    FRAGMENT_LOAD(func_80004454, fragment3);
+                    FRAGMENT_LOAD(fragment3);
                     FRAGMENT_LOAD_AND_CALL(fragment18, 1, 0);
                     break;
             }
@@ -198,7 +198,7 @@ void func_800296E0(void) {
     func_80005E40(0x10000, 0);
     temp_s0 = func_80007444(1, 1, 2, 0, 2, 1);
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
+    FRAGMENT_LOAD(fragment34);
     func_80007678(temp_s0);
     FRAGMENT_LOAD_AND_CALL2(fragment67, 1, 0);
 
@@ -302,7 +302,7 @@ void func_80029BC0(void) {
 
                 main_pool_push_state('STAD');
 
-                FRAGMENT_LOAD(func_80004454, fragment34);
+                FRAGMENT_LOAD(fragment34);
                 FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
                 main_pool_pop_state('STAD');
@@ -400,7 +400,7 @@ void func_8002A06C(void) {
 
                     main_pool_push_state('FREE');
 
-                    FRAGMENT_LOAD(func_80004454, fragment34);
+                    FRAGMENT_LOAD(fragment34);
                     FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
                     main_pool_pop_state('FREE');
@@ -476,7 +476,7 @@ void func_8002A400(void) {
 
                     main_pool_push_state('STAD');
 
-                    FRAGMENT_LOAD(func_80004454, fragment34);
+                    FRAGMENT_LOAD(fragment34);
                     FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
                     main_pool_pop_state('STAD');
@@ -633,7 +633,7 @@ void func_8002AAA8(void) {
 
                 main_pool_push_state('STAD');
 
-                FRAGMENT_LOAD(func_80004454, fragment34);
+                FRAGMENT_LOAD(fragment34);
                 FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
                 main_pool_pop_state('STAD');
@@ -681,7 +681,7 @@ void func_8002ADE8(s32 arg0) {
 
     main_pool_push_state('FIGT');
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
+    FRAGMENT_LOAD(fragment34);
     FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
     main_pool_pop_state('FIGT');
@@ -701,7 +701,7 @@ void func_8002AF38(void) {
 
     main_pool_push_state('FIGT');
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
+    FRAGMENT_LOAD(fragment34);
     FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
     main_pool_pop_state('FIGT');
@@ -720,10 +720,10 @@ void func_8002B07C(void) {
 
     main_pool_push_state('DOSE');
 
-    frag_43_entry = FRAGMENT_LOAD(func_80004454, fragment43);
+    frag_43_entry = FRAGMENT_LOAD(fragment43);
     frag_43_entry();
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
+    FRAGMENT_LOAD(fragment34);
     FRAGMENT_LOAD_AND_CALL(fragment75, 0, 0);
 
     gCurrentGameState = STATE_TITLE_SCREEN;
@@ -737,7 +737,7 @@ void func_8002B180(void) {
     func_8002BC64(1, 0, 2, 0);
     func_800367A0(0xA0, 0xA, 0);
 
-    FRAGMENT_LOAD(func_80004454, fragment34);
+    FRAGMENT_LOAD(fragment34);
     FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
 
     main_pool_pop_state('STAD');
