@@ -438,8 +438,8 @@ extern u8 n64_logo_texture_ROM_START[]; // 3B96B0
 extern u8 n64_logo_texture_ROM_END[];   // 3B96B0
 extern u8 fonts_ROM_START[];            // 3BA190
 extern u8 fonts_ROM_END[];              // 3BA190
-extern u8 _3CB130_ROM_START[];
-extern u8 _3CB130_ROM_END[];
+extern u8 backgrounds_ROM_START[];      // 3CB130
+extern u8 backgrounds_ROM_END[];        // 3CB130
 extern u8 _45B580_ROM_START[];
 extern u8 _45B580_ROM_END[];
 extern u8 _4A21C0_ROM_START[];
