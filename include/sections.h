@@ -458,12 +458,12 @@ extern u8 backgrounds_ROM_START[];         // 3CB130
 extern u8 backgrounds_ROM_END[];           // 3CB130
 extern u8 battle_headers_ROM_START[];      // 45B580
 extern u8 battle_headers_ROM_END[];        // 45B580
-extern u8 _4A21C0_ROM_START[];
-extern u8 _4A21C0_ROM_END[];
-extern u8 _4BD6B0_ROM_START[];
-extern u8 _4BD6B0_ROM_END[];
-extern u8 _4BE810_ROM_START[];
-extern u8 _4BE810_ROM_END[];
+extern u8 common_menu0_ui_ROM_START[];
+extern u8 common_menu0_ui_ROM_END[];
+extern u8 common_menu1_ui_ROM_START[];
+extern u8 common_menu1_ui_ROM_END[];
+extern u8 common_menu2_ui_ROM_START[];
+extern u8 common_menu2_ui_ROM_END[];
 extern u8 area_select_ui_ROM_START[];      // 4D1330
 extern u8 area_select_ui_ROM_END[];        // 4D1330
 extern u8 menu_select_ui_ROM_START[];      // 4EB0C0

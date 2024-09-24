@@ -70,7 +70,7 @@ s32 func_820003A4(UNUSED s32 arg0, UNUSED s32 arg1) {
     func_80005E40(0x10000, 0);
     sp2C = func_80007444(0, 1, 2, 0, 2, 1);
 
-    ASSET_LOAD(D_1000000, _4BD6B0, 0);
+    ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, n64_logo_texture, 0);
 
     func_80028AFC(2);
