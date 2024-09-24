@@ -498,6 +498,14 @@ extern u8 sushi_go_round_sprites_ROM_START[];      // 66FD80
 extern u8 sushi_go_round_sprites_ROM_END[];        // 66FD80
 extern u8 kids_club_game_ui_ROM_START[];           // 675FA0
 extern u8 kids_club_game_ui_ROM_END[];             // 675FA0
+extern u8 gallery_ui_ROM_START[];                  // 696350
+extern u8 gallery_ui_ROM_END[];                    // 696350
+extern u8 snap_select_ui_ROM_START[];              // 6AE1D0
+extern u8 snap_select_ui_ROM_END[];                // 6AE1D0
+extern u8 cup_clear_ui_ROM_START[];                // 6B0FB0
+extern u8 cup_clear_ui_ROM_END[];                  // 6B0FB0
+extern u8 gb_pak_select_ui_ROM_START[];            // 6B4F00
+extern u8 gb_pak_select_ui_ROM_END[];              // 6B4F00
 extern u8 _6C4CE0_ROM_START[];
 extern u8 _6C4CE0_ROM_END[];
 extern u8 _6C4E50_ROM_START[];
@@ -505,7 +513,6 @@ extern u8 _6C4E50_ROM_END[];
 
 extern u8 D_124570[];
 
-extern u8 _696350_ROM_START[];
 extern u8 textdata_ROM_START[];     // 783760
 extern u8 textdata_ROM_END[];       // 783760
 
