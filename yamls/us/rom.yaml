@@ -840,7 +840,7 @@
     subsegments:
     - [0x142200, rodatabin,    fragments/11/fragment11_reloc]
 
-# transfer pak error code
+  # debug model viewer/minigame sample
   - name: fragment12
     type: code
     bss_size: 0x180
@@ -2472,15 +2472,15 @@
   - [0x6E2FC0, bin, battle_ui]
   - [0x6E8910, bin, transfer_pak_error_ui]
   - [0x6EB340, bin] # pokedex area flags?
-  - [0x6EC4D0, bin]
-  - [0x6ECE80, bin]
-  - [0x701E50, bin]
-  - [0x70D3A0, bin]
-  - [0x7820E0, bin]
+  - [0x6EC4D0, bin] # another UI bin related to GB paks as its loaded whenever there is GB pak elements, however it doesnt seem(?) to be used.
+  - [0x6ECE80, bin, badge_ui] 
+  - [0x701E50, bin, gym_leader_castle_ui]
+  - [0x70D3A0, bin] # maybe model animation related?
+  - [0x7820E0, bin] 
   - [0x783760, bin, textdata]
   - [0x798CD0, bin]
-  - [0x7994B0, bin]
-  - [0x79AFB0, bin]
+  - [0x7994B0, bin, snap_mode_ui]
+  - [0x79AFB0, bin, copyright]
   - [0x79B8F0]
   
   

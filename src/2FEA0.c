@@ -31,67 +31,67 @@ void func_8002F2A0(void) {
             FRAGMENT_LOAD(fragment34);
 
             switch (sp60) {
-                case 1:
+                case 1: // magikarp minigame
                     FRAGMENT_LOAD(fragment4);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment6, 0, 0);
                     break;
-                case 2:
+                case 2: // clefairy minigame
                     FRAGMENT_LOAD(fragment4);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment7, 0, 0);
                     break;
-                case 3:
+                case 3: // rattata minigame
                     FRAGMENT_LOAD(fragment4);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment8, 0, 0);
                     break;
-                case 4:
+                case 4: // unfinished jigglypuff minigame
                     FRAGMENT_LOAD(fragment4);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment9, 0, 0);
                     break;
-                case 5:
+                case 5: // drowzee minigame
                     FRAGMENT_LOAD(fragment5);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment10, 0, 0);
                     break;
-                case 6:
+                case 6: // pikachu minigame
                     FRAGMENT_LOAD(fragment5);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment11, 0, 0);
                     break;
-                case 7:
+                case 7: // "minigame 7 sample" model viewer. debug placeholder?
                     FRAGMENT_LOAD(fragment5);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment12, 0, 0);
                     break;
-                case 8:
+                case 8: // "minigame 8 sample" model viewer. debug placeholder?
                     FRAGMENT_LOAD(fragment5);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment13, 0, 0);
                     break;
-                case 9:
+                case 9: // sushi go round
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment14, 0, 0);
                     break;
-                case 10:
+                case 10: // doesnt seem to load... crashes the game
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment15, 0, 0);
                     break;
-                case 11:
+                case 11: // credits? why from the kids club?
                     FRAGMENT_LOAD(fragment5);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment16, 0, 0);
                     break;
-                case 12:
+                case 12: // also crashes.
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment17, 0, 0);
                     break;
-                case 13:
+                case 13: // ekans minigame
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment18, 0, 0);
                     break;
-                case 14:
+                case 14: // crashes...
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment19, 0, 0);
                     break;
-                case 15:
+                case 15: // 
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment20, 0, 0);
                     break;
-                case 16:
+                case 16: // sandshrew minigame
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment21, 0, 0);
                     break;
