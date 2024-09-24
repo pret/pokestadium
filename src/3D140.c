@@ -566,7 +566,20 @@ s32 func_8003D494(void) {
     return D_80077D90;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D4A0.s")
+s32 func_8003D4A0(s32 arg0) {
+    if (arg0 == 0) {
+        if (D_800FC818 != D_800FCAD8) {
+            return 0;
+        }
+        D_80077DA8 = 1;
+    } else {
+        osAiSetFrequency(D_800FCAD4);
+        lastInfo = NULL;
+        dmaState.initialized = 0;
+        D_80077DA8 = 0;
+    }
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D514.s")
 
