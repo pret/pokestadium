@@ -64,7 +64,7 @@ void func_87802360(s16 arg0, s16 arg1, f32* arg2, f32* arg3) {
                 }
             }
 
-            var_fv0 *= ABS_ALT(SINS((temp_ft1 & 0xFFFF)));
+            var_fv0 *= ABS(SINS((temp_ft1 & 0xFFFF)));
 
             *arg3 = 1.0f - var_fv0;
             *arg2 = 1.0f - var_fv0;
