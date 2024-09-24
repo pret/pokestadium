@@ -514,6 +514,10 @@ extern u8 battle_ui_ROM_START[];
 extern u8 battle_ui_ROM_END[];
 extern u8 transfer_pak_error_ui_ROM_START[];
 extern u8 transfer_pak_error_ui_ROM_END[];
+extern u8 badge_ui_ROM_START[];
+extern u8 badge_ui_ROM_END[];
+extern u8 gym_leader_castle_ui_ROM_START[];
+extern u8 gym_leader_castle_ui_ROM_END[];
 
 extern u8 D_124570[];
 
