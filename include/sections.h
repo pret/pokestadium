@@ -506,10 +506,14 @@ extern u8 cup_clear_ui_ROM_START[];                // 6B0FB0
 extern u8 cup_clear_ui_ROM_END[];                  // 6B0FB0
 extern u8 gb_pak_select_ui_ROM_START[];            // 6B4F00
 extern u8 gb_pak_select_ui_ROM_END[];              // 6B4F00
-extern u8 _6C4CE0_ROM_START[];
-extern u8 _6C4CE0_ROM_END[];
-extern u8 _6C4E50_ROM_START[];
-extern u8 _6C4E50_ROM_END[];
+extern u8 run_rattata_run_flag_gfx_ROM_START[];
+extern u8 run_rattata_run_flag_gfx_ROM_END[];
+extern u8 kanto_gb_map_ROM_START[];
+extern u8 kanto_gb_map_ROM_END[];
+extern u8 battle_ui_ROM_START[];
+extern u8 battle_ui_ROM_END[];
+extern u8 transfer_pak_error_ui_ROM_START[];
+extern u8 transfer_pak_error_ui_ROM_END[];
 
 extern u8 D_124570[];
 
