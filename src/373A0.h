@@ -3,6 +3,12 @@
 
 #include "global.h"
 
+#ifdef M2C
+#define ENTRY_SIZE 1
+#else
+#define ENTRY_SIZE
+#endif
+
 typedef struct File1Header {
     /* 0x00 */ u32 offset1;
     /* 0x04 */ u32 wave_tables_offset;
@@ -33,6 +39,27 @@ typedef struct unk_D_800FC6CC {
     /* 0x04 */ u32 unk_04;
 } unk_D_800FC6CC; // size = 0x8
 
+typedef struct unk_D_800FC6D4_entry {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+} unk_D_800FC6D4_entry; // size = 0x4
+
+typedef struct testme {
+    u32 unk_00;
+    u32 unk_04;
+} testme;
+
+typedef struct unk_D_800FC6D4 {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ u16 num_entries;
+    /* 0x04 */ u16 unk_04;
+    /* 0x06 */ u16 unk_06;
+    /* 0x08 */ testme* offset;
+    /* 0x0C */ char unk_0C[0x4];
+    /* 0x10 */ unk_D_800FC6D4_entry entries[ENTRY_SIZE];
+} unk_D_800FC6D4; // size = 0x10
+
 extern u8 D_800B32A0[0x493E0];
 extern u32* D_800FC680;
 extern u8* D_800FC684;
@@ -47,7 +74,7 @@ extern u8* D_800FC6B0[3];
 extern u8* D_800FC6C0[3];
 extern unk_D_800FC6CC* D_800FC6CC;
 extern u8* D_800FC6D0;
-extern u32* D_800FC6D4;
+extern unk_D_800FC6D4* D_800FC6D4;
 extern u8* D_800FC6D8;
 extern u8* D_800FC6DC;
 extern u32* D_800FC6E0;
