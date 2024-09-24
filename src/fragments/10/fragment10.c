@@ -951,7 +951,7 @@ void func_864025A0(UNUSED s32 arg0, UNUSED s32 arg1) {
     func_80005E40(0x18000, 0);
     sp24 = func_80007444(0, 1, 3, 1, 2, 1);
     D_87B000E0 = func_8001E94C(0x16, 0);
-    ASSET_LOAD(D_1000000, _4BD6B0, 0);
+    ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     FRAGMENT_LOAD(fragment31);
     func_86402130();
     func_80007678(sp24);

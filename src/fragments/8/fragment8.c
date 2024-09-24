@@ -1402,7 +1402,7 @@ void func_8620369C(s32 arg0, UNUSED s32 arg1) {
     sp24 = func_80007444(0, 0, 3, 1, 2, 1);
     D_86204714 = func_8001E94C(0x16, 0);
 
-    ASSET_LOAD(D_1000000, _4BD6B0, 0);
+    ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_4000000, run_rattata_run_flag_gfx, 0);
     FRAGMENT_LOAD(fragment31);
 

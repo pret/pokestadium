@@ -1889,7 +1889,7 @@ void func_86104474(UNUSED s32 arg0, UNUSED s32 arg1) {
     sp24 = func_80007444(0, 1, 3, 1, 2, 1);
     D_861054B4 = func_8001E94C(0x36, 0);
 
-    ASSET_LOAD(D_1000000, _4BD6B0, 0);
+    ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     FRAGMENT_LOAD(fragment31);
 
     func_80004454((((u32)D_8D000000 & 0x0FF00000) >> 0x14) - 0x10, _5C7A70_ROM_START, _5C7A70_ROM_END);
