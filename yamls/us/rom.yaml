@@ -2461,12 +2461,13 @@
   - [0x6B0FB0, bin, cup_clear_ui]
   - [0x6B4F00, bin, gb_pak_select_ui]
   - [0x6C1AB0, bin, victory_palace_plate_text]
-  - [0x6C4CE0, bin]
-  - [0x6C4E50, bin]
-  - [0x6CA730, bin]
-  - [0x6E2FC0, bin]
-  - [0x6E8910, bin]
-  - [0x6EB340, bin]
+  - [0x6C4CE0, bin, run_rattata_run_flag_gfx]
+  - [0x6C4E50, bin, kanto_gb_map]
+  - [0x6CA730, bin] # unused JPEG bin of 15 JPEGs mapping onto the type constants. What is this for?
+  - [0x6E2F90, bin] # compressed blank file.
+  - [0x6E2FC0, bin, battle_ui]
+  - [0x6E8910, bin, transfer_pak_error_ui]
+  - [0x6EB340, bin] # pokedex area flags?
   - [0x6EC4D0, bin]
   - [0x6ECE80, bin]
   - [0x701E50, bin]
