@@ -48,8 +48,8 @@
 
 #define ROUND_MAX(x) (((x) > 0.0f ? 0.5f : -0.5f) + (x))
 
-#define ABS(x) ((x) >= 0 ? (x) : -(x))
-#define ABS_ALT(x) ((x) < 0 ? -(x) : (x))
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+#define ABS_ALT(x) ((x) >= 0 ? (x) : -(x))
 
 #define FRAGMENT_ID(fragment) ((((u32)fragment##_TEXT_START & 0x0FF00000) >> 0x14) - 0x10)
 #define ASSET_ID(asset) (((u32)asset & 0x0F000000) >> 0x18)

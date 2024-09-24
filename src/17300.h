@@ -36,11 +36,11 @@ void func_80017090(unk_D_86002F58_004_000_040* arg0, u16 arg1, s32 arg2);
 void func_80017188(void);
 void func_800171A8(Vec3f* arg0, Vec3s* arg1, Vec3f* arg2, s32 arg3);
 void func_800173CC(unk_D_86002F58_004_000* arg0);
-s32 func_800173DC(unk_D_86002F58_004_000* arg0, s16 arg1, s32 arg2, s32 arg3);
+s32 func_800173DC(unk_D_86002F58_004_000* arg0, s16 arg1, void* arg2, s32 arg3);
 s32 func_80017454(unk_D_86002F58_004_000* arg0, s32 arg1);
 void func_80017464(unk_D_86002F58_004_000* arg0, s16 arg1);
 s32 func_80017484(unk_D_86002F58_004_000* arg0, s16 arg1);
-void func_800174E4(unk_D_86002F58_004_000* arg0);
+s32 func_800174E4(unk_D_86002F58_004_000* arg0);
 s32 func_80017514(unk_D_86002F58_004_000* arg0);
 
 
