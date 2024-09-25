@@ -1,23 +1,23 @@
 #ifndef _CONTROLLER_H_
 #define _CONTROLLER_H_
 
-struct Controller {
+typedef struct Controller {
     /* 0x00 */ s16 contId;
     /* 0x02 */ s16 rawStickX;
     /* 0x04 */ s16 rawStickY;
     /* 0x06 */ u16 buttonDown;
     /* 0x08 */ u16 buttonPressed;
     /* 0x0A */ u16 unkA;
-    char fillerC[2];
-    /* 0x0E */ u16 unkE;
-    /* 0x10 */ float stickMag;
-    /* 0x14 */ float stickX;
-    /* 0x18 */ float stickY;
+    /* 0x0C */ char fillerC[2];
+    /* 0x0E */ s16 angle;
+    /* 0x10 */ f32 stickMag;
+    /* 0x14 */ f32 stickX;
+    /* 0x18 */ f32 stickY;
     /* 0x1C */ OSContStatus *statusData;
     /* 0x20 */ OSContPad *controllerData;
-};
+} Controller;
 
-extern struct Controller gControllers[4];
+extern Controller gControllers[4];
 extern OSMesgQueue gSIEventMesgQueue;
 extern u8 gControllerBits;
 extern u8 gEepromProbe;
@@ -27,8 +27,13 @@ extern OSMesg gSIEventMesgBuf[1];
 extern OSMesg gEepromMesgBuf[1];
 extern OSMesgQueue gEepromMesgQueue;
 
+extern Controller* gPlayer1Controller;
+extern Controller* gPlayer2Controller;
+extern Controller* gPlayer3Controller;
+extern Controller* gPlayer4Controller;
+
 void Cont_InitControllers(void);
-void Cont_AdjustAnalogStick(struct Controller *controller);
+void Cont_AdjustAnalogStick(Controller *controller);
 void Cont_StartReadInputs(void);
 void Cont_ReadInputs(void);
 u8 Cont_GetControllerBits(void);

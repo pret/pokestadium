@@ -3,7 +3,12 @@
 #include "gb_tower.h"
 #include "math_util.h"
 
-struct Controller gControllers[4];
+Controller* gPlayer1Controller = &gControllers[0];
+Controller* gPlayer2Controller = &gControllers[1];
+Controller* gPlayer3Controller = &gControllers[2];
+Controller* gPlayer4Controller = &gControllers[3];
+
+Controller gControllers[4];
 OSMesgQueue gSIEventMesgQueue;
 u8 gControllerBits;
 u8 gEepromProbe;
@@ -22,7 +27,7 @@ void Cont_InitControllers(void) {
 
     // clear each gControllers member.
     for (i = 0; i < MAXCONTROLLERS; i++) {
-        bzero((void*)&gControllers[i], sizeof(struct Controller));
+        bzero((void*)&gControllers[i], sizeof(Controller));
     }
 
     // Initialize each connected controller.
@@ -41,7 +46,7 @@ void Cont_InitControllers(void) {
  * Take the updated controller struct and calculate
  * the new x, y, and distance floats.
  */
-void Cont_AdjustAnalogStick(struct Controller* controller) {
+void Cont_AdjustAnalogStick(Controller* controller) {
     // reset the controller's x and y floats.
     controller->stickX = 0.0f;
     controller->stickY = 0.0f;
@@ -75,7 +80,7 @@ void Cont_AdjustAnalogStick(struct Controller* controller) {
     }
 
     if (controller->stickMag > 0.0f) {
-        controller->unkE = MathUtil_Atan2s(-controller->stickY, controller->stickX);
+        controller->angle = MathUtil_Atan2s(-controller->stickY, controller->stickX);
     }
 }
 
@@ -93,7 +98,7 @@ void Cont_StartReadInputs(void) {
  */
 void Cont_ReadInputs(void) {
     s32 i;
-    struct Controller* controller = &gControllers[0];
+    Controller* controller = &gControllers[0];
 
     osRecvMesg(&gSIEventMesgQueue, NULL, OS_MESG_BLOCK);
     osContGetReadData(&gControllerPads[0]);

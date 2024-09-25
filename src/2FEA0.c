@@ -87,7 +87,7 @@ void func_8002F2A0(void) {
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment19, 0, 0);
                     break;
-                case 15: // 
+                case 15: //
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment20, 0, 0);
                     break;

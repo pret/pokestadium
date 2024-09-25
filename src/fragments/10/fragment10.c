@@ -690,9 +690,9 @@ void func_86401B3C(void) {
 
     while (var_s2 != 0) {
         if (var_s1 >= 0x11) {
-            if (D_80068BA0->unk_08 & 0x1000) {
+            if (gPlayer1Controller->buttonPressed & 0x1000) {
                 var_s2 = 0;
-            } else if ((D_8780FA2A == 0) && (D_80068BA0->unk_08 & 0x4000)) {
+            } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
                 func_80048B90(3);
                 func_87802EB8(2);
                 D_87B000D0 = 1;

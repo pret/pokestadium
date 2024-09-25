@@ -29,7 +29,7 @@ unk_D_86002F34_00C* D_8006F094 = NULL;
 unk_D_86002F34_alt1* D_8006F098 = NULL;
 unk_D_86002F58_004_000* D_8006F09C = NULL;
 unk_D_86002F34_alt11* D_8006F0A0 = NULL;
-func_D_8006F0A4 D_8006F0A4[] = {
+static func_D_8006F0A4 D_8006F0A4[] = {
     func_80013330, func_800133D8, func_80013464, func_80013764, func_8001378C, func_8001395C, func_800139E8,
     func_80013AF8, func_80013B8C, func_80013C14, func_80013C1C, func_80013D34, func_80013F7C, func_80013F84,
     func_80014124, func_80014D70, func_80014214, func_800142BC, func_80014334, func_80014384, func_800143C0,
@@ -37,9 +37,9 @@ func_D_8006F0A4 D_8006F0A4[] = {
     func_80014D50, NULL,          NULL,
 };
 
-s32 D_8006F120 = 0;
+static s32 D_8006F120 = 0;
 
-u32 D_8006F124[4][9] = {
+static u32 D_8006F124[4][9] = {
     {
         0x3024000,
         0x3024000,
@@ -86,7 +86,7 @@ u32 D_8006F124[4][9] = {
     },
 };
 
-u8 D_8006F1B4[15][16] = {
+static u8 D_8006F1B4[15][16] = {
     { 0x1F, 0x1F, 0x1F, 3, 7, 7, 7, 3, 0, 0x1F, 4, 0x1F, 0, 7, 6, 7 },
     { 1, 0x1F, 3, 0x1F, 7, 7, 7, 1, 0, 0x1F, 4, 0x1F, 0, 7, 6, 7 },
     { 1, 3, 8, 3, 7, 7, 3, 7, 0, 0x1F, 4, 0x1F, 0, 7, 6, 7 },
@@ -104,20 +104,20 @@ u8 D_8006F1B4[15][16] = {
     { 1, 0x1F, 4, 0x1F, 1, 7, 4, 7, 0x1F, 0x1F, 0x1F, 0, 0, 7, 6, 7 },
 };
 
-s16 D_8006F2A4[] = { 16, 8, 4, 2, 0, 0 };
+static s16 D_8006F2A4[] = { 16, 8, 4, 2, 0, 0 };
 
-s32 D_800AA6C0;
-MtxF* D_800AA6C8[8];
-u8 pad_D_800AA6E8[0x1E0];
-unk_D_800AA8C8 D_800AA8C8;
-unk_D_800AB970 D_800AB970;
-s32 D_800ABB00;
-s32 D_800ABB04;
-s32 D_800ABB08;
-unk_D_800ABB10 D_800ABB10;
-unk_D_800ABB28 D_800ABB28[10];
-unk_D_800ABB28* D_800ABCB8;
-s32 D_800ABCBC;
+static s32 D_800AA6C0;
+static MtxF* D_800AA6C8[8];
+static u8 pad_D_800AA6E8[0x1E0];
+static unk_D_800AA8C8 D_800AA8C8;
+static unk_D_800AB970 D_800AB970;
+static s32 D_800ABB00;
+static s32 D_800ABB04;
+static s32 D_800ABB08;
+static unk_D_800ABB10 D_800ABB10;
+static unk_D_800ABB28 D_800ABB28[10];
+static unk_D_800ABB28* D_800ABCB8;
+static s32 D_800ABCBC;
 
 void func_80012180(void) {
     D_800AA8C8.unk_10A0 = 0;

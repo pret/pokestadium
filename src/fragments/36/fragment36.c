@@ -286,7 +286,7 @@ s32 func_821009B4(void) {
     s32 var_s0 = 0;
     s32 var_s2 = 30;
 
-    func_8001F738(D_80068BA0);
+    func_8001F738(gPlayer1Controller);
 
     while (var_s0 == 0) {
         if (D_82100EC8 == 0) {
@@ -298,7 +298,7 @@ s32 func_821009B4(void) {
 
         func_800290B4();
 
-        if ((D_80068BA0->unk_08 & 0x9000) && (D_82100EC8 != 0)) {
+        if ((gPlayer1Controller->buttonPressed & 0x9000) && (D_82100EC8 != 0)) {
             func_80048B90(0xF);
             var_s0 = func_82100054();
         } else if (func_82100958() != 0) {
@@ -343,7 +343,8 @@ void func_82100B1C(s32 arg0) {
 
 void func_82100B98(void) {
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    ASSET_LOAD(D_2000000, title_ui, 0); // bin contains a JP logo and press start, but this bin is loaded for the "Press Start" gfx
+    ASSET_LOAD(D_2000000, title_ui,
+               0); // bin contains a JP logo and press start, but this bin is loaded for the "Press Start" gfx
 
     D_82100EB8 = main_pool_alloc(0x4510, 0);
     D_82100EBC = main_pool_alloc(0x100000, 0);

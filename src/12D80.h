@@ -44,6 +44,16 @@ typedef struct unk_D_800ABB10 {
     /* 0x14 */ Gfx* unk_14;
 } unk_D_800ABB10; // size = 0x18?
 
+extern s32 D_8006F080;
+extern u16 D_8006F084;
+extern unk_D_86002F34_00C* D_8006F088;
+extern unk_D_86002F34_alt1* D_8006F08C;
+extern unk_D_86002F34_alt1* D_8006F090;
+extern unk_D_86002F34_00C* D_8006F094;
+extern unk_D_86002F34_alt1* D_8006F098;
+extern unk_D_86002F58_004_000* D_8006F09C;
+extern unk_D_86002F34_alt11* D_8006F0A0;
+
 void func_80012180(void);
 void func_800121C8(void);
 void func_80012230(MtxF* arg0);
