@@ -1422,7 +1422,8 @@
     - [0x26F9C0, data,   fragments/34/fragment34_data]
     - [0x270570, rodata, fragments/34/fragment34_rodata]
 
-    - {vram: 0x8140E620, type:  bss, name: fragments/34/fragment34_bss}
+    - {vram: 0x8140E620, type:  bss, name: fragments/34/fragment34_261F90}
+    - {vram: 0x8140E720, type:  bss, name: fragments/34/fragment34_269820}
 
   - name: fragment34_relocs
     type: code
