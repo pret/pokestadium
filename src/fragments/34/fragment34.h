@@ -61,10 +61,15 @@ typedef struct unk_D_8140E720 {
     /* 0xD0 */ s8 unk_D0;
 } unk_D_8140E720; // size = 0xD4
 
+typedef struct arg1_func_8140213C {
+    /* 0x00 */ char unk00[0x64];
+    /* 0x64 */ MtxF unk_64;
+} arg1_func_8140213C; // size >= 0xA4
+
 extern Gfx D_8140DAE0[];
 extern Gfx D_8140DB30[];
 
-extern void* D_8140E620;
+extern MtxF* D_8140E620;
 extern s32 D_8140E624;
 extern Vec3f D_8140E628;
 
@@ -77,6 +82,7 @@ void func_81400930(Vec3f*, Vec3f*);
 void func_8140094C(Vec3s*, Vec3s*);
 u32 func_81400A78(s32);
 s32 func_81400B00(s32);
+
 void func_81406204(Gfx*, s32, s32, s32, s32);
 void func_81406288(Gfx*, s32, s32, s32, s32);
 void func_81407B04(unk_D_8140E720*);

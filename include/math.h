@@ -44,6 +44,11 @@ typedef struct Vec3s {
     /* 0x4 */ s16 z;
 } Vec3s; // size = 0x6
 
+typedef struct Vec2s {
+    /* 0x0 */ s16 x;
+    /* 0x2 */ s16 y;
+} Vec2s; // size = 0x4
+
 typedef union Vec2s_s32 {
     struct {
         /* 0x0 */ s16 x;
