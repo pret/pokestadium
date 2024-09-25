@@ -217,10 +217,10 @@ void func_862002F4(void) {
     f32 temp_fv0;
     f32 temp_fv1;
 
-    sp60[0] = D_80068BA0->unk_08;
-    sp60[1] = D_80068BA4->unk_08;
-    sp60[2] = D_80068BA8->unk_08;
-    sp60[3] = D_80068BAC->unk_08;
+    sp60[0] = gPlayer1Controller->buttonPressed;
+    sp60[1] = gPlayer2Controller->buttonPressed;
+    sp60[2] = gPlayer3Controller->buttonPressed;
+    sp60[3] = gPlayer4Controller->buttonPressed;
 
     if (D_86203E48 == 2) {
         for (i = 0; i < 4; i++) {
@@ -537,11 +537,11 @@ s32 func_862011E8(void) {
         func_862004D8();
         func_86200620();
         if (D_8620471A == 1) {
-            if (D_80068BA0->unk_08 & 0x1000) {
+            if (gPlayer1Controller->buttonPressed & 0x1000) {
                 var_s1_3 = 0;
             }
 
-            if ((D_8780FA2A == 0) && (D_80068BA0->unk_08 & 0x4000)) {
+            if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
                 func_80048B90(3);
                 func_87802EB8(2);
                 return -1;
@@ -581,7 +581,8 @@ void func_862013C0(void) {
         func_862004D8();
 
         if ((D_86204718 == 1) && (func_80007604() == 0) &&
-            ((D_80068BA0->unk_08 | D_80068BA4->unk_08 | D_80068BA8->unk_08 | (D_80068BAC->unk_08 != 0)) != 0)) {
+            ((gPlayer1Controller->buttonPressed | gPlayer2Controller->buttonPressed |
+              gPlayer3Controller->buttonPressed | (gPlayer4Controller->buttonPressed != 0)) != 0)) {
             func_80006CB4(0x1E);
             func_8004B094(0x1E);
             D_86204700 = 0;
@@ -1026,7 +1027,7 @@ void func_862023F8(void) {
             }
 
             if (D_86204718 == 1) {
-                if ((D_80068BA0->unk_08 != 0) && (sp8C == 0)) {
+                if ((gPlayer1Controller->buttonPressed != 0) && (sp8C == 0)) {
                     D_86204704 = 0x1C2;
                     sp8C = 1;
                 }

@@ -82,21 +82,21 @@ void func_86300020(void) {
         D_86301730[i].unk_17B = D_86301730[i].unk_179;
     }
 
-    D_86301730[0].unk_17C = D_80068BA0->unk_08;
-    D_86301730[0].unk_178 = D_80068BA0->unk_02;
-    D_86301730[0].unk_179 = D_80068BA0->unk_04;
+    D_86301730[0].unk_17C = gPlayer1Controller->buttonPressed;
+    D_86301730[0].unk_178 = gPlayer1Controller->rawStickX;
+    D_86301730[0].unk_179 = gPlayer1Controller->rawStickY;
 
-    D_86301730[1].unk_17C = D_80068BA4->unk_08;
-    D_86301730[1].unk_178 = D_80068BA4->unk_02;
-    D_86301730[1].unk_179 = D_80068BA4->unk_04;
+    D_86301730[1].unk_17C = gPlayer2Controller->buttonPressed;
+    D_86301730[1].unk_178 = gPlayer2Controller->rawStickX;
+    D_86301730[1].unk_179 = gPlayer2Controller->rawStickY;
 
-    D_86301730[2].unk_17C = D_80068BA8->unk_08;
-    D_86301730[2].unk_178 = D_80068BA8->unk_02;
-    D_86301730[2].unk_179 = D_80068BA8->unk_04;
+    D_86301730[2].unk_17C = gPlayer3Controller->buttonPressed;
+    D_86301730[2].unk_178 = gPlayer3Controller->rawStickX;
+    D_86301730[2].unk_179 = gPlayer3Controller->rawStickY;
 
-    D_86301730[3].unk_17C = D_80068BAC->unk_08;
-    D_86301730[3].unk_178 = D_80068BAC->unk_02;
-    D_86301730[3].unk_179 = D_80068BAC->unk_04;
+    D_86301730[3].unk_17C = gPlayer4Controller->buttonPressed;
+    D_86301730[3].unk_178 = gPlayer4Controller->rawStickX;
+    D_86301730[3].unk_179 = gPlayer4Controller->rawStickY;
 }
 
 void func_8630011C(void) {
@@ -461,7 +461,7 @@ void func_86300F68(void) {
         func_8630011C();
         func_86300230();
 
-        if (D_80068BA0->unk_08 & 0x1000) {
+        if (gPlayer1Controller->buttonPressed & 0x1000) {
             var_s6 = 0;
         }
 
