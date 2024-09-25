@@ -330,7 +330,7 @@ void func_800173CC(unk_D_86002F58_004_000* arg0) {
     arg0->unk_040.unk_04 = NULL;
 }
 
-s32 func_800173DC(unk_D_86002F58_004_000* arg0, s16 arg1, s32 arg2, s32 arg3) {
+s32 func_800173DC(unk_D_86002F58_004_000* arg0, s16 arg1, void* arg2, s32 arg3) {
     unk_D_86002F58_004_000_040_004* temp_v0 = Util_ConvertAddrToVirtAddr(arg2);
     unk_D_86002F58_004_000_040* ptr = &arg0->unk_040;
 
@@ -375,8 +375,8 @@ s32 func_80017484(unk_D_86002F58_004_000* arg0, s16 arg1) {
     return var_a2;
 }
 
-void func_800174E4(unk_D_86002F58_004_000* arg0) {
-    func_80017484(arg0, arg0->unk_040.unk_04->unk_0A - 1);
+s32 func_800174E4(unk_D_86002F58_004_000* arg0) {
+    return func_80017484(arg0, arg0->unk_040.unk_04->unk_0A - 1);
 }
 
 s32 func_80017514(unk_D_86002F58_004_000* arg0) {

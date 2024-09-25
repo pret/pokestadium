@@ -530,24 +530,24 @@ s32 func_822023A4(void) {
     D_82203150.unk_06 = 0;
     D_82203150.unk_04 = 0x12C;
 
-    if (D_80068BA0->unk_08 & 0x8000) {
+    if (gPlayer1Controller->buttonPressed & 0x8000) {
         if (D_822031D8 == 3) {
             func_8004E810(0x96, 8);
         }
         func_80048B90(0x33);
         func_80048B90(0x16);
         var_t1 = 3;
-    } else if (D_80068BA0->unk_08 & 0x4000) {
+    } else if (gPlayer1Controller->buttonPressed & 0x4000) {
         func_8000D23C(0x28);
         func_80048B90(3);
         var_t1 = 4;
-    } else if (D_80068BA0->unk_08 & 0x800) {
+    } else if (gPlayer1Controller->buttonPressed & 0x800) {
         var_s0 = D_82202FE4[D_822031D8].unk_06;
-    } else if (D_80068BA0->unk_08 & 0x400) {
+    } else if (gPlayer1Controller->buttonPressed & 0x400) {
         var_s0 = D_82202FE4[D_822031D8].unk_07;
-    } else if (D_80068BA0->unk_08 & 0x200) {
+    } else if (gPlayer1Controller->buttonPressed & 0x200) {
         var_s0 = D_82202FE4[D_822031D8].unk_08;
-    } else if (D_80068BA0->unk_08 & 0x100) {
+    } else if (gPlayer1Controller->buttonPressed & 0x100) {
         var_s0 = D_82202FE4[D_822031D8].unk_09;
     }
 

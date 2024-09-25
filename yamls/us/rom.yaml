@@ -332,7 +332,7 @@
     # .data
     - [0x69770, data, rom_data_69770] # dp_intro
     - [0x69790, .data, util]
-    - [0x697A0, data, rom_data_697A0]
+    - [0x697A0, .data, controller]
     - [0x697B0, .data, 6BC0]
     - [0x697C0, .data, stage_loader]
     - [0x6A1B0, .data, crash_screen]
@@ -635,12 +635,16 @@
     - [0x119FB0, c,       fragments/3/fragment3_119FB0]
     - [0x11BBF0, c,       fragments/3/fragment3_11BBF0]
     - [0x11BF90, c,       fragments/3/fragment3_11BF90]
-    - [0x11C730, data,    fragments/3/fragment3_data]
-    - [0x11E810, rodata,  fragments/3/fragment3_rodata_11E810]
-    - [0x11E950, rodata,  fragments/3/fragment3_rodata_11E950]
-    - [0x11E9A0, rodata,  fragments/3/fragment3_rodata_11E9A0]
+    - [0x11C730, .data,    fragments/3/fragment3_1189B0]
+    - [0x11C770, .data,    fragments/3/fragment3_1193E0]
+    - [0x11C790, .data,    fragments/3/fragment3_11BBF0]
+    - [0x11E810, .rodata,  fragments/3/fragment3_1193E0]
+    - [0x11E950, .rodata,  fragments/3/fragment3_119FB0]
+    - [0x11E9A0, .rodata,  fragments/3/fragment3_11BBF0]
 
-    - {vram: 0x87906040, type:  bss, name: fragments/3/fragment3_bss}
+    - {vram: 0x87906040, type:  .bss, name: fragments/3/fragment3_1189B0}
+    - {vram: 0x879060E0, type:  .bss, name: fragments/3/fragment3_1193E0}
+    - {vram: 0x87906120, type:  .bss, name: fragments/3/fragment3_11BF90}
 
   - name: fragment3_relocs
     type: code
