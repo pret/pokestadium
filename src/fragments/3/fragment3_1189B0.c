@@ -8,37 +8,20 @@
 #include "src/controller.h"
 #include "src/fragments/2/fragment2.h"
 
-extern s16 D_87903DA4;
-extern s16 D_87903DA8;
-extern s16 D_87903DAC;
-extern s16 D_87903DC0;
-extern s16 D_87903DC4;
-extern s16 D_87903DC8;
-extern s16 D_87903DCC;
-extern s16 D_87903DD0;
-
-extern s16 D_87906040;
-extern s16 D_87906044;
-extern s16 D_87906048;
-extern s16 D_8790604A;
-
-extern s16 D_87906060;
-extern s16 D_87906062;
-extern s16 D_87906064;
-extern s16 D_87906066;
-extern Vec3s D_8790606C;
-extern s16 D_87906072;
-extern s16 D_87906076;
-extern s16 D_87906078;
-extern f32 D_8790607C;
-extern f32 D_87906080;
-extern Vec3f D_87906088;
-extern s8 D_879060C4;
-extern s8 D_879060C5;
-extern s8 D_879060C6;
-extern s8 D_879060C7;
-extern s16 D_879060C8;
-
+s16 D_87903DA0 = 0;
+s16 D_87903DA4 = 0;
+s16 D_87903DA8 = 0;
+s16 D_87903DAC = 0;
+s16 D_87903DB0 = 0;
+s32 pad_D_87903DB4 = 0;
+s16 D_87903DB8 = 0;
+s32 pad_D_87903DBC = 0;
+s16 D_87903DC0 = 0;
+s16 D_87903DC4 = 0;
+s16 D_87903DC8 = 0;
+s16 D_87903DCC = 0;
+s16 D_87903DD0 = 0;
+s16 D_87903DD4 = 0;
 
 ret_func_80004454 func_87900020(void) {
     return func_87900020;

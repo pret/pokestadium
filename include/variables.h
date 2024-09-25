@@ -81,19 +81,6 @@ extern u32 D_B0000D10;
 
 extern u8 D_800818E0[0x20];
 
-typedef struct unk_D_80068BA0 {
-    /* 0x00 */ char pad00[0x2];
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ u16 unk_06;
-    /* 0x08 */ u16 unk_08;
-    /* 0x0A */ char pad0A[0x2];
-} unk_D_80068BA0; // size >= 0xC
-
-extern unk_D_80068BA0* D_80068BA0;
-extern unk_D_80068BA0* D_80068BA4;
-extern unk_D_80068BA0* D_80068BA8;
-extern unk_D_80068BA0* D_80068BAC;
 extern Gfx D_8006F518[];
 extern Gfx D_8006F630[];
 extern u8 D_82000000;
