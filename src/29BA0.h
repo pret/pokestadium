@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "3FB0.h"
+#include "src/controller.h"
 
 typedef struct unk_D_800AE520 {
     /* 0x00 */ s16 unk_00;
@@ -64,7 +65,7 @@ typedef struct unk_D_800AE540_0004 {
     /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
     /* 0x002 */ u8 unk_002;
-    /* 0x004 */ struct Controller* controller;
+    /* 0x004 */ Controller* controller;
     /* 0x008 */ char unk_008[0x4];
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;

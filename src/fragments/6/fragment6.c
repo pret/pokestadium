@@ -177,15 +177,15 @@ void func_86000020(void) {
     s32 i;
     s32 j;
 
-    D_86002F58[0].unk_17A = D_80068BA0->unk_08;
-    D_86002F58[1].unk_17A = D_80068BA4->unk_08;
-    D_86002F58[2].unk_17A = D_80068BA8->unk_08;
-    D_86002F58[3].unk_17A = D_80068BAC->unk_08;
+    D_86002F58[0].unk_17A = gPlayer1Controller->buttonPressed;
+    D_86002F58[1].unk_17A = gPlayer2Controller->buttonPressed;
+    D_86002F58[2].unk_17A = gPlayer3Controller->buttonPressed;
+    D_86002F58[3].unk_17A = gPlayer4Controller->buttonPressed;
 
-    D_86002F58[0].unk_174 = D_80068BA0->unk_06;
-    D_86002F58[1].unk_174 = D_80068BA4->unk_06;
-    D_86002F58[2].unk_174 = D_80068BA8->unk_06;
-    D_86002F58[3].unk_174 = D_80068BAC->unk_06;
+    D_86002F58[0].unk_174 = gPlayer1Controller->buttonDown;
+    D_86002F58[1].unk_174 = gPlayer2Controller->buttonDown;
+    D_86002F58[2].unk_174 = gPlayer3Controller->buttonDown;
+    D_86002F58[3].unk_174 = gPlayer4Controller->buttonDown;
 
     for (i = 0; i < 4; i++) {
         D_86003B5C = &D_86002F58[i];
@@ -596,11 +596,11 @@ s32 func_86000FD4(void) {
     var_s0_2 = true;
     while (var_s0_2 == true) {
         if (func_86000410() == 0) {
-            if (D_80068BA0->unk_08 & 0x1000) {
+            if (gPlayer1Controller->buttonPressed & 0x1000) {
                 var_s0_2 = false;
             }
 
-            if ((D_8780FA2A == 0) && (D_80068BA0->unk_08 & 0x4000)) {
+            if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
                 func_80048B90(3);
                 func_87802EB8(2);
                 return -1;
