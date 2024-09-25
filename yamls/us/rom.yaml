@@ -2487,6 +2487,7 @@
   # sections hard aligned to an address start here
   # ------------------------------------------------
 
+  # Seems to be the portion(s) of the ROM(s) used in GB Tower mode.
   - name: late_assets_1
     type: code
     bss_size: 0x0
@@ -2550,6 +2551,7 @@
     - [0x81CB8C, bin] # end of Yay0 files
     - [0x81EC28]
 
+  # multi bin asset array of 152 uncompressed icons of the pokemon.
   - name: late_assets_2
     type: code
     bss_size: 0x0
