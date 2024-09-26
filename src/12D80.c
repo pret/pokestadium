@@ -1114,41 +1114,13 @@ Vec3f* func_80015390(unk_D_86002F58_004_000* arg0, s16 arg1, Vec3f* arg2) {
     return NULL;
 }
 
-#ifdef NON_MATCHING
-void func_80015400(Gfx* arg0, u8* arg1) {
-    /*
-    gDPSetCombineLERP(arg0++,
-                      arg1[0], arg1[1], arg1[2], arg1[3], arg1[4], arg1[5], arg1[6],
-                      arg1[7], arg1[8], arg1[9], arg1[10], arg1[11], arg1[12], arg1[13],
-                      arg1[14], arg1[15]);
-    */
+void func_80015400(Gfx* arg0, arg1_func_81407874_014_000_010* arg1) {
+    gDPSetCombine(arg0++,
+                  GCCc0w0(arg1->unk_00, arg1->unk_02, arg1->unk_04, arg1->unk_06) | GCCc1w0(arg1->unk_08, arg1->unk_0A),
 
-    gDPSetCombine(arg0++, GCCc0w0(arg1[0], arg1[2], arg1[4], arg1[6]) | GCCc1w0(arg1[8], arg1[10]),
-                  GCCc0w1(arg1[1], arg1[3], arg1[5], arg1[7]) |
-                      GCCc1w1(arg1[9], arg1[12], arg1[14], arg1[11], arg1[13], arg1[15]));
-
-    /*
-    arg0->words.w0 = ((((arg1->unk_0 & 0xF) << 0x14) |
-                       ((arg1->unk_2 & 0x1F) << 0xF) |
-                       ((arg1->unk_4 & 7) << 0xC) |
-                       ((arg1->unk_6 & 7) << 9) |
-                       ((arg1->unk_8 & 0xF) << 5) | (arg1->unk_A & 0x1F)) & 0xFFFFFF) |
-                        0xFC000000;
-    arg0->words.w1 = (arg1->unk_1 << 0x1C) |
-                    ((arg1->unk_3 & 7) << 0xF) |
-                    ((arg1->unk_5 & 7) << 0xC) |
-                    ((arg1->unk_7 & 7) << 9) |
-                    ((arg1->unk_9 & 0xF) << 0x18) |
-                    ((arg1->unk_C & 7) << 0x15) |
-                    ((arg1->unk_E & 7) << 0x12) |
-                    ((arg1->unk_B & 7) << 6) |
-                    ((arg1->unk_D & 7) * 8) |
-                    (arg1->unk_F & 7);
-    */
+                  GCCc0w1(arg1->unk_01, arg1->unk_03, arg1->unk_05, arg1->unk_07) |
+                      GCCc1w1(arg1->unk_09, arg1->unk_0C, arg1->unk_0E, arg1->unk_0B, arg1->unk_0D, arg1->unk_0F));
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/12D80/func_80015400.s")
-#endif
 
 void func_8001550C(void) {
     if (D_800ABB08 == 0) {
