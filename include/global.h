@@ -394,4 +394,23 @@ typedef struct unk_D_864027C0 {
     /* 0x1C */ s16 unk_1C;
 } unk_D_864027C0; // size = 0x20
 
+typedef struct arg1_func_81407874_014_000_010 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ u8 unk_07;
+    /* 0x08 */ u8 unk_08;
+    /* 0x09 */ u8 unk_09;
+    /* 0x0A */ u8 unk_0A;
+    /* 0x0B */ u8 unk_0B;
+    /* 0x0C */ u8 unk_0C;
+    /* 0x0D */ u8 unk_0D;
+    /* 0x0E */ u8 unk_0E;
+    /* 0x0F */ u8 unk_0F;
+} arg1_func_81407874_014_000_010; // size >= 0x10
+
 #endif

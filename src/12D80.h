@@ -106,7 +106,7 @@ void func_8001533C(s32 arg0);
 void func_80015348(void);
 s32 func_80015360(void);
 Vec3f* func_80015390(unk_D_86002F58_004_000* arg0, s16 arg1, Vec3f* arg2);
-void func_80015400(Gfx* arg0, u8* arg1);
+void func_80015400(Gfx* arg0, arg1_func_81407874_014_000_010* arg1);
 void func_8001550C(void);
 void func_8001554C(void);
 void func_80015684(void);

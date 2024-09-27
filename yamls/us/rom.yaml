@@ -1419,10 +1419,12 @@
     - [0x26E540, c,      fragments/34/fragment34_26E540]
     - [0x26E6D0, c,      fragments/34/fragment34_26E6D0]
     - [0x26F9B0, c,      fragments/34/fragment34_26F9B0]
-    - [0x26F9C0, data,   fragments/34/fragment34_data]
-    - [0x270570, rodata, fragments/34/fragment34_rodata]
+    - [0x26F9C0, .data,   fragments/34/fragment34_264380]
+    - [0x2703D0, .data,   fragments/34/fragment34_269820]
+    - [0x2703E0, .data,   fragments/34/fragment34_26E6D0]
+    - [0x270570, .rodata, fragments/34/fragment34_269820]
 
-    - {vram: 0x8140E620, type:  bss, name: fragments/34/fragment34_bss}
+    - {vram: 0x8140E620, type:  .bss, name: fragments/34/fragment34_261F90}
 
   - name: fragment34_relocs
     type: code

@@ -80,24 +80,6 @@ void func_879038AC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s
     sp34->unk_000.unk_000.unk_14 = 2;
 }
 
-typedef struct arg1_func_87903D64_014 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ unk_D_86002F34_000_014_004* unk_04;
-    /* 0x08 */ unk_D_86002F34_000_014_004* unk_08;
-    /* 0x0C */ unk_D_86002F34_000_014_004* unk_0C;
-    /* 0x10 */ unk_D_86002F34_000_014_010* unk_10;
-    /* 0x14 */ unk_D_86002F34_000_014_010* unk_14;
-    /* 0x18 */ unk_D_86002F34_000_014_010* unk_18;
-} arg1_func_87903D64_014;
-
-// Possibly unk_D_86002F34_alt7, unk_D_86002F34_alt8,
-// unk_D_86002F34_alt9 or unk_D_86002F34_alt2
-typedef struct arg1_func_87903D64 {
-    /* 0x00 */ char unk00[0x14];
-    /* 0x00 */ arg1_func_87903D64_014* unk_14;
-    /* 0x18 */ Gfx* unk_18;
-} arg1_func_87903D64; // size >= 0x1C
-
 #ifdef NON_MATCHING
 Gfx* func_87903920(Gfx* arg0, arg1_func_87903D64_014* arg1) {
     s32 sp38;
