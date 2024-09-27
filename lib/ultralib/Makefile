@@ -20,6 +20,11 @@ BUILD_AR := $(BUILD_DIR)/$(TARGET).a
 
 WORKING_DIR := $(shell pwd)
 
+PRINT = printf
+ifeq ($(VERBOSE),0)
+  V := @
+endif
+
 CPP := cpp -P
 AR := ar
 
@@ -123,7 +128,8 @@ $(shell mkdir -p $(BASE_DIR) src $(foreach dir,$(SRC_DIRS),$(BUILD_DIR)/$(dir)))
 all: $(BUILD_AR)
 
 $(BUILD_AR): $(MARKER_FILES)
-	$(AR_OLD) rcs $@ $(AR_ORDER)
+	@$(PRINT) "$(GREEN)Making libultra archive:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)$(AR_OLD) rcs $@ $(AR_ORDER)
 ifneq ($(COMPARE),0)
 # patch archive creation time and individual files' ownership & permissions
 	dd bs=1 skip=24 seek=24 count=12 conv=notrunc if=$(BASE_AR) of=$@ status=none
@@ -133,11 +139,11 @@ ifneq ($(COMPARE),0)
 endif
 
 clean:
-	$(RM) -rf $(BUILD_DIR)
+	$(V)$(RM) -rf $(BUILD_DIR)
 
 distclean:
-	$(MAKE) -C tools distclean
-	$(RM) -rf extracted/ $(BUILD_ROOT)
+	$(V)$(MAKE) -C tools distclean
+	$(V)$(RM) -rf extracted/ $(BUILD_ROOT)
 
 setup:
 	$(MAKE) -C tools
@@ -170,7 +176,8 @@ $(BUILD_DIR)/src/voice/%.marker: OPTFLAGS += -DLANG_JAPANESE -I$(WORKING_DIR)/sr
 $(BUILD_DIR)/src/voice/%.marker: CC := tools/compile_sjis.py -D__CC=$(WORKING_DIR)/$(CC) -D__BUILD_DIR=$(BUILD_DIR)
 
 $(C_MARKER_FILES): $(BUILD_DIR)/%.marker: %.c
-	cd $(<D) && $(WORKING_DIR)/$(CC) $(CFLAGS) $(MIPS_VERSION) $(CPPFLAGS) $(OPTFLAGS) $(<F) $(IINC) -o $(WORKING_DIR)/$(@:.marker=.o)
+	@$(PRINT) "$(GREEN)Compiling libultra file:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)cd $(<D) && $(WORKING_DIR)/$(CC) $(CFLAGS) $(MIPS_VERSION) $(CPPFLAGS) $(OPTFLAGS) $(<F) $(IINC) -o $(WORKING_DIR)/$(@:.marker=.o)
 ifneq ($(COMPARE),0)
 # check if this file is in the archive; patch corrupted bytes and change file timestamps to match original if so
 	@$(if $(findstring $(BASE_DIR)/$(@F:.marker=.o), $(BASE_OBJS)), \
@@ -181,15 +188,16 @@ ifneq ($(COMPARE),0)
 	)
 endif
 ifneq ($(FIXUPS),0)
-	tools/set_o32abi_bit.py $(WORKING_DIR)/$(@:.marker=.o)
-	$(CROSS)strip $(WORKING_DIR)/$(@:.marker=.o) -N asdasdasdasd
-	$(CROSS)objcopy --remove-section .mdebug $(WORKING_DIR)/$(@:.marker=.o)
+	$(V)tools/set_o32abi_bit.py $(WORKING_DIR)/$(@:.marker=.o)
+	$(V)$(CROSS)strip $(WORKING_DIR)/$(@:.marker=.o) -N asdasdasdasd
+	$(V)$(CROSS)objcopy --remove-section .mdebug $(WORKING_DIR)/$(@:.marker=.o)
 endif
 # create or update the marker file
 	@touch $@
 
 $(S_MARKER_FILES): $(BUILD_DIR)/%.marker: %.s
-	cd $(<D) && $(WORKING_DIR)/$(CC) $(ASFLAGS) $(MIPS_VERSION) $(CPPFLAGS) $(ASOPTFLAGS) $(<F) $(IINC) -o $(WORKING_DIR)/$(@:.marker=.o)
+	@$(PRINT) "$(GREEN)Assembling libultra file:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)cd $(<D) && $(WORKING_DIR)/$(CC) $(ASFLAGS) $(MIPS_VERSION) $(CPPFLAGS) $(ASOPTFLAGS) $(<F) $(IINC) -o $(WORKING_DIR)/$(@:.marker=.o)
 ifneq ($(COMPARE),0)
 # check if this file is in the archive; patch corrupted bytes and change file timestamps to match original if so
 	@$(if $(findstring $(BASE_DIR)/$(@F:.marker=.o), $(BASE_OBJS)), \
@@ -200,9 +208,9 @@ ifneq ($(COMPARE),0)
 	)
 endif
 ifneq ($(FIXUPS),0)
-	tools/set_o32abi_bit.py $(WORKING_DIR)/$(@:.marker=.o)
-	$(CROSS)strip $(WORKING_DIR)/$(@:.marker=.o) -N asdasdasdasd
-	$(CROSS)objcopy --remove-section .mdebug $(WORKING_DIR)/$(@:.marker=.o)
+	$(V)tools/set_o32abi_bit.py $(WORKING_DIR)/$(@:.marker=.o)
+	$(V)$(CROSS)strip $(WORKING_DIR)/$(@:.marker=.o) -N asdasdasdasd
+	$(V)$(CROSS)objcopy --remove-section .mdebug $(WORKING_DIR)/$(@:.marker=.o)
 endif
 # create or update the marker file
 	@touch $@
