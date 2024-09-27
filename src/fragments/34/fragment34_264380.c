@@ -354,11 +354,6 @@ Gfx D_8140E448[] = {
     gsSPEndDisplayList(),
 };
 
-extern u32 D_8140E6B8;
-extern u32 D_8140E6E8;
-extern u32 D_8140E6EC;
-extern u32 D_8140E6F0;
-
 void func_81402410(void) {
     gDPPipeSync(gDisplayListHead++);
 }

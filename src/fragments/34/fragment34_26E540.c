@@ -1,5 +1,30 @@
 #include "fragment34.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/34/fragment34_26E540/func_8140C5D0.s")
+void func_8140C5D0(void) {
+    D_8140E6B8++;
+    D_8140E6BC = D_8140E6B8 & 0x3F;
+    D_8140E6C0 = D_8140E6B8 & 0x1F;
+    D_8140E6C4 = D_8140E6B8 & 0xF;
+    D_8140E6C8 = D_8140E6B8 & 7;
+    D_8140E6CC = D_8140E6B8 & 3;
+    D_8140E6D0 = D_8140E6B8 % 3;
+    D_8140E6D4 = D_8140E6B8 & 1;
+    D_8140E6D8 = D_8140E6B8 >> 6;
+    D_8140E6DC = D_8140E6B8 >> 5;
+    D_8140E6E0 = D_8140E6B8 >> 4;
+    D_8140E6E4 = D_8140E6B8 >> 3;
+    D_8140E6E8 = D_8140E6B8 >> 2;
+    D_8140E6EC = D_8140E6B8 / 3;
+    D_8140E6F0 = D_8140E6B8 >> 1;
+    D_8140E6F4 = D_8140E6D8 & 1;
+    D_8140E6F8 = D_8140E6DC & 1;
+    D_8140E6FC = D_8140E6E0 & 1;
+    D_8140E700 = D_8140E6E4 & 1;
+    D_8140E704 = D_8140E6E8 & 1;
+    D_8140E708 = D_8140E6EC & 1;
+    D_8140E70C = D_8140E6F0 & 1;
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/34/fragment34_26E540/func_8140C734.s")
+void func_8140C734(void) {
+    func_8140C5D0();
+}
