@@ -99,13 +99,13 @@ typedef struct unk_D_8140E720 {
     /* 0xB8 */ s16 unk_B8;
     /* 0xBA */ s16 unk_BA;
     /* 0xBC */ s16 unk_BC;
-    /* 0xBE */ u8 unk_BE;
-    /* 0xBF */ u8 unk_BF;
-    /* 0xC0 */ u8 unk_C0;
-    /* 0xC1 */ u8 unk_C1;
-    /* 0xC2 */ u8 unk_C2;
-    /* 0xC3 */ u8 unk_C3;
-    /* 0xC4 */ u8 unk_C4;
+    /* 0xBE */ u8 prim_r;
+    /* 0xBF */ u8 prim_g;
+    /* 0xC0 */ u8 prim_b;
+    /* 0xC1 */ u8 env_r;
+    /* 0xC2 */ u8 env_g;
+    /* 0xC3 */ u8 env_b;
+    /* 0xC4 */ u8 prim_a;
     /* 0xC5 */ char unkC5[0x1];
     /* 0xC6 */ s8 unk_C6;
     /* 0xC7 */ s8 unk_C7;
@@ -217,6 +217,11 @@ typedef struct arg1_func_81407874 {
     /* 0x00 */ arg1_func_81407874_014* unk_14;
 } arg1_func_81407874; // size >= 0x18
 
+typedef struct unk_D_8140E634 {
+    /* 0x00 */ Vec3f unk_00;
+    /* 0x0C */ char unk0C[0x84];
+} unk_D_8140E634; // size = 0x90
+
 extern Gfx D_8140DAE0[];
 extern Gfx D_8140DB30[];
 extern Gfx D_8140DBA8[];
@@ -256,10 +261,35 @@ extern Gfx D_8140E430[];
 extern Gfx D_8140E448[];
 extern unk_D_8140E728_01C D_8140E460;
 
+extern u8 D_8140E538[];
+
 extern MtxF* D_8140E620;
 extern s32 D_8140E624;
-extern Vec3f D_8140E628;
-
+extern s32 D_8140E624;
+extern unk_D_8140E634 D_8140E628;
+extern u32 D_8140E6B8;
+extern s32 D_8140E6BC;
+extern s32 D_8140E6C0;
+extern s32 D_8140E6C4;
+extern s32 D_8140E6C8;
+extern s32 D_8140E6CC;
+extern u32 D_8140E6D0;
+extern s32 D_8140E6D4;
+extern u32 D_8140E6D8;
+extern u32 D_8140E6DC;
+extern u32 D_8140E6E0;
+extern u32 D_8140E6E4;
+extern u32 D_8140E6E8;
+extern u32 D_8140E6EC;
+extern u32 D_8140E6F0;
+extern s32 D_8140E6F4;
+extern s32 D_8140E6F8;
+extern s32 D_8140E6FC;
+extern s32 D_8140E700;
+extern s32 D_8140E704;
+extern s32 D_8140E708;
+extern s32 D_8140E70C;
+extern s32 D_8140E710;
 extern unk_D_8140E720* D_8140E720;
 extern unk_D_8140E728* D_8140E728;
 extern s32 D_8140E72C;
@@ -734,6 +764,8 @@ void func_8140C5BC(UNUSED unk_D_8140E720* arg0, UNUSED unk_D_86002F34_00C* arg1)
 
 
 void func_8140C5D0(void);
-void func_8140D5A0(unk_D_8140E720*, s32);
+
+
+void func_8140D5A0(unk_D_8140E720*, u16);
 
 #endif // _FRAGMENT34_H_

@@ -176,9 +176,9 @@ void func_87901B08(void) {
 }
 
 void func_87901BB0(unk_D_8140E720* arg0) {
-    D_8140E628.x = arg0->unk_28;
-    D_8140E628.y = arg0->unk_28;
-    D_8140E628.z = arg0->unk_28;
+    D_8140E628.unk_00.x = arg0->unk_28;
+    D_8140E628.unk_00.y = arg0->unk_28;
+    D_8140E628.unk_00.z = arg0->unk_28;
 }
 
 void func_87901BD4(unk_D_8140E720* arg0) {
