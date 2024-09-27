@@ -136,10 +136,10 @@ void func_87901A28(unk_D_8140E728* arg0) {
     s16 sp2C;
     unk_D_8140E728_01C* temp_v0 = arg0->unk_1C;
     s16 temp_v1 = arg0->unk_24;
-    unk_D_8140E728_01C_004* unk_04 = temp_v0->unk_04;
+    unk_D_8140E728_01C_004_1* unk_04 = temp_v0->unk_04.a;
 
     if ((temp_v0->unk_00 == 1) && (unk_04->unk_00 == 1)) {
-        func_87901958(func_81407B5C(temp_v1 & 0xFF), arg0, 0);
+        func_87901958(func_81407B5C(temp_v1), arg0, 0);
     } else {
         for (i = 0; i < sp2C; i++) {
             func_87901958(func_81407B3C(), arg0, i);
@@ -176,9 +176,9 @@ void func_87901B08(void) {
 }
 
 void func_87901BB0(unk_D_8140E720* arg0) {
-    D_8140E628.x = arg0->unk_28;
-    D_8140E628.y = arg0->unk_28;
-    D_8140E628.z = arg0->unk_28;
+    D_8140E628.unk_00.x = arg0->unk_28;
+    D_8140E628.unk_00.y = arg0->unk_28;
+    D_8140E628.unk_00.z = arg0->unk_28;
 }
 
 void func_87901BD4(unk_D_8140E720* arg0) {
@@ -218,7 +218,7 @@ void func_87901C98(void) {
 
     gSPDisplayList(gDisplayListHead++, D_8140DB30);
 
-    func_8140C204(D_87906054, &gDisplayListHead);
+    func_8140C204(D_87906054);
 
     gSPDisplayList(gDisplayListHead++, D_8140DAE0);
 }
@@ -249,7 +249,7 @@ void func_87901F04(unk_D_8140E720* arg0) {
             break;
 
         case 2:
-            if (arg0->unk_30 < 0.0f) {
+            if (arg0->unk_2C.y < 0.0f) {
                 func_81408150(arg0);
             }
             break;
@@ -398,14 +398,14 @@ void func_87902608(unk_D_8140E720* arg0) {
             break;
 
         case 2:
-            if (arg0->unk_54 < 0.0f) {
+            if (arg0->unk_50.y < 0.0f) {
                 func_81408150(arg0);
             }
             break;
     }
 
     if (func_8140819C(arg0) != 0) {
-        if (arg0->unk_30 > 0.0f) {
+        if (arg0->unk_2C.y > 0.0f) {
             func_81408328(arg0);
         } else {
             func_81408348(arg0);
@@ -469,7 +469,7 @@ void func_879027F0(unk_D_8140E720* arg0) {
 
     if (func_81408368(arg0) != 0) {
         func_81409FD8(arg0);
-        if (arg0->unk_30 < 0.0f) {
+        if (arg0->unk_2C.y < 0.0f) {
             func_81408150(arg0);
         }
     }
@@ -527,7 +527,7 @@ void func_879029F0(unk_D_8140E720* arg0) {
 
     if (func_81408368(arg0) != 0) {
         func_81409FD8(arg0);
-        if (arg0->unk_30 < 0.0f) {
+        if (arg0->unk_2C.y < 0.0f) {
             func_81408150(arg0);
         }
     }
@@ -560,7 +560,7 @@ void func_87902C9C(unk_D_8140E720* arg0) {
             break;
 
         case 2:
-            if (arg0->unk_54 < -2.5f) {
+            if (arg0->unk_50.y < -2.5f) {
                 func_81408150(arg0);
             }
             break;
