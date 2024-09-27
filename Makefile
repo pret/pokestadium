@@ -300,8 +300,6 @@ O_FILES += build/src/libleo/bootstrap.s.o
 
 #### Main Targets ###
 
-all: rom
-
 rom: $(ROM)
 	@$(PRINT) "$(RED)Building ROM...\n$(NO_COL)"
 ifneq ($(COMPARE),0)
@@ -356,7 +354,6 @@ init: distclean
 	$(MAKE) venv
 	$(MAKE) setup
 	$(MAKE) extract
-	$(MAKE) all
 	$(MAKE) diff-init
 
 run: $(ROM)
