@@ -172,12 +172,6 @@ extern u32 D_3008000;
 extern u32 D_300C000;
 extern u32 D_1003E78[];
 extern u32 D_304F120[];
-extern u16 D_87B000C0;
-extern u16 D_87B000C4;
-extern u8 D_87B000C8;
-extern u8 D_87B000CC;
-extern u8 D_87B000D0;
-extern u8 D_87B000D4;
 
 extern s32 D_800FC820;
 extern u8* D_800FF9C0;
