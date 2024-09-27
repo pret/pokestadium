@@ -665,7 +665,7 @@
     - [0x11F580, c,    fragments/4/fragment4]
     - [0x120670, .data, fragments/4/fragment4]
 
-    - {vram: 0x87A01300, type:  bss, name: fragments/4/fragment4_bss}
+    - {vram: 0x87A01300, type:  .bss, name: fragments/4/fragment4}
 
   - name: fragment4_relocs
     type: code
@@ -684,9 +684,9 @@
     subsegments:
     - [0x120920, textbin, fragments/5/fragment5_header]
     - [0x120940, c,    fragments/5/fragment5]
-    - [0x1209E0, data, fragments/5/fragment5_data]
+    - [0x1209E0, .data, fragments/5/fragment5]
 
-    - {vram: 0x87B000E0, type:  bss, name: fragments/5/fragment5_bss}
+    - {vram: 0x87B000E0, type:  .bss, name: fragments/5/fragment5}
 
   - name: fragment5_relocs
     type: code
