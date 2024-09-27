@@ -5,6 +5,10 @@ CXXFLAGS := -I . -Wall -Wextra -std=c++17
 LDFLAGS := -lm
 PROGRAMS := vtxdis
 
+ifeq ($(VERBOSE),0)
+  V := @
+endif
+
 default: all
 
 n64crc_SOURCES := vtxdis.c
@@ -12,7 +16,7 @@ n64crc_SOURCES := vtxdis.c
 all: $(PROGRAMS)
 
 clean:
-	rm -Rf $(PROGRAMS) $(BUILD_DIR)
+	$(V)rm -Rf $(PROGRAMS) $(BUILD_DIR)
 
 distclean: clean
 

@@ -58,8 +58,37 @@ N64_EMULATOR ?=
 # Set prefix to mips binutils binaries (mips-linux-gnu-ld => 'mips-linux-gnu-') - Change at your own risk!
 # In nearly all cases, not having 'mips-linux-gnu-*' binaries on the PATH is indicative of missing dependencies
 MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
+PRINT = printf
+
+# Whether to hide commands or not
+VERBOSE ?= 0
+ifeq ($(VERBOSE),0)
+  V := @
+endif
+
+# Whether to colorize build messages
+COLOR ?= 1
 
 TARGET  := pokestadium
+
+# Run at the start of the build
+ifeq ($(filter clean distclean setup extract venv rom run all diff-init,$(MAKECMDGOALS)),)
+  $(info ==== Build Options ====)
+  $(info Version:        $(VERSION))
+  $(info Microcode:      f3dex)
+  $(info Target:         $(TARGET))
+  ifeq ($(COMPARE),1)
+    $(info Compare ROM:    yes)
+  else
+    $(info Compare ROM:    no)
+  endif
+  ifeq ($(NON_MATCHING),1)
+    $(info Build Matching: no)
+  else
+    $(info Build Matching: yes)
+  endif
+  $(info =======================)
+endif
 
 BASEROM_DIR := baseroms/$(VERSION)
 BASEROM     := $(BASEROM_DIR)/baserom.z64
@@ -242,6 +271,20 @@ build/src/hal_libc.o: CFLAGS += -signed
 
 build/src/libleo/%.o: CC := $(CC_OLD)
 
+ifeq ($(COLOR),1)
+NO_COL  := \033[0m
+RED     := \033[0;31m
+GREEN   := \033[0;32m
+BLUE    := \033[0;34m
+YELLOW  := \033[0;33m
+BLINK   := \033[33;5m
+endif
+
+# Common build print status function
+define print
+  @$(PRINT) "$(GREEN)$(1) $(YELLOW)$(2)$(GREEN) -> $(BLUE)$(3)$(NO_COL)\n"
+endef
+
 DECOMP_POKESTADIUM := $(filter-out src/libleo/%,$(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)))
 DECOMP_POKESTADIUM_FILTERED := $(patsubst %.c,%.o,$(addprefix build/,$(shell find $(DECOMP_POKESTADIUM) -type f -exec grep -l "GLOBAL_ASM" {} \;)))
 
@@ -260,40 +303,47 @@ O_FILES += build/src/libleo/bootstrap.s.o
 all: rom
 
 rom: $(ROM)
+	@$(PRINT) "$(RED)Building ROM...\n$(NO_COL)"
 ifneq ($(COMPARE),0)
 	@md5sum $(ROM)
 	@md5sum -c $(BASEROM_DIR)/checksum.md5
 endif
 
 clean:
-	$(RM) -r $(BUILD_DIR)
+	@$(PRINT) "$(RED)Cleaning ROM build files...\n$(NO_COL)"
+	$(V)$(RM) -r $(BUILD_DIR)
 
 libclean:
-	$(MAKE) -C lib/ultralib clean VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET)
-	$(RM) -rf $(BUILD_DIR)/lib
-	$(RM) -r build/$(TARGET)-$(VERSION).elf
-	$(RM) -r build/$(TARGET)-$(VERSION).ld
-	$(RM) -r build/$(TARGET)-$(VERSION).map
-	$(RM) -r build/$(TARGET)-$(VERSION).z64
+	@$(PRINT) "$(RED)Cleaning libultra build files...\n$(NO_COL)"
+	$(V)$(MAKE) -C lib/ultralib clean VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET)
+	$(V)$(RM) -rf $(BUILD_DIR)/lib
+	$(V)$(RM) -r build/$(TARGET)-$(VERSION).elf
+	$(V)$(RM) -r build/$(TARGET)-$(VERSION).ld
+	$(V)$(RM) -r build/$(TARGET)-$(VERSION).map
+	$(V)$(RM) -r build/$(TARGET)-$(VERSION).z64
 
 distclean: clean libclean
-	$(RM) -r $(BUILD_DIR) asm/ assets/ .splat/
-	$(RM) -r linker_scripts/$(VERSION)/auto $(LDSCRIPT)
-	$(MAKE) -C tools distclean
+	@$(PRINT) "$(RED)Performing full source distribution clean...\n$(NO_COL)"
+	$(V)$(RM) -r $(BUILD_DIR) asm/ assets/ .splat/
+	$(V)$(RM) -r linker_scripts/$(VERSION)/auto $(LDSCRIPT)
+	$(V)$(MAKE) -C tools distclean
 
 venv:
-	test -d $(VENV) || python3 -m venv $(VENV)
-	$(PYTHON) -m ensurepip --upgrade
-	$(PYTHON) -m pip install -U pip
-	$(PYTHON) -m pip install -U -r requirements.txt
+	@$(PRINT) "$(RED)Testing venv and setting up python requirements...\n$(NO_COL)"
+	$(V)test -d $(VENV) || python3 -m venv $(VENV)
+	$(V)$(PYTHON) -m ensurepip --upgrade
+	$(V)$(PYTHON) -m pip install -U pip
+	$(V)$(PYTHON) -m pip install -U -r requirements.txt
 
 setup:
-	$(MAKE) -C tools WARNINGS_CHECK=$(WARNINGS_CHECK)
+	@$(PRINT) "$(RED)Setting up tools...\n$(NO_COL)"
+	$(V)$(MAKE) -C tools WARNINGS_CHECK=$(WARNINGS_CHECK)
 
 extract:
-	$(RM) -r asm/$(VERSION) assets/$(VERSION)
-	$(CAT) yamls/$(VERSION)/header.yaml yamls/$(VERSION)/rom.yaml > $(SPLAT_YAML)
-	$(SPLAT) $(SPLAT_FLAGS) $(SPLAT_YAML)
+	@$(PRINT) "$(YELLOW)Running ROM extraction...\n$(NO_COL)"
+	$(V)$(RM) -r asm/$(VERSION) assets/$(VERSION)
+	$(V)$(CAT) yamls/$(VERSION)/header.yaml yamls/$(VERSION)/rom.yaml > $(SPLAT_YAML)
+	$(V)$(SPLAT) $(SPLAT_FLAGS) $(SPLAT_YAML)
 
 lib: $(ULTRALIB_LIB)
 
@@ -324,44 +374,53 @@ endif
 #### Various Recipes ####
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary --gap-fill=0xFF $< $@
-	$(ENCRYPT_LIBLEO) $@ $(MAP)
+	$(call print,Building ROM:,$<,$@)
+	$(V)$(OBJCOPY) -O binary --gap-fill=0xFF $< $@
+	$(V)$(ENCRYPT_LIBLEO) $@ $(MAP)
 
 # TODO: update rom header checksum
 
 # TODO: avoid using auto/undefined
 $(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
-	$(LD) $(LDFLAGS) -T $(LDSCRIPT) \
+	@$(PRINT) "$(GREEN)Linking ELF file:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)$(LD) $(LDFLAGS) -T $(LDSCRIPT) \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld -T $(BUILD_DIR)/linker_scripts/common_undef_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld \
 		-Map $(MAP) $(LIBULTRA_LIB) -o $@
 
 $(LDSCRIPT): linker_scripts/$(VERSION)/$(TARGET).ld
-	cp $< $@
+	$(call print,Copying linker script to build dir:,$<,$@)
+	$(V)cp $< $@
 
 $(BUILD_DIR)/%.ld: %.ld
-	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $< > $@
+	$(call print,Preprocessing linker script:,$<,$@)
+	$(V)$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $< > $@
 
 $(LIBULTRA_LIB): $(ULTRALIB_LIB)
-	cp $< $@
-	$(LIBDUMP_CMD)
+	$(call print,Archiving libultra lib:,$<,$@)
+	$(V)cp $< $@
+	$(V)$(LIBDUMP_CMD)
 
 $(ULTRALIB_LIB):
-	$(MAKE) -C lib/ultralib VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET) FIXUPS=1 CROSS=$(MIPS_BINUTILS_PREFIX) CC=../../$(CC_OLD)
+	@$(PRINT) "$(GREEN)Making libultra:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)$(MAKE) -C lib/ultralib VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET) FIXUPS=1 CROSS=$(MIPS_BINUTILS_PREFIX) CC=../../$(CC_OLD) VERBOSE=$(VERBOSE) COLOR=$(COLOR)
 
 $(BUILD_DIR)/%.o: %.bin
-	$(OBJCOPY) -I binary -O elf32-big $< $@
+	$(call print,Binning object:,$<,$@)
+	$(V)$(OBJCOPY) -I binary -O elf32-big $< $@
 
 $(BUILD_DIR)/%.o: %.s
-	$(ICONV) $(ICONV_FLAGS) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) -o $@
-	$(OBJDUMP_CMD)
+	$(call print,Assembling:,$<,$@)
+	$(V)$(ICONV) $(ICONV_FLAGS) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) -o $@
+	$(V)$(OBJDUMP_CMD)
 
 $(BUILD_DIR)/%.o: %.c
-	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
-	$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
-	$(OBJDUMP_CMD)
-	$(RM_MDEBUG)
+	$(call print,Compiling:,$<,$@)
+	$(V)$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
+	$(V)$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
+	$(V)$(OBJDUMP_CMD)
+	$(V)$(RM_MDEBUG)
 
 # Add these as a dependency for .o files
 asset_files: $(ASSET_INC_C)
