@@ -313,8 +313,8 @@ s32 func_81400550(s16* arg0, s16 arg1, s16 arg2) {
     return var_v1;
 }
 
-s32 func_814005EC(u16* arg0, s16 arg1, s16 arg2) {
-    s32 a0 = *arg0;
+s32 func_814005EC(s16* arg0, s16 arg1, s16 arg2) {
+    s32 a0 = *(u16*)arg0;
     s32 var_v1 = 0;
     s32 var_a1 = (u16)arg1;
 
@@ -551,9 +551,9 @@ f32 func_81400CC0(f32 arg0, f32 arg1, s16 arg2) {
     return (SINS(arg2) * arg0) + (COSS(arg2) * arg1);
 }
 
-Vec3f* func_81400D00(Vec3f* arg0, Vec3f arg1, u16 arg4) {
-    f32 temp_fv0 = SINS(arg4);
-    f32 temp_fv1 = COSS(arg4);
+Vec3f* func_81400D00(Vec3f* arg0, Vec3f arg1, Vec3s arg2) {
+    f32 temp_fv0 = SINS(arg2.y);
+    f32 temp_fv1 = COSS(arg2.y);
 
     arg0->x = (arg1.x * temp_fv1) + (arg1.z * temp_fv0);
     arg0->y = arg1.y;
