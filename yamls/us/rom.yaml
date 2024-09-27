@@ -853,10 +853,10 @@
     subsegments:
     - [0x142B10, textbin,   fragments/12/fragment12_header]
     - [0x142B30, c,      fragments/12/fragment12]
-    - [0x143360, data,   fragments/12/fragment12_data]
-    - [0x143400, rodata, fragments/12/fragment12_rodata]
+    - [0x143360, .data,   fragments/12/fragment12]
+    - [0x143400, .rodata, fragments/12/fragment12]
 
-    - {vram: 0x86600940, type:  bss, name: fragments/12/fragment12_bss}
+    - {vram: 0x86600940, type:  .bss, name: fragments/12/fragment12}
 
   - name: fragment12_relocs
     type: code
