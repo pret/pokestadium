@@ -898,12 +898,16 @@
     - [0x144300, c,      fragments/14/fragment14_144300]
     - [0x1462A0, c,      fragments/14/fragment14_1462A0]
     - [0x14A030, c,      fragments/14/fragment14_14A030]
-    - [0x14AFB0, data,   fragments/14/fragment14_data]
-    - [0x14B660, rodata, fragments/14/fragment14_rodata_14B660]
-    - [0x14B6A0, rodata, fragments/14/fragment14_rodata_14B6A0]
-    - [0x14B790, rodata, fragments/14/fragment14_rodata_14B790]
+    - [0x14AFB0, .data,   fragments/14/fragment14_144300]
+    - [0x14B270, .data,   fragments/14/fragment14_1462A0]
+    - [0x14B420, .data,   fragments/14/fragment14_14A030]
+    - [0x14B660, .rodata, fragments/14/fragment14_144300]
+    - [0x14B6A0, .rodata, fragments/14/fragment14_1462A0]
+    - [0x14B790, .rodata, fragments/14/fragment14_14A030]
 
-    - {vram: 0x86807500, type:  bss, name: fragments/14/fragment14_bss}
+    - {vram: 0x86807500, type:  .bss, name: fragments/14/fragment14_144300}
+    - {vram: 0x86807550, type:  .bss, name: fragments/14/fragment14_1462A0}
+    - {vram: 0x868084D0, type:  .bss, name: fragments/14/fragment14_14A030}
 
   - name: fragment14_relocs
     type: code
