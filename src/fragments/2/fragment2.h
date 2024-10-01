@@ -32,7 +32,7 @@ extern u16 D_8780FC98;
 void func_87800020(void);
 void func_8780005C(void);
 void func_878001D0(void);
-u32 func_878001E8(s32 arg0);
+u32 func_878001E8(u32 arg0);
 void func_8780024C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_878009BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_878010C8(s16 arg0);

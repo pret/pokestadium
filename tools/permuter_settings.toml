@@ -17,6 +17,12 @@ POLY_XLU_DISP = "int"
 UNK_2B0_DISP = "int"
 UNK_2C0_DISP = "int"
 LIGHT_DISP = "int"
+SQ = "float"
+ABS = "float"
+ABS_ALT = "float"
+ABS_NORMALIZED = "float"
+COSS = "float"
+SINS = "float"
 
 [decompme.compilers]
 "tools/ido/linux/7.1/cc" = "ido7.1"
