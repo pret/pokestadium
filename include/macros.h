@@ -51,6 +51,8 @@
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 #define ABS_ALT(x) ((x) >= 0 ? (x) : -(x))
 
+#define ABS_NORMALIZED(x) ((ABS_ALT((x)) < (0.000001f)) ? 0.0f : (x))
+
 #define FRAGMENT_ID(fragment) ((((u32)fragment##_TEXT_START & 0x0FF00000) >> 0x14) - 0x10)
 #define ASSET_ID(asset) (((u32)asset & 0x0F000000) >> 0x18)
 
