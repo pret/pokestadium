@@ -79,7 +79,7 @@ void func_878001D0(void) {
     D_8780FA20++;
 }
 
-u32 func_878001E8(s32 arg0) {
+u32 func_878001E8(u32 arg0) {
     u32 temp_a0 = guRandom() + D_8780FA20;
     u32 var_v1;
 

@@ -94,7 +94,7 @@ extern u8* D_800ABE00;
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/18480/func_80018AD0.s")
 
-unk_D_86002F34* func_80018B70(MemoryBlock* arg0, void* arg1) {
+void* func_80018B70(MemoryBlock* arg0, void* arg1) {
     extern func_D_8006F2B0 D_8006F2B0[];
 
     D_800ABD34 = NULL;
@@ -107,7 +107,7 @@ unk_D_86002F34* func_80018B70(MemoryBlock* arg0, void* arg1) {
     D_800ABD38[0] = 0;
     D_800ABD38[1] = 0;
 
-    while (D_800ABE00 != 0) {
+    while (D_800ABE00 != NULL) {
         D_8006F2B0[*D_800ABE00]();
     }
 

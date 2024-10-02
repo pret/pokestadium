@@ -62,7 +62,7 @@ extern Gfx D_1002508[];
 extern Gfx D_1002590[];
 extern u8 D_2000000[];
 extern u8 D_3000000[];
-extern u8 D_4000000[];
+extern u8 D_04000000[];
 extern u8 D_4000008[];
 extern u8 D_4000810[];
 extern u8 D_4001018[];
@@ -78,6 +78,29 @@ extern u8 D_2028A20[];
 extern u8 D_2028A60[];
 extern u8 D_2028AA0[];
 extern u32 D_B0000D10;
+extern u8 D_400C800[];
+extern u8 D_400CA00[];
+extern u8 D_400CC00[];
+extern u8 D_400CE00[];
+extern u8 D_400CF00[];
+extern u8 D_400D100[];
+extern u8 D_400D200[];
+extern u8 D_04000000[];
+extern u8 D_04000800[];
+extern u8 D_04001000[];
+extern u8 D_04001800[];
+extern u8 D_04002000[];
+extern u8 D_04002800[];
+extern u8 D_04003000[];
+extern u8 D_04003800[];
+extern u8 D_04004000[];
+extern u8 D_04005000[];
+extern u8 D_04006000[];
+extern u8 D_04007000[];
+extern u8 D_04008000[];
+extern u8 D_04009000[];
+extern u8 D_0400A000[];
+extern u8 D_0400B000[];
 
 extern u8 D_800818E0[0x20];
 
@@ -94,6 +117,7 @@ extern u8 D_86200000;
 extern u8 D_86800000;
 extern u8 D_86C00000;
 extern u8 D_87A00000;
+extern u8 D_87000000[];
 
 typedef struct unk_D_800A7440 {
 	/* 0x00 */ s16 x1;
