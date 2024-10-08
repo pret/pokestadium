@@ -28,6 +28,8 @@ struct RelocTable {
     /* 0x04 */ u32 relocations[RELOCATIONS_SIZE]; // variable size
 };
 
+typedef s32 (*FragmentEntry)(s32, s32);
+
 typedef struct Fragment {
     /* 0x00 */ u32 inst[2];     // MIPS instructions to jump to the main function, typically something like "j 0x8xx00020; nop"
     /* 0x08 */ char magic[8];   // "FRAGMENT"

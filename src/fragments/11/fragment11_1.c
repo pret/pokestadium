@@ -1250,7 +1250,7 @@ void func_86502848(void) {
     for (i = 0; i < 4; i++) {
         D_8650AB28 = &D_8650A528[i];
 
-        D_8650AB28->unk_17C = func_80011B10(temp_s5, 0, 4, 0, &D_8006F050, 1.0f);
+        D_8650AB28->unk_17C = func_80011B10(temp_s5, NULL, 4, NULL, &D_8006F050, 1.0f);
         func_80012094(&D_800AC840, &D_8650AB28->unk_17C->unk_00);
     }
 

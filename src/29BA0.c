@@ -51,7 +51,7 @@ s32 Game_DoCopyProtection(s32 state) {
 
 s32 func_80029008(s32 arg0, u8* romStart, u8* romEnd, u32 arg3, u32 arg4) {
     s32 result;
-    s32 (*func)(s32, s32);
+    FragmentEntry func;
 
     func = func_80004454(arg0, romStart, romEnd);
 

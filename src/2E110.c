@@ -101,7 +101,7 @@ end:
     *arg0++ = 0;
 }
 
-char* func_8002D7C0(char* arg0, s32 arg1, char** arg2, s32 file_number) {
+char* func_8002D7C0(char* arg0, s32 arg1, char** arg2, u32 file_number) {
     char* sp1C;
     char* sp18 = (u32)arg2 + (u32)arg2[file_number + 1];
 

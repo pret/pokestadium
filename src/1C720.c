@@ -120,20 +120,17 @@ unk_D_86002F58_004_000_00C_028* func_8001BE90(unk_D_86002F58_004_000* arg0, s32 
 }
 
 #ifdef NON_MATCHING
-void func_8001BEE8(s32* arg0, unk_func_8001BEE8* arg1) {
+unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* arg0, unk_func_8001BEE8* arg1) {
     char sp38[0xB];
-    s32 sp34;
+    unk_D_86002F58_004_000_010_02C sp34;
     unk_D_8006FF00* sp30;
     UNUSED unk_func_8001BEE8* sp20;
     UNUSED s32 i;
     u8 var_a0;
-    char* var_v1;
-    s8 t;
-    s32* test;
-    test = arg0;
+    s8* var_v1;
 
     sp30 = &D_8006FF00[arg1->unk_00 - 1];
-    sp34 = 0;
+    sp34.raw = 0;
 
     func_80021CA4(sp38, arg1->unk_00);
 
@@ -141,24 +138,20 @@ void func_8001BEE8(s32* arg0, unk_func_8001BEE8* arg1) {
         var_a0 = (arg1->unk_0E >> 8) + arg1->unk_0E;
 
         var_v1 = arg1->unk_30;
-        while (*var_v1 != 0) {
-            t = *var_v1++;
-            var_a0 += t;
+        while (*var_v1) {
+            var_a0 += *var_v1++;
         }
 
         var_v1 = arg1->unk_3B;
-        while (*var_v1 != 0) {
-            t = *var_v1++;
-            var_a0 += t;
-            do {
-                var_a0 += t;
-            } while (0);
+        while (*var_v1) {
+            var_a0 += *var_v1++;
         }
 
-        *(s16*)&sp34 = ((((sp30->unk_12 - sp30->unk_10) << 6) * var_a0) / 255) + (sp30->unk_10 << 6);
+        sp34.unk_00 = ((((sp30->unk_12 - sp30->unk_10) << 6) * var_a0) / 255) + (sp30->unk_10 << 6);
     }
 
-    *test = sp34;
+    *arg0 = sp34;
+    return arg0;
 }
 #else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1C720/func_8001BEE8.s")
