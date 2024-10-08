@@ -928,12 +928,13 @@
     - [0x14CA70, c,      fragments/15/fragment15_14CA70]
     - [0x14EC80, c,      fragments/15/fragment15_14EC80]
     - [0x150AC0, c,      fragments/15/fragment15_150AC0]
-    - [0x1554D0, data,   fragments/15/fragment15_data]
-    - [0x156EB0, rodata, fragments/15/fragment15_rodata_156EB0]
-    - [0x156F00, rodata, fragments/15/fragment15_rodata_156F00]
-    - [0x156F70, rodata, fragments/15/fragment15_rodata_156F70]
+    - [0x1554D0, .data,   fragments/15/fragment15_14CA70]
+    - [0x156EB0, .rodata, fragments/15/fragment15_14CA70]
+    - [0x156F00, .rodata, fragments/15/fragment15_14EC80]
+    - [0x156F70, .rodata, fragments/15/fragment15_150AC0]
 
-    - {vram: 0x8690A610, type:  bss, name: fragments/15/fragment15_bss}
+    - {vram: 0x8690A610, type:  .bss, name: fragments/15/fragment15_14CA70}
+    - {vram: 0x8690B600, type:  .bss, name: fragments/15/fragment15_14EC80}
 
   - name: fragment15_relocs
     type: code
