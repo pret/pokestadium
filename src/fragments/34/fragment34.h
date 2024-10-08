@@ -764,7 +764,7 @@ void func_8140C5BC(UNUSED unk_D_8140E720* arg0, UNUSED unk_D_86002F34_00C* arg1)
 
 
 void func_8140C5D0(void);
-
+void func_8140C734(void);
 
 void func_8140D5A0(unk_D_8140E720*, u16);
 

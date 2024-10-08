@@ -430,56 +430,51 @@ void func_822018D4(s16 arg0, s16 arg1, s16 arg2) {
     func_8001C330(arg0 - (arg2 / 2), arg1 - (arg2 / 2), arg2, arg2, 0, 0, 0x10000 / arg2, 0x10000 / arg2, 0);
 }
 
-#ifdef NON_MATCHING
 void func_82201AC8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
     s16 sp54;
-    s16 sp4C;
+    s16 sp50;
     s16 var_s2;
     s16 var_s3;
-    s16 sp50;
 
     if (arg2 >= 0x10) {
         var_s3 = 8;
     } else {
         var_s3 = arg2 / 2;
     }
-    sp4C = 0x2000 / var_s3;
 
     if (arg3 >= 0x10) {
         var_s2 = 8;
     } else {
         var_s2 = arg3 / 2;
     }
-    sp50 = 0x2000 / var_s2;
 
-    sp54 = (arg0 + arg2) - var_s3;
+    sp50 = arg2 - (var_s3 * 2);
+    sp54 = arg3 - (var_s2 * 2);
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    func_8001C330(arg0, arg1, var_s3, var_s2, 0, 0, sp4C, sp50, 0);
+    func_8001C330(arg0, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028AA0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    func_8001C330(sp54, arg1, var_s3, var_s2, 0, 0, sp4C, sp50, 0);
+    func_8001C330((arg0 + arg2) - var_s3, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_20289E0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    func_8001C330(arg0, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, sp4C, sp50, 0);
+    func_8001C330(arg0, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A20, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    func_8001C330(sp54, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, sp4C, sp50, 0);
+    func_8001C330((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
+                  0x2000 / var_s2, 0);
 
     gSPDisplayList(gDisplayListHead++, D_8006F498);
-
-    sp54 = arg3 - (var_s2 * 2);
-    sp50 = arg2 - (var_s3 * 2);
 
     if ((sp50 > 0) && (sp54 > 0)) {
         func_8001C604(arg0 + var_s3, arg1, sp50, var_s2, arg4, arg5, arg6, arg7);
@@ -493,9 +488,6 @@ void func_82201AC8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/37/fragment37/func_82201AC8.s")
-#endif
 
 void func_822022C8(s32 arg0) {
     func_82201AC8(0x38, 0x17C, 0x210, 0x3C, 0x1E, 0x1E, 0x82, 0x96);

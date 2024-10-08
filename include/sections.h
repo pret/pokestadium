@@ -464,6 +464,8 @@ extern u8 common_menu1_ui_ROM_START[];
 extern u8 common_menu1_ui_ROM_END[];
 extern u8 common_menu2_ui_ROM_START[];
 extern u8 common_menu2_ui_ROM_END[];
+extern u8 snap_mode_ui_ROM_START[];
+extern u8 snap_mode_ui_ROM_END[];
 extern u8 area_select_ui_ROM_START[];      // 4D1330
 extern u8 area_select_ui_ROM_END[];        // 4D1330
 extern u8 menu_select_ui_ROM_START[];      // 4EB0C0
@@ -518,6 +520,10 @@ extern u8 badge_ui_ROM_START[];
 extern u8 badge_ui_ROM_END[];
 extern u8 gym_leader_castle_ui_ROM_START[];
 extern u8 gym_leader_castle_ui_ROM_END[];
+extern u8 _70D3A0_ROM_START[];
+extern u8 _70D3A0_ROM_END[];
+extern u8 D_70110[];
+extern u8 D_70290[];
 
 extern u8 D_124570[];
 
