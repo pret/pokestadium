@@ -199,5 +199,10 @@ extern u32 D_304F120[];
 
 extern s32 D_800FC820;
 extern u8* D_800FF9C0;
+extern s32 D_80075BCC[];
+
+typedef struct unk_70D3A0 {
+    /* 0x00 */ char unk00[0x10];
+} unk_70D3A0; // size = 0x10
 
 #endif
