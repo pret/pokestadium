@@ -156,6 +156,7 @@ SPLAT           := $(PYTHON) -m splat split
 SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
 ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
+EXTRACT_ASSETS  := tools/extract_assets.sh
 
 IINC := -Iinclude -Isrc -Isrc/libnaudio -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
 IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
@@ -342,6 +343,7 @@ extract:
 	$(V)$(RM) -r asm/$(VERSION) assets/$(VERSION)
 	$(V)$(CAT) yamls/$(VERSION)/header.yaml yamls/$(VERSION)/rom.yaml > $(SPLAT_YAML)
 	$(V)$(SPLAT) $(SPLAT_FLAGS) $(SPLAT_YAML)
+	$(V)$(EXTRACT_ASSETS)
 
 lib: $(ULTRALIB_LIB)
 
