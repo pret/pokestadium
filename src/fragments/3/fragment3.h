@@ -150,7 +150,7 @@ extern s16 D_87906044;
 extern s16 D_87906046;
 extern s16 D_87906048;
 extern s16 D_8790604A;
-extern unk_D_86002F34_00C* D_87906050;
+
 extern unk_D_86002F34_00C* D_87906054;
 extern s16 D_87906060;
 extern s16 D_87906062;

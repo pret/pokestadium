@@ -372,7 +372,7 @@ s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, unk_D_86002F58_004
             sp18->unk_14 = 0x3C000;
             sp18->unk_18 = arg2;
 
-            if ((arg0->unk_24 != NULL) && (arg0->unk_24->unk_00 == arg1) && (arg0->unk_2C.raw == sp18->unk_18.raw)) {
+            if ((arg0->unk_24 != NULL) && (arg1 == *arg0->unk_24) && (arg0->unk_2C.raw == sp18->unk_18.raw)) {
                 osSendMesg(sp18->unk_04, sp18, 1);
             } else {
                 osSendMesg(&D_800ABE10.unk_9D0, sp18, 1);

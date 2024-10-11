@@ -507,7 +507,7 @@ void func_86806A50(void) {
     unk_D_868084D8* var_s0;
     unk_func_80011B94* temp_a1;
     unk_D_86808808* ptr;
-    Gfx* gfx = D_86807338;
+    Gfx* temp = D_86807338;
 
     D_868084D4 = 0.0f;
     D_86809A08 = 0;
@@ -529,7 +529,7 @@ void func_86806A50(void) {
     }
 
     for (i = 0, var_s0 = D_868084D8; i < 12; i++, var_s0++) {
-        var_s0->unk_40 = func_80011B10(temp_s2, NULL, 5, gfx, &D_8006F050, var_s0->unk_2C);
+        var_s0->unk_40 = func_80011B10(temp_s2, 0, 5, temp, &D_8006F050, var_s0->unk_2C);
         func_868061E8(0, var_s0, i, NULL);
         func_80012094(&D_800AC840, var_s0->unk_40);
     }

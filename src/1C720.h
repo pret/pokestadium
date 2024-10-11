@@ -52,7 +52,7 @@ void func_8001BE34(unk_D_86002F58_004_000* arg0, u8 arg1, u8 arg2, u8 arg3, u8 a
 void func_8001BE78(unk_D_86002F58_004_000* arg0, u8 arg1);
 void func_8001BE84(unk_D_86002F58_004_000* arg0, u8 arg1);
 unk_D_86002F58_004_000_00C_028* func_8001BE90(unk_D_86002F58_004_000* arg0, s32 arg1);
-unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* arg0, unk_func_8001BEE8* arg1);
+void func_8001BEE8(s32* arg0, unk_func_8001BEE8* arg1);
 void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2);
 void func_8001C07C(unk_func_8001C07C_arg0* arg0);
 void func_8001C198(unk_func_8001C248* arg0);
