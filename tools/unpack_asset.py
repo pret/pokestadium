@@ -7,6 +7,7 @@ from pathlib import Path
 import crunch64
 
 # Asset unpacker v0.1 (WIP)
+# usage: unpack_asset.py path/to/asset.bin [optional: path override]
 
 # Read a big endian 32-bit value from a bytearray file with a given offset.
 def read_32_be_value(file_arr, i):
@@ -37,7 +38,7 @@ file_header = bytearray(file.read(0x10))
 # TODO: Properly handle this
 if file_header[0] != 0x00 or file_header[1] != 0x00 or file_header[2] != 0x00 or file_header[4] != 0x00 or file_header[5] != 0x00 or file_header[6] != 0x00 or file_header[7] != 0x00:
     if extract_to == None:
-        file_path_to_write = assets_path + filename + "/0/file.bin"
+        file_path_to_write = assets_path + filename + "/0.bin"
     else:
         file_path_to_write = extract_to
     os.makedirs(os.path.dirname(file_path_to_write), exist_ok=True)
@@ -68,7 +69,7 @@ while file_num < file_count:
     # Seek to the file offset.
     file.seek(bin_offset, os.SEEK_SET)
     sub_file_bytes = bytearray(file.read(bin_size))
-    file_path_to_write = assets_path + filename + "/" + str(file_num) + "/file.bin"
+    file_path_to_write = assets_path + filename + "/" + str(file_num) + ".bin"
     #print("[DEBUG] Path to write:", file_path_to_write)
     os.makedirs(os.path.dirname(file_path_to_write), exist_ok=True)
     file_to_write = open(file_path_to_write, 'wb')
