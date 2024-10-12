@@ -11,7 +11,7 @@
 #include "src/memmap.h"
 #include "src/util.h"
 
-typedef void (*func_D_8006F0A4)(unk_D_86002F34_000* arg0);
+typedef void (*func_D_8006F0A4)(struct GraphNode* arg0);
 
 typedef struct unk_D_800AA8C8 {
     /* 0x0000 */ MtxF unk_0000[64];
@@ -380,9 +380,9 @@ void func_800131B4(unk_D_86002F34_00C_0CC* arg0, unk_D_86002F34_00C_040* arg1) {
     }
 }
 
-void func_80013330(unk_D_86002F34_000* arg0) {
-    unk_D_86002F34_000* temp_s2 = arg0->unk_0C;
-    unk_D_86002F34_000* var_s0 = temp_s2;
+void func_80013330(struct GraphNode* arg0) {
+    struct GraphNode* temp_s2 = arg0->unk_0C;
+    struct GraphNode* var_s0 = temp_s2;
 
     if (temp_s2 != NULL) {
         do {
@@ -398,9 +398,9 @@ void func_80013330(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_800133D8(unk_D_86002F34_000* arg0) {
+void func_800133D8(struct GraphNode* arg0) {
     UNUSED s32 pad;
-    unk_D_86002F34_000* temp_a1 = ((unk_D_86002F34*)arg0)->unk_18;
+    struct GraphNode* temp_a1 = ((unk_D_86002F34*)arg0)->unk_18;
 
     if ((temp_a1 != NULL) && (temp_a1->unk_01 & 1)) {
         D_800AA6C0 = 0;
@@ -413,7 +413,7 @@ void func_800133D8(unk_D_86002F34_000* arg0) {
     func_80013330(arg0);
 }
 
-void func_80013464(unk_D_86002F34_000* arg0) {
+void func_80013464(struct GraphNode* arg0) {
     UNUSED MtxF pad_mtx;
     unk_D_86002F34_00C* arg = (unk_D_86002F34_00C*)arg0;
     unk_D_86002F34_00C_040* temp_s2 = &arg->unk_40;
@@ -454,13 +454,13 @@ void func_80013464(unk_D_86002F34_000* arg0) {
     D_8006F088 = NULL;
 }
 
-void func_80013764(unk_D_86002F34_000* arg0) {
+void func_80013764(struct GraphNode* arg0) {
     D_8006F08C = arg0;
     func_80013330(arg0);
     D_8006F08C = NULL;
 }
 
-void func_8001378C(unk_D_86002F34_000* arg0) {
+void func_8001378C(struct GraphNode* arg0) {
     unk_D_86002F34_alt1* arg = (unk_D_86002F34_alt1*)arg0;
 
     if (arg->unk_00.unk_0C != NULL) {
@@ -494,7 +494,7 @@ void func_8001378C(unk_D_86002F34_000* arg0) {
     arg->unk_1A = D_8006F084;
 }
 
-void func_800138F0(unk_D_86002F34_000* arg0) {
+void func_800138F0(struct GraphNode* arg0) {
     unk_D_86002F34_00C* arg = (unk_D_86002F34_00C*)arg0;
 
     if ((D_8006F094 == NULL) && (arg->unk_00.unk_0C != NULL)) {
@@ -506,7 +506,7 @@ void func_800138F0(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_8001395C(unk_D_86002F34_000* arg0) {
+void func_8001395C(struct GraphNode* arg0) {
     if ((D_8006F094 == NULL) && (arg0->unk_0C != NULL)) {
         gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
         gSPMatrix(gDisplayListHead++, (u32)D_8006F088->unk_40.mtx & 0x1FFFFFFF,
@@ -516,7 +516,7 @@ void func_8001395C(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_800139E8(unk_D_86002F34_000* arg0) {
+void func_800139E8(struct GraphNode* arg0) {
     if ((D_8006F094 == NULL) && (arg0->unk_0C != NULL)) {
         gSPLookAt(gDisplayListHead++, (u32)&D_8006F088->unk_60.lookat->l & 0x1FFFFFFF);
 
@@ -531,7 +531,7 @@ void func_800139E8(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_80013AF8(unk_D_86002F34_000* arg0) {
+void func_80013AF8(struct GraphNode* arg0) {
     unk_D_86002F34_alt2* arg = (unk_D_86002F34_alt2*)arg0;
     unk_D_86002F34_00C_018* ptr = &D_8006F088->unk_18;
 
@@ -541,7 +541,7 @@ void func_80013AF8(unk_D_86002F34_000* arg0) {
     gDPSetCycleType(gDisplayListHead++, G_CYC_2CYCLE);
 }
 
-void func_80013B8C(UNUSED unk_D_86002F34_000* arg0) {
+void func_80013B8C(UNUSED struct GraphNode* arg0) {
     unk_D_86002F34_00C_018* ptr = &D_8006F088->unk_18;
 
     func_800067E4(&gDisplayListHead, ptr->x, ptr->y, ptr->width, ptr->height);
@@ -550,10 +550,10 @@ void func_80013B8C(UNUSED unk_D_86002F34_000* arg0) {
     gDPSetCycleType(gDisplayListHead++, G_CYC_2CYCLE);
 }
 
-void func_80013C14(UNUSED unk_D_86002F34_000* arg0) {
+void func_80013C14(UNUSED struct GraphNode* arg0) {
 }
 
-void func_80013C1C(unk_D_86002F34_000* arg0) {
+void func_80013C1C(struct GraphNode* arg0) {
     unk_D_86002F34_alt3* arg = (unk_D_86002F34_alt3*)arg0;
 
     D_8006F090->unk_1D = 1;
@@ -565,7 +565,7 @@ void func_80013C1C(unk_D_86002F34_000* arg0) {
 }
 
 #ifdef NON_MATCHING
-void func_80013D34(unk_D_86002F34_000* arg0) {
+void func_80013D34(struct GraphNode* arg0) {
     unk_D_86002F34_alt4* arg = (unk_D_86002F34_alt4*)arg0;
     Lights7* lights;
     unk_D_86002F34_alt1* new_var;
@@ -611,10 +611,10 @@ void func_80013D34(unk_D_86002F34_000* arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/12D80/func_80013D34.s")
 #endif
 
-void func_80013F7C(UNUSED unk_D_86002F34_000* arg0) {
+void func_80013F7C(UNUSED struct GraphNode* arg0) {
 }
 
-void func_80013F84(unk_D_86002F34_000* arg0) {
+void func_80013F84(struct GraphNode* arg0) {
     unk_D_86002F34_alt4* arg = (unk_D_86002F34_alt4*)arg0;
     s32 i;
     Lights7* lights;
@@ -640,7 +640,7 @@ void func_80013F84(unk_D_86002F34_000* arg0) {
     gSPLight(gDisplayListHead++, D_8006F090->lights, i + 1);
 }
 
-void func_80014124(unk_D_86002F34_000* arg0) {
+void func_80014124(struct GraphNode* arg0) {
     unk_D_86002F34_alt11* arg = (unk_D_86002F34_alt11*)arg0;
     MtxF* temp_v0 = &D_800AA8C8.unk_0000[D_800AA8C8.unk_10A0];
     Vec3f sp2C;
@@ -665,7 +665,7 @@ void func_80014124(unk_D_86002F34_000* arg0) {
     D_8006F0A0 = NULL;
 }
 
-void func_80014214(unk_D_86002F34_000* arg0) {
+void func_80014214(struct GraphNode* arg0) {
     unk_D_86002F34_alt3* arg = (unk_D_86002F34_alt3*)arg0;
     MtxF* mtx2 = &D_8006F088->unk_60.mtxf;
     f32 a = D_800AA8C8.unk_0000[D_800AA8C8.unk_10A0].mf[3][0];
@@ -678,10 +678,10 @@ void func_80014214(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_800142BC(unk_D_86002F34_000* arg0) {
+void func_800142BC(struct GraphNode* arg0) {
     unk_D_86002F34_alt3* arg = (unk_D_86002F34_alt3*)arg0;
     s32 i;
-    unk_D_86002F34_000* var_a1 = arg->unk_00.unk_0C;
+    struct GraphNode* var_a1 = arg->unk_00.unk_0C;
 
     if (var_a1 != NULL) {
         for (i = 0; i < arg->unk_1A; i++) {
@@ -694,7 +694,7 @@ void func_800142BC(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_80014334(unk_D_86002F34_000* arg0) {
+void func_80014334(struct GraphNode* arg0) {
     MtxF sp20;
     unk_D_86002F34_alt5* arg = (unk_D_86002F34_alt5*)arg0;
 
@@ -705,7 +705,7 @@ void func_80014334(unk_D_86002F34_000* arg0) {
     D_800AA8C8.unk_10A0--;
 }
 
-void func_80014384(unk_D_86002F34_000* arg0) {
+void func_80014384(struct GraphNode* arg0) {
     unk_D_86002F34_alt5* arg = (unk_D_86002F34_alt5*)arg0;
 
     func_80012344(&arg->unk_18);
@@ -714,7 +714,7 @@ void func_80014384(unk_D_86002F34_000* arg0) {
     D_800AA8C8.unk_10A0--;
 }
 
-void func_800143C0(unk_D_86002F34_000* arg0) {
+void func_800143C0(struct GraphNode* arg0) {
     Vec3s sp90;
     Vec3f sp84;
     Vec3f sp78;
@@ -766,7 +766,7 @@ void func_800143C0(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_80014624(unk_D_86002F34_000* arg0) {
+void func_80014624(struct GraphNode* arg0) {
     unk_D_86002F34_alt7* arg = (unk_D_86002F34_alt7*)arg0;
 
     if (arg->unk_18 != NULL) {
@@ -777,7 +777,7 @@ void func_80014624(unk_D_86002F34_000* arg0) {
     func_80013330(arg0);
 }
 
-void func_80014690(unk_D_86002F34_000* arg0) {
+void func_80014690(struct GraphNode* arg0) {
     MtxF sp38;
     Color_RGBA8_u32 sp34;
     unk_D_86002F58_004_000* arg = (unk_D_86002F58_004_000*)arg0;
@@ -829,7 +829,7 @@ void func_80014690(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_800148D8(unk_D_86002F34_000* arg0) {
+void func_800148D8(struct GraphNode* arg0) {
     unk_D_86002F34_alt8* arg = (unk_D_86002F34_alt8*)arg0;
 
     func_800122B4(&arg->unk_1C);
@@ -845,7 +845,7 @@ void func_800148D8(unk_D_86002F34_000* arg0) {
     D_800AA8C8.unk_10A0--;
 }
 
-void func_80014980(unk_D_86002F34_000* arg0) {
+void func_80014980(struct GraphNode* arg0) {
     MtxF sp30;
     unk_D_86002F34_alt9* arg = (unk_D_86002F34_alt9*)arg0;
 
@@ -866,7 +866,7 @@ void func_80014980(unk_D_86002F34_000* arg0) {
     D_800AA8C8.unk_10A0--;
 }
 
-void func_80014A60(unk_D_86002F34_000* arg0) {
+void func_80014A60(struct GraphNode* arg0) {
     unk_D_86002F34_alt9* arg = (unk_D_86002F34_alt9*)arg0;
 
     if ((arg->unk_18 != NULL) || (arg->unk_00.unk_10 != NULL)) {
@@ -879,7 +879,7 @@ void func_80014A60(unk_D_86002F34_000* arg0) {
     func_80013330(arg0);
 }
 
-void func_80014AEC(unk_D_86002F34_000* arg0) {
+void func_80014AEC(struct GraphNode* arg0) {
     Color_RGBA8_u32 sp44;
     unk_D_86002F34_alt10* arg = (unk_D_86002F34_alt10*)arg0;
     unk_D_86002F34_alt11_018* sp3C;
@@ -932,18 +932,18 @@ void func_80014CB8(s32 arg0) {
     }
 }
 
-void func_80014D24(unk_D_86002F34_000* arg0) {
+void func_80014D24(struct GraphNode* arg0) {
     unk_D_86002F34_alt3* arg = (unk_D_86002F34_alt3*)arg0;
 
     func_80014CB8(arg->unk_18);
     func_80013330(arg0);
 }
 
-void func_80014D50(unk_D_86002F34_000* arg0) {
+void func_80014D50(struct GraphNode* arg0) {
     func_80013330(arg0);
 }
 
-void func_80014D70(unk_D_86002F34_000* arg0) {
+void func_80014D70(struct GraphNode* arg0) {
     Vec3f sp9C;
     Vec3f sp90;
     Vec3f sp84;
@@ -1007,7 +1007,7 @@ void func_80014D70(unk_D_86002F34_000* arg0) {
     }
 }
 
-void func_80015094(unk_D_86002F34_000* arg0) {
+void func_80015094(struct GraphNode* arg0) {
     unk_D_86002F34_alt1* arg = (unk_D_86002F34_alt1*)arg0;
 
     if (arg0->unk_01 & 1) {
@@ -1032,9 +1032,9 @@ void func_80015094(unk_D_86002F34_000* arg0) {
     D_8006F080 = 0;
 }
 
-void func_80015220(unk_D_86002F34_000* arg0, s32 arg1) {
-    unk_D_86002F34_000* var_s1 = arg0;
-    unk_D_86002F34_000** var_s0;
+void func_80015220(struct GraphNode* arg0, s32 arg1) {
+    struct GraphNode* var_s1 = arg0;
+    struct GraphNode** var_s0;
 
     do {
         if (var_s1->unk_10 != NULL) {

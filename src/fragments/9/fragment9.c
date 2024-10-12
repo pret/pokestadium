@@ -2,7 +2,7 @@
 #include "include/libc/math.h"
 #include "src/12D80.h"
 #include "src/18140.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/19840.h"
 #include "src/1C720.h"
 #include "src/1CF30.h"
@@ -524,7 +524,7 @@ void func_86301234(void) {
     s32 i;
     MemoryBlock* temp_v0 = func_80002D10(main_pool_get_available(), 0);
 
-    D_86301714 = func_80018B70(temp_v0, &D_86301650);
+    D_86301714 = process_geo_layout(temp_v0, &D_86301650);
     func_80002D60(temp_v0);
     func_8001BB20();
     func_8001987C();

@@ -1,7 +1,7 @@
 #include "fragment14.h"
 #include "src/12D80.h"
 #include "src/17300.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/19840.h"
 #include "src/1C720.h"
 #include "src/4CBC0.h"
@@ -1650,7 +1650,7 @@ void func_86805858(s32 arg0) {
     D_86807550 = func_80019D18(0xA0);
 
     temp_v0 = func_80002D10(main_pool_get_available(), 0);
-    D_86808474 = (unk_D_86002F58_004_000_004*)func_80018B70(temp_v0, &D_86807078);
+    D_86808474 = (unk_D_86002F58_004_000_004*)process_geo_layout(temp_v0, &D_86807078);
     func_80002D60(temp_v0);
     D_8680847A = 0;
     D_8680847E = 4 - D_8780FA2C;

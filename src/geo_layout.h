@@ -5,7 +5,30 @@
 #include "src/memory.h"
 #include "src/11BA0.h"
 
-typedef void (*func_D_8006F2B0)(void);
+#define GEO_CMD_FLAGS_RESET 0
+#define GEO_CMD_FLAGS_SET   1
+#define GEO_CMD_FLAGS_CLEAR 2
+
+#define CMD_SIZE_SHIFT (sizeof(void *) >> 3)
+#define CMD_PROCESS_OFFSET(offset) (((offset) & 3) | (((offset) & ~3) << CMD_SIZE_SHIFT))
+
+#define cur_geo_cmd_u8(offset) \
+    (gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
+
+#define cur_geo_cmd_s16(offset) \
+    (*(s16 *) &gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
+
+#define cur_geo_cmd_s32(offset) \
+    (*(s32 *) &gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
+
+#define cur_geo_cmd_u32(offset) \
+    (*(u32 *) &gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
+
+#define cur_geo_cmd_ptr(offset) \
+    (*(void **) &gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
+
+
+typedef void (*GeoLayoutCommandProc)(void);
 
 typedef struct unk_D_800ABE00_cmd0 {
     /* 0x00 */ u8 cmd;
@@ -59,7 +82,7 @@ typedef struct unk_D_800ABE00_cmd9 {
 
 typedef struct unk_D_800ABE00_cmdA {
     /* 0x00 */ u8 cmd;
-    /* 0x04 */ unk_D_86002F34_000* unk_04;
+    /* 0x04 */ struct GraphNode* unk_04;
 } unk_D_800ABE00_cmdA; // size = 0x8
 
 typedef struct unk_D_800ABE00_cmdB {
@@ -283,13 +306,13 @@ typedef struct unk_D_800ABE00_cmd26 {
     /* 0x13 */ u8 a;
 } unk_D_800ABE00_cmd26; // size = 0x14
 
-void func_80017880(void); // cmd  0
-void func_80017914(void); // cmd  1
-void func_8001799C(void); // cmd  2
-void func_800179C8(void); // cmd  3
-void func_80017A1C(void); // cmd  4
-void func_80017A54(void); // cmd  5
-void func_80017A98(void); // cmd  6
+void geo_layout_cmd_branch_and_link(void); // cmd  0
+void geo_layout_cmd_end(void); // cmd  1
+void geo_layout_cmd_jump(void); // cmd  2
+void geo_layout_cmd_branch(void); // cmd  3
+void geo_layout_cmd_return(void); // cmd  4
+void geo_layout_cmd_open_node(void); // cmd  5
+void geo_layout_cmd_close_node(void); // cmd  6
 void func_80017B28(void); // cmd  7
 void func_80017B60(void); // cmd  8
 void func_80017BBC(void); // cmd  9
@@ -322,6 +345,6 @@ void func_800189B8(void); // cmd 35
 void func_80018A40(void); // cmd 36
 void func_80018A8C(void); // cmd 37
 void func_80018AD0(void); // cmd 38
-unk_D_86002F34_000* func_80018B70(MemoryBlock*, void*);
+struct GraphNode* process_geo_layout(MemoryBlock*, void*);
 
 #endif // _18480_H_

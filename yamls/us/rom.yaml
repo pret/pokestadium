@@ -59,7 +59,7 @@
     - [0x12D80, c] # 
     - [0x17300, c] #
     - [0x18140, c] # dp model animations
-    - [0x18480, c] # dp model animations
+    - [0x18480, c, geo_layout] # dp model animations
     - [0x19840, c] # alternative pkm textures
     - [0x1AB70, c] # vs screen code
     - [0x1C720, c] #

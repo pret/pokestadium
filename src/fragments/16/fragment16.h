@@ -440,7 +440,7 @@ extern unk_D_86002F34_00C* D_86A06254;
 extern s16 D_86A06258;
 extern s16* D_86A0625C;
 
-s32 func_86A00020(s32 arg0, unk_D_86002F34_000* arg1);
+s32 func_86A00020(s32 arg0, struct GraphNode* arg1);
 void func_86A013C8(u8 arg0, u8 arg1, unk_D_86A03014* arg2);
 void func_86A01490(void);
 void func_86A014F0(void);
