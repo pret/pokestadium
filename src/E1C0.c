@@ -64,7 +64,7 @@ void func_8000D738(UnkInputStruct8000D738* arg0) {
     D_800AA664 = main_pool_alloc(0x21E0, 0);
 
     FRAGMENT_LOAD(fragment1);
-    temp_v0 = ASSET_LOAD2(func_800044F4, fonts, 1, 1);
+    temp_v0 = ASSET_LOAD2(fonts, 1, 1);
 
     D_800AA660->unk_21FC = func_8000484C(temp_v0, 0);
     D_800AA660->unk_2200 = func_8000484C(temp_v0, 1);

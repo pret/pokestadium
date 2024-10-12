@@ -46,7 +46,7 @@
 #define CLAMP_MAX(x, max) ((x) > (max) ? (max) : (x))
 #define CLAMP_MIN(x, min) ((x) < (min) ? (min) : (x))
 
-#define ROUND_MAX(x) (((x) > 0.0f ? 0.5f : -0.5f) + (x))
+#define ROUND_MAX(x) ((x) + ((x) > 0.0f ? 0.5f : -0.5f))
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 #define ABS_ALT(x) ((x) >= 0 ? (x) : -(x))
@@ -72,7 +72,7 @@
     func_80004258(ASSET_ID(vram), rom##_ROM_START, rom##_ROM_END, arg0) \
 )
 
-#define ASSET_LOAD2(vram, rom, arg0, arg1) (\
+#define ASSET_LOAD2(rom, arg0, arg1) (\
     func_800044F4(rom##_ROM_START, rom##_ROM_END, arg0, arg1) \
 )
 #endif
