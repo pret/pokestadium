@@ -1,3 +1,5 @@
-#include "global.h"
+#include "fragment16.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/16/fragment16_15A2A0/func_86A018C0.s")
+u16 func_86A018C0(void) {
+    return 0xBB;
+}

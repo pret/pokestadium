@@ -31,7 +31,7 @@ void func_80010FDC(unk_D_86002F34_000* arg0, func_D_86002F34_000_010 arg1, unk_D
     }
 }
 
-unk_D_86002F34_000* func_8001103C(MainPoolState* arg0, void* arg1) {
+unk_D_86002F34_000* func_8001103C(MainPoolState* arg0, unk_D_86002F34_000* arg1) {
     if (arg0 != NULL) {
         arg1 = func_80002DCC(arg0, sizeof(unk_D_86002F34_000), 4);
     }
