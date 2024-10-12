@@ -1,7 +1,7 @@
 #include "fragment16.h"
 #include "src/11BA0.h"
 #include "src/12D80.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/1C720.h"
 #include "src/1CF30.h"
 #include "src/20330.h"
@@ -25,14 +25,14 @@ typedef struct unk_D_86A02700 {
 } unk_D_86A02700; // size = 0x10
 
 static unk_D_8690A610 D_86A06170;
-static unk_D_86002F34_000 D_86A06190;
-static unk_D_86002F34_000 D_86A061A8;
-static unk_D_86002F34_000 D_86A061C0;
+static struct GraphNode D_86A06190;
+static struct GraphNode D_86A061A8;
+static struct GraphNode D_86A061C0;
 static s8 D_86A061D8;
 static u8 D_86A061D9;
 static BinArchive* D_86A061DC;
 static Color_RGBA8_u32 D_86A061E0;
-static unk_D_86002F34_000* D_86A061E4;
+static struct GraphNode* D_86A061E4;
 static unk_D_86002F34_00C* D_86A061E8;
 static s16 D_86A061EC;
 static s16 D_86A061EE;
@@ -120,7 +120,7 @@ u32 D_86A025D0[] = {
     0x06000000, 0x01000000,
 };
 
-s32 func_86A00020(s32 arg0, unk_D_86002F34_000* arg1) {
+s32 func_86A00020(s32 arg0, struct GraphNode* arg1) {
     unk_D_86002F58_004_000* ptr = (unk_D_86002F58_004_000*)arg1;
 
     if (arg0 == 2) {
@@ -166,17 +166,17 @@ void func_86A000B4(s8 arg0, u8 arg1) {
 
     temp_v0 = sp28(0, 0);
     if (temp_v0 != NULL) {
-        func_80012094(&D_86A06190, func_80018B70(sp2C, temp_v0));
+        func_80012094(&D_86A06190, process_geo_layout(sp2C, temp_v0));
     }
 
     temp_v0 = sp28(1, 0);
     if (temp_v0 != NULL) {
-        func_80012094(&D_86A061A8, func_80018B70(sp2C, temp_v0));
+        func_80012094(&D_86A061A8, process_geo_layout(sp2C, temp_v0));
     }
 
     temp_v0 = sp28(3, 0);
     if (temp_v0 != NULL) {
-        func_80012094(&D_86A061C0, func_80018B70(sp2C, temp_v0));
+        func_80012094(&D_86A061C0, process_geo_layout(sp2C, temp_v0));
     }
 
     D_86A025C8 = sp28(2, 0);
@@ -1448,7 +1448,7 @@ void func_86A00DAC(s32 arg0) {
     func_8001103C(NULL, &D_86A061C0);
     func_86A0003C(0xFF, 0xFF, 0xFF);
     sp2C = func_80002D10(main_pool_get_available(), 0);
-    D_86A061E4 = func_80018B70(sp2C, &D_86A025D0);
+    D_86A061E4 = process_geo_layout(sp2C, &D_86A025D0);
     func_80002D60(sp2C);
     func_8001BB20();
     func_86A00D00();

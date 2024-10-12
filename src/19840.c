@@ -1,5 +1,5 @@
 #include "19840.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/dma.h"
 #include "src/memmap.h"
 #include "src/memory.h"
@@ -203,7 +203,7 @@ s32 func_80019328(MemoryBlock* arg0, Fragment* arg1, arg1_func_80010CA8 arg2) {
     temp_v0->unk_14 = arg1;
 
     for (i = 0; i < temp_v0->unk_03; i++) {
-        temp_v0_2 = func_80018B70(arg0, temp_v0->unk_08[i]);
+        temp_v0_2 = process_geo_layout(arg0, temp_v0->unk_08[i]);
 
         if (temp_v0_2->unk_00.unk_00 == 0xE) {
             temp_v0_2->unk_28 = arg1;
@@ -220,7 +220,7 @@ s32 func_80019328(MemoryBlock* arg0, Fragment* arg1, arg1_func_80010CA8 arg2) {
 void func_80019420(MemoryBlock* arg0, arg1_func_80019420* arg1) {
     while (arg1->unk_00) {
         if (arg1->unk_00 == 3) {
-            arg1->unk_04 = func_80018B70(arg0, arg1->unk_04);
+            arg1->unk_04 = process_geo_layout(arg0, arg1->unk_04);
         }
 
         arg1++;

@@ -8,7 +8,7 @@
 #include "src/fragments/2/fragment2.h"
 #include "src/fragments/4/fragment4.h"
 #include "src/fragments/6/fragment6.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/19840.h"
 #include "src/1C720.h"
 #include "src/32D10.h"
@@ -1125,7 +1125,7 @@ void func_86002440(void) {
     MemoryBlock* temp_v0;
 
     temp_v0 = (MemoryBlock*)func_80002D10(main_pool_get_available(), 0);
-    D_86002F34 = (unk_D_86002F34*)func_80018B70(temp_v0, D_86002B18);
+    D_86002F34 = (unk_D_86002F34*)process_geo_layout(temp_v0, D_86002B18);
     func_80002D60(temp_v0);
     func_8001BB20();
     func_8001987C();

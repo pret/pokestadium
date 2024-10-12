@@ -1,6 +1,6 @@
 #include "fragment14.h"
 #include "src/12D80.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/19840.h"
 #include "src/1C720.h"
 #include "src/1CF30.h"
@@ -705,7 +705,7 @@ void func_86801D48(void) {
     MemoryBlock* sp18;
 
     sp18 = func_80002D10(main_pool_get_available(), 0);
-    D_86807500 = (unk_D_86002F34_000*)func_80018B70(sp18, &D_86806CD0);
+    D_86807500 = (struct GraphNode*)process_geo_layout(sp18, &D_86806CD0);
 
     func_80002D60(sp18);
     func_8001BB20();
