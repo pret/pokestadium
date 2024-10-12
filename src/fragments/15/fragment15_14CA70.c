@@ -1147,7 +1147,7 @@ s32 func_86902098(s32 arg0, UNUSED s32 arg1) {
     func_80028AFC(2);
     func_80027FA0(&D_8690B378, 0);
 
-    D_8690A698 = ASSET_LOAD2(_5C7A70, stadium_models, 1, 1);
+    D_8690A698 = ASSET_LOAD2(stadium_models, 1, 1);
     func_8002D510();
     D_8690A678 = func_8002D5AC(0x2B);
     func_86902004(arg0);

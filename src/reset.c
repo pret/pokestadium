@@ -5,7 +5,7 @@
 // this file handles the soft reset effect.
 typedef struct UnkStruct800A6D20 {
     OSThread thread;
-    char filler1B0[0x5E0 - 0x1B0];
+    char filler1B0[0x430];
     u32 unk5E0;
 } UnkStruct800A6D20;
 
