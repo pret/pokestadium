@@ -785,7 +785,7 @@ void func_82202B60(void) {
 }
 
 void func_82202CB8(void) {
-    D_822030F4 = ASSET_LOAD2(backgrounds, backgrounds, 1, 1);
+    D_822030F4 = ASSET_LOAD2(backgrounds, 1, 1);
 
     if (D_822031E8.unk_00 == 2) {
         if (D_800AE540.unk_11F2 == 0) {

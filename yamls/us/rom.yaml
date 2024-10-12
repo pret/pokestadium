@@ -956,10 +956,12 @@
     - [0x15A2A0, c,      fragments/16/fragment16_15A2A0]
     - [0x15A2B0, c,      fragments/16/fragment16_15A2B0]
     - [0x15AD80, c,      fragments/16/fragment16_15AD80]
-    - [0x15AF80, data,   fragments/16/fragment16_data]
-    - [0x15EB20, rodata, fragments/16/fragment16_rodata]
+    - [0x15AF80, .data,   fragments/16/fragment16_158A00]
+    - [0x15BB50, .data,   fragments/16/fragment16_15A2B0]
+    - [0x15E530, .data,   fragments/16/fragment16_15AD80]
+    - [0x15EB20, .rodata, fragments/16/fragment16_15A2B0]
 
-    - {vram: 0x86A06170, type:  bss, name: fragments/16/fragment16_bss}
+    - {vram: 0x86A06170, type:  .bss, name: fragments/16/fragment16_158A00}
 
   - name: fragment16_relocs
     type: code

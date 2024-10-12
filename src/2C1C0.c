@@ -367,8 +367,7 @@ typedef struct unk_func_8002BFC4_004 {
     /* 0x034 */ u16 unk_34;
     /* 0x036 */ u16 unk_36;
     /* 0x038 */ unk_func_80026268_arg0 unk_38[1];
-    /* 0x08C */
-} unk_func_8002BFC4_004;
+} unk_func_8002BFC4_004; // size >= 0x8C
 
 typedef struct unk_func_8002BFC4 {
     /* 0x000 */ s32 unk_00;

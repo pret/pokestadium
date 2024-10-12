@@ -26,7 +26,7 @@ typedef struct {
 } block_param_form; // size = 0x10
 
 typedef union {
-    /* 0x00 */ struct {
+    struct {
         /* 0x00 */ u32 country;
         /* 0x04 */ u8 fmt_type;
         /* 0x05 */ u8 disk_type;
