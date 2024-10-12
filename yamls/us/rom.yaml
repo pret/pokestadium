@@ -2499,7 +2499,7 @@
   # ------------------------------------------------
 
   # Seems to be the portion(s) of the ROM(s) used in GB Tower mode.
-  - name: late_assets_1
+  - name: gb_tower_roms
     type: code
     bss_size: 0x0
     start: 0x7C0000
@@ -2507,70 +2507,70 @@
     ld_align_segment_start: 0x7C0000
     subalign: 4
     subsegments: # unaligned starts
-    - [0x7C0000, bin]
-    - [0x7C18F8, bin]
-    - [0x7C3398, bin]
-    - [0x7C4E14, bin]
-    - [0x7C6854, bin]
-    - [0x7C8154, bin]
-    - [0x7C9BA8, bin]
-    - [0x7CB654, bin]
-    - [0x7CD0D0, bin]
-    - [0x7CD3D4, bin]
-    - [0x7CD938, bin]
-    - [0x7CFFCC, bin]
-    - [0x7D1EF4, bin]
-    - [0x7D3CAC, bin]
-    - [0x7D56D8, bin]
-    - [0x7D79AC, bin]
-    - [0x7D9718, bin]
-    - [0x7DB5C0, bin]
-    - [0x7DD2F8, bin]
-    - [0x7DEF80, bin]
-    - [0x7E0894, bin]
-    - [0x7E2424, bin]
-    - [0x7E495C, bin]
-    - [0x7E6D4C, bin]
-    - [0x7E8FD0, bin]
-    - [0x7EAB78, bin]
-    - [0x7ED0E8, bin]
-    - [0x7EED64, bin]
-    - [0x7F118C, bin]
-    - [0x7F2A78, bin]
-    - [0x7F4774, bin]
-    - [0x7F6ABC, bin]
-    - [0x7F8E44, bin]
-    - [0x7FB188, bin]
-    - [0x7FD23C, bin]
-    - [0x7FF56C, bin]
-    - [0x8018C0, bin]
-    - [0x803BD0, bin]
-    - [0x805AE0, bin]
-    - [0x807C74, bin]
-    - [0x808378, bin]
-    - [0x809118, bin]
-    - [0x80B0DC, bin]
-    - [0x80C444, bin]
-    - [0x80E1DC, bin]
-    - [0x80F368, bin]
-    - [0x810FBC, bin]
-    - [0x812BA8, bin]
-    - [0x81491C, bin]
-    - [0x816B90, bin]
-    - [0x818C64, bin]
-    - [0x81AA20, bin]
-    - [0x81CB8C, bin] # end of Yay0 files
+    - [0x7C0000, bin, rom_part_0]
+    - [0x7C18F8, bin, rom_part_1]
+    - [0x7C3398, bin, rom_part_2]
+    - [0x7C4E14, bin, rom_part_3]
+    - [0x7C6854, bin, rom_part_4]
+    - [0x7C8154, bin, rom_part_5]
+    - [0x7C9BA8, bin, rom_part_6]
+    - [0x7CB654, bin, rom_part_7]
+    - [0x7CD0D0, bin, rom_part_8]
+    - [0x7CD3D4, bin, rom_part_9]
+    - [0x7CD938, bin, rom_part_10]
+    - [0x7CFFCC, bin, rom_part_11]
+    - [0x7D1EF4, bin, rom_part_12]
+    - [0x7D3CAC, bin, rom_part_13]
+    - [0x7D56D8, bin, rom_part_14]
+    - [0x7D79AC, bin, rom_part_15]
+    - [0x7D9718, bin, rom_part_16]
+    - [0x7DB5C0, bin, rom_part_17]
+    - [0x7DD2F8, bin, rom_part_18]
+    - [0x7DEF80, bin, rom_part_19]
+    - [0x7E0894, bin, rom_part_20]
+    - [0x7E2424, bin, rom_part_21]
+    - [0x7E495C, bin, rom_part_22]
+    - [0x7E6D4C, bin, rom_part_23]
+    - [0x7E8FD0, bin, rom_part_24]
+    - [0x7EAB78, bin, rom_part_25]
+    - [0x7ED0E8, bin, rom_part_26]
+    - [0x7EED64, bin, rom_part_27]
+    - [0x7F118C, bin, rom_part_28]
+    - [0x7F2A78, bin, rom_part_29]
+    - [0x7F4774, bin, rom_part_30]
+    - [0x7F6ABC, bin, rom_part_31]
+    - [0x7F8E44, bin, rom_part_32]
+    - [0x7FB188, bin, rom_part_33]
+    - [0x7FD23C, bin, rom_part_34]
+    - [0x7FF56C, bin, rom_part_35]
+    - [0x8018C0, bin, rom_part_36]
+    - [0x803BD0, bin, rom_part_37]
+    - [0x805AE0, bin, rom_part_38]
+    - [0x807C74, bin, rom_part_39]
+    - [0x808378, bin, rom_part_40]
+    - [0x809118, bin, rom_part_41]
+    - [0x80B0DC, bin, rom_part_42]
+    - [0x80C444, bin, rom_part_43]
+    - [0x80E1DC, bin, rom_part_44]
+    - [0x80F368, bin, rom_part_45]
+    - [0x810FBC, bin, rom_part_46]
+    - [0x812BA8, bin, rom_part_47]
+    - [0x81491C, bin, rom_part_48]
+    - [0x816B90, bin, rom_part_49]
+    - [0x818C64, bin, rom_part_50]
+    - [0x81AA20, bin, rom_part_51]
+    - [0x81CB8C, bin, rom_part_52] # end of Yay0 files
     - [0x81EC28]
 
-  # multi bin asset array of 152 uncompressed icons of the pokemon.
-  - name: late_assets_2
+  # multi bin asset array of 152 uncompressed icons of the pokemon (last ID is Substitute Doll).
+  - name: pokemon_icons
     type: code
     bss_size: 0x0
     start: 0x820000
     vram: 0x8FD00000 # unknown vram. Another unused one? Might be 8FD00000?
     ld_align_segment_start: 0x820000
     subsegments:
-    - [0x820000, bin]
+    - [0x820000, bin, pokemon_icons]
 
   - name: late_assets_3
     type: code

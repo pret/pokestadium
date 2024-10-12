@@ -18,6 +18,10 @@ def read_32_be_value(file_arr, i):
 # --------------------------
 
 assets_path = "assets/us/"
+    
+extract_to = None
+if len(sys.argv) == 3:
+    extract_to = sys.argv[2]
 
 filepath = Path(sys.argv[1])
 filename = os.path.splitext(os.path.basename(filepath))[0]
@@ -32,7 +36,10 @@ file_header = bytearray(file.read(0x10))
 # For some reason, stadium_models.bin breaks this pattern and uses this for something. (HACK: Workaround by just not checking the 4th byte.)
 # TODO: Properly handle this
 if file_header[0] != 0x00 or file_header[1] != 0x00 or file_header[2] != 0x00 or file_header[4] != 0x00 or file_header[5] != 0x00 or file_header[6] != 0x00 or file_header[7] != 0x00:
-    file_path_to_write = assets_path + filename + "/0/file.bin"
+    if extract_to == None:
+        file_path_to_write = assets_path + filename + "/0/file.bin"
+    else:
+        file_path_to_write = extract_to
     os.makedirs(os.path.dirname(file_path_to_write), exist_ok=True)
     with open(file_path_to_write, 'wb') as f:
         fin = open(filepath, 'rb')

@@ -16,5 +16,3 @@ decompressed = crunch64.yay0.decompress(filebytes)
 
 fileout = Path(sys.argv[2])
 fileout.write_bytes(decompressed)
-
-print("Yay0 decompressed")
