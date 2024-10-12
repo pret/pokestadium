@@ -2,7 +2,7 @@
 #include "src/12D80.h"
 #include "src/17300.h"
 #include "src/18140.h"
-#include "src/18480.h"
+#include "src/geo_layout.h"
 #include "src/19840.h"
 #include "src/1C720.h"
 #include "src/1CF30.h"
@@ -25,7 +25,7 @@ static u32 D_86600850[] = {
 };
 
 static unk_D_86002F30* D_86600940;
-static unk_D_86002F34_000* D_86600944;
+static struct GraphNode* D_86600944;
 static unk_D_86002F34_00C* D_86600948;
 static unk_D_86002F58_004_000 D_86600950;
 static s16 D_86600AB8;
@@ -202,7 +202,7 @@ void func_866005B8(void) {
 void func_86600658(void) {
     MemoryBlock* sp1C = func_80002D10(main_pool_get_available(), 0);
 
-    D_86600944 = func_80018B70(sp1C, &D_86600850);
+    D_86600944 = process_geo_layout(sp1C, &D_86600850);
     func_80002D60(sp1C);
     func_8001BB20();
     func_8001BB58(&D_86600950);

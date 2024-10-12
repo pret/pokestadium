@@ -3,7 +3,7 @@
 #include "F420.h"
 #include "util.h"
 
-void func_80010FA0(unk_D_86002F34_000* arg0, u8 arg1) {
+void func_80010FA0(struct GraphNode* arg0, u8 arg1) {
     if (arg0 != NULL) {
         arg0->unk_00 = arg1;
         arg0->unk_01 = 0x11;
@@ -17,7 +17,7 @@ void func_80010FA0(unk_D_86002F34_000* arg0, u8 arg1) {
     }
 }
 
-void func_80010FDC(unk_D_86002F34_000* arg0, func_D_86002F34_000_010 arg1, unk_D_86002F34_000_014* arg2) {
+void func_80010FDC(struct GraphNode* arg0, func_D_86002F34_000_010 arg1, unk_D_86002F34_000_014* arg2) {
     if (arg1 != NULL) {
         arg1 = Util_ConvertAddrToVirtAddr(arg1);
     }
@@ -31,9 +31,9 @@ void func_80010FDC(unk_D_86002F34_000* arg0, func_D_86002F34_000_010 arg1, unk_D
     }
 }
 
-unk_D_86002F34_000* func_8001103C(MainPoolState* arg0, unk_D_86002F34_000* arg1) {
+struct GraphNode* func_8001103C(MainPoolState* arg0, struct GraphNode* arg1) {
     if (arg0 != NULL) {
-        arg1 = func_80002DCC(arg0, sizeof(unk_D_86002F34_000), 4);
+        arg1 = func_80002DCC(arg0, sizeof(struct GraphNode), 4);
     }
 
     if (arg1 != NULL) {
@@ -43,7 +43,7 @@ unk_D_86002F34_000* func_8001103C(MainPoolState* arg0, unk_D_86002F34_000* arg1)
     return arg1;
 }
 
-unk_D_86002F34_alt2* func_80011088(MainPoolState* arg0, unk_D_86002F34_alt2* arg1, unk_D_86002F34_000* arg2) {
+unk_D_86002F34_alt2* func_80011088(MainPoolState* arg0, unk_D_86002F34_alt2* arg1, struct GraphNode* arg2) {
     if (arg0 != NULL) {
         arg1 = func_80002DCC(arg0, sizeof(unk_D_86002F34_alt2), 4);
     }
@@ -529,9 +529,9 @@ void func_80011FC8(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80012044.s")
 
-void func_80012094(unk_D_86002F34_000* arg0, unk_D_86002F34_000* arg1) {
-    unk_D_86002F34_000* temp_v0;
-    unk_D_86002F34_000* temp_v1;
+void func_80012094(struct GraphNode* arg0, struct GraphNode* arg1) {
+    struct GraphNode* temp_v0;
+    struct GraphNode* temp_v1;
 
     if ((arg0 != NULL) && (arg1 != NULL)) {
         temp_v0 = arg0->unk_0C;
