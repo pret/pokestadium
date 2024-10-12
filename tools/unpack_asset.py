@@ -29,8 +29,10 @@ file_header = bytearray(file.read(0x10))
 #print("[DEBUG] File name:", filename)
 
 # Magic check for multi asset bin. If no match, treat as a single asset bin, and just copy it to the expected folder.
-if file_header[0] != 0x00 or file_header[1] != 0x00 or file_header[2] != 0x00 or file_header[3] != 0x00 or file_header[4] != 0x00 or file_header[5] != 0x00 or file_header[6] != 0x00 or file_header[7] != 0x00:
-    file_path_to_write = assets_path + filename + "/0/0.bin"
+# For some reason, stadium_models.bin breaks this pattern and uses this for something. (HACK: Workaround by just not checking the 4th byte.)
+# TODO: Properly handle this
+if file_header[0] != 0x00 or file_header[1] != 0x00 or file_header[2] != 0x00 or file_header[4] != 0x00 or file_header[5] != 0x00 or file_header[6] != 0x00 or file_header[7] != 0x00:
+    file_path_to_write = assets_path + filename + "/0/file.bin"
     os.makedirs(os.path.dirname(file_path_to_write), exist_ok=True)
     with open(file_path_to_write, 'wb') as f:
         fin = open(filepath, 'rb')
@@ -59,7 +61,7 @@ while file_num < file_count:
     # Seek to the file offset.
     file.seek(bin_offset, os.SEEK_SET)
     sub_file_bytes = bytearray(file.read(bin_size))
-    file_path_to_write = assets_path + filename + "/" + str(file_num) + "/" + str(file_num) + ".bin"
+    file_path_to_write = assets_path + filename + "/" + str(file_num) + "/file.bin"
     #print("[DEBUG] Path to write:", file_path_to_write)
     os.makedirs(os.path.dirname(file_path_to_write), exist_ok=True)
     file_to_write = open(file_path_to_write, 'wb')

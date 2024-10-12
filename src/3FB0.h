@@ -23,8 +23,8 @@ typedef struct PERSSZP {
 
 typedef struct PRESJPEG {
     /* 0x00 */ char magic[0x8]; // PRESJPEG
-    /* 0x08 */ u32 unk_08;
-    /* 0x0C */ u32 unk_0C;
+    /* 0x08 */ u32 unk_08; // header size? always 0x10
+    /* 0x0C */ u32 unk_0C; 
 } PRESJPEG; // size = 0x10
 
 typedef struct Yay0 {
