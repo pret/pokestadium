@@ -2572,6 +2572,7 @@
     subsegments:
     - [0x820000, bin, pokemon_icons]
 
+  # Trainer data
   - name: late_assets_3
     type: code
     bss_size: 0x0
@@ -2581,6 +2582,7 @@
     subsegments:
     - [0x898000, bin]
 
+  # move animation gfx data?
   - name: late_assets_4
     type: code
     bss_size: 0x0
@@ -2590,15 +2592,16 @@
     subsegments:
     - [0x8CC000, bin]
 
-  - name: late_assets_5
+  - name: pokemon_models
     type: code
     bss_size: 0x0
     start: 0x920000
     vram: 0x90000000
     ld_align_segment_start: 0x920000
     subsegments:
-    - [0x920000, bin]
+    - [0x920000, bin, pokemon_models]
     
+  # sound data?
   - name: late_assets_6
     type: code
     bss_size: 0x0
