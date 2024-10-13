@@ -342,11 +342,6 @@ typedef struct unk_D_86002F34_alt12 {
     /* 0x1E */ s16 unk_1E;
 } unk_D_86002F34_alt12; // size = 0x20
 
-/** A node that allows an object to specify a different culling radius than the
- *  default one of 300. For this to work, it needs to be a direct child of the
- *  object node. Used for very large objects, such as shock wave rings that Bowser
- *  creates, tornadoes, the big eel.
- */
 typedef struct GraphNodeCullingRadius {
     /* 0x00 */ struct GraphNode node;
     /* 0x18 */ s16 cullingRadius; // specifies the 'sphere radius' for purposes of frustum culling
