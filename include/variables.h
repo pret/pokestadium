@@ -202,7 +202,14 @@ extern u8* D_800FF9C0;
 extern s32 D_80075BCC[];
 
 typedef struct unk_70D3A0 {
-    /* 0x00 */ char unk00[0x10];
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
 } unk_70D3A0; // size = 0x10
+
+typedef struct unk_D_70B10 {
+    /* 0x00 */ char unk00[0x20];
+} unk_D_70B10; // size = 0x20
 
 #endif

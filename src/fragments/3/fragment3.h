@@ -264,6 +264,13 @@ void func_87903358(s16 arg0, s16 arg1);
 void func_879033FC(unk_func_8790002C* arg0);
 void func_8790354C(void);
 
-
+void func_87903600(void);
+void func_879036B4(unk_func_8790002C* arg0);
+void func_8790370C(void);
+void func_879037D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6);
+void func_87903838(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6);
+void func_879038AC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6);
+Gfx* func_87903920(Gfx* arg0, arg1_func_87903D64_014* arg1);
+void func_87903D64(s32 arg0, arg1_func_87903D64* arg1);
 
 #endif // _FRAGMENT3_H_

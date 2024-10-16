@@ -18,8 +18,8 @@ typedef struct unk_D_83402EE0_070 {
 } unk_D_83402EE0_070; // size = 0x1A
 
 void func_8002FA40(void);
-void func_8003107C(unk_D_83402EE0_070*, unk_func_8001BEE8*);
-void func_80031140(unk_func_8001BEE8*, unk_D_83407AC8*);
+void func_8003107C(unk_D_83402EE0_070*, unk_func_80026268_arg0*);
+void func_80031140(unk_func_80026268_arg0*, unk_D_83407AC8*);
 f32 func_80031A6C(f32);
 void func_80031EF4(MtxF*, MtxF*);
 void func_80032034(MtxF* arg0, Vec3f* arg1);

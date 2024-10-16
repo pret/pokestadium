@@ -7,6 +7,8 @@
 #define MEMORY_POOL_LEFT  0
 #define MEMORY_POOL_RIGHT 1
 
+struct MainPoolBlock;
+
 typedef void (*AllocateFunc)(struct MainPoolBlock*, u32);
 
 typedef struct MainPoolBlock {

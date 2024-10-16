@@ -417,7 +417,7 @@ unk_func_80011B94* func_80011B94(MainPoolState* arg0, unk_func_80011B94* arg1, s
     return arg1;
 }
 
-unk_D_86002F34_alt10* func_80011BF4(MainPoolState* arg0, unk_D_86002F34_alt10* arg1, s16 arg2, s16 arg3, s32 arg4,
+unk_D_86002F34_alt10* func_80011BF4(MainPoolState* arg0, unk_D_86002F34_alt10* arg1, s16 arg2, s16 arg3, Gfx* arg4,
                                     s16 arg5, s16 arg6, u8 r, u8 g, u8 b, u8 a) {
     if (arg0 != NULL) {
         arg1 = func_80002DCC(arg0, sizeof(unk_D_86002F34_alt10), 4);
