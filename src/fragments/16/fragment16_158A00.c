@@ -44,7 +44,7 @@ u8 D_86A06210;
 u8 D_86A06211;
 u8 D_86A06212;
 unk_D_86A03014* D_86A06214;
-char* D_86A06218;
+char** D_86A06218;
 u32 D_86A0621C;
 u16 D_86A06220;
 u16 D_86A06222;
@@ -1537,7 +1537,7 @@ s32 func_86A01020(Color_RGBA8_u32* arg0, u16 arg1, u16 arg2, u8 arg3) {
 #ifdef NON_MATCHING
 // Needs the in-fucntion static but that breaks bss ordering
 void func_86A013C8(u8 arg0, u8 arg1, unk_D_86A03014* arg2) {
-    static char* D_86A06218;
+    static char** D_86A06218;
 
     u16 i;
     u16 sp2C;

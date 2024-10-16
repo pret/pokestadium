@@ -294,7 +294,7 @@ static unk_D_8690A610 D_8690A610;
 static unk_D_86002F58_004_000_000 D_8690A630;
 static unk_D_86002F58_004_000_000 D_8690A648;
 static unk_D_86002F58_004_000_000 D_8690A660;
-char* D_8690A678;
+char** D_8690A678;
 static s32 D_8690A67C;
 static s32 D_8690A680;
 static s32 pad_D_8690A684;
@@ -304,7 +304,7 @@ static s32 pad_D_8690A690;
 static s32 pad_D_8690A694;
 static BinArchive* D_8690A698;
 static unk_D_8690A69C* D_8690A69C;
-static unk_func_8001BEE8 D_8690A6A0;
+static unk_func_80026268_arg0 D_8690A6A0;
 static s32 D_8690A6F4;
 static s32 D_8690A6F8;
 static s32 D_8690A6FC;
@@ -406,7 +406,7 @@ void func_86900188(void) {
     func_80003B30(&D_8690B2F8, sp20, sp1C, 0);
 }
 
-unk_D_86002F58_004_000_010_024* func_86900244(unk_func_8001BEE8* arg0) {
+unk_D_86002F58_004_000_010_024* func_86900244(unk_func_80026268_arg0* arg0) {
     unk_D_86002F58_004_000_010_02C sp1C;
     unk_D_86002F58_004_000_010* sp18;
 

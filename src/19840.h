@@ -81,7 +81,7 @@ s32 func_80019C58(unk_D_86002F58_004_000_010* arg0);
 s32 func_80019CA8(unk_D_86002F58_004_000_010* arg0);
 s32 func_80019CE0(unk_D_86002F58_004_000_010* arg0);
 unk_D_86002F30* func_80019D18(s32 arg0);
-s32 func_80019D90(unk_func_8001BEE8* arg0);
+unk_D_86002F30* func_80019D90(unk_func_80026268_arg0* arg0);
 s32 func_80019E18(s32 arg0, s32 arg1);
 arg1_func_80019420* func_80019EA0(s32 arg0);
 Fragment* func_80019F0C(MainPoolState* arg0, u32 arg1, s32 arg2, s32 arg3, PERSSZP* arg4, s32 arg5);
