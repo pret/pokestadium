@@ -2,7 +2,6 @@
 #define _FRAGMENT16_H_
 
 #include "global.h"
-#include "prevent_bss_reordering.h"
 
 typedef struct unk_D_86A025A0 {
     /* 0x00 */ s8 unk_00;

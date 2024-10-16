@@ -16,7 +16,7 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 
-static s32 D_82100EA0;
+static char** D_82100EA0;
 static s32 pad_D_82100EA4;
 static unk_func_80027FA0 D_82100EA8;
 static BinArchive* D_82100EB0;

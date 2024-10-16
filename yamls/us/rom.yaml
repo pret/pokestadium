@@ -992,14 +992,27 @@
     - [0x169510, c,      fragments/17/fragment17_169510]
     - [0x169A40, c,      fragments/17/fragment17_169A40]
     - [0x16A0E0, c,      fragments/17/fragment17_16A0E0]
-    - [0x16B580, data,   fragments/17/fragment17_data]
-    - [0x16DD70, rodata, fragments/17/fragment17_rodata_16DD70]
-    - [0x16DDA0, rodata, fragments/17/fragment17_rodata_16DDA0]
-    - [0x16DDF0, rodata, fragments/17/fragment17_rodata_16DDF0]
-    - [0x16DEA0, rodata, fragments/17/fragment17_rodata_16DEA0]
-    - [0x16DF30, rodata, fragments/17/fragment17_rodata_16DF30]
+    - [0x16B580, .data,   fragments/17/fragment17_15FA60]
+    - [0x16B6E0, .data,   fragments/17/fragment17_161590]
+    - [0x16B6F0, .data,   fragments/17/fragment17_161E60]
+    - [0x16D670, .data,   fragments/17/fragment17_165640]
+    - [0x16D950, .data,   fragments/17/fragment17_168110]
+    - [0x16D960, .data,   fragments/17/fragment17_1687E0]
+    - [0x16DBE0, .data,   fragments/17/fragment17_169A40]
+    - [0x16DC40, .data,   fragments/17/fragment17_16A0E0]
 
-    - {vram: 0x86B0E5D0, type:  bss, name: fragments/17/fragment17_bss}
+    - [0x16DD70, .rodata, fragments/17/fragment17_15F9B0]
+    - [0x16DDA0, .rodata, fragments/17/fragment17_15FA60]
+    - [0x16DDF0, .rodata, fragments/17/fragment17_161E60]
+    - [0x16DEA0, .rodata, fragments/17/fragment17_165640]
+    - [0x16DF30, .rodata, fragments/17/fragment17_16A0E0]
+
+    - {vram: 0x86B0E5D0, type: .bss, name: fragments/17/fragment17_15FA60}
+    - {vram: 0x86B0EBC0, type: .bss, name: fragments/17/fragment17_161E60}
+    - {vram: 0x86B0F9D0, type: .bss, name: fragments/17/fragment17_165640}
+    - {vram: 0x86B106A0, type: .bss, name: fragments/17/fragment17_1687E0}
+    - {vram: 0x86B106B0, type: .bss, name: fragments/17/fragment17_169A40}
+    - {vram: 0x86B10840, type: .bss, name: fragments/17/fragment17_16A0E0}
 
   - name: fragment17_relocs
     type: code

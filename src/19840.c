@@ -501,10 +501,10 @@ unk_D_86002F30* func_80019D18(s32 arg0) {
     return sp24;
 }
 
-s32 func_80019D90(unk_func_8001BEE8* arg0) {
+unk_D_86002F30* func_80019D90(unk_func_80026268_arg0* arg0) {
     Fragment* sp2C;
     arg1_func_80010CA8 sp28;
-    s32 sp24 = 0;
+    unk_D_86002F30* sp24 = NULL;
     MemoryBlock* sp20;
 
     sp2C = func_8000484C(D_800ABE10.unk_A04.unk_00, arg0->unk_00 - 1);

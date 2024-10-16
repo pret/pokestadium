@@ -426,7 +426,7 @@ u8 func_80022A60(s32 arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/22630/func_80022F24.s")
 
 void func_80023068(void) {
-    s32 sp1C = func_8002D5AC(0x11);
+    char** sp1C = func_8002D5AC(0x11);
 
     HAL_Strcpy(D_800AC890[0], func_8002D7C0(NULL, 0, sp1C, 0));
     HAL_Strcpy(D_800AC890[1], func_8002D7C0(NULL, 0, sp1C, 1));

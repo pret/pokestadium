@@ -8,7 +8,7 @@ extern GeoLayoutCommandProc GeoLayoutJumpTable[];
 extern MemoryBlock* gGraphNodePool;
 extern unk_D_86002F34* gCurRootGraphNode;
 extern u32 gGeoLayoutStack[];
-extern struct GraphNode *gCurGraphNodeList[32];
+extern struct GraphNode* gCurGraphNodeList[32];
 extern s16 gCurGraphNodeIndex;
 extern s16 gGeoLayoutStackIndex;
 extern s16 gGeoLayoutReturnIndex;
@@ -20,7 +20,7 @@ extern u8* gGeoLayoutCommand;
 */
 void geo_layout_cmd_branch_and_link(void) {
     u8* cmd = (void*)gGeoLayoutCommand;
-    
+
     cmd += 0;
 
     gGeoLayoutStack[gGeoLayoutStackIndex++] = (uintptr_t)(cmd + CMD_PROCESS_OFFSET(8));
@@ -34,7 +34,7 @@ void geo_layout_cmd_end(void) {
     gGeoLayoutStackIndex = gGeoLayoutReturnIndex;
     gGeoLayoutReturnIndex = gGeoLayoutStack[--gGeoLayoutStackIndex] & 0xFFFF;
     gCurGraphNodeIndex = gGeoLayoutStack[gGeoLayoutStackIndex] >> 16;
-    gGeoLayoutCommand = (u8 *) gGeoLayoutStack[--gGeoLayoutStackIndex];
+    gGeoLayoutCommand = (u8*)gGeoLayoutStack[--gGeoLayoutStackIndex];
 }
 
 /*
@@ -43,7 +43,7 @@ void geo_layout_cmd_end(void) {
 */
 void geo_layout_cmd_jump(void) {
     u8* cmd = (void*)gGeoLayoutCommand;
-    
+
     cmd += 0;
 
     gGeoLayoutCommand = Util_ConvertAddrToVirtAddr(cur_geo_cmd_ptr(0x04));
@@ -55,7 +55,7 @@ void geo_layout_cmd_jump(void) {
 */
 void geo_layout_cmd_branch(void) {
     u8* cmd = (void*)gGeoLayoutCommand;
-    
+
     cmd += 0;
 
     // unlike in sm64, this argument doesnt seem to be optional.
@@ -65,7 +65,7 @@ void geo_layout_cmd_branch(void) {
 
 // 0x04: Return from branch
 void geo_layout_cmd_return(void) {
-    gGeoLayoutCommand = (u8 *) gGeoLayoutStack[--gGeoLayoutStackIndex];
+    gGeoLayoutCommand = (u8*)gGeoLayoutStack[--gGeoLayoutStackIndex];
 }
 
 // 0x05: Open node
@@ -81,7 +81,7 @@ void geo_layout_cmd_close_node(void) {
     gGeoLayoutCommand += 0x04 << CMD_SIZE_SHIFT;
 }
 
-void func_80017AC4(struct GraphNode *arg0) {
+void func_80017AC4(struct GraphNode* arg0) {
     if (arg0 != NULL) {
         gCurGraphNodeList[gCurGraphNodeIndex] = arg0;
         if (gCurGraphNodeIndex == 0) {
@@ -128,7 +128,8 @@ void func_80017BFC(void) {
 
 void func_80017C48(void) {
     unk_D_800ABE00_cmdB* cmd = (unk_D_800ABE00_cmdB*)gGeoLayoutCommand;
-    unk_D_86002F34_00C* temp_v0 = func_800110E0(gGraphNodePool, NULL, cmd->unk_04, cmd->unk_06, cmd->unk_08, cmd->unk_0A);
+    unk_D_86002F34_00C* temp_v0 =
+        func_800110E0(gGraphNodePool, NULL, cmd->unk_04, cmd->unk_06, cmd->unk_08, cmd->unk_0A);
 
     if (temp_v0 != NULL) {
         temp_v0->unk_24.fovy = cmd->unk_02;
@@ -223,8 +224,8 @@ void func_800180D4(void) {
 void func_8001812C(void) {
     unk_D_800ABE00_cmd17* cmd = (unk_D_800ABE00_cmd17*)gGeoLayoutCommand;
 
-    func_80017AC4(
-        func_8001156C(gGraphNodePool, NULL, cmd->unk_02, cmd->unk_08, cmd->unk_04, cmd->unk_0C, cmd->unk_06, cmd->unk_10));
+    func_80017AC4(func_8001156C(gGraphNodePool, NULL, cmd->unk_02, cmd->unk_08, cmd->unk_04, cmd->unk_0C, cmd->unk_06,
+                                cmd->unk_10));
 
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmd17);
 }
@@ -295,7 +296,8 @@ void func_80018490(void) {
         var_a3 |= 2;
     }
 
-    func_80017AC4(func_80011814(gGraphNodePool, NULL, cmd->unk_01, var_a3, cmd->unk_03, &cmd->unk_04, &cmd->unk_0A, &sp3C));
+    func_80017AC4(
+        func_80011814(gGraphNodePool, NULL, cmd->unk_01, var_a3, cmd->unk_03, &cmd->unk_04, &cmd->unk_0A, &sp3C));
 
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmd1D);
 }
@@ -398,7 +400,7 @@ void func_80018AD0(void) {
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmd26);
 }
 
-struct GraphNode *process_geo_layout(MemoryBlock* pool, void *segptr) {
+struct GraphNode* process_geo_layout(MemoryBlock* pool, void* segptr) {
     // set by register_scene_graph_node when gCurGraphNodeIndex is 0
     // and gCurRootGraphNode is NULL
     gCurRootGraphNode = NULL;

@@ -20,7 +20,7 @@ extern u32 D_87806730[];
 char** D_87806330 = NULL;
 
 static s32 D_8780FA20;
-static s32 D_8780FA24;
+static char** D_8780FA24;
 u16 D_8780FA28;
 s16 D_8780FA2A;
 s16 D_8780FA2C;

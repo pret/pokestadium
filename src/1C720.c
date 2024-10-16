@@ -119,13 +119,12 @@ unk_D_86002F58_004_000_00C_028* func_8001BE90(unk_D_86002F58_004_000* arg0, s32 
     return var_v1;
 }
 
-#ifdef NON_MATCHING
-unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* arg0, unk_func_8001BEE8* arg1) {
+unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* arg0, unk_func_80026268_arg0* arg1) {
+    UNUSED s32 pad;
     char sp38[0xB];
     unk_D_86002F58_004_000_010_02C sp34;
     unk_D_8006FF00* sp30;
-    UNUSED unk_func_8001BEE8* sp20;
-    UNUSED s32 i;
+    UNUSED s32 pad2;
     u8 var_a0;
     s8* var_v1;
 
@@ -135,16 +134,20 @@ unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* ar
     func_80021CA4(sp38, arg1->unk_00);
 
     if (HAL_Strcmp(arg1->unk_30, sp38) != 0) {
-        var_a0 = (arg1->unk_0E >> 8) + arg1->unk_0E;
+        var_a0 = ((arg1->unk_0E >> 8) & 0xFF) + (arg1->unk_0E & 0xFF);
+
+        if (1) {}
 
         var_v1 = arg1->unk_30;
         while (*var_v1) {
-            var_a0 += *var_v1++;
+            var_a0 += *var_v1++ & 0xFF;
+            var_a0 += 0;
         }
 
         var_v1 = arg1->unk_3B;
         while (*var_v1) {
-            var_a0 += *var_v1++;
+            var_a0 += *var_v1++ & 0xFF;
+            var_a0 += 0;
         }
 
         sp34.unk_00 = ((((sp30->unk_12 - sp30->unk_10) << 6) * var_a0) / 255) + (sp30->unk_10 << 6);
@@ -153,12 +156,9 @@ unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* ar
     *arg0 = sp34;
     return arg0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1C720/func_8001BEE8.s")
-#endif
 
 void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2) {
-    unk_func_8001BEE8 stack;
+    unk_func_80026268_arg0 stack;
 
     stack.unk_00 = arg2;
     stack.unk_0E = arg1->unk_02;
