@@ -1052,10 +1052,10 @@
     subsegments:
     - [0x17FB40, textbin,   fragments/19/fragment19_header]
     - [0x17FB60, c,      fragments/19/fragment19]
-    - [0x180070, data,   fragments/19/fragment19_data]
-    - [0x180100, rodata, fragments/19/fragment19_rodata]
+    - [0x180070, .data,   fragments/19/fragment19]
+    - [0x180100, .rodata, fragments/19/fragment19]
 
-    - {vram: 0x86D005D0, type:  bss, name: fragments/19/fragment19_bss}
+    - {vram: 0x86D005D0, type:  .bss, name: fragments/19/fragment19}
 
   - name: fragment19_relocs
     type: code

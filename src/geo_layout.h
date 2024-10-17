@@ -351,6 +351,6 @@ void func_800189B8(void); // cmd 35
 void func_80018A40(void); // cmd 36
 void func_80018A8C(void); // cmd 37
 void func_80018AD0(void); // cmd 38
-struct GraphNode* process_geo_layout(MemoryBlock*, void*);
+GraphNode* process_geo_layout(MemoryBlock*, void*);
 
 #endif // _18480_H_
