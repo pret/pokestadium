@@ -555,16 +555,16 @@ s32 func_81400B4C(s32 arg0, s32 arg1) {
 void func_81400B84(UNUSED s32 arg0) {
 }
 
-void func_81400B8C(Vec3f arg0) {
-    MathUtil_Atan2s(arg0.y, arg0.z);
+s16 func_81400B8C(Vec3f arg0) {
+    return MathUtil_Atan2s(arg0.y, arg0.z);
 }
 
-void func_81400BBC(Vec3f arg0) {
-    MathUtil_Atan2s(arg0.z, arg0.x);
+s16 func_81400BBC(Vec3f arg0) {
+    return MathUtil_Atan2s(arg0.z, arg0.x);
 }
 
-void func_81400BEC(Vec3f arg0) {
-    MathUtil_Atan2s(arg0.x, arg0.y);
+s16 func_81400BEC(Vec3f arg0) {
+    return MathUtil_Atan2s(arg0.x, arg0.y);
 }
 
 void func_81400C1C(Vec3s* arg0, Vec3f arg1) {

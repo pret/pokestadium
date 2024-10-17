@@ -119,12 +119,13 @@ def dump(offset):
 
                 out += f"    ANIMATION_SCRIPT_CMD_{cmd:02X}"
                 out += "("
+                #print(hex(offset), hex(cmd))
                 out = get_type(f, offset, cmd, COMMANDS[cmd]["args"][1:], out)
                 if out[-2:] == ", ":
                     out = out[:-2]
                 out += "),\n"
 
-                if cmd == 0x01:
+                if cmd == 0x01 or cmd == 0x04:
                     break;
 
                 offset += COMMANDS[cmd]["size"]

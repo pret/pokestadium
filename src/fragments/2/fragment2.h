@@ -12,6 +12,7 @@ extern char** D_87806330;
 extern s16 D_87806338;
 extern u32* D_8780633C[];
 extern u32* D_8780634C[];
+extern u32 D_87806398[];
 
 extern u16 D_8780FA28;
 extern s16 D_8780FA2A;
