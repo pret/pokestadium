@@ -337,7 +337,7 @@ static Controller D_8690B5D0;
 static s32 D_8690B5F4;
 static s32 D_8690B5F8;
 
-s32 func_86900020(s32 arg0, struct GraphNode* arg1) {
+s32 func_86900020(s32 arg0, GraphNode* arg1) {
     unk_D_86002F34_alt18* ptr = (unk_D_86002F34_alt18*)arg1;
     f32 sp28;
     s16 sp26;
@@ -351,7 +351,7 @@ s32 func_86900020(s32 arg0, struct GraphNode* arg1) {
     return 0;
 }
 
-s32 func_86900088(s32 arg0, struct GraphNode* arg1) {
+s32 func_86900088(s32 arg0, GraphNode* arg1) {
     unk_D_86002F34_alt18* ptr = (unk_D_86002F34_alt18*)arg1;
     f32 sp28;
     s16 sp26;
@@ -365,7 +365,7 @@ s32 func_86900088(s32 arg0, struct GraphNode* arg1) {
     return 0;
 }
 
-s32 func_869000F4(s32 arg0, struct GraphNode* arg1) {
+s32 func_869000F4(s32 arg0, GraphNode* arg1) {
     unk_D_86002F58_004_000* ptr = (unk_D_86002F58_004_000*)arg1;
 
     if (arg0 == 2) {

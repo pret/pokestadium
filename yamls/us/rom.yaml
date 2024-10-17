@@ -1074,10 +1074,10 @@
     subsegments:
     - [0x1802B0, textbin,   fragments/20/fragment20_header]
     - [0x1802D0, c,      fragments/20/fragment20]
-    - [0x183260, data,   fragments/20/fragment20_data]
-    - [0x184FA0, rodata, fragments/20/fragment20_rodata]
+    - [0x183260, .data,   fragments/20/fragment20]
+    - [0x184FA0, .rodata, fragments/20/fragment20]
 
-    - {vram: 0x86E04D60, type:  bss, name: fragments/20/fragment20_bss}
+    - {vram: 0x86E04D60, type:  .bss, name: fragments/20/fragment20}
 
   - name: fragment20_relocs
     type: code

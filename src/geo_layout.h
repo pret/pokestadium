@@ -83,7 +83,7 @@ typedef struct unk_D_800ABE00_cmd9 {
 
 typedef struct unk_D_800ABE00_cmdA {
     /* 0x00 */ u8 cmd;
-    /* 0x04 */ struct GraphNode* unk_04;
+    /* 0x04 */ GraphNode* unk_04;
 } unk_D_800ABE00_cmdA; // size = 0x8
 
 typedef struct unk_D_800ABE00_cmdB {

@@ -5,6 +5,10 @@ from pathlib import Path
 from struct import *
 import data2c
 import find_sym
+import subprocess
+
+GFXDIS_CMD = "./tools/gfxdis.f3dex2 -x -dc -f baseroms/us/baserom.z64 "
+VTXDIS_CMD = "./tools/vtxdis -f baseroms/us/baserom.z64 "
 
 COMMANDS = {}
 
@@ -33,6 +37,7 @@ def dump(offset):
     TO_DECOMP = []
 
     def get_type(f, offset, cmd, args, out):
+        curr_args = []
         for arg in args:
             if "pad" in arg["name"]:
                 continue
@@ -51,7 +56,7 @@ def dump(offset):
                 type = "ptr" if "*" in arg["type"] else arg["type"]
                 match data2c.BASE_TYPES[type]:
                     case 1:
-                        v = unpack(">b" if is_signed else ">B", f.read(1))[0]
+                        v = unpack_from(">b" if is_signed else ">B", f.read(1))[0]
                         out += f"{v}, "
 
                     case 2:
@@ -67,7 +72,30 @@ def dump(offset):
 
                         elif "*" in arg["type"]:
                             if v != 0:
-                                OUT_DATA[v] = arg["type"].replace("*","")
+                                t = arg["type"].replace("*","")
+
+                                if t not in OUT_DATA:
+                                    OUT_DATA[t] = []
+
+                                match t:
+                                    case "Gfx":
+                                        OUT_DATA[t].append(v)
+
+                                    case "Vtx":
+                                        if cmd == 0x17:
+                                            out += f"D_{v:08X}" + ", "
+                                        else:
+                                            print(hex(v))
+                                            print(curr_args)
+                                            exit()
+                                            OUT_DATA[t].append([curr_args[0], v])
+
+                                    case "unk_D_86002F34_018":
+                                        OUT_DATA[t].append([curr_args[0], v])
+
+                                    case _:
+                                        OUT_DATA[t].append(v)
+
                                 out += f"D_{v:08X}" + ", "
                             else:
                                 out += f"NULL" + ", "
@@ -91,6 +119,8 @@ def dump(offset):
                         print(f"Unhandled size type for arg")
                         print(f"{arg}")
                         exit()
+
+                curr_args.append(v)
         return out
 
     offset = int(offset, 16)
@@ -148,19 +178,86 @@ def dump(offset):
                     print(f"Unhandled output function type cmd {cmd}")
                     exit()
 
-    if len(OUT_FUNCS) > 0:
-        print()
+    FINAL_OUT_DATA = []
 
-    for v, type in sorted(list(OUT_DATA.items()), key=lambda x:x[0]):
+    OUT_DATA = list(OUT_DATA.items())
+
+    while len(OUT_DATA) > 0:
+        type, entries = OUT_DATA.pop()
+
         match type:
             case "Gfx":
-                print(f"Gfx D_{v:08X}[];")
+                while len(entries) > 0:
+                    v = entries.pop()
+                    a = find_sym.find(f"0x{v:X}", "v")["rom"]
+                    out = subprocess.getoutput(GFXDIS_CMD + f"-a 0x{a:X}")
+                    
+                    for line in out.splitlines():
+                        if "SPVertex(" in line:
+                            addr_str = line.split("(",1)[1].split(",")[0]
+                            count_str = line.split("(",1)[1].split(",")[1]
+
+                            addr = int(addr_str, 0)
+                            count = int(count_str, 10)
+
+
+                            OUT_DATA.append(("Vtx", [[count, addr]]))
+                            out = out.replace(addr_str, f"D_{addr:X}")
+                    FINAL_OUT_DATA.append([v, "Gfx", out])
 
             case "Vtx":
-                print(f"Vtx D_{v:08X}[];")
+                while len(entries) > 0:
+                    c, v = entries.pop()
+                    addr = find_sym.find(f"0x{v:X}", "v")["rom"]
+                    out = subprocess.getoutput(VTXDIS_CMD + f"-o 0x{addr:X} -c {c}")
+                    FINAL_OUT_DATA.append([v, "Vtx", out])
+
+            case "unk_D_86002F34_018":
+                while len(entries) > 0:
+                    c, v = entries.pop()
+
+                    dump_type = f"unk_D_86002F34_018[{c}]" if c > 0 else f"unk_D_86002F34_018"
+                    
+                    d = data2c.dump(find_sym.find(f"0x{v:X}", "v")["rom"], dump_type)
+                    out = f"unk_D_86002F34_018 D_{v:08X}" + (f"[{c}]" if c > 0 else "") + f" = {d}"
+                    FINAL_OUT_DATA.append([v, dump_type, out])
 
             case _:
-                print(f"{type}* D_{v:08X};")
+                while len(entries) > 0:
+                    v = entries.pop()
+                    dump_type = f"{type}"
+                    sym = find_sym.find(f"0x{v:X}", "v")
+                    if sym["rom"] > 0:
+                        out = data2c.dump(find_sym.find(f"0x{v:X}", "v")["rom"], dump_type)
+                    else:
+                        out = ""
+                    FINAL_OUT_DATA.append([v, type, out])
+
+    FINAL_OUT_DATA.sort(key=lambda x: x[0])
+    for v, type, out in FINAL_OUT_DATA:
+        is_array = "[" in type or type == "Gfx" or type == "Vtx"
+
+        if "[" in type:
+            count = int(type.split("[",1)[1].split("]",1)[0], 0)
+        else:
+            count = 0
+
+        type = type.split("[",1)[0]
+
+        o = f"static {type} D_{v:08X}"
+        if len(out) > 0:
+            if is_array:
+                if count > 0:
+                    o += f"[{count}]"
+                else:
+                    o += f"[]"
+
+            o += " = " + out + (";" if out[-1] != ";" else "")
+
+        else:
+            o += ";"
+
+        print(o)
 
     print()
     [print(x[0] + x[1]) for x in sorted(TO_OUTPUT, key=lambda x: x[0])]

@@ -32,7 +32,7 @@ static s8 D_86A061D8;
 static u8 D_86A061D9;
 static BinArchive* D_86A061DC;
 static Color_RGBA8_u32 D_86A061E0;
-static struct GraphNode* D_86A061E4;
+static GraphNode* D_86A061E4;
 static unk_D_86002F34_00C* D_86A061E8;
 static s16 D_86A061EC;
 static s16 D_86A061EE;
@@ -120,7 +120,7 @@ u32 D_86A025D0[] = {
     0x06000000, 0x01000000,
 };
 
-s32 func_86A00020(s32 arg0, struct GraphNode* arg1) {
+s32 func_86A00020(s32 arg0, GraphNode* arg1) {
     unk_D_86002F58_004_000* ptr = (unk_D_86002F58_004_000*)arg1;
 
     if (arg0 == 2) {

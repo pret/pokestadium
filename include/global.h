@@ -425,7 +425,7 @@ typedef struct unk_D_86002F34_018 {
     /* 0x03 */ u8 unk_03;
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s32* unk_08;
+    /* 0x08 */ u8* unk_08;
 } unk_D_86002F34_018; // size = 0xC
 
 typedef struct unk_D_86002F34_01C {

@@ -109,9 +109,9 @@ extern Controller D_8690B390;
 extern unk_D_8690B3C0 D_8690B3C0;
 extern s8 D_8690B3D0[255];
 
-s32 func_86900020(s32 arg0, struct GraphNode* arg1);
-s32 func_86900088(s32 arg0, struct GraphNode* arg1);
-s32 func_869000F4(s32 arg0, struct GraphNode* arg1);
+s32 func_86900020(s32 arg0, GraphNode* arg1);
+s32 func_86900088(s32 arg0, GraphNode* arg1);
+s32 func_869000F4(s32 arg0, GraphNode* arg1);
 void func_86900110(u8 arg0, u8 arg1, u8 arg2);
 void func_86900188(void);
 unk_D_86002F58_004_000_010_024* func_86900244(unk_func_80026268_arg0* arg0);
