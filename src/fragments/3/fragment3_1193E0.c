@@ -2,7 +2,6 @@
 #include "src/1CF30.h"
 #include "src/20470.h"
 #include "src/F420.h"
-#include "src/controller.h"
 
 s16 D_87906040;
 s16 pad_D_87906042;
@@ -41,14 +40,10 @@ s16 D_879060A8;
 Vec3s D_879060AC;
 s32 pad_D_879060B4;
 s32 pad_D_879060B8;
-s16 D_879060BC;
-s16 D_879060BE;
+Controller* D_879060BC;
 s16 D_879060C0;
 s16 D_879060C2;
-s8 D_879060C4;
-s8 D_879060C5;
-s8 D_879060C6;
-s8 D_879060C7;
+s8 D_879060C4[4];
 s16 D_879060C8;
 s16 D_879060CA;
 s32 pad_D_879060D0[4];

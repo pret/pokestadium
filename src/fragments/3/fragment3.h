@@ -4,13 +4,12 @@
 #include "global.h"
 #include "src/fragments/34/fragment34.h"
 #include "src/3FB0.h"
+#include "src/controller.h"
 
 typedef struct unk_func_8790002C {
     /* 0x000 */ unk_D_86002F58_004_000 unk_000;
     /* 0x168 */ unk_D_86002F30* unk_168;
-    /* 0x16C */ f32 unk_16C;
-    /* 0x170 */ f32 unk_170;
-    /* 0x174 */ f32 unk_174;
+    /* 0x16C */ Vec3f unk_16C;
     /* 0x178 */ char unk178[0x18];
     /* 0x190 */ f32 unk_190;
     /* 0x194 */ f32 unk_194;
@@ -30,7 +29,7 @@ typedef struct unk_func_8790002C {
     /* 0x1CC */ f32 unk_1CC;
     /* 0x1D0 */ f32 unk_1D0;
     /* 0x1D4 */ f32 unk_1D4;
-    /* 0x1D8 */ char unk1D8[0xC];
+    /* 0x1D8 */ Vec3f unk_1D8;
     /* 0x1E4 */ f32 unk_1E4;
     /* 0x1E8 */ char unk1E8[0x4];
     /* 0x1EC */ f32 unk_1EC;
@@ -73,14 +72,15 @@ typedef struct unk_func_8790002C {
     /* 0x24C */ s16 unk_24C;
     /* 0x24E */ char unk24E[0x6];
     /* 0x254 */ s32 unk_254;
-    /* 0x258 */ char unk258[0x2];
+    /* 0x258 */ s16 unk_258;
     /* 0x25A */ s16 unk_25A;
-    /* 0x25C */ char unk25C[0x4];
+    /* 0x25C */ s16 unk_25C;
+    /* 0x25E */ s16 unk_25E;
     /* 0x260 */ s16 unk_260;
     /* 0x262 */ s16 unk_262;
     /* 0x264 */ s16 unk_264;
     /* 0x264 */ s16 unk_266;
-    /* 0x268 */ char unk268[0x2];
+    /* 0x268 */ s16 unk_268;
     /* 0x26A */ s16 unk_26A;
     /* 0x26C */ s16 unk_26C;
     /* 0x26E */ s16 unk_26E;
@@ -108,6 +108,7 @@ typedef struct unk_func_8790002C {
     /* 0x2A8 */ s16 unk_2A8;
     /* 0x2AA */ s16 unk_2AA;
     /* 0x2AC */ s16 unk_2AC;
+    /* 0x2AE */ s16 unk_2AE;
     /* 0x2B0 */ char unk2B0[0x4];
 } unk_func_8790002C; // size = 0x2B4
 
@@ -130,9 +131,11 @@ typedef struct unk_D_87903E10 {
     /* 0x04 */ unk_D_87903E00* unk_04;
 } unk_D_87903E10; // size = 0x8
 
+extern s16 D_87903DA0;
 extern s16 D_87903DA4;
 extern s16 D_87903DA8;
 extern s16 D_87903DAC;
+extern s16 D_87903DBC;
 extern s16 D_87903DC0;
 extern s16 D_87903DC4;
 extern s16 D_87903DC8;
@@ -165,7 +168,6 @@ extern s16 D_87906078;
 extern f32 D_8790607C;
 extern f32 D_87906080;
 extern Vec3f D_87906088;
-
 extern s16 D_87906094;
 extern s16 D_87906096;
 extern s16 D_87906098;
@@ -180,11 +182,10 @@ extern Vec3s D_879060AC;
 
 extern s16 D_87903DB0;
 extern s16 D_87903DB8;
-
-extern s8 D_879060C4;
-extern s8 D_879060C5;
-extern s8 D_879060C6;
-extern s8 D_879060C7;
+extern Controller* D_879060BC;
+extern s16 D_879060C0;
+extern s16 D_879060C2;
+extern s8 D_879060C4[4];
 extern s16 D_879060C8;
 extern s16 D_879060CA;
 

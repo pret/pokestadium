@@ -3,7 +3,7 @@
 #include "38BB0.h"
 #include "3D140.h"
 
-void func_8004FC60(s32 arg0, s32 arg1) {
+void func_8004FC60(s32 arg0, u32 arg1) {
     s32 i;
 
     if (arg0 & 4) {

@@ -1031,10 +1031,10 @@
     subsegments:
     - [0x1708B0, textbin,   fragments/18/fragment18_header]
     - [0x1708D0, c,      fragments/18/fragment18]
-    - [0x1750F0, data,   fragments/18/fragment18_data]
-    - [0x17EC60, rodata, fragments/18/fragment18_rodata]
+    - [0x1750F0, .data,   fragments/18/fragment18]
+    - [0x17EC60, .rodata, fragments/18/fragment18]
 
-    - {vram: 0x86C0E480, type:  bss, name: fragments/18/fragment18_bss}
+    - {vram: 0x86C0E480, type:  .bss, name: fragments/18/fragment18}
 
   - name: fragment18_relocs
     type: code

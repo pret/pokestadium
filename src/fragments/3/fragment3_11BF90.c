@@ -46,9 +46,10 @@ void func_8790370C(void) {
 
 void func_87903778(unk_func_8790002C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7,
                    s16 arg8) {
-    arg0->unk_16C = arg1;
-    arg0->unk_170 = arg1;
-    arg0->unk_174 = arg1;
+    arg0->unk_16C.x = arg1;
+    arg0->unk_16C.y = arg1;
+    arg0->unk_16C.z = arg1;
+
     arg0->unk_1A8 = arg2;
     arg0->unk_1AC = arg3;
     arg0->unk_1B0 = arg4;

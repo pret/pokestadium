@@ -15,7 +15,7 @@ s16 D_87903DAC = 0;
 s16 D_87903DB0 = 0;
 s32 pad_D_87903DB4 = 0;
 s16 D_87903DB8 = 0;
-s32 pad_D_87903DBC = 0;
+s16 D_87903DBC = 0;
 s16 D_87903DC0 = 0;
 s16 D_87903DC4 = 0;
 s16 D_87903DC8 = 0;
@@ -39,7 +39,7 @@ s32 func_879000C4(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
     f32 var_fv0 = arg1->unk_19C - arg0->unk_19C;
     f32 var_fv1 = arg1->unk_1A0 - arg0->unk_1A0;
     f32 var_fa0 = arg1->unk_1A4 - arg0->unk_1A4;
-    f32 var_fa1 = (arg0->unk_288 * arg0->unk_170) + (arg1->unk_288 * arg1->unk_170);
+    f32 var_fa1 = (arg0->unk_288 * arg0->unk_16C.y) + (arg1->unk_288 * arg1->unk_16C.y);
     s32 ret = 0;
 
     if (var_fv0 < 0.0f) {
@@ -79,8 +79,8 @@ s32 func_879001A4(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
     var_fa0 = arg1->unk_1A4 - arg0->unk_1A4;
     var_v1 = 0;
 
-    var_fa1 = (arg0->unk_288 * arg0->unk_170) + (arg1->unk_288 * arg1->unk_170);
-    var_fs0 = ((arg0->unk_28C * arg0->unk_170) + (arg1->unk_28C * arg1->unk_170)) * 0.5f;
+    var_fa1 = (arg0->unk_288 * arg0->unk_16C.y) + (arg1->unk_288 * arg1->unk_16C.y);
+    var_fs0 = ((arg0->unk_28C * arg0->unk_16C.y) + (arg1->unk_28C * arg1->unk_16C.y)) * 0.5f;
 
     var_fv0 = ABS(var_fv0);
     var_fv1 = ABS(var_fv1);
@@ -240,7 +240,7 @@ void func_8790060C(unk_func_8790002C* arg0) {
     arg0->unk_296 = 0;
     arg0->unk_298 = 0;
 
-    arg0->unk_16C = arg0->unk_170 = arg0->unk_174 = 1.0f;
+    arg0->unk_16C.x = arg0->unk_16C.y = arg0->unk_16C.z = 1.0f;
 
     arg0->unk_198 = 0.0f;
     arg0->unk_194 = 0.0f;
@@ -290,9 +290,9 @@ void func_87900770(unk_func_8790002C* arg0) {
 }
 
 void func_87900808(unk_func_8790002C* arg0) {
-    arg0->unk_000.unk_030.x = arg0->unk_16C;
-    arg0->unk_000.unk_030.y = arg0->unk_170;
-    arg0->unk_000.unk_030.z = arg0->unk_174;
+    arg0->unk_000.unk_030.x = arg0->unk_16C.x;
+    arg0->unk_000.unk_030.y = arg0->unk_16C.y;
+    arg0->unk_000.unk_030.z = arg0->unk_16C.z;
 
     arg0->unk_000.unk_024.x = arg0->unk_190;
     arg0->unk_000.unk_024.y = arg0->unk_194;
@@ -322,10 +322,10 @@ void func_87900854(void) {
     func_878029C0();
     func_87802528();
 
-    D_879060C4 = ptr[0];
-    D_879060C5 = ptr[1];
-    D_879060C6 = ptr[2];
-    D_879060C7 = ptr[3];
+    D_879060C4[0] = ptr[0];
+    D_879060C4[1] = ptr[1];
+    D_879060C4[2] = ptr[2];
+    D_879060C4[3] = ptr[3];
 
     D_879060C8 = 0xFF;
 }
