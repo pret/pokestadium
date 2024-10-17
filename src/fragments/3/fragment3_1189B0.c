@@ -28,17 +28,18 @@ ret_func_80004454 func_87900020(void) {
 }
 
 void func_8790002C(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
-    sqrtf(SQ(arg1->unk_19C - arg0->unk_19C) + SQ(arg1->unk_1A4 - arg0->unk_1A4));
+    sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.z - arg0->unk_19C.z));
 }
 
 void func_87900070(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
-    sqrtf(SQ(arg1->unk_19C - arg0->unk_19C) + SQ(arg1->unk_1A0 - arg0->unk_1A0) + SQ(arg1->unk_1A4 - arg0->unk_1A4));
+    sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.y - arg0->unk_19C.y) +
+          SQ(arg1->unk_19C.z - arg0->unk_19C.z));
 }
 
 s32 func_879000C4(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
-    f32 var_fv0 = arg1->unk_19C - arg0->unk_19C;
-    f32 var_fv1 = arg1->unk_1A0 - arg0->unk_1A0;
-    f32 var_fa0 = arg1->unk_1A4 - arg0->unk_1A4;
+    f32 var_fv0 = arg1->unk_19C.x - arg0->unk_19C.x;
+    f32 var_fv1 = arg1->unk_19C.y - arg0->unk_19C.y;
+    f32 var_fa0 = arg1->unk_19C.z - arg0->unk_19C.z;
     f32 var_fa1 = (arg0->unk_288 * arg0->unk_16C.y) + (arg1->unk_288 * arg1->unk_16C.y);
     s32 ret = 0;
 
@@ -74,9 +75,9 @@ s32 func_879001A4(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
     f32 tmp;
     s32 var_v1;
 
-    var_fv0 = arg1->unk_19C - arg0->unk_19C;
-    var_fv1 = arg1->unk_1A0 - arg0->unk_1A0;
-    var_fa0 = arg1->unk_1A4 - arg0->unk_1A4;
+    var_fv0 = arg1->unk_19C.x - arg0->unk_19C.x;
+    var_fv1 = arg1->unk_19C.y - arg0->unk_19C.y;
+    var_fa0 = arg1->unk_19C.z - arg0->unk_19C.z;
     var_v1 = 0;
 
     var_fa1 = (arg0->unk_288 * arg0->unk_16C.y) + (arg1->unk_288 * arg1->unk_16C.y);
@@ -186,38 +187,38 @@ void func_87900558(void) {
 }
 
 void func_87900564(unk_func_8790002C* arg0) {
-    arg0->unk_1C0 = 0.0f;
-    arg0->unk_1A8 = 0.0f;
-    arg0->unk_190 = 0.0f;
-    arg0->unk_1C4 = 0.0f;
-    arg0->unk_1AC = 0.0f;
-    arg0->unk_194 = 0.0f;
-    arg0->unk_1C8 = 0.0f;
-    arg0->unk_1B0 = 0.0f;
-    arg0->unk_198 = 0.0f;
+    arg0->unk_1C0.x = 0.0f;
+    arg0->unk_1A8.x = 0.0f;
+    arg0->unk_190.x = 0.0f;
+    arg0->unk_1C0.y = 0.0f;
+    arg0->unk_1A8.y = 0.0f;
+    arg0->unk_190.y = 0.0f;
+    arg0->unk_1C0.z = 0.0f;
+    arg0->unk_1A8.z = 0.0f;
+    arg0->unk_190.z = 0.0f;
 }
 
 void func_87900594(unk_func_8790002C* arg0) {
-    arg0->unk_1A8 = 0.0f;
-    arg0->unk_1AC = 0.0f;
-    arg0->unk_1B0 = 0.0f;
+    arg0->unk_1A8.x = 0.0f;
+    arg0->unk_1A8.y = 0.0f;
+    arg0->unk_1A8.z = 0.0f;
 }
 
 void func_879005AC(unk_func_8790002C* arg0) {
-    arg0->unk_1C0 = 0.0f;
-    arg0->unk_1C4 = 0.0f;
-    arg0->unk_1C8 = 0.0f;
+    arg0->unk_1C0.x = 0.0f;
+    arg0->unk_1C0.y = 0.0f;
+    arg0->unk_1C0.z = 0.0f;
 }
 
 void func_879005C4(unk_func_8790002C* arg0) {
     arg0->unk_1FC = arg0->unk_1FC - arg0->unk_210;
-    arg0->unk_1C0 = arg0->unk_1C0 + arg0->unk_1F8;
-    arg0->unk_1C4 = arg0->unk_1C4 + (arg0->unk_1FC - arg0->unk_210);
-    arg0->unk_1C8 = arg0->unk_1C8 + arg0->unk_200;
+    arg0->unk_1C0.x = arg0->unk_1C0.x + arg0->unk_1F8;
+    arg0->unk_1C0.y = arg0->unk_1C0.y + (arg0->unk_1FC - arg0->unk_210);
+    arg0->unk_1C0.z = arg0->unk_1C0.z + arg0->unk_200;
 }
 
 void func_8790060C(unk_func_8790002C* arg0) {
-    arg0->unk_214 = arg0->unk_216 = arg0->unk_218 = 0;
+    arg0->unk_214.x = arg0->unk_214.y = arg0->unk_214.z = 0;
     arg0->unk_21A = arg0->unk_21C = arg0->unk_21E = 0;
     arg0->unk_220 = arg0->unk_222 = arg0->unk_224 = 0;
     arg0->unk_226 = arg0->unk_228 = arg0->unk_22A = 0;
@@ -241,19 +242,14 @@ void func_8790060C(unk_func_8790002C* arg0) {
     arg0->unk_298 = 0;
 
     arg0->unk_16C.x = arg0->unk_16C.y = arg0->unk_16C.z = 1.0f;
+    arg0->unk_190.x = arg0->unk_190.y = arg0->unk_190.z = 0.0f;
+    arg0->unk_1A8.x = arg0->unk_1A8.y = arg0->unk_1A8.z = 0.0f;
 
-    arg0->unk_198 = 0.0f;
-    arg0->unk_194 = 0.0f;
-    arg0->unk_190 = 0.0f;
-    arg0->unk_1B0 = 0.0f;
-    arg0->unk_1AC = 0.0f;
-    arg0->unk_1A8 = 0.0f;
-    arg0->unk_1BC = 0.0f;
-    arg0->unk_1B8 = 0.0f;
-    arg0->unk_1B4 = 0.0f;
-    arg0->unk_1C8 = 0.0f;
-    arg0->unk_1C4 = 0.0f;
-    arg0->unk_1C0 = 0.0f;
+    arg0->unk_1B4.z = 0.0f;
+    arg0->unk_1B4.y = 0.0f;
+    arg0->unk_1B4.x = 0.0f;
+    arg0->unk_1C0.x = arg0->unk_1C0.y = arg0->unk_1C0.z = 0.0f;
+
     arg0->unk_1D4 = 0.0f;
     arg0->unk_1D0 = 0.0f;
     arg0->unk_1CC = 0.0f;
@@ -278,15 +274,15 @@ void func_8790060C(unk_func_8790002C* arg0) {
 }
 
 void func_87900770(unk_func_8790002C* arg0) {
-    arg0->unk_190 = arg0->unk_19C = arg0->unk_1A8 + arg0->unk_1C0;
-    arg0->unk_194 = arg0->unk_1A0 = arg0->unk_1AC + arg0->unk_1C4;
-    arg0->unk_198 = arg0->unk_1A4 = arg0->unk_1B0 + arg0->unk_1C8;
+    arg0->unk_190.x = arg0->unk_19C.x = arg0->unk_1A8.x + arg0->unk_1C0.x;
+    arg0->unk_190.y = arg0->unk_19C.y = arg0->unk_1A8.y + arg0->unk_1C0.y;
+    arg0->unk_190.z = arg0->unk_19C.z = arg0->unk_1A8.z + arg0->unk_1C0.z;
 
-    arg0->unk_1A0 = arg0->unk_1A0 + arg0->unk_1E4;
+    arg0->unk_19C.y = arg0->unk_19C.y + arg0->unk_1E4;
 
-    arg0->unk_214 = arg0->unk_21A + arg0->unk_226 + arg0->unk_232;
-    arg0->unk_216 = arg0->unk_21C + arg0->unk_228 + arg0->unk_234;
-    arg0->unk_218 = arg0->unk_21E + arg0->unk_22A + arg0->unk_236;
+    arg0->unk_214.x = arg0->unk_21A + arg0->unk_226 + arg0->unk_232;
+    arg0->unk_214.y = arg0->unk_21C + arg0->unk_228 + arg0->unk_234;
+    arg0->unk_214.z = arg0->unk_21E + arg0->unk_22A + arg0->unk_236;
 }
 
 void func_87900808(unk_func_8790002C* arg0) {
@@ -294,13 +290,13 @@ void func_87900808(unk_func_8790002C* arg0) {
     arg0->unk_000.unk_030.y = arg0->unk_16C.y;
     arg0->unk_000.unk_030.z = arg0->unk_16C.z;
 
-    arg0->unk_000.unk_024.x = arg0->unk_190;
-    arg0->unk_000.unk_024.y = arg0->unk_194;
-    arg0->unk_000.unk_024.z = arg0->unk_198;
+    arg0->unk_000.unk_024.x = arg0->unk_190.x;
+    arg0->unk_000.unk_024.y = arg0->unk_190.y;
+    arg0->unk_000.unk_024.z = arg0->unk_190.z;
 
-    arg0->unk_000.unk_01E.x = arg0->unk_214;
-    arg0->unk_000.unk_01E.y = arg0->unk_216;
-    arg0->unk_000.unk_01E.z = arg0->unk_218;
+    arg0->unk_000.unk_01E.x = arg0->unk_214.x;
+    arg0->unk_000.unk_01E.y = arg0->unk_214.y;
+    arg0->unk_000.unk_01E.z = arg0->unk_214.z;
 }
 
 void func_87900854(void) {

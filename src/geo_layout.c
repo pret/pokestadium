@@ -8,7 +8,7 @@ extern GeoLayoutCommandProc GeoLayoutJumpTable[];
 extern MemoryBlock* gGraphNodePool;
 extern unk_D_86002F34* gCurRootGraphNode;
 extern u32 gGeoLayoutStack[];
-extern struct GraphNode* gCurGraphNodeList[32];
+extern GraphNode* gCurGraphNodeList[32];
 extern s16 gCurGraphNodeIndex;
 extern s16 gGeoLayoutStackIndex;
 extern s16 gGeoLayoutReturnIndex;
@@ -81,7 +81,7 @@ void geo_layout_cmd_close_node(void) {
     gGeoLayoutCommand += 0x04 << CMD_SIZE_SHIFT;
 }
 
-void func_80017AC4(struct GraphNode* arg0) {
+void func_80017AC4(GraphNode* arg0) {
     if (arg0 != NULL) {
         gCurGraphNodeList[gCurGraphNodeIndex] = arg0;
         if (gCurGraphNodeIndex == 0) {
@@ -400,7 +400,7 @@ void func_80018AD0(void) {
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmd26);
 }
 
-struct GraphNode* process_geo_layout(MemoryBlock* pool, void* segptr) {
+GraphNode* process_geo_layout(MemoryBlock* pool, void* segptr) {
     // set by register_scene_graph_node when gCurGraphNodeIndex is 0
     // and gCurRootGraphNode is NULL
     gCurRootGraphNode = NULL;

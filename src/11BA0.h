@@ -20,10 +20,10 @@ typedef struct unk_D_8690A610 {
     /* 0x18 */ unk_D_8690A610_018 unk_18;
 } unk_D_8690A610; // size = 0x20
 
-void func_80010FA0(struct GraphNode* arg0, u8 arg1);
-void func_80010FDC(struct GraphNode* arg0, func_D_86002F34_000_010 arg1, unk_D_86002F34_000_014* arg2);
-struct GraphNode* func_8001103C(MainPoolState* arg0, struct GraphNode* arg1);
-unk_D_86002F34_alt2* func_80011088(MainPoolState* arg0, unk_D_86002F34_alt2* arg1, struct GraphNode* arg2);
+void func_80010FA0(GraphNode* arg0, u8 arg1);
+void func_80010FDC(GraphNode* arg0, func_D_86002F34_000_010 arg1, unk_D_86002F34_000_014* arg2);
+GraphNode* func_8001103C(MainPoolState* arg0, GraphNode* arg1);
+unk_D_86002F34_alt2* func_80011088(MainPoolState* arg0, unk_D_86002F34_alt2* arg1, GraphNode* arg2);
 unk_D_86002F34_00C* func_800110E0(MemoryBlock* arg0, unk_D_86002F34_00C* arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);
 unk_D_86002F34_alt13* func_800111A4(MemoryBlock* arg0, unk_D_86002F34_alt13* arg1, s16 arg2);
 unk_D_86002F34_alt1* func_800111FC(MemoryBlock* arg0, unk_D_86002F34_alt1* arg1, s16 arg2);
@@ -58,5 +58,5 @@ void func_80011DAC(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s16 arg3, s16 a
 void func_80011E68(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_80011EB4(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7);
 void func_80011FC8(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg4, u8 arg5);
-void func_80012094(struct GraphNode* arg0, struct GraphNode* arg1);
+void func_80012094(GraphNode* arg0, GraphNode* arg1);
 #endif // _11BA0_H_

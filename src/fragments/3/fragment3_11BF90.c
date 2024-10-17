@@ -50,9 +50,9 @@ void func_87903778(unk_func_8790002C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     arg0->unk_16C.y = arg1;
     arg0->unk_16C.z = arg1;
 
-    arg0->unk_1A8 = arg2;
-    arg0->unk_1AC = arg3;
-    arg0->unk_1B0 = arg4;
+    arg0->unk_1A8.x = arg2;
+    arg0->unk_1A8.y = arg3;
+    arg0->unk_1A8.z = arg4;
     arg0->unk_21A = arg5;
     arg0->unk_21C = arg6;
     arg0->unk_21E = arg7;

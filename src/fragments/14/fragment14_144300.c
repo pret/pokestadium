@@ -705,7 +705,7 @@ void func_86801D48(void) {
     MemoryBlock* sp18;
 
     sp18 = func_80002D10(main_pool_get_available(), 0);
-    D_86807500 = (struct GraphNode*)process_geo_layout(sp18, &D_86806CD0);
+    D_86807500 = (GraphNode*)process_geo_layout(sp18, &D_86806CD0);
 
     func_80002D60(sp18);
     func_8001BB20();

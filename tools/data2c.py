@@ -633,8 +633,7 @@ def dump_data(offset, struct, counts):
     out, _ = output_array(data, struct, counts, 0, out, 0)
     out = out + "};" if (len(counts) > 0 and struct in STRUCTS) else (out[:-2] + "};")
 
-    print(out)
-
+    return out
 
 #######################################################################
 
@@ -643,7 +642,8 @@ calc_struct_sizes()
 #print(f"{len(STRUCTS)} structs parsed in")
 
 def dump(offset, type_name):
-    offset = int(offset, 16)
+    if type(offset) != int:
+        offset = int(offset, 16)
 
     counts = []
     while "[" in type_name:
@@ -656,7 +656,10 @@ def dump(offset, type_name):
         print(f"Could not find type definition \"{type_name}\", maybe it failed to parse...")
         exit()
 
-    dump_data(offset, type_name, counts)
+    out = dump_data(offset, type_name, counts)
+
+    return out
 
 if __name__ == "__main__":
-    dump(sys.argv[1], sys.argv[2])
+    out = dump(sys.argv[1], sys.argv[2])
+    print(out)

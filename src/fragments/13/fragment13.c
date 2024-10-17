@@ -25,7 +25,7 @@ static u32 D_86700840[] = {
 };
 
 static unk_D_86002F30* D_86700930;
-static struct GraphNode* D_86700934;
+static GraphNode* D_86700934;
 static unk_D_86002F34_00C* D_86700938;
 static unk_D_86002F58_004_000 D_86700940;
 
