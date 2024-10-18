@@ -418,14 +418,17 @@ typedef struct unk_D_86002F34_alt24 {
 
 typedef void* (*func_unk_D_800ABE10)(s32, s32);
 
+#define unk_D_86002F34_018_GFX_TYPE_1 1 // 8-bit per texel
+#define unk_D_86002F34_018_GFX_TYPE_2 2 // 16-bit per texel
+#define unk_D_86002F34_018_GFX_TYPE_3 3 // 32-bit per texel
+
 typedef struct unk_D_86002F34_018 {
     /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ u8* unk_08;
+    /* 0x01 */ u8 type;
+    /* 0x02 */ s16 width;
+    /* 0x04 */ s16 height;
+    /* 0x06 */ s16 num_texels;
+    /* 0x08 */ u8* texture;
 } unk_D_86002F34_018; // size = 0xC
 
 typedef struct unk_D_86002F34_01C {
