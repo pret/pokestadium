@@ -49,7 +49,7 @@ typedef struct unk_func_8790002C {
     /* 0x234 */ s16 unk_234;
     /* 0x236 */ s16 unk_236;
     /* 0x238 */ s16 unk_238;
-    /* 0x23A */ char unk23A[0x2];
+    /* 0x23A */ s16 unk_23A;
     /* 0x23A */ s16 unk_23C;
     /* 0x23E */ s16 unk_23E;
     /* 0x240 */ s16 unk_240;
@@ -98,7 +98,7 @@ typedef struct unk_func_8790002C {
     /* 0x2AA */ s16 unk_2AA;
     /* 0x2AC */ s16 unk_2AC;
     /* 0x2AE */ s16 unk_2AE;
-    /* 0x2B0 */ char unk2B0[0x2];
+    /* 0x2B0 */ s16 unk_2B0;
     /* 0x2B2 */ s16 unk_2B2;
 } unk_func_8790002C; // size = 0x2B4
 

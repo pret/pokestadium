@@ -35,6 +35,7 @@ def dump(offset):
     OUT_DATA = {}
     DONE_DECOMP = set()
     TO_DECOMP = []
+    REPLACE_OFFSETS = {}
 
     def get_type(f, offset, cmd, args, out):
         curr_args = []
@@ -68,6 +69,9 @@ def dump(offset):
                         
                         if (cmd == 0x00 or cmd == 0x03) and arg["name"] == "unk_04":
                             TO_DECOMP.append(find_sym.find(f"0x{v:X}", "v")["rom"])
+
+                            REPLACE_OFFSETS[offset + arg["offset"]] = v
+
                             out += f"D_{v:08X}" + ", "
 
                         elif "*" in arg["type"]:
@@ -82,9 +86,7 @@ def dump(offset):
                                         OUT_DATA[t].append(v)
 
                                     case "Vtx":
-                                        if cmd == 0x17:
-                                            out += f"D_{v:08X}" + ", "
-                                        else:
+                                        if cmd != 0x17:
                                             print(hex(v))
                                             print(curr_args)
                                             exit()
@@ -97,15 +99,19 @@ def dump(offset):
                                         OUT_DATA[t].append(v)
 
                                 out += f"D_{v:08X}" + ", "
+                                REPLACE_OFFSETS[offset + arg["offset"]] = v
                             else:
                                 out += f"NULL" + ", "
+                                REPLACE_OFFSETS[offset + arg["offset"]] = 0
 
                         elif make_hex:
                             if v == 0:
                                 out += f"NULL" + ", "
-                            elif v in FUNCS:
+                                REPLACE_OFFSETS[offset + arg["offset"]] = 0
+                            if v in FUNCS:
                                 out += f"{FUNCS[v]}" + ", "
                                 OUT_FUNCS[cmd].add(FUNCS[v])
+                                REPLACE_OFFSETS[offset + arg["offset"]] = v
                             else:
                                 out += f"0x{v:08X}" + ", "
                         else:
@@ -140,20 +146,23 @@ def dump(offset):
             #print(f"Processing script at 0x{offset:X}")
 
             f.seek(offset, 0)
+            start = offset
 
             out = f""
             while True:
                 cmd = unpack_from(">B", f.read(1), 0)[0]
+
+                #out += f"    0x{word:08X},\n"
                 #print(f"depth {DEPTH} offset 0x{offset:X} cmd 0x{cmd:02X} size 0x{COMMANDS[cmd]['size']:X}")
                 #print(f"command 0x{cmd:X} --", COMMANDS[cmd])
 
-                out += f"    ANIMATION_SCRIPT_CMD_{cmd:02X}"
-                out += "("
+                #out += f"    ANIMATION_SCRIPT_CMD_{cmd:02X}"
+                #out += "("
                 #print(hex(offset), hex(cmd))
-                out = get_type(f, offset, cmd, COMMANDS[cmd]["args"][1:], out)
-                if out[-2:] == ", ":
-                    out = out[:-2]
-                out += "),\n"
+                _ = get_type(f, offset, cmd, COMMANDS[cmd]["args"][1:], out)
+                #if out[-2:] == ", ":
+                #    out = out[:-2]
+                #out += "),\n"
 
                 if cmd == 0x01 or cmd == 0x04:
                     break;
@@ -161,11 +170,32 @@ def dump(offset):
                 offset += COMMANDS[cmd]["size"]
                 f.seek(offset, 0)
 
-            out = out[:-1]
+                end = offset
+
+            #out = out[:-1]
+            f.seek(start, 0)
+            end += 4
+
+            out = f""
+            while start < end:
+                word = unpack_from(">I", f.read(4), 0)[0]
+
+                if start in REPLACE_OFFSETS:
+                    v = REPLACE_OFFSETS[start]
+                    if v == 0:
+                        out += f"    NULL,\n"
+                    elif v in FUNCS:
+                        out += f"    {FUNCS[v]},\n"
+                    else:
+                        out += f"    D_{v:08X},\n"
+                else:
+                    out += f"    0x{word:08X},\n"
+
+                start += 4
 
             #print()
             out_struct = f"static u32 D_{out_info['ram']:X}[] = " + "{\n"
-            TO_OUTPUT.append([out_struct, out + "\n};\n"])
+            TO_OUTPUT.append([out_struct, out + "};\n"])
 
     for cmd in OUT_FUNCS:
         funcs = sorted(list(OUT_FUNCS[cmd]))
@@ -218,8 +248,42 @@ def dump(offset):
 
                     dump_type = f"unk_D_86002F34_018[{c}]" if c > 0 else f"unk_D_86002F34_018"
                     
-                    d = data2c.dump(find_sym.find(f"0x{v:X}", "v")["rom"], dump_type)
-                    out = f"unk_D_86002F34_018 D_{v:08X}" + (f"[{c}]" if c > 0 else "") + f" = {d}"
+                    out = data2c.dump(find_sym.find(f"0x{v:X}", "v")["rom"], dump_type)
+
+                    split = out.split(",")
+                    for i,arg in enumerate(split):
+                        arg = arg.strip()
+                        is_valid = False
+                        try:
+                            addr = int(arg, 16)
+                            if addr >= 0x80000000:
+                                is_valid = True
+                        except Exception:
+                            pass;
+
+                        if is_valid:
+                            tex_type_str = split[i-4].strip()
+                            tex_type = int(tex_type_str, 16)
+
+                            match tex_type:
+                                case 2:
+                                    new_tex_type = "unk_D_86002F34_018_GFX_TYPE_2"
+                                    size = (int(split[i-1].strip(), 10) * 2) // 4
+                                case 3:
+                                    new_tex_type = "unk_D_86002F34_018_GFX_TYPE_3"
+                                    size = (int(split[i-1].strip(), 10) * 4) // 4
+                                case _:
+                                    print(f"Inknown tex type {tex_type}")
+                                    exit()
+
+                            tex = data2c.dump(find_sym.find(f"0x{addr:X}", "v")["rom"], f"u32[{size}]")
+                            FINAL_OUT_DATA.append([addr, f"u32[{size}]", tex])
+                            
+                            pos = out.rfind(tex_type_str, 0, out.find(arg))
+
+                            out = out[:pos] + new_tex_type + out[pos+4:]
+                            out = out.replace(arg, f"D_{addr:08X}")
+
                     FINAL_OUT_DATA.append([v, dump_type, out])
 
             case _:
@@ -234,7 +298,11 @@ def dump(offset):
                     FINAL_OUT_DATA.append([v, type, out])
 
     FINAL_OUT_DATA.sort(key=lambda x: x[0])
+    FINAL_DONE = set()
     for v, type, out in FINAL_OUT_DATA:
+        if v in FINAL_DONE:
+            continue
+        FINAL_DONE.add(v)
         is_array = "[" in type or type == "Gfx" or type == "Vtx"
 
         if "[" in type:
