@@ -79,6 +79,7 @@ void func_8002FA40(void) {
                 FRAGMENT_LOAD(fragment3);
                 FRAGMENT_LOAD(fragment31);
 
+                // determine if this is "How to Snap" or regular Snap Mode.
                 if (var_s5 == 1) {
                     var_s0 = 0;
                 } else {
