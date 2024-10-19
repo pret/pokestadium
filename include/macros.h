@@ -34,7 +34,7 @@
 
 #define ALIGN4(val) (((val) + 0x3) & ~0x3)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
-#define ALIGN16(val) (((val) + 0xF) & ~0xF)
+#define ALIGN16(val) (((val) + 0xFu) & ~0xFu)
 #define ALIGN64(val) (((val) + 0x3F) & ~0x3F)
 
 #define DECR(x) ((x) == 0 ? 0 : --(x))

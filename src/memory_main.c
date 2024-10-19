@@ -395,6 +395,6 @@ size_t main_pool_get_block_dist(MainPoolBlock* block) {
 /**
  * Return the pointer to the static memory pool area.
  */
-struct MainPool* main_pool_get_pool(void) {
+MainPool* main_pool_get_pool(void) {
     return &sMemPool;
 }

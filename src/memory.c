@@ -9,9 +9,9 @@
  * order for allocation/freeing.
  * Return NULL if there is not enough space in the main pool.
  */
-struct MemoryPool* mem_pool_try_init(u32 size, s32 side) {
+MemoryPool* mem_pool_try_init(u32 size, s32 side) {
     MainPoolBlock* block;
-    struct MemoryPool* ret;
+    MemoryPool* ret;
 
     size = ALIGN4(size);
     block = main_pool_alloc(size, side);
@@ -28,7 +28,7 @@ struct MemoryPool* mem_pool_try_init(u32 size, s32 side) {
 // TODO: This function is strange, it cant be using MemoryPool, as it allocates
 // more variables than the MemoryPool struct, and it doesnt line up. Whats going
 // on with these structs?
-struct MainPool* mem_pool_init(struct MainPool* pool, s32 size) {
+MainPool* mem_pool_init(MainPool* pool, s32 size) {
     s32 aligned_size =
         ALIGN4(size - 3) - 0x28; // whats the deal with 0x28? this size doesnt match any known pool struct.
     void* listHeadL = &pool->listHeadL;
@@ -46,7 +46,7 @@ struct MainPool* mem_pool_init(struct MainPool* pool, s32 size) {
 /**
  * Allocate from a memory pool. Return NULL if there is not enough space.
  */
-void* mem_pool_alloc(struct MainPool* node, s32 size) {
+void* mem_pool_alloc(MainPool* node, s32 size) {
     struct MemoryBlock* freeBlock;
     void* addr;
 
@@ -79,7 +79,7 @@ void* mem_pool_alloc(struct MainPool* node, s32 size) {
 /**
  * Free a block that was allocated using mem_pool_alloc.
  */
-void mem_pool_free(struct MemoryPool* pool, void* addr) {
+void mem_pool_free(MemoryPool* pool, void* addr) {
     struct MemoryBlock* block;
     struct MemoryBlock* freeList;
 
