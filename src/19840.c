@@ -31,18 +31,18 @@ void func_80018C40(unk_D_86002F34* arg0, arg1_func_80010CA8 arg1) {
 
     for (i = 0; i < arg0->unk_24; i++, var_s2++) {
         if (var_s2->unk_00 == 0) {
-            if (var_s2->unk_01 == 2) {
-                u16* var_s1 = var_s2->unk_08;
+            if (var_s2->type == unk_D_86002F34_018_GFX_TYPE_2) {
+                u16* var_s1 = var_s2->texture;
 
-                for (j = 0; j < var_s2->unk_06; j++) {
+                for (j = 0; j < var_s2->num_texels; j++) {
                     var_s1[j] = func_80010CA8(var_s1[j], arg1);
                 }
             }
 
-            if (var_s2->unk_01 == 3) {
-                u32* var_s1 = var_s2->unk_08;
+            if (var_s2->type == unk_D_86002F34_018_GFX_TYPE_3) {
+                u32* var_s1 = var_s2->texture;
 
-                for (j = 0; j < var_s2->unk_06; j++) {
+                for (j = 0; j < var_s2->num_texels; j++) {
                     var_s1[j] = func_80010E20(var_s1[j], arg1);
                 }
             }

@@ -218,7 +218,22 @@ void func_8002FA40(void) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_8003107C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031140.s")
+void func_80031140(unk_func_80026268_arg0* arg0, unk_D_83407AC8* arg1) {
+    s32 i;
+
+    bzero(arg0, sizeof(unk_func_80026268_arg0));
+
+    arg0->unk_0E = arg1->unk_00;
+    arg0->unk_00 = arg1->unk_02;
+
+    for (i = 0; i < 11; i++) {
+        arg0->unk_30[i] = arg1->unk_03[i];
+    }
+
+    for (i = 0; i < 11; i++) {
+        arg0->unk_3B[i] = arg1->unk_0E[i];
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031204.s")
 
