@@ -472,10 +472,10 @@ void func_80004200(u32 block_addr, u32 addr) {
     }
 }
 
-s32 func_80004258(s32 id, u8* rom_start, u8* rom_end, s32 arg3) {
-    s32 vaddr = func_80003DC4(rom_start, rom_end, arg3, 0);
+u8* func_80004258(s32 id, u8* rom_start, u8* rom_end, s32 arg3) {
+    u8* vaddr = func_80003DC4(rom_start, rom_end, arg3, 0);
 
-    if ((vaddr != 0) && (id > 0)) {
+    if ((vaddr != NULL) && (id > 0)) {
         Memmap_SetSegmentMap(id, vaddr, main_pool_get_block_dist(vaddr));
         main_pool_set_func(vaddr, id + 0x82000000, &func_80004200);
     }

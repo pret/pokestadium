@@ -75,7 +75,7 @@ unk_D_800AE540_0004* func_80029074(void) {
     return D_800AE540.unk_0004;
 }
 
-s16 func_80029080(void) {
+s32 func_80029080(void) {
     return D_80075674;
 }
 

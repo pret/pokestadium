@@ -7,11 +7,9 @@
 typedef struct unk_D_83407AC8 {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03[11];
-    /* 0x0E */ u8 unk_0E;
-    /* 0x0F */ u8 unk_0F;
-    /* 0x10 */ u8 unk_10;
-} unk_D_83407AC8; // size >= 0x12
+    /* 0x03 */ s8 unk_03[11];
+    /* 0x0E */ s8 unk_0E[11];
+} unk_D_83407AC8; // size >= 0x1A
 
 typedef struct unk_D_83402EE0_070 {
     /* 0x00 */ char unk00[0x1A];

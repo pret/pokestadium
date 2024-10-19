@@ -1118,10 +1118,10 @@
     subsegments:
     - [0x191660, textbin,   fragments/22/fragment22_header]
     - [0x191680, c,      fragments/22/fragment22]
-    - [0x193EA0, data,   fragments/22/fragment22_data]
-    - [0x1A8320, rodata, fragments/22/fragment22_rodata]
+    - [0x193EA0, .data,   fragments/22/fragment22]
+    - [0x1A8320, .rodata, fragments/22/fragment22]
 
-    - {vram: 0x88016CF0, type:  bss, name: fragments/22/fragment22_bss}
+    - {vram: 0x88016CF0, type:  .bss, name: fragments/22/fragment22}
 
   - name: fragment22_relocs
     type: code

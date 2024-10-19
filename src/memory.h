@@ -26,7 +26,7 @@ typedef struct MainPoolState {
     /* 0x0C */ struct MainPoolState *prev;
 } MainPoolState;
 
-struct MainPool {
+typedef struct MainPool {
     /* 0x00 */ OSMesg msgs[1];
     /* 0x04 */ OSMesgQueue queue;
     /* 0x1C */ size_t available;
@@ -35,7 +35,7 @@ struct MainPool {
     /* 0x28 */ MainPoolBlock *listHeadL;
     /* 0x2C */ MainPoolBlock *listHeadR;
     /* 0x30 */ struct MainPoolState *mainState;
-};
+} MainPool;
 
 // structs used for the smaller pools allocated from the global pool.
 typedef struct MemoryBlock {
@@ -43,13 +43,13 @@ typedef struct MemoryBlock {
     /* 0x04 */ u32 size;
 } MemoryBlock;
 
-struct MemoryPool {
+typedef struct MemoryPool {
     /* 0x00 */ OSMesg msgs[1];
     /* 0x04 */ OSMesgQueue queue;
     /* 0x1C */ size_t available;
     /* 0x20 */ struct MemoryBlock *firstBlock;
     /* 0x24 */ struct MemoryBlock freeList;
-};
+} MemoryPool;
 
 // memory_main.c
 void main_pool_init(void *start, void *end);
@@ -65,14 +65,14 @@ u32 main_pool_pop_state(u32 arg);
 void *main_pool_search(uintptr_t addr, s32 *argPtr);
 void main_pool_set_func(void *block, s32 arg, AllocateFunc func);
 size_t main_pool_get_block_dist(MainPoolBlock *block);
-struct MainPool *main_pool_get_pool(void);
+MainPool*main_pool_get_pool(void);
 
 // memory.c
-struct MemoryPool *mem_pool_try_init(u32 size, s32 side);
-struct MainPool* mem_pool_init(struct MainPool *pool, s32 size);
-void *mem_pool_alloc(struct MainPool *node, s32 size);
+MemoryPool *mem_pool_try_init(u32 size, s32 side);
+MainPool* mem_pool_init(MainPool*pool, s32 size);
+void *mem_pool_alloc(MainPool*node, s32 size);
 
-void mem_pool_free(struct MemoryPool* pool, void* addr);
+void mem_pool_free(MemoryPool* pool, void* addr);
 void *func_80002D10(u32 size, s32 side);
 void func_80002D60(struct MemoryBlock* block);
 void* func_80002DA4(struct MainPoolState* block, s32 size);

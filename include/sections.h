@@ -137,36 +137,50 @@ extern u8 fragment22_relocs_ROM_END[];
 extern u8 fragment23_TEXT_START[];
 extern u8 fragment23_ROM_START[];
 extern u8 fragment23_ROM_END[];
+extern u8 fragment23_relocs_ROM_END[];
 
 // fragment 24
 extern u8 fragment24_TEXT_START[];
 extern u8 fragment24_ROM_START[];
 extern u8 fragment24_ROM_END[];
+extern u8 fragment24_relocs_ROM_END[];
 
 // fragment 25
 extern u8 fragment25_TEXT_START[];
 extern u8 fragment25_ROM_START[];
 extern u8 fragment25_ROM_END[];
+extern u8 fragment25_relocs_ROM_END[];
 
 // fragment 26
 extern u8 fragment26_TEXT_START[];
 extern u8 fragment26_ROM_START[];
 extern u8 fragment26_ROM_END[];
+extern u8 fragment26_relocs_ROM_END[];
 
 // fragment 27
 extern u8 fragment27_TEXT_START[];
 extern u8 fragment27_ROM_START[];
 extern u8 fragment27_ROM_END[];
+extern u8 fragment27_relocs_ROM_END[];
 
 // fragment 28
 extern u8 fragment28_TEXT_START[];
 extern u8 fragment28_ROM_START[];
 extern u8 fragment28_ROM_END[];
+extern u8 fragment28_relocs_ROM_END[];
 
 // fragment 29
 extern u8 fragment29_TEXT_START[];
 extern u8 fragment29_ROM_START[];
 extern u8 fragment29_ROM_END[];
+extern u8 fragment29_relocs_ROM_END[];
+
+extern u8 fragment29_misc_1_ROM_START[];
+extern u8 fragment29_misc_1_ROM_END[];
+extern u8 fragment29_misc_2_ROM_START[];
+extern u8 fragment29_misc_2_ROM_END[];
+extern u8 fragment29_misc_3_ROM_START[];
+extern u8 fragment29_misc_3_ROM_END[];
 
 // fragment 30
 extern u8 fragment30_TEXT_START[];

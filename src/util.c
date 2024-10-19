@@ -12,7 +12,7 @@
  */
 u32 gExpansionRAMStart = FALSE;
 
-extern struct MainPool** gMainPool; // gMainPool
+extern MainPool** gMainPool; // gMainPool
 
 void func_80003860(void);
 s32 func_80007A58(void);
@@ -114,7 +114,7 @@ void Util_DrawRect(Gfx** dlist, s32 ulx, s32 lrx, u16 color) {
  * tacked onto the profiler by HAL instead of EAD.
  */
 void Util_DrawMemProfiler(Gfx** dlist) {
-    struct MainPool* pool = main_pool_get_pool(); // get pool pointer
+    MainPool* pool = main_pool_get_pool(); // get pool pointer
     /**
      * Get the available memory offset by gExpansionRAMStart variable. This variable is weird; it
      * seems to be used in reference to osMemSize checks >= 0x600000 which would only be true

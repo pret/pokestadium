@@ -90,8 +90,12 @@ void func_80023D60(s32);
 void func_80023F78(s32 arg0);
 void func_80024040(s32 arg0);
 s32 func_800240A0(void);
+s32 func_80024A48(s32, s32, s32);
+s32 func_80024EF4(void);
+s32 func_80024F00(s32);
 s32 func_80024FB0(s32 arg0);
 void func_800251B0(s32, s8*);
-
+s32 func_80025370(s32);
+s32 func_8002539C(s32);
 
 #endif // _6BC0_H_
