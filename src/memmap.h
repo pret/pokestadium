@@ -49,7 +49,7 @@ void Memmap_SetSegments(Gfx** gfxDl);
 void Memmap_RelocateFragment(u32 id, struct Fragment* fragment);
 void Memmap_SetFragmentMap(u32 id, uintptr_t vaddr, size_t size);
 uintptr_t Memmap_GetFragmentBaseVaddr(u32 id);
-uintptr_t Memmap_GetFragmentVaddr(u32 mask);
+uintptr_t Memmap_GetFragmentVaddr(void* addr);
 u32 Memmap_GetFragmentVaddrMask(u32 i, uintptr_t addr);
 void Memmap_ClearFragmentMemmap(u32 id);
 uintptr_t Memmap_GetLoadedFragmentVaddr(uintptr_t addr);

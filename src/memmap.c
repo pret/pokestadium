@@ -170,15 +170,16 @@ uintptr_t Memmap_GetFragmentBaseVaddr(u32 id) {
  * Y: Fragment number.
  * Z: Fragment offset.
  */
-uintptr_t Memmap_GetFragmentVaddr(u32 mask) {
-    if ((mask >= 0x81000000U) && (mask < 0x90000000U)) {
-        u32 id = ((mask & 0x0FF00000) >> 0x14) - 0x10;
-        u32 value = ((mask & 0x000FFFFF));
+uintptr_t Memmap_GetFragmentVaddr(void* addr) {
+    if (((u32)addr >= 0x81000000U) && ((u32)addr < 0x90000000U)) {
+        u32 id = (((u32)addr & 0x0FF00000) >> 0x14) - 0x10;
+        u32 value = (((u32)addr & 0x000FFFFF));
+
         if (gFragments[id].vaddr != NULL) {
-            mask = gFragments[id].vaddr + value;
+            addr = gFragments[id].vaddr + value;
         }
     }
-    return mask;
+    return (uintptr_t)addr;
 }
 
 /*

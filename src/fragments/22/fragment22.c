@@ -2450,10 +2450,10 @@ void func_88000020(unk_func_88001300_000* arg0, s32 arg1, s32 arg2) {
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(arg0, sizeof(unk_func_88001300_000));
 
     arg0->unk_18 = func_8800008C;
-    arg0->unk_10 = arg1;
-    arg0->unk_12 = arg2;
-    arg0->unk_16 = 0x4C;
-    arg0->unk_14 = 0x4C;
+    arg0->unk_10.unk_00 = arg1;
+    arg0->unk_10.unk_02 = arg2;
+    arg0->unk_14.unk_02 = 0x4C;
+    arg0->unk_14.unk_00 = 0x4C;
 }
 
 s32 func_8800008C(unk_func_88001300_000* arg0, s32 arg1, s32 arg2) {
@@ -2503,10 +2503,10 @@ void func_8800071C(unk_func_8800071C* arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(arg0, sizeof(unk_func_8800071C));
 
     arg0->unk_00.unk_18 = func_880007C0;
-    arg0->unk_00.unk_10 = arg1;
-    arg0->unk_00.unk_12 = arg2;
-    arg0->unk_00.unk_14 = arg3;
-    arg0->unk_00.unk_16 = arg4;
+    arg0->unk_00.unk_10.unk_00 = arg1;
+    arg0->unk_00.unk_10.unk_02 = arg2;
+    arg0->unk_00.unk_14.unk_00 = arg3;
+    arg0->unk_00.unk_14.unk_02 = arg4;
     arg0->unk_2C = arg5;
     arg0->unk_30 = arg6;
     arg0->unk_34 = arg7;
@@ -2516,8 +2516,8 @@ void func_8800071C(unk_func_8800071C* arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
 s32 func_880007C0(unk_func_88001300_000* arg0, s32 arg1, s32 arg2) {
     unk_func_8800071C* ptr = (unk_func_8800071C*)arg0;
 
-    func_880001A8(ptr->unk_00.unk_10, ptr->unk_00.unk_12, ptr->unk_00.unk_14, ptr->unk_00.unk_16, ptr->unk_2C,
-                  ptr->unk_30, ptr->unk_34, ptr->unk_38);
+    func_880001A8(ptr->unk_00.unk_10.unk_00, ptr->unk_00.unk_10.unk_02, ptr->unk_00.unk_14.unk_00,
+                  ptr->unk_00.unk_14.unk_02, ptr->unk_2C, ptr->unk_30, ptr->unk_34, ptr->unk_38);
     return 0;
 }
 
@@ -2526,10 +2526,10 @@ void func_88000830(unk_func_88000830* arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
 
     arg0->unk_00.unk_1C = func_880008C4;
     arg0->unk_00.unk_18 = func_880008E0;
-    arg0->unk_00.unk_10 = arg1;
-    arg0->unk_00.unk_12 = arg2;
-    arg0->unk_00.unk_14 = arg3;
-    arg0->unk_00.unk_16 = arg4;
+    arg0->unk_00.unk_10.unk_00 = arg1;
+    arg0->unk_00.unk_10.unk_02 = arg2;
+    arg0->unk_00.unk_14.unk_00 = arg3;
+    arg0->unk_00.unk_14.unk_02 = arg4;
     arg0->unk_34 = arg5;
     arg0->unk_30 = arg6;
     arg0->unk_2C = NULL;
@@ -2553,11 +2553,11 @@ s32 func_880008E0(unk_func_88000830* arg0, s32 arg1, s32 arg2) {
     gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
     gDPLoadTextureBlock(gDisplayListHead++, arg0->unk_30[arg0->unk_2C], G_IM_FMT_RGBA, G_IM_SIZ_16b, arg0->unk_34,
-                        arg0->unk_00.unk_16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        arg0->unk_00.unk_14.unk_02, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                        G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(gDisplayListHead++, arg1 << 3, arg2 << 3, (arg0->unk_00.unk_14 + arg1) << 3,
-                        (arg2 + arg0->unk_00.unk_16) << 3, G_TX_RENDERTILE, 0, 0, 0x0200, 0x0200);
+    gSPTextureRectangle(gDisplayListHead++, arg1 << 3, arg2 << 3, (arg0->unk_00.unk_14.unk_00 + arg1) << 3,
+                        (arg2 + arg0->unk_00.unk_14.unk_02) << 3, G_TX_RENDERTILE, 0, 0, 0x0200, 0x0200);
     return 0;
 }
 
@@ -2566,10 +2566,10 @@ void func_88000C18(unk_func_88000C18* arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
 
     arg0->unk_00.unk_1C = func_88000CB0;
     arg0->unk_00.unk_24 = func_88000CC0;
-    arg0->unk_00.unk_10 = arg1;
-    arg0->unk_00.unk_12 = arg2;
-    arg0->unk_00.unk_14 = arg3;
-    arg0->unk_00.unk_16 = arg4;
+    arg0->unk_00.unk_10.unk_00 = arg1;
+    arg0->unk_00.unk_10.unk_02 = arg2;
+    arg0->unk_00.unk_14.unk_00 = arg3;
+    arg0->unk_00.unk_14.unk_02 = arg4;
 
     arg0->unk_2C = arg5;
     arg0->unk_30 = -1;
@@ -2591,8 +2591,8 @@ void func_88000CC8(unk_func_88000CC8* arg0, s32 arg1, s32 arg2, unk_func_8850002
 
     arg0->unk_00.unk_18 = func_88000E30;
     arg0->unk_00.unk_1C = func_88000D80;
-    arg0->unk_00.unk_10 = arg1;
-    arg0->unk_00.unk_12 = arg2;
+    arg0->unk_00.unk_10.unk_00 = arg1;
+    arg0->unk_00.unk_10.unk_02 = arg2;
     arg0->unk_2C = arg3;
     arg0->unk_30[0] = arg4;
     arg0->unk_30[1] = arg5;
@@ -2725,8 +2725,8 @@ void func_88001300(unk_func_88001300* arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
 
     arg0->unk_00.unk_20 = func_88001D0C;
     arg0->unk_00.unk_24 = func_88001CBC;
-    arg0->unk_00.unk_10 = arg1;
-    arg0->unk_00.unk_12 = arg2;
+    arg0->unk_00.unk_10.unk_00 = arg1;
+    arg0->unk_00.unk_10.unk_02 = arg2;
     arg0->unk_3C = mem_pool_alloc(arg6, sizeof(unk_func_88001300_03C));
 
     ((func8850C284)Memmap_GetFragmentVaddr(func_8850C284))(arg0->unk_3C, 2, 4, arg6);
@@ -2789,14 +2789,15 @@ void func_88001300(unk_func_88001300* arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
         temp_s0 = mem_pool_alloc(arg6, sizeof(unk_func_88001300_000));
         ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(temp_s0, sizeof(unk_func_88001300_000));
         // clang-format off
-        temp_s0->unk_10 = 0x1E4; temp_s0->unk_12 = 0x34;
+        temp_s0->unk_10.unk_00 = 0x1E4; temp_s0->unk_10.unk_02 = 0x34;
         // clang-format on
-        temp_s0->unk_14 = 0x4C;
-        temp_s0->unk_16 = 0x4C;
+        temp_s0->unk_14.unk_00 = 0x4C;
+        temp_s0->unk_14.unk_02 = 0x4C;
         ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0->unk_2C, temp_s0);
 
         arg0->unk_38 = mem_pool_alloc(arg6, sizeof(unk_func_88001300_038));
-        ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_38, 0, 0, temp_s0->unk_14, temp_s0->unk_16);
+        ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_38, 0, 0, temp_s0->unk_14.unk_00,
+                                                               temp_s0->unk_14.unk_02);
         arg0->unk_38->unk_28 |= 0x200;
         ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(temp_s0, arg0->unk_38);
 
@@ -3078,11 +3079,6 @@ s32 func_880025D8(unk_func_88001300* arg0) {
 
     return sp24 - 1;
 }
-
-typedef struct func_88002628_sp38 {
-    /* 0x000 */ OSThread thread;
-    /* 0x1B0 */ char unk1B0[0x10];
-} func_88002628_sp38; // size = 0x1C0
 
 s32 func_88002628(s32 arg0, UNUSED s32 arg1) {
     MemoryPool* sp44;

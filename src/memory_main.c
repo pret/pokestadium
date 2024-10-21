@@ -214,7 +214,7 @@ u32 main_pool_get_available(void) {
  * in the pool.
  */
 u32 main_pool_push_state(u32 arg) {
-    struct MainPoolState* state;
+    MainPoolState* state;
     MainPoolBlock* listHeadL;
     MainPoolBlock* listHeadR;
     uintptr_t available;
@@ -263,11 +263,11 @@ u32 main_pool_push_state(u32 arg) {
  * amount of free space left in the pool.
  */
 u32 main_pool_pop_state(u32 arg) {
-    struct MainPoolState* node;
+    MainPoolState* node;
     MainPoolBlock* argptr;
     void* listHeadL;
     void* listHeadR;
-    struct MainPoolState* state;
+    MainPoolState* state;
 
     osRecvMesg(&sMemPool.queue, NULL, OS_MESG_BLOCK);
 
@@ -387,7 +387,7 @@ void main_pool_set_func(void* block, s32 arg, AllocateFunc func) {
  * Get the distance offset from the block's state listHeadL pointer to the current block.
  */
 size_t main_pool_get_block_dist(MainPoolBlock* block) {
-    struct MainPoolState* state = ((u8*)block - sizeof(MainPoolBlock));
+    MainPoolState* state = ((u8*)block - sizeof(MainPoolBlock));
 
     return (size_t)((uintptr_t)state->listHeadL - (uintptr_t)block);
 }
