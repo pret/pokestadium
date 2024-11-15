@@ -101,6 +101,20 @@ extern u8 D_04008000[];
 extern u8 D_04009000[];
 extern u8 D_0400A000[];
 extern u8 D_0400B000[];
+extern u8 D_4006A60[];
+extern u8 D_40022E0[];
+extern u8 D_4002368[];
+extern u8 D_40025F0[];
+extern u8 D_4002878[];
+extern u8 D_4002B00[];
+extern u8 D_4002D88[];
+extern u8 D_4003010[];
+extern u8 D_4003298[];
+extern u8 D_4003520[];
+extern u8 D_4001638[];
+extern u8 D_4001680[];
+extern u8 D_40016C8[];
+extern u8 D_4001710[];
 
 extern u8 D_800818E0[0x20];
 
@@ -211,5 +225,7 @@ typedef struct unk_70D3A0 {
 typedef struct unk_D_70B10 {
     /* 0x00 */ char unk00[0x20];
 } unk_D_70B10; // size = 0x20
+
+extern unk_func_88500020 D_800758E0;
 
 #endif

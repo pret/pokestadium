@@ -7,14 +7,13 @@
 typedef unsigned int uintptr_t;
 
 #include "macros.h"
-
 #include "attributes.h"
 #include "functions.h"
-#include "variables.h"
 #include "sections.h"
 #include "gfx.h"
 #include "color.h"
 #include "sound.h"
+#include "string.h"
 #include "math.h"
 
 typedef struct unk_D_86002F58_004_000_00C_028 {
@@ -501,5 +500,19 @@ typedef struct arg1_func_81407874_014_000_010 {
     /* 0x0E */ u8 unk_0E;
     /* 0x0F */ u8 unk_0F;
 } arg1_func_81407874_014_000_010; // size >= 0x10
+
+typedef struct func_88002628_sp38 {
+    /* 0x000 */ OSThread thread;
+    /* 0x1B0 */ char unk1B0[0x10];
+} func_88002628_sp38; // size = 0x1C0
+
+typedef struct unk_func_88500020 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ u8* unk_0C;
+} unk_func_88500020; // size = 0x10
+
+#include "variables.h"
 
 #endif

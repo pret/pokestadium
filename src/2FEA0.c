@@ -67,7 +67,8 @@ void func_8002F2A0(void) {
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment14, 0, 0);
                     break;
-                case 10: // seems to be the "snap mode" code. However, the asset UI isnt loaded, so this call will crash.
+                case 10: // seems to be the "snap mode" code. However, the asset UI isnt loaded, so this call will
+                         // crash.
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment15, 0, 0);
                     break;
@@ -75,7 +76,8 @@ void func_8002F2A0(void) {
                     FRAGMENT_LOAD(fragment5);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment16, 0, 0);
                     break;
-                case 12: // crashes. This fragment is the "Demo" cutscene bin, but this code passes an invalid demo ID, which doesnt exist.
+                case 12: // crashes. This fragment is the "Demo" cutscene bin, but this code passes an invalid demo ID,
+                         // which doesnt exist.
                     FRAGMENT_LOAD(fragment3);
                     var_s0 = FRAGMENT_LOAD_AND_CALL(fragment17, 0, 0);
                     break;

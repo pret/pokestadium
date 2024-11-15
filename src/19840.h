@@ -17,7 +17,7 @@ typedef struct unk_func_80019600 {
     /* 0x04 */ OSMesgQueue* queue;
     /* 0x08 */ void* unk_08;
     /* 0x0C */ void* unk_0C;
-    /* 0x10 */ struct MainPoolState* pool;
+    /* 0x10 */ MainPoolState* pool;
     /* 0x14 */ s32 size;
     /* 0x18 */ arg1_func_80010CA8 unk_18;
 } unk_func_80019600; // size >= 0x1C

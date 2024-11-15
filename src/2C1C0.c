@@ -224,7 +224,7 @@ void func_8002BA34(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 void func_8002BB7C(s32 arg0, s32 arg1, s32 arg2) {
     s32 i;
     unk_func_80026268_arg0 sp48;
-    void* temp_v0;
+    unk_func_80022C28_ret* temp_v0;
     unk_D_800AE540_0004* temp_s4;
     char sp34[11];
 

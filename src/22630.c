@@ -122,14 +122,14 @@ char* func_80021B7C(char* arg0, char* arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/22630/func_80021C20.s")
 
-void func_80021C40(char* arg0, char* arg1) {
+char* func_80021C40(char* arg0, char* arg1) {
     char sp1C[11];
 
     _bcopy(arg1, sp1C, 0xA);
 
     sp1C[10] = 'P';
 
-    func_80021A90(arg0, sp1C);
+    return func_80021A90(arg0, sp1C);
 }
 
 extern char D_8006FEE8[][0x1C];

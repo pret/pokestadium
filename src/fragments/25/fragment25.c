@@ -1,4 +1,4 @@
-#include "global.h"
+#include "fragment25.h"
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/25/fragment25/func_88400020.s")
 

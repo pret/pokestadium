@@ -79,6 +79,7 @@ typedef union{
 } Color_RGBA14;
 
 #define RGBA8(r, g, b, a) ((((r) & 0xFF) << 24) | (((g) & 0xFF) << 16) | (((b) & 0xFF) << 8) | (((a) & 0xFF) << 0))
+#define	RGBA5551(r, g, b, a) ((((r) << 8) & 0xF800) | (((g) << 3) & 0x7C0) | (((b) >> 2) & 0x3E) | ((a) & 0x1))
 
 #define RGBA16_GET_R(pixel) ((((pixel) & 0xF800) >> 11) & 0xFF)
 #define RGBA16_GET_G(pixel) ((((pixel) & 0x7C0) >> 6) & 0xFF)

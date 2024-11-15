@@ -721,11 +721,13 @@ s32 func_8002797C(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
                 break;
 
             case 22:
-                _bcopy(&D_800AE4E8[2].unk_04.unk2->unk_1EC8.unk_0002[arg2], arg3, 0x8C);
+                _bcopy(&D_800AE4E8[2].unk_04.unk2->unk_1EC8.unk_0002[arg2], arg3,
+                       sizeof(unk_D_800AE4E8_004_2_1EC8_0002));
                 break;
 
             case 23:
-                _bcopy(&D_800AE4E8[2].unk_04.unk2->unk_3280.unk_0002[arg2], arg3, 0x8C);
+                _bcopy(&D_800AE4E8[2].unk_04.unk2->unk_3280.unk_0002[arg2], arg3,
+                       sizeof(unk_D_800AE4E8_004_2_1EC8_0002));
                 break;
         }
         sp2C = 1;
