@@ -2798,7 +2798,7 @@ void func_88001300(unk_func_88001300* arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
         arg0->unk_38 = mem_pool_alloc(arg6, sizeof(unk_func_88001300_038));
         ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_38, 0, 0, temp_s0->unk_14.unk_00,
                                                                temp_s0->unk_14.unk_02);
-        arg0->unk_38->unk_28 |= 0x200;
+        arg0->unk_38->unk_00.unk_28 |= 0x200;
         ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(temp_s0, arg0->unk_38);
 
         sp5C = mem_pool_alloc(arg6, sizeof(unk_func_88001300_000));
@@ -3017,7 +3017,7 @@ void func_8800233C(unk_func_88001300* arg0) {
                 func_8002EEA8(NULL);
             }
 
-            arg0->unk_38->unk_28 |= 0x201;
+            arg0->unk_38->unk_00.unk_28 |= 0x201;
 
             for (i = 0; i < 8; i++) {
                 func_8002EEA8(NULL);
@@ -3027,7 +3027,7 @@ void func_8800233C(unk_func_88001300* arg0) {
             temp_s0 = Memmap_GetFragmentVaddr(func_88506074); temp_s0(arg0->unk_34, func_8002D7C0(NULL, 0, D_88016CF4, 6));
             // clang-format on
         } else {
-            arg0->unk_38->unk_28 |= 0x201;
+            arg0->unk_38->unk_00.unk_28 |= 0x201;
             func_88001258(arg0);
         }
     } else {

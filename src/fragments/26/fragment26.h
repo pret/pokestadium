@@ -8,6 +8,7 @@
 #include "src/29BA0.h"
 #include "src/1AB70.h"
 #include "src/2D340.h"
+#include "src/fragments/25/fragment25.h"
 
 struct unk_func_88001300;
 struct unk_func_88001300_000;
@@ -51,8 +52,7 @@ typedef struct unk_func_88001300_02C {
 } unk_func_88001300_02C; // size = 0x30
 
 typedef struct unk_func_88001300_030 {
-    /* 0x00 */ unk_func_88001300_000_000 unk_00;
-    /* 0x0C */ char unk0C[0x20];
+    /* 0x00 */ unk_func_88001300_000 unk_00;
     /* 0x2C */ Color_RGBA8_u32 unk_2C;
     /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 unk_34;
@@ -60,14 +60,7 @@ typedef struct unk_func_88001300_030 {
 } unk_func_88001300_030; // size = 0x3C
 
 typedef struct unk_func_88001300_038 {
-    /* 0x00 */ u8* unk_00[1];
-    /* 0x04 */ char unk04[0x8];
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ char unk10[0x4];
-    /* 0x14 */ s16 unk_14;
-    /* 0x16 */ s16 unk_16;
-    /* 0x18 */ char unk18[0x10];
-    /* 0x28 */ u16 unk_28;
+    /* 0x00 */ unk_func_88001300_000 unk_00;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
 } unk_func_88001300_038; // size = 0x34
@@ -107,9 +100,13 @@ typedef struct unk_func_88001300_03C {
     /* 0x1C */ unk_func_88001300_03C_01C* unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ char unk28[0x4];
+    /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ char unk30[0x10];
+    /* 0x30 */ char unk30[0x8];
+    /* 0x38 */ s16 unk_38;
+    /* 0x3A */ s16 unk_3A;
+    /* 0x3C */ s16 unk_3C;
+    /* 0x3E */ s16 unk_3E;
 } unk_func_88001300_03C; // size = 0x40
 
 typedef struct unk_func_88001300 {
@@ -228,6 +225,25 @@ typedef struct unk_func_88200FA0_030_030_1AE680 {
     /* 0x52 */ s16 unk_52;
 } unk_func_88200FA0_030_030_1AE680; // size = 0x54
 
+// Copy of above with unk_2C changed just for fragment24_1CEA00
+typedef struct unk_func_88200FA0_030_030_1CEA00 {
+    /* 0x00 */ unk_func_88001300_000 unk_00;
+    /* 0x2C */ unk_func_8830867C_02C_0CC* unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ u16* unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s16 unk_3C;
+    /* 0x3E */ s16 unk_3E;
+    /* 0x40 */ unk_func_88200FA0_030_030_040 unk_40;
+    /* 0x44 */ unk_func_88001300_03C_01C* unk_44;
+    /* 0x48 */ s16 unk_48;
+    /* 0x4A */ s16 unk_4A;
+    /* 0x4C */ s16 unk_4C;
+    /* 0x4E */ s16 unk_4E;
+    /* 0x50 */ s16 unk_50;
+    /* 0x52 */ s16 unk_52;
+} unk_func_88200FA0_030_030_1CEA00; // size = 0x54
+
 typedef struct unk_func_8850182C {
     /* 0x00 */ unk_func_88001300_000 unk_00;
     /* 0x2C */ Color_RGBA8 unk_2C;
@@ -235,7 +251,7 @@ typedef struct unk_func_8850182C {
 
 typedef struct unk_func_889000C4 {
     /* 0x00 */ unk_func_88001300_000 unk_00;
-    /* 0x2C */ void* unk_2C;
+    /* 0x2C */ unk_func_88001300_000* unk_2C;
     /* 0x30 */ void* unk_30;
     /* 0x34 */ unk_func_88200FA0_030_038 unk_34;
     /* 0x40 */ void* unk_40;
@@ -353,7 +369,6 @@ typedef struct unk_func_882025E0_1A9780 {
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ unk_func_882025E0_03C unk_3C[5];
 } unk_func_882025E0_1A9780; // size = 0x78
-
 
 typedef s32 (*unk_func_88203ED8_064_010)(struct unk_func_88203ED8_064*, Controller*);
 typedef void (*unk_func_88203ED8_064_014)(struct unk_func_88203ED8_064*);
@@ -503,6 +518,124 @@ typedef struct unk_func_8820E99C_030_044 {
     /* 0x30 */ s32 unk_30;
 } unk_func_8820E99C_030_044; // size = 0x34
 
+struct unk_func_8830867C_02C;
+
+typedef struct unk_func_8830867C_02C_034 {
+    /* 0x00 */ unk_func_88200FA0_030_030_1CEA00 unk_00;
+    /* 0x54 */ s16 unk_54;
+    /* 0x58 */ s32 unk_58;
+    /* 0x5C */ s32 unk_5C;
+    /* 0x60 */ char unk60[0xC];
+    /* 0x6C */ s32 unk_6C;
+    /* 0x70 */ struct unk_func_8830867C_02C* unk_70;
+} unk_func_8830867C_02C_034; // size = 0x74
+
+typedef s32 (*unk_func_8830867C_02C_048_010)(struct unk_func_8830867C_02C_048*, Controller*);
+typedef void (*unk_func_8830867C_02C_048_014)(struct unk_func_8830867C_02C_048*, s32);
+
+typedef struct unk_func_8830867C_02C_048 {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_02C_048* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_02C_048* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_02C* unk_24;
+} unk_func_8830867C_02C_048; // size = 0x28
+
+typedef struct unk_func_8830867C_034_038 {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_034_038* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_034_038* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_034* unk_24;
+} unk_func_8830867C_034_038; // size = 0x28
+
+typedef struct unk_func_8830867C_044_040 {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_034_038* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_034_038* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_044* unk_24;
+} unk_func_8830867C_044_040; // size = 0x28
+
+typedef struct unk_func_8830867C_03C_058 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ unk_D_88400138* unk_04;
+} unk_func_8830867C_03C_058; // size = 0x8
+
+typedef struct unk_func_8830867C_03C_0D0 {
+    /* 0x00 */ unk_func_8830867C_03C_058** unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+} unk_func_8830867C_03C_0D0; // size = 0x10
+
+typedef struct unk_func_8830867C_03C_04C {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_03C_04C* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_03C_04C* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_03C* unk_24;
+} unk_func_8830867C_03C_04C; // size = 0x28
+
+typedef struct unk_func_8830867C_040_05C {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_040_05C* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_040_05C* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_040* unk_24;
+} unk_func_8830867C_040_05C; // size = 0x28
+
+typedef struct unk_func_8830867C_04C_080 {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_04C_080* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_04C_080* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_04C* unk_24;
+} unk_func_8830867C_04C_080; // size = 0x28
+
+typedef struct unk_func_8830867C_048_048 {
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ struct unk_func_8830867C_048_048* unk_04;
+    /* 0x08 */ struct unk_func_8830867C_048_048* unk_08;
+    /* 0x0C */ char unk0C[0x4];
+    /* 0x10 */ unk_func_8830867C_02C_048_010 unk_10;
+    /* 0x14 */ unk_func_8830867C_02C_048_014 unk_14;
+    /* 0x18 */ char unk18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ struct unk_func_8830867C_048* unk_24;
+} unk_func_8830867C_048_048; // size = 0x28
+
 typedef void (*func88500020)(unk_func_88500020*, s32, s32);
 typedef void (*func88500668)(unk_func_882025E0*, s32);
 typedef void (*func8850068C)(unk_func_88001300_000_000*, unk_func_88001300_000_000*);
@@ -532,6 +665,7 @@ typedef void (*func88506074)(unk_func_88001300_034*, char*);
 typedef void (*func885060BC)(unk_func_88200FA0_030_030*, s32, s32, unk_func_88200FA0_030_030_040, s32, s32, s32, s32, MemoryPool*);
 typedef void (*func88506238)(unk_func_88200FA0_030_030*, s32, MemoryPool*);
 typedef void (*func8850628C)(unk_func_88200FA0_030_030*);
+typedef void (*func8850633C)(unk_func_88200FA0_030_030_1CEA00*, unk_func_8830867C_02C_0CC*);
 typedef void (*func88506384)(unk_func_88200FA0_030_030*, unk_func_88200FA0_030_038*, MemoryPool*);
 typedef void (*func885063B8)(unk_func_88200FA0_030_030*, unk_func_88201DA0_038*);
 typedef void (*func88506404)(unk_func_88200FA0_030_030*, u8*, MemoryPool*);
@@ -539,11 +673,14 @@ typedef void (*func88506BFC)(unk_func_88200FA0_030_030*, s32);
 typedef void (*func88506CE4)(unk_func_88200FA0_030_030*);
 typedef void (*func88506DCC)(unk_func_8821421C_038_034*, s32, s32, void (*)(), s32, s32, s32, MemoryPool*);
 typedef void (*func88506EE4)(unk_func_8820BE14_02C_038*, unk_func_88200FA0_030_038*);
+typedef void (*func88506F1C)(unk_func_8830867C_02C_034*, unk_func_88200FA0_030_038*, MemoryPool*);
 typedef void (*func88506F50)(unk_func_8821421C_038_034*, unk_func_8821421C_038_050**);
+typedef void (*func88506F8C)(unk_func_8821421C_038_034*, unk_func_8830867C_03C_0D0*, MemoryPool*);
 typedef void (*func88506FC0)(unk_func_8820BE14_02C_038*);
 typedef void (*func88506FE0)(unk_func_8820BE14_02C_038*);
 typedef void (*func88507AE4)(unk_func_8820BE14_02C_038*, s32);
 typedef void (*func88507B80)(unk_func_8820BE14_02C_038*, s32);
+typedef void (*func88507C0C)(unk_func_8830867C_02C_034*, s32, s32);
 typedef void (*func88507CC4)(unk_func_8820BE14_02C_038*, unk_func_88205880_00D0*);
 typedef void (*func88507CEC)(unk_func_8820BE14_02C_038*);
 typedef void (*func88507D4C)(unk_func_88507D4C*, s32, s32, s32, s32, unk_func_8820BE14_02C_038*);
@@ -568,7 +705,9 @@ typedef void (*func8850C064)(unk_func_88203ED8_064*, s32);
 typedef void (*func8850C284)(unk_func_88001300_03C*, s32, s32, MemoryPool*);
 typedef void (*func8850CAB4)(unk_func_88001300_03C*);
 typedef void (*func8850CB48)(unk_func_88001300_03C*, s32);
+typedef void (*func8850CBA8)(unk_func_8830867C_02C_048*);
 typedef void (*func8850CC74)(unk_func_88001300_000*, unk_func_88001300_000*);
+typedef void (*func8850CD24)(unk_func_8830867C_02C_048*, s32);
 typedef void (*func8850CD44)(unk_func_8850CD44*, s32, MemoryPool*);
 typedef void (*func8850CF00)(unk_func_8850CD44*, s32);
 
@@ -581,7 +720,7 @@ void func_88500828(unk_func_88001300_000*, s32, s32);
 void func_885008C4(unk_func_88001300_000*);
 void func_8850093C(s32, s32);
 void func_88500994(unk_func_88500994*, s32, s32);
-void func_88500A3C(unk_func_88500994*, unk_func_8850878C*);
+void func_88500A3C(unk_func_88001300_000*, unk_func_88001300_000*);
 void func_88500A6C(unk_func_88500994*, s32);
 void func_88500E34(unk_func_88500E34*, s32, s32, s32, s32, u8*);
 void func_88500EE4(unk_func_88500EE4*, s32, s32, s32, s32, u8*, Color_RGBA8, Color_RGBA8);
@@ -602,6 +741,7 @@ void func_88506074(unk_func_88001300_034* arg0, char* arg1);
 void func_885060BC(unk_func_88200FA0_030_030*, s32, s32, unk_func_88200FA0_030_030_040, s32, s32, s32, s32, MemoryPool*);
 void func_88506238(unk_func_88200FA0_030_030*, s32, MemoryPool*);
 void func_8850628C(unk_func_88200FA0_030_030*);
+void func_8850633C(unk_func_88200FA0_030_030_1CEA00*, unk_func_8830867C_02C_0CC*);
 void func_88506384(unk_func_88200FA0_030_030*, unk_func_88200FA0_030_038*, MemoryPool*);
 void func_885063B8(unk_func_88200FA0_030_030*, unk_func_88201DA0_038*);
 void func_88506404(unk_func_88200FA0_030_030*, u8*, MemoryPool*);
@@ -609,11 +749,14 @@ void func_88506BFC(unk_func_88200FA0_030_030*, s32);
 void func_88506CE4(unk_func_88200FA0_030_030*);
 void func_88506DCC(unk_func_8821421C_038_034*, s32, s32, void (*)(), s32, s32, s32, MemoryPool*);
 void func_88506EE4(unk_func_8820BE14_02C_038*, unk_func_88200FA0_030_038*);
+void func_88506F1C(unk_func_8830867C_02C_034*, unk_func_88200FA0_030_038*, MemoryPool*);
 void func_88506F50(unk_func_8821421C_038_034*, unk_func_8821421C_038_050**);
+void func_88506F8C(unk_func_8821421C_038_034*, unk_func_8830867C_03C_0D0*, MemoryPool*);
 void func_88506FC0(unk_func_8820BE14_02C_038*);
 void func_88506FE0(unk_func_8820BE14_02C_038*);
 void func_88507AE4(unk_func_8820BE14_02C_038*, s32);
 void func_88507B80(unk_func_8820BE14_02C_038*, s32);
+void func_88507C0C(unk_func_8830867C_02C_034*, s32, s32);
 void func_88507CC4(unk_func_8820BE14_02C_038*, unk_func_88205880_00D0*);
 void func_88507CEC(unk_func_8820BE14_02C_038*);
 void func_88507D4C(unk_func_88507D4C*, s32, s32, s32, s32, unk_func_8820BE14_02C_038*);
@@ -637,8 +780,10 @@ void func_8850BFB0(unk_func_88203ED8_064*);
 void func_8850C064(unk_func_88203ED8_064*, s32);
 void func_8850C284(unk_func_88001300_03C*, s32, s32, MemoryPool*);
 void func_8850CAB4(unk_func_88001300_03C*);
-void func_8850CB48(unk_func_88001300_03C*, s32, s32);
+void func_8850CB48(unk_func_88001300_03C*, s32);
+void func_8850CBA8(unk_func_8830867C_02C_048*);
 void func_8850CC74(unk_func_88001300_000*, unk_func_88001300_000*);
+void func_8850CD24(unk_func_8830867C_02C_048*, s32);
 void func_8850CD44(unk_func_8850CD44*, s32, MemoryPool*);
 void func_8850CF00(unk_func_8850CD44*, s32);
 

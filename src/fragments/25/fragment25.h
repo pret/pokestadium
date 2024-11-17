@@ -9,8 +9,8 @@ typedef struct unk_D_88400138 {
     /* 0x08 */ Color_RGBA8 unk_08;
 } unk_D_88400138; // size = 0xC
 
-typedef unk_D_88400138* (*func884000C4)(u8);
+typedef unk_D_88400138* (*func884000C4)(s32);
 
-unk_D_88400138* func_884000C4(u8);
+unk_D_88400138* func_884000C4(s32);
 
 #endif // _FRAGMENT25_H_

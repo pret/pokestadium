@@ -124,13 +124,14 @@ void func_88201DA0(unk_func_88201DA0* arg0, s32 arg1, s32 arg2, unk_func_8800130
 
     arg0->unk_2C = mem_pool_alloc(arg6, sizeof(unk_func_88001300_038));
     ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_2C, 0, 0, 0x212, 0x148);
-    arg0->unk_2C->unk_28 |= 0x200;
-    arg0->unk_2C->unk_28 |= 0x400;
-    arg0->unk_2C->unk_28 &= ~1;
+    arg0->unk_2C->unk_00.unk_28 |= 0x200;
+    arg0->unk_2C->unk_00.unk_28 |= 0x400;
+    arg0->unk_2C->unk_00.unk_28 &= ~1;
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0, arg0->unk_2C);
 
     arg0->unk_58 = mem_pool_alloc(arg6, sizeof(unk_func_8850182C));
-    ((func8850182C)Memmap_GetFragmentVaddr(func_8850182C))(arg0->unk_58, 0, 0, arg0->unk_2C->unk_14, 0x1C, D_88217C30);
+    ((func8850182C)Memmap_GetFragmentVaddr(func_8850182C))(arg0->unk_58, 0, 0, arg0->unk_2C->unk_00.unk_14.unk_00, 0x1C,
+                                                           D_88217C30);
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0->unk_2C, arg0->unk_58);
 
     arg0->unk_50 = mem_pool_alloc(arg6, sizeof(unk_func_8850878C));
@@ -163,7 +164,8 @@ void func_88202054(unk_func_88201DA0* arg0, u32 arg1, u32 arg2) {
     sprintf(&arg0->unk_54[strlen(arg0->unk_54)], " No.%d", arg2 + 1);
 
     arg0->unk_50->unk_00.unk_10.unk_00 =
-        (arg0->unk_2C->unk_14 - func_8001F5B0(arg0->unk_50->unk_2C, arg0->unk_50->unk_38, arg0->unk_54)) / 2;
+        (arg0->unk_2C->unk_00.unk_14.unk_00 - func_8001F5B0(arg0->unk_50->unk_2C, arg0->unk_50->unk_38, arg0->unk_54)) /
+        2;
     arg0->unk_58->unk_2C = D_88217C38[arg1 - 1];
 }
 
@@ -804,7 +806,7 @@ void func_88203ED8(unk_func_88203ED8* arg0, s32 arg1, s32 arg2, unk_func_8820588
 
     arg0->unk_2C = mem_pool_alloc(arg8, sizeof(unk_func_88001300_038));
     ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_2C, 0, 0, 0x228, 0x172);
-    arg0->unk_2C->unk_28 |= 0x400;
+    arg0->unk_2C->unk_00.unk_28 |= 0x400;
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0, arg0->unk_2C);
 
     sp98 = mem_pool_alloc(arg8, sizeof(unk_func_885012A4));
@@ -1529,7 +1531,7 @@ void func_88205E94(unk_func_88205880* arg0) {
     func_8001F738(gPlayer1Controller);
     func_882057B4(arg0->unk_002C, gPlayer1Controller);
 
-    while (arg0->unk_002C->unk_2C->unk_28 & 1) {
+    while (arg0->unk_002C->unk_2C->unk_00.unk_28 & 1) {
         func_8002EEA8(NULL);
     }
 

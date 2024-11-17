@@ -46,7 +46,7 @@ MainPool* mem_pool_init(MainPool* pool, s32 size) {
 /**
  * Allocate from a memory pool. Return NULL if there is not enough space.
  */
-void* mem_pool_alloc(MainPool* node, s32 size) {
+void* mem_pool_alloc(MemoryPool* node, s32 size) {
     struct MemoryBlock* freeBlock;
     void* addr;
 
@@ -54,7 +54,7 @@ void* mem_pool_alloc(MainPool* node, s32 size) {
 
     addr = NULL;
     size = ALIGN4(size) + sizeof(struct MemoryBlock);
-    freeBlock = (struct MemoryBlock*)&node->end;
+    freeBlock = &node->freeList;
 
     while (freeBlock->next != NULL) {
         if (freeBlock->next->size >= size) {

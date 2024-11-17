@@ -15,14 +15,17 @@ typedef enum {
 } PokemonRomType;
 
 typedef struct unk_D_80070F84 {
-    /* 0x00 */ char unk00[0x5];
+    /* 0x00 */ u8 unk_00;
+    /* 0x04 */ char unk01[0x4];
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ char unk0B[0x8];
+    /* 0x0B */ char unk0B[0x4];
+    /* 0x0F */ u8 unk_0F[1];
+    /* 0x10 */ char unk10[0x3];
     /* 0x13 */ u8 unk_13;
     /* 0x14 */ char unk14[0x3];
 } unk_D_80070F84; // size = 0x17
@@ -116,12 +119,13 @@ u32 func_800224B8(s32 arg0, u16 arg1);
 u16 func_800226C0(s32 arg0, u32 arg1);
 void func_80022734(unk_func_8820BE14_sp*);
 void func_800228B0(unk_func_8820BE14_sp*);
+s8 func_80022A28(s32);
 u8 func_80022A38(s32 arg0);
 u8 func_80022A60(s32 arg0);
 unk_func_80022C28_ret* func_80022C28(s32, s32, s32, s32);
 unk_func_80022C28_ret* func_80022CC0(s32, s32, s32, s32, char*, s32);
-void func_80022D24(unk_func_80022C28_ret*);
-void func_80022D8C(unk_func_80022C28_ret*);
+s32 func_80022D24(unk_func_80022C28_ret*);
+s32 func_80022D8C(unk_func_80022C28_ret*);
 s32 func_80022E18(unk_func_80026268_arg0*, s32, unk_func_80022C28_ret*);
 s32 func_80022F24(unk_func_88205880_00D0*, s32, unk_func_80022C28_ret*);
 void func_80023068(void);
