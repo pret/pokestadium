@@ -626,7 +626,11 @@ void func_88217018(unk_func_8820BE14_02C_038* arg0, unk_func_8820BE14_06C_000* a
     ((func88506EE4)Memmap_GetFragmentVaddr(func_88506EE4))(arg0, &arg1->unk_04);
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1BCF10/func_88217060.s")
+void func_88217060(unk_func_8820BE14_02C_038* arg0, s32* arg1, s32 arg2) {
+    arg0->unk_88 = arg1;
+    arg0->unk_8C = arg2;
+    ((func88506F50)Memmap_GetFragmentVaddr(func_88506F50))(arg0, arg1 + 1);
+}
 
 void func_882170A8(unk_func_882170A8* arg0, s32 arg1, s32 arg2, unk_func_8820BE14_02C_038* arg3, s32 arg4) {
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(arg0, sizeof(unk_func_882170A8));

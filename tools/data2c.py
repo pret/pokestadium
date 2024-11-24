@@ -572,17 +572,28 @@ def dump_data(offset, struct, counts):
 
             return out
 
-
         if name in STRUCTS:
             out += indent + "{ "
 
-            #print(STRUCTS[name])
             for member in STRUCTS[name]["data"]:
-                if member["type"] in STRUCTS:
-                    out = output_struct(data, member["type"], out, offset + member["offset"], indent)
+                if len(member["counts"]) > 0:
+                    out += "{ "
+
+                    for count in member["counts"]:
+                        for i in range(count):
+                            if member["type"] in STRUCTS:
+                                out = output_struct(data, member["type"], out, offset + member["offset"], indent + ("    " * i))
+                            else:
+                                base_size = BASE_TYPES[member["type"]]
+                                out = output_type(member["type"], base_size, offset + member["offset"] + (i * base_size), out)
+
+                    out += "}, "
+
                 else:
-                    #print(member)
-                    out = output_type(member["type"], member["size"], offset + member["offset"], out)
+                    if member["type"] in STRUCTS:
+                        out = output_struct(data, member["type"], out, offset + member["offset"], indent)
+                    else:
+                        out = output_type(member["type"], member["size"], offset + member["offset"], out)
 
             if len(STRUCTS[name]["data"]) <= 4:
                 out = out[:-2]

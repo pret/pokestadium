@@ -70,7 +70,7 @@ MainPool*main_pool_get_pool(void);
 // memory.c
 MemoryPool *mem_pool_try_init(u32 size, s32 side);
 MainPool* mem_pool_init(MainPool* pool, s32 size);
-void *mem_pool_alloc(MainPool* node, s32 size);
+void *mem_pool_alloc(MemoryPool* node, s32 size);
 
 void mem_pool_free(MemoryPool* pool, void* addr);
 void *func_80002D10(u32 size, s32 side);

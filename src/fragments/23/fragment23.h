@@ -700,6 +700,7 @@ void func_88216000(unk_func_8820BE14_02C_038* arg0, s32 arg1, s32 arg2);
 s32 func_882169D4(unk_func_8820BE14_02C_038* arg0, Controller* arg1);
 void func_88216F18(unk_func_8820BE14_02C_038* arg0, s32 arg1);
 void func_88217018(unk_func_8820BE14_02C_038* arg0, unk_func_8820BE14_06C_000* arg1, u32 arg2);
+void func_88217060(unk_func_8820BE14_02C_038*, s32*, s32);
 void func_882170A8(unk_func_882170A8* arg0, s32 arg1, s32 arg2, unk_func_8820BE14_02C_038* arg3, s32 arg4);
 void func_8821711C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 func_8821738C(unk_func_882170A8* arg0, s32 arg1, s32 arg2);

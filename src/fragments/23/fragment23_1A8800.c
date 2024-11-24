@@ -41,9 +41,9 @@ void func_88200290(unk_func_88503298* arg0, s32 arg1, s32 arg2, MemoryPool* arg3
 
     arg0->unk_2C = mem_pool_alloc(arg3, sizeof(unk_func_88001300_038));
     ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_2C, 0, 0, var_s1, 0x68);
-    arg0->unk_2C->unk_28 |= 0x200;
-    arg0->unk_2C->unk_28 |= 0x400;
-    arg0->unk_2C->unk_28 &= ~1;
+    arg0->unk_2C->unk_00.unk_28 |= 0x200;
+    arg0->unk_2C->unk_00.unk_28 |= 0x400;
+    arg0->unk_2C->unk_00.unk_28 &= ~1;
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0, arg0->unk_2C);
 
     temp_s0 = mem_pool_alloc(arg3, sizeof(unk_func_885012A4));
@@ -95,9 +95,9 @@ void func_882004C8(unk_func_88200FA0_030* arg0, s32 arg1, s32 arg2, unk_func_880
 
     arg0->unk_2C = mem_pool_alloc(arg4, sizeof(unk_func_88001300_038));
     ((func88502274)Memmap_GetFragmentVaddr(func_88502274))(arg0->unk_2C, 0, 0, var_s2, 0xA4);
-    arg0->unk_2C->unk_28 |= 0x200;
-    arg0->unk_2C->unk_28 |= 0x400;
-    arg0->unk_2C->unk_28 &= ~1;
+    arg0->unk_2C->unk_00.unk_28 |= 0x200;
+    arg0->unk_2C->unk_00.unk_28 |= 0x400;
+    arg0->unk_2C->unk_00.unk_28 &= ~1;
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0, arg0->unk_2C);
 
     sp6C = mem_pool_alloc(arg4, sizeof(unk_func_8850B254));
@@ -159,7 +159,7 @@ s32 func_88200A30(unk_func_88200FA0_030* arg0, Controller* arg1) {
         if ((sp1C & 1) && (sp1C & 8)) {
             func_88200968(arg0, arg0->unk_30->unk_38);
         }
-    } else if (!(arg0->unk_2C->unk_28 & 1)) {
+    } else if (!(arg0->unk_2C->unk_00.unk_28 & 1)) {
         sp1C = 2;
     } else {
         sp1C = 1;
@@ -168,14 +168,14 @@ s32 func_88200A30(unk_func_88200FA0_030* arg0, Controller* arg1) {
 }
 
 void func_88200ACC(unk_func_88200FA0_030* arg0) {
-    arg0->unk_2C->unk_28 |= 1;
-    arg0->unk_34->unk_2C->unk_28 |= 1;
+    arg0->unk_2C->unk_00.unk_28 |= 1;
+    arg0->unk_34->unk_2C->unk_00.unk_28 |= 1;
 }
 
 void func_88200AF4(unk_func_88200FA0_030* arg0) {
     arg0->unk_2C->unk_2C = 0xB;
     arg0->unk_34->unk_2C->unk_2C = 0xB;
-    while (arg0->unk_2C->unk_28 & 1) {
+    while (arg0->unk_2C->unk_00.unk_28 & 1) {
         func_8002EEA8(NULL);
     }
 }
