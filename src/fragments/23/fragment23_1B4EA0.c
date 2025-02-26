@@ -331,7 +331,7 @@ void func_8820D7C8(s32 arg0, s32 arg1, s8* arg2, s32 arg3, s32 arg4, unk_func_88
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
     gDPSetRenderMode(gDisplayListHead++, G_RM_NOOP, G_RM_NOOP2);
 
-    temp_t2 = ((D_88217FFC.r << 8) & 0xF800) | ((D_88217FFC.g * 8) & 0x7C0) | ((D_88217FFC.b >> 2) & 0x3E) | 1;
+    temp_t2 = ((D_88217FFC.r << 8) & 0xF800) | ((D_88217FFC.g << 3) & 0x7C0) | ((D_88217FFC.b >> 2) & 0x3E) | 1;
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -1240,7 +1240,7 @@ void func_88210334(unk_func_8821421C_038_04C* arg0, unk_func_8821421C_038* arg1)
 s32 func_88210380(unk_func_8821421C_038_04C* arg0, Controller* arg1) {
     s32 var_v1;
     s32 i;
-    unk_func_88203ED8_064* var_a0;
+    unk_func_8821421C_038_04C_000* var_a0;
 
     var_v1 = 0;
     if (arg0->unk_00.unk_20 > 0) {
@@ -2745,7 +2745,7 @@ s32 func_88213CA0(unk_func_8821421C_02C_06C* arg0, Controller* arg1) {
     s32 i;
     s32 var_a1;
     s32 var_s0;
-    unk_func_88203ED8_064* var_a0;
+    unk_func_8821421C_02C_06C_000* var_a0;
     s32 sp4C;
     s32 sp48;
     s32 sp44;
@@ -3014,7 +3014,7 @@ void func_882147BC(unk_func_8821421C* arg0) {
     osStopThread(NULL);
 }
 
-void func_8821483C(s32 arg0) {
+void func_8821483C(UNUSED unk_D_800AC870* arg0) {
     MemoryPool* sp34;
     void* sp30;
     u8* sp2C;

@@ -1223,11 +1223,11 @@
     vram: 0x88500000
     subsegments:
     - [0x1EA860, textbin,   fragments/26/fragment26_header]
-    - [0x1EA880, c,      fragments/26/fragment26]
-    - [0x1F77E0, data,   fragments/26/fragment26_data]
-    - [0x1F7810, rodata, fragments/26/fragment26_rodata]
+    - [0x1EA880, c,         fragments/26/fragment26]
+    - [0x1F77E0, .data,     fragments/26/fragment26]
+    - [0x1F7810, .rodata,   fragments/26/fragment26]
 
-    - {vram: 0x8850CFE0, type:  bss, name: fragments/26/fragment26_bss}
+    - {vram: 0x8850CFE0, type:  .bss, name: fragments/26/fragment26}
 
   - name: fragment26_relocs
     type: code

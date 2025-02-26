@@ -642,7 +642,7 @@ void func_883026CC(unk_func_8830867C_02C_050* arg0, s32 arg1, s32 arg2, s32 arg3
 s32 func_88302748(unk_func_8830867C_02C_050* arg0, s32 arg1, s32 arg2) {
     static Color_RGBA8 D_88317214 = { 0xFF, 0xFF, 0xFF, 0xFF };
 
-    s32 temp_t7;
+    UNUSED s32 pad;
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -1815,14 +1815,14 @@ void func_88305CDC(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_03
 
 void func_88305D7C(unk_func_8830867C_02C* arg0, s32 arg1) {
     arg0->unk_000.unk_2A = arg1;
-    arg0->unk_048->unk_14(arg0->unk_048, arg1);
+    arg0->unk_048->unk_00.unk_14(arg0->unk_048, arg1);
 }
 
 s32 func_88305DA8(unk_func_8830867C_02C* arg0, Controller* arg1) {
     s32 var_v1;
 
     if (arg0->unk_02C->unk_30 & 2) {
-        var_v1 = arg0->unk_048->unk_10(arg0->unk_048, arg1);
+        var_v1 = arg0->unk_048->unk_00.unk_10(arg0->unk_048, arg1);
     } else {
         var_v1 = 1;
     }
@@ -1833,7 +1833,7 @@ void func_88305DF4(unk_func_8830867C_02C* arg0, Controller* arg1) {
     s32 var_s3 = 0;
     s32 temp_v0;
 
-    arg0->unk_048->unk_14(arg0->unk_048, 1);
+    arg0->unk_048->unk_00.unk_14(arg0->unk_048, 1);
 
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_02C);
 
@@ -2385,7 +2385,7 @@ void func_88306FE4(void) {
 
 void func_88306FEC(unk_func_8830867C_02C_048* arg0, unk_func_8830867C_02C* arg1) {
     ((func8850CBA8)Memmap_GetFragmentVaddr(func_8850CBA8))(arg0);
-    arg0->unk_10 = func_8830858C;
+    arg0->unk_00.unk_10 = func_8830858C;
     arg0->unk_24 = arg1;
 }
 
@@ -2455,7 +2455,7 @@ s32 func_88307264(unk_func_8830867C_02C* arg0, Controller* arg1, s32 arg2) {
     sp34 = 1;
     sp30 = func_88305458(arg0);
     if (sp30 != 0) {
-        arg0->unk_048->unk_14(arg0->unk_048, 0);
+        arg0->unk_048->unk_00.unk_14(arg0->unk_048, 0);
         ((func889006D4)Memmap_GetFragmentVaddr(func_889006D4))(arg0->unk_0B0, func_88307250(arg0));
 
         temp_v0_2 = ((func88900808)Memmap_GetFragmentVaddr(func_88900808))(arg0->unk_0B0, arg1, 1);
@@ -2469,13 +2469,13 @@ s32 func_88307264(unk_func_8830867C_02C* arg0, Controller* arg1, s32 arg2) {
             sp34 = 0;
         }
 
-        arg0->unk_048->unk_14(arg0->unk_048, 1);
+        arg0->unk_048->unk_00.unk_14(arg0->unk_048, 1);
     } else if ((arg2 == 0) && (arg0->unk_CB8 != 0)) {
-        arg0->unk_048->unk_14(arg0->unk_048, 0);
+        arg0->unk_048->unk_00.unk_14(arg0->unk_048, 0);
         if (func_88314340(arg0->unk_0B4, arg1) == 1) {
             sp34 = 0;
         }
-        arg0->unk_048->unk_14(arg0->unk_048, 1);
+        arg0->unk_048->unk_00.unk_14(arg0->unk_048, 1);
     }
     return sp34;
 }
@@ -2953,14 +2953,14 @@ s32 func_8830858C(unk_func_8830867C_02C_048* arg0, Controller* arg1) {
     s32 var_a2 = 0;
     unk_func_8830867C_02C_048* var_a0;
 
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
 
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
 
-        var_a2 = var_a0->unk_10(var_a0, arg1);
+        var_a2 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
     if (var_a2 & 1) {
@@ -2975,7 +2975,7 @@ s32 func_8830858C(unk_func_8830867C_02C_048* arg0, Controller* arg1) {
         }
     }
 
-    switch (arg0->unk_1C) {
+    switch (arg0->unk_00.unk_1C) {
         case 0:
             var_a2 = func_8830772C(arg0, arg1, var_a2);
             break;

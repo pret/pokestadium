@@ -131,8 +131,8 @@ typedef struct unk_func_8820B12C_000 {
     /* 0x04 */ struct unk_func_8820B12C_000* unk_04;
     /* 0x08 */ struct unk_func_8820B12C_000* unk_08;
     /* 0x0C */ char unk0C[0x4];
-    /* 0x10 */ unk_func_88203ED8_064_010 unk_10;
-    /* 0x14 */ unk_func_88203ED8_064_014 unk_14;
+    /* 0x10 */ unk_func_8820B12C_02C_010 unk_10;
+    /* 0x14 */ unk_func_8820B12C_02C_014 unk_14;
     /* 0x18 */ char unk18[0x4];
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -316,8 +316,8 @@ typedef struct unk_func_8821421C_02C_06C_000 {
     /* 0x04 */ struct unk_func_88203ED8_064* unk_04;
     /* 0x08 */ struct unk_func_88203ED8_064* unk_08;
     /* 0x0C */ char unk0C[0x4];
-    /* 0x10 */ unk_func_88203ED8_064_010 unk_10;
-    /* 0x14 */ unk_func_88203ED8_064_014 unk_14;
+    /* 0x10 */ unk_func_8820B12C_02C_010 unk_10;
+    /* 0x14 */ unk_func_8820B12C_02C_014 unk_14;
     /* 0x18 */ char unk18[0x4];
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -371,7 +371,7 @@ typedef struct unk_func_8821421C_038_04C_000 {
     /* 0x04 */ struct unk_func_88203ED8_064* unk_04;
     /* 0x08 */ struct unk_func_88203ED8_064* unk_08;
     /* 0x0C */ char unk0C[0x4];
-    /* 0x10 */ unk_func_88203ED8_064_010 unk_10;
+    /* 0x10 */ unk_func_8820B12C_02C_010 unk_10;
     /* 0x14 */ unk_func_8821421C_038_04C_000_014 unk_14;
     /* 0x18 */ char unk18[0x4];
     /* 0x1C */ s32 unk_1C;
@@ -461,7 +461,7 @@ extern u32* D_88223470[];
 extern u32 D_88223488[];
 extern u32 D_88223E48[];
 
-s32 func_88200020(void);
+unk_D_800AC870* func_88200020(void);
 void func_882000E4(void);
 s32 func_88200110(UNUSED s32 arg0, UNUSED s32 arg1);
 s32 func_88200190(s32 arg0, s32 arg1);
@@ -592,7 +592,7 @@ s32 func_8820B838(unk_func_8820B12C* arg0, Controller* arg1);
 void func_8820C510(unk_func_8820BE14* arg0);
 void func_8820C5BC(unk_func_8820BE14* arg0);
 void func_8820C63C(unk_func_8820BE14* arg0);
-void func_8820C700(s32 arg0, s32 arg1);
+void func_8820C700(unk_D_800AC870* arg0, s32 arg1);
 
 void func_8820C930(s32 arg0, s32 arg1, s32 arg2, unk_func_8820BE14_06C* arg3);
 void func_8820C97C(s32 arg0, s32 arg1, s32 arg2, unk_func_8820BE14_06C* arg3, s32 arg4, char* arg5, s32 arg6);
@@ -686,7 +686,7 @@ s32 func_88213CA0(unk_func_8821421C_02C_06C* arg0, Controller* arg1);
 void func_8821421C(unk_func_8821421C* arg0, s32 arg1, s32 arg2, MemoryPool* arg3, s32 arg4, char** arg5);
 void func_88214720(unk_func_8821421C* arg0);
 void func_882147BC(unk_func_8821421C* arg0);
-void func_8821483C(s32 arg0);
+void func_8821483C(unk_D_800AC870* arg0);
 
 void func_882149A0(unk_func_882149A0* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, Color_RGBA8 arg7, Color_RGBA8 arg8, Color_RGBA8 arg9);
 s32 func_88214A58(unk_func_882149A0* arg0, s32 arg1, s32 arg2);
