@@ -708,14 +708,14 @@ void func_8830B2EC(unk_func_8830867C_034* arg0, unk_func_8830867C_02C_144* arg1)
 
 void func_8830B354(unk_func_8830867C_034* arg0, s32 arg1) {
     arg0->unk_00.unk_2A = arg1;
-    arg0->unk_38->unk_14(arg0->unk_38, arg1);
+    arg0->unk_38->unk_00.unk_14(arg0->unk_38, arg1);
 }
 
 s32 func_8830B380(unk_func_8830867C_034* arg0, Controller* arg1) {
     s32 sp1C;
 
     if (arg0->unk_2C->unk_30 & 2) {
-        sp1C = arg0->unk_38->unk_10(arg0->unk_38, arg1);
+        sp1C = arg0->unk_38->unk_00.unk_10(arg0->unk_38, arg1);
         if (!(sp1C & 1) && (sp1C & 4)) {
             func_8830AAA4(arg0, 0);
             func_88309960(arg0->unk_3C);
@@ -728,7 +728,7 @@ s32 func_8830B380(unk_func_8830867C_034* arg0, Controller* arg1) {
 
 void func_8830B404(unk_func_8830867C_034_038* arg0, unk_func_8830867C_034* arg1) {
     ((func8850CBA8)Memmap_GetFragmentVaddr(func_8850CBA8))(arg0);
-    arg0->unk_10 = func_8830B450;
+    arg0->unk_00.unk_10 = func_8830B450;
     arg0->unk_24 = arg1;
 }
 
@@ -737,17 +737,17 @@ s32 func_8830B450(unk_func_8830867C_034_038* arg0, Controller* arg1) {
     s32 i;
     unk_func_8830867C_034_038* var_a0;
 
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
 
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
 
-        var_v1 = var_a0->unk_10(var_a0, arg1);
+        var_v1 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
-    switch (arg0->unk_1C) {
+    switch (arg0->unk_00.unk_1C) {
         case 0:
             if (var_v1 & 1) {
                 if (var_v1 & 8) {
@@ -833,7 +833,7 @@ s32 func_8830B450(unk_func_8830867C_034_038* arg0, Controller* arg1) {
 void func_8830B8A0(unk_func_8830867C_034* arg0) {
     func_8830A520(arg0->unk_3C, 0);
     ((func8850CD24)Memmap_GetFragmentVaddr(func_8850CD24))(arg0->unk_38, 1);
-    arg0->unk_38->unk_14(arg0->unk_38, 1);
+    arg0->unk_38->unk_00.unk_14(arg0->unk_38, 1);
     arg0->unk_34->unk_00.unk_28 &= ~1;
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_3C->unk_2C);
@@ -1557,14 +1557,14 @@ void func_8830DAB8(unk_func_8830867C_044* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 void func_8830DBE0(unk_func_8830867C_044* arg0, s32 arg1) {
     arg0->unk_00.unk_2A = arg1;
-    arg0->unk_40->unk_14(arg0->unk_40, arg1);
+    arg0->unk_40->unk_00.unk_14(arg0->unk_40, arg1);
 }
 
 s32 func_8830DC0C(unk_func_8830867C_044* arg0, Controller* arg1) {
     s32 var_v1;
 
     if (arg0->unk_2C->unk_30 & 2) {
-        var_v1 = arg0->unk_40->unk_10(arg0->unk_40, arg1);
+        var_v1 = arg0->unk_40->unk_00.unk_10(arg0->unk_40, arg1);
     } else {
         var_v1 = 1;
     }
@@ -1579,7 +1579,7 @@ s32 func_8830DC58(unk_func_8830867C_044* arg0, Controller* arg1) {
     ((func8850CB48)Memmap_GetFragmentVaddr(func_8850CB48))(arg0->unk_44, 0);
     ((func8850CD24)Memmap_GetFragmentVaddr(func_8850CD24))(arg0->unk_40, 0);
 
-    arg0->unk_40->unk_14(arg0->unk_40, 1);
+    arg0->unk_40->unk_00.unk_14(arg0->unk_40, 1);
 
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
     while (var_s0 == 0) {
@@ -1607,7 +1607,7 @@ s32 func_8830DC58(unk_func_8830867C_044* arg0, Controller* arg1) {
 
 void func_8830DD8C(unk_func_8830867C_044_040* arg0, unk_func_8830867C_044* arg1) {
     ((func8850CBA8)Memmap_GetFragmentVaddr(func_8850CBA8))(arg0);
-    arg0->unk_10 = func_8830DDD8;
+    arg0->unk_00.unk_10 = func_8830DDD8;
     arg0->unk_24 = arg1;
 }
 
@@ -1618,13 +1618,13 @@ s32 func_8830DDD8(unk_func_8830867C_044_040* arg0, Controller* arg1) {
     unk_func_8830867C_034_038* var_a0;
 
     var_v1 = 0;
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
 
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
-        var_v1 = var_a0->unk_10(var_a0, arg1);
+        var_v1 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
     if (var_v1 & 1) {
@@ -1641,7 +1641,7 @@ s32 func_8830DDD8(unk_func_8830867C_044_040* arg0, Controller* arg1) {
 
     if (var_v1 & 8) {
         if (arg1->buttonPressed & 0x200) {
-            s32 var_a1 = arg0->unk_1C;
+            s32 var_a1 = arg0->unk_00.unk_1C;
 
             if (var_a1 == 0) {
                 var_a1 = 3;
@@ -1662,7 +1662,7 @@ s32 func_8830DDD8(unk_func_8830867C_044_040* arg0, Controller* arg1) {
             ((func8850CD24)Memmap_GetFragmentVaddr(func_8850CD24))(arg0, var_a1);
             var_v1 |= 0x80000001;
         } else if (arg1->buttonPressed & 0x100) {
-            s32 var_a1 = arg0->unk_1C + 1;
+            s32 var_a1 = arg0->unk_00.unk_1C + 1;
 
             if (var_a1 == 3) {
                 var_a1 = 0;
@@ -1683,7 +1683,7 @@ s32 func_8830DDD8(unk_func_8830867C_044_040* arg0, Controller* arg1) {
             var_v1 |= 0x80000001;
         }
     } else if (!(var_v1 & 2) && (var_v1 & 4)) {
-        switch (arg0->unk_1C) {
+        switch (arg0->unk_00.unk_1C) {
             case 2:
                 break;
 
@@ -1973,14 +1973,14 @@ void func_8830F05C(unk_func_8830867C_03C* arg0, unk_func_8830867C_02C_C54_01C* a
 
 void func_8830F09C(unk_func_8830867C_03C* arg0, s32 arg1) {
     arg0->unk_00.unk_2A = arg1;
-    arg0->unk_4C->unk_14(arg0->unk_4C, arg1);
+    arg0->unk_4C->unk_00.unk_14(arg0->unk_4C, arg1);
 }
 
 s32 func_8830F0C8(unk_func_8830867C_03C* arg0, Controller* arg1) {
     s32 var_v1;
 
     if (arg0->unk_2C->unk_30 & 2) {
-        var_v1 = arg0->unk_4C->unk_10(arg0->unk_4C, arg1);
+        var_v1 = arg0->unk_4C->unk_00.unk_10(arg0->unk_4C, arg1);
     } else {
         var_v1 = 1;
     }
@@ -1995,7 +1995,7 @@ s32 func_8830F114(unk_func_8830867C_03C* arg0, Controller* arg1) {
     ((func88507AE4)Memmap_GetFragmentVaddr(func_88507AE4))(arg0->unk_54, 0);
     ((func8850CB48)Memmap_GetFragmentVaddr(func_8850CB48))(arg0->unk_50, 0);
 
-    arg0->unk_4C->unk_14(arg0->unk_4C, 1);
+    arg0->unk_4C->unk_00.unk_14(arg0->unk_4C, 1);
 
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
@@ -2024,7 +2024,7 @@ s32 func_8830F114(unk_func_8830867C_03C* arg0, Controller* arg1) {
 
 void func_8830F254(unk_func_8830867C_03C_04C* arg0, unk_func_8830867C_03C* arg1) {
     ((func8850BDF0)Memmap_GetFragmentVaddr(func_8850BDF0))(arg0);
-    arg0->unk_10 = func_8830F2A0;
+    arg0->unk_00.unk_10 = func_8830F2A0;
     arg0->unk_24 = arg1;
 }
 
@@ -2034,13 +2034,13 @@ s32 func_8830F2A0(unk_func_8830867C_03C_04C* arg0, Controller* arg1) {
     s32 i;
 
     var_t2 = 0;
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
 
-        var_t2 = var_a0->unk_10(var_a0, arg1);
+        var_t2 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
     if (var_t2 & 1) {
@@ -2056,12 +2056,12 @@ s32 func_8830F2A0(unk_func_8830867C_03C_04C* arg0, Controller* arg1) {
     }
 
     if (var_t2 & 2) {
-        if (arg0->unk_1C == 1) {
+        if (arg0->unk_00.unk_1C == 1) {
             ((func8850C064)Memmap_GetFragmentVaddr(func_8850C064))(arg0, 0);
             var_t2 |= 1;
         }
     } else if (var_t2 & 4) {
-        switch (arg0->unk_1C) {
+        switch (arg0->unk_00.unk_1C) {
             case 0:
                 switch (arg0->unk_24->unk_50->unk_24) {
                     case 2:
@@ -2385,14 +2385,14 @@ void func_883105D4(unk_func_8830867C_040* arg0, unk_func_8830867C_02C_C54_024* a
 
 void func_88310650(unk_func_8830867C_040* arg0, s32 arg1) {
     arg0->unk_00.unk_2A = arg1;
-    arg0->unk_5C->unk_14(arg0->unk_5C, arg1);
+    arg0->unk_5C->unk_00.unk_14(arg0->unk_5C, arg1);
 }
 
 s32 func_8831067C(unk_func_8830867C_040* arg0, Controller* arg1) {
     s32 var_v1;
 
     if (arg0->unk_2C->unk_30 & 2) {
-        var_v1 = arg0->unk_5C->unk_10(arg0->unk_5C, arg1);
+        var_v1 = arg0->unk_5C->unk_00.unk_10(arg0->unk_5C, arg1);
     } else {
         var_v1 = 1;
     }
@@ -2407,7 +2407,7 @@ s32 func_883106C8(unk_func_8830867C_040* arg0, Controller* arg1) {
 
     ((func88507AE4)Memmap_GetFragmentVaddr(func_88507AE4))(arg0->unk_64, 0);
     ((func8850CB48)Memmap_GetFragmentVaddr(func_8850CB48))(arg0->unk_60, 0);
-    arg0->unk_5C->unk_14(arg0->unk_5C, 1);
+    arg0->unk_5C->unk_00.unk_14(arg0->unk_5C, 1);
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
     while (var_s0 == 0) {
@@ -2435,7 +2435,7 @@ s32 func_883106C8(unk_func_8830867C_040* arg0, Controller* arg1) {
 
 void func_88310808(unk_func_8830867C_040_05C* arg0, unk_func_8830867C_040* arg1) {
     ((func8850BDF0)Memmap_GetFragmentVaddr(func_8850BDF0))(arg0);
-    arg0->unk_10 = func_88310854;
+    arg0->unk_00.unk_10 = func_88310854;
     arg0->unk_24 = arg1;
 }
 
@@ -2448,14 +2448,14 @@ s32 func_88310854(unk_func_8830867C_040_05C* arg0, Controller* arg1) {
     u8* ptr2;
 
     var_t2 = 0;
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
 
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
 
-        var_t2 = var_a0->unk_10(var_a0, arg1);
+        var_t2 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
     if (var_t2 & 1) {
@@ -2471,12 +2471,12 @@ s32 func_88310854(unk_func_8830867C_040_05C* arg0, Controller* arg1) {
     }
 
     if (var_t2 & 2) {
-        if (arg0->unk_1C == 1) {
+        if (arg0->unk_00.unk_1C == 1) {
             ((func8850C064)Memmap_GetFragmentVaddr(func_8850C064))(arg0, 0);
             var_t2 |= 1;
         }
     } else if (var_t2 & 4) {
-        switch (arg0->unk_1C) {
+        switch (arg0->unk_00.unk_1C) {
             case 0:
                 switch (arg0->unk_24->unk_60->unk_24) {
                     case 4:
@@ -3291,7 +3291,7 @@ void func_88312188(unk_func_8830867C_04C* arg0, s32 arg1) {
 
 void func_883121F0(unk_func_8830867C_04C* arg0, s32 arg1) {
     arg0->unk_00.unk_2A = arg1;
-    arg0->unk_80->unk_14(arg0->unk_80, arg1);
+    arg0->unk_80->unk_00.unk_14(arg0->unk_80, arg1);
 }
 
 s32 func_8831221C(unk_func_8830867C_04C* arg0, s32* arg1) {
@@ -3311,7 +3311,7 @@ s32 func_8831221C(unk_func_8830867C_04C* arg0, s32* arg1) {
 
 void func_88312298(unk_func_8830867C_04C_080* arg0, unk_func_8830867C_04C* arg1) {
     ((func8850BDF0)Memmap_GetFragmentVaddr(func_8850BDF0))(arg0);
-    arg0->unk_10 = func_883125B4;
+    arg0->unk_00.unk_10 = func_883125B4;
     arg0->unk_24 = arg1;
 }
 
@@ -3379,12 +3379,12 @@ s32 func_883125B4(unk_func_8830867C_04C_080* arg0, Controller* arg1) {
     unk_func_8830867C_04C_080* var_a0;
 
     var_s0 = 0;
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
-        var_s0 = var_a0->unk_10(var_a0, arg1);
+        var_s0 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
     if (var_s0 & 1) {
@@ -3400,7 +3400,7 @@ s32 func_883125B4(unk_func_8830867C_04C_080* arg0, Controller* arg1) {
     }
 
     if (var_s0 & 2) {
-        switch (arg0->unk_1C) {
+        switch (arg0->unk_00.unk_1C) {
             case 2:
                 func_883097D4(arg0->unk_24->unk_78);
                 if (func_883122E4(arg0) == 0) {
@@ -3415,7 +3415,7 @@ s32 func_883125B4(unk_func_8830867C_04C_080* arg0, Controller* arg1) {
                 break;
         }
     } else if (var_s0 & 4) {
-        switch (arg0->unk_1C) {
+        switch (arg0->unk_00.unk_1C) {
             case 0:
                 if (arg0->unk_24->unk_8C != 0) {
                     ((func88500A6C)Memmap_GetFragmentVaddr(func_88500A6C))(arg0->unk_24->unk_34, 1);
@@ -3463,7 +3463,7 @@ s32 func_8831286C(unk_func_8830867C_04C* arg0, Controller* arg1) {
     s32 var_v1;
 
     if (arg0->unk_2C->unk_30 & 2) {
-        var_v1 = arg0->unk_80->unk_10(arg0->unk_80, arg1);
+        var_v1 = arg0->unk_80->unk_00.unk_10(arg0->unk_80, arg1);
     } else {
         var_v1 = 1;
     }
@@ -3493,11 +3493,11 @@ s32 func_88312998(unk_func_8830867C_04C* arg0, Controller* arg1) {
     s32 temp_v0;
     s32 var_s0 = 0;
 
-    if (arg0->unk_80->unk_1C == 0) {
+    if (arg0->unk_80->unk_00.unk_1C == 0) {
         func_883128B8(arg0);
     }
 
-    if (arg0->unk_80->unk_1C == 1) {
+    if (arg0->unk_80->unk_00.unk_1C == 1) {
         if (arg0->unk_88 == NULL) {
             ((func8850C064)Memmap_GetFragmentVaddr(func_8850C064))(arg0->unk_80, 0);
             ((func88500A6C)Memmap_GetFragmentVaddr(func_88500A6C))(arg0->unk_34, 0);
@@ -3512,13 +3512,13 @@ s32 func_88312998(unk_func_8830867C_04C* arg0, Controller* arg1) {
         temp_v0 = arg0->unk_00.unk_20(arg0, arg1);
         if (!(temp_v0 & 1)) {
             if (temp_v0 & 2) {
-                if (arg0->unk_80->unk_1C == 1) {
+                if (arg0->unk_80->unk_00.unk_1C == 1) {
                     var_s0 = 3;
                 } else {
                     var_s0 = 1;
                 }
             } else if (temp_v0 & 4) {
-                if (arg0->unk_80->unk_1C == 1) {
+                if (arg0->unk_80->unk_00.unk_1C == 1) {
                     var_s0 = 3;
                 } else {
                     var_s0 = 2;
@@ -3864,7 +3864,7 @@ void func_88313A94(unk_func_8830867C_048* arg0) {
     func_88313A34(arg0);
     ((func8850C064)Memmap_GetFragmentVaddr(func_8850C064))(arg0->unk_48, 0);
 
-    arg0->unk_48->unk_14(arg0->unk_48, 1);
+    arg0->unk_48->unk_00.unk_14(arg0->unk_48, 1);
 
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_30);
@@ -3877,14 +3877,14 @@ void func_88313B4C(unk_func_8830867C_048* arg0) {
 
 void func_88313B64(unk_func_8830867C_048* arg0, s32 arg1) {
     arg0->unk_00.unk_2A = arg1;
-    arg0->unk_48->unk_14(arg0->unk_48, arg1);
+    arg0->unk_48->unk_00.unk_14(arg0->unk_48, arg1);
 }
 
 s32 func_88313B90(unk_func_8830867C_048* arg0, Controller* arg1) {
     s32 var_v1;
 
     if (arg0->unk_2C->unk_30 & 2) {
-        var_v1 = arg0->unk_48->unk_10(arg0->unk_48, arg1);
+        var_v1 = arg0->unk_48->unk_00.unk_10(arg0->unk_48, arg1);
         if (!(var_v1 & 1)) {
             if (var_v1 & 2) {
                 func_88313B4C(arg0);
@@ -3900,7 +3900,7 @@ s32 func_88313B90(unk_func_8830867C_048* arg0, Controller* arg1) {
 
 void func_88313C24(unk_func_8830867C_048_048* arg0, unk_func_8830867C_048* arg1) {
     ((func8850BDF0)Memmap_GetFragmentVaddr(func_8850BDF0))(arg0);
-    arg0->unk_10 = func_88313C70;
+    arg0->unk_00.unk_10 = func_88313C70;
     arg0->unk_24 = arg1;
 }
 
@@ -3911,17 +3911,17 @@ s32 func_88313C70(unk_func_8830867C_048_048* arg0, Controller* arg1) {
     unk_func_88200FA0_030_030_1CEA00* temp_v0_4;
 
     var_a2 = 0;
-    if (arg0->unk_20 > 0) {
-        var_a0 = arg0->unk_04;
+    if (arg0->unk_00.unk_20 > 0) {
+        var_a0 = arg0->unk_00.unk_00.unk_04;
 
-        for (i = 0; i < arg0->unk_1C; i++) {
-            var_a0 = var_a0->unk_08;
+        for (i = 0; i < arg0->unk_00.unk_1C; i++) {
+            var_a0 = var_a0->unk_00.unk_00.unk_08;
         }
 
-        var_a2 = var_a0->unk_10(var_a0, arg1);
+        var_a2 = var_a0->unk_00.unk_10(var_a0, arg1);
     }
 
-    switch (arg0->unk_1C) {
+    switch (arg0->unk_00.unk_1C) {
         case 0:
             if (var_a2 & 1) {
                 if (var_a2 & 8) {

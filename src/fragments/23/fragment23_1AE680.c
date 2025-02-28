@@ -2510,7 +2510,7 @@ void func_8820C63C(unk_func_8820BE14* arg0) {
     osStopThread(NULL);
 }
 
-void func_8820C700(s32 arg0, s32 arg1) {
+void func_8820C700(unk_D_800AC870* arg0, s32 arg1) {
     static ThreadEntries D_88217FC8[] = { func_8820C5BC, func_8820C63C };
 
     MemoryPool* sp5C;

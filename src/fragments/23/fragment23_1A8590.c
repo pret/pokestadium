@@ -5,7 +5,7 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 
-s32 func_88200020(void) {
+unk_D_800AC870* func_88200020(void) {
     unk_D_800AC870* sp1C;
 
     main_pool_push_state('TERM');
@@ -37,7 +37,7 @@ s32 func_88200110(UNUSED s32 arg0, UNUSED s32 arg1) {
 }
 
 s32 func_88200190(s32 arg0, s32 arg1) {
-    s32 temp_s0;
+    unk_D_800AC870* temp_s0;
     s32 var_s1;
 
     if (arg0 == 5) {
