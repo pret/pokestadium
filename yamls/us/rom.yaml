@@ -1246,10 +1246,10 @@
     subsegments:
     - [0x1F7C90, textbin,   fragments/27/fragment27_header]
     - [0x1F7CB0, c,      fragments/27/fragment27]
-    - [0x1FD750, data,   fragments/27/fragment27_data]
-    - [0x214060, rodata, fragments/27/fragment27_rodata]
+    - [0x1FD750, .data,   fragments/27/fragment27]
+    - [0x214060, .rodata, fragments/27/fragment27]
 
-    - {vram: 0x8861C510, type:  bss, name: fragments/27/fragment27_bss}
+    - {vram: 0x8861C510, type:  .bss, name: fragments/27/fragment27}
 
   - name: fragment27_relocs
     type: code

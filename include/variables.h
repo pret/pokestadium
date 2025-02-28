@@ -162,6 +162,10 @@ extern u8 D_4007AD0[];
 extern u8 D_4007B18[];
 extern u8 D_4007B60[];
 extern u8 D_4007BA8[];
+extern u8 D_4004448[];
+extern u8 D_4004FB8[];
+
+
 
 extern u8 D_800818E0[0x20];
 

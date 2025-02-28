@@ -3068,7 +3068,7 @@ void func_8830867C(unk_func_8830867C* arg0, s32 arg1, s32 arg2, MemoryPool* arg3
     // clang-format off
     arg0->unk_54.unk_00 = 0x38; arg0->unk_54.unk_02 = 0x4E;
     // clang-format on
-    arg0->unk_68 = sp88;
+    arg0->unk_54.unk_14 = sp88;
     arg0->unk_6C = 0;
     arg0->unk_70 = arg6;
     arg0->unk_74 = D_8831A4D0;
