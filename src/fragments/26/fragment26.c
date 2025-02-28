@@ -3306,7 +3306,7 @@ void func_8850CE80(unk_func_8850CD44* arg0, s32 arg1) {
     }
 }
 
-void func_8850CF00(unk_func_8850CD44* arg0, s32 arg1) {
+void func_8850CF00(unk_func_8850CD44* arg0, Controller* arg1) {
     s32 temp_v0;
     s32 var_s0 = 0;
 

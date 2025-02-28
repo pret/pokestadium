@@ -383,7 +383,8 @@ typedef struct unk_func_8830867C_054 {
     /* 0x08 */ unk_func_88001300_000* unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-} unk_func_8830867C_054; // size >= 0x14
+    /* 0x14 */ unk_func_88001300_000* unk_14;
+} unk_func_8830867C_054; // size = 0x18
 
 typedef struct unk_func_8830867C_02C_0E4 {
     /* 0x00 */ s32 unk_00;
@@ -482,7 +483,6 @@ typedef struct unk_func_8830867C {
     /* 0x4C */ unk_func_8830867C_04C* unk_4C;
     /* 0x50 */ unk_func_889000C4* unk_50;
     /* 0x54 */ unk_func_8830867C_054 unk_54;
-    /* 0x68 */ unk_func_88001300_000* unk_68;
     /* 0x6C */ s32 unk_6C;
     /* 0x70 */ char** unk_70;
     /* 0x74 */ char** unk_74;

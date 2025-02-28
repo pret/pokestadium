@@ -19,6 +19,7 @@ extern Gfx D_8006F798[];
 
 void func_80020460(s32, s32, s32, s32, u16);
 void func_8002053C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGB8*, Color_RGB8*);
+void func_80020B88(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_80021920(void);
 
 
