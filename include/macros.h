@@ -75,4 +75,5 @@
 #define ASSET_LOAD2(rom, arg0, arg1) (\
     func_800044F4(rom##_ROM_START, rom##_ROM_END, arg0, arg1) \
 )
+
 #endif

@@ -164,6 +164,7 @@ extern u8 D_4007B60[];
 extern u8 D_4007BA8[];
 extern u8 D_4004448[];
 extern u8 D_4004FB8[];
+extern u8 D_4003AD0[];
 
 
 
@@ -197,7 +198,8 @@ extern struct unk_D_86002F58_004_000_000 D_800AC858;
 extern struct unk_D_86002F58_004_000* D_8006F09C;
 
 typedef struct unk_D_8006FF00 {
-	/* 0x00 */ char unk_00[0x4];
+	/* 0x00 */ u8 unk_00;
+	/* 0x02 */ s16 unk_02;
 	/* 0x04 */ char* name;
 	/* 0x08 */ char unk_08[0x4];
 	/* 0x0C */ u8 unk_0C;
@@ -281,5 +283,13 @@ typedef struct unk_D_70B10 {
 
 extern unk_func_88500020 D_800758E0;
 extern unk_func_88500020 D_800758F0;
+
+typedef struct unk_D_8007596C {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ u16 unk_02;
+} unk_D_8007596C; // size = 0x4
+extern unk_D_8007596C D_8007596C[151];
+
+extern u32 D_8C000000; // start of some rom area
 
 #endif

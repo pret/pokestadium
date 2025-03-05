@@ -150,11 +150,15 @@ u8 func_80024F68(s32);
 s32 func_80024FB0(s32 arg0);
 s32 func_80025084(s32);
 s32 func_8002513C(s32);
-char* func_800251B0(s32, s8*);
+char* func_800251B0(s32, char*);
 s32 func_80025370(s32);
 s32 func_8002539C(s32);
 void func_80025540(s32);
+s32 func_8002564C(s32, s32);
 void func_800256F4(s32, s32, s32);
+s32 func_80025840(s32);
+s32 func_80025988(s32);
+s32 func_80025AD0(s32);
 void func_80026E4C(s32);
 
 #endif // _6BC0_H_

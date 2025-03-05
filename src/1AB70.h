@@ -26,10 +26,15 @@ typedef struct unk_func_8001B1FC {
     /* 0x2C */ unk_D_80068BB0* unk_2C;
 } unk_func_8001B1FC; // size = 0x30
 
+s32 func_8001A024(unk_D_86002F58_004_000_010*, s32, s32, s32);
+void func_8001A324(s32, s32, s32, s32);
+void func_8001ABAC(s32, s32);
+void* func_8001AFD8(s32, s32);
 void func_8001B058(void);
 void func_8001B0DC(unk_func_88201DA0_034_008*, s32, s32);
 unk_func_8001B1FC* func_8001B1FC(unk_D_86002F58_004_000_010*, s32, s32, s32, s32, s32, s32, u8*);
 void func_8001B2D8(unk_func_8001B1FC* arg0, unk_func_80026268_arg0* arg1, s32 arg2);
+void func_8001B480(void*, s32, s32);
 u8* func_8001B9D4(void*);
 
 #endif // _1AB70_H_
