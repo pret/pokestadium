@@ -23,6 +23,7 @@ typedef struct amConfig {
 void amCreateAudioMgr(ALSynConfig*, amConfig*, u32, s32, s32);
 OSTask* func_8003CADC(OSTask*);
 void __clearAudioDMA(void);
+void func_8003D2B8(s32);
 void func_8003D32C(void);
 s32 func_8003D494(void);
 s32 func_8003D4A0(s32);

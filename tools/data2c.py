@@ -3,6 +3,7 @@
 import sys
 from pathlib import Path
 from struct import *
+import find_sym
 
 STRUCTS = {}
 STRUCT_TYPEDEFS = {}
@@ -668,9 +669,9 @@ def dump(offset, type_name):
         exit()
 
     out = dump_data(offset, type_name, counts)
-
     return out
 
 if __name__ == "__main__":
-    out = dump(sys.argv[1], sys.argv[2])
+    rom_offset = find_sym.find(sys.argv[1])
+    out = dump(rom_offset["rom"], sys.argv[2])
     print(out)

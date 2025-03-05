@@ -1706,8 +1706,8 @@ s32 func_88506CE4(unk_func_88200FA0_030_030* arg0) {
     return -1;
 }
 
-void func_88506DCC(unk_func_8821421C_038_034* arg0, s32 arg1, s32 arg2, void (*arg3)(), s32 arg4, s32 arg5, s32 arg6,
-                   MemoryPool* arg7) {
+void func_88506DCC(unk_func_8821421C_038_034* arg0, s32 arg1, s32 arg2, unk_func_88200FA0_030_030_040 arg3, s32 arg4,
+                   s32 arg5, s32 arg6, MemoryPool* arg7) {
     func_885060BC(&arg0->unk_00, arg1, arg2, arg3, arg4, arg5, arg6, 1, arg7);
     arg0->unk_00.unk_00.unk_1C = func_88507018;
     arg0->unk_00.unk_00.unk_18 = func_8850734C;

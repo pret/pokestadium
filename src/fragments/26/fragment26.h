@@ -20,6 +20,7 @@ struct unk_func_882025E0;
 struct unk_func_8850CD44;
 struct unk_func_8830867C_02C_048_000;
 struct unk_func_8850BD40;
+struct unk_func_88200FA0_030_030;
 
 typedef s32 (*unk_func_88001300_018)(struct unk_func_88001300_000*, s32, s32);
 typedef s32 (*unk_func_88001300_01C)(struct unk_func_88001300_000*);
@@ -201,7 +202,7 @@ typedef struct unk_func_88503298 {
     /* 0x30 */ unk_func_8850878C* unk_30;
 } unk_func_88503298; // size = 0x34
 
-typedef void (*unk_func_88200FA0_030_030_040)();
+typedef void (*unk_func_88200FA0_030_030_040)(s32, s32, char*, s32, s32, struct unk_func_88200FA0_030_030*);
 
 typedef struct unk_func_88200FA0_030_030 {
     /* 0x00 */ unk_func_88001300_000 unk_00;
@@ -699,11 +700,12 @@ typedef struct unk_func_8830867C_048_048 {
 } unk_func_8830867C_048_048; // size = 0x28
 
 typedef void (*func88500020)(unk_func_88500020*, s32, s32);
+typedef void (*func88500338)(unk_func_88500020* arg0, s32 arg1, s32 arg2, s32 arg3);
 typedef void (*func88500668)(unk_func_882025E0*, s32);
 typedef void (*func8850068C)(unk_func_88001300_000_000*, unk_func_88001300_000_000*);
 typedef void (*func885007CC)(unk_func_88001300_000*, s32);
-typedef void (*func88500828)(unk_func_88001300*, s32, s32);
-typedef void (*func885008C4)(unk_func_88001300*);
+typedef void (*func88500828)(unk_func_88001300_000*, s32, s32);
+typedef void (*func885008C4)(unk_func_88001300_000*);
 typedef void (*func8850093C)(s32, s32);
 typedef void (*func88500994)(unk_func_88500994*, s32, s32);
 typedef void (*func88500A3C)(unk_func_88500994*, unk_func_88001300_000*);
@@ -775,6 +777,7 @@ typedef void (*func8850CD44)(unk_func_8850CD44*, s32, MemoryPool*);
 typedef void (*func8850CF00)(unk_func_8850CD44*, Controller*);
 
 void func_88500020(unk_func_88500020*, s32, s32);
+void func_88500338(unk_func_88500020* arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_88500668(unk_func_88001300_000_000*, s32);
 void func_8850068C(unk_func_88001300_000_000*, unk_func_88001300_000_000*);
 void func_885007CC(unk_func_88001300_000*, s32);
@@ -844,7 +847,7 @@ s32 func_88506438(unk_func_88200FA0_030_030*, s32, s32);
 s32 func_885065E0(unk_func_88200FA0_030_030*, Controller*);
 void func_88506BFC(unk_func_88200FA0_030_030*, s32);
 s32 func_88506CE4(unk_func_88200FA0_030_030*);
-void func_88506DCC(unk_func_8821421C_038_034*, s32, s32, void (*)(), s32, s32, s32, MemoryPool*);
+void func_88506DCC(unk_func_8821421C_038_034*, s32, s32, unk_func_88200FA0_030_030_040, s32, s32, s32, MemoryPool*);
 void func_88506EE4(unk_func_8820BE14_02C_038*, unk_func_88200FA0_030_038*);
 void func_88506F1C(unk_func_8830867C_02C_034*, unk_func_88200FA0_030_038*, MemoryPool*);
 void func_88506F50(unk_func_8821421C_038_034*, unk_func_8821421C_038_050**);

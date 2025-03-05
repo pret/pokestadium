@@ -539,6 +539,8 @@ extern u8 _70D3A0_ROM_END[];
 extern u8 D_70110[];
 extern u8 D_70290[];
 extern u8 D_70B10[];
+extern u8 _6EB340_ROM_START[];
+extern u8 _6EB340_ROM_END[];
 
 extern u8 D_124570[];
 
