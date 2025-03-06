@@ -1294,9 +1294,9 @@
     subsegments:
     - [0x23C250, textbin,   fragments/29/fragment29_header]
     - [0x23C270, c,      fragments/29/fragment29]
-    - [0x23D3C0, data,   fragments/29/fragment29_data]
+    - [0x23D3C0, .data,   fragments/29/fragment29]
 
-    - {vram: 0x889011E0, type:  bss, name: fragments/29/fragment29_bss}
+    - {vram: 0x889011E0, type:  .bss, name: fragments/29/fragment29}
 
   - name: fragment29_relocs
     type: code

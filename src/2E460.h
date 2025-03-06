@@ -52,6 +52,7 @@ void func_8002EEA8(OSMesg);
 ret_func_8002ED08* func_8002ED08(s32);
 s32 func_8002ED78(unk_func_80026268_arg0*, s32);
 s32 func_8002EDEC(s32);
+void func_8002EEEC(void);
 void func_8002EF18(s32*);
 void func_8002EF44(void);
 s32 func_8002F1C0(u8);

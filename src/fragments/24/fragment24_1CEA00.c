@@ -3108,10 +3108,10 @@ void func_8830867C(unk_func_8830867C* arg0, s32 arg1, s32 arg2, MemoryPool* arg3
 
     arg0->unk_50->unk_00.unk_10.unk_00 =
         arg0->unk_2C->unk_000.unk_10.unk_00 +
-        ((arg0->unk_2C->unk_02C->unk_00.unk_14.unk_00 - arg0->unk_50->unk_2C->unk_14.unk_00) / 2);
+        ((arg0->unk_2C->unk_02C->unk_00.unk_14.unk_00 - arg0->unk_50->unk_2C->unk_00.unk_14.unk_00) / 2);
     arg0->unk_50->unk_00.unk_10.unk_02 =
         arg0->unk_2C->unk_000.unk_10.unk_02 +
-        ((arg0->unk_2C->unk_02C->unk_00.unk_14.unk_02 - arg0->unk_50->unk_2C->unk_14.unk_02) / 2);
+        ((arg0->unk_2C->unk_02C->unk_00.unk_14.unk_02 - arg0->unk_50->unk_2C->unk_00.unk_14.unk_02) / 2);
 }
 
 void func_88308D60(unk_func_8830867C* arg0) {
