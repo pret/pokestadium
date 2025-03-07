@@ -343,10 +343,10 @@ typedef struct unk_D_86002F34_alt12 {
     /* 0x1E */ s16 unk_1E;
 } unk_D_86002F34_alt12; // size = 0x20
 
-typedef struct unk_D_86002F34_alt13 {
-    /* 0x00 */ GraphNode unk_00;
-    /* 0x18 */ s16 unk_18;
-} unk_D_86002F34_alt13; // size = 0x1C
+typedef struct GraphNodeCullingRadius {
+    /* 0x00 */ struct GraphNode node;
+    /* 0x18 */ s16 cullingRadius; // specifies the 'sphere radius' for purposes of frustum culling
+} GraphNodeCullingRadius; // size = 0x1C
 
 typedef struct unk_D_86002F34_alt14 {
     /* 0x00 */ GraphNode unk_00;
