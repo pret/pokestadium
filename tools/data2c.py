@@ -46,6 +46,11 @@ SIGNED = {
 
     "short",
     "int",
+
+    "f32",
+    "f64",
+    "float",
+    "double",
 }
 
 FLOAT = {
@@ -126,6 +131,7 @@ def calc_struct_sizes():
 
             i += 1
 
+        max_size = round_up(max_size, max_rounding)
         STRUCTS[name]["size"] = max_size
         STRUCTS[name]["round"] = max_rounding
 
@@ -527,46 +533,64 @@ def dump_data(offset, struct, counts):
     def output_struct(data, name, out, offset, indent):
         def round_up(offset, rounding):
             return offset + (-offset % rounding)
+        def output_type(type, size, offset, out):
+            is_signed = type in SIGNED
+            is_float = type in FLOAT
+            make_hex = "*" in type or type not in SIGNED
 
-        out += indent + "{ "
-
-        for member in STRUCTS[name]["data"]:
-            if member["type"] in STRUCTS:
-                out = output_struct(data, member["type"], out, offset + member["offset"], indent)
-            else:
-                #print(member)
-
-                is_signed = member["type"] in SIGNED
-                is_float = member["type"] in FLOAT
-                read_offset = offset + member["offset"]
-                make_hex = "*" in member["type"]
-
-                match member["size"]:
-                    case 1:
-                        v = unpack_from(">b" if is_signed else ">B", data, read_offset)[0]
+            match size:
+                case 1:
+                    v = unpack_from(">b" if is_signed else ">B", data, offset)[0]
+                    if make_hex:
+                        out += f"0x{v:02X}" + ", "
+                    else:
                         out += f"{v}, "
 
-                    case 2:
-                        v = unpack_from(">h" if is_signed else ">H", data, read_offset)[0]
+                case 2:
+                    v = unpack_from(">h" if is_signed else ">H", data, offset)[0]
+                    if make_hex:
+                        out += f"0x{v:04X}" + ", "
+                    else:
                         out += f"{v}, "
 
-                    case 4:
-                        v = unpack_from(">f" if is_float else ">i" if is_signed else ">I", data, read_offset)[0]
-                        if make_hex:
-                            if v == 0:
-                                out += f"NULL" + ", "
-                            else:
-                                out += f"0x{v:08X}" + ", "
+                case 4:
+                    v = unpack_from(">f" if is_float else ">i" if is_signed else ">I", data, offset)[0]
+                    if make_hex:
+                        if v == 0:
+                            out += f"NULL" + ", "
                         else:
-                            out += f"{v}" + ("f" if is_float else "") + ", "
+                            out += f"0x{v:08X}" + ", "
+                    else:
+                        out += f"{v}" + ("f" if is_float else "") + ", "
 
-                    case 8:
-                        v = unpack_from(">d" if is_float else ">q" if is_signed else ">Q", data, read_offset)[0]
-                        out += f"{v}" + ", "
+                case 8:
+                    v = unpack_from(">d" if is_float else ">q" if is_signed else ">Q", data, offset)[0]
+                    if make_hex:
+                        out += f"0x{v:16X}" + ", "
+                    else:
+                        out += f"{v}, "
 
-        if len(STRUCTS[name]["data"]) <= 4:
-            out = out[:-2]
-        out += indent + "}, "
+            return out
+
+
+        if name in STRUCTS:
+            out += indent + "{ "
+
+            #print(STRUCTS[name])
+            for member in STRUCTS[name]["data"]:
+                if member["type"] in STRUCTS:
+                    out = output_struct(data, member["type"], out, offset + member["offset"], indent)
+                else:
+                    #print(member)
+                    out = output_type(member["type"], member["size"], offset + member["offset"], out)
+
+            if len(STRUCTS[name]["data"]) <= 4:
+                out = out[:-2]
+            out += indent + "}, "
+
+        else:
+            out = output_type(name, BASE_TYPES[name], offset, out)
+
         return out
 
     def output_array(data, name, counts, depth, out, offset):
@@ -585,18 +609,18 @@ def dump_data(offset, struct, counts):
                     out += indent + "\n},"
                 else:
                     out = output_struct(data, name, out, offset, (depth + 1) * "    ")
-                    offset += STRUCTS[name]["size"]
+                    offset += STRUCTS[name]["size"] if name in STRUCTS else BASE_TYPES[name]
 
         else:
             out = output_struct(data, name, out, offset, "")
 
         return out, offset
 
-    total_size = STRUCTS[struct]["size"]
+    total_size = STRUCTS[struct]["size"] if struct in STRUCTS else BASE_TYPES[struct]
     total_count = 1
     for count in counts:
         total_count *= count
-    total_size = STRUCTS[struct]["size"] * total_count
+    total_size *= total_count
 
     #print(f"size 0x{STRUCTS[struct]['size']:X} x {total_count} = 0x{total_size:X}")
 
@@ -607,31 +631,32 @@ def dump_data(offset, struct, counts):
 
     out = "{" if len(counts) > 0 else ""
     out, _ = output_array(data, struct, counts, 0, out, 0)
-    out =  out + "};" if len(counts) > 0 else (out[:-2] + ";")
+    out = out + "};" if (len(counts) > 0 and struct in STRUCTS) else (out[:-2] + "};")
 
     print(out)
-
 
 
 #######################################################################
 
 parse_structs()
 calc_struct_sizes()
-
 #print(f"{len(STRUCTS)} structs parsed in")
 
-offset = int(sys.argv[1], 16)
-struct = sys.argv[2]
+def dump(offset, type_name):
+    offset = int(offset, 16)
 
-counts = []
-while "[" in struct:
-    count = struct.split("[",1)[1].split("]",1)[0]
-    struct = struct.split("[",1)[0] + struct.split("]",1)[1]
-    count = int(count, 0)
-    counts.append(count)
+    counts = []
+    while "[" in type_name:
+        count = type_name.split("[",1)[1].split("]",1)[0]
+        type_name = type_name.split("[",1)[0] + type_name.split("]",1)[1]
+        count = int(count, 0)
+        counts.append(count)
 
-if struct not in STRUCTS:
-    print(f"Could not find struct definition \"{struct}\", maybe it failed to parse...")
-    exit()
+    if type_name not in STRUCTS and type_name not in BASE_TYPES:
+        print(f"Could not find type definition \"{type_name}\", maybe it failed to parse...")
+        exit()
 
-dump_data(offset, struct, counts)
+    dump_data(offset, type_name, counts)
+
+if __name__ == "__main__":
+    dump(sys.argv[1], sys.argv[2])

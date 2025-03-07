@@ -91,7 +91,7 @@ extern const char D_8690A5C8[];
 extern const char D_8690A5D8[];
 extern const char D_8690A5E8[];
 
-extern char* D_8690A678;
+extern char** D_8690A678;
 extern f32 D_8690A708;
 extern unk_D_8690A710* D_8690A710;
 extern unk_D_8690B2F8 D_8690B2F8;
@@ -114,7 +114,7 @@ s32 func_86900088(s32 arg0, struct GraphNode* arg1);
 s32 func_869000F4(s32 arg0, struct GraphNode* arg1);
 void func_86900110(u8 arg0, u8 arg1, u8 arg2);
 void func_86900188(void);
-unk_D_86002F58_004_000_010_024* func_86900244(unk_func_8001BEE8* arg0);
+unk_D_86002F58_004_000_010_024* func_86900244(unk_func_80026268_arg0* arg0);
 void func_869002AC(void);
 void func_86900410(void);
 void func_86900484(s32 arg0);

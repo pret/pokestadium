@@ -27,31 +27,32 @@
 #define cur_geo_cmd_ptr(offset) \
     (*(void **) &gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
 
-
 typedef void (*GeoLayoutCommandProc)(void);
 
 typedef struct unk_D_800ABE00_cmd0 {
     /* 0x00 */ u8 cmd;
     /* 0x02 */ u16 unk_02;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ u8* unk_04;
 } unk_D_800ABE00_cmd0; // size = 0x8
 
 typedef struct unk_D_800ABE00_cmd1 {
     /* 0x00 */ u8 cmd;
+    /* 0x01 */ char pad[3];
 } unk_D_800ABE00_cmd1; // size = 0x4
 
 typedef struct unk_D_800ABE00_cmd2 {
     /* 0x00 */ u8 cmd;
-    /* 0x04 */ u32 unk_04;
+    /* 0x04 */ u8* unk_04;
 } unk_D_800ABE00_cmd2; // size = 0x8
 
 typedef struct unk_D_800ABE00_cmd3 {
     /* 0x00 */ u8 cmd;
-    /* 0x04 */ u32 unk_04;
+    /* 0x04 */ u8* unk_04;
 } unk_D_800ABE00_cmd3; // size = 0x8
 
 typedef struct unk_D_800ABE00_cmd4 {
     /* 0x00 */ u8 cmd;
+    /* 0x01 */ char pad[3];
 } unk_D_800ABE00_cmd4; // size = 0x4
 
 typedef struct unk_D_800ABE00_cmd5 {
@@ -130,6 +131,11 @@ typedef struct unk_D_800ABE00_cmd11 {
     /* 0x01 */ char pad[3];
 } unk_D_800ABE00_cmd11; // size = 0x4
 
+typedef struct unk_D_800ABE00_cmd12 {
+    /* 0x00 */ u8 cmd;
+    /* 0x01 */ char pad[3];
+} unk_D_800ABE00_cmd12; // size = 0x4
+
 typedef struct unk_D_800ABE00_cmd13 {
     /* 0x00 */ u8 cmd;
     /* 0x01 */ u8 r;
@@ -141,7 +147,7 @@ typedef struct unk_D_800ABE00_cmd13 {
 
 typedef struct unk_D_800ABE00_cmd14 {
     /* 0x00 */ u8 cmd;
-    /* 0x01 */ char unk01[0x3];
+    /* 0x01 */ char pad[0x3];
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ u8 r;
@@ -152,7 +158,7 @@ typedef struct unk_D_800ABE00_cmd14 {
 
 typedef struct unk_D_800ABE00_cmd15 {
     /* 0x00 */ u8 cmd;
-    /* 0x01 */ char unk01[0xB];
+    /* 0x01 */ char pad[0xB];
 } unk_D_800ABE00_cmd15; // size = 0xC
 
 typedef struct unk_D_800ABE00_cmd16 {
@@ -182,7 +188,7 @@ typedef struct unk_D_800ABE00_cmd18 {
 
 typedef struct unk_D_800ABE00_cmd19 {
     /* 0x00 */ u8 cmd;
-    /* 0x01 */ char unk01[0x3];
+    /* 0x01 */ char pad[0x3];
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ s16 unk_06;
 } unk_D_800ABE00_cmd19; // size = 0x8
@@ -195,7 +201,7 @@ typedef struct unk_D_800ABE00_cmd1A {
 
 typedef struct unk_D_800ABE00_cmd1B {
     /* 0x00 */ u8 cmd;
-    /* 0x01 */ char unk01[0x3];
+    /* 0x01 */ char pad[0x3];
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ s16 unk_08;
@@ -204,7 +210,7 @@ typedef struct unk_D_800ABE00_cmd1B {
 
 typedef struct unk_D_800ABE00_cmd1C {
     /* 0x00 */ u8 cmd;
-    /* 0x01 */ char unk01[0x3];
+    /* 0x01 */ char pad[0x3];
     /* 0x04 */ u32 unk_04;
     /* 0x08 */ u32 unk_08;
     /* 0x0C */ u32 unk_0C;
@@ -245,7 +251,7 @@ typedef struct unk_D_800ABE00_cmd1F {
 typedef struct unk_D_800ABE00_cmd20 {
     /* 0x00 */ u8 cmd;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk02[0x2];
+    /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ s16 unk_08;
@@ -271,7 +277,7 @@ typedef struct unk_D_800ABE00_cmd23 {
     /* 0x00 */ u8 cmd;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ Gfx* unk_04;
     /* 0x07 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
     /* 0x0C */ u8 r;

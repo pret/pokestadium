@@ -5,24 +5,24 @@
 #define D_800AF740_NUM_FILES 42
 
 static BinArchive* D_800AF740;
-static s32* D_800AF744;
+static char** D_800AF744;
 
 void func_8002D510(void) {
     s32 i;
 
     D_800AF740 = func_800044F4(textdata_ROM_START, NULL, 1, 0);
-    D_800AF744 = main_pool_alloc(D_800AF740_NUM_FILES * sizeof(s32), 0);
+    D_800AF744 = main_pool_alloc(D_800AF740_NUM_FILES * sizeof(char*), 0);
 
     for (i = 0; i < D_800AF740_NUM_FILES; i++) {
-        D_800AF744[i] = 0;
+        D_800AF744[i] = NULL;
     }
 }
 
-char* func_8002D5AC(s32 file_number) {
-    return (char*)func_8000484C(D_800AF740, file_number);
+char** func_8002D5AC(s32 file_number) {
+    return (char**)func_8000484C(D_800AF740, file_number);
 }
 
-void func_8002D5D4(u32 arg0, s32 arg1) {
+void func_8002D5D4(u32 arg0, char* arg1) {
     if ((arg0 >= 0x14) && (arg0 < 0x2A)) {
         D_800AF744[arg0] = arg1;
     }
@@ -70,7 +70,7 @@ void func_8002D628(char* arg0, u32 arg1, s8* arg2) {
                     }
 
                     if ((temp_v0 >= 0x14) && (temp_v0 < 0x2A)) {
-                        if (D_800AF744[temp_v0] != 0) {
+                        if (D_800AF744[temp_v0] != NULL) {
                             var_s4 = D_800AF744[temp_v0];
                             var_s2 = 1;
                         }

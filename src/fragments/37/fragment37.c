@@ -78,7 +78,7 @@ static unk_D_82202FE4 D_82202FE4[9] = {
 
 static u8* D_82203064[] = { 0x03005000, 0x03005A20, 0x03006440, 0x03005A20 };
 
-static s32 D_822030F0;
+static char** D_822030F0;
 static BinArchive* D_822030F4;
 static Vp D_822030F8;
 static Mtx D_82203108;
