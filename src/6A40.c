@@ -36,10 +36,10 @@ void func_80005EDC(void) {
     gDisplayListHead = *temp_v0;
 }
 
-void func_80005F1C(s32* arg0, s32* arg1) {
+void func_80005F1C(Gfx** arg0, Gfx** arg1) {
     s32* ptr = (s32*)&D_800A7428;
-    *arg1 = (uintptr_t)gDisplayListHead - ptr[D_800A7428.unk10];
-    *arg0 = ptr[D_800A7428.unk10];
+    *arg1 = (Gfx*)((uintptr_t)gDisplayListHead - ptr[D_800A7428.unk10]);
+    *arg0 = (Gfx*)(ptr[D_800A7428.unk10]);
 }
 
 void* func_80005F5C(s32 arg0) {

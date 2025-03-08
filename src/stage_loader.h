@@ -8,8 +8,8 @@ typedef struct unk_D_800A7450 {
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x04 */ Gfx* unk_04;
+    /* 0x08 */ Gfx* unk_08;
     /* 0x0C */ void* unk_0C;
     /* 0x10 */ char unk10[0x4];
 } unk_D_800A7450; // size >= 0x14

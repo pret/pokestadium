@@ -9,7 +9,7 @@ void func_80057FD0(void *, int);
 s32 func_8005A990(OSPiHandle *);
 
 // bcopy.s
-void _bcopy(void *, void *, s32);
+void _bcopy(void* src, void* dst, s32);
 
 // 5580.s
 void func_80004CC0(OSThread *, s32, s32);
