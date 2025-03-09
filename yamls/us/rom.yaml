@@ -1639,10 +1639,10 @@
     subsegments:
     - [0x29DD30, textbin,   fragments/42/fragment42_header]
     - [0x29DD50, c,      fragments/42/fragment42]
-    - [0x2A0EB0, data,   fragments/42/fragment42_data]
-    - [0x2A0FE0, rodata, fragments/42/fragment42_rodata]
+    - [0x2A0EB0, .data,   fragments/42/fragment42]
+    - [0x2A0FE0, .rodata, fragments/42/fragment42]
 
-    - {vram: 0x833032E0, type:  bss, name: fragments/42/fragment42_bss}
+    - {vram: 0x833032E0, type:  .bss, name: fragments/42/fragment42}
 
   - name: fragment42_relocs
     type: code
@@ -1663,10 +1663,13 @@
     - [0x2A1B50, c,      fragments/43/fragment43_2A1B50]
     - [0x2A3E70, c,      fragments/43/fragment43_2A3E70]
     - [0x2A3F60, c,      fragments/43/fragment43_2A3F60]
-    - [0x2A4950, data,   fragments/43/fragment43_data]
-    - [0x2A49F0, rodata, fragments/43/fragment43_rodata]
+    - [0x2A4950, .data,   fragments/43/fragment43_2A1B50]
+    - [0x2A4970, .data,   fragments/43/fragment43_2A3F60]
+    - [0x2A49F0, .rodata, fragments/43/fragment43_2A3F60]
 
-    - {vram: 0x83402EE0, type:  bss, name: fragments/43/fragment43_bss}
+    - {vram: 0x83402EE0, type:  .bss, name: fragments/43/fragment43_2A1B50}
+    - {vram: 0x83407BF0, type:  .bss, name: fragments/43/fragment43_2A3E70}
+    - {vram: 0x83407C00, type:  .bss, name: fragments/43/fragment43_2A3F60}
 
   - name: fragment43_relocs
     type: code
@@ -1685,10 +1688,10 @@
     subsegments:
     - [0x2A4DF0, textbin,   fragments/44/fragment44_header]
     - [0x2A4E10, c,      fragments/44/fragment44]
-    - [0x2A8C60, rodata, fragments/44/fragment44_rodata_2A8C60]
-    - [0x2A8D60, rodata, fragments/44/fragment44_rodata_2A8D60]
+    - [0x2A8C60, .data, fragments/44/fragment44]
+    - [0x2A8D60, .rodata, fragments/44/fragment44]
 
-    - {vram: 0x83503FC0, type:  bss, name: fragments/44/fragment44_bss}
+    - {vram: 0x83503FC0, type:  .bss, name: fragments/44/fragment44}
 
   - name: fragment44_relocs
     type: code
@@ -1707,10 +1710,10 @@
     subsegments:
     - [0x2A9790, textbin,   fragments/45/fragment45_header]
     - [0x2A97B0, c,      fragments/45/fragment45]
-    - [0x2ACA10, data,   fragments/45/fragment45_data]
-    - [0x2ACA70, rodata, fragments/45/fragment45_rodata]
+    - [0x2ACA10, .data,   fragments/45/fragment45]
+    - [0x2ACA70, .rodata, fragments/45/fragment45]
 
-    - {vram: 0x836032F0, type:  bss, name: fragments/45/fragment45_bss}
+    - {vram: 0x836032F0, type:  .bss, name: fragments/45/fragment45}
 
   - name: fragment45_relocs
     type: code

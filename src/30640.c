@@ -11,14 +11,18 @@
 #include "src/29BA0.h"
 #include "src/3FB0.h"
 #include "src/4BDC0.h"
-#include "src/6BC0.h"
 #include "src/F420.h"
 #include "src/math_util.h"
 #include "src/memory.h"
-#include "src/fragments/43/fragment43.h"
 #include "src/util.h"
 
-extern u32 D_83407B30;
+extern s32 D_80075F84;
+extern unk_func_80031270* D_80075F80;
+extern s32 D_80075F90;
+extern u32 D_80075FA0[];
+
+void func_800318B8(void);
+void func_8340051C(void);
 
 void func_8002FA40(void) {
     s32 var_s6;
@@ -29,7 +33,7 @@ void func_8002FA40(void) {
     u32 var_s5;
     u32 sp5C;
     s32 var_v0;
-    u32* val;
+    unk_D_83407B00* val;
 
     val = &D_83407B30;
     var_s2 = 0;
@@ -42,7 +46,7 @@ void func_8002FA40(void) {
     FRAGMENT_LOAD(fragment34);
 
     do {
-        temp_s0 = Util_ConvertAddrToVirtAddr(val);
+        temp_s0 = Util_ConvertAddrToVirtAddr((u32)val);
         var_s6 = 1;
 
         main_pool_push_state('galy');
@@ -186,9 +190,13 @@ void func_8002FA40(void) {
     main_pool_pop_state('SNPM');
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_8002FF00.s")
+void func_8002FF00(void) {
+    func_800318B8();
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_8002FF20.s")
+void func_8002FF20(void) {
+    D_80075F90 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_8002FF2C.s")
 
@@ -216,7 +224,21 @@ void func_8002FA40(void) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_800303C8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_8003107C.s")
+void func_8003107C(unk_D_83402EE0_070* arg0, unk_func_80026268_arg0* arg1) {
+    s32 i;
+
+    bzero(arg0, sizeof(unk_D_83402EE0_070));
+    arg0->unk_00 = arg1->unk_0E;
+    arg0->unk_02 = arg1->unk_00;
+
+    for (i = 0; i < 11; i++) {
+        arg0->unk_03[i] = ((s8*)arg1->unk_30)[i];
+    }
+
+    for (i = 0; i < 11; i++) {
+        arg0->unk_0E[i] = ((s8*)arg1->unk_3B)[i];
+    }
+}
 
 void func_80031140(unk_func_80026268_arg0* arg0, unk_D_83407AC8* arg1) {
     s32 i;
@@ -235,9 +257,55 @@ void func_80031140(unk_func_80026268_arg0* arg0, unk_D_83407AC8* arg1) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031204.s")
+void func_80031204(unk_func_80031270* arg0, s16 arg1, s16 arg2) {
+    UNUSED s32 pad;
+    MemoryBlock* sp18;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031270.s")
+    sp18 = func_80002D10(main_pool_get_available(), 0);
+    D_80075F80 = arg0;
+    arg0->unk_1C = process_geo_layout(sp18, D_80075FA0);
+    D_80075F80 = NULL;
+    func_80002D60(sp18);
+}
+
+unk_func_80031270* func_80031270(s16 arg0, s16 arg1, unk_D_80068BB0* arg2, unk_D_80068BB0* arg3,
+                                 unk_D_86002F58_004_000_010* arg4, BinArchive* arg5, unk_D_83403C60* arg6) {
+    unk_D_80068BB0* var_v0;
+    unk_func_80031270* temp_v0 = main_pool_alloc(sizeof(unk_func_80031270), 0);
+
+    if (temp_v0 != NULL) {
+        temp_v0->unk_00 = 0;
+        temp_v0->unk_02 = 0;
+        temp_v0->unk_04 = arg0;
+        temp_v0->unk_06 = arg1;
+
+        if (arg2 != NULL) {
+            temp_v0->unk_08 = arg2;
+        } else {
+            temp_v0->unk_08 = func_80006314(0, 2, arg0, arg1, 0);
+        }
+
+        if (arg3 != NULL) {
+            temp_v0->unk_0C = arg3;
+        } else {
+            temp_v0->unk_0C = func_80006314(0, 2, arg0, arg1, 1);
+        }
+
+        func_80006414(temp_v0->unk_08, temp_v0->unk_0C);
+
+        temp_v0->unk_10 = arg4;
+        temp_v0->unk_14 = arg5;
+        temp_v0->unk_18 = arg6;
+        temp_v0->unk_34 = 0;
+
+        if (D_80075F90 == 0) {
+            D_80075F90 = func_80006314(0, 2, 0xC8, 0x2B, 0);
+        }
+
+        func_80031204(temp_v0, arg0, arg1);
+    }
+    return temp_v0;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031390.s")
 
@@ -251,7 +319,9 @@ void func_80031140(unk_func_80026268_arg0* arg0, unk_D_83407AC8* arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_800318AC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_800318B8.s")
+void func_800318B8(void) {
+    D_80075F84 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_800318C4.s")
 
