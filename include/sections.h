@@ -337,6 +337,7 @@ extern u8 fragment54_relocs_ROM_END[];
 extern u8 fragment55_TEXT_START[];
 extern u8 fragment55_ROM_START[];
 extern u8 fragment55_ROM_END[];
+extern u8 fragment55_relocs_ROM_END[];
 
 // fragment 56
 extern u8 fragment56_TEXT_START[];

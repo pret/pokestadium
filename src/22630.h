@@ -97,6 +97,45 @@ typedef struct unk_func_8820BE14_sp {
     /* 0x53 */ u8 unk_53;
 } unk_func_8820BE14_sp; // size = 0x54
 
+typedef struct unk_D_800AC910_50 {
+    /* 0x000 */ char unk000[0x18];
+    /* 0x018 */ u8 unk_018[11];
+    /* 0x023 */ char unk023[0x62];
+    /* 0x085 */ u8 unk_085;
+    /* 0x086 */ char unk086[0x4];
+    /* 0x08A */ u8 unk_08A;
+    /* 0x08B */ char unk08B[0x3EC];
+    /* 0x477 */ s8 unk_477;
+    /* 0x478 */ char unk478[0xA5];
+    /* 0x51D */ s8 unk_51D;
+    /* 0x51E */ char unk51E[0x48E];
+    /* 0x9AC */ u8 unk_9AC;
+    /* 0x9AB */ char unk9AB[0x5F6];
+    /* 0xFA1 */ u8 unk_FA1;
+    /* 0xFA2 */ char unkFA2[0x1E];
+} unk_D_800AC910_50; // size = 0xFC0
+
+typedef struct unk_D_800AC910_040 {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[11];
+    /* 0x0D */ u8 unk_0D[2];
+    /* 0x0F */ char unkF[0x1];
+} unk_D_800AC910_040; // size = 0x10
+
+typedef struct unk_D_800AC910 {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ char unk06[0x13];
+    /* 0x19 */ u8 unk_019[0x20];
+    /* 0x39 */ char unk39[0x7];
+    /* 0x40 */ unk_D_800AC910_040 unk_40;
+    /* 0x50 */ unk_D_800AC910_50* unk_50;
+    /* 0x54 */ void* unk_54;
+} unk_D_800AC910; // size = 0x58
+
 u16 func_80021A30(u8* arg0);
 u32 func_80021A48(u8* arg0);
 void func_80021A68(u8* arg0, s32 arg1);
@@ -119,6 +158,7 @@ u32 func_800224B8(s32 arg0, u16 arg1);
 u16 func_800226C0(s32 arg0, u32 arg1);
 void func_80022734(unk_func_8820BE14_sp*);
 void func_800228B0(unk_func_8820BE14_sp*);
+s16 func_80022A04(u16*, unk_D_800AC910_040*);
 s8 func_80022A28(s32);
 u8 func_80022A38(s32 arg0);
 u8 func_80022A60(s32 arg0);
@@ -148,10 +188,12 @@ s32 func_800243D8(s32);
 void func_8002447C(s32);
 void func_800244F4(s32);
 s32 func_80024A48(s32, s32, s32);
+void func_80024CB0(s32, s32, s32, s32, unk_func_80026268_arg0*);
 s32 func_80024EF4(void);
 s32 func_80024F00(s32);
 u8 func_80024F68(s32);
 s32 func_80024FB0(s32 arg0);
+void func_80025040(s16, unk_D_800AC910_040*);
 s32 func_80025084(s32);
 s32 func_8002513C(s32);
 char* func_800251B0(s32, char*);

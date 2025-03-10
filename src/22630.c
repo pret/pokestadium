@@ -7,45 +7,6 @@
 #include "src/hal_libc.h"
 #include "src/util.h"
 
-typedef struct unk_D_800AC910_50 {
-    /* 0x000 */ char unk000[0x18];
-    /* 0x018 */ u8 unk_018[11];
-    /* 0x023 */ char unk023[0x62];
-    /* 0x085 */ u8 unk_085;
-    /* 0x086 */ char unk086[0x4];
-    /* 0x08A */ u8 unk_08A;
-    /* 0x08B */ char unk08B[0x3EC];
-    /* 0x477 */ s8 unk_477;
-    /* 0x478 */ char unk478[0xA5];
-    /* 0x51D */ s8 unk_51D;
-    /* 0x51E */ char unk51E[0x48E];
-    /* 0x9AC */ u8 unk_9AC;
-    /* 0x9AB */ char unk9AB[0x5F6];
-    /* 0xFA1 */ u8 unk_FA1;
-    /* 0xFA2 */ char unkFA2[0x1E];
-} unk_D_800AC910_50; // size = 0xFC0
-
-typedef struct unk_D_800AC910_40 {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ char unk_02[11];
-} unk_D_800AC910_40;
-
-typedef struct unk_D_800AC910 {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ char unk06[0x13];
-    /* 0x19 */ u8 unk_019[0x20];
-    /* 0x39 */ char unk39[0x7];
-    /* 0x40 */ u16 unk_40;
-    /* 0x42 */ char unk_42[11];
-    /* 0x4D */ u8 unk_4D[2];
-    /* 0x50 */ unk_D_800AC910_50* unk_50;
-    /* 0x54 */ void* unk_54;
-} unk_D_800AC910; // size = 0x58
-
 extern unk_D_80070F84 D_80070F84[];
 
 extern unk_D_800AC910 D_800AC910[];
@@ -672,7 +633,7 @@ s32 func_800240A0(void) {
         var_s0->unk_02 = 0;
         var_s0->unk_05 = 0;
 
-        var_s0->unk_40 = 0x5000;
+        var_s0->unk_40.unk_00 = 0x5000;
 
         for (j = 0; j < 11; j++) {
             var_s0->unk_42[j] = '\x00';
@@ -772,9 +733,9 @@ s32 func_80024FB0(s32 arg0) {
         return 0;
     }
 
-    D_800AC910[arg0].unk_40 = func_80021A30(&D_800AC910[arg0].unk_50->unk_085);
-    _bcopy(&D_800AC910[arg0].unk_50->unk_018, &D_800AC910[arg0].unk_42, 0xB);
-    bzero(D_800AC910[arg0].unk_4D, 3);
+    D_800AC910[arg0].unk_40.unk_00 = func_80021A30(&D_800AC910[arg0].unk_50->unk_085);
+    _bcopy(&D_800AC910[arg0].unk_50->unk_018, &D_800AC910[arg0].unk_40.unk_02, 0xB);
+    bzero(D_800AC910[arg0].unk_40.unk_0D, 3);
     return 1;
 }
 
