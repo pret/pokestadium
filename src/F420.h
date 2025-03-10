@@ -17,8 +17,8 @@ extern Vec3s D_8006F05C;
 extern Vec3f D_8006F064;
 extern u16 D_8006F070[];
 
-Color_RGBA8_u32* func_8000E820(Color_RGBA8_u32* arg0, u8 r, u8 g, u8 b);
-Color_RGBA8_u32* func_8000E840(Color_RGBA8_u32* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
+Color_RGBA8* func_8000E820(Color_RGBA8* arg0, u8 r, u8 g, u8 b);
+Color_RGBA8* func_8000E840(Color_RGBA8* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
 Vec3f* func_8000E868(Vec3f* arg0, f32 arg1, f32 arg2, f32 arg3);
 Vec3f* func_8000E88C(Vec3f* arg0, f32 arg1, f32 arg2, f32 arg3);
 Vec3f* func_8000E8B0(Vec3f* arg0, Vec3f* arg1);

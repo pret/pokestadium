@@ -8,7 +8,7 @@ Vec3s D_8006F05C = { 0, 0, 0 };
 Vec3f D_8006F064 = { 1.0f, 1.0f, 1.0f };
 u16 D_8006F070[] = { 1, 1, 1 };
 
-Color_RGBA8_u32* func_8000E820(Color_RGBA8_u32* arg0, u8 r, u8 g, u8 b) {
+Color_RGBA8* func_8000E820(Color_RGBA8* arg0, u8 r, u8 g, u8 b) {
     arg0->r = r;
     arg0->g = g;
     arg0->b = b;
@@ -16,7 +16,7 @@ Color_RGBA8_u32* func_8000E820(Color_RGBA8_u32* arg0, u8 r, u8 g, u8 b) {
     return arg0;
 }
 
-Color_RGBA8_u32* func_8000E840(Color_RGBA8_u32* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
+Color_RGBA8* func_8000E840(Color_RGBA8* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
     arg0->r = arg1;
     arg0->g = arg2;
     arg0->b = arg3;
