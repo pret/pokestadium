@@ -1415,11 +1415,11 @@
     vram: 0x81300000
     subsegments:
     - [0x25B0D0, textbin,   fragments/33/fragment33_header]
-    - [0x25B0F0, asm,    fragments/33/fragment33]
-    - [0x25ECF0, data,   fragments/33/fragment33_data]
-    - [0x25F020, rodata, fragments/33/fragment33_rodata]
+    - [0x25B0F0, c,    fragments/33/fragment33]
+    - [0x25ECF0, .data,   fragments/33/fragment33]
+    - [0x25F020, .rodata, fragments/33/fragment33]
 
-    - {vram: 0x81303FA0, type:  bss, name: fragments/33/fragment33_bss}
+    - {vram: 0x81303FA0, type:  .bss, name: fragments/33/fragment33}
 
   - name: fragment33_relocs
     type: code
