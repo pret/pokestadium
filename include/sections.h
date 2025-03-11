@@ -207,6 +207,7 @@ extern u8 fragment33_ROM_START[];
 extern u8 fragment33_ROM_END[];
 extern u8 fragment33_relocs_ROM_END[];
 extern u8 fragment33_misc_ROM_START[];
+extern u8 fragment33_misc_ROM_END[];
 
 // fragment 34
 extern u8 fragment34_TEXT_START[];
@@ -548,6 +549,12 @@ extern u8 _6A9750_ROM_START[];
 extern u8 _6A9750_ROM_END[];
 extern u8 copyright_ROM_START[];
 extern u8 copyright_ROM_END[];
+extern u8 _6EC4D0_ROM_START[];
+extern u8 _6EC4D0_ROM_END[];
+extern u8 trade_select_ui_ROM_START[];
+extern u8 trade_select_ui_ROM_END[];
+
+
 
 extern u8 D_124570[];
 
