@@ -71,7 +71,7 @@ static char** D_88224FB8;
 static char** D_88224FBC;
 
 #ifdef NON_MATCHING
-void func_88206110(unk_func_8820BE14_sp* arg0) {
+void func_88206110(unk_func_80026268_arg0* arg0) {
     static unk_D_88217D10 D_88217D10[2][9] = {
         {
             { 1, 0x87, 0x21, 0x2D, 0, 0 },
@@ -102,9 +102,9 @@ void func_88206110(unk_func_8820BE14_sp* arg0) {
     unk_D_88217D10* var_v0;
     unk_D_88217D10* temp_a1;
 
-    bzero(arg0, sizeof(unk_func_8820BE14_sp));
+    bzero(arg0, sizeof(unk_func_80026268_arg0));
 
-    arg0->unk_00 = func_8002816C();
+    arg0->unk_00.unk_00 = func_8002816C();
     if (func_80024F68(func_80029080()) == 7) {
         var_a2 = 1;
     } else {
@@ -114,7 +114,7 @@ void func_88206110(unk_func_8820BE14_sp* arg0) {
     temp_a1 = D_88217D10[var_a2];
 
     for (i = 0, var_v0 = temp_a1; i < 9; i++, var_v0++) {
-        if (var_v0->unk_00 == arg0->unk_00) {
+        if (var_v0->unk_00 == arg0->unk_00.unk_00) {
             break;
         }
     }
@@ -125,10 +125,10 @@ void func_88206110(unk_func_8820BE14_sp* arg0) {
     }
 
     arg0->unk_10 = var_v0->unk_04;
-    arg0->unk_09 = temp_a1[i].unk_08;
-    arg0->unk_0A = temp_a1[i].unk_09;
-    arg0->unk_0B = temp_a1[i].unk_0A;
-    arg0->unk_0C = temp_a1[i].unk_0B;
+    arg0->unk_09[0] = temp_a1[i].unk_08;
+    arg0->unk_09[1] = temp_a1[i].unk_09;
+    arg0->unk_09[2] = temp_a1[i].unk_0A;
+    arg0->unk_09[3] = temp_a1[i].unk_0B;
 
     arg0->unk_0E = 0x7D0;
     arg0->unk_14 = 0;
@@ -139,14 +139,14 @@ void func_88206110(unk_func_8820BE14_sp* arg0) {
 
     arg0->unk_1E = guRandom();
 
-    arg0->unk_06 = D_80070FA0[arg0->unk_00 - 1].unk_06;
-    arg0->unk_07 = D_80070FA0[arg0->unk_00 - 1].unk_07;
+    arg0->unk_06 = D_80070FA0[arg0->unk_00.unk_00 - 1].unk_06;
+    arg0->unk_07 = D_80070FA0[arg0->unk_00.unk_00 - 1].unk_07;
 
     func_80022734(arg0);
 
     arg0->unk_04 = arg0->unk_24;
 
-    HAL_Strcpy(arg0->unk_30, func_8002D7C0(NULL, 0, D_88224FB8, arg0->unk_00 - 1));
+    HAL_Strcpy(arg0->unk_30, func_8002D7C0(NULL, 0, D_88224FB8, arg0->unk_00.unk_00 - 1));
     HAL_Strcpy(arg0->unk_3B, func_8002D7C0(NULL, 0, D_88224FB4, 0x17));
 
     func_800228B0(arg0);
@@ -486,7 +486,7 @@ void func_8820723C(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     temp_v1 = func_8001F5B0(0, 0, "L100");
 
-    if ((arg0->unk_000[0].unk_00 <= 0) || (arg0->unk_000[0].unk_00 >= 0x98)) {
+    if ((arg0->unk_000[0].unk_00.unk_00 <= 0) || (arg0->unk_000[0].unk_00.unk_00 >= 0x98)) {
         func_8001F1E8(((arg1 + arg3) - temp_v1) - 0x14, arg2 + 8, "L?");
     } else {
         func_8001F1E8(((arg1 + arg3) - temp_v1) - 0x14, arg2 + 8, "L%d", arg0->unk_000[0].unk_24);
@@ -1185,7 +1185,7 @@ s32 func_8820938C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2) {
 
     func_8001F3F4();
 
-    if ((arg0->unk_002C->unk_000[0].unk_00 <= 0) || (arg0->unk_002C->unk_000[0].unk_00 >= 0x98)) {
+    if ((arg0->unk_002C->unk_000[0].unk_00.unk_00 <= 0) || (arg0->unk_002C->unk_000[0].unk_00.unk_00 >= 0x98)) {
         func_8001F324(D_88217E3C.r, D_88217E3C.g, D_88217E3C.b, D_88217E3C.a);
         func_8001EBE0(8, 0);
         func_8001F1E8(arg1 + 8, arg2 + 8, "?????");
@@ -1204,7 +1204,7 @@ s32 func_8820938C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2) {
 
         func_8001F324(D_88217E3C.r, D_88217E3C.g, D_88217E3C.b, D_88217E3C.a);
         func_8001EBE0(8, 0);
-        func_8001F1E8(arg1 + 8, arg2 + 8, func_8002D7C0(NULL, 0, D_88224FB8, arg0->unk_002C->unk_000[0].unk_00 - 1));
+        func_8001F1E8(arg1 + 8, arg2 + 8, func_8002D7C0(NULL, 0, D_88224FB8, arg0->unk_002C->unk_000[0].unk_00.unk_00 - 1));
 
         func_8001F1E8(arg1 + 0x44, arg2 + 0x24, "%3d", arg0->unk_002C->unk_000[0].unk_26);
         func_8001F1E8(arg1 + 0x46, arg2 + 0x54, "%3d", arg0->unk_002C->unk_000[0].unk_28);
@@ -1973,8 +1973,8 @@ void func_8820B480(unk_func_88200FA0_030_038* arg0, s32 arg1) {
     unk_func_88205880_00D0** tmp = arg0->unk_00;
 
     for (i = 0; i < arg0->unk_08; i++) {
-        if ((tmp[i]->unk_000[0].unk_00 > 0) && (tmp[i]->unk_000[0].unk_00 < 0x98)) {
-            func_800256F4(arg1, tmp[i]->unk_000[0].unk_00, 3);
+        if ((tmp[i]->unk_000[0].unk_00.unk_00 > 0) && (tmp[i]->unk_000[0].unk_00.unk_00 < 0x98)) {
+            func_800256F4(arg1, tmp[i]->unk_000[0].unk_00.unk_00, 3);
         }
     }
 }
@@ -2287,7 +2287,7 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     unk_func_88509E34* temp_s1_2;
     unk_func_885088F4* temp_s2;
     void* temp_v0;
-    unk_func_8820BE14_sp* temp_v0_5;
+    unk_func_80026268_arg0* temp_v0_5;
     void* temp_v0_6;
     unk_func_882062E4* var_s1;
     void* var_s2_4;
@@ -2382,7 +2382,7 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     }
 
     if (arg3 == 1) {
-        temp_v0_5 = mem_pool_alloc(arg4, sizeof(unk_func_8820BE14_sp));
+        temp_v0_5 = mem_pool_alloc(arg4, sizeof(unk_func_80026268_arg0));
         func_88206110(temp_v0_5);
 
         spA0 = mem_pool_alloc(arg4, sizeof(unk_func_8820BE14_06C_000));

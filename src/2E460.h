@@ -21,14 +21,6 @@ typedef struct unk_func_8820E99C_030_030 {
     /* 0x10 */ s32 unk_10;
 } unk_func_8820E99C_030_030; // size = 0x14
 
-typedef struct unk_D_80072B00 {
-    /* 0x00 */ char unk00[2];
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03;
-    /* 0x04 */ char unk04[1];
-    /* 0x05 */ u8 unk_05;
-} unk_D_80072B00; // size = 0x6
-
 typedef struct unk_func_8830867C_044_038_030 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;

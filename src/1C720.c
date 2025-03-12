@@ -128,10 +128,10 @@ unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* ar
     u8 var_a0;
     s8* var_v1;
 
-    sp30 = &D_8006FF00[arg1->unk_00 - 1];
+    sp30 = &D_8006FF00[arg1->unk_00.unk_00 - 1];
     sp34.raw = 0;
 
-    func_80021CA4(sp38, arg1->unk_00);
+    func_80021CA4(sp38, arg1->unk_00.unk_00);
 
     if (HAL_Strcmp(arg1->unk_30, sp38) != 0) {
         var_a0 = ((arg1->unk_0E >> 8) & 0xFF) + (arg1->unk_0E & 0xFF);
@@ -160,7 +160,7 @@ unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* ar
 void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2) {
     unk_func_80026268_arg0 stack;
 
-    stack.unk_00 = arg2;
+    stack.unk_00.unk_00 = arg2;
     stack.unk_0E = arg1->unk_02;
 
     _bcopy(arg1->unk_04, stack.unk_30, 0x10);
@@ -183,7 +183,7 @@ void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
     stack.unk_0C.raw = 0;
 
     if (!(arg0->unk_00 & 0x40) && (arg0->unk_00 & 0x80)) {
-        if (arg0->unk_04 != NULL && stack.unk_08 == arg0->unk_04->unk_00) {
+        if (arg0->unk_04 != NULL && stack.unk_08 == arg0->unk_04->unk_00.unk_00) {
             func_8001BEE8(&stack.unk_0C, arg0->unk_04);
             if ((stack.unk_08 == 0x19) && (arg0->unk_04->unk_52 & 0x80)) {
                 stack.unk_08 = 0x99;

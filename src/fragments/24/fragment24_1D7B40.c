@@ -3266,7 +3266,7 @@ void func_88312108(unk_func_8830867C_04C* arg0) {
 
     if (arg0->unk_88 != NULL) {
         sp1C = 0x4D;
-        func_8002D5D4(0x19, func_8002D7C0(NULL, 0, D_8831A4D0, arg0->unk_88->unk_00 - 1));
+        func_8002D5D4(0x19, func_8002D7C0(NULL, 0, D_8831A4D0, arg0->unk_88->unk_00.unk_00 - 1));
     } else {
         sp1C = 0x4E;
     }

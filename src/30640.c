@@ -229,7 +229,7 @@ void func_8003107C(unk_D_83402EE0_070* arg0, unk_func_80026268_arg0* arg1) {
 
     bzero(arg0, sizeof(unk_D_83402EE0_070));
     arg0->unk_00 = arg1->unk_0E;
-    arg0->unk_02 = arg1->unk_00;
+    arg0->unk_02 = arg1->unk_00.unk_00;
 
     for (i = 0; i < 11; i++) {
         arg0->unk_03[i] = ((s8*)arg1->unk_30)[i];
@@ -246,7 +246,7 @@ void func_80031140(unk_func_80026268_arg0* arg0, unk_D_83407AC8* arg1) {
     bzero(arg0, sizeof(unk_func_80026268_arg0));
 
     arg0->unk_0E = arg1->unk_00;
-    arg0->unk_00 = arg1->unk_02;
+    arg0->unk_00.unk_00 = arg1->unk_02;
 
     for (i = 0; i < 11; i++) {
         arg0->unk_30[i] = arg1->unk_03[i];

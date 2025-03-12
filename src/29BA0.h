@@ -14,9 +14,13 @@ typedef struct unk_D_800AE520 {
     /* 0x10 */ s32 arg1;
 } unk_D_800AE520; // size >= 0x14
 
-typedef struct unk_func_80026268_arg0 {
+typedef struct unk_func_80026268_arg0_000 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
+} unk_func_80026268_arg0_000; // size = 0x2
+
+typedef struct unk_func_80026268_arg0 {
+    /* 0x00 */ unk_func_80026268_arg0_000 unk_00;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ u8 unk_04;
     /* 0x05 */ u8 unk_05;

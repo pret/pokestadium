@@ -239,7 +239,7 @@ void func_86B05E18(void) {
 }
 
 void func_86B05EE8(void) {
-    D_86B0FA78->unk_174 = D_86B10690->unk_01C[D_86B0FA78->unk_17C].unk_00;
+    D_86B0FA78->unk_174 = D_86B10690->unk_01C[D_86B0FA78->unk_17C].unk_00.unk_00;
     func_8001BB58(&D_86B0FA78->unk_004);
     func_8001987C();
 
