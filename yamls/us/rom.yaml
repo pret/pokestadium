@@ -68,6 +68,7 @@
     - [0x20470, c] # dp list for UI and icons
     - [0x225A0, c] #
     - [0x22630, c] # registered pkm stats
+    - [0x232C0, c] # 
     - [0x26820, c] # save data code
     - [0x29BA0, c] # scenary code
     - [0x2C1C0, c] # scenary cache cleaner
@@ -415,8 +416,8 @@
     - [0x7C190, rodata, rom_rodata_7C190]
     - [0x7C220, rodata, rom_rodata_7C220]
     - [0x7C750, rodata, rom_rodata_7C750]
-    - [0x7CCA0, rodata, rom_rodata_7CCA0]
-    - [0x7CD10, rodata, rom_rodata_7CD10]
+    - [0x7CCA0, .rodata, 22630]
+    - [0x7CD10, .rodata, 232C0]
     - [0x7CD40, .rodata, 26820]
     - [0x7CEC0, .rodata, 29BA0]
     - [0x7CFD0, .rodata, 2C1C0]
@@ -1395,9 +1396,9 @@
     subsegments:
     - [0x25A740, textbin,   fragments/32/fragment32_header]
     - [0x25A760, c,      fragments/32/fragment32]
-    - [0x25B060, data,   fragments/32/fragment32_data]
+    - [0x25B060, .data,   fragments/32/fragment32]
 
-    - {vram: 0x81100930, type:  bss, name: fragments/32/fragment32_bss}
+    - {vram: 0x81100930, type:  .bss, name: fragments/32/fragment32}
 
   - name: fragment32_relocs
     type: code

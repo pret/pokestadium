@@ -1,5 +1,6 @@
 #include "2C1C0.h"
 #include "src/22630.h"
+#include "src/232C0.h"
 #include "src/26820.h"
 #include "src/2C1C0.h"
 #include "src/3FB0.h"
@@ -135,7 +136,7 @@ void func_8002B888(unk_D_800AE540_0004* arg0, unk_func_80026268_arg0* arg1) {
 }
 
 unk_func_80026268_arg0* func_8002B924(unk_func_80026268_arg0* arg0, u8 arg1, s16 arg2) {
-    arg0->unk_00 = arg1;
+    arg0->unk_00.unk_00 = arg1;
     arg0->unk_04 = 0;
     arg0->unk_05 = 0;
 
@@ -351,7 +352,7 @@ void func_8002BEC8(s16 arg0) {
 
     for (i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; i++, var_s1++, var_s0++) {
         var_s0->unk_24 = arg0;
-        var_s0->unk_10 = func_800224B8(var_s0->unk_00, arg0);
+        var_s0->unk_10 = func_800224B8(var_s0->unk_00.unk_00, arg0);
         func_80022338(var_s0);
         var_s0->unk_02 = var_s0->unk_26;
 

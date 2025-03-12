@@ -20,7 +20,7 @@ extern s32 D_800A82A8;
 
 // these first 4 funcs might be part of a hal_libc file or something instead of GB Tower.
 
-s32 func_8000AEBC(s32 arg0, s32 arg1, u16 arg2, u16 arg3);
+s32 func_8000AEBC(s32 arg0, void* arg1, u16 arg2, u16 arg3);
 s32 func_8000AF40(s32 arg0, void* arg1, u16 arg2, u16 arg3);
 
 // TODO: These 0x20 sizes probably belong to a struct size or something. Use
@@ -235,7 +235,7 @@ s32 func_8000AE28(s32 arg0, void* arg1) {
     return sp18;
 }
 
-s32 func_8000AEBC(s32 arg0, s32 arg1, u16 arg2, u16 arg3) {
+s32 func_8000AEBC(s32 arg0, void* arg1, u16 arg2, u16 arg3) {
     s32 var_v1;
 
     var_v1 = 1;

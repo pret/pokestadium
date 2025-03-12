@@ -14,7 +14,7 @@ s32 func_8000AC7C(s32 arg0);
 s32 func_8000ACF4(s32 arg0);
 s32 func_8000AD68(s32 arg0);
 s32 func_8000AE28(s32 arg0, void* arg1);
-s32 func_8000AEBC(s32 arg0, s32 arg1, u16 arg2, u16 arg3);
+s32 func_8000AEBC(s32 arg0, void* arg1, u16 arg2, u16 arg3);
 s32 func_8000AF40(s32 arg0, void* arg1, u16 arg2, u16 arg3);
 s32 func_8000AFC4(s32 arg0, u8* arg1, u16 arg2, u16 arg3);
 s32 func_8000B048(s32 arg0, u8* arg1, u16 arg2, u16 arg3);

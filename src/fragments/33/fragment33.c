@@ -320,7 +320,6 @@ void func_81300DA4(void) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_81300DF8(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, f32 arg5, s16 arg6) {
     Gfx* gfx = gDisplayListHead;
     u16 tmpa1;
@@ -334,8 +333,8 @@ void func_81300DF8(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, f32 arg5, s
 
         tmpa1 = arg1 << 2;
         tmpa2 = arg2 << 2;
-        tmp1 = tmpa1 + (arg3 * arg5) * 4;
-        tmp2 = tmpa2 + (arg4 * arg5) * 4;
+        tmp1 = tmpa1 + ((4.0f * arg3) * arg5);
+        tmp2 = tmpa2 + ((4.0f * arg4) * arg5);
         v = 1024.0f / arg5;
 
         gDPSetCycleType(gfx++, G_CYC_1CYCLE);
@@ -364,9 +363,6 @@ void func_81300DF8(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, f32 arg5, s
         gDisplayListHead = gfx;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/33/fragment33/func_81300DF8.s")
-#endif
 
 void func_81301668(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
     s16 temp_a2;

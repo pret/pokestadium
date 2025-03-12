@@ -453,7 +453,7 @@ s32 func_88601B64(unk_func_88205880_0098_008_044* arg0, s32 arg1, s32 arg2) {
     func_8001EBE0(0x10, 0);
     func_8001F324(D_88605AF0.r, D_88605AF0.g, D_88605AF0.b, D_88605AF0.a);
     func_8001F1E8(arg1 + 0x10, arg2 + 6, (char*)arg0->unk_2C->unk_30);
-    if ((arg0->unk_2C->unk_00 <= 0) || (arg0->unk_2C->unk_00 >= 0x98)) {
+    if ((arg0->unk_2C->unk_00.unk_00 <= 0) || (arg0->unk_2C->unk_00.unk_00 >= 0x98)) {
         func_8001EBE0(0x10, 0);
         func_8001F1E8(arg1 + 0x9B, arg2 + 6, "%s?", sp34);
         func_8001EBE0(8, 0);
@@ -463,8 +463,8 @@ s32 func_88601B64(unk_func_88205880_0098_008_044* arg0, s32 arg1, s32 arg2) {
         func_8001EBE0(0x10, 0);
         func_8001F1E8(arg1 + 0x9B, arg2 + 6, "%s%d", sp34, arg0->unk_2C->unk_24);
         func_8001EBE0(8, 0);
-        func_8001F1E8(arg1 + 0x11E, arg2 + 0xA, "%s%03d", sp30, arg0->unk_2C->unk_00);
-        func_8001F1E8(arg1 + 0x1A0, arg2 + 0xA, func_8002D7C0(NULL, 0, D_8861C514, arg0->unk_2C->unk_00 - 1));
+        func_8001F1E8(arg1 + 0x11E, arg2 + 0xA, "%s%03d", sp30, arg0->unk_2C->unk_00.unk_00);
+        func_8001F1E8(arg1 + 0x1A0, arg2 + 0xA, func_8002D7C0(NULL, 0, D_8861C514, arg0->unk_2C->unk_00.unk_00 - 1));
     }
     func_8001F444();
     return 0;
@@ -506,7 +506,7 @@ s32 func_88601DF0(unk_func_88205880_0098_008_048* arg0, s32 arg1, s32 arg2) {
     func_8001F1E8(arg1 + var_s4, arg2 + 4, temp_v0);
     var_s4 += func_8001F5B0(0, 0, temp_v0);
 
-    if ((arg0->unk_2C->unk_00 <= 0) || (arg0->unk_2C->unk_00 >= 0x98)) {
+    if ((arg0->unk_2C->unk_00.unk_00 <= 0) || (arg0->unk_2C->unk_00.unk_00 >= 0x98)) {
         char* tmp = "1/";
 
         func_8001F324(D_88605AF4.r, D_88605AF4.g, D_88605AF4.b, D_88605AF4.a);
@@ -564,7 +564,7 @@ s32 func_88602198(unk_func_88205880_0098_008_04C* arg0, s32 arg1, s32 arg2) {
         return 0;
     }
 
-    if ((arg0->unk_2C->unk_00 > 0) && (arg0->unk_2C->unk_00 < 0x98)) {
+    if ((arg0->unk_2C->unk_00.unk_00 > 0) && (arg0->unk_2C->unk_00.unk_00 < 0x98)) {
         func_80020B88(sp54, arg2 + 0x18, 0x90, arg0->unk_2C->unk_02, arg0->unk_2C->unk_26);
     }
 
@@ -577,7 +577,7 @@ s32 func_88602198(unk_func_88205880_0098_008_04C* arg0, s32 arg1, s32 arg2) {
     func_8001F1E8(sp54 + 4, arg2 + 0x56, func_8002D7C0(NULL, 0, D_8861C510, 0xB));
     func_8001F1E8(sp54 + 4, arg2 + 0x6C, func_8002D7C0(NULL, 0, D_8861C510, 0xC));
 
-    if ((arg0->unk_2C->unk_00 <= 0) || (arg0->unk_2C->unk_00 >= 0x98)) {
+    if ((arg0->unk_2C->unk_00.unk_00 <= 0) || (arg0->unk_2C->unk_00.unk_00 >= 0x98)) {
         sp50 = func_8001F5B0(0, 0, D_88605AFC);
         func_8001F1E8((sp54 - sp50) + 0x8C, arg2 + 4, D_88605AFC);
         func_8001F1E8((sp54 - func_8001F5B0(0, 0, "?/000")) + 0x8C, arg2 + 4, "?/");
@@ -829,13 +829,13 @@ s32 func_88603094(unk_func_88205880_0098_008_054* arg0, s32 arg1, s32 arg2) {
     func_8001F1E8(arg1 + 0xE8, arg2 + 0x2C, sp70);
     func_8001F1E8(func_8001F5B0(0, 0, sp70) + arg1 + 0xE8, arg2 + 0x2C, "%d", arg0->unk_2C->unk_10);
 
-    if ((arg0->unk_2C->unk_00 > 0) && (arg0->unk_2C->unk_00 < 0x98)) {
+    if ((arg0->unk_2C->unk_00.unk_00 > 0) && (arg0->unk_2C->unk_00.unk_00 < 0x98)) {
         s32 sp6C = (arg0->unk_2C->unk_24 == 0x64) ? 0x64 : arg0->unk_2C->unk_24 + 1;
         UNUSED s32 pad;
         char sp48[32];
         s32 sp44;
 
-        func_8002D600(6, (char*)(func_88600020(arg0->unk_2C->unk_00, sp6C) - arg0->unk_2C->unk_10));
+        func_8002D600(6, (char*)(func_88600020(arg0->unk_2C->unk_00.unk_00, sp6C) - arg0->unk_2C->unk_10));
         func_8002D7C0(sp48, sizeof(sp48), D_8861C510, 0x10);
         sp44 = func_8001F5B0(0, 0, sp48);
         func_8001F1E8(arg1 + 0xE8, arg2 + 0x44, sp48);

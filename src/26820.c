@@ -306,7 +306,7 @@ void func_80026268(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* a
 void func_800262DC(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* arg1) {
     arg0->unk_04 = arg0->unk_24;
 
-    func_80021F04(arg0, arg1);
+    func_80021F04(arg0, &arg1->unk_00);
     func_80021B7C(arg1->unk_21, arg0->unk_30);
 
     _bcopy(arg0->unk_46, arg1->unk_2C, 0xB);
@@ -695,7 +695,32 @@ s16 func_800275E0(s32 arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/26820/func_800276F0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/26820/func_8002782C.s")
+void func_8002782C(s32 arg0, s32 arg1) {
+    s32 idx1;
+    s32 idx2;
+    s32 sp1C;
+
+    idx1 = D_800AE4E0 / 4;
+    idx2 = D_800AE4E0 % 4;
+
+    sp1C = func_800275E0(arg0, arg1);
+    if (sp1C < func_800270AC(arg0)) {
+        switch (arg0) {
+            case 16:
+                D_800AE4E8[idx1].unk_04.unk1->unk_0000[idx2][arg1].unk_000.unk_0E = sp1C + 1;
+                break;
+
+            case 17:
+                D_800AE4E8[3].unk_04.unk3->unk_0000[arg1].unk_000.unk_0E = sp1C + 1;
+                break;
+
+            case 18:
+                D_800AE4E8[3].unk_04.unk3->unk_34E0[arg1].unk_00.unk_0E = sp1C + 1;
+                break;
+        }
+        func_800264DC(arg0, arg1, 2);
+    }
+}
 
 s32 func_8002797C(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
     s32 sp2C = 0;
@@ -735,8 +760,6 @@ s32 func_8002797C(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
 
     return sp2C;
 }
-
-void func_8002782C(s32, s32);
 
 s32 func_80027C24(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
     s32 sp34 = 0;

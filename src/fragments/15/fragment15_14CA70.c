@@ -1,5 +1,6 @@
 #include "fragment15.h"
 #include "src/fragments/3/fragment3.h"
+#include "src/fragments/31/fragment31.h"
 #include "src/fragments/34/fragment34.h"
 #include "src/fragments/43/fragment43.h"
 #include "src/11BA0.h"
@@ -410,10 +411,10 @@ unk_D_86002F58_004_000_010_024* func_86900244(unk_func_80026268_arg0* arg0) {
     unk_D_86002F58_004_000_010_02C sp1C;
     unk_D_86002F58_004_000_010* sp18;
 
-    arg0->unk_00 = 25;
+    arg0->unk_00.unk_00 = 25;
     sp18 = func_80019760(1);
     func_8001BEE8(&sp1C, arg0);
-    func_800198E4(sp18, arg0->unk_00 = 153, sp1C);
+    func_800198E4(sp18, arg0->unk_00.unk_00 = 153, sp1C);
     func_80019CA8(sp18);
 
     return sp18->unk_24;

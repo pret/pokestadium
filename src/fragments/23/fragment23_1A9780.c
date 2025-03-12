@@ -3,6 +3,7 @@
 #include "src/1CF30.h"
 #include "src/20330.h"
 #include "src/22630.h"
+#include "src/232C0.h"
 #include "src/26820.h"
 #include "src/29BA0.h"
 #include "src/2D340.h"
@@ -27,8 +28,8 @@ void func_88201210(unk_func_88205880_00D0* arg0) {
     temp_s3 = func_80029080();
 
     for (i = 0; i < arg0->unk_690; i++, tmp++) {
-        if ((tmp->unk_00 > 0) && (tmp->unk_00 < 0x98)) {
-            func_800256F4(temp_s3, tmp->unk_00, 3);
+        if ((tmp->unk_00.unk_00 > 0) && (tmp->unk_00.unk_00 < 0x98)) {
+            func_800256F4(temp_s3, tmp->unk_00.unk_00, 3);
         }
     }
 }
@@ -1103,7 +1104,7 @@ u32 func_88204E0C(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     var_s1 = arg0->unk_000;
     for (i = 0; i < arg0->unk_690; i++, var_s1++) {
-        bzero(&sp34, 0x54);
+        bzero(&sp34, sizeof(unk_func_80026268_arg0));
         func_80022E18(&sp34, 1, temp_v0);
         if (bcmp(&sp34, var_s1, sizeof(unk_func_80026268_arg0)) != 0) {
             sp90 = 1;

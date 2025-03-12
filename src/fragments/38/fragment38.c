@@ -686,18 +686,18 @@ u8 func_82302BB4(unk_D_82305AF8* arg0, s16 arg1) {
 
     for (i = 0; i < 6; i++, var_s1++) {
         var_s1->unk_25 = 1;
-        if ((var_s1->unk_00 > 0) && (var_s1->unk_00 < 0x98)) {
+        if ((var_s1->unk_00.unk_00 > 0) && (var_s1->unk_00.unk_00 < 0x98)) {
             if (func_82302B78(var_s1) != 0) {
                 ptr1 = &D_8230597C[(arg1 - 1) & 0xFFFFFFFF];
 
-                if (D_8006FF00[var_s1->unk_00 - 1].unk_0C & ptr1->unk_06) {
+                if (D_8006FF00[var_s1->unk_00.unk_00 - 1].unk_0C & ptr1->unk_06) {
                     if ((var_s1->unk_24 >= ptr1->unk_00) && (ptr1->unk_02 >= var_s1->unk_24)) {
                         var_s1->unk_25 = 0;
                     }
                 }
 
                 for (j = 0; j < i; j++) {
-                    if (var_s1->unk_00 == arg0->unk_0020[j].unk_00) {
+                    if (var_s1->unk_00.unk_00 == arg0->unk_0020[j].unk_00.unk_00) {
                         var_s1->unk_25 = 1;
                         arg0->unk_0020[j].unk_25 = 1;
                     }
@@ -1358,26 +1358,19 @@ void func_82304AB0(unk_D_82305A28* arg0) {
     arg0->unk_00 = 4;
 }
 
-#ifdef NON_MATCHING
 void func_82304BEC(unk_func_80026268_arg0* arg0, s16 arg1) {
-    char sp32[11];
-    u16 tmp;
-    u16 sp30;
+    unk_D_800AC910_040 sp30;
     unk_D_800AC910_040 sp20;
 
-    tmp = func_80024F68(arg1);
-    if ((tmp == 7) && (arg0->unk_00 == 0x19)) {
+    if ((func_80024F68(arg1) == 7) && (arg0->unk_00.unk_00 == 0x19)) {
         func_80025040(arg1, &sp20);
-        _bcopy(arg0->unk_46, sp32, 11);
-        sp30 = arg0->unk_0E;
+        _bcopy(arg0->unk_46, sp30.unk_02, 11);
+        sp30.unk_00 = arg0->unk_0E;
         if (func_80022A04(&sp30, &sp20)) {
             arg0->unk_52 |= 0x80;
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/38/fragment38/func_82304BEC.s")
-#endif
 
 void func_82304C7C(unk_D_82305AF8* arg0) {
     s16 i;
