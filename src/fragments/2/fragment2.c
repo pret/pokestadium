@@ -33,8 +33,7 @@ s16 D_8780FA48;
 
 static s32 pad_D_8780FA4C;
 
-s16 D_8780FA50;
-s16 D_8780FA52[2][4];
+s16 D_8780FA50[9];
 s16 D_8780FA68[4];
 
 void func_87800020(void) {

@@ -80,7 +80,7 @@ typedef struct unk_D_800AC910_050_9AC {
     /* 0x008 */ unk_D_800AC910_050_9AC_008 unk_008[6];
     /* 0x110 */ char unk_110[6][11];
     /* 0x152 */ char unk_152[6][11];
-} unk_D_800AC910_050_9AC; // size >= 0x160
+} unk_D_800AC910_050_9AC; // size = 0x194
 
 typedef struct unk_D_800AC910_050_B40_000 {
     /* 0x000 */ u8 unk_000;
@@ -116,7 +116,9 @@ typedef struct unk_D_800AC910_050 {
     /* 0x037 */ char unk037[0x12];
     /* 0x049 */ u8 unk_049;
     /* 0x04A */ unk_func_80026268_arg0_000 unk_04A[1];
-    /* 0x04C */ char unk04C[0x39];
+    /* 0x04C */ char unk04C[0x2A];
+    /* 0x076 */ u8 unk_076;
+    /* 0x077 */ char unk077[0xE];
     /* 0x085 */ u8 unk_085;
     /* 0x086 */ char unk086[0x4];
     /* 0x08A */ u8 unk_08A;
@@ -125,7 +127,9 @@ typedef struct unk_D_800AC910_050 {
     /* 0x267 */ unk_func_80026268_arg0_000 unk_267[1];
     /* 0x269 */ char unk269[0x63];
     /* 0x2CC */ s8 unk_2CC;
-    /* 0x2CD */ char unk2CD[0x1AA];
+    /* 0x2CD */ char unk2CD[0x174];
+    /* 0x441 */ u8 unk_441;
+    /* 0x442 */ char unk442[0x35];
     /* 0x477 */ s8 unk_477;
     /* 0x478 */ char unk478[0xA5];
     /* 0x51D */ s8 unk_51D;
@@ -183,15 +187,17 @@ char* func_80021C20(char* arg0, char* arg1);
 char* func_80021C40(char* arg0, char* arg1);
 char* func_80021C80(char* arg0, char* arg1);
 char* func_80021CA4(char* arg0, s32 arg1);
-char* func_80021CE0(s32 arg0, s8* arg1);
+char* func_80021CE0(s32 arg0, char* arg1);
 void func_80021D9C(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1);
 void func_80021E90(unk_func_80026268_arg0* arg0, unk_D_800AC910_050_9AC_008* arg1);
 void func_80021F04(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1);
 void func_80022010(unk_func_88205880_00D0* arg0, unk_D_800AC910_050_9AC_008* arg1);
 u16 func_80022084(u16 arg0);
+void func_800220C4(void);
 u16 func_800220CC(s32 arg0, u16 arg1);
-u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, s32 arg4);
+u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4);
 void func_80022338(unk_func_80026268_arg0* arg0);
+u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4);
 u32 func_800224B8(s32 arg0, u16 arg1);
 
 #endif // _6BC0_H_

@@ -22,6 +22,7 @@ extern s16 D_8780FA38;
 extern s16 D_8780FA3A;
 extern s16 D_8780FA40[4];
 extern s16 D_8780FA48;
+extern s16 D_8780FA50[9];
 extern s16 D_8780FA68[4];
 extern u32* D_8780FA70;
 extern u16 D_8780FC92;

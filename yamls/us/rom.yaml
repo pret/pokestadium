@@ -1564,11 +1564,12 @@
     - [0x27BCC0, c,      fragments/39/fragment39_27BCC0]
     - [0x2804C0, c,      fragments/39/fragment39_2804C0]
     - [0x281C40, c,      fragments/39/fragment39_281C40]
-    - [0x281E50, data,   fragments/39/fragment39_data]
-    - [0x2846C0, rodata, fragments/39/fragment39_rodata_2846C0]
-    - [0x284780, rodata, fragments/39/fragment39_rodata_284780]
+    - [0x281E50, .data,   fragments/39/fragment39_27BCC0]
+    - [0x2846C0, .rodata, fragments/39/fragment39_27BCC0]
+    - [0x284780, .rodata, fragments/39/fragment39_2804C0]
 
-    - {vram: 0x82508AF0, type:  bss, name: fragments/39/fragment39_bss}
+    - {vram: 0x82508AF0, type:  .bss, name: fragments/39/fragment39_27BCC0}
+    - {vram: 0x8250A480, type:  .bss, name: fragments/39/fragment39_2804C0}
 
   - name: fragment39_relocs
     type: code

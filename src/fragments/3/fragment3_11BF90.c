@@ -1,6 +1,7 @@
 #include "fragment3.h"
 #include "src/19840.h"
 #include "src/1C720.h"
+#include "src/12D80.h"
 #include "src/memory.h"
 
 static unk_func_8790002C* D_87906120;

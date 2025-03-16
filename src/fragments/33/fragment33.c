@@ -7,6 +7,7 @@
 #include "src/20330.h"
 #include "src/20470.h"
 #include "src/22630.h"
+#include "src/232C0.h"
 #include "src/26820.h"
 #include "src/29BA0.h"
 #include "src/2E110.h"
