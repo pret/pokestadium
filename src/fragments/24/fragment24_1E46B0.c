@@ -912,7 +912,8 @@ void func_88316A58(unk_func_8830867C_02C_144* arg0, s32 arg1) {
                 for (x = 0; x < var_s4->unk_10.unk_08; x++, var_s0++) {
                     func_80022F24(&var_s0->unk_00->unk_08, 1, temp_s3);
                     if ((var_s2->unk_00 == 0x20) || (var_s2->unk_00 == 0x21)) {
-                        if ((var_s0->unk_00->unk_08.unk_00.unk_00 > 0) && (var_s0->unk_00->unk_08.unk_00.unk_00 < 0x98)) {
+                        if ((var_s0->unk_00->unk_08.unk_00.unk_00 > 0) &&
+                            (var_s0->unk_00->unk_08.unk_00.unk_00 < 0x98)) {
                             func_800256F4(var_s2->unk_04, var_s0->unk_00->unk_08.unk_00.unk_00, 3);
                         }
                     }

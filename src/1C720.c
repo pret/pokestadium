@@ -9,6 +9,7 @@
 #include "19840.h"
 #include "dp_intro.h"
 #include "hal_libc.h"
+#include "src/12D80.h"
 
 void func_8001BB20(void) {
     func_8001103C(0, &D_800AC840);

@@ -1204,7 +1204,8 @@ s32 func_8820938C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2) {
 
         func_8001F324(D_88217E3C.r, D_88217E3C.g, D_88217E3C.b, D_88217E3C.a);
         func_8001EBE0(8, 0);
-        func_8001F1E8(arg1 + 8, arg2 + 8, func_8002D7C0(NULL, 0, D_88224FB8, arg0->unk_002C->unk_000[0].unk_00.unk_00 - 1));
+        func_8001F1E8(arg1 + 8, arg2 + 8,
+                      func_8002D7C0(NULL, 0, D_88224FB8, arg0->unk_002C->unk_000[0].unk_00.unk_00 - 1));
 
         func_8001F1E8(arg1 + 0x44, arg2 + 0x24, "%3d", arg0->unk_002C->unk_000[0].unk_26);
         func_8001F1E8(arg1 + 0x46, arg2 + 0x54, "%3d", arg0->unk_002C->unk_000[0].unk_28);

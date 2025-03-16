@@ -99,15 +99,21 @@ char* func_80021CA4(char* arg0, s32 arg1) {
     return arg0;
 }
 
-char* func_80021CE0(s32 arg0, s8* arg1) {
+char* func_80021CE0(s32 arg0, char* arg1) {
     extern char* D_80072EE0[];
+    // "ひでんマシン%02d"
+    static const char D_0007CCA0[] = { 0xA4, 0xD2, 0xA4, 0xC7, 0xA4, 0xF3, 0xA5, 0xDE, 0xA5, 0xB7,
+                                       0xA5, 0xF3, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00, 0x00, 0x00 };
+    // "わざマシン%02d"
+    static const char D_0007CCB4[] = { 0xA4, 0xEF, 0xA4, 0xB6, 0xA5, 0xDE, 0xA5, 0xB7,
+                                       0xA5, 0xF3, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00 };
 
     if ((arg0 > 0) && (arg0 < 0x54)) {
         HAL_Strcpy(arg1, D_80072EE0[arg0 - 1]);
     } else if ((arg0 >= 0xC4) && (arg0 < 0xC9)) {
-        sprintf(arg1, "ひでんマシン%02d", arg0 - 0xC3, arg0);
+        sprintf(arg1, D_0007CCA0, arg0 - 0xC3, arg0);
     } else if ((arg0 >= 0xC9) && (arg0 < 0xFF)) {
-        sprintf(arg1, "わざマシン%02d", arg0 - 0xC8, arg0);
+        sprintf(arg1, D_0007CCB4, arg0 - 0xC8, arg0);
     } else {
         HAL_Strcpy(arg1, D_80072EE0[6]);
     }
@@ -198,7 +204,8 @@ u16 func_80022084(u16 arg0) {
     return i;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/22630/func_800220C4.s")
+void func_800220C4(void) {
+}
 
 u16 func_800220CC(s32 arg0, u16 arg1) {
     u16 sp6;
@@ -228,7 +235,7 @@ u16 func_800220CC(s32 arg0, u16 arg1) {
     return sp6;
 }
 
-u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, s32 arg4) {
+u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
     u16 sp1C;
     u16 sp24;
     u16 sp22;
@@ -280,7 +287,19 @@ void func_80022338(unk_func_80026268_arg0* arg0) {
     arg0->unk_2E = func_80022170(5, arg0->unk_00.unk_00, arg0->unk_1C, arg0->unk_24, arg0->unk_1E);
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/22630/func_8002240C.s")
+u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
+    s32 i;
+    s32 tmp;
+
+    for (i = 1; i < 0xFFFF; i += 2) {
+        tmp = func_80022170(arg0, arg1, i + 2, arg3, arg4);
+        if (arg2 < tmp) {
+            break;
+        }
+    }
+
+    return i;
+}
 
 u32 func_800224B8(s32 arg0, u16 arg1) {
     u32 sp4;
