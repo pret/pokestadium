@@ -35,8 +35,13 @@ typedef struct Yay0 {
 } Yay0; // size = 0x10
 
 typedef struct BinArchive {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u16 unk_02;
+    union {
+        struct {
+            /* 0x00 */ u16 unk_00;
+            /* 0x02 */ u16 unk_02;
+        };
+        s32 raw;
+    };
     /* 0x04 */ u32 unk_04;
     /* 0x08 */ u32 total_size;
     /* 0x0C */ u32 num_files;

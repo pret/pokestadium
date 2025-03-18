@@ -366,14 +366,16 @@ extern struct unk_D_86002F58_004_000_000 D_800AC858;
 
 typedef struct unk_D_8006FF00 {
 	/* 0x00 */ u8 unk_00;
+	/* 0x01 */ u8 unk_01;
 	/* 0x02 */ s16 unk_02;
 	/* 0x04 */ char* name;
-	/* 0x08 */ char unk_08[0x4];
+	/* 0x08 */ s32 unk_08;
 	/* 0x0C */ u8 unk_0C;
 	/* 0x0D */ char unk_0D[0x3];
 	/* 0x10 */ s16 unk_10;
 	/* 0x12 */ s16 unk_12;
-	/* 0x14 */ char unk_14[0x8];
+	/* 0x14 */ u32 unk_14;
+	/* 0x18 */ char unk_18[0x4];
 } unk_D_8006FF00; // size = 0x1C
 extern unk_D_8006FF00 D_8006FF00[];
 
