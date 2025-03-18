@@ -131,16 +131,16 @@ typedef struct unk_func_8830867C_04C_030_02C_000_000_00C {
     /* 0x08 */ s32 unk_08;
 } unk_func_8830867C_04C_030_02C_000_000_00C; // size >= 0xC
 
-typedef void (*func_func_8002D1AC)();
+typedef s32 (*func_func_8002D1AC)(unk_func_8830867C_02C_0CC_000*, s32*);
 typedef s32 (*unk_D_8831A1F8)(s32, s32);
 
 void func_8002C740(unk_func_88201DA0_038*, unk_func_88201DA0_034*, s32, s32, s32);
 void func_8002C758(unk_func_8820BE14_06C*, s32, s32, MemoryPool*);
-void func_8002C88C(unk_func_8820BE14_06C*, u8*, s32);
-void func_8002C990(unk_func_8820BE14_06C*, s32);
+s32 func_8002C88C(unk_func_8820BE14_06C*, s8*, s32);
+s32 func_8002C990(unk_func_8820BE14_06C*, s32);
 s32 func_8002CB58(unk_func_8830867C_04C_030_02C_000_000_00C*, s32);
+void func_8002CBB0(unk_func_88205880_A030*, void**, s32, s32);
 void func_8002CBC0(unk_func_88200FA0_030_038*, s32, MemoryPool*);
-void func_8002CBB0(unk_func_88205880_A030*, void*, s32, s32);
 void func_8002CC2C(unk_func_88200FA0_030_038*, char*, s32);
 void func_8002CC80(unk_func_8830867C_02C_0CC*, s32);
 void func_8002D180(unk_func_8830867C_02C_0CC*, unk_D_8831A1F8);
