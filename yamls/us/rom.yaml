@@ -341,7 +341,8 @@
     - [0x6A3D0, .data, gb_tower]
     - [0x6A3E0, data, rom_data_6A3E0]
     - [0x6A3F0, .data, math_util]
-    - [0x6FC00, data, rom_data_6FC00]
+    - [0x6FC00, .data, E890]
+    - [0x6FC10, data, rom_data_6FC10]
     - [0x6FC50, .data, F420]
     - [0x6FC80, .data, 12D80]
     - [0x6FEB0, .data, geo_layout]
@@ -413,7 +414,7 @@
     - [0x7BBE0, .rodata, crash_screen]
     - [0x7BFA0, .rodata, profiler]
     - [0x7BFC0, .rodata, gb_tower]
-    - [0x7C000, rodata, rom_rodata_7C000]
+    - [0x7C000, .rodata, E890]
     - [0x7C180, .rodata, F420]
     - [0x7C190, .rodata, 1AB70]
     - [0x7C1C0, rodata, rom_rodata_7C1C0]
@@ -499,6 +500,7 @@
     - {vram: 0x800A8100, type:  bss, name: unk_bss_2}
     - {vram: 0x800A82E0, type:  .bss, name: D470}
     - {vram: 0x800A83A0, type:  bss, name: unk_bss_17}
+    - {vram: 0x800AA680, type:  .bss, name: E890}
     - {vram: 0x800AA6C0, type:  .bss, name: 12D80}
     - {vram: 0x800ABCC0, type:  .bss, name: 17300}
     - {vram: 0x800ABD00, type:  bss, name: 18140}

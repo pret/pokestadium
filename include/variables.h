@@ -2,6 +2,7 @@
 #define _VARIABLES_H_
 
 #include "global.h"
+#include "PR/leo.h"
 
 // thread pris
 #define THREAD_PRI_IDLE_INIT 100
@@ -73,7 +74,6 @@ extern u8 D_4001820[];
 extern u8 D_5000000[];
 extern u8 D_6000000[];
 extern u8 D_8D000000[];
-extern void* D_800AA688;
 extern u8 D_20144E0[];
 extern u8 D_3044260[];
 extern u8 D_20289E0[];
@@ -336,7 +336,7 @@ extern u8 D_30CD410[];
 extern u8 D_30CD490[];
 extern u8 D_30CD510[];
 
-extern u8 D_800818E0[0x20];
+extern LEODiskID D_800818E0;
 
 extern Gfx D_8006F518[];
 extern Gfx D_8006F630[];

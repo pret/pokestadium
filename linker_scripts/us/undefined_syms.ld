@@ -182,3 +182,4 @@ gSoftResetLineNum = 0x800A7300;
 gSoftResetRed = 0x800A7308;
 gSoftResetGreen = 0x800A730C;
 gSoftResetBlue = 0x800A7310;
+D_800AA688 = 0x800AA688;

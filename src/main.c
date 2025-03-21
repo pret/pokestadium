@@ -14,7 +14,7 @@ u8 unk_8007F330[0x400];
 OSThread pThreads;
 u8 unk_8007F8E0[0x720];
 u8 D_80080000[0x18E0];
-u8 D_800818E0[0x20];
+LEODiskID D_800818E0;
 
 /**
  * Initialize hardware, start main thread, then idle.

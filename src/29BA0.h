@@ -4,6 +4,7 @@
 #include "global.h"
 #include "3FB0.h"
 #include "src/controller.h"
+#include "PR/leo.h"
 
 typedef struct unk_D_800AE520 {
     /* 0x00 */ s16 unk_00;
@@ -159,6 +160,6 @@ void func_8002B244(void);
 void func_8002B24C(void);
 void func_8002B274(s32 arg0, s32 arg1);
 void func_8002B310(void);
-void Game_Thread(UNUSED void *arg);
+void Game_Thread(UNUSED LEODiskID* arg);
 
 #endif // _29BA0_H_
