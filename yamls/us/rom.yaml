@@ -70,6 +70,7 @@
     - [0x22630, c] # registered pkm stats
     - [0x232C0, c] # 
     - [0x26820, c] # save data code
+    - [0x29B90, pad]
     - [0x29BA0, c] # scenary code
     - [0x2C1C0, c] # scenary cache cleaner
     - [0x2D340, c] # pkm lab pc code
@@ -349,6 +350,7 @@
     - [0x6FF50, .data, 1AB70]
     - [0x70070, .data, 20470]
     - [0x703E0, data, rom_data_703E0]
+    - [0x74250, .data, 26820]
     - [0x74260, data, rom_data_74260]
     - [0x76260, .data, 29BA0]
     - [0x76280, .data, 2C1C0]
@@ -510,6 +512,7 @@
     - {vram: 0x800AC840, type:  bss, name: unk_bss_14}
     - {vram: 0x800AC880, type:  .bss, name: 20330}
     - {vram: 0x800AC890, type:  bss, name: unk_bss_11}
+    - {vram: 0x800AE4E0, type:  .bss, name: 26820}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}
     - {vram: 0x800AF740, type:  .bss, name: 2E110}
     - {vram: 0x800AF750, type:  bss, name: unk_bss_7}
