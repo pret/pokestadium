@@ -17,11 +17,6 @@ s32 func_8000B4C4(void);
 // Yay0.s
 void Yay0_Decompress(void* src, void* dst);
 
-// D470.s
-void func_8000C8F8(void);
-void func_8000CEE4(s32, s32, void *, OSMesgQueue *);
-void func_8000D0B4(s32, s32, s32, void *, s32, OSMesgQueue *);
-
 // DDC0.s
 void func_8000D564(void);
 

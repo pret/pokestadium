@@ -1,5 +1,7 @@
 #include "global.h"
 #include "rsp.h"
+#include "D470.h"
+#include "util.h"
 
 // All from n64 programming manual section 27.2
 #define SRAM_START_ADDR 0x08000000
@@ -128,21 +130,19 @@ s32 func_8000087C(struct UnkStruct800006C4_2* arg0) {
 }
 
 s32 func_80000904(struct UnkStruct800006C4_2* arg0) {
-    UNUSED s32 arr[5];
-    s32 sp20;
+    OSIoMesg sp20;
 
     osInvalDCache(arg0->vaddr, 0x80);
-    func_8000D0B4((uintptr_t)&sp20, 0, arg0->unk1C, arg0->vaddr, 1, &D_80083BD0.queue2);
+    func_8000D0B4(&sp20, 0, arg0->unk1C, arg0->vaddr, 1, &D_80083BD0.queue2);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
 
 s32 func_80000974(struct UnkStruct800006C4_2* arg0) {
-    UNUSED s32 arr[5];
-    s32 sp20_4;
-    UNUSED s32 sp20_5;
+    OSIoMesg sp20;
+    UNUSED s32 pad;
 
-    func_8000CEE4((uintptr_t)&sp20_4, 0, arg0->vaddr, &D_80083BD0.queue2);
+    func_8000CEE4(&sp20, 0, arg0->vaddr, &D_80083BD0.queue2);
     osRecvMesg(&D_80083BD0.queue2, &D_80083BD0.unk0, OS_MESG_BLOCK);
     return 0;
 }
@@ -201,8 +201,10 @@ void thread20_rsp(UNUSED void* arg) {
 
     func_800005C0();
     func_8000C8F8();
-    while (1) {
+
+    while (true) {
         osRecvMesg(&D_80083BD0.queue1, (void*)&sp2C, OS_MESG_BLOCK);
+
         switch (sp2C->unk0) {
             case 0xF0:
                 var_v0 = (OSMesg)INT2VOID(func_800007D4(sp2C, 0));
@@ -252,9 +254,11 @@ void thread20_rsp(UNUSED void* arg) {
                 var_v0 = (OSMesg)func_80000B74((struct UnkStruct80000A80*)sp2C);
                 break;
         }
+
         if ((OSMesgQueue*)INT2VOID(sp2C->unk28) != NULL) {
             osSendMesg(INT2VOID(sp2C->unk28), var_v0, 0);
         }
+
         Util_Free(sp2C);
     }
 }
