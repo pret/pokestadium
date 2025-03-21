@@ -460,11 +460,13 @@ typedef struct UnkInputStruct8000D738 {
 
 typedef struct UnkStruct800AA660 {
     /* 0x0000 */ OSThread thread;
-    /* 0x01B0 */ char unk01B0[0x28];
+    /* 0x01B0 */ char unk01B0[0x10];
+    /* 0x01C0 */ OSMesgQueue queue1;
     /* 0x01D8 */ struct UnkStruct800AA660* unk_01D8;
-    /* 0x01DC */ char unk01DC[0x2004];
+    /* 0x01DC */ s32 unk_01DC;
+    /* 0x01E0 */ char unk01E0[0x2000];
     /* 0x21E0 */ OSMesg mesg;
-    /* 0x21E4 */ OSMesgQueue queue;
+    /* 0x21E4 */ OSMesgQueue queue2;
     /* 0x21FC */ s32 unk_21FC;
     /* 0x2200 */ s32 unk_2200;
     /* 0x2204 */ UnkInputStruct8000D738 unk_2204;

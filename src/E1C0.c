@@ -69,7 +69,7 @@ void func_8000D738(UnkInputStruct8000D738* arg0) {
     D_800AA660->unk_21FC = func_8000484C(temp_v0, 0);
     D_800AA660->unk_2200 = func_8000484C(temp_v0, 1);
     D_800AA660->unk_2204 = *arg0;
-    osCreateMesgQueue(&D_800AA660->queue, &D_800AA660->mesg, 1);
+    osCreateMesgQueue(&D_800AA660->queue2, &D_800AA660->mesg, 1);
     osCreateThread(&D_800AA664->thread, 10, func_8000D5C0, NULL, (u32)D_800AA664 + 0x21E0, 0x11);
     osCreateThread(&D_800AA660->thread, 8, func_8000D678, NULL, (u32)D_800AA660 + 0x21E0, 0xF);
     D_800AA668 = func_8000B318(0);
@@ -79,7 +79,7 @@ void func_8000D738(UnkInputStruct8000D738* arg0) {
 OSMesg* func_8000D8A8(void) {
     OSMesg mesg;
 
-    osRecvMesg(&D_800AA660->queue, &mesg, OS_MESG_BLOCK);
+    osRecvMesg(&D_800AA660->queue2, &mesg, OS_MESG_BLOCK);
     return mesg;
 }
 

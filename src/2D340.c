@@ -224,39 +224,31 @@ static u16 D_80075690[0x100] = {
     0x5515, 0xFFFF, 0xFFFF, 0xFFFF,
 };
 
-#ifdef NON_MATCHING
-void func_8002D28C(u16* a0, u8* a1) {
+void func_8002D28C(u16* arg0, u8* a1) {
     u8 temp_v1;
-    u16* arg0 = a0;
     u8* arg1 = a1;
 
     do {
         temp_v1 = *arg1++;
         switch (temp_v1) {
+            case 0xDF:
+                *arg0++ = D_80075690[temp_v1];
+                *arg0++ = D_80075690[temp_v1];
+                continue;
+
             case 0xBC:
                 *arg0++ = D_80075690[0x50] + 4;
                 *arg0++ = D_80075690[0x4B] + 4;
-                break;
+                continue;
 
             case 0xBD:
                 *arg0++ = D_80075690[0x4D] + 4;
                 *arg0++ = D_80075690[0x4E] + 4;
-                break;
-
-            case 0xDF:
-                *arg0++ = D_80075690[temp_v1];
-                *arg0++ = D_80075690[temp_v1];
-                break;
-
-            default:
-                *arg0++ = D_80075690[temp_v1];
-                break;
+                continue;
         }
+        *arg0++ = D_80075690[temp_v1];
     } while (temp_v1 != 0);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002D28C.s")
-#endif
 
 s32 func_8002D348(u8* arg0, u8* arg1) {
     static u16 D_80075890[3] = { 0xFF00, 0xFFFC, 0xFFFF };

@@ -409,7 +409,7 @@
     - [0x7BB10, rodata]
     - [0x7BB20, .rodata, util]
     - [0x7BB50, .rodata, 3FB0]
-    - [0x7BBC0, rodata]
+    - [0x7BBC0, .rodata, 5580]
     - [0x7BBE0, .rodata, crash_screen]
     - [0x7BFA0, .rodata, profiler]
     - [0x7BFC0, .rodata, gb_tower]
@@ -489,7 +489,8 @@
     - {vram: 0x800A6070, type: .bss, name: memory_main}
     - {vram: 0x800A60B0, type:  bss, name: unk_bss_4}
     - {vram: 0x800A60C0, type: .bss, name: 3FB0}
-    - {vram: 0x800A62E0, type: bss, name: unk_bss_8}
+    - {vram: 0x800A62E0, type: .bss, name: 5580}
+    - {vram: 0x800A6D20, type: .bss, name: reset}
     - {vram: 0x800A7320, type: .bss, name: controller}
     - {vram: 0x800A7420, type:  bss, name: unk_bss_3}
     - {vram: 0x800A7450, type:  .bss, name: stage_loader}
