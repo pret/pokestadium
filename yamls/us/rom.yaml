@@ -503,7 +503,7 @@
     - {vram: 0x800AA680, type:  .bss, name: E890}
     - {vram: 0x800AA6C0, type:  .bss, name: 12D80}
     - {vram: 0x800ABCC0, type:  .bss, name: 17300}
-    - {vram: 0x800ABD00, type:  bss, name: 18140}
+    - {vram: 0x800ABD00, type:  .bss, name: 18140}
     - {vram: 0x800ABD30, type:  .bss, name: geo_layout}
     - {vram: 0x800ABE10, type:  .bss, name: 19840}
     - {vram: 0x800AC830, type:  .bss, name: 1AB70}

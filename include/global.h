@@ -107,17 +107,21 @@ typedef struct unk_D_86002F58_004_000_040 {
 } unk_D_86002F58_004_000_040; // size >= 0x14
 
 typedef struct unk_D_86002F58_004_000_054_004 {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ s16 unk_04;
-    /* 0x06 */ char unk_06[0x4];
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ u16 unk_08;
     /* 0x0A */ u16 unk_0A;
-} unk_D_86002F58_004_000_054_004; // size >= 0x0C
+    /* 0x0C */ void* unk_0C;
+    /* 0x10 */ void* unk_10;
+} unk_D_86002F58_004_000_054_004; // size >= 0x14
 
 typedef struct unk_D_86002F58_004_000_054 {
     /* 0x00 */ s16 unk_00;
     /* 0x04 */ unk_D_86002F58_004_000_054_004* unk_04;
     /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
+    /* 0x0A */ u16 unk_0A;
 } unk_D_86002F58_004_000_054; // size = 0xC
 
 typedef struct unk_D_86002F58_004_000_0A8 {
