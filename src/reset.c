@@ -4,21 +4,23 @@
 
 // this file handles the soft reset effect.
 typedef struct UnkStruct800A6D20 {
-    OSThread thread;
-    char filler1B0[0x430];
-    u32 unk5E0;
-} UnkStruct800A6D20;
+    /* 0x000 */ OSThread thread;
+    /* 0x1B0 */ char unk1B0[0x430];
+    /* 0x5E0 */ u32 gSoftResetLineNum;
+    /* 0x5E4 */ s32 gSoftResetRed;
+    /* 0x5E8 */ s32 gSoftResetGreen;
+    /* 0x5EC */ s32 gSoftResetBlue;
+    /* 0x5F0 */ char unk5F0[0x10];
+} UnkStruct800A6D20; // size = 0x600
 
-extern UnkStruct800A62E0 D_800A62E0;
-extern UnkStruct800A6D20 D_800A6D20;
+typedef struct UnkStruct4 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ u16 unk_04;
+    /* 0x06 */ u16 unk_06;
+    /* 0x08 */ s32 unk_08;
+} UnkStruct4; // size >= 0xC
 
-struct UnkStruct4 {
-    s32 unk0;
-    u16 unk4;
-    u16 unk6;
-    s32 unk8;
-};
-
+UnkStruct800A6D20 D_800A6D20;
 extern u32 gSoftResetLineNum;
 extern s32 gSoftResetRed;
 extern s32 gSoftResetGreen;
@@ -83,9 +85,9 @@ void func_8000559C(void) {
         }
         // this function is supposed to only take 1 argument. huh?
         // this function packs 3 values into a RGBA5551 format.
-        func_80001AD4(((((u32)(gSoftResetRed * (15 - gSoftResetLineNum)) >> 4) << 11) |
-                       (((u32)(gSoftResetGreen * (15 - gSoftResetLineNum)) >> 4) << 6) |
-                       (((u32)(gSoftResetBlue * (15 - gSoftResetLineNum)) >> 4) << 1) | 1) &
+        func_80001AD4(((((gSoftResetRed * (15 - gSoftResetLineNum)) >> 4) << 11) |
+                       (((gSoftResetGreen * (15 - gSoftResetLineNum)) >> 4) << 6) |
+                       (((gSoftResetBlue * (15 - gSoftResetLineNum)) >> 4) << 1) | 1) &
                           0xFFFF,
                       gSoftResetLineNum);
     }
@@ -98,7 +100,7 @@ void func_8000559C(void) {
  */
 void SoftReset_Thread(void* unused) {
     __osSetFpcCsr(0x01000C01);
-    func_80005328(&D_800A6D20.thread);
+    func_80005328(&D_800A6D20);
 
     // thread loop
     while (1) {
@@ -106,28 +108,31 @@ void SoftReset_Thread(void* unused) {
         if (D_800A62E0.unk_A38 == 0) {
             continue;
         }
-        if ((u32)D_800A6D20.unk5E0 < 0x10U) {
-            struct UnkStruct4* temp_v0 = func_80001C58();
+
+        if (D_800A6D20.gSoftResetLineNum < 0x10U) {
+            UnkStruct4* temp_v0 = func_80001C58();
             if (temp_v0 != NULL) {
-                if (temp_v0->unk4 == 320) {
-                    SoftReset_ClearLines320(temp_v0->unk8);
+                if (temp_v0->unk_04 == 320) {
+                    SoftReset_ClearLines320(temp_v0->unk_08);
                 } else {
-                    SoftReset_ClearLines640(temp_v0->unk8);
+                    SoftReset_ClearLines640(temp_v0->unk_08);
                 }
             } else if (func_80001B40() != 0) {
                 func_8000559C();
             } else {
                 SoftReset_ClearLines320(osViGetCurrentFramebuffer());
             }
-            D_800A6D20.unk5E0++;
+            D_800A6D20.gSoftResetLineNum++;
             continue;
         }
-        if (D_800A6D20.unk5E0 != 0x10) {
+
+        if (D_800A6D20.gSoftResetLineNum != 0x10) {
             continue;
         }
+
         osViBlack(1U);
         osViSetYScale(1.0f);
-        D_800A6D20.unk5E0++;
+        D_800A6D20.gSoftResetLineNum++;
     }
 }
 
@@ -136,7 +141,7 @@ void SoftReset_Thread(void* unused) {
  */
 void SoftReset_CreateThread(void) {
     func_80004CC0(&D_800A6D20.thread, 2, 1);
-    D_800A6D20.unk5E0 = 0;
+    D_800A6D20.gSoftResetLineNum = 0;
     osCreateThread(&D_800A6D20.thread, THREAD_ID_RESET, SoftReset_Thread, NULL, &gSoftResetLineNum, THREAD_PRI_RESET);
     osStartThread(&D_800A6D20.thread);
 }

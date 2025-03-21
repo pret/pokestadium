@@ -13,7 +13,9 @@
 #include "src/2FEA0.h"
 #include "src/2E460.h"
 #include "src/E1C0.h"
+#include "src/E890.h"
 #include "src/19840.h"
+#include "src/232C0.h"
 #include "src/controller.h"
 #include "src/dp_intro.h"
 #include "src/gb_tower.h"
@@ -186,7 +188,7 @@ void func_800293CC(void) {
 void func_800296AC(void) {
     func_8000D2B4(1);
     func_80001BD4(2);
-    LeoBootGame(D_800AA688);
+    LeoBootGame(D_800AA680.unk_08);
 }
 
 void func_800296E0(void) {
@@ -771,7 +773,7 @@ void func_8002B310(void) {
     func_80000DF4();
 }
 
-void Game_Thread(UNUSED void* arg) {
+void Game_Thread(UNUSED LEODiskID* arg) {
     s32 state;
 
     __osSetFpcCsr(0x01000C01U);

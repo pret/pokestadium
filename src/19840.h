@@ -38,7 +38,7 @@ typedef struct unk_D_800ABE10_A04 {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ BinArchive* unk_10;
 } unk_D_800ABE10_A04; // size >= 0x14
 
 typedef struct unk_D_800ABE10 {

@@ -107,17 +107,21 @@ typedef struct unk_D_86002F58_004_000_040 {
 } unk_D_86002F58_004_000_040; // size >= 0x14
 
 typedef struct unk_D_86002F58_004_000_054_004 {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ s16 unk_04;
-    /* 0x06 */ char unk_06[0x4];
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ u16 unk_08;
     /* 0x0A */ u16 unk_0A;
-} unk_D_86002F58_004_000_054_004; // size >= 0x0C
+    /* 0x0C */ void* unk_0C;
+    /* 0x10 */ void* unk_10;
+} unk_D_86002F58_004_000_054_004; // size >= 0x14
 
 typedef struct unk_D_86002F58_004_000_054 {
     /* 0x00 */ s16 unk_00;
     /* 0x04 */ unk_D_86002F58_004_000_054_004* unk_04;
     /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
+    /* 0x0A */ u16 unk_0A;
 } unk_D_86002F58_004_000_054; // size = 0xC
 
 typedef struct unk_D_86002F58_004_000_0A8 {
@@ -460,11 +464,13 @@ typedef struct UnkInputStruct8000D738 {
 
 typedef struct UnkStruct800AA660 {
     /* 0x0000 */ OSThread thread;
-    /* 0x01B0 */ char unk01B0[0x28];
+    /* 0x01B0 */ char unk01B0[0x10];
+    /* 0x01C0 */ OSMesgQueue queue1;
     /* 0x01D8 */ struct UnkStruct800AA660* unk_01D8;
-    /* 0x01DC */ char unk01DC[0x2004];
+    /* 0x01DC */ s32 unk_01DC;
+    /* 0x01E0 */ char unk01E0[0x2000];
     /* 0x21E0 */ OSMesg mesg;
-    /* 0x21E4 */ OSMesgQueue queue;
+    /* 0x21E4 */ OSMesgQueue queue2;
     /* 0x21FC */ s32 unk_21FC;
     /* 0x2200 */ s32 unk_2200;
     /* 0x2204 */ UnkInputStruct8000D738 unk_2204;

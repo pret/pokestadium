@@ -1,7 +1,7 @@
 #include "global.h"
 #include "profiler.h"
+#include "5580.h"
 
-extern OSTime D_800A6CE8;
 extern Gfx* gDisplayListHead;
 
 struct Profiler gProfiler;
@@ -19,7 +19,7 @@ struct Profiler gProfiler;
 // log the current osTime to the appropriate idx for current thread5 processes.
 void profiler_log_thread5_time(enum ProfilerGameEvent eventID) {
     if (eventID == THREAD5_START) {
-        gProfiler.profiler_data[gProfiler.frameIdx1].gameTimes[eventID] = D_800A6CE8;
+        gProfiler.profiler_data[gProfiler.frameIdx1].gameTimes[eventID] = D_800A62E0.time;
     } else {
         gProfiler.profiler_data[gProfiler.frameIdx1].gameTimes[eventID] = osGetTime();
     }

@@ -3,16 +3,57 @@
 #include "src/F420.h"
 #include "src/util.h"
 
-extern GeoLayoutCommandProc GeoLayoutJumpTable[];
+static GeoLayoutCommandProc GeoLayoutJumpTable[] = {
+    geo_layout_cmd_branch_and_link,
+    geo_layout_cmd_end,
+    geo_layout_cmd_jump,
+    geo_layout_cmd_branch,
+    geo_layout_cmd_return,
+    geo_layout_cmd_open_node,
+    geo_layout_cmd_close_node,
+    func_80017B28,
+    func_80017B60,
+    func_80017BBC,
+    func_80017BFC,
+    func_80017C48,
+    func_80017D94,
+    func_80017DE0,
+    func_80017E2C,
+    func_80017E78,
+    func_80017EC4,
+    func_80017F1C,
+    func_80017F5C,
+    func_80017F64,
+    func_80017FD4,
+    func_800180BC,
+    func_800180D4,
+    func_8001812C,
+    func_8001819C,
+    func_800181FC,
+    func_8001824C,
+    func_8001829C,
+    func_800183C4,
+    func_80018490,
+    func_800185A8,
+    func_80018600,
+    func_8001878C,
+    func_800188C8,
+    func_80018968,
+    func_800189B8,
+    func_80018A40,
+    func_80018A8C,
+    func_80018AD0,
+};
 
-extern MemoryBlock* gGraphNodePool;
-extern unk_D_86002F34* gCurRootGraphNode;
-extern u32 gGeoLayoutStack[];
-extern GraphNode* gCurGraphNodeList[32];
-extern s16 gCurGraphNodeIndex;
-extern s16 gGeoLayoutStackIndex;
-extern s16 gGeoLayoutReturnIndex;
-extern u8* gGeoLayoutCommand;
+static MemoryBlock* gGraphNodePool;
+static GraphNode* gCurRootGraphNode;
+static u32 gGeoLayoutStack[16];
+static GraphNode* gCurGraphNodeList[32];
+static s16 gCurGraphNodeIndex;
+static s16 gGeoLayoutStackIndex;
+static s16 D_800ABDFC;
+static s16 gGeoLayoutReturnIndex;
+static u8* gGeoLayoutCommand;
 
 /*
   0x00: Branch and store return address

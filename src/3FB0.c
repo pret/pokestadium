@@ -95,17 +95,17 @@ void func_800033C8(unk_func_80003680_sp300* arg0, u8* arg1) {
     arg0->height = (arg0->start_of_frame[1] << 8) | arg0->start_of_frame[2];
 }
 
-extern u64 D_80068080[];
-extern u64 D_8007ED20[];
+extern u64 njpgdspMainTextStart[];
+extern u64 njpgdspMainDataStart[];
 
 void func_80003558(UnkStruct80001380* arg0, unk_func_80003680_sp90* arg1) {
     arg0->task.t.type = 4;
     arg0->task.t.flags = 0;
     arg0->task.t.ucode_boot = rspbootTextStart;
     arg0->task.t.ucode_boot_size = (u32)_binary_assets_us_F3DEX2_bin_start - (u32)rspbootTextStart;
-    arg0->task.t.ucode = D_80068080;
+    arg0->task.t.ucode = njpgdspMainTextStart;
     arg0->task.t.ucode_size = 0x1000;
-    arg0->task.t.ucode_data = D_8007ED20;
+    arg0->task.t.ucode_data = njpgdspMainDataStart;
     arg0->task.t.ucode_data_size = 0x800;
     arg0->task.t.dram_stack = NULL;
     arg0->task.t.dram_stack_size = 0;

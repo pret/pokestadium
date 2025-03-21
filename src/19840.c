@@ -272,7 +272,6 @@ void func_80019514(unk_func_80019600* arg0) {
     arg0->size = temp_s3->listHeadL + 1;
 }
 
-#ifdef NON_MATCHING
 void func_80019600(UNUSED void* arg0) {
     unk_func_80019600* sp34;
 
@@ -291,17 +290,11 @@ void func_80019600(UNUSED void* arg0) {
                 break;
         }
 
-        if (sp34->queue == NULL) {
-            continue;
+        if (sp34->queue != NULL) {
+            osSendMesg(sp34->queue, sp34, 1);
         }
-
-        osSendMesg(sp34->queue, sp34, 1);
     }
 }
-#else
-void func_80019600(UNUSED void* arg0);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/19840/func_80019600.s")
-#endif
 
 void func_800196DC(void) {
     osCreateMesgQueue(&D_800ABE10.unk_9D0, &D_800ABE10.unk_9B0, 8);

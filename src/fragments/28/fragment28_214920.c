@@ -33,7 +33,7 @@ static char** D_888267A8;
 static char** D_888267AC;
 static char** D_888267B0;
 static unk_D_86002F58_004_000 D_888267B8;
-static void* D_88826920;
+static unk_func_8001B1FC* D_88826920;
 static unk_func_80007444* D_88826924;
 static unk_func_80007444* D_88826928;
 static unk_D_86002F58_004_000_010* D_8882692C;
@@ -914,7 +914,7 @@ u8 func_888038E0(void) {
 #endif
 
 void func_88803BCC(u8* arg0, s32 arg1) {
-    s32 sp1C;
+    unk_func_8001A024* sp1C;
     void* sp18;
 
     main_pool_push_state('ICON');

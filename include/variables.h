@@ -2,6 +2,7 @@
 #define _VARIABLES_H_
 
 #include "global.h"
+#include "PR/leo.h"
 
 // thread pris
 #define THREAD_PRI_IDLE_INIT 100
@@ -73,7 +74,6 @@ extern u8 D_4001820[];
 extern u8 D_5000000[];
 extern u8 D_6000000[];
 extern u8 D_8D000000[];
-extern void* D_800AA688;
 extern u8 D_20144E0[];
 extern u8 D_3044260[];
 extern u8 D_20289E0[];
@@ -336,7 +336,7 @@ extern u8 D_30CD410[];
 extern u8 D_30CD490[];
 extern u8 D_30CD510[];
 
-extern u8 D_800818E0[0x20];
+extern LEODiskID D_800818E0;
 
 extern Gfx D_8006F518[];
 extern Gfx D_8006F630[];
@@ -366,14 +366,16 @@ extern struct unk_D_86002F58_004_000_000 D_800AC858;
 
 typedef struct unk_D_8006FF00 {
 	/* 0x00 */ u8 unk_00;
+	/* 0x01 */ u8 unk_01;
 	/* 0x02 */ s16 unk_02;
 	/* 0x04 */ char* name;
-	/* 0x08 */ char unk_08[0x4];
+	/* 0x08 */ s32 unk_08;
 	/* 0x0C */ u8 unk_0C;
 	/* 0x0D */ char unk_0D[0x3];
 	/* 0x10 */ s16 unk_10;
 	/* 0x12 */ s16 unk_12;
-	/* 0x14 */ char unk_14[0x8];
+	/* 0x14 */ u32 unk_14;
+	/* 0x18 */ char unk_18[0x4];
 } unk_D_8006FF00; // size = 0x1C
 extern unk_D_8006FF00 D_8006FF00[];
 
