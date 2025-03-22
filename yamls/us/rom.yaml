@@ -355,7 +355,8 @@
     - [0x76260, .data, 29BA0]
     - [0x76280, .data, 2C1C0]
     - [0x76290, .data, 2D340]
-    - [0x764A0, data, rom_data_762A0]
+    - [0x764A0, .data, 2E460]
+    - [0x76A40, data, rom_data_76A40]
     - [0x78570, .data, 373A0]
     - [0x78890, .data, 38BB0]
     - [0x78990, data, rom_data_78990]
@@ -428,7 +429,7 @@
     - [0x7CEC0, .rodata, 29BA0]
     - [0x7CFD0, .rodata, 2C1C0]
     - [0x7D030, .rodata, 2E110]
-    - [0x7D040, rodata, rom_rodata_7D040] # 2E460
+    - [0x7D040, .rodata, 2E460]
     - [0x7D090, .rodata, 2FEA0]
     - [0x7D0F0, .rodata, 30640]
     - [0x7D110, rodata, rom_rodata_7D110]
@@ -515,7 +516,8 @@
     - {vram: 0x800AE4E0, type:  .bss, name: 26820}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}
     - {vram: 0x800AF740, type:  .bss, name: 2E110}
-    - {vram: 0x800AF750, type:  bss, name: unk_bss_7}
+    - {vram: 0x800AF750, type:  .bss, name: 2E460}
+    - {vram: 0x800AF770, type:  bss, name: unk_bss_7}
     - {vram: 0x800B32A0, type:  .bss, name: 373A0}
     - {vram: 0x800FC7A0, type:  .bss, name: 38BB0}
     - {vram: 0x800FC820, type:  bss, name: unk_bss_12}

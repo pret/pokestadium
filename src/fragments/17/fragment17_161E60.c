@@ -22,6 +22,7 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 #include "src/fragments/3/fragment3.h"
+#include "src/2E460.h"
 
 extern u8 D_30074E0[];
 extern u8 D_30092E0[];
@@ -844,7 +845,7 @@ void func_86B026C0(void) {
     D_86B0EBDC->unk_008.unk_000.unk_02 &= ~0x20;
     D_86B0EBDC->unk_170.unk_000.unk_01 &= ~1;
 
-    temp_a1 = _70D3A0_ROM_START + (D_80075BCC[D_86B0EBDC->unk_2EC] & 0xFFFFFF);
+    temp_a1 = _70D3A0_ROM_START + (D_80075BD0[D_86B0EBDC->unk_2EC - 1] & 0xFFFFFF);
     func_80003B30(D_86B0EBE8, temp_a1, temp_a1 + 0xBC0, 0);
     D_86B0EBDC->unk_308 = 0;
     func_87903600();

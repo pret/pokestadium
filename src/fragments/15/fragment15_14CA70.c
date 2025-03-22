@@ -11,6 +11,7 @@
 #include "src/19840.h"
 #include "src/1CF30.h"
 #include "src/20330.h"
+#include "src/2E460.h"
 #include "src/26820.h"
 #include "src/2E110.h"
 #include "src/3FB0.h"
@@ -393,7 +394,7 @@ void func_86900110(u8 arg0, u8 arg1, u8 arg2) {
 
 void func_86900188(void) {
     UNUSED s32 pad[2];
-    u8* temp_a1 = (u32)_70D3A0_ROM_START + (D_80075BCC[D_8690A69C->unk_16C] & 0xFFFFFF);
+    u8* temp_a1 = (u32)_70D3A0_ROM_START + (D_80075BD0[D_8690A69C->unk_16C - 1] & 0xFFFFFF);
     u8* sp20 = (u32)_70D3A0_ROM_START +
                (((D_8690A69C->unk_16C * sizeof(unk_70D3A0)) - sizeof(unk_70D3A0) + (u32)D_70110) & 0xFFFFFF);
     u8* sp1C = sp20 + sizeof(unk_70D3A0);

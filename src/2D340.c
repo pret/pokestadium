@@ -14,15 +14,34 @@ void func_8002C758(unk_func_8820BE14_06C* arg0, s32 arg1, s32 arg2, MemoryPool* 
     arg0->unk_08 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002C7AC.s")
+void func_8002C7AC(unk_func_8820BE14_06C* arg0, MemoryPool* arg1) {
+    mem_pool_free(arg1, arg0->unk_00);
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002C7D4.s")
+s32 func_8002C7D4(unk_func_8820BE14_06C* arg0, s8* a1) {
+    s8* var_v0;
+    s32 i;
+    s8* arg1;
+
+    if (arg0->unk_08 >= arg0->unk_04) {
+        return 1;
+    }
+
+    var_v0 = (u8*)arg0->unk_00 + (arg0->unk_0C * arg0->unk_08);
+    arg1 = a1;
+
+    for (i = arg0->unk_0C; i > 0; i--) {
+        *var_v0++ = *arg1++;
+    }
+
+    arg0->unk_08++;
+    return 0;
+}
 
 s32 func_8002C88C(unk_func_8820BE14_06C* arg0, s8* arg1, s32 arg2) {
     s32 var_t1;
     s8* var_t0;
     s8* var_v1;
-    s32 i;
 
     if ((arg0->unk_08 >= arg0->unk_04) || (arg0->unk_08 < arg2)) {
         return 1;
@@ -74,9 +93,43 @@ s32 func_8002C990(unk_func_8820BE14_06C* arg0, s32 arg1) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002CA00.s")
+s32 func_8002CA00(unk_func_8820BE14_06C* arg0, s8* a1, s32 arg2) {
+    s8* var_v0;
+    s32 i;
+    s8* arg1;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002CAAC.s")
+    if (arg2 >= arg0->unk_08) {
+        return 1;
+    }
+
+    var_v0 = (s8*)arg0->unk_00 + (arg0->unk_0C * arg2);
+    arg1 = a1;
+
+    for (i = arg0->unk_0C; i > 0; i--) {
+        *arg1++ = *var_v0++;
+    }
+
+    return 0;
+}
+
+s32 func_8002CAAC(unk_func_8820BE14_06C* arg0, s8* a1, s32 arg2) {
+    s8* var_v0;
+    s32 i;
+    s8* arg1;
+
+    if (arg2 >= arg0->unk_08) {
+        return 1;
+    }
+
+    var_v0 = (s8*)arg0->unk_00 + (arg0->unk_0C * arg2);
+    arg1 = a1;
+
+    for (i = arg0->unk_0C; i > 0; i--) {
+        *var_v0++ = *arg1++;
+    }
+
+    return 0;
+}
 
 s32 func_8002CB58(unk_func_8830867C_04C_030_02C_000_000_00C* arg0, s32 arg1) {
     s16* var_a2;
@@ -114,7 +167,9 @@ void func_8002CBC0(unk_func_88200FA0_030_038* arg0, s32 arg1, MemoryPool* arg2) 
     arg0->unk_08 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002CC04.s")
+void func_8002CC04(unk_func_88200FA0_030_038* arg0, MemoryPool* arg1) {
+    mem_pool_free(arg1, arg0->unk_00);
+}
 
 void func_8002CC2C(unk_func_88200FA0_030_038* arg0, char* arg1, s32 arg2) {
     s32 var_t1;
@@ -200,7 +255,29 @@ void func_8002D1AC(unk_func_8830867C_02C_0CC* arg0, unk_func_8830867C_02C_0CC* a
     arg1->unk_08 = ((s32)var_s1 - (s32)arg1->unk_00) >> 2;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002D248.s")
+s32 func_8002D248(u16* a0, u16* a1) {
+    u16* arg0 = a0;
+    u16* arg1 = a1;
+    s32 tmpa;
+    s32 tmp = tmpa - (*arg1);
+
+    while (true) {
+        tmpa = *arg0++;
+
+        tmp = tmpa - *arg1;
+        if (tmp != 0) {
+            return tmp;
+        }
+
+        if (tmpa == 0) {
+            break;
+        }
+
+        arg1++;
+    }
+
+    return 0;
+}
 
 static u16 D_80075690[0x100] = {
     0,      0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
