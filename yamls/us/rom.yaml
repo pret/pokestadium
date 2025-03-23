@@ -357,6 +357,8 @@
     - [0x76290, .data, 2D340]
     - [0x764A0, .data, 2E460]
     - [0x76A40, data, rom_data_76A40]
+    - [0x76EF0, .data, 33E30]
+    - [0x76FB0, data, rom_data_76FB0]
     - [0x78570, .data, 373A0]
     - [0x78890, .data, 38BB0]
     - [0x78990, data, rom_data_78990]
