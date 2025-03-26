@@ -45,17 +45,17 @@ typedef struct unk_D_800FC6D4_entry {
     /* 0x03 */ u8 unk_03;
 } unk_D_800FC6D4_entry; // size = 0x4
 
-typedef struct testme {
-    u32 unk_00;
-    u32 unk_04;
-} testme;
+typedef struct unk_D_800FC6D4_008 {
+    /* 0x00 */ u32 unk_00;
+    /* 0x04 */ u8 unk_04;
+} unk_D_800FC6D4_008; // size = 0x8
 
 typedef struct unk_D_800FC6D4 {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 num_entries;
     /* 0x04 */ u16 unk_04;
     /* 0x06 */ u16 unk_06;
-    /* 0x08 */ testme* offset;
+    /* 0x08 */ unk_D_800FC6D4_008* offset;
     /* 0x0C */ char unk_0C[0x4];
     /* 0x10 */ unk_D_800FC6D4_entry entries[ENTRY_SIZE];
 } unk_D_800FC6D4; // size = 0x10

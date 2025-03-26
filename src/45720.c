@@ -91,7 +91,7 @@ void func_80044D78(u32 arg0, u32 arg1) {
     }
 }
 
-s32 func_80044E54(s32 arg0) {
+s32 func_80044E54(u32 arg0) {
     if (D_800FCEF0[arg0] == 2) {
         return 0;
     }

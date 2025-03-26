@@ -8,6 +8,7 @@
 #include "src/49790.h"
 #include "src/memmap.h"
 #include "src/memory.h"
+#include "src/232C0.h"
 
 static Color_RGBA8 D_8850CF80 = { 0xF0, 0xF0, 0xF0, 0xFF };
 

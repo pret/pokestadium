@@ -363,7 +363,7 @@
     - [0x78890, .data, 38BB0]
     - [0x78990, data, rom_data_78990]
     - [0x79180, .data, libnaudio/n_sl]
-    - [0x79190, data, rom_data_79190]
+    - [0x79190, .data, 435D0]
     - [0x791F0, .data, 45720]
     - [0x79200, .data, libnaudio/n_env]
     - [0x79300, data, rom_data_79300]
@@ -440,6 +440,7 @@
     - [0x7D340, .rodata, 38BB0]
     - [0x7D3C0, rodata, rom_rodata_7D3C0]
     - [0x7D3E0, rodata, rom_rodata_7D3E0]
+    - [0x7D800, .rodata, 435D0]
     - [0x7D860, .rodata, 45720]
     - [0x7D880, .rodata, libnaudio/n_env]
     - [0x7D8D0, rodata, rom_rodata_7D8D0]
@@ -523,6 +524,7 @@
     - {vram: 0x800B32A0, type:  .bss, name: 373A0}
     - {vram: 0x800FC7A0, type:  .bss, name: 38BB0}
     - {vram: 0x800FC820, type:  bss, name: unk_bss_12}
+    - {vram: 0x800FCD40, type:  .bss, name: 435D0}
     - {vram: 0x800FCED0, type:  .bss, name: 45720}
     - {vram: 0x800FCF60, type:  bss, name: unk_bss_15}
     - {vram: 0x800FF990, type:  .bss, name: 4B940}

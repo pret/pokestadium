@@ -18,6 +18,7 @@
 #include "src/memmap.h"
 #include "src/memory.h"
 #include "src/stage_loader.h"
+#include "src/232C0.h"
 
 s32 func_888002F8(unk_func_888044BC_050*, s32, s32);
 s32 func_88801214(unk_func_888044BC_038*, Controller*);

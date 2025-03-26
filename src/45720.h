@@ -14,7 +14,7 @@ extern u32 D_800FCF30[2];
 void func_80044B20(ALHeap*, u32, u32);
 void func_80044CBC(u32, u32, u32, u32);
 void func_80044D78(u32, u32);
-s32 func_80044E54(s32);
+s32 func_80044E54(u32);
 void func_80044E80(s32);
 void func_80044EA4(void);
 void func_800455DC(u32 arg0, u32 arg1, u32 arg2, OSMesgQueue* arg3);

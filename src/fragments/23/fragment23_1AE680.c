@@ -14,6 +14,7 @@
 #include "src/memmap.h"
 #include "src/memory.h"
 #include "src/stage_loader.h"
+#include "src/232C0.h"
 
 typedef void (*ThreadEntries)(unk_func_8820BE14*);
 

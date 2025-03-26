@@ -1,5 +1,12 @@
 #include "37370.h"
+#include "src/49790.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/37370/func_80036770.s")
+void func_80036770(s32 arg0) {
+    func_80048B90(arg0);
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/37370/func_80036790.s")
+s32 func_80036790(void) {
+    s32 arr[1];
+
+    return arr[16];
+}
