@@ -3,6 +3,25 @@
 
 #include "global.h"
 
+typedef struct unk_D_800FCB18 {
+    /* 0x00 */ char pad00[0xC];
+    /* 0x0C */ u16 unk_0C;
+    /* 0x0E */ char pad0E[0x7];
+    /* 0x15 */ u8 unk_15;
+    /* 0x16 */ char pad16[0x6];
+    /* 0x1C */ u8 unk_1C;
+    /* 0x1D */ u8 unk_1D;
+    /* 0x1E */ char pad1E[0x8];
+    /* 0x26 */ u8 unk_26;
+    /* 0x28 */ u16 unk_28;
+} unk_D_800FCB18; // size >= 0x2C
+
+typedef struct amConfig {
+    /* 0x00 */ u32 outputRate;
+    /* 0x04 */ u32 framesPerField;
+    /* 0x08 */ u32 maxACMDSize;
+} amConfig; // size = 0xC
+
 extern s32 D_80077DC4;
 extern f32 D_80077DC8;
 extern u8 D_80077DCC;
@@ -13,12 +32,7 @@ extern f32 D_80077DDC;
 extern f32 D_80077DE0;
 extern u8 D_80077DE4;
 
-typedef struct amConfig {
-    /* 0x00 */ u32 outputRate;
-    /* 0x04 */ u32 framesPerField;
-    /* 0x08 */ u32 maxACMDSize;
-} amConfig; // size = 0xC
-
+extern unk_D_800FCB18* D_800FCB18[2];
 
 void amCreateAudioMgr(ALSynConfig*, amConfig*, u32, s32, s32);
 OSTask* func_8003CADC(OSTask*);

@@ -112,18 +112,6 @@ extern s32 min_only_one;
 extern u8 D_800FC825;
 extern s32 D_800FC828;
 
-typedef struct unk_D_800FCB18 {
-    /* 0x00 */ char pad00[0xC];
-    /* 0x0C */ u16 unk_0C;
-    /* 0x0E */ char pad0E[0xE];
-    /* 0x1C */ u8 unk_1C;
-    /* 0x1D */ u8 unk_1D;
-    /* 0x1E */ char pad1E[0x8];
-    /* 0x26 */ u8 unk_26;
-    /* 0x28 */ u16 unk_28;
-} unk_D_800FCB18; // size >= 0x2C
-
-extern unk_D_800FCB18* D_800FCB18[2];
 extern s32 D_800FCB28;
 extern s32 D_800FCB2C;
 

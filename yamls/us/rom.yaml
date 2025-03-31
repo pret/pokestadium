@@ -89,7 +89,7 @@
     
     # libnaudiosc. Why are there so many gaps?
     - [0x43520, c, libnaudio/n_sl]
-    - [0x435B0, c] # 
+    - [0x435B0, c, libnaudio/n_synsetpriority]
     - [0x435D0, c]  # pkm lab cries code
     - [0x45720, c]  # music code
     - [0x46680, c]  # speech code
@@ -370,7 +370,7 @@
     - [0x79630, .data, 49790]
     - [0x79660, data, rom_data_79660]
     - [0x79AE0, .data, 4CBC0]
-    - [0x79C70, data, rom_data_79C70]
+    - [0x79C70, .data, 4F410]
     - [0x79F70, .data, libnaudio/n_drvrNew]
     - [0x7A100, .data, libnaudio/n_reverb]
     - [0x7A110, data, rom_data_7A110]
@@ -451,7 +451,7 @@
     - [0x7E0E0, .rodata, 4BA90]
     - [0x7E110, .rodata, 4BDC0]
     - [0x7E2F0, .rodata, 4CBC0]
-    - [0x7E560, rodata, rom_rodata_7E560]
+    - [0x7E560, .rodata, 4F410]
     - [0x7E5D0, .rodata, libnaudio/n_drvrNew]
     - [0x7E5F0, .rodata, libnaudio/n_resample]
     - [0x7E600, .rodata, libnaudio/n_reverb]

@@ -1,6 +1,6 @@
 #include "38BB0.h"
 #include "src/3D140.h"
-#include "src/435B0.h"
+#include "src/libnaudio/n_synsetpriority.h"
 
 typedef u8* (*func_D_80077C98)(unk_D_800FC7D0*, u8*);
 typedef u8* (*func_D_80077D5C)(u8*);
@@ -987,7 +987,7 @@ void func_80039940(void) {
 
         n_alSynSetVol(&ptr->unk_148->voice, 0, D_800FC7D8 * 2);
 
-        func_800429B0(&ptr->unk_148->voice, 0);
+        n_alSynSetPriority(&ptr->unk_148->voice, 0);
         func_8003C3A0(ptr->unk_148);
 
         ptr->unk_148 = NULL;
@@ -1820,9 +1820,9 @@ void func_8003B2B4(unk_D_800FC7D0* arg0) {
 
             if (arg0->unk_068 < 0x80) {
                 if (arg0->unk_0BA != 0) {
-                    func_800429B0(&arg0->unk_148->voice, 1);
+                    n_alSynSetPriority(&arg0->unk_148->voice, 1);
                 } else {
-                    func_800429B0(&arg0->unk_148->voice, 0);
+                    n_alSynSetPriority(&arg0->unk_148->voice, 0);
                 }
             }
 
