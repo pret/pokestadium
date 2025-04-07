@@ -24,7 +24,7 @@
 
 extern u8 D_800FC824;
 extern u8 D_80077D98;
-extern u8* D_800FC6D8;
+extern s16* D_800FC6D8;
 extern u32 D_800FD6F0;
 
 Acmd* n_alMainBusPull(s32 sampleOffset, Acmd* p) {
@@ -40,8 +40,8 @@ Acmd* n_alMainBusPull(s32 sampleOffset, Acmd* p) {
 
     if (D_800FC824 != 0) {
         aClearBuffer(ptr++, 0x7C0, 0x2E0);
-        n_aLoadBuffer(ptr++, 0x170, 0x7C0, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0 * 2]));
-        n_aLoadBuffer(ptr++, 0x170, 0x930, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0 * 2]));
+        n_aLoadBuffer(ptr++, 0x170, 0x7C0, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0]));
+        n_aLoadBuffer(ptr++, 0x170, 0x930, osVirtualToPhysical(&D_800FC6D8[D_800FD6F0]));
 
         D_800FD6F0 += 0xB8;
         if (D_800FD6F0 >= 0xB80) {
