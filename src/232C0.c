@@ -29,8 +29,6 @@ u16 func_800226C0(s32 arg0, u32 arg1) {
 }
 
 void func_80022734(unk_func_80026268_arg0* arg0) {
-    extern unk_D_80072B00 D_80072B00[];
-
     s32 i;
     s32 temp_a3;
     s32 var_v0;

@@ -3,8 +3,9 @@
 
 #include "global.h"
 
-extern s8 D_80079364;
+extern u8 D_80079364;
 
-void func_8004E810(s32, s32);
+void func_8004E810(u32 arg0, u32 arg1);
+void func_8004EBC8(u32 arg0);
 
 #endif // _4F410_H_

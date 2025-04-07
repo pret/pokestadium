@@ -57,11 +57,7 @@ typedef struct AMDMAState {
     /* 0x08 */ AMDMABuffer* firstFree;
 } AMDMAState; // size = 0xC
 
-extern u8 D_800783FC;
-extern u8 D_80078400;
-extern u16 D_80078410[1][9];
-extern u16 D_80078446[1][9];
-extern u16 D_800784EA[1][9];
+extern f32 D_80077D94;
 extern s32 D_80077DC4;
 extern f32 D_80077DC8;
 extern u8 D_80077DCC;
@@ -95,6 +91,11 @@ extern u8 D_800783DC;
 extern u8 D_800783E4;
 extern u8 D_800783E8;
 extern u8 D_800783EC;
+extern u8 D_800783FC;
+extern u8 D_80078400;
+extern u16 D_80078410[1][9];
+extern u16 D_80078446[1][9];
+extern u16 D_800784EA[1][9];
 extern f64 D_8007C7E0;
 extern f64 D_8007C7E8;
 extern f64 D_8007C7F0;
@@ -111,18 +112,6 @@ extern s32 min_only_one;
 extern u8 D_800FC825;
 extern s32 D_800FC828;
 
-typedef struct unk_D_800FCB18 {
-    /* 0x00 */ char pad00[0xC];
-    /* 0x0C */ u16 unk_0C;
-    /* 0x0E */ char pad0E[0xE];
-    /* 0x1C */ u8 unk_1C;
-    /* 0x1D */ u8 unk_1D;
-    /* 0x1E */ char pad1E[0x8];
-    /* 0x26 */ u8 unk_26;
-    /* 0x28 */ u16 unk_28;
-} unk_D_800FCB18; // size >= 0x2C
-
-extern unk_D_800FCB18* D_800FCB18[2];
 extern s32 D_800FCB28;
 extern s32 D_800FCB2C;
 
@@ -152,19 +141,32 @@ extern s8 D_800783E0;
 extern s16 D_800783F0;
 extern s16 D_800783F4;
 extern s16 D_800783F8;
+typedef struct unk_D_80078548 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+} unk_D_80078548;
+
+extern unk_D_80078548 D_80078548[];
+extern u8 D_80078554[];
+extern u8 D_80078568[];
 extern u8 D_800FCB38[2][8];
 extern s32 D_800FCC50[];
 extern s8 D_800FCCA0;
 extern s8 D_800FCCA1;
 extern u8 D_800FCCA2;
 extern u8 D_800FCCAC;
-extern s8 D_800FCCB7;
+extern u8 D_800FCCB7;
 extern s8 D_800FCCB8[];
 extern s8 D_800FCCBA[];
 extern s8 D_800FCCBC[];
 extern s8 D_800FCCBE[];
 extern s8 D_800FCCC0[];
 extern s8 D_800FCCC2[];
+extern u8 D_800FCCC6[];
+extern u8 D_800FCCC8[];
+extern u8 D_800FCCCE[];
+extern u8 D_800FCCD0[];
+extern u8 D_800FCCD2[];
 extern s8 D_800FCCD4[];
 extern s8 D_800FCCD6[];
 extern s8 D_800FCCD8[];
@@ -196,6 +198,14 @@ extern u16 D_80077EB4;
 extern u16 D_80077F04;
 extern u16 D_80077F44;
 extern u16 D_80077F60;
+extern u16 D_80077F6C[];
+extern u16 D_80077F74[];
+extern u16 D_80077F7C[];
+extern u16 D_80077F88[];
+extern u16 D_80077F90[];
+extern u16 D_80077F98[];
+extern u16 D_80077FA4[];
+extern u16 D_80077FAC[];
 extern u32 D_800783B4;
 extern s32 D_800FCCA8;
 extern u8 D_800FCCAD;
@@ -511,7 +521,17 @@ void __clearAudioDMA(void) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D264.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D2B8.s")
+void func_8003D2B8(s32 arg0) {
+    if (D_80077D90 == 0) {
+        func_800498A8(0x7D00, 0x78, 0x320);
+        D_80077D90 = 1;
+        D_80077D9C = 1;
+        D_80077D94 = 0.0f;
+        D_80077DA0 = arg0;
+        D_80077DA4 = 0;
+        D_800FC824 = 0;
+    }
+}
 
 #ifdef NON_MATCHING
 void func_8003D32C(void) {
@@ -1104,7 +1124,273 @@ void func_8003DB84(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F660.s")
 
+void func_8003D570(u8*, u8, s32);
+s32 func_8003D624(u8*, u8);
+void func_80041CEC(void);
+u32 func_80042158(u32, unk_D_800FCB18*, unk_D_800FCB18*);
+
+#ifdef NON_MATCHING
+void func_80040A70(unk_D_800FCB18* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 i;
+    s32 sp40;
+    u32 temp_lo;
+    u32 temp_v0;
+    s32 sp34;
+    u32 tmp;
+    OSIntMask sp2C;
+
+    if (arg0 == NULL) {
+        return;
+    }
+
+    if (arg0 == D_800FCB18[0]) {
+        sp40 = 0;
+    } else if (arg0 == D_800FCB18[1]) {
+        sp40 = 1;
+    } else {
+        return;
+    }
+
+    if ((D_800FCB18[0] == NULL) || (D_800FCB18[1] == NULL)) {
+        return;
+    }
+
+    D_800FCCAC = arg1;
+
+    switch (arg3) {
+        case 1:
+            D_800FCCB7 = 0;
+            func_80041CEC();
+            sp40 ^= 1;
+
+            if (D_800FCB18[sp40]->unk_0C != 0) {
+                for (i = 0; i < 5; i++) {
+                    if (arg1 == D_80078548[i].unk_00) {
+                        if (D_800FCB18[sp40]->unk_0C < D_800FCB48[sp40].unk_00[D_800FCB48[sp40].unk_24 & 0xF]) {
+                            tmp = (D_800FCB48[sp40].unk_00[D_800FCB48[sp40].unk_24 & 0xF] - D_800FCB18[sp40]->unk_0C);
+                            D_800FCCA4 = (tmp * 0x64) / D_800FCB18[sp40]->unk_28;
+                        } else {
+                            D_800FCCA4 = 0;
+                        }
+                        D_800FCCAD = arg2;
+                        return;
+                    }
+
+                    if (arg1 == D_80078548[i].unk_01) {
+                        if (D_800FCB18[sp40]->unk_0C < D_800FCB48[sp40].unk_00[D_800FCB48[sp40].unk_24 & 0xF]) {
+                            tmp = D_800FCB48[sp40].unk_00[D_800FCB48[sp40].unk_24 & 0xF] - D_800FCB18[sp40]->unk_0C;
+                            D_800FCCA4 = (tmp * 0x64) / D_800FCB18[sp40]->unk_28;
+                        } else {
+                            D_800FCCA4 = 0;
+                        }
+                        D_800FCCAD = arg2;
+                        return;
+                    }
+                }
+            }
+
+            temp_v0 = osSetIntMask(sp2C);
+
+            D_800FCCA2 = 0x1E;
+            if (D_800FCB18[sp40]->unk_0C < D_800FCB48[sp40].unk_00[D_800FCB48[sp40].unk_24 & 0xF]) {
+                tmp = D_800FCB48[sp40].unk_00[D_800FCB48[sp40].unk_24 & 0xF] - D_800FCB18[sp40]->unk_0C;
+                D_800FCCA4 = (tmp * 0x64) / D_800FCB18[sp40]->unk_28;
+            } else {
+                D_800FCCA4 = 0;
+            }
+            D_800FCCAD = arg2;
+
+            osSetIntMask(temp_v0);
+
+            if (D_800FCCA4 >= 0x29) {
+                func_800367A0(0x16, D_80078400, 0);
+            }
+            break;
+
+        case 0:
+        case 2:
+            func_80041CEC();
+            D_800FCCC0[sp40] = 0;
+            D_800FCCC2[sp40] = 0;
+
+            if (arg1 != 0x13) {
+                D_800FCCCE[sp40] = 0;
+            }
+
+            if (arg1 != 0x5B) {
+                D_800FCCD0[sp40] = 0;
+            }
+
+            if (arg3 != 2) {
+                D_800FCCD2[sp40] = 0;
+            }
+
+            D_800FCCAE += 1;
+
+            for (i = 0; i < 17; i++) {
+                if (arg1 == D_80078554[i]) {
+                    goto loop1_end;
+                }
+            }
+
+            D_800FCCC6[sp40] = 0;
+        loop1_end:
+
+            for (i = 0; i < 9; i++) {
+                if (arg1 == D_80078568[i]) {
+                    goto loop2_end;
+                }
+            }
+
+            D_800FCCC8[sp40] = 0;
+        loop2_end:
+
+            D_800FCCA2 = 0;
+            if (D_800FCCB7 == 0) {
+                tmp = func_80042158(arg1, D_800FCB18[sp40], D_800FCB18[sp40 ^ 1]);
+
+                if (tmp == -1) {
+                    if (func_8003D624(D_800FCCD8, arg1 - 1) == 0) {
+                        sp34 = arg1 + 0x1A2;
+                        func_8003D570(D_800FCCD8, arg1 - 1, 1);
+                        func_80041C70(sp34);
+                    } else {
+                        func_800420C0(D_80077F6C);
+                    }
+                } else if (tmp == -2) {
+                    if (func_8003D624(D_800FCCD8, arg1 - 1) == 0) {
+                        sp34 = arg1 + 0x1A2;
+                        func_8003D570(D_800FCCD8, arg1 - 1, 1);
+                        func_80041C70(sp34);
+                    } else {
+                        func_800420C0(D_80077F74);
+                    }
+                } else if (tmp == -3) {
+                    D_800783D4 = 1;
+                    if (func_8003D624(D_800FCCD8, arg1 - 1) == 0) {
+                        sp34 = arg1 + 0x1A2;
+                        func_8003D570(D_800FCCD8, arg1 - 1, 1);
+                        func_80041C70(sp34);
+                    } else {
+                        func_80041C70(0x187);
+                    }
+                } else if (tmp == -4) {
+                    if (func_8003D624(D_800FCCD8, arg1 - 1) == 0) {
+                        sp34 = arg1 + 0x1A2;
+                        func_8003D570(D_800FCCD8, arg1 - 1, 1);
+                        func_80041C70(sp34);
+                    } else {
+                        func_800420C0(D_80077F98);
+                    }
+                } else if (tmp != -5) {
+                    if ((D_800FCB48[sp40 ^ 1].unk_00[D_800FCB48[sp40 ^ 1].unk_24 & 0xF] < tmp) && (D_800FCCB6 == 0)) {
+                        if (func_8003D624(D_800FCCD8, arg1 - 1) == 0) {
+                            sp34 = arg1 + 0x1A2;
+                            func_8003D570(D_800FCCD8, arg1 - 1, 1);
+                            func_80041C70(sp34);
+                        } else {
+                            func_800420C0(D_80077F90);
+                            D_800FCCB6 = 0;
+                        }
+                    } else {
+                        D_800FCCB6 = 0;
+                        temp_lo = (tmp * 0x64) / D_800FCB18[sp40 ^ 1]->unk_28;
+                        if (temp_lo >= 0x51) {
+                            if (D_800FCCAF == 0) {
+                                D_800FCCAF = 1;
+                                func_800420C0(D_80077F6C);
+                            } else {
+                                func_800420C0(D_80077F74);
+                            }
+                        } else if (temp_lo >= 0x33) {
+                            if (D_800783CC == 1) {
+                                func_800420C0(D_80077F88);
+                            } else {
+                                func_800420C0(D_80077F7C);
+                            }
+                        } else if (func_80044E54(1) == 0) {
+                            if (D_800783CC == 1) {
+                                if (D_800FCCAE == 2) {
+                                    func_800420C0(D_80077FAC);
+                                } else {
+                                    func_800420C0(D_80077FA4);
+                                }
+                            } else {
+                                func_800420C0(D_80077F98);
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+
+        case 3:
+            if (D_800FCCB7 == 0) {
+                D_800FCCB7 = 1;
+                D_800FCCA2 = 0;
+                tmp = func_80042158(arg1, D_800FCB18[sp40], D_800FCB18[sp40 ^ 1]);
+                if ((tmp >> 0x10) == 0) {
+                    tmp = tmp << 1;
+
+                    if (D_800FCB48[sp40 ^ 1].unk_00[D_800FCB48[sp40 ^ 1].unk_24 & 0xF] < tmp) {
+                        if (func_8003D624(D_800FCCD8, arg1 - 1) == 0) {
+                            sp34 = arg1 + 0x1A2;
+                            func_8003D570(D_800FCCD8, arg1 - 1, 1);
+                            func_80041C70(sp34);
+                        } else {
+                            func_800420C0(D_80077F90);
+                        }
+                    } else {
+                        temp_lo = (tmp * 0x64u) / D_800FCB18[sp40 ^ 1]->unk_28;
+                        if (temp_lo >= 0x51) {
+                            if (D_800FCCAF == 0) {
+                                D_800FCCAF = 1;
+                                func_800420C0(D_80077F6C);
+                            } else {
+                                func_800420C0(D_80077F74);
+                            }
+                        } else if (temp_lo >= 0x33) {
+                            if (D_800783CC == 1) {
+                                func_800420C0(D_80077F88);
+                            } else {
+                                func_800420C0(D_80077F7C);
+                            }
+                        } else if (func_80044E54(1) == 0) {
+                            if (D_800783CC == 1) {
+                                if (D_800FCCAE == 2) {
+                                    func_800420C0(D_80077FAC);
+                                } else {
+                                    func_800420C0(D_80077FA4);
+                                }
+                            } else {
+                                func_800420C0(D_80077F98);
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+
+        case 4:
+            D_800FCCAE += 1;
+            D_800FCCB7 = 0;
+            D_800FCCA2 = 0;
+            break;
+
+        case 5:
+            D_800FCCB7 = 0;
+            D_800FCCA2 = 0;
+            break;
+
+        default:
+            D_800FCCB7 = 0;
+            D_800FCCA2 = 0;
+            break;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80040A70.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800414B8.s")
 

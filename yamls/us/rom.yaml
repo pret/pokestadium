@@ -89,7 +89,7 @@
     
     # libnaudiosc. Why are there so many gaps?
     - [0x43520, c, libnaudio/n_sl]
-    - [0x435B0, c] # 
+    - [0x435B0, c, libnaudio/n_synsetpriority]
     - [0x435D0, c]  # pkm lab cries code
     - [0x45720, c]  # music code
     - [0x46680, c]  # speech code
@@ -355,19 +355,22 @@
     - [0x76260, .data, 29BA0]
     - [0x76280, .data, 2C1C0]
     - [0x76290, .data, 2D340]
-    - [0x764A0, data, rom_data_762A0]
+    - [0x764A0, .data, 2E460]
+    - [0x76A40, data, rom_data_76A40]
+    - [0x76EF0, .data, 33E30]
+    - [0x76FB0, data, rom_data_76FB0]
     - [0x78570, .data, 373A0]
     - [0x78890, .data, 38BB0]
     - [0x78990, data, rom_data_78990]
     - [0x79180, .data, libnaudio/n_sl]
-    - [0x79190, data, rom_data_79190]
+    - [0x79190, .data, 435D0]
     - [0x791F0, .data, 45720]
     - [0x79200, .data, libnaudio/n_env]
     - [0x79300, data, rom_data_79300]
     - [0x79630, .data, 49790]
     - [0x79660, data, rom_data_79660]
     - [0x79AE0, .data, 4CBC0]
-    - [0x79C70, data, rom_data_79C70]
+    - [0x79C70, .data, 4F410]
     - [0x79F70, .data, libnaudio/n_drvrNew]
     - [0x7A100, .data, libnaudio/n_reverb]
     - [0x7A110, data, rom_data_7A110]
@@ -428,7 +431,7 @@
     - [0x7CEC0, .rodata, 29BA0]
     - [0x7CFD0, .rodata, 2C1C0]
     - [0x7D030, .rodata, 2E110]
-    - [0x7D040, rodata, rom_rodata_7D040] # 2E460
+    - [0x7D040, .rodata, 2E460]
     - [0x7D090, .rodata, 2FEA0]
     - [0x7D0F0, .rodata, 30640]
     - [0x7D110, rodata, rom_rodata_7D110]
@@ -437,6 +440,7 @@
     - [0x7D340, .rodata, 38BB0]
     - [0x7D3C0, rodata, rom_rodata_7D3C0]
     - [0x7D3E0, rodata, rom_rodata_7D3E0]
+    - [0x7D800, .rodata, 435D0]
     - [0x7D860, .rodata, 45720]
     - [0x7D880, .rodata, libnaudio/n_env]
     - [0x7D8D0, rodata, rom_rodata_7D8D0]
@@ -447,7 +451,7 @@
     - [0x7E0E0, .rodata, 4BA90]
     - [0x7E110, .rodata, 4BDC0]
     - [0x7E2F0, .rodata, 4CBC0]
-    - [0x7E560, rodata, rom_rodata_7E560]
+    - [0x7E560, .rodata, 4F410]
     - [0x7E5D0, .rodata, libnaudio/n_drvrNew]
     - [0x7E5F0, .rodata, libnaudio/n_resample]
     - [0x7E600, .rodata, libnaudio/n_reverb]
@@ -515,10 +519,12 @@
     - {vram: 0x800AE4E0, type:  .bss, name: 26820}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}
     - {vram: 0x800AF740, type:  .bss, name: 2E110}
-    - {vram: 0x800AF750, type:  bss, name: unk_bss_7}
+    - {vram: 0x800AF750, type:  .bss, name: 2E460}
+    - {vram: 0x800AF770, type:  bss, name: unk_bss_7}
     - {vram: 0x800B32A0, type:  .bss, name: 373A0}
     - {vram: 0x800FC7A0, type:  .bss, name: 38BB0}
     - {vram: 0x800FC820, type:  bss, name: unk_bss_12}
+    - {vram: 0x800FCD40, type:  .bss, name: 435D0}
     - {vram: 0x800FCED0, type:  .bss, name: 45720}
     - {vram: 0x800FCF60, type:  bss, name: unk_bss_15}
     - {vram: 0x800FF990, type:  .bss, name: 4B940}

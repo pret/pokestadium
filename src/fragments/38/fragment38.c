@@ -14,6 +14,7 @@
 #include "src/F420.h"
 #include "src/memory.h"
 #include "src/stage_loader.h"
+#include "src/232C0.h"
 
 static char** D_82305A20;
 static char** D_82305A24;

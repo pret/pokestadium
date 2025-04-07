@@ -20,6 +20,7 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 #include "src/util.h"
+#include "src/2E460.h"
 
 extern u8 D_3000180[];
 extern u8 D_3000780[];
@@ -227,7 +228,7 @@ void func_86B05E18(void) {
     u8* temp_a1;
     u8* sp1C;
 
-    temp_a1 = (u32)_70D3A0_ROM_START + (D_80075BCC[D_86B0FA78->unk_174] & 0xFFFFFF);
+    temp_a1 = (u32)_70D3A0_ROM_START + (D_80075BD0[D_86B0FA78->unk_174 - 1] & 0xFFFFFF);
     sp24 = (u32)_70D3A0_ROM_START +
            ((((D_86B0FA78->unk_174 ^ 0) * sizeof(unk_D_70B10)) - sizeof(unk_D_70B10) + (u32)D_70B10) & 0xFFFFFF);
     sp1C = (u32)_70D3A0_ROM_START +

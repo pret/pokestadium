@@ -335,6 +335,18 @@ extern u8 D_30CD390[];
 extern u8 D_30CD410[];
 extern u8 D_30CD490[];
 extern u8 D_30CD510[];
+extern u8 D_04001878[];
+extern u8 D_040018E0[];
+extern u8 D_04001948[];
+extern u8 D_040019B0[];
+extern u8 D_04001A18[];
+extern u8 D_04001A80[];
+extern u8 D_04001AF0[];
+extern u8 D_04001B58[];
+extern u8 D_04001BC0[];
+extern u8 D_04001C28[];
+extern u8 D_4001C90[];
+extern u8 D_4001FB8[];
 
 extern LEODiskID D_800818E0;
 
@@ -437,7 +449,6 @@ extern u32 D_304F120[];
 
 extern s32 D_800FC820;
 extern u8* D_800FF9C0;
-extern s32 D_80075BCC[];
 
 typedef struct unk_70D3A0 {
     /* 0x00 */ f32 unk_00;
@@ -450,15 +461,6 @@ typedef struct unk_D_70B10 {
     /* 0x00 */ char unk00[0x20];
 } unk_D_70B10; // size = 0x20
 
-extern unk_func_88500020 D_800758E0;
-extern unk_func_88500020 D_800758F0;
-
-typedef struct unk_D_8007596C {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u16 unk_02;
-} unk_D_8007596C; // size = 0x4
-extern unk_D_8007596C D_8007596C[151];
-
 extern u32 D_8C000000; // start of some rom area
 
 typedef struct unk_D_80072B00 {
@@ -468,5 +470,11 @@ typedef struct unk_D_80072B00 {
     /* 0x04 */ char unk04[1];
     /* 0x05 */ u8 unk_05;
 } unk_D_80072B00; // size = 0x6
+extern unk_D_80072B00 D_80072B00[];
+
+typedef struct unk_D_80072338 {
+    /* 0x00 */ char unk00[0xC];
+} unk_D_80072338; // size = 0xC
+extern unk_D_80072338 D_80072338[];
 
 #endif

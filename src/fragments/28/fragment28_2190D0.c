@@ -15,6 +15,7 @@
 #include "src/geo_layout.h"
 #include "src/memory.h"
 #include "src/stage_loader.h"
+#include "src/232C0.h"
 
 typedef struct unk_D_88826A88 {
     /* 0x00 */ char unk_00[1]; // unk size
