@@ -107,10 +107,11 @@ unk_D_80068BB0* func_80006314(s32 fmt, s32 size, s32 width, s32 height, s32 side
             break;
     }
 
-    sp34 = main_pool_alloc(size_bytes + sizeof(unk_D_80068BB0), side);
+    // header + image size + rounding up to 64
+    sp34 = main_pool_alloc(sizeof(unk_D_80068BB0) + size_bytes + 64, side);
     if (sp34 != NULL) {
         // image data follows the header struct
-        func_800062E4(sp34, fmt, size, width, height, sp34->unk_10);
+        func_800062E4(sp34, fmt, size, width, height, (u8*)sp34 + sizeof(unk_D_80068BB0));
     }
 
     return sp34;

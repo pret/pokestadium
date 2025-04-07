@@ -1753,9 +1753,9 @@
     subsegments:
     - [0x2AD270, textbin,   fragments/46/fragment46_header]
     - [0x2AD290, c,      fragments/46/fragment46]
-    - [0x2AD720, data,   fragments/46/fragment46_data]
+    - [0x2AD720, .data,   fragments/46/fragment46]
 
-    - {vram: 0x837004C0, type:  bss, name: fragments/46/fragment46_bss}
+    - {vram: 0x837004C0, type:  .bss, name: fragments/46/fragment46}
 
   - name: fragment46_relocs
     type: code

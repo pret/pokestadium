@@ -18,8 +18,7 @@ typedef struct unk_D_80068BB0 {
 	/* 0x06 */ u16 height;
 	/* 0x08 */ u8* img_p;
 	/* 0x0C */ struct unk_D_80068BB0* depth_p;
-	/* 0x10 */ char unk_10[0x40];
-} unk_D_80068BB0; // size = 0x50
+} unk_D_80068BB0; // size = 0x10
 
 unk_D_800A7440* func_80005FC0(unk_D_800A7440* arg0, s16 x1, s16 y1, s16 x2, s16 y2);
 s32 func_80006030(unk_D_800A7440* arg0);
