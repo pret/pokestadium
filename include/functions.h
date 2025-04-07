@@ -40,4 +40,6 @@ void __ull_divremi(unsigned long long* div, unsigned long long* rem, unsigned lo
 long long __ll_mod(long long a0, long long a1);
 long long __ll_rshift(long long a0, long long a1);
 
+f32 abs_asm(f32);
+
 #endif
