@@ -347,6 +347,9 @@ extern u8 D_04001BC0[];
 extern u8 D_04001C28[];
 extern u8 D_4001C90[];
 extern u8 D_4001FB8[];
+extern u8 D_30015E0[];
+extern u8 D_30025E0[];
+extern u8 D_3002C00[];
 
 extern LEODiskID D_800818E0;
 

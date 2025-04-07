@@ -132,7 +132,10 @@ void func_8001A654(u16* arg0, s32 a1, arg1_func_80010CA8 arg2) {
     cond = arg1 >= 2;
     arg1 -= 2;
     // clang-format off
-    while (cond != 0) {        *arg0 = func_80010CA8(*arg0, arg2);        cond = arg1 >= 2;        arg1 -= 2;        arg0++;    }
+    while (cond != 0) {        
+        *arg0 = func_80010CA8(*arg0, arg2);        cond = arg1 >= 2;        arg1 -= 2;        
+        arg0++;    
+    }
     // clang-format on
 }
 
