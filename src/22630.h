@@ -25,6 +25,12 @@ typedef struct unk_D_80070F84 {
 extern unk_D_80070F84 D_80070F84[];
 extern unk_D_80070F84 D_80070FA0[];
 
+typedef struct unk_D_80071D88 {
+    /* 0x00 */ char* type_name;
+    /* 0x04 */ Color_RGB8 color;
+} unk_D_80071D88; // size = 0x8
+extern unk_D_80071D88 D_80071D88[];
+
 typedef struct unk_D_800AE4E8_004_1_000_010_000 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01[2];

@@ -22,8 +22,7 @@ typedef struct unk_func_88200FA0_030_038 {
 typedef struct unk_func_88201DA0_034 {
     /* 0x0000 */ s32 unk_000;
     /* 0x0004 */ char unk004[0x4];
-    /* 0x0008 */ unk_func_88201DA0_034_008 unk_008;
-    /* 0x000C */ char unk00C[0xC7C];
+    /* 0x0008 */ u16 unk_008[0x640];
 } unk_func_88201DA0_034; // size = 0xC88
 
 typedef struct unk_func_88201DA0_038 {

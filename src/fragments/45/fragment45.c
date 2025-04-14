@@ -350,7 +350,7 @@ void func_83600E20(s32 arg0, s32 arg1, s16 arg2) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < spC0; i += end) {
-        temp_v0_2 = CLAMP_MAX(end, spC0 - i);
+        temp_v0_2 = CLAMP_MIN(spC0 - i, end);
 
         gDPLoadTextureBlock(gDisplayListHead++, &D_4004D48[i * spC0], G_IM_FMT_RGBA, G_IM_SIZ_16b, spC0, temp_v0_2, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
@@ -388,7 +388,7 @@ void func_83601314(s32 arg0, s32 arg1, s16 arg2) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < spC0; i += end) {
-        temp_v0_2 = CLAMP_MAX(end, spC0 - i);
+        temp_v0_2 = CLAMP_MIN(spC0 - i, end);
 
         gDPLoadTextureBlock(gDisplayListHead++, &D_4005F48[i * spC0], G_IM_FMT_RGBA, G_IM_SIZ_16b, spC0, temp_v0_2, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
@@ -566,7 +566,7 @@ void func_83601F28(int arg0, int arg1, s32 arg2, f32 arg3) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < spF8; i += iter) {
-        s32 temp_v0_2 = CLAMP_MAX(iter, spF8 - i);
+        s32 temp_v0_2 = CLAMP_MIN(spF8 - i, iter);
         s32 temp_fv1_2 = ROUND_MAX((temp_v0_2 * arg3) + 0.4f);
         s32 temp_fa0 = ROUND_MAX((i * arg3) + 0.4f);
 
@@ -615,7 +615,7 @@ void func_83602458(void) {
 
     idx = 0;
     for (i = 0; i < end; i += 0x40, idx++) {
-        s32 temp_v0_2 = CLAMP_MAX(0x40, end - i);
+        s32 temp_v0_2 = CLAMP_MIN(end - i, 0x40);
 
         if (D_836033C0 & (1 << idx)) {
             r = (((D_836032AC.r - D_836032A4.r) * idx) / 8) + D_836032A4.r;

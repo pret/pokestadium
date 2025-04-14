@@ -43,8 +43,8 @@
 #define CLAMP(x, min, max) ((x) < (min) ? (min) : (x) > (max) ? (max) : (x))
 //! checks max first
 #define CLAMP_ALT(x, min, max) ((x) > (max) ? (max) : (x) < (min) ? (min) : (x))
-#define CLAMP_MAX(x, max) ((x) > (max) ? (max) : (x))
-#define CLAMP_MIN(x, min) ((x) < (min) ? (min) : (x))
+#define CLAMP_MAX(x, max) ((x) > (max) ? (x) : (max))
+#define CLAMP_MIN(x, min) ((x) < (min) ? (x) : (min))
 
 #define ROUND_MAX(x) ((x) + ((x) > 0.0f ? 0.5f : -0.5f))
 

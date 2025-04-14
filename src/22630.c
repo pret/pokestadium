@@ -7,8 +7,6 @@
 #include "src/hal_libc.h"
 #include "src/util.h"
 
-extern unk_D_80070F84 D_80070F84[];
-
 u16 func_80021A30(u8* arg0) {
     return (arg0[0] << 8) | arg0[1];
 }

@@ -1634,14 +1634,26 @@
     - [0x28ED00, c,      fragments/41/fragment41_28ED00]
     - [0x291D60, c,      fragments/41/fragment41_291D60]
     - [0x2942C0, c,      fragments/41/fragment41_2942C0]
-    - [0x29BA20, data,   fragments/41/fragment41_data]
-    - [0x29BF80, rodata, fragments/41/fragment41_rodata_29BF80]
-    - [0x29C010, rodata, fragments/41/fragment41_rodata_29C010]
-    - [0x29C040, rodata, fragments/41/fragment41_rodata_29C040]
-    - [0x29C140, rodata, fragments/41/fragment41_rodata_29C140]
-    - [0x29C180, rodata, fragments/41/fragment41_rodata_29C180]
+    - [0x29BA20, .data,   fragments/41/fragment41_287ED0]
+    - [0x29BA40, .data,   fragments/41/fragment41_289240]
+    - [0x29BAC0, .data,   fragments/41/fragment41_28D1A0]
+    - [0x29BB60, .data,   fragments/41/fragment41_28ED00]
+    - [0x29BE20, .data,   fragments/41/fragment41_291D60]
+    - [0x29BE40, .data,   fragments/41/fragment41_2942C0]
+    
+    - [0x29BF80, .rodata, fragments/41/fragment41_287ED0]
+    - [0x29C010, .rodata, fragments/41/fragment41_289240]
+    - [0x29C040, .rodata, fragments/41/fragment41_28D1A0]
+    - [0x29C090, .rodata, fragments/41/fragment41_28ED00]
+    - [0x29C140, .rodata, fragments/41/fragment41_291D60]
+    - [0x29C180, .rodata, fragments/41/fragment41_2942C0]
 
-    - {vram: 0x82F14420, type:  bss, name: fragments/41/fragment41_bss}
+    - {vram: 0x82F14420, type:  .bss, name: fragments/41/fragment41_287ED0}
+    - {vram: 0x82F144D0, type:  .bss, name: fragments/41/fragment41_289240}
+    - {vram: 0x82F20A10, type:  .bss, name: fragments/41/fragment41_28D1A0}
+    - {vram: 0x82F20A40, type:  .bss, name: fragments/41/fragment41_28ED00}
+    - {vram: 0x82F210E0, type:  .bss, name: fragments/41/fragment41_291D60}
+    - {vram: 0x82F21140, type:  .bss, name: fragments/41/fragment41_2942C0}
 
   - name: fragment41_relocs
     type: code

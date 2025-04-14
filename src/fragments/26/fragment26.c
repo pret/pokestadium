@@ -2293,24 +2293,21 @@ s32 func_8850897C(unk_func_885088F4* arg0) {
     return 0;
 }
 
-#ifdef NON_MATCHING
 s32 func_88508AA8(unk_func_885088F4* arg0, s32 arg1, s32 arg2) {
     static Color_RGBA8 D_8850CF8C = { 0x38, 0x38, 0x68, 0xFF };
 
-    s32 color;
+    u32 color = RGBA5551(D_8850CF8C.r, D_8850CF8C.g, D_8850CF8C.b, 1);
 
     gDPPipeSync(gDisplayListHead++);
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
     gDPSetRenderMode(gDisplayListHead++, G_RM_NOOP, G_RM_NOOP2);
-    color = ((D_8850CF8C.r << 8) & 0xF800) | ((D_8850CF8C.g << 3) & 0x7C0) | ((D_8850CF8C.b >> 2) & 0x3E) | 1;
     gDPSetFillColor(gDisplayListHead++, (color << 0x10) | color);
 
     gDPFillRectangle(gDisplayListHead++, CLAMP_MAX(arg1, 0), CLAMP_MAX(arg2, 0), CLAMP_MAX(arg1 + 0x27F, 0),
                      CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) - 0x16, 0));
 
-    gDPFillRectangle(gDisplayListHead++, CLAMP_MAX((arg0->unk_34 + arg1) - 1, 0),
-                     CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) - 6, 0), CLAMP_MAX(arg1, 0),
-                     CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15, 0));
+    gDPFillRectangle(gDisplayListHead++, CLAMP_MAX(arg1, 0), CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15, 0),
+                     CLAMP_MAX((arg0->unk_34 + arg1) - 1, 0), CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) - 6, 0));
 
     gDPFillRectangle(gDisplayListHead++, CLAMP_MAX((arg1 - arg0->unk_38) + 0x280, 0),
                      CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15, 0), CLAMP_MAX(arg1 + 0x27F, 0),
@@ -2327,76 +2324,38 @@ s32 func_88508AA8(unk_func_885088F4* arg0, s32 arg1, s32 arg2) {
     gDPLoadTextureBlock(gDisplayListHead++, D_4007948, G_IM_FMT_IA, G_IM_SIZ_8b, 8, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(
-        gDisplayListHead++, CLAMP_MAX(arg1 << 2, 0), CLAMP_MAX((((arg0->unk_00.unk_14.unk_02 + arg2) - 5) << 2), 0),
-        CLAMP_MAX(((arg0->unk_34 + arg1) << 2), 0), CLAMP_MAX(((arg0->unk_00.unk_14.unk_02 + arg2) << 2), 0),
-        G_TX_RENDERTILE, ((arg1 << 2) < 0) ? CLAMP_MIN(((s16)arg1 << 0xA) >> 7, 0) : 0,
-        -((((arg0->unk_00.unk_14.unk_02 + arg2) - 5) & 0x20000000)
-              ? CLAMP_MIN((((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 5) << 0xA) >> 7), 0)
-              : 0),
-        0x0400, 0x0400);
+    gSPScisTextureRectangle(gDisplayListHead++, arg1 << 2, ((arg0->unk_00.unk_14.unk_02 + arg2) - 5) << 2,
+                            (arg0->unk_34 + arg1) << 2, (arg0->unk_00.unk_14.unk_02 + arg2) << 2, G_TX_RENDERTILE, 0, 0,
+                            0x400, 0x400);
 
-    gSPTextureRectangle(gDisplayListHead++, CLAMP_MAX(((arg1 - arg0->unk_38) + 0x280) << 2, 0),
-                        CLAMP_MAX(((arg0->unk_00.unk_14.unk_02 + arg2) - 5) << 2, 0), CLAMP_MAX((arg1 + 0x280) << 2, 0),
-                        CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) << 2, 0), G_TX_RENDERTILE,
-                        ((((arg1 - arg0->unk_38) + 0x280) << 2) < 0)
-                            ? CLAMP_MIN(((s16)((arg1 - arg0->unk_38) + 0x280) << 0xA) >> 7, 0)
-                            : 0,
-                        -((((arg0->unk_00.unk_14.unk_02 + arg2) - 5) & 0x20000000)
-                              ? CLAMP_MIN(((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 5) << 0xA) >> 7, 0)
-                              : 0),
-                        0x0400, 0x0400);
+    gSPScisTextureRectangle(gDisplayListHead++, ((arg1 - arg0->unk_38) + 0x280) << 2,
+                            ((arg0->unk_00.unk_14.unk_02 + arg2) - 5) << 2, (arg1 + 0x280) << 2,
+                            (arg0->unk_00.unk_14.unk_02 + arg2) << 2, G_TX_RENDERTILE, 0, 0, 0x400, 0x400);
 
-    gSPTextureRectangle(
-        gDisplayListHead++, CLAMP_MAX((arg0->unk_34 + arg1 + 0x10) << 2, 0),
-        CLAMP_MAX(((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 2, 0),
-        CLAMP_MAX(((arg1 - arg0->unk_38) + 0x270) << 2, 0),
-        CLAMP_MAX(((arg0->unk_00.unk_14.unk_02 + arg2) - 0x10) << 2, 0), G_TX_RENDERTILE,
-        (((arg0->unk_34 + arg1 + 0x10) << 2) < 0) ? CLAMP_MIN(((s16)(arg0->unk_34 + arg1 + 0x10) << 0xA) >> 7, 0) : 0,
-        -((((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) & 0x20000000)
-              ? CLAMP_MIN(((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 0xA) >> 7, 0)
-              : 0),
-        0x0400, 0x0400);
+    gSPScisTextureRectangle(gDisplayListHead++, (arg0->unk_34 + arg1 + 0x10) << 2,
+                            ((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 2, ((arg1 - arg0->unk_38) + 0x270) << 2,
+                            ((arg0->unk_00.unk_14.unk_02 + arg2) - 0x10) << 2, G_TX_RENDERTILE, 0, 0, 0x400, 0x400);
 
     gDPPipeSync(gDisplayListHead++);
     gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-    gDPSetCombineLERP(gDisplayListHead++, TEXEL0, COMBINED, PRIMITIVE, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, SHADE, 0, 0,
-                      0, 0);
+    gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
 
     gDPLoadTextureBlock(gDisplayListHead++, D_4007978, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 21, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(gDisplayListHead++, CLAMP_MAX((arg0->unk_34 + arg1) << 2, 0),
-                        CLAMP_MAX(((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 2, 0),
-                        CLAMP_MAX(((arg1 - arg0->unk_38) + 0x270) << 2, 0),
-                        CLAMP_MAX((arg0->unk_00.unk_14.unk_02 + arg2) << 2, 0), G_TX_RENDERTILE,
-                        (((arg0->unk_34 + arg1) << 2) < 0) ? CLAMP_MIN(((s16)(arg0->unk_34 + arg1) << 0xA) >> 7, 0) : 0,
-                        -(((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) & 0x20000000)
-                              ? CLAMP_MIN(((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 0xA) >> 7, 0)
-                              : 0),
-                        0x0400, 0x0400);
+    gSPScisTextureRectangle(gDisplayListHead++, (arg0->unk_34 + arg1) << 2,
+                            ((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 2, ((arg1 - arg0->unk_38) + 0x270) << 2,
+                            (arg0->unk_00.unk_14.unk_02 + arg2) << 2, G_TX_RENDERTILE, 0, 0, 0x400, 0x400);
 
     gDPLoadTextureBlock(gDisplayListHead++, D_4007978, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 21, 0, G_TX_MIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 4, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(gDisplayListHead++, CLAMP_MAX((s16)(((arg1 - arg0->unk_38) + 0x270) << 2), 0),
-                        CLAMP_MAX((s16)(((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 2), 0),
-                        CLAMP_MAX((s16)(((arg1 - arg0->unk_38) + 0x280) << 2), 0),
-                        CLAMP_MAX((s16)((arg0->unk_00.unk_14.unk_02 + arg2) << 2), 0), G_TX_RENDERTILE,
-                        0x200 - ((s16)(((arg1 - arg0->unk_38) + 0x270) << 2) < 0
-                                     ? CLAMP_MIN(((s16)(((arg1 - arg0->unk_38) + 0x270) << 2) << 0xA) >> 7, 0)
-                                     : 0),
-                        -(((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) & 0x20000000)
-                              ? CLAMP_MIN(((s16)((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 0xA) >> 7, 0)
-                              : 0),
-                        0x0400, 0x0400);
+    gSPScisTextureRectangle(gDisplayListHead++, ((arg1 - arg0->unk_38) + 0x270) << 2,
+                            ((arg0->unk_00.unk_14.unk_02 + arg2) - 0x15) << 2, ((arg1 - arg0->unk_38) + 0x280) << 2,
+                            (arg0->unk_00.unk_14.unk_02 + arg2) << 2, G_TX_RENDERTILE, 0x200, 0, 0x400, 0x400);
 
     return 0;
 }
-#else
-static Color_RGBA8 D_8850CF8C = { 0x38, 0x38, 0x68, 0xFF };
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/26/fragment26/func_88508AA8.s")
-#endif
 
 void func_88509A2C(unk_func_88509A2C* arg0, s32 arg1, s32 arg2, s32 arg3, char* arg4) {
     func_885007CC(&arg0->unk_00, sizeof(unk_func_88509A2C));
