@@ -259,7 +259,7 @@ void func_8001B058(void) {
     D_800ABE10.unk_A04.unk_10 = func_800044F4(0x820000, NULL, 1, 1);
 }
 
-void func_8001B088(unk_func_88201DA0_034_008* arg0, s32 arg1) {
+void func_8001B088(u16* arg0, s32 arg1) {
     BinArchive* temp_v1;
     u8* temp_a1;
 
@@ -270,7 +270,7 @@ void func_8001B088(unk_func_88201DA0_034_008* arg0, s32 arg1) {
     }
 }
 
-void func_8001B0DC(unk_func_88201DA0_034_008* arg0, s32 arg1, unk_func_80026268_arg0* arg2) {
+void func_8001B0DC(u16* arg0, s32 arg1, unk_func_80026268_arg0* arg2) {
     arg1_func_80010CA8 sp1C;
 
     if (arg2 == 0) {

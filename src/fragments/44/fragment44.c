@@ -255,7 +255,7 @@ void func_83500758(s32 arg0, s32 arg1) {
     s32 tmp3 = 64;
 
     for (i = 0; i < new_var; i += tmp) {
-        temp_v0 = CLAMP_MAX(tmp, new_var - i);
+        temp_v0 = CLAMP_MIN(new_var - i, tmp);
 
         gDPLoadTextureTile(gDisplayListHead++, D_04001000 + ((i << 6) << 1), G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 64, tmp2,
                            tmp2, 64, temp_v0 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP,
@@ -687,7 +687,7 @@ void func_835024FC(void) {
 
     idx = 0;
     for (i = 0; i < end; i += 0x40, idx++) {
-        temp_v0_11 = CLAMP_MAX(0x40, end - i);
+        temp_v0_11 = CLAMP_MIN(end - i, 0x40);
 
         if (D_83504088 & (1 << idx)) {
             r = (((D_83503EA0.r - D_83503E98.r) * idx) / 8) + D_83503E98.r;
@@ -839,7 +839,7 @@ void func_835028D0(s32 arg0, s32 arg1, s32 arg2) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < end; i += var_s2) {
-        s32 temp_v0_11 = CLAMP_MAX(var_s2, end - i);
+        s32 temp_v0_11 = CLAMP_MIN(end - i, var_s2);
 
         gDPLoadTextureTile(gDisplayListHead++, &spF0[i * var_ra], G_IM_FMT_IA, G_IM_SIZ_8b, var_ra, 0, 0, 0, var_ra,
                            temp_v0_11 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
@@ -856,7 +856,7 @@ void func_835028D0(s32 arg0, s32 arg1, s32 arg2) {
         var_ra = 0x64;
         end = 0x37;
         for (i = 0; i < end; i += var_s2) {
-            s32 temp_v0_11 = CLAMP_MAX(var_s2, end - i);
+            s32 temp_v0_11 = CLAMP_MIN(end - i, var_s2);
 
             gDPLoadTextureTile(gDisplayListHead++, &spEC[i * var_ra], G_IM_FMT_IA, G_IM_SIZ_8b, var_ra, 0, 0, 0, var_ra,
                                temp_v0_11 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
@@ -875,7 +875,7 @@ void func_835028D0(s32 arg0, s32 arg1, s32 arg2) {
         var_s2 = 0x14;
         end = 0x3C;
         for (i = 0; i < end; i += var_s2) {
-            s32 temp_v0_11 = CLAMP_MAX(var_s2, end - i);
+            s32 temp_v0_11 = CLAMP_MIN(end - i, var_s2);
 
             gDPLoadTextureTile(gDisplayListHead++, &spE8[i * var_ra], G_IM_FMT_RGBA, G_IM_SIZ_16b, var_ra, 0, 0, 0,
                                var_ra, temp_v0_11 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP,
@@ -912,7 +912,7 @@ void func_83502F78(int arg0, int arg1, s32 arg2, f32 arg3) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < spF8; i += iter) {
-        s32 temp_v0_2 = CLAMP_MAX(iter, spF8 - i);
+        s32 temp_v0_2 = CLAMP_MIN(spF8 - i, iter);
         s32 temp_fv1_2 = ROUND_MAX((temp_v0_2 * arg3) + 0.4f);
         s32 temp_fa0 = ROUND_MAX((i * arg3) + 0.4f);
 

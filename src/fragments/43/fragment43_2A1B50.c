@@ -389,7 +389,7 @@ void func_8340144C(u16* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) 
     s32 i;
 
     for (i = 0; i < arg4; i += tmp) {
-        temp_v0 = CLAMP_MAX(tmp, arg4 - i);
+        temp_v0 = CLAMP_MIN(arg4 - i, tmp);
 
         gDPLoadTextureTile(gDisplayListHead++, &arg0[i * arg3], G_IM_FMT_RGBA, G_IM_SIZ_16b, arg3, 0, 0, 0, arg3,
                            temp_v0 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
@@ -438,7 +438,7 @@ void func_834018C0(u16* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, 
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
 
     for (i = 0; i < arg4; i += arg5) {
-        temp_v0 = CLAMP_MAX(arg5, arg4 - i);
+        temp_v0 = CLAMP_MIN(arg4 - i, arg5);
 
         gDPLoadTextureTile(gDisplayListHead++, &arg0[i * arg3], G_IM_FMT_RGBA, G_IM_SIZ_16b, arg3, 0, 0, 0, arg3 - 1,
                            temp_v0 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,

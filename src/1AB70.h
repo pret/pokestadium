@@ -6,10 +6,6 @@
 #include "F420.h"
 #include "29BA0.h"
 
-typedef struct unk_func_88201DA0_034_008 {
-    /* 0x00 */ char unk00[0x4];
-} unk_func_88201DA0_034_008; // size >= 0x4
-
 typedef struct unk_func_8001B1FC {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u16 unk_02;
@@ -66,7 +62,7 @@ void func_8001A324(unk_func_8001A024*, s32, s32, u16);
 s32 func_8001ABAC(unk_func_8001A024*, s32);
 void* func_8001AFD8(unk_func_8001A024*, s32);
 void func_8001B058(void);
-void func_8001B0DC(unk_func_88201DA0_034_008*, s32, unk_func_80026268_arg0*);
+void func_8001B0DC(u16*, s32, unk_func_80026268_arg0*);
 unk_func_8001B1FC* func_8001B1FC(unk_D_86002F58_004_000_010*, s16, s16, s16, s16, s16, s16, u8*);
 void func_8001B2D8(unk_func_8001B1FC* arg0, unk_func_80026268_arg0* arg1, u16 arg2);
 void func_8001B480(unk_func_8001B1FC*, s32, u16);

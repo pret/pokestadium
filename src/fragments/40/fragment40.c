@@ -481,22 +481,10 @@ void func_831010E0(unk_D_83101F00* arg0, s16 arg1) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_831011D4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
-    gSPTextureRectangle(gDisplayListHead++, CLAMP_MIN(0, (s16)(arg0 << 2)), CLAMP_MIN(0, (s16)(arg1 << 2)),
-                        CLAMP_MIN(0, (s16)(((arg0 + arg2) - 1) << 2)), CLAMP_MIN(0, (s16)(((arg1 + arg3) - 1) << 2)),
-                        G_TX_RENDERTILE,
-                        arg4 - ((arg0 << 2) < 0 ? arg6 < 0 ? CLAMP_MIN(0, ((arg0 << 2) * arg6) >> 7)
-                                                           : CLAMP_MAX(0, ((arg0 << 2) * arg6) >> 7)
-                                                : 0),
-                        arg5 - ((arg1 << 0x2) < 0 ? arg7 < 0 ? CLAMP_MIN(0, ((arg1 << 2) * arg7) >> 7)
-                                                             : CLAMP_MAX(0, ((arg1 << 2) * arg7) >> 7)
-                                                  : 0),
-                        arg6, arg7);
+    gSPScisTextureRectangle(gDisplayListHead++, arg0 << 2, arg1 << 2, ((arg0 + arg2) - 1) << 2,
+                            ((arg1 + arg3) - 1) << 2, 0, arg4, arg5, arg6, arg7);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/40/fragment40/func_831011D4.s")
-#endif
 
 void func_831013FC(void) {
     f32 v = 1.8f;
