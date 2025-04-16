@@ -1818,10 +1818,10 @@
     subsegments:
     - [0x2B3F70, textbin,   fragments/48/fragment48_header]
     - [0x2B3F90, c,      fragments/48/fragment48]
-    - [0x2B45A0, data,   fragments/48/fragment48_data]
-    - [0x2B45C0, rodata, fragments/48/fragment48_rodata]
+    - [0x2B45A0, .data,   fragments/48/fragment48]
+    - [0x2B45C0, .rodata, fragments/48/fragment48]
 
-    - {vram: 0x839006B0, type:  bss, name: fragments/48/fragment48_bss}
+    - {vram: 0x839006B0, type:  .bss, name: fragments/48/fragment48}
 
   - name: fragment48_relocs
     type: code
