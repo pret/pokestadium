@@ -41,6 +41,7 @@ unk_func_80022C28_ret* func_80022C28(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 unk_func_80022C28_ret* func_80022CC0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, char* arg4, u16 arg5);
 s32 func_80022D24(unk_func_80022C28_ret* arg0);
 s32 func_80022D8C(unk_func_80022C28_ret* arg0);
+s32 func_80022DF4(unk_func_80022C28_ret*, u8);
 s32 func_80022E18(u8* arg0, s32 arg1, unk_func_80022C28_ret* arg2);
 s32 func_80022F24(u8* arg0, s32 arg1, unk_func_80022C28_ret* arg2);
 void func_80023068(void);

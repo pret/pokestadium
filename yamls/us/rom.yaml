@@ -1788,12 +1788,18 @@
     - [0x2AD910, c,      fragments/47/fragment47_2AD910]
     - [0x2AE1F0, c,      fragments/47/fragment47_2AE1F0]
     - [0x2AFDB0, c,      fragments/47/fragment47_2AFDB0]
-    - [0x2B25A0, data,   fragments/47/fragment47_data]
-    - [0x2B2E50, rodata, fragments/47/fragment47_rodata_2B2E50]
-    - [0x2B2E90, rodata, fragments/47/fragment47_rodata_2B2E90]
-    - [0x2B2F10, rodata, fragments/47/fragment47_rodata_2B2F10]
 
-    - {vram: 0x83805650, type:  bss, name: fragments/47/fragment47_bss}
+    - [0x2B25A0, .data,   fragments/47/fragment47_2AD910]
+    - [0x2B25B0, .data,   fragments/47/fragment47_2AE1F0]
+    - [0x2B2E30, .data,   fragments/47/fragment47_2AFDB0]
+
+    - [0x2B2E50, .rodata, fragments/47/fragment47_2AD910]
+    - [0x2B2E90, .rodata, fragments/47/fragment47_2AE1F0]
+    - [0x2B2F10, .rodata, fragments/47/fragment47_2AFDB0]
+
+    - {vram: 0x83805650, type:  .bss, name: fragments/47/fragment47_2AD910}
+    - {vram: 0x83805670, type:  .bss, name: fragments/47/fragment47_2AE1F0}
+    - {vram: 0x838067F0, type:  .bss, name: fragments/47/fragment47_2AFDB0}
 
   - name: fragment47_relocs
     type: code
