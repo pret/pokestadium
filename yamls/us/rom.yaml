@@ -1860,10 +1860,10 @@
     subsegments:
     - [0x2B5350, textbin,   fragments/50/fragment50_header]
     - [0x2B5370, c,      fragments/50/fragment50]
-    - [0x2B91D0, data,   fragments/50/fragment50_data]
-    - [0x2BC690, rodata, fragments/50/fragment50_rodata]
+    - [0x2B91D0, .data,   fragments/50/fragment50]
+    - [0x2BC690, .rodata, fragments/50/fragment50]
 
-    - {vram: 0x82607410, type:  bss, name: fragments/50/fragment50_bss}
+    - {vram: 0x82607410, type:  .bss, name: fragments/50/fragment50}
 
   - name: fragment50_relocs
     type: code

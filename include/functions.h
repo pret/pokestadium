@@ -3,8 +3,6 @@
 
 #include "ultra64.h"
 
-f32 __sinf(f32);
-
 void func_80057FD0(void *, int);
 s32 func_8005A990(OSPiHandle *);
 
@@ -41,5 +39,8 @@ long long __ll_mod(long long a0, long long a1);
 long long __ll_rshift(long long a0, long long a1);
 
 f32 abs_asm(f32);
+
+f32 __cosf(f32);
+f32 __sinf(f32);
 
 #endif

@@ -158,7 +158,7 @@ unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* ar
     return arg0;
 }
 
-void func_8001C014(s32* arg0, unk_func_8001C014* arg1, u16 arg2) {
+void func_8001C014(unk_D_86002F58_004_000_010_02C* arg0, unk_func_8001C014* arg1, u16 arg2) {
     unk_func_80026268_arg0 stack;
 
     stack.unk_00.unk_00 = arg2;

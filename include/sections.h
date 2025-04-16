@@ -526,6 +526,8 @@ extern u8 gb_pak_select_ui_ROM_START[];            // 6B4F00
 extern u8 gb_pak_select_ui_ROM_END[];              // 6B4F00
 extern u8 run_rattata_run_flag_gfx_ROM_START[];
 extern u8 run_rattata_run_flag_gfx_ROM_END[];
+extern u8 victory_palace_plate_text_ROM_START[];
+extern u8 victory_palace_plate_text_ROM_END[];
 extern u8 kanto_gb_map_ROM_START[];
 extern u8 kanto_gb_map_ROM_END[];
 extern u8 battle_ui_ROM_START[];
