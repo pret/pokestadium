@@ -1882,8 +1882,6 @@
     - [0x2BD0A0, textbin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
     - [0x2BD0C0, c,      fragments/51/fragment51]
 
-    - {vram: 0x82800080, type:  bss, name: fragments/51/fragment51_bss}
-
   - name: fragment51_relocs
     type: code
     bss_size: 0x0
