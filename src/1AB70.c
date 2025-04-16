@@ -273,7 +273,7 @@ void func_8001B088(u16* arg0, s32 arg1) {
 void func_8001B0DC(u16* arg0, s32 arg1, unk_func_80026268_arg0* arg2) {
     arg1_func_80010CA8 sp1C;
 
-    if (arg2 == 0) {
+    if (arg2 == NULL) {
         func_8001B088(arg0, arg1);
         return;
     }

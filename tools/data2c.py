@@ -103,8 +103,6 @@ def calc_struct_sizes():
 
                 exit()
             else:
-                print()
-                print()
                 print(f"What type? {member['type']}")
                 exit()
 
@@ -158,12 +156,10 @@ def parse_struct(filename, fd, i):
         i += 1
 
     end_line = i
-    if "sndp" in str(filename):
-        testMe = True
 
-    #if testMe:
-    #    print(start_line, end_line, indent, fd[start_line:end_line])
-    #    exit()
+    if testMe:
+        print(start_line, end_line, indent, fd[start_line:end_line])
+        #exit()
 
     pre_struct_name = fd[start_line]
     pre_struct_name = pre_struct_name.replace("struct","")
@@ -185,12 +181,12 @@ def parse_struct(filename, fd, i):
     #if "LEOCmd" in struct_name:
     #    testMe = True
 
-    #if testMe:
-    #    print()
-    #    print(struct_name)
-    #    print(start_line, end_line, indent)
-    #    print(fd[start_line:end_line])
-    #    #exit()
+    if testMe:
+        print()
+        print(struct_name)
+        print(start_line, end_line, indent)
+        print(fd[start_line:end_line])
+        #exit()
 
     if struct_name and struct_name in STRUCTS:
         return i, True, "", []
@@ -214,9 +210,9 @@ def parse_struct(filename, fd, i):
         if not data_member.strip():
             continue
 
-        #if testMe:
-        #    print(f"bbbb {j}")
-        #    print(data_member)
+        if testMe:
+            print(f"bbbb {j}")
+            print(f"data_member: \"{data_member}\"")
 
         if " : " in data_member:
             skipMe = True
@@ -226,6 +222,7 @@ def parse_struct(filename, fd, i):
             continue
 
         elif (data_member.strip().startswith("union") or data_member.strip().startswith("struct")) and ";" not in data_member:
+            #print(f"UNION! {data_member}")
             is_union = "union" in data_member
             start = j
 
@@ -236,8 +233,8 @@ def parse_struct(filename, fd, i):
             #while "{" not in fd[j]:
             #    j += 1
 
-            #if testMe:
-            #print(f"RECURSE {str(filename)} j {j} -- {fd[start-1]}")
+            if testMe:
+                print(f"RECURSE {str(filename)} j {j} -- {fd[start-1]}")
             j, skipMe, name, data = parse_struct("", fd, start - 1)
             j += 1
 
@@ -252,11 +249,13 @@ def parse_struct(filename, fd, i):
             STRUCTS[name]["data"] = data
             STRUCTS[name]["union"] = is_union
 
-            #if testMe:
-            #print(f"DONE RECURSE {str(filename)} j {j}")
-            #print(STRUCTS[name])
-            #exit()
             struct_data.append({"name":name, "type":name, "counts":[], "size":0, "round":0, "offset":0})
+            if testMe:
+                print(f"DONE RECURSE {str(filename)} j {j}")
+                print(f"name \"{name}\" -- data \"{STRUCTS[name]}\"")
+                print(f"appending data {struct_data[-1]}")
+                #exit()
+
             continue;
 
         elif ";" not in data_member and "/" in data_member:
@@ -284,10 +283,8 @@ def parse_struct(filename, fd, i):
 
             data_member = "".join(data_members)
 
-        #if testMe:
-        #    print()
-        #    print()
-        #    print(data_members)
+        if testMe:
+            print(f"final data member line \"{data_member}\"")
 
         #print(data_members)
         data_member = data_member.rsplit(";",1)[0]
@@ -298,6 +295,11 @@ def parse_struct(filename, fd, i):
             data_member = data_member.split("*/",1)[1]
 
         type, name = data_member.rsplit(" ",1)
+        if "{" in name or "}" in name:
+            continue;
+
+        if testMe:
+            print(f"parsed type \"{type}\", name \"{name}\"")
 
         type = type.strip()
         if "," in type:
@@ -347,7 +349,8 @@ def parse_struct(filename, fd, i):
             type = type.strip()
             name = name.strip()
 
-            #print(f"name:\"{name}\", type:\"{type}\"")
+            if testMe:
+                print(f"Appending new data member, name:\"{name}\", type:\"{type}\"")
 
             struct_data.append({"name":name, "type":type, "counts":counts, "size":0, "round":0, "offset":0})
 
@@ -410,6 +413,10 @@ def parse_structs():
                     STRUCTS[name] = {}
                     STRUCTS[name]["data"] = data
                     STRUCTS[name]["union"] = False
+
+                #if "unk_D_83407B00" in name:
+                #    print(STRUCTS[name])
+                #    exit()
 
             elif fd[i].startswith("typedef union"):
                 i, skipMe, name, data = parse_struct(file_name, fd, i)
@@ -650,6 +657,10 @@ def dump_data(offset, struct, counts):
 #######################################################################
 
 parse_structs()
+#for s in STRUCTS:
+#    if "unk_D_83407B00" in s:
+#        print(s)
+#exit()
 calc_struct_sizes()
 #print(f"{len(STRUCTS)} structs parsed in")
 
