@@ -23,9 +23,18 @@ typedef struct func_800253F4_arg1 {
     /* 0x00F */ unk_D_800AC910_050_9AC unk_00F;
 } func_800253F4_arg1; // size >= 0x1A3
 
+typedef struct unk_func_800228F0 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u16 unk_02;
+    /* 0x04 */ char unk_04[16];
+    /* 0x14 */ char unk_14[16];
+} unk_func_800228F0; // size >= 0x28
+
 u16 func_800226C0(s32 arg0, u32 arg1);
 void func_80022734(unk_func_80026268_arg0* arg0);
 void func_800228B0(unk_func_80026268_arg0* arg0);
+s32 func_800228F0(unk_func_800228F0*, u16);
 void func_80022978(unk_func_80026268_arg0* arg0, s16 arg1, u8 arg2);
 s32 func_80022A04(u16* arg0, unk_D_800AC910_040* arg1);
 u8 func_80022A28(s32 arg0);

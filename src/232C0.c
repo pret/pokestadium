@@ -408,7 +408,7 @@ s8 func_80023324(s32 arg0) {
     RomHeader sp28;
     s8 var_s0 = POKEMON_ROM_NONE;
 
-    if ((func_8000B1C4(arg0, &sp28, 0x120, 0x60) == 0) && (sp28.country_code == 1)) {
+    if ((func_8000B1C4(arg0, &sp28, 0x120, sizeof(RomHeader)) == 0) && (sp28.country_code == 1)) {
         sp28.game_title[7] = '\x0';
         sp28.game_title[16] = '\x0';
 

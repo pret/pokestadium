@@ -506,6 +506,7 @@ extern u8 D_200A300[];
 extern u8 D_200A780[];
 extern u8 D_2000980[];
 extern u8 D_2000A60[];
+extern u8 D_3008200[];
 
 extern LEODiskID D_800818E0;
 
@@ -523,6 +524,8 @@ extern u8 D_86800000;
 extern u8 D_86C00000;
 extern u8 D_87A00000;
 extern u8 D_87000000[];
+
+extern u8 D_800AF770[];
 
 typedef struct unk_D_800A7440 {
 	/* 0x00 */ s16 x1;
