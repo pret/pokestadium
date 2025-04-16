@@ -1839,9 +1839,9 @@
     subsegments:
     - [0x2B46F0, textbin,   fragments/49/fragment49_header]
     - [0x2B4710, c,      fragments/49/fragment49]
-    - [0x2B5240, data,   fragments/49/fragment49_data]
+    - [0x2B5240, .data,   fragments/49/fragment49]
 
-    - {vram: 0x83A00B70, type:  bss, name: fragments/49/fragment49_bss}
+    - {vram: 0x83A00B70, type:  .bss, name: fragments/49/fragment49}
 
   - name: fragment49_relocs
     type: code
