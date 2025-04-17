@@ -532,7 +532,7 @@ void func_8002A728(void) {
         func_80001BD4(2);
         func_8000D358();
 
-        sp2C.unk_04 = main_pool_alloc(0x4B00, 0);
+        sp2C.unk_04 = main_pool_alloc(sizeof(*sp2C.unk_04), 0);
 
         FRAGMENT_LOAD_AND_CALL(fragment53, D_80075674, &sp2C);
         func_8000D738(&sp2C);
