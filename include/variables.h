@@ -507,6 +507,8 @@ extern u8 D_200A780[];
 extern u8 D_2000980[];
 extern u8 D_2000A60[];
 extern u8 D_3008200[];
+extern u8 D_4000C40[];
+extern u8 D_4000DD0[];
 
 extern LEODiskID D_800818E0;
 
@@ -640,5 +642,7 @@ typedef struct unk_D_80072338 {
     /* 0x02 */ char unk02[0xA];
 } unk_D_80072338; // size = 0xC
 extern unk_D_80072338 D_80072338[];
+
+extern char D_8006FEE8[][0x1C];
 
 #endif
