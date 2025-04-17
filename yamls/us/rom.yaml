@@ -1939,9 +1939,9 @@
     subsegments:
     - [0x2BDAC0, textbin,  fragments/54/fragment54_header]
     - [0x2BDAE0, c,    fragments/54/fragment54]
-    - [0x2BEBE0, data, fragments/54/fragment54_data]
+    - [0x2BEBE0, .data, fragments/54/fragment54]
 
-    - {vram: 0x82B01140, type:  bss, name: fragments/54/fragment54_bss}
+    - {vram: 0x82B01140, type:  .bss, name: fragments/54/fragment54}
 
   - name: fragment54_relocs
     type: code
