@@ -1989,7 +1989,7 @@
     - [0x2C3220, textbin, fragments/56/fragment56_header]
     - [0x2C3240, c,    fragments/56/fragment56]
 
-    - {vram: 0x82C01660, type:  bss, name: fragments/56/fragment56_bss}
+    - {vram: 0x82C01660, type:  .bss, name: fragments/56/fragment56}
 
   - name: fragment56_relocs
     type: code
