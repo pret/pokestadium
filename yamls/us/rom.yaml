@@ -1879,7 +1879,7 @@
     start: 0x2BD0A0
     vram: 0x82800000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82800000.
     subsegments:
-    - [0x2BD0A0, textbin,    fragments/51/fragment51_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BD0A0, textbin,    fragments/51/fragment51_header]
     - [0x2BD0C0, c,      fragments/51/fragment51]
 
   - name: fragment51_relocs
@@ -1894,13 +1894,13 @@
     type: code
     bss_size: 0x180
     start: 0x2BD130
-    vram: 0x82900000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82900000.
+    vram: 0x82800000 # unknown vram due to being unused, but based on the patterns before hand, this is probably 82900000.
     subsegments:
-    - [0x2BD130, textbin,  fragments/52/fragment52_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BD130, textbin,  fragments/52/fragment52_header]
     - [0x2BD150, c,    fragments/52/fragment52]
-    - [0x2BD600, data, fragments/52/fragment52_data]
+    - [0x2BD600, .data, fragments/52/fragment52]
 
-    - {vram: 0x82900530, type:  bss, name: fragments/52/fragment52_bss}
+    - {vram: 0x82800530, type:  .bss, name: fragments/52/fragment52}
 
   - name: fragment52_relocs
     type: code
@@ -1937,7 +1937,7 @@
     start: 0x2BDAC0
     vram: 0x82B00000
     subsegments:
-    - [0x2BDAC0, textbin,  fragments/54/fragment54_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x2BDAC0, textbin,  fragments/54/fragment54_header]
     - [0x2BDAE0, c,    fragments/54/fragment54]
     - [0x2BEBE0, data, fragments/54/fragment54_data]
 
@@ -2497,7 +2497,7 @@
     start: 0x3B9620
     vram: 0x8FC00000 # unknown vram. Another unused one? Might be 8FC00000?
     subsegments:
-    - [0x3B9620, textbin,  fragments/77/fragment77_header] # need to leave it as a bin. Splat thinks there's a pointer
+    - [0x3B9620, textbin,  fragments/77/fragment77_header]
     - [0x3B9640, c,    fragments/77/fragment77]
 
     - {vram: 0x8FC00080, type:  bss, name: fragments/77/fragment77_bss}
