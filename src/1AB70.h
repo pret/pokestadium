@@ -59,6 +59,7 @@ typedef struct unk_func_8001A024 {
 
 unk_func_8001A024* func_8001A024(unk_D_86002F58_004_000_010*, s16, s16, s16);
 void func_8001A324(unk_func_8001A024*, s32, s32, u16);
+void func_8001A46C(unk_func_8001A024*, s32, unk_func_80026268_arg0*, s32);
 s32 func_8001ABAC(unk_func_8001A024*, s32);
 void* func_8001AFD8(unk_func_8001A024*, s32);
 void func_8001B058(void);

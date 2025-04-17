@@ -1918,9 +1918,9 @@
     subsegments:
     - [0x2BD6E0, textbin, fragments/53/fragment53_header]
     - [0x2BD700, c,    fragments/53/fragment53]
-    - [0x2BDA40, data, fragments/53/fragment53_data]
+    - [0x2BDA40, .data, fragments/53/fragment53]
 
-    - {vram: 0x82A00370, type:  bss, name: fragments/53/fragment53_bss}
+    - {vram: 0x82A00370, type:  .bss, name: fragments/53/fragment53}
 
   - name: fragment53_relocs
     type: code

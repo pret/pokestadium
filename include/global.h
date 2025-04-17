@@ -459,7 +459,9 @@ typedef struct unk_D_86002F30 {
 
 typedef struct UnkInputStruct8000D738 {
     /* 0x00 */ s16 unk_00;
-    /* 0x00 */ s32 unk_04;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ u16 (*unk_04)[6][0x640];
 } UnkInputStruct8000D738; // size = 0x8
 
 typedef struct UnkStruct800AA660 {
