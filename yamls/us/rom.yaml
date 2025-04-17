@@ -1962,10 +1962,14 @@
     - [0x2BED40, c,      fragments/55/fragment55_2BED40]
     - [0x2C0F90, c,      fragments/55/fragment55_2C0F90]
     - [0x2C13F0, c,      fragments/55/fragment55_2C13F0]
-    - [0x2C26E0, data,   fragments/55/fragment55_data]
-    - [0x2C28A0, rodata, fragments/55/fragment55_rodata]
+    - [0x2C26E0, .data,   fragments/55/fragment55_2BED40]
+    - [0x2C2890, .data,   fragments/55/fragment55_2C13F0]
+    - [0x2C28A0, .rodata, fragments/55/fragment55_2BED40]
+    - [0x2C2970, .rodata, fragments/55/fragment55_2C13F0]
 
-    - {vram: 0x83003C80, type:  bss, name: fragments/55/fragment55_bss}
+    - {vram: 0x83003C80, type:  .bss, name: fragments/55/fragment55_2BED40}
+    - {vram: 0x83003EE0, type:  .bss, name: fragments/55/fragment55_2C0F90}
+    - {vram: 0x83003EF0, type:  .bss, name: fragments/55/fragment55_2C13F0}
 
   - name: fragment55_relocs
     type: code

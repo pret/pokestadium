@@ -91,8 +91,6 @@ char* func_80021C80(char* arg0, char* arg1) {
 }
 
 char* func_80021CA4(char* arg0, s32 arg1) {
-    extern char D_8006FEE8[][0x1C];
-
     func_80021C80(arg0, (char*)*(u32*)D_8006FEE8[arg1]);
     return arg0;
 }
