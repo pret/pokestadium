@@ -2030,10 +2030,10 @@
     subsegments:
     - [0x2CF350, textbin,   fragments/58/fragment58_header]
     - [0x2CF370, c,      fragments/58/fragment58]
-    - [0x2D1F30, data,   fragments/58/fragment58_data]
-    - [0x2D2000, rodata, fragments/58/fragment58_rodata]
+    - [0x2D1F30, .data,   fragments/58/fragment58]
+    - [0x2D2000, .rodata, fragments/58/fragment58]
 
-    - {vram: 0x84002D00, type:  bss, name: fragments/58/fragment58_bss}
+    - {vram: 0x84002D00, type:  .bss, name: fragments/58/fragment58}
 
   - name: fragment58_relocs
     type: code
