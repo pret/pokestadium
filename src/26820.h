@@ -14,7 +14,8 @@ typedef struct unk_func_80027FA0 {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk02[0x2];
     /* 0x04 */ u8 unk_04;
-    /* 0x05 */ char unk05[0x2];
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
 } unk_func_80027FA0; // size = 0x8
 

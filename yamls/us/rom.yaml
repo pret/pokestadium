@@ -2052,10 +2052,10 @@
     subsegments:
     - [0x2D24C0, textbin,   fragments/59/fragment59_header]
     - [0x2D24E0, c,      fragments/59/fragment59]
-    - [0x2D48F0, data,   fragments/59/fragment59_data]
-    - [0x2D58F0, rodata, fragments/59/fragment59_rodata]
+    - [0x2D48F0, .data,   fragments/59/fragment59]
+    - [0x2D58F0, .rodata, fragments/59/fragment59]
 
-    - {vram: 0x84103440, type:  bss, name: fragments/59/fragment59_bss}
+    - {vram: 0x84103440, type:  .bss, name: fragments/59/fragment59}
 
   - name: fragment59_relocs
     type: code
