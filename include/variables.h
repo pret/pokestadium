@@ -555,6 +555,10 @@ extern u8 D_300E820[];
 extern u8 D_300ED30[];
 extern u8 D_300F580[];
 extern u8 D_3022AA0[];
+extern u8 D_200B3E0[];
+extern u8 D_200C380[];
+extern u8 D_200D320[];
+extern u8 D_3008880[];
 
 extern LEODiskID D_800818E0;
 

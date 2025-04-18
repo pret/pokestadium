@@ -112,7 +112,7 @@ unk_D_800AE540_0004* func_8002B700(s32 arg0, s16 arg1, char* arg2, char* arg3) {
     return sp1C;
 }
 
-void func_8002B840(s32 arg0, s32 arg1) {
+void func_8002B840(s32 arg0, unk_D_800AE540_0004* arg1) {
     unk_D_800AE540_1194* temp_v0 = &D_800AE540.unk_1194[arg0];
     u8 idx = temp_v0->unk_01;
 
