@@ -2008,10 +2008,10 @@
     subsegments:
     - [0x2C49D0, textbin,   fragments/57/fragment57_header]
     - [0x2C49F0, c,      fragments/57/fragment57]
-    - [0x2CB970, data,   fragments/57/fragment57_data]
-    - [0x2CE950, rodata, fragments/57/fragment57_rodata]
+    - [0x2CB970, .data,   fragments/57/fragment57]
+    - [0x2CE950, .rodata, fragments/57/fragment57]
 
-    - {vram: 0x82D09FF0, type:  bss, name: fragments/57/fragment57_bss}
+    - {vram: 0x82D09FF0, type:  .bss, name: fragments/57/fragment57}
 
   - name: fragment57_relocs
     type: code

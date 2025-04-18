@@ -28,9 +28,9 @@ void func_8002D5D4(u32 arg0, u32 arg1) {
     }
 }
 
-void func_8002D600(u32 arg0, char* arg1) {
+void func_8002D600(u32 arg0, u32 arg1) {
     if ((arg0 != 0) && (arg0 < 0xA)) {
-        D_800AF744[arg0] = arg1;
+        D_800AF744[arg0] = (char*)arg1;
     }
 }
 
