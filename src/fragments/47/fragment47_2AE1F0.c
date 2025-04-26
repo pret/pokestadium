@@ -13,17 +13,6 @@
 #include "src/memmap.h"
 #include "src/memory.h"
 
-typedef struct unk_D_8380548C {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-} unk_D_8380548C; // size = 0xE
-
 typedef struct unk_D_83806778 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;

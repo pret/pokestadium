@@ -58,7 +58,7 @@ typedef struct unk_D_800AE540_0874 {
     /* 0x002 */ u8 unk_002;
     /* 0x003 */ u8 unk_003;
     /* 0x004 */ char unk004[0x10];
-    /* 0x014 */ char unk_014[0x4];
+    /* 0x014 */ char unk_014[4];
     /* 0x018 */ char unk018[0x10];
     /* 0x028 */ unk_func_80026268_arg0 unk_028[1];
     /* 0x07C */ char unk07C[0x1A4];
@@ -71,7 +71,7 @@ typedef struct unk_D_800AE540_0004 {
     /* 0x001 */ u8 unk_001;
     /* 0x002 */ u8 unk_002;
     /* 0x004 */ Controller* controller;
-    /* 0x008 */ char unk_008[0x4];
+    /* 0x008 */ char unk_008[4];
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;
     /* 0x01C */ unk_func_80026268_arg0 unk_01C[1];

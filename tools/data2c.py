@@ -590,7 +590,8 @@ def dump_data(offset, struct, counts):
                     for count in member["counts"]:
                         for i in range(count):
                             if member["type"] in STRUCTS:
-                                out = output_struct(data, member["type"], out, offset + member["offset"], indent + ("    " * i))
+                                #print(f"Reading {member['type']} from offset {offset + member['offset']} with size {STRUCTS[member['type']]['size']}")
+                                out = output_struct(data, member["type"], out, offset + member["offset"] + (i * STRUCTS[member['type']]['size']), indent + ("    " * i))
                             else:
                                 base_size = BASE_TYPES[member["type"]]
                                 out = output_type(member["type"], base_size, offset + member["offset"] + (i * base_size), out)
@@ -657,11 +658,13 @@ def dump_data(offset, struct, counts):
 #######################################################################
 
 parse_structs()
-#for s in STRUCTS:
-#    if "unk_D_83407B00" in s:
-#        print(s)
-#exit()
 calc_struct_sizes()
+# for s in STRUCTS:
+#     if "unk_D_842115F0" in s or "Color_RGB" in s:
+#         print(s)
+#         print(f"\t\t{STRUCTS[s]}")
+#         print()
+# exit()
 #print(f"{len(STRUCTS)} structs parsed in")
 
 def dump(offset, type_name):
