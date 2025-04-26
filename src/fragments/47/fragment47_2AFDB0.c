@@ -99,7 +99,7 @@ s32 func_83802700(unk_D_838067F0* arg0, unk_D_838067F0_0168* arg1, s32 arg2, unk
     arg1->unk_2692 = arg0->unk_001C;
 
     for (i = 0; i < 3; i++) {
-        arg1->unk_0000[i].unk_004[0].unk_00.unk_00 = 0;
+        arg1->unk_0000[i].unk_004.unk_00.unk_00 = 0;
         *(s32*)&arg1->unk_0000[i].unk_000 = 0;
     }
 
@@ -118,7 +118,7 @@ s32 func_83802700(unk_D_838067F0* arg0, unk_D_838067F0_0168* arg1, s32 arg2, unk
                 for (j = 0; j < 3; j++) {
                     if (i < temp_s3->unk_00) {
                         if (func_80022DF4(var_v0, temp_s3->unk_02[i++]) != 0) {
-                            var_s4 += func_80022E18(arg1->unk_0000[j].unk_004, 1, var_v0);
+                            var_s4 += func_80022E18(&arg1->unk_0000[j].unk_004, 1, var_v0);
                         }
                     }
                 }
@@ -130,24 +130,25 @@ s32 func_83802700(unk_D_838067F0* arg0, unk_D_838067F0_0168* arg1, s32 arg2, unk
         s32 var_s1_3 = arg2 * 3;
         for (j = 0; j < 3; j++) {
             if (var_s1_3 < arg3->unk_000) {
-                _bcopy(&arg3->unk_004[var_s1_3++], &arg1->unk_0000[var_s4].unk_004[0], 0x54);
-                func_800228B0(arg1->unk_0000[var_s4++].unk_004);
+                _bcopy(&arg3->unk_004[var_s1_3++], &arg1->unk_0000[var_s4].unk_004,
+                       sizeof(arg1->unk_0000[var_s4].unk_004));
+                func_800228B0(&arg1->unk_0000[var_s4++].unk_004);
             }
         }
     }
 
     for (i = 0; i < var_s4; i++) {
-        func_8001B0DC(&arg1->unk_0000[i].unk_004[1], 0, &arg1->unk_0000[i].unk_004[0]);
+        func_8001B0DC(arg1->unk_0000[i].unk_058, 0, &arg1->unk_0000[i].unk_004);
 
         arg1->unk_0000[i].unk_000 = arg0->unk_0018;
         arg1->unk_0000[i].unk_001 = arg0->unk_001C;
         arg1->unk_0000[i].unk_002 = arg2 * 3 + i;
-        arg1->unk_0000[i].unk_003 = arg1->unk_0000[i].unk_004[0].unk_00.unk_00;
+        arg1->unk_0000[i].unk_003 = arg1->unk_0000[i].unk_004.unk_00.unk_00;
 
-        arg1->unk_0000[i].unk_004[0].unk_53 = arg2 * 3 + i;
-        arg1->unk_0000[i].unk_004[0].unk_52 = (arg0->unk_0018 * 0x10) | arg0->unk_001C;
+        arg1->unk_0000[i].unk_004.unk_53 = arg2 * 3 + i;
+        arg1->unk_0000[i].unk_004.unk_52 = (arg0->unk_0018 * 0x10) | arg0->unk_001C;
 
-        func_83802660(arg0, &arg1->unk_0000[i].unk_004[0]);
+        func_83802660(arg0, &arg1->unk_0000[i].unk_004);
     }
 
     return var_s4;
@@ -238,7 +239,7 @@ unk_D_838067F0_0168* func_83802C74(unk_D_838067F0_0168* arg0, s32 arg1) {
 
 void func_83802C98(unk_D_838067F0* arg0) {
     unk_D_838067F0_0168* ptr = func_83802C74(arg0->unk_0160, arg0->unk_0028);
-    unk_func_80026268_arg0* temp_a1 = &ptr->unk_0000[arg0->unk_0024].unk_004[0];
+    unk_func_80026268_arg0* temp_a1 = &ptr->unk_0000[arg0->unk_0024].unk_004;
 
     if (temp_a1->unk_00.unk_00 != 0) {
         arg0->unk_0000 = 7;
@@ -667,7 +668,7 @@ void func_8380419C(s32 arg0, s32 arg1, unk_D_838067F0_0168* arg2) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        if (arg2->unk_0000[i].unk_004[0].unk_00.unk_00 != 0) {
+        if (arg2->unk_0000[i].unk_004.unk_00.unk_00 != 0) {
             func_84200420(arg0 + i * 0x84, arg1, 0x84, 0x2C, 0x64, 0x64, 0xC8, 0xFF);
         } else {
             func_84200420(arg0 + i * 0x84, arg1, 0x84, 0x2C, 0x3C, 0x3C, 0xA0, 0xFF);
@@ -677,21 +678,20 @@ void func_8380419C(s32 arg0, s32 arg1, unk_D_838067F0_0168* arg2) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < 3; i++) {
-        if (arg2->unk_0000[i].unk_004[0].unk_00.unk_00 != 0) {
-            func_8001C6AC(arg0 + (i * 0x84) + 2, arg1 + 2, 0x28, 0x28, &arg2->unk_0000[i].unk_004[1].unk_00.unk_00,
-                          0x28, 0);
+        if (arg2->unk_0000[i].unk_004.unk_00.unk_00 != 0) {
+            func_8001C6AC(arg0 + (i * 0x84) + 2, arg1 + 2, 0x28, 0x28, &arg2->unk_0000[i].unk_058, 0x28, 0);
         }
     }
 
     func_8001F3F4();
 
     for (i = 0; i < 3; i++) {
-        if (arg2->unk_0000[i].unk_004[0].unk_00.unk_00 != 0) {
+        if (arg2->unk_0000[i].unk_004.unk_00.unk_00 != 0) {
             func_8001F324(0xFF, 0xFF, 0xFF, 0xFF);
             func_8001EBE0(4, 0);
-            func_8001F1E8(arg0 + (i * 0x84) + 0x2C, arg1 + 5, arg2->unk_0000[i].unk_004[0].unk_30);
+            func_8001F1E8(arg0 + (i * 0x84) + 0x2C, arg1 + 5, arg2->unk_0000[i].unk_004.unk_30);
             func_8001EBE0(4, 0);
-            func_8001F1E8(arg0 + (i * 0x84) + 0x2C, arg1 + 0x17, "L%d", arg2->unk_0000[i].unk_004[0].unk_24);
+            func_8001F1E8(arg0 + (i * 0x84) + 0x2C, arg1 + 0x17, "L%d", arg2->unk_0000[i].unk_004.unk_24);
         }
     }
 

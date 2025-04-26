@@ -2100,16 +2100,29 @@
     - [0x2DD710, c,      fragments/61/fragment61_2DD710]
     - [0x2DFB60, c,      fragments/61/fragment61_2DFB60]
     - [0x2E2C20, c,      fragments/61/fragment61_2E2C20]
-    - [0x2E85D0, data,   fragments/61/fragment61_data]
-    - [0x2E9120, rodata, fragments/61/fragment61_rodata_2E9120]
-    - [0x2E9150, rodata, fragments/61/fragment61_rodata_2E9150]
-    - [0x2E91D0, rodata, fragments/61/fragment61_rodata_2E91D0]
-    - [0x2E9250, rodata, fragments/61/fragment61_rodata_2E9250]
-    - [0x2E92B0, rodata, fragments/61/fragment61_rodata_2E92B0]
-    - [0x2E92E0, rodata, fragments/61/fragment61_rodata_2E92E0]
-    - [0x2E9350, rodata, fragments/61/fragment61_rodata_2E9350]
+    - [0x2E4040, c,      fragments/61/fragment61_2E4040]
+    - [0x2E5430, c,      fragments/61/fragment61_2E5430]
 
-    - {vram: 0x84211B30, type:  bss, name: fragments/61/fragment61_bss}
+    - [0x2E85D0, .data,   fragments/61/fragment61_2D78B0]
+    - [0x2E8630, .data,   fragments/61/fragment61_2DB900]
+    - [0x2E8E40, .data,   fragments/61/fragment61_2DD710]
+    - [0x2E8E60, .data,   fragments/61/fragment61_2DFB60]
+    - [0x2E8E80, .data,   fragments/61/fragment61_2E2C20]
+    - [0x2E8F90, .data,   fragments/61/fragment61_2E4040]
+    - [0x2E90E0, .data,   fragments/61/fragment61_2E5430]
+    
+    - [0x2E9120, .rodata, fragments/61/fragment61_2D78B0]
+    - [0x2E9150, .rodata, fragments/61/fragment61_2DB900]
+    - [0x2E91D0, .rodata, fragments/61/fragment61_2DD710]
+    - [0x2E9250, .rodata, fragments/61/fragment61_2DFB60]
+    - [0x2E92B0, .rodata, fragments/61/fragment61_2E2C20]
+    - [0x2E92E0, .rodata, fragments/61/fragment61_2E4040]
+    - [0x2E9350, .rodata, fragments/61/fragment61_2E5430]
+
+    - {vram: 0x84211B30, type:  .bss, name: fragments/61/fragment61_2D78B0}
+    - {vram: 0x8423D400, type:  .bss, name: fragments/61/fragment61_2DB900}
+    - {vram: 0x8423E580, type:  .bss, name: fragments/61/fragment61_2E4040}
+    
 
   - name: fragment61_relocs
     type: code

@@ -158,7 +158,7 @@ void func_80021F04(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_00
         arg1->unk_00 = arg0->unk_00.unk_01;
     }
 
-    func_80021A68(arg1->unk_01, arg0->unk_02);
+    func_80021A68(arg1->unk_01, (u16)arg0->unk_02);
 
     arg1->unk_03 = arg0->unk_04;
     arg1->unk_04 = arg0->unk_05;
