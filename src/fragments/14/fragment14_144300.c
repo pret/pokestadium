@@ -127,22 +127,22 @@ void func_86800070(void) {
     temp_v0 = *D_86806D68;
     D_86807518.buttonDown |= temp_v0->buttonDown;
     D_86807518.buttonPressed |= temp_v0->buttonPressed;
-    D_86807518.unkA |= temp_v0->unkA;
+    D_86807518.unk_0A |= temp_v0->unk_0A;
 
     temp_v0 = *D_86806D6C;
     D_86807518.buttonDown |= temp_v0->buttonDown;
     D_86807518.buttonPressed |= temp_v0->buttonPressed;
-    D_86807518.unkA |= temp_v0->unkA;
+    D_86807518.unk_0A |= temp_v0->unk_0A;
 
     temp_v0 = *D_86806D70;
     D_86807518.buttonDown |= temp_v0->buttonDown;
     D_86807518.buttonPressed |= temp_v0->buttonPressed;
-    D_86807518.unkA |= temp_v0->unkA;
+    D_86807518.unk_0A |= temp_v0->unk_0A;
 
     temp_v0 = *D_86806D74;
     D_86807518.buttonDown |= temp_v0->buttonDown;
     D_86807518.buttonPressed |= temp_v0->buttonPressed;
-    D_86807518.unkA |= temp_v0->unkA;
+    D_86807518.unk_0A |= temp_v0->unk_0A;
 
     if (1) {}
 }

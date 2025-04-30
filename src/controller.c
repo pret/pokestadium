@@ -111,13 +111,13 @@ void Cont_ReadInputs(void) {
             controller->rawStickY = controller->controllerData->stick_y;
             controller->buttonPressed =
                 controller->controllerData->button & (controller->controllerData->button ^ controller->buttonDown);
-            controller->unkA = controller->buttonDown & (controller->controllerData->button ^ controller->buttonDown);
+            controller->unk_0A = controller->buttonDown & (controller->controllerData->button ^ controller->buttonDown);
             controller->buttonDown = controller->controllerData->button;
 
             Cont_AdjustAnalogStick(controller);
         } else {
             controller->buttonPressed = 0;
-            controller->unkA = 0;
+            controller->unk_0A = 0;
             controller->buttonDown = 0;
         }
     }

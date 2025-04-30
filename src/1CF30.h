@@ -48,6 +48,6 @@ void func_8001F470(void);
 void func_8001F4C4(void);
 void func_8001F504(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7);
 s32 func_8001F5B0(s32 x, s32 y, const char* fmt, ...);
-void func_8001F6E8(s32 arg0, s32 arg1);
+u8 func_8001F6E8(s32 arg0, s32 arg1);
 
 #endif // _1CF30_H_

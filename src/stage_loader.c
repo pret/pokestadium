@@ -577,8 +577,8 @@ void func_800079C4(void) {
     }
 }
 
-void* func_80007A2C(void) {
-    void* ret = NULL;
+unk_func_80007444_018* func_80007A2C(void) {
+    unk_func_80007444_018* ret = NULL;
 
     if (D_800A7464 != NULL) {
         ret = D_800A7464->unk_18[D_800A7464->unk_16];
