@@ -2238,11 +2238,33 @@
     - [0x397B10, c,      fragments/63/fragment63_397B10]
     - [0x39AC50, c,      fragments/63/fragment63_39AC50]
     - [0x39BFB0, c,      fragments/63/fragment63_39BFB0]
+    - [0x39ED60, c,      fragments/63/fragment63_39ED60]
     - [0x3A0010, c,      fragments/63/fragment63_3A0010]
-    - [0x3A3C10, data,   fragments/63/fragment63_data]
-    - [0x3AD980, rodata, fragments/63/fragment63_rodata]
+    - [0x3A1970, c,      fragments/63/fragment63_3A1970]
+    - [0x3A1C30, c,      fragments/63/fragment63_3A1C30]
+    - [0x3A3BF0, c,      fragments/63/fragment63_data]
+    
+    - [0x3A3C10, .data,   fragments/63/fragment63_394120]
+    - [0x3A3D40, .data,   fragments/63/fragment63_397B10]
+    - [0x3A5D20, .data,   fragments/63/fragment63_39AC50]
+    - [0x3A8D10, .data,   fragments/63/fragment63_39BFB0]
+    - [0x3AA490, .data,   fragments/63/fragment63_39ED60]
+    - [0x3AABA0, .data,   fragments/63/fragment63_3A0010]
+    - [0x3AB000, .data,   fragments/63/fragment63_3A1970]
+    - [0x3AB650, .data,   fragments/63/fragment63_3A1C30]
+    - [0x3AB720, .data,   fragments/63/fragment63_data]
+    
+    - [0x3AD860, .rodata, fragments/63/fragment63_394120]
+    - [0x3AD8B0, .rodata, fragments/63/fragment63_3974E0]
+    - [0x3AD8C0, .rodata, fragments/63/fragment63_397B10]
+    - [0x3AD8F0, .rodata, fragments/63/fragment63_39AC50]
+    - [0x3AD900, .rodata, fragments/63/fragment63_39BFB0]
+    - [0x3AD920, .rodata, fragments/63/fragment63_39ED60]
+    - [0x3AD930, .rodata, fragments/63/fragment63_3A0010]
+    - [0x3AD970, .rodata, fragments/63/fragment63_3A1970]
+    - [0x3AD980, .rodata, fragments/63/fragment63_3A1C30]
 
-    - {vram: 0x84B19910, type:  bss, name: fragments/63/fragment63_bss}
+    - {vram: 0x84B19910, type:  .bss, name: fragments/63/fragment63_394120}
 
   - name: fragment63_relocs
     type: code

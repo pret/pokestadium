@@ -459,7 +459,7 @@ void func_86900410(void) {
 void func_86900484(s32 arg0) {
     MemoryBlock* sp1C;
     FragmentEntry sp18;
-    unk_D_86002F58_004_000_000* temp_v0;
+    u32* temp_v0;
     unk_D_8690A610_018* temp_v1;
 
     main_pool_push_state('BACK');

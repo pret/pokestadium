@@ -16,7 +16,8 @@
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_2F1D60/func_843075D0.s")
 
-void func_84307630(void) {}
+void func_84307630(void) {
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_2F1D60/func_84307638.s")
 

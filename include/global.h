@@ -16,6 +16,8 @@ typedef unsigned int uintptr_t;
 #include "string.h"
 #include "math.h"
 
+struct unk_D_86002F58_004_000_00C;
+
 typedef struct unk_D_86002F58_004_000_00C_028 {
     /* 0x00 */ char pad0[4];
     /* 0x04 */ u8 unk_04;
@@ -26,11 +28,6 @@ typedef struct unk_D_86002F58_004_000_00C_028 {
 } unk_D_86002F58_004_000_00C_028; // size >= 0x14
 
 typedef unk_D_86002F58_004_000_00C_028* (*unk_D_86002F58_004_000_00C_028_func)(s32, s32);
-
-typedef struct unk_D_86002F58_004_000_00C {
-    /* 0x00 */ char unk_00[0x28];
-    /* 0x28 */ unk_D_86002F58_004_000_00C_028_func unk_28;
-} unk_D_86002F58_004_000_00C; // size >= 0x2C
 
 typedef union unk_D_86002F58_004_000_010_02C {
     struct {
@@ -68,9 +65,15 @@ typedef struct unk_D_86002F58_004_000_010 {
 
 typedef struct unk_D_86002F58_004_000_004 {
     /* 0x00 */ struct unk_D_86002F58_004_000_004* unk_00[4];
-    /* 0x04 */ unk_D_86002F58_004_000_00C* unk_04;
-    /* 0x08 */ unk_D_86002F58_004_000_010* unk_08;
-} unk_D_86002F58_004_000_004; // size >= 0x0C
+    /* 0x10 */ struct unk_D_86002F58_004_000_00C* unk_10;
+    /* 0x14 */ unk_D_86002F58_004_000_010* unk_14;
+} unk_D_86002F58_004_000_004; // size >= 0x18
+
+typedef struct unk_D_86002F58_004_000_00C {
+    /* 0x00 */ unk_D_86002F58_004_000_004 unk_00;
+    /* 0x18 */ char unk_18[0x10];
+    /* 0x28 */ unk_D_86002F58_004_000_00C_028_func unk_28;
+} unk_D_86002F58_004_000_00C; // size >= 0x2C
 
 typedef struct unk_D_86002F58_004_000_000 {
     /* 0x00 */ u8 unk_00;
@@ -182,7 +185,7 @@ typedef struct GraphNode {
     /* 0x08 */ struct GraphNode* unk_08;
     /* 0x0C */ struct unk_D_86002F34_00C* unk_0C;
     /* 0x10 */ func_D_86002F34_000_010 unk_10;
-    /* 0x14 */ unk_D_86002F34_000_014* unk_14;
+    /* 0x14 */ void* unk_14;
 } GraphNode; // size = 0x18
 
 typedef struct unk_D_86002F34_00C_018 {

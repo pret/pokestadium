@@ -17,7 +17,7 @@ void func_80010FA0(GraphNode* arg0, u8 arg1) {
     }
 }
 
-void func_80010FDC(GraphNode* arg0, func_D_86002F34_000_010 arg1, unk_D_86002F34_000_014* arg2) {
+void func_80010FDC(GraphNode* arg0, func_D_86002F34_000_010 arg1, void* arg2) {
     if (arg1 != NULL) {
         arg1 = Util_ConvertAddrToVirtAddr(arg1);
     }
