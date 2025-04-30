@@ -2283,10 +2283,10 @@
     subsegments:
     - [0x3AEE50, textbin,   fragments/64/fragment64_header]
     - [0x3AEE70, c,      fragments/64/fragment64]
-    - [0x3B2390, data,   fragments/64/fragment64_data]
-    - [0x3B2530, rodata, fragments/64/fragment64_rodata]
+    - [0x3B2390, .data,   fragments/64/fragment64]
+    - [0x3B2530, .rodata, fragments/64/fragment64]
 
-    - {vram: 0x84803760, type:  bss, name: fragments/64/fragment64_bss}
+    - {vram: 0x84803760, type:  .bss, name: fragments/64/fragment64}
 
   - name: fragment64_relocs
     type: code

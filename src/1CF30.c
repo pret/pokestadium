@@ -664,6 +664,6 @@ s32 func_8001F5B0(s32 x, s32 y, const char* fmt, ...) {
     return var_s2;
 }
 
-void func_8001F6E8(s32 arg0, s32 arg1) {
-    func_8001E78C(&D_800AC870->unk_00[D_800AC870->unk_50], arg1 & 0xFF);
+u8 func_8001F6E8(s32 arg0, s32 arg1) {
+    return func_8001E78C(&D_800AC870->unk_00[D_800AC870->unk_50], arg1 & 0xFF);
 }

@@ -15,7 +15,9 @@ typedef struct unk_D_800A7450 {
 } unk_D_800A7450; // size >= 0x14
 
 typedef struct unk_func_80007444_018 {
-    /* 0x00 */ char unk00[0x8];
+    /* 0x00 */ char unk00[0x4];
+    /* 0x04 */ u16 unk_04;
+    /* 0x06 */ u16 unk_06;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ char unk0C[0x4];
 } unk_func_80007444_018; // size = 0x10
@@ -67,7 +69,7 @@ s32 func_80007820(u32 arg0, s32 (*arg1)(u8));
 s32 func_800078D4(s32 (*arg0)(u8), s32 arg1, s32 arg2);
 void func_80007990(u16 arg0);
 void func_800079C4(void);
-void* func_80007A2C(void);
+unk_func_80007444_018* func_80007A2C(void);
 s32 func_80007A58(void);
 void func_80007A80(void);
 void func_80007C3C(void);
