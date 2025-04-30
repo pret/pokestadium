@@ -2305,10 +2305,10 @@
     subsegments:
     - [0x3B2AE0, textbin,   fragments/65/fragment65_header]
     - [0x3B2B00, c,      fragments/65/fragment65]
-    - [0x3B59E0, data,   fragments/65/fragment65_data]
-    - [0x3B5BE0, rodata, fragments/65/fragment65_rodata]
+    - [0x3B59E0, .data,   fragments/65/fragment65]
+    - [0x3B5BE0, .rodata, fragments/65/fragment65]
 
-    - {vram: 0x84A03130, type:  bss, name: fragments/65/fragment65_bss}
+    - {vram: 0x84A03130, type:  .bss, name: fragments/65/fragment65}
 
   - name: fragment65_relocs
     type: code

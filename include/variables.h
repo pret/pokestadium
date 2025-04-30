@@ -734,6 +734,25 @@ extern u8 D_3000B60[];
 extern u8 D_3001110[];
 extern u8 D_30016C0[];
 extern u8 D_3001C70[];
+extern u8 D_300CC10[];
+extern u8 D_3019C38[];
+extern u8 D_3009290[];
+extern u8 D_300A290[];
+extern u8 D_300B290[];
+extern u8 D_3011A30[];
+extern u8 D_300C290[];
+extern u8 D_3000000[];
+extern u8 D_3000D20[];
+extern u8 D_3001A40[];
+extern u8 D_3002760[];
+extern u8 D_3003480[];
+extern u8 D_30041A0[];
+extern u8 D_3004EC0[];
+extern u8 D_3005BE0[];
+extern u8 D_3006900[];
+extern u8 D_3008E50[];
+extern u8 D_3007620[];
+extern u8 D_3008238[];
 
 extern LEODiskID D_800818E0;
 
