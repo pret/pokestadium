@@ -57,11 +57,32 @@ typedef struct unk_func_8001A024 {
     /* 0x18 */ unk_D_8006FF00* unk_18;
 } unk_func_8001A024; // size = 0x1C
 
+typedef struct unk_D_84B25A28 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x04 */ unk_D_86002F58_004_000* unk_04;
+    /* 0x08 */ unk_D_86002F34_00C* unk_08;
+    /* 0x0C */ GraphNode* unk_0C;
+    /* 0x10 */ GraphNode* unk_10;
+    /* 0x14 */ GraphNode* unk_14;
+    /* 0x18 */ GraphNode* unk_18;
+    /* 0x1C */ GraphNode* unk_1C;
+    /* 0x20 */ unk_func_8001A024* unk_20;
+    /* 0x24 */ unk_D_80068BB0* unk_24;
+    /* 0x28 */ unk_D_80068BB0* unk_28;
+    /* 0x2C */ char unk2C[0x4];
+} unk_D_84B25A28; // size = 0x30
+
 unk_func_8001A024* func_8001A024(unk_D_86002F58_004_000_010*, s16, s16, s16);
+void func_8001A1D0(unk_func_8001A024*, unk_D_86002F58_004_000_010*, unk_D_80068BB0*);
+void func_8001A250(unk_func_8001A024*, unk_D_8006FF00*);
 void func_8001A324(unk_func_8001A024*, s32, s32, u16);
 void func_8001A46C(unk_func_8001A024*, s32, unk_func_80026268_arg0*, s32);
+void func_8001AA18(unk_func_8001A024*, s32, unk_D_84B25A28*);
 s32 func_8001ABAC(unk_func_8001A024*, s32);
 void* func_8001AFD8(unk_func_8001A024*, s32);
+s32 func_8001B010(unk_func_8001A024*);
 void func_8001B058(void);
 void func_8001B0DC(u16*, s32, unk_func_80026268_arg0*);
 unk_func_8001B1FC* func_8001B1FC(unk_D_86002F58_004_000_010*, s16, s16, s16, s16, s16, s16, u8*);

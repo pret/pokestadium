@@ -21,7 +21,7 @@ typedef struct unk_D_8690A610 {
 } unk_D_8690A610; // size = 0x20
 
 void func_80010FA0(GraphNode* arg0, u8 arg1);
-void func_80010FDC(GraphNode* arg0, func_D_86002F34_000_010 arg1, unk_D_86002F34_000_014* arg2);
+void func_80010FDC(GraphNode* arg0, func_D_86002F34_000_010 arg1, void* arg2);
 GraphNode* func_8001103C(MainPoolState* arg0, GraphNode* arg1);
 unk_D_86002F34_alt2* func_80011088(MainPoolState* arg0, unk_D_86002F34_alt2* arg1, GraphNode* arg2);
 unk_D_86002F34_00C* func_800110E0(MemoryBlock* arg0, unk_D_86002F34_00C* arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);

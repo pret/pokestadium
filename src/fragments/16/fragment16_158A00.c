@@ -148,7 +148,7 @@ void func_86A0003C(u8 r, u8 g, u8 b) {
 void func_86A000B4(s8 arg0, u8 arg1) {
     MemoryBlock* sp2C;
     FragmentEntry sp28;
-    unk_D_86002F58_004_000_000* temp_v0;
+    u32* temp_v0;
     unk_D_8690A610_018* temp_v0_4;
 
     while (func_80001C90() == 0) {}
