@@ -1,3 +1,7 @@
-#include "global.h"
+#include "fragment70.h"
+#include "src/29BA0.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/70/fragment70/func_8F300020.s")
+s32 func_8F300020(UNUSED s32 arg0, UNUSED s32 arg1) {
+    FRAGMENT_LOAD_AND_CALL2(fragment67, 0, 0);
+    return 0x80;
+}

@@ -1,3 +1,5 @@
-#include "global.h"
+#include "fragment67.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/67/fragment67/func_8F000020.s")
+s32 func_8F000020(UNUSED s32 arg0, UNUSED s32 arg1) {
+    return 2;
+}
