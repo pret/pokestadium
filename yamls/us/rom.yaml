@@ -2347,8 +2347,6 @@
     - [0x3B8530, textbin,   fragments/67/fragment67_header]
     - [0x3B8550, c,      fragments/67/fragment67]
 
-    - {vram: 0x8F000030, type:  bss, name: fragments/67/fragment67_bss}
-
   - name: fragment67_relocs
     type: code
     bss_size: 0x0
@@ -2367,8 +2365,6 @@
     - [0x3B8570, textbin, fragments/68/fragment68_header]
     - [0x3B8590, c,    fragments/68/fragment68]
 
-    - {vram: 0x8F100080, type:  bss, name: fragments/68/fragment68_bss}
-
   - name: fragment68_relocs
     type: code
     bss_size: 0x0
@@ -2385,8 +2381,6 @@
     subsegments:
     - [0x3B8600, textbin,   fragments/69/fragment69_header]
     - [0x3B8620, c,      fragments/69/fragment69]
-
-    - {vram: 0x8F200080, type:  bss, name: fragments/69/fragment69_bss}
 
   - name: fragment69_relocs
     type: code
@@ -2405,8 +2399,6 @@
     - [0x3B8690, textbin,   fragments/70/fragment70_header]
     - [0x3B86B0, c,      fragments/70/fragment70]
 
-    - {vram: 0x8F300080, type:  bss, name: fragments/70/fragment70_bss}
-
   - name: fragment70_relocs
     type: code
     bss_size: 0x0
@@ -2423,8 +2415,6 @@
     subsegments:
     - [0x3B8720, textbin,   fragments/71/fragment71_header]
     - [0x3B8740, c,      fragments/71/fragment71]
-
-    - {vram: 0x8F400080, type:  bss, name: fragments/71/fragment71_bss}
 
   - name: fragment71_relocs
     type: code
@@ -2443,8 +2433,6 @@
     - [0x3B87B0, textbin, fragments/72/fragment72_header]
     - [0x3B87D0, c,    fragments/72/fragment72]
 
-    - {vram: 0x8F500080, type:  bss, name: fragments/72/fragment72_bss}
-
   - name: fragment72_relocs
     type: code
     bss_size: 0x0
@@ -2462,8 +2450,6 @@
     - [0x3B8840, textbin, fragments/73/fragment73_header]
     - [0x3B8860, c,    fragments/73/fragment73]
 
-    - {vram: 0x8F600080, type:  bss, name: fragments/73/fragment73_bss}
-
   - name: fragment73_relocs
     type: code
     bss_size: 0x0
@@ -2480,8 +2466,6 @@
     subsegments:
     - [0x3B88D0, textbin, fragments/74/fragment74_header]
     - [0x3B88F0, c,    fragments/74/fragment74]
-
-    - {vram: 0x8F700080, type:  bss, name: fragments/74/fragment74_bss}
 
   - name: fragment74_relocs
     type: code
@@ -2520,8 +2504,6 @@
     - [0x3B9590, textbin, fragments/76/fragment76_header]
     - [0x3B95B0, c,    fragments/76/fragment76]
 
-    - {vram: 0x8FB00080, type:  bss, name: fragments/76/fragment76_bss}
-
   - name: fragment76_relocs
     type: code
     bss_size: 0x0
@@ -2538,8 +2520,6 @@
     subsegments:
     - [0x3B9620, textbin,  fragments/77/fragment77_header]
     - [0x3B9640, c,    fragments/77/fragment77]
-
-    - {vram: 0x8FC00080, type:  bss, name: fragments/77/fragment77_bss}
 
   - name: fragment77_relocs
     type: code
