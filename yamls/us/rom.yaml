@@ -2483,9 +2483,9 @@
     subsegments:
     - [0x3B8960, textbin, fragments/75/fragment75_header]
     - [0x3B8980, c,    fragments/75/fragment75]
-    - [0x3B9350, data, fragments/75/fragment75_data]
+    - [0x3B9350, .data, fragments/75/fragment75]
 
-    - {vram: 0x8FA00A20, type:  bss, name: fragments/75/fragment75_bss}
+    - {vram: 0x8FA00A20, type:  .bss, name: fragments/75/fragment75}
 
   - name: fragment75_relocs
     type: code

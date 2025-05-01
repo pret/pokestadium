@@ -2,7 +2,6 @@
 #include <PR/os_internal_reg.h>
 #include "global.h"
 #include "dp_intro.h"
-#include "3FB0.h"
 #include "5580.h"
 #include "6BC0.h"
 #include "crash_screen.h"
