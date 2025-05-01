@@ -753,6 +753,11 @@ extern u8 D_3006900[];
 extern u8 D_3008E50[];
 extern u8 D_3007620[];
 extern u8 D_3008238[];
+extern u8 _798CD0_TEXT_START[];
+extern u8 D_8C200090[];
+extern u8 D_8C200920[];
+extern u8 D_8C201070[];
+extern u8 D_8C2011C4[];
 
 extern LEODiskID D_800818E0;
 
@@ -798,7 +803,7 @@ typedef struct unk_D_8006FF00 {
 	/* 0x14 */ u32 unk_14;
 	/* 0x18 */ u32 unk_18;
 } unk_D_8006FF00; // size = 0x1C
-extern unk_D_8006FF00 D_8006FF00[];
+extern unk_D_8006FF00 D_8006FF00[152];
 
 typedef struct unk_D_800AC870_sub {
 	/* 0x00 */ s16 unk_00;

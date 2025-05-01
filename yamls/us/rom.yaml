@@ -2326,9 +2326,9 @@
     subsegments:
     - [0x3B6130, textbin,   fragments/66/fragment66_header]
     - [0x3B6150, c,      fragments/66/fragment66]
-    - [0x3B8080, data,   fragments/66/fragment66_data]
+    - [0x3B8080, .data,   fragments/66/fragment66]
 
-    - {vram: 0x83202010, type:  bss, name: fragments/66/fragment66_bss}
+    - {vram: 0x83202010, type:  .bss, name: fragments/66/fragment66}
 
   - name: fragment66_relocs
     type: code
