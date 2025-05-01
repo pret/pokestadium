@@ -6271,16 +6271,16 @@ void func_88804370(void) {
     u32 sp2C;
     unk_D_80068BB0* sp28;
 
-    sp28 = main_pool_alloc(sizeof(unk_func_80007444_018), 0);
+    sp28 = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
 
-    sp34 = D_88826924->unk_18[0]->unk_08;
-    D_88826930 = D_88826924->unk_18[0]->unk_08 + 0x25800;
-    sp30 = D_88826924->unk_18[1]->unk_08;
-    D_88826934 = D_88826924->unk_18[1]->unk_08 + 0x25800;
-    sp2C = D_88826924->unk_18[1]->unk_08 + 0x70800;
+    sp34 = D_88826924->unk_18[0]->img_p;
+    D_88826930 = D_88826924->unk_18[0]->img_p + 0x25800;
+    sp30 = D_88826924->unk_18[1]->img_p;
+    D_88826934 = D_88826924->unk_18[1]->img_p + 0x25800;
+    sp2C = D_88826924->unk_18[1]->img_p + 0x70800;
 
-    D_88826928->unk_18[0] = main_pool_alloc(sizeof(unk_func_80007444_018), 0);
-    D_88826928->unk_18[1] = main_pool_alloc(sizeof(unk_func_80007444_018), 0);
+    D_88826928->unk_18[0] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
+    D_88826928->unk_18[1] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
 
     func_800062E4(D_88826928->unk_18[0], 0, 2, 0x140, 0xF0, sp34);
     func_800062E4(D_88826928->unk_18[1], 0, 2, 0x140, 0xF0, sp30);
