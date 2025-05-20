@@ -95,7 +95,7 @@ void func_80003890(u8* in_header, u8* memory);
 void func_80003964(u8* arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_80003A14(u8* arg0, s16 arg1, s16 arg2, s32 arg3);
 s32 func_80003B04(s16 arg0);
-void func_80003B30(u8* arg0, u8* arg1, u8* arg2, s32 arg3);
+void func_80003B30(u32 arg0, u32 arg1, u32 arg2, s32 arg3);
 void func_80003BE0(u8* arg0, u8* arg1, u8* arg2);
 void* func_80003C80(u8* addr, PRESJPEG* arg1, s32 side);
 s32 func_80003D18(s32 arg0, PERSSZP* arg1, s32 side);

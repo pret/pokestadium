@@ -1,5 +1,11 @@
 #include "global.h"
 
+/*
+static u8 D_84385750[] = {
+    0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80,
+};
+*/
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_2F74E0/func_8430CC20.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_2F74E0/func_8430CC84.s")

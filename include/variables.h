@@ -889,4 +889,14 @@ extern unk_D_80072338 D_80072338[];
 
 extern char D_8006FEE8[][0x1C];
 
+typedef struct unk_rom_70D3A0_offset_72780 {
+    /* 0x00 */ char unk00[0x20];
+} unk_rom_70D3A0_offset_72780;
+extern unk_rom_70D3A0_offset_72780 D_72780[];
+
+typedef struct unk_rom_70D3A0_offset_73A60 {
+    /* 0x00 */ char unk00[0x20];
+} unk_rom_70D3A0_offset_73A60;
+extern unk_rom_70D3A0_offset_73A60 D_73A60[];
+
 #endif
