@@ -33,18 +33,6 @@ static s32 D_843900A0;
 static s32 D_843900A4;
 s32 D_843900A8;
 
-extern char** D_843900B0;
-extern char** D_843900B4;
-extern char** D_843900B8;
-extern char** D_843900BC;
-extern char** D_843900C0;
-extern s32 D_84390174;
-extern unk_D_84390178 D_84390178;
-extern s32 D_8439022C;
-extern s32 D_84390230;
-extern s32 D_84390234;
-extern unk_D_84390240 D_84390240;
-
 unk_D_8438E7B0* D_84384570[] = { &D_8438E7B0, &D_8438F390 };
 unk_D_8438FF70* D_84384578[] = {
     &D_8438FF70,
@@ -127,14 +115,18 @@ unk_D_843847BC D_843847BC[2] = {
         0xFFB8,
         0x0048,
         0x0020,
-        10.0f, 10.0f, 1280.0f,
+        10.0f,
+        10.0f,
+        1280.0f,
         0x0001,
     },
     {
         0x015F,
         0x0080,
         0x0020,
-        10.0f, 10.0f, 1280.0f,
+        10.0f,
+        10.0f,
+        1280.0f,
         0xFFFF,
     },
 };
@@ -734,7 +726,7 @@ void func_84302128(unk_D_84390010* arg0) {
 }
 
 void func_84302148(unk_D_84390010* arg0) {
-    arg0->unk_720->unk_04 = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    arg0->unk_720->unk_04 = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
     arg0->unk_720->unk_00 |= 0x80;
     arg0->unk_720->unk_02 = arg0->unk_654.unk_BC;
 }
@@ -1384,11 +1376,11 @@ void func_84303ECC(unk_D_84390010* arg0) {
     s32 idx = arg0->unk_4C0;
     s32 temp_a0;
     s32 sp34;
-    unk_D_84390010_724_01C* sp30;
+    unk_func_80026268_arg0* sp30;
     unk_D_84390010_654* sp24;
 
     sp34 = D_84385384[idx].unk_20;
-    sp30 = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    sp30 = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
     sp24 = &arg0->unk_654;
     D_84390020 = &D_84384570[func_84307F00(arg0)]->unk_000[sp34];
     temp_a0 = sp24->unk_34 & 2;
@@ -1424,7 +1416,7 @@ void func_84303ECC(unk_D_84390010* arg0) {
 void func_84304114(unk_D_84390010* arg0) {
     UNUSED s32 pad;
     unk_D_84390010_654* sp18 = &arg0->unk_654;
-    unk_D_84390010_724_01C* ptr = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
 
     if ((sp18->unk_34 & 0x4000) || (sp18->unk_34 & 2) || (ptr->unk_05 & 7)) {
         D_84390068[D_843900A0].unk_04 = D_84385380;
@@ -1442,7 +1434,7 @@ void func_84304114(unk_D_84390010* arg0) {
 
 void func_84304210(unk_D_84390010* arg0) {
     UNUSED s32 pad;
-    unk_D_84390010_724_01C* ptr = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
     unk_D_84390010_654* sp24 = &arg0->unk_654;
 
     if ((arg0->unk_654.unk_34 & 0x4000) || (sp24->unk_34 & 2) || (ptr->unk_05 & 7)) {
@@ -1473,7 +1465,7 @@ void func_84304210(unk_D_84390010* arg0) {
 
 void func_843043FC(unk_D_84390010* arg0) {
     UNUSED s32 pad;
-    unk_D_84390010_724_01C* ptr = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
     unk_D_84390010_654* sp24;
 
     if ((arg0->unk_654.unk_34 & 0x4000) || (ptr->unk_05 & 0x20) || (ptr->unk_05 & 7)) {
@@ -1602,7 +1594,7 @@ void func_843048C8(unk_D_84390010* arg0) {
 
 void func_843049FC(unk_D_84390010* arg0) {
     UNUSED s32 pad[3];
-    unk_D_84390010_724_01C* ptr = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
     s32 sp1C;
 
     arg0->unk_4C4 = 0;
@@ -1980,7 +1972,7 @@ void func_84305A74(unk_D_84390010* arg0, s32 arg1, s32 arg2) {
 
 s32 func_84305AFC(unk_D_84390010* arg0) {
     unk_D_84390010_654* sp20 = &arg0->unk_654;
-    unk_D_84390010_724_01C* ptr = &arg0->unk_724[sp20->unk_08].unk_1C;
+    unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
 
     if ((sp20->unk_34 & 2) || (ptr->unk_05 & 7) || ((sp20->unk_34 & 0x200) && !(sp20->unk_34 & 0x400)) ||
         (sp20->unk_34 & 0x4000)) {
@@ -2082,12 +2074,12 @@ s32 func_84305CAC(unk_D_84390010* arg0, s32 arg1) {
 
 s32 func_84305E54(unk_D_84390010* arg0, s32 arg1) {
     unk_D_8438E7B0_A50* temp_a2;
-    unk_D_84390010_724_01C* sp28;
+    unk_func_80026268_arg0* sp28;
     UNUSED s32 pad;
     s32 sp20;
     unk_D_8438E7B0_A50* sp1C;
 
-    sp28 = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    sp28 = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
     sp20 = D_84384670[arg0->unk_654.unk_38.unk_5A - 1];
     sp1C = &D_84384570[func_84307F00(arg0)]->unk_000[sp20];
     temp_a2 = &D_84384570[func_84307F00(arg0)]->unk_A50;
@@ -2393,7 +2385,7 @@ void func_84306914(unk_D_84390010* arg0) {
 }
 
 void func_84306A68(unk_D_84390010* arg0) {
-    unk_D_84390010_724_01C* ptr = &arg0->unk_724[arg0->unk_654.unk_08].unk_1C;
+    unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[arg0->unk_654.unk_08];
 
     if ((ptr->unk_05 & 7) && !(arg0->unk_654.unk_34 & 1)) {
         func_84305A74(arg0, 0xAF, 2);
@@ -2456,7 +2448,7 @@ void func_84306C8C(unk_D_84390010* arg0) {
     func_8001BD04(&arg0->unk_000, 0);
     func_80017464(&arg0->unk_000, 0);
 
-    arg0->unk_720->unk_04 = &arg0->unk_724->unk_1C;
+    arg0->unk_720->unk_04 = arg0->unk_724->unk_01C;
     if ((arg0->unk_000.unk_01A == 0x32) || (arg0->unk_000.unk_01A == 0x33)) {
         arg0->unk_000.unk_000.unk_02 &= ~0x40;
     } else {

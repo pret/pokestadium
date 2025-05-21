@@ -83,11 +83,11 @@ typedef struct unk_D_800AE540_0004 {
 typedef struct unk_D_800AE540_1194 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ s32 unk_04;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ unk_D_800AE540_0004* unk_04;
     /* 0x04 */ unk_D_800AE540_0004* unk_08[2];
     /* 0x04 */ s32 unk_10;
-    /* 0x04 */ s32 unk_14;
+    /* 0x04 */ unk_D_86002F58_004_000_004* unk_14;
     /* 0x04 */ unk_D_86002F58_004_000_004* unk_18;
     /* 0x1C */ u8 unk_1C;
     /* 0x1D */ u8 unk_1D;

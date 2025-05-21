@@ -89,11 +89,8 @@ void func_84307638(unk_D_84390010* arg0) {
     tmp2 = D_84384578[temp_v0]->unk_00.y;
     arg0->unk_728.unk_194 = tmp2;
 
-    func_8431AE7C(sp30, 
-                  arg0->unk_728.unk_000.unk_024.x + arg0->unk_728.unk_190, 
-                  arg0->unk_728.unk_000.unk_024.y + tmp2, 
-                  arg0->unk_728.unk_000.unk_024.z, 
-                  arg0->unk_728.unk_188, arg0->unk_728.unk_184, arg0->unk_728.unk_186);
+    func_8431AE7C(sp30, arg0->unk_728.unk_000.unk_024.x + arg0->unk_728.unk_190, arg0->unk_728.unk_000.unk_024.y + tmp2,
+                  arg0->unk_728.unk_000.unk_024.z, arg0->unk_728.unk_188, arg0->unk_728.unk_184, arg0->unk_728.unk_186);
 }
 
 void func_84307748(unk_D_84390010* arg0) {
