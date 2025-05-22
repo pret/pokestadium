@@ -147,17 +147,17 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x054 */ unk_D_86002F58_004_000_054 unk_054;
     /* 0x060 */ MtxF unk_060;
     /* 0x0A0 */ Color_RGBA8_u32 unk_0A0;
-    /* 0x0A4 */ char pad0A4[2];
+    /* 0x0A4 */ char unk0A4[2];
     /* 0x0A6 */ u8 unk_0A6;
     /* 0x0A7 */ u8 unk_0A7;
     /* 0x0A8 */ unk_D_86002F58_004_000_0A8 unk_0A8[1];
-    /* 0x0B8 */ char pad0B8[0x24];
+    /* 0x0B8 */ char unk0B8[0x24];
     /* 0x0DC */ Vec3f unk_0DC;
-    /* 0x0E0 */ char pad0E0[0x4];
+    /* 0x0E0 */ char unk0E0[0x4];
     /* 0x0EC */ Vec3f unk_0EC;
-    /* 0x0F8 */ char pad0F8[0x4];
+    /* 0x0F8 */ char unk0F8[0x4];
     /* 0x0FC */ Vec3f unk_0FC;
-    /* 0x108 */ char pad108[0x60];
+    /* 0x108 */ char unk108[0x60];
 } unk_D_86002F58_004_000; // size = 0x168
 
 typedef struct unk_D_86002F34_000_014_004 {
