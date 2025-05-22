@@ -637,12 +637,30 @@ void func_8430C004(unk_D_84390010* arg0, unk_D_84390010* arg1);
 void func_8430C010(s32 arg0);
 
 
-void func_8430C19C(Vec3f*, f32, s16);
-s32 func_8430C1E4(Vec3f*, Vec3f*);
-void func_8430C204(Vec3s*, Vec3s*);
-u16 func_8430C414(s32);
-void func_8430C4F8(s16*, s16, s16);
-void func_8430C718(f32*, f32, f32);
+void func_8430C070(Vec3f* arg0, Vec3f* arg1, f32* arg2, s16* arg3, s16* arg4);
+Vec3f* func_8430C120(Vec3f* arg0);
+Vec3f* func_8430C138(Vec3f* arg0, Vec3f* arg1, f32 arg2, s16 arg3);
+void func_8430C19C(Vec3f* arg0, f32 arg1, s16 arg2);
+Vec3f* func_8430C1E4(Vec3f* arg0, Vec3f* arg1);
+Vec3s* func_8430C204(Vec3s* arg0, Vec3s* arg1);
+Vec3f* func_8430C224(Vec3f* arg0, f32 arg1, f32 arg2, f32 arg3);
+s16 func_8430C260(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
+f32 func_8430C2A4(Vec3f arg0, Vec3f arg1);
+f32 func_8430C308(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
+s32 func_8430C384(f32 arg0);
+u16 func_8430C414(s32 arg0);
+s32 func_8430C4F8(s16* arg0, s16 arg1, s16 arg2);
+s32 func_8430C59C(s16* arg0, s16 arg1, f32 arg2);
+void func_8430C718(f32* arg0, f32 arg1, f32 arg2);
+void func_8430C780(s16* arg0, s16 arg1, s16 arg2);
+void func_8430C7B4(u16* arg0, u16 arg1, s16 arg2);
+void func_8430C7E4(f32* arg0, f32 arg1);
+void func_8430C8A0(f32* arg0, f32 arg1);
+void func_8430C97C(f32* arg0, f32 arg1);
+void func_8430CA4C(f32* arg0, f32 arg1);
+void func_8430CB3C(f32* arg0, f32 arg1);
+
+
 void func_8430D814(void);
 
 void func_843184FC(void);
