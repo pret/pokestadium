@@ -31,7 +31,7 @@ static unk_D_84390048 D_84390048;
 static unk_D_84390068 D_84390068[7];
 static s32 D_843900A0;
 static s32 D_843900A4;
-s32 D_843900A8;
+f32 D_843900A8[2];
 
 unk_D_8438E7B0* D_84384570[] = { &D_8438E7B0, &D_8438F390 };
 unk_D_8438FF70* D_84384578[] = {
@@ -1801,7 +1801,7 @@ void func_843066E0(unk_D_84390010* arg0) {
         case 15:
         case 16:
             func_84308654(arg0, 0, 0);
-            if (arg0->unk_654.unk_38.unk4D[9] == 0) {
+            if (arg0->unk_654.unk_38.unk_56 == 0) {
                 func_8000E88C(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
             } else {
                 func_8000E88C(&arg0->unk_000.unk_030, 0.8f, 0.8f, 0.8f);
@@ -1810,7 +1810,7 @@ void func_843066E0(unk_D_84390010* arg0) {
 
         case 12:
             func_84308654(arg0, 0, 0);
-            if (arg0->unk_654.unk_38.unk4D[9] == 0) {
+            if (arg0->unk_654.unk_38.unk_56 == 0) {
                 func_8000E88C(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
             } else {
                 func_8000E88C(&arg0->unk_000.unk_030, 0.8f, 0.8f, 0.8f);

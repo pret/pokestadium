@@ -741,7 +741,7 @@ void func_8430B40C(unk_D_84390010* arg0, unk_D_84390010* arg1) {
         arg1->unk_4A6 += arg1->unk_4A8;
     }
 
-    if (arg1->unk_654.unk_38.unk4D[9] == 0) {
+    if (arg1->unk_654.unk_38.unk_56 == 0) {
         var_fv0 = 1.0f;
     } else {
         var_fv0 = 0.8f;
@@ -770,7 +770,7 @@ void func_8430B550(unk_D_84390010* arg0, unk_D_84390010* arg1) {
         var_fv1 = SINS(arg1->unk_4A6) * arg1->unk_4A0;
     }
 
-    if (arg1->unk_654.unk_38.unk4D[9] == 0) {
+    if (arg1->unk_654.unk_38.unk_56 == 0) {
         var_fv0 = 1.0f;
     } else {
         var_fv0 = 0.8f;
