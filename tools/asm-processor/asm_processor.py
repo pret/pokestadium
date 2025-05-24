@@ -223,12 +223,12 @@ class Section:
         assert self.sh_type == SHT_STRTAB
         to = self.data.find(b'\0', index)
         assert to != -1
-        return self.data[index:to].decode('latin1')
+        return self.data[index:to].decode('utf8')
 
     def add_str(self, string):
         assert self.sh_type == SHT_STRTAB
         ret = len(self.data)
-        self.data += string.encode('latin1') + b'\0'
+        self.data += string.encode('utf8') + b'\0'
         return ret
 
     def is_rel(self):
@@ -523,7 +523,7 @@ class GlobalAsmBlock:
         raise Failure(message + "\nwithin " + context)
 
     def count_quoted_size(self, line, z, real_line, output_enc):
-        line = line.encode(output_enc).decode('latin1')
+        line = line.encode(output_enc).decode('utf8')
         in_quote = False
         has_comma = True
         num_parts = 0
@@ -1309,7 +1309,7 @@ def fixup_objfile(objfile_name, functions, asm_prelude, assembler, output_enc, d
                             st_other=STV_DEFAULT,
                             st_shndx=section.index,
                             strtab=objfile.symtab.strtab,
-                            name=symbol_name[:-1].decode('latin1'))
+                            name=symbol_name[:-1].decode('utf8'))
                         strtab_index += len(emitted_symbol_name)
                         new_strtab_data.append(emitted_symbol_name)
                         new_syms.append(sym)
@@ -1420,8 +1420,8 @@ def run_wrapped(argv, outfile, functions):
     parser.add_argument('--post-process', dest='objfile', help="path to .o file to post-process")
     parser.add_argument('--assembler', dest='assembler', help="assembler command (e.g. \"mips-linux-gnu-as -march=vr4300 -mabi=32\")")
     parser.add_argument('--asm-prelude', dest='asm_prelude', help="path to a file containing a prelude to the assembly file (with .set and .macro directives, e.g.)")
-    parser.add_argument('--input-enc', default='latin1', help="input encoding (default: %(default)s)")
-    parser.add_argument('--output-enc', default='latin1', help="output encoding (default: %(default)s)")
+    parser.add_argument('--input-enc', default='utf8', help="input encoding (default: %(default)s)")
+    parser.add_argument('--output-enc', default='utf8', help="output encoding (default: %(default)s)")
     parser.add_argument('--drop-mdebug-gptab', dest='drop_mdebug_gptab', action='store_true', help="drop mdebug and gptab sections")
     parser.add_argument('--convert-statics', dest='convert_statics', choices=["no", "local", "global", "global-with-filename"], default="local", help="change static symbol visibility (default: %(default)s)")
     parser.add_argument('--force', dest='force', action='store_true', help="force processing of files without GLOBAL_ASM blocks")

@@ -524,7 +524,6 @@ void func_84311428(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 
 void func_843116D8(s16 arg0, s16 arg1) {
     Color_RGB8 sp54[] = {
-        // D_84385920
         { 0xB4, 0x00, 0x00 },
         { 0xCC, 0x8F, 0x00 },
         { 0x00, 0xB4, 0x00 },
@@ -579,7 +578,7 @@ void func_843118A8(s16 arg0, s16 arg1) {
 }
 
 void func_84311A38(unk_D_84390010* arg0, s16 arg1, s16 arg2) {
-    u8* sp74[] = { D_3006170, D_30061D0, D_3006230 }; // D_8438592C
+    u8* sp74[] = { D_3006170, D_30061D0, D_3006230 };
     UNUSED s32 pad;
     s32 i;
     s32 j;
@@ -996,7 +995,7 @@ s32 func_84313908(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 void func_84313A74(unk_D_84390010* arg0, s16 arg1, s16 arg2, s32 arg3) {
     s32 i;
-    s32 sp64[] = { 0, 0, 0, 0 }; // D_84385938
+    s32 sp64[] = { 0, 0, 0, 0 };
     u8 sp60[4];
     unk_D_84390010_654_038* temp_s0;
     unk_func_80026268_arg0* sp58;
@@ -1192,27 +1191,19 @@ void func_84313A74(unk_D_84390010* arg0, s16 arg1, s16 arg2, s32 arg3) {
     func_8001F324(0xFF, 0xFF, 0xFF, 0xFF);
 
     if (temp_s0->unk_1F[0] >= 0xA6) {
-        // "？？？？？"
-        static const char D_8438B328[] = { 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9 };
-        func_84313750(arg1 + 0x5A, arg2 + 4, D_8438B328);
+        func_84313750(arg1 + 0x5A, arg2 + 4, "？？？？？");
     }
 
     if (temp_s0->unk_1F[1] >= 0xA6) {
-        // "？？？？？"
-        static const char D_8438B334[] = { 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9 };
-        func_8001F1E8(arg1 + 0x7C, arg2 + 0x11, D_8438B334);
+        func_8001F1E8(arg1 + 0x7C, arg2 + 0x11, "？？？？？");
     }
 
     if (temp_s0->unk_1F[2] >= 0xA6) {
-        // "？？？？？"
-        static const char D_8438B340[] = { 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9 };
-        func_8001F1E8(arg1 + 0x6E, arg2 + 0x25, D_8438B340);
+        func_8001F1E8(arg1 + 0x6E, arg2 + 0x25, "？？？？？");
     }
 
     if (temp_s0->unk_1F[3] >= 0xA6) {
-        // "？？？？？"
-        static const char D_8438B34C[] = { 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9, 0xA1, 0xA9 };
-        func_84313750(arg1 + 0x4C, arg2 + 0x18, D_8438B34C);
+        func_84313750(arg1 + 0x4C, arg2 + 0x18, "？？？？？");
     }
 
     func_8001F444();
@@ -1220,14 +1211,6 @@ void func_84313A74(unk_D_84390010* arg0, s16 arg1, s16 arg2, s32 arg3) {
 }
 
 void func_8431493C(s16 arg0, s16 arg1, s16 arg2, s32 arg3) {
-    // こうさんしますか?
-    static const char D_8438B358[] = {
-        0xa4, 0xb3, 0xa4, 0xa6, 0xa4, 0xb5, 0xa4, 0xf3, 0xa4, 0xb7, 0xa4, 0xde, 0xa4, 0xb9, 0xa4, 0xab, 0x3f,
-    };
-    // "いいえ"
-    static const char D_8438B36C[] = { 0xa4, 0xa4, 0xa4, 0xa4, 0xa4, 0xa8 };
-    // "はい"
-    static const char D_8438B374[] = { 0xa4, 0xcf, 0xa4, 0xa4, 0x00, 0x00 };
     UNUSED s32 pad[2];
     s32 var_v1;
 
@@ -1240,9 +1223,9 @@ void func_8431493C(s16 arg0, s16 arg1, s16 arg2, s32 arg3) {
     func_84310334(arg0 + 1, arg1 + 1, 0xC6, 0x28, &D_84385860[var_v1], &D_84385870[var_v1]);
     func_8001F3F4();
     func_8001EBE0(2, 0);
-    func_8001F1E8(arg0 + 0x2E, arg1 + 6, D_8438B358);
-    func_8001F1E8(arg0 + 0x38, arg1 + 0x18, D_8438B36C);
-    func_8001F1E8(arg0 + 0x81, arg1 + 0x18, D_8438B374);
+    func_8001F1E8(arg0 + 0x2E, arg1 + 6, "こうさんしますか?");
+    func_8001F1E8(arg0 + 0x38, arg1 + 0x18, "いいえ");
+    func_8001F1E8(arg0 + 0x81, arg1 + 0x18, "はい");
     func_8001F444();
 
     gSPDisplayList(gDisplayListHead++, D_8006F5A0);
@@ -1364,14 +1347,12 @@ void func_84314F60(unk_D_84390010* arg0, unk_D_800AE540_0004* arg1, unk_func_800
 void func_8431524C(unk_D_84390010* arg0, unk_D_800AE540_0004* arg1, s16 arg2, s16 arg3, s32 arg4) {
     UNUSED s32 pad[2];
     Color_RGB8* sp88[] = {
-        // D_84385948
         D_84385888,
         D_843858A0,
         D_843858B8,
         D_843858D0,
     };
     Color_RGB8* sp78[] = {
-        // D_84385958
         D_84385894,
         D_843858AC,
         D_843858C4,
@@ -1414,14 +1395,12 @@ void func_84315550(unk_D_84390010* arg0, s16 arg1, s16 arg2, s32 arg3) {
     unk_func_80026268_arg0* ptr = &arg0->unk_724->unk_01C[0];
     s32 i;
     Color_RGB8* sp88[] = {
-        // D_84385968
         D_84385888,
         D_843858A0,
         D_843858B8,
         D_843858D0,
     };
     Color_RGB8* sp78[] = {
-        // D_84385978
         D_84385894,
         D_843858AC,
         D_843858C4,

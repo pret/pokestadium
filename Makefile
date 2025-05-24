@@ -60,6 +60,8 @@ N64_EMULATOR ?=
 MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
 PRINT = printf
 
+PREPROCESS :=
+
 # Whether to hide commands or not
 VERBOSE ?= 0
 ifeq ($(VERBOSE),0)
@@ -296,6 +298,8 @@ DECOMP_POKESTADIUM_FILTERED := $(patsubst %.c,%.o,$(addprefix build/,$(shell fin
 # only run asm processor on files that need it.
 $(DECOMP_POKESTADIUM_FILTERED): CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
+$(BUILD_DIR)/src/%.o: PREPROCESS := ./tools/preprocess.sh -i $(ICONV) --
+
 ###################### Ugly hacksz #############################
 
 # This is unsanitary to do, -but-, because this file is encrypted we cant have splat decrypt it
@@ -421,7 +425,7 @@ $(BUILD_DIR)/%.o: %.s
 $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
-	$(V)$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
+	$(V)$(PREPROCESS) $(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(LIBULTRA_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
 	$(V)$(OBJDUMP_CMD)
 	$(V)$(RM_MDEBUG)
 
