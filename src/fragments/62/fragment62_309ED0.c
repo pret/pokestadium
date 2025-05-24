@@ -1,4 +1,7 @@
-#include "global.h"
+#include "fragment62.h"
+
+// static Vec3f D_84385B90 = { 0.0f, 100.0f, 0.0f };
+// static Vec3f D_84385B9C = { 0.0f, 10.0f, 0.0f };
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_309ED0/func_8431F610.s")
 
