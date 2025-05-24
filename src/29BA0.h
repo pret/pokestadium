@@ -74,8 +74,7 @@ typedef struct unk_D_800AE540_0004 {
     /* 0x008 */ char unk_008[4];
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;
-    /* 0x01C */ unk_func_80026268_arg0 unk_01C[1];
-    /* 0x070 */ char unk070[0x1A4];
+    /* 0x01C */ unk_func_80026268_arg0 unk_01C[6];
     /* 0x214 */ unk_D_800AE540_0874* unk_214;
     /* 0x218 */ char unk218[0x4];
 } unk_D_800AE540_0004; // size = 0x21C

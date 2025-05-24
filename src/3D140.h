@@ -44,6 +44,8 @@ s32 func_8003D4A0(s32);
 void func_8003D68C(s32);
 void func_8003D918(u32 arg0, u32 arg1);
 void func_8003DB84(s32 arg0);
+void func_8003F624(u32 arg0);
+void func_8003F660(s32);
 void func_80041688(void);
 void func_800416BC(void);
 void func_80041A98(void);

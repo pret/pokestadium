@@ -96,6 +96,7 @@ extern u8 D_80078400;
 extern u16 D_80078410[1][9];
 extern u16 D_80078446[1][9];
 extern u16 D_800784EA[1][9];
+extern u32 D_80078544;
 extern f64 D_8007C7E0;
 extern f64 D_8007C7E8;
 extern f64 D_8007C7F0;
@@ -111,9 +112,9 @@ extern AudioInfo* lastInfo;
 extern s32 min_only_one;
 extern u8 D_800FC825;
 extern s32 D_800FC828;
-
 extern s32 D_800FCB28;
 extern s32 D_800FCB2C;
+extern u32 D_800FCCF0[10];
 
 typedef struct unk_D_800FCB48 {
     /* 0x00 */ u16 unk_00[16];
@@ -1120,7 +1121,13 @@ void func_8003DB84(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F4C0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F624.s")
+void func_8003F624(u32 arg0) {
+    D_800FCCF0[D_80078544] = arg0;
+    D_80078544++;
+    if (D_80078544 >= 0xA) {
+        D_80078544--;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F660.s")
 
