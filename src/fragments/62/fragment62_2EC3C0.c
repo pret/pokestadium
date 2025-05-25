@@ -393,15 +393,15 @@ void func_84302658(unk_D_84390010* arg0, s32 arg1) {
     var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (sp66 * 0x20)) & 0xFFFFFF);
     func_80003B30(&D_84390048, var_a1, var_a1 + 0x20, 0);
 
-    func_8430C1E4(&arg0->unk_46C.unk_00, &D_84390048.unk_00);
-    func_8430C1E4(&arg0->unk_46C.unk_0C, &D_84390048.unk_0C);
+    func_8430C1E4(&arg0->unk_448.unk_24.unk_00, &D_84390048.unk_00);
+    func_8430C1E4(&arg0->unk_448.unk_24.unk_0C, &D_84390048.unk_0C);
 
-    arg0->unk_46C.unk_18 = D_84390048.unk_18;
-    arg0->unk_46C.unk_19 = D_84390048.unk_19;
-    arg0->unk_46C.unk_1A = D_84390048.unk_1A;
-    arg0->unk_46C.unk_1B = D_84390048.unk_1B;
-    arg0->unk_46C.unk_00.x *= arg0->unk_4B0;
-    arg0->unk_46C.unk_0C.x *= arg0->unk_4B0;
+    arg0->unk_448.unk_24.unk_18 = D_84390048.unk_18;
+    arg0->unk_448.unk_24.unk_19 = D_84390048.unk_19;
+    arg0->unk_448.unk_24.unk_1A = D_84390048.unk_1A;
+    arg0->unk_448.unk_24.unk_1B = D_84390048.unk_1B;
+    arg0->unk_448.unk_24.unk_00.x *= arg0->unk_4B0;
+    arg0->unk_448.unk_24.unk_0C.x *= arg0->unk_4B0;
 
     var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (sp66 << 4)) & 0xFFFFFF);
     func_80003B30(&D_84390028[sp68], var_a1, var_a1 + 0x10, 0);
@@ -556,7 +556,7 @@ void func_84302EF0(unk_D_84390010* arg0) {
                 func_8432B5B8(arg0, sp24, 2);
             } else {
                 if ((sp24->unk_5A == 0x2D) || (sp24->unk_5A == 0x2E) || (sp24->unk_5A == 0x59)) {
-                    func_8431B290(arg0, sp24);
+                    func_8431B290(arg0);
                 }
                 func_8432B5B8(arg0, sp24, 0);
                 func_843031A0(arg0);
@@ -2102,7 +2102,7 @@ void func_84307078(unk_D_800AE540_1194* arg0) {
 
 void func_843071B8(unk_D_84390010* arg0, unk_D_84390010* arg1, s32 arg2) {
     func_8000E88C(&arg1->unk_448, 0.0f, 0.0f, 0.0f);
-    func_8000E88C(&arg1->unk_454, 0.0f, 0.0f, 0.0f);
+    func_8000E88C(&arg1->unk_448.unk_0C, 0.0f, 0.0f, 0.0f);
     arg1->unk_4B0 = arg2;
 }
 
