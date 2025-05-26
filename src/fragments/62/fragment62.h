@@ -235,7 +235,8 @@ typedef struct unk_D_8438E7B0 {
 } unk_D_8438E7B0; // size = 0xBE0
 
 typedef struct unk_D_84390240_000 {
-    /* 0x00 */ char unk00[0xC];
+    /* 0x00 */ char unk00[0x8];
+    /* 0x08 */ s8 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
@@ -270,7 +271,9 @@ typedef struct unk_D_84390240_000 {
     /* 0x74 */ f32 unk_74;
     /* 0x78 */ u8 unk_78;
     /* 0x7A */ s16 unk_7A;
-    /* 0x7C */ char unk7C[0x18];
+    /* 0x7C */ char unk7C[0x8];
+    /* 0x84 */ f32 unk_84;
+    /* 0x88 */ char unk88[0xC];
     /* 0x94 */ Vec3f unk_94;
     /* 0xA0 */ Vec3f unk_A0;
     /* 0xAC */ char unkAC[0xC];
@@ -278,7 +281,7 @@ typedef struct unk_D_84390240_000 {
     /* 0xC4 */ Vec3f unk_C4;
     /* 0xD0 */ Vec3f unk_D0;
     /* 0xDC */ unk_D_86002F34_00C* unk_DC;
-} unk_D_84390240_000; // size >= 0xE0
+} unk_D_84390240_000; // size = 0xE0
 
 typedef struct unk_D_84390240 {
     /* 0x00 */ unk_D_84390240_000* unk_00;
@@ -477,6 +480,8 @@ extern unk_D_84390178 D_84390178;
 extern Vec3f D_84390190;
 extern unk_D_843901A0* D_843901A0;
 extern unk_D_843901B0 D_843901B0;
+extern unk_D_84390010* D_84390200;
+extern unk_D_84390010* D_84390204;
 extern s32 D_8439022C;
 extern s32 D_84390230;
 extern s32 D_84390234;
@@ -1175,7 +1180,46 @@ void func_84328250(unk_D_86002F34_00C* arg0);
 void func_84328734(unk_D_86002F34_00C* arg0);
 
 
-s32 func_8432AEE4(s32, unk_D_86002F34_00C*);
+void func_84328990(unk_D_86002F34_00C* arg0);
+void func_84328A70(UNUSED unk_D_86002F34_00C* arg0);
+void func_84328B30(UNUSED unk_D_86002F34_00C* arg0);
+void func_84328BF0(unk_D_86002F34_00C* arg0);
+void func_84328D70(unk_D_86002F34_00C* arg0);
+void func_84328EC0(UNUSED unk_D_86002F34_00C* arg0);
+void func_84328F2C(unk_D_86002F34_00C* arg0);
+void func_843290A0(unk_D_86002F34_00C* arg0);
+void func_84329164(unk_D_86002F34_00C* arg0);
+void func_843292D8(unk_D_86002F34_00C* arg0);
+void func_843293A8(UNUSED unk_D_86002F34_00C* arg0);
+void func_843293B0(void);
+void func_843293B8(unk_D_86002F34_00C* arg0);
+
+
+void func_843294A0(unk_D_86002F34_00C* arg0);
+void func_843295D0(unk_D_86002F34_00C* arg0);
+void func_843296B8(unk_D_86002F34_00C* arg0, UNUSED unk_D_84390010* arg1, UNUSED unk_D_84390010* arg2);
+void func_843297AC(void);
+void func_843297E8(UNUSED unk_D_86002F34_00C* arg0);
+void func_843297F0(UNUSED unk_D_86002F34_00C* arg0);
+void func_843297F8(unk_D_86002F34_00C* arg0);
+void func_84329858(unk_D_86002F34_00C* arg0);
+void func_84329B04(unk_D_86002F34_00C* arg0);
+void func_84329DB8(unk_D_86002F34_00C* arg0);
+u16 func_84329DFC(unk_D_84390010* arg0, unk_D_86002F34_00C* arg1, unk_D_84390010* a2, s16 arg3, f32 arg4);
+u16 func_8432A024(unk_D_84390010* arg0, unk_D_86002F34_00C* arg1, unk_D_84390010* a2, s16 arg3, f32 arg4);
+void func_8432A2D4(unk_D_86002F34_00C* arg0);
+void func_8432A398(unk_D_86002F34_00C* arg0);
+void func_8432A414(void);
+void func_8432A41C(void);
+void func_8432A448(void);
+void func_8432A4B0(void);
+void func_8432A510(void);
+void func_8432A578(unk_D_86002F34_00C* arg0);
+void func_8432ABBC(unk_D_86002F34_00C* arg0);
+void func_8432ADD8(unk_D_86002F34_00C* arg0);
+s32 func_8432AEE4(s32 arg0, unk_D_86002F34_00C* arg1);
+
+
 void func_8432AF70(unk_D_84390010*);
 void func_8432B0E4(unk_D_84390010*);
 void func_8432B13C(unk_D_84390010*);
@@ -1193,6 +1237,8 @@ void func_8432B588(unk_D_84390010*);
 void func_8432B5B8(unk_D_84390010*, unk_D_84390010_654_038*, s32);
 void func_8432B604(void);
 void func_8432B704(void);
+void func_8432B808(void);
+void func_8432BBC0(void);
 void func_8432BF88(unk_D_84390010*, s32);
 void func_8432C5D4(s32, unk_D_84390010*, unk_D_84390010*, s16, s16);
 void func_8432C604(s32, unk_D_84390010*, unk_D_84390010*, s16, s16);
@@ -1210,7 +1256,9 @@ void func_8432E9D8(s32);
 void func_8432F9B4(void);
 f32 func_8435E158(f32, f32, f32*);
 f32 func_8435FCD0(void);
+void func_8436EEF0(s32, s32);
 s32 func_8436EF48(void);
+void func_8436EF54(void);
 void func_8436F664(void);
 s32 func_8436F6D8(void);
 void func_8436F9D8(s32, s32);

@@ -2153,6 +2153,7 @@
     - [0x3055E0, c,      fragments/62/fragment62_3055E0]
     - [0x309ED0, c,      fragments/62/fragment62_309ED0]
     - [0x313250, c,      fragments/62/fragment62_313250]
+    - [0x313D60, c,      fragments/62/fragment62_313D60]
     - [0x315830, c,      fragments/62/fragment62_315830]
     - [0x315D50, c,      fragments/62/fragment62_315D50]
     - [0x317E70, c,      fragments/62/fragment62_317E70]
@@ -2203,8 +2204,8 @@
     - [0x375D50, .rodata, fragments/62/fragment62_304060]
     - [0x375EA0, .rodata, fragments/62/fragment62_3055E0]
     - [0x376100, .rodata, fragments/62/fragment62_309ED0]
-    - [0x3764B0, rodata, fragments/62/fragment62_rodata_3764B0]
-    - [0x3764E0, rodata, fragments/62/fragment62_rodata_3764E0]
+    - [0x3764B0, .rodata, fragments/62/fragment62_313250]
+    - [0x3764E0, .rodata, fragments/62/fragment62_313D60]
     - [0x376650, rodata, fragments/62/fragment62_rodata_376650]
     - [0x3768B0, rodata, fragments/62/fragment62_rodata_3768B0]
     - [0x3768E0, rodata, fragments/62/fragment62_rodata_3768E0]
@@ -2239,7 +2240,8 @@
     - {vram: 0x843901A0, type:  .bss, name: fragments/62/fragment62_3020D0}
     - {vram: 0x843901B0, type:  .bss, name: fragments/62/fragment62_3055E0}
     - {vram: 0x84390200, type:  .bss, name: fragments/62/fragment62_309ED0}
-    - {vram: 0x84390240, type:  bss, name: fragments/62/fragment62_bss2}
+    - {vram: 0x84390240, type:  .bss, name: fragments/62/fragment62_313D60}
+    - {vram: 0x843902A0, type:  bss, name: fragments/62/fragment62_bss2}
 
   - name: fragment62_relocs
     type: code
