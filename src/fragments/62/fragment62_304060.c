@@ -379,7 +379,7 @@ void func_8431A2C8(unk_D_86002F34_00C* arg0, s32 arg1) {
         tmp3 = (temp_s0->unk_4B0 * D_84384580[D_84390240.unk_00->unk_2C]->unk_0E) + func_84308190(temp_s0);
 
         func_80010354(&arg0->unk_60.at, &arg0->unk_60.eye, tmp1, tmp4, tmp3);
-        D_84390240.unk_00->unk_20 += 1;
+        D_84390240.unk_00->unk_20++;
     }
 }
 

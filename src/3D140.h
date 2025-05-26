@@ -44,8 +44,12 @@ s32 func_8003D4A0(s32);
 void func_8003D68C(s32);
 void func_8003D918(u32 arg0, u32 arg1);
 void func_8003DB84(s32 arg0);
+void func_8003F1AC(s32);
+void func_8003F4C0(s32);
 void func_8003F624(u32 arg0);
 void func_8003F660(s32);
+void func_800414B8(s32);
+void func_8004153C(void);
 void func_80041688(void);
 void func_800416BC(void);
 void func_80041A98(void);
@@ -56,5 +60,6 @@ void func_80041DF4(u16 arg0);
 void func_80041E40(u16 arg0);
 u32 func_80041EF4(u16* arg0);
 void func_800420C0(u16* arg0);
+void func_80048014(void);
 
 #endif // _3D140_H_

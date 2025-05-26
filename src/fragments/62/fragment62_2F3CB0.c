@@ -591,11 +591,11 @@ void func_8430AE3C(unk_D_84390010* arg0, unk_D_84390010* arg1) {
 
 void func_8430AE90(unk_D_84390010* arg0) {
     UNUSED s32 pad;
-    unk_D_84390240_000_0DC* sp18 = D_84390240.unk_00->unk_DC;
+    unk_D_86002F34_00C* sp18 = D_84390240.unk_00->unk_DC;
 
     func_84307C5C(arg0);
     func_8000EB70(&arg0->unk_000.unk_01E, 0, arg0->unk_4B0 << 0xE, 0);
-    func_8000E88C(&sp18->unk_C0, 0.0f, 1.0f, 0.0f);
+    func_8000E88C(&sp18->unk_60.up, 0.0f, 1.0f, 0.0f);
     func_84309F0C(arg0);
 }
 
@@ -611,7 +611,7 @@ void func_8430AF08(unk_D_84390010* arg0, unk_D_84390010* arg1) {
 }
 
 void func_8430AF80(UNUSED unk_D_84390010* arg0, unk_D_84390010* arg1) {
-    unk_D_84390240_000_0DC* temp_s0 = D_84390240.unk_00->unk_DC;
+    unk_D_86002F34_00C* temp_s0 = D_84390240.unk_00->unk_DC;
     f32 temp_fa0;
     f32 temp_fa1_2;
     f32 temp_ft4;
@@ -624,9 +624,9 @@ void func_8430AF80(UNUSED unk_D_84390010* arg0, unk_D_84390010* arg1) {
     func_8430C4F8(&arg1->unk_4A4, 0x5B0, 0x3C);
     func_8430C4F8(&arg1->unk_4A8, -0x8000, arg1->unk_4A4);
 
-    sp2C = temp_s0->unk_B4.x - temp_s0->unk_A8.x;
-    sp28 = temp_s0->unk_B4.y - temp_s0->unk_A8.y;
-    sp24 = temp_s0->unk_B4.z - temp_s0->unk_A8.z;
+    sp2C = temp_s0->unk_60.at.x - temp_s0->unk_60.eye.x;
+    sp28 = temp_s0->unk_60.at.y - temp_s0->unk_60.eye.y;
+    sp24 = temp_s0->unk_60.at.z - temp_s0->unk_60.eye.z;
 
     temp_fv0_2 = sqrtf(SQ(sp2C) + SQ(sp28) + SQ(sp24));
 
@@ -636,9 +636,9 @@ void func_8430AF80(UNUSED unk_D_84390010* arg0, unk_D_84390010* arg1) {
 
     temp_ft4 = 1.0 - COSS(arg1->unk_4A8);
 
-    temp_s0->unk_C0.x = (temp_ft4 * temp_fa0 * temp_fv1_2) - (SINS(arg1->unk_4A8) * temp_fa1_2);
-    temp_s0->unk_C0.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
-    temp_s0->unk_C0.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
+    temp_s0->unk_60.up.x = (temp_ft4 * temp_fa0 * temp_fv1_2) - (SINS(arg1->unk_4A8) * temp_fa1_2);
+    temp_s0->unk_60.up.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
+    temp_s0->unk_60.up.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
 
     if (arg1->unk_000.unk_024.y < 0.0f) {
         arg1->unk_000.unk_024.y = 0.0f;
@@ -1207,24 +1207,20 @@ unk_D_86B0C160 D_84384888[] = {
     },
 };
 
-u32 D_843848F0[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x15550000, 0x00000000, 0x40600000, 0x3E4CCCCD, 0x3D75C28F, 0x43480000,
+unk_D_86B0C160 D_843848F0 = {
+    0, 0, 0, 0, 0, 0.0f, 0.0f, 0, 0, 0, 0, 5461, 0.0f, 3.5f, 0.20000000298023224f, 0.05999999865889549f, 200.0f,
 };
 
-u32 D_84384924[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000011C6,
-    0x7C6A0000, 0x00000000, 0x40C00000, 0x3E4CCCCD, 0x3D23D70A, 0x43480000,
+unk_D_86B0C160 D_84384924 = {
+    0, 0, 0, 0, 0, 0.0f, 0.0f, 0, 0, 0, 4550, 31850, 0.0f, 6.0f, 0.20000000298023224f, 0.03999999910593033f, 200.0f,
 };
 
-u32 D_84384958[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000E38,
-    0x80000000, 0x00000000, 0x40C00000, 0x3E4CCCCD, 0x3DA3D70A, 0x43480000,
+unk_D_86B0C160 D_84384958 = {
+    0, 0, 0, 0, 0, 0.0f, 0.0f, 0, 0, 0, 3640, -32768, 0.0f, 6.0f, 0.20000000298023224f, 0.07999999821186066f, 200.0f,
 };
 
-u32 D_8438498C[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x40600000, 0x3E4CCCCD, 0x3D75C28F, 0x43480000,
+unk_D_86B0C160 D_8438498C = {
+    0, 0, 0, 0, 0, 0.0f, 0.0f, 0, 0, 0, 0, 0, 0.0f, 3.5f, 0.20000000298023224f, 0.05999999865889549f, 200.0f,
 };
 
 unk_D_86B0C160 D_843849C0[] = {
@@ -1344,9 +1340,8 @@ unk_D_86B0C160 D_843849C0[] = {
     },
 };
 
-u32 D_84384AF8[] = {
-    0x00000000, 0x00000888, 0x00000000, 0x00000000, 0x41280000, 0x00000000, 0x000000B6,
-    0x00000000, 0x00000000, 0x40000000, 0x3E4CCCCD, 0x3C75C28F, 0x42480000,
+unk_D_86B0C160 D_84384AF8 = {
+    0, 0, 0, 2184, 0, 0.0f, 10.5f, 0, 0, 0, 182, 0, 0.0f, 2.0f, 0.20000000298023224f, 0.014999999664723873f, 50.0f,
 };
 
 unk_D_86B0C160 D_84384B2C[] = {

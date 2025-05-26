@@ -1213,7 +1213,7 @@ void func_84304D84(unk_D_84390010* arg0) {
 void func_84304F54(unk_D_84390010* arg0) {
     s32 sp24;
 
-    D_84390020 = D_84384570[func_84307F00(arg0)]->unkB10;
+    D_84390020 = &D_84384570[func_84307F00(arg0)]->unk_B10;
     if (D_84390020->unk_09 == 1) {
         sp24 = D_84390020->unk_0A - 0x4C;
     } else {

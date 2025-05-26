@@ -3,8 +3,8 @@
 #include "src/F420.h"
 
 unk_D_843901B0 D_843901B0;
-static f32 D_843901F0;
-static f32 D_843901F4;
+f32 D_843901F0;
+f32 D_843901F4;
 
 static s32 D_84385B50 = 0;
 
@@ -1297,7 +1297,7 @@ void func_8431F194(unk_D_86002F34_00C* arg0, unk_D_84390010* arg1) {
     func_8431B858(arg1, arg0);
 }
 
-void func_8431F290(unk_D_84390010* arg0, unk_D_86002F34_00C* arg1, u32 arg2, s32 arg3) {
+void func_8431F290(unk_D_84390010* arg0, unk_D_86002F34_00C* arg1, s32 arg2, s32 arg3) {
     func_8431BA5C();
     switch (arg2) {
         case 0:
