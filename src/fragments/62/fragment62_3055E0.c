@@ -635,7 +635,7 @@ s32 func_8431C8E0(unk_D_86002F34_00C* arg0, unk_D_84390010* arg1) {
     s16 sp4E;
     s16 sp4C;
     UNUSED s32 pad3[2];
-    unk_D_84390010_654_038* temp_v1;
+    unk_D_800FCB18* temp_v1;
 
     temp_v1 = &D_84390010[func_84307F00(arg1) == 0]->unk_654.unk_38;
 

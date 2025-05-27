@@ -997,7 +997,7 @@ void func_84313A74(unk_D_84390010* arg0, s16 arg1, s16 arg2, s32 arg3) {
     s32 i;
     s32 sp64[] = { 0, 0, 0, 0 };
     u8 sp60[4];
-    unk_D_84390010_654_038* temp_s0;
+    unk_D_800FCB18* temp_s0;
     unk_func_80026268_arg0* sp58;
     UNUSED s32 pad;
 

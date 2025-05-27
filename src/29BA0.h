@@ -6,6 +6,12 @@
 #include "src/controller.h"
 #include "PR/leo.h"
 
+typedef struct arg1_func_80019420 {
+    /* 0x00 */ s8 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ void* unk_04;
+} arg1_func_80019420; // size = 0x8
+
 typedef struct unk_D_800AE520 {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 fragment_id;
@@ -92,7 +98,7 @@ typedef struct unk_D_800AE540_1194 {
     /* 0x1D */ u8 unk_1D;
     /* 0x1E */ u8 unk_1E;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk24[0x4];
+    /* 0x24 */ arg1_func_80019420* unk_24;
 } unk_D_800AE540_1194; // size = 0x28
 
 typedef struct unk_D_800AE540 {

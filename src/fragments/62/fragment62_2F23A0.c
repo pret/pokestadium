@@ -445,8 +445,8 @@ s32 func_84308D54(unk_D_84390010* arg0) {
     return arg0->unk_720->unk_08[1]->unk_002 + arg0->unk_720->unk_08[0]->unk_002;
 }
 
-u8 func_84308D90(unk_D_84390010* arg0) {
-    return arg0->unk_000.unk_000.unk_02;
+u8 func_84308D90(unk_D_800AE540_0004* arg0) {
+    return arg0->unk_002;
 }
 
 s32 func_84308D98(unk_D_84390010* arg0) {

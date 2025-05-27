@@ -228,8 +228,8 @@ s32 func_8430D334(unk_D_84390010* arg0) {
 }
 
 void func_8430D364(void) {
-    unk_D_84390010_654_038* temp_a2;
-    unk_D_84390010_654_038* temp_a3;
+    unk_D_800FCB18* temp_a2;
+    unk_D_800FCB18* temp_a3;
     unk_D_84390010_654* ptr1;
     unk_D_84390010_654* ptr2;
     unk_func_80026268_arg0* ptr3;
@@ -256,7 +256,7 @@ s32 func_8430D434(unk_D_84390010* arg0) {
     s32 i;
     s32 var_v1;
     unk_D_84390010_654* temp_v1;
-    unk_D_84390010_654_038* temp_v0;
+    unk_D_800FCB18* temp_v0;
 
     temp_v1 = &arg0->unk_654;
     temp_v0 = &arg0->unk_654.unk_38;
@@ -286,7 +286,7 @@ s32 func_8430D434(unk_D_84390010* arg0) {
 }
 
 s32 func_8430D574(unk_D_84390010* arg0, s32 arg1) {
-    unk_D_84390010_654_038* ptr = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* ptr = &arg0->unk_654.unk_38;
 
     if (!(ptr->unk_32[arg1] & 0x3F)) {
         return 1;
@@ -385,7 +385,7 @@ void func_8430D814(void) {
 }
 
 s32 func_8430D8C4(unk_D_84390010* arg0) {
-    unk_D_84390010_654_038* temp_v0 = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* temp_v0 = &arg0->unk_654.unk_38;
     s32 i;
     s32 var_v1 = 0;
 
@@ -558,8 +558,8 @@ s32 func_8430DE20(unk_D_84390010* arg0, unk_D_84390010* arg1) {
     return 0;
 }
 
-void func_8430DF60(UNUSED unk_D_84390010_654_038* arg0, UNUSED unk_D_84390010_654_038* arg1,
-                   UNUSED unk_D_84390010_654* arg2, UNUSED unk_D_84390010_654* arg3, UNUSED unk_D_84390010* arg4) {
+void func_8430DF60(UNUSED unk_D_800FCB18* arg0, UNUSED unk_D_800FCB18* arg1, UNUSED unk_D_84390010_654* arg2,
+                   UNUSED unk_D_84390010_654* arg3, UNUSED unk_D_84390010* arg4) {
     if ((D_84390120 == 1.0f) && (D_8439013C == 0)) {
         D_8439013C = 1;
         D_84390138 = func_84383B5C(0);
@@ -567,8 +567,8 @@ void func_8430DF60(UNUSED unk_D_84390010_654_038* arg0, UNUSED unk_D_84390010_65
 }
 
 s32 func_8430DFCC(unk_D_84390010* arg0, unk_D_84390010* arg1) {
-    unk_D_84390010_654_038* sp34 = &arg0->unk_654.unk_38;
-    unk_D_84390010_654_038* sp30 = &arg1->unk_654.unk_38;
+    unk_D_800FCB18* sp34 = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* sp30 = &arg1->unk_654.unk_38;
     unk_D_84390010_654* sp2C = &arg0->unk_654;
     unk_D_84390010_654* sp28 = &arg1->unk_654;
 
@@ -677,7 +677,7 @@ void func_8430E1CC(unk_D_84390010* arg0) {
 
 void func_8430E490(unk_D_84390010* arg0) {
     unk_D_84390010_654* temp_v0 = &arg0->unk_654;
-    unk_D_84390010_654_038* temp_v1 = &D_84390010[func_84307F00(arg0) == 0]->unk_654.unk_38;
+    unk_D_800FCB18* temp_v1 = &D_84390010[func_84307F00(arg0) == 0]->unk_654.unk_38;
 
     if (temp_v1->unk_4C & 0x20) {
         arg0->unk_654.unk_38.unk_5A = 0xFF;
@@ -834,7 +834,7 @@ void func_8430E8E8(unk_D_84390010* arg0) {
 
 void func_8430EB1C(unk_D_84390010* arg0) {
     unk_D_84390010_654* temp_v0 = &arg0->unk_654;
-    unk_D_84390010_654_038* temp_v1 = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* temp_v1 = &arg0->unk_654.unk_38;
 
     if (arg0->unk_654.unk_14 != 4) {
         temp_v0->unk_0C = temp_v0->unk_14;
@@ -860,7 +860,7 @@ s32 func_8430EBA8(unk_D_84390010* arg0) {
     s32 temp_a1;
     s32 var_v1;
     unk_D_84390010_654* temp_v0;
-    unk_D_84390010_654_038* temp_a0;
+    unk_D_800FCB18* temp_a0;
     Controller* cont;
 
     temp_v0 = &arg0->unk_654;
@@ -908,7 +908,7 @@ s32 func_8430EBA8(unk_D_84390010* arg0) {
 s32 func_8430ED88(unk_D_84390010* arg0) {
     UNUSED s32 pad[2];
     unk_D_84390010_654* sp24 = &arg0->unk_654;
-    unk_D_84390010_654_038* ptr = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* ptr = &arg0->unk_654.unk_38;
 
     if (!(ptr->unk_32[sp24->unk_14] & 0x3F)) {
         func_8432B4F0();
@@ -1159,8 +1159,8 @@ void func_8430F500(void) {
 }
 
 void func_8430F598(unk_D_84390010* arg0, unk_D_84390010* arg1) {
-    unk_D_84390010_654_038* temp_v0 = &arg0->unk_654.unk_38;
-    unk_D_84390010_654_038* temp_v1 = &arg1->unk_654.unk_38;
+    unk_D_800FCB18* temp_v0 = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* temp_v1 = &arg1->unk_654.unk_38;
 
     if (!(arg0->unk_654.unk_38.unk_4D & 0x60)) {
         temp_v0->unk_4C &= ~8;
@@ -1176,8 +1176,8 @@ void func_8430F598(unk_D_84390010* arg0, unk_D_84390010* arg1) {
 void func_8430F5F4(void) {
     unk_D_84390010_654* sp24 = &D_84390010[0]->unk_654;
     unk_D_84390010_654* sp20 = &D_84390010[1]->unk_654;
-    unk_D_84390010_654_038* sp1C = &D_84390010[0]->unk_654.unk_38;
-    unk_D_84390010_654_038* sp18 = &D_84390010[1]->unk_654.unk_38;
+    unk_D_800FCB18* sp1C = &D_84390010[0]->unk_654.unk_38;
+    unk_D_800FCB18* sp18 = &D_84390010[1]->unk_654.unk_38;
     Controller* cont = &D_84390150;
 
     func_8430F500();
@@ -1228,8 +1228,8 @@ void func_8430F5F4(void) {
 
 void func_8430F794(unk_D_84390010* arg0, unk_D_84390010* arg1) {
     UNUSED s32 pad;
-    unk_D_84390010_654_038* sp20 = &arg0->unk_654.unk_38;
-    unk_D_84390010_654_038* sp1C = &arg1->unk_654.unk_38;
+    unk_D_800FCB18* sp20 = &arg0->unk_654.unk_38;
+    unk_D_800FCB18* sp1C = &arg1->unk_654.unk_38;
 
     if (func_8430F350(arg0, arg1) == 0) {
         if (!(sp20->unk_4D & 0x60)) {
@@ -1264,8 +1264,8 @@ void func_8430F794(unk_D_84390010* arg0, unk_D_84390010* arg1) {
 void func_8430F8B8(void) {
     unk_D_84390010_654* sp24 = &D_84390010[0]->unk_654;
     unk_D_84390010_654* sp20 = &D_84390010[1]->unk_654;
-    unk_D_84390010_654_038* sp1C = &D_84390010[0]->unk_654.unk_38;
-    unk_D_84390010_654_038* sp18 = &D_84390010[1]->unk_654.unk_38;
+    unk_D_800FCB18* sp1C = &D_84390010[0]->unk_654.unk_38;
+    unk_D_800FCB18* sp18 = &D_84390010[1]->unk_654.unk_38;
 
     if (D_84390010[0]->unk_724->unk_000 & 2) {
         D_84390144 = D_843C4DC4;

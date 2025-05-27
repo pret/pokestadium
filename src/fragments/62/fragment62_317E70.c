@@ -138,6 +138,10 @@
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_317E70/func_8432F93C.s")
 
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_317E70/func_8432F998.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_317E70/func_8432F9A0.s")
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_317E70/func_8432F9A8.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_317E70/func_8432F9B4.s")

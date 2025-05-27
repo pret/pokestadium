@@ -141,7 +141,7 @@ void func_84317B40(void) {
 
 void func_84317BDC(void) {
     u32 sp1C;
-    unk_D_84390010_654_038* sp18 = &D_84390010[D_84390240.unk_00->unk_2C]->unk_654.unk_38;
+    unk_D_800FCB18* sp18 = &D_84390010[D_84390240.unk_00->unk_2C]->unk_654.unk_38;
 
     sp18->unk_58 = sp18->unk_44.unk_00;
 
@@ -213,7 +213,7 @@ void func_84317BDC(void) {
 void func_84317EDC(void) {
     u32 sp24;
     UNUSED s32 pad;
-    unk_D_84390010_654_038* sp1C = &D_84390010[D_84390240.unk_00->unk_2C]->unk_654.unk_38;
+    unk_D_800FCB18* sp1C = &D_84390010[D_84390240.unk_00->unk_2C]->unk_654.unk_38;
 
     if (func_84307AE0(sp1C->unk_5A, D_84385990, 2) != 0) {
         sp24 = 0;
@@ -257,7 +257,7 @@ void func_843180AC(void) {
 
     s32 sp2C;
     s32 tmp;
-    unk_D_84390010_654_038* sp24;
+    unk_D_800FCB18* sp24;
 
     sp24 = &D_84390010[D_84390240.unk_00->unk_2C]->unk_654.unk_38;
 

@@ -813,7 +813,7 @@ void func_8430B6F8(unk_D_84390010* arg0, unk_D_84390010* arg1) {
 }
 
 void func_8430B734(unk_D_84390010* arg0, unk_D_84390010* arg1) {
-    unk_D_84390010_654_038* temp_a0 = &arg1->unk_654.unk_38;
+    unk_D_800FCB18* temp_a0 = &arg1->unk_654.unk_38;
     s16 sp22;
 
     arg1->unk_4A8 += 0xCCC;
@@ -862,7 +862,7 @@ void func_8430B950(UNUSED unk_D_84390010* arg0, unk_D_84390010* arg1) {
 }
 
 void func_8430B968(unk_D_84390010* arg0, unk_D_84390010* arg1) {
-    unk_D_84390010_654_038* ptr = &arg1->unk_654.unk_38;
+    unk_D_800FCB18* ptr = &arg1->unk_654.unk_38;
     UNUSED s32 pad;
     f32 temp_fs0;
 

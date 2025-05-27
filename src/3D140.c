@@ -930,10 +930,10 @@ void func_8003DB84(s32 arg0) {
                         }
                     }
 
-                    if (D_800FCB18[0]->unk_1C != D_800FCB18[1]->unk_1C) {
-                        if (D_800FCB18[0]->unk_1C != D_800FCB18[1]->unk_1D) {
-                            if ((D_800FCB18[0]->unk_1D != D_800FCB18[1]->unk_1C) &&
-                                (D_800FCB18[0]->unk_1D != D_800FCB18[1]->unk_1D)) {
+                    if (D_800FCB18[0]->unk_16[6] != D_800FCB18[1]->unk_16[6]) {
+                        if (D_800FCB18[0]->unk_16[6] != D_800FCB18[1]->unk_16[7]) {
+                            if ((D_800FCB18[0]->unk_16[7] != D_800FCB18[1]->unk_16[6]) &&
+                                (D_800FCB18[0]->unk_16[7] != D_800FCB18[1]->unk_16[7])) {
                                 D_800FCCB0 = 0;
                                 func_800420C0(D_80077E18);
                                 return;

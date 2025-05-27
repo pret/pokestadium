@@ -5,12 +5,12 @@
 #include "src/12D80.h"
 
 void func_87901620(void) {
-    D_8140E720 = main_pool_alloc(0xF870, 0);
-    bzero(D_8140E720, 0xF870);
+    D_8140E720 = main_pool_alloc(sizeof(unk_D_8140E720) * 300, 0);
+    bzero(D_8140E720, sizeof(unk_D_8140E720) * 300);
     D_8140E72C = 0;
 
-    D_8140E728 = main_pool_alloc(0x1800, 0);
-    bzero(D_8140E728, 0x1800);
+    D_8140E728 = main_pool_alloc(sizeof(unk_D_8140E728) * 128, 0);
+    bzero(D_8140E728, sizeof(unk_D_8140E728) * 128);
     D_8140E734 = 0;
 }
 

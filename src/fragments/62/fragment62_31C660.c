@@ -216,6 +216,12 @@
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_31C660/func_843375B0.s")
 
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_31C660/func_8433765C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_31C660/func_84337664.s")
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_31C660/func_8433766C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_31C660/func_843378CC.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_31C660/func_843378D4.s")
