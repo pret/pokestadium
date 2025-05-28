@@ -414,7 +414,7 @@ extern unk_D_84385384 D_84385384[];
 extern Vec3f D_84385B90;
 extern Vec3f D_84385B9C;
 extern u32 D_84385BC0[];
-extern unk_D_8140E728_01C D_843861D0[];
+extern unk_D_8140E728_01C D_843861D0[86];
 extern func_D_84390320 D_84388280[];
 extern func_D_84390320 D_843884D8[];
 extern func_D_84390320 D_84388668[];
@@ -1404,7 +1404,13 @@ void func_8432FEC4(unk_D_8140E720* arg0);
 void func_8432FEEC(unk_D_8140E720* arg0);
 
 
-void func_8433010C(unk_D_8140E720*, u8);
+void func_8432FF20(unk_D_8140E720* arg0);
+void func_8432FF8C(unk_D_8140E720* arg0);
+void func_84330048(unk_D_8140E720* arg0);
+void func_843300B4(unk_D_8140E720* arg0);
+void func_8433010C(unk_D_8140E720* arg0, u8 arg1);
+
+
 void func_84330170(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
 void func_84330300(unk_D_8140E720*, unk_D_86002F34_00C*);
 void func_84330344(unk_D_8140E720*, unk_D_86002F34_00C*);
