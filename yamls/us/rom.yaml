@@ -2208,7 +2208,7 @@
     - [0x3764B0, .rodata, fragments/62/fragment62_313250]
     - [0x3764E0, .rodata, fragments/62/fragment62_313D60]
     - [0x376650, .rodata, fragments/62/fragment62_315D50]
-    - [0x376790, rodata, fragments/62/fragment62_rodata_376790]
+    - [0x376790, .rodata, fragments/62/fragment62_317E70]
     - [0x3768B0, rodata, fragments/62/fragment62_rodata_3768B0]
     - [0x3768E0, rodata, fragments/62/fragment62_rodata_3768E0]
     - [0x3769B0, rodata, fragments/62/fragment62_rodata_3769B0]

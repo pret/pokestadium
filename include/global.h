@@ -533,6 +533,8 @@ typedef struct TrainerData {
     /* 0x03A */ char unk3A[0x1F6];
 } TrainerData; // size = 0x230
 
+extern s16 D_80075E40[];
+
 #include "variables.h"
 
 #endif

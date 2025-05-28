@@ -573,20 +573,20 @@ void func_81408AF0(unk_D_8140E720* arg0) {
     arg0->unk_2C.z = arg0->unk_68.z + arg0->unk_38.z + arg0->unk_50.z;
 
     if (arg0->unk_14 != NULL) {
-        arg0->unk_14->unk_24.x = arg0->unk_2C.x;
-        arg0->unk_14->unk_24.y = arg0->unk_2C.y;
-        arg0->unk_14->unk_24.z = arg0->unk_2C.z;
+        arg0->unk_14->unk_024.x = arg0->unk_2C.x;
+        arg0->unk_14->unk_024.y = arg0->unk_2C.y;
+        arg0->unk_14->unk_024.z = arg0->unk_2C.z;
 
-        arg0->unk_14->unk_30.x = arg0->unk_1C;
-        arg0->unk_14->unk_30.y = arg0->unk_1C;
-        arg0->unk_14->unk_30.z = arg0->unk_1C;
+        arg0->unk_14->unk_030.x = arg0->unk_1C;
+        arg0->unk_14->unk_030.y = arg0->unk_1C;
+        arg0->unk_14->unk_030.z = arg0->unk_1C;
 
         if (func_81408308(arg0, 0x200) != 0) {
-            arg0->unk_14->unk_1E.x = arg0->unk_94.x;
-            arg0->unk_14->unk_1E.y = arg0->unk_94.y;
-            arg0->unk_14->unk_1E.z = arg0->unk_94.z;
+            arg0->unk_14->unk_01E.x = arg0->unk_94.x;
+            arg0->unk_14->unk_01E.y = arg0->unk_94.y;
+            arg0->unk_14->unk_01E.z = arg0->unk_94.z;
         }
-        arg0->unk_14->unk_1D = arg0->prim_a;
+        arg0->unk_14->unk_01D = arg0->prim_a;
     }
 }
 

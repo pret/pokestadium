@@ -45,8 +45,8 @@ unk_D_84390010* D_843902F0;
 s32 D_843902F4;
 s32 D_843902F8;
 static s8 D_843902FC;
-func_D_84388CA8 D_84390300[8];
-func_D_84388CA8 D_84390320[8];
+func_D_84390300 D_84390300[8];
+func_D_84390320 D_84390320[8];
 s32 D_84390340;
 static f32 D_84390344;
 Vec3f D_84390348;
@@ -938,7 +938,7 @@ unk_D_8140E728_01C D_843861D0[] = {
     },
 };
 
-static func_D_84388CA8 D_84386480[] = {
+static func_D_84390320 D_84386480[] = {
     func_8432F998, func_84342CF0, func_8433B2E8, func_8434DE6C, func_8433BAA8, func_8432F998, func_8433B4AC,
     func_84356AC8, func_84344A4C, func_8432F998, func_843473BC, func_84357AB8, func_84343288, func_84356FAC,
     func_84343988, func_8433B290, func_8435811C, func_8434A324, func_8433DC80, func_8432F998, func_843378CC,
@@ -961,7 +961,7 @@ static func_D_84388CA8 D_84386480[] = {
     func_8433FAF8, func_8433F758, func_8433F5D4, func_8432F998, func_84356CA4, func_84356D04, func_8433F414,
     func_8433F4CC, func_8433F4EC, func_8433F5B4, func_8433F974, func_8432F998,
 };
-static func_D_84388CA8 D_843866C4[] = {
+static func_D_84390320 D_843866C4[] = {
     func_8432F9A0, func_8432F9A0, func_8433B58C, func_84357A64, func_84357AE0, func_84357110, func_8434575C,
     func_8434A384, func_8433DECC, func_8432F9A0, func_84346BE0, func_8432F9A0, func_8432F9A0, func_84344BDC,
     func_84355E58, func_843372D8, func_8434CF64, func_84342908, func_84357CC8, func_8432F9A0, func_8433BF54,
@@ -4178,7 +4178,7 @@ static u8* D_84386E08[][5] = {
 };
 
 /*
-static func_D_84388CA8 D_84388280[] = {
+static func_D_84390320 D_84388280[] = {
     func_843593A0, func_843593A0, func_843593A0, func_843593A0, func_8435BED8, func_84359684, func_843593A0,
     func_84359FE0, func_843593A0, func_843593A0, func_843593A0, func_8435A7F0, func_843593A0, func_843593A0,
     func_843593A0, func_843593A0, func_843593A0, func_843593A0, func_843593A0, func_84359C84, func_843593A0,
@@ -4203,7 +4203,7 @@ static func_D_84388CA8 D_84388280[] = {
     func_843593A0, func_843593A0, func_843593A0,
 };
 
-static func_D_84388CA8 D_843884D8[] = {
+static func_D_84390320 D_843884D8[] = {
     func_843593A8, func_84359750, func_843593A8, func_843593A8, func_843593A8, func_843593A8, func_843593A8,
     func_843593A8, func_843593A8, func_84359D7C, func_843593A8, func_843593A8, func_843593A8, func_843593A8,
     func_843593A8, func_843593A8, func_84359AE0, func_843593A8, func_843593A8, func_84359820, func_843593A8,
@@ -4221,7 +4221,7 @@ static func_D_84388CA8 D_843884D8[] = {
     func_843593A8, func_843593A8,
 };
 
-static func_D_84388CA8 D_84388668[] = {
+static func_D_84390300 D_84388668[] = {
     func_843593B0, func_843593B0, func_843593B0, func_843593B0, func_8435BF08, func_843596DC, func_843593B0,
     func_8435A014, func_843593B0, func_843593B0, func_843593B0, func_8435A81C, func_843593B0, func_843593B0,
     func_843593B0, func_843593B0, func_843593B0, func_843593B0, func_843593B0, func_84359CB8, func_843593B0,
@@ -4246,7 +4246,7 @@ static func_D_84388CA8 D_84388668[] = {
     func_843593B0, func_843593B0, func_843593B0,
 };
 
-static func_D_84388CA8 D_843888C0[] = {
+static func_D_84390300 D_843888C0[] = {
     func_843593B8, func_843597AC, func_843593B8, func_843593B8, func_843593B8, func_843593B8, func_843593B8,
     func_843593B8, func_843593B8, func_84359DF4, func_843593B8, func_843593B8, func_843593B8, func_843593B8,
     func_843593B8, func_843593B8, func_84359AE8, func_843593B8, func_843593B8, func_8435989C, func_843593B8,
@@ -4264,7 +4264,7 @@ static func_D_84388CA8 D_843888C0[] = {
     func_843593B8, func_843593B8,
 };
 
-static func_D_84388CA8 D_84388A50[] = {
+static func_D_84390320 D_84388A50[] = {
     func_843593C0, func_843593C0, func_843593C0, func_843593C0, func_8435BF28, func_843596FC, func_843593C0,
     func_8435A084, func_843593C0, func_843593C0, func_843593C0, func_8435A99C, func_843593C0, func_843593C0,
     func_843593C0, func_843593C0, func_843593C0, func_843593C0, func_843593C0, func_84359D28, func_843593C0,
@@ -4289,7 +4289,7 @@ static func_D_84388CA8 D_84388A50[] = {
     func_843593C0, func_843593C0, func_843593C0,
 };
 
-static func_D_84388CA8 D_84388CA8[] = {
+static func_D_84390320 D_84388CA8[] = {
     func_843593C8, func_843597CC, func_843593C8, func_843593C8, func_843593C8, func_843593C8, func_843593C8,
     func_843593C8, func_843593C8, func_84359E14, func_843593C8, func_843593C8, func_843593C8, func_843593C8,
     func_843593C8, func_843593C8, func_84359AF0, func_843593C8, func_843593C8, func_843598BC, func_843593C8,
@@ -4757,7 +4757,7 @@ void func_8432C14C(s16 arg0) {
     D_843866C4[arg0]();
 }
 
-void func_8432C194(func_D_84388CA8 arg0, func_D_84388CA8 arg1) {
+void func_8432C194(func_D_84390300 arg0, func_D_84390320 arg1) {
     if (D_843902FC >= 8) {
         D_843902FC = 0;
     }
@@ -5150,10 +5150,10 @@ void func_8432CE78(unk_D_86002F58_004_000* arg0, s16 arg1) {
     func_80017464(arg0, arg0->unk_040.unk_04->unk_0A - 1);
 }
 
-s32 func_8432CED4(unk_D_8140E720_014* arg0) {
+s32 func_8432CED4(unk_D_86002F58_004_000* arg0) {
     s32 ret = 0;
 
-    if (arg0->unk_48 == 0) {
+    if (arg0->unk_040.unk_08 == 0) {
         ret = 1;
     }
     return ret;

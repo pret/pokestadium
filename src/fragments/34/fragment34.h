@@ -5,6 +5,7 @@
 
 struct unk_D_8140E720;
 struct unk_D_8140E728_01C_004_1;
+struct unk_D_84390010;
 
 typedef void (*func_unk_D_8140E720_008)(struct unk_D_8140E720*);
 typedef void (*func_unk_D_8140E720_00C)(struct unk_D_8140E720*, unk_D_86002F34_00C*);
@@ -57,23 +58,13 @@ typedef struct unk_D_8140E728 {
     /* 0x2F */ u8 unk_2F;
 } unk_D_8140E728; // size = 0x30
 
-typedef struct unk_D_8140E720_014 {
-    /* 0x00 */ char unk00[0x1D];
-    /* 0x1D */ u8 unk_1D;
-    /* 0x1E */ Vec3s unk_1E;
-    /* 0x24 */ Vec3f unk_24;
-    /* 0x30 */ Vec3f unk_30;
-    /* 0x3C */ char unk3C[0xC];
-    /* 0x48 */ s32 unk_48;
-} unk_D_8140E720_014; // size >= 0x4C
-
 typedef struct unk_D_8140E720 {
     /* 0x00 */ struct unk_D_8140E720* next;
     /* 0x04 */ struct unk_D_8140E720* prev;
     /* 0x08 */ func_unk_D_8140E720_008 unk_08;
     /* 0x0C */ unk_D_8140E728_01C* unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ unk_D_8140E720_014* unk_14;
+    /* 0x10 */ struct unk_D_84390010* unk_10;
+    /* 0x14 */ unk_D_86002F58_004_000* unk_14;
     /* 0x18 */ u32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
@@ -116,7 +107,7 @@ typedef struct unk_D_8140E720 {
     /* 0xC7 */ s8 unk_C7;
     /* 0xC8 */ char unkC8[0x2];
     /* 0xCA */ u8 unk_CA;
-    /* 0xCB */ char unkCB[0x1];
+    /* 0xCB */ u8 unk_CB;
     /* 0xCC */ u8 unk_CC;
     /* 0xCD */ u8 unk_CD;
     /* 0xCE */ u8 unk_CE;
@@ -124,20 +115,18 @@ typedef struct unk_D_8140E720 {
     /* 0xD0 */ s8 unk_D0;
 } unk_D_8140E720; // size = 0xD4
 
-typedef struct unk_D_8140E724_004 {
-    /* 0x00 */ char unk00[0x10];
-} unk_D_8140E724_004; // size >= 0x10
+typedef void (*func_unk_D_8140E724)(struct unk_D_8140E724*);
 
 typedef struct unk_D_8140E724 {
-    /* 0x00 */ char unk00[0x4];
-    /* 0x04 */ unk_D_8140E724_004* unk_04;
-    /* 0x08 */ char unk08[0x4];
+    /* 0x00 */ func_unk_D_8140E724 unk_00;
+    /* 0x04 */ unk_D_8140E728_01C* unk_04;
+    /* 0x08 */ struct unk_D_84390010* unk_08;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s16 unk_10;
     /* 0x12 */ s16 unk_12;
-    /* 0x14 */ u8 unk_14;
-    /* 0x15 */ u8 unk_15;
+    /* 0x14 */ s8 unk_14;
+    /* 0x15 */ s8 unk_15;
     /* 0x16 */ u8 unk_16;
     /* 0x17 */ u8 unk_17;
     /* 0x18 */ u8 unk_18;
@@ -333,6 +322,7 @@ extern s32 D_8140E708;
 extern s32 D_8140E70C;
 extern s32 D_8140E710;
 extern unk_D_8140E720* D_8140E720;
+extern unk_D_8140E724* D_8140E724;
 extern unk_D_8140E728* D_8140E728;
 extern s32 D_8140E72C;
 extern s32 D_8140E730;
