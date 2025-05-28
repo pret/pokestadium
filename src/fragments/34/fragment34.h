@@ -6,6 +6,7 @@
 struct unk_D_8140E720;
 struct unk_D_8140E728_01C_004_1;
 struct unk_D_84390010;
+struct unk_D_8140E724;
 
 typedef void (*func_unk_D_8140E720_008)(struct unk_D_8140E720*);
 typedef void (*func_unk_D_8140E720_00C)(struct unk_D_8140E720*, unk_D_86002F34_00C*);
@@ -134,11 +135,6 @@ typedef struct unk_D_8140E724 {
     /* 0x1A */ u8 unk_1A;
     /* 0x1B */ u8 unk_1B;
 } unk_D_8140E724; // size = 0x1C
-
-typedef struct arg1_func_8140213C {
-    /* 0x00 */ char unk00[0x64];
-    /* 0x64 */ MtxF unk_64;
-} arg1_func_8140213C; // size >= 0xA4
 
 typedef struct arg1_func_87903D64_014 {
     /* 0x00 */ s32 unk_00;
@@ -405,10 +401,10 @@ void func_81401E84(MtxF* arg0, Vec3f arg1, Vec3f arg2, s16 arg3, f32 arg4);
 void func_81401FC0(Vec3f arg0, Vec3s arg1, f32 arg2);
 void func_8140203C(Vec3f arg0, Vec3s arg1, f32 arg2);
 void func_814020B8(Vec3f arg0, Vec3s arg1, f32 arg2, f32 arg3);
-void func_8140213C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4);
-void func_814021A4(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4, s16 arg5);
-void func_81402214(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4);
-void func_8140227C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4, s16 arg5);
+void func_8140213C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4);
+void func_814021A4(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5);
+void func_81402214(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4);
+void func_8140227C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5);
 void func_814022EC(Vec3f arg0, Vec3s arg3, f32 arg5);
 void func_8140238C(Vec3f arg0, Vec3f arg3, f32 arg6);
 
@@ -432,6 +428,7 @@ void func_81402E14(u8* texture, s32 fmt, s32 width, s32 height, s32 cms, s32 cmt
 void func_814030C0(u8* texture, s32 fmt, s32 width, s32 height, s32 cms, s32 cmt, s32 masks, s32 maskt, s32 shifts, s32 shiftt);
 void func_814032B4(u8* texture, s32 fmt, s32 width, s32 height, s32 cms, s32 cmt, s32 masks, s32 maskt, s32 shifts, s32 shiftt);
 void func_8140353C(u8* texture, s32 fmt, s32 width, s32 height, s32 cms, s32 cmt, s32 masks, s32 maskt, s32 shifts, s32 shiftt);
+void func_81403754(u8* texture, s32 tmem, s32 rtile, s32 fmt, s32 width, s32 height, s32 cms, s32 cmt, s32 masks, s32 maskt, s32 shifts, s32 shiftt);
 void func_81403A20(u8* texture, s32 width, s32 height);
 void func_81403A6C(u8* texture, s32 width, s32 height);
 void func_81403AB8(u8* texture, s32 width, s32 height);
@@ -472,12 +469,12 @@ void func_81404ABC(Vec3f arg0, Vec3s arg1, f32 arg2, Vtx* arg3);
 void func_81404B78(Vec3f arg0, Vec3s arg1, f32 arg3, Vtx* arg4);
 void func_81404C34(Vec3f arg0, Vec3s arg1, f32 arg2, f32 arg3, Vtx* arg4);
 void func_81404CF8(Vec3f arg0, Vec3s arg1, f32 arg2, Vtx* arg3);
-void func_81404DB4(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3);
-void func_81404E4C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3, s16 arg4);
-void func_81404EEC(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3);
-void func_81404F84(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3, s16 arg4);
-void func_81405024(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3);
-void func_814050BC(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3, s16 arg4);
+void func_81404DB4(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3);
+void func_81404E4C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3, s16 arg4);
+void func_81404EEC(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3);
+void func_81404F84(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3, s16 arg4);
+void func_81405024(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3);
+void func_814050BC(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg2, Vtx* arg3, s16 arg4);
 void func_8140515C(u8* texture, Vtx* vtx, s32 arg2, s32 arg3, s32 width, s32 height);
 void func_81405308(u8* texture, Vtx* vtx, s32 arg2, s32 arg3, s32 width, s32 height);
 void func_814054B4(u8* texture, Vtx* vtx, s32 arg2, s32 arg3, s32 width, s32 height);
@@ -823,22 +820,22 @@ void func_8140CAC8(UNUSED unk_D_8140E720* arg0, u8* texture);
 void func_8140CB04(unk_D_8140E720* arg0, u8* texture);
 void func_8140CB38(UNUSED unk_D_8140E720* arg0, u8* texture);
 void func_8140CB64(UNUSED unk_D_8140E720* arg0, u8* texture);
-void func_8140CB90(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140CC04(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-s32 func_8140CC90(unk_D_8140E720* arg0, UNUSED arg1_func_8140213C* arg1);
-void func_8140CD80(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140CDDC(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140CE68(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140CED4(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140CF30(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140CFBC(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140D050(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140D0E4(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140D170(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140D1FC(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-void func_8140D288(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
-s32 func_8140D314(unk_D_8140E720* arg0, UNUSED arg1_func_8140213C* arg1);
-void func_8140D404(unk_D_8140E720* arg0, arg1_func_8140213C* arg1);
+void func_8140CB90(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140CC04(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+s32 func_8140CC90(unk_D_8140E720* arg0, UNUSED unk_D_86002F34_00C* arg1);
+void func_8140CD80(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140CDDC(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140CE68(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140CED4(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140CF30(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140CFBC(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140D050(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140D0E4(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140D170(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140D1FC(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+void func_8140D288(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
+s32 func_8140D314(unk_D_8140E720* arg0, UNUSED unk_D_86002F34_00C* arg1);
+void func_8140D404(unk_D_8140E720* arg0, unk_D_86002F34_00C* arg1);
 void func_8140D4A8(u8* arg0, u16 arg1);
 void func_8140D4E0(u8* arg0, u8* arg1, u16 arg2);
 void func_8140D530(unk_D_8140E720* arg0, u16 arg1);

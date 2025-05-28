@@ -1062,31 +1062,31 @@ void func_814020B8(Vec3f arg0, Vec3s arg1, f32 arg2, f32 arg3) {
     func_81401394(&sp28);
 }
 
-void func_8140213C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4) {
+void func_8140213C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4) {
     MtxF sp20;
 
-    func_81401ABC(&sp20, &arg0->unk_64, arg1, arg4);
+    func_81401ABC(&sp20, &arg0->unk_60.mtxf, arg1, arg4);
     func_81401394(&sp20);
 }
 
-void func_814021A4(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
+void func_814021A4(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
     MtxF sp28;
 
-    func_81401C04(&sp28, &arg0->unk_64, arg1, arg4, arg5);
+    func_81401C04(&sp28, &arg0->unk_60.mtxf, arg1, arg4, arg5);
     func_81401394(&sp28);
 }
 
-void func_81402214(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4) {
+void func_81402214(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4) {
     MtxF sp20;
 
-    func_81401B6C(&sp20, &arg0->unk_64, arg1, arg4);
+    func_81401B6C(&sp20, &arg0->unk_60.mtxf, arg1, arg4);
     func_81401394(&sp20);
 }
 
-void func_8140227C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
+void func_8140227C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
     MtxF sp28;
 
-    func_81401D50(&sp28, &arg0->unk_64, arg1, arg4, arg5);
+    func_81401D50(&sp28, &arg0->unk_60.mtxf, arg1, arg4, arg5);
     func_81401394(&sp28);
 }
 
