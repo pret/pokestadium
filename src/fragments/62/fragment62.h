@@ -1724,8 +1724,22 @@ void func_8433FAF8(void);
 void func_8433FD30(void);
 
 
+void func_8433FD80(unk_D_8140E720* arg0);
+void func_8433FDC0(unk_D_8140E720* arg0);
+void func_8433FE80(unk_D_8140E720* arg0);
+void func_8433FF44(unk_D_8140E720* arg0);
+void func_843400BC(unk_D_8140E720* arg0);
+void func_8434016C(unk_D_8140E720* arg0);
+void func_84340230(unk_D_8140E720* arg0);
+void func_843403D8(unk_D_8140E720* arg0);
+void func_84340690(unk_D_8140E720* arg0);
+void func_84340940(unk_D_8140E720* arg0);
+void func_84340AC4(void);
+void func_84340ACC(void);
 void func_84340CB0(void);
 void func_84340D14(void);
+
+
 void func_84342808(void);
 void func_84342908(void);
 void func_84342CF0(void);
@@ -1866,6 +1880,7 @@ void func_84357A64(void);
 void func_84357AB8(void);
 void func_84357AE0(void);
 void func_84357B80(void);
+void func_84357BA8(void);
 void func_84357CC8(void);
 void func_84357E60(void);
 void func_84357F64(void);

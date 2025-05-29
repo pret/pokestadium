@@ -441,7 +441,7 @@ void func_8433F758(void) {
 
 void func_8433F974(void) {
     UNUSED s32 pad;
-    
+
     func_8432ED0C(0, 8, 6);
     func_8432ECA0(0, 1, 4, func_8433F06C, &D_843861D0[0x44], 0, 8, 9, 0, 0x3C, 2);
     func_8432ECA0(6, 1, 8, func_8433F06C, &D_843861D0[0x44], 0, 8, 9, 0, 0x3C, 3);
