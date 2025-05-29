@@ -2212,7 +2212,7 @@
     - [0x376790, .rodata, fragments/62/fragment62_317E70]
     - [0x3768B0, .rodata, fragments/62/fragment62_31C660]
     - [0x3768E0, .rodata, fragments/62/fragment62_31D9F0]
-    - [0x3769B0, rodata, fragments/62/fragment62_rodata_3769B0]
+    - [0x3769B0, .rodata, fragments/62/fragment62_3223B0]
     - [0x376A10, rodata, fragments/62/fragment62_rodata_376A10]
     - [0x376A40, rodata, fragments/62/fragment62_rodata_376A40]
     - [0x376AE0, rodata, fragments/62/fragment62_rodata_376AE0]
