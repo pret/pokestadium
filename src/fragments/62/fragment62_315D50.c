@@ -5059,11 +5059,11 @@ void func_8432CAD0(void) {
     }
 }
 
-s32 func_8432CB60(unk_D_86002F58_004_000* arg0) {
+unk_D_8140E720* func_8432CB60(unk_D_86002F58_004_000* arg0) {
     return arg0->unk_000.unk_14;
 }
 
-unk_D_86002F58_004_000* func_8432CB68(s32 arg0) {
+unk_D_86002F58_004_000* func_8432CB68(unk_D_8140E720* arg0) {
     s32 i;
     s32 var_v0 = -1;
     unk_D_86002F58_004_000* temp_a0;

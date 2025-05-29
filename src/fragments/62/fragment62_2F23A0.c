@@ -177,11 +177,11 @@ s16 func_84308190(unk_D_84390010* arg0) {
     return arg0->unk_4B0 << 0xE;
 }
 
-s16 func_843081A4(s32 arg0) {
+s32 func_843081A4(s32 arg0) {
     return D_84390010[arg0]->unk_000.unk_01A;
 }
 
-s16 func_843081BC(unk_D_84390010* arg0) {
+s32 func_843081BC(unk_D_84390010* arg0) {
     return arg0->unk_000.unk_01A;
 }
 

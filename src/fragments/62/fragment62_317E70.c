@@ -72,7 +72,7 @@ void func_8432D6C8(unk_D_8140E720* arg0, Vec3f arg1, Vec3s arg2, s32 arg3, s32 a
     }
 }
 
-void func_8432D76C(unk_D_8140E720* arg0, unk_D_8140E720* arg1, func_unk_D_8140E720_008 arg2, unk_D_8140E728_01C* arg3,
+void func_8432D76C(unk_D_8140E720* arg0, unk_D_8140E720* arg1, func_unk_D_8140E724_008 arg2, unk_D_8140E728_01C* arg3,
                    s32 arg4) {
     arg0->unk_08 = arg2;
     arg0->unk_0C = arg3;
@@ -99,7 +99,7 @@ void func_8432D76C(unk_D_8140E720* arg0, unk_D_8140E720* arg1, func_unk_D_8140E7
     }
 }
 
-void func_8432D844(unk_D_8140E720* arg0, func_unk_D_8140E720_008 arg1, unk_D_8140E728_01C* arg2, s16 arg3) {
+void func_8432D844(unk_D_8140E720* arg0, func_unk_D_8140E724_008 arg1, unk_D_8140E728_01C* arg2, s16 arg3) {
     s16 i;
     unk_D_8140E720* temp_v0;
 
@@ -112,7 +112,7 @@ void func_8432D844(unk_D_8140E720* arg0, func_unk_D_8140E720_008 arg1, unk_D_814
     }
 }
 
-void func_8432D8E8(unk_D_8140E720* arg0, func_unk_D_8140E720_008 arg1, unk_D_8140E728_01C* arg2, s16 arg3, s16 arg4,
+void func_8432D8E8(unk_D_8140E720* arg0, func_unk_D_8140E724_008 arg1, unk_D_8140E728_01C* arg2, s16 arg3, s16 arg4,
                    s16 arg5) {
     s16 i;
     unk_D_8140E720* temp_v0;
