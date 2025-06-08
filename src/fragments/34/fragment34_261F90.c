@@ -1,9 +1,9 @@
 #include "fragment34.h"
-#include "include/libc/math.h"
+#include "include/math.h"
 #include "src/F420.h"
 #include "src/math_util.h"
 
-MtxF* D_8140E620;
+unk_D_8140E620* D_8140E620;
 s32 D_8140E624;
 s32 D_8140E624;
 unk_D_8140E634 D_8140E628;
@@ -727,9 +727,9 @@ void func_8140138C(void) {
 
 void func_81401394(MtxF* arg0) {
     if (D_8140E624 < 0x16C) {
-        func_80010090((MtxF*)((u32)D_8140E620 + (D_8140E624 * sizeof(MtxF))), arg0);
+        func_80010090(&D_8140E620->unk_0000[D_8140E624], arg0);
 
-        gSPMatrix(gDisplayListHead++, ((u32)D_8140E620 + (D_8140E624 * sizeof(MtxF))) & 0x1FFFFFFF,
+        gSPMatrix(gDisplayListHead++, (u32)&D_8140E620->unk_0000[D_8140E624] & 0x1FFFFFFF,
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         D_8140E624++;

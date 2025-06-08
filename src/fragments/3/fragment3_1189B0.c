@@ -1,5 +1,5 @@
 #include "fragment3.h"
-#include "include/libc/math.h"
+#include "include/math.h"
 #include "src/17300.h"
 #include "src/18140.h"
 #include "src/1C720.h"

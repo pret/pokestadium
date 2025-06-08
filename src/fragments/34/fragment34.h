@@ -248,6 +248,13 @@ typedef struct unk_D_8140E634 {
     /* 0x10 */ unk_D_8140E634_010 unk_10;
 } unk_D_8140E634; // size = 0x8C
 
+typedef struct unk_D_8140E620 {
+    /* 0x0000 */ MtxF unk_0000[364];
+    /* 0x5B00 */ char unk5B00[0x80];
+    /* 0x5B80 */ Mtx unk_5B80;
+    /* 0x5BC0 */ char unk5BC0[0x20];
+} unk_D_8140E620; // size = 0x5BE0
+
 extern Gfx D_8140DAE0[];
 extern Gfx D_8140DB30[];
 extern Gfx D_8140DBA8[];
@@ -289,7 +296,7 @@ extern unk_D_8140E728_01C D_8140E460;
 
 extern u8 D_8140E538[];
 
-extern MtxF* D_8140E620;
+extern unk_D_8140E620* D_8140E620;
 extern s32 D_8140E624;
 extern s32 D_8140E624;
 extern unk_D_8140E634 D_8140E628;

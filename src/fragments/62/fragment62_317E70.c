@@ -889,16 +889,16 @@ void func_8432FCB4(unk_D_84390010* arg0) {
     func_8432FC60(arg0);
 }
 
-void func_8432FCD4(void) {
-    func_8432FC94(D_843902EC);
+f32 func_8432FCD4(void) {
+    return func_8432FC94(D_843902EC);
 }
 
 void func_8432FCF8(void) {
     func_8432FCB4(D_843902EC);
 }
 
-void func_8432FD1C(void) {
-    func_8432FC94(D_843902F0);
+f32 func_8432FD1C(void) {
+    return func_8432FC94(D_843902F0);
 }
 
 void func_8432FD40(void) {

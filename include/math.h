@@ -3,11 +3,19 @@
 
 #include "PR/ultratypes.h"
 
+#define M_PI_F 3.14159265358979323846f
 #define M_SQRT2 1.41421356237309504880f
 #define M_SQRT1_2 0.70710678118654752440f	/* 1/sqrt(2) */
 #define FLT_MAX 340282346638528859811704183484516925440.0f
 #define SHT_MAX 32767.0f
 #define SHT_MINV (1.0f / SHT_MAX)
+
+#define TWO_THIRDS_PI 2.094395160675049
+#define TWO_PI 6.2831854820251469
+/*
+#define TWO_PI 6.2831854820251465
+*/
+#define TWO_PI_F 6.283185482f
 
 extern long long __d_to_ll(double d);
 extern long long __f_to_ll(float f);
@@ -17,6 +25,10 @@ extern double __ll_to_d(long long s);
 extern float __ll_to_f(long long s);
 extern double __ull_to_d(unsigned long long u);
 extern float __ull_to_f(unsigned long long u);
+
+float fabsf(float f);
+float sqrtf(float f);
+double sqrt(double d);
 
 #define SINS(x) gSineTable[(u16) (x) >> 4]
 #define COSS(x) gCosineTable[(u16) (x) >> 4]

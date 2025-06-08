@@ -213,7 +213,7 @@ void func_87901C98(void) {
     gSPMatrix(gDisplayListHead++, D_87906054->unk_24.mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gDisplayListHead++, D_87906054->unk_60.p_mtxf, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
-    D_8140E620 = func_80005F5C(0x5BE0);
+    D_8140E620 = func_80005F5C(sizeof(unk_D_8140E620));
     D_8140E624 = 0;
 
     gSPDisplayList(gDisplayListHead++, D_8140DB30);

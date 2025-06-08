@@ -48,7 +48,7 @@ void* func_80005F5C(s32 arg0) {
 
     arg0 = ALIGN8(arg0);
     temp_v0 = (D_800A7428.unk8 - arg0);
-    ret = 0;
+    ret = NULL;
     if (temp_v0 >= (uintptr_t)gDisplayListHead) {
         D_800A7428.unk8 = temp_v0;
         ret = temp_v0;
