@@ -118,6 +118,7 @@ s32 func_800318C4(unk_D_83403C60*);
 f32 func_80031A6C(f32);
 void func_80031A94(f32, f32, f32, f32, f32, f32, f32*, f32*, f32*);
 void func_80031B04(f32*, f32*, f32*);
+void func_80031C6C(Mtx*, f32, f32, f32, f32, f32, f32);
 void func_80031EF4(MtxF*, MtxF*);
 void func_80032034(MtxF* arg0, Vec3f* arg1);
 
