@@ -2523,9 +2523,14 @@ void func_84365434(void);
 Gfx* func_84365558(Gfx* arg0);
 
 
-void func_84365A10(s32);
+void func_84365A10(s16 arg0);
+void func_84365B88(s32 arg0, s32 arg1);
+void func_8436611C(unk_D_8439CA60_0014* arg0, Vtx* arg1);
 s32 func_843661D0(void);
-Gfx* func_84366560(Gfx*);
+void func_8436643C(void);
+Gfx* func_84366560(Gfx* arg0);
+
+
 void func_84366A10(void);
 void func_84366B38(f32, f32, f32, f32, f32, f32, s32, s32, s32, s32, f32, s32);
 s32 func_84367014(void);
