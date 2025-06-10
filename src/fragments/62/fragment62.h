@@ -584,6 +584,7 @@ extern func_D_84390320 D_84388668[];
 extern func_D_84390320 D_843888C0[];
 extern func_D_84390320 D_84388A50[];
 extern func_D_84390320 D_84388CA8[];
+extern u32 D_8438A648[];
 
 
 extern u8 D_843C4DA4;
@@ -658,6 +659,7 @@ extern f32 D_84392058[26];
 extern u8* D_843920C0[256];
 extern s16 D_843924C0[0x10];
 extern arg1_func_80019420* D_843924E0[40];
+
 
 
 s32 func_84300020(s32 arg0, GraphNode* arg1);
@@ -2554,7 +2556,6 @@ s32 func_843661D0(void);
 void func_8436643C(void);
 Gfx* func_84366560(Gfx* arg0);
 
-
 void func_84366A10(void);
 void func_84366B38(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, f32 argA, s16 argB);
 void func_84366DCC(f32 arg0, Vec3f* arg1, f32 arg2);
@@ -2562,6 +2563,7 @@ void func_84366E54(unk_D_843A22C0* arg0);
 s32 func_84367014(void);
 Gfx* func_843670C8(Gfx* arg0);
 
+Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8);
 
 void func_84367CB0(void);
 void func_84367E2C(f32, f32, f32, f32, f32, f32, s32, s32, s32, s32, f32, f32, f32, s32);
