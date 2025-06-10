@@ -93,38 +93,42 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
     gDPPipeSync(arg0++);
     gDPSetEnvColor(arg0++, arg5, arg6, arg7, arg8);
 
+    a3_x = arg4 * sp130;
+    a3_y = arg4 * sp12C;
+    a3_z = arg4 * sp128;
+
     temp_v1 = sp1E8;
 
-    tmp1 = arg4 * sp130;
-    tmp2 = arg4 * sp12C;
-    tmp3 = arg4 * sp128;
+    if (a3_z) {}
 
-    temp_v1->v.ob[0] = tmp1 * 2.0f + a1_x;
-    temp_v1->v.ob[1] = tmp2 * 2.0f + a1_y;
-    temp_v1->v.ob[2] = tmp3 * 2.0f + a1_z;
+    tmp1 = a2_y - a3_y * 2.0f;
+
+    temp_v1->v.ob[0] = a3_x * 2.0f + a1_x;
+    temp_v1->v.ob[1] = a3_y * 2.0f + a1_y;
+    temp_v1->v.ob[2] = a3_z * 2.0f + a1_z;
     temp_v1++;
 
-    temp_v1->v.ob[0] = tmp1 * 2.0f + a2_x;
-    temp_v1->v.ob[1] = tmp2 * 2.0f + a2_y;
-    temp_v1->v.ob[2] = tmp3 * 2.0f + a2_z;
+    temp_v1->v.ob[0] = a3_x * 2.0f + a2_x;
+    temp_v1->v.ob[1] = a3_y * 2.0f + a2_y;
+    temp_v1->v.ob[2] = a3_z * 2.0f + a2_z;
     temp_v1++;
 
-    sp8C = (a1_x * 1.2f) + (-a2_x * 0.2f);
-    sp88 = (a1_y * 1.2f) + (-a2_y * 0.2f);
-    sp84 = (a1_z * 1.2f) + (-a2_z * 0.2f);
+    sp8C = (-a2_x * 0.2f) + (a1_x * 1.2f);
+    sp88 = (-a2_y * 0.2f) + (a1_y * 1.2f);
+    sp84 = (-a2_z * 0.2f) + (a1_z * 1.2f);
 
     sp80 = (a2_x * 1.2f) - (a1_x * 0.2f);
     sp7C = (a2_y * 1.2f) - (a1_y * 0.2f);
     sp78 = (a2_z * 1.2f) - (a1_z * 0.2f);
 
-    temp_v1->v.ob[0] = tmp1 + sp8C;
-    temp_v1->v.ob[1] = tmp2 + sp88;
-    temp_v1->v.ob[2] = tmp3 + sp84;
+    temp_v1->v.ob[0] = a3_x + sp8C;
+    temp_v1->v.ob[1] = a3_y + sp88;
+    temp_v1->v.ob[2] = a3_z + sp84;
     temp_v1++;
 
-    temp_v1->v.ob[0] = tmp1 + sp80;
-    temp_v1->v.ob[1] = tmp2 + sp7C;
-    temp_v1->v.ob[2] = tmp3 + sp78;
+    temp_v1->v.ob[0] = a3_x + sp80;
+    temp_v1->v.ob[1] = a3_y + sp7C;
+    temp_v1->v.ob[2] = a3_z + sp78;
     temp_v1++;
 
     temp_v1->v.ob[0] = a1_x;
@@ -137,24 +141,24 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
     temp_v1->v.ob[2] = a2_z;
     temp_v1++;
 
-    temp_v1->v.ob[0] = sp8C - tmp1;
-    temp_v1->v.ob[1] = sp88 - tmp2;
-    temp_v1->v.ob[2] = sp84 - tmp3;
+    temp_v1->v.ob[0] = sp8C - a3_x;
+    temp_v1->v.ob[1] = sp88 - a3_y;
+    temp_v1->v.ob[2] = sp84 - a3_z;
     temp_v1++;
 
-    temp_v1->v.ob[0] = sp80 - tmp1;
-    temp_v1->v.ob[1] = sp7C - tmp2;
-    temp_v1->v.ob[2] = sp78 - tmp3;
+    temp_v1->v.ob[0] = sp80 - a3_x;
+    temp_v1->v.ob[1] = sp7C - a3_y;
+    temp_v1->v.ob[2] = sp78 - a3_z;
     temp_v1++;
 
-    temp_v1->v.ob[0] = a1_x - tmp1 * 2.0f;
-    temp_v1->v.ob[1] = a1_y - tmp2 * 2.0f;
-    temp_v1->v.ob[2] = a1_z - tmp3 * 2.0f;
+    temp_v1->v.ob[0] = a1_x - a3_x * 2.0f;
+    temp_v1->v.ob[1] = a1_y - a3_y * 2.0f;
+    temp_v1->v.ob[2] = a1_z - a3_z * 2.0f;
     temp_v1++;
 
-    temp_v1->v.ob[0] = a2_x - tmp1 * 2.0f;
-    temp_v1->v.ob[1] = a2_y - tmp2 * 2.0f;
-    temp_v1->v.ob[2] = a2_z - tmp3 * 2.0f;
+    temp_v1->v.ob[0] = a2_x - a3_x * 2.0f;
+    temp_v1->v.ob[1] = tmp1;
+    temp_v1->v.ob[2] = a2_z - a3_z * 2.0f;
     temp_v1++;
 
     guTranslate(sp1DC, 0.0f, 0.0f, 0.0f);

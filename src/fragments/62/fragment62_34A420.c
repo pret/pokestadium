@@ -552,7 +552,6 @@ void func_84360EFC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s
     }
 }
 
-#ifdef NON_MATCHING
 void func_843612F8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s16 arg6, u8 arg7, u8 arg8, u8 arg9,
                    u8 argA, f32 argB, f32 argC, f32 argD, s16 argE) {
     unk_D_84398F50* var_v0;
@@ -562,13 +561,9 @@ void func_843612F8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s
     Vec3f spBC;
     Vec3f spB0;
     s32 temp_fp;
-    s32 temp_s2;
-    s32 temp_s3;
     s32 temp_s5;
     s32 temp_s6;
     s32 temp_s7;
-    f32 idx1;
-    f32 idx2;
 
     spBC.x = arg0;
     spBC.y = arg1;
@@ -598,33 +593,27 @@ void func_843612F8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s
             temp_s6 = RAND(20) + 2;
             temp_fp = RAND(10) + 4;
 
-            for (j = 0, temp_s2 = temp_s6, temp_s3 = temp_s5; j < 20; j++) {
+            for (j = 0; j < 20; j++) {
                 var_s0->unk_00 = j;
                 var_s0->unk_04 = argA;
                 var_s0->unk_08 = argC;
                 var_s0->unk_0C = 0.0f;
                 var_s0->unk_10 = spBC;
 
-                idx1 = ((temp_s2 % (temp_fp + 20)) * TWO_PI) / (temp_fp + 20);
-                idx2 = ((temp_s3 % temp_s7) * TWO_PI) / temp_s7;
-
-                var_s0->unk_10.y += 5.0 * __sinf(idx2) * __sinf(idx1);
-                var_s0->unk_10.z += 5.0 * __cosf(idx2) * __cosf(idx1);
+                var_s0->unk_10.y += 5.0 * __sinf((((temp_s5 + j) % temp_s7) * TWO_PI) / temp_s7) *
+                                    __sinf((((temp_s6 + j) % (temp_fp + 20)) * TWO_PI) / (temp_fp + 20));
+                var_s0->unk_10.z += 5.0 * __cosf((((temp_s5 + j) % temp_s7) * TWO_PI) / temp_s7) *
+                                    __cosf((((temp_s6 + j) % (temp_fp + 20)) * TWO_PI) / (temp_fp + 20));
                 var_s0->unk_1C = spB0;
 
                 var_s0->unk_10.x += var_s0->unk_1C.x * ((j * 0.5) - (s32)(j * 0.5));
 
-                temp_s2++;
-                temp_s3++;
                 var_s0++;
             }
             break;
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_34A420/func_843612F8.s")
-#endif
 
 void func_843616B0(f32 arg0, UNUSED Vec3f* arg1, Vec3f* arg2, f32 arg3, UNUSED f32 arg4, UNUSED f32 arg5,
                    UNUSED f32 arg6) {

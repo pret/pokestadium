@@ -545,6 +545,33 @@ typedef struct unk_D_843A22C0 {
     /* 0x038 */ unk_D_843A22C0_038 unk_038[10];
 } unk_D_843A22C0; // size = 0x358
 
+typedef struct unk_D_843AA880_034 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ Vec3f unk_0C;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ Vec3f unk_2C;
+    /* 0x38 */ Vec3f unk_38;
+} unk_D_843AA880_034; // size = 0x44
+
+typedef struct unk_D_843AA880 {
+    /* 0x000 */ s16 unk_000;
+    /* 0x002 */ s16 unk_002;
+    /* 0x004 */ s16 unk_004;
+    /* 0x006 */ s16 unk_006;
+    /* 0x008 */ Color_RGB8 unk_008;
+    /* 0x00C */ f32 unk_00C;
+    /* 0x010 */ f32 unk_010;
+    /* 0x014 */ f32 unk_014;
+    /* 0x018 */ Vtx* unk_018;
+    /* 0x01C */ Vec3f unk_01C;
+    /* 0x028 */ char unk028[0xC];
+    /* 0x034 */ unk_D_843AA880_034 unk_034[15];
+} unk_D_843AA880; // size = 0x430
+
 extern unk_D_8438E7B0* D_84384570[];
 extern unk_D_8438FF70* D_84384578[];
 extern unk_D_8438FF70* D_84384580[];
@@ -2565,10 +2592,15 @@ Gfx* func_843670C8(Gfx* arg0);
 
 Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8);
 
+
 void func_84367CB0(void);
-void func_84367E2C(f32, f32, f32, f32, f32, f32, s32, s32, s32, s32, f32, f32, f32, s32);
+void func_84367E2C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, f32 argA, f32 argB, f32 argC, s16 argD);
+void func_84368080(f32 arg0, Vec3f* arg1, f32 arg2, f32 arg3);
+void func_84368140(unk_D_843AA880* arg0);
 s32 func_843684CC(void);
-Gfx* func_84368560(Gfx*);
+Gfx* func_84368560(Gfx* arg0);
+
+
 void func_84368AB0(void);
 void func_84368C04(f32, f32, f32, f32, f32, f32, s32, s32, s32, s32, f32, f32, f32, s32);
 s32 func_843692E8(void);
