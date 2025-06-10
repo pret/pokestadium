@@ -811,12 +811,12 @@ s32 func_8432F9CC(s32 arg0) {
     return sp1C;
 }
 
-void func_8432FA0C(void) {
-    func_843081BC(D_843902EC);
+s32 func_8432FA0C(void) {
+    return func_843081BC(D_843902EC);
 }
 
-void func_8432FA30(void) {
-    func_843081BC(D_843902F0);
+s32 func_8432FA30(void) {
+    return func_843081BC(D_843902F0);
 }
 
 void func_8432FA54(unk_D_84390010* arg0, s16 arg1, Vec3f* arg2) {
