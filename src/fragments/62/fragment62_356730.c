@@ -302,11 +302,8 @@ Gfx* func_8436C6A4(Gfx* arg0, unk_D_843C2C00* arg1, s16 arg2, s16 arg3) {
 
     if (temp_v1) {}
 
-    a1 = temp_v1->a * arg1->unk_08C;
-    a2 = temp_v0->a * arg1->unk_090;
-
-    gDPSetPrimColor(arg0++, 0, arg1->unk_080, temp_v1->r, temp_v1->g, temp_v1->b, a1);
-    gDPSetEnvColor(arg0++, temp_v0->r, temp_v0->g, temp_v0->b, a2);
+    gDPSetPrimColor(arg0++, 0, arg1->unk_080, temp_v1->r, temp_v1->g, temp_v1->b, (u8)(temp_v1->a * arg1->unk_08C));
+    gDPSetEnvColor(arg0++, temp_v0->r, temp_v0->g, temp_v0->b, (u8)(temp_v0->a * arg1->unk_090));
 
     for (i = 0, sp44 = arg1->unk_018; i < 9; i++) {
         gSPVertex(arg0++, sp44, 18, 0);
