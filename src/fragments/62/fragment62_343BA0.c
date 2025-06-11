@@ -875,10 +875,10 @@ void func_8435B600(void) {
 }
 
 void func_8435B654(void) {
-    static s32 D_84387FC0[] = { 2, 1, 0xE, 1, 2, 2, 3, 1 };
-    static s32 D_84387FE0[] = { 3, 5, 0, 5, 3, 7, 0, 5 };
-    static s32 D_84388000[] = { 2, 1, 0xE, 1, 2, 1, 3, 1 };
-    static s32 D_84388020[] = { 3, 5, 0, 5, 0, 7, 5, 7 };
+    static unk_D_843C2C00_024 D_84387FC0 = { 2, 1, 0xE, 1, 2, 2, 3, 1 };
+    static unk_D_843C2C00_024 D_84387FE0 = { 3, 5, 0, 5, 3, 7, 0, 5 };
+    static unk_D_843C2C00_024 D_84388000 = { 2, 1, 0xE, 1, 2, 1, 3, 1 };
+    static unk_D_843C2C00_024 D_84388020 = { 3, 5, 0, 5, 0, 7, 5, 7 };
 
     f32 spB4;
     f32 spB0;
@@ -892,10 +892,10 @@ void func_8435B654(void) {
     spA4 *= 10.0f;
     spA0 *= 10.0f;
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 2.0f, 10.0f, 0x14, 0x8F, 0x8F, 6, 0xA, 0xF, 0xE,
-                  -3, 5, 0, 0xF, D_84387FC0, D_84387FE0, 0xFF, 0xFF, 0, 0x96, 0x64, 0xFF, 0, 0xC8, 0x32, 0xFF, 0x96,
+                  -3, 5, 0, 0xF, &D_84387FC0, &D_84387FE0, 0xFF, 0xFF, 0, 0x96, 0x64, 0xFF, 0, 0xC8, 0x32, 0xFF, 0x96,
                   0xFF, 0x78);
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 3.0f, 15.0f, 0x14, 0x8F, 0x90, 2, 6, 0, 0xF, -4,
-                  2, 0, 0, D_84388000, D_84388020, 0, 0xFF, 0x64, 0x96, 0x64, 0x64, 0, 0xFF, 0xC8, 0, 0, 0, 0);
+                  2, 0, 0, &D_84388000, &D_84388020, 0, 0xFF, 0x64, 0x96, 0x64, 0x64, 0, 0xFF, 0xC8, 0, 0, 0, 0);
 }
 
 void func_8435B8E8(void) {
@@ -959,10 +959,10 @@ void func_8435BBEC(void) {
 }
 
 void func_8435BC40(void) {
-    static s32 D_84388080[] = { 3, 5, 1, 5, 6, 7, 2, 3 };
-    static s32 D_843880A0[] = { 0x1F, 0x1F, 0x1F, 0, 0, 7, 5, 7 };
-    static s32 D_843880C0[] = { 3, 5, 2, 5, 1, 7, 3, 7 };
-    static s32 D_843880E0[] = { 0x1F, 0x1F, 0x1F, 0, 0, 7, 5, 7 };
+    static unk_D_843C2C00_024 D_84388080 = { 3, 5, 1, 5, 6, 7, 2, 3 };
+    static unk_D_843C2C00_024 D_843880A0 = { 0x1F, 0x1F, 0x1F, 0, 0, 7, 5, 7 };
+    static unk_D_843C2C00_024 D_843880C0 = { 3, 5, 2, 5, 1, 7, 3, 7 };
+    static unk_D_843C2C00_024 D_843880E0 = { 0x1F, 0x1F, 0x1F, 0, 0, 7, 5, 7 };
 
     f32 spB4;
     f32 spB0;
@@ -976,9 +976,9 @@ void func_8435BC40(void) {
     spA4 *= 10.0f;
     spA0 *= 10.0f;
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 2.0f, 10.0f, 0x14, 0x93, 0x93, 5, 0xA, 0xF, 0xF,
-                  -5, 5, 0xF, 0xF, D_84388080, D_843880A0, 0xC8, 0xC8, 0, 0x64, 0, 0, 0xC8, 0, 0xFF, 0, 0xFF, 0, 0x5A);
+                  -5, 5, 0xF, 0xF, &D_84388080, &D_843880A0, 0xC8, 0xC8, 0, 0x64, 0, 0, 0xC8, 0, 0xFF, 0, 0xFF, 0, 0x5A);
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 3.0f, 15.0f, 0x14, 0x91, 0x91, -2, 0xA, 0xF,
-                  0xF, 5, 0xF, 0xF, 0xF, D_843880C0, D_843880E0, 0xFF, 0x32, 0x64, 0xC8, 0, 0x64, 0x32, 0xFF, 0xFF, 0,
+                  0xF, 5, 0xF, 0xF, 0xF, &D_843880C0, &D_843880E0, 0xFF, 0x32, 0x64, 0xC8, 0, 0x64, 0x32, 0xFF, 0xFF, 0,
                   0, 0, 0);
 }
 
@@ -999,10 +999,10 @@ void func_8435BF28(void) {
 }
 
 void func_8435BF7C(void) {
-    static s32 D_84388100[] = { 2, 1, 0xE, 1, 2, 7, 1, 3 };
-    static s32 D_84388120[] = { 3, 5, 0, 5, 0, 7, 5, 7 };
-    static s32 D_84388140[] = { 2, 1, 0xE, 1, 2, 7, 1, 3 };
-    static s32 D_84388160[] = { 3, 5, 0, 5, 0, 7, 5, 7 };
+    static unk_D_843C2C00_024 D_84388100 = { 2, 1, 0xE, 1, 2, 7, 1, 3 };
+    static unk_D_843C2C00_024 D_84388120 = { 3, 5, 0, 5, 0, 7, 5, 7 };
+    static unk_D_843C2C00_024 D_84388140 = { 2, 1, 0xE, 1, 2, 7, 1, 3 };
+    static unk_D_843C2C00_024 D_84388160 = { 3, 5, 0, 5, 0, 7, 5, 7 };
 
     f32 spB4;
     f32 spB0;
@@ -1016,10 +1016,10 @@ void func_8435BF7C(void) {
     spA4 *= 10.0f;
     spA0 *= 10.0f;
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 2.0f, 10.0f, 0x14, 0x97, 0x98, -5, 0x14, 0xF,
-                  0xD, -5, 0x14, 0, 0xE, D_84388100, D_84388120, 0xFF, 0xFF, 0xFF, 0x32, 0x64, 0x64, 0, 0xFF, 0xFF,
+                  0xD, -5, 0x14, 0, 0xE, &D_84388100, &D_84388120, 0xFF, 0xFF, 0xFF, 0x32, 0x64, 0x64, 0, 0xFF, 0xFF,
                   0xC8, 0xFF, 0xFF, 0x96);
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 3.0f, 15.0f, 0x14, 0x97, 0x98, 5, 0xF, 0xF, 0xE,
-                  0, 0xF, 0xF, 0xF, D_84388140, D_84388160, 0xFF, 0xFF, 0xFF, 0x32, 0x64, 0x64, 0x64, 0xFF, 0xFF, 0, 0,
+                  0, 0xF, 0xF, 0xF, &D_84388140, &D_84388160, 0xFF, 0xFF, 0xFF, 0x32, 0x64, 0x64, 0x64, 0xFF, 0xFF, 0, 0,
                   0, 0);
 }
 
@@ -1040,8 +1040,8 @@ void func_8435C270(void) {
 }
 
 void func_8435C2C4(void) {
-    static s32 D_84388180[] = { 2, 1, 0xE, 1, 2, 1, 3, 1 };
-    static s32 D_843881A0[] = { 3, 5, 0, 5, 0, 7, 5, 7 };
+    static unk_D_843C2C00_024 D_84388180 = { 2, 1, 0xE, 1, 2, 1, 3, 1 };
+    static unk_D_843C2C00_024 D_843881A0 = { 3, 5, 0, 5, 0, 7, 5, 7 };
 
     f32 spB4;
     f32 spB0;
@@ -1055,7 +1055,7 @@ void func_8435C2C4(void) {
     spA4 *= 10.0f;
     spA0 *= 10.0f;
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 3.0f, 15.0f, 0x14, 0x97, 0x94, 0, 0x14, 0xE,
-                  0xF, 0, 0x14, 0xF, 0xE, D_84388180, D_843881A0, 0xFF, 0xFF, 0xFF, 0x96, 0x96, 0xFF, 0xFF, 0, 0xFF,
+                  0xF, 0, 0x14, 0xF, 0xE, &D_84388180, &D_843881A0, 0xFF, 0xFF, 0xFF, 0x96, 0x96, 0xFF, 0xFF, 0, 0xFF,
                   0xFF, 0xFF, 0, 0x96);
 }
 
@@ -1076,16 +1076,16 @@ void func_8435C498(void) {
 }
 
 void func_8435C4EC(void) {
-    static s32 D_843881C0[] = {
+    static unk_D_843C2C00_024 D_843881C0 = {
         0x00000002, 0x00000001, 0x0000000E, 0x00000001, 0x00000007, 0x00000007, 0x00000007, 0x00000003,
     };
-    static s32 D_843881E0[] = {
+    static unk_D_843C2C00_024 D_843881E0 = {
         0x00000003, 0x00000005, 0x00000000, 0x00000005, 0x00000007, 0x00000007, 0x00000007, 0x00000000,
     };
-    static s32 D_84388200[] = {
+    static unk_D_843C2C00_024 D_84388200 = {
         0x00000002, 0x00000001, 0x0000000E, 0x00000001, 0x00000002, 0x00000001, 0x00000003, 0x00000001,
     };
-    static s32 D_84388220[] = {
+    static unk_D_843C2C00_024 D_84388220 = {
         0x00000003, 0x00000005, 0x00000000, 0x00000005, 0x00000000, 0x00000007, 0x00000005, 0x00000007,
     };
 
@@ -1101,10 +1101,10 @@ void func_8435C4EC(void) {
     spA4 *= 12.0f;
     spA0 *= 12.0f;
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 2.0f, 10.0f, 0x14, 0x91, 0x92, 5, 0x1E, 0, 0xD,
-                  -5, 0x1E, 0xF, 0xD, D_843881C0, D_843881E0, 0xFF, 0xFF, 0, 0xFF, 0x96, 0x32, 0, 0, 0xFF, 0xFF, 0xC8,
+                  -5, 0x1E, 0xF, 0xD, &D_843881C0, &D_843881E0, 0xFF, 0xFF, 0, 0xFF, 0x96, 0x32, 0, 0, 0xFF, 0xFF, 0xC8,
                   0x64, 0xC8);
     func_8436BFB8(spB4, spB0, spAC, spA8, spA4, spA0, 0.0f, 5.0f, 1.2f, 3.0f, 15.0f, 0x14, 0x97, 0x96, 6, 0x14, 0xE,
-                  0xF, -3, 0xA, 0, 0xF, D_84388200, D_84388220, 0xFF, 0xFF, 0x64, 0x96, 0xFF, 0xFF, 0x64, 0, 0xC8, 0, 0,
+                  0xF, -3, 0xA, 0, 0xF, &D_84388200, &D_84388220, 0xFF, 0xFF, 0x64, 0x96, 0xFF, 0xFF, 0x64, 0, 0xC8, 0, 0,
                   0, 0);
 }
 
