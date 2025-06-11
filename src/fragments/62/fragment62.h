@@ -2714,9 +2714,13 @@ Gfx* func_8436AC44(Gfx* arg0);
 
 
 void func_8436B140(void);
-void func_8436B270(f32, f32, f32, f32, f32, f32, s32, s32, s32, s32, f32, f32, f32, s32);
-void func_8436B8D8(void);
-Gfx* func_8436B974(Gfx*);
+void func_8436B270(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, f32 argA, f32 argB, f32 argC, s16 argD);
+void func_8436B538(f32 arg0, Vec3f* arg1, f32 arg2);
+void func_8436B5C0(unk_D_843ADA80* arg0);
+s32 func_8436B8D8(void);
+Gfx* func_8436B974(Gfx* arg0);
+
+
 void func_8436BE70(void);
 void func_8436BFB8(f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, s32, 
                    s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32*, s32*, 
