@@ -100,17 +100,17 @@ void func_8436BFB8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f
             var_v0->unk_024 = *arg16;
             var_v0->unk_044 = *arg17;
 
-            var_v0->unk_07C.r = arg18;
-            var_v0->unk_07C.g = arg19;
-            var_v0->unk_07C.b = arg1A;
-            var_v0->unk_07C.a = arg1B;
+            var_v0->unk_07C.unk_00.r = arg18;
+            var_v0->unk_07C.unk_00.g = arg19;
+            var_v0->unk_07C.unk_00.b = arg1A;
+            var_v0->unk_07C.unk_00.a = arg1B;
 
-            var_v0->unk_080 = arg1C;
+            var_v0->unk_07C.unk_04 = arg1C;
 
-            var_v0->unk_081.r = arg1D;
-            var_v0->unk_081.g = arg1E;
-            var_v0->unk_081.b = arg1F;
-            var_v0->unk_081.a = arg20;
+            var_v0->unk_081.unk_00.r = arg1D;
+            var_v0->unk_081.unk_00.g = arg1E;
+            var_v0->unk_081.unk_00.b = arg1F;
+            var_v0->unk_081.unk_00.a = arg20;
 
             var_v0->unk_086.r = arg21;
             var_v0->unk_086.g = arg22;
@@ -227,52 +227,29 @@ s32 func_8436C62C(void) {
     return 0;
 }
 
+#define TRIANGLES(gfx)                                                                                        \
+    {                                                                                                         \
+        s32 j, k;                                                                                             \
+        for (j = 0; j < 2; j++)                                                                               \
+            for (k = 0; k < 4; k++)                                                                           \
+                gSP2Triangles(gfx++, (j * 4) + k, (j * 4) + (k + 9), (j * 4) + (k + 1), 0, (j * 4) + (k + 9), \
+                              (j * 4) + (k + 10), (j * 4) + (k + 1), 0);                                      \
+    }
+
 #ifdef NON_MATCHING
 Gfx* func_8436C6A4(Gfx* arg0, unk_D_843C2C00* arg1, s16 arg2, s16 arg3) {
     s32 i;
     s32 j;
-    s32 sp4C;
     Vtx* sp44;
-    Color_RGBA8* temp_v0;
-    Color_RGBA8* temp_v1;
-    Gfx* temp_s0;
-    Gfx* temp_s0_2;
-    Gfx* temp_s0_3;
-    Gfx* temp_s0_4;
-    Gfx* temp_v0_4;
-    Gfx* var_s0;
-    f32 temp_fv0;
-    f32 temp_fv1;
-    f32 var_ft0;
-    f32 var_ft5;
-    s16 temp_a0;
-    s16 temp_v0_2;
-    s32 temp_a0_2;
-    s32 temp_a0_3;
-    s32 temp_a1;
-    s32 temp_a2;
-    s32 temp_a3;
-    s32 temp_t0;
-    s32 temp_t1;
-    s32 temp_t2;
-    s32 temp_v1_2;
-    s32 var_ra;
-    s32 var_s1;
-    s32 var_s2;
-    s32 var_s3;
-    s32 var_s5;
-    s32 var_s6;
-    s32 var_s7;
-    s32 var_t3;
-    s32 var_t4;
-    s32 var_t5;
-    u32 temp_t6_2;
-    u8 temp_t6;
-    u8 temp_t8;
+    s32 k;
+    unk_D_84389CE0* temp_v0;
+    unk_D_84389CE0* temp_v1;
     u8 a1;
     u8 a2;
     s16 tmp;
-    s32 tmp1;
+
+    temp_v1 = &arg1->unk_07C;
+    temp_v0 = &arg1->unk_081;
 
     if (func_8432E8B0() == 1) {
         if (arg1->unk_094 >= arg1->unk_002) {
@@ -287,7 +264,7 @@ Gfx* func_8436C6A4(Gfx* arg0, unk_D_843C2C00* arg1, s16 arg2, s16 arg3) {
             arg1->unk_08C = 1.0f - tmp * 0.1f;
             arg1->unk_090 = 1.0f - tmp * 0.1f;
 
-            if (arg1->unk_08C > 1.0f) {
+            if (tmp * 0.1f > 1.0f) {
                 arg1->unk_08C = 0.0f;
             }
 
@@ -297,24 +274,16 @@ Gfx* func_8436C6A4(Gfx* arg0, unk_D_843C2C00* arg1, s16 arg2, s16 arg3) {
         }
     }
 
-    temp_v1 = &arg1->unk_07C;
-    temp_v0 = &arg1->unk_081;
+    a1 = temp_v1->unk_00.a * arg1->unk_08C;
+    a2 = temp_v0->unk_00.a * arg1->unk_090;
 
-    if (temp_v1) {}
+    gDPSetPrimColor(arg0++, 0, temp_v1->unk_04, temp_v1->unk_00.r, temp_v1->unk_00.g, temp_v1->unk_00.b, a1);
+    gDPSetEnvColor(arg0++, temp_v0->unk_00.r, temp_v0->unk_00.g, temp_v0->unk_00.b, a2);
 
-    gDPSetPrimColor(arg0++, 0, arg1->unk_080, temp_v1->r, temp_v1->g, temp_v1->b, (u8)(temp_v1->a * arg1->unk_08C));
-    gDPSetEnvColor(arg0++, temp_v0->r, temp_v0->g, temp_v0->b, (u8)(temp_v0->a * arg1->unk_090));
-
-    for (i = 0, sp44 = arg1->unk_018; i < 9; i++) {
+    sp44 = arg1->unk_018;
+    for (i = 0; i < 9; i++) {
         gSPVertex(arg0++, sp44, 18, 0);
-
-        for (j = 0; j < 2; j++) {
-            gSP2Triangles(arg0++, j * 4 + 0, j * 4 + 9, j * 4 + 1, 0, j * 4 + 9, j * 4 + 10, j * 4 + 1, 0);
-            gSP2Triangles(arg0++, j * 4 + 1, j * 4 + 10, j * 4 + 2, 0, j * 4 + 10, j * 4 + 11, j * 4 + 2, 0);
-            gSP2Triangles(arg0++, j * 4 + 2, j * 4 + 11, j * 4 + 3, 0, j * 4 + 11, j * 4 + 12, j * 4 + 3, 0);
-            gSP2Triangles(arg0++, j * 4 + 3, j * 4 + 12, j * 4 + 4, 0, j * 4 + 12, j * 4 + 13, j * 4 + 4, 0);
-        }
-
+        TRIANGLES(arg0);
         sp44 += 9;
     }
 
@@ -410,9 +379,10 @@ Gfx* func_8436CE34(Gfx* arg0) {
 
             arg0 = func_8436CB60(arg0, var_fp);
 
-            gDPSetPrimColor(arg0++, 0, var_fp->unk_080, var_fp->unk_07C.r, var_fp->unk_07C.g, var_fp->unk_07C.b,
-                            var_fp->unk_07C.a);
-            gDPSetEnvColor(arg0++, var_fp->unk_081.r, var_fp->unk_081.g, var_fp->unk_081.b, var_fp->unk_081.a);
+            gDPSetPrimColor(arg0++, 0, var_fp->unk_07C.unk_04, var_fp->unk_07C.unk_00.r, var_fp->unk_07C.unk_00.g,
+                            var_fp->unk_07C.unk_00.b, var_fp->unk_07C.unk_00.a);
+            gDPSetEnvColor(arg0++, var_fp->unk_081.unk_00.r, var_fp->unk_081.unk_00.g, var_fp->unk_081.unk_00.b,
+                           var_fp->unk_081.unk_00.a);
             gSPClearGeometryMode(arg0++, G_CULL_BOTH);
             gSPSetGeometryMode(arg0++, G_CULL_FRONT);
             gDPPipeSync(arg0++);
