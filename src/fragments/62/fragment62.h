@@ -764,6 +764,11 @@ typedef struct unk_D_843C3508 {
     /* 0x0A4 */ unk_D_843C3508_0A4 unk_0A4[20];
 } unk_D_843C3508; // size = 0x374
 
+typedef struct unk_D_8438ACB8 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+} unk_D_8438ACB8; // size = 0x2
+
 extern unk_D_8438E7B0* D_84384570[];
 extern unk_D_8438FF70* D_84384578[];
 extern unk_D_8438FF70* D_84384580[];
@@ -807,18 +812,24 @@ extern Gfx D_84389AE0[];
 extern u32 D_8438A648[];
 extern Gfx D_8438A980[];
 extern u8 D_8438AC60[];
-extern u8 D_8438ACB8[];
+extern unk_D_8438ACB8 D_8438ACB8[];
 extern u8 D_8438ACD4[];
 extern u8 D_8438ACF0[];
+extern u8* D_8438E778;
+extern u8* D_8438E77C;
 
 extern u8 D_843C4DA4;
+extern u8 D_843C4DA5;
+extern u8 D_843C4DA9;
+extern u8 D_843C4DAA;
 extern s32 D_843C4DEC;
 //extern unk_D_843C4E44 D_843C4E44;
 extern u8 D_843C4E44;
 extern u8 D_843C4E45;
 extern u16 D_843C4DC4;
-extern u8* D_8438E778;
-extern u8* D_8438E77C;
+extern unk_D_800FCB18* D_843C5238;
+extern unk_D_800FCB18* D_843C523C;
+
 
 extern unk_D_84390010* D_84390010[2];
 extern unk_D_84390010* D_84390018;
@@ -2927,8 +2938,46 @@ void func_8437345C(void);
 void func_84373570(unk_D_84390010* arg0);
 
 
+u16 func_843736B0(u16* arg0, u16 arg1, u8 arg2);
+void func_84373754(void);
+void func_84373A30(void);
+void func_84373D04(void);
+void func_84373E24(void);
+void func_84373E60(void);
 void func_843741C4(void);
+void func_843744F0(void);
+void func_8437483C(void);
+void func_84374C9C(void);
+void func_84374D08(void);
+void func_84374D58(void);
+void func_84374E08(void);
+void func_84374EE4(void);
+void func_84374FD4(void);
+void func_84375038(void);
+void func_843751F8(void);
+void func_843752C0(void);
+void func_84375384(void);
+void func_84375424(void);
+void func_84375508(void);
+void func_843755E8(void);
+void func_84375700(void);
+void func_84375894(void);
+void func_843759C4(void);
+void func_843759DC(void);
+void func_843759F4(void);
+void func_84375B1C(void);
+void func_84375C24(void);
+void func_84375C60(void);
+void func_84375D78(void);
+void func_84375DA4(void);
+void func_84375E6C(void);
+void func_8437600C(void);
+void func_84376258(void);
+void func_843765E8(void);
+void func_8437670C(void);
 void func_84376768(void);
+
+
 void func_843831A0(unk_D_800AE540_0004*, unk_D_800AE540_0004*, unk_D_800AE540_0004*, s32, u8*, s32, s32);
 void func_8438363C(s32, s32, s32);
 s32 func_84383B5C(s32);
