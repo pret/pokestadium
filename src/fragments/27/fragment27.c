@@ -950,7 +950,7 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
         s32 sp38;
         s32 sp34;
 
-        sp38 = ((((sp130->unk00[4] * 0x64) / 255) + 2) / 5) * 5;
+        sp38 = ((((sp130->unk_04 * 0x64) / 255) + 2) / 5) * 5;
         func_8001F324(sp12C->unk_04.r, sp12C->unk_04.g, sp12C->unk_04.b, sp12C->unk_04.a);
         func_8001EBE0(8, 0);
         func_8001F1E8(sp13C + 8, sp138 + 4, func_8002D7C0(NULL, 0, D_8861C518, sp134->unk_00[0] - 1));

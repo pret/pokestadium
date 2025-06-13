@@ -1943,7 +1943,7 @@ void func_84323FA0(unk_D_86002F34_00C* arg0) {
             D_84390220 = func_8431FCCC(D_84390200);
             D_84390224 = func_8431FCCC(D_84390204);
             sp1C = func_8431C8E0(arg0, D_84390200);
-            if ((func_84323B2C(D_84390204) != 0) && ((D_843C4DEC.unk_00 < 0xA) || (D_843C4DA4 != 0)) &&
+            if ((func_84323B2C(D_84390204) != 0) && ((D_843C4DEC < 0xA) || (D_843C4DA4 != 0)) &&
                 !(sp24->unk_15 & 0x20)) {
                 var_a0 = 0x5A;
             } else {

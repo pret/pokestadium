@@ -254,7 +254,6 @@ void func_84317EDC(void) {
 }
 
 void func_843180AC(void) {
-
     s32 sp2C;
     s32 tmp;
     unk_D_800FCB18* sp24;

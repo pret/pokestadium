@@ -12,9 +12,6 @@
 
 #define TWO_THIRDS_PI 2.094395160675049
 #define TWO_PI 6.2831854820251469
-/*
-#define TWO_PI 6.2831854820251465
-*/
 #define TWO_PI_F 6.283185482f
 
 extern long long __d_to_ll(double d);
