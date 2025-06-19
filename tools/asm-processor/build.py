@@ -52,7 +52,7 @@ asmproc_flags += opt_flags + [str(in_file)]
 # asmproc_flags += ["--drop-mdebug-gptab"]
 
 # Convert encoding before compiling.
-# asmproc_flags += ["--input-enc", "utf-8", "--output-enc", "euc-jp"]
+asmproc_flags += ["--input-enc", "euc-jp", "--output-enc", "euc-jp"]
 
 with tempfile.TemporaryDirectory(prefix="asm_processor") as tmpdirname:
     tmpdir_path = Path(tmpdirname)

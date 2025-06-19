@@ -266,7 +266,7 @@ s32 func_80003B04(s16 arg0) {
     return func_8000CDB8(arg0 << 7);
 }
 
-void func_80003B30(u8* arg0, u8* arg1, u8* arg2, s32 arg3) {
+void func_80003B30(u32 arg0, u32 arg1, u32 arg2, s32 arg3) {
     s32 var_s0;
     s32 var_s1;
     OSMesgQueue* mesq = &D_800A62C0;

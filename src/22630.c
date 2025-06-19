@@ -254,7 +254,7 @@ u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
             break;
 
         case 5:
-            sp24 = D_80070F84[arg1].unk_0A;
+            sp24 = D_80070F84[arg1].unk_0A[0];
             break;
     }
 

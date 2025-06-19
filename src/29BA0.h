@@ -6,6 +6,12 @@
 #include "src/controller.h"
 #include "PR/leo.h"
 
+typedef struct arg1_func_80019420 {
+    /* 0x00 */ s8 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ void* unk_04;
+} arg1_func_80019420; // size = 0x8
+
 typedef struct unk_D_800AE520 {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 fragment_id;
@@ -74,8 +80,7 @@ typedef struct unk_D_800AE540_0004 {
     /* 0x008 */ char unk_008[4];
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;
-    /* 0x01C */ unk_func_80026268_arg0 unk_01C[1];
-    /* 0x070 */ char unk070[0x1A4];
+    /* 0x01C */ unk_func_80026268_arg0 unk_01C[6];
     /* 0x214 */ unk_D_800AE540_0874* unk_214;
     /* 0x218 */ char unk218[0x4];
 } unk_D_800AE540_0004; // size = 0x21C
@@ -83,17 +88,17 @@ typedef struct unk_D_800AE540_0004 {
 typedef struct unk_D_800AE540_1194 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ s32 unk_04;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ unk_D_800AE540_0004* unk_04;
     /* 0x04 */ unk_D_800AE540_0004* unk_08[2];
-    /* 0x04 */ char unk10[0x4];
-    /* 0x04 */ s32 unk_14;
-    /* 0x04 */ char unk18[0x4];
+    /* 0x04 */ s32 unk_10;
+    /* 0x04 */ unk_D_86002F58_004_000_004* unk_14;
+    /* 0x04 */ unk_D_86002F58_004_000_004* unk_18;
     /* 0x1C */ u8 unk_1C;
     /* 0x1D */ u8 unk_1D;
     /* 0x1E */ u8 unk_1E;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk24[0x4];
+    /* 0x24 */ arg1_func_80019420* unk_24;
 } unk_D_800AE540_1194; // size = 0x28
 
 typedef struct unk_D_800AE540 {

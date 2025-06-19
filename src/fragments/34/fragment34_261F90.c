@@ -1,12 +1,13 @@
 #include "fragment34.h"
-#include "include/libc/math.h"
+#include "include/math.h"
 #include "src/F420.h"
 #include "src/math_util.h"
 
-MtxF* D_8140E620;
+unk_D_8140E620* D_8140E620;
 s32 D_8140E624;
 s32 D_8140E624;
 unk_D_8140E634 D_8140E628;
+unk_D_8140E634_010* D_8140E6B4;
 u32 D_8140E6B8;
 s32 D_8140E6BC;
 s32 D_8140E6C0;
@@ -30,11 +31,12 @@ s32 D_8140E704;
 s32 D_8140E708;
 s32 D_8140E70C;
 s32 D_8140E710;
-s32 pad_D_8140E714[2];
+static s32 pad_D_8140E714[2];
 unk_D_8140E720* D_8140E720;
-s32 pad_D_8140E724;
+unk_D_8140E724* D_8140E724;
 unk_D_8140E728* D_8140E728;
 s32 D_8140E72C;
+s32 D_8140E730;
 s32 D_8140E734;
 
 void func_81400020(s32* arg0, s32 arg1) {
@@ -725,9 +727,9 @@ void func_8140138C(void) {
 
 void func_81401394(MtxF* arg0) {
     if (D_8140E624 < 0x16C) {
-        func_80010090((MtxF*)((u32)D_8140E620 + (D_8140E624 * sizeof(MtxF))), arg0);
+        func_80010090(&D_8140E620->unk_0000[D_8140E624], arg0);
 
-        gSPMatrix(gDisplayListHead++, ((u32)D_8140E620 + (D_8140E624 * sizeof(MtxF))) & 0x1FFFFFFF,
+        gSPMatrix(gDisplayListHead++, (u32)&D_8140E620->unk_0000[D_8140E624] & 0x1FFFFFFF,
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         D_8140E624++;
@@ -1060,31 +1062,31 @@ void func_814020B8(Vec3f arg0, Vec3s arg1, f32 arg2, f32 arg3) {
     func_81401394(&sp28);
 }
 
-void func_8140213C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4) {
+void func_8140213C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4) {
     MtxF sp20;
 
-    func_81401ABC(&sp20, &arg0->unk_64, arg1, arg4);
+    func_81401ABC(&sp20, &arg0->unk_60.mtxf, arg1, arg4);
     func_81401394(&sp20);
 }
 
-void func_814021A4(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
+void func_814021A4(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
     MtxF sp28;
 
-    func_81401C04(&sp28, &arg0->unk_64, arg1, arg4, arg5);
+    func_81401C04(&sp28, &arg0->unk_60.mtxf, arg1, arg4, arg5);
     func_81401394(&sp28);
 }
 
-void func_81402214(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4) {
+void func_81402214(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4) {
     MtxF sp20;
 
-    func_81401B6C(&sp20, &arg0->unk_64, arg1, arg4);
+    func_81401B6C(&sp20, &arg0->unk_60.mtxf, arg1, arg4);
     func_81401394(&sp20);
 }
 
-void func_8140227C(arg1_func_8140213C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
+void func_8140227C(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
     MtxF sp28;
 
-    func_81401D50(&sp28, &arg0->unk_64, arg1, arg4, arg5);
+    func_81401D50(&sp28, &arg0->unk_60.mtxf, arg1, arg4, arg5);
     func_81401394(&sp28);
 }
 

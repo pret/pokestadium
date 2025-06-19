@@ -5,11 +5,7 @@
 #include "src/3FB0.h"
 #include "src/F420.h"
 #include "src/1C720.h"
-
-typedef struct arg1_func_80019420 {
-    /* 0x00 */ s8 unk_00;
-    /* 0x04 */ void* unk_04;
-} arg1_func_80019420; // size = 0x8
+#include "src/29BA0.h"
 
 typedef struct unk_func_80019600 {
     /* 0x00 */ s16 unk_00;

@@ -758,6 +758,71 @@ extern u8 D_8C200090[];
 extern u8 D_8C200920[];
 extern u8 D_8C201070[];
 extern u8 D_8C2011C4[];
+extern u8 D_3008380[];
+extern u8 D_3008400[];
+extern u8 D_3008480[];
+extern u8 D_3008500[];
+extern u8 D_3008580[];
+extern u8 D_3008600[];
+extern u8 D_3008680[];
+extern u8 D_3008700[];
+extern u8 D_3000470[];
+extern u8 D_3001F70[];
+extern u8 D_30092C0[];
+extern u8 D_3009560[];
+extern u8 D_3008280[];
+extern u8 D_3006170[];
+extern u8 D_30061D0[];
+extern u8 D_3006230[];
+extern u8 D_1003DB0[];
+extern u8 D_1003E50[];
+extern u8 D_1003EA0[];
+extern u8 D_1003EC8[];
+extern u8 D_1003EF0[];
+extern u8 D_300B870[];
+extern u8 D_3008C00[];
+extern u8 D_3008D80[];
+extern u8 D_3008E40[];
+extern u8 D_3008FC0[];
+extern u8 D_3009080[];
+extern u8 D_3009200[];
+extern u8 D_3008780[];
+extern u8 D_3008900[];
+extern u8 D_30089C0[];
+extern u8 D_3008B40[];
+extern u8 D_3006290[];
+extern u8 D_3006450[];
+extern u8 D_3006530[];
+extern u8 D_30066F0[];
+extern u8 D_30067D0[];
+extern u8 D_3006990[];
+extern u8 D_3006A70[];
+extern u8 D_3006C30[];
+extern u8 D_300B630[];
+extern u8 D_300A1F0[];
+extern u8 D_30096B0[];
+extern u8 D_300AAF0[];
+extern u8 D_300A8B0[];
+extern u8 D_300B3F0[];
+extern u8 D_3009FB0[];
+extern u8 D_30098F0[];
+extern u8 D_300A430[];
+extern u8 D_300B1B0[];
+extern u8 D_300AF70[];
+extern u8 D_300A670[];
+extern u8 D_3009D70[];
+extern u8 D_300AD30[];
+extern u8 D_3009B30[];
+extern u8 D_3006D10[];
+extern u8 D_3007010[];
+extern u8 D_3007310[];
+extern u8 D_3007610[];
+extern u8 D_3007A78[];
+extern u8 D_3007EB0[];
+extern u8 D_3007910[];
+extern u8 D_3008018[];
+extern u8 D_3007BE0[];
+extern u8 D_3007D48[];
 
 extern LEODiskID D_800818E0;
 
@@ -872,10 +937,11 @@ typedef struct unk_D_70B10 {
 extern u32 D_8C000000; // start of some rom area
 
 typedef struct unk_D_80072B00 {
-    /* 0x00 */ char unk00[2];
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03;
-    /* 0x04 */ char unk04[1];
+    /* 0x04 */ u8 unk_04;
     /* 0x05 */ u8 unk_05;
 } unk_D_80072B00; // size = 0x6
 extern unk_D_80072B00 D_80072B00[];
@@ -883,10 +949,22 @@ extern unk_D_80072B00 D_80072B00[];
 typedef struct unk_D_80072338 {
     /* 0x00 */ char unk00[0x1];
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk02[0xA];
+    /* 0x02 */ char unk02[0x2];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ char unk08[0x4];
 } unk_D_80072338; // size = 0xC
 extern unk_D_80072338 D_80072338[];
 
 extern char D_8006FEE8[][0x1C];
+
+typedef struct unk_rom_70D3A0_offset_72780 {
+    /* 0x00 */ char unk00[0x20];
+} unk_rom_70D3A0_offset_72780;
+extern unk_rom_70D3A0_offset_72780 D_72780[];
+
+typedef struct unk_rom_70D3A0_offset_73A60 {
+    /* 0x00 */ char unk00[0x20];
+} unk_rom_70D3A0_offset_73A60;
+extern unk_rom_70D3A0_offset_73A60 D_73A60[];
 
 #endif

@@ -1,9 +1,9 @@
 #include "fragment62.h"
 #include "src/6A40.h"
 
-static unk_D_843ADA80 D_843B8340[50];
+static unk_D_843ADA80 D_843ADA80[50];
 
-static Gfx D_84389B60[] = {
+static Gfx D_84389A50[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
@@ -16,13 +16,13 @@ static Gfx D_84389B60[] = {
     gsDPSetColorDither(G_CD_NOISE),
     gsSPEndDisplayList(),
 };
-static Vtx D_84389BB0[] = {
+static Vtx D_84389AA0[] = {
     VTX(-6, 0, -6, 2048, 0, 0xFF, 0xFF, 0xFF, 0x14),
     VTX(6, 0, -6, 0, 0, 0xFF, 0xFF, 0xFF, 0x14),
     VTX(-6, 0, 6, 2048, 2048, 0xFF, 0xFF, 0xFF, 0x14),
     VTX(6, 0, 6, 0, 2048, 0xFF, 0xFF, 0xFF, 0x14),
 };
-static Gfx D_84389BF0[] = {
+Gfx D_84389AE0[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
@@ -36,13 +36,13 @@ static Gfx D_84389BF0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPSetTextureFilter(G_TF_BILERP),
     gsDPPipeSync(),
-    gsSPVertex(D_84389BB0, 4, 0),
+    gsSPVertex(D_84389AA0, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
     gsSPEndDisplayList(),
 };
 
-void func_8436B140(void) {
-    unk_D_843ADA80* var_v0 = &D_843B8340[0];
+void func_8436A410(void) {
+    unk_D_843ADA80* var_v0 = &D_843ADA80[0];
     unk_D_843ADA80_040* var_a0;
     s32 i;
     s32 j;
@@ -69,7 +69,7 @@ void func_8436B140(void) {
     }
 }
 
-void func_8436B270(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9,
+void func_8436A540(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9,
                    f32 argA, f32 argB, f32 argC, s16 argD) {
     unk_D_843ADA80* var_v1;
     unk_D_843ADA80_040* var_s0;
@@ -94,7 +94,7 @@ void func_8436B270(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u
     sp64.y = temp_fv1 * -2.0;
     sp64.z = 0.0f;
 
-    var_v1 = &D_843B8340[0];
+    var_v1 = &D_843ADA80[0];
 
     for (i = 0; i < 50; i++, var_v1++) {
         if (var_v1->unk_000 == 0) {
@@ -130,7 +130,7 @@ void func_8436B270(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u
     }
 }
 
-void func_8436B538(f32 arg0, Vec3f* arg1, f32 arg2) {
+void func_8436A808(f32 arg0, Vec3f* arg1, f32 arg2) {
     MtxF sp30;
     f32 temp_fv0 = (arg0 * 360.0) / 6.2831854820251465;
 
@@ -138,7 +138,7 @@ void func_8436B538(f32 arg0, Vec3f* arg1, f32 arg2) {
     guMtxXFMF(sp30.mf, 0.0f, 0.0f, arg2, &arg1->x, &arg1->y, &arg1->z);
 }
 
-void func_8436B5C0(unk_D_843ADA80* arg0) {
+void func_8436A890(unk_D_843ADA80* arg0) {
     s32 i;
     f32 temp_fs3 = arg0->unk_010;
     unk_D_843ADA80_040* var_s0 = &arg0->unk_040[0];
@@ -202,9 +202,9 @@ void func_8436B5C0(unk_D_843ADA80* arg0) {
     }
 }
 
-s32 func_8436B8D8(void) {
+s32 func_8436ABA8(void) {
     s32 i;
-    unk_D_843ADA80* var_s0 = &D_843B8340[0];
+    unk_D_843ADA80* var_s0 = &D_843ADA80[0];
 
     for (i = 0; i < 50; i++, var_s0++) {
         if (var_s0->unk_000 == 1) {
@@ -212,14 +212,14 @@ s32 func_8436B8D8(void) {
             if ((var_s0->unk_002 == 1) && (var_s0->unk_006 < var_s0->unk_004)) {
                 var_s0->unk_000 = 0;
             } else {
-                func_8436B5C0(var_s0);
+                func_8436A890(var_s0);
             }
         }
     }
     return 0;
 }
 
-Gfx* func_8436B974(Gfx* arg0) {
+Gfx* func_8436AC44(Gfx* arg0) {
     s32 i;
     s32 j;
     s32 k;
@@ -235,10 +235,10 @@ Gfx* func_8436B974(Gfx* arg0) {
     s16 var_s3;
     f32 tmp;
 
-    gDPLoadTextureBlock(arg0++, D_843920C0[0x1C], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(arg0++, D_843920C0[0x1E], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    var_s5 = &D_843B8340[0];
+    var_s5 = &D_843ADA80[0];
     for (i = 0; i < 50; i++, var_s5++) {
         if (var_s5->unk_000 == 1) {
             temp_s0 = &var_s5->unk_040[0];
@@ -253,7 +253,7 @@ Gfx* func_8436B974(Gfx* arg0) {
                 guMtxCatL(&spC0, temp_v0, temp_v0);
 
                 gSPMatrix(arg0++, temp_v0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-                gSPDisplayList(arg0++, D_84389BF0);
+                gSPDisplayList(arg0++, D_84389AE0);
                 gSPPopMatrix(arg0++, G_MTX_MODELVIEW);
             }
 
@@ -261,7 +261,7 @@ Gfx* func_8436B974(Gfx* arg0) {
 
             var_s0 = var_s5->unk_020;
             for (j = 0; j < 10; j++) {
-                func_8436B538(temp_s0->unk_08, &sp184, temp_s0->unk_04 * tmp);
+                func_8436A808(temp_s0->unk_08, &sp184, temp_s0->unk_04 * tmp);
 
                 var_s3 = temp_s0->unk_0C.y + sp184.y;
                 if (var_s3 < 0) {
@@ -277,7 +277,7 @@ Gfx* func_8436B974(Gfx* arg0) {
                 var_s0->v.cn[3] = temp_s0->unk_00;
                 var_s0++;
 
-                func_8436B538(temp_s0->unk_08 + 3.1415927f, &sp184, temp_s0->unk_04 * tmp);
+                func_8436A808(temp_s0->unk_08 + 3.1415927f, &sp184, temp_s0->unk_04 * tmp);
 
                 var_s3 = temp_s0->unk_0C.y + sp184.y;
                 if (var_s3 < 0) {
@@ -298,7 +298,7 @@ Gfx* func_8436B974(Gfx* arg0) {
 
             var_s0 = var_s5->unk_020;
 
-            gSPDisplayList(arg0++, D_84389B60);
+            gSPDisplayList(arg0++, D_84389A50);
 
             for (k = 0; k < 9; k++) {
                 gSPVertex(arg0++, var_s0, 4, 0);

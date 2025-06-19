@@ -5,12 +5,12 @@
 #include "src/12D80.h"
 
 void func_87901620(void) {
-    D_8140E720 = main_pool_alloc(0xF870, 0);
-    bzero(D_8140E720, 0xF870);
+    D_8140E720 = main_pool_alloc(sizeof(unk_D_8140E720) * 300, 0);
+    bzero(D_8140E720, sizeof(unk_D_8140E720) * 300);
     D_8140E72C = 0;
 
-    D_8140E728 = main_pool_alloc(0x1800, 0);
-    bzero(D_8140E728, 0x1800);
+    D_8140E728 = main_pool_alloc(sizeof(unk_D_8140E728) * 128, 0);
+    bzero(D_8140E728, sizeof(unk_D_8140E728) * 128);
     D_8140E734 = 0;
 }
 
@@ -58,7 +58,7 @@ void func_87901720(unk_D_8140E728* arg0) {
     arg0->unk_26 = arg0->unk_28;
 }
 
-s32 func_87901738(s32 arg0, s32 arg1, s8 arg2, f32 arg3, Vec3f arg4, Vec3s arg7, func_unk_D_8140E720_008 arg9,
+s32 func_87901738(s32 arg0, s32 arg1, s8 arg2, f32 arg3, Vec3f arg4, Vec3s arg7, func_unk_D_8140E724_008 arg9,
                   unk_D_8140E728_01C* argA, s32 argB, u8 argC, s16 argD, u8 argE, u8 argF, u8 arg10) {
     unk_D_8140E728* temp_v0 = (unk_D_8140E728*)func_8790168C();
 
@@ -90,7 +90,7 @@ s32 func_87901738(s32 arg0, s32 arg1, s8 arg2, f32 arg3, Vec3f arg4, Vec3s arg7,
     return (s32)temp_v0;
 }
 
-void func_87901804(s32 arg0, f32 arg1, Vec3f arg2, func_unk_D_8140E720_008 arg3, unk_D_8140E728_01C* arg4, s16 arg5,
+void func_87901804(s32 arg0, f32 arg1, Vec3f arg2, func_unk_D_8140E724_008 arg3, unk_D_8140E728_01C* arg4, s16 arg5,
                    u8 arg6, u8 arg7) {
     Vec3s sp50;
 
@@ -99,7 +99,7 @@ void func_87901804(s32 arg0, f32 arg1, Vec3f arg2, func_unk_D_8140E720_008 arg3,
     func_87901738(arg0, 0, 1, arg1, arg2, sp50, arg3, arg4, 0, 0, arg5, arg6, arg7, 0);
 }
 
-void func_879018B0(s32 arg0, s32 arg1, s8 arg2, f32 arg3, Vec3f arg4, func_unk_D_8140E720_008 arg7,
+void func_879018B0(s32 arg0, s32 arg1, s8 arg2, f32 arg3, Vec3f arg4, func_unk_D_8140E724_008 arg7,
                    unk_D_8140E728_01C* arg8, s16 arg9, u8 argA, u8 argB) {
     Vec3s sp50;
 
@@ -213,7 +213,7 @@ void func_87901C98(void) {
     gSPMatrix(gDisplayListHead++, D_87906054->unk_24.mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gDisplayListHead++, D_87906054->unk_60.p_mtxf, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
-    D_8140E620 = func_80005F5C(0x5BE0);
+    D_8140E620 = func_80005F5C(sizeof(unk_D_8140E620));
     D_8140E624 = 0;
 
     gSPDisplayList(gDisplayListHead++, D_8140DB30);

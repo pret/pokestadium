@@ -3,18 +3,66 @@
 
 #include "global.h"
 
+typedef struct unk_D_800FCB18_044 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+} unk_D_800FCB18_044; // size = 0x6
+
 typedef struct unk_D_800FCB18 {
-    /* 0x00 */ char pad00[0xC];
+    /* 0x00 */ char unk00[0x1];
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ char unk02[0x3];
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ char unk06[0x5];
+    /* 0x0B */ u8 unk_0B;
     /* 0x0C */ u16 unk_0C;
-    /* 0x0E */ char pad0E[0x7];
+    /* 0x0E */ u16 unk_0E;
+    /* 0x10 */ u16 unk_10;
+    /* 0x12 */ u16 unk_12;
+    /* 0x14 */ u8 unk_14;
     /* 0x15 */ u8 unk_15;
-    /* 0x16 */ char pad16[0x6];
-    /* 0x1C */ u8 unk_1C;
-    /* 0x1D */ u8 unk_1D;
-    /* 0x1E */ char pad1E[0x8];
+    /* 0x16 */ u8 unk_16[9];
+    /* 0x1F */ u8 unk_1F[4];
+    /* 0x23 */ char unk23[0x1];
+    /* 0x24 */ u16 unk_24;
     /* 0x26 */ u8 unk_26;
     /* 0x28 */ u16 unk_28;
-} unk_D_800FCB18; // size >= 0x2C
+    /* 0x2A */ u16 unk_2A;
+    /* 0x2C */ u16 unk_2C;
+    /* 0x2E */ u16 unk_2E;
+    /* 0x30 */ u16 unk_30;
+    /* 0x32 */ u8 unk_32[4];
+    /* 0x36 */ u16 unk_36;
+    /* 0x38 */ u16 unk_38;
+    /* 0x3A */ u16 unk_3A;
+    /* 0x3C */ u16 unk_3C;
+    /* 0x3E */ u16 unk_3E;
+    /* 0x40 */ char unk40[0x4];
+    /* 0x44 */ unk_D_800FCB18_044 unk_44;
+    /* 0x4A */ u8 unk_4A;
+    /* 0x4B */ u8 unk_4B;
+    /* 0x4C */ u8 unk_4C;
+    /* 0x4D */ u8 unk_4D;
+    /* 0x4E */ u8 unk_4E;
+    /* 0x4F */ u8 unk_4F;
+    /* 0x50 */ u8 unk_50;
+    /* 0x51 */ u8 unk_51;
+    /* 0x52 */ u8 unk_52;
+    /* 0x53 */ u8 unk_53;
+    /* 0x54 */ u16 unk_54;
+    /* 0x56 */ u8 unk_56;
+    /* 0x57 */ u8 unk_57;
+    /* 0x58 */ u8 unk_58;
+    /* 0x59 */ u8 unk_59;
+    /* 0x5A */ u8 unk_5A;
+    /* 0x5B */ u8 unk_5B;
+    /* 0x5C */ u8 unk_5C[6];
+    /* 0x62 */ char unk62[0x2];
+} unk_D_800FCB18; // size = 0x64
 
 typedef struct amConfig {
     /* 0x00 */ u32 outputRate;
@@ -42,8 +90,19 @@ void func_8003D32C(void);
 s32 func_8003D494(void);
 s32 func_8003D4A0(s32);
 void func_8003D68C(s32);
+void func_8003D6B0(u8, u8, u8, u8);
+void func_8003D828(u8, u8, u8, u8);
 void func_8003D918(u32 arg0, u32 arg1);
 void func_8003DB84(s32 arg0);
+void func_8003EB40(s32, unk_D_800FCB18*);
+void func_8003F1AC(s32);
+void func_8003F4C0(s32);
+void func_8003F624(u32 arg0);
+void func_8003F660(s32);
+void func_80040A70(unk_D_800FCB18* arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_800414B8(s32);
+void func_8004153C(void);
+void func_80041688(void);
 void func_800416BC(void);
 void func_80041A98(void);
 void func_80041C70(u32 arg0);
@@ -53,5 +112,6 @@ void func_80041DF4(u16 arg0);
 void func_80041E40(u16 arg0);
 u32 func_80041EF4(u16* arg0);
 void func_800420C0(u16* arg0);
+void func_80048014(void);
 
 #endif // _3D140_H_

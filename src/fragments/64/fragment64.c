@@ -128,7 +128,7 @@ void func_84800184(void) {
     s32 var_s4;
     s8 temp_v0;
     s8* var_v0;
-    unk_func_80007444_018* sp58;
+    unk_D_80068BB0* sp58;
     Color_RGB8 sp54;
     Color_RGB8 sp50;
 
@@ -161,7 +161,7 @@ void func_84800184(void) {
     }
     func_8001F444();
 
-    gDPSetScissorFrac(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, sp58->unk_04 * 4.0f, sp58->unk_06 * 4.0f);
+    gDPSetScissorFrac(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, sp58->width * 4.0f, sp58->height * 4.0f);
 
     D_8480379A += 2;
     if (D_8480379A >= ((strlen(var_v0) * 0x18) + 0x18)) {

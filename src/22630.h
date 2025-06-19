@@ -8,13 +8,16 @@
 
 typedef struct unk_D_80070F84 {
     /* 0x00 */ u8 unk_00;
-    /* 0x04 */ char unk01[0x4];
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ u8 unk_04;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
+    /* 0x0A */ u8 unk_0A[1];
     /* 0x0B */ char unk0B[0x4];
     /* 0x0F */ u8 unk_0F[1];
     /* 0x10 */ char unk10[0x3];
