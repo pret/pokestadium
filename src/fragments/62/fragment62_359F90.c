@@ -3,12 +3,6 @@
 #include "src/2E110.h"
 #include "src/F420.h"
 
-typedef struct unk_D_8438ACF0 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
-} unk_D_8438ACF0; // size = 0x3
-
 typedef struct unk_D_843C4DA0 {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u8 unk_02;

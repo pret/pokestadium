@@ -560,7 +560,8 @@ extern u8 trade_select_ui_ROM_END[];
 extern u8 _798CD0_TEXT_START[];
 extern u8 _798CD0_ROM_START[];
 extern u8 _798CD0_ROM_END[];
-
+extern u8 _7820E0_ROM_START[];
+extern u8 _7820E0_ROM_END[];
 
 
 extern u8 D_124570[];

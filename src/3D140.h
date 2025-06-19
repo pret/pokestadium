@@ -13,7 +13,11 @@ typedef struct unk_D_800FCB18_044 {
 } unk_D_800FCB18_044; // size = 0x6
 
 typedef struct unk_D_800FCB18 {
-    /* 0x00 */ char unk00[0xB];
+    /* 0x00 */ char unk00[0x1];
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ char unk02[0x3];
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ char unk06[0x5];
     /* 0x0B */ u8 unk_0B;
     /* 0x0C */ u16 unk_0C;
     /* 0x0E */ u16 unk_0E;
@@ -48,7 +52,7 @@ typedef struct unk_D_800FCB18 {
     /* 0x50 */ u8 unk_50;
     /* 0x51 */ u8 unk_51;
     /* 0x52 */ u8 unk_52;
-    /* 0x53 */ char unk53[0x1];
+    /* 0x53 */ u8 unk_53;
     /* 0x54 */ u16 unk_54;
     /* 0x56 */ u8 unk_56;
     /* 0x57 */ u8 unk_57;
@@ -56,7 +60,8 @@ typedef struct unk_D_800FCB18 {
     /* 0x59 */ u8 unk_59;
     /* 0x5A */ u8 unk_5A;
     /* 0x5B */ u8 unk_5B;
-    /* 0x5C */ u8 unk_5C[8];
+    /* 0x5C */ u8 unk_5C[6];
+    /* 0x62 */ char unk62[0x2];
 } unk_D_800FCB18; // size = 0x64
 
 typedef struct amConfig {
