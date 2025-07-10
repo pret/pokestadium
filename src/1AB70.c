@@ -79,7 +79,23 @@ unk_func_8001A024* func_8001A024(unk_D_86002F58_004_000_010* arg0, s16 arg1, s16
     return temp_v0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001A1D0.s")
+void func_8001A1D0(unk_func_8001A024* arg0, unk_D_86002F58_004_000_010* arg1, unk_D_80068BB0* arg2) {
+    s32 var_s0;
+    s32 var_s1;
+
+    arg0->unk_04 = arg1;
+    arg0->unk_14 = arg2;
+
+    var_s0 = 0;    
+    if ( arg0->unk_01 > 0) {
+        var_s1 = 0;
+        do {
+            func_80006414( (arg0->unk_08 + var_s1)->unk_0C, arg2 );
+            var_s0++;
+            var_s1 += sizeof( u8 ); // sizeof( unk_func_8001A024_008 ) ???
+        } while (var_s0 < arg0->unk_01);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001A250.s")
 
