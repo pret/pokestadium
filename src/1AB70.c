@@ -97,7 +97,10 @@ void func_8001A1D0(unk_func_8001A024* arg0, unk_D_86002F58_004_000_010* arg1, un
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001A250.s")
+void func_8001A250(unk_func_8001A024* arg0, unk_D_8006FF00*arg1) {
+    arg0->unk_18 = arg1;
+}
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001A258.s")
 
