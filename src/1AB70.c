@@ -85,48 +85,42 @@ void func_8001A1D0(unk_func_8001A024* arg0, unk_D_86002F58_004_000_010* arg1, un
     arg0->unk_04 = arg1;
     arg0->unk_14 = arg2;
 
-    for(i=0; i < arg0->unk_01; ++i){
+    for (i = 0; i < arg0->unk_01; ++i) {
         func_80006414(arg0->unk_08[i].unk_0C, arg2);
     }
-
-    return;
 }
 
-void func_8001A250(unk_func_8001A024* arg0, unk_D_8006FF00*arg1) {
+void func_8001A250(unk_func_8001A024* arg0, unk_D_8006FF00* arg1) {
     arg0->unk_18 = arg1;
 }
 
 void func_8001A258(unk_func_8001A024* arg0) {
     // s32 var_s0;
-    s32                     i;
-    u16                     w;
-    u16                     h;
-    unk_func_8001A024_008*  tempImg_p;
-    unk_D_80068BB0*         tempDepth_p;
+    s32 i;
+    u16 w;
+    u16 h;
+    unk_func_8001A024_008* tempImg_p;
+    unk_D_80068BB0* tempDepth_p;
 
     if (arg0->unk_00 & 1) {
         func_80019CA8(arg0->unk_04);
         func_8001BCF0(arg0->unk_10);
     }
-    
+
     arg0->unk_00 = 0;
     arg0->unk_02 = 0;
     arg0->unk_03 = -1;
 
-    for(i=0; i < arg0->unk_01; ++i)
-    {
+    for (i = 0; i < arg0->unk_01; ++i) {
         tempImg_p = &arg0->unk_08[i];
         tempDepth_p = tempImg_p->unk_0C;
         w = tempDepth_p->width;
         h = tempDepth_p->height;
         tempImg_p->unk_00 = 0;
         arg0->unk_08[i].unk_14.raw = 0;
-        bzero( arg0->unk_08[i].unk_0C->img_p, w * h * 2 );
+        bzero(arg0->unk_08[i].unk_0C->img_p, w * h * 2);
     }
-
-    return;
 }
-
 
 #ifdef NON_MATCHING
 void func_8001A324(unk_func_8001A024* arg0, s32 arg1, s32 arg2, u16 arg3) {
