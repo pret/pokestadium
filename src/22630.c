@@ -23,7 +23,7 @@ void func_80021A68(u8* arg0, s32 arg1) {
 void func_80021A78(u8* arg0, s32 arg1) {
     arg0[0] = (arg1 >> 0x10) & 0xFF;
     arg0[1] = (arg1 >> 8) & 0xFF;
-    arg0[2] = (arg1)&0xFF;
+    arg0[2] = (arg1) & 0xFF;
 }
 
 char* func_80021A90(char* arg0, char* arg1) {

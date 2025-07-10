@@ -1,3 +1,9 @@
-#include "global.h"
+#include "src/29BA0.h"
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/30/fragment30/func_88A00020.s")
+#include "fragment30.h"
+
+//  unused wrapper to load the pokelab?
+s32 func_88A00020(UNUSED s32 arg0, UNUSED s32 arg1) {
+    FRAGMENT_LOAD_AND_CALL2(fragment22, 1, 0);
+    return 0x25;
+}
