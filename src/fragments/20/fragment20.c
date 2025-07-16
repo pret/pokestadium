@@ -37,8 +37,8 @@ typedef struct unk_D_86E04BFC {
     /* 0x16 */ s16 unk_16;
 } unk_D_86E04BFC; // size = 0x18
 
-static unk_func_8790002C D_86E04D60[4];
-static unk_func_8790002C D_86E05830[20];
+static minigameActor D_86E04D60[4];
+static minigameActor D_86E05830[20];
 static s16 D_86E08E40;
 static unk_D_800AC870* D_86E08E44;
 
@@ -455,8 +455,8 @@ static u32 D_86E04AE0[] = {
 static s16 D_86E04B20 = 0;
 static s16 D_86E04B24 = 1;
 static s16 D_86E04B28 = 0;
-static unk_func_8790002C* D_86E04B2C = D_86E04D60;
-static unk_func_8790002C* D_86E04B30 = D_86E05830;
+static minigameActor* D_86E04B2C = D_86E04D60;
+static minigameActor* D_86E04B30 = D_86E05830;
 static u32 D_86E04B34[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0xFFE20032, 0x00000000,  0x00000000,
     0x05000000, 0x0D000000, 0x05000000, 0x14000000, 0x002B0012, 0xFFFFFF32, 0x16FFFFFF,  0x0F000003,
@@ -568,12 +568,12 @@ void func_86E001A0(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86E001E4(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E001E4(minigameActor* arg0, s32 arg1) {
     func_8790060C(arg0);
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    arg0->scale.x = 1.0f;
+    arg0->scale.y = 1.0f;
+    arg0->scale.z = 1.0f;
 
     arg0->unk_1A8.x = D_86E04BCC[arg1].x;
     arg0->unk_1A8.y = D_86E04BCC[arg1].y;
@@ -608,18 +608,18 @@ void func_86E002E4(void) {
     }
 }
 
-void func_86E0034C(unk_func_8790002C* arg0) {
+void func_86E0034C(minigameActor* arg0) {
     arg0->unk_25A++;
     arg0->unk_272 = 4;
     arg0->unk_000.unk_01C = 1;
 }
 
-void func_86E0036C(unk_func_8790002C* arg0) {
+void func_86E0036C(minigameActor* arg0) {
     if (arg0->unk_29A != 0) {
         arg0->unk_29A--;
     }
 
-    if ((D_879060BC->buttonDown & 0x8000) && (arg0->unk_23E == 0) && (arg0->unk_240 == 0) && (arg0->unk_2AA == 0) &&
+    if ((tempControllerPtr->buttonDown & 0x8000) && (arg0->unk_23E == 0) && (arg0->unk_240 == 0) && (arg0->unk_2AA == 0) &&
         (arg0->unk_29A == 0)) {
         arg0->unk_23E = 1;
     }
@@ -637,24 +637,24 @@ void func_86E0036C(unk_func_8790002C* arg0) {
                 arg0->unk_000.unk_000.unk_02 &= ~0x20;
             }
 
-            if (!(D_879060BC->buttonDown & 0x8000) || (arg0->unk_2AA != 0)) {
+            if (!(tempControllerPtr->buttonDown & 0x8000) || (arg0->unk_2AA != 0)) {
                 arg0->unk_23E = 0;
                 arg0->unk_000.unk_000.unk_02 |= 0x20;
-            } else if ((D_879060BC->buttonDown & 0x8000) != 0) {
+            } else if ((tempControllerPtr->buttonDown & 0x8000) != 0) {
                 func_86E0034C(arg0);
             }
             break;
     }
 }
 
-void func_86E004FC(unk_func_8790002C* arg0) {
+void func_86E004FC(minigameActor* arg0) {
     if (arg0->unk_2AC != 0) {
         arg0->unk_244 = 0;
         arg0->unk_242 = 0;
     }
 }
 
-s32 func_86E00518(unk_func_8790002C* arg0, s32 arg1) {
+s32 func_86E00518(minigameActor* arg0, s32 arg1) {
     s32 sp1C;
     s32 sp18;
     s32 var_v1;
@@ -712,7 +712,7 @@ s32 func_86E00518(unk_func_8790002C* arg0, s32 arg1) {
     return var_v1;
 }
 
-void func_86E0063C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E0063C(minigameActor* arg0, s32 arg1) {
     s32 sp2C;
     s32 sp28;
     u32 sp24;
@@ -753,7 +753,7 @@ void func_86E0063C(unk_func_8790002C* arg0, s32 arg1) {
     arg0->unk_2B2 = sp24;
 }
 
-void func_86E0073C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E0073C(minigameActor* arg0, s32 arg1) {
     u32 sp2C;
     UNUSED s32 pad[3];
     u32 sp1C;
@@ -778,13 +778,13 @@ void func_86E0073C(unk_func_8790002C* arg0, s32 arg1) {
     arg0->unk_2B2 = var_a2;
 }
 
-void func_86E007BC(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E007BC(minigameActor* arg0, s32 arg1) {
     arg0->unk_244 = arg1;
     arg0->unk_29E = 0;
     arg0->unk_2B2 = 0;
 }
 
-void func_86E007CC(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E007CC(minigameActor* arg0, s32 arg1) {
     s32 i;
     s32 sp20;
     s32 var_t0 = 0;
@@ -842,7 +842,7 @@ void func_86E007CC(unk_func_8790002C* arg0, s32 arg1) {
     }
 }
 
-void func_86E00924(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E00924(minigameActor* arg0, s32 arg1) {
     if (arg0->unk_242 == 0) {
         func_86E007CC(arg0, arg1);
     }
@@ -896,14 +896,14 @@ void func_86E00924(unk_func_8790002C* arg0, s32 arg1) {
 void func_86E00AF4(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
+    tempControllerPtr = gPlayer1Controller;
     D_86E04B2C = D_86E04D60;
 
     for (i = 0; i < 4; i++) {
         D_86E04B2C->unk_000.unk_01C = 0;
         D_86E04B2C->unk_272 = 0;
 
-        if (D_87903DA4 != 0) {
+        if (minigameInputLock != 0) {
             if (D_86E04B2C->unk_2AC == 0) {
                 func_86E0036C(D_86E04B2C);
             } else {
@@ -915,7 +915,7 @@ void func_86E00AF4(void) {
         func_87900808(D_86E04B2C);
 
         D_86E04B2C++;
-        D_879060BC++;
+        tempControllerPtr++;
     }
 }
 
@@ -940,7 +940,7 @@ s32 func_86E00C34(s32 arg0) {
     return sp1C;
 }
 
-void func_86E00CAC(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E00CAC(minigameActor* arg0, s32 arg1) {
     s32 i;
     s32 temp_v0;
 
@@ -963,7 +963,7 @@ void func_86E00CAC(unk_func_8790002C* arg0, s32 arg1) {
     }
 }
 
-void func_86E00D78(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E00D78(minigameActor* arg0, s32 arg1) {
     if ((D_86E04B2C->unk_25A > 0) && (arg0->unk_2A8 == 0)) {
         if (D_86E04B2C->unk_25A >= 0x28) {
             D_86E04B2C->unk_258 -= D_86E04B2C->unk_25A;
@@ -1009,7 +1009,7 @@ void func_86E00ED0(void) {
     D_86E04B2C = D_86E04D60;
 
     for (i = 0; i < 4; i++) {
-        if (D_87903DA4 != 0) {
+        if (minigameInputLock != 0) {
             func_86E00CAC(D_86E04B2C, i);
             func_86E00D78(D_86E04B2C, i);
         }
@@ -1040,7 +1040,7 @@ void func_86E00FD8(void) {
     }
 }
 
-void func_86E0103C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E0103C(minigameActor* arg0, s32 arg1) {
     func_8790060C(arg0);
     arg0->unk_266 = arg1;
 
@@ -1052,9 +1052,9 @@ void func_86E0103C(unk_func_8790002C* arg0, s32 arg1) {
     arg0->unk_288 = D_86E04BFC[arg1].unk_12;
     arg0->unk_28C = D_86E04BFC[arg1].unk_14;
 
-    arg0->unk_16C.x = 0.5f;
-    arg0->unk_16C.y = 0.5f;
-    arg0->unk_16C.z = 0.5f;
+    arg0->scale.x = 0.5f;
+    arg0->scale.y = 0.5f;
+    arg0->scale.z = 0.5f;
 
     arg0->unk_000.unk_000.unk_01 &= ~1;
 
@@ -1084,7 +1084,7 @@ void func_86E01188(void) {
     s32 var_s1;
     s32 sp40;
     s32 var_s5;
-    unk_func_8790002C* ptr;
+    minigameActor* ptr;
 
     switch (D_87906046) {
         default:
@@ -1127,7 +1127,7 @@ void func_86E01188(void) {
     }
 }
 
-void func_86E01310(unk_func_8790002C* arg0) {
+void func_86E01310(minigameActor* arg0) {
     s16 temp_v1 = (D_86E04B20 * 4) + 0x28;
     s16 temp_a1 = arg0->unk_266;
 
@@ -1146,12 +1146,12 @@ void func_86E01310(unk_func_8790002C* arg0) {
     func_8001BD04(&arg0->unk_000, 0);
 }
 
-void func_86E01414(unk_func_8790002C* arg0) {
+void func_86E01414(minigameActor* arg0) {
     arg0->unk_23E = 0;
     arg0->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86E01428(unk_func_8790002C* arg0) {
+void func_86E01428(minigameActor* arg0) {
     UNUSED s32 pad[3];
     s16 temp_a1 = arg0->unk_266;
     Vec3f sp3C;
@@ -1224,7 +1224,7 @@ void func_86E01428(unk_func_8790002C* arg0) {
     }
 }
 
-void func_86E016EC(unk_func_8790002C* arg0) {
+void func_86E016EC(minigameActor* arg0) {
     f32 temp_fv0;
     f32 temp_fv0_2;
     f32 temp_fv0_3;
@@ -1234,7 +1234,7 @@ void func_86E016EC(unk_func_8790002C* arg0) {
     arg0->unk_190.z = arg0->unk_19C.z = arg0->unk_1A8.z + arg0->unk_1C0.z;
 }
 
-void func_86E0172C(unk_func_8790002C* arg0) {
+void func_86E0172C(minigameActor* arg0) {
     if (arg0->unk_23E != 0) {
         arg0->unk_1F8 += arg0->unk_204;
         arg0->unk_1FC += arg0->unk_208 - arg0->unk_210;
@@ -1258,12 +1258,12 @@ void func_86E017C0(void) {
     }
 }
 
-void func_86E0182C(unk_func_8790002C* arg0) {
+void func_86E0182C(minigameActor* arg0) {
     func_879003A0(arg0);
 
-    arg0->unk_000.unk_030.x = arg0->unk_16C.x;
-    arg0->unk_000.unk_030.y = arg0->unk_16C.y;
-    arg0->unk_000.unk_030.z = arg0->unk_16C.z;
+    arg0->unk_000.unk_030.x = arg0->scale.x;
+    arg0->unk_000.unk_030.y = arg0->scale.y;
+    arg0->unk_000.unk_030.z = arg0->scale.z;
 
     arg0->unk_000.unk_024.x = arg0->unk_190.x;
     arg0->unk_000.unk_024.y = arg0->unk_190.y;
@@ -1297,15 +1297,15 @@ void func_86E01904(void) {
     D_87906068 = 0x32;
     D_8790606A = 0x1900;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = 0x2A;
-    D_8790606C.z = 0;
+    minigameCameraCoords.x = 0;
+    minigameCameraCoords.y = 0x2A;
+    minigameCameraCoords.z = 0;
 
     func_87900B64();
 }
 
 void func_86E01990(void) {
-    func_87900C5C();
+    minigameDebuggModeControll();
     func_87900B64();
 }
 
@@ -1314,7 +1314,7 @@ void func_86E019B8(void) {
     func_86E010E8();
     func_86E002E4();
     func_86E01904();
-    D_87903DA4 = 0;
+    minigameInputLock = 0;
 }
 
 void func_86E019F4(void) {
@@ -1453,7 +1453,7 @@ s32 func_86E01B08(void) {
 s32 func_86E01E34(void) {
     s32 i;
     s32 var_s3 = 0;
-    unk_func_8790002C* var_s0;
+    minigameActor* var_s0;
 
     for (i = 0, var_s0 = D_86E04D60; i < 4; i++, var_s0++) {
         if (var_s0->unk_2A8 != 0) {
@@ -1497,7 +1497,7 @@ s32 func_86E01EE8(void) {
 s32 func_86E01F50(void) {
     s32 i;
     s32 ret = 1;
-    unk_func_8790002C* var_v0 = D_86E05830;
+    minigameActor* var_v0 = D_86E05830;
 
     for (i = 0; i < 20; i++, var_v0++) {
         if (var_v0->unk_23E != 0) {
@@ -1509,26 +1509,26 @@ s32 func_86E01F50(void) {
 }
 
 void func_86E01F8C(void) {
-    switch (D_87903DA0) {
+    switch (minigameState) {
         case 1:
-            D_87906040 = 0xF;
-            D_87903DA0++;
+            minigameInputLockTimer = 0xF;
+            minigameState++;
             break;
 
         case 2:
-            D_87906040--;
-            if (D_87906040 < 0) {
+            minigameInputLockTimer--;
+            if (minigameInputLockTimer < 0) {
                 func_8780295C(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 3:
             if (func_86E01EE8() != 0) {
                 D_86E04B28 = 1;
-                D_87903DA4 = 1;
+                minigameInputLock = 1;
                 D_87903DC4 = 0;
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
@@ -1536,7 +1536,7 @@ void func_86E01F8C(void) {
             if (1) {}
 
             if (func_86E01B08() != 0) {
-                D_87903DA0++;
+                minigameState++;
             } else {
                 func_86E019F4();
             }
@@ -1544,23 +1544,23 @@ void func_86E01F8C(void) {
 
         case 5:
             if (func_86E01F50() != 0) {
-                D_87906040 = 0xA;
-                D_87903DA0++;
+                minigameInputLockTimer = 0xA;
+                minigameState++;
             }
             break;
 
         case 6:
-            D_87906040--;
-            if (D_87906040 < 0) {
+            minigameInputLockTimer--;
+            if (minigameInputLockTimer < 0) {
                 func_86E01E34();
                 func_87802EB8(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 7:
             if (D_8780FC96 != 0) {
-                D_87903DA0++;
+                minigameState++;
                 D_87903DAC = 1;
             }
             break;
@@ -1680,7 +1680,7 @@ void func_86E027FC(s32 arg0) {
     func_86E027D4();
     func_8001F444();
 
-    if (D_87906044 != 0) {
+    if (showMinigameHUD != 0) {
         func_86E02170();
         func_86E021D8();
     }
@@ -1697,13 +1697,13 @@ void func_86E02880(s32 arg0) {
     func_80015094(&D_87906050->unk_00);
     func_87901C98();
 
-    if (D_87903DB0 == 0) {
+    if (minigameDebuggMode == 0) {
         if (D_8780FC98 == 0) {
             func_86E027FC(arg0);
         }
         func_87804FD4();
     } else {
-        func_87900F44();
+        showDebuggCameraInfo();
     }
 
     func_80007778();
@@ -1721,13 +1721,13 @@ void func_86E0296C(void) {
 }
 
 void func_86E02974(void) {
-    if ((D_87903DB0 == 0) && (D_87906044 == 0) && (func_80007604() == 0)) {
-        if (gPlayer1Controller->buttonPressed & 0x1000) {
+    if ((minigameDebuggMode == 0) && (showMinigameHUD == 0) && (func_80007604() == 0)) {
+        if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
             D_87903DC4 = 1;
-            D_87903DA0 = 1;
-            D_87906044 = 1;
+            minigameState = 1;
+            showMinigameHUD = 1;
             func_86E001A0(0xB, 0);
-        } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
+        } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
             func_86E001A0(0xD, 0);
             func_87802EB8(2);
         }
@@ -1735,9 +1735,9 @@ void func_86E02974(void) {
 }
 
 void func_86E02A28(void) {
-    unk_func_8790002C* ptr = D_86E04D60;
+    minigameActor* ptr = D_86E04D60;
 
-    if ((gPlayer1Controller->buttonPressed & 0x8000) && (ptr->unk_23E == 0)) {
+    if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (ptr->unk_23E == 0)) {
         ptr->unk_29A = 4;
     }
 }
@@ -1753,7 +1753,7 @@ void func_86E02A64(void) {
     while (var_s1 != 0) {
         func_87900528();
 
-        if (D_87903DA0 == 0) {
+        if (minigameState == 0) {
             D_87906042 += 1;
             if (D_87906042 < 0) {
                 D_87906042 = 0;

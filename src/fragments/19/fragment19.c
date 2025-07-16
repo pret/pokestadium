@@ -28,15 +28,15 @@ void func_86D00020(void) {
     D_87906068 = 0x32;
     D_8790606A = 0x1900;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = 0x1E;
-    D_8790606C.z = 0;
+    minigameCameraCoords.x = 0;
+    minigameCameraCoords.y = 0x1E;
+    minigameCameraCoords.z = 0;
 
     func_87900B64();
 }
 
 void func_86D000A8(void) {
-    func_87900C5C();
+    minigameDebuggModeControll();
     func_87900B64();
 }
 
@@ -46,8 +46,8 @@ void func_86D000D0(UNUSED s32 arg0) {
     func_80015348();
     func_80015094(&D_87906050->unk_00);
 
-    if (D_87903DB0 != 0) {
-        func_87900F44();
+    if (minigameDebuggMode != 0) {
+        showDebuggCameraInfo();
     }
 
     func_80007778();
@@ -77,17 +77,17 @@ void func_86D0015C(void) {
         }
 
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_Z)) {
-            D_87903DB0 = (D_87903DB0 + 1) & 1;
+            minigameDebuggMode = (minigameDebuggMode + 1) & 1;
         }
 
-        if ((D_87903DB0 == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
-            D_87903DA0 = 1;
+        if ((minigameDebuggMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+            minigameState = 1;
         }
 
         func_8790370C();
         func_86D000A8();
 
-        if ((D_87903DB0 == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_CDOWN)) {
+        if ((minigameDebuggMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_CDOWN)) {
             var_s1 = 0;
         }
 

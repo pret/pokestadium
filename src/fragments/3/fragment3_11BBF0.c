@@ -357,7 +357,7 @@ void func_87903358(s16 arg0, s16 arg1) {
     }
 }
 
-void func_879033FC(unk_func_8790002C* arg0) {
+void func_879033FC(minigameActor* arg0) {
     s32 i;
     s16 temp_a2;
     s32 var_s2;

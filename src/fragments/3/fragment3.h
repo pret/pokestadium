@@ -6,21 +6,21 @@
 #include "src/3FB0.h"
 #include "src/controller.h"
 
-typedef struct unk_func_8790002C {
+typedef struct minigameActor {
     /* 0x000 */ unk_D_86002F58_004_000 unk_000;
     /* 0x168 */ unk_D_86002F30* unk_168;
-    /* 0x16C */ Vec3f unk_16C;
+    /* 0x16C */ Vec3f scale;
     /* 0x178 */ char unk178[0x18];
     /* 0x190 */ Vec3f unk_190;
-    /* 0x19C */ Vec3f unk_19C;
-    /* 0x1A8 */ Vec3f unk_1A8;
+    /* 0x19C */ Vec3f unk_19C;      //	position?
+    /* 0x1A8 */ Vec3f unk_1A8;      //	position on skans' minigame, most probable one
     /* 0x1B4 */ Vec3f unk_1B4;
     /* 0x1C0 */ Vec3f unk_1C0;
     /* 0x1CC */ f32 unk_1CC;
     /* 0x1D0 */ f32 unk_1D0;
     /* 0x1D4 */ f32 unk_1D4;
-    /* 0x1D8 */ Vec3f unk_1D8;
-    /* 0x1E4 */ f32 unk_1E4;
+    /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame but nothing reads this ?
+    /* 0x1E4 */ f32 unk_1E4;        //	double of 28C
     /* 0x1E8 */ char unk1E8[0x4];
     /* 0x1EC */ f32 unk_1EC;
     /* 0x1F0 */ f32 unk_1F0;
@@ -32,7 +32,7 @@ typedef struct unk_func_8790002C {
     /* 0x208 */ f32 unk_208;
     /* 0x20C */ f32 unk_20C;
     /* 0x210 */ f32 unk_210;
-    /* 0x214 */ Vec3s unk_214;
+    /* 0x214 */ Vec3s unk_214;		//	rotation?
     /* 0x21A */ s16 unk_21A;
     /* 0x21C */ s16 unk_21C;
     /* 0x21E */ s16 unk_21E;
@@ -40,7 +40,7 @@ typedef struct unk_func_8790002C {
     /* 0x222 */ s16 unk_222;
     /* 0x224 */ s16 unk_224;
     /* 0x226 */ s16 unk_226;
-    /* 0x228 */ s16 unk_228;
+    /* 0x228 */ s16 unk_228;		//	y angle?
     /* 0x22A */ s16 unk_22A;
     /* 0x22C */ s16 unk_22C;
     /* 0x22E */ s16 unk_22E;
@@ -51,14 +51,14 @@ typedef struct unk_func_8790002C {
     /* 0x238 */ s16 unk_238;
     /* 0x23A */ s16 unk_23A;
     /* 0x23A */ s16 unk_23C;
-    /* 0x23E */ s16 unk_23E;
+    /* 0x23E */ s16 unk_23E;        //	animation id or state?
     /* 0x240 */ s16 unk_240;
     /* 0x242 */ s16 unk_242;
     /* 0x244 */ s16 unk_244;
     /* 0x246 */ char unk246[0x2];
-    /* 0x248 */ s16 unk_248;
-    /* 0x24A */ s16 unk_24A;
-    /* 0x24C */ s16 unk_24C;
+    /* 0x248 */ s16 unk_248;        //	0,1,2 - colliding? visibility? animation id?
+    /* 0x24A */ s16 unk_24A;        //	some flag related to collisions
+    /* 0x24C */ s16 unk_24C;        //	some flag related to collisions
     /* 0x24E */ char unk24E[0x6];
     /* 0x254 */ s32 unk_254;
     /* 0x258 */ s16 unk_258;
@@ -70,18 +70,18 @@ typedef struct unk_func_8790002C {
     /* 0x264 */ s16 unk_264;
     /* 0x264 */ s16 unk_266;
     /* 0x268 */ s16 unk_268;
-    /* 0x26A */ s16 unk_26A;
-    /* 0x26C */ s16 unk_26C;
+    /* 0x26A */ s16 unk_26A;        //	some flag related to collisions
+    /* 0x26C */ s16 unk_26C;        //	animation id or state?
     /* 0x26E */ s16 unk_26E;
     /* 0x270 */ s16 unk_270;
     /* 0x272 */ s16 unk_272;
     /* 0x274 */ f32 unk_274;
     /* 0x278 */ char unk278[0x4];
     /* 0x27C */ f32 unk_27C;
-    /* 0x280 */ f32 unk_280;
+    /* 0x280 */ f32 unk_280;		//	intensity of rotation?
     /* 0x284 */ f32 unk_284;
-    /* 0x288 */ f32 unk_288;
-    /* 0x28C */ f32 unk_28C;
+    /* 0x288 */ f32 unk_288;        //	bottom of the hitbox? bounding box?
+    /* 0x28C */ f32 unk_28C;        //	top of the hitbox? boundin box? ;   half of 1E4
     /* 0x290 */ s16 unk_290;
     /* 0x292 */ s16 unk_292;
     /* 0x294 */ s16 unk_294;
@@ -90,7 +90,7 @@ typedef struct unk_func_8790002C {
     /* 0x29A */ s16 unk_29A;
     /* 0x29C */ s16 unk_29C;
     /* 0x29E */ s16 unk_29E;
-    /* 0x2A0 */ s16 unk_2A0;
+    /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames some button was pressed?
     /* 0x2A2 */ s16 unk_2A2;
     /* 0x2A4 */ s16 unk_2A4;
     /* 0x2A6 */ s16 unk_2A6;
@@ -100,7 +100,7 @@ typedef struct unk_func_8790002C {
     /* 0x2AE */ s16 unk_2AE;
     /* 0x2B0 */ s16 unk_2B0;
     /* 0x2B2 */ s16 unk_2B2;
-} unk_func_8790002C; // size = 0x2B4
+} minigameActor; // size = 0x2B4
 
 // Possibly unk_D_86002F34_alt7, unk_D_86002F34_alt8, 
 // unk_D_86002F34_alt9 or unk_D_86002F34_alt2
@@ -121,8 +121,8 @@ typedef struct unk_D_87903E10 {
     /* 0x04 */ unk_D_87903E00* unk_04;
 } unk_D_87903E10; // size = 0x8
 
-extern s16 D_87903DA0;
-extern s16 D_87903DA4;
+extern s16 minigameState;
+extern s16 minigameInputLock;
 extern s16 D_87903DA8;
 extern s16 D_87903DAC;
 extern s16 D_87903DBC;
@@ -137,9 +137,9 @@ extern unk_D_87903E10 D_87903E10;
 extern unk_D_87903E10 D_87903E28;
 extern unk_D_87903E10 D_87903E40;
 extern unk_D_87903E10 D_87903E58;
-extern s16 D_87906040;
+extern s16 minigameInputLockTimer;
 extern s16 D_87906042;
-extern s16 D_87906044;
+extern s16 showMinigameHUD;                  //  game state?
 extern s16 D_87906046;
 extern s16 D_87906048;
 extern s16 D_8790604A;
@@ -151,7 +151,7 @@ extern s16 D_87906064;
 extern s16 D_87906066;
 extern s16 D_87906068;
 extern s16 D_8790606A;
-extern Vec3s D_8790606C;
+extern Vec3s minigameCameraCoords;
 extern s16 D_87906072;
 extern s16 D_87906076;
 extern s16 D_87906078;
@@ -170,9 +170,9 @@ extern s16 D_879060A6;
 extern s16 D_879060A8;
 extern Vec3s D_879060AC;
 
-extern s16 D_87903DB0;
+extern s16 minigameDebuggMode;
 extern s16 D_87903DB8;
-extern Controller* D_879060BC;
+extern Controller* tempControllerPtr;
 extern s16 D_879060C0;
 extern s16 D_879060C2;
 extern s8 D_879060C4[4];
@@ -184,34 +184,34 @@ extern Vec3f D_87906100;
 extern Vec3f D_87906110;
 
 ret_func_80004454 func_87900020(void);
-void func_8790002C(unk_func_8790002C* arg0, unk_func_8790002C* arg1);
-void func_87900070(unk_func_8790002C* arg0, unk_func_8790002C* arg1);
-s32 func_879000C4(unk_func_8790002C* arg0, unk_func_8790002C* arg1);
-s32 func_879001A4(unk_func_8790002C* arg0, unk_func_8790002C* arg1);
-void func_879002B8(unk_func_8790002C* arg0, s16 arg1, s16 arg2, s16 arg3);
-void func_879002FC(unk_func_8790002C* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
-void func_87900344(unk_func_8790002C* arg0, s16 arg1, s16 arg2, s16 arg3);
-s32 func_87900384(unk_func_8790002C* arg0);
-void func_879003A0(unk_func_8790002C* arg0);
+float getVec3Distance_xz(minigameActor* arg0, minigameActor* arg1);
+void getVec3Distance_xyz(minigameActor* arg0, minigameActor* arg1);
+s32 func_879000C4(minigameActor* arg0, minigameActor* arg1);
+s32 func_879001A4(minigameActor* arg0, minigameActor* arg1);
+void func_879002B8(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3);
+void func_879002FC(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
+void func_87900344(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3);
+s32 func_87900384(minigameActor* arg0);
+void func_879003A0(minigameActor* arg0);
 void func_879004F8(unk_D_86002F58_004_000* arg0);
 void func_87900528(void);
 void func_87900558(void);
-void func_87900564(unk_func_8790002C* arg0);
-void func_87900594(unk_func_8790002C* arg0);
-void func_879005AC(unk_func_8790002C* arg0);
-void func_879005C4(unk_func_8790002C* arg0);
-void func_8790060C(unk_func_8790002C* arg0);
-void func_87900770(unk_func_8790002C* arg0);
-void func_87900808(unk_func_8790002C* arg0);
+void func_87900564(minigameActor* arg0);
+void func_87900594(minigameActor* arg0);
+void func_879005AC(minigameActor* arg0);
+void func_879005C4(minigameActor* arg0);
+void func_8790060C(minigameActor* arg0);
+void func_87900770(minigameActor* arg0);
+void func_87900808(minigameActor* arg0);
 void func_87900854(void);
 void func_87900920(void);
 void func_879009B4(void);
 
 void func_87900A50(void);
 void func_87900B64(void);
-s32 func_87900C5C(void);
-void func_87900F44(void);
-void func_879010A4(void);
+s32 minigameDebuggModeControll(void);
+void showDebuggCameraInfo(void);
+void showDebuggJoystickInfo(void);
 void func_87901200(void);
 
 void func_87901620(void);
@@ -252,11 +252,11 @@ void func_87903260(void);
 void func_87903294(void);
 void func_879032BC(s16 arg0);
 void func_87903358(s16 arg0, s16 arg1);
-void func_879033FC(unk_func_8790002C* arg0);
+void func_879033FC(minigameActor* arg0);
 void func_8790354C(void);
 
 void func_87903600(void);
-void func_879036B4(unk_func_8790002C* arg0);
+void func_879036B4(minigameActor* arg0);
 void func_8790370C(void);
 void func_879037D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6);
 void func_87903838(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6);

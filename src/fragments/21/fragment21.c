@@ -31,9 +31,9 @@ extern u8 D_03049020[];
 extern u8 D_030483A0[];
 extern u8 D_03047720[];
 
-static unk_func_8790002C D_86F0B1F0[4];
-static unk_func_8790002C D_86F0BCC0[4];
-static unk_func_8790002C D_86F0C790[4];
+static minigameActor D_86F0B1F0[4];
+static minigameActor D_86F0BCC0[4];
+static minigameActor D_86F0C790[4];
 static s16 D_86F0D260;
 static unk_D_800AC870* D_86F0D264;
 
@@ -1455,9 +1455,9 @@ static u32 D_86F0AFB8[] = {
     0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86F0ACE0, 0x06000000, 0x06000000, 0x01000000,
 };
 
-static unk_func_8790002C* D_86F0AFF8 = D_86F0B1F0;
-static unk_func_8790002C* D_86F0AFFC = D_86F0BCC0;
-static unk_func_8790002C* D_86F0B000 = D_86F0C790;
+static minigameActor* D_86F0AFF8 = D_86F0B1F0;
+static minigameActor* D_86F0AFFC = D_86F0BCC0;
+static minigameActor* D_86F0B000 = D_86F0C790;
 
 static u32 D_86F0B004[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0x0000000F, 0x00000000, 0x00000000,
@@ -1583,10 +1583,10 @@ void func_86F00188(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86F001CC(unk_func_8790002C* arg0, s32 arg1) {
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+void func_86F001CC(minigameActor* arg0, s32 arg1) {
+    arg0->scale.x = 1.0f;
+    arg0->scale.y = 1.0f;
+    arg0->scale.z = 1.0f;
 
     arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
     arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
@@ -1635,32 +1635,32 @@ void func_86F002F4(void) {
     }
 }
 
-void func_86F0035C(unk_func_8790002C* arg0) {
-    arg0->unk_222 = D_879060BC->angle;
+void func_86F0035C(minigameActor* arg0) {
+    arg0->unk_222 = tempControllerPtr->angle;
 }
 
 void func_86F00370(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
+    tempControllerPtr = gPlayer1Controller;
     D_86F0AFF8 = D_86F0B1F0;
 
     for (i = 0; i < 4; i++) {
         func_86F0035C(D_86F0AFF8);
 
         D_86F0AFF8++;
-        D_879060BC++;
+        tempControllerPtr++;
     }
 }
 
-void func_86F003FC(unk_func_8790002C* arg0, s32 arg1) {
+void func_86F003FC(minigameActor* arg0, s32 arg1) {
     func_8001BD04(&arg0->unk_000, arg1);
     func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
     func_80017464(&arg0->unk_000, 0);
     func_80017454(&arg0->unk_000, 0x10000);
 }
 
-void func_86F00450(unk_func_8790002C* arg0, f32 arg1) {
+void func_86F00450(minigameActor* arg0, f32 arg1) {
     arg0->unk_280 -= arg1;
     if (arg0->unk_280 < 1.0f) {
         arg0->unk_280 = 1.0f;
@@ -1668,7 +1668,7 @@ void func_86F00450(unk_func_8790002C* arg0, f32 arg1) {
     arg0->unk_27C = arg0->unk_280;
 }
 
-void func_86F0048C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86F0048C(minigameActor* arg0, s32 arg1) {
     if (arg1 == -1) {
         arg0->unk_29A = 0;
         arg0->unk_2B0 = 0;
@@ -1689,21 +1689,21 @@ void func_86F0048C(unk_func_8790002C* arg0, s32 arg1) {
     }
 }
 
-void func_86F0050C(unk_func_8790002C* arg0) {
+void func_86F0050C(minigameActor* arg0) {
     s32 var_v0;
 
     var_v0 = 0;
-    if (D_879060BC->buttonPressed & 0x20 && (D_879060BC->buttonPressed & 0x10)) {
+    if (tempControllerPtr->buttonPressed & 0x20 && (tempControllerPtr->buttonPressed & 0x10)) {
         var_v0 = 3;
     } else if (arg0->unk_29A == 1) {
-        if (D_879060BC->buttonPressed & 0x20) {
+        if (tempControllerPtr->buttonPressed & 0x20) {
             var_v0 = 1;
-        } else if (D_879060BC->buttonPressed & 0x10) {
+        } else if (tempControllerPtr->buttonPressed & 0x10) {
             var_v0 = 2;
         }
-    } else if (D_879060BC->buttonPressed & 0x10) {
+    } else if (tempControllerPtr->buttonPressed & 0x10) {
         var_v0 = 2;
-    } else if (D_879060BC->buttonPressed & 0x20) {
+    } else if (tempControllerPtr->buttonPressed & 0x20) {
         var_v0 = 1;
     }
 
@@ -1756,7 +1756,7 @@ void func_86F0050C(unk_func_8790002C* arg0) {
     arg0->unk_274 += arg0->unk_27C;
 }
 
-void func_86F00778(unk_func_8790002C* arg0) {
+void func_86F00778(minigameActor* arg0) {
     switch (D_87906046) {
         case 0:
             arg0->unk_27C = (func_81400A78(0xA) * 0.1f) + 3.0f;
@@ -1781,7 +1781,7 @@ void func_86F00778(unk_func_8790002C* arg0) {
     }
 }
 
-void func_86F00920(unk_func_8790002C* arg0) {
+void func_86F00920(minigameActor* arg0) {
     UNUSED s32 pad;
     Vec3f sp48;
     f32 temp_fv0;
@@ -1867,14 +1867,14 @@ void func_86F00920(unk_func_8790002C* arg0) {
 void func_86F00D04(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
+    tempControllerPtr = gPlayer1Controller;
 
     D_86F0AFF8 = D_86F0B1F0;
     D_86F0AFFC = D_86F0BCC0;
     D_86F0B000 = D_86F0C790;
 
     for (i = 0; i < 4; i++) {
-        if (D_87903DA4 != 0) {
+        if (minigameInputLock != 0) {
             if (D_86F0AFF8->unk_2AC == 0) {
                 func_86F0050C(D_86F0AFF8);
             } else {
@@ -1890,16 +1890,16 @@ void func_86F00D04(void) {
         D_86F0AFFC++;
         D_86F0B000++;
 
-        D_879060BC++;
+        tempControllerPtr++;
     }
 }
 
-void func_86F00E34(unk_func_8790002C* a0, s32 arg1) {
-    unk_func_8790002C* arg0 = a0;
+void func_86F00E34(minigameActor* a0, s32 arg1) {
+    minigameActor* arg0 = a0;
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    arg0->scale.x = 1.0f;
+    arg0->scale.y = 1.0f;
+    arg0->scale.z = 1.0f;
 
     arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
     arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
@@ -1933,7 +1933,7 @@ void func_86F00F00(void) {
     }
 }
 
-void func_86F00F68(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
+void func_86F00F68(minigameActor* arg0, minigameActor* arg1) {
     s32 var_a1;
 
     if ((arg1->unk_274 > 300.0f) && (arg0->unk_23E == 0)) {
@@ -1968,12 +1968,12 @@ void func_86F01014(void) {
     }
 }
 
-void func_86F010B4(unk_func_8790002C* a0, s32 arg1) {
-    unk_func_8790002C* arg0 = a0;
+void func_86F010B4(minigameActor* a0, s32 arg1) {
+    minigameActor* arg0 = a0;
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    arg0->scale.x = 1.0f;
+    arg0->scale.y = 1.0f;
+    arg0->scale.z = 1.0f;
 
     arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
     arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
@@ -2012,7 +2012,7 @@ void func_86F01180(void) {
     }
 }
 
-void func_86F011E8(unk_func_8790002C* arg0) {
+void func_86F011E8(minigameActor* arg0) {
     switch (arg0->unk_23E) {
         case 1:
             func_86F003FC(arg0, 0);
@@ -2056,9 +2056,9 @@ void func_86F0132C(void) {
     D_87906068 = 0x32;
     D_8790606A = 0x1900;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = -2;
-    D_8790606C.z = 0;
+    minigameCameraCoords.x = 0;
+    minigameCameraCoords.y = -2;
+    minigameCameraCoords.z = 0;
 
     func_87900B64();
 }
@@ -2085,7 +2085,7 @@ void func_86F013B8(void) {
 
 void func_86F01488(void) {
     func_86F013B8();
-    func_87900C5C();
+    minigameDebuggModeControll();
     func_87900B64();
 }
 
@@ -2164,52 +2164,52 @@ s32 func_86F016D8(void) {
 }
 
 void func_86F0174C(void) {
-    switch (D_87903DA0) {
+    switch (minigameState) {
         case 1:
-            D_87906040 = 0xF;
-            D_87903DA0++;
+            minigameInputLockTimer = 0xF;
+            minigameState++;
             break;
 
         case 2:
-            D_87906040--;
-            if (D_87906040 < 0) {
+            minigameInputLockTimer--;
+            if (minigameInputLockTimer < 0) {
                 func_8780295C(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 3:
             if (func_86F016D8() != 0) {
-                D_87903DA4 = 1;
+                minigameInputLock = 1;
                 D_87903DC4 = 0;
                 func_86F00370();
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 4:
             if (func_86F014F8() != 0) {
                 func_86F0164C();
-                D_87903DA4 = 0;
+                minigameInputLock = 0;
                 D_87906072 = 1;
-                D_87903DA0++;
-                D_87906040 = 0x28;
+                minigameState++;
+                minigameInputLockTimer = 0x28;
             }
             break;
 
         case 5:
-            D_87906040--;
-            if (D_87906040 == 0) {
+            minigameInputLockTimer--;
+            if (minigameInputLockTimer == 0) {
                 func_87802EB8(1);
                 func_87903294();
                 func_86F00188(0xC, 0xB4);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 6:
             if (D_8780FC96 != 0) {
-                D_87903DA0++;
+                minigameState++;
                 D_87903DAC = 1;
             }
             break;
@@ -2312,7 +2312,7 @@ void func_86F01EB4(void) {
     func_87903260();
     func_86F01C40();
 
-    if (D_87906044 != 0) {
+    if (showMinigameHUD != 0) {
         func_86F01D78();
     }
 }
@@ -2345,14 +2345,14 @@ void func_86F01F58(s32 arg0) {
     func_80015094(&D_87906050->unk_00);
     func_87901C98();
 
-    if (D_87903DB0 == 0) {
+    if (minigameDebuggMode == 0) {
         if (D_8780FC98 == 0) {
             func_86F01EF4(arg0);
         }
         func_87804FD4();
     } else {
-        func_87900F44();
-        func_879010A4();
+        showDebuggCameraInfo();
+        showDebuggJoystickInfo();
     }
 
     func_80007778();
@@ -2375,18 +2375,18 @@ void func_86F0204C(void) {
     while (var_s5 != 0) {
         func_87900528();
 
-        if (D_87903DA0 == 0) {
+        if (minigameState == 0) {
             D_87906042 += 1;
             if (D_87906042 < 0) {
                 D_87906042 = 0;
             }
         }
 
-        if ((D_87903DB0 == 0) && (D_87906044 == 0) && (func_80007604() == 0)) {
+        if ((minigameDebuggMode == 0) && (showMinigameHUD == 0) && (func_80007604() == 0)) {
             if (gPlayer1Controller->buttonPressed & 0x1000) {
                 D_87903DC4 = 1;
-                D_87903DA0 = 1;
-                D_87906044 = 1;
+                minigameState = 1;
+                showMinigameHUD = 1;
                 func_86F00188(7, 0);
             } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
                 func_86F00188(8, 0);
@@ -2404,7 +2404,7 @@ void func_86F0204C(void) {
             func_86F01488();
         }
 
-        if ((D_87903DB0 == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
+        if ((minigameDebuggMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
             var_s5 = 0;
         }
 

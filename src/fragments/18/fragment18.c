@@ -39,25 +39,25 @@ extern u8 D_030426E0[];
 extern u8 D_03042E00[];
 
 typedef struct unk_D_86C12008 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
+    /* 0x00 */ s16 unk_00; //  -1
+    /* 0x02 */ s16 unk_02; //	0
     /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
+    /* 0x06 */ s16 unk_06; //	0
+    /* 0x08 */ s16 unk_08; //	0
+    /* 0x0A */ s16 unk_0A; //	0
     /* 0x0C */ s16 unk_0C;
 } unk_D_86C12008; // size = 0xE
 
-typedef struct unk_D_86C0E1CC {
-    /* 0x00 */ Vec3f unk_00;
+typedef struct actorInitialPosition {
+    /* 0x00 */ Vec3f pos;
     /* 0x0C */ char unk0C[0x6];
     /* 0x12 */ s16 unk_12;
     /* 0x12 */ s16 unk_14;
-} unk_D_86C0E1CC; // size = 0x18
+} actorInitialPosition; // size = 0x18
 
-static unk_func_8790002C D_86C0E480[9];
-static unk_func_8790002C D_86C0FCD8[9];
-static unk_func_8790002C D_86C11530[4];
+static minigameActor D_86C0E480[9];
+static minigameActor D_86C0FCD8[9];
+static minigameActor D_86C11530[4];
 static unk_D_800AC870* D_86C12000;
 static unk_D_86C12008 D_86C12008[3];
 static s32 D_86C12034;
@@ -85,7 +85,7 @@ static u32 D_86C049D0[] = {
     0x00010000, 0x00000000, 0x00050050, D_86C049D0, D_86C04840,
 };
 
-static u32 D_86C049F8[] = {
+static u32 redDiglettTileTexture[] = {
     0xD5EDD62D, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5EB, 0xD5EDD5ED, 0xD5EDD5ED,
     0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5EB, 0xD5ABD5AB,
     0xD5ABD5AB, 0xD5ABD5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9,
@@ -202,7 +202,7 @@ static u32 D_86C049F8[] = {
     0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB,
 };
 
-static u32 D_86C059F8[] = {
+static u32 yellowDiglettTileTexture[] = {
     0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66B, 0xD66DD66D, 0xD66DD66D,
     0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66B, 0xD66BD66B,
     0xD66BD66B, 0xD66BD669, 0xD629D669, 0xD669D669, 0xD669D669, 0xD669D669, 0xD669D669, 0xD669D669, 0xD669D669,
@@ -319,7 +319,7 @@ static u32 D_86C059F8[] = {
     0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B,
 };
 
-static u32 D_86C069F8[] = {
+static u32 blueDiglettTileTexture[] = {
     0xCE37CE37, 0xC637C637, 0xC637C637, 0xC637C637, 0xC637C637, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7,
     0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC637C5F7, 0xC5F7C5F7,
     0xC5F7C5F7, 0xC5F7C5F7, 0xBDF7C5F7, 0xC5F7BDF7, 0xBDB7BDB7, 0xBDB7BDB7, 0xBDB7BDB7, 0xBDB7BDB7, 0xBDB7BDB7,
@@ -436,7 +436,7 @@ static u32 D_86C069F8[] = {
     0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7,
 };
 
-static u32 D_86C079F8[] = {
+static u32 floorTexture1[] = {
     0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE182E1, 0x82A1CD9F, 0xCD9F82A1,
     0x82E18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1,
     0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x82E182A1, 0xC55FFFDF, 0xFFDFC55F, 0x82A182E1, 0x8AE18AE1,
@@ -496,7 +496,7 @@ static u32 D_86C079F8[] = {
     0xCD9F82A1, 0x82E18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1,
 };
 
-static u32 D_86C081F8[] = {
+static u32 floorTexture2[] = {
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
@@ -613,7 +613,7 @@ static u32 D_86C081F8[] = {
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
 };
 
-static u32 D_86C091F8[] = {
+static u32 sceneDecorationTextureBlue[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -673,7 +673,7 @@ static u32 D_86C091F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
-static u32 D_86C099F8[] = {
+static u32 sceneDecorationTextureGreen[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -733,7 +733,7 @@ static u32 D_86C099F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
-static u32 D_86C0A1F8[] = {
+static u32 sceneDecorationTextureRed[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -793,7 +793,7 @@ static u32 D_86C0A1F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
-static u32 D_86C0A9F8[] = {
+static u32 sceneDecorationTextureYellow[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -853,6 +853,7 @@ static u32 D_86C0A9F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
+//  unused or unshown decoration texture?
 static u32 D_86C0B1F8[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
@@ -912,14 +913,15 @@ static u32 D_86C0B1F8[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFB4AD, 0xAC2993A5, 0x831F72DB, 0x6A996299,
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
-static unk_D_86002F34_018 D_86C0B9F8[] = {
+
+static unk_D_86002F34_018 sceneTextures[] = {
     {
         0x00,
         unk_D_86002F34_018_GFX_TYPE_2,
         32,
         64,
         2048,
-        D_86C049F8,
+        redDiglettTileTexture,
     },
     {
         0x00,
@@ -927,7 +929,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         64,
         2048,
-        D_86C059F8,
+        yellowDiglettTileTexture,
     },
     {
         0x00,
@@ -935,7 +937,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         64,
         2048,
-        D_86C069F8,
+        blueDiglettTileTexture,
     },
     {
         0x00,
@@ -943,7 +945,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C079F8,
+        floorTexture1,
     },
     {
         0x00,
@@ -951,7 +953,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C081F8,
+        floorTexture2,
     },
     {
         0x00,
@@ -959,7 +961,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C091F8,
+        sceneDecorationTextureBlue,
     },
     {
         0x00,
@@ -967,7 +969,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C099F8,
+        sceneDecorationTextureGreen,
     },
     {
         0x00,
@@ -975,7 +977,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C0A1F8,
+        sceneDecorationTextureRed,
     },
     {
         0x00,
@@ -983,7 +985,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C0A9F8,
+        sceneDecorationTextureYellow,
     },
     {
         0x00,
@@ -1046,7 +1048,8 @@ static Gfx D_86C0BB28[] = {
     gsSPEndDisplayList(),
 };
 
-static Vtx D_86C0BB68[] = {
+//  red quads
+static Vtx sceneGeometry_1[] = {
     VTX(880, 0, 880, 10240, 10239, 0x00, 0x78, 0x00, 0xFF),  VTX(440, 0, 880, 8191, 10239, 0x00, 0x78, 0x00, 0xFF),
     VTX(440, 0, 1320, 8191, 12287, 0x00, 0x78, 0x00, 0xFF),  VTX(880, 0, 1320, 10240, 12287, 0x00, 0x78, 0x00, 0xFF),
     VTX(-880, 0, -880, 2048, 2047, 0x00, 0x78, 0x00, 0xFF),  VTX(-1320, 0, -880, 0, 2047, 0x00, 0x78, 0x00, 0xFF),
@@ -1065,7 +1068,8 @@ static Vtx D_86C0BB68[] = {
     VTX(0, 0, 0, 6144, 6143, 0x00, 0x78, 0x00, 0xFF),        VTX(-440, 0, 440, 4096, 8191, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0BD68[] = {
+//  red quads
+static Vtx sceneGeometry_2[] = {
     VTX(0, 0, 0, 6144, 6143, 0x00, 0x78, 0x00, 0xFF),       VTX(-440, 0, 440, 4096, 8191, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, 440, 6144, 8191, 0x00, 0x78, 0x00, 0xFF),     VTX(440, 0, 440, 8191, 8191, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, 880, 6144, 10239, 0x00, 0x78, 0x00, 0xFF),    VTX(440, 0, 880, 8191, 10239, 0x00, 0x78, 0x00, 0xFF),
@@ -1075,7 +1079,8 @@ static Vtx D_86C0BD68[] = {
     VTX(880, 0, 0, 10240, 6143, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0BE38[] = {
+//  yellow quads
+static Vtx sceneGeometry_3[] = {
     VTX(-440, 0, -880, 4096, 2048, 0x00, 0x78, 0x00, 0xFF),  VTX(-880, 0, -880, 2048, 2048, 0x00, 0x78, 0x00, 0xFF),
     VTX(-880, 0, -440, 2048, 4096, 0x00, 0x78, 0x00, 0xFF),  VTX(-440, 0, -440, 4096, 4096, 0x00, 0x78, 0x00, 0xFF),
     VTX(880, 0, 440, 10240, 8191, 0x00, 0x78, 0x00, 0xFF),   VTX(440, 0, 440, 8191, 8191, 0x00, 0x78, 0x00, 0xFF),
@@ -1094,7 +1099,8 @@ static Vtx D_86C0BE38[] = {
     VTX(-880, 0, 440, 2048, 8191, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C028[] = {
+//  yellow quads
+static Vtx sceneGeometry_4[] = {
     VTX(440, 0, -1320, 8191, 0, 0x00, 0x78, 0x00, 0xFF),    VTX(0, 0, -1320, 6144, 0, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, -880, 6144, 2048, 0x00, 0x78, 0x00, 0xFF),    VTX(440, 0, -880, 8191, 2048, 0x00, 0x78, 0x00, 0xFF),
     VTX(880, 0, -880, 10240, 2048, 0x00, 0x78, 0x00, 0xFF), VTX(440, 0, -440, 8191, 4096, 0x00, 0x78, 0x00, 0xFF),
@@ -1103,7 +1109,8 @@ static Vtx D_86C0C028[] = {
     VTX(-440, 0, 880, 4096, 10240, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C0D8[] = {
+//  blue quads
+static Vtx sceneGeometry_5[] = {
     VTX(-880, 0, -440, 2048, 4096, 0x00, 0x78, 0x00, 0xFF),  VTX(-1320, 0, -440, 0, 4096, 0x00, 0x78, 0x00, 0xFF),
     VTX(-1320, 0, 0, 0, 6144, 0x00, 0x78, 0x00, 0xFF),       VTX(-880, 0, 0, 2048, 6144, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, 440, 6144, 8191, 0x00, 0x78, 0x00, 0xFF),      VTX(-440, 0, 440, 4096, 8191, 0x00, 0x78, 0x00, 0xFF),
@@ -1122,7 +1129,8 @@ static Vtx D_86C0C0D8[] = {
     VTX(-880, 0, 1320, 2048, 12288, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C2C8[] = {
+//  blue quads
+static Vtx sceneGeometry_6[] = {
     VTX(880, 0, -1320, 10240, 0, 0x00, 0x78, 0x00, 0xFF),    VTX(440, 0, -1320, 8191, 0, 0x00, 0x78, 0x00, 0xFF),
     VTX(440, 0, -880, 8191, 2048, 0x00, 0x78, 0x00, 0xFF),   VTX(880, 0, -880, 10240, 2048, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, -880, 6144, 2048, 0x00, 0x78, 0x00, 0xFF),     VTX(-440, 0, -880, 4096, 2048, 0x00, 0x78, 0x00, 0xFF),
@@ -1131,7 +1139,8 @@ static Vtx D_86C0C2C8[] = {
     VTX(1320, 0, -880, 12288, 2048, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C378[] = {
+//  second floor
+static Vtx sceneGeometry_7[] = {
     VTX(584, 50, -1431, 14262, 5137, 0xF1, 0x61, 0x44, 0xFF),
     VTX(673, 750, -1822, 14262, 358, 0xE9, 0x3B, 0x65, 0xFF),
     VTX(-673, 750, -1822, 16457, 358, 0x17, 0x3B, 0x65, 0xFF),
@@ -1150,7 +1159,8 @@ static Vtx D_86C0C378[] = {
     VTX(1636, 50, -924, 12068, 5137, 0xD5, 0x61, 0x36, 0xFF),
 };
 
-static Vtx D_86C0C478[] = {
+//  yellow stairs
+static Vtx sceneGeometry_8[] = {
     VTX(-2624, 50, 1128, 2560, -71, 0x45, 0x60, 0x0F, 0xFF), VTX(-2375, 0, 1128, 2560, 1066, 0x17, 0x75, 0x05, 0xFF),
     VTX(-2140, 0, 97, 2194, 1066, 0x15, 0x75, 0x0A, 0xFF),   VTX(-2364, 50, -11, 2194, -71, 0x3E, 0x61, 0x1E, 0xFF),
     VTX(2364, 50, -11, 5485, -71, 0xC2, 0x61, 0x1E, 0xFF),   VTX(2140, 0, 97, 5485, 1066, 0xEB, 0x75, 0x0A, 0xFF),
@@ -1162,7 +1172,8 @@ static Vtx D_86C0C478[] = {
     VTX(-1636, 50, -924, 1828, -71, 0x2B, 0x61, 0x36, 0xFF), VTX(-1481, 0, -729, 1828, 1066, 0x0E, 0x75, 0x12, 0xFF),
 };
 
-static Vtx D_86C0C598[] = {
+//  red decoration
+static Vtx sceneGeometry_9[] = {
     VTX(27, 262, -1502, 693, 149, 0x29, 0x6E, 0x12, 0xFF),  VTX(53, 240, -1542, 874, 149, 0x53, 0x4B, 0xD5, 0xFF),
     VTX(0, 259, -1553, 512, 0, 0x00, 0x67, 0xC4, 0xFF),     VTX(38, 226, -1459, 768, 511, 0x3C, 0x33, 0x59, 0xFF),
     VTX(75, 194, -1515, 1024, 511, 0x78, 0x00, 0x00, 0xFF), VTX(27, 171, -1449, 693, 874, 0x29, 0xD9, 0x69, 0xFF),
@@ -1172,7 +1183,8 @@ static Vtx D_86C0C598[] = {
     VTX(-75, 194, -1515, 0, 511, 0x88, 0x00, 0x00, 0xFF),   VTX(-53, 148, -1488, 149, 874, 0xAD, 0xB5, 0x2B, 0xFF),
 };
 
-static Vtx D_86C0C678[] = {
+//  green decoration
+static Vtx sceneGeometry_10[] = {
     VTX(588, 262, -1502, 693, 149, 0x29, 0x6E, 0x12, 0xFF),  VTX(615, 240, -1542, 874, 149, 0x53, 0x4B, 0xD5, 0xFF),
     VTX(562, 259, -1553, 512, 0, 0x00, 0x67, 0xC4, 0xFF),    VTX(599, 226, -1459, 768, 511, 0x3C, 0x33, 0x59, 0xFF),
     VTX(637, 194, -1515, 1024, 511, 0x78, 0x00, 0x00, 0xFF), VTX(588, 171, -1449, 693, 874, 0x29, 0xD9, 0x69, 0xFF),
@@ -1182,7 +1194,8 @@ static Vtx D_86C0C678[] = {
     VTX(486, 194, -1515, 0, 511, 0x88, 0x00, 0x00, 0xFF),    VTX(508, 148, -1488, 149, 874, 0xAD, 0xB5, 0x2B, 0xFF),
 };
 
-static Vtx D_86C0C758[] = {
+//  yellow decoration
+static Vtx sceneGeometry_11[] = {
     VTX(-535, 262, -1502, 693, 149, 0x29, 0x6E, 0x12, 0xFF),  VTX(-508, 240, -1542, 874, 149, 0x53, 0x4B, 0xD5, 0xFF),
     VTX(-562, 259, -1553, 512, 0, 0x00, 0x67, 0xC4, 0xFF),    VTX(-524, 226, -1459, 768, 511, 0x3C, 0x33, 0x59, 0xFF),
     VTX(-486, 194, -1515, 1024, 511, 0x78, 0x00, 0x00, 0xFF), VTX(-535, 171, -1449, 693, 874, 0x29, 0xD9, 0x69, 0xFF),
@@ -1192,7 +1205,8 @@ static Vtx D_86C0C758[] = {
     VTX(-637, 194, -1515, 0, 511, 0x88, 0x00, 0x00, 0xFF),    VTX(-615, 148, -1488, 149, 874, 0xAD, 0xB5, 0x2B, 0xFF),
 };
 
-static Vtx D_86C0C838[] = {
+//  blue right decoration
+static Vtx sceneGeometry_12[] = {
     VTX(1093, 262, -1268, 693, 149, 0x20, 0x6E, 0x20, 0xFF),  VTX(1132, 240, -1297, 874, 149, 0x5C, 0x4B, 0xF4, 0xFF),
     VTX(1086, 259, -1325, 512, 0, 0x14, 0x67, 0xC8, 0xFF),    VTX(1089, 226, -1224, 768, 511, 0x19, 0x33, 0x69, 0xFF),
     VTX(1143, 194, -1264, 1024, 511, 0x70, 0x00, 0x29, 0xFF), VTX(1075, 171, -1219, 693, 874, 0x02, 0xD9, 0x71, 0xFF),
@@ -1202,7 +1216,8 @@ static Vtx D_86C0C838[] = {
     VTX(1003, 194, -1316, 0, 511, 0x90, 0x00, 0xD7, 0xFF),    VTX(1014, 148, -1283, 149, 874, 0xA4, 0xB5, 0x0C, 0xFF),
 };
 
-static Vtx D_86C0C918[] = {
+//  blue left decoration
+static Vtx sceneGeometry_13[] = {
     VTX(-1044, 262, -1287, 693, 149, 0x2D, 0x6E, 0x03, 0xFF),
     VTX(-1032, 240, -1333, 874, 149, 0x3F, 0x4B, 0xBB, 0xFF),
     VTX(-1086, 259, -1325, 512, 0, 0xEC, 0x67, 0xC8, 0xFF),
@@ -1220,95 +1235,60 @@ static Vtx D_86C0C918[] = {
 };
 
 static Gfx D_86C0C9F8[] = {
-    gsSPVertex(D_86C0C918, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_13, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CA58[] = {
-    gsSPVertex(D_86C0C838, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_12, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CAB8[] = {
-    gsSPVertex(D_86C0C758, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_11, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CB18[] = {
-    gsSPVertex(D_86C0C678, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_10, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CB78[] = {
-    gsSPVertex(D_86C0C598, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_9, 14, 0),         gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CBD8[] = {
-    gsSPVertex(D_86C0C378, 16, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-    gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
-    gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
-    gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
-    gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
-    gsSP2Triangles(13, 12, 14, 0, 13, 14, 15, 0),
-    gsSP2Triangles(15, 14, 1, 0, 15, 1, 0, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_7, 16, 0),           gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),       gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
+    gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),       gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
+    gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0), gsSP2Triangles(13, 12, 14, 0, 13, 14, 15, 0),
+    gsSP2Triangles(15, 14, 1, 0, 15, 1, 0, 0),    gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CC28[] = {
-    gsSPVertex(D_86C0C478, 18, 0),
+    gsSPVertex(sceneGeometry_8, 18, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -1320,7 +1300,7 @@ static Gfx D_86C0CC28[] = {
 };
 
 static Gfx D_86C0CC70[] = {
-    gsSPVertex(D_86C0BB68, 32, 0),
+    gsSPVertex(sceneGeometry_1, 32, 0),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
@@ -1331,7 +1311,7 @@ static Gfx D_86C0CC70[] = {
     gsSP2Triangles(23, 7, 24, 0, 23, 24, 25, 0),
     gsSP2Triangles(26, 27, 28, 0, 26, 28, 29, 0),
     gsSP1Triangle(30, 25, 31, 0),
-    gsSPVertex(D_86C0BD68, 13, 0),
+    gsSPVertex(sceneGeometry_2, 13, 0),
     gsSP2Triangles(0, 1, 2, 0, 3, 2, 4, 0),
     gsSP2Triangles(3, 4, 5, 0, 6, 7, 8, 0),
     gsSP2Triangles(6, 8, 9, 0, 10, 9, 11, 0),
@@ -1340,7 +1320,7 @@ static Gfx D_86C0CC70[] = {
 };
 
 static Gfx D_86C0CCF8[] = {
-    gsSPVertex(D_86C0BE38, 32, 0),
+    gsSPVertex(sceneGeometry_3, 32, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 1, 0),
@@ -1350,7 +1330,7 @@ static Gfx D_86C0CCF8[] = {
     gsSP2Triangles(22, 23, 24, 0, 22, 24, 7, 0),
     gsSP2Triangles(25, 13, 26, 0, 25, 26, 5, 0),
     gsSP2Triangles(27, 28, 29, 0, 27, 29, 30, 0),
-    gsSPVertex(D_86C0C028, 11, 0),
+    gsSPVertex(sceneGeometry_4, 11, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 3, 5, 0, 4, 5, 6, 0),
     gsSP2Triangles(7, 8, 9, 0, 7, 9, 10, 0),
@@ -1358,7 +1338,7 @@ static Gfx D_86C0CCF8[] = {
 };
 
 static Gfx D_86C0CD70[] = {
-    gsSPVertex(D_86C0C0D8, 32, 0),
+    gsSPVertex(sceneGeometry_5, 32, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 3, 9, 0, 8, 9, 5, 0),
@@ -1368,7 +1348,7 @@ static Gfx D_86C0CD70[] = {
     gsSP2Triangles(21, 22, 23, 0, 21, 23, 14, 0),
     gsSP2Triangles(24, 25, 26, 0, 24, 26, 16, 0),
     gsSP2Triangles(27, 28, 29, 0, 27, 29, 30, 0),
-    gsSPVertex(D_86C0C2C8, 11, 0),
+    gsSPVertex(sceneGeometry_6, 11, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 3, 0),
@@ -1395,11 +1375,11 @@ static u32 D_86C0CDE8[] = {
 };
 
 static u32 D_86C0D008[] = {
-    0x1700000A, 0x000000E9, D_86C0B9F8, 0x00000000, D_86C0BB68, 0x05000000, 0x1C000000, 0x000023D7,
-    0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86C0CDE8, 0x06000000, 0x06000000, 0x01000000,
+    0x1700000A, 0x000000E9, sceneTextures, 0x00000000, sceneGeometry_1, 0x05000000, 0x1C000000, 0x000023D7,
+    0x000023D7, 0x000023D7, 0x05000000,    0x03000000, D_86C0CDE8,      0x06000000, 0x06000000, 0x01000000,
 };
 
-static u32 D_86C0D048[] = {
+static u32 ekansShadowTexture[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000101, 0x01010101, 0x01010101, 0x01010000, 0x00000000,
@@ -1516,9 +1496,9 @@ static u32 D_86C0D048[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-static unk_func_8790002C* D_86C0E048 = &D_86C0E480[0];
-static unk_func_8790002C* D_86C0E04C = &D_86C0FCD8[0];
-static unk_func_8790002C* D_86C0E050 = &D_86C11530[0];
+static minigameActor* D_86C0E048 = &D_86C0E480[0];
+static minigameActor* D_86C0E04C = &D_86C0FCD8[0];
+static minigameActor* D_86C0E050 = &D_86C11530[0];
 
 static s16 D_86C0E054[] = {
     0x0000, 0x0001, 0x0002, 0x0000, 0x0003, 0x0006, 0x0000, 0x0004, 0x0008, 0x0001, 0x0004, 0x0007,
@@ -1563,14 +1543,14 @@ static u32 D_86C0E0D0[] = {
     0x06000000, 0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
 
-static unk_D_86C0E1CC D_86C0E16C[] = {
+static actorInitialPosition skansActorInfo[] = {
     { { -45.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { -15.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { 15.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { 45.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
 };
 
-static unk_D_86C0E1CC D_86C0E1CC[] = {
+static actorInitialPosition diglettActorInfo[] = {
     { { -75.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
     { { 0.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
     { { 75.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
@@ -1593,13 +1573,17 @@ static unk_func_87801684 D_86C0E33C[] = {
     { D_03042E00, 0xE }, { D_03043520, 4 }, { D_03043C40, 8 }, { D_03043520, 4 }, { D_03042E00, 0xE },
     { D_03041FC0, 4 },   { D_030426E0, 8 }, { D_03041FC0, 4 }, { NULL, 0 },
 };
-static s16 D_86C0E384[] = { 0x32, 0x6E, 0xAA, 0xE6 };
-static Color_RGB8 D_86C0E38C[] = {
-    { 0, 0, 0xB4 },    { 0, 0x82, 0 },       { 0xA0, 0, 0 }, { 0x8C, 0x8C, 0 }, { 0xFF, 0xFF, 0xFF }, { 0xFA, 0, 0 },
-    { 0, 0x28, 0xFF }, { 0xFF, 0xFF, 0xE2 }, { 0, 0, 0 },    { 0x11, 0, 0 },    { 0, 0, 0 },          { 0, 0, 0 },
+static s16 playerGUIScoreXPositions[] = { 0x32, 0x6E, 0xAA, 0xE6 };
+static Color_RGB8 playerColors[] = {
+    { 0, 0, 0xB4 },    //  player 1 skans shadow color
+    { 0, 0x82, 0 },    //  player 2 skans shadow color
+    { 0xA0, 0, 0 },    //  player 3 skans shadow color
+    { 0x8C, 0x8C, 0 }, //  player 4 skans shadow color
+    { 0xFF, 0xFF, 0xFF }, { 0xFA, 0, 0 }, { 0, 0x28, 0xFF }, { 0xFF, 0xFF, 0xE2 },
+    { 0, 0, 0 },          { 0x11, 0, 0 }, { 0, 0, 0 },       { 0, 0, 0 },
 };
 
-s32 func_86C00020(unk_func_8790002C* arg0) {
+s32 func_86C00020(minigameActor* arg0) {
     f32 tmp = arg0->unk_274;
     s32 var_v1 = 0;
 
@@ -1740,77 +1724,77 @@ void func_86C00368(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86C003AC(unk_func_8790002C* arg0) {
+void func_86C003AC(minigameActor* arg0) {
     s16 idx = arg0 - D_86C11530;
 
-    arg0->unk_1A8.x = arg0->unk_1D8.x = D_86C0E16C[idx].unk_00.x;
-    arg0->unk_1A8.y = arg0->unk_1D8.y = D_86C0E16C[idx].unk_00.y;
-    arg0->unk_1A8.z = arg0->unk_1D8.z = D_86C0E16C[idx].unk_00.z;
+    arg0->unk_1A8.x = arg0->unk_1D8.x = skansActorInfo[idx].pos.x;
+    arg0->unk_1A8.y = arg0->unk_1D8.y = skansActorInfo[idx].pos.y;
+    arg0->unk_1A8.z = arg0->unk_1D8.z = skansActorInfo[idx].pos.z;
 
     arg0->unk_1C0.x = 0.0f;
     arg0->unk_1C0.y = -30.0f;
     arg0->unk_1C0.z = 0.0f;
 }
 
-void func_86C00424(unk_func_8790002C* arg0, s16 arg1) {
+void initEkans(minigameActor* ekans, s16 player) {
     s32 i;
 
-    func_8790060C(arg0);
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    func_8790060C(ekans);
+    ekans->scale.x = 1.0f;
+    ekans->scale.y = 1.0f;
+    ekans->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = arg0->unk_1D8.x = D_86C0E16C[arg1].unk_00.x;
-    arg0->unk_1A8.y = arg0->unk_1D8.y = D_86C0E16C[arg1].unk_00.y;
-    arg0->unk_1A8.z = arg0->unk_1D8.z = D_86C0E16C[arg1].unk_00.z;
+    ekans->unk_1A8.x = ekans->unk_1D8.x = skansActorInfo[player].pos.x;
+    ekans->unk_1A8.y = ekans->unk_1D8.y = skansActorInfo[player].pos.y;
+    ekans->unk_1A8.z = ekans->unk_1D8.z = skansActorInfo[player].pos.z;
 
-    arg0->unk_1C0.y = 10.0f;
-    arg0->unk_288 = 50.0f;
-    arg0->unk_28C = 140.0f;
+    ekans->unk_1C0.y = 10.0f;
+    ekans->unk_288 = 50.0f;
+    ekans->unk_28C = 140.0f;
 
-    arg0->unk_21C = -0x8000;
-    arg0->unk_25C = 0x64;
-    arg0->unk_258 = arg0->unk_25C;
+    ekans->unk_21C = -0x8000;
+    ekans->unk_25C = 0x64;
+    ekans->unk_258 = ekans->unk_25C;
 
-    func_8001BD04(&arg0->unk_000, 0);
+    func_8001BD04(&ekans->unk_000, 0);
 
-    arg0->unk_000.unk_000.unk_01 |= 1;
-    arg0->unk_000.unk_000.unk_02 |= 0x20;
+    ekans->unk_000.unk_000.unk_01 |= 1;
+    ekans->unk_000.unk_000.unk_02 |= 0x20;
 
-    func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
-    func_80017464(&arg0->unk_000, arg0->unk_26E);
+    func_800173DC(&ekans->unk_000, 0, ekans->unk_000.unk_040.unk_04, 0x10000);
+    func_80017464(&ekans->unk_000, ekans->unk_26E);
 
-    arg0->unk_000.unk_000.unk_02 &= ~0x40;
-    arg0->unk_2AC = D_879060C4[arg1];
-    arg0->unk_266 = -1;
+    ekans->unk_000.unk_000.unk_02 &= ~0x40;
+    ekans->unk_2AC = D_879060C4[player];
+    ekans->unk_266 = -1;
 
     if (D_86C12088 == 0) {
-        arg0->unk_2AE = D_86C0E084[D_87906046][arg1];
+        ekans->unk_2AE = D_86C0E084[D_87906046][player];
     } else {
-        arg0->unk_2AE = D_86C0E0A4[arg1];
+        ekans->unk_2AE = D_86C0E0A4[player];
     }
 
     // clang-format off
-    for (i = 0; i < 9; i++) { D_86C12040[i][arg1] = 0; }
+    for (i = 0; i < 9; i++){ D_86C12040[i][player] = 0; }
     // clang-format on
 }
 
-void func_86C005D0(void) {
+void initEkanses(void) {
     s32 i;
 
     D_86C0E050 = D_86C11530;
 
     for (i = 0; i < 4; i++) {
-        func_86C00424(D_86C0E050, i);
+        initEkans(D_86C0E050, i);
         D_86C0E050++;
     }
 }
 
-f32 func_86C0063C(unk_func_8790002C* arg0) {
+f32 func_86C0063C(minigameActor* arg0) {
     return (arg0->unk_284 <= arg0->unk_280) ? arg0->unk_280 : arg0->unk_284;
 }
 
-s16 func_86C00668(unk_func_8790002C* arg0, s16 arg1) {
+s16 func_86C00668(minigameActor* arg0, s16 arg1) {
     s32 var_v1 = arg1 ^ 0;
 
     switch (arg0 - D_86C11530) {
@@ -1857,32 +1841,32 @@ s16 func_86C00668(unk_func_8790002C* arg0, s16 arg1) {
     return var_v1;
 }
 
-void func_86C00770(unk_func_8790002C* arg0) {
-    f32 sp34;
+void func_86C00770(minigameActor* arg0) {
+    f32 stickMagnitude;
     f32 temp_fa0;
     f32 temp_fv1;
-    s32 sp1C;
+    s32 direction;
     s16 var_v1;
-    s16 sp24;
+    s16 stickY;
     f32 var_ft4;
     s32 var_v0;
 
-    sp1C = 0;
-    sp34 = D_879060BC->stickMag;
-    sp24 = D_879060BC->stickY;
+    direction = 0;
+    stickMagnitude = tempControllerPtr->stickMag;
+    stickY = tempControllerPtr->stickY;
 
     if (arg0->unk_23E == 0) {
-        if (D_879060BC->buttonDown & 0x200) {
-            sp1C = 1;
-        } else if (D_879060BC->buttonDown & 0x100) {
-            sp1C = -1;
-        } else if (D_879060BC->buttonDown & 2) {
-            sp1C = 1;
-        } else if (D_879060BC->buttonDown & 1) {
-            sp1C = -1;
+        if ( BTN_IS_DOWN(tempControllerPtr, BTN_DLEFT) ) {
+            direction = 1;
+        } else if ( BTN_IS_DOWN(tempControllerPtr, BTN_DRIGHT) ) {
+            direction = -1;
+        } else if ( BTN_IS_DOWN(tempControllerPtr, BTN_CLEFT) ) {
+            direction = 1;
+        } else if ( BTN_IS_DOWN(tempControllerPtr, BTN_CRIGHT) ) {
+            direction = -1;
         }
 
-        if (sp1C != 0) {
+        if (direction != 0) {
             arg0->unk_2A0++;
             if (arg0->unk_2A0 >= 0xB) {
                 arg0->unk_2A0 = 0xA;
@@ -1899,39 +1883,39 @@ void func_86C00770(unk_func_8790002C* arg0) {
             var_v1 = 0x1E0;
         }
 
-        arg0->unk_228 += sp1C * (var_v1 + 0x180);
+        arg0->unk_228 += direction * (var_v1 + 0x180);
         arg0->unk_228 = func_86C00668(arg0, arg0->unk_228);
     }
 
-    if (sp24 >= 0) {
-        sp34 = 0.0f;
+    if (stickY >= 0) {
+        stickMagnitude = 0.0f;
     }
 
     if (arg0->unk_23E == 0) {
         var_v0 = 0;
         var_ft4 = 0.0f;
-        temp_fv1 = arg0->unk_280 - sp34;
+        temp_fv1 = arg0->unk_280 - stickMagnitude;
         temp_fa0 = arg0->unk_284 - arg0->unk_280;
         if (temp_fa0 <= temp_fv1) {
-            if ((arg0->unk_280 <= 12.0f) && (temp_fv1 >= 5.0f) && (sp34 == 0.0f)) {
+            if ((arg0->unk_280 <= 12.0f) && (temp_fv1 >= 5.0f) && (stickMagnitude == 0.0f)) {
                 var_v0 = 1;
                 var_ft4 = arg0->unk_280;
             }
 
             if (arg0->unk_280 <= 30.0f) {
                 if (temp_fv1 >= 10.0f) {
-                    sp1C = 1;
+                    direction = 1;
                     var_v0 = 1;
                     var_ft4 = func_86C0063C(arg0);
                 }
             } else if (arg0->unk_280 < 50.0f) {
                 if (temp_fv1 >= 15.0f) {
-                    sp1C = 1;
+                    direction = 1;
                     var_v0 = 1;
                     var_ft4 = func_86C0063C(arg0);
                 }
             } else if (temp_fv1 >= 20.0f) {
-                sp1C = 1;
+                direction = 1;
                 var_v0 = 1;
                 var_ft4 = func_86C0063C(arg0);
             }
@@ -1941,7 +1925,7 @@ void func_86C00770(unk_func_8790002C* arg0) {
         }
 
         if (var_v0 != 0) {
-            sp34 = 0.0f;
+            stickMagnitude = 0.0f;
 
             if (var_ft4 < 24.0f) {
                 var_ft4 = 24.0f;
@@ -1956,12 +1940,12 @@ void func_86C00770(unk_func_8790002C* arg0) {
         }
 
         arg0->unk_284 = arg0->unk_280;
-        arg0->unk_280 = sp34;
+        arg0->unk_280 = stickMagnitude;
     }
 }
 
 void func_86C00AA4(void) {
-    unk_func_8790002C* ptr = D_86C11530;
+    minigameActor* ptr = D_86C11530;
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -1972,7 +1956,7 @@ void func_86C00AA4(void) {
     }
 }
 
-s32 func_86C00B0C(unk_func_8790002C* arg0) {
+s32 func_86C00B0C(minigameActor* arg0) {
     s32 ret = 0;
     s32 idx = arg0->unk_266;
     s32 i;
@@ -2009,7 +1993,7 @@ s16 func_86C00BB4(void) {
     return var_t0;
 }
 
-s16 func_86C00C40(unk_func_8790002C* arg0) {
+s16 func_86C00C40(minigameActor* arg0) {
     s32 i;
     s32 var_a0;
     s16 sp1E = -1;
@@ -2047,13 +2031,13 @@ s16 func_86C00C40(unk_func_8790002C* arg0) {
     return sp1E;
 }
 
-s16 func_86C00D50(unk_func_8790002C* arg0) {
+s16 func_86C00D50(minigameActor* arg0) {
     s32 i;
     s32 j;
     s32 sp1C;
     s16 var_a0;
     s32 var_v1;
-    unk_func_8790002C* var_v0 = D_86C11530;
+    minigameActor* var_v0 = D_86C11530;
 
     sp1C = 1;
 
@@ -2098,7 +2082,7 @@ s16 func_86C00D50(unk_func_8790002C* arg0) {
     return var_a0;
 }
 
-s32 func_86C00EF8(unk_func_8790002C* arg0) {
+s32 func_86C00EF8(minigameActor* arg0) {
     switch (arg0->unk_2AE) {
         case 0:
             arg0->unk_266 = func_86C00BB4();
@@ -2116,9 +2100,9 @@ s32 func_86C00EF8(unk_func_8790002C* arg0) {
     return arg0->unk_266;
 }
 
-void func_86C00F70(unk_func_8790002C* arg0) {
+void func_86C00F70(minigameActor* arg0) {
     Vec3f sp3C;
-    unk_func_8790002C* temp_v0;
+    minigameActor* temp_v0;
     s16 sp36;
     s16 sp34;
     s16 sp32;
@@ -2157,7 +2141,7 @@ void func_86C00F70(unk_func_8790002C* arg0) {
     arg0->unk_22E = func_878001E8(sp32) + sp34;
 }
 
-void func_86C01100(unk_func_8790002C* arg0) {
+void func_86C01100(minigameActor* arg0) {
     s16 temp_v1 = D_86C12008[arg0->unk_266].unk_00;
     f32 var_fv0;
 
@@ -2253,7 +2237,7 @@ s16 func_86C014A0(void) {
     return sp1E;
 }
 
-void func_86C01538(unk_func_8790002C* arg0) {
+void func_86C01538(minigameActor* arg0) {
     switch (arg0->unk_242) {
         case 1:
             if (func_86C00EF8(arg0) >= 0) {
@@ -2308,7 +2292,7 @@ void func_86C01538(unk_func_8790002C* arg0) {
     }
 }
 
-void func_86C016C8(unk_func_8790002C* arg0) {
+void func_86C016C8(minigameActor* arg0) {
     arg0->unk_210 = 1.0f;
     arg0->unk_1F8 = (SINS(arg0->unk_214.y) * (26.0f + arg0->unk_274)) / 10.0f;
     arg0->unk_1FC = (arg0->unk_274 + 70.0f) * 0.125f;
@@ -2318,7 +2302,7 @@ void func_86C016C8(unk_func_8790002C* arg0) {
 void func_86C01748(void) {
 }
 
-void func_86C01750(unk_func_8790002C* arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+void func_86C01750(minigameActor* arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     if (arg3 > 0.0f) {
         if (arg4 >= 0.0f) {
             arg0->unk_1F8 *= 0.25f;
@@ -2349,7 +2333,7 @@ void func_86C01750(unk_func_8790002C* arg0, s32 arg1, s32 arg2, f32 arg3, f32 ar
     arg0->unk_22E = 0x1000;
 }
 
-void func_86C018B8(unk_func_8790002C* arg0, s32 arg1) {
+void func_86C018B8(minigameActor* arg0, s32 arg1) {
     s32 i;
     f32 temp_fa0;
     f32 temp_fa1;
@@ -2393,8 +2377,8 @@ void func_86C01AF8(void) {
     Vec3f sp70;
     s32 i;
     s32 j;
-    unk_func_8790002C* temp_s1;
-    unk_func_8790002C* var_s6 = D_86C11530;
+    minigameActor* temp_s1;
+    minigameActor* var_s6 = D_86C11530;
 
     for (i = 0; i < 4; i++, var_s6++) {
         if (var_s6->unk_25E != 0) {
@@ -2425,13 +2409,13 @@ void func_86C01AF8(void) {
     }
 }
 
-void func_86C01D2C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86C01D2C(minigameActor* arg0, s32 arg1) {
     Vec3f sp3C;
     Vec3f sp30;
     f32 temp_fa0;
     f32 temp_fv1;
     s32 idx;
-    unk_func_8790002C* sp20;
+    minigameActor* sp20;
     unk_D_86C12008* sp18;
 
     if (arg0->unk_260 != 2) {
@@ -2496,7 +2480,7 @@ void func_86C01D2C(unk_func_8790002C* arg0, s32 arg1) {
     }
 }
 
-void func_86C01FAC(unk_func_8790002C* arg0, s32 arg1) {
+void func_86C01FAC(minigameActor* arg0, s32 arg1) {
     if (arg0->unk_260 == 3) {
         func_81400760(&arg0->unk_1A8.x, arg0->unk_1B4.x, arg0->unk_1CC);
         func_81400760(&arg0->unk_1A8.z, arg0->unk_1B4.z, arg0->unk_1D4);
@@ -2568,7 +2552,7 @@ void func_86C01FAC(unk_func_8790002C* arg0, s32 arg1) {
     arg0->unk_234 += arg0->unk_22E;
 }
 
-void func_86C021FC(unk_func_8790002C* arg0) {
+void func_86C021FC(minigameActor* arg0) {
     if (arg0->unk_280 > 5.0f) {
         func_81400760(&arg0->unk_1C0.x, (-SINS(arg0->unk_214.y) * arg0->unk_280) / 3.0f, 4.0f);
         func_81400760(&arg0->unk_1C0.z, (-COSS(arg0->unk_214.y) * arg0->unk_280) / 3.0f, 4.0f);
@@ -2578,8 +2562,8 @@ void func_86C021FC(unk_func_8790002C* arg0) {
     }
 }
 
-void func_86C022D8(unk_func_8790002C* arg0) {
-    if (D_87903DA4 != 0) {
+void func_86C022D8(minigameActor* arg0) {
+    if (minigameInputLock != 0) {
         if (arg0->unk_2AC == 0) {
             func_86C00770(arg0);
         } else {
@@ -2588,13 +2572,13 @@ void func_86C022D8(unk_func_8790002C* arg0) {
     }
 }
 
-void func_86C02324(unk_func_8790002C* arg0, s32 arg1) {
+void func_86C02324(minigameActor* arg0, s32 arg1) {
     switch (arg0->unk_23E) {
         case 0x0:
             func_86C021FC(arg0);
             break;
 
-        case 0x1:
+        case 0x1: //  on ekans launch
             func_86C016C8(arg0);
             func_879002B8(arg0, 1, -1, 0);
             arg0->unk_262 = 1;
@@ -2608,7 +2592,7 @@ void func_86C02324(unk_func_8790002C* arg0, s32 arg1) {
             func_86C01FAC(arg0, arg1);
             break;
 
-        case 0x3:
+        case 0x3: // on ekans return ?
             func_879002B8(arg0, 0, -1, 1);
             func_86C003AC(arg0);
             arg0->unk_23E++;
@@ -2652,7 +2636,7 @@ void func_86C0250C(void) {
 void func_86C02514(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
+    tempControllerPtr = gPlayer1Controller;
     D_86C0E050 = D_86C11530;
 
     for (i = 0; i < 4; i++) {
@@ -2664,7 +2648,7 @@ void func_86C02514(void) {
         }
 
         D_86C0E050++;
-        D_879060BC++;
+        tempControllerPtr++;
     }
 
     func_86C01AF8();
@@ -2680,40 +2664,40 @@ void func_86C02514(void) {
     }
 }
 
-void func_86C02610(unk_func_8790002C* arg0, s32 arg1) {
-    func_8790060C(arg0);
+void initDiglett(minigameActor* diglett, s32 arg1) {
+    func_8790060C(diglett);
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    diglett->scale.x = 1.0f;
+    diglett->scale.y = 1.0f;
+    diglett->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86C0E1CC[arg1].unk_00.x;
-    arg0->unk_1A8.y = D_86C0E1CC[arg1].unk_00.y;
-    arg0->unk_1A8.z = D_86C0E1CC[arg1].unk_00.z;
+    diglett->unk_1A8.x = diglettActorInfo[arg1].pos.x;
+    diglett->unk_1A8.y = diglettActorInfo[arg1].pos.y;
+    diglett->unk_1A8.z = diglettActorInfo[arg1].pos.z;
 
-    arg0->unk_288 = D_86C0E1CC[arg1].unk_12;
-    arg0->unk_28C = D_86C0E1CC[arg1].unk_14;
+    diglett->unk_288 = diglettActorInfo[arg1].unk_12;
+    diglett->unk_28C = diglettActorInfo[arg1].unk_14;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
-    arg0->unk_1E4 = arg0->unk_28C * 0.5f;
+    diglett->unk_258 = diglett->unk_25C = 0x64;
+    diglett->unk_1E4 = diglett->unk_28C * 0.5f;
 
-    func_8001BD04(&arg0->unk_000, 1);
-    func_879004F8(&arg0->unk_000);
+    func_8001BD04(&diglett->unk_000, 1);
+    func_879004F8(&diglett->unk_000);
 
-    arg0->unk_000.unk_01C = 0;
-    arg0->unk_000.unk_000.unk_02 &= ~0x40;
+    diglett->unk_000.unk_01C = 0;
+    diglett->unk_000.unk_000.unk_02 &= ~0x40;
 }
 
-void func_86C026F0(unk_func_8790002C* arg0, s32 arg1) {
+void initDiglettHole(minigameActor* arg0, s32 arg1) {
     func_8790060C(arg0);
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    arg0->scale.x = 1.0f;
+    arg0->scale.y = 1.0f;
+    arg0->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86C0E1CC[arg1].unk_00.x;
-    arg0->unk_1A8.y = D_86C0E1CC[arg1].unk_00.y;
-    arg0->unk_1A8.z = D_86C0E1CC[arg1].unk_00.z;
+    arg0->unk_1A8.x = diglettActorInfo[arg1].pos.x;
+    arg0->unk_1A8.y = diglettActorInfo[arg1].pos.y;
+    arg0->unk_1A8.z = diglettActorInfo[arg1].pos.z;
 
     arg0->unk_000.unk_000.unk_02 &= ~0x40;
 }
@@ -2750,16 +2734,16 @@ void func_86C027BC(void) {
     }
 }
 
-void func_86C02804(void) {
+void initDigletts(void) {
     s32 i;
 
     D_86C0E048 = D_86C0E480;
     D_86C0E04C = D_86C0FCD8;
 
     for (i = 0; i < 9; i++) {
-        func_86C02610(D_86C0E048, i);
+        initDiglett(D_86C0E048, i);
         func_87900770(D_86C0E048);
-        func_86C026F0(D_86C0E04C, i);
+        initDiglettHole(D_86C0E04C, i);
         func_87900770(D_86C0E04C);
         func_87900808(D_86C0E04C);
         D_86C0E048 = &D_86C0E048[1];
@@ -2816,7 +2800,7 @@ s16 func_86C028C0(s16 arg0) {
     return var_a1;
 }
 
-void func_86C02A1C(unk_func_8790002C* arg0) {
+void func_86C02A1C(minigameActor* arg0) {
     s32 temp_v0;
     s32 sp18 = 0;
 
@@ -2853,7 +2837,7 @@ void func_86C02A1C(unk_func_8790002C* arg0) {
     }
 }
 
-void func_86C02B78(unk_func_8790002C* arg0, s32 arg1) {
+void func_86C02B78(minigameActor* arg0, s32 arg1) {
     u8 var_s0 = 0;
     u8 var_a2 = 0;
     u8 var_a3 = 0;
@@ -2989,10 +2973,11 @@ void func_86C03008(void) {
     }
 }
 
+//	init game objects
 void func_86C03080(void) {
     func_87900854();
-    func_86C005D0();
-    func_86C02804();
+    initEkanses();
+    initDigletts();
     func_86C03500();
 
     D_879060C2 = 0x3C;
@@ -3002,7 +2987,7 @@ void func_86C03080(void) {
 }
 
 s32 func_86C030EC(void) {
-    unk_func_8790002C* var_v0 = D_86C11530;
+    minigameActor* var_v0 = D_86C11530;
     s32 ret = 1;
     s32 i;
 
@@ -3018,7 +3003,7 @@ s32 func_86C030EC(void) {
 void func_86C03128(void) {
     s32 i;
     s32 var_s2;
-    unk_func_8790002C* var_s0;
+    minigameActor* var_s0;
 
     var_s2 = -1;
     for (i = 0, var_s0 = D_86C11530; i < 4; i++, var_s0++) {
@@ -3082,55 +3067,55 @@ s32 func_86C03258(void) {
     return sp1C;
 }
 
-void func_86C03344(void) {
-    switch (D_87903DA0) {
-        case 1:
-            D_87906040 = 0xF;
-            D_87903DA0++;
+void ekansMinigameNextStep(void) {
+    switch (minigameState) {
+        case 1: //	after pressing start
+            minigameInputLockTimer = 0xF;
+            minigameState++;
             break;
 
-        case 2:
-            D_87906040 -= 1;
-            if (D_87906040 < 0) {
+        case 2: //	waits for some frames before starting the main countdown
+            minigameInputLockTimer -= 1;
+            if (minigameInputLockTimer < 0) {
                 func_8780295C(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
-        case 3:
+        case 3: //	state 3: when the main countdown finishes, game starts
             if (func_86C031E4() != 0) {
                 func_86C027BC();
                 func_86C00AA4();
-                D_87903DA4 = 1;
-                D_87903DA0++;
+                minigameInputLock = 1;
+                minigameState++;
             }
             break;
 
-        case 4:
+        case 4: //	state 4: main countdown ends, adds a little wait
             if (func_86C03258() != 0) {
                 D_87903DC4 = 4;
-                D_87906040 = 0x32;
-                D_87903DA4 = 0;
-                D_87903DA0++;
+                minigameInputLockTimer = 0x32;
+                minigameInputLock = 0;
+                minigameState++;
             }
             break;
 
-        case 5:
-            D_87906040--;
-            if (D_87906040 < 0) {
-                D_87906040 = 0;
+        case 5: //	state 5: after the wait, ends the minigame
+            minigameInputLockTimer--;
+            if (minigameInputLockTimer < 0) {
+                minigameInputLockTimer = 0;
             }
-            if ((func_86C030EC() != 0) && (D_87906040 == 0)) {
+            if ((func_86C030EC() != 0) && (minigameInputLockTimer == 0)) {
                 func_86C03128();
                 func_87802EB8(1);
                 func_87903294();
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 6:
             if (D_8780FC96 != 0) {
-                D_87903DA0++;
+                minigameState++;
                 D_87903DAC = 1;
             }
             break;
@@ -3152,9 +3137,9 @@ void func_86C03500(void) {
     D_87906068 = 0x32;
     D_8790606A = 0x7D0;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = 0x56;
-    D_8790606C.z = 0;
+    minigameCameraCoords.x = 0;
+    minigameCameraCoords.y = 0x56;
+    minigameCameraCoords.z = 0;
 
     func_87900B64();
 
@@ -3170,7 +3155,7 @@ void func_86C03500(void) {
 }
 
 void func_86C035E0(void) {
-    func_87900C5C();
+    minigameDebuggModeControll();
     func_87900B64();
 }
 
@@ -3261,7 +3246,7 @@ void func_86C03BE8(void) {
 }
 
 void func_86C03C64(void) {
-    unk_func_8790002C* var_s4 = D_86C11530;
+    minigameActor* var_s4 = D_86C11530;
     s32 i;
 
     func_8001F3F4();
@@ -3278,7 +3263,7 @@ void func_86C03C64(void) {
     }
 
     for (i = 0; i < 4; i++, var_s4++) {
-        s16 tmp = D_86C0E384[i];
+        s16 tmp = playerGUIScoreXPositions[i];
 
         if (D_86C12088 == 0) {
             if (var_s4->unk_2AC != 0) {
@@ -3299,7 +3284,7 @@ void func_86C03E4C(void) {
     func_87903260();
     func_86C03AB8();
 
-    if (D_87906044 != 0) {
+    if (showMinigameHUD != 0) {
         func_86C03C64();
     }
 }
@@ -3315,7 +3300,7 @@ void func_86C03E8C(s32 arg0) {
 }
 
 void func_86C03ED4(void) {
-    unk_func_8790002C* var_s0 = D_86C11530;
+    minigameActor* actor = D_86C11530;
     s32 i;
     Vec3f sp7C;
     Vec3s sp74;
@@ -3326,14 +3311,14 @@ void func_86C03ED4(void) {
     sp74.y = 0;
     sp74.z = 0;
 
-    func_8140419C(D_86C0D048, 0x40, 0x40);
+    func_8140419C(ekansShadowTexture, 0x40, 0x40);
 
-    for (i = 0; i < 4; i++, var_s0++) {
-        if (var_s0->unk_23E == 2) {
+    for (i = 0; i < 4; i++, actor++) {
+        if (actor->unk_23E == 2) {
             gSPDisplayList(gDisplayListHead++, D_8140DD58);
 
-            func_81405B70(D_86C0E38C[i].r, D_86C0E38C[i].g, D_86C0E38C[i].b, (var_s0->unk_000.unk_01D / 2) & 0xFF);
-            func_80015390(&var_s0->unk_000, 0xA, &sp7C);
+            func_81405B70(playerColors[i].r, playerColors[i].g, playerColors[i].b, (actor->unk_000.unk_01D / 2) & 0xFF);
+            func_80015390(&actor->unk_000, 0xA, &sp7C);
 
             sp7C.y = 5.0f;
 
@@ -3356,13 +3341,13 @@ void func_86C040B4(s32 arg0) {
     func_87901C98();
     func_86C03ED4();
 
-    if (D_87903DB0 == 0) {
+    if (minigameDebuggMode == 0) {
         func_86C03E8C(arg0);
     }
 
-    if (D_87903DB0 != 0) {
-        func_87900F44();
-        func_879010A4();
+    if (minigameDebuggMode != 0) {
+        showDebuggCameraInfo();
+        showDebuggJoystickInfo();
     }
 
     if (D_86C12088 != 0) {
@@ -3372,55 +3357,55 @@ void func_86C040B4(s32 arg0) {
     func_80007778();
 }
 
-void func_86C04170(void) {
-    func_86C03080();
-    func_87900558();
+void initEkansMinigameAssets(void) {
+    func_86C03080(); //	init game objects
+    func_87900558(); //	change a global something
     func_87901620();
     func_800077B4(0xA);
     func_80006C6C(0x10);
 
     if (D_86C12088 != 0) {
         D_87903DC4 = 1;
-        D_87906044 = 1;
-        D_87903DA0 = 1;
+        showMinigameHUD = 1;
+        minigameState = 1;
     } else {
         D_87903DC4 = 3;
     }
 }
 
-void func_86C041E8(void) {
+void showTutorialScreenEkansMinigame(void) {
     s32 var_s1 = 1;
 
     while (var_s1 != 0) {
-        func_87900528();
+        func_87900528(); 		//	input
 
-        if ((D_87903DB0 == 0) && (func_80007604() == 0)) {
+        if ((minigameDebuggMode == 0) && (func_80007604() == 0)) {
             if (D_86C12088 != 0) {
                 if ((gPlayer1Controller->buttonPressed != 0) || (D_879060C2 == 0x28)) {
-                    func_87802EB8(2);
+                    func_87802EB8(2);		//	D_8780FC92 = 1
                 }
-            } else if (D_87906044 == 0) {
-                if (gPlayer1Controller->buttonPressed & 0x1000) {
-                    D_87903DC4 = 1;
-                    D_87903DA0 = 1;
-                    D_87906044 = 1;
+            } else if (showMinigameHUD == 0) {
+                if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+                    D_87903DC4 = 1;			//	takes off the tutorial screen
+                    minigameState = 1;
+                    showMinigameHUD = 1;
                     func_86C00368(0x10, 0);
-                } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
+                } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
                     func_86C00368(0x11, 0);
-                    func_87802EB8(2);
+                    func_87802EB8(2);		//	D_8780FC92 = 1
                 }
             }
         }
 
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86C03344();
+            ekansMinigameNextStep();
             func_86C02514();
             func_86C03008();
             func_86C035E0();
         }
 
-        if ((D_87903DB0 == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
+        if ((minigameDebuggMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
             var_s1 = 0;
         }
 
@@ -3428,7 +3413,7 @@ void func_86C041E8(void) {
     }
 }
 
-void func_86C043C4(void) {
+void ekansMinigameUpdate(void) {
     s32 i;
 
     func_80006CB4(0x1E);
@@ -3440,10 +3425,10 @@ void func_86C043C4(void) {
     }
 
     for (i = 0; i < 30; i++) {
-        func_87900528();
+        func_87900528();		//	input
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86C03344();
+            ekansMinigameNextStep();
             func_86C02514();
             func_86C03008();
             func_86C035E0();
@@ -3503,7 +3488,7 @@ void func_86C044B4(void) {
     }
 }
 
-s32 func_86C046B0(s32 arg0, UNUSED s32 arg1) {
+s32 startSkansMinigame(s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
     if (arg0 == 1) {
@@ -3528,12 +3513,12 @@ s32 func_86C046B0(s32 arg0, UNUSED s32 arg1) {
 
     func_86C044B4();
     func_80007678(sp24);
-    func_86C04170();
-    func_86C041E8();
-    func_86C043C4();
+    initEkansMinigameAssets();
+    showTutorialScreenEkansMinigame();
+    ekansMinigameUpdate();
     func_800076C0();
-    func_8001E9CC();
-    func_80005EAC();
+    func_8001E9CC();	//	main_pool_try_free(D_800AC870);
+    func_80005EAC();	//	main_pool_try_free(D_800A7428.unk4); main_pool_try_free(D_800A7428.unk0);
 
     main_pool_pop_state('MINI');
 

@@ -245,10 +245,10 @@ typedef struct unk_D_86002F34_00C_0CC {
 
 typedef struct unk_D_86002F34_00C {
     /* 0x00 */ GraphNode unk_00;
-    /* 0x18 */ unk_D_86002F34_00C_018 unk_18;
-    /* 0x24 */ unk_D_86002F34_00C_024 unk_24;
+    /* 0x18 */ unk_D_86002F34_00C_018 unk_18;	//	viewPort
+    /* 0x24 */ unk_D_86002F34_00C_024 unk_24;	//	projection
     /* 0x40 */ unk_D_86002F34_00C_040 unk_40;
-    /* 0x60 */ unk_D_86002F34_00C_060 unk_60;
+    /* 0x60 */ unk_D_86002F34_00C_060 unk_60;	//	camera
     /* 0xCC */ unk_D_86002F34_00C_0CC unk_CC;
     /* 0xEC */ char unkEC[0x4];
 } unk_D_86002F34_00C; // size = 0xF0
