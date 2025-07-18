@@ -6,15 +6,15 @@
 
 void func_86F00020(s16 arg0, s16 arg1);
 void func_86F00188(s16 arg0, s16 arg1);
-void func_86F001CC(minigameActor* arg0, s32 arg1);
+void func_86F001CC(minigameActor* sandshrew, s32 player);
 void func_86F002F4(void);
 void func_86F0035C(minigameActor* arg0);
 void func_86F00370(void);
 void func_86F003FC(minigameActor* arg0, s32 arg1);
 void func_86F00450(minigameActor* arg0, f32 arg1);
 void func_86F0048C(minigameActor* arg0, s32 arg1);
-void func_86F0050C(minigameActor* arg0);
-void func_86F00778(minigameActor* arg0);
+void sandshrewPlayerInput(minigameActor* sandshrew);
+void sandshrewAIControls(minigameActor* arg0);
 void func_86F00920(minigameActor* arg0);
 void func_86F00D04(void);
 void func_86F00E34(minigameActor* a0, s32 arg1);
@@ -36,7 +36,7 @@ void func_86F0174C(void);
 void func_86F018E4(void);
 void func_86F01904(void);
 void func_86F01C40(void);
-void func_86F01D78(void);
+void fixSandshrewMinigameHUD(void);
 void func_86F01EB4(void);
 void func_86F01EF4(s32 arg0);
 void func_86F01F58(s32 arg0);

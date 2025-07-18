@@ -74,29 +74,31 @@ typedef struct minigameActor {
     /* 0x26C */ s16 unk_26C;        //	animation id or state?
     /* 0x26E */ s16 unk_26E;
     /* 0x270 */ s16 unk_270;
-    /* 0x272 */ s16 unk_272;
+    /* 0x272 */ s16 unk_272;        //  
     /* 0x274 */ f32 unk_274;
     /* 0x278 */ char unk278[0x4];
     /* 0x27C */ f32 unk_27C;
     /* 0x280 */ f32 unk_280;		//	intensity of rotation?
     /* 0x284 */ f32 unk_284;
-    /* 0x288 */ f32 unk_288;        //	bottom of the hitbox? bounding box?
-    /* 0x28C */ f32 unk_28C;        //	top of the hitbox? boundin box? ;   half of 1E4
+    /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
+    /* 0x28C */ f32 unk_28C;        //	top    of the hitbox / bounding box ? ;   half of 1E4
     /* 0x290 */ s16 unk_290;
     /* 0x292 */ s16 unk_292;
     /* 0x294 */ s16 unk_294;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 unk_298;
-    /* 0x29A */ s16 unk_29A;
+    /* 0x29A */ s16 unk_29A;        //  last direction on sandshrew's minigame ;
+                                    //  also score gotten by diglett hit on skans' minigame ;
+                                    //  also per player input lock frames on metapod's minigame after a pause ;
     /* 0x29C */ s16 unk_29C;
     /* 0x29E */ s16 unk_29E;
     /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames some button was pressed?
-    /* 0x2A2 */ s16 unk_2A2;
+    /* 0x2A2 */ s16 unk_2A2;        //  score on skans' minigame
     /* 0x2A4 */ s16 unk_2A4;
     /* 0x2A6 */ s16 unk_2A6;
     /* 0x2A8 */ s16 unk_2A8;
     /* 0x2AA */ s16 unk_2AA;
-    /* 0x2AC */ s16 unk_2AC;
+    /* 0x2AC */ s16 isHuman;
     /* 0x2AE */ s16 unk_2AE;
     /* 0x2B0 */ s16 unk_2B0;
     /* 0x2B2 */ s16 unk_2B2;
@@ -139,18 +141,18 @@ extern unk_D_87903E10 D_87903E40;
 extern unk_D_87903E10 D_87903E58;
 extern s16 minigameInputLockTimer;
 extern s16 D_87906042;
-extern s16 showMinigameHUD;                  //  game state?
+extern s16 showMinigameHUD;
 extern s16 D_87906046;
 extern s16 D_87906048;
 extern s16 D_8790604A;
-extern unk_D_86002F34_00C* D_87906050;
+extern unk_D_86002F34_00C* D_87906050;      // geo layout
 extern unk_D_86002F34_00C* D_87906054;
-extern s16 D_87906060;
-extern s16 D_87906062;
-extern s16 D_87906064;
-extern s16 D_87906066;
-extern s16 D_87906068;
-extern s16 D_8790606A;
+extern s16 minigameCameraXRot;
+extern s16 minigameCameraYRot;
+extern s16 minigameCameraDistance;
+extern s16 minigameCameraFOV;
+extern s16 minigameCameraNear;
+extern s16 minigameCameraFar;
 extern Vec3s minigameCameraCoords;
 extern s16 D_87906072;
 extern s16 D_87906076;
@@ -176,7 +178,7 @@ extern Controller* tempControllerPtr;
 extern s16 D_879060C0;
 extern s16 D_879060C2;
 extern s8 D_879060C4[4];
-extern s16 D_879060C8;
+extern s16 minigameHUDTransparency;
 extern s16 D_879060CA;
 
 extern Vec3f D_879060E0;
@@ -187,7 +189,7 @@ ret_func_80004454 func_87900020(void);
 float getVec3Distance_xz(minigameActor* arg0, minigameActor* arg1);
 void getVec3Distance_xyz(minigameActor* arg0, minigameActor* arg1);
 s32 func_879000C4(minigameActor* arg0, minigameActor* arg1);
-s32 func_879001A4(minigameActor* arg0, minigameActor* arg1);
+s32 metapodRockCollisionCheck(minigameActor* arg0, minigameActor* arg1);
 void func_879002B8(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3);
 void func_879002FC(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
 void func_87900344(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3);

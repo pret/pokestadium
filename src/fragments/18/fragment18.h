@@ -62,7 +62,7 @@ void func_86C035E0(void);
 void func_86C03608(void);
 void func_86C03AB8(void);
 void func_86C03BE8(void);
-void func_86C03C64(void);
+void fixSkansMinigameHUD(void);
 void func_86C03E4C(void);
 void func_86C03E8C(s32 arg0);
 void func_86C03ED4(void);

@@ -343,7 +343,7 @@ void func_879032BC(s16 arg0) {
 void func_87903358(s16 arg0, s16 arg1) {
     switch (D_87903DC0) {
         case 1:
-            D_87903DD0 = arg0;
+            D_87903DD0 = arg0; // 0x11
             D_87903DC8 = arg1;
             D_87903DC0++;
             break;
@@ -371,7 +371,7 @@ void func_879033FC(minigameActor* arg0) {
     for (i = 0; i < 4; i++) {
         if (arg0[i].unk_2A8 != 0) {
             temp_a2 = D_87903E60[D_87903DD4][var_s2];
-            if (arg0[i].unk_2AC != 0) {
+            if (arg0[i].isHuman != 0) {
                 func_87801644(-1 - i, 0x78, temp_a2, 1.0f);
             } else {
                 func_87801644(i, 0x78, temp_a2, 1.0f);

@@ -31,9 +31,9 @@ extern u8 D_03049020[];
 extern u8 D_030483A0[];
 extern u8 D_03047720[];
 
-static minigameActor D_86F0B1F0[4];
-static minigameActor D_86F0BCC0[4];
-static minigameActor D_86F0C790[4];
+static minigameActor sandshrewPlayers[4];
+static minigameActor sandshrewHoles[4];
+static minigameActor sandshrewWaterGeisers[4];
 static s16 D_86F0D260;
 static unk_D_800AC870* D_86F0D264;
 
@@ -796,6 +796,7 @@ static u32 D_86F07E90[1024] = {
     0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5,
     0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5
 };
+
 static unk_D_86002F34_018 D_86F08E90[9] = {
     {
         0x00,
@@ -870,6 +871,7 @@ static unk_D_86002F34_018 D_86F08E90[9] = {
         D_86F07E90,
     },
 };
+
 static Gfx D_86F08F00[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD),
@@ -988,6 +990,7 @@ static Gfx D_86F09130[] = {
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x03FC, 0x01FC),
     gsSPEndDisplayList(),
 };
+
 static Vtx D_86F09170[] = {
     VTX(-1900, 0, -450, 243, 2183, 0x40, 0x64, 0x0C, 0xFF),  VTX(1900, 0, -450, 8174, 3040, 0xAE, 0x55, 0x10, 0xFF),
     VTX(1400, 0, -1900, 5844, 3696, 0xC9, 0x64, 0x22, 0xFF), VTX(2000, 0, 1500, 10113, 2028, 0x00, 0x78, 0x00, 0xFF),
@@ -1217,6 +1220,7 @@ static Vtx D_86F0A610[] = {
     VTX(98, 58, -482, 1024, 1342, 0x99, 0x00, 0x3C, 0xFF), VTX(53, 171, -561, 512, -86, 0x99, 0x00, 0x3B, 0xFF),
     VTX(18, 86, -620, 124, 982, 0x99, 0x00, 0x3C, 0xFF),   VTX(87, 86, -501, 899, 982, 0x99, 0x00, 0x3C, 0xFF),
 };
+
 static Gfx D_86F0A730[] = {
     gsSPVertex(D_86F098D0, 32, 0),
     gsSPSetGeometryMode(G_CULL_BACK),
@@ -1449,15 +1453,14 @@ static u32 D_86F0ACE0[] = {
     0x2301FFFF, D_86F08F00, 0x0008FFFF, 0xFFFFFFFF, 0x22010000, D_86F0A9C8, 0x06000000, 0x06000000, 0x06000000,
     0x06000000, 0x04000000,
 };
-
 static u32 D_86F0AFB8[] = {
     0x17000009, 0x0000015C, D_86F08E90, NULL,       D_86F09170, 0x05000000, 0x1C000000, 0x000023D7,
     0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86F0ACE0, 0x06000000, 0x06000000, 0x01000000,
 };
 
-static minigameActor* D_86F0AFF8 = D_86F0B1F0;
-static minigameActor* D_86F0AFFC = D_86F0BCC0;
-static minigameActor* D_86F0B000 = D_86F0C790;
+static minigameActor* tempSandshrewPlayer = sandshrewPlayers;
+static minigameActor* tempSandshrewHole = sandshrewHoles;
+static minigameActor* tempSandshrewWaterGeiser = sandshrewWaterGeisers;
 
 static u32 D_86F0B004[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0x0000000F, 0x00000000, 0x00000000,
@@ -1466,7 +1469,7 @@ static u32 D_86F0B004[] = {
     0x00000000, D_86F0AFB8, 0x06000000, 0x06000000, 0x0F000003, 0x05000000, 0x0A000000, &D_800AC840,
     0x06000000, 0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
-static Vec3f D_86F0B0A0[4] = {
+static Vec3f sandshrewPositions[4] = {
     {
         -50.0f,
         0.0f,
@@ -1488,12 +1491,15 @@ static Vec3f D_86F0B0A0[4] = {
         50.0f,
     },
 };
+
+//  unuced
 static s16 D_86F0B0D0[] = {
     0x6000,
     0x2000,
     0xE000,
     0xA000,
 };
+
 static unk_func_87801684 D_86F0B0D8[5] = {
     { D_03040580, 0x12 }, { D_03040980, 2 }, { D_03040D80, 8 }, { D_03040980, 2 }, { NULL, 0 },
 };
@@ -1503,8 +1509,9 @@ static unk_func_87801684 D_86F0B100[5] = {
 static unk_func_87801684 D_86F0B128[6] = {
     { D_03047720, 2 }, { D_030483A0, 2 }, { D_03049020, 2 }, { D_030483A0, 2 }, { D_03047720, 6 }, { NULL, 0 },
 };
-static s16 D_86F0B158[] = { 0x1E, 0x32, 0xF0, 0x104 };
-static s16 D_86F0B160[] = { 0xA8, 0x50, 0x50, 0xA8 };
+
+static s16 playerIconsScreenXPos[] = { 0x1E, 0x32, 0xF0, 0x104 };
+static s16 playerIconsScreenYPos[] = { 0xA8, 0x50, 0x50, 0xA8 };
 
 void func_86F00020(s16 arg0, s16 arg1) {
     UNUSED s32 pad;
@@ -1583,55 +1590,55 @@ void func_86F00188(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86F001CC(minigameActor* arg0, s32 arg1) {
-    arg0->scale.x = 1.0f;
-    arg0->scale.y = 1.0f;
-    arg0->scale.z = 1.0f;
+void func_86F001CC(minigameActor* sandshrew, s32 player) {
+    sandshrew->scale.x = 1.0f;
+    sandshrew->scale.y = 1.0f;
+    sandshrew->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
-    arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
-    arg0->unk_1A8.z = D_86F0B0A0[arg1].z;
+    sandshrew->unk_1A8.x = sandshrewPositions[player].x;
+    sandshrew->unk_1A8.y = sandshrewPositions[player].y;
+    sandshrew->unk_1A8.z = sandshrewPositions[player].z;
 
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
+    sandshrew->unk_1C0.x = 0.0f;
+    sandshrew->unk_1C0.y = 0.0f;
+    sandshrew->unk_1C0.z = 0.0f;
 
-    if (1) {}
+    if (true) {}
 
-    arg0->unk_220 = arg0->unk_226 = arg0->unk_22C = 0;
-    arg0->unk_222 = arg0->unk_228 = arg0->unk_22E = 0;
-    arg0->unk_224 = arg0->unk_22A = arg0->unk_230 = 0;
+    sandshrew->unk_220 = sandshrew->unk_226 = sandshrew->unk_22C = 0;
+    sandshrew->unk_222 = sandshrew->unk_228 = sandshrew->unk_22E = 0;
+    sandshrew->unk_224 = sandshrew->unk_22A = sandshrew->unk_230 = 0;
 
-    arg0->unk_272 = 0;
-    arg0->unk_2A8 = 0;
-    arg0->unk_2A4 = 0;
+    sandshrew->unk_272 = 0;
+    sandshrew->unk_2A8 = 0;
+    sandshrew->unk_2A4 = 0;
 
-    arg0->unk_274 = 0.0f;
-    arg0->unk_27C = 0.0f;
+    sandshrew->unk_274 = 0.0f;
+    sandshrew->unk_27C = 0.0f;
 
-    arg0->unk_214.x = arg0->unk_21A = 0;
-    arg0->unk_214.y = arg0->unk_21C = 0;
-    arg0->unk_214.z = arg0->unk_21E = 0;
+    sandshrew->unk_214.x = sandshrew->unk_21A = 0;
+    sandshrew->unk_214.y = sandshrew->unk_21C = 0;
+    sandshrew->unk_214.z = sandshrew->unk_21E = 0;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
-    arg0->unk_238 = arg0->unk_23A = 0;
+    sandshrew->unk_258 = sandshrew->unk_25C = 0x64;
+    sandshrew->unk_238 = sandshrew->unk_23A = 0;
 
-    func_8001BD04(&arg0->unk_000, 0);
+    func_8001BD04(&sandshrew->unk_000, 0);
 
-    arg0->unk_290 = 0;
-    arg0->unk_23E = 0;
-    arg0->unk_240 = 0;
+    sandshrew->unk_290 = 0;
+    sandshrew->unk_23E = 0;
+    sandshrew->unk_240 = 0;
 
-    arg0->unk_2AC = D_879060C4[arg1];
+    sandshrew->isHuman = D_879060C4[player];
 }
 
 void func_86F002F4(void) {
     s32 i;
 
-    D_86F0AFF8 = D_86F0B1F0;
+    tempSandshrewPlayer = sandshrewPlayers;
     for (i = 0; i < 4; i++) {
-        func_86F001CC(D_86F0AFF8, i);
-        D_86F0AFF8++;
+        func_86F001CC(tempSandshrewPlayer, i);
+        tempSandshrewPlayer++;
     }
 }
 
@@ -1643,12 +1650,12 @@ void func_86F00370(void) {
     s32 i;
 
     tempControllerPtr = gPlayer1Controller;
-    D_86F0AFF8 = D_86F0B1F0;
+    tempSandshrewPlayer = sandshrewPlayers;
 
     for (i = 0; i < 4; i++) {
-        func_86F0035C(D_86F0AFF8);
+        func_86F0035C(tempSandshrewPlayer);
 
-        D_86F0AFF8++;
+        tempSandshrewPlayer++;
         tempControllerPtr++;
     }
 }
@@ -1689,74 +1696,74 @@ void func_86F0048C(minigameActor* arg0, s32 arg1) {
     }
 }
 
-void func_86F0050C(minigameActor* arg0) {
-    s32 var_v0;
+void sandshrewPlayerInput(minigameActor* sandshrew) {
+    s32 dir;
 
-    var_v0 = 0;
-    if (tempControllerPtr->buttonPressed & 0x20 && (tempControllerPtr->buttonPressed & 0x10)) {
-        var_v0 = 3;
-    } else if (arg0->unk_29A == 1) {
-        if (tempControllerPtr->buttonPressed & 0x20) {
-            var_v0 = 1;
-        } else if (tempControllerPtr->buttonPressed & 0x10) {
-            var_v0 = 2;
+    dir = 0;
+    if (BTN_IS_PRESSED(tempControllerPtr, BTN_L) && BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
+        dir = 3;
+    } else if (sandshrew->unk_29A == 1) {
+        if (BTN_IS_PRESSED(tempControllerPtr, BTN_L)) {
+            dir = 1;
+        } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
+            dir = 2;
         }
-    } else if (tempControllerPtr->buttonPressed & 0x10) {
-        var_v0 = 2;
-    } else if (tempControllerPtr->buttonPressed & 0x20) {
-        var_v0 = 1;
+    } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
+        dir = 2;
+    } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_L)) {
+        dir = 1;
     }
 
-    if (arg0->unk_23E == 0) {
-        if ((arg0->unk_29A == 0) && ((var_v0 == 1) || (var_v0 == 2))) {
-            func_86F0048C(arg0, 1);
-            arg0->unk_29A = var_v0;
+    if (sandshrew->unk_23E == 0) {
+        if ((sandshrew->unk_29A == 0) && ((dir == 1) || (dir == 2))) {
+            func_86F0048C(sandshrew, 1);
+            sandshrew->unk_29A = dir;
         }
-    } else if (var_v0 == 3) {
-        arg0->unk_2B0--;
-        if (arg0->unk_2B0 < 0) {
-            func_86F0048C(arg0, -1);
+    } else if (dir == 3) {
+        sandshrew->unk_2B0--;
+        if (sandshrew->unk_2B0 < 0) {
+            func_86F0048C(sandshrew, -1);
         } else {
-            func_86F00450(arg0, 1.0f);
+            func_86F00450(sandshrew, 1.0f);
         }
-    } else if (var_v0 == 2) {
-        if (arg0->unk_29A == 1) {
-            func_86F0048C(arg0, 2);
-            arg0->unk_29A = 2;
-        } else if (arg0->unk_29A == 2) {
-            arg0->unk_2B0--;
-            if (arg0->unk_2B0 < 0) {
-                func_86F0048C(arg0, -1);
+    } else if (dir == 2) {
+        if (sandshrew->unk_29A == 1) {
+            func_86F0048C(sandshrew, 2);
+            sandshrew->unk_29A = 2;
+        } else if (sandshrew->unk_29A == 2) {
+            sandshrew->unk_2B0--;
+            if (sandshrew->unk_2B0 < 0) {
+                func_86F0048C(sandshrew, -1);
             } else {
-                func_86F00450(arg0, 1.0f);
+                func_86F00450(sandshrew, 1.0f);
             }
         }
-    } else if (var_v0 == 1) {
-        if (arg0->unk_29A == 2) {
-            func_86F0048C(arg0, 2);
-            arg0->unk_29A = 1;
-        } else if (arg0->unk_29A == 1) {
-            arg0->unk_2B0--;
-            if (arg0->unk_2B0 < 0) {
-                func_86F0048C(arg0, -1);
+    } else if (dir == 1) {
+        if (sandshrew->unk_29A == 2) {
+            func_86F0048C(sandshrew, 2);
+            sandshrew->unk_29A = 1;
+        } else if (sandshrew->unk_29A == 1) {
+            sandshrew->unk_2B0--;
+            if (sandshrew->unk_2B0 < 0) {
+                func_86F0048C(sandshrew, -1);
             } else {
-                func_86F00450(arg0, 1.0f);
+                func_86F00450(sandshrew, 1.0f);
             }
         }
-    } else if (arg0->unk_2A0 == 0) {
-        func_86F0048C(arg0, -1);
+    } else if (sandshrew->unk_2A0 == 0) {
+        func_86F0048C(sandshrew, -1);
     } else {
-        func_86F00450(arg0, 1.0f);
+        func_86F00450(sandshrew, 1.0f);
     }
 
-    arg0->unk_2A0--;
-    if (arg0->unk_2A0 < 0) {
-        arg0->unk_2A0 = 0;
+    sandshrew->unk_2A0--;
+    if (sandshrew->unk_2A0 < 0) {
+        sandshrew->unk_2A0 = 0;
     }
-    arg0->unk_274 += arg0->unk_27C;
+    sandshrew->unk_274 += sandshrew->unk_27C;
 }
 
-void func_86F00778(minigameActor* arg0) {
+void sandshrewAIControls(minigameActor* arg0) {
     switch (D_87906046) {
         case 0:
             arg0->unk_27C = (func_81400A78(0xA) * 0.1f) + 3.0f;
@@ -1826,7 +1833,7 @@ void func_86F00920(minigameActor* arg0) {
                     arg0->unk_1C0.y -= temp_fv0;
                 }
 
-                func_86F00188(3, arg0 - D_86F0B1F0);
+                func_86F00188(3, arg0 - sandshrewPlayers);
                 if (func_800174E4(&arg0->unk_000) != 0) {
                     func_80017464(&arg0->unk_000, 0);
                 }
@@ -1836,7 +1843,7 @@ void func_86F00920(minigameActor* arg0) {
                 func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
                 func_80017464(&arg0->unk_000, 0);
                 func_80017454(&arg0->unk_000, 0x10000);
-                func_86F00188(4, arg0 - D_86F0B1F0);
+                func_86F00188(4, arg0 - sandshrewPlayers);
                 arg0->unk_23E++;
             }
             break;
@@ -1859,7 +1866,7 @@ void func_86F00920(minigameActor* arg0) {
 
         case 0x65:
             func_87900594(arg0);
-            func_80015390(&D_86F0B000->unk_000, 0xA, &arg0->unk_1C0);
+            func_80015390(&tempSandshrewWaterGeiser->unk_000, 0xA, &arg0->unk_1C0);
             break;
     }
 }
@@ -1869,26 +1876,26 @@ void func_86F00D04(void) {
 
     tempControllerPtr = gPlayer1Controller;
 
-    D_86F0AFF8 = D_86F0B1F0;
-    D_86F0AFFC = D_86F0BCC0;
-    D_86F0B000 = D_86F0C790;
+    tempSandshrewPlayer = sandshrewPlayers;
+    tempSandshrewHole = sandshrewHoles;
+    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
 
     for (i = 0; i < 4; i++) {
-        if (minigameInputLock != 0) {
-            if (D_86F0AFF8->unk_2AC == 0) {
-                func_86F0050C(D_86F0AFF8);
+        if (minigameInputLock != false) {
+            if (tempSandshrewPlayer->isHuman == 0) {
+                sandshrewPlayerInput(tempSandshrewPlayer);
             } else {
-                func_86F00778(D_86F0AFF8);
+                sandshrewAIControls(tempSandshrewPlayer);
             }
         }
 
-        func_86F00920(D_86F0AFF8);
-        func_87900770(D_86F0AFF8);
-        func_87900808(D_86F0AFF8);
+        func_86F00920(tempSandshrewPlayer);
+        func_87900770(tempSandshrewPlayer);
+        func_87900808(tempSandshrewPlayer);
 
-        D_86F0AFF8++;
-        D_86F0AFFC++;
-        D_86F0B000++;
+        tempSandshrewPlayer++;
+        tempSandshrewHole++;
+        tempSandshrewWaterGeiser++;
 
         tempControllerPtr++;
     }
@@ -1901,9 +1908,9 @@ void func_86F00E34(minigameActor* a0, s32 arg1) {
     arg0->scale.y = 1.0f;
     arg0->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
-    arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
-    arg0->unk_1A8.z = D_86F0B0A0[arg1].z;
+    arg0->unk_1A8.x = sandshrewPositions[arg1].x;
+    arg0->unk_1A8.y = sandshrewPositions[arg1].y;
+    arg0->unk_1A8.z = sandshrewPositions[arg1].z;
 
     arg0->unk_214.x = arg0->unk_21A = arg0->unk_220 = arg0->unk_226 = arg0->unk_22C = 0;
     arg0->unk_214.y = arg0->unk_21C = arg0->unk_222 = arg0->unk_228 = arg0->unk_22E = 0;
@@ -1926,10 +1933,10 @@ void func_86F00E34(minigameActor* a0, s32 arg1) {
 void func_86F00F00(void) {
     s32 i;
 
-    D_86F0AFFC = D_86F0BCC0;
+    tempSandshrewHole = sandshrewHoles;
     for (i = 0; i < 4; i++) {
-        func_86F00E34(D_86F0AFFC, i);
-        D_86F0AFFC++;
+        func_86F00E34(tempSandshrewHole, i);
+        tempSandshrewHole++;
     }
 }
 
@@ -1955,16 +1962,16 @@ void func_86F00F68(minigameActor* arg0, minigameActor* arg1) {
 void func_86F01014(void) {
     s32 i;
 
-    D_86F0AFFC = D_86F0BCC0;
-    D_86F0AFF8 = D_86F0B1F0;
+    tempSandshrewHole = sandshrewHoles;
+    tempSandshrewPlayer = sandshrewPlayers;
 
     for (i = 0; i < 4; i++) {
-        func_86F00F68(D_86F0AFFC, D_86F0AFF8);
-        func_87900770(D_86F0AFFC);
-        func_87900808(D_86F0AFFC);
+        func_86F00F68(tempSandshrewHole, tempSandshrewPlayer);
+        func_87900770(tempSandshrewHole);
+        func_87900808(tempSandshrewHole);
 
-        D_86F0AFFC++;
-        D_86F0AFF8++;
+        tempSandshrewHole++;
+        tempSandshrewPlayer++;
     }
 }
 
@@ -1975,9 +1982,9 @@ void func_86F010B4(minigameActor* a0, s32 arg1) {
     arg0->scale.y = 1.0f;
     arg0->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
-    arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
-    arg0->unk_1A8.z = D_86F0B0A0[arg1].z;
+    arg0->unk_1A8.x = sandshrewPositions[arg1].x;
+    arg0->unk_1A8.y = sandshrewPositions[arg1].y;
+    arg0->unk_1A8.z = sandshrewPositions[arg1].z;
 
     arg0->unk_22C = 0;
     arg0->unk_22E = 0;
@@ -2004,11 +2011,11 @@ void func_86F010B4(minigameActor* a0, s32 arg1) {
 void func_86F01180(void) {
     s32 i;
 
-    D_86F0B000 = D_86F0C790;
+    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
 
     for (i = 0; i < 4; i++) {
-        func_86F010B4(D_86F0B000, i);
-        D_86F0B000++;
+        func_86F010B4(tempSandshrewWaterGeiser, i);
+        tempSandshrewWaterGeiser++;
     }
 }
 
@@ -2020,7 +2027,7 @@ void func_86F011E8(minigameActor* arg0) {
             arg0->unk_23E++;
             break;
         case 2:
-            if (func_80017514(&D_86F0B000->unk_000) != 0) {
+            if (func_80017514(&tempSandshrewWaterGeiser->unk_000) != 0) {
                 func_86F003FC(arg0, 1);
                 arg0->unk_23E++;
             }
@@ -2035,26 +2042,26 @@ void func_86F011E8(minigameActor* arg0) {
 void func_86F012B8(void) {
     s32 i;
 
-    D_86F0B000 = D_86F0C790;
+    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
 
     for (i = 0; i < 4; i++) {
-        func_86F011E8(D_86F0B000);
-        func_87900770(D_86F0B000);
-        func_87900808(D_86F0B000);
+        func_86F011E8(tempSandshrewWaterGeiser);
+        func_87900770(tempSandshrewWaterGeiser);
+        func_87900808(tempSandshrewWaterGeiser);
 
-        D_86F0B000++;
+        tempSandshrewWaterGeiser++;
     }
 }
 
 void func_86F0132C(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    D_87906060 = 0x1600;
-    D_87906062 = 0;
-    D_87906064 = 0x10E;
-    D_87906066 = 0x23;
-    D_87906068 = 0x32;
-    D_8790606A = 0x1900;
+    minigameCameraXRot = 0x1600;
+    minigameCameraYRot = 0;
+    minigameCameraDistance = 0x10E;
+    minigameCameraFOV = 0x23;
+    minigameCameraNear = 0x32;
+    minigameCameraFar = 0x1900;
 
     minigameCameraCoords.x = 0;
     minigameCameraCoords.y = -2;
@@ -2074,7 +2081,7 @@ void func_86F013B8(void) {
             func_81400760(&D_8790607C, 250.0f, 1.0f);
             func_81400760(&D_87906088.y, 34.0f, 1.8f);
             func_81400550(&D_87906076, 0x600, 0xCC);
-            func_81400550(&D_879060C8, 0, 0x30);
+            func_81400550(&minigameHUDTransparency, 0, 0x30);
             break;
     }
 
@@ -2090,11 +2097,11 @@ void func_86F01488(void) {
 }
 
 void func_86F014B8(void) {
-    func_87900854();
-    func_86F002F4();
+    func_87900854(); //	init minigame variables
+    func_86F002F4(); //	init Sandshrews?
     func_86F00F00();
     func_86F01180();
-    func_86F0132C();
+    func_86F0132C(); // fix the camera
 }
 
 s32 func_86F014F8(void) {
@@ -2107,28 +2114,28 @@ s32 func_86F014F8(void) {
     var_s7 = 0;
     var_s4 = -1;
 
-    D_86F0AFF8 = D_86F0B1F0;
+    tempSandshrewPlayer = sandshrewPlayers;
     for (i = 0; i < 4; i++) {
-        if (D_86F0AFF8->unk_190.y < var_fs0) {
-            var_fs0 = D_86F0AFF8->unk_190.y;
+        if (tempSandshrewPlayer->unk_190.y < var_fs0) {
+            var_fs0 = tempSandshrewPlayer->unk_190.y;
         }
-        D_86F0AFF8++;
+        tempSandshrewPlayer++;
     }
 
-    D_86F0AFF8 = D_86F0B1F0;
-    D_86F0B000 = D_86F0C790;
+    tempSandshrewPlayer = sandshrewPlayers;
+    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
     for (i = 0; i < 4; i++) {
-        if (D_86F0AFF8->unk_190.y <= var_fs0) {
-            D_86F0AFF8->unk_2A8 = 1;
+        if (tempSandshrewPlayer->unk_190.y <= var_fs0) {
+            tempSandshrewPlayer->unk_2A8 = 1;
             var_s7 = 1;
             var_s4 += 1;
-            D_86F0AFF8->unk_23E = 0x64;
-            D_86F0B000->unk_23E = 1;
+            tempSandshrewPlayer->unk_23E = 0x64;
+            tempSandshrewWaterGeiser->unk_23E = 1;
             func_86F00188(5, i);
             func_87802F00(i);
         }
-        D_86F0AFF8++;
-        D_86F0B000++;
+        tempSandshrewPlayer++;
+        tempSandshrewWaterGeiser++;
     }
 
     D_87903DD4 = var_s4;
@@ -2138,10 +2145,10 @@ s32 func_86F014F8(void) {
 void func_86F0164C(void) {
     s32 i;
 
-    D_86F0AFF8 = D_86F0B1F0;
+    tempSandshrewPlayer = sandshrewPlayers;
     for (i = 0; i < 4; i++) {
-        D_86F0AFF8->unk_274 = D_86F0AFF8->unk_27C = 0.0f;
-        D_86F0AFF8++;
+        tempSandshrewPlayer->unk_274 = tempSandshrewPlayer->unk_27C = 0.0f;
+        tempSandshrewPlayer++;
     }
 }
 
@@ -2165,12 +2172,12 @@ s32 func_86F016D8(void) {
 
 void func_86F0174C(void) {
     switch (minigameState) {
-        case 1:
+        case 1: //  after pressing start
             minigameInputLockTimer = 0xF;
             minigameState++;
             break;
 
-        case 2:
+        case 2: //  waits for some frames before starting the main countdown
             minigameInputLockTimer--;
             if (minigameInputLockTimer < 0) {
                 func_8780295C(1);
@@ -2178,7 +2185,7 @@ void func_86F0174C(void) {
             }
             break;
 
-        case 3:
+        case 3: //
             if (func_86F016D8() != 0) {
                 minigameInputLock = 1;
                 D_87903DC4 = 0;
@@ -2282,26 +2289,26 @@ void func_86F01C40(void) {
     if (D_87903DC4 == -2) {
         func_8001EBE0(0x10, -2);
         if (D_87903DD0 == 0x18) {
-            func_879033FC(D_86F0B1F0);
+            func_879033FC(sandshrewPlayers);
         }
         func_8001EBE0(4, -2);
     }
 }
 
-void func_86F01D78(void) {
+void fixSandshrewMinigameHUD(void) {
     s32 i;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_879060C8);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, minigameHUDTransparency);
 
     for (i = 0; i < 4; i++) {
-        s16 tmp1 = D_86F0B158[i];
-        s16 tmp2 = D_86F0B160[i];
+        s16 xPos = playerIconsScreenXPos[i];
+        s16 yPos = playerIconsScreenYPos[i];
 
-        if (D_879060C4[i] == 0) {
-            func_87801644(i, tmp1, tmp2, 0.75f);
-        } else {
-            func_87801644(-1 - i, tmp1, tmp2, 0.75f);
+        if (D_879060C4[i] == 0) { //	if ai player
+            func_87801644(i, xPos, yPos, 0.75f);
+        } else { //	if human player
+            func_87801644(-1 - i, xPos, yPos, 0.75f);
         }
     }
 
@@ -2313,7 +2320,7 @@ void func_86F01EB4(void) {
     func_86F01C40();
 
     if (showMinigameHUD != 0) {
-        func_86F01D78();
+        fixSandshrewMinigameHUD();
     }
 }
 
@@ -2382,13 +2389,13 @@ void func_86F0204C(void) {
             }
         }
 
-        if ((minigameDebuggMode == 0) && (showMinigameHUD == 0) && (func_80007604() == 0)) {
-            if (gPlayer1Controller->buttonPressed & 0x1000) {
+        if ((minigameDebuggMode == false) && (showMinigameHUD == false) && (func_80007604() == 0)) {
+            if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
                 D_87903DC4 = 1;
                 minigameState = 1;
-                showMinigameHUD = 1;
+                showMinigameHUD = true;
                 func_86F00188(7, 0);
-            } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
+            } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
                 func_86F00188(8, 0);
                 func_87802EB8(2);
             }
@@ -2396,7 +2403,7 @@ void func_86F0204C(void) {
 
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86F0174C();
+            func_86F0174C(); //	next stept
             func_86F00D04();
             func_86F01014();
             func_86F012B8();
@@ -2452,15 +2459,15 @@ void func_86F02320(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86F0B1F0[i].unk_000);
+        func_8001BB58(&sandshrewPlayers[i].unk_000);
     }
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86F0BCC0[i].unk_000);
+        func_8001BB58(&sandshrewHoles[i].unk_000);
     }
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86F0C790[i].unk_000);
+        func_8001BB58(&sandshrewWaterGeisers[i].unk_000);
     }
 
     func_8001987C();
@@ -2468,28 +2475,29 @@ void func_86F02320(void) {
     temp_s1 = func_80019D18(0xA1);
 
     for (i = 0; i < 4; i++) {
-        D_86F0B1F0[i].unk_23C = 0xA1;
-        D_86F0B1F0[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86F0B1F0[i].unk_000, 0, D_86F0B1F0[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86F0B1F0[i].unk_000, 0);
+        sandshrewPlayers[i].unk_23C = 0xA1;
+        sandshrewPlayers[i].unk_168 = temp_s1;
+        func_8001BC34(&sandshrewPlayers[i].unk_000, 0, sandshrewPlayers[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&sandshrewPlayers[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0x9D);
 
     for (i = 0; i < 4; i++) {
-        D_86F0BCC0[i].unk_23C = 0x9D;
-        D_86F0BCC0[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86F0BCC0[i].unk_000, 0, D_86F0BCC0[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86F0BCC0[i].unk_000, 0);
+        sandshrewHoles[i].unk_23C = 0x9D;
+        sandshrewHoles[i].unk_168 = temp_s1;
+        func_8001BC34(&sandshrewHoles[i].unk_000, 0, sandshrewHoles[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&sandshrewHoles[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0xA2);
 
     for (i = 0; i < 4; i++) {
-        D_86F0C790[i].unk_23C = 0xA2;
-        D_86F0C790[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86F0C790[i].unk_000, 0, D_86F0C790[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86F0C790[i].unk_000, 0);
+        sandshrewWaterGeisers[i].unk_23C = 0xA2;
+        sandshrewWaterGeisers[i].unk_168 = temp_s1;
+        func_8001BC34(&sandshrewWaterGeisers[i].unk_000, 0, sandshrewWaterGeisers[i].unk_23C,
+                      temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&sandshrewWaterGeisers[i].unk_000, 0);
     }
 }
 
@@ -2514,12 +2522,12 @@ s32 func_86F02520(s32 arg0, UNUSED s32 arg1) {
 
     func_86F02320();
     func_80007678(sp24);
-    func_86F02004();
-    func_86F0204C();
+    func_86F02004(); //	init assets ?
+    func_86F0204C(); //	tutorial screen ?
     func_86F02230();
     func_800076C0();
-    func_8001E9CC();
-    func_80005EAC();
+    func_8001E9CC(); //	main_pool_try_free(D_800AC870);
+    func_80005EAC(); //	main_pool_try_free(D_800A7428.unk4); main_pool_try_free(D_800A7428.unk0);
 
     main_pool_pop_state('MINI');
 

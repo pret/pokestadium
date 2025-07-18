@@ -37,8 +37,8 @@ typedef struct unk_D_86E04BFC {
     /* 0x16 */ s16 unk_16;
 } unk_D_86E04BFC; // size = 0x18
 
-static minigameActor D_86E04D60[4];
-static minigameActor D_86E05830[20];
+static minigameActor metadodPlayers[4];
+static minigameActor D_86E05830[20]; //	rocks?
 static s16 D_86E08E40;
 static unk_D_800AC870* D_86E08E44;
 
@@ -455,7 +455,7 @@ static u32 D_86E04AE0[] = {
 static s16 D_86E04B20 = 0;
 static s16 D_86E04B24 = 1;
 static s16 D_86E04B28 = 0;
-static minigameActor* D_86E04B2C = D_86E04D60;
+static minigameActor* tempMetadodPlayer = metadodPlayers;
 static minigameActor* D_86E04B30 = D_86E05830;
 static u32 D_86E04B34[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0xFFE20032, 0x00000000,  0x00000000,
@@ -595,16 +595,16 @@ void func_86E001E4(minigameActor* arg0, s32 arg1) {
     func_80017788(&arg0->unk_000);
     arg0->unk_000.unk_01C = 0;
     func_87900770(arg0);
-    arg0->unk_2AC = D_879060C4[arg1];
+    arg0->isHuman = D_879060C4[arg1];
 }
 
 void func_86E002E4(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
     for (i = 0; i < 4; i++) {
-        func_86E001E4(D_86E04B2C, i);
-        D_86E04B2C++;
+        func_86E001E4(tempMetadodPlayer, i);
+        tempMetadodPlayer++;
     }
 }
 
@@ -619,8 +619,8 @@ void func_86E0036C(minigameActor* arg0) {
         arg0->unk_29A--;
     }
 
-    if ((tempControllerPtr->buttonDown & 0x8000) && (arg0->unk_23E == 0) && (arg0->unk_240 == 0) && (arg0->unk_2AA == 0) &&
-        (arg0->unk_29A == 0)) {
+    if ((tempControllerPtr->buttonDown & 0x8000) && (arg0->unk_23E == 0) && (arg0->unk_240 == 0) &&
+        (arg0->unk_2AA == 0) && (arg0->unk_29A == 0)) {
         arg0->unk_23E = 1;
     }
 
@@ -648,7 +648,7 @@ void func_86E0036C(minigameActor* arg0) {
 }
 
 void func_86E004FC(minigameActor* arg0) {
-    if (arg0->unk_2AC != 0) {
+    if (arg0->isHuman != 0) {
         arg0->unk_244 = 0;
         arg0->unk_242 = 0;
     }
@@ -897,43 +897,43 @@ void func_86E00AF4(void) {
     s32 i;
 
     tempControllerPtr = gPlayer1Controller;
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
 
     for (i = 0; i < 4; i++) {
-        D_86E04B2C->unk_000.unk_01C = 0;
-        D_86E04B2C->unk_272 = 0;
+        tempMetadodPlayer->unk_000.unk_01C = 0;
+        tempMetadodPlayer->unk_272 = 0;
 
         if (minigameInputLock != 0) {
-            if (D_86E04B2C->unk_2AC == 0) {
-                func_86E0036C(D_86E04B2C);
+            if (tempMetadodPlayer->isHuman == 0) {
+                func_86E0036C(tempMetadodPlayer);
             } else {
-                func_86E00924(D_86E04B2C, i);
+                func_86E00924(tempMetadodPlayer, i);
             }
         }
 
-        func_87900770(D_86E04B2C);
-        func_87900808(D_86E04B2C);
+        func_87900770(tempMetadodPlayer);
+        func_87900808(tempMetadodPlayer);
 
-        D_86E04B2C++;
+        tempMetadodPlayer++;
         tempControllerPtr++;
     }
 }
 
-s32 func_86E00BDC(void) {
-    return func_879001A4(D_86E04B30, &D_86E04D60[D_86E04B30->unk_266]);
+s32 metapodRockCollisionCheck_void(void) {
+    return metapodRockCollisionCheck(D_86E04B30, &metadodPlayers[D_86E04B30->unk_266]);
 }
 
 s32 func_86E00C34(s32 arg0) {
     s32 sp1C = 0;
 
-    if (func_86E00BDC() != 0) {
-        D_86E04B2C->unk_260 = 1;
-        if (D_86E04B2C->unk_272 != 0) {
+    if (metapodRockCollisionCheck_void() != 0) {
+        tempMetadodPlayer->unk_260 = 1;
+        if (tempMetadodPlayer->unk_272 != 0) {
             func_86E001A0(7, arg0);
             sp1C = 1;
         } else {
-            D_86E04B2C->unk_240 = 1;
-            func_86E004FC(D_86E04B2C);
+            tempMetadodPlayer->unk_240 = 1;
+            func_86E004FC(tempMetadodPlayer);
             sp1C = 2;
         }
     }
@@ -942,16 +942,16 @@ s32 func_86E00C34(s32 arg0) {
 
 void func_86E00CAC(minigameActor* arg0, s32 arg1) {
     s32 i;
-    s32 temp_v0;
+    s32 colliding;
 
     D_86E04B30 = D_86E05830;
 
     for (i = 0; i < 20; i++) {
         if ((D_86E04B30->unk_270 != 0) && (arg1 == D_86E04B30->unk_266) && (D_86E04B30->unk_260 == 0)) {
-            temp_v0 = func_86E00C34(arg1);
-            if (temp_v0 != 0) {
+            colliding = func_86E00C34(arg1);
+            if (colliding != 0) {
                 D_86E04B30->unk_260 = 1;
-                if (temp_v0 == 1) {
+                if (colliding == 1) {
                     D_86E04B30->unk_272 = 1;
                 } else {
                     D_86E04B30->unk_272 = 0;
@@ -964,39 +964,39 @@ void func_86E00CAC(minigameActor* arg0, s32 arg1) {
 }
 
 void func_86E00D78(minigameActor* arg0, s32 arg1) {
-    if ((D_86E04B2C->unk_25A > 0) && (arg0->unk_2A8 == 0)) {
-        if (D_86E04B2C->unk_25A >= 0x28) {
-            D_86E04B2C->unk_258 -= D_86E04B2C->unk_25A;
-            D_86E04B2C->unk_25A = 0;
+    if ((tempMetadodPlayer->unk_25A > 0) && (arg0->unk_2A8 == 0)) {
+        if (tempMetadodPlayer->unk_25A >= 0x28) {
+            tempMetadodPlayer->unk_258 -= tempMetadodPlayer->unk_25A;
+            tempMetadodPlayer->unk_25A = 0;
         } else {
-            D_86E04B2C->unk_25A--;
-            D_86E04B2C->unk_258--;
+            tempMetadodPlayer->unk_25A--;
+            tempMetadodPlayer->unk_258--;
         }
 
-        if (D_86E04B2C->unk_258 < 0) {
-            D_86E04B2C->unk_258 = 0;
+        if (tempMetadodPlayer->unk_258 < 0) {
+            tempMetadodPlayer->unk_258 = 0;
         }
     }
 
-    if (D_86E04B2C->unk_258 == 0) {
-        if (D_86E04B2C->unk_2A4 == 0) {
+    if (tempMetadodPlayer->unk_258 == 0) {
+        if (tempMetadodPlayer->unk_2A4 == 0) {
             func_86E001A0(9, arg1);
-            func_879002B8(D_86E04B2C, 3, 1, 0);
-            D_86E04B2C->unk_2A4 = 1;
-            D_86E04B2C->unk_2AA = 1;
+            func_879002B8(tempMetadodPlayer, 3, 1, 0);
+            tempMetadodPlayer->unk_2A4 = 1;
+            tempMetadodPlayer->unk_2AA = 1;
         }
     } else {
-        switch (D_86E04B2C->unk_240) {
+        switch (tempMetadodPlayer->unk_240) {
             case 1:
-                D_86E04B2C->unk_25A += 0x1E;
-                func_879002B8(D_86E04B2C, 2, 0, 1);
+                tempMetadodPlayer->unk_25A += 0x1E;
+                func_879002B8(tempMetadodPlayer, 2, 0, 1);
                 func_86E001A0(8, arg1);
-                D_86E04B2C->unk_240++;
+                tempMetadodPlayer->unk_240++;
                 break;
 
             case 2:
-                if (D_86E04B2C->unk_248 == 0) {
-                    D_86E04B2C->unk_240 = 0;
+                if (tempMetadodPlayer->unk_248 == 0) {
+                    tempMetadodPlayer->unk_240 = 0;
                 }
                 break;
         }
@@ -1006,37 +1006,37 @@ void func_86E00D78(minigameActor* arg0, s32 arg1) {
 void func_86E00ED0(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
 
     for (i = 0; i < 4; i++) {
         if (minigameInputLock != 0) {
-            func_86E00CAC(D_86E04B2C, i);
-            func_86E00D78(D_86E04B2C, i);
+            func_86E00CAC(tempMetadodPlayer, i);
+            func_86E00D78(tempMetadodPlayer, i);
         }
-        D_86E04B2C++;
+        tempMetadodPlayer++;
     }
 }
 
 void func_86E00F60(void) {
-    func_879003A0(D_86E04B2C);
+    func_879003A0(tempMetadodPlayer);
 
-    D_86E04B2C->unk_000.unk_024.x = D_86E04B2C->unk_190.x;
-    D_86E04B2C->unk_000.unk_024.y = D_86E04B2C->unk_190.y;
-    D_86E04B2C->unk_000.unk_024.z = D_86E04B2C->unk_190.z;
+    tempMetadodPlayer->unk_000.unk_024.x = tempMetadodPlayer->unk_190.x;
+    tempMetadodPlayer->unk_000.unk_024.y = tempMetadodPlayer->unk_190.y;
+    tempMetadodPlayer->unk_000.unk_024.z = tempMetadodPlayer->unk_190.z;
 
-    D_86E04B2C->unk_000.unk_01E.x = D_86E04B2C->unk_214.x;
-    D_86E04B2C->unk_000.unk_01E.y = D_86E04B2C->unk_214.y;
-    D_86E04B2C->unk_000.unk_01E.z = D_86E04B2C->unk_214.z;
+    tempMetadodPlayer->unk_000.unk_01E.x = tempMetadodPlayer->unk_214.x;
+    tempMetadodPlayer->unk_000.unk_01E.y = tempMetadodPlayer->unk_214.y;
+    tempMetadodPlayer->unk_000.unk_01E.z = tempMetadodPlayer->unk_214.z;
 }
 
 void func_86E00FD8(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
 
     for (i = 0; i < 4; i++) {
         func_86E00F60();
-        D_86E04B2C++;
+        tempMetadodPlayer++;
     }
 }
 
@@ -1108,7 +1108,7 @@ void func_86E01188(void) {
             break;
     }
 
-    ptr = D_86E04D60;
+    ptr = metadodPlayers;
     for (i = 0; i < 4; i++, ptr++) {
         if (ptr->unk_2AA == 0) {
             var_s1 = 0;
@@ -1132,14 +1132,14 @@ void func_86E01310(minigameActor* arg0) {
     s16 temp_a1 = arg0->unk_266;
 
     arg0->unk_29E = temp_v1 - 1;
-    arg0->unk_1A8.y += D_86E04BFC[temp_a1].unk_00.y + D_86E04D60[temp_a1].unk_28C;
+    arg0->unk_1A8.y += D_86E04BFC[temp_a1].unk_00.y + metadodPlayers[temp_a1].unk_28C;
 
     arg0->unk_210 = 0.7f;
     arg0->unk_1F8 = 0.0f;
     arg0->unk_1FC = temp_v1 * arg0->unk_210 * 0.5f;
 
     arg0->unk_200 =
-        ((D_86E04D60[temp_a1].unk_1A8.z + (D_86E04D60[temp_a1].unk_288 * 0.5f)) - arg0->unk_1A8.z) / temp_v1;
+        ((metadodPlayers[temp_a1].unk_1A8.z + (metadodPlayers[temp_a1].unk_288 * 0.5f)) - arg0->unk_1A8.z) / temp_v1;
     arg0->unk_270 = 1;
 
     arg0->unk_000.unk_000.unk_01 |= 1;
@@ -1156,7 +1156,7 @@ void func_86E01428(minigameActor* arg0) {
     s16 temp_a1 = arg0->unk_266;
     Vec3f sp3C;
 
-    if ((D_87903DA8 != 0) || (D_86E04D60[temp_a1].unk_258 == 0)) {
+    if ((D_87903DA8 != 0) || (metadodPlayers[temp_a1].unk_258 == 0)) {
         switch (arg0->unk_23E) {
             case 1:
                 arg0->unk_23E = 0;
@@ -1290,12 +1290,12 @@ void func_86E01898(void) {
 void func_86E01904(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    D_87906060 = -0x200;
-    D_87906062 = 0;
-    D_87906064 = 0xBE;
-    D_87906066 = 0x23;
-    D_87906068 = 0x32;
-    D_8790606A = 0x1900;
+    minigameCameraXRot = -0x200;
+    minigameCameraYRot = 0;
+    minigameCameraDistance = 0xBE;
+    minigameCameraFOV = 0x23;
+    minigameCameraNear = 0x32;
+    minigameCameraFar = 0x1900;
 
     minigameCameraCoords.x = 0;
     minigameCameraCoords.y = 0x2A;
@@ -1366,33 +1366,33 @@ s32 func_86E01B08(void) {
     s32 var_t3 = 0;
     s32 var_v0_5;
 
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
 
     for (i = 0; i < 4; i++) {
-        if (D_86E04B2C->unk_2A6 < var_a3) {
-            var_a3 = D_86E04B2C->unk_2A6;
+        if (tempMetadodPlayer->unk_2A6 < var_a3) {
+            var_a3 = tempMetadodPlayer->unk_2A6;
         }
 
-        if (D_86E04B2C->unk_2A4 == 1) {
+        if (tempMetadodPlayer->unk_2A4 == 1) {
             var_t1++;
         }
 
-        if (D_86E04B2C->unk_2A4 == 2) {
+        if (tempMetadodPlayer->unk_2A4 == 2) {
             var_t2++;
         }
 
-        D_86E04B2C++;
+        tempMetadodPlayer++;
     }
 
     if (var_t1 != 0) {
         var_a3 -= var_t1;
-        D_86E04B2C = D_86E04D60;
+        tempMetadodPlayer = metadodPlayers;
         for (i = 0; i < 4; i++) {
-            if (D_86E04B2C->unk_2A4 == 1) {
-                D_86E04B2C->unk_2A4 = 2;
-                D_86E04B2C->unk_2A6 = var_a3;
+            if (tempMetadodPlayer->unk_2A4 == 1) {
+                tempMetadodPlayer->unk_2A4 = 2;
+                tempMetadodPlayer->unk_2A6 = var_a3;
             }
-            D_86E04B2C++;
+            tempMetadodPlayer++;
         }
     }
 
@@ -1406,40 +1406,40 @@ s32 func_86E01B08(void) {
         var_v0_5 = 3;
     }
 
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
 
     switch (var_v0_5) {
         case 1:
             for (i = 0; i < 4; i++) {
-                if (D_86E04B2C->unk_2A6 == 5) {
-                    D_86E04B2C->unk_2A8 = 1;
-                    D_86E04B2C->unk_2AA = 1;
-                    D_86E04B2C->unk_2A6 = 1;
+                if (tempMetadodPlayer->unk_2A6 == 5) {
+                    tempMetadodPlayer->unk_2A8 = 1;
+                    tempMetadodPlayer->unk_2AA = 1;
+                    tempMetadodPlayer->unk_2A6 = 1;
                     var_t3 = 1;
                     func_87802F00(i);
                     break;
                 }
-                D_86E04B2C++;
+                tempMetadodPlayer++;
             }
             break;
 
         case 2:
             var_t3 = 1;
             for (i = 0; i < 4; i++) {
-                D_86E04B2C->unk_2AA = 1;
-                D_86E04B2C->unk_2A6 = 0;
-                D_86E04B2C++;
+                tempMetadodPlayer->unk_2AA = 1;
+                tempMetadodPlayer->unk_2A6 = 0;
+                tempMetadodPlayer++;
             }
             break;
 
         case 3:
             for (i = 0; i < 4; i++) {
-                if (D_86E04B2C->unk_2A6 == 1) {
-                    D_86E04B2C->unk_2AA = 1;
-                    D_86E04B2C->unk_2A6 = 5;
+                if (tempMetadodPlayer->unk_2A6 == 1) {
+                    tempMetadodPlayer->unk_2AA = 1;
+                    tempMetadodPlayer->unk_2A6 = 5;
                     var_t3 = 1;
                 }
-                D_86E04B2C++;
+                tempMetadodPlayer++;
             }
             break;
     }
@@ -1455,7 +1455,7 @@ s32 func_86E01E34(void) {
     s32 var_s3 = 0;
     minigameActor* var_s0;
 
-    for (i = 0, var_s0 = D_86E04D60; i < 4; i++, var_s0++) {
+    for (i = 0, var_s0 = metadodPlayers; i < 4; i++, var_s0++) {
         if (var_s0->unk_2A8 != 0) {
             func_879002B8(var_s0, 4, -1, 0);
             var_s3 = 1;
@@ -1468,11 +1468,11 @@ s32 func_86E01E34(void) {
 void func_86E01EB0(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    tempMetadodPlayer = metadodPlayers;
     for (i = 0; i < 4; i++) {
-        if (D_86E04B2C) {}
+        if (tempMetadodPlayer) {}
 
-        D_86E04B2C++;
+        tempMetadodPlayer++;
     }
 }
 
@@ -1578,22 +1578,22 @@ void func_86E02170(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, D_86E04D60[i].unk_258, D_86E04D60[i].unk_25C);
+        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, metadodPlayers[i].unk_258, metadodPlayers[i].unk_25C);
     }
 }
 
-void func_86E021D8(void) {
+void fixMetapodMinigameHUD(void) {
     s32 i;
     s32 tmp;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_879060C8);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, minigameHUDTransparency);
 
     for (i = 0, tmp = 0x26; i < 4; tmp += 0x4A, i++) {
         if (D_879060C4[i] == 0) {
-            func_87801644(i, tmp, 0xD6, 0.7f);
+            func_87801644(i, tmp, 0xD6, 0.7f); //  draw player icon
         } else {
-            func_87801644(-1 - i, tmp, 0xD6, 0.7f);
+            func_87801644(-1 - i, tmp, 0xD6, 0.7f); //  draw player icon
         }
     }
 
@@ -1682,7 +1682,7 @@ void func_86E027FC(s32 arg0) {
 
     if (showMinigameHUD != 0) {
         func_86E02170();
-        func_86E021D8();
+        fixMetapodMinigameHUD();
     }
 }
 
@@ -1735,10 +1735,10 @@ void func_86E02974(void) {
 }
 
 void func_86E02A28(void) {
-    minigameActor* ptr = D_86E04D60;
+    minigameActor* metapod = metadodPlayers;
 
-    if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (ptr->unk_23E == 0)) {
-        ptr->unk_29A = 4;
+    if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (metapod->unk_23E == 0)) {
+        metapod->unk_29A = 4;
     }
 }
 
@@ -1795,8 +1795,8 @@ void func_86E02BB0(void) {
     }
 
     for (i = 0; i < 30; i++) {
-        func_87900528();
-        func_86E02880(2);
+        func_87900528();  // input reading
+        func_86E02880(2); // display text ?
     }
 
     while (func_800484E0() != 0) {}
@@ -1821,7 +1821,7 @@ void func_86E02C5C(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86E04D60[i].unk_000);
+        func_8001BB58(&metadodPlayers[i].unk_000);
     }
 
     for (i = 0; i < 20; i++) {
@@ -1836,15 +1836,16 @@ void func_86E02C5C(void) {
             var_v1 = func_878001E8(2);
         }
 
-        D_86E04D60[i].unk_23C = D_86E04CB4[var_v1][0];
-        D_86E04D60[i].unk_168 = func_80019D18(D_86E04D60[i].unk_23C);
-        D_86E04D60[i].unk_288 = D_86E04CB4[var_v1][1];
-        D_86E04D60[i].unk_28C = D_86E04CB4[var_v1][2];
+        metadodPlayers[i].unk_23C = D_86E04CB4[var_v1][0];
+        metadodPlayers[i].unk_168 = func_80019D18(metadodPlayers[i].unk_23C);
+        metadodPlayers[i].unk_288 = D_86E04CB4[var_v1][1];
+        metadodPlayers[i].unk_28C = D_86E04CB4[var_v1][2];
 
-        func_8001BC34(&D_86E04D60[i].unk_000, 0, D_86E04D60[i].unk_23C, D_86E04D60[i].unk_168->unk_08->unk_00[0]);
-        func_8001BD04(&D_86E04D60[i].unk_000, 0);
+        func_8001BC34(&metadodPlayers[i].unk_000, 0, metadodPlayers[i].unk_23C,
+                      metadodPlayers[i].unk_168->unk_08->unk_00[0]);
+        func_8001BD04(&metadodPlayers[i].unk_000, 0);
 
-        if (D_86E04D60) {}
+        if (metadodPlayers) {}
     }
 
     temp_s1_2 = func_80019D18(0x9C);
@@ -1880,12 +1881,12 @@ s32 func_86E02E40(s32 arg0, s32 arg1) {
 
     func_86E02C5C();
     func_80007678(sp24);
-    func_86E02924();
-    func_86E02A64();
+    func_86E02924(); //	init assets ?
+    func_86E02A64(); //	tutorial screen ?
     func_86E02BB0();
     func_800076C0();
-    func_8001E9CC();
-    func_80005EAC();
+    func_8001E9CC(); //	main_pool_try_free(D_800AC870);
+    func_80005EAC(); //	main_pool_try_free(D_800A7428.unk4); main_pool_try_free(D_800A7428.unk0);
 
     main_pool_pop_state('MINI');
 

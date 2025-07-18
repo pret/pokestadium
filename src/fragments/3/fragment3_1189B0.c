@@ -68,8 +68,7 @@ s32 func_879000C4(minigameActor* arg0, minigameActor* arg1) {
     return ret;
 }
 
-// Collition detection on metapod's minigame
-s32 func_879001A4(minigameActor* arg0, minigameActor* arg1) {
+s32 metapodRockCollisionCheck(minigameActor* fallingRock, minigameActor* metapod) {
     f32 totalX;
     f32 totalY;
     f32 totalZ;
@@ -78,13 +77,13 @@ s32 func_879001A4(minigameActor* arg0, minigameActor* arg1) {
     f32 tmp;
     s32 ret;
 
-    totalX = arg1->unk_19C.x - arg0->unk_19C.x;
-    totalY = arg1->unk_19C.y - arg0->unk_19C.y;
-    totalZ = arg1->unk_19C.z - arg0->unk_19C.z;
+    totalX = metapod->unk_19C.x - fallingRock->unk_19C.x;
+    totalY = metapod->unk_19C.y - fallingRock->unk_19C.y;
+    totalZ = metapod->unk_19C.z - fallingRock->unk_19C.z;
     ret = 0;
 
-    var_fa1 = (arg0->unk_288 * arg0->scale.y) + (arg1->unk_288 * arg1->scale.y);          //  bottom
-    var_fs0 = ((arg0->unk_28C * arg0->scale.y) + (arg1->unk_28C * arg1->scale.y)) / 2.0f; //  top
+    var_fa1 = (fallingRock->unk_288 * fallingRock->scale.y) + (metapod->unk_288 * metapod->scale.y);
+    var_fs0 = ((fallingRock->unk_28C * fallingRock->scale.y) + (metapod->unk_28C * metapod->scale.y)) / 2.0f;
 
     totalX = ABS(totalX);
     totalY = ABS(totalY);
@@ -185,7 +184,7 @@ void func_879004F8(unk_D_86002F58_004_000* arg0) {
 void func_87900528(void) {
     Cont_StartReadInputs();
     Cont_ReadInputs();
-    func_8001F730();        // nothing
+    func_8001F730(); // nothing
 }
 
 void func_87900558(void) {
@@ -329,29 +328,29 @@ void func_87900854(void) {
     D_879060C4[2] = ptr[2];
     D_879060C4[3] = ptr[3];
 
-    D_879060C8 = 0xFF;
+    minigameHUDTransparency = 0xFF;
 }
 
 void func_87900920(void) {
-    D_8790607C = D_87906064;
-    D_87906080 = D_87906066;
+    D_8790607C = minigameCameraDistance;
+    D_87906080 = minigameCameraFOV;
 
     D_87906088.x = minigameCameraCoords.x;
     D_87906088.y = minigameCameraCoords.y;
     D_87906088.z = minigameCameraCoords.z;
 
-    D_87906076 = D_87906060;
-    D_87906078 = D_87906062;
+    D_87906076 = minigameCameraXRot;
+    D_87906078 = minigameCameraYRot;
 }
 
 void func_879009B4(void) {
-    D_87906064 = D_8790607C;
-    D_87906066 = D_87906080;
+    minigameCameraDistance = D_8790607C;
+    minigameCameraFOV = D_87906080;
 
     minigameCameraCoords.x = D_87906088.x;
     minigameCameraCoords.y = D_87906088.y;
     minigameCameraCoords.z = D_87906088.z;
 
-    D_87906060 = D_87906076;
-    D_87906062 = D_87906078;
+    minigameCameraXRot = D_87906076;
+    minigameCameraYRot = D_87906078;
 }
