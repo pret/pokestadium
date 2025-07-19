@@ -94,18 +94,18 @@ Gfx* func_87903920(Gfx* arg0, arg1_func_87903D64_014* arg1) {
     unk_D_86002F34_000_014_010* sp20;
 
     s32 temp_a2;
-    s32 temp_t1;
-    s32 temp_t1_2;
-    s32 temp_t2;
-    s32 temp_t2_2;
-    s32 temp_t2_3;
-    s32 temp_t4;
+    UNUSED s32 temp_t1;
+    UNUSED s32 temp_t1_2;
+    UNUSED s32 temp_t2;
+    UNUSED s32 temp_t2_2;
+    UNUSED s32 temp_t2_3;
+    UNUSED s32 temp_t4;
     s32 var_a0;
     s32 var_v1;
     u32 temp_a3;
     u32 var_v0;
-    u8* temp_t1_3;
-    u8* temp_v1;
+    UNUSED u8* temp_t1_3;
+    UNUSED u8* temp_v1;
     unk_D_86002F34_000_014_004* var_a1;
     unk_D_86002F34_000_014_004* var_a2;
     unk_D_86002F34_000_014_010* var_a3;

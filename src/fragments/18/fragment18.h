@@ -50,7 +50,7 @@ void func_86C02A1C(minigameActor* arg0);
 void func_86C02B78(minigameActor* arg0, s32 arg1);
 void func_86C02C28(void);
 void func_86C03008(void);
-void func_86C03080(void);
+void ekansMinigameInitObjects(void);
 s32 func_86C030EC(void);
 void func_86C03128(void);
 s32 func_86C031E4(void);
@@ -61,7 +61,7 @@ void func_86C03500(void);
 void func_86C035E0(void);
 void func_86C03608(void);
 void func_86C03AB8(void);
-void func_86C03BE8(void);
+void drawEkansMinigameCountdown(void);
 void fixSkansMinigameHUD(void);
 void func_86C03E4C(void);
 void func_86C03E8C(s32 arg0);
@@ -71,6 +71,6 @@ void initEkansMinigameAssets(void);
 void showTutorialScreenEkansMinigame(void);
 void ekansMinigameUpdate(void);
 void func_86C044B4(void);
-s32 startSkansMinigame(s32 arg0, UNUSED s32 arg1);
+s32 ekansMinigameLoad(s32 arg0, UNUSED s32 arg1);
 
 #endif // _FRAGMENT18_H_

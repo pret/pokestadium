@@ -42,7 +42,7 @@ s32 pad_D_879060B4;
 s32 pad_D_879060B8;
 Controller* tempControllerPtr;
 s16 D_879060C0;
-s16 D_879060C2;
+s16 ekansMinigameCountdown;
 s8 D_879060C4[4];
 s16 minigameHUDTransparency;
 s16 D_879060CA;

@@ -63,7 +63,7 @@ static unk_D_86C12008 D_86C12008[3];
 static s32 D_86C12034;
 static s16 D_86C12038;
 static s16 D_86C12040[9][4];
-static s16 D_86C12088;
+static s16 ekansMinigameCountdownStarted;
 
 static u32 D_86C04840[] = {
     0x07070707, 0x07070707, 0x07070707, 0x07070707, 0x07070708, 0x08080808, 0x08080808, 0x08080808, 0x08080808,
@@ -1765,7 +1765,7 @@ void initEkans(minigameActor* ekans, s16 player) {
     ekans->isHuman = D_879060C4[player];
     ekans->unk_266 = -1;
 
-    if (D_86C12088 == 0) {
+    if (ekansMinigameCountdownStarted == 0) {
         ekans->unk_2AE = D_86C0E084[D_87906046][player];
     } else {
         ekans->unk_2AE = D_86C0E0A4[player];
@@ -2804,25 +2804,25 @@ void func_86C02A1C(minigameActor* arg0) {
     if (D_86C12038 != 0) {
         D_86C12038 = 0;
         sp18 = 1;
-    } else if (D_86C12088 == 0) {
-        if ((D_879060C2 < 0xA) && (D_86C12034 == 0)) {
+    } else if (ekansMinigameCountdownStarted == 0) {
+        if ((ekansMinigameCountdown < 0xA) && (D_86C12034 == 0)) {
             sp18 = 1;
         } else {
             sp18 = 0;
             temp_v0 = func_878001E8(0x64);
-            if ((D_879060C2 < 0xA) && (temp_v0 < 0x14)) {
+            if ((ekansMinigameCountdown < 0xA) && (temp_v0 < 0x14)) {
                 sp18 = 1;
-            } else if ((D_879060C2 < 0x14) && (temp_v0 < 0xF)) {
+            } else if ((ekansMinigameCountdown < 0x14) && (temp_v0 < 0xF)) {
                 sp18 = 1;
-            } else if ((D_879060C2 < 0x1E) && (temp_v0 < 0xA)) {
+            } else if ((ekansMinigameCountdown < 0x1E) && (temp_v0 < 0xA)) {
                 sp18 = 1;
-            } else if ((D_879060C2 < 0x28) && (temp_v0 < 5)) {
+            } else if ((ekansMinigameCountdown < 0x28) && (temp_v0 < 5)) {
                 sp18 = 1;
             }
         }
     } else {
         temp_v0 = func_878001E8(0x64);
-        if ((D_879060C2 < 0x2D) && (temp_v0 < 5)) {
+        if ((ekansMinigameCountdown < 0x2D) && (temp_v0 < 5)) {
             sp18 = 1;
         }
     }
@@ -2971,14 +2971,14 @@ void func_86C03008(void) {
 }
 
 //	init game objects
-void func_86C03080(void) {
-    func_87900854();
+void ekansMinigameInitObjects(void) {
+    func_87900854(); //  minigame variables
     initEkanses();
     initDigletts();
-    func_86C03500();
+    func_86C03500(); //  camera
 
-    D_879060C2 = 0x3C;
-    D_879060C0 = D_879060C2 * 0x1E;
+    ekansMinigameCountdown = 0x3C;
+    D_879060C0 = ekansMinigameCountdown * 0x1E;
     D_86C12038 = 0;
     D_86C12034 = 0;
 }
@@ -3044,18 +3044,18 @@ s32 func_86C03258(void) {
 
     D_879060C0--;
     if (D_879060C0 == 0) {
-        D_879060C2 = 0;
+        ekansMinigameCountdown = 0;
         func_86C00368(0xB, 0);
         sp1C = 1;
     } else {
-        D_879060C2 = (D_879060C0 / 30) + 1;
+        ekansMinigameCountdown = (D_879060C0 / 30) + 1;
         if ((D_879060C0 % 30) == 0) {
-            if (D_879060C2 == 0xB) {
+            if (ekansMinigameCountdown == 0xB) {
                 sp1C = 0;
                 func_86C00368(0xC, 0);
             }
 
-            if (D_879060C2 < 7) {
+            if (ekansMinigameCountdown < 7) {
                 sp1C = 0;
                 func_86C00368(0xA, 0);
             }
@@ -3235,11 +3235,11 @@ void func_86C03AB8(void) {
     }
 }
 
-void func_86C03BE8(void) {
-    func_8001F324(0xFF, 0xC8, 0x32, 0xFF);
-    func_8001EBE0(8, 0);
-    func_8001F1E8(0x80, 0x14, func_8002D7C0(NULL, 0, D_87806330, 0x5D));
-    func_8001F1E8(0xAA, 0x14, "%d", D_879060C2);
+void drawEkansMinigameCountdown(void) {
+    func_8001F324(0xFF, 0xC8, 0x32, 0xFF);                               // set color
+    func_8001EBE0(8, 0);                                                 // set style
+    func_8001F1E8(0x80, 0x14, func_8002D7C0(NULL, 0, D_87806330, 0x5D)); // TIME
+    func_8001F1E8(0xAA, 0x14, "%d", ekansMinigameCountdown);
 }
 
 void fixSkansMinigameHUD(void) {
@@ -3247,22 +3247,22 @@ void fixSkansMinigameHUD(void) {
     s32 i;
 
     func_8001F3F4();
-    if (D_86C12088 == 0) {
-        func_86C03BE8();
+    if (ekansMinigameCountdownStarted == 0) {
+        drawEkansMinigameCountdown();
     }
     func_8001F444();
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, minigameHUDTransparency);
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted != 0) {
         func_878021B4(0x1E, 0x17);
     }
 
     for (i = 0; i < 4; i++, var_s4++) {
         s16 tmp = playerGUIScoreXPositions[i];
 
-        if (D_86C12088 == 0) {
+        if (ekansMinigameCountdownStarted == 0) {
             if (var_s4->isHuman != 0) {
                 func_87801644(-1 - i, tmp, 0xCC, 0.75f);
             } else {
@@ -3291,7 +3291,7 @@ void func_86C03E8C(s32 arg0) {
         func_86C03E4C();
     }
 
-    if (D_86C12088 == 0) {
+    if (ekansMinigameCountdownStarted == 0) {
         func_87804FD4();
     }
 }
@@ -3347,7 +3347,7 @@ void func_86C040B4(s32 arg0) {
         showDebuggJoystickInfo();
     }
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted != 0) {
         func_8780005C();
     }
 
@@ -3355,13 +3355,13 @@ void func_86C040B4(s32 arg0) {
 }
 
 void initEkansMinigameAssets(void) {
-    func_86C03080(); //	init game objects
-    func_87900558(); //	change a global something
-    func_87901620();
+    ekansMinigameInitObjects(); //	init game objects
+    func_87900558();            //	showMinigameHUD = 0
+    func_87901620();            //	memory
     func_800077B4(0xA);
     func_80006C6C(0x10);
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted != 0) {
         D_87903DC4 = 1;
         showMinigameHUD = 1;
         minigameState = 1;
@@ -3377,13 +3377,13 @@ void showTutorialScreenEkansMinigame(void) {
         func_87900528(); //	input
 
         if ((minigameDebuggMode == 0) && (func_80007604() == 0)) {
-            if (D_86C12088 != 0) {
-                if ((gPlayer1Controller->buttonPressed != 0) || (D_879060C2 == 0x28)) {
+            if (ekansMinigameCountdownStarted != 0) {
+                if ((gPlayer1Controller->buttonPressed != 0) || (ekansMinigameCountdown == 0x28)) {
                     func_87802EB8(2); //	D_8780FC92 = 1
                 }
             } else if (showMinigameHUD == 0) {
                 if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
-                    D_87903DC4 = 1; //	changing this makes the tutorial screen don't go
+                    D_87903DC4 = 1; //	changing this makes the tutorial screen stay on
                     minigameState = 1;
                     showMinigameHUD = 1;
                     func_86C00368(0x10, 0);
@@ -3415,7 +3415,7 @@ void ekansMinigameUpdate(void) {
 
     func_80006CB4(0x1E);
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted != 0) {
         func_86C00368(0x13, 0x1E);
     } else {
         func_86C00368(0x12, 0x1E);
@@ -3485,15 +3485,15 @@ void func_86C044B4(void) {
     }
 }
 
-s32 startSkansMinigame(s32 arg0, UNUSED s32 arg1) {
+s32 ekansMinigameLoad(s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
     if (arg0 == 1) {
-        D_86C12088 = 1;
+        ekansMinigameCountdownStarted = 1;
         func_878010C8(0xD);
         func_86C00368(0x10, 0);
     } else {
-        D_86C12088 = 0;
+        ekansMinigameCountdownStarted = 0;
     }
 
     D_87906046 = D_8780FA38;

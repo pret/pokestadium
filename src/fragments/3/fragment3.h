@@ -12,14 +12,14 @@ typedef struct minigameActor {
     /* 0x16C */ Vec3f scale;
     /* 0x178 */ char unk178[0x18];
     /* 0x190 */ Vec3f unk_190;
-    /* 0x19C */ Vec3f unk_19C;      //	position?
+    /* 0x19C */ Vec3f unk_19C;      //	position ?
     /* 0x1A8 */ Vec3f unk_1A8;      //	position on skans' minigame, most probable one
     /* 0x1B4 */ Vec3f unk_1B4;
     /* 0x1C0 */ Vec3f unk_1C0;
     /* 0x1CC */ f32 unk_1CC;
     /* 0x1D0 */ f32 unk_1D0;
     /* 0x1D4 */ f32 unk_1D4;
-    /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame but nothing reads this ?
+    /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame? nothing reads this
     /* 0x1E4 */ f32 unk_1E4;        //	double of 28C
     /* 0x1E8 */ char unk1E8[0x4];
     /* 0x1EC */ f32 unk_1EC;
@@ -52,7 +52,7 @@ typedef struct minigameActor {
     /* 0x23A */ s16 unk_23A;
     /* 0x23A */ s16 unk_23C;
     /* 0x23E */ s16 unk_23E;        //	animation id or state?
-    /* 0x240 */ s16 unk_240;
+    /* 0x240 */ s16 unk_240;		//	
     /* 0x242 */ s16 unk_242;
     /* 0x244 */ s16 unk_244;
     /* 0x246 */ char unk246[0x2];
@@ -74,7 +74,7 @@ typedef struct minigameActor {
     /* 0x26C */ s16 unk_26C;        //	animation id or state?
     /* 0x26E */ s16 unk_26E;
     /* 0x270 */ s16 unk_270;
-    /* 0x272 */ s16 unk_272;        //  
+    /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ?
     /* 0x274 */ f32 unk_274;
     /* 0x278 */ char unk278[0x4];
     /* 0x27C */ f32 unk_27C;
@@ -87,12 +87,13 @@ typedef struct minigameActor {
     /* 0x294 */ s16 unk_294;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 unk_298;
-    /* 0x29A */ s16 unk_29A;        //  last direction on sandshrew's minigame ;
-                                    //  also score gotten by diglett hit on skans' minigame ;
-                                    //  also per player input lock frames on metapod's minigame after a pause ;
+    /* 0x29A */ s16 unk_29A;		//	used as:
+    								//  last direction in sandshrew's minigame ;
+                            		//  diglett hit score in Skans' minigame ;
+                            		//  per player input lock frames on metapod's minigame after a pause ;
     /* 0x29C */ s16 unk_29C;
     /* 0x29E */ s16 unk_29E;
-    /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames some button was pressed?
+    /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames L/R was pressed on sandshrew?
     /* 0x2A2 */ s16 unk_2A2;        //  score on skans' minigame
     /* 0x2A4 */ s16 unk_2A4;
     /* 0x2A6 */ s16 unk_2A6;
@@ -176,7 +177,7 @@ extern s16 minigameDebuggMode;
 extern s16 D_87903DB8;
 extern Controller* tempControllerPtr;
 extern s16 D_879060C0;
-extern s16 D_879060C2;
+extern s16 ekansMinigameCountdown;
 extern s8 D_879060C4[4];
 extern s16 minigameHUDTransparency;
 extern s16 D_879060CA;

@@ -1590,7 +1590,7 @@ void func_86F00188(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86F001CC(minigameActor* sandshrew, s32 player) {
+void initSandshrew(minigameActor* sandshrew, s32 player) {
     sandshrew->scale.x = 1.0f;
     sandshrew->scale.y = 1.0f;
     sandshrew->scale.z = 1.0f;
@@ -1632,12 +1632,12 @@ void func_86F001CC(minigameActor* sandshrew, s32 player) {
     sandshrew->isHuman = D_879060C4[player];
 }
 
-void func_86F002F4(void) {
+void initSandshrews(void) {
     s32 i;
 
     tempSandshrewPlayer = sandshrewPlayers;
     for (i = 0; i < 4; i++) {
-        func_86F001CC(tempSandshrewPlayer, i);
+        initSandshrew(tempSandshrewPlayer, i);
         tempSandshrewPlayer++;
     }
 }
@@ -1901,41 +1901,44 @@ void func_86F00D04(void) {
     }
 }
 
-void func_86F00E34(minigameActor* a0, s32 arg1) {
-    minigameActor* arg0 = a0;
+void initSandshrewHole(minigameActor* a0, s32 arg1) {
+    minigameActor* sandshrewHole = a0;
 
-    arg0->scale.x = 1.0f;
-    arg0->scale.y = 1.0f;
-    arg0->scale.z = 1.0f;
+    sandshrewHole->scale.x = 1.0f;
+    sandshrewHole->scale.y = 1.0f;
+    sandshrewHole->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = sandshrewPositions[arg1].x;
-    arg0->unk_1A8.y = sandshrewPositions[arg1].y;
-    arg0->unk_1A8.z = sandshrewPositions[arg1].z;
+    sandshrewHole->unk_1A8.x = sandshrewPositions[arg1].x;
+    sandshrewHole->unk_1A8.y = sandshrewPositions[arg1].y;
+    sandshrewHole->unk_1A8.z = sandshrewPositions[arg1].z;
 
-    arg0->unk_214.x = arg0->unk_21A = arg0->unk_220 = arg0->unk_226 = arg0->unk_22C = 0;
-    arg0->unk_214.y = arg0->unk_21C = arg0->unk_222 = arg0->unk_228 = arg0->unk_22E = 0;
-    arg0->unk_214.z = arg0->unk_21E = arg0->unk_224 = arg0->unk_22A = arg0->unk_230 = 0;
+    sandshrewHole->unk_214.x = sandshrewHole->unk_21A = sandshrewHole->unk_220 = sandshrewHole->unk_226 =
+        sandshrewHole->unk_22C = 0;
+    sandshrewHole->unk_214.y = sandshrewHole->unk_21C = sandshrewHole->unk_222 = sandshrewHole->unk_228 =
+        sandshrewHole->unk_22E = 0;
+    sandshrewHole->unk_214.z = sandshrewHole->unk_21E = sandshrewHole->unk_224 = sandshrewHole->unk_22A =
+        sandshrewHole->unk_230 = 0;
 
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
+    sandshrewHole->unk_1C0.x = 0.0f;
+    sandshrewHole->unk_1C0.y = 0.0f;
+    sandshrewHole->unk_1C0.z = 0.0f;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
+    sandshrewHole->unk_258 = sandshrewHole->unk_25C = 0x64;
 
-    arg0->unk_272 = 0;
-    arg0->unk_2A4 = 0;
-    arg0->unk_23E = 0;
-    arg0->unk_24A = 0;
+    sandshrewHole->unk_272 = 0;
+    sandshrewHole->unk_2A4 = 0;
+    sandshrewHole->unk_23E = 0;
+    sandshrewHole->unk_24A = 0;
 
-    arg0->unk_000.unk_000.unk_01 &= ~1;
+    sandshrewHole->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86F00F00(void) {
+void initSandshrewHoles(void) {
     s32 i;
 
     tempSandshrewHole = sandshrewHoles;
     for (i = 0; i < 4; i++) {
-        func_86F00E34(tempSandshrewHole, i);
+        initSandshrewHole(tempSandshrewHole, i);
         tempSandshrewHole++;
     }
 }
@@ -1975,7 +1978,7 @@ void func_86F01014(void) {
     }
 }
 
-void func_86F010B4(minigameActor* a0, s32 arg1) {
+void initSandshrewWaterGeiser(minigameActor* a0, s32 arg1) {
     minigameActor* arg0 = a0;
 
     arg0->scale.x = 1.0f;
@@ -2008,13 +2011,13 @@ void func_86F010B4(minigameActor* a0, s32 arg1) {
     arg0->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86F01180(void) {
+void initSandshrewWaterGeisers(void) {
     s32 i;
 
     tempSandshrewWaterGeiser = sandshrewWaterGeisers;
 
     for (i = 0; i < 4; i++) {
-        func_86F010B4(tempSandshrewWaterGeiser, i);
+        initSandshrewWaterGeiser(tempSandshrewWaterGeiser, i);
         tempSandshrewWaterGeiser++;
     }
 }
@@ -2096,11 +2099,11 @@ void func_86F01488(void) {
     func_87900B64();
 }
 
-void func_86F014B8(void) {
+void sandshrewMinigameInitObjects(void) {
     func_87900854(); //	init minigame variables
-    func_86F002F4(); //	init Sandshrews?
-    func_86F00F00();
-    func_86F01180();
+    initSandshrews();
+    initSandshrewHoles();
+    initSandshrewWaterGeisers();
     func_86F0132C(); // fix the camera
 }
 
@@ -2324,9 +2327,9 @@ void func_86F01EB4(void) {
     }
 }
 
-void func_86F01EF4(s32 arg0) {
-    u8 sp1C[] = { 0, 0, 30 };  // D_86F0B168
-    u8 sp18[] = { 0, 0, 250 }; // D_86F0B16C
+void func_86F01EF4(UNUSED s32 arg0) {
+    UNUSED u8 sp1C[] = { 0, 0, 30 };  // D_86F0B168
+    UNUSED u8 sp18[] = { 0, 0, 250 }; // D_86F0B16C
 
     func_8001F3F4();
     func_8001EBE0(4, -2);
@@ -2365,8 +2368,8 @@ void func_86F01F58(s32 arg0) {
     func_80007778();
 }
 
-void func_86F02004(void) {
-    func_86F014B8();
+void sandshrewMinigameInit(void) {
+    sandshrewMinigameInitObjects();
     func_800077B4(0xA);
     func_80006C6C(0x10);
     D_87903DC4 = 3;
@@ -2501,7 +2504,7 @@ void func_86F02320(void) {
     }
 }
 
-s32 func_86F02520(s32 arg0, UNUSED s32 arg1) {
+s32 sandshrewMinigameLoad(s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
     if (arg0 == 1) {
@@ -2522,7 +2525,7 @@ s32 func_86F02520(s32 arg0, UNUSED s32 arg1) {
 
     func_86F02320();
     func_80007678(sp24);
-    func_86F02004(); //	init assets ?
+    sandshrewMinigameInit();
     func_86F0204C(); //	tutorial screen ?
     func_86F02230();
     func_800076C0();
