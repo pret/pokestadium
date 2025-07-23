@@ -434,7 +434,7 @@ typedef struct unk_D_86002F34_018 {
     /* 0x02 */ s16 width;
     /* 0x04 */ s16 height;
     /* 0x06 */ s16 num_texels;
-    /* 0x08 */ u8* texture;
+    /* 0x08 */ u32* texture;
 } unk_D_86002F34_018; // size = 0xC
 
 typedef struct unk_D_86002F34_01C {
