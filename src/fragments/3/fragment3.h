@@ -51,7 +51,7 @@ typedef struct minigameActor {
     /* 0x238 */ s16 unk_238;
     /* 0x23A */ s16 unk_23A;
     /* 0x23A */ s16 unk_23C;
-    /* 0x23E */ s16 unk_23E;        //	animation id or state?
+    /* 0x23E */ s16 unk_23E;        //	animation id or state ?
     /* 0x240 */ s16 unk_240;		//	
     /* 0x242 */ s16 unk_242;
     /* 0x244 */ s16 unk_244;
@@ -75,10 +75,10 @@ typedef struct minigameActor {
     /* 0x26E */ s16 unk_26E;
     /* 0x270 */ s16 unk_270;
     /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ?
-    /* 0x274 */ f32 unk_274;
+    /* 0x274 */ f32 unk_274;        //  
     /* 0x278 */ char unk278[0x4];
     /* 0x27C */ f32 unk_27C;
-    /* 0x280 */ f32 unk_280;		//	intensity of rotation?
+    /* 0x280 */ f32 unk_280;		//	intensity of rotation? stick magnitude on ekans?
     /* 0x284 */ f32 unk_284;
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
     /* 0x28C */ f32 unk_28C;        //	top    of the hitbox / bounding box ? ;   half of 1E4
@@ -198,7 +198,7 @@ s32 func_87900384(minigameActor* arg0);
 void func_879003A0(minigameActor* arg0);
 void func_879004F8(unk_D_86002F58_004_000* arg0);
 void func_87900528(void);
-void func_87900558(void);
+void hideMiniGameHUD(void);
 void func_87900564(minigameActor* arg0);
 void func_87900594(minigameActor* arg0);
 void func_879005AC(minigameActor* arg0);

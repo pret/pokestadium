@@ -184,10 +184,10 @@ void func_879004F8(unk_D_86002F58_004_000* arg0) {
 void func_87900528(void) {
     Cont_StartReadInputs();
     Cont_ReadInputs();
-    func_8001F730(); // nothing
+    func_8001F730();        // nothing
 }
 
-void func_87900558(void) {
+void hideMiniGameHUD(void) {
     showMinigameHUD = 0;
 }
 

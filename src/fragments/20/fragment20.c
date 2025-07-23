@@ -1748,7 +1748,7 @@ void func_86E02A64(void) {
     D_87903DBC = 0;
 
     func_87901620();
-    func_87900558();
+    hideMiniGameHUD();
 
     while (var_s1 != 0) {
         func_87900528();
