@@ -10,12 +10,12 @@ typedef struct minigameActor {
     /* 0x000 */ unk_D_86002F58_004_000 unk_000;
     /* 0x168 */ unk_D_86002F30* unk_168;
     /* 0x16C */ Vec3f scale;
-    /* 0x178 */ char unk178[0x18];
-    /* 0x190 */ Vec3f unk_190;
-    /* 0x19C */ Vec3f unk_19C;      //	position ?
-    /* 0x1A8 */ Vec3f unk_1A8;      //	position on skans' minigame, most probable one
-    /* 0x1B4 */ Vec3f unk_1B4;
-    /* 0x1C0 */ Vec3f unk_1C0;
+    /* 0x178 */ char unk178[0x18];	//	unused ?
+    /* 0x190 */ Vec3f unk_190;      //  position ?
+    /* 0x19C */ Vec3f unk_19C;      //	position ?					**	metapod only
+    /* 0x1A8 */ Vec3f unk_1A8;      //	origin position
+    /* 0x1B4 */ Vec3f unk_1B4;		//	related to angle 			**	ekans only
+    /* 0x1C0 */ Vec3f unk_1C0;      //  position
     /* 0x1CC */ f32 unk_1CC;
     /* 0x1D0 */ f32 unk_1D0;
     /* 0x1D4 */ f32 unk_1D4;
@@ -50,7 +50,7 @@ typedef struct minigameActor {
     /* 0x236 */ s16 unk_236;
     /* 0x238 */ s16 unk_238;
     /* 0x23A */ s16 unk_23A;
-    /* 0x23A */ s16 unk_23C;
+    /* 0x23C */ s16 unk_23C;        //  model id ?
     /* 0x23E */ s16 unk_23E;        //	animation id or state ?
     /* 0x240 */ s16 unk_240;		//	
     /* 0x242 */ s16 unk_242;
@@ -63,7 +63,7 @@ typedef struct minigameActor {
     /* 0x254 */ s32 unk_254;
     /* 0x258 */ s16 unk_258;
     /* 0x25A */ s16 unk_25A;
-    /* 0x25C */ s16 unk_25C;
+    /* 0x25C */ s16 unk_25C;        //  health on metapod's minigame, different on sandshrew and ekans
     /* 0x25E */ s16 unk_25E;
     /* 0x260 */ s16 unk_260;
     /* 0x262 */ s16 unk_262;
@@ -96,7 +96,7 @@ typedef struct minigameActor {
     /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames L/R was pressed on sandshrew?
     /* 0x2A2 */ s16 unk_2A2;        //  score on skans' minigame
     /* 0x2A4 */ s16 unk_2A4;
-    /* 0x2A6 */ s16 unk_2A6;
+    /* 0x2A6 */ s16 unk_2A6;		//	metapod state ?
     /* 0x2A8 */ s16 unk_2A8;
     /* 0x2AA */ s16 unk_2AA;
     /* 0x2AC */ s16 isHuman;
@@ -187,8 +187,8 @@ extern Vec3f D_87906100;
 extern Vec3f D_87906110;
 
 ret_func_80004454 func_87900020(void);
-float getVec3Distance_xz(minigameActor* arg0, minigameActor* arg1);
-void getVec3Distance_xyz(minigameActor* arg0, minigameActor* arg1);
+float MinigameGetVec3Distance_2d(minigameActor* arg0, minigameActor* arg1);
+void MinigameGetVec3Distance_3d(minigameActor* arg0, minigameActor* arg1);
 s32 func_879000C4(minigameActor* arg0, minigameActor* arg1);
 s32 metapodRockCollisionCheck(minigameActor* arg0, minigameActor* arg1);
 void func_879002B8(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3);
@@ -200,7 +200,7 @@ void func_879004F8(unk_D_86002F58_004_000* arg0);
 void func_87900528(void);
 void hideMiniGameHUD(void);
 void func_87900564(minigameActor* arg0);
-void func_87900594(minigameActor* arg0);
+void minigameSetActorPositionZero(minigameActor* arg0);
 void func_879005AC(minigameActor* arg0);
 void func_879005C4(minigameActor* arg0);
 void func_8790060C(minigameActor* arg0);

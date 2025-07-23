@@ -28,11 +28,11 @@ ret_func_80004454 func_87900020(void) {
 }
 
 // func_8790002C
-float getVec3Distance_xz(minigameActor* arg0, minigameActor* arg1) {
+float MinigameGetVec3Distance_2d(minigameActor* arg0, minigameActor* arg1) {
     return sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.z - arg0->unk_19C.z));
 }
 // func_87900070
-void getVec3Distance_xyz(minigameActor* arg0, minigameActor* arg1) {
+void MinigameGetVec3Distance_3d(minigameActor* arg0, minigameActor* arg1) {
     sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.y - arg0->unk_19C.y) +
           SQ(arg1->unk_19C.z - arg0->unk_19C.z));
 }
@@ -203,7 +203,7 @@ void func_87900564(minigameActor* arg0) {
     arg0->unk_190.z = 0.0f;
 }
 
-void func_87900594(minigameActor* arg0) {
+void minigameSetActorPositionZero(minigameActor* arg0) {
     arg0->unk_1A8.x = 0.0f;
     arg0->unk_1A8.y = 0.0f;
     arg0->unk_1A8.z = 0.0f;
@@ -278,16 +278,16 @@ void func_8790060C(minigameActor* arg0) {
     arg0->unk_290 = arg0->unk_292 = arg0->unk_294 = 0;
 }
 
-void func_87900770(minigameActor* arg0) {
-    arg0->unk_190.x = arg0->unk_19C.x = arg0->unk_1A8.x + arg0->unk_1C0.x;
-    arg0->unk_190.y = arg0->unk_19C.y = arg0->unk_1A8.y + arg0->unk_1C0.y;
-    arg0->unk_190.z = arg0->unk_19C.z = arg0->unk_1A8.z + arg0->unk_1C0.z;
+void func_87900770(minigameActor* poke) {
+    poke->unk_190.x = poke->unk_19C.x = poke->unk_1A8.x + poke->unk_1C0.x;
+    poke->unk_190.y = poke->unk_19C.y = poke->unk_1A8.y + poke->unk_1C0.y;
+    poke->unk_190.z = poke->unk_19C.z = poke->unk_1A8.z + poke->unk_1C0.z;
 
-    arg0->unk_19C.y = arg0->unk_19C.y + arg0->unk_1E4;
+    poke->unk_19C.y = poke->unk_19C.y + poke->unk_1E4;
 
-    arg0->unk_214.x = arg0->unk_21A + arg0->unk_226 + arg0->unk_232;
-    arg0->unk_214.y = arg0->unk_21C + arg0->unk_228 + arg0->unk_234;
-    arg0->unk_214.z = arg0->unk_21E + arg0->unk_22A + arg0->unk_236;
+    poke->unk_214.x = poke->unk_21A + poke->unk_226 + poke->unk_232;
+    poke->unk_214.y = poke->unk_21C + poke->unk_228 + poke->unk_234;
+    poke->unk_214.z = poke->unk_21E + poke->unk_22A + poke->unk_236;
 }
 
 void func_87900808(minigameActor* arg0) {

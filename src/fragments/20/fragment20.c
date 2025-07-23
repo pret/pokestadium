@@ -464,7 +464,7 @@ static u32 D_86E04B34[] = {
     0x00000000, D_86E04AE0, 0x06000000, 0x06000000, 0x05000000, 0x0A000000, &D_800AC840, 0x06000000,
     0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
-static Vec3f D_86E04BCC[] = {
+static Vec3f minigameMetapodOriginPositions[] = {
     { -54.0f, 0.0f, 0.0f },
     { -18.0f, 0.0f, 0.0f },
     { 18.0f, 0.0f, 0.0f },
@@ -568,34 +568,34 @@ void func_86E001A0(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86E001E4(minigameActor* arg0, s32 arg1) {
-    func_8790060C(arg0);
+void func_86E001E4(minigameActor* metapod, s32 arg1) {
+    func_8790060C(metapod);
 
-    arg0->scale.x = 1.0f;
-    arg0->scale.y = 1.0f;
-    arg0->scale.z = 1.0f;
+    metapod->scale.x = 1.0f;
+    metapod->scale.y = 1.0f;
+    metapod->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86E04BCC[arg1].x;
-    arg0->unk_1A8.y = D_86E04BCC[arg1].y;
-    arg0->unk_1A8.z = D_86E04BCC[arg1].z;
+    metapod->unk_1A8.x = minigameMetapodOriginPositions[arg1].x;
+    metapod->unk_1A8.y = minigameMetapodOriginPositions[arg1].y;
+    metapod->unk_1A8.z = minigameMetapodOriginPositions[arg1].z;
 
-    if (arg0->unk_23C == 0x9E) {
-        arg0->unk_1A8.z -= 10.0f;
+    if (metapod->unk_23C == 0x9E) {			// if poke is metapod (not weedle) move it slightly
+        metapod->unk_1A8.z -= 10.0f;
     }
 
-    arg0->unk_21A = 0;
-    arg0->unk_21C = 0;
-    arg0->unk_21E = 0;
-    arg0->unk_25C = 0x190;
-    arg0->unk_258 = arg0->unk_25C;
-    arg0->unk_2A6 = 5;
-    arg0->unk_1E4 = arg0->unk_28C * 0.5f;
+    metapod->unk_21A = 0;
+    metapod->unk_21C = 0;
+    metapod->unk_21E = 0;
+    metapod->unk_25C = 0x190;
+    metapod->unk_258 = metapod->unk_25C;
+    metapod->unk_2A6 = 5;
+    metapod->unk_1E4 = metapod->unk_28C * 0.5f;
 
-    func_8001BD04(&arg0->unk_000, 0);
-    func_80017788(&arg0->unk_000);
-    arg0->unk_000.unk_01C = 0;
-    func_87900770(arg0);
-    arg0->isHuman = D_879060C4[arg1];
+    func_8001BD04(&metapod->unk_000, 0);
+    func_80017788(&metapod->unk_000);
+    metapod->unk_000.unk_01C = 0;
+    func_87900770(metapod);
+    metapod->isHuman = D_879060C4[arg1];
 }
 
 void initMetapodPlayers(void) {

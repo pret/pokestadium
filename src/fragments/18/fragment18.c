@@ -21,22 +21,22 @@
 #include "src/stage_loader.h"
 #include "src/geo_layout.h"
 
-extern u8 D_03034E40[];
-extern u8 D_03035A80[];
-extern u8 D_030366C0[];
-extern u8 D_03037300[];
-extern u8 D_030397C0[];
-extern u8 D_0303A400[];
-extern u8 D_0303B040[];
-extern u8 D_0303D500[];
-extern u8 D_03040580[];
-extern u8 D_03040980[];
-extern u8 D_03040D80[];
-extern u8 D_03041FC0[];
-extern u8 D_03043520[];
-extern u8 D_03043C40[];
-extern u8 D_030426E0[];
-extern u8 D_03042E00[];
+extern u32 D_03034E40[];
+extern u32 D_03035A80[];
+extern u32 D_030366C0[];
+extern u32 D_03037300[];
+extern u32 D_030397C0[];
+extern u32 D_0303A400[];
+extern u32 D_0303B040[];
+extern u32 D_0303D500[];
+extern u32 D_03040580[];
+extern u32 D_03040980[];
+extern u32 D_03040D80[];
+extern u32 D_03041FC0[];
+extern u32 D_03043520[];
+extern u32 D_03043C40[];
+extern u32 D_030426E0[];
+extern u32 D_03042E00[];
 
 typedef struct unk_D_86C12008 {
     /* 0x00 */ s16 unk_00; //  -1
@@ -48,12 +48,12 @@ typedef struct unk_D_86C12008 {
     /* 0x0C */ s16 unk_0C;
 } unk_D_86C12008; // size = 0xE
 
-typedef struct actorInitialPosition {
+typedef struct actorOriginPosition {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ char unk0C[0x6];
     /* 0x12 */ s16 unk_12;
     /* 0x12 */ s16 unk_14;
-} actorInitialPosition; // size = 0x18
+} actorOriginPosition; // size = 0x18
 
 static minigameActor minigameDigletActors[9];
 static minigameActor minigameDiglettHoleActors[9];
@@ -945,7 +945,7 @@ static unk_D_86002F34_018 sceneTextures[] = {
         32,
         32,
         1024,
-        floorTexture1,
+        floorTexture1, //
     },
     {
         0x00,
@@ -1540,14 +1540,14 @@ static u32 D_86C0E0D0[] = {
     0x06000000, 0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
 
-static actorInitialPosition skansActorInfo[] = {
+static actorOriginPosition skansActorInfo[] = {
     { { -45.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { -15.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { 15.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { 45.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
 };
 
-static actorInitialPosition diglettActorInfo[] = {
+static actorOriginPosition diglettActorInfo[] = {
     { { -75.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
     { { 0.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
     { { 75.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
@@ -2406,7 +2406,7 @@ void func_86C01AF8(void) {
     }
 }
 
-void func_86C01D2C(minigameActor* arg0, s32 arg1) {
+void func_86C01D2C(minigameActor* ekans, s32 arg1) {
     Vec3f sp3C;
     Vec3f sp30;
     f32 temp_fa0;
@@ -2415,13 +2415,13 @@ void func_86C01D2C(minigameActor* arg0, s32 arg1) {
     minigameActor* sp20;
     unk_D_86C12008* sp18;
 
-    if (arg0->unk_260 != 2) {
+    if (ekans->unk_260 != 2) {
         return;
     }
 
-    func_80015390(&arg0->unk_000, 0xA, &sp30);
+    func_80015390(&ekans->unk_000, 0xA, &sp30);
 
-    idx = arg0->unk_266;
+    idx = ekans->unk_266;
     sp18 = &D_86C12008[idx];
     sp20 = &minigameDigletActors[sp18->unk_00];
 
@@ -2430,50 +2430,50 @@ void func_86C01D2C(minigameActor* arg0, s32 arg1) {
     temp_fa0 = sp30.x - sp3C.x;
     temp_fv1 = sp30.z - sp3C.z;
 
-    arg0->unk_1F8 = 0.0f;
-    arg0->unk_200 = 0.0f;
+    ekans->unk_1F8 = 0.0f;
+    ekans->unk_200 = 0.0f;
 
-    arg0->unk_1A8.x = arg0->unk_190.x;
-    arg0->unk_1A8.z = arg0->unk_190.z;
+    ekans->unk_1A8.x = ekans->unk_190.x;
+    ekans->unk_1A8.z = ekans->unk_190.z;
 
-    arg0->unk_1B4.x = sp3C.x;
-    arg0->unk_1B4.z = sp3C.z;
+    ekans->unk_1B4.x = sp3C.x;
+    ekans->unk_1B4.z = sp3C.z;
 
-    arg0->unk_1C0.x = arg0->unk_1C0.z = 0.0f;
+    ekans->unk_1C0.x = ekans->unk_1C0.z = 0.0f;
 
-    arg0->unk_22E = 0x2000;
-    arg0->unk_000.unk_000.unk_02 &= 0xFFDF;
+    ekans->unk_22E = 0x2000;
+    ekans->unk_000.unk_000.unk_02 &= 0xFFDF;
 
     if ((temp_fv1 > 15.0f) || (temp_fv1 < -15.0f)) {
-        arg0->unk_1D4 = 4.0f;
+        ekans->unk_1D4 = 4.0f;
     } else if ((temp_fv1 > 5.0f) || (temp_fv1 < -5.0f)) {
-        arg0->unk_1D4 = 2.0f;
+        ekans->unk_1D4 = 2.0f;
     } else {
-        arg0->unk_1D4 = 1.0f;
+        ekans->unk_1D4 = 1.0f;
     }
 
     if ((temp_fa0 > 15.0f) || (temp_fa0 < -15.0f)) {
-        arg0->unk_1CC = 4.0f;
+        ekans->unk_1CC = 4.0f;
     } else if ((temp_fa0 > 5.0f) || (temp_fa0 < -5.0f)) {
-        arg0->unk_1CC = 2.0f;
+        ekans->unk_1CC = 2.0f;
     } else {
-        arg0->unk_1CC = 1.0f;
+        ekans->unk_1CC = 1.0f;
     }
 
-    arg0->unk_260 = 3;
+    ekans->unk_260 = 3;
     if (sp20->unk_29C != 0) {
-        arg0->unk_29A = 2;
+        ekans->unk_29A = 2;
     } else {
-        arg0->unk_29A = 1;
+        ekans->unk_29A = 1;
     }
 
     sp18->unk_08 = 1;
     sp18->unk_0C = arg1;
     D_86C12040[sp18->unk_00][arg1] = 1;
 
-    arg0->unk_296 = 1;
-    if (arg0->unk_260 == 0) {
-        arg0->unk_298 = 1;
+    ekans->unk_296 = 1;
+    if (ekans->unk_260 == 0) {
+        ekans->unk_298 = 1;
     }
 }
 
@@ -2569,59 +2569,59 @@ void func_86C022D8(minigameActor* arg0) {
     }
 }
 
-void func_86C02324(minigameActor* arg0, s32 arg1) {
-    switch (arg0->unk_23E) {
+void func_86C02324(minigameActor* ekans, s32 arg1) {
+    switch (ekans->unk_23E) {
         case 0x0:
-            func_86C021FC(arg0);
+            func_86C021FC(ekans);
             break;
 
         case 0x1: //  on ekans launch
-            func_86C016C8(arg0);
-            func_879002B8(arg0, 1, -1, 0);
-            arg0->unk_262 = 1;
-            arg0->unk_260 = 0;
+            func_86C016C8(ekans);
+            func_879002B8(ekans, 1, -1, 0);
+            ekans->unk_262 = 1;
+            ekans->unk_260 = 0;
             func_86C00368(3, arg1);
-            arg0->unk_23E++;
+            ekans->unk_23E++;
             break;
 
         case 0x2:
-            func_86C01D2C(arg0, arg1);
-            func_86C01FAC(arg0, arg1);
+            func_86C01D2C(ekans, arg1);
+            func_86C01FAC(ekans, arg1);
             break;
 
         case 0x3: // on ekans return ?
-            func_879002B8(arg0, 0, -1, 1);
-            func_86C003AC(arg0);
-            arg0->unk_23E++;
+            func_879002B8(ekans, 0, -1, 1);
+            func_86C003AC(ekans);
+            ekans->unk_23E++;
             break;
 
         case 0x4:
-            arg0->unk_000.unk_000.unk_01 |= 1;
-            arg0->unk_000.unk_000.unk_02 |= 0x20;
-            arg0->unk_298 = 0;
-            arg0->unk_296 = 0;
-            arg0->unk_280 = 0.0f;
-            arg0->unk_23E++;
+            ekans->unk_000.unk_000.unk_01 |= 1;
+            ekans->unk_000.unk_000.unk_02 |= 0x20;
+            ekans->unk_298 = 0;
+            ekans->unk_296 = 0;
+            ekans->unk_280 = 0.0f;
+            ekans->unk_23E++;
             break;
 
         case 0x5:
-            if (func_81400760(&arg0->unk_1C0.y, 10.0f, 4.0f) != 0) {
-                arg0->unk_23E = 0;
+            if (func_81400760(&ekans->unk_1C0.y, 10.0f, 4.0f) != 0) {
+                ekans->unk_23E = 0;
             }
             break;
 
         case 0x64:
-            func_81400760(&arg0->unk_1C0.x, 0.0f, 4.0f);
-            func_81400760(&arg0->unk_1C0.z, 0.0f, 4.0f);
-            if (func_81400550(&arg0->unk_228, -0x8000, 0x400) != 0) {
-                arg0->unk_23E++;
-                func_8001BD04(&arg0->unk_000, 2);
+            func_81400760(&ekans->unk_1C0.x, 0.0f, 4.0f);
+            func_81400760(&ekans->unk_1C0.z, 0.0f, 4.0f);
+            if (func_81400550(&ekans->unk_228, -0x8000, 0x400) != 0) {
+                ekans->unk_23E++;
+                func_8001BD04(&ekans->unk_000, 2);
             }
             break;
 
         case 0x65:
-            if (func_80017514(&arg0->unk_000) != 0) {
-                func_80017464(&arg0->unk_000, 0xA);
+            if (func_80017514(&ekans->unk_000) != 0) {
+                func_80017464(&ekans->unk_000, 0xA);
             }
             break;
     }

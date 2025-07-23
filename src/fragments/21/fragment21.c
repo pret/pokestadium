@@ -1791,7 +1791,7 @@ void sandshrewAIControls(minigameActor* arg0) {
 void func_86F00920(minigameActor* sandshrew) {
     UNUSED s32 pad;
     Vec3f sp48;
-    f32 temp_fv0;
+    f32 holeDeepeness;
 
     switch (sandshrew->unk_23E) {
         case 0x1:				//	geiser coming out of the ground
@@ -1808,29 +1808,29 @@ void func_86F00920(minigameActor* sandshrew) {
             }
             break;
 
-        case 0x3:
+        case 0x3:               //  diggin
             if (sandshrew->unk_27C != 0) {
                 if (D_8140E6CC == 0) {
-                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 1);
-                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 2);
+                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 1);	//	perticles
+                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 2);	//	particles
                 }
 
                 if (D_8140E6CC == 0) {
                     if (sandshrew->unk_190.y > -10.0f) {
-                        func_81407D48(1.0f, sandshrew->unk_190, sandshrew->unk_214, func_87902224, &D_87903E10, 1);
+                        func_81407D48(1.0f, sandshrew->unk_190, sandshrew->unk_214, func_87902224, &D_87903E10, 1);	//	particles
                     } else {
                         sp48.x = sandshrew->unk_190.x;
                         sp48.y = -5.0f;
                         sp48.z = sandshrew->unk_190.z;
-                        func_81407D48(1.0f, sp48, sandshrew->unk_214, func_879023EC, &D_87903E10, 1);
+                        func_81407D48(1.0f, sp48, sandshrew->unk_214, func_879023EC, &D_87903E10, 1);	//	particles
                     }
                 }
 
                 func_80017454(&sandshrew->unk_000, ((s32)sandshrew->unk_27C << 0xE) + 0xC000);
 
-                temp_fv0 = sandshrew->unk_274 / 5000.0f;
-                if (temp_fv0 > 0.2f) {
-                    sandshrew->unk_1C0.y -= temp_fv0;
+                holeDeepeness = sandshrew->unk_274 / 5000.0f;
+                if (holeDeepeness > 0.2f) {
+                    sandshrew->unk_1C0.y -= holeDeepeness;
                 }
 
                 func_86F00188(3, sandshrew - sandshrewPlayers);
@@ -1865,7 +1865,7 @@ void func_86F00920(minigameActor* sandshrew) {
             break;
 
         case 0x65:
-            func_87900594(sandshrew);
+            minigameSetActorPositionZero(sandshrew);
             func_80015390(&tempSandshrewWaterGeiser->unk_000, 0xA, &sandshrew->unk_1C0);
             break;
     }
