@@ -575,12 +575,12 @@ void func_86E001E4(minigameActor* metapod, s32 arg1) {
     metapod->scale.y = 1.0f;
     metapod->scale.z = 1.0f;
 
-    metapod->unk_1A8.x = minigameMetapodOriginPositions[arg1].x;
-    metapod->unk_1A8.y = minigameMetapodOriginPositions[arg1].y;
-    metapod->unk_1A8.z = minigameMetapodOriginPositions[arg1].z;
+    metapod->localOrigin.x = minigameMetapodOriginPositions[arg1].x;
+    metapod->localOrigin.y = minigameMetapodOriginPositions[arg1].y;
+    metapod->localOrigin.z = minigameMetapodOriginPositions[arg1].z;
 
     if (metapod->unk_23C == 0x9E) {			// if poke is metapod (not weedle) move it slightly
-        metapod->unk_1A8.z -= 10.0f;
+        metapod->localOrigin.z -= 10.0f;
     }
 
     metapod->unk_21A = 0;
@@ -615,12 +615,12 @@ void func_86E0034C(minigameActor* arg0) {
 }
 
 void func_86E0036C(minigameActor* arg0) {
-    if (arg0->unk_29A != 0) {
-        arg0->unk_29A--;
+    if (arg0->metapodInputLockTimer != 0) {
+        arg0->metapodInputLockTimer--;
     }
 
     if ((BTN_IS_DOWN(tempControllerPtr, BTN_A)) && (arg0->unk_23E == 0) && (arg0->unk_240 == 0) &&
-        (arg0->unk_2AA == 0) && (arg0->unk_29A == 0)) {
+        (arg0->unk_2AA == 0) && (arg0->metapodInputLockTimer == 0)) {
         arg0->unk_23E = 1;
     }
 
@@ -654,7 +654,7 @@ void func_86E004FC(minigameActor* metapod) {
     }
 }
 
-s32 func_86E00518(minigameActor* arg0, s32 arg1) {
+s32 func_86E00518(UNUSED minigameActor* metapod, s32 arg1) {
     s32 sp1C;
     s32 sp18;
     s32 var_v1;
@@ -712,7 +712,7 @@ s32 func_86E00518(minigameActor* arg0, s32 arg1) {
     return var_v1;
 }
 
-void func_86E0063C(minigameActor* arg0, s32 arg1) {
+void func_86E0063C(minigameActor* metapod, s32 arg1) {
     s32 sp2C;
     s32 sp28;
     u32 sp24;
@@ -748,9 +748,9 @@ void func_86E0063C(minigameActor* arg0, s32 arg1) {
             break;
     }
 
-    arg0->unk_244 = temp_s1;
-    arg0->unk_29E = sp2C;
-    arg0->unk_2B2 = sp24;
+    metapod->unk_244 = temp_s1;
+    metapod->unk_29E = sp2C;
+    metapod->unk_2B2 = sp24;
 }
 
 void func_86E0073C(minigameActor* arg0, s32 arg1) {
@@ -842,52 +842,52 @@ void func_86E007CC(minigameActor* metapod, s32 player) {
     }
 }
 
-void func_86E00924(minigameActor* arg0, s32 arg1) {
-    if (arg0->unk_242 == 0) {
-        func_86E007CC(arg0, arg1);
+void func_86E00924(minigameActor* metapod, s32 arg1) {
+    if (metapod->unk_242 == 0) {
+        func_86E007CC(metapod, arg1);
     }
 
-    switch (arg0->unk_242) {
+    switch (metapod->unk_242) {
         case 0x1:
-            arg0->unk_244--;
-            if (arg0->unk_244 < 0) {
-                if ((arg0->unk_2AA == 0) && (arg0->unk_240 == 0)) {
-                    if (arg0->unk_29E > 0) {
-                        func_879002B8(arg0, 1, -1, 1);
-                        arg0->unk_23E = 1;
-                        arg0->unk_272 = 4;
-                        arg0->unk_242++;
-                        func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_879029F0, &D_87903E40, 4);
+            metapod->unk_244--;
+            if (metapod->unk_244 < 0) {
+                if ((metapod->unk_2AA == 0) && (metapod->unk_240 == 0)) {
+                    if (metapod->unk_29E > 0) {
+                        func_879002B8(metapod, 1, -1, 1);
+                        metapod->unk_23E = 1;
+                        metapod->unk_272 = 4;
+                        metapod->unk_242++;
+                        func_81407D48(1.0f, metapod->unk_190, metapod->unk_214, func_879029F0, &D_87903E40, 4);
                     } else {
-                        arg0->unk_242 = 0x64;
+                        metapod->unk_242 = 0x64;
                     }
                 } else {
-                    arg0->unk_242 = 0;
+                    metapod->unk_242 = 0;
                 }
             }
             break;
 
         case 0x2:
-            arg0->unk_29E--;
-            if (arg0->unk_29E < 0) {
-                arg0->unk_000.unk_000.unk_02 |= 0x20;
-                arg0->unk_242 = 0x64;
+            metapod->unk_29E--;
+            if (metapod->unk_29E < 0) {
+                metapod->unk_000.unk_000.unk_02 |= 0x20;
+                metapod->unk_242 = 0x64;
                 return;
             }
 
-            arg0->unk_25A++;
-            arg0->unk_272 = 4;
-            arg0->unk_000.unk_01C = 1;
-            if (func_80017484(&arg0->unk_000, 5) != 0) {
-                arg0->unk_000.unk_000.unk_02 &= ~0x20;
+            metapod->unk_25A++;
+            metapod->unk_272 = 4;
+            metapod->unk_000.unk_01C = 1;
+            if (func_80017484(&metapod->unk_000, 5) != 0) {
+                metapod->unk_000.unk_000.unk_02 &= ~0x20;
             }
             break;
 
         case 0x64:
-            arg0->unk_2B2--;
-            if (arg0->unk_2B2 <= 0) {
-                arg0->unk_23E = 0;
-                arg0->unk_242 = 0;
+            metapod->unk_2B2--;
+            if (metapod->unk_2B2 <= 0) {
+                metapod->unk_23E = 0;
+                metapod->unk_242 = 0;
             }
             break;
     }
@@ -1044,9 +1044,9 @@ void func_86E0103C(minigameActor* arg0, s32 arg1) {
     func_8790060C(arg0);
     arg0->unk_266 = arg1;
 
-    arg0->unk_1A8.x = D_86E04BFC[arg1].unk_00.x;
-    arg0->unk_1A8.y = D_86E04BFC[arg1].unk_00.y;
-    arg0->unk_1A8.z = D_86E04BFC[arg1].unk_00.z;
+    arg0->localOrigin.x = D_86E04BFC[arg1].unk_00.x;
+    arg0->localOrigin.y = D_86E04BFC[arg1].unk_00.y;
+    arg0->localOrigin.z = D_86E04BFC[arg1].unk_00.z;
 
     arg0->unk_270 = 0;
     arg0->unk_288 = D_86E04BFC[arg1].unk_12;
@@ -1084,7 +1084,7 @@ void func_86E01188(void) {
     s32 var_s1;
     s32 sp40;
     s32 var_s5;
-    minigameActor* ptr;
+    minigameActor* metapod;
 
     switch (D_87906046) {
         default:
@@ -1108,9 +1108,9 @@ void func_86E01188(void) {
             break;
     }
 
-    ptr = metadodPlayers;
-    for (i = 0; i < 4; i++, ptr++) {
-        if (ptr->unk_2AA == 0) {
+    metapod = metadodPlayers;
+    for (i = 0; i < 4; i++, metapod++) {
+        if (metapod->unk_2AA == 0) {
             var_s1 = 0;
             tempFallingRock = &metapodMinigameFallingRocks[i * 5];
 
@@ -1127,124 +1127,124 @@ void func_86E01188(void) {
     }
 }
 
-void func_86E01310(minigameActor* arg0) {
+void func_86E01310(minigameActor* rock) {
     s16 temp_v1 = (D_86E04B20 * 4) + 0x28;
-    s16 temp_a1 = arg0->unk_266;
+    s16 temp_a1 = rock->unk_266;
 
-    arg0->unk_29E = temp_v1 - 1;
-    arg0->unk_1A8.y += D_86E04BFC[temp_a1].unk_00.y + metadodPlayers[temp_a1].unk_28C;
+    rock->unk_29E = temp_v1 - 1;
+    rock->localOrigin.y += D_86E04BFC[temp_a1].unk_00.y + metadodPlayers[temp_a1].unk_28C;
 
-    arg0->unk_210 = 0.7f;
-    arg0->unk_1F8 = 0.0f;
-    arg0->unk_1FC = temp_v1 * arg0->unk_210 * 0.5f;
+    rock->unk_210 = 0.7f;
+    rock->unk_1F8 = 0.0f;
+    rock->unk_1FC = temp_v1 * rock->unk_210 * 0.5f;
 
-    arg0->unk_200 =
-        ((metadodPlayers[temp_a1].unk_1A8.z + (metadodPlayers[temp_a1].unk_288 * 0.5f)) - arg0->unk_1A8.z) / temp_v1;
-    arg0->unk_270 = 1;
+    rock->unk_200 =
+        ((metadodPlayers[temp_a1].localOrigin.z + (metadodPlayers[temp_a1].unk_288 * 0.5f)) - rock->localOrigin.z) / temp_v1;
+    rock->unk_270 = 1;
 
-    arg0->unk_000.unk_000.unk_01 |= 1;
-    func_8001BD04(&arg0->unk_000, 0);
+    rock->unk_000.unk_000.unk_01 |= 1;
+    func_8001BD04(&rock->unk_000, 0);
 }
 
-void func_86E01414(minigameActor* arg0) {
-    arg0->unk_23E = 0;
-    arg0->unk_000.unk_000.unk_01 &= ~1;
+void func_86E01414(minigameActor* rock) {
+    rock->unk_23E = 0;
+    rock->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86E01428(minigameActor* arg0) {
+void func_86E01428(minigameActor* rock) {
     UNUSED s32 pad[3];
-    s16 temp_a1 = arg0->unk_266;
+    s16 temp_a1 = rock->unk_266;
     Vec3f sp3C;
 
     if ((D_87903DA8 != 0) || (metadodPlayers[temp_a1].unk_258 == 0)) {
-        switch (arg0->unk_23E) {
+        switch (rock->unk_23E) {
             case 1:
-                arg0->unk_23E = 0;
+                rock->unk_23E = 0;
                 break;
 
             case 2:
-                arg0->unk_270 = 0;
-                arg0->unk_23E = 0x64;
+                rock->unk_270 = 0;
+                rock->unk_23E = 0x64;
                 break;
         }
     }
 
-    switch (arg0->unk_23E) {
+    switch (rock->unk_23E) {
         case 0x1:
-            arg0->unk_29E--;
-            if (arg0->unk_29E <= 0) {
+            rock->unk_29E--;
+            if (rock->unk_29E <= 0) {
                 func_86E001A0(5, temp_a1);
-                func_86E01310(arg0);
-                arg0->unk_23E++;
+                func_86E01310(rock);
+                rock->unk_23E++;
             }
             break;
 
         case 0x2:
-            arg0->unk_29E--;
-            if (arg0->unk_29E < 0) {
-                arg0->unk_29E = 0;
+            rock->unk_29E--;
+            if (rock->unk_29E < 0) {
+                rock->unk_29E = 0;
             }
 
-            if (arg0->unk_260 != 0) {
-                arg0->unk_270 = 0;
-                if (arg0->unk_272 != 0) {
-                    arg0->unk_1FC = 5.0f;
-                    arg0->unk_200 = 1.5f;
-                    func_86E01414(arg0);
-                    func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_87901F04, &D_87903E28, 4);
+            if (rock->unk_260 != 0) {
+                rock->unk_270 = 0;
+                if (rock->unk_272 != 0) {
+                    rock->unk_1FC = 5.0f;
+                    rock->unk_200 = 1.5f;
+                    func_86E01414(rock);
+                    func_81407D48(1.0f, rock->unk_190, rock->unk_214, func_87901F04, &D_87903E28, 4);
                 } else {
-                    arg0->unk_23E++;
+                    rock->unk_23E++;
                 }
             }
             break;
 
         case 0x3:
-            arg0->unk_1FC = 7.0f;
-            arg0->unk_200 = 3.0f;
+            rock->unk_1FC = 7.0f;
+            rock->unk_200 = 3.0f;
 
-            sp3C.x = arg0->unk_190.x;
+            sp3C.x = rock->unk_190.x;
             sp3C.y = 0.0f;
-            sp3C.z = arg0->unk_190.z;
+            sp3C.z = rock->unk_190.z;
 
-            func_81407D48(1.0f, sp3C, arg0->unk_214, func_87902068, &D_87903E10, 4);
-            arg0->unk_23E++;
+            func_81407D48(1.0f, sp3C, rock->unk_214, func_87902068, &D_87903E10, 4);
+            rock->unk_23E++;
             break;
 
         case 0x4:
-            if (arg0->unk_190.y < -10.0f) {
-                func_86E01414(arg0);
+            if (rock->unk_190.y < -10.0f) {
+                func_86E01414(rock);
             }
             break;
 
         case 0x64:
-            if (func_814004D8(&arg0->unk_000.unk_01D, 0, 0x40) != 0) {
-                func_86E01414(arg0);
+            if (func_814004D8(&rock->unk_000.unk_01D, 0, 0x40) != 0) {
+                func_86E01414(rock);
             }
             break;
     }
 }
 
 void func_86E016EC(minigameActor* arg0) {
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
+    UNUSED f32 temp_fv0;
+    UNUSED f32 temp_fv0_2;
+    UNUSED f32 temp_fv0_3;
 
-    arg0->unk_190.x = arg0->unk_19C.x = arg0->unk_1A8.x + arg0->unk_1C0.x;
-    arg0->unk_190.y = arg0->unk_19C.y = arg0->unk_1A8.y + arg0->unk_1C0.y;
-    arg0->unk_190.z = arg0->unk_19C.z = arg0->unk_1A8.z + arg0->unk_1C0.z;
+    arg0->unk_190.x = arg0->unk_19C.x = arg0->localOrigin.x + arg0->unk_1C0.x;
+    arg0->unk_190.y = arg0->unk_19C.y = arg0->localOrigin.y + arg0->unk_1C0.y;
+    arg0->unk_190.z = arg0->unk_19C.z = arg0->localOrigin.z + arg0->unk_1C0.z;
 }
 
-void func_86E0172C(minigameActor* arg0) {
-    if (arg0->unk_23E != 0) {
-        arg0->unk_1F8 += arg0->unk_204;
-        arg0->unk_1FC += arg0->unk_208 - arg0->unk_210;
-        arg0->unk_200 += arg0->unk_20C;
-        arg0->unk_1C0.x += arg0->unk_1F8;
-        arg0->unk_1C0.y += arg0->unk_1FC;
-        arg0->unk_1C0.z += arg0->unk_200;
+void func_86E0172C(minigameActor* rock) {
+    if (rock->unk_23E != 0) {
+        rock->unk_1F8 += rock->unk_204;
+        rock->unk_1FC += rock->unk_208 - rock->unk_210;
+        rock->unk_200 += rock->unk_20C;
+        rock->unk_1C0.x += rock->unk_1F8;
+        rock->unk_1C0.y += rock->unk_1FC;
+        rock->unk_1C0.z += rock->unk_200;
     }
 
-    func_86E016EC(arg0);
+    func_86E016EC(rock);
 }
 
 void func_86E017C0(void) {
@@ -1325,7 +1325,7 @@ void func_86E019F4(void) {
     switch (D_86E04B28) {
         case 1:
             func_86E01188();
-            D_86E04B28 += 1;
+            D_86E04B28++;
             break;
 
         case 2:
@@ -1738,7 +1738,7 @@ void func_86E02A28(void) {
     minigameActor* metapod = metadodPlayers;
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (metapod->unk_23E == 0)) {
-        metapod->unk_29A = 4;
+        metapod->metapodInputLockTimer = 4;
     }
 }
 

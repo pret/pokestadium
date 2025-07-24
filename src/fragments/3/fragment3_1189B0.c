@@ -191,22 +191,22 @@ void hideMiniGameHUD(void) {
     showMinigameHUD = 0;
 }
 
-void func_87900564(minigameActor* arg0) {
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1A8.x = 0.0f;
-    arg0->unk_190.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1A8.y = 0.0f;
-    arg0->unk_190.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
-    arg0->unk_1A8.z = 0.0f;
-    arg0->unk_190.z = 0.0f;
+void func_87900564(minigameActor* actor) {
+    actor->unk_1C0.x = 0.0f;
+    actor->localOrigin.x = 0.0f;
+    actor->unk_190.x = 0.0f;
+    actor->unk_1C0.y = 0.0f;
+    actor->localOrigin.y = 0.0f;
+    actor->unk_190.y = 0.0f;
+    actor->unk_1C0.z = 0.0f;
+    actor->localOrigin.z = 0.0f;
+    actor->unk_190.z = 0.0f;
 }
 
-void minigameSetActorPositionZero(minigameActor* arg0) {
-    arg0->unk_1A8.x = 0.0f;
-    arg0->unk_1A8.y = 0.0f;
-    arg0->unk_1A8.z = 0.0f;
+void minigameActorLocalOriginToZero(minigameActor* arg0) {
+    arg0->localOrigin.x = 0.0f;
+    arg0->localOrigin.y = 0.0f;
+    arg0->localOrigin.z = 0.0f;
 }
 
 void func_879005AC(minigameActor* arg0) {
@@ -215,73 +215,73 @@ void func_879005AC(minigameActor* arg0) {
     arg0->unk_1C0.z = 0.0f;
 }
 
-void func_879005C4(minigameActor* arg0) {
-    arg0->unk_1FC = arg0->unk_1FC - arg0->unk_210;
-    arg0->unk_1C0.x = arg0->unk_1C0.x + arg0->unk_1F8;
-    arg0->unk_1C0.y = arg0->unk_1C0.y + (arg0->unk_1FC - arg0->unk_210);
-    arg0->unk_1C0.z = arg0->unk_1C0.z + arg0->unk_200;
+void func_879005C4(minigameActor* ekans) {
+    ekans->unk_1FC = ekans->unk_1FC - ekans->unk_210;
+    ekans->unk_1C0.x = ekans->unk_1C0.x + ekans->unk_1F8;
+    ekans->unk_1C0.y = ekans->unk_1C0.y + (ekans->unk_1FC - ekans->unk_210);
+    ekans->unk_1C0.z = ekans->unk_1C0.z + ekans->unk_200;
 }
 
-void func_8790060C(minigameActor* arg0) {
-    arg0->unk_214.x = arg0->unk_214.y = arg0->unk_214.z = 0;
-    arg0->unk_21A = arg0->unk_21C = arg0->unk_21E = 0;
-    arg0->unk_220 = arg0->unk_222 = arg0->unk_224 = 0;
-    arg0->unk_226 = arg0->unk_228 = arg0->unk_22A = 0;
-    arg0->unk_22C = arg0->unk_22E = arg0->unk_230 = 0;
-    arg0->unk_232 = arg0->unk_234 = arg0->unk_236 = 0;
-    arg0->unk_23E = arg0->unk_240 = arg0->unk_242 = arg0->unk_248 = 0;
+void func_8790060C(minigameActor* actor) {
+    actor->unk_214.x = actor->unk_214.y = actor->unk_214.z = 0;
+    actor->unk_21A = actor->unk_21C = actor->unk_21E = 0;
+    actor->unk_220 = actor->unk_222 = actor->unk_224 = 0;
+    actor->unk_226 = actor->unk_228 = actor->unk_22A = 0;
+    actor->unk_22C = actor->unk_22E = actor->unk_230 = 0;
+    actor->unk_232 = actor->unk_234 = actor->unk_236 = 0;
+    actor->unk_23E = actor->unk_240 = actor->unk_242 = actor->unk_248 = 0;
 
-    arg0->unk_254 = 0;
-    arg0->unk_272 = 0;
-    arg0->unk_238 = 0;
-    arg0->unk_25A = 0;
-    arg0->unk_2A8 = 0;
-    arg0->unk_2A4 = 0;
-    arg0->unk_2A2 = 0;
-    arg0->unk_29A = 0;
-    arg0->unk_2AA = 0;
-    arg0->unk_29C = 0;
-    arg0->unk_2A0 = 0;
-    arg0->unk_29E = 0;
-    arg0->unk_296 = 0;
-    arg0->unk_298 = 0;
+    actor->unk_254 = 0;
+    actor->unk_272 = 0;
+    actor->unk_238 = 0;
+    actor->unk_25A = 0;
+    actor->unk_2A8 = 0;
+    actor->unk_2A4 = 0;
+    actor->unk_2A2 = 0;
+    actor->unk_29A = 0;
+    actor->unk_2AA = 0;
+    actor->unk_29C = 0;
+    actor->unk_2A0 = 0;
+    actor->unk_29E = 0;
+    actor->unk_296 = 0;
+    actor->unk_298 = 0;
 
-    arg0->scale.x = arg0->scale.y = arg0->scale.z = 1.0f;
-    arg0->unk_190.x = arg0->unk_190.y = arg0->unk_190.z = 0.0f;
-    arg0->unk_1A8.x = arg0->unk_1A8.y = arg0->unk_1A8.z = 0.0f;
+    actor->scale.x = actor->scale.y = actor->scale.z = 1.0f;
+    actor->unk_190.x = actor->unk_190.y = actor->unk_190.z = 0.0f;
+    actor->localOrigin.x = actor->localOrigin.y = actor->localOrigin.z = 0.0f;
 
-    arg0->unk_1B4.z = 0.0f;
-    arg0->unk_1B4.y = 0.0f;
-    arg0->unk_1B4.x = 0.0f;
-    arg0->unk_1C0.x = arg0->unk_1C0.y = arg0->unk_1C0.z = 0.0f;
+    actor->unk_1B4.z = 0.0f;
+    actor->unk_1B4.y = 0.0f;
+    actor->unk_1B4.x = 0.0f;
+    actor->unk_1C0.x = actor->unk_1C0.y = actor->unk_1C0.z = 0.0f;
 
-    arg0->unk_1D4 = 0.0f;
-    arg0->unk_1D0 = 0.0f;
-    arg0->unk_1CC = 0.0f;
-    arg0->unk_1E4 = 0.0f;
-    arg0->unk_210 = 0.0f;
-    arg0->unk_20C = 0.0f;
-    arg0->unk_208 = 0.0f;
-    arg0->unk_204 = 0.0f;
-    arg0->unk_200 = 0.0f;
-    arg0->unk_1FC = 0.0f;
-    arg0->unk_1F8 = 0.0f;
-    arg0->unk_1F4 = 0.0f;
-    arg0->unk_1F0 = 0.0f;
-    arg0->unk_1EC = 0.0f;
-    arg0->unk_284 = 0.0f;
-    arg0->unk_280 = 0.0f;
-    arg0->unk_27C = 0.0f;
-    arg0->unk_274 = 0.0f;
+    actor->unk_1D4 = 0.0f;
+    actor->unk_1D0 = 0.0f;
+    actor->unk_1CC = 0.0f;
+    actor->unk_1E4 = 0.0f;
+    actor->unk_210 = 0.0f;
+    actor->unk_20C = 0.0f;
+    actor->unk_208 = 0.0f;
+    actor->unk_204 = 0.0f;
+    actor->unk_200 = 0.0f;
+    actor->unk_1FC = 0.0f;
+    actor->unk_1F8 = 0.0f;
+    actor->unk_1F4 = 0.0f;
+    actor->unk_1F0 = 0.0f;
+    actor->unk_1EC = 0.0f;
+    actor->unk_284 = 0.0f;
+    actor->unk_280 = 0.0f;
+    actor->unk_27C = 0.0f;
+    actor->unk_274 = 0.0f;
 
-    arg0->unk_260 = arg0->unk_262 = arg0->unk_264 = arg0->unk_266 = 0;
-    arg0->unk_290 = arg0->unk_292 = arg0->unk_294 = 0;
+    actor->unk_260 = actor->unk_262 = actor->unk_264 = actor->unk_266 = 0;
+    actor->unk_290 = actor->unk_292 = actor->unk_294 = 0;
 }
 
 void func_87900770(minigameActor* poke) {
-    poke->unk_190.x = poke->unk_19C.x = poke->unk_1A8.x + poke->unk_1C0.x;
-    poke->unk_190.y = poke->unk_19C.y = poke->unk_1A8.y + poke->unk_1C0.y;
-    poke->unk_190.z = poke->unk_19C.z = poke->unk_1A8.z + poke->unk_1C0.z;
+    poke->unk_190.x = poke->unk_19C.x = poke->localOrigin.x + poke->unk_1C0.x;
+    poke->unk_190.y = poke->unk_19C.y = poke->localOrigin.y + poke->unk_1C0.y;
+    poke->unk_190.z = poke->unk_19C.z = poke->localOrigin.z + poke->unk_1C0.z;
 
     poke->unk_19C.y = poke->unk_19C.y + poke->unk_1E4;
 

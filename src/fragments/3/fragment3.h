@@ -7,31 +7,31 @@
 #include "src/controller.h"
 
 typedef struct minigameActor {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ unk_D_86002F58_004_000 unk_000;		// collider ?
     /* 0x168 */ unk_D_86002F30* unk_168;
     /* 0x16C */ Vec3f scale;
     /* 0x178 */ char unk178[0x18];	//	unused ?
     /* 0x190 */ Vec3f unk_190;      //  position ?
     /* 0x19C */ Vec3f unk_19C;      //	position ?					**	metapod only
-    /* 0x1A8 */ Vec3f unk_1A8;      //	origin position
+    /* 0x1A8 */ Vec3f localOrigin;	//	origin position
     /* 0x1B4 */ Vec3f unk_1B4;		//	related to angle 			**	ekans only
-    /* 0x1C0 */ Vec3f unk_1C0;      //  position
-    /* 0x1CC */ f32 unk_1CC;
-    /* 0x1D0 */ f32 unk_1D0;
-    /* 0x1D4 */ f32 unk_1D4;
-    /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame? nothing reads this
-    /* 0x1E4 */ f32 unk_1E4;        //	double of 28C
-    /* 0x1E8 */ char unk1E8[0x4];
-    /* 0x1EC */ f32 unk_1EC;
-    /* 0x1F0 */ f32 unk_1F0;
-    /* 0x1F4 */ f32 unk_1F4;
-    /* 0x1F8 */ f32 unk_1F8;
-    /* 0x1FC */ f32 unk_1FC;
-    /* 0x200 */ f32 unk_200;
-    /* 0x204 */ f32 unk_204;
-    /* 0x208 */ f32 unk_208;
-    /* 0x20C */ f32 unk_20C;
-    /* 0x210 */ f32 unk_210;
+    /* 0x1C0 */ Vec3f unk_1C0;      //  position,  most probable one
+    /* 0x1CC */ f32 unk_1CC;		//	???							**	ekans only
+    /* 0x1D0 */ f32 unk_1D0;		//	unused ?
+    /* 0x1D4 */ f32 unk_1D4;		//	???							**	ekans only
+    /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame? never used
+    /* 0x1E4 */ f32 unk_1E4;        //	??? half of 28C
+    /* 0x1E8 */ char unk1E8[0x4];	//	unused ?
+    /* 0x1EC */ f32 unk_1EC;		//	zero, never used
+    /* 0x1F0 */ f32 unk_1F0;		//	zero, never used
+    /* 0x1F4 */ f32 unk_1F4;		//	zero, never used
+    /* 0x1F8 */ f32 unk_1F8;		//	speed (x) on ekans and metapod
+    /* 0x1FC */ f32 unk_1FC;		//	speed (y) on ekans and metapod
+    /* 0x200 */ f32 unk_200;		//	speed (z) on ekans and metapod
+    /* 0x204 */ f32 unk_204;		//	x acceleration on metapod	**	metapod only
+    /* 0x208 */ f32 unk_208;		//	y acceleration on metapod	**	metapod only
+    /* 0x20C */ f32 unk_20C;		//	z acceleration on metapod	**	metapod only
+    /* 0x210 */ f32 unk_210;		//	ekans max heght ? ; rock max height on metapod
     /* 0x214 */ Vec3s unk_214;		//	rotation?
     /* 0x21A */ s16 unk_21A;
     /* 0x21C */ s16 unk_21C;
@@ -43,7 +43,7 @@ typedef struct minigameActor {
     /* 0x228 */ s16 unk_228;		//	y angle?
     /* 0x22A */ s16 unk_22A;
     /* 0x22C */ s16 unk_22C;
-    /* 0x22E */ s16 unk_22E;
+    /* 0x22E */ s16 unk_22E;        //  spining speed on ekans ; and maybe sandsrew?
     /* 0x230 */ s16 unk_230;
     /* 0x232 */ s16 unk_232;
     /* 0x234 */ s16 unk_234;
@@ -68,7 +68,7 @@ typedef struct minigameActor {
     /* 0x260 */ s16 unk_260;
     /* 0x262 */ s16 unk_262;
     /* 0x264 */ s16 unk_264;
-    /* 0x264 */ s16 unk_266;
+    /* 0x266 */ s16 unk_266;        //  player id on metapod ?
     /* 0x268 */ s16 unk_268;
     /* 0x26A */ s16 unk_26A;        //	some flag related to collisions
     /* 0x26C */ s16 unk_26C;        //	animation id or state?
@@ -81,18 +81,21 @@ typedef struct minigameActor {
     /* 0x280 */ f32 unk_280;		//	intensity of rotation? stick magnitude on ekans?
     /* 0x284 */ f32 unk_284;
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
-    /* 0x28C */ f32 unk_28C;        //	top    of the hitbox / bounding box ? ;   half of 1E4
+    /* 0x28C */ f32 unk_28C;        //	top    of the hitbox / bounding box ? ;   double of 1E4
     /* 0x290 */ s16 unk_290;
     /* 0x292 */ s16 unk_292;
     /* 0x294 */ s16 unk_294;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 unk_298;
-    /* 0x29A */ s16 unk_29A;		//	used as:
-    								//  last direction in sandshrew's minigame ;
-                            		//  diglett hit score in Skans' minigame ;
-                            		//  per player input lock frames on metapod's minigame after a pause ;
+    /* 0x29A */ union {
+                    s16 unk_29A;
+                    s16 sandshrewLastDir;
+                    s16 ekansDiglettHitScore;
+                    s16 metapodInputLockTimer;
+                };
+
     /* 0x29C */ s16 unk_29C;
-    /* 0x29E */ s16 unk_29E;
+    /* 0x29E */ s16 unk_29E;        //  respawn time after landing on ekans ; something related with comp animation on metapod
     /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames L/R was pressed on sandshrew?
     /* 0x2A2 */ s16 unk_2A2;        //  score on skans' minigame
     /* 0x2A4 */ s16 unk_2A4;
@@ -200,7 +203,7 @@ void func_879004F8(unk_D_86002F58_004_000* arg0);
 void func_87900528(void);
 void hideMiniGameHUD(void);
 void func_87900564(minigameActor* arg0);
-void minigameSetActorPositionZero(minigameActor* arg0);
+void minigameActorLocalOriginToZero(minigameActor* arg0);
 void func_879005AC(minigameActor* arg0);
 void func_879005C4(minigameActor* arg0);
 void func_8790060C(minigameActor* arg0);

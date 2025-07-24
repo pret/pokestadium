@@ -14,7 +14,7 @@ void func_86F003FC(minigameActor* arg0, s32 arg1);
 void func_86F00450(minigameActor* arg0, f32 arg1);
 void func_86F0048C(minigameActor* arg0, s32 arg1);
 void sandshrewPlayerInput(minigameActor* sandshrew);
-void sandshrewAIControls(minigameActor* arg0);
+void sandshrewCompControls(minigameActor* arg0);
 void func_86F00920(minigameActor* arg0);
 void func_86F00D04(void);
 void initSandshrewHole(minigameActor* a0, s32 arg1);

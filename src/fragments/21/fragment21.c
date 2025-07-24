@@ -1595,9 +1595,9 @@ void initSandshrew(minigameActor* sandshrew, s32 player) {
     sandshrew->scale.y = 1.0f;
     sandshrew->scale.z = 1.0f;
 
-    sandshrew->unk_1A8.x = sandshrewPositions[player].x;
-    sandshrew->unk_1A8.y = sandshrewPositions[player].y;
-    sandshrew->unk_1A8.z = sandshrewPositions[player].z;
+    sandshrew->localOrigin.x = sandshrewPositions[player].x;
+    sandshrew->localOrigin.y = sandshrewPositions[player].y;
+    sandshrew->localOrigin.z = sandshrewPositions[player].z;
 
     sandshrew->unk_1C0.x = 0.0f;
     sandshrew->unk_1C0.y = 0.0f;
@@ -1677,7 +1677,7 @@ void func_86F00450(minigameActor* arg0, f32 arg1) {
 
 void func_86F0048C(minigameActor* sandshrew, s32 arg1) {
     if (arg1 == -1) {
-        sandshrew->unk_29A = 0;
+        sandshrew->sandshrewLastDir = 0;
         sandshrew->unk_2B0 = 0;
         sandshrew->unk_2A0 = 0;
         sandshrew->unk_280 = 0.0f;
@@ -1702,7 +1702,7 @@ void sandshrewPlayerInput(minigameActor* sandshrew) {
     dir = 0;
     if (BTN_IS_PRESSED(tempControllerPtr, BTN_L) && BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
         dir = 3;
-    } else if (sandshrew->unk_29A == 1) {
+    } else if (sandshrew->sandshrewLastDir == 1) {
         if (BTN_IS_PRESSED(tempControllerPtr, BTN_L)) {
             dir = 1;
         } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
@@ -1715,9 +1715,9 @@ void sandshrewPlayerInput(minigameActor* sandshrew) {
     }
 
     if (sandshrew->unk_23E == 0) {				//	on iddle animation
-        if ((sandshrew->unk_29A == 0) && ((dir == 1) || (dir == 2))) {
+        if ((sandshrew->sandshrewLastDir == 0) && ((dir == 1) || (dir == 2))) {
             func_86F0048C(sandshrew, 1);
-            sandshrew->unk_29A = dir;
+            sandshrew->sandshrewLastDir = dir;
         }
     } else if (dir == 3) {						//	on both L&R
         sandshrew->unk_2B0--;
@@ -1727,10 +1727,10 @@ void sandshrewPlayerInput(minigameActor* sandshrew) {
             func_86F00450(sandshrew, 1.0f);
         }
     } else if (dir == 2) {						//	on R
-        if (sandshrew->unk_29A == 1) {
+        if (sandshrew->sandshrewLastDir == 1) {
             func_86F0048C(sandshrew, 2);
-            sandshrew->unk_29A = 2;
-        } else if (sandshrew->unk_29A == 2) {
+            sandshrew->sandshrewLastDir = 2;
+        } else if (sandshrew->sandshrewLastDir == 2) {
             sandshrew->unk_2B0--;
             if (sandshrew->unk_2B0 < 0) {
                 func_86F0048C(sandshrew, -1);
@@ -1739,10 +1739,10 @@ void sandshrewPlayerInput(minigameActor* sandshrew) {
             }
         }
     } else if (dir == 1) {						//	on L
-        if (sandshrew->unk_29A == 2) {
+        if (sandshrew->sandshrewLastDir == 2) {
             func_86F0048C(sandshrew, 2);
-            sandshrew->unk_29A = 1;
-        } else if (sandshrew->unk_29A == 1) {
+            sandshrew->sandshrewLastDir = 1;
+        } else if (sandshrew->sandshrewLastDir == 1) {
             sandshrew->unk_2B0--;
             if (sandshrew->unk_2B0 < 0) {
                 func_86F0048C(sandshrew, -1);
@@ -1763,7 +1763,7 @@ void sandshrewPlayerInput(minigameActor* sandshrew) {
     sandshrew->unk_274 += sandshrew->unk_27C;
 }
 
-void sandshrewAIControls(minigameActor* arg0) {
+void sandshrewCompControls(minigameActor* arg0) {
     switch (D_87906046) {
         case 0:
             arg0->unk_27C = (func_81400A78(0xA) * 0.1f) + 3.0f;
@@ -1848,7 +1848,7 @@ void func_86F00920(minigameActor* sandshrew) {
             }
             break;
 
-        case 0x4:
+        case 0x4:              //   on stop diggin
             if (func_800174E4(&sandshrew->unk_000) != 0) {
                 func_8001BD04(&sandshrew->unk_000, 0);
                 sandshrew->unk_23E = 0;
@@ -1865,7 +1865,7 @@ void func_86F00920(minigameActor* sandshrew) {
             break;
 
         case 0x65:
-            minigameSetActorPositionZero(sandshrew);
+            minigameActorLocalOriginToZero(sandshrew);
             func_80015390(&tempSandshrewWaterGeiser->unk_000, 0xA, &sandshrew->unk_1C0);
             break;
     }
@@ -1885,7 +1885,7 @@ void func_86F00D04(void) {
             if (tempSandshrewPlayer->isHuman == 0) {
                 sandshrewPlayerInput(tempSandshrewPlayer);
             } else {
-                sandshrewAIControls(tempSandshrewPlayer);
+                sandshrewCompControls(tempSandshrewPlayer);
             }
         }
 
@@ -1908,9 +1908,9 @@ void initSandshrewHole(minigameActor* a0, s32 arg1) {
     sandshrewHole->scale.y = 1.0f;
     sandshrewHole->scale.z = 1.0f;
 
-    sandshrewHole->unk_1A8.x = sandshrewPositions[arg1].x;
-    sandshrewHole->unk_1A8.y = sandshrewPositions[arg1].y;
-    sandshrewHole->unk_1A8.z = sandshrewPositions[arg1].z;
+    sandshrewHole->localOrigin.x = sandshrewPositions[arg1].x;
+    sandshrewHole->localOrigin.y = sandshrewPositions[arg1].y;
+    sandshrewHole->localOrigin.z = sandshrewPositions[arg1].z;
 
     sandshrewHole->unk_214.x = sandshrewHole->unk_21A = sandshrewHole->unk_220 = sandshrewHole->unk_226 =
         sandshrewHole->unk_22C = 0;
@@ -1985,9 +1985,9 @@ void initSandshrewWaterGeiser(minigameActor* arg0, s32 arg1) {
     geiser->scale.y = 1.0f;
     geiser->scale.z = 1.0f;
 
-    geiser->unk_1A8.x = sandshrewPositions[arg1].x;
-    geiser->unk_1A8.y = sandshrewPositions[arg1].y;
-    geiser->unk_1A8.z = sandshrewPositions[arg1].z;
+    geiser->localOrigin.x = sandshrewPositions[arg1].x;
+    geiser->localOrigin.y = sandshrewPositions[arg1].y;
+    geiser->localOrigin.z = sandshrewPositions[arg1].z;
 
     geiser->unk_22C = 0;
     geiser->unk_22E = 0;
