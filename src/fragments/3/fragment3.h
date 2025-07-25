@@ -11,7 +11,7 @@ typedef struct minigameActor {
     /* 0x168 */ unk_D_86002F30* unk_168;
     /* 0x16C */ Vec3f scale;
     /* 0x178 */ char unk178[0x18];	//	unused ?
-    /* 0x190 */ Vec3f unk_190;      //  position ?
+    /* 0x190 */ Vec3f unk_190;      //  global position ?
     /* 0x19C */ Vec3f unk_19C;      //	position ?					**	metapod only
     /* 0x1A8 */ Vec3f localOrigin;	//	origin position
     /* 0x1B4 */ Vec3f unk_1B4;		//	related to angle 			**	ekans only
@@ -20,11 +20,11 @@ typedef struct minigameActor {
     /* 0x1D0 */ f32 unk_1D0;		//	unused ?
     /* 0x1D4 */ f32 unk_1D4;		//	???							**	ekans only
     /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame? never used
-    /* 0x1E4 */ f32 unk_1E4;        //	??? half of 28C
+    /* 0x1E4 */ f32 unk_1E4;        //	botton  of the hitbox ? half of 28C
     /* 0x1E8 */ char unk1E8[0x4];	//	unused ?
-    /* 0x1EC */ f32 unk_1EC;		//	zero, never used
-    /* 0x1F0 */ f32 unk_1F0;		//	zero, never used
-    /* 0x1F4 */ f32 unk_1F4;		//	zero, never used
+    /* 0x1EC */ f32 unk_1EC;		//	always zero
+    /* 0x1F0 */ f32 unk_1F0;		//	always zero
+    /* 0x1F4 */ f32 unk_1F4;		//	always zero
     /* 0x1F8 */ f32 unk_1F8;		//	speed (x) on ekans and metapod
     /* 0x1FC */ f32 unk_1FC;		//	speed (y) on ekans and metapod
     /* 0x200 */ f32 unk_200;		//	speed (z) on ekans and metapod
@@ -32,33 +32,33 @@ typedef struct minigameActor {
     /* 0x208 */ f32 unk_208;		//	y acceleration on metapod	**	metapod only
     /* 0x20C */ f32 unk_20C;		//	z acceleration on metapod	**	metapod only
     /* 0x210 */ f32 unk_210;		//	ekans max heght ? ; rock max height on metapod
-    /* 0x214 */ Vec3s unk_214;		//	rotation?
-    /* 0x21A */ s16 unk_21A;
-    /* 0x21C */ s16 unk_21C;
-    /* 0x21E */ s16 unk_21E;
-    /* 0x220 */ s16 unk_220;
-    /* 0x222 */ s16 unk_222;
-    /* 0x224 */ s16 unk_224;
-    /* 0x226 */ s16 unk_226;
-    /* 0x228 */ s16 unk_228;		//	y angle?
-    /* 0x22A */ s16 unk_22A;
-    /* 0x22C */ s16 unk_22C;
-    /* 0x22E */ s16 unk_22E;        //  spining speed on ekans ; and maybe sandsrew?
-    /* 0x230 */ s16 unk_230;
-    /* 0x232 */ s16 unk_232;
-    /* 0x234 */ s16 unk_234;
-    /* 0x236 */ s16 unk_236;
-    /* 0x238 */ s16 unk_238;
-    /* 0x23A */ s16 unk_23A;
-    /* 0x23C */ s16 unk_23C;        //  model id ?
+    /* 0x214 */ Vec3s totalRot;		//	total rotation
+    /* 0x21A */ s16 unk_21A;		//	x rotation ? always zero
+    /* 0x21C */ s16 unk_21C;		//	y rotation on ekans, zero elsewhere
+    /* 0x21E */ s16 unk_21E;		//	z rotation ? always zero
+    /* 0x220 */ s16 unk_220;		//	x something, always zero
+    /* 0x222 */ s16 unk_222;		//	y something, always zero
+    /* 0x224 */ s16 unk_224;		//	z something, always zero
+    /* 0x226 */ s16 unk_226;		//	x rotation ?
+    /* 0x228 */ s16 unk_228;		//	y rotation (throwing direction on ekans)
+    /* 0x22A */ s16 unk_22A;		//	z rotation ?
+    /* 0x22C */ s16 unk_22C;		//	x spinning speed ?
+    /* 0x22E */ s16 unk_22E;        //  spinning speed on ekans ; and maybe sandsrew?
+    /* 0x230 */ s16 unk_230;		//	z spinning speed ?
+    /* 0x232 */ s16 unk_232;		//	always zero
+    /* 0x234 */ s16 unk_234;		//	rotation
+    /* 0x236 */ s16 unk_236;		//	always zero
+    /* 0x238 */ s16 unk_238;		//	always zero
+    /* 0x23A */ s16 unk_23A;		//	always zero
+    /* 0x23C */ s16 unk_23C;        //  ???
     /* 0x23E */ s16 unk_23E;        //	animation id or state ?
-    /* 0x240 */ s16 unk_240;		//	
+    /* 0x240 */ s16 unk_240;		//	metapod rock squashed
     /* 0x242 */ s16 unk_242;
     /* 0x244 */ s16 unk_244;
     /* 0x246 */ char unk246[0x2];
     /* 0x248 */ s16 unk_248;        //	0,1,2 - colliding? visibility? animation id?
-    /* 0x24A */ s16 unk_24A;        //	some flag related to collisions
-    /* 0x24C */ s16 unk_24C;        //	some flag related to collisions
+    /* 0x24A */ s16 unk_24A;        //	animation id ?
+    /* 0x24C */ s16 unk_24C;        //	
     /* 0x24E */ char unk24E[0x6];
     /* 0x254 */ s32 unk_254;
     /* 0x258 */ s16 unk_258;
@@ -81,7 +81,7 @@ typedef struct minigameActor {
     /* 0x280 */ f32 unk_280;		//	intensity of rotation? stick magnitude on ekans?
     /* 0x284 */ f32 unk_284;
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
-    /* 0x28C */ f32 unk_28C;        //	top    of the hitbox / bounding box ? ;   double of 1E4
+    /* 0x28C */ f32 unk_28C;        //	top    of the hitbox ? / bounding box ? ;   double of 1E4
     /* 0x290 */ s16 unk_290;
     /* 0x292 */ s16 unk_292;
     /* 0x294 */ s16 unk_294;

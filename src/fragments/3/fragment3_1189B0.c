@@ -100,13 +100,13 @@ s32 metapodRockCollisionCheck(minigameActor* fallingRock, minigameActor* metapod
 }
 
 // change animation on ekans' and metapod's minigames ?
-void func_879002B8(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3) {
-    arg0->unk_248 = 1; //	animation flag ?
-    arg0->unk_24A = arg1;
-    arg0->unk_24C = arg2;
-    arg0->unk_26A = arg3;
-    arg0->unk_26C = 0; //	animation flag ?
-    arg0->unk_26E = 0;
+void func_879002B8(minigameActor* poke, s16 arg1, s16 arg2, s16 arg3) {
+    poke->unk_248 = 1; //	animation flag ?
+    poke->unk_24A = arg1;
+    poke->unk_24C = arg2;
+    poke->unk_26A = arg3;
+    poke->unk_26C = 0; //	animation flag ?
+    poke->unk_26E = 0;
 }
 
 void func_879002FC(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
@@ -223,7 +223,7 @@ void func_879005C4(minigameActor* ekans) {
 }
 
 void func_8790060C(minigameActor* actor) {
-    actor->unk_214.x = actor->unk_214.y = actor->unk_214.z = 0;
+    actor->totalRot.x = actor->totalRot.y = actor->totalRot.z = 0;
     actor->unk_21A = actor->unk_21C = actor->unk_21E = 0;
     actor->unk_220 = actor->unk_222 = actor->unk_224 = 0;
     actor->unk_226 = actor->unk_228 = actor->unk_22A = 0;
@@ -285,9 +285,9 @@ void func_87900770(minigameActor* poke) {
 
     poke->unk_19C.y = poke->unk_19C.y + poke->unk_1E4;
 
-    poke->unk_214.x = poke->unk_21A + poke->unk_226 + poke->unk_232;
-    poke->unk_214.y = poke->unk_21C + poke->unk_228 + poke->unk_234;
-    poke->unk_214.z = poke->unk_21E + poke->unk_22A + poke->unk_236;
+    poke->totalRot.x = poke->unk_21A + poke->unk_226 + poke->unk_232;
+    poke->totalRot.y = poke->unk_21C + poke->unk_228 + poke->unk_234;
+    poke->totalRot.z = poke->unk_21E + poke->unk_22A + poke->unk_236;
 }
 
 void func_87900808(minigameActor* arg0) {
@@ -299,9 +299,9 @@ void func_87900808(minigameActor* arg0) {
     arg0->unk_000.unk_024.y = arg0->unk_190.y;
     arg0->unk_000.unk_024.z = arg0->unk_190.z;
 
-    arg0->unk_000.unk_01E.x = arg0->unk_214.x;
-    arg0->unk_000.unk_01E.y = arg0->unk_214.y;
-    arg0->unk_000.unk_01E.z = arg0->unk_214.z;
+    arg0->unk_000.unk_01E.x = arg0->totalRot.x;
+    arg0->unk_000.unk_01E.y = arg0->totalRot.y;
+    arg0->unk_000.unk_01E.z = arg0->totalRot.z;
 }
 
 void func_87900854(void) {

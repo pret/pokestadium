@@ -37,8 +37,8 @@ typedef struct unk_D_86E04BFC {
     /* 0x16 */ s16 unk_16;
 } unk_D_86E04BFC; // size = 0x18
 
-static minigameActor metadodPlayers[4];
-static minigameActor metapodMinigameFallingRocks[20];
+static minigameActor miniMetapods[4];
+static minigameActor miniMetapodRocks[20];
 static s16 D_86E08E40;
 static unk_D_800AC870* D_86E08E44;
 
@@ -455,8 +455,8 @@ static u32 D_86E04AE0[] = {
 static s16 D_86E04B20 = 0;
 static s16 D_86E04B24 = 1;
 static s16 D_86E04B28 = 0;
-static minigameActor* tempMetadodPlayer = metadodPlayers;
-static minigameActor* tempFallingRock = metapodMinigameFallingRocks;
+static minigameActor* miniMetapodPtr = miniMetapods;
+static minigameActor* miniMetapodRockPtr = miniMetapodRocks;
 static u32 D_86E04B34[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0xFFE20032, 0x00000000,  0x00000000,
     0x05000000, 0x0D000000, 0x05000000, 0x14000000, 0x002B0012, 0xFFFFFF32, 0x16FFFFFF,  0x0F000003,
@@ -601,10 +601,10 @@ void func_86E001E4(minigameActor* metapod, s32 arg1) {
 void initMetapodPlayers(void) {
     s32 i;
 
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
     for (i = 0; i < 4; i++) {
-        func_86E001E4(tempMetadodPlayer, i);
-        tempMetadodPlayer++;
+        func_86E001E4(miniMetapodPtr, i);
+        miniMetapodPtr++;
     }
 }
 
@@ -628,7 +628,7 @@ void func_86E0036C(minigameActor* arg0) {
         case 1:
             func_86E0034C(arg0);
             func_879002B8(arg0, 1, -1, 1);
-            func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_879029F0, &D_87903E40, 4);
+            func_81407D48(1.0f, arg0->unk_190, arg0->totalRot, func_879029F0, &D_87903E40, 4);
             arg0->unk_23E++;
             break;
 
@@ -807,15 +807,15 @@ void func_86E007CC(minigameActor* metapod, s32 player) {
                 sp20 = 0xC;
         }
 
-        tempFallingRock = metapodMinigameFallingRocks;
+        miniMetapodRockPtr = miniMetapodRocks;
         for (i = 0; i < 20; i++) {
-            if ((tempFallingRock->unk_270 != 0) && (player == tempFallingRock->unk_266)) {
-                if (tempFallingRock->unk_29E < sp20) {
+            if ((miniMetapodRockPtr->unk_270 != 0) && (player == miniMetapodRockPtr->unk_266)) {
+                if (miniMetapodRockPtr->unk_29E < sp20) {
                     var_t0 = 1;
-                    sp20 = tempFallingRock->unk_29E;
+                    sp20 = miniMetapodRockPtr->unk_29E;
                 }
             }
-            tempFallingRock++;
+            miniMetapodRockPtr++;
         }
 
         sp20--;
@@ -857,7 +857,7 @@ void func_86E00924(minigameActor* metapod, s32 arg1) {
                         metapod->unk_23E = 1;
                         metapod->unk_272 = 4;
                         metapod->unk_242++;
-                        func_81407D48(1.0f, metapod->unk_190, metapod->unk_214, func_879029F0, &D_87903E40, 4);
+                        func_81407D48(1.0f, metapod->unk_190, metapod->totalRot, func_879029F0, &D_87903E40, 4);
                     } else {
                         metapod->unk_242 = 0x64;
                     }
@@ -897,106 +897,106 @@ void func_86E00AF4(void) {
     s32 i;
 
     tempControllerPtr = gPlayer1Controller;
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
-        tempMetadodPlayer->unk_000.unk_01C = 0;
-        tempMetadodPlayer->unk_272 = 0;
+        miniMetapodPtr->unk_000.unk_01C = 0;
+        miniMetapodPtr->unk_272 = 0;
 
         if (minigameInputLock != 0) {
-            if (tempMetadodPlayer->isHuman == 0) {
-                func_86E0036C(tempMetadodPlayer);
+            if (miniMetapodPtr->isHuman == 0) {
+                func_86E0036C(miniMetapodPtr);
             } else {
-                func_86E00924(tempMetadodPlayer, i);
+                func_86E00924(miniMetapodPtr, i);
             }
         }
 
-        func_87900770(tempMetadodPlayer);
-        func_87900808(tempMetadodPlayer);
+        func_87900770(miniMetapodPtr);
+        func_87900808(miniMetapodPtr);
 
-        tempMetadodPlayer++;
+        miniMetapodPtr++;
         tempControllerPtr++;
     }
 }
 
 s32 metapodRockCollisionCheck_void(void) {
-    return metapodRockCollisionCheck(tempFallingRock, &metadodPlayers[tempFallingRock->unk_266]);
+    return metapodRockCollisionCheck(miniMetapodRockPtr, &miniMetapods[miniMetapodRockPtr->unk_266]);
 }
 
-s32 func_86E00C34(s32 arg0) {
+s32 func_86E00C34(s32 nPlayer) {
     s32 sp1C = 0;
 
     if (metapodRockCollisionCheck_void() != 0) {
-        tempMetadodPlayer->unk_260 = 1;
-        if (tempMetadodPlayer->unk_272 != 0) { //  if hardened ? colliding ?
-            func_86E001A0(7, arg0);
+        miniMetapodPtr->unk_260 = 1;
+        if (miniMetapodPtr->unk_272 != 0) { //  if hardened ? colliding ?
+            func_86E001A0(7, nPlayer);
             sp1C = 1;
         } else {
-            tempMetadodPlayer->unk_240 = 1; // set the metapod's squashing animation
-            func_86E004FC(tempMetadodPlayer);
+            miniMetapodPtr->unk_240 = 1; // rock squashing
+            func_86E004FC(miniMetapodPtr);
             sp1C = 2;
         }
     }
     return sp1C;
 }
 
-void func_86E00CAC(minigameActor* arg0, s32 arg1) {
+void func_86E00CAC(UNUSED minigameActor* metapod, s32 nPlayer) {
     s32 i;
     s32 colliding;
 
-    tempFallingRock = metapodMinigameFallingRocks;
+    miniMetapodRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 20; i++) {
-        if ((tempFallingRock->unk_270 != 0) && (arg1 == tempFallingRock->unk_266) && (tempFallingRock->unk_260 == 0)) {
-            colliding = func_86E00C34(arg1);
+        if ((miniMetapodRockPtr->unk_270 != 0) && (nPlayer == miniMetapodRockPtr->unk_266) && (miniMetapodRockPtr->unk_260 == 0)) {
+            colliding = func_86E00C34(nPlayer);
             if (colliding != 0) {
-                tempFallingRock->unk_260 = 1;
+                miniMetapodRockPtr->unk_260 = 1;
                 if (colliding == 1) {
-                    tempFallingRock->unk_272 = 1;
+                    miniMetapodRockPtr->unk_272 = 1;
                 } else {
-                    tempFallingRock->unk_272 = 0;
+                    miniMetapodRockPtr->unk_272 = 0;
                 }
                 break;
             }
         }
-        tempFallingRock++;
+        miniMetapodRockPtr++;
     }
 }
 
 void func_86E00D78(minigameActor* arg0, s32 arg1) {
-    if ((tempMetadodPlayer->unk_25A > 0) && (arg0->unk_2A8 == 0)) {
-        if (tempMetadodPlayer->unk_25A >= 0x28) {
-            tempMetadodPlayer->unk_258 -= tempMetadodPlayer->unk_25A;
-            tempMetadodPlayer->unk_25A = 0;
+    if ((miniMetapodPtr->unk_25A > 0) && (arg0->unk_2A8 == 0)) {
+        if (miniMetapodPtr->unk_25A >= 0x28) {
+            miniMetapodPtr->unk_258 -= miniMetapodPtr->unk_25A;
+            miniMetapodPtr->unk_25A = 0;
         } else {
-            tempMetadodPlayer->unk_25A--;
-            tempMetadodPlayer->unk_258--;
+            miniMetapodPtr->unk_25A--;
+            miniMetapodPtr->unk_258--;
         }
 
-        if (tempMetadodPlayer->unk_258 < 0) {
-            tempMetadodPlayer->unk_258 = 0;
+        if (miniMetapodPtr->unk_258 < 0) {
+            miniMetapodPtr->unk_258 = 0;
         }
     }
 
-    if (tempMetadodPlayer->unk_258 == 0) {
-        if (tempMetadodPlayer->unk_2A4 == 0) {
+    if (miniMetapodPtr->unk_258 == 0) {
+        if (miniMetapodPtr->unk_2A4 == 0) {
             func_86E001A0(9, arg1);
-            func_879002B8(tempMetadodPlayer, 3, 1, 0);
-            tempMetadodPlayer->unk_2A4 = 1;
-            tempMetadodPlayer->unk_2AA = 1;
+            func_879002B8(miniMetapodPtr, 3, 1, 0);
+            miniMetapodPtr->unk_2A4 = 1;
+            miniMetapodPtr->unk_2AA = 1;
         }
     } else {
-        switch (tempMetadodPlayer->unk_240) {
+        switch (miniMetapodPtr->unk_240) {
             case 1:
-                tempMetadodPlayer->unk_25A += 0x1E;
-                func_879002B8(tempMetadodPlayer, 2, 0, 1);
+                miniMetapodPtr->unk_25A += 0x1E;
+                func_879002B8(miniMetapodPtr, 2, 0, 1);
                 func_86E001A0(8, arg1);
-                tempMetadodPlayer->unk_240++;
+                miniMetapodPtr->unk_240++;
                 break;
 
             case 2:
-                if (tempMetadodPlayer->unk_248 == 0) {
-                    tempMetadodPlayer->unk_240 = 0;
+                if (miniMetapodPtr->unk_248 == 0) {
+                    miniMetapodPtr->unk_240 = 0;
                 }
                 break;
         }
@@ -1006,37 +1006,37 @@ void func_86E00D78(minigameActor* arg0, s32 arg1) {
 void func_86E00ED0(void) {
     s32 i;
 
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
         if (minigameInputLock != 0) {
-            func_86E00CAC(tempMetadodPlayer, i);
-            func_86E00D78(tempMetadodPlayer, i);
+            func_86E00CAC(miniMetapodPtr, i);
+            func_86E00D78(miniMetapodPtr, i);
         }
-        tempMetadodPlayer++;
+        miniMetapodPtr++;
     }
 }
 
 void func_86E00F60(void) {
-    func_879003A0(tempMetadodPlayer);
+    func_879003A0(miniMetapodPtr);
 
-    tempMetadodPlayer->unk_000.unk_024.x = tempMetadodPlayer->unk_190.x;
-    tempMetadodPlayer->unk_000.unk_024.y = tempMetadodPlayer->unk_190.y;
-    tempMetadodPlayer->unk_000.unk_024.z = tempMetadodPlayer->unk_190.z;
+    miniMetapodPtr->unk_000.unk_024.x = miniMetapodPtr->unk_190.x;
+    miniMetapodPtr->unk_000.unk_024.y = miniMetapodPtr->unk_190.y;
+    miniMetapodPtr->unk_000.unk_024.z = miniMetapodPtr->unk_190.z;
 
-    tempMetadodPlayer->unk_000.unk_01E.x = tempMetadodPlayer->unk_214.x;
-    tempMetadodPlayer->unk_000.unk_01E.y = tempMetadodPlayer->unk_214.y;
-    tempMetadodPlayer->unk_000.unk_01E.z = tempMetadodPlayer->unk_214.z;
+    miniMetapodPtr->unk_000.unk_01E.x = miniMetapodPtr->totalRot.x;
+    miniMetapodPtr->unk_000.unk_01E.y = miniMetapodPtr->totalRot.y;
+    miniMetapodPtr->unk_000.unk_01E.z = miniMetapodPtr->totalRot.z;
 }
 
 void func_86E00FD8(void) {
     s32 i;
 
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
         func_86E00F60();
-        tempMetadodPlayer++;
+        miniMetapodPtr++;
     }
 }
 
@@ -1065,12 +1065,12 @@ void initFallingRocks(void) {
     s32 i;
     s32 j;
 
-    tempFallingRock = metapodMinigameFallingRocks;
+    miniMetapodRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 5; j++) {
-            func_86E0103C(tempFallingRock, i);
-            tempFallingRock++;
+            func_86E0103C(miniMetapodRockPtr, i);
+            miniMetapodRockPtr++;
         }
     }
 
@@ -1108,20 +1108,20 @@ void func_86E01188(void) {
             break;
     }
 
-    metapod = metadodPlayers;
+    metapod = miniMetapods;
     for (i = 0; i < 4; i++, metapod++) {
         if (metapod->unk_2AA == 0) {
             var_s1 = 0;
-            tempFallingRock = &metapodMinigameFallingRocks[i * 5];
+            miniMetapodRockPtr = &miniMetapodRocks[i * 5];
 
             for (j = 0; j < D_86E04B24; j++) {
-                func_86E0103C(tempFallingRock, i);
+                func_86E0103C(miniMetapodRockPtr, i);
 
-                tempFallingRock->unk_23E = 1;
-                tempFallingRock->unk_29E = var_s1;
+                miniMetapodRockPtr->unk_23E = 1;
+                miniMetapodRockPtr->unk_29E = var_s1;
 
                 var_s1 += var_s5;
-                tempFallingRock++;
+                miniMetapodRockPtr++;
             }
         }
     }
@@ -1132,14 +1132,14 @@ void func_86E01310(minigameActor* rock) {
     s16 temp_a1 = rock->unk_266;
 
     rock->unk_29E = temp_v1 - 1;
-    rock->localOrigin.y += D_86E04BFC[temp_a1].unk_00.y + metadodPlayers[temp_a1].unk_28C;
+    rock->localOrigin.y += D_86E04BFC[temp_a1].unk_00.y + miniMetapods[temp_a1].unk_28C;
 
     rock->unk_210 = 0.7f;
     rock->unk_1F8 = 0.0f;
     rock->unk_1FC = temp_v1 * rock->unk_210 * 0.5f;
 
     rock->unk_200 =
-        ((metadodPlayers[temp_a1].localOrigin.z + (metadodPlayers[temp_a1].unk_288 * 0.5f)) - rock->localOrigin.z) / temp_v1;
+        ((miniMetapods[temp_a1].localOrigin.z + (miniMetapods[temp_a1].unk_288 * 0.5f)) - rock->localOrigin.z) / temp_v1;
     rock->unk_270 = 1;
 
     rock->unk_000.unk_000.unk_01 |= 1;
@@ -1156,7 +1156,7 @@ void func_86E01428(minigameActor* rock) {
     s16 temp_a1 = rock->unk_266;
     Vec3f sp3C;
 
-    if ((D_87903DA8 != 0) || (metadodPlayers[temp_a1].unk_258 == 0)) {
+    if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].unk_258 == 0)) {
         switch (rock->unk_23E) {
             case 1:
                 rock->unk_23E = 0;
@@ -1191,7 +1191,7 @@ void func_86E01428(minigameActor* rock) {
                     rock->unk_1FC = 5.0f;
                     rock->unk_200 = 1.5f;
                     func_86E01414(rock);
-                    func_81407D48(1.0f, rock->unk_190, rock->unk_214, func_87901F04, &D_87903E28, 4);
+                    func_81407D48(1.0f, rock->unk_190, rock->totalRot, func_87901F04, &D_87903E28, 4);
                 } else {
                     rock->unk_23E++;
                 }
@@ -1206,7 +1206,7 @@ void func_86E01428(minigameActor* rock) {
             sp3C.y = 0.0f;
             sp3C.z = rock->unk_190.z;
 
-            func_81407D48(1.0f, sp3C, rock->unk_214, func_87902068, &D_87903E10, 4);
+            func_81407D48(1.0f, sp3C, rock->totalRot, func_87902068, &D_87903E10, 4);
             rock->unk_23E++;
             break;
 
@@ -1250,11 +1250,11 @@ void func_86E0172C(minigameActor* rock) {
 void func_86E017C0(void) {
     s32 i;
 
-    tempFallingRock = metapodMinigameFallingRocks;
+    miniMetapodRockPtr = miniMetapodRocks;
     for (i = 0; i < 20; i++) {
-        func_86E01428(tempFallingRock);
-        func_86E0172C(tempFallingRock);
-        tempFallingRock++;
+        func_86E01428(miniMetapodRockPtr);
+        func_86E0172C(miniMetapodRockPtr);
+        miniMetapodRockPtr++;
     }
 }
 
@@ -1269,21 +1269,21 @@ void func_86E0182C(minigameActor* arg0) {
     arg0->unk_000.unk_024.y = arg0->unk_190.y;
     arg0->unk_000.unk_024.z = arg0->unk_190.z;
 
-    arg0->unk_000.unk_01E.x = arg0->unk_214.x;
-    arg0->unk_000.unk_01E.y = arg0->unk_214.y;
-    arg0->unk_000.unk_01E.z = arg0->unk_214.z;
+    arg0->unk_000.unk_01E.x = arg0->totalRot.x;
+    arg0->unk_000.unk_01E.y = arg0->totalRot.y;
+    arg0->unk_000.unk_01E.z = arg0->totalRot.z;
 }
 
 void func_86E01898(void) {
     s32 var_s1;
 
-    tempFallingRock = metapodMinigameFallingRocks;
+    miniMetapodRockPtr = miniMetapodRocks;
     var_s1 = 0;
     do {
-        func_86E016EC(tempFallingRock);
-        func_86E0182C(tempFallingRock);
+        func_86E016EC(miniMetapodRockPtr);
+        func_86E0182C(miniMetapodRockPtr);
         var_s1 += 1;
-        tempFallingRock = &tempFallingRock[1];
+        miniMetapodRockPtr = &miniMetapodRockPtr[1];
     } while (var_s1 != 0x14);
 }
 
@@ -1321,7 +1321,7 @@ void func_86E019F4(void) {
     s32 i;
     s32 var_a2;
 
-    tempFallingRock = metapodMinigameFallingRocks;
+    miniMetapodRockPtr = miniMetapodRocks;
     switch (D_86E04B28) {
         case 1:
             func_86E01188();
@@ -1331,11 +1331,11 @@ void func_86E019F4(void) {
         case 2:
             var_a2 = 1;
             for (i = 0; i < 20; i++) {
-                if (tempFallingRock->unk_23E != 0) {
+                if (miniMetapodRockPtr->unk_23E != 0) {
                     var_a2 = 0;
                     break;
                 }
-                tempFallingRock++;
+                miniMetapodRockPtr++;
             }
 
             if (var_a2 != 0) {
@@ -1366,33 +1366,33 @@ s32 func_86E01B08(void) {
     s32 var_t3 = 0;
     s32 var_v0_5;
 
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
-        if (tempMetadodPlayer->unk_2A6 < var_a3) {
-            var_a3 = tempMetadodPlayer->unk_2A6;
+        if (miniMetapodPtr->unk_2A6 < var_a3) {
+            var_a3 = miniMetapodPtr->unk_2A6;
         }
 
-        if (tempMetadodPlayer->unk_2A4 == 1) {
+        if (miniMetapodPtr->unk_2A4 == 1) {
             var_t1++;
         }
 
-        if (tempMetadodPlayer->unk_2A4 == 2) {
+        if (miniMetapodPtr->unk_2A4 == 2) {
             var_t2++;
         }
 
-        tempMetadodPlayer++;
+        miniMetapodPtr++;
     }
 
     if (var_t1 != 0) {
         var_a3 -= var_t1;
-        tempMetadodPlayer = metadodPlayers;
+        miniMetapodPtr = miniMetapods;
         for (i = 0; i < 4; i++) {
-            if (tempMetadodPlayer->unk_2A4 == 1) {
-                tempMetadodPlayer->unk_2A4 = 2;
-                tempMetadodPlayer->unk_2A6 = var_a3;
+            if (miniMetapodPtr->unk_2A4 == 1) {
+                miniMetapodPtr->unk_2A4 = 2;
+                miniMetapodPtr->unk_2A6 = var_a3;
             }
-            tempMetadodPlayer++;
+            miniMetapodPtr++;
         }
     }
 
@@ -1406,40 +1406,40 @@ s32 func_86E01B08(void) {
         var_v0_5 = 3;
     }
 
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
 
     switch (var_v0_5) {
         case 1:
             for (i = 0; i < 4; i++) {
-                if (tempMetadodPlayer->unk_2A6 == 5) {
-                    tempMetadodPlayer->unk_2A8 = 1;
-                    tempMetadodPlayer->unk_2AA = 1;
-                    tempMetadodPlayer->unk_2A6 = 1;
+                if (miniMetapodPtr->unk_2A6 == 5) {
+                    miniMetapodPtr->unk_2A8 = 1;
+                    miniMetapodPtr->unk_2AA = 1;
+                    miniMetapodPtr->unk_2A6 = 1;
                     var_t3 = 1;
                     func_87802F00(i);
                     break;
                 }
-                tempMetadodPlayer++;
+                miniMetapodPtr++;
             }
             break;
 
         case 2:
             var_t3 = 1;
             for (i = 0; i < 4; i++) {
-                tempMetadodPlayer->unk_2AA = 1;
-                tempMetadodPlayer->unk_2A6 = 0;
-                tempMetadodPlayer++;
+                miniMetapodPtr->unk_2AA = 1;
+                miniMetapodPtr->unk_2A6 = 0;
+                miniMetapodPtr++;
             }
             break;
 
         case 3:
             for (i = 0; i < 4; i++) {
-                if (tempMetadodPlayer->unk_2A6 == 1) {
-                    tempMetadodPlayer->unk_2AA = 1;
-                    tempMetadodPlayer->unk_2A6 = 5;
+                if (miniMetapodPtr->unk_2A6 == 1) {
+                    miniMetapodPtr->unk_2AA = 1;
+                    miniMetapodPtr->unk_2A6 = 5;
                     var_t3 = 1;
                 }
-                tempMetadodPlayer++;
+                miniMetapodPtr++;
             }
             break;
     }
@@ -1455,7 +1455,7 @@ s32 func_86E01E34(void) {
     s32 var_s3 = 0;
     minigameActor* var_s0;
 
-    for (i = 0, var_s0 = metadodPlayers; i < 4; i++, var_s0++) {
+    for (i = 0, var_s0 = miniMetapods; i < 4; i++, var_s0++) {
         if (var_s0->unk_2A8 != 0) {
             func_879002B8(var_s0, 4, -1, 0);
             var_s3 = 1;
@@ -1468,11 +1468,11 @@ s32 func_86E01E34(void) {
 void func_86E01EB0(void) {
     s32 i;
 
-    tempMetadodPlayer = metadodPlayers;
+    miniMetapodPtr = miniMetapods;
     for (i = 0; i < 4; i++) {
-        if (tempMetadodPlayer) {}
+        if (miniMetapodPtr) {}
 
-        tempMetadodPlayer++;
+        miniMetapodPtr++;
     }
 }
 
@@ -1497,7 +1497,7 @@ s32 func_86E01EE8(void) {
 s32 func_86E01F50(void) {
     s32 i;
     s32 ret = 1;
-    minigameActor* var_v0 = metapodMinigameFallingRocks;
+    minigameActor* var_v0 = miniMetapodRocks;
 
     for (i = 0; i < 20; i++, var_v0++) {
         if (var_v0->unk_23E != 0) {
@@ -1578,7 +1578,7 @@ void func_86E02170(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, metadodPlayers[i].unk_258, metadodPlayers[i].unk_25C);
+        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, miniMetapods[i].unk_258, miniMetapods[i].unk_25C);
     }
 }
 
@@ -1735,7 +1735,7 @@ void func_86E02974(void) {
 }
 
 void func_86E02A28(void) {
-    minigameActor* metapod = metadodPlayers;
+    minigameActor* metapod = miniMetapods;
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (metapod->unk_23E == 0)) {
         metapod->metapodInputLockTimer = 4;
@@ -1821,11 +1821,11 @@ void func_86E02C5C(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&metadodPlayers[i].unk_000);
+        func_8001BB58(&miniMetapods[i].unk_000);
     }
 
     for (i = 0; i < 20; i++) {
-        func_8001BB58(&metapodMinigameFallingRocks[i].unk_000);
+        func_8001BB58(&miniMetapodRocks[i].unk_000);
     }
 
     func_8001987C();
@@ -1836,28 +1836,28 @@ void func_86E02C5C(void) {
             var_v1 = func_878001E8(2);
         }
 
-        metadodPlayers[i].unk_23C = D_86E04CB4[var_v1][0];
-        metadodPlayers[i].unk_168 = func_80019D18(metadodPlayers[i].unk_23C);
-        metadodPlayers[i].unk_288 = D_86E04CB4[var_v1][1];
-        metadodPlayers[i].unk_28C = D_86E04CB4[var_v1][2];
+        miniMetapods[i].unk_23C = D_86E04CB4[var_v1][0];
+        miniMetapods[i].unk_168 = func_80019D18(miniMetapods[i].unk_23C);
+        miniMetapods[i].unk_288 = D_86E04CB4[var_v1][1];
+        miniMetapods[i].unk_28C = D_86E04CB4[var_v1][2];
 
-        func_8001BC34(&metadodPlayers[i].unk_000, 0, metadodPlayers[i].unk_23C,
-                      metadodPlayers[i].unk_168->unk_08->unk_00[0]);
-        func_8001BD04(&metadodPlayers[i].unk_000, 0);
+        func_8001BC34(&miniMetapods[i].unk_000, 0, miniMetapods[i].unk_23C,
+                      miniMetapods[i].unk_168->unk_08->unk_00[0]);
+        func_8001BD04(&miniMetapods[i].unk_000, 0);
 
-        if (metadodPlayers) {}
+        if (miniMetapods) {}
     }
 
     temp_s1_2 = func_80019D18(0x9C);
     for (i = 0; i < 20; i++) {
-        metapodMinigameFallingRocks[i].unk_23C = 0x9C;
-        metapodMinigameFallingRocks[i].unk_168 = temp_s1_2;
+        miniMetapodRocks[i].unk_23C = 0x9C;
+        miniMetapodRocks[i].unk_168 = temp_s1_2;
 
-        func_8001BC34(&metapodMinigameFallingRocks[i].unk_000, 0, metapodMinigameFallingRocks[i].unk_23C,
+        func_8001BC34(&miniMetapodRocks[i].unk_000, 0, miniMetapodRocks[i].unk_23C,
                       temp_s1_2->unk_08->unk_00[0]);
-        func_8001BD04(&metapodMinigameFallingRocks[i].unk_000, 0);
+        func_8001BD04(&miniMetapodRocks[i].unk_000, 0);
 
-        metapodMinigameFallingRocks[i].unk_000.unk_000.unk_01 &= ~1;
+        miniMetapodRocks[i].unk_000.unk_000.unk_01 &= ~1;
     }
 }
 

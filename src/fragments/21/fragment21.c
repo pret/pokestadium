@@ -31,9 +31,9 @@ extern u32 D_03049020[];
 extern u32 D_030483A0[];
 extern u32 D_03047720[];
 
-static minigameActor sandshrewPlayers[4];
-static minigameActor sandshrewHoles[4];
-static minigameActor sandshrewWaterGeisers[4];
+static minigameActor miniSandshrews[4];
+static minigameActor miniSandshrewHoles[4];
+static minigameActor miniSandshrewGeisers[4];
 static s16 D_86F0D260;
 static unk_D_800AC870* D_86F0D264;
 
@@ -1458,9 +1458,9 @@ static u32 D_86F0AFB8[] = {
     0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86F0ACE0, 0x06000000, 0x06000000, 0x01000000,
 };
 
-static minigameActor* tempSandshrewPlayer = sandshrewPlayers;
-static minigameActor* tempSandshrewHole = sandshrewHoles;
-static minigameActor* tempSandshrewWaterGeiser = sandshrewWaterGeisers;
+static minigameActor* miniSandshrewPtr = miniSandshrews;
+static minigameActor* miniSandshrewHolePtr = miniSandshrewHoles;
+static minigameActor* miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
 static u32 D_86F0B004[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0x0000000F, 0x00000000, 0x00000000,
@@ -1616,9 +1616,9 @@ void initSandshrew(minigameActor* sandshrew, s32 player) {
     sandshrew->unk_274 = 0.0f;
     sandshrew->unk_27C = 0.0f;
 
-    sandshrew->unk_214.x = sandshrew->unk_21A = 0;
-    sandshrew->unk_214.y = sandshrew->unk_21C = 0;
-    sandshrew->unk_214.z = sandshrew->unk_21E = 0;
+    sandshrew->totalRot.x = sandshrew->unk_21A = 0;
+    sandshrew->totalRot.y = sandshrew->unk_21C = 0;
+    sandshrew->totalRot.z = sandshrew->unk_21E = 0;
 
     sandshrew->unk_258 = sandshrew->unk_25C = 0x64;
     sandshrew->unk_238 = sandshrew->unk_23A = 0;
@@ -1635,10 +1635,10 @@ void initSandshrew(minigameActor* sandshrew, s32 player) {
 void initSandshrews(void) {
     s32 i;
 
-    tempSandshrewPlayer = sandshrewPlayers;
+    miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        initSandshrew(tempSandshrewPlayer, i);
-        tempSandshrewPlayer++;
+        initSandshrew(miniSandshrewPtr, i);
+        miniSandshrewPtr++;
     }
 }
 
@@ -1650,12 +1650,12 @@ void func_86F00370(void) {
     s32 i;
 
     tempControllerPtr = gPlayer1Controller;
-    tempSandshrewPlayer = sandshrewPlayers;
+    miniSandshrewPtr = miniSandshrews;
 
     for (i = 0; i < 4; i++) {
-        func_86F0035C(tempSandshrewPlayer);
+        func_86F0035C(miniSandshrewPtr);
 
-        tempSandshrewPlayer++;
+        miniSandshrewPtr++;
         tempControllerPtr++;
     }
 }
@@ -1817,12 +1817,12 @@ void func_86F00920(minigameActor* sandshrew) {
 
                 if (D_8140E6CC == 0) {
                     if (sandshrew->unk_190.y > -10.0f) {
-                        func_81407D48(1.0f, sandshrew->unk_190, sandshrew->unk_214, func_87902224, &D_87903E10, 1);	//	particles
+                        func_81407D48(1.0f, sandshrew->unk_190, sandshrew->totalRot, func_87902224, &D_87903E10, 1);	//	particles
                     } else {
                         sp48.x = sandshrew->unk_190.x;
                         sp48.y = -5.0f;
                         sp48.z = sandshrew->unk_190.z;
-                        func_81407D48(1.0f, sp48, sandshrew->unk_214, func_879023EC, &D_87903E10, 1);	//	particles
+                        func_81407D48(1.0f, sp48, sandshrew->totalRot, func_879023EC, &D_87903E10, 1);	//	particles
                     }
                 }
 
@@ -1833,7 +1833,7 @@ void func_86F00920(minigameActor* sandshrew) {
                     sandshrew->unk_1C0.y -= holeDeepeness;
                 }
 
-                func_86F00188(3, sandshrew - sandshrewPlayers);
+                func_86F00188(3, sandshrew - miniSandshrews);
                 if (func_800174E4(&sandshrew->unk_000) != 0) {
                     func_80017464(&sandshrew->unk_000, 0);
                 }
@@ -1843,7 +1843,7 @@ void func_86F00920(minigameActor* sandshrew) {
                 func_800173DC(&sandshrew->unk_000, 0, sandshrew->unk_000.unk_040.unk_04, 0x10000);
                 func_80017464(&sandshrew->unk_000, 0);
                 func_80017454(&sandshrew->unk_000, 0x10000);
-                func_86F00188(4, sandshrew - sandshrewPlayers);
+                func_86F00188(4, sandshrew - miniSandshrews);
                 sandshrew->unk_23E++;
             }
             break;
@@ -1866,7 +1866,7 @@ void func_86F00920(minigameActor* sandshrew) {
 
         case 0x65:
             minigameActorLocalOriginToZero(sandshrew);
-            func_80015390(&tempSandshrewWaterGeiser->unk_000, 0xA, &sandshrew->unk_1C0);
+            func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->unk_1C0);
             break;
     }
 }
@@ -1876,26 +1876,26 @@ void func_86F00D04(void) {
 
     tempControllerPtr = gPlayer1Controller;
 
-    tempSandshrewPlayer = sandshrewPlayers;
-    tempSandshrewHole = sandshrewHoles;
-    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
+    miniSandshrewPtr = miniSandshrews;
+    miniSandshrewHolePtr = miniSandshrewHoles;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
         if (minigameInputLock != false) {
-            if (tempSandshrewPlayer->isHuman == 0) {
-                sandshrewPlayerInput(tempSandshrewPlayer);
+            if (miniSandshrewPtr->isHuman == 0) {
+                sandshrewPlayerInput(miniSandshrewPtr);
             } else {
-                sandshrewCompControls(tempSandshrewPlayer);
+                sandshrewCompControls(miniSandshrewPtr);
             }
         }
 
-        func_86F00920(tempSandshrewPlayer);
-        func_87900770(tempSandshrewPlayer);
-        func_87900808(tempSandshrewPlayer);
+        func_86F00920(miniSandshrewPtr);
+        func_87900770(miniSandshrewPtr);
+        func_87900808(miniSandshrewPtr);
 
-        tempSandshrewPlayer++;
-        tempSandshrewHole++;
-        tempSandshrewWaterGeiser++;
+        miniSandshrewPtr++;
+        miniSandshrewHolePtr++;
+        miniSandshrewGeiserPtr++;
 
         tempControllerPtr++;
     }
@@ -1912,11 +1912,11 @@ void initSandshrewHole(minigameActor* a0, s32 arg1) {
     sandshrewHole->localOrigin.y = sandshrewPositions[arg1].y;
     sandshrewHole->localOrigin.z = sandshrewPositions[arg1].z;
 
-    sandshrewHole->unk_214.x = sandshrewHole->unk_21A = sandshrewHole->unk_220 = sandshrewHole->unk_226 =
+    sandshrewHole->totalRot.x = sandshrewHole->unk_21A = sandshrewHole->unk_220 = sandshrewHole->unk_226 =
         sandshrewHole->unk_22C = 0;
-    sandshrewHole->unk_214.y = sandshrewHole->unk_21C = sandshrewHole->unk_222 = sandshrewHole->unk_228 =
+    sandshrewHole->totalRot.y = sandshrewHole->unk_21C = sandshrewHole->unk_222 = sandshrewHole->unk_228 =
         sandshrewHole->unk_22E = 0;
-    sandshrewHole->unk_214.z = sandshrewHole->unk_21E = sandshrewHole->unk_224 = sandshrewHole->unk_22A =
+    sandshrewHole->totalRot.z = sandshrewHole->unk_21E = sandshrewHole->unk_224 = sandshrewHole->unk_22A =
         sandshrewHole->unk_230 = 0;
 
     sandshrewHole->unk_1C0.x = 0.0f;
@@ -1936,10 +1936,10 @@ void initSandshrewHole(minigameActor* a0, s32 arg1) {
 void initSandshrewHoles(void) {
     s32 i;
 
-    tempSandshrewHole = sandshrewHoles;
+    miniSandshrewHolePtr = miniSandshrewHoles;
     for (i = 0; i < 4; i++) {
-        initSandshrewHole(tempSandshrewHole, i);
-        tempSandshrewHole++;
+        initSandshrewHole(miniSandshrewHolePtr, i);
+        miniSandshrewHolePtr++;
     }
 }
 
@@ -1965,16 +1965,16 @@ void func_86F00F68(minigameActor* sandshrewHole, minigameActor* sandshrewPlayer)
 void func_86F01014(void) {
     s32 i;
 
-    tempSandshrewHole = sandshrewHoles;
-    tempSandshrewPlayer = sandshrewPlayers;
+    miniSandshrewHolePtr = miniSandshrewHoles;
+    miniSandshrewPtr = miniSandshrews;
 
     for (i = 0; i < 4; i++) {
-        func_86F00F68(tempSandshrewHole, tempSandshrewPlayer);
-        func_87900770(tempSandshrewHole);
-        func_87900808(tempSandshrewHole);
+        func_86F00F68(miniSandshrewHolePtr, miniSandshrewPtr);
+        func_87900770(miniSandshrewHolePtr);
+        func_87900808(miniSandshrewHolePtr);
 
-        tempSandshrewHole++;
-        tempSandshrewPlayer++;
+        miniSandshrewHolePtr++;
+        miniSandshrewPtr++;
     }
 }
 
@@ -1993,9 +1993,9 @@ void initSandshrewWaterGeiser(minigameActor* arg0, s32 arg1) {
     geiser->unk_22E = 0;
     geiser->unk_230 = 0;
 
-    geiser->unk_214.x = geiser->unk_21A = geiser->unk_220 = geiser->unk_226 = geiser->unk_22C;
-    geiser->unk_214.y = geiser->unk_21C = geiser->unk_222 = geiser->unk_228 = geiser->unk_22E;
-    geiser->unk_214.z = geiser->unk_21E = geiser->unk_224 = geiser->unk_22A = geiser->unk_230;
+    geiser->totalRot.x = geiser->unk_21A = geiser->unk_220 = geiser->unk_226 = geiser->unk_22C;
+    geiser->totalRot.y = geiser->unk_21C = geiser->unk_222 = geiser->unk_228 = geiser->unk_22E;
+    geiser->totalRot.z = geiser->unk_21E = geiser->unk_224 = geiser->unk_22A = geiser->unk_230;
 
     geiser->unk_1C0.x = 0.0f;
     geiser->unk_1C0.y = 0.0f;
@@ -2014,11 +2014,11 @@ void initSandshrewWaterGeiser(minigameActor* arg0, s32 arg1) {
 void initSandshrewWaterGeisers(void) {
     s32 i;
 
-    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
-        initSandshrewWaterGeiser(tempSandshrewWaterGeiser, i);
-        tempSandshrewWaterGeiser++;
+        initSandshrewWaterGeiser(miniSandshrewGeiserPtr, i);
+        miniSandshrewGeiserPtr++;
     }
 }
 
@@ -2030,7 +2030,7 @@ void func_86F011E8(minigameActor* geiser) {
             geiser->unk_23E++;
             break;
         case 2:					//	first geiser animation ends
-            if (func_80017514(&tempSandshrewWaterGeiser->unk_000) != 0) {
+            if (func_80017514(&miniSandshrewGeiserPtr->unk_000) != 0) {
                 func_86F003FC(geiser, 1);
                 geiser->unk_23E++;
             }
@@ -2045,14 +2045,14 @@ void func_86F011E8(minigameActor* geiser) {
 void func_86F012B8(void) {
     s32 i;
 
-    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
-        func_86F011E8(tempSandshrewWaterGeiser);
-        func_87900770(tempSandshrewWaterGeiser);
-        func_87900808(tempSandshrewWaterGeiser);
+        func_86F011E8(miniSandshrewGeiserPtr);
+        func_87900770(miniSandshrewGeiserPtr);
+        func_87900808(miniSandshrewGeiserPtr);
 
-        tempSandshrewWaterGeiser++;
+        miniSandshrewGeiserPtr++;
     }
 }
 
@@ -2117,28 +2117,28 @@ s32 func_86F014F8(void) {
     var_s7 = 0;
     var_s4 = -1;
 
-    tempSandshrewPlayer = sandshrewPlayers;
+    miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        if (tempSandshrewPlayer->unk_190.y < var_fs0) {
-            var_fs0 = tempSandshrewPlayer->unk_190.y;
+        if (miniSandshrewPtr->unk_190.y < var_fs0) {
+            var_fs0 = miniSandshrewPtr->unk_190.y;
         }
-        tempSandshrewPlayer++;
+        miniSandshrewPtr++;
     }
 
-    tempSandshrewPlayer = sandshrewPlayers;
-    tempSandshrewWaterGeiser = sandshrewWaterGeisers;
+    miniSandshrewPtr = miniSandshrews;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
     for (i = 0; i < 4; i++) {
-        if (tempSandshrewPlayer->unk_190.y <= var_fs0) {
-            tempSandshrewPlayer->unk_2A8 = 1;
+        if (miniSandshrewPtr->unk_190.y <= var_fs0) {
+            miniSandshrewPtr->unk_2A8 = 1;
             var_s7 = 1;
             var_s4 += 1;
-            tempSandshrewPlayer->unk_23E = 0x64;
-            tempSandshrewWaterGeiser->unk_23E = 1;
+            miniSandshrewPtr->unk_23E = 0x64;
+            miniSandshrewGeiserPtr->unk_23E = 1;
             func_86F00188(5, i);
             func_87802F00(i);
         }
-        tempSandshrewPlayer++;
-        tempSandshrewWaterGeiser++;
+        miniSandshrewPtr++;
+        miniSandshrewGeiserPtr++;
     }
 
     D_87903DD4 = var_s4;
@@ -2148,10 +2148,10 @@ s32 func_86F014F8(void) {
 void func_86F0164C(void) {
     s32 i;
 
-    tempSandshrewPlayer = sandshrewPlayers;
+    miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        tempSandshrewPlayer->unk_274 = tempSandshrewPlayer->unk_27C = 0.0f;
-        tempSandshrewPlayer++;
+        miniSandshrewPtr->unk_274 = miniSandshrewPtr->unk_27C = 0.0f;
+        miniSandshrewPtr++;
     }
 }
 
@@ -2292,7 +2292,7 @@ void func_86F01C40(void) {
     if (D_87903DC4 == -2) {
         func_8001EBE0(0x10, -2);
         if (D_87903DD0 == 0x18) {
-            func_879033FC(sandshrewPlayers);
+            func_879033FC(miniSandshrews);
         }
         func_8001EBE0(4, -2);
     }
@@ -2462,15 +2462,15 @@ void func_86F02320(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&sandshrewPlayers[i].unk_000);
+        func_8001BB58(&miniSandshrews[i].unk_000);
     }
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&sandshrewHoles[i].unk_000);
+        func_8001BB58(&miniSandshrewHoles[i].unk_000);
     }
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&sandshrewWaterGeisers[i].unk_000);
+        func_8001BB58(&miniSandshrewGeisers[i].unk_000);
     }
 
     func_8001987C();
@@ -2478,29 +2478,29 @@ void func_86F02320(void) {
     temp_s1 = func_80019D18(0xA1);
 
     for (i = 0; i < 4; i++) {
-        sandshrewPlayers[i].unk_23C = 0xA1;
-        sandshrewPlayers[i].unk_168 = temp_s1;
-        func_8001BC34(&sandshrewPlayers[i].unk_000, 0, sandshrewPlayers[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&sandshrewPlayers[i].unk_000, 0);
+        miniSandshrews[i].unk_23C = 0xA1;
+        miniSandshrews[i].unk_168 = temp_s1;
+        func_8001BC34(&miniSandshrews[i].unk_000, 0, miniSandshrews[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&miniSandshrews[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0x9D);
 
     for (i = 0; i < 4; i++) {
-        sandshrewHoles[i].unk_23C = 0x9D;
-        sandshrewHoles[i].unk_168 = temp_s1;
-        func_8001BC34(&sandshrewHoles[i].unk_000, 0, sandshrewHoles[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&sandshrewHoles[i].unk_000, 0);
+        miniSandshrewHoles[i].unk_23C = 0x9D;
+        miniSandshrewHoles[i].unk_168 = temp_s1;
+        func_8001BC34(&miniSandshrewHoles[i].unk_000, 0, miniSandshrewHoles[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&miniSandshrewHoles[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0xA2);
 
     for (i = 0; i < 4; i++) {
-        sandshrewWaterGeisers[i].unk_23C = 0xA2;
-        sandshrewWaterGeisers[i].unk_168 = temp_s1;
-        func_8001BC34(&sandshrewWaterGeisers[i].unk_000, 0, sandshrewWaterGeisers[i].unk_23C,
+        miniSandshrewGeisers[i].unk_23C = 0xA2;
+        miniSandshrewGeisers[i].unk_168 = temp_s1;
+        func_8001BC34(&miniSandshrewGeisers[i].unk_000, 0, miniSandshrewGeisers[i].unk_23C,
                       temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&sandshrewWaterGeisers[i].unk_000, 0);
+        func_8001BD04(&miniSandshrewGeisers[i].unk_000, 0);
     }
 }
 
