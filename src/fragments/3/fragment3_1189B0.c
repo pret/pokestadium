@@ -17,7 +17,7 @@ s32 pad_D_87903DB4 = 0;
 s16 D_87903DB8 = 0;
 s16 D_87903DBC = 0;
 s16 D_87903DC0 = 0;
-s16 D_87903DC4 = 0; //	related to tutorial screen on minigames
+s16 miniTutoScreenState = 0; //	related to tutorial screen on minigames
 s16 D_87903DC8 = 0;
 s16 D_87903DCC = 0;
 s16 D_87903DD0 = 0;
@@ -28,17 +28,17 @@ ret_func_80004454 func_87900020(void) {
 }
 
 // func_8790002C
-float MinigameGetVec3Distance_2d(minigameActor* arg0, minigameActor* arg1) {
+float MinigameGetVec3Distance_2d(MiniActor* arg0, MiniActor* arg1) {
     return sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.z - arg0->unk_19C.z));
 }
 // func_87900070
-void MinigameGetVec3Distance_3d(minigameActor* arg0, minigameActor* arg1) {
+void MinigameGetVec3Distance_3d(MiniActor* arg0, MiniActor* arg1) {
     sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.y - arg0->unk_19C.y) +
           SQ(arg1->unk_19C.z - arg0->unk_19C.z));
 }
 
 //  unused,
-s32 func_879000C4(minigameActor* arg0, minigameActor* arg1) {
+s32 func_879000C4(MiniActor* arg0, MiniActor* arg1) {
     f32 totalX = arg1->unk_19C.x - arg0->unk_19C.x;
     f32 totalY = arg1->unk_19C.y - arg0->unk_19C.y;
     f32 totalZ = arg1->unk_19C.z - arg0->unk_19C.z;
@@ -68,7 +68,7 @@ s32 func_879000C4(minigameActor* arg0, minigameActor* arg1) {
     return ret;
 }
 
-s32 metapodRockCollisionCheck(minigameActor* fallingRock, minigameActor* metapod) {
+s32 metapodRockCollisionCheck(MiniActor* fallingRock, MiniActor* metapod) {
     f32 totalX;
     f32 totalY;
     f32 totalZ;
@@ -99,17 +99,18 @@ s32 metapodRockCollisionCheck(minigameActor* fallingRock, minigameActor* metapod
     return ret;
 }
 
-// change animation on ekans' and metapod's minigames ?
-void func_879002B8(minigameActor* poke, s16 arg1, s16 arg2, s16 arg3) {
+//	change animation on ekans' and metapod's minigames ?
+void miniChangeActorAnim(MiniActor* poke, s16 anim, s16 arg2, s16 arg3) {
     poke->unk_248 = 1; //	animation flag ?
-    poke->unk_24A = arg1;
+    poke->unk_24A = anim;
     poke->unk_24C = arg2;
     poke->unk_26A = arg3;
     poke->unk_26C = 0; //	animation flag ?
     poke->unk_26E = 0;
 }
 
-void func_879002FC(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
+//	unused
+void func_879002FC(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
     arg0->unk_248 = 1;
     arg0->unk_24A = arg1;
     arg0->unk_24C = arg2;
@@ -119,16 +120,15 @@ void func_879002FC(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) 
 }
 
 //	diglett's pop out the ground on diglett's minigame
-void func_87900344(minigameActor* arg0, s16 arg1, s16 arg2, s16 arg3) {
-    arg0->unk_248 = 1;    //	colliding ?
-    arg0->unk_24A = arg1; //	1
-    arg0->unk_24C = arg2; // -1
-    arg0->unk_26A = arg3; //	1
-    arg0->unk_26C = 1;    //	animation id?
+void func_87900344(MiniActor* diglett, s16 anim, s16 arg2, s16 arg3) {
+    diglett->unk_248 = 1;    //	visibility ?
+    diglett->unk_24A = anim; //	 1
+    diglett->unk_24C = arg2; //	-1
+    diglett->unk_26A = arg3; //	 1
+    diglett->unk_26C = 1;    //	animation id?
 }
 
-// just checks an object colliding flag?
-s32 func_87900384(minigameActor* arg0) {
+s32 miniIddleAnimCheck(MiniActor* arg0) {
     s32 var_v1 = 0;
 
     if (arg0->unk_248 == 0) {
@@ -137,42 +137,42 @@ s32 func_87900384(minigameActor* arg0) {
     return var_v1;
 }
 
-void func_879003A0(minigameActor* arg0) {
-    switch (arg0->unk_248) {
+void func_879003A0(MiniActor* poke) {
+    switch (poke->unk_248) {
         case 1:
-            func_8001BD04(&arg0->unk_000, arg0->unk_24A);
-            if (arg0->unk_26C != 0) {
-                func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, -0x10000);
-                func_80017464(&arg0->unk_000, arg0->unk_000.unk_040.unk_04->unk_0A - 1);
+            func_8001BD04(&poke->unk_000, poke->unk_24A);
+            if (poke->unk_26C != 0) {
+                func_800173DC(&poke->unk_000, 0, poke->unk_000.unk_040.unk_04, -0x10000);
+                func_80017464(&poke->unk_000, poke->unk_000.unk_040.unk_04->unk_0A - 1);
             } else {
-                func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
-                func_80017464(&arg0->unk_000, arg0->unk_26E);
-                func_80017788(&arg0->unk_000);
-                if (arg0->unk_24C != -1) {
-                    func_8001BD9C(&arg0->unk_000, arg0->unk_24C);
-                    func_80017804(&arg0->unk_000, arg0->unk_26E);
+                func_800173DC(&poke->unk_000, 0, poke->unk_000.unk_040.unk_04, 0x10000);
+                func_80017464(&poke->unk_000, poke->unk_26E);
+                func_80017788(&poke->unk_000);
+                if (poke->unk_24C != -1) {
+                    func_8001BD9C(&poke->unk_000, poke->unk_24C);
+                    func_80017804(&poke->unk_000, poke->unk_26E);
                 }
             }
-            arg0->unk_248++;
+            poke->unk_248++;
             break;
 
         case 2:
-            if (arg0->unk_26C == 0) {
-                if (func_800174E4(&arg0->unk_000) != 0) {
-                    arg0->unk_248++;
+            if (poke->unk_26C == 0) {
+                if (func_800174E4(&poke->unk_000) != 0) {
+                    poke->unk_248++;
                 }
             } else {
-                if (arg0->unk_000.unk_040.unk_08 == 0) {
-                    arg0->unk_248++;
+                if (poke->unk_000.unk_040.unk_08 == 0) {
+                    poke->unk_248++;
                 }
             }
             break;
 
         case 3:
-            if (arg0->unk_26A != 0) {
-                func_8001BD04(&arg0->unk_000, 0);
+            if (poke->unk_26A != 0) {
+                func_8001BD04(&poke->unk_000, 0);
             }
-            arg0->unk_248 = 0;
+            poke->unk_248 = 0;
             break;
     }
 }
@@ -188,10 +188,10 @@ void func_87900528(void) {
 }
 
 void hideMiniGameHUD(void) {
-    showMinigameHUD = 0;
+    miniShowHUB = 0;
 }
 
-void func_87900564(minigameActor* actor) {
+void func_87900564(MiniActor* actor) {
     actor->unk_1C0.x = 0.0f;
     actor->localOrigin.x = 0.0f;
     actor->unk_190.x = 0.0f;
@@ -203,26 +203,26 @@ void func_87900564(minigameActor* actor) {
     actor->unk_190.z = 0.0f;
 }
 
-void minigameActorLocalOriginToZero(minigameActor* arg0) {
+void minigameActorLocalOriginToZero(MiniActor* arg0) {
     arg0->localOrigin.x = 0.0f;
     arg0->localOrigin.y = 0.0f;
     arg0->localOrigin.z = 0.0f;
 }
 
-void func_879005AC(minigameActor* arg0) {
+void func_879005AC(MiniActor* arg0) {
     arg0->unk_1C0.x = 0.0f;
     arg0->unk_1C0.y = 0.0f;
     arg0->unk_1C0.z = 0.0f;
 }
 
-void func_879005C4(minigameActor* ekans) {
+void func_879005C4(MiniActor* ekans) {
     ekans->unk_1FC = ekans->unk_1FC - ekans->unk_210;
     ekans->unk_1C0.x = ekans->unk_1C0.x + ekans->unk_1F8;
     ekans->unk_1C0.y = ekans->unk_1C0.y + (ekans->unk_1FC - ekans->unk_210);
     ekans->unk_1C0.z = ekans->unk_1C0.z + ekans->unk_200;
 }
 
-void func_8790060C(minigameActor* actor) {
+void func_8790060C(MiniActor* actor) {
     actor->totalRot.x = actor->totalRot.y = actor->totalRot.z = 0;
     actor->unk_21A = actor->unk_21C = actor->unk_21E = 0;
     actor->unk_220 = actor->unk_222 = actor->unk_224 = 0;
@@ -278,7 +278,7 @@ void func_8790060C(minigameActor* actor) {
     actor->unk_290 = actor->unk_292 = actor->unk_294 = 0;
 }
 
-void func_87900770(minigameActor* poke) {
+void miniActorUpdateTransform(MiniActor* poke) {
     poke->unk_190.x = poke->unk_19C.x = poke->localOrigin.x + poke->unk_1C0.x;
     poke->unk_190.y = poke->unk_19C.y = poke->localOrigin.y + poke->unk_1C0.y;
     poke->unk_190.z = poke->unk_19C.z = poke->localOrigin.z + poke->unk_1C0.z;
@@ -290,7 +290,8 @@ void func_87900770(minigameActor* poke) {
     poke->totalRot.z = poke->unk_21E + poke->unk_22A + poke->unk_236;
 }
 
-void func_87900808(minigameActor* arg0) {
+//  updates an object's collider ?
+void func_87900808(MiniActor* arg0) {
     arg0->unk_000.unk_030.x = arg0->scale.x;
     arg0->unk_000.unk_030.y = arg0->scale.y;
     arg0->unk_000.unk_030.z = arg0->scale.z;
@@ -314,7 +315,7 @@ void func_87900854(void) {
     D_87906048 = 0;
     D_8790604A = 0;
     D_87903DC0 = 0;
-    D_87903DC4 = 0;
+    miniTutoScreenState = 0;
     D_87903DC8 = 0;
     D_87903DCC = 0;
     D_87903DD0 = 0;

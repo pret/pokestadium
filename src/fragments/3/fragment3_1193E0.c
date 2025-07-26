@@ -5,7 +5,7 @@
 
 s16 minigameInputLockTimer;
 s16 D_87906042;
-s16 showMinigameHUD;
+s16 miniShowHUB;
 s16 D_87906046;
 s16 D_87906048; //  unused?
 s16 D_8790604A;
@@ -40,7 +40,7 @@ s16 D_879060A8;
 Vec3s D_879060AC;
 s32 pad_D_879060B4;
 s32 pad_D_879060B8;
-Controller* tempControllerPtr;
+Controller* miniControllerPtr;
 s16 D_879060C0;
 s16 ekansMinigameCountdown;
 s8 D_879060C4[4];

@@ -31,9 +31,9 @@ extern u32 D_03049020[];
 extern u32 D_030483A0[];
 extern u32 D_03047720[];
 
-static minigameActor miniSandshrews[4];
-static minigameActor miniSandshrewHoles[4];
-static minigameActor miniSandshrewGeisers[4];
+static MiniActor miniSandshrews[4];
+static MiniActor miniSandshrewHoles[4];
+static MiniActor miniSandshrewGeisers[4];
 static s16 D_86F0D260;
 static unk_D_800AC870* D_86F0D264;
 
@@ -1458,9 +1458,9 @@ static u32 D_86F0AFB8[] = {
     0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86F0ACE0, 0x06000000, 0x06000000, 0x01000000,
 };
 
-static minigameActor* miniSandshrewPtr = miniSandshrews;
-static minigameActor* miniSandshrewHolePtr = miniSandshrewHoles;
-static minigameActor* miniSandshrewGeiserPtr = miniSandshrewGeisers;
+static MiniActor* miniSandshrewPtr = miniSandshrews;
+static MiniActor* miniSandshrewHolePtr = miniSandshrewHoles;
+static MiniActor* miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
 static u32 D_86F0B004[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0x0000000F, 0x00000000, 0x00000000,
@@ -1590,7 +1590,7 @@ void func_86F00188(s16 arg0, s16 arg1) {
     }
 }
 
-void initSandshrew(minigameActor* sandshrew, s32 player) {
+void initSandshrew(MiniActor* sandshrew, s32 player) {
     sandshrew->scale.x = 1.0f;
     sandshrew->scale.y = 1.0f;
     sandshrew->scale.z = 1.0f;
@@ -1629,7 +1629,7 @@ void initSandshrew(minigameActor* sandshrew, s32 player) {
     sandshrew->unk_23E = 0;
     sandshrew->unk_240 = 0;
 
-    sandshrew->isHuman = D_879060C4[player];
+    sandshrew->isComp = D_879060C4[player];
 }
 
 void initSandshrews(void) {
@@ -1642,32 +1642,32 @@ void initSandshrews(void) {
     }
 }
 
-void func_86F0035C(minigameActor* arg0) {
-    arg0->unk_222 = tempControllerPtr->angle;
+void func_86F0035C(MiniActor* arg0) {
+    arg0->unk_222 = miniControllerPtr->angle;
 }
 
 void func_86F00370(void) {
     s32 i;
 
-    tempControllerPtr = gPlayer1Controller;
+    miniControllerPtr = gPlayer1Controller;
     miniSandshrewPtr = miniSandshrews;
 
     for (i = 0; i < 4; i++) {
         func_86F0035C(miniSandshrewPtr);
 
         miniSandshrewPtr++;
-        tempControllerPtr++;
+        miniControllerPtr++;
     }
 }
 
-void func_86F003FC(minigameActor* actor, s32 animID) {
+void func_86F003FC(MiniActor* actor, s32 animID) {
     func_8001BD04(&actor->unk_000, animID);
     func_800173DC(&actor->unk_000, 0, actor->unk_000.unk_040.unk_04, 0x10000);
     func_80017464(&actor->unk_000, 0);
     func_80017454(&actor->unk_000, 0x10000);
 }
 
-void func_86F00450(minigameActor* arg0, f32 arg1) {
+void func_86F00450(MiniActor* arg0, f32 arg1) {
     arg0->unk_280 -= arg1;
     if (arg0->unk_280 < 1.0f) {
         arg0->unk_280 = 1.0f;
@@ -1675,7 +1675,7 @@ void func_86F00450(minigameActor* arg0, f32 arg1) {
     arg0->unk_27C = arg0->unk_280;
 }
 
-void func_86F0048C(minigameActor* sandshrew, s32 arg1) {
+void func_86F0048C(MiniActor* sandshrew, s32 arg1) {
     if (arg1 == -1) {
         sandshrew->sandshrewLastDir = 0;
         sandshrew->unk_2B0 = 0;
@@ -1696,21 +1696,21 @@ void func_86F0048C(minigameActor* sandshrew, s32 arg1) {
     }
 }
 
-void sandshrewPlayerInput(minigameActor* sandshrew) {
+void sandshrewPlayerInput(MiniActor* sandshrew) {
     s32 dir;
 
     dir = 0;
-    if (BTN_IS_PRESSED(tempControllerPtr, BTN_L) && BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
+    if (BTN_IS_PRESSED(miniControllerPtr, BTN_L) && BTN_IS_PRESSED(miniControllerPtr, BTN_R)) {
         dir = 3;
     } else if (sandshrew->sandshrewLastDir == 1) {
-        if (BTN_IS_PRESSED(tempControllerPtr, BTN_L)) {
+        if (BTN_IS_PRESSED(miniControllerPtr, BTN_L)) {
             dir = 1;
-        } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
+        } else if (BTN_IS_PRESSED(miniControllerPtr, BTN_R)) {
             dir = 2;
         }
-    } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_R)) {
+    } else if (BTN_IS_PRESSED(miniControllerPtr, BTN_R)) {
         dir = 2;
-    } else if (BTN_IS_PRESSED(tempControllerPtr, BTN_L)) {
+    } else if (BTN_IS_PRESSED(miniControllerPtr, BTN_L)) {
         dir = 1;
     }
 
@@ -1763,7 +1763,7 @@ void sandshrewPlayerInput(minigameActor* sandshrew) {
     sandshrew->unk_274 += sandshrew->unk_27C;
 }
 
-void sandshrewCompControls(minigameActor* arg0) {
+void sandshrewCompControls(MiniActor* arg0) {
     switch (D_87906046) {
         case 0:
             arg0->unk_27C = (func_81400A78(0xA) * 0.1f) + 3.0f;
@@ -1788,7 +1788,7 @@ void sandshrewCompControls(minigameActor* arg0) {
     }
 }
 
-void func_86F00920(minigameActor* sandshrew) {
+void func_86F00920(MiniActor* sandshrew) {
     UNUSED s32 pad;
     Vec3f sp48;
     f32 holeDeepeness;
@@ -1874,7 +1874,7 @@ void func_86F00920(minigameActor* sandshrew) {
 void func_86F00D04(void) {
     s32 i;
 
-    tempControllerPtr = gPlayer1Controller;
+    miniControllerPtr = gPlayer1Controller;
 
     miniSandshrewPtr = miniSandshrews;
     miniSandshrewHolePtr = miniSandshrewHoles;
@@ -1882,7 +1882,7 @@ void func_86F00D04(void) {
 
     for (i = 0; i < 4; i++) {
         if (minigameInputLock != false) {
-            if (miniSandshrewPtr->isHuman == 0) {
+            if (miniSandshrewPtr->isComp == 0) {
                 sandshrewPlayerInput(miniSandshrewPtr);
             } else {
                 sandshrewCompControls(miniSandshrewPtr);
@@ -1890,19 +1890,19 @@ void func_86F00D04(void) {
         }
 
         func_86F00920(miniSandshrewPtr);
-        func_87900770(miniSandshrewPtr);
+        miniActorUpdateTransform(miniSandshrewPtr);
         func_87900808(miniSandshrewPtr);
 
         miniSandshrewPtr++;
         miniSandshrewHolePtr++;
         miniSandshrewGeiserPtr++;
 
-        tempControllerPtr++;
+        miniControllerPtr++;
     }
 }
 
-void initSandshrewHole(minigameActor* a0, s32 arg1) {
-    minigameActor* sandshrewHole = a0;
+void initSandshrewHole(MiniActor* a0, s32 arg1) {
+    MiniActor* sandshrewHole = a0;
 
     sandshrewHole->scale.x = 1.0f;
     sandshrewHole->scale.y = 1.0f;
@@ -1943,7 +1943,7 @@ void initSandshrewHoles(void) {
     }
 }
 
-void func_86F00F68(minigameActor* sandshrewHole, minigameActor* sandshrewPlayer) {
+void func_86F00F68(MiniActor* sandshrewHole, MiniActor* sandshrewPlayer) {
     s32 var_a1;
 
     if ((sandshrewPlayer->unk_274 > 300.0f) && (sandshrewHole->unk_23E == 0)) {
@@ -1970,7 +1970,7 @@ void func_86F01014(void) {
 
     for (i = 0; i < 4; i++) {
         func_86F00F68(miniSandshrewHolePtr, miniSandshrewPtr);
-        func_87900770(miniSandshrewHolePtr);
+        miniActorUpdateTransform(miniSandshrewHolePtr);
         func_87900808(miniSandshrewHolePtr);
 
         miniSandshrewHolePtr++;
@@ -1978,8 +1978,8 @@ void func_86F01014(void) {
     }
 }
 
-void initSandshrewWaterGeiser(minigameActor* arg0, s32 arg1) {
-    minigameActor* geiser = arg0;
+void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
+    MiniActor* geiser = arg0;
 
     geiser->scale.x = 1.0f;
     geiser->scale.y = 1.0f;
@@ -1989,13 +1989,9 @@ void initSandshrewWaterGeiser(minigameActor* arg0, s32 arg1) {
     geiser->localOrigin.y = sandshrewPositions[arg1].y;
     geiser->localOrigin.z = sandshrewPositions[arg1].z;
 
-    geiser->unk_22C = 0;
-    geiser->unk_22E = 0;
-    geiser->unk_230 = 0;
-
-    geiser->totalRot.x = geiser->unk_21A = geiser->unk_220 = geiser->unk_226 = geiser->unk_22C;
-    geiser->totalRot.y = geiser->unk_21C = geiser->unk_222 = geiser->unk_228 = geiser->unk_22E;
-    geiser->totalRot.z = geiser->unk_21E = geiser->unk_224 = geiser->unk_22A = geiser->unk_230;
+    geiser->totalRot.x = geiser->unk_21A = geiser->unk_220 = geiser->unk_226 = geiser->unk_22C = 0;
+    geiser->totalRot.y = geiser->unk_21C = geiser->unk_222 = geiser->unk_228 = geiser->unk_22E = 0;
+    geiser->totalRot.z = geiser->unk_21E = geiser->unk_224 = geiser->unk_22A = geiser->unk_230 = 0;
 
     geiser->unk_1C0.x = 0.0f;
     geiser->unk_1C0.y = 0.0f;
@@ -2022,7 +2018,7 @@ void initSandshrewWaterGeisers(void) {
     }
 }
 
-void func_86F011E8(minigameActor* geiser) {
+void func_86F011E8(MiniActor* geiser) {
     switch (geiser->unk_23E) {
         case 1:
             func_86F003FC(geiser, 0);
@@ -2049,7 +2045,7 @@ void func_86F012B8(void) {
 
     for (i = 0; i < 4; i++) {
         func_86F011E8(miniSandshrewGeiserPtr);
-        func_87900770(miniSandshrewGeiserPtr);
+        miniActorUpdateTransform(miniSandshrewGeiserPtr);
         func_87900808(miniSandshrewGeiserPtr);
 
         miniSandshrewGeiserPtr++;
@@ -2190,8 +2186,8 @@ void func_86F0174C(void) {
 
         case 3: //
             if (func_86F016D8() != 0) {
-                minigameInputLock = 1;
-                D_87903DC4 = 0;
+                minigameInputLock = true;
+                miniTutoScreenState = 0;
                 func_86F00370();
                 minigameState++;
             }
@@ -2289,7 +2285,7 @@ void func_86F01C40(void) {
             break;
     }
 
-    if (D_87903DC4 == -2) {
+    if (miniTutoScreenState == -2) {
         func_8001EBE0(0x10, -2);
         if (D_87903DD0 == 0x18) {
             func_879033FC(miniSandshrews);
@@ -2322,7 +2318,7 @@ void func_86F01EB4(void) {
     func_87903260();
     func_86F01C40();
 
-    if (showMinigameHUD != 0) {
+    if (miniShowHUB != 0) {
         fixSandshrewMinigameHUD();
     }
 }
@@ -2372,7 +2368,7 @@ void sandshrewMinigameInit(void) {
     sandshrewMinigameInitObjects();
     func_800077B4(0xA);
     func_80006C6C(0x10);
-    D_87903DC4 = 3;
+    miniTutoScreenState = 3;
     D_87906046 = D_8780FA38;
 }
 
@@ -2392,11 +2388,11 @@ void func_86F0204C(void) {
             }
         }
 
-        if ((minigameDebuggMode == false) && (showMinigameHUD == false) && (func_80007604() == 0)) {
+        if ((minigameDebuggMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
             if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
-                D_87903DC4 = 1;
+                miniTutoScreenState = 1;
                 minigameState = 1;
-                showMinigameHUD = true;
+                miniShowHUB = true;
                 func_86F00188(7, 0);
             } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
                 func_86F00188(8, 0);

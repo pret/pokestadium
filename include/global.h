@@ -139,9 +139,9 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x01A */ s16 unk_01A;
     /* 0x01C */ u8 unk_01C;
     /* 0x01D */ u8 unk_01D;
-    /* 0x01E */ Vec3s unk_01E;
-    /* 0x024 */ Vec3f unk_024;
-    /* 0x030 */ Vec3f unk_030;
+    /* 0x01E */ Vec3s unk_01E;			//	total Rotation
+    /* 0x024 */ Vec3f unk_024;			//	global Position
+    /* 0x030 */ Vec3f unk_030;			//	scale
     /* 0x03C */ Color_RGBA8_u32 unk_03C;
     /* 0x040 */ unk_D_86002F58_004_000_040 unk_040;
     /* 0x054 */ unk_D_86002F58_004_000_054 unk_054;

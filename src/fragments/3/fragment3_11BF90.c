@@ -4,13 +4,13 @@
 #include "src/12D80.h"
 #include "src/memory.h"
 
-static minigameActor* D_87906120;
+static MiniActor* D_87906120;
 
 void func_87903600(void) {
     s32 i;
-    minigameActor* ptr;
+    MiniActor* ptr;
 
-    D_87906120 = main_pool_alloc(sizeof(minigameActor) * 3, 0);
+    D_87906120 = main_pool_alloc(sizeof(MiniActor) * 3, 0);
     ptr = D_87906120;
 
     for (i = 0; i < 3; i++, ptr++) {
@@ -23,29 +23,29 @@ void func_87903600(void) {
     }
 }
 
-void func_879036B4(minigameActor* arg0) {
+void func_879036B4(MiniActor* arg0) {
     if (arg0->unk_23E == 1) {
         arg0->unk_000.unk_000.unk_01 |= 1;
-        func_879002B8(arg0, 0, -1, 0);
+        miniChangeActorAnim(arg0, 0, -1, 0);
         arg0->unk_23E++;
     }
 }
 
 void func_8790370C(void) {
     s32 i;
-    minigameActor* ptr = D_87906120;
+    MiniActor* ptr = D_87906120;
 
     func_8140C5D0();
 
     for (i = 0; i < 3; i++, ptr++) {
         func_879036B4(ptr);
         func_879003A0(ptr);
-        func_87900770(ptr);
+        miniActorUpdateTransform(ptr);
         func_87900808(ptr);
     }
 }
 
-void func_87903778(minigameActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7,
+void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7,
                    s16 arg8) {
     arg0->scale.x = arg1;
     arg0->scale.y = arg1;
@@ -62,21 +62,21 @@ void func_87903778(minigameActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
 }
 
 void func_879037D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
-    minigameActor* sp34 = D_87906120;
+    MiniActor* sp34 = D_87906120;
 
     func_87903778(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0);
     sp34->unk_000.unk_000.unk_14 = 0;
 }
 
 void func_87903838(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
-    minigameActor* sp34 = &D_87906120[1];
+    MiniActor* sp34 = &D_87906120[1];
 
     func_87903778(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 1);
     sp34->unk_000.unk_000.unk_14 = 1;
 }
 
 void func_879038AC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
-    minigameActor* sp34 = &D_87906120[2];
+    MiniActor* sp34 = &D_87906120[2];
 
     func_87903778(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 2);
     sp34->unk_000.unk_000.unk_14 = 2;

@@ -55,7 +55,7 @@ void func_86D000D0(UNUSED s32 arg0) {
 
 void func_86D00134(void) {
     func_80006C6C(0x10);
-    D_87903DC4 = 3;
+    miniTutoScreenState = 3;
 }
 
 void func_86D0015C(void) {
