@@ -456,7 +456,7 @@ static s16 D_86E04B20 = 0;
 static s16 D_86E04B24 = 1;
 static s16 D_86E04B28 = 0;
 static MiniActor* miniMetapodPtr = miniMetapods;
-static MiniActor* miniMetapodRockPtr = miniMetapodRocks;
+static MiniActor* miniRockPtr = miniMetapodRocks;
 static u32 D_86E04B34[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0xFFE20032, 0x00000000,  0x00000000,
     0x05000000, 0x0D000000, 0x05000000, 0x14000000, 0x002B0012, 0xFFFFFF32, 0x16FFFFFF,  0x0F000003,
@@ -807,15 +807,15 @@ void func_86E007CC(MiniActor* metapod, s32 player) {
                 sp20 = 0xC;
         }
 
-        miniMetapodRockPtr = miniMetapodRocks;
+        miniRockPtr = miniMetapodRocks;
         for (i = 0; i < 20; i++) {
-            if ((miniMetapodRockPtr->unk_270 != 0) && (player == miniMetapodRockPtr->unk_266)) {
-                if (miniMetapodRockPtr->unk_29E < sp20) {
+            if ((miniRockPtr->unk_270 != 0) && (player == miniRockPtr->playerId)) {
+                if (miniRockPtr->unk_29E < sp20) {
                     var_t0 = 1;
-                    sp20 = miniMetapodRockPtr->unk_29E;
+                    sp20 = miniRockPtr->unk_29E;
                 }
             }
-            miniMetapodRockPtr++;
+            miniRockPtr++;
         }
 
         sp20--;
@@ -920,7 +920,7 @@ void func_86E00AF4(void) {
 }
 
 s32 metapodRockCollisionCheck_void(void) {
-    return metapodRockCollisionCheck(miniMetapodRockPtr, &miniMetapods[miniMetapodRockPtr->unk_266]);
+    return metapodRockCollisionCheck(miniRockPtr, &miniMetapods[miniRockPtr->playerId]);
 }
 
 s32 func_86E00C34(s32 nPlayer) {
@@ -944,22 +944,22 @@ void func_86E00CAC(UNUSED MiniActor* metapod, s32 nPlayer) {
     s32 i;
     s32 colliding;
 
-    miniMetapodRockPtr = miniMetapodRocks;
+    miniRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 20; i++) {
-        if ((miniMetapodRockPtr->unk_270 != 0) && (nPlayer == miniMetapodRockPtr->unk_266) && (miniMetapodRockPtr->unk_260 == 0)) {
+        if ((miniRockPtr->unk_270 != 0) && (nPlayer == miniRockPtr->playerId) && (miniRockPtr->unk_260 == 0)) {
             colliding = func_86E00C34(nPlayer);
-            if (colliding != 0) {
-                miniMetapodRockPtr->unk_260 = 1;
+            if (colliding) {
+                miniRockPtr->unk_260 = 1;
                 if (colliding == 1) {
-                    miniMetapodRockPtr->unk_272 = 1;
+                    miniRockPtr->unk_272 = 1;
                 } else {
-                    miniMetapodRockPtr->unk_272 = 0;
+                    miniRockPtr->unk_272 = 0;
                 }
                 break;
             }
         }
-        miniMetapodRockPtr++;
+        miniRockPtr++;
     }
 }
 
@@ -1042,7 +1042,7 @@ void func_86E00FD8(void) {
 
 void func_86E0103C(MiniActor* arg0, s32 arg1) {
     func_8790060C(arg0);
-    arg0->unk_266 = arg1;
+    arg0->playerId = arg1;
 
     arg0->localOrigin.x = D_86E04BFC[arg1].unk_00.x;
     arg0->localOrigin.y = D_86E04BFC[arg1].unk_00.y;
@@ -1065,12 +1065,12 @@ void initFallingRocks(void) {
     s32 i;
     s32 j;
 
-    miniMetapodRockPtr = miniMetapodRocks;
+    miniRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 5; j++) {
-            func_86E0103C(miniMetapodRockPtr, i);
-            miniMetapodRockPtr++;
+            func_86E0103C(miniRockPtr, i);
+            miniRockPtr++;
         }
     }
 
@@ -1112,16 +1112,16 @@ void func_86E01188(void) {
     for (i = 0; i < 4; i++, metapod++) {
         if (metapod->unk_2AA == 0) {
             var_s1 = 0;
-            miniMetapodRockPtr = &miniMetapodRocks[i * 5];
+            miniRockPtr = &miniMetapodRocks[i * 5];
 
             for (j = 0; j < D_86E04B24; j++) {
-                func_86E0103C(miniMetapodRockPtr, i);
+                func_86E0103C(miniRockPtr, i);
 
-                miniMetapodRockPtr->unk_23E = 1;
-                miniMetapodRockPtr->unk_29E = var_s1;
+                miniRockPtr->unk_23E = 1;
+                miniRockPtr->unk_29E = var_s1;
 
                 var_s1 += var_s5;
-                miniMetapodRockPtr++;
+                miniRockPtr++;
             }
         }
     }
@@ -1129,7 +1129,7 @@ void func_86E01188(void) {
 
 void func_86E01310(MiniActor* rock) {
     s16 temp_v1 = (D_86E04B20 * 4) + 0x28;
-    s16 temp_a1 = rock->unk_266;
+    s16 temp_a1 = rock->playerId;
 
     rock->unk_29E = temp_v1 - 1;
     rock->localOrigin.y += D_86E04BFC[temp_a1].unk_00.y + miniMetapods[temp_a1].unk_28C;
@@ -1153,7 +1153,7 @@ void func_86E01414(MiniActor* rock) {
 
 void func_86E01428(MiniActor* rock) {
     UNUSED s32 pad[3];
-    s16 temp_a1 = rock->unk_266;
+    s16 temp_a1 = rock->playerId;
     Vec3f sp3C;
 
     if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].unk_258 == 0)) {
@@ -1250,11 +1250,11 @@ void func_86E0172C(MiniActor* rock) {
 void func_86E017C0(void) {
     s32 i;
 
-    miniMetapodRockPtr = miniMetapodRocks;
+    miniRockPtr = miniMetapodRocks;
     for (i = 0; i < 20; i++) {
-        func_86E01428(miniMetapodRockPtr);
-        func_86E0172C(miniMetapodRockPtr);
-        miniMetapodRockPtr++;
+        func_86E01428(miniRockPtr);
+        func_86E0172C(miniRockPtr);
+        miniRockPtr++;
     }
 }
 
@@ -1277,13 +1277,13 @@ void func_86E0182C(MiniActor* arg0) {
 void func_86E01898(void) {
     s32 var_s1;
 
-    miniMetapodRockPtr = miniMetapodRocks;
+    miniRockPtr = miniMetapodRocks;
     var_s1 = 0;
     do {
-        func_86E016EC(miniMetapodRockPtr);
-        func_86E0182C(miniMetapodRockPtr);
+        func_86E016EC(miniRockPtr);
+        func_86E0182C(miniRockPtr);
         var_s1 += 1;
-        miniMetapodRockPtr = &miniMetapodRockPtr[1];
+        miniRockPtr = &miniRockPtr[1];
     } while (var_s1 != 0x14);
 }
 
@@ -1301,12 +1301,12 @@ void func_86E01904(void) {
     minigameCameraCoords.y = 0x2A;
     minigameCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 }
 
 void func_86E01990(void) {
-    minigameDebuggModeControll();
-    func_87900B64();
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
 void initMetapodMinigameAssets(void) {
@@ -1321,7 +1321,7 @@ void func_86E019F4(void) {
     s32 i;
     s32 var_a2;
 
-    miniMetapodRockPtr = miniMetapodRocks;
+    miniRockPtr = miniMetapodRocks;
     switch (D_86E04B28) {
         case 1:
             func_86E01188();
@@ -1331,11 +1331,11 @@ void func_86E019F4(void) {
         case 2:
             var_a2 = 1;
             for (i = 0; i < 20; i++) {
-                if (miniMetapodRockPtr->unk_23E != 0) {
+                if (miniRockPtr->unk_23E != 0) {
                     var_a2 = 0;
                     break;
                 }
-                miniMetapodRockPtr++;
+                miniRockPtr++;
             }
 
             if (var_a2 != 0) {
@@ -1697,7 +1697,7 @@ void func_86E02880(s32 arg0) {
     func_80015094(&D_87906050->unk_00);
     func_87901C98();
 
-    if (minigameDebuggMode == false) {
+    if (miniDebugMode == false) {
         if (D_8780FC98 == 0) {
             miniMetapodDrawPlayerHUBs(arg0);
         }
@@ -1714,14 +1714,14 @@ void metapodMinigameInit(void) {
     func_800077B4(0xA);
     func_80006C6C(0x10);
     miniTutoScreenState = 3;
-    D_87906046 = D_8780FA38;
+    D_87906046 = D_8780FA38;	//	difficulty ?
 }
 
 void func_86E0296C(void) {
 }
 
 void miniMetapodTutoScreenControls(void) {
-    if ((minigameDebuggMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
+    if ((miniDebugMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
             miniTutoScreenState = 1;
             minigameState = 1;

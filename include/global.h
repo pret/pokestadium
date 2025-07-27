@@ -146,7 +146,7 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x040 */ unk_D_86002F58_004_000_040 unk_040;
     /* 0x054 */ unk_D_86002F58_004_000_054 unk_054;
     /* 0x060 */ MtxF unk_060;
-    /* 0x0A0 */ Color_RGBA8_u32 unk_0A0;
+    /* 0x0A0 */ Color_RGBA8_u32 unk_0A0;    //  vertex color ?
     /* 0x0A4 */ char unk0A4[2];
     /* 0x0A6 */ u8 unk_0A6;
     /* 0x0A7 */ u8 unk_0A7;

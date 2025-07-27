@@ -1667,12 +1667,12 @@ void func_86F003FC(MiniActor* actor, s32 animID) {
     func_80017454(&actor->unk_000, 0x10000);
 }
 
-void func_86F00450(MiniActor* arg0, f32 arg1) {
-    arg0->unk_280 -= arg1;
-    if (arg0->unk_280 < 1.0f) {
-        arg0->unk_280 = 1.0f;
+void func_86F00450(MiniActor* sandshrew, f32 arg1) {
+    sandshrew->unk_280 -= arg1;
+    if (sandshrew->unk_280 < 1.0f) {
+        sandshrew->unk_280 = 1.0f;
     }
-    arg0->unk_27C = arg0->unk_280;
+    sandshrew->unk_27C = sandshrew->unk_280;
 }
 
 void func_86F0048C(MiniActor* sandshrew, s32 arg1) {
@@ -2066,7 +2066,7 @@ void func_86F0132C(void) {
     minigameCameraCoords.y = -2;
     minigameCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 }
 
 void func_86F013B8(void) {
@@ -2091,8 +2091,8 @@ void func_86F013B8(void) {
 
 void func_86F01488(void) {
     func_86F013B8();
-    minigameDebuggModeControll();
-    func_87900B64();
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
 void sandshrewMinigameInitObjects(void) {
@@ -2351,7 +2351,7 @@ void func_86F01F58(s32 arg0) {
     func_80015094(&D_87906050->unk_00);
     func_87901C98();
 
-    if (minigameDebuggMode == 0) {
+    if (miniDebugMode == 0) {
         if (D_8780FC98 == 0) {
             func_86F01EF4(arg0);
         }
@@ -2369,7 +2369,7 @@ void sandshrewMinigameInit(void) {
     func_800077B4(0xA);
     func_80006C6C(0x10);
     miniTutoScreenState = 3;
-    D_87906046 = D_8780FA38;
+    D_87906046 = D_8780FA38;    // difficulty ?
 }
 
 void func_86F0204C(void) {
@@ -2388,7 +2388,7 @@ void func_86F0204C(void) {
             }
         }
 
-        if ((minigameDebuggMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
+        if ((miniDebugMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
             if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
                 miniTutoScreenState = 1;
                 minigameState = 1;
@@ -2410,7 +2410,7 @@ void func_86F0204C(void) {
             func_86F01488();
         }
 
-        if ((minigameDebuggMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
+        if ((miniDebugMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
             var_s5 = 0;
         }
 

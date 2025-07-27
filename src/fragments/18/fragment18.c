@@ -39,13 +39,13 @@ extern u32 D_030426E0[];
 extern u32 D_03042E00[];
 
 typedef struct ActiveDiglettInfo {
-    /* 0x00 */ s16 unk_00;		//	diglett id ?
-    /* 0x02 */ s16 unk_02; 		//	0
-    /* 0x04 */ s16 unk_04;
+    /* 0x00 */ s16 diglettId;
+    /* 0x02 */ s16 state;
+    /* 0x04 */ s16 timer;
     /* 0x06 */ s16 unk_06;		//	0
-    /* 0x08 */ s16 unk_08;		//	0
+    /* 0x08 */ s16 gotHoop;
     /* 0x0A */ s16 unk_0A;		//	0
-    /* 0x0C */ s16 unk_0C;
+    /* 0x0C */ s16 playerId;
 } ActiveDiglettInfo; // size = 0xE
 
 typedef struct ActorOriginPosition {
@@ -1502,7 +1502,7 @@ UNUSED static s16 D_86C0E054[] = {
     0x0002, 0x0004, 0x0006, 0x0002, 0x0005, 0x0008, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008,
 };
 
-static s16 D_86C0E084[4][4] = {
+static s16 D_86C0E084[4][4] = {		//	difficulties ?
     {
         0x0000,
         0x0000,
@@ -1596,7 +1596,7 @@ s32 func_86C00020(MiniActor* arg0) {
 }
 
 void func_86C00090(s16 nDiglett, s32* arg1, s32* arg2) {
-    s16 ActiveDiglettId = activeDigletts[nDiglett].unk_00;
+    s16 ActiveDiglettId = activeDigletts[nDiglett].diglettId;
 
     if (miniDigletts[ActiveDiglettId].unk_29C != 0) {
         *arg1 = 1;
@@ -1763,7 +1763,7 @@ void initEkans(MiniActor* ekans, s16 player) {
 
     ekans->unk_000.unk_000.unk_02 &= ~0x40;
     ekans->isComp = D_879060C4[player];
-    ekans->unk_266 = -1;
+    ekans->playerId = -1;
 
     if (ekansMinigameCountdownStarted == false) {
         ekans->unk_2AE = D_86C0E084[D_87906046][player];
@@ -1787,8 +1787,8 @@ void initEkanses(void) {
     }
 }
 
-f32 func_86C0063C(MiniActor* arg0) {
-    return (arg0->unk_284 <= arg0->unk_280) ? arg0->unk_280 : arg0->unk_284;
+f32 func_86C0063C(MiniActor* ekans) {
+    return (ekans->unk_284 <= ekans->unk_280) ? ekans->unk_280 : ekans->unk_284;
 }
 
 s16 func_86C00668(MiniActor* arg0, s16 arg1) {
@@ -1955,12 +1955,12 @@ void func_86C00AA4(void) {
 
 s32 func_86C00B0C(MiniActor* ekans) {
     s32 ret = 0;
-    s32 idx = ekans->unk_266;
+    s32 idx = ekans->playerId;
     s32 i;
 
-    if ((miniDigletts[activeDigletts[idx].unk_00].unk_29C == 0) && (ekans->unk_2AE == 1)) {
+    if ((miniDigletts[activeDigletts[idx].diglettId].unk_29C == 0) && (ekans->unk_2AE == 1)) {
         for (i = 0; i < 3; i++) {
-            if ((activeDigletts[i].unk_02 == 6) && (miniDigletts[activeDigletts[i].unk_00].unk_29C != 0)) {
+            if ((activeDigletts[i].state == 6) && (miniDigletts[activeDigletts[i].diglettId].unk_29C != 0)) {
                 ret = 1;
                 break;
             }
@@ -1976,7 +1976,7 @@ s16 func_86C00BB4(void) {
     s16 var_t0 = -1;
 
     for (i = 0; i < 3; i++) {
-        if (activeDigletts[var_v1].unk_02 == 6) {
+        if (activeDigletts[var_v1].state == 6) {
             var_t0 = var_v1;
             break;
         }
@@ -1996,8 +1996,8 @@ s16 func_86C00C40(MiniActor* arg0) {
     s16 sp1E = -1;
     s32 sp18 = 0;
 
-    if (arg0->unk_266 >= 0) {
-        var_a0 = arg0->unk_266;
+    if (arg0->playerId >= 0) {
+        var_a0 = arg0->playerId;
     } else {
         sp18 = 0;
         sp1E = -1;
@@ -2005,7 +2005,7 @@ s16 func_86C00C40(MiniActor* arg0) {
     }
 
     for (i = 0; i < 3; i++) {
-        if ((activeDigletts[i].unk_02 == 6) && (miniDigletts[activeDigletts[i].unk_00].unk_29C != 0)) {
+        if ((activeDigletts[i].state == 6) && (miniDigletts[activeDigletts[i].diglettId].unk_29C != 0)) {
             sp1E = i;
             sp18 = 1;
             break;
@@ -2014,7 +2014,7 @@ s16 func_86C00C40(MiniActor* arg0) {
 
     if (sp18 == 0) {
         for (i = 0; i < 3; i++) {
-            if (activeDigletts[var_a0].unk_02 == 6) {
+            if (activeDigletts[var_a0].state == 6) {
                 sp1E = var_a0;
                 break;
             }
@@ -2048,12 +2048,12 @@ s16 func_86C00D50(MiniActor* arg0) {
     var_a0 = func_878001E8(0x64) % 3;
 
     for (i = 0; i < 3; i++) {
-        if (activeDigletts[var_a0].unk_02 == 6) {
+        if (activeDigletts[var_a0].state == 6) {
             if (sp1C == 0) {
                 var_v0 = miniEkanses;
                 var_v1 = 1;
                 for (j = 0; j < 4; j++, var_v0++) {
-                    if ((var_v0 != arg0) && (var_v0->isComp != 0) && (var_a0 == var_v0->unk_266)) {
+                    if ((var_v0 != arg0) && (var_v0->isComp != 0) && (var_a0 == var_v0->playerId)) {
                         var_v1 = 0;
                     }
                 }
@@ -2082,19 +2082,19 @@ s16 func_86C00D50(MiniActor* arg0) {
 s32 func_86C00EF8(MiniActor* arg0) {
     switch (arg0->unk_2AE) {
         case 0:
-            arg0->unk_266 = func_86C00BB4();
+            arg0->playerId = func_86C00BB4();
             break;
 
         case 1:
-            arg0->unk_266 = func_86C00C40(arg0);
+            arg0->playerId = func_86C00C40(arg0);
             break;
 
         case 2:
-            arg0->unk_266 = func_86C00D50(arg0);
+            arg0->playerId = func_86C00D50(arg0);
             break;
     }
 
-    return arg0->unk_266;
+    return arg0->playerId;
 }
 
 void func_86C00F70(MiniActor* ekans) {
@@ -2128,7 +2128,7 @@ void func_86C00F70(MiniActor* ekans) {
             break;
     }
 
-    idx = activeDigletts[ekans->unk_266].unk_00;
+    idx = activeDigletts[ekans->playerId].diglettId;
     tempDiglett = &miniDigletts[idx];
 
     sp3C.x = tempDiglett->unk_190.x - ekans->unk_190.x;
@@ -2138,52 +2138,52 @@ void func_86C00F70(MiniActor* ekans) {
     ekans->unk_22E = func_878001E8(sp32) + sp34;
 }
 
-void func_86C01100(MiniActor* arg0) {
-    s16 temp_v1 = activeDigletts[arg0->unk_266].unk_00;
-    f32 var_fv0;
+void miniEkansCompGetForce(MiniActor* ekans) {
+    s16 diglettId = activeDigletts[ekans->playerId].diglettId;
+    f32 force;
 
     switch (D_87906046) {
         case 0:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0x28) + 0x14;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0x23) + 0x14;
+            if (diglettId < 3) {
+                force = func_878001E8(0x28) + 0x14;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0x23) + 0x14;
             } else {
-                var_fv0 = func_878001E8(0x19) + 0x28;
+                force = func_878001E8(0x19) + 0x28;
             }
             break;
 
         case 1:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0x1E) + 0x14;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0x1E) + 0x1E;
+            if (diglettId < 3) {
+                force = func_878001E8(0x1E) + 0x14;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0x1E) + 0x1E;
             } else {
-                var_fv0 = func_878001E8(0xF) + 0x32;
+                force = func_878001E8(0xF) + 0x32;
             }
             break;
 
         case 2:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0xF) + 0x18;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0xF) + 0x28;
+            if (diglettId < 3) {
+                force = func_878001E8(0xF) + 0x18;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0xF) + 0x28;
             } else {
-                var_fv0 = func_878001E8(0xA) + 0x36;
+                force = func_878001E8(0xA) + 0x36;
             }
             break;
 
         case 3:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0xA) + 0x1C;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0xA) + 0x2A;
+            if (diglettId < 3) {
+                force = func_878001E8(0xA) + 0x1C;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0xA) + 0x2A;
             } else {
-                var_fv0 = func_878001E8(6) + 0x3A;
+                force = func_878001E8(6) + 0x3A;
             }
             break;
     }
-    arg0->unk_280 = var_fv0;
+    ekans->unk_280 = force;
 }
 
 s16 func_86C01408(void) {
@@ -2258,7 +2258,7 @@ void compEkansControls(MiniActor* ekans) {
             } else {
                 ekans->unk_29E--;
                 if (ekans->unk_29E <= 0) {
-                    func_86C01100(ekans);
+                    miniEkansCompGetForce(ekans);
                     ekans->unk_242++;
                 }
             }
@@ -2345,8 +2345,8 @@ void checkCollitionWithDigletts(MiniActor* ekans, s32 nPlayer) {
     func_80015390(&ekans->unk_000, 0xA, &tempEkansHitboxPos);
     if ((ekans->unk_262 != 0) && (ekans->unk_260 < 2)) {
         for (i = 0; i < 3; i++) {
-            if ((activeDigletts[i].unk_06 != 0) && (activeDigletts[i].unk_08 == 0)) {
-                func_80015390(&miniDigletts[activeDigletts[i].unk_00].unk_000, 0xA, &tempDiglettHitboxPos);
+            if ((activeDigletts[i].unk_06 != 0) && (activeDigletts[i].gotHoop == false)) {
+                func_80015390(&miniDigletts[activeDigletts[i].diglettId].unk_000, 0xA, &tempDiglettHitboxPos);
                 distance2d = func_81400EF0(tempEkansHitboxPos, tempDiglettHitboxPos);
 
                 xDist = tempEkansHitboxPos.x - tempDiglettHitboxPos.x;
@@ -2356,8 +2356,8 @@ void checkCollitionWithDigletts(MiniActor* ekans, s32 nPlayer) {
                 if ((distance2d < 35.0f) && (yDist > -35.0f) && (yDist < 20.0f)) {
                     if ((distance2d < 25.0f) && (yDist > -20.0f) && (yDist < 20.0f)) {
                         ekans->ekansAbbleToHoop = true;
-                        ekans->unk_268 = ekans->unk_266;
-                        ekans->unk_266 = i;
+                        ekans->unk_268 = ekans->playerId;
+                        ekans->playerId = i;
                     } else if (ekans->unk_260 == 0) {
                         ekans->unk_260 = 1;
                         ekansFixDirToDiglett(ekans, nPlayer, i, zDist, xDist, yDist);
@@ -2380,11 +2380,11 @@ void func_86C01AF8(void) {
 
     for (i = 0; i < 4; i++, ekans++) {
         if (ekans->ekansAbbleToHoop) {
-            s32 idx = ekans->unk_266;
+            s32 idx = ekans->playerId;
 
             for (j = i + 1; j < 4; j++) {
-                if ( (miniEkanses[j].ekansAbbleToHoop) && (idx == miniEkanses[j].unk_266) ) {
-                    diglett = &miniDigletts[activeDigletts[idx].unk_00];
+                if ( (miniEkanses[j].ekansAbbleToHoop) && (idx == miniEkanses[j].playerId) ) {
+                    diglett = &miniDigletts[activeDigletts[idx].diglettId];
 
                     func_80015390(&ekans->unk_000, 0xA, &sp7C);
                     func_80015390(&miniEkanses[j].unk_000, 0xA, &sp70);
@@ -2407,14 +2407,14 @@ void func_86C01AF8(void) {
     }
 }
 
-void func_86C01D2C(MiniActor* ekans, s32 arg1) {
+void func_86C01D2C(MiniActor* ekans, s32 nPlayer) {
     Vec3f diglettColl;
     Vec3f ekansColl;
     f32 xDist;
     f32 zDist;
     s32 idx;
     MiniActor* diglett;
-    ActiveDiglettInfo* sp18;
+    ActiveDiglettInfo* activeDiglett;
 
     if (ekans->unk_260 != 2) {
         return;
@@ -2422,9 +2422,9 @@ void func_86C01D2C(MiniActor* ekans, s32 arg1) {
 
     func_80015390(&ekans->unk_000, 0xA, &ekansColl);
 
-    idx = ekans->unk_266;
-    sp18 = &activeDigletts[idx];
-    diglett = &miniDigletts[sp18->unk_00];
+    idx = ekans->playerId;
+    activeDiglett = &activeDigletts[idx];
+    diglett = &miniDigletts[activeDiglett->diglettId];
 
     func_80015390(&diglett->unk_000, 0xA, &diglettColl);
 
@@ -2468,9 +2468,9 @@ void func_86C01D2C(MiniActor* ekans, s32 arg1) {
         ekans->ekansDiglettHitScore = 1;
     }
 
-    sp18->unk_08 = 1;
-    sp18->unk_0C = arg1;
-    D_86C12040[sp18->unk_00][arg1] = 1;
+    activeDiglett->gotHoop = true;
+    activeDiglett->playerId = nPlayer;
+    D_86C12040[activeDiglett->diglettId][nPlayer] = 1;
 
     ekans->unk_296 = 1;
     if (ekans->unk_260 == 0) {
@@ -2487,7 +2487,7 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
     if (ekans->unk_298 != 0) {
         ekans->unk_298--;
     } else if (ekans->unk_296 != 0) {
-        func_86C00368(8, ekans->unk_266);
+        func_86C00368(8, ekans->playerId);
         ekans->unk_296 = 0;
     }
 
@@ -2530,10 +2530,10 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
         ekans->unk_29E--;
         if (ekans->unk_29E <= 0) {
             if ((ekans->unk_260 == 5) && (ekans->isComp != 0)) {
-                if (ekans->unk_268 == ekans->unk_266) {
-                    ekans->unk_266 = -1;
+                if (ekans->unk_268 == ekans->playerId) {
+                    ekans->playerId = -1;
                 } else {
-                    ekans->unk_266 = ekans->unk_268;
+                    ekans->playerId = ekans->unk_268;
                 }
             }
 
@@ -2570,7 +2570,7 @@ void anyEkansControls(MiniActor* ekans) {
     }
 }
 
-void func_86C02324(MiniActor* ekans, s32 nPlayer) {
+void miniEkansCompStateMachine(MiniActor* ekans, s32 nPlayer) {
     switch (ekans->unk_23E) {
         case 0x0:		//	pull back
             func_86C021FC(ekans);
@@ -2653,7 +2653,7 @@ void miniEkansPhysics(void) {
     miniEkansPtr = miniEkanses;
 
     for (i = 0; i < 4; i++) {
-        func_86C02324(miniEkansPtr, i);
+        miniEkansCompStateMachine(miniEkansPtr, i);
         func_879003A0(miniEkansPtr);
         miniActorUpdateTransform(miniEkansPtr);
         func_87900808(miniEkansPtr);    // update the collider?
@@ -2662,19 +2662,19 @@ void miniEkansPhysics(void) {
     }
 }
 
-void initDiglett(MiniActor* diglett, s32 arg1) {
+void initDiglett(MiniActor* diglett, s32 nDiglett) {
     func_8790060C(diglett);
 
     diglett->scale.x = 1.0f;
     diglett->scale.y = 1.0f;
     diglett->scale.z = 1.0f;
 
-    diglett->localOrigin.x = diglettActorInfo[arg1].pos.x;
-    diglett->localOrigin.y = diglettActorInfo[arg1].pos.y;
-    diglett->localOrigin.z = diglettActorInfo[arg1].pos.z;
+    diglett->localOrigin.x = diglettActorInfo[nDiglett].pos.x;
+    diglett->localOrigin.y = diglettActorInfo[nDiglett].pos.y;
+    diglett->localOrigin.z = diglettActorInfo[nDiglett].pos.z;
 
-    diglett->unk_288 = diglettActorInfo[arg1].unk_12;
-    diglett->unk_28C = diglettActorInfo[arg1].unk_14;
+    diglett->unk_288 = diglettActorInfo[nDiglett].unk_12;
+    diglett->unk_28C = diglettActorInfo[nDiglett].unk_14;
 
     diglett->unk_258 = diglett->unk_25C = 0x64;
     diglett->unk_1E4 = diglett->unk_28C * 0.5f;
@@ -2704,10 +2704,10 @@ void func_86C0276C(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        activeDigletts[i].unk_02 = 0;
-        activeDigletts[i].unk_00 = -1;
+        activeDigletts[i].state = 0;
+        activeDigletts[i].diglettId = -1;
         activeDigletts[i].unk_06 = 0;
-        activeDigletts[i].unk_08 = 0;
+        activeDigletts[i].gotHoop = false;
         activeDigletts[i].unk_0A = 0;
     }
 }
@@ -2727,8 +2727,8 @@ void func_86C027BC(void) {
     func_86C0276C();
 
     for (i = 0; i < 3; i++) {
-        activeDigletts[i].unk_02 = 3;
-        activeDigletts[i].unk_00 = -1;
+        activeDigletts[i].state = 3;
+        activeDigletts[i].diglettId = -1;
     }
 }
 
@@ -2751,10 +2751,10 @@ void initDigletts(void) {
     func_86C0276C();
 }
 
-s16 func_86C028C0(s16 arg0) {
+s16 miniEkansChooseRandDiglett(UNUSED s16 activeDiglett) {
     s32 i;
     s16 sp44[3];
-    s16 var_a1;
+    s16 rand;
     s16 var_s0;
     s16 var_s3;
 
@@ -2764,22 +2764,22 @@ s16 func_86C028C0(s16 arg0) {
 
     var_s0 = 0;
     for (i = 0; i < 3; i++) {
-        if (activeDigletts[i].unk_00 != -1) {
-            sp44[var_s0] = activeDigletts[i].unk_00;
+        if (activeDigletts[i].diglettId != -1) {
+            sp44[var_s0] = activeDigletts[i].diglettId;
             var_s0++;
         }
     }
 
     if (var_s0 == 0) {
-        var_a1 = func_878001E8(0x64) % 9;
+        rand = func_878001E8(0x64) % 9;
     } else {
         var_s3 = 0;
         while (true) {
             var_s0 = 0;
-            var_a1 = func_878001E8(0x64) % 9;
+            rand = func_878001E8(0x64) % 9;
             while (true) {
                 s16 tmp = var_s0 + 1;
-                if (var_a1 == sp44[var_s0]) {
+                if (rand == sp44[var_s0]) {
                     break;
                 }
                 var_s0++;
@@ -2795,7 +2795,7 @@ s16 func_86C028C0(s16 arg0) {
         }
     }
 
-    return var_a1;
+    return rand;
 }
 
 void func_86C02A1C(MiniActor* diglett) {
@@ -2835,70 +2835,70 @@ void func_86C02A1C(MiniActor* diglett) {
     }
 }
 
-void func_86C02B78(MiniActor* diglett, s32 arg1) {
-    u8 var_s0 = 0;
-    u8 var_a2 = 0;
-    u8 var_a3 = 0;
+void miniEkansRecolorDiglet(MiniActor* diglett, s32 nActiveDiglett) {
+    u8 r = 0;
+    u8 g = 0;
+    u8 b = 0;
 
-    switch (activeDigletts[arg1].unk_0C) {
+    switch (activeDigletts[nActiveDiglett].playerId) {
         case 0:
-            var_s0 = 0x14;
-            var_a2 = 0x3C;
-            var_a3 = 0xFF;
+            r = 0x14;
+            g = 0x3C;
+            b = 0xFF;
             break;
 
         case 1:
-            var_a2 = 0x96;
-            var_a3 = 0x3C;
+            g = 0x96;
+            b = 0x3C;
             break;
 
         case 2:
-            var_s0 = 0xC8;
-            var_a2 = 0x1E;
-            var_a3 = 0x14;
+            r = 0xC8;
+            g = 0x1E;
+            b = 0x14;
             break;
 
         case 3:
-            var_s0 = 0xDC;
-            var_a2 = 0xAA;
+            r = 0xDC;
+            g = 0xAA;
             break;
     }
 
-    func_8001BE34(&diglett->unk_000, var_s0, var_a2, var_a3, 0x80);
+    func_8001BE34(&diglett->unk_000, r, g, b, 0x80);
 }
 
 void func_86C02C28(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        switch (activeDigletts[i].unk_02) {
+        switch (activeDigletts[i].state) {
             case 1:
-                miniDiglettPtr = &miniDigletts[activeDigletts[i].unk_00];
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
                 miniChangeActorAnim(miniDiglettPtr, 1, -1, 0);
-                activeDigletts[i].unk_02 = 2;
+                activeDigletts[i].state = 2;
                 func_86C00368(6, i);
                 break;
 
             case 2:
-                miniDiglettPtr = &miniDigletts[activeDigletts[i].unk_00];
-                if (miniIddleAnimCheck(miniDiglettPtr) != false) {
-                    activeDigletts[i].unk_00 = -1;
-                    activeDigletts[i].unk_02 = 0;
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                if ( miniIddleAnimCheck(miniDiglettPtr) ) {
+                    activeDigletts[i].diglettId = -1;
+                    activeDigletts[i].state = 0;
                 }
                 break;
 
             case 3:
-                activeDigletts[i].unk_02 = 4;
-                activeDigletts[i].unk_04 = func_878001E8(0x14);
+                activeDigletts[i].state = 4;
+                activeDigletts[i].timer = func_878001E8(0x14);	//	get random
                 break;
 
-            case 4:
-                activeDigletts[i].unk_04--;
-                if (activeDigletts[i].unk_04 < 0) {
-                    activeDigletts[i].unk_02 = 5;
-                    activeDigletts[i].unk_04 = 0xD;
-                    activeDigletts[i].unk_00 = func_86C028C0(i);
-                    miniDiglettPtr = &miniDigletts[activeDigletts[i].unk_00];
+            case 4:	// pre-spawn
+                activeDigletts[i].timer--;			//	spawn delay
+                if (activeDigletts[i].timer < 0) {
+                    activeDigletts[i].state = 5;
+                    activeDigletts[i].timer = 0xD;
+                    activeDigletts[i].diglettId = miniEkansChooseRandDiglett(i);
+                    miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
                     miniDiglettPtr->unk_000.unk_000.unk_01 |= 1;
                     func_86C00368(7, i);
                     func_86C02A1C(miniDiglettPtr);
@@ -2906,51 +2906,52 @@ void func_86C02C28(void) {
                 }
                 break;
 
-            case 5:
-                activeDigletts[i].unk_04--;
-                if (activeDigletts[i].unk_04 < 0) {
+            case 5:	//	coming out of the ground anim
+                activeDigletts[i].timer--;			//	interactable delay
+                if (activeDigletts[i].timer < 0) {
                     activeDigletts[i].unk_06 = 1;
-                    activeDigletts[i].unk_02 = 6;
+                    activeDigletts[i].state = 6;
                 }
                 break;
 
-            case 6:
-                if (activeDigletts[i].unk_08 != 0) {
-                    miniDiglettPtr = &miniDigletts[activeDigletts[i].unk_00];
+            case 6:	//	getting hoop'd
+                if ( activeDigletts[i].gotHoop ) {
+                    miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
                     miniChangeActorAnim(miniDiglettPtr, 2, -1, 0);
-                    func_86C02B78(miniDiglettPtr, i);
-                    activeDigletts[i].unk_02 = 7;
+                    miniEkansRecolorDiglet(miniDiglettPtr, i);
+                    activeDigletts[i].state = 7;
                     activeDigletts[i].unk_06 = 0;
-                    activeDigletts[i].unk_08 = 0;
+                    activeDigletts[i].gotHoop = false;
                 }
                 break;
 
-            case 7:
-                miniDiglettPtr = &miniDigletts[activeDigletts[i].unk_00];
-                if (miniIddleAnimCheck(miniDiglettPtr) != false) {
+            case 7:	//	reset active diglet
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                if ( miniIddleAnimCheck(miniDiglettPtr) ) {
+                	// recolor diglett to white
                     func_8001BE34(&miniDiglettPtr->unk_000, 0xFF, 0xFF, 0xFF, 0);
                     miniChangeActorAnim(miniDiglettPtr, 1, -1, 0);
-                    activeDigletts[i].unk_02 = 8;
+                    activeDigletts[i].state = 8;
                     func_86C00368(9, i);
                 }
                 break;
 
             case 8:
-                miniDiglettPtr = &miniDigletts[activeDigletts[i].unk_00];
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
                 if (miniIddleAnimCheck(miniDiglettPtr) != false) {
                     miniDiglettPtr->unk_000.unk_000.unk_01 &= ~1;
-                    activeDigletts[i].unk_04 = 1;
-                    activeDigletts[i].unk_02 = 9;
+                    activeDigletts[i].timer = 1;
+                    activeDigletts[i].state = 9;
                     miniDiglettPtr->unk_29C = 0;
                     miniDiglettPtr->unk_000.unk_01C = 0;
                 }
                 break;
 
-            case 9:
-                activeDigletts[i].unk_04--;
-                if (activeDigletts[i].unk_04 == 0) {
-                    activeDigletts[i].unk_00 = -1;
-                    activeDigletts[i].unk_02 = 3;
+            case 9:	// dissapering to the ground anim
+                activeDigletts[i].timer--;				//	re-starting delay
+                if (activeDigletts[i].timer == 0) {
+                    activeDigletts[i].diglettId = -1;
+                    activeDigletts[i].state = 3;
                 }
                 break;
         }
@@ -2976,7 +2977,7 @@ void ekansMinigameInitObjects(void) {
     func_87900854(); //  minigame variables
     initEkanses();
     initDigletts();
-    func_86C03500(); //  camera
+    miniEkansInitCam();
 
     ekansMinigameCountdown = 0x3C;
     D_879060C0 = ekansMinigameCountdown * 0x1E;
@@ -3125,7 +3126,7 @@ void miniEkansStateMachine(void) {
 void func_86C034F8(void) {
 }
 
-void func_86C03500(void) {
+void miniEkansInitCam(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
     minigameCameraXRot = 0x1800;
@@ -3139,7 +3140,7 @@ void func_86C03500(void) {
     minigameCameraCoords.y = 0x56;
     minigameCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 
     D_879060CA = 0;
 
@@ -3153,8 +3154,8 @@ void func_86C03500(void) {
 }
 
 void func_86C035E0(void) {
-    minigameDebuggModeControll();
-    func_87900B64();
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
 void func_86C03608(void) {
@@ -3339,11 +3340,11 @@ void func_86C040B4(s32 arg0) {
     func_87901C98();
     func_86C03ED4();
 
-    if (minigameDebuggMode == 0) {
+    if (miniDebugMode == 0) {
         func_86C03E8C(arg0);
     }
 
-    if (minigameDebuggMode != 0) {
+    if (miniDebugMode != 0) {
         showDebuggCameraInfo();
         showDebuggJoystickInfo();
     }
@@ -3377,7 +3378,7 @@ void showTutorialScreenEkansMinigame(void) {
     while (var_s1 != 0) {
         func_87900528(); //	input
 
-        if ((minigameDebuggMode == 0) && (func_80007604() == 0)) {
+        if ((miniDebugMode == 0) && (func_80007604() == 0)) {
             if (ekansMinigameCountdownStarted) {
                 if ((gPlayer1Controller->buttonPressed != 0) || (ekansMinigameCountdown == 0x28)) {
                     func_87802EB8(2); //	D_8780FC92 = 1
@@ -3403,7 +3404,7 @@ void showTutorialScreenEkansMinigame(void) {
             func_86C035E0();
         }
 
-        if ((minigameDebuggMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
+        if ((miniDebugMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
             var_s1 = 0;
         }
 
@@ -3497,7 +3498,7 @@ s32 ekansMinigameLoad(s32 arg0, UNUSED s32 arg1) {
         ekansMinigameCountdownStarted = false;
     }
 
-    D_87906046 = D_8780FA38;
+    D_87906046 = D_8780FA38; // difficulty ?
 
     main_pool_push_state('MINI');
 

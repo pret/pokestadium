@@ -12,7 +12,7 @@ s16 minigameState = 0;
 s16 minigameInputLock = 0;
 s16 D_87903DA8 = 0;
 s16 D_87903DAC = 0;
-s16 minigameDebuggMode = 0;
+s16 miniDebugMode = 0;
 s32 pad_D_87903DB4 = 0;
 s16 D_87903DB8 = 0;
 s16 D_87903DBC = 0;
@@ -274,7 +274,7 @@ void func_8790060C(MiniActor* actor) {
     actor->unk_27C = 0.0f;
     actor->unk_274 = 0.0f;
 
-    actor->unk_260 = actor->unk_262 = actor->unk_264 = actor->unk_266 = 0;
+    actor->unk_260 = actor->unk_262 = actor->unk_264 = actor->playerId = 0;
     actor->unk_290 = actor->unk_292 = actor->unk_294 = 0;
 }
 

@@ -57,7 +57,7 @@ void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 
     arg0->unk_21A = arg5;
     arg0->unk_21C = arg6;
     arg0->unk_21E = arg7;
-    arg0->unk_266 = arg8;
+    arg0->playerId = arg8;
     arg0->unk_23E = 1;
 }
 

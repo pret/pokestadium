@@ -74,7 +74,7 @@ void func_87900A50(void) {
     }
 }
 
-void func_87900B64(void) { //  fix the camera on minigames ?
+void miniUpdateCamera(void) {
     D_87906054->unk_24.fovy = minigameCameraFOV;
     D_87906054->unk_24.near = minigameCameraNear;
     D_87906054->unk_24.far = minigameCameraFar;
@@ -87,10 +87,10 @@ void func_87900B64(void) { //  fix the camera on minigames ?
                   minigameCameraYRot);
 }
 
-s32 minigameDebuggModeControll(void) {
+s32 minigameDebuggModeControl(void) {
     s16 sp6;
 
-    if (minigameDebuggMode == 0) {
+    if (miniDebugMode == 0) {
         return;
     }
 

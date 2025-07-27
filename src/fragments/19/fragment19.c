@@ -32,21 +32,21 @@ void func_86D00020(void) {
     minigameCameraCoords.y = 0x1E;
     minigameCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 }
 
-void func_86D000A8(void) {
-    minigameDebuggModeControll();
-    func_87900B64();
+void miniUnkUpdateCamera(void) {
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
-void func_86D000D0(UNUSED s32 arg0) {
+void miniUnkDrawHUB(UNUSED s32 arg0) {
     func_800079C4();
     func_8000699C(&gDisplayListHead, 1);
     func_80015348();
     func_80015094(&D_87906050->unk_00);
 
-    if (minigameDebuggMode != 0) {
+    if (miniDebugMode != 0) {
         showDebuggCameraInfo();
     }
 
@@ -58,7 +58,7 @@ void func_86D00134(void) {
     miniTutoScreenState = 3;
 }
 
-void func_86D0015C(void) {
+void miniUnkControls(void) {
     s32 var_s1 = 1;
 
     while (var_s1 != 0) {
@@ -77,21 +77,21 @@ void func_86D0015C(void) {
         }
 
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_Z)) {
-            minigameDebuggMode = (minigameDebuggMode + 1) & 1;
+            miniDebugMode = (miniDebugMode + 1) & 1;
         }
 
-        if ((minigameDebuggMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+        if ((miniDebugMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
             minigameState = 1;
         }
 
         func_8790370C();
-        func_86D000A8();
+        miniUnkUpdateCamera();
 
-        if ((minigameDebuggMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_CDOWN)) {
+        if ((miniDebugMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_CDOWN)) {
             var_s1 = 0;
         }
 
-        func_86D000D0(1);
+        miniUnkDrawHUB(1);
     }
 }
 
@@ -101,8 +101,8 @@ void func_86D0032C(void) {
     func_80006CB4(0x1E);
 
     for (i = 0; i < 30; i++) {
-        func_87900528();
-        func_86D000D0(2);
+        func_87900528();    //  inputs
+        miniUnkDrawHUB(2);
     }
 }
 
@@ -134,7 +134,7 @@ s32 func_86D003EC(s32 arg0, s32 arg1) {
     func_86D0037C();
     func_80007678(sp24);
     func_86D00134();
-    func_86D0015C();
+    miniUnkControls();
     func_86D0032C();
     func_800076C0();
     func_8001E9CC();

@@ -7,7 +7,7 @@
 #include "src/controller.h"
 
 typedef struct MiniActor {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;		// collider ?
+    /* 0x000 */ unk_D_86002F58_004_000 unk_000;		// collider ? model ?
     /* 0x168 */ unk_D_86002F30* unk_168;
     /* 0x16C */ Vec3f scale;
     /* 0x178 */ char unk178[0x18];	//	unused ?
@@ -65,10 +65,10 @@ typedef struct MiniActor {
     /* 0x25A */ s16 unk_25A;        //  something animation on metapod  ** metapod only
     /* 0x25C */ s16 unk_25C;        //  max health on metapod, different on sandshrew and ekans
     /* 0x25E */ s16 ekansAbbleToHoop;	//								** ekans only
-    /* 0x260 */ s16 unk_260;
+    /* 0x260 */ s16 unk_260;        //  rock got blocked on metapod ; 
     /* 0x262 */ s16 unk_262;        //  can ekans peg a digglet ?		** ekans only
-    /* 0x264 */ s16 unk_264;
-    /* 0x266 */ s16 unk_266;        //  player id on metapod ?
+    /* 0x264 */ s16 unk_264;        //  always zero
+    /* 0x266 */ s16 playerId;
     /* 0x268 */ s16 unk_268;
     /* 0x26A */ s16 unk_26A;        //	some flag related to collisions
     /* 0x26C */ s16 unk_26C;        //	animation id or state?
@@ -77,8 +77,8 @@ typedef struct MiniActor {
     /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ?
     /* 0x274 */ f32 unk_274;        //  
     /* 0x278 */ char unk278[0x4];
-    /* 0x27C */ f32 unk_27C;
-    /* 0x280 */ f32 unk_280;		//	x rotation speed? stick magnitude on ekans?
+    /* 0x27C */ f32 unk_27C;		//
+    /* 0x280 */ f32 unk_280;		//	stick magnitude on ekans? digging/animation speed on sandshrew
     /* 0x284 */ f32 unk_284;
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
     /* 0x28C */ f32 unk_28C;        //	top    of the hitbox ? / bounding box ? ;   double of 1E4
@@ -176,7 +176,7 @@ extern s16 D_879060A6;
 extern s16 D_879060A8;
 extern Vec3s D_879060AC;
 
-extern s16 minigameDebuggMode;
+extern s16 miniDebugMode;
 extern s16 D_87903DB8;
 extern Controller* miniControllerPtr;
 extern s16 D_879060C0;
@@ -214,8 +214,8 @@ void func_87900920(void);
 void func_879009B4(void);
 
 void func_87900A50(void);
-void func_87900B64(void);
-s32 minigameDebuggModeControll(void);
+void miniUpdateCamera(void);
+s32 minigameDebuggModeControl(void);
 void showDebuggCameraInfo(void);
 void showDebuggJoystickInfo(void);
 void func_87901200(void);
