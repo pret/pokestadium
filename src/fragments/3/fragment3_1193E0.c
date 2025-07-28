@@ -3,7 +3,7 @@
 #include "src/20470.h"
 #include "src/F420.h"
 
-s16 minigameInputLockTimer;
+s16 miniInputLockTimer;
 s16 D_87906042;
 s16 miniShowHUB;
 s16 D_87906046;
@@ -13,13 +13,13 @@ s32 pad_D_8790604C; //	unused?
 unk_D_86002F34_00C* D_87906050;
 unk_D_86002F34_00C* D_87906054;
 s32 pad_D_87906058[2]; //	unused?
-s16 minigameCameraXRot;
-s16 minigameCameraYRot;
-s16 minigameCameraDistance;
-s16 minigameCameraFOV;
-s16 minigameCameraNear;
-s16 minigameCameraFar;
-Vec3s minigameCameraCoords;
+s16 miniCameraXRot;
+s16 miniCameraYRot;
+s16 miniCameraDistance;
+s16 miniCameraFov;
+s16 miniCameraNear;
+s16 miniCameraFar;
+Vec3s miniCameraCoords;
 s16 D_87906072;
 s16 pad_D_87906074;
 s16 D_87906076;
@@ -42,9 +42,9 @@ s32 pad_D_879060B4;
 s32 pad_D_879060B8;
 Controller* miniControllerPtr;
 s16 D_879060C0;
-s16 ekansMinigameCountdown;
+s16 miniEkansCountdown;
 s8 D_879060C4[4];
-s16 minigameHUDTransparency;
+s16 miniHudTransparency;
 s16 D_879060CA;
 s32 pad_D_879060D0[4];
 Vec3f D_879060E0;
@@ -53,38 +53,38 @@ Vec3f D_87906100;
 Vec3f D_87906110;
 
 void func_87900A50(void) {
-    minigameCameraXRot = D_879060A2 + D_87906094;
-    minigameCameraYRot = D_879060A4 + D_87906096;
+    miniCameraXRot = D_879060A2 + D_87906094;
+    miniCameraYRot = D_879060A4 + D_87906096;
 
-    minigameCameraCoords.x = D_879060AC.x + D_8790609C.x;
-    minigameCameraCoords.y = D_879060AC.y + D_8790609C.y;
-    minigameCameraCoords.z = D_879060AC.z + D_8790609C.z;
+    miniCameraCoords.x = D_879060AC.x + D_8790609C.x;
+    miniCameraCoords.y = D_879060AC.y + D_8790609C.y;
+    miniCameraCoords.z = D_879060AC.z + D_8790609C.z;
 
-    minigameCameraDistance = D_879060A6 + D_87906098;
-    minigameCameraFOV = D_879060A8 + D_8790609A;
+    miniCameraDistance = D_879060A6 + D_87906098;
+    miniCameraFov = D_879060A8 + D_8790609A;
 
-    if (minigameCameraDistance < 0x32) {
-        minigameCameraDistance = 0x32;
-        D_87906098 = minigameCameraDistance - D_879060A6;
+    if (miniCameraDistance < 0x32) {
+        miniCameraDistance = 0x32;
+        D_87906098 = miniCameraDistance - D_879060A6;
     }
 
-    if (minigameCameraFOV < 0xA) {
-        minigameCameraFOV = 0xA;
-        D_8790609A = minigameCameraFOV - D_879060A8;
+    if (miniCameraFov < 0xA) {
+        miniCameraFov = 0xA;
+        D_8790609A = miniCameraFov - D_879060A8;
     }
 }
 
 void miniUpdateCamera(void) {
-    D_87906054->unk_24.fovy = minigameCameraFOV;
-    D_87906054->unk_24.near = minigameCameraNear;
-    D_87906054->unk_24.far = minigameCameraFar;
+    D_87906054->unk_24.fovy = miniCameraFov;
+    D_87906054->unk_24.near = miniCameraNear;
+    D_87906054->unk_24.far = miniCameraFar;
 
-    D_87906054->unk_60.at.x = minigameCameraCoords.x;
-    D_87906054->unk_60.at.y = minigameCameraCoords.y;
-    D_87906054->unk_60.at.z = minigameCameraCoords.z;
+    D_87906054->unk_60.at.x = miniCameraCoords.x;
+    D_87906054->unk_60.at.y = miniCameraCoords.y;
+    D_87906054->unk_60.at.z = miniCameraCoords.z;
 
-    func_80010354(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, minigameCameraDistance, minigameCameraXRot,
-                  minigameCameraYRot);
+    func_80010354(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, miniCameraDistance, miniCameraXRot,
+                  miniCameraYRot);
 }
 
 s32 minigameDebuggModeControl(void) {
@@ -122,27 +122,27 @@ s32 minigameDebuggModeControl(void) {
     if (D_87903DB8 == 0) {
         if (BTN_IS_DOWN(gPlayer1Controller, 0xCF00)) {
             if (BTN_IS_DOWN(gPlayer1Controller, BTN_DUP)) {
-                sp6 = minigameCameraYRot + 0x8000;
+                sp6 = miniCameraYRot + 0x8000;
             }
 
             if (BTN_IS_DOWN(gPlayer1Controller, BTN_DDOWN)) {
-                sp6 = minigameCameraYRot;
+                sp6 = miniCameraYRot;
             }
 
             if (BTN_IS_DOWN(gPlayer1Controller, BTN_DLEFT)) {
-                sp6 = minigameCameraYRot + 0xC000;
+                sp6 = miniCameraYRot + 0xC000;
             }
 
             if (BTN_IS_DOWN(gPlayer1Controller, BTN_DRIGHT)) {
-                sp6 = minigameCameraYRot + 0x4000;
+                sp6 = miniCameraYRot + 0x4000;
             }
 
             if (BTN_IS_DOWN(gPlayer1Controller, BTN_A)) {
-                sp6 = minigameCameraYRot + 0x8000;
+                sp6 = miniCameraYRot + 0x8000;
             }
 
             if (BTN_IS_DOWN(gPlayer1Controller, BTN_B)) {
-                sp6 = minigameCameraYRot;
+                sp6 = miniCameraYRot;
             }
 
             D_8790609C.x += SINS(sp6) * 16.0f;
@@ -183,12 +183,12 @@ void showDebuggCameraInfo(void) {
         func_8001F1E8(0x19, 0x1C, "TRANSRATE");
     }
 
-    func_8001F1E8(0x19, 0x28, "CAMERA X:%d", minigameCameraCoords.x);
-    func_8001F1E8(0x19, 0x34, "CAMERA Y:%d", minigameCameraCoords.y);
-    func_8001F1E8(0x19, 0x40, "CAMERA Z:%d", minigameCameraCoords.z);
-    func_8001F1E8(0xA7, 0x28, "CAMERA D:%d", minigameCameraDistance);
-    func_8001F1E8(0xA7, 0x34, "CAMERA F:%d", minigameCameraFOV);
-    func_8001F1E8(0xA7, 0x40, "X:%04hX Y:%04hX", minigameCameraXRot, minigameCameraYRot);
+    func_8001F1E8(0x19, 0x28, "CAMERA X:%d", miniCameraCoords.x);
+    func_8001F1E8(0x19, 0x34, "CAMERA Y:%d", miniCameraCoords.y);
+    func_8001F1E8(0x19, 0x40, "CAMERA Z:%d", miniCameraCoords.z);
+    func_8001F1E8(0xA7, 0x28, "CAMERA D:%d", miniCameraDistance);
+    func_8001F1E8(0xA7, 0x34, "CAMERA F:%d", miniCameraFov);
+    func_8001F1E8(0xA7, 0x40, "X:%04hX Y:%04hX", miniCameraXRot, miniCameraYRot);
     func_8001F444();
 }
 

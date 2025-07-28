@@ -587,7 +587,7 @@ void func_86E001E4(MiniActor* metapod, s32 arg1) {
     metapod->unk_21C = 0;
     metapod->unk_21E = 0;
     metapod->unk_25C = 0x190;
-    metapod->unk_258 = metapod->unk_25C;
+    metapod->health = metapod->unk_25C;
     metapod->unk_2A6 = 5;
     metapod->unk_1E4 = metapod->unk_28C * 0.5f;
 
@@ -966,22 +966,22 @@ void func_86E00CAC(UNUSED MiniActor* metapod, s32 nPlayer) {
 void func_86E00D78(MiniActor* metapod, s32 nPlayer) {
     if ((miniMetapodPtr->unk_25A > 0) && (metapod->unk_2A8 == 0)) {
         if (miniMetapodPtr->unk_25A >= 0x28) {
-            miniMetapodPtr->unk_258 -= miniMetapodPtr->unk_25A;
+            miniMetapodPtr->health -= miniMetapodPtr->unk_25A;
             miniMetapodPtr->unk_25A = 0;
         } else {
             miniMetapodPtr->unk_25A--;
-            miniMetapodPtr->unk_258--;
+            miniMetapodPtr->health--;
         }
 
-        if (miniMetapodPtr->unk_258 < 0) {
-            miniMetapodPtr->unk_258 = 0;
+        if (miniMetapodPtr->health < 0) {
+            miniMetapodPtr->health = 0;
         }
     }
 
-    if (miniMetapodPtr->unk_258 == 0) {
+    if (miniMetapodPtr->health == 0) {
         if (miniMetapodPtr->unk_2A4 == 0) {
             func_86E001A0(9, nPlayer);
-            miniChangeActorAnim(miniMetapodPtr, 3, 1, 0);
+            miniChangeActorAnim(miniMetapodPtr, 3, 1, 0); // dead animation
             miniMetapodPtr->unk_2A4 = 1;
             miniMetapodPtr->unk_2AA = 1;
         }
@@ -1156,7 +1156,7 @@ void func_86E01428(MiniActor* rock) {
     s16 temp_a1 = rock->playerId;
     Vec3f sp3C;
 
-    if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].unk_258 == 0)) {
+    if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].health == 0)) {
         switch (rock->unk_23E) {
             case 1:
                 rock->unk_23E = 0;
@@ -1229,9 +1229,9 @@ void func_86E016EC(MiniActor* arg0) {
     UNUSED f32 temp_fv0_2;
     UNUSED f32 temp_fv0_3;
 
-    arg0->unk_190.x = arg0->unk_19C.x = arg0->localOrigin.x + arg0->unk_1C0.x;
-    arg0->unk_190.y = arg0->unk_19C.y = arg0->localOrigin.y + arg0->unk_1C0.y;
-    arg0->unk_190.z = arg0->unk_19C.z = arg0->localOrigin.z + arg0->unk_1C0.z;
+    arg0->unk_190.x = arg0->unk_19C.x = arg0->localOrigin.x + arg0->globalPos.x;
+    arg0->unk_190.y = arg0->unk_19C.y = arg0->localOrigin.y + arg0->globalPos.y;
+    arg0->unk_190.z = arg0->unk_19C.z = arg0->localOrigin.z + arg0->globalPos.z;
 }
 
 void func_86E0172C(MiniActor* rock) {
@@ -1239,9 +1239,9 @@ void func_86E0172C(MiniActor* rock) {
         rock->unk_1F8 += rock->unk_204;
         rock->unk_1FC += rock->unk_208 - rock->unk_210;
         rock->unk_200 += rock->unk_20C;
-        rock->unk_1C0.x += rock->unk_1F8;
-        rock->unk_1C0.y += rock->unk_1FC;
-        rock->unk_1C0.z += rock->unk_200;
+        rock->globalPos.x += rock->unk_1F8;
+        rock->globalPos.y += rock->unk_1FC;
+        rock->globalPos.z += rock->unk_200;
     }
 
     func_86E016EC(rock);
@@ -1290,16 +1290,16 @@ void func_86E01898(void) {
 void func_86E01904(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    minigameCameraXRot = -0x200;
-    minigameCameraYRot = 0;
-    minigameCameraDistance = 0xBE;
-    minigameCameraFOV = 0x23;
-    minigameCameraNear = 0x32;
-    minigameCameraFar = 0x1900;
+    miniCameraXRot = -0x200;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0xBE;
+    miniCameraFov = 0x23;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x1900;
 
-    minigameCameraCoords.x = 0;
-    minigameCameraCoords.y = 0x2A;
-    minigameCameraCoords.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = 0x2A;
+    miniCameraCoords.z = 0;
 
     miniUpdateCamera();
 }
@@ -1511,13 +1511,13 @@ s32 func_86E01F50(void) {
 void func_86E01F8C(void) {
     switch (minigameState) {
         case 1:
-            minigameInputLockTimer = 0xF;
+            miniInputLockTimer = 0xF;
             minigameState++;
             break;
 
         case 2:
-            minigameInputLockTimer--;
-            if (minigameInputLockTimer < 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
                 func_8780295C(1);
                 minigameState++;
             }
@@ -1544,14 +1544,14 @@ void func_86E01F8C(void) {
 
         case 5:
             if (func_86E01F50() != 0) {
-                minigameInputLockTimer = 0xA;
+                miniInputLockTimer = 0xA;
                 minigameState++;
             }
             break;
 
         case 6:
-            minigameInputLockTimer--;
-            if (minigameInputLockTimer < 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
                 func_86E01E34();
                 func_87802EB8(1);
                 minigameState++;
@@ -1578,7 +1578,7 @@ void miniDrawMetapodHealth(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, miniMetapods[i].unk_258, miniMetapods[i].unk_25C);
+        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, miniMetapods[i].health, miniMetapods[i].unk_25C);
     }
 }
 
@@ -1587,7 +1587,7 @@ void miniDrawMetapodHeads(void) {
     s32 tmp;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, minigameHUDTransparency);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     for (i = 0, tmp = 0x26; i < 4; tmp += 0x4A, i++) {
         if (D_879060C4[i] == 0) {

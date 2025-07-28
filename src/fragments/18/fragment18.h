@@ -48,7 +48,7 @@ void initDigletts(void);
 s16 miniEkansChooseRandDiglett(s16 arg0);
 void func_86C02A1C(MiniActor* arg0);
 void miniEkansRecolorDiglet(MiniActor* arg0, s32 arg1);
-void func_86C02C28(void);
+void miniDiglettStateMachine(void);
 void func_86C03008(void);
 void ekansMinigameInitObjects(void);
 s32 func_86C030EC(void);

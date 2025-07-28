@@ -17,7 +17,7 @@ s32 pad_D_87903DB4 = 0;
 s16 D_87903DB8 = 0;
 s16 D_87903DBC = 0;
 s16 D_87903DC0 = 0;
-s16 miniTutoScreenState = 0; //	related to tutorial screen on minigames
+s16 miniTutoScreenState = 0;
 s16 D_87903DC8 = 0;
 s16 D_87903DCC = 0;
 s16 D_87903DD0 = 0;
@@ -99,7 +99,6 @@ s32 metapodRockCollisionCheck(MiniActor* fallingRock, MiniActor* metapod) {
     return ret;
 }
 
-//	change animation on ekans' and metapod's minigames ?
 void miniChangeActorAnim(MiniActor* poke, s16 anim, s16 arg2, s16 arg3) {
     poke->unk_248 = 1; //	animation flag ?
     poke->unk_24A = anim;
@@ -110,7 +109,7 @@ void miniChangeActorAnim(MiniActor* poke, s16 anim, s16 arg2, s16 arg3) {
 }
 
 //	unused
-void func_879002FC(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
+void miniChangeActorAnim_alt1(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
     arg0->unk_248 = 1;
     arg0->unk_24A = arg1;
     arg0->unk_24C = arg2;
@@ -119,16 +118,15 @@ void func_879002FC(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
     arg0->unk_26E = arg4;
 }
 
-//	diglett's pop out the ground on diglett's minigame
-void func_87900344(MiniActor* diglett, s16 anim, s16 arg2, s16 arg3) {
-    diglett->unk_248 = 1;    //	visibility ?
-    diglett->unk_24A = anim; //	 1
-    diglett->unk_24C = arg2; //	-1
-    diglett->unk_26A = arg3; //	 1
-    diglett->unk_26C = 1;    //	animation id?
+void miniChangeActorAnim_alt2(MiniActor* diglett, s16 anim, s16 arg2, s16 arg3) {
+    diglett->unk_248 = 1;
+    diglett->unk_24A = anim;
+    diglett->unk_24C = arg2;
+    diglett->unk_26A = arg3;
+    diglett->unk_26C = 1;
 }
 
-s32 miniIddleAnimCheck(MiniActor* arg0) {
+s32 miniPokeIsIdleCheck(MiniActor* arg0) {
     s32 var_v1 = 0;
 
     if (arg0->unk_248 == 0) {
@@ -192,13 +190,15 @@ void hideMiniGameHUD(void) {
 }
 
 void func_87900564(MiniActor* actor) {
-    actor->unk_1C0.x = 0.0f;
+    actor->globalPos.x = 0.0f;
     actor->localOrigin.x = 0.0f;
     actor->unk_190.x = 0.0f;
-    actor->unk_1C0.y = 0.0f;
+
+    actor->globalPos.y = 0.0f;
     actor->localOrigin.y = 0.0f;
     actor->unk_190.y = 0.0f;
-    actor->unk_1C0.z = 0.0f;
+
+    actor->globalPos.z = 0.0f;
     actor->localOrigin.z = 0.0f;
     actor->unk_190.z = 0.0f;
 }
@@ -210,16 +210,16 @@ void minigameActorLocalOriginToZero(MiniActor* arg0) {
 }
 
 void func_879005AC(MiniActor* arg0) {
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
+    arg0->globalPos.x = 0.0f;
+    arg0->globalPos.y = 0.0f;
+    arg0->globalPos.z = 0.0f;
 }
 
 void func_879005C4(MiniActor* ekans) {
     ekans->unk_1FC = ekans->unk_1FC - ekans->unk_210;
-    ekans->unk_1C0.x = ekans->unk_1C0.x + ekans->unk_1F8;
-    ekans->unk_1C0.y = ekans->unk_1C0.y + (ekans->unk_1FC - ekans->unk_210);
-    ekans->unk_1C0.z = ekans->unk_1C0.z + ekans->unk_200;
+    ekans->globalPos.x = ekans->globalPos.x + ekans->unk_1F8;
+    ekans->globalPos.y = ekans->globalPos.y + (ekans->unk_1FC - ekans->unk_210);
+    ekans->globalPos.z = ekans->globalPos.z + ekans->unk_200;
 }
 
 void func_8790060C(MiniActor* actor) {
@@ -253,7 +253,7 @@ void func_8790060C(MiniActor* actor) {
     actor->unk_1B4.z = 0.0f;
     actor->unk_1B4.y = 0.0f;
     actor->unk_1B4.x = 0.0f;
-    actor->unk_1C0.x = actor->unk_1C0.y = actor->unk_1C0.z = 0.0f;
+    actor->globalPos.x = actor->globalPos.y = actor->globalPos.z = 0.0f;
 
     actor->unk_1D4 = 0.0f;
     actor->unk_1D0 = 0.0f;
@@ -279,9 +279,9 @@ void func_8790060C(MiniActor* actor) {
 }
 
 void miniActorUpdateTransform(MiniActor* poke) {
-    poke->unk_190.x = poke->unk_19C.x = poke->localOrigin.x + poke->unk_1C0.x;
-    poke->unk_190.y = poke->unk_19C.y = poke->localOrigin.y + poke->unk_1C0.y;
-    poke->unk_190.z = poke->unk_19C.z = poke->localOrigin.z + poke->unk_1C0.z;
+    poke->unk_190.x = poke->unk_19C.x = poke->localOrigin.x + poke->globalPos.x;
+    poke->unk_190.y = poke->unk_19C.y = poke->localOrigin.y + poke->globalPos.y;
+    poke->unk_190.z = poke->unk_19C.z = poke->localOrigin.z + poke->globalPos.z;
 
     poke->unk_19C.y = poke->unk_19C.y + poke->unk_1E4;
 
@@ -311,7 +311,7 @@ void func_87900854(void) {
     minigameInputLock = 0;
     D_87903DA8 = 0;
     D_87903DAC = 0;
-    minigameInputLockTimer = 0;
+    miniInputLockTimer = 0;
     D_87906048 = 0;
     D_8790604A = 0;
     D_87903DC0 = 0;
@@ -329,29 +329,29 @@ void func_87900854(void) {
     D_879060C4[2] = ptr[2];
     D_879060C4[3] = ptr[3];
 
-    minigameHUDTransparency = 0xFF;
+    miniHudTransparency = 0xFF;
 }
 
 void func_87900920(void) {
-    D_8790607C = minigameCameraDistance;
-    D_87906080 = minigameCameraFOV;
+    D_8790607C = miniCameraDistance;
+    D_87906080 = miniCameraFov;
 
-    D_87906088.x = minigameCameraCoords.x;
-    D_87906088.y = minigameCameraCoords.y;
-    D_87906088.z = minigameCameraCoords.z;
+    D_87906088.x = miniCameraCoords.x;
+    D_87906088.y = miniCameraCoords.y;
+    D_87906088.z = miniCameraCoords.z;
 
-    D_87906076 = minigameCameraXRot;
-    D_87906078 = minigameCameraYRot;
+    D_87906076 = miniCameraXRot;
+    D_87906078 = miniCameraYRot;
 }
 
 void func_879009B4(void) {
-    minigameCameraDistance = D_8790607C;
-    minigameCameraFOV = D_87906080;
+    miniCameraDistance = D_8790607C;
+    miniCameraFov = D_87906080;
 
-    minigameCameraCoords.x = D_87906088.x;
-    minigameCameraCoords.y = D_87906088.y;
-    minigameCameraCoords.z = D_87906088.z;
+    miniCameraCoords.x = D_87906088.x;
+    miniCameraCoords.y = D_87906088.y;
+    miniCameraCoords.z = D_87906088.z;
 
-    minigameCameraXRot = D_87906076;
-    minigameCameraYRot = D_87906078;
+    miniCameraXRot = D_87906076;
+    miniCameraYRot = D_87906078;
 }

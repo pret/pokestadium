@@ -15,11 +15,11 @@ typedef struct MiniActor {
     /* 0x19C */ Vec3f unk_19C;      //	position ?					**	metapod only
     /* 0x1A8 */ Vec3f localOrigin;	//	origin position
     /* 0x1B4 */ Vec3f unk_1B4;		//	related to angle 			**	ekans only
-    /* 0x1C0 */ Vec3f unk_1C0;      //  maybe global position ?
+    /* 0x1C0 */ Vec3f globalPos;
     /* 0x1CC */ f32 unk_1CC;		//	???							**	ekans only
     /* 0x1D0 */ f32 unk_1D0;		//	unused ?
     /* 0x1D4 */ f32 unk_1D4;		//	???							**	ekans only
-    /* 0x1D8 */ Vec3f unk_1D8;      //	also position on skans' minigame? never used
+    /* 0x1D8 */ Vec3f unk_1D8;      //	also position, never used
     /* 0x1E4 */ f32 unk_1E4;        //	botton  of the hitbox ? half of 28C
     /* 0x1E8 */ char unk1E8[0x4];	//	unused ?
     /* 0x1EC */ f32 unk_1EC;		//	always zero
@@ -58,10 +58,10 @@ typedef struct MiniActor {
     /* 0x246 */ char unk246[0x2];	//	unused
     /* 0x248 */ s16 unk_248;        //	0,1,2 - is colliding? visibility?
     /* 0x24A */ s16 unk_24A;        //	animation id ?
-    /* 0x24C */ s16 unk_24C;        //	
+    /* 0x24C */ s16 unk_24C;        //	texture animation ?
     /* 0x24E */ char unk24E[0x6];	//	unused
     /* 0x254 */ s32 unk_254;		//	always zero
-    /* 0x258 */ s16 unk_258;		//	health on metapod ; ??? on ekans and sandsrew
+    /* 0x258 */ s16 health;		//	health on metapod ; ??? on ekans and sandsrew
     /* 0x25A */ s16 unk_25A;        //  something animation on metapod  ** metapod only
     /* 0x25C */ s16 unk_25C;        //  max health on metapod, different on sandshrew and ekans
     /* 0x25E */ s16 ekansAbbleToHoop;	//								** ekans only
@@ -69,16 +69,16 @@ typedef struct MiniActor {
     /* 0x262 */ s16 unk_262;        //  can ekans peg a digglet ?		** ekans only
     /* 0x264 */ s16 unk_264;        //  always zero
     /* 0x266 */ s16 playerId;
-    /* 0x268 */ s16 unk_268;
+    /* 0x268 */ s16 playerIdBuffer;	//	ekans only
     /* 0x26A */ s16 unk_26A;        //	some flag related to collisions
     /* 0x26C */ s16 unk_26C;        //	animation id or state?
-    /* 0x26E */ s16 unk_26E;
+    /* 0x26E */ s16 unk_26E;		//	animation something, always zero
     /* 0x270 */ s16 unk_270;
     /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ?
     /* 0x274 */ f32 unk_274;        //  
-    /* 0x278 */ char unk278[0x4];
+    /* 0x278 */ char unk278[0x4];	//	unused
     /* 0x27C */ f32 unk_27C;		//
-    /* 0x280 */ f32 unk_280;		//	stick magnitude on ekans? digging/animation speed on sandshrew
+    /* 0x280 */ f32 unk_280;		//	stick magnitude on ekans? ; digging/animation speed on sandshrew
     /* 0x284 */ f32 unk_284;
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
     /* 0x28C */ f32 unk_28C;        //	top    of the hitbox ? / bounding box ? ;   double of 1E4
@@ -143,7 +143,7 @@ extern unk_D_87903E10 D_87903E10;
 extern unk_D_87903E10 D_87903E28;
 extern unk_D_87903E10 D_87903E40;
 extern unk_D_87903E10 D_87903E58;
-extern s16 minigameInputLockTimer;
+extern s16 miniInputLockTimer;
 extern s16 D_87906042;
 extern s16 miniShowHUB;
 extern s16 D_87906046;
@@ -151,13 +151,13 @@ extern s16 D_87906048;
 extern s16 D_8790604A;
 extern unk_D_86002F34_00C* D_87906050;      // geo layout
 extern unk_D_86002F34_00C* D_87906054;
-extern s16 minigameCameraXRot;
-extern s16 minigameCameraYRot;
-extern s16 minigameCameraDistance;
-extern s16 minigameCameraFOV;
-extern s16 minigameCameraNear;
-extern s16 minigameCameraFar;
-extern Vec3s minigameCameraCoords;
+extern s16 miniCameraXRot;
+extern s16 miniCameraYRot;
+extern s16 miniCameraDistance;
+extern s16 miniCameraFov;
+extern s16 miniCameraNear;
+extern s16 miniCameraFar;
+extern Vec3s miniCameraCoords;
 extern s16 D_87906072;
 extern s16 D_87906076;
 extern s16 D_87906078;
@@ -180,9 +180,9 @@ extern s16 miniDebugMode;
 extern s16 D_87903DB8;
 extern Controller* miniControllerPtr;
 extern s16 D_879060C0;
-extern s16 ekansMinigameCountdown;
+extern s16 miniEkansCountdown;
 extern s8 D_879060C4[4];
-extern s16 minigameHUDTransparency;
+extern s16 miniHudTransparency;
 extern s16 D_879060CA;
 
 extern Vec3f D_879060E0;
@@ -195,9 +195,9 @@ void MinigameGetVec3Distance_3d(MiniActor* arg0, MiniActor* arg1);
 s32 func_879000C4(MiniActor* arg0, MiniActor* arg1);
 s32 metapodRockCollisionCheck(MiniActor* arg0, MiniActor* arg1);
 void miniChangeActorAnim(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3);
-void func_879002FC(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
-void func_87900344(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3);
-s32 miniIddleAnimCheck(MiniActor* arg0);
+void miniChangeActorAnim_alt1(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
+void miniChangeActorAnim_alt2(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3);
+s32 miniPokeIsIdleCheck(MiniActor* arg0);
 void func_879003A0(MiniActor* arg0);
 void func_879004F8(unk_D_86002F58_004_000* arg0);
 void func_87900528(void);

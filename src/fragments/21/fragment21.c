@@ -1599,9 +1599,9 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
     sandshrew->localOrigin.y = sandshrewPositions[player].y;
     sandshrew->localOrigin.z = sandshrewPositions[player].z;
 
-    sandshrew->unk_1C0.x = 0.0f;
-    sandshrew->unk_1C0.y = 0.0f;
-    sandshrew->unk_1C0.z = 0.0f;
+    sandshrew->globalPos.x = 0.0f;
+    sandshrew->globalPos.y = 0.0f;
+    sandshrew->globalPos.z = 0.0f;
 
     if (true) {}
 
@@ -1620,7 +1620,7 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
     sandshrew->totalRot.y = sandshrew->unk_21C = 0;
     sandshrew->totalRot.z = sandshrew->unk_21E = 0;
 
-    sandshrew->unk_258 = sandshrew->unk_25C = 0x64;
+    sandshrew->health = sandshrew->unk_25C = 0x64;
     sandshrew->unk_238 = sandshrew->unk_23A = 0;
 
     func_8001BD04(&sandshrew->unk_000, 0);
@@ -1830,7 +1830,7 @@ void func_86F00920(MiniActor* sandshrew) {
 
                 holeDeepeness = sandshrew->unk_274 / 5000.0f;
                 if (holeDeepeness > 0.2f) {
-                    sandshrew->unk_1C0.y -= holeDeepeness;
+                    sandshrew->globalPos.y -= holeDeepeness;
                 }
 
                 func_86F00188(3, sandshrew - miniSandshrews);
@@ -1861,12 +1861,12 @@ void func_86F00920(MiniActor* sandshrew) {
             func_80017464(&sandshrew->unk_000, 0);
             func_80017454(&sandshrew->unk_000, 0x10000);
             sandshrew->unk_23E++;
-            sandshrew->unk_1C0.y += 15.0f;
+            sandshrew->globalPos.y += 15.0f;
             break;
 
         case 0x65:
             minigameActorLocalOriginToZero(sandshrew);
-            func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->unk_1C0);
+            func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->globalPos);
             break;
     }
 }
@@ -1919,11 +1919,11 @@ void initSandshrewHole(MiniActor* a0, s32 arg1) {
     sandshrewHole->totalRot.z = sandshrewHole->unk_21E = sandshrewHole->unk_224 = sandshrewHole->unk_22A =
         sandshrewHole->unk_230 = 0;
 
-    sandshrewHole->unk_1C0.x = 0.0f;
-    sandshrewHole->unk_1C0.y = 0.0f;
-    sandshrewHole->unk_1C0.z = 0.0f;
+    sandshrewHole->globalPos.x = 0.0f;
+    sandshrewHole->globalPos.y = 0.0f;
+    sandshrewHole->globalPos.z = 0.0f;
 
-    sandshrewHole->unk_258 = sandshrewHole->unk_25C = 0x64;
+    sandshrewHole->health = sandshrewHole->unk_25C = 0x64;
 
     sandshrewHole->unk_272 = 0;
     sandshrewHole->unk_2A4 = 0;
@@ -1993,11 +1993,11 @@ void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
     geiser->totalRot.y = geiser->unk_21C = geiser->unk_222 = geiser->unk_228 = geiser->unk_22E = 0;
     geiser->totalRot.z = geiser->unk_21E = geiser->unk_224 = geiser->unk_22A = geiser->unk_230 = 0;
 
-    geiser->unk_1C0.x = 0.0f;
-    geiser->unk_1C0.y = 0.0f;
-    geiser->unk_1C0.z = 0.0f;
+    geiser->globalPos.x = 0.0f;
+    geiser->globalPos.y = 0.0f;
+    geiser->globalPos.z = 0.0f;
 
-    geiser->unk_258 = geiser->unk_25C = 0x64;
+    geiser->health = geiser->unk_25C = 0x64;
 
     geiser->unk_272 = 0;
     geiser->unk_2A4 = 0;
@@ -2055,16 +2055,16 @@ void func_86F012B8(void) {
 void func_86F0132C(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    minigameCameraXRot = 0x1600;
-    minigameCameraYRot = 0;
-    minigameCameraDistance = 0x10E;
-    minigameCameraFOV = 0x23;
-    minigameCameraNear = 0x32;
-    minigameCameraFar = 0x1900;
+    miniCameraXRot = 0x1600;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0x10E;
+    miniCameraFov = 0x23;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x1900;
 
-    minigameCameraCoords.x = 0;
-    minigameCameraCoords.y = -2;
-    minigameCameraCoords.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = -2;
+    miniCameraCoords.z = 0;
 
     miniUpdateCamera();
 }
@@ -2080,7 +2080,7 @@ void func_86F013B8(void) {
             func_81400760(&D_8790607C, 250.0f, 1.0f);
             func_81400760(&D_87906088.y, 34.0f, 1.8f);
             func_81400550(&D_87906076, 0x600, 0xCC);
-            func_81400550(&minigameHUDTransparency, 0, 0x30);
+            func_81400550(&miniHudTransparency, 0, 0x30);
             break;
     }
 
@@ -2172,13 +2172,13 @@ s32 func_86F016D8(void) {
 void func_86F0174C(void) {
     switch (minigameState) {
         case 1: //  after pressing start
-            minigameInputLockTimer = 0xF;
+            miniInputLockTimer = 0xF;
             minigameState++;
             break;
 
         case 2: //  waits for some frames before starting the main countdown
-            minigameInputLockTimer--;
-            if (minigameInputLockTimer < 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
                 func_8780295C(1);
                 minigameState++;
             }
@@ -2199,13 +2199,13 @@ void func_86F0174C(void) {
                 minigameInputLock = 0;
                 D_87906072 = 1;
                 minigameState++;
-                minigameInputLockTimer = 0x28;
+                miniInputLockTimer = 0x28;
             }
             break;
 
         case 5:
-            minigameInputLockTimer--;
-            if (minigameInputLockTimer == 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer == 0) {
                 func_87802EB8(1);
                 func_87903294();
                 func_86F00188(0xC, 0xB4);
@@ -2298,7 +2298,7 @@ void fixSandshrewMinigameHUD(void) {
     s32 i;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, minigameHUDTransparency);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     for (i = 0; i < 4; i++) {
         s16 xPos = playerIconsScreenXPos[i];

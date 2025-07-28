@@ -21,16 +21,16 @@ static u32 D_86D00530[] = {
 void func_86D00020(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    minigameCameraXRot = 0xA00;
-    minigameCameraYRot = 0;
-    minigameCameraDistance = 0x17C;
-    minigameCameraFOV = 0x1E;
-    minigameCameraNear = 0x32;
-    minigameCameraFar = 0x1900;
+    miniCameraXRot = 0xA00;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0x17C;
+    miniCameraFov = 0x1E;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x1900;
 
-    minigameCameraCoords.x = 0;
-    minigameCameraCoords.y = 0x1E;
-    minigameCameraCoords.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = 0x1E;
+    miniCameraCoords.z = 0;
 
     miniUpdateCamera();
 }
