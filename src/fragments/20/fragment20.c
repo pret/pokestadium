@@ -586,8 +586,8 @@ void func_86E001E4(MiniActor* metapod, s32 arg1) {
     metapod->unk_21A = 0;
     metapod->unk_21C = 0;
     metapod->unk_21E = 0;
-    metapod->unk_25C = 0x190;
-    metapod->health = metapod->unk_25C;
+    metapod->miniMaxHealth = 0x190;
+    metapod->miniHealth = metapod->miniMaxHealth;
     metapod->unk_2A6 = 5;
     metapod->unk_1E4 = metapod->unk_28C * 0.5f;
 
@@ -609,7 +609,7 @@ void initMetapodPlayers(void) {
 }
 
 void func_86E0034C(MiniActor* metapod) {
-    metapod->unk_25A++;
+    metapod->damageTimer++;
     metapod->unk_272 = 4;
     metapod->unk_000.unk_01C = 1;
 }
@@ -619,17 +619,17 @@ void miniMetapodHumanControls(MiniActor* metapod) {
         metapod->metapodInputLockTimer--;
     }
 
-    if ((BTN_IS_DOWN(miniControllerPtr, BTN_A)) && (metapod->unk_23E == 0) && (metapod->unk_240 == 0) &&
+    if ((BTN_IS_DOWN(miniControllerPtr, BTN_A)) && (metapod->mainState == 0) && (metapod->unk_240 == 0) &&
         (metapod->unk_2AA == 0) && (metapod->metapodInputLockTimer == 0)) {
-        metapod->unk_23E = 1;
+        metapod->mainState = 1;
     }
 
-    switch (metapod->unk_23E) {
+    switch (metapod->mainState) {
         case 1:
             func_86E0034C(metapod);
             miniChangeActorAnim(metapod, 1, -1, 1);
             func_81407D48(1.0f, metapod->unk_190, metapod->totalRot, func_879029F0, &D_87903E40, 4);
-            metapod->unk_23E++;
+            metapod->mainState++;
             break;
 
         case 2:
@@ -638,7 +638,7 @@ void miniMetapodHumanControls(MiniActor* metapod) {
             }
 
             if (!(BTN_IS_DOWN(miniControllerPtr, BTN_A)) || (metapod->unk_2AA != 0)) {
-                metapod->unk_23E = 0;
+                metapod->mainState = 0;
                 metapod->unk_000.unk_000.unk_02 |= 0x20;
             } else if (BTN_IS_DOWN(miniControllerPtr, BTN_A)) {
                 func_86E0034C(metapod);
@@ -650,7 +650,7 @@ void miniMetapodHumanControls(MiniActor* metapod) {
 void func_86E004FC(MiniActor* metapod) {
     if (metapod->isComp) {
         metapod->unk_244 = 0;
-        metapod->unk_242 = 0;
+        metapod->compState = 0;
     }
 }
 
@@ -778,10 +778,10 @@ void func_86E0073C(MiniActor* arg0, s32 arg1) {
     arg0->unk_2B2 = var_a2;
 }
 
-void func_86E007BC(MiniActor* arg0, s32 arg1) {
-    arg0->unk_244 = arg1;
-    arg0->unk_29E = 0;
-    arg0->unk_2B2 = 0;
+void func_86E007BC(MiniActor* metapod, s32 arg1) {
+    metapod->unk_244 = arg1;
+    metapod->unk_29E = 0;
+    metapod->unk_2B2 = 0;
 }
 
 void func_86E007CC(MiniActor* metapod, s32 player) {
@@ -823,7 +823,7 @@ void func_86E007CC(MiniActor* metapod, s32 player) {
             if (sp20 < 0) {
                 sp20 = 0;
             }
-            metapod->unk_242 = 1;
+            metapod->compState = 1;
 
             switch (func_86E00518(metapod, sp20)) {
                 case 0:
@@ -843,26 +843,26 @@ void func_86E007CC(MiniActor* metapod, s32 player) {
 }
 
 void miniMetapodCompControls(MiniActor* metapod, s32 nPlayer) {
-    if (metapod->unk_242 == 0) {
+    if (metapod->compState == 0) {
         func_86E007CC(metapod, nPlayer);
     }
 
-    switch (metapod->unk_242) {
+    switch (metapod->compState) {
         case 0x1:
             metapod->unk_244--;
             if (metapod->unk_244 < 0) {
                 if ((metapod->unk_2AA == 0) && (metapod->unk_240 == 0)) {
                     if (metapod->unk_29E > 0) {
                         miniChangeActorAnim(metapod, 1, -1, 1);
-                        metapod->unk_23E = 1;
+                        metapod->mainState = 1;
                         metapod->unk_272 = 4;
-                        metapod->unk_242++;
+                        metapod->compState++;
                         func_81407D48(1.0f, metapod->unk_190, metapod->totalRot, func_879029F0, &D_87903E40, 4);
                     } else {
-                        metapod->unk_242 = 0x64;
+                        metapod->compState = 0x64;
                     }
                 } else {
-                    metapod->unk_242 = 0;
+                    metapod->compState = 0;
                 }
             }
             break;
@@ -871,11 +871,11 @@ void miniMetapodCompControls(MiniActor* metapod, s32 nPlayer) {
             metapod->unk_29E--;
             if (metapod->unk_29E < 0) {
                 metapod->unk_000.unk_000.unk_02 |= 0x20;
-                metapod->unk_242 = 0x64;
+                metapod->compState = 0x64;
                 return;
             }
 
-            metapod->unk_25A++;
+            metapod->damageTimer++;
             metapod->unk_272 = 4;
             metapod->unk_000.unk_01C = 1;
             if (func_80017484(&metapod->unk_000, 5) != 0) {
@@ -886,8 +886,8 @@ void miniMetapodCompControls(MiniActor* metapod, s32 nPlayer) {
         case 0x64:
             metapod->unk_2B2--;
             if (metapod->unk_2B2 <= 0) {
-                metapod->unk_23E = 0;
-                metapod->unk_242 = 0;
+                metapod->mainState = 0;
+                metapod->compState = 0;
             }
             break;
     }
@@ -927,7 +927,7 @@ s32 func_86E00C34(s32 nPlayer) {
     s32 sp1C = 0;
 
     if (metapodRockCollisionCheck_void() != 0) {
-        miniMetapodPtr->unk_260 = 1;
+        miniMetapodPtr->midAirState = 1;
         if (miniMetapodPtr->unk_272 != 0) { //  if hardened ? colliding ?
             func_86E001A0(7, nPlayer);
             sp1C = 1;
@@ -947,10 +947,10 @@ void func_86E00CAC(UNUSED MiniActor* metapod, s32 nPlayer) {
     miniRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 20; i++) {
-        if ((miniRockPtr->unk_270 != 0) && (nPlayer == miniRockPtr->playerId) && (miniRockPtr->unk_260 == 0)) {
+        if ((miniRockPtr->unk_270 != 0) && (nPlayer == miniRockPtr->playerId) && (miniRockPtr->midAirState == 0)) {
             colliding = func_86E00C34(nPlayer);
             if (colliding) {
-                miniRockPtr->unk_260 = 1;
+                miniRockPtr->midAirState = 1;
                 if (colliding == 1) {
                     miniRockPtr->unk_272 = 1;
                 } else {
@@ -964,21 +964,21 @@ void func_86E00CAC(UNUSED MiniActor* metapod, s32 nPlayer) {
 }
 
 void func_86E00D78(MiniActor* metapod, s32 nPlayer) {
-    if ((miniMetapodPtr->unk_25A > 0) && (metapod->unk_2A8 == 0)) {
-        if (miniMetapodPtr->unk_25A >= 0x28) {
-            miniMetapodPtr->health -= miniMetapodPtr->unk_25A;
-            miniMetapodPtr->unk_25A = 0;
+    if ((miniMetapodPtr->damageTimer > 0) && (metapod->unk_2A8 == 0)) {
+        if (miniMetapodPtr->damageTimer >= 0x28) {
+            miniMetapodPtr->miniHealth -= miniMetapodPtr->damageTimer;
+            miniMetapodPtr->damageTimer = 0;
         } else {
-            miniMetapodPtr->unk_25A--;
-            miniMetapodPtr->health--;
+            miniMetapodPtr->damageTimer--;
+            miniMetapodPtr->miniHealth--;
         }
 
-        if (miniMetapodPtr->health < 0) {
-            miniMetapodPtr->health = 0;
+        if (miniMetapodPtr->miniHealth < 0) {
+            miniMetapodPtr->miniHealth = 0;
         }
     }
 
-    if (miniMetapodPtr->health == 0) {
+    if (miniMetapodPtr->miniHealth == 0) {
         if (miniMetapodPtr->unk_2A4 == 0) {
             func_86E001A0(9, nPlayer);
             miniChangeActorAnim(miniMetapodPtr, 3, 1, 0); // dead animation
@@ -988,14 +988,14 @@ void func_86E00D78(MiniActor* metapod, s32 nPlayer) {
     } else {
         switch (miniMetapodPtr->unk_240) {
             case 1:
-                miniMetapodPtr->unk_25A += 0x1E;
+                miniMetapodPtr->damageTimer += 0x1E;
                 miniChangeActorAnim(miniMetapodPtr, 2, 0, 1);
                 func_86E001A0(8, nPlayer);
                 miniMetapodPtr->unk_240++;
                 break;
 
             case 2:
-                if (miniMetapodPtr->unk_248 == 0) {
+                if (miniMetapodPtr->isIdle == 0) {
                     miniMetapodPtr->unk_240 = 0;
                 }
                 break;
@@ -1117,7 +1117,7 @@ void func_86E01188(void) {
             for (j = 0; j < D_86E04B24; j++) {
                 func_86E0103C(miniRockPtr, i);
 
-                miniRockPtr->unk_23E = 1;
+                miniRockPtr->mainState = 1;
                 miniRockPtr->unk_29E = var_s1;
 
                 var_s1 += var_s5;
@@ -1134,9 +1134,9 @@ void func_86E01310(MiniActor* rock) {
     rock->unk_29E = temp_v1 - 1;
     rock->localOrigin.y += D_86E04BFC[temp_a1].unk_00.y + miniMetapods[temp_a1].unk_28C;
 
-    rock->unk_210 = 0.7f;
+    rock->weight = 0.7f;
     rock->unk_1F8 = 0.0f;
-    rock->unk_1FC = temp_v1 * rock->unk_210 * 0.5f;
+    rock->unk_1FC = temp_v1 * rock->weight * 0.5f;
 
     rock->unk_200 =
         ((miniMetapods[temp_a1].localOrigin.z + (miniMetapods[temp_a1].unk_288 * 0.5f)) - rock->localOrigin.z) / temp_v1;
@@ -1147,7 +1147,7 @@ void func_86E01310(MiniActor* rock) {
 }
 
 void func_86E01414(MiniActor* rock) {
-    rock->unk_23E = 0;
+    rock->mainState = 0;
     rock->unk_000.unk_000.unk_01 &= ~1;
 }
 
@@ -1156,26 +1156,26 @@ void func_86E01428(MiniActor* rock) {
     s16 temp_a1 = rock->playerId;
     Vec3f sp3C;
 
-    if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].health == 0)) {
-        switch (rock->unk_23E) {
+    if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].miniHealth == 0)) {
+        switch (rock->mainState) {
             case 1:
-                rock->unk_23E = 0;
+                rock->mainState = 0;
                 break;
 
             case 2:
                 rock->unk_270 = 0;
-                rock->unk_23E = 0x64;
+                rock->mainState = 0x64;
                 break;
         }
     }
 
-    switch (rock->unk_23E) {
+    switch (rock->mainState) {
         case 0x1:
             rock->unk_29E--;
             if (rock->unk_29E <= 0) {
                 func_86E001A0(5, temp_a1);
                 func_86E01310(rock);
-                rock->unk_23E++;
+                rock->mainState++;
             }
             break;
 
@@ -1185,7 +1185,7 @@ void func_86E01428(MiniActor* rock) {
                 rock->unk_29E = 0;
             }
 
-            if (rock->unk_260 != 0) {
+            if (rock->midAirState != 0) {
                 rock->unk_270 = 0;
                 if (rock->unk_272 != 0) {
                     rock->unk_1FC = 5.0f;
@@ -1193,7 +1193,7 @@ void func_86E01428(MiniActor* rock) {
                     func_86E01414(rock);
                     func_81407D48(1.0f, rock->unk_190, rock->totalRot, func_87901F04, &D_87903E28, 4);
                 } else {
-                    rock->unk_23E++;
+                    rock->mainState++;
                 }
             }
             break;
@@ -1207,7 +1207,7 @@ void func_86E01428(MiniActor* rock) {
             sp3C.z = rock->unk_190.z;
 
             func_81407D48(1.0f, sp3C, rock->totalRot, func_87902068, &D_87903E10, 4);
-            rock->unk_23E++;
+            rock->mainState++;
             break;
 
         case 0x4:
@@ -1235,9 +1235,9 @@ void func_86E016EC(MiniActor* arg0) {
 }
 
 void func_86E0172C(MiniActor* rock) {
-    if (rock->unk_23E != 0) {
+    if (rock->mainState != 0) {
         rock->unk_1F8 += rock->unk_204;
-        rock->unk_1FC += rock->unk_208 - rock->unk_210;
+        rock->unk_1FC += rock->unk_208 - rock->weight;
         rock->unk_200 += rock->unk_20C;
         rock->globalPos.x += rock->unk_1F8;
         rock->globalPos.y += rock->unk_1FC;
@@ -1331,7 +1331,7 @@ void func_86E019F4(void) {
         case 2:
             var_a2 = 1;
             for (i = 0; i < 20; i++) {
-                if (miniRockPtr->unk_23E != 0) {
+                if (miniRockPtr->mainState != 0) {
                     var_a2 = 0;
                     break;
                 }
@@ -1500,7 +1500,7 @@ s32 func_86E01F50(void) {
     MiniActor* var_v0 = miniMetapodRocks;
 
     for (i = 0; i < 20; i++, var_v0++) {
-        if (var_v0->unk_23E != 0) {
+        if (var_v0->mainState != 0) {
             ret = 0;
             break;
         }
@@ -1578,7 +1578,7 @@ void miniDrawMetapodHealth(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, miniMetapods[i].health, miniMetapods[i].unk_25C);
+        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, miniMetapods[i].miniHealth, miniMetapods[i].miniMaxHealth);
     }
 }
 
@@ -1737,7 +1737,7 @@ void miniMetapodTutoScreenControls(void) {
 void func_86E02A28(void) {
     MiniActor* metapod = miniMetapods;
 
-    if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (metapod->unk_23E == 0)) {
+    if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (metapod->mainState == 0)) {
         metapod->metapodInputLockTimer = 4;
     }
 }

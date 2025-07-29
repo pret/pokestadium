@@ -1620,13 +1620,13 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
     sandshrew->totalRot.y = sandshrew->unk_21C = 0;
     sandshrew->totalRot.z = sandshrew->unk_21E = 0;
 
-    sandshrew->health = sandshrew->unk_25C = 0x64;
+    sandshrew->miniHealth = sandshrew->miniMaxHealth = 0x64;
     sandshrew->unk_238 = sandshrew->unk_23A = 0;
 
     func_8001BD04(&sandshrew->unk_000, 0);
 
     sandshrew->unk_290 = 0;
-    sandshrew->unk_23E = 0;
+    sandshrew->mainState = 0;
     sandshrew->unk_240 = 0;
 
     sandshrew->isComp = D_879060C4[player];
@@ -1685,7 +1685,7 @@ void func_86F0048C(MiniActor* sandshrew, s32 arg1) {
     } else if (arg1 == 1) {
         sandshrew->unk_2A0 = 0x14;
         sandshrew->unk_2B0 = 3;
-        sandshrew->unk_23E = 1;
+        sandshrew->mainState = 1;
         sandshrew->unk_280 = 10.0f;
         sandshrew->unk_27C = 10.0f;
     } else {
@@ -1714,7 +1714,7 @@ void sandshrewPlayerInput(MiniActor* sandshrew) {
         dir = 1;
     }
 
-    if (sandshrew->unk_23E == 0) {				//	on iddle animation
+    if (sandshrew->mainState == 0) {				//	on iddle animation
         if ((sandshrew->sandshrewLastDir == 0) && ((dir == 1) || (dir == 2))) {
             func_86F0048C(sandshrew, 1);
             sandshrew->sandshrewLastDir = dir;
@@ -1783,8 +1783,8 @@ void sandshrewCompControls(MiniActor* arg0) {
     }
 
     arg0->unk_274 += arg0->unk_27C;
-    if ((arg0->unk_23E == 0) && (arg0->unk_27C != 0.0f)) {
-        arg0->unk_23E = 1;
+    if ((arg0->mainState == 0) && (arg0->unk_27C != 0.0f)) {
+        arg0->mainState = 1;
     }
 }
 
@@ -1793,10 +1793,10 @@ void func_86F00920(MiniActor* sandshrew) {
     Vec3f sp48;
     f32 holeDeepeness;
 
-    switch (sandshrew->unk_23E) {
+    switch (sandshrew->mainState) {
         case 0x1:				//	geiser coming out of the ground
             func_86F003FC(sandshrew, 1);
-            sandshrew->unk_23E++;
+            sandshrew->mainState++;
             break;
 
         case 0x2:				//	on geiser loop
@@ -1804,7 +1804,7 @@ void func_86F00920(MiniActor* sandshrew) {
                 func_86F003FC(sandshrew, 2);
                 func_80017454(&sandshrew->unk_000, 0);
                 sandshrew->unk_22E = 0;
-                sandshrew->unk_23E++;
+                sandshrew->mainState++;
             }
             break;
 
@@ -1844,14 +1844,14 @@ void func_86F00920(MiniActor* sandshrew) {
                 func_80017464(&sandshrew->unk_000, 0);
                 func_80017454(&sandshrew->unk_000, 0x10000);
                 func_86F00188(4, sandshrew - miniSandshrews);
-                sandshrew->unk_23E++;
+                sandshrew->mainState++;
             }
             break;
 
         case 0x4:              //   on stop diggin
             if (func_800174E4(&sandshrew->unk_000) != 0) {
                 func_8001BD04(&sandshrew->unk_000, 0);
-                sandshrew->unk_23E = 0;
+                sandshrew->mainState = 0;
             }
             break;
 
@@ -1860,7 +1860,7 @@ void func_86F00920(MiniActor* sandshrew) {
             func_800173DC(&sandshrew->unk_000, 0, sandshrew->unk_000.unk_040.unk_04, 0x10000);
             func_80017464(&sandshrew->unk_000, 0);
             func_80017454(&sandshrew->unk_000, 0x10000);
-            sandshrew->unk_23E++;
+            sandshrew->mainState++;
             sandshrew->globalPos.y += 15.0f;
             break;
 
@@ -1923,11 +1923,11 @@ void initSandshrewHole(MiniActor* a0, s32 arg1) {
     sandshrewHole->globalPos.y = 0.0f;
     sandshrewHole->globalPos.z = 0.0f;
 
-    sandshrewHole->health = sandshrewHole->unk_25C = 0x64;
+    sandshrewHole->miniHealth = sandshrewHole->miniMaxHealth = 0x64;
 
     sandshrewHole->unk_272 = 0;
     sandshrewHole->unk_2A4 = 0;
-    sandshrewHole->unk_23E = 0;
+    sandshrewHole->mainState = 0;
     sandshrewHole->unk_24A = 0;
 
     sandshrewHole->unk_000.unk_000.unk_01 &= ~1;
@@ -1946,13 +1946,13 @@ void initSandshrewHoles(void) {
 void func_86F00F68(MiniActor* sandshrewHole, MiniActor* sandshrewPlayer) {
     s32 var_a1;
 
-    if ((sandshrewPlayer->unk_274 > 300.0f) && (sandshrewHole->unk_23E == 0)) {
+    if ((sandshrewPlayer->unk_274 > 300.0f) && (sandshrewHole->mainState == 0)) {
         func_86F003FC(sandshrewHole, 0);
         sandshrewHole->unk_000.unk_000.unk_01 |= 1;
-        sandshrewHole->unk_23E = 1;
+        sandshrewHole->mainState = 1;
     }
 
-    if (sandshrewHole->unk_23E != 0) {
+    if (sandshrewHole->mainState != 0) {
         if (sandshrewPlayer->unk_274 > 400.0f) {
             var_a1 = 0x5000;
         } else {
@@ -1997,11 +1997,11 @@ void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
     geiser->globalPos.y = 0.0f;
     geiser->globalPos.z = 0.0f;
 
-    geiser->health = geiser->unk_25C = 0x64;
+    geiser->miniHealth = geiser->miniMaxHealth = 0x64;
 
     geiser->unk_272 = 0;
     geiser->unk_2A4 = 0;
-    geiser->unk_23E = 0;
+    geiser->mainState = 0;
     geiser->unk_24A = 0;
 
     geiser->unk_000.unk_000.unk_01 &= ~1;
@@ -2019,21 +2019,21 @@ void initSandshrewWaterGeisers(void) {
 }
 
 void func_86F011E8(MiniActor* geiser) {
-    switch (geiser->unk_23E) {
+    switch (geiser->mainState) {
         case 1:
             func_86F003FC(geiser, 0);
             geiser->unk_000.unk_000.unk_01 |= 1;
-            geiser->unk_23E++;
+            geiser->mainState++;
             break;
         case 2:					//	first geiser animation ends
             if (func_80017514(&miniSandshrewGeiserPtr->unk_000) != 0) {
                 func_86F003FC(geiser, 1);
-                geiser->unk_23E++;
+                geiser->mainState++;
             }
             break;
     }
 
-    if ((geiser->unk_23E >= 2) && (D_8140E6CC == 0)) {
+    if ((geiser->mainState >= 2) && (D_8140E6CC == 0)) {
         func_81407F24(&geiser->unk_000, func_87902C9C, &D_87903E58, 4, 0xA);
     }
 }
@@ -2128,8 +2128,8 @@ s32 func_86F014F8(void) {
             miniSandshrewPtr->unk_2A8 = 1;
             var_s7 = 1;
             var_s4 += 1;
-            miniSandshrewPtr->unk_23E = 0x64;
-            miniSandshrewGeiserPtr->unk_23E = 1;
+            miniSandshrewPtr->mainState = 0x64;
+            miniSandshrewGeiserPtr->mainState = 1;
             func_86F00188(5, i);
             func_87802F00(i);
         }

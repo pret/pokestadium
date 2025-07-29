@@ -5,7 +5,7 @@
 #include "src/fragments/3/fragment3.h"
 
 s32 func_86C00020(MiniActor* arg0);
-void func_86C00090(s16 arg0, s32* arg1, s32* arg2);
+void miniDiglettGoldCheck(s16 arg0, s32* arg1, s32* arg2);
 void func_86C00110(s16 arg0, s16 arg1);
 void func_86C00368(s16 arg0, s16 arg1);
 void func_86C003AC(MiniActor* arg0);
@@ -62,13 +62,13 @@ void func_86C035E0(void);
 void func_86C03608(void);
 void func_86C03AB8(void);
 void miniEkansDrawCountdown(void);
-void fixSkansMinigameHUD(void);
+void miniEkansDrawHub(void);
 void func_86C03E4C(void);
 void func_86C03E8C(s32 arg0);
 void func_86C03ED4(void);
 void func_86C040B4(s32 arg0);
 void initEkansMinigameAssets(void);
-void showTutorialScreenEkansMinigame(void);
+void miniEkansTutoScreenControls(void);
 void ekansMinigameUpdate(void);
 void func_86C044B4(void);
 s32 ekansMinigameLoad(s32 arg0, UNUSED s32 arg1);

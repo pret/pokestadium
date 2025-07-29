@@ -100,17 +100,17 @@ s32 metapodRockCollisionCheck(MiniActor* fallingRock, MiniActor* metapod) {
 }
 
 void miniChangeActorAnim(MiniActor* poke, s16 anim, s16 arg2, s16 arg3) {
-    poke->unk_248 = 1; //	animation flag ?
+    poke->isIdle = 1;
     poke->unk_24A = anim;
     poke->unk_24C = arg2;
     poke->unk_26A = arg3;
-    poke->unk_26C = 0; //	animation flag ?
+    poke->unk_26C = 0;
     poke->unk_26E = 0;
 }
 
 //	unused
 void miniChangeActorAnim_alt1(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
-    arg0->unk_248 = 1;
+    arg0->isIdle = 1;
     arg0->unk_24A = arg1;
     arg0->unk_24C = arg2;
     arg0->unk_26A = arg3;
@@ -119,7 +119,7 @@ void miniChangeActorAnim_alt1(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16
 }
 
 void miniChangeActorAnim_alt2(MiniActor* diglett, s16 anim, s16 arg2, s16 arg3) {
-    diglett->unk_248 = 1;
+    diglett->isIdle = 1;
     diglett->unk_24A = anim;
     diglett->unk_24C = arg2;
     diglett->unk_26A = arg3;
@@ -129,14 +129,14 @@ void miniChangeActorAnim_alt2(MiniActor* diglett, s16 anim, s16 arg2, s16 arg3) 
 s32 miniPokeIsIdleCheck(MiniActor* arg0) {
     s32 var_v1 = 0;
 
-    if (arg0->unk_248 == 0) {
+    if (arg0->isIdle == 0) {
         var_v1 = 1;
     }
     return var_v1;
 }
 
 void func_879003A0(MiniActor* poke) {
-    switch (poke->unk_248) {
+    switch (poke->isIdle) {
         case 1:
             func_8001BD04(&poke->unk_000, poke->unk_24A);
             if (poke->unk_26C != 0) {
@@ -151,17 +151,17 @@ void func_879003A0(MiniActor* poke) {
                     func_80017804(&poke->unk_000, poke->unk_26E);
                 }
             }
-            poke->unk_248++;
+            poke->isIdle++;
             break;
 
         case 2:
             if (poke->unk_26C == 0) {
                 if (func_800174E4(&poke->unk_000) != 0) {
-                    poke->unk_248++;
+                    poke->isIdle++;
                 }
             } else {
                 if (poke->unk_000.unk_040.unk_08 == 0) {
-                    poke->unk_248++;
+                    poke->isIdle++;
                 }
             }
             break;
@@ -170,7 +170,7 @@ void func_879003A0(MiniActor* poke) {
             if (poke->unk_26A != 0) {
                 func_8001BD04(&poke->unk_000, 0);
             }
-            poke->unk_248 = 0;
+            poke->isIdle = 0;
             break;
     }
 }
@@ -216,9 +216,9 @@ void func_879005AC(MiniActor* arg0) {
 }
 
 void func_879005C4(MiniActor* ekans) {
-    ekans->unk_1FC = ekans->unk_1FC - ekans->unk_210;
+    ekans->unk_1FC = ekans->unk_1FC - ekans->weight;
     ekans->globalPos.x = ekans->globalPos.x + ekans->unk_1F8;
-    ekans->globalPos.y = ekans->globalPos.y + (ekans->unk_1FC - ekans->unk_210);
+    ekans->globalPos.y = ekans->globalPos.y + (ekans->unk_1FC - ekans->weight);
     ekans->globalPos.z = ekans->globalPos.z + ekans->unk_200;
 }
 
@@ -229,18 +229,18 @@ void func_8790060C(MiniActor* actor) {
     actor->unk_226 = actor->unk_228 = actor->unk_22A = 0;
     actor->unk_22C = actor->unk_22E = actor->unk_230 = 0;
     actor->unk_232 = actor->unk_234 = actor->unk_236 = 0;
-    actor->unk_23E = actor->unk_240 = actor->unk_242 = actor->unk_248 = 0;
+    actor->mainState = actor->unk_240 = actor->compState = actor->isIdle = 0;
 
     actor->unk_254 = 0;
     actor->unk_272 = 0;
     actor->unk_238 = 0;
-    actor->unk_25A = 0;
+    actor->damageTimer = 0;
     actor->unk_2A8 = 0;
     actor->unk_2A4 = 0;
-    actor->unk_2A2 = 0;
+    actor->ekansScore = 0;
     actor->unk_29A = 0;
     actor->unk_2AA = 0;
-    actor->unk_29C = 0;
+    actor->diglettIsGold = 0;
     actor->unk_2A0 = 0;
     actor->unk_29E = 0;
     actor->unk_296 = 0;
@@ -255,11 +255,11 @@ void func_8790060C(MiniActor* actor) {
     actor->unk_1B4.x = 0.0f;
     actor->globalPos.x = actor->globalPos.y = actor->globalPos.z = 0.0f;
 
-    actor->unk_1D4 = 0.0f;
-    actor->unk_1D0 = 0.0f;
-    actor->unk_1CC = 0.0f;
+    actor->dist2DiglettLevelZ = 0.0f;
+    actor->dist2DiglettLevelY = 0.0f;
+    actor->dist2DiglettLevelX = 0.0f;
     actor->unk_1E4 = 0.0f;
-    actor->unk_210 = 0.0f;
+    actor->weight = 0.0f;
     actor->unk_20C = 0.0f;
     actor->unk_208 = 0.0f;
     actor->unk_204 = 0.0f;
@@ -274,7 +274,7 @@ void func_8790060C(MiniActor* actor) {
     actor->unk_27C = 0.0f;
     actor->unk_274 = 0.0f;
 
-    actor->unk_260 = actor->unk_262 = actor->unk_264 = actor->playerId = 0;
+    actor->midAirState = actor->ekansIsMidAir = actor->unk_264 = actor->playerId = 0;
     actor->unk_290 = actor->unk_292 = actor->unk_294 = 0;
 }
 

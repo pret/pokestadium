@@ -24,10 +24,10 @@ void func_87903600(void) {
 }
 
 void func_879036B4(MiniActor* arg0) {
-    if (arg0->unk_23E == 1) {
+    if (arg0->mainState == 1) {
         arg0->unk_000.unk_000.unk_01 |= 1;
         miniChangeActorAnim(arg0, 0, -1, 0);
-        arg0->unk_23E++;
+        arg0->mainState++;
     }
 }
 
@@ -58,7 +58,7 @@ void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 
     arg0->unk_21C = arg6;
     arg0->unk_21E = arg7;
     arg0->playerId = arg8;
-    arg0->unk_23E = 1;
+    arg0->mainState = 1;
 }
 
 void func_879037D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {

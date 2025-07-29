@@ -14,11 +14,11 @@ typedef struct MiniActor {
     /* 0x190 */ Vec3f unk_190;      //  global position ?
     /* 0x19C */ Vec3f unk_19C;      //	position ?					**	metapod only
     /* 0x1A8 */ Vec3f localOrigin;	//	origin position
-    /* 0x1B4 */ Vec3f unk_1B4;		//	related to angle 			**	ekans only
+    /* 0x1B4 */ Vec3f unk_1B4;		//	???				 			**	ekans only
     /* 0x1C0 */ Vec3f globalPos;
-    /* 0x1CC */ f32 unk_1CC;		//	???							**	ekans only
-    /* 0x1D0 */ f32 unk_1D0;		//	unused ?
-    /* 0x1D4 */ f32 unk_1D4;		//	???							**	ekans only
+    /* 0x1CC */ f32 dist2DiglettLevelX;	//	1,2,4					**	ekans only
+    /* 0x1D0 */ f32 dist2DiglettLevelY;	//	unused
+    /* 0x1D4 */ f32 dist2DiglettLevelZ;	//	1,2,4					**	ekans only
     /* 0x1D8 */ Vec3f unk_1D8;      //	also position, never used
     /* 0x1E4 */ f32 unk_1E4;        //	botton  of the hitbox ? half of 28C
     /* 0x1E8 */ char unk1E8[0x4];	//	unused ?
@@ -31,14 +31,14 @@ typedef struct MiniActor {
     /* 0x204 */ f32 unk_204;		//	x acceleration on metapod	**	metapod only
     /* 0x208 */ f32 unk_208;		//	y acceleration on metapod	**	metapod only
     /* 0x20C */ f32 unk_20C;		//	z acceleration on metapod	**	metapod only
-    /* 0x210 */ f32 unk_210;		//	weight? gravity ? y acceleration ? on ekans and metapod
+    /* 0x210 */ f32 weight;		//	weight? gravity ? y acceleration ? on ekans and metapod
     /* 0x214 */ Vec3s totalRot;		//	total rotation
     /* 0x21A */ s16 unk_21A;		//	x rotation 1, always zero
-    /* 0x21C */ s16 unk_21C;		//	y rotation 1 on ekans
+    /* 0x21C */ s16 unk_21C;		//	y rotation 1
     /* 0x21E */ s16 unk_21E;		//	z rotation 1 ? always zero
-    /* 0x220 */ s16 unk_220;		//	x something, always zero
-    /* 0x222 */ s16 unk_222;		//	y something, always zero
-    /* 0x224 */ s16 unk_224;		//	z something, always zero
+    /* 0x220 */ s16 unk_220;		//	x something
+    /* 0x222 */ s16 unk_222;		//	y something
+    /* 0x224 */ s16 unk_224;		//	z something
     /* 0x226 */ s16 unk_226;		//	x rotation 2
     /* 0x228 */ s16 unk_228;		//	y rotation 2 (throwing direction on ekans)
     /* 0x22A */ s16 unk_22A;		//	z rotation 2
@@ -50,23 +50,23 @@ typedef struct MiniActor {
     /* 0x236 */ s16 unk_236;		//	z rotation 3 always zero
     /* 0x238 */ s16 unk_238;		//	always zero
     /* 0x23A */ s16 unk_23A;		//	always zero
-    /* 0x23C */ s16 unk_23C;        //  ???
-    /* 0x23E */ s16 unk_23E;        //	animation id
+    /* 0x23C */ s16 unk_23C;        //  ??? some value to send to unk_000->unk_018
+    /* 0x23E */ s16 mainState;		//	animation id or state
     /* 0x240 */ s16 unk_240;		//	metapod got rock squashed
-    /* 0x242 */ s16 unk_242;        //  comp state on ekans ; 
+    /* 0x242 */ s16 compState;
     /* 0x244 */ s16 unk_244;		//	?
     /* 0x246 */ char unk246[0x2];	//	unused
-    /* 0x248 */ s16 unk_248;        //	0,1,2 - is colliding? visibility?
+    /* 0x248 */ s16 isIdle;        //	0,1,2 - is colliding? visibility?
     /* 0x24A */ s16 unk_24A;        //	animation id ?
     /* 0x24C */ s16 unk_24C;        //	texture animation ?
     /* 0x24E */ char unk24E[0x6];	//	unused
     /* 0x254 */ s32 unk_254;		//	always zero
-    /* 0x258 */ s16 health;		//	health on metapod ; ??? on ekans and sandsrew
-    /* 0x25A */ s16 unk_25A;        //  something animation on metapod  ** metapod only
-    /* 0x25C */ s16 unk_25C;        //  max health on metapod, different on sandshrew and ekans
-    /* 0x25E */ s16 ekansAbbleToHoop;	//								** ekans only
-    /* 0x260 */ s16 unk_260;        //  rock got blocked on metapod ; 
-    /* 0x262 */ s16 unk_262;        //  can ekans peg a digglet ?		** ekans only
+    /* 0x258 */ s16 miniHealth;		//	health, used only on metapod
+    /* 0x25A */ s16 damageTimer;	//	** metapod only
+    /* 0x25C */ s16 miniMaxHealth;	//	400 instead of 100 on metapod
+    /* 0x25E */ s16 ekansAbbleToHoop;							//		**	ekans only
+    /* 0x260 */ s16 midAirState;	//  mid air state, ekanses and falling rocks
+    /* 0x262 */ s16 ekansIsMidAir;	//	ekans is in mid air				**	ekans only
     /* 0x264 */ s16 unk_264;        //  always zero
     /* 0x266 */ s16 playerId;
     /* 0x268 */ s16 playerIdBuffer;	//	ekans only
@@ -75,18 +75,18 @@ typedef struct MiniActor {
     /* 0x26E */ s16 unk_26E;		//	animation something, always zero
     /* 0x270 */ s16 unk_270;
     /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ?
-    /* 0x274 */ f32 unk_274;        //  
+    /* 0x274 */ f32 unk_274;        //  ???
     /* 0x278 */ char unk278[0x4];	//	unused
     /* 0x27C */ f32 unk_27C;		//
     /* 0x280 */ f32 unk_280;		//	stick magnitude on ekans? ; digging/animation speed on sandshrew
-    /* 0x284 */ f32 unk_284;
+    /* 0x284 */ f32 unk_284;		//	launch forse on ekans
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
     /* 0x28C */ f32 unk_28C;        //	top    of the hitbox ? / bounding box ? ;   double of 1E4
-    /* 0x290 */ s16 unk_290;
-    /* 0x292 */ s16 unk_292;
-    /* 0x294 */ s16 unk_294;
+    /* 0x290 */ s16 unk_290;		//	always zero
+    /* 0x292 */ s16 unk_292;		//	always zero
+    /* 0x294 */ s16 unk_294;		//	always zero
     /* 0x296 */ s16 unk_296;
-    /* 0x298 */ s16 unk_298;
+    /* 0x298 */ s16 unk_298;		//	diglett bounceness on ekans ?
     /* 0x29A */ union {
                     s16 unk_29A;
                     s16 sandshrewLastDir;
@@ -94,10 +94,10 @@ typedef struct MiniActor {
                     s16 metapodInputLockTimer;
                 };
 
-    /* 0x29C */ s16 unk_29C;
-    /* 0x29E */ s16 unk_29E;        //  respawn time after landing on ekans ; something related with comp animation on metapod
-    /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames L/R was pressed on sandshrew?
-    /* 0x2A2 */ s16 unk_2A2;        //  score on skans' minigame
+    /* 0x29C */ s16 diglettIsGold;	//						**	diglett only
+    /* 0x29E */ s16 unk_29E;        //  respawn time after landing on ekans ; something comp animation on metapod
+    /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames L/R DL/DR was pressed on sandshrew and ekans
+    /* 0x2A2 */ s16 ekansScore;		// 						**	ekans only
     /* 0x2A4 */ s16 unk_2A4;
     /* 0x2A6 */ s16 unk_2A6;		//	metapod state ?
     /* 0x2A8 */ s16 unk_2A8;
