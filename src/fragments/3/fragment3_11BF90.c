@@ -51,12 +51,12 @@ void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 
     arg0->scale.y = arg1;
     arg0->scale.z = arg1;
 
-    arg0->localOrigin.x = arg2;
-    arg0->localOrigin.y = arg3;
-    arg0->localOrigin.z = arg4;
-    arg0->unk_21A = arg5;
-    arg0->unk_21C = arg6;
-    arg0->unk_21E = arg7;
+    arg0->position_1.x = arg2;
+    arg0->position_1.y = arg3;
+    arg0->position_1.z = arg4;
+    arg0->xRot_1 = arg5;
+    arg0->yRot_1 = arg6;
+    arg0->zRot_1 = arg7;
     arg0->playerId = arg8;
     arg0->mainState = 1;
 }

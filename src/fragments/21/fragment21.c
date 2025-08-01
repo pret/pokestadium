@@ -1595,30 +1595,30 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
     sandshrew->scale.y = 1.0f;
     sandshrew->scale.z = 1.0f;
 
-    sandshrew->localOrigin.x = sandshrewPositions[player].x;
-    sandshrew->localOrigin.y = sandshrewPositions[player].y;
-    sandshrew->localOrigin.z = sandshrewPositions[player].z;
+    sandshrew->position_1.x = sandshrewPositions[player].x;
+    sandshrew->position_1.y = sandshrewPositions[player].y;
+    sandshrew->position_1.z = sandshrewPositions[player].z;
 
-    sandshrew->globalPos.x = 0.0f;
-    sandshrew->globalPos.y = 0.0f;
-    sandshrew->globalPos.z = 0.0f;
+    sandshrew->position_2.x = 0.0f;
+    sandshrew->position_2.y = 0.0f;
+    sandshrew->position_2.z = 0.0f;
 
     if (true) {}
 
-    sandshrew->unk_220 = sandshrew->unk_226 = sandshrew->unk_22C = 0;
-    sandshrew->unk_222 = sandshrew->unk_228 = sandshrew->unk_22E = 0;
-    sandshrew->unk_224 = sandshrew->unk_22A = sandshrew->unk_230 = 0;
+    sandshrew->unk_220 = sandshrew->xRot_2 = sandshrew->unk_22C = 0;
+    sandshrew->unk_222 = sandshrew->yRot_2 = sandshrew->unk_22E = 0;
+    sandshrew->unk_224 = sandshrew->zRot_2 = sandshrew->unk_230 = 0;
 
     sandshrew->unk_272 = 0;
-    sandshrew->unk_2A8 = 0;
+    sandshrew->isWinner = 0;
     sandshrew->unk_2A4 = 0;
 
     sandshrew->diggingSpeed = 0.0f;
     sandshrew->diggingAccel2 = 0.0f;
 
-    sandshrew->totalRot.x = sandshrew->unk_21A = 0;
-    sandshrew->totalRot.y = sandshrew->unk_21C = 0;
-    sandshrew->totalRot.z = sandshrew->unk_21E = 0;
+    sandshrew->totalRot.x = sandshrew->xRot_1 = 0;
+    sandshrew->totalRot.y = sandshrew->yRot_1 = 0;
+    sandshrew->totalRot.z = sandshrew->zRot_1 = 0;
 
     sandshrew->miniHealth = sandshrew->miniMaxHealth = 0x64;
     sandshrew->unk_238 = sandshrew->unk_23A = 0;
@@ -1816,12 +1816,12 @@ void func_86F00920(MiniActor* sandshrew) {
                 }
 
                 if (D_8140E6CC == 0) {
-                    if (sandshrew->unk_190.y > -10.0f) {
-                        func_81407D48(1.0f, sandshrew->unk_190, sandshrew->totalRot, func_87902224, &D_87903E10, 1);	//	particles
+                    if (sandshrew->totalPos.y > -10.0f) {
+                        func_81407D48(1.0f, sandshrew->totalPos, sandshrew->totalRot, func_87902224, &D_87903E10, 1);	//	particles
                     } else {
-                        sp48.x = sandshrew->unk_190.x;
+                        sp48.x = sandshrew->totalPos.x;
                         sp48.y = -5.0f;
-                        sp48.z = sandshrew->unk_190.z;
+                        sp48.z = sandshrew->totalPos.z;
                         func_81407D48(1.0f, sp48, sandshrew->totalRot, func_879023EC, &D_87903E10, 1);	//	particles
                     }
                 }
@@ -1830,7 +1830,7 @@ void func_86F00920(MiniActor* sandshrew) {
 
                 holeDeepeness = sandshrew->diggingSpeed / 5000.0f;
                 if (holeDeepeness > 0.2f) {
-                    sandshrew->globalPos.y -= holeDeepeness;
+                    sandshrew->position_2.y -= holeDeepeness;
                 }
 
                 func_86F00188(3, sandshrew - miniSandshrews);
@@ -1861,12 +1861,12 @@ void func_86F00920(MiniActor* sandshrew) {
             func_80017464(&sandshrew->unk_000, 0);
             func_80017454(&sandshrew->unk_000, 0x10000);
             sandshrew->mainState++;
-            sandshrew->globalPos.y += 15.0f;
+            sandshrew->position_2.y += 15.0f;
             break;
 
         case 0x65:
             minigameActorLocalOriginToZero(sandshrew);
-            func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->globalPos);
+            func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->position_2);
             break;
     }
 }
@@ -1908,20 +1908,20 @@ void initSandshrewHole(MiniActor* a0, s32 arg1) {
     sandshrewHole->scale.y = 1.0f;
     sandshrewHole->scale.z = 1.0f;
 
-    sandshrewHole->localOrigin.x = sandshrewPositions[arg1].x;
-    sandshrewHole->localOrigin.y = sandshrewPositions[arg1].y;
-    sandshrewHole->localOrigin.z = sandshrewPositions[arg1].z;
+    sandshrewHole->position_1.x = sandshrewPositions[arg1].x;
+    sandshrewHole->position_1.y = sandshrewPositions[arg1].y;
+    sandshrewHole->position_1.z = sandshrewPositions[arg1].z;
 
-    sandshrewHole->totalRot.x = sandshrewHole->unk_21A = sandshrewHole->unk_220 = sandshrewHole->unk_226 =
+    sandshrewHole->totalRot.x = sandshrewHole->xRot_1 = sandshrewHole->unk_220 = sandshrewHole->xRot_2 =
         sandshrewHole->unk_22C = 0;
-    sandshrewHole->totalRot.y = sandshrewHole->unk_21C = sandshrewHole->unk_222 = sandshrewHole->unk_228 =
+    sandshrewHole->totalRot.y = sandshrewHole->yRot_1 = sandshrewHole->unk_222 = sandshrewHole->yRot_2 =
         sandshrewHole->unk_22E = 0;
-    sandshrewHole->totalRot.z = sandshrewHole->unk_21E = sandshrewHole->unk_224 = sandshrewHole->unk_22A =
+    sandshrewHole->totalRot.z = sandshrewHole->zRot_1 = sandshrewHole->unk_224 = sandshrewHole->zRot_2 =
         sandshrewHole->unk_230 = 0;
 
-    sandshrewHole->globalPos.x = 0.0f;
-    sandshrewHole->globalPos.y = 0.0f;
-    sandshrewHole->globalPos.z = 0.0f;
+    sandshrewHole->position_2.x = 0.0f;
+    sandshrewHole->position_2.y = 0.0f;
+    sandshrewHole->position_2.z = 0.0f;
 
     sandshrewHole->miniHealth = sandshrewHole->miniMaxHealth = 0x64;
 
@@ -1985,17 +1985,17 @@ void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
     geiser->scale.y = 1.0f;
     geiser->scale.z = 1.0f;
 
-    geiser->localOrigin.x = sandshrewPositions[arg1].x;
-    geiser->localOrigin.y = sandshrewPositions[arg1].y;
-    geiser->localOrigin.z = sandshrewPositions[arg1].z;
+    geiser->position_1.x = sandshrewPositions[arg1].x;
+    geiser->position_1.y = sandshrewPositions[arg1].y;
+    geiser->position_1.z = sandshrewPositions[arg1].z;
 
-    geiser->totalRot.x = geiser->unk_21A = geiser->unk_220 = geiser->unk_226 = geiser->unk_22C = 0;
-    geiser->totalRot.y = geiser->unk_21C = geiser->unk_222 = geiser->unk_228 = geiser->unk_22E = 0;
-    geiser->totalRot.z = geiser->unk_21E = geiser->unk_224 = geiser->unk_22A = geiser->unk_230 = 0;
+    geiser->totalRot.x = geiser->xRot_1 = geiser->unk_220 = geiser->xRot_2 = geiser->unk_22C = 0;
+    geiser->totalRot.y = geiser->yRot_1 = geiser->unk_222 = geiser->yRot_2 = geiser->unk_22E = 0;
+    geiser->totalRot.z = geiser->zRot_1 = geiser->unk_224 = geiser->zRot_2 = geiser->unk_230 = 0;
 
-    geiser->globalPos.x = 0.0f;
-    geiser->globalPos.y = 0.0f;
-    geiser->globalPos.z = 0.0f;
+    geiser->position_2.x = 0.0f;
+    geiser->position_2.y = 0.0f;
+    geiser->position_2.z = 0.0f;
 
     geiser->miniHealth = geiser->miniMaxHealth = 0x64;
 
@@ -2115,8 +2115,8 @@ s32 func_86F014F8(void) {
 
     miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        if (miniSandshrewPtr->unk_190.y < var_fs0) {
-            var_fs0 = miniSandshrewPtr->unk_190.y;
+        if (miniSandshrewPtr->totalPos.y < var_fs0) {
+            var_fs0 = miniSandshrewPtr->totalPos.y;
         }
         miniSandshrewPtr++;
     }
@@ -2124,8 +2124,8 @@ s32 func_86F014F8(void) {
     miniSandshrewPtr = miniSandshrews;
     miniSandshrewGeiserPtr = miniSandshrewGeisers;
     for (i = 0; i < 4; i++) {
-        if (miniSandshrewPtr->unk_190.y <= var_fs0) {
-            miniSandshrewPtr->unk_2A8 = 1;
+        if (miniSandshrewPtr->totalPos.y <= var_fs0) {
+            miniSandshrewPtr->isWinner = 1;
             var_s7 = 1;
             var_s4 += 1;
             miniSandshrewPtr->mainState = 0x64;

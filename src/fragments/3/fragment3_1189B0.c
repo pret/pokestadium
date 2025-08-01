@@ -29,19 +29,19 @@ ret_func_80004454 func_87900020(void) {
 
 // func_8790002C
 float MinigameGetVec3Distance_2d(MiniActor* arg0, MiniActor* arg1) {
-    return sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.z - arg0->unk_19C.z));
+    return sqrtf(SQ(arg1->totalPos_alt.x - arg0->totalPos_alt.x) + SQ(arg1->totalPos_alt.z - arg0->totalPos_alt.z));
 }
 // func_87900070
 void MinigameGetVec3Distance_3d(MiniActor* arg0, MiniActor* arg1) {
-    sqrtf(SQ(arg1->unk_19C.x - arg0->unk_19C.x) + SQ(arg1->unk_19C.y - arg0->unk_19C.y) +
-          SQ(arg1->unk_19C.z - arg0->unk_19C.z));
+    sqrtf(SQ(arg1->totalPos_alt.x - arg0->totalPos_alt.x) + SQ(arg1->totalPos_alt.y - arg0->totalPos_alt.y) +
+          SQ(arg1->totalPos_alt.z - arg0->totalPos_alt.z));
 }
 
 //  unused,
 s32 func_879000C4(MiniActor* arg0, MiniActor* arg1) {
-    f32 totalX = arg1->unk_19C.x - arg0->unk_19C.x;
-    f32 totalY = arg1->unk_19C.y - arg0->unk_19C.y;
-    f32 totalZ = arg1->unk_19C.z - arg0->unk_19C.z;
+    f32 totalX = arg1->totalPos_alt.x - arg0->totalPos_alt.x;
+    f32 totalY = arg1->totalPos_alt.y - arg0->totalPos_alt.y;
+    f32 totalZ = arg1->totalPos_alt.z - arg0->totalPos_alt.z;
     f32 var_fa1 = (arg0->unk_288 * arg0->scale.y) + (arg1->unk_288 * arg1->scale.y);
     s32 ret = FALSE;
 
@@ -77,13 +77,13 @@ s32 metapodRockCollisionCheck(MiniActor* fallingRock, MiniActor* metapod) {
     f32 tmp;
     s32 ret;
 
-    totalX = metapod->unk_19C.x - fallingRock->unk_19C.x;
-    totalY = metapod->unk_19C.y - fallingRock->unk_19C.y;
-    totalZ = metapod->unk_19C.z - fallingRock->unk_19C.z;
+    totalX = metapod->totalPos_alt.x - fallingRock->totalPos_alt.x;
+    totalY = metapod->totalPos_alt.y - fallingRock->totalPos_alt.y;
+    totalZ = metapod->totalPos_alt.z - fallingRock->totalPos_alt.z;
     ret = 0;
 
     var_fa1 = (fallingRock->unk_288 * fallingRock->scale.y) + (metapod->unk_288 * metapod->scale.y);
-    var_fs0 = ((fallingRock->unk_28C * fallingRock->scale.y) + (metapod->unk_28C * metapod->scale.y)) / 2.0f;
+    var_fs0 = ((fallingRock->height * fallingRock->scale.y) + (metapod->height * metapod->scale.y)) / 2.0f;
 
     totalX = ABS(totalX);
     totalY = ABS(totalY);
@@ -190,52 +190,52 @@ void hideMiniGameHUD(void) {
 }
 
 void func_87900564(MiniActor* actor) {
-    actor->globalPos.x = 0.0f;
-    actor->localOrigin.x = 0.0f;
-    actor->unk_190.x = 0.0f;
+    actor->position_2.x = 0.0f;
+    actor->position_1.x = 0.0f;
+    actor->totalPos.x = 0.0f;
 
-    actor->globalPos.y = 0.0f;
-    actor->localOrigin.y = 0.0f;
-    actor->unk_190.y = 0.0f;
+    actor->position_2.y = 0.0f;
+    actor->position_1.y = 0.0f;
+    actor->totalPos.y = 0.0f;
 
-    actor->globalPos.z = 0.0f;
-    actor->localOrigin.z = 0.0f;
-    actor->unk_190.z = 0.0f;
+    actor->position_2.z = 0.0f;
+    actor->position_1.z = 0.0f;
+    actor->totalPos.z = 0.0f;
 }
 
 void minigameActorLocalOriginToZero(MiniActor* arg0) {
-    arg0->localOrigin.x = 0.0f;
-    arg0->localOrigin.y = 0.0f;
-    arg0->localOrigin.z = 0.0f;
+    arg0->position_1.x = 0.0f;
+    arg0->position_1.y = 0.0f;
+    arg0->position_1.z = 0.0f;
 }
 
 void func_879005AC(MiniActor* arg0) {
-    arg0->globalPos.x = 0.0f;
-    arg0->globalPos.y = 0.0f;
-    arg0->globalPos.z = 0.0f;
+    arg0->position_2.x = 0.0f;
+    arg0->position_2.y = 0.0f;
+    arg0->position_2.z = 0.0f;
 }
 
 void func_879005C4(MiniActor* ekans) {
     ekans->unk_1FC = ekans->unk_1FC - ekans->weight;
-    ekans->globalPos.x = ekans->globalPos.x + ekans->unk_1F8;
-    ekans->globalPos.y = ekans->globalPos.y + (ekans->unk_1FC - ekans->weight);
-    ekans->globalPos.z = ekans->globalPos.z + ekans->unk_200;
+    ekans->position_2.x = ekans->position_2.x + ekans->unk_1F8;
+    ekans->position_2.y = ekans->position_2.y + (ekans->unk_1FC - ekans->weight);
+    ekans->position_2.z = ekans->position_2.z + ekans->unk_200;
 }
 
 void func_8790060C(MiniActor* actor) {
     actor->totalRot.x = actor->totalRot.y = actor->totalRot.z = 0;
-    actor->unk_21A = actor->unk_21C = actor->unk_21E = 0;
+    actor->xRot_1 = actor->yRot_1 = actor->zRot_1 = 0;
     actor->unk_220 = actor->unk_222 = actor->unk_224 = 0;
-    actor->unk_226 = actor->unk_228 = actor->unk_22A = 0;
+    actor->xRot_2 = actor->yRot_2 = actor->zRot_2 = 0;
     actor->unk_22C = actor->unk_22E = actor->unk_230 = 0;
-    actor->unk_232 = actor->unk_234 = actor->unk_236 = 0;
+    actor->xRot_3 = actor->yRot_3 = actor->zRot_3 = 0;
     actor->mainState = actor->unk_240 = actor->compState = actor->isIdle = 0;
 
     actor->unk_254 = 0;
     actor->unk_272 = 0;
     actor->unk_238 = 0;
     actor->damageTimer = 0;
-    actor->unk_2A8 = 0;
+    actor->isWinner = 0;
     actor->unk_2A4 = 0;
     actor->ekansScore = 0;
     actor->unk_29A = 0;
@@ -247,13 +247,13 @@ void func_8790060C(MiniActor* actor) {
     actor->unk_298 = 0;
 
     actor->scale.x = actor->scale.y = actor->scale.z = 1.0f;
-    actor->unk_190.x = actor->unk_190.y = actor->unk_190.z = 0.0f;
-    actor->localOrigin.x = actor->localOrigin.y = actor->localOrigin.z = 0.0f;
+    actor->totalPos.x = actor->totalPos.y = actor->totalPos.z = 0.0f;
+    actor->position_1.x = actor->position_1.y = actor->position_1.z = 0.0f;
 
     actor->unk_1B4.z = 0.0f;
     actor->unk_1B4.y = 0.0f;
     actor->unk_1B4.x = 0.0f;
-    actor->globalPos.x = actor->globalPos.y = actor->globalPos.z = 0.0f;
+    actor->position_2.x = actor->position_2.y = actor->position_2.z = 0.0f;
 
     actor->dist2DiglettLevelZ = 0.0f;
     actor->dist2DiglettLevelY = 0.0f;
@@ -279,15 +279,15 @@ void func_8790060C(MiniActor* actor) {
 }
 
 void miniActorUpdateTransform(MiniActor* poke) {
-    poke->unk_190.x = poke->unk_19C.x = poke->localOrigin.x + poke->globalPos.x;
-    poke->unk_190.y = poke->unk_19C.y = poke->localOrigin.y + poke->globalPos.y;
-    poke->unk_190.z = poke->unk_19C.z = poke->localOrigin.z + poke->globalPos.z;
+    poke->totalPos.x = poke->totalPos_alt.x = poke->position_1.x + poke->position_2.x;
+    poke->totalPos.y = poke->totalPos_alt.y = poke->position_1.y + poke->position_2.y;
+    poke->totalPos.z = poke->totalPos_alt.z = poke->position_1.z + poke->position_2.z;
 
-    poke->unk_19C.y = poke->unk_19C.y + poke->unk_1E4;
+    poke->totalPos_alt.y = poke->totalPos_alt.y + poke->unk_1E4;
 
-    poke->totalRot.x = poke->unk_21A + poke->unk_226 + poke->unk_232;
-    poke->totalRot.y = poke->unk_21C + poke->unk_228 + poke->unk_234;
-    poke->totalRot.z = poke->unk_21E + poke->unk_22A + poke->unk_236;
+    poke->totalRot.x = poke->xRot_1 + poke->xRot_2 + poke->xRot_3;
+    poke->totalRot.y = poke->yRot_1 + poke->yRot_2 + poke->yRot_3;
+    poke->totalRot.z = poke->zRot_1 + poke->zRot_2 + poke->zRot_3;
 }
 
 //  updates an object's collider ?
@@ -296,9 +296,9 @@ void func_87900808(MiniActor* arg0) {
     arg0->unk_000.unk_030.y = arg0->scale.y;
     arg0->unk_000.unk_030.z = arg0->scale.z;
 
-    arg0->unk_000.unk_024.x = arg0->unk_190.x;
-    arg0->unk_000.unk_024.y = arg0->unk_190.y;
-    arg0->unk_000.unk_024.z = arg0->unk_190.z;
+    arg0->unk_000.unk_024.x = arg0->totalPos.x;
+    arg0->unk_000.unk_024.y = arg0->totalPos.y;
+    arg0->unk_000.unk_024.z = arg0->totalPos.z;
 
     arg0->unk_000.unk_01E.x = arg0->totalRot.x;
     arg0->unk_000.unk_01E.y = arg0->totalRot.y;

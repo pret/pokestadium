@@ -29,13 +29,13 @@ extern u8 D_03040580[];
 extern u8 D_03040D80[];
 extern u8 D_03040980[];
 
-typedef struct unk_D_86E04BFC {
+typedef struct MiniRockInfo {
     /* 0x00 */ Vec3f unk_00;
     /* 0x0C */ Vec3s unk_0C;
     /* 0x12 */ s16 unk_12;
     /* 0x14 */ s16 unk_14;
     /* 0x16 */ s16 unk_16;
-} unk_D_86E04BFC; // size = 0x18
+} MiniRockInfo; // size = 0x18
 
 static MiniActor miniMetapods[4];
 static MiniActor miniMetapodRocks[20];
@@ -464,13 +464,13 @@ static u32 D_86E04B34[] = {
     0x00000000, D_86E04AE0, 0x06000000, 0x06000000, 0x05000000, 0x0A000000, &D_800AC840, 0x06000000,
     0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
-static Vec3f minigameMetapodOriginPositions[] = {
+static Vec3f miniMetapodInfo[] = {
     { -54.0f, 0.0f, 0.0f },
     { -18.0f, 0.0f, 0.0f },
     { 18.0f, 0.0f, 0.0f },
     { 54.0f, 0.0f, 0.0f },
 };
-static unk_D_86E04BFC D_86E04BFC[] = {
+static MiniRockInfo miniRockInfos[] = {
     { { -54.0f, 0.0f, -300.0f }, { 0, 0, 0 }, 20, 40, 0 },
     { { -18.0f, 0.0f, -300.0f }, { 0, 0, 0 }, 20, 40, 0 },
     { { 18.0f, 0.0f, -300.0f }, { 0, 0, 0 }, 20, 40, 0 },
@@ -568,28 +568,28 @@ void func_86E001A0(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86E001E4(MiniActor* metapod, s32 arg1) {
+void miniInitMetapodPlayer(MiniActor* metapod, s32 arg1) {
     func_8790060C(metapod);
 
     metapod->scale.x = 1.0f;
     metapod->scale.y = 1.0f;
     metapod->scale.z = 1.0f;
 
-    metapod->localOrigin.x = minigameMetapodOriginPositions[arg1].x;
-    metapod->localOrigin.y = minigameMetapodOriginPositions[arg1].y;
-    metapod->localOrigin.z = minigameMetapodOriginPositions[arg1].z;
+    metapod->position_1.x = miniMetapodInfo[arg1].x;
+    metapod->position_1.y = miniMetapodInfo[arg1].y;
+    metapod->position_1.z = miniMetapodInfo[arg1].z;
 
     if (metapod->unk_23C == 0x9E) {			// if poke is metapod (not weedle) move it slightly
-        metapod->localOrigin.z -= 10.0f;
+        metapod->position_1.z -= 10.0f;
     }
 
-    metapod->unk_21A = 0;
-    metapod->unk_21C = 0;
-    metapod->unk_21E = 0;
+    metapod->xRot_1 = 0;
+    metapod->yRot_1 = 0;
+    metapod->zRot_1 = 0;
     metapod->miniMaxHealth = 0x190;
     metapod->miniHealth = metapod->miniMaxHealth;
     metapod->unk_2A6 = 5;
-    metapod->unk_1E4 = metapod->unk_28C * 0.5f;
+    metapod->unk_1E4 = metapod->height * 0.5f;
 
     func_8001BD04(&metapod->unk_000, 0);
     func_80017788(&metapod->unk_000);
@@ -598,12 +598,12 @@ void func_86E001E4(MiniActor* metapod, s32 arg1) {
     metapod->isComp = D_879060C4[arg1];
 }
 
-void initMetapodPlayers(void) {
+void miniInitMetapodPlayers(void) {
     s32 i;
 
     miniMetapodPtr = miniMetapods;
     for (i = 0; i < 4; i++) {
-        func_86E001E4(miniMetapodPtr, i);
+        miniInitMetapodPlayer(miniMetapodPtr, i);
         miniMetapodPtr++;
     }
 }
@@ -628,7 +628,7 @@ void miniMetapodHumanControls(MiniActor* metapod) {
         case 1:		// start harden
             func_86E0034C(metapod);
             miniChangeActorAnim(metapod, 1, -1, 1);
-            func_81407D48(1.0f, metapod->unk_190, metapod->totalRot, func_879029F0, &D_87903E40, 4);
+            func_81407D48(1.0f, metapod->totalPos, metapod->totalRot, func_879029F0, &D_87903E40, 4);
             metapod->mainState++;
             break;
 
@@ -857,7 +857,7 @@ void miniMetapodCompControls(MiniActor* metapod, s32 nPlayer) {
                         metapod->mainState = 1;
                         metapod->unk_272 = 4;
                         metapod->compState++;
-                        func_81407D48(1.0f, metapod->unk_190, metapod->totalRot, func_879029F0, &D_87903E40, 4);
+                        func_81407D48(1.0f, metapod->totalPos, metapod->totalRot, func_879029F0, &D_87903E40, 4);
                     } else {
                         metapod->compState = 0x64;
                     }
@@ -964,7 +964,7 @@ void miniRockChecks(UNUSED MiniActor* metapod, s32 nPlayer) {
 }
 
 void miniMatapodChecks(MiniActor* metapod, s32 nPlayer) {
-    if ((miniMetapodPtr->damageTimer > 0) && (metapod->unk_2A8 == 0)) {
+    if ((miniMetapodPtr->damageTimer > 0) && (metapod->isWinner == 0)) {
         if (miniMetapodPtr->damageTimer >= 0x28) {
             miniMetapodPtr->miniHealth -= miniMetapodPtr->damageTimer;
             miniMetapodPtr->damageTimer = 0;
@@ -1020,9 +1020,9 @@ void miniMatapodMinigameChecks(void) {
 void func_86E00F60(void) {
     func_879003A0(miniMetapodPtr);
 
-    miniMetapodPtr->unk_000.unk_024.x = miniMetapodPtr->unk_190.x;
-    miniMetapodPtr->unk_000.unk_024.y = miniMetapodPtr->unk_190.y;
-    miniMetapodPtr->unk_000.unk_024.z = miniMetapodPtr->unk_190.z;
+    miniMetapodPtr->unk_000.unk_024.x = miniMetapodPtr->totalPos.x;
+    miniMetapodPtr->unk_000.unk_024.y = miniMetapodPtr->totalPos.y;
+    miniMetapodPtr->unk_000.unk_024.z = miniMetapodPtr->totalPos.z;
 
     miniMetapodPtr->unk_000.unk_01E.x = miniMetapodPtr->totalRot.x;
     miniMetapodPtr->unk_000.unk_01E.y = miniMetapodPtr->totalRot.y;
@@ -1040,17 +1040,17 @@ void func_86E00FD8(void) {
     }
 }
 
-void func_86E0103C(MiniActor* arg0, s32 arg1) {
+void miniInitRock(MiniActor* arg0, s32 arg1) {
     func_8790060C(arg0);
     arg0->playerId = arg1;
 
-    arg0->localOrigin.x = D_86E04BFC[arg1].unk_00.x;
-    arg0->localOrigin.y = D_86E04BFC[arg1].unk_00.y;
-    arg0->localOrigin.z = D_86E04BFC[arg1].unk_00.z;
+    arg0->position_1.x = miniRockInfos[arg1].unk_00.x;
+    arg0->position_1.y = miniRockInfos[arg1].unk_00.y;
+    arg0->position_1.z = miniRockInfos[arg1].unk_00.z;
 
     arg0->unk_270 = 0;
-    arg0->unk_288 = D_86E04BFC[arg1].unk_12;
-    arg0->unk_28C = D_86E04BFC[arg1].unk_14;
+    arg0->unk_288 = miniRockInfos[arg1].unk_12;
+    arg0->height = miniRockInfos[arg1].unk_14;
 
     arg0->scale.x = 0.5f;
     arg0->scale.y = 0.5f;
@@ -1061,7 +1061,7 @@ void func_86E0103C(MiniActor* arg0, s32 arg1) {
     miniActorUpdateTransform(arg0);
 }
 
-void initFallingRocks(void) {
+void miniInitRocks(void) {
     s32 i;
     s32 j;
 
@@ -1069,7 +1069,7 @@ void initFallingRocks(void) {
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 5; j++) {
-            func_86E0103C(miniRockPtr, i);
+            miniInitRock(miniRockPtr, i);
             miniRockPtr++;
         }
     }
@@ -1115,7 +1115,7 @@ void func_86E01188(void) {
             miniRockPtr = &miniMetapodRocks[i * 5];
 
             for (j = 0; j < D_86E04B24; j++) {
-                func_86E0103C(miniRockPtr, i);
+                miniInitRock(miniRockPtr, i);
 
                 miniRockPtr->mainState = 1;
                 miniRockPtr->unk_29E = var_s1;
@@ -1132,14 +1132,14 @@ void func_86E01310(MiniActor* rock) {
     s16 temp_a1 = rock->playerId;
 
     rock->unk_29E = temp_v1 - 1;
-    rock->localOrigin.y += D_86E04BFC[temp_a1].unk_00.y + miniMetapods[temp_a1].unk_28C;
+    rock->position_1.y += miniRockInfos[temp_a1].unk_00.y + miniMetapods[temp_a1].height;
 
     rock->weight = 0.7f;
     rock->unk_1F8 = 0.0f;
     rock->unk_1FC = temp_v1 * rock->weight * 0.5f;
 
     rock->unk_200 =
-        ((miniMetapods[temp_a1].localOrigin.z + (miniMetapods[temp_a1].unk_288 * 0.5f)) - rock->localOrigin.z) / temp_v1;
+        ((miniMetapods[temp_a1].position_1.z + (miniMetapods[temp_a1].unk_288 * 0.5f)) - rock->position_1.z) / temp_v1;
     rock->unk_270 = 1;
 
     rock->unk_000.unk_000.unk_01 |= 1;
@@ -1191,7 +1191,7 @@ void miniRockStateMachine(MiniActor* rock) {
                     rock->unk_1FC = 5.0f;
                     rock->unk_200 = 1.5f;
                     func_86E01414(rock);
-                    func_81407D48(1.0f, rock->unk_190, rock->totalRot, func_87901F04, &D_87903E28, 4);
+                    func_81407D48(1.0f, rock->totalPos, rock->totalRot, func_87901F04, &D_87903E28, 4);
                 } else {
                     rock->mainState++;
                 }
@@ -1202,16 +1202,16 @@ void miniRockStateMachine(MiniActor* rock) {
             rock->unk_1FC = 7.0f;
             rock->unk_200 = 3.0f;
 
-            sp3C.x = rock->unk_190.x;
+            sp3C.x = rock->totalPos.x;
             sp3C.y = 0.0f;
-            sp3C.z = rock->unk_190.z;
+            sp3C.z = rock->totalPos.z;
 
             func_81407D48(1.0f, sp3C, rock->totalRot, func_87902068, &D_87903E10, 4);
             rock->mainState++;
             break;
 
         case 0x4:
-            if (rock->unk_190.y < -10.0f) {
+            if (rock->totalPos.y < -10.0f) {
                 func_86E01414(rock);
             }
             break;
@@ -1224,14 +1224,14 @@ void miniRockStateMachine(MiniActor* rock) {
     }
 }
 
-void func_86E016EC(MiniActor* arg0) {
+void miniRockUpdatePosition(MiniActor* rock) {
     UNUSED f32 temp_fv0;
     UNUSED f32 temp_fv0_2;
     UNUSED f32 temp_fv0_3;
 
-    arg0->unk_190.x = arg0->unk_19C.x = arg0->localOrigin.x + arg0->globalPos.x;
-    arg0->unk_190.y = arg0->unk_19C.y = arg0->localOrigin.y + arg0->globalPos.y;
-    arg0->unk_190.z = arg0->unk_19C.z = arg0->localOrigin.z + arg0->globalPos.z;
+    rock->totalPos.x = rock->totalPos_alt.x = rock->position_1.x + rock->position_2.x;
+    rock->totalPos.y = rock->totalPos_alt.y = rock->position_1.y + rock->position_2.y;
+    rock->totalPos.z = rock->totalPos_alt.z = rock->position_1.z + rock->position_2.z;
 }
 
 void miniUpdateRockTransform(MiniActor* rock) {
@@ -1239,12 +1239,12 @@ void miniUpdateRockTransform(MiniActor* rock) {
         rock->unk_1F8 += rock->xAccel;
         rock->unk_1FC += rock->yAccel - rock->weight;
         rock->unk_200 += rock->zAccel;
-        rock->globalPos.x += rock->unk_1F8;
-        rock->globalPos.y += rock->unk_1FC;
-        rock->globalPos.z += rock->unk_200;
+        rock->position_2.x += rock->unk_1F8;
+        rock->position_2.y += rock->unk_1FC;
+        rock->position_2.z += rock->unk_200;
     }
 
-    func_86E016EC(rock);
+    miniRockUpdatePosition(rock);
 }
 
 void miniUpdateRocks(void) {
@@ -1258,6 +1258,7 @@ void miniUpdateRocks(void) {
     }
 }
 
+//	update model transform ?
 void func_86E0182C(MiniActor* arg0) {
     func_879003A0(arg0);
 
@@ -1265,21 +1266,21 @@ void func_86E0182C(MiniActor* arg0) {
     arg0->unk_000.unk_030.y = arg0->scale.y;
     arg0->unk_000.unk_030.z = arg0->scale.z;
 
-    arg0->unk_000.unk_024.x = arg0->unk_190.x;
-    arg0->unk_000.unk_024.y = arg0->unk_190.y;
-    arg0->unk_000.unk_024.z = arg0->unk_190.z;
+    arg0->unk_000.unk_024.x = arg0->totalPos.x;
+    arg0->unk_000.unk_024.y = arg0->totalPos.y;
+    arg0->unk_000.unk_024.z = arg0->totalPos.z;
 
     arg0->unk_000.unk_01E.x = arg0->totalRot.x;
     arg0->unk_000.unk_01E.y = arg0->totalRot.y;
     arg0->unk_000.unk_01E.z = arg0->totalRot.z;
 }
 
-void func_86E01898(void) {
+void miniUpdateRocksPositions(void) {
 	s32 i;
     miniRockPtr = miniMetapodRocks;
     for (i = 0; i < 20; ++i)
     {
-        func_86E016EC(miniRockPtr);
+        miniRockUpdatePosition(miniRockPtr);
         func_86E0182C(miniRockPtr);    	
         miniRockPtr = &miniRockPtr[1];
     }
@@ -1303,15 +1304,15 @@ void func_86E01904(void) {
     miniUpdateCamera();
 }
 
-void func_86E01990(void) {
+void miniMetapodCameraControls(void) {
     minigameDebuggModeControl();
     miniUpdateCamera();
 }
 
 void initMetapodMinigameAssets(void) {
     func_87900854(); //	minigame variables
-    initFallingRocks();
-    initMetapodPlayers();
+    miniInitRocks();
+    miniInitMetapodPlayers();
     func_86E01904(); //	camera
     minigameInputLock = 0;
 }
@@ -1411,7 +1412,7 @@ s32 func_86E01B08(void) {
         case 1:
             for (i = 0; i < 4; i++) {
                 if (miniMetapodPtr->unk_2A6 == 5) {
-                    miniMetapodPtr->unk_2A8 = 1;
+                    miniMetapodPtr->isWinner = 1;
                     miniMetapodPtr->unk_2AA = 1;
                     miniMetapodPtr->unk_2A6 = 1;
                     var_t3 = 1;
@@ -1455,7 +1456,7 @@ s32 func_86E01E34(void) {
     MiniActor* var_s0;
 
     for (i = 0, var_s0 = miniMetapods; i < 4; i++, var_s0++) {
-        if (var_s0->unk_2A8 != 0) {
+        if (var_s0->isWinner != 0) {
             miniChangeActorAnim(var_s0, 4, -1, 0);
             var_s3 = 1;
         }
@@ -1767,10 +1768,10 @@ void func_86E02A64(void) {
             miniUpdateMetapods();
             miniUpdateRocks();
             miniMatapodMinigameChecks();
-            func_86E01898();
-            func_86E00FD8();
+            miniUpdateRocksPositions();
+            func_86E00FD8();	// update metapod models?
             func_86E02150();
-            func_86E01990();
+            miniMetapodCameraControls();
         } else {
             func_86E02A28();
         }
@@ -1838,7 +1839,7 @@ void func_86E02C5C(void) {
         miniMetapods[i].unk_23C = D_86E04CB4[var_v1][0];
         miniMetapods[i].unk_168 = func_80019D18(miniMetapods[i].unk_23C);
         miniMetapods[i].unk_288 = D_86E04CB4[var_v1][1];
-        miniMetapods[i].unk_28C = D_86E04CB4[var_v1][2];
+        miniMetapods[i].height = D_86E04CB4[var_v1][2];
 
         func_8001BC34(&miniMetapods[i].unk_000, 0, miniMetapods[i].unk_23C,
                       miniMetapods[i].unk_168->unk_08->unk_00[0]);

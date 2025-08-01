@@ -369,7 +369,7 @@ void func_879033FC(MiniActor* arg0) {
 
     var_s2 = 0;
     for (i = 0; i < 4; i++) {
-        if (arg0[i].unk_2A8 != 0) {
+        if (arg0[i].isWinner != 0) {
             temp_a2 = D_87903E60[D_87903DD4][var_s2];
             if (arg0[i].isComp != 0) {
                 func_87801644(-1 - i, 0x78, temp_a2, 1.0f);

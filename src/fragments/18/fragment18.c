@@ -1724,13 +1724,13 @@ void func_86C00368(s16 arg0, s16 arg1) {
 void func_86C003AC(MiniActor* arg0) {
     s16 idx = arg0 - miniEkanses;
 
-    arg0->localOrigin.x = arg0->unk_1D8.x = skansActorInfo[idx].pos.x;
-    arg0->localOrigin.y = arg0->unk_1D8.y = skansActorInfo[idx].pos.y;
-    arg0->localOrigin.z = arg0->unk_1D8.z = skansActorInfo[idx].pos.z;
+    arg0->position_1.x = arg0->unk_1D8.x = skansActorInfo[idx].pos.x;
+    arg0->position_1.y = arg0->unk_1D8.y = skansActorInfo[idx].pos.y;
+    arg0->position_1.z = arg0->unk_1D8.z = skansActorInfo[idx].pos.z;
 
-    arg0->globalPos.x = 0.0f;
-    arg0->globalPos.y = -30.0f;
-    arg0->globalPos.z = 0.0f;
+    arg0->position_2.x = 0.0f;
+    arg0->position_2.y = -30.0f;
+    arg0->position_2.z = 0.0f;
 }
 
 void initEkans(MiniActor* ekans, s16 player) {
@@ -1741,15 +1741,15 @@ void initEkans(MiniActor* ekans, s16 player) {
     ekans->scale.y = 1.0f;
     ekans->scale.z = 1.0f;
 
-    ekans->localOrigin.x = ekans->unk_1D8.x = skansActorInfo[player].pos.x;
-    ekans->localOrigin.y = ekans->unk_1D8.y = skansActorInfo[player].pos.y;
-    ekans->localOrigin.z = ekans->unk_1D8.z = skansActorInfo[player].pos.z;
+    ekans->position_1.x = ekans->unk_1D8.x = skansActorInfo[player].pos.x;
+    ekans->position_1.y = ekans->unk_1D8.y = skansActorInfo[player].pos.y;
+    ekans->position_1.z = ekans->unk_1D8.z = skansActorInfo[player].pos.z;
 
-    ekans->globalPos.y = 10.0f;
+    ekans->position_2.y = 10.0f;
     ekans->unk_288 = 50.0f;
-    ekans->unk_28C = 140.0f;
+    ekans->height = 140.0f;
 
-    ekans->unk_21C = -0x8000;
+    ekans->yRot_1 = -0x8000;
     ekans->miniMaxHealth = 0x64;
     ekans->miniHealth = ekans->miniMaxHealth;
 
@@ -1880,8 +1880,8 @@ void humanEkansControls(MiniActor* ekans) {
             var_v1 = 0x1E0;
         }
 
-        ekans->unk_228 += direction * (var_v1 + 0x180);
-        ekans->unk_228 = func_86C00668(ekans, ekans->unk_228);
+        ekans->yRot_2 += direction * (var_v1 + 0x180);
+        ekans->yRot_2 = func_86C00668(ekans, ekans->yRot_2);
     }
 
     if (stickY >= 0) {
@@ -1931,8 +1931,8 @@ void humanEkansControls(MiniActor* ekans) {
             ekans->launchForce = var_ft4;
             ekans->unk_22E = 0;
             ekans->stickMagnitude1 = 0.0f;
-            ekans->globalPos.x = 0.0f;
-            ekans->globalPos.z = 0.0f;
+            ekans->position_2.x = 0.0f;
+            ekans->position_2.z = 0.0f;
             ekans->mainState = 1;
         }
 
@@ -2131,8 +2131,8 @@ void func_86C00F70(MiniActor* ekans) {
     idx = activeDigletts[ekans->playerId].diglettId;
     tempDiglett = &miniDigletts[idx];
 
-    sp3C.x = tempDiglett->unk_190.x - ekans->unk_190.x;
-    sp3C.z = tempDiglett->unk_190.z - ekans->unk_190.z;
+    sp3C.x = tempDiglett->totalPos.x - ekans->totalPos.x;
+    sp3C.z = tempDiglett->totalPos.z - ekans->totalPos.z;
 
     ekans->unk_222 = func_86C00668(ekans, func_81400BBC(sp3C) + func_81400B00(sp36) + 0x8000);
     ekans->unk_22E = func_878001E8(sp32) + sp34;
@@ -2246,7 +2246,7 @@ void compEkansControls(MiniActor* ekans) {
         case 2:					//	comp L R
             if (func_86C00B0C(ekans) != 0) {
                 ekans->compState = 1;
-            } else if (func_81400550(&ekans->unk_228, ekans->unk_222, ekans->unk_22E) != 0) {
+            } else if (func_81400550(&ekans->yRot_2, ekans->unk_222, ekans->unk_22E) != 0) {
                 ekans->unk_29E = func_86C01408();
                 ekans->compState++;
             }
@@ -2266,7 +2266,7 @@ void compEkansControls(MiniActor* ekans) {
 
         case 4:					//	comp launch (only y speed)
             if (func_81400760(&ekans->launchForce, ekans->stickMagnitude1, 8.0f) != 0) {
-                ekans->globalPos.z = ekans->globalPos.x = 0.0f;
+                ekans->position_2.z = ekans->position_2.x = 0.0f;
                 ekans->stickMagnitude1 = 0;
                 ekans->mainState = 1;
                 ekans->compState++;
@@ -2322,7 +2322,7 @@ void ekansFixDirToDiglett(MiniActor* ekans, UNUSED s32 nPlayer, s32 nActiveDigle
         ekans->unk_1FC = -ekans->unk_1FC * 0.75f;
     }
 
-    ekans->globalPos.y += ekans->unk_1FC;
+    ekans->position_2.y += ekans->unk_1FC;
 
     func_86C00368(5, nActiveDiglett);
 
@@ -2434,13 +2434,13 @@ void func_86C01D2C(MiniActor* ekans, s32 nPlayer) {
     ekans->unk_1F8 = 0.0f;
     ekans->unk_200 = 0.0f;
 
-    ekans->localOrigin.x = ekans->unk_190.x;
-    ekans->localOrigin.z = ekans->unk_190.z;
+    ekans->position_1.x = ekans->totalPos.x;
+    ekans->position_1.z = ekans->totalPos.z;
 
     ekans->unk_1B4.x = diglettColl.x;
     ekans->unk_1B4.z = diglettColl.z;
 
-    ekans->globalPos.x = ekans->globalPos.z = 0.0f;
+    ekans->position_2.x = ekans->position_2.z = 0.0f;
 
     ekans->unk_22E = 0x2000;
     ekans->unk_000.unk_000.unk_02 &= 0xFFDF;
@@ -2480,8 +2480,8 @@ void func_86C01D2C(MiniActor* ekans, s32 nPlayer) {
 
 void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
     if (ekans->midAirState == 3) {
-        func_81400760(&ekans->localOrigin.x, ekans->unk_1B4.x, ekans->dist2DiglettLevelX);
-        func_81400760(&ekans->localOrigin.z, ekans->unk_1B4.z, ekans->dist2DiglettLevelZ);
+        func_81400760(&ekans->position_1.x, ekans->unk_1B4.x, ekans->dist2DiglettLevelX);
+        func_81400760(&ekans->position_1.z, ekans->unk_1B4.z, ekans->dist2DiglettLevelZ);
     }
 
     if (ekans->unk_298 != 0) {
@@ -2492,8 +2492,8 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
     }
 
     if (ekans->midAirState < 5) {
-        if (ekans->globalPos.y <= -50.0f) {
-            ekans->globalPos.y = -50.0f;
+        if (ekans->position_2.y <= -50.0f) {
+            ekans->position_2.y = -50.0f;
             ekans->unk_1F8 = 0.0f;
             ekans->unk_200 = 0.0f;
             if (ekans->midAirState == 3) {
@@ -2512,8 +2512,8 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
             ekans->ekansDiglettHitScore = 0;
         }
     } else {
-        if ((ekans->globalPos.y <= -50.0f) && (ekans->midAirState >= 5)) {
-            ekans->globalPos.y = -50.0f;
+        if ((ekans->position_2.y <= -50.0f) && (ekans->midAirState >= 5)) {
+            ekans->position_2.y = -50.0f;
             ekans->weight = 0.0f;
             ekans->unk_1FC = 0.0f;
             func_81400550(&ekans->unk_22E, 0, 0x100);
@@ -2539,7 +2539,7 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
 
             ekans->unk_000.unk_000.unk_01 &= ~1;
             ekans->unk_000.unk_01D = 0xFF;
-            ekans->unk_234 = 0;
+            ekans->yRot_3 = 0;
             ekans->unk_22E = 0;
             ekans->midAirState = 0;
             ekans->ekansIsMidAir = 0;
@@ -2547,16 +2547,16 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
         }
     }
 
-    ekans->unk_234 += ekans->unk_22E;
+    ekans->yRot_3 += ekans->unk_22E;
 }
 
 void func_86C021FC(MiniActor* ekans) {
     if (ekans->stickMagnitude1 > 5.0f) {
-        func_81400760(&ekans->globalPos.x, (-SINS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
-        func_81400760(&ekans->globalPos.z, (-COSS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
+        func_81400760(&ekans->position_2.x, (-SINS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
+        func_81400760(&ekans->position_2.z, (-COSS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
     } else {
-        ekans->globalPos.x = 0.0f;
-        ekans->globalPos.z = 0.0f;
+        ekans->position_2.x = 0.0f;
+        ekans->position_2.z = 0.0f;
     }
 }
 
@@ -2606,15 +2606,15 @@ void miniEkansCompStateMachine(MiniActor* ekans, s32 nPlayer) {
             break;
 
         case 0x5:
-            if (func_81400760(&ekans->globalPos.y, 10.0f, 4.0f) != 0) {
+            if (func_81400760(&ekans->position_2.y, 10.0f, 4.0f) != 0) {
                 ekans->mainState = 0;
             }
             break;
 
         case 0x64:
-            func_81400760(&ekans->globalPos.x, 0.0f, 4.0f);
-            func_81400760(&ekans->globalPos.z, 0.0f, 4.0f);
-            if (func_81400550(&ekans->unk_228, -0x8000, 0x400) != 0) {
+            func_81400760(&ekans->position_2.x, 0.0f, 4.0f);
+            func_81400760(&ekans->position_2.z, 0.0f, 4.0f);
+            if (func_81400550(&ekans->yRot_2, -0x8000, 0x400) != 0) {
                 ekans->mainState++;
                 func_8001BD04(&ekans->unk_000, 2);
             }
@@ -2669,15 +2669,15 @@ void initDiglett(MiniActor* diglett, s32 nDiglett) {
     diglett->scale.y = 1.0f;
     diglett->scale.z = 1.0f;
 
-    diglett->localOrigin.x = diglettActorInfo[nDiglett].pos.x;
-    diglett->localOrigin.y = diglettActorInfo[nDiglett].pos.y;
-    diglett->localOrigin.z = diglettActorInfo[nDiglett].pos.z;
+    diglett->position_1.x = diglettActorInfo[nDiglett].pos.x;
+    diglett->position_1.y = diglettActorInfo[nDiglett].pos.y;
+    diglett->position_1.z = diglettActorInfo[nDiglett].pos.z;
 
     diglett->unk_288 = diglettActorInfo[nDiglett].unk_12;
-    diglett->unk_28C = diglettActorInfo[nDiglett].unk_14;
+    diglett->height = diglettActorInfo[nDiglett].unk_14;
 
     diglett->miniHealth = diglett->miniMaxHealth = 0x64;
-    diglett->unk_1E4 = diglett->unk_28C * 0.5f;
+    diglett->unk_1E4 = diglett->height * 0.5f;
 
     func_8001BD04(&diglett->unk_000, 1);
     func_879004F8(&diglett->unk_000);
@@ -2693,9 +2693,9 @@ void initDiglettHole(MiniActor* hole, s32 arg1) {
     hole->scale.y = 1.0f;
     hole->scale.z = 1.0f;
 
-    hole->localOrigin.x = diglettActorInfo[arg1].pos.x;
-    hole->localOrigin.y = diglettActorInfo[arg1].pos.y;
-    hole->localOrigin.z = diglettActorInfo[arg1].pos.z;
+    hole->position_1.x = diglettActorInfo[arg1].pos.x;
+    hole->position_1.y = diglettActorInfo[arg1].pos.y;
+    hole->position_1.z = diglettActorInfo[arg1].pos.z;
 
     hole->unk_000.unk_000.unk_02 &= ~0x40;
 }
@@ -3016,7 +3016,7 @@ void func_86C03128(void) {
         for (i = 0; i < 4; i++, ekans++) {
             if (var_s2 == ekans->ekansScore) {
                 func_87802F00(i);
-                ekans->unk_2A8 = 1;
+                ekans->isWinner = 1;
                 ekans->mainState = 0x64;
             }
         }
