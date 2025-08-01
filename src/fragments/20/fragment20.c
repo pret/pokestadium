@@ -1275,17 +1275,16 @@ void func_86E0182C(MiniActor* arg0) {
 }
 
 void func_86E01898(void) {
-    s32 var_s1;
-
+	s32 i;
     miniRockPtr = miniMetapodRocks;
-    var_s1 = 0;
-    do {
+    for (i = 0; i < 20; ++i)
+    {
         func_86E016EC(miniRockPtr);
-        func_86E0182C(miniRockPtr);
-        var_s1 += 1;
+        func_86E0182C(miniRockPtr);    	
         miniRockPtr = &miniRockPtr[1];
-    } while (var_s1 != 0x14);
+    }
 }
+
 
 void func_86E01904(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
