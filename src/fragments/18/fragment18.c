@@ -1581,7 +1581,7 @@ static Color_RGB8 playerColors[] = {
 };
 
 s32 func_86C00020(MiniActor* ekans) {
-    f32 tmp = ekans->unk_274;
+    f32 tmp = ekans->launchForce;
     s32 var_v1 = 0;
 
     if (tmp > 58.0f) {
@@ -1788,7 +1788,7 @@ void initEkanses(void) {
 }
 
 f32 func_86C0063C(MiniActor* ekans) {
-    return (ekans->unk_284 <= ekans->unk_280) ? ekans->unk_280 : ekans->unk_284;
+    return (ekans->stickMagnitude2 <= ekans->stickMagnitude1) ? ekans->stickMagnitude1 : ekans->stickMagnitude2;
 }
 
 s16 func_86C00668(MiniActor* arg0, s16 arg1) {
@@ -1891,21 +1891,21 @@ void humanEkansControls(MiniActor* ekans) {
     if (ekans->mainState == 0) {
         var_v0 = 0;
         var_ft4 = 0.0f;
-        temp_fv1 = ekans->unk_280 - stickMagnitude;
-        temp_fa0 = ekans->unk_284 - ekans->unk_280;
+        temp_fv1 = ekans->stickMagnitude1 - stickMagnitude;
+        temp_fa0 = ekans->stickMagnitude2 - ekans->stickMagnitude1;
         if (temp_fa0 <= temp_fv1) {
-            if ((ekans->unk_280 <= 12.0f) && (temp_fv1 >= 5.0f) && (stickMagnitude == 0.0f)) {
+            if ((ekans->stickMagnitude1 <= 12.0f) && (temp_fv1 >= 5.0f) && (stickMagnitude == 0.0f)) {
                 var_v0 = 1;
-                var_ft4 = ekans->unk_280;
+                var_ft4 = ekans->stickMagnitude1;
             }
 
-            if (ekans->unk_280 <= 30.0f) {
+            if (ekans->stickMagnitude1 <= 30.0f) {
                 if (temp_fv1 >= 10.0f) {
                     direction = 1;
                     var_v0 = 1;
                     var_ft4 = func_86C0063C(ekans);
                 }
-            } else if (ekans->unk_280 < 50.0f) {
+            } else if (ekans->stickMagnitude1 < 50.0f) {
                 if (temp_fv1 >= 15.0f) {
                     direction = 1;
                     var_v0 = 1;
@@ -1918,7 +1918,7 @@ void humanEkansControls(MiniActor* ekans) {
             }
         } else if (temp_fa0 >= 25.0f) {
             var_v0 = 1;
-            var_ft4 = ekans->unk_284;
+            var_ft4 = ekans->stickMagnitude2;
         }
 
         if (var_v0 != 0) {
@@ -1928,16 +1928,16 @@ void humanEkansControls(MiniActor* ekans) {
                 var_ft4 = 24.0f;
             }
 
-            ekans->unk_274 = var_ft4;
+            ekans->launchForce = var_ft4;
             ekans->unk_22E = 0;
-            ekans->unk_280 = 0.0f;
+            ekans->stickMagnitude1 = 0.0f;
             ekans->globalPos.x = 0.0f;
             ekans->globalPos.z = 0.0f;
             ekans->mainState = 1;
         }
 
-        ekans->unk_284 = ekans->unk_280;
-        ekans->unk_280 = stickMagnitude;
+        ekans->stickMagnitude2 = ekans->stickMagnitude1;
+        ekans->stickMagnitude1 = stickMagnitude;
     }
 }
 
@@ -2079,22 +2079,22 @@ s16 func_86C00D50(MiniActor* arg0) {
     return var_a0;
 }
 
-s32 func_86C00EF8(MiniActor* arg0) {
-    switch (arg0->unk_2AE) {
+s32 func_86C00EF8(MiniActor* compEkans) {
+    switch (compEkans->unk_2AE) {
         case 0:
-            arg0->playerId = func_86C00BB4();
+            compEkans->playerId = func_86C00BB4();
             break;
 
         case 1:
-            arg0->playerId = func_86C00C40(arg0);
+            compEkans->playerId = func_86C00C40(compEkans);
             break;
 
         case 2:
-            arg0->playerId = func_86C00D50(arg0);
+            compEkans->playerId = func_86C00D50(compEkans);
             break;
     }
 
-    return arg0->playerId;
+    return compEkans->playerId;
 }
 
 void func_86C00F70(MiniActor* ekans) {
@@ -2183,7 +2183,7 @@ void miniEkansCompGetForce(MiniActor* ekans) {
             }
             break;
     }
-    ekans->unk_280 = force;
+    ekans->stickMagnitude1 = force;
 }
 
 s16 func_86C01408(void) {
@@ -2265,9 +2265,9 @@ void compEkansControls(MiniActor* ekans) {
             break;
 
         case 4:					//	comp launch (only y speed)
-            if (func_81400760(&ekans->unk_274, ekans->unk_280, 8.0f) != 0) {
+            if (func_81400760(&ekans->launchForce, ekans->stickMagnitude1, 8.0f) != 0) {
                 ekans->globalPos.z = ekans->globalPos.x = 0.0f;
-                ekans->unk_280 = 0;
+                ekans->stickMagnitude1 = 0;
                 ekans->mainState = 1;
                 ekans->compState++;
             }
@@ -2291,9 +2291,9 @@ void compEkansControls(MiniActor* ekans) {
 
 void func_86C016C8(MiniActor* ekans) {
     ekans->weight = 1.0f;
-    ekans->unk_1F8 = (SINS(ekans->totalRot.y) * (26.0f + ekans->unk_274)) / 10.0f;
-    ekans->unk_1FC = (ekans->unk_274 + 70.0f) * 0.125f;
-    ekans->unk_200 = (COSS(ekans->totalRot.y) * (26.0f + ekans->unk_274)) / 10.0f;
+    ekans->unk_1F8 = (SINS(ekans->totalRot.y) * (26.0f + ekans->launchForce)) / 10.0f;
+    ekans->unk_1FC = (ekans->launchForce + 70.0f) * 0.125f;
+    ekans->unk_200 = (COSS(ekans->totalRot.y) * (26.0f + ekans->launchForce)) / 10.0f;
 }
 
 void func_86C01748(void) {
@@ -2551,9 +2551,9 @@ void func_86C01FAC(MiniActor* ekans, s32 nPlayer) {
 }
 
 void func_86C021FC(MiniActor* ekans) {
-    if (ekans->unk_280 > 5.0f) {
-        func_81400760(&ekans->globalPos.x, (-SINS(ekans->totalRot.y) * ekans->unk_280) / 3.0f, 4.0f);
-        func_81400760(&ekans->globalPos.z, (-COSS(ekans->totalRot.y) * ekans->unk_280) / 3.0f, 4.0f);
+    if (ekans->stickMagnitude1 > 5.0f) {
+        func_81400760(&ekans->globalPos.x, (-SINS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
+        func_81400760(&ekans->globalPos.z, (-COSS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
     } else {
         ekans->globalPos.x = 0.0f;
         ekans->globalPos.z = 0.0f;
@@ -2601,7 +2601,7 @@ void miniEkansCompStateMachine(MiniActor* ekans, s32 nPlayer) {
             ekans->unk_000.unk_000.unk_02 |= 0x20;
             ekans->unk_298 = 0;
             ekans->unk_296 = 0;
-            ekans->unk_280 = 0.0f;
+            ekans->stickMagnitude1 = 0.0f;
             ekans->mainState++;
             break;
 

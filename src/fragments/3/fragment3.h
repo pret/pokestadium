@@ -28,10 +28,10 @@ typedef struct MiniActor {
     /* 0x1F8 */ f32 unk_1F8;		//	speed (x) on ekans and metapod
     /* 0x1FC */ f32 unk_1FC;		//	speed (y) on ekans and metapod
     /* 0x200 */ f32 unk_200;		//	speed (z) on ekans and metapod
-    /* 0x204 */ f32 unk_204;		//	x acceleration on metapod	**	metapod only
-    /* 0x208 */ f32 unk_208;		//	y acceleration on metapod	**	metapod only
-    /* 0x20C */ f32 unk_20C;		//	z acceleration on metapod	**	metapod only
-    /* 0x210 */ f32 weight;		//	weight? gravity ? y acceleration ? on ekans and metapod
+    /* 0x204 */ f32 xAccel; 		//	x acceleration on metapod	**	metapod only
+    /* 0x208 */ f32 yAccel; 		//	y acceleration on metapod	**	metapod only
+    /* 0x20C */ f32 zAccel; 		//	z acceleration on metapod	**	metapod only
+    /* 0x210 */ f32 weight;
     /* 0x214 */ Vec3s totalRot;		//	total rotation
     /* 0x21A */ s16 unk_21A;		//	x rotation 1, always zero
     /* 0x21C */ s16 unk_21C;		//	y rotation 1
@@ -52,7 +52,10 @@ typedef struct MiniActor {
     /* 0x23A */ s16 unk_23A;		//	always zero
     /* 0x23C */ s16 unk_23C;        //  ??? some value to send to unk_000->unk_018
     /* 0x23E */ s16 mainState;		//	animation id or state
-    /* 0x240 */ s16 unk_240;		//	metapod got rock squashed
+    /* 0x240 */ union {
+    			s16 unk_240;
+    			s16 isSquashed;
+    		};
     /* 0x242 */ s16 compState;
     /* 0x244 */ s16 unk_244;		//	?
     /* 0x246 */ char unk246[0x2];	//	unused
@@ -71,36 +74,43 @@ typedef struct MiniActor {
     /* 0x266 */ s16 playerId;
     /* 0x268 */ s16 playerIdBuffer;	//	ekans only
     /* 0x26A */ s16 unk_26A;        //	some flag related to collisions
-    /* 0x26C */ s16 unk_26C;        //	animation id or state?
-    /* 0x26E */ s16 unk_26E;		//	animation something, always zero
+    /* 0x26C */ s16 unk_26C;        //	animation something
+    /* 0x26E */ s16 unk_26E;		//	animation something
     /* 0x270 */ s16 unk_270;
-    /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ?
-    /* 0x274 */ f32 unk_274;        //  ???
+    /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ? ;
+    /* 0x274 */ union{
+    			f32 unk_274;
+    			f32 diggingSpeed;
+    			f32 launchForce;
+    		};
     /* 0x278 */ char unk278[0x4];	//	unused
-    /* 0x27C */ f32 unk_27C;		//
-    /* 0x280 */ f32 unk_280;		//	stick magnitude on ekans? ; digging/animation speed on sandshrew
-    /* 0x284 */ f32 unk_284;		//	launch forse on ekans
+    /* 0x27C */ f32 diggingAccel2;	//
+    /* 0x280 */ union {
+    			f32 unk_280;
+    			f32 stickMagnitude1;
+    			f32 diggingAccel1;
+    		};
+    /* 0x284 */ f32 stickMagnitude2;	//	launch forse on ekans
     /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
     /* 0x28C */ f32 unk_28C;        //	top    of the hitbox ? / bounding box ? ;   double of 1E4
     /* 0x290 */ s16 unk_290;		//	always zero
     /* 0x292 */ s16 unk_292;		//	always zero
     /* 0x294 */ s16 unk_294;		//	always zero
     /* 0x296 */ s16 unk_296;
-    /* 0x298 */ s16 unk_298;		//	diglett bounceness on ekans ?
+    /* 0x298 */ s16 unk_298;		// timer after bouncin on digletts on ekans
     /* 0x29A */ union {
-                    s16 unk_29A;
-                    s16 sandshrewLastDir;
-                    s16 ekansDiglettHitScore;
-                    s16 metapodInputLockTimer;
-                };
-
+    			s16 unk_29A;
+    			s16 sandshrewLastDir;
+    			s16 ekansDiglettHitScore;
+    			s16 metapodInputLockTimer;
+    		};
     /* 0x29C */ s16 diglettIsGold;	//						**	diglett only
     /* 0x29E */ s16 unk_29E;        //  respawn time after landing on ekans ; something comp animation on metapod
-    /* 0x2A0 */ s16 unk_2A0;        //	ammount of frames L/R DL/DR was pressed on sandshrew and ekans
+    /* 0x2A0 */ s16 unk_2A0;        //	timer for correct L/R inpus on sandsrew; ammount of frmaes DL/DR was pressed on ekans
     /* 0x2A2 */ s16 ekansScore;		// 						**	ekans only
     /* 0x2A4 */ s16 unk_2A4;
     /* 0x2A6 */ s16 unk_2A6;		//	metapod state ?
-    /* 0x2A8 */ s16 unk_2A8;
+    /* 0x2A8 */ s16 unk_2A8;        //	is winner ? is alive ?
     /* 0x2AA */ s16 unk_2AA;
     /* 0x2AC */ s16 isComp;
     /* 0x2AE */ s16 unk_2AE;

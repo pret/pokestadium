@@ -619,20 +619,20 @@ void miniMetapodHumanControls(MiniActor* metapod) {
         metapod->metapodInputLockTimer--;
     }
 
-    if ((BTN_IS_DOWN(miniControllerPtr, BTN_A)) && (metapod->mainState == 0) && (metapod->unk_240 == 0) &&
+    if ((BTN_IS_DOWN(miniControllerPtr, BTN_A)) && (metapod->mainState == 0) && (metapod->isSquashed == 0) &&
         (metapod->unk_2AA == 0) && (metapod->metapodInputLockTimer == 0)) {
         metapod->mainState = 1;
     }
 
     switch (metapod->mainState) {
-        case 1:
+        case 1:		// start harden
             func_86E0034C(metapod);
             miniChangeActorAnim(metapod, 1, -1, 1);
             func_81407D48(1.0f, metapod->unk_190, metapod->totalRot, func_879029F0, &D_87903E40, 4);
             metapod->mainState++;
             break;
 
-        case 2:
+        case 2:     //  harden
             if (func_80017484(&metapod->unk_000, 5) != 0) {
                 metapod->unk_000.unk_000.unk_02 &= ~0x20;
             }
@@ -789,7 +789,7 @@ void func_86E007CC(MiniActor* metapod, s32 player) {
     s32 sp20;
     s32 var_t0 = 0;
 
-    if (metapod->unk_240 == 0) {
+    if (metapod->isSquashed == 0) {
         switch (D_87906046) {
             case 0:
                 sp20 = 0x1E;
@@ -851,7 +851,7 @@ void miniMetapodCompControls(MiniActor* metapod, s32 nPlayer) {
         case 0x1:
             metapod->unk_244--;
             if (metapod->unk_244 < 0) {
-                if ((metapod->unk_2AA == 0) && (metapod->unk_240 == 0)) {
+                if ((metapod->unk_2AA == 0) && (metapod->isSquashed == 0)) {
                     if (metapod->unk_29E > 0) {
                         miniChangeActorAnim(metapod, 1, -1, 1);
                         metapod->mainState = 1;
@@ -893,7 +893,7 @@ void miniMetapodCompControls(MiniActor* metapod, s32 nPlayer) {
     }
 }
 
-void func_86E00AF4(void) {
+void miniUpdateMetapods(void) {
     s32 i;
 
     miniControllerPtr = gPlayer1Controller;
@@ -932,7 +932,7 @@ s32 func_86E00C34(s32 nPlayer) {
             func_86E001A0(7, nPlayer);
             sp1C = 1;
         } else {
-            miniMetapodPtr->unk_240 = 1; // rock squashing
+            miniMetapodPtr->isSquashed = 1; // rock squashing
             func_86E004FC(miniMetapodPtr);
             sp1C = 2;
         }
@@ -940,7 +940,7 @@ s32 func_86E00C34(s32 nPlayer) {
     return sp1C;
 }
 
-void func_86E00CAC(UNUSED MiniActor* metapod, s32 nPlayer) {
+void miniRockChecks(UNUSED MiniActor* metapod, s32 nPlayer) {
     s32 i;
     s32 colliding;
 
@@ -963,7 +963,7 @@ void func_86E00CAC(UNUSED MiniActor* metapod, s32 nPlayer) {
     }
 }
 
-void func_86E00D78(MiniActor* metapod, s32 nPlayer) {
+void miniMatapodChecks(MiniActor* metapod, s32 nPlayer) {
     if ((miniMetapodPtr->damageTimer > 0) && (metapod->unk_2A8 == 0)) {
         if (miniMetapodPtr->damageTimer >= 0x28) {
             miniMetapodPtr->miniHealth -= miniMetapodPtr->damageTimer;
@@ -986,32 +986,32 @@ void func_86E00D78(MiniActor* metapod, s32 nPlayer) {
             miniMetapodPtr->unk_2AA = 1;
         }
     } else {
-        switch (miniMetapodPtr->unk_240) {
+        switch (miniMetapodPtr->isSquashed) {
             case 1:
                 miniMetapodPtr->damageTimer += 0x1E;
                 miniChangeActorAnim(miniMetapodPtr, 2, 0, 1);
                 func_86E001A0(8, nPlayer);
-                miniMetapodPtr->unk_240++;
+                miniMetapodPtr->isSquashed++;
                 break;
 
             case 2:
                 if (miniMetapodPtr->isIdle == 0) {
-                    miniMetapodPtr->unk_240 = 0;
+                    miniMetapodPtr->isSquashed = 0;
                 }
                 break;
         }
     }
 }
 
-void func_86E00ED0(void) {
+void miniMatapodMinigameChecks(void) {
     s32 i;
 
     miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
         if (minigameInputLock != 0) {
-            func_86E00CAC(miniMetapodPtr, i);
-            func_86E00D78(miniMetapodPtr, i);
+            miniRockChecks(miniMetapodPtr, i);
+            miniMatapodChecks(miniMetapodPtr, i);
         }
         miniMetapodPtr++;
     }
@@ -1151,7 +1151,7 @@ void func_86E01414(MiniActor* rock) {
     rock->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86E01428(MiniActor* rock) {
+void miniRockStateMachine(MiniActor* rock) {
     UNUSED s32 pad[3];
     s16 temp_a1 = rock->playerId;
     Vec3f sp3C;
@@ -1234,11 +1234,11 @@ void func_86E016EC(MiniActor* arg0) {
     arg0->unk_190.z = arg0->unk_19C.z = arg0->localOrigin.z + arg0->globalPos.z;
 }
 
-void func_86E0172C(MiniActor* rock) {
+void miniUpdateRockTransform(MiniActor* rock) {
     if (rock->mainState != 0) {
-        rock->unk_1F8 += rock->unk_204;
-        rock->unk_1FC += rock->unk_208 - rock->weight;
-        rock->unk_200 += rock->unk_20C;
+        rock->unk_1F8 += rock->xAccel;
+        rock->unk_1FC += rock->yAccel - rock->weight;
+        rock->unk_200 += rock->zAccel;
         rock->globalPos.x += rock->unk_1F8;
         rock->globalPos.y += rock->unk_1FC;
         rock->globalPos.z += rock->unk_200;
@@ -1247,13 +1247,13 @@ void func_86E0172C(MiniActor* rock) {
     func_86E016EC(rock);
 }
 
-void func_86E017C0(void) {
+void miniUpdateRocks(void) {
     s32 i;
 
     miniRockPtr = miniMetapodRocks;
     for (i = 0; i < 20; i++) {
-        func_86E01428(miniRockPtr);
-        func_86E0172C(miniRockPtr);
+        miniRockStateMachine(miniRockPtr);
+        miniUpdateRockTransform(miniRockPtr);
         miniRockPtr++;
     }
 }
@@ -1508,7 +1508,7 @@ s32 func_86E01F50(void) {
     return ret;
 }
 
-void func_86E01F8C(void) {
+void miniMetapodMinigameStateMachine(void) {
     switch (minigameState) {
         case 1:
             miniInputLockTimer = 0xF;
@@ -1764,10 +1764,10 @@ void func_86E02A64(void) {
 
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86E01F8C();
-            func_86E00AF4();
-            func_86E017C0();
-            func_86E00ED0();
+            miniMetapodMinigameStateMachine();
+            miniUpdateMetapods();
+            miniUpdateRocks();
+            miniMatapodMinigameChecks();
             func_86E01898();
             func_86E00FD8();
             func_86E02150();

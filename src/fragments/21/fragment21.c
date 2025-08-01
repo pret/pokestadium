@@ -1613,8 +1613,8 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
     sandshrew->unk_2A8 = 0;
     sandshrew->unk_2A4 = 0;
 
-    sandshrew->unk_274 = 0.0f;
-    sandshrew->unk_27C = 0.0f;
+    sandshrew->diggingSpeed = 0.0f;
+    sandshrew->diggingAccel2 = 0.0f;
 
     sandshrew->totalRot.x = sandshrew->unk_21A = 0;
     sandshrew->totalRot.y = sandshrew->unk_21C = 0;
@@ -1668,11 +1668,11 @@ void func_86F003FC(MiniActor* actor, s32 animID) {
 }
 
 void func_86F00450(MiniActor* sandshrew, f32 arg1) {
-    sandshrew->unk_280 -= arg1;
-    if (sandshrew->unk_280 < 1.0f) {
-        sandshrew->unk_280 = 1.0f;
+    sandshrew->diggingAccel1 -= arg1;
+    if (sandshrew->diggingAccel1 < 1.0f) {
+        sandshrew->diggingAccel1 = 1.0f;
     }
-    sandshrew->unk_27C = sandshrew->unk_280;
+    sandshrew->diggingAccel2 = sandshrew->diggingAccel1;
 }
 
 void func_86F0048C(MiniActor* sandshrew, s32 arg1) {
@@ -1680,19 +1680,19 @@ void func_86F0048C(MiniActor* sandshrew, s32 arg1) {
         sandshrew->sandshrewLastDir = 0;
         sandshrew->unk_2B0 = 0;
         sandshrew->unk_2A0 = 0;
-        sandshrew->unk_280 = 0.0f;
-        sandshrew->unk_27C = 0.0f;
+        sandshrew->diggingAccel1 = 0.0f;
+        sandshrew->diggingAccel2 = 0.0f;
     } else if (arg1 == 1) {
         sandshrew->unk_2A0 = 0x14;
         sandshrew->unk_2B0 = 3;
         sandshrew->mainState = 1;
-        sandshrew->unk_280 = 10.0f;
-        sandshrew->unk_27C = 10.0f;
+        sandshrew->diggingAccel1 = 10.0f;
+        sandshrew->diggingAccel2 = 10.0f;
     } else {
         sandshrew->unk_2A0 = 0x14;
         sandshrew->unk_2B0 = 3;
-        sandshrew->unk_27C = sandshrew->unk_280;
-        sandshrew->unk_280 = 10.0f;
+        sandshrew->diggingAccel2 = sandshrew->diggingAccel1;
+        sandshrew->diggingAccel1 = 10.0f;
     }
 }
 
@@ -1760,30 +1760,30 @@ void sandshrewPlayerInput(MiniActor* sandshrew) {
     if (sandshrew->unk_2A0 < 0) {
         sandshrew->unk_2A0 = 0;
     }
-    sandshrew->unk_274 += sandshrew->unk_27C;
+    sandshrew->diggingSpeed += sandshrew->diggingAccel2;
 }
 
 void sandshrewCompControls(MiniActor* arg0) {
     switch (D_87906046) {
         case 0:
-            arg0->unk_27C = (func_81400A78(0xA) * 0.1f) + 3.0f;
+            arg0->diggingAccel2 = (func_81400A78(0xA) * 0.1f) + 3.0f;
             break;
 
         case 1:
-            arg0->unk_27C = (func_81400A78(0x14) * 0.15f) + 5.0f;
+            arg0->diggingAccel2 = (func_81400A78(0x14) * 0.15f) + 5.0f;
             break;
 
         case 2:
-            arg0->unk_27C = (func_81400A78(0x14) * 0.17f) + 6.0f;
+            arg0->diggingAccel2 = (func_81400A78(0x14) * 0.17f) + 6.0f;
             break;
 
         case 3:
-            arg0->unk_27C = (func_81400A78(0x12) * 0.2f) + 6.4f;
+            arg0->diggingAccel2 = (func_81400A78(0x12) * 0.2f) + 6.4f;
             break;
     }
 
-    arg0->unk_274 += arg0->unk_27C;
-    if ((arg0->mainState == 0) && (arg0->unk_27C != 0.0f)) {
+    arg0->diggingSpeed += arg0->diggingAccel2;
+    if ((arg0->mainState == 0) && (arg0->diggingAccel2 != 0.0f)) {
         arg0->mainState = 1;
     }
 }
@@ -1809,7 +1809,7 @@ void func_86F00920(MiniActor* sandshrew) {
             break;
 
         case 0x3:               //  diggin
-            if (sandshrew->unk_27C != 0) {
+            if (sandshrew->diggingAccel2 != 0) {
                 if (D_8140E6CC == 0) {
                     func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 1);	//	perticles
                     func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 2);	//	particles
@@ -1826,9 +1826,9 @@ void func_86F00920(MiniActor* sandshrew) {
                     }
                 }
 
-                func_80017454(&sandshrew->unk_000, ((s32)sandshrew->unk_27C << 0xE) + 0xC000);
+                func_80017454(&sandshrew->unk_000, ((s32)sandshrew->diggingAccel2 << 0xE) + 0xC000);
 
-                holeDeepeness = sandshrew->unk_274 / 5000.0f;
+                holeDeepeness = sandshrew->diggingSpeed / 5000.0f;
                 if (holeDeepeness > 0.2f) {
                     sandshrew->globalPos.y -= holeDeepeness;
                 }
@@ -1838,7 +1838,7 @@ void func_86F00920(MiniActor* sandshrew) {
                     func_80017464(&sandshrew->unk_000, 0);
                 }
             } else {
-                sandshrew->unk_274 = 0.0f;
+                sandshrew->diggingSpeed = 0.0f;
                 func_8001BD04(&sandshrew->unk_000, 3);
                 func_800173DC(&sandshrew->unk_000, 0, sandshrew->unk_000.unk_040.unk_04, 0x10000);
                 func_80017464(&sandshrew->unk_000, 0);
@@ -1946,14 +1946,14 @@ void initSandshrewHoles(void) {
 void func_86F00F68(MiniActor* sandshrewHole, MiniActor* sandshrewPlayer) {
     s32 var_a1;
 
-    if ((sandshrewPlayer->unk_274 > 300.0f) && (sandshrewHole->mainState == 0)) {
+    if ((sandshrewPlayer->diggingSpeed > 300.0f) && (sandshrewHole->mainState == 0)) {
         func_86F003FC(sandshrewHole, 0);
         sandshrewHole->unk_000.unk_000.unk_01 |= 1;
         sandshrewHole->mainState = 1;
     }
 
     if (sandshrewHole->mainState != 0) {
-        if (sandshrewPlayer->unk_274 > 400.0f) {
+        if (sandshrewPlayer->diggingSpeed > 400.0f) {
             var_a1 = 0x5000;
         } else {
             var_a1 = 0;
@@ -2146,7 +2146,7 @@ void func_86F0164C(void) {
 
     miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        miniSandshrewPtr->unk_274 = miniSandshrewPtr->unk_27C = 0.0f;
+        miniSandshrewPtr->diggingSpeed = miniSandshrewPtr->diggingAccel2 = 0.0f;
         miniSandshrewPtr++;
     }
 }

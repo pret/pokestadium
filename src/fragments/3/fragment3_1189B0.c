@@ -260,18 +260,18 @@ void func_8790060C(MiniActor* actor) {
     actor->dist2DiglettLevelX = 0.0f;
     actor->unk_1E4 = 0.0f;
     actor->weight = 0.0f;
-    actor->unk_20C = 0.0f;
-    actor->unk_208 = 0.0f;
-    actor->unk_204 = 0.0f;
+    actor->zAccel = 0.0f;
+    actor->yAccel = 0.0f;
+    actor->xAccel = 0.0f;
     actor->unk_200 = 0.0f;
     actor->unk_1FC = 0.0f;
     actor->unk_1F8 = 0.0f;
     actor->unk_1F4 = 0.0f;
     actor->unk_1F0 = 0.0f;
     actor->unk_1EC = 0.0f;
-    actor->unk_284 = 0.0f;
+    actor->stickMagnitude2 = 0.0f;
     actor->unk_280 = 0.0f;
-    actor->unk_27C = 0.0f;
+    actor->diggingAccel2 = 0.0f;
     actor->unk_274 = 0.0f;
 
     actor->midAirState = actor->ekansIsMidAir = actor->unk_264 = actor->playerId = 0;
