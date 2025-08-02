@@ -29,16 +29,16 @@ extern u8 D_03040580[];
 extern u8 D_03040D80[];
 extern u8 D_03040980[];
 
-typedef struct unk_D_86E04BFC {
+typedef struct MiniRockInfo {
     /* 0x00 */ Vec3f unk_00;
     /* 0x0C */ Vec3s unk_0C;
     /* 0x12 */ s16 unk_12;
     /* 0x14 */ s16 unk_14;
     /* 0x16 */ s16 unk_16;
-} unk_D_86E04BFC; // size = 0x18
+} MiniRockInfo; // size = 0x18
 
-static unk_func_8790002C D_86E04D60[4];
-static unk_func_8790002C D_86E05830[20];
+static MiniActor miniMetapods[4];
+static MiniActor miniMetapodRocks[20];
 static s16 D_86E08E40;
 static unk_D_800AC870* D_86E08E44;
 
@@ -455,8 +455,8 @@ static u32 D_86E04AE0[] = {
 static s16 D_86E04B20 = 0;
 static s16 D_86E04B24 = 1;
 static s16 D_86E04B28 = 0;
-static unk_func_8790002C* D_86E04B2C = D_86E04D60;
-static unk_func_8790002C* D_86E04B30 = D_86E05830;
+static MiniActor* miniMetapodPtr = miniMetapods;
+static MiniActor* miniRockPtr = miniMetapodRocks;
 static u32 D_86E04B34[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0xFFE20032, 0x00000000,  0x00000000,
     0x05000000, 0x0D000000, 0x05000000, 0x14000000, 0x002B0012, 0xFFFFFF32, 0x16FFFFFF,  0x0F000003,
@@ -464,13 +464,13 @@ static u32 D_86E04B34[] = {
     0x00000000, D_86E04AE0, 0x06000000, 0x06000000, 0x05000000, 0x0A000000, &D_800AC840, 0x06000000,
     0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
-static Vec3f D_86E04BCC[] = {
+static Vec3f miniMetapodInfo[] = {
     { -54.0f, 0.0f, 0.0f },
     { -18.0f, 0.0f, 0.0f },
     { 18.0f, 0.0f, 0.0f },
     { 54.0f, 0.0f, 0.0f },
 };
-static unk_D_86E04BFC D_86E04BFC[] = {
+static MiniRockInfo miniRockInfos[] = {
     { { -54.0f, 0.0f, -300.0f }, { 0, 0, 0 }, 20, 40, 0 },
     { { -18.0f, 0.0f, -300.0f }, { 0, 0, 0 }, 20, 40, 0 },
     { { 18.0f, 0.0f, -300.0f }, { 0, 0, 0 }, 20, 40, 0 },
@@ -568,99 +568,99 @@ void func_86E001A0(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86E001E4(unk_func_8790002C* arg0, s32 arg1) {
-    func_8790060C(arg0);
+void miniInitMetapodPlayer(MiniActor* metapod, s32 arg1) {
+    miniActorAllToZero(metapod);
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    metapod->scale.x = 1.0f;
+    metapod->scale.y = 1.0f;
+    metapod->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86E04BCC[arg1].x;
-    arg0->unk_1A8.y = D_86E04BCC[arg1].y;
-    arg0->unk_1A8.z = D_86E04BCC[arg1].z;
+    metapod->position_1.x = miniMetapodInfo[arg1].x;
+    metapod->position_1.y = miniMetapodInfo[arg1].y;
+    metapod->position_1.z = miniMetapodInfo[arg1].z;
 
-    if (arg0->unk_23C == 0x9E) {
-        arg0->unk_1A8.z -= 10.0f;
+    if (metapod->unk_23C == 0x9E) { // if poke is metapod (not weedle) move it slightly
+        metapod->position_1.z -= 10.0f;
     }
 
-    arg0->unk_21A = 0;
-    arg0->unk_21C = 0;
-    arg0->unk_21E = 0;
-    arg0->unk_25C = 0x190;
-    arg0->unk_258 = arg0->unk_25C;
-    arg0->unk_2A6 = 5;
-    arg0->unk_1E4 = arg0->unk_28C * 0.5f;
+    metapod->xRot_1 = 0;
+    metapod->yRot_1 = 0;
+    metapod->zRot_1 = 0;
+    metapod->miniMaxHealth = 0x190;
+    metapod->miniHealth = metapod->miniMaxHealth;
+    metapod->unk_2A6 = 5;
+    metapod->middleHeight = metapod->halfHeight * 0.5f;
 
-    func_8001BD04(&arg0->unk_000, 0);
-    func_80017788(&arg0->unk_000);
-    arg0->unk_000.unk_01C = 0;
-    func_87900770(arg0);
-    arg0->unk_2AC = D_879060C4[arg1];
+    func_8001BD04(&metapod->unk_000, 0);
+    func_80017788(&metapod->unk_000);
+    metapod->unk_000.unk_01C = 0;
+    miniActorUpdateTransform(metapod);
+    metapod->isComp = D_879060C4[arg1];
 }
 
-void func_86E002E4(void) {
+void miniInitMetapodPlayers(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    miniMetapodPtr = miniMetapods;
     for (i = 0; i < 4; i++) {
-        func_86E001E4(D_86E04B2C, i);
-        D_86E04B2C++;
+        miniInitMetapodPlayer(miniMetapodPtr, i);
+        miniMetapodPtr++;
     }
 }
 
-void func_86E0034C(unk_func_8790002C* arg0) {
-    arg0->unk_25A++;
-    arg0->unk_272 = 4;
-    arg0->unk_000.unk_01C = 1;
+void func_86E0034C(MiniActor* metapod) {
+    metapod->damageTimer++;
+    metapod->unk_272 = 4;
+    metapod->unk_000.unk_01C = 1;
 }
 
-void func_86E0036C(unk_func_8790002C* arg0) {
-    if (arg0->unk_29A != 0) {
-        arg0->unk_29A--;
+void miniMetapodHumanControls(MiniActor* metapod) {
+    if (metapod->metapodInputLockTimer != 0) {
+        metapod->metapodInputLockTimer--;
     }
 
-    if ((D_879060BC->buttonDown & 0x8000) && (arg0->unk_23E == 0) && (arg0->unk_240 == 0) && (arg0->unk_2AA == 0) &&
-        (arg0->unk_29A == 0)) {
-        arg0->unk_23E = 1;
+    if ((BTN_IS_DOWN(miniControllerPtr, BTN_A)) && (metapod->mainState == 0) && (metapod->isSquashed == 0) &&
+        (metapod->unk_2AA == 0) && (metapod->metapodInputLockTimer == 0)) {
+        metapod->mainState = 1;
     }
 
-    switch (arg0->unk_23E) {
-        case 1:
-            func_86E0034C(arg0);
-            func_879002B8(arg0, 1, -1, 1);
-            func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_879029F0, &D_87903E40, 4);
-            arg0->unk_23E++;
+    switch (metapod->mainState) {
+        case 1: // start harden
+            func_86E0034C(metapod);
+            miniChangeActorAnim(metapod, 1, -1, 1);
+            func_81407D48(1.0f, metapod->totalPos, metapod->totalRot, func_879029F0, &D_87903E40, 4);
+            metapod->mainState++;
             break;
 
-        case 2:
-            if (func_80017484(&arg0->unk_000, 5) != 0) {
-                arg0->unk_000.unk_000.unk_02 &= ~0x20;
+        case 2: //  harden
+            if (func_80017484(&metapod->unk_000, 5) != 0) {
+                metapod->unk_000.unk_000.unk_02 &= ~0x20;
             }
 
-            if (!(D_879060BC->buttonDown & 0x8000) || (arg0->unk_2AA != 0)) {
-                arg0->unk_23E = 0;
-                arg0->unk_000.unk_000.unk_02 |= 0x20;
-            } else if ((D_879060BC->buttonDown & 0x8000) != 0) {
-                func_86E0034C(arg0);
+            if (!(BTN_IS_DOWN(miniControllerPtr, BTN_A)) || (metapod->unk_2AA != 0)) {
+                metapod->mainState = 0;
+                metapod->unk_000.unk_000.unk_02 |= 0x20;
+            } else if (BTN_IS_DOWN(miniControllerPtr, BTN_A)) {
+                func_86E0034C(metapod);
             }
             break;
     }
 }
 
-void func_86E004FC(unk_func_8790002C* arg0) {
-    if (arg0->unk_2AC != 0) {
-        arg0->unk_244 = 0;
-        arg0->unk_242 = 0;
+void func_86E004FC(MiniActor* metapod) {
+    if (metapod->isComp) {
+        metapod->unk_244 = 0;
+        metapod->compState = 0;
     }
 }
 
-s32 func_86E00518(unk_func_8790002C* arg0, s32 arg1) {
+s32 func_86E00518(UNUSED MiniActor* metapod, s32 arg1) {
     s32 sp1C;
     s32 sp18;
     s32 var_v1;
     s32 temp_v0;
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             if (arg1 < 0xA) {
                 sp1C = 0x32;
@@ -712,13 +712,13 @@ s32 func_86E00518(unk_func_8790002C* arg0, s32 arg1) {
     return var_v1;
 }
 
-void func_86E0063C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E0063C(MiniActor* metapod, s32 arg1) {
     s32 sp2C;
     s32 sp28;
     u32 sp24;
     u32 temp_s1 = func_878001E8(arg1);
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             sp2C = func_878001E8(0xA) + 2;
             sp28 = arg1 - temp_s1;
@@ -748,12 +748,12 @@ void func_86E0063C(unk_func_8790002C* arg0, s32 arg1) {
             break;
     }
 
-    arg0->unk_244 = temp_s1;
-    arg0->unk_29E = sp2C;
-    arg0->unk_2B2 = sp24;
+    metapod->unk_244 = temp_s1;
+    metapod->unk_29E = sp2C;
+    metapod->unk_2B2 = sp24;
 }
 
-void func_86E0073C(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E0073C(MiniActor* arg0, s32 arg1) {
     u32 sp2C;
     UNUSED s32 pad[3];
     u32 sp1C;
@@ -778,19 +778,19 @@ void func_86E0073C(unk_func_8790002C* arg0, s32 arg1) {
     arg0->unk_2B2 = var_a2;
 }
 
-void func_86E007BC(unk_func_8790002C* arg0, s32 arg1) {
-    arg0->unk_244 = arg1;
-    arg0->unk_29E = 0;
-    arg0->unk_2B2 = 0;
+void func_86E007BC(MiniActor* metapod, s32 arg1) {
+    metapod->unk_244 = arg1;
+    metapod->unk_29E = 0;
+    metapod->unk_2B2 = 0;
 }
 
-void func_86E007CC(unk_func_8790002C* arg0, s32 arg1) {
+void func_86E007CC(MiniActor* metapod, s32 player) {
     s32 i;
     s32 sp20;
     s32 var_t0 = 0;
 
-    if (arg0->unk_240 == 0) {
-        switch (D_87906046) {
+    if (metapod->isSquashed == 0) {
+        switch (miniDifficulty) {
             case 0:
                 sp20 = 0x1E;
                 break;
@@ -807,15 +807,15 @@ void func_86E007CC(unk_func_8790002C* arg0, s32 arg1) {
                 sp20 = 0xC;
         }
 
-        D_86E04B30 = D_86E05830;
+        miniRockPtr = miniMetapodRocks;
         for (i = 0; i < 20; i++) {
-            if ((D_86E04B30->unk_270 != 0) && (arg1 == D_86E04B30->unk_266)) {
-                if (D_86E04B30->unk_29E < sp20) {
+            if ((miniRockPtr->unk_270 != 0) && (player == miniRockPtr->collidingActorId)) {
+                if (miniRockPtr->unk_29E < sp20) {
                     var_t0 = 1;
-                    sp20 = D_86E04B30->unk_29E;
+                    sp20 = miniRockPtr->unk_29E;
                 }
             }
-            D_86E04B30++;
+            miniRockPtr++;
         }
 
         sp20--;
@@ -823,254 +823,256 @@ void func_86E007CC(unk_func_8790002C* arg0, s32 arg1) {
             if (sp20 < 0) {
                 sp20 = 0;
             }
-            arg0->unk_242 = 1;
+            metapod->compState = 1;
 
-            switch (func_86E00518(arg0, sp20)) {
+            switch (func_86E00518(metapod, sp20)) {
                 case 0:
-                    func_86E0063C(arg0, sp20);
+                    func_86E0063C(metapod, sp20);
                     break;
 
                 case 1:
-                    func_86E0073C(arg0, sp20);
+                    func_86E0073C(metapod, sp20);
                     break;
 
                 case 2:
-                    func_86E007BC(arg0, sp20);
+                    func_86E007BC(metapod, sp20);
                     break;
             }
         }
     }
 }
 
-void func_86E00924(unk_func_8790002C* arg0, s32 arg1) {
-    if (arg0->unk_242 == 0) {
-        func_86E007CC(arg0, arg1);
+void miniMetapodCompControls(MiniActor* compMetapod, s32 nPlayer) {
+    if (compMetapod->compState == 0) {
+        func_86E007CC(compMetapod, nPlayer);
     }
 
-    switch (arg0->unk_242) {
+    switch (compMetapod->compState) {
         case 0x1:
-            arg0->unk_244--;
-            if (arg0->unk_244 < 0) {
-                if ((arg0->unk_2AA == 0) && (arg0->unk_240 == 0)) {
-                    if (arg0->unk_29E > 0) {
-                        func_879002B8(arg0, 1, -1, 1);
-                        arg0->unk_23E = 1;
-                        arg0->unk_272 = 4;
-                        arg0->unk_242++;
-                        func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_879029F0, &D_87903E40, 4);
+            compMetapod->unk_244--;
+            if (compMetapod->unk_244 < 0) {
+                if ((compMetapod->unk_2AA == 0) && (compMetapod->isSquashed == false)) {
+                    if (compMetapod->unk_29E > 0) {
+                        miniChangeActorAnim(compMetapod, 1, -1, 1);
+                        compMetapod->mainState = 1;
+                        compMetapod->unk_272 = 4;
+                        compMetapod->compState++;
+                        func_81407D48(1.0f, compMetapod->totalPos, compMetapod->totalRot, func_879029F0, &D_87903E40,
+                                      4);
                     } else {
-                        arg0->unk_242 = 0x64;
+                        compMetapod->compState = 0x64;
                     }
                 } else {
-                    arg0->unk_242 = 0;
+                    compMetapod->compState = 0;
                 }
             }
             break;
 
         case 0x2:
-            arg0->unk_29E--;
-            if (arg0->unk_29E < 0) {
-                arg0->unk_000.unk_000.unk_02 |= 0x20;
-                arg0->unk_242 = 0x64;
+            compMetapod->unk_29E--;
+            if (compMetapod->unk_29E < 0) {
+                compMetapod->unk_000.unk_000.unk_02 |= 0x20;
+                compMetapod->compState = 0x64;
                 return;
             }
 
-            arg0->unk_25A++;
-            arg0->unk_272 = 4;
-            arg0->unk_000.unk_01C = 1;
-            if (func_80017484(&arg0->unk_000, 5) != 0) {
-                arg0->unk_000.unk_000.unk_02 &= ~0x20;
+            compMetapod->damageTimer++;
+            compMetapod->unk_272 = 4;
+            compMetapod->unk_000.unk_01C = 1;
+            if (func_80017484(&compMetapod->unk_000, 5) != 0) {
+                compMetapod->unk_000.unk_000.unk_02 &= ~0x20;
             }
             break;
 
         case 0x64:
-            arg0->unk_2B2--;
-            if (arg0->unk_2B2 <= 0) {
-                arg0->unk_23E = 0;
-                arg0->unk_242 = 0;
+            compMetapod->unk_2B2--;
+            if (compMetapod->unk_2B2 <= 0) {
+                compMetapod->mainState = 0;
+                compMetapod->compState = 0;
             }
             break;
     }
 }
 
-void func_86E00AF4(void) {
+void miniUpdateMetapods(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
-    D_86E04B2C = D_86E04D60;
+    miniControllerPtr = gPlayer1Controller;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
-        D_86E04B2C->unk_000.unk_01C = 0;
-        D_86E04B2C->unk_272 = 0;
+        miniMetapodPtr->unk_000.unk_01C = 0;
+        miniMetapodPtr->unk_272 = 0;
 
-        if (D_87903DA4 != 0) {
-            if (D_86E04B2C->unk_2AC == 0) {
-                func_86E0036C(D_86E04B2C);
+        if (minigameInputLock != 0) {
+            if (miniMetapodPtr->isComp == false) {
+                miniMetapodHumanControls(miniMetapodPtr);
             } else {
-                func_86E00924(D_86E04B2C, i);
+                miniMetapodCompControls(miniMetapodPtr, i);
             }
         }
 
-        func_87900770(D_86E04B2C);
-        func_87900808(D_86E04B2C);
+        miniActorUpdateTransform(miniMetapodPtr);
+        func_87900808(miniMetapodPtr);
 
-        D_86E04B2C++;
-        D_879060BC++;
+        miniMetapodPtr++;
+        miniControllerPtr++;
     }
 }
 
-s32 func_86E00BDC(void) {
-    return func_879001A4(D_86E04B30, &D_86E04D60[D_86E04B30->unk_266]);
+s32 metapodRockCollisionCheck_void(void) {
+    return metapodRockCollisionCheck(miniRockPtr, &miniMetapods[miniRockPtr->collidingActorId]);
 }
 
-s32 func_86E00C34(s32 arg0) {
+s32 func_86E00C34(s32 nPlayer) {
     s32 sp1C = 0;
 
-    if (func_86E00BDC() != 0) {
-        D_86E04B2C->unk_260 = 1;
-        if (D_86E04B2C->unk_272 != 0) {
-            func_86E001A0(7, arg0);
+    if (metapodRockCollisionCheck_void() != 0) {
+        miniMetapodPtr->midAirState = 1;
+        if (miniMetapodPtr->unk_272 != 0) { //  if hardened ? colliding ?
+            func_86E001A0(7, nPlayer);
             sp1C = 1;
         } else {
-            D_86E04B2C->unk_240 = 1;
-            func_86E004FC(D_86E04B2C);
+            miniMetapodPtr->isSquashed = 1; // rock squashing
+            func_86E004FC(miniMetapodPtr);
             sp1C = 2;
         }
     }
     return sp1C;
 }
 
-void func_86E00CAC(unk_func_8790002C* arg0, s32 arg1) {
+void miniRockChecks(UNUSED MiniActor* metapod, s32 nPlayer) {
     s32 i;
-    s32 temp_v0;
+    s32 colliding;
 
-    D_86E04B30 = D_86E05830;
+    miniRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 20; i++) {
-        if ((D_86E04B30->unk_270 != 0) && (arg1 == D_86E04B30->unk_266) && (D_86E04B30->unk_260 == 0)) {
-            temp_v0 = func_86E00C34(arg1);
-            if (temp_v0 != 0) {
-                D_86E04B30->unk_260 = 1;
-                if (temp_v0 == 1) {
-                    D_86E04B30->unk_272 = 1;
+        if ((miniRockPtr->unk_270 != 0) && (nPlayer == miniRockPtr->collidingActorId) &&
+            (miniRockPtr->midAirState == 0)) {
+            colliding = func_86E00C34(nPlayer);
+            if (colliding) {
+                miniRockPtr->midAirState = 1;
+                if (colliding == 1) {
+                    miniRockPtr->unk_272 = 1;
                 } else {
-                    D_86E04B30->unk_272 = 0;
+                    miniRockPtr->unk_272 = 0;
                 }
                 break;
             }
         }
-        D_86E04B30++;
+        miniRockPtr++;
     }
 }
 
-void func_86E00D78(unk_func_8790002C* arg0, s32 arg1) {
-    if ((D_86E04B2C->unk_25A > 0) && (arg0->unk_2A8 == 0)) {
-        if (D_86E04B2C->unk_25A >= 0x28) {
-            D_86E04B2C->unk_258 -= D_86E04B2C->unk_25A;
-            D_86E04B2C->unk_25A = 0;
+void miniMatapodChecks(MiniActor* metapod, s32 nPlayer) {
+    if ((miniMetapodPtr->damageTimer > 0) && (metapod->isWinner == 0)) {
+        if (miniMetapodPtr->damageTimer >= 0x28) {
+            miniMetapodPtr->miniHealth -= miniMetapodPtr->damageTimer;
+            miniMetapodPtr->damageTimer = 0;
         } else {
-            D_86E04B2C->unk_25A--;
-            D_86E04B2C->unk_258--;
+            miniMetapodPtr->damageTimer--;
+            miniMetapodPtr->miniHealth--;
         }
 
-        if (D_86E04B2C->unk_258 < 0) {
-            D_86E04B2C->unk_258 = 0;
+        if (miniMetapodPtr->miniHealth < 0) {
+            miniMetapodPtr->miniHealth = 0;
         }
     }
 
-    if (D_86E04B2C->unk_258 == 0) {
-        if (D_86E04B2C->unk_2A4 == 0) {
-            func_86E001A0(9, arg1);
-            func_879002B8(D_86E04B2C, 3, 1, 0);
-            D_86E04B2C->unk_2A4 = 1;
-            D_86E04B2C->unk_2AA = 1;
+    if (miniMetapodPtr->miniHealth == 0) {
+        if (miniMetapodPtr->unk_2A4 == 0) {
+            func_86E001A0(9, nPlayer);
+            miniChangeActorAnim(miniMetapodPtr, 3, 1, 0); // dead animation
+            miniMetapodPtr->unk_2A4 = 1;
+            miniMetapodPtr->unk_2AA = 1;
         }
     } else {
-        switch (D_86E04B2C->unk_240) {
+        switch (miniMetapodPtr->isSquashed) {
             case 1:
-                D_86E04B2C->unk_25A += 0x1E;
-                func_879002B8(D_86E04B2C, 2, 0, 1);
-                func_86E001A0(8, arg1);
-                D_86E04B2C->unk_240++;
+                miniMetapodPtr->damageTimer += 0x1E;
+                miniChangeActorAnim(miniMetapodPtr, 2, 0, 1);
+                func_86E001A0(8, nPlayer);
+                miniMetapodPtr->isSquashed++;
                 break;
 
             case 2:
-                if (D_86E04B2C->unk_248 == 0) {
-                    D_86E04B2C->unk_240 = 0;
+                if (miniMetapodPtr->unk_248 == 0) {
+                    miniMetapodPtr->isSquashed = 0;
                 }
                 break;
         }
     }
 }
 
-void func_86E00ED0(void) {
+void miniMatapodMinigameChecks(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
-        if (D_87903DA4 != 0) {
-            func_86E00CAC(D_86E04B2C, i);
-            func_86E00D78(D_86E04B2C, i);
+        if (minigameInputLock != 0) {
+            miniRockChecks(miniMetapodPtr, i);
+            miniMatapodChecks(miniMetapodPtr, i);
         }
-        D_86E04B2C++;
+        miniMetapodPtr++;
     }
 }
 
 void func_86E00F60(void) {
-    func_879003A0(D_86E04B2C);
+    func_879003A0(miniMetapodPtr);
 
-    D_86E04B2C->unk_000.unk_024.x = D_86E04B2C->unk_190.x;
-    D_86E04B2C->unk_000.unk_024.y = D_86E04B2C->unk_190.y;
-    D_86E04B2C->unk_000.unk_024.z = D_86E04B2C->unk_190.z;
+    miniMetapodPtr->unk_000.unk_024.x = miniMetapodPtr->totalPos.x;
+    miniMetapodPtr->unk_000.unk_024.y = miniMetapodPtr->totalPos.y;
+    miniMetapodPtr->unk_000.unk_024.z = miniMetapodPtr->totalPos.z;
 
-    D_86E04B2C->unk_000.unk_01E.x = D_86E04B2C->unk_214.x;
-    D_86E04B2C->unk_000.unk_01E.y = D_86E04B2C->unk_214.y;
-    D_86E04B2C->unk_000.unk_01E.z = D_86E04B2C->unk_214.z;
+    miniMetapodPtr->unk_000.unk_01E.x = miniMetapodPtr->totalRot.x;
+    miniMetapodPtr->unk_000.unk_01E.y = miniMetapodPtr->totalRot.y;
+    miniMetapodPtr->unk_000.unk_01E.z = miniMetapodPtr->totalRot.z;
 }
 
 void func_86E00FD8(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
         func_86E00F60();
-        D_86E04B2C++;
+        miniMetapodPtr++;
     }
 }
 
-void func_86E0103C(unk_func_8790002C* arg0, s32 arg1) {
-    func_8790060C(arg0);
-    arg0->unk_266 = arg1;
+void miniInitRock(MiniActor* rock, s32 arg1) {
+    miniActorAllToZero(rock);
+    rock->collidingActorId = arg1;
 
-    arg0->unk_1A8.x = D_86E04BFC[arg1].unk_00.x;
-    arg0->unk_1A8.y = D_86E04BFC[arg1].unk_00.y;
-    arg0->unk_1A8.z = D_86E04BFC[arg1].unk_00.z;
+    rock->position_1.x = miniRockInfos[arg1].unk_00.x;
+    rock->position_1.y = miniRockInfos[arg1].unk_00.y;
+    rock->position_1.z = miniRockInfos[arg1].unk_00.z;
 
-    arg0->unk_270 = 0;
-    arg0->unk_288 = D_86E04BFC[arg1].unk_12;
-    arg0->unk_28C = D_86E04BFC[arg1].unk_14;
+    rock->unk_270 = 0;
+    rock->cubeRadio = miniRockInfos[arg1].unk_12;
+    rock->halfHeight = miniRockInfos[arg1].unk_14;
 
-    arg0->unk_16C.x = 0.5f;
-    arg0->unk_16C.y = 0.5f;
-    arg0->unk_16C.z = 0.5f;
+    rock->scale.x = 0.5f;
+    rock->scale.y = 0.5f;
+    rock->scale.z = 0.5f;
 
-    arg0->unk_000.unk_000.unk_01 &= ~1;
+    rock->unk_000.unk_000.unk_01 &= ~1;
 
-    func_87900770(arg0);
+    miniActorUpdateTransform(rock);
 }
 
-void func_86E010E8(void) {
+void miniInitRocks(void) {
     s32 i;
     s32 j;
 
-    D_86E04B30 = D_86E05830;
+    miniRockPtr = miniMetapodRocks;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 5; j++) {
-            func_86E0103C(D_86E04B30, i);
-            D_86E04B30++;
+            miniInitRock(miniRockPtr, i);
+            miniRockPtr++;
         }
     }
 
@@ -1084,9 +1086,9 @@ void func_86E01188(void) {
     s32 var_s1;
     s32 sp40;
     s32 var_s5;
-    unk_func_8790002C* ptr;
+    MiniActor* metapod;
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         default:
             var_s5 = sp40;
             break;
@@ -1108,234 +1110,233 @@ void func_86E01188(void) {
             break;
     }
 
-    ptr = D_86E04D60;
-    for (i = 0; i < 4; i++, ptr++) {
-        if (ptr->unk_2AA == 0) {
+    metapod = miniMetapods;
+    for (i = 0; i < 4; i++, metapod++) {
+        if (metapod->unk_2AA == 0) {
             var_s1 = 0;
-            D_86E04B30 = &D_86E05830[i * 5];
+            miniRockPtr = &miniMetapodRocks[i * 5];
 
             for (j = 0; j < D_86E04B24; j++) {
-                func_86E0103C(D_86E04B30, i);
+                miniInitRock(miniRockPtr, i);
 
-                D_86E04B30->unk_23E = 1;
-                D_86E04B30->unk_29E = var_s1;
+                miniRockPtr->mainState = 1;
+                miniRockPtr->unk_29E = var_s1;
 
                 var_s1 += var_s5;
-                D_86E04B30++;
+                miniRockPtr++;
             }
         }
     }
 }
 
-void func_86E01310(unk_func_8790002C* arg0) {
+void func_86E01310(MiniActor* rock) {
     s16 temp_v1 = (D_86E04B20 * 4) + 0x28;
-    s16 temp_a1 = arg0->unk_266;
+    s16 temp_a1 = rock->collidingActorId;
 
-    arg0->unk_29E = temp_v1 - 1;
-    arg0->unk_1A8.y += D_86E04BFC[temp_a1].unk_00.y + D_86E04D60[temp_a1].unk_28C;
+    rock->unk_29E = temp_v1 - 1;
+    rock->position_1.y += miniRockInfos[temp_a1].unk_00.y + miniMetapods[temp_a1].halfHeight;
 
-    arg0->unk_210 = 0.7f;
-    arg0->unk_1F8 = 0.0f;
-    arg0->unk_1FC = temp_v1 * arg0->unk_210 * 0.5f;
+    rock->antiAcceleration = 0.7f;
+    rock->xSpeed = 0.0f;
+    rock->ySpeed = temp_v1 * rock->antiAcceleration * 0.5f;
 
-    arg0->unk_200 =
-        ((D_86E04D60[temp_a1].unk_1A8.z + (D_86E04D60[temp_a1].unk_288 * 0.5f)) - arg0->unk_1A8.z) / temp_v1;
-    arg0->unk_270 = 1;
+    rock->zSpeed =
+        ((miniMetapods[temp_a1].position_1.z + (miniMetapods[temp_a1].cubeRadio * 0.5f)) - rock->position_1.z) /
+        temp_v1;
+    rock->unk_270 = 1;
 
-    arg0->unk_000.unk_000.unk_01 |= 1;
-    func_8001BD04(&arg0->unk_000, 0);
+    rock->unk_000.unk_000.unk_01 |= 1;
+    func_8001BD04(&rock->unk_000, 0);
 }
 
-void func_86E01414(unk_func_8790002C* arg0) {
-    arg0->unk_23E = 0;
-    arg0->unk_000.unk_000.unk_01 &= ~1;
+void func_86E01414(MiniActor* rock) {
+    rock->mainState = 0;
+    rock->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86E01428(unk_func_8790002C* arg0) {
+void miniRockStateMachine(MiniActor* rock) {
     UNUSED s32 pad[3];
-    s16 temp_a1 = arg0->unk_266;
+    s16 temp_a1 = rock->collidingActorId;
     Vec3f sp3C;
 
-    if ((D_87903DA8 != 0) || (D_86E04D60[temp_a1].unk_258 == 0)) {
-        switch (arg0->unk_23E) {
+    if ((D_87903DA8 != 0) || (miniMetapods[temp_a1].miniHealth == 0)) {
+        switch (rock->mainState) {
             case 1:
-                arg0->unk_23E = 0;
+                rock->mainState = 0;
                 break;
 
             case 2:
-                arg0->unk_270 = 0;
-                arg0->unk_23E = 0x64;
+                rock->unk_270 = 0;
+                rock->mainState = 0x64;
                 break;
         }
     }
 
-    switch (arg0->unk_23E) {
+    switch (rock->mainState) {
         case 0x1:
-            arg0->unk_29E--;
-            if (arg0->unk_29E <= 0) {
+            rock->unk_29E--;
+            if (rock->unk_29E <= 0) {
                 func_86E001A0(5, temp_a1);
-                func_86E01310(arg0);
-                arg0->unk_23E++;
+                func_86E01310(rock);
+                rock->mainState++;
             }
             break;
 
         case 0x2:
-            arg0->unk_29E--;
-            if (arg0->unk_29E < 0) {
-                arg0->unk_29E = 0;
+            rock->unk_29E--;
+            if (rock->unk_29E < 0) {
+                rock->unk_29E = 0;
             }
 
-            if (arg0->unk_260 != 0) {
-                arg0->unk_270 = 0;
-                if (arg0->unk_272 != 0) {
-                    arg0->unk_1FC = 5.0f;
-                    arg0->unk_200 = 1.5f;
-                    func_86E01414(arg0);
-                    func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_87901F04, &D_87903E28, 4);
+            if (rock->midAirState != 0) {
+                rock->unk_270 = 0;
+                if (rock->unk_272 != 0) {
+                    rock->ySpeed = 5.0f;
+                    rock->zSpeed = 1.5f;
+                    func_86E01414(rock);
+                    func_81407D48(1.0f, rock->totalPos, rock->totalRot, func_87901F04, &D_87903E28, 4);
                 } else {
-                    arg0->unk_23E++;
+                    rock->mainState++;
                 }
             }
             break;
 
         case 0x3:
-            arg0->unk_1FC = 7.0f;
-            arg0->unk_200 = 3.0f;
+            rock->ySpeed = 7.0f;
+            rock->zSpeed = 3.0f;
 
-            sp3C.x = arg0->unk_190.x;
+            sp3C.x = rock->totalPos.x;
             sp3C.y = 0.0f;
-            sp3C.z = arg0->unk_190.z;
+            sp3C.z = rock->totalPos.z;
 
-            func_81407D48(1.0f, sp3C, arg0->unk_214, func_87902068, &D_87903E10, 4);
-            arg0->unk_23E++;
+            func_81407D48(1.0f, sp3C, rock->totalRot, func_87902068, &D_87903E10, 4);
+            rock->mainState++;
             break;
 
         case 0x4:
-            if (arg0->unk_190.y < -10.0f) {
-                func_86E01414(arg0);
+            if (rock->totalPos.y < -10.0f) {
+                func_86E01414(rock);
             }
             break;
 
         case 0x64:
-            if (func_814004D8(&arg0->unk_000.unk_01D, 0, 0x40) != 0) {
-                func_86E01414(arg0);
+            if (func_814004D8(&rock->unk_000.unk_01D, 0, 0x40) != 0) {
+                func_86E01414(rock);
             }
             break;
     }
 }
 
-void func_86E016EC(unk_func_8790002C* arg0) {
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
+void miniRockUpdatePosition(MiniActor* rock) {
+    UNUSED f32 temp_fv0;
+    UNUSED f32 temp_fv0_2;
+    UNUSED f32 temp_fv0_3;
 
-    arg0->unk_190.x = arg0->unk_19C.x = arg0->unk_1A8.x + arg0->unk_1C0.x;
-    arg0->unk_190.y = arg0->unk_19C.y = arg0->unk_1A8.y + arg0->unk_1C0.y;
-    arg0->unk_190.z = arg0->unk_19C.z = arg0->unk_1A8.z + arg0->unk_1C0.z;
+    rock->totalPos.x = rock->totalPos_alt.x = rock->position_1.x + rock->position_2.x;
+    rock->totalPos.y = rock->totalPos_alt.y = rock->position_1.y + rock->position_2.y;
+    rock->totalPos.z = rock->totalPos_alt.z = rock->position_1.z + rock->position_2.z;
 }
 
-void func_86E0172C(unk_func_8790002C* arg0) {
-    if (arg0->unk_23E != 0) {
-        arg0->unk_1F8 += arg0->unk_204;
-        arg0->unk_1FC += arg0->unk_208 - arg0->unk_210;
-        arg0->unk_200 += arg0->unk_20C;
-        arg0->unk_1C0.x += arg0->unk_1F8;
-        arg0->unk_1C0.y += arg0->unk_1FC;
-        arg0->unk_1C0.z += arg0->unk_200;
+void miniUpdateRockTransform(MiniActor* rock) {
+    if (rock->mainState != 0) {
+        rock->xSpeed += rock->xAccel;
+        rock->ySpeed += rock->yAccel - rock->antiAcceleration;
+        rock->zSpeed += rock->zAccel;
+        rock->position_2.x += rock->xSpeed;
+        rock->position_2.y += rock->ySpeed;
+        rock->position_2.z += rock->zSpeed;
     }
 
-    func_86E016EC(arg0);
+    miniRockUpdatePosition(rock);
 }
 
-void func_86E017C0(void) {
+void miniUpdateRocks(void) {
     s32 i;
 
-    D_86E04B30 = D_86E05830;
+    miniRockPtr = miniMetapodRocks;
     for (i = 0; i < 20; i++) {
-        func_86E01428(D_86E04B30);
-        func_86E0172C(D_86E04B30);
-        D_86E04B30++;
+        miniRockStateMachine(miniRockPtr);
+        miniUpdateRockTransform(miniRockPtr);
+        miniRockPtr++;
     }
 }
 
-void func_86E0182C(unk_func_8790002C* arg0) {
+//	update model transform ?
+void func_86E0182C(MiniActor* arg0) {
     func_879003A0(arg0);
 
-    arg0->unk_000.unk_030.x = arg0->unk_16C.x;
-    arg0->unk_000.unk_030.y = arg0->unk_16C.y;
-    arg0->unk_000.unk_030.z = arg0->unk_16C.z;
+    arg0->unk_000.unk_030.x = arg0->scale.x;
+    arg0->unk_000.unk_030.y = arg0->scale.y;
+    arg0->unk_000.unk_030.z = arg0->scale.z;
 
-    arg0->unk_000.unk_024.x = arg0->unk_190.x;
-    arg0->unk_000.unk_024.y = arg0->unk_190.y;
-    arg0->unk_000.unk_024.z = arg0->unk_190.z;
+    arg0->unk_000.unk_024.x = arg0->totalPos.x;
+    arg0->unk_000.unk_024.y = arg0->totalPos.y;
+    arg0->unk_000.unk_024.z = arg0->totalPos.z;
 
-    arg0->unk_000.unk_01E.x = arg0->unk_214.x;
-    arg0->unk_000.unk_01E.y = arg0->unk_214.y;
-    arg0->unk_000.unk_01E.z = arg0->unk_214.z;
+    arg0->unk_000.unk_01E.x = arg0->totalRot.x;
+    arg0->unk_000.unk_01E.y = arg0->totalRot.y;
+    arg0->unk_000.unk_01E.z = arg0->totalRot.z;
 }
 
-void func_86E01898(void) {
-    s32 var_s1;
-
-    D_86E04B30 = D_86E05830;
-    var_s1 = 0;
-    do {
-        func_86E016EC(D_86E04B30);
-        func_86E0182C(D_86E04B30);
-        var_s1 += 1;
-        D_86E04B30 = &D_86E04B30[1];
-    } while (var_s1 != 0x14);
+void miniUpdateRocksPositions(void) {
+    s32 i;
+    miniRockPtr = miniMetapodRocks;
+    for (i = 0; i < 20; ++i) {
+        miniRockUpdatePosition(miniRockPtr);
+        func_86E0182C(miniRockPtr);
+        miniRockPtr = &miniRockPtr[1];
+    }
 }
 
 void func_86E01904(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    D_87906060 = -0x200;
-    D_87906062 = 0;
-    D_87906064 = 0xBE;
-    D_87906066 = 0x23;
-    D_87906068 = 0x32;
-    D_8790606A = 0x1900;
+    miniCameraXRot = -0x200;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0xBE;
+    miniCameraFov = 0x23;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x1900;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = 0x2A;
-    D_8790606C.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = 0x2A;
+    miniCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 }
 
-void func_86E01990(void) {
-    func_87900C5C();
-    func_87900B64();
+void miniMetapodCameraControls(void) {
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
-void func_86E019B8(void) {
-    func_87900854();
-    func_86E010E8();
-    func_86E002E4();
-    func_86E01904();
-    D_87903DA4 = 0;
+void initMetapodMinigameAssets(void) {
+    func_87900854(); //	minigame variables
+    miniInitRocks();
+    miniInitMetapodPlayers();
+    func_86E01904(); //	camera
+    minigameInputLock = 0;
 }
 
 void func_86E019F4(void) {
     s32 i;
     s32 var_a2;
 
-    D_86E04B30 = D_86E05830;
+    miniRockPtr = miniMetapodRocks;
     switch (D_86E04B28) {
         case 1:
             func_86E01188();
-            D_86E04B28 += 1;
+            D_86E04B28++;
             break;
 
         case 2:
             var_a2 = 1;
             for (i = 0; i < 20; i++) {
-                if (D_86E04B30->unk_23E != 0) {
+                if (miniRockPtr->mainState != 0) {
                     var_a2 = 0;
                     break;
                 }
-                D_86E04B30++;
+                miniRockPtr++;
             }
 
             if (var_a2 != 0) {
@@ -1366,33 +1367,33 @@ s32 func_86E01B08(void) {
     s32 var_t3 = 0;
     s32 var_v0_5;
 
-    D_86E04B2C = D_86E04D60;
+    miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
-        if (D_86E04B2C->unk_2A6 < var_a3) {
-            var_a3 = D_86E04B2C->unk_2A6;
+        if (miniMetapodPtr->unk_2A6 < var_a3) {
+            var_a3 = miniMetapodPtr->unk_2A6;
         }
 
-        if (D_86E04B2C->unk_2A4 == 1) {
+        if (miniMetapodPtr->unk_2A4 == 1) {
             var_t1++;
         }
 
-        if (D_86E04B2C->unk_2A4 == 2) {
+        if (miniMetapodPtr->unk_2A4 == 2) {
             var_t2++;
         }
 
-        D_86E04B2C++;
+        miniMetapodPtr++;
     }
 
     if (var_t1 != 0) {
         var_a3 -= var_t1;
-        D_86E04B2C = D_86E04D60;
+        miniMetapodPtr = miniMetapods;
         for (i = 0; i < 4; i++) {
-            if (D_86E04B2C->unk_2A4 == 1) {
-                D_86E04B2C->unk_2A4 = 2;
-                D_86E04B2C->unk_2A6 = var_a3;
+            if (miniMetapodPtr->unk_2A4 == 1) {
+                miniMetapodPtr->unk_2A4 = 2;
+                miniMetapodPtr->unk_2A6 = var_a3;
             }
-            D_86E04B2C++;
+            miniMetapodPtr++;
         }
     }
 
@@ -1406,40 +1407,40 @@ s32 func_86E01B08(void) {
         var_v0_5 = 3;
     }
 
-    D_86E04B2C = D_86E04D60;
+    miniMetapodPtr = miniMetapods;
 
     switch (var_v0_5) {
         case 1:
             for (i = 0; i < 4; i++) {
-                if (D_86E04B2C->unk_2A6 == 5) {
-                    D_86E04B2C->unk_2A8 = 1;
-                    D_86E04B2C->unk_2AA = 1;
-                    D_86E04B2C->unk_2A6 = 1;
+                if (miniMetapodPtr->unk_2A6 == 5) {
+                    miniMetapodPtr->isWinner = 1;
+                    miniMetapodPtr->unk_2AA = 1;
+                    miniMetapodPtr->unk_2A6 = 1;
                     var_t3 = 1;
                     func_87802F00(i);
                     break;
                 }
-                D_86E04B2C++;
+                miniMetapodPtr++;
             }
             break;
 
         case 2:
             var_t3 = 1;
             for (i = 0; i < 4; i++) {
-                D_86E04B2C->unk_2AA = 1;
-                D_86E04B2C->unk_2A6 = 0;
-                D_86E04B2C++;
+                miniMetapodPtr->unk_2AA = 1;
+                miniMetapodPtr->unk_2A6 = 0;
+                miniMetapodPtr++;
             }
             break;
 
         case 3:
             for (i = 0; i < 4; i++) {
-                if (D_86E04B2C->unk_2A6 == 1) {
-                    D_86E04B2C->unk_2AA = 1;
-                    D_86E04B2C->unk_2A6 = 5;
+                if (miniMetapodPtr->unk_2A6 == 1) {
+                    miniMetapodPtr->unk_2AA = 1;
+                    miniMetapodPtr->unk_2A6 = 5;
                     var_t3 = 1;
                 }
-                D_86E04B2C++;
+                miniMetapodPtr++;
             }
             break;
     }
@@ -1453,11 +1454,11 @@ s32 func_86E01B08(void) {
 s32 func_86E01E34(void) {
     s32 i;
     s32 var_s3 = 0;
-    unk_func_8790002C* var_s0;
+    MiniActor* var_s0;
 
-    for (i = 0, var_s0 = D_86E04D60; i < 4; i++, var_s0++) {
-        if (var_s0->unk_2A8 != 0) {
-            func_879002B8(var_s0, 4, -1, 0);
+    for (i = 0, var_s0 = miniMetapods; i < 4; i++, var_s0++) {
+        if (var_s0->isWinner != 0) {
+            miniChangeActorAnim(var_s0, 4, -1, 0);
             var_s3 = 1;
         }
     }
@@ -1468,11 +1469,11 @@ s32 func_86E01E34(void) {
 void func_86E01EB0(void) {
     s32 i;
 
-    D_86E04B2C = D_86E04D60;
+    miniMetapodPtr = miniMetapods;
     for (i = 0; i < 4; i++) {
-        if (D_86E04B2C) {}
+        if (miniMetapodPtr) {}
 
-        D_86E04B2C++;
+        miniMetapodPtr++;
     }
 }
 
@@ -1497,10 +1498,10 @@ s32 func_86E01EE8(void) {
 s32 func_86E01F50(void) {
     s32 i;
     s32 ret = 1;
-    unk_func_8790002C* var_v0 = D_86E05830;
+    MiniActor* var_v0 = miniMetapodRocks;
 
     for (i = 0; i < 20; i++, var_v0++) {
-        if (var_v0->unk_23E != 0) {
+        if (var_v0->mainState != 0) {
             ret = 0;
             break;
         }
@@ -1508,27 +1509,27 @@ s32 func_86E01F50(void) {
     return ret;
 }
 
-void func_86E01F8C(void) {
-    switch (D_87903DA0) {
+void miniMetapodMinigameStateMachine(void) {
+    switch (minigameState) {
         case 1:
-            D_87906040 = 0xF;
-            D_87903DA0++;
+            miniInputLockTimer = 0xF;
+            minigameState++;
             break;
 
         case 2:
-            D_87906040--;
-            if (D_87906040 < 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
                 func_8780295C(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 3:
             if (func_86E01EE8() != 0) {
                 D_86E04B28 = 1;
-                D_87903DA4 = 1;
-                D_87903DC4 = 0;
-                D_87903DA0++;
+                minigameInputLock = 1;
+                miniTutoScreenState = 0;
+                minigameState++;
             }
             break;
 
@@ -1536,7 +1537,7 @@ void func_86E01F8C(void) {
             if (1) {}
 
             if (func_86E01B08() != 0) {
-                D_87903DA0++;
+                minigameState++;
             } else {
                 func_86E019F4();
             }
@@ -1544,23 +1545,23 @@ void func_86E01F8C(void) {
 
         case 5:
             if (func_86E01F50() != 0) {
-                D_87906040 = 0xA;
-                D_87903DA0++;
+                miniInputLockTimer = 0xA;
+                minigameState++;
             }
             break;
 
         case 6:
-            D_87906040--;
-            if (D_87906040 < 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
                 func_86E01E34();
                 func_87802EB8(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 7:
             if (D_8780FC96 != 0) {
-                D_87903DA0++;
+                minigameState++;
                 D_87903DAC = 1;
             }
             break;
@@ -1574,26 +1575,26 @@ void func_86E02150(void) {
     func_87901C20();
 }
 
-void func_86E02170(void) {
+void miniDrawMetapodHealth(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, D_86E04D60[i].unk_258, D_86E04D60[i].unk_25C);
+        func_8780024C(0x1A + i * 0x4A, 0xD0, 0x32, miniMetapods[i].miniHealth, miniMetapods[i].miniMaxHealth);
     }
 }
 
-void func_86E021D8(void) {
+void miniDrawMetapodHeads(void) {
     s32 i;
     s32 tmp;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_879060C8);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     for (i = 0, tmp = 0x26; i < 4; tmp += 0x4A, i++) {
         if (D_879060C4[i] == 0) {
-            func_87801644(i, tmp, 0xD6, 0.7f);
+            func_87801644(i, tmp, 0xD6, 0.7f); //  draw player icon
         } else {
-            func_87801644(-1 - i, tmp, 0xD6, 0.7f);
+            func_87801644(-1 - i, tmp, 0xD6, 0.7f); //  draw player icon
         }
     }
 
@@ -1660,7 +1661,7 @@ void func_86E026D0(void) {
             break;
     }
 
-    if (D_87903DC4 == -2) {
+    if (miniTutoScreenState == -2) {
         func_8001EBE0(0x10, -2);
         func_8001EBE0(4, -2);
     }
@@ -1671,18 +1672,18 @@ void func_86E027D4(void) {
     func_86E026D0();
 }
 
-void func_86E027FC(s32 arg0) {
-    u8 sp1C[] = { 0, 0, 30 };
-    u8 sp18[] = { 0, 0, 250 };
+void miniMetapodDrawPlayerHUBs(UNUSED s32 arg0) {
+    UNUSED u8 sp1C[] = { 0, 0, 30 };
+    UNUSED u8 sp18[] = { 0, 0, 250 };
 
     func_8001F3F4();
     func_8001EBE0(4, -2);
     func_86E027D4();
     func_8001F444();
 
-    if (D_87906044 != 0) {
-        func_86E02170();
-        func_86E021D8();
+    if (miniShowHUB != 0) {
+        miniDrawMetapodHealth();
+        miniDrawMetapodHeads();
     }
 }
 
@@ -1697,37 +1698,37 @@ void func_86E02880(s32 arg0) {
     func_80015094(&D_87906050->unk_00);
     func_87901C98();
 
-    if (D_87903DB0 == 0) {
+    if (miniDebugMode == false) {
         if (D_8780FC98 == 0) {
-            func_86E027FC(arg0);
+            miniMetapodDrawPlayerHUBs(arg0);
         }
         func_87804FD4();
     } else {
-        func_87900F44();
+        showDebuggCameraInfo();
     }
 
     func_80007778();
 }
 
-void func_86E02924(void) {
-    func_86E019B8();
+void metapodMinigameInit(void) {
+    initMetapodMinigameAssets();
     func_800077B4(0xA);
     func_80006C6C(0x10);
-    D_87903DC4 = 3;
-    D_87906046 = D_8780FA38;
+    miniTutoScreenState = 3;
+    miniDifficulty = D_8780FA38;
 }
 
 void func_86E0296C(void) {
 }
 
-void func_86E02974(void) {
-    if ((D_87903DB0 == 0) && (D_87906044 == 0) && (func_80007604() == 0)) {
-        if (gPlayer1Controller->buttonPressed & 0x1000) {
-            D_87903DC4 = 1;
-            D_87903DA0 = 1;
-            D_87906044 = 1;
+void miniMetapodTutoScreenControls(void) {
+    if ((miniDebugMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
+        if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+            miniTutoScreenState = 1;
+            minigameState = 1;
+            miniShowHUB = 1;
             func_86E001A0(0xB, 0);
-        } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
+        } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
             func_86E001A0(0xD, 0);
             func_87802EB8(2);
         }
@@ -1735,10 +1736,10 @@ void func_86E02974(void) {
 }
 
 void func_86E02A28(void) {
-    unk_func_8790002C* ptr = D_86E04D60;
+    MiniActor* metapod = miniMetapods;
 
-    if ((gPlayer1Controller->buttonPressed & 0x8000) && (ptr->unk_23E == 0)) {
-        ptr->unk_29A = 4;
+    if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (metapod->mainState == 0)) {
+        metapod->metapodInputLockTimer = 4;
     }
 }
 
@@ -1748,30 +1749,30 @@ void func_86E02A64(void) {
     D_87903DBC = 0;
 
     func_87901620();
-    func_87900558();
+    hideMiniGameHUD();
 
     while (var_s1 != 0) {
         func_87900528();
 
-        if (D_87903DA0 == 0) {
+        if (minigameState == 0) {
             D_87906042 += 1;
             if (D_87906042 < 0) {
                 D_87906042 = 0;
             }
         }
 
-        func_86E02974();
+        miniMetapodTutoScreenControls();
 
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86E01F8C();
-            func_86E00AF4();
-            func_86E017C0();
-            func_86E00ED0();
-            func_86E01898();
-            func_86E00FD8();
+            miniMetapodMinigameStateMachine();
+            miniUpdateMetapods();
+            miniUpdateRocks();
+            miniMatapodMinigameChecks();
+            miniUpdateRocksPositions();
+            func_86E00FD8(); // update metapod models?
             func_86E02150();
-            func_86E01990();
+            miniMetapodCameraControls();
         } else {
             func_86E02A28();
         }
@@ -1795,8 +1796,8 @@ void func_86E02BB0(void) {
     }
 
     for (i = 0; i < 30; i++) {
-        func_87900528();
-        func_86E02880(2);
+        func_87900528();  // input reading
+        func_86E02880(2); // display text ?
     }
 
     while (func_800484E0() != 0) {}
@@ -1805,7 +1806,7 @@ void func_86E02BB0(void) {
 }
 
 void func_86E02C5C(void) {
-    static s16 D_86E04CB4[6][4] = {
+    static s16 playerVariations[6][4] = {
         { 0x9B, 0xA, 0x23, 0 }, { 0x9E, 0xA, 0x1E, 0 }, { 0, 0x13, 0, 0x28 },
         { -1, -0x19, 0, 0 },    { 0, 0x3C, 0, 0x20 },   { 0, 6, -1, -0x14 },
     };
@@ -1813,7 +1814,7 @@ void func_86E02C5C(void) {
     s32 i;
     MemoryBlock* temp_v0;
     unk_D_86002F30* temp_s1_2;
-    s32 var_v1;
+    s32 randN;
 
     temp_v0 = func_80002D10(main_pool_get_available(), 0);
     D_87906050 = process_geo_layout(temp_v0, D_86E04B34);
@@ -1821,45 +1822,45 @@ void func_86E02C5C(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86E04D60[i].unk_000);
+        func_8001BB58(&miniMetapods[i].unk_000);
     }
 
     for (i = 0; i < 20; i++) {
-        func_8001BB58(&D_86E05830[i].unk_000);
+        func_8001BB58(&miniMetapodRocks[i].unk_000);
     }
 
     func_8001987C();
 
     for (i = 0; i < 4; i++) {
-        var_v1 = D_8780FA68[i] - 1;
+        randN = D_8780FA68[i] - 1;
         if (D_8780FA68[i] == 0) {
-            var_v1 = func_878001E8(2);
+            randN = func_878001E8(2);
         }
 
-        D_86E04D60[i].unk_23C = D_86E04CB4[var_v1][0];
-        D_86E04D60[i].unk_168 = func_80019D18(D_86E04D60[i].unk_23C);
-        D_86E04D60[i].unk_288 = D_86E04CB4[var_v1][1];
-        D_86E04D60[i].unk_28C = D_86E04CB4[var_v1][2];
+        miniMetapods[i].unk_23C = playerVariations[randN][0];
+        miniMetapods[i].unk_168 = func_80019D18(miniMetapods[i].unk_23C);
+        miniMetapods[i].cubeRadio = playerVariations[randN][1];
+        miniMetapods[i].halfHeight = playerVariations[randN][2];
 
-        func_8001BC34(&D_86E04D60[i].unk_000, 0, D_86E04D60[i].unk_23C, D_86E04D60[i].unk_168->unk_08->unk_00[0]);
-        func_8001BD04(&D_86E04D60[i].unk_000, 0);
+        func_8001BC34(&miniMetapods[i].unk_000, 0, miniMetapods[i].unk_23C, miniMetapods[i].unk_168->unk_08->unk_00[0]);
+        func_8001BD04(&miniMetapods[i].unk_000, 0);
 
-        if (D_86E04D60) {}
+        if (miniMetapods) {}
     }
 
     temp_s1_2 = func_80019D18(0x9C);
     for (i = 0; i < 20; i++) {
-        D_86E05830[i].unk_23C = 0x9C;
-        D_86E05830[i].unk_168 = temp_s1_2;
+        miniMetapodRocks[i].unk_23C = 0x9C;
+        miniMetapodRocks[i].unk_168 = temp_s1_2;
 
-        func_8001BC34(&D_86E05830[i].unk_000, 0, D_86E05830[i].unk_23C, temp_s1_2->unk_08->unk_00[0]);
-        func_8001BD04(&D_86E05830[i].unk_000, 0);
+        func_8001BC34(&miniMetapodRocks[i].unk_000, 0, miniMetapodRocks[i].unk_23C, temp_s1_2->unk_08->unk_00[0]);
+        func_8001BD04(&miniMetapodRocks[i].unk_000, 0);
 
-        D_86E05830[i].unk_000.unk_000.unk_01 &= ~1;
+        miniMetapodRocks[i].unk_000.unk_000.unk_01 &= ~1;
     }
 }
 
-s32 func_86E02E40(s32 arg0, s32 arg1) {
+s32 metapodMinigameLoad(s32 arg0, s32 arg1) {
     unk_func_80007444* sp24;
 
     if (arg0 == 1) {
@@ -1880,12 +1881,12 @@ s32 func_86E02E40(s32 arg0, s32 arg1) {
 
     func_86E02C5C();
     func_80007678(sp24);
-    func_86E02924();
-    func_86E02A64();
+    metapodMinigameInit();
+    func_86E02A64(); //	tutorial screen ?
     func_86E02BB0();
     func_800076C0();
-    func_8001E9CC();
-    func_80005EAC();
+    func_8001E9CC(); //	main_pool_try_free(D_800AC870);
+    func_80005EAC(); //	main_pool_try_free(D_800A7428.unk4); main_pool_try_free(D_800A7428.unk0);
 
     main_pool_pop_state('MINI');
 

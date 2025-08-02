@@ -139,14 +139,14 @@ typedef struct unk_D_86002F58_004_000 {
     /* 0x01A */ s16 unk_01A;
     /* 0x01C */ u8 unk_01C;
     /* 0x01D */ u8 unk_01D;
-    /* 0x01E */ Vec3s unk_01E;
-    /* 0x024 */ Vec3f unk_024;
-    /* 0x030 */ Vec3f unk_030;
+    /* 0x01E */ Vec3s unk_01E;			//	total Rotation
+    /* 0x024 */ Vec3f unk_024;			//	global Position
+    /* 0x030 */ Vec3f unk_030;			//	scale
     /* 0x03C */ Color_RGBA8_u32 unk_03C;
     /* 0x040 */ unk_D_86002F58_004_000_040 unk_040;
     /* 0x054 */ unk_D_86002F58_004_000_054 unk_054;
     /* 0x060 */ MtxF unk_060;
-    /* 0x0A0 */ Color_RGBA8_u32 unk_0A0;
+    /* 0x0A0 */ Color_RGBA8_u32 unk_0A0;    //  vertex color ?
     /* 0x0A4 */ char unk0A4[2];
     /* 0x0A6 */ u8 unk_0A6;
     /* 0x0A7 */ u8 unk_0A7;
@@ -245,10 +245,10 @@ typedef struct unk_D_86002F34_00C_0CC {
 
 typedef struct unk_D_86002F34_00C {
     /* 0x00 */ GraphNode unk_00;
-    /* 0x18 */ unk_D_86002F34_00C_018 unk_18;
-    /* 0x24 */ unk_D_86002F34_00C_024 unk_24;
+    /* 0x18 */ unk_D_86002F34_00C_018 unk_18;	//	viewPort
+    /* 0x24 */ unk_D_86002F34_00C_024 unk_24;	//	projection
     /* 0x40 */ unk_D_86002F34_00C_040 unk_40;
-    /* 0x60 */ unk_D_86002F34_00C_060 unk_60;
+    /* 0x60 */ unk_D_86002F34_00C_060 unk_60;	//	camera
     /* 0xCC */ unk_D_86002F34_00C_0CC unk_CC;
     /* 0xEC */ char unkEC[0x4];
 } unk_D_86002F34_00C; // size = 0xF0
@@ -434,7 +434,7 @@ typedef struct unk_D_86002F34_018 {
     /* 0x02 */ s16 width;
     /* 0x04 */ s16 height;
     /* 0x06 */ s16 num_texels;
-    /* 0x08 */ u8* texture;
+    /* 0x08 */ u32* texture;
 } unk_D_86002F34_018; // size = 0xC
 
 typedef struct unk_D_86002F34_01C {

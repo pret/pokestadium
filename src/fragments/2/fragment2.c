@@ -339,8 +339,8 @@ u32* D_8780FA70;
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/2/fragment2/func_87801400.s")
 #endif
 
-void func_87801644(s32 arg0, s16 arg1, s16 arg2, f32 arg3) {
-    func_87801400(arg0, arg1, arg2, arg3, arg3);
+void func_87801644(s32 arg0, s16 arg1, s16 arg2, f32 _scale) {
+    func_87801400(arg0, arg1, arg2, _scale, _scale);
 }
 
 void func_87801684(s16 arg0, s16 arg1, unk_func_87801684* arg2) {

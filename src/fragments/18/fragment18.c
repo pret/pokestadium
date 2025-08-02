@@ -21,49 +21,49 @@
 #include "src/stage_loader.h"
 #include "src/geo_layout.h"
 
-extern u8 D_03034E40[];
-extern u8 D_03035A80[];
-extern u8 D_030366C0[];
-extern u8 D_03037300[];
-extern u8 D_030397C0[];
-extern u8 D_0303A400[];
-extern u8 D_0303B040[];
-extern u8 D_0303D500[];
-extern u8 D_03040580[];
-extern u8 D_03040980[];
-extern u8 D_03040D80[];
-extern u8 D_03041FC0[];
-extern u8 D_03043520[];
-extern u8 D_03043C40[];
-extern u8 D_030426E0[];
-extern u8 D_03042E00[];
+extern u32 D_03034E40[];
+extern u32 D_03035A80[];
+extern u32 D_030366C0[];
+extern u32 D_03037300[];
+extern u32 D_030397C0[];
+extern u32 D_0303A400[];
+extern u32 D_0303B040[];
+extern u32 D_0303D500[];
+extern u32 D_03040580[];
+extern u32 D_03040980[];
+extern u32 D_03040D80[];
+extern u32 D_03041FC0[];
+extern u32 D_03043520[];
+extern u32 D_03043C40[];
+extern u32 D_030426E0[];
+extern u32 D_03042E00[];
 
-typedef struct unk_D_86C12008 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-} unk_D_86C12008; // size = 0xE
+typedef struct ActiveDiglettInfo {
+    /* 0x00 */ s16 diglettId;
+    /* 0x02 */ s16 state;
+    /* 0x04 */ s16 timer;
+    /* 0x06 */ s16 unk_06; //	0
+    /* 0x08 */ s16 gotHoop;
+    /* 0x0A */ s16 unk_0A; //	0
+    /* 0x0C */ s16 collidingActorId;
+} ActiveDiglettInfo; // size = 0xE
 
-typedef struct unk_D_86C0E1CC {
-    /* 0x00 */ Vec3f unk_00;
+typedef struct ActorOriginPosition {
+    /* 0x00 */ Vec3f pos;
     /* 0x0C */ char unk0C[0x6];
     /* 0x12 */ s16 unk_12;
     /* 0x12 */ s16 unk_14;
-} unk_D_86C0E1CC; // size = 0x18
+} ActorOriginPosition; // size = 0x18
 
-static unk_func_8790002C D_86C0E480[9];
-static unk_func_8790002C D_86C0FCD8[9];
-static unk_func_8790002C D_86C11530[4];
+static MiniActor miniDigletts[9];
+static MiniActor miniDiglettHoles[9];
+static MiniActor miniEkanses[4];
 static unk_D_800AC870* D_86C12000;
-static unk_D_86C12008 D_86C12008[3];
+static ActiveDiglettInfo activeDigletts[3];
 static s32 D_86C12034;
 static s16 D_86C12038;
 static s16 D_86C12040[9][4];
-static s16 D_86C12088;
+static s16 ekansMinigameCountdownStarted;
 
 static u32 D_86C04840[] = {
     0x07070707, 0x07070707, 0x07070707, 0x07070707, 0x07070708, 0x08080808, 0x08080808, 0x08080808, 0x08080808,
@@ -85,7 +85,7 @@ static u32 D_86C049D0[] = {
     0x00010000, 0x00000000, 0x00050050, D_86C049D0, D_86C04840,
 };
 
-static u32 D_86C049F8[] = {
+static u32 redDiglettTileTexture[] = {
     0xD5EDD62D, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5EB, 0xD5EDD5ED, 0xD5EDD5ED,
     0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5ED, 0xD5EDD5EB, 0xD5ABD5AB,
     0xD5ABD5AB, 0xD5ABD5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9, 0xD5A9D5A9,
@@ -202,7 +202,7 @@ static u32 D_86C049F8[] = {
     0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB, 0xD5EBD5EB,
 };
 
-static u32 D_86C059F8[] = {
+static u32 yellowDiglettTileTexture[] = {
     0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66B, 0xD66DD66D, 0xD66DD66D,
     0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66D, 0xD66DD66B, 0xD66BD66B,
     0xD66BD66B, 0xD66BD669, 0xD629D669, 0xD669D669, 0xD669D669, 0xD669D669, 0xD669D669, 0xD669D669, 0xD669D669,
@@ -319,7 +319,7 @@ static u32 D_86C059F8[] = {
     0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B, 0xD66BD66B,
 };
 
-static u32 D_86C069F8[] = {
+static u32 blueDiglettTileTexture[] = {
     0xCE37CE37, 0xC637C637, 0xC637C637, 0xC637C637, 0xC637C637, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7,
     0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC637C5F7, 0xC5F7C5F7,
     0xC5F7C5F7, 0xC5F7C5F7, 0xBDF7C5F7, 0xC5F7BDF7, 0xBDB7BDB7, 0xBDB7BDB7, 0xBDB7BDB7, 0xBDB7BDB7, 0xBDB7BDB7,
@@ -436,7 +436,7 @@ static u32 D_86C069F8[] = {
     0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7, 0xC5F7C5F7,
 };
 
-static u32 D_86C079F8[] = {
+static u32 floorTexture1[] = {
     0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE182E1, 0x82A1CD9F, 0xCD9F82A1,
     0x82E18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1,
     0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x82E182A1, 0xC55FFFDF, 0xFFDFC55F, 0x82A182E1, 0x8AE18AE1,
@@ -496,7 +496,7 @@ static u32 D_86C079F8[] = {
     0xCD9F82A1, 0x82E18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1, 0x8AE18AE1,
 };
 
-static u32 D_86C081F8[] = {
+static u32 floorTexture2[] = {
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
@@ -613,7 +613,7 @@ static u32 D_86C081F8[] = {
     0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF, 0xFF7070FF,
 };
 
-static u32 D_86C091F8[] = {
+static u32 sceneDecorationTextureBlue[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -673,7 +673,7 @@ static u32 D_86C091F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
-static u32 D_86C099F8[] = {
+static u32 sceneDecorationTextureGreen[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -733,7 +733,7 @@ static u32 D_86C099F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
-static u32 D_86C0A1F8[] = {
+static u32 sceneDecorationTextureRed[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -793,7 +793,7 @@ static u32 D_86C0A1F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
-static u32 D_86C0A9F8[] = {
+static u32 sceneDecorationTextureYellow[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
     0xCCF1CCF1, 0xC4EFBCAD, 0xA4298B61, 0x6A995A57, 0x5A576257, 0x6A996ADB, 0x6A9B6A99, 0x62595A57, 0x5A576A99,
@@ -853,6 +853,7 @@ static u32 D_86C0A9F8[] = {
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
 
+//  unused or unshown decoration texture?
 static u32 D_86C0B1F8[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFBCAD, 0xAC2993E5, 0x83617B1D, 0x72DB6A9B, 0x6ADB72DB,
     0x7B1D8B61, 0x9BE5AC69, 0xBCADC4EF, 0xC4F1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
@@ -912,14 +913,15 @@ static u32 D_86C0B1F8[] = {
     0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1C4F1, 0xC4EFB4AD, 0xAC2993A5, 0x831F72DB, 0x6A996299,
     0x62996A99, 0x72DB831F, 0x93A5AC29, 0xB4ADC4AF, 0xC4EFCCF1, 0xCCF1CCF1, 0xCCF1CCF1, 0xCCF1CCF1,
 };
-static unk_D_86002F34_018 D_86C0B9F8[] = {
+
+static unk_D_86002F34_018 sceneTextures[] = {
     {
         0x00,
         unk_D_86002F34_018_GFX_TYPE_2,
         32,
         64,
         2048,
-        D_86C049F8,
+        redDiglettTileTexture,
     },
     {
         0x00,
@@ -927,7 +929,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         64,
         2048,
-        D_86C059F8,
+        yellowDiglettTileTexture,
     },
     {
         0x00,
@@ -935,15 +937,11 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         64,
         2048,
-        D_86C069F8,
+        blueDiglettTileTexture,
     },
     {
-        0x00,
-        unk_D_86002F34_018_GFX_TYPE_2,
-        32,
-        32,
-        1024,
-        D_86C079F8,
+        0x00, unk_D_86002F34_018_GFX_TYPE_2, 32, 32, 1024,
+        floorTexture1, //
     },
     {
         0x00,
@@ -951,7 +949,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C081F8,
+        floorTexture2,
     },
     {
         0x00,
@@ -959,7 +957,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C091F8,
+        sceneDecorationTextureBlue,
     },
     {
         0x00,
@@ -967,7 +965,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C099F8,
+        sceneDecorationTextureGreen,
     },
     {
         0x00,
@@ -975,7 +973,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C0A1F8,
+        sceneDecorationTextureRed,
     },
     {
         0x00,
@@ -983,7 +981,7 @@ static unk_D_86002F34_018 D_86C0B9F8[] = {
         32,
         32,
         1024,
-        D_86C0A9F8,
+        sceneDecorationTextureYellow,
     },
     {
         0x00,
@@ -1006,7 +1004,6 @@ static Gfx D_86C0BA70[] = {
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x007C, 0x007C),
     gsSPEndDisplayList(),
 };
-
 static Gfx D_86C0BAA8[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_32b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD),
@@ -1019,7 +1016,6 @@ static Gfx D_86C0BAA8[] = {
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x04FC, 0x007C),
     gsSPEndDisplayList(),
 };
-
 static Gfx D_86C0BAE8[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD),
@@ -1032,7 +1028,6 @@ static Gfx D_86C0BAE8[] = {
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x0DFC, 0x027C),
     gsSPEndDisplayList(),
 };
-
 static Gfx D_86C0BB28[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD,
                 G_TX_MIRROR | G_TX_CLAMP, 5, G_TX_NOLOD),
@@ -1046,7 +1041,8 @@ static Gfx D_86C0BB28[] = {
     gsSPEndDisplayList(),
 };
 
-static Vtx D_86C0BB68[] = {
+//  red quads
+static Vtx sceneGeometry_1[] = {
     VTX(880, 0, 880, 10240, 10239, 0x00, 0x78, 0x00, 0xFF),  VTX(440, 0, 880, 8191, 10239, 0x00, 0x78, 0x00, 0xFF),
     VTX(440, 0, 1320, 8191, 12287, 0x00, 0x78, 0x00, 0xFF),  VTX(880, 0, 1320, 10240, 12287, 0x00, 0x78, 0x00, 0xFF),
     VTX(-880, 0, -880, 2048, 2047, 0x00, 0x78, 0x00, 0xFF),  VTX(-1320, 0, -880, 0, 2047, 0x00, 0x78, 0x00, 0xFF),
@@ -1065,7 +1061,8 @@ static Vtx D_86C0BB68[] = {
     VTX(0, 0, 0, 6144, 6143, 0x00, 0x78, 0x00, 0xFF),        VTX(-440, 0, 440, 4096, 8191, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0BD68[] = {
+//  red quads
+static Vtx sceneGeometry_2[] = {
     VTX(0, 0, 0, 6144, 6143, 0x00, 0x78, 0x00, 0xFF),       VTX(-440, 0, 440, 4096, 8191, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, 440, 6144, 8191, 0x00, 0x78, 0x00, 0xFF),     VTX(440, 0, 440, 8191, 8191, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, 880, 6144, 10239, 0x00, 0x78, 0x00, 0xFF),    VTX(440, 0, 880, 8191, 10239, 0x00, 0x78, 0x00, 0xFF),
@@ -1075,7 +1072,8 @@ static Vtx D_86C0BD68[] = {
     VTX(880, 0, 0, 10240, 6143, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0BE38[] = {
+//  yellow quads
+static Vtx sceneGeometry_3[] = {
     VTX(-440, 0, -880, 4096, 2048, 0x00, 0x78, 0x00, 0xFF),  VTX(-880, 0, -880, 2048, 2048, 0x00, 0x78, 0x00, 0xFF),
     VTX(-880, 0, -440, 2048, 4096, 0x00, 0x78, 0x00, 0xFF),  VTX(-440, 0, -440, 4096, 4096, 0x00, 0x78, 0x00, 0xFF),
     VTX(880, 0, 440, 10240, 8191, 0x00, 0x78, 0x00, 0xFF),   VTX(440, 0, 440, 8191, 8191, 0x00, 0x78, 0x00, 0xFF),
@@ -1094,7 +1092,8 @@ static Vtx D_86C0BE38[] = {
     VTX(-880, 0, 440, 2048, 8191, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C028[] = {
+//  yellow quads
+static Vtx sceneGeometry_4[] = {
     VTX(440, 0, -1320, 8191, 0, 0x00, 0x78, 0x00, 0xFF),    VTX(0, 0, -1320, 6144, 0, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, -880, 6144, 2048, 0x00, 0x78, 0x00, 0xFF),    VTX(440, 0, -880, 8191, 2048, 0x00, 0x78, 0x00, 0xFF),
     VTX(880, 0, -880, 10240, 2048, 0x00, 0x78, 0x00, 0xFF), VTX(440, 0, -440, 8191, 4096, 0x00, 0x78, 0x00, 0xFF),
@@ -1103,7 +1102,8 @@ static Vtx D_86C0C028[] = {
     VTX(-440, 0, 880, 4096, 10240, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C0D8[] = {
+//  blue quads
+static Vtx sceneGeometry_5[] = {
     VTX(-880, 0, -440, 2048, 4096, 0x00, 0x78, 0x00, 0xFF),  VTX(-1320, 0, -440, 0, 4096, 0x00, 0x78, 0x00, 0xFF),
     VTX(-1320, 0, 0, 0, 6144, 0x00, 0x78, 0x00, 0xFF),       VTX(-880, 0, 0, 2048, 6144, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, 440, 6144, 8191, 0x00, 0x78, 0x00, 0xFF),      VTX(-440, 0, 440, 4096, 8191, 0x00, 0x78, 0x00, 0xFF),
@@ -1122,7 +1122,8 @@ static Vtx D_86C0C0D8[] = {
     VTX(-880, 0, 1320, 2048, 12288, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C2C8[] = {
+//  blue quads
+static Vtx sceneGeometry_6[] = {
     VTX(880, 0, -1320, 10240, 0, 0x00, 0x78, 0x00, 0xFF),    VTX(440, 0, -1320, 8191, 0, 0x00, 0x78, 0x00, 0xFF),
     VTX(440, 0, -880, 8191, 2048, 0x00, 0x78, 0x00, 0xFF),   VTX(880, 0, -880, 10240, 2048, 0x00, 0x78, 0x00, 0xFF),
     VTX(0, 0, -880, 6144, 2048, 0x00, 0x78, 0x00, 0xFF),     VTX(-440, 0, -880, 4096, 2048, 0x00, 0x78, 0x00, 0xFF),
@@ -1131,7 +1132,8 @@ static Vtx D_86C0C2C8[] = {
     VTX(1320, 0, -880, 12288, 2048, 0x00, 0x78, 0x00, 0xFF),
 };
 
-static Vtx D_86C0C378[] = {
+//  second floor
+static Vtx sceneGeometry_7[] = {
     VTX(584, 50, -1431, 14262, 5137, 0xF1, 0x61, 0x44, 0xFF),
     VTX(673, 750, -1822, 14262, 358, 0xE9, 0x3B, 0x65, 0xFF),
     VTX(-673, 750, -1822, 16457, 358, 0x17, 0x3B, 0x65, 0xFF),
@@ -1150,7 +1152,8 @@ static Vtx D_86C0C378[] = {
     VTX(1636, 50, -924, 12068, 5137, 0xD5, 0x61, 0x36, 0xFF),
 };
 
-static Vtx D_86C0C478[] = {
+//  yellow stairs
+static Vtx sceneGeometry_8[] = {
     VTX(-2624, 50, 1128, 2560, -71, 0x45, 0x60, 0x0F, 0xFF), VTX(-2375, 0, 1128, 2560, 1066, 0x17, 0x75, 0x05, 0xFF),
     VTX(-2140, 0, 97, 2194, 1066, 0x15, 0x75, 0x0A, 0xFF),   VTX(-2364, 50, -11, 2194, -71, 0x3E, 0x61, 0x1E, 0xFF),
     VTX(2364, 50, -11, 5485, -71, 0xC2, 0x61, 0x1E, 0xFF),   VTX(2140, 0, 97, 5485, 1066, 0xEB, 0x75, 0x0A, 0xFF),
@@ -1162,7 +1165,8 @@ static Vtx D_86C0C478[] = {
     VTX(-1636, 50, -924, 1828, -71, 0x2B, 0x61, 0x36, 0xFF), VTX(-1481, 0, -729, 1828, 1066, 0x0E, 0x75, 0x12, 0xFF),
 };
 
-static Vtx D_86C0C598[] = {
+//  red decoration
+static Vtx sceneGeometry_9[] = {
     VTX(27, 262, -1502, 693, 149, 0x29, 0x6E, 0x12, 0xFF),  VTX(53, 240, -1542, 874, 149, 0x53, 0x4B, 0xD5, 0xFF),
     VTX(0, 259, -1553, 512, 0, 0x00, 0x67, 0xC4, 0xFF),     VTX(38, 226, -1459, 768, 511, 0x3C, 0x33, 0x59, 0xFF),
     VTX(75, 194, -1515, 1024, 511, 0x78, 0x00, 0x00, 0xFF), VTX(27, 171, -1449, 693, 874, 0x29, 0xD9, 0x69, 0xFF),
@@ -1172,7 +1176,8 @@ static Vtx D_86C0C598[] = {
     VTX(-75, 194, -1515, 0, 511, 0x88, 0x00, 0x00, 0xFF),   VTX(-53, 148, -1488, 149, 874, 0xAD, 0xB5, 0x2B, 0xFF),
 };
 
-static Vtx D_86C0C678[] = {
+//  green decoration
+static Vtx sceneGeometry_10[] = {
     VTX(588, 262, -1502, 693, 149, 0x29, 0x6E, 0x12, 0xFF),  VTX(615, 240, -1542, 874, 149, 0x53, 0x4B, 0xD5, 0xFF),
     VTX(562, 259, -1553, 512, 0, 0x00, 0x67, 0xC4, 0xFF),    VTX(599, 226, -1459, 768, 511, 0x3C, 0x33, 0x59, 0xFF),
     VTX(637, 194, -1515, 1024, 511, 0x78, 0x00, 0x00, 0xFF), VTX(588, 171, -1449, 693, 874, 0x29, 0xD9, 0x69, 0xFF),
@@ -1182,7 +1187,8 @@ static Vtx D_86C0C678[] = {
     VTX(486, 194, -1515, 0, 511, 0x88, 0x00, 0x00, 0xFF),    VTX(508, 148, -1488, 149, 874, 0xAD, 0xB5, 0x2B, 0xFF),
 };
 
-static Vtx D_86C0C758[] = {
+//  yellow decoration
+static Vtx sceneGeometry_11[] = {
     VTX(-535, 262, -1502, 693, 149, 0x29, 0x6E, 0x12, 0xFF),  VTX(-508, 240, -1542, 874, 149, 0x53, 0x4B, 0xD5, 0xFF),
     VTX(-562, 259, -1553, 512, 0, 0x00, 0x67, 0xC4, 0xFF),    VTX(-524, 226, -1459, 768, 511, 0x3C, 0x33, 0x59, 0xFF),
     VTX(-486, 194, -1515, 1024, 511, 0x78, 0x00, 0x00, 0xFF), VTX(-535, 171, -1449, 693, 874, 0x29, 0xD9, 0x69, 0xFF),
@@ -1192,7 +1198,8 @@ static Vtx D_86C0C758[] = {
     VTX(-637, 194, -1515, 0, 511, 0x88, 0x00, 0x00, 0xFF),    VTX(-615, 148, -1488, 149, 874, 0xAD, 0xB5, 0x2B, 0xFF),
 };
 
-static Vtx D_86C0C838[] = {
+//  blue right decoration
+static Vtx sceneGeometry_12[] = {
     VTX(1093, 262, -1268, 693, 149, 0x20, 0x6E, 0x20, 0xFF),  VTX(1132, 240, -1297, 874, 149, 0x5C, 0x4B, 0xF4, 0xFF),
     VTX(1086, 259, -1325, 512, 0, 0x14, 0x67, 0xC8, 0xFF),    VTX(1089, 226, -1224, 768, 511, 0x19, 0x33, 0x69, 0xFF),
     VTX(1143, 194, -1264, 1024, 511, 0x70, 0x00, 0x29, 0xFF), VTX(1075, 171, -1219, 693, 874, 0x02, 0xD9, 0x71, 0xFF),
@@ -1202,7 +1209,8 @@ static Vtx D_86C0C838[] = {
     VTX(1003, 194, -1316, 0, 511, 0x90, 0x00, 0xD7, 0xFF),    VTX(1014, 148, -1283, 149, 874, 0xA4, 0xB5, 0x0C, 0xFF),
 };
 
-static Vtx D_86C0C918[] = {
+//  blue left decoration
+static Vtx sceneGeometry_13[] = {
     VTX(-1044, 262, -1287, 693, 149, 0x2D, 0x6E, 0x03, 0xFF),
     VTX(-1032, 240, -1333, 874, 149, 0x3F, 0x4B, 0xBB, 0xFF),
     VTX(-1086, 259, -1325, 512, 0, 0xEC, 0x67, 0xC8, 0xFF),
@@ -1220,95 +1228,60 @@ static Vtx D_86C0C918[] = {
 };
 
 static Gfx D_86C0C9F8[] = {
-    gsSPVertex(D_86C0C918, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_13, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CA58[] = {
-    gsSPVertex(D_86C0C838, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_12, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CAB8[] = {
-    gsSPVertex(D_86C0C758, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_11, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CB18[] = {
-    gsSPVertex(D_86C0C678, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_10, 14, 0),        gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CB78[] = {
-    gsSPVertex(D_86C0C598, 14, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),
-    gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
-    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),
-    gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
-    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),
-    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
-    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),
-    gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
-    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_9, 14, 0),         gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 1, 0),     gsSP2Triangles(3, 1, 0, 0, 5, 6, 4, 0),
+    gsSP2Triangles(5, 4, 3, 0, 6, 5, 7, 0),     gsSP2Triangles(8, 0, 2, 0, 9, 3, 0, 0),
+    gsSP2Triangles(9, 0, 8, 0, 10, 5, 3, 0),    gsSP2Triangles(10, 3, 9, 0, 5, 10, 7, 0),
+    gsSP2Triangles(11, 8, 2, 0, 12, 9, 8, 0),   gsSP2Triangles(12, 8, 11, 0, 13, 10, 9, 0),
+    gsSP2Triangles(13, 9, 12, 0, 10, 13, 7, 0), gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CBD8[] = {
-    gsSPVertex(D_86C0C378, 16, 0),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-    gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
-    gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
-    gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
-    gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
-    gsSP2Triangles(13, 12, 14, 0, 13, 14, 15, 0),
-    gsSP2Triangles(15, 14, 1, 0, 15, 1, 0, 0),
-    gsSPEndDisplayList(),
+    gsSPVertex(sceneGeometry_7, 16, 0),           gsSPSetGeometryMode(G_CULL_BACK),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),       gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
+    gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),       gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
+    gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0), gsSP2Triangles(13, 12, 14, 0, 13, 14, 15, 0),
+    gsSP2Triangles(15, 14, 1, 0, 15, 1, 0, 0),    gsSPEndDisplayList(),
 };
 
 static Gfx D_86C0CC28[] = {
-    gsSPVertex(D_86C0C478, 18, 0),
+    gsSPVertex(sceneGeometry_8, 18, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -1320,7 +1293,7 @@ static Gfx D_86C0CC28[] = {
 };
 
 static Gfx D_86C0CC70[] = {
-    gsSPVertex(D_86C0BB68, 32, 0),
+    gsSPVertex(sceneGeometry_1, 32, 0),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
@@ -1331,7 +1304,7 @@ static Gfx D_86C0CC70[] = {
     gsSP2Triangles(23, 7, 24, 0, 23, 24, 25, 0),
     gsSP2Triangles(26, 27, 28, 0, 26, 28, 29, 0),
     gsSP1Triangle(30, 25, 31, 0),
-    gsSPVertex(D_86C0BD68, 13, 0),
+    gsSPVertex(sceneGeometry_2, 13, 0),
     gsSP2Triangles(0, 1, 2, 0, 3, 2, 4, 0),
     gsSP2Triangles(3, 4, 5, 0, 6, 7, 8, 0),
     gsSP2Triangles(6, 8, 9, 0, 10, 9, 11, 0),
@@ -1340,7 +1313,7 @@ static Gfx D_86C0CC70[] = {
 };
 
 static Gfx D_86C0CCF8[] = {
-    gsSPVertex(D_86C0BE38, 32, 0),
+    gsSPVertex(sceneGeometry_3, 32, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 1, 0),
@@ -1350,7 +1323,7 @@ static Gfx D_86C0CCF8[] = {
     gsSP2Triangles(22, 23, 24, 0, 22, 24, 7, 0),
     gsSP2Triangles(25, 13, 26, 0, 25, 26, 5, 0),
     gsSP2Triangles(27, 28, 29, 0, 27, 29, 30, 0),
-    gsSPVertex(D_86C0C028, 11, 0),
+    gsSPVertex(sceneGeometry_4, 11, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 3, 5, 0, 4, 5, 6, 0),
     gsSP2Triangles(7, 8, 9, 0, 7, 9, 10, 0),
@@ -1358,7 +1331,7 @@ static Gfx D_86C0CCF8[] = {
 };
 
 static Gfx D_86C0CD70[] = {
-    gsSPVertex(D_86C0C0D8, 32, 0),
+    gsSPVertex(sceneGeometry_5, 32, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 3, 9, 0, 8, 9, 5, 0),
@@ -1368,7 +1341,7 @@ static Gfx D_86C0CD70[] = {
     gsSP2Triangles(21, 22, 23, 0, 21, 23, 14, 0),
     gsSP2Triangles(24, 25, 26, 0, 24, 26, 16, 0),
     gsSP2Triangles(27, 28, 29, 0, 27, 29, 30, 0),
-    gsSPVertex(D_86C0C2C8, 11, 0),
+    gsSPVertex(sceneGeometry_6, 11, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 3, 0),
@@ -1395,11 +1368,11 @@ static u32 D_86C0CDE8[] = {
 };
 
 static u32 D_86C0D008[] = {
-    0x1700000A, 0x000000E9, D_86C0B9F8, 0x00000000, D_86C0BB68, 0x05000000, 0x1C000000, 0x000023D7,
-    0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86C0CDE8, 0x06000000, 0x06000000, 0x01000000,
+    0x1700000A, 0x000000E9, sceneTextures, 0x00000000, sceneGeometry_1, 0x05000000, 0x1C000000, 0x000023D7,
+    0x000023D7, 0x000023D7, 0x05000000,    0x03000000, D_86C0CDE8,      0x06000000, 0x06000000, 0x01000000,
 };
 
-static u32 D_86C0D048[] = {
+static u32 ekansShadowTexture[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000101, 0x01010101, 0x01010101, 0x01010000, 0x00000000,
@@ -1516,16 +1489,16 @@ static u32 D_86C0D048[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-static unk_func_8790002C* D_86C0E048 = &D_86C0E480[0];
-static unk_func_8790002C* D_86C0E04C = &D_86C0FCD8[0];
-static unk_func_8790002C* D_86C0E050 = &D_86C11530[0];
+static MiniActor* miniDiglettPtr = &miniDigletts[0];
+static MiniActor* miniDiglettHolePtr = &miniDiglettHoles[0];
+static MiniActor* miniEkansPtr = &miniEkanses[0];
 
-static s16 D_86C0E054[] = {
+UNUSED static s16 D_86C0E054[] = {
     0x0000, 0x0001, 0x0002, 0x0000, 0x0003, 0x0006, 0x0000, 0x0004, 0x0008, 0x0001, 0x0004, 0x0007,
     0x0002, 0x0004, 0x0006, 0x0002, 0x0005, 0x0008, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008,
 };
 
-static s16 D_86C0E084[4][4] = {
+static s16 miniEkansDifficulties[4][4] = {
     {
         0x0000,
         0x0000,
@@ -1563,14 +1536,14 @@ static u32 D_86C0E0D0[] = {
     0x06000000, 0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
 
-static unk_D_86C0E1CC D_86C0E16C[] = {
+static ActorOriginPosition skansActorInfo[] = {
     { { -45.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { -15.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { 15.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
     { { 45.0f, 0.0f, 50.0f }, { 0, 0, 0, 0, 0, 0 }, 0, 0x8C },
 };
 
-static unk_D_86C0E1CC D_86C0E1CC[] = {
+static ActorOriginPosition diglettActorInfo[] = {
     { { -75.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
     { { 0.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
     { { 75.0f, 0.0f, -75.0f }, { 0, 0, 0, 0, 0, 0 }, 0xA, 0x23 },
@@ -1593,14 +1566,18 @@ static unk_func_87801684 D_86C0E33C[] = {
     { D_03042E00, 0xE }, { D_03043520, 4 }, { D_03043C40, 8 }, { D_03043520, 4 }, { D_03042E00, 0xE },
     { D_03041FC0, 4 },   { D_030426E0, 8 }, { D_03041FC0, 4 }, { NULL, 0 },
 };
-static s16 D_86C0E384[] = { 0x32, 0x6E, 0xAA, 0xE6 };
-static Color_RGB8 D_86C0E38C[] = {
-    { 0, 0, 0xB4 },    { 0, 0x82, 0 },       { 0xA0, 0, 0 }, { 0x8C, 0x8C, 0 }, { 0xFF, 0xFF, 0xFF }, { 0xFA, 0, 0 },
-    { 0, 0x28, 0xFF }, { 0xFF, 0xFF, 0xE2 }, { 0, 0, 0 },    { 0x11, 0, 0 },    { 0, 0, 0 },          { 0, 0, 0 },
+static s16 playerGUIScoreXPositions[] = { 0x32, 0x6E, 0xAA, 0xE6 };
+static Color_RGB8 playerColors[] = {
+    { 0, 0, 0xB4 },    //  player 1 skans shadow color
+    { 0, 0x82, 0 },    //  player 2 skans shadow color
+    { 0xA0, 0, 0 },    //  player 3 skans shadow color
+    { 0x8C, 0x8C, 0 }, //  player 4 skans shadow color
+    { 0xFF, 0xFF, 0xFF }, { 0xFA, 0, 0 }, { 0, 0x28, 0xFF }, { 0xFF, 0xFF, 0xE2 },
+    { 0, 0, 0 },          { 0x11, 0, 0 }, { 0, 0, 0 },       { 0, 0, 0 },
 };
 
-s32 func_86C00020(unk_func_8790002C* arg0) {
-    f32 tmp = arg0->unk_274;
+s32 func_86C00020(MiniActor* ekans) {
+    f32 tmp = ekans->launchForce;
     s32 var_v1 = 0;
 
     if (tmp > 58.0f) {
@@ -1614,27 +1591,27 @@ s32 func_86C00020(unk_func_8790002C* arg0) {
     return var_v1;
 }
 
-void func_86C00090(s16 arg0, s32* arg1, s32* arg2) {
-    s16 temp_v0 = D_86C12008[arg0].unk_00;
+void miniDiglettGoldCheck(s16 nDiglett, s32* isGold, s32* arg2) {
+    s16 ActiveDiglettId = activeDigletts[nDiglett].diglettId;
 
-    if (D_86C0E480[temp_v0].unk_29C != 0) {
-        *arg1 = 1;
+    if (miniDigletts[ActiveDiglettId].diglettIsGold) {
+        *isGold = 1;
     } else {
-        *arg1 = 0;
+        *isGold = 0;
     }
 
-    *arg2 = D_86C0E0AC[temp_v0];
+    *arg2 = D_86C0E0AC[ActiveDiglettId];
 }
 
 void func_86C00110(s16 arg0, s16 arg1) {
     s32 var_s0;
-    s32 sp30;
+    s32 isGold;
     s32 sp2C;
     UNUSED s32 pad[2];
 
     var_s0 = 0;
     sp2C = 0;
-    sp30 = 0;
+    isGold = 0;
 
     switch (arg0) {
         case 1:
@@ -1647,37 +1624,37 @@ void func_86C00110(s16 arg0, s16 arg1) {
 
         case 3:
             var_s0 = 0xA0003;
-            sp30 = arg1;
-            sp2C = func_86C00020(&D_86C11530[arg1]);
+            isGold = arg1;
+            sp2C = func_86C00020(&miniEkanses[arg1]);
             break;
 
         case 4:
             var_s0 = 0xA0007;
-            sp30 = arg1;
+            isGold = arg1;
             break;
 
         case 5:
-            func_86C00090(arg1, &sp30, &sp2C);
+            miniDiglettGoldCheck(arg1, &isGold, &sp2C);
             var_s0 = 0xA0011;
             break;
 
         case 6:
-            func_86C00090(arg1, &sp30, &sp2C);
+            miniDiglettGoldCheck(arg1, &isGold, &sp2C);
             var_s0 = 0xA0012;
             break;
 
         case 7:
-            func_86C00090(arg1, &sp30, &sp2C);
+            miniDiglettGoldCheck(arg1, &isGold, &sp2C);
             var_s0 = 0xA0008;
             break;
 
         case 8:
-            func_86C00090(arg1, &sp30, &sp2C);
+            miniDiglettGoldCheck(arg1, &isGold, &sp2C);
             var_s0 = 0xA000B;
             break;
 
         case 9:
-            func_86C00090(arg1, &sp30, &sp2C);
+            miniDiglettGoldCheck(arg1, &isGold, &sp2C);
             var_s0 = 0xA000A;
             break;
 
@@ -1730,7 +1707,7 @@ void func_86C00110(s16 arg0, s16 arg1) {
 
     if (var_s0 != 0) {
         D_87903DBC++;
-        func_8004D9B0(var_s0, sp30, sp2C);
+        func_8004D9B0(var_s0, isGold, sp2C);
     }
 }
 
@@ -1740,80 +1717,80 @@ void func_86C00368(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86C003AC(unk_func_8790002C* arg0) {
-    s16 idx = arg0 - D_86C11530;
+void func_86C003AC(MiniActor* arg0) {
+    s16 idx = arg0 - miniEkanses;
 
-    arg0->unk_1A8.x = arg0->unk_1D8.x = D_86C0E16C[idx].unk_00.x;
-    arg0->unk_1A8.y = arg0->unk_1D8.y = D_86C0E16C[idx].unk_00.y;
-    arg0->unk_1A8.z = arg0->unk_1D8.z = D_86C0E16C[idx].unk_00.z;
+    arg0->position_1.x = arg0->unk_1D8.x = skansActorInfo[idx].pos.x;
+    arg0->position_1.y = arg0->unk_1D8.y = skansActorInfo[idx].pos.y;
+    arg0->position_1.z = arg0->unk_1D8.z = skansActorInfo[idx].pos.z;
 
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = -30.0f;
-    arg0->unk_1C0.z = 0.0f;
+    arg0->position_2.x = 0.0f;
+    arg0->position_2.y = -30.0f;
+    arg0->position_2.z = 0.0f;
 }
 
-void func_86C00424(unk_func_8790002C* arg0, s16 arg1) {
+void initEkans(MiniActor* ekans, s16 player) {
     s32 i;
 
-    func_8790060C(arg0);
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    miniActorAllToZero(ekans);
+    ekans->scale.x = 1.0f;
+    ekans->scale.y = 1.0f;
+    ekans->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = arg0->unk_1D8.x = D_86C0E16C[arg1].unk_00.x;
-    arg0->unk_1A8.y = arg0->unk_1D8.y = D_86C0E16C[arg1].unk_00.y;
-    arg0->unk_1A8.z = arg0->unk_1D8.z = D_86C0E16C[arg1].unk_00.z;
+    ekans->position_1.x = ekans->unk_1D8.x = skansActorInfo[player].pos.x;
+    ekans->position_1.y = ekans->unk_1D8.y = skansActorInfo[player].pos.y;
+    ekans->position_1.z = ekans->unk_1D8.z = skansActorInfo[player].pos.z;
 
-    arg0->unk_1C0.y = 10.0f;
-    arg0->unk_288 = 50.0f;
-    arg0->unk_28C = 140.0f;
+    ekans->position_2.y = 10.0f;
+    ekans->cubeRadio = 50.0f;
+    ekans->halfHeight = 140.0f;
 
-    arg0->unk_21C = -0x8000;
-    arg0->unk_25C = 0x64;
-    arg0->unk_258 = arg0->unk_25C;
+    ekans->yRot_1 = -0x8000;
+    ekans->miniMaxHealth = 0x64;
+    ekans->miniHealth = ekans->miniMaxHealth;
 
-    func_8001BD04(&arg0->unk_000, 0);
+    func_8001BD04(&ekans->unk_000, 0);
 
-    arg0->unk_000.unk_000.unk_01 |= 1;
-    arg0->unk_000.unk_000.unk_02 |= 0x20;
+    ekans->unk_000.unk_000.unk_01 |= 1;
+    ekans->unk_000.unk_000.unk_02 |= 0x20;
 
-    func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
-    func_80017464(&arg0->unk_000, arg0->unk_26E);
+    func_800173DC(&ekans->unk_000, 0, ekans->unk_000.unk_040.unk_04, 0x10000);
+    func_80017464(&ekans->unk_000, ekans->unk_26E);
 
-    arg0->unk_000.unk_000.unk_02 &= ~0x40;
-    arg0->unk_2AC = D_879060C4[arg1];
-    arg0->unk_266 = -1;
+    ekans->unk_000.unk_000.unk_02 &= ~0x40;
+    ekans->isComp = D_879060C4[player];
+    ekans->collidingActorId = -1;
 
-    if (D_86C12088 == 0) {
-        arg0->unk_2AE = D_86C0E084[D_87906046][arg1];
+    if (ekansMinigameCountdownStarted == false) {
+        ekans->unk_2AE = miniEkansDifficulties[miniDifficulty][player];
     } else {
-        arg0->unk_2AE = D_86C0E0A4[arg1];
+        ekans->unk_2AE = D_86C0E0A4[player];
     }
 
     // clang-format off
-    for (i = 0; i < 9; i++) { D_86C12040[i][arg1] = 0; }
+    for (i = 0; i < 9; i++){ D_86C12040[i][player] = 0; }
     // clang-format on
 }
 
-void func_86C005D0(void) {
+void initAllEkans(void) {
     s32 i;
 
-    D_86C0E050 = D_86C11530;
+    miniEkansPtr = miniEkanses;
 
     for (i = 0; i < 4; i++) {
-        func_86C00424(D_86C0E050, i);
-        D_86C0E050++;
+        initEkans(miniEkansPtr, i);
+        miniEkansPtr++;
     }
 }
 
-f32 func_86C0063C(unk_func_8790002C* arg0) {
-    return (arg0->unk_284 <= arg0->unk_280) ? arg0->unk_280 : arg0->unk_284;
+f32 func_86C0063C(MiniActor* ekans) {
+    return (ekans->stickMagnitude2 <= ekans->stickMagnitude1) ? ekans->stickMagnitude1 : ekans->stickMagnitude2;
 }
 
-s16 func_86C00668(unk_func_8790002C* arg0, s16 arg1) {
+s16 func_86C00668(MiniActor* arg0, s16 arg1) {
     s32 var_v1 = arg1 ^ 0;
 
-    switch (arg0 - D_86C11530) {
+    switch (arg0 - miniEkanses) {
         case 0:
             if (var_v1 < -0x1E00) {
                 var_v1 = -0x1E00;
@@ -1857,129 +1834,129 @@ s16 func_86C00668(unk_func_8790002C* arg0, s16 arg1) {
     return var_v1;
 }
 
-void func_86C00770(unk_func_8790002C* arg0) {
-    f32 sp34;
+void miniEkansHumanControls(MiniActor* ekans) {
+    f32 stickMagnitude;
     f32 temp_fa0;
     f32 temp_fv1;
-    s32 sp1C;
+    s32 direction;
     s16 var_v1;
-    s16 sp24;
+    s16 stickY;
     f32 var_ft4;
     s32 var_v0;
 
-    sp1C = 0;
-    sp34 = D_879060BC->stickMag;
-    sp24 = D_879060BC->stickY;
+    direction = 0;
+    stickMagnitude = miniControllerPtr->stickMag;
+    stickY = miniControllerPtr->stickY;
 
-    if (arg0->unk_23E == 0) {
-        if (D_879060BC->buttonDown & 0x200) {
-            sp1C = 1;
-        } else if (D_879060BC->buttonDown & 0x100) {
-            sp1C = -1;
-        } else if (D_879060BC->buttonDown & 2) {
-            sp1C = 1;
-        } else if (D_879060BC->buttonDown & 1) {
-            sp1C = -1;
+    if (ekans->mainState == 0) {
+        if (BTN_IS_DOWN(miniControllerPtr, BTN_DLEFT)) {
+            direction = 1;
+        } else if (BTN_IS_DOWN(miniControllerPtr, BTN_DRIGHT)) {
+            direction = -1;
+        } else if (BTN_IS_DOWN(miniControllerPtr, BTN_CLEFT)) {
+            direction = 1;
+        } else if (BTN_IS_DOWN(miniControllerPtr, BTN_CRIGHT)) {
+            direction = -1;
         }
 
-        if (sp1C != 0) {
-            arg0->unk_2A0++;
-            if (arg0->unk_2A0 >= 0xB) {
-                arg0->unk_2A0 = 0xA;
+        if (direction != 0) {
+            ekans->leftRightCount++;
+            if (ekans->leftRightCount >= 0xB) {
+                ekans->leftRightCount = 0xA;
             }
         } else {
-            arg0->unk_2A0 = 0;
+            ekans->leftRightCount = 0;
         }
 
-        if (arg0->unk_2A0 < 3) {
+        if (ekans->leftRightCount < 3) {
             var_v1 = 0;
-        } else if (arg0->unk_2A0 < 6) {
-            var_v1 = arg0->unk_2A0 * 0x28;
+        } else if (ekans->leftRightCount < 6) {
+            var_v1 = ekans->leftRightCount * 0x28;
         } else {
             var_v1 = 0x1E0;
         }
 
-        arg0->unk_228 += sp1C * (var_v1 + 0x180);
-        arg0->unk_228 = func_86C00668(arg0, arg0->unk_228);
+        ekans->yRot_2 += direction * (var_v1 + 0x180);
+        ekans->yRot_2 = func_86C00668(ekans, ekans->yRot_2);
     }
 
-    if (sp24 >= 0) {
-        sp34 = 0.0f;
+    if (stickY >= 0) {
+        stickMagnitude = 0.0f;
     }
 
-    if (arg0->unk_23E == 0) {
+    if (ekans->mainState == 0) {
         var_v0 = 0;
         var_ft4 = 0.0f;
-        temp_fv1 = arg0->unk_280 - sp34;
-        temp_fa0 = arg0->unk_284 - arg0->unk_280;
+        temp_fv1 = ekans->stickMagnitude1 - stickMagnitude;
+        temp_fa0 = ekans->stickMagnitude2 - ekans->stickMagnitude1;
         if (temp_fa0 <= temp_fv1) {
-            if ((arg0->unk_280 <= 12.0f) && (temp_fv1 >= 5.0f) && (sp34 == 0.0f)) {
+            if ((ekans->stickMagnitude1 <= 12.0f) && (temp_fv1 >= 5.0f) && (stickMagnitude == 0.0f)) {
                 var_v0 = 1;
-                var_ft4 = arg0->unk_280;
+                var_ft4 = ekans->stickMagnitude1;
             }
 
-            if (arg0->unk_280 <= 30.0f) {
+            if (ekans->stickMagnitude1 <= 30.0f) {
                 if (temp_fv1 >= 10.0f) {
-                    sp1C = 1;
+                    direction = 1;
                     var_v0 = 1;
-                    var_ft4 = func_86C0063C(arg0);
+                    var_ft4 = func_86C0063C(ekans);
                 }
-            } else if (arg0->unk_280 < 50.0f) {
+            } else if (ekans->stickMagnitude1 < 50.0f) {
                 if (temp_fv1 >= 15.0f) {
-                    sp1C = 1;
+                    direction = 1;
                     var_v0 = 1;
-                    var_ft4 = func_86C0063C(arg0);
+                    var_ft4 = func_86C0063C(ekans);
                 }
             } else if (temp_fv1 >= 20.0f) {
-                sp1C = 1;
+                direction = 1;
                 var_v0 = 1;
-                var_ft4 = func_86C0063C(arg0);
+                var_ft4 = func_86C0063C(ekans);
             }
         } else if (temp_fa0 >= 25.0f) {
             var_v0 = 1;
-            var_ft4 = arg0->unk_284;
+            var_ft4 = ekans->stickMagnitude2;
         }
 
         if (var_v0 != 0) {
-            sp34 = 0.0f;
+            stickMagnitude = 0.0f;
 
             if (var_ft4 < 24.0f) {
                 var_ft4 = 24.0f;
             }
 
-            arg0->unk_274 = var_ft4;
-            arg0->unk_22E = 0;
-            arg0->unk_280 = 0.0f;
-            arg0->unk_1C0.x = 0.0f;
-            arg0->unk_1C0.z = 0.0f;
-            arg0->unk_23E = 1;
+            ekans->launchForce = var_ft4;
+            ekans->ySpinSpeed = 0;
+            ekans->stickMagnitude1 = 0.0f;
+            ekans->position_2.x = 0.0f;
+            ekans->position_2.z = 0.0f;
+            ekans->mainState = 1;
         }
 
-        arg0->unk_284 = arg0->unk_280;
-        arg0->unk_280 = sp34;
+        ekans->stickMagnitude2 = ekans->stickMagnitude1;
+        ekans->stickMagnitude1 = stickMagnitude;
     }
 }
 
 void func_86C00AA4(void) {
-    unk_func_8790002C* ptr = D_86C11530;
+    MiniActor* ekans = miniEkanses;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (ptr->unk_2AC != 0) {
-            ptr->unk_242 = 1;
+        if (ekans->isComp != false) {
+            ekans->compState = 1;
         }
-        ptr++;
+        ekans++;
     }
 }
 
-s32 func_86C00B0C(unk_func_8790002C* arg0) {
+s32 func_86C00B0C(MiniActor* compEkans) {
     s32 ret = 0;
-    s32 idx = arg0->unk_266;
+    s32 idx = compEkans->collidingActorId;
     s32 i;
 
-    if ((D_86C0E480[D_86C12008[idx].unk_00].unk_29C == 0) && (arg0->unk_2AE == 1)) {
+    if ((miniDigletts[activeDigletts[idx].diglettId].diglettIsGold == 0) && (compEkans->unk_2AE == 1)) {
         for (i = 0; i < 3; i++) {
-            if ((D_86C12008[i].unk_02 == 6) && (D_86C0E480[D_86C12008[i].unk_00].unk_29C != 0)) {
+            if ((activeDigletts[i].state == 6) && (miniDigletts[activeDigletts[i].diglettId].diglettIsGold != 0)) {
                 ret = 1;
                 break;
             }
@@ -1995,7 +1972,7 @@ s16 func_86C00BB4(void) {
     s16 var_t0 = -1;
 
     for (i = 0; i < 3; i++) {
-        if (D_86C12008[var_v1].unk_02 == 6) {
+        if (activeDigletts[var_v1].state == 6) {
             var_t0 = var_v1;
             break;
         }
@@ -2009,14 +1986,14 @@ s16 func_86C00BB4(void) {
     return var_t0;
 }
 
-s16 func_86C00C40(unk_func_8790002C* arg0) {
+s16 func_86C00C40(MiniActor* arg0) {
     s32 i;
     s32 var_a0;
     s16 sp1E = -1;
     s32 sp18 = 0;
 
-    if (arg0->unk_266 >= 0) {
-        var_a0 = arg0->unk_266;
+    if (arg0->collidingActorId >= 0) {
+        var_a0 = arg0->collidingActorId;
     } else {
         sp18 = 0;
         sp1E = -1;
@@ -2024,7 +2001,7 @@ s16 func_86C00C40(unk_func_8790002C* arg0) {
     }
 
     for (i = 0; i < 3; i++) {
-        if ((D_86C12008[i].unk_02 == 6) && (D_86C0E480[D_86C12008[i].unk_00].unk_29C != 0)) {
+        if ((activeDigletts[i].state == 6) && (miniDigletts[activeDigletts[i].diglettId].diglettIsGold != 0)) {
             sp1E = i;
             sp18 = 1;
             break;
@@ -2033,7 +2010,7 @@ s16 func_86C00C40(unk_func_8790002C* arg0) {
 
     if (sp18 == 0) {
         for (i = 0; i < 3; i++) {
-            if (D_86C12008[var_a0].unk_02 == 6) {
+            if (activeDigletts[var_a0].state == 6) {
                 sp1E = var_a0;
                 break;
             }
@@ -2047,18 +2024,18 @@ s16 func_86C00C40(unk_func_8790002C* arg0) {
     return sp1E;
 }
 
-s16 func_86C00D50(unk_func_8790002C* arg0) {
+s16 func_86C00D50(MiniActor* arg0) {
     s32 i;
     s32 j;
     s32 sp1C;
     s16 var_a0;
     s32 var_v1;
-    unk_func_8790002C* var_v0 = D_86C11530;
+    MiniActor* var_v0 = miniEkanses;
 
     sp1C = 1;
 
     for (var_v1 = 0; var_v1 < 4; var_v1++, var_v0++) {
-        if ((var_v0 != arg0) && (var_v0->unk_2AC != 0)) {
+        if ((var_v0 != arg0) && (var_v0->isComp != 0)) {
             sp1C = 0;
             break;
         }
@@ -2067,12 +2044,12 @@ s16 func_86C00D50(unk_func_8790002C* arg0) {
     var_a0 = func_878001E8(0x64) % 3;
 
     for (i = 0; i < 3; i++) {
-        if (D_86C12008[var_a0].unk_02 == 6) {
+        if (activeDigletts[var_a0].state == 6) {
             if (sp1C == 0) {
-                var_v0 = D_86C11530;
+                var_v0 = miniEkanses;
                 var_v1 = 1;
                 for (j = 0; j < 4; j++, var_v0++) {
-                    if ((var_v0 != arg0) && (var_v0->unk_2AC != 0) && (var_a0 == var_v0->unk_266)) {
+                    if ((var_v0 != arg0) && (var_v0->isComp != 0) && (var_a0 == var_v0->collidingActorId)) {
                         var_v1 = 0;
                     }
                 }
@@ -2098,33 +2075,33 @@ s16 func_86C00D50(unk_func_8790002C* arg0) {
     return var_a0;
 }
 
-s32 func_86C00EF8(unk_func_8790002C* arg0) {
-    switch (arg0->unk_2AE) {
+s32 func_86C00EF8(MiniActor* compEkans) {
+    switch (compEkans->unk_2AE) {
         case 0:
-            arg0->unk_266 = func_86C00BB4();
+            compEkans->collidingActorId = func_86C00BB4();
             break;
 
         case 1:
-            arg0->unk_266 = func_86C00C40(arg0);
+            compEkans->collidingActorId = func_86C00C40(compEkans);
             break;
 
         case 2:
-            arg0->unk_266 = func_86C00D50(arg0);
+            compEkans->collidingActorId = func_86C00D50(compEkans);
             break;
     }
 
-    return arg0->unk_266;
+    return compEkans->collidingActorId;
 }
 
-void func_86C00F70(unk_func_8790002C* arg0) {
+void func_86C00F70(MiniActor* compEkans) {
     Vec3f sp3C;
-    unk_func_8790002C* temp_v0;
+    MiniActor* tempDiglett;
     s16 sp36;
     s16 sp34;
     s16 sp32;
     s16 idx;
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             sp36 = 0x1000;
             sp34 = 0x80;
@@ -2147,68 +2124,68 @@ void func_86C00F70(unk_func_8790002C* arg0) {
             break;
     }
 
-    idx = D_86C12008[arg0->unk_266].unk_00;
-    temp_v0 = &D_86C0E480[idx];
+    idx = activeDigletts[compEkans->collidingActorId].diglettId;
+    tempDiglett = &miniDigletts[idx];
 
-    sp3C.x = temp_v0->unk_190.x - arg0->unk_190.x;
-    sp3C.z = temp_v0->unk_190.z - arg0->unk_190.z;
+    sp3C.x = tempDiglett->totalPos.x - compEkans->totalPos.x;
+    sp3C.z = tempDiglett->totalPos.z - compEkans->totalPos.z;
 
-    arg0->unk_222 = func_86C00668(arg0, func_81400BBC(sp3C) + func_81400B00(sp36) + 0x8000);
-    arg0->unk_22E = func_878001E8(sp32) + sp34;
+    compEkans->unk_222 = func_86C00668(compEkans, func_81400BBC(sp3C) + func_81400B00(sp36) + 0x8000);
+    compEkans->ySpinSpeed = func_878001E8(sp32) + sp34;
 }
 
-void func_86C01100(unk_func_8790002C* arg0) {
-    s16 temp_v1 = D_86C12008[arg0->unk_266].unk_00;
-    f32 var_fv0;
+void miniEkansCompGetForce(MiniActor* compEkans) {
+    s16 diglettId = activeDigletts[compEkans->collidingActorId].diglettId;
+    f32 force;
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0x28) + 0x14;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0x23) + 0x14;
+            if (diglettId < 3) {
+                force = func_878001E8(0x28) + 0x14;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0x23) + 0x14;
             } else {
-                var_fv0 = func_878001E8(0x19) + 0x28;
+                force = func_878001E8(0x19) + 0x28;
             }
             break;
 
         case 1:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0x1E) + 0x14;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0x1E) + 0x1E;
+            if (diglettId < 3) {
+                force = func_878001E8(0x1E) + 0x14;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0x1E) + 0x1E;
             } else {
-                var_fv0 = func_878001E8(0xF) + 0x32;
+                force = func_878001E8(0xF) + 0x32;
             }
             break;
 
         case 2:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0xF) + 0x18;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0xF) + 0x28;
+            if (diglettId < 3) {
+                force = func_878001E8(0xF) + 0x18;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0xF) + 0x28;
             } else {
-                var_fv0 = func_878001E8(0xA) + 0x36;
+                force = func_878001E8(0xA) + 0x36;
             }
             break;
 
         case 3:
-            if (temp_v1 < 3) {
-                var_fv0 = func_878001E8(0xA) + 0x1C;
-            } else if (temp_v1 < 6) {
-                var_fv0 = func_878001E8(0xA) + 0x2A;
+            if (diglettId < 3) {
+                force = func_878001E8(0xA) + 0x1C;
+            } else if (diglettId < 6) {
+                force = func_878001E8(0xA) + 0x2A;
             } else {
-                var_fv0 = func_878001E8(6) + 0x3A;
+                force = func_878001E8(6) + 0x3A;
             }
             break;
     }
-    arg0->unk_280 = var_fv0;
+    compEkans->stickMagnitude1 = force;
 }
 
 s16 func_86C01408(void) {
     s16 sp1E;
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             sp1E = func_81400A78(0x14) + 0x12;
             break;
@@ -2232,7 +2209,7 @@ s16 func_86C01408(void) {
 s16 func_86C014A0(void) {
     s16 sp1E;
 
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             sp1E = func_81400A78(0x14) + 0xC;
             break;
@@ -2253,132 +2230,133 @@ s16 func_86C014A0(void) {
     return sp1E;
 }
 
-void func_86C01538(unk_func_8790002C* arg0) {
-    switch (arg0->unk_242) {
+void miniEkansCompControls(MiniActor* compEkans) {
+    switch (compEkans->compState) {
         case 1:
-            if (func_86C00EF8(arg0) >= 0) {
-                func_86C00F70(arg0);
-                arg0->unk_242++;
+            if (func_86C00EF8(compEkans) >= 0) {
+                func_86C00F70(compEkans);
+                compEkans->compState++;
             }
             break;
 
-        case 2:
-            if (func_86C00B0C(arg0) != 0) {
-                arg0->unk_242 = 1;
-            } else if (func_81400550(&arg0->unk_228, arg0->unk_222, arg0->unk_22E) != 0) {
-                arg0->unk_29E = func_86C01408();
-                arg0->unk_242++;
+        case 2: //	comp L R
+            if (func_86C00B0C(compEkans) != 0) {
+                compEkans->compState = 1;
+            } else if (func_81400550(&compEkans->yRot_2, compEkans->unk_222, compEkans->ySpinSpeed) != 0) {
+                compEkans->unk_29E = func_86C01408();
+                compEkans->compState++;
             }
             break;
 
-        case 3:
-            if (func_86C00B0C(arg0) != 0) {
-                arg0->unk_242 = 1;
+        case 3: //	comp holding back
+            if (func_86C00B0C(compEkans) != 0) {
+                compEkans->compState = 1;
             } else {
-                arg0->unk_29E--;
-                if (arg0->unk_29E <= 0) {
-                    func_86C01100(arg0);
-                    arg0->unk_242++;
+                compEkans->unk_29E--;
+                if (compEkans->unk_29E <= 0) {
+                    miniEkansCompGetForce(compEkans);
+                    compEkans->compState++;
                 }
             }
             break;
 
-        case 4:
-            if (func_81400760(&arg0->unk_274, arg0->unk_280, 8.0f) != 0) {
-                arg0->unk_1C0.z = arg0->unk_1C0.x = 0.0f;
-                arg0->unk_280 = 0;
-                arg0->unk_23E = 1;
-                arg0->unk_242++;
+        case 4: //	comp launch (only y speed)
+            if (func_81400760(&compEkans->launchForce, compEkans->stickMagnitude1, 8.0f) != 0) {
+                compEkans->position_2.z = compEkans->position_2.x = 0.0f;
+                compEkans->stickMagnitude1 = 0;
+                compEkans->mainState = 1;
+                compEkans->compState++;
             }
             break;
 
-        case 5:
-            if (arg0->unk_23E == 0) {
-                arg0->unk_29E = func_86C014A0();
-                arg0->unk_242++;
+        case 5: //	comp launch force
+            if (compEkans->mainState == 0) {
+                compEkans->unk_29E = func_86C014A0();
+                compEkans->compState++;
             }
             break;
 
-        case 6:
-            arg0->unk_29E--;
-            if (arg0->unk_29E <= 0) {
-                arg0->unk_242 = 1;
+        case 6: //	repeat
+            compEkans->unk_29E--;
+            if (compEkans->unk_29E <= 0) {
+                compEkans->compState = 1;
             }
             break;
     }
 }
 
-void func_86C016C8(unk_func_8790002C* arg0) {
-    arg0->unk_210 = 1.0f;
-    arg0->unk_1F8 = (SINS(arg0->unk_214.y) * (26.0f + arg0->unk_274)) / 10.0f;
-    arg0->unk_1FC = (arg0->unk_274 + 70.0f) * 0.125f;
-    arg0->unk_200 = (COSS(arg0->unk_214.y) * (26.0f + arg0->unk_274)) / 10.0f;
+void func_86C016C8(MiniActor* ekans) {
+    ekans->antiAcceleration = 1.0f;
+    ekans->xSpeed = (SINS(ekans->totalRot.y) * (26.0f + ekans->launchForce)) / 10.0f;
+    ekans->ySpeed = (ekans->launchForce + 70.0f) * 0.125f;
+    ekans->zSpeed = (COSS(ekans->totalRot.y) * (26.0f + ekans->launchForce)) / 10.0f;
 }
 
 void func_86C01748(void) {
 }
 
-void func_86C01750(unk_func_8790002C* arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {
-    if (arg3 > 0.0f) {
-        if (arg4 >= 0.0f) {
-            arg0->unk_1F8 *= 0.25f;
+void ekansFixDirToDiglett(MiniActor* ekans, UNUSED s32 nPlayer, s32 nActiveDiglett, f32 zDist, f32 xDist, f32 yDist) {
+    if (zDist > 0.0f) {
+        if (xDist >= 0.0f) {
+            ekans->xSpeed *= 0.25f;
         } else {
-            arg0->unk_1F8 = -arg0->unk_1F8 * 0.25f;
+            ekans->xSpeed = -ekans->xSpeed * 0.25f;
         }
-        arg0->unk_200 = -arg0->unk_200 * 0.25f;
+        ekans->zSpeed = -ekans->zSpeed * 0.25f;
     } else {
-        if (arg4 >= 0.0f) {
-            arg0->unk_1F8 *= 0.25f;
+        if (xDist >= 0.0f) {
+            ekans->xSpeed *= 0.25f;
         } else {
-            arg0->unk_1F8 = -arg0->unk_1F8 * 0.25f;
+            ekans->xSpeed = -ekans->xSpeed * 0.25f;
         }
-        arg0->unk_200 *= 0.25f;
+        ekans->zSpeed *= 0.25f;
     }
 
-    if (arg5 > 0) {
-        arg0->unk_1FC = -arg0->unk_1FC * 0.75f;
+    if (yDist > 0) {
+        ekans->ySpeed = -ekans->ySpeed * 0.75f;
     } else {
-        arg0->unk_1FC = -arg0->unk_1FC * 0.75f;
+        ekans->ySpeed = -ekans->ySpeed * 0.75f;
     }
-    arg0->unk_1C0.y += arg0->unk_1FC;
 
-    func_86C00368(5, arg2);
+    ekans->position_2.y += ekans->ySpeed;
 
-    arg0->unk_298 = 0xC;
-    arg0->unk_000.unk_000.unk_02 &= ~0x20;
-    arg0->unk_22E = 0x1000;
+    func_86C00368(5, nActiveDiglett);
+
+    ekans->unk_298 = 0xC;
+    ekans->unk_000.unk_000.unk_02 &= ~0x20;
+    ekans->ySpinSpeed = 0x1000;
 }
 
-void func_86C018B8(unk_func_8790002C* arg0, s32 arg1) {
+void checkCollitionWithDigletts(MiniActor* ekans, s32 nPlayer) {
     s32 i;
-    f32 temp_fa0;
-    f32 temp_fa1;
-    f32 temp_fv0;
-    f32 temp_fv1;
+    f32 xDist;
+    f32 yDist;
+    f32 zDist;
+    f32 distance2d;
     UNUSED s32 pad;
-    Vec3f sp84;
-    Vec3f sp78;
+    Vec3f tempDiglettHitboxPos;
+    Vec3f tempEkansHitboxPos;
 
-    arg0->unk_25E = 0;
-    func_80015390(&arg0->unk_000, 0xA, &sp78);
-    if ((arg0->unk_262 != 0) && (arg0->unk_260 < 2)) {
+    ekans->ekansAbbleToHoop = false;
+    func_80015390(&ekans->unk_000, 0xA, &tempEkansHitboxPos);
+    if ((ekans->ekansIsMidAir) && (ekans->midAirState < 2)) {
         for (i = 0; i < 3; i++) {
-            if ((D_86C12008[i].unk_06 != 0) && (D_86C12008[i].unk_08 == 0)) {
-                func_80015390(&D_86C0E480[D_86C12008[i].unk_00].unk_000, 0xA, &sp84);
-                temp_fv0 = func_81400EF0(sp78, sp84);
+            if ((activeDigletts[i].unk_06 != 0) && (activeDigletts[i].gotHoop == false)) {
+                func_80015390(&miniDigletts[activeDigletts[i].diglettId].unk_000, 0xA, &tempDiglettHitboxPos);
+                distance2d = func_81400EF0(tempEkansHitboxPos, tempDiglettHitboxPos);
 
-                temp_fa0 = sp78.x - sp84.x;
-                temp_fv1 = sp78.y - sp84.y;
-                temp_fa1 = sp78.z - sp84.z;
+                xDist = tempEkansHitboxPos.x - tempDiglettHitboxPos.x;
+                yDist = tempEkansHitboxPos.y - tempDiglettHitboxPos.y;
+                zDist = tempEkansHitboxPos.z - tempDiglettHitboxPos.z;
 
-                if ((temp_fv0 < 35.0f) && (temp_fv1 > -35.0f) && (temp_fv1 < 20.0f)) {
-                    if ((temp_fv0 < 25.0f) && (temp_fv1 > -20.0f) && (temp_fv1 < 20.0f)) {
-                        arg0->unk_25E = 1;
-                        arg0->unk_268 = arg0->unk_266;
-                        arg0->unk_266 = i;
-                    } else if (arg0->unk_260 == 0) {
-                        arg0->unk_260 = 1;
-                        func_86C01750(arg0, arg1, i, temp_fa1, temp_fa0, temp_fv1);
+                if ((distance2d < 35.0f) && (yDist > -35.0f) && (yDist < 20.0f)) {
+                    if ((distance2d < 25.0f) && (yDist > -20.0f) && (yDist < 20.0f)) {
+                        ekans->ekansAbbleToHoop = true;
+                        ekans->collidingActorId_alt = ekans->collidingActorId;
+                        ekans->collidingActorId = i;
+                    } else if (ekans->midAirState == 0) {
+                        ekans->midAirState = 1;
+                        ekansFixDirToDiglett(ekans, nPlayer, i, zDist, xDist, yDist);
                     }
                 }
             }
@@ -2393,254 +2371,254 @@ void func_86C01AF8(void) {
     Vec3f sp70;
     s32 i;
     s32 j;
-    unk_func_8790002C* temp_s1;
-    unk_func_8790002C* var_s6 = D_86C11530;
+    MiniActor* diglett;
+    MiniActor* ekans = miniEkanses;
 
-    for (i = 0; i < 4; i++, var_s6++) {
-        if (var_s6->unk_25E != 0) {
-            s32 idx = var_s6->unk_266;
+    for (i = 0; i < 4; i++, ekans++) {
+        if (ekans->ekansAbbleToHoop) {
+            s32 idx = ekans->collidingActorId;
 
             for (j = i + 1; j < 4; j++) {
-                if ((D_86C11530[j].unk_25E != 0) && (idx == D_86C11530[j].unk_266)) {
-                    temp_s1 = &D_86C0E480[D_86C12008[idx].unk_00];
+                if ((miniEkanses[j].ekansAbbleToHoop) && (idx == miniEkanses[j].collidingActorId)) {
+                    diglett = &miniDigletts[activeDigletts[idx].diglettId];
 
-                    func_80015390(&var_s6->unk_000, 0xA, &sp7C);
-                    func_80015390(&D_86C11530[j].unk_000, 0xA, &sp70);
-                    func_80015390(&temp_s1->unk_000, 0xA, &sp88);
+                    func_80015390(&ekans->unk_000, 0xA, &sp7C);
+                    func_80015390(&miniEkanses[j].unk_000, 0xA, &sp70);
+                    func_80015390(&diglett->unk_000, 0xA, &sp88);
 
                     if (func_81400E8C(sp7C, sp88) > func_81400E8C(sp70, sp88)) {
-                        var_s6->unk_25E = 0;
+                        ekans->ekansAbbleToHoop = false;
                         break;
                     } else {
-                        D_86C11530[j].unk_25E = 0;
+                        miniEkanses[j].ekansAbbleToHoop = false;
                     }
                 }
             }
 
-            if (var_s6->unk_25E != 0) {
-                var_s6->unk_25E = 0;
-                var_s6->unk_260 = 2;
+            if (ekans->ekansAbbleToHoop) {
+                ekans->ekansAbbleToHoop = false;
+                ekans->midAirState = 2;
             }
         }
     }
 }
 
-void func_86C01D2C(unk_func_8790002C* arg0, s32 arg1) {
-    Vec3f sp3C;
-    Vec3f sp30;
-    f32 temp_fa0;
-    f32 temp_fv1;
+void func_86C01D2C(MiniActor* ekans, s32 nPlayer) {
+    Vec3f diglettColl;
+    Vec3f ekansColl;
+    f32 xDist;
+    f32 zDist;
     s32 idx;
-    unk_func_8790002C* sp20;
-    unk_D_86C12008* sp18;
+    MiniActor* diglett;
+    ActiveDiglettInfo* activeDiglett;
 
-    if (arg0->unk_260 != 2) {
+    if (ekans->midAirState != 2) {
         return;
     }
 
-    func_80015390(&arg0->unk_000, 0xA, &sp30);
+    func_80015390(&ekans->unk_000, 0xA, &ekansColl);
 
-    idx = arg0->unk_266;
-    sp18 = &D_86C12008[idx];
-    sp20 = &D_86C0E480[sp18->unk_00];
+    idx = ekans->collidingActorId;
+    activeDiglett = &activeDigletts[idx];
+    diglett = &miniDigletts[activeDiglett->diglettId];
 
-    func_80015390(&sp20->unk_000, 0xA, &sp3C);
+    func_80015390(&diglett->unk_000, 0xA, &diglettColl);
 
-    temp_fa0 = sp30.x - sp3C.x;
-    temp_fv1 = sp30.z - sp3C.z;
+    xDist = ekansColl.x - diglettColl.x;
+    zDist = ekansColl.z - diglettColl.z;
 
-    arg0->unk_1F8 = 0.0f;
-    arg0->unk_200 = 0.0f;
+    ekans->xSpeed = 0.0f;
+    ekans->zSpeed = 0.0f;
 
-    arg0->unk_1A8.x = arg0->unk_190.x;
-    arg0->unk_1A8.z = arg0->unk_190.z;
+    ekans->position_1.x = ekans->totalPos.x;
+    ekans->position_1.z = ekans->totalPos.z;
 
-    arg0->unk_1B4.x = sp3C.x;
-    arg0->unk_1B4.z = sp3C.z;
+    ekans->closestDiglettPos.x = diglettColl.x;
+    ekans->closestDiglettPos.z = diglettColl.z;
 
-    arg0->unk_1C0.x = arg0->unk_1C0.z = 0.0f;
+    ekans->position_2.x = ekans->position_2.z = 0.0f;
 
-    arg0->unk_22E = 0x2000;
-    arg0->unk_000.unk_000.unk_02 &= 0xFFDF;
+    ekans->ySpinSpeed = 0x2000;
+    ekans->unk_000.unk_000.unk_02 &= 0xFFDF;
 
-    if ((temp_fv1 > 15.0f) || (temp_fv1 < -15.0f)) {
-        arg0->unk_1D4 = 4.0f;
-    } else if ((temp_fv1 > 5.0f) || (temp_fv1 < -5.0f)) {
-        arg0->unk_1D4 = 2.0f;
+    if ((zDist > 15.0f) || (zDist < -15.0f)) {
+        ekans->dist2DiglettLevelZ = 4.0f;
+    } else if ((zDist > 5.0f) || (zDist < -5.0f)) {
+        ekans->dist2DiglettLevelZ = 2.0f;
     } else {
-        arg0->unk_1D4 = 1.0f;
+        ekans->dist2DiglettLevelZ = 1.0f;
     }
 
-    if ((temp_fa0 > 15.0f) || (temp_fa0 < -15.0f)) {
-        arg0->unk_1CC = 4.0f;
-    } else if ((temp_fa0 > 5.0f) || (temp_fa0 < -5.0f)) {
-        arg0->unk_1CC = 2.0f;
+    if ((xDist > 15.0f) || (xDist < -15.0f)) {
+        ekans->dist2DiglettLevelX = 4.0f;
+    } else if ((xDist > 5.0f) || (xDist < -5.0f)) {
+        ekans->dist2DiglettLevelX = 2.0f;
     } else {
-        arg0->unk_1CC = 1.0f;
+        ekans->dist2DiglettLevelX = 1.0f;
     }
 
-    arg0->unk_260 = 3;
-    if (sp20->unk_29C != 0) {
-        arg0->unk_29A = 2;
+    ekans->midAirState = 3;
+    if (diglett->diglettIsGold) {
+        ekans->ekansDiglettHitScore = 2;
     } else {
-        arg0->unk_29A = 1;
+        ekans->ekansDiglettHitScore = 1;
     }
 
-    sp18->unk_08 = 1;
-    sp18->unk_0C = arg1;
-    D_86C12040[sp18->unk_00][arg1] = 1;
+    activeDiglett->gotHoop = true;
+    activeDiglett->collidingActorId = nPlayer;
+    D_86C12040[activeDiglett->diglettId][nPlayer] = 1;
 
-    arg0->unk_296 = 1;
-    if (arg0->unk_260 == 0) {
-        arg0->unk_298 = 1;
+    ekans->unk_296 = 1;
+    if (ekans->midAirState == 0) {
+        ekans->unk_298 = 1;
     }
 }
 
-void func_86C01FAC(unk_func_8790002C* arg0, s32 arg1) {
-    if (arg0->unk_260 == 3) {
-        func_81400760(&arg0->unk_1A8.x, arg0->unk_1B4.x, arg0->unk_1CC);
-        func_81400760(&arg0->unk_1A8.z, arg0->unk_1B4.z, arg0->unk_1D4);
+void miniGetCloser2Diglett(MiniActor* ekans, s32 nPlayer) {
+    if (ekans->midAirState == 3) {
+        func_81400760(&ekans->position_1.x, ekans->closestDiglettPos.x, ekans->dist2DiglettLevelX);
+        func_81400760(&ekans->position_1.z, ekans->closestDiglettPos.z, ekans->dist2DiglettLevelZ);
     }
 
-    if (arg0->unk_298 != 0) {
-        arg0->unk_298--;
-    } else if (arg0->unk_296 != 0) {
-        func_86C00368(8, arg0->unk_266);
-        arg0->unk_296 = 0;
+    if (ekans->unk_298 != 0) {
+        ekans->unk_298--;
+    } else if (ekans->unk_296 != 0) {
+        func_86C00368(8, ekans->collidingActorId);
+        ekans->unk_296 = 0;
     }
 
-    if (arg0->unk_260 < 5) {
-        if (arg0->unk_1C0.y <= -50.0f) {
-            arg0->unk_1C0.y = -50.0f;
-            arg0->unk_1F8 = 0.0f;
-            arg0->unk_200 = 0.0f;
-            if (arg0->unk_260 == 3) {
-                arg0->unk_29E = 0x1E;
-                arg0->unk_260 = 5;
-                arg0->unk_1FC *= -0.25f;
+    if (ekans->midAirState < 5) {
+        if (ekans->position_2.y <= -50.0f) {
+            ekans->position_2.y = -50.0f;
+            ekans->xSpeed = 0.0f;
+            ekans->zSpeed = 0.0f;
+            if (ekans->midAirState == 3) {
+                ekans->unk_29E = 0x1E;
+                ekans->midAirState = 5;
+                ekans->ySpeed *= -0.25f;
             } else {
-                arg0->unk_29E = 0xF;
-                arg0->unk_22E = 0x1000;
-                arg0->unk_260 = 6;
-                arg0->unk_1FC *= -0.5f;
-                func_86C00368(4, arg1);
+                ekans->unk_29E = 0xF;
+                ekans->ySpinSpeed = 0x1000;
+                ekans->midAirState = 6;
+                ekans->ySpeed *= -0.5f;
+                func_86C00368(4, nPlayer);
             }
-            arg0->unk_000.unk_000.unk_02 &= ~0x20;
-            arg0->unk_2A2 += arg0->unk_29A;
-            arg0->unk_29A = 0;
+            ekans->unk_000.unk_000.unk_02 &= ~0x20;
+            ekans->ekansScore += ekans->ekansDiglettHitScore;
+            ekans->ekansDiglettHitScore = 0;
         }
     } else {
-        if ((arg0->unk_1C0.y <= -50.0f) && (arg0->unk_260 >= 5)) {
-            arg0->unk_1C0.y = -50.0f;
-            arg0->unk_210 = 0.0f;
-            arg0->unk_1FC = 0.0f;
-            func_81400550(&arg0->unk_22E, 0, 0x100);
+        if ((ekans->position_2.y <= -50.0f) && (ekans->midAirState >= 5)) {
+            ekans->position_2.y = -50.0f;
+            ekans->antiAcceleration = 0.0f;
+            ekans->ySpeed = 0.0f;
+            func_81400550(&ekans->ySpinSpeed, 0, 0x100);
         }
 
-        if (arg0->unk_29E < 6) {
-            s16 tmp = arg0->unk_000.unk_01D - 0x40;
+        if (ekans->unk_29E < 6) {
+            s16 tmp = ekans->unk_000.unk_01D - 0x40;
             if (tmp < 0) {
                 tmp = 0;
             }
-            arg0->unk_000.unk_01D = tmp;
+            ekans->unk_000.unk_01D = tmp;
         }
 
-        arg0->unk_29E--;
-        if (arg0->unk_29E <= 0) {
-            if ((arg0->unk_260 == 5) && (arg0->unk_2AC != 0)) {
-                if (arg0->unk_268 == arg0->unk_266) {
-                    arg0->unk_266 = -1;
+        ekans->unk_29E--;
+        if (ekans->unk_29E <= 0) {
+            if ((ekans->midAirState == 5) && (ekans->isComp)) {
+                if (ekans->collidingActorId_alt == ekans->collidingActorId) {
+                    ekans->collidingActorId = -1;
                 } else {
-                    arg0->unk_266 = arg0->unk_268;
+                    ekans->collidingActorId = ekans->collidingActorId_alt;
                 }
             }
 
-            arg0->unk_000.unk_000.unk_01 &= ~1;
-            arg0->unk_000.unk_01D = 0xFF;
-            arg0->unk_234 = 0;
-            arg0->unk_22E = 0;
-            arg0->unk_260 = 0;
-            arg0->unk_262 = 0;
-            arg0->unk_23E++;
+            ekans->unk_000.unk_000.unk_01 &= ~1;
+            ekans->unk_000.unk_01D = 0xFF;
+            ekans->yRot_3 = 0;
+            ekans->ySpinSpeed = 0;
+            ekans->midAirState = 0;
+            ekans->ekansIsMidAir = 0;
+            ekans->mainState++;
         }
     }
 
-    arg0->unk_234 += arg0->unk_22E;
+    ekans->yRot_3 += ekans->ySpinSpeed;
 }
 
-void func_86C021FC(unk_func_8790002C* arg0) {
-    if (arg0->unk_280 > 5.0f) {
-        func_81400760(&arg0->unk_1C0.x, (-SINS(arg0->unk_214.y) * arg0->unk_280) / 3.0f, 4.0f);
-        func_81400760(&arg0->unk_1C0.z, (-COSS(arg0->unk_214.y) * arg0->unk_280) / 3.0f, 4.0f);
+void func_86C021FC(MiniActor* ekans) {
+    if (ekans->stickMagnitude1 > 5.0f) {
+        func_81400760(&ekans->position_2.x, (-SINS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
+        func_81400760(&ekans->position_2.z, (-COSS(ekans->totalRot.y) * ekans->stickMagnitude1) / 3.0f, 4.0f);
     } else {
-        arg0->unk_1C0.x = 0.0f;
-        arg0->unk_1C0.z = 0.0f;
+        ekans->position_2.x = 0.0f;
+        ekans->position_2.z = 0.0f;
     }
 }
 
-void func_86C022D8(unk_func_8790002C* arg0) {
-    if (D_87903DA4 != 0) {
-        if (arg0->unk_2AC == 0) {
-            func_86C00770(arg0);
+void miniEkansAnycontrols(MiniActor* ekans) {
+    if (minigameInputLock != 0) {
+        if (ekans->isComp == false) {
+            miniEkansHumanControls(ekans);
         } else {
-            func_86C01538(arg0);
+            miniEkansCompControls(ekans);
         }
     }
 }
 
-void func_86C02324(unk_func_8790002C* arg0, s32 arg1) {
-    switch (arg0->unk_23E) {
-        case 0x0:
-            func_86C021FC(arg0);
+void miniEkansPlayerStateMachine(MiniActor* ekans, s32 nPlayer) {
+    switch (ekans->mainState) {
+        case 0x0: //	pull back
+            func_86C021FC(ekans);
             break;
 
-        case 0x1:
-            func_86C016C8(arg0);
-            func_879002B8(arg0, 1, -1, 0);
-            arg0->unk_262 = 1;
-            arg0->unk_260 = 0;
-            func_86C00368(3, arg1);
-            arg0->unk_23E++;
+        case 0x1: //  launch
+            func_86C016C8(ekans);
+            miniChangeActorAnim(ekans, 1, -1, 0);
+            ekans->ekansIsMidAir = 1;
+            ekans->midAirState = 0;
+            func_86C00368(3, nPlayer);
+            ekans->mainState++;
             break;
 
-        case 0x2:
-            func_86C01D2C(arg0, arg1);
-            func_86C01FAC(arg0, arg1);
+        case 0x2: //	on freefall
+            func_86C01D2C(ekans, nPlayer);
+            miniGetCloser2Diglett(ekans, nPlayer);
             break;
 
-        case 0x3:
-            func_879002B8(arg0, 0, -1, 1);
-            func_86C003AC(arg0);
-            arg0->unk_23E++;
+        case 0x3: // on ekans return
+            miniChangeActorAnim(ekans, 0, -1, 1);
+            func_86C003AC(ekans);
+            ekans->mainState++;
             break;
 
         case 0x4:
-            arg0->unk_000.unk_000.unk_01 |= 1;
-            arg0->unk_000.unk_000.unk_02 |= 0x20;
-            arg0->unk_298 = 0;
-            arg0->unk_296 = 0;
-            arg0->unk_280 = 0.0f;
-            arg0->unk_23E++;
+            ekans->unk_000.unk_000.unk_01 |= 1;
+            ekans->unk_000.unk_000.unk_02 |= 0x20;
+            ekans->unk_298 = 0;
+            ekans->unk_296 = 0;
+            ekans->stickMagnitude1 = 0.0f;
+            ekans->mainState++;
             break;
 
-        case 0x5:
-            if (func_81400760(&arg0->unk_1C0.y, 10.0f, 4.0f) != 0) {
-                arg0->unk_23E = 0;
+        case 0x5: //	reapearing animation
+            if (func_81400760(&ekans->position_2.y, 10.0f, 4.0f) != 0) {
+                ekans->mainState = 0;
             }
             break;
 
-        case 0x64:
-            func_81400760(&arg0->unk_1C0.x, 0.0f, 4.0f);
-            func_81400760(&arg0->unk_1C0.z, 0.0f, 4.0f);
-            if (func_81400550(&arg0->unk_228, -0x8000, 0x400) != 0) {
-                arg0->unk_23E++;
-                func_8001BD04(&arg0->unk_000, 2);
+        case 0x64: //	start win animation
+            func_81400760(&ekans->position_2.x, 0.0f, 4.0f);
+            func_81400760(&ekans->position_2.z, 0.0f, 4.0f);
+            if (func_81400550(&ekans->yRot_2, -0x8000, 0x400) != 0) {
+                ekans->mainState++;
+                func_8001BD04(&ekans->unk_000, 2);
             }
             break;
 
-        case 0x65:
-            if (func_80017514(&arg0->unk_000) != 0) {
-                func_80017464(&arg0->unk_000, 0xA);
+        case 0x65: //	win animation
+            if (func_80017514(&ekans->unk_000) != 0) {
+                func_80017464(&ekans->unk_000, 0xA);
             }
             break;
     }
@@ -2649,84 +2627,84 @@ void func_86C02324(unk_func_8790002C* arg0, s32 arg1) {
 void func_86C0250C(void) {
 }
 
-void func_86C02514(void) {
+void miniEkansPlayersUpdate(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
-    D_86C0E050 = D_86C11530;
+    miniControllerPtr = gPlayer1Controller;
+    miniEkansPtr = miniEkanses;
 
     for (i = 0; i < 4; i++) {
-        func_86C022D8(D_86C0E050);
+        miniEkansAnycontrols(miniEkansPtr);
 
-        if (D_86C0E050->unk_262 != 0) {
-            func_879005C4(D_86C0E050);
-            func_86C018B8(D_86C0E050, i);
+        if (miniEkansPtr->ekansIsMidAir) {
+            miniEkansUpdatePos(miniEkansPtr);
+            checkCollitionWithDigletts(miniEkansPtr, i);
         }
 
-        D_86C0E050++;
-        D_879060BC++;
+        miniEkansPtr++;
+        miniControllerPtr++;
     }
 
     func_86C01AF8();
-    D_86C0E050 = D_86C11530;
+    miniEkansPtr = miniEkanses;
 
     for (i = 0; i < 4; i++) {
-        func_86C02324(D_86C0E050, i);
-        func_879003A0(D_86C0E050);
-        func_87900770(D_86C0E050);
-        func_87900808(D_86C0E050);
+        miniEkansPlayerStateMachine(miniEkansPtr, i);
+        func_879003A0(miniEkansPtr);
+        miniActorUpdateTransform(miniEkansPtr);
+        func_87900808(miniEkansPtr); // update the model?
 
-        D_86C0E050++;
+        miniEkansPtr++;
     }
 }
 
-void func_86C02610(unk_func_8790002C* arg0, s32 arg1) {
-    func_8790060C(arg0);
+void initDiglett(MiniActor* diglett, s32 nDiglett) {
+    miniActorAllToZero(diglett);
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    diglett->scale.x = 1.0f;
+    diglett->scale.y = 1.0f;
+    diglett->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86C0E1CC[arg1].unk_00.x;
-    arg0->unk_1A8.y = D_86C0E1CC[arg1].unk_00.y;
-    arg0->unk_1A8.z = D_86C0E1CC[arg1].unk_00.z;
+    diglett->position_1.x = diglettActorInfo[nDiglett].pos.x;
+    diglett->position_1.y = diglettActorInfo[nDiglett].pos.y;
+    diglett->position_1.z = diglettActorInfo[nDiglett].pos.z;
 
-    arg0->unk_288 = D_86C0E1CC[arg1].unk_12;
-    arg0->unk_28C = D_86C0E1CC[arg1].unk_14;
+    diglett->cubeRadio = diglettActorInfo[nDiglett].unk_12;
+    diglett->halfHeight = diglettActorInfo[nDiglett].unk_14;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
-    arg0->unk_1E4 = arg0->unk_28C * 0.5f;
+    diglett->miniHealth = diglett->miniMaxHealth = 0x64;
+    diglett->middleHeight = diglett->halfHeight / 2.0f;
 
-    func_8001BD04(&arg0->unk_000, 1);
-    func_879004F8(&arg0->unk_000);
+    func_8001BD04(&diglett->unk_000, 1);
+    func_879004F8(&diglett->unk_000);
 
-    arg0->unk_000.unk_01C = 0;
-    arg0->unk_000.unk_000.unk_02 &= ~0x40;
+    diglett->unk_000.unk_01C = 0;
+    diglett->unk_000.unk_000.unk_02 &= ~0x40;
 }
 
-void func_86C026F0(unk_func_8790002C* arg0, s32 arg1) {
-    func_8790060C(arg0);
+void initDiglettHole(MiniActor* hole, s32 arg1) {
+    miniActorAllToZero(hole);
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    hole->scale.x = 1.0f;
+    hole->scale.y = 1.0f;
+    hole->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86C0E1CC[arg1].unk_00.x;
-    arg0->unk_1A8.y = D_86C0E1CC[arg1].unk_00.y;
-    arg0->unk_1A8.z = D_86C0E1CC[arg1].unk_00.z;
+    hole->position_1.x = diglettActorInfo[arg1].pos.x;
+    hole->position_1.y = diglettActorInfo[arg1].pos.y;
+    hole->position_1.z = diglettActorInfo[arg1].pos.z;
 
-    arg0->unk_000.unk_000.unk_02 &= ~0x40;
+    hole->unk_000.unk_000.unk_02 &= ~0x40;
 }
 
 void func_86C0276C(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        D_86C12008[i].unk_02 = 0;
-        D_86C12008[i].unk_00 = -1;
-        D_86C12008[i].unk_06 = 0;
-        D_86C12008[i].unk_08 = 0;
-        D_86C12008[i].unk_0A = 0;
+        activeDigletts[i].state = 0;
+        activeDigletts[i].diglettId = -1;
+        activeDigletts[i].unk_06 = 0;
+        activeDigletts[i].gotHoop = false;
+        activeDigletts[i].unk_0A = 0;
     }
 }
 
@@ -2745,34 +2723,34 @@ void func_86C027BC(void) {
     func_86C0276C();
 
     for (i = 0; i < 3; i++) {
-        D_86C12008[i].unk_02 = 3;
-        D_86C12008[i].unk_00 = -1;
+        activeDigletts[i].state = 3;
+        activeDigletts[i].diglettId = -1;
     }
 }
 
-void func_86C02804(void) {
+void initDigletts(void) {
     s32 i;
 
-    D_86C0E048 = D_86C0E480;
-    D_86C0E04C = D_86C0FCD8;
+    miniDiglettPtr = miniDigletts;
+    miniDiglettHolePtr = miniDiglettHoles;
 
     for (i = 0; i < 9; i++) {
-        func_86C02610(D_86C0E048, i);
-        func_87900770(D_86C0E048);
-        func_86C026F0(D_86C0E04C, i);
-        func_87900770(D_86C0E04C);
-        func_87900808(D_86C0E04C);
-        D_86C0E048 = &D_86C0E048[1];
-        D_86C0E04C = &D_86C0E04C[1];
+        initDiglett(miniDiglettPtr, i);
+        miniActorUpdateTransform(miniDiglettPtr);
+        initDiglettHole(miniDiglettHolePtr, i);
+        miniActorUpdateTransform(miniDiglettHolePtr);
+        func_87900808(miniDiglettHolePtr);
+        miniDiglettPtr = &miniDiglettPtr[1];
+        miniDiglettHolePtr = &miniDiglettHolePtr[1];
     }
 
     func_86C0276C();
 }
 
-s16 func_86C028C0(s16 arg0) {
+s16 miniEkansChooseRandDiglett(UNUSED s16 activeDiglett) {
     s32 i;
     s16 sp44[3];
-    s16 var_a1;
+    s16 rand;
     s16 var_s0;
     s16 var_s3;
 
@@ -2782,22 +2760,22 @@ s16 func_86C028C0(s16 arg0) {
 
     var_s0 = 0;
     for (i = 0; i < 3; i++) {
-        if (D_86C12008[i].unk_00 != -1) {
-            sp44[var_s0] = D_86C12008[i].unk_00;
+        if (activeDigletts[i].diglettId != -1) {
+            sp44[var_s0] = activeDigletts[i].diglettId;
             var_s0++;
         }
     }
 
     if (var_s0 == 0) {
-        var_a1 = func_878001E8(0x64) % 9;
+        rand = func_878001E8(0x64) % 9;
     } else {
         var_s3 = 0;
         while (true) {
             var_s0 = 0;
-            var_a1 = func_878001E8(0x64) % 9;
+            rand = func_878001E8(0x64) % 9;
             while (true) {
                 s16 tmp = var_s0 + 1;
-                if (var_a1 == sp44[var_s0]) {
+                if (rand == sp44[var_s0]) {
                     break;
                 }
                 var_s0++;
@@ -2813,162 +2791,163 @@ s16 func_86C028C0(s16 arg0) {
         }
     }
 
-    return var_a1;
+    return rand;
 }
 
-void func_86C02A1C(unk_func_8790002C* arg0) {
+void func_86C02A1C(MiniActor* diglett) {
     s32 temp_v0;
     s32 sp18 = 0;
 
     if (D_86C12038 != 0) {
         D_86C12038 = 0;
         sp18 = 1;
-    } else if (D_86C12088 == 0) {
-        if ((D_879060C2 < 0xA) && (D_86C12034 == 0)) {
+    } else if (ekansMinigameCountdownStarted == false) {
+        if ((miniEkansCountdown < 0xA) && (D_86C12034 == 0)) {
             sp18 = 1;
         } else {
             sp18 = 0;
             temp_v0 = func_878001E8(0x64);
-            if ((D_879060C2 < 0xA) && (temp_v0 < 0x14)) {
+            if ((miniEkansCountdown < 0xA) && (temp_v0 < 0x14)) {
                 sp18 = 1;
-            } else if ((D_879060C2 < 0x14) && (temp_v0 < 0xF)) {
+            } else if ((miniEkansCountdown < 0x14) && (temp_v0 < 0xF)) {
                 sp18 = 1;
-            } else if ((D_879060C2 < 0x1E) && (temp_v0 < 0xA)) {
+            } else if ((miniEkansCountdown < 0x1E) && (temp_v0 < 0xA)) {
                 sp18 = 1;
-            } else if ((D_879060C2 < 0x28) && (temp_v0 < 5)) {
+            } else if ((miniEkansCountdown < 0x28) && (temp_v0 < 5)) {
                 sp18 = 1;
             }
         }
     } else {
         temp_v0 = func_878001E8(0x64);
-        if ((D_879060C2 < 0x2D) && (temp_v0 < 5)) {
+        if ((miniEkansCountdown < 0x2D) && (temp_v0 < 5)) {
             sp18 = 1;
         }
     }
 
     if (sp18 != 0) {
         D_86C12034 += 1;
-        arg0->unk_29C = 1;
-        arg0->unk_000.unk_01C = 1;
+        diglett->diglettIsGold = true;
+        diglett->unk_000.unk_01C = 1;
     }
 }
 
-void func_86C02B78(unk_func_8790002C* arg0, s32 arg1) {
-    u8 var_s0 = 0;
-    u8 var_a2 = 0;
-    u8 var_a3 = 0;
+void miniEkansRecolorDiglet(MiniActor* diglett, s32 nActiveDiglett) {
+    u8 r = 0;
+    u8 g = 0;
+    u8 b = 0;
 
-    switch (D_86C12008[arg1].unk_0C) {
+    switch (activeDigletts[nActiveDiglett].collidingActorId) {
         case 0:
-            var_s0 = 0x14;
-            var_a2 = 0x3C;
-            var_a3 = 0xFF;
+            r = 0x14;
+            g = 0x3C;
+            b = 0xFF;
             break;
 
         case 1:
-            var_a2 = 0x96;
-            var_a3 = 0x3C;
+            g = 0x96;
+            b = 0x3C;
             break;
 
         case 2:
-            var_s0 = 0xC8;
-            var_a2 = 0x1E;
-            var_a3 = 0x14;
+            r = 0xC8;
+            g = 0x1E;
+            b = 0x14;
             break;
 
         case 3:
-            var_s0 = 0xDC;
-            var_a2 = 0xAA;
+            r = 0xDC;
+            g = 0xAA;
             break;
     }
 
-    func_8001BE34(&arg0->unk_000, var_s0, var_a2, var_a3, 0x80);
+    func_8001BE34(&diglett->unk_000, r, g, b, 0x80);
 }
 
-void func_86C02C28(void) {
+void miniDiglettStateMachine(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        switch (D_86C12008[i].unk_02) {
+        switch (activeDigletts[i].state) {
             case 1:
-                D_86C0E048 = &D_86C0E480[D_86C12008[i].unk_00];
-                func_879002B8(D_86C0E048, 1, -1, 0);
-                D_86C12008[i].unk_02 = 2;
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                miniChangeActorAnim(miniDiglettPtr, 1, -1, 0);
+                activeDigletts[i].state = 2;
                 func_86C00368(6, i);
                 break;
 
             case 2:
-                D_86C0E048 = &D_86C0E480[D_86C12008[i].unk_00];
-                if (func_87900384(D_86C0E048) != 0) {
-                    D_86C12008[i].unk_00 = -1;
-                    D_86C12008[i].unk_02 = 0;
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                if (miniPokeIsIdleCheck(miniDiglettPtr)) {
+                    activeDigletts[i].diglettId = -1;
+                    activeDigletts[i].state = 0;
                 }
                 break;
 
-            case 3:
-                D_86C12008[i].unk_02 = 4;
-                D_86C12008[i].unk_04 = func_878001E8(0x14);
+            case 3: //	get random time delay
+                activeDigletts[i].state = 4;
+                activeDigletts[i].timer = func_878001E8(0x14);
                 break;
 
-            case 4:
-                D_86C12008[i].unk_04--;
-                if (D_86C12008[i].unk_04 < 0) {
-                    D_86C12008[i].unk_02 = 5;
-                    D_86C12008[i].unk_04 = 0xD;
-                    D_86C12008[i].unk_00 = func_86C028C0(i);
-                    D_86C0E048 = &D_86C0E480[D_86C12008[i].unk_00];
-                    D_86C0E048->unk_000.unk_000.unk_01 |= 1;
+            case 4:                        // pre-spawn
+                activeDigletts[i].timer--; //	spawn delay
+                if (activeDigletts[i].timer < 0) {
+                    activeDigletts[i].state = 5;
+                    activeDigletts[i].timer = 0xD;
+                    activeDigletts[i].diglettId = miniEkansChooseRandDiglett(i);
+                    miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                    miniDiglettPtr->unk_000.unk_000.unk_01 |= 1;
                     func_86C00368(7, i);
-                    func_86C02A1C(D_86C0E048);
-                    func_87900344(D_86C0E048, 1, -1, 1);
+                    func_86C02A1C(miniDiglettPtr);
+                    miniChangeActorAnim_alt2(miniDiglettPtr, 1, -1, 1);
                 }
                 break;
 
-            case 5:
-                D_86C12008[i].unk_04--;
-                if (D_86C12008[i].unk_04 < 0) {
-                    D_86C12008[i].unk_06 = 1;
-                    D_86C12008[i].unk_02 = 6;
+            case 5:                        //	coming out of the ground anim
+                activeDigletts[i].timer--; //	interactable delay
+                if (activeDigletts[i].timer < 0) {
+                    activeDigletts[i].unk_06 = 1;
+                    activeDigletts[i].state = 6;
                 }
                 break;
 
-            case 6:
-                if (D_86C12008[i].unk_08 != 0) {
-                    D_86C0E048 = &D_86C0E480[D_86C12008[i].unk_00];
-                    func_879002B8(D_86C0E048, 2, -1, 0);
-                    func_86C02B78(D_86C0E048, i);
-                    D_86C12008[i].unk_02 = 7;
-                    D_86C12008[i].unk_06 = 0;
-                    D_86C12008[i].unk_08 = 0;
+            case 6: //	getting hoop'd
+                if (activeDigletts[i].gotHoop) {
+                    miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                    miniChangeActorAnim(miniDiglettPtr, 2, -1, 0);
+                    miniEkansRecolorDiglet(miniDiglettPtr, i);
+                    activeDigletts[i].state = 7;
+                    activeDigletts[i].unk_06 = 0;
+                    activeDigletts[i].gotHoop = false;
                 }
                 break;
 
-            case 7:
-                D_86C0E048 = &D_86C0E480[D_86C12008[i].unk_00];
-                if (func_87900384(D_86C0E048) != 0) {
-                    func_8001BE34(&D_86C0E048->unk_000, 0xFF, 0xFF, 0xFF, 0);
-                    func_879002B8(D_86C0E048, 1, -1, 0);
-                    D_86C12008[i].unk_02 = 8;
+            case 7: //	reset active diglet
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                if (miniPokeIsIdleCheck(miniDiglettPtr)) {
+                    // recolor diglett to white
+                    func_8001BE34(&miniDiglettPtr->unk_000, 0xFF, 0xFF, 0xFF, 0);
+                    miniChangeActorAnim(miniDiglettPtr, 1, -1, 0);
+                    activeDigletts[i].state = 8;
                     func_86C00368(9, i);
                 }
                 break;
 
             case 8:
-                D_86C0E048 = &D_86C0E480[D_86C12008[i].unk_00];
-                if (func_87900384(D_86C0E048) != 0) {
-                    D_86C0E048->unk_000.unk_000.unk_01 &= ~1;
-                    D_86C12008[i].unk_04 = 1;
-                    D_86C12008[i].unk_02 = 9;
-                    D_86C0E048->unk_29C = 0;
-                    D_86C0E048->unk_000.unk_01C = 0;
+                miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
+                if (miniPokeIsIdleCheck(miniDiglettPtr)) {
+                    miniDiglettPtr->unk_000.unk_000.unk_01 &= ~1;
+                    activeDigletts[i].timer = 1;
+                    activeDigletts[i].state = 9;
+                    miniDiglettPtr->diglettIsGold = false;
+                    miniDiglettPtr->unk_000.unk_01C = 0;
                 }
                 break;
 
-            case 9:
-                D_86C12008[i].unk_04--;
-                if (D_86C12008[i].unk_04 == 0) {
-                    D_86C12008[i].unk_00 = -1;
-                    D_86C12008[i].unk_02 = 3;
+            case 9:                        // dissapering to the ground anim
+                activeDigletts[i].timer--; //	re-starting delay
+                if (activeDigletts[i].timer == 0) {
+                    activeDigletts[i].diglettId = -1;
+                    activeDigletts[i].state = 3;
                 }
                 break;
         }
@@ -2978,36 +2957,37 @@ void func_86C02C28(void) {
 void func_86C03008(void) {
     s32 i;
 
-    func_86C02C28();
-    D_86C0E048 = D_86C0E480;
+    miniDiglettStateMachine();
+    miniDiglettPtr = miniDigletts;
 
     for (i = 0; i < 9; i++) {
-        func_87900770(D_86C0E048);
-        func_87900808(D_86C0E048);
-        func_879003A0(D_86C0E048);
-        D_86C0E048++;
+        miniActorUpdateTransform(miniDiglettPtr);
+        func_87900808(miniDiglettPtr);
+        func_879003A0(miniDiglettPtr);
+        miniDiglettPtr++;
     }
 }
 
-void func_86C03080(void) {
-    func_87900854();
-    func_86C005D0();
-    func_86C02804();
-    func_86C03500();
+//	init game objects
+void ekansMinigameInitObjects(void) {
+    func_87900854(); //  minigame variables
+    initAllEkans();
+    initDigletts();
+    miniEkansInitCam();
 
-    D_879060C2 = 0x3C;
-    D_879060C0 = D_879060C2 * 0x1E;
+    miniEkansCountdown = 0x3C;
+    D_879060C0 = miniEkansCountdown * 0x1E;
     D_86C12038 = 0;
     D_86C12034 = 0;
 }
 
 s32 func_86C030EC(void) {
-    unk_func_8790002C* var_v0 = D_86C11530;
+    MiniActor* ekans = miniEkanses;
     s32 ret = 1;
     s32 i;
 
-    for (i = 0; i < 4; i++, var_v0++) {
-        if (var_v0->unk_23E != 0) {
+    for (i = 0; i < 4; i++, ekans++) {
+        if (ekans->mainState != 0) {
             ret = 0;
             break;
         }
@@ -3018,22 +2998,22 @@ s32 func_86C030EC(void) {
 void func_86C03128(void) {
     s32 i;
     s32 var_s2;
-    unk_func_8790002C* var_s0;
+    MiniActor* ekans;
 
     var_s2 = -1;
-    for (i = 0, var_s0 = D_86C11530; i < 4; i++, var_s0++) {
-        if (var_s2 < var_s0->unk_2A2) {
-            var_s2 = var_s0->unk_2A2;
+    for (i = 0, ekans = miniEkanses; i < 4; i++, ekans++) {
+        if (var_s2 < ekans->ekansScore) {
+            var_s2 = ekans->ekansScore;
         }
     }
 
     if (var_s2 != 0) {
-        var_s0 = D_86C11530;
-        for (i = 0; i < 4; i++, var_s0++) {
-            if (var_s2 == var_s0->unk_2A2) {
+        ekans = miniEkanses;
+        for (i = 0; i < 4; i++, ekans++) {
+            if (var_s2 == ekans->ekansScore) {
                 func_87802F00(i);
-                var_s0->unk_2A8 = 1;
-                var_s0->unk_23E = 0x64;
+                ekans->isWinner = 1;
+                ekans->mainState = 0x64;
             }
         }
     }
@@ -3062,18 +3042,18 @@ s32 func_86C03258(void) {
 
     D_879060C0--;
     if (D_879060C0 == 0) {
-        D_879060C2 = 0;
+        miniEkansCountdown = 0;
         func_86C00368(0xB, 0);
         sp1C = 1;
     } else {
-        D_879060C2 = (D_879060C0 / 30) + 1;
+        miniEkansCountdown = (D_879060C0 / 30) + 1;
         if ((D_879060C0 % 30) == 0) {
-            if (D_879060C2 == 0xB) {
+            if (miniEkansCountdown == 0xB) {
                 sp1C = 0;
                 func_86C00368(0xC, 0);
             }
 
-            if (D_879060C2 < 7) {
+            if (miniEkansCountdown < 7) {
                 sp1C = 0;
                 func_86C00368(0xA, 0);
             }
@@ -3082,55 +3062,55 @@ s32 func_86C03258(void) {
     return sp1C;
 }
 
-void func_86C03344(void) {
-    switch (D_87903DA0) {
-        case 1:
-            D_87906040 = 0xF;
-            D_87903DA0++;
+void miniEkansMinigameStateMachine(void) {
+    switch (minigameState) {
+        case 1: //	after pressing start
+            miniInputLockTimer = 0xF;
+            minigameState++;
             break;
 
-        case 2:
-            D_87906040 -= 1;
-            if (D_87906040 < 0) {
+        case 2: //	waits for some frames before starting the main countdown
+            miniInputLockTimer -= 1;
+            if (miniInputLockTimer < 0) {
                 func_8780295C(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
-        case 3:
+        case 3: //	main game loop
             if (func_86C031E4() != 0) {
                 func_86C027BC();
                 func_86C00AA4();
-                D_87903DA4 = 1;
-                D_87903DA0++;
+                minigameInputLock = 1;
+                minigameState++;
             }
             break;
 
-        case 4:
+        case 4: //	main countdown ends, adds a little wait
             if (func_86C03258() != 0) {
-                D_87903DC4 = 4;
-                D_87906040 = 0x32;
-                D_87903DA4 = 0;
-                D_87903DA0++;
+                miniTutoScreenState = 4;
+                miniInputLockTimer = 0x32;
+                minigameInputLock = 0;
+                minigameState++;
             }
             break;
 
-        case 5:
-            D_87906040--;
-            if (D_87906040 < 0) {
-                D_87906040 = 0;
+        case 5: //	state 5: after the wait, ends the minigame
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
+                miniInputLockTimer = 0;
             }
-            if ((func_86C030EC() != 0) && (D_87906040 == 0)) {
+            if ((func_86C030EC() != 0) && (miniInputLockTimer == 0)) {
                 func_86C03128();
                 func_87802EB8(1);
                 func_87903294();
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 6:
             if (D_8780FC96 != 0) {
-                D_87903DA0++;
+                minigameState++;
                 D_87903DAC = 1;
             }
             break;
@@ -3142,21 +3122,21 @@ void func_86C03344(void) {
 void func_86C034F8(void) {
 }
 
-void func_86C03500(void) {
+void miniEkansInitCam(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    D_87906060 = 0x1800;
-    D_87906062 = 0;
-    D_87906064 = 0xF0;
-    D_87906066 = 0x1E;
-    D_87906068 = 0x32;
-    D_8790606A = 0x7D0;
+    miniCameraXRot = 0x1800;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0xF0;
+    miniCameraFov = 0x1E;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x7D0;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = 0x56;
-    D_8790606C.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = 0x56;
+    miniCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 
     D_879060CA = 0;
 
@@ -3170,8 +3150,8 @@ void func_86C03500(void) {
 }
 
 void func_86C035E0(void) {
-    func_87900C5C();
-    func_87900B64();
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
 void func_86C03608(void) {
@@ -3247,41 +3227,41 @@ void func_86C03AB8(void) {
             break;
     }
 
-    if (D_87903DC4 == -2) {
+    if (miniTutoScreenState == -2) {
         func_8001F3F4();
         func_8001F444();
     }
 }
 
-void func_86C03BE8(void) {
-    func_8001F324(0xFF, 0xC8, 0x32, 0xFF);
-    func_8001EBE0(8, 0);
-    func_8001F1E8(0x80, 0x14, func_8002D7C0(NULL, 0, D_87806330, 0x5D));
-    func_8001F1E8(0xAA, 0x14, "%d", D_879060C2);
+void miniEkansDrawCountdown(void) {
+    func_8001F324(0xFF, 0xC8, 0x32, 0xFF);                               // set color
+    func_8001EBE0(8, 0);                                                 // set style
+    func_8001F1E8(0x80, 0x14, func_8002D7C0(NULL, 0, D_87806330, 0x5D)); // TIME text
+    func_8001F1E8(0xAA, 0x14, "%d", miniEkansCountdown);
 }
 
-void func_86C03C64(void) {
-    unk_func_8790002C* var_s4 = D_86C11530;
+void miniEkansDrawHub(void) {
+    MiniActor* ekans = miniEkanses;
     s32 i;
 
     func_8001F3F4();
-    if (D_86C12088 == 0) {
-        func_86C03BE8();
+    if (ekansMinigameCountdownStarted == false) {
+        miniEkansDrawCountdown();
     }
     func_8001F444();
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_879060C8);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted) {
         func_878021B4(0x1E, 0x17);
     }
 
-    for (i = 0; i < 4; i++, var_s4++) {
-        s16 tmp = D_86C0E384[i];
+    for (i = 0; i < 4; i++, ekans++) {
+        s16 tmp = playerGUIScoreXPositions[i];
 
-        if (D_86C12088 == 0) {
-            if (var_s4->unk_2AC != 0) {
+        if (ekansMinigameCountdownStarted == false) {
+            if (ekans->isComp != 0) {
                 func_87801644(-1 - i, tmp, 0xCC, 0.75f);
             } else {
                 func_87801644(i, tmp, 0xCC, 0.75f);
@@ -3289,7 +3269,7 @@ void func_86C03C64(void) {
         } else {
             func_87801644(i, tmp, 0xCC, 0.75f);
         }
-        func_8001F1E8(tmp + 0x14, 0xCC, "  %d", D_86C11530[i].unk_2A2);
+        func_8001F1E8(tmp + 0x14, 0xCC, "  %d", miniEkanses[i].ekansScore);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
@@ -3299,23 +3279,23 @@ void func_86C03E4C(void) {
     func_87903260();
     func_86C03AB8();
 
-    if (D_87906044 != 0) {
-        func_86C03C64();
+    if (miniShowHUB) {
+        miniEkansDrawHub();
     }
 }
 
 void func_86C03E8C(s32 arg0) {
     if (D_8780FC98 == 0) {
-        func_86C03E4C();
+        func_86C03E4C(); // HUB
     }
 
-    if (D_86C12088 == 0) {
+    if (ekansMinigameCountdownStarted == false) {
         func_87804FD4();
     }
 }
 
 void func_86C03ED4(void) {
-    unk_func_8790002C* var_s0 = D_86C11530;
+    MiniActor* ekans = miniEkanses;
     s32 i;
     Vec3f sp7C;
     Vec3s sp74;
@@ -3326,14 +3306,14 @@ void func_86C03ED4(void) {
     sp74.y = 0;
     sp74.z = 0;
 
-    func_8140419C(D_86C0D048, 0x40, 0x40);
+    func_8140419C(ekansShadowTexture, 0x40, 0x40);
 
-    for (i = 0; i < 4; i++, var_s0++) {
-        if (var_s0->unk_23E == 2) {
+    for (i = 0; i < 4; i++, ekans++) {
+        if (ekans->mainState == 2) {
             gSPDisplayList(gDisplayListHead++, D_8140DD58);
 
-            func_81405B70(D_86C0E38C[i].r, D_86C0E38C[i].g, D_86C0E38C[i].b, (var_s0->unk_000.unk_01D / 2) & 0xFF);
-            func_80015390(&var_s0->unk_000, 0xA, &sp7C);
+            func_81405B70(playerColors[i].r, playerColors[i].g, playerColors[i].b, (ekans->unk_000.unk_01D / 2) & 0xFF);
+            func_80015390(&ekans->unk_000, 0xA, &sp7C);
 
             sp7C.y = 5.0f;
 
@@ -3356,71 +3336,71 @@ void func_86C040B4(s32 arg0) {
     func_87901C98();
     func_86C03ED4();
 
-    if (D_87903DB0 == 0) {
+    if (miniDebugMode == false) {
         func_86C03E8C(arg0);
     }
 
-    if (D_87903DB0 != 0) {
-        func_87900F44();
-        func_879010A4();
+    if (miniDebugMode) {
+        showDebuggCameraInfo();
+        showDebuggJoystickInfo();
     }
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted) {
         func_8780005C();
     }
 
     func_80007778();
 }
 
-void func_86C04170(void) {
-    func_86C03080();
-    func_87900558();
-    func_87901620();
+void initEkansMinigameAssets(void) {
+    ekansMinigameInitObjects(); //	init game objects
+    hideMiniGameHUD();
+    func_87901620(); //	memory something
     func_800077B4(0xA);
     func_80006C6C(0x10);
 
-    if (D_86C12088 != 0) {
-        D_87903DC4 = 1;
-        D_87906044 = 1;
-        D_87903DA0 = 1;
+    if (ekansMinigameCountdownStarted) {
+        miniTutoScreenState = 1;
+        miniShowHUB = 1;
+        minigameState = 1;
     } else {
-        D_87903DC4 = 3;
+        miniTutoScreenState = 3;
     }
 }
 
-void func_86C041E8(void) {
+void miniEkansTutoScreenControls(void) {
     s32 var_s1 = 1;
 
     while (var_s1 != 0) {
-        func_87900528();
+        func_87900528(); //	input
 
-        if ((D_87903DB0 == 0) && (func_80007604() == 0)) {
-            if (D_86C12088 != 0) {
-                if ((gPlayer1Controller->buttonPressed != 0) || (D_879060C2 == 0x28)) {
-                    func_87802EB8(2);
+        if ((miniDebugMode == false) && (func_80007604() == 0)) {
+            if (ekansMinigameCountdownStarted) {
+                if ((gPlayer1Controller->buttonPressed != 0) || (miniEkansCountdown == 0x28)) {
+                    func_87802EB8(2); //	D_8780FC92 = 1
                 }
-            } else if (D_87906044 == 0) {
-                if (gPlayer1Controller->buttonPressed & 0x1000) {
-                    D_87903DC4 = 1;
-                    D_87903DA0 = 1;
-                    D_87906044 = 1;
+            } else if (miniShowHUB == false) {
+                if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+                    miniTutoScreenState = 1;
+                    minigameState = 1;
+                    miniShowHUB = true;
                     func_86C00368(0x10, 0);
-                } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
+                } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
                     func_86C00368(0x11, 0);
-                    func_87802EB8(2);
+                    func_87802EB8(2); //	D_8780FC92 = 1
                 }
             }
         }
 
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86C03344();
-            func_86C02514();
+            miniEkansMinigameStateMachine();
+            miniEkansPlayersUpdate();
             func_86C03008();
             func_86C035E0();
         }
 
-        if ((D_87903DB0 == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
+        if ((miniDebugMode == false) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
             var_s1 = 0;
         }
 
@@ -3428,23 +3408,23 @@ void func_86C041E8(void) {
     }
 }
 
-void func_86C043C4(void) {
+void ekansMinigameUpdate(void) {
     s32 i;
 
     func_80006CB4(0x1E);
 
-    if (D_86C12088 != 0) {
+    if (ekansMinigameCountdownStarted) {
         func_86C00368(0x13, 0x1E);
     } else {
         func_86C00368(0x12, 0x1E);
     }
 
     for (i = 0; i < 30; i++) {
-        func_87900528();
+        func_87900528(); //	input
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86C03344();
-            func_86C02514();
+            miniEkansMinigameStateMachine();
+            miniEkansPlayersUpdate();
             func_86C03008();
             func_86C035E0();
         }
@@ -3466,55 +3446,55 @@ void func_86C044B4(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86C11530[i].unk_000);
+        func_8001BB58(&miniEkanses[i].unk_000);
     }
 
     for (i = 0; i < 9; i++) {
-        func_8001BB58(&D_86C0E480[i].unk_000);
+        func_8001BB58(&miniDigletts[i].unk_000);
     }
 
     for (i = 0; i < 9; i++) {
-        func_8001BB58(&D_86C0FCD8[i].unk_000);
+        func_8001BB58(&miniDiglettHoles[i].unk_000);
     }
 
     func_8001987C();
 
     temp_s1 = func_80019D18(0x9F);
     for (i = 0; i < 4; i++) {
-        D_86C11530[i].unk_23C = 0x9F;
-        D_86C11530[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86C11530[i].unk_000, 0, D_86C11530[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86C11530[i].unk_000, 0);
+        miniEkanses[i].unk_23C = 0x9F;
+        miniEkanses[i].unk_168 = temp_s1;
+        func_8001BC34(&miniEkanses[i].unk_000, 0, miniEkanses[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&miniEkanses[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0xA4);
     for (i = 0; i < 9; i++) {
-        D_86C0E480[i].unk_23C = 0xA4;
-        D_86C0E480[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86C0E480[i].unk_000, 0, D_86C0E480[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        D_86C0E480[i].unk_000.unk_000.unk_01 &= ~1;
+        miniDigletts[i].unk_23C = 0xA4;
+        miniDigletts[i].unk_168 = temp_s1;
+        func_8001BC34(&miniDigletts[i].unk_000, 0, miniDigletts[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        miniDigletts[i].unk_000.unk_000.unk_01 &= ~1;
     }
 
     temp_s1 = func_80019D18(0xA3);
     for (i = 0; i < 9; i++) {
-        D_86C0FCD8[i].unk_23C = 0xA3;
-        D_86C0FCD8[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86C0FCD8[i].unk_000, 0, D_86C0FCD8[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        miniDiglettHoles[i].unk_23C = 0xA3;
+        miniDiglettHoles[i].unk_168 = temp_s1;
+        func_8001BC34(&miniDiglettHoles[i].unk_000, 0, miniDiglettHoles[i].unk_23C, temp_s1->unk_08->unk_00[0]);
     }
 }
 
-s32 func_86C046B0(s32 arg0, UNUSED s32 arg1) {
+s32 ekansMinigameLoad(s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
     if (arg0 == 1) {
-        D_86C12088 = 1;
+        ekansMinigameCountdownStarted = true;
         func_878010C8(0xD);
         func_86C00368(0x10, 0);
     } else {
-        D_86C12088 = 0;
+        ekansMinigameCountdownStarted = false;
     }
 
-    D_87906046 = D_8780FA38;
+    miniDifficulty = D_8780FA38; // difficulty ?
 
     main_pool_push_state('MINI');
 
@@ -3526,14 +3506,14 @@ s32 func_86C046B0(s32 arg0, UNUSED s32 arg1) {
     FRAGMENT_LOAD(fragment31);
     func_80004454((((u32)D_8D000000 & 0x0FF00000) >> 0x14) - 0x10, _5C7A70_ROM_START, pokedex_area_model_ROM_START);
 
-    func_86C044B4();
+    func_86C044B4(); // memory
     func_80007678(sp24);
-    func_86C04170();
-    func_86C041E8();
-    func_86C043C4();
+    initEkansMinigameAssets();
+    miniEkansTutoScreenControls();
+    ekansMinigameUpdate();
     func_800076C0();
-    func_8001E9CC();
-    func_80005EAC();
+    func_8001E9CC(); //	main_pool_try_free(D_800AC870);
+    func_80005EAC(); //	main_pool_try_free(D_800A7428.unk4); main_pool_try_free(D_800A7428.unk0);
 
     main_pool_pop_state('MINI');
 

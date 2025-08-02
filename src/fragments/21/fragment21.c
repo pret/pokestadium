@@ -21,19 +21,19 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 
-extern u8 D_03040580[];
-extern u8 D_03040D80[];
-extern u8 D_03040980[];
-extern u8 D_030451A0[];
-extern u8 D_03046AA0[];
-extern u8 D_03045E20[];
-extern u8 D_03049020[];
-extern u8 D_030483A0[];
-extern u8 D_03047720[];
+extern u32 D_03040580[];
+extern u32 D_03040D80[];
+extern u32 D_03040980[];
+extern u32 D_030451A0[];
+extern u32 D_03046AA0[];
+extern u32 D_03045E20[];
+extern u32 D_03049020[];
+extern u32 D_030483A0[];
+extern u32 D_03047720[];
 
-static unk_func_8790002C D_86F0B1F0[4];
-static unk_func_8790002C D_86F0BCC0[4];
-static unk_func_8790002C D_86F0C790[4];
+static MiniActor miniSandshrews[4];
+static MiniActor miniSandshrewHoles[4];
+static MiniActor miniSandshrewGeisers[4];
 static s16 D_86F0D260;
 static unk_D_800AC870* D_86F0D264;
 
@@ -796,6 +796,7 @@ static u32 D_86F07E90[1024] = {
     0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5,
     0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5, 0x73C573C5
 };
+
 static unk_D_86002F34_018 D_86F08E90[9] = {
     {
         0x00,
@@ -870,6 +871,7 @@ static unk_D_86002F34_018 D_86F08E90[9] = {
         D_86F07E90,
     },
 };
+
 static Gfx D_86F08F00[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD),
@@ -988,6 +990,7 @@ static Gfx D_86F09130[] = {
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x03FC, 0x01FC),
     gsSPEndDisplayList(),
 };
+
 static Vtx D_86F09170[] = {
     VTX(-1900, 0, -450, 243, 2183, 0x40, 0x64, 0x0C, 0xFF),  VTX(1900, 0, -450, 8174, 3040, 0xAE, 0x55, 0x10, 0xFF),
     VTX(1400, 0, -1900, 5844, 3696, 0xC9, 0x64, 0x22, 0xFF), VTX(2000, 0, 1500, 10113, 2028, 0x00, 0x78, 0x00, 0xFF),
@@ -1217,6 +1220,7 @@ static Vtx D_86F0A610[] = {
     VTX(98, 58, -482, 1024, 1342, 0x99, 0x00, 0x3C, 0xFF), VTX(53, 171, -561, 512, -86, 0x99, 0x00, 0x3B, 0xFF),
     VTX(18, 86, -620, 124, 982, 0x99, 0x00, 0x3C, 0xFF),   VTX(87, 86, -501, 899, 982, 0x99, 0x00, 0x3C, 0xFF),
 };
+
 static Gfx D_86F0A730[] = {
     gsSPVertex(D_86F098D0, 32, 0),
     gsSPSetGeometryMode(G_CULL_BACK),
@@ -1449,15 +1453,14 @@ static u32 D_86F0ACE0[] = {
     0x2301FFFF, D_86F08F00, 0x0008FFFF, 0xFFFFFFFF, 0x22010000, D_86F0A9C8, 0x06000000, 0x06000000, 0x06000000,
     0x06000000, 0x04000000,
 };
-
 static u32 D_86F0AFB8[] = {
     0x17000009, 0x0000015C, D_86F08E90, NULL,       D_86F09170, 0x05000000, 0x1C000000, 0x000023D7,
     0x000023D7, 0x000023D7, 0x05000000, 0x03000000, D_86F0ACE0, 0x06000000, 0x06000000, 0x01000000,
 };
 
-static unk_func_8790002C* D_86F0AFF8 = D_86F0B1F0;
-static unk_func_8790002C* D_86F0AFFC = D_86F0BCC0;
-static unk_func_8790002C* D_86F0B000 = D_86F0C790;
+static MiniActor* miniSandshrewPtr = miniSandshrews;
+static MiniActor* miniSandshrewHolePtr = miniSandshrewHoles;
+static MiniActor* miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
 static u32 D_86F0B004[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0x0000000F, 0x00000000, 0x00000000,
@@ -1466,7 +1469,7 @@ static u32 D_86F0B004[] = {
     0x00000000, D_86F0AFB8, 0x06000000, 0x06000000, 0x0F000003, 0x05000000, 0x0A000000, &D_800AC840,
     0x06000000, 0x06000000, 0x06000000, 0x03000000, D_87806398, 0x06000000, 0x01000000,
 };
-static Vec3f D_86F0B0A0[4] = {
+static Vec3f sandshrewPositions[4] = {
     {
         -50.0f,
         0.0f,
@@ -1488,12 +1491,15 @@ static Vec3f D_86F0B0A0[4] = {
         50.0f,
     },
 };
+
+//  unuced
 static s16 D_86F0B0D0[] = {
     0x6000,
     0x2000,
     0xE000,
     0xA000,
 };
+
 static unk_func_87801684 D_86F0B0D8[5] = {
     { D_03040580, 0x12 }, { D_03040980, 2 }, { D_03040D80, 8 }, { D_03040980, 2 }, { NULL, 0 },
 };
@@ -1503,8 +1509,9 @@ static unk_func_87801684 D_86F0B100[5] = {
 static unk_func_87801684 D_86F0B128[6] = {
     { D_03047720, 2 }, { D_030483A0, 2 }, { D_03049020, 2 }, { D_030483A0, 2 }, { D_03047720, 6 }, { NULL, 0 },
 };
-static s16 D_86F0B158[] = { 0x1E, 0x32, 0xF0, 0x104 };
-static s16 D_86F0B160[] = { 0xA8, 0x50, 0x50, 0xA8 };
+
+static s16 playerIconsScreenXPos[] = { 0x1E, 0x32, 0xF0, 0x104 };
+static s16 playerIconsScreenYPos[] = { 0xA8, 0x50, 0x50, 0xA8 };
 
 void func_86F00020(s16 arg0, s16 arg1) {
     UNUSED s32 pad;
@@ -1583,283 +1590,285 @@ void func_86F00188(s16 arg0, s16 arg1) {
     }
 }
 
-void func_86F001CC(unk_func_8790002C* arg0, s32 arg1) {
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+void initSandshrew(MiniActor* sandshrew, s32 player) {
+    sandshrew->scale.x = 1.0f;
+    sandshrew->scale.y = 1.0f;
+    sandshrew->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
-    arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
-    arg0->unk_1A8.z = D_86F0B0A0[arg1].z;
+    sandshrew->position_1.x = sandshrewPositions[player].x;
+    sandshrew->position_1.y = sandshrewPositions[player].y;
+    sandshrew->position_1.z = sandshrewPositions[player].z;
 
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
+    sandshrew->position_2.x = 0.0f;
+    sandshrew->position_2.y = 0.0f;
+    sandshrew->position_2.z = 0.0f;
 
-    if (1) {}
+    if (true) {}
 
-    arg0->unk_220 = arg0->unk_226 = arg0->unk_22C = 0;
-    arg0->unk_222 = arg0->unk_228 = arg0->unk_22E = 0;
-    arg0->unk_224 = arg0->unk_22A = arg0->unk_230 = 0;
+    sandshrew->unk_220 = sandshrew->xRot_2 = sandshrew->unk_22C = 0;
+    sandshrew->unk_222 = sandshrew->yRot_2 = sandshrew->ySpinSpeed = 0;
+    sandshrew->unk_224 = sandshrew->zRot_2 = sandshrew->unk_230 = 0;
 
-    arg0->unk_272 = 0;
-    arg0->unk_2A8 = 0;
-    arg0->unk_2A4 = 0;
+    sandshrew->unk_272 = 0;
+    sandshrew->isWinner = 0;
+    sandshrew->unk_2A4 = 0;
 
-    arg0->unk_274 = 0.0f;
-    arg0->unk_27C = 0.0f;
+    sandshrew->diggingSpeed = 0.0f;
+    sandshrew->diggingAccel2 = 0.0f;
 
-    arg0->unk_214.x = arg0->unk_21A = 0;
-    arg0->unk_214.y = arg0->unk_21C = 0;
-    arg0->unk_214.z = arg0->unk_21E = 0;
+    sandshrew->totalRot.x = sandshrew->xRot_1 = 0;
+    sandshrew->totalRot.y = sandshrew->yRot_1 = 0;
+    sandshrew->totalRot.z = sandshrew->zRot_1 = 0;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
-    arg0->unk_238 = arg0->unk_23A = 0;
+    sandshrew->miniHealth = sandshrew->miniMaxHealth = 0x64;
+    sandshrew->unk_238 = sandshrew->unk_23A = 0;
 
-    func_8001BD04(&arg0->unk_000, 0);
+    func_8001BD04(&sandshrew->unk_000, 0);
 
-    arg0->unk_290 = 0;
-    arg0->unk_23E = 0;
-    arg0->unk_240 = 0;
+    sandshrew->unk_290 = 0;
+    sandshrew->mainState = 0;
+    sandshrew->isSquashed = 0;
 
-    arg0->unk_2AC = D_879060C4[arg1];
+    sandshrew->isComp = D_879060C4[player];
 }
 
-void func_86F002F4(void) {
+void initSandshrews(void) {
     s32 i;
 
-    D_86F0AFF8 = D_86F0B1F0;
+    miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        func_86F001CC(D_86F0AFF8, i);
-        D_86F0AFF8++;
+        initSandshrew(miniSandshrewPtr, i);
+        miniSandshrewPtr++;
     }
 }
 
-void func_86F0035C(unk_func_8790002C* arg0) {
-    arg0->unk_222 = D_879060BC->angle;
+void miniSandshewReangle(MiniActor* sandshrew) {
+    sandshrew->unk_222 = miniControllerPtr->angle;
 }
 
-void func_86F00370(void) {
+void miniSandshewReangleAll(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
-    D_86F0AFF8 = D_86F0B1F0;
+    miniControllerPtr = gPlayer1Controller;
+    miniSandshrewPtr = miniSandshrews;
 
     for (i = 0; i < 4; i++) {
-        func_86F0035C(D_86F0AFF8);
+        miniSandshewReangle(miniSandshrewPtr);
 
-        D_86F0AFF8++;
-        D_879060BC++;
+        miniSandshrewPtr++;
+        miniControllerPtr++;
     }
 }
 
-void func_86F003FC(unk_func_8790002C* arg0, s32 arg1) {
-    func_8001BD04(&arg0->unk_000, arg1);
-    func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
-    func_80017464(&arg0->unk_000, 0);
-    func_80017454(&arg0->unk_000, 0x10000);
+void miniSandshewChangeAnim(MiniActor* actor, s32 animID) {
+    func_8001BD04(&actor->unk_000, animID);
+    func_800173DC(&actor->unk_000, 0, actor->unk_000.unk_040.unk_04, 0x10000);
+    func_80017464(&actor->unk_000, 0);
+    func_80017454(&actor->unk_000, 0x10000);
 }
 
-void func_86F00450(unk_func_8790002C* arg0, f32 arg1) {
-    arg0->unk_280 -= arg1;
-    if (arg0->unk_280 < 1.0f) {
-        arg0->unk_280 = 1.0f;
+void sandshrewDecreaseVel(MiniActor* sandshrew, f32 arg1) {
+    sandshrew->diggingAccel1 -= arg1;
+    if (sandshrew->diggingAccel1 < 1.0f) {
+        sandshrew->diggingAccel1 = 1.0f;
     }
-    arg0->unk_27C = arg0->unk_280;
+    sandshrew->diggingAccel2 = sandshrew->diggingAccel1;
 }
 
-void func_86F0048C(unk_func_8790002C* arg0, s32 arg1) {
-    if (arg1 == -1) {
-        arg0->unk_29A = 0;
-        arg0->unk_2B0 = 0;
-        arg0->unk_2A0 = 0;
-        arg0->unk_280 = 0.0f;
-        arg0->unk_27C = 0.0f;
-    } else if (arg1 == 1) {
-        arg0->unk_2A0 = 0x14;
-        arg0->unk_2B0 = 3;
-        arg0->unk_23E = 1;
-        arg0->unk_280 = 10.0f;
-        arg0->unk_27C = 10.0f;
-    } else {
-        arg0->unk_2A0 = 0x14;
-        arg0->unk_2B0 = 3;
-        arg0->unk_27C = arg0->unk_280;
-        arg0->unk_280 = 10.0f;
+void sandshrewChangeState(MiniActor* sandshrew, s32 arg1) {
+    if (arg1 == -1) { //	stop digging
+        sandshrew->sandshrewLastDir = 0;
+        sandshrew->sandshrewFailChances = 0;
+        sandshrew->leftRightTimer = 0;
+        sandshrew->diggingAccel1 = 0.0f;
+        sandshrew->diggingAccel2 = 0.0f;
+    } else if (arg1 == 1) { //	start digging
+        sandshrew->leftRightTimer = 0x14;
+        sandshrew->sandshrewFailChances = 3;
+        sandshrew->mainState = 1;
+        sandshrew->diggingAccel1 = 10.0f;
+        sandshrew->diggingAccel2 = 10.0f;
+    } else { //	dig
+        sandshrew->leftRightTimer = 0x14;
+        sandshrew->sandshrewFailChances = 3;
+        sandshrew->diggingAccel2 = sandshrew->diggingAccel1;
+        sandshrew->diggingAccel1 = 10.0f;
     }
 }
 
-void func_86F0050C(unk_func_8790002C* arg0) {
-    s32 var_v0;
+void sandshrewHumanControls(MiniActor* sandshrew) {
+    s32 dir;
 
-    var_v0 = 0;
-    if (D_879060BC->buttonPressed & 0x20 && (D_879060BC->buttonPressed & 0x10)) {
-        var_v0 = 3;
-    } else if (arg0->unk_29A == 1) {
-        if (D_879060BC->buttonPressed & 0x20) {
-            var_v0 = 1;
-        } else if (D_879060BC->buttonPressed & 0x10) {
-            var_v0 = 2;
+    dir = 0;
+    if (BTN_IS_PRESSED(miniControllerPtr, BTN_L) && BTN_IS_PRESSED(miniControllerPtr, BTN_R)) {
+        dir = 3;
+    } else if (sandshrew->sandshrewLastDir == 1) {
+        if (BTN_IS_PRESSED(miniControllerPtr, BTN_L)) {
+            dir = 1;
+        } else if (BTN_IS_PRESSED(miniControllerPtr, BTN_R)) {
+            dir = 2;
         }
-    } else if (D_879060BC->buttonPressed & 0x10) {
-        var_v0 = 2;
-    } else if (D_879060BC->buttonPressed & 0x20) {
-        var_v0 = 1;
+    } else if (BTN_IS_PRESSED(miniControllerPtr, BTN_R)) {
+        dir = 2;
+    } else if (BTN_IS_PRESSED(miniControllerPtr, BTN_L)) {
+        dir = 1;
     }
 
-    if (arg0->unk_23E == 0) {
-        if ((arg0->unk_29A == 0) && ((var_v0 == 1) || (var_v0 == 2))) {
-            func_86F0048C(arg0, 1);
-            arg0->unk_29A = var_v0;
+    if (sandshrew->mainState == 0) { //	on iddle animation
+        if ((sandshrew->sandshrewLastDir == 0) && ((dir == 1) || (dir == 2))) {
+            sandshrewChangeState(sandshrew, 1);
+            sandshrew->sandshrewLastDir = dir;
         }
-    } else if (var_v0 == 3) {
-        arg0->unk_2B0--;
-        if (arg0->unk_2B0 < 0) {
-            func_86F0048C(arg0, -1);
+    } else if (dir == 3) { //	on both L&R
+        sandshrew->sandshrewFailChances--;
+        if (sandshrew->sandshrewFailChances < 0) {
+            sandshrewChangeState(sandshrew, -1);
         } else {
-            func_86F00450(arg0, 1.0f);
+            sandshrewDecreaseVel(sandshrew, 1.0f);
         }
-    } else if (var_v0 == 2) {
-        if (arg0->unk_29A == 1) {
-            func_86F0048C(arg0, 2);
-            arg0->unk_29A = 2;
-        } else if (arg0->unk_29A == 2) {
-            arg0->unk_2B0--;
-            if (arg0->unk_2B0 < 0) {
-                func_86F0048C(arg0, -1);
+    } else if (dir == 2) { //	on R
+        if (sandshrew->sandshrewLastDir == 1) {
+            sandshrewChangeState(sandshrew, 2);
+            sandshrew->sandshrewLastDir = 2;
+        } else if (sandshrew->sandshrewLastDir == 2) {
+            sandshrew->sandshrewFailChances--;
+            if (sandshrew->sandshrewFailChances < 0) {
+                sandshrewChangeState(sandshrew, -1);
             } else {
-                func_86F00450(arg0, 1.0f);
+                sandshrewDecreaseVel(sandshrew, 1.0f);
             }
         }
-    } else if (var_v0 == 1) {
-        if (arg0->unk_29A == 2) {
-            func_86F0048C(arg0, 2);
-            arg0->unk_29A = 1;
-        } else if (arg0->unk_29A == 1) {
-            arg0->unk_2B0--;
-            if (arg0->unk_2B0 < 0) {
-                func_86F0048C(arg0, -1);
+    } else if (dir == 1) { //	on L
+        if (sandshrew->sandshrewLastDir == 2) {
+            sandshrewChangeState(sandshrew, 2);
+            sandshrew->sandshrewLastDir = 1;
+        } else if (sandshrew->sandshrewLastDir == 1) {
+            sandshrew->sandshrewFailChances--;
+            if (sandshrew->sandshrewFailChances < 0) {
+                sandshrewChangeState(sandshrew, -1);
             } else {
-                func_86F00450(arg0, 1.0f);
+                sandshrewDecreaseVel(sandshrew, 1.0f);
             }
         }
-    } else if (arg0->unk_2A0 == 0) {
-        func_86F0048C(arg0, -1);
-    } else {
-        func_86F00450(arg0, 1.0f);
+    } else if (sandshrew->leftRightTimer == 0) { //	???
+        sandshrewChangeState(sandshrew, -1);
+    } else { //	???
+        sandshrewDecreaseVel(sandshrew, 1.0f);
     }
 
-    arg0->unk_2A0--;
-    if (arg0->unk_2A0 < 0) {
-        arg0->unk_2A0 = 0;
+    sandshrew->leftRightTimer--;
+    if (sandshrew->leftRightTimer < 0) {
+        sandshrew->leftRightTimer = 0;
     }
-    arg0->unk_274 += arg0->unk_27C;
+    sandshrew->diggingSpeed += sandshrew->diggingAccel2;
 }
 
-void func_86F00778(unk_func_8790002C* arg0) {
-    switch (D_87906046) {
+void sandshrewCompControls(MiniActor* arg0) {
+    switch (miniDifficulty) {
         case 0:
-            arg0->unk_27C = (func_81400A78(0xA) * 0.1f) + 3.0f;
+            arg0->diggingAccel2 = (func_81400A78(0xA) * 0.1f) + 3.0f;
             break;
 
         case 1:
-            arg0->unk_27C = (func_81400A78(0x14) * 0.15f) + 5.0f;
+            arg0->diggingAccel2 = (func_81400A78(0x14) * 0.15f) + 5.0f;
             break;
 
         case 2:
-            arg0->unk_27C = (func_81400A78(0x14) * 0.17f) + 6.0f;
+            arg0->diggingAccel2 = (func_81400A78(0x14) * 0.17f) + 6.0f;
             break;
 
         case 3:
-            arg0->unk_27C = (func_81400A78(0x12) * 0.2f) + 6.4f;
+            arg0->diggingAccel2 = (func_81400A78(0x12) * 0.2f) + 6.4f;
             break;
     }
 
-    arg0->unk_274 += arg0->unk_27C;
-    if ((arg0->unk_23E == 0) && (arg0->unk_27C != 0.0f)) {
-        arg0->unk_23E = 1;
+    arg0->diggingSpeed += arg0->diggingAccel2;
+    if ((arg0->mainState == 0) && (arg0->diggingAccel2 != 0.0f)) {
+        arg0->mainState = 1;
     }
 }
 
-void func_86F00920(unk_func_8790002C* arg0) {
+void func_86F00920(MiniActor* sandshrew) {
     UNUSED s32 pad;
     Vec3f sp48;
-    f32 temp_fv0;
+    f32 holeDeepeness;
 
-    switch (arg0->unk_23E) {
-        case 0x1:
-            func_86F003FC(arg0, 1);
-            arg0->unk_23E++;
+    switch (sandshrew->mainState) {
+        case 0x1: //	start digging animation 1
+            miniSandshewChangeAnim(sandshrew, 1);
+            sandshrew->mainState++;
             break;
 
-        case 0x2:
-            if (func_800174E4(&arg0->unk_000) != 0) {
-                func_86F003FC(arg0, 2);
-                func_80017454(&arg0->unk_000, 0);
-                arg0->unk_22E = 0;
-                arg0->unk_23E++;
+        case 0x2: //	start digging animation 2
+            if (func_800174E4(&sandshrew->unk_000) != 0) {
+                miniSandshewChangeAnim(sandshrew, 2);
+                func_80017454(&sandshrew->unk_000, 0);
+                sandshrew->ySpinSpeed = 0;
+                sandshrew->mainState++;
             }
             break;
 
-        case 0x3:
-            if (arg0->unk_27C != 0) {
+        case 0x3: //  diggin
+            if (sandshrew->diggingAccel2 != 0) {
                 if (D_8140E6CC == 0) {
-                    func_81407F24(&arg0->unk_000, func_87902608, &D_87903E28, 1, 1);
-                    func_81407F24(&arg0->unk_000, func_87902608, &D_87903E28, 1, 2);
+                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 1); //	perticles
+                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 2); //	particles
                 }
 
                 if (D_8140E6CC == 0) {
-                    if (arg0->unk_190.y > -10.0f) {
-                        func_81407D48(1.0f, arg0->unk_190, arg0->unk_214, func_87902224, &D_87903E10, 1);
+                    if (sandshrew->totalPos.y > -10.0f) {
+                        func_81407D48(1.0f, sandshrew->totalPos, sandshrew->totalRot, func_87902224, &D_87903E10,
+                                      1); //	particles
                     } else {
-                        sp48.x = arg0->unk_190.x;
+                        sp48.x = sandshrew->totalPos.x;
                         sp48.y = -5.0f;
-                        sp48.z = arg0->unk_190.z;
-                        func_81407D48(1.0f, sp48, arg0->unk_214, func_879023EC, &D_87903E10, 1);
+                        sp48.z = sandshrew->totalPos.z;
+                        func_81407D48(1.0f, sp48, sandshrew->totalRot, func_879023EC, &D_87903E10,
+                                      1); //	particles
                     }
                 }
 
-                func_80017454(&arg0->unk_000, ((s32)arg0->unk_27C << 0xE) + 0xC000);
+                func_80017454(&sandshrew->unk_000, ((s32)sandshrew->diggingAccel2 << 0xE) + 0xC000);
 
-                temp_fv0 = arg0->unk_274 / 5000.0f;
-                if (temp_fv0 > 0.2f) {
-                    arg0->unk_1C0.y -= temp_fv0;
+                holeDeepeness = sandshrew->diggingSpeed / 5000.0f;
+                if (holeDeepeness > 0.2f) {
+                    sandshrew->position_2.y -= holeDeepeness;
                 }
 
-                func_86F00188(3, arg0 - D_86F0B1F0);
-                if (func_800174E4(&arg0->unk_000) != 0) {
-                    func_80017464(&arg0->unk_000, 0);
+                func_86F00188(3, sandshrew - miniSandshrews);
+                if (func_800174E4(&sandshrew->unk_000) != 0) {
+                    func_80017464(&sandshrew->unk_000, 0);
                 }
             } else {
-                arg0->unk_274 = 0.0f;
-                func_8001BD04(&arg0->unk_000, 3);
-                func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
-                func_80017464(&arg0->unk_000, 0);
-                func_80017454(&arg0->unk_000, 0x10000);
-                func_86F00188(4, arg0 - D_86F0B1F0);
-                arg0->unk_23E++;
+                sandshrew->diggingSpeed = 0.0f;
+                func_8001BD04(&sandshrew->unk_000, 3);
+                func_800173DC(&sandshrew->unk_000, 0, sandshrew->unk_000.unk_040.unk_04, 0x10000);
+                func_80017464(&sandshrew->unk_000, 0);
+                func_80017454(&sandshrew->unk_000, 0x10000);
+                func_86F00188(4, sandshrew - miniSandshrews);
+                sandshrew->mainState++;
             }
             break;
 
-        case 0x4:
-            if (func_800174E4(&arg0->unk_000) != 0) {
-                func_8001BD04(&arg0->unk_000, 0);
-                arg0->unk_23E = 0;
+        case 0x4: //   on stop diggin
+            if (func_800174E4(&sandshrew->unk_000) != 0) {
+                func_8001BD04(&sandshrew->unk_000, 0);
+                sandshrew->mainState = 0;
             }
             break;
 
-        case 0x64:
-            func_8001BD04(&arg0->unk_000, 4);
-            func_800173DC(&arg0->unk_000, 0, arg0->unk_000.unk_040.unk_04, 0x10000);
-            func_80017464(&arg0->unk_000, 0);
-            func_80017454(&arg0->unk_000, 0x10000);
-            arg0->unk_23E++;
-            arg0->unk_1C0.y += 15.0f;
+        case 0x64: //	win start animation
+            func_8001BD04(&sandshrew->unk_000, 4);
+            func_800173DC(&sandshrew->unk_000, 0, sandshrew->unk_000.unk_040.unk_04, 0x10000);
+            func_80017464(&sandshrew->unk_000, 0);
+            func_80017454(&sandshrew->unk_000, 0x10000);
+            sandshrew->mainState++;
+            sandshrew->position_2.y += 15.0f;
             break;
 
-        case 0x65:
-            func_87900594(arg0);
-            func_80015390(&D_86F0B000->unk_000, 0xA, &arg0->unk_1C0);
+        case 0x65: //	win animation loop
+            minigameActorLocalOriginToZero(sandshrew);
+            func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->position_2);
             break;
     }
 }
@@ -1867,200 +1876,199 @@ void func_86F00920(unk_func_8790002C* arg0) {
 void func_86F00D04(void) {
     s32 i;
 
-    D_879060BC = gPlayer1Controller;
+    miniControllerPtr = gPlayer1Controller;
 
-    D_86F0AFF8 = D_86F0B1F0;
-    D_86F0AFFC = D_86F0BCC0;
-    D_86F0B000 = D_86F0C790;
+    miniSandshrewPtr = miniSandshrews;
+    miniSandshrewHolePtr = miniSandshrewHoles;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
-        if (D_87903DA4 != 0) {
-            if (D_86F0AFF8->unk_2AC == 0) {
-                func_86F0050C(D_86F0AFF8);
+        if (minigameInputLock) {
+            if (miniSandshrewPtr->isComp == 0) {
+                sandshrewHumanControls(miniSandshrewPtr);
             } else {
-                func_86F00778(D_86F0AFF8);
+                sandshrewCompControls(miniSandshrewPtr);
             }
         }
 
-        func_86F00920(D_86F0AFF8);
-        func_87900770(D_86F0AFF8);
-        func_87900808(D_86F0AFF8);
+        func_86F00920(miniSandshrewPtr);
+        miniActorUpdateTransform(miniSandshrewPtr);
+        func_87900808(miniSandshrewPtr);
 
-        D_86F0AFF8++;
-        D_86F0AFFC++;
-        D_86F0B000++;
+        miniSandshrewPtr++;
+        miniSandshrewHolePtr++;
+        miniSandshrewGeiserPtr++;
 
-        D_879060BC++;
+        miniControllerPtr++;
     }
 }
 
-void func_86F00E34(unk_func_8790002C* a0, s32 arg1) {
-    unk_func_8790002C* arg0 = a0;
+void initSandshrewHole(MiniActor* a0, s32 arg1) {
+    MiniActor* sandshrewHole = a0;
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    sandshrewHole->scale.x = 1.0f;
+    sandshrewHole->scale.y = 1.0f;
+    sandshrewHole->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
-    arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
-    arg0->unk_1A8.z = D_86F0B0A0[arg1].z;
+    sandshrewHole->position_1.x = sandshrewPositions[arg1].x;
+    sandshrewHole->position_1.y = sandshrewPositions[arg1].y;
+    sandshrewHole->position_1.z = sandshrewPositions[arg1].z;
 
-    arg0->unk_214.x = arg0->unk_21A = arg0->unk_220 = arg0->unk_226 = arg0->unk_22C = 0;
-    arg0->unk_214.y = arg0->unk_21C = arg0->unk_222 = arg0->unk_228 = arg0->unk_22E = 0;
-    arg0->unk_214.z = arg0->unk_21E = arg0->unk_224 = arg0->unk_22A = arg0->unk_230 = 0;
+    sandshrewHole->totalRot.x = sandshrewHole->xRot_1 = sandshrewHole->unk_220 = sandshrewHole->xRot_2 =
+        sandshrewHole->unk_22C = 0;
+    sandshrewHole->totalRot.y = sandshrewHole->yRot_1 = sandshrewHole->unk_222 = sandshrewHole->yRot_2 =
+        sandshrewHole->ySpinSpeed = 0;
+    sandshrewHole->totalRot.z = sandshrewHole->zRot_1 = sandshrewHole->unk_224 = sandshrewHole->zRot_2 =
+        sandshrewHole->unk_230 = 0;
 
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
+    sandshrewHole->position_2.x = 0.0f;
+    sandshrewHole->position_2.y = 0.0f;
+    sandshrewHole->position_2.z = 0.0f;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
+    sandshrewHole->miniHealth = sandshrewHole->miniMaxHealth = 0x64;
 
-    arg0->unk_272 = 0;
-    arg0->unk_2A4 = 0;
-    arg0->unk_23E = 0;
-    arg0->unk_24A = 0;
+    sandshrewHole->unk_272 = 0;
+    sandshrewHole->unk_2A4 = 0;
+    sandshrewHole->mainState = 0;
+    sandshrewHole->unk_24A = 0;
 
-    arg0->unk_000.unk_000.unk_01 &= ~1;
+    sandshrewHole->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86F00F00(void) {
+void initSandshrewHoles(void) {
     s32 i;
 
-    D_86F0AFFC = D_86F0BCC0;
+    miniSandshrewHolePtr = miniSandshrewHoles;
     for (i = 0; i < 4; i++) {
-        func_86F00E34(D_86F0AFFC, i);
-        D_86F0AFFC++;
+        initSandshrewHole(miniSandshrewHolePtr, i);
+        miniSandshrewHolePtr++;
     }
 }
 
-void func_86F00F68(unk_func_8790002C* arg0, unk_func_8790002C* arg1) {
+void func_86F00F68(MiniActor* sandshrewHole, MiniActor* sandshrewPlayer) {
     s32 var_a1;
 
-    if ((arg1->unk_274 > 300.0f) && (arg0->unk_23E == 0)) {
-        func_86F003FC(arg0, 0);
-        arg0->unk_000.unk_000.unk_01 |= 1;
-        arg0->unk_23E = 1;
+    if ((sandshrewPlayer->diggingSpeed > 300.0f) && (sandshrewHole->mainState == 0)) {
+        miniSandshewChangeAnim(sandshrewHole, 0);
+        sandshrewHole->unk_000.unk_000.unk_01 |= 1;
+        sandshrewHole->mainState = 1;
     }
 
-    if (arg0->unk_23E != 0) {
-        if (arg1->unk_274 > 400.0f) {
+    if (sandshrewHole->mainState != 0) {
+        if (sandshrewPlayer->diggingSpeed > 400.0f) {
             var_a1 = 0x5000;
         } else {
             var_a1 = 0;
         }
-        func_80017454(&arg0->unk_000, var_a1);
+        func_80017454(&sandshrewHole->unk_000, var_a1);
     }
 }
 
 void func_86F01014(void) {
     s32 i;
 
-    D_86F0AFFC = D_86F0BCC0;
-    D_86F0AFF8 = D_86F0B1F0;
+    miniSandshrewHolePtr = miniSandshrewHoles;
+    miniSandshrewPtr = miniSandshrews;
 
     for (i = 0; i < 4; i++) {
-        func_86F00F68(D_86F0AFFC, D_86F0AFF8);
-        func_87900770(D_86F0AFFC);
-        func_87900808(D_86F0AFFC);
+        func_86F00F68(miniSandshrewHolePtr, miniSandshrewPtr);
+        miniActorUpdateTransform(miniSandshrewHolePtr);
+        func_87900808(miniSandshrewHolePtr);
 
-        D_86F0AFFC++;
-        D_86F0AFF8++;
+        miniSandshrewHolePtr++;
+        miniSandshrewPtr++;
     }
 }
 
-void func_86F010B4(unk_func_8790002C* a0, s32 arg1) {
-    unk_func_8790002C* arg0 = a0;
+void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
+    MiniActor* geiser = arg0;
 
-    arg0->unk_16C.x = 1.0f;
-    arg0->unk_16C.y = 1.0f;
-    arg0->unk_16C.z = 1.0f;
+    geiser->scale.x = 1.0f;
+    geiser->scale.y = 1.0f;
+    geiser->scale.z = 1.0f;
 
-    arg0->unk_1A8.x = D_86F0B0A0[arg1].x;
-    arg0->unk_1A8.y = D_86F0B0A0[arg1].y;
-    arg0->unk_1A8.z = D_86F0B0A0[arg1].z;
+    geiser->position_1.x = sandshrewPositions[arg1].x;
+    geiser->position_1.y = sandshrewPositions[arg1].y;
+    geiser->position_1.z = sandshrewPositions[arg1].z;
 
-    arg0->unk_22C = 0;
-    arg0->unk_22E = 0;
-    arg0->unk_230 = 0;
+    geiser->totalRot.x = geiser->xRot_1 = geiser->unk_220 = geiser->xRot_2 = geiser->unk_22C = 0;
+    geiser->totalRot.y = geiser->yRot_1 = geiser->unk_222 = geiser->yRot_2 = geiser->ySpinSpeed = 0;
+    geiser->totalRot.z = geiser->zRot_1 = geiser->unk_224 = geiser->zRot_2 = geiser->unk_230 = 0;
 
-    arg0->unk_214.x = arg0->unk_21A = arg0->unk_220 = arg0->unk_226 = arg0->unk_22C;
-    arg0->unk_214.y = arg0->unk_21C = arg0->unk_222 = arg0->unk_228 = arg0->unk_22E;
-    arg0->unk_214.z = arg0->unk_21E = arg0->unk_224 = arg0->unk_22A = arg0->unk_230;
+    geiser->position_2.x = 0.0f;
+    geiser->position_2.y = 0.0f;
+    geiser->position_2.z = 0.0f;
 
-    arg0->unk_1C0.x = 0.0f;
-    arg0->unk_1C0.y = 0.0f;
-    arg0->unk_1C0.z = 0.0f;
+    geiser->miniHealth = geiser->miniMaxHealth = 0x64;
 
-    arg0->unk_258 = arg0->unk_25C = 0x64;
+    geiser->unk_272 = 0;
+    geiser->unk_2A4 = 0;
+    geiser->mainState = 0;
+    geiser->unk_24A = 0;
 
-    arg0->unk_272 = 0;
-    arg0->unk_2A4 = 0;
-    arg0->unk_23E = 0;
-    arg0->unk_24A = 0;
-
-    arg0->unk_000.unk_000.unk_01 &= ~1;
+    geiser->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void func_86F01180(void) {
+void initSandshrewGeisers(void) {
     s32 i;
 
-    D_86F0B000 = D_86F0C790;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
-        func_86F010B4(D_86F0B000, i);
-        D_86F0B000++;
+        initSandshrewWaterGeiser(miniSandshrewGeiserPtr, i);
+        miniSandshrewGeiserPtr++;
     }
 }
 
-void func_86F011E8(unk_func_8790002C* arg0) {
-    switch (arg0->unk_23E) {
+void func_86F011E8(MiniActor* geiser) {
+    switch (geiser->mainState) {
         case 1:
-            func_86F003FC(arg0, 0);
-            arg0->unk_000.unk_000.unk_01 |= 1;
-            arg0->unk_23E++;
+            miniSandshewChangeAnim(geiser, 0);
+            geiser->unk_000.unk_000.unk_01 |= 1;
+            geiser->mainState++;
             break;
         case 2:
-            if (func_80017514(&D_86F0B000->unk_000) != 0) {
-                func_86F003FC(arg0, 1);
-                arg0->unk_23E++;
+            if (func_80017514(&miniSandshrewGeiserPtr->unk_000) != 0) {
+                miniSandshewChangeAnim(geiser, 1);
+                geiser->mainState++;
             }
             break;
     }
 
-    if ((arg0->unk_23E >= 2) && (D_8140E6CC == 0)) {
-        func_81407F24(&arg0->unk_000, func_87902C9C, &D_87903E58, 4, 0xA);
+    if ((geiser->mainState >= 2) && (D_8140E6CC == 0)) {
+        func_81407F24(&geiser->unk_000, func_87902C9C, &D_87903E58, 4, 0xA);
     }
 }
 
 void func_86F012B8(void) {
     s32 i;
 
-    D_86F0B000 = D_86F0C790;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
-        func_86F011E8(D_86F0B000);
-        func_87900770(D_86F0B000);
-        func_87900808(D_86F0B000);
+        func_86F011E8(miniSandshrewGeiserPtr);
+        miniActorUpdateTransform(miniSandshrewGeiserPtr);
+        func_87900808(miniSandshrewGeiserPtr);
 
-        D_86F0B000++;
+        miniSandshrewGeiserPtr++;
     }
 }
 
 void func_86F0132C(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    D_87906060 = 0x1600;
-    D_87906062 = 0;
-    D_87906064 = 0x10E;
-    D_87906066 = 0x23;
-    D_87906068 = 0x32;
-    D_8790606A = 0x1900;
+    miniCameraXRot = 0x1600;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0x10E;
+    miniCameraFov = 0x23;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x1900;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = -2;
-    D_8790606C.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = -2;
+    miniCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 }
 
 void func_86F013B8(void) {
@@ -2074,7 +2082,7 @@ void func_86F013B8(void) {
             func_81400760(&D_8790607C, 250.0f, 1.0f);
             func_81400760(&D_87906088.y, 34.0f, 1.8f);
             func_81400550(&D_87906076, 0x600, 0xCC);
-            func_81400550(&D_879060C8, 0, 0x30);
+            func_81400550(&miniHudTransparency, 0, 0x30);
             break;
     }
 
@@ -2085,16 +2093,16 @@ void func_86F013B8(void) {
 
 void func_86F01488(void) {
     func_86F013B8();
-    func_87900C5C();
-    func_87900B64();
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
-void func_86F014B8(void) {
-    func_87900854();
-    func_86F002F4();
-    func_86F00F00();
-    func_86F01180();
-    func_86F0132C();
+void sandshrewMinigameInitObjects(void) {
+    func_87900854(); //	init minigame variables
+    initSandshrews();
+    initSandshrewHoles();
+    initSandshrewGeisers();
+    func_86F0132C(); // fix the camera
 }
 
 s32 func_86F014F8(void) {
@@ -2107,28 +2115,28 @@ s32 func_86F014F8(void) {
     var_s7 = 0;
     var_s4 = -1;
 
-    D_86F0AFF8 = D_86F0B1F0;
+    miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        if (D_86F0AFF8->unk_190.y < var_fs0) {
-            var_fs0 = D_86F0AFF8->unk_190.y;
+        if (miniSandshrewPtr->totalPos.y < var_fs0) {
+            var_fs0 = miniSandshrewPtr->totalPos.y;
         }
-        D_86F0AFF8++;
+        miniSandshrewPtr++;
     }
 
-    D_86F0AFF8 = D_86F0B1F0;
-    D_86F0B000 = D_86F0C790;
+    miniSandshrewPtr = miniSandshrews;
+    miniSandshrewGeiserPtr = miniSandshrewGeisers;
     for (i = 0; i < 4; i++) {
-        if (D_86F0AFF8->unk_190.y <= var_fs0) {
-            D_86F0AFF8->unk_2A8 = 1;
+        if (miniSandshrewPtr->totalPos.y <= var_fs0) {
+            miniSandshrewPtr->isWinner = 1;
             var_s7 = 1;
             var_s4 += 1;
-            D_86F0AFF8->unk_23E = 0x64;
-            D_86F0B000->unk_23E = 1;
+            miniSandshrewPtr->mainState = 0x64;
+            miniSandshrewGeiserPtr->mainState = 1;
             func_86F00188(5, i);
             func_87802F00(i);
         }
-        D_86F0AFF8++;
-        D_86F0B000++;
+        miniSandshrewPtr++;
+        miniSandshrewGeiserPtr++;
     }
 
     D_87903DD4 = var_s4;
@@ -2138,10 +2146,10 @@ s32 func_86F014F8(void) {
 void func_86F0164C(void) {
     s32 i;
 
-    D_86F0AFF8 = D_86F0B1F0;
+    miniSandshrewPtr = miniSandshrews;
     for (i = 0; i < 4; i++) {
-        D_86F0AFF8->unk_274 = D_86F0AFF8->unk_27C = 0.0f;
-        D_86F0AFF8++;
+        miniSandshrewPtr->diggingSpeed = miniSandshrewPtr->diggingAccel2 = 0.0f;
+        miniSandshrewPtr++;
     }
 }
 
@@ -2164,52 +2172,52 @@ s32 func_86F016D8(void) {
 }
 
 void func_86F0174C(void) {
-    switch (D_87903DA0) {
-        case 1:
-            D_87906040 = 0xF;
-            D_87903DA0++;
+    switch (minigameState) {
+        case 1: //  after pressing start
+            miniInputLockTimer = 0xF;
+            minigameState++;
             break;
 
-        case 2:
-            D_87906040--;
-            if (D_87906040 < 0) {
+        case 2: //  waits for some frames before starting the main countdown
+            miniInputLockTimer--;
+            if (miniInputLockTimer < 0) {
                 func_8780295C(1);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
-        case 3:
+        case 3: //
             if (func_86F016D8() != 0) {
-                D_87903DA4 = 1;
-                D_87903DC4 = 0;
-                func_86F00370();
-                D_87903DA0++;
+                minigameInputLock = true;
+                miniTutoScreenState = 0;
+                miniSandshewReangleAll(); // (???)
+                minigameState++;
             }
             break;
 
         case 4:
             if (func_86F014F8() != 0) {
                 func_86F0164C();
-                D_87903DA4 = 0;
+                minigameInputLock = false;
                 D_87906072 = 1;
-                D_87903DA0++;
-                D_87906040 = 0x28;
+                minigameState++;
+                miniInputLockTimer = 0x28;
             }
             break;
 
         case 5:
-            D_87906040--;
-            if (D_87906040 == 0) {
+            miniInputLockTimer--;
+            if (miniInputLockTimer == 0) {
                 func_87802EB8(1);
                 func_87903294();
                 func_86F00188(0xC, 0xB4);
-                D_87903DA0++;
+                minigameState++;
             }
             break;
 
         case 6:
             if (D_8780FC96 != 0) {
-                D_87903DA0++;
+                minigameState++;
                 D_87903DAC = 1;
             }
             break;
@@ -2279,29 +2287,29 @@ void func_86F01C40(void) {
             break;
     }
 
-    if (D_87903DC4 == -2) {
+    if (miniTutoScreenState == -2) {
         func_8001EBE0(0x10, -2);
         if (D_87903DD0 == 0x18) {
-            func_879033FC(D_86F0B1F0);
+            func_879033FC(miniSandshrews);
         }
         func_8001EBE0(4, -2);
     }
 }
 
-void func_86F01D78(void) {
+void fixSandshrewMinigameHUD(void) {
     s32 i;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_879060C8);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     for (i = 0; i < 4; i++) {
-        s16 tmp1 = D_86F0B158[i];
-        s16 tmp2 = D_86F0B160[i];
+        s16 xPos = playerIconsScreenXPos[i];
+        s16 yPos = playerIconsScreenYPos[i];
 
-        if (D_879060C4[i] == 0) {
-            func_87801644(i, tmp1, tmp2, 0.75f);
-        } else {
-            func_87801644(-1 - i, tmp1, tmp2, 0.75f);
+        if (D_879060C4[i] == 0) { //	if ai player
+            func_87801644(i, xPos, yPos, 0.75f);
+        } else { //	if human player
+            func_87801644(-1 - i, xPos, yPos, 0.75f);
         }
     }
 
@@ -2312,14 +2320,14 @@ void func_86F01EB4(void) {
     func_87903260();
     func_86F01C40();
 
-    if (D_87906044 != 0) {
-        func_86F01D78();
+    if (miniShowHUB != 0) {
+        fixSandshrewMinigameHUD();
     }
 }
 
-void func_86F01EF4(s32 arg0) {
-    u8 sp1C[] = { 0, 0, 30 };  // D_86F0B168
-    u8 sp18[] = { 0, 0, 250 }; // D_86F0B16C
+void func_86F01EF4(UNUSED s32 arg0) {
+    UNUSED u8 sp1C[] = { 0, 0, 30 };  // D_86F0B168
+    UNUSED u8 sp18[] = { 0, 0, 250 }; // D_86F0B16C
 
     func_8001F3F4();
     func_8001EBE0(4, -2);
@@ -2345,50 +2353,50 @@ void func_86F01F58(s32 arg0) {
     func_80015094(&D_87906050->unk_00);
     func_87901C98();
 
-    if (D_87903DB0 == 0) {
+    if (miniDebugMode == 0) {
         if (D_8780FC98 == 0) {
             func_86F01EF4(arg0);
         }
         func_87804FD4();
     } else {
-        func_87900F44();
-        func_879010A4();
+        showDebuggCameraInfo();
+        showDebuggJoystickInfo();
     }
 
     func_80007778();
 }
 
-void func_86F02004(void) {
-    func_86F014B8();
+void sandshrewMinigameInit(void) {
+    sandshrewMinigameInitObjects();
     func_800077B4(0xA);
     func_80006C6C(0x10);
-    D_87903DC4 = 3;
-    D_87906046 = D_8780FA38;
+    miniTutoScreenState = 3;
+    miniDifficulty = D_8780FA38;
 }
 
 void func_86F0204C(void) {
     s32 var_s5 = 1;
 
     func_87901620();
-    func_87900558();
+    hideMiniGameHUD();
 
     while (var_s5 != 0) {
         func_87900528();
 
-        if (D_87903DA0 == 0) {
+        if (minigameState == 0) {
             D_87906042 += 1;
             if (D_87906042 < 0) {
                 D_87906042 = 0;
             }
         }
 
-        if ((D_87903DB0 == 0) && (D_87906044 == 0) && (func_80007604() == 0)) {
-            if (gPlayer1Controller->buttonPressed & 0x1000) {
-                D_87903DC4 = 1;
-                D_87903DA0 = 1;
-                D_87906044 = 1;
+        if ((miniDebugMode == false) && (miniShowHUB == false) && (func_80007604() == 0)) {
+            if (BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+                miniTutoScreenState = 1;
+                minigameState = 1;
+                miniShowHUB = true;
                 func_86F00188(7, 0);
-            } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
+            } else if ((D_8780FA2A == 0) && (BTN_IS_PRESSED(gPlayer1Controller, BTN_B))) {
                 func_86F00188(8, 0);
                 func_87802EB8(2);
             }
@@ -2396,7 +2404,7 @@ void func_86F0204C(void) {
 
         if (D_8780FC94 == 0) {
             func_8140C5D0();
-            func_86F0174C();
+            func_86F0174C(); //	next stept
             func_86F00D04();
             func_86F01014();
             func_86F012B8();
@@ -2404,7 +2412,7 @@ void func_86F0204C(void) {
             func_86F01488();
         }
 
-        if ((D_87903DB0 == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
+        if ((miniDebugMode == 0) && ((D_87903DAC != 0) || (D_8780FC92 != 0))) {
             var_s5 = 0;
         }
 
@@ -2452,15 +2460,15 @@ void func_86F02320(void) {
     func_8001BB20();
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86F0B1F0[i].unk_000);
+        func_8001BB58(&miniSandshrews[i].unk_000);
     }
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86F0BCC0[i].unk_000);
+        func_8001BB58(&miniSandshrewHoles[i].unk_000);
     }
 
     for (i = 0; i < 4; i++) {
-        func_8001BB58(&D_86F0C790[i].unk_000);
+        func_8001BB58(&miniSandshrewGeisers[i].unk_000);
     }
 
     func_8001987C();
@@ -2468,32 +2476,32 @@ void func_86F02320(void) {
     temp_s1 = func_80019D18(0xA1);
 
     for (i = 0; i < 4; i++) {
-        D_86F0B1F0[i].unk_23C = 0xA1;
-        D_86F0B1F0[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86F0B1F0[i].unk_000, 0, D_86F0B1F0[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86F0B1F0[i].unk_000, 0);
+        miniSandshrews[i].unk_23C = 0xA1;
+        miniSandshrews[i].unk_168 = temp_s1;
+        func_8001BC34(&miniSandshrews[i].unk_000, 0, miniSandshrews[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&miniSandshrews[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0x9D);
 
     for (i = 0; i < 4; i++) {
-        D_86F0BCC0[i].unk_23C = 0x9D;
-        D_86F0BCC0[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86F0BCC0[i].unk_000, 0, D_86F0BCC0[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86F0BCC0[i].unk_000, 0);
+        miniSandshrewHoles[i].unk_23C = 0x9D;
+        miniSandshrewHoles[i].unk_168 = temp_s1;
+        func_8001BC34(&miniSandshrewHoles[i].unk_000, 0, miniSandshrewHoles[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&miniSandshrewHoles[i].unk_000, 0);
     }
 
     temp_s1 = func_80019D18(0xA2);
 
     for (i = 0; i < 4; i++) {
-        D_86F0C790[i].unk_23C = 0xA2;
-        D_86F0C790[i].unk_168 = temp_s1;
-        func_8001BC34(&D_86F0C790[i].unk_000, 0, D_86F0C790[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        func_8001BD04(&D_86F0C790[i].unk_000, 0);
+        miniSandshrewGeisers[i].unk_23C = 0xA2;
+        miniSandshrewGeisers[i].unk_168 = temp_s1;
+        func_8001BC34(&miniSandshrewGeisers[i].unk_000, 0, miniSandshrewGeisers[i].unk_23C, temp_s1->unk_08->unk_00[0]);
+        func_8001BD04(&miniSandshrewGeisers[i].unk_000, 0);
     }
 }
 
-s32 func_86F02520(s32 arg0, UNUSED s32 arg1) {
+s32 sandshrewMinigameLoad(s32 arg0, UNUSED s32 arg1) {
     unk_func_80007444* sp24;
 
     if (arg0 == 1) {
@@ -2514,12 +2522,12 @@ s32 func_86F02520(s32 arg0, UNUSED s32 arg1) {
 
     func_86F02320();
     func_80007678(sp24);
-    func_86F02004();
-    func_86F0204C();
+    sandshrewMinigameInit();
+    func_86F0204C(); //	tutorial screen ?
     func_86F02230();
     func_800076C0();
-    func_8001E9CC();
-    func_80005EAC();
+    func_8001E9CC(); //	main_pool_try_free(D_800AC870);
+    func_80005EAC(); //	main_pool_try_free(D_800A7428.unk4); main_pool_try_free(D_800A7428.unk0);
 
     main_pool_pop_state('MINI');
 

@@ -21,33 +21,33 @@ static u32 D_86D00530[] = {
 void func_86D00020(void) {
     D_87906054 = D_87906050->unk_00.unk_0C;
 
-    D_87906060 = 0xA00;
-    D_87906062 = 0;
-    D_87906064 = 0x17C;
-    D_87906066 = 0x1E;
-    D_87906068 = 0x32;
-    D_8790606A = 0x1900;
+    miniCameraXRot = 0xA00;
+    miniCameraYRot = 0;
+    miniCameraDistance = 0x17C;
+    miniCameraFov = 0x1E;
+    miniCameraNear = 0x32;
+    miniCameraFar = 0x1900;
 
-    D_8790606C.x = 0;
-    D_8790606C.y = 0x1E;
-    D_8790606C.z = 0;
+    miniCameraCoords.x = 0;
+    miniCameraCoords.y = 0x1E;
+    miniCameraCoords.z = 0;
 
-    func_87900B64();
+    miniUpdateCamera();
 }
 
-void func_86D000A8(void) {
-    func_87900C5C();
-    func_87900B64();
+void miniUnkUpdateCamera(void) {
+    minigameDebuggModeControl();
+    miniUpdateCamera();
 }
 
-void func_86D000D0(UNUSED s32 arg0) {
+void miniUnkDrawHUB(UNUSED s32 arg0) {
     func_800079C4();
     func_8000699C(&gDisplayListHead, 1);
     func_80015348();
     func_80015094(&D_87906050->unk_00);
 
-    if (D_87903DB0 != 0) {
-        func_87900F44();
+    if (miniDebugMode != 0) {
+        showDebuggCameraInfo();
     }
 
     func_80007778();
@@ -55,10 +55,10 @@ void func_86D000D0(UNUSED s32 arg0) {
 
 void func_86D00134(void) {
     func_80006C6C(0x10);
-    D_87903DC4 = 3;
+    miniTutoScreenState = 3;
 }
 
-void func_86D0015C(void) {
+void miniUnkControls(void) {
     s32 var_s1 = 1;
 
     while (var_s1 != 0) {
@@ -77,21 +77,21 @@ void func_86D0015C(void) {
         }
 
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_Z)) {
-            D_87903DB0 = (D_87903DB0 + 1) & 1;
+            miniDebugMode = (miniDebugMode + 1) & 1;
         }
 
-        if ((D_87903DB0 == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
-            D_87903DA0 = 1;
+        if ((miniDebugMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+            minigameState = 1;
         }
 
         func_8790370C();
-        func_86D000A8();
+        miniUnkUpdateCamera();
 
-        if ((D_87903DB0 == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_CDOWN)) {
+        if ((miniDebugMode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_CDOWN)) {
             var_s1 = 0;
         }
 
-        func_86D000D0(1);
+        miniUnkDrawHUB(1);
     }
 }
 
@@ -101,8 +101,8 @@ void func_86D0032C(void) {
     func_80006CB4(0x1E);
 
     for (i = 0; i < 30; i++) {
-        func_87900528();
-        func_86D000D0(2);
+        func_87900528(); //  inputs
+        miniUnkDrawHUB(2);
     }
 }
 
@@ -134,7 +134,7 @@ s32 func_86D003EC(s32 arg0, s32 arg1) {
     func_86D0037C();
     func_80007678(sp24);
     func_86D00134();
-    func_86D0015C();
+    miniUnkControls();
     func_86D0032C();
     func_800076C0();
     func_8001E9CC();

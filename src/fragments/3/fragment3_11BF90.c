@@ -4,13 +4,13 @@
 #include "src/12D80.h"
 #include "src/memory.h"
 
-static unk_func_8790002C* D_87906120;
+static MiniActor* D_87906120;
 
 void func_87903600(void) {
     s32 i;
-    unk_func_8790002C* ptr;
+    MiniActor* ptr;
 
-    D_87906120 = main_pool_alloc(sizeof(unk_func_8790002C) * 3, 0);
+    D_87906120 = main_pool_alloc(sizeof(MiniActor) * 3, 0);
     ptr = D_87906120;
 
     for (i = 0; i < 3; i++, ptr++) {
@@ -19,64 +19,63 @@ void func_87903600(void) {
         func_8001BC34(&ptr->unk_000, 0, ptr->unk_23C, ptr->unk_168->unk_08->unk_00[0]);
         func_8001BD04(&ptr->unk_000, 0);
         ptr->unk_000.unk_000.unk_01 &= ~1;
-        func_8790060C(ptr);
+        miniActorAllToZero(ptr);
     }
 }
 
-void func_879036B4(unk_func_8790002C* arg0) {
-    if (arg0->unk_23E == 1) {
+void func_879036B4(MiniActor* arg0) {
+    if (arg0->mainState == 1) {
         arg0->unk_000.unk_000.unk_01 |= 1;
-        func_879002B8(arg0, 0, -1, 0);
-        arg0->unk_23E++;
+        miniChangeActorAnim(arg0, 0, -1, 0);
+        arg0->mainState++;
     }
 }
 
 void func_8790370C(void) {
     s32 i;
-    unk_func_8790002C* ptr = D_87906120;
+    MiniActor* ptr = D_87906120;
 
     func_8140C5D0();
 
     for (i = 0; i < 3; i++, ptr++) {
         func_879036B4(ptr);
         func_879003A0(ptr);
-        func_87900770(ptr);
+        miniActorUpdateTransform(ptr);
         func_87900808(ptr);
     }
 }
 
-void func_87903778(unk_func_8790002C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7,
-                   s16 arg8) {
-    arg0->unk_16C.x = arg1;
-    arg0->unk_16C.y = arg1;
-    arg0->unk_16C.z = arg1;
+void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7, s16 arg8) {
+    arg0->scale.x = arg1;
+    arg0->scale.y = arg1;
+    arg0->scale.z = arg1;
 
-    arg0->unk_1A8.x = arg2;
-    arg0->unk_1A8.y = arg3;
-    arg0->unk_1A8.z = arg4;
-    arg0->unk_21A = arg5;
-    arg0->unk_21C = arg6;
-    arg0->unk_21E = arg7;
-    arg0->unk_266 = arg8;
-    arg0->unk_23E = 1;
+    arg0->position_1.x = arg2;
+    arg0->position_1.y = arg3;
+    arg0->position_1.z = arg4;
+    arg0->xRot_1 = arg5;
+    arg0->yRot_1 = arg6;
+    arg0->zRot_1 = arg7;
+    arg0->collidingActorId = arg8;
+    arg0->mainState = 1;
 }
 
 void func_879037D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
-    unk_func_8790002C* sp34 = D_87906120;
+    MiniActor* sp34 = D_87906120;
 
     func_87903778(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0);
     sp34->unk_000.unk_000.unk_14 = 0;
 }
 
 void func_87903838(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
-    unk_func_8790002C* sp34 = &D_87906120[1];
+    MiniActor* sp34 = &D_87906120[1];
 
     func_87903778(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 1);
     sp34->unk_000.unk_000.unk_14 = 1;
 }
 
 void func_879038AC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
-    unk_func_8790002C* sp34 = &D_87906120[2];
+    MiniActor* sp34 = &D_87906120[2];
 
     func_87903778(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 2);
     sp34->unk_000.unk_000.unk_14 = 2;
@@ -94,18 +93,18 @@ Gfx* func_87903920(Gfx* arg0, arg1_func_87903D64_014* arg1) {
     unk_D_86002F34_000_014_010* sp20;
 
     s32 temp_a2;
-    s32 temp_t1;
-    s32 temp_t1_2;
-    s32 temp_t2;
-    s32 temp_t2_2;
-    s32 temp_t2_3;
-    s32 temp_t4;
+    UNUSED s32 temp_t1;
+    UNUSED s32 temp_t1_2;
+    UNUSED s32 temp_t2;
+    UNUSED s32 temp_t2_2;
+    UNUSED s32 temp_t2_3;
+    UNUSED s32 temp_t4;
     s32 var_a0;
     s32 var_v1;
     u32 temp_a3;
     u32 var_v0;
-    u8* temp_t1_3;
-    u8* temp_v1;
+    UNUSED u8* temp_t1_3;
+    UNUSED u8* temp_v1;
     unk_D_86002F34_000_014_004* var_a1;
     unk_D_86002F34_000_014_004* var_a2;
     unk_D_86002F34_000_014_010* var_a3;
