@@ -6,7 +6,7 @@
 s16 miniInputLockTimer;
 s16 D_87906042;
 s16 miniShowHUB;
-s16 D_87906046;
+s16 miniDifficulty;
 s16 D_87906048; //  unused?
 s16 D_8790604A;
 s32 pad_D_8790604C; //	unused?
@@ -83,8 +83,7 @@ void miniUpdateCamera(void) {
     D_87906054->unk_60.at.y = miniCameraCoords.y;
     D_87906054->unk_60.at.z = miniCameraCoords.z;
 
-    func_80010354(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, miniCameraDistance, miniCameraXRot,
-                  miniCameraYRot);
+    func_80010354(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, miniCameraDistance, miniCameraXRot, miniCameraYRot);
 }
 
 s32 minigameDebuggModeControl(void) {

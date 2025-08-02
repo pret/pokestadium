@@ -1606,7 +1606,7 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
     if (true) {}
 
     sandshrew->unk_220 = sandshrew->xRot_2 = sandshrew->unk_22C = 0;
-    sandshrew->unk_222 = sandshrew->yRot_2 = sandshrew->unk_22E = 0;
+    sandshrew->unk_222 = sandshrew->yRot_2 = sandshrew->ySpinSpeed = 0;
     sandshrew->unk_224 = sandshrew->zRot_2 = sandshrew->unk_230 = 0;
 
     sandshrew->unk_272 = 0;
@@ -1627,7 +1627,7 @@ void initSandshrew(MiniActor* sandshrew, s32 player) {
 
     sandshrew->unk_290 = 0;
     sandshrew->mainState = 0;
-    sandshrew->unk_240 = 0;
+    sandshrew->isSquashed = 0;
 
     sandshrew->isComp = D_879060C4[player];
 }
@@ -1642,32 +1642,32 @@ void initSandshrews(void) {
     }
 }
 
-void func_86F0035C(MiniActor* arg0) {
-    arg0->unk_222 = miniControllerPtr->angle;
+void miniSandshewReangle(MiniActor* sandshrew) {
+    sandshrew->unk_222 = miniControllerPtr->angle;
 }
 
-void func_86F00370(void) {
+void miniSandshewReangleAll(void) {
     s32 i;
 
     miniControllerPtr = gPlayer1Controller;
     miniSandshrewPtr = miniSandshrews;
 
     for (i = 0; i < 4; i++) {
-        func_86F0035C(miniSandshrewPtr);
+        miniSandshewReangle(miniSandshrewPtr);
 
         miniSandshrewPtr++;
         miniControllerPtr++;
     }
 }
 
-void func_86F003FC(MiniActor* actor, s32 animID) {
+void miniSandshewChangeAnim(MiniActor* actor, s32 animID) {
     func_8001BD04(&actor->unk_000, animID);
     func_800173DC(&actor->unk_000, 0, actor->unk_000.unk_040.unk_04, 0x10000);
     func_80017464(&actor->unk_000, 0);
     func_80017454(&actor->unk_000, 0x10000);
 }
 
-void func_86F00450(MiniActor* sandshrew, f32 arg1) {
+void sandshrewDecreaseVel(MiniActor* sandshrew, f32 arg1) {
     sandshrew->diggingAccel1 -= arg1;
     if (sandshrew->diggingAccel1 < 1.0f) {
         sandshrew->diggingAccel1 = 1.0f;
@@ -1675,28 +1675,28 @@ void func_86F00450(MiniActor* sandshrew, f32 arg1) {
     sandshrew->diggingAccel2 = sandshrew->diggingAccel1;
 }
 
-void func_86F0048C(MiniActor* sandshrew, s32 arg1) {
-    if (arg1 == -1) {
+void sandshrewChangeState(MiniActor* sandshrew, s32 arg1) {
+    if (arg1 == -1) { //	stop digging
         sandshrew->sandshrewLastDir = 0;
-        sandshrew->unk_2B0 = 0;
-        sandshrew->unk_2A0 = 0;
+        sandshrew->sandshrewFailChances = 0;
+        sandshrew->leftRightTimer = 0;
         sandshrew->diggingAccel1 = 0.0f;
         sandshrew->diggingAccel2 = 0.0f;
-    } else if (arg1 == 1) {
-        sandshrew->unk_2A0 = 0x14;
-        sandshrew->unk_2B0 = 3;
+    } else if (arg1 == 1) { //	start digging
+        sandshrew->leftRightTimer = 0x14;
+        sandshrew->sandshrewFailChances = 3;
         sandshrew->mainState = 1;
         sandshrew->diggingAccel1 = 10.0f;
         sandshrew->diggingAccel2 = 10.0f;
-    } else {
-        sandshrew->unk_2A0 = 0x14;
-        sandshrew->unk_2B0 = 3;
+    } else { //	dig
+        sandshrew->leftRightTimer = 0x14;
+        sandshrew->sandshrewFailChances = 3;
         sandshrew->diggingAccel2 = sandshrew->diggingAccel1;
         sandshrew->diggingAccel1 = 10.0f;
     }
 }
 
-void sandshrewPlayerInput(MiniActor* sandshrew) {
+void sandshrewHumanControls(MiniActor* sandshrew) {
     s32 dir;
 
     dir = 0;
@@ -1714,57 +1714,57 @@ void sandshrewPlayerInput(MiniActor* sandshrew) {
         dir = 1;
     }
 
-    if (sandshrew->mainState == 0) {				//	on iddle animation
+    if (sandshrew->mainState == 0) { //	on iddle animation
         if ((sandshrew->sandshrewLastDir == 0) && ((dir == 1) || (dir == 2))) {
-            func_86F0048C(sandshrew, 1);
+            sandshrewChangeState(sandshrew, 1);
             sandshrew->sandshrewLastDir = dir;
         }
-    } else if (dir == 3) {						//	on both L&R
-        sandshrew->unk_2B0--;
-        if (sandshrew->unk_2B0 < 0) {
-            func_86F0048C(sandshrew, -1);
+    } else if (dir == 3) { //	on both L&R
+        sandshrew->sandshrewFailChances--;
+        if (sandshrew->sandshrewFailChances < 0) {
+            sandshrewChangeState(sandshrew, -1);
         } else {
-            func_86F00450(sandshrew, 1.0f);
+            sandshrewDecreaseVel(sandshrew, 1.0f);
         }
-    } else if (dir == 2) {						//	on R
+    } else if (dir == 2) { //	on R
         if (sandshrew->sandshrewLastDir == 1) {
-            func_86F0048C(sandshrew, 2);
+            sandshrewChangeState(sandshrew, 2);
             sandshrew->sandshrewLastDir = 2;
         } else if (sandshrew->sandshrewLastDir == 2) {
-            sandshrew->unk_2B0--;
-            if (sandshrew->unk_2B0 < 0) {
-                func_86F0048C(sandshrew, -1);
+            sandshrew->sandshrewFailChances--;
+            if (sandshrew->sandshrewFailChances < 0) {
+                sandshrewChangeState(sandshrew, -1);
             } else {
-                func_86F00450(sandshrew, 1.0f);
+                sandshrewDecreaseVel(sandshrew, 1.0f);
             }
         }
-    } else if (dir == 1) {						//	on L
+    } else if (dir == 1) { //	on L
         if (sandshrew->sandshrewLastDir == 2) {
-            func_86F0048C(sandshrew, 2);
+            sandshrewChangeState(sandshrew, 2);
             sandshrew->sandshrewLastDir = 1;
         } else if (sandshrew->sandshrewLastDir == 1) {
-            sandshrew->unk_2B0--;
-            if (sandshrew->unk_2B0 < 0) {
-                func_86F0048C(sandshrew, -1);
+            sandshrew->sandshrewFailChances--;
+            if (sandshrew->sandshrewFailChances < 0) {
+                sandshrewChangeState(sandshrew, -1);
             } else {
-                func_86F00450(sandshrew, 1.0f);
+                sandshrewDecreaseVel(sandshrew, 1.0f);
             }
         }
-    } else if (sandshrew->unk_2A0 == 0) {		//	on none
-        func_86F0048C(sandshrew, -1);
-    } else {									//	???
-        func_86F00450(sandshrew, 1.0f);
+    } else if (sandshrew->leftRightTimer == 0) { //	???
+        sandshrewChangeState(sandshrew, -1);
+    } else { //	???
+        sandshrewDecreaseVel(sandshrew, 1.0f);
     }
 
-    sandshrew->unk_2A0--;
-    if (sandshrew->unk_2A0 < 0) {
-        sandshrew->unk_2A0 = 0;
+    sandshrew->leftRightTimer--;
+    if (sandshrew->leftRightTimer < 0) {
+        sandshrew->leftRightTimer = 0;
     }
     sandshrew->diggingSpeed += sandshrew->diggingAccel2;
 }
 
 void sandshrewCompControls(MiniActor* arg0) {
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             arg0->diggingAccel2 = (func_81400A78(0xA) * 0.1f) + 3.0f;
             break;
@@ -1794,35 +1794,37 @@ void func_86F00920(MiniActor* sandshrew) {
     f32 holeDeepeness;
 
     switch (sandshrew->mainState) {
-        case 0x1:				//	geiser coming out of the ground
-            func_86F003FC(sandshrew, 1);
+        case 0x1: //	start digging animation 1
+            miniSandshewChangeAnim(sandshrew, 1);
             sandshrew->mainState++;
             break;
 
-        case 0x2:				//	on geiser loop
+        case 0x2: //	start digging animation 2
             if (func_800174E4(&sandshrew->unk_000) != 0) {
-                func_86F003FC(sandshrew, 2);
+                miniSandshewChangeAnim(sandshrew, 2);
                 func_80017454(&sandshrew->unk_000, 0);
-                sandshrew->unk_22E = 0;
+                sandshrew->ySpinSpeed = 0;
                 sandshrew->mainState++;
             }
             break;
 
-        case 0x3:               //  diggin
+        case 0x3: //  diggin
             if (sandshrew->diggingAccel2 != 0) {
                 if (D_8140E6CC == 0) {
-                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 1);	//	perticles
-                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 2);	//	particles
+                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 1); //	perticles
+                    func_81407F24(&sandshrew->unk_000, func_87902608, &D_87903E28, 1, 2); //	particles
                 }
 
                 if (D_8140E6CC == 0) {
                     if (sandshrew->totalPos.y > -10.0f) {
-                        func_81407D48(1.0f, sandshrew->totalPos, sandshrew->totalRot, func_87902224, &D_87903E10, 1);	//	particles
+                        func_81407D48(1.0f, sandshrew->totalPos, sandshrew->totalRot, func_87902224, &D_87903E10,
+                                      1); //	particles
                     } else {
                         sp48.x = sandshrew->totalPos.x;
                         sp48.y = -5.0f;
                         sp48.z = sandshrew->totalPos.z;
-                        func_81407D48(1.0f, sp48, sandshrew->totalRot, func_879023EC, &D_87903E10, 1);	//	particles
+                        func_81407D48(1.0f, sp48, sandshrew->totalRot, func_879023EC, &D_87903E10,
+                                      1); //	particles
                     }
                 }
 
@@ -1848,14 +1850,14 @@ void func_86F00920(MiniActor* sandshrew) {
             }
             break;
 
-        case 0x4:              //   on stop diggin
+        case 0x4: //   on stop diggin
             if (func_800174E4(&sandshrew->unk_000) != 0) {
                 func_8001BD04(&sandshrew->unk_000, 0);
                 sandshrew->mainState = 0;
             }
             break;
 
-        case 0x64:
+        case 0x64: //	win start animation
             func_8001BD04(&sandshrew->unk_000, 4);
             func_800173DC(&sandshrew->unk_000, 0, sandshrew->unk_000.unk_040.unk_04, 0x10000);
             func_80017464(&sandshrew->unk_000, 0);
@@ -1864,7 +1866,7 @@ void func_86F00920(MiniActor* sandshrew) {
             sandshrew->position_2.y += 15.0f;
             break;
 
-        case 0x65:
+        case 0x65: //	win animation loop
             minigameActorLocalOriginToZero(sandshrew);
             func_80015390(&miniSandshrewGeiserPtr->unk_000, 0xA, &sandshrew->position_2);
             break;
@@ -1881,9 +1883,9 @@ void func_86F00D04(void) {
     miniSandshrewGeiserPtr = miniSandshrewGeisers;
 
     for (i = 0; i < 4; i++) {
-        if (minigameInputLock != false) {
+        if (minigameInputLock) {
             if (miniSandshrewPtr->isComp == 0) {
-                sandshrewPlayerInput(miniSandshrewPtr);
+                sandshrewHumanControls(miniSandshrewPtr);
             } else {
                 sandshrewCompControls(miniSandshrewPtr);
             }
@@ -1915,7 +1917,7 @@ void initSandshrewHole(MiniActor* a0, s32 arg1) {
     sandshrewHole->totalRot.x = sandshrewHole->xRot_1 = sandshrewHole->unk_220 = sandshrewHole->xRot_2 =
         sandshrewHole->unk_22C = 0;
     sandshrewHole->totalRot.y = sandshrewHole->yRot_1 = sandshrewHole->unk_222 = sandshrewHole->yRot_2 =
-        sandshrewHole->unk_22E = 0;
+        sandshrewHole->ySpinSpeed = 0;
     sandshrewHole->totalRot.z = sandshrewHole->zRot_1 = sandshrewHole->unk_224 = sandshrewHole->zRot_2 =
         sandshrewHole->unk_230 = 0;
 
@@ -1947,7 +1949,7 @@ void func_86F00F68(MiniActor* sandshrewHole, MiniActor* sandshrewPlayer) {
     s32 var_a1;
 
     if ((sandshrewPlayer->diggingSpeed > 300.0f) && (sandshrewHole->mainState == 0)) {
-        func_86F003FC(sandshrewHole, 0);
+        miniSandshewChangeAnim(sandshrewHole, 0);
         sandshrewHole->unk_000.unk_000.unk_01 |= 1;
         sandshrewHole->mainState = 1;
     }
@@ -1990,7 +1992,7 @@ void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
     geiser->position_1.z = sandshrewPositions[arg1].z;
 
     geiser->totalRot.x = geiser->xRot_1 = geiser->unk_220 = geiser->xRot_2 = geiser->unk_22C = 0;
-    geiser->totalRot.y = geiser->yRot_1 = geiser->unk_222 = geiser->yRot_2 = geiser->unk_22E = 0;
+    geiser->totalRot.y = geiser->yRot_1 = geiser->unk_222 = geiser->yRot_2 = geiser->ySpinSpeed = 0;
     geiser->totalRot.z = geiser->zRot_1 = geiser->unk_224 = geiser->zRot_2 = geiser->unk_230 = 0;
 
     geiser->position_2.x = 0.0f;
@@ -2007,7 +2009,7 @@ void initSandshrewWaterGeiser(MiniActor* arg0, s32 arg1) {
     geiser->unk_000.unk_000.unk_01 &= ~1;
 }
 
-void initSandshrewWaterGeisers(void) {
+void initSandshrewGeisers(void) {
     s32 i;
 
     miniSandshrewGeiserPtr = miniSandshrewGeisers;
@@ -2021,13 +2023,13 @@ void initSandshrewWaterGeisers(void) {
 void func_86F011E8(MiniActor* geiser) {
     switch (geiser->mainState) {
         case 1:
-            func_86F003FC(geiser, 0);
+            miniSandshewChangeAnim(geiser, 0);
             geiser->unk_000.unk_000.unk_01 |= 1;
             geiser->mainState++;
             break;
-        case 2:					//	first geiser animation ends
+        case 2:
             if (func_80017514(&miniSandshrewGeiserPtr->unk_000) != 0) {
-                func_86F003FC(geiser, 1);
+                miniSandshewChangeAnim(geiser, 1);
                 geiser->mainState++;
             }
             break;
@@ -2099,7 +2101,7 @@ void sandshrewMinigameInitObjects(void) {
     func_87900854(); //	init minigame variables
     initSandshrews();
     initSandshrewHoles();
-    initSandshrewWaterGeisers();
+    initSandshrewGeisers();
     func_86F0132C(); // fix the camera
 }
 
@@ -2188,7 +2190,7 @@ void func_86F0174C(void) {
             if (func_86F016D8() != 0) {
                 minigameInputLock = true;
                 miniTutoScreenState = 0;
-                func_86F00370();
+                miniSandshewReangleAll(); // (???)
                 minigameState++;
             }
             break;
@@ -2196,7 +2198,7 @@ void func_86F0174C(void) {
         case 4:
             if (func_86F014F8() != 0) {
                 func_86F0164C();
-                minigameInputLock = 0;
+                minigameInputLock = false;
                 D_87906072 = 1;
                 minigameState++;
                 miniInputLockTimer = 0x28;
@@ -2369,7 +2371,7 @@ void sandshrewMinigameInit(void) {
     func_800077B4(0xA);
     func_80006C6C(0x10);
     miniTutoScreenState = 3;
-    D_87906046 = D_8780FA38;    // difficulty ?
+    miniDifficulty = D_8780FA38;
 }
 
 void func_86F0204C(void) {
@@ -2494,8 +2496,7 @@ void func_86F02320(void) {
     for (i = 0; i < 4; i++) {
         miniSandshrewGeisers[i].unk_23C = 0xA2;
         miniSandshrewGeisers[i].unk_168 = temp_s1;
-        func_8001BC34(&miniSandshrewGeisers[i].unk_000, 0, miniSandshrewGeisers[i].unk_23C,
-                      temp_s1->unk_08->unk_00[0]);
+        func_8001BC34(&miniSandshrewGeisers[i].unk_000, 0, miniSandshrewGeisers[i].unk_23C, temp_s1->unk_08->unk_00[0]);
         func_8001BD04(&miniSandshrewGeisers[i].unk_000, 0);
     }
 }

@@ -384,7 +384,7 @@ void func_879033FC(MiniActor* arg0) {
 }
 
 void func_8790354C(void) {
-    switch (D_87906046) {
+    switch (miniDifficulty) {
         case 0:
             func_8001F1E8(0xC8, 0x20, "(EASY)");
             break;

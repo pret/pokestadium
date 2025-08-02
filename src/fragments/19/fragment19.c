@@ -101,7 +101,7 @@ void func_86D0032C(void) {
     func_80006CB4(0x1E);
 
     for (i = 0; i < 30; i++) {
-        func_87900528();    //  inputs
+        func_87900528(); //  inputs
         miniUnkDrawHUB(2);
     }
 }

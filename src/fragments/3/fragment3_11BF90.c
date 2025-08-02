@@ -19,7 +19,7 @@ void func_87903600(void) {
         func_8001BC34(&ptr->unk_000, 0, ptr->unk_23C, ptr->unk_168->unk_08->unk_00[0]);
         func_8001BD04(&ptr->unk_000, 0);
         ptr->unk_000.unk_000.unk_01 &= ~1;
-        func_8790060C(ptr);
+        miniActorAllToZero(ptr);
     }
 }
 
@@ -45,8 +45,7 @@ void func_8790370C(void) {
     }
 }
 
-void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7,
-                   s16 arg8) {
+void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6, s16 arg7, s16 arg8) {
     arg0->scale.x = arg1;
     arg0->scale.y = arg1;
     arg0->scale.z = arg1;
@@ -57,7 +56,7 @@ void func_87903778(MiniActor* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 
     arg0->xRot_1 = arg5;
     arg0->yRot_1 = arg6;
     arg0->zRot_1 = arg7;
-    arg0->playerId = arg8;
+    arg0->collidingActorId = arg8;
     arg0->mainState = 1;
 }
 

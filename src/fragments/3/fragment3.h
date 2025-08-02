@@ -14,69 +14,66 @@ typedef struct MiniActor {
     /* 0x190 */ Vec3f totalPos;		//	all positions
     /* 0x19C */ Vec3f totalPos_alt;	//	all positions + height/2
     /* 0x1A8 */ Vec3f position_1;
-    /* 0x1B4 */ Vec3f unk_1B4;		//	???				**	ekans only
+    /* 0x1B4 */ Vec3f closestDiglettPos;//				**	ekans only
     /* 0x1C0 */ Vec3f position_2;
-    /* 0x1CC */ f32 dist2DiglettLevelX;	//				**	ekans only
+    /* 0x1CC */ f32 dist2DiglettLevelX;	//	1,2,4
     /* 0x1D0 */ f32 dist2DiglettLevelY;	//	unused
-    /* 0x1D4 */ f32 dist2DiglettLevelZ;	//	1,2,4		**	ekans only
-    /* 0x1D8 */ Vec3f unk_1D8;		//	also position, never used
-    /* 0x1E4 */ f32 unk_1E4;		//	botton  of the hitbox ? half of 28C
+    /* 0x1D4 */ f32 dist2DiglettLevelZ;	//	1,2,4
+    /* 0x1D8 */ Vec3f unk_1D8;		//	also position, unused
+    /* 0x1E4 */ f32 middleHeight;
     /* 0x1E8 */ char unk1E8[0x4];	//	unused ?
     /* 0x1EC */ f32 unk_1EC;		//	always zero
     /* 0x1F0 */ f32 unk_1F0;		//	always zero
     /* 0x1F4 */ f32 unk_1F4;		//	always zero
-    /* 0x1F8 */ f32 unk_1F8;		//	speed (x) on ekans and metapod
-    /* 0x1FC */ f32 unk_1FC;		//	speed (y) on ekans and metapod
-    /* 0x200 */ f32 unk_200;		//	speed (z) on ekans and metapod
-    /* 0x204 */ f32 xAccel; 		//	x acceleration on metapod	**	metapod only
-    /* 0x208 */ f32 yAccel; 		//	y acceleration on metapod	**	metapod only
-    /* 0x20C */ f32 zAccel; 		//	z acceleration on metapod	**	metapod only
-    /* 0x210 */ f32 weight;
-    /* 0x214 */ Vec3s totalRot;		//	total rotation
-    /* 0x21A */ s16 xRot_1;			//	x rotation 1, always zero
-    /* 0x21C */ s16 yRot_1;			//	y rotation 1
-    /* 0x21E */ s16 zRot_1;			//	z rotation 1 ? always zero
+    /* 0x1F8 */ f32 xSpeed;
+    /* 0x1FC */ f32 ySpeed;
+    /* 0x200 */ f32 zSpeed;
+    /* 0x204 */ f32 xAccel;
+    /* 0x208 */ f32 yAccel;
+    /* 0x20C */ f32 zAccel;
+    /* 0x210 */ f32 antiAcceleration;
+    /* 0x214 */ Vec3s totalRot;
+    /* 0x21A */ s16 xRot_1;
+    /* 0x21C */ s16 yRot_1;
+    /* 0x21E */ s16 zRot_1;
     /* 0x220 */ s16 unk_220;		//	x something
-    /* 0x222 */ s16 unk_222;		//	y something
+    /* 0x222 */ s16 unk_222;		//	y something ; ??? ; stick direction on sandshrew (?)
     /* 0x224 */ s16 unk_224;		//	z something
-    /* 0x226 */ s16 xRot_2;			//	x rotation 2
-    /* 0x228 */ s16 yRot_2;			//	y rotation 2 (throwing direction on ekans)
-    /* 0x22A */ s16 zRot_2;			//	z rotation 2
-    /* 0x22C */ s16 unk_22C;		//	x spinning speed ?
-    /* 0x22E */ s16 unk_22E;		//  y spinning speed on ekans ; and maybe sandsrew?
-    /* 0x230 */ s16 unk_230;		//	z spinning speed ?
-    /* 0x232 */ s16 xRot_3;			//	x rotation 3
-    /* 0x234 */ s16 yRot_3;			//	y rotation 3
-    /* 0x236 */ s16 zRot_3;			//	z rotation 3 always zero
+    /* 0x226 */ s16 xRot_2;
+    /* 0x228 */ s16 yRot_2;			//	throwing direction on ekans
+    /* 0x22A */ s16 zRot_2;
+    /* 0x22C */ s16 unk_22C;		//	zero, x spinning speed ?
+    /* 0x22E */ s16 ySpinSpeed;		//  y spinning speed on ekans
+    /* 0x230 */ s16 unk_230;		//	zero, z spinning speed ?
+    /* 0x232 */ s16 xRot_3;
+    /* 0x234 */ s16 yRot_3;
+    /* 0x236 */ s16 zRot_3;
     /* 0x238 */ s16 unk_238;		//	always zero
     /* 0x23A */ s16 unk_23A;		//	always zero
     /* 0x23C */ s16 unk_23C;		//	??? some value to send to unk_000->unk_018
-    /* 0x23E */ s16 mainState;		//	animation id or state
-    /* 0x240 */ union {
-    			s16 unk_240;
-    			s16 isSquashed;
-    		};
+    /* 0x23E */ s16 mainState;
+    /* 0x240 */ s16 isSquashed;		//	on metapod
     /* 0x242 */ s16 compState;
-    /* 0x244 */ s16 unk_244;		//	?
+    /* 0x244 */ s16 unk_244;		//	something metapod comp AI RNG
     /* 0x246 */ char unk246[0x2];	//	unused
-    /* 0x248 */ s16 isIdle;        //	0,1,2 - is colliding? visibility?
-    /* 0x24A */ s16 unk_24A;        //	animation id ?
-    /* 0x24C */ s16 unk_24C;        //	texture animation ?
+    /* 0x248 */ s16 unk_248;		//	animation something 0,1,2
+    /* 0x24A */ s16 unk_24A;		//	animation id or state?
+    /* 0x24C */ s16 unk_24C;		//	texture animation ?
     /* 0x24E */ char unk24E[0x6];	//	unused
     /* 0x254 */ s32 unk_254;		//	always zero
-    /* 0x258 */ s16 miniHealth;		//	health, used only on metapod
+    /* 0x258 */ s16 miniHealth;
     /* 0x25A */ s16 damageTimer;	//	** metapod only
     /* 0x25C */ s16 miniMaxHealth;	//	400 instead of 100 on metapod
     /* 0x25E */ s16 ekansAbbleToHoop;							//		**	ekans only
     /* 0x260 */ s16 midAirState;	//  mid air state, ekanses and falling rocks
     /* 0x262 */ s16 ekansIsMidAir;	//	ekans is in mid air				**	ekans only
     /* 0x264 */ s16 unk_264;        //  always zero
-    /* 0x266 */ s16 playerId;
-    /* 0x268 */ s16 playerIdBuffer;	//	ekans only
+    /* 0x266 */ s16 collidingActorId;
+    /* 0x268 */ s16 collidingActorId_alt;							//	**	ekans only
     /* 0x26A */ s16 unk_26A;        //	some flag related to collisions
     /* 0x26C */ s16 unk_26C;        //	animation something
     /* 0x26E */ s16 unk_26E;		//	animation something
-    /* 0x270 */ s16 unk_270;
+    /* 0x270 */ s16 unk_270;		//	???								**	metapod only
     /* 0x272 */ s16 unk_272;        //  colliding with a rock on metapod's minigame ? ;
     /* 0x274 */ union{
     			f32 unk_274;
@@ -90,9 +87,9 @@ typedef struct MiniActor {
     			f32 stickMagnitude1;
     			f32 diggingAccel1;
     		};
-    /* 0x284 */ f32 stickMagnitude2;	//	launch forse on ekans
-    /* 0x288 */ f32 unk_288;        //	bottom of the hitbox / bounding box ?
-    /* 0x28C */ f32 height;			//	top    of the hitbox ? / bounding box ? ;   double of 1E4
+    /* 0x284 */ f32 stickMagnitude2;    //	launch forse on ekans
+    /* 0x288 */ f32 cubeRadio;		//	bottom of the hitbox / bounding box ?
+    /* 0x28C */ f32 halfHeight;
     /* 0x290 */ s16 unk_290;		//	always zero
     /* 0x292 */ s16 unk_292;		//	always zero
     /* 0x294 */ s16 unk_294;		//	always zero
@@ -104,17 +101,21 @@ typedef struct MiniActor {
     			s16 ekansDiglettHitScore;
     			s16 metapodInputLockTimer;
     		};
-    /* 0x29C */ s16 diglettIsGold;	//						**	diglett only
-    /* 0x29E */ s16 unk_29E;        //  respawn time after landing on ekans ; something comp animation on metapod
-    /* 0x2A0 */ s16 unk_2A0;        //	timer for correct L/R inpus on sandsrew; ammount of frmaes DL/DR was pressed on ekans
-    /* 0x2A2 */ s16 ekansScore;		// 						**	ekans only
+    /* 0x29C */ s16 diglettIsGold;						//	**	diglett only
+    /* 0x29E */ s16 unk_29E;	// something comp AI RNG	maybe timer to launch
+    /* 0x2A0 */ union {
+    			s16 unk_2A0;
+    			s16 leftRightTimer;	//	on sandshrew, 20 to 0
+    			s16 leftRightCount;	//	on ekans
+    		};
+    /* 0x2A2 */ s16 ekansScore;							//	**	ekans only
     /* 0x2A4 */ s16 unk_2A4;
     /* 0x2A6 */ s16 unk_2A6;		//	metapod state ?
     /* 0x2A8 */ s16 isWinner;
     /* 0x2AA */ s16 unk_2AA;
     /* 0x2AC */ s16 isComp;
-    /* 0x2AE */ s16 unk_2AE;
-    /* 0x2B0 */ s16 unk_2B0;
+    /* 0x2AE */ s16 unk_2AE;		//	???					**	metapod only
+    /* 0x2B0 */ s16 sandshrewFailChances;	//	3,2,1,0		**	sandsrew only
     /* 0x2B2 */ s16 unk_2B2;
 } MiniActor; // size = 0x2B4
 
@@ -156,7 +157,7 @@ extern unk_D_87903E10 D_87903E58;
 extern s16 miniInputLockTimer;
 extern s16 D_87906042;
 extern s16 miniShowHUB;
-extern s16 D_87906046;
+extern s16 miniDifficulty;
 extern s16 D_87906048;
 extern s16 D_8790604A;
 extern unk_D_86002F34_00C* D_87906050;      // geo layout
@@ -208,16 +209,16 @@ void miniChangeActorAnim(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3);
 void miniChangeActorAnim_alt1(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
 void miniChangeActorAnim_alt2(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3);
 s32 miniPokeIsIdleCheck(MiniActor* arg0);
-void func_879003A0(MiniActor* arg0);
+void func_879003A0(MiniActor* poke);
 void func_879004F8(unk_D_86002F58_004_000* arg0);
 void func_87900528(void);
 void hideMiniGameHUD(void);
-void func_87900564(MiniActor* arg0);
+void func_87900564(MiniActor* actor);
 void minigameActorLocalOriginToZero(MiniActor* arg0);
 void func_879005AC(MiniActor* arg0);
-void func_879005C4(MiniActor* arg0);
-void func_8790060C(MiniActor* arg0);
-void miniActorUpdateTransform(MiniActor* arg0);
+void miniEkansUpdatePos(MiniActor* ekans);
+void miniActorAllToZero(MiniActor* actor);
+void miniActorUpdateTransform(MiniActor* poke);
 void func_87900808(MiniActor* arg0);
 void func_87900854(void);
 void func_87900920(void);
