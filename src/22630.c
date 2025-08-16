@@ -203,84 +203,88 @@ u16 func_80022084(u16 arg0) {
 void func_800220C4(void) {
 }
 
-u16 func_800220CC(s32 arg0, u16 arg1) {
-    u16 sp6;
+u16 GetPokemonDV(s32 statId, u16 dvBits) { //GetPokemonDV
+    u16 dvValue;
 
-    switch (arg0) {
-        case 1:
-            sp6 = ((arg1 & 0x1000) >> 9) | ((arg1 & 0x100) >> 6) | ((arg1 & 0x10) >> 3) | (arg1 & 1);
+    switch (statId) {
+        case STAT_HP: // HP DV (derived from the LSBs of other DVs)
+            dvValue = ((dvBits & 0x1000) >> 9)  // Special DV bit 0 → HP DV bit 0
+                    | ((dvBits & 0x0100) >> 6)  // Speed DV bit 0 → HP DV bit 1
+                    | ((dvBits & 0x0010) >> 3)  // Defense DV bit 0 → HP DV bit 2
+                    | (dvBits & 0x0001);        // Attack DV bit 0 → HP DV bit 3
             break;
 
-        case 2:
-            sp6 = (arg1 >> 0xC) & 0xF;
+        case STAT_SPECIAL: // Special DV
+            dvValue = (dvBits >> 12) & 0xF;
             break;
 
-        case 3:
-            sp6 = (arg1 >> 8) & 0xF;
+        case STAT_SPEED: // Speed DV
+            dvValue = (dvBits >> 8) & 0xF;
             break;
 
-        case 4:
-            sp6 = (arg1 >> 4) & 0xF;
+        case STAT_DEFENSE: // Defense DV
+            dvValue = (dvBits >> 4) & 0xF;
             break;
 
-        case 5:
-            sp6 = arg1 & 0xF;
+        case STAT_ATTACK: // Attack DV
+            dvValue = dvBits & 0xF;
             break;
     }
 
-    return sp6;
+    return dvValue;
 }
 
-u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
-    u16 sp1C;
-    u16 sp24;
-    u16 sp22;
+u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u16 dvBits) {
+    u16 statValue;
+    u16 baseStat;
+    u16 dvValue;
 
-    switch (arg0) {
-        case 1:
-            sp24 = D_80070F84[arg1].unk_06;
+    switch (statId) {
+        case STAT_HP:
+            baseStat = D_80070F84[speciesId].baseHP;
             break;
-
-        case 2:
-            sp24 = D_80070F84[arg1].unk_07;
+        case STAT_SPECIAL:
+            baseStat = D_80070F84[speciesId].baseSpecial;
             break;
-
-        case 3:
-            sp24 = D_80070F84[arg1].unk_08;
+        case STAT_SPEED:
+            baseStat = D_80070F84[speciesId].baseSpeed;
             break;
-
-        case 4:
-            sp24 = D_80070F84[arg1].unk_09;
+        case STAT_DEFENSE:
+            baseStat = D_80070F84[speciesId].baseDefense;
             break;
-
-        case 5:
-            sp24 = D_80070F84[arg1].unk_0A[0];
+        case STAT_ATTACK:
+            baseStat = D_80070F84[speciesId].baseAttack;
             break;
     }
 
-    sp22 = func_800220CC(arg0, arg4);
+    // Get the Pokémon's DV for the stat (or HP DV)
+    dvValue = GetPokemonDV(statId, dvBits);
 
-    sp1C = (((func_80022084(arg2) / 4) + ((sp24 + sp22) * 2)) * arg3) / 100;
-    if (arg0 == 1) {
-        sp1C += arg3 + 10;
+    // Compute the preliminary stat value
+    statValue = (((func_80022084(statModifier) / 4) + ((baseStat + dvValue) * 2)) * level) / 100;
+
+    // Add final adjustments
+    if (statId == STAT_HP) {
+        statValue += level + 10;
     } else {
-        sp1C += 5;
+        statValue += 5;
     }
 
-    if (sp1C > 999) {
-        sp1C = 999;
+    // Cap at 999
+    if (statValue > 999) {
+        statValue = 999;
     }
 
-    return sp1C;
+    return statValue;
 }
 
 void func_80022338(unk_func_80026268_arg0* arg0) {
     arg0->unk_24 = func_800226C0(arg0->unk_00.unk_00, arg0->unk_10);
-    arg0->unk_26 = func_80022170(1, arg0->unk_00.unk_00, arg0->unk_14, arg0->unk_24, arg0->unk_1E);
-    arg0->unk_28 = func_80022170(2, arg0->unk_00.unk_00, arg0->unk_16, arg0->unk_24, arg0->unk_1E);
-    arg0->unk_2A = func_80022170(3, arg0->unk_00.unk_00, arg0->unk_18, arg0->unk_24, arg0->unk_1E);
-    arg0->unk_2C = func_80022170(4, arg0->unk_00.unk_00, arg0->unk_1A, arg0->unk_24, arg0->unk_1E);
-    arg0->unk_2E = func_80022170(5, arg0->unk_00.unk_00, arg0->unk_1C, arg0->unk_24, arg0->unk_1E);
+    arg0->unk_26 = CalculateStatValue(1, arg0->unk_00.unk_00, arg0->unk_14, arg0->unk_24, arg0->unk_1E);
+    arg0->unk_28 = CalculateStatValue(2, arg0->unk_00.unk_00, arg0->unk_16, arg0->unk_24, arg0->unk_1E);
+    arg0->unk_2A = CalculateStatValue(3, arg0->unk_00.unk_00, arg0->unk_18, arg0->unk_24, arg0->unk_1E);
+    arg0->unk_2C = CalculateStatValue(4, arg0->unk_00.unk_00, arg0->unk_1A, arg0->unk_24, arg0->unk_1E);
+    arg0->unk_2E = CalculateStatValue(5, arg0->unk_00.unk_00, arg0->unk_1C, arg0->unk_24, arg0->unk_1E);
 }
 
 u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
@@ -288,7 +292,7 @@ u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
     s32 tmp;
 
     for (i = 1; i < 0xFFFF; i += 2) {
-        tmp = func_80022170(arg0, arg1, i + 2, arg3, arg4);
+        tmp = CalculateStatValue(arg0, arg1, i + 2, arg3, arg4);
         if (arg2 < tmp) {
             break;
         }

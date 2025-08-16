@@ -6,6 +6,31 @@
 #include "29BA0.h"
 #include "2D340.h"
 
+#define STAT_HP 1
+#define STAT_SPECIAL 2
+#define STAT_SPEED 3
+#define STAT_DEFENSE 4
+#define STAT_ATTACK 5
+
+typedef struct PokemonStats {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 baseHP;
+    /* 0x07 */ u8 baseSpecial;
+    /* 0x08 */ u8 baseSpeed;
+    /* 0x09 */ u8 baseDefense;
+    /* 0x0A */ u8 baseAttack;
+    /* 0x0B */ char unk0B[0x4];
+    /* 0x0F */ u8 unk_0F[1];
+    /* 0x10 */ char unk10[0x3];
+    /* 0x13 */ u8 unk_13;
+    /* 0x14 */ char unk14[0x3];
+} PokemonStats; // size = 0x17
+
 typedef struct unk_D_80070F84 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
@@ -17,16 +42,16 @@ typedef struct unk_D_80070F84 {
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A[1];
-    /* 0x0B */ char unk0B[0x4];
+    /* 0x0A */ u8 unk_0A[4];
+    /* 0x0E */ char unk0E[1];
     /* 0x0F */ u8 unk_0F[1];
     /* 0x10 */ char unk10[0x3];
     /* 0x13 */ u8 unk_13;
     /* 0x14 */ char unk14[0x3];
 } unk_D_80070F84; // size = 0x17
 
-extern unk_D_80070F84 D_80070F84[];
-extern unk_D_80070F84 D_80070FA0[];
+extern PokemonStats D_80070F84[];
+extern unk_D_80070F84 D_80070FA0[]; //TODO: is this typed correctly?
 
 typedef struct unk_D_80071D88 {
     /* 0x00 */ char* type_name;
@@ -204,7 +229,7 @@ void func_80022010(unk_func_88205880_00D0* arg0, unk_D_800AC910_050_9AC_008* arg
 u16 func_80022084(u16 arg0);
 void func_800220C4(void);
 u16 func_800220CC(s32 arg0, u16 arg1);
-u32 func_80022170(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4);
+u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u16 dvBits);
 void func_80022338(unk_func_80026268_arg0* arg0);
 u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4);
 u32 func_800224B8(s32 arg0, u16 arg1);

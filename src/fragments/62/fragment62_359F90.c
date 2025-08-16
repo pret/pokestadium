@@ -779,7 +779,7 @@ void func_84370B7C(unk_D_84390010* arg0) {
     func_84370B0C(arg0);
     func_84370B44(arg0);
 
-    sp24->unk_36 = D_80070F84[sp24->unk_0B].unk_06;
+    sp24->unk_36 = D_80070F84[sp24->unk_0B].baseHP;
     sp24->unk_38 = sp34->unk_28;
     sp24->unk_3A = sp34->unk_2A;
     sp24->unk_3C = sp34->unk_2C;
@@ -1204,9 +1204,9 @@ s32 func_84371C18(void) {
 
     D_843C4DA5 = 0;
     if (D_8438AC60[0] == 1) {
-        sp18 = (D_80070F84[D_843C5238->unk_0B].unk_09 + 0x4C) >> 2;
+        sp18 = (D_80070F84[D_843C5238->unk_0B].baseDefense + 0x4C) >> 2;
     } else {
-        sp18 = D_80070F84[D_843C5238->unk_0B].unk_09 >> 1;
+        sp18 = D_80070F84[D_843C5238->unk_0B].baseDefense >> 1;
     }
 
     if (D_843C5238->unk_44.unk_02 == 0) {
