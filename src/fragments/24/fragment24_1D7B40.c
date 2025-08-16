@@ -2803,7 +2803,7 @@ void func_883112B0(unk_func_8830867C_04C* arg0, s32 arg1, s32 arg2, unk_func_880
 }
 
 s32 func_88311C64(s32 arg0, s32 arg1) {
-    static unk_D_80070F84 D_8831757C[] = {
+    static PokemonStats D_8831757C[] = {
         {
             0x06,
             0x4E,
@@ -3103,7 +3103,7 @@ s32 func_88311C64(s32 arg0, s32 arg1) {
         },
     };
 
-    unk_D_80070F84* var_v1;
+    PokemonStats* var_v1;
     s32 i;
 
     var_v1 = &D_80070FA0[arg0 - 1];

@@ -261,7 +261,7 @@ void func_843021E8(unk_D_84390010* arg0, u16 arg1, unk_D_84390010_94C* arg2, unk
     s32 temp_v0_3;
     s32 temp_v1_2;
     u8 var_a0;
-    unk_D_80070F84* temp_s4;
+    unk_D_80070F84* temp_s4; //TODO: this is definitely typed wrong
     unk_D_800FCB18* temp_s5;
 
     temp_s5 = &arg0->unk_654.unk_38;
@@ -270,7 +270,7 @@ void func_843021E8(unk_D_84390010* arg0, u16 arg1, unk_D_84390010_94C* arg2, unk
         if (temp_s5->unk_1F[i] != 0) {
             temp_s4 = &D_80070FA0[arg1];
 
-            for (j = 0; j < 4; j++) {
+            for (j = 0; j < ARRAY_COUNT(temp_s4->unk_0A); j++) {
                 if ((temp_s4->unk_0A[j] != 0) && (temp_s4->unk_0A[j] == temp_s5->unk_1F[i])) {
                     arg0->unk_654.unk_C1[i] = 0;
                 }

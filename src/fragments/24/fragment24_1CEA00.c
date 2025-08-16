@@ -1700,7 +1700,7 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
             if (temp_s0->unk_14 >= 0x6401) {
                 temp_s0->unk_14 = 0x6400;
             }
-            temp_s0->unk_26 = func_80022170(1, temp_s0->unk_00, temp_s0->unk_14, temp_s0->unk_24, temp_s0->unk_1E);
+            temp_s0->unk_26 = CalculateStatValue(STAT_HP, temp_s0->unk_00, temp_s0->unk_14, temp_s0->unk_24, temp_s0->unk_1E);
             *arg3 = temp_s0->unk_26;
             break;
 
@@ -1711,7 +1711,7 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
             if (temp_s0->unk_16 >= 0x6401) {
                 temp_s0->unk_16 = 0x6400;
             }
-            temp_s0->unk_28 = func_80022170(2, temp_s0->unk_00, temp_s0->unk_16, temp_s0->unk_24, temp_s0->unk_1E);
+            temp_s0->unk_28 = CalculateStatValue(STAT_SPECIAL, temp_s0->unk_00, temp_s0->unk_16, temp_s0->unk_24, temp_s0->unk_1E);
             *arg3 = temp_s0->unk_28;
             break;
 
@@ -1722,7 +1722,7 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
             if (temp_s0->unk_18 >= 0x6401) {
                 temp_s0->unk_18 = 0x6400;
             }
-            temp_s0->unk_2A = func_80022170(3, temp_s0->unk_00, temp_s0->unk_18, temp_s0->unk_24, temp_s0->unk_1E);
+            temp_s0->unk_2A = CalculateStatValue(STAT_SPEED, temp_s0->unk_00, temp_s0->unk_18, temp_s0->unk_24, temp_s0->unk_1E);
             *arg3 = temp_s0->unk_2A;
             break;
 
@@ -1733,7 +1733,7 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
             if (temp_s0->unk_1A >= 0x6401) {
                 temp_s0->unk_1A = 0x6400;
             }
-            temp_s0->unk_2C = func_80022170(4, temp_s0->unk_00, temp_s0->unk_1A, temp_s0->unk_24, temp_s0->unk_1E);
+            temp_s0->unk_2C = CalculateStatValue(STAT_DEFENSE, temp_s0->unk_00, temp_s0->unk_1A, temp_s0->unk_24, temp_s0->unk_1E);
             *arg3 = temp_s0->unk_2C;
             break;
 
@@ -1744,7 +1744,7 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
             if (temp_s0->unk_1C >= 0x6401) {
                 temp_s0->unk_1C = 0x6400;
             }
-            temp_s0->unk_2E = func_80022170(5, temp_s0->unk_00, temp_s0->unk_1C, temp_s0->unk_24, temp_s0->unk_1E);
+            temp_s0->unk_2E = CalculateStatValue(STAT_ATTACK, temp_s0->unk_00, temp_s0->unk_1C, temp_s0->unk_24, temp_s0->unk_1E);
             *arg3 = temp_s0->unk_2E;
             break;
 
