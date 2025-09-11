@@ -3,6 +3,7 @@
 #include "src/1C720.h"
 #include "src/373A0.h"
 #include "src/3D140.h"
+#include "src/485C0.h"
 #include "src/4BDC0.h"
 #include "src/4F410.h"
 #include "src/F420.h"
