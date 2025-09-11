@@ -61,6 +61,7 @@ extern s32 D_B0000800;
 extern u8 D_1000000[];
 extern u8 D_8000000[];
 extern u8 D_81000000[];
+extern u8 D_1000800[];
 extern u8 D_1001800[];
 extern Gfx D_1002480[];
 extern Gfx D_1002508[];

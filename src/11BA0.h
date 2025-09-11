@@ -58,7 +58,7 @@ void func_80011DAC(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s16 arg3, s16 a
 void func_80011E68(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_80011EB4(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7);
 void func_80011FC8(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg4, u8 arg5);
-void func_80012044(unk_D_86002F34_00C*, s32, s32, s32, u32);
+void func_80012044(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s32 arg3, u32 arg4);
 void func_80012094(GraphNode* arg0, GraphNode* arg1);
 
 #endif // _11BA0_H_

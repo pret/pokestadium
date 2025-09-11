@@ -35,7 +35,7 @@
     - [0x6A40, c]
     - [0x6BC0, c, 6BC0] # 
     - [0x75F0, c, stage_loader] # stage loader
-    - [0x8EB0, c] # empty file/padding?
+    - [0x8EB0, pad]
     - [0x8EC0, c, crash_screen] # crash handler
     - [0x9D20, c, profiler]
     - [0xAF00, c, math_util]
