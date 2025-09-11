@@ -27,3 +27,4 @@ ctx.c.m2c
 .vscode/*
 !.vscode/c_cpp_properties.json
 tools/vtxdis
+.DS_Store
