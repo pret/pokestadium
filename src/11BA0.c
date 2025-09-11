@@ -527,7 +527,19 @@ void func_80011FC8(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80012044.s")
+void func_80012044(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s32 arg3, u32 arg4) {
+    unk_D_86002F34_00C_0CC* ptr = &arg0->unk_CC;
+    ptr->unk_0C = arg1;
+    ptr->unk_0E = arg2;
+    ptr->unk_10 = 0;
+    ptr->unk_12 = 0;
+    ptr->unk_14 = 0;
+    ptr->unk_16 = 0;
+    ptr->unk_18 = 0;
+    ptr->unk_1A = 0;
+    ptr->unk_02 = 0;
+    ptr->texture = D_1000800;
+}
 
 void func_80012094(GraphNode* arg0, GraphNode* arg1) {
     GraphNode* temp_v0;
@@ -549,6 +561,26 @@ void func_80012094(GraphNode* arg0, GraphNode* arg1) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_800120DC.s")
+void func_800120DC(GraphNode* arg0, GraphNode* arg1) {    
+    arg1->unk_04->unk_08 = arg1->unk_08;
+    arg1->unk_08->unk_04 = arg1->unk_04;
+    if ((unk_D_86002F34_00C*)arg1 == arg0->unk_0C) {
+        if (arg1 == arg1->unk_08) {
+            arg0->unk_0C = NULL;
+            return;
+        }
+        arg0->unk_0C = (unk_D_86002F34_00C*)arg1->unk_08;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/11BA0/func_80012120.s")
+GraphNode* func_80012120(GraphNode* arg0, s32 arg1) {
+    GraphNode* var_v1;
+    s32 i;
+    var_v1 = (GraphNode*)arg0->unk_0C;
+    if (var_v1 != NULL) {
+        for (i = 0; i < arg1; i++) {
+            var_v1 = var_v1->unk_08;
+        }
+    }
+    return var_v1;
+}
