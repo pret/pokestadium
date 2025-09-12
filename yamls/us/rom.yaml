@@ -439,7 +439,7 @@
     - [0x7D230, .rodata, 373A0]
     - [0x7D340, .rodata, 38BB0]
     - [0x7D3C0, rodata, rom_rodata_7D3C0]
-    - [0x7D3E0, rodata, rom_rodata_7D3E0]
+    - [0x7D3E0, .rodata, 3D140]
     - [0x7D800, .rodata, 435D0]
     - [0x7D860, .rodata, 45720]
     - [0x7D880, .rodata, libnaudio/n_env]
