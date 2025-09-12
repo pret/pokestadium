@@ -105,6 +105,7 @@ void func_8004153C(void);
 void func_80041688(void);
 void func_800416BC(void);
 void func_80041A98(void);
+void func_80041CEC(void);
 void func_80041C70(u32 arg0);
 void func_80041D50(u8* arg0, u8* arg1);
 u16 func_80041D70(u16 arg0);

@@ -80,6 +80,14 @@ extern u16 D_80077E78[];
 extern u16 D_80077E88[];
 extern u16 D_80077E90[];
 extern u16 D_800780A8[];
+typedef struct unk_D_8007838C {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+} unk_D_8007838C; // size = 0x04
+
+extern unk_D_8007838C D_8007838C;
 extern u8 D_800783BC;
 extern u8 D_800783C0;
 extern u8 D_800783C4;
@@ -97,6 +105,7 @@ extern u16 D_80078410[1][9];
 extern u16 D_80078446[1][9];
 extern u16 D_800784EA[1][9];
 extern u32 D_80078544;
+extern f32 D_8007C7C0;
 extern f64 D_8007C7E0;
 extern f64 D_8007C7E8;
 extern f64 D_8007C7F0;
@@ -520,7 +529,15 @@ void __clearAudioDMA(void) {
     nextDMA = 0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D264.s")
+void func_8003D264(s32 arg0) {
+    if (arg0 != 0) {
+        func_800498A8(0x7D00, 0x78, 0x640);
+        D_80077D90 = 1;
+        D_80077D94 = D_8007C7C0;
+        return;
+    }
+    D_80077D90 = 0;
+}
 
 void func_8003D2B8(s32 arg0) {
     if (D_80077D90 == 0) {
@@ -602,13 +619,49 @@ s32 func_8003D4A0(s32 arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D514.s")
+s32 func_8003D514(u8* arg0) {
+    if (D_80077DAC == 0) {
+        *arg0 = 7;
+        return 8;
+    }
+    *arg0 = D_800FC825;
+    return D_800FC828;
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D54C.s")
+void func_8003D54C(s32 arg0) {
+    if (arg0 == 1) {
+        D_80077DAC = 1;
+        return;
+    }
+    D_80077DAC = 0;
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D570.s")
+/**
+ * Sets or clears a bit in an array.
+ */
+void func_8003D570(u8* array, u8 index, u8 flag) {
+    u8 offset = index / 8;
+    u8 bitPosition = index % 8;
+    u8 mask = (1 << bitPosition);
+    if (flag) {
+        array[offset] |= mask;   // Set the bit
+    } else {
+        array[offset] &= ~mask;  // Clear the bit
+    }
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D624.s")
+/**
+ * Checks if a bit is set in an array.
+ */
+s32 func_8003D624(u8* array, u8 index) {
+    u8 offset = index / 8;
+    u8 bitPosition = index % 8;
+    u8 flag = (array[offset] & (u8)(1 << bitPosition));
+    if (flag) {
+        return 1;
+    }
+    return 0;
+}
 
 void func_8003D68C(s32 arg0) {
     if (arg0 != 0) {
@@ -618,7 +671,12 @@ void func_8003D68C(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D6B0.s")
+void func_8003D6B0(u8 arg0, u8 arg1, u8 arg2, u8 arg3) {
+    D_8007838C.unk_00 = arg0;
+    D_8007838C.unk_01 = arg1;
+    D_8007838C.unk_02 = arg2;
+    D_8007838C.unk_03 = arg3;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D6DC.s")
 
@@ -1131,9 +1189,6 @@ void func_8003F624(u32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F660.s")
 
-void func_8003D570(u8*, u8, s32);
-s32 func_8003D624(u8*, u8);
-void func_80041CEC(void);
 u32 func_80042158(u32, unk_D_800FCB18*, unk_D_800FCB18*);
 
 #ifdef NON_MATCHING
@@ -1401,9 +1456,42 @@ void func_80040A70(unk_D_800FCB18* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800414B8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8004153C.s")
+void func_8004153C(void) {
+    if (D_80078E80 == 0) {
+        func_8004B1CC(0x3D);
+        func_800367A0(0x16, D_80078400, 0);
+        if (D_80078404 == 0xC) {
+            if (!(D_80078408 & 3) && (*D_80078390 != 0)) {
+                func_80041C70(0xCA);
+                return;
+            }
+            func_80041C70(0xC8);
+            return;
+        }
+        if (D_80078404 == 0xD) {
+            if ((D_80078408 == 4) && (*D_80078390 != 0)) {
+                func_80041C70(0xCA);
+                return;
+            }
+            if ((D_80078408 == 5) && (*D_80078390 != 0)) {
+                func_80041C70(0xCB);
+                return;
+            }
+            func_80041C70(0xC8);
+            return;
+        }
+        if ((D_80078408 == 8) && (*D_80078390 != 0)) {
+            func_80041C70(0xC9);
+            return;
+        }
+        func_80041C70(0xC8);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80041688.s")
+void func_80041688(void) {
+    func_800367A0(0x16, D_80078400, 0);
+    func_80041C70(0x1A2);
+}
 
 void func_800416BC(void) {
     u8* seq;
@@ -1530,17 +1618,25 @@ void func_80041A98(void) {
 #endif
 
 void func_80041C70(u32 arg0) {
-    u32 temp_v0;
+    OSIntMask mask;
 
     if ((D_80078388 != 0) && (D_800783FC != 0) && (arg0 != 0)) {
-        temp_v0 = osSetIntMask(1);
+        mask = osSetIntMask(OS_IM_NONE);
         D_800783A4[D_800783B8 & 3] = arg0;
         D_800783B8++;
-        osSetIntMask(temp_v0);
+        osSetIntMask(mask);
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80041CEC.s")
+void func_80041CEC(void) {
+    OSIntMask mask;
+
+    if ((D_80078388 != 0) && (D_800783FC != 0)) {
+        mask = osSetIntMask(OS_IM_NONE);
+        D_800783A4[(D_800783B8 - 1) & 3] = 0;
+        osSetIntMask(mask);
+    }
+}
 
 void func_80041D50(u8* arg0, u8* arg1) {
     u8 temp_v0 = *arg0;
@@ -1631,6 +1727,47 @@ void func_800420C0(u16* arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80042158.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80042850.s")
+s32 func_80042850(u8 arg0) {
+    switch (arg0) {
+    case 0:
+        return 0;
+    case 20:
+        return 1;
+    case 21:
+        return 2;
+    case 23:
+        return 3;
+    case 22:
+        return 4;
+    case 25:
+        return 5;
+    case 1:
+        return 6;
+    case 3:
+        return 7;
+    case 4:
+        return 8;
+    case 2:
+        return 9;
+    case 24:
+        return 0xA;
+    case 7:
+        return 0xB;
+    case 5:
+        return 0xC;
+    case 8:
+        return 0xD;
+    case 26:
+        return 0xE;
+    default:
+        return 0;
+    }
+}
 
+#ifdef NON_MATCHING
+void func_800428FC(void) {
+    func_80041C70(0); // Should not take an argument
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800428FC.s")
+#endif
