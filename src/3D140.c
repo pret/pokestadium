@@ -127,12 +127,17 @@ extern u32 D_800FCCF0[10];
 
 typedef struct unk_D_800FCB48 {
     /* 0x00 */ u16 unk_00[16];
-    /* 0x20 */ char pad20[0x4];
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ char pad28[0x50];
+    /* 0x28 */ u16 unk_28[16];
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ u16 unk_50[16];
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ s32 unk_74;
     /* 0x78 */ s32 unk_78;
     /* 0x7C */ s32 unk_7C;
-    /* 0x80 */ char pad80[0x4];
+    /* 0x80 */ s32 unk_80;
 } unk_D_800FCB48; // size = 0x84
 
 extern unk_D_800FCB48 D_800FCB48[2];
@@ -172,8 +177,11 @@ extern s8 D_800FCCBC[];
 extern s8 D_800FCCBE[];
 extern s8 D_800FCCC0[];
 extern s8 D_800FCCC2[];
+extern s8 D_800FCCC4[];
 extern u8 D_800FCCC6[];
 extern u8 D_800FCCC8[];
+extern u8 D_800FCCCA[];
+extern u8 D_800FCCCC[];
 extern u8 D_800FCCCE[];
 extern u8 D_800FCCD0[];
 extern u8 D_800FCCD2[];
@@ -678,7 +686,39 @@ void func_8003D6B0(u8 arg0, u8 arg1, u8 arg2, u8 arg3) {
     D_8007838C.unk_03 = arg3;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D6DC.s")
+void func_8003D6DC(u8 arg0) {
+    s32 i;
+
+    if (arg0 < 3) {
+        for (i = 0; i < 16; i++) {
+            D_800FCB48[arg0].unk_00[i] = 0;
+            D_800FCB48[arg0].unk_28[i] = 0;
+            D_800FCB48[arg0].unk_50[i] = 0;
+        }
+        D_800FCB48[arg0].unk_20 = 0;
+        D_800FCB48[arg0].unk_24 = 0;
+        D_800FCB48[arg0].unk_48 = 0;
+        D_800FCB48[arg0].unk_4C = 0;
+        D_800FCB48[arg0].unk_70 = 0;
+        D_800FCB48[arg0].unk_74 = 0;
+        D_800FCB48[arg0].unk_78 = 0;
+        D_800FCB48[arg0].unk_7C = 0;
+        D_800FCB48[arg0].unk_80 = 0;
+        D_800FCCBC[arg0] = 0;
+        D_800FCCBE[arg0] = 0;
+        D_800FCCC4[arg0] = 0;
+        D_800FCCC6[arg0] = 0;
+        D_800FCCC8[arg0] = 0;
+        D_800FCCCA[arg0] = 0;
+        D_800FCCCC[arg0] = 0;
+        D_800FCCCE[arg0] = 0;
+        D_800FCCD0[arg0] = 0;
+        D_800FCCD2[arg0] = 0;
+        D_800FCCD4[arg0] = 0;
+        D_800FCCC2[arg0] = 0;
+        D_800FCCC0[arg0] = 0;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D828.s")
 
@@ -1723,7 +1763,23 @@ void func_800420C0(u16* arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800420F0.s")
+void func_800420F0(u16 arg0, u16* arg1, u8* arg2) {
+    u8 temp_v0;
+
+    if (*arg2 == 0) {
+        func_80041C70(arg0);
+    } else {
+        func_800420C0(arg1);
+    }
+    temp_v0 = *arg2;
+    if (temp_v0 < 0xFF) {
+        *arg2 = temp_v0 + 1;
+    }
+}
+
+void func_800420F0_empty() {
+    
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80042158.s")
 
