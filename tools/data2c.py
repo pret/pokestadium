@@ -67,7 +67,7 @@ def calc_struct_sizes():
         max_rounding = 0
 
         testMe = False
-        #if name == "unk_D_86002F58_004_000_010_02C":
+        #if name == "arg1_func_80010CA8":
         #   testMe = True
 
         #print(data)

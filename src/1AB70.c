@@ -257,11 +257,58 @@ void func_8001A714(unk_func_8001A024* arg0, s32 arg1) {
     func_80015094(arg0->unk_0C);
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001AA18.s")
+s32 func_8001AA18(unk_func_8001A024* arg0, s32 arg1) {
+    s32 i;
+    s32 var_v0;
+    s32 sp24;
+    s32 sp20;
+    unk_func_8001A024_008* temp_v0_2;
+
+    sp24 = -1;
+    sp20 = arg0->unk_02;
+    if (arg0->unk_00 & 1) {
+        if (arg1 == 1) {
+            var_v0 = func_80019CA8(arg0->unk_04);
+        } else {
+            var_v0 = func_80019C08(arg0->unk_04);
+        }
+        if (var_v0 != 0) {
+            arg0->unk_00 &= 0xFFFE;
+            arg0->unk_08[sp20].unk_00 &= 0xFFFE;
+            func_8001A714(arg0, sp20);
+            arg0->unk_03 = sp20;
+            sp24 = sp20;
+            arg0->unk_02++;
+            if (arg0->unk_02 >= arg0->unk_01) {
+                arg0->unk_02 = 0;
+            }
+        }
+    } else {
+        for (i = 0; i < arg0->unk_01; i++) {
+            temp_v0_2 = &arg0->unk_08[sp20];
+            if (temp_v0_2->unk_00 & 1) {
+                arg0->unk_00 |= 1;
+                if (temp_v0_2->unk_00 & 2) {
+                    func_800198E4(arg0->unk_04, *temp_v0_2->unk_14.ptr, temp_v0_2->unk_10);
+                } else {
+                    func_800198E4(arg0->unk_04, temp_v0_2->unk_14.unk_02, temp_v0_2->unk_10);
+                }
+                arg0->unk_02 = sp20;
+                break;
+            } else {
+                sp20 += 1;
+                if (sp20 >= arg0->unk_01) {
+                    sp20 = 0;
+                }
+            }
+        }
+    }
+    return sp24;
+}
 
 s32 func_8001ABAC(unk_func_8001A024* arg0, s32 arg1) {
     UNUSED s32 pad;
-    unk_D_86002F58_004_000_010_02C sp48;
+    arg1_func_80010CA8 sp48;
     s32 sp44;
     s32 var_s1;
     unk_func_8001A024_008* temp_s0;
@@ -317,7 +364,47 @@ s32 func_8001ABAC(unk_func_8001A024* arg0, s32 arg1) {
     return sp44;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001AD90.s")
+s32 func_8001AD90(unk_func_8001A024* arg0, s32 arg1) {
+    s32 i;
+    s32 var_a2;
+    s32 var_s0;
+    unk_func_8001A024_008* temp_a0;
+    unk_func_8001A024_008* temp_s1;
+    
+    var_a2 = -1;
+    var_s0 = arg0->unk_02;
+    temp_a0 = arg0->unk_08;
+    
+    for (i = 0; i < arg0->unk_01; i++) {
+        temp_s1 = &arg0->unk_08[var_s0];
+        if (temp_s1->unk_00 & 1) {
+            while (func_80001C90() == 0) {}
+            
+            if (temp_s1->unk_00 & 2) {
+                func_800198E4(arg0->unk_04, *temp_s1->unk_14.ptr, temp_s1->unk_10);
+            } else {
+                func_800198E4(arg0->unk_04, temp_s1->unk_14.unk_02, temp_s1->unk_10);
+            }
+            func_80019CA8(arg0->unk_04);
+            arg0->unk_08[var_s0].unk_00 &= ~1;
+            func_8001A714(arg0, var_s0);
+            arg0->unk_02 = var_s0;
+            var_a2 = var_s0;
+            arg0->unk_02++;
+            arg0->unk_03 = var_s0;
+            if (arg0->unk_02 >= arg0->unk_01) {
+                arg0->unk_02 = 0;
+            }
+            break;
+        } else {
+            var_s0 += 1;
+            if (var_s0 >= arg0->unk_01) {
+                var_s0 = 0;
+            }
+        }
+    }
+    return var_a2;
+}
 
 void func_8001AEEC(unk_func_8001A024* arg0, s32 arg1) {
     s32 i;
@@ -434,7 +521,7 @@ unk_func_8001B1FC* func_8001B1FC(unk_D_86002F58_004_000_010* arg0, s16 arg1, s16
 }
 
 void func_8001B2D8(unk_func_8001B1FC* arg0, unk_func_80026268_arg0* arg1, u16 arg2) {
-    unk_D_86002F58_004_000_010_02C sp2C;
+    arg1_func_80010CA8 sp2C;
     s16 tmp1 = (s16)(D_8006FF00[arg1->unk_00.unk_00 - 1].unk_14 >> 0x10) >> 6;
     s16 tmp2 = (s16)(D_8006FF00[arg1->unk_00.unk_00 - 1].unk_14 >> 6) >> 4;
     s16 tmp3 = (s16)(D_8006FF00[arg1->unk_00.unk_00 - 1].unk_14 << 6) >> 6;
@@ -462,7 +549,7 @@ void func_8001B2D8(unk_func_8001B1FC* arg0, unk_func_80026268_arg0* arg1, u16 ar
 }
 
 void func_8001B480(unk_func_8001B1FC* arg0, s32 arg1, u16 arg2) {
-    unk_D_86002F58_004_000_010_02C sp34;
+    arg1_func_80010CA8 sp34;
     s16 tmp1 = (s16)(D_8006FF00[arg1 - 1].unk_14 >> 0x10) >> 6;
     s16 tmp2 = (s16)(D_8006FF00[arg1 - 1].unk_14 >> 6) >> 4;
     s16 tmp3 = (s16)(D_8006FF00[arg1 - 1].unk_14 << 6) >> 6;

@@ -409,7 +409,7 @@ void func_86900188(void) {
 }
 
 unk_D_86002F58_004_000_010_024* func_86900244(unk_func_80026268_arg0* arg0) {
-    unk_D_86002F58_004_000_010_02C sp1C;
+    arg1_func_80010CA8 sp1C;
     unk_D_86002F58_004_000_010* sp18;
 
     arg0->unk_00.unk_00 = 25;

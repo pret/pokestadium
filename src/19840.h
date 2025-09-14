@@ -26,7 +26,7 @@ typedef struct sp18_func_800198E4 {
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ unk_D_86002F58_004_000_010_02C unk_18;
+    /* 0x18 */ arg1_func_80010CA8 unk_18;
 } sp18_func_800198E4; // size = 0x1C
 
 typedef struct unk_D_800ABE10_A04 {
@@ -68,8 +68,8 @@ void func_80019600(UNUSED void* arg0);
 void func_800196DC(void);
 unk_D_86002F58_004_000_010* func_80019760(u32 arg0);
 void func_8001987C(void);
-s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, unk_D_86002F58_004_000_010_02C arg2);
-s32 func_80019A1C(unk_D_86002F58_004_000_010* arg0, u16 arg1, unk_D_86002F58_004_000_010_02C arg2, s16 arg3);
+s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2);
+s32 func_80019A1C(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2, s16 arg3);
 s32 func_80019A7C(unk_D_86002F58_004_000_010* arg0, s32 arg1, s32 arg2);
 s32 func_80019B48(unk_D_86002F58_004_000_010* arg0, sp18_func_800198E4* arg1);
 s32 func_80019C08(unk_D_86002F58_004_000_010* arg0);

@@ -120,10 +120,10 @@ unk_D_86002F58_004_000_00C_028* func_8001BE90(unk_D_86002F58_004_000* arg0, s32 
     return var_v1;
 }
 
-unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* arg0, unk_func_80026268_arg0* arg1) {
+arg1_func_80010CA8* func_8001BEE8(arg1_func_80010CA8* arg0, unk_func_80026268_arg0* arg1) {
     UNUSED s32 pad;
     char sp38[0xB];
-    unk_D_86002F58_004_000_010_02C sp34;
+    arg1_func_80010CA8 sp34;
     unk_D_8006FF00* sp30;
     UNUSED s32 pad2;
     u8 var_a0;
@@ -158,7 +158,7 @@ unk_D_86002F58_004_000_010_02C* func_8001BEE8(unk_D_86002F58_004_000_010_02C* ar
     return arg0;
 }
 
-void func_8001C014(unk_D_86002F58_004_000_010_02C* arg0, unk_func_8001C014* arg1, u16 arg2) {
+void func_8001C014(arg1_func_80010CA8* arg0, unk_func_8001C014* arg1, u16 arg2) {
     unk_func_80026268_arg0 stack;
 
     stack.unk_00.unk_00 = arg2;
@@ -171,10 +171,10 @@ void func_8001C014(unk_D_86002F58_004_000_010_02C* arg0, unk_func_8001C014* arg1
 
 #ifdef NON_MATCHING
 typedef struct stack_func_8001C07C {
-    /* 0x00 */ unk_D_86002F58_004_000_010_02C unk_00;
+    /* 0x00 */ arg1_func_80010CA8 unk_00;
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ s16 unk_08;
-    /* 0x0C */ unk_D_86002F58_004_000_010_02C unk_0C;
+    /* 0x0C */ arg1_func_80010CA8 unk_0C;
 } stack_func_8001C07C; // size == 0x30
 
 void func_8001C07C(unk_func_8001C07C_arg0* arg0) {

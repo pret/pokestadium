@@ -3,15 +3,6 @@
 
 #include "global.h"
 
-typedef union arg1_func_80010CA8 {
-    struct {
-        /* 0x00 */ s16 unk_00;
-        /* 0x02 */ s8 unk_02;
-        /* 0x03 */ s8 unk_03;
-    };
-    u32 raw;
-} arg1_func_80010CA8; // size = 0x4
-
 extern Vec3f D_8006F050;
 extern Vec3s D_8006F05C;
 extern Vec3f D_8006F064;

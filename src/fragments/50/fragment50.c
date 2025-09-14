@@ -2144,7 +2144,7 @@ void func_82602578(s16 arg0) {
 }
 
 void func_82602614(s16 arg0) {
-    unk_D_86002F58_004_000_010_02C sp24;
+    arg1_func_80010CA8 sp24;
     s16 idx = ((D_82607B54 + arg0 + D_8267E4F0) % D_8267E4F0) + 1;
 
     D_82607B52 = (D_82607B50 + arg0 + 5) % 5;
@@ -2154,7 +2154,7 @@ void func_82602614(s16 arg0) {
 }
 
 void func_826026D4(s16 arg0) {
-    unk_D_86002F58_004_000_010_02C sp54;
+    arg1_func_80010CA8 sp54;
     s16 temp_s1 = ((D_82607B54 + arg0 + D_8267E4F0) % D_8267E4F0) + 1;
     unk_func_800228F0 sp2C;
 

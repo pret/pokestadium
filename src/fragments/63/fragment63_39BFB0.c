@@ -1016,7 +1016,7 @@ void func_84B09F60(unk_D_84B25A58* arg0) {
 }
 
 void func_84B0A18C(unk_D_84B25A58* arg0) {
-    func_8001AA18(arg0->unk_1C, 0, arg0);
+    func_8001AA18(arg0->unk_1C, 0);
 
     arg0->unk_01++;
     if ((arg0->unk_01 >= 0x1E) && (func_8001B010(arg0->unk_1C) != 0)) {

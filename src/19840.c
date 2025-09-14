@@ -342,7 +342,7 @@ void func_8001987C(void) {
     D_800ABE10.unk_A04.unk_08 = main_pool_alloc(0x28000, 1);
 }
 
-s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, unk_D_86002F58_004_000_010_02C arg2) {
+s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2) {
     s32 sp1C;
     sp18_func_800198E4* sp18;
     s32 var_v1;
@@ -379,7 +379,7 @@ s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, unk_D_86002F58_004
     return sp1C;
 }
 
-s32 func_80019A1C(unk_D_86002F58_004_000_010* arg0, u16 arg1, unk_D_86002F58_004_000_010_02C arg2, s16 arg3) {
+s32 func_80019A1C(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2, s16 arg3) {
     if ((arg0->unk_00 & 8) && !(arg0->unk_01 & 1)) {
         arg0->unk_02 = arg3;
         func_800198E4(arg0, arg1, arg2);
