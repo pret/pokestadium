@@ -52,7 +52,7 @@
     - [0xD470, c] #
     - [0xDDC0, c]
     - [0xE1C0, c]
-    - [0xE570, c] #
+    - [0xE570, c, gb_mbc] # gameboy memory bank controller
     - [0xE890, c] #
     - [0xF420, c] #
     - [0x11BA0, c] #  

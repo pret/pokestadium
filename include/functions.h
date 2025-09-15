@@ -21,9 +21,6 @@ void Yay0_Decompress(void* src, void* dst);
 // DDC0.s
 void func_8000D564(void);
 
-// E570.s
-void func_8000D970(OSPfs *);
-
 // exception_set.s
 void set_watch_lohi(s32);
 
