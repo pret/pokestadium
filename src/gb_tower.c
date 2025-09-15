@@ -2,8 +2,7 @@
 #include "hal_libc.h"
 #include "controller.h"
 #include "29BA0.h"
-
-extern s32 func_8000DAFC(void*, s32, u16, s32, s32);
+#include "gb_mbc.h"
 
 // gb_tower.c
 // dont forget to pass -signed when compiling
@@ -76,7 +75,7 @@ s32 func_8000A798(s32 arg0, u8* arg1, u8* arg2) {
         func_8002B274(arg0, 1);
     }
     if ((status & OS_GBPAK_RSTB_STATUS) && (osGbpakCheckConnector(&D_800A8100[arg0], &status) == 0)) {
-        func_8000D970(&D_800A8100[arg0]);
+        osGbmbcRamEnable(&D_800A8100[arg0]);
         sp28 = func_8000A6D8(arg0, arg2);
     }
     D_800A82A0[arg0] = 1;
@@ -160,7 +159,7 @@ s32 func_8000AA7C(void) {
                             // what. the redundant temp_v0 functionless check is apparently needed to match.
                         }
                         if (osGbpakCheckConnector(&D_800A8100[i], &status) == 0) {
-                            func_8000D970(&D_800A8100[i]);
+                            osGbmbcRamEnable(&D_800A8100[i]);
                             D_800A82A0[i] = 1;
                             D_800A82A5 |= (1 << i);
                         } else {
@@ -215,7 +214,7 @@ s32 func_8000AD68(s32 arg0) {
         (osGbpakReadId(&D_800A8100[arg0], &sp28, &status) == 0) && (status & OS_GBPAK_RSTB_STATUS) &&
         (osGbpakCheckConnector(&D_800A8100[arg0], &status) == 0)) {
 
-        func_8000D970(&D_800A8100[arg0]);
+        osGbmbcRamEnable(&D_800A8100[arg0]);
         D_800A82A0[arg0] = 1;
     }
 
@@ -240,7 +239,7 @@ s32 func_8000AEBC(s32 arg0, void* arg1, u16 arg2, u16 arg3) {
 
     var_v1 = 1;
     if (D_800A82A5 & (1 << arg0)) {
-        var_v1 = func_8000DAFC(&D_800A8100[arg0], 0, arg2, arg1, arg3);
+        var_v1 = osGbmbcReadWrite(&D_800A8100[arg0], 0, arg2, arg1, arg3);
     }
     return var_v1;
 }
@@ -250,7 +249,7 @@ s32 func_8000AF40(s32 arg0, void* arg1, u16 arg2, u16 arg3) {
 
     var_v1 = 1;
     if (D_800A82A5 & (1 << arg0)) {
-        var_v1 = func_8000DAFC(&D_800A8100[arg0], 1, arg2, (uintptr_t)arg1, arg3);
+        var_v1 = osGbmbcReadWrite(&D_800A8100[arg0], 1, arg2, (uintptr_t)arg1, arg3);
     }
     return var_v1;
 }
