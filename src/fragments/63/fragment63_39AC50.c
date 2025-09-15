@@ -803,7 +803,7 @@ void func_84B07294(unk_D_84B25A28* arg0) {
 }
 
 void func_84B07370(unk_D_84B25A28* arg0) {
-    func_8001AA18(arg0->unk_20, 0, arg0);
+    func_8001AA18(arg0->unk_20, 0);
 
     arg0->unk_01++;
     if ((arg0->unk_01 >= 0x1E) && (func_8001B010(arg0->unk_20) != 0)) {

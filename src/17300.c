@@ -192,18 +192,18 @@ f32 func_80016F20(unk_D_800ABCC0* arg0, s32 arg1) {
     return var_fv1;
 }
 
-typedef union unk_D_86002F58_004_000_010_02C_test {
+typedef union arg1_func_80010CA8_test {
     struct {
         s16 unk_00;
         s16 unk_02;
     };
     s32 raw;
-} unk_D_86002F58_004_000_010_02C_test; // size = 0x4
+} arg1_func_80010CA8_test; // size = 0x4
 
 typedef struct unk_D_86002F58_004_000_040_test {
     /* 0x00 */ s16 unk_00;
     /* 0x04 */ unk_D_86002F58_004_000_040_004* unk_04;
-    /* 0x08 */ unk_D_86002F58_004_000_010_02C_test unk_08;
+    /* 0x08 */ arg1_func_80010CA8_test unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ char unk10[0x2];
     /* 0x12 */ u16 unk_12;
@@ -211,8 +211,8 @@ typedef struct unk_D_86002F58_004_000_040_test {
 
 #ifdef NON_MATCHING
 s32 func_80016FBC(unk_D_86002F58_004_000_040_test* arg0, u16 arg1) {
-    unk_D_86002F58_004_000_010_02C_test spC;
-    unk_D_86002F58_004_000_010_02C_test* ptr;
+    arg1_func_80010CA8_test spC;
+    arg1_func_80010CA8_test* ptr;
     unk_D_86002F58_004_000_040_004* temp_v0;
 
     spC = arg0->unk_08;
