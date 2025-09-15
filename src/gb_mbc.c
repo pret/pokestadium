@@ -18,7 +18,6 @@
 // Track ram banks for channels
 extern u8 D_800AA670[16];
 
-// #pragma GLOBAL_ASM("asm/us/nonmatchings/gb_mbc/osGbmbcRamEnable.s")
 s32 osGbmbcRamEnable(OSPfs* pfs) {
   s32 i;
   s32 ret;
@@ -50,7 +49,6 @@ s32 osGbmbcRamEnable(OSPfs* pfs) {
   return ret;
 }
 
-// #pragma GLOBAL_ASM("asm/us/nonmatchings/gb_mbc/osGbmbcSelectRamBank.s")
 s32 osGbmbcSelectRamBank(OSPfs* pfs, u8 bank) {
     s32 i;
     s32 ret;
