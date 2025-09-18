@@ -5,11 +5,19 @@
 
 // image size in bits
 typedef enum IMAGE_SIZE_BITS {
-	IMAGE_SIZE_BITS_4b,
-	IMAGE_SIZE_BITS_8b,
-	IMAGE_SIZE_BITS_16b,
-	IMAGE_SIZE_BITS_32b,
+	IMAGE_SIZE_BITS_4b  = 0,
+	IMAGE_SIZE_BITS_8b  = 1,
+	IMAGE_SIZE_BITS_16b = 2,
+	IMAGE_SIZE_BITS_32b = 3,
 } IMAGE_SIZE_BITS;
+
+typedef enum IMAGE_FMT {
+	IMAGE_FMT_RGBA = 0,
+	IMAGE_FMT_YUV  = 1,
+	IMAGE_FMT_CI   = 2,
+	IMAGE_FMT_IA   = 3,
+	IMAGE_FMT_I    = 4,
+} IMAGE_FMT;
 
 typedef struct unk_D_80068BB0 {
 	/* 0x00 */ u16 fmt;
