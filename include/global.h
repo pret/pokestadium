@@ -468,19 +468,20 @@ typedef struct UnkInputStruct8000D738 {
     /* 0x04 */ u16 (*unk_04)[6][0x640];
 } UnkInputStruct8000D738; // size = 0x8
 
-typedef struct UnkStruct800AA660 {
+typedef struct unk_D_800AA660 {
     /* 0x0000 */ OSThread thread;
     /* 0x01B0 */ char unk01B0[0x10];
     /* 0x01C0 */ OSMesgQueue queue1;
-    /* 0x01D8 */ struct UnkStruct800AA660* unk_01D8;
+    /* 0x01D8 */ struct unk_D_800AA660* unk_01D8;
     /* 0x01DC */ s32 unk_01DC;
     /* 0x01E0 */ char unk01E0[0x2000];
     /* 0x21E0 */ OSMesg mesg;
     /* 0x21E4 */ OSMesgQueue queue2;
-    /* 0x21FC */ s32 unk_21FC;
-    /* 0x2200 */ s32 unk_2200;
+    /* 0x21FC */ u8* font1;
+    /* 0x2200 */ u8* font2;
     /* 0x2204 */ UnkInputStruct8000D738 unk_2204;
-} UnkStruct800AA660; // size >= 0x220C
+    /* 0x220C */ char unk220C[4];
+} unk_D_800AA660; // size = 0x2210
 
 typedef struct unk_D_864027C0 {
     /* 0x00 */ f32 unk_00;

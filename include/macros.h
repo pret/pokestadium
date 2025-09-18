@@ -32,6 +32,7 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#define ALIGN2(val) (((u32)(val) + 0x1) & ~0x1)
 #define ALIGN4(val) (((val) + 0x3) & ~0x3)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 #define ALIGN16(val) (((val) + 0xFu) & ~0xFu)

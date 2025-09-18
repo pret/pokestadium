@@ -924,6 +924,14 @@ extern u32 D_304F120[];
 extern s32 D_800FC820;
 extern u8* D_800FF9C0;
 
+extern OSViMode D_800795C0;
+extern u8 D_ADC80[];
+extern u8 D_F4130[];
+extern u8 D_F4920[];
+extern u8 D_F5450[];
+extern u8 D_FDE40[];
+extern u8 D_102BA0[];
+
 typedef struct unk_70D3A0 {
     /* 0x00 */ f32 unk_00;
     /* 0x04 */ f32 unk_04;

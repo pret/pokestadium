@@ -160,7 +160,7 @@ void func_80004DB4(void) {
 }
 
 void func_80004DBC(u32 arg0) {
-    UnkStruct800AA660* var_s0 = D_800A62E0.unk_A10;
+    unk_D_800AA660* var_s0 = D_800A62E0.unk_A10;
 
     while (var_s0 != NULL) {
         if (D_800A62E0.unk_A38 == 0) {
@@ -200,7 +200,7 @@ s32 func_80004ED0(void) {
 }
 
 void func_80004F08(void) {
-    UnkStruct800AA660* var_s0 = D_800A62E0.unk_A10;
+    unk_D_800AA660* var_s0 = D_800A62E0.unk_A10;
 
     while (var_s0 != NULL) {
         if (var_s0->unk_01DC == 0) {
@@ -335,9 +335,9 @@ void func_800052B4(void) {
     osStartThread(&D_800A62E0.thread);
 }
 
-void func_80005328(UnkStruct800AA660* arg0) {
-    UnkStruct800AA660* var_v1;
-    UnkStruct800AA660* var_a1;
+void func_80005328(unk_D_800AA660* arg0) {
+    unk_D_800AA660* var_v1;
+    unk_D_800AA660* var_a1;
 
     if (D_800A62E0.unk_A10 == NULL) {
         D_800A62E0.unk_A10 = arg0;
@@ -354,9 +354,9 @@ void func_80005328(UnkStruct800AA660* arg0) {
     arg0->unk_01D8 = NULL;
 }
 
-void func_80005370(UnkStruct800AA660* arg0) {
-    UnkStruct800AA660** var_v0 = &D_800A62E0.unk_A10;
-    UnkStruct800AA660* var_v1 = D_800A62E0.unk_A10;
+void func_80005370(unk_D_800AA660* arg0) {
+    unk_D_800AA660** var_v0 = &D_800A62E0.unk_A10;
+    unk_D_800AA660* var_v1 = D_800A62E0.unk_A10;
 
     while (var_v1 != NULL) {
         if (var_v1 == arg0) {
