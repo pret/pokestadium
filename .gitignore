@@ -27,4 +27,5 @@ ctx.c.m2c
 .vscode/*
 !.vscode/c_cpp_properties.json
 tools/vtxdis
+tools/permuter/
 .DS_Store

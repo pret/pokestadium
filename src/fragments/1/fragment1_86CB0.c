@@ -78,6 +78,7 @@ u32 func_812073B8(u16 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207494.s")
 
+s32 func_812075C0(s32);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_812075C0.s")
 
 void func_81207690(void) {
