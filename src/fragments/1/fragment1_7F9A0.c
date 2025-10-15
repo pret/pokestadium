@@ -256,7 +256,42 @@ s32 func_812005D8(unk_D_8122B2C0* arg0) {
 s32 func_812006AC(unk_D_8122B2C0* arg0);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812006AC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812008C8.s")
+s32 func_812008C8(unk_D_8122B2C0* arg0, s32 arg1) {
+  s32 temp_v0;
+  s32 var_s0;
+  s32 var_s1;
+  u8* var_s3;
+  s32 var_v0;
+  s32 var_v1;
+  u32 var_s2;
+
+  var_v0 = func_812005D8(arg0);
+  var_v1 = var_v0;
+  var_s3 = arg0->transferBuffer;
+  var_s2 = arg0->gbAddress;
+  var_s1 = arg0->transferSize;
+  while ((var_v0 == 0) && (var_s1 != 0)) {
+      var_v0 = func_812002BC(arg0, var_s2 >> 0xD);
+      var_v1 = var_v0;
+      if (var_v0 == 0) {
+          temp_v0 = var_s2 & 0x1FFF;
+          if ((u32) (temp_v0 + var_s1) >= 0x2001U) {
+              var_s0 = 0x2000 - temp_v0;
+          } else {
+              var_s0 = var_s1;
+          }
+          var_v0 = osGbpakReadWrite(&arg0->pfs, arg1, (temp_v0 | 0xA000) & 0xFFFF, var_s3, var_s0);
+          var_v1 = var_v0;
+          var_s3 += var_s0;
+          var_s1 -= var_s0;
+          var_s2 = (var_s2 + 0x2000) & ~0x1FFF;
+      }
+  }
+  if (var_v0 == 0) {
+      var_v1 = func_8120019C(arg0);
+  }
+  return var_v1;
+}
 
 s32 func_812009D0(unk_func_812009D0* arg0) {
   u8* var_s1;
