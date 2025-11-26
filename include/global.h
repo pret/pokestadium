@@ -535,6 +535,77 @@ typedef struct TrainerData {
     /* 0x03A */ char unk3A[0x1F6];
 } TrainerData; // size = 0x230
 
+// GB Emulator State
+typedef struct unk_D_8122B2C0 {
+    /* 0x00000 */ u8 unk_00[0x208];
+    /* 0x00208 */ u8 unk_208[0x40];
+    /* 0x00248 */ u8 unk_248[0x40];
+    /* 0x00288 */ u8 unk_288[0x100];
+    /* 0x00388 */ u8 unk_388[0x400];
+    /* 0x00788 */ u8 unk_788[0x4000];
+    /* 0x04788 */ u8 unk_4788[0xC00];
+    /* 0x05388 */ s32 unk_5388;
+    /* 0x0538C */ char unk0538C[4];
+    /* 0x05390 */ u32 unk_5390;
+    /* 0x05394 */ u32 unk_5394;
+    /* 0x05398 */ u32 unk_5398;
+    /* 0x0539C */ u32 unk_539C;
+    /* 0x53A0 */ char unk053A0[0x8];
+    /* 0x053A8 */ void* unk_53A8;
+    /* 0x053AC */ void* unk_53AC;
+    /* 0x053B0 */ void* unk_53B0;
+    /* 0x053B4 */ void* unk_53B4;
+    /* 0x053B8 */ char unk053B8[0x4];
+    /* 0x053BC */ void* unk_53BC;
+    /* 0x053C0 */ char unk053C0[0x2E];
+    /* 0x053EE */ u16 unk_53EE;
+    /* 0x053F0 */ u16 unk_53F0;
+    /* 0x053F2 */ char unk053F1[0xA];
+    /* 0x053FC */ u8 unk_53FC;
+    /* 0x053FD */ u8 unk_53FD;
+    /* 0x053FE */ u8 unk_53FE;
+    /* 0x053FF */ char unk053FF[0x86];
+    /* 0x05485 */ u8 unk_5485;
+    /* 0x05486 */ char unk05486[0x8];
+    /* 0x0548E */ u8 unk_548E;
+    /* 0x0548F */ char unk0548F[0xD];
+    /* 0x0549C */ u8 unk_549C[0x100];
+    /* 0x0559C */ u8 unk_559C[0x10];
+    /* 0x055AC */ u8 unk_55AC[0x40];
+    /* 0x055EC */ u8 unk_55EC[0x40];
+    /* 0x0562C */ u8 unk_562C[0x200];
+    /* 0x0582C */ u8 unk_582C[0x200];
+    /* 0x05A2C */ u8 unk_5A2C[0x200];
+    /* 0x05C2C */ char unk05C2C[0x2C];
+    /* 0x05C58 */ void* unk_5C58;
+    /* 0x05C5C */ char unk_5C5C[0x50];
+    /* 0x05CAC */ OSGbpakId gbpakId;
+    /* 0x05CFC */ OSPfs* pfs;
+    /* 0x05D00 */ char unk05D00[0x64];
+    /* 0x05D64 */ u8* transferBuffer;
+    /* 0x05D68 */ u32 gbAddress;
+    /* 0x05D6C */ s32 transferSize;
+    /* 0x05D70 */ u32 unk_5D70[4];
+    /* 0x05D80 */ u32 unk_5D80[4];
+    /* 0x05D90 */ u32 unk_5D90[4];
+    /* 0x05DA0 */ u16 unk_5DA0;
+    /* 0x05DA2 */ u16 unk_5DA2;
+    /* 0x05DA4 */ char unk05DA4[0x20];
+    /* 0x05DC4 */ u8 unk_5DC4;
+    /* 0x05DC5 */ u8 unk_5DC5;
+    /* 0x05DC6 */ char unk05DC6[0x2];
+    /* 0x05DC8 */ volatile u8 unk_5DC8;
+    /* 0x05DC9 */ u8 unk_5DC9;
+    /* 0x05DCA */ u8 unk_5DCA;
+    /* 0x05DCB */ u8 status;
+    /* 0x05DCC */ u8 unk_5DCC;
+    /* 0x05DCD */ char unk05DCD[1];
+    /* 0x05DCE */ u8 unk_5DCE;
+    /* 0x05DCF */ u8 unk_5DCF;
+    /* 0x05DD0 */ u8 unk_5DD0;
+    /* 0x05DD1 */ u8 unk05DD1[0x15287];
+  } unk_D_8122B2C0; // size = 0x1B058
+
 extern s16 D_80075E40[];
 
 #include "variables.h"
