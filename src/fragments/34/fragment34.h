@@ -150,7 +150,7 @@ typedef struct arg1_func_87903D64_014 {
 // unk_D_86002F34_alt9 or unk_D_86002F34_alt2
 typedef struct arg1_func_87903D64 {
     /* 0x00 */ char unk00[0x14];
-    /* 0x00 */ arg1_func_87903D64_014* unk_14;
+    /* 0x14 */ arg1_func_87903D64_014* unk_14;
     /* 0x18 */ Gfx* unk_18;
 } arg1_func_87903D64; // size >= 0x1C
 
