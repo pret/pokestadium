@@ -10,11 +10,11 @@ void func_81002B20(Gfx* gfx) {
     angle = D_8006F09C->unk_0A6 & 3;
     mtx = (Mtx*)func_80005F5C(sizeof(Mtx));
     guRotate(mtx, D_800AF778[angle], 1.0f, 0.0f, 0.0f);
-    {        Gfx *_gfx = (Gfx *)(gfx++);        _gfx->words.w0 = 0xDA380001;        _gfx->words.w1 = mtx;  }
+    gSPMatrix(gfx++, mtx, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPEndDisplayList(gfx++);
 }
 
-void func_81002BC0(s32 arg0, GraphicState* state) {
+void func_81002BC0(s32 arg0, DisplayListState* state) {
     Gfx* gfx;
 
     if (arg0 == 2) {

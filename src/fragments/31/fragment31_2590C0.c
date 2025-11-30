@@ -70,4 +70,16 @@ void func_81003E90(s32 arg0, unk_arg1_func_81003E00* arg1) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/31/fragment31_2590C0/func_81003F20.s")
+void func_81003F20(s32 arg0, DisplayListState* state) {
+    Gfx* gfx;
+
+    if (arg0 == 2) {
+        gfx = func_80005F5C(0xA0);
+        state->gfx = gfx;
+        gDPSetAlphaDither(gfx++, G_AD_NOISE);
+        gDPSetPrimColor(gfx++, 0, 0, 10, 10, 10, D_8006F09C->unk_0A6 & 0xFF);
+        gDPSetEnvColor(gfx++, 0x37, 0x14, 0x14, 0xB4);
+        gDPSetCombineLERP(gfx++, 0, 0, 0, 0, TEXEL0, 1, PRIMITIVE, 1, 0, 0, 0, 0, COMBINED, 0, ENVIRONMENT, 0);
+        gSPEndDisplayList(gfx++);
+    }
+}

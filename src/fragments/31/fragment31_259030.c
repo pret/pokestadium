@@ -2,7 +2,7 @@
 #include "src/6A40.h"
 #include "src/fragments/10/fragment10.h"
 
-void func_81003D70(s32 arg0, GraphicState* state) {
+void func_81003D70(s32 arg0, DisplayListState* state) {
     Gfx* gfx;
 
     if (arg0 == 2) {
