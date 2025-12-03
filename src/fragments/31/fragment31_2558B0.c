@@ -1,4 +1,5 @@
 #include "fragment31.h"
+#include "12D80.h"
 
 typedef struct unk_D_810047E0 {
     /* 0x00 */ s16 unk_00;
@@ -9,6 +10,7 @@ typedef struct unk_D_810047E0 {
 } unk_D_810047E0; // size = 0x2C
 
 extern unk_D_810047E0 D_810047E0[2][10];
+extern unk_D_810047E0 D_81004998[2][10];
 extern s32 D_81004B50;
 extern s32 D_81004B54;
 

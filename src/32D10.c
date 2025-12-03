@@ -5,17 +5,10 @@
 #include "src/memmap.h"
 #include "src/fragments/31/fragment31.h"
 
-extern s16 D_800AF778[4];
-extern s16 D_800AF780[4];
-extern s16 D_800AF788[4];
-extern s16 D_800AF790[4];
-extern s16 D_800AF798[4];
-extern s16 D_800AF7A0[4];
 extern s32 D_800AF7A8;
 extern s16 D_800AF7AC;
 extern s16 D_800AF7AE;
 extern s16 D_800AF7C0[];
-extern s16 D_800AF7B0[2];
 extern s16 D_800AF7B4[6];
 
 void func_80032110(u8 arg0, s16 arg1) {

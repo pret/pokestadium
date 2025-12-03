@@ -185,7 +185,7 @@ u16 func_81207C5C_Empty(void) {
 }
 
 #ifdef NON_MATCHING
-// Does match but won't generate correct checksum
+// Matching but won't generate correct checksum
 u16 func_81207DF8(void) {
     static s32 D_8120EB6C;
     u16 temp_v0;
