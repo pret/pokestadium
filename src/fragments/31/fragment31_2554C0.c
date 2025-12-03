@@ -42,10 +42,8 @@ Gfx* func_81000330(Gfx* gfx, DisplayListAddresses* addresses, s32 index) {
     }
 }
 
-#ifdef NON_MATCHING
-// Matching but issue with .data
 void func_81000420(s32 arg0, DisplayListState* state) {
-    static s32 D_81003FD0; // .data
+    static s32 D_81003FD0 = 0;
     Gfx* gfx;
     DisplayListAddresses* addresses;
     u8 temp_v1;
@@ -59,6 +57,3 @@ void func_81000420(s32 arg0, DisplayListState* state) {
         D_81003FD0 += 1;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/31/fragment31_2554C0/func_81000420.s")
-#endif

@@ -1,4 +1,5 @@
 #include "fragment31.h"
+#include "12D80.h"
 
 typedef struct unk_D_810047E0 {
     /* 0x00 */ s16 unk_00;
