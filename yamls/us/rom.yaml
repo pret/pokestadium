@@ -68,7 +68,7 @@
     - [0x20470, c] # dp list for UI and icons
     - [0x225A0, c] #
     - [0x22630, c] # registered pkm stats
-    - [0x232C0, c] # 
+    - [0x232C0, c, 232C0] # 
     - [0x26820, c] # save data code
     - [0x29B90, pad]
     - [0x29BA0, c] # scenary code

@@ -1,9 +1,18 @@
 #include "232C0.h"
+#include "src/22630.h"
 #include "src/26820.h"
 #include "src/2E110.h"
 #include "src/gb_tower.h"
 #include "src/hal_libc.h"
 #include "src/util.h"
+
+typedef struct unk_func_800228F0_sp24 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u16 unk_02;
+    /* 0x04 */ char unk_04[0x10];
+    /* 0x14 */ char unk_14[0x8];
+} unk_func_800228F0_sp24; // size >= 0x1C
 
 extern unk_D_800AC910 D_800AC910[4];
 extern u32 D_800ACA70;
@@ -62,7 +71,21 @@ void func_800228B0(unk_func_80026268_arg0* arg0) {
     _bcopy(&sp18, arg0->unk_46, 0xB);
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/232C0/func_800228F0.s")
+s32 func_800228F0(unk_func_800228F0* arg0, u16 arg1) {
+    unk_func_800228F0_sp24 sp24;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if ((func_8002797C(0x13, 0, arg1 - 1, &sp24) != 0) && (sp24.unk_00 != 0)) {
+        arg0->unk_00 = sp24.unk_00;
+        arg0->unk_01 = sp24.unk_01;
+        arg0->unk_02 = sp24.unk_02;
+        func_80021C40(arg0->unk_04, &sp24.unk_04[0]);
+        func_80021C40(arg0->unk_14, &sp24.unk_04[0xB]);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 void func_80022978(unk_func_80026268_arg0* arg0, s16 arg1, u8 arg2) {
     unk_D_800AE4E8_004_2_0DC0_002 sp24;
@@ -233,7 +256,16 @@ s32 func_80022D8C(unk_func_80022C28_ret* arg0) {
     return sp1C;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/232C0/func_80022DF4.s")
+s32 func_80022DF4(unk_func_80022C28_ret* arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg0->unk_08 >= arg1) {
+        arg0->unk_0A = arg1;
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 s32 func_80022E18(u8* arg0, s32 arg1, unk_func_80022C28_ret* arg2) {
     s32 var_s3;
