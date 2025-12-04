@@ -9,6 +9,11 @@ s32 func_8005A990(OSPiHandle *);
 // 517A0.s
 void func_80050BA0(s32, void*);
 
+// 49190.s
+void func_80048904(s32, s32, s32);
+void func_80048590(s32, s32, void*, s16*);
+void func_80048684(void*, s16, s32, s16*);
+
 // bcopy.s
 void _bcopy(void* src, void* dst, s32);
 
