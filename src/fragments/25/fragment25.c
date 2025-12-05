@@ -2,6 +2,7 @@
 #include "src/2E460.h"
 
 extern unk_D_88400138 D_88400138[];
+extern unk_D_88400100 D_88400100[];
 /*
 static unk_D_88400138 D_88400138[] = {
     { 0x00000000, { 0xFF, 0xFF, 0xFF, 0xFF } }, { 0x00000001, { 0x4D, 0x4D, 0x4D, 0xFF } },
@@ -10,8 +11,6 @@ static unk_D_88400138 D_88400138[] = {
     { 0x00000006, { 0xFF, 0xFF, 0x00, 0xFF } },
 };
 */
-
-extern unk_D_88400138 D_88400138[];
 /*
 static unk_D_88400138 D_88400138[] = {
     { 0, { 0xF0, 0xF0, 0xF0, 0xFF }, { 0xF0, 0xF0, 0xF0, 0xFF } },
@@ -32,9 +31,42 @@ static unk_D_88400138 D_88400138[] = {
 };
 */
 
+#ifdef NON_MATCHING
+s32 func_88400020(s32 arg0) {
+    s32 v1;
+    if (arg0 & 7) {
+        return 2;
+    }
+    if (arg0 & 8) {
+        return 3;
+    }
+    if (arg0 & 0x10) {
+        return 4;
+    }
+    if (arg0 & 0x20) {
+        return 5;
+    }
+    if (arg0 & 0x40) {
+        return 6;
+    }
+    v1 = 0;
+    return v1;
+}
+#else
+s32 func_88400020(s32);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/25/fragment25/func_88400020.s")
+#endif
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/25/fragment25/func_8840007C.s")
+unk_D_88400100* func_8840007C(unk_func_80026268_arg0* arg0) {
+    s32 var_v1;
+
+    if (arg0->unk_02 == 0) {
+        var_v1 = 1;
+    } else {
+        var_v1 = func_88400020(arg0->unk_05);
+    }
+    return &D_88400100[var_v1];
+}
 
 unk_D_88400138* func_884000C4(s32 arg0) {
     return &D_88400138[func_8002EDEC(arg0)];

@@ -577,7 +577,7 @@ s32 func_800373D8(void) {
 
     // Read the second file from the sub header into D_800FC6DC (0x16F2BD0)
     func_8004ADB0(D_800FC6EC->offset2, D_800FC6DC, D_800FC6EC->wave_tables_offset - D_800FC6EC->offset2);
-    // Decompress the yay0 file into D_800FC688
+    // Decompress the yay0 file into D_800FC68C
     D_800FC68C = alHeapAlloc(D_800FC810, 1, 0x157C);
     func_80050B40(D_800FC6DC, D_800FC68C, 0x157C);
     // ???
