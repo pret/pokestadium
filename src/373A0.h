@@ -14,7 +14,7 @@ typedef struct File1Header {
     /* 0x04 */ u32 wave_tables_offset;
     /* 0x08 */ u32 num_files;
     /* 0x0C */ u32 files[1];
-} File1Header; // size = 0xC
+} File1Header; // size >= 0x10
 
 typedef struct File2SubHeader1 {
     /* 0x00 */ u32 offset1;
@@ -48,7 +48,7 @@ typedef struct unk_D_800FC6D4_entry {
 typedef struct unk_D_800FC6D4_008 {
     /* 0x00 */ u32 unk_00;
     /* 0x04 */ u8 unk_04;
-} unk_D_800FC6D4_008; // size = 0x8
+} unk_D_800FC6D4_008; // size = 0x5
 
 typedef struct unk_D_800FC6D4 {
     /* 0x00 */ u16 flags;
