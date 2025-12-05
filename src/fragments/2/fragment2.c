@@ -191,6 +191,7 @@ u32* D_8780633C[] = { D_878067F0, D_87807690, D_87808530, D_878093D0 };
 u32* D_8780634C[] = { D_8780B110, D_8780BFB0, D_8780CE50, D_8780DCF0, D_8780A270 };
 
 #ifdef NON_MATCHING
+// Matches when D_8780FA30, D_8780FA40, D_8780FA68 are static
 void func_878010C8(s16 arg0) {
     s32 i;
 
@@ -305,8 +306,6 @@ s32 func_878013D4(UNUSED unk_D_800AC870* arg0, char* arg1) {
     return func_8001F5B0(0, 0, arg1);
 }
 
-// Needs in-function static to match, but D_8780FA70 is referenced in fragment 20 and 39?
-#ifdef NON_MATCHING
 void func_87801400(s32 arg0, s16 arg1, s16 arg2, f32 arg3, f32 arg4) {
     static u32* D_8780FA70;
 
@@ -334,10 +333,6 @@ void func_87801400(s32 arg0, s16 arg1, s16 arg2, f32 arg3, f32 arg4) {
         func_8001C330(arg1, arg2, a, b, 0, 0, 1024.0f / arg3, 1024.0f / arg4, 0);
     }
 }
-#else
-u32* D_8780FA70;
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/2/fragment2/func_87801400.s")
-#endif
 
 void func_87801644(s32 arg0, s16 arg1, s16 arg2, f32 _scale) {
     func_87801400(arg0, arg1, arg2, _scale, _scale);
