@@ -358,7 +358,7 @@
     - [0x764A0, .data, 2E460]
     - [0x76A40, data, rom_data_76A40]
     - [0x76EF0, .data, 33E30]
-    - [0x76FB0, data, rom_data_76FB0]
+    - [0x76FB0, data, rom_data_76FB0] # 33FE0
     - [0x78570, .data, 373A0]
     - [0x78890, .data, 38BB0]
     - [0x78990, data, rom_data_78990]
@@ -435,7 +435,7 @@
     - [0x7D090, .rodata, 2FEA0]
     - [0x7D0F0, .rodata, 30640]
     - [0x7D110, rodata, rom_rodata_7D110]
-    - [0x7D1B0, rodata, rom_rodata_7D1B0]
+    - [0x7D1B0, rodata, rom_rodata_7D1B0] # 33FE0
     - [0x7D230, .rodata, 373A0]
     - [0x7D340, .rodata, 38BB0]
     - [0x7D3C0, rodata, rom_rodata_7D3C0]
@@ -513,20 +513,23 @@
     - {vram: 0x800ABD30, type:  .bss, name: geo_layout}
     - {vram: 0x800ABE10, type:  .bss, name: 19840}
     - {vram: 0x800AC830, type:  .bss, name: 1AB70}
-    - {vram: 0x800AC840, type:  bss, name: unk_bss_14}
+    - {vram: 0x800AC840, type:  bss, name: unk_bss_14} # 1C720
+    - {vram: 0x800AC870, type:  bss, name: unk_bss_16} # 1CF30
     - {vram: 0x800AC880, type:  .bss, name: 20330}
-    - {vram: 0x800AC890, type:  bss, name: unk_bss_11}
+    - {vram: 0x800AC890, type:  bss, name: unk_bss_11} # 232C0
     - {vram: 0x800AE4E0, type:  .bss, name: 26820}
     - {vram: 0x800AE520, type:  .bss, name: 29BA0}
     - {vram: 0x800AF740, type:  .bss, name: 2E110}
     - {vram: 0x800AF750, type:  .bss, name: 2E460}
-    - {vram: 0x800AF770, type:  bss, name: unk_bss_7}
+    - {vram: 0x800AF770, type:  bss, name: unk_bss_7} # 32D10
+    - {vram: 0x800AF7C0, type:  bss, name: unk_bss_8} # 334D0
+    - {vram: 0x800B2F50, type:  bss, name: unk_bss_9} # 33FE0
     - {vram: 0x800B32A0, type:  .bss, name: 373A0}
     - {vram: 0x800FC7A0, type:  .bss, name: 38BB0}
-    - {vram: 0x800FC820, type:  bss, name: unk_bss_12}
+    - {vram: 0x800FC820, type:  bss, name: unk_bss_12} # 3D140
     - {vram: 0x800FCD40, type:  .bss, name: 435D0}
     - {vram: 0x800FCED0, type:  .bss, name: 45720}
-    - {vram: 0x800FCF60, type:  bss, name: unk_bss_15}
+    - {vram: 0x800FCF60, type:  bss, name: unk_bss_15} # 4A3E0
     - {vram: 0x800FF990, type:  .bss, name: 4B940}
     - {vram: 0x800FF9B0, type:  .bss, name: 4BDC0}
     - {vram: 0x800FF9C0, type:  bss, name: unk_bss_10}

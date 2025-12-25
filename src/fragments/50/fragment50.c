@@ -9,6 +9,7 @@
 #include "src/232C0.h"
 #include "src/26820.h"
 #include "src/2E110.h"
+#include "src/32D10.h"
 #include "src/3FB0.h"
 #include "src/49790.h"
 #include "src/4BDC0.h"

@@ -2,6 +2,7 @@
 #include "src/fragments/7/fragment7.h"
 #include "src/fragments/8/fragment8.h"
 #include "src/6A40.h"
+#include "src/32D10.h"
 
 typedef struct {
     /* 0x00 */ u8 rgb0[3];      // start color

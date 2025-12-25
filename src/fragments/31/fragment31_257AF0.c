@@ -1,6 +1,7 @@
 #include "fragment31.h"
 #include "src/6A40.h"
 #include "src/12D80.h"
+#include "src/32D10.h"
 
 typedef struct unk_arg1_func_81002830 {
     /* 0x00 */ s16 unk_00;
@@ -19,8 +20,6 @@ typedef struct TextureState {
     /* 0x14 */ u32* textures;
     /* 0x18 */ Gfx* gfx;
 } TextureState; // size = 0x1C
-
-extern s16 D_800AF7AE;
 
 #ifdef NON_MATCHING
 void func_81002830(Gfx* gfx, unk_arg1_func_81002830* arg1) {

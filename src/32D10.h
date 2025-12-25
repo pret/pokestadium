@@ -9,6 +9,7 @@ extern s16 D_800AF788[4];
 extern s16 D_800AF790[4];
 extern s16 D_800AF798[4];
 extern s16 D_800AF7A0[4];
+extern s16 D_800AF7AE;
 extern s16 D_800AF7B0[2];
 
 void func_80032110(u8 arg0, s16 arg1);
