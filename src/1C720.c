@@ -7,6 +7,7 @@
 #include "32D10.h"
 #include "22630.h"
 #include "19840.h"
+#include "29BA0.h"
 #include "dp_intro.h"
 #include "hal_libc.h"
 #include "src/12D80.h"
@@ -169,35 +170,25 @@ void func_8001C014(arg1_func_80010CA8* arg0, unk_func_8001C014* arg1, u16 arg2) 
     func_8001BEE8(arg0, &stack);
 }
 
-#ifdef NON_MATCHING
-typedef struct stack_func_8001C07C {
-    /* 0x00 */ arg1_func_80010CA8 unk_00;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0C */ arg1_func_80010CA8 unk_0C;
-} stack_func_8001C07C; // size == 0x30
+void func_8001C07C(unk_D_800AE540_1194* arg0) {
+    arg1_func_80010CA8 sp2C;
+    s16 sp2A;
+    unk_D_800AE540_0004* temp_a1;
 
-void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
-    stack_func_8001C07C stack;
-
-    stack.unk_08 = arg0->unk_02;
-    stack.unk_0C.raw = 0;
-
+    sp2A = arg0->unk_02;
+    sp2C.raw = 0;
     if (!(arg0->unk_00 & 0x40) && (arg0->unk_00 & 0x80)) {
-        if (arg0->unk_04 != NULL && stack.unk_08 == arg0->unk_04->unk_00.unk_00) {
-            func_8001BEE8(&stack.unk_0C, arg0->unk_04);
-            if ((stack.unk_08 == 0x19) && (arg0->unk_04->unk_52 & 0x80)) {
-                stack.unk_08 = 0x99;
+        temp_a1 = arg0->unk_04;
+        if ((temp_a1 != NULL) && (sp2A == arg0->unk_04->unk_000)) {
+            func_8001BEE8(&sp2C, (unk_func_80026268_arg0*)arg0->unk_04);
+            if ((sp2A == 0x19) && (arg0->unk_04->unk_01C[0].unk_30[6] & 0x80)) {
+                sp2A = 0x99;
             }
         }
-
         if (!(arg0->unk_10->unk_00 & 4)) {
             while (func_80001C90() == 0) {}
         }
-
-        stack.unk_00 = stack.unk_0C;
-        func_800198E4(arg0->unk_10, stack.unk_08, stack.unk_0C);
-
+        func_800198E4(arg0->unk_10, (u16) sp2A, sp2C);
         arg0->unk_00 |= 0x40;
         arg0->unk_00 &= ~0x10;
 
@@ -208,9 +199,6 @@ void func_8001C07C(unk_func_8001C07C_arg0* arg0) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1C720/func_8001C07C.s")
-#endif
 
 void func_8001C198(unk_func_8001C248* arg0) {
     if (func_80019C08(arg0->unk_000.unk_10)) {

@@ -80,14 +80,10 @@ extern u16 D_80077E78[];
 extern u16 D_80077E88[];
 extern u16 D_80077E90[];
 extern u16 D_800780A8[];
-typedef struct unk_D_8007838C {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03;
-} unk_D_8007838C; // size = 0x04
-
-extern unk_D_8007838C D_8007838C;
+extern u8 D_8007838C[4];
+extern u8 D_80078390[2];
+extern u8 D_80078394[4];
+extern u8 D_80078398[4];
 extern u8 D_800783BC;
 extern u8 D_800783C0;
 extern u8 D_800783C4;
@@ -121,7 +117,7 @@ extern AudioInfo* lastInfo;
 extern s32 min_only_one;
 extern u8 D_800FC825;
 extern s32 D_800FC828;
-extern s32 D_800FCB28;
+extern s32 D_800FCB28[2];
 extern s32 D_800FCB2C;
 extern u32 D_800FCCF0[10];
 
@@ -560,6 +556,7 @@ void func_8003D2B8(s32 arg0) {
 }
 
 #ifdef NON_MATCHING
+// Matches but issues with .rodata
 void func_8003D32C(void) {
     switch (D_80077D9C) {
         case 1:
@@ -680,10 +677,10 @@ void func_8003D68C(s32 arg0) {
 }
 
 void func_8003D6B0(u8 arg0, u8 arg1, u8 arg2, u8 arg3) {
-    D_8007838C.unk_00 = arg0;
-    D_8007838C.unk_01 = arg1;
-    D_8007838C.unk_02 = arg2;
-    D_8007838C.unk_03 = arg3;
+    D_8007838C[0] = arg0;
+    D_8007838C[1] = arg1;
+    D_8007838C[2] = arg2;
+    D_8007838C[3] = arg3;
 }
 
 void func_8003D6DC(u8 arg0) {
@@ -720,7 +717,32 @@ void func_8003D6DC(u8 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003D828.s")
+void func_8003D828(u8 arg0, u8 arg1, u8 arg2, u8 arg3) {
+    s32 i;
+    s32 j;
+
+    D_80078398[0] = arg0;
+    D_80078398[1] = arg1;
+    D_80078398[2] = arg2;
+    D_80078398[3] = arg3;
+    D_80078394[0] = 0xFF;
+    D_80078394[1] = 0xFF;
+    D_80078390[0] = 0;
+    D_80078390[1] = 0;
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 4; j++) {
+            if (i + 1 == D_80078398[j]) {
+                D_80078390[i] += D_8007838C[j];
+            }
+        }
+    }
+    D_800FCB18[0] = 0;
+    D_800FCB18[1] = 0;
+    D_800FCB28[0] = 0;
+    D_800FCB28[1] = 0;
+    func_8003D6DC(0);
+    func_8003D6DC(1);
+}
 
 #ifdef NON_MATCHING
 void func_8003D918(u32 arg0, u32 arg1) {
@@ -836,7 +858,7 @@ void func_8003DB84(s32 arg0) {
 
         if ((D_800FCB18[0] != NULL) && (D_800FCB18[1] != NULL)) {
             if (D_800FCB18[0] != NULL) {
-                D_800FCB28 = D_800FCB18[0]->unk_0C;
+                D_800FCB28[0] = D_800FCB18[0]->unk_0C;
             }
 
             if (D_800FCB18[1] != NULL) {
@@ -1180,7 +1202,7 @@ void func_8003DB84(s32 arg0) {
         func_80037234(0x5B, 0);
 
         if (D_800FCB18[0] != NULL) {
-            D_800FCB28 = D_800FCB18[0]->unk_0C;
+            D_800FCB28[0] = D_800FCB18[0]->unk_0C;
         }
 
         if (D_800FCB18[1] != NULL) {

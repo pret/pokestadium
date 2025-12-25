@@ -7,8 +7,6 @@
 
 extern s32 D_800AF7A8;
 extern s16 D_800AF7AC;
-extern s16 D_800AF7AE;
-extern s16 D_800AF7C0[];
 extern s16 D_800AF7B4[6];
 
 void func_80032110(u8 arg0, s16 arg1) {

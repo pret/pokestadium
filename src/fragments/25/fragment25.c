@@ -31,31 +31,28 @@ static unk_D_88400138 D_88400138[] = {
 };
 */
 
-#ifdef NON_MATCHING
 s32 func_88400020(s32 arg0) {
     s32 v1;
     if (arg0 & 7) {
-        return 2;
+        v1 = 2;
     }
-    if (arg0 & 8) {
-        return 3;
+    else if (arg0 & 8) {
+        v1 = 3;
     }
-    if (arg0 & 0x10) {
-        return 4;
+    else if (arg0 & 0x10) {
+        v1 =  4;
     }
-    if (arg0 & 0x20) {
-        return 5;
+    else if (arg0 & 0x20) {
+        v1 =  5;
     }
-    if (arg0 & 0x40) {
-        return 6;
+    else if (arg0 & 0x40) {
+        v1 =  6;
     }
-    v1 = 0;
+    else {
+        v1 = 0;
+    }
     return v1;
 }
-#else
-s32 func_88400020(s32);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/25/fragment25/func_88400020.s")
-#endif
 
 unk_D_88400100* func_8840007C(unk_func_80026268_arg0* arg0) {
     s32 var_v1;

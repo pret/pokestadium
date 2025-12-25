@@ -37,43 +37,44 @@ void func_82100034(void) {
     func_8001F750();
 }
 
-#ifdef NON_MATCHING
 s32 func_82100054(void) {
     static s32 D_82100DC0 = 0;
 
     s32 var_v1 = 4;
 
-    if (D_82100DC0 == 0) {
+    if (D_82100DC0 != 0) {
         switch (D_82100EC0) {
             case 0:
                 break;
 
             case 1:
-                return 0x80;
+                var_v1 = 0x80;
+            break;
 
             case 2:
-                return 0x81;
+                var_v1 = 0x81;
+            break;
 
             case 3:
-                return 0x82;
+                var_v1 = 0x82;
+            break;
 
             case 4:
-                return 0x20;
+                var_v1 = 0x20;
+            break;
 
             case 5:
-                return 0x25;
+                var_v1 = 0x25;
+            break;
 
             case 6:
                 var_v1 = 0x11;
+            break;
         }
     }
 
     return var_v1;
 }
-#else
-static s32 D_82100DC0 = 0;
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/36/fragment36/func_82100054.s")
-#endif
 
 void func_821000C4(s16 arg0, s16 arg1) {
     static s32 D_82100DC4 = 0x40;
