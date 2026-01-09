@@ -7,13 +7,13 @@
 Gfx* func_81000200(Gfx* gfx, DisplayListAddresses* addresses, s32 index) {
     gSPDisplayList(gfx++, addresses->segments[0]);
     // TODO: Convert to gDPLoadTextureBlock
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xFD900000;    _gfx->words.w1 = addresses->textures[index];    }
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF5900000;    _gfx->words.w1 = 0x07080200;    }
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xE6000000;    _gfx->words.w1 = 0;    }
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF3000000;    _gfx->words.w1 = 0x073FF200;    }
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xE7000000;    _gfx->words.w1 = 0;    }
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF5880800;    _gfx->words.w1 = 0x80200;    }
-    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF2000000;    _gfx->words.w1 = 0x7C0FC;    }
+    gDPSetTextureImage(gfx++, G_IM_FMT_I, G_IM_SIZ_16b, 1, addresses->textures[index]);
+    gDPSetTile(gfx++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPLoadSync(gfx++);
+    gDPLoadBlock(gfx++, 7, 0, 0, 0x3FF, 0x200);
+    gDPPipeSync(gfx++);
+    gDPSetTile(gfx++, G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+    gDPSetTileSize(gfx++, 0, 0, 0, 0x7C, 0xFC);
     gSPDisplayList(gfx++, addresses->segments[1]);
     gSPEndDisplayList(gfx++);
     return gfx;

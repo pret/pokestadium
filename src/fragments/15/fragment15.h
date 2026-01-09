@@ -66,6 +66,9 @@ typedef struct unk_D_8690B3C0 {
     /* 0x0C */ s32 unk_0C;
 } unk_D_8690B3C0; // size >= 0x10
 
+extern u8 D_5001950[];
+extern u8 D_5003AE8[];
+
 extern Vec3f D_86908C20;
 extern Vec3f D_86908C2C;
 extern Vec3f D_86908C38;

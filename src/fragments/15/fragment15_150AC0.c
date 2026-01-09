@@ -30,8 +30,6 @@ extern u8 D_5000C90[];
 extern u8 D_50011D0[];
 extern u8 D_5001680[];
 extern u8 D_50017E8[];
-extern u8 D_5001950[];
-extern u8 D_5003AE8[];
 
 void func_86904070(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     unk_D_80068BB0* temp_s1 = func_8000648C();
