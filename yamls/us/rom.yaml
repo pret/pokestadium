@@ -500,7 +500,7 @@
     - {vram: 0x800A6D20, type: .bss, name: reset}
     - {vram: 0x800A7320, type: .bss, name: controller}
     - {vram: 0x800A7420, type:  bss, name: unk_bss_3}
-    - {vram: 0x800A7450, type:  .bss, name: stage_loader}
+    - {vram: 0x800A7450, type: .bss, name: stage_loader}
     - {vram: 0x800A74C0, type: .bss, name: crash_screen}
     - {vram: 0x800A7EA0, type: .bss, name: profiler}
     - {vram: 0x800A8100, type:  bss, name: unk_bss_2}
