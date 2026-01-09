@@ -1842,10 +1842,6 @@ s32 func_80042850(u8 arg0) {
     }
 }
 
-#ifdef NON_MATCHING
-void func_800428FC(void) {
-    func_80041C70(0); // Should not take an argument
+void func_800428FC(u32 arg0) {
+    func_80041C70(arg0);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800428FC.s")
-#endif

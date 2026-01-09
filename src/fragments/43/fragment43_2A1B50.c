@@ -544,9 +544,9 @@ void func_83401FD0(unk_D_83407B38* arg0) {
 }
 
 void func_834020D8(void) {
-    u16* temp_v0 = func_800318AC();
+    unk_func_80031270* temp_v0 = func_800318AC();
 
-    if ((temp_v0 != NULL) && (temp_v0[0] == 2)) {
+    if ((temp_v0 != NULL) && (temp_v0->unk_00 == 2)) {
         main_pool_pop_state('albu');
         func_800318B8();
     }

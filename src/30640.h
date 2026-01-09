@@ -42,7 +42,11 @@ typedef struct unk_D_83402EE0 {
 
 typedef struct unk_D_83403C60 {
     /* 0x00 */ unk_func_80026268_arg0 unk_00;
-    /* 0x54 */ char unk54[0x38];
+    /* 0x54 */ char unk54[0x18];
+    /* 0x6C */ u8 unk_6C;
+    /* 0x6D */ char unk6D[0x3];
+    /* 0x70 */ unk_D_83407AC8 unk_70;
+    /* 0x8A */ char unk8A[0x2];
 } unk_D_83403C60; // size = 0x8C
 
 typedef struct unk_D_83406EB0 {
@@ -68,6 +72,22 @@ typedef struct unk_D_83407B00 {
                 };
 } unk_D_83407B00; // size = 0x8
 
+typedef struct unk_func_800314BC_temp_v4 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s32 unk_04;
+} unk_func_800314BC_temp_v4; // size = 0x8
+
+typedef struct unk_func_80031270_024 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ char pad2[0x12];
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ s32 unk_1C;
+} unk_func_80031270_024; // size = 0x20
+
 typedef struct unk_func_80031270 {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ s16 unk_02;
@@ -79,8 +99,12 @@ typedef struct unk_func_80031270 {
     /* 0x14 */ BinArchive* unk_14;
     /* 0x18 */ unk_D_83403C60* unk_18;
     /* 0x1C */ GraphNode* unk_1C;
-    /* 0x20 */ char unk20[0x14];
-    /* 0x32 */ s32 unk_34;
+    /* 0x20 */ unk_D_86002F58_004_000* unk_20;
+    /* 0x24 */ unk_func_80031270_024* unk_24;
+    /* 0x28 */ GraphNode* unk_28;
+    /* 0x2C */ GraphNode* unk_2C;
+    /* 0x30 */ GraphNode* unk_30;
+    /* 0x34 */ s32 unk_34;
 } unk_func_80031270; // size = 0x38
 
 typedef struct unk_D_83407B38_0B0 {
@@ -109,10 +133,10 @@ void func_8002FF20(void);
 void func_8003107C(unk_D_83402EE0_070*, unk_func_80026268_arg0*);
 void func_80031140(unk_func_80026268_arg0*, unk_D_83407AC8*);
 unk_func_80031270* func_80031270(s16, s16, unk_D_80068BB0*, unk_D_80068BB0*, unk_D_86002F58_004_000_010*, BinArchive*, unk_D_83403C60*);
-void func_80031660(unk_func_80031270*);
+u8* func_80031660(unk_func_80031270*);
 s32 func_800317D8(unk_func_80031270*);
 s32 func_8003181C(unk_func_80031270**, s32);
-u16* func_800318AC(void);
+unk_func_80031270* func_800318AC(void);
 void func_800318B8(void);
 s32 func_800318C4(unk_D_83403C60*);
 f32 func_80031A6C(f32);

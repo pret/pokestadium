@@ -35,6 +35,7 @@ typedef struct unk_func_80026268_arg0 {
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09[4];
+    /* 0x0D */ u8 pad0D;
     /* 0x0E */ u16 unk_0E;
     /* 0x10 */ u32 unk_10;
     /* 0x14 */ u16 unk_14;
@@ -54,9 +55,9 @@ typedef struct unk_func_80026268_arg0 {
     /* 0x30 */ u8 unk_30[11];
     /* 0x3B */ u8 unk_3B[11];
     /* 0x46 */ u8 unk_46[11];
-    /* 0x51 */ char unk51[0x1];
+    /* 0x51 */ u8 pad51;
     /* 0x52 */ u8 unk_52;
-    /* 0x52 */ u8 unk_53;
+    /* 0x53 */ u8 unk_53;
 } unk_func_80026268_arg0; // size = 0x54
 
 typedef struct unk_D_800AE540_0874 {
