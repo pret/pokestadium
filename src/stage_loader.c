@@ -180,12 +180,12 @@ s32 func_80007A58(void);
 void func_80007FC4(Gfx**, s32);
 void func_800080E0(void);
 
-#ifdef NON_MATCHING
 void func_800069F0(void) {
     u8 a;
     u8 b;
     u8 g;
     u8 r;
+    unk_func_80007444* v0 = D_800A7464;
 
     if (D_800A7464->unk_11 == 0) {
         return;
@@ -195,25 +195,21 @@ void func_800069F0(void) {
     g = RGBA16_GET_G(D_800A7464->unk_14);
     b = RGBA16_GET_B(D_800A7464->unk_14);
 
-    r = ((r << 3) | (r >> 2)) & 0xFF;
-    g = ((g << 3) | (g >> 2)) & 0xFF;
-    b = ((b << 3) | (b >> 2)) & 0xFF;
+    r = (r << 3) | (r >> 2);
+    g = (g << 3) | (g >> 2);
+    b = (b << 3) | (b >> 2);
 
     switch (D_800A7464->unk_11) {
-        default:
-            a = a;
-            break;
-
         case 1:
-            a = 0xFF;
+            a = 255;
             break;
 
         case 2:
-            a = (0xFF - ((D_800A7464->unk_13 * 0xFF) / D_800A7464->unk_12));
+            a = (255 - ((D_800A7464->unk_13 * 255) / D_800A7464->unk_12));
             break;
 
         case 3:
-            a = ((D_800A7464->unk_13 * 0xFF) / D_800A7464->unk_12);
+            a = ((D_800A7464->unk_13 * 255) / D_800A7464->unk_12);
             break;
     }
 
@@ -235,10 +231,6 @@ void func_800069F0(void) {
         }
     }
 }
-#else
-void func_800069F0(void);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/stage_loader/func_800069F0.s")
-#endif
 
 s32 func_80006C04(s32 arg0) {
     s32 ret = 0;
