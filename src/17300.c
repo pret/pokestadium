@@ -3,6 +3,11 @@
 #include "src/F420.h"
 #include "src/18140.h"
 
+typedef struct unk_func_80016B30_arg0 {
+    /* 0x00 */ Vec3s vec;
+    /* 0x06 */ s16 unk_06;
+} unk_func_80016B30_arg0; // size = 0x8
+
 static unk_D_800ABCC0 D_800ABCC0[2];
 static s32 D_800ABCF0;
 
@@ -74,23 +79,11 @@ f32 func_80016848(unk_D_800ABCC0* arg0, s32 arg1) {
     return var_fv1;
 }
 
-#ifdef NON_MATCHING
 f32 func_80016934(Vec3s* arg0, s16 arg1, s16 arg2) {
+    f32 y;
     s32 i;
-    f32 sp4;
-    Vec3s* temp_a1;
-    Vec3s* temp_v0;
-    Vec3s* var_a1;
-    f32 temp_fa0;
-    f32 temp_fa1;
-    f32 temp_ft3;
-    f32 temp_ft4;
-    f32 temp_ft5;
-    f32 temp_fv0;
+    f32 x;
     f32 var_fv1;
-    s16 temp_v1_2;
-    s32 temp_v1;
-    s32 var_v0;
 
     if (arg0->x >= arg2) {
         var_fv1 = arg0->y;
@@ -104,28 +97,47 @@ f32 func_80016934(Vec3s* arg0, s16 arg1, s16 arg2) {
                 }
             }
 
-            temp_fv0 = (arg2 - arg0[i].x) / 30.0f;
-            temp_fa0 = 30.0f / (arg0[i + 1].x - arg0[i].x);
-            temp_ft4 = CB(temp_fv0) * SQ(temp_fa0);
-            temp_ft5 = 2.0f * SQ(temp_fv0);
-            temp_ft3 = 3.0f * SQ(temp_fv0) * SQ(temp_fa0);
+            x = (arg2 - arg0[i].x) / 30.0f;
+            y = 30.0f / (arg0[i + 1].x - arg0[i].x);
 
-            var_fv1 = (arg0[i + 1].z * (temp_ft4 - (SQ(temp_fv0) * temp_fa0))) +
-                      ((arg0[i].y * (((temp_ft5 * temp_fv0 * CB(temp_fa0)) - temp_ft3) + 1.0f)) +
-                       (arg0[i + 1].y * ((-2.0f * CB(temp_fv0) * CB(temp_fa0)) + temp_ft3)) +
-                       (arg0[i].z * ((temp_ft4 - (temp_ft5 * temp_fa0)) + temp_fv0)));
+            var_fv1 = (arg0[i].y * (((2.0f * x * x * x * y * y * y) - 3.0f * x * x * y * y) + 1.0f))
+                    + (arg0[i + 1].y * ((-2.0f * x * x * x * y * y * y) + 3.0f * x * x * y * y))
+                    + (arg0[i].z * ((x * x * x * y * y - (2.0f * x * x * y)) + x))
+                    + (arg0[i + 1].z * (x * x * x * y * y - (x * x * y)));
         }
     }
     return var_fv1;
 }
-#else
-f32 func_80016934(Vec3s* arg0, s16 arg1, s16 arg2);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/17300/func_80016934.s")
-#endif
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/17300/func_80016B30.s")
+f32 func_80016B30(unk_func_80016B30_arg0* arg0, s16 arg1, s16 arg2) {
+    f32 y;
+    s32 i;
+    f32 x;
+    f32 var_fv1;
 
-f32 func_80016B30(Vec3s*, s16, s16);
+    if (arg0->vec.x >= arg2) {
+        var_fv1 = arg0->vec.y;
+    } else {
+        if (arg2 >= arg0[arg1 - 1].vec.x) {
+            var_fv1 = arg0[arg1 - 1].vec.y;
+        } else {
+            for (i = 0; i < arg1 - 2; i++) {
+                if (arg2 < arg0[i + 1].vec.x) {
+                    break;
+                }
+            }
+
+            x = (arg2 - arg0[i].vec.x) / 30.0f;
+            y = 30.0f / (arg0[i + 1].vec.x - arg0[i].vec.x);
+
+            var_fv1 = (arg0[i].vec.y * (((2.0f * x * x * x * y * y * y) - 3.0f * x * x * y * y) + 1.0f))
+                    + (arg0[i + 1].vec.y * ((-2.0f * x * x * x * y * y * y) + 3.0f * x * x * y * y))
+                    + (arg0[i].unk_06 * ((x * x * x * y * y - (2.0f * x * x * y)) + x))
+                    + (arg0[i + 1].vec.z * (x * x * x * y * y - (x * x * y)));
+        }
+    }
+    return var_fv1;
+}
 
 f32 func_80016D20(unk_D_800ABCC0* arg0, s32 arg1) {
     f32 var_fv1;
@@ -173,7 +185,7 @@ s16 func_80016DE0(unk_D_800ABCC0* arg0, s32 arg1) {
 }
 
 f32 func_80016F20(unk_D_800ABCC0* arg0, s32 arg1) {
-    Vec3s* temp_a0;
+    s16* temp_a0;
     f32 var_fv0;
     f32 var_fv1;
     unk_D_800ABCC0_008* temp_v0 = &arg0->unk_08[arg1];
@@ -192,36 +204,34 @@ f32 func_80016F20(unk_D_800ABCC0* arg0, s32 arg1) {
     return var_fv1;
 }
 
-typedef union arg1_func_80010CA8_test {
+typedef union unk_D_86002F58_004_000_040_raw_08 {
     struct {
         s16 unk_00;
         s16 unk_02;
     };
     s32 raw;
-} arg1_func_80010CA8_test; // size = 0x4
+} unk_D_86002F58_004_000_040_raw_08; // size = 0x4
 
-typedef struct unk_D_86002F58_004_000_040_test {
+typedef struct unk_D_86002F58_004_000_040_raw {
     /* 0x00 */ s16 unk_00;
     /* 0x04 */ unk_D_86002F58_004_000_040_004* unk_04;
-    /* 0x08 */ arg1_func_80010CA8_test unk_08;
+    /* 0x08 */ unk_D_86002F58_004_000_040_raw_08 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ char unk10[0x2];
     /* 0x12 */ u16 unk_12;
-} unk_D_86002F58_004_000_040_test; // size >= 0x14
+} unk_D_86002F58_004_000_040_raw; // size >= 0x14
 
-#ifdef NON_MATCHING
-s32 func_80016FBC(unk_D_86002F58_004_000_040_test* arg0, u16 arg1) {
-    arg1_func_80010CA8_test spC;
-    arg1_func_80010CA8_test* ptr;
+s32 func_80016FBC(unk_D_86002F58_004_000_040_raw* arg0, u16 arg1) {
+    unk_D_86002F58_004_000_040_raw_08 spC;
+    unk_D_86002F58_004_000_040_raw_08* ptr;
     unk_D_86002F58_004_000_040_004* temp_v0;
 
-    spC = arg0->unk_08;
+    ptr = &spC;
     temp_v0 = arg0->unk_04;
-
-    if (arg1 != arg0->unk_12) {
+    spC.raw = arg0->unk_08.raw;
+    if (arg0->unk_12 != arg1) {
         spC.raw += arg0->unk_0C;
         if (arg0->unk_0C >= 0) {
-            ptr = &spC;
             if (ptr->unk_00 >= temp_v0->unk_0A) {
                 if (temp_v0->unk_00 & 2) {
                     ptr->unk_00 = temp_v0->unk_0A - 1;
@@ -230,7 +240,6 @@ s32 func_80016FBC(unk_D_86002F58_004_000_040_test* arg0, u16 arg1) {
                 }
             }
         } else {
-            ptr = &spC;
             if (ptr->unk_00 < temp_v0->unk_06) {
                 if (temp_v0->unk_00 & 2) {
                     ptr->unk_00 = temp_v0->unk_06;
@@ -243,9 +252,6 @@ s32 func_80016FBC(unk_D_86002F58_004_000_040_test* arg0, u16 arg1) {
 
     return spC.raw;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/17300/func_80016FBC.s")
-#endif
 
 void func_80017080(void) {
     D_800ABCF0 = -1;

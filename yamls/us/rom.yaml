@@ -57,7 +57,7 @@
     - [0xF420, c] #
     - [0x11BA0, c] #  
     - [0x12D80, c] # 
-    - [0x17300, c] #
+    - [0x17300, c, 17300] #
     - [0x18140, c] # dp model animations
     - [0x18480, c, geo_layout] # dp model animations
     - [0x19840, c] # alternative pkm textures
@@ -493,6 +493,7 @@
     - {vram: 0x8007F190, type: .bss, name: main}
     - {vram: 0x80081900, type: .bss, name: rsp}
     - {vram: 0x80083CA0, type:  bss, name: unk_bss}
+    - {vram: 0x800A5870, type: .bss, name: memmap}
     - {vram: 0x800A6070, type: .bss, name: memory_main}
     - {vram: 0x800A60B0, type:  bss, name: unk_bss_4}
     - {vram: 0x800A60C0, type: .bss, name: 3FB0}

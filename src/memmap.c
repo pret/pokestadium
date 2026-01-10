@@ -1,6 +1,14 @@
 #include "global.h"
 #include "memmap.h"
 
+struct MemoryMap {
+    uintptr_t vaddr;
+    size_t size;
+};
+
+struct MemoryMap gSegments[16];
+struct MemoryMap gFragments[240];
+
 /*
  * Set the base virtual address and size of the specified segment memmap.
  */
