@@ -144,7 +144,7 @@ s32 func_80003680(u32 addr, s32 arg1, u8* arg2) {
     unk_func_80003680_sp300 sp300;
     u8 sp200[2][0x80];
     unk_func_80003680_spB0 spB0[4];
-    u8* temp_s0;
+    u16* temp_s0;
     u8* temp_s3;
     unk_func_80003680_sp90 sp90;
     unk_func_80003680_sp27 sp74;

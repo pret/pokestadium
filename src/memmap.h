@@ -7,16 +7,6 @@
 #define RELOCATIONS_SIZE
 #endif
 
-struct MemoryMap {
-    uintptr_t vaddr;
-    size_t size;
-};
-
-// these are probably .bss symbols in memmap.c, but until I have more
-// of bss mapped, not 100% sure if they go in that file. TODO: Migrate
-extern struct MemoryMap gSegments[16];
-extern struct MemoryMap gFragments[240];
-
 /* MIPS Relocation Types */
 #define R_MIPS_32 2
 #define R_MIPS_26 4
