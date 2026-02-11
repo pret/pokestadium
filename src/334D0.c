@@ -51,21 +51,10 @@ s32 func_800328D8(UNUSED s32 arg0) {
     return 1;
 }
 
-#ifdef NON_MATCHING
 void func_800328E4(u8 arg0) {
-    MtxF* temp_a0;
-    MtxF* temp_v0;
-
-    temp_v0 = func_800123D4(0);
-    temp_a0 = &D_800AF7C8[arg0]; // arg0 * 16?
-
-    func_8000ED4C(temp_a0, temp_v0);
-    func_8000ED4C(&temp_a0[1], func_800123D4(-1));
+    func_8000ED4C((MtxF*)((u8*)D_800AF7C8 + (arg0 << 10)), func_800123D4(0));
+    func_8000ED4C((MtxF*)((u8*)(MtxF*)((u8*)D_800AF7C8 + (arg0 << 10)) + 0x40), func_800123D4(-1));
 }
-#else
-void func_800328E4(u8);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/334D0/func_800328E4.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_80032940(u8 index) {
