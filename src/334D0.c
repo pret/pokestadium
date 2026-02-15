@@ -56,19 +56,14 @@ void func_800328E4(u8 arg0) {
     func_8000ED4C((MtxF*)((u8*)(MtxF*)((u8*)D_800AF7C8 + (arg0 << 10)) + 0x40), func_800123D4(-1));
 }
 
-#ifdef NON_MATCHING
 void func_80032940(u8 index) {
     MtxF* temp_a1;
     MtxF sp1C;
 
+    temp_a1 = ((MtxF*)((u8*)D_800AF7C8 + (index << 10)));
     func_80031EF4(&sp1C, &D_8006F088->unk_60.mtxf);
-    temp_a1 = &D_800AF7C8[index << 0x4];
     guMtxCatF(sp1C.mf, temp_a1->mf, temp_a1->mf);
 }
-#else
-void func_80032940(u8);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/334D0/func_80032940.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_80032990(u8 index) {
