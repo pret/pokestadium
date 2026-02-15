@@ -65,28 +65,26 @@ void func_80032940(u8 index) {
     guMtxCatF(sp1C.mf, temp_a1->mf, temp_a1->mf);
 }
 
-#ifdef NON_MATCHING
 void func_80032990(u8 index) {
     MtxF* temp_a0;
-    MtxF sp38;
+    
+    s32 pad[2];
+    f32 spC0;
+    f32 spBC;
+    f32 spB8;
+    
     MtxF sp78;
-    Vec3f spC0;
+    MtxF sp38;
     Vec3f sp2C;
-    MtxF* sp28;
-    u8 temp_a2;
-
-    temp_a2 = index;
-    temp_a0 = &D_800AF7C8[index << 0x4];
+    
+    temp_a0 = ((MtxF*)((u8*)D_800AF7C8 + (index << 10)));
+    
     func_80032034(temp_a0, &sp2C);
     guScaleF(sp38.mf, sp2C.x, sp2C.y, sp2C.z);
-    guMtxXFMF(sp28->mf, 0.0f, 0.0f, 0.0f, &spC0.x, &spC0.y, &spC0.z);
-    guTranslateF(sp78.mf, spC0.x, spC0.y, spC0.z);
+    guMtxXFMF(temp_a0->mf, 0.0f, 0.0f, 0.0f, &spC0, &spBC, &spB8);
+    guTranslateF(sp78.mf, spC0, spBC, spB8);
     guMtxCatF(sp38.mf, sp78.mf, temp_a0->mf);
 }
-#else
-void func_80032990(u8);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/334D0/func_80032990.s")
-#endif
 
 void func_80032A34(s32 arg0) {
     s32 i;
