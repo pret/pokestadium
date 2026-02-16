@@ -300,17 +300,17 @@ class Section:
 
         assert hdrr_magic == 0x7009, "Invalid magic value for .mdebug symbolic header"
 
-        hdrr_cbLineOffset += shift_by
-        hdrr_cbDnOffset += shift_by
-        hdrr_cbPdOffset += shift_by
-        hdrr_cbSymOffset += shift_by
-        hdrr_cbOptOffset += shift_by
-        hdrr_cbAuxOffset += shift_by
-        hdrr_cbSsOffset += shift_by
-        hdrr_cbSsExtOffset += shift_by
-        hdrr_cbFdOffset += shift_by
-        hdrr_cbRfdOffset += shift_by
-        hdrr_cbExtOffset += shift_by
+        hdrr_cbLineOffset = (hdrr_cbLineOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbDnOffset = (hdrr_cbDnOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbPdOffset = (hdrr_cbPdOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbSymOffset = (hdrr_cbSymOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbOptOffset = (hdrr_cbOptOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbAuxOffset = (hdrr_cbAuxOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbSsOffset = (hdrr_cbSsOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbSsExtOffset = (hdrr_cbSsExtOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbFdOffset = (hdrr_cbFdOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbRfdOffset = (hdrr_cbRfdOffset + shift_by) & 0xFFFFFFFF
+        hdrr_cbExtOffset = (hdrr_cbExtOffset + shift_by) & 0xFFFFFFFF
 
         new_data[0:0x60] = self.fmt.pack("HHIIIIIIIIIIIIIIIIIIIIIII", hdrr_magic, hdrr_vstamp, hdrr_ilineMax, hdrr_cbLine, \
             hdrr_cbLineOffset, hdrr_idnMax, hdrr_cbDnOffset, hdrr_ipdMax, \
