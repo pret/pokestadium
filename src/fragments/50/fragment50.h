@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+extern char** D_8267E760;
+
 void func_82600020(void);
 s32 func_82600094(s8* arg0, s8* arg1);
 s32 func_826000D8(void);

@@ -53,7 +53,7 @@ typedef struct unk_D_800FC7D0_148 {
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ u16 unk_28;
     /* 0x2A */ u8 unk_2A;
-} unk_D_800FC7D0_148; // size >= 0x2C
+} unk_D_800FC7D0_148; // size = 0x2C
 
 typedef struct unk_D_800FC7D0 {
     /* 0x000 */ struct unk_D_800FC7D0* unk_000;

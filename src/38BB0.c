@@ -488,9 +488,8 @@ void func_80038B54(u8* arg0, u32 arg1) {
     *arg0++ = arg1 & 0xFF;
 }
 
-#ifdef NON_MATCHING
 s32 func_80038B68(sp38_func_800373D8* arg0) {
-    UNUSED s32 pad[2];
+    UNUSED s32 pad[1];
     s32 i;
     ALSynConfig sp4C;
     amConfig sp40;
@@ -507,18 +506,16 @@ s32 func_80038B68(sp38_func_800373D8* arg0) {
     func_8003C1D0(arg0->unk_0C, 0, arg0->unk_10);
     alHeapInit(&D_800FC7B8, arg0->unk_0C, arg0->unk_10);
     D_800FC810 = &D_800FC7B8;
-    D_800FC7D0 = alHeapAlloc(&D_800FC7B8, 1, D_800FC7CC * sizeof(unk_D_800FC7D0));
-    func_8003C1D0(D_800FC7D0, 0, D_800FC7CC * sizeof(unk_D_800FC7D0));
+    D_800FC7D0 = alHeapDBAlloc(NULL, 0, &D_800FC7B8, 1, D_800FC7CC * sizeof(unk_D_800FC7D0));
+    func_8003C1D0((u8*)D_800FC7D0, 0, D_800FC7CC * sizeof(unk_D_800FC7D0));
 
-    D_800FC7E8 = alHeapAlloc(&D_800FC7B8, 1, arg0->unk_2C);
+    D_800FC7E8 = alHeapDBAlloc(NULL, 0, &D_800FC7B8, 1, arg0->unk_2C);
     D_800FC7EC = 0;
     D_800FC7F0 = arg0->unk_2C;
 
-    D_800FC7FC = alHeapAlloc(&D_800FC7B8, arg0->unk_04, sizeof(unk_D_800FC7D0_148));
-    D_800FC804 = NULL;
-    D_800FC800 = NULL;
-    D_800FC808 = NULL;
-    D_800FC80C = NULL;
+    D_800FC7FC = alHeapDBAlloc(NULL, 0, &D_800FC7B8, arg0->unk_04, sizeof(unk_D_800FC7D0_148));
+    D_800FC800 = D_800FC804 = NULL;
+    D_800FC808 = D_800FC80C = NULL;
     D_800FC818 = 0;
     D_800FC81C = 0;
 
@@ -563,9 +560,6 @@ s32 func_80038B68(sp38_func_800373D8* arg0) {
 
     return D_800FC7B8.cur - D_800FC7B8.base;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/38BB0/func_80038B68.s")
-#endif
 
 void func_80038E98(s32 arg0, u32 arg1) {
     u8* temp_a0;

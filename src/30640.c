@@ -1,6 +1,7 @@
 #include "30640.h"
 #include "include/math.h"
 #include "src/fragments/15/fragment15.h"
+#include "src/fragments/31/fragment31.h"
 #include "src/fragments/34/fragment34.h"
 #include "src/11BA0.h"
 #include "src/12D80.h"
@@ -36,6 +37,11 @@ typedef struct unk_func_8003013C_arg1 {
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ s16 unk_1E;
 } unk_func_8003013C_arg1; // size >= 0x20
+
+typedef struct unk_func_80031660_sp24 {
+    /* 0x00 */ u8 pad00[0x18];
+    /* 0x18 */ s32 unk_18;
+} unk_func_80031660_sp24; // size = 0x1C
 
 extern unk_func_80031270* D_80075F80;
 extern unk_func_80031270* D_80075F84;
@@ -410,7 +416,7 @@ void func_800302A4(s32 arg0, s32 arg1) {
 
 #ifdef NON_MATCHING
 s32 func_800303C8(s32 arg0, UNUSED GraphNode* arg1) {
-     char* sp16C;
+    char* sp16C;
     u8* sp40;
     char* temp_s2;
     s32 temp_v0;
@@ -665,8 +671,85 @@ unk_func_80031270* func_80031270(s16 arg0, s16 arg1, unk_D_80068BB0* arg2, unk_D
     return temp_v0;
 }
 
-void func_80031390(unk_func_80031270*);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031390.s")
+typedef union unk_func_80026268_arg0_000_raw {
+    struct {
+        u8 unk_00;
+        u8 unk_01;
+        u16 unk_02;
+    };
+    f32 raw;
+} unk_func_80026268_arg0_000_raw; // size = 0x4
+
+typedef struct unk_func_80026268_arg0_raw {
+    /* 0x00 */ unk_func_80026268_arg0_000_raw unk_00;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ u8 unk_08;
+    /* 0x09 */ u8 unk_09[4];
+    /* 0x0D */ u8 pad0D;
+    /* 0x0E */ u16 unk_0E;
+    /* 0x10 */ u32 unk_10;
+    /* 0x14 */ u16 unk_14;
+    /* 0x16 */ u16 unk_16;
+    /* 0x18 */ u16 unk_18;
+    /* 0x1A */ u16 unk_1A;
+    /* 0x1C */ u16 unk_1C;
+    /* 0x1E */ u16 unk_1E;
+    /* 0x20 */ u8 unk_20[4];
+    /* 0x24 */ u8 unk_24;
+    /* 0x25 */ u8 unk_25;
+    /* 0x26 */ u16 unk_26;
+    /* 0x28 */ u16 unk_28;
+    /* 0x2A */ u16 unk_2A;
+    /* 0x2C */ u16 unk_2C;
+    /* 0x2E */ u16 unk_2E;
+    /* 0x30 */ u8 unk_30[11];
+    /* 0x3B */ u8 unk_3B[11];
+    /* 0x46 */ u8 unk_46[11];
+    /* 0x51 */ char unk51[0x1];
+    /* 0x52 */ u8 unk_52;
+    /* 0x53 */ u8 unk_53;
+} unk_func_80026268_arg0_raw; // size = 0x54
+
+typedef struct unk_D_83403C60_raw {
+    /* 0x00 */ unk_func_80026268_arg0_raw unk_00;
+    /* 0x54 */ char unk54[0x18];
+    /* 0x6C */ u8 unk_6C;
+    /* 0x6D */ char unk6D[0x3];
+    /* 0x70 */ unk_D_83407AC8 unk_70;
+    /* 0x8A */ char unk8A[0x2];
+} unk_D_83403C60_raw; // size = 0x8C
+
+void func_80031390(unk_func_80031270* arg0) {
+    s32 sp94;
+    arg1_func_80010CA8 sp90;
+    UNUSED s32 pad[3]; // unk_func_80026268_arg0 potentially bigger?
+    unk_func_80026268_arg0 sp30;
+    unk_D_83403C60_raw* temp_s1;
+    void (*sp28)(void*, u32);
+
+    temp_s1 = (unk_D_83403C60_raw*)arg0->unk_18;
+    func_80031140(&sp30, &temp_s1->unk_70);
+    func_8000E88C(&arg0->unk_20->unk_024, 0, temp_s1->unk_00.unk_00.raw, 0); //?
+    arg0->unk_20->unk_0A6 = 0xFE;
+    sp94 = sp30.unk_00.unk_00;
+    if (sp30.unk_00.unk_00 == 0x99) {
+        sp30.unk_00.unk_00 = 0x19;
+    }
+    func_8001BEE8(&sp90, &sp30);
+    sp30.unk_00.unk_00 = sp94;
+    func_800198E4(arg0->unk_10, sp30.unk_00.unk_00, sp90);
+    func_80019CA8(arg0->unk_10);
+    func_8001BCF0(arg0->unk_20);
+    func_8001BC34(arg0->unk_20, 0, sp30.unk_00.unk_00, arg0->unk_10->unk_24->unk_08->unk_00[0]);
+    sp28 = Util_ConvertAddrToVirtAddr(&func_81002260);
+    sp28(arg0->unk_20, Util_ConvertAddrToVirtAddr(&temp_s1->unk_00.unk_09[1]));
+    func_8001BD04(arg0->unk_20, temp_s1->unk_00.unk_05);
+    func_80017464(arg0->unk_20, temp_s1->unk_00.unk_06);
+    func_8001BD9C(arg0->unk_20, temp_s1->unk_00.unk_08);
+    func_80017804(arg0->unk_20, (s16)temp_s1->unk_00.unk_09[0]);
+}
 
 void func_800314BC(unk_func_80031270* arg0) {
     MemoryBlock* sp24;
@@ -711,58 +794,56 @@ void func_800314BC(unk_func_80031270* arg0) {
     temp_v1->unk_01 = (u8) (temp_v1->unk_01 | 1);
 }
 
-#ifdef NON_MATCHING
 u8* func_80031660(unk_func_80031270* arg0) {
-    void* sp24;
+    unk_func_80031660_sp24* sp24;
     void (*sp20)();
-    u32 temp_v0_2;
-    void* v0_ptr;
 
-    sp24 = (arg0->unk_18 + 0x50);
+    sp24 = (unk_func_80031660_sp24*)((u8*)arg0->unk_18 + 0x50);
     sp20 = Util_ConvertAddrToVirtAddr(&func_8140C734);
     D_80075F84 = arg0;
     if (arg0->unk_00 == 1) {
-        if (arg0->unk_02 != 1) {
-            if (arg0->unk_02 == 2) {
+        switch (arg0->unk_02) {
+            case 2:
                 func_80031390(arg0);
                 func_800314BC(arg0);
-            }
-        } else {
-            func_80006498(&gDisplayListHead, arg0->unk_08);
-            temp_v0_2 = arg0->unk_34;
-            if ((temp_v0_2 == -1U) || (temp_v0_2 == 0)) {
-                func_8000699C(&gDisplayListHead, 1);
-            } else if (temp_v0_2 < 0x10000U) {
-                func_8000699C(&gDisplayListHead, temp_v0_2 & 0xFFFF);
-            } else {
-                func_8000699C(&gDisplayListHead, 0xA6BF);
-            }
-            func_80015348();
-            v0_ptr = Util_ConvertAddrToVirtAddr(&D_8140E6B8);
-            v0_ptr = (s32) sp24;
-            sp20();
-            func_80015094(arg0->unk_1C);
+                break;
+            case 1:
+                func_80006498(&gDisplayListHead, arg0->unk_08);
+
+                if ((arg0->unk_34 == -1) || (arg0->unk_34 == 0)) {
+                    func_8000699C(&gDisplayListHead, 1);
+                } else if (arg0->unk_34 < 0x10000U) {
+                    func_8000699C(&gDisplayListHead, arg0->unk_34);
+                } else {
+                    func_8000699C(&gDisplayListHead, 0xA6BF);
+                }
+                func_80015348();
+                *((s32*)Util_ConvertAddrToVirtAddr(&D_8140E6B8)) = sp24->unk_18;
+                sp20();
+                func_80015094(arg0->unk_1C);
+                break;
+            default:
+                break;
         }
+ 
     }
-    switch (arg0->unk_00) {                           /* irregular */
-    case 0:
-        arg0->unk_00 = 1U;
-        arg0->unk_02 = 2;
-        break;
-    case 1:
-        arg0->unk_02--;
-        if (arg0->unk_02 <= 0) {
-            arg0->unk_00 = 2U;
-        }
-        break;
-    case 2:
-        break;
+    switch (arg0->unk_00) {
+        case 0:
+            arg0->unk_00 = 1;
+            arg0->unk_02 = 2;
+            break;
+        case 1:
+            arg0->unk_02--;
+            if (arg0->unk_02 <= 0) {
+                arg0->unk_00 = 2;
+            }
+            break;
+        case 2:
+            break;
     }
     return arg0->unk_08->img_p;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80031660.s")
-#endif
+
 s32 func_800317D8(unk_func_80031270* arg0) {
     s32 var_v1;
     s32 sp1C;
