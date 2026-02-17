@@ -1,7 +1,9 @@
 #include "fragment31.h"
 #include "src/fragments/7/fragment7.h"
 #include "src/fragments/8/fragment8.h"
+#include "src/fragments/50/fragment50.h"
 #include "src/6A40.h"
+#include "src/12D80.h"
 #include "src/32D10.h"
 
 typedef struct {
@@ -12,12 +14,14 @@ typedef struct {
 } Keyframe;  // size = 0x08
 
 extern Keyframe* D_8100419C[];
-extern s32 D_810041D0;
+extern s32 D_810041D0[20];
+extern char D_810047D0[3];
 extern s32 D_81004B70;
 extern s32 D_81004B80;
 extern s32 D_81004B90;
 extern s32 D_81004BA0;
 extern s32 D_81004BB0;
+extern char D_81004BB8[0x28];
 
 #ifdef NON_MATCHING
 void func_81002DC0(Gfx* gfx, s32 arg1, s32 arg2) {
@@ -309,8 +313,50 @@ s32 func_81003A24(s8* arg0) {
     return var_v1;
 }
 
-void func_81003A54(Gfx*); 
+#ifdef NON_MATCHING
+void func_81003A54(Gfx* gfx) {
+    u8 sp4D;
+    char* sp34;
+    Mtx* sp30;
+    s32 sp2C;
+    u8 temp_t0;
+    u8 var_v1;
+
+    temp_t0 = D_800AF770[(D_8006F09C->unk_0A6 % 5) & 0xFF];
+    switch (D_81004BB0) {
+    case 0:
+        var_v1 = (((s32) (temp_t0 + 1) / 100) + 0x10) & 0xFF;
+        break;
+    case 1:
+        var_v1 = (((s32) ((s32) (temp_t0 + 1) % 100) / 10) + 0x10) & 0xFF;
+        break;
+    case 2:
+        var_v1 = (((s32) (temp_t0 + 1) % 10) + 0x10) & 0xFF;
+        break;
+    default:
+        sp34 = func_8002D7C0(0, 0, D_8267E760, temp_t0);;
+        sprintf(D_81004BB8, D_810047D0, sp34);
+        sp4D = func_8001E730((u8) D_81004BB8[(D_81004BB0 - 3) & 0xFFFF]);
+        sp2C = 0xA - func_81003A24((s8*)sp34);
+        sp30 = func_80005F5C(0x40);;
+        guTranslate(sp30, (f32) sp2C * 32.0f, 0.0f, 0.0f);
+        var_v1 = sp4D;
+        {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xDA380001;    _gfx->words.w1 = sp30;    }
+        break;
+    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xFD6800FF;    _gfx->words.w1 = Util_ConvertAddrToVirtAddr(D_3000000[((var_v1 & 0xF) * 0x10) + (((s32) (var_v1 & 0xF0) >> 4) << 0xC)]);    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF5680600;    _gfx->words.w1 = 0x07094250;    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xE6000000;    _gfx->words.w1 = 0;    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF4000000;    _gfx->words.w1 = 0x07040040;    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xE7000000;    _gfx->words.w1 = 0;    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF5680600;    _gfx->words.w1 = 0x94250;    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF2000000;    _gfx->words.w1 = 0x40040;    }
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xDF000000;    _gfx->words.w1 = 0;    }
+    D_81004BB0 += 1;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/31/fragment31_258080/func_81003A54.s")
+#endif
 
 void func_81003CF0(s32 arg0, DisplayListState* state) {
     Gfx* gfx;

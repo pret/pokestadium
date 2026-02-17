@@ -226,9 +226,167 @@ s32* func_8002CD58(s32* arg0, s32* arg1, s32* arg2, s32 (*arg3)(s32, s32)) {
                                       : arg0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002CE34.s")
+#ifdef NON_MATCHING
+void func_8002CE34(void** base, s32 n, s32 (*cmp)(s32, s32)) {
+    void** sp8C;
+    s32 temp_s1;
+    s32 temp_s2;
+    s32 temp_s3;
+    void* temp_s4;
+    s32 temp_s4_2;
+    void* temp_t7_2;
+    void* temp_t8;
+    void* temp_v0;
+    s32 temp_v0_2;
+    void* temp_v0_3;
+    void* temp_v0_4;
+    void* temp_v0_5;
+    s32 temp_v0_6;
+    s32 temp_v0_7;
+    s32 var_a2_2;
+    s32 var_a2_3;
+    s32 var_v0;
+    s32 var_v0_2;
+    void** var_a2;
+    void** temp_t5;
+    void** temp_t7;
+    void** var_s0;
+    void** var_s0_2;
+    void** var_s1;
+    void** var_s1_2;
+    void** var_s2;
+    void** var_s2_2;
+    void** var_s3;
+    s32 pad[1];
+    void** sp44;
 
-void func_8002CE34(u8*, s32, s32 (*arg1)(s32, s32));
+    while(1) {
+        var_s2 = base;
+        if (n < 7) {
+            temp_t7 = n + base;
+            sp44 = temp_t7;
+            var_s1 = base;
+            if (base < temp_t7) {
+                do {
+                    var_s0 = var_s1;
+                    if ((base < var_s1) && (cmp(*(var_s1 - 1), *var_s1) > 0)) {
+                        while(1) {    
+                            temp_v0 = *var_s0;
+                            temp_t8 = *(var_s0 - 1);
+                            var_s0 -= 1;
+                            *var_s0 = temp_v0;
+                            *(var_s0 + 1) = temp_t8;
+                            if (base < var_s0) {
+                                if (cmp(*(var_s0 - 1), *var_s0) > 0) {
+                                    continue;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    var_s1 += 1;
+                } while (var_s1 < sp44);
+            }
+        } else {
+            sp8C = ((n / 2) * 1) + base;
+            if (n >= 8) {
+                var_a2 = ((n * 4) + base) - 4;
+                if (n >= 0x29) {
+                    temp_v0_2 = n / 8;
+                    temp_s1 = temp_v0_2 * 4;
+                    temp_s3 = temp_v0_2 * 8;
+                    var_s2 = func_8002CD58(base, temp_s1 + base, temp_s3 + base, cmp);
+                    sp8C = func_8002CD58(sp8C - temp_s1, sp8C, &sp8C[temp_v0_2], cmp);
+                    var_a2 = func_8002CD58(var_a2 - temp_s3, var_a2 - temp_s1, var_a2, cmp);
+                }
+                sp8C = func_8002CD58(var_s2, sp8C, var_a2, cmp);
+            }
+            temp_t5 = (n * 4) + base;
+            var_s3 = temp_t5 - 4;
+            temp_s4 = *sp8C;
+            sp44 = temp_t5;
+            var_s0_2 = var_s3;
+            var_s2_2 = base;
+            var_s1_2 = base;
+    loop_14:
+            if (var_s0_2 >= var_s1_2) {
+                var_v0 = cmp(*var_s1_2, temp_s4);
+                if (var_v0 <= 0) {
+        loop_16:
+                    if (var_v0 == 0) {
+                        temp_v0_3 = *var_s2_2;
+                        var_s2_2 += 1;
+                        *(var_s2_2 - 1) = *var_s1_2;
+                        *var_s1_2 = temp_v0_3;
+                    }
+                    var_s1_2 += 1;
+                    if (var_s0_2 >= var_s1_2) {
+                        var_v0 = cmp(*var_s1_2, temp_s4);
+                        if (var_v0 <= 0) {
+                            goto loop_16;
+                        }
+                    }
+                }
+            }
+            if (var_s0_2 >= var_s1_2) {
+                var_v0_2 = cmp(*var_s0_2, temp_s4);
+                if (var_v0_2 >= 0) {
+        loop_22:
+                    if (var_v0_2 == 0) {
+                        temp_t7_2 = *var_s3;
+                        temp_v0_4 = *var_s0_2;
+                        var_s3 -= 1;
+                        *var_s0_2 = temp_t7_2;
+                        *(var_s3 + 1) = temp_v0_4;
+                    }
+                    var_s0_2 -= 1;
+                    if (var_s0_2 >= var_s1_2) {
+                        var_v0_2 = cmp(*var_s0_2, temp_s4);
+                        if (var_v0_2 >= 0) {
+                            goto loop_22;
+                        }
+                    }
+                }
+            }
+            if (var_s0_2 >= var_s1_2) {
+                temp_v0_5 = *var_s1_2;
+                var_s1_2 += 1;
+                *(var_s1_2 - 1) = *var_s0_2;
+                var_s0_2 -= 1;
+                *(var_s0_2 + 1) = temp_v0_5;
+                goto loop_14;
+            }
+            temp_s4_2 = (s32) (var_s1_2 - var_s2_2);
+            temp_v0_6 = (s32) (var_s2_2 - base);
+            if (temp_v0_6 < temp_s4_2) {
+                var_a2_2 = temp_v0_6;
+            } else {
+                var_a2_2 = temp_s4_2;
+            }
+            func_8002CCC4(base, var_s1_2 - var_a2_2, var_a2_2);
+            temp_s2 = (s32) (var_s3 - var_s0_2);
+            temp_v0_7 = ((s32) (sp44 - var_s3)) - 1;
+            if (temp_s2 < temp_v0_7) {
+                var_a2_3 = temp_s2;
+            } else {
+                var_a2_3 = temp_v0_7;
+            }
+            func_8002CCC4(var_s1_2, sp44 - var_a2_3, var_a2_3);
+            if (temp_s4_2 >= 2) {
+                func_8002CE34(base, temp_s4_2, cmp);
+            }
+            if (temp_s2 >= 2) {
+                base = sp44 - temp_s2;
+                n = temp_s2;
+                continue;
+            }
+        }
+        return;
+    }
+}
+#else
+#pragma GLOBAL_ASM("asm/us/nonmatchings/2D340/func_8002CE34.s")
+#endif
 
 void func_8002D180(unk_func_8830867C_02C_0CC* arg0, s32 (*arg1)(s32, s32)) {
     func_8002CE34(arg0->unk_00, arg0->unk_08, arg1);
