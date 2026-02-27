@@ -1,12 +1,10 @@
 #include "C970.h"
 
-typedef struct unk_func_8000C104_arg1 {
-    /* 0x000 */ u8 value;
-    /* 0x001 */ u8  pad01[0x0F];
-    /* 0x010 */ u16 unk_10;
-    /* 0x012 */ u8  pad12[0xEE];
-    /* 0x100 */ u16 unk_100;
-} unk_func_8000C104_arg1; // size >= 0x102
+typedef struct JpegHuffmanTableOld {
+    /* 0x000 */ u8 codeOffs[16];
+    /* 0x010 */ u16 dcCodes[120];
+    /* 0x100 */ u16 acCodes[256];
+} JpegHuffmanTableOld; // size >= 0x300
 
 void JpegUtils_ProcessQuantizationTable(u8* dqt, JpegQuantizationTable* qt, u8 num_tables) {
     u8 i;
@@ -124,28 +122,24 @@ s32 JpegUtils_ProcessHuffmanTable(u8* dht, JpegHuffmanTable* ht, u8* codesLength
     return 0;
 }
 
-#ifdef NON_MATCHING
-void func_8000C104(u8* arg0, unk_func_8000C104_arg1* arg1, u8* arg2, u16* arg3, s16 arg4, u8 arg5) {
-    s16 i;
-    u8 temp_v1;
+void JpegUtils_SetHuffmanTableOld(u8* data, JpegHuffmanTableOld* ht, u8* codesLengths, u16* codes, s16 count, u8 isAc) {
+    s16 idx;
+    u8 a;
 
-    for (i = 0; i < arg4; i++) {
-        temp_v1 = arg0[i];
-        if (arg5 != 0) {
-            arg1[temp_v1 * 2].unk_100 = arg3[i];
-            arg1[temp_v1].value = arg2[i];
+    for (idx = 0; idx < count; idx++) {
+        a = data[idx];
+        if (isAc) {
+            ht->acCodes[a] = codes[idx];
+            ht->codeOffs[a] = codesLengths[idx];
         } else {
-            arg1[temp_v1 * 2].unk_10 = arg3[i];
-            arg1[temp_v1].value = arg2[i];
+            ht->dcCodes[a] = codes[idx];
+            ht->codeOffs[a] = codesLengths[idx];
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000C104.s")
-#endif
 
 #ifdef NON_MATCHING
-s32 func_8000C1AC(u8* arg0, unk_func_8000C104_arg1* arg1, u8* arg2, u16* arg3) {
+s32 func_8000C1AC(u8* arg0, JpegHuffmanTableOld* arg1, u8* arg2, u16* arg3) {
     u8 sp2F;
     s16 sp2C;
     s16 temp_v0;
@@ -161,7 +155,7 @@ s32 func_8000C1AC(u8* arg0, unk_func_8000C104_arg1* arg1, u8* arg2, u16* arg3) {
     if (JpegUtils_GetHuffmanCodes(arg2, arg3) != temp_v0) {
         return 1;
     }
-    func_8000C104((u8*)temp_s0 + 0x10, arg1, arg2, arg3, temp_v0, sp2F);
+    JpegUtils_SetHuffmanTableOld((u8*)temp_s0 + 0x10, arg1, arg2, arg3, temp_v0, sp2F);
     return 0;
 }
 #else
