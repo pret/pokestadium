@@ -39,44 +39,33 @@ s32 JpegUtils_ParseHuffmanCodesLengths(u8* ptr, u8* codesLengths) {
     return count;
 }
 
-#ifdef NON_MATCHING
-s16 func_8000BE5C(u8* arg0, u16* arg1) {
-    s16 var_v0;
-    s16 var_v1;
-    s32 temp_t6;
-    u8 temp_t0;
-    u8 var_a2;
-    u8 var_a3;
+s16 JpegUtils_GetHuffmanCodes(u8* codesLengths, u16* codes) {
+    s16 idx = 0;
+    u16 code = 0;
+    u8 lastLen = codesLengths[0];
 
-    var_a2 = *arg0;
-    var_v1 = 0;
-    var_v0 = 0;
-    var_a3 = var_a2;
+    while (true) {
+        while (true) {
+            codes[idx++] = code++;
 
-    while(1) {
-        temp_t6 = var_v1 * 2;
-        var_v1 += 1;
-        arg1[temp_t6] = var_v0;
-        temp_t0 = arg0[var_v1];
-        var_v0 = (var_v0 + 1) & 0xFFFF;
-        if (var_a3 == temp_t0) {
-            continue;
+            if (codesLengths[idx] != lastLen) {
+                break;
+            }
         }
-        if (temp_t0 != 0) {
-            do {
-                var_a3 = (var_a2 + 1) & 0xFF;
-                var_v0 = (var_v0 * 2) & 0xFFFF;
-                var_a2 = var_a3;
-            } while (temp_t0 != var_a3);
-            continue;
+
+        if (codesLengths[idx] == 0) {
+            break;
         }
-        break;
+
+        while (true) {
+            if (code <<= 1, codesLengths[idx] == ++lastLen) {
+                break;
+            }
+        }
     }
-    return var_v1;
+
+    return idx;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BE5C.s")
-#endif
 
 u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes) {
     u8 idx;
@@ -105,7 +94,7 @@ s16 func_8000BF70(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, u8 arg4
     if ((temp_v0 == 0) || ((arg4 != 0) && (temp_v0 >= 0x101)) || ((arg4 == 0) && (temp_v0 >= 0x11))) {
         return 0;
     }
-    if (func_8000BE5C(arg2, arg3) != temp_v0) {
+    if (JpegUtils_GetHuffmanCodes(arg2, arg3) != temp_v0) {
         return 0;
     }
     if (temp_v0 != JpegUtils_SetHuffmanTable(arg0, arg1, arg3)) {
@@ -170,7 +159,7 @@ s32 func_8000C1AC(u8* arg0, unk_func_8000C104_arg1* arg1, u8* arg2, u16* arg3) {
         return 1;
     }
     sp2C = temp_v0;
-    if (func_8000BE5C(arg2, arg3) != temp_v0) {
+    if (JpegUtils_GetHuffmanCodes(arg2, arg3) != temp_v0) {
         return 1;
     }
     func_8000C104((u8*)temp_s0 + 0x10, arg1, arg2, arg3, temp_v0, sp2F);
