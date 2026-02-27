@@ -8,30 +8,18 @@ typedef struct unk_func_8000C104_arg1 {
     /* 0x100 */ u16 unk_100;
 } unk_func_8000C104_arg1; // size >= 0x102
 
-#ifdef NON_MATCHING
-void func_8000BD70(u8* in_quantization_tables, u8* out_quantization_tables, s32 num_tables) {
-    u8* src;
-    u8* dst;
-    s32 i;
-    s32 j;
-    s32 count;
+void JpegUtils_ProcessQuantizationTable(u8* dqt, JpegQuantizationTable* qt, u8 num_tables) {
+    u8 i;
 
-    src = in_quantization_tables;
-    count = num_tables & 0xFF;
+    for (i = 0; i < num_tables; i++) {
+        u8 j;
 
-    for (i = 0; i < count; i++) {
-        src++;
-
-        for (j = 0; j < 0x40; j++) {
-            dst = out_quantization_tables + (i << 7) + (j * 2);
-            *(s16*)dst = (s16)*src;
-            src++;
+        dqt++;
+        for (j = 0; j < 64; j++) {
+            qt[i].table[j] = *dqt++;
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BD70.s")
-#endif
 
 #ifdef NON_MATCHING
 s16 func_8000BDD8(u8* arg0, u16* arg1) {

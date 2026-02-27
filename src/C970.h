@@ -10,7 +10,11 @@ typedef struct JpegHuffmanTable {
     /* 0x50 */ u8* symbols;
 } JpegHuffmanTable; // size = 0x54
 
-void func_8000BD70(u8* in_quantization_tables, u8* out_quantization_tables, s32 num_tables);
+typedef struct JpegQuantizationTable {
+    /* 0x00 */ u16 table[8*8];
+} JpegQuantizationTable; // size = 0x80
+
+void JpegUtils_ProcessQuantizationTable(u8* dqt, JpegQuantizationTable* qt, u8 num_tables);
 s32 func_8000C02C(u8*, JpegHuffmanTable*, u8*, u16*, s32);
 u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes);
 
