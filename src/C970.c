@@ -102,7 +102,7 @@ s16 func_8000BE5C(u8* arg0, u16* arg1) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BE5C.s")
 #endif
 
-u16 func_8000BEC8(u8* data, JpegHuffmanTable* ht, u16* codes) {
+u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes) {
     u8 idx;
     u16 codeOff = 0;
 
@@ -132,7 +132,7 @@ s16 func_8000BF70(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, u8 arg4
     if (func_8000BE5C(arg2, arg3) != temp_v0) {
         return 0;
     }
-    if (temp_v0 != func_8000BEC8(arg0, arg1, arg3)) {
+    if (temp_v0 != JpegUtils_SetHuffmanTable(arg0, arg1, arg3)) {
         return 0;
     }
     return temp_v0;

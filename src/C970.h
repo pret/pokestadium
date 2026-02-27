@@ -12,6 +12,6 @@ typedef struct JpegHuffmanTable {
 
 void func_8000BD70(u8* in_quantization_tables, u8* out_quantization_tables, s32 num_tables);
 s32 func_8000C02C(u8*, JpegHuffmanTable*, u8*, u16*, s32);
-u16 func_8000BEC8(u8* data, JpegHuffmanTable* ht, u16* codes);
+u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes);
 
 #endif // _C970_H_
