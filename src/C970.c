@@ -21,35 +21,23 @@ void JpegUtils_ProcessQuantizationTable(u8* dqt, JpegQuantizationTable* qt, u8 n
     }
 }
 
-#ifdef NON_MATCHING
-s16 func_8000BDD8(u8* arg0, u16* arg1) {
-    s16 var_a2;
-    s16 var_v1;
-    s8 i;
-    s8 var_v0;
-    u8* temp_a1;
+s32 JpegUtils_ParseHuffmanCodesLengths(u8* ptr, u8* codesLengths) {
+    u8 off = 1;
+    s16 count = 0;
+    s16 idx = 1;
 
-    var_v0 = 1;
-    var_v1 = 0;
-    var_a2 = 1;
-    for (i = 1; i < 0x11; i = (var_v0 + 1) & 0xFF) {
-        temp_a1 = &arg0[i];
-        if ((s32) temp_a1[-1] > 0) {
-            do {
-                arg1[var_v1] = var_v0;
-                var_a2 += 1;
-                var_v1 += 1;
-            } while ((s32) temp_a1[-1] >= var_a2);
-            var_a2 = 1;
+    while (off < 0x11) {
+        while (idx <= ptr[off - 1]) {
+            codesLengths[count++] = off;
+            idx++;
         }
-        var_v0 = i;
+        idx = 1;
+        off++;
     }
-    arg1[var_v1] = 0;
-    return var_v1;
+
+    codesLengths[count] = 0;
+    return count;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BDD8.s")
-#endif
 
 #ifdef NON_MATCHING
 s16 func_8000BE5C(u8* arg0, u16* arg1) {
@@ -113,7 +101,7 @@ u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes) {
 s16 func_8000BF70(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, u8 arg4) {
     s16 temp_v0;
 
-    temp_v0 = func_8000BDD8(arg2, arg3);
+    temp_v0 = JpegUtils_GetHuffmanCodes(arg2, arg3);
     if ((temp_v0 == 0) || ((arg4 != 0) && (temp_v0 >= 0x101)) || ((arg4 == 0) && (temp_v0 >= 0x11))) {
         return 0;
     }
@@ -196,7 +184,7 @@ s32 func_8000C1AC(u8* arg0, unk_func_8000C104_arg1* arg1, u8* arg2, u16* arg3) {
 
     temp_s0 = arg0 + 1;
     sp2F = (u8) ((s32) *arg0 >> 4);
-    temp_v0 = func_8000BDD8(temp_s0, arg2);
+    temp_v0 = JpegUtils_GetHuffmanCodes(temp_s0, arg2);
     if ((temp_v0 == 0) || ((sp2F != 0) && (temp_v0 >= 0x101)) || ((sp2F == 0) && (temp_v0 >= 0x11))) {
         return 1;
     }
