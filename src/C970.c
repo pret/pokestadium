@@ -102,32 +102,27 @@ s16 func_8000BE5C(u8* arg0, u16* arg1) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BE5C.s")
 #endif
 
-#ifdef NON_MATCHING
-s8 func_8000BEC8(u8* arg0, unk_func_80003680_spB0* arg1, u16* arg2) {
-    s32 i;
-    s32 temp_t4;
-    s8 var_v1;
+u16 func_8000BEC8(u8* data, JpegHuffmanTable* ht, u16* codes) {
+    u8 idx;
+    u16 codeOff = 0;
 
-    var_v1 = 0;
-    for (i = 0; i < 16; i = (i + 1) & 0xFF) {
-        if (arg0[i] != 0) {
-            arg1->unk_00[i] = var_v1;
-            arg1->unk_10[i] = arg2[var_v1];
-            temp_t4 = ((var_v1 + arg0[i]) - 1) & 0xFFFF;
-            var_v1 = (temp_t4 + 1);
-            arg1->unk_30[i] = arg2[temp_t4];
+    for (idx = 0; idx < 0x10; idx++) {
+        if (data[idx]) {
+            ht->codeOffs[idx] = codeOff;
+            ht->codesA[idx] = codes[codeOff];
+            codeOff += data[idx] - 1;
+            ht->codesB[idx] = codes[codeOff];
+            codeOff++;
         } else {
-            arg1->unk_30[i] = 0xFFFF;
+            ht->codesB[idx] = 0xFFFF;
         }
     }
-    return var_v1;
+
+    return codeOff;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BEC8.s")
-#endif
 
 #ifdef NON_MATCHING
-s16 func_8000BF70(u8* arg0, unk_func_80003680_spB0* arg1, u8* arg2, u16* arg3, u8 arg4) {
+s16 func_8000BF70(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, u8 arg4) {
     s16 temp_v0;
 
     temp_v0 = func_8000BDD8(arg2, arg3);
@@ -147,7 +142,7 @@ s16 func_8000BF70(u8* arg0, unk_func_80003680_spB0* arg1, u8* arg2, u16* arg3, u
 #endif
 
 #ifdef NON_MATCHING
-s32 func_8000C02C(u8* arg0, unk_func_80003680_spB0* arg1, u8* arg2, u16* arg3, s32 arg4) {
+s32 func_8000C02C(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, s32 arg4) {
     s32 temp_at;
     s32 temp_lo;
     s32 temp_t8;
@@ -170,7 +165,7 @@ s32 func_8000C02C(u8* arg0, unk_func_80003680_spB0* arg1, u8* arg2, u16* arg3, s
             }
             temp_t8 = (var_s1 + 1) & 0xFF;
             temp_at = temp_t8 < (s32) arg4;
-            arg1[temp_lo].unk_50 = temp_s0_2;
+            arg1[temp_lo].symbols = temp_s0_2;
             var_s1 = temp_t8;
             var_s0 = temp_s0_2 + temp_v0;
             if (temp_at == 0) {

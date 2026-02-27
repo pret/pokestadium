@@ -119,7 +119,7 @@ void func_80003558(UnkStruct80001380* arg0, unk_func_80003680_sp90* arg1) {
     osCreateMesgQueue(&arg0->queue, &arg0->mesg, 1);
 }
 
-void func_80003608(unk_func_80003680_sp27* arg0, unk_func_80003680_spB0* arg1, unk_func_80003680_sp300* arg2) {
+void func_80003608(unk_func_80003680_sp27* arg0, JpegHuffmanTable* arg1, unk_func_80003680_sp300* arg2) {
     arg0->unk_00 = arg2->start_of_scan;
     arg0->unk_04 = arg2->unk_00;
     arg0->unk_05 = 2;
@@ -143,7 +143,7 @@ s32 func_80003680(u32 addr, s32 arg1, u8* arg2) {
     UnkStruct80001380 sp318;
     unk_func_80003680_sp300 sp300;
     u8 sp200[2][0x80];
-    unk_func_80003680_spB0 spB0[4];
+    JpegHuffmanTable spB0[4];
     u16* temp_s0;
     u8* temp_s3;
     unk_func_80003680_sp90 sp90;

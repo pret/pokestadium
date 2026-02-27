@@ -87,7 +87,7 @@ typedef void (*ret_func_80004454)(void);
 s32 func_800033B0(u8* arg0);
 void func_800033C8(unk_func_80003680_sp300* arg0, u8* arg1);
 void func_80003558(UnkStruct80001380* arg0, unk_func_80003680_sp90* arg1);
-void func_80003608(unk_func_80003680_sp27* arg0, unk_func_80003680_spB0* arg1, unk_func_80003680_sp300* arg2);
+void func_80003608(unk_func_80003680_sp27* arg0, JpegHuffmanTable* arg1, unk_func_80003680_sp300* arg2);
 void func_80003648(unk_func_80003680_sp90* arg0, u8(arg1)[2][0x80], unk_func_80003680_sp300* arg2);
 s32 func_80003680(u32 addr, s32 arg1, u8* arg2);
 void func_80003860(void);

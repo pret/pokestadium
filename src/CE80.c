@@ -14,10 +14,10 @@ s32 func_8000C280(unk_func_80003680_sp27* arg0, u32 arg1, u32 arg2, u8 arg3, unk
     s16 sp60;
     u32 i;
     s32 sp58;
-    unk_func_80003680_spB0* temp_fp;
-    unk_func_80003680_spB0* temp_s4;
-    unk_func_80003680_spB0* temp_s5;
-    unk_func_80003680_spB0* temp_s7;
+    JpegHuffmanTable* temp_fp;
+    JpegHuffmanTable* temp_s4;
+    JpegHuffmanTable* temp_s5;
+    JpegHuffmanTable* temp_s7;
 
     sp58 = 0;
     D_800A82D0 = arg0->unk_00;
@@ -93,7 +93,7 @@ s32 func_8000C280(unk_func_80003680_sp27* arg0, u32 arg1, u32 arg2, u8 arg3, unk
 #endif
 
 #ifdef NON_MATCHING
-s32 func_8000C4A8(unk_func_80003680_spB0* arg0, unk_func_80003680_spB0* arg1, s16* arg2, s16* arg3) {
+s32 func_8000C4A8(JpegHuffmanTable* arg0, JpegHuffmanTable* arg1, s16* arg2, s16* arg3) {
     s8 i;
     s8 sp36;
     s16 sp34;
@@ -146,7 +146,7 @@ typedef struct sp24_func_8000C644 {
 } sp24_func_8000C644;
 
 #ifdef NON_MATCHING
-s32 func_8000C644(unk_func_80003680_spB0* arg0, s16* arg1, s8* arg2) {
+s32 func_8000C644(JpegHuffmanTable* arg0, s16* arg1, s8* arg2) {
     u8 i;
     sp24_func_8000C644 sp24;
     s16 temp_v0;
@@ -157,7 +157,7 @@ s32 func_8000C644(unk_func_80003680_spB0* arg0, s16* arg1, s8* arg2) {
     for (i = 0; i < 16; i++) {
         sp24.unk_00 = temp_v0 >> (0xF - i);
 
-        if ((arg0->unk_30[i] != 0xFFFF) && !(arg0->unk_30[i] < sp24.unk_00)) {
+        if ((arg0->codesB[i] != 0xFFFF) && !(arg0->codesB[i] < sp24.unk_00)) {
             break;
         }
     }
@@ -166,7 +166,7 @@ s32 func_8000C644(unk_func_80003680_spB0* arg0, s16* arg1, s8* arg2) {
         return 1;
     }
 
-    sp24.unk_02 = *(u8*)(((arg0->unk_00[i] + sp24.unk_00) - arg0->unk_10[i]) + arg0->unk_50);
+    sp24.unk_02 = *(u8*)(((arg0->codeOffs[i] + sp24.unk_00) - arg0->codesA[i]) + arg0->symbols);
     *arg2 = sp24.unk_02 >> 4;
 
     D_800A82D8 = (D_800A82D8 + i) - 0xF;
