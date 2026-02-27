@@ -2,7 +2,7 @@
 #define _CE80_H_
 
 #include "global.h"
-#include "C970.h"
+#include "jpegutils.h"
 
 typedef struct unk_func_80003680_sp27 {
     /* 0x00 */ s32 unk_00;

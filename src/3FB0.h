@@ -3,7 +3,7 @@
 
 #include "global.h"
 #include "5580.h"
-#include "C970.h"
+#include "jpegutils.h"
 #include "CE80.h"
 #include "src/memmap.h"
 #include "src/memory.h"

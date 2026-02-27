@@ -1,5 +1,5 @@
-#ifndef _C970_H_
-#define _C970_H_
+#ifndef JPEGUTILS_H
+#define JPEGUTILS_H
 
 #include "global.h"
 
@@ -18,4 +18,4 @@ void JpegUtils_ProcessQuantizationTable(u8* dqt, JpegQuantizationTable* qt, u8 n
 s32 JpegUtils_ProcessHuffmanTable(u8*, JpegHuffmanTable*, u8*, u16*, u8);
 u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes);
 
-#endif // _C970_H_
+#endif // JPEGUTILS_H

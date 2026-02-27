@@ -1,4 +1,4 @@
-#include "C970.h"
+#include "jpegutils.h"
 
 typedef struct JpegHuffmanTableOld {
     /* 0x000 */ u8 codeOffs[16];
