@@ -160,7 +160,7 @@ s32 func_80003680(u32 addr, s32 arg1, u8* arg2) {
 
     func_800033C8(&sp300, arg2);
     JpegUtils_ProcessQuantizationTable(sp300.quantization_table, sp200, 2);
-    func_8000C02C(sp300.huffman_table, spB0, temp_s3, temp_s0, 4);
+    JpegUtils_ProcessHuffmanTable(sp300.huffman_table, spB0, temp_s3, temp_s0, 4);
 
     Util_Free(temp_s0);
     Util_Free(temp_s3);

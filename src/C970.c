@@ -117,43 +117,24 @@ s16 func_8000BF70(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, u8 arg4
 #pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000BF70.s")
 #endif
 
-#ifdef NON_MATCHING
-s32 func_8000C02C(u8* arg0, JpegHuffmanTable* arg1, u8* arg2, u16* arg3, s32 arg4) {
-    s32 temp_at;
-    s32 temp_lo;
-    s32 temp_t8;
-    s32 temp_v0;
-    s32 var_s1;
-    u8* var_s0;
-    u8* temp_s0;
-    u8* temp_s0_2;
+s32 JpegUtils_ProcessHuffmanTable(u8* dht, JpegHuffmanTable* ht, u8* codesLengths, u16* codes, u8 count) {
+    u8 idx;
+    u32 codeCount;
 
-    var_s0 = arg0;
-    var_s1 = 0;
-    if ((s32) arg4 > 0) {
-        while(1) {            
-            temp_lo = var_s1 * 0x54;
-            temp_s0 = var_s0 + 1;
-            temp_v0 = func_8000BF70(temp_s0, &arg1[temp_lo], arg2, arg3, (s32) *var_s0 >> 4);
-            temp_s0_2 = temp_s0 + 0x10;
-            if (temp_v0 == 0) {
-                return 1;
-            }
-            temp_t8 = (var_s1 + 1) & 0xFF;
-            temp_at = temp_t8 < (s32) arg4;
-            arg1[temp_lo].symbols = temp_s0_2;
-            var_s1 = temp_t8;
-            var_s0 = temp_s0_2 + temp_v0;
-            if (temp_at == 0) {
-                return 0;
-            }
+    for (idx = 0; idx < count; idx++) {
+        u32 ac = (*dht++ >> 4);
+
+        codeCount = func_8000BF70(dht, &ht[idx], codesLengths, codes, ac);
+        if (codeCount == 0) {
+            return 1;
         }
+
+        dht += 0x10;
+        ht[idx].symbols = dht;
+        dht += codeCount;
     }
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000C02C.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_8000C104(u8* arg0, unk_func_8000C104_arg1* arg1, u8* arg2, u16* arg3, s16 arg4, u8 arg5) {

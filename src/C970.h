@@ -15,7 +15,7 @@ typedef struct JpegQuantizationTable {
 } JpegQuantizationTable; // size = 0x80
 
 void JpegUtils_ProcessQuantizationTable(u8* dqt, JpegQuantizationTable* qt, u8 num_tables);
-s32 func_8000C02C(u8*, JpegHuffmanTable*, u8*, u16*, s32);
+s32 JpegUtils_ProcessHuffmanTable(u8*, JpegHuffmanTable*, u8*, u16*, u8);
 u16 JpegUtils_SetHuffmanTable(u8* data, JpegHuffmanTable* ht, u16* codes);
 
 #endif // _C970_H_
