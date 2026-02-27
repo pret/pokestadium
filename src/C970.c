@@ -138,26 +138,22 @@ void JpegUtils_SetHuffmanTableOld(u8* data, JpegHuffmanTableOld* ht, u8* codesLe
     }
 }
 
-#ifdef NON_MATCHING
-s32 func_8000C1AC(u8* arg0, JpegHuffmanTableOld* arg1, u8* arg2, u16* arg3) {
-    u8 sp2F;
-    s16 sp2C;
-    s16 temp_v0;
-    u8* temp_s0;
+u32 JpegUtils_ProcessHuffmanTableImplOld(u8* dht, JpegHuffmanTableOld* ht, u8* codesLengths, u16* codes) {
+     u8 isAc = *dht++ >> 4;
+    s16 count2;
+    s32 count;
 
-    temp_s0 = arg0 + 1;
-    sp2F = (u8) ((s32) *arg0 >> 4);
-    temp_v0 = JpegUtils_GetHuffmanCodes(temp_s0, arg2);
-    if ((temp_v0 == 0) || ((sp2F != 0) && (temp_v0 >= 0x101)) || ((sp2F == 0) && (temp_v0 >= 0x11))) {
+    count2 = count = JpegUtils_ParseHuffmanCodesLengths(dht, codesLengths);
+
+    if (count == 0 || (isAc && count > 0x100) || (!isAc && count > 0x10)) {
         return 1;
     }
-    sp2C = temp_v0;
-    if (JpegUtils_GetHuffmanCodes(arg2, arg3) != temp_v0) {
+
+    if (JpegUtils_GetHuffmanCodes(codesLengths, codes) != count2) {
         return 1;
     }
-    JpegUtils_SetHuffmanTableOld((u8*)temp_s0 + 0x10, arg1, arg2, arg3, temp_v0, sp2F);
+
+    JpegUtils_SetHuffmanTableOld(dht + 0x10, ht, codesLengths, codes, count2, isAc);
+
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/C970/func_8000C1AC.s")
-#endif
