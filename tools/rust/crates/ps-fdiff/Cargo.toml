@@ -1,0 +1,15 @@
+[package]
+name = "ps-fdiff"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Non-interactive per-function assembly diff (built ROM vs baserom)"
+
+[[bin]]
+name = "ps-fdiff"
+path = "src/main.rs"
+
+[dependencies]
+ps-core.workspace = true
+anyhow.workspace = true

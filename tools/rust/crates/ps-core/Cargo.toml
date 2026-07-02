@@ -1,0 +1,15 @@
+[package]
+name = "ps-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Shared parsers and domain models for the Pokémon Stadium matching tools"
+
+[dependencies]
+anyhow.workspace = true
+regex.workspace = true
+serde.workspace = true
+md-5.workspace = true
+rabbitizer.workspace = true
+libc.workspace = true

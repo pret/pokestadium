@@ -1,0 +1,17 @@
+[package]
+name = "ps-status"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Report the status of functions still pending decompilation"
+
+[[bin]]
+name = "ps-status"
+path = "src/main.rs"
+
+[dependencies]
+ps-core.workspace = true
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true

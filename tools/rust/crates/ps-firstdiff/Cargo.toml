@@ -1,0 +1,15 @@
+[package]
+name = "ps-firstdiff"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Find the first difference(s) between the built ROM and the expected ROM"
+
+[[bin]]
+name = "ps-firstdiff"
+path = "src/main.rs"
+
+[dependencies]
+ps-core.workspace = true
+anyhow.workspace = true

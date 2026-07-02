@@ -29,4 +29,5 @@ ctx.c.m2c
 tools/vtxdis
 tools/permuter
 tools/n64
+tools/rust/target/
 .DS_Store

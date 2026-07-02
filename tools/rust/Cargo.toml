@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.74"
+
+[workspace.dependencies]
+ps-core = { path = "crates/ps-core" }
+anyhow = "1"
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+md-5 = "0.10"
+rabbitizer = "1"
+libc = "0.2"
+
+[profile.release]
+opt-level = 3
