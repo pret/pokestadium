@@ -454,7 +454,73 @@ void func_80034B28(StadiumModel* model) {
 }
 
 void func_80034BD4(StadiumModel*, StadiumTransform*, s32, ModelVertex*);
+#ifdef NON_MATCHING
+// Like func_80034824, but only deforms a vertex when its projection onto the
+// transform's p0->p1 edge lies within (0, maxDist); otherwise clears the bit.
+void func_80034BD4(StadiumModel* arg0, StadiumTransform* arg1, s32 arg2, ModelVertex* arg3) {
+    ModelSegment* segment;
+    ModelVertex* vtx;
+    PosBlend* pos;
+    s16* indexTable;
+    s16* remap;
+    MtxF* mtx;
+    f32* weights;
+    s16 vertexCount;
+    s16 vi;
+    s32 i;
+    s32 bit;
+    f32 bx, by, bz;
+    f32 outX, outY, outZ;
+    f32 dist;
+    f32 w0, w1, w2;
+    f32 p0x, p0y, p0z;
+    f32 p1x, p1y, p1z;
+    f32 p2x, p2y, p2z;
+    f32 p3x, p3y, p3z;
+
+    segment = (ModelSegment*) Memmap_GetSegmentVaddr((u32) arg0);
+    vertexCount = segment->vertexCount;
+    remap = (s16*) Memmap_GetSegmentVaddr(segment->remapSegment);
+    indexTable = (s16*) Memmap_GetSegmentVaddr(segment->tableSegment);
+    mtx = arg1->mtx;
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x0, arg1->y0, arg1->z0, &p0x, &p0y, &p0z);
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x1, arg1->y1, arg1->z1, &p1x, &p1y, &p1z);
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x2, arg1->y2, arg1->z2, &p2x, &p2y, &p2z);
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x3, arg1->y3, arg1->z3, &p3x, &p3y, &p3z);
+    vtx = arg3;
+    i = 0;
+    if (vertexCount > 0) {
+        do {
+            vi = *remap;
+            if ((func_800336F8(indexTable, vi) != 0) && (vi == i)) {
+                bx = vtx->position.base.x;
+                by = vtx->position.base.y;
+                bz = vtx->position.base.z;
+                bit = 1 << arg2;
+                dist = func_80033568(bx, by, bz, p0x, p0y, p0z, p1x, p1y, p1z, &outX, &outY, &outZ);
+                pos = &vtx->position;
+                if ((dist > 0.0f) && (dist < arg1->maxDist)) {
+                    weights = (f32*) ((u8*) vtx + (arg2 * 0x10));
+                    w0 = weights[5];
+                    w1 = weights[6];
+                    w2 = weights[7];
+                    vtx->disabled = (u16) (vtx->disabled | bit);
+                    pos->offset.x = (((w0 * (p1x - p0x)) + p0x + (w1 * (p2x - p0x)) + (w2 * (p3x - p0x))) - bx) * 1.0f;
+                    pos->offset.y = (((w0 * (p1y - p0y)) + p0y + (w1 * (p2y - p0y)) + (w2 * (p3y - p0y))) - by) * 1.0f;
+                    pos->offset.z = (((w0 * (p1z - p0z)) + p0z + (w1 * (p2z - p0z)) + (w2 * (p3z - p0z))) - bz) * 1.0f;
+                } else {
+                    vtx->disabled = (u16) (vtx->disabled & ~bit);
+                }
+            }
+            i += 1;
+            remap += 1;
+            vtx += 1;
+        } while (i != vertexCount);
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80034BD4.s")
+#endif
 
 void func_80034F68(MtxF* mtx, Vec3f* out, Vec3s* in) {
     f32 sp34;
