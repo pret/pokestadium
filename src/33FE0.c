@@ -367,7 +367,97 @@ void func_80034254(StadiumModel* model) {
 #endif
 
 void func_80034348(ModelSegment*, ModelVertex*);
+#ifdef NON_MATCHING
+// Smooth vertex normals: accumulate each triangle's (length-120) face normal
+// into its three vertices, then store the per-vertex average as the color.
+void func_80034348(ModelSegment* arg0, ModelVertex* arg1) {
+    Vec3fCounter* acc;
+    ModelVertex* vtx;
+    ModelVertex* v0;
+    ModelVertex* v1;
+    ModelVertex* v2;
+    s16* tri;
+    s16* remap;
+    s16 triangleCount;
+    s16 vertexCount;
+    s16 a, b, c;
+    s16 n;
+    s32 i;
+    f32 e1x, e1y, e1z;
+    f32 e2x, e2y, e2z;
+    f32 nx, ny, nz;
+    f32 len;
+    f32 scale;
+    f32 fn;
+
+    triangleCount = arg0->triangleCount;
+    vertexCount = arg0->vertexCount;
+    tri = (s16*) Memmap_GetSegmentVaddr(arg0->indexSegment);
+    remap = (s16*) Memmap_GetSegmentVaddr(arg0->remapSegment);
+
+    for (i = 0; i < vertexCount; i++) {
+        D_800B2F50[i].vec.x = 0.0f;
+        D_800B2F50[i].vec.y = 0.0f;
+        D_800B2F50[i].vec.z = 0.0f;
+        D_800B2F50[i].count = 0;
+    }
+
+    for (i = 0; i < triangleCount; i++) {
+        a = remap[tri[0]];
+        b = remap[tri[1]];
+        c = remap[tri[2]];
+        tri += 3;
+        v0 = &arg1[a];
+        v1 = &arg1[b];
+        v2 = &arg1[c];
+        e1x = v1->position.base.x - v0->position.base.x;
+        e1y = v1->position.base.y - v0->position.base.y;
+        e1z = v1->position.base.z - v0->position.base.z;
+        e2x = v2->position.base.x - v1->position.base.x;
+        e2y = v2->position.base.y - v1->position.base.y;
+        e2z = v2->position.base.z - v1->position.base.z;
+        nx = (e1y * e2z) - (e1z * e2y);
+        ny = (e1z * e2x) - (e1x * e2z);
+        nz = (e1x * e2y) - (e1y * e2x);
+        len = sqrtf((nx * nx) + (ny * ny) + (nz * nz));
+        if ((s32) len > 0) {
+            scale = 120.0f / len;
+            nx *= scale;
+            ny *= scale;
+            nz *= scale;
+        }
+        acc = &D_800B2F50[a];
+        acc->vec.x += nx;
+        acc->vec.y += ny;
+        acc->vec.z += nz;
+        acc->count += 1;
+        acc = &D_800B2F50[b];
+        acc->vec.x += nx;
+        acc->vec.y += ny;
+        acc->vec.z += nz;
+        acc->count += 1;
+        acc = &D_800B2F50[c];
+        acc->vec.x += nx;
+        acc->vec.y += ny;
+        acc->vec.z += nz;
+        acc->count += 1;
+    }
+
+    vtx = arg1;
+    for (i = 0; i < vertexCount; i++) {
+        n = D_800B2F50[i].count;
+        if (n > 0) {
+            fn = (f32) n;
+            vtx->colorR = D_800B2F50[i].vec.x / fn;
+            vtx->colorG = D_800B2F50[i].vec.y / fn;
+            vtx->colorB = D_800B2F50[i].vec.z / fn;
+        }
+        vtx += 1;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80034348.s")
+#endif
 
 void func_80034824(ModelSegment*, StadiumTransform*, s32, ModelVertex*);
 #ifdef NON_MATCHING
