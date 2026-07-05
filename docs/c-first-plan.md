@@ -97,7 +97,12 @@ low-% files), then the two big `fragments/1` files.
 
 ### Per-function workflow (the core loop)
 1. `python3 tools/m2ctx.py src/<file>.c` → generates `ctx.c` (types/externs).
-2. `m2c --context ctx.c asm/us/nonmatchings/<file>/<func>.s` → first-draft C.
+2. `m2c --context ctx.c --target mips-ido-c asm/us/nonmatchings/<file>/<func>.s` →
+   first-draft C. **If the function has a jump table** (`switch`), m2c fails with
+   "corresponding jump table is not provided" — pass the rodata `.s` that defines
+   the `jtbl_*` symbol as an extra argument, e.g.
+   `m2c --context ctx.c … func.s asm/us/data/rom_rodata_7D8D0.rodata.s`.
+   (14 of the remaining bare functions use jump tables.)
 3. Hand-clean: fix types against `src/<file>.h` / `include/`, name obvious args,
    keep struct offset/size comments.
 4. Wrap in the file:
