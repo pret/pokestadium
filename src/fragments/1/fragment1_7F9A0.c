@@ -708,7 +708,72 @@ void func_81202210(s32 arg0, s32 arg1) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202210.s")
 #endif
 
+#ifdef NON_MATCHING
+extern u8 D_8120E580[];
+extern u8 D_8120D7F3[];
+extern s32 D_8122B2E0;
+// Compose the score/counter panel (layout selected by D_8122C4E2), then lay out
+// the value's digit run right-to-left using the D_8120E580 glyph-width table.
+void func_8120241C(void) {
+    u8* base;
+    u8* var_s4;
+    u8* ptr;
+    s32 acc;
+    s32 i;
+    s32 idx;
+    u8 sel;
+    u16 val;
+
+    sel = D_8122B2C0->unk_5DC5;
+    base = (u8*) (D_8122B2E0 - 0x14);
+    if (sel != 0) {
+        sel -= 1;
+    }
+    val = D_8120E680[sel];
+    switch (D_8122C4E2) {
+    case 1:
+        func_81201FBC((s32) (base + 0xA4), val, 0x8C);
+        func_812015EC((u16*) (base + 0x5AA), (u16*) ((u8*) D_8122C748 + 0xA778), 0, 0x18, 0xD);
+        func_812015EC((u16*) (base + 0x1762), (u16*) ((u8*) D_8122C748 + 0xA6D8), 0, 0x10, 5);
+        func_812015EC((u16*) (base + 0x5DE), (u16*) ((u8*) D_8122C748 + 0xAC58), 0, 8, 6);
+        func_812015EC((u16*) (base + 0x5EE), (u16*) ((u8*) D_8122C748 + 0xACB8), 0, 8, 6);
+        var_s4 = base + 0x600;
+        break;
+    case 2:
+        func_81201FBC((s32) (base + 0x9C), val, 0x94);
+        func_812015EC((u16*) (base + 0x5A4), (u16*) ((u8*) D_8122C748 + 0xA9E8), 0, 0x18, 0xD);
+        func_812015EC((u16*) (base + 0x175C), (u16*) ((u8*) D_8122C748 + 0xA5E8), 0, 0x18, 5);
+        func_812015EC((u16*) (base + 0x5D8), (u16*) ((u8*) D_8122C748 + 0xAC58), 0, 8, 6);
+        func_812015EC((u16*) (base + 0x5E8), (u16*) ((u8*) D_8122C748 + 0xACB8), 0, 8, 6);
+        func_812015EC((u16*) (base + 0x5F8), (u16*) ((u8*) D_8122C748 + 0xACB8), 0, 8, 6);
+        var_s4 = base + 0x608;
+        break;
+    default:
+        func_81201FBC((s32) (base + 0xCE), val, 0x60);
+        var_s4 = base + 0x5D6;
+        break;
+    }
+    func_812015EC((u16*) var_s4, (u16*) ((u8*) D_8122C748 + 0xC1D8), 0, 0xC, 0xC);
+    acc = 0;
+    ptr = &D_8120D7F3[0];
+    i = 0x37;
+    do {
+        idx = D_8120E580[(ptr[0x116] - i) + 0x80];
+        func_81201DDC((u16*) ((var_s4 - 0x266) + (acc * 2)), D_8122C744 + (idx * 0xC0), 0xFFFE, 0xC, 0xC, 0x10);
+        acc += D_8120E580[idx];
+        if (i == 0x3C) {
+            acc -= 1;
+        }
+        if (i == 0x3D) {
+            acc += 1;
+        }
+        i += 1;
+        ptr -= 1;
+    } while (i != 0x42);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_8120241C.s")
+#endif
 
 #ifdef NON_MATCHING
 extern u8 D_8122C771;
