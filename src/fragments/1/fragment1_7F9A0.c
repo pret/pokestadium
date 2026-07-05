@@ -508,7 +508,59 @@ void func_81201FBC(s32 arg0, s32 arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_8120241C.s")
 
+#ifdef NON_MATCHING
+extern u8 D_8122C771;
+// Draws a bordered tile grid into dst from glyph data in D_8122C748->unk0000.
+void func_81202758(u16* arg0, s32 arg1) {
+    s32 srcA;
+    s32 srcB;
+    s32 i;
+    s32 count;
+    u16* dst;
+    u16* dst2;
+    u16* dst3;
+    u16* p;
+    u16* p2;
+
+    dst = arg0;
+    srcA = arg1 * 0x28 * 2;
+    for (i = 0; i < 6; i++) {
+        func_812015EC(dst, (u16*) &D_8122C748->unk0000[srcA + 0x8910], 0, 8, 5);
+        dst += 0x10;
+    }
+    srcB = arg1 << 7;
+    func_812015EC(dst, (u16*) &D_8122C748->unk0000[srcB + 0x8F90], 0, 8, 8);
+    dst2 = dst + 0x1406;
+    for (i = 0; i < 5; i++) {
+        func_812015EC(dst2, (u16*) &D_8122C748->unk0000[srcB + 0x8090], 0, 8, 8);
+        dst2 += 0x1400;
+    }
+    func_812015EC(dst2, (u16*) &D_8122C748->unk0000[srcB + 0x8510], 0, 8, 8);
+    dst3 = dst2 + 0x10;
+    if (D_8122C771 == 1) {
+        count = 7;
+    } else if (D_8122C771 == 2) {
+        count = 0xA;
+    } else if (D_8122C771 == 3) {
+        count = 0xB;
+    } else {
+        count = 6;
+    }
+    while (count > 0) {
+        func_812015EC(dst3 + 0x780, (u16*) &D_8122C748->unk0000[srcA + 0x8910], 0, 8, 5);
+        count -= 1;
+        dst3 += 0x10;
+    }
+    func_812015EC(dst3, (u16*) &D_8122C748->unk0000[srcB + 0x8B90], 0, 8, 8);
+    p = dst3 - 0x13FA;
+    func_812015EC(p, (u16*) &D_8122C748->unk0000[srcB + 0x9390], 0, 8, 8);
+    p2 = p - 0x1400;
+    func_812015EC(p2, (u16*) &D_8122C748->unk0000[srcB + 0x9390], 0, 8, 8);
+    func_812015EC(p2 - 0x1400, (u16*) &D_8122C748->unk0000[0x8490], 0, 8, 8);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202758.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812029B0.s")
 
