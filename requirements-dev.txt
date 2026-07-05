@@ -1,0 +1,10 @@
+# Optional developer tooling (not needed to build the ROM).
+#
+# m2c (mips_to_c): decompiles a nonmatchings .s into first-draft C, used by the
+# "C-first" campaign (see docs/c-first-plan.md). Pair with tools/m2ctx.py to
+# generate the type context:
+#
+#   python3 tools/m2ctx.py src/<file>.c
+#   m2c --context ctx.c --target mips-ido-c asm/us/nonmatchings/<file>/<func>.s
+#
+git+https://github.com/matt-kempster/mips_to_c.git

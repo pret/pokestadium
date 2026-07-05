@@ -26,6 +26,18 @@ To install them simply run in a terminal:
 python3 -m pip install -r requirements.txt
 ```
 
+## macOS
+
+Use Homebrew: `brew install make mips-linux-gnu-binutils libiconv` (invoke the
+build as `gmake`). **`libiconv` is required** — macOS's system (BSD) `iconv`
+mis-encodes an ASCII backslash as the EUC-JP fullwidth backslash (0xA1C0) when it
+follows a multibyte character, silently corrupting C escapes like `\n` inside
+Japanese string literals and breaking the byte-match. The Makefile auto-detects
+GNU libiconv from Homebrew (`/opt/homebrew` or `/usr/local`) and warns if only the
+system `iconv` is found. The host-compiler syntax check also fails under Apple
+clang (it can't do `-m32` and treats `-Wint-conversion` as an error), so build
+with `gmake RUN_CC_CHECK=0`; this does not affect the ROM output.
+
 # To use
 1. Place the US Pokemon Stadium 1.0 rom into the repository's "/baseroms/us/" folder as "baserom.z64".
 2. Set up tools and extract the rom: `make init`
@@ -69,8 +81,24 @@ The binaries land in `tools/rust/target/release/`:
   ./tools/rust/target/release/ps-fdiff func_80030010
   ```
 
-Run any tool with `--help` for options. The equivalent Python scripts
-(`progress.py`, `tools/first_diff.py`, `diff.py`) are kept alongside for now; see
-[`tools/rust/README.md`](tools/rust/README.md) for parity-validation status.
+Run any tool with `--help` for options.
+
+## Rust ↔ Python equivalence
+
+The Rust tools mirror the existing Python scripts, which are **maintained
+alongside them** (not deprecated) — use whichever you prefer:
+
+| Rust tool      | Python equivalent       | Parity                                   |
+| -------------- | ----------------------- | ---------------------------------------- |
+| `ps-status`    | `progress.py`           | byte-exact totals + per-folder counts    |
+| `ps-firstdiff` | `tools/first_diff.py`   | same offset / function / decoded bytes   |
+| `ps-fdiff`     | `./diff.py -mwo <func>` | same differing instruction located¹      |
+
+¹ `ps-fdiff` additionally resolves `jal` targets to symbol names and is scoped to
+the function; `diff.py` keeps its interactive TUI, scoring and wider window.
+
+Parity was verified against a real matching build (`ps-status`) and an injected
+one-instruction regression (`ps-firstdiff` / `ps-fdiff`). See
+[`tools/rust/README.md`](tools/rust/README.md) for the full validation details.
 
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
