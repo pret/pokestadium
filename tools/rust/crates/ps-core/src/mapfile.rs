@@ -157,21 +157,52 @@ fn is_symbol_name(name: &str) -> bool {
 fn finalize(contributions: Vec<Contribution>) -> Vec<MapSymbol> {
     let mut out = Vec::new();
     for c in contributions {
+        // Contributions placed at vram 0 are archive members pulled in but never
+        // allocated into the ROM (e.g. unused libultra functions). The Python
+        // `mapfile_parser` drops them, so we must too or they inflate the totals.
+        if c.vram == 0 {
+            continue;
+        }
+
         let end = c.vram.saturating_add(c.size);
+        let vrom_of = |vram: u64| match (c.sec_vram, c.sec_lma) {
+            (Some(sv), Some(lma)) if vram >= sv => Some(lma + (vram - sv)),
+            _ => None,
+        };
+
+        // A leading gap before the first listed symbol (or a contribution with no
+        // symbols at all) is a static function with no exported symbol. The Python
+        // `mapfile_parser` synthesizes a `$_static_symbol_...` covering
+        // `[contribution_vram, first_symbol_vram)`, and `progress.py` counts it —
+        // so we do the same (fragment headers, symbol-less archive members, and
+        // the static-function prefix of files like `sptask.o`).
+        let first_sym = c.syms.first().map(|(v, _)| *v).unwrap_or(end);
+        if first_sym > c.vram {
+            out.push(MapSymbol {
+                name: format!(
+                    "$_static_symbol_{:08X}_{}_{}",
+                    c.vram,
+                    c.filepath.to_string_lossy(),
+                    c.section_type
+                ),
+                vram: c.vram,
+                size: first_sym - c.vram,
+                vrom: vrom_of(c.vram),
+                section_type: c.section_type.clone(),
+                filepath: c.filepath.clone(),
+            });
+        }
+
         for (i, (vram, name)) in c.syms.iter().enumerate() {
             let next = c.syms.get(i + 1).map(|(v, _)| *v).unwrap_or(end);
             let size = next.saturating_sub(*vram);
             // vrom = section_lma + (vram - section_vram), when the section had a
             // load address. Only meaningful for allocated-in-ROM sections.
-            let vrom = match (c.sec_vram, c.sec_lma) {
-                (Some(sv), Some(lma)) if *vram >= sv => Some(lma + (*vram - sv)),
-                _ => None,
-            };
             out.push(MapSymbol {
                 name: name.clone(),
                 vram: *vram,
                 size,
-                vrom,
+                vrom: vrom_of(*vram),
                 section_type: c.section_type.clone(),
                 filepath: c.filepath.clone(),
             });
@@ -282,6 +313,38 @@ Linker script and memory map
             mf.symbol_containing_vram(0x80000044).unwrap().name,
             "func_80000040"
         );
+    }
+
+    const SAMPLE_SYNTH: &str = "\
+Linker script and memory map
+
+.text           0x0000000080000000     0x100 load address 0x0000000000001000
+ .text          0x0000000080000000       0x20 build/asm/us/data/frag_header.o
+ .text          0x0000000080000020       0x60 build/lib/libultra.a(sptask.o)
+                0x0000000080000040                osSpTaskLoad
+ .text          0x0000000000000000     0x2660 build/lib/libultra.a(sprite.o)
+";
+
+    #[test]
+    fn synthesizes_leading_gap_and_skips_vram_zero() {
+        let mf = parse_str(SAMPLE_SYNTH);
+
+        // Symbol-less contribution -> one synthetic symbol spanning it.
+        let hdr = mf.symbol_at_vram(0x80000000).unwrap();
+        assert!(hdr.name.starts_with("$_static_symbol_"));
+        assert_eq!(hdr.size, 0x20);
+
+        // Leading gap before the first named symbol is synthesized too.
+        let gap = mf.symbol_at_vram(0x80000020).unwrap();
+        assert!(gap.name.starts_with("$_static_symbol_"));
+        assert_eq!(gap.size, 0x20); // 0x40 - 0x20
+        let real = mf.symbol_at_vram(0x80000040).unwrap();
+        assert_eq!(real.name, "osSpTaskLoad");
+        assert_eq!(real.size, 0x40); // runs to contribution end 0x80
+
+        // The vram-0 (unallocated) archive member contributes nothing.
+        assert!(mf.symbol_at_vram(0).is_none());
+        assert!(!mf.symbols.iter().any(|s| s.filepath.to_string_lossy().contains("sprite.o")));
     }
 
     #[test]
