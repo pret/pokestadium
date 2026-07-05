@@ -30,7 +30,8 @@ enum ColorMode {
 }
 
 struct Args {
-    func: String,
+    func: Option<String>,
+    file: Option<String>,
     version: String,
     root: PathBuf,
     color: ColorMode,
@@ -38,6 +39,7 @@ struct Args {
 
 fn parse_args() -> Result<Args> {
     let mut func: Option<String> = None;
+    let mut file: Option<String> = None;
     let mut version = DEFAULT_VERSION.to_string();
     let mut root = PathBuf::from(".");
     let mut color = ColorMode::Auto;
@@ -56,6 +58,12 @@ fn parse_args() -> Result<Args> {
                         .ok_or_else(|| anyhow::anyhow!("--root needs a value"))?,
                 );
             }
+            "--file" => {
+                file = Some(
+                    it.next()
+                        .ok_or_else(|| anyhow::anyhow!("--file needs a source path"))?,
+                );
+            }
             "--color" => {
                 color = match it.next().as_deref() {
                     Some("always") => ColorMode::Always,
@@ -67,10 +75,11 @@ fn parse_args() -> Result<Args> {
             "-h" | "--help" => {
                 println!(
                     "ps-fdiff — per-function asm diff (built ROM vs baserom)\n\n\
-USAGE:\n    ps-fdiff [OPTIONS] <FUNCTION>\n\n\
+USAGE:\n    ps-fdiff [OPTIONS] <FUNCTION>\n    ps-fdiff [OPTIONS] --file <SRC.c>\n\n\
 OPTIONS:\n\
     -v, --version <VER>   Game version (default: us)\n\
         --root <DIR>      Repository root (default: .)\n\
+        --file <SRC>      Summarize every function in a source file, closest-first\n\
         --color <WHEN>    always | never | auto (default: auto)\n\
     -h, --help            Show this help"
                 );
@@ -81,9 +90,12 @@ OPTIONS:\n\
         }
     }
 
-    let func = func.ok_or_else(|| anyhow::anyhow!("a function name is required (see --help)"))?;
+    if func.is_none() && file.is_none() {
+        bail!("a function name or --file <src> is required (see --help)");
+    }
     Ok(Args {
         func,
+        file,
         version,
         root,
         color,
@@ -102,7 +114,7 @@ fn main() -> ExitCode {
     }
 }
 
-/// Returns Ok(true) when the function matches, Ok(false) when it differs.
+/// Returns Ok(true) when everything matches, Ok(false) when something differs.
 fn run() -> Result<bool> {
     let args = parse_args()?;
     let build = args.root.join("build");
@@ -121,25 +133,90 @@ fn run() -> Result<bool> {
     }
 
     let map = MapFile::read(&map_path)?;
-    let sym = map
-        .symbol_by_name(&args.func)
-        .with_context(|| format!("function {} not found in {}", args.func, map_path.display()))?;
-    let vrom = sym
-        .vrom
-        .ok_or_else(|| anyhow::anyhow!("no ROM offset (vrom) for {} in the map", args.func))?;
-    let size = sym.size;
-    if size == 0 {
-        bail!("function {} has zero size in the map", args.func);
-    }
-
     let my = Rom::read(&myimg)?;
     let base = Rom::read(&baseimg)?;
 
+    if let Some(src) = &args.file {
+        return run_file(src, &map, &my, &base);
+    }
+
+    let func = args.func.as_ref().expect("checked in parse_args");
     let use_color = match args.color {
         ColorMode::Always => true,
         ColorMode::Never => false,
         ColorMode::Auto => std::io::stdout().is_terminal(),
     };
+    run_single(func, &map, &my, &base, use_color)
+}
+
+/// Count differing words of a `.text` symbol between the two images. Returns
+/// `(differing_words, total_words)`.
+fn count_diff(sym: &ps_core::mapfile::MapSymbol, my: &Rom, base: &Rom) -> Option<(usize, usize)> {
+    let vrom = sym.vrom? as usize;
+    let words = (sym.size / 4) as usize;
+    if words == 0 {
+        return Some((0, 0));
+    }
+    let mut differ = 0;
+    for i in 0..words {
+        let off = vrom + i * 4;
+        if base.word_be(off) != my.word_be(off) {
+            differ += 1;
+        }
+    }
+    Some((differ, words))
+}
+
+/// `--file` mode: summarize every function contributed by a source file's object,
+/// ranked closest-first (fewest differing words). Returns true iff all match.
+fn run_file(src: &str, map: &MapFile, my: &Rom, base: &Rom) -> Result<bool> {
+    let object = object_path_for_src(src);
+    let mut rows: Vec<(&ps_core::mapfile::MapSymbol, usize, usize)> = map
+        .text_symbols()
+        .filter(|s| s.filepath.to_string_lossy() == object)
+        .filter_map(|s| count_diff(s, my, base).map(|(d, t)| (s, d, t)))
+        .collect();
+    if rows.is_empty() {
+        bail!(
+            "no .text functions found for object {object} (from {src}); is it built and does the path match the map?"
+        );
+    }
+    // Closest-first: fewest differing words, then by name for determinism.
+    rows.sort_by(|a, b| a.1.cmp(&b.1).then_with(|| a.0.name.cmp(&b.0.name)));
+
+    let matched = rows.iter().filter(|r| r.1 == 0).count();
+    println!("{object}: {} functions, {matched} match", rows.len());
+    for (sym, differ, total) in &rows {
+        let status = if *differ == 0 {
+            "MATCH".to_string()
+        } else {
+            format!("{differ}/{total} words differ")
+        };
+        println!("  {:<32} size 0x{:<5X} {status}", sym.name, sym.size);
+    }
+    Ok(matched == rows.len())
+}
+
+/// Map a source path (`src/33FE0.c`, `src/fragments/1/x.c`) to its object path as
+/// it appears in the map (`build/src/33FE0.o`).
+fn object_path_for_src(src: &str) -> String {
+    let trimmed = src.trim_start_matches("./");
+    let stem = trimmed.strip_suffix(".c").unwrap_or(trimmed);
+    format!("build/{stem}.o")
+}
+
+/// Single-function mode: full side-by-side word diff. Returns true iff it matches.
+fn run_single(func: &str, map: &MapFile, my: &Rom, base: &Rom, use_color: bool) -> Result<bool> {
+    let sym = map
+        .symbol_by_name(func)
+        .with_context(|| format!("function {func} not found in the map"))?;
+    let vrom = sym
+        .vrom
+        .ok_or_else(|| anyhow::anyhow!("no ROM offset (vrom) for {func} in the map"))?;
+    let size = sym.size;
+    if size == 0 {
+        bail!("function {func} has zero size in the map");
+    }
 
     println!(
         "{} @ vram 0x{:08X}, rom 0x{:X}, size 0x{:X}",
@@ -155,10 +232,10 @@ fn run() -> Result<bool> {
         let base_word = base.word_be(off);
         let my_word = my.word_be(off);
         let base_txt = base_word
-            .map(|w| disasm::disassemble_word(w, vram, &map))
+            .map(|w| disasm::disassemble_word(w, vram, map))
             .unwrap_or_else(|| "<eof>".to_string());
         let my_txt = my_word
-            .map(|w| disasm::disassemble_word(w, vram, &map))
+            .map(|w| disasm::disassemble_word(w, vram, map))
             .unwrap_or_else(|| "<eof>".to_string());
         let differ = base_word != my_word;
         if differ {

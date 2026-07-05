@@ -25,6 +25,7 @@ struct Args {
     json: bool,
     list: bool,
     build_aware: Option<bool>,
+    c_coverage: bool,
 }
 
 fn parse_args() -> Result<Args> {
@@ -33,6 +34,7 @@ fn parse_args() -> Result<Args> {
     let mut json = false;
     let mut list = false;
     let mut build_aware = None;
+    let mut c_coverage = false;
 
     let mut it = std::env::args().skip(1);
     while let Some(arg) = it.next() {
@@ -52,6 +54,7 @@ fn parse_args() -> Result<Args> {
             "--list" => list = true,
             "--build-aware" => build_aware = Some(true),
             "--build-free" => build_aware = Some(false),
+            "--c-coverage" => c_coverage = true,
             "-h" | "--help" => {
                 print_help();
                 std::process::exit(0);
@@ -65,6 +68,7 @@ fn parse_args() -> Result<Args> {
         json,
         list,
         build_aware,
+        c_coverage,
     })
 }
 
@@ -77,6 +81,7 @@ OPTIONS:\n\
         --root <DIR>      Repository root (default: .)\n\
         --build-aware     Force build-aware mode (requires build/*.map)\n\
         --build-free      Force build-free mode\n\
+        --c-coverage      Report C coverage: guarded (has C) vs bare GLOBAL_ASM\n\
         --list            List every pending function with its address\n\
         --json            Emit JSON instead of a table\n\
     -h, --help            Show this help"
@@ -100,6 +105,10 @@ fn run() -> Result<()> {
         .root
         .join("build")
         .join(format!("pokestadium-{}.map", args.version));
+
+    if args.c_coverage {
+        return run_c_coverage(&args);
+    }
 
     let want_build_aware = match args.build_aware {
         Some(v) => v,
@@ -179,6 +188,137 @@ fn run_build_free(args: &Args, map_path: &Path) -> Result<()> {
     }
 
     Ok(())
+}
+
+/// C-first coverage: how many `GLOBAL_ASM` directives are guarded by a
+/// `NON_MATCHING` C body vs still "bare" (assembled even under NON_MATCHING).
+/// The campaign target is *bare -> 0*.
+fn run_c_coverage(args: &Args) -> Result<()> {
+    let src_root = args.root.join("src");
+    let entries = globalasm::scan(&src_root)?;
+
+    let total = entries.len();
+    let guarded = entries.iter().filter(|e| e.guarded).count();
+    let bare = total - guarded;
+
+    // Per-file bare counts, and the bare worklist with addresses for --list.
+    let sym_path = args
+        .root
+        .join("linker_scripts")
+        .join(&args.version)
+        .join("symbol_addrs_code.txt");
+    let syms = symbols::parse_files(&[sym_path.as_path()]).unwrap_or_default();
+
+    let mut bare_by_file: BTreeMap<String, Vec<(String, Option<u64>)>> = BTreeMap::new();
+    for e in entries.iter().filter(|e| !e.guarded) {
+        let file = e
+            .c_file
+            .strip_prefix(&args.root)
+            .unwrap_or(&e.c_file)
+            .to_string_lossy()
+            .into_owned();
+        let addr = syms.get(&e.func).map(|s| s.addr);
+        bare_by_file
+            .entry(file)
+            .or_default()
+            .push((e.func.clone(), addr));
+    }
+
+    if args.json {
+        print_c_coverage_json(total, guarded, bare, &bare_by_file);
+        return Ok(());
+    }
+
+    let pct = if total == 0 {
+        100.0
+    } else {
+        guarded as f64 / total as f64 * 100.0
+    };
+    println!("C coverage of GLOBAL_ASM functions:");
+    println!("  guarded (has C):   {guarded}");
+    println!("  bare (asm only):   {bare}");
+    println!("  total GLOBAL_ASM:  {total}");
+    println!("  C-first progress:  {pct:.2}%  (bare -> 0 is the goal)");
+
+    if bare > 0 {
+        println!();
+        println!("Bare functions by file (most first):");
+        let mut rows: Vec<(&String, usize)> =
+            bare_by_file.iter().map(|(k, v)| (k, v.len())).collect();
+        rows.sort_by(|a, b| b.1.cmp(&a.1).then_with(|| a.0.cmp(b.0)));
+        for (file, n) in &rows {
+            println!("  {file:<44} {n:>3}");
+        }
+    }
+
+    if args.list {
+        println!();
+        println!("Bare worklist:");
+        for (file, funcs) in &bare_by_file {
+            for (func, addr) in funcs {
+                match addr {
+                    Some(a) => println!("  {file:<40} {func:<32} 0x{a:08X}"),
+                    None => println!("  {file:<40} {func:<32} (no address)"),
+                }
+            }
+        }
+    }
+
+    Ok(())
+}
+
+fn print_c_coverage_json(
+    total: usize,
+    guarded: usize,
+    bare: usize,
+    bare_by_file: &BTreeMap<String, Vec<(String, Option<u64>)>>,
+) {
+    use serde::Serialize;
+
+    #[derive(Serialize)]
+    struct FuncOut {
+        func: String,
+        address: Option<String>,
+    }
+    #[derive(Serialize)]
+    struct FileOut {
+        file: String,
+        bare: usize,
+        functions: Vec<FuncOut>,
+    }
+    #[derive(Serialize)]
+    struct Root {
+        mode: &'static str,
+        total_global_asm: usize,
+        guarded: usize,
+        bare: usize,
+        files: Vec<FileOut>,
+    }
+
+    let mut files: Vec<FileOut> = bare_by_file
+        .iter()
+        .map(|(file, funcs)| FileOut {
+            file: file.clone(),
+            bare: funcs.len(),
+            functions: funcs
+                .iter()
+                .map(|(func, addr)| FuncOut {
+                    func: func.clone(),
+                    address: addr.map(|a| format!("0x{a:08X}")),
+                })
+                .collect(),
+        })
+        .collect();
+    files.sort_by(|a, b| b.bare.cmp(&a.bare).then_with(|| a.file.cmp(&b.file)));
+
+    let root = Root {
+        mode: "c-coverage",
+        total_global_asm: total,
+        guarded,
+        bare,
+        files,
+    };
+    println!("{}", serde_json::to_string_pretty(&root).unwrap());
 }
 
 fn print_build_free_json(total: usize, by_file: &BTreeMap<String, Vec<(String, Option<u64>)>>) {
