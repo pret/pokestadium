@@ -148,21 +148,21 @@ all its functions — a free head-start on the later matching phase.
   that mirror an existing sibling (`func_812075C0` ↔ `func_812073B8`) are the
   cleanest wins.
 
-Progress so far (15 done) → bare 61 → 46, C-first 75.8%:
-- 33FE0/3D140: `func_80033D1C`, `func_800414B8`, `func_8003F4C0`, `func_8003F4C0`,
-  `func_800361C4` (jtbl model dispatcher), `func_80035E2C`, `func_80035FA8`.
-- fragment1_86CB0: `func_812075C0`, `func_81209690`, `func_81207698` (jtbl),
-  `func_81208C08` (jtbl).
-- fragment1_7F9A0: `func_812004B8`, `func_81202EA8`, `func_81202FCC`,
-  `func_812006AC`, `func_81202758`.
+Progress so far (21 done) → bare 61 → 40, C-first 79.0%. The **entire 33FE0 model
+cluster is C**: dispatcher (`func_800361C4`), per-vertex passes (`func_80035E2C`,
+`func_80035FA8`, `func_80035B20`, `func_800357F4`), matrix/geometry deforms
+(`func_80034824`, `func_80034BD4`), smooth normals (`func_80034348`), frame append
+(`func_80033D44`), plus the small ones. Also done: fragment1_86CB0 (incl. jtbl
+`func_81207698`/`func_81208C08`), fragment1_7F9A0, and 3D140 leaf funcs.
 
 Hard-function notes: jtbl functions need the rodata `.s` passed to m2c (or hand-
 tracing when m2c returns a degenerate draft); watch for m2c's byte-vs-element
 pointer arithmetic and fields accessed beyond a mistyped struct (e.g. a count read
-through a `PosBlend*` at +0x2C that is really `ModelVertex.drawGroup`). Some
-functions rely on a callee's leftover `$f0` return while the callee is declared
-`void` (e.g. `func_80035B20` via `func_80035434`) — those need the callee's
-signature changed first, so defer them.
+through a `PosBlend*` at +0x2C that is really `ModelVertex.drawGroup`). The
+leftover-`$f0` pattern (a callee declared `void` that ends in a bare `sqrtf(...)`,
+whose caller uses the `$f0` result) is fixed by changing the callee to return
+`f32` + `return` — this reproduced identical asm and kept the byte-match, then
+unblocked `func_80035B20`/`func_800357F4`.
 
 ## Critical files
 - `tools/rust/crates/ps-status/` + `tools/rust/crates/ps-core/src/globalasm.rs` —
