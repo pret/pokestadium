@@ -283,7 +283,72 @@ s32 func_812005D8(unk_D_8122B2C0* arg0) {
 }
 
 s32 func_812006AC(unk_D_8122B2C0* arg0);
+#ifdef NON_MATCHING
+s32 func_812006AC(unk_D_8122B2C0* arg0) {
+    s32 checksum;
+    s32 ret;
+    u8* buf;
+    u32 addr;
+    s32 remaining;
+    s32 chunk;
+    s32 off;
+    s32 i;
+
+    checksum = 0;
+    ret = func_812005D8(arg0);
+    buf = arg0->transferBuffer;
+    addr = arg0->gbAddress;
+    remaining = arg0->transferSize;
+
+    if ((ret == 0) && (addr < 0x4000)) {
+        if ((addr + remaining) >= 0x4001) {
+            chunk = 0x4000 - addr;
+        } else {
+            chunk = remaining;
+        }
+        ret = osGbpakReadWrite(&arg0->pfs, 0, addr & 0xFFFF, buf, chunk);
+        if (ret == 0) {
+            for (i = 0; i < chunk; i++) {
+                checksum += buf[i];
+            }
+            buf += chunk;
+            remaining -= chunk;
+            addr = 0x4000;
+        }
+    }
+
+    while ((ret == 0) && (remaining != 0)) {
+        ret = func_812001E4(arg0, addr >> 0xE);
+        if (ret == 0) {
+            off = addr & 0x3FFF;
+            if ((off + remaining) >= 0x4001) {
+                chunk = 0x4000 - off;
+            } else {
+                chunk = remaining;
+            }
+            ret = osGbpakReadWrite(&arg0->pfs, 0, (off | 0x4000) & 0xFFFF, buf, chunk);
+            if (ret == 0) {
+                for (i = 0; i < chunk; i++) {
+                    checksum += buf[i];
+                }
+                buf += chunk;
+                remaining -= chunk;
+                addr = (addr + 0x4000) & ~0x3FFF;
+            }
+        }
+    }
+
+    if (ret == 0) {
+        ret = func_8120019C(arg0);
+        if (ret == 0) {
+            arg0->unk_5D70[0] += checksum;
+        }
+    }
+    return ret;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812006AC.s")
+#endif
 
 s32 func_812008C8(unk_D_8122B2C0* arg0, s32 arg1) {
   s32 temp_v0;
@@ -503,7 +568,41 @@ void func_81202EA8(u16* arg0, u16* arg1, u16* arg2, s32 arg3, s32 arg4) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202EA8.s")
 #endif
 
+#ifdef NON_MATCHING
+extern u16* D_8122C750;
+extern u32 D_8122C764;
+extern u32 D_8122C768;
+extern u8 D_8122C770;
+void func_81202758(s32, u8);
+s32 func_81202FCC(s32 arg0, s32 arg1) {
+    s32 updated;
+
+    updated = 0;
+    if ((u32) D_8122C768 < (osGetCount() - D_8122C76C)) {
+        updated = 1;
+        D_8122C76C = osGetCount();
+        D_8122C770 = (D_8122C770 + 1) & 7;
+        if (D_8122C768 >= 0x80001) {
+            D_8122C768 -= D_8122C768 >> 8;
+        }
+    }
+    if ((osGetCount() - D_8122C760) >= 0x200001) {
+        updated = 1;
+        D_8122C760 = osGetCount();
+        D_8122C764 += 1;
+        if (D_8122C764 >= 0x140) {
+            D_8122C764 = 0;
+        }
+    }
+    if (updated != 0) {
+        func_81202758(arg0 + 0x87BA, D_8122C770);
+        func_81202EA8((u16*) D_8122C750, (u16*) D_8122C74C, (u16*) (arg1 + 0x20A80), 0xF, D_8122C764);
+    }
+    return updated;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202FCC.s")
+#endif
 
 void func_8120311C(unk_D_8122B2C0* arg0) {
   s32 i;
