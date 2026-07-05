@@ -779,7 +779,74 @@ void func_80035E2C(ModelSegment* segment, ModelVertex* arg1, f32 arg2, StadiumMo
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035E2C.s")
 #endif
 
+#ifdef NON_MATCHING
+extern f32 D_8007C5F0;
+extern f32 D_8007C5F4;
+// Settle each flagged vertex: zero tiny offsets, fold the accumulated offset
+// (averaged by drawGroup count) into base, then decay the offset by stiffness.
+void func_80035FA8(ModelSegment* arg0, ModelVertex* arg1) {
+    ModelVertex* vtx;
+    PosBlend* pos;
+    s16* indexTable;
+    s16* remap;
+    s32 i;
+    f32 threshold;
+    f32 stiffness;
+    f32 fx;
+    f32 fy;
+    f32 fz;
+    f32 ftz;
+    f32 divisor;
+    u16 count;
+
+    vtx = arg1;
+    indexTable = (s16*) Memmap_GetSegmentVaddr(arg0->tableSegment);
+    remap = (s16*) Memmap_GetSegmentVaddr(arg0->remapSegment);
+    if (arg0->vertexCount > 0) {
+        threshold = D_8007C5F0;
+        stiffness = D_8007C5F4;
+        i = 0;
+        do {
+            pos = &vtx->position;
+            if ((func_800336F8(indexTable, i) != 0) && (i == *remap)) {
+                if (func_8003342C(pos->offset.x) < threshold) {
+                    pos->offset.x = 0.0f;
+                }
+                if (func_8003342C(pos->offset.y) < threshold) {
+                    pos->offset.y = 0.0f;
+                }
+                if (func_8003342C(pos->offset.z) < threshold) {
+                    pos->offset.z = 0.0f;
+                }
+                count = vtx->drawGroup;
+                fx = pos->offset.x;
+                fy = pos->offset.y;
+                fz = pos->offset.z;
+                if ((s32) count > 0) {
+                    divisor = (f32) count;
+                    pos->base.x += fx / divisor;
+                    pos->base.y += fy / divisor;
+                    pos->base.z += fz / divisor;
+                } else {
+                    pos->base.x += fx;
+                    pos->base.y += fy;
+                    pos->base.z += fz;
+                }
+                pos->offset.x = fx - (stiffness * fx);
+                ftz = fz - (stiffness * fz);
+                pos->offset.y = fy - (stiffness * fy);
+                pos->offset.z = ftz;
+            }
+            vtx->drawGroup = 0;
+            i += 1;
+            vtx += 1;
+            remap += 1;
+        } while (i < arg0->vertexCount);
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035FA8.s")
+#endif
 
 void func_800361C4(StadiumModel* model, MtxF*);
 #ifdef NON_MATCHING
