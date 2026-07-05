@@ -652,7 +652,61 @@ void func_812020C0(s32 arg0, s32 arg1, s32 arg2) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812020C0.s")
 #endif
 
+#ifdef NON_MATCHING
+extern u8 D_8120E480[];
+extern u16 D_8120E680[];
+extern u8 D_8122AD50[];
+extern s8 D_8122C4E7;
+// Compose a Game Boy screen frame: clear the buffer, draw the border, then lay
+// out the digit/glyph run for the current value using the D_8120E480 glyph-width
+// table (two-level: width index at +0x43, then advance width).
+void func_81202210(s32 arg0, s32 arg1) {
+    unk_D_80068BB0* buf;
+    u8* head;
+    u8* ptr;
+    s32 count;
+    s32 acc;
+    s32 i;
+    s32 idx;
+    u8 sel;
+
+    buf = D_8122B2D8[arg0];
+    bzero(buf, 0x2800);
+    head = (u8*) buf + 0xAA;
+    sel = D_8122B2C0->unk_5DC5;
+    if (sel != 0) {
+        sel -= 1;
+    }
+    func_81201FBC((s32) head, D_8120E680[sel], 0x70);
+    count = 9;
+    acc = 0;
+    if (arg1 != 0) {
+        count = 8;
+        arg1 = 0xA;
+    }
+    i = 0;
+    if (count >= 0) {
+        ptr = &D_8122AD50[arg1 + count];
+        do {
+            idx = D_8120E480[(*ptr - i) + 0x43];
+            func_81201DDC((u16*) (head + (acc * 2) + 0x788), D_8122C740 + (idx * 0xA0), 0xFFFE, 0xC, 0xA, 0x10);
+            i += 1;
+            acc += D_8120E480[idx];
+            ptr -= 1;
+        } while ((count + 1) != i);
+    }
+    func_812015EC((u16*) (head + 0x7FE), (u16*) ((u8*) D_8122C748 + 0xAD18), 0, 0x10, 0xA);
+    sel = D_8122B2C0->unk_5DC5;
+    if (sel != 0) {
+        sel -= 1;
+    }
+    func_812015EC((u16*) (head + 0x5C2), (u16*) ((u8*) D_8122C748 + (sel * 0x120) + 0xAE58), 0, 0xC, 0xC);
+    func_812020C0((s32) (head - 0x10), arg1, 0);
+    D_8122C4E7 = 0;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202210.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_8120241C.s")
 
