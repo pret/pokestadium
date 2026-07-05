@@ -451,7 +451,66 @@ void func_812015EC(u16* dst, u16* src, s32 mode, s32 width, s32 height) {
   }
 }
 
+#ifdef NON_MATCHING
+// Draw the tile-grid border/frame into the render target: blit corner/edge
+// glyphs from D_8122C748, then paint the 0xC14 grid lines. All pointer offsets
+// are byte offsets into the u16 render target.
+void func_812016DC(u16* arg0) {
+    u8* s1;
+    u8* s2;
+    u8* s3;
+    u8* s5;
+    u8* a2;
+    u8* a3;
+    u8* v0;
+    s32 s4;
+    s32 t0;
+    s32 a1;
+
+    s1 = (u8*) arg0 + 0x10;
+    s2 = (u8*) arg0 + 0x1400;
+    s5 = s2 + 0x4C;
+    s3 = s1 + 0x5F00;
+    s4 = 0x1400;
+    do {
+        func_812015EC((u16*) s1, (u16*) &D_8122C748->unk0000[0x1180], 0xFFFF, 8, 8);
+        func_812015EC((u16*) s3, (u16*) &D_8122C748->unk0000[0x1400], 0xFFFF, 8, 8);
+        func_812015EC((u16*) s2, (u16*) &D_8122C748->unk0000[0x1280], 0xFFFF, 8, 8);
+        func_812015EC((u16*) s5, (u16*) &D_8122C748->unk0000[0x1300], 0xFFFF, 8, 8);
+        s4 += 0x1400;
+        s1 += 0x10;
+        s3 += 0x10;
+        s2 += 0x1400;
+        s5 += 0x1400;
+    } while (s4 != 0x6400);
+    func_812015EC(arg0, (u16*) &D_8122C748->unk0000[0x1100], 0, 8, 8);
+    func_812015EC((u16*) ((u8*) arg0 + 0x4C), (u16*) &D_8122C748->unk0000[0x1200], 0, 8, 8);
+    func_812015EC((u16*) ((u8*) arg0 + 0x5F00), (u16*) &D_8122C748->unk0000[0x1380], 0, 8, 8);
+    func_812015EC((u16*) ((u8*) arg0 + 0x5F4C), (u16*) &D_8122C748->unk0000[0x1480], 0, 8, 8);
+    t0 = 0;
+    a3 = (u8*) arg0;
+    a2 = (u8*) arg0;
+    do {
+        *(u16*) (a2 + 0x1410) = 0xC14;
+        *(u16*) (a2 + 0x1412) = 0xC14;
+        a1 = 2;
+        v0 = a3 + 4;
+        do {
+            a1 += 4;
+            *(u16*) (v0 + 0x1412) = 0xC14;
+            *(u16*) (v0 + 0x1414) = 0xC14;
+            *(u16*) (v0 + 0x1416) = 0xC14;
+            v0 += 8;
+            *(u16*) (v0 + 0x1408) = 0xC14;
+        } while (a1 != 0x1E);
+        t0 += 0x140;
+        a3 += 0x280;
+        a2 += 0x280;
+    } while (t0 != 0x2580);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812016DC.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812018C0.s")
 
