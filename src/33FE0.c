@@ -743,13 +743,46 @@ void func_80035D08(ModelSegment*, ModelVertex*, f32);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035D08.s")
 #endif
 
+#ifdef NON_MATCHING
+// Per-vertex Y nudge for flagged vertices (mode 1: +arg2; mode 2: +0.25*arg2).
+void func_80035E2C(ModelSegment* segment, ModelVertex* arg1, f32 arg2, StadiumModel* arg3) {
+    s16* indexTable;
+    s16* remap;
+    ModelVertex* vtx;
+    s16 mode;
+    s32 i;
+
+    indexTable = (s16*) Memmap_GetSegmentVaddr(segment->tableSegment);
+    remap = (s16*) Memmap_GetSegmentVaddr(segment->remapSegment);
+    vtx = arg1;
+    for (i = 0; i < segment->vertexCount; i++) {
+        if ((func_800336F8(indexTable, i) != 0) && (i == *remap)) {
+            mode = func_800338B8(indexTable, i);
+            switch (mode) {
+            case 1:
+                vtx->position.base.x += 0.0f;
+                vtx->position.base.y += arg2 * 1.0f;
+                vtx->position.base.z += 0.0f;
+                break;
+            case 2:
+                vtx->position.base.x += 0.0f;
+                vtx->position.base.z += 0.0f;
+                vtx->position.base.y += 0.25f * arg2 * 1.0f;
+                break;
+            }
+        }
+        vtx += 1;
+        remap += 1;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035E2C.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035FA8.s")
 
 void func_800361C4(StadiumModel* model, MtxF*);
 #ifdef NON_MATCHING
-void func_80035E2C(void*, void*, f32, StadiumModel*);
 // Dispatch a model's per-frame transform pass by model type, then apply the
 // vertex remap table (copying the 0x30-byte pos/color/tex tail between vertices).
 void func_800361C4(StadiumModel* model, MtxF* arg1) {
