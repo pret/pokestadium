@@ -320,7 +320,109 @@ void func_80033D1C(StadiumModel* model, MtxF* mtx) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D1C.s")
 #endif
 
+#ifdef NON_MATCHING
+extern f32 D_8007C5B4;
+// Append a StadiumTransform: build an orthonormal frame from p0->p1, store the
+// four control points + matrix, then compute each vertex's projection weights.
+void func_80033D44(StadiumModel* arg0, s16 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, MtxF* arg9) {
+    ModelSegment* segment;
+    StadiumTransform* tf;
+    ModelVertex* vtx;
+    f32* w;
+    s16 idx;
+    s32 i;
+    f32 dx, dy, dz, len;
+    f32 ndx, ndy, ndz;
+    f32 ux, uy, uz;
+    f32 rx, ry, rz;
+    f32 p2x, p2y, p2z;
+    f32 p3x, p3y, p3z;
+    f32 c0x, c0y, c0z;
+    f32 c1x, c1y, c1z;
+    f32 c2x, c2y, c2z;
+    f32 c3x, c3y, c3z;
+    f32 vx, vy, vz;
+    f32 px, py, pz;
+    f32 dist;
+
+    idx = arg0->unk_02;
+    segment = (ModelSegment*) Memmap_GetSegmentVaddr(arg0->modelSegment);
+    arg0->unk_02 = idx + 1;
+    dx = arg6 - arg3;
+    dy = arg7 - arg4;
+    dz = arg8 - arg5;
+    len = sqrtf((dx * dx) + (dy * dy) + (dz * dz));
+    if (len != 0.0f) {
+        ndx = dx / len;
+        ndy = dy / len;
+        ndz = dz / len;
+        ux = -1.0f;
+        uy = 0.0f;
+        uz = 0.0f;
+        if (D_8007C5B4 < func_8003342C((ndx * -1.0f) + (ndy * 0.0f) + (ndz * 0.0f))) {
+            uy = 1.0f;
+            ux = 0.0f;
+            uz = 0.0f;
+            if (D_8007C5B4 < func_8003342C(ndy)) {
+                uz = 1.0f;
+                uy = 0.0f;
+            }
+        }
+        func_80033450(ndx, ndy, ndz, ux, uy, uz, &rx, &ry, &rz);
+        p2x = arg3 + rx;
+        p2y = arg4 + ry;
+        p2z = arg5 + rz;
+        func_80033450(ndx, ndy, ndz, rx, ry, rz, &rx, &ry, &rz);
+        p3x = arg3 + rx;
+        p3y = arg4 + ry;
+        p3z = arg5 + rz;
+        tf = &arg0->transforms[idx];
+        tf->unk_00 = arg1;
+        tf->maxDist = arg2;
+        tf->x0 = arg3;
+        tf->y0 = arg4;
+        tf->z0 = arg5;
+        tf->x1 = arg6;
+        tf->y1 = arg7;
+        tf->z1 = arg8;
+        tf->x2 = p2x;
+        tf->y2 = p2y;
+        tf->z2 = p2z;
+        tf->x3 = p3x;
+        tf->y3 = p3y;
+        tf->z3 = p3z;
+        tf->mtx = arg9;
+        guMtxXFMF((f32(*)[4]) arg9, arg3, arg4, arg5, &c0x, &c0y, &c0z);
+        guMtxXFMF((f32(*)[4]) arg9, arg6, arg7, arg8, &c1x, &c1y, &c1z);
+        guMtxXFMF((f32(*)[4]) arg9, p2x, p2y, p2z, &c2x, &c2y, &c2z);
+        guMtxXFMF((f32(*)[4]) arg9, p3x, p3y, p3z, &c3x, &c3y, &c3z);
+        vtx = &arg0->mvtx;
+        i = 0;
+        if (segment->vertexCount > 0) {
+            do {
+                vx = vtx->position.base.x;
+                vy = vtx->position.base.y;
+                vz = vtx->position.base.z;
+                dist = func_80033568(vx, vy, vz, c0x, c0y, c0z, c1x, c1y, c1z, &px, &py, &pz);
+                w = (f32*) ((u8*) vtx + (idx * 0x10) + 0x14);
+                if (dist > 0.0f) {
+                    vx = (((vx - px) * arg2) / dist) + px;
+                    vy = (((vy - py) * arg2) / dist) + py;
+                    vz = (((vz - pz) * arg2) / dist) + pz;
+                }
+                w[0] = func_800334C0(vx, vy, vz, c0x, c0y, c0z, c1x, c1y, c1z);
+                w[1] = func_800334C0(vx, vy, vz, c0x, c0y, c0z, c2x, c2y, c2z);
+                w[2] = func_800334C0(vx, vy, vz, c0x, c0y, c0z, c3x, c3y, c3z);
+                w[3] = dist;
+                i += 1;
+                vtx += 1;
+            } while (i < segment->vertexCount);
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D44.s")
+#endif
 
 #ifdef NON_MATCHING
 void func_80034254(StadiumModel* model) {
