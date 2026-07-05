@@ -573,7 +573,7 @@ extern u16* D_8122C750;
 extern u32 D_8122C764;
 extern u32 D_8122C768;
 extern u8 D_8122C770;
-void func_81202758(s32, u8);
+void func_81202758(u16*, s32);
 s32 func_81202FCC(s32 arg0, s32 arg1) {
     s32 updated;
 
@@ -595,7 +595,7 @@ s32 func_81202FCC(s32 arg0, s32 arg1) {
         }
     }
     if (updated != 0) {
-        func_81202758(arg0 + 0x87BA, D_8122C770);
+        func_81202758((u16*) (arg0 + 0x87BA), D_8122C770);
         func_81202EA8((u16*) D_8122C750, (u16*) D_8122C74C, (u16*) (arg1 + 0x20A80), 0xF, D_8122C764);
     }
     return updated;
