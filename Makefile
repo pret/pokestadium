@@ -151,6 +151,18 @@ CPP             := cpp
 ICONV           := iconv
 CAT             := cat
 
+# macOS's BSD iconv mis-encodes an ASCII backslash (0x5C) as the EUC-JP fullwidth
+# backslash (0xA1C0) when it follows a multibyte character. This silently corrupts
+# C escapes such as "\n" inside Japanese string literals and breaks the byte-match
+# (e.g. a ~293-byte divergence at the end of fragment62). GNU libiconv encodes it
+# correctly, so prefer it when present: `brew install libiconv`.
+ifeq ($(DETECTED_OS), macos)
+  ICONV := $(firstword $(wildcard /opt/homebrew/opt/libiconv/bin/iconv /usr/local/opt/libiconv/bin/iconv) iconv)
+  ifeq ($(ICONV), iconv)
+    $(warning Using system BSD iconv on macOS; this mis-encodes "\n" in EUC-JP strings and will break the byte-match. Run `brew install libiconv`.)
+  endif
+endif
+
 ASM_PROC        := $(PYTHON) tools/asm-processor/build.py
 ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename
 
