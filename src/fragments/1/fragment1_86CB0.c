@@ -121,7 +121,41 @@ void func_81207690(void) {
 }
 
 s32 func_81207698(u32, u16);
+#ifdef NON_MATCHING
+extern u8 D_8122EE58[];
+extern s32 D_8122EE98;
+s32 func_81207698(u32 arg0, u16 arg1) {
+    switch (arg0) {
+    case 0:
+        if ((arg1 >= 4) && (arg1 < 8)) {
+            return 0x7F;
+        }
+        return 0;
+    case 1:
+        if (arg1 < 8) {
+            return 0x7F;
+        }
+        return 0;
+    case 2:
+        if (arg1 < 0x10) {
+            return 0x7F;
+        }
+        return 0;
+    case 3:
+        if (arg1 < 8) {
+            return 0;
+        }
+        return 0x7F;
+    case 6:
+        return ((u8*) D_8122C794)[D_8122EE98 + arg1] & 0x7F;
+    case 7:
+        return (D_8122EE58[arg1] << 3) & 0xFF;
+    }
+    return 0;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207698.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207774.s")
 
@@ -280,7 +314,60 @@ void func_8120806C(u16, u8);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81208828.s")
 
+#ifdef NON_MATCHING
+extern s32 D_8120EAD0;
+void func_81208C08(u16 arg0, u8 arg1, u16 arg2) {
+    s32 code;
+
+    code = arg0 + 0xFFFF0100;
+    osSendMesg(&D_8122EEB0, (void*) ((code << 0x18) | (arg1 << 0x10) | arg2), 0);
+    D_8120EAD0 = arg2;
+    switch (code) {
+    case 20:
+        if (arg1 & 0x80) {
+            D_8122EEA8.unk_00 = 2;
+        }
+        break;
+    case 25:
+        if (arg1 & 0x80) {
+            D_8122EEA8.unk_01 = 2;
+        }
+        break;
+    case 30:
+        if (arg1 & 0x80) {
+            D_8122EEA8.unk_02 = 2;
+        }
+        break;
+    case 35:
+        if (arg1 & 0x80) {
+            D_8122EEA8.unk_03 = 2;
+        }
+        break;
+    case 38:
+        if (!(arg1 & 1)) {
+            D_8122EEA8.unk_00 = 1;
+        }
+        if (!(arg1 & 2)) {
+            D_8122EEA8.unk_01 = 1;
+        }
+        if (!(arg1 & 4)) {
+            D_8122EEA8.unk_02 = 1;
+        }
+        if (!(arg1 & 8)) {
+            D_8122EEA8.unk_03 = 1;
+        }
+        if (!(arg1 & 0x80)) {
+            D_8122EEA8.unk_00 = 1;
+            D_8122EEA8.unk_01 = 1;
+            D_8122EEA8.unk_02 = 1;
+            D_8122EEA8.unk_03 = 1;
+        }
+        break;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81208C08.s")
+#endif
 
 void func_81208D7C(void) {
   s32 pad[6];
