@@ -748,7 +748,96 @@ void func_80035D08(ModelSegment*, ModelVertex*, f32);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035FA8.s")
 
 void func_800361C4(StadiumModel* model, MtxF*);
+#ifdef NON_MATCHING
+void func_80035E2C(void*, void*, f32, StadiumModel*);
+// Dispatch a model's per-frame transform pass by model type, then apply the
+// vertex remap table (copying the 0x30-byte pos/color/tex tail between vertices).
+void func_800361C4(StadiumModel* model, MtxF* arg1) {
+    ModelSegment* segment;
+    ModelVertex* vtx;
+    s16* remap;
+    StadiumTransform* transform;
+    s32 i;
+
+    segment = (ModelSegment*) Memmap_GetSegmentVaddr(model->modelSegment);
+    vtx = &model->mvtx;
+    switch (segment->type) {
+    case 3:
+        func_80035248(segment, arg1, vtx);
+        func_80035C4C(segment, vtx, model->position.y * -10.0f);
+        func_80034348(segment, vtx);
+        transform = model->transforms;
+        for (i = 0; i < model->unk_02; i++) {
+            func_80034BD4((StadiumModel*) segment, transform, i, vtx);
+            transform += 1;
+        }
+        func_80035FA8(segment, vtx);
+        func_800359FC(segment, vtx, model, 0.7f);
+        break;
+    case 4:
+        func_80035248(segment, arg1, vtx);
+        func_80035C4C(segment, vtx, model->position.y * -10.0f);
+        func_80034348(segment, vtx);
+        func_80035FA8(segment, vtx);
+        break;
+    case 10:
+        func_80035248(segment, arg1, vtx);
+        func_80035D08(segment, vtx, model->position.y * 160.0f);
+        func_80035FA8(segment, vtx);
+        func_80035B20(segment, vtx, model, 1.0f);
+        break;
+    case 11:
+        func_80035248(segment, arg1, vtx);
+        func_80035E2C(segment, vtx, 160.0f, model);
+        func_80035FA8(segment, vtx);
+        func_80035B20(segment, vtx, model, 1.0f);
+        break;
+    case 1:
+        func_80035248(segment, arg1, vtx);
+        func_80034348(segment, vtx);
+        func_80035FA8(segment, vtx);
+        break;
+    case 2:
+        func_80035248(segment, arg1, vtx);
+        func_80035C4C(segment, vtx, model->position.y * -10.0f);
+        func_80034348(segment, vtx);
+        func_80035FA8(segment, vtx);
+        break;
+    case 5:
+        func_80035248(segment, arg1, vtx);
+        func_80034348(segment, vtx);
+        func_80035FA8(segment, vtx);
+        break;
+    case 6:
+        func_80035248(segment, arg1, vtx);
+        func_80034348(segment, vtx);
+        func_80035FA8(segment, vtx);
+        break;
+    case 9:
+        func_80035248(segment, arg1, vtx);
+        func_80034B28(model);
+        func_80034348(segment, vtx);
+        break;
+    default:
+        return;
+    }
+
+    remap = (s16*) Memmap_GetSegmentVaddr(segment->remapSegment);
+    for (i = 0; i < segment->vertexCount; i++) {
+        s16 src = remap[i];
+        if (src != i) {
+            s32* dst_p = (s32*) ((u8*) &vtx[i] + 0x64);
+            s32* src_p = (s32*) ((u8*) &vtx[src] + 0x64);
+            s32 j;
+            for (j = 0; j < 0xC; j++) {
+                dst_p[j] = src_p[j];
+            }
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_800361C4.s")
+#endif
 
 void func_8003658C(StadiumModel* model, Vtx* vtxBuf) {
     ModelSegment* segment;
