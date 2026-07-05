@@ -143,8 +143,9 @@ all its functions — a free head-start on the later matching phase.
   that mirror an existing sibling (`func_812075C0` ↔ `func_812073B8`) are the
   cleanest wins.
 
-Progress so far (4 done): `func_80033D1C`, `func_800414B8`, `func_812075C0`,
-`func_81209690` → bare 61 → 57, C-first 70.0%.
+Progress so far (7 done): `func_80033D1C`, `func_800414B8`, `func_8003F4C0`
+(33FE0/3D140); `func_812075C0`, `func_81209690` (fragment1_86CB0);
+`func_812004B8`, `func_81202EA8` (fragment1_7F9A0) → bare 61 → 54, C-first 71.6%.
 
 ## Critical files
 - `tools/rust/crates/ps-status/` + `tools/rust/crates/ps-core/src/globalasm.rs` —
