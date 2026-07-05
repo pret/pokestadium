@@ -148,9 +148,21 @@ all its functions — a free head-start on the later matching phase.
   that mirror an existing sibling (`func_812075C0` ↔ `func_812073B8`) are the
   cleanest wins.
 
-Progress so far (7 done): `func_80033D1C`, `func_800414B8`, `func_8003F4C0`
-(33FE0/3D140); `func_812075C0`, `func_81209690` (fragment1_86CB0);
-`func_812004B8`, `func_81202EA8` (fragment1_7F9A0) → bare 61 → 54, C-first 71.6%.
+Progress so far (15 done) → bare 61 → 46, C-first 75.8%:
+- 33FE0/3D140: `func_80033D1C`, `func_800414B8`, `func_8003F4C0`, `func_8003F4C0`,
+  `func_800361C4` (jtbl model dispatcher), `func_80035E2C`, `func_80035FA8`.
+- fragment1_86CB0: `func_812075C0`, `func_81209690`, `func_81207698` (jtbl),
+  `func_81208C08` (jtbl).
+- fragment1_7F9A0: `func_812004B8`, `func_81202EA8`, `func_81202FCC`,
+  `func_812006AC`, `func_81202758`.
+
+Hard-function notes: jtbl functions need the rodata `.s` passed to m2c (or hand-
+tracing when m2c returns a degenerate draft); watch for m2c's byte-vs-element
+pointer arithmetic and fields accessed beyond a mistyped struct (e.g. a count read
+through a `PosBlend*` at +0x2C that is really `ModelVertex.drawGroup`). Some
+functions rely on a callee's leftover `$f0` return while the callee is declared
+`void` (e.g. `func_80035B20` via `func_80035434`) — those need the callee's
+signature changed first, so defer them.
 
 ## Critical files
 - `tools/rust/crates/ps-status/` + `tools/rust/crates/ps-core/src/globalasm.rs` —
