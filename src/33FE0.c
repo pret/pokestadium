@@ -848,7 +848,7 @@ void func_80035248(ModelSegment*, MtxF*, ModelVertex*);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035248.s")
 #endif
 
-void func_80035434(Vec3f* a, Vec3f* b, Vec3f* scale) {
+f32 func_80035434(Vec3f* a, Vec3f* b, Vec3f* scale) {
     f32 dx;
     f32 dy;
     f32 dz;
@@ -866,10 +866,10 @@ void func_80035434(Vec3f* a, Vec3f* b, Vec3f* scale) {
     if (func_8003342C(dz) < D_8007C5D8) {
         dz = 0.0f;
     }
-    sqrtf((dx * dx) + (dy * dy) + (dz * dz));
+    return sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
-void func_80035538(Vec3s* a, Vec3s* b) {
+f32 func_80035538(Vec3s* a, Vec3s* b) {
     f32 dx;
     f32 dy;
     f32 dz;
@@ -877,7 +877,7 @@ void func_80035538(Vec3s* a, Vec3s* b) {
     dx = (f32) (a->x - b->x);
     dy = (f32) (a->y - b->y);
     dz = (f32) (a->z - b->z);
-    sqrtf((dx * dx) + (dy * dy) + (dz * dz));
+    return sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
 #ifdef NON_MATCHING
@@ -960,7 +960,76 @@ void func_80035660(PosBlend*, PosBlend*, f32, f32, f32);
 #endif
 
 void func_800357F4(StadiumModel*);
+#ifdef NON_MATCHING
+// Build the per-vertex transform-command list from the joint adjacency graph:
+// for each qualifying joint/other pair, emit a blend command weighted by their
+// rest-pose distance. The list is terminated with a targetIndex == -1 entry.
+void func_800357F4(StadiumModel* arg0) {
+    ModelSegment* segment;
+    s16* tableSegment;
+    s16* remapTable;
+    s16* vertexData;
+    s16* adjacency;
+    ModelVertex* vtx;
+    ModelVertex* out;
+    ModelTransformCmd* cmd;
+    s16* edge;
+    s16 joint;
+    s16 other;
+    s16 raw;
+    s16 d0, d1, a0, a1;
+    s16 e0, e1;
+    f32 dist;
+    s32 i;
+
+    segment = (ModelSegment*) Memmap_GetSegmentVaddr(arg0->modelSegment);
+    tableSegment = (s16*) Memmap_GetSegmentVaddr(segment->tableSegment);
+    remapTable = (s16*) Memmap_GetSegmentVaddr(segment->remapSegment);
+    vertexData = (s16*) Memmap_GetSegmentVaddr(segment->vertexSegment);
+    adjacency = (s16*) Memmap_GetSegmentVaddr(segment->unk_0C);
+    out = &arg0->mvtx;
+    vtx = &arg0->mvtx;
+    i = 0;
+    if (segment->vertexCount > 0) {
+        do {
+            joint = vtx->jointIndex;
+            edge = &adjacency[vtx->parentIndex];
+            for (;;) {
+                raw = *edge;
+                edge += 1;
+                if (raw == -1) {
+                    break;
+                }
+                other = remapTable[raw];
+                d0 = func_80033810(tableSegment, joint);
+                d1 = func_80033810(tableSegment, other);
+                a0 = func_800337D8(tableSegment, joint);
+                a1 = func_800337D8(tableSegment, other);
+                if ((d0 < d1) && (a0 == a1) && (a0 > 0)) {
+                    e0 = func_800336F8(tableSegment, joint);
+                    e1 = func_800336F8(tableSegment, other);
+                    dist = func_80035538((Vec3s*) ((u8*) vertexData + joint * 0x10),
+                                         (Vec3s*) ((u8*) vertexData + other * 0x10));
+                    cmd = &out->cmd;
+                    out += 1;
+                    cmd->targetIndex = joint;
+                    cmd->sourceIndex = other;
+                    cmd->enableFrom = e0;
+                    cmd->enableTo = e1;
+                    cmd->blendWeight = dist;
+                }
+            }
+            i += 1;
+            vtx += 1;
+        } while (i < segment->vertexCount);
+    }
+    out->cmd.targetIndex = -1;
+    out->cmd.sourceIndex = -1;
+    out->cmd.blendWeight = -1.0f;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_800357F4.s")
+#endif
 
 #ifdef NON_MATCHING
 void func_800359FC(ModelSegment* segment, ModelVertex* vertices, StadiumModel* model, f32 deltaTime) {
@@ -1008,7 +1077,52 @@ void func_800359FC(ModelSegment* segment, ModelVertex* vertices, StadiumModel* m
 #endif
 
 void func_80035B20(ModelSegment*, ModelVertex*, StadiumModel*, f32);
+#ifdef NON_MATCHING
+// Apply each active transform command: spring-blend the target vertex toward
+// the source, weighted by their scaled distance.
+void func_80035B20(ModelSegment* arg0, ModelVertex* arg1, StadiumModel* arg2, f32 arg3) {
+    ModelVertex* vtx;
+    ModelTransformCmd* cmd;
+    ModelVertex* target;
+    ModelVertex* source;
+    PosBlend* tp;
+    PosBlend* sp;
+    s16 targetIndex;
+    s16 enableFrom;
+    s16 enableTo;
+    f32 blendWeight;
+
+    Memmap_GetSegmentVaddr(arg0->tableSegment);
+    Memmap_GetSegmentVaddr(arg0->remapSegment);
+    vtx = arg1;
+    for (;;) {
+        cmd = &vtx->cmd;
+        targetIndex = cmd->targetIndex;
+        vtx += 1;
+        if (targetIndex == -1) {
+            break;
+        }
+        enableFrom = cmd->enableFrom;
+        enableTo = cmd->enableTo;
+        blendWeight = cmd->blendWeight;
+        target = &arg1[targetIndex];
+        if (target->disabled != 0) {
+            enableFrom = 0;
+        }
+        source = &arg1[cmd->sourceIndex];
+        if (source->disabled != 0) {
+            enableTo = 0;
+        }
+        if ((enableTo != 0) || (enableFrom != 0)) {
+            tp = &target->position;
+            sp = &source->position;
+            func_80035660(tp, sp, blendWeight, func_80035434(&tp->base, &sp->base, &arg2->position), arg3);
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80035B20.s")
+#endif
 
 void func_80035C4C(ModelSegment* segment, ModelVertex* vertices, f32 yOffset) {
     s16* indexTable;
