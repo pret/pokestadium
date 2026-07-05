@@ -221,7 +221,36 @@ void func_812003EC(unk_D_8122B2C0* arg0, s32 arg1) {
 }
 
 s32 func_812004B8(unk_D_8122B2C0*);
+#ifdef NON_MATCHING
+s32 func_812004B8(unk_D_8122B2C0* arg0) {
+    s32 ret;
+    s32 count;
+
+    count = 3;
+    do {
+        func_812003EC(arg0, count);
+        ret = func_812002BC(arg0, arg0->unk_5DA0 / 8192);
+        if (ret == 0) {
+            ret = osGbpakReadWrite(&arg0->pfs, 1, ((arg0->unk_5DA0 & 0x1FFF) | 0xA000), &arg0->unk_5D80, sizeof(D_8122C520));
+            if (ret == 0) {
+                ret = osGbpakReadWrite(&arg0->pfs, 0, ((arg0->unk_5DA0 & 0x1FFF) | 0xA000), D_8122C520, sizeof(D_8122C520));
+                if (ret == 0) {
+                    ret = bcmp(D_8122C520, &arg0->unk_5D80, sizeof(D_8122C520));
+                    if (ret == 0) {
+                        count -= 1;
+                        if (count == 0) {
+                            arg0->unk_5DC4 = 1;
+                        }
+                    }
+                }
+            }
+        }
+    } while ((ret == 0) && (count != 0));
+    return ret;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812004B8.s")
+#endif
 
 s32 func_812005D8(unk_D_8122B2C0* arg0) {
   s32 ret;
@@ -418,7 +447,61 @@ void func_81201FBC(s32 arg0, s32 arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812029B0.s")
 
+#ifdef NON_MATCHING
+// Saturating additive RGB565 blend: out[y][x] = sat(srcB[y][x] + srcA[y][(arg4+x)%320])
+void func_81202EA8(u16* arg0, u16* arg1, u16* arg2, s32 arg3, s32 arg4) {
+    u16* aRow;
+    u16* bRow;
+    u16* outRow;
+    u16* b;
+    u16* out;
+    s32 idx;
+    s32 col;
+    u16 pa;
+    u16 pb;
+    s32 r;
+    s32 g;
+    s32 blue;
+
+    if (arg3 > 0) {
+        bRow = arg1;
+        aRow = arg0;
+        outRow = arg2;
+        do {
+            col = 0;
+            b = bRow;
+            idx = arg4;
+            out = outRow;
+            do {
+                pa = aRow[idx % 320];
+                pb = *b;
+                r = (pb & 0xF800) + (pa & 0xF800);
+                if (r >= 0xF801) {
+                    r = 0xF800;
+                }
+                g = (pb & 0x7C0) + (pa & 0x7C0);
+                if (g >= 0x7C1) {
+                    g = 0x7C0;
+                }
+                blue = (pb & 0x3E) + (pa & 0x3E);
+                col += 1;
+                if (blue >= 0x3F) {
+                    blue = 0x3E;
+                }
+                b += 1;
+                idx += 1;
+                out += 1;
+                out[-1] = (s16) (r | g | blue);
+            } while (col != 0x140);
+            outRow += 320;
+            bRow += 320;
+            aRow += 320;
+        } while (outRow != arg2 + (arg3 * 320));
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202EA8.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202FCC.s")
 
