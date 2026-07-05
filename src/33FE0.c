@@ -308,7 +308,62 @@ void func_800338D8(StadiumModel*, MtxF* mtx);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_800338D8.s")
 #endif
 
+#ifdef NON_MATCHING
+extern f32 D_8007C5B0;
+void func_800357F4(StadiumModel*);
+// Initialize a StadiumModel from three segments: copy the header block into the
+// model's 0x138 sub-struct, record the matrix's per-axis scale, then run the
+// base transform and rebuild the joint command list.
+void func_80033B2C(u32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+    StadiumModel* model;
+    Vec3fCounter* seg1;
+    MtxF* mtx;
+    u8* header;
+    u8* sub;
+    f32 sx, sy, sz;
+
+    model = (StadiumModel*) Memmap_GetSegmentVaddr(arg0);
+    seg1 = (Vec3fCounter*) Memmap_GetSegmentVaddr(arg1);
+    mtx = (MtxF*) Memmap_GetSegmentVaddr(arg2);
+    header = (u8*) Memmap_GetSegmentVaddr(arg3);
+    sub = (u8*) model + 0x138;
+    D_800B2F50 = seg1;
+
+    *(f32*) (sub + 0x0) = *(f32*) (header + 0x0);
+    *(f32*) (sub + 0x4) = *(f32*) (header + 0x4);
+    *(f32*) (sub + 0x8) = *(f32*) (header + 0x8);
+    *(s32*) (sub + 0xC) = *(s32*) (header + 0xC);
+    *(s32*) (sub + 0x10) = *(s32*) (header + 0x10);
+    *(s32*) (sub + 0x14) = *(s32*) (header + 0x14);
+    *(s32*) (sub + 0x18) = *(s32*) (header + 0x18);
+    *(s32*) (sub + 0x1C) = *(s32*) (header + 0x1C);
+    model->unk_00 = 1;
+    model->unk_02 = 0;
+    model->modelSegment = (u32) sub;
+
+    sx = sqrtf((mtx->xx * mtx->xx) + (mtx->yx * mtx->yx) + (mtx->zx * mtx->zx));
+    sy = sqrtf((mtx->xy * mtx->xy) + (mtx->yy * mtx->yy) + (mtx->zy * mtx->zy));
+    sz = sqrtf((mtx->xz * mtx->xz) + (mtx->yz * mtx->yz) + (mtx->zz * mtx->zz));
+    if (sx == 0.0f) {
+        sx = 1.0f;
+    }
+    if (sy == 0.0f) {
+        sy = 1.0f;
+    }
+    if (sz == 0.0f) {
+        sz = 1.0f;
+    }
+    model->position.x = sx;
+    model->position.y = sy;
+    model->position.z = sz;
+
+    guScale(&D_800B3258, D_8007C5B0, D_8007C5B0, D_8007C5B0);
+    func_800338D8(model, mtx);
+    func_800357F4(model);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033B2C.s")
+#endif
 
 #ifdef NON_MATCHING
 void func_800357F4(StadiumModel*);
