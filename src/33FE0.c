@@ -310,7 +310,15 @@ void func_800338D8(StadiumModel*, MtxF* mtx);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033B2C.s")
 
+#ifdef NON_MATCHING
+void func_800357F4(StadiumModel*);
+void func_80033D1C(StadiumModel* model, MtxF* mtx) {
+    func_800338D8(model, mtx);
+    func_800357F4(model);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D1C.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D44.s")
 

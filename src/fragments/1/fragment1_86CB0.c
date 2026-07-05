@@ -107,7 +107,15 @@ u32 func_812073B8(u16 arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207494.s")
 
 s32 func_812075C0(s32);
+#ifdef NON_MATCHING
+s32 func_812075C0(s32 arg0) {
+    s32 temp;
+    temp = ((131072.0f / (0x800 - (arg0 & 0xFFFF))) / D_8120EAC0) * 65536;
+    return temp;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_812075C0.s")
+#endif
 
 void func_81207690(void) {
 }
@@ -354,4 +362,9 @@ void func_81209688(UNUSED s32 arg0) {
 }
 
 // Decrypting this function causes issues
+#ifdef NON_MATCHING
+void func_81209690(s32 arg0) {
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81209690.s")
+#endif

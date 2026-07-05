@@ -1239,7 +1239,49 @@ void func_8003DB84(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F1AC.s")
 
+#ifdef NON_MATCHING
+extern u8 D_800FCB30[];
+extern u32 D_800FCBC0;
+extern u16 D_80077FD8;
+extern u16 D_80077FE4;
+void func_8003F4C0(s32 arg0) {
+    u8 temp_v0;
+    s32 idx;
+
+    if ((arg0 != 0) && ((u32) arg0 < 5)) {
+        arg0 -= 1;
+        temp_v0 = D_80078398[arg0];
+        if (((s32) temp_v0 > 0) && ((s32) temp_v0 < 3)) {
+            idx = (temp_v0 - 1) & 0xFF;
+            if ((D_800FCB18[0] != NULL) && (D_800FCB18[1] != NULL) && ((s32) D_800FCB18[idx]->unk_0C > 0)) {
+                D_800FCB30[idx] = 1;
+                D_800FCCB5 = 1;
+                if (D_800783DC != 0) {
+                    func_80041C70(0x58);
+                    D_800783DC = 0;
+                    return;
+                }
+                D_800783DC = 1;
+                if ((u32) D_800783CC < 2) {
+                    if ((osGetTime() % 2) == 0) {
+                        func_80041C70(0x54);
+                        return;
+                    }
+                    func_80041C70(0x55);
+                    return;
+                }
+                if ((&D_800FCBC0)[idx * 0x21] < 2) {
+                    func_800420C0(&D_80077FE4);
+                    return;
+                }
+                func_800420C0(&D_80077FD8);
+            }
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F4C0.s")
+#endif
 
 void func_8003F624(u32 arg0) {
     D_800FCCF0[D_80078544] = arg0;
@@ -1516,7 +1558,29 @@ void func_80040A70(unk_D_800FCB18* arg0, s32 arg1, s32 arg2, s32 arg3) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80040A70.s")
 #endif
 
+#ifdef NON_MATCHING
+void func_800414B8(s32 arg0) {
+    s8* temp_v1;
+    u8 temp_v0;
+
+    if ((arg0 != 0) && ((u32) arg0 < 5)) {
+        arg0 -= 1;
+        temp_v0 = D_80078398[arg0];
+        if (((s32) temp_v0 > 0) && ((s32) temp_v0 < 3)) {
+            temp_v0 = (temp_v0 - 1) & 0xFF;
+            temp_v1 = &D_800FCCD4[temp_v0];
+            if (*temp_v1 != 0) {
+                func_80041C70(0x191);
+            } else {
+                func_80041C70(0x190);
+                *temp_v1 = 1;
+            }
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_800414B8.s")
+#endif
 
 void func_8004153C(void) {
     if (D_80078E80 == 0) {
