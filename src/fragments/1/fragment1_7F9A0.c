@@ -512,7 +512,44 @@ void func_812016DC(u16* arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812016DC.s")
 #endif
 
+#ifdef NON_MATCHING
+// Tint-modulated blit: scale each source pixel's luminance (blue channel) by the
+// arg2 RGB565 tint and write it to the render target. arg0/arg1 are byte-offset
+// pointers; the source row stride is arg3 pixels, the target's is 320.
+void func_812018C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 x;
+    s32 y;
+    u16* dst;
+    u16* src;
+    s32 tintR;
+    s32 tintG;
+    s32 tintB;
+    s32 intensity;
+
+    tintR = arg2 & 0xF800;
+    tintG = arg2 & 0x7C0;
+    tintB = arg2 & 0x3E;
+    y = 0;
+    if (arg4 > 0) {
+        do {
+            dst = (u16*) ((u8*) arg0 + (y * 0x280));
+            src = (u16*) ((u8*) arg1 + (y * arg3 * 2));
+            x = 0;
+            if (arg3 > 0) {
+                do {
+                    intensity = (s32) (src[x] & 0x3E) >> 1;
+                    dst[x] = (((tintR * intensity) / 31) & 0xF800) | (((tintG * intensity) / 31) & 0x7C0) |
+                             (((tintB * intensity) / 31) & 0x3E);
+                    x++;
+                } while (x != arg3);
+            }
+            y++;
+        } while (y != arg4);
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812018C0.s")
+#endif
 
 #ifdef NON_MATCHING
 void func_81201DDC(u16* dst, u8* alpha_map, s32 color, s32 width, s32 height, u32 alpha_stride) {
