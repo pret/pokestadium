@@ -502,7 +502,59 @@ void func_81201FBC(s32 arg0, s32 arg1, s32 arg2) {
   func_812018C0(arg0 + (arg2 - 8) * 2, &D_8122C748->unk_9990, arg1, 8, 0x10);
 }
 
+#ifdef NON_MATCHING
+// Blit a tile's set (odd) pixels from D_8122C748's plane data into the render
+// target at +0x5B4, 4 pixels per step across an 0xB x 0xC region. arg1 chooses
+// the source plane and scan direction.
+void func_812020C0(s32 arg0, s32 arg1, s32 arg2) {
+    u16* src;
+    u8* base;
+    s32 step;
+    s32 row;
+    s32 col;
+    u16 p;
+
+    if (arg1 != 0) {
+        src = (u16*) ((u8*) D_8122C748 + (arg2 * 0x108) + 0x9A90);
+        step = 1;
+    } else {
+        src = (u16*) ((u8*) D_8122C748 + (arg2 * 0x108) + 0x9B96);
+        step = -1;
+    }
+    base = (u8*) arg0;
+    row = 0;
+    do {
+        col = 0;
+        do {
+            u16* dst = (u16*) (base + (row * 0x280) + (col * 2) + 0x5B4);
+            p = *src;
+            src += step;
+            if (p & 1) {
+                dst[0] = p;
+            }
+            p = *src;
+            src += step;
+            if (p & 1) {
+                dst[1] = p;
+            }
+            p = *src;
+            src += step;
+            if (p & 1) {
+                dst[2] = p;
+            }
+            p = *src;
+            src += step;
+            if (p & 1) {
+                dst[3] = p;
+            }
+            col += 4;
+        } while (col != 0xC);
+        row += 1;
+    } while (row != 0xB);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812020C0.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202210.s")
 
