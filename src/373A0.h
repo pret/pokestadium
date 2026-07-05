@@ -26,6 +26,7 @@ typedef struct File2SubHeader2 {
     /* 0x00 */ u32 num_files;
     /* 0x04 */ u32 offset1;
     /* 0x08 */ u32 wave_tables_offset;
+    /* 0x0C */ u32 files[ENTRY_SIZE]; // trailing table of num_files file offsets
 } File2SubHeader2; // size = 0xC
 
 typedef union {
