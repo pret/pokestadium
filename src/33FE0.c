@@ -370,7 +370,70 @@ void func_80034348(ModelSegment*, ModelVertex*);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80034348.s")
 
 void func_80034824(ModelSegment*, StadiumTransform*, s32, ModelVertex*);
+#ifdef NON_MATCHING
+// Barycentric deform: transform a StadiumTransform's 4 corners by its matrix,
+// then set each flagged vertex's offset to the interpolated corner minus base.
+void func_80034824(ModelSegment* arg0, StadiumTransform* arg1, s32 arg2, ModelVertex* arg3) {
+    ModelVertex* vtx;
+    PosBlend* pos;
+    s16* indexTable;
+    s16* remap;
+    MtxF* mtx;
+    f32* weights;
+    s16 vi;
+    s16 vertexCount;
+    s32 i;
+    f32 p0x, p0y, p0z;
+    f32 p1x, p1y, p1z;
+    f32 p2x, p2y, p2z;
+    f32 p3x, p3y, p3z;
+    f32 e2x, e2y, e2z;
+    f32 e3x, e3y, e3z;
+    f32 w0, w1, w2;
+
+    vertexCount = arg0->vertexCount;
+    remap = (s16*) Memmap_GetSegmentVaddr(arg0->remapSegment);
+    indexTable = (s16*) Memmap_GetSegmentVaddr(arg0->tableSegment);
+    mtx = arg1->mtx;
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x0, arg1->y0, arg1->z0, &p0x, &p0y, &p0z);
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x1, arg1->y1, arg1->z1, &p1x, &p1y, &p1z);
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x2, arg1->y2, arg1->z2, &p2x, &p2y, &p2z);
+    guMtxXFMF((f32(*)[4]) mtx, arg1->x3, arg1->y3, arg1->z3, &p3x, &p3y, &p3z);
+    vtx = arg3;
+    i = 0;
+    e2x = p2x - p0x;
+    e2y = p2y - p0y;
+    e2z = p2z - p0z;
+    e3x = p3x - p0x;
+    e3y = p3y - p0y;
+    e3z = p3z - p0z;
+    if (vertexCount > 0) {
+        do {
+            vi = *remap;
+            remap += 1;
+            if (func_800336F8(indexTable, vi) != 0) {
+                pos = &vtx->position;
+                if (vi == i) {
+                    weights = (f32*) ((u8*) vtx + (arg2 * 0x10));
+                    if (arg2 == vtx->nextIndex) {
+                        w0 = weights[5];
+                        w1 = weights[6];
+                        w2 = weights[7];
+                        vtx->disabled = (u16) (vtx->disabled | (1 << arg2));
+                        pos->offset.x = ((w0 * (p1x - p0x)) + p0x + (w1 * e2x) + (w2 * e3x)) - pos->base.x;
+                        pos->offset.y = ((w0 * (p1y - p0y)) + p0y + (w1 * e2y) + (w2 * e3y)) - pos->base.y;
+                        pos->offset.z = ((w0 * (p1z - p0z)) + p0z + (w1 * e2z) + (w2 * e3z)) - pos->base.z;
+                    }
+                }
+            }
+            i += 1;
+            vtx += 1;
+        } while (i != vertexCount);
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80034824.s")
+#endif
 
 void func_80034B28(StadiumModel* model) {
     ModelSegment* segment;
