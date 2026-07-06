@@ -81,7 +81,7 @@ void func_83800294(s32 arg0) {
     main_pool_push_state('glpc');
 
     if ((D_83805664 >= 0) && (D_83805664 < 4)) {
-        func_80023D60(D_83805664);
+        LoadMonFromSlot(D_83805664);
     }
 
     if (arg0 != 0) {

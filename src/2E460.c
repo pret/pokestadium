@@ -46,14 +46,14 @@ unk_func_88500020 D_800758F0[] = {
 };
 
 void func_8002D860(unk_func_8002D860* arg0, s32 arg1) {
-    if (func_80024F00(arg1) != 0) {
+    if (GetMonState(arg1) != 0) {
         arg0->unk_00 = 1;
     } else {
         arg0->unk_00 = 0;
-        arg0->unk_08 = func_80025084(arg1);
-        func_800251B0(arg1, &arg0[1]);
+        arg0->unk_08 = GetMonName(arg1);
+        GetMonNickname(arg1, &arg0[1]);
     }
-    arg0->unk_04 = func_80024F68(arg1);
+    arg0->unk_04 = GetMonStatus(arg1);
 }
 
 void func_8002D8C8(unk_func_88500020* arg0, s32 arg1, s32 a2) {
@@ -489,28 +489,28 @@ s32 ApplyMoveSecondaryEffect(s32 arg0, s32 arg1, s32 arg2) {
         case 16:
         case 17:
         case 18:
-            sp1C = func_800275E0(arg0, arg2);
+            sp1C = GetEffectValue(arg0, arg2);
             break;
     }
     return sp1C;
 }
 
-void func_8002EE78(void) {
+void InitControllerQueue(void) {
     osCreateMesgQueue(&D_800AF750, &D_800AF768, 1);
 }
 
-void func_8002EEA8(OSMesg arg0) {
+void OnControllerMessage(OSMesg arg0) {
     osSendMesg(&D_800AF750, arg0, 1);
     Cont_StartReadInputs();
     Cont_ReadInputs();
     func_8001F730();
 }
 
-void func_8002EEEC(void) {
+void WakeController(void) {
     osSendMesg(&D_800AF750, NULL, 1);
 }
 
-void func_8002EF18(OSMesg arg0) {
+void OnControllerRequest(OSMesg arg0) {
     osRecvMesg(&D_800AF750, arg0, 1);
 }
 
@@ -520,7 +520,7 @@ void Game_HandlePokemonLab(void) {
 
     FRAGMENT_LOAD_AND_CALL(fragment33, 1, 0);
 
-    if (func_80029080() == -1) {
+    if (GetCurrentGameState() == -1) {
         gCurrentGameState = STATE_AREA_SELECT;
         return;
     }
@@ -532,9 +532,9 @@ void Game_HandlePokemonLab(void) {
         if (game_state == STATE_POKEMON_LAB) {
             main_pool_push_state('PLAB');
 
-            if (func_80029080() != -1) {
-                func_80028AFC(3);
-                func_80023D60(func_80029080());
+            if (GetCurrentGameState() != -1) {
+                LoadSlot(3);
+                LoadMonFromSlot(GetCurrentGameState());
             }
 
             func_80005E40(0x16000, 0);
@@ -544,7 +544,7 @@ void Game_HandlePokemonLab(void) {
 
             while ((game_state == STATE_POKEMON_LAB) && (D_800AE520.unk_00 != 0)) {
                 D_800AE520.unk_00 = 0;
-                game_state = func_80029008(D_800AE520.fragment_id, D_800AE520.rom_start, D_800AE520.rom_end,
+                game_state = LoadFragment(D_800AE520.fragment_id, D_800AE520.rom_start, D_800AE520.rom_end,
                                            D_800AE520.arg0, D_800AE520.arg1);
             }
 
@@ -572,7 +572,7 @@ void Game_HandlePokemonLab(void) {
     gCurrentGameState = STATE_AREA_SELECT;
 }
 
-s32 func_8002F1C0(s32 arg0) {
+s32 IsValidInput(s32 arg0) {
     static u8 D_80075950[] = {
         5,    6,    8,    9,    0x1F, 0x29, 0x2A, 0x2B, 0x2D, 0x30, 0x3F, 0x40, 0x45,
         0x46, 0x47, 0x48, 0x49, 0x4A, 0x4C, 0x4D, 0x4E, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8,
@@ -589,10 +589,10 @@ s32 func_8002F1C0(s32 arg0) {
     return 0;
 }
 
-s32 func_8002F264(s32 arg0) {
+s32 IsValidInputStrict(s32 arg0) {
     s32 sp1C = 0;
 
-    if (func_8002F1C0(arg0) != 0) {
+    if (IsValidInput(arg0) != 0) {
         sp1C = 1;
     }
     return sp1C;

@@ -129,7 +129,7 @@ s32 func_8320029C(void) {
             D_832027C8.unk_00 = (var_v1->unk_01C[i].unk_52 & 0x70) >> 4;
             D_832027C8.unk_01 = var_v1->unk_01C[i].unk_52 & 0xF;
             if ((D_832027C8.unk_00 < 4) && (D_832027C8.unk_01 < 0xD)) {
-                if (func_80023D60(D_832027C8.unk_00) != 0) {
+                if (LoadMonFromSlot(D_832027C8.unk_00) != 0) {
                     D_832027C8.unk_02 = func_83200148(D_832027C8.unk_00, D_832027C8.unk_01, var_v1->unk_01C[i].unk_53);
                     if (D_832027C8.unk_02 >= 0) {
                         return 1;

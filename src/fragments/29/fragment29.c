@@ -205,7 +205,7 @@ s32 func_88900808(unk_func_889000C4* arg0, Controller* arg1, s32 arg2) {
     u32 var_s0 = 0;
 
     while (var_s0 == 0) {
-        func_8002EEA8(var_s0);
+        OnControllerMessage(var_s0);
         temp_v0 = arg0->unk_00.unk_20(&arg0->unk_00, arg1);
         if (!(temp_v0 & 1)) {
             if (arg1->buttonPressed & 0x4000) {
@@ -270,8 +270,8 @@ void func_88900970(unk_func_889000C4* arg0, s32 arg1) {
             }
 
             func_889010D0(arg0->unk_44, var_s0);
-            func_8002EEEC();
-            func_8002EEEC();
+            WakeController();
+            WakeController();
         }
     }
 

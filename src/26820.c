@@ -713,7 +713,7 @@ void func_80027430(s32 arg0, s32 arg1, s32 arg2, char* arg3, u16 arg4) {
     }
 }
 
-s16 func_800275E0(s32 arg0, s32 arg1) {
+s16 GetEffectValue(s32 arg0, s32 arg1) {
     s16 var_v1 = 0;
     s32 idx1 = D_800AE4E0 / 4;
     s32 idx2 = D_800AE4E0 % 4;
@@ -751,7 +751,7 @@ void func_800276F0(s32 arg0, s32 arg1, s32 arg2) {
     s32 sp1C = D_800AE4E0 / 4;
     s32 sp18 = D_800AE4E0 % 4;
 
-    if (arg2 < func_800275E0(arg0, arg1)) {
+    if (arg2 < GetEffectValue(arg0, arg1)) {
         switch (arg0) {
             case 16:
                 D_800AE4E8[sp1C].unk_04.unk1->unk_0000[sp18][arg1].unk_000.unk_0E = arg2;
@@ -778,7 +778,7 @@ void func_8002782C(s32 arg0, s32 arg1) {
     idx1 = D_800AE4E0 / 4;
     idx2 = D_800AE4E0 % 4;
 
-    sp1C = func_800275E0(arg0, arg1);
+    sp1C = GetEffectValue(arg0, arg1);
     if (sp1C < func_800270AC(arg0)) {
         switch (arg0) {
             case 16:
@@ -802,7 +802,7 @@ s32 func_8002797C(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
     s32 idx1 = D_800AE4E0 / 4;
     s32 idx2 = D_800AE4E0 % 4;
 
-    if (arg2 < func_800275E0(arg0, arg1)) {
+    if (arg2 < GetEffectValue(arg0, arg1)) {
         switch (arg0) {
             case 16:
                 func_80026268(arg3, &D_800AE4E8[idx1].unk_04.unk1->unk_0000[idx2][arg1].unk_010[arg2]);
@@ -841,7 +841,7 @@ s32 func_80027C24(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
     s32 idx1 = D_800AE4E0 / 4;
     s32 idx2 = D_800AE4E0 % 4;
     s32 sp28 = func_800270AC(arg0);
-    s32 sp24 = func_800275E0(arg0, arg1);
+    s32 sp24 = GetEffectValue(arg0, arg1);
 
     if ((arg2 < sp24) || ((arg2 == sp24) && (arg2 < sp28))) {
         switch (arg0) {
@@ -1169,7 +1169,7 @@ void func_80028A74(void) {
     }
 }
 
-s32 func_80028AFC(s16 arg0) {
+s32 LoadSlot(s16 arg0) {
     if (!((D_800AE4E8[arg0].unk_00 & 1) != 0)) {
         switch (arg0) {
             case 0:
@@ -1197,12 +1197,12 @@ void func_80028BE4(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        func_80028AFC(i);
+        LoadSlot(i);
     }
 }
 
 void func_80028C28(void) {
-    func_80028AFC(3);
+    LoadSlot(3);
 }
 
 s32 func_80028C48(s16 arg0) {

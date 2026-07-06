@@ -391,7 +391,7 @@ void func_84209D18(unk_D_842168A0* arg0, unk_func_80026268_arg0* arg1) {
     unk_D_800AC910_040 sp38;
     unk_D_800AC910_040 sp28;
 
-    if ((arg0->unk_00004 < 4) && (func_80024F68(arg0->unk_00004) == 7) && (arg1->unk_00.unk_00 == 0x19)) {
+    if ((arg0->unk_00004 < 4) && (GetMonStatus(arg0->unk_00004) == 7) && (arg1->unk_00.unk_00 == 0x19)) {
         func_80025040(arg0->unk_00004, &sp28);
         _bcopy(arg1->unk_46, sp38.unk_02, 11);
         sp38.unk_00 = arg1->unk_0E;

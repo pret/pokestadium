@@ -646,8 +646,8 @@ void func_82302A6C(unk_D_82305AF8* arg0, s16 arg1, s16 arg2, s16 arg3) {
     arg0->unk_000A = arg2;
     arg0->unk_000C = arg1;
     arg0->unk_000E = arg2;
-    arg0->unk_0012 = func_80025084(arg3);
-    func_800251B0(arg3, arg0->unk_0014);
+    arg0->unk_0012 = GetMonName(arg3);
+    GetMonNickname(arg3, arg0->unk_0014);
 
     for (i = 0; i < 6; i++) {
         func_80024CB0(0x20, arg3, 0, i, &arg0->unk_0020[i]);
@@ -1363,7 +1363,7 @@ void func_82304BEC(unk_func_80026268_arg0* arg0, s16 arg1) {
     unk_D_800AC910_040 sp30;
     unk_D_800AC910_040 sp20;
 
-    if ((func_80024F68(arg1) == 7) && (arg0->unk_00.unk_00 == 0x19)) {
+    if ((GetMonStatus(arg1) == 7) && (arg0->unk_00.unk_00 == 0x19)) {
         func_80025040(arg1, &sp20);
         _bcopy(arg0->unk_46, sp30.unk_02, 11);
         sp30.unk_00 = arg0->unk_0E;

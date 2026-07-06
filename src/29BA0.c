@@ -51,7 +51,7 @@ s32 Game_DoCopyProtection(s32 state) {
     return state;
 }
 
-s32 func_80029008(s32 arg0, u8* romStart, u8* romEnd, u32 arg3, u32 arg4) {
+s32 LoadFragment(s32 arg0, u8* romStart, u8* romEnd, u32 arg3, u32 arg4) {
     s32 result;
     FragmentEntry func;
 
@@ -77,7 +77,7 @@ unk_D_800AE540_0004* func_80029074(void) {
     return D_800AE540.unk_0004;
 }
 
-s32 func_80029080(void) {
+s32 GetCurrentGameState(void) {
     return D_80075674;
 }
 
@@ -206,7 +206,7 @@ void Game_HandleStubbedDebug(void) {
 
     while ((gCurrentGameState == STATE_STUBBED_DEBUG) && (D_800AE520.unk_00 != 0)) {
         D_800AE520.unk_00 = 0;
-        gCurrentGameState = func_80029008(D_800AE520.fragment_id, D_800AE520.rom_start, D_800AE520.rom_end,
+        gCurrentGameState = LoadFragment(D_800AE520.fragment_id, D_800AE520.rom_start, D_800AE520.rom_end,
                                           D_800AE520.arg0, D_800AE520.arg1);
     }
 
@@ -548,7 +548,7 @@ void Game_HandleGBTower(void) {
         }
 
         func_80024040(D_80075674);
-        func_80028AFC(2);
+        LoadSlot(2);
         func_80027F24(&sp24);
 
         sp24.unk_04 = sp2C.unk_00;

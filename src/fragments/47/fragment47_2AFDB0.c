@@ -75,7 +75,7 @@ void func_83802660(unk_D_838067F0* arg0, unk_func_80026268_arg0* arg1) {
 
     unk_func_83802660_sp28 sp28;
 
-    if ((arg0->unk_0018 < 4) && (func_80024F68(arg0->unk_0018) == 7) && (arg1->unk_00.unk_00 == 0x19)) {
+    if ((arg0->unk_0018 < 4) && (GetMonStatus(arg0->unk_0018) == 7) && (arg1->unk_00.unk_00 == 0x19)) {
         func_80025040(arg0->unk_0018, &sp28);
         _bcopy(arg1->unk_46, sp28.unk_14, sizeof(arg1->unk_46));
         sp28.unk_12 = arg1->unk_0E;

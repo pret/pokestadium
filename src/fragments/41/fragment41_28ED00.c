@@ -1103,7 +1103,7 @@ void func_82F09C6C(void) {
         D_82F210D8[i] = -1;
     }
 
-    D_82F210D8[0] = func_80029080();
+    D_82F210D8[0] = GetCurrentGameState();
     D_82F210D2 = 0;
     func_82F07004(D_82F210D8[0]);
 }

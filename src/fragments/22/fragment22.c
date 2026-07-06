@@ -2699,10 +2699,10 @@ void func_88001300(unk_func_88001300* arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
     unk_func_88001300_03C* tmp3C;
 
     arg0->unk_54 = arg3;
-    arg0->unk_40 = func_80029080();
+    arg0->unk_40 = GetCurrentGameState();
     arg0->unk_50 = 1;
 
-    if ((arg0->unk_40 != -1) && (func_80024F00(arg0->unk_40) == 0)) {
+    if ((arg0->unk_40 != -1) && (GetMonState(arg0->unk_40) == 0)) {
         if (func_80024A48(0x20, arg0->unk_40, 0) < 6) {
             arg0->unk_50 = 0;
         }
@@ -2715,7 +2715,7 @@ void func_88001300(unk_func_88001300* arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
         }
 
         for (i = 0; i < 12; i++) {
-            if (func_800275E0(0x11, i) < 0x14) {
+            if (GetEffectValue(0x11, i) < 0x14) {
                 arg0->unk_50 = 0;
                 break;
             }
@@ -2762,7 +2762,7 @@ void func_88001300(unk_func_88001300* arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(&arg0->unk_2C->unk_00, &temp_s0->unk_00);
 
     sp68 = mem_pool_alloc(arg6, sizeof(unk_func_88509A2C));
-    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(sp68, 0xE, 8, func_80029080(),
+    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(sp68, 0xE, 8, GetCurrentGameState(),
                                                            func_8002D7C0(NULL, 0, D_88016CF0, 0));
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(&temp_s0->unk_00, &sp68->unk_00.unk_00);
 
@@ -2867,7 +2867,7 @@ s32 func_88001D94(unk_func_88001300* arg0) {
 
     var_s6 = 0;
     while (var_s6 == 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
         var_s1 = arg0->unk_00.unk_20(arg0, gPlayer1Controller);
         if (var_s1 & 1) {
             if (var_s1 & 8) {
@@ -2879,7 +2879,7 @@ s32 func_88001D94(unk_func_88001300* arg0) {
         } else if (gPlayer1Controller->buttonPressed & 0x8000) {
             switch (arg0->unk_3C->unk_24) {
                 case 4:
-                    if (func_80024F00(arg0->unk_40) != 0) {
+                    if (GetMonState(arg0->unk_40) != 0) {
                         ((func88506074)Memmap_GetFragmentVaddr(func_88506074))(arg0->unk_34,
                                                                                func_8002D7C0(NULL, 0, D_88016CF4, 7));
                         var_s1 |= 0x80000101;
@@ -2906,7 +2906,7 @@ s32 func_88001D94(unk_func_88001300* arg0) {
                     break;
 
                 case 7:
-                    if (func_80024F00(arg0->unk_40) != 0) {
+                    if (GetMonState(arg0->unk_40) != 0) {
                         ((func88506074)Memmap_GetFragmentVaddr(func_88506074))(arg0->unk_34,
                                                                                func_8002D7C0(NULL, 0, D_88016CF4, 7));
                         var_s1 |= 0x80000101;
@@ -2923,7 +2923,7 @@ s32 func_88001D94(unk_func_88001300* arg0) {
                     break;
 
                 case 5:
-                    if (func_80024F00(arg0->unk_40) != 0) {
+                    if (GetMonState(arg0->unk_40) != 0) {
                         ((func88506074)Memmap_GetFragmentVaddr(func_88506074))(arg0->unk_34,
                                                                                func_8002D7C0(NULL, 0, D_88016CF4, 7));
                         var_s1 |= 0x80000101;
@@ -2947,7 +2947,7 @@ s32 func_88001D94(unk_func_88001300* arg0) {
                     break;
 
                 case 3:
-                    if (func_80024F00(arg0->unk_40) != 0) {
+                    if (GetMonState(arg0->unk_40) != 0) {
                         ((func88506074)Memmap_GetFragmentVaddr(func_88506074))(arg0->unk_34,
                                                                                func_8002D7C0(NULL, 0, D_88016CF4, 7));
                         var_s1 |= 0x80000101;
@@ -2986,7 +2986,7 @@ void func_8800233C(unk_func_88001300* arg0) {
     func88506074 temp_s0;
 
     while (func_80007604() != 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 
     if (arg0->unk_54 == 2) {
@@ -2999,11 +2999,11 @@ void func_8800233C(unk_func_88001300* arg0) {
 
         i = 10;
         while (i-- > 0) {
-            func_8002EEA8(NULL);
+            OnControllerMessage(NULL);
         }
 
         func_8004B9C4(0x10);
-        func_8002EEA8(0x10002);
+        OnControllerMessage(0x10002);
     }
 
     arg0->unk_2C->unk_2C = -1;
@@ -3015,13 +3015,13 @@ void func_8800233C(unk_func_88001300* arg0) {
             // clang-format on
 
             for (i = 0; i < 60; i++) {
-                func_8002EEA8(NULL);
+                OnControllerMessage(NULL);
             }
 
             arg0->unk_38->unk_00.unk_28 |= 0x201;
 
             for (i = 0; i < 8; i++) {
-                func_8002EEA8(NULL);
+                OnControllerMessage(NULL);
             }
 
             // clang-format off
@@ -3047,10 +3047,10 @@ void func_8800233C(unk_func_88001300* arg0) {
 
     i = 10;
     while (i-- > 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 
-    func_8002EEA8(sp34);
+    OnControllerMessage(sp34);
 
     osStopThread(NULL);
 }
@@ -3075,7 +3075,7 @@ s32 func_880025D8(unk_func_88001300* arg0) {
 
     while (sp24 == 0) {
         func_88002580(arg0);
-        func_8002EF18(&sp24);
+        OnControllerRequest(&sp24);
     }
 
     return sp24 - 1;
@@ -3099,7 +3099,7 @@ s32 func_88002628(s32 arg0, UNUSED s32 arg1) {
     FRAGMENT_LOAD(fragment25);
     sp40 = ASSET_LOAD(0, fragment29_misc_2, 0);
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_8002D510();
     D_88016CF0 = func_8002D5AC(0x2A);
     D_88016CF4 = func_8002D5AC(0);
@@ -3112,7 +3112,7 @@ s32 func_88002628(s32 arg0, UNUSED s32 arg1) {
 
     sp30 = ALIGN16((u32)mem_pool_alloc(sp44, sizeof(func_88002628_sp38)));
     osCreateThread(&sp30->thread, 0x32, func_8800233C, sp38, sp34 + 0x1000, osGetThreadPri(NULL) - 1);
-    func_8002EE78();
+    InitControllerQueue();
     func_8001F738(gPlayer1Controller);
     osStartThread(&sp30->thread);
 

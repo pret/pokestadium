@@ -47,7 +47,7 @@ void func_83900038(void) {
 
     D_839026FC = 0;
     D_83902700.unk_00 = 0;
-    func_80028AFC(2);
+    LoadSlot(2);
 
     for (i = 0; i < 36; i++) {
         func_8002797C(0x16, 0, i, &D_839006B0[i]);

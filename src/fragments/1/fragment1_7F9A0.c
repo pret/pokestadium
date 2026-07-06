@@ -1548,7 +1548,7 @@ void func_81206D9C(unk_D_800AA660* arg0) {
   func_81203E30();
   D_8122C740 = arg0->font1 + 0x90;
   D_8122C744 = arg0->font2 + 0x90;
-  func_812033F4(0, func_80029080(), 5, 0x50, &gSIEventMesgQueue, arg0->unk_2204.unk_04);
+  func_812033F4(0, GetCurrentGameState(), 5, 0x50, &gSIEventMesgQueue, arg0->unk_2204.unk_04);
 }
 
 void func_81206E64(unk_D_800AA660* arg0) {

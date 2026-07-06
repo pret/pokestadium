@@ -74,7 +74,7 @@ s32 func_82A00224(s32 arg0, UnkInputStruct8000D738* arg1) {
     D_82A00374 = func_8001A024(D_82A00370, 6, 0x28, 0x28);
     func_8001987C();
     func_82A00020(arg0);
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80007678(sp24);
     func_80007820(8, func_82A000F0);
     func_800076C0();

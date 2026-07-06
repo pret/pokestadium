@@ -287,8 +287,8 @@ void func_82F00734(void) {
         func_80023AF8(i);
         DecodeMonNameSafe(ptr->unk_08, sp40.unk_02);
         ptr->unk_06 = sp40.unk_00;
-        ptr->unk_01 = func_80024F68(i);
-        ptr->unk_00 = func_80024F00(i);
+        ptr->unk_01 = GetMonStatus(i);
+        ptr->unk_00 = GetMonState(i);
         ptr->unk_03 = func_80025370(i);
         ptr->unk_04 = func_8002539C(i);
         ptr->unk_05 = (temp_s2 & (1 << i)) != 0;
@@ -376,7 +376,7 @@ void func_82F00AC8(s32 arg0) {
                 main_pool_push_state('pmex');
                 D_82F144BC = 1;
             }
-            func_80023D60(func_82F07A54(D_82F144A8));
+            LoadMonFromSlot(func_82F07A54(D_82F144A8));
             func_82F01530(D_82F144A8, func_82F07A54(D_82F144A8));
             break;
 

@@ -786,7 +786,7 @@ void func_86B025A4(void) {
     s32 var_v0;
 
     D_86B0EBDC->unk_2F0 = 0;
-    func_80028AFC(2);
+    LoadSlot(2);
     var_v0 = func_8002816C() & 0xFF;
 
     D_86B0EBDC->unk_2E8 = var_v0;

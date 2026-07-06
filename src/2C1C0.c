@@ -230,7 +230,7 @@ void func_8002BB7C(s32 arg0, s32 arg1, s32 arg2) {
     char sp34[11];
 
     func_80023AF8(arg2);
-    func_800251B0(arg2, &sp34);
+    GetMonNickname(arg2, &sp34);
 
     temp_s4 = func_8002B700(arg1, 0, &sp34, GetPlayerName(1));
     temp_v0 = func_80022C28(0x20, arg2, 0, 0);

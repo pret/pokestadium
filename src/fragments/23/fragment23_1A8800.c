@@ -176,7 +176,7 @@ void func_88200AF4(unk_func_88200FA0_030* arg0) {
     arg0->unk_2C->unk_2C = 0xB;
     arg0->unk_34->unk_2C->unk_2C = 0xB;
     while (arg0->unk_2C->unk_00.unk_28 & 1) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 }
 
@@ -187,7 +187,7 @@ s32 func_88200B60(unk_func_88200FA0_030* arg0, Controller* arg1) {
     func_88200ACC(arg0);
 
     while (var_s1 == 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
         var_s0 = func_88200A30(arg0, arg1);
         if (!(var_s0 & 1)) {
             if (arg1->buttonPressed & 0x4000) {
@@ -235,7 +235,7 @@ void func_88200C44(unk_func_88200FA0* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(sp4C, arg0->unk_2C);
 
     sp44 = mem_pool_alloc(arg4, sizeof(unk_func_88509A2C));
-    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(sp44, 0x38, 0x22, func_80029080(),
+    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(sp44, 0x38, 0x22, GetCurrentGameState(),
                                                            func_8002D7C0(NULL, 0, D_88224F90, 0));
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(arg0->unk_2C, sp44);
 
@@ -258,7 +258,7 @@ s32 func_88200F00(unk_func_88200FA0* arg0) {
         ((func885008C4)Memmap_GetFragmentVaddr(func_885008C4))(arg0);
         ((func88500828)Memmap_GetFragmentVaddr(func_88500828))(arg0, 0, 0);
         func_80007778();
-        func_8002EF18(&sp34);
+        OnControllerRequest(&sp34);
     }
     return sp34;
 }
@@ -268,7 +268,7 @@ void func_88200FA0(unk_func_88200FA0* arg0) {
     s32 i;
 
     while (func_80007604() != 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 
     func_8001F738(gPlayer1Controller);
@@ -280,10 +280,10 @@ void func_88200FA0(unk_func_88200FA0* arg0) {
 
         i = 10;
         while (i-- > 0) {
-            func_8002EEA8(NULL);
+            OnControllerMessage(NULL);
         }
     }
-    func_8002EEA8(sp24);
+    OnControllerMessage(sp24);
 
     osStopThread(NULL);
 }
@@ -311,7 +311,7 @@ s32 func_8820104C(s32 arg0, UNUSED s32 arg1) {
     sp28 = ALIGN16((u32)mem_pool_alloc(sp34, sizeof(func_88002628_sp38)));
     osCreateThread(&sp28->thread, 0x32, func_88200FA0, sp30, sp2C + 0x1000, osGetThreadPri(NULL) - 1);
 
-    func_8002EE78();
+    InitControllerQueue();
     func_8001F738(gPlayer1Controller);
 
     osStartThread(&sp28->thread);

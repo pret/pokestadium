@@ -62,7 +62,7 @@
 )
 
 #define FRAGMENT_LOAD_AND_CALL(fragment, arg0, arg1) (\
-    func_80029008(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END, arg0, arg1) \
+    LoadFragment(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END, arg0, arg1) \
 )
 
 #define FRAGMENT_LOAD_AND_CALL2(fragment, arg0, arg1) (\

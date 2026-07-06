@@ -816,7 +816,7 @@ s32 func_82202DC4(UNUSED s32 arg0, UNUSED s32 arg1) {
 
     func_8002D510();
     D_822030F0 = func_8002D5AC(0x17);
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027F24(&D_822031E8);
     func_80027FA0(&D_822031E0, D_800AE540.unk_11F2);
     func_82202CB8();

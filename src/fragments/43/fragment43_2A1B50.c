@@ -39,7 +39,7 @@ void func_83400020(void) {
 
     main_pool_push_state('bkgl');
 
-    func_80028AFC(2);
+    LoadSlot(2);
     bzero(D_83403C60, sizeof(unk_D_83403C60) * 36);
     bzero(D_83405010, sizeof(unk_D_83403C60) * 36);
     bzero(&D_834063C0, sizeof(unk_D_83403C60) * 21);
@@ -157,7 +157,7 @@ s32 func_83400410(s32 arg0, s32 arg1) {
 
     main_pool_push_state('bkgl');
 
-    func_80028AFC(2);
+    LoadSlot(2);
     if (arg0 != 0) {
         sp28 = func_83400334();
     } else {

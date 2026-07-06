@@ -869,7 +869,7 @@ s32 func_84A02D14(s32 arg0, UNUSED s32 arg1) {
     func_8002D510();
     D_84A03130 = func_8002D5AC(0x19);
     D_84A03134 = func_8002D5AC(0x22);
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027FA0(&D_84A03180, D_800AE540.unk_11F2);
     D_84A03168 = func_800044F4(0x898000, NULL, 1, 1);
     D_84A0316C = ASSET_LOAD2(battle_portraits, 1, 1);

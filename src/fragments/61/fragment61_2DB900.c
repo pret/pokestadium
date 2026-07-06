@@ -751,8 +751,8 @@ void func_84205B3C(void) {
         func_80025040(i, &sp48);
         DecodeMonName(D_8423E518[i].unk_06, sp48.unk_02);
         D_8423E518[i].unk_04 = sp48.unk_00;
-        D_8423E518[i].unk_01 = func_80024F68(i);
-        D_8423E518[i].unk_00 = func_80024F00(i);
+        D_8423E518[i].unk_01 = GetMonStatus(i);
+        D_8423E518[i].unk_00 = GetMonState(i);
         D_8423E518[i].unk_02 = func_80025370(i);
         D_8423E518[i].unk_03 = (temp_s3 & (1 << i)) != 0;
     }

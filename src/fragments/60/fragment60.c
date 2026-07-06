@@ -455,7 +455,7 @@ s32 func_82E00F2C(UNUSED s32 arg0, UNUSED s32 arg1) {
         main_pool_push_state('LVSL');
 
         func_8001E94C(0x10, 0);
-        func_80028AFC(2);
+        LoadSlot(2);
         func_80027FA0(&D_82E023A0, D_800AE540.unk_11F2);
         if (D_800AE540.unk_0000 == 3) {
             D_82E023AA = D_82E023A0.unk_05;

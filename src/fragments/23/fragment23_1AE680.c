@@ -106,7 +106,7 @@ void func_88206110(unk_func_80026268_arg0* arg0) {
     bzero(arg0, sizeof(unk_func_80026268_arg0));
 
     arg0->unk_00.unk_00 = func_8002816C();
-    if (func_80024F68(func_80029080()) == 7) {
+    if (GetMonStatus(GetCurrentGameState()) == 7) {
         var_a2 = 1;
     } else {
         var_a2 = 0;
@@ -374,7 +374,7 @@ s32 func_882068B4(unk_func_88001300_034* arg0, Controller* arg1) {
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
     while (var_s1 == 0) {
-        func_8002EEA8(var_s1);
+        OnControllerMessage(var_s1);
 
         var_s0 = arg0->unk_00.unk_20(arg0, arg1);
 
@@ -582,7 +582,7 @@ s32 func_88207154(unk_func_8820BE14_02C_078* arg0, Controller* arg1) {
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
     while (var_s1 == 0) {
-        func_8002EEA8(var_s1);
+        OnControllerMessage(var_s1);
 
         var_s0 = arg0->unk_00.unk_20(arg0, arg1);
         if (!(var_s0 & 1)) {
@@ -1213,7 +1213,7 @@ void func_88208C5C(unk_func_88208C5C* arg0, unk_func_8850143C* arg1) {
     arg0->unk_00.unk_14.unk_00 = arg1->unk_00.unk_14.unk_00;
     arg0->unk_00.unk_14.unk_02 = arg1->unk_00.unk_14.unk_02;
     arg0->unk_2C = arg1;
-    arg0->unk_30 = func_8002EC08(func_80024F68(func_80029080()));
+    arg0->unk_30 = func_8002EC08(GetMonStatus(GetCurrentGameState()));
     arg0->unk_34 = -1;
     arg0->unk_38 = -1;
 }
@@ -2040,7 +2040,7 @@ s32 func_8820AFC4(unk_func_8820BE14_02C* arg0, Controller* arg1) {
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
     while (var_s2 == 0) {
-        func_8002EEA8(0);
+        OnControllerMessage(0);
 
         temp_v0 = arg0->unk_00.unk_20(arg0, gPlayer1Controller);
 
@@ -2122,7 +2122,7 @@ s32 func_8820B2A4(unk_func_8820BE14_02C* arg0) {
     s32 var_s4;
     unk_func_8820BE14_06C_000* var_s1;
 
-    temp_s2 = func_80029080();
+    temp_s2 = GetCurrentGameState();
     var_s4 = 0;
 
     var_s1 = arg0->unk_8C[0].unk_00;
@@ -2191,9 +2191,9 @@ void func_8820B504(unk_func_8820BE14_02C* arg0, s32 arg1) {
     s32 temp_s5;
     unk_func_8820BE14_06C_000* temp_s4;
 
-    temp_s5 = func_80029080();
+    temp_s5 = GetCurrentGameState();
     ((func88500A6C)Memmap_GetFragmentVaddr(func_88500A6C))(arg0->unk_84->unk_40, 2);
-    func_8002EEA8(NULL);
+    OnControllerMessage(NULL);
 
     temp_s4 = arg0->unk_8C[0].unk_00;
     for (i = 0; i < 1; i++) {
@@ -2518,7 +2518,7 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     arg0->unk_00.unk_10.unk_00 = arg1;
     arg0->unk_00.unk_10.unk_02 = arg2;
 
-    spB4 = func_80029080();
+    spB4 = GetCurrentGameState();
 
     var_s1 = mem_pool_alloc(arg4, sizeof(unk_func_882062E4) * (6 + (12 * 20) * 2));
     bzero(var_s1, sizeof(unk_func_882062E4) * (6 + (12 * 20) * 2));
@@ -2615,7 +2615,7 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(spC4, temp_s2);
 
     temp_s1 = mem_pool_alloc(arg4, sizeof(unk_func_88509A2C));
-    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(temp_s1, 0x38, 0x22, func_80029080(),
+    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(temp_s1, 0x38, 0x22, GetCurrentGameState(),
                                                            func_8002D7C0(NULL, 0, D_88224FB0, 0));
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(temp_s2, temp_s1);
 
@@ -2673,7 +2673,7 @@ void func_8820C510(unk_func_8820BE14* arg0) {
         ((func88500828)Memmap_GetFragmentVaddr(func_88500828))(&arg0->unk_00, 0, 0);
 
         func_80007778();
-        func_8002EF18(&sp34);
+        OnControllerRequest(&sp34);
     }
 }
 
@@ -2681,10 +2681,10 @@ void func_8820C5BC(unk_func_8820BE14* arg0) {
     s32 sp24 = func_8820AFC4(arg0->unk_2C, gPlayer1Controller);
 
     while (arg0->unk_2C->unk_2C->unk_00.unk_28 & 1) {
-        func_8002EEA8(0);
+        OnControllerMessage(0);
     }
 
-    func_8002EEA8(sp24);
+    OnControllerMessage(sp24);
     osStopThread(NULL);
 }
 
@@ -2696,23 +2696,23 @@ void func_8820C63C(unk_func_8820BE14* arg0) {
 
     var_s0 = 8;
     while (var_s0-- > 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 
     sp24 = func_8820AFC4(arg0->unk_2C, gPlayer1Controller);
 
     while (arg0->unk_2C->unk_2C->unk_00.unk_28 & 1) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 
     func_80006CB4(8);
 
     var_s0 = 10;
     while (var_s0-- > 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
     }
 
-    func_8002EEA8(sp24);
+    OnControllerMessage(sp24);
 
     osStopThread(NULL);
 }
@@ -2741,7 +2741,7 @@ void func_8820C700(unk_D_800AC870* arg0, s32 arg1) {
     sp5C = mem_pool_try_init(0x18000, 0);
 
     if (arg1 == 1) {
-        func_80028AFC(2);
+        LoadSlot(2);
     }
     func_8002D510();
 
@@ -2764,7 +2764,7 @@ void func_8820C700(unk_D_800AC870* arg0, s32 arg1) {
 
     osCreateThread(&sp50->thread, 0x32, D_88217FC8[arg1], sp58, sp54 + 0x10000, osGetThreadPri(NULL) - 1);
 
-    func_8002EE78();
+    InitControllerQueue();
     func_8001F738(gPlayer1Controller);
 
     osStartThread(&sp50->thread);

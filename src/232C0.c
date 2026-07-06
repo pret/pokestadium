@@ -168,7 +168,7 @@ void EstimateMoveQuick(unk_func_80022C28_ret* arg0) {
 
     arg0->unk_05 = func_80027108(arg0->unk_01);
     arg0->unk_06 = func_800270AC(arg0->unk_01);
-    arg0->unk_08 = func_800275E0(arg0->unk_01, arg0->unk_03);
+    arg0->unk_08 = GetEffectValue(arg0->unk_01, arg0->unk_03);
 
     if (arg0->unk_00 == 2) {
         arg0->unk_0A = arg0->unk_08;
@@ -329,7 +329,7 @@ s32 func_80022F24(u8* arg0, s32 arg1, unk_func_80022C28_ret* arg2) {
             switch (arg2->unk_01 & 0xF0) {
                 case 16:
                     var_s2 = func_80027C24(arg2->unk_01, arg2->unk_03, arg2->unk_0A, arg0);
-                    arg2->unk_08 = func_800275E0(arg2->unk_01, arg2->unk_03);
+                    arg2->unk_08 = GetEffectValue(arg2->unk_01, arg2->unk_03);
                     break;
 
                 case 32:
@@ -684,7 +684,7 @@ s32 func_80023B7C(s32 arg0) {
     return sp2C;
 }
 
-s32 func_80023D60(s32 arg0) {
+s32 LoadMonFromSlot(s32 arg0) {
     u8 sp2F;
     s32 temp_s1 = 0;
 
@@ -1189,7 +1189,7 @@ s32 func_80024EF4(void) {
     return D_800ACA70;
 }
 
-s32 func_80024F00(s32 arg0) {
+s32 GetMonState(s32 arg0) {
     return D_800AC910[arg0].unk_03;
 }
 
@@ -1207,7 +1207,7 @@ s32 func_80024F24(s32 arg0) {
     return 0;
 }
 
-s32 func_80024F68(s32 arg0) {
+s32 GetMonStatus(s32 arg0) {
     return D_800AC910[arg0].unk_02;
 }
 
@@ -1234,7 +1234,7 @@ void func_80025040(s32 arg0, unk_D_800AC910_040* arg1) {
     *ptr2++ = *ptr++;
 }
 
-s32 func_80025084(s32 arg0) {
+s32 GetMonName(s32 arg0) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return -1;
     }
@@ -1262,7 +1262,7 @@ s32 func_8002513C(s32 arg0) {
     return phi_v1;
 }
 
-char* func_800251B0(s32 arg0, char* arg1) {
+char* GetMonNickname(s32 arg0, char* arg1) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return NULL;
     }

@@ -1327,7 +1327,7 @@ void func_878029C0(void) {
 
     if (D_8780FE32) {}
 
-    func_80028AFC(2);
+    LoadSlot(2);
 }
 
 void func_87802E1C(void) {

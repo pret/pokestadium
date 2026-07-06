@@ -941,7 +941,7 @@ void func_88316BEC(unk_func_8830867C_02C_154* arg0, MemoryPool* arg1) {
     s32 i;
 
     arg0->unk_00 = 0x23;
-    arg0->unk_01 = func_80029080();
+    arg0->unk_01 = GetCurrentGameState();
     arg0->unk_02 = 0;
     arg0->unk_04 = 1;
     func_8002C758(&arg0[0].unk_0C, 2, 0x14, arg1);
@@ -959,7 +959,7 @@ void func_88316BEC(unk_func_8830867C_02C_154* arg0, MemoryPool* arg1) {
     func_8002D860(&sp48, arg0->unk_01);
 
     for (i = 0; i < 4; i++) {
-        if ((func_80027164(0x12, i) != 0) && (func_800275E0(0x12, i) > 0)) {
+        if ((func_80027164(0x12, i) != 0) && (GetEffectValue(0x12, i) > 0)) {
             temp_s1 = func_80027184(0x12, i);
             func_800272BC(0x12, i, &sp38);
             if ((sp48.unk_08 == temp_s1) && (HAL_Strcmp(sp54, sp38) == 0)) {
@@ -1100,7 +1100,7 @@ void func_88316F98(unk_func_88200FA0_030_038* arg0, unk_func_8830867C_02C_1A8* a
 }
 
 void func_88317144(unk_func_8830867C_04C_030_02C_000* arg0) {
-    if ((func_8002F264(arg0->unk_00[0]->unk_00) != 0) || (arg0->unk_00[0]->unk_01 < 2)) {
+    if ((IsValidInputStrict(arg0->unk_00[0]->unk_00) != 0) || (arg0->unk_00[0]->unk_01 < 2)) {
         s32 tmp = arg0->unk_00[1]->unk_0C.unk_00;
 
         func_8002CB58(&arg0->unk_00[1]->unk_0C, ((s32)arg0->unk_00[0] - tmp) >> 1);

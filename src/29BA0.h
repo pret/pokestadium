@@ -130,10 +130,10 @@ extern unk_D_800AE540 D_800AE540;
 extern BinArchive* D_800AF738;
 
 s32 Game_DoCopyProtection(s32 state);
-s32 func_80029008(s32 arg0, u8* romStart, u8* romEnd, u32 arg3, u32 arg4);
+s32 LoadFragment(s32 arg0, u8* romStart, u8* romEnd, u32 arg3, u32 arg4);
 void func_80029048(s32 arg0, u8* arg1, u8* arg2, s32 arg3, s32 arg4);
 unk_D_800AE540_0004* func_80029074(void);
-s32 func_80029080(void);
+s32 GetCurrentGameState(void);
 void func_8002908C(s32 arg0);
 void func_800290B4(void);
 s32 func_800290E4(s16 arg0);

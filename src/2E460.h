@@ -89,12 +89,12 @@ Move* GetMove(s32 arg0);
 s32 GetSpeciesType(unk_func_80026268_arg0* arg0, s32 arg1);
 s32 RemapFlagIndex(s32 arg0);
 s32 ApplyMoveSecondaryEffect(s32 arg0, s32 arg1, s32 arg2);
-void func_8002EE78(void);
-void func_8002EEA8(OSMesg arg0);
-void func_8002EEEC(void);
-void func_8002EF18(OSMesg arg0);
+void InitControllerQueue(void);
+void OnControllerMessage(OSMesg arg0);
+void WakeController(void);
+void OnControllerRequest(OSMesg arg0);
 void Game_HandlePokemonLab(void);
-s32 func_8002F1C0(s32 arg0);
-s32 func_8002F264(s32 arg0);
+s32 IsValidInput(s32 arg0);
+s32 IsValidInputStrict(s32 arg0);
 
 #endif // _2E460_H_

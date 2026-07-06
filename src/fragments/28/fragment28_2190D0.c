@@ -4127,7 +4127,7 @@ void func_88807D04(s32 arg0, MainPoolState* arg1, UNUSED s32 arg2, s32 arg3, s32
         if (D_88826564[i] >= 0) {
             unk_D_88826CF0* temp_s0 = &D_88826CF0[D_8882651C[D_88826564[i]] - 1];
 
-            D_88826A56 = func_8002EC08(func_80024F68(func_80029080()));
+            D_88826A56 = func_8002EC08(GetMonStatus(GetCurrentGameState()));
 
             switch (D_88826A56) {
                 case 0:

@@ -2747,8 +2747,8 @@ void func_82D06AB0(void) {
         func_80025040(i, &sp48);
         DecodeMonName(&D_82D0AB38[i].unk_08, &sp48.unk_02);
         D_82D0AB38[i].unk_06 = sp48.unk_00;
-        D_82D0AB38[i].unk_01 = func_80024F68(i);
-        D_82D0AB38[i].unk_00 = func_80024F00(i);
+        D_82D0AB38[i].unk_01 = GetMonStatus(i);
+        D_82D0AB38[i].unk_00 = GetMonState(i);
         D_82D0AB38[i].unk_03 = func_80025370(i);
         D_82D0AB38[i].unk_04 = (temp_s3 & (1 << i)) != 0;
         D_82D0AB38[i].unk_02 = func_80024F8C(i);
@@ -2796,7 +2796,7 @@ s32 func_82D06D0C(s32 arg0, s32 arg1) {
 
     main_pool_push_state('GBCK');
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027FA0(&D_82D0AB90, 0);
     func_80028070(&D_82D0AB98);
     sp53 = (D_82D0AB98 & 4) != 0;

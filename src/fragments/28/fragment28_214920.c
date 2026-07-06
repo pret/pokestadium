@@ -342,8 +342,8 @@ void func_888018E0(unk_func_888044BC_03C_02C* arg0, s32 arg1, s32 arg2) {
 }
 
 void func_8880193C(unk_func_888044BC_03C_02C* arg0, s32 arg1) {
-    arg0->unk_2C = func_80025084(arg1);
-    func_800251B0(arg1, arg0->unk_30);
+    arg0->unk_2C = GetMonName(arg1);
+    GetMonNickname(arg1, arg0->unk_30);
     arg0->unk_3C = func_80025840(arg1);
     arg0->unk_40 = func_80025988(arg1);
     arg0->unk_44 = func_80025AD0(arg1);
@@ -720,7 +720,7 @@ void func_888031FC(unk_func_888044BC* arg0, s32 arg1, s32 arg2, u8* arg3, Memory
     unk_func_88001300_000* sp44;
     unk_func_88001300_000* sp40;
 
-    sp48 = func_80029080();
+    sp48 = GetCurrentGameState();
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(&arg0->unk_00, sizeof(unk_func_888044BC));
     arg0->unk_00.unk_10.unk_00 = arg1;
     arg0->unk_00.unk_10.unk_02 = arg2;
@@ -6118,7 +6118,7 @@ s32 func_88803C74(void) {
     D_88826920 = func_8001B1FC(D_8882692C, 0x100, 0xC0, 0, 0, 0xF8, 0xC0, D_88808248);
     func_88802EC4(D_88826940->unk_4C->unk_2C, temp_s0);
     func_8880261C(D_88826940->unk_44->unk_2C, temp_s0);
-    func_88802DAC(D_88826940->unk_48, func_80029080(), temp_s0);
+    func_88802DAC(D_88826940->unk_48, GetCurrentGameState(), temp_s0);
     ((func88500A6C)Memmap_GetFragmentVaddr(func_88500A6C))(D_88826940->unk_2C, 1);
     ((func88500A6C)Memmap_GetFragmentVaddr(func_88500A6C))(D_88826940->unk_30, 1);
     D_88826940->unk_50->unk_00.unk_28 &= ~0x100;
@@ -6294,7 +6294,7 @@ s32 func_888044BC(UNUSED s32 arg0, UNUSED s32 arg1) {
     MemoryPool* sp2C;
     u8* sp28;
 
-    D_88826938 = func_80029080();
+    D_88826938 = GetCurrentGameState();
     D_8882693C = func_8880431C() - 1;
 
     main_pool_push_state('BOOK');
@@ -6324,7 +6324,7 @@ s32 func_888044BC(UNUSED s32 arg0, UNUSED s32 arg1) {
     D_888267A8 = func_8002D5AC(0xA);
     D_888267AC = func_8002D5AC(0x28);
     D_888267B0 = func_8002D5AC(9);
-    D_888269A0 = func_80029080();
+    D_888269A0 = GetCurrentGameState();
 
     if (D_888269A0 != -1) {
         func_8002D860(&D_888269A8, D_888269A0);

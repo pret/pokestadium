@@ -1014,7 +1014,7 @@ s32 func_841022C0(s32 arg0, s32 arg1) {
 
     main_pool_push_state('PSSL');
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027FA0(&D_84103CF0, D_800AE540.unk_11F2);
     func_8001E94C(0x18, 0);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);

@@ -249,7 +249,7 @@ s32 func_82B00E84(void) {
 
     main_pool_push_state('menu');
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027FA0(&sp1C, D_800AE540.unk_11F2);
     func_8001E94C(0x10, 0);
 

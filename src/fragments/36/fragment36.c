@@ -375,7 +375,7 @@ s32 func_82100C98(UNUSED s32 arg0, s16* arg1) {
         func_80007754();
     }
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027FA0(&D_82100EA8, 0);
     func_8001E94C(6, 0);
     func_82100B98();

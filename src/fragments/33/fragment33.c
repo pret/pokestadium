@@ -126,7 +126,7 @@ s32 func_81300020(s32 arg0, GraphNode* arg1) {
 s32 func_813001C0(void) {
     unk_func_8002A728 sp18;
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027F24(&sp18);
     return sp18.unk_00;
 }
@@ -568,8 +568,8 @@ void func_81302548(void) {
         func_80025040(i, &sp48);
         DecodeMonNameSafe(D_81303FA8[i].unk_08, sp48.unk_02);
         D_81303FA8[i].unk_06 = sp48.unk_00;
-        D_81303FA8[i].unk_01 = func_80024F68(i);
-        D_81303FA8[i].unk_00 = func_80024F00(i);
+        D_81303FA8[i].unk_01 = GetMonStatus(i);
+        D_81303FA8[i].unk_00 = GetMonState(i);
         D_81303FA8[i].unk_03 = func_80025370(i);
         D_81303FA8[i].unk_04 = (temp_s3 & (1 << i)) != 0;
         D_81303FA8[i].unk_02 = func_80024F8C(i);
@@ -594,7 +594,7 @@ void func_81302630(void) {
         return;
     }
 
-    D_81304000 = func_80029080();
+    D_81304000 = GetCurrentGameState();
 
     if (sp28 == 0) {
         D_81304000 = 0;
@@ -752,7 +752,7 @@ void func_81302C20(void) {
         D_81304008[temp_s1].unk_002 = temp_s1;
         D_81304008[temp_s1].unk_000 = 0;
 
-        switch (func_80024F68(temp_s1)) {
+        switch (GetMonStatus(temp_s1)) {
             case 1:
                 D_81304008[temp_s1].unk_01C = D_201E420;
                 break;

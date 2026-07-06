@@ -2663,7 +2663,7 @@ s32 func_825046AC(s32 arg0, s32 arg1) {
 
     D_8250A268 = func_8000484C(D_8250A264, 4);
     D_8250A47C = D_87806330;
-    func_80028AFC(2);
+    LoadSlot(2);
     func_825045C0();
     func_80007678(sp24);
     func_82504370(arg0, arg1);

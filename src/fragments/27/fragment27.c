@@ -1432,7 +1432,7 @@ s32 func_88605718(unk_func_88205880_0098_008* arg0) {
     while (var_s1 == 0) {
         s32 temp_v0_5;
 
-        func_8002EEA8((OSMesg*)var_s1);
+        OnControllerMessage((OSMesg*)var_s1);
         temp_v0_5 = arg0->unk_00.unk_20(&arg0->unk_00, gPlayer1Controller);
 
         if (!(temp_v0_5 & 1)) {

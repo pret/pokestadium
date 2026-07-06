@@ -788,7 +788,7 @@ s32 func_84203210(void) {
                 main_pool_push_state('pkgb');
 
                 if (var_s2 < 4) {
-                    func_80023D60(var_s2);
+                    LoadMonFromSlot(var_s2);
                     func_80024208(var_s2);
                     D_800AE540.unk_11F0 = func_80025328(var_s2);
                 } else {
@@ -874,7 +874,7 @@ s32 func_842034E4(void) {
                 main_pool_push_state('pkgb');
 
                 if (var_s2 < 4) {
-                    func_80023D60(var_s2);
+                    LoadMonFromSlot(var_s2);
                     func_80024208(var_s2);
                     D_800AE540.unk_11F0 = func_80025328(var_s2);
                 } else {
@@ -920,7 +920,7 @@ void func_842037AC(void) {
         main_pool_push_state('regi');
 
         if (temp_v0 < 4) {
-            func_80023D60(temp_v0);
+            LoadMonFromSlot(temp_v0);
             func_80024208(temp_v0);
             func_80025040(temp_v0, &sp60);
             DecodeMonName(sp74, sp60.unk_02);
@@ -1070,7 +1070,7 @@ void func_84203D74(void) {
         if (D_800AE540.unk_0002 >= 8) {
             D_84211B34 = func_8000484C(D_84211B30, 0xE);
         } else {
-            func_80028AFC(2);
+            LoadSlot(2);
             func_80027FA0(&sp20, D_800AE540.unk_11F2);
             if (sp20.unk_04 < 8) {
                 D_84211B34 = func_8000484C(D_84211B30, 0xD);
@@ -1101,7 +1101,7 @@ s32 func_84203E6C(s32 arg0, UNUSED s32 arg1) {
     D_84211B48 = func_8002D5AC(0x1A);
     D_84211B4C = func_8002D5AC(6);
 
-    func_80028AFC(D_800AE540.unk_0001 / 4);
+    LoadSlot(D_800AE540.unk_0001 / 4);
     func_80028C48(D_800AE540.unk_0001);
     func_80028EB8();
     func_84203D74();

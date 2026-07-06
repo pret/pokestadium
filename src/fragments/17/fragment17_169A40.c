@@ -148,7 +148,7 @@ s32 func_86B0A554(void) {
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     FRAGMENT_LOAD(fragment31);
 
-    func_80028AFC(2);
+    LoadSlot(2);
     func_80027FA0(&D_86B10830, D_800AE540.unk_11F2);
 
     if (D_800AE540.unk_11F2 == 1) {

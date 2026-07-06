@@ -626,7 +626,7 @@ s32 func_88502C24(unk_func_88001300_038* arg0, UNUSED Controller* arg1) {
 void func_88502C98(unk_func_88001300_038* arg0) {
     if ((arg0->unk_2C >= 0xB) && (arg0->unk_00.unk_28 & 1)) {
         do {
-            func_8002EEA8(NULL);
+            OnControllerMessage(NULL);
         } while (arg0->unk_00.unk_28 & 1);
     }
     arg0->unk_00.unk_28 |= 1;
@@ -2368,14 +2368,14 @@ void func_88509A2C(unk_func_88509A2C* arg0, s32 arg1, s32 arg2, s32 arg3, char* 
     arg0->unk_2C = arg3;
 
     if (arg3 != -1) {
-        if (func_80024F00(arg3) != 0) {
+        if (GetMonState(arg3) != 0) {
             arg0->unk_30 = 1;
         } else {
             arg0->unk_30 = 0;
-            arg0->unk_38 = func_80025084(arg3);
-            func_800251B0(arg3, arg0->unk_40);
+            arg0->unk_38 = GetMonName(arg3);
+            GetMonNickname(arg3, arg0->unk_40);
         }
-        arg0->unk_34 = func_8002EC08(func_80024F68(arg3));
+        arg0->unk_34 = func_8002EC08(GetMonStatus(arg3));
     }
     arg0->unk_3C = arg4;
 }
@@ -2534,7 +2534,7 @@ void func_8850A30C(unk_func_88509F48* arg0, Controller* arg1, s32 arg2) {
     func_8850A2DC(arg0);
 
     while (var_s0 == 0) {
-        func_8002EEA8(var_s0);
+        OnControllerMessage(var_s0);
 
         temp_v0 = arg0->unk_00.unk_20(arg0, arg1);
         if (!(temp_v0 & 1) && (temp_v0 & 2)) {
@@ -3271,7 +3271,7 @@ void func_8850CF00(unk_func_8850CD44* arg0, Controller* arg1) {
     s32 var_s0 = 0;
 
     while (var_s0 == 0) {
-        func_8002EEA8(var_s0);
+        OnControllerMessage(var_s0);
         temp_v0 = arg0->unk_10(arg0, arg1);
         if (!(temp_v0 & 1) && (temp_v0 & 4)) {
             var_s0 = 1;

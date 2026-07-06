@@ -97,7 +97,7 @@ void func_8820CBA0(unk_func_8821421C_02C_030* arg0, unk_func_8850143C* arg1, spE
     arg0->unk_00.unk_14.unk_00 = arg1->unk_00.unk_14.unk_00;
     arg0->unk_00.unk_14.unk_02 = arg1->unk_00.unk_14.unk_02;
     arg0->unk_2C = arg1;
-    arg0->unk_30 = func_8002EC08(func_80024F68(func_80029080()));
+    arg0->unk_30 = func_8002EC08(GetMonStatus(GetCurrentGameState()));
     arg0->unk_34 = -1;
     arg0->unk_38 = arg2;
 }
@@ -272,7 +272,7 @@ s32 func_8820D620(unk_func_8821421C_034* arg0, Controller* arg1) {
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
     while (var_s1 == 0) {
-        func_8002EEA8(var_s1);
+        OnControllerMessage(var_s1);
 
         var_s0 = func_8820D564(arg0, arg1);
 
@@ -432,7 +432,7 @@ s32 func_8820DCD4(unk_func_8821421C_02C_070* arg0, Controller* arg1) {
     arg0->unk_00.unk_24(&arg0->unk_00, 1);
 
     while (var_s1 == 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
 
         var_s0 = arg0->unk_00.unk_20(arg0, arg1);
 
@@ -473,7 +473,7 @@ s32 func_8820DDE4(u8* arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_8001F3F4();
     func_8001EBE0(8, 0);
 
-    if (func_8002F1C0(arg0[0]) != 0) {
+    if (IsValidInput(arg0[0]) != 0) {
         sp34 = D_88218004[0];
     } else {
         sp34 = D_88218000;
@@ -482,7 +482,7 @@ s32 func_8820DDE4(u8* arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_8001F324(sp34.r, sp34.g, sp34.b, sp34.a);
     func_8001F1E8(arg1 + 0x19, arg2 + 4, func_8002D7C0(NULL, 0, D_88224FC8, arg0[0] - 1));
 
-    if (func_8002F264(arg0[0]) == 0) {
+    if (IsValidInputStrict(arg0[0]) == 0) {
         sp24 = func_8002D7C0(NULL, 0, D_88224FC4, 0x19);
         sprintf(sp2C, "%s00", sp24);
         func_8001EBE0(4, 0);
@@ -1208,7 +1208,7 @@ s32 func_88210234(unk_func_8821421C_038* arg0, Controller* arg1) {
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_44);
 
     while (var_s0 == 0) {
-        func_8002EEA8(var_s0);
+        OnControllerMessage(var_s0);
         temp_v0 = func_88210168(arg0, arg1);
 
         if (!(temp_v0 & 1)) {
@@ -1579,7 +1579,7 @@ s32 func_88210DB0(s32 arg0, unk_func_8820BE14_06C* arg1) {
 s32 func_88210DF4(s32 arg0, unk_func_8820BE14_06C* arg1) {
     s32 var_v1;
 
-    if (func_8002F264(arg0) != 0) {
+    if (IsValidInputStrict(arg0) != 0) {
         if (arg1->unk_08 < arg1->unk_04) {
             var_v1 = 1;
         } else {
@@ -1682,7 +1682,7 @@ void func_88211088(unk_func_8820BE14_02C_038* arg0, s32 arg1) {
 void func_882110E0(unk_func_8820BE14_02C_038* arg0, unk_func_8820BE14_02C_038* arg1, unk_func_8820E99C* arg2) {
     u8* sp24 = &((u8*)arg0->unk_00.unk_2C->unk_00)[arg0->unk_00.unk_2C->unk_0C * arg0->unk_00.unk_38];
 
-    if (func_8002F264(sp24[0]) != 0) {
+    if (IsValidInputStrict(sp24[0]) != 0) {
         func_88210E70(arg1, &((u8*)arg0->unk_00.unk_2C->unk_00)[arg0->unk_00.unk_2C->unk_0C * arg0->unk_00.unk_38]);
         func_88210F00(arg0);
     } else {
@@ -1727,7 +1727,7 @@ void func_882111F8(unk_func_8820BE14_02C_038* arg0, s32 arg1, s32 arg2) {
     sp30 = *sp20;
     sp2C = *sp1C;
 
-    if ((func_8002F264(sp30.unk_00) == 0) && (sp30.unk_00 == sp2C.unk_00)) {
+    if ((IsValidInputStrict(sp30.unk_00) == 0) && (sp30.unk_00 == sp2C.unk_00)) {
         var_v1 = func_882111C0(&sp30, &sp2C);
     } else {
         var_v1 = 1;
@@ -1771,7 +1771,7 @@ void func_88211380(unk_func_8821421C_02C_06C_02C* arg0, Controller* arg1) {
 
     sp34.unk_00 = *sp38;
 
-    if (func_8002F264(sp38->unk_00) == 0) {
+    if (IsValidInputStrict(sp38->unk_00) == 0) {
         sp34.unk_00.unk_01 = arg0->unk_34->unk_30->unk_30.unk_00;
     }
 
@@ -1810,7 +1810,7 @@ void func_88211508(unk_func_8821421C_02C_06C_02C* arg0, Controller* arg1) {
 
     func_882109C8(arg0, &sp28, &sp24);
 
-    if ((func_8002F264(sp2C.unk_00.unk_00) == 0) && (sp2C.unk_02.unk_00 == sp2C.unk_00.unk_00)) {
+    if ((IsValidInputStrict(sp2C.unk_00.unk_00) == 0) && (sp2C.unk_02.unk_00 == sp2C.unk_00.unk_00)) {
         if (func_882111C0(&sp2C.unk_00, &sp2C.unk_02) > 0) {
             func_8820E638(arg0->unk_70[1], sp2C.unk_02);
             func_88217718(arg0->unk_68[1], sp28);
@@ -1901,7 +1901,7 @@ s32 func_882118CC(unk_func_8821421C_02C_06C_02C* arg0, Controller* arg1) {
                                 arg0->unk_4C, arg0->unk_78[0].unk_00, arg0->unk_78[0].unk_04, arg0->unk_78[0].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(func_8850A3CC))(arg0->unk_4C, arg1);
                             sp2C = 1;
-                        } else if ((func_8002F1C0(sp24[0]) != 0) && ((arg0->unk_2C[1]->unk_8C >> 0x10) == 2)) {
+                        } else if ((IsValidInput(sp24[0]) != 0) && ((arg0->unk_2C[1]->unk_8C >> 0x10) == 2)) {
                             func_80048B90(8);
                             ((func8850A10C)Memmap_GetFragmentVaddr(func_8850A10C))(
                                 arg0->unk_4C, arg0->unk_78[4].unk_00, arg0->unk_78[4].unk_04, arg0->unk_78[4].unk_08);
@@ -1918,7 +1918,7 @@ s32 func_882118CC(unk_func_8821421C_02C_06C_02C* arg0, Controller* arg1) {
                                 sp2C = 1;
                             } else {
                                 arg0->unk_2C[0]->unk_00.unk_34[arg0->unk_2C[0]->unk_00.unk_38] |= 2;
-                                if (func_8002F264(sp24[0]) == 0) {
+                                if (IsValidInputStrict(sp24[0]) == 0) {
                                     func_88210B38(arg0, sp28);
                                     func_88210BFC(arg0, 4);
                                     sp2C |= 1;
@@ -1959,7 +1959,7 @@ s32 func_882118CC(unk_func_8821421C_02C_06C_02C* arg0, Controller* arg1) {
                                 arg0->unk_4C, arg0->unk_78[2].unk_00, arg0->unk_78[2].unk_04, arg0->unk_78[2].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(func_8850A3CC))(arg0->unk_4C, arg1);
                             sp2C = 1;
-                        } else if ((func_8002F1C0(sp24[0]) != 0) && ((arg0->unk_2C[1]->unk_8C >> 0x10) == 2)) {
+                        } else if ((IsValidInput(sp24[0]) != 0) && ((arg0->unk_2C[1]->unk_8C >> 0x10) == 2)) {
                             func_80048B90(8);
                             ((func8850A10C)Memmap_GetFragmentVaddr(func_8850A10C))(
                                 arg0->unk_4C, arg0->unk_78[4].unk_00, arg0->unk_78[4].unk_04, arg0->unk_78[4].unk_08);
@@ -2043,7 +2043,7 @@ s32 func_882118CC(unk_func_8821421C_02C_06C_02C* arg0, Controller* arg1) {
             } else if (sp2C & 4) {
                 new_var2 = &((u8*)arg0->unk_2C[1]->unk_00.unk_2C->unk_00)[arg0->unk_2C[1]->unk_00.unk_2C->unk_0C *
                                                                           arg0->unk_2C[1]->unk_00.unk_38];
-                if ((func_8002F1C0(new_var2[0]) != 0) && ((arg0->unk_2C[0]->unk_8C >> 0x10) == 2)) {
+                if ((IsValidInput(new_var2[0]) != 0) && ((arg0->unk_2C[0]->unk_8C >> 0x10) == 2)) {
                     func_80048B90(8);
                     ((func8850A10C)Memmap_GetFragmentVaddr(func_8850A10C))(
                         arg0->unk_4C, arg0->unk_78[4].unk_00, arg0->unk_78[4].unk_04, arg0->unk_78[4].unk_08);
@@ -2238,12 +2238,12 @@ void func_882121E0(unk_func_8821421C_02C* arg0, s32 arg1, s32 arg2, unk_func_882
     char* temp_s1;
     char* sp6C;
 
-    temp_s0 = func_80029080();
+    temp_s0 = GetCurrentGameState();
 
     spE8 = mem_pool_alloc(argB, sizeof(spE8_func_882121E0));
     temp_s1 = mem_pool_alloc(argB, sizeof(char) * 40);
 
-    func_8002D5D4(0x15, func_800251B0(temp_s0, spDC));
+    func_8002D5D4(0x15, GetMonNickname(temp_s0, spDC));
 
     spE8->unk_00[1] = func_8002D7C0(temp_s1, sizeof(char) * 40, D_88224FC4, 0xF);
     spE8->unk_00[0] = func_8002D7C0(NULL, 0, D_88224FC4, 0xE);
@@ -2571,7 +2571,7 @@ s32 func_88213618(unk_func_8821421C_02C* arg0, Controller* arg1) {
     ((func88502C98)Memmap_GetFragmentVaddr(func_88502C98))(arg0->unk_2C);
 
     while (var_s4 == 0) {
-        func_8002EEA8(NULL);
+        OnControllerMessage(NULL);
 
         temp_v0 = arg0->unk_00.unk_20(arg0, gPlayer1Controller);
 
@@ -2649,7 +2649,7 @@ s32 func_882138D4(unk_func_8821421C_02C* arg0) {
     s32 var_v1_2;
     unk_func_8821421C_03C* temp_v0_2;
 
-    sp24 = func_80029080();
+    sp24 = GetCurrentGameState();
     sp20 = 0;
 
     if (func_882137B4(&arg0->unk_78[0], 0x23, sp24, 0) != 0) {
@@ -2675,11 +2675,11 @@ s32 func_882138D4(unk_func_8821421C_02C* arg0) {
 }
 
 void func_882139C0(unk_func_8821421C_02C* arg0, s32 arg1) {
-    s32 sp4C = func_80029080();
+    s32 sp4C = GetCurrentGameState();
     char sp40[11];
 
     ((func88500A6C)Memmap_GetFragmentVaddr(func_88500A6C))(arg0->unk_A0->unk_40, 2);
-    func_8002EEA8(NULL);
+    OnControllerMessage(NULL);
 
     if (arg0->unk_78[0].unk_00 != 0) {
         func_8820C97C(0x23, sp4C, 0, &arg0->unk_78[0].unk_04, 0, NULL, -1);
@@ -2697,8 +2697,8 @@ void func_882139C0(unk_func_8821421C_02C* arg0, s32 arg1) {
                 func_8820C97C(0x12, 0, arg0->unk_7C->unk_00, &arg0->unk_78[2].unk_04, 0, NULL, -1);
             }
         } else {
-            func_8820C97C(0x12, 0, arg0->unk_7C->unk_00, &arg0->unk_78[2].unk_04, 0, func_800251B0(sp4C, sp40),
-                          func_80025084(sp4C));
+            func_8820C97C(0x12, 0, arg0->unk_7C->unk_00, &arg0->unk_78[2].unk_04, 0, GetMonNickname(sp4C, sp40),
+                          GetMonName(sp4C));
         }
     }
 
@@ -2919,7 +2919,7 @@ void func_8821421C(unk_func_8821421C* arg0, s32 arg1, s32 arg2, MemoryPool* arg3
     unk_func_88509A2C* sp60;
     unk_func_88509E34* sp5C;
 
-    sp84 = func_80029080();
+    sp84 = GetCurrentGameState();
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(arg0, sizeof(unk_func_8821421C));
     arg0->unk_00.unk_10.unk_00 = arg1;
     arg0->unk_00.unk_10.unk_02 = arg2;
@@ -2937,7 +2937,7 @@ void func_8821421C(unk_func_8821421C* arg0, s32 arg1, s32 arg2, MemoryPool* arg3
 
     func_8820CA2C(arg0->unk_7C);
 
-    arg0->unk_78 = func_8820CAB4(arg0->unk_7C, func_80025084(sp84), func_800251B0(sp84, sp78));
+    arg0->unk_78 = func_8820CAB4(arg0->unk_7C, GetMonName(sp84), GetMonNickname(sp84, sp78));
     if ((arg0->unk_78 != -1) && (arg0->unk_7C[arg0->unk_78].unk_00 != 0)) {
         func_8820C930(0x12, 0, arg0->unk_78, &arg0->unk_3C[2].unk_04);
     }
@@ -2957,7 +2957,7 @@ void func_8821421C(unk_func_8821421C* arg0, s32 arg1, s32 arg2, MemoryPool* arg3
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(sp8C, sp64);
 
     sp60 = mem_pool_alloc(arg3, sizeof(unk_func_88509A2C));
-    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(sp60, 0x38, 0x22, func_80029080(),
+    ((func88509A2C)Memmap_GetFragmentVaddr(func_88509A2C))(sp60, 0x38, 0x22, GetCurrentGameState(),
                                                            func_8002D7C0(NULL, 0, D_88224FC0, 0));
     ((func8850068C)Memmap_GetFragmentVaddr(func_8850068C))(sp64, sp60);
 
@@ -2999,7 +2999,7 @@ void func_88214720(unk_func_8821421C* arg0) {
         ((func88500828)Memmap_GetFragmentVaddr(func_88500828))(arg0, 0, 0);
 
         func_80007778();
-        func_8002EF18(&sp34);
+        OnControllerRequest(&sp34);
     }
 }
 
@@ -3007,10 +3007,10 @@ void func_882147BC(unk_func_8821421C* arg0) {
     s32 sp24 = func_88213618(arg0->unk_2C, gPlayer1Controller);
 
     while (arg0->unk_2C->unk_2C->unk_00.unk_28 & 1) {
-        func_8002EEA8(0);
+        OnControllerMessage(0);
     }
 
-    func_8002EEA8(sp24);
+    OnControllerMessage(sp24);
 
     osStopThread(NULL);
 }
@@ -3042,7 +3042,7 @@ void func_8821483C(UNUSED unk_D_800AC870* arg0) {
 
     osCreateThread(&sp28->thread, 0x32, func_882147BC, sp30, sp2C + 0x10000, osGetThreadPri(NULL) - 1);
 
-    func_8002EE78();
+    InitControllerQueue();
     func_8001F738(gPlayer1Controller);
 
     osStartThread(&sp28->thread);
