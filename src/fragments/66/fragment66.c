@@ -694,7 +694,7 @@ void func_83201A18(s32 arg0) {
     }
 
     D_832027C8.unk_04.unk_09[arg0] = 0x39;
-    D_832027C8.unk_04.unk_20[arg0] = D_80072B00[0x38].pp;
+    D_832027C8.unk_04.unk_20[arg0] = gMoves[0x38].pp;
 
     func_832018DC();
     func_8320084C(func_8002D7C0(NULL, 0, D_83202020, 0xE), 1);

@@ -228,7 +228,7 @@ void func_84376B9C(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1) {
 }
 
 void func_84376C90(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u8 arg2) {
-    Move* temp_v0 = &D_80072B00[arg2 - 1];
+    Move* temp_v0 = &gMoves[arg2 - 1];
 
     D_843C6148.unk_00 = temp_v0->id;
     D_843C6148.unk_01 = temp_v0->effect;
@@ -1095,10 +1095,10 @@ void func_84378578(unk_D_843C60AC* arg0, u8 arg1) {
 
     if ((sp2F > 0) && (sp2F < 0xA6) && (sp2F != arg0->unk_05[arg1])) {
         if (!(arg0->unk_12.unk_15 & 7) && !(arg0->unk_12.unk_15 & 0x20) && !(arg0->unk_12.unk_4D & 0x20)) {
-            if (D_80072B00[sp2F - 1].basePower != 0) {
-                if (func_8437738C(D_80072B00[sp2F - 1].type, &arg0->unk_12) != 0.0f) {
-                    if ((D_80072B00[sp2F - 1].effect != 7) && (D_80072B00[sp2F - 1].effect != 0x26) &&
-                        (D_80072B00[sp2F - 1].effect != 0x28)) {
+            if (gMoves[sp2F - 1].basePower != 0) {
+                if (func_8437738C(gMoves[sp2F - 1].type, &arg0->unk_12) != 0.0f) {
+                    if ((gMoves[sp2F - 1].effect != 7) && (gMoves[sp2F - 1].effect != 0x26) &&
+                        (gMoves[sp2F - 1].effect != 0x28)) {
                         arg0->unk_05[arg1] = sp2F;
                     }
                 }
@@ -1118,7 +1118,7 @@ u16 func_8437865C(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u8 arg2) {
         var_v0 = func_84376F68(arg0, arg1, arg2, 1);
     }
 
-    switch (D_80072B00[arg2 - 1].effect) {
+    switch (gMoves[arg2 - 1].effect) {
         case 0x3:
             if (arg1->unk_4D & 0x10) {
                 var_v0 = 0;
@@ -1137,7 +1137,7 @@ u16 func_8437865C(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u8 arg2) {
 
         case 0x26:
             if ((arg0->unk_2E >= arg1->unk_2E) &&
-                (!(D_843C5564->unk_00 & 0x10) || (func_8437738C(D_80072B00[arg2 - 1].type, arg1) != 0.0f))) {
+                (!(D_843C5564->unk_00 & 0x10) || (func_8437738C(gMoves[arg2 - 1].type, arg1) != 0.0f))) {
                 var_v0 = 0x3E7;
             } else {
                 var_v0 = 0;
@@ -1192,42 +1192,42 @@ void func_843787F4(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u16* arg2, u8* ar
     u8 var_a1;
     u16 tmp = arg4;
 
-    if ((arg4 != 0) && (D_80072B00[arg4 - 1].basePower != 0)) {
+    if ((arg4 != 0) && (gMoves[arg4 - 1].basePower != 0)) {
         if (1) {}
         if (1) {}
         if (1) {}
         if (1) {}
         temp_v0 = func_8437865C(arg0, arg1, arg4);
 
-        var_a1 = D_80072B00[arg4 - 1].effect;
+        var_a1 = gMoves[arg4 - 1].effect;
 
-        if (((var_a1 != 0x26) && (D_80072B00[arg4 - 1].effect != 7)) || (arg5 == 0)) {
+        if (((var_a1 != 0x26) && (gMoves[arg4 - 1].effect != 7)) || (arg5 == 0)) {
             switch (arg5) {
                 case 1:
-                    if ((D_80072B00[arg4 - 1].type < 0xA) && (temp_v0 >= *arg2)) {
+                    if ((gMoves[arg4 - 1].type < 0xA) && (temp_v0 >= *arg2)) {
                         *arg3 = arg4;
                         *arg2 = temp_v0;
                     }
                     break;
 
                 case 2:
-                    if ((D_80072B00[arg4 - 1].type >= 0xB) && (temp_v0 >= *arg2)) {
+                    if ((gMoves[arg4 - 1].type >= 0xB) && (temp_v0 >= *arg2)) {
                         *arg3 = arg4;
                         *arg2 = temp_v0;
                     }
                     break;
 
                 case 3:
-                    if ((D_80072B00[arg4 - 1].type < 2) && (temp_v0 >= *arg2)) {
+                    if ((gMoves[arg4 - 1].type < 2) && (temp_v0 >= *arg2)) {
                         *arg3 = arg4;
                         *arg2 = temp_v0;
                     }
                     break;
 
                 case 10:
-                    temp_v0 *= (f32)D_80072B00[arg4 - 1].accuracy / 255.0;
-                    if ((D_80072B00[arg4 - 1].effect != 0x1A) && (D_80072B00[arg4 - 1].effect != 0x27) &&
-                        (D_80072B00[arg4 - 1].effect != 0x2B) && (D_80072B00[arg4 - 1].effect != 0x50) &&
+                    temp_v0 *= (f32)gMoves[arg4 - 1].accuracy / 255.0;
+                    if ((gMoves[arg4 - 1].effect != 0x1A) && (gMoves[arg4 - 1].effect != 0x27) &&
+                        (gMoves[arg4 - 1].effect != 0x2B) && (gMoves[arg4 - 1].effect != 0x50) &&
                         (arg0->unk_2E >= arg1->unk_2E)) {
                         temp_v0 *= 2;
                     }
@@ -1240,8 +1240,8 @@ void func_843787F4(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u16* arg2, u8* ar
                     break;
 
                 case 12:
-                    if ((D_80072B00[arg4 - 1].effect != 0x1A) && (D_80072B00[arg4 - 1].effect != 0x27) &&
-                        (D_80072B00[arg4 - 1].effect != 0x2B) && (D_80072B00[arg4 - 1].effect != 0x50)) {
+                    if ((gMoves[arg4 - 1].effect != 0x1A) && (gMoves[arg4 - 1].effect != 0x27) &&
+                        (gMoves[arg4 - 1].effect != 0x2B) && (gMoves[arg4 - 1].effect != 0x50)) {
                         temp_v0 *= 2;
                     }
 
@@ -1253,7 +1253,7 @@ void func_843787F4(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u16* arg2, u8* ar
                     break;
 
                 case 11:
-                    if ((D_80072B00[arg4 - 1].effect == 0x27) || (D_80072B00[arg4 - 1].effect == 0x2B)) {
+                    if ((gMoves[arg4 - 1].effect == 0x27) || (gMoves[arg4 - 1].effect == 0x2B)) {
                         temp_v0 = 0;
                     }
 
@@ -1438,7 +1438,7 @@ u8 func_84379224(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u8 arg2, u8 arg3) {
     tmp2 = 14 - arg1->unk_5C[5];
 
     if (arg3) {
-        var_a3 = D_80072B00[arg2 - 1].accuracy;
+        var_a3 = gMoves[arg2 - 1].accuracy;
     } else {
         var_a3 = 0xFF;
     }
@@ -1573,7 +1573,7 @@ void func_843794CC(unk_D_843C60AC* arg0, unk_D_843C60AC* arg1, s32 arg2, u8 arg3
         spFB = func_84379224(var_s0, var_s3, var_s2->unk_00, 1);
         var_s2->unk_02 = func_84376920(var_s0, var_s3, var_s2->unk_00);
 
-        var_s2->unk_03 = D_80072B00[var_s2->unk_00 - 1].effect;
+        var_s2->unk_03 = gMoves[var_s2->unk_00 - 1].effect;
         var_s2->unk_16 = 0;
         var_s2->unk_04 = 0xFF;
         var_s2->unk_0E = var_s2->unk_16;
@@ -1592,8 +1592,8 @@ void func_843794CC(unk_D_843C60AC* arg0, unk_D_843C60AC* arg1, s32 arg2, u8 arg3
 
         if (((D_843C60BC != 0) && (arg2 == 0)) || ((var_s3->unk_15 & 7) != 0) ||
             ((var_s0->unk_4C & 0x20) && (var_s0->unk_4F != 0)) ||
-            ((var_s3->unk_15 & 0x20) && (D_80072B00[var_s2->unk_00 - 1].effect != 4) &&
-             (D_80072B00[var_s2->unk_00 - 1].effect != 0x22))) {
+            ((var_s3->unk_15 & 0x20) && (gMoves[var_s2->unk_00 - 1].effect != 4) &&
+             (gMoves[var_s2->unk_00 - 1].effect != 0x22))) {
             var_s4 = 0;
             sp102 = 0;
         }
@@ -1611,12 +1611,12 @@ void func_843794CC(unk_D_843C60AC* arg0, unk_D_843C60AC* arg1, s32 arg2, u8 arg3
             }
         }
 
-        switch (D_80072B00[var_s2->unk_00 - 1].effect) {
+        switch (gMoves[var_s2->unk_00 - 1].effect) {
             case 0x0:
                 switch (var_s2->unk_00) {
                     case 0x44:
                         if (var_s4 < var_s0->unk_0C) {
-                            if (D_80072B00[spF7 - 1].type < 2) {
+                            if (gMoves[spF7 - 1].type < 2) {
                                 var_s1 = var_s4 * 2;
                                 spFB *= ((f32)spFA * 0.7) / 255.0;
                             } else {
@@ -1684,7 +1684,7 @@ void func_843794CC(unk_D_843C60AC* arg0, unk_D_843C60AC* arg1, s32 arg2, u8 arg3
             case 0x27:
             case 0x2B:
                 if ((D_843C60BC != 0) && (var_s1 != 0)) {
-                    if (func_84377430(D_80072B00[var_s2->unk_00 - 1].type, D_843C60A8) == 0) {
+                    if (func_84377430(gMoves[var_s2->unk_00 - 1].type, D_843C60A8) == 0) {
                         var_s1 = 0;
                     } else {
                         var_s1 *= 0.75;
@@ -2128,7 +2128,7 @@ s32 func_8437AC20(unk_func_843794CC* arg0, u8 arg1, u8 arg2) {
     u8 i;
 
     for (i = 0; i < arg1; i++) {
-        if ((arg2 == arg0[i].unk_0C) && (D_80072B00[arg0[i].unk_00 - 1].effect != 0x26)) {
+        if ((arg2 == arg0[i].unk_0C) && (gMoves[arg0[i].unk_00 - 1].effect != 0x26)) {
             return 1;
         }
     }
@@ -2141,7 +2141,7 @@ s32 func_8437ACB0(unk_func_843794CC* arg0, u8 arg1, u8 arg2, u8 arg3) {
     s32 var_v1 = 0;
 
     for (i = 0; i < arg2; i++) {
-        if ((arg3 < arg0[i].unk_0C) && (D_80072B00[arg0[i].unk_00 - 1].effect != 0x26)) {
+        if ((arg3 < arg0[i].unk_0C) && (gMoves[arg0[i].unk_00 - 1].effect != 0x26)) {
             var_v1 = 1;
         }
     }
@@ -2166,7 +2166,7 @@ u8 func_8437AEA4(unk_func_843794CC* arg0, u8 arg1, u8 arg2, u8 arg3) {
 
     for (i = 0; i < arg2; i++) {
         if (i != arg1) {
-            if ((arg0[i].unk_0C >= arg3) && (D_80072B00[arg0[i].unk_00 - 1].effect != 0x26)) {
+            if ((arg0[i].unk_0C >= arg3) && (gMoves[arg0[i].unk_00 - 1].effect != 0x26)) {
                 var_v1 = 1;
             }
         }
@@ -2351,7 +2351,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
         spF8 = 0;
 
         temp_s7 = &arg3[i];
-        sp9C = &D_80072B00[temp_s7->unk_00 - 1];
+        sp9C = &gMoves[temp_s7->unk_00 - 1];
         var_s5 = 1;
         temp_s0 = func_843780FC(temp_s6->unk_0B, temp_s7->unk_00);
         var_s1 = (func_843767E4(4) * temp_s0 * sp78 * 3) / 2;
@@ -2623,7 +2623,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         var_s1 *= (0xD - temp_s6->unk_5C[0]) / 12.0f;
                         for (j = 0; j < arg2; j++) {
                             temp_v0_4 = &arg3[j];
-                            if ((D_80072B00[temp_v0_4->unk_00 - 1].type < 0xA) && (temp_v0_4->unk_0A != 0)) {
+                            if ((gMoves[temp_v0_4->unk_00 - 1].type < 0xA) && (temp_v0_4->unk_0A != 0)) {
                                 var_s0 = 0;
                             }
                         }
@@ -2647,7 +2647,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
 
                     for (j = 0; j < arg2; j++) {
                         temp_v0_5 = &arg3[j];
-                        if ((D_80072B00[temp_v0_5->unk_00 - 1].type < 0xA) && (temp_v0_5->unk_0A != 0)) {
+                        if ((gMoves[temp_v0_5->unk_00 - 1].type < 0xA) && (temp_v0_5->unk_0A != 0)) {
                             var_s0 = 0;
                         }
                     }
@@ -2670,7 +2670,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         var_s1 += spB6 * 6;
                         if (temp_s7->unk_14 >= 0x9A) {
                             var_s1 -= sp6C * 6;
-                        } else if (D_80072B00[temp_s7->unk_05 - 1].type < 0xA) {
+                        } else if (gMoves[temp_s7->unk_05 - 1].type < 0xA) {
                             var_s1 += spB6 * 6;
                         }
 
@@ -2690,7 +2690,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         spF8 = 1;
                     }
                 } else {
-                    if (D_80072B00[temp_s7->unk_05 - 1].type < 0xA) {
+                    if (gMoves[temp_s7->unk_05 - 1].type < 0xA) {
                         var_s1 += spB6 * 4;
                     }
                     var_s1 += spB6 * 4;
@@ -2758,7 +2758,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         var_s1 += spB7 * 7;
                         if (temp_s7->unk_14 >= 0x9A) {
                             var_s1 -= sp6C * 7;
-                        } else if (D_80072B00[temp_s7->unk_05 - 1].type >= 0xB) {
+                        } else if (gMoves[temp_s7->unk_05 - 1].type >= 0xB) {
                             var_s1 += spB6 * 7;
                         }
 
@@ -2774,7 +2774,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         spF8 = 1;
                     }
                 } else {
-                    if (D_80072B00[temp_s7->unk_05 - 1].type >= 0xB) {
+                    if (gMoves[temp_s7->unk_05 - 1].type >= 0xB) {
                         var_s1 += spB6 * 2;
                     }
                     var_s1 += (spB7 * 2) + (spB6 * 3);
@@ -2957,7 +2957,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         var_s1 += (spB6 * 7);
                         if (func_8437ACB0(arg3, i, arg2, 0x99) != 0) {
                             var_s1 -= sp6C * 7;
-                        } else if (D_80072B00[temp_s7->unk_05 - 1].type >= 0xB) {
+                        } else if (gMoves[temp_s7->unk_05 - 1].type >= 0xB) {
                             var_s1 += spB6 * 7;
                         }
 
@@ -3022,8 +3022,8 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                 if (arg4) {
                     if ((temp_s3->unk_16[6] != temp_s6->unk_16[6]) || (temp_s3->unk_16[7] != temp_s6->unk_16[7])) {
                         var_s1 += spB4 * 3;
-                        sp8C = func_8437738C(D_80072B00[temp_s7->unk_05 - 1].type, temp_s6);
-                        if ((sp8C - func_8437738C(D_80072B00[temp_s7->unk_05 - 1].type, temp_s3)) > 0.0) {
+                        sp8C = func_8437738C(gMoves[temp_s7->unk_05 - 1].type, temp_s6);
+                        if ((sp8C - func_8437738C(gMoves[temp_s7->unk_05 - 1].type, temp_s3)) > 0.0) {
                             var_s1 += spB6 * 3;
                         }
 
@@ -3369,7 +3369,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                 if (arg4) {
                     if (!(temp_s6->unk_4E & 2)) {
                         var_s1 += spB6 * 7;
-                        if (D_80072B00[temp_s7->unk_05 - 1].type >= 0xB) {
+                        if (gMoves[temp_s7->unk_05 - 1].type >= 0xB) {
                             var_s1 += spB6 * 7;
                         }
 
@@ -3392,7 +3392,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         spF8 = 1;
                     }
                 } else {
-                    if (D_80072B00[temp_s7->unk_05 - 1].type >= 0xB) {
+                    if (gMoves[temp_s7->unk_05 - 1].type >= 0xB) {
                         var_s1 += spB6 * 3;
                     }
                     var_s1 += spB6 * 3;
@@ -3403,7 +3403,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                 if (arg4) {
                     if (!(temp_s6->unk_4E & 4)) {
                         var_s1 += spB6 * 6;
-                        if (D_80072B00[temp_s7->unk_05 - 1].type < 0xA) {
+                        if (gMoves[temp_s7->unk_05 - 1].type < 0xA) {
                             var_s1 += spB6 * 6;
                         }
 
@@ -3426,7 +3426,7 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
                         spF8 = 1;
                     }
                 } else {
-                    if (D_80072B00[temp_s7->unk_05 - 1].type < 0xA) {
+                    if (gMoves[temp_s7->unk_05 - 1].type < 0xA) {
                         var_s1 += spB6 * 3;
                     }
                     var_s1 += spB6 * 3;
@@ -3594,14 +3594,14 @@ void func_8437B0CC(unk_D_843C60A4* arg0, unk_D_843C60A4* arg1, u8 arg2, unk_func
         if (arg4) {
             if (!(D_843C5564->unk_00 & 0x30)) {
                 temp_s7->unk_28 = func_843767E4(0xFE) + 1;
-                if (D_80072B00[temp_s7->unk_00 - 1].basePower == 0) {
+                if (gMoves[temp_s7->unk_00 - 1].basePower == 0) {
                     if (spF8 != 0) {
                         temp_s7->unk_28 = 0;
                     }
                 } else {
-                    if ((D_80072B00[temp_s7->unk_00 - 1].effect != 0x28) &&
-                        (D_80072B00[temp_s7->unk_00 - 1].effect != 0x29) &&
-                        (func_8437738C(D_80072B00[temp_s7->unk_00 - 1].type, &temp_s4->unk_12) == 0.0f)) {
+                    if ((gMoves[temp_s7->unk_00 - 1].effect != 0x28) &&
+                        (gMoves[temp_s7->unk_00 - 1].effect != 0x29) &&
+                        (func_8437738C(gMoves[temp_s7->unk_00 - 1].type, &temp_s4->unk_12) == 0.0f)) {
                         temp_s7->unk_28 = 0;
                     }
 
@@ -3747,7 +3747,7 @@ u16 func_8437E860(u8 arg0, u8 arg1) {
 }
 
 u8 func_8437E920(u8 arg0) {
-    u8 var_a1 = D_80072B00[arg0 - 1].pp;
+    u8 var_a1 = gMoves[arg0 - 1].pp;
 
     var_a1 += ((var_a1 / 5 >= 8) ? 7 : var_a1 / 5) * 3;
     return var_a1;
@@ -4753,7 +4753,7 @@ u8 func_84380B40(unk_D_843C60AC* arg0, s32* arg1, s32* arg2, unk_D_843C60A4* arg
 
                 if (ptr->unk_15 & 0x20) {
                     var_s1 = 0;
-                    if ((D_80072B00[arg4 - 1].effect != 4) && (D_80072B00[arg4 - 1].effect != 0x22)) {
+                    if ((gMoves[arg4 - 1].effect != 4) && (gMoves[arg4 - 1].effect != 0x22)) {
                         var_s3 = ptr->unk_0C;
                     }
                 }
@@ -4765,8 +4765,8 @@ u8 func_84380B40(unk_D_843C60AC* arg0, s32* arg1, s32* arg2, unk_D_843C60A4* arg
                     var_s1_2 = 0;
                 }
 
-                if ((!(ptr->unk_15 & 0x20) || (D_80072B00[arg4 - 1].effect == 4) ||
-                     (D_80072B00[arg4 - 1].effect == 0x22)) &&
+                if ((!(ptr->unk_15 & 0x20) || (gMoves[arg4 - 1].effect == 4) ||
+                     (gMoves[arg4 - 1].effect == 0x22)) &&
                     ((sp70 < (var_s1_2 - temp_v0_2)) ||
                      ((sp70 == (var_s1_2 - temp_v0_2)) && (func_843767E4(1) != 0)))) {
                     sp70 = var_s1_2 - temp_v0_2;
@@ -5080,8 +5080,8 @@ u16 func_84381BD4(u16* arg0, u16 arg1, u8 arg2) {
 void func_84381C78(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u8 arg2, u8 arg3) {
     u16 tmp;
 
-    if (D_80072B00[arg2 - 1].basePower != 0) {
-        if (D_80072B00[arg2 - 1].type < 0xA) {
+    if (gMoves[arg2 - 1].basePower != 0) {
+        if (gMoves[arg2 - 1].type < 0xA) {
             if (arg3) {
                 tmp = arg1->unk_38 - func_843767E4(6);
                 tmp += 3;
@@ -5275,13 +5275,13 @@ s32 func_8438249C(u8 arg0, u8 arg1) {
         return 0;
     }
 
-    sp18 = &D_80072B00[D_843C6138[arg0] - 1];
+    sp18 = &gMoves[D_843C6138[arg0] - 1];
 
     if (arg1 == D_843C6138[arg0]) {
         return 1;
     }
 
-    if ((func_8436FD54(D_80072B00[arg1 - 1].effect, D_8438B0D8, 0x1A) != 0) &&
+    if ((func_8436FD54(gMoves[arg1 - 1].effect, D_8438B0D8, 0x1A) != 0) &&
         (func_8436FD54(sp18->effect, D_8438B0D8, 0x1A) != 0)) {
         return 1;
     }
@@ -5293,7 +5293,7 @@ s32 func_8438255C(u8 arg0, u8 arg1) {
         return 0;
     }
 
-    if (func_8436FD54(D_80072B00[arg1 - 1].effect, D_8438B0F4, 2) != 0) {
+    if (func_8436FD54(gMoves[arg1 - 1].effect, D_8438B0F4, 2) != 0) {
         return 1;
     }
     return 0;
@@ -5347,10 +5347,10 @@ s32 func_84382668(unk_D_800FCB18* arg0, s32 arg1, u8 arg2, u8 arg3) {
 
 s32 func_84382840(unk_D_800FCB18* arg0, unk_D_800FCB18* arg1, u8 arg2) {
     s32 sp24 = 0;
-    Move* sp1C = &D_80072B00[arg2 - 1];
+    Move* sp1C = &gMoves[arg2 - 1];
 
-    if (D_80072B00[arg2 - 1].basePower != 0) {
-        if (func_8437738C(D_80072B00[arg2 - 1].type, arg1) < 1.0) {
+    if (gMoves[arg2 - 1].basePower != 0) {
+        if (func_8437738C(gMoves[arg2 - 1].type, arg1) < 1.0) {
             return 1;
         }
     }

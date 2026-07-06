@@ -953,7 +953,7 @@ typedef struct Move {
     /* 0x04 */ u8 accuracy;
     /* 0x05 */ u8 pp;
 } Move; // size = 0x6
-extern Move D_80072B00[];
+extern Move gMoves[];
 
 typedef struct unk_D_80072338 {
     /* 0x00 */ char unk00[0x1];

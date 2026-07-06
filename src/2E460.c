@@ -443,7 +443,7 @@ Move* func_8002ED40(s32 arg0) {
     if ((arg0 <= 0) || (arg0 >= 0xA6)) {
         return NULL;
     }
-    return &D_80072B00[arg0 - 1];
+    return &gMoves[arg0 - 1];
 }
 
 s32 func_8002ED78(unk_func_80026268_arg0* arg0, s32 arg1) {

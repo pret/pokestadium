@@ -281,7 +281,7 @@ void func_82F05F40(unk_D_82F20A10* arg0) {
             }
 
             if (func_82F05F20(sp11C->unk_09[i]) == 0) {
-                ptr = &D_80072B00[sp11C->unk_09[i] - 1];
+                ptr = &gMoves[sp11C->unk_09[i] - 1];
 
                 var_t0 = ptr->pp / 5;
                 if (var_t0 >= 7) {
