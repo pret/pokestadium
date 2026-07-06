@@ -646,7 +646,7 @@ void func_84801A88(unk_D_848037A0* arg0) {
         if (sp78->unk_09[i] == 0) {
             break;
         }
-        temp_v1 = &D_848035FC[D_80072338[sp78->unk_09[i] - 1].unk_01];
+        temp_v1 = &D_848035FC[gMoveAnimData[sp78->unk_09[i] - 1].category];
         func_8001EBE0(4, 0);
         func_8001F324(temp_v1->unk_00.r, temp_v1->unk_00.g, temp_v1->unk_00.b, 0xFF);
         func_8001F1E8(temp_fp + 0x14C, (i * 0x14) + sp7C + 7, func_8002D7C0(NULL, 0, D_84803788, sp78->unk_09[i] - 1));
@@ -664,7 +664,7 @@ void func_84801A88(unk_D_848037A0* arg0) {
             break;
         }
         func_8001C6AC(temp_fp + 0x136, (i * 0x14) + sp7C + 7, 0x14, 0x14,
-                      D_848035FC[D_80072338[sp78->unk_09[i] - 1].unk_01].unk_04, 0x14, 0);
+                      D_848035FC[gMoveAnimData[sp78->unk_09[i] - 1].category].unk_04, 0x14, 0);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);

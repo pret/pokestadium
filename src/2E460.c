@@ -432,11 +432,11 @@ s32 func_8002ECDC(unk_func_80026268_arg0* arg0) {
     return i;
 }
 
-ret_func_8002ED08* func_8002ED08(s32 arg0) {
+MoveAnimData* func_8002ED08(s32 arg0) {
     if ((arg0 <= 0) || (arg0 > 165)) {
         return NULL;
     }
-    return &D_80072338[arg0 - 1];
+    return &gMoveAnimData[arg0 - 1];
 }
 
 Move* func_8002ED40(s32 arg0) {

@@ -269,7 +269,7 @@ void func_886011EC(unk_func_88205880_0098_008_040_03C* arg0, s32 arg1) {
 }
 
 s32 func_886011F4(unk_func_88205880_0098_008_040_03C* arg0, s32 arg1, s32 arg2) {
-    ret_func_8002ED08* sp6C;
+    MoveAnimData* sp6C;
 
     if (arg0->unk_2C == 0) {
         return 0;
@@ -277,8 +277,8 @@ s32 func_886011F4(unk_func_88205880_0098_008_040_03C* arg0, s32 arg1, s32 arg2) 
 
     sp6C = func_8002ED08(arg0->unk_2C);
     if (sp6C != NULL) {
-        unk_D_88400138* sp68 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(sp6C->unk_00[1]);
-        s32 temp_v0_2 = func_8002EDEC(sp6C->unk_00[1]);
+        unk_D_88400138* sp68 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(sp6C->category);
+        s32 temp_v0_2 = func_8002EDEC(sp6C->category);
 
         gDPPipeSync(gDisplayListHead++);
 
@@ -299,7 +299,7 @@ s32 func_886011F4(unk_func_88205880_0098_008_040_03C* arg0, s32 arg1, s32 arg2) 
         func_8001F3F4();
         func_8001F324(sp68->unk_04.r, sp68->unk_04.g, sp68->unk_04.b, sp68->unk_04.a);
         func_8001EBE0(8, 0);
-        func_8001F1E8(arg1 + 0x16, arg2, func_8002D7C0(NULL, 0, D_8861C518, sp6C->unk_00[0] - 1));
+        func_8001F1E8(arg1 + 0x16, arg2, func_8002D7C0(NULL, 0, D_8861C518, sp6C->nameStringId - 1));
         func_8001F444();
     } else {
         unk_D_88400138* sp1C = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(0);
@@ -871,7 +871,7 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
 
     s32 sp13C;
     s32 sp138;
-    ret_func_8002ED08* sp134;
+    MoveAnimData* sp134;
     Move* sp130;
     unk_D_88400138* sp12C;
     char* sp128;
@@ -953,12 +953,12 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
         sp38 = ((((sp130->accuracy * 0x64) / 255) + 2) / 5) * 5;
         func_8001F324(sp12C->unk_04.r, sp12C->unk_04.g, sp12C->unk_04.b, sp12C->unk_04.a);
         func_8001EBE0(8, 0);
-        func_8001F1E8(sp13C + 8, sp138 + 4, func_8002D7C0(NULL, 0, D_8861C518, sp134->unk_00[0] - 1));
+        func_8001F1E8(sp13C + 8, sp138 + 4, func_8002D7C0(NULL, 0, D_8861C518, sp134->nameStringId - 1));
         func_8001EBE0(4, 0);
         func_8001F1E8(func_8001F5B0(0, 0, sp128) + sp13C + 0x90, sp138 + 8, " %s",
                       func_8002D7C0(NULL, 0, D_8861C51C, sp12C->unk_00));
         func_8001F3B4(0x12);
-        func_8001F1E8(sp13C + 0xE, sp138 + 0x3A, func_8002D7C0(NULL, 0, D_8861C528, sp134->unk_00[0] - 1));
+        func_8001F1E8(sp13C + 0xE, sp138 + 0x3A, func_8002D7C0(NULL, 0, D_8861C528, sp134->nameStringId - 1));
         func_8001F324(D_88605B4C.r, D_88605B4C.g, D_88605B4C.b, D_88605B4C.a);
         func_8001EBE0(4, 0);
 

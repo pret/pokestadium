@@ -571,7 +571,7 @@ s32 func_88208CE4(unk_func_88208C5C* arg0, s32 arg1, s32 arg2);
 u32 func_882091E4(unk_func_88208C5C* arg0);
 void func_882091F8(unk_func_88208C5C* arg0, u32 arg1);
 void func_8820920C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2);
-void func_8820927C(s32 arg0, s32 arg1, ret_func_8002ED08* arg2, s32 arg3);
+void func_8820927C(s32 arg0, s32 arg1, MoveAnimData* arg2, s32 arg3);
 s32 func_8820938C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2);
 void func_88209A88(unk_func_8820BE14_02C_070* arg0, unk_func_88205880_00D0* arg1);
 s32 func_88209AF0(unk_func_8820BE14_06C* arg0);

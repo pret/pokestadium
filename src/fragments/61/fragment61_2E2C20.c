@@ -350,7 +350,7 @@ void func_8420B8CC(unk_D_8423D3A8* arg0, s32 arg1) {
                     if (temp_a0 == 0) {
                         break;
                     }
-                    color = &D_842115F0[D_80072338[temp_a0 - 1].unk_01].unk_00[2];
+                    color = &D_842115F0[gMoveAnimData[temp_a0 - 1].category].unk_00[2];
                     sp80 = func_8420B870(i, D_842116F0[i], func_842000C0(temp_a0));
                     func_8001F324(color->r, color->g, color->b, 0xFF);
                     func_8001F1E8(temp_s4 + sp80, D_842116F8[i] + temp_s5, func_842000C0(temp_s6->unk_09[i]));
@@ -367,7 +367,7 @@ void func_8420B8CC(unk_D_8423D3A8* arg0, s32 arg1) {
 
                     sp80 = func_8420B870(i, D_842116F0[i], func_842000C0(temp_s6->unk_09[i]));
                     func_8001C6AC((temp_s4 + sp80) - 0x18, D_842116F8[i] + temp_s5, 0x14, 0x14,
-                                  D_842115F0[D_80072338[temp_s6->unk_09[i] - 1].unk_01].unk_0C, 0x14, 0);
+                                  D_842115F0[gMoveAnimData[temp_s6->unk_09[i] - 1].category].unk_0C, 0x14, 0);
                 }
             }
 

@@ -955,14 +955,14 @@ typedef struct Move {
 } Move; // size = 0x6
 extern Move gMoves[];
 
-typedef struct unk_D_80072338 {
-    /* 0x00 */ char unk00[0x1];
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk02[0x2];
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ char unk08[0x4];
-} unk_D_80072338; // size = 0xC
-extern unk_D_80072338 D_80072338[];
+typedef struct MoveAnimData {
+    /* 0x00 */ u8 nameStringId;   // move name string ID (passed to func_8002D7C0)
+    /* 0x01 */ u8 category;       // animation/category ID (used for color lookup)
+    /* 0x02 */ char pad02[0x2];
+    /* 0x04 */ s32 animData;      // pointer to animation sequence data
+    /* 0x08 */ char pad08[0x4];
+} MoveAnimData; // size = 0xC
+extern MoveAnimData gMoveAnimData[];
 
 extern char D_8006FEE8[][0x1C];
 

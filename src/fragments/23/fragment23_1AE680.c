@@ -1098,7 +1098,7 @@ void func_8820920C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2) {
     arg0->unk_0030 = 0;
 }
 
-void func_8820927C(s32 arg0, s32 arg1, ret_func_8002ED08* arg2, s32 arg3) {
+void func_8820927C(s32 arg0, s32 arg1, MoveAnimData* arg2, s32 arg3) {
     Color_RGBA8 sp24;
     char* sp20;
 
@@ -1107,8 +1107,8 @@ void func_8820927C(s32 arg0, s32 arg1, ret_func_8002ED08* arg2, s32 arg3) {
         sp24 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(0)->unk_04;
         sp20 = "???????";
     } else {
-        sp24 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(arg2->unk_00[1])->unk_04;
-        sp20 = func_8002D7C0(NULL, 0, D_88224FBC, arg2->unk_00[0] - 1);
+        sp24 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(arg2->category)->unk_04;
+        sp20 = func_8002D7C0(NULL, 0, D_88224FBC, arg2->nameStringId - 1);
     }
 
     func_8001F324(sp24.r, sp24.g, sp24.b, sp24.a);

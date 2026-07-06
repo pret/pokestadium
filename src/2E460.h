@@ -41,10 +41,6 @@ typedef struct unk_func_8002D860 {
     /* 0x08 */ s32 unk_08;
 } unk_func_8002D860; // size = 0xC
 
-typedef struct ret_func_8002ED08 {
-    /* 0x00 */ u8 unk_00[12];
-} ret_func_8002ED08; // size = 0xC
-
 typedef struct unk_func_8820E99C_030_030 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
@@ -88,7 +84,7 @@ s32 func_8002EBD8(unk_func_8002EBD8_arg0* arg0);
 s32 func_8002EC08(s32 arg0);
 Color_RGBA8 func_8002EC1C(Color_RGBA8 arg0, f32 arg1);
 s32 func_8002ECDC(unk_func_80026268_arg0* arg0);
-ret_func_8002ED08* func_8002ED08(s32 arg0);
+MoveAnimData* func_8002ED08(s32 arg0);
 Move* func_8002ED40(s32 arg0);
 s32 func_8002ED78(unk_func_80026268_arg0* arg0, s32 arg1);
 s32 func_8002EDEC(s32 arg0);

@@ -1190,7 +1190,7 @@ void func_88304490(s32 arg0, s32 arg1, s32 arg2, u8* arg3, s32 arg4) {
 
     char* sp2C;
     Color_RGBA8 sp28;
-    ret_func_8002ED08* sp24;
+    MoveAnimData* sp24;
     u8* sp18 = &arg3[arg4];
 
     if (arg4 < func_8002ECDC(arg3)) {
@@ -1199,7 +1199,7 @@ void func_88304490(s32 arg0, s32 arg1, s32 arg2, u8* arg3, s32 arg4) {
             sp28 = D_88317278;
             sp2C = " ????? ";
         } else {
-            sp28 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(sp24->unk_00[1])->unk_04;
+            sp28 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(sp24->category)->unk_04;
             sp2C = func_8002D7C0(NULL, 0, D_8831A4CC, sp18[9] - 1);
         }
         func_8001F3F4();

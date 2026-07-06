@@ -267,7 +267,7 @@ void func_82F05F40(unk_D_82F20A10* arg0) {
 
             if (func_82F05F20(sp11C->unk_09[i]) == 0) {
                 func_8001C6AC(D_82F13C54[i] + arg0->unk_04, D_82F13C5C[i] + arg0->unk_06, 0x14, 0x14,
-                              D_82F13C68[D_80072338[sp11C->unk_09[i] - 1].unk_01], 0x14, 0x200000);
+                              D_82F13C68[gMoveAnimData[sp11C->unk_09[i] - 1].category], 0x14, 0x200000);
             }
         }
 
@@ -371,7 +371,7 @@ void func_82F05F40(unk_D_82F20A10* arg0) {
                 }
 
                 if (func_82F05F20(sp11C->unk_09[i]) == 0) {
-                    sp70 = &D_80071D88[D_80072338[sp11C->unk_09[i] - 1].unk_01].color;
+                    sp70 = &D_80071D88[gMoveAnimData[sp11C->unk_09[i] - 1].category].color;
                     sp74 = func_82F00058(sp11C->unk_09[i]);
                 } else {
                     // "？？？？？？？"

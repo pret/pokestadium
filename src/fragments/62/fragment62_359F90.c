@@ -1378,7 +1378,7 @@ s32 func_84371DCC(void) {
 
     if ((D_843C5238->unk_57 != 0) && (D_843C5238->unk_57 == D_843C5238->unk_5A)) {
         D_843C5238->unk_4C &= 0xFFEF;
-        func_8002D5D4(0x1D, D_80072338[D_843C5238->unk_5A - 1].unk_04);
+        func_8002D5D4(0x1D, gMoveAnimData[D_843C5238->unk_5A - 1].animData);
         func_843179F4(D_843901A0->unk_088, 0xF);
         D_84390240.unk_00->unk_48 = 0x11;
         return 0;
