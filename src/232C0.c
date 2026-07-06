@@ -824,10 +824,10 @@ s32 func_800240A0(void) {
 }
 
 void func_80024208(s32 arg0) {
-    u16 temp_v0 = func_80021A30(&D_800AC910[arg0].unk_50->unk_2CC);
+    u16 temp_v0 = ReadBE16(&D_800AC910[arg0].unk_50->unk_2CC);
 
     if (!(temp_v0 & 0x8000)) {
-        func_80021A68(&D_800AC910[arg0].unk_50->unk_2CC, temp_v0 | 0x8000);
+        WriteBE16(&D_800AC910[arg0].unk_50->unk_2CC, temp_v0 | 0x8000);
     }
 }
 
@@ -1220,7 +1220,7 @@ s32 func_80024FB0(s32 arg0) {
         return 0;
     }
 
-    D_800AC910[arg0].unk_40.unk_00 = func_80021A30(&D_800AC910[arg0].unk_50->unk_085);
+    D_800AC910[arg0].unk_40.unk_00 = ReadBE16(&D_800AC910[arg0].unk_50->unk_085);
     _bcopy(&D_800AC910[arg0].unk_50->unk_018, &D_800AC910[arg0].unk_40.unk_02, 0xB);
     bzero(D_800AC910[arg0].unk_40.unk_0D, 3);
     return 1;
@@ -1238,12 +1238,12 @@ s32 func_80025084(s32 arg0) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return -1;
     }
-    return func_80021A30(&D_800AC910[arg0].unk_50->unk_085);
+    return ReadBE16(&D_800AC910[arg0].unk_50->unk_085);
 }
 
 void func_800250E0(s32 arg0, u16 arg1) {
     if (D_800AC910[arg0].unk_00 & 1) {
-        func_80021A68(&D_800AC910[arg0].unk_50->unk_085, arg1);
+        WriteBE16(&D_800AC910[arg0].unk_50->unk_085, arg1);
     }
 }
 
@@ -1252,7 +1252,7 @@ s32 func_8002513C(s32 arg0) {
     s32 phi_v1 = -1;
 
     if (D_800AC910[arg0].unk_00 & 1) {
-        temp_a0 = func_80021A30(&D_800AC910[arg0].unk_50->unk_2CC) >> 8;
+        temp_a0 = ReadBE16(&D_800AC910[arg0].unk_50->unk_2CC) >> 8;
         if (temp_a0 & 0x80) {
             phi_v1 = (temp_a0 & 0x7F) + 1;
         } else {
