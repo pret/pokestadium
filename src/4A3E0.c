@@ -239,7 +239,198 @@ void func_80049D5C(u16 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_80049DF0.s")
 
+#ifdef NON_MATCHING
+extern u8 D_800FD015;
+extern u8 D_800FD016;
+extern u8 D_800FD017;
+extern u8 D_800FD019;
+extern u8 D_800FD01B;
+typedef struct GbPulse {
+    /* 0x00 */ u32 unk_00; // phase position
+    /* 0x04 */ s16 unk_04; // current amplitude
+    /* 0x06 */ s16 unk_06; // envelope step
+    /* 0x08 */ u32 unk_08; // envelope reload
+    /* 0x0C */ u32 unk_0C; // envelope counter
+    /* 0x10 */ s16 unk_10; // high half-period
+    /* 0x12 */ s16 unk_12; // low half-period
+    /* 0x14 */ s16 unk_14;
+    /* 0x16 */ u8 unk_16;  // duty phase (high/low)
+    /* 0x17 */ u8 pad_17;
+    /* 0x18 */ u32 unk_18; // next duty toggle position
+    /* 0x1C */ u32 unk_1C; // full period
+    /* 0x20 */ u32 unk_20; // length counter
+    /* 0x24 */ u32 unk_24; // channel active
+} GbPulse;
+// Software-APU square (pulse) channel: on a register-change trigger, decode the
+// GB pulse registers (D_800FD008) into period/duty/envelope/length, then each
+// call advance the duty toggle and envelope and return the current amplitude.
+s16 func_8004A474(void) {
+    GbPulse* ch = (GbPulse*) D_800FCF90;
+    u8* reg = (u8*) &D_800FD008;
+    s32 triggered = 0;
+    s16 out;
+
+    if (D_800FD015 != 0) {
+        triggered = 1;
+        D_800FD015 = 0;
+    }
+    if (D_800FD017 != 0) {
+        triggered = 1;
+        D_800FD017 = 0;
+    }
+    if (D_800FD019 != 0) {
+        triggered = 1;
+        D_800FD019 = 0;
+    }
+    if (D_800FD01B != 0) {
+        triggered = 1;
+        D_800FD01B = 0;
+    }
+
+    if (triggered != 0) {
+        s32 duty = (reg[0xC] & 0xC0) >> 6;
+        s32 envDir;
+        u8 startPhase = 1;
+        s16 half;
+
+        ch->unk_1C = ((0x800 - (reg[0x10] | ((reg[0x12] & 7) << 8))) * D_800FD004) >> 0xB;
+
+        switch (duty) {
+            case 0:
+                half = ch->unk_1C >> 3;
+                ch->unk_12 = half;
+                if ((half & 0xFFFF) < 0x40) {
+                    ch->unk_12 = 0x40;
+                    half = 0x40;
+                }
+                startPhase = 1;
+                ch->unk_10 = ch->unk_1C - (half & 0xFFFF);
+                break;
+            case 1:
+                half = ch->unk_1C >> 2;
+                ch->unk_12 = half;
+                if ((half & 0xFFFF) < 0x40) {
+                    ch->unk_12 = 0x40;
+                    half = 0x40;
+                }
+                startPhase = 0;
+                ch->unk_10 = ch->unk_1C - (half & 0xFFFF);
+                break;
+            case 2:
+                half = ch->unk_1C >> 1;
+                ch->unk_12 = half;
+                if ((half & 0xFFFF) < 0x40) {
+                    ch->unk_12 = 0x40;
+                    half = 0x40;
+                }
+                startPhase = 0;
+                ch->unk_10 = ch->unk_1C - (half & 0xFFFF);
+                break;
+            case 3:
+                half = ch->unk_1C >> 2;
+                ch->unk_10 = half;
+                if ((half & 0xFFFF) < 0x40) {
+                    ch->unk_10 = 0x40;
+                    half = 0x40;
+                }
+                startPhase = 1;
+                ch->unk_12 = ch->unk_1C - (half & 0xFFFF);
+                break;
+            default:
+                ch->unk_10 = ch->unk_1C;
+                ch->unk_12 = 0;
+                startPhase = 1;
+                break;
+        }
+
+        envDir = reg[0xE] & 8;
+        if ((envDir == 0) && !(reg[0xE] & 0xF0)) {
+            ch->unk_24 = 0;
+            reg[0x2C] &= 0xFD;
+            return 0;
+        }
+        if ((envDir != 0) && !(reg[0xE] & 0xF0) && !(reg[0xE] & 7)) {
+            ch->unk_24 = 0;
+            reg[0x2C] &= 0xFD;
+            return 0;
+        }
+        if (reg[0x12] & 0x80) {
+            s32 envPeriod = reg[0xE] & 7;
+
+            ch->unk_00 = 0;
+            ch->unk_24 = 1;
+            ch->unk_16 = startPhase;
+            ch->unk_14 = 0;
+            ch->unk_18 = 0;
+            ch->unk_04 = (reg[0xE] & 0xF0) << 7;
+            if (envPeriod != 0) {
+                if (envDir != 0) {
+                    ch->unk_06 = 0x800;
+                } else {
+                    ch->unk_06 = -0x800;
+                }
+                ch->unk_08 = envPeriod * D_800FD004;
+                ch->unk_0C = envPeriod * D_800FD004;
+            } else {
+                ch->unk_06 = 0;
+                ch->unk_08 = -1;
+                ch->unk_0C = -1;
+            }
+            if (reg[0x12] & 0x40) {
+                ch->unk_20 = ((0x40 - (reg[0xC] & 0x3F)) * D_800FD004) >> 2;
+            } else {
+                ch->unk_20 = -1;
+            }
+            reg[0x12] &= 0x7F;
+        }
+    }
+
+    if (ch->unk_24 == 0) {
+        return 0;
+    }
+
+    if (ch->unk_20 < ch->unk_00) {
+        ch->unk_24 = 0;
+        reg[0x2C] &= 0xFD;
+        return 0;
+    }
+    if (ch->unk_0C < ch->unk_00) {
+        ch->unk_04 += ch->unk_06;
+        ch->unk_0C += ch->unk_08;
+    }
+
+    if (ch->unk_00 >= ch->unk_18) {
+        u8 phase = ch->unk_16;
+        u32 next = ch->unk_18;
+
+        do {
+            phase ^= 1;
+            ch->unk_16 = phase;
+            next += (&ch->unk_10)[phase];
+            ch->unk_18 = next;
+        } while (ch->unk_00 >= next);
+    }
+
+    if (!(D_800FD016 & 8) && (ch->unk_04 < 0)) {
+        ch->unk_24 = 0;
+        return 0;
+    }
+    if ((ch->unk_04 & 0xFFFF) >= 0x7801) {
+        ch->unk_04 = 0x7800;
+        ch->unk_06 = 0;
+        ch->unk_0C = -1;
+    }
+
+    out = ch->unk_04;
+    if (ch->unk_16 == 0) {
+        out = -out;
+    }
+    ch->unk_00 += 0x40;
+    return out;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_8004A474.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_8004A89C.s")
 
