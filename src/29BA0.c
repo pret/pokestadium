@@ -144,7 +144,7 @@ void Game_HandleN64LogoIntro(void) {
     gCurrentGameState = STATE_TITLE_SCREEN;
 }
 
-void func_800293CC(void) {
+void Game_HandleTitleScreen(void) {
     gCurrentGameState = FRAGMENT_LOAD_AND_CALL(fragment36, 0, &D_8007567C);
 
     if (gCurrentGameState == STATE_TITLE_SCREEN) {
@@ -798,7 +798,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
                 Game_HandleN64LogoIntro();
                 break;
             case STATE_TITLE_SCREEN:
-                func_800293CC();
+                Game_HandleTitleScreen();
                 break;
             case STATE_N64DD_BOOT_UNUSED:
                 func_800296AC();

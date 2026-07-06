@@ -139,7 +139,7 @@ void func_800290B4(void);
 s32 func_800290E4(s16 arg0);
 void func_800291E0(void);
 void Game_HandleN64LogoIntro(void);
-void func_800293CC(void);
+void Game_HandleTitleScreen(void);
 void func_800296AC(void);
 void func_800296E0(void);
 void func_80029828(void);
