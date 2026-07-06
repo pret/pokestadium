@@ -1,4 +1,5 @@
 #include "4F410.h"
+#include "include/pokemon.h"
 #include "src/373A0.h"
 #include "src/45720.h"
 #include "src/4B940.h"
@@ -1086,7 +1087,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
     var_v0 = 0;
     if (arg0 == 0xC8) {
         var_v0 = 1;
-    } else if (((arg0 == 0) || (arg0 >= 0x98)) && (arg1 != 0xA)) {
+    } else if (((arg0 == 0) || (arg0 >= SPECIES_BLANK)) && (arg1 != 0xA)) {
         return;
     }
 
@@ -1176,7 +1177,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
 
         case 1:
             if (var_v0 != 0) {
-                arg0 = 0x98;
+                arg0 = SPECIES_BLANK;
                 sp24 = 0x70;
             } else {
                 sp24 = 0x60;
@@ -1211,7 +1212,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
                     var_a3 = 0x2A;
                     break;
 
-                case 0x98:
+                case SPECIES_BLANK:
                 case 0x99:
                 case 0x9A:
                 case 0x9B:
