@@ -566,7 +566,7 @@ void func_81302548(void) {
 
     for (i = 0; i < 4; i++) {
         func_80025040(i, &sp48);
-        func_80021B5C(D_81303FA8[i].unk_08, sp48.unk_02);
+        DecodeMonNameSafe(D_81303FA8[i].unk_08, sp48.unk_02);
         D_81303FA8[i].unk_06 = sp48.unk_00;
         D_81303FA8[i].unk_01 = func_80024F68(i);
         D_81303FA8[i].unk_00 = func_80024F00(i);

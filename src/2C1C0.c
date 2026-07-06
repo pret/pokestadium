@@ -536,7 +536,7 @@ void func_8002C538(void) {
     sp20.unk_0E = D_800AE540.unk_1194[0].unk_08[0]->unk_018;
 
     _bcopy(D_800AE540.unk_11E4[0], &sp20.unk_05, 8);
-    func_80021C20(&sp20.unk_10, &D_800AE540.unk_1194[0].unk_08[0]->unk_008);
+    EncodeMonNameSafe(&sp20.unk_10, &D_800AE540.unk_1194[0].unk_08[0]->unk_008);
     func_800281D4(&sp20, sp1C->unk_028, sp1C->unk_002);
     func_80026684(0x15, 0);
 }
@@ -560,7 +560,7 @@ s32 func_8002C5E8(void) {
         D_800AE540.unk_11F0 = sp250.unk_0D;
         tmp = sp250.unk_0E;
 
-        func_80021B5C(sp44, sp250.unk_10);
+        DecodeMonNameSafe(sp44, sp250.unk_10);
         func_8002B840(0, func_8002B700(0, tmp, sp44, sp44));
         func_8002B840(1, func_8002B700(-1, tmp, "COM", func_8002311C(3)));
 

@@ -285,7 +285,7 @@ void func_82F00734(void) {
     for (i = 0, ptr = &D_82F14450[0]; i < 4; i++, ptr++) {
         func_80025040(i, &sp40);
         func_80023AF8(i);
-        func_80021B5C(ptr->unk_08, sp40.unk_02);
+        DecodeMonNameSafe(ptr->unk_08, sp40.unk_02);
         ptr->unk_06 = sp40.unk_00;
         ptr->unk_01 = func_80024F68(i);
         ptr->unk_00 = func_80024F00(i);

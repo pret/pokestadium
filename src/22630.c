@@ -27,7 +27,7 @@ void WriteBE24(u8* arg0, s32 arg1) {
     arg0[2] = (arg1) & 0xFF;
 }
 
-char* func_80021A90(char* arg0, char* arg1) {
+char* DecodeMonName(char* arg0, char* arg1) {
     extern s8 D_80073030[];
 
     char* sp34 = arg0;
@@ -49,11 +49,11 @@ char* func_80021A90(char* arg0, char* arg1) {
     return sp34;
 }
 
-void func_80021B5C(char* arg0, char* arg1) {
-    func_80021A90(arg0, arg1);
+void DecodeMonNameSafe(char* arg0, char* arg1) {
+    DecodeMonName(arg0, arg1);
 }
 
-char* func_80021B7C(char* arg0, char* arg1) {
+char* EncodeMonName(char* arg0, char* arg1) {
     extern u8 D_80073130[];
 
     char* sp1C = arg0;
@@ -72,27 +72,27 @@ char* func_80021B7C(char* arg0, char* arg1) {
     return sp1C;
 }
 
-char* func_80021C20(char* arg0, char* arg1) {
-    return func_80021B7C(arg0, arg1);
+char* EncodeMonNameSafe(char* arg0, char* arg1) {
+    return EncodeMonName(arg0, arg1);
 }
 
-char* func_80021C40(char* arg0, char* arg1) {
+char* DecodePaddedMonName(char* arg0, char* arg1) {
     char sp1C[11];
 
     _bcopy(arg1, sp1C, 0xA);
 
     sp1C[10] = 'P';
 
-    return func_80021A90(arg0, sp1C);
+    return DecodeMonName(arg0, sp1C);
 }
 
-char* func_80021C80(char* arg0, char* arg1) {
+char* CopyMonName(char* arg0, char* arg1) {
     HAL_Strcpy(arg0, arg1);
     return arg0;
 }
 
 char* func_80021CA4(char* arg0, s32 arg1) {
-    func_80021C80(arg0, (char*)*(u32*)D_8006FEE8[arg1]);
+    CopyMonName(arg0, (char*)*(u32*)D_8006FEE8[arg1]);
     return arg0;
 }
 

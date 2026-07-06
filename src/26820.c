@@ -190,15 +190,15 @@ void func_80026268(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* a
     arg0->unk_25 = 0;
 
     _bcopy(arg1->unk_2C, arg0->unk_46, 0xB);
-    func_80021C40(arg0->unk_30, arg1->unk_21);
-    func_80021C40(arg0->unk_3B, arg1->unk_2C);
+    DecodePaddedMonName(arg0->unk_30, arg1->unk_21);
+    DecodePaddedMonName(arg0->unk_3B, arg1->unk_2C);
 }
 
 void func_800262DC(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* arg1) {
     arg0->unk_04 = arg0->unk_24;
 
     func_80021F04(arg0, &arg1->unk_00);
-    func_80021B7C(arg1->unk_21, arg0->unk_30);
+    EncodeMonName(arg1->unk_21, arg0->unk_30);
 
     _bcopy(arg0->unk_46, arg1->unk_2C, 0xB);
 }
@@ -653,7 +653,7 @@ char* func_800272BC(s32 arg0, s32 arg1, char* arg2) {
         }
 
         if (var_a1 != NULL) {
-            sp1C = func_80021A90(arg2, var_a1);
+            sp1C = DecodeMonName(arg2, var_a1);
         }
     }
 
@@ -679,7 +679,7 @@ void func_80027430(s32 arg0, s32 arg1, s32 arg2, char* arg3, u16 arg4) {
             }
 
             if (arg3 != NULL) {
-                func_80021B7C(&temp_v0->unk_000.unk_01, arg3);
+                EncodeMonName(&temp_v0->unk_000.unk_01, arg3);
             }
 
             func_800264DC(arg0, arg1, 3);
@@ -692,7 +692,7 @@ void func_80027430(s32 arg0, s32 arg1, s32 arg2, char* arg3, u16 arg4) {
             }
 
             if (arg3 != NULL) {
-                func_80021B7C(&temp_v0_2->unk_000.unk_01, arg3);
+                EncodeMonName(&temp_v0_2->unk_000.unk_01, arg3);
             }
 
             func_800264DC(arg0, arg1, 3);
@@ -705,7 +705,7 @@ void func_80027430(s32 arg0, s32 arg1, s32 arg2, char* arg3, u16 arg4) {
             }
 
             if (arg3 != NULL) {
-                func_80021B7C(&temp_v0_3->unk_00.unk_01, arg3);
+                EncodeMonName(&temp_v0_3->unk_00.unk_01, arg3);
             }
 
             func_800264DC(arg0, arg1, 3);
