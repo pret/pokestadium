@@ -502,7 +502,6 @@ void func_81208E28(s32 arg0) {
 extern s16 D_8122C790;
 extern s16 D_8122C792;
 extern void* D_812346E0;
-extern void osGbSetNextBuffer(void*, s32);
 // Fill the GB line buffer (640 x/y s16 pairs) with a ramp from (D_8122C790,
 // D_8122C792) down to the origin, then flush it and hand it to the GB DAC.
 void func_81208E4C(void) {
@@ -577,7 +576,74 @@ u8 func_81208F9C(u16 arg0) {
   return D_811FEB60[arg0 & 0xFFFF];
 }
 
+#ifdef NON_MATCHING
+extern s16 D_812346EC[];
+extern u8 D_81234690[];
+extern s32 D_812346C8;
+extern s32 D_812346D0;
+extern s32 D_812346D4;
+extern s32 D_812346F4;
+extern u32 D_812346FC;
+void func_81208828(s16, void*, s16, s16*);
+void func_81209374(s16, void*, s16, s16*);
+// Advance the GB audio triple buffer: hand the just-filled buffer to the DAC
+// (after a warm-up delay), then size and (re)fill the next buffer.
+s32 func_81209078(void) {
+    void** bufs = (void**) &D_812346E0;
+    s32 fill = (D_812346D4 + 1) % 3;
+    s32 play = (fill + 2) % 3;
+    s32 aiLen;
+    void* buf;
+    s16 len;
+
+    D_812346C8++;
+    D_812346D0 ^= 1;
+    D_812346D4 = fill;
+
+    aiLen = osAiGetLength() >> 2;
+
+    if (D_812346FC < 0x10) {
+        s16 playLen = D_812346EC[play];
+        if (playLen != 0) {
+            if (osGbSetNextBuffer(bufs[play], playLen * 4, playLen, &D_812346EC[play]) != -1) {
+                s16* end = (s16*) ((u8*) bufs[play] + D_812346EC[play] * 4);
+                D_8122C790 = end[-2];
+                D_8122C792 = end[-1];
+            }
+        }
+    }
+
+    if (D_812346FC >= 0x11) {
+        return 0;
+    }
+    if (D_812346FC != 0) {
+        D_812346FC++;
+    }
+
+    buf = bufs[fill];
+    D_812346EC[fill] = (((*(s16*) &D_81234690[6] - aiLen) + 0x80) & 0xFFF0) + 0x10;
+    if (D_812346EC[fill] < *(s16*) &D_81234690[0xA]) {
+        D_812346EC[fill] = *(s16*) &D_81234690[0xA];
+    }
+    if (*(s16*) &D_81234690[8] < D_812346EC[fill]) {
+        D_812346EC[fill] = *(s16*) &D_81234690[8];
+    }
+    len = D_812346EC[fill];
+
+    if (D_8120EB78 == 0) {
+        func_81208828(len, buf, len, &D_812346EC[fill]);
+    } else {
+        func_81209374(len, buf, len, &D_812346EC[fill]);
+    }
+    osWritebackDCache(buf, len * 4);
+
+    D_812346F4 = osGetCount() * (D_812346F4 + D_812346C8);
+    D_812346F4 += ((s16*) buf)[D_812346C8 & 0xFF];
+    return 0;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81209078.s")
+#endif
 
 void func_8120935C(s32 arg0) {
   D_8120EB78 = arg0;
