@@ -1,4 +1,5 @@
 #include "22630.h"
+#include "include/pokemon.h"
 #include "include/string.h"
 #include "src/22630.h"
 #include "src/26820.h"
@@ -104,12 +105,12 @@ char* func_80021CE0(s32 arg0, char* arg1) {
     static const char D_0007CCB4[] = { 0xA4, 0xEF, 0xA4, 0xB6, 0xA5, 0xDE, 0xA5, 0xB7,
                                        0xA5, 0xF3, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00 };
 
-    if ((arg0 > 0) && (arg0 < 0x54)) {
+    if ((arg0 > ITEM_NONE) && (arg0 <= ITEM_REGULAR_LAST)) {
         HAL_Strcpy(arg1, D_80072EE0[arg0 - 1]);
-    } else if ((arg0 >= 0xC4) && (arg0 < 0xC9)) {
-        sprintf(arg1, D_0007CCA0, arg0 - 0xC3, arg0);
-    } else if ((arg0 >= 0xC9) && (arg0 < 0xFF)) {
-        sprintf(arg1, D_0007CCB4, arg0 - 0xC8, arg0);
+    } else if ((arg0 >= ITEM_HM_FIRST) && (arg0 < ITEM_TM_FIRST)) {
+        sprintf(arg1, D_0007CCA0, arg0 - (ITEM_HM_FIRST - 1), arg0);
+    } else if ((arg0 >= ITEM_TM_FIRST) && (arg0 <= ITEM_TM_LAST)) {
+        sprintf(arg1, D_0007CCB4, arg0 - (ITEM_TM_FIRST - 1), arg0);
     } else {
         HAL_Strcpy(arg1, D_80072EE0[6]);
     }
