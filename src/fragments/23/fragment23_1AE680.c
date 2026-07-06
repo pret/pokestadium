@@ -633,7 +633,83 @@ static Color_RGBA8 D_88217E1C[] = {
 };
 
 void func_88207354();
+#ifdef NON_MATCHING
+#define GFX(w0v, w1v)                        \
+    do {                                     \
+        Gfx* _g = gDisplayListHead;          \
+        gDisplayListHead = _g + 1;           \
+        _g->words.w0 = (w0v);                \
+        _g->words.w1 = (w1v);                \
+    } while (0)
+// Draw the filled highlight box behind a menu entry: a solid fill (brightened
+// D_88217E18) framed by top/bottom outline lines (D_88217E1C[1]), then its
+// content. Layout depends on the entry state flags in arg4.
+void func_88207354(s32 arg0, s32 arg1, unk_func_88205880_00D0* arg2, s32 arg3, s32 arg4, void* arg5) {
+    u32 lrx = (((arg0 + 0xCB) & 0x3FF) << 0xE) | 0xF6000000;
+    u32 ulx = (arg0 & 0x3FF) << 0xE;
+    s32 fill;
+    s32 outline;
+    Color_RGBA8 color;
+
+    outline =
+        ((D_88217E1C[1].r << 8) & 0xF800) | ((D_88217E1C[1].g << 3) & 0x7C0) | ((D_88217E1C[1].b >> 2) & 0x3E) | 1;
+
+    if (arg2 != NULL) {
+        if (arg4 & 2) {
+            color = func_8002D444(D_88217E18, 1.4f);
+        } else {
+            color = D_88217E18;
+        }
+        fill = ((color.r << 8) & 0xF800) | ((color.g << 3) & 0x7C0) | ((color.b >> 2) & 0x3E) | 1;
+
+        GFX(0xE7000000, 0);
+        GFX(0xE3000A01, 0x300000);
+        GFX(0xE200001C, 0);
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (fill << 0x10) | fill);
+        GFX(lrx | (((arg1 + 0x1A) & 0x3FF) * 4), ulx | (((arg1 + 1) & 0x3FF) * 4));
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (outline << 0x10) | outline);
+        GFX(lrx | ((arg1 & 0x3FF) * 4), ulx | ((arg1 & 0x3FF) * 4));
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (outline << 0x10) | outline);
+        GFX(lrx | (((arg1 + 0x1B) & 0x3FF) * 4), ulx | (((arg1 + 0x1B) & 0x3FF) * 4));
+
+        if (!(arg4 & 0x100)) {
+            func_8820723C(arg2, arg0, arg1, *(s32*) ((u8*) arg5 + 0x3C));
+        }
+    } else if (arg4 & 1) {
+        color = D_88217E18;
+        fill = ((color.r << 8) & 0xF800) | ((color.g << 3) & 0x7C0) | ((color.b >> 2) & 0x3E) | 1;
+
+        GFX(0xE7000000, 0);
+        GFX(0xE3000A01, 0x300000);
+        GFX(0xE200001C, 0);
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (fill << 0x10) | fill);
+        GFX(lrx | (((arg1 + 0x1A) & 0x3FF) * 4), ulx | (((arg1 + 1) & 0x3FF) * 4));
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (outline << 0x10) | outline);
+        GFX(lrx | ((arg1 & 0x3FF) * 4), ulx | ((arg1 & 0x3FF) * 4));
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (outline << 0x10) | outline);
+        GFX(lrx | (((arg1 + 0x1B) & 0x3FF) * 4), ulx | (((arg1 + 0x1B) & 0x3FF) * 4));
+    } else {
+        color = func_8002D444(D_88217E18, 0.8f);
+        fill = ((color.r << 8) & 0xF800) | ((color.g << 3) & 0x7C0) | ((color.b >> 2) & 0x3E) | 1;
+
+        GFX(0xE7000000, 0);
+        GFX(0xE3000A01, 0x300000);
+        GFX(0xE200001C, 0);
+        GFX(0xE7000000, 0);
+        GFX(0xF7000000, (fill << 0x10) | fill);
+        GFX(lrx | (((arg1 + 0x1B) & 0x3FF) * 4), ulx | ((arg1 & 0x3FF) * 4));
+    }
+}
+#undef GFX
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1AE680/func_88207354.s")
+#endif
 
 void func_882079D8(unk_func_882079D8* arg0, s32 arg1, s32 arg2, s32 arg3, unk_func_88205880_00D0* arg4) {
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(&arg0->unk_00, sizeof(unk_func_882079D8));
