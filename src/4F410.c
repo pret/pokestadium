@@ -15,7 +15,7 @@ typedef struct unk_D_80079070 {
     /* 0x04 */ u8 unk_04;
 } unk_D_80079070; // size = 0x5
 
-static unk_D_80079070 D_80079070[151] = {
+static unk_D_80079070 gSpeciesBattleAnimConfig[151] = {
     {
         0x01,
         0x01,
@@ -1126,7 +1126,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
                 arg0 = 0x9D;
                 var_a3 = 0x3C;
             } else {
-                var_a3 = D_80079070[arg0 - 1].unk_03;
+                var_a3 = gSpeciesBattleAnimConfig[arg0 - 1].unk_03;
             }
             sp24 = 0x30;
             break;
@@ -1136,7 +1136,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
                 arg0 = 0x9D;
                 var_a3 = 0x3C;
             } else {
-                var_a3 = D_80079070[arg0 - 1].unk_03;
+                var_a3 = gSpeciesBattleAnimConfig[arg0 - 1].unk_03;
             }
             sp24 = 0x60;
             func_800367A0(0x15, D_80078400, 0);
@@ -1147,7 +1147,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
                 arg0 = 0x9C;
                 var_a3 = 0x32;
             } else {
-                var_a3 = D_80079070[arg0 - 1].unk_03;
+                var_a3 = gSpeciesBattleAnimConfig[arg0 - 1].unk_03;
             }
             sp24 = 0x70;
             func_800367A0(0x15, D_80078400, 0);
@@ -1181,7 +1181,7 @@ void func_8004E810(u32 arg0, u32 arg1) {
                 sp24 = 0x70;
             } else {
                 sp24 = 0x60;
-                var_a3 = D_80079070[arg0 - 1].unk_04;
+                var_a3 = gSpeciesBattleAnimConfig[arg0 - 1].unk_04;
             }
             break;
 
