@@ -210,7 +210,75 @@ static Color_RGBA8 D_88217DF4 = { 0x6C, 0x6C, 0x7E, 0xFF };
 void func_8820634C();
 // const char D_88224E90[] = "%d";
 // const char D_88224E94[] = " 00";
+#ifdef NON_MATCHING
+// Draw an ordered menu row: fill box (RGBA5551 from D_88217DF4), the row's label
+// string, its right-aligned index number (arg3 + 1), and its icon.
+void func_8820634C(s32 arg0, s32 arg1, void* arg2, s32 arg3, s32 arg4, void* arg5) {
+    Gfx* g;
+    Color_RGBA8* col;
+    s8* label;
+    char num[4];
+    s32 y;
+    s32 fill;
+
+    label = func_8002D7C0(NULL, 0, D_88224FB4, 0x41U);
+
+    g = gDisplayListHead;
+    gDisplayListHead = g + 1;
+    g->words.w0 = 0xE7000000;
+    g->words.w1 = 0;
+
+    g = gDisplayListHead;
+    gDisplayListHead = g + 1;
+    g->words.w1 = 0x300000;
+    g->words.w0 = 0xE3000A01;
+
+    g = gDisplayListHead;
+    gDisplayListHead = g + 1;
+    g->words.w1 = 0;
+    g->words.w0 = 0xE200001C;
+
+    g = gDisplayListHead;
+    gDisplayListHead = g + 1;
+    g->words.w1 = 0;
+    g->words.w0 = 0xE7000000;
+
+    g = gDisplayListHead;
+    gDisplayListHead = g + 1;
+    g->words.w0 = 0xF7000000;
+    fill = ((D_88217DF4.r << 8) & 0xF800) | ((D_88217DF4.g << 3) & 0x7C0) | ((D_88217DF4.b >> 2) & 0x3E) | 1;
+    g->words.w1 = (fill << 0x10) | fill;
+
+    g = gDisplayListHead;
+    gDisplayListHead = g + 1;
+    g->words.w0 = 0xF6000000 | ((((*(s16*) ((u8*) arg5 + 0x3C) + arg0) - 1) & 0x3FF) << 0xE) |
+                  ((((arg1 + *(s16*) ((u8*) arg5 + 0x3E)) - 1) & 0x3FF) * 4);
+    g->words.w1 = ((arg0 & 0x3FF) << 0xE) | ((arg1 & 0x3FF) * 4);
+
+    func_8001F3F4();
+    if (arg4 & 0x100) {
+        col = &D_88217DF0;
+    } else if (arg4 & 4) {
+        col = &D_88217DEC;
+    } else {
+        col = &D_88217DE8;
+    }
+    func_8001F324(col->r, col->g, col->b, col->a);
+    func_8001EBE0(8, 0);
+
+    y = arg1 + 2;
+    func_8001F1E8(arg0 + 8, y, label);
+    sprintf(num, "%d", arg3 + 1);
+    func_8001F1E8(((arg0 + func_8001F5B0(0, 0, label) + func_8001F5B0(0, 0, " 00")) - func_8001F5B0(0, 0, num)) + 8, y,
+                  num);
+    func_8001F444();
+
+    func_8821711C((*(s16*) ((u8*) arg5 + 0x3C) + arg0) - 0x35, arg1 + 8, *(s32*) ((u8*) arg2 + 0xC),
+                  *(s32*) ((u8*) arg2 + 8), 2);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1AE680/func_8820634C.s")
+#endif
 
 static u8 D_88217DF8[] = {
     0x18,
