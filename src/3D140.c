@@ -1235,7 +1235,190 @@ void func_8003DB84(s32 arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003DB84.s")
 #endif
 
+#ifdef NON_MATCHING
+void func_800420F0(u16, u16*, u8*);
+extern u8 D_800FCB30[];
+extern u16 D_80077FEC;
+extern u16 D_80077FF4;
+extern u16 D_80077FFC;
+extern u16 D_80078004;
+extern u16 D_8007800C;
+extern u16 D_80078014;
+// Announce a Pokemon entering battle for player arg0: track whether it has been
+// seen before, and choose a line based on the switch flags, the Pokemon's status
+// ailments, and the level/HP balance versus the opposing Pokemon.
+void func_8003EB40(s32 arg0, unk_D_800FCB18* arg1) {
+    s32 forced = 0;
+
+    D_800FCCB1 = 0;
+    D_800783F0 = 0;
+    D_800783F4 = 0;
+    D_800783F8 = 0;
+
+    if ((arg1 != NULL) && (arg0 != 0) && ((u32) arg0 < 5)) {
+        s32 idx = arg0 - 1;
+        u8 count = D_80078398[idx];
+
+        if (((s32) count > 0) && ((s32) count < 3)) {
+            s32 side = (count - 1) & 0xFF;
+            s32 opp = side ^ 1;
+            unk_D_800FCB18* self;
+            unk_D_800FCB48* hist;
+            u8 species;
+
+            if (idx != D_80078394[side]) {
+                forced = 1;
+                D_80078394[side] = idx;
+            }
+            D_800FCB18[side] = arg1;
+            func_8003D6DC(side);
+            D_800FCCC8[opp] = 0;
+
+            self = D_800FCB18[side];
+            hist = &D_800FCB48[side];
+            D_800FCB28[side] = self->unk_0C;
+            hist->unk_24++;
+            hist->unk_00[hist->unk_24 & 0xF] = self->unk_0C;
+
+            species = self->unk_0B;
+            if (((s32) species > 0) && ((s32) species < 0x98)) {
+                u8 n = D_8007839C[side];
+                s32 found = 0;
+
+                if (n != 0) {
+                    u8* seen = D_800FCB38[side];
+                    s32 i = 0;
+
+                    do {
+                        i++;
+                        if (species == *seen) {
+                            found = 1;
+                            break;
+                        }
+                        seen++;
+                    } while (i < n);
+                }
+
+                if (found) {
+                    unk_D_800FCB18* other;
+
+                    if (D_800FCB30[side] == 0) {
+                        if (D_800783DC == 0) {
+                            if ((s32) D_80078390[side] < 2) {
+                                if ((osGetTime() % 2) == 0) {
+                                    func_80041C70(2);
+                                } else {
+                                    func_80041C70(1);
+                                }
+                            } else {
+                                func_80041C70(0x50);
+                                if (forced) {
+                                    func_800420C0(&D_80077FEC);
+                                }
+                            }
+                            D_800783DC = 1;
+                        } else {
+                            func_80041C70(0x58);
+                            D_800783DC = 0;
+                            if (forced) {
+                                func_800420C0(&D_80077FEC);
+                            }
+                        }
+                    } else if (forced) {
+                        func_800420C0(&D_80077FEC);
+                    }
+                    D_800FCB30[side] = 0;
+
+                    other = D_800FCB18[opp];
+                    if ((other != NULL) && (forced == 0)) {
+                        u8 status = self->unk_15;
+
+                        if (status & 0x20) {
+                            func_800420C0(&D_80077FFC);
+                            return;
+                        }
+                        if (status & 7) {
+                            func_800420C0(&D_80078004);
+                            return;
+                        }
+                        if (status & 8) {
+                            func_80041C70(6);
+                            return;
+                        }
+                        if (status & 0x10) {
+                            func_80041C70(7);
+                            return;
+                        }
+                        if ((((f32) self->unk_0C / (f32) self->unk_28) < 0.2f) &&
+                            ((s32) self->unk_0C < (s32) other->unk_0C)) {
+                            func_800420C0(&D_8007800C);
+                        }
+                    }
+                } else {
+                    D_800FCB38[side][n] = species;
+                    D_8007839C[side] = n + 1;
+                    if (((n + 1) & 0xFF) >= 8) {
+                        D_8007839C[side] = 7;
+                    }
+                    D_800FCB30[side] = 0;
+
+                    if (D_800783CC != 0) {
+                        unk_D_800FCB18* other;
+
+                        func_80041C70(species + 0xCB);
+                        if (forced) {
+                            func_800420C0(&D_80077FEC);
+                        }
+                        other = D_800FCB18[opp];
+                        if (other != NULL) {
+                            f32 selfLevel = self->unk_26;
+                            f32 otherLevel = other->unk_26;
+                            f32 diff = otherLevel - selfLevel;
+
+                            if ((2.0f * selfLevel) < diff) {
+                                D_800FCCB1 = 1;
+                                D_800FCCBA[side] = 0;
+                                return;
+                            }
+                            if ((selfLevel * 0.3f) < diff) {
+                                D_800FCCB1 = 1;
+                                D_800FCCBA[side] = 0;
+                                return;
+                            }
+                            if ((otherLevel * 0.3f) < (selfLevel - otherLevel)) {
+                                D_800FCCB1 = 1;
+                                if ((D_800FCCD6[side] != 0) && (D_800FCCBA[side] != 0)) {
+                                    if (forced == 0) {
+                                        func_800420C0(&D_80078014);
+                                    }
+                                } else if (forced == 0) {
+                                    func_800420F0(9, &D_80077FF4, (u8*) &D_800FCCBA[side]);
+                                } else {
+                                    D_800FCCBA[side]++;
+                                }
+                                D_800FCCB8[side] = 0;
+                                D_800FCCD6[side] = 0;
+                                return;
+                            }
+                            if ((D_80078390[side] == 2) && (D_80078390[opp] == 3) &&
+                                (((u32) (other->unk_0C * 0x64) / (u16) other->unk_28) < 0x32) && (D_800783E0 == 0)) {
+                                if (forced == 0) {
+                                    func_80041C70(0xA);
+                                }
+                                D_800783E0 = 1;
+                            }
+                        }
+                        D_800FCCB8[side] = 0;
+                        D_800FCCBA[side] = 0;
+                    }
+                }
+            }
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003EB40.s")
+#endif
 
 #ifdef NON_MATCHING
 extern u8 D_800FCB30[];
