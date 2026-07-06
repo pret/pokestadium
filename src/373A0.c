@@ -1,4 +1,5 @@
 #include "373A0.h"
+#include "include/pokemon.h"
 #include "src/4CBC0.h"
 #include "src/373A0.h"
 #include "src/3D140.h"
@@ -210,11 +211,11 @@ s32 func_800367A0(u32 arg0, s32 arg1, s32 arg2) {
             return 0;
 
         case 0x33:
-            if (arg1 >= 0x98) {
+            if (arg1 >= SPECIES_BLANK) {
                 arg1 = 3;
             }
 
-            if ((arg1 > 0) && (arg1 < 0x98)) {
+            if ((arg1 > 0) && (arg1 < SPECIES_BLANK)) {
                 arg1--;
             } else {
                 arg1 = 0;
@@ -242,11 +243,11 @@ s32 func_800367A0(u32 arg0, s32 arg1, s32 arg2) {
                 return func_80039024(D_800FC6A4, D_800FC6A8, 0x20, 0x80, 0x80, -1);
             }
 
-            if (arg1 >= 0x98) {
+            if (arg1 >= SPECIES_BLANK) {
                 arg1 = 2;
             }
 
-            if ((arg1 > 0) && (arg1 < 0x98)) {
+            if ((arg1 > 0) && (arg1 < SPECIES_BLANK)) {
                 arg1--;
             } else {
                 arg1 = 0;
