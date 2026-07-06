@@ -928,7 +928,7 @@ unk_D_800AC910_050_B40_000* func_80024528(s32 arg0, s32 arg1) {
 void func_80024624(unk_func_80026268_arg0* arg0, s32 arg1, s32 arg2) {
     unk_D_800AC910_050_9AC* ptr2 = &D_800AC910[arg1].unk_50->unk_9AC;
 
-    func_80021E90(arg0, &ptr2->unk_008[arg2]);
+    DecodeFullMonRecord(arg0, &ptr2->unk_008[arg2]);
     func_80022338(arg0);
 
     arg0->unk_52 = 0;
@@ -943,7 +943,7 @@ void func_80024624(unk_func_80026268_arg0* arg0, s32 arg1, s32 arg2) {
 void func_800246F8(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2) {
     unk_D_800AC910_050_9AC* sp24 = &D_800AC910[arg1].unk_50->unk_9AC;
 
-    func_80022010(arg0, &sp24->unk_008[arg2]);
+    EncodeFullMonRecord(arg0, &sp24->unk_008[arg2]);
     EncodeMonName(sp24->unk_152[arg2], arg0->unk_000[0].unk_30);
     _bcopy(arg0->unk_000[0].unk_46, sp24->unk_110[arg2], 0xB);
     sp24->unk_001[arg2] = sp24->unk_008[arg2].unk_00.unk_00;
@@ -953,7 +953,7 @@ void func_800247C4(unk_func_80026268_arg0* arg0, s32 arg1, s32 arg2, s32 arg3) {
     unk_D_800AC910_050_B40* sp2C = (unk_D_800AC910_050_B40*)func_80024528(arg1, arg2);
 
     if (sp2C != NULL) {
-        func_80021D9C(arg0, &sp2C->unk_016[arg3]);
+        DecodeMonRecord(arg0, &sp2C->unk_016[arg3]);
         func_80022338(arg0);
 
         arg0->unk_52 = 0;
@@ -971,7 +971,7 @@ void func_80024884(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     if (sp2C != NULL) {
         arg0->unk_000[0].unk_04 = arg0->unk_000[0].unk_24;
-        func_80021F04(arg0->unk_000, &sp2C->unk_016[arg3]);
+        EncodeMonRecord(arg0->unk_000, &sp2C->unk_016[arg3]);
         EncodeMonNameSafe(sp2C->unk_386[arg3], arg0->unk_000[0].unk_30);
         _bcopy(arg0->unk_000[0].unk_46, sp2C->unk_2AA[arg3], 0xB);
         sp2C->unk_000.unk_001[arg3] = sp2C->unk_016[arg3].unk_00;

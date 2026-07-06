@@ -118,7 +118,7 @@ char* GetItemName(s32 arg0, char* arg1) {
     return arg1;
 }
 
-void func_80021D9C(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1) {
+void DecodeMonRecord(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1) {
     arg0->unk_00.unk_00 = GetSpeciesType2(arg1->unk_00);
     arg0->unk_00.unk_01 = arg1->unk_00;
     arg0->unk_02 = ReadBE16(arg1->unk_01);
@@ -142,8 +142,8 @@ void func_80021D9C(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_00
     memcpy(arg0->unk_20, arg1->unk_1D, 4);
 }
 
-void func_80021E90(unk_func_80026268_arg0* arg0, unk_D_800AC910_050_9AC_008* arg1) {
-    func_80021D9C(arg0, &arg1->unk_00);
+void DecodeFullMonRecord(unk_func_80026268_arg0* arg0, unk_D_800AC910_050_9AC_008* arg1) {
+    DecodeMonRecord(arg0, &arg1->unk_00);
     arg0->unk_24 = arg1->unk_21;
     arg0->unk_26 = ReadBE16(&arg1->unk_22);
     arg0->unk_28 = ReadBE16(&arg1->unk_24);
@@ -152,7 +152,7 @@ void func_80021E90(unk_func_80026268_arg0* arg0, unk_D_800AC910_050_9AC_008* arg
     arg0->unk_2E = ReadBE16(&arg1->unk_2A);
 }
 
-void func_80021F04(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1) {
+void EncodeMonRecord(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1) {
     if (GetSpeciesType1(arg0->unk_00.unk_00) & 0xFF) {
         arg1->unk_00 = GetSpeciesType1(arg0->unk_00.unk_00);
     } else {
@@ -180,8 +180,8 @@ void func_80021F04(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_00
     memcpy(arg1->unk_1D, arg0->unk_20, 4);
 }
 
-void func_80022010(unk_func_88205880_00D0* arg0, unk_D_800AC910_050_9AC_008* arg1) {
-    func_80021F04(arg0->unk_000, arg1);
+void EncodeFullMonRecord(unk_func_88205880_00D0* arg0, unk_D_800AC910_050_9AC_008* arg1) {
+    EncodeMonRecord(arg0->unk_000, arg1);
     arg1->unk_21 = arg0->unk_000[0].unk_24;
     WriteBE16(&arg1->unk_22, arg0->unk_000[0].unk_26);
     WriteBE16(&arg1->unk_24, arg0->unk_000[0].unk_28);
@@ -190,7 +190,7 @@ void func_80022010(unk_func_88205880_00D0* arg0, unk_D_800AC910_050_9AC_008* arg
     WriteBE16(&arg1->unk_2A, arg0->unk_000[0].unk_2E);
 }
 
-u16 func_80022084(u16 arg0) {
+u16 Isqrt(u16 arg0) {
     u16 i;
 
     for (i = 1; i < 255; i++) {
@@ -262,7 +262,7 @@ u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u
     dvValue = GetPokemonDV(statId, dvBits);
 
     // Compute the preliminary stat value
-    statValue = (((func_80022084(statModifier) / 4) + ((baseStat + dvValue) * 2)) * level) / 100;
+    statValue = (((Isqrt(statModifier) / 4) + ((baseStat + dvValue) * 2)) * level) / 100;
 
     // Add final adjustments
     if (statId == STAT_HP) {

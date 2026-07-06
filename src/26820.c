@@ -182,7 +182,7 @@ void func_80025F50(s32 arg0, s32 arg1) {
 }
 
 void func_80026268(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* arg1) {
-    func_80021D9C(arg0, arg1);
+    DecodeMonRecord(arg0, arg1);
     func_80022338(arg0);
 
     arg0->unk_52 = 0;
@@ -197,7 +197,7 @@ void func_80026268(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* a
 void func_800262DC(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010* arg1) {
     arg0->unk_04 = arg0->unk_24;
 
-    func_80021F04(arg0, &arg1->unk_00);
+    EncodeMonRecord(arg0, &arg1->unk_00);
     EncodeMonName(arg1->unk_21, arg0->unk_30);
 
     _bcopy(arg0->unk_46, arg1->unk_2C, 0xB);
