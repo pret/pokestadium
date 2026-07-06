@@ -108,9 +108,9 @@ s32 func_80022A04(u16* arg0, unk_D_800AC910_040* arg1) {
 }
 
 u8 func_80022A28(s32 arg0) {
-    extern u8 D_80073230[];
+    extern u8 gMoveType[];
 
-    return D_80073230[arg0];
+    return gMoveType[arg0];
 }
 
 u8 func_80022A38(s32 arg0) {
