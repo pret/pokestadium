@@ -546,7 +546,123 @@ u16 func_81207DF8(void);
 void func_8120806C(u16, u8);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_8120806C.s")
 
+#ifdef NON_MATCHING
+extern u8 D_8120EA70[];
+extern s32 D_8120EAD0;
+typedef struct GbSndCmd {
+    /* 0x0 */ u8 cmd;
+    /* 0x1 */ u8 param;
+    /* 0x2 */ u16 time;
+} GbSndCmd; // size = 0x4
+extern GbSndCmd D_8122C8D8[];
+// Software GB APU tick: drain queued register writes (already time-sorted) into
+// D_8122C8D8, then for each output sample dispatch any due writes, step the four
+// channels, mix them per the stereo enable/volume register at D_8120EA70+0x14,
+// clamp, and emit one s16 stereo pair.
+void func_81208828(s16 arg0, void* arg1, s16 arg2, s16* arg3) {
+    OSMesg msg;
+    s32 count = 0;
+    s32 dispatch = 0;
+    u16 maxTime = 0;
+    s32 first = 1;
+    s32 s5 = 0;
+    f32 pos;
+    f32 step;
+    s32 flushAll;
+    s16* out = arg1;
+
+    while (osRecvMesg(&D_8122EEB0, &msg, 0) != -1) {
+        u16 time = *(u16*) ((u8*) &msg + 2);
+        if (first) {
+            s5 = time;
+            first = 0;
+        }
+        if (time < maxTime) {
+            s32 defer = s5 < D_8120EAD0;
+            s5 = 0;
+            if (defer) {
+                osJamMesg(&D_8122EEB0, msg, 0);
+                break;
+            }
+        }
+        *(u32*) &D_8122C8D8[count] = (u32) msg;
+        count++;
+        maxTime = time;
+    }
+
+    pos = 0.0f;
+    step = (f32) D_8120EAC4 / (f32) arg0;
+    flushAll = (arg0 < count) ? 1 : 0;
+
+    if (arg0 > 0) {
+        s16* end = (s16*) ((s32*) arg1 + arg0);
+        do {
+            u32 nr51 = *(u32*) &D_8120EA70[0x14];
+            s8 nr51noise = (s8) D_8120EA70[0x15];
+            s32 ch1, ch2, ch3, ch4;
+            u32 left;
+            u32 right;
+
+            pos += step;
+
+            if (flushAll) {
+                while (count != 0) {
+                    GbSndCmd* c = &D_8122C8D8[dispatch];
+                    if (((s32) pos & 0xFFFF) < (s32) c->time) {
+                        break;
+                    }
+                    func_8120806C(c->cmd, c->param);
+                    count--;
+                    dispatch++;
+                }
+            } else if (count != 0) {
+                GbSndCmd* c = &D_8122C8D8[dispatch];
+                if (((s32) pos & 0xFFFF) >= (s32) c->time) {
+                    func_8120806C(c->cmd, c->param);
+                    count--;
+                    dispatch++;
+                }
+            }
+
+            ch1 = func_81207774();
+            ch2 = func_81207A60();
+            ch3 = func_81207C5C();
+            ch4 = func_81207DF8();
+
+            right = (((nr51 & 1) ? ch1 : 0) + ((nr51 & 0x20000) ? ch2 : 0) + ((nr51 & 0x40000) ? ch3 : 0) +
+                     ((nr51 & 0x80000) ? ch4 : 0)) /
+                    (u32) (8 - (nr51 & 7));
+            left = (((nr51 & 0x100000) ? ch1 : 0) + ((nr51 & 0x200000) ? ch2 : 0) + ((nr51 & 0x400000) ? ch3 : 0) +
+                    ((nr51noise < 0) ? ch4 : 0)) /
+                   (u32) (8 - ((nr51 * 2) >> 0x1D));
+
+            if (right >= 0x8000) {
+                right = 0x7FFF;
+            }
+            if (left >= 0x8000) {
+                left = 0x7FFF;
+            }
+            out[0] = left;
+            out[1] = right;
+            out += 2;
+        } while (out != end);
+    }
+
+    while (count != 0) {
+        GbSndCmd* c = &D_8122C8D8[dispatch];
+        func_8120806C(c->cmd, c->param);
+        count--;
+        dispatch++;
+    }
+
+    D_8122EEA8.unk_00 = 0;
+    D_8122EEA8.unk_01 = 0;
+    D_8122EEA8.unk_02 = 0;
+    D_8122EEA8.unk_03 = 0;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81208828.s")
+#endif
 
 #ifdef NON_MATCHING
 extern s32 D_8120EAD0;
