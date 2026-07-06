@@ -122,7 +122,7 @@ u8 func_80022A38(s32 arg0) {
 }
 
 s32 func_80022A60(s32 arg0) {
-    if ((arg0 <= 0) || (arg0 > 190)) {
+    if ((arg0 <= 0) || (arg0 > SPECIES_EXTENDED_MAX)) {
         return SPECIES_BLANK;
     }
 
