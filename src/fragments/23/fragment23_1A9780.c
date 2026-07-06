@@ -103,7 +103,111 @@ static Color_RGBA8 D_88217C20 = { 0xF0, 0xF0, 0xF0, 0xFF };
 static Color_RGBA8 D_88217C24 = { 0x28, 0x28, 0x64, 0xFF };
 static Color_RGBA8 D_88217C28 = { 0x3C, 0x3C, 0x82, 0xFF };
 static Color_RGBA8 D_88217C2C = { 0x78, 0x78, 0x96, 0xFF };
+#ifdef NON_MATCHING
+extern u8 D_4006A08;
+#define GFX(w0v, w1v)                        \
+    do {                                     \
+        Gfx* _g = gDisplayListHead;          \
+        gDisplayListHead = _g + 1;           \
+        _g->words.w0 = (w0v);                \
+        _g->words.w1 = (w1v);                \
+    } while (0)
+#define RGBA5551(c) (((c).r << 8 & 0xF800) | ((c).g << 3 & 0x7C0) | ((c).b >> 2 & 0x3E) | 1)
+// Build the Pokemon info panel: a three-tone beveled background box, the entry's
+// panel texture, and (for a real species) its sprite plus stat icon and name.
+void func_88201488(s32 arg0, s32 arg1, void** arg2, s32 arg3, s32 arg4, void* arg5) {
+    s32 w = *(s16*) ((u8*) arg5 + 0x3C);
+    s32 h = *(s16*) ((u8*) arg5 + 0x3E);
+    u32 x0 = (arg0 & 0x3FF) << 0xE;
+    u32 xa = ((arg0 + 1) & 0x3FF) << 0xE;
+    u32 ya = (arg1 & 0x3FF) * 4;
+    u32 yb = ((arg1 + 1) & 0x3FF) * 4;
+    s32 fc24 = RGBA5551(D_88217C24);
+    s32 fc28 = RGBA5551(D_88217C28);
+    s32 fc2c = RGBA5551(D_88217C2C);
+
+    GFX(0xE7000000, 0);
+    GFX(0xE3000A01, 0x300000);
+    GFX(0xE200001C, 0);
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fc24 << 0x10) | fc24);
+    GFX(((((arg0 + w) - 2) & 0x3FF) << 0xE) | 0xF6000000 | (((arg1 + 0x31) & 0x3FF) * 4), xa | yb);
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fc28 << 0x10) | fc28);
+    GFX(((((arg0 + w) - 2) & 0x3FF) << 0xE) | 0xF6000000 | (((arg1 + 0x49) & 0x3FF) * 4),
+        xa | (((arg1 + 0x32) & 0x3FF) * 4));
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fc2c << 0x10) | fc2c);
+    GFX(((((arg0 + w) - 1) & 0x3FF) << 0xE) | 0xF6000000 | ya, x0 | ya);
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fc2c << 0x10) | fc2c);
+    GFX(((((arg0 + w) - 1) & 0x3FF) << 0xE) | 0xF6000000 | ((((arg1 + h) - 1) & 0x3FF) * 4),
+        x0 | ((((arg1 + h) - 1) & 0x3FF) * 4));
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fc2c << 0x10) | fc2c);
+    GFX(x0 | 0xF6000000 | ((((arg1 + h) - 2) & 0x3FF) * 4), x0 | yb);
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fc2c << 0x10) | fc2c);
+    GFX(((((arg0 + w) - 1) & 0x3FF) << 0xE) | 0xF6000000 | ((((arg1 + h) - 2) & 0x3FF) * 4),
+        ((((arg0 + w) - 1) & 0x3FF) << 0xE) | yb);
+
+    if (arg2 != NULL) {
+        u8* meta = *(u8**) arg2;
+        u8 species;
+
+        GFX(0xE7000000, 0);
+        GFX(0xE3000A01, 0x200000);
+        GFX(0xE200001C, 0);
+        GFX(0xE2001E01, 1);
+        GFX(0xE3000C00, 0);
+        GFX(0xFD100000, (u32) ((u8*) arg2 + 8));
+        GFX(0xF5100000, 0x07000000);
+        GFX(0xE6000000, 0);
+        GFX(0xF3000000, 0x0763F0CD);
+        GFX(0xE7000000, 0);
+        GFX(0xF5101400, 0);
+        GFX(0xF2000000, 0x9C09C);
+        GFX(((((arg0 + 0x57) * 4) & 0xFFF) << 0xC) | 0xE4000000 | (((arg1 + 0x2D) * 4) & 0xFFF),
+            ((((arg0 + 0x30) * 4) & 0xFFF) << 0xC) | (((arg1 + 6) * 4) & 0xFFF));
+        GFX(0xE1000000, 0);
+        GFX(0xF1000000, 0x10000400);
+        GFX(0xE7000000, 0);
+        GFX(0xE2001E01, 0);
+
+        species = meta[0];
+        if (((s32) species > 0) && ((s32) species < 0x98)) {
+            GFX(0xE7000000, 0);
+            GFX(0xE3000A01, 0);
+            GFX(0xE200001C, 0x504240);
+            GFX(0xE3000C00, 0);
+            GFX(0xE3001201, 0);
+            GFX(0xFCFFFFFF, 0xFFFCF279);
+            GFX(0xFD700000, (u32) &D_4006A08);
+            GFX(0xF5700000, 0x07000000);
+            GFX(0xE6000000, 0);
+            GFX(0xF3000000, 0x07027800);
+            GFX(0xE7000000, 0);
+            GFX(0xF5680200, 0);
+            GFX(0xF2000000, 0x1C024);
+            GFX(((((arg0 + 0x12) * 4) & 0xFFF) << 0xC) | 0xE4000000 | (((arg1 + 0x29) * 4) & 0xFFF),
+                ((((arg0 + 0xA) * 4) & 0xFFF) << 0xC) | (((arg1 + 0x1F) * 4) & 0xFFF));
+            GFX(0xE1000000, 0);
+            GFX(0xF1000000, 0x04000400);
+            func_8002E244(arg0 + 0x14, arg1 + 0x1D, *(s32*) (meta + 0x24));
+        }
+
+        func_8001F3F4();
+        func_8001F324(D_88217C20.r, D_88217C20.g, D_88217C20.b, D_88217C20.a);
+        func_8001EBE0(8, 0);
+        func_8001F1E8(((w - func_8001F5B0(0, 0, meta + 0x30)) / 2) + arg0, arg1 + 0x34, meta + 0x30);
+        func_8001F444();
+    }
+}
+#undef RGBA5551
+#undef GFX
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1A9780/func_88201488.s")
+#endif
 
 void func_88201DA0(unk_func_88201DA0* arg0, s32 arg1, s32 arg2, unk_func_88001300_000* arg3, FragmentEntry arg4,
                    unk_func_88205880_0098* arg5, MemoryPool* arg6) {
