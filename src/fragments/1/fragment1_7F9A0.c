@@ -829,7 +829,174 @@ void func_81202758(u16* arg0, s32 arg1) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81202758.s")
 #endif
 
+#ifdef NON_MATCHING
+extern u8 D_8120D8FD;
+extern u8 D_8120D8FE;
+extern u8 D_8120D906;
+extern u16* D_8122C750;
+extern u32 D_8122C764;
+extern u32 D_8122C768;
+extern u8 D_8122C770;
+// Compose a full Game Boy Tower screen: tiled background, cached glyph strip,
+// per-panel frames, two marker-line passes, then the mode/state overlays.
+void func_812029B0(u8* arg0, void* arg1, s32 arg2, s32 arg3) {
+    u8* p;
+    u8* q;
+    u8* buf;
+    u8* widthPtr;
+    u8* glyphPtr;
+    u8* dst;
+    s32 x;
+    s32 y;
+    s32 i;
+    s32 widthIdx;
+    s32 cursor;
+    s32 idx;
+
+    // Pass 1: tiled background fill (4 row-groups x 5 columns).
+    y = 0;
+    do {
+        p = arg0 + (y * 2);
+        x = 0;
+        do {
+            func_812015EC((u16*) p, (u16*) &D_8122C748->unk0000[0x1500], 0xFFFF, 0x40, (y == 0xF000) ? 0x30 : 0x40);
+            x += 0x40;
+            p += 0x80;
+        } while (x != 0x140);
+        y += 0x5000;
+    } while (y < 0x14000);
+
+    // Pass 2: build the cached glyph strip once.
+    cursor = 0;
+    if (D_8122C74C == 0) {
+        p = D_8122B2F4;
+        D_8122B2F4 = p + 0x2580;
+        D_8122C74C = (s32) p;
+        _bcopy(arg0 + 0x20A80, p, 0x2580);
+        q = D_8122B2F4;
+        D_8122B2F4 = q + 0x2580;
+        D_8122C750 = (u16*) q;
+        bzero(q, 0x2580);
+        widthIdx = 0x12;
+        widthPtr = &D_8120D8FD;
+        glyphPtr = &D_8120D8FE;
+        for (;;) {
+            idx = D_8120E580[(*glyphPtr - widthIdx) + 0x5B];
+            func_81201DDC((u16*) ((u8*) D_8122C750 + (cursor * 2) + 0x280), D_8122C744 + (idx * 0xC0), 0xFFFE, 0xC, 0xC, 0x10);
+            cursor += D_8120E580[idx];
+            i = ((s32) *widthPtr < 0x40);
+            glyphPtr -= 1;
+            widthPtr -= 1;
+            if (i) {
+                break;
+            }
+            widthIdx += 2;
+            if (widthPtr == &D_8120D906) {
+                break;
+            }
+        }
+    }
+
+    // Pass 3: per-panel frames (+ optional cached sub-image).
+    p = arg0 + 0x1722C;
+    q = arg0;
+    y = 0;
+    do {
+        func_812016DC((u16*) p);
+        if (arg1 != NULL) {
+            u16* src = (u16*) ((u8*) arg1 + (y * 0xC80));
+            osInvalDCache(src, 0xC80);
+            func_812015EC((u16*) (q + 0x179B2), src, 0, 0x28, 0x28);
+        }
+        y += 1;
+        q += 0x5C;
+        p += 0x5C;
+    } while (y != 6);
+
+    // Pass 4: horizontal marker lines.
+    y = 0;
+    q = arg0;
+    do {
+        u8* a = q;
+        u8* b = q + 0x10002;
+        x = 0;
+        do {
+            x += 1;
+            *(u16*) (a + 0x4380) = 0x25A;
+            a += 2;
+            *(u16*) (b + 0x2E7E) = 0x25A;
+            b += 2;
+        } while (x < 0x140);
+        y += 0x140;
+        q += 0x280;
+    } while (y < 0x780);
+
+    // Pass 5: corner tiles.
+    p = arg0 + 0x11A80;
+    q = arg0 + 0x5280;
+    i = 0;
+    do {
+        func_812015EC((u16*) q, (u16*) &D_8122C748->unk0000[0x3500], 0xFFFF, 8, 8);
+        func_812015EC((u16*) p, (u16*) &D_8122C748->unk0000[0x3580], 0xFFFF, 8, 8);
+        i += 0x10;
+        q += 0x10;
+        p += 0x10;
+    } while (i != 0x280);
+
+    // Pass 6: second marker fill (4 pixels/step).
+    y = 0;
+    q = arg0;
+    do {
+        u8* a = q;
+        x = 0;
+        do {
+            x += 4;
+            *(u16*) (a + 0x6682) = 0x2BA4;
+            *(u16*) (a + 0x6684) = 0x2BA4;
+            *(u16*) (a + 0x6686) = 0x2BA4;
+            a += 8;
+            *(u16*) (a + 0x6678) = 0x2BA4;
+        } while (x != 0x140);
+        y += 0x140;
+        q += 0x280;
+    } while (y != 0x5A00);
+
+    switch (arg2) {
+    case 1:
+        D_8122C754 = arg0 + 2;
+        break;
+    case 2:
+        D_8122C754 = arg0 + 4;
+        break;
+    case 3:
+        D_8122C754 = arg0 + 6;
+        break;
+    default:
+        D_8122C754 = arg0;
+        break;
+    }
+    func_812015EC((u16*) (arg0 + 0x9C70), (u16*) &D_8122C748->unk0000[0x3600], 0, 0x56, 0x21);
+    func_812015EC((u16*) (D_8122C754 + 0x61E0), (u16*) &D_8122C748->unk0000[0x4CB0], 0, 0x3C, 0x4B);
+    switch (arg3) {
+    case 0:
+        func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) &D_8122C748->unk0000[0x6FD8], 0, 0x17, 0x19);
+        break;
+    case 2:
+        func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) &D_8122C748->unk0000[0x7730], 0, 0x17, 0x19);
+        break;
+    case 3:
+        func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) &D_8122C748->unk0000[0x7BE0], 0, 0x17, 0x19);
+        break;
+    }
+    D_8122C771 = arg2;
+    func_81202758((u16*) (D_8122C754 + 0x87BA), 0);
+    D_8122C770 = 0;
+    D_8122C768 = 0x800000;
+    D_8122C764 = 0xA0;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812029B0.s")
+#endif
 
 #ifdef NON_MATCHING
 // Saturating additive RGB565 blend: out[y][x] = sat(srcB[y][x] + srcA[y][(arg4+x)%320])
