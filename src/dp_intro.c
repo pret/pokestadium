@@ -197,7 +197,7 @@ void func_8000183C(UNUSED void* arg) {
     }
 }
 
-void func_800019C8(void) {
+void StartDPIntroThread(void) {
     switch (osTvType) {
         case 1:
         case 2:

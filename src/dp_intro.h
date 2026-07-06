@@ -11,7 +11,7 @@ void func_8000152C(struct UnkArray4* arg0);
 void func_800015A8(void);
 void func_800017E4(void);
 void func_8000183C(UNUSED void* arg);
-void func_800019C8(void);
+void StartDPIntroThread(void);
 void func_80001AD4(u16 color);
 u16 func_80001B2C(void);
 s32 func_80001B40(void);

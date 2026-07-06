@@ -27,7 +27,7 @@ void Idle_ThreadEntry(UNUSED void* unused) {
     rsp_init();
     StartRSPThread();
     StartDDThread();
-    func_800019C8();
+    StartDPIntroThread();
     SoftReset_CreateThread();
     osCreateThread(&pThreads, 6, &Game_Thread, 0, &D_800818E0, 20);
     osStartThread(&pThreads);
