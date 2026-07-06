@@ -177,7 +177,92 @@ s32 func_81207698(u32 arg0, u16 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207774.s")
 
+#ifdef NON_MATCHING
+extern u8 D_8120EB14[];
+// Advance one GB sound channel by a sample: run its length/envelope/sweep state
+// and return the current amplitude.
+s32 func_81207A60(void) {
+    s32 sample;
+    s32 vol;
+    u8 tmp;
+
+    if (D_8122C7E8.unk_00 == 0) {
+        if (D_8122C7E8.unk_3C == 0) {
+            return 0;
+        }
+        D_8122C7E8.unk_3C--;
+        D_8122C7E8.unk_20 = D_8122C7E8.unk_3C;
+        D_8122C7E8.unk_0C = D_8122C7E8.unk_40;
+    }
+
+    if ((s32) D_8122C7E8.unk_10 >= 0x7FF) {
+        D_8122C7E8.unk_4C = 1;
+    } else {
+        D_8122C7E8.unk_4C = 0;
+    }
+
+    sample = func_81207698((u32) (u8) D_8122C7E8.unk2F[0xC], D_8122C7E8.unk_08.unk_00);
+    D_8122C7E8.unk_08.unk_02 = (D_8122C7E8.unk_08.unk_02 + D_8122C7E8.unk_0C) & 0x1FFFFF;
+
+    if (D_8122C7E8.unk_4C == 1) {
+        vol = D_8122C7E8.unk_3C;
+        if (D_8122C7E8.unk_3C != 0) {
+            D_8122C7E8.unk_3C--;
+            vol = D_8122C7E8.unk_3C;
+        }
+        sample = ((sample & 0xFFFF) * vol) & 0xFFFF;
+    } else {
+        if (D_8122C7E8.unk_3C != D_8122C7E8.unk_20) {
+            D_8122C7E8.unk_3C = D_8122C7E8.unk_20;
+        }
+        D_8122C7E8.unk_40 = D_8122C7E8.unk_0C;
+        sample = ((sample & 0xFFFF) * D_8122C7E8.unk_20) & 0xFFFF;
+    }
+
+    if (D_8122C7E8.unk_28 != 0) {
+        D_8122C7E8.unk_24++;
+        if ((D_8122C7E8.unk_24 % D_8122C7E8.unk_28) == 0) {
+            if (D_8122C7E8.unk_2E != 0) {
+                if (D_8122C7E8.unk_2E != 1) {
+                    tmp = D_8122C7E8.unk_2D;
+                } else {
+                    tmp = D_8122C7E8.unk_2D;
+                    if ((s32) tmp < 0xF) {
+                        D_8122C7E8.unk_2D = tmp + 1;
+                        tmp = D_8122C7E8.unk_2D;
+                    }
+                }
+            } else {
+                tmp = D_8122C7E8.unk_2D;
+                if (tmp != 0) {
+                    D_8122C7E8.unk_2D = tmp - 1;
+                    tmp = D_8122C7E8.unk_2D;
+                }
+                if (tmp == 0) {
+                    D_8122C7E8.unk_00 = 0;
+                }
+            }
+            D_8122C7E8.unk_20 = D_8120EB14[tmp];
+        }
+    } else {
+        D_8122C7E8.unk_20 = D_8120EB14[D_8122C7E8.unk_2D];
+    }
+
+    if (D_8122C7E8.unk_18 == 1) {
+        s32 len = D_8122C7E8.unk_14;
+        if (len != 0) {
+            D_8122C7E8.unk_14 = len - 1;
+            len = D_8122C7E8.unk_14;
+        }
+        if (len == 0) {
+            D_8122C7E8.unk_00 = 0;
+        }
+    }
+    return sample;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207A60.s")
+#endif
 
 u16 func_81207C5C(void) {
     u16 temp_v0;
