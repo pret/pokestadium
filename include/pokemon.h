@@ -100,4 +100,21 @@ typedef enum PokemonType {
 #define ITEM_TM_LAST           254     // TM54 (Stadium's range; Gen 1 has only 50)
 #define ITEM_TM_COUNT          54
 
+// ----------------------------------------------------------------------------
+// Status conditions — DEFERRED
+//
+// Pokemon status conditions (Sleep / Poison / Burn / Freeze / Paralysis /
+// Toxic) are NOT defined here yet. The patterns that initially looked like
+// status-condition storage turned out to be something else:
+//
+//   - `unk_D_800FCB18.unk_15 & 7` (audio struct) → audio flags, not status
+//   - `temp_s6->unk_15` switch on 0x8 / 0x10 / 0x40 → critical-hit modifiers
+//
+// The actual status encoding is buried in unrenamed `unk_*` fields on
+// `unk_D_843C5568` and other battle structs in src/fragments/62/. A future
+// batch needs deeper archaeology on fragment62_361050.c and the
+// unk_D_843C5568 struct (status apply, turn-end tick, sleep counter)
+// before STATUS_* constants can be defined safely.
+// ----------------------------------------------------------------------------
+
 #endif
