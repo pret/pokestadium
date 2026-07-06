@@ -128,7 +128,7 @@ void func_800291E0(void) {
     main_pool_pop_state('demo');
 }
 
-void func_80029310(void) {
+void Game_HandleN64LogoIntro(void) {
     FRAGMENT_LOAD_AND_CALL(fragment35, 0, 0);
 
     main_pool_push_state('TITL');
@@ -795,7 +795,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
 
         switch (state) {
             case STATE_N64_LOGO_INTRO:
-                func_80029310();
+                Game_HandleN64LogoIntro();
                 break;
             case STATE_TITLE_SCREEN:
                 func_800293CC();
@@ -865,7 +865,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
                 break;
             // same as state 1: N64 Logo + Intro.
             default:
-                func_80029310();
+                Game_HandleN64LogoIntro();
                 break;
         }
 
