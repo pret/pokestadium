@@ -67,4 +67,37 @@ typedef enum PokemonType {
     TYPE_DRAGON    = 14
 } PokemonType;
 
+// ----------------------------------------------------------------------------
+// Item IDs
+//
+// Stadium's item encoding has three distinct ranges:
+//
+//   1..83     regular Gen-1 items (Master Ball, Potions, status healers,
+//             evolution stones, badges, key items, fossils, etc.)
+//             Looked up in D_80072EE0 (gItemNames) by index.
+//   196..200  HM01..HM05 (Hidden Machines) — formatted as ひでんマシン%02d
+//   201..254  TM01..TM54 (Technical Machines) — formatted as わざマシン%02d
+//
+// IDs 0, 84..195, and 255+ have no name mapping (fallback = gItemNames[6],
+// which is '？？？？？' / placeholder).
+//
+// Stadium uses 54 TMs rather than Gen-1's 50 — TM51..TM54 (IDs 251..254)
+// may be Stadium-specific or unused.
+//
+// KNOWN_UNKNOWNS:
+// - TM01..TM50 in Stadium don't necessarily match Gen-1's canonical TM
+//   ordering (move 249 = TM50 in Gen 1; Stadium may differ).
+// ----------------------------------------------------------------------------
+
+#define ITEM_NONE              0       // invalid / no item
+#define ITEM_REGULAR_FIRST     1       // first regular item ID
+#define ITEM_REGULAR_LAST      83      // last regular item ID (Potion variants etc.)
+#define ITEM_REGULAR_COUNT     83      // number of regular items
+#define ITEM_HM_FIRST          196     // HM01 — Hidden Machine
+#define ITEM_HM_LAST           200     // HM05
+#define ITEM_HM_COUNT          5
+#define ITEM_TM_FIRST          201     // TM01 — Technical Machine
+#define ITEM_TM_LAST           254     // TM54 (Stadium's range; Gen 1 has only 50)
+#define ITEM_TM_COUNT          54
+
 #endif
