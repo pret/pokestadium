@@ -1,4 +1,5 @@
 #include "232C0.h"
+#include "include/pokemon.h"
 #include "src/22630.h"
 #include "src/26820.h"
 #include "src/2E110.h"
@@ -122,7 +123,7 @@ u8 func_80022A38(s32 arg0) {
 
 s32 func_80022A60(s32 arg0) {
     if ((arg0 <= 0) || (arg0 > 190)) {
-        return 152;
+        return SPECIES_BLANK;
     }
 
     return D_800732FF[arg0];
