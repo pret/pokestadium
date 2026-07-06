@@ -175,7 +175,138 @@ s32 func_81207698(u32 arg0, u16 arg1) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207698.s")
 #endif
 
+#ifdef NON_MATCHING
+extern u8 D_8120EB14[];
+// Advance the GB square-wave channel (D_8122C798): run its length/envelope like
+// the other channels, plus a frequency sweep that shifts unk_10 up or down and
+// silences the channel when it under/overflows.
+u16 func_81207774(void) {
+    s32 sample;
+    u16 out;
+    u8 tmp;
+    s32 doSweep;
+    s32 runEnvelope;
+
+    if (D_8122C798.unk_00 == 0) {
+        if (D_8122C798.unk_3C == 0) {
+            return 0;
+        }
+        D_8122C798.unk_3C--;
+        D_8122C798.unk_20 = D_8122C798.unk_3C;
+        D_8122C798.unk_0C = D_8122C798.unk_40;
+    }
+
+    if ((s32) D_8122C798.unk_10 <= 0) {
+        D_8122C798.unk_4C = 1;
+    } else if (((s32) D_8122C798.unk_10 >= 0x7FF) && ((u8) D_8122C798.unk2F[0xA] == 0)) {
+        D_8122C798.unk_4C = 1;
+    } else {
+        D_8122C798.unk_4C = 0;
+    }
+
+    sample = func_81207698((u32) (u8) D_8122C798.unk2F[0xC], D_8122C798.unk_08.unk_00);
+    D_8122C798.unk_08.unk_02 = (D_8122C798.unk_08.unk_02 + D_8122C798.unk_0C) & 0x1FFFFF;
+
+    if (D_8122C798.unk_4C == 1) {
+        u8 vol = D_8122C798.unk_3C;
+        if (D_8122C798.unk_3C != 0) {
+            D_8122C798.unk_3C--;
+            vol = D_8122C798.unk_3C;
+        }
+        out = ((sample & 0xFFFF) * vol) & 0xFFFF;
+    } else {
+        D_8122C798.unk_40 = D_8122C798.unk_0C;
+        D_8122C798.unk_3C = D_8122C798.unk_20;
+        out = ((sample & 0xFFFF) * D_8122C798.unk_20) & 0xFFFF;
+    }
+
+    doSweep = 0;
+    if ((u8) D_8122C798.unk2F[0xB] != 0) {
+        u32 c = *(u32*) &D_8122C798.unk2F[1] + 1;
+        *(u32*) &D_8122C798.unk2F[1] = c;
+        if ((c % *(u32*) &D_8122C798.unk2F[5]) == 0) {
+            doSweep = 1;
+        }
+    }
+
+    runEnvelope = 1;
+    if (doSweep) {
+        u16 freq = D_8122C798.unk_10;
+        s32 delta = ((s32) freq >> (u8) D_8122C798.unk2F[9]) & 0xFFFF;
+        u8 mode = (u8) D_8122C798.unk2F[0xA];
+        s32 nf;
+
+        switch (mode) {
+            case 0:
+                nf = freq + delta;
+                D_8122C798.unk_10 = nf;
+                freq = nf;
+                break;
+            case 1:
+                nf = (freq - delta) - 1;
+                D_8122C798.unk_10 = nf;
+                freq = nf;
+                break;
+        }
+
+        if ((s32) freq <= 0) {
+            D_8122C798.unk_00 = 0;
+            runEnvelope = 0;
+        } else {
+            if (((s32) freq >= 0x800) && (mode == 0)) {
+                D_8122C798.unk_10 = 0x7FF;
+                D_8122C798.unk_00 = 0;
+                freq = 0x7FF;
+            }
+            D_8122C798.unk_0C = func_812075C0(freq & 0xFFFF);
+        }
+    }
+
+    if (runEnvelope) {
+        if (D_8122C798.unk_28 != 0) {
+            D_8122C798.unk_24++;
+            if ((D_8122C798.unk_24 % D_8122C798.unk_28) == 0) {
+                if (D_8122C798.unk_2E != 0) {
+                    if (D_8122C798.unk_2E != 1) {
+                        tmp = D_8122C798.unk_2D;
+                    } else {
+                        tmp = D_8122C798.unk_2D;
+                        if ((s32) tmp < 0xF) {
+                            D_8122C798.unk_2D = tmp + 1;
+                            tmp = D_8122C798.unk_2D;
+                        }
+                    }
+                } else {
+                    tmp = D_8122C798.unk_2D;
+                    if (tmp != 0) {
+                        D_8122C798.unk_2D = tmp - 1;
+                        tmp = D_8122C798.unk_2D;
+                    }
+                    if (tmp == 0) {
+                        D_8122C798.unk_00 = 0;
+                    }
+                }
+                D_8122C798.unk_20 = D_8120EB14[tmp];
+            }
+        } else {
+            D_8122C798.unk_20 = D_8120EB14[D_8122C798.unk_2D];
+        }
+        if (D_8122C798.unk_18 == 1) {
+            s32 len = D_8122C798.unk_14;
+            if (len != 0) {
+                D_8122C798.unk_14 = len - 1;
+                len = D_8122C798.unk_14;
+            }
+            if (len == 0) {
+                D_8122C798.unk_00 = 0;
+            }
+        }
+    }
+    return out;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207774.s")
+#endif
 
 #ifdef NON_MATCHING
 extern u8 D_8120EB14[];
