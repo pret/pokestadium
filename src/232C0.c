@@ -107,13 +107,13 @@ s32 func_80022A04(u16* arg0, unk_D_800AC910_040* arg1) {
     return !bcmp(arg0, arg1, 0xD);
 }
 
-u8 func_80022A28(s32 arg0) {
+u8 GetMoveType(s32 arg0) {
     extern u8 gMoveType[];
 
     return gMoveType[arg0];
 }
 
-u8 func_80022A38(s32 arg0) {
+u8 GetSpeciesType1(s32 arg0) {
     if ((arg0 <= 0) || (arg0 > NATIONAL_DEX_COUNT)) {
         return 0;
     }
@@ -121,7 +121,7 @@ u8 func_80022A38(s32 arg0) {
     return gSpeciesType1[arg0];
 }
 
-s32 func_80022A60(s32 arg0) {
+s32 GetSpeciesType2(s32 arg0) {
     if ((arg0 <= 0) || (arg0 > SPECIES_EXTENDED_MAX)) {
         return SPECIES_BLANK;
     }
@@ -129,19 +129,19 @@ s32 func_80022A60(s32 arg0) {
     return gSpeciesType2[arg0];
 }
 
-u8 func_80022A88(s32 arg0) {
+u8 GetSpeciesGrowthRate(s32 arg0) {
     extern u8 gSpeciesGrowthRate[];
 
     return gSpeciesGrowthRate[arg0];
 }
 
-u8 func_80022A98(s32 arg0) {
+u8 GetSpeciesEggGroup(s32 arg0) {
     extern u8 gSpeciesEggGroup[];
 
     return gSpeciesEggGroup[arg0];
 }
 
-s32 func_80022AA8(s32 arg0) {
+s32 GetSpeciesGenderRatio(s32 arg0) {
     extern u8 gSpeciesGenderRatio[];
 
     if (arg0 == 0) {
@@ -150,7 +150,7 @@ s32 func_80022AA8(s32 arg0) {
     return gSpeciesGenderRatio[arg0] + 1;
 }
 
-s32 func_80022ACC(s32 arg0) {
+s32 GetSpeciesHabitat(s32 arg0) {
     extern u8 gSpeciesHabitat[];
 
     if (arg0 == 0) {
@@ -1328,7 +1328,7 @@ void func_80025498(char* arg0, s32 arg1, u8* arg2) {
     s32 h;
 
     while (arg1-- > 0) {
-        temp_v0 = func_80022A60(*arg2++);
+        temp_v0 = GetSpeciesType2(*arg2++);
         if (0x98 != temp_v0) {
             temp_v0++;
             temp_v0--;

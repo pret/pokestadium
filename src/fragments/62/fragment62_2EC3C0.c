@@ -303,7 +303,7 @@ void func_843021E8(unk_D_84390010* arg0, u16 arg1, unk_D_84390010_94C* arg2, unk
                     var_a0 = temp_s4->unk_0F[j / 8];
                 }
 
-                if (((var_a0 >> (j % 8)) & 1) && (func_80022A28(j) == temp_s5->unk_1F[i])) {
+                if (((var_a0 >> (j % 8)) & 1) && (GetMoveType(j) == temp_s5->unk_1F[i])) {
                     arg0->unk_654.unk_C1[i] = 0;
                 }
             }

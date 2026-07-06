@@ -3133,7 +3133,7 @@ s32 func_88311D6C(s32 arg0, unk_func_8830867C_02C_0CC_000_008* arg1) {
     temp_v0 = func_8002ECDC(arg1);
     var_s4 = 0;
     for (i = 0; i < temp_v0; i++) {
-        if (func_80022A28(var_s3) == arg1->unk_09[i]) {
+        if (GetMoveType(var_s3) == arg1->unk_09[i]) {
             break;
         }
     }

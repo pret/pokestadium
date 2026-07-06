@@ -1805,7 +1805,7 @@ void func_88305CDC(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_03
         var_a0 = arg1->unk_00[0]->unk_00 - 0x92;
     }
 
-    ptr->unk_09[arg2] = func_80022A28(var_a0);
+    ptr->unk_09[arg2] = GetMoveType(var_a0);
     ptr->unk_20[arg2] = func_8002ED40(ptr->unk_09[arg2])->pp;
 
     if (arg1->unk_00[0]->unk_00 >= 0xC9) {

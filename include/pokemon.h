@@ -9,7 +9,7 @@
 // The codebase uses 1-indexed species IDs throughout. ID 0 is reserved as
 // "no species / invalid". The canonical Gen-1 range is 1..NATIONAL_DEX_COUNT.
 //
-// Several internal APIs (func_80022A60, the moves/effects tables) accept a
+// Several internal APIs (GetSpeciesType2, the moves/effects tables) accept a
 // wider range up to SPECIES_EXTENDED_MAX to accommodate Pokemon Stadium-
 // specific IDs beyond the national dex (glitch forms, event Pokemon, etc.).
 // SPECIES_BLANK is the sentinel returned when a lookup fails or the input

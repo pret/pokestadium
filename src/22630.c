@@ -119,7 +119,7 @@ char* func_80021CE0(s32 arg0, char* arg1) {
 }
 
 void func_80021D9C(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1) {
-    arg0->unk_00.unk_00 = func_80022A60(arg1->unk_00);
+    arg0->unk_00.unk_00 = GetSpeciesType2(arg1->unk_00);
     arg0->unk_00.unk_01 = arg1->unk_00;
     arg0->unk_02 = func_80021A30(arg1->unk_01);
 
@@ -153,8 +153,8 @@ void func_80021E90(unk_func_80026268_arg0* arg0, unk_D_800AC910_050_9AC_008* arg
 }
 
 void func_80021F04(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1) {
-    if (func_80022A38(arg0->unk_00.unk_00) & 0xFF) {
-        arg1->unk_00 = func_80022A38(arg0->unk_00.unk_00);
+    if (GetSpeciesType1(arg0->unk_00.unk_00) & 0xFF) {
+        arg1->unk_00 = GetSpeciesType1(arg0->unk_00.unk_00);
     } else {
         arg1->unk_00 = arg0->unk_00.unk_01;
     }
