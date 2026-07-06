@@ -1396,7 +1396,60 @@ void func_812033F4(s32 arg0, s32 arg1, OSId arg2, s32 arg3, OSMesgQueue* arg4, u
 #endif
 
 void func_81203C58(unk_D_8122B2C0*);
+#ifdef NON_MATCHING
+// Stream-decompress the GB graphics banks: for each bank, Yay0-decompress its
+// base tile block, then XOR-patch it with each successive delta block (skipping
+// deltas below the current frame threshold at unk05DC6).
+void func_81203C58(unk_D_8122B2C0* arg0) {
+    u16* stream = (u16*) arg0->unk_5D70[2];
+    u32 dst;
+    u16 header;
+
+    if (stream == 0) {
+        return;
+    }
+    header = *stream;
+    dst = arg0->unk_5D70[3] + 0x7C0000;
+    do {
+        s32 bank = header & 0xFF;
+        s32 count = header >> 8;
+        s32 tileOff = bank << 14;
+        s32 i;
+
+        func_80003B30((u32) ((u8*) arg0->unk_53BC + 0xEC000), dst, stream[1] + dst, 0);
+        dst += stream[1];
+        stream += 2;
+        Yay0_Decompress((u8*) arg0->unk_53BC + 0xEC000, (u8*) arg0->unk_53BC + tileOff);
+
+        for (i = 0; i < count; i++) {
+            if ((s32) (i + 1) >= (s32) (u8) arg0->unk05DC6[0]) {
+                u8* patch;
+                u8* src;
+                s32 j;
+
+                func_80003B30((u32) ((u8*) arg0->unk_53BC + 0xF0000), dst, stream[0] + dst, 0);
+                Yay0_Decompress((u8*) arg0->unk_53BC + 0xF0000, (u8*) arg0->unk_53BC + 0xEC000);
+                src = (u8*) arg0->unk_53BC + 0xEC000;
+                patch = (u8*) arg0->unk_53BC + tileOff;
+                for (j = 0; j != 0x1000; j += 4) {
+                    patch[0] ^= src[0];
+                    patch[1] ^= src[1];
+                    patch[2] ^= src[2];
+                    patch[3] ^= src[3];
+                    patch += 4;
+                    src += 4;
+                }
+            }
+            dst += stream[0];
+            stream += 1;
+        }
+        arg0->unk_549C[bank] = 0xFF;
+        header = *stream;
+    } while (header != 0);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81203C58.s")
+#endif
 
 void func_81203E30(void) {
   if ((D_8122C4FA.unk_01 == D_8122C4FA.unk_00) || (D_8122C4FA.unk_00 >= 5) || (D_8122C4FA.unk_01 >= 5)) {
