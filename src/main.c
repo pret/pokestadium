@@ -21,7 +21,7 @@ LEODiskID D_800818E0;
  */
 void Idle_ThreadEntry(UNUSED void* unused) {
     osCreateViManager(OS_PRIORITY_VIMGR);
-    func_80001474(0, 1);
+    InitVideoMode(0, 1);
     osViBlack(TRUE);
     crash_screen_init();
     rsp_init();

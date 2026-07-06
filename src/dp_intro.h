@@ -6,7 +6,7 @@
 
 void func_80001380(UnkStruct80001380* arg0);
 void func_80001444(UnkStruct80001380* arg0, struct UnkArray4* arg1, s32 arg2);
-void func_80001474(s8 arg0, s8 arg1);
+void InitVideoMode(s8 arg0, s8 arg1);
 void func_8000152C(struct UnkArray4* arg0);
 void func_800015A8(void);
 void func_800017E4(void);

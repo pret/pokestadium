@@ -74,7 +74,7 @@ void func_80001444(UnkStruct80001380* arg0, struct UnkArray4* arg1, s32 arg2) {
     func_800053B4(arg0, arg2);
 }
 
-void func_80001474(s8 arg0, s8 arg1) {
+void InitVideoMode(s8 arg0, s8 arg1) {
     s32 var_v0;
 
     if (osTvType == 2) {
@@ -137,7 +137,7 @@ void func_800015A8(void) {
         osViSwapBuffer((void*)(uintptr_t)D_80083CA0.unk_AA8->unk_08);
         osViRepeatLine(0);
         if ((D_80083CA0.unk_A9D != D_80083CA0.unk_AAD) || (D_80083CA0.unk_A9E != D_80083CA0.unk_AAE)) {
-            func_80001474((s8)D_80083CA0.unk_A9D, (s8)D_80083CA0.unk_A9E);
+            InitVideoMode((s8)D_80083CA0.unk_A9D, (s8)D_80083CA0.unk_A9E);
         }
         if (D_80068B70 != 0) {
             osViBlack(1U);
@@ -150,7 +150,7 @@ void func_800015A8(void) {
         osViRepeatLine(1);
         osViSwapBuffer((void*)(uintptr_t)D_80083CA0.unk_9E0->unk_08);
         if ((D_80083CA0.unk_A9D != D_80083CA0.unk_AAD) || (D_80083CA0.unk_A9E != D_80083CA0.unk_AAE)) {
-            func_80001474((s8)D_80083CA0.unk_A9D, (s8)D_80083CA0.unk_A9E);
+            InitVideoMode((s8)D_80083CA0.unk_A9D, (s8)D_80083CA0.unk_A9E);
         }
     }
 
@@ -282,7 +282,7 @@ s32 func_80001C58(void) {
 }
 
 void func_80001C64(void) {
-    func_80001474((s8)D_80083CA0.unk_AAD, (s8)D_80083CA0.unk_AAE);
+    InitVideoMode((s8)D_80083CA0.unk_AAD, (s8)D_80083CA0.unk_AAE);
 }
 
 s32 func_80001C90(void) {
