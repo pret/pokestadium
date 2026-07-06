@@ -114,7 +114,7 @@ u8 func_80022A28(s32 arg0) {
 }
 
 u8 func_80022A38(s32 arg0) {
-    if ((arg0 <= 0) || (arg0 > 151)) {
+    if ((arg0 <= 0) || (arg0 > NATIONAL_DEX_COUNT)) {
         return 0;
     }
 
