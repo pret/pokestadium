@@ -74,7 +74,7 @@ typedef enum PokemonType {
 //
 //   1..83     regular Gen-1 items (Master Ball, Potions, status healers,
 //             evolution stones, badges, key items, fossils, etc.)
-//             Looked up in D_80072EE0 (gItemNames) by index.
+//             Looked up in gItemNames (gItemNames, post-rename) by index.
 //   196..200  HM01..HM05 (Hidden Machines) — formatted as ひでんマシン%02d
 //   201..254  TM01..TM54 (Technical Machines) — formatted as わざマシン%02d
 //

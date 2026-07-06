@@ -97,7 +97,7 @@ char* func_80021CA4(char* arg0, s32 arg1) {
 }
 
 char* func_80021CE0(s32 arg0, char* arg1) {
-    extern char* D_80072EE0[];
+    extern char* gItemNames[];
     // "ひでんマシン%02d"
     static const char D_0007CCA0[] = { 0xA4, 0xD2, 0xA4, 0xC7, 0xA4, 0xF3, 0xA5, 0xDE, 0xA5, 0xB7,
                                        0xA5, 0xF3, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00, 0x00, 0x00 };
@@ -106,13 +106,13 @@ char* func_80021CE0(s32 arg0, char* arg1) {
                                        0xA5, 0xF3, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00 };
 
     if ((arg0 > ITEM_NONE) && (arg0 <= ITEM_REGULAR_LAST)) {
-        HAL_Strcpy(arg1, D_80072EE0[arg0 - 1]);
+        HAL_Strcpy(arg1, gItemNames[arg0 - 1]);
     } else if ((arg0 >= ITEM_HM_FIRST) && (arg0 < ITEM_TM_FIRST)) {
         sprintf(arg1, D_0007CCA0, arg0 - (ITEM_HM_FIRST - 1), arg0);
     } else if ((arg0 >= ITEM_TM_FIRST) && (arg0 <= ITEM_TM_LAST)) {
         sprintf(arg1, D_0007CCB4, arg0 - (ITEM_TM_FIRST - 1), arg0);
     } else {
-        HAL_Strcpy(arg1, D_80072EE0[6]);
+        HAL_Strcpy(arg1, gItemNames[6]);
     }
 
     return arg1;
