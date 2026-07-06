@@ -411,7 +411,74 @@ s32 func_812009D0(unk_func_812009D0* arg0) {
 void func_81200AA8(void *);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81200AA8.s")
 
+#ifdef NON_MATCHING
+extern u16 D_8120E300[];
+extern u8 D_8120E480[];
+extern u8 D_8120E580[];
+// Composite a stream of GB glyph/sprite tile-strips into the framebuffer (arg0).
+// Each command block picks a tile font (0xA/0xC-tall), a 16-color palette, and a
+// screen position, then blits its run of tiles with per-pixel palette lookup
+// (color 0 transparent unless the command's opaque flag 0x20 is set).
+void func_812011D0(s32 arg0, u8* arg1) {
+    u8* cmd = arg1;
+    u8 header = *cmd;
+
+    while (header != 0) {
+        s32 transparent = header & 0x20;
+        s32 advAdjust = (header & 0x40) ? -1 : 0;
+        u8 type = cmd[3];
+        u8* dst = (u8*) arg0 + ((cmd[2] * 0x140) + (cmd[1] + ((header & 1) << 8))) * 2;
+        u8* srcBase;
+        u8* table;
+        u16* palette;
+        s32 rowCount;
+        s32 palIdx;
+        u8 tiles = cmd[5];
+
+        if (type == 0xC) {
+            srcBase = D_8122C744;
+            table = D_8120E580;
+            rowCount = 0xC;
+        } else {
+            srcBase = D_8122C740;
+            table = D_8120E480;
+            rowCount = 0xA;
+        }
+
+        palIdx = ((cmd[4] >= 1) && (cmd[4] <= 11)) ? cmd[4] : 0;
+        palette = &D_8120E300[palIdx * 0x10];
+
+        while (tiles != 0) {
+            u8 tileId = table[cmd[6] + 0x80];
+            s32 width = table[tileId];
+            u8* src = srcBase + (tileId * rowCount * 0x10);
+            s32 row;
+
+            tiles--;
+            cmd++;
+
+            for (row = 0; row < rowCount; row++) {
+                s32 px;
+
+                for (px = 0; px < width; px++) {
+                    u16 color = palette[src[px] & 0xF];
+                    if ((transparent != 0) || (color != 0)) {
+                        *(u16*) (dst + (px * 2)) = color;
+                    }
+                }
+                dst += 0x280;
+                src += 0x10;
+            }
+            dst -= ((rowCount * 0x140) - width - advAdjust) * 2;
+        }
+
+        header = cmd[6];
+        cmd += 6;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812011D0.s")
+#endif
 
 s32 func_81201560(s32 arg0, s32 arg1) {
   return (arg1 & 1) ? arg1 : arg0;
