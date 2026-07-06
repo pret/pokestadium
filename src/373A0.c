@@ -18,7 +18,7 @@ typedef struct unk_D_80077970 {
     /* 0x04 */ u8 unk_04;
 } unk_D_80077970; // size = 0x5
 
-static unk_D_80077970 D_80077970[151] = {
+static unk_D_80077970 gSpeciesSoundVariant[151] = {
     { 1, 1, 0, 0x52, 4 },    { 1, 1, 0, 0x58, 0x36 }, { 2, 2, 0, 0x1A, 0x3C }, { 1, 1, 0, 0, 0 },
     { 1, 1, 0, 0x54, 0x3C }, { 2, 2, 1, 0x2E, 0xA },  { 1, 1, 0, 0x5C, 0 },    { 1, 1, 0, 0x44, 0x52 },
     { 2, 2, 0, 0x22, 0x36 }, { 1, 1, 0, 0x98, 0 },    { 1, 1, 0, 0x32, 0xA4 }, { 1, 1, 0, 0, 0 },
@@ -221,7 +221,7 @@ s32 func_800367A0(u32 arg0, s32 arg1, s32 arg2) {
                 arg1 = 0;
             }
 
-            switch (D_80077970[arg1].unk_00) {
+            switch (gSpeciesSoundVariant[arg1].unk_00) {
                 case 0:
                     return 0;
 
@@ -253,7 +253,7 @@ s32 func_800367A0(u32 arg0, s32 arg1, s32 arg2) {
                 arg1 = 0;
             }
 
-            switch (D_80077970[arg1].unk_01) {
+            switch (gSpeciesSoundVariant[arg1].unk_01) {
                 case 0:
                     sp2C = func_80039024(D_800FC6A4, D_800FC6A8, 0xB, 0x80, 0x80, -1);
                     break;
