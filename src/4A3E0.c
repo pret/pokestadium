@@ -51,7 +51,94 @@ u8 func_80049890(u16 arg0) {
     return D_800FD6A0[arg0 & 0xFF];
 }
 
+#ifdef NON_MATCHING
+extern u32 D_800FD004;
+extern u8 D_800FD048[];
+extern s16 D_800FD06E;
+extern u8 D_800FCF60[];
+extern u8 D_800FCF90[];
+extern u8 D_800FCFB8[];
+extern u8 D_800FCFD8[];
+extern s32 D_800FD6E8;
+void func_8004ACD0(void);
+void func_8004AC9C(void);
+// Reset the sound-mixer state: clear the voice/command tables, seed the first
+// command entry, zero the four channel structs, and set the output sample rate.
+void func_800498A8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 rate = (u32) arg0 >> 1;
+    u8* p;
+    s32 len;
+
+    D_800FD004 = rate;
+    D_800FD6E4 = 1048576.0f / (f32) rate;
+
+    p = (u8*) &D_800FD008;
+    do {
+        p += 2;
+        p[-1] = 1;
+    } while ((u32) p < (u32) D_800FD068);
+
+    p = (u8*) &D_800FD008;
+    p[0x00] = 8;
+    p[0x02] = 0;
+    p[0x04] = 0;
+    p[0x06] = 0;
+    p[0x08] = 0x40;
+    p[0x0C] = 0;
+    p[0x0E] = 0;
+    p[0x10] = 0;
+    p[0x12] = 0x40;
+    p[0x14] = 0;
+    p[0x16] = 0;
+    p[0x18] = 0;
+    p[0x1A] = 0;
+    p[0x1C] = 0x40;
+    p[0x20] = 0;
+    p[0x22] = 0;
+    p[0x24] = 0;
+    p[0x26] = 0x40;
+    p[0x28] = 0;
+    p[0x2A] = 0;
+    p[0x2C] = 0;
+
+    p = D_800FD048;
+    do {
+        p += 8;
+        p[-6] = 0;
+        p[-4] = 0;
+        p[-2] = 0;
+        p[-8] = 0;
+    } while (p != (u8*) D_800FD068);
+
+    D_800FD6AC = 0;
+    D_800FD06E = 0;
+    D_800FD6A8 = 0;
+
+    *(u32*) &D_800FCF60[0] = 0;
+    D_800FCF60[0x2C] = 0;
+    *(u32*) &D_800FCF90[0] = 0;
+    D_800FCF90[0x24] = 0;
+    *(u32*) &D_800FCFB8[0] = 0;
+    D_800FCFB8[0x1C] = 0;
+    *(u32*) &D_800FCFD8[0] = 0;
+    D_800FCFD8[0x28] = 0;
+    D_800FCFD8[0x04] = 0xFF;
+
+    func_8004ACD0();
+    func_8004AC9C();
+
+    D_800FF97C = (u8) arg1;
+    len = arg2 * 2;
+    D_800FF980 = arg2;
+    D_800FF980 = len;
+    if ((u32) len >= 0x1141) {
+        D_800FF980 = 0x1140;
+    }
+    D_800FD6E8 = 2;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_800498A8.s")
+#endif
 
 void func_80049D5C(u16);
 s16 func_80049DF0(void);
