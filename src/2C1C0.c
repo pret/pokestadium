@@ -166,9 +166,9 @@ unk_func_80026268_arg0* func_8002B924(unk_func_80026268_arg0* arg0, u8 arg1, s16
 
     arg0->unk_52 = 0;
     arg0->unk_53 = 0;
-    arg0->unk_10 = func_800224B8(arg1, arg2);
+    arg0->unk_10 = ComputeExpToLevel(arg1, arg2);
 
-    func_80022338(arg0);
+    CalculateAllStats(arg0);
 
     arg0->unk_02 = arg0->unk_26;
 
@@ -352,8 +352,8 @@ void func_8002BEC8(s16 arg0) {
 
     for (i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; i++, var_s1++, var_s0++) {
         var_s0->unk_24 = arg0;
-        var_s0->unk_10 = func_800224B8(var_s0->unk_00.unk_00, arg0);
-        func_80022338(var_s0);
+        var_s0->unk_10 = ComputeExpToLevel(var_s0->unk_00.unk_00, arg0);
+        CalculateAllStats(var_s0);
         var_s0->unk_02 = var_s0->unk_26;
 
         *var_s1 = *var_s0;

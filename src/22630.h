@@ -227,11 +227,11 @@ void DecodeFullMonRecord(unk_func_80026268_arg0* arg0, unk_D_800AC910_050_9AC_00
 void EncodeMonRecord(unk_func_80026268_arg0* arg0, unk_D_800AE4E8_004_1_000_010_000* arg1);
 void EncodeFullMonRecord(unk_func_88205880_00D0* arg0, unk_D_800AC910_050_9AC_008* arg1);
 u16 Isqrt(u16 arg0);
-void func_800220C4(void);
+void InitStatCalc(void);
 u16 func_800220CC(s32 arg0, u16 arg1);
 u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u16 dvBits);
-void func_80022338(unk_func_80026268_arg0* arg0);
-u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4);
-u32 func_800224B8(s32 arg0, u16 arg1);
+void CalculateAllStats(unk_func_80026268_arg0* arg0);
+u16 FindStatDVThreshold(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4);
+u32 ComputeExpToLevel(s32 arg0, u16 arg1);
 
 #endif // _6BC0_H_

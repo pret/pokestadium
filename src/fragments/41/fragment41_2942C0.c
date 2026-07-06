@@ -435,7 +435,7 @@ void func_82F0D6D0(s16 arg0, unk_func_80026268_arg0* arg1) {
         if (func_82F0D64C(sp2E, arg1->unk_30) != 0) {
             CopyMonName(arg1->unk_30, func_82F00020(arg1->unk_00.unk_00));
         }
-        func_80022338(arg1);
+        CalculateAllStats(arg1);
         func_800256F4(arg0, arg1->unk_00.unk_00, 3);
     }
 }

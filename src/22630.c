@@ -201,7 +201,7 @@ u16 Isqrt(u16 arg0) {
     return i;
 }
 
-void func_800220C4(void) {
+void InitStatCalc(void) {
 }
 
 u16 GetPokemonDV(s32 statId, u16 dvBits) { //GetPokemonDV
@@ -279,7 +279,7 @@ u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u
     return statValue;
 }
 
-void func_80022338(unk_func_80026268_arg0* arg0) {
+void CalculateAllStats(unk_func_80026268_arg0* arg0) {
     arg0->unk_24 = func_800226C0(arg0->unk_00.unk_00, arg0->unk_10);
     arg0->unk_26 = CalculateStatValue(1, arg0->unk_00.unk_00, arg0->unk_14, arg0->unk_24, arg0->unk_1E);
     arg0->unk_28 = CalculateStatValue(2, arg0->unk_00.unk_00, arg0->unk_16, arg0->unk_24, arg0->unk_1E);
@@ -288,7 +288,7 @@ void func_80022338(unk_func_80026268_arg0* arg0) {
     arg0->unk_2E = CalculateStatValue(5, arg0->unk_00.unk_00, arg0->unk_1C, arg0->unk_24, arg0->unk_1E);
 }
 
-u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
+u16 FindStatDVThreshold(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
     s32 i;
     s32 tmp;
 
@@ -302,7 +302,7 @@ u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
     return i;
 }
 
-u32 func_800224B8(s32 arg0, u16 arg1) {
+u32 ComputeExpToLevel(s32 arg0, u16 arg1) {
     u32 sp4;
 
     switch (gSpeciesBaseStats[arg0].unk_13) {

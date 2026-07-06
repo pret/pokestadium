@@ -1752,8 +1752,8 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
             sp34 = 0;
             *arg2 = temp_s0->unk_24;
             sp3A = temp_s0->unk_26;
-            *(s32*)&temp_s0->unk_10 = func_800224B8(temp_s0->unk_00, (temp_s0->unk_24 + 1) & 0xFFFF);
-            func_80022338(&arg0->unk_08);
+            *(s32*)&temp_s0->unk_10 = ComputeExpToLevel(temp_s0->unk_00, (temp_s0->unk_24 + 1) & 0xFFFF);
+            CalculateAllStats(&arg0->unk_08);
             temp_s0->unk_02 = (temp_s0->unk_02 + temp_s0->unk_26) - sp3A;
             *arg3 = temp_s0->unk_24;
             break;
