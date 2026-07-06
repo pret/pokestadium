@@ -432,7 +432,138 @@ s16 func_8004A474(void) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_8004A474.s")
 #endif
 
+#ifdef NON_MATCHING
+extern u8 D_800FD028[];
+extern u8 D_800FD030[];
+extern u8 D_800FD02A;
+extern u8 D_80078A60[];
+extern f32 D_8007D4D0;
+extern f32 D_8007D4D4;
+typedef struct GbWave {
+    /* 0x00 */ u32 unk_00; // phase position
+    /* 0x04 */ u8 unk_04;  // current wave index
+    /* 0x05 */ u8 pad_05[3];
+    /* 0x08 */ u32 unk_08; // sample read position
+    /* 0x0C */ f32 unk_0C; // samples per output
+    /* 0x10 */ f32 unk_10; // sample accumulator
+    /* 0x14 */ f32 unk_14; // volume
+    /* 0x18 */ f32 unk_18; // envelope step
+    /* 0x1C */ u32 unk_1C; // envelope reload
+    /* 0x20 */ u32 unk_20; // envelope counter
+    /* 0x24 */ u32 unk_24; // length counter
+    /* 0x28 */ u32 unk_28; // channel active
+} GbWave;
+// Software-APU wave (PCM sample) channel: on a register trigger, decode the GB
+// wave registers (D_800FD008), DMA in the selected waveform, set up envelope and
+// length, then each call resample the waveform and return the scaled amplitude.
+s16 func_8004A89C(void) {
+    GbWave* ch = (GbWave*) D_800FCFD8;
+    u8* reg = (u8*) &D_800FD008;
+    u8* trig = (u8*) &D_800FD028;
+    s32 triggered = 0;
+
+    do {
+        if (trig[1] != 0) {
+            triggered = 1;
+            trig[1] = 0;
+        }
+        trig += 2;
+    } while (trig != (u8*) &D_800FD030);
+
+    if (triggered != 0) {
+        u8* entry = &D_80078A60[((reg[0x24] & 7) << 7) + (((reg[0x24] & 0xF0) >> 4) * 8)];
+        u8 waveIdx = entry[0];
+        s32 envDir;
+
+        if (waveIdx == 0xFF) {
+            ch->unk_28 = 0;
+            return 0;
+        }
+        if (reg[0x24] & 8) {
+            waveIdx = (waveIdx + 0x10) & 0xFF;
+        }
+        ch->unk_0C = (f32) *(s32*) &entry[4];
+        if (ch->unk_04 != waveIdx) {
+            ch->unk_04 = waveIdx;
+            func_8004ADB0(D_800FC6CC[waveIdx].unk_00, (u32) D_800FC6D0, D_800FC6CC[waveIdx].unk_04);
+        }
+        ch->unk_08 = 0;
+        envDir = reg[0x22] & 8;
+        ch->unk_10 = 0.0f;
+        if ((envDir == 0) && !(reg[0x22] & 0xF0)) {
+            ch->unk_28 = 0;
+            reg[0x2C] &= 0xF7;
+            return 0;
+        }
+        if ((envDir != 0) && !(reg[0x22] & 0xF0) && !(reg[0x22] & 7)) {
+            ch->unk_28 = 0;
+            reg[0x2C] &= 0xF7;
+            return 0;
+        }
+        if (reg[0x26] & 0x80) {
+            s32 envPeriod = reg[0x22] & 7;
+
+            ch->unk_00 = 0;
+            ch->unk_28 = 1;
+            ch->unk_14 = (f32) (reg[0x22] & 0xF0) * D_8007D4D0;
+            if (envPeriod != 0) {
+                if (envDir != 0) {
+                    ch->unk_18 = D_8007D4D0;
+                } else {
+                    ch->unk_18 = D_8007D4D4;
+                }
+                ch->unk_1C = envPeriod * D_800FD004 * 4;
+                ch->unk_20 = envPeriod * D_800FD004 * 4;
+            } else {
+                ch->unk_1C = -1;
+                ch->unk_20 = -1;
+                ch->unk_18 = 0.0f;
+            }
+            if (reg[0x26] & 0x40) {
+                ch->unk_24 = (0x40 - (reg[0x20] & 0x3F)) * D_800FD004;
+            } else {
+                ch->unk_24 = -1;
+            }
+            reg[0x26] &= 0x7F;
+        }
+    }
+
+    if (ch->unk_28 == 0) {
+        return 0;
+    }
+
+    if (ch->unk_24 < ch->unk_00) {
+        ch->unk_28 = 0;
+        reg[0x2C] &= 0xF7;
+        return 0;
+    }
+    if (ch->unk_20 < ch->unk_00) {
+        ch->unk_20 += ch->unk_1C;
+        ch->unk_14 += ch->unk_18;
+    }
+    ch->unk_10 += 1.0f;
+    if (ch->unk_0C <= ch->unk_10) {
+        ch->unk_08++;
+        ch->unk_10 -= ch->unk_0C;
+        if (ch->unk_08 >= (u32) (D_800FC6CC[ch->unk_04].unk_04 >> 1)) {
+            ch->unk_08 = 0;
+        }
+    }
+    if (!(D_800FD02A & 8) && (ch->unk_14 < 0.0f)) {
+        ch->unk_28 = 0;
+        return 0;
+    }
+    if (ch->unk_14 > 0.75f) {
+        ch->unk_14 = 0.75f;
+        ch->unk_20 = -1;
+        ch->unk_18 = 0.0f;
+    }
+    ch->unk_00 += 0x100;
+    return (s16) (s32) ((f32) ((s16*) D_800FC6D0)[ch->unk_08] * ch->unk_14);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_8004A89C.s")
+#endif
 
 void func_8004AC9C(void) {
     s32 i;
