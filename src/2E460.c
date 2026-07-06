@@ -514,7 +514,7 @@ void func_8002EF18(OSMesg arg0) {
     osRecvMesg(&D_800AF750, arg0, 1);
 }
 
-void func_8002EF44(void) {
+void Game_HandlePokemonLab(void) {
     s32 game_state;
     s32 var_s4;
 

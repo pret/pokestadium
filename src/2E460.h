@@ -93,7 +93,7 @@ void func_8002EE78(void);
 void func_8002EEA8(OSMesg arg0);
 void func_8002EEEC(void);
 void func_8002EF18(OSMesg arg0);
-void func_8002EF44(void);
+void Game_HandlePokemonLab(void);
 s32 func_8002F1C0(s32 arg0);
 s32 func_8002F264(s32 arg0);
 
