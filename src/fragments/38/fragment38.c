@@ -1375,7 +1375,7 @@ void func_82304BEC(unk_func_80026268_arg0* arg0, s16 arg1) {
 
 void func_82304C7C(unk_D_82305AF8* arg0) {
     s16 i;
-    unk_D_800AE540_0004* temp_s4 = func_8002B700(arg0->unk_0001, arg0->unk_0012, arg0->unk_0014, func_8002311C(1));
+    unk_D_800AE540_0004* temp_s4 = func_8002B700(arg0->unk_0001, arg0->unk_0012, arg0->unk_0014, GetPlayerName(1));
 
     for (i = 0; i < 6; i++) {
         func_82304BEC(&arg0->unk_0020[i], arg0->unk_0001);

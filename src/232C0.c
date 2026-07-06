@@ -26,7 +26,7 @@ extern u8 gSpeciesType2[];
 
 extern char D_800AC890[][0x20];
 
-u16 func_800226C0(s32 arg0, u32 arg1) {
+u16 LevelFromExp(s32 arg0, u32 arg1) {
     s32 i;
 
     for (i = 1; i < 100; i++) {
@@ -367,7 +367,7 @@ void func_80023068(void) {
     HAL_Strcpy(D_800AC890[3], func_8002D7C0(NULL, 0, sp1C, 3));
 }
 
-char* func_8002311C(s32 arg0) {
+char* GetPlayerName(s32 arg0) {
     return D_800AC890[arg0];
 }
 

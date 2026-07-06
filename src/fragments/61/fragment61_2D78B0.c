@@ -639,7 +639,7 @@ void func_84202D18(unk_D_8423D3D8* arg0, s16 arg1) {
         DecodeMonName(sp50, sp38.unk_02);
         var_v1 = sp38.unk_00;
     } else {
-        HAL_Strcpy(sp50, func_8002311C(1));
+        HAL_Strcpy(sp50, GetPlayerName(1));
         var_v1 = 0;
     }
 
@@ -926,7 +926,7 @@ void func_842037AC(void) {
             DecodeMonName(sp74, sp60.unk_02);
             var_s1 = sp60.unk_00;
         } else {
-            HAL_Strcpy(sp74, func_8002311C(1));
+            HAL_Strcpy(sp74, GetPlayerName(1));
             var_s1 = 0;
         }
 

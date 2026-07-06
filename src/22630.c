@@ -32,7 +32,7 @@ char* DecodeMonName(char* arg0, char* arg1) {
 
     char* sp34 = arg0;
     char* sp18;
-    char* temp_s1 = func_8002311C(1);
+    char* temp_s1 = GetPlayerName(1);
 
     while (*arg1 != 'P') {
         if (*arg1 == ']') {
@@ -59,7 +59,7 @@ char* EncodeMonName(char* arg0, char* arg1) {
     char* sp1C = arg0;
     char* sp18 = arg1;
 
-    if (HAL_Strcmp(sp18, func_8002311C(1)) == 0) {
+    if (HAL_Strcmp(sp18, GetPlayerName(1)) == 0) {
         *arg0++ = ']';
     } else {
         while (*sp18 != 0) {
@@ -280,7 +280,7 @@ u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u
 }
 
 void CalculateAllStats(unk_func_80026268_arg0* arg0) {
-    arg0->unk_24 = func_800226C0(arg0->unk_00.unk_00, arg0->unk_10);
+    arg0->unk_24 = LevelFromExp(arg0->unk_00.unk_00, arg0->unk_10);
     arg0->unk_26 = CalculateStatValue(1, arg0->unk_00.unk_00, arg0->unk_14, arg0->unk_24, arg0->unk_1E);
     arg0->unk_28 = CalculateStatValue(2, arg0->unk_00.unk_00, arg0->unk_16, arg0->unk_24, arg0->unk_1E);
     arg0->unk_2A = CalculateStatValue(3, arg0->unk_00.unk_00, arg0->unk_18, arg0->unk_24, arg0->unk_1E);

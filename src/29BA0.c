@@ -462,8 +462,8 @@ void Game_HandleVsMewtwo(void) {
 
     func_800290E4(0x18);
     func_8002B5EC(8, 8, 0);
-    func_8002B840(0, func_8002B700(0, 0, "1P", func_8002311C(1)));
-    func_8002B840(1, func_8002B700(-1, 0, "COM", func_8002311C(3)));
+    func_8002B840(0, func_8002B700(0, 0, "1P", GetPlayerName(1)));
+    func_8002B840(1, func_8002B700(-1, 0, "COM", GetPlayerName(3)));
 
     while ((sp4E > 0) && (sp4E < 3)) {
         sp4E = func_8002A260(sp4E);
@@ -613,8 +613,8 @@ void Game_HandleGymLeaderCastle(void) {
 
     if (!(D_800AE540.unk_11F5 & 1)) {
         func_8002B5EC(7, 7, 0);
-        func_8002B840(0, func_8002B700(0, 0, "1P", func_8002311C(1)));
-        func_8002B840(1, func_8002B700(-1, 0, "COM", func_8002311C(3)));
+        func_8002B840(0, func_8002B700(0, 0, "1P", GetPlayerName(1)));
+        func_8002B840(1, func_8002B700(-1, 0, "COM", GetPlayerName(3)));
     }
 
     while ((sp4E > 0) && (sp4E < 4)) {

@@ -173,7 +173,7 @@ unk_func_80026268_arg0* func_8002B924(unk_func_80026268_arg0* arg0, u8 arg1, s16
     arg0->unk_02 = arg0->unk_26;
 
     GetItemStringField(arg0->unk_30, arg1);
-    HAL_Strcpy(arg0->unk_3B, func_8002311C(0));
+    HAL_Strcpy(arg0->unk_3B, GetPlayerName(0));
     return arg0;
 }
 
@@ -212,8 +212,8 @@ void func_8002BA34(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 
     func_8002B5EC(0x10, arg0, arg1);
 
-    spD0 = func_8002B700(0, 0, func_8002311C(1), func_8002311C(2));
-    spCC = func_8002B700(1, 0, func_8002311C(1), func_8002311C(2));
+    spD0 = func_8002B700(0, 0, GetPlayerName(1), GetPlayerName(2));
+    spCC = func_8002B700(1, 0, GetPlayerName(1), GetPlayerName(2));
 
     func_8002B888(spD0, func_8002B924(&sp78, arg2, spD6));
     func_8002B888(spCC, func_8002B924(&sp24, arg3, spD6));
@@ -232,7 +232,7 @@ void func_8002BB7C(s32 arg0, s32 arg1, s32 arg2) {
     func_80023AF8(arg2);
     func_800251B0(arg2, &sp34);
 
-    temp_s4 = func_8002B700(arg1, 0, &sp34, func_8002311C(1));
+    temp_s4 = func_8002B700(arg1, 0, &sp34, GetPlayerName(1));
     temp_v0 = func_80022C28(0x20, arg2, 0, 0);
 
     if (temp_v0 != NULL) {
@@ -502,11 +502,11 @@ void func_8002C394(s16 arg0) {
     func_8002B5EC(9, 6, 0);
 
     if (arg0 == 1) {
-        func_8002B840(0, func_8002B700(0, 0, "1P", func_8002311C(1)));
-        func_8002B840(1, func_8002B700(-1, 0, "COM", func_8002311C(3)));
+        func_8002B840(0, func_8002B700(0, 0, "1P", GetPlayerName(1)));
+        func_8002B840(1, func_8002B700(-1, 0, "COM", GetPlayerName(3)));
     } else {
-        func_8002B840(0, func_8002B700(0, 0, "1P", func_8002311C(1)));
-        func_8002B840(1, func_8002B700(1, 0, "2P", func_8002311C(1)));
+        func_8002B840(0, func_8002B700(0, 0, "1P", GetPlayerName(1)));
+        func_8002B840(1, func_8002B700(1, 0, "2P", GetPlayerName(1)));
     }
 
     if (D_80075684 == 0) {
@@ -562,7 +562,7 @@ s32 func_8002C5E8(void) {
 
         DecodeMonNameSafe(sp44, sp250.unk_10);
         func_8002B840(0, func_8002B700(0, tmp, sp44, sp44));
-        func_8002B840(1, func_8002B700(-1, tmp, "COM", func_8002311C(3)));
+        func_8002B840(1, func_8002B700(-1, tmp, "COM", GetPlayerName(3)));
 
         for (i = 0; i < temp_v0; i++) {
             func_8002B888(D_800AE540.unk_1194[0].unk_08[0], &sp58[i]);

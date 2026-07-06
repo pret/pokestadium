@@ -1706,7 +1706,7 @@ s32 func_826000D8(void) {
     char* tmp;
 
     func_800228F0(&sp20, (D_82607B54 % D_8267E4F0) + 1);
-    tmp = func_8002311C(1);
+    tmp = GetPlayerName(1);
     if ((sp20.unk_02 == 0) && (func_82600094(&sp20.unk_14, tmp) == 1)) {
         sp44 = 1;
     }
