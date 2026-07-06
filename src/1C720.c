@@ -133,7 +133,7 @@ arg1_func_80010CA8* func_8001BEE8(arg1_func_80010CA8* arg0, unk_func_80026268_ar
     sp30 = &D_8006FF00[arg1->unk_00.unk_00 - 1];
     sp34.raw = 0;
 
-    func_80021CA4(sp38, arg1->unk_00.unk_00);
+    GetItemStringField(sp38, arg1->unk_00.unk_00);
 
     if (HAL_Strcmp(arg1->unk_30, sp38) != 0) {
         var_a0 = ((arg1->unk_0E >> 8) & 0xFF) + (arg1->unk_0E & 0xFF);

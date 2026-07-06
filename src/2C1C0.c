@@ -172,7 +172,7 @@ unk_func_80026268_arg0* func_8002B924(unk_func_80026268_arg0* arg0, u8 arg1, s16
 
     arg0->unk_02 = arg0->unk_26;
 
-    func_80021CA4(arg0->unk_30, arg1);
+    GetItemStringField(arg0->unk_30, arg1);
     HAL_Strcpy(arg0->unk_3B, func_8002311C(0));
     return arg0;
 }

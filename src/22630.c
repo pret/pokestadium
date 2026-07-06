@@ -91,12 +91,12 @@ char* CopyMonName(char* arg0, char* arg1) {
     return arg0;
 }
 
-char* func_80021CA4(char* arg0, s32 arg1) {
+char* GetItemStringField(char* arg0, s32 arg1) {
     CopyMonName(arg0, (char*)*(u32*)D_8006FEE8[arg1]);
     return arg0;
 }
 
-char* func_80021CE0(s32 arg0, char* arg1) {
+char* GetItemName(s32 arg0, char* arg1) {
     extern char* gItemNames[];
     // "ひでんマシン%02d"
     static const char D_0007CCA0[] = { 0xA4, 0xD2, 0xA4, 0xC7, 0xA4, 0xF3, 0xA5, 0xDE, 0xA5, 0xB7,
