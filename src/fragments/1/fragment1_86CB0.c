@@ -413,7 +413,48 @@ void func_81208E28(s32 arg0) {
   func_81208D7C();
 }
 
+#ifdef NON_MATCHING
+extern s16 D_8122C790;
+extern s16 D_8122C792;
+extern void* D_812346E0;
+extern void osGbSetNextBuffer(void*, s32);
+// Fill the GB line buffer (640 x/y s16 pairs) with a ramp from (D_8122C790,
+// D_8122C792) down to the origin, then flush it and hand it to the GB DAC.
+void func_81208E4C(void) {
+    s16* buf = D_812346E0;
+    f32 x = (f32) D_8122C790;
+    f32 y = (f32) D_8122C792;
+    f32 dx = x / 640.0f;
+    f32 dy = y / 640.0f;
+    s32 i;
+
+    func_81208D7C();
+    for (i = 0; i != 0x280; i += 4) {
+        buf[0] = (s16) (s32) x;
+        buf[1] = (s16) (s32) y;
+        x -= dx;
+        y -= dy;
+        buf[2] = (s16) (s32) x;
+        buf[3] = (s16) (s32) y;
+        x -= dx;
+        y -= dy;
+        buf[4] = (s16) (s32) x;
+        buf[5] = (s16) (s32) y;
+        x -= dx;
+        y -= dy;
+        buf[6] = (s16) (s32) x;
+        buf[7] = (s16) (s32) y;
+        x -= dx;
+        y -= dy;
+        buf += 8;
+    }
+    while (osAiGetStatus() & 0x80000000) {}
+    osWritebackDCache(D_812346E0, 0xA00);
+    osGbSetNextBuffer(D_812346E0, 0xA00);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81208E4C.s")
+#endif
 
 void func_81208F94(void) {
 }
