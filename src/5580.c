@@ -210,7 +210,7 @@ void func_80004F08(void) {
     }
     D_800A62E0.unk_A38 = 1;
     func_8000D338();
-    func_8002B310();
+    Game_OneShotInit();
 }
 
 void func_80004F70(void) {
