@@ -237,7 +237,242 @@ void func_80049D5C(u16 arg0) {
     }
 }
 
+#ifdef NON_MATCHING
+extern u8 D_800FD009;
+extern u8 D_800FD00A;
+extern u8 D_800FD00C;
+typedef struct GbPulseSweep {
+    /* 0x00 */ u32 unk_00; // phase position
+    /* 0x04 */ u16 unk_04; // frequency
+    /* 0x06 */ u8 pad_06[2];
+    /* 0x08 */ u32 unk_08; // sweep tick period
+    /* 0x0C */ s16 unk_0C; // amplitude
+    /* 0x0E */ s16 unk_0E; // envelope step
+    /* 0x10 */ u32 unk_10; // envelope reload
+    /* 0x14 */ u32 unk_14; // envelope counter
+    /* 0x18 */ s16 unk_18; // high half-period
+    /* 0x1A */ s16 unk_1A; // low half-period
+    /* 0x1C */ s16 unk_1C;
+    /* 0x1E */ u8 unk_1E;  // duty phase (high/low)
+    /* 0x1F */ u8 pad_1F;
+    /* 0x20 */ u32 unk_20; // next duty toggle position
+    /* 0x24 */ u32 unk_24; // full period
+    /* 0x28 */ u32 unk_28; // length counter
+    /* 0x2C */ u32 unk_2C; // channel active
+} GbPulseSweep;
+
+// Split the channel period (unk_24) into high/low half-periods per the duty bits,
+// clamping each to a minimum of 0x40. Returns the starting duty phase.
+static s32 gbPulseSweepDuty(GbPulseSweep* ch, s32 duty) {
+    s32 half;
+    s32 phase = 1;
+
+    switch (duty) {
+        case 0:
+            half = ch->unk_24 >> 3;
+            ch->unk_1A = half;
+            if ((half & 0xFFFF) < 0x40) {
+                ch->unk_1A = 0x40;
+                half = 0x40;
+            }
+            phase = 1;
+            ch->unk_18 = ch->unk_24 - (half & 0xFFFF);
+            break;
+        case 1:
+            half = ch->unk_24 >> 2;
+            ch->unk_1A = half;
+            if ((half & 0xFFFF) < 0x40) {
+                ch->unk_1A = 0x40;
+                half = 0x40;
+            }
+            phase = 0;
+            ch->unk_18 = ch->unk_24 - (half & 0xFFFF);
+            break;
+        case 2:
+            half = ch->unk_24 >> 1;
+            ch->unk_1A = half;
+            if ((half & 0xFFFF) < 0x40) {
+                ch->unk_1A = 0x40;
+                half = 0x40;
+            }
+            phase = 0;
+            ch->unk_18 = ch->unk_24 - (half & 0xFFFF);
+            break;
+        case 3:
+            half = ch->unk_24 >> 2;
+            ch->unk_18 = half;
+            if ((half & 0xFFFF) < 0x40) {
+                ch->unk_18 = 0x40;
+                half = 0x40;
+            }
+            phase = 1;
+            ch->unk_1A = ch->unk_24 - (half & 0xFFFF);
+            break;
+        default:
+            ch->unk_18 = ch->unk_24;
+            ch->unk_1A = 0;
+            phase = 1;
+            break;
+    }
+    return phase;
+}
+
+// Software-APU pulse channel 1 (with frequency sweep): decode the GB registers
+// on a trigger, then each call run the sweep (shifting unk_04 up/down), envelope,
+// and duty toggle, returning the current amplitude.
+s16 func_80049DF0(void) {
+    GbPulseSweep* ch = (GbPulseSweep*) D_800FCF60;
+    u8* reg = (u8*) &D_800FD008;
+    s32 triggered = 0;
+    s16 out;
+
+    if (D_800FD009 != 0) {
+        D_800FD009 = 0;
+        triggered = 1;
+    }
+    if (reg[3] != 0) {
+        triggered = 1;
+        reg[3] = 0;
+    }
+    if (reg[5] != 0) {
+        triggered = 1;
+        reg[5] = 0;
+    }
+    if (reg[7] != 0) {
+        triggered = 1;
+        reg[7] = 0;
+    }
+    if (reg[9] != 0) {
+        triggered = 1;
+        reg[9] = 0;
+    }
+
+    if (triggered != 0) {
+        s32 envDir;
+        s32 phase;
+
+        ch->unk_04 = reg[6] | ((reg[8] & 7) << 8);
+        ch->unk_24 = ((0x800 - (ch->unk_04 & 0xFFFF)) * D_800FD004) >> 0xB;
+        phase = gbPulseSweepDuty(ch, (reg[2] & 0xC0) >> 6);
+
+        envDir = reg[4] & 8;
+        if ((envDir == 0) && !(reg[4] & 0xF0)) {
+            ch->unk_2C = 0;
+            reg[0x2C] &= 0xFE;
+            return 0;
+        }
+        if ((envDir != 0) && !(reg[4] & 0xF0) && !(reg[4] & 7)) {
+            ch->unk_2C = 0;
+            reg[0x2C] &= 0xFE;
+            return 0;
+        }
+        if (reg[8] & 0x80) {
+            s32 envPeriod = reg[4] & 7;
+            s32 sweepTime;
+
+            ch->unk_00 = 0;
+            ch->unk_2C = 1;
+            ch->unk_1E = phase;
+            ch->unk_1C = 0;
+            ch->unk_20 = 0;
+            ch->unk_0C = (reg[4] & 0xF0) << 7;
+            if (envPeriod != 0) {
+                if (envDir != 0) {
+                    ch->unk_0E = 0x800;
+                } else {
+                    ch->unk_0E = -0x800;
+                }
+                ch->unk_10 = envPeriod * D_800FD004;
+                ch->unk_14 = envPeriod * D_800FD004;
+            } else {
+                ch->unk_0E = 0;
+                ch->unk_10 = -1;
+                ch->unk_14 = -1;
+            }
+            sweepTime = (((reg[0] & 0x70) >> 4) * D_800FD004) >> 1;
+            ch->unk_08 = sweepTime;
+            if (sweepTime == 0) {
+                ch->unk_08 = -1;
+            }
+            if (reg[8] & 0x40) {
+                ch->unk_28 = ((0x40 - (reg[2] & 0x3F)) * D_800FD004) >> 2;
+            } else {
+                ch->unk_28 = -1;
+            }
+            reg[8] &= ~0x80;
+        }
+    }
+
+    if (ch->unk_2C == 0) {
+        return 0;
+    }
+
+    if (ch->unk_28 < ch->unk_00) {
+        ch->unk_2C = 0;
+        reg[0x2C] &= 0xFE;
+        return 0;
+    }
+
+    if ((ch->unk_08 - (ch->unk_00 % ch->unk_08)) < 0x41) {
+        s32 newFreq;
+
+        if (!(reg[0] & 8)) {
+            newFreq = (((s32) ch->unk_04 >> (reg[0] & 7)) + ch->unk_04) & 0xFFFF;
+            if (newFreq >= 0x800) {
+                ch->unk_2C = 0;
+                reg[0x2C] &= 0xFE;
+                return 0;
+            }
+            ch->unk_04 = newFreq;
+            ch->unk_24 = ((0x800 - ch->unk_04) * D_800FD004) >> 0xB;
+            gbPulseSweepDuty(ch, (D_800FD00A & 0xC0) >> 6);
+        } else {
+            newFreq = (ch->unk_04 - ((s32) ch->unk_04 >> (reg[0] & 7))) & 0xFFFF;
+            if (!((newFreq >= 0x800) || (newFreq < 0))) {
+                ch->unk_04 = newFreq;
+                ch->unk_24 = ((0x800 - ch->unk_04) * D_800FD004) >> 0xB;
+                gbPulseSweepDuty(ch, (D_800FD00A & 0xC0) >> 6);
+            }
+        }
+    }
+
+    if (ch->unk_14 < ch->unk_00) {
+        ch->unk_0C += ch->unk_0E;
+        ch->unk_14 += ch->unk_10;
+    }
+
+    if (ch->unk_20 < ch->unk_00) {
+        u8 phase = ch->unk_1E;
+        u32 next = ch->unk_20;
+
+        do {
+            phase ^= 1;
+            ch->unk_1E = phase;
+            next += (&ch->unk_18)[phase];
+            ch->unk_20 = next;
+        } while (next < ch->unk_00);
+    }
+
+    if (!(D_800FD00C & 8) && (ch->unk_0C < 0)) {
+        ch->unk_2C = 0;
+        return 0;
+    }
+    if ((ch->unk_0C & 0xFFFF) >= 0x7801) {
+        ch->unk_0C = 0x7800;
+        ch->unk_0E = 0;
+        ch->unk_14 = -1;
+    }
+
+    out = ch->unk_0C;
+    if (ch->unk_1E == 0) {
+        out = -out;
+    }
+    ch->unk_00 += 0x40;
+    return out;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4A3E0/func_80049DF0.s")
+#endif
 
 #ifdef NON_MATCHING
 extern u8 D_800FD015;
