@@ -2128,7 +2128,180 @@ void func_800420F0_empty() {
     
 }
 
+#ifdef NON_MATCHING
+s32 func_80042850(u8);
+extern u8 D_800780B4[];
+extern u8 D_80078180;
+extern u8 D_800781E0;
+extern u8 D_800782A4[];
+
+// Map a type-chart entry (0..3) to its damage multiplier.
+static f32 typeChartMul(u8 v) {
+    switch (v) {
+        case 1:
+            return 0.0f;
+        case 2:
+            return 0.5f;
+        case 3:
+            return 2.0f;
+        default:
+            return 1.0f;
+    }
+}
+
+// Estimate the damage (or a special commentary code) a move (arg0) would deal
+// from arg1 to arg2: dispatch on the move's category, and for damaging moves run
+// the standard damage formula scaled by type effectiveness, STAB, and modifiers.
+u32 func_80042158(u32 arg0, unk_D_800FCB18* arg1, unk_D_800FCB18* arg2) {
+    s32 move = arg0;
+    s32 side;
+    u8* entry;
+    u8* nextEntry;
+    u8 category;
+    s32 atkType;
+    u8 power;
+
+    if ((arg0 == 0) || (arg0 >= 0xA6)) {
+        move = 1;
+    }
+    if (arg1 == D_800FCB18[0]) {
+        side = 0;
+    } else if (arg1 == D_800FCB18[1]) {
+        side = 1;
+    } else {
+        return 0;
+    }
+
+    nextEntry = &D_800780B4[move * 3];
+    entry = nextEntry - 3;
+    category = entry[0];
+    atkType = func_80042850(entry[2]);
+    power = entry[1];
+
+    switch (category) {
+        case 0x26:
+            return -1;
+        case 0x28:
+            return (s32) arg2->unk_28 / 2;
+        case 0x29:
+            switch (move) {
+                case 0x31:
+                    return 0x14;
+                case 0x45:
+                    return arg1->unk_26;
+                case 0x52:
+                    return 0x28;
+                case 0x65:
+                    return arg1->unk_26;
+                case 0x95:
+                    return (s32) ((f32) arg1->unk_26 * 1.5f);
+                default:
+                    return 0;
+            }
+        case 0x7:
+            return -3;
+        case 0x9:
+        case 0xA:
+        case 0xB:
+        case 0xD:
+        case 0xF:
+        case 0x18:
+        case 0x19:
+        case 0x1A:
+        case 0x2E:
+        case 0x2F:
+        case 0x32:
+        case 0x33:
+        case 0x34:
+        case 0x35:
+        case 0x38:
+        case 0x39:
+        case 0x40:
+        case 0x41:
+        case 0x4F:
+        case 0x52:
+        case 0x53:
+        case 0x55:
+            return -5;
+        case 0x12:
+        case 0x13:
+        case 0x14:
+        case 0x16:
+        case 0x20:
+        case 0x31:
+        case 0x3B:
+        case 0x42:
+        case 0x43:
+        case 0x54:
+        case 0x56:
+            return -4;
+        case 0x1C:
+            if (nextEntry == &D_800781E0) {
+                return -5;
+            }
+            return -4;
+        default:
+            if (nextEntry == &D_80078180) {
+                return -2;
+            }
+            {
+                f32 atkStat = (arg1->unk_2A != 0) ? (f32) arg1->unk_2A : 1.0f;
+                f32 defStat = (arg2->unk_2C != 0) ? (f32) arg2->unk_2C : 1.0f;
+                f32 base =
+                    (((f32) (((s32) (arg1->unk_26 * 2) / 5) + 2) * (f32) power * atkStat) / defStat) / 50.0f;
+                s32 defType1 = func_80042850(arg2->unk_16[6]);
+                s32 defType2 = func_80042850(arg2->unk_16[7]);
+                u8* chart = &D_800782A4[atkType * 0xF];
+                f32 typeMul1 = typeChartMul(chart[defType1]);
+                f32 typeMul2 = typeChartMul(chart[defType2 & 0xFF]);
+                u8 moveType = entry[2];
+                f32 stab = ((arg1->unk_16[6] == moveType) || (arg1->unk_16[7] == moveType)) ? 1.5f : 1.0f;
+                s32 oppSide = side ^ 1;
+                f32 dmg = base * typeMul1 * typeMul2 * stab;
+                unk_D_800FCB48* histOpp = &D_800FCB48[oppSide];
+                f32 oppRecent = (f32) histOpp->unk_00[histOpp->unk_24 & 0xF];
+                f32 defHp;
+                f32 oppCrit;
+                unk_D_800FCB48* histSelf;
+                f32 selfRecent;
+                f32 atkHp;
+                f32 selfCrit;
+                u8 status;
+                f32 statusMul;
+                u32 result;
+
+                if (oppRecent == 0.0f) {
+                    oppRecent = 1.0f;
+                }
+                defHp = (f32) arg2->unk_28;
+                oppCrit = (D_80078390[oppSide] == 1) ? 1.1f : 1.0f;
+                histSelf = &D_800FCB48[side];
+                selfRecent = (f32) histSelf->unk_00[histSelf->unk_24 & 0xF];
+                if (selfRecent == 0.0f) {
+                    selfRecent = 1.0f;
+                }
+                atkHp = (f32) arg1->unk_28;
+                selfCrit = (D_80078390[side] == 1) ? 1.1f : 1.0f;
+                status = arg2->unk_15;
+                if (status & 0x20) {
+                    statusMul = 1.2f;
+                } else if (status & 7) {
+                    statusMul = 1.1f;
+                } else {
+                    statusMul = 1.0f;
+                }
+                result = (u32) (((defHp / oppRecent) * 0.01f + 1.0f) * dmg *
+                                (1.0f + (atkHp / selfRecent) * 0.01f) * oppCrit * selfCrit * statusMul);
+                if (result >= 0x8000) {
+                    result = 0x7FFF;
+                }
+                return result;
+            }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_80042158.s")
+#endif
 
 s32 func_80042850(u8 arg0) {
     switch (arg0) {
