@@ -25,7 +25,7 @@ void Idle_ThreadEntry(UNUSED void* unused) {
     osViBlack(TRUE);
     crash_screen_init();
     rsp_init();
-    func_800052B4();
+    StartRSPThread();
     StartDDThread();
     func_800019C8();
     SoftReset_CreateThread();

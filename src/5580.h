@@ -85,7 +85,7 @@ extern unk_D_800A62E0 D_800A62E0;
 void func_80004CC0(UnkStruct80083CA0_2*, s32, s32);
 s32 func_80004CF4(UnkStruct80083CA0_2*);
 s32 func_80004D20(UnkStruct80083CA0_2*);
-void func_800052B4(void);
+void StartRSPThread(void);
 void func_80005328(unk_D_800AA660*);
 void func_80004980(UnkStruct80001380* arg0);
 void func_800049AC(UnkStruct80001380* arg0);

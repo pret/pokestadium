@@ -322,7 +322,7 @@ void func_80005194(void* arg0) {
     }
 }
 
-void func_800052B4(void) {
+void StartRSPThread(void) {
     D_800A62E0.unk_A10 = NULL;
     D_800A62E0.unk_A14 = NULL;
     D_800A62E0.unk_A18 = 0;
