@@ -1,4 +1,5 @@
 #include "fragment50.h"
+#include "include/pokemon.h"
 #include "src/12D80.h"
 #include "src/19840.h"
 #include "src/1AB70.h"
@@ -66,7 +67,7 @@ static s16 D_82608554;
 static s16 D_82608556;
 static unk_D_86002F34_00C* D_82608558;
 static s32 pad_D_82608560[2];
-static u16 D_82608568[151][0x640];
+static u16 D_82608568[NATIONAL_DEX_COUNT][0x640];
 static s16 D_8267E4E8;
 static u16 D_8267E4EA;
 static u16 D_8267E4EC;
@@ -1676,7 +1677,7 @@ void func_82600020(void) {
 
     if (func_80028118() != 1) {
         var_s1 = 0;
-        for (i = 0; i < 151; i++) {
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++) {
             if (func_826007C8(i + 1) != 0) {
                 var_s1++;
             }
@@ -2610,7 +2611,7 @@ void func_82603924(void) {
     func_8001987C();
     func_8001B058();
 
-    for (i = 0; i < 151; i++) {
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++) {
         func_8001B0DC(D_82608568[i], i + 1, NULL);
     }
 
