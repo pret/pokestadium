@@ -16,7 +16,7 @@ void func_8000D338(void);
 void func_8000D358(void);
 void func_8000D380(void);
 void func_8000D3A8(void*);
-void func_8000D564(void);
+void StartDDThread(void);
 
 
 #endif // _DDC0_H_

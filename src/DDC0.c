@@ -120,7 +120,7 @@ void func_8000D3A8(void* unused) {
     }
 }
 
-void func_8000D564(void) {
+void StartDDThread(void) {
     osCreateThread(&D_800A8480, 4, func_8000D3A8, NULL, D_800AA660, 0x50);
     osStartThread(&D_800A8480);
 }

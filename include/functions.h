@@ -24,7 +24,7 @@ s32 func_8000B4C4(void);
 void Yay0_Decompress(void* src, void* dst);
 
 // DDC0.s
-void func_8000D564(void);
+void StartDDThread(void);
 
 // exception_set.s
 void set_watch_lohi(s32);
