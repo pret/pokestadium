@@ -839,7 +839,7 @@ extern u32 D_8122C768;
 extern u8 D_8122C770;
 // Compose a full Game Boy Tower screen: tiled background, cached glyph strip,
 // per-panel frames, two marker-line passes, then the mode/state overlays.
-void func_812029B0(u8* arg0, void* arg1, s32 arg2, s32 arg3) {
+void func_812029B0(u8* arg0, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3) {
     u8* p;
     u8* q;
     u8* buf;
@@ -1182,7 +1182,218 @@ void func_81208F94(void);
 void func_8120935C(s32);
 
 void func_812033F4(s32, s32, OSId, s32, OSMesgQueue*, u16 (*arg5)[6][0x640]);
+#ifdef NON_MATCHING
+extern OSMesgQueue D_8122B1EC;
+extern void* D_8122B250;
+extern OSMesgQueue D_8122B254;
+extern unk_D_8122B2C0* D_8122B2C4;
+extern u8 fragment1_misc_yay0_ROM_START;
+extern void func_8120311C(unk_D_8122B2C0*);
+extern void func_812070A0(void);
+extern void func_81208E28(unk_D_8122B2F8*);
+extern void func_8120935C(s32);
+extern void func_8120735C(s32);
+extern void func_81208D7C(void);
+extern void func_81208F94(void);
+extern void func_81203304(void);
+// Fragment (Game Boy Tower) init: allocate framebuffers and the emulator state,
+// start the worker thread, load & decompress the tile/font data, compose the
+// initial screens, then present the first frame.
+void func_812033F4(s32 arg0, s32 arg1, OSId arg2, s32 arg3, OSMesgQueue* arg4, u16 (*arg5)[6][0x640]) {
+    u8* s;
+    unk_D_8122B2C0** slot;
+    unk_D_8122B2F8** fbSlot;
+    unk_D_80068BB0** imgSlot;
+    unk_D_8122B1E8* view;
+    u8** dstSlot;
+    unk_D_8122B2C0* gb;
+    s32 i;
+    s32 j;
+    s32 pri;
+
+    D_8122B1E0 = func_80006314(0, 2, 0x140, 0x120, 1);
+    D_8122B1E4 = func_80006314(0, 2, 0x140, 0x120, 1);
+    D_8122B2F8 = main_pool_alloc(0x1FEAE8, 0);
+    if (D_8122B2F8 == NULL) {
+        D_8122C4DC = 1;
+        D_8122B2FC = 4;
+        return;
+    }
+    D_8122B2F4 = (u8*) D_8122B2F8;
+    osCreateMesgQueue(&D_8122B1EC, D_8122B1E8->mesg, 1);
+    osCreateMesgQueue(&D_8122B254, &D_8122B250, 1);
+    D_8122B2F0 = 0;
+    switch (osTvType) {
+    case 0:
+        osViSetMode(&D_800795C0);
+        break;
+    case 2:
+        osViSetMode(&osViModeMpalLpn1);
+        break;
+    case 1:
+        osViSetMode(&osViModeNtscLpn1);
+        break;
+    }
+    osViSetSpecialFeatures(0x2A);
+    osViSetSpecialFeatures(0x80);
+    osViBlack(1);
+    D_8122C4E0 = 0;
+    D_8122C4D8 = arg4;
+    osCreateMesgQueue(&D_8122C4C0, D_8122C4B0, 4);
+    osCreateThread(&D_8122B300, arg2, func_81200AA8, NULL, D_8122C4B0, arg3);
+    osStartThread(&D_8122B300);
+
+    D_8122B2B8 = 0;
+    D_8122B2EC = D_8122B2F4;
+    D_8122B2F4 += 0xC410;
+    slot = &D_8122B2C0;
+    do {
+        s = D_8122B2F4;
+        *slot = (unk_D_8122B2C0*) s;
+        bzero(s, 0x1B058);
+        D_8122B2F4 = s + 0x1B058;
+        *(u8**) (s + 0x53B4) = D_8122B2F4;
+        D_8122B2F4 += 0x6000;
+        if (slot == &D_8122B2C0) {
+            *(u8**) (s + 0x53A8) = D_8122B2F4;
+            D_8122B2F4 += 0x4D40;
+            *(u8**) (s + 0x53AC) = D_8122B2F4;
+            D_8122B2F4 += 0x4D40;
+            *(u8**) (s + 0x53B0) = D_8122B2F4;
+            D_8122B2F4 += 0x4D40;
+            *(s32*) (s + 0x5388) = 0x400;
+            if (slot == &D_8122B2C0) {
+                *(u8**) (s + 0x53BC) = D_8122B2F4;
+                D_8122B2F4 += 0x100000;
+            } else {
+                *(void**) (s + 0x53BC) = D_8122B2C0->unk_53BC;
+            }
+            func_8120311C((unk_D_8122B2C0*) s);
+            if ((slot == &D_8122B2C0) && (arg1 >= 0)) {
+                if (arg1 < 4) {
+                    *(u8*) (s + 0x5DCA) = 1;
+                }
+                *(s8*) (s + 0x5DCC) = (s8) arg1;
+                osSendMesg(&D_8122C4C0, s, 1);
+            }
+        }
+        slot++;
+    } while ((u32) slot < (u32) &D_8122B2C4);
+
+    func_80003B30((u32) (D_8122B2F4 + 0xC5C0), (u32) D_102BA0, (s32) (fragment2_ROM_START + 1) & ~1, 0);
+    Yay0_Decompress(D_8122B2F4 + 0xC5C0, D_8122B2F4);
+    s = D_8122B2F4;
+    D_8122B2F4 = s + 0xC5C0;
+    D_8122C748 = (unk_D_8122C748*) s;
+    D_8122B2C0->unk_5C58 = s;
+    D_8122C74C = 0;
+
+    dstSlot = D_8122C758;
+    imgSlot = &D_8122B1E0;
+    view = &D_8122B1E8[0];
+    do {
+        view->unk_20 = 2;
+        view->unk_24 = 0;
+        func_812029B0((*imgSlot)->img_p, arg5, arg1, 0);
+        dstSlot++;
+        view++;
+        imgSlot++;
+        dstSlot[-1] = (u8*) D_8122C754;
+    } while ((u32) dstSlot < (u32) &D_8122C760);
+
+    func_812070A0();
+    func_80003B30((u32) (D_8122B2F4 + 0x80000), (u32) &fragment1_misc_yay0_ROM_START, (s32) (D_F4130 + 1) & ~1, 0);
+    Yay0_Decompress(D_8122B2F4 + 0x80000, D_8122B2F4);
+    func_81208E28((unk_D_8122B2F8*) D_8122B2F4);
+    func_8120935C(0);
+    func_8120735C(0);
+    func_81208D7C();
+    func_81208C08(0xFF26, 0, 0);
+    func_81208C08(0xFF26, 0x8F, 0x10);
+    func_81208C08(0xFF24, 0x77, 0x20);
+    func_81208C08(0xFF25, 0xFF, 0x30);
+    func_81208F94();
+    D_8122B2F4 += 0x80000;
+
+    fbSlot = &D_8122B2C8[0];
+    D_8122C4E4 = D_8122C4E2;
+    D_8122C4E3 = 0;
+    D_8122C4E5 = (D_8122C4E2 == 2) ? 2 : 1;
+    imgSlot = &D_8122B2D8[0];
+    do {
+        s = D_8122B2F4;
+        D_8122B2F4 = s + 0xE200;
+        *fbSlot = (unk_D_8122B2F8*) s;
+        bzero(D_8122B2F4 - 0xE200, 0x2800);
+        s = D_8122B2F4;
+        imgSlot++;
+        D_8122B2F4 = s + 0x2800;
+        imgSlot[-1] = s;
+        fbSlot++;
+    } while (imgSlot != &D_8122B2D8[2]);
+
+    if (D_8122C4E2 == 0) {
+        func_80003B30((u32) D_8122B2C8[0]->unk000000, (u32) D_F4920, (s32) (D_F5450 + 1) & ~1, 0);
+        Yay0_Decompress(D_8122B2C8[0]->unk000000, D_8122B2C8[1]);
+    } else if (D_8122C4E2 == 1) {
+        func_80003B30((u32) D_8122B2C8[0]->unk000000, (u32) D_F5450, (s32) (D_FDE40 + 1) & ~1, 0);
+        Yay0_Decompress(D_8122B2C8[0]->unk000000, D_8122B2C8[1]);
+    } else if (D_8122C4E2 == 2) {
+        func_80003B30((u32) D_8122B2C8[0]->unk000000, (u32) D_FDE40, (s32) (D_102BA0 + 1) & ~1, 0);
+        Yay0_Decompress(D_8122B2C8[0]->unk000000, D_8122B2C8[2]);
+        func_80003B30((u32) D_8122B2C8[0]->unk000000, (u32) D_F5450, (s32) (D_FDE40 + 1) & ~1, 0);
+        Yay0_Decompress(D_8122B2C8[0]->unk000000, D_8122B2C8[1]);
+    }
+
+    while ((D_8122B2F4 - (u8*) D_8122B2F8) != 0x1FEAE8) {
+    }
+    osWritebackDCacheAll();
+
+    gb = D_8122B2C0;
+    if (gb->unk_5DCA != 0) {
+        while (gb->unk_5DC8 != 0) {
+        }
+        i = 0;
+        if (gb->unk_5DC5 != 0) {
+            i = 0x500;
+        }
+        j = i / 256;
+        if (j < 0x80) {
+            for (; j < 0x80; j++) {
+                *(u8*) ((u8*) gb + 0x582C + j) = 0;
+            }
+        }
+        if (gb->unk_5DCA == 0) {
+            D_8122C4DC = 1;
+            D_8122B2FC = 1;
+            func_81203304();
+            return;
+        }
+        D_8122C4E8 = 0xFF;
+        func_81202210(0, 1);
+        func_81202210(1, 1);
+        func_8120241C();
+        if ((gb->unk_5DC5 == 0) || (gb->unk_5DC5 == 2)) {
+            D_8122C4DC = 1;
+            D_8122B2FC = 1;
+            func_81203304();
+            return;
+        }
+        D_8122C4DC = 5;
+        pri = (gb->unk_5DC5 != 0) ? (gb->unk_5DC5 - 1) : 0;
+        func_812029B0(D_8122B1E0->img_p, arg5, arg1, pri);
+        pri = (gb->unk_5DC5 != 0) ? (gb->unk_5DC5 - 1) : 0;
+        func_812029B0(D_8122B1E4->img_p, arg5, arg1, pri);
+    }
+
+    D_8122C760 = osGetCount();
+    D_8122C76C = D_8122C760;
+    osViSwapBuffer((&D_8122B1E0)[D_8122B2B8]->img_p);
+    D_8122B2B8 ^= 1;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812033F4.s")
+#endif
 
 void func_81203C58(unk_D_8122B2C0*);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81203C58.s")
