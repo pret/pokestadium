@@ -101,20 +101,48 @@ typedef enum PokemonType {
 #define ITEM_TM_COUNT          54
 
 // ----------------------------------------------------------------------------
-// Status conditions — DEFERRED
+// Status conditions
 //
-// Pokemon status conditions (Sleep / Poison / Burn / Freeze / Paralysis /
-// Toxic) are NOT defined here yet. The patterns that initially looked like
-// status-condition storage turned out to be something else:
+// Gen-1 status encoding (inferred from the status-healer item IDs in
+// gItemNames: item 11=どくけし/Antidote, 12=やけどなおし/Burn Heal,
+// 13=こおりなおし/Ice Heal, 14=ねむけざまし/Awakening, 15=まひなおし/Parlyz
+// Heal). The encoding matches the canonical Gen-1 status byte:
 //
-//   - `unk_D_800FCB18.unk_15 & 7` (audio struct) → audio flags, not status
-//   - `temp_s6->unk_15` switch on 0x8 / 0x10 / 0x40 → critical-hit modifiers
+//   0 = STATUS_NONE      no status
+//   1 = STATUS_SLEEP     prevents attacking; decrements per turn
+//   2 = STATUS_POISON    HP loss per turn
+//   3 = STATUS_BURN      HP loss per turn; halves Attack
+//   4 = STATUS_FREEZE    prevents attacking until thawed
+//   5 = STATUS_PARALYSIS 25% miss chance; halves Speed
+//   6 = STATUS_TOXIC     PSN++ (Gen 2+; unlikely in Gen-1-only Stadium)
+//   7 = STATUS_ANY       sentinel: any non-OK status (mask 0x07)
 //
-// The actual status encoding is buried in unrenamed `unk_*` fields on
-// `unk_D_843C5568` and other battle structs in src/fragments/62/. A future
-// batch needs deeper archaeology on fragment62_361050.c and the
-// unk_D_843C5568 struct (status apply, turn-end tick, sleep counter)
-// before STATUS_* constants can be defined safely.
+// KNOWN_UNKNOWNS:
+// - The actual storage location of the status byte in battle structs
+//   is unrenamed. Patterns that initially looked like status storage
+//   (`unk_D_800FCB18.unk_15 & 7`, `temp_s6->unk_15` on 0x8/0x10/0x40)
+//   turned out to be audio flags and critical-hit modifiers respectively.
+//   The real status byte is buried in unrenamed `unk_*` fields on
+//   `unk_D_843C5568` and related battle structs in src/fragments/62/.
+//   A future batch needs deeper archaeology on fragment62_361050.c and
+//   the unk_D_843C5568 struct (status apply, turn-end tick, sleep
+//   counter) before STATUS_* can replace live `unk_NN` accesses.
+// - Confirmation that Stadium uses 0..6 (not 0..5 or a different
+//   range) is pending — item IDs 11-15 strongly suggest the standard
+//   Gen-1 5 main statuses, but the actual value in the battle struct
+//   hasn't been located yet.
 // ----------------------------------------------------------------------------
+
+typedef enum PokemonStatus {
+    STATUS_NONE      = 0,
+    STATUS_SLEEP     = 1,
+    STATUS_POISON    = 2,
+    STATUS_BURN      = 3,
+    STATUS_FREEZE    = 4,
+    STATUS_PARALYSIS = 5,
+    STATUS_TOXIC     = 6
+} PokemonStatus;
+
+#define STATUS_ANY 7  // sentinel: any non-OK status (mask 0x07)
 
 #endif
