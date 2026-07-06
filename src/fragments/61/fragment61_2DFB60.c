@@ -395,7 +395,7 @@ void func_84209D18(unk_D_842168A0* arg0, unk_func_80026268_arg0* arg1) {
         func_80025040(arg0->unk_00004, &sp28);
         _bcopy(arg1->unk_46, sp38.unk_02, 11);
         sp38.unk_00 = arg1->unk_0E;
-        if (func_80022A04(&sp38, &sp28) != 0) {
+        if (RecordsEqual(&sp38, &sp28) != 0) {
             arg1->unk_52 |= 0x80;
         }
     }

@@ -103,7 +103,7 @@ void func_80022978(unk_func_80026268_arg0* arg0, s16 arg1, u8 arg2) {
     func_80027C24(0x13, 0, arg0->unk_00.unk_00 - 1, &sp24);
 }
 
-s32 func_80022A04(u16* arg0, unk_D_800AC910_040* arg1) {
+s32 RecordsEqual(u16* arg0, unk_D_800AC910_040* arg1) {
     return !bcmp(arg0, arg1, 0xD);
 }
 
@@ -160,7 +160,7 @@ s32 GetSpeciesHabitat(s32 arg0) {
     return gSpeciesHabitat[arg0] + 1;
 }
 
-void func_80022AF0(unk_func_80022C28_ret* arg0) {
+void EstimateMoveQuick(unk_func_80022C28_ret* arg0) {
     if (arg0->unk_00 == 1) {
         arg0->unk_04 |= 1;
         func_800276F0(arg0->unk_01, arg0->unk_03, 0);
@@ -177,7 +177,7 @@ void func_80022AF0(unk_func_80022C28_ret* arg0) {
     }
 }
 
-void func_80022B88(unk_func_80022C28_ret* arg0) {
+void EstimateMoveFull(unk_func_80022C28_ret* arg0) {
     if (arg0->unk_00 == 1) {
         arg0->unk_04 |= 1;
         func_80024AE0(arg0->unk_01, arg0->unk_02, arg0->unk_03, 0);
@@ -207,11 +207,11 @@ unk_func_80022C28_ret* func_80022C28(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
         switch (arg0 & 0xF0) {
             case 16:
-                func_80022AF0(sp1C);
+                EstimateMoveQuick(sp1C);
                 break;
 
             case 32:
-                func_80022B88(sp1C);
+                EstimateMoveFull(sp1C);
                 break;
         }
     }

@@ -79,7 +79,7 @@ void func_83802660(unk_D_838067F0* arg0, unk_func_80026268_arg0* arg1) {
         func_80025040(arg0->unk_0018, &sp28);
         _bcopy(arg1->unk_46, sp28.unk_14, sizeof(arg1->unk_46));
         sp28.unk_12 = arg1->unk_0E;
-        if (func_80022A04(&sp28.unk_12, &sp28) != 0) {
+        if (RecordsEqual(&sp28.unk_12, &sp28) != 0) {
             arg1->unk_52 |= 0x80;
         }
     }

@@ -1367,7 +1367,7 @@ void func_82304BEC(unk_func_80026268_arg0* arg0, s16 arg1) {
         func_80025040(arg1, &sp20);
         _bcopy(arg0->unk_46, sp30.unk_02, 11);
         sp30.unk_00 = arg0->unk_0E;
-        if (func_80022A04(&sp30, &sp20)) {
+        if (RecordsEqual(&sp30, &sp20)) {
             arg0->unk_52 |= 0x80;
         }
     }
