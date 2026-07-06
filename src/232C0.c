@@ -130,15 +130,15 @@ s32 func_80022A60(s32 arg0) {
 }
 
 u8 func_80022A88(s32 arg0) {
-    extern u8 D_800733BF[];
+    extern u8 gSpeciesGrowthRate[];
 
-    return D_800733BF[arg0];
+    return gSpeciesGrowthRate[arg0];
 }
 
 u8 func_80022A98(s32 arg0) {
-    extern u8 D_80073457[];
+    extern u8 gSpeciesEggGroup[];
 
-    return D_80073457[arg0];
+    return gSpeciesEggGroup[arg0];
 }
 
 s32 func_80022AA8(s32 arg0) {
