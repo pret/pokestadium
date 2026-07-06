@@ -21,8 +21,8 @@ extern u8 D_800ACA74;
 extern u8 D_800ACA75;
 extern unk_D_800AC910_050 D_800ACA78;
 
-extern u8 D_80073267[];
-extern u8 D_800732FF[];
+extern u8 gSpeciesType1[];
+extern u8 gSpeciesType2[];
 
 extern char D_800AC890[][0x20];
 
@@ -118,7 +118,7 @@ u8 func_80022A38(s32 arg0) {
         return 0;
     }
 
-    return D_80073267[arg0];
+    return gSpeciesType1[arg0];
 }
 
 s32 func_80022A60(s32 arg0) {
@@ -126,7 +126,7 @@ s32 func_80022A60(s32 arg0) {
         return SPECIES_BLANK;
     }
 
-    return D_800732FF[arg0];
+    return gSpeciesType2[arg0];
 }
 
 u8 func_80022A88(s32 arg0) {
