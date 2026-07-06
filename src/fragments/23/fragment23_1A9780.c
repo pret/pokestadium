@@ -645,7 +645,77 @@ static Color_RGBA8 D_88217C4C = { 0x5A, 0x5A, 0xA6, 0xFF };
 static Color_RGBA8 D_88217C50 = { 0x40, 0x40, 0x74, 0xFF };
 static Color_RGBA8 D_88217C54 = { 0x78, 0x78, 0xF1, 0xFF };
 static Color_RGBA8 D_88217C58 = { 0x5E, 0x5E, 0xBE, 0xFF };
+#ifdef NON_MATCHING
+#define GFX(w0v, w1v)                        \
+    do {                                     \
+        Gfx* _g = gDisplayListHead;          \
+        gDisplayListHead = _g + 1;           \
+        _g->words.w0 = (w0v);                \
+        _g->words.w1 = (w1v);                \
+    } while (0)
+// Draw a menu row with a "counter" label: a highlight fill box (D_88217C50,
+// brightened when selected) framed by outline lines (D_88217C58), then the row's
+// label string, its right-aligned index number (arg3 + 1), and its icon.
+void func_88203538(s32 arg0, s32 arg1, unk_func_88205880_00D0* arg2, s32 arg3, s32 arg4, void* arg5) {
+    s32 ext = *(s16*) ((u8*) arg5 + 0x3C);
+    s32 hgt = *(s16*) ((u8*) arg5 + 0x3E);
+    u32 lrx = ((((ext + arg0) - 1) & 0x3FF) << 0xE) | 0xF6000000;
+    u32 ulx = (arg0 & 0x3FF) << 0xE;
+    s32 fill;
+    s32 outline;
+    Color_RGBA8 color;
+    Color_RGBA8 textColor;
+    s8* label;
+    char num[4];
+    s32 wLabel;
+    s32 wSpace;
+    s32 wNum;
+
+    if (arg4 & 2) {
+        color = func_8002D444(D_88217C50, 1.4f);
+    } else {
+        color = D_88217C50;
+    }
+    fill = ((color.r << 8) & 0xF800) | ((color.g << 3) & 0x7C0) | ((color.b >> 2) & 0x3E) | 1;
+    outline = ((D_88217C58.r << 8) & 0xF800) | ((D_88217C58.g << 3) & 0x7C0) | ((D_88217C58.b >> 2) & 0x3E) | 1;
+
+    GFX(0xE7000000, 0);
+    GFX(0xE3000A01, 0x300000);
+    GFX(0xE200001C, 0);
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (fill << 0x10) | fill);
+    GFX(lrx | ((((arg1 + hgt) - 2) & 0x3FF) * 4), ulx | (((arg1 + 1) & 0x3FF) * 4));
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (outline << 0x10) | outline);
+    GFX(lrx | ((arg1 & 0x3FF) * 4), ulx | ((arg1 & 0x3FF) * 4));
+    GFX(0xE7000000, 0);
+    GFX(0xF7000000, (outline << 0x10) | outline);
+    GFX(lrx | ((((arg1 + hgt) - 1) & 0x3FF) * 4), ulx | ((((arg1 + hgt) - 1) & 0x3FF) * 4));
+
+    textColor = D_88217C48;
+    if (arg4 & 4) {
+        textColor.a = 0x4C;
+    }
+
+    label = func_8002D7C0(NULL, 0, D_88224FA4, 0x31);
+    wLabel = func_8001F5B0(8, 0, label);
+    wSpace = func_8001F5B0(8, 0, " 00");
+    wNum = func_8001F5B0(4, 0, "00");
+    func_8001F3F4();
+    func_8001EBE0(8, 0);
+    func_8001F324(textColor.r, textColor.g, textColor.b, textColor.a);
+    func_8001F1E8(arg0 + 0x19, arg1 + 2, label);
+    sprintf(num, "%d", arg3 + 1);
+    func_8001F1E8(((arg0 + wLabel + wSpace) - func_8001F5B0(0, 0, num)) + 0x19, arg1 + 2, num);
+    func_8001F444();
+    if (!(arg4 & 0x100)) {
+        func_88202450(arg2, ((ext + arg0) - wNum) - 0x35, arg1);
+    }
+}
+#undef GFX
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1A9780/func_88203538.s")
+#endif
 
 void func_8820399C(unk_func_8820399C* arg0, s32 arg1, unk_func_8850143C* arg2) {
     ((func885007CC)Memmap_GetFragmentVaddr(func_885007CC))(arg0, sizeof(unk_func_8820399C));
