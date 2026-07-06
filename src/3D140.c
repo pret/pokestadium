@@ -1237,7 +1237,85 @@ void func_8003DB84(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003EB40.s")
 
+#ifdef NON_MATCHING
+extern u8 D_800FCB30[];
+extern u32 D_800FCBC0;
+extern u8 D_800783D0;
+extern u16 D_80077FB4;
+extern u16 D_80077FC0;
+extern u16 D_80077FC8;
+extern u16 D_80077FD0;
+// Pick and queue an announcer comment for a low-HP/faint event on player arg0,
+// choosing the line from a series of flags and the HP balance between the two
+// active Pokemon.
+void func_8003F1AC(s32 arg0) {
+    u8 count;
+    s32 idx;
+    s32 side;
+
+    if ((arg0 != 0) && ((u32) arg0 < 5)) {
+        arg0 -= 1;
+        idx = arg0;
+        count = D_80078398[idx];
+        if (((s32) count > 0) && ((s32) count < 3)) {
+            side = (count - 1) & 0xFF;
+            D_8007838C[idx]--;
+            D_80078390[side]--;
+            D_800FCB30[side] = 0;
+            if ((D_800FCB18[0] != NULL) && (D_800FCB18[1] != NULL)) {
+                func_800367A0(0x16, D_80078400, 0);
+                if (D_800783D8 != 0) {
+                    func_80041C70(0xC3);
+                    D_800783D8 = 0;
+                    D_800783E4 = 1;
+                    return;
+                }
+                D_800783D8 = 1;
+                if (D_800783D4 != 0) {
+                    func_80041C70(0xB9);
+                    D_800783D4 = 0;
+                    return;
+                }
+                if ((u32) D_800783CC < 2) {
+                    if ((osGetTime() % 2) == 0) {
+                        func_80041C70(0xBC);
+                        return;
+                    }
+                    func_80041C70(0xC5);
+                    return;
+                }
+                if (D_800783D0 != 0) {
+                    func_80041C70(0xC4);
+                    D_800783D0 = 0;
+                    return;
+                }
+                if (((u32) D_800FCCA4 >= 0x64) && (D_800FCCB2 == 0) && (D_800783EC == 0)) {
+                    f32 hpSelf = D_800FCB18[side]->unk_26;
+                    f32 hpOther = D_800FCB18[side ^ 1]->unk_26;
+                    if (((f64) hpSelf * 0.3) < (f64) (hpOther - hpSelf)) {
+                        func_800420C0(&D_80077FC0);
+                    } else {
+                        func_800420C0(&D_80077FD0);
+                    }
+                    D_800FCCD6[side] = 1;
+                    return;
+                }
+                if (((&D_800FCBC0)[side * 0x21] >= 8) && (D_800FCCB2 == 0)) {
+                    if (((u32) D_800FCCA4 < 5) && (D_800783E8 == 0)) {
+                        func_80041C70(0xC2);
+                        return;
+                    }
+                    func_800420C0(&D_80077FC8);
+                    return;
+                }
+                func_800420C0(&D_80077FB4);
+            }
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3D140/func_8003F1AC.s")
+#endif
 
 #ifdef NON_MATCHING
 extern u8 D_800FCB30[];
