@@ -142,22 +142,22 @@ u8 func_80022A98(s32 arg0) {
 }
 
 s32 func_80022AA8(s32 arg0) {
-    extern u8 D_800734EF[];
+    extern u8 gSpeciesGenderRatio[];
 
     if (arg0 == 0) {
         return 0;
     }
-    return D_800734EF[arg0] + 1;
+    return gSpeciesGenderRatio[arg0] + 1;
 }
 
 s32 func_80022ACC(s32 arg0) {
-    extern u8 D_80073597[];
+    extern u8 gSpeciesHabitat[];
 
     if (arg0 == 0) {
         return 0;
     }
 
-    return D_80073597[arg0] + 1;
+    return gSpeciesHabitat[arg0] + 1;
 }
 
 void func_80022AF0(unk_func_80022C28_ret* arg0) {
