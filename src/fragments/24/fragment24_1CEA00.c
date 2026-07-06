@@ -1767,17 +1767,17 @@ s32 func_883058C4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030
 void func_88305BC4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_030_02C_000* arg1, s32 arg2, s32* arg3,
                    s32* arg4) {
     s32 var_v1;
-    unk_D_80072B00* temp_v0;
+    Move* temp_v0;
     unk_func_8830867C_02C_0CC_000_008* ptr = &arg0->unk_08;
 
     temp_v0 = func_8002ED40(ptr->unk_09[arg2]);
 
-    var_v1 = temp_v0->unk_05 / 5;
+    var_v1 = temp_v0->pp / 5;
     if (var_v1 >= 7) {
         var_v1 = 7;
     }
 
-    *arg3 = ((ptr->unk_20[arg2] >> 6) * var_v1) + temp_v0->unk_05;
+    *arg3 = ((ptr->unk_20[arg2] >> 6) * var_v1) + temp_v0->pp;
     *arg4 = *arg3 + var_v1;
 
     ptr->unk_20[arg2] += var_v1 + 0x40;
@@ -1806,7 +1806,7 @@ void func_88305CDC(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_03
     }
 
     ptr->unk_09[arg2] = func_80022A28(var_a0);
-    ptr->unk_20[arg2] = func_8002ED40(ptr->unk_09[arg2])->unk_05;
+    ptr->unk_20[arg2] = func_8002ED40(ptr->unk_09[arg2])->pp;
 
     if (arg1->unk_00[0]->unk_00 >= 0xC9) {
         func_88317144(arg1);

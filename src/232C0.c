@@ -51,7 +51,7 @@ void func_80022734(unk_func_80026268_arg0* arg0) {
     for (i = 0; i < 4; i++) {
         if (arg0->unk_09[i] != 0) {
             temp_a3 = (arg0->unk_20[i] >> 6) & 3;
-            var_v0 = D_80072B00[arg0->unk_09[i] - 1].unk_05;
+            var_v0 = D_80072B00[arg0->unk_09[i] - 1].pp;
 
             if (var_v0 >= 0x28) {
                 var_v0 = var_v0 + (temp_a3 * 7);

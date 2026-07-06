@@ -807,12 +807,12 @@ void func_84370E78(void) {
 }
 
 void func_84370E80(void) {
-    D_843C5238->unk_44.unk_00 = D_80072B00[D_843C5238->unk_5A - 1].unk_00;
-    D_843C5238->unk_44.unk_01 = D_80072B00[D_843C5238->unk_5A - 1].unk_01;
-    D_843C5238->unk_44.unk_02 = D_80072B00[D_843C5238->unk_5A - 1].unk_02;
-    D_843C5238->unk_44.unk_03 = D_80072B00[D_843C5238->unk_5A - 1].unk_03;
-    D_843C5238->unk_44.unk_04 = D_80072B00[D_843C5238->unk_5A - 1].unk_04;
-    D_843C5238->unk_44.unk_05 = D_80072B00[D_843C5238->unk_5A - 1].unk_05;
+    D_843C5238->unk_44.unk_00 = D_80072B00[D_843C5238->unk_5A - 1].id;
+    D_843C5238->unk_44.unk_01 = D_80072B00[D_843C5238->unk_5A - 1].effect;
+    D_843C5238->unk_44.unk_02 = D_80072B00[D_843C5238->unk_5A - 1].basePower;
+    D_843C5238->unk_44.unk_03 = D_80072B00[D_843C5238->unk_5A - 1].type;
+    D_843C5238->unk_44.unk_04 = D_80072B00[D_843C5238->unk_5A - 1].accuracy;
+    D_843C5238->unk_44.unk_05 = D_80072B00[D_843C5238->unk_5A - 1].pp;
 }
 
 void func_84370F40(void) {
@@ -1517,7 +1517,7 @@ void func_84372670(void) {
                 }
 
                 if (D_8438AC60[0] == 1) {
-                    D_843C5238->unk_44.unk_04 = D_80072B00[D_843C5238->unk_5A - 1].unk_04;
+                    D_843C5238->unk_44.unk_04 = D_80072B00[D_843C5238->unk_5A - 1].accuracy;
                 }
                 func_843708CC();
 

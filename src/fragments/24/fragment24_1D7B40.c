@@ -38,7 +38,7 @@ void func_88309160(s32 arg0, s32 arg1, unk_func_88309160_arg2* arg2, s32 arg3, u
     s32 var_v0;
     char* sp28;
     s32 var_v1;
-    unk_D_80072B00* temp_v0_2;
+    Move* temp_v0_2;
 
     if (arg2 != NULL) {
         sp34 = func_8002ED08(arg2->unk_00);
@@ -59,12 +59,12 @@ void func_88309160(s32 arg0, s32 arg1, unk_func_88309160_arg2* arg2, s32 arg3, u
         if (sp34 != NULL) {
             temp_v0_2 = func_8002ED40(arg2->unk_00);
 
-            var_v1 = temp_v0_2->unk_05 / 5;
+            var_v1 = temp_v0_2->pp / 5;
             if (var_v1 >= 7) {
                 var_v1 = 7;
             }
 
-            new_var = temp_v0_2->unk_05 + (var_v1 * (arg2->unk_04 >> 6));
+            new_var = temp_v0_2->pp + (var_v1 * (arg2->unk_04 >> 6));
             func_8002E5A0((arg5->unk_00.unk_14.unk_00 + arg0) - 0x19, arg1 + 0xC, new_var, 2);
         }
     }

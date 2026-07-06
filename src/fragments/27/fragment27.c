@@ -330,16 +330,16 @@ void func_886015F4(unk_func_88205880_0098_008_040_05C* arg0, s32 arg1, s32 arg2)
 }
 
 s32 func_88601600(unk_func_88205880_0098_008_040_05C* arg0, s32 arg1, s32 arg2) {
-    unk_D_80072B00* temp_v0 = func_8002ED40(arg0->unk_2C);
+    Move* temp_v0 = func_8002ED40(arg0->unk_2C);
     s32 sp18;
     s32 var_v1;
 
     if (temp_v0 != NULL) {
-        var_v1 = temp_v0->unk_05 / 5;
+        var_v1 = temp_v0->pp / 5;
         if (var_v1 >= 7) {
             var_v1 = 7;
         }
-        sp18 = temp_v0->unk_05 + (var_v1 * (arg0->unk_30 >> 6));
+        sp18 = temp_v0->pp + (var_v1 * (arg0->unk_30 >> 6));
         func_8002E5A0(arg1, arg2, arg0->unk_30 & 0x3F, 2);
         func_8002E5A0(arg1 + 0x1B, arg2, sp18, 2);
 
@@ -872,7 +872,7 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
     s32 sp13C;
     s32 sp138;
     ret_func_8002ED08* sp134;
-    unk_D_80072B00* sp130;
+    Move* sp130;
     unk_D_88400138* sp12C;
     char* sp128;
     char* sp124;
@@ -888,7 +888,7 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
 
     sp130 = func_8002ED40(arg0->unk_2C);
     sp134 = func_8002ED08(arg0->unk_2C);
-    sp12C = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))((sp130 == NULL) ? 0 : sp130->unk_03);
+    sp12C = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))((sp130 == NULL) ? 0 : sp130->type);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -950,7 +950,7 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
         s32 sp38;
         s32 sp34;
 
-        sp38 = ((((sp130->unk_04 * 0x64) / 255) + 2) / 5) * 5;
+        sp38 = ((((sp130->accuracy * 0x64) / 255) + 2) / 5) * 5;
         func_8001F324(sp12C->unk_04.r, sp12C->unk_04.g, sp12C->unk_04.b, sp12C->unk_04.a);
         func_8001EBE0(8, 0);
         func_8001F1E8(sp13C + 8, sp138 + 4, func_8002D7C0(NULL, 0, D_8861C518, sp134->unk_00[0] - 1));
@@ -962,7 +962,7 @@ s32 func_88603468(unk_func_88205880_0098_008_058* arg0, s32 arg1, s32 arg2) {
         func_8001F324(D_88605B4C.r, D_88605B4C.g, D_88605B4C.b, D_88605B4C.a);
         func_8001EBE0(4, 0);
 
-        sp34 = sp130->unk_02;
+        sp34 = sp130->basePower;
         if ((arg0->unk_2C == 0x78) || (arg0->unk_2C == 0x99)) {
             sp34 *= 2;
         }

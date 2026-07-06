@@ -439,7 +439,7 @@ ret_func_8002ED08* func_8002ED08(s32 arg0) {
     return &D_80072338[arg0 - 1];
 }
 
-unk_D_80072B00* func_8002ED40(s32 arg0) {
+Move* func_8002ED40(s32 arg0) {
     if ((arg0 <= 0) || (arg0 >= 0xA6)) {
         return NULL;
     }

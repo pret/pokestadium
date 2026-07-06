@@ -223,7 +223,7 @@ void func_82F05F40(unk_D_82F20A10* arg0) {
     s16 temp_s1_2;
     s32 temp_s1_3;
     unk_func_80026268_arg0* sp11C;
-    unk_D_80072B00* ptr;
+    Move* ptr;
     UNUSED s32 pad;
     char sp94[128];
     char* sp8C[2];
@@ -283,12 +283,12 @@ void func_82F05F40(unk_D_82F20A10* arg0) {
             if (func_82F05F20(sp11C->unk_09[i]) == 0) {
                 ptr = &D_80072B00[sp11C->unk_09[i] - 1];
 
-                var_t0 = ptr->unk_05 / 5;
+                var_t0 = ptr->pp / 5;
                 if (var_t0 >= 7) {
                     var_t0 = 7;
                 }
 
-                sp80 = ((sp11C->unk_20[i] >> 6) * var_t0) + ptr->unk_05;
+                sp80 = ((sp11C->unk_20[i] >> 6) * var_t0) + ptr->pp;
                 func_8001CADC(D_82F13C54[i] + arg0->unk_04 + 0xB6, D_82F13C5C[i] + arg0->unk_06 + 6, 8, 0xC, D_302F528,
                               8, 0);
                 func_82F05D74(D_82F13C54[i] + arg0->unk_04 + 0xA4, D_82F13C5C[i] + arg0->unk_06 + 6,
