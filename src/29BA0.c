@@ -779,7 +779,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
     __osSetFpcCsr(0x01000C01U);
 
     Cont_SetupControllers();
-    func_800196DC();
+    StartControllerThread();
 
     main_pool_push_state('GAME');
 

@@ -65,7 +65,7 @@ void func_80019420(MemoryBlock* arg0, arg1_func_80019420* arg1);
 void func_80019484(unk_func_80019600* arg0);
 void func_80019514(unk_func_80019600* arg0);
 void func_80019600(UNUSED void* arg0);
-void func_800196DC(void);
+void StartControllerThread(void);
 unk_D_86002F58_004_000_010* func_80019760(u32 arg0);
 void func_8001987C(void);
 s32 func_800198E4(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2);

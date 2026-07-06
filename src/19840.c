@@ -296,7 +296,7 @@ void func_80019600(UNUSED void* arg0) {
     }
 }
 
-void func_800196DC(void) {
+void StartControllerThread(void) {
     osCreateMesgQueue(&D_800ABE10.unk_9D0, &D_800ABE10.unk_9B0, 8);
     osCreateMesgQueue(&D_800ABE10.unk_9EC, &D_800ABE10.unk_9E8, 1);
     osCreateThread(&D_800ABE10.unk_000, 7, func_80019600, NULL, &D_800ABE10.unk_9B0, 0xA);
