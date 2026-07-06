@@ -27,7 +27,7 @@
 // The codebase uses 1-indexed move IDs throughout, matching the Gen-1
 // national move list (165 moves total). ID 0 is reserved as "no move /
 // invalid". MOVE_BOUNDARY (== MOVE_MAX_ID + 1) is the value used in range
-// checks; e.g. func_8002ED40 rejects move IDs >= MOVE_BOUNDARY.
+// checks; e.g. GetMove rejects move IDs >= MOVE_BOUNDARY.
 // ----------------------------------------------------------------------------
 
 #define MOVE_NONE               0       // invalid / unset / no move

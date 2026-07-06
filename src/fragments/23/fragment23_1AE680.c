@@ -1422,7 +1422,7 @@ s32 func_8820938C(unk_func_8820BE14_02C_070* arg0, s32 arg1, s32 arg2) {
 
     for (i = 0; i < spB0; i++) {
         func_8820927C(D_88217E40[i].unk_00 + arg1, D_88217E40[i].unk_04 + arg2,
-                      func_8002ED08(arg0->unk_002C->unk_000[0].unk_09[i]), D_88217E40[i].unk_08);
+                      GetMoveAnimData(arg0->unk_002C->unk_000[0].unk_09[i]), D_88217E40[i].unk_08);
     }
 
     func_8001F444();

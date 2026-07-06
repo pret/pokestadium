@@ -1194,7 +1194,7 @@ void func_88304490(s32 arg0, s32 arg1, s32 arg2, u8* arg3, s32 arg4) {
     u8* sp18 = &arg3[arg4];
 
     if (arg4 < func_8002ECDC(arg3)) {
-        sp24 = func_8002ED08(sp18[9]);
+        sp24 = GetMoveAnimData(sp18[9]);
         if (sp24 == NULL) {
             sp28 = D_88317278;
             sp2C = " ????? ";
@@ -1770,7 +1770,7 @@ void func_88305BC4(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_03
     Move* temp_v0;
     unk_func_8830867C_02C_0CC_000_008* ptr = &arg0->unk_08;
 
-    temp_v0 = func_8002ED40(ptr->unk_09[arg2]);
+    temp_v0 = GetMove(ptr->unk_09[arg2]);
 
     var_v1 = temp_v0->pp / 5;
     if (var_v1 >= 7) {
@@ -1806,7 +1806,7 @@ void func_88305CDC(unk_func_8830867C_02C_0CC_000* arg0, unk_func_8830867C_04C_03
     }
 
     ptr->unk_09[arg2] = GetMoveType(var_a0);
-    ptr->unk_20[arg2] = func_8002ED40(ptr->unk_09[arg2])->pp;
+    ptr->unk_20[arg2] = GetMove(ptr->unk_09[arg2])->pp;
 
     if (arg1->unk_00[0]->unk_00 >= 0xC9) {
         func_88317144(arg1);
