@@ -784,7 +784,85 @@ void func_81209368(s32 arg0) {
   D_8120EB7C = arg0;
 }
 
+#ifdef NON_MATCHING
+extern s32 D_8120EB84;
+extern s32 D_8120EB8C;
+extern s32 D_8122869C;
+extern s8* D_81228654[];
+extern s32 D_81228678[];
+typedef struct GbMixStream {
+    /* 0x0 */ s32 index;
+    /* 0x4 */ s32 cursor;
+} GbMixStream;
+// Mix the two active GB PCM streams into arg0 stereo s16 pairs (left = A+B,
+// right = A-B). Stream B is scaled by the crossfade gain D_8122869C; a pending
+// stream (D_8120EB7C) is swapped into slot A, pushing A down to B, on entry.
+void func_81209374(s16 arg0, void* arg1, s16 arg2, s16* arg3) {
+    GbMixStream* pend = (GbMixStream*) &D_8120EB7C;
+    GbMixStream* chA = (GbMixStream*) &D_8120EB84;
+    GbMixStream* chB = (GbMixStream*) &D_8120EB8C;
+    s16* out = arg1;
+    s8* baseA = NULL;
+    s8* baseB = NULL;
+    s32 lenA = 0;
+    s32 lenB = 0;
+    s32 gain;
+    s32 i;
+
+    if (pend->index != 0) {
+        s32 pendIdx = pend->index;
+        s32 oldIndex = chA->index;
+        s32 oldCursor = chA->cursor;
+
+        chA->cursor = 0;
+        pend->index = 0;
+        chB->index = oldIndex;
+        chB->cursor = oldCursor;
+        chA->index = pendIdx;
+        D_8122869C = 0x400;
+    }
+    gain = D_8122869C;
+
+    if (chA->index != 0) {
+        baseA = D_81228654[chA->index];
+        lenA = D_81228678[chA->index];
+    }
+    if (chB->index != 0) {
+        baseB = D_81228654[chB->index];
+        lenB = D_81228678[chB->index];
+    }
+
+    for (i = 0; i < arg0; i++) {
+        s32 sampleA = 0;
+        s32 sampleB = 0;
+
+        if (baseA != NULL) {
+            if (lenA == chA->cursor) {
+                chA->index = 0;
+                baseA = NULL;
+            } else {
+                sampleA = baseA[chA->cursor];
+                chA->cursor++;
+            }
+        }
+        if (baseB != NULL) {
+            if (lenB == chB->cursor) {
+                chB->index = 0;
+                baseB = NULL;
+            } else {
+                sampleB = (baseB[chB->cursor] * gain) / 1024;
+                chB->cursor++;
+            }
+        }
+
+        out[0] = (sampleA + sampleB) << 6;
+        out[1] = (sampleA - sampleB) << 6;
+        out += 2;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81209374.s")
+#endif
 
 void func_81209688(UNUSED s32 arg0) {
 }
