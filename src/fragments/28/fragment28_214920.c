@@ -1,4 +1,5 @@
 #include "fragment28.h"
+#include "include/pokemon.h"
 #include "src/12D80.h"
 #include "src/19840.h"
 #include "src/1AB70.h"
@@ -236,19 +237,19 @@ void func_88800E20(unk_func_888044BC_038_02C* arg0, s32 arg1, s32 arg2, s32 arg3
     arg0->unk_00.unk_44->unk_00.unk_14.unk_00 = 0xF6;
     arg0->unk_00.unk_44->unk_00.unk_14.unk_02 = 0x1E;
 
-    sp40 = mem_pool_alloc(arg5, sizeof(unk_D_8006FF00*) * 151);
-    for (i = 0; i < 151; i++) {
+    sp40 = mem_pool_alloc(arg5, sizeof(unk_D_8006FF00*) * NATIONAL_DEX_COUNT);
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++) {
         sp40[i] = &D_8006FF00[i];
     }
 
-    func_8002CBB0(&arg0->unk_70, sp40, 151, 151);
+    func_8002CBB0(&arg0->unk_70, sp40, NATIONAL_DEX_COUNT, NATIONAL_DEX_COUNT);
 
-    sp3C = mem_pool_alloc(arg5, sizeof(unk_D_8006FF00*) * 151);
-    for (i = 0; i < 151; i++) {
+    sp3C = mem_pool_alloc(arg5, sizeof(unk_D_8006FF00*) * NATIONAL_DEX_COUNT);
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++) {
         sp3C[D_88808150[i]] = &D_8006FF00[i];
     }
 
-    func_8002CBB0(&arg0->unk_7C, sp3C, 151, 151);
+    func_8002CBB0(&arg0->unk_7C, sp3C, NATIONAL_DEX_COUNT, NATIONAL_DEX_COUNT);
 
     ((func88506F1C)Memmap_GetFragmentVaddr(func_88506F1C))(&arg0->unk_00, &arg0->unk_70, arg5);
 
@@ -6256,7 +6257,7 @@ void func_88804288(void) {
 s32 func_8880431C(void) {
     s32 i;
 
-    for (i = 151; i > 0; i--) {
+    for (i = NATIONAL_DEX_COUNT; i > 0; i--) {
         if (func_8002564C(D_88826938, i) != 0) {
             break;
         }
