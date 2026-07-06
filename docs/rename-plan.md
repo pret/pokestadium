@@ -71,10 +71,70 @@ campaign. **Do not relax this rule, ever.**
 - `asm/us/*.s` — pure asm
 - Anything behind `#ifdef NON_MATCHING` — not byte-matching yet
 - `hasm` segments (boot, Yay0, 49190, 517A0, abs)
-- `linker_scripts/us/symbol_addrs*.txt` — pins addresses; the name
-  change is link-invisible, **do not edit them**
+- `linker_scripts/us/{hardware_regs,unused_syms}.ld` and `linker_scripts/auto/` — not symbol declarations
 - Python matching tools (`progress.py`, `tools/first_diff.py`, `./diff.py`)
   — superseded by the Rust toolkit
+
+> **Note on `linker_scripts/us/symbol_addrs.txt` and `undefined_syms.ld`:**
+> these DO contain symbol declarations that must be updated for any
+> function or global-variable rename. See "Linker-script propagation"
+> below. Earlier versions of this plan said "do not edit them" — that
+> rule was wrong (caught during the `D_80070F84 → gSpeciesBaseStats`
+> rename, where missing the linker-script edit produced an undefined
+> reference at link time).
+
+## Linker-script propagation (function + global-var renames)
+
+Both `linker_scripts/us/symbol_addrs.txt` and `linker_scripts/us/undefined_syms.ld`
+contain **symbol declarations** of the form:
+
+```
+D_80070F84 = 0x80070F84;
+```
+
+This is not just an address pin — it tells the linker to **create a
+symbol with the name `D_80070F84` at address `0x80070F84`**. The symbol
+name MUST match the C `extern` declaration that references it, or the
+link fails with `undefined reference to <new_name>`.
+
+**Rule:** if the symbol being renamed is declared in `symbol_addrs.txt`
+or `undefined_syms.ld`, the rename commit **must** also update that
+declaration. The address value (`0x80070F84` in the example) is
+preserved — only the LHS name changes:
+
+```diff
+- D_80070F84 = 0x80070F84;
++ gSpeciesBaseStats = 0x80070F84;
+```
+
+**Detection** (before committing a rename):
+
+```bash
+# For an old symbol name like D_80070F84 or func_80010FA0:
+rg -n '^\s*\b<old>\b\s*=' linker_scripts/us/
+# If that returns hits, the rename MUST propagate to those files.
+```
+
+**What does NOT need updating** (these are not symbol declarations):
+
+- `linker_scripts/us/hardware_regs.ld` — hardware MMIO address defines
+- `linker_scripts/us/unused_syms.ld` — list of intentionally-unused symbols
+- `linker_scripts/us/auto/undefined_syms_auto.ld` — generated from splat, do not hand-edit
+- `linker_scripts/us/auto/undefined_funcs_auto.ld` — generated, do not hand-edit
+- `linker_scripts/us/symbol_addrs*.txt` — only the lines matching
+  `<old> = 0x…;` need updating; do not touch other entries.
+- `linker_scripts/us/pokestadium.ld` — memory layout, not symbol declarations
+
+**Rust tool support** (`ps-rename-check` should grow this mode):
+
+```bash
+# New: verify the rename propagated to all linker-script declarations.
+ps-rename-check <old> <new>
+# Should exit non-zero if:
+#   - <old> still appears as a declaration in symbol_addrs.txt / undefined_syms.ld
+#   - <new> is missing as a declaration in those files
+# Should exit 0 only when every linker-script declaration is consistent.
+```
 
 ---
 
@@ -115,16 +175,21 @@ build map. Indirect calls through function pointers get flagged with
 
 ### `ps-rename-check` (new binary)
 
-New crate at `tools/rust/crates/ps-rename-check/`. ~80 lines. Reuses
+New crate at `tools/rust/crates/ps-rename-check/`. ~120 lines. Reuses
 `ps-core::globalasm` and `ps-core::mapfile` — does not reinvent them.
 
 ```bash
-# Verifies a single rename is complete and the build is still matching.
+# Verifies a single rename is complete, the linker scripts are
+# consistent, and the build is still matching.
 # Exits 0 only if ALL hold:
 #   (a) zero stragglers of <old> remain in src/ include/
 #       other than the rename commit's definition;
-#   (b) `make` produced md5 ed1378bc…;
-#   (c) `ps-firstdiff` exits 0.
+#   (b) zero <old> = 0x…; lines remain in
+#       linker_scripts/us/{symbol_addrs.txt,undefined_syms.ld};
+#   (c) exactly one <new> = 0x…; line exists in those files
+#       (or zero, if the symbol wasn't linker-declared);
+#   (d) `make` produced md5 ed1378bc…;
+#   (e) `ps-firstdiff` exits 0.
 # Exits 1 if any check fails. Exits 2 on tool error.
 ps-rename-check <old> <new>
 ```
@@ -162,23 +227,32 @@ function, in the same commit.
 4. Update declaration:
      src/<file>.h                       # if file-scoped
      include/functions.h                # if cross-file
-5. Update definition in src/<file>.c.
-6. Update every callsite:
+5. Check linker scripts (see "Linker-script propagation" above):
+     rg -n '^\s*\b<old>\b\s*=' linker_scripts/us/
+   If non-empty, update each hit in the SAME commit:
+     <old> = 0x…;   →   <new> = 0x…;
+6. Update definition in src/<file>.c.
+7. Update every callsite:
      rg -n '\b<old_name>\b' src include
    Must show 1 occurrence (the definition) or 0 (extern-only).
-7. make                                 # md5 must match
-8. ps-firstdiff                         # exits 0
-9. ps-rename-check <old> <new>          # one-shot: 1+7+8
-10. python3 format.py src/<file>.c      # formatter stays Python
-11. Commit (template below).
+8. make                                 # md5 must match
+9. ps-firstdiff                         # exits 0
+10. ps-rename-check <old> <new>          # one-shot: 1+8+9
+11. python3 format.py src/<file>.c      # formatter stays Python
+12. Commit (template below).
 ```
 
 ### Global variable
 
-Declaration in `include/variables.h` or `src/<file>.h`. Address is
-pinned in `linker_scripts/us/symbol_addrs*.txt` — **leave those alone**,
-the name change is link-invisible, md5 still matches. Workflow same
-as function but step 6 must scan `include/` and `src/`.
+Declaration in `include/variables.h` or `src/<file>.h`. **The same
+linker-script check applies** as for functions (step 5 above): if
+`<old> = 0x…;` appears in `linker_scripts/us/symbol_addrs.txt` or
+`linker_scripts/us/undefined_syms.ld`, the rename MUST propagate to
+those files in the same commit. Address values preserved; only the
+LHS name changes.
+
+Otherwise the workflow is the same as functions, except step 7
+(straggler check) must scan both `include/` and `src/`.
 
 ### Struct field
 
