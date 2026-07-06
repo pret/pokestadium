@@ -104,7 +104,25 @@ u32 func_812073B8(u16 arg0) {
   return temp;
 }
 
+#ifdef NON_MATCHING
+extern u16 D_8120EAD4[];
+extern u32 D_8120EB48[];
+extern s32 D_8122EE98;
+extern f32 D_8122B0A8;
+extern f32 D_8122B0AC;
+// Map a (row, col, tile) triple to a GB tile-data byte offset (D_8122EE98) and a
+// palette index (D_8120EAC8), returning the scaled screen coordinate for the tile.
+u32 func_81207494(s32 arg0, s32 arg1, s32 arg2) {
+    s32 col = arg0 & 0xFFFF;
+    s32 row = arg1 & 0xFFFF;
+
+    D_8122EE98 = ((row * 0x10) + col) << 0xE;
+    D_8120EAC8 = D_8120EAD4[(col * 2) + row];
+    return (u32) (((f32) (s32) (f32) D_8120EB48[arg2 & 0xFFFF] / D_8122B0A8) * D_8122B0AC);
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207494.s")
+#endif
 
 s32 func_812075C0(s32);
 #ifdef NON_MATCHING
