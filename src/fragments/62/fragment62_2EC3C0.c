@@ -261,7 +261,7 @@ void func_843021E8(unk_D_84390010* arg0, u16 arg1, unk_D_84390010_94C* arg2, unk
     s32 temp_v0_3;
     s32 temp_v1_2;
     u8 var_a0;
-    unk_D_80070F84* temp_s4; //TODO: this is definitely typed wrong
+    PokemonStatsExtended* temp_s4; //TODO: this is definitely typed wrong
     unk_D_800FCB18* temp_s5;
 
     temp_s5 = &arg0->unk_654.unk_38;

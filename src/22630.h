@@ -31,7 +31,7 @@ typedef struct PokemonStats {
     /* 0x14 */ char unk14[0x3];
 } PokemonStats; // size = 0x17
 
-typedef struct unk_D_80070F84 {
+typedef struct PokemonStatsExtended {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
@@ -48,10 +48,10 @@ typedef struct unk_D_80070F84 {
     /* 0x10 */ char unk10[0x3];
     /* 0x13 */ u8 unk_13;
     /* 0x14 */ char unk14[0x3];
-} unk_D_80070F84; // size = 0x17
+} PokemonStatsExtended; // size = 0x17
 
-extern PokemonStats D_80070F84[];
-extern unk_D_80070F84 D_80070FA0[]; //TODO: is this typed correctly?
+extern PokemonStats gSpeciesBaseStats[];
+extern PokemonStatsExtended D_80070FA0[]; //TODO: is this typed correctly?
 
 typedef struct unk_D_80071D88 {
     /* 0x00 */ char* type_name;

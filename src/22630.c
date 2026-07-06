@@ -241,19 +241,19 @@ u32 CalculateStatValue(s32 statId, s32 speciesId, u16 statModifier, u16 level, u
 
     switch (statId) {
         case STAT_HP:
-            baseStat = D_80070F84[speciesId].baseHP;
+            baseStat = gSpeciesBaseStats[speciesId].baseHP;
             break;
         case STAT_SPECIAL:
-            baseStat = D_80070F84[speciesId].baseSpecial;
+            baseStat = gSpeciesBaseStats[speciesId].baseSpecial;
             break;
         case STAT_SPEED:
-            baseStat = D_80070F84[speciesId].baseSpeed;
+            baseStat = gSpeciesBaseStats[speciesId].baseSpeed;
             break;
         case STAT_DEFENSE:
-            baseStat = D_80070F84[speciesId].baseDefense;
+            baseStat = gSpeciesBaseStats[speciesId].baseDefense;
             break;
         case STAT_ATTACK:
-            baseStat = D_80070F84[speciesId].baseAttack;
+            baseStat = gSpeciesBaseStats[speciesId].baseAttack;
             break;
     }
 
@@ -304,7 +304,7 @@ u16 func_8002240C(s32 arg0, s32 arg1, u16 arg2, u16 arg3, u16 arg4) {
 u32 func_800224B8(s32 arg0, u16 arg1) {
     u32 sp4;
 
-    switch (D_80070F84[arg0].unk_13) {
+    switch (gSpeciesBaseStats[arg0].unk_13) {
         case 0:
             sp4 = arg1 * arg1 * arg1;
             break;

@@ -43,7 +43,7 @@ typedef struct unk_D_88605B00 {
 s32 func_88600020(s32 arg0, s32 arg1) {
     s32 sp4;
 
-    switch (D_80070F84[arg0].unk_13) {
+    switch (gSpeciesBaseStats[arg0].unk_13) {
         case 0:
             sp4 = arg1 * arg1 * arg1;
             break;
