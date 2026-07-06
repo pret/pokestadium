@@ -66,5 +66,5 @@ unk_D_88400100* func_8840007C(unk_func_80026268_arg0* arg0) {
 }
 
 unk_D_88400138* func_884000C4(s32 arg0) {
-    return &D_88400138[func_8002EDEC(arg0)];
+    return &D_88400138[RemapFlagIndex(arg0)];
 }

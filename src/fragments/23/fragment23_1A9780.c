@@ -1301,7 +1301,7 @@ s32 func_88204EE8(unk_func_88203ED8* arg0) {
 
     for (i = 0; i < 12; i++) {
         if ((var_s1[i]->unk_694 != 0x21) || (i != var_s1[i]->unk_698)) {
-            if ((var_s1[i]->unk_690 != 0) || (func_8002EE1C(0x21, temp_s3, i) != 0)) {
+            if ((var_s1[i]->unk_690 != 0) || (ApplyMoveSecondaryEffect(0x21, temp_s3, i) != 0)) {
                 var_s2 |= 2;
                 var_s1[i]->unk_69C = 1;
             }
@@ -1318,7 +1318,7 @@ s32 func_88204EE8(unk_func_88203ED8* arg0) {
 
     for (i = 0; i < 12; i++) {
         if ((var_s1[i]->unk_694 != 0x11) || (i != var_s1[i]->unk_698)) {
-            if ((var_s1[i]->unk_690 != 0) || (func_8002EE1C(0x11, 0, i) != 0)) {
+            if ((var_s1[i]->unk_690 != 0) || (ApplyMoveSecondaryEffect(0x11, 0, i) != 0)) {
                 var_s2 |= 4;
                 var_s1[i]->unk_69C = 1;
             }

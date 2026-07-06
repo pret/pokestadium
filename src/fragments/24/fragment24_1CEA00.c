@@ -1169,7 +1169,7 @@ void func_88304350(s32 arg0, s32 arg1, s32 arg2, u8* arg3, s32 arg4) {
             return;
         }
     } else {
-        sp28 = func_8002ED78(arg3, arg4);
+        sp28 = GetSpeciesType(arg3, arg4);
         if (sp28 != -1) {
             sp2C = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(sp28)->unk_04;
             sp20 = func_8002D7C0(NULL, 0, D_8831A4D4, func_800219FC(sp28));

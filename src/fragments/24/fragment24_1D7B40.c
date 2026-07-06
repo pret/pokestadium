@@ -1937,7 +1937,7 @@ void func_8830EE58(unk_func_8830867C_03C* arg0, unk_func_8830867C_02C_C54_01C* a
             arg0->unk_30[i].unk_00->unk_30 =
                 ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(arg0->unk_30[i].unk_04)->unk_04;
             arg0->unk_30[i].unk_00->unk_44 = arg0->unk_30[i].unk_00->unk_44;
-            arg0->unk_54->unk_00.unk_34[func_8002EDEC(arg0->unk_30[i].unk_04)] |= 2;
+            arg0->unk_54->unk_00.unk_34[RemapFlagIndex(arg0->unk_30[i].unk_04)] |= 2;
         } else {
             arg0->unk_30[i].unk_04 = -1;
             var_s3 = "----";
@@ -2083,7 +2083,7 @@ s32 func_8830F2A0(unk_func_8830867C_03C_04C* arg0, Controller* arg1) {
                 } else {
                     if (arg0->unk_24->unk_30[arg0->unk_24->unk_50->unk_24].unk_04 != -1) {
                         arg0->unk_24->unk_54->unk_00
-                            .unk_34[func_8002EDEC(arg0->unk_24->unk_30[arg0->unk_24->unk_50->unk_24].unk_04)] &= ~2;
+                            .unk_34[RemapFlagIndex(arg0->unk_24->unk_30[arg0->unk_24->unk_50->unk_24].unk_04)] &= ~2;
                     }
                     arg0->unk_24->unk_54->unk_00.unk_34[arg0->unk_24->unk_54->unk_00.unk_38] |= 2;
 

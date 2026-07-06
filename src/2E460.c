@@ -446,7 +446,7 @@ Move* GetMove(s32 arg0) {
     return &gMoves[arg0 - 1];
 }
 
-s32 func_8002ED78(unk_func_80026268_arg0* arg0, s32 arg1) {
+s32 GetSpeciesType(unk_func_80026268_arg0* arg0, s32 arg1) {
     s32 temp_v0 = arg0->unk_00.unk_00 - 1;
     s32 var_v1;
 
@@ -461,7 +461,7 @@ s32 func_8002ED78(unk_func_80026268_arg0* arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 func_8002EDEC(s32 arg0) {
+s32 RemapFlagIndex(s32 arg0) {
     s32 ret;
 
     if (arg0 >= 0x14) {
@@ -475,7 +475,7 @@ s32 func_8002EDEC(s32 arg0) {
     return ret;
 }
 
-s32 func_8002EE1C(s32 arg0, s32 arg1, s32 arg2) {
+s32 ApplyMoveSecondaryEffect(s32 arg0, s32 arg1, s32 arg2) {
     s32 sp1C;
 
     switch (arg0) {

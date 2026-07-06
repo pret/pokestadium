@@ -2094,7 +2094,7 @@ s32 func_8820B178(unk_func_8820BE14_06C_000* arg0, s32 arg1, s32 arg2, s32 arg3)
 
     arg0->unk_00 = 0;
 
-    if (func_8002EE1C(arg1, arg2, arg3) != arg0->unk_04.unk_08) {
+    if (ApplyMoveSecondaryEffect(arg1, arg2, arg3) != arg0->unk_04.unk_08) {
         arg0->unk_00 = 1;
         sp90 = 1;
     } else {

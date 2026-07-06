@@ -278,7 +278,7 @@ s32 func_886011F4(unk_func_88205880_0098_008_040_03C* arg0, s32 arg1, s32 arg2) 
     sp6C = GetMoveAnimData(arg0->unk_2C);
     if (sp6C != NULL) {
         unk_D_88400138* sp68 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(sp6C->category);
-        s32 temp_v0_2 = func_8002EDEC(sp6C->category);
+        s32 temp_v0_2 = RemapFlagIndex(sp6C->category);
 
         gDPPipeSync(gDisplayListHead++);
 
@@ -520,7 +520,7 @@ s32 func_88601DF0(unk_func_88205880_0098_008_048* arg0, s32 arg1, s32 arg2) {
         char sp50[4];
 
         for (i = 0; i < 2; i++) {
-            tmp = func_8002ED78(arg0->unk_2C, i);
+            tmp = GetSpeciesType(arg0->unk_2C, i);
             if (tmp != -1) {
                 temp_v0_3 = ((func884000C4)Memmap_GetFragmentVaddr(func_884000C4))(tmp);
                 sp68 = temp_v0_3->unk_04;
