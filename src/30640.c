@@ -280,28 +280,20 @@ s32 func_8002FF8C(s32 arg0) {
     return 0;
 }
 
-#ifdef NON_MATCHING
 s32 func_80030010(s32 arg0, unk_D_86002F34_00C* arg1) {
-    s32* src;
-    s32* dst;
+    s32 pad;
+    unk_D_83403C60_050_00C* src;
 
     if (arg0 == 2) {
-        src = (s32*)((u8*)D_80075F84->unk_18 + 0x50);
+        src = (unk_D_83403C60_050_00C*)((u8*)D_80075F84->unk_18 + 0x50);
         func_80011DAC(arg1, 0, 0, D_80075F84->unk_04, D_80075F84->unk_06);
         func_80011E68(arg1, func_8002FF3C(D_80075F84->unk_18), 20.0f, 10000.0f);
-        dst = (s32*)((u8*)arg1 + 0xA8);
-        dst[0] = src[0];
-        dst[1] = src[1];
-        dst[2] = src[2];
-        dst[3] = src[3];
-        dst[4] = src[4];
-        dst[5] = src[5];
+        ((unk_D_83403C60_050_00C*)((u8*)arg1 + 0xA8))[0] = src[0];
+        ((unk_D_83403C60_050_00C*)((u8*)arg1 + 0xA8))[1] = src[1];
+        pad = 0;
     }
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/30640/func_80030010.s")
-#endif
 
 #ifdef NON_MATCHING
 s32 func_800300CC(s32 arg0, unk_D_86002F34_00C* arg1) {

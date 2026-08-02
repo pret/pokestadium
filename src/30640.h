@@ -49,6 +49,12 @@ typedef struct unk_D_83403C60 {
     /* 0x8A */ char unk8A[0x2];
 } unk_D_83403C60; // size = 0x8C
 
+typedef struct unk_D_83403C60_050_00C {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+} unk_D_83403C60_050_00C; // size = 0xC
+
 typedef struct unk_D_83406EB0 {
     /* 0x00 */ char unk00[0x6C];
     /* 0x6C */ u8 unk_6C;
