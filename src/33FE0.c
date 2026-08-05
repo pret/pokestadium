@@ -311,10 +311,7 @@ void func_800338D8(StadiumModel*, MtxF* mtx);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033B2C.s")
 
-void func_80033D1C(s32 arg0) {
-    func_800338D8();
-    func_800357F4(arg0);
-}
+#pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D1C.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D44.s")
 
