@@ -887,61 +887,37 @@ void func_8004473C(void) {
     D_800FCE40[1] = 0xFF;
 }
 
-#ifdef NON_MATCHING
 void func_800448B4(u8 arg0) {
-    s32 sp1C = arg0;
-    s32 temp_a0;
-    u8 var_a1;
-    s32 var_a3;
-    unk_D_800FC6D4_008* var_t0;
-    unk_D_800FC6D4_008* var_t1;
-    u32 var_a2;
-    u8 temp_t3;
+    u32 i;
+    u8 x;
+    u8 temp;
     u8 temp_v1;
-    u8* temp_t9;
-    u8* temp_v0;
-    u32 tmp;
-    s32 tmp2;
-    s32 i;
-    u8* tmp3;
 
-    var_t0 = D_800FCEC8;
-    tmp2 = var_t0->unk_04;
-    tmp = ((tmp2 >> 6) & 3) & 0xFF;
-    var_a1 = tmp2 & 0xF;
-    var_a2 = 0;
-    var_a3 = 0;
-
-    while (true) {
-        D_800FCD48[var_a1] = sp1C + 1;
-        if (var_a1 >= 3) {
-            D_800FCD58[var_a1] |= 4;
+    temp_v1 = ((unk_D_800FC6D4_008*)D_800FCEC8)->unk_04;
+    temp = (temp_v1 >> 6) & 3;
+    x = temp_v1 & 0xF;
+    i = 0;
+    while (1) {
+        D_800FCD48[x] = arg0 + 1;
+        if (x >= 3) {
+            D_800FCD58[x] |= 4;
         }
-        var_a2++;
 
-        D_800FCE88[var_a1] = D_800FCE48[var_a1] = var_t0->unk_00;
-
-        var_a3 += 8;
-        if (tmp < var_a2) {
+        D_800FCE48[x] = ((unk_D_800FC6D4_008*)D_800FCEC8 + i)->unk_00;
+        D_800FCE88[x] = D_800FCE48[x];
+        i++;
+        
+        if (i > temp) {
             break;
         }
-
-        // var_t0 = &D_800FCEC8[var_a2];
-        var_t0 = (u8*)D_800FCE48 + var_a3;
-        var_a1 = var_t0->unk_04 & 0xF;
+        x = ((unk_D_800FC6D4_008*)D_800FCEC8 + i)->unk_04 & 0xF;
     }
 
-    if ((sp1C >= D_800785A0) && (sp1C < D_800785A4)) {
-        // tmp3[4] = tmp3[5] = tmp3[6] = tmp3[7] = sp1C + 1;
-
-        for (i = 0; i < 4; i++) {
-            D_800FCD48[4 + i] = sp1C + 1;
-        }
-        // D_800FCD48[4] = sp1C + 1;
-        // D_800FCD48[5] = sp1C + 1;
-        // D_800FCD48[6] = sp1C + 1;
-        // D_800FCD48[7] = sp1C + 1;
-
+    if ((arg0 >= D_800785A0) && (arg0 < D_800785A4)) {
+        D_800FCD48[4] = arg0 + 1;
+        D_800FCD48[5] = arg0 + 1;
+        D_800FCD48[6] = arg0 + 1;
+        D_800FCD48[7] = arg0 + 1;
         D_800FCE48[6] = &D_800785B8;
         if (D_800FCE40[0] == 0) {
             D_800FCE40[0] = func_80049890(0xFF24);
@@ -949,9 +925,6 @@ void func_800448B4(u8 arg0) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/435D0/func_800448B4.s")
-#endif
 
 s32 func_800449F8(void) {
     s32 ret = 0;

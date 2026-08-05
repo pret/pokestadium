@@ -311,7 +311,10 @@ void func_800338D8(StadiumModel*, MtxF* mtx);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033B2C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D1C.s")
+void func_80033D1C(s32 arg0) {
+    func_800338D8();
+    func_800357F4(arg0);
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D44.s")
 
@@ -552,31 +555,29 @@ void func_80035538(Vec3s* a, Vec3s* b) {
     sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
-#ifdef NON_MATCHING
-void func_800355A8(Vec3f* from, Vec3f* to, f32 currentTime, f32 deltaTime) {
-    f32 sp14;
-    f32 temp_ft4;
-    f32 temp_fv1;
-    f32 scale;
+void func_800355A8(Vec3f* arg0, Vec3f* to, f32 currentTime, f32 deltaTime, f32 scale) {
+    s32 pad;
+    f32 temp_fv0;
+    f32 temp_fa1;
+    f32 temp_ft5;
 
     if (deltaTime < D_8007C5DC) {
         return;
     }
-    temp_ft4 = to->y;
-    temp_fv1 = to->x;
-    sp14 = to->z;
-    scale = ((currentTime - deltaTime) / deltaTime);
+
+    temp_fv0 = to->x - arg0->x;
+    temp_fa1 = to->y - arg0->y;
+    temp_ft5 = to->z - arg0->z;
+
+    scale *= (currentTime - deltaTime) / deltaTime;
     if (deltaTime < currentTime) {
-        scale *= 0.5f;
+        scale /= 2.0f;
     }
-    to->x = (f32) (temp_fv1 + ((temp_fv1 - from->x) * scale));
-    to->y = (f32) (temp_ft4 + ((temp_ft4 - from->y) * scale));
-    to->z = (f32) (sp14 + ((sp14 - from->z) * scale));
+
+    to->x += temp_fv0 * scale;
+    to->y += temp_fa1 * scale;
+    to->z += temp_ft5 * scale;
 }
-#else
-void func_800355A8(Vec3f*, Vec3f*, f32, f32);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_800355A8.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_80035660(PosBlend* src, PosBlend* dst, f32 totalTime, f32 elapsed, f32 stiffness) {

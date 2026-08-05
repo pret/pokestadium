@@ -1447,20 +1447,20 @@ u8* func_8003A744(u8* arg0) {
     return arg0;
 }
 
-#ifdef NON_MATCHING
 s32 func_8003A78C(void* arg0) {
-    s32 i;
-    UNUSED s32 pad4[1];
+    f64 pad64;
     f32 spA4;
-    UNUSED s32 pad[4];
+    s32 pad[4];
     ALVoiceConfig sp8C;
-    UNUSED s32 pad2[3];
-    UNUSED s32 pad3[1];
+    s32 pad2[3];
+    s32 pad3[1];
+    s32 pad4[1];
     f32 var_fs0;
-    s32 temp_s3;
     u32 var_s4;
     u32 temp_s1;
+    s32 temp_s3;
     s32 var_s2;
+    s32 i;
     unk_D_800FC7D0* ptr;
 
     if (D_80077C90 > 0) {
@@ -1552,11 +1552,11 @@ s32 func_8003A78C(void* arg0) {
             var_s2 = ((ptr->unk_0D1 * ptr->unk_0C4) >> 7) & 0x7F;
         }
 
-        var_s4 = ptr->unk_008 - ptr->unk_028;
-        ptr->unk_0BE = var_s4 >> 8;
-
         temp_s1 = ptr->unk_0E3;
-        temp_s1 += (((0x80 - temp_s1) * ptr->unk_0E2) >> 7);
+        temp_s1 += (((128 - temp_s1) * ptr->unk_0E2) / 128);
+
+        ptr->unk_0BE = (u32)(ptr->unk_008 - ptr->unk_028) / 256;
+
 
         if (ptr->unk_0E1 != 0) {
             if (var_fs0 != 0.0f) {
@@ -1587,14 +1587,14 @@ s32 func_8003A78C(void* arg0) {
             ptr->unk_148->unk_2A = ptr->unk_0D7;
             ptr->unk_148->unk_28 = ptr->unk_0E0;
 
-            if (ptr->unk_068 >= 0x80) {
+            if (ptr->unk_068 >= 128) {
                 sp8C.priority = 0x7F;
             } else {
                 sp8C.priority = ptr->unk_068;
             }
 
-            sp8C.unityPitch = 0;
             sp8C.fxBus = 0;
+            sp8C.unityPitch = 0;
             n_alSynAllocVoice(&ptr->unk_148->voice, &sp8C);
 
             ptr->unk_0B4 = temp_s3;
@@ -1602,7 +1602,7 @@ s32 func_8003A78C(void* arg0) {
             ptr->unk_0E4 = temp_s1;
 
             if (var_fs0 == 0.0f) {
-                var_fs0 = func_8003BBA4(ptr->unk_050 * 0.0833333333333333287);
+                var_fs0 = func_8003BBA4(ptr->unk_050 * (5.0 / 60.0));
                 if (var_fs0 > 2.0) {
                     var_fs0 = 2.0f;
                 }
@@ -1626,9 +1626,6 @@ s32 func_8003A78C(void* arg0) {
 
     return D_800FC7D8;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/38BB0/func_8003A78C.s")
-#endif
 
 void func_8003AD58(unk_D_800FC7D0* arg0) {
     s32 pad[2];
