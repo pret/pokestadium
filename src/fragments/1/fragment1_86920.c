@@ -98,7 +98,6 @@ void func_81207078(unk_func_81206FA0* arg0, s32 arg1, s32 arg2) {
   arg0->unk_0C = 0;
 }
 
-#ifdef NON_MATCHING
 void func_812070A0(void) {
     unk_D_81231450* var_v0;
     unk_D_81234650* var_v0_2;
@@ -164,6 +163,3 @@ loop_9:
         var_s1 += 4;
     } while (*var_s1 != &D_812346EC);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86920/func_812070A0.s")
-#endif
