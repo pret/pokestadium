@@ -4,7 +4,10 @@ Pure-python port of SubDrag's CMORTDecoder (N64 Sound Tool, public domain
 decode-only release), which is a register-level reconstruction of the MIPS
 codec Pokemon Stadium uses for the announcer / voice clips.
 
-usage (self-check):  python3 tools/mort_audio.py [baserom]
+The encode half (MortWriter) re-packs coded fields; it is not an encoder --
+see tools/audio/inject_mort.py for what that is enough to do.
+
+usage (self-check):  python3 tools/audio/mort_audio.py [baserom]
 """
 
 import struct
@@ -41,12 +44,17 @@ def mul15(x, y):
 
 
 class MortDecoder:
-    """One MORT stream.  Call decode() after construction."""
+    """One MORT stream.  Call decode() after construction.
 
-    def __init__(self, rom, address):
+    With record=True every bit field read is appended to self.fields as
+    (value, width) in read order, which is all MortWriter needs to re-pack
+    the same stream."""
+
+    def __init__(self, rom, address, record=False):
         self.rom = rom              # whole ROM (bytes)
         self.address = address      # MORT start; must be 0x1000-aligned
         self.pcm = []               # decoded samples as u16
+        self.fields = [] if record else None
         self.frame_count = struct.unpack_from(">H", rom, address + 4)[0]
         self.sample_rate = struct.unpack_from(">H", rom, address + 6)[0]
         self.word_count = be32(rom, address + 8)
@@ -90,6 +98,7 @@ class MortDecoder:
         if bitsleft >= n + 1:
             v = cur & ((1 << n) - 1)
             cur >>= n
+            self._record(v, n)
             return v, cur, bitsleft - n
         t6 = 1 << bitsleft
         t9 = t6 - 1
@@ -106,7 +115,12 @@ class MortDecoder:
             t8 = ((cur & t9) << bitsleft) & 0xFFFFFFFF
             retval = (retval | t8) & 0xFFFF
         cur = cur >> (n - bitsleft)
+        self._record(retval, n)
         return retval, cur, bitsleft + (0x20 - n)
+
+    def _record(self, value, width):
+        if self.fields is not None:
+            self.fields.append((value, width))
 
     # ---- helpers called from the frame decoder -----------------------
     def _f48590(self, spc8, off, stack2, sp60):
@@ -399,6 +413,59 @@ class MortDecoder:
         return self.pcm
 
 
+class MortWriter:
+    """Packs coded fields back into a MORT blob.
+
+    This is the wire format only: the caller supplies the coded fields
+    (value, width) in the order the decoder reads them, e.g. from
+    MortDecoder(record=True).  Picking fields that make the result sound like
+    some target PCM is the analysis half, so... not implemented."""
+
+    HEADER_BITS = 96        # the 12-byte container header, skipped by the reader
+
+    def __init__(self):
+        self.bits = 0
+        self.nbits = self.HEADER_BITS
+
+    def write(self, value, width):
+        self.bits |= (value & ((1 << width) - 1)) << self.nbits
+        self.nbits += width
+
+    def write_silence(self, frames):
+        """Code `frames` null frames -- mode bit 1 plus a 4-bit run length of
+        1..16, repeated.  The one frame class that is trivially invertible."""
+        while frames > 0:
+            n = min(frames, 16)
+            self.write(1, 1)
+            self.write(n - 1, 4)
+            frames -= n
+
+    def blob(self, frame_count, sample_rate):
+        nwords = (self.nbits + 31) // 32
+        body = b"".join(struct.pack(">I", (self.bits >> (32 * k)) & 0xFFFFFFFF)
+                        for k in range(self.HEADER_BITS // 32, nwords))
+        return (MORT_MAGIC + struct.pack(">HHI", frame_count, sample_rate, nwords)
+                + body)
+
+
+def repack(rom, address):
+    """Decode one clip while recording its fields, then write those fields back
+    out.  Returns (pcm, blob); the blob's coded bits equal the original's."""
+    dec = MortDecoder(rom, address, record=True)
+    pcm = dec.decode()
+    w = MortWriter()
+    for value, width in dec.fields:
+        w.write(value, width)
+    return pcm, w.blob(dec.frame_count, dec.sample_rate)
+
+
+def silence(frame_count, sample_rate=16000):
+    """A blob built from scratch that decodes to frame_count * 160 zeros."""
+    w = MortWriter()
+    w.write_silence(frame_count)
+    return w.blob(frame_count, sample_rate)
+
+
 def parse_alseqfile(rom, base):
     """'S1' + u16 BE count + count x ALSeqData{u32 offset; u32 len}, offsets
     relative to `base`.  Returns (count, [(abs_offset, len), ...])."""
@@ -476,8 +543,18 @@ def _selfcheck(baserom="baseroms/us/baserom.z64"):
     pcm = dec.decode()
     assert len(pcm) == fc * SAMPLES_PER_FRAME, len(pcm)
     assert pcm[:2] == [0, 336], pcm[:2]
-    print("self-check ok: first clip @%#x, %d frames, %d Hz, %d words ->"
-          " %d samples, %.2fs" % (off, fc, sr, wc, len(pcm), len(pcm) / sr))
+    print("first clip @%#x: %d frames, %d Hz, %d words -> %d samples, %.2fs"
+          % (off, fc, sr, wc, len(pcm), len(pcm) / sr))
+
+    # encode half: the re-packed fields must decode back to the same samples,
+    # and a blob built from scratch must decode to silence
+    pcm2, blob = repack(rom, off)
+    assert pcm2 == pcm
+    assert blob == rom[off:off + wc * 4], "re-packed clip is not byte-identical"
+    assert MortDecoder(blob, 0).decode() == pcm
+    assert MortDecoder(silence(37), 0).decode() == [0] * (37 * SAMPLES_PER_FRAME)
+    print("self-check ok: re-packed clip is %d of %d bytes and decodes back"
+          % (len(blob), wc * 4))
 
 
 if __name__ == "__main__":

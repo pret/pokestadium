@@ -4,9 +4,9 @@
 Parses the banks, decodes their 9-byte ADPCM frames and writes the samples out
 as N64 AIFC (VAPC/VADPCM). This module works on the EXPANDED bank image (what 
 tools/decompress_yay0.py produces from the copies in the audio archives);
-the raw compact ROM encoding is parsed in tools/extract_audio.py.
+the raw compact ROM encoding is parsed in tools/audio/extract_audio.py.
 
-usage (self-check):  python3 tools/numus_audio.py [baserom]
+usage (self-check):  python3 tools/audio/numus_audio.py [baserom]
 """
 
 import math

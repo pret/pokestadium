@@ -627,9 +627,9 @@ tools/decompress_yay0.py assets/us/rom_parts/52.bin assets/us/rom_parts/52.bin
 
 # Extract audio banks/samples and announcer voice clips.
 # WIP, so only run each tool when it is present.
-if [ -f tools/extract_audio.py ]; then
-    python3 tools/extract_audio.py
+if [ -f tools/audio/extract_audio.py ]; then
+    python3 tools/audio/extract_audio.py
 fi
-if [ -f tools/extract_mort.py ]; then
-    python3 tools/extract_mort.py
+if [ -f tools/audio/extract_mort.py ]; then
+    python3 tools/audio/extract_mort.py
 fi
