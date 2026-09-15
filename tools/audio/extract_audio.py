@@ -39,6 +39,11 @@ def find_twin(rom, raw_off):
             best = (p, img)
 
 
+def bank_name(bank, raw_off):
+    """Display name; the unnamed banks go by their raw offset."""
+    return (bank.name or "UNNAMED_%X" % raw_off).replace(".WBK", "")
+
+
 def write_wav(path, pcm, rate=SYNTH_RATE):
     pcm = [max(-32768, min(32767, x)) for x in pcm]
     with wave.open(str(path), "wb") as w:
@@ -70,7 +75,7 @@ def extract_bank(rom, raw_off):
     twin_off, img = twin
 
     bank = parse_expanded_bank(img)
-    name = (bank.name or "UNNAMED_%X" % raw_off).replace(".WBK", "")
+    name = bank_name(bank, raw_off)
     outdir = OUT_ROOT / name
     outdir.mkdir(parents=True, exist_ok=True)
 

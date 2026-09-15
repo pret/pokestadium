@@ -119,6 +119,37 @@ def decode_frames(book, data, wrap_out=True):
     return out
 
 
+def encode_frames(book, pcm, npred=4):
+    """NADPCM encode: the exact inverse search of decode_frames.
+
+    For each 16-sample frame every (predictor, scale) pair is tried, the
+    nibbles are the rounded quantised residuals, and the pair with the lowest
+    squared error wins. Uses only codebook entries the sample already has, so
+    the bank descriptors never change."""
+    data = bytearray()
+    v1 = v2 = 0
+    for i in range(0, len(pcm) - len(pcm) % 16, 16):
+        want = pcm[i:i + 16]
+        best = None
+        for pred in range(npred):
+            f1, f2 = book[pred * 16 + 8], book[pred * 16]
+            for scale in range(16):
+                nibs, err, a1, a2 = [], 0, v1, v2
+                for target in want:
+                    base = (f1 * a1 + f2 * a2) >> 11
+                    n = max(-8, min(7, (target - base + (1 << scale >> 1)) >> scale))
+                    cur = wrap16(base + (n << scale))
+                    err += (cur - target) ** 2
+                    nibs.append(n & 0xF)
+                    a2, a1 = a1, cur
+                if best is None or err < best[0]:
+                    best = (err, scale, pred, nibs, a1, a2)
+        _, scale, pred, nibs, v1, v2 = best
+        data.append(scale << 4 | pred)
+        data += bytes(nibs[k] << 4 | nibs[k + 1] for k in range(0, 16, 2))
+    return bytes(data)
+
+
 def _extended(value):
     """80-bit IEEE extended (AIFF sample rate)."""
     if value == 0:
