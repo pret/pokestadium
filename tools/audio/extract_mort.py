@@ -2,12 +2,15 @@
 """Extract Pokemon Stadium (US) announcer / voice clips (MORT) to WAV.
 
 Walks archive 4's alSeqFile index (0x197C1E0..0x1FBA260), decodes each
-self-describing clip with the ported MORT codec (tools/mort_audio.py, a
+self-describing clip with the ported MORT codec (tools/audio/mort_audio.py, a
 register-level port of SubDrag's public-domain CMORTDecoder) and writes
 build/assets/audio/ANNOUNCER/<NNNN>_<offset>.wav (16-bit mono, header rate)
 plus announcer.json with per-clip stats.
 
-usage:  python3 tools/extract_mort.py [baserom]
+With --blobs it instead dumps the raw MORT blobs next to the WAVs; those feed
+straight back into tools/audio/inject_mort.py for a byte-identical round trip.
+
+usage:  python3 tools/audio/extract_mort.py [baserom] [--blobs]
 """
 
 import json
@@ -44,7 +47,15 @@ def read_wav(path, expected, rate):
         return list(struct.unpack("<%dh" % expected, w.readframes(expected)))
 
 
-def main(baserom="baseroms/us/baserom.z64"):
+def dump_blobs(rom, clips, out):
+    """The clips as they sit in the ROM, one file each."""
+    out.mkdir(parents=True, exist_ok=True)
+    for i, (off, fc, sr, wc) in enumerate(clips):
+        (out / ("%04d_%08X.mort" % (i, off))).write_bytes(rom[off:off + wc * 4])
+    print("wrote %d MORT blobs -> %s" % (len(clips), out))
+
+
+def main(baserom="baseroms/us/baserom.z64", blobs=False):
     rom = Path(baserom).read_bytes()
     clips = archive4_clips(rom)
     chains = find_mort_chains(rom)
@@ -54,6 +65,9 @@ def main(baserom="baseroms/us/baserom.z64"):
     print("archive 4 %#x..%#x: %d alSeqFile sub-files, %d clips "
           "(index == magic chain-walk)"
           % (ARCHIVE4, ANN_END, len(parse_alseqfile(rom, ARCHIVE4)[1]), len(clips)))
+
+    if blobs:
+        return dump_blobs(rom, clips, OUT / "blobs")
 
     OUT.mkdir(parents=True, exist_ok=True)
     entries = []
@@ -97,4 +111,5 @@ def main(baserom="baseroms/us/baserom.z64"):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:])
+    args = [a for a in sys.argv[1:] if a != "--blobs"]
+    main(*args, blobs="--blobs" in sys.argv)
