@@ -65,40 +65,34 @@ void func_8431790C(void) {
     D_843901A0->unk_008[1] = 0;
 }
 
-#ifdef NON_MATCHING
 void func_84317940(s8* arg0, s8* arg1, ...) {
     va_list args;
-    s8** temp_v1;
-    s32 var_v0;
-    s8* var_a3;
+    s8* src;
+    s8* fmt;
+    s32 len;
 
-    var_v0 = 0;
-    temp_v1 = &args;
+    len = 0;
+    va_start(args, arg1);
+    fmt = arg1;
 
-    while (*arg1 != '\x00') {
-        if (*arg1 != 0x25) {
-            arg0[var_v0++] = *arg1;
+    while (*fmt != 0) {
+        if (*fmt != 0x25) {
+            arg0[len++] = *fmt;
         } else {
-            arg1++;
-            if (*arg1 == 0x73) {
-                temp_v1 = ALIGN4((s32)temp_v1);
-                var_a3 = *(s8**)temp_v1;
-                temp_v1++;
-
-                while (*var_a3 != 0) {
-                    arg0[var_v0] = *var_a3;
-                    var_a3++;
-                    var_v0++;
+            fmt++;
+            if (*fmt == 0x73) {
+                src = va_arg(args, s8*);
+                while (*src != 0) {
+                    arg0[len] = *src;
+                    src++;
+                    len++;
                 }
             }
         }
-        arg1++;
+        fmt++;
     }
-    arg0[var_v0] = '\x00';
+    arg0[len] = 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/62/fragment62_3020D0/func_84317940.s")
-#endif
 
 void func_843179F4(s8* arg0, s8 arg1) {
     u8 tmp = arg1;

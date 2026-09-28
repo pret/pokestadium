@@ -572,23 +572,19 @@ void func_869009E8(Controller* arg0, Controller* arg1) {
     arg0->stickMag = arg1->stickMag;
 }
 
-#ifdef NON_MATCHING
 void func_86900A14(void) {
-    s32 temp_t9;
-    u16 temp_v0;
-    s32* tmp = &D_8690B3B8;
+    Controller* c = &D_8690B5D0;
 
     D_8690B3B4 = D_869091B8[D_8690B3B8].unk_02;
     if (D_8690B3BC == 0) {
         D_8690B3B8++;
         D_8690B3BC = D_869091B8[D_8690B3B8].unk_00;
-        if (D_869091B8) {}
     }
 
-    D_8690B5D0.stickMag = D_869091B8[D_8690B3B8].unk_04;
-    D_8690B5D0.stickY = D_869091B8[*tmp].unk_0C;
-    D_8690B5D0.buttonPressed = D_869091B8[*tmp].unk_02 & (D_869091B8[*tmp].unk_02 ^ D_8690B3B4);
-    D_8690B5D0.buttonDown = D_869091B8[*tmp].unk_02;
+    c->stickMag = D_869091B8[D_8690B3B8].unk_04;
+    c->stickY = D_869091B8[D_8690B3B8].unk_0C;
+    c->buttonPressed = D_869091B8[D_8690B3B8].unk_02 & (D_869091B8[D_8690B3B8].unk_02 ^ D_8690B3B4);
+    c->buttonDown = D_869091B8[D_8690B3B8].unk_02;
 
     if (D_8690B3BC > 0) {
         D_8690B3BC--;
@@ -596,9 +592,6 @@ void func_86900A14(void) {
 
     func_869009E8(&D_8690B390, &D_8690B5D0);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/15/fragment15_14CA70/func_86900A14.s")
-#endif
 
 void func_86900B04(f32* arg0, f32* arg1, s16 arg2, s16 arg3) {
     *arg0 += arg3 * COSS(arg2);

@@ -939,27 +939,34 @@ s32 func_800449F8(void) {
     return ret;
 }
 
-#ifdef NON_MATCHING
+typedef struct unk_80044A50_008 {
+    /* 0x00 */ u32 unk_00;
+    /* 0x04 */ u32 unk_04;
+} unk_80044A50_008; // size = 0x8
+
 void func_80044A50(unk_D_800FC6D4* arg0) {
-    u32 i;
-    u32 end;
-    unk_D_800FC6D4_008* ptr;
-    u32 a0 = arg0;
+    s32 i;
+    s32 end;
+    u32 base;
+    u8* temp_v1;
+    unk_80044A50_008* temp_v0;
 
     if (arg0->flags != 0) {
         return;
     }
 
-    end = arg0->unk_04 * 3;
-    ptr = arg0->offset + a0;
-    arg0->offset = ptr;
+    end = arg0->unk_04;
+    base = (u32)arg0;
+    temp_v1 = arg0->offset;
+    temp_v1 += base;
+    arg0->offset = (u32)temp_v1;
 
-    for (i = 0; i < end; i++) {
-        ptr[i].unk_00 += a0;
+    for (i = 0; i != (end * 3); i++) {
+        temp_v0 = (unk_80044A50_008*)((u32)i * 8 + (u32)temp_v1);
+        // IDO needs the separate += 0 to match the og register allocation
+        temp_v0 += 0;
+        temp_v0->unk_00 += base;
     }
 
     arg0->flags = 1;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/435D0/func_80044A50.s")
-#endif

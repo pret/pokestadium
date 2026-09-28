@@ -4375,7 +4375,7 @@ s32 func_8437FD74(unk_D_843C60A4* arg0, s32* arg1, s32* arg2, u8 arg3) {
                             sp90[2] = l;
 
                             if ((D_843C5564->unk_00 & 0x800) && (func_8437F068(arg0, sp90, 3) != 0)) {
-                                var_s0 -= abs_asm(var_s0) * 0.2;
+                                var_s0 -= fabsf(var_s0) * 0.2;
                             }
 
                             if (func_8437F85C(arg0, sp94, var_s0, sp78, sp90, 3, arg3) != 0) {

@@ -44,7 +44,7 @@
     - [0xC030, c] # extra sprites loader
     - [0xC3D0, asm, exception_set] # exception functions
     - [0xC3F0, hasm, yay0] # Yay0 decoder
-    - [0xC4A0, hasm, abs] # abs function
+    - [0xC4A0, hasm, abs] # fabsf function
     - [0xC4B0, c, libleo/bootdisk]
     - [0xC910, hasm, ../../src/libleo/bootstrap]
     - [0xC970, c, jpegutils]
@@ -448,7 +448,7 @@
     - [0x7D860, .rodata, 45720]
     - [0x7D880, .rodata, libnaudio/n_env]
     - [0x7D8D0, .rodata, 485C0]
-    - [0x7DF80, rodata, rom_rodata_7DF80]
+    - [0x7DF80, .rodata, 48C60]
     - [0x7DFD0, .rodata, 49790]
     - [0x7E0C0, .rodata, libnaudio/n_synthesizer]
     - [0x7E0D0, rodata, rom_rodata_7E0D0]
@@ -616,7 +616,7 @@
     - [0xAA6D0,  rodata, fragments/1/fragment1_rodata_AA6D0]
     - [0xAA8F0,  rodata, fragments/1/fragment1_rodata_AA8F0]
     - [0xAA900,  rodata, fragments/1/fragment1_rodata_AA900]
-    - [0xAAA20,  rodata, fragments/1/fragment1_rodata_AAA20]
+    - [0xAAA20,  .rodata, fragments/1/fragment1_86CB0]
 
     - {vram: 0x8122B1E0, type:  bss, name: fragments/1/fragment1_bss}
 

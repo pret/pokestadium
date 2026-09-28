@@ -1107,7 +1107,6 @@ void func_81407484(Gfx* arg0, arg1_func_81407874_014_000_010* arg1) {
                       GCCc1w1(arg1->unk_09, arg1->unk_0C, arg1->unk_0E, arg1->unk_0B, arg1->unk_0D, arg1->unk_0F));
 }
 
-#ifdef NON_MATCHING
 Gfx* func_81407590(Gfx* arg0, arg1_func_81407874_014* arg1) {
     arg1_func_81407874_014_000* var_a3;
     arg1_func_81407874_014_004* sp20;
@@ -1115,6 +1114,10 @@ Gfx* func_81407590(Gfx* arg0, arg1_func_81407874_014* arg1) {
     arg1_func_81407874_014_000_014_000_000* temp_v1;
     Color_RGBA8_u32 color;
     u32 ret;
+    s16 sp1c;
+    s16 sp18;
+    s16 sp14;
+    s16 sp10;
 
     var_a3 = arg1->unk_00;
     sp20 = arg1->unk_04;
@@ -1127,10 +1130,13 @@ Gfx* func_81407590(Gfx* arg0, arg1_func_81407874_014* arg1) {
         if (var_a3->unk_14 != NULL) {
             if (var_a3->unk_14->unk_04 == 0) {
                 color.rgba = var_a3->unk_14->unk_00.color.rgba;
+                sp1c = color.rgba >> 0x18;
+                sp18 = color.rgba >> 0x10;
+                sp14 = color.rgba >> 0x8;
+                sp10 = color.rgba;
 
                 gDPPipeSync(arg0++);
-                gDPSetPrimColor(arg0++, 0, 0xFF, (color.rgba >> 0x18) & 0xFF, (color.rgba >> 0x10), (color.rgba >> 0x8),
-                                color.rgba);
+                gDPSetPrimColor(arg0++, 0, 0xFF, sp1c, sp18, sp14, sp10);
             } else {
                 ret = func_81406080(var_a3->unk_14->unk_06) % var_a3->unk_14->unk_04;
                 temp_v1 = &var_a3->unk_14->unk_00.ptr5[ret];
@@ -1172,9 +1178,6 @@ Gfx* func_81407590(Gfx* arg0, arg1_func_81407874_014* arg1) {
 
     return arg0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/34/fragment34_264380/func_81407590.s")
-#endif
 
 void func_81407874(s32 arg0, arg1_func_87903D64* arg1) {
     if (arg0 == 5) {
