@@ -122,73 +122,62 @@ void func_8001A258(unk_func_8001A024* arg0) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_8001A324(unk_func_8001A024* arg0, s32 arg1, s32 arg2, u16 arg3) {
     s32 w;
     s32 h;
 
-    if (arg1 >= arg0->unk_01) {
-        return;
-    }
-
-    w = arg0->unk_08[arg1].unk_0C->width;
-    h = arg0->unk_08[arg1].unk_0C->height;
-    bzero(arg0->unk_08[arg1].unk_0C->img_p, w * h * 2);
-
-    if ((arg2 <= 0) || (arg2 >= 0x98)) {
-        arg2 = 0x98;
-    }
-
-    arg0->unk_08[arg1].unk_00 = 1;
-    arg0->unk_08[arg1].unk_02 = arg3 & ~1;
-    arg0->unk_08[arg1].unk_14.raw = arg2;
-    arg0->unk_08[arg1].unk_08 = arg0->unk_18[arg2 - 1].unk_02 / 100.0f;
-    arg0->unk_08[arg1].unk_10.raw = 0;
-
-    if (arg0->unk_18[arg2 - 1].name == NULL) {
-        arg0->unk_08[arg1].unk_04 = arg0->unk_18[arg2 - 1].unk_08 - 0xE38;
-    } else {
-        arg0->unk_08[arg1].unk_04 = -0xE38;
+    if (arg1 < arg0->unk_01) {
+        w = arg0->unk_08[arg1].unk_0C->width;
+        h = arg0->unk_08[arg1].unk_0C->height;
+        bzero(arg0->unk_08[arg1].unk_0C->img_p, w * h * 2);
+    
+        if ((arg2 <= 0) || (arg2 >= 0x98)) {
+            arg2 = 0x98;
+        }
+    
+        arg0->unk_08[arg1].unk_00 = 1;
+        arg0->unk_08[arg1].unk_02 = arg3 & ~1;
+        arg0->unk_08[arg1].unk_14.raw = arg2;
+        arg0->unk_08[arg1].unk_08 = arg0->unk_18[arg2 - 1].unk_02 / 100.0f;
+        arg0->unk_08[arg1].unk_10.raw = 0;
+    
+        if (arg0->unk_18[arg2 - 1].name == NULL) {
+            arg0->unk_08[arg1].unk_04 = arg0->unk_18[arg2 - 1].unk_08 - 0xE38;
+        } else {
+            arg0->unk_08[arg1].unk_04 = -0xE38;
+        }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001A324.s")
-#endif
 
-#ifdef NON_MATCHING
-void func_8001A46C(unk_func_8001A024* arg0, s32 arg1, unk_func_80026268_arg0* arg2, u16 arg3) {
+void func_8001A46C(unk_func_8001A024* arg0, s32 arg1, unk_func_80026268_arg0* arg2, u16 arg3) { // or u16 arg3
     s32 w;
     s32 h;
 
-    if (arg1 >= arg0->unk_01) {
-        return;
-    }
-    w = arg0->unk_08[arg1].unk_0C->width;
-    h = arg0->unk_08[arg1].unk_0C->height;
-    bzero(arg0->unk_08[arg1].unk_0C->img_p, w * h * 2);
-    if (((s32) arg2->unk_00.unk_00 > 0) && ((s32) arg2->unk_00.unk_00 < 0x98)) {
-        arg0->unk_08[arg1].unk_00 = 3;
-        arg0->unk_08[arg1].unk_14.raw = arg2;;
-        arg0->unk_08[arg1].unk_02 = arg3 & ~1;
-        arg0->unk_08[arg1].unk_08 = arg0->unk_18[arg2->unk_00.unk_00 - 1].unk_02 / 100.0f;
-        func_8001BEE8(&arg0->unk_08[arg1].unk_10, arg2);
-        if (arg0->unk_18[arg2->unk_00.unk_00 - 1].name == NULL) {
-            arg0->unk_08[arg1].unk_04 = arg0->unk_18[arg2->unk_00.unk_00 - 1].unk_08 - 0xE38;;
+    if (arg1 < arg0->unk_01) {
+        w = arg0->unk_08[arg1].unk_0C->width;
+        h = arg0->unk_08[arg1].unk_0C->height;
+        bzero(arg0->unk_08[arg1].unk_0C->img_p, w * h * 2);
+        if (((s32) arg2->unk_00.unk_00 > 0) && ((s32) arg2->unk_00.unk_00 < 0x98)) {
+            arg0->unk_08[arg1].unk_00 = 3;
+            arg0->unk_08[arg1].unk_14.raw = arg2;;
+            arg0->unk_08[arg1].unk_02 = arg3 & ~1;
+            arg0->unk_08[arg1].unk_08 = arg0->unk_18[arg2->unk_00.unk_00 - 1].unk_02 / 100.0f;
+            func_8001BEE8(&arg0->unk_08[arg1].unk_10, arg2);
+            if (arg0->unk_18[arg2->unk_00.unk_00 - 1].name == NULL) {
+                arg0->unk_08[arg1].unk_04 = arg0->unk_18[arg2->unk_00.unk_00 - 1].unk_08 - 0xE38;;
+                return;
+            }
+            arg0->unk_08[arg1].unk_04  = -0xE38;
             return;
         }
-        arg0->unk_08[arg1].unk_04  = -0xE38;
-        return;
+        arg0->unk_08[arg1].unk_00 = 1;
+        arg0->unk_08[arg1].unk_02 = arg3 & ~1;
+        arg0->unk_08[arg1].unk_14.raw = 0x98;
+        arg0->unk_08[arg1].unk_08 = (f32) ((f32) arg0->unk_18[151].unk_02 / 100.0f);
+        arg0->unk_08[arg1].unk_10.raw = 0;
+        arg0->unk_08[arg1].unk_04 = -0xE38;
     }
-    arg0->unk_08[arg1].unk_00 = 1;
-    arg0->unk_08[arg1].unk_02 = arg3 & ~1;
-    arg0->unk_08[arg1].unk_14.raw = 0x98;
-    arg0->unk_08[arg1].unk_08 = (f32) ((f32) arg0->unk_18[151].unk_02 / 100.0f);
-    arg0->unk_08[arg1].unk_10.raw = 0;
-    arg0->unk_08[arg1].unk_04 = -0xE38;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1AB70/func_8001A46C.s")
-#endif
 
 void func_8001A654(u16* arg0, s32 a1, arg1_func_80010CA8 arg2) {
     s32 cond;

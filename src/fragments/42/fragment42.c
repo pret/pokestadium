@@ -515,7 +515,6 @@ void func_83300D80(u16* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, 
     func_8001C330(arg1 + temp_fv1_2, arg2 - temp_fa0_2, temp_fv1, temp_fa0, 0, 0, 1024.0f / arg5, 1024.0f / arg6, 0);
 }
 
-#ifdef NON_MATCHING
 void func_83301090(void) {
     static s16 D_83303288 = 0;
     static s16 D_8330328C = 0x3200;
@@ -550,7 +549,7 @@ void func_83301090(void) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < 7; i++) {
-        temp_t0 = 0xC - D_833031B4[i].unk_04;
+        temp_t0 = -D_833031B4[i].unk_04 + 0xC;
 
         if (D_833031B4[i].unk_12 == 0) {
             r = 0xFF;
@@ -587,11 +586,6 @@ void func_83301090(void) {
 
     func_8001F444();
 }
-#else
-static s16 D_83303288 = 0;
-static s16 D_8330328C = 0x3200;
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/42/fragment42/func_83301090.s")
-#endif
 
 void func_833013C4(s32 arg0, s32 arg1, s32 arg2) {
     s32 sp3C;
