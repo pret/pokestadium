@@ -616,7 +616,7 @@
     - [0xAA6D0,  rodata, fragments/1/fragment1_rodata_AA6D0]
     - [0xAA8F0,  rodata, fragments/1/fragment1_rodata_AA8F0]
     - [0xAA900,  rodata, fragments/1/fragment1_rodata_AA900]
-    - [0xAAA20,  rodata, fragments/1/fragment1_rodata_AAA20]
+    - [0xAAA20,  .rodata, fragments/1/fragment1_86CB0]
 
     - {vram: 0x8122B1E0, type:  bss, name: fragments/1/fragment1_bss}
 
