@@ -447,7 +447,7 @@
     - [0x7D800, .rodata, 435D0]
     - [0x7D860, .rodata, 45720]
     - [0x7D880, .rodata, libnaudio/n_env]
-    - [0x7D8D0, rodata, rom_rodata_7D8D0]
+    - [0x7D8D0, .rodata, 485C0]
     - [0x7DF80, .rodata, 48C60]
     - [0x7DFD0, .rodata, 49790]
     - [0x7E0C0, .rodata, libnaudio/n_synthesizer]
