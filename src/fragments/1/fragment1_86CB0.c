@@ -47,8 +47,7 @@ typedef struct unk_D_8122EEA8 {
 } unk_D_8122EEA8; // size = 0x4
 
 extern u8 D_811FEB60[];
-extern u32 D_8120EB48[];
-extern u8 D_8120EB24[];extern u16 D_8120EAD4[];
+extern u8 D_8120EB24[];
 extern u8 D_8120EB28[];
 extern u8 D_8120EB38[];
 extern u16 D_8120EA86;
@@ -59,7 +58,9 @@ extern s32 D_8120EAC4;
 extern s32 D_8120EA60;
 extern u32 D_8120EA80;
 extern s32 D_8120EAD0;
+extern u16 D_8120EAD4[32];
 extern u8 D_8120EB14[];
+extern u32 D_8120EB48[8];
 extern s32 D_8120EB78;
 extern s32 D_8120EB7C;
 extern s32 D_8120EB84[2];
@@ -67,12 +68,6 @@ extern s32 D_8120EB8C[2];
 extern s32 D_81228678[];
 extern s32 D_81228654[];
 extern s32 D_8122869C;
-
-// .rodata
-extern f32 D_8122B0A0;
-extern f32 D_8122B0A4;
-extern f32 D_8122B0A8;
-extern f32 D_8122B0AC;
 
 // .bss
 extern s16 D_8122C790;
@@ -116,11 +111,11 @@ void func_81207354(void) {
 void func_8120735C(s32 arg0) {
     if (arg0 == 0) {
         D_8120EAC4 = 0x4578;
-        D_8120EAC0 = D_8122B0A0;
+        D_8120EAC0 = 1500.0f;
         return;
     }
     D_8120EAC4 = 0x8AF0;
-    D_8120EAC0 = D_8122B0A4;
+    D_8120EAC0 = 1500.0f;
 }
 
 void func_812073A4(s32 arg0, s32 arg1) {
@@ -138,22 +133,15 @@ u32 func_812073B8(u16 arg0) {
 }
 
 u32 func_81207494(u16 arg0, u16 arg1, u16 arg2) {
-    f32 f;
-    u32 t0;
-    s32 t2;
-    s32 v;
+    u32 temp;
+    s32 temp2;
 
-    t0 = *(u32*) &D_8120EB48[arg2];
-    D_8122EE98 = ((arg1 * 0x10) + arg0) << 0xE;
-    f = (f32) t0;
-    if ((s32) t0 < 0) {
-        f += 4294967296.0f;
-    }
-    t2 = (s32) f;
-    f = (f32) t2 / D_8122B0A8 * D_8122B0AC;
-    v = (s32) f;
-    D_8120EAC8 = D_8120EAD4[(arg0 << 1) + arg1];
-    return v;
+    D_8122EE98 = (arg1 * 16 + arg0) << 14;
+    temp = D_8120EB48[arg2];
+    temp2 = (f32)temp;
+    temp = (temp2 / 48000.0f) * 24000.0f;
+    D_8120EAC8 = D_8120EAD4[arg0 * 2 + arg1];
+    return temp;
 }
 
 u32 func_812075C0(u16 arg0) {
@@ -165,7 +153,6 @@ u32 func_812075C0(u16 arg0) {
 void func_81207690(void) {
 }
 
-// Matching needs rodata mapping
 s32 func_81207698(u32 arg0, s32 arg1) {
     switch (arg0) {
     case 0:
@@ -189,12 +176,12 @@ s32 func_81207698(u32 arg0, s32 arg1) {
         }
         return 0x7F;
     case 4:
-        return (u8)(D_8122C794[arg1 + D_8122EE98] & 0x7F);
     case 5:
-        return (u8)(D_8122EE58[arg1] << 3);
+    break;
     case 6:
+        return (u8)(D_8122C794[arg1 + D_8122EE98] & 0x7F);
     case 7:
-        break;
+        return (u8)(D_8122EE58[arg1] << 3);
     }
 }
 
