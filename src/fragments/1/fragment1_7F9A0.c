@@ -533,40 +533,36 @@ void func_812018C0(u16* arg0, s32 arg1, u16* arg2, s32 arg3, s32 arg4) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812018C0.s")
 #endif
 
-#ifdef NON_MATCHING
 void func_81201DDC(u16* dst, u8* alpha_map, s32 color, s32 width, s32 height, u32 alpha_stride) {
-  u16* dst_row;
-  u8* alpha_row;
-  s32 x;
-  s32 y;
-  s32 var_t0;
-  s32 var_t4;
-  s32 var_a0;
+    u16* dst_row;
+    u8* alpha_row;
+    s32 x;
+    s32 y;
+    s32 var_t0;
+    s32 var_t4;
+    s32 var_a0;
 
-  for (y = 0; y < height; y++) {
-      for (x = 0; x < width; x++) {
-          var_a0 = alpha_map[y * alpha_stride + x];
+    for (y = 0; y < height; y++) {
+        for (x = 0; x < width; x++) {
+            var_a0 = alpha_map[y * alpha_stride + x] & 0xF;
 
-          var_t0 = (dst[y * 320 + x] & 0xF800) + ((((color & 0xF800) * (var_a0 & 0xF)) / 15) & 0xF800);
-          if (var_t0 > 0xF800) var_t0 = 0xF800;
+            var_t0 = (dst[y * 320 + x] & 0xF800) + ((((color & 0xF800) * (var_a0)) / 15) & 0xF800);
+            if (var_t0 > 0xF800) var_t0 = 0xF800;
 
-          var_t4 = var_t0;
+            var_t4 = var_t0;
 
-          var_t0 = (dst[y * 320 + x] & 0x07C0) + ((((color & 0x07C0) * (var_a0 & 0xF)) / 15) & 0x07C0);
-          if (var_t0 > 0x07C0) var_t0 = 0x07C0;
-          
-          var_t4 |= var_t0;
+            var_t0 = (dst[y * 320 + x] & 0x07C0) + ((((color & 0x07C0) * (var_a0)) / 15) & 0x07C0);
+            if (var_t0 > 0x07C0) var_t0 = 0x07C0;
+            
+            var_t4 |= var_t0;
 
-          var_t0 = (dst[y * 320 + x] & 0x003E) + ((((color & 0x003E) * (var_a0 & 0xF)) / 15) & 0x003E);
-          if (var_t0 > 0x003E) var_t0 = 0x003E;
+            var_t0 = (dst[y * 320 + x] & 0x003E) + ((((color & 0x003E) * (var_a0)) / 15) & 0x003E);
+            if (var_t0 > 0x003E) var_t0 = 0x003E;
 
-          dst[y * 320 + x] = (s16)(var_t4 | var_t0);
-      }
-  }
+            dst[y * 320 + x] = (s16)(var_t4 | var_t0);
+        }
+    }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81201DDC.s")
-#endif
 
 void func_81201FBC(s32 arg0, s32 arg1, s32 arg2) {
   s32 var_s0;
@@ -580,33 +576,32 @@ void func_81201FBC(s32 arg0, s32 arg1, s32 arg2) {
   func_812018C0(arg0 + (arg2 - 8) * 2, &D_8122C748->unk_9990, arg1, 8, 0x10);
 }
 
-#ifdef NON_MATCHING
-void func_812020C0(u16* arg0, s32 arg1, s32 arg2) {
-    s32 row;
-    s32 col;
-    u16* src;
-    s32 idx;
+void func_812020C0(u16* dst, s32 arg1, s32 arg2) {
+  u16* src;
+  s32 offset;
+  s32 row;
+  s32 col;
+  u16 val;
 
-    idx = arg2 * 0x84;
-    if (arg1 != 0) {
-        src = &D_8122C748->unk_9A90[idx];
-        arg1 = 1;
-    } else {
-        src = &D_8122C748->unk_9A90[idx + 0x83];
-        arg1 = -1;
-    }
-    for (row = 0; row < 11; row++) {
-        for (col = 0; col < 12; col++) {
-            if (*src & 1) {
-                arg0[(row * 320) + col + 730] = *src;
-            }
-            src += arg1;
-        }
-    }
+  offset = arg2 * 132;
+  if (arg1 != 0) {
+      src = (u16*) (offset * 2 + (u8*) D_8122C748 + 0x9A90);
+      arg1 = 1;
+  } else {
+      src = (u16*) (offset * 2 + (u8*) D_8122C748 + 0x9B96);
+      arg1 = -1;
+  }
+
+  for (row = 0; row < 11; row++) {
+      for (col = 0; col < 12; col++) {
+          val = *src;
+          if (val & 1) {
+              dst[row * 320 + col + 730] = val;
+          }
+          src += arg1;
+      }
+  }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812020C0.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_81202210(s32 arg0, s32 arg1) {

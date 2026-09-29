@@ -58,15 +58,11 @@ extern s32 D_8120EAC4;
 extern s32 D_8120EA60;
 extern u32 D_8120EA80;
 extern s32 D_8120EAD0;
+extern u16 D_8120EAD4[32];
 extern u8 D_8120EB14[];
+extern u32 D_8120EB48[8];
 extern s32 D_8120EB78;
 extern s32 D_8120EB7C;
-
-// .rodata
-extern f32 D_8122B0A0;
-extern f32 D_8122B0A4;
-extern f32 D_8122B0A8;
-extern f32 D_8122B0AC;
 
 // .bss
 extern s16 D_8122C790;
@@ -100,11 +96,11 @@ void func_81207354(void) {
 void func_8120735C(s32 arg0) {
     if (arg0 == 0) {
         D_8120EAC4 = 0x4578;
-        D_8120EAC0 = D_8122B0A0;
+        D_8120EAC0 = 1500.0f;
         return;
     }
     D_8120EAC4 = 0x8AF0;
-    D_8120EAC0 = D_8122B0A4;
+    D_8120EAC0 = 1500.0f;
 }
 
 void func_812073A4(s32 arg0, s32 arg1) {
@@ -121,7 +117,17 @@ u32 func_812073B8(u16 arg0) {
   return temp;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207494.s")
+u32 func_81207494(u16 arg0, u16 arg1, u16 arg2) {
+    u32 temp;
+    s32 temp2;
+
+    D_8122EE98 = (arg1 * 16 + arg0) << 14;
+    temp = D_8120EB48[arg2];
+    temp2 = (f32)temp;
+    temp = (temp2 / 48000.0f) * 24000.0f;
+    D_8120EAC8 = D_8120EAD4[arg0 * 2 + arg1];
+    return temp;
+}
 
 u32 func_812075C0(u16 arg0) {
   u32 temp;
@@ -132,8 +138,6 @@ u32 func_812075C0(u16 arg0) {
 void func_81207690(void) {
 }
 
-#ifdef NON_MATCHING
-// Matching needs rodata mapping
 s32 func_81207698(u32 arg0, s32 arg1) {
     switch (arg0) {
     case 0:
@@ -157,18 +161,14 @@ s32 func_81207698(u32 arg0, s32 arg1) {
         }
         return 0x7F;
     case 4:
-        return (u8)(D_8122C794[arg1 + D_8122EE98] & 0x7F);
     case 5:
-        return (u8)(D_8122EE58[arg1] << 3);
+    break;
     case 6:
+        return (u8)(D_8122C794[arg1 + D_8122EE98] & 0x7F);
     case 7:
-        break;
+        return (u8)(D_8122EE58[arg1] << 3);
     }
 }
-#else
-s32 func_81207698(u32, s32);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207698.s")
-#endif
 
 u16 func_81207774(void) {
     u16 var_t0;
@@ -486,8 +486,6 @@ void func_8120806C(u16, u8);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81208828.s")
 
-#ifdef NON_MATCHING
-// Matching needs rodata mapping
 void func_81208C08(u16 arg0, u8 arg1, u16 arg2) {
     s32 temp_v1;
 
@@ -542,9 +540,6 @@ void func_81208C08(u16 arg0, u8 arg1, u16 arg2) {
         break;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81208C08.s")
-#endif
 
 void func_81208D7C(void) {
   s32 pad[6];

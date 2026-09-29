@@ -136,7 +136,7 @@ void func_83100020(unk_D_86002F58_004_000* arg0) {
             temp_fv0 = ptr->unk_180;
             ptr->unk_180 += ptr->unk_184;
 
-            if (((ptr->unk_180 * temp_fv0) < 0.0f) && (abs_asm(ptr->unk_184) < 0.13f)) {
+            if (((ptr->unk_180 * temp_fv0) < 0.0f) && (fabsf(ptr->unk_184) < 0.13f)) {
                 sp1C = 1;
             }
 

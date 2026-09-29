@@ -1131,22 +1131,29 @@ void func_86803C6C(unk_D_86807558* arg0);
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/14/fragment14_1462A0/func_86803C6C.s")
 #endif
 
-#ifdef NON_MATCHING
 unk_D_868084D8* func_86804634(unk_D_86807558* arg0) {
+    UNUSED s32 pad;
     s32 i;
     Vec3f sp14;
+    f32 dx;
+    f32 dy;
+    f32 dz;
     unk_D_868084D8* var_v1;
-    f32 sq;
-    Vec3f* tmp;
 
     sp14 = arg0->unk_0E4.unk_0EC;
 
     for (i = 0, var_v1 = D_868084D8; i < 12; i++, var_v1++) {
-        if (((var_v1->unk_02 & 1) != 0) && (var_v1->unk_10 == 2)) {
-            if (SQ(D_86806FBC) >=
-                SQ(var_v1->unk_14.x - sp14.x) + SQ(var_v1->unk_14.y - sp14.y) + SQ(var_v1->unk_14.z - sp14.z)) {
-                break;
-            }
+        if (!(var_v1->unk_02 & 1)) {
+            continue;
+        }
+        if (var_v1->unk_10 != 2) {
+            continue;
+        }
+        dx = var_v1->unk_14.x - sp14.x;
+        dy = var_v1->unk_14.y - sp14.y;
+        dz = var_v1->unk_14.z - sp14.z;
+        if (SQ(dx) + SQ(dy) + SQ(dz) <= SQ(D_86806FBC)) {
+            break;
         }
     }
 
@@ -1156,10 +1163,6 @@ unk_D_868084D8* func_86804634(unk_D_86807558* arg0) {
 
     return var_v1;
 }
-#else
-unk_D_868084D8* func_86804634(unk_D_86807558* arg0);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/14/fragment14_1462A0/func_86804634.s")
-#endif
 
 s32 func_86804700(unk_D_86807558* arg0) {
     UNUSED s32 pad;

@@ -832,10 +832,8 @@ s32 func_81302E58(s32 arg0, UNUSED s32 arg1) {
     return sp20;
 }
 
-#ifdef NON_MATCHING
 void func_8130306C(u8* arg0) {
     Gfx* gfx = gDisplayListHead;
-    u8* var_t0;
     s32 i;
     s32 j;
 
@@ -851,11 +849,10 @@ void func_8130306C(u8* arg0) {
     gDPSetTexturePersp(gfx++, G_TP_NONE);
 
     for (i = 0; i < 15; i++) {
-        var_t0 = ((i * 0x14) << 9) + arg0;
-        for (j = 0; j < 20; j++, var_t0 += 0x200) {
+        for (j = 0; j < 20; j++) {
             gDPPipeSync(gfx++);
 
-            gDPLoadTextureBlock(gfx++, var_t0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+            gDPLoadTextureBlock(gfx++, arg0 + (i * 0x14 + j) * 0x200, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                                 G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gfx++, (j * 0x20) << 2, (i * 0x20) << 2, ((j + 1) * 0x20) << 2, ((i + 1) * 0x20) << 2,
                                 G_TX_RENDERTILE, 0, 0, 0x0200, 0x0200);
@@ -864,9 +861,6 @@ void func_8130306C(u8* arg0) {
 
     gDisplayListHead = gfx;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/33/fragment33/func_8130306C.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_8130337C(void) {
