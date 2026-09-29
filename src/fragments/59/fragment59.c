@@ -522,28 +522,30 @@ static u32 D_841033F8[] = {
     0x00000000, 0x08000000, func_84101120, 0x00000000, 0x06000000, 0x01000000,
 };
 
-#ifdef NON_MATCHING
 void func_84100020(s16 arg0, s16 arg1, s16 arg2) {
-    s32 spC;
-    s32 sp8;
-    s32 sp4;
+    s16 dd;
+    s16 xl;
+    s16 yl;
+    s16 xh;
+    s16 yh;
 
     if (arg2 < 2) {
         return;
     }
 
+    dd = 0x8000 / arg2;
+    xl = (arg0 << 2) - (arg2 << 1);
+    yl = (arg1 << 2) - (arg2 << 1);
+    xh = xl + (arg2 << 2);
+    yh = yl + (arg2 << 2);
+
     gSPDisplayList(gDisplayListHead++, D_8006F558);
     gDPSetPrimColor(gDisplayListHead++, 0, 0, 255, 255, 0, 255);
     gDPLoadTextureBlock(gDisplayListHead++, D_302E440, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-    gSPTextureRectangle(gDisplayListHead++, ((arg0 << 2) - (arg2 << 1)), ((arg1 << 2) - (arg2 << 1)),
-                        (((arg0 << 2) - arg2 << 1)) << 2, (((arg1 << 2) - (arg2 << 1)) + (arg2 << 2)), G_TX_RENDERTILE,
-                        0, 0, 0x8000 / arg2, 0x8000 / arg2);
+    gSPTextureRectangle(gDisplayListHead++, xl, yl, xh, yh, G_TX_RENDERTILE, 0, 0, dd, dd);
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/59/fragment59/func_84100020.s")
-#endif
 
 void func_84100288(s16 arg0) {
     s32 i;

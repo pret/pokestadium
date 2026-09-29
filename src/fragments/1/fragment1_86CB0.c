@@ -918,7 +918,6 @@ void func_81208828(s32 arg0, s16* arg1, UNUSED s32 arg2, UNUSED s32 arg3, s32 ar
     D_8122EEA8.unk_03 = 0;
 }
 
-// Matching needs rodata mapping
 void func_81208C08(u16 arg0, u8 arg1, u16 arg2) {
     s32 temp_v1;
 

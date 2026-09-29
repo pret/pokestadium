@@ -1237,7 +1237,6 @@ void func_88210334(unk_func_8821421C_038_04C* arg0, unk_func_8821421C_038* arg1)
     arg0->unk_00.unk_24 = arg1;
 }
 
-#ifdef NON_MATCHING
 s32 func_88210380(unk_func_8821421C_038_04C* arg0, Controller* arg1) {
     s32 var_v1;
     s32 i;
@@ -1280,7 +1279,7 @@ s32 func_88210380(unk_func_8821421C_038_04C* arg0, Controller* arg1) {
         switch (arg0->unk_00.unk_1C) {
             case 0:
                 func_8820EFD0(arg0->unk_00.unk_24->unk_2C,
-                              &arg0->unk_00.unk_24->unk_50[arg0->unk_00.unk_24->unk_34->unk_00.unk_38]);
+                              arg0->unk_00.unk_24->unk_50[0] + arg0->unk_00.unk_24->unk_34->unk_00.unk_38);
                 func_882101E0(arg0->unk_00.unk_24, arg0->unk_00.unk_24->unk_34->unk_00.unk_38);
 
                 ((func8850CB48)Memmap_GetFragmentVaddr(func_8850CB48))(arg0->unk_28, 0);
@@ -1322,9 +1321,6 @@ s32 func_88210380(unk_func_8821421C_038_04C* arg0, Controller* arg1) {
 
     return var_v1;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1B4EA0/func_88210380.s")
-#endif
 
 void func_8821064C(unk_func_8821421C_02C_06C_02C* arg0, unk_func_8820BE14_02C_038* arg1,
                    unk_func_8820BE14_02C_038* arg2, unk_func_8820E99C* arg3, unk_func_88217740* arg4,
@@ -1622,7 +1618,6 @@ void func_88210F00(unk_func_8820BE14_02C_038* arg0) {
     ((func88507AE4)Memmap_GetFragmentVaddr(func_88507AE4))(arg0, sp1C);
 }
 
-#ifdef NON_MATCHING
 void func_88210F74(unk_func_8820BE14_02C_038* arg0, s32 arg1, s32 arg2) {
     UNUSED s32 pad;
     s32 i;
@@ -1630,24 +1625,28 @@ void func_88210F74(unk_func_8820BE14_02C_038* arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
     unk_func_8821421C_02C_06C_02C_060_02C_000 sp44;
     unk_func_8820BE14_06C* temp_s4;
+    void* temp_v1;
     u8* var_s2;
 
     temp_s4 = arg0->unk_00.unk_2C;
     var_s3 = arg0->unk_00.unk_38;
-    var_s2 = temp_s4->unk_00;
+    temp_v1 = temp_s4->unk_00;
     i = 0;
 
-    while (i < temp_s4->unk_08) {
-        if (arg1 == var_s2[0]) {
-            arg2 += var_s2[1];
-            func_8002C990(temp_s4, i);
-            if (i < var_s3) {
-                var_s3--;
+    if (temp_s4->unk_08 > 0) {
+        var_s2 = (u8*)temp_v1;
+        do {
+            if (arg1 == var_s2[0]) {
+                arg2 += var_s2[1];
+                func_8002C990(temp_s4, i);
+                if (i < var_s3) {
+                    var_s3--;
+                }
+            } else {
+                i++;
+                var_s2 += 2;
             }
-        } else {
-            i++;
-            var_s2 += 2;
-        }
+        } while (i < temp_s4->unk_08);
     }
 
     sp44.unk_00 = arg1;
@@ -1665,9 +1664,6 @@ void func_88210F74(unk_func_8820BE14_02C_038* arg0, s32 arg1, s32 arg2) {
 
     ((func88507AE4)Memmap_GetFragmentVaddr(func_88507AE4))(arg0, var_s3 - 1);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1B4EA0/func_88210F74.s")
-#endif
 
 void func_88211088(unk_func_8820BE14_02C_038* arg0, s32 arg1) {
     u8* temp_v1 = &((u8*)arg0->unk_00.unk_2C->unk_00)[arg0->unk_00.unk_2C->unk_0C * arg0->unk_00.unk_38];

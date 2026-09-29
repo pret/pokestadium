@@ -1,4 +1,7 @@
 #include "global.h"
+#include "src/373A0.h"
+#include "src/48C60.h"
+#include "src/libnumus/player.h"
 
 // .data
 typedef struct {
@@ -9,7 +12,6 @@ typedef struct {
     /* 0x04 */ u8 unk_04;
 } unk_D_80078700;  // size = 0x05
 
-// func_800479C0 reads unk_02 through the biased symbol D_800786FD (= D_80078700 - 3).
 unk_D_80078700 D_80078700[151] = {
     /*   1 */ { 0x01, 0x01, 0x00, 0x52, 0x04 },
     /*   2 */ { 0x01, 0x01, 0x00, 0x58, 0x36 },
@@ -166,10 +168,201 @@ unk_D_80078700 D_80078700[151] = {
 
 s32 D_800789F4 = 0;
 s32 D_800789F8 = 0;
-s32 D_800789FC = 0;
-s32 D_80078A00[] = { 0, 0, 0, 0 };
+u8 D_800789FC = 0;
+u8 D_80078A00[16] = { 0 };
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/485C0/func_800479C0.s")
+s32 func_800479C0(u32 arg0, s32 arg1, u32 arg2) {
+    u32 sound;
+    s32 romAddr;
+    s32 size;
+    s32 result;
+
+    if ((arg0 >= 0xA6U) && (arg0 != 0xA6)) {
+        return 0;
+    }
+    func_80048464();
+
+    if (arg0 == 0xA6) {
+        sound = arg2;
+        arg2 = 0xFF;
+    }
+
+    switch (arg2) {
+    case 4:
+        if (MusHandleAsk(D_800789F4) != 0) {
+            MusSetDurationScale(D_800789F4, 0x14);
+            D_800789F4 = 0;
+        }
+        if ((arg0 == 0xD) || (arg0 == 0x13) || (arg0 == 0x4C) || (arg0 == 0x5B) || (arg0 == 0x82) || (arg0 == 0x8F)) {
+            sound = 4;
+        } else {
+            return 0;
+        }
+        break;
+
+    case 0:
+        if (MusHandleAsk(D_800789F4) != 0) {
+            MusSetDurationScale(D_800789F4, 0x14);
+            D_800789F4 = 0;
+        }
+        switch (arg0) {
+        case 0x35:
+        case 0x52:
+        case 0x53:
+            if (D_80078700[arg1 - 1].unk_02 == 1) {
+                sound = 0;
+            } else {
+                sound = 4;
+            }
+            break;
+        case 0x78:
+        case 0x99:
+            sound = 0;
+            break;
+        default:
+            sound = 0;
+        }
+        D_80078A00[0] = 0;
+        break;
+
+    case 1:
+        switch (arg0) {
+        case 0x14: case 0x23: case 0x2B: case 0x30: case 0x32: case 0x35: case 0x3B:
+        case 0x3D: case 0x3E: case 0x3F: case 0x47: case 0x48: case 0x4B: case 0x50:
+        case 0x51: case 0x52: case 0x66: case 0x6D: case 0x7E: case 0x84: case 0x86:
+        case 0x89: case 0x8A: case 0x8D: case 0xA0:
+            if (MusHandleAsk(D_800789F4) != 0) {
+                MusSetDurationScale(D_800789F4, 0x3C);
+                D_800789F4 = 0;
+                sound = 1;
+                break;
+            default:
+                if (MusHandleAsk(D_800789F4) != 0) {
+                    MusSetDurationScale(D_800789F4, 2);
+                    D_800789F4 = 0;
+                }
+            }
+        case 0xB: case 0xC: case 0xD: case 0x10: case 0x12: case 0x2F: case 0x39:
+        case 0x4D: case 0x4E: case 0x4F: case 0x54: case 0x55: case 0x56: case 0x57:
+        case 0x5F: case 0x65: case 0x67: case 0x6C: case 0x72: case 0x78: case 0x7B:
+        case 0x7F: case 0x80: case 0x81: case 0x8B: case 0x8E: case 0x93: case 0x94:
+        case 0x95: case 0x99:
+            sound = 1;
+            break;
+        }
+        break;
+
+    case 2:
+        if (MusHandleAsk(D_800789F4) != 0) {
+            MusSetDurationScale(D_800789F4, 0x14);
+            D_800789F4 = 0;
+        }
+        switch (arg0) {
+        case 0xE: case 0x36: case 0x4A: case 0x60: case 0x61: case 0x66: case 0x68:
+        case 0x69: case 0x6A: case 0x6B: case 0x6E: case 0x6F: case 0x70: case 0x71:
+        case 0x72: case 0x73: case 0x74: case 0x85: case 0x87: case 0x90: case 0x97:
+        case 0x9C: case 0x9F: case 0xA4:
+            return 0;
+        case 0x1: case 0x2: case 0x3: case 0x4: case 0x6: case 0xA: case 0xB:
+        case 0xC: case 0xF: case 0x15: case 0x16: case 0x17: case 0x20: case 0x2C:
+        case 0x44: case 0x7D: case 0x80: case 0x9A: case 0x9E: case 0xA2: case 0xA3:
+            sound = 2;
+            break;
+        case 0x35:
+        case 0x52:
+        case 0x53:
+            if (D_80078700[arg1 - 1].unk_02== 1) {
+                sound = 0;
+            } else {
+                sound = 4;
+            }
+            break;
+        default:
+            sound = 0;
+            break;
+        }
+        D_80078A00[0] = 0;
+        break;
+
+    case 3:
+        if (MusHandleAsk(D_800789F4) != 0) {
+            MusSetDurationScale(D_800789F4, 0x14);
+            D_800789F4 = 0;
+        }
+        if (arg0 == 0x9A) {
+            sound = 3;
+            if (D_80078A00[0] == 0) {
+                D_80078A00[0] = 1;
+            } else {
+                sound = 0;
+            }
+        } else {
+            sound = 0;
+        }
+        break;
+
+    case 5:
+        switch (arg0) {
+        case 0xD: case 0x10: case 0x12: case 0x2F: case 0x39: case 0x4D: case 0x4E:
+        case 0x4F: case 0x54: case 0x55: case 0x56: case 0x57: case 0x5F: case 0x67:
+        case 0x6C: case 0x6D: case 0x72: case 0x78: case 0x7B: case 0x80: case 0x81:
+        case 0x8B: case 0x8E: case 0x93: case 0x94: case 0x99:
+            return 0;
+        default:
+            if (MusHandleAsk(D_800789F4) != 0) {
+                MusSetDurationScale(D_800789F4, 0x3C);
+                D_800789F4 = 0;
+            }
+            return 0;
+        }
+
+    case 0xA6:
+    case 0xFF:
+        break;
+
+    default:
+        return 0;
+    }
+
+    D_800789FC++;
+    D_800789FC %= 3;
+
+    arg0--;
+    if (arg0 < (D_800FC6F0->num_files - 1)) {
+        romAddr = ((u32*)D_800FC6F0)[arg0 + 3];
+        size = ((u32*)D_800FC6F0)[arg0 + 4] - romAddr;
+    } else {
+        romAddr = ((u32*)D_800FC6F0)[arg0 + 3];
+        size = D_800FC6E8->seqArray[2].offset - romAddr;
+    }
+    func_8004ADB0(romAddr, D_800FC6DC, size);
+    func_80050B40(D_800FC6DC, D_800FC698[D_800789FC], 0x258);
+    RemapBankPointers((bank_remap_descriptor_t*)D_800FC698[D_800789FC]);
+    result = MusStartSoundEffect((SoundBank*)D_800FC690, D_800FC698[D_800789FC], sound + 1, 0x70, 0x80, -1);
+
+    if (arg2 != 0xFF) {
+        D_800789F8 = result;
+    }
+    if ((arg2 == 0) || (arg2 == 2) || (arg2 == 3) || (arg2 == 4)) {
+        D_800789F4 = D_800789F8;
+    }
+    if ((arg2 == 0) || (arg2 == 2)) {
+        switch (arg0 + 1) {
+        case 0x85:
+            func_800367A0(0x28, 0, 0);
+            break;
+        case 0x2D:
+        case 0x2E:
+            if (D_80078A20[0] == 0) {
+                func_8004E810(arg1, 0);
+            }
+            D_80078A20[0] = 0;
+            break;
+        case 0x9C:
+            break;
+        }
+    }
+}
 
 void func_80048014(void) {
   MusSetDurationScale(D_800789F8, 0x5A);

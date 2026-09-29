@@ -3,17 +3,32 @@
 
 #include "global.h"
 
+typedef struct Vec3fCounter {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+    /* 0x0C */ s16 count;
+} Vec3fCounter; // size = 0x10
+
 typedef struct PosBlend {
     /* 0x00 */ Vec3f base;
     /* 0x0C */ Vec3f offset;
-} PosBlend; // size = 0x18
+    /* 0x18 */ Color_RGBf color;
+    /* 0x24 */ s16 texS;
+    /* 0x26 */ s16 texT;
+    /* 0x28 */ u8 alpha;
+    /* 0x29 */ u8 pad8D;
+    /* 0x2A */ u16 disabled;
+    /* 0x2C */ u16 drawGroup;
+    /* 0x2E */ s16 nextIndex;
+} PosBlend; // size = 0x30
 
-
-typedef struct Vec3fCounter {
-    /* 0x00 */ Vec3f vec;
-    /* 0x0C */ s16 count;
-    /* 0x0E */ s16 pad;
-} Vec3fCounter; // size = 0x10
+typedef struct ModelBlendWeight {
+    /* 0x00 */ f32 w0;
+    /* 0x04 */ f32 w1;
+    /* 0x08 */ f32 w2;
+    /* 0x0C */ f32 dist;
+} ModelBlendWeight; // size = 0x10
 
 typedef struct ModelTransformCmd {
     /* 0x00 */ s16 targetIndex;
@@ -21,15 +36,8 @@ typedef struct ModelTransformCmd {
     /* 0x04 */ s16 enableFrom;
     /* 0x06 */ s16 enableTo;
     /* 0x08 */ f32 blendWeight;
-} ModelTransformCmd; // size = 0x0C
-
-typedef struct TransformWeights {
-    /* 0x00 */ u16 flags;
-    /* 0x02 */ u16 owner;
-    /* 0x04 */ f32 w0;
-    /* 0x08 */ f32 w1;
-    /* 0x0C */ f32 w2;
-} TransformWeights;     // size = 0x10
+    /* 0x0C */ ModelBlendWeight weights[5];
+} ModelTransformCmd; // size = 0x5C
 
 typedef struct ModelVertex {
     /* 0x00 */ s16 jointIndex;      // bone / transform index
@@ -37,21 +45,7 @@ typedef struct ModelVertex {
     /* 0x04 */ s16 childIndex;      // child / next transform
     /* 0x06 */ u16 pad06;
     /* 0x08 */ ModelTransformCmd cmd;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ u8  pad18[0x8];
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ u8  pad24[0x40];
-    /* 0x64 */ PosBlend position;   // base + animated offset
-    /* 0x7C */ f32 colorR;          // vertex color (float)
-    /* 0x80 */ f32 colorG;
-    /* 0x84 */ f32 colorB;
-    /* 0x88 */ s16 texS;            // texture coordinate S
-    /* 0x8A */ s16 texT;            // texture coordinate T
-    /* 0x8C */ u8  alpha;           // vertex alpha
-    /* 0x8D */ u8  pad8D;
-    /* 0x8E */ u16 disabled;      // enable / visibility / animation flags
-    /* 0x90 */ s16 drawGroup;       // render group / material group
-    /* 0x92 */ s16 nextIndex;       // linked-list / chain index
+    /* 0x64 */ PosBlend position;
 } ModelVertex;                      // size = 0x94
 
 typedef struct StadiumTransform {
