@@ -633,3 +633,6 @@ fi
 if [ -f tools/audio/extract_mort.py ]; then
     python3 tools/audio/extract_mort.py
 fi
+if [ -f tools/audio/extract_mus.py ]; then
+    python3 tools/audio/extract_mus.py
+fi
