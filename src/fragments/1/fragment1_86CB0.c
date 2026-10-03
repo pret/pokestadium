@@ -497,245 +497,205 @@ u16 func_81207DF8(void);
 #endif
 
 void func_8120806C(u16, u8);
-void func_8120806C(u16 arg0, u8 arg1) {
-    u8* a3;
-    u8* a0;
-    s32 a2;
-    s32 v0;
-    s32 v1;
-    s32 t0;
-    s32 t1;
-    s32 t2;
-    s32 t3;
-    s32 t4;
-    s32 t5;
-    s32 t6;
-    s32 t7;
-    s32 t8;
-    s32 t9;
+void func_8120806C(u16 reg, u8 value) {
+    s32 pad;
+    s32 i;
+    s32 pad2;
 
-    a3 = (u8*) &D_8120EA70;
-    a2 = arg0;
-    if (arg0 == 0x26) {
-        if ((arg1 & 0x80) == 0) {
-            v0 = 0x23;
-            while (1) {
-                func_8120806C(v0, 0);
-                v0 -= 1;
-                if (v0 == 0xF) {
-                    break;
+    if ((reg == 0x26) && !(value & 0x80)) {
+        for (i = 0x23; i != 0xF; i--) {
+            func_8120806C(i, 0);
                 }
             }
-            a2 = 0x26;
-        }
-    }
-    if (a2 < 0x24) {
-        if (*(s16*) &a3[0x16] < 0) {
+
+    if ((reg < 0x24) && !GB_APU_REGS.power) {
             return;
         }
-    }
-    a0 = a3 + a2;
-    *((u8*) a0 - 0x10) = arg1;
-    switch (a2 - 0x10) {
-    case 0:
-        v0 = *(u32*) &a3[0];
-        D_8122C798.unk_34 = (((((v0 << 1) >> 29) * 4) - ((v0 << 1) >> 29)) * 8 + 0) * 16;
-        D_8122C798.unk_39 = (u32) (v0 << 4) >> 31;
-        D_8122C798.unk_38 = a3[0] & 7;
+
+    D_8120EA70[reg - 0x10] = value;
+
+    switch (reg) {
+        case 0x10:
+            D_8122C798.unk_34 = GB_APU_REGS.sweepTime * 400;
+            D_8122C798.unk_39 = GB_APU_REGS.sweepDir;
+            D_8122C798.unk_38 = GB_APU_REGS.sweepShift;
         if (D_8122C798.unk_3A == 0) {
             D_8122C798.unk_30 = 0;
         }
-        if (D_8122C798.unk_34 != 0) {
-            D_8122C798.unk_3A = 1;
-        } else {
+            if (D_8122C798.unk_34 == 0) {
             D_8122C798.unk_3A = 0;
+            } else {
+                D_8122C798.unk_3A = 1;
         }
         break;
-    case 1:
-        D_8122C798.unk_3B = a3[1] >> 6;
-        *(s32*) ((u8*) &D_8122C798 + 0x1C) = 0x40 - (a3[0] & 0x3F);
+        case 0x11:
+            D_8122C798.unk_3B = GB_APU_REGS.duty1;
+            D_8122C798.unk_1C = 0x40 - GB_APU_REGS.length1;
         break;
-    case 2:
-        v0 = *(u32*) &a3[2] >> 12;
-        D_8122C798.unk_21 = v0;
-        if (v0 != 0) {
-            break;
-        }
-        if ((s32) (*(u32*) &a3[0] << 20) < 0) {
-            return;
-        }
+        case 0x12:
+            D_8122C798.unk_21 = GB_APU_REGS.volume1;
+            if ((GB_APU_REGS.volume1 == 0) && (GB_APU_REGS.envDir1 == 0)) {
         D_8122C798.unk_00 = 0;
+            }
         break;
-    case 3:
-        t0 = ((a3[4] & 7) << 8) | a3[3];
-        D_8122C798.unk_10 = t0;
-        D_8122C798.unk_0C = func_812075C0((u16) t0);
+        case 0x13:
+            D_8122C798.unk_10 = GB_APU_REGS.freqLo1 | (GB_APU_REGS.freqHi1 << 8);
+            D_8122C798.unk_0C = func_812075C0(D_8122C798.unk_10);
         break;
-    case 4:
-        t0 = ((a3[4] & 7) << 8) | a3[3];
-        D_8122C798.unk_10 = t0;
-        D_8122C798.unk_18 = (u32) (*(u32*) &a3[4] << 1) >> 31;
-        D_8122C798.unk_0C = func_812075C0((u16) t0);
-        if (1 == ((u32) *(u32*) &a3[4] >> 31)) {
-            t0 = *(s32*) ((u8*) &D_8122C798 + 0x1C);
-            D_8122C798.unk_14 = ((((t0 * 4) - t0) * 8) + t0) * 8;
-            t1 = a3[2];
-            D_8122C798.unk_20 = D_8120EB14[t1];
-            D_8122C798.unk_2E = (u32) (*(u32*) &a3[0] << 20) >> 31;
-            t0 = ((a3[2] & 7) * 4 - (a3[2] & 7)) * 8 + (a3[2] & 7);
-            D_8122C798.unk_28 = t0 * 32;
+        case 0x14:
+            D_8122C798.unk_18 = GB_APU_REGS.counter1;
+            D_8122C798.unk_10 = GB_APU_REGS.freqLo1 | (GB_APU_REGS.freqHi1 << 8);
+            D_8122C798.unk_0C = func_812075C0(D_8122C798.unk_10);
+            if ((s32)GB_APU_REGS.trigger1 == 1) {
+                D_8122C798.unk_14 = D_8122C798.unk_1C * 200;
+                D_8122C798.unk_20 = D_8120EB14[D_8122C798.unk_21];
             D_8122C798.unk_24 = 0;
             D_8122C798.unk_30 = 0;
-            D_8122C798.unk_2D = t1;
-            if (*(s16*) &a3[0x16] < 0) {
+                D_8122C798.unk_2E = GB_APU_REGS.envDir1;
+                D_8122C798.unk_28 = GB_APU_REGS.envSweep1 * 800;
+                D_8122C798.unk_2D = D_8122C798.unk_21;
+                if (GB_APU_REGS.power) {
                 D_8122C798.unk_00 = 1;
             }
         }
+            if (D_8122C798.unk_34 == 0) {
+                D_8122C798.unk_3A = 0;
+            } else {
+                D_8122C798.unk_3A = 1;
+            }
         break;
-    case 5:
-        D_8122C7E8.unk_3B = (u32) *(u16*) &a3[6] >> 14;
-        *(s32*) ((u8*) &D_8122C7E8 + 0x1C) = 0x40 - (a3[6] & 0x3F);
+        case 0x16:
+            D_8122C7E8.unk_3B = GB_APU_REGS.duty2;
+            D_8122C7E8.unk_1C = 0x40 - GB_APU_REGS.length2;
         break;
-    case 6:
-        v0 = a3[7] >> 4;
-        D_8122C7E8.unk_21 = v0;
-        if (v0 != 0) {
-            break;
-        }
-        if ((s32) (*(u32*) &a3[4] << 28) < 0) {
-            return;
-        }
+        case 0x17:
+            D_8122C7E8.unk_21 = GB_APU_REGS.volume2;
+            if ((GB_APU_REGS.volume2 == 0) && (GB_APU_REGS.envDir2 == 0)) {
         D_8122C7E8.unk_00 = 0;
+            }
         break;
-    case 7:
-        t0 = ((a3[8] & 7) << 8) | a3[8];
-        D_8122C7E8.unk_10 = t0;
-        D_8122C7E8.unk_0C = func_812075C0((u16) t0);
+        case 0x18:
+            D_8122C7E8.unk_10 = GB_APU_REGS.freqLo2 | (GB_APU_REGS.freqHi2 << 8);
+            D_8122C7E8.unk_0C = func_812075C0(D_8122C7E8.unk_10);
         break;
-    case 8:
-        t0 = ((a3[8] & 7) << 8) | a3[8];
-        D_8122C7E8.unk_10 = t0;
-        D_8122C7E8.unk_18 = (u32) (*(u32*) &a3[8] << 9) >> 31;
-        D_8122C7E8.unk_0C = func_812075C0((u16) t0);
-        if (1 == ((u32) a3[9] >> 7)) {
-            t0 = *(s32*) ((u8*) &D_8122C7E8 + 0x1C);
-            D_8122C7E8.unk_14 = ((((t0 * 4) - t0) * 8) + t0) * 8;
-            v0 = *(u32*) &a3[4];
+        case 0x19:
+            D_8122C7E8.unk_18 = GB_APU_REGS.counter2;
+            D_8122C7E8.unk_10 = GB_APU_REGS.freqLo2 | (GB_APU_REGS.freqHi2 << 8);
+            D_8122C7E8.unk_0C = func_812075C0(D_8122C7E8.unk_10);
+            if ((s32)GB_APU_REGS.trigger2 == 1) {
+                D_8122C7E8.unk_14 = D_8122C7E8.unk_1C * 200;
+                D_8122C7E8.unk_08.unk_02 = 0;
             D_8122C7E8.unk_20 = D_8120EB14[D_8122C7E8.unk_21];
-            D_8122C7E8.unk_2E = (u32) (v0 << 28) >> 31;
-            t0 = (((v0 & 7) * 4) - (v0 & 7)) * 8 + (v0 & 7);
-            D_8122C7E8.unk_28 = t0 * 32;
             D_8122C7E8.unk_24 = 0;
-            D_8122C7E8.unk_08.unk_02 = 0;
+                D_8122C7E8.unk_2E = GB_APU_REGS.envDir2;
+                D_8122C7E8.unk_28 = GB_APU_REGS.envSweep2 * 800;
             D_8122C7E8.unk_2D = D_8122C7E8.unk_21;
-            D_8122C7E8.unk_20 = D_8122C7E8.unk_20;
-            if (*(s16*) &a3[0x16] < 0) {
+                if (GB_APU_REGS.power) {
                 D_8122C7E8.unk_00 = 1;
             }
         }
         break;
-    case 9:
-        v0 = (u32) *(u16*) &a3[0xA] >> 15;
-        D_8122C838.unk_00 = v0;
-        if (v0 != 0) {
-            return;
+        case 0x1A:
+            if (GB_APU_REGS.waveOn == 0) {
+                D_8122C838.unk_00 = GB_APU_REGS.waveOn;
         }
         break;
-    case 0xA:
-        *(s32*) ((u8*) &D_8122C838 + 0x1C) = 0x100 - a3[0xB];
+        case 0x1B:
+            D_8122C838.unk_1C = 0x100 - GB_APU_REGS.length3;
         break;
-    case 0xB:
-        t0 = (u32) (*(u32*) &a3[0xC] << 1) >> 30;
-        D_8122C838.unk_21 = t0;
-        D_8122C838.unk_20 = D_8120EB24[t0 & 0xFF];
+        case 0x1C:
+            D_8122C838.unk_21 = GB_APU_REGS.level3;
+            D_8122C838.unk_20 = D_8120EB24[D_8122C838.unk_21];
         break;
-    case 0xC:
-        t0 = ((a3[0xE] & 7) << 8) | a3[0xD];
-        D_8122C838.unk_10 = t0;
-        D_8122C838.unk_0C = func_812073B8((u16) t0);
+        case 0x1D:
+            D_8122C838.unk_10 = GB_APU_REGS.freqLo3 | (GB_APU_REGS.freqHi3 << 8);
+            D_8122C838.unk_0C = func_812073B8(D_8122C838.unk_10);
         break;
-    case 0xD:
-        t0 = ((a3[0xE] & 7) << 8) | a3[0xD];
-        D_8122C838.unk_10 = t0;
-        D_8122C838.unk_18 = (u32) (*(u32*) &a3[0xC] << 17) >> 31;
-        D_8122C838.unk_0C = func_812073B8((u16) t0);
-        if (1 == ((u32) *(u16*) &a3[0xE] >> 15)) {
-            t0 = *(s32*) ((u8*) &D_8122C838 + 0x1C);
-            D_8122C838.unk_14 = ((((t0 * 4) - t0) * 8) + t0) * 8;
+        case 0x1E:
+            D_8122C838.unk_10 = GB_APU_REGS.freqLo3 | (GB_APU_REGS.freqHi3 << 8);
+            D_8122C838.unk_0C = func_812073B8(D_8122C838.unk_10);
+            D_8122C838.unk_18 = GB_APU_REGS.counter3;
+            if ((s32)GB_APU_REGS.trigger3 == 1) {
+                D_8122C838.unk_14 = D_8122C838.unk_1C * 200;
             D_8122C838.unk_04 = 0x140;
-            if ((u32) *(u16*) &a3[0xA] >> 15 == 1) {
+                if (GB_APU_REGS.power && ((s32)GB_APU_REGS.waveOn == 1)) {
                 D_8122C838.unk_00 = 1;
             }
         }
         break;
-    case 0xE:
-        v0 = (s32) (D_8122EE58 + (a2 * 2));
-        *((u8*) v0 - 0x60) = a3[a2 - 0x10] >> 4;
-        *((u8*) v0 - 0x5F) = a3[a2 - 0x10] & 0xF;
+        case 0x30:
+        case 0x31:
+        case 0x32:
+        case 0x33:
+        case 0x34:
+        case 0x35:
+        case 0x36:
+        case 0x37:
+        case 0x38:
+        case 0x39:
+        case 0x3A:
+        case 0x3B:
+        case 0x3C:
+        case 0x3D:
+        case 0x3E:
+        case 0x3F:
+            D_8122EE58[(reg - 0x30) * 2 + 0] = (D_8120EA70[reg - 0x10] >> 4) & 0xF;
+            D_8122EE58[(reg - 0x30) * 2 + 1] = D_8120EA70[reg - 0x10] & 0xF;
         break;
-    case 0xF:
-        *(s32*) ((u8*) &D_8122C888 + 0x1C) = 0x40 - (a3[0x10] & 0x3F);
+        case 0x20:
+            D_8122C888.unk_1C = 0x40 - GB_APU_REGS.length4;
         break;
-    case 0x10:
-        v0 = a3[0x11] >> 4;
-        D_8122C888.unk_21 = v0;
-        if (v0 != 0) {
-            break;
-        }
-        if ((s32) (*(u32*) &a3[0x10] << 12) < 0) {
-            return;
-        }
+        case 0x21:
+            D_8122C888.unk_21 = GB_APU_REGS.volume4;
+            if ((GB_APU_REGS.volume4 == 0) && (GB_APU_REGS.envDir4 == 0)) {
         D_8122C888.unk_00 = 0;
+            }
         break;
-    case 0x11:
-        t0 = (u32) *(u16*) &a3[0x12] >> 12;
-        D_8122C888.unk_10 = t0;
-        v0 = func_81207494((u16) t0, (u16) ((u32) (*(u32*) &a3[0x10] << 20) >> 31), (u16) (a3[0x12] & 7));
-        D_8122C888.unk_0C = v0;
-        if (D_8122C888.unk_00 != 0) {
-            v1 = D_8122C888.unk_40;
+        case 0x22:
+            D_8122C888.unk_10 = GB_APU_REGS.shift4;
+            D_8122C888.unk_0C = func_81207494(GB_APU_REGS.shift4, GB_APU_REGS.width4, GB_APU_REGS.ratio4);
+            if (D_8122C888.unk_00 == 0) {
+                D_8122C888.unk_40 = D_8122C888.unk_0C;
+            }
+            if (D_8122C888.unk_40 < D_8122C888.unk_0C) {
+                D_8122C888.unk_48 = D_8122C888.unk_0C - D_8122C888.unk_40;
         } else {
-            D_8122C888.unk_40 = v0;
-            v1 = v0;
-        }
-        t0 = (v1 < D_8122C888.unk_0C) ? (D_8122C888.unk_0C - v1) : (v1 - D_8122C888.unk_0C);
-        t0 >>= 7;
-        if (t0 != 0) {
-            D_8122C888.unk_48 = t0;
-        } else {
+                D_8122C888.unk_48 = D_8122C888.unk_40 - D_8122C888.unk_0C;
+            }
+            D_8122C888.unk_48 >>= 7;
+            if (D_8122C888.unk_48 == 0) {
             D_8122C888.unk_48 = 1;
         }
         break;
-    case 0x12:
-        v1 = *(u32*) &a3[0x10];
-        D_8122C888.unk_18 = (u32) (v1 << 25) >> 31;
-        if (1 == ((u32) a3[0x13] >> 7)) {
-            t0 = *(s32*) ((u8*) &D_8122C888 + 0x1C);
-            D_8122C888.unk_14 = ((((t0 * 4) - t0) * 8) + t0) * 8;
-            if (D_8122C888.unk_00 != 0) {
+        case 0x23:
+            D_8122C888.unk_18 = GB_APU_REGS.counter4;
+            if ((s32)GB_APU_REGS.trigger4 == 1) {
+                D_8122C888.unk_14 = D_8122C888.unk_1C * 200;
+                if (D_8122C888.unk_00 == 0) {
                 D_8122C888.unk_08.unk_02 = 0;
             }
-            t0 = (u32) (v1 << 20) >> 31;
             D_8122C888.unk_2D = D_8122C888.unk_21;
-            if (t0 == 0) {
+                switch ((s32)GB_APU_REGS.width4) {
+                    case 0:
                 D_8122C888.unk_20 = D_8120EB28[D_8122C888.unk_2D];
-            } else if (t0 == 1) {
+                        break;
+                    case 1:
                 D_8122C888.unk_20 = D_8120EB38[D_8122C888.unk_2D];
+                        break;
             }
-            if (D_8122C888.unk_00 == 0 || D_8122C888.unk_3C < D_8122C888.unk_20) {
+                if ((D_8122C888.unk_00 == 0) || (D_8122C888.unk_3C < D_8122C888.unk_20)) {
                 D_8122C888.unk_3C = D_8122C888.unk_20;
             }
             D_8122C888.unk_24 = 0;
-            D_8122C888.unk_2E = (u32) (v1 << 12) >> 31;
-            t0 = (((*(u16*) &a3[0x10] & 7) * 4) - (*(u16*) &a3[0x10] & 7)) * 8 + (*(u16*) &a3[0x10] & 7);
-            D_8122C888.unk_28 = t0 * 32;
-            if (*(s16*) &a3[0x16] < 0) {
+                D_8122C888.unk_2E = GB_APU_REGS.envDir4;
+                D_8122C888.unk_28 = GB_APU_REGS.envSweep4 * 800;
+                if (GB_APU_REGS.power) {
                 D_8122C888.unk_00 = 1;
             }
         }
         break;
-    case 0x13:
-        if ((arg1 & 0x80) == 0) {
+        case 0x26:
+            if (!(value & 0x80)) {
             D_8122C798.unk_00 = 0;
             D_8122C7E8.unk_00 = 0;
             D_8122C838.unk_00 = 0;
