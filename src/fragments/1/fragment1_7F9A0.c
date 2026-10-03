@@ -1142,16 +1142,13 @@ void func_81202758(s32 arg0, s32 arg1) {
     arg0 -= 0x1400;
     func_812015EC((u16*) (arg0), (u16*) (D_8122C748 + 0x8490), 0, 8, 8);
 }
-#ifdef NON_MATCHING
-// Closest real version. Permuter matches all but one addu operand order with two fake
-// constructs: "n != (j = 0)" as the loop condition (keeps the "li s0,9; beqz" guard)
-// and an empty "if (!x) {}" before bzero (moves &D_8122B2F4 from s1 to s2).
 void func_812029B0(u16* dst, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3) {
     s32 x;
     s32 y;
     s32 step;
     u16* row;
     s32 xpos;
+    s32 i;
     s32 n;
     s32 j;
 
@@ -1159,7 +1156,7 @@ void func_812029B0(u16* dst, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3) {
     for (y = 0; y < 0x14000; y += step) {
         row = dst + y;
         for (x = 0; x != 320u; x += 64) {
-            func_812015EC(row, (u16*) (D_8122C748 + 0x1500), 0xFFFF, 64, (y == 0xF000) ? 48 : 64);
+            func_812015EC(row, (u16*) ((u8*) D_8122C748 + 0x1500), 0xFFFF, 64, (y == 0xF000) ? 48 : 64);
             row += 64;
         }
     }
@@ -1169,45 +1166,49 @@ void func_812029B0(u16* dst, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3) {
         D_8122C74C = (s32) D_8122B2F4;
         D_8122B2F4 += 0x2580;
         j = 9;
+        x = 8; // FAKE: x = 8 ... x++ ... if (x != 0) keeps the "li s0,9; beqz" loop guard
         _bcopy(dst + 0x10540, (void*) D_8122C74C, 0x2580);
         D_8122C750 = (s32) D_8122B2F4;
         D_8122B2F4 += 0x2580;
         bzero((void*) D_8122C750, 0x2580);
+        x++;
 
-        for (n = j; n != 0; n++) {
-            func_81201DDC((u16*) ((xpos * 2) + D_8122C750 + 0x280),
-                          (D_8120E580[D_8120D820[0xE7 - n] - n * 2 + 0x5B] * 0xC0) + D_8122C744, 0xFFFE, 0xC, 0xC,
-                          0x10);
-            xpos += D_8120E580[D_8120E580[D_8120D820[0xE7 - n] - n * 2 + 0x5B]];
-            if (D_8120D820[0xE6 - n] < 0x40) {
-                break;
+        if (x != 0) {
+            for (i = j; i != 0; i++) {
+                func_81201DDC((u16*) ((xpos * 2) + D_8122C750 + 0x280),
+                              (D_8120E580[D_8120D820[0xE7 - i] - i * 2 + 0x5B] * 0xC0) + D_8122C744, 0xFFFE, 0xC, 0xC,
+                              0x10);
+                xpos += D_8120E580[D_8120E580[D_8120D820[0xE7 - i] - i * 2 + 0x5B]];
+                if (D_8120D820[0xE6 - i] < 0x40) {
+                    break;
+                }
             }
         }
     }
 
-    for (n = 0; n != 6; n++) {
-        func_812016DC(dst + 0xB916 + n * 46);
+    for (x = 0; x < 6; x++) {
+        func_812016DC(dst + 0xB916 + x * 46);
         if (arg1 != NULL) {
-            osInvalDCache((*arg1)[n], sizeof((*arg1)[n]));
-            func_812015EC(dst + 0xBCD9 + n * 46, (*arg1)[n], 0, 40, 40);
+            osInvalDCache((*arg1) + (0, x), sizeof((*arg1)[x])); // FAKE: (0, x)
+            func_812015EC(dst + 0xBCD9 + x * 46, (*arg1) + (0, x), 0, 40, 40);
         }
     }
 
-    for (j = 0; j < 6 * 320; j += 320) {
+    for (j = 0; j < 6; j++) {
         for (x = 0; x < 320; x++) {
-            dst[27 * 320 + j + x] = 0x25A;
-            dst[121 * 320 + j + x] = 0x25A;
+            dst[(j + 27) * 320 + x] = 0x25A;
+            dst[(j + 121) * 320 + x] = 0x25A;
         }
     }
 
-    for (x = 0; x != 320; x += 8) {
-        func_812015EC(dst + 33 * 320 + x, (u16*) (D_8122C748 + 0x3500), 0xFFFF, 8, 8);
-        func_812015EC(dst + 113 * 320 + x, (u16*) (D_8122C748 + 0x3580), 0xFFFF, 8, 8);
+    for (x = 0; x < 320; x += 8) {
+        func_812015EC(dst + 33 * 320 + x, (u16*) ((u8*) D_8122C748 + 0x3500), 0xFFFF, 8, 8);
+        func_812015EC(dst + 113 * 320 + x, (u16*) ((u8*) D_8122C748 + 0x3580), 0xFFFF, 8, 8);
     }
 
-    for (j = 0; j != 72 * 320; j += 320) {
-        for (x = 0; x != 320; x++) {
-            dst[41 * 320 + j + x] = 0x2BA4;
+    for (j = 0; j < 72; j++) {
+        for (x = 0; x < 320; x++) {
+            dst[(j + 41) * 320 + x] = 0x2BA4;
         }
     }
 
@@ -1226,20 +1227,20 @@ void func_812029B0(u16* dst, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3) {
             break;
     }
 
-    func_812015EC(dst + 0x4E38, (u16*) (D_8122C748 + 0x3600), 0, 0x56, 0x21);
-    func_812015EC((u16*) (D_8122C754 + 0x61E0), (u16*) (D_8122C748 + 0x4CB0), 0, 0x3C, 0x4B);
+    func_812015EC(dst + 0x4E38, (u16*) ((u8*) D_8122C748 + 0x3600), 0, 0x56, 0x21);
+    func_812015EC((u16*) (D_8122C754 + 0x61E0), (u16*) ((u8*) D_8122C748 + 0x4CB0), 0, 0x3C, 0x4B);
 
     switch (arg3) {
         case 0:
-            func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) (D_8122C748 + 0x6FD8), 0, 0x17, 0x19);
+            func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) ((u8*) D_8122C748 + 0x6FD8), 0, 0x17, 0x19);
             break;
         case 1:
             break;
         case 2:
-            func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) (D_8122C748 + 0x7730), 0, 0x17, 0x19);
+            func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) ((u8*) D_8122C748 + 0x7730), 0, 0x17, 0x19);
             break;
         case 3:
-            func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) (D_8122C748 + 0x7BE0), 0, 0x17, 0x19);
+            func_812015EC((u16*) (D_8122C754 + 0x6706), (u16*) ((u8*) D_8122C748 + 0x7BE0), 0, 0x17, 0x19);
             break;
     }
 
@@ -1249,10 +1250,6 @@ void func_812029B0(u16* dst, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3) {
     D_8122C768 = 0x800000;
     D_8122C764 = 0xA0;
 }
-#else
-void func_812029B0(u16* dst, u16 (*arg1)[6][0x640], s32 arg2, s32 arg3);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_812029B0.s")
-#endif
 
 void func_81202EA8(u16* arg0, u16* arg1, s16* arg2, s32 arg3, s32 arg4) {
     s32 i;
