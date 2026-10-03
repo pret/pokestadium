@@ -413,6 +413,7 @@ u16 func_81207C5C_Empty(void) {
     
 }
 
+#ifdef NON_MATCHING
 // Matching but won't generate correct checksum
 u16 func_81207DF8(void) {
     static s32 D_8120EB6C;
@@ -490,6 +491,10 @@ u16 func_81207DF8(void) {
     
     return (temp_v0 << 1);
 }
+#else
+u16 func_81207DF8(void);
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_86CB0/func_81207DF8.s")
+#endif
 
 void func_8120806C(u16, u8);
 void func_8120806C(u16 arg0, u8 arg1) {
