@@ -13,7 +13,7 @@ typedef struct unk_func_81208D7C {
   /* 0x12 */ u16 unk_12;
   /* 0x14 */ s32 unk_14;
   /* 0x18 */ s32 unk_18;
-  /* 0x1C */ char unk1C[0x4];
+  /* 0x1C */ s32 unk_1C;
   /* 0x20 */ u8 unk_20;
   /* 0x21 */ u8 unk_21;
   /* 0x22 */ char unk22[0x2];
@@ -62,12 +62,17 @@ extern u16 D_8120EAD4[32];
 extern u8 D_8120EB14[];
 extern u32 D_8120EB48[8];
 extern s32 D_8120EB78;
-extern s32 D_8120EB7C;
-extern s32 D_8120EB84[2];
-extern s32 D_8120EB8C[2];
+typedef struct GbAudioStream {
+    /* 0x0 */ s32 id;
+    /* 0x4 */ s32 pos;
+} GbAudioStream; // size = 0x8
+
+extern GbAudioStream D_8120EB7C;
+extern GbAudioStream D_8120EB84;
+extern GbAudioStream D_8120EB8C;
 extern s32 D_81228678[];
-extern s32 D_81228654[];
-extern s32 D_8122869C;
+extern s8* D_81228654[];
+extern u32 D_8122869C;
 
 // .bss
 extern s16 D_8122C790;
@@ -79,18 +84,96 @@ extern unk_func_81208D7C D_8122C838;
 extern unk_func_81208D7C D_8122C888;
 extern u8 D_8122EE58[40];
 extern u8 D_8120EA70[];
+
+// Game Boy sound registers NR10 (0xFF10) through NR52 (0xFF26), mirrored in
+// D_8120EA70 (indexed by register address - 0xFF10).
+typedef struct GbApuRegs {
+    /* 0x00 NR10 */ u32 : 1;
+                    u32 sweepTime : 3;
+                    u32 sweepDir : 1;
+                    u32 sweepShift : 3;
+    /* 0x01 NR11 */ u32 duty1 : 2;
+                    u32 length1 : 6;
+    /* 0x02 NR12 */ u32 volume1 : 4;
+                    u32 envDir1 : 1;
+                    u32 envSweep1 : 3;
+    /* 0x03 NR13 */ u32 freqLo1 : 8;
+    /* 0x04 NR14 */ u32 trigger1 : 1;
+                    u32 counter1 : 1;
+                    u32 : 3;
+                    u32 freqHi1 : 3;
+    /* 0x05 */      u32 : 8;
+    /* 0x06 NR21 */ u32 duty2 : 2;
+                    u32 length2 : 6;
+    /* 0x07 NR22 */ u32 volume2 : 4;
+                    u32 envDir2 : 1;
+                    u32 envSweep2 : 3;
+    /* 0x08 NR23 */ u32 freqLo2 : 8;
+    /* 0x09 NR24 */ u32 trigger2 : 1;
+                    u32 counter2 : 1;
+                    u32 : 3;
+                    u32 freqHi2 : 3;
+    /* 0x0A NR30 */ u32 waveOn : 1;
+                    u32 : 7;
+    /* 0x0B NR31 */ u32 length3 : 8;
+    /* 0x0C NR32 */ u32 : 1;
+                    u32 level3 : 2;
+                    u32 : 5;
+    /* 0x0D NR33 */ u32 freqLo3 : 8;
+    /* 0x0E NR34 */ u32 trigger3 : 1;
+                    u32 counter3 : 1;
+                    u32 : 3;
+                    u32 freqHi3 : 3;
+    /* 0x0F */      u32 : 8;
+    /* 0x10 NR41 */ u32 : 2;
+                    u32 length4 : 6;
+    /* 0x11 NR42 */ u32 volume4 : 4;
+                    u32 envDir4 : 1;
+                    u32 envSweep4 : 3;
+    /* 0x12 NR43 */ u16 shift4 : 4;
+                    u32 width4 : 1;
+                    u32 ratio4 : 3;
+    /* 0x13 NR44 */ u32 trigger4 : 1;
+                    u32 counter4 : 1;
+                    u32 : 6;
+    /* 0x14 NR50 */ u32 vinLeft : 1;
+                    u32 leftVolume : 3;
+                    u32 vinRight : 1;
+                    u32 rightVolume : 3;
+    /* 0x15 NR51 */ u32 noiseLeft : 1;
+                    u32 waveLeft : 1;
+                    u32 sq2Left : 1;
+                    u32 sq1Left : 1;
+                    u32 noiseRight : 1;
+                    u32 waveRight : 1;
+                    u32 sq2Right : 1;
+                    u32 sq1Right : 1;
+    /* 0x16 NR52 */ u32 power : 1;
+                    u32 : 7;
+    /* 0x17 */      u32 : 8;
+} GbApuRegs; // size = 0x18
+
+#define GB_APU_REGS (*(GbApuRegs*)D_8120EA70)
+
+// A queued APU register write, packed into an OSMesg as (reg << 24) | (value << 16) | time.
+typedef struct GbApuWrite {
+    /* 0x0 */ u8 reg;
+    /* 0x1 */ u8 value;
+    /* 0x2 */ u16 time;
+} GbApuWrite; // size = 0x4
+
+extern GbApuWrite D_8122C8D8[];
 void func_81209374(s32 arg0, s16* arg1);
 extern s32 D_8122EE98;
 extern unk_D_8122EEA8 D_8122EEA8;
 extern OSMesgQueue D_8122EEB0;
-extern u8 D_8122C8D8[];
 extern OSMesg D_8122EEC8;
-extern void* D_812346E0;
-extern s32 D_812346C8;
+extern s16* D_812346E0[3];
+extern volatile s32 D_812346C8;
 extern s32 D_812346D0;
 extern s32 D_812346D4;
-extern s32 D_812346F4;
-extern s32 D_812346FC;
+extern u32 D_812346F4;
+extern volatile u32 D_812346FC;
 extern s16 D_81234690[];
 extern s16 D_812346EC[];
 
@@ -965,7 +1048,7 @@ void func_81208E28(s32 arg0) {
 }
 
 void func_81208E4C(void) {
-    void* sp34 = D_812346E0;
+    void* sp34 = D_812346E0[0];
     f32 x = (f32) D_8122C790;
     f32 y = (f32) D_8122C792;
     f32 dx = x / 640.0f;
@@ -1086,7 +1169,7 @@ void func_8120935C(s32 arg0) {
 }
 
 void func_81209368(s32 arg0) {
-  D_8120EB7C = arg0;
+  D_8120EB7C.id = arg0;
 }
 
 void func_81209374(s32 arg0, s16* arg1) {
