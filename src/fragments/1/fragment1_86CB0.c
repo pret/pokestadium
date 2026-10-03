@@ -788,178 +788,119 @@ void func_8120806C(u16 reg, u8 value) {
     }
 }
 
-void func_81208828(s32 arg0, s16* arg1, UNUSED s32 arg2, UNUSED s32 arg3, s32 arg4) {
-    OSMesg msg;
-    s32* s4;
-    OSMesgQueue* s7;
-    s32 s0;
-    s32 s1;
-    s32 s2;
-    s32 s5;
-    s32 s6;
-    s16* s3ptr;
-    s16* last;
-    s16* out;
-    s32 v1;
-    s32 t0;
-    s32 t1;
-    s32 t2;
-    s32 t3;
-    s32 t4;
-    s32 a0;
-    s32 a2;
-    s32 a3;
-    s32 t5;
-    s32 t6;
-    s32 t7;
-    s32 t8;
-    s32 t9;
-    s32 u0;
-    s32 u1;
-    s32 lim;
-    f32 rate;
-    f32 acc;
-    s32 factor;
+void func_81208828(s32 numSamples, s16* out) {
+    s32 i;
+    u32 sq1R;
+    u32 sq1L;
+    u32 sq2R;
+    u32 sq2L;
+    u32 waveR;
+    u32 waveL;
+    u32 noiseR;
+    u32 noiseL;
+    u32 right;
+    u32 left;
+    s32 sq1;
+    s32 sq2;
+    GbApuWrite msg;
+    s32 wave;
+    s32 noise;
+    s32 count;
+    s32 idx;
+    f32 step;
+    f32 pos;
+    s32 flush;
+    s32 first;
+    s32 startTime;
+    u32 lastTime;
+    s32 pad[3];
 
-    s7 = &D_8122EEB0;
-    s4 = (s32*) &D_8122C8D8[0];
-    s3ptr = (s16*) &msg;
-    s5 = arg4;
-    acc = 0.0f;
-    v1 = 1;
-    s1 = 0;
-    s2 = 0;
-    s0 = 0;
-    while (1) {
-        v1 = v1;
-        if (osRecvMesg(s7, &msg, 0) == -1) {
+    first = TRUE;
+    count = 0;
+    idx = 0;
+    lastTime = 0;
+    while (TRUE) {
+        if (osRecvMesg(&D_8122EEB0, (OSMesg*)&msg, OS_MESG_NOBLOCK) == -1) {
             break;
         }
-        if (v1 == 0) {
-            s5 = (u16) msg;
-            v1 = 0;
+        if (first) {
+            startTime = msg.time;
+            first = FALSE;
         }
-        if (((u16) msg & 0xFFFF) < (u32) s0) {
-            if ((u32) s5 < (u32) D_8120EAD0) {
-                osJamMesg(s7, msg, 0);
+        if (msg.time < lastTime) {
+            if (startTime < D_8120EAD0) {
+                osJamMesg(&D_8122EEB0, *(OSMesg*)&msg, OS_MESG_NOBLOCK);
                 break;
             }
-            s4[s1] = msg;
-            s1 += 1;
-            s0 = (u16) msg;
+            startTime = 0;
+            D_8122C8D8[count++] = msg;
+            lastTime = msg.time;
         } else {
-            s4[s1] = msg;
-            s1 += 1;
-            s0 = (u16) msg;
+            D_8122C8D8[count++] = msg;
+            lastTime = msg.time;
         }
     }
-    rate = (f32) D_8120EAC4 / (f32) arg0;
-    factor = (arg0 < s1) ? 1 : 0;
-    out = arg1;
-    if (arg0 > 0) {
-        last = (s16*) ((u8*) arg1 + (arg0 << 2));
-        factor = factor;
-        do {
-            acc += rate;
-            if (factor != 0) {
-                while (s1 != 0) {
-                    t7 = (s32) acc;
-                    t8 = t7 & 0xFFFF;
-                    if (t8 < (u32) ((s32*) &s4[s2])[0]) {
-                        break;
-                    }
-                    s0 = s4[s2];
-                    func_8120806C((u16) s0, (u8) (s0 >> 8));
-                    s1 -= 1;
-                    s2 += 1;
-                }
+
+    pos = 0.0f;
+    step = (f32)D_8120EAC4 / (f32)numSamples;
+    if (numSamples < count) {
+        flush = TRUE;
             } else {
-                if (s1 != 0) {
-                    t7 = (s32) acc;
-                    t8 = t7 & 0xFFFF;
-                    if (t8 < (u32) ((s32*) &s4[s2])[0]) {
-                    } else {
-                        s0 = s4[s2];
-                        func_8120806C((u16) s0, (u8) (s0 >> 8));
-                        s1 -= 1;
-                        s2 += 1;
-                    }
+        flush = FALSE;
+    }
+
+    for (i = 0; i < numSamples; i++) {
+        pos += step;
+        if (flush) {
+            while (TRUE) {
+                if (count == 0) {
+                    break;
                 }
+                if (((s32)pos & 0xFFFF) < D_8122C8D8[idx].time) {
+                    break;
+                }
+                func_8120806C(D_8122C8D8[idx].reg, D_8122C8D8[idx].value);
+                count--;
+                idx++;
             }
-            s6 = func_81207774();
-            s3ptr = (s16*) func_81207A60();
-            s0 = func_81207C5C();
-            s3ptr = (s16*) s0;
-            t0 = func_81207DF8();
-            t4 = 0;
-            t2 = 0;
-            t3 = 0;
-            t1 = 0;
-            t0 = 0;
-            a2 = 0;
-            a3 = 0;
-            s3ptr = s3ptr;
-            t9 = (s8) *(u8*) ((u8*) s7 + 0x15);
-            if (t9 < 0) {
-                t4 = t0;
+        } else if ((count != 0) && (((s32)pos & 0xFFFF) >= D_8122C8D8[idx].time)) {
+            func_8120806C(D_8122C8D8[idx].reg, D_8122C8D8[idx].value);
+            count--;
+            idx++;
+        }
+
+        sq1 = func_81207774();
+        sq2 = func_81207A60();
+        wave = func_81207C5C();
+        noise = func_81207DF8();
+
+        noiseL = GB_APU_REGS.noiseLeft ? noise : 0;
+        noiseR = GB_APU_REGS.noiseRight ? noise : 0;
+        waveL = GB_APU_REGS.waveLeft ? wave : 0;
+        waveR = GB_APU_REGS.waveRight ? wave : 0;
+        sq2L = GB_APU_REGS.sq2Left ? sq2 : 0;
+        sq2R = GB_APU_REGS.sq2Right ? sq2 : 0;
+        sq1L = GB_APU_REGS.sq1Left ? sq1 : 0;
+        sq1R = GB_APU_REGS.sq1Right ? sq1 : 0;
+
+        right = (sq1R + sq2R + waveR + noiseR) / (8 - GB_APU_REGS.rightVolume);
+        left = (sq1L + sq2L + waveL + noiseL) / (8 - GB_APU_REGS.leftVolume);
+        if (right >= 0x8000) {
+            right = 0x7FFF;
             }
-            t6 = *(u32*) ((u8*) s7 + 0x14);
-            if ((s32) (t6 << 12) < 0) {
-                t2 = t0;
+        if (left >= 0x8000) {
+            left = 0x7FFF;
             }
-            t8 = t6 << 9;
-            if ((s32) t8 < 0) {
-                t3 = s0;
-            }
-            t5 = t6 << 13;
-            if ((s32) t5 < 0) {
-                t1 = s0;
-            }
-            t7 = t6 << 10;
-            if ((s32) t7 < 0) {
-                t0 = s3ptr;
-            }
-            t9 = t6 << 14;
-            if ((s32) t9 < 0) {
-                a2 = s3ptr;
-            }
-            t6 = t6 << 11;
-            if ((s32) t6 < 0) {
-                a3 = s6;
-            }
-            a0 = 0;
-            t7 = *(u16*) ((u8*) s7 + 0x14);
-            if ((t7 & 1) != 0) {
-                a0 = s6;
-            }
-            t9 = a0 + a2 + t1 + t2;
-            t8 = *(u8*) ((u8*) s7 + 0x14) & 7;
-            t5 = a3 + t0 + t3;
-            lim = 8 - t8;
-            u0 = (u32) t9 / (u32) lim;
-            u1 = (u32) (t5 + t4) / (u32) (8 - ((u32) (t6 << 1) >> 29));
-            if (u0 >= 0x8000) {
-                u0 = 0x7FFF;
-            }
-            if (u1 >= 0x8000) {
-                u1 = 0x7FFF;
-            }
-            out[0] = u1;
-            out[1] = u0;
-            out += 2;
-        } while (out != last);
+        out[i * 2 + 0] = left;
+        out[i * 2 + 1] = right;
     }
-    if (s1 != 0) {
-        t6 = s2 << 2;
-        t9 = (s32*) &D_8122C8D8[0];
-        s4 = (s32*) ((u8*) t9 + t6);
-        do {
-            s0 = s4[0];
-            func_8120806C((u16) s0, (u8) (s0 >> 8));
-            s1 -= 1;
-            s4 += 1;
-        } while (s1 != 0);
+
+    while (count != 0) {
+        func_8120806C(D_8122C8D8[idx].reg, D_8122C8D8[idx].value);
+        count--;
+        idx++;
     }
+
     D_8122EEA8.unk_00 = 0;
     D_8122EEA8.unk_01 = 0;
     D_8122EEA8.unk_02 = 0;
