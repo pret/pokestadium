@@ -86,6 +86,7 @@
     - [0x373A0, c]  # battle code
     - [0x38BB0, c, libnumus/player]
     - [0x3D140, c]  # music code
+    - [0x3E170, c, 3D140_2]  # music code
     
     # libnaudiosc. Why are there so many gaps?
     - [0x43520, c, libnaudio/n_sl]
@@ -444,6 +445,7 @@
     - [0x7D230, .rodata, 373A0]
     - [0x7D340, .rodata, libnumus/player]
     - [0x7D3C0, .rodata, 3D140]
+    - [0x7D3E0, .rodata, 3D140_2]
     - [0x7D800, .rodata, 435D0]
     - [0x7D860, .rodata, 45720]
     - [0x7D880, .rodata, libnaudio/n_env]
@@ -613,7 +615,7 @@
     - [0xA8F00,  rodata, fragments/1/fragment1_rodata_A8F00]
     - [0xA9140,  rodata, fragments/1/fragment1_rodata_A9140]
     - [0xA9BE0,  rodata, fragments/1/fragment1_rodata_A9BE0]
-    - [0xAA6D0,  rodata, fragments/1/fragment1_rodata_AA6D0]
+    - [0xAA6D0,  .rodata, fragments/1/fragment1_7F9A0]
     - [0xAA8F0,  rodata, fragments/1/fragment1_rodata_AA8F0]
     - [0xAA900,  rodata, fragments/1/fragment1_rodata_AA900]
     - [0xAAA20,  .rodata, fragments/1/fragment1_86CB0]
