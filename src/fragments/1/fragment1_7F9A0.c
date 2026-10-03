@@ -1570,7 +1570,6 @@ void func_812033F4(s32 arg0, s32 arg1, OSId arg2, s32 arg3, OSMesgQueue* arg4, u
     osViSwapBuffer((&D_8122B1E0)[D_8122B2B8]->img_p);
     D_8122B2B8 ^= 1;
 }
-#ifdef NON_MATCHING
 void func_81203C58(unk_D_8122B2C0* arg0) {
     u16* list;
     s32 i;
@@ -1580,21 +1579,19 @@ void func_81203C58(unk_D_8122B2C0* arg0) {
     s32 j;
     u8* src;
     u8* dst;
-    u16 entry;
 
-    // Only the spill of (bank << 14) differs: target uses 0x44(sp), this compiles to 0x40(sp)
-    count = arg0->unk_5D70[2];
-    list = (u16*) count;
-    if (count != 0) {
+    // FAKE
+    if ((u16*) arg0->unk_5D70[2]) {}
+
+    list = (u16*) arg0->unk_5D70[2];
+    if (list != 0) {
         rom = arg0->unk_5D70[3] + 0x7C0000;
         do {
-            entry = *list;
-            bank = entry & 0xFF;
-            count = (s32) entry / 256;
+            bank = *list & 0xFF;
+            count = *list / 256;
             func_80003B30((u32) arg0->unk_53BC + 0xEC000, rom, list[1] + rom, 0);
-            entry = *list;
+            rom += list[1];
             list += 2;
-            rom += list[-1];
             Yay0_Decompress((void*) ((u32) arg0->unk_53BC + 0xEC000), (void*) ((u32) arg0->unk_53BC + (bank << 14)));
             for (i = 0; i < count; i++) {
                 if (i + 1 >= arg0->unk_5DC6) {
@@ -1606,18 +1603,12 @@ void func_81203C58(unk_D_8122B2C0* arg0) {
                         dst[j] ^= src[j];
                     }
                 }
-                rom += *list;
-                list++;
+                rom += *list++;
             }
             arg0->unk_549C[bank] = 0xFF;
-            entry = *list;
-        } while (entry);
+        } while (*list);
     }
 }
-#else
-void func_81203C58(unk_D_8122B2C0* arg0);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/1/fragment1_7F9A0/func_81203C58.s")
-#endif
 
 void func_81203E30(void) {
   if ((D_8122C4FA.unk_01 == D_8122C4FA.unk_00) || (D_8122C4FA.unk_00 >= 5) || (D_8122C4FA.unk_01 >= 5)) {
