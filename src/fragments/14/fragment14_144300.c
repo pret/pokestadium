@@ -537,7 +537,6 @@ s32 func_86801840(void) {
     return var_v1;
 }
 
-#ifdef NON_MATCHING
 s32 func_86801884(void) {
     s32 sp1C;
     s32 sp18;
@@ -665,9 +664,6 @@ s32 func_86801884(void) {
 
     return sp1C;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/14/fragment14_144300/func_86801884.s")
-#endif
 
 void func_86801CA8(void) {
     s32 var_s0;
