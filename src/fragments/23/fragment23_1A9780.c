@@ -1396,7 +1396,6 @@ s32 func_882051EC(unk_func_88203ED8* arg0, Controller* arg1) {
     return sp24;
 }
 
-#ifdef NON_MATCHING
 s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
     s32 sp34;
     s32 tmp;
@@ -1550,9 +1549,6 @@ s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
     }
     return sp34;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/23/fragment23_1A9780/func_882052F4.s")
-#endif
 
 void func_882057B4(unk_func_88203ED8* arg0, Controller* arg1) {
     s32 var_s1 = 0;
