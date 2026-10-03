@@ -1130,7 +1130,9 @@ void func_81209374(s32 numSamples, s16* out) {
     u32 vol;
     s32 a;
     s32 b;
+    s16* p;
 
+    p = out;
     mainData = NULL;
     altData = NULL;
     if (D_8120EB7C.id != 0) {
@@ -1140,6 +1142,7 @@ void func_81209374(s32 numSamples, s16* out) {
         D_8120EB7C.id = 0;
         D_8122869C = 0x400;
     }
+    vol = D_8122869C;
     if (D_8120EB84.id != 0) {
         mainData = D_81228654[D_8120EB84.id];
         mainEnd = D_81228678[D_8120EB84.id];
@@ -1149,8 +1152,6 @@ void func_81209374(s32 numSamples, s16* out) {
         altEnd = D_81228678[D_8120EB8C.id];
     }
 
-    vol = D_8122869C;
-    D_8122869C = vol;
     for (i = 0; i < numSamples; i++) {
         if (mainData != NULL) {
             if (mainEnd == D_8120EB84.pos) {
@@ -1174,9 +1175,10 @@ void func_81209374(s32 numSamples, s16* out) {
         } else {
             b = 0;
         }
-        out[i * 2 + 0] = (a + b) << 6;
-        out[i * 2 + 1] = (a - b) << 6;
+        p[i * 2 + 0] = (a + b) << 6;
+        p[i * 2 + 1] = (a - b) << 6;
     }
+    D_8122869C = vol;
 }
 #else
 void func_81209374(s32 numSamples, s16* out);
