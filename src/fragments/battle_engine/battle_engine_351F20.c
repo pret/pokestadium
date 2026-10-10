@@ -26,7 +26,6 @@ static Vtx D_84389810[] = {
     VTX(0, -20, 0, 1024, 0, 0xFF, 0xFF, 0xFF, 0x00),   VTX(30, -20, 0, 1024, 0, 0xFF, 0xFF, 0xFF, 0x00),
 };
 
-#ifdef NON_MATCHING
 Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8) {
     s32 i;
     Vtx* sp1E8;
@@ -55,7 +54,7 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
     f32 a3_y;
     f32 a3_z;
     f32 tmp1;
-    f32 tmp2;
+    f32 scaled_z;
     f32 tmp3;
 
     sp1DC = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
@@ -95,22 +94,27 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
 
     a3_x = arg4 * sp130;
     a3_y = arg4 * sp12C;
-    a3_z = arg4 * sp128;
+    scaled_z = arg4 * sp128;
 
     temp_v1 = sp1E8;
 
-    if (a3_z) {}
-
-    tmp1 = a2_y - a3_y * 2.0f;
+    // Dead early copies of the blends below; they only fix the order of IDO's spill slots.
+    sp8C = (-a2_x * 0.2f) + (a1_x * 1.2f);
+    sp88 = (-a2_y * 0.2f) + (a1_y * 1.2f);
+    sp84 = (-a2_z * 0.2f) + (a1_z * 1.2f);
+    sp80 = (a2_x * 1.2f) - (a1_x * 0.2f);
+    sp7C = (a2_y * 1.2f) - (a1_y * 0.2f);
+    sp78 = (a2_z * 1.2f) - (a1_z * 0.2f);
+    if (arg4) {}
 
     temp_v1->v.ob[0] = a3_x * 2.0f + a1_x;
     temp_v1->v.ob[1] = a3_y * 2.0f + a1_y;
-    temp_v1->v.ob[2] = a3_z * 2.0f + a1_z;
+    temp_v1->v.ob[2] = scaled_z * 2.0f + a1_z;
     temp_v1++;
 
     temp_v1->v.ob[0] = a3_x * 2.0f + a2_x;
     temp_v1->v.ob[1] = a3_y * 2.0f + a2_y;
-    temp_v1->v.ob[2] = a3_z * 2.0f + a2_z;
+    temp_v1->v.ob[2] = scaled_z * 2.0f + a2_z;
     temp_v1++;
 
     sp8C = (-a2_x * 0.2f) + (a1_x * 1.2f);
@@ -123,12 +127,12 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
 
     temp_v1->v.ob[0] = a3_x + sp8C;
     temp_v1->v.ob[1] = a3_y + sp88;
-    temp_v1->v.ob[2] = a3_z + sp84;
+    temp_v1->v.ob[2] = scaled_z + sp84;
     temp_v1++;
 
     temp_v1->v.ob[0] = a3_x + sp80;
     temp_v1->v.ob[1] = a3_y + sp7C;
-    temp_v1->v.ob[2] = a3_z + sp78;
+    temp_v1->v.ob[2] = scaled_z + sp78;
     temp_v1++;
 
     temp_v1->v.ob[0] = a1_x;
@@ -143,22 +147,25 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
 
     temp_v1->v.ob[0] = sp8C - a3_x;
     temp_v1->v.ob[1] = sp88 - a3_y;
-    temp_v1->v.ob[2] = sp84 - a3_z;
+    temp_v1->v.ob[2] = sp84 - scaled_z;
     temp_v1++;
 
     temp_v1->v.ob[0] = sp80 - a3_x;
     temp_v1->v.ob[1] = sp7C - a3_y;
-    temp_v1->v.ob[2] = sp78 - a3_z;
+    temp_v1->v.ob[2] = sp78 - scaled_z;
     temp_v1++;
 
     temp_v1->v.ob[0] = a1_x - a3_x * 2.0f;
     temp_v1->v.ob[1] = a1_y - a3_y * 2.0f;
-    temp_v1->v.ob[2] = a1_z - a3_z * 2.0f;
+    temp_v1->v.ob[2] = a1_z - scaled_z * 2.0f;
     temp_v1++;
 
     temp_v1->v.ob[0] = a2_x - a3_x * 2.0f;
-    temp_v1->v.ob[1] = tmp1;
-    temp_v1->v.ob[2] = a2_z - a3_z * 2.0f;
+    temp_v1->v.ob[1] = a2_y - a3_y * 2.0f;
+    temp_v1->v.ob[2] = a2_z - scaled_z * 2.0f;
+    // Dead stores; they raise scaled_z's register-allocation priority.
+    scaled_z += 1.0f;
+    scaled_z += 1.0f;
     temp_v1++;
 
     guTranslate(sp1DC, 0.0f, 0.0f, 0.0f);
@@ -174,6 +181,3 @@ Gfx* func_84367660(Gfx* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, u
 
     return arg0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_engine/battle_engine_351F20/func_84367660.s")
-#endif
