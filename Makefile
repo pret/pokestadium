@@ -42,8 +42,9 @@ else
 endif
 
 #### Defaults ####
-# Target game version. Currently only the following version is supported:
+# Target game version. Supported versions:
 #   us   N64 US (default)
+#   us_rev1   N64 US revision 1
 VERSION ?= us
 # If COMPARE is 1, check the output md5sum after building
 COMPARE ?= 1
@@ -121,6 +122,9 @@ ULTRALIB_TARGET      := libultra_rom
 ### Output ###
 
 BUILD_DIR := build
+ifeq ($(VERSION),us_rev1)
+BUILD_DIR := build/us_rev1
+endif
 ROM       := $(BUILD_DIR)/$(TARGET)-$(VERSION).z64
 ELF       := $(ROM:.z64=.elf)
 MAP       := $(ROM:.z64=.map)
@@ -133,8 +137,10 @@ BUILD_DEFINES ?=
 
 ifeq ($(VERSION),us)
   BUILD_DEFINES   += -DVERSION_US=1
+else ifeq ($(VERSION),us_rev1)
+  BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV1=1
 else
-$(error Invalid VERSION variable detected. Please use 'us')
+$(error Invalid VERSION variable detected. Please use 'us' or 'us_rev1')
 endif
 
 
@@ -267,7 +273,7 @@ LIBULTRA_DIR  := lib/libultra
 LIBULTRA_LIB  := $(BUILD_DIR)/$(LIBULTRA_DIR).a
 
 SRC_DIRS      := $(shell find src -type d)
-ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*" -not -path "asm/$(VERSION)/lib/*")
+ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*" -not -path "asm/$(VERSION)/matchings*" -not -path "asm/$(VERSION)/lib/*")
 ASSET_DIRS    := $(shell find assets/$(VERSION) -type d)
 LIB_DIRS      := $(foreach f, $(LIBULTRA_DIR), $f)
 
@@ -294,27 +300,27 @@ $(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(BUILD_DIR)/linker_scri
 
 
 # directory flags
-build/src/boot/O2/%.o: OPTFLAGS := -O2
-build/src/boot/libc/%.o: OPTFLAGS := -O2
-build/src/boot/libc64/%.o: OPTFLAGS := -O2
-build/src/boot/libm/%.o: OPTFLAGS := -O2
-build/src/boot/libu64/%.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/boot/O2/%.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/boot/libc/%.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/boot/libc64/%.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/boot/libm/%.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/boot/libu64/%.o: OPTFLAGS := -O2
 
 # per-file flags
 
-build/src/boot/fault.o: CFLAGS += -trapuv
-build/src/boot/fault_drawer.o: CFLAGS += -trapuv
-build/src/controller_ram.o: OPTFLAGS += -Wo,-loopunroll,0
-build/src/hal_libc.o: CFLAGS += -signed
+$(BUILD_DIR)/src/boot/fault.o: CFLAGS += -trapuv
+$(BUILD_DIR)/src/boot/fault_drawer.o: CFLAGS += -trapuv
+$(BUILD_DIR)/src/controller_ram.o: OPTFLAGS += -Wo,-loopunroll,0
+$(BUILD_DIR)/src/hal_libc.o: CFLAGS += -signed
 
-build/src/libleo/%.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/libleo/%.o: CC := $(CC_OLD)
 
-build/src/jpegutils.o: CC := $(CC_OLD)
-build/src/jpeg_decoder.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/jpegutils.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/jpeg_decoder.o: CC := $(CC_OLD)
 
-build/src/flash.o: CC := $(CC_OLD)
-build/src/flash.o: OPTFLAGS := -O0
-build/src/flash.o: MIPS_VERSION := -mips1
+$(BUILD_DIR)/src/flash.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/flash.o: OPTFLAGS := -O0
+$(BUILD_DIR)/src/flash.o: MIPS_VERSION := -mips1
 
 ifeq ($(COLOR),1)
 NO_COL  := \033[0m
@@ -331,7 +337,7 @@ define print
 endef
 
 DECOMP_POKESTADIUM := $(filter-out src/libleo/%,$(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)))
-DECOMP_POKESTADIUM_FILTERED := $(patsubst %.c,%.o,$(addprefix build/,$(shell find $(DECOMP_POKESTADIUM) -type f -exec grep -lE "GLOBAL_ASM|SWAP_FUNCTION_WORDS" {} \;)))
+DECOMP_POKESTADIUM_FILTERED := $(patsubst %.c,%.o,$(addprefix $(BUILD_DIR)/,$(shell find $(DECOMP_POKESTADIUM) -type f -exec grep -lE "GLOBAL_ASM|SWAP_FUNCTION_WORDS" {} \;)))
 
 # only run asm processor on files that need it.
 ifeq ($(DETECTED_OS),windows)
@@ -348,7 +354,7 @@ endif
 # This is unsanitary to do, -but-, because this file is encrypted we cant have splat decrypt it
 # on split. This requires us to include this manually, but it needs to be in the dependency
 # list. So we add it.
-O_FILES += build/src/libleo/bootstrap.s.o
+O_FILES += $(BUILD_DIR)/src/libleo/bootstrap.s.o
 
 #### Main Targets ###
 
@@ -367,10 +373,7 @@ libclean:
 	@$(PRINT) "$(RED)Cleaning libultra build files...\n$(NO_COL)"
 	$(V)$(MAKE) -C lib/ultralib clean VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET)
 	$(V)$(RM) -rf $(BUILD_DIR)/lib
-	$(V)$(RM) -r build/$(TARGET)-$(VERSION).elf
-	$(V)$(RM) -r build/$(TARGET)-$(VERSION).ld
-	$(V)$(RM) -r build/$(TARGET)-$(VERSION).map
-	$(V)$(RM) -r build/$(TARGET)-$(VERSION).z64
+	$(V)$(RM) -r $(ELF) $(LDSCRIPT) $(MAP) $(ROM)
 
 distclean: clean libclean
 	@$(PRINT) "$(RED)Performing full source distribution clean...\n$(NO_COL)"
@@ -394,7 +397,7 @@ extract:
 	$(V)$(RM) -r asm/$(VERSION) assets/$(VERSION)
 	$(V)$(CAT) yamls/$(VERSION)/header.yaml yamls/$(VERSION)/rom.yaml > $(SPLAT_YAML)
 	$(V)$(SPLAT) $(SPLAT_FLAGS) $(SPLAT_YAML)
-	$(V)PYTHON="$(PYTHON)" $(EXTRACT_ASSETS)
+	$(V)PYTHON="$(PYTHON)" VERSION="$(VERSION)" $(EXTRACT_ASSETS)
 
 lib: $(ULTRALIB_LIB)
 

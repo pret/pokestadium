@@ -551,13 +551,21 @@ void TeamSelection_RulePrompt_HandleInput(void) {
             Audio_PlaySoundEffectById(SFX_MENU_BACK);
             D_8423E58A = -1;
             D_84211700 = 3;
-        } else if (BTN_IS_PRESSED(D_8423E584, BTN_DUP)) {
+        } else if (BTN_IS_PRESSED(D_8423E584, BTN_DUP)
+#ifdef VERSION_US_REV1
+                   && (tmp >= 2)
+#endif
+        ) {
             Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             D_8423E58A -= 1;
             if (D_8423E58A < 0) {
                 D_8423E58A = tmp - 1;
             }
-        } else if (BTN_IS_PRESSED(D_8423E584, BTN_DDOWN)) {
+        } else if (BTN_IS_PRESSED(D_8423E584, BTN_DDOWN)
+#ifdef VERSION_US_REV1
+                   && (tmp >= 2)
+#endif
+        ) {
             Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             D_8423E58A += 1;
             if (D_8423E58A >= tmp) {
