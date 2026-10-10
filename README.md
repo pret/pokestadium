@@ -1,3 +1,6 @@
+# AI Disclaimer
+This used a substantial amount of AI for *matching* functions and *annotating widely used structs and globals*. Function-to-function documentation and annotation is done by humans and AI-annotation is limited to domains where abundant examples exist in the ROM. 
+
 # Pokemon Stadium (US)
 A WIP decomp of Pokemon Stadium (US).
 
@@ -32,34 +35,5 @@ python3 -m pip install -r requirements.txt
 2. Set up tools and extract the rom: `make init`
 3. Re-assemble the rom: `make`
 
-## US Rev. 1
-
-Place your big-endian US Rev. 1 ROM in `baseroms/us_rev1/baserom.z64`.
-Its SHA-1 must be `488bb6d112427823d77fcecdd9297fd86875263d`.
-After installing the prerequisites above, initialize and build this target with:
-
-```powershell
-make init VERSION=us_rev1
-make VERSION=us_rev1
-```
-
-If the tools and Python environment are already set up, use:
-
-```powershell
-make extract VERSION=us_rev1
-make VERSION=us_rev1
-```
-
-Source is shared between the two targets. Assembly fallbacks and packed assets
-are extracted from each target's own ROM, and Rev. 1 objects use a separate
-build directory. Run `make extract VERSION=us` before building US 1.0 if its
-assets have not yet been extracted. `make init`/`make distclean` remove shared
-extraction directories; `make clean` for the default target removes the entire
-`build` directory, including the nested Rev. 1 build.
-
-Rev. 1 currently keeps its changed GB Tower function `func_8120572C` in
-extracted assembly rather than matching C. This is revision support, not a
-claim that the revised function has been decompiled. Both targets retain their
-normal full-ROM checksum verification. ROMs are not distributed by this repo.
-
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+Last mile decomp and annotation work done by [Team Hippodrome](https://discord.gg/8EvuQxbxu8).
