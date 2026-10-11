@@ -7245,7 +7245,6 @@ u8 D_81228678[0x24] = {
     0x00, 0x00, 0x28, 0xD0, 0x00, 0x00, 0x1A, 0xE0, 0x00, 0x00, 0x41, 0x90, 0x00, 0x00, 0x32, 0x60,
     0x00, 0x00, 0x1C, 0xE0,
 };
-u32 D_8122869C = 0;
 
 #define GB_AUDIO_STREAM_DATA ((s8**)D_81228654)
 #define GB_AUDIO_STREAM_SIZE ((s32*)D_81228678)
@@ -7791,16 +7790,21 @@ void GbAudio_SetAlternateStreamId(s32 arg0) {
   D_8120EB7C.id = arg0;
 }
 
-#ifdef NON_MATCHING
+typedef struct GbStereoSample {
+    /* 0x0 */ s16 left;
+    /* 0x2 */ s16 right;
+} GbStereoSample; // size = 0x4
+
 void func_81209374(s32 numSamples, s16* out) {
+    static u32 D_8122869C = 0;
+
     s32 i;
     s8* mainData;
     s8* altData;
-    u32 vol;
     s32 a;
+    s32 b;
     s32 mainEnd;
     s32 altEnd;
-    s32 b;
 
     mainData = NULL;
     altData = NULL;
@@ -7811,7 +7815,6 @@ void func_81209374(s32 numSamples, s16* out) {
         D_8120EB7C.id = 0;
         D_8122869C = 0x400;
     }
-    vol = D_8122869C;
     if (D_8120EB84.id != 0) {
         mainData = GB_AUDIO_STREAM_DATA[D_8120EB84.id];
         mainEnd = GB_AUDIO_STREAM_SIZE[D_8120EB84.id];
@@ -7841,20 +7844,15 @@ void func_81209374(s32 numSamples, s16* out) {
                 b = 0;
             } else {
                 b = altData[D_8120EB8C.pos++];
-                b = (s32)(b * vol) / 1024;
+                b = (s32)(b * D_8122869C) / 1024;
             }
         } else {
             b = 0;
         }
-        out[i * 2 + 0] = (a + b) << 6;
-        out[i * 2 + 1] = (a - b) << 6;
+        ((GbStereoSample*)out)[i].left = (a + b) << 6;
+        ((GbStereoSample*)out)[i].right = (a - b) << 6;
     }
-    D_8122869C = vol;
 }
-#else
-void func_81209374(s32, s16*);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/gb_tower_emulator/gb_tower_emulator_86CB0/func_81209374.s")
-#endif
 
 void func_81209688(UNUSED s32 arg0) {
 }
