@@ -4275,9 +4275,9 @@ void BattleScene_ConfigureAudioChannelGroupCounts(void) {
 }
 
 void BattleScene_SelectBattleMusic(void) {
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 0:
-            switch (D_800AE540.unk_0001) {
+            switch (gSessionContext.ruleCategory) {
                 case 0:
                     Audio_SelectModeMusic(0, 0xE);
                     break;
@@ -4317,77 +4317,77 @@ void BattleScene_SelectBattleMusic(void) {
             break;
 
         case 1:
-            Audio_SelectModeMusic(D_800AE540.unk_0003, 0xA);
+            Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 0xA);
             break;
 
         case 2:
-            Audio_SelectModeMusic(D_800AE540.unk_0003, 0xB);
+            Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 0xB);
             break;
 
         case 3:
-            switch (D_800AE540.unk_0002) {
+            switch (gSessionContext.modeSelection) {
                 case 0:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 6);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 6);
                     break;
 
                 case 1:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 7);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 7);
                     break;
 
                 case 2:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 8);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 8);
                     break;
 
                 case 3:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 9);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 9);
                     break;
             }
             break;
 
         case 4:
-            Audio_SelectModeMusic(D_800AE540.unk_0003, 5);
+            Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 5);
             break;
 
         case 5:
-            Audio_SelectModeMusic(D_800AE540.unk_0003, 4);
+            Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 4);
             break;
 
         case 6:
-            switch (D_800AE540.unk_0002) {
+            switch (gSessionContext.modeSelection) {
                 case 0:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 0);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 0);
                     break;
 
                 case 1:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 1);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 1);
                     break;
 
                 case 2:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 2);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 2);
                     break;
 
                 case 3:
-                    Audio_SelectModeMusic(D_800AE540.unk_0003, 3);
+                    Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 3);
                     break;
             }
             break;
 
         case 7:
-            if (D_800AE540.unk_0002 == 9) {
+            if (gSessionContext.modeSelection == 9) {
                 Audio_SelectModeMusic(5, 0xD);
-            } else if (D_800AE540.unk_0002 == 8) {
-                Audio_SelectModeMusic(D_800AE540.unk_0003, 0xD);
+            } else if (gSessionContext.modeSelection == 8) {
+                Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 0xD);
             } else {
-                Audio_SelectModeMusic((D_800AE540.unk_0002 * 4) + D_800AE540.unk_0003, 0xC);
+                Audio_SelectModeMusic((gSessionContext.modeSelection * 4) + gSessionContext.roundOrDemoId, 0xC);
             }
             break;
 
         case 8:
-            Audio_SelectModeMusic(D_800AE540.unk_0003, 0xF);
+            Audio_SelectModeMusic(gSessionContext.roundOrDemoId, 0xF);
             break;
 
         case 10:
-            switch (D_800AE540.unk_0001) {
+            switch (gSessionContext.ruleCategory) {
                 case 0:
                     Audio_SelectModeMusic(0xFF, 0xE);
                     break;
@@ -4433,13 +4433,13 @@ void BattleScene_SelectBattleMusic(void) {
 }
 
 void BattleScene_StartBattleMusic(void) {
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 16:
             Audio_StartMusicTrack(1);
             break;
 
         case 0:
-            switch (D_800AE540.unk_0001) {
+            switch (gSessionContext.ruleCategory) {
                 case 0:
                     Audio_StartTrackForCategory(0, 0xE);
                     break;
@@ -4479,77 +4479,77 @@ void BattleScene_StartBattleMusic(void) {
             break;
 
         case 1:
-            Audio_StartTrackForCategory(D_800AE540.unk_0003, 0xA);
+            Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 0xA);
             break;
 
         case 2:
-            Audio_StartTrackForCategory(D_800AE540.unk_0003, 0xB);
+            Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 0xB);
             break;
 
         case 3:
-            switch (D_800AE540.unk_0002) {
+            switch (gSessionContext.modeSelection) {
                 case 0:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 6);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 6);
                     break;
 
                 case 1:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 7);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 7);
                     break;
 
                 case 2:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 8);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 8);
                     break;
 
                 case 3:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 9);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 9);
                     break;
             }
             break;
 
         case 4:
-            Audio_StartTrackForCategory(D_800AE540.unk_0003, 5);
+            Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 5);
             break;
 
         case 5:
-            Audio_StartTrackForCategory(D_800AE540.unk_0003, 4);
+            Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 4);
             break;
 
         case 6:
-            switch (D_800AE540.unk_0002) {
+            switch (gSessionContext.modeSelection) {
                 case 0:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 0);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 0);
                     break;
 
                 case 1:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 1);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 1);
                     break;
 
                 case 2:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 2);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 2);
                     break;
 
                 case 3:
-                    Audio_StartTrackForCategory(D_800AE540.unk_0003, 3);
+                    Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 3);
                     break;
             }
             break;
 
         case 7:
-            if (D_800AE540.unk_0002 == 9) {
+            if (gSessionContext.modeSelection == 9) {
                 Audio_StartTrackForCategory(5, 0xD);
-            } else if (D_800AE540.unk_0002 == 8) {
-                Audio_StartTrackForCategory(D_800AE540.unk_0003, 0xD);
+            } else if (gSessionContext.modeSelection == 8) {
+                Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 0xD);
             } else {
-                Audio_StartTrackForCategory((D_800AE540.unk_0002 * 4) + D_800AE540.unk_0003, 0xC);
+                Audio_StartTrackForCategory((gSessionContext.modeSelection * 4) + gSessionContext.roundOrDemoId, 0xC);
             }
             break;
 
         case 8:
-            Audio_StartTrackForCategory(D_800AE540.unk_0003, 0xF);
+            Audio_StartTrackForCategory(gSessionContext.roundOrDemoId, 0xF);
             break;
 
         case 10:
-            switch (D_800AE540.unk_0001) {
+            switch (gSessionContext.ruleCategory) {
                 case 0:
                     Audio_StartTrackForCategory(0xFF, 0xE);
                     break;

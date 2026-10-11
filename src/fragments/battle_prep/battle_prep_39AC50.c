@@ -832,12 +832,12 @@ void BattlePrepRoster_LoadDexIdsSingle(unk_D_84B25A28* arg0) {
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_20, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0x60, 1));
 
-    for (count = 0, i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (count = 0, i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
     }
 
-    for (count = 6, i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (count = 6, i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
     }
 }
 
@@ -848,30 +848,30 @@ void BattlePrepRoster_LoadDexIdsDouble(unk_D_84B25A28* arg0) {
 
     PokeIcon_AttachDepthBuffer(arg0->unk_20, tmp, GfxImage_Allocate(0, 2, 0x60, 0x40, 1));
 
-    for (count = 0, i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (count = 0, i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
     }
 
-    if (D_800AE540.unk_1194[0].unk_08[1] != NULL) {
-        for (i = 0, count = 6; i < D_800AE540.unk_1194[0].unk_08[1]->unk_214->unk_002; count++, i++) {
-            func_8001A324(arg0->unk_20, count, D_800AE540.unk_1194[0].unk_08[1]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    if (gSessionContext.battleSides[0].unk_08[1] != NULL) {
+        for (i = 0, count = 6; i < gSessionContext.battleSides[0].unk_08[1]->unk_214->unk_002; count++, i++) {
+            func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].unk_08[1]->unk_214->unk_028[i].unk_00.unk_00, 0);
         }
     }
 
-    for (i = 0, count = 12; i < D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (i = 0, count = 12; i < gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
     }
 
-    if (D_800AE540.unk_1194[1].unk_08[1] != NULL) {
-        for (count = 18, i = 0; i < D_800AE540.unk_1194[1].unk_08[1]->unk_214->unk_002; count++, i++) {
-            func_8001A324(arg0->unk_20, count, D_800AE540.unk_1194[1].unk_08[1]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    if (gSessionContext.battleSides[1].unk_08[1] != NULL) {
+        for (count = 18, i = 0; i < gSessionContext.battleSides[1].unk_08[1]->unk_214->unk_002; count++, i++) {
+            func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].unk_08[1]->unk_214->unk_028[i].unk_00.unk_00, 0);
         }
     }
 }
 
 void BattlePrepRoster_Load(unk_D_84B25A28* arg0, BinArchive* arg1) {
-    u8* sp24 = BinArchive_GetFile(arg1, D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_003);
-    u8* sp20 = BinArchive_GetFile(arg1, D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_003);
+    u8* sp24 = BinArchive_GetFile(arg1, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_003);
+    u8* sp20 = BinArchive_GetFile(arg1, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_003);
 
     PokeIcon_OpenModelArchives();
     FRAGMENT_LOAD(fragment31);
@@ -973,7 +973,7 @@ void BattlePrepRoster_Init(unk_D_84B25A28* arg0, unk_D_86002F34_00C* arg1) {
     arg0->unk_24 = GfxImage_Allocate(0, 2, 0x40, 0x60, 0);
     arg0->unk_28 = GfxImage_Allocate(0, 2, 0x40, 0x60, 0);
 
-    if ((D_800AE540.unk_0001 == 0) && ((D_800AE540.unk_1194[0].unk_01 == 2) || (D_800AE540.unk_1194[1].unk_01 == 2))) {
+    if ((gSessionContext.ruleCategory == 0) && ((gSessionContext.battleSides[0].unk_01 == 2) || (gSessionContext.battleSides[1].unk_01 == 2))) {
         arg0->unk_02 = 1;
     }
     if (arg0->unk_02 == 1) {

@@ -25,9 +25,9 @@ static u8 D_84385750[] = {
 };
 
 void BattleScene_InitializePresentationTimers(void) {
-    D_8439012C = D_800AE540.unk_11EF * 0x1E;
-    D_84390130 = D_800AE540.unk_11EE * 0x708;
-    D_84390128 = D_800AE540.unk_11EE * 0x708;
+    D_8439012C = gSessionContext.moveLimitSeconds * 0x1E;
+    D_84390130 = gSessionContext.battleLimitMinutes * 0x708;
+    D_84390128 = gSessionContext.battleLimitMinutes * 0x708;
 }
 
 void BattleScene_QuantizePresentationTimer(void) {
@@ -46,7 +46,7 @@ s32 BattleScene_TickPresentationTimer(void) {
 }
 
 s32 BattleScene_IsPresentationCountdownComplete(void) {
-    if (D_800AE540.unk_11ED == 0) {
+    if (gSessionContext.timeLimitsEnabled == 0) {
         return 0;
     }
 
@@ -130,7 +130,7 @@ s32 BattleScene_UpdateResultPresentation(void) {
     s32 sp1C = 0;
     s32 var_v0;
 
-    if (D_800AE540.unk_11ED == 0) {
+    if (gSessionContext.timeLimitsEnabled == 0) {
         return 0;
     }
 
@@ -165,7 +165,7 @@ s32 BattleScene_UpdateResultPresentation(void) {
 }
 
 s32 BattleScene_IsActionSelectionTimerExpired(void) {
-    if (D_800AE540.unk_11ED == 0) {
+    if (gSessionContext.timeLimitsEnabled == 0) {
         return 0;
     }
 
@@ -196,7 +196,7 @@ s32 BattleScene_IsActionSelectionTimerExpired(void) {
 }
 
 void BattleScene_ResetActionSelectionTimer(void) {
-    D_84390124 = D_800AE540.unk_11EF * 0x1E;
+    D_84390124 = gSessionContext.moveLimitSeconds * 0x1E;
 }
 
 s32 BattleScene_TickActionSelectionTimers(void) {
@@ -1318,7 +1318,7 @@ void BattleScene_CollectActions(void) {
 
 void BattleScene_UpdateActionCollection(void) {
     D_84390288 = 0;
-    if (D_800AE540.unk_0000 == 0x10) {
+    if (gSessionContext.mode == 0x10) {
         BattleScene_TickAttractModeInput();
     } else {
         BattleScene_CollectActions();

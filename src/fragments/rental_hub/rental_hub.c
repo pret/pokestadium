@@ -56,9 +56,9 @@ void RentalHub_DrawHeader(void) {
     Font_BeginTranslucentTextRendering();
     Font_SetActive(0x10, 0);
     Gfx_SetEnvColor(0, 0, 0, 0xFF);
-    Font_Printf(0x6A, 0x2C, Text_GetString(NULL, 0, D_82B01140, D_82B0112C[D_800AE540.unk_0000]));
+    Font_Printf(0x6A, 0x2C, Text_GetString(NULL, 0, D_82B01140, D_82B0112C[gSessionContext.mode]));
     Gfx_SetEnvColor(0xFF, 0xFF, 0x77, 0xFF);
-    Font_Printf(0x68, 0x2A, Text_GetString(NULL, 0, D_82B01140, D_82B0112C[D_800AE540.unk_0000]));
+    Font_Printf(0x68, 0x2A, Text_GetString(NULL, 0, D_82B01140, D_82B0112C[gSessionContext.mode]));
     Font_EndTexturedTextRendering();
 }
 
@@ -175,7 +175,7 @@ void RentalHub_FadeInWait(void) {
 }
 
 void RentalHub_FadeOutWait(void) {
-    if ((D_800AE540.unk_0000 == 7) || (D_800AE540.unk_0000 == 8)) {
+    if ((gSessionContext.mode == 7) || (gSessionContext.mode == 8)) {
         Audio_StopMusic(0x10);
     }
 
@@ -220,7 +220,7 @@ s16 RentalHub_MenuLoop(void) {
     if (temp_s1 == 'btnA') {
         var_v1 = D_82B0114C + 1;
     } else {
-        if (D_800AE540.unk_0000 != 0) {
+        if (gSessionContext.mode != 0) {
             RentalHub_FadeOutWait();
         }
         var_v1 = 0;
@@ -231,14 +231,14 @@ s16 RentalHub_MenuLoop(void) {
 void RentalHub_LoadBackgroundImage(ModeSettings* arg0) {
     D_82B01144 = BinArchive_Open(backgrounds_ROM_START, battle_headers_ROM_START, 1, 1);
 
-    if (D_800AE540.unk_0000 == 7) {
+    if (gSessionContext.mode == 7) {
         if (arg0->unk_04 < 8) {
             D_82B01148 = BinArchive_GetFile(D_82B01144, 0xD);
         } else {
             D_82B01148 = BinArchive_GetFile(D_82B01144, 0x10);
         }
     } else {
-        D_82B01148 = BinArchive_GetFile(D_82B01144, D_82B01120[D_800AE540.unk_0000]);
+        D_82B01148 = BinArchive_GetFile(D_82B01144, D_82B01120[gSessionContext.mode]);
     }
 }
 
@@ -250,7 +250,7 @@ s32 RentalHub_MenuMain(void) {
     main_pool_push_state('menu');
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&sp1C, D_800AE540.unk_11F2);
+    Save_GetModeSettings(&sp1C, gSessionContext.unk_11F2);
     Font_Init(0x10, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
@@ -262,7 +262,7 @@ s32 RentalHub_MenuMain(void) {
     D_82B01140 = Text_GetStringTable(0x18);
     D_82B0114C = 0;
 
-    if (D_800AE540.unk_0000 == 7) {
+    if (gSessionContext.mode == 7) {
         if (sp1C.unk_04 < 8) {
             Audio_PlayMusicIfChanged(0x2A);
         } else {

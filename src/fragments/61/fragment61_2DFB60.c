@@ -888,7 +888,7 @@ s32 Rental_PrimeCarousel(RentalCarouselState* arg0, RentalTeamTray* arg1, unk_D_
     }
 
     for (i = 12; i >= 0; i--) {
-        if (Rental_BuildBoxFilterIndex(arg0, i, D_800AE540.unk_0001) > 0) {
+        if (Rental_BuildBoxFilterIndex(arg0, i, gSessionContext.ruleCategory) > 0) {
             arg0->unk_00005 = i;
         }
     }

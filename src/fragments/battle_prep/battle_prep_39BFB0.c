@@ -517,7 +517,7 @@ void BattlePrepTeamIcons_DrawHpBarsSingle(unk_D_84B25A58* arg0, s32 arg1) {
     s32 var_s0;
 
     for (i = 0; i < 2; i++) {
-        temp_s5 = D_800AE540.unk_1194[i].unk_08[0];
+        temp_s5 = gSessionContext.battleSides[i].unk_08[0];
 
         for (j = 0; j < temp_s5->unk_002; j++) {
             temp_lo = temp_s5->unk_01C[j].unk_26 * arg1;
@@ -541,7 +541,7 @@ void BattlePrepTeamIcons_DrawHpBarsDouble(unk_D_84B25A58* arg0, s32 arg1) {
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 2; j++) {
-            temp_s5 = D_800AE540.unk_1194[i].unk_08[j];
+            temp_s5 = gSessionContext.battleSides[i].unk_08[j];
 
             if (temp_s5 != NULL) {
                 for (x = 0; x < temp_s5->unk_002; x++) {
@@ -566,7 +566,7 @@ void BattlePrepTeamIcons_MarkFaintedSingle(unk_D_84B25A58* arg0, s32 arg1) {
     s32 j;
 
     for (i = 0; i < 2; i++) {
-        temp_s5 = D_800AE540.unk_1194[i].unk_08[0];
+        temp_s5 = gSessionContext.battleSides[i].unk_08[0];
 
         for (j = 0; j < temp_s5->unk_002; j++) {
             if (arg1 == temp_s5->unk_01C[j].unk_25) {
@@ -587,7 +587,7 @@ void BattlePrepTeamIcons_MarkFaintedDouble(unk_D_84B25A58* arg0, s32 arg1) {
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 2; j++) {
-            temp_s5 = D_800AE540.unk_1194[i].unk_08[j];
+            temp_s5 = gSessionContext.battleSides[i].unk_08[j];
 
             if (temp_s5 != NULL) {
                 for (x = 0; x < temp_s5->unk_002; x++) {
@@ -801,22 +801,22 @@ void BattlePrepTeamIcons_HpDrainStepDoublePAL(unk_D_84B25A58* arg0, s16 arg1) {
 
 void BattlePrepTeamIcons_FinalRevealSingle(unk_D_84B25A58* arg0, s16 arg1) {
     s32 i;
-    BattleMon* temp_s5 = D_800AE540.unk_1194[0].unk_08[0]->unk_01C;
-    BattleMon* temp_s6 = D_800AE540.unk_1194[1].unk_08[0]->unk_01C;
+    BattleMon* temp_s5 = gSessionContext.battleSides[0].unk_08[0]->unk_01C;
+    BattleMon* temp_s6 = gSessionContext.battleSides[1].unk_08[0]->unk_01C;
 
     if (arg1 == 0) {
         BattlePrepTeamIcons_InitDisplayObjectsSingleHidden(arg0);
     }
 
     if (arg1 < 0x10) {
-        for (i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; i++) {
+        for (i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_002; i++) {
             if (temp_s5[i].unk_25 != 0) {
                 arg0->unk_04[1 + i].rotation.y += 0x800;
                 arg0->unk_04[9 + i].rotation.y += 0x800;
             }
         }
 
-        for (i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; i++) {
+        for (i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; i++) {
             if (temp_s6[i].unk_25 != 0) {
                 arg0->unk_04[4 + i].rotation.y -= 0x800;
                 arg0->unk_04[12 + i].rotation.y -= 0x800;
@@ -832,7 +832,7 @@ void BattlePrepTeamIcons_FinalRevealSingle(unk_D_84B25A58* arg0, s16 arg1) {
         }
 
         for (i = 0; i < 3; i++) {
-            if ((i >= D_800AE540.unk_1194[0].unk_08[0]->unk_002) || (temp_s5[i].unk_25 == 0)) {
+            if ((i >= gSessionContext.battleSides[0].unk_08[0]->unk_002) || (temp_s5[i].unk_25 == 0)) {
                 Model_InitDisplayObject(&arg0->unk_04[1 + i], 0, 0, arg0->unk_08);
             } else {
                 Model_InitDisplayObject(&arg0->unk_04[1 + i], 0, 0, arg0->unk_10);
@@ -840,7 +840,7 @@ void BattlePrepTeamIcons_FinalRevealSingle(unk_D_84B25A58* arg0, s16 arg1) {
         }
 
         for (i = 0; i < 3; i++) {
-            if ((i >= D_800AE540.unk_1194[1].unk_08[0]->unk_002) || (temp_s6[i].unk_25 == 0)) {
+            if ((i >= gSessionContext.battleSides[1].unk_08[0]->unk_002) || (temp_s6[i].unk_25 == 0)) {
                 Model_InitDisplayObject(&arg0->unk_04[4 + i], 0, 0, arg0->unk_08);
             } else {
                 Model_InitDisplayObject(&arg0->unk_04[4 + i], 0, 0, arg0->unk_10);
@@ -851,17 +851,17 @@ void BattlePrepTeamIcons_FinalRevealSingle(unk_D_84B25A58* arg0, s16 arg1) {
 
 void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
     s32 i;
-    BattleMon* temp_s0 = &D_800AE540.unk_1194[0].unk_08[0]->unk_01C[0];
+    BattleMon* temp_s0 = &gSessionContext.battleSides[0].unk_08[0]->unk_01C[0];
     BattleMon* var_a3 = NULL;
-    BattleMon* temp_t1 = &D_800AE540.unk_1194[1].unk_08[0]->unk_01C[0];
+    BattleMon* temp_t1 = &gSessionContext.battleSides[1].unk_08[0]->unk_01C[0];
     BattleMon* var_t0 = NULL;
 
-    if (D_800AE540.unk_1194[0].unk_01 == 2) {
-        var_a3 = &D_800AE540.unk_1194[0].unk_08[1]->unk_01C[0];
+    if (gSessionContext.battleSides[0].unk_01 == 2) {
+        var_a3 = &gSessionContext.battleSides[0].unk_08[1]->unk_01C[0];
     }
 
-    if (D_800AE540.unk_1194[1].unk_01 == 2) {
-        var_t0 = &D_800AE540.unk_1194[1].unk_08[1]->unk_01C[0];
+    if (gSessionContext.battleSides[1].unk_01 == 2) {
+        var_t0 = &gSessionContext.battleSides[1].unk_08[1]->unk_01C[0];
     }
 
     if (arg1 == 0) {
@@ -869,14 +869,14 @@ void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
     }
 
     if (arg1 < 0x10) {
-        for (i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; i++) {
+        for (i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_002; i++) {
             if (temp_s0[i].unk_25 != 0) {
                 arg0->unk_04[16 + i].rotation.y += 0x800;
                 arg0->unk_04[28 + i].rotation.y += 0x800;
             }
         }
 
-        for (i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; i++) {
+        for (i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; i++) {
             if (temp_t1[i].unk_25 != 0) {
                 arg0->unk_04[22 + i].rotation.y -= 0x800;
                 arg0->unk_04[34 + i].rotation.y -= 0x800;
@@ -884,7 +884,7 @@ void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
         }
 
         if (var_a3 != NULL) {
-            for (i = 0; i < D_800AE540.unk_1194[0].unk_08[1]->unk_002; i++) {
+            for (i = 0; i < gSessionContext.battleSides[0].unk_08[1]->unk_002; i++) {
                 if (var_a3[i].unk_25 != 0) {
                     arg0->unk_04[19 + i].rotation.y += 0x800;
                     arg0->unk_04[31 + i].rotation.y += 0x800;
@@ -893,7 +893,7 @@ void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
         }
 
         if (var_t0 != NULL) {
-            for (i = 0; i < D_800AE540.unk_1194[1].unk_08[1]->unk_002; i++) {
+            for (i = 0; i < gSessionContext.battleSides[1].unk_08[1]->unk_002; i++) {
                 if (var_t0[i].unk_25 != 0) {
                     arg0->unk_04[25 + i].rotation.y -= 0x800;
                     arg0->unk_04[37 + i].rotation.y -= 0x800;
@@ -1045,12 +1045,12 @@ void BattlePrepTeamIcons_LoadDexIdsSingle(unk_D_84B25A58* arg0) {
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_1C, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0xC0, 1));
 
-    for (count = 0, i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_1C, count, D_800AE540.unk_1194[0].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
+    for (count = 0, i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_1C, count, gSessionContext.battleSides[0].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
     }
 
-    for (count = 3, i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_1C, count, D_800AE540.unk_1194[1].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
+    for (count = 3, i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_1C, count, gSessionContext.battleSides[1].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
     }
 }
 
@@ -1062,30 +1062,30 @@ void BattlePrepTeamIcons_LoadDexIdsDouble(unk_D_84B25A58* arg0) {
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_1C, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0x60, 1));
 
-    for (count = 0, i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_1C, count, D_800AE540.unk_1194[0].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
+    for (count = 0, i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_1C, count, gSessionContext.battleSides[0].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
     }
 
-    for (count = 6, i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_1C, count, D_800AE540.unk_1194[1].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
+    for (count = 6, i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; count++, i++) {
+        func_8001A324(arg0->unk_1C, count, gSessionContext.battleSides[1].unk_08[0]->unk_01C[i].unk_00.unk_00, 0);
     }
 
-    if (D_800AE540.unk_1194[0].unk_08[1] != NULL) {
-        for (count = 3, i = 0; i < D_800AE540.unk_1194[0].unk_08[1]->unk_002; count++, i++) {
-            func_8001A324(arg0->unk_1C, count, D_800AE540.unk_1194[0].unk_08[1]->unk_01C[i].unk_00.unk_00, 0);
+    if (gSessionContext.battleSides[0].unk_08[1] != NULL) {
+        for (count = 3, i = 0; i < gSessionContext.battleSides[0].unk_08[1]->unk_002; count++, i++) {
+            func_8001A324(arg0->unk_1C, count, gSessionContext.battleSides[0].unk_08[1]->unk_01C[i].unk_00.unk_00, 0);
         }
     }
 
-    if (D_800AE540.unk_1194[1].unk_08[1] != NULL) {
-        for (count = 9, i = 0; i < D_800AE540.unk_1194[1].unk_08[1]->unk_002; count++, i++) {
-            func_8001A324(arg0->unk_1C, count, D_800AE540.unk_1194[1].unk_08[1]->unk_01C[i].unk_00.unk_00, 0);
+    if (gSessionContext.battleSides[1].unk_08[1] != NULL) {
+        for (count = 9, i = 0; i < gSessionContext.battleSides[1].unk_08[1]->unk_002; count++, i++) {
+            func_8001A324(arg0->unk_1C, count, gSessionContext.battleSides[1].unk_08[1]->unk_01C[i].unk_00.unk_00, 0);
         }
     }
 }
 
 void BattlePrepTeamIcons_Load(unk_D_84B25A58* arg0, BinArchive* arg1) {
-    u8* sp24 = BinArchive_GetFile(arg1, D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_003);
-    u8* sp20 = BinArchive_GetFile(arg1, D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_003);
+    u8* sp24 = BinArchive_GetFile(arg1, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_003);
+    u8* sp20 = BinArchive_GetFile(arg1, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_003);
 
     PokeIcon_OpenModelArchives();
 
@@ -1131,12 +1131,12 @@ void BattlePrepTeamIcons_LoadIconTexturesSingle(unk_D_84B25A58* arg0) {
     s32 i;
     s32 count;
 
-    for (i = 0, count = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; count++, i++) {
-        PokeIcon_LoadModelTextureForMon(arg0->unk_20[count], D_800AE540.unk_1194[0].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
+    for (i = 0, count = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_002; count++, i++) {
+        PokeIcon_LoadModelTextureForMon(arg0->unk_20[count], gSessionContext.battleSides[0].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
     }
 
-    for (i = 0, count = 3; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; count++, i++) {
-        PokeIcon_LoadModelTextureForMon(arg0->unk_20[count], D_800AE540.unk_1194[1].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
+    for (i = 0, count = 3; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; count++, i++) {
+        PokeIcon_LoadModelTextureForMon(arg0->unk_20[count], gSessionContext.battleSides[1].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
     }
 }
 
@@ -1144,23 +1144,23 @@ void BattlePrepTeamIcons_LoadIconTexturesDouble(unk_D_84B25A58* arg0) {
     s32 i;
     s32 count;
 
-    for (i = 0, count = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; count++, i++) {
-        PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], D_800AE540.unk_1194[0].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
+    for (i = 0, count = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_002; count++, i++) {
+        PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], gSessionContext.battleSides[0].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
     }
 
-    for (i = 0, count = 6; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; count++, i++) {
-        PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], D_800AE540.unk_1194[1].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
+    for (i = 0, count = 6; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; count++, i++) {
+        PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], gSessionContext.battleSides[1].unk_08[0]->unk_01C[i].unk_00.unk_00, NULL);
     }
 
-    if (D_800AE540.unk_1194[0].unk_08[1] != NULL) {
-        for (i = 0, count = 3; i < D_800AE540.unk_1194[0].unk_08[1]->unk_002; count++, i++) {
-            PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], D_800AE540.unk_1194[0].unk_08[1]->unk_01C[i].unk_00.unk_00, NULL);
+    if (gSessionContext.battleSides[0].unk_08[1] != NULL) {
+        for (i = 0, count = 3; i < gSessionContext.battleSides[0].unk_08[1]->unk_002; count++, i++) {
+            PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], gSessionContext.battleSides[0].unk_08[1]->unk_01C[i].unk_00.unk_00, NULL);
         }
     }
 
-    if (D_800AE540.unk_1194[1].unk_08[1] != NULL) {
-        for (i = 0, count = 9; i < D_800AE540.unk_1194[1].unk_08[1]->unk_002; count++, i++) {
-            PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], D_800AE540.unk_1194[1].unk_08[1]->unk_01C[i].unk_00.unk_00, NULL);
+    if (gSessionContext.battleSides[1].unk_08[1] != NULL) {
+        for (i = 0, count = 9; i < gSessionContext.battleSides[1].unk_08[1]->unk_002; count++, i++) {
+            PokeIcon_LoadModelTextureForMon(&arg0->unk_20[count], gSessionContext.battleSides[1].unk_08[1]->unk_01C[i].unk_00.unk_00, NULL);
         }
     }
 }
@@ -1175,19 +1175,19 @@ void BattlePrepTeamIcons_Init(unk_D_84B25A58* arg0) {
     arg0->unk_24 = GfxImage_Allocate(0, 2, 0x40, 0x60, 0);
     arg0->unk_28 = GfxImage_Allocate(0, 2, 0x40, 0x60, 0);
 
-    if ((D_800AE540.unk_0001 == 8) && (D_800AE540.unk_1194[0].unk_08[0]->unk_002 >= 4)) {
+    if ((gSessionContext.ruleCategory == 8) && (gSessionContext.battleSides[0].unk_08[0]->unk_002 >= 4)) {
         arg0->unk_02 = 1;
     }
 
-    if (D_800AE540.unk_0001 == 0) {
-        if ((D_800AE540.unk_1194[0].unk_01 == 2) || (D_800AE540.unk_1194[1].unk_01 == 2)) {
+    if (gSessionContext.ruleCategory == 0) {
+        if ((gSessionContext.battleSides[0].unk_01 == 2) || (gSessionContext.battleSides[1].unk_01 == 2)) {
             arg0->unk_02 = 1;
         } else {
-            if (D_800AE540.unk_1194[0].unk_08[0]->unk_002 >= 4) {
+            if (gSessionContext.battleSides[0].unk_08[0]->unk_002 >= 4) {
                 arg0->unk_02 = 1;
             }
 
-            if (D_800AE540.unk_1194[1].unk_08[0]->unk_002 >= 4) {
+            if (gSessionContext.battleSides[1].unk_08[0]->unk_002 >= 4) {
                 arg0->unk_02 = 1;
             }
         }

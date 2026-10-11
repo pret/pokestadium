@@ -380,7 +380,7 @@ s32 BattleScene_UpdatePausedFrame(s32 arg0) {
 void Battle_UpdateCompletionGate(void) {
     if (D_8438E7AC < 0) {
         D_8438E7AC++;
-    } else if ((D_8438E7AC == 0) && (D_800AE540.unk_0000 == 0x10) && gPlayer1Controller->buttonPressed) {
+    } else if ((D_8438E7AC == 0) && (gSessionContext.mode == 0x10) && gPlayer1Controller->buttonPressed) {
         D_8438E7AC = 1;
     }
 }
@@ -417,7 +417,7 @@ s32 Battle_FrameCallback(s32 arg0) {
     if ((arg0 != 2) && (D_8438E7AC == 1)) {
         D_8438E7AC = 2;
         func_8003DB84(0);
-        if (D_800AE540.unk_0000 != 0x11) {
+        if (gSessionContext.mode != 0x11) {
             Audio_FadeOutAll(0x1E);
         }
         return 1;
@@ -450,25 +450,25 @@ void func_8430128C(void) {
     s32 i;
     s32 var_s1;
 
-    temp_s1 = D_800AE540.unk_1194[0].unk_08[0];
-    temp_s2 = D_800AE540.unk_1194[0].unk_08[1];
-    temp_s0 = D_800AE540.unk_1194[1].unk_08[0];
+    temp_s1 = gSessionContext.battleSides[0].unk_08[0];
+    temp_s2 = gSessionContext.battleSides[0].unk_08[1];
+    temp_s0 = gSessionContext.battleSides[1].unk_08[0];
 
     if (temp_s0->unk_000 & 2) {
-        if (D_800AE540.unk_0000 == 0) {
-            if (D_800AE540.unk_0001 == 0) {
+        if (gSessionContext.mode == 0) {
+            if (gSessionContext.ruleCategory == 0) {
                 var_s1 = temp_s0->unk_214->unk_002;
             } else {
                 var_s1 = 3;
             }
-            func_843831A0(temp_s1, temp_s2, temp_s0, D_800AE540.unk_11EC, sp48, D_800AE540.unk_0001, var_s1);
+            func_843831A0(temp_s1, temp_s2, temp_s0, gSessionContext.aiDifficulty, sp48, gSessionContext.ruleCategory, var_s1);
         } else {
-            if (D_800AE540.unk_0001 == 8) {
+            if (gSessionContext.ruleCategory == 8) {
                 var_s1 = temp_s0->unk_214->unk_002;
             } else {
                 var_s1 = 3;
             }
-            func_843831A0(temp_s1, NULL, temp_s0, temp_s0->unk_018 & 0xFF, sp48, D_800AE540.unk_0001, var_s1);
+            func_843831A0(temp_s1, NULL, temp_s0, temp_s0->unk_018 & 0xFF, sp48, gSessionContext.ruleCategory, var_s1);
         }
         func_8430123C(sp48, var_s1);
         temp_s0->unk_002 = var_s1;
@@ -503,9 +503,9 @@ void func_84301430(unk_func_80007444* arg0) {
     Battle_SetStageTintColor(0xFF, 0xFF, 0xFF);
     BattleScene_SetModelUniformScale(1.0f);
 
-    if (D_800AE540.unk_0000 == 0x11) {
+    if (gSessionContext.mode == 0x11) {
         Font_Init(4, 0);
-    } else if (D_800AE540.unk_0000 == 0x10) {
+    } else if (gSessionContext.mode == 0x10) {
         Font_Init(7, 0);
     } else {
         Font_Init(3, 0);
@@ -530,15 +530,15 @@ void func_84301430(unk_func_80007444* arg0) {
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_3000000, battle_ui, 0);
 
-    if ((D_800AE540.unk_0000 == 0x10) || (D_800AE540.unk_0000 == 0xA)) {
-        sp32 = D_84384350[D_800AE540.unk_0001];
-        if (D_800AE540.unk_0001 == 7) {
-            sp32 += D_800AE540.unk_0002;
+    if ((gSessionContext.mode == 0x10) || (gSessionContext.mode == 0xA)) {
+        sp32 = D_84384350[gSessionContext.ruleCategory];
+        if (gSessionContext.ruleCategory == 7) {
+            sp32 += gSessionContext.modeSelection;
         }
     } else {
-        sp32 = D_84384350[D_800AE540.unk_0000];
-        if (D_800AE540.unk_0000 == 7) {
-            sp32 += D_800AE540.unk_0002;
+        sp32 = D_84384350[gSessionContext.mode];
+        if (gSessionContext.mode == 7) {
+            sp32 += gSessionContext.modeSelection;
         }
     }
 
@@ -613,7 +613,7 @@ void func_84301A24(void) {
 s32 Battle_Main(s32 arg0, SessionContext* arg1) {
     unk_func_80007444* sp24;
 
-    D_8438E798 = D_800AE540.unk_1194;
+    D_8438E798 = gSessionContext.battleSides;
     D_8438E7AC = -2;
 
     main_pool_push_state('BATL');

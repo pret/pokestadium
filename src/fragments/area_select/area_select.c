@@ -349,7 +349,7 @@ void AreaSelect_DrawNameBanner(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
             Gfx_DrawTextureRgba16(arg0, arg1 + (i * 4), 0xC4, 4, var_s2 + (i * 0x620), 0xC4, 0);
         }
 
-        if ((D_800AE540.unk_11F2 != 0) && ((arg3 == 0) || (arg3 == 2) || (arg3 == 3))) {
+        if ((gSessionContext.unk_11F2 != 0) && ((arg3 == 0) || (arg3 == 2) || (arg3 == 3))) {
             Gfx_DrawTextureRgba16(arg0 - 0x20, arg1 + 0xD, 0x24, 0x24, D_20144E0, 0x24, 0);
         }
 
@@ -400,7 +400,7 @@ void AreaSelect_DrawPulsingMarker(s16 arg0, s16 arg1) {
                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
         gDPSetEnvColor(gDisplayListHead++, 0, 100, 255, 255);
 
-        if (D_800AE540.unk_11F5 & 4) {
+        if (gSessionContext.sessionFlags & 4) {
             gDPSetPrimColor(gDisplayListHead++, 0, 0xFF, 255, 255, 255, gAreaSelectBackgroundFadeAlpha);
         } else {
             gDPSetPrimColor(gDisplayListHead++, 0, 0xFF, 255, 255, 255, 255);
@@ -709,7 +709,7 @@ s32 AreaSelect_FadeInFromBattle(void) {
     if (StageContext_GetFadeMode() == 0) {
         gAreaSelectBackgroundFadeAlpha += 4;
         if (gAreaSelectBackgroundFadeAlpha == 0x100) {
-            D_800AE540.unk_11F5 &= 0xFFFB;
+            gSessionContext.sessionFlags &= 0xFFFB;
             gAreaSelectBackgroundFadeAlpha = 0xFF;
             gAreaSelectPreviousIndex = 8;
             gAreaSelectSelectedIndex = 0;
@@ -734,7 +734,7 @@ void AreaSelect_Loop(void) {
     s16 i;
 
     i = 2;
-    if (D_800AE540.unk_11F5 & 4) {
+    if (gSessionContext.sessionFlags & 4) {
         Cry_Play(0x96, 7);
         i = 8;
     }
@@ -788,7 +788,7 @@ void AreaSelect_LoadBackgroundArt(void) {
     gAreaSelectBackgroundArchive = ASSET_LOAD2(backgrounds, 1, 1);
 
     if (gAreaSelectGameOptions.unk_00 == 2) {
-        if (D_800AE540.unk_11F2 == 0) {
+        if (gSessionContext.unk_11F2 == 0) {
             gAreaSelectCurrentBackground = BinArchive_GetFile(gAreaSelectBackgroundArchive, 1);
             gAreaSelectNextBackground = BinArchive_GetFile(gAreaSelectBackgroundArchive, 2);
         } else {
@@ -818,11 +818,11 @@ s32 AreaSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     gAreaSelectStrings = Text_GetStringTable(0x17);
     Save_EnsureBankLoaded(2);
     Save_GetOptions(&gAreaSelectGameOptions);
-    Save_GetModeSettings(&gAreaSelectModeSettings, D_800AE540.unk_11F2);
+    Save_GetModeSettings(&gAreaSelectModeSettings, gSessionContext.unk_11F2);
     AreaSelect_LoadBackgroundArt();
     gAreaSelectSelectedIndex = 8;
 
-    if ((gAreaSelectModeSettings.unk_07 != 0) && !(D_800AE540.unk_11F5 & 4) && !(gAreaSelectModeSettings.unk_00 & 0x100)) {
+    if ((gAreaSelectModeSettings.unk_07 != 0) && !(gSessionContext.sessionFlags & 4) && !(gAreaSelectModeSettings.unk_00 & 0x100)) {
         gAreaSelectBackgroundFadeAlpha = 0xFF;
     }
 
