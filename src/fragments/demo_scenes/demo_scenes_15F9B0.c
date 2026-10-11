@@ -2,7 +2,7 @@
 #include "game_state.h"
 
 s32 Stage_DispatchDemoScene(UNUSED s32 arg0, UNUSED s32 arg1) {
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 18:
             return Stage_ShowBootDiorama();
 

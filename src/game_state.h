@@ -103,31 +103,31 @@ typedef struct BattleSessionTeams {
 } BattleSessionTeams; // size = 0x28
 
 typedef struct SessionContext {
-    /* 0x0000 */ s8 unk_0000;
-    /* 0x0001 */ s8 unk_0001;
-    /* 0x0002 */ s8 unk_0002;
-    /* 0x0003 */ s8 unk_0003;
-    /* 0x0004 */ TeamRoster unk_0004[4];
-    /* 0x0874 */ ExtendedRosterInfo unk_0874[4];
-    /* 0x1194 */ BattleSessionTeams unk_1194[2];
-    /* 0x11E4 */ u8 unk_11E4[2][4];
-    /* 0x11EC */ u8 unk_11EC;
-    /* 0x11EC */ u8 unk_11ED;
-    /* 0x11EC */ u8 unk_11EE;
-    /* 0x11EC */ u8 unk_11EF;
+    /* 0x0000 */ s8 mode;
+    /* 0x0001 */ s8 ruleCategory;
+    /* 0x0002 */ s8 modeSelection; // Cup division or castle location, depending on mode.
+    /* 0x0003 */ s8 roundOrDemoId; // One-based battle round; scene ID in non-battle attract demos.
+    /* 0x0004 */ TeamRoster trainerSlots[4];
+    /* 0x0874 */ ExtendedRosterInfo rosterInfo[4];
+    /* 0x1194 */ BattleSessionTeams battleSides[2];
+    /* 0x11E4 */ u8 opponentHistory[2][4]; // Eight contiguous entries; the first subscript is not a battle side.
+    /* 0x11EC */ u8 aiDifficulty; // Free Battle: 0 = Hard, 1 = Normal, 2 = Easy.
+    /* 0x11ED */ u8 timeLimitsEnabled;
+    /* 0x11EE */ u8 battleLimitMinutes;
+    /* 0x11EF */ u8 moveLimitSeconds;
     /* 0x11F0 */ u8 gbStarterChoice;
     /* 0x11F1 */ char unk11F1[0x1];
     /* 0x11F2 */ u8 unk_11F2;
-    /* 0x11F3 */ u8 unk_11F3;
+    /* 0x11F3 */ u8 continueCount;
     /* 0x11F4 */ u8 unk_11F4;
-    /* 0x11F5 */ u8 unk_11F5;
-    /* 0x11F6 */ u16 unk_11F6;
+    /* 0x11F5 */ u8 sessionFlags;
+    /* 0x11F6 */ u16 transitionFlags;
 } SessionContext; // size = 0x11F8
 
 extern u16 D_80073660[16][256];
 extern s32 gCurrentGameState;
 extern unk_D_800AE520 D_800AE520;
-extern SessionContext D_800AE540;
+extern SessionContext gSessionContext;
 extern BinArchive* D_800AF738;
 
 s32 Game_DoCopyProtection(s32 state);

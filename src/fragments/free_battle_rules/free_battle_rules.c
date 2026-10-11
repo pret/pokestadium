@@ -747,7 +747,7 @@ void FreeBattle_ApplyRuleSelection(void) {
     }
 
     if (D_84002D18.unk_02 == 3) {
-        D_800AE540.unk_11EC = D_84002BE4;
+        gSessionContext.aiDifficulty = D_84002BE4;
         temp_v0 = Trainer_Create(-1, 0, "COM", Text_GetPlayerLabel(3));
         Team_AddTrainer(1, temp_v0);
         if (D_84002D18.unk_00 == 3) {
@@ -764,14 +764,14 @@ void FreeBattle_ApplyRuleSelection(void) {
         }
     }
 
-    if (D_800AE540.unk_1194[0].unk_01 == 2) {
-        D_800AE540.unk_1194[0].unk_08[0]->unk_214->unk_003 = 0x35;
-        D_800AE540.unk_1194[0].unk_08[1]->unk_214->unk_003 = 0x35;
+    if (gSessionContext.battleSides[0].unk_01 == 2) {
+        gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_003 = 0x35;
+        gSessionContext.battleSides[0].unk_08[1]->unk_214->unk_003 = 0x35;
     }
 
-    if (D_800AE540.unk_1194[1].unk_01 == 2) {
-        D_800AE540.unk_1194[1].unk_08[0]->unk_214->unk_003 = 0x35;
-        D_800AE540.unk_1194[1].unk_08[1]->unk_214->unk_003 = 0x35;
+    if (gSessionContext.battleSides[1].unk_01 == 2) {
+        gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_003 = 0x35;
+        gSessionContext.battleSides[1].unk_08[1]->unk_214->unk_003 = 0x35;
     }
 }
 

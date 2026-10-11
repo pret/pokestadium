@@ -439,23 +439,23 @@ void Intro_SetupTextPanel(unk_D_86B0FA50* arg0, u8* arg1, f32 arg2, s16 arg3, s1
 }
 
 void Intro_ConfigureTextPanels(void) {
-    if (D_800AE540.unk_11F2 == 1) {
+    if (gSessionContext.unk_11F2 == 1) {
         Intro_SetupTextPanel(D_86B0FA60, &D_300C6D0, -250.0f, 0xC8, 0x18, 0x18);
     }
 
     Intro_SetupTextPanel(D_86B0FA54, &D_3000180, -250.0f, 0xC8, 0x40, 0x18);
 
-    if (D_800AE540.unk_0002 == 0) {
+    if (gSessionContext.modeSelection == 0) {
         Intro_SetupTextPanel(D_86B0FA5C, &D_30060E0, -170.0f, 0x3C, 0x88, 0x14);
-    } else if (D_800AE540.unk_0002 == 1) {
+    } else if (gSessionContext.modeSelection == 1) {
         Intro_SetupTextPanel(D_86B0FA5C, &D_3006B80, -170.0f, 0x3C, 0x78, 0x14);
-    } else if (D_800AE540.unk_0002 == 2) {
+    } else if (gSessionContext.modeSelection == 2) {
         Intro_SetupTextPanel(D_86B0FA5C, &D_3004E20, -170.0f, 0x3C, 0x78, 0x14);
-    } else if (D_800AE540.unk_0002 == 3) {
+    } else if (gSessionContext.modeSelection == 3) {
         Intro_SetupTextPanel(D_86B0FA5C, &D_3005780, -170.0f, 0x3C, 0x78, 0x14);
     }
 
-    switch (D_800AE540.unk_0001) {
+    switch (gSessionContext.ruleCategory) {
         case 1:
             Intro_SetupTextPanel(D_86B0FA58, &D_30024E0, -100.0f, 0x1E, 0xB0, 0x14);
             break;
@@ -523,12 +523,12 @@ void Intro_TriggerTextPanelExit(void) {
 }
 
 void Intro_SelectPartyRoster(void) {
-    if (D_800AE540.unk_1194[0].unk_1C == 1) {
-        D_86B10690 = D_800AE540.unk_1194[0].unk_08[0];
-        D_86B10694 = &D_800AE540.unk_1194[0];
+    if (gSessionContext.battleSides[0].unk_1C == 1) {
+        D_86B10690 = gSessionContext.battleSides[0].unk_08[0];
+        D_86B10694 = &gSessionContext.battleSides[0];
     } else {
-        D_86B10690 = D_800AE540.unk_1194[1].unk_08[0];
-        D_86B10694 = &D_800AE540.unk_1194[1];
+        D_86B10690 = gSessionContext.battleSides[1].unk_08[0];
+        D_86B10694 = &gSessionContext.battleSides[1];
     }
 }
 
@@ -554,7 +554,7 @@ s32 Intro_UpdateShowcaseSequence(void) {
             }
 
             if (Intro_UpdateCameraKeyframe(D_86B0FA7C->unk_00) != 0) {
-                if ((D_800AE540.unk_0001 == 7) && (D_86B0FA78->unk_17C == 5)) {
+                if ((gSessionContext.ruleCategory == 7) && (D_86B0FA78->unk_17C == 5)) {
                     return 1;
                 }
                 WipeTransition_Start(3, 0x1E);
@@ -721,7 +721,7 @@ void Intro_DrawTextPanels(void) {
                 UI_DrawGradientTexture(D_86B0FA58->unk_80, D_86B0FA58->unk_98, D_86B0FA58->unk_9C, D_86B0FA58->unk_9E,
                               D_86B0FA58->unk_A0, &D_86B0FA54->unk_B0);
 
-                if (D_800AE540.unk_11F2 == 1) {
+                if (gSessionContext.unk_11F2 == 1) {
                     UI_DrawTextureRgba16(D_86B0FA60->unk_80, (s16)D_86B0FA58->unk_98 + D_86B0FA58->unk_9E,
                                   D_86B0FA58->unk_9C - 2, D_86B0FA60->unk_9E, D_86B0FA60->unk_A0);
                 }
@@ -772,7 +772,7 @@ void Intro_DrawTextPanels(void) {
                 UI_DrawGradientTexture(D_86B0FA58->unk_80, D_86B0FA58->unk_98, D_86B0FA58->unk_9C, D_86B0FA58->unk_9E,
                               D_86B0FA58->unk_A0, D_86B0DD40);
 
-                if (D_800AE540.unk_11F2 == 1) {
+                if (gSessionContext.unk_11F2 == 1) {
                     UI_DrawTextureRgba16(D_86B0FA60->unk_80, (s16)D_86B0FA58->unk_98 + D_86B0FA58->unk_9E,
                                   D_86B0FA58->unk_9C - 2, D_86B0FA60->unk_9E, D_86B0FA60->unk_A0);
                 }
@@ -887,7 +887,7 @@ void Intro_FadeOutSequence(void) {
     s32 var_s1;
     void (*temp_s2)(void) = Util_ConvertAddrToVirtAddr(Particle_UpdateFrameCountersAlias);
 
-    if (D_800AE540.unk_0001 == 7) {
+    if (gSessionContext.ruleCategory == 7) {
         for (i = 0; i < 100; i++) {
             Intro_ReadControllerInput();
             MiniFx_UpdateParticles();
@@ -898,7 +898,7 @@ void Intro_FadeOutSequence(void) {
         }
     }
 
-    if (D_800AE540.unk_0001 == 7) {
+    if (gSessionContext.ruleCategory == 7) {
         var_s1 = 0x64;
     } else {
         var_s1 = 0xA;
@@ -908,7 +908,7 @@ void Intro_FadeOutSequence(void) {
     Audio_FadeOutAll(var_s1 - 2);
 
     for (i = 0; i < var_s1; i++) {
-        if (D_800AE540.unk_0001 == 7) {
+        if (gSessionContext.ruleCategory == 7) {
             Intro_ReadControllerInput();
             MiniFx_UpdateParticles();
             temp_s2();
@@ -922,7 +922,7 @@ void Intro_FadeOutSequence(void) {
         }
     }
 
-    if (D_800AE540.unk_0001 == 7) {
+    if (gSessionContext.ruleCategory == 7) {
         for (i = 0; i < 30; i++) {
             Intro_ReadControllerInput();
             MiniFx_UpdateParticles();
@@ -941,12 +941,12 @@ void Stage_LoadModels(void) {
     void* temp_v0_3;
     unk_D_8690A610_018* temp_v0_6;
 
-    D_86B0FA42 = gStageModelIndices[D_800AE540.unk_0001];
-    if (D_800AE540.unk_0001 == 7) {
-        D_86B0FA42 += D_800AE540.unk_0002;
+    D_86B0FA42 = gStageModelIndices[gSessionContext.ruleCategory];
+    if (gSessionContext.ruleCategory == 7) {
+        D_86B0FA42 += gSessionContext.modeSelection;
     }
 
-    switch (D_800AE540.unk_0001) {
+    switch (gSessionContext.ruleCategory) {
         case 1:
             D_86B0FA44 = 4;
             break;
@@ -956,7 +956,7 @@ void Stage_LoadModels(void) {
             break;
 
         case 3:
-            D_86B0FA44 = D_800AE540.unk_0002;
+            D_86B0FA44 = gSessionContext.modeSelection;
             break;
 
         case 4:
@@ -968,7 +968,7 @@ void Stage_LoadModels(void) {
             break;
 
         case 6:
-            D_86B0FA44 = D_800AE540.unk_0002;
+            D_86B0FA44 = gSessionContext.modeSelection;
             break;
 
         default:
@@ -1042,7 +1042,7 @@ void Stage_LoadModels(void) {
 
     Intro_SelectPartyRoster();
 
-    switch (D_800AE540.unk_0001) {
+    switch (gSessionContext.ruleCategory) {
         case 1:
         case 2:
         case 4:
@@ -1055,7 +1055,7 @@ void Stage_LoadModels(void) {
             break;
 
         default:
-            if (D_800AE540.unk_0002 == 3) {
+            if (gSessionContext.modeSelection == 3) {
                 D_86B0FA74 = 1;
                 Intro_StartFirstShowcase();
                 Intro_BeginOrbitCamera();

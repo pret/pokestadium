@@ -507,7 +507,7 @@ void Glc_DrawTrackingIcon(void) {
 
 void Glc_ClearInitState(void) {
     stage_fade_mode = 0;
-    if (D_800AE540.unk_11F2 != 0) {
+    if (gSessionContext.unk_11F2 != 0) {
         tracking_icon_on = 1;
     } else {
         tracking_icon_on = 0;

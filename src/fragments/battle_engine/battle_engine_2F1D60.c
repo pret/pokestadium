@@ -167,7 +167,7 @@ void BattleScene_TickOwnerSlideAnimation(Battler* arg0) {
 }
 
 void BattleScene_TickBothOwnerSlideAnimations(Battler* arg0, Battler* arg1) {
-    if (D_800AE540.unk_0000 != 0x10) {
+    if (gSessionContext.mode != 0x10) {
         BattleScene_TickOwnerSlideAnimation(arg0);
         BattleScene_TickOwnerSlideAnimation(arg1);
     }

@@ -366,7 +366,7 @@ s32 CupSelect_HandleInput(void) {
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
         Audio_PlaySoundEffectById(0x26);
-        D_800AE540.unk_0002 = hovered_division;
+        gSessionContext.modeSelection = hovered_division;
         action = 'slct';
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         Audio_PlaySoundEffectById(SFX_MENU_BACK);
@@ -447,7 +447,7 @@ s32 CupSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     s16 background_file = -1;
     s32 did_select = 1;
 
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 3:
             background_file = 9;
             break;
@@ -462,8 +462,8 @@ s32 CupSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
 
         Font_Init(0x10, 0);
         Save_EnsureBankLoaded(2);
-        Save_GetModeSettings(&D_82E023A0, D_800AE540.unk_11F2);
-        if (D_800AE540.unk_0000 == 3) {
+        Save_GetModeSettings(&D_82E023A0, gSessionContext.unk_11F2);
+        if (gSessionContext.mode == 3) {
             latest_unlocked_division = D_82E023A0.unk_05;
         } else {
             latest_unlocked_division = D_82E023A0.unk_06;

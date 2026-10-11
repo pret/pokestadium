@@ -801,7 +801,7 @@ void Completion_SelectBonusPokemon(void) {
         MathUtil_Random_ZeroOne();
     }
 
-    if (D_800AE540.unk_0000 == 0x1A) {
+    if (gSessionContext.mode == 0x1A) {
         D_86B0F9C8 = 8;
         D_86B0EBDC->unk_2EC = D_86B0DBC0[D_86B0F9C8];
     } else {
@@ -992,7 +992,7 @@ void Completion_UpdateGiftDialogFirstTime(void) {
 
     switch (D_86B0EBE0->unk_00) {
         case 0:
-            if (D_800AE540.unk_0000 == 0x1A) {
+            if (gSessionContext.mode == 0x1A) {
                 sprintf(D_86B0F7C8, Text_GetString(NULL, 0, D_86B0EBD0, 0x96));
             } else {
                 Text_SetStringToken(0x1F, Text_GetString(NULL, 0, D_86B0EBD4, D_86B0EBDC->unk_2EC - 1));
@@ -1082,7 +1082,7 @@ void Completion_UpdateGiftDialogWithExisting(void) {
 
     switch (D_86B0EBE0->unk_00) {
         case 0:
-            if (D_800AE540.unk_0000 == 0x1A) {
+            if (gSessionContext.mode == 0x1A) {
                 sprintf(D_86B0F7C8, Text_GetString(NULL, 0, D_86B0EBD0, 0x96));
             } else {
                 Text_SetStringToken(0x1F, Text_GetString(NULL, 0, D_86B0EBD4, D_86B0EBDC->unk_2EC - 1));
@@ -1597,11 +1597,11 @@ void Completion_FadeOutAndSave(void) {
     }
 
     if (D_86B0EBDC->unk_2F0 == 1) {
-        if (D_800AE540.unk_0000 == 0x1A) {
+        if (gSessionContext.mode == 0x1A) {
             Save_SetSelectedPokemonId(D_86B0EBDC->unk_2EC, 1);
             Save_SetOptionsField1F(1);
         } else {
-            Save_SetSelectedPokemonId(D_86B0EBDC->unk_2EC, D_800AE540.unk_11F2);
+            Save_SetSelectedPokemonId(D_86B0EBDC->unk_2EC, gSessionContext.unk_11F2);
         }
         Save_CommitTypedRecord(0x14, 0);
         Save_FlushBank(2);
