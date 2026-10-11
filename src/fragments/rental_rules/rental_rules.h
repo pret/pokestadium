@@ -19,19 +19,19 @@ typedef struct unk_D_83003CE0 {
     /* 0x9C */ char unk9C[0x64];
 } unk_D_83003CE0; // size = 0x100
 
-typedef struct QualifyingPokemonDisplayRow_014_000 {
-    /* 0x00 */ s16 unk_00;
+typedef struct SpeciesQualificationStatus {
+    /* 0x00 */ s16 species;
     /* 0x02 */ s16 is_eligible;
-} QualifyingPokemonDisplayRow_014_000; // size = 0x4
+} SpeciesQualificationStatus; // size = 0x4
 
 typedef struct QualifyingPokemonDisplayNode {
-    /* 0x00 */ QualifyingPokemonDisplayRow_014_000 unk_00[6];
+    /* 0x00 */ SpeciesQualificationStatus species_listed[6];
     /* 0x18 */ struct QualifyingPokemonDisplayNode* below_neighbour;
     /* 0x1C */ struct QualifyingPokemonDisplayNode* above_neighbour;
 } QualifyingPokemonDisplayNode; // size = 0x20
 
 typedef struct QualifyingPokemonDisplayRow {
-    /* 0x00 */ s16 unk_00;
+    /* 0x00 */ s16 qualifying_list_state;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
     /* 0x06 */ s16 unk_06;
