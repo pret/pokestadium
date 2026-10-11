@@ -32,14 +32,14 @@ typedef struct QualifyingPokemonDisplayRow {
 
 typedef struct QualifyingPokemonDisplay {
     /* 0x00 */ s16 qualifying_list_state;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 pokedex_index;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x10 */ QualifyingPokemonDisplayRow* self_node;
-    /* 0x14 */ QualifyingPokemonDisplayRow unk_14[6];
+    /* 0x02 */ s16 animation_ticks;  // Updates remaining: 5 for opening/closing, 4 for scrolling.
+    /* 0x04 */ s16 window_openness;  // 0 = closed, 1024 = fully open.
+    /* 0x06 */ s16 eligible_count;   // Species accepted by the current category predicate.
+    /* 0x08 */ s16 top_row_index;    // Row index; its first species is top_row_index * 6 + 1.
+    /* 0x0A */ s16 scroll_direction; // -1 = up, +1 = down, 0 = initial position.
+    /* 0x0C */ s16 row_draw_budget;  // -1 = continuous, 0 = skip rows, positive = row draws remaining.
+    /* 0x10 */ QualifyingPokemonDisplayRow* top_row;
+    /* 0x14 */ QualifyingPokemonDisplayRow row_buffer[6]; // Circular buffer: 5 visible rows plus 1 scroll row.
 } QualifyingPokemonDisplay; // size = 0xD4
 
 extern unk_D_83003CE0 D_83003CE0;

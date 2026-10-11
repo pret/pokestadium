@@ -57,9 +57,9 @@ void RentalHub_DrawHeader(void) {
     Font_BeginTranslucentTextRendering();
     Font_SetActive(0x10, 0);
     Gfx_SetEnvColor(0, 0, 0, 0xFF);
-    Font_Printf(0x6A, 0x2C, Text_GetString(NULL, 0, D_82B01140, D_82B0112C[gSessionContext.mode]));
+    Font_Printf(0x6A, 0x2C, Text_GetString(NULL, 0, menu_string_array, rental_hub_text_offsets[gSessionContext.mode]));
     Gfx_SetEnvColor(0xFF, 0xFF, 0x77, 0xFF);
-    Font_Printf(0x68, 0x2A, Text_GetString(NULL, 0, D_82B01140, D_82B0112C[gSessionContext.mode]));
+    Font_Printf(0x68, 0x2A, Text_GetString(NULL, 0, menu_string_array, rental_hub_text_offsets[gSessionContext.mode]));
     Font_EndTexturedTextRendering();
 }
 
@@ -239,7 +239,7 @@ void RentalHub_LoadBackgroundImage(ModeSettings* arg0) {
             D_82B01148 = BinArchive_GetFile(background_bin_archive, 0x10);
         }
     } else {
-        D_82B01148 = BinArchive_GetFile(D_82B01144, D_82B01120[gSessionContext.mode]);
+        D_82B01148 = BinArchive_GetFile(background_bin_archive, D_82B01120[gSessionContext.mode]);
     }
 }
 
