@@ -1,5 +1,7 @@
 # AI Disclaimer
-This used a substantial amount of AI for *matching* functions and *annotating widely used structs and globals*. Function-to-function documentation and annotation is done by humans and AI-annotation is limited to domains where abundant examples exist in the ROM. 
+This project is was a collaborative effort by humans that used AI. AI was used for for *matching* functions and *annotating widely used structs and globals* where abundant evidence greatly reduced hallucination risk.
+
+The original pret contributors (the first four years of contributions) did not use AI to our knowledge. Pret has no official relationship with us (Team Hippodrome) other sharing some members.
 
 # Pokemon Stadium (US)
 A WIP decomp of Pokemon Stadium (US).
@@ -36,4 +38,7 @@ python3 -m pip install -r requirements.txt
 3. Re-assemble the rom: `make`
 
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+
 Last mile decomp and annotation work done by [Team Hippodrome](https://discord.gg/8EvuQxbxu8).
+
+Part of the [R.A.I.D. (Retro AI Development)](https://discord.gg/eCvnsvrjnY) community. 
