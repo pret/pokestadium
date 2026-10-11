@@ -419,6 +419,8 @@ endif
 .DEFAULT_GOAL := rom
 # Prevent removing intermediate files
 .SECONDARY:
+# A ROM whose post-link fixup failed must not survive as "up to date"
+.DELETE_ON_ERROR:
 
 
 #### Various Recipes ####
@@ -427,8 +429,8 @@ $(ROM): $(ELF)
 	$(call print,Building ROM:,$<,$@)
 	$(V)$(OBJCOPY) -O binary --gap-fill=0xFF $< $@
 	$(V)$(ENCRYPT_LIBLEO) $@ $(MAP)
-
-# TODO: update rom header checksum
+	$(V)NM=$(NM) $(PYTHON) tools/fix_fragment_headers.py $< $@ --all
+	$(V)$(PYTHON) -m ipl3checksum sum --update $@  # IPL3 rejects a stale CRC1/CRC2 at boot
 
 # TODO: avoid using auto/undefined
 $(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
@@ -438,6 +440,9 @@ $(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VER
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld -T $(BUILD_DIR)/linker_scripts/common_undef_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld \
 		-Map $(MAP) $(LIBULTRA_LIB) -o $@
+# Fragment reloc tables are retail bytes; when a fragment's code changes they are regenerated
+# from this ELF (exit 3), which shifts later segments, so relink once.
+	$(V)$(PYTHON) tools/gen_fragment_relocs.py --all $@ || { [ $$? -eq 3 ] && [ -z "$(RELINKED)" ] && $(MAKE) $@ RELINKED=1; }
 
 $(LDSCRIPT): linker_scripts/$(VERSION)/$(TARGET).ld
 	$(call print,Copying linker script to build dir:,$<,$@)
@@ -455,6 +460,12 @@ $(LIBULTRA_LIB): $(ULTRALIB_LIB)
 $(ULTRALIB_LIB):
 	@$(PRINT) "$(GREEN)Making libultra:  $(BLUE)$@ $(NO_COL)\n"
 	$(V)$(MAKE) -C lib/ultralib VERSION=$(ULTRALIB_VERSION) TARGET=$(ULTRALIB_TARGET) FIXUPS=1 COMPARE=0 CROSS=$(MIPS_BINUTILS_PREFIX) IDO_PREPROCESS=$(if $(filter windows,$(DETECTED_OS)),1,0) CC=../../$(CC_OLD) PYTHON=$(PYTHON) VERBOSE=$(VERBOSE) COLOR=$(COLOR)
+
+# Text is the retail archive plus the tracked edits in text/textdata.json
+$(BUILD_DIR)/assets/$(VERSION)/textdata.o: assets/$(VERSION)/textdata.bin text/textdata.json tools/patch_textdata.py
+	$(call print,Patching text:,$<,$@)
+	$(V)$(PYTHON) tools/patch_textdata.py $< text/textdata.json $(@:.o=.bin)
+	$(V)$(OBJCOPY) -I binary -O elf32-big $(@:.o=.bin) $@
 
 $(BUILD_DIR)/%.o: %.bin
 	$(call print,Binning object:,$<,$@)
