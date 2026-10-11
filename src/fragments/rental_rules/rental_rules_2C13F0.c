@@ -353,7 +353,7 @@ void RentalRules_ListDraw(void) {
     s16 y;
     QualifyingPokemonDisplay* display = &qualifying_species_display;
 
-    if (ptr->unk_04 == 0) {
+    if (display->window_openness == 0) {
         return;
     }
 
