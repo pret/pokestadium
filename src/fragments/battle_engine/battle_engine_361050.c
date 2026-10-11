@@ -4072,7 +4072,6 @@ s32 BattleAI_SelectRandomUsableMoveSlot(BattleMonRuntime* arg0) {
     return var_a2;
 }
 
-#ifdef NON_MATCHING
 s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
     u8 i;
     u8 j;
@@ -4085,8 +4084,10 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
     u8 temp_v0_2;
     u8 var_a0_3;
     s32 var_a1;
-    u8 temp_l;
-    s32 sp94[8];
+    unsigned int temp_l;
+    // The loop below and BattleAI_InsertRankedCandidateGroup use 8 entries, but only 6 fit in the
+    // target's frame. The last two overlap the unused stack homes of var_a1 and temp_l.
+    s32 sp94[6];
     u8 sp90[3];
     u8 sp78[0x18];
     u8 spBF;
@@ -4098,12 +4099,21 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
     for (i = 0; i < arg0->unk_00; i++) {
         if (i) {
             spBA = arg0->unk_04[0];
+            // Empty blocks. Their count changes the weight of the webs that span them, which decides
+            // the s7/s8 assignment of arg0 and &sp90.
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
         } else {
             spBA = 0;
         }
 
         if (i) {
-            if ((arg2 && arg2) && arg2) {}
             var_a3 = arg0->unk_01[0];
         } else {
             var_a3 = 0;
@@ -4114,10 +4124,18 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
         }
 
         temp_l = arg0->unk_04[i];
-        if (temp_l < arg0->unk_01[i]) {
+        // Copy so the line below reads m: the else branch's (s32)var_a3 then becomes a separate web,
+        // numbered after (s32)m, which orders that loop's preheader.
+        m = var_a3;
+        if ((s32)temp_l < arg0->unk_01[i]) {
             if (temp_l == 3) {
+                // Discarded read. It leaves i's live range one register short at the j-loop guard, so
+                // IDO ends i's register range before the guard and stores i to its stack home earlier.
+                if (arg1) {}
                 var_s2 = 0;
-                temp_v0_2 = arg0->unk_01[i] + var_a3;
+                temp_v0_2 = arg0->unk_01[i] + m;
+                // Block boundary before the loop; it moves temp_v0_2 - 1 to the target's spill slot.
+                if (1) {}
 
                 for (j = var_a3; j < temp_v0_2 - 2; j++) {
                     for (k = j + 1; k < temp_v0_2 - 1; k++) {
@@ -4128,7 +4146,8 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
                             sp90[1] = k;
                             sp90[2] = l;
 
-                            if ((D_843C5564->unk_00 & 0x800) && (BattleAI_GroupSharesTypeWeakness(arg0, sp90, 3) != 0)) {
+                            if ((D_843C5564->unk_00 & 0x800) &&
+                                (BattleAI_GroupSharesTypeWeakness(arg0, sp90, 3) != 0)) {
                                 var_s0 -= fabsf(var_s0) * 0.2;
                             }
 
@@ -4150,6 +4169,8 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
                 if (var_s2 > 0) {
                     var_a0_3 = 1;
                     var_a1 = var_s2;
+                    // Discarded read; it only steers register allocation.
+                    if (D_843C5564->unk_00) {}
                     if (D_843C5564->unk_00 & 0x10000) {
                         var_a0_3 = 2;
                     }
@@ -4158,11 +4179,14 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
                         var_a0_3 *= 4;
                     }
 
+                    // k is dead; setting it in both arms keeps the unconditional branch after the then arm.
                     if (var_a0_3 < var_s2) {
                         var_a1 = var_a0_3;
+                        k = 1;
+                    } else {
+                        k = 0;
                     }
-
-                    // var_a1 = (var_a0_3 < var_s2) ? var_a0_3 : var_s2;
+                    if (k) {}
 
                     spBF = BattleAI_RandomBelowInclusive(var_a1 - 1);
                     _bcopy(&sp78[spBF * 3], &arg1[spBA], 3);
@@ -4175,6 +4199,9 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
         } else {
             for (m = 0; m < arg0->unk_01[i]; m++) {
                 arg1[m + spBA] = m + var_a3;
+                // No-op pair; it only steers register allocation.
+                m++;
+                m--;
             }
             sp76 = 1;
         }
@@ -4182,9 +4209,6 @@ s32 func_8437FD74(BattleAiTeamState* arg0, u8* arg1, s32* arg2, u8 arg3) {
 
     return sp76;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_engine/battle_engine_361050/func_8437FD74.s")
-#endif
 
 s32 BattleAI_SelectLeadFromScoredGroup(BattleAiTeamState* arg0, BattleAiTeamState* arg1, u8* arg2, u8* arg3, s32* arg4) {
     u8 i;
