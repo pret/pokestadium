@@ -160,7 +160,7 @@ void RentalHub_Draw(s16 height) {
     RentalHub_DrawHeader();
     RentalHub_DrawMenuItems(height);
     if (height == 8) {
-        RentalHub_DrawSelectionCursor((hovered_menu_item * 0xA4) + 0x50, 0x180, 0x98, 0x30);
+        RentalHub_DrawSelectionCursor((hovered_menu_item * 164) + 80, 384, 152, 48);
     }
     BgStage_AdvanceFrame();
 }
