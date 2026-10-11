@@ -273,6 +273,7 @@ extern u8 D_2007500[];
 #define POKEBALL_ICON_BOTTOM D_2007500
 extern u8 D_20003C0[];
 extern u8 D_20005C0[];
+#define ELIGIBILITY_PANEL_LEGEND D_20005C0
 extern u8 D_20002C0[];
 extern u8 D_2000300[];
 extern u8 D_2000340[];

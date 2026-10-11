@@ -8,8 +8,8 @@
 #include "src/gfx_rect.h"
 #include "variables.h"
 
-static u16 D_83003EF0[151][0x640];
-static unk_D_83079E70 D_83079E70;
+static u16 pokemon_list[151][0x640];
+static QualifyingPokemonDisplayRow D_83079E70;
 
 s32 RentalRules_SpeciesMatchesCategory(s16 species, s16 ruleset) {
     s32 is_eligible;
@@ -81,91 +81,91 @@ s16 RentalRules_CountMatchingSpecies(s16 ruleset) {
     return number_of_eligible_pokemon;
 }
 
-s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* arg0, s16 arg1, s16 rule_category) {
+s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayNode* display_node, s16 row, s16 ruleset) {
     s32 i;
-    s16 var_a0;
-    s32 var_s1;
-    s32 var_s3;
+    s16 species;
+    s32 index;
+    s32 number_processed;
 
     for (i = 0; i < 6; i++) {
-        arg0->unk_00[i].unk_00 = 0;
-        arg0->unk_00[i].unk_02 = 0;
+        display_node->unk_00[i].unk_00 = 0;
+        display_node->unk_00[i].is_eligible = 0;
     }
 
-    var_s3 = 0;
-    var_s1 = (arg1 * 6) + 1;
-    for (i = 0; i < 6; i++, var_s1++) {
-        var_a0 = var_s1;
-        if ((var_a0 <= 0) || (var_a0 >= 0x98)) {
-            var_a0 = 0;
+    number_processed = 0;
+    index = (row * 6) + 1;
+    for (i = 0; i < 6; i++, index++) {
+        species = index;
+        if ((species <= 0) || (species >= 152)) {
+            species = 0;
         } else {
-            var_s3++;
+            number_processed++;
         }
-        arg0->unk_00[i].unk_00 = var_a0;
+        display_node->unk_00[i].unk_00 = species;
 
-        if (RentalRules_SpeciesMatchesCategory(var_a0, rule_category) != 0) {
-            arg0->unk_00[i].unk_02 = 1;
+        if (RentalRules_SpeciesMatchesCategory(species, ruleset) != 0) {
+            display_node->unk_00[i].is_eligible = 1;
         } else {
-            arg0->unk_00[i].unk_02 = 0;
+            display_node->unk_00[i].is_eligible = 0;
         }
     }
 
-    return var_s3;
+    return number_processed;
 }
 
-QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* arg0, s32 arg1) {
-    while (arg1-- > 0) {
-        arg0 = arg0->unk_18;
+struct QualifyingPokemonDisplayNode* RentalRules_AdvancePageNode(struct QualifyingPokemonDisplayNode* current_node, s32 advance_amount) {
+    while (advance_amount-- > 0) {
+        current_node = current_node->below_neighbour;
     }
 
-    return arg0;
+    return current_node;
 }
 
-s32 RentalRules_ScrollPageUp(unk_D_83079E70* arg0) {
-    s32 sp1C = 0;
+s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplayRow* row) {
+    s32 scroll_successful = 0;
 
-    if (RentalRules_BuildSpeciesPage(arg0->unk_10->unk_1C, arg0->unk_08 - 1, D_800AE540.unk_0001) > 0) {
-        arg0->unk_00 = 3;
-        arg0->unk_02 = 4;
-        arg0->unk_08--;
-        arg0->unk_10 = arg0->unk_10->unk_1C;
-        arg0->unk_0A = -1;
-        arg0->unk_0C = -1;
-        sp1C = 1;
+    if (RentalRules_BuildSpeciesPage(row->self_node->above_neighbour, row->pokedex_index - 1, D_800AE540.unk_0001) > 0) {
+        row->unk_00 = 3;
+        row->unk_02 = 4;
+        row->pokedex_index--;
+        row->self_node = row->self_node->above_neighbour;
+        row->unk_0A = -1;
+        row->unk_0C = -1;
+        scroll_successful = 1;
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
-    return sp1C;
+    return scroll_successful;
 }
 
-s32 RentalRules_ScrollPageDown(unk_D_83079E70* arg0) {
-    s32 sp1C = 0;
+s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplayRow* row) {
+    s32 scroll_successful = 0;
 
-    if (RentalRules_BuildSpeciesPage(RentalRules_AdvancePageNode(arg0->unk_10, 5), arg0->unk_08 + 5, D_800AE540.unk_0001) > 0) {
-        arg0->unk_00 = 3;
-        arg0->unk_02 = 4;
-        arg0->unk_08++;
-        arg0->unk_10 = arg0->unk_10->unk_18;
-        arg0->unk_0A = 1;
-        arg0->unk_0C = -1;
-        sp1C = 1;
+    if (RentalRules_BuildSpeciesPage(RentalRules_AdvancePageNode(row->self_node, 5), row->pokedex_index + 5, D_800AE540.unk_0001) > 0) {
+        row->unk_00 = 3;
+        row->unk_02 = 4;
+        row->pokedex_index++;
+        row->self_node = row->self_node->below_neighbour;
+        row->unk_0A = 1;
+        row->unk_0C = -1;
+        scroll_successful = 1;
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
-    return sp1C;
+    return scroll_successful;
 }
 
-void RentalRules_ListUpdateOpen(unk_D_83079E70* arg0) {
-    arg0->unk_02--;
-    arg0->unk_04 = ((5 - arg0->unk_02) << 0xA) / 5;
-    if (arg0->unk_02 <= 0) {
-        arg0->unk_00 = 2;
-        arg0->unk_02 = 0;
-        arg0->unk_0C = 2;
+void RentalRules_ListUpdateOpen(QualifyingPokemonDisplayRow* row) {
+    row->unk_02--;
+    row->unk_04 = ((5 - row->unk_02) << 0xA) / 5;
+    if (row->unk_02 <= 0) {
+        row->unk_00 = 2;
+        row->unk_02 = 0;
+        row->unk_0C = 2;
     }
 }
 
-void RentalRules_ListUpdateShown(unk_D_83079E70* arg0) {
+void RentalRules_ListUpdateShown(QualifyingPokemonDisplayRow* arg0) {
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A | BTN_B)) {
         arg0->unk_00 = 4;
         arg0->unk_02 = 5;
@@ -178,7 +178,7 @@ void RentalRules_ListUpdateShown(unk_D_83079E70* arg0) {
     }
 }
 
-void RentalRules_ListUpdateScrolling(unk_D_83079E70* arg0) {
+void RentalRules_ListUpdateScrolling(QualifyingPokemonDisplayRow* arg0) {
     s32 var_v1;
 
     arg0->unk_02--;
@@ -198,7 +198,7 @@ void RentalRules_ListUpdateScrolling(unk_D_83079E70* arg0) {
     }
 }
 
-void RentalRules_ListUpdateClose(unk_D_83079E70* arg0) {
+void RentalRules_ListUpdateClose(QualifyingPokemonDisplayRow* arg0) {
     arg0->unk_02--;
     arg0->unk_04 = (arg0->unk_02 << 0xA) / 5;
     if (arg0->unk_02 <= 0) {
@@ -208,7 +208,7 @@ void RentalRules_ListUpdateClose(unk_D_83079E70* arg0) {
     }
 }
 
-void RentalRules_DrawScrollbar(s16 arg0, s16 arg1, unk_D_83079E70* arg2) {
+void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplayRow* row_display) {
     static s16 D_83003B70 = 0;
 
     s16 temp_t0;
@@ -217,24 +217,24 @@ void RentalRules_DrawScrollbar(s16 arg0, s16 arg1, unk_D_83079E70* arg2) {
     gDPSetEnvColor(gDisplayListHead++, 130, 130, 220, 255);
     gDPSetPrimColor(gDisplayListHead++, 0, 0, 60, 60, 150, 255);
 
-    Gfx_DrawTextureIa8(arg0, arg1, 0x10, 8, D_200A200, 0x10, 0);
-    Gfx_DrawTextureIa8(arg0, arg1 + 0x114, 0x10, 8, D_200A280, 0x10, 0);
-    Gfx_DrawTexturedRectClipped(arg0, arg1 + 8, 0x10, 0x10C, 0, 0, 0x400, 0, 0);
+    Gfx_DrawTextureIa8(x, y, 16, 8, D_200A200, 0x10, 0);
+    Gfx_DrawTextureIa8(x, y + 276, 0x10, 8, D_200A280, 0x10, 0);
+    Gfx_DrawTexturedRectClipped(x, y + 8, 0x10, 0x10C, 0, 0, 0x400, 0, 0);
 
-    if (arg2->unk_00 != 3) {
-        temp_t0 = (arg2->unk_08 * 0x10C) / 21;
-    } else if (arg2->unk_0A > 0) {
-        temp_t0 = (((arg2->unk_08 * 4) - arg2->unk_02) * 0x10C) / 84;
+    if (row_display->unk_00 != 3) {
+        temp_t0 = (row_display->pokedex_index * 0x10C) / 21;
+    } else if (row_display->unk_0A > 0) {
+        temp_t0 = (((row_display->pokedex_index * 4) - row_display->unk_02) * 0x10C) / 84;
     } else {
-        temp_t0 = (((arg2->unk_08 * 4) + arg2->unk_02) * 0x10C) / 84;
+        temp_t0 = (((row_display->pokedex_index * 4) + row_display->unk_02) * 0x10C) / 84;
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     if (D_83003B70 < 4) {
-        Gfx_DrawTextureRgba16(arg0 - 4, (arg1 + temp_t0) - 4, 0x18, 0x18, D_200A300, 0x18, 0);
+        Gfx_DrawTextureRgba16(x - 4, (y + temp_t0) - 4, 24, 24, D_200A300, 0x18, 0);
     } else {
-        Gfx_DrawTextureRgba16(arg0 - 4, (arg1 + temp_t0) - 4, 0x18, 0x18, D_200A780, 0x18, 0);
+        Gfx_DrawTextureRgba16(x - 4, (y + temp_t0) - 4, 24, 24, D_200A780, 0x18, 0);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
@@ -243,43 +243,43 @@ void RentalRules_DrawScrollbar(s16 arg0, s16 arg1, unk_D_83079E70* arg2) {
     D_83003B70 = (D_83003B70 + 1) % 8;
 }
 
-void RentalRules_DrawCloseButtonIcon(s16 arg0, s16 arg1) {
+void RentalRules_DrawEligibilityPanelLegend(s16 x, s16 y) {
     gDPPipeSync(gDisplayListHead++);
 
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetEnvColor(gDisplayListHead++, 60, 60, 160, 255);
 
-    Gfx_DrawTextureI4(arg0, arg1, 0x20, 0x14, D_4000DD0, 0x20, 0);
+    Gfx_DrawTextureI4(x, y, 32, 20, ELIGIBILITY_PANEL_LEGEND, 0x20, 0);
 }
 
-void RentalRules_DrawSpeciesPage(s16 arg0, s16 arg1, QualifyingPokemonDisplayRow* arg2) {
+void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayNode* node) {
     UNUSED s32 pad;
     s32 i;
-    Color_RGB8* var_v0;
-    Color_RGB8 sp78 = { 0x3C, 0x3C, 0xA0 };
-    Color_RGB8 sp74 = { 0x64, 0x1E, 0x1E };
-    Color_RGB8 sp70 = { 0x1E, 0x1E, 0x64 };
+    Color_RGB8* current_panel_color;
+    Color_RGB8 eligible_panel_color = { 0x3C, 0x3C, 0xA0 };
+    Color_RGB8 banned_panel_color = { 0x64, 0x1E, 0x1E };
+    Color_RGB8 empty_panel_color = { 0x1E, 0x1E, 0x64 };
     s16 temp_s0;
 
     for (i = 0; i < 6; i++) {
-        if (arg2->unk_00[i].unk_00 != 0) {
-            if (arg2->unk_00[i].unk_02 != 0) {
-                var_v0 = &sp78;
+        if (node->unk_00[i].unk_00 != 0) {
+            if (node->unk_00[i].is_eligible != 0) {
+                current_panel_color = &eligible_panel_color;
             } else {
-                var_v0 = &sp74;
+                current_panel_color = &banned_panel_color;
             }
         } else {
-            var_v0 = &sp70;
+            current_panel_color = &empty_panel_color;
         }
-        RentalRules_DrawFilledPanel(arg0 + i * 0x54, arg1, 0x54, 0x3C, var_v0->r, var_v0->g, var_v0->b);
+        RentalRules_DrawFilledPanel(x + i * 0x54, y, 0x54, 0x3C, current_panel_color->r, current_panel_color->g, current_panel_color->b);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < 6; i++) {
-        temp_s0 = arg2->unk_00[i].unk_00;
+        temp_s0 = node->unk_00[i].unk_00;
         if (temp_s0 != NULL) {
-            Gfx_DrawTextureRgba16(arg0 + (i * 0x54) + 0x16, arg1 + 3, 0x28, 0x28, D_83003EF0[temp_s0 - 1], 0x28, 0);
+            Gfx_DrawTextureRgba16(x + (i * 0x54) + 0x16, y + 3, 0x28, 0x28, pokemon_list[temp_s0 - 1], 0x28, 0);
         }
     }
 
@@ -290,9 +290,9 @@ void RentalRules_DrawSpeciesPage(s16 arg0, s16 arg1, QualifyingPokemonDisplayRow
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
     for (i = 0; i < 6; i++) {
-        temp_s0 = arg2->unk_00[i].unk_00;
+        temp_s0 = node->unk_00[i].unk_00;
         if (temp_s0 != NULL) {
-            Font_Printf(arg0 + (i * 0x54) + 2, arg1 + 0x2A, RentalRules_GetPokemonName(temp_s0));
+            Font_Printf(x + (i * 0x54) + 2, y + 0x2A, RentalRules_GetPokemonName(temp_s0));
         }
     }
 
@@ -300,26 +300,26 @@ void RentalRules_DrawSpeciesPage(s16 arg0, s16 arg1, QualifyingPokemonDisplayRow
 }
 
 void RentalRules_ListInit(s32 arg0) {
-    unk_D_83079E70* ptr = &D_83079E70;
+    QualifyingPokemonDisplayRow* ptr = &D_83079E70;
     s32 i;
 
     ptr->unk_00 = 0;
     ptr->unk_04 = 0;
 
     for (i = 0; i < 6; i++) {
-        ptr->unk_14[i].unk_18 = &ptr->unk_14[(i + 1) % 6];
-        ptr->unk_14[i].unk_1C = &ptr->unk_14[(i + 5) % 6];
+        ptr->unk_14[i].below_neighbour = &ptr->unk_14[(i + 1) % 6];
+        ptr->unk_14[i].above_neighbour = &ptr->unk_14[(i + 5) % 6];
     }
 
     if (arg0 != 0) {
         for (i = 0; i < 151; i++) {
-            PokeIcon_LoadModelTextureForMon(D_83003EF0[i], i + 1, NULL);
+            PokeIcon_LoadModelTextureForMon(pokemon_list[i], i + 1, NULL);
         }
     }
 }
 
 void RentalRules_ListUpdate(void) {
-    unk_D_83079E70* ptr = &D_83079E70;
+    QualifyingPokemonDisplayRow* ptr = &D_83079E70;
 
     if (ptr->unk_00 != 0) {
         switch (ptr->unk_00) {
@@ -345,7 +345,7 @@ void RentalRules_ListUpdate(void) {
 void RentalRules_ListDraw(void) {
     s16 spA6;
     s16 spA4;
-    unk_D_83079E70* ptr = &D_83079E70;
+    QualifyingPokemonDisplayRow* ptr = &D_83079E70;
 
     if (ptr->unk_04 == 0) {
         return;
@@ -358,7 +358,7 @@ void RentalRules_ListDraw(void) {
     if (ptr->unk_04 >= 0x400) {
         UNUSED s32 pad;
         s32 i;
-        QualifyingPokemonDisplayRow* var_s0;
+        QualifyingPokemonDisplayNode* var_s0;
 
         RentalRules_DrawFilledPanel(spA6, spA4, 0x210, 0x24, 0x1E, 0x64, 0x64);
         RentalRules_DrawFilledPanel(spA6, spA4 + 0x24, 0x18, 0x12C, 0x1E, 0x1E, 0x64);
@@ -366,7 +366,7 @@ void RentalRules_ListDraw(void) {
 
         gSPDisplayList(gDisplayListHead++, D_8006F518);
 
-        RentalRules_DrawCloseButtonIcon(spA6 + 8, spA4 + 8);
+        RentalRules_DrawEligibilityPanelLegend(spA6 + 8, spA4 + 8);
 
         gSPDisplayList(gDisplayListHead++, D_8006F630);
 
@@ -388,24 +388,24 @@ void RentalRules_ListDraw(void) {
             s16 sp4A = spA4 - ((ptr->unk_0A * 0x3C * (4 - ptr->unk_02)) / 4);
             Gfx_SetScissorRect(&gDisplayListHead, spA6 + 0x18, spA4 + 0x24, 0x1F8, 0x12C);
             if (ptr->unk_0A > 0) {
-                var_s0 = ptr->unk_10->unk_1C;
+                var_s0 = ptr->self_node->above_neighbour;
                 for (i = 0; i < 6; i++) {
                     RentalRules_DrawSpeciesPage(spA6 + 0x18, sp4A + 0x24 + i * 0x3C, var_s0);
-                    var_s0 = var_s0->unk_18;
+                    var_s0 = var_s0->below_neighbour;
                 }
             } else {
-                var_s0 = ptr->unk_10;
+                var_s0 = ptr->self_node;
                 for (i = 0; i < 6; i++) {
                     RentalRules_DrawSpeciesPage(spA6 + 0x18, sp4A - 0x18 + i * 0x3C, var_s0);
-                    var_s0 = var_s0->unk_18;
+                    var_s0 = var_s0->below_neighbour;
                 }
             }
             Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 0x280, 0x1E0);
         } else {
-            var_s0 = ptr->unk_10;
+            var_s0 = ptr->self_node;
             for (i = 0; i < 5; i++) {
                 RentalRules_DrawSpeciesPage(spA6 + 0x18, spA4 + 0x24 + i * 0x3C, var_s0);
-                var_s0 = var_s0->unk_18;
+                var_s0 = var_s0->below_neighbour;
             }
         }
 
@@ -418,17 +418,17 @@ void RentalRules_ListDraw(void) {
 }
 
 void RentalRules_ListOpen(void) {
-    unk_D_83079E70* ptr = &D_83079E70;
+    QualifyingPokemonDisplayRow* ptr = &D_83079E70;
     s32 i;
 
     ptr->unk_00 = 1;
     ptr->unk_02 = 5;
     ptr->unk_04 = 0;
-    ptr->unk_08 = 0;
+    ptr->pokedex_index = 0;
     ptr->unk_0A = 0;
     ptr->unk_0C = -1;
     ptr->unk_06 = RentalRules_CountMatchingSpecies(D_800AE540.unk_0001);
-    ptr->unk_10 = &ptr->unk_14[0];
+    ptr->self_node = &ptr->unk_14[0];
 
     for (i = 0; i < 5; i++) {
         RentalRules_BuildSpeciesPage(&ptr->unk_14[i], i, D_800AE540.unk_0001);
