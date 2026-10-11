@@ -165,7 +165,7 @@ void RentalRules_ListUpdateOpen(QualifyingPokemonDisplay* display) {
     display->unk_02--;
     display->unk_04 = ((5 - display->unk_02) << 0xA) / 5;
     if (display->unk_02 <= 0) {
-        display->qualifying_list_state = OPENING;
+        display->qualifying_list_state = AWAITING_INPUT;
         display->unk_02 = 0;
         display->unk_0C = 2;
     }
