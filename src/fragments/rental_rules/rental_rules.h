@@ -85,25 +85,25 @@ void RentalRules_PopupOpen(s16 text_index);
 s32 RentalRules_PopupIsActive(void);
 s32 RentalRules_PopupGetProgress(void);
 
-s32 RentalRules_SpeciesMatchesCategory(s16 arg0, s16 arg1);
-s16 RentalRules_CountMatchingSpecies(s16 arg0);
-s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* arg0, s16 arg1, s16 arg2);
-QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* arg0, s32 arg1);
-s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* arg0);
-s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* arg0);
-void RentalRules_ListUpdateOpen(QualifyingPokemonDisplay* arg0);
-void RentalRules_ListUpdateShown(QualifyingPokemonDisplay* arg0);
-void RentalRules_ListUpdateScrolling(QualifyingPokemonDisplay* arg0);
-void RentalRules_ListUpdateClose(QualifyingPokemonDisplay* arg0);
-void RentalRules_DrawScrollbar(s16 arg0, s16 arg1, QualifyingPokemonDisplay* arg2);
-void RentalRules_DrawEligibilityPanelLegend(s16 arg0, s16 arg1);
-void RentalRules_DrawSpeciesPage(s16 arg0, s16 arg1, QualifyingPokemonDisplayRow* arg2);
-void RentalRules_ListInit(s32 arg0);
-void RentalRules_ListUpdate(void);
-void RentalRules_ListDraw(void);
-void RentalRules_ListOpen(void);
-s32 RentalRules_ListIsActive(void);
-s32 RentalRules_ListGetProgress(void);
+s32 RentalRules_SpeciesMatchesCategory(s16 species, s16 ruleset);
+s16 RentalRules_CountMatchingSpecies(s16 ruleset);
+s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* row, s16 current_row_index, s16 ruleset);
+QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* row, s32 advance_amount);
+s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* display);
+s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* display);
+void RentalRules_QualifyingSpeciesWindowUpdateOpen(QualifyingPokemonDisplay* display);
+void RentalRules_QualifyingSpeciesWindowUpdateShown(QualifyingPokemonDisplay* display);
+void RentalRules_QualifyingSpeciesWindowUpdateScrolling(QualifyingPokemonDisplay* display);
+void RentalRules_QualifyingSpeciesWindowUpdateClose(QualifyingPokemonDisplay* display);
+void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* display);
+void RentalRules_DrawEligibilityPanelLegend(s16 x, s16 y);
+void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node);
+void RentalRules_QualifyingSpeciesWindowInit(s32 arg0);
+void RentalRules_QualifyingSpeciesWindowUpdate(void);
+void RentalRules_QualifyingSpeciesWindowDraw(void);
+void RentalRules_QualifyingSpeciesWindowOpen(void);
+s32 RentalRules_QualifyingSpeciesWindowIsActive(void);
+s32 RentalRules_GetQualifyingSpeciesDisplayOpeningProgress(void);
 
 
 #endif // _FRAGMENT55_H_

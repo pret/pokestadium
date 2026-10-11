@@ -119,7 +119,7 @@ s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* row, s16 current_r
     return number_processed;
 }
 
-struct QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* row, s32 advance_amount) {
+QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* row, s32 advance_amount) {
     while (advance_amount-- > 0) {
         row = row->below_neighbour;
     }
@@ -161,7 +161,7 @@ s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* display) {
     return scroll_successful;
 }
 
-void RentalRules_ListUpdateOpen(QualifyingPokemonDisplay* display) {
+void RentalRules_QualifyingSpeciesWindowUpdateOpen(QualifyingPokemonDisplay* display) {
     display->animation_ticks--;
     display->window_openness = ((5 - display->animation_ticks) << 0xA) / 5;
     if (display->animation_ticks <= 0) {
@@ -171,7 +171,7 @@ void RentalRules_ListUpdateOpen(QualifyingPokemonDisplay* display) {
     }
 }
 
-void RentalRules_ListUpdateShown(QualifyingPokemonDisplay* display) {
+void RentalRules_QualifyingSpeciesWindowUpdateShown(QualifyingPokemonDisplay* display) {
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A | BTN_B)) {
         display->qualifying_list_state = CLOSING;
         display->animation_ticks = 5;
@@ -184,7 +184,7 @@ void RentalRules_ListUpdateShown(QualifyingPokemonDisplay* display) {
     }
 }
 
-void RentalRules_ListUpdateScrolling(QualifyingPokemonDisplay* display) {
+void RentalRules_QualifyingSpeciesWindowUpdateScrolling(QualifyingPokemonDisplay* display) {
     s32 var_v1;
 
     display->animation_ticks--;
@@ -204,17 +204,17 @@ void RentalRules_ListUpdateScrolling(QualifyingPokemonDisplay* display) {
     }
 }
 
-void RentalRules_ListUpdateClose(QualifyingPokemonDisplay* arg0) {
-    arg0->animation_ticks--;
-    arg0->window_openness = (arg0->animation_ticks << 0xA) / 5;
-    if (arg0->animation_ticks <= 0) {
-        arg0->qualifying_list_state = INACTIVE;
-        arg0->animation_ticks = 0;
-        arg0->row_draw_budget = -1;
+void RentalRules_QualifyingSpeciesWindowUpdateClose(QualifyingPokemonDisplay* display) {
+    display->animation_ticks--;
+    display->window_openness = (display->animation_ticks << 0xA) / 5;
+    if (display->animation_ticks <= 0) {
+        display->qualifying_list_state = INACTIVE;
+        display->animation_ticks = 0;
+        display->row_draw_budget = -1;
     }
 }
 
-void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* row_display) {
+void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* display) {
     static s16 D_83003B70 = 0;
 
     s16 y_offset;
@@ -227,12 +227,12 @@ void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* row_displ
     Gfx_DrawTextureIa8(x, y + 276, 0x10, 8, D_200A280, 0x10, 0);
     Gfx_DrawTexturedRectClipped(x, y + 8, 0x10, 0x10C, 0, 0, 0x400, 0, 0);
 
-    if (row_display->qualifying_list_state != SCROLLING) {
-        y_offset = (row_display->top_row_index * 0x10C) / 21;
-    } else if (row_display->scroll_direction > 0) {
-        y_offset = (((row_display->top_row_index * 4) - row_display->animation_ticks) * 0x10C) / 84;
+    if (display->qualifying_list_state != SCROLLING) {
+        y_offset = (display->top_row_index * 0x10C) / 21;
+    } else if (display->scroll_direction > 0) {
+        y_offset = (((display->top_row_index * 4) - display->animation_ticks) * 0x10C) / 84;
     } else {
-        y_offset = (((row_display->top_row_index * 4) + row_display->animation_ticks) * 0x10C) / 84;
+        y_offset = (((display->top_row_index * 4) + display->animation_ticks) * 0x10C) / 84;
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
@@ -305,7 +305,7 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
     Font_EndTexturedTextRendering();
 }
 
-void RentalRules_ListInit(s32 arg0) {
+void RentalRules_QualifyingSpeciesWindowInit(s32 arg0) {
     QualifyingPokemonDisplay* ptr = &qualifying_species_display;
     s32 i;
 
@@ -324,31 +324,31 @@ void RentalRules_ListInit(s32 arg0) {
     }
 }
 
-void RentalRules_ListUpdate(void) {
+void RentalRules_QualifyingSpeciesWindowUpdate(void) {
     QualifyingPokemonDisplay* ptr = &qualifying_species_display;
 
     if (ptr->qualifying_list_state != INACTIVE) {
         switch (ptr->qualifying_list_state) {
             case OPENING:
-                RentalRules_ListUpdateOpen(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateOpen(&qualifying_species_display);
                 break;
 
             case AWAITING_INPUT:
-                RentalRules_ListUpdateShown(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateShown(&qualifying_species_display);
                 break;
 
             case SCROLLING:
-                RentalRules_ListUpdateScrolling(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateScrolling(&qualifying_species_display);
                 break;
 
             case CLOSING:
-                RentalRules_ListUpdateClose(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateClose(&qualifying_species_display);
                 break;
         }
     }
 }
 
-void RentalRules_ListDraw(void) {
+void RentalRules_QualifyingSpeciesWindowDraw(void) {
     s16 x;
     s16 y;
     QualifyingPokemonDisplay* display = &qualifying_species_display;
@@ -423,7 +423,7 @@ void RentalRules_ListDraw(void) {
     if (1) {}
 }
 
-void RentalRules_ListOpen(void) {
+void RentalRules_QualifyingSpeciesWindowOpen(void) {
     QualifyingPokemonDisplay* ptr = &qualifying_species_display;
     s32 i;
 
@@ -441,7 +441,7 @@ void RentalRules_ListOpen(void) {
     }
 }
 
-s32 RentalRules_ListIsActive(void) {
+s32 RentalRules_QualifyingSpeciesWindowIsActive(void) {
     s32 is_active;
 
     if (qualifying_species_display.qualifying_list_state != INACTIVE) {
@@ -452,6 +452,6 @@ s32 RentalRules_ListIsActive(void) {
     return is_active;
 }
 
-s32 RentalRules_ListGetProgress(void) {
+s32 RentalRules_GetQualifyingSpeciesDisplayOpeningProgress(void) {
     return qualifying_species_display.window_openness;
 }

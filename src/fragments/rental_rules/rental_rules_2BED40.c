@@ -392,7 +392,7 @@ void RentalRules_UpdateMainInput(void) {
         if (D_83003DE0.unk_00[D_83003CA0[D_83003CA6]] != NULL) {
             RentalRules_PopupOpen(D_83003CA0[D_83003CA6]);
         } else {
-            RentalRules_ListOpen();
+            RentalRules_QualifiyingSpeciesWindowOpen();
             Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         }
 
@@ -406,7 +406,7 @@ void RentalRules_UpdateMainInput(void) {
 }
 
 void RentalRules_UpdateWaitPopupClose(void) {
-    if ((RentalRules_PopupIsActive() == 0) && (RentalRules_ListIsActive() == 0)) {
+    if ((RentalRules_PopupIsActive() == 0) && (RentalRules_QualifyingSpeciesWindowIsActive() == 0)) {
         D_83003C80 = 1;
     }
 }
@@ -610,7 +610,7 @@ void RentalRules_DrawRuleListPanel(void) {
         RentalRules_DrawFilledPanel(0x38, temp_s3, 0x210, 0x20, 0x3C, 0x3C, 0xA0);
         RentalRules_DrawFilledPanel(0x38, temp_s3 + 0x20, 0x210, 0x110, 0x1E, 0x1E, 0x64);
         RentalRules_DrawFilledPanel(0x38, temp_s3 + 0x130, 0x210, 0x20, 0x3C, 0x3C, 0xA0);
-        if ((RentalRules_PopupGetProgress() == 0) && (RentalRules_ListGetProgress() == 0)) {
+        if ((RentalRules_PopupGetProgress() == 0) && (RentalRules_GetQualifyingSpeciesDisplayOpeningProgress() == 0)) {
             s16 sins = SINS(D_83003B60) * 3.0f;
 
             Ui_DrawTextureMarker(sins + 0x48, temp_s3 + (D_83003CA6 * 0x18) + 0x2A);
@@ -649,7 +649,7 @@ void RentalRules_DrawFrame(void) {
         }
     }
 
-    if ((RentalRules_PopupGetProgress() < 0x400) && (RentalRules_ListGetProgress() < 0x400)) {
+    if ((RentalRules_PopupGetProgress() < 0x400) && (RentalRules_GetQualifyingSpeciesDisplayOpeningProgress() < 0x400)) {
         RentalRules_DrawRuleListPanel();
     }
 
