@@ -1906,7 +1906,7 @@ s16 TransferPak_MainMenu(SessionContinueData* arg0) {
 
         StageLoader_RunFrames(2);
 
-        if (D_800AE540.unk_0000 == 7) {
+        if (gSessionContext.mode == 7) {
             sp44 = 0x27;
         } else {
             sp44 = 0x20;
@@ -2028,7 +2028,7 @@ s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* arg1) {
     if (arg0 == 5) {
         var_a3 = D_8006F09C->node.callbackArg;
         var_a2 = var_a3;
-        if ((var_a3 == 0) && (D_800AE540.unk_11F2 == 1)) {
+        if ((var_a3 == 0) && (gSessionContext.unk_11F2 == 1)) {
             var_a2 = 7;
         }
 
@@ -2554,7 +2554,7 @@ s32 TransferPak_MenuHandleInput(void) {
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) && (D_82D0AB90.unk_00 == 0x1F8)) {
         Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         var_a3 = -1;
-        D_800AE540.unk_11F2 ^= 1;
+        gSessionContext.unk_11F2 ^= 1;
     }
 
     if ((sp24 != -1) && (sp22 != sp24)) {
@@ -2800,7 +2800,7 @@ s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
     Save_GetModeSettings(&D_82D0AB90, 0);
     Save_GetOptionsField02(&D_82D0AB98);
     sp53 = (D_82D0AB98 & 4) != 0;
-    D_800AE540.unk_11F2 = sp53;
+    gSessionContext.unk_11F2 = sp53;
     Gfx_InitDisplayListBuffers(0x10000, 0);
     sp54 = StageContext_Allocate(1, 0, 2, 0, 2, 1);
     Font_Init(0x1C, 0);
@@ -2836,8 +2836,8 @@ s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
 
     StageContext_Deactivate();
 
-    if (D_800AE540.unk_11F2 != sp53) {
-        if (D_800AE540.unk_11F2 == 0) {
+    if (gSessionContext.unk_11F2 != sp53) {
+        if (gSessionContext.unk_11F2 == 0) {
             D_82D0AB98 &= ~4;
         } else {
             D_82D0AB98 |= 4;

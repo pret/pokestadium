@@ -325,15 +325,15 @@ void BattleScene_IntroCameraStep20(unk_D_86002F34_00C* arg0) {
     s16 var_v1;
 
     BattleScene_ResetCameraFrameCounter();
-    if (D_800AE540.unk_0000 == 0x10) {
-        var_v1 = D_843859E0[D_800AE540.unk_0001].unk_00;
-        if (D_800AE540.unk_0001 == 7) {
-            var_v1 += D_800AE540.unk_0002;
+    if (gSessionContext.mode == 0x10) {
+        var_v1 = D_843859E0[gSessionContext.ruleCategory].unk_00;
+        if (gSessionContext.ruleCategory == 7) {
+            var_v1 += gSessionContext.modeSelection;
         }
     } else {
-        var_v1 = D_843859E0[D_800AE540.unk_0000].unk_00;
-        if (D_800AE540.unk_0000 == 7) {
-            var_v1 += D_800AE540.unk_0002;
+        var_v1 = D_843859E0[gSessionContext.mode].unk_00;
+        if (gSessionContext.mode == 7) {
+            var_v1 += gSessionContext.modeSelection;
         }
     }
     arg0->unk_24.fovy = D_843859E0[var_v1].unk_0C;
@@ -554,7 +554,7 @@ void BattleScene_IntroCameraFinalHoldStep(unk_D_86002F34_00C* arg0) {
 }
 
 void BattleScene_UpdateIntroCameraSequence(unk_D_86002F34_00C* arg0) {
-    if ((D_800AE540.unk_0000 == 0x10) && (gBattleScene.unk_00->unk_1C == 1)) {
+    if ((gSessionContext.mode == 0x10) && (gBattleScene.unk_00->unk_1C == 1)) {
         BattleScene_UpdateActionSelectPhase();
     } else if (gBattleScene.unk_00->unk_1C == 1) {
         if ((gBattleScene.unk_00->unk_30 == 0) && (D_84390010[0]->unk_728.unk_168->unk_1C == 0x17) &&

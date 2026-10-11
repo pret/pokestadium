@@ -145,7 +145,7 @@ void BattleMenu_DrawScrollingRulesText(void) {
     Font_SetActive(0x10, 0);
     Gfx_SetEnvColor(0xA5, 0xDE, 0x8C, 0xFF);
 
-    if ((D_84816420->unk_0001 == 0) || (D_84816420->unk_0001 == 8)) {
+    if ((D_84816420->ruleCategory == 0) || (D_84816420->ruleCategory == 8)) {
         var_v0 = Text_GetString(NULL, 0, D_84803790, 1);
     } else {
         var_v0 = Text_GetString(NULL, 0, D_84803790, 0);
@@ -480,7 +480,7 @@ void BattleMenu_DrawOrderSelectPanel_LevelCapNotice(unk_D_848037A0* arg0) {
     s32 sp30;
     s32 sp2C;
 
-    switch (D_84816420->unk_0001) {
+    switch (D_84816420->ruleCategory) {
         case 3:
             sp2C = 0x9B;
             break;
@@ -748,7 +748,7 @@ void BattleMenu_UpdateComPanelAutoInput(void) {
     }
 
     if (i < 4) {
-        if ((D_84816420->unk_0001 != 0) && (D_84816420->unk_0001 != 8)) {
+        if ((D_84816420->ruleCategory != 0) && (D_84816420->ruleCategory != 8)) {
             var_v0 = 3;
         } else {
             var_v0 = D_848037A0[i].unk_0017;
@@ -793,7 +793,7 @@ s32 BattleMenu_PicksExceedLevelCap(unk_D_848037A0* arg0) {
             var_v0 += arg0->unk_0018[arg0->unk_000C[i]].unk_24;
         }
 
-        if (D_84816420->unk_0001 == 3) {
+        if (D_84816420->ruleCategory == 3) {
             if ((arg0->unk_000B == 2) && (var_v0 >= 0x6A)) {
                 return 1;
             }
@@ -801,7 +801,7 @@ s32 BattleMenu_PicksExceedLevelCap(unk_D_848037A0* arg0) {
             if ((arg0->unk_000B == 3) && (var_v0 >= 0x9C)) {
                 return 1;
             }
-        } else if (D_84816420->unk_0001 == 4) {
+        } else if (D_84816420->ruleCategory == 4) {
             if ((arg0->unk_000B == 2) && (var_v0 >= 0x38)) {
                 return 1;
             }
@@ -809,7 +809,7 @@ s32 BattleMenu_PicksExceedLevelCap(unk_D_848037A0* arg0) {
             if ((arg0->unk_000B == 3) && (var_v0 >= 0x51)) {
                 return 1;
             }
-        } else if (D_84816420->unk_0001 == 5) {
+        } else if (D_84816420->ruleCategory == 5) {
             if ((arg0->unk_000B == 2) && (var_v0 >= 0x24)) {
                 return 1;
             }
@@ -826,7 +826,7 @@ s32 BattleMenu_PicksExceedLevelCap(unk_D_848037A0* arg0) {
 s32 BattleMenu_IsOrderSelectionComplete(unk_D_848037A0* arg0) {
     s8 var_v1;
 
-    if ((D_84816420->unk_0001 != 0) && (D_84816420->unk_0001 != 8)) {
+    if ((D_84816420->ruleCategory != 0) && (D_84816420->ruleCategory != 8)) {
         var_v1 = 3;
     } else if (arg0->unk_001C->unk_000 & 2) {
         var_v1 = arg0->unk_0017;
@@ -1177,8 +1177,8 @@ void BattleMenu_CommitOrderSelection(void) {
         var_s2++;
     }
 
-    BattleMenu_RearrangeLeadPokemon(&D_84816420->unk_1194[0], &D_84803760[0]);
-    BattleMenu_RearrangeLeadPokemon(&D_84816420->unk_1194[1], &D_84803760[1]);
+    BattleMenu_RearrangeLeadPokemon(&D_84816420->battleSides[0], &D_84803760[0]);
+    BattleMenu_RearrangeLeadPokemon(&D_84816420->battleSides[1], &D_84803760[1]);
 }
 
 void BattleMenu_AddOrderSelectPanel(s16 arg0, s16 arg1, TeamRoster* arg2, s32 arg3, s32 arg4) {
@@ -1215,7 +1215,7 @@ void BattleMenu_AddOrderSelectPanel(s16 arg0, s16 arg1, TeamRoster* arg2, s32 ar
 }
 
 void BattleMenu_InitOrderSelectPanels(SessionContext* arg0) {
-    BattleSessionTeams* temp_s0 = &arg0->unk_1194[0];
+    BattleSessionTeams* temp_s0 = &arg0->battleSides[0];
 
     D_84816420 = arg0;
     D_8480379C = 0;
@@ -1225,8 +1225,8 @@ void BattleMenu_InitOrderSelectPanels(SessionContext* arg0) {
     D_84816450 = 0;
     D_84816428.buttonPressed = 0;
 
-    BattleMenu_InitTeamOrderState(&D_84803760[0], &D_84816420->unk_1194[0], D_84816420->unk_0001);
-    BattleMenu_InitTeamOrderState(&D_84803760[1], &D_84816420->unk_1194[1], D_84816420->unk_0001);
+    BattleMenu_InitTeamOrderState(&D_84803760[0], &D_84816420->battleSides[0], D_84816420->ruleCategory);
+    BattleMenu_InitTeamOrderState(&D_84803760[1], &D_84816420->battleSides[1], D_84816420->ruleCategory);
 
     if (temp_s0->unk_01 == 1) {
         BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->unk_08[0], 0, -1);
@@ -1272,7 +1272,7 @@ s32 BattleMenu_RunOrderSelectScreen(s32 arg0, s32 arg1) {
     D_84803790 = Text_GetStringTable(0x12);
     D_84803794 = Text_GetStringTable(6);
 
-    BattleMenu_InitOrderSelectPanels(&D_800AE540);
+    BattleMenu_InitOrderSelectPanels(&gSessionContext);
     Audio_PlayMusicIfChanged(7);
     StageContext_Activate(sp24);
     BgStage_WaitForCondition(BattleMenu_UpdateOrderSelect, 8, 8);

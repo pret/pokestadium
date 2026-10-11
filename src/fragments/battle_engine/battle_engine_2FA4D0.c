@@ -1779,7 +1779,7 @@ void BattleHud_DrawOwnSideStatus(Battler* arg0, BattlerState* arg1) {
     UNUSED s32 pad;
     s32 var_v1;
 
-    if (D_800AE540.unk_0000 != 0x10) {
+    if (gSessionContext.mode != 0x10) {
         if (arg1->unk_10 == 3) {
             BattleHud_DrawMonStatusBoxPlayer(arg0, arg0->unk_728.unk_168->unk_1C - 2, arg0->unk_728.unk_168->unk_1E - 0x3A, arg1->unk_1E,
                           1);
@@ -1838,7 +1838,7 @@ void BattleHud_DrawOpponentSideStatus(Battler* arg0, BattlerState* arg1) {
     TeamRoster* sp24 = arg0->unk_720->unk_08[arg0->unk_728.unk_16C];
     s32 sp20;
 
-    if (D_800AE540.unk_0000 != 0x10) {
+    if (gSessionContext.mode != 0x10) {
         if (arg1->unk_10 == 3) {
             BattleHud_DrawMonStatusBoxOpponent(arg0, arg0->unk_728.unk_168->unk_1C - 0x20, arg0->unk_728.unk_168->unk_1E - 2, arg1->unk_1E,
                           1);

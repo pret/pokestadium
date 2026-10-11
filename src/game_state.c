@@ -583,7 +583,7 @@ static s16 D_8007567C = 0;
 
 unk_D_800AE520 D_800AE520;
 s32 pad_D_800AE534[2];
-SessionContext D_800AE540;
+SessionContext gSessionContext;
 BinArchive* D_800AF738;
 
 s32 Game_DoCopyProtection(s32 state) {
@@ -622,7 +622,7 @@ void Fragment_QueueCall(s32 arg0, u8* arg1, u8* arg2, s32 arg3, s32 arg4) {
 }
 
 TeamRoster* Trainer_GetSlots(void) {
-    return D_800AE540.unk_0004;
+    return gSessionContext.trainerSlots;
 }
 
 s32 GbSave_GetActivePort(void) {
@@ -651,7 +651,7 @@ s32 Stage_RunDemoScene(s16 arg0) {
     FRAGMENT_LOAD(fragment2);
     FRAGMENT_LOAD(fragment3);
 
-    D_800AE540.unk_0000 = arg0;
+    gSessionContext.mode = arg0;
 
     sp24 = FRAGMENT_LOAD_AND_CALL(fragment17, arg0, 0);
 
@@ -667,7 +667,7 @@ void State_RunCredits(void) {
     FRAGMENT_LOAD(fragment2);
     FRAGMENT_LOAD(fragment3);
 
-    if (D_800AE540.unk_11F2 != 0) {
+    if (gSessionContext.unk_11F2 != 0) {
         FRAGMENT_LOAD_AND_CALL(fragment16, 0, 0);
     } else {
         FRAGMENT_LOAD_AND_CALL(fragment16, 0, 1);
@@ -698,15 +698,15 @@ void State_TitleScreen(void) {
     if (gCurrentGameState == STATE_TITLE_SCREEN) {
         main_pool_push_state('DEMO');
 
-        if (D_800AE540.unk_0000 == 0x10) {
+        if (gSessionContext.mode == 0x10) {
             FRAGMENT_LOAD(fragment34);
-            FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+            FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
         } else {
             ASSET_LOAD(D_3000000, kids_club_game_ui, 0); // borrows the Stadium logo from it
             FRAGMENT_LOAD(fragment2);
             FRAGMENT_LOAD(fragment34);
 
-            switch (D_800AE540.unk_0003) {
+            switch (gSessionContext.roundOrDemoId) {
                 case 3:
                     FRAGMENT_LOAD(fragment4);
                     FRAGMENT_LOAD_AND_CALL(fragment8, 1, 0);
@@ -728,8 +728,8 @@ void State_TitleScreen(void) {
         return;
     }
 
-    D_800AE540.unk_0002 = 0;
-    D_800AE540.unk_11F6 = 0;
+    gSessionContext.modeSelection = 0;
+    gSessionContext.transitionFlags = 0;
     D_80075674 = -1;
 }
 
@@ -837,56 +837,56 @@ void State_StadiumMenu(void) {
     s16 sp4E = 1;
 
     while ((sp4E > 0) && (sp4E < 5)) {
-        if (D_800AE540.unk_11F5 & 1) {
+        if (gSessionContext.sessionFlags & 1) {
             sp4E = 5;
         } else {
             sp4E = RuleWizard_StadiumMenu(sp4E);
         }
 
         if (sp4E == 5) {
-            D_800AE540.unk_11F6 = 0;
+            gSessionContext.transitionFlags = 0;
             FRAGMENT_LOAD_AND_CALL(fragment63, 1, 0);
 
-            while (!(D_800AE540.unk_11F6 & 1)) {
+            while (!(gSessionContext.transitionFlags & 1)) {
                 FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
 
                 main_pool_push_state('STAD');
 
                 FRAGMENT_LOAD(fragment34);
-                FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+                FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
                 main_pool_pop_state('STAD');
 
                 FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
             }
 
-            if (D_800AE540.unk_11F6 & 0x20) {
+            if (gSessionContext.transitionFlags & 0x20) {
                 sp4E = 4;
             }
 
-            if (D_800AE540.unk_11F6 & 0x800) {
+            if (gSessionContext.transitionFlags & 0x800) {
                 sp4E = 4;
             }
 
-            if (D_800AE540.unk_11F6 & 2) {
+            if (gSessionContext.transitionFlags & 2) {
                 Stage_RunDemoScene(0x11);
             }
 
-            if (D_800AE540.unk_11F6 & 0x1000) {
+            if (gSessionContext.transitionFlags & 0x1000) {
                 FRAGMENT_LOAD_AND_CALL(fragment66, 0, 0);
             }
 
-            if (D_800AE540.unk_11F6 & 8) {
+            if (gSessionContext.transitionFlags & 8) {
                 Stage_RunDemoScene(0x16);
             }
 
-            if (D_800AE540.unk_11F6 & 0x10) {
+            if (gSessionContext.transitionFlags & 0x10) {
                 Stage_RunDemoScene(0x17);
             }
         }
     }
 
-    if (D_800AE540.unk_11F6 & 0x40) {
+    if (gSessionContext.transitionFlags & 0x40) {
         gCurrentGameState = STATE_TITLE_SCREEN;
     } else {
         gCurrentGameState = STATE_AREA_SELECT;
@@ -942,27 +942,27 @@ void State_FreeBattle(void) {
 
         switch (sp4E) {
             case 4:
-                D_800AE540.unk_11F6 = 0;
+                gSessionContext.transitionFlags = 0;
                 FRAGMENT_LOAD_AND_CALL(fragment63, 0, 0);
 
-                while (!(D_800AE540.unk_11F6 & 1)) {
+                while (!(gSessionContext.transitionFlags & 1)) {
                     FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
 
                     main_pool_push_state('FREE');
 
                     FRAGMENT_LOAD(fragment34);
-                    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+                    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
                     main_pool_pop_state('FREE');
 
                     FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
                 }
 
-                if (D_800AE540.unk_11F6 & 0x20) {
+                if (gSessionContext.transitionFlags & 0x20) {
                     sp4E = 3;
                 }
 
-                if (D_800AE540.unk_11F6 & 0x80) {
+                if (gSessionContext.transitionFlags & 0x80) {
                     sp4E = 1;
                 }
                 break;
@@ -1018,27 +1018,27 @@ void State_VsMewtwo(void) {
 
         switch (sp4E) {
             case 3:
-                D_800AE540.unk_11F6 = 0;
+                gSessionContext.transitionFlags = 0;
                 FRAGMENT_LOAD_AND_CALL(fragment63, 0, 0);
 
-                while (!(D_800AE540.unk_11F6 & 1)) {
+                while (!(gSessionContext.transitionFlags & 1)) {
                     FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
 
                     main_pool_push_state('STAD');
 
                     FRAGMENT_LOAD(fragment34);
-                    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+                    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
                     main_pool_pop_state('STAD');
 
                     FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
                 }
 
-                if (D_800AE540.unk_11F6 & 0x20) {
+                if (gSessionContext.transitionFlags & 0x20) {
                     sp4E = 2;
                 }
 
-                if (D_800AE540.unk_11F6 & 4) {
+                if (gSessionContext.transitionFlags & 4) {
                     State_RunCredits();
                     gCurrentGameState = STATE_N64_LOGO_INTRO;
                     return;
@@ -1159,14 +1159,14 @@ void State_GymLeaderCastle(void) {
     s16 sp4E = 1;
     s16 sp4C = 0;
 
-    if (!(D_800AE540.unk_11F5 & 1)) {
+    if (!(gSessionContext.sessionFlags & 1)) {
         Session_SetMode(7, 7, 0);
         Team_AddTrainer(0, Trainer_Create(0, 0, "1P", Text_GetPlayerLabel(1)));
         Team_AddTrainer(1, Trainer_Create(-1, 0, "COM", Text_GetPlayerLabel(3)));
     }
 
     while ((sp4E > 0) && (sp4E < 4)) {
-        if (D_800AE540.unk_11F5 & 1) {
+        if (gSessionContext.sessionFlags & 1) {
             sp4E = 4;
         } else {
             sp4E = RuleWizard_GymLeaderCastle(sp4E, sp4C);
@@ -1174,48 +1174,48 @@ void State_GymLeaderCastle(void) {
 
         if (sp4E == 4) {
             sp4C = 0;
-            D_800AE540.unk_11F6 = 0;
+            gSessionContext.transitionFlags = 0;
 
             FRAGMENT_LOAD_AND_CALL(fragment63, 1, 0);
 
-            while (!(D_800AE540.unk_11F6 & 1)) {
+            while (!(gSessionContext.transitionFlags & 1)) {
                 FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
 
                 main_pool_push_state('STAD');
 
                 FRAGMENT_LOAD(fragment34);
-                FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+                FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
                 main_pool_pop_state('STAD');
 
                 FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
             }
 
-            if (D_800AE540.unk_11F6 & 0x200) {
+            if (gSessionContext.transitionFlags & 0x200) {
                 FRAGMENT_LOAD_AND_CALL(fragment40, 0, 0);
                 Stage_RunDemoScene(0x11);
                 Stage_RunDemoScene(0x15);
             }
 
-            if (D_800AE540.unk_11F6 & 0x20) {
+            if (gSessionContext.transitionFlags & 0x20) {
                 sp4E = 3;
             }
 
-            if (D_800AE540.unk_11F6 & 0x800) {
+            if (gSessionContext.transitionFlags & 0x800) {
                 sp4E = 3;
             }
 
-            if (D_800AE540.unk_11F6 & 0x400) {
+            if (gSessionContext.transitionFlags & 0x400) {
                 sp4C = 1;
             }
 
-            if (D_800AE540.unk_11F6 & 0x100) {
+            if (gSessionContext.transitionFlags & 0x100) {
                 sp4E = 2;
             }
         }
     }
 
-    if (D_800AE540.unk_11F6 & 0x40) {
+    if (gSessionContext.transitionFlags & 0x40) {
         gCurrentGameState = STATE_TITLE_SCREEN;
     } else {
         gCurrentGameState = STATE_AREA_SELECT;
@@ -1232,7 +1232,7 @@ void State_BattleNow(s32 arg0) {
     main_pool_push_state('FIGT');
 
     FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
     main_pool_pop_state('FIGT');
 
@@ -1252,7 +1252,7 @@ void State_BattleFromEvent(void) {
     main_pool_push_state('FIGT');
 
     FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
     main_pool_pop_state('FIGT');
 
@@ -1288,7 +1288,7 @@ void State_FastBattle(void) {
     Audio_PlayCommand(0xA0, 0xA, 0);
 
     FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &D_800AE540);
+    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
 
     main_pool_pop_state('STAD');
 
@@ -1331,7 +1331,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
 
     main_pool_push_state('GAME');
 
-    D_800AE540.unk_11F2 = 0;
+    gSessionContext.unk_11F2 = 0;
 
     // is this game connected to a Sticker Station?
     if (Controller_CheckAccessoryEeprom() != 0) {
