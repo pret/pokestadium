@@ -228,7 +228,6 @@ void WidgetTree_SelectPage(unk_func_88500994* arg0, s32 arg1) {
     arg0->unk_2C = arg1;
 }
 
-#ifdef NON_MATCHING
 void func_88500A74(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_x;
     s32 var_y;
@@ -244,8 +243,9 @@ void func_88500A74(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
 
-    gDPSetScissorFrac(gDisplayListHead++, G_SC_NON_INTERLACE, arg0 * 4.0f, arg1 * 4.0f, (arg0 + arg2) * 4.0f,
-                      (arg1 + arg3) * 4.0f);
+    sp34 = (arg0 + arg2) * 4.0f;
+    sp88 = (arg1 + arg3) * 4.0f;
+    gDPSetScissorFrac(gDisplayListHead++, G_SC_NON_INTERLACE, arg0 * 4.0f, arg1 * 4.0f, sp34, sp88);
 
     sp88 = arg1 + arg3;
     sp34 = arg0 + arg2;
@@ -265,9 +265,6 @@ void func_88500A74(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     gDPPipeSync(gDisplayListHead++);
     gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, 640, 480);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/widget_tree/widget_tree/func_88500A74.s")
-#endif
 
 void WidgetTree_InitTiledTextureRegion(unk_func_88500E34* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5) {
     WidgetTree_InitWidget(&arg0->unk_00, sizeof(unk_func_88500E34));
@@ -1454,265 +1451,173 @@ s32 WidgetTree_DrawPagedGrid(unk_func_88200FA0_030_030* arg0, s32 arg1, s32 arg2
     return 0;
 }
 
-#ifdef NON_MATCHING
-s32 func_885065E0(unk_func_88200FA0_030_030 *arg0, Controller *arg1)
-{
-  s32 sp5C;
-  s32 sp58;
-  s32 sp54;
-  s32 sp50;
-  s32 sp48;
-  s32 sp24;
-  s32 var_a3;
-  s32 var_t1_2;
-  s32 var_v0_2;
-  s32 temp_v1;
-  int var_t1;
-  s32 var_t4;
-  s32 var_v0;
-  s32 i;
-  s32 j;
-  var_t4 = 0;
-  sp5C = 0;
-  if ((arg0->unk_2C == 0) || (arg0->unk_2C->unk_08 == 0))
-  {
-    return 0;
-  }
-  sp48 = ((arg0->unk_2C->unk_08 + arg0->unk_48) - 1) / arg0->unk_48;
-  sp58 = arg0->unk_38 % arg0->unk_48;
-  sp54 = arg0->unk_38 / arg0->unk_48;
-  sp24 = Input_GetRepeatedDPad() & 0xFFFF;
-  if (sp24 == 0x800)
-  {
-    for (i = 0, var_t1 = sp54; i < (sp48 - 1); i++)
-    {
-      j = 0;
-      if (i && i)
-      {
-      }
-      if (var_t1 == 0)
-      {
-        var_v0 = sp48;
-      }
-      else
-      {
-        var_v0 = var_t1;
-      }
-      var_t1 = var_v0 - 1;
-      var_a3 = arg0->unk_4C;
-      while (j < arg0->unk_48)
-      {
-        var_v0 = (arg0->unk_48 * var_t1) + var_a3;
-        if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4)))
-        {
-          var_t4 = 1;
-          break;
-        }
-        j++;
-        if (var_a3 == 0)
-        {
-          var_v0_2 = arg0->unk_48;
-        }
-        else
-        {
-          var_v0_2 = var_a3;
-        }
-        var_a3 = var_v0_2 - 1;
-      }
+s32 func_885065E0(unk_func_88200FA0_030_030* arg0, Controller* arg1) {
+    s32 sp5C;
+    s32 sp58;
+    s32 sp54;
+    s32 var_a3;
+    int var_t1;
+    s32 sp48;
+    s32 var_v0_2;
+    s32 sp24;
+    s32 var_v0;
+    s32 i;
+    s32 var_t4;
+    s32 j;
 
-      if (var_t4 != 0)
-      {
-        break;
-      }
+    var_t4 = 0;
+    sp5C = 0;
+    if ((arg0->unk_2C == NULL) || (arg0->unk_2C->unk_08 == 0)) {
+        return 0;
     }
+    sp48 = ((arg0->unk_2C->unk_08 + arg0->unk_48) - 1) / arg0->unk_48;
+    sp58 = arg0->unk_38 % arg0->unk_48;
+    sp54 = arg0->unk_38 / arg0->unk_48;
+    sp24 = Input_GetRepeatedDPad() & 0xFFFF;
+    if (sp24 == 0x800) {
+        for (i = 0, var_t1 = sp54; i < (sp48 - 1); i++) {
+            j = 0;
+            if (var_t1 == 0) {
+                var_v0 = sp48;
+            } else {
+                var_v0 = var_t1;
+            }
+            var_t1 = var_v0 - 1;
+            var_a3 = arg0->unk_4C;
+            while (j < arg0->unk_48) {
+                var_v0 = (arg0->unk_48 * var_t1) + var_a3;
+                if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4))) {
+                    var_t4 = 1;
+                    break;
+                }
+                j++;
+                if (var_a3 == 0) {
+                    var_v0_2 = arg0->unk_48;
+                } else {
+                    var_v0_2 = var_a3;
+                }
+                var_a3 = var_v0_2 - 1;
+            }
 
-    if ((arg0->unk_00.unk_28 & 0x200) && ((var_t4 == 0) || (sp54 < var_t1)))
-    {
-      sp5C = 8;
-      var_t4 = 0;
-    }
-    sp50 = var_a3;
-  }
-  else
-    if (sp24 == 0x400)
-  {
-    for (i = 0, var_t1 = sp54; i < (sp48 - 1); i++)
-    {
-      j = 0;
-      if (i && i)
-      {
-      }
-      if (var_t1 == (sp48 - 1))
-      {
-        var_t1 = 0;
-      }
-      else
-      {
-        var_t1++;
-      }
-      var_a3 = arg0->unk_4C;
-      while (j < arg0->unk_48)
-      {
-        var_v0 = (arg0->unk_48 * var_t1) + var_a3;
-        if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4)))
-        {
-          var_t4 = 1;
-          break;
+            if (var_t4 != 0) {
+                break;
+            }
         }
-        j++;
-        if (var_a3 == 0)
-        {
-          var_v0_2 = arg0->unk_48;
-        }
-        else
-        {
-          var_v0_2 = var_a3;
-        }
-        var_a3 = var_v0_2 - 1;
-      }
 
-      if (var_t4 != 0)
-      {
-        break;
-      }
-    }
+        if ((arg0->unk_00.unk_28 & 0x200) && ((var_t4 == 0) || (sp54 < var_t1))) {
+            sp5C = 8;
+            var_t4 = 0;
+        }
+    } else if (sp24 == 0x400) {
+        for (i = 0, var_t1 = sp54; i < (sp48 - 1); i++) {
+            j = 0;
+            if (var_t1 == (sp48 - 1)) {
+                var_t1 = 0;
+            } else {
+                var_t1++;
+            }
+            var_a3 = arg0->unk_4C;
+            while (j < arg0->unk_48) {
+                var_v0 = (arg0->unk_48 * var_t1) + var_a3;
+                if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4))) {
+                    var_t4 = 1;
+                    break;
+                }
+                j++;
+                if (var_a3 == 0) {
+                    var_v0_2 = arg0->unk_48;
+                } else {
+                    var_v0_2 = var_a3;
+                }
+                var_a3 = var_v0_2 - 1;
+            }
 
-    if ((arg0->unk_00.unk_28 & 0x200) && ((var_t4 == 0) || (var_t1 < sp54)))
-    {
-      sp5C = 8;
-      var_t4 = 0;
-    }
-    sp50 = var_a3;
-  }
-  else
-    if (sp24 == 0x100)
-  {
-    var_t1 = sp54;
-    var_a3 = sp58;
-    for (i = 0; i < (arg0->unk_48 - 1); i++)
-    {
-      j = 0;
-      if (i && i)
-      {
-      }
-      if (var_a3 == (arg0->unk_48 - 1))
-      {
-        var_a3 = 0;
-      }
-      else
-      {
-        var_a3++;
-      }
-      var_t1_2 = arg0->unk_4E;
-      while (j < sp48)
-      {
-        var_v0 = (arg0->unk_48 * var_t1_2) + var_a3;
-        if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4)))
-        {
-          var_t4 = 1;
-          break;
+            if (var_t4 != 0) {
+                break;
+            }
         }
-        j++;
-        if (var_t1_2 == 0)
-        {
-          var_v0_2 = sp48;
-        }
-        else
-        {
-          var_v0_2 = var_t1_2;
-        }
-        var_t1_2 = var_v0_2 - 1;
-      }
 
-      if (var_t4 != 0)
-      {
-        break;
-      }
-    }
-
-    if ((arg0->unk_00.unk_28 & 0x100) && ((var_t4 == 0) || (var_a3 < sp58)))
-    {
-      sp5C = 8;
-      var_t4 = 0;
-    }
-    sp50 = var_a3;
-    var_t1 = var_t1_2;
-  }
-  else
-    if (sp24 == 0x200)
-  {
-    var_t1 = sp54;
-    var_a3 = sp58;
-    for (i = 0; i < (arg0->unk_48 - 1); i++)
-    {
-      j = 0;
-      if (i && i)
-      {
-      }
-      if (var_a3 == 0)
-      {
-        var_v0 = arg0->unk_48;
-      }
-      else
-      {
-        var_v0 = var_a3;
-      }
-      var_a3 = var_v0 - 1;
-      var_t1_2 = arg0->unk_4E;
-      while (j < sp48)
-      {
-        var_v0 = (arg0->unk_48 * var_t1_2) + var_a3;
-        if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4)))
-        {
-          var_t4 = 1;
-          break;
+        if ((arg0->unk_00.unk_28 & 0x200) && ((var_t4 == 0) || (var_t1 < sp54))) {
+            sp5C = 8;
+            var_t4 = 0;
         }
-        j++;
-        if (var_t1_2 == 0)
-        {
-          var_v0_2 = sp48;
-        }
-        else
-        {
-          var_v0_2 = var_t1_2;
-        }
-        var_t1_2 = var_v0_2 - 1;
-      }
+    } else if (sp24 == 0x100) {
+        for (j = 0, var_a3 = sp58; j < (arg0->unk_48 - 1); j++) {
+            if (var_a3 == (arg0->unk_48 - 1)) {
+                var_a3 = 0;
+            } else {
+                var_a3++;
+            }
+            var_t1 = arg0->unk_4E;
+            for (i = 0; i < sp48; i++) {
+                var_v0 = (arg0->unk_48 * var_t1) + var_a3;
+                if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4))) {
+                    var_t4 = 1;
+                    break;
+                }
+                if (var_t1 == 0) {
+                    var_v0_2 = sp48;
+                } else {
+                    var_v0_2 = var_t1;
+                }
+                var_t1 = var_v0_2 - 1;
+            }
 
-      if (var_t4 != 0)
-      {
-        break;
-      }
-    }
+            if (var_t4 != 0) {
+                break;
+            }
+        }
 
-    if ((arg0->unk_00.unk_28 & 0x100) && ((var_t4 == 0) || (sp58 < var_a3)))
-    {
-      sp5C = 8;
-      var_t4 = 0;
+        if ((arg0->unk_00.unk_28 & 0x100) && ((var_t4 == 0) || (var_a3 < sp58))) {
+            sp5C = 8;
+            var_t4 = 0;
+        }
+    } else if (sp24 == 0x200) {
+        for (j = 0, var_a3 = sp58; j < (arg0->unk_48 - 1); j++) {
+            if (var_a3 == 0) {
+                var_v0 = arg0->unk_48;
+            } else {
+                var_v0 = var_a3;
+            }
+            var_a3 = var_v0 - 1;
+            var_t1 = arg0->unk_4E;
+            for (i = 0; i < sp48; i++) {
+                var_v0 = (arg0->unk_48 * var_t1) + var_a3;
+                if ((var_v0 < arg0->unk_2C->unk_08) && (!(arg0->unk_34[var_v0] & 4))) {
+                    var_t4 = 1;
+                    break;
+                }
+                if (var_t1 == 0) {
+                    var_v0_2 = sp48;
+                } else {
+                    var_v0_2 = var_t1;
+                }
+                var_t1 = var_v0_2 - 1;
+            }
+
+            if (var_t4 != 0) {
+                break;
+            }
+        }
+
+        if ((arg0->unk_00.unk_28 & 0x100) && ((var_t4 == 0) || (sp58 < var_a3))) {
+            sp5C = 8;
+            var_t4 = 0;
+        }
     }
-    var_t1 = var_t1_2;
-    sp50 = var_a3;
-  }
-  if (var_t4 != 0)
-  {
-    arg0->unk_38 = (arg0->unk_48 * var_t1) + sp50;
-    arg0->unk_44->unk_00.unk_10.unk_00 = ((arg0->unk_38 % arg0->unk_48) * arg0->unk_3C) + arg0->unk_50;
-    arg0->unk_44->unk_00.unk_10.unk_02 = ((arg0->unk_38 / arg0->unk_48) * arg0->unk_3E) + arg0->unk_52;
-    if ((sp24 == 0x800) || (sp24 == 0x400))
-    {
-      arg0->unk_4E = var_t1;
+    if (var_t4 != 0) {
+        arg0->unk_38 = (arg0->unk_48 * var_t1) + var_a3;
+        arg0->unk_44->unk_00.unk_10.unk_00 = ((arg0->unk_38 % arg0->unk_48) * arg0->unk_3C) + arg0->unk_50;
+        arg0->unk_44->unk_00.unk_10.unk_02 = ((arg0->unk_38 / arg0->unk_48) * arg0->unk_3E) + arg0->unk_52;
+        if ((sp24 == 0x800) || (sp24 == 0x400)) {
+            arg0->unk_4E = var_t1;
+        } else {
+            arg0->unk_4C = var_a3;
+        }
+        sp5C = 0x80000009;
     }
-    else
-    {
-      arg0->unk_4C = sp50;
-    }
-    sp5C = 0x80000009;
-  }
-  return sp5C;
+    return sp5C;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/widget_tree/widget_tree/func_885065E0.s")
-#endif
 
 void WidgetTree_SetPagedGridSelection(unk_func_88200FA0_030_030* arg0, s32 arg1) {
     arg0->unk_38 = arg1;
