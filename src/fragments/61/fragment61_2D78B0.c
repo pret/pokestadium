@@ -303,9 +303,9 @@ void TeamSelection_DrawTitleHeader(void) {
     Font_BeginTranslucentTextRendering();
     Font_SetActive(0x10, 0);
     Gfx_SetEnvColor(0, 0, 0, 0xFF);
-    Font_Printf(0x6A, 0x2C, TeamSelection_GetLabelText(D_84210D70[D_800AE540.unk_0000]));
+    Font_Printf(0x6A, 0x2C, TeamSelection_GetLabelText(D_84210D70[gSessionContext.mode]));
     Gfx_SetEnvColor(0xFF, 0xFF, 0x77, 0xFF);
-    Font_Printf(0x68, 0x2A, TeamSelection_GetLabelText(D_84210D70[D_800AE540.unk_0000]));
+    Font_Printf(0x68, 0x2A, TeamSelection_GetLabelText(D_84210D70[gSessionContext.mode]));
     Font_EndTexturedTextRendering();
 }
 
@@ -340,7 +340,7 @@ void TeamSelection_DrawCategoryScreen(s16 arg0, s16 arg1, s16 arg2) {
             Ui_DrawAnimatedTextureMarker(0x79, (D_8423D3F8 * 0x1E) + 0xAD);
             Font_BeginTranslucentTextRendering();
             Font_SetActive(0x10, 0);
-            Font_Printf(0x7D, 0x8B, "%s %s", TeamSelection_GetLabelText(D_800AE540.unk_0001 + 0x3F), TeamSelection_GetLabelText(0x48));
+            Font_Printf(0x7D, 0x8B, "%s %s", TeamSelection_GetLabelText(gSessionContext.ruleCategory + 0x3F), TeamSelection_GetLabelText(0x48));
             TeamSelection_DrawCategoryRow(0x6D, 0x81, 0, TeamSelection_GetLabelText(0x49));
             TeamSelection_DrawCategoryRow(0x6D, 0x81, 1, TeamSelection_GetLabelText(0x4A));
             TeamSelection_DrawCategoryRow(0x6D, 0x81, 2, TeamSelection_GetLabelText(0x4B));
@@ -433,7 +433,7 @@ void TeamSelection_DrawFrame(s16 arg0, s16 arg1) {
     Color_RGBA8 sp30;
     s32 var_t0 = 0;
 
-    if ((D_800AE540.unk_0000 == 0) && (arg1 >= 0)) {
+    if ((gSessionContext.mode == 0) && (arg1 >= 0)) {
         if (D_84210D48 == 0) {
             var_t0 = 1;
         } else {
@@ -600,7 +600,7 @@ void TeamSelection_RunInputLoop(s16 arg0, s16 arg1, s16 arg2) {
 
 void TeamSelection_InitializeSlots(void) {
     s16 i;
-    TeamRoster* var_v0 = D_800AE540.unk_0004;
+    TeamRoster* var_v0 = gSessionContext.trainerSlots;
 
     for (i = 0; i < 4; i++) {
         D_8423D3D8[i].unk_00 = 0;
@@ -613,7 +613,7 @@ void TeamSelection_InitializeSlots(void) {
             if (!(var_v0->unk_000 & 2)) {
                 D_8423D3D8[var_v0->unk_001].unk_00 = 1;
                 D_8423D3D8[var_v0->unk_001].unk_04 = var_v0;
-            } else if (D_800AE540.unk_0000 == 0) {
+            } else if (gSessionContext.mode == 0) {
                 D_8423D3D8[var_v0->unk_001].unk_00 = 1;
                 D_8423D3D8[var_v0->unk_001].unk_04 = var_v0;
                 D_8423D3D8[var_v0->unk_001].unk_01 = 4;
@@ -658,7 +658,7 @@ s32 Team_CommitSelectionToTrainer(unk_D_8423D3D8* arg0, s16 arg1) {
         temp_s3 = RegisteredTeam_LoadSelected(&D_84229EB0, &sp34);
         if (sp34 != NULL) {
             arg0->unk_04->unk_018 = sp34->unk_4D10;
-            if (D_800AE540.unk_0000 != 0) {
+            if (gSessionContext.mode != 0) {
                 HAL_Strcpy(arg0->unk_04->unk_008, sp34->unk_4D12);
             }
             HAL_Strcpy(arg0->unk_04->unk_214->unk_014, sp34->unk_4D12);
@@ -670,7 +670,7 @@ s32 Team_CommitSelectionToTrainer(unk_D_8423D3D8* arg0, s16 arg1) {
         }
     } else {
         arg0->unk_04->unk_018 = D_84211B50.unk_001C;
-        if (D_800AE540.unk_0000 != 0) {
+        if (gSessionContext.mode != 0) {
             HAL_Strcpy(arg0->unk_04->unk_008, D_84211B50.unk_001E);
         }
         HAL_Strcpy(arg0->unk_04->unk_214->unk_014, D_84211B50.unk_001E);
@@ -736,13 +736,13 @@ s32 Team_SelectTeams(void) {
     s16 var_s1 = 0;
     s16 var_s2;
 
-    if ((D_800AE540.unk_0000 == 7) && (D_800AE540.unk_0002 == 9)) {
+    if ((gSessionContext.mode == 7) && (gSessionContext.modeSelection == 9)) {
         TeamSelection_FadeOut(0);
         Team_ResetOpponentHistory();
         return 1;
     }
 
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 0:
             Audio_PlayMusicIfChanged(0x2D);
             break;
@@ -790,9 +790,9 @@ s32 Team_SelectTeams(void) {
                 if (var_s2 < 4) {
                     GbSave_LoadPort(var_s2);
                     GbSave_MarkBoxDataLoaded(var_s2);
-                    D_800AE540.gbStarterChoice = GbSave_GetStarterChoice(var_s2);
+                    gSessionContext.gbStarterChoice = GbSave_GetStarterChoice(var_s2);
                 } else {
-                    D_800AE540.gbStarterChoice = 0;
+                    gSessionContext.gbStarterChoice = 0;
                 }
 
                 TeamSelection_InitializeSlot(&D_8423D3D8[(unsigned long)idx], var_s2);
@@ -824,7 +824,7 @@ s32 Team_SelectRegisteredTeams(void) {
     s16 var_s1 = 0;
     s16 var_s2;
 
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 0:
             Audio_PlayMusicIfChanged(0x2D);
             break;
@@ -876,9 +876,9 @@ s32 Team_SelectRegisteredTeams(void) {
                 if (var_s2 < 4) {
                     GbSave_LoadPort(var_s2);
                     GbSave_MarkBoxDataLoaded(var_s2);
-                    D_800AE540.gbStarterChoice = GbSave_GetStarterChoice(var_s2);
+                    gSessionContext.gbStarterChoice = GbSave_GetStarterChoice(var_s2);
                 } else {
-                    D_800AE540.gbStarterChoice = 0;
+                    gSessionContext.gbStarterChoice = 0;
                 }
                 TeamSelection_InitializeSlot(&D_8423D3D8[(unsigned long)idx], var_s2);
                 TeamSelection_ApplySlotSelection(var_s1, var_s2);
@@ -1010,7 +1010,7 @@ void Rental_LoadRosterForMode(void) {
 
     temp_a0 = BinArchive_Open(0x898000, NULL, 1, 0);
 
-    switch (D_800AE540.unk_0001) {
+    switch (gSessionContext.ruleCategory) {
         case 0:
             var_a1 = 0x1A;
             break;
@@ -1055,7 +1055,7 @@ void Rental_LoadRosterForMode(void) {
     if (var_a1 == 0) {
         D_84211B38 = NULL;
     } else {
-        if (D_800AE540.unk_11F2 != 0) {
+        if (gSessionContext.unk_11F2 != 0) {
             var_a1 += 0x1F;
         }
         D_84211B38 = BinArchive_GetFile(temp_a0, var_a1);
@@ -1066,12 +1066,12 @@ void Rental_LoadBackgroundImage(void) {
     ModeSettings sp20;
 
     D_84211B30 = ASSET_LOAD2(backgrounds, 1, 1);
-    if (D_800AE540.unk_0000 == 7) {
-        if (D_800AE540.unk_0002 >= 8) {
+    if (gSessionContext.mode == 7) {
+        if (gSessionContext.modeSelection >= 8) {
             D_84211B34 = BinArchive_GetFile(D_84211B30, 0xE);
         } else {
             Save_EnsureBankLoaded(2);
-            Save_GetModeSettings(&sp20, D_800AE540.unk_11F2);
+            Save_GetModeSettings(&sp20, gSessionContext.unk_11F2);
             if (sp20.unk_04 < 8) {
                 D_84211B34 = BinArchive_GetFile(D_84211B30, 0xD);
             } else {
@@ -1079,7 +1079,7 @@ void Rental_LoadBackgroundImage(void) {
             }
         }
     } else {
-        D_84211B34 = BinArchive_GetFile(D_84211B30, D_84210D4C[D_800AE540.unk_0000]);
+        D_84211B34 = BinArchive_GetFile(D_84211B30, D_84210D4C[gSessionContext.mode]);
     }
 }
 
@@ -1101,8 +1101,8 @@ s32 Rental_Main(s32 arg0, UNUSED s32 arg1) {
     D_84211B48 = Text_GetStringTable(0x1A);
     D_84211B4C = Text_GetStringTable(6);
 
-    Save_EnsureBankLoaded(D_800AE540.unk_0001 / 4);
-    Save_SetActiveRecordBank(D_800AE540.unk_0001);
+    Save_EnsureBankLoaded(gSessionContext.ruleCategory / 4);
+    Save_SetActiveRecordBank(gSessionContext.ruleCategory);
     Deck_CompactRegisteredTeams();
     Rental_LoadBackgroundImage();
     PokeIcon_OpenModelArchive();
@@ -1111,11 +1111,11 @@ s32 Rental_Main(s32 arg0, UNUSED s32 arg1) {
 
     if (arg0 == 1) {
         var_v1 = RegisteredTeam_Manage();
-    } else if (D_800AE540.unk_11F6 & 0x20) {
+    } else if (gSessionContext.transitionFlags & 0x20) {
         var_v1 = Team_SelectRegisteredTeams();
-        D_800AE540.unk_11F6 = D_800AE540.unk_11F6 & 0xFFDF;
+        gSessionContext.transitionFlags = gSessionContext.transitionFlags & 0xFFDF;
     } else {
-        D_800AE540.unk_11F5 &= 0xFFFD;
+        gSessionContext.sessionFlags &= 0xFFFD;
         var_v1 = Team_SelectTeams();
     }
 

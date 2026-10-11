@@ -275,11 +275,11 @@ void BattlePrepBadgeAward_RevealStep(unk_D_84B25A90* arg0) {
 
     var_s3 = arg0->unk_01 / var_a0;
     arg0->unk_01++;
-    if (D_800AE540.unk_0003 - 1 < var_s3) {
-        var_s3 = D_800AE540.unk_0003 - 1;
+    if (gSessionContext.roundOrDemoId - 1 < var_s3) {
+        var_s3 = gSessionContext.roundOrDemoId - 1;
     }
 
-    if (var_s3 < D_800AE540.unk_0003 - 1) {
+    if (var_s3 < gSessionContext.roundOrDemoId - 1) {
         if ((arg0->unk_01 % var_a0) == 0) {
             Audio_PlayCategory11SoundCommand(0x0110000E, var_s3 + 1, 0);
             Model_InitDisplayObject(&arg0->unk_04[8 + var_s3], 1, 0, arg0->unk_0C);
@@ -291,7 +291,7 @@ void BattlePrepBadgeAward_RevealStep(unk_D_84B25A90* arg0) {
             arg0->unk_04[16 + var_s3].node.callbackArg = arg0;
             arg0->unk_28[var_s3] = 0;
         }
-    } else if (var_s3 == D_800AE540.unk_0003 - 1) {
+    } else if (var_s3 == gSessionContext.roundOrDemoId - 1) {
         if (var_a1 == (arg0->unk_01 - (var_s3 * var_a0))) {
             Audio_PlayCategory11SoundCommand(0x0110000F, 0, 0);
             Model_InitDisplayObject(&arg0->unk_04[8 + var_s3], 1, 0, arg0->unk_0C);
@@ -306,7 +306,7 @@ void BattlePrepBadgeAward_RevealStep(unk_D_84B25A90* arg0) {
             Vec3f_SetComponentsDuplicate(&arg0->unk_04[24].position, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
             arg0->unk_04[24].node.callbackArg = arg0;
 
-            for (i = 0; i < D_800AE540.unk_0003 - 1; i++) {
+            for (i = 0; i < gSessionContext.roundOrDemoId - 1; i++) {
                 arg0->unk_04[8 + i].rootId = 0;
             }
         } else {
@@ -327,7 +327,7 @@ void BattlePrepBadgeAward_SpawnSparkleParticle(unk_D_84B25A90* arg0, DisplayObje
     u16 sp26;
     f32 temp_fv0;
 
-    if (arg2 < D_800AE540.unk_0003) {
+    if (arg2 < gSessionContext.roundOrDemoId) {
         if (arg1->node.children == NULL) {
             Model_InitDisplayObject(arg1, 2, 0, arg0->unk_18);
         }

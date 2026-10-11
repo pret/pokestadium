@@ -110,18 +110,18 @@ char* RentalRules_GetPokemonName(s32 arg0) {
 void RentalRules_LoadBackgroundArchive(void) {
     ModeSettings sp20;
 
-    if (D_800AE540.unk_0000 != 0xA) {
+    if (gSessionContext.mode != 0xA) {
         D_83003C88 = BinArchive_Open(backgrounds_ROM_START, battle_headers_ROM_START, 1, 1);
-        if (D_800AE540.unk_0000 == 7) {
+        if (gSessionContext.mode == 7) {
             Save_EnsureBankLoaded(2);
-            Save_GetModeSettings(&sp20, D_800AE540.unk_11F2);
+            Save_GetModeSettings(&sp20, gSessionContext.unk_11F2);
             if (sp20.unk_04 < 8) {
                 D_83003C8C = BinArchive_GetFile(D_83003C88, 0xD);
             } else {
                 D_83003C8C = BinArchive_GetFile(D_83003C88, 0x10);
             }
         } else {
-            D_83003C8C = BinArchive_GetFile(D_83003C88, D_830039C8[D_800AE540.unk_0000]);
+            D_83003C8C = BinArchive_GetFile(D_83003C88, D_830039C8[gSessionContext.mode]);
         }
     }
 }
@@ -135,9 +135,9 @@ void RentalRules_PollInput(void) {
 s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
     s16* var_v1 = NULL;
 
-    switch (arg0->unk_0001) {
+    switch (arg0->ruleCategory) {
         case 1:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 1:
                     var_v1 = D_830039D4;
                     break;
@@ -151,7 +151,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 2:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 2:
                     var_v1 = D_83003A10;
                     break;
@@ -165,7 +165,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 3:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 3:
                     var_v1 = D_830039D4;
                     break;
@@ -179,7 +179,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 4:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 4:
                     var_v1 = D_83003A84;
                     break;
@@ -193,7 +193,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 5:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 5:
                     var_v1 = D_83003ACC;
                     break;
@@ -207,7 +207,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 6:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 6:
                     var_v1 = D_83003B04;
                     break;
@@ -221,7 +221,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 0:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 0:
                     var_v1 = D_83003B34;
                     break;
@@ -229,7 +229,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 7:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 7:
                     var_v1 = D_83003B44;
                     break;
@@ -237,7 +237,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 8:
-            switch (arg0->unk_0000) {
+            switch (arg0->mode) {
                 case 8:
                     var_v1 = D_83003B54;
                     break;
@@ -636,7 +636,7 @@ void RentalRules_DrawRuleListPanel(void) {
 void RentalRules_DrawFrame(void) {
     BgStage_DrawFrame();
     if (D_83003C90 != 0) {
-        if (D_800AE540.unk_0000 == 0xA) {
+        if (gSessionContext.mode == 0xA) {
             RentalRules_DrawBackgroundFallback();
         } else {
             Gfx_DrawTiledRgba16Image(D_83003C8C);
@@ -710,7 +710,7 @@ void RentalRules_Init(void) {
     D_83003CA6 = 0;
     D_83003C84 = 0;
 
-    D_83003CA0 = RentalRules_GetRuleIdList(&D_800AE540);
+    D_83003CA0 = RentalRules_GetRuleIdList(&gSessionContext);
     if (D_83003CA0 == 0) {
         D_83003CA4 = 0;
     } else {
@@ -739,10 +739,10 @@ void RentalRules_Init(void) {
     D_83003CD8 = D_83003CB4;
     D_83003CDC = D_83003CB8;
 
-    D_83003C98 = RentalRules_GetModeLabel(D_800AE540.unk_0000);
-    D_83003C9C = RentalRules_GetCategoryLabel(D_800AE540.unk_0001);
+    D_83003C98 = RentalRules_GetModeLabel(gSessionContext.mode);
+    D_83003C9C = RentalRules_GetCategoryLabel(gSessionContext.ruleCategory);
 
-    if (D_800AE540.unk_11F2 != 0) {
+    if (gSessionContext.unk_11F2 != 0) {
         D_83003C84 |= 1;
     }
 

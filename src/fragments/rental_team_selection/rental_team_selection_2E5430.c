@@ -171,7 +171,7 @@ void TeamSelection_RegisteredTeam_DrawCard(unk_D_84229EB0* arg0, s16 arg1, s16 a
 }
 
 void TeamSelection_RegisteredTeam_DrawHeader(s16 arg0, s16 arg1) {
-    char* sp54 = TeamSelection_GetLabelText(D_800AE540.unk_0001 + 0x3F);
+    char* sp54 = TeamSelection_GetLabelText(gSessionContext.ruleCategory + 0x3F);
     s32 sp50 = Font_MeasureTextExtent(8, 0, sp54);
 
     gSPDisplayList(gDisplayListHead++, D_8006F558);

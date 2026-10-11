@@ -1061,7 +1061,7 @@ void BattlePrep_InitCarouselEntry(unk_D_84B259A8* arg0, DisplayObject* arg1) {
     for (i = 0; i < 4; i++) {
         BattlePrep_InitCarouselGymBadgeSlot(arg0, i, -0x140, 0x30);
         BattlePrep_InitCarouselLeftIcon(arg0, i);
-        if ((D_800AE540.unk_0000 == 3) || (D_800AE540.unk_0000 == 6)) {
+        if ((gSessionContext.mode == 3) || (gSessionContext.mode == 6)) {
             BattlePrep_InitCarouselCupIcon(arg0, i);
         }
     }
@@ -1097,13 +1097,13 @@ void BattlePrep_InitCarouselExit(unk_D_84B259A8* arg0, DisplayObject* arg1) {
 void BattlePrep_LoadBannerAssets(unk_D_84B259A8* arg0) {
     BinArchive* temp_a0 = ASSET_LOAD2(battle_headers, 1, 1);
 
-    if (D_800AE540.unk_0000 == 7) {
-        arg0->unk_0C = BinArchive_GetFile(temp_a0, D_84B0FC48[D_800AE540.unk_0002]);
-        arg0->unk_10 = Util_ConvertAddrToVirtAddr(D_84B0FC6C[D_800AE540.unk_0002]);
+    if (gSessionContext.mode == 7) {
+        arg0->unk_0C = BinArchive_GetFile(temp_a0, D_84B0FC48[gSessionContext.modeSelection]);
+        arg0->unk_10 = Util_ConvertAddrToVirtAddr(D_84B0FC6C[gSessionContext.modeSelection]);
 
-        switch (D_800AE540.unk_0002) {
+        switch (gSessionContext.modeSelection) {
             default:
-                if (D_800AE540.unk_0003 == 4) {
+                if (gSessionContext.roundOrDemoId == 4) {
                     arg0->unk_18 = Util_ConvertAddrToVirtAddr(D_302CA70);
                 } else {
                     arg0->unk_18 = Util_ConvertAddrToVirtAddr(D_302BA70);
@@ -1119,11 +1119,11 @@ void BattlePrep_LoadBannerAssets(unk_D_84B259A8* arg0) {
                 break;
         }
     } else {
-        arg0->unk_0C = BinArchive_GetFile(temp_a0, D_84B0FC40[D_800AE540.unk_0000 - 1]);
-        arg0->unk_10 = Util_ConvertAddrToVirtAddr(D_84B0FC54[D_800AE540.unk_0000 - 1]);
-        arg0->unk_14 = Util_ConvertAddrToVirtAddr(D_84B0FCAC[D_800AE540.unk_0002]);
+        arg0->unk_0C = BinArchive_GetFile(temp_a0, D_84B0FC40[gSessionContext.mode - 1]);
+        arg0->unk_10 = Util_ConvertAddrToVirtAddr(D_84B0FC54[gSessionContext.mode - 1]);
+        arg0->unk_14 = Util_ConvertAddrToVirtAddr(D_84B0FCAC[gSessionContext.modeSelection]);
 
-        switch (D_800AE540.unk_0003) {
+        switch (gSessionContext.roundOrDemoId) {
             default:
                 arg0->unk_18 = Util_ConvertAddrToVirtAddr(D_302AA70);
                 break;
@@ -1138,8 +1138,8 @@ void BattlePrep_LoadBannerAssets(unk_D_84B259A8* arg0) {
         }
     }
 
-    if (D_800AE540.unk_0003 < 7) {
-        arg0->unk_1C = Util_ConvertAddrToVirtAddr(D_84B0FC90[D_800AE540.unk_0003]);
+    if (gSessionContext.roundOrDemoId < 7) {
+        arg0->unk_1C = Util_ConvertAddrToVirtAddr(D_84B0FC90[gSessionContext.roundOrDemoId]);
     }
 }
 
@@ -1184,7 +1184,7 @@ void BattlePrep_LoadBannerGeoLayouts(unk_D_84B259A8* arg0) {
     arg0->unk_24 = process_geo_layout(temp_v0, D_84B10378);
     arg0->unk_38 = process_geo_layout(temp_v0, D_84B10E78);
     arg0->unk_34 = process_geo_layout(temp_v0, D_84B109F0);
-    if (D_800AE540.unk_11F2 == 0) {
+    if (gSessionContext.unk_11F2 == 0) {
         arg0->unk_28 = process_geo_layout(temp_v0, D_84B10568);
         arg0->unk_2C = process_geo_layout(temp_v0, D_84B105A8);
     } else {
@@ -1193,10 +1193,10 @@ void BattlePrep_LoadBannerGeoLayouts(unk_D_84B259A8* arg0) {
         BattlePrep_AdjustBannerTextureOffset(arg0);
     }
 
-    if (D_800AE540.unk_0000 == 7) {
-        switch (D_800AE540.unk_0002) {
+    if (gSessionContext.mode == 7) {
+        switch (gSessionContext.modeSelection) {
             default:
-                if (D_800AE540.unk_0003 < 4) {
+                if (gSessionContext.roundOrDemoId < 4) {
                     arg0->unk_30 = process_geo_layout(temp_v0, D_84B11060);
                 } else {
                     arg0->unk_30 = process_geo_layout(temp_v0, D_84B10D70);
@@ -1211,7 +1211,7 @@ void BattlePrep_LoadBannerGeoLayouts(unk_D_84B259A8* arg0) {
                 arg0->unk_30 = process_geo_layout(temp_v0, D_84B10D70);
                 break;
         }
-    } else if (D_800AE540.unk_0003 < 7) {
+    } else if (gSessionContext.roundOrDemoId < 7) {
         arg0->unk_30 = process_geo_layout(temp_v0, D_84B11060);
     } else {
         arg0->unk_30 = process_geo_layout(temp_v0, D_84B10BE8);
@@ -1243,9 +1243,9 @@ void BattlePrep_ApplyBannerColors(unk_D_84B259A8* arg0) {
     UNUSED s32 pad[2];
     s16 var_v1;
 
-    var_v1 = D_800AE540.unk_0000 - 1;
-    if (D_800AE540.unk_0000 == 7) {
-        var_v1 += D_800AE540.unk_0002;
+    var_v1 = gSessionContext.mode - 1;
+    if (gSessionContext.mode == 7) {
+        var_v1 += gSessionContext.modeSelection;
     }
 
     BattlePrep_SetVertexGradientColors(arg0->unk_28, &D_84B0FCBC[var_v1], &D_84B0FCFC[var_v1]);
@@ -1294,7 +1294,7 @@ s32 BattlePrep_BadgeCarouselGlowCallback(s32 arg0, unk_func_80011B94* arg1) {
         tmp = ((D_8006F09C->effectSlot - temp_v0->unk_08->effectSlot) % 8) - 4;
         tmp2 = tmp + arg1->display_node_header.callbackArg * 4;
 
-        if ((temp_v0->unk_02 != 0) && ((tmp2 + 1) == D_800AE540.unk_0003)) {
+        if ((temp_v0->unk_02 != 0) && ((tmp2 + 1) == gSessionContext.roundOrDemoId)) {
             // clang-format off
             if (D_84B11C18 >= 0) { var_t1 = (s32)(SINS((s32)(SINS(D_84B11C18) * 16384.0f)) * 127.0f) + 0x7F;
             } else {
@@ -1344,7 +1344,7 @@ s32 BattlePrep_BadgeCarouselGlowCallback2(s32 arg0, unk_func_80011B94* arg1) {
         tmp = ((D_8006F09C->effectSlot - temp_v0->unk_08->effectSlot) % 8);
         tmp -= 4;
 
-        if ((temp_v0->unk_02 != 0) && ((tmp + 1) == D_800AE540.unk_0003)) {
+        if ((temp_v0->unk_02 != 0) && ((tmp + 1) == gSessionContext.roundOrDemoId)) {
             // clang-format off
             if (D_84B11C1C >= 0) {                var_t1 = (s32)(SINS((s32)(SINS(D_84B11C1C) * 16384.0f)) * 127.0f)+ 0x7F;
             } else {
@@ -1439,22 +1439,22 @@ void BattlePrep_BadgeRevealSpin(unk_D_84B259E8* arg0) {
         Audio_PlayCategory11SoundCommand(0x0110000C, 0, 0);
         BattlePrep_ResetBadgeSlideSlots(arg0);
     } else if (arg0->unk_01 == 0x20) {
-        if (D_800AE540.unk_0000 == 7) {
+        if (gSessionContext.mode == 7) {
             var_a2 = 4;
         } else {
             var_a2 = 8;
         }
 
-        Audio_PlayCategory11SoundCommand(0x01100014, D_800AE540.unk_0003, var_a2);
-        BattlePrep_RenderBadgeGlowTexture(arg0->unk_10[D_800AE540.unk_0003 - 1]);
+        Audio_PlayCategory11SoundCommand(0x01100014, gSessionContext.roundOrDemoId, var_a2);
+        BattlePrep_RenderBadgeGlowTexture(arg0->unk_10[gSessionContext.roundOrDemoId - 1]);
 
-        if (D_800AE540.unk_0000 == 7) {
-            GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_30[D_800AE540.unk_0003 - 1]);
+        if (gSessionContext.mode == 7) {
+            GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_30[gSessionContext.roundOrDemoId - 1]);
 
             gSPDisplayList(gDisplayListHead++, D_8006F4E0);
 
-            Gfx_DrawTextureRgba16(4, 0x24, 0x38, 0x1C, &arg0->unk_10[D_800AE540.unk_0003 - 1][0x208], 0x40, 0x200000);
-            Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, &arg0->unk_10[D_800AE540.unk_0003 - 1][0x1008], 0x40, 0x200000);
+            Gfx_DrawTextureRgba16(4, 0x24, 0x38, 0x1C, &arg0->unk_10[gSessionContext.roundOrDemoId - 1][0x208], 0x40, 0x200000);
+            Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, &arg0->unk_10[gSessionContext.roundOrDemoId - 1][0x1008], 0x40, 0x200000);
 
             gSPDisplayList(gDisplayListHead++, D_8006F630);
         }
@@ -1543,14 +1543,14 @@ void BattlePrep_RenderBadgeBackground(unk_D_84B259E8* arg0, s16 arg1, char* arg2
     Gfx_DrawTextureRgba16(0, 0x20, 0x40, 0x20, D_3013000, 0x40, 0x200000);
     Gfx_DrawTextureRgba16(0, 0x40, 0x40, 0x20, D_3014000, 0x40, 0x200000);
 
-    if ((D_800AE540.unk_0002 < 9) || (arg1 == 0)) {
+    if ((gSessionContext.modeSelection < 9) || (arg1 == 0)) {
         Gfx_DrawTextureRgba16(4, 0x24, 0x38, 0x1C, arg0->unk_10[arg1] + 0x208, 0x40, 0x200000);
         Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, arg0->unk_10[arg1] + 0x1008, 0x40, 0x200000);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 
-    if ((D_800AE540.unk_0002 < 9) || (arg1 == 0)) {
+    if ((gSessionContext.modeSelection < 9) || (arg1 == 0)) {
         s32 sp34 = Font_MeasureTextExtent(2, 0, arg2);
 
         Font_BeginTranslucentTextRendering();
@@ -1592,7 +1592,7 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
     unk_func_84B067B4* ptr;
     s16 tmp;
 
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 1:
             sp44 = 6;
             break;
@@ -1602,7 +1602,7 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
             break;
 
         case 3:
-            sp44 = D_800AE540.unk_0002 + 8;
+            sp44 = gSessionContext.modeSelection + 8;
             break;
 
         case 4:
@@ -1614,11 +1614,11 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
             break;
 
         case 6:
-            sp44 = D_800AE540.unk_0002 + 2;
+            sp44 = gSessionContext.modeSelection + 2;
             break;
 
         case 7:
-            sp44 = D_800AE540.unk_0002 + 0xC;
+            sp44 = gSessionContext.modeSelection + 0xC;
             break;
 
         case 8:
@@ -1626,18 +1626,18 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
             break;
     }
 
-    if (D_800AE540.unk_11F2 != 0) {
+    if (gSessionContext.unk_11F2 != 0) {
         sp44 += 0x1F;
     }
 
     temp_s5 = BinArchive_GetFile(arg1, sp44);
-    if (D_800AE540.unk_0000 == 7) {
+    if (gSessionContext.mode == 7) {
         for (i = 0; i < 4; i++) {
             ptr = i + ((void)0, temp_s5);
 
             tmp = (ptr->unk_038 >> 8) & 0xFF;
             arg0->unk_10[i] = BattlePrep_Align64PoolBlock(BinArchive_GetFile(arg2, tmp));
-            if (i < (D_800AE540.unk_0003 - 1)) {
+            if (i < (gSessionContext.roundOrDemoId - 1)) {
                 BattlePrep_RenderBadgeGlowTexture(arg0->unk_10[i]);
             }
             arg0->unk_30[i] = GfxImage_Allocate(0, 2, 0x40, 0x60, 0);
@@ -1645,11 +1645,11 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
         }
     } else {
         for (i = 0; i < 8; i++) {
-            if (i < D_800AE540.unk_0003) {
-                tmp = (temp_s5[D_800AE540.unk_11E4[0][i]].unk_038 >> 8) & 0xFF;
+            if (i < gSessionContext.roundOrDemoId) {
+                tmp = (temp_s5[gSessionContext.opponentHistory[0][i]].unk_038 >> 8) & 0xFF;
 
                 arg0->unk_10[i] = BattlePrep_Align64PoolBlock(BinArchive_GetFile(arg2, tmp));
-                if (i < (D_800AE540.unk_0003 - 1)) {
+                if (i < (gSessionContext.roundOrDemoId - 1)) {
                     BattlePrep_RenderBadgeGlowTexture(arg0->unk_10[i]);
                 }
             } else {
@@ -1673,7 +1673,7 @@ void BattlePrep_InitBadgeCarouselScene(unk_D_84B259E8* arg0, BinArchive* arg1, B
     }
 
     temp_v0 = MainPool_AllocState(main_pool_get_available(), 0);
-    if (D_800AE540.unk_0000 == 7) {
+    if (gSessionContext.mode == 7) {
         arg0->unk_0C = process_geo_layout(temp_v0, D_84B11BD0);
     } else {
         arg0->unk_0C = process_geo_layout(temp_v0, D_84B11640);

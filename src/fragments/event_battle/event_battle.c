@@ -1394,9 +1394,9 @@ void EventBattle_StartBattle(unk_D_82305A28* arg0) {
     EventBattle_BuildTrainerFromCard(&D_82305AF8[1]);
 
     if (D_82305A40.unk_01 == 1) {
-        D_800AE540.unk_11ED = D_82305A40.unk_01;
-        D_800AE540.unk_11EE = D_82305A40.unk_02;
-        D_800AE540.unk_11EF = D_82305A40.unk_04;
+        gSessionContext.timeLimitsEnabled = D_82305A40.unk_01;
+        gSessionContext.battleLimitMinutes = D_82305A40.unk_02;
+        gSessionContext.moveLimitSeconds = D_82305A40.unk_04;
     }
     D_82305AF8[0].unk_0000 = 3;
     D_82305AF8[1].unk_0000 = 3;

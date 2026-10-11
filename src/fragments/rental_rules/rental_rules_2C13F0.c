@@ -130,7 +130,7 @@ struct QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemo
 s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* display) {
     s32 scroll_successful = 0;
 
-    if (RentalRules_BuildSpeciesPage(display->self_node->above_neighbour, display->pokedex_index - 1, D_800AE540.unk_0001) > 0) {
+    if (RentalRules_BuildSpeciesPage(display->self_node->above_neighbour, display->pokedex_index - 1, gSessionContext.ruleCategory) > 0) {
         display->qualifying_list_state = 3;
         display->unk_02 = 4;
         display->pokedex_index--;
@@ -147,7 +147,7 @@ s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* display) {
 s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* display) {
     s32 scroll_successful = 0;
 
-    if (RentalRules_BuildSpeciesPage(RentalRules_AdvancePageNode(display->self_node, 5), display->pokedex_index + 5, D_800AE540.unk_0001) > 0) {
+    if (RentalRules_BuildSpeciesPage(RentalRules_AdvancePageNode(display->self_node, 5), display->pokedex_index + 5, gSessionContext.ruleCategory) > 0) {
         display->qualifying_list_state = SCROLLING;
         display->unk_02 = 4;
         display->pokedex_index++;
@@ -433,11 +433,11 @@ void RentalRules_ListOpen(void) {
     ptr->pokedex_index = 0;
     ptr->unk_0A = 0;
     ptr->unk_0C = -1;
-    ptr->unk_06 = RentalRules_CountMatchingSpecies(D_800AE540.unk_0001);
+    ptr->unk_06 = RentalRules_CountMatchingSpecies(gSessionContext.ruleCategory);
     ptr->self_node = &ptr->unk_14[0];
 
     for (i = 0; i < 5; i++) {
-        RentalRules_BuildSpeciesPage(&ptr->unk_14[i], i, D_800AE540.unk_0001);
+        RentalRules_BuildSpeciesPage(&ptr->unk_14[i], i, gSessionContext.ruleCategory);
     }
 }
 

@@ -362,7 +362,7 @@ void BattleAnim_CallbackStartEffects133And134And143Descriptor38MetadataBurstEmit
 s16 BattleAnim_GetSessionModeEffectParam(void) {
     s16 var_v1 = 0x3B;
 
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 0:
             var_v1 = 0xD;
             break;

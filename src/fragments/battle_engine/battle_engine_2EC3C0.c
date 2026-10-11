@@ -2062,7 +2062,7 @@ void BattleScene_InitializePresentation(UNUSED BattleSessionTeams* arg0) {
     BattleScene_InitializeParticipantAuxiliaryModel(D_84390010[0]);
     BattleScene_InitializeParticipantAuxiliaryModel(D_84390010[1]);
 
-    switch (D_800AE540.unk_0000) {
+    switch (gSessionContext.mode) {
         case 0:
         case 1:
         case 2:

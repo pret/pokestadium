@@ -511,7 +511,7 @@ void Glc_Draw(void) {
         glc_to_e4_transition = 0xFF;
     }
 
-    if (D_800AE540.unk_11F2 == 1) {
+    if (gSessionContext.unk_11F2 == 1) {
         gSPDisplayList(gDisplayListHead++, D_8006F518);
 
         Gfx_DrawTextureRgba16(0x22C, 0x28, 0x24, 0x24, D_3019C38, 0x24, 0);
@@ -619,7 +619,7 @@ void Glc_LoadTrainerPanels(void) {
         trainer_file_index = selected_map_node + 10;
     }
 
-    if (D_800AE540.unk_11F2 != 0) {
+    if (gSessionContext.unk_11F2 != 0) {
         trainer_file_index += 0x1F;
     }
 
@@ -742,7 +742,7 @@ s32 Glc_ShowIntro(void) {
 s32 Glc_AdvanceRoom(void) {
     s16 i;
 
-    if (D_800AE540.unk_0002 == 7) {
+    if (gSessionContext.modeSelection == 7) {
         Audio_PlayCategory11SoundCommand(0x01100015, 0, 0);
         glc_to_e4_transition = 5;
     }
@@ -760,7 +760,7 @@ s32 Glc_AdvanceRoom(void) {
 
     Audio_PlaySoundEffectById(0x01100011);
 
-    if (D_800AE540.unk_0002 == 8) {
+    if (gSessionContext.modeSelection == 8) {
         castle_map_nodes[11].node_state = 0x3C;
     } else {
         castle_map_nodes[D_84A03180.unk_04].node_state = 0x3C;
@@ -810,11 +810,11 @@ s16 Glc_RunMenu(s16 action) {
         }
     }
 
-    D_800AE540.unk_0003 = 1;
+    gSessionContext.roundOrDemoId = 1;
     if (selected_map_node < GLC_TO_ELITE_4) {
-        D_800AE540.unk_0002 = selected_map_node;
+        gSessionContext.modeSelection = selected_map_node;
     } else {
-        D_800AE540.unk_0002 = selected_map_node - 2;
+        gSessionContext.modeSelection = selected_map_node - 2;
     }
     return action;
 }
@@ -824,15 +824,15 @@ s16 Glc_InitMenu(s16 arg0) {
     s16 sp2C = 2;
     s16 var_v1 = D_84A03180.unk_04;
 
-    if (D_800AE540.unk_0002 < 8) {
-        selected_map_node = D_800AE540.unk_0002;
+    if (gSessionContext.modeSelection < 8) {
+        selected_map_node = gSessionContext.modeSelection;
     } else {
-        selected_map_node = D_800AE540.unk_0002 + 2;
+        selected_map_node = gSessionContext.modeSelection + 2;
     }
 
     if (arg0 == 1) {
         sp2C = 4;
-        if (D_800AE540.unk_0002 < 8) {
+        if (gSessionContext.modeSelection < 8) {
             var_v1--;
         }
     }
@@ -877,7 +877,7 @@ s32 GymLeaderCastle_Main(s32 arg0, UNUSED s32 arg1) {
     glc_text_ui = Text_GetStringTable(0x19);
     glc_text_trainer_names = Text_GetStringTable(0x22);
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_84A03180, D_800AE540.unk_11F2);
+    Save_GetModeSettings(&D_84A03180, gSessionContext.unk_11F2);
     trainer_data_archive = BinArchive_Open(0x898000, NULL, 1, 1);
     portrait_archive = ASSET_LOAD2(battle_portraits, 1, 1);
     background_archive  = ASSET_LOAD2(backgrounds, 1, 1);
