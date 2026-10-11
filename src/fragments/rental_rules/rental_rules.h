@@ -24,13 +24,13 @@ typedef struct SpeciesQualificationStatus {
     /* 0x02 */ s16 is_eligible;
 } SpeciesQualificationStatus; // size = 0x4
 
-typedef struct QualifyingPokemonDisplayNode {
-    /* 0x00 */ SpeciesQualificationStatus species_listed[6];
-    /* 0x18 */ struct QualifyingPokemonDisplayNode* below_neighbour;
-    /* 0x1C */ struct QualifyingPokemonDisplayNode* above_neighbour;
-} QualifyingPokemonDisplayNode; // size = 0x20
-
 typedef struct QualifyingPokemonDisplayRow {
+    /* 0x00 */ SpeciesQualificationStatus species_listed[6];
+    /* 0x18 */ struct QualifyingPokemonDisplayRow* below_neighbour;
+    /* 0x1C */ struct QualifyingPokemonDisplayRow* above_neighbour;
+} QualifyingPokemonDisplayRow; // size = 0x20
+
+typedef struct QualifyingPokemonDisplay {
     /* 0x00 */ s16 qualifying_list_state;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
@@ -38,9 +38,9 @@ typedef struct QualifyingPokemonDisplayRow {
     /* 0x08 */ s16 pokedex_index;
     /* 0x0A */ s16 unk_0A;
     /* 0x0C */ s16 unk_0C;
-    /* 0x10 */ QualifyingPokemonDisplayNode* self_node;
-    /* 0x14 */ QualifyingPokemonDisplayNode unk_14[6];
-} QualifyingPokemonDisplayRow; // size = 0xD4
+    /* 0x10 */ QualifyingPokemonDisplayRow* self_node;
+    /* 0x14 */ QualifyingPokemonDisplayRow unk_14[6];
+} QualifyingPokemonDisplay; // size = 0xD4
 
 extern unk_D_83003CE0 D_83003CE0;
 extern unk_D_83003CE0 D_83003DE0;
@@ -87,17 +87,17 @@ s32 RentalRules_PopupGetProgress(void);
 
 s32 RentalRules_SpeciesMatchesCategory(s16 arg0, s16 arg1);
 s16 RentalRules_CountMatchingSpecies(s16 arg0);
-s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayNode* arg0, s16 arg1, s16 arg2);
-QualifyingPokemonDisplayNode* RentalRules_AdvancePageNode(QualifyingPokemonDisplayNode* arg0, s32 arg1);
-s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplayRow* arg0);
-s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplayRow* arg0);
-void RentalRules_ListUpdateOpen(QualifyingPokemonDisplayRow* arg0);
-void RentalRules_ListUpdateShown(QualifyingPokemonDisplayRow* arg0);
-void RentalRules_ListUpdateScrolling(QualifyingPokemonDisplayRow* arg0);
-void RentalRules_ListUpdateClose(QualifyingPokemonDisplayRow* arg0);
-void RentalRules_DrawScrollbar(s16 arg0, s16 arg1, QualifyingPokemonDisplayRow* arg2);
+s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* arg0, s16 arg1, s16 arg2);
+QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* arg0, s32 arg1);
+s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* arg0);
+s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* arg0);
+void RentalRules_ListUpdateOpen(QualifyingPokemonDisplay* arg0);
+void RentalRules_ListUpdateShown(QualifyingPokemonDisplay* arg0);
+void RentalRules_ListUpdateScrolling(QualifyingPokemonDisplay* arg0);
+void RentalRules_ListUpdateClose(QualifyingPokemonDisplay* arg0);
+void RentalRules_DrawScrollbar(s16 arg0, s16 arg1, QualifyingPokemonDisplay* arg2);
 void RentalRules_DrawEligibilityPanelLegend(s16 arg0, s16 arg1);
-void RentalRules_DrawSpeciesPage(s16 arg0, s16 arg1, QualifyingPokemonDisplayNode* arg2);
+void RentalRules_DrawSpeciesPage(s16 arg0, s16 arg1, QualifyingPokemonDisplayRow* arg2);
 void RentalRules_ListInit(s32 arg0);
 void RentalRules_ListUpdate(void);
 void RentalRules_ListDraw(void);
