@@ -238,40 +238,35 @@ void GalleryUI_DrawRotatedSprite(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
-#ifdef NON_MATCHING
 void func_86905734(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u8 arg6) {
-    f32 a1;
-    f32 a2;
+    s32 a1;
+    s32 a2;
     s16 spF8[4];
     s16 spF0[4];
     unk_D_80068BB0* spEC;
     Vtx* spE8;
     Mtx* spE4;
     Vp* spE0;
-    f32 sp64;
-    f32 sp60;
-    f32 sp5C;
-    s32 tmp1;
 
     spEC = GfxImage_GetCurrent();
     spE8 = Gfx_AllocDisplayList(sizeof(Vtx) * 4);
     spE4 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     spE0 = Gfx_AllocDisplayList(sizeof(Vp) * 1);
 
-    sp64 = arg1;
-    sp5C = arg2;
+    a1 = arg1;
+    a2 = arg2;
 
-    spF8[0] = ((-(arg3 / 2) * COSS(arg5)) - (SINS(arg5) * -arg4)) + sp64;
-    spF0[0] = (COSS(arg5) * -arg4) + (-(arg3 / 2) * SINS(arg5)) + sp5C;
+    spF8[0] = ((-(arg3 / 2) * COSS(arg5)) - (SINS(arg5) * -arg4)) + a1;
+    spF0[0] = ((-(arg3 / 2) * SINS(arg5)) + (COSS(arg5) * -arg4)) + a2;
 
-    spF8[1] = (((arg3 / 2) * COSS(arg5)) - (SINS(arg5) * -arg4)) + sp64;
-    spF0[1] = (COSS(arg5) * -arg4) + ((arg3 / 2) * SINS(arg5)) + sp5C;
+    spF8[1] = (((arg3 / 2) * COSS(arg5)) - (SINS(arg5) * -arg4)) + a1;
+    spF0[1] = (((arg3 / 2) * SINS(arg5)) + (COSS(arg5) * -arg4)) + a2;
 
-    spF8[2] = (-(arg3 / 2) * COSS(arg5)) + sp64;
-    spF0[2] = (-(arg3 / 2) * SINS(arg5)) + sp5C;
+    spF8[2] = (-(arg3 / 2) * COSS(arg5)) + a1;
+    spF0[2] = (-(arg3 / 2) * SINS(arg5)) + a2;
 
-    spF8[3] = ((arg3 / 2) * COSS(arg5)) + sp64;
-    spF0[3] = ((arg3 / 2) * SINS(arg5)) + sp5C;
+    spF8[3] = ((arg3 / 2) * COSS(arg5)) + a1;
+    spF0[3] = ((arg3 / 2) * SINS(arg5)) + a2;
 
     Gfx_SetViewportDimensions(spE0, spEC->width, spEC->height);
 
@@ -316,10 +311,6 @@ void func_86905734(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u
 
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
-#else
-void func_86905734(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u8 arg6);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/gallery_camera/gallery_camera_150AC0/func_86905734.s")
-#endif
 
 void GalleryUI_DrawRotateArrowIcon(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u8 arg6) {
     f32 a1;
