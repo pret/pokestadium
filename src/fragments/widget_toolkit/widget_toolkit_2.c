@@ -1646,7 +1646,6 @@ void func_87803EAC(u32* arg0, u16 arg1, UNUSED u16 arg2, u16 arg3, u16 arg4, u8 
     }
 }
 
-#ifdef NON_MATCHING
 typedef struct Vtx4 {
     /* 0x00 */ Vtx vtx1;
     /* 0x10 */ Vtx vtx2;
@@ -1770,6 +1769,8 @@ void func_87804320(u8 arg0, s8 arg1, s8 arg2, s8 arg3, s8 arg4) {
         }
 
         for (i = 0, var_s4 = 0; i < 4; i++) {
+            s32 k = var_s4;
+
             if (spA0[i] == 1) {
                 Gfx_SetVertexAttributes(&spAC[var_s4].vtx1, -0x63, spA4[var_s4], 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
                 Gfx_SetVertexAttributes(&spAC[var_s4].vtx2, -0x1B, spA4[var_s4], 0, 0x480, 0, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -1784,15 +1785,13 @@ void func_87804320(u8 arg0, s8 arg1, s8 arg2, s8 arg3, s8 arg4) {
 
                 if (var_s4 != 3) {
                     spA4[var_s4 + 1] = spA4[var_s4] + 0x36;
-                    var_s4 = var_s4 + 1;
+                    var_s4++;
+                    k++;
                 }
             }
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/widget_toolkit/widget_toolkit_2/func_87804320.s")
-#endif
 
 void Widget_PauseMenuDrawPlayerIcons(s16 arg0) {
     s32 var_a0;
@@ -1979,7 +1978,7 @@ s32 Widget_PauseMenuUpdate(void) {
             if ((D_8780FE44 <= 0) && (D_8780FC9C->buttonPressed & 0x8000)) {
                 D_8780FC98 = 1;
                 if (D_8780FA2A == 0) {
-                    Audio_PlaySoundEffectById(4);
+                    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
                     D_8780FC40 = 3;
                     D_8780FC70 = 1;
                     D_8780FC5D = 3;
@@ -2027,7 +2026,7 @@ s32 Widget_PauseMenuUpdate(void) {
                     if (i == 4) {
                         if (D_8780FC6C == 0) {
                             if (D_8780FC9C->buttonPressed & 0x8000) {
-                                Audio_PlaySoundEffectById(4);
+                                Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
                                 if (Widget_PauseMenuCheckHyperUnlock() != 0) {
                                     Audio_StartMusicTrack(0x13);
                                     D_8780FC6C = 1;
@@ -2041,7 +2040,7 @@ s32 Widget_PauseMenuUpdate(void) {
                             D_8780FE44 -= D_8780FCA0;
                             if (D_8780FE44 <= 0) {
                                 if (D_8780FC9C->buttonPressed & 0x8000) {
-                                    Audio_PlaySoundEffectById(4);
+                                    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
                                     D_8780FC40 = 3;
                                     D_8780FC70 = 1;
                                     D_8780FC6C = 0;
@@ -2061,19 +2060,19 @@ s32 Widget_PauseMenuUpdate(void) {
 
         case 3:
             if ((D_8780FC9C->buttonPressed & 0x800) || ((sp67 == 1) && (D_8780FC9A == 0))) {
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 D_8780FC5C--;
                 if (D_8780FC5C < 0) {
                     D_8780FC5C = D_8780FC5D - 1;
                 }
             } else if ((D_8780FC9C->buttonPressed & 0x400) || ((sp66 == 1) && (D_8780FC9B == 0))) {
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 D_8780FC5C++;
                 if (D_8780FC5C >= D_8780FC5D) {
                     D_8780FC5C = 0;
                 }
             } else if (D_8780FC9C->buttonPressed & 0x8000) {
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                 if (D_8780FA2A == 0) {
                     D_8780FC40 = 6;
                 } else if (D_8780FC4C != 0) {
@@ -2105,7 +2104,7 @@ s32 Widget_PauseMenuUpdate(void) {
 
             if (!(D_8780FC48 & D_8780FE40)) {
                 D_8780FC90++;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 if (D_8780FC90 >= D_8780FC78) {
                     D_8780FC90 = 0;
                 }

@@ -27,7 +27,7 @@ static u32 D_86700840[] = {
 static unk_D_86002F30* D_86700930;
 static GraphNode* D_86700934;
 static unk_D_86002F34_00C* D_86700938;
-static unk_D_86002F58_004_000 D_86700940;
+static DisplayObject D_86700940;
 
 static s16 D_86700AA8;
 static s16 D_86700AAA;
@@ -40,7 +40,7 @@ void Minigame_Sample8Viewer_PollInput(void) {
 }
 
 void Minigame_Sample8Viewer_InitCamera(void) {
-    D_86700938 = D_86700934->unk_0C;
+    D_86700938 = D_86700934->children;
     D_86700AA8 = 0x100;
     D_86700AAA = 0;
     D_86700AAC = 0x78;

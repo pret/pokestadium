@@ -15,7 +15,7 @@
 
 static unk_D_86002F30* D_82800530;
 static GraphNode* D_82800534;
-static unk_D_86002F58_004_000 D_82800538;
+static DisplayObject D_82800538;
 static BinArchive* D_828006A0;
 static u8* D_828006A4;
 

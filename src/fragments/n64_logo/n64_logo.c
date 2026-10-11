@@ -94,7 +94,7 @@ s32 N64Logo_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
         Audio_SetVoiceEnabled(1);
     }
 
-    Audio_PlaySoundEffectById(0xA);
+    Audio_PlaySoundEffectById(SFX_N64_LOGO);
     sp30 = osGetTime();
     N64Logo_ScanGbSavePorts();
     N64Logo_WaitForElapsed(sp30);

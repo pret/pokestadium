@@ -12,113 +12,113 @@
 #include "hal_libc.h"
 #include "src/geo_render.h"
 
-struct unk_D_86002F58_004_000_000 D_800AC840;
-struct unk_D_86002F58_004_000_000 D_800AC858;
+struct DisplayNodeHeader D_800AC840;
+struct DisplayNodeHeader D_800AC858;
 
 void ModelRenderer_InitDisplayRoots(void) {
     GeoNode_CreateContainer(0, &D_800AC840);
     GeoNode_CreateContainer(0, &D_800AC858);
 }
 
-void ModelRenderer_AttachDisplayObject(unk_D_86002F58_004_000* arg0) {
+void ModelRenderer_AttachDisplayObject(DisplayObject* arg0) {
     GeoNode_CreateModelPart(NULL, arg0, 0, &D_8006F050, &D_8006F05C, &D_8006F064);
-    GraphNode_AppendChild(&D_800AC840, &arg0->unk_000);
-    arg0->unk_0A6 = 0;
-    arg0->unk_000.unk_01 &= ~1;
+    GraphNode_AppendChild(&D_800AC840, &arg0->node);
+    arg0->effectSlot = 0;
+    arg0->node.flags &= ~1;
 }
 
-void ModelRenderer_AttachSecondaryDisplayObject(unk_D_86002F58_004_000* arg0) {
+void ModelRenderer_AttachSecondaryDisplayObject(DisplayObject* arg0) {
     GeoNode_CreateModelPart(NULL, arg0, 0, &D_8006F050, &D_8006F05C, &D_8006F064);
-    GraphNode_AppendChild(&D_800AC858, &arg0->unk_000);
-    arg0->unk_000.unk_01 &= ~1;
+    GraphNode_AppendChild(&D_800AC858, &arg0->node);
+    arg0->node.flags &= ~1;
 }
 
-void Model_InitDisplayObject(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, unk_D_86002F58_004_000_004* arg3) {
-    GraphNode_AppendChild(&arg0->unk_000, arg3);
-    MtxF_Identity(&arg0->unk_060);
-    arg0->unk_018 = arg1;
-    arg0->unk_01A = arg2;
+void Model_InitDisplayObject(DisplayObject* display_object, s16 root_id, s16 object_type, ModelNodeView* child) {
+    GraphNode_AppendChild(&display_object->node, child);
+    MtxF_Identity(&display_object->matrix);
+    display_object->rootId = root_id;
+    display_object->objectType = object_type;
 
-    arg0->unk_01D = 0xFF;
-    arg0->unk_01C = 0;
+    display_object->lodFraction = 0xFF;
+    display_object->textureMode = 0;
 
-    arg0->unk_000.unk_01 |= 0x1;
+    display_object->node.flags |= 0x1;
 
-    arg0->unk_000.unk_02 &= ~0x4;
-    arg0->unk_000.unk_02 |= 0x20;
-    arg0->unk_000.unk_02 |= 0x40;
-    arg0->unk_000.unk_02 &= ~0x2;
+    display_object->node.renderFlags &= ~0x4;
+    display_object->node.renderFlags |= 0x20;
+    display_object->node.renderFlags |= 0x40;
+    display_object->node.renderFlags &= ~0x2;
 
-    arg0->unk_0A0.rgba = 0xFFFFFF00;
-    arg0->unk_03C.rgba = 0xFFFFFF00;
-    arg0->unk_040.unk_00 = -1;
-    arg0->unk_040.unk_04 = NULL;
-    arg0->unk_054.unk_00 = -1;
-    arg0->unk_054.unk_04 = NULL;
+    display_object->fogColor.rgba = 0xFFFFFF00;
+    display_object->textureTint.rgba = 0xFFFFFF00;
+    display_object->transformAnim.animationId = -1;
+    display_object->transformAnim.data = NULL;
+    display_object->eventTrack.trackId = -1;
+    display_object->eventTrack.data = NULL;
 
-    arg0->unk_000.unk_02 &= ~0x8;
+    display_object->node.renderFlags &= ~0x8;
 
-    if (arg2 > 0) {
-        ModelAnim_StartDisplayObjectAnimation(arg0);
+    if (object_type > 0) {
+        ModelAnim_StartDisplayObjectAnimation(display_object);
     }
 }
 
-void ModelRenderer_ClearDisplayObject(unk_D_86002F58_004_000* arg0) {
-    arg0->unk_000.unk_0C = NULL;
-    arg0->unk_000.unk_01 &= ~1;
+void ModelRenderer_ClearDisplayObject(DisplayObject* arg0) {
+    arg0->node.children = NULL;
+    arg0->node.flags &= ~1;
 }
 
-s32 ModelAnim_SetAnimation(unk_D_86002F58_004_000* arg0, s32 arg1) {
-    unk_D_86002F58_004_000_00C* tmp = arg0->unk_000.unk_0C;
-    unk_D_86002F58_004_000_00C_028* temp_v0 = tmp->unk_28(0, 0);
+s32 ModelAnim_SetAnimation(DisplayObject* arg0, s32 arg1) {
+    ModelAssetNode* tmp = arg0->node.children;
+    ModelAnimationBank* temp_v0 = tmp->getAnimationBank(0, 0);
 
     if (arg1 == -1) {
         ModelAnim_ClearTransformChannel(arg0);
-    } else if (arg1 < temp_v0->unk_04) {
-        ModelAnim_BindTransformCurve(arg0, arg1, temp_v0->unk_0C[arg1], 0x10000);
+    } else if (arg1 < temp_v0->transformCount) {
+        ModelAnim_BindTransformCurve(arg0, arg1, temp_v0->transformTracks[arg1], 0x10000);
         return 1;
     }
 
     return 0;
 }
 
-s32 ModelAnim_SetEventTrack(unk_D_86002F58_004_000* arg0, s32 arg1) {
-    unk_D_86002F58_004_000_00C* temp_v0 = arg0->unk_000.unk_0C;
-    unk_D_86002F58_004_000_00C_028* temp_v1 = temp_v0->unk_28(0, 0);
+s32 ModelAnim_SetEventTrack(DisplayObject* arg0, s32 arg1) {
+    ModelAssetNode* temp_v0 = arg0->node.children;
+    ModelAnimationBank* temp_v1 = temp_v0->getAnimationBank(0, 0);
 
     if (arg1 == -1) {
         ModelAnim_ClearEventTrack(arg0);
-    } else if (arg1 < temp_v1->unk_05) {
-        ModelAnim_BindEventTrack(arg0, arg1, temp_v1->unk_10[arg1]);
+    } else if (arg1 < temp_v1->eventTrackCount) {
+        ModelAnim_BindEventTrack(arg0, arg1, temp_v1->eventTracks[arg1]);
         return 1;
     }
 
     return 0;
 }
 
-void Model_SetMaterialColor(unk_D_86002F58_004_000* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
-    Color_SetRGBA(&arg0->unk_0A0, arg1, arg2, arg3, arg4);
+void Model_SetMaterialColor(DisplayObject* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
+    Color_SetRGBA(&arg0->fogColor, arg1, arg2, arg3, arg4);
 }
 
-void Model_SetMaterialAlpha(unk_D_86002F58_004_000* arg0, u8 arg1) {
-    arg0->unk_01D = arg1;
+void Model_SetMaterialAlpha(DisplayObject* arg0, u8 arg1) {
+    arg0->lodFraction = arg1;
 }
 
-void Model_SetMaterialTextureMode(unk_D_86002F58_004_000* arg0, u8 arg1) {
-    arg0->unk_01C = arg1;
+void Model_SetMaterialTextureMode(DisplayObject* arg0, u8 arg1) {
+    arg0->textureMode = arg1;
 }
 
-unk_D_86002F58_004_000_00C_028* ModelAnim_GetAnimationRecord(unk_D_86002F58_004_000* arg0, s32 arg1) {
-    unk_D_86002F58_004_000_00C_028* var_v1 = NULL;
+ModelAnimationBank* ModelAnim_GetAnimationRecord(DisplayObject* arg0, s32 arg1) {
+    ModelAnimationBank* var_v1 = NULL;
 
     if (arg0 == NULL) {
         arg0 = D_8006F09C;
     }
 
     if (arg0 != NULL) {
-        unk_D_86002F58_004_000_00C* tmp = arg0->unk_000.unk_0C;
+        ModelAssetNode* tmp = arg0->node.children;
 
-        var_v1 = tmp->unk_28(arg1, 0);
+        var_v1 = tmp->getAnimationBank(arg1, 0);
     }
 
     return var_v1;
@@ -188,7 +188,7 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
                 sp2A = 0x99;
             }
         }
-        if (!(arg0->unk_10->unk_00 & 4)) {
+        if (!(arg0->unk_10->flags & 4)) {
             while (Display_IsFrameReady() == 0) {}
         }
         PokeIcon_RequestFrameLoad(arg0->unk_10, (u16) sp2A, sp2C);
@@ -197,44 +197,44 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
 
         if (arg0->unk_00 & 0x20) {
             PokeIcon_WaitFrameLoad(arg0->unk_10);
-            arg0->unk_14 = arg0->unk_10->unk_24;
+            arg0->unk_14 = arg0->unk_10->loadedModel;
             arg0->unk_00 &= ~0xE0;
         }
     }
 }
 
 void PokeIcon_PollFrameLoadForObject(unk_func_8001C248* arg0) {
-    if (PokeIcon_PollFrameLoad(arg0->unk_000.unk_10)) {
-        arg0->unk_000.unk_14 = arg0->unk_000.unk_10->unk_24;
-        arg0->unk_000.unk_00 &= ~0xE0;
-        arg0->unk_000.unk_00 |= 0x10;
+    if (PokeIcon_PollFrameLoad(arg0->node.callback)) {
+        arg0->node.callbackArg = arg0->node.callback->loadedModel;
+        arg0->node.type &= ~0xE0;
+        arg0->node.type |= 0x10;
     }
 }
 
 void PokeIcon_WaitFrameLoadForObject(unk_func_8001C248* arg0) {
-    if (arg0->unk_000.unk_00 & 0x40 && PokeIcon_WaitFrameLoad(arg0->unk_000.unk_10) != 0) {
-        arg0->unk_000.unk_14 = arg0->unk_000.unk_10->unk_24;
-        arg0->unk_000.unk_00 &= ~0xE0;
-        arg0->unk_000.unk_00 |= 0x10;
+    if (arg0->node.type & 0x40 && PokeIcon_WaitFrameLoad(arg0->node.callback) != 0) {
+        arg0->node.callbackArg = arg0->node.callback->loadedModel;
+        arg0->node.type &= ~0xE0;
+        arg0->node.type |= 0x10;
     }
 }
 
 void PokeIcon_RequestBackgroundForObject(unk_func_8001C248* arg0) {
     if (!(arg0->unk_01D & 0x40) && (arg0->unk_01D & 0x80)) {
-        PokeIcon_RequestBackgroundLoad(arg0->unk_000.unk_10, arg0->unk_020, arg0->unk_024);
+        PokeIcon_RequestBackgroundLoad(arg0->node.callback, arg0->unk_020, arg0->unk_024);
         arg0->unk_01D |= 0x40;
         arg0->unk_01D &= ~0x10;
         if (arg0->unk_01D & 0x20) {
-            PokeIcon_WaitBackgroundLoad(arg0->unk_000.unk_10);
-            arg0->unk_024 = arg0->unk_000.unk_10->unk_28;
+            PokeIcon_WaitBackgroundLoad(arg0->node.callback);
+            arg0->unk_024 = arg0->node.callback->loadedBackground;
             arg0->unk_01D &= ~0xE0;
         }
     }
 }
 
 void PokeIcon_PollBackgroundForObject(unk_func_8001C248* arg0) {
-    if (PokeIcon_PollBackgroundLoad(arg0->unk_000.unk_10) != 0) {
-        arg0->unk_024 = arg0->unk_000.unk_10->unk_28;
+    if (PokeIcon_PollBackgroundLoad(arg0->node.callback) != 0) {
+        arg0->unk_024 = arg0->node.callback->loadedBackground;
         arg0->unk_01D &= ~0xE0;
         arg0->unk_01D |= 0x10;
     }

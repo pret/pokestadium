@@ -112,7 +112,7 @@ static unk_D_833031B4 D_833031B4[] = {
         NULL,
         1,
         0,
-        2,
+        SFX_MENU_CONFIRM,
     },
     {
         D_03003C40,
@@ -134,7 +134,7 @@ static unk_D_833031B4 D_833031B4[] = {
         NULL,
         2,
         0,
-        3,
+        SFX_MENU_BACK,
     },
 };
 static s16 D_8330325C[2] = { 0x108, 0x108 };
@@ -292,7 +292,7 @@ s32 Gallery_SnapUpdateMenuInput(void) {
     }
 
     if (sp1C != D_83402E28) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     sp24 = &D_833031B4[D_83402E28];
@@ -358,7 +358,7 @@ s32 Gallery_SnapUpdateMenuInput(void) {
             Audio_PlaySoundEffectById(sp24->unk_14);
         } else {
             D_833033A0 = 1;
-            Audio_PlaySoundEffectById(8);
+            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         }
     }
     return sp28;
@@ -418,7 +418,7 @@ s32 Gallery_SnapUpdateGridInput(unk_D_83407B38* arg0) {
 
     arg0->unk_00 = Gallery_GridPosToIndex(arg0, sp44, sp40);
     if (arg0->unk_00 != sp48) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if (gPlayer1Controller->buttonPressed & 0x8000) {
@@ -429,9 +429,9 @@ s32 Gallery_SnapUpdateGridInput(unk_D_83407B38* arg0) {
                 arg0->unk_04 = sp3C;
                 arg0->unk_B0->unk_18 = sp38->unk_18;
                 arg0->unk_B0->unk_00 = 0;
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             } else {
-                Audio_PlaySoundEffectById(8);
+                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
             }
         } else {
             if ((arg0->unk_04 >= 0) && (arg0->unk_04 < arg0->unk_14)) {
@@ -441,7 +441,7 @@ s32 Gallery_SnapUpdateGridInput(unk_D_83407B38* arg0) {
                     Gallery_SwapPhotoRecords(sp38->unk_18, arg0->unk_B0->unk_18);
                     Audio_PlaySoundEffectById(0x29);
                 } else {
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 }
             } else {
                 if (Gallery_PhotoRecordsEqual(arg0->unk_B0->unk_18, sp38->unk_18) == 0) {
@@ -453,7 +453,7 @@ s32 Gallery_SnapUpdateGridInput(unk_D_83407B38* arg0) {
 
                     sp38->unk_00 = 0;
                 } else {
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                     Gallery_SnapResetToMenu();
                 }
             }
@@ -471,7 +471,7 @@ s32 Gallery_SnapUpdateGridInput(unk_D_83407B38* arg0) {
             }
             arg0->unk_04 = -1;
         }
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     } else if (gPlayer1Controller->buttonPressed & 4) {
         idx = (arg0->unk_08 * arg0->unk_14) + arg0->unk_00;
         if (arg0->unk_04 == -1) {
@@ -482,10 +482,10 @@ s32 Gallery_SnapUpdateGridInput(unk_D_83407B38* arg0) {
 
         if ((arg0->unk_04 == -1) && (Gallery_IsSceneReady(sp28) != 0)) {
             sp4C = 1;
-            Audio_PlaySoundEffectById(0x19);
+            Audio_PlaySoundEffectById(SFX_ZOOM_IN);
             Gallery_SetEnlargeTarget(sp28->unk_18);
         } else {
-            Audio_PlaySoundEffectById(8);
+            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         }
     }
 
@@ -686,7 +686,7 @@ void Gallery_SnapDrawHintBox(unk_D_83407B38* arg0, s32 arg1, s32 arg2) {
 
 void Gallery_SnapInit(s32 arg0, s32 arg1) {
     unk_D_83407B38* temp_v0_2;
-    unk_D_86002F58_004_000_010* sp30;
+    ModelLoadContext* sp30;
 
     switch (arg0) {
         case 1:
@@ -984,7 +984,7 @@ void Gallery_SnapUpdatePasteConfirm(unk_D_83407B38* arg0) {
     } else if (gPlayer1Controller->buttonPressed & 0x4000) {
         *temp_v1->unk_18 = D_833033A8;
         temp_v1->unk_00 = 0;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         var_a2 = 1;
     }
 
@@ -1001,7 +1001,7 @@ void Gallery_SnapUpdateSaveConfirm(void) {
             D_833032A8--;
             if (D_833032A8 == 0) {
                 D_83303434 = 1;
-                Audio_PlaySoundEffectById(8);
+                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
             }
         }
     }
@@ -1016,7 +1016,7 @@ void Gallery_SnapUpdateSaveConfirm(void) {
             D_833033A0 = 1;
             D_833032A8 = 4;
         } else if (gPlayer1Controller->buttonPressed & 0x4000) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             D_833032E4 = 1;
             D_833033A0 = 0;
             D_83303434 = 0;
@@ -1106,7 +1106,7 @@ s32 Gallery_SnapUpdate(void) {
                                 } else {
                                     D_833032E4 = 1;
                                     D_833033A0 = 1;
-                                    Audio_PlaySoundEffectById(8);
+                                    Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                                 }
                             } else {
                                 D_833032E4 = 1;

@@ -87,7 +87,7 @@ unk_D_86807558 D_86807558[4];
 s32 D_86808438[4];
 static s32 D_86808448;
 static Controller D_86808450;
-static unk_D_86002F58_004_000_004* D_86808474;
+static ModelNodeView* D_86808474;
 static s16 D_86808478;
 static s16 D_8680847A;
 static s16 D_8680847C;
@@ -98,17 +98,17 @@ static unk_D_86002F34_00C* D_86808490;
 unk_D_86808498 D_86808498;
 
 void SushiGame_UpdateNameTagPulse(unk_D_86807558* arg0) {
-    unk_D_86002F58_004_000* ptr = &arg0->unk_24C;
+    DisplayObject* ptr = &arg0->unk_24C;
 
     if (arg0->unk_0DC != 0) {
-        ptr->unk_030.x = (SINS(arg0->unk_0E2 + 0x0000) * 0.3f) + 1.0f;
-        ptr->unk_030.y = (SINS(arg0->unk_0E2 + 0x3200) * 0.3f) + 1.0f;
+        ptr->scale.x = (SINS(arg0->unk_0E2 + 0x0000) * 0.3f) + 1.0f;
+        ptr->scale.y = (SINS(arg0->unk_0E2 + 0x3200) * 0.3f) + 1.0f;
     } else {
-        ptr->unk_030.y = 1.0f;
-        ptr->unk_030.x = 1.0f;
+        ptr->scale.y = 1.0f;
+        ptr->scale.x = 1.0f;
     }
 
-    ptr->unk_024 = arg0->unk_0E4.unk_0FC;
+    ptr->position = arg0->unk_0E4.anchors[5].position;
 
     if (D_8780FC94 == 0) {
         arg0->unk_0E2 += 0x1800;
@@ -121,12 +121,12 @@ void SushiGame_NameTagGeoCallback(s32 arg0, UNUSED s32 arg1) {
 
     switch (arg0) {
         case 2:
-            idx = D_8006F09C->unk_000.unk_14;
+            idx = D_8006F09C->node.callbackArg;
             SushiGame_UpdateNameTagPulse(&D_86807558[idx]);
             break;
 
         case 5:
-            idx = D_8006F09C->unk_000.unk_14;
+            idx = D_8006F09C->node.callbackArg;
             gSPSegment(gDisplayListHead++, 0x0F, Memmap_GetSegmentVaddr(D_86807558[idx].unk_3B4));
 
             gDPPipeSync(gDisplayListHead++);
@@ -135,8 +135,8 @@ void SushiGame_NameTagGeoCallback(s32 arg0, UNUSED s32 arg1) {
                              AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | G_RM_PASS,
                              AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL |
                                  GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
-            gDPSetEnvColor(gDisplayListHead++, D_8006F09C->unk_03C.r, D_8006F09C->unk_03C.g, D_8006F09C->unk_03C.b,
-                           D_8006F09C->unk_01D);
+            gDPSetEnvColor(gDisplayListHead++, D_8006F09C->textureTint.r, D_8006F09C->textureTint.g, D_8006F09C->textureTint.b,
+                           D_8006F09C->lodFraction);
             gSPDisplayList(gDisplayListHead++, D_86807010);
 
             GeoRender_SetRenderMode();
@@ -191,7 +191,7 @@ s32 SushiGame_OrthonormalizeBasis(unk_D_86807558_098* arg0) {
     return 0;
 }
 
-s16 SushiGame_FindCrossedAnimEvent(unk_D_86002F58_004_000* arg0, s16 arg1) {
+s16 SushiGame_FindCrossedAnimEvent(DisplayObject* arg0, s16 arg1) {
     s32 i;
     s16 sp2A;
 
@@ -243,7 +243,7 @@ void SushiGame_ResetPlayerSubState(unk_D_86807558_040* arg0) {
 
 void SushiGame_InitPlayerSlot(unk_D_86807558* arg0, s32 arg1, s32 arg2) {
     s32 i;
-    unk_D_86002F58_004_000* sp24;
+    DisplayObject* sp24;
     s16 angle;
     f32 sqrt;
 
@@ -360,17 +360,17 @@ void SushiGame_InitPlayerSlot(unk_D_86807558* arg0, s32 arg1, s32 arg2) {
     ModelRenderer_AttachDisplayObject(sp24);
     ModelRenderer_AttachDisplayObject(&arg0->unk_24C);
 
-    arg0->unk_24C.unk_000.unk_14 = arg0->unk_000;
+    arg0->unk_24C.node.callbackArg = arg0->unk_000;
 
     Model_InitDisplayObject(sp24, 0, 0xA0, D_86807550->unk_08->unk_00[0]);
     ModelAnim_SetAnimation(sp24, arg0->unk_0C0);
 
-    sp24->unk_040.unk_08 = Rand_Range(0x1E) << 0x10;
+    sp24->transformAnim.frameFixed = Rand_Range(0x1E) << 0x10;
 
     Model_InitDisplayObject(&arg0->unk_24C, 0, 0, D_86808474);
 
-    arg0->unk_24C.unk_000.unk_01 |= 1;
-    arg0->unk_24C.unk_000.unk_02 |= 8;
+    arg0->unk_24C.node.flags |= 1;
+    arg0->unk_24C.node.renderFlags |= 8;
 
     if (arg2 != 0) {
         arg0->unk_3B4 = D_8780633C[arg0->unk_000];
@@ -501,7 +501,7 @@ void SushiGame_SetPlayerEatState(unk_D_86807558* arg0, u32 arg1) {
             arg0->unk_0D0.rgba = -0x100;
             if ((arg0->unk_028 != 1) || (arg0->unk_018 == 0)) {
                 arg0->unk_0C0 = 9;
-                arg0->unk_24C.unk_000.unk_01 &= ~1;
+                arg0->unk_24C.node.flags &= ~1;
             }
             arg0->unk_074.x = arg0->unk_074.z = 0.0f;
             arg0->unk_0C8 = 1.0f;
@@ -1010,7 +1010,7 @@ void func_86803C6C(unk_D_86807558* arg0) {
             if (arg0->unk_060 == 2) {
                 arg0->unk_0D0.g = arg0->unk_0D0.b = 255.0f * spB8;
                 if (!(arg0->unk_006 & 0xF)) {
-                    Particle_EmitBurstAtTransform(1.0f, arg0->unk_0E4.unk_0FC, D_8006F05C, MiniFx_UpdateRandomOffsetPalette10RiseFadeParticle, &gMiniFxParticleDescriptorI4Frame, 4);
+                    Particle_EmitBurstAtTransform(1.0f, arg0->unk_0E4.anchors[5].position, D_8006F05C, MiniFx_UpdateRandomOffsetPalette10RiseFadeParticle, &gMiniFxParticleDescriptorI4Frame, 4);
                 }
             } else {
                 arg0->unk_0D0.r = arg0->unk_0D0.b = 255.0f * spB8;
@@ -1137,7 +1137,7 @@ unk_D_868084D8* func_86804634(unk_D_86807558* arg0) {
     f32 dz;
     unk_D_868084D8* var_v1;
 
-    sp14 = arg0->unk_0E4.unk_0EC;
+    sp14 = arg0->unk_0E4.anchors[4].position;
 
     for (i = 0, var_v1 = D_868084D8; i < 12; i++, var_v1++) {
         if (!(var_v1->unk_02 & 1)) {
@@ -1178,7 +1178,7 @@ s32 SushiGame_CheckEatInterrupt(unk_D_86807558* arg0) {
         return 2;
     }
 
-    sp2C = arg0->unk_0E4.unk_0EC;
+    sp2C = arg0->unk_0E4.anchors[4].position;
 
     for (i = 0, var_v0 = D_86807558; i < 4; i++, var_v0++) {
         if (arg0 == var_v0) {
@@ -1411,9 +1411,9 @@ void SushiGame_ApplyCollisionPush(unk_D_86807558* arg0) {
 void SushiGame_UpdatePlayerModelTransform(unk_D_86807558* arg0) {
     UNUSED s32 pad[3];
     f32 var_fv0;
-    unk_D_86002F58_004_000* ptr = &arg0->unk_0E4;
+    DisplayObject* ptr = &arg0->unk_0E4;
 
-    ptr->unk_024 = arg0->unk_068;
+    ptr->position = arg0->unk_068;
 
     SushiGame_OrthonormalizeBasis(&arg0->unk_098);
 
@@ -1422,19 +1422,19 @@ void SushiGame_UpdatePlayerModelTransform(unk_D_86807558* arg0) {
     if (arg0->unk_098.unk_00.x < 0.0f) {
         var_fv0 = 0.0f - var_fv0;
     }
-    ptr->unk_01E.y = (s32)var_fv0 & 0xFFFF;
+    ptr->rotation.y = (s32)var_fv0 & 0xFFFF;
 
-    ptr->unk_03C.rgba = arg0->unk_0D0.rgba;
+    ptr->textureTint.rgba = arg0->unk_0D0.rgba;
 
     if (arg0->unk_0C4 != arg0->unk_0C0) {
         ModelAnim_SetAnimation(&arg0->unk_0E4, arg0->unk_0C0);
     }
 
-    ptr->unk_040.unk_0C = (s32)(arg0->unk_0C8 * 65536.0f);
+    ptr->transformAnim.speedFixed = (s32)(arg0->unk_0C8 * 65536.0f);
     if (arg0->unk_002 & 0x10) {
-        ptr->unk_01D = 0xFF;
+        ptr->lodFraction = 0xFF;
     } else {
-        ptr->unk_01D = 0;
+        ptr->lodFraction = 0;
     }
 }
 
@@ -1650,7 +1650,7 @@ void SushiGame_InitPlayerSlots(s32 arg0) {
     D_86807550 = Model_LoadByArchiveIndex(0xA0);
 
     temp_v0 = MainPool_AllocState(main_pool_get_available(), 0);
-    D_86808474 = (unk_D_86002F58_004_000_004*)process_geo_layout(temp_v0, &D_86807078);
+    D_86808474 = (ModelNodeView*)process_geo_layout(temp_v0, &D_86807078);
     MainPool_FinalizeAllocation(temp_v0);
     D_8680847A = 0;
     D_8680847E = 4 - D_8780FA2C;
@@ -1746,7 +1746,7 @@ void SushiGame_UpdateCameraBasis(unk_D_86808498* arg0) {
 }
 
 void SushiGame_InitCamera(void) {
-    D_87906054 = D_86808490 = D_86807500->unk_00.unk_0C;
+    D_87906054 = D_86808490 = D_86807500->node.children;
 
     D_86808498.unk_00.x = 0.0f;
     D_86808498.unk_00.y = 0.0f;

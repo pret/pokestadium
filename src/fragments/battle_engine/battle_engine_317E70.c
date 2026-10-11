@@ -873,7 +873,7 @@ void BattleAnim_GetOwnerModelBoundsScaled(Battler* arg0, Vec3f* arg1) {
 }
 
 f32 BattleAnim_GetSpeciesBaseScale(Battler* arg0) {
-    f32 ret = D_80075E40[arg0->unk_000.unk_01A] * 0.01f;
+    f32 ret = D_80075E40[arg0->unk_000.objectType] * 0.01f;
 
     return ret;
 }

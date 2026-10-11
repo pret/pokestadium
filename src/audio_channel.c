@@ -57,7 +57,7 @@ void Audio_SetPauseMixMode(u32 arg0) {
             Audio_QueueFadeSoundCommand(D_80078E68, 3);
             Audio_QueueSetVolumeCommand(2, D_80078E60 >> 1);
             Audio_QueueSetVolumeCommand(1, D_80078E64 / 3);
-            D_80078E68 = Audio_PlaySoundEffectById(0x23);
+            D_80078E68 = Audio_PlaySoundEffectById(SFX_PAUSE);
             Audio_QueueVoiceVolumeScale(D_80078E68, 0xFF);
             break;
 
@@ -65,11 +65,11 @@ void Audio_SetPauseMixMode(u32 arg0) {
             Audio_QueueFadeSoundCommand(D_80078E68, 3);
             Audio_QueueSetVolumeCommand(2, D_80078E60);
             Audio_QueueSetVolumeCommand(1, D_80078E64);
-            D_80078E68 = Audio_PlaySoundEffectById(0x24);
+            D_80078E68 = Audio_PlaySoundEffectById(SFX_RESUME);
             break;
 
         case 2:
-            Audio_QueueVoiceVolumeScale(Audio_PlaySoundEffectById(1), 0xFF);
+            Audio_QueueVoiceVolumeScale(Audio_PlaySoundEffectById(SFX_MENU_SCROLL), 0xFF);
             break;
 
         case 3:

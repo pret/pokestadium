@@ -149,7 +149,7 @@ s32 Snap_PrintClubUpdateBackgroundSelect(void) {
 
             if ((D_83A00B7C == -1) && (Snap_PrintClubCheckConfirmInput() != 0)) {
                 D_83A00B70 = 2;
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 StageFade_StartFromTransparent(8);
             }
             break;

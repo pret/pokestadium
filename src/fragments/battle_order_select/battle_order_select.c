@@ -842,12 +842,12 @@ s32 BattleMenu_IsOrderSelectionComplete(unk_D_848037A0* arg0) {
 
 void BattleMenu_SelectOrderSlot(unk_D_848037A0* arg0, s8 arg1, s32 arg2) {
     if (arg1 >= arg0->unk_0017) {
-        Audio_PlaySoundEffectById(8);
+        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         return;
     }
 
     if (arg2 != 0) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         arg0->unk_0005 = 4;
         arg0->unk_0006 = 2;
         arg0->unk_0016 = arg1;
@@ -855,7 +855,7 @@ void BattleMenu_SelectOrderSlot(unk_D_848037A0* arg0, s8 arg1, s32 arg2) {
     }
 
     if (BattleMenu_IsSlotAlreadySelected(arg0, arg1) != 0) {
-        Audio_PlaySoundEffectById(8);
+        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         return;
     }
 
@@ -868,13 +868,13 @@ void BattleMenu_SelectOrderSlot(unk_D_848037A0* arg0, s8 arg1, s32 arg2) {
     }
 
     if (BattleMenu_PicksExceedLevelCap(arg0) != 0) {
-        Audio_PlaySoundEffectById(8);
+        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         arg0->unk_0005 = 2;
         arg0->unk_0006 = 2;
         return;
     }
 
-    Audio_PlaySoundEffectById(2);
+    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     if (BattleMenu_IsOrderSelectionComplete(arg0) != 0) {
         arg0->unk_0005 = 1;
         arg0->unk_000A = 0;
@@ -894,7 +894,7 @@ void BattleMenu_UndoLastOrderSelection(unk_D_848037A0* arg0) {
             arg0->unk_0006 = 2;
         }
 
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
 
         if (arg0->unk_0002 != -1) {
             temp_v0 = &D_848037A0[arg0->unk_0002];
@@ -952,7 +952,7 @@ void BattleMenu_HandleOrderSelectPanel_ConfirmInput(Controller* arg0, unk_D_8480
     if (BTN_IS_PRESSED(arg0, BTN_DLEFT | BTN_DRIGHT)) {
         arg1->unk_0006 = 2;
         arg1->unk_000A ^= 1;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     } else if (BTN_IS_PRESSED(arg0, BTN_A)) {
         if (arg1->unk_000A == 0) {
             arg1->unk_0006 = 2;
@@ -965,7 +965,7 @@ void BattleMenu_HandleOrderSelectPanel_ConfirmInput(Controller* arg0, unk_D_8480
             arg1->unk_000B = 0;
             arg1->unk_0009 = 0;
             BattleMenu_ResetOrderSlotIcons(arg1->unk_0003);
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             if (arg1->unk_0002 != -1) {
                 temp_v0_2 = &D_848037A0[arg1->unk_0002];
                 temp_v0_2->unk_0005 = 0;
@@ -985,7 +985,7 @@ void BattleMenu_HandleOrderSelectPanel_LevelCapNoticeInput(Controller* arg0, unk
         arg1->unk_0009 = 0;
         arg1->unk_0006 = 2;
         BattleMenu_ResetOrderSlotIcons(arg1->unk_0003);
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 

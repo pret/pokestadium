@@ -2,7 +2,7 @@
 #include "geo_render.h"
 
 void DisplayList_BuildOptionalPlusSegment(Gfx* gfx, DisplayListAddresses* addresses) {
-    if (D_8006F09C->unk_01C == 0) {
+    if (D_8006F09C->textureMode == 0) {
         gSPDisplayList(gfx++, addresses->segments[0]);
     }
     gSPDisplayList(gfx++, addresses->segments[1]);

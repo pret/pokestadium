@@ -29,7 +29,7 @@ void BattleScene_SetBothOwnerActiveFlags(void) {
 }
 
 void BattleScene_SetOwnerPoseFlag(PresentationLayout* arg0) {
-    arg0->unk_00.unk_01 |= 0x10;
+    arg0->node.flags |= 0x10;
 }
 
 void BattleScene_LoadOwnerCameraFramingConstants(Battler* arg0) {
@@ -89,8 +89,8 @@ void BattleScene_ApplyOwnerCameraFraming(Battler* arg0) {
     tmp2 = D_84384578[temp_v0]->unk_00.y;
     arg0->unk_728.unk_194 = tmp2;
 
-    BattleScene_SetCameraAtAndEyeFromAngles(sp30, arg0->unk_728.unk_000.unk_024.x + arg0->unk_728.unk_190, arg0->unk_728.unk_000.unk_024.y + tmp2,
-                  arg0->unk_728.unk_000.unk_024.z, arg0->unk_728.unk_188, arg0->unk_728.unk_184, arg0->unk_728.unk_186);
+    BattleScene_SetCameraAtAndEyeFromAngles(sp30, arg0->unk_728.unk_000.position.x + arg0->unk_728.unk_190, arg0->unk_728.unk_000.position.y + tmp2,
+                  arg0->unk_728.unk_000.position.z, arg0->unk_728.unk_188, arg0->unk_728.unk_184, arg0->unk_728.unk_186);
 }
 
 void BattleScene_TickOwnerCameraFraming(Battler* arg0) {
@@ -109,8 +109,8 @@ void BattleScene_TickOwnerSlideIn(Battler* arg0, s32 arg1) {
     s16 var_a0;
     PresentationLayout* temp_v0;
 
-    arg0->unk_728.unk_168->unk_00.unk_01 |= 1;
-    arg0->unk_728.unk_000.unk_000.unk_01 |= 1;
+    arg0->unk_728.unk_168->node.flags |= 1;
+    arg0->unk_728.unk_000.node.flags |= 1;
 
     if (arg0->unk_728.unk_178 == 1) {
         if ((arg0->unk_728.unk_168->unk_1C == -0x48) && !(arg0->unk_654.unk_34 & 0x800)) {
@@ -141,15 +141,15 @@ void BattleScene_TickOwnerSlideOut(Battler* arg0, s32 arg1) {
         arg0->unk_728.unk_18C = 0;
         arg0->unk_728.unk_168->unk_1C = Math_StepToS32(arg0->unk_728.unk_168->unk_1C, -0x48, arg1, arg1);
         if (arg0->unk_728.unk_168->unk_1C == -0x48) {
-            arg0->unk_728.unk_168->unk_00.unk_01 &= ~1;
-            arg0->unk_728.unk_000.unk_000.unk_01 &= ~1;
+            arg0->unk_728.unk_168->node.flags &= ~1;
+            arg0->unk_728.unk_000.node.flags &= ~1;
         }
     } else {
         arg0->unk_728.unk_18C = 0;
         arg0->unk_728.unk_168->unk_1C = Math_StepToS32(arg0->unk_728.unk_168->unk_1C, 0x15F, arg1, arg1);
         if (arg0->unk_728.unk_168->unk_1C == 0x15F) {
-            arg0->unk_728.unk_168->unk_00.unk_01 &= ~1;
-            arg0->unk_728.unk_000.unk_000.unk_01 &= ~1;
+            arg0->unk_728.unk_168->node.flags &= ~1;
+            arg0->unk_728.unk_000.node.flags &= ~1;
         }
     }
 }

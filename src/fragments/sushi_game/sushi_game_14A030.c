@@ -190,7 +190,7 @@ void SushiGame_InitConveyorCup(unk_D_86808808* arg0, s32 arg1) {
     arg0->unk_008 = 0;
 
     SushiGame_GetConveyorSlotPosition(arg0->unk_000, &arg0->unk_00C);
-    ModelRenderer_AttachDisplayObject(&sp1C->unk_000);
+    ModelRenderer_AttachDisplayObject(&sp1C->node);
 
     sp1C->unk_030.x = sp1C->unk_030.y = sp1C->unk_030.z = 2.0f;
 }
@@ -274,7 +274,7 @@ void SushiGame_InitPlate(s32 arg0, unk_D_868084D8* arg1, s32 arg2, unk_D_868084D
         arg1->unk_10 = 0;
         arg1->unk_38 = NULL;
         arg1->unk_2C = 0.0f;
-        arg1->unk_40->unk_00.unk_01 &= ~1;
+        arg1->unk_40->node.flags &= ~1;
     } else {
         arg3->unk_008 = arg1;
         arg1->unk_02 = 0;
@@ -293,7 +293,7 @@ void SushiGame_InitPlate(s32 arg0, unk_D_868084D8* arg1, s32 arg2, unk_D_868084D
             arg1->unk_02 |= 2;
         }
 
-        arg1->unk_40->unk_00.unk_01 |= 1;
+        arg1->unk_40->node.flags |= 1;
 
         if (arg3->unk_006 >= 2) {
             if ((D_86807180[arg1->unk_0C].unk_18 != 0) && (D_86807510 >= 0x3D)) {
@@ -398,7 +398,7 @@ void SushiGame_UpdatePlate(unk_D_868084D8* arg0) {
                         arg0->unk_2C = 1.5f * var_fv0;
                     } else {
                         arg0->unk_2C = 0.0f;
-                        arg0->unk_40->unk_00.unk_01 &= ~1;
+                        arg0->unk_40->node.flags &= ~1;
                     }
                 }
                 break;
@@ -425,9 +425,9 @@ void SushiGame_UpdatePlate(unk_D_868084D8* arg0) {
     gSPEndDisplayList(gfx++);
 
     if (arg0->unk_08.a != 0xFF) {
-        arg0->unk_40->unk_00.unk_03 = 5;
+        arg0->unk_40->node.renderLayer = 5;
     } else {
-        arg0->unk_40->unk_00.unk_03 = 4;
+        arg0->unk_40->node.renderLayer = 4;
     }
 
     arg0->unk_40->unk_18 = arg0->unk_3C;
@@ -524,8 +524,8 @@ void SushiGame_InitConveyorBelt(void) {
     for (i = 0, ptr = D_86808808; i < 12; i++, ptr++) {
         SushiGame_InitConveyorCup(ptr, i);
         temp_a1 = GeoNode_CreateDisplayList(temp_s2, NULL, 4, D_868072C0);
-        ptr->unk_018.unk_000.unk_01 |= 1;
-        GraphNode_AppendChild(&ptr->unk_018, &temp_a1->unk_00);
+        ptr->unk_018.node.flags |= 1;
+        GraphNode_AppendChild(&ptr->unk_018, &temp_a1->display_node_header);
     }
 
     for (i = 0, var_s0 = D_868084D8; i < 12; i++, var_s0++) {

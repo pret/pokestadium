@@ -101,10 +101,10 @@ s32 Battle_StageLightAngleCallbackB(s32 arg0, unk_D_86002F34_alt18* arg1) {
     return 0;
 }
 
-s32 Battle_StageMaterialTintCallback(s32 arg0, unk_D_86002F58_004_000* arg1) {
+s32 Battle_StageMaterialTintCallback(s32 arg0, DisplayObject* arg1) {
     if (arg0 == 2) {
-        Vec3f_SetComponentsDuplicate(&arg1->unk_030, D_8438E7A8, D_8438E7A8, D_8438E7A8);
-        arg1->unk_03C.rgba = D_8438E7A4.rgba;
+        Vec3f_SetComponentsDuplicate(&arg1->scale, D_8438E7A8, D_8438E7A8, D_8438E7A8);
+        arg1->textureTint.rgba = D_8438E7A4.rgba;
     }
     return 0;
 }
@@ -115,11 +115,11 @@ void Battle_SetStageTintColor(u8 arg0, u8 arg1, u8 arg2) {
     D_8438E7A4.b = arg2;
 
     if (((arg0 & arg1 & arg2) & 0xFF) == 0xFF) {
-        if (D_8438E530.unk_00.unk_14 == 1) {
-            D_8438E530.unk_00.unk_01 |= 1;
+        if (D_8438E530.node.callbackArg == 1) {
+            D_8438E530.node.flags |= 1;
         }
     } else {
-        D_8438E530.unk_00.unk_01 &= ~1;
+        D_8438E530.node.flags &= ~1;
     }
 }
 
@@ -191,10 +191,10 @@ void Battle_DrawStageBackdrop(void) {
 }
 
 void Battle_RenderStageThumbnail(GraphNode* arg0, unk_D_80068BB0* arg1) {
-    unk_D_86002F34_00C* sp2C = arg0->unk_0C;
+    unk_D_86002F34_00C* sp2C = arg0->children;
     unk_D_86002F34_00C_018 sp20;
 
-    if (sp2C->unk_00.unk_01 & 0x10) {
+    if (sp2C->node.flags & 0x10) {
         sp20 = sp2C->unk_18;
 
         sp2C->unk_18.x = 0;
@@ -206,7 +206,7 @@ void Battle_RenderStageThumbnail(GraphNode* arg0, unk_D_80068BB0* arg1) {
         GfxImage_FillCurrent(&gDisplayListHead, 0x10D);
         Geo_RenderRootNode(arg0);
 
-        sp2C->unk_00.unk_01 &= ~0x10;
+        sp2C->node.flags &= ~0x10;
 
         sp2C->unk_18 = sp20;
     }
@@ -246,8 +246,8 @@ void Battle_DrawTexturedRectSegment(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8* 
 void Battle_DrawFaintOrderMarker(GraphNode* arg0, unk_D_80068BB0* arg1) {
     s32 temp_s2;
     s32 temp_s3;
-    unk_D_86002F34_00C* temp_v1 = arg0->unk_0C;
-    unk_D_86002F34_00C_018* ptr = &arg0->unk_0C->unk_18;
+    unk_D_86002F34_00C* temp_v1 = arg0->children;
+    unk_D_86002F34_00C_018* ptr = &arg0->children->unk_18;
     s32 img;
 
     temp_s2 = ptr->x;
@@ -589,13 +589,13 @@ void func_84301430(unk_func_80007444* arg0) {
 
     temp_v0_7 = sp3C(4, 0);
     if (temp_v0_7 == NULL) {
-        D_8438E530.unk_00.unk_14 = 0;
-        D_8438E530.unk_00.unk_01 &= ~1;
+        D_8438E530.node.callbackArg = 0;
+        D_8438E530.node.flags &= ~1;
     } else {
         D_8438E530.unk_18.unk_00 = temp_v0_7->unk_00;
         D_8438E530.unk_18.unk_02 = temp_v0_7->unk_02;
         D_8438E530.unk_18.unk_04.rgba = temp_v0_7->unk_04.rgba;
-        D_8438E530.unk_00.unk_14 = 1;
+        D_8438E530.node.callbackArg = 1;
     }
 
     BattleScene_DispatchLifecycle(3, D_8438E798);

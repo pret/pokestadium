@@ -474,7 +474,7 @@ void Gallery_DrawStatusIcon(s32 arg0, s32 arg1, s32 arg2) {
     Gfx_DrawTextureRgba16(arg0, arg1, 0x40, 0x20, var_v0, 0x40, 0);
 }
 
-void Gallery_InitSceneGrid(unk_D_83407B38* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, unk_D_86002F58_004_000_010* arg5,
+void Gallery_InitSceneGrid(unk_D_83407B38* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, ModelLoadContext* arg5,
                    BinArchive* arg6, unk_D_83403C60* arg7, s32 arg8, s32 arg9) {
     UNUSED s32 pad;
     unk_D_80068BB0* sp168;
@@ -594,7 +594,7 @@ s32 Gallery_GridPosToIndex(unk_D_83407B38* arg0, s32 arg1, s32 arg2) {
     return (arg0->unk_18 * arg2) + arg1;
 }
 
-void Gallery_RebindSceneGridResources(unk_D_83407B38* arg0, unk_D_86002F58_004_000_010* arg1, BinArchive* arg2) {
+void Gallery_RebindSceneGridResources(unk_D_83407B38* arg0, ModelLoadContext* arg1, BinArchive* arg2) {
     s32 i;
 
     for (i = 0; i < 37; i++) {

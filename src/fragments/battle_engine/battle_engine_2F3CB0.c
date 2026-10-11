@@ -46,8 +46,8 @@ void BattleAnim_UpdateSwayPhysicsToOwner(Battler* arg0, Battler* arg1, f32 arg2,
     sp3C.y = arg1->unk_448.unk_0C.y;
     arg1->unk_448.unk_0C.x = 0.0f;
 
-    BattleAnim_Vec3fSetPolarXZ(&sp3C, arg1->unk_448.unk_0C.z, arg0->unk_000.unk_01E.y + 0x4000);
-    Vec3f_AddInPlace(&arg0->unk_000.unk_024, &sp3C);
+    BattleAnim_Vec3fSetPolarXZ(&sp3C, arg1->unk_448.unk_0C.z, arg0->unk_000.rotation.y + 0x4000);
+    Vec3f_AddInPlace(&arg0->unk_000.position, &sp3C);
 }
 
 void BattleAnim_UpdateSwayPhysicsToTarget(UNUSED Battler* arg0, Battler* arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5) {
@@ -84,15 +84,15 @@ void BattleAnim_UpdateSwayPhysicsToTarget(UNUSED Battler* arg0, Battler* arg1, f
     arg1->unk_448.unk_0C.x = 0.0f;
 
     BattleAnim_Vec3fSetPolarXZ(&sp3C, arg1->unk_448.unk_0C.z, arg5);
-    Vec3f_AddInPlace(&arg1->unk_4EC.unk_024, &sp3C);
+    Vec3f_AddInPlace(&arg1->unk_4EC.position, &sp3C);
 }
 
 void BattleScene_HideParticipantSecondaryModels(Battler* arg0) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.unk_030, 1.0f, 1.0f, 1.0f);
-        arg0->unk_168[i].unk_000.unk_000.unk_01 &= ~1;
+        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
+        arg0->unk_168[i].unk_000.node.flags &= ~1;
         arg0->unk_168[i].unk_169 = 0;
     }
 }
@@ -104,11 +104,11 @@ void BattleScene_ShowSecondaryModelsAtMainTransform(Battler* arg0) {
     for (i = 0; i < 2; i++) {
         arg0->unk_168[i].unk_16C = 0;
         arg0->unk_168[i].unk_16A = sp64[i];
-        arg0->unk_168[i].unk_000.unk_01D = 0;
-        arg0->unk_168[i].unk_000.unk_000.unk_01 |= 1;
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.unk_024, &arg0->unk_000.unk_024);
-        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.unk_01E, &arg0->unk_000.unk_01E);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.unk_030, &arg0->unk_000.unk_030);
+        arg0->unk_168[i].unk_000.lodFraction = 0;
+        arg0->unk_168[i].unk_000.node.flags |= 1;
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->unk_000.position);
+        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->unk_000.rotation);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.scale, &arg0->unk_000.scale);
     }
 }
 
@@ -119,20 +119,20 @@ void BattleScene_UpdateSecondaryModelOrbit(Battler* arg0) {
     f32 sp4C[] = { 0.3f, -0.4f, -0.2f, 0.4f }; // D_8438461C
 
     for (i = 0; i < 2; i++) {
-        arg0->unk_168[i].unk_000.unk_01D = Math_StepToS32(arg0->unk_168[i].unk_000.unk_01D, 0x3C, 5, 5);
+        arg0->unk_168[i].unk_000.lodFraction = Math_StepToS32(arg0->unk_168[i].unk_000.lodFraction, 0x3C, 5, 5);
         arg0->unk_168[i].unk_16C = Math_StepToS32(arg0->unk_168[i].unk_16C, 0x38E, 0x64, 0x64);
         arg0->unk_168[i].unk_16C = Math_StepToS32(arg0->unk_168[i].unk_16C, 0x38E, 0x64, 0x64);
         arg0->unk_168[i].unk_16A += arg0->unk_168[i].unk_16C;
 
         tmp = SINS(arg0->unk_168[i].unk_16A) * (BattleScene_GetParticipantModelRadiusScaled(arg0) * sp4C[i]);
-        BattleAnim_Vec3fSetPolarXZ(&sp5C, tmp, arg0->unk_000.unk_01E.y);
+        BattleAnim_Vec3fSetPolarXZ(&sp5C, tmp, arg0->unk_000.rotation.y);
 
-        arg0->unk_168[i].unk_000.unk_024.x = arg0->unk_000.unk_024.x + sp5C.x;
-        arg0->unk_168[i].unk_000.unk_024.y = arg0->unk_000.unk_024.y + sp5C.y;
-        arg0->unk_168[i].unk_000.unk_024.z = arg0->unk_000.unk_024.z + sp5C.z;
+        arg0->unk_168[i].unk_000.position.x = arg0->unk_000.position.x + sp5C.x;
+        arg0->unk_168[i].unk_000.position.y = arg0->unk_000.position.y + sp5C.y;
+        arg0->unk_168[i].unk_000.position.z = arg0->unk_000.position.z + sp5C.z;
 
-        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_08 >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_00);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.animationId);
     }
 }
 
@@ -141,11 +141,11 @@ void BattleScene_ShowSecondaryModelsAtMainPose(Battler* arg0) {
 
     for (i = 0; i < 2; i++) {
         arg0->unk_168[i].unk_169 = 0;
-        arg0->unk_168[i].unk_000.unk_01D = 0x3C;
-        arg0->unk_168[i].unk_000.unk_000.unk_01 |= 1;
-        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.unk_030, 1.0f, 1.0f, 1.0f);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.unk_024, &arg0->unk_000.unk_024);
-        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.unk_01E, &arg0->unk_000.unk_01E);
+        arg0->unk_168[i].unk_000.lodFraction = 0x3C;
+        arg0->unk_168[i].unk_000.node.flags |= 1;
+        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->unk_000.position);
+        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->unk_000.rotation);
     }
 }
 
@@ -155,17 +155,17 @@ s32 BattleScene_ShrinkSecondaryModelsToScale(Battler* arg0) {
     f32 sp5C[] = { 0.007f, 0.005f, 0.039f }; // D_8438462C
 
     for (i = 0; i < 2; i++) {
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.unk_024, &arg0->unk_000.unk_024);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->unk_000.position);
 
-        temp_fv0_2 = Math_StepToF(arg0->unk_168[i].unk_000.unk_030.x, 0.8f, sp5C[i], sp5C[i]);
-        arg0->unk_168[i].unk_000.unk_030.x = temp_fv0_2;
-        arg0->unk_168[i].unk_000.unk_030.y = temp_fv0_2;
-        arg0->unk_168[i].unk_000.unk_030.z = temp_fv0_2;
+        temp_fv0_2 = Math_StepToF(arg0->unk_168[i].unk_000.scale.x, 0.8f, sp5C[i], sp5C[i]);
+        arg0->unk_168[i].unk_000.scale.x = temp_fv0_2;
+        arg0->unk_168[i].unk_000.scale.y = temp_fv0_2;
+        arg0->unk_168[i].unk_000.scale.z = temp_fv0_2;
 
-        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_08 >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_00);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.animationId);
 
-        if (arg0->unk_168[i].unk_000.unk_030.y < 0.8) {
+        if (arg0->unk_168[i].unk_000.scale.y < 0.8) {
             arg0->unk_168[i].unk_169 = 1;
         }
     }
@@ -178,15 +178,15 @@ void BattleScene_ShowSecondaryModelsStaggeredFrame(Battler* arg0) {
 
     for (i = 0; i < 2; i++) {
         arg0->unk_168[i].unk_169 = 0;
-        arg0->unk_168[i].unk_000.unk_01D = 0x41 - i * 4;
-        arg0->unk_168[i].unk_000.unk_000.unk_01 |= 1;
+        arg0->unk_168[i].unk_000.lodFraction = 0x41 - i * 4;
+        arg0->unk_168[i].unk_000.node.flags |= 1;
 
-        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_08 >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_00);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.unk_030, 1.0f, 1.0f, 1.0f);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.unk_024, &arg0->unk_000.unk_024);
-        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.unk_01E, &arg0->unk_000.unk_01E);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.unk_030, &arg0->unk_000.unk_030);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.animationId);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->unk_000.position);
+        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->unk_000.rotation);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.scale, &arg0->unk_000.scale);
     }
 }
 
@@ -200,11 +200,11 @@ void BattleScene_UpdateSecondaryModelTrailPosition(Battler* arg0, s16 arg1) {
     f32 sp70[3] = { 0.98f, 0.96f, 0.95f }; // D_84384644
 
     for (i = 0; i < 2; i++) {
-        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_08 >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.unk_040.unk_00);
-        Vec3f_CalculateDistanceAngles(&arg0->unk_000.unk_024, &arg0->unk_168[i].unk_000.unk_024, &sp90, &sp8E, &sp8C);
-        Camera_ComputeEyeFromAngles(&arg0->unk_000.unk_024, &arg0->unk_168[i].unk_000.unk_024, sp7C[i] * sp90, sp8E, sp8C);
-        BattleAnim_StepToS16(&arg0->unk_168[i].unk_000.unk_01E.y, arg0->unk_000.unk_01E.y, sp70[i] * arg1);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->unk_000.transformAnim.animationId);
+        Vec3f_CalculateDistanceAngles(&arg0->unk_000.position, &arg0->unk_168[i].unk_000.position, &sp90, &sp8E, &sp8C);
+        Camera_ComputeEyeFromAngles(&arg0->unk_000.position, &arg0->unk_168[i].unk_000.position, sp7C[i] * sp90, sp8E, sp8C);
+        BattleAnim_StepToS16(&arg0->unk_168[i].unk_000.rotation.y, arg0->unk_000.rotation.y, sp70[i] * arg1);
     }
 }
 
@@ -213,15 +213,15 @@ void BattleScene_ResetParticipantModelFlags(Battler* arg0) {
 }
 
 void BattleAnim_StatusIdleCase1Sub0(UNUSED Battler* arg0, Battler* arg1) {
-    arg1->unk_4EC.unk_000.unk_01 |= 1;
+    arg1->unk_4EC.node.flags |= 1;
     if (arg1 == D_84390010[0]) {
-        Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.unk_024, 35.0f, 50.0f, -250.0f);
+        Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, 35.0f, 50.0f, -250.0f);
     } else {
-        Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.unk_024, -35.0f, 50.0f, -250.0f);
+        Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, -35.0f, 50.0f, -250.0f);
     }
     BattleAnim_InitSwayOffset(arg1, 20.0f, 0x1FFE);
     arg1->unk_4B8++;
-    arg1->unk_4EC.unk_000.unk_02 &= ~0x20;
+    arg1->unk_4EC.node.renderFlags &= ~0x20;
     ModelAnim_SetFrame(&arg1->unk_4EC, 0);
 }
 
@@ -232,12 +232,12 @@ void BattleAnim_StatusIdleCase1Sub1(Battler* arg0, Battler* arg1) {
         BattleAnim_UpdateSwayPhysicsToTarget(arg0, arg1, 0, 0, 0x1FFE, 0x3BB8);
     }
 
-    arg1->unk_4EC.unk_01E.x += 0x1555;
-    arg1->unk_4EC.unk_01E.z += 0xE38;
+    arg1->unk_4EC.rotation.x += 0x1555;
+    arg1->unk_4EC.rotation.z += 0xE38;
 
-    if (arg1->unk_4EC.unk_024.y < 0) {
-        arg1->unk_4EC.unk_000.unk_01 &= ~1;
-        arg1->unk_4EC.unk_024.y = 0.0f;
+    if (arg1->unk_4EC.position.y < 0) {
+        arg1->unk_4EC.node.flags &= ~1;
+        arg1->unk_4EC.position.y = 0.0f;
         arg1->unk_448.unk_0C.y = 0.0f;
         BattleScene_ResetParticipantModelFlags(arg1);
     }
@@ -255,30 +255,30 @@ void BattleAnim_StatusIdleCase1(Battler* arg0, Battler* arg1) {
 }
 
 void BattleAnim_StatusIdleCase2Sub0(UNUSED Battler* arg0, Battler* arg1) {
-    Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.unk_024, arg1->unk_4B0 * -150.0f, 100.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, arg1->unk_4B0 * -150.0f, 100.0f, 0.0f);
     arg1->unk_4B8++;
     BattleAnim_InitSwayOffset(arg1, 0.0f, 0x3FFC);
-    arg1->unk_4EC.unk_000.unk_01 |= 1;
-    arg1->unk_4EC.unk_000.unk_02 &= ~0x20;
+    arg1->unk_4EC.node.flags |= 1;
+    arg1->unk_4EC.node.renderFlags &= ~0x20;
     ModelAnim_SetFrame(&arg1->unk_4EC, 0);
 }
 
 void BattleAnim_StatusIdleCase2Sub1(Battler* arg0, Battler* arg1) {
-    arg1->unk_4EC.unk_01E.x += 0x1555;
-    arg1->unk_4EC.unk_01E.z += 0xE38;
+    arg1->unk_4EC.rotation.x += 0x1555;
+    arg1->unk_4EC.rotation.z += 0xE38;
 
     BattleAnim_UpdateSwayPhysicsToTarget(arg0, arg1, 0.0f, 0.0f, 0x4000, 0);
 
-    if (arg1->unk_4EC.unk_024.y < 0) {
-        arg1->unk_4EC.unk_01E.x = 0;
-        arg1->unk_4EC.unk_01E.z = 0;
+    if (arg1->unk_4EC.position.y < 0) {
+        arg1->unk_4EC.rotation.x = 0;
+        arg1->unk_4EC.rotation.z = 0;
         if (arg1 == D_84390018) {
-            arg1->unk_4EC.unk_01E.y = 0x4000;
+            arg1->unk_4EC.rotation.y = 0x4000;
         } else {
-            arg1->unk_4EC.unk_01E.y = -0x4000;
+            arg1->unk_4EC.rotation.y = -0x4000;
         }
         arg1->unk_448.unk_0C.y = 0.0f;
-        arg1->unk_4EC.unk_024.y = 2.5f;
+        arg1->unk_4EC.position.y = 2.5f;
         BattleScene_ResetParticipantModelFlags(arg1);
     }
 }
@@ -305,7 +305,7 @@ void BattleAnim_StatusIdleCase3Sub0(UNUSED Battler* arg0, Battler* arg1) {
 void BattleAnim_StatusIdleCase3Sub1(Battler* arg0, Battler* arg1) {
     BattleAnim_UpdateSwayPhysicsToOwner(arg0, arg1, 1.45f, 0.015f, 0x4000);
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, 0);
-    if (arg0->unk_000.unk_024.y >= 200.0f) {
+    if (arg0->unk_000.position.y >= 200.0f) {
         arg1->unk_448.unk_0C.y = 0.0f;
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
@@ -332,7 +332,7 @@ void BattleAnim_StatusIdleCase14Sub0(UNUSED Battler* arg0, Battler* arg1) {
 
 void BattleAnim_StatusIdleCase14Sub1(Battler* arg0, Battler* arg1) {
     BattleAnim_UpdateSwayPhysicsToOwner(arg0, arg1, 2.0f, 0.002f, 0x4000);
-    if ((arg0->unk_000.unk_024.y - BattleScene_GetParticipantModelHeight(arg1)) >= 90.0f) {
+    if ((arg0->unk_000.position.y - BattleScene_GetParticipantModelHeight(arg1)) >= 90.0f) {
         arg1->unk_4B8++;
         arg1->unk_448.unk_0C.y = 0.0f;
     }
@@ -357,13 +357,13 @@ void BattleAnim_StatusIdleCase14(Battler* arg0, Battler* arg1) {
 }
 
 s32 BattleAnim_ApproachAngleAndCheckThreshold(Battler* arg0, s16 arg1, s16 arg2) {
-    arg0->unk_000.unk_01E.y -= arg1;
+    arg0->unk_000.rotation.y -= arg1;
 
     if (arg1 > 0) {
-        if ((arg2 >= arg0->unk_000.unk_01E.y) && ((arg2 - arg1) < arg0->unk_000.unk_01E.y)) {
+        if ((arg2 >= arg0->unk_000.rotation.y) && ((arg2 - arg1) < arg0->unk_000.rotation.y)) {
             return 1;
         }
-    } else if ((arg0->unk_000.unk_01E.y >= arg2) && (arg0->unk_000.unk_01E.y < (arg2 - arg1))) {
+    } else if ((arg0->unk_000.rotation.y >= arg2) && (arg0->unk_000.rotation.y < (arg2 - arg1))) {
         return 1;
     }
 
@@ -393,7 +393,7 @@ void BattleAnim_StatusIdleCase4Sub1(Battler* arg0, Battler* arg1) {
 }
 
 void BattleAnim_StatusIdleCase4Sub2(Battler* arg0, Battler* arg1) {
-    f32 tmp = 0x4000 - arg0->unk_000.unk_01E.y;
+    f32 tmp = 0x4000 - arg0->unk_000.rotation.y;
     f32 var_fa1;
     s16 sp26;
     s32 sp20;
@@ -411,7 +411,7 @@ void BattleAnim_StatusIdleCase4Sub2(Battler* arg0, Battler* arg1) {
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, sp26);
 
     if (sp20 != 0) {
-        arg0->unk_000.unk_01E.y = arg1->unk_4B0 << 0xE;
+        arg0->unk_000.rotation.y = arg1->unk_4B0 << 0xE;
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -461,7 +461,7 @@ void BattleAnim_StatusIdleCase5Sub2(Battler* arg0, Battler* arg1) {
 
     BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->unk_4B0 << 0xE);
 
-    if (BattleScene_ByteArrayContains(arg1->unk_000.unk_01A, sp28, sizeof(sp28)) != 0) {
+    if (BattleScene_ByteArrayContains(arg1->unk_000.objectType, sp28, sizeof(sp28)) != 0) {
         sp30 = 10.3f;
         sp34 = 10.0f;
         sp2C = 0.035f;
@@ -472,10 +472,10 @@ void BattleAnim_StatusIdleCase5Sub2(Battler* arg0, Battler* arg1) {
     }
 
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, arg1->unk_4A6);
-    BattleAnim_ApproachF(&arg0->unk_000.unk_024.y, -(BattleAnim_GetOwnerModelHeight(arg1) * sp30), sp2C);
+    BattleAnim_ApproachF(&arg0->unk_000.position.y, -(BattleAnim_GetOwnerModelHeight(arg1) * sp30), sp2C);
 
-    if (arg0->unk_000.unk_024.y <= -(BattleAnim_GetOwnerModelHeight(arg1) * sp34)) {
-        Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg1->unk_4B0 << 0xE, 0);
+    if (arg0->unk_000.position.y <= -(BattleAnim_GetOwnerModelHeight(arg1) * sp34)) {
+        Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg1->unk_4B0 << 0xE, 0);
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -502,7 +502,7 @@ void BattleAnim_StatusIdleCase6Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4C0 = 0;
     arg1->unk_4A0 = 0.0f;
     BattleScene_PositionParticipantModel(arg1);
-    Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg1->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg1->unk_4B0 << 0xE, 0);
     BattleScene_ShowSecondaryModelsStaggeredFrame(arg1);
     arg1->unk_4B8++;
 }
@@ -514,9 +514,9 @@ void BattleAnim_StatusIdleCase6Sub1(Battler* arg0, Battler* arg1) {
     BattleAnim_ApproachF(&arg1->unk_4A0, 50.0f, 0.1f);
     arg1->unk_4A6 += 0xE38;
     tmp = SINS(arg1->unk_4A6) * arg1->unk_4A0;
-    BattleAnim_Vec3fSetPolarXZ(&sp20, tmp, arg0->unk_000.unk_01E.y);
+    BattleAnim_Vec3fSetPolarXZ(&sp20, tmp, arg0->unk_000.rotation.y);
     BattleScene_PositionParticipantModel(arg1);
-    Vec3f_AddInPlace(&arg0->unk_000.unk_024, &sp20);
+    Vec3f_AddInPlace(&arg0->unk_000.position, &sp20);
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, 0);
 
     if (arg1->unk_4A0 > 49.0f) {
@@ -532,15 +532,15 @@ void BattleAnim_StatusIdleCase6Sub2(Battler* arg0, Battler* arg1) {
     arg1->unk_4A6 += 0xE38;
 
     tmp = SINS(arg1->unk_4A6) * arg1->unk_4A0;
-    BattleAnim_Vec3fSetPolarXZ(&sp20, tmp, arg0->unk_000.unk_01E.y);
+    BattleAnim_Vec3fSetPolarXZ(&sp20, tmp, arg0->unk_000.rotation.y);
 
     BattleScene_PositionParticipantModel(arg1);
-    Vec3f_AddInPlace(&arg0->unk_000.unk_024, &sp20);
+    Vec3f_AddInPlace(&arg0->unk_000.position, &sp20);
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, 0);
 
     if (arg1->unk_4A0 <= 0.5f) {
         BattleScene_PositionParticipantModel(arg1);
-        Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg1->unk_4B0 << 0xE, 0);
+        Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg1->unk_4B0 << 0xE, 0);
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -565,7 +565,7 @@ void BattleAnim_StatusIdleCase7Sub0(Battler* arg0, Battler* arg1) {
     BattleScene_ShowSecondaryModelsAtMainTransform(arg1);
     arg1->unk_4AC = 0;
     BattleScene_PositionParticipantModel(arg1);
-    Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg1->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg1->unk_4B0 << 0xE, 0);
     arg1->unk_4B8++;
 }
 
@@ -594,7 +594,7 @@ void BattleAnim_ResetOwnerFacingAndExitStatusIdle(Battler* arg0) {
     unk_D_86002F34_00C* sp18 = gBattleScene.unk_00->unk_DC;
 
     BattleScene_PositionParticipantModel(arg0);
-    Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg0->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg0->unk_4B0 << 0xE, 0);
     Vec3f_SetComponentsDuplicate(&sp18->unk_60.up, 0.0f, 1.0f, 0.0f);
     BattleScene_ResetParticipantModelFlags(arg0);
 }
@@ -606,7 +606,7 @@ void BattleAnim_StatusIdleCase8Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4C0 = 0;
     arg1->unk_4A0 = 0.0f;
     BattleScene_PositionParticipantModel(arg1);
-    Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg1->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg1->unk_4B0 << 0xE, 0);
     arg1->unk_4B8++;
 }
 
@@ -640,8 +640,8 @@ void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
     temp_s0->unk_60.up.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
     temp_s0->unk_60.up.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
 
-    if (arg1->unk_000.unk_024.y < 0.0f) {
-        arg1->unk_000.unk_024.y = 0.0f;
+    if (arg1->unk_000.position.y < 0.0f) {
+        arg1->unk_000.position.y = 0.0f;
     }
 }
 
@@ -657,7 +657,7 @@ void BattleAnim_StatusIdleCase8(Battler* arg0, Battler* arg1) {
 }
 
 void BattleAnim_StatusIdleCase9Sub0(Battler* arg0, Battler* arg1) {
-    if (arg0->unk_000.unk_030.y != 1.0f) {
+    if (arg0->unk_000.scale.y != 1.0f) {
         BattleScene_ResetParticipantModelFlags(arg1);
     } else {
         BattleScene_ShowSecondaryModelsAtMainPose(arg1);
@@ -668,14 +668,14 @@ void BattleAnim_StatusIdleCase9Sub0(Battler* arg0, Battler* arg1) {
 void BattleAnim_StatusIdleCase9Sub1(Battler* arg0, Battler* arg1) {
     f32 temp_fv0;
 
-    temp_fv0 = Math_StepToF(arg0->unk_000.unk_030.x, 0.8f, 0.01f, 0.01f);
-    arg0->unk_000.unk_030.x = temp_fv0;
-    arg0->unk_000.unk_030.y = temp_fv0;
-    arg0->unk_000.unk_030.z = temp_fv0;
+    temp_fv0 = Math_StepToF(arg0->unk_000.scale.x, 0.8f, 0.01f, 0.01f);
+    arg0->unk_000.scale.x = temp_fv0;
+    arg0->unk_000.scale.y = temp_fv0;
+    arg0->unk_000.scale.z = temp_fv0;
 
     BattleScene_ShrinkSecondaryModelsToScale(arg1);
 
-    if (arg0->unk_000.unk_030.y <= 0.8) {
+    if (arg0->unk_000.scale.y <= 0.8) {
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -697,12 +697,12 @@ void BattleAnim_StatusIdleCase12Sub0(UNUSED Battler* arg0, Battler* arg1) {
 }
 
 void BattleAnim_StatusIdleCase12Sub1(Battler* arg0, UNUSED Battler* arg1) {
-    arg0->unk_000.unk_030.x = Math_StepToF(arg0->unk_000.unk_030.x, 0.0f, 0.05f, 0.05f);
-    arg0->unk_000.unk_030.y = Math_StepToF(arg0->unk_000.unk_030.y, 0.0f, 0.05f, 0.05f);
-    arg0->unk_000.unk_030.z = Math_StepToF(arg0->unk_000.unk_030.z, 0.0f, 0.05f, 0.05f);
+    arg0->unk_000.scale.x = Math_StepToF(arg0->unk_000.scale.x, 0.0f, 0.05f, 0.05f);
+    arg0->unk_000.scale.y = Math_StepToF(arg0->unk_000.scale.y, 0.0f, 0.05f, 0.05f);
+    arg0->unk_000.scale.z = Math_StepToF(arg0->unk_000.scale.z, 0.0f, 0.05f, 0.05f);
 
-    if (arg0->unk_000.unk_030.y <= 0.1) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 0.001f, 0.001f, 0.001f);
+    if (arg0->unk_000.scale.y <= 0.1) {
+        Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 0.001f, 0.001f, 0.001f);
     }
 }
 
@@ -722,9 +722,9 @@ void BattleAnim_StatusIdleCase13Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4A6 = 0;
     arg1->unk_4A8 = 0;
     arg1->unk_4A0 = 0.4f;
-    arg1->unk_448.unk_0C.x = arg0->unk_000.unk_030.x;
-    arg1->unk_448.unk_0C.y = arg0->unk_000.unk_030.y;
-    arg1->unk_448.unk_0C.z = arg0->unk_000.unk_030.z;
+    arg1->unk_448.unk_0C.x = arg0->unk_000.scale.x;
+    arg1->unk_448.unk_0C.y = arg0->unk_000.scale.y;
+    arg1->unk_448.unk_0C.z = arg0->unk_000.scale.z;
     arg1->unk_4B8++;
 }
 
@@ -747,9 +747,9 @@ void BattleAnim_StatusIdleCase13Sub1(Battler* arg0, Battler* arg1) {
         var_fv0 = 0.8f;
     }
 
-    arg0->unk_000.unk_030.x = var_fv0 - (SINS(arg1->unk_4A6) * arg1->unk_4A0);
-    arg0->unk_000.unk_030.y = (SINS(arg1->unk_4A6) * arg1->unk_4A0) + var_fv0;
-    arg0->unk_000.unk_030.z = var_fv0 - (SINS(arg1->unk_4A6) * arg1->unk_4A0);
+    arg0->unk_000.scale.x = var_fv0 - (SINS(arg1->unk_4A6) * arg1->unk_4A0);
+    arg0->unk_000.scale.y = (SINS(arg1->unk_4A6) * arg1->unk_4A0) + var_fv0;
+    arg0->unk_000.scale.z = var_fv0 - (SINS(arg1->unk_4A6) * arg1->unk_4A0);
 
     if ((arg1->unk_4A6 >= 0x4000) && (arg1->unk_4A6 >= 0x4000)) {
         arg1->unk_4A8 = 0x1554;
@@ -776,14 +776,14 @@ void BattleAnim_StatusIdleCase13Sub2(Battler* arg0, Battler* arg1) {
         var_fv0 = 0.8f;
     }
 
-    arg0->unk_000.unk_030.x = var_fv0 - var_fv1;
-    arg0->unk_000.unk_030.y = (SINS(arg1->unk_4A6) * arg1->unk_4A0) + var_fv0;
-    arg0->unk_000.unk_030.z = var_fv0 - (SINS(arg1->unk_4A6) * arg1->unk_4A0);
+    arg0->unk_000.scale.x = var_fv0 - var_fv1;
+    arg0->unk_000.scale.y = (SINS(arg1->unk_4A6) * arg1->unk_4A0) + var_fv0;
+    arg0->unk_000.scale.z = var_fv0 - (SINS(arg1->unk_4A6) * arg1->unk_4A0);
 
     if (arg1->unk_4A0 <= 0.01f) {
-        arg0->unk_000.unk_030.x = var_fv0;
-        arg0->unk_000.unk_030.y = var_fv0;
-        arg0->unk_000.unk_030.z = var_fv0;
+        arg0->unk_000.scale.x = var_fv0;
+        arg0->unk_000.scale.y = var_fv0;
+        arg0->unk_000.scale.z = var_fv0;
         BattleScene_ResetParticipantModelFlags(arg1);
     }
 }
@@ -806,9 +806,9 @@ void BattleAnim_StatusIdleCase13(Battler* arg0, Battler* arg1) {
 void BattleAnim_StatusIdleCase15Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4A8 = 0x71C;
     arg1->unk_4A0 = 0.4f;
-    arg1->unk_448.unk_0C.x = arg0->unk_000.unk_030.x;
-    arg1->unk_448.unk_0C.y = arg0->unk_000.unk_030.y;
-    arg1->unk_448.unk_0C.z = arg0->unk_000.unk_030.z;
+    arg1->unk_448.unk_0C.x = arg0->unk_000.scale.x;
+    arg1->unk_448.unk_0C.y = arg0->unk_000.scale.y;
+    arg1->unk_448.unk_0C.z = arg0->unk_000.scale.z;
     arg1->unk_4B8++;
 }
 
@@ -826,20 +826,20 @@ void BattleAnim_StatusIdleCase15Sub1(Battler* arg0, Battler* arg1) {
     }
 
     if (temp_a0->unk_56 == 0) {
-        arg0->unk_000.unk_030.x = 1.0f - (SINS(sp22) * arg1->unk_4A0);
-        arg0->unk_000.unk_030.y = (SINS(sp22) * arg1->unk_4A0) + 1.0f;
-        arg0->unk_000.unk_030.z = 1.0f - (SINS(sp22) * arg1->unk_4A0);
+        arg0->unk_000.scale.x = 1.0f - (SINS(sp22) * arg1->unk_4A0);
+        arg0->unk_000.scale.y = (SINS(sp22) * arg1->unk_4A0) + 1.0f;
+        arg0->unk_000.scale.z = 1.0f - (SINS(sp22) * arg1->unk_4A0);
     } else {
-        arg0->unk_000.unk_030.x = 0.8 - (SINS(sp22) * arg1->unk_4A0);
-        arg0->unk_000.unk_030.y = (SINS(sp22) * arg1->unk_4A0) + 0.8;
-        arg0->unk_000.unk_030.z = 0.8 - (SINS(sp22) * arg1->unk_4A0);
+        arg0->unk_000.scale.x = 0.8 - (SINS(sp22) * arg1->unk_4A0);
+        arg0->unk_000.scale.y = (SINS(sp22) * arg1->unk_4A0) + 0.8;
+        arg0->unk_000.scale.z = 0.8 - (SINS(sp22) * arg1->unk_4A0);
     }
 
     if (arg1->unk_4A0 <= 0.01f) {
         if (temp_a0->unk_56 == 0) {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 1.0f, 1.0f, 1.0f);
         } else {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 0.8f, 0.8f, 0.8f);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 0.8f, 0.8f, 0.8f);
         }
         BattleScene_ResetParticipantModelFlags(arg1);
     }
@@ -868,14 +868,14 @@ void BattleAnim_StatusIdleCase16Sub1(Battler* arg0, Battler* arg1) {
 
     if (ptr->unk_56 == 0) {
         temp_fs0 = (1.0f - Strip400_GetTailFadeRatio()) * 0.6f;
-        BattleAnim_ApproachF(&arg0->unk_000.unk_030.x, 1.0f - temp_fs0, 0.5f);
-        BattleAnim_ApproachF(&arg0->unk_000.unk_030.y, 1.0f + temp_fs0, 0.5f);
-        BattleAnim_ApproachF(&arg0->unk_000.unk_030.z, 1.0f - temp_fs0, 0.5f);
+        BattleAnim_ApproachF(&arg0->unk_000.scale.x, 1.0f - temp_fs0, 0.5f);
+        BattleAnim_ApproachF(&arg0->unk_000.scale.y, 1.0f + temp_fs0, 0.5f);
+        BattleAnim_ApproachF(&arg0->unk_000.scale.z, 1.0f - temp_fs0, 0.5f);
     } else {
         temp_fs0 = (1.0f - Strip400_GetTailFadeRatio()) * 0.3f;
-        BattleAnim_ApproachF(&arg0->unk_000.unk_030.x, 0.8 - temp_fs0, 0.5f);
-        BattleAnim_ApproachF(&arg0->unk_000.unk_030.y, temp_fs0 + 0.8, 0.5f);
-        BattleAnim_ApproachF(&arg0->unk_000.unk_030.z, 0.8 - temp_fs0, 0.5f);
+        BattleAnim_ApproachF(&arg0->unk_000.scale.x, 0.8 - temp_fs0, 0.5f);
+        BattleAnim_ApproachF(&arg0->unk_000.scale.y, temp_fs0 + 0.8, 0.5f);
+        BattleAnim_ApproachF(&arg0->unk_000.scale.z, 0.8 - temp_fs0, 0.5f);
     }
 }
 
@@ -900,13 +900,13 @@ void BattleAnim_StatusIdleCase10Sub1(Battler* arg0, Battler* arg1) {
     f32 sp20;
 
     arg1->unk_4C0++;
-    sp20 = TerrainGrid_SampleHeightAndSlope(arg0->unk_000.unk_024.x, arg0->unk_000.unk_024.z, &sp24);
-    arg0->unk_000.unk_024.y = BattleScene_GetParticipantModelHeight(arg1) + sp20;
-    arg0->unk_000.unk_01E.x = (s16)sp24 * 0xB6;
+    sp20 = TerrainGrid_SampleHeightAndSlope(arg0->unk_000.position.x, arg0->unk_000.position.z, &sp24);
+    arg0->unk_000.position.y = BattleScene_GetParticipantModelHeight(arg1) + sp20;
+    arg0->unk_000.rotation.x = (s16)sp24 * 0xB6;
 
     if (arg1->unk_4C0 == 0x12C) {
-        arg0->unk_000.unk_024.y = BattleScene_GetParticipantModelHeight(arg1);
-        arg0->unk_000.unk_01E.x = 0;
+        arg0->unk_000.position.y = BattleScene_GetParticipantModelHeight(arg1);
+        arg0->unk_000.rotation.x = 0;
         BattleScene_ResetParticipantModelFlags(arg1);
     }
 }
@@ -1031,8 +1031,8 @@ void BattleAnim_UpdateSecondarySwayPhysics(Battler* arg0, Battler* arg1, UNUSED 
     sp2C.y = arg1->unk_4D8.y;
     arg1->unk_4D8.x = 0.0f;
 
-    BattleAnim_Vec3fSetPolarXZ(&sp2C, arg1->unk_4D8.z, arg0->unk_000.unk_01E.y + 0x4000);
-    Vec3f_AddInPlace(&arg0->unk_000.unk_024, &sp2C);
+    BattleAnim_Vec3fSetPolarXZ(&sp2C, arg1->unk_4D8.z, arg0->unk_000.rotation.y + 0x4000);
+    Vec3f_AddInPlace(&arg0->unk_000.position, &sp2C);
 }
 
 void BattleAnim_SecondaryStatusCaseBSub0(UNUSED Battler* arg0, Battler* arg1) {
@@ -1044,9 +1044,9 @@ void BattleAnim_SecondaryStatusCaseBSub0(UNUSED Battler* arg0, Battler* arg1) {
 
 void BattleAnim_SecondaryStatusCaseBSub1(Battler* arg0, Battler* arg1) {
     BattleAnim_UpdateSecondarySwayPhysics(arg0, arg1, 0, 0, 0x2E36);
-    if (arg1->unk_000.unk_024.y < BattleScene_GetParticipantModelHeight(arg1)) {
+    if (arg1->unk_000.position.y < BattleScene_GetParticipantModelHeight(arg1)) {
         arg1->unk_4D8.y = 0.0f;
-        arg1->unk_000.unk_024.y = BattleScene_GetParticipantModelHeight(arg1);
+        arg1->unk_000.position.y = BattleScene_GetParticipantModelHeight(arg1);
         BattleAnim_ClearOwnerSecondaryStatusFlags(arg1);
     }
 }

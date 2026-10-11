@@ -24,7 +24,7 @@ static u32 D_86B0E250[] = {
 
 static unk_D_86002F30* D_86B106B0;
 static GraphNode* D_86B106B4;
-static unk_D_86002F58_004_000 D_86B106B8;
+static DisplayObject D_86B106B8;
 static unk_D_86002F34_00C* D_86B10820;
 static BinArchive* D_86B10824;
 static u8* D_86B10828;
@@ -35,7 +35,7 @@ void MewtwoIntro_DrawOverlay(void) {
 }
 
 void MewtwoIntro_InitCamera(void) {
-    D_86B10820 = D_86B106B4->unk_0C;
+    D_86B10820 = D_86B106B4->children;
     Vec3f_SetComponentsDuplicate(&D_86B10820->unk_60.at, 0.0f, 0.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&D_86B10820->unk_60.eye, 0.0f, 0.0f, 200.0f);
     D_86B10820->unk_24.near = 16.0f;
@@ -86,11 +86,11 @@ void MewtwoIntro_RenderFrame(void) {
 s32 MewtwoIntro_UpdateFade(void) {
     s32 var_v0;
 
-    if ((D_86B106B8.unk_040.unk_08 >> 0x10) >= 0x5F) {
+    if ((D_86B106B8.transformAnim.frameFixed >> 0x10) >= 0x5F) {
         Model_SetMaterialColor(&D_86B106B8, 0, 0, 0, D_86B1082C += 0x14);
     }
 
-    if ((D_86B106B8.unk_040.unk_08 >> 0x10) == 0x64) {
+    if ((D_86B106B8.transformAnim.frameFixed >> 0x10) == 0x64) {
         StageContext_SetClearColor(1);
         StageFade_StartFromTransparent(3);
     }
@@ -132,7 +132,7 @@ void MewtwoIntro_InitScene(void) {
     D_86B106B0 = Model_LoadByArchiveIndex(0xD6);
     Model_InitDisplayObject(&D_86B106B8, 0, 0xD6, D_86B106B0->unk_08->unk_00[0]);
     ModelAnim_SetAnimation(&D_86B106B8, 1);
-    Vec3f_SetComponentsDuplicate(&D_86B106B8.unk_024, 0.0f, 0.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&D_86B106B8.position, 0.0f, 0.0f, 0.0f);
     D_86B1082C = 0;
 }
 

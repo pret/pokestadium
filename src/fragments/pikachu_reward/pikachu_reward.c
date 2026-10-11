@@ -27,7 +27,7 @@ static GraphNode* D_83202014;
 static unk_D_86002F30* D_83202018;
 static char** D_8320201C;
 static char** D_83202020;
-static unk_D_86002F58_004_000 D_83202028[4];
+static DisplayObject D_83202028[4];
 static unk_D_832025C8 D_832025C8;
 static unk_D_832027C8 D_832027C8;
 
@@ -42,11 +42,11 @@ static u32 D_83201F5C[] = {
     &D_800AC840, 0x06000000, 0x06000000,    0x06000000, 0x06000000, 0x01000000,
 };
 
-s32 PikachuReward_PositionSurfingPikachuModel(s32 arg0, unk_D_86002F58_004_000* arg1) {
+s32 PikachuReward_PositionSurfingPikachuModel(s32 arg0, DisplayObject* arg1) {
     if (arg0 == 2) {
-        arg1->unk_01E.z -= 0x80;
-        arg1->unk_024.x = D_83202028->unk_024.x;
-        arg1->unk_024.y = D_83202028->unk_024.y + 70.0f;
+        arg1->rotation.z -= 0x80;
+        arg1->position.x = D_83202028->position.x;
+        arg1->position.y = D_83202028->position.y + 70.0f;
     }
     return 0;
 }
@@ -157,7 +157,7 @@ s32 PikachuReward_CountKnownMoves(void) {
 void PikachuReward_UpdateLeadPikachuAnimation(void) {
     static s32 D_83202004 = 0;
 
-    if ((D_83202028[0].unk_040.unk_00 != 0xA) && (D_83202028[0].unk_040.unk_00 != 5)) {
+    if ((D_83202028[0].transformAnim.animationId != 0xA) && (D_83202028[0].transformAnim.animationId != 5)) {
         D_83202004++;
         if (D_83202004 == 0x3C) {
             D_83202004 = 0;
@@ -166,9 +166,9 @@ void PikachuReward_UpdateLeadPikachuAnimation(void) {
         }
     }
 
-    if ((D_83202028[0].unk_040.unk_00 != 0) && (ModelAnim_IsFinished(&D_83202028[0]) != 0)) {
+    if ((D_83202028[0].transformAnim.animationId != 0) && (ModelAnim_IsFinished(&D_83202028[0]) != 0)) {
         if (D_83201F50 != 0) {
-            D_83202028[0].unk_000.unk_01 &= ~1;
+            D_83202028[0].node.flags &= ~1;
         } else {
             ModelAnim_SetAnimation(&D_83202028[0], 0);
         }
@@ -177,35 +177,35 @@ void PikachuReward_UpdateLeadPikachuAnimation(void) {
 
 void PikachuReward_UpdateFollowerVisibility(void) {
     if (D_83201F54 == -1) {
-        D_83202028[1].unk_000.unk_01 &= ~1;
-        D_83202028[2].unk_000.unk_01 &= ~1;
-        D_83202028[3].unk_000.unk_01 &= ~1;
+        D_83202028[1].node.flags &= ~1;
+        D_83202028[2].node.flags &= ~1;
+        D_83202028[3].node.flags &= ~1;
         return;
     }
 
     switch (D_83201F54) {
         case 0x0:
-            D_83202028[1].unk_000.unk_01 |= 1;
+            D_83202028[1].node.flags |= 1;
             break;
 
         case 0x8:
-            D_83202028[2].unk_000.unk_01 |= 1;
+            D_83202028[2].node.flags |= 1;
             break;
 
         case 0x10:
-            D_83202028[3].unk_000.unk_01 |= 1;
+            D_83202028[3].node.flags |= 1;
             break;
 
         case 0x46:
-            D_83202028[1].unk_000.unk_01 &= ~1;
+            D_83202028[1].node.flags &= ~1;
             break;
 
         case 0x4E:
-            D_83202028[2].unk_000.unk_01 &= ~1;
+            D_83202028[2].node.flags &= ~1;
             break;
 
         case 0x56:
-            D_83202028[3].unk_000.unk_01 &= ~1;
+            D_83202028[3].node.flags &= ~1;
             break;
     }
 
@@ -296,7 +296,7 @@ void PikachuReward_ShowTextWaitForA(char* arg0, s32 arg1) {
         BgStage_AdvanceFrame();
     } while (!BTN_IS_PRESSED(gPlayer1Controller, BTN_A));
 
-    Audio_PlaySoundEffectById(1);
+    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     D_83201F58 = arg0;
 }
 
@@ -338,7 +338,7 @@ s32 PikachuReward_ConfirmYesNoPrompt(char* arg0) {
     while (var_s2 != 0) {
         Controller_PollInputs();
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP | BTN_DDOWN)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             var_s1 ^= 1;
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
             var_s2 = 0;
@@ -379,9 +379,9 @@ s32 PikachuReward_ConfirmYesNoPrompt(char* arg0) {
     }
 
     if (temp_s3 != 0) {
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     } else {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
     return temp_s3;
 }
@@ -398,7 +398,7 @@ s32 PikachuReward_SelectMoveToForget(char* arg0) {
         Controller_PollInputs();
 
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             var_s0--;
             if (var_s0 < 0) {
                 var_s0 = 3;
@@ -406,7 +406,7 @@ s32 PikachuReward_SelectMoveToForget(char* arg0) {
         }
 
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             var_s0++;
             if (var_s0 >= 4) {
                 var_s0 = 0;
@@ -414,15 +414,15 @@ s32 PikachuReward_SelectMoveToForget(char* arg0) {
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
             if ((D_832027C8.unk_04.unk_09[var_s0] == 0xF) || (D_832027C8.unk_04.unk_09[var_s0] == 0x13) ||
                 (D_832027C8.unk_04.unk_09[var_s0] == 0x46) || (D_832027C8.unk_04.unk_09[var_s0] == 0x94)) {
-                Audio_PlaySoundEffectById(8);
+                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
             } else {
                 var_s4 = 0;
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             }
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
             var_s4 = 0;
             var_s0 = -1;
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
 
         PikachuReward_RenderFrame(0);
@@ -483,7 +483,7 @@ s32 PikachuReward_SelectMoveToForget(char* arg0) {
 
 void PikachuReward_ShowDeclinedEnding(void) {
     PikachuReward_ScrollTextIn(Text_GetString(NULL, 0, D_83202020, 4));
-    D_83202028->unk_01E.y = -0x800;
+    D_83202028->rotation.y = -0x800;
     ModelAnim_SetAnimation(D_83202028, 5);
     ModelAnim_SetEventTrack(D_83202028, 0);
     D_83201F50 = 1;
@@ -507,15 +507,15 @@ void PikachuReward_ShowSuccessEnding(void) {
 
 void PikachuReward_PlayIntroCamera(void) {
     s32 i;
-    unk_D_86002F34_00C* temp_s1 = D_83202010->unk_0C;
+    unk_D_86002F34_00C* temp_s1 = D_83202010->children;
 
-    D_83202028->unk_01E.y = 0x1000;
+    D_83202028->rotation.y = 0x1000;
 
     for (i = 0; i < 120; i++) {
         Controller_PollInputs();
         temp_s1->unk_60.at.y = 0x320 - ((i * 0x1E0) / 120);
         temp_s1->unk_60.eye.y = 0x320 - ((i * 0x1E0) / 120);
-        D_83202028->unk_01E.y += 0x200;
+        D_83202028->rotation.y += 0x200;
         PikachuReward_RenderFrame(0);
         BgStage_AdvanceFrame();
     }
@@ -718,14 +718,14 @@ void PikachuReward_RunSequence(void) {
     StageLoader_RunFrames(2);
 }
 
-void PikachuReward_SetupFollowerModel(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, s16 arg3) {
+void PikachuReward_SetupFollowerModel(DisplayObject* arg0, s16 arg1, s16 arg2, s16 arg3) {
     Model_InitDisplayObject(arg0, 0, 0, D_83202014);
     ModelAnim_BindTransformCurve(arg0, 0, D_8C2011C4, 0x10000);
-    arg0->unk_000.unk_01 &= ~1;
-    Vec3f_SetComponentsDuplicate(&arg0->unk_030, 1.5f, 1.5f, 1.5f);
-    arg0->unk_024.x = arg1;
-    arg0->unk_024.y = arg2;
-    arg0->unk_01E.z = arg3;
+    arg0->node.flags &= ~1;
+    Vec3f_SetComponentsDuplicate(&arg0->scale, 1.5f, 1.5f, 1.5f);
+    arg0->position.x = arg1;
+    arg0->position.y = arg2;
+    arg0->rotation.z = arg3;
 }
 
 void PikachuReward_SetupScene(void) {
@@ -744,9 +744,9 @@ void PikachuReward_SetupScene(void) {
     }
 
     Model_InitDisplayObject(&D_83202028[0], 0, 0, D_83202018->unk_08->unk_00[0]);
-    Vec3f_SetComponentsDuplicate(&D_83202028[0].unk_030, 16.0f, 16.0f, 16.0f);
+    Vec3f_SetComponentsDuplicate(&D_83202028[0].scale, 16.0f, 16.0f, 16.0f);
     ModelAnim_SetAnimation(&D_83202028[0], 0);
-    D_83202028->unk_000.unk_02 &= ~0x40;
+    D_83202028->node.renderFlags &= ~0x40;
     PikachuReward_SetupFollowerModel(&D_83202028[1], -0x50, 0x17C, 0x1800);
     PikachuReward_SetupFollowerModel(&D_83202028[2], 0, 0x17C, 0);
     PikachuReward_SetupFollowerModel(&D_83202028[3], 0x50, 0x17C, -0x1800);

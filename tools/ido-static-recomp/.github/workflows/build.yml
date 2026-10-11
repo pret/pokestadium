@@ -1,0 +1,137 @@
+name: Recompile ido and publish releases
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [
+          {
+            name: linux,
+            runner: ubuntu-22.04
+          },
+          {
+            name: macos,
+            runner: macos-latest
+          },
+          {
+            name: windows,
+            runner: windows-latest
+          },
+          {
+            name: linux-arm,
+            runner: ubuntu-22.04
+          }
+        ]
+        ido: [5.3, 7.1]
+
+    name: Recompiling ido ${{ matrix.ido }} for ${{ matrix.os.name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Ubuntu
+      - name: Install dependencies (Linux)
+        shell: bash
+        if: matrix.os.name == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Build recomp binary (Linux)
+        shell: bash
+        if: matrix.os.name == 'linux'
+        run: |
+          make -j $(nproc) RELEASE=1 setup
+
+      - name: Run the build script (Linux)
+        shell: bash
+        if: matrix.os.name == 'linux'
+        run: |
+          make -j $(nproc) RELEASE=1 VERSION=${{ matrix.ido }}
+
+      - name: Install dependencies (Linux ARM64)
+        shell: bash
+        if: matrix.os.name == 'linux-arm'
+        run: |
+          sudo apt update
+          sudo apt install gcc-aarch64-linux-gnu
+
+      - name: Build recomp binary (Linux ARM64)
+        shell: bash
+        if: matrix.os.name == 'linux-arm'
+        run: |
+          make -j $(nproc) RELEASE=1 setup
+
+      - name: Run the build script (Linux)
+        shell: bash
+        if: matrix.os.name == 'linux-arm'
+        run: |
+          make -j $(nproc) RELEASE=1 VERSION=${{ matrix.ido }} CC=aarch64-linux-gnu-gcc STRIP=aarch64-linux-gnu-strip
+
+      # MacOS
+      - name: Install dependencies (MacOS)
+        shell: bash
+        if: matrix.os.name == 'macos'
+        run: |
+          brew install make
+
+      - name: Build recomp binary (MacOS)
+        shell: bash
+        if: matrix.os.name == 'macos'
+        run: |
+          make -j $(nproc) RELEASE=1 setup
+      - name: Run the build script (MacOS)
+        shell: bash
+        if: matrix.os.name == 'macos'
+        run: |
+          make -j $(nproc) RELEASE=1 VERSION=${{ matrix.ido }} TARGET=universal
+
+      # Windows
+      - name: Install dependencies (Windows)
+        uses: msys2/setup-msys2@v2
+        if: matrix.os.name == 'windows'
+        with:
+          install: |-
+            gcc
+            mingw-w64-x86_64-gcc
+            make
+
+      - name: Build recomp binary (Windows)
+        shell: msys2 {0}
+        if: matrix.os.name == 'windows'
+        run: |-
+          make --jobs RELEASE=1 setup
+
+      - name: Run the build script (Windows)
+        shell: cmd
+        if: matrix.os.name == 'windows'
+        run: |-
+          set MSYSTEM=MSYS
+          msys2 -c 'make --jobs RELEASE=1 VERSION=${{ matrix.ido }}'
+
+      # Archive
+      - name: Create release archive
+        shell: bash
+        run: |
+          cd build/${{ matrix.ido }}/out
+          tar -czvf ../../../ido-${{ matrix.ido }}-recomp-${{ matrix.os.name }}.tar.gz *
+
+      - name: Upload archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ido-${{ matrix.ido }}-recomp-${{ matrix.os.name }}
+          path: |
+            ido-${{ matrix.ido }}-recomp-${{ matrix.os.name }}.tar.gz
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ido-${{ matrix.ido }}-recomp-${{ matrix.os.name }}.tar.gz

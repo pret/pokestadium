@@ -33,7 +33,7 @@ void func_8690232C(void) {
 }
 
 void GalleryCamera_InitFreeView(void) {
-    D_87906054 = D_87906050->unk_00.unk_0C;
+    D_87906054 = D_87906050->node.children;
     D_8690B600 = 0;
     D_8690B602 = 0;
     D_8690B604 = GalleryCamera_ComputeZoomDistance(4.0f);

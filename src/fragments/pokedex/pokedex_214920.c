@@ -33,11 +33,11 @@ static char** D_888267A4;
 static char** D_888267A8;
 static char** D_888267AC;
 static char** D_888267B0;
-static unk_D_86002F58_004_000 D_888267B8;
+static DisplayObject D_888267B8;
 static unk_func_8001B1FC* D_88826920;
 static unk_func_80007444* D_88826924;
 static unk_func_80007444* D_88826928;
-static unk_D_86002F58_004_000_010* D_8882692C;
+static ModelLoadContext* D_8882692C;
 static s32 D_88826930;
 static s32 D_88826934;
 static s32 D_88826938;
@@ -6131,10 +6131,10 @@ s32 Pokedex_ShowEntry(void) {
         Input_ResetRepeatState();
         if ((gPlayer1Controller->buttonPressed & 0x4000) && (Cry_IsPlaying() == 0)) {
             var_s1 = 2;
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         } else if ((gPlayer1Controller->buttonPressed & 0x8000) && (Cry_IsPlaying() == 0)) {
             var_s1 = 1;
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         }
         GeoRender_AdvanceFrameCounter();
         BgStage_DrawFrame();
@@ -6213,7 +6213,7 @@ s32 Pokedex_ShowAreaMapScreen(void) {
         BgStage_AdvanceFrame();
     }
 
-    Audio_PlaySoundEffectById(3);
+    Audio_PlaySoundEffectById(SFX_MENU_BACK);
     Pokedex_ExitAreaMapScreen();
     return var_s0;
 }

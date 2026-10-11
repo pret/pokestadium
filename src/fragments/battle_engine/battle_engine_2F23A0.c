@@ -25,7 +25,7 @@ BattleMon* BattleScene_GetParticipantSessionMon(Battler* arg0) {
 s32 BattleScene_IsPartnerPikachu(Battler* arg0) {
     BattleMon* temp_v0 = BattleScene_GetParticipantSessionMon(arg0);
 
-    if ((arg0->unk_000.unk_01A == 0x19) && (temp_v0->unk_52 & 0x80)) {
+    if ((arg0->unk_000.objectType == 0x19) && (temp_v0->unk_52 & 0x80)) {
         return 1;
     }
     return 0;
@@ -49,41 +49,41 @@ f32 BattleScene_GetParticipantEyeHeight(Battler* arg0) {
 
 void BattleScene_PositionParticipantModel(Battler* arg0) {
     if (BattleScene_GetParticipantSideIndex(arg0) == 0) {
-        if (arg0->unk_000.unk_01A == 0x82) {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-        } else if ((arg0->unk_000.unk_01A == 3) || (arg0->unk_000.unk_01A == 0x83)) {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, -175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-        } else if (arg0->unk_000.unk_01A == 0x5F) {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 7.5000005f);
+        if (arg0->unk_000.objectType == 0x82) {
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
+        } else if ((arg0->unk_000.objectType == 3) || (arg0->unk_000.objectType == 0x83)) {
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, -175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
+        } else if (arg0->unk_000.objectType == 0x5F) {
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 7.5000005f);
         } else {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, -150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, -150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
         }
-    } else if ((arg0->unk_000.unk_01A == 0x82) || (arg0->unk_000.unk_01A == 0x5F)) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, 225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-    } else if ((arg0->unk_000.unk_01A == 3) || (arg0->unk_000.unk_01A == 0x83)) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, 175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
+    } else if ((arg0->unk_000.objectType == 0x82) || (arg0->unk_000.objectType == 0x5F)) {
+        Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, 225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
+    } else if ((arg0->unk_000.objectType == 3) || (arg0->unk_000.objectType == 0x83)) {
+        Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, 175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
     } else {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_024, 150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_000.position, 150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
     }
 }
 
 f32 BattleScene_GetParticipantModelXOffset(Battler* arg0) {
     if (BattleScene_GetParticipantSideIndex(arg0) == 0) {
-        if ((arg0->unk_000.unk_01A == 0x82) || (arg0->unk_000.unk_01A == 0x5F)) {
+        if ((arg0->unk_000.objectType == 0x82) || (arg0->unk_000.objectType == 0x5F)) {
             return -200.0f;
         }
 
-        if ((arg0->unk_000.unk_01A == 3) || (arg0->unk_000.unk_01A == 0x83)) {
+        if ((arg0->unk_000.objectType == 3) || (arg0->unk_000.objectType == 0x83)) {
             return -175.0f;
         }
         return -150.0f;
     }
 
-    if ((arg0->unk_000.unk_01A == 0x82) || (arg0->unk_000.unk_01A == 0x5F)) {
+    if ((arg0->unk_000.objectType == 0x82) || (arg0->unk_000.objectType == 0x5F)) {
         return 200.0f;
     }
 
-    if ((arg0->unk_000.unk_01A == 3) || (arg0->unk_000.unk_01A == 0x83)) {
+    if ((arg0->unk_000.objectType == 3) || (arg0->unk_000.objectType == 0x83)) {
         return 175.0f;
     }
 
@@ -91,9 +91,9 @@ f32 BattleScene_GetParticipantModelXOffset(Battler* arg0) {
 }
 
 void BattleScene_SetParticipantModelScale(Battler* arg0, f32 arg1) {
-    arg0->unk_000.unk_030.x = arg1;
-    arg0->unk_000.unk_030.y = arg1;
-    arg0->unk_000.unk_030.z = arg1;
+    arg0->unk_000.scale.x = arg1;
+    arg0->unk_000.scale.y = arg1;
+    arg0->unk_000.scale.z = arg1;
 }
 
 s32 BattleScene_GetSelectedSideTeamSize(Battler* arg0) {
@@ -144,7 +144,7 @@ s32 Battle_GetSideAnimTableFieldC(Battler* arg0) {
 }
 
 f32 Battle_GetScaledHeightY(Battler* arg0) {
-    return ((BattleScene_GetParticipantModelWidth(arg0) * 2) / 50.0f) * arg0->unk_000.unk_030.y;
+    return ((BattleScene_GetParticipantModelWidth(arg0) * 2) / 50.0f) * arg0->unk_000.scale.y;
 }
 
 f32 Battle_GetScaleRatio(Battler* arg0) {
@@ -156,15 +156,15 @@ s16 BattleScene_GetActiveAnimRowId(Battler* arg0) {
 }
 
 void BattleScene_GetParticipantModelBoundsScaled(Battler* arg0, Vec3f* arg1) {
-    arg1->x = ((BattleScene_GetParticipantModelRadius(arg0) * 2) / 50.0f) * arg0->unk_000.unk_030.x;
-    arg1->y = ((BattleScene_GetParticipantModelWidth(arg0) * 2) / 50.0f) * arg0->unk_000.unk_030.y;
-    arg1->z = ((BattleScene_GetParticipantModelRadius(arg0) * 2) / 50.0f) * arg0->unk_000.unk_030.x;
+    arg1->x = ((BattleScene_GetParticipantModelRadius(arg0) * 2) / 50.0f) * arg0->unk_000.scale.x;
+    arg1->y = ((BattleScene_GetParticipantModelWidth(arg0) * 2) / 50.0f) * arg0->unk_000.scale.y;
+    arg1->z = ((BattleScene_GetParticipantModelRadius(arg0) * 2) / 50.0f) * arg0->unk_000.scale.x;
 }
 
 void BattleScene_GetParticipantModelRotation(Battler* arg0, Vec3s* arg1) {
-    arg1->x = arg0->unk_000.unk_01E.x;
-    arg1->y = arg0->unk_000.unk_01E.y;
-    arg1->z = arg0->unk_000.unk_01E.z;
+    arg1->x = arg0->unk_000.rotation.x;
+    arg1->y = arg0->unk_000.rotation.y;
+    arg1->z = arg0->unk_000.rotation.z;
 }
 
 u16 Battle_GetActiveMonHp(Battler* arg0) {
@@ -178,45 +178,45 @@ s16 BattleScene_GetParticipantFacingAngle(Battler* arg0) {
 }
 
 s32 BattleAnim_GetSpeciesBySideIndex(s32 arg0) {
-    return D_84390010[arg0]->unk_000.unk_01A;
+    return D_84390010[arg0]->unk_000.objectType;
 }
 
 s32 BattleAnim_GetOwnerSpecies(Battler* arg0) {
-    return arg0->unk_000.unk_01A;
+    return arg0->unk_000.objectType;
 }
 
 u8 BattleScene_IsParticipantModelVisible(Battler* arg0) {
-    s32 ret = arg0->unk_000.unk_000.unk_01 & 1;
+    s32 ret = arg0->unk_000.node.flags & 1;
     return ret;
 }
 
 void BattleScene_GetParticipantModelPosition(Battler* arg0, Vec3f* arg1) {
-    arg1->x = arg0->unk_000.unk_024.x;
-    arg1->y = arg0->unk_000.unk_024.y;
-    arg1->z = arg0->unk_000.unk_024.z;
+    arg1->x = arg0->unk_000.position.x;
+    arg1->y = arg0->unk_000.position.y;
+    arg1->z = arg0->unk_000.position.z;
 }
 
 void BattleAnim_GetOwnerDefaultAnchorPosition(Battler* arg0, Vec3f* arg1) {
     f32 var_fs0 = 0.0f;
 
-    if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, &D_843845F0, 1) != 0) {
+    if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, &D_843845F0, 1) != 0) {
         var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) / 1.5f;
-    } else if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, &D_843845F4, 1) != 0) {
+    } else if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, &D_843845F4, 1) != 0) {
         var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) * 0.5f;
-    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, &D_843845F8, 1) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.objectType, &D_843845F8, 1) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
         var_fs0 = 2.0f * BattleAnim_GetOwnerModelHeight(arg0);
-    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, D_843845FC, 2) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.objectType, D_843845FC, 2) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
         var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 
     if (BattleScene_GetParticipantModelHeight(arg0) != 0.0f) {
-        arg1->x = arg0->unk_000.unk_024.x;
-        arg1->y = arg0->unk_000.unk_024.y + var_fs0;
-        arg1->z = arg0->unk_000.unk_024.z;
+        arg1->x = arg0->unk_000.position.x;
+        arg1->y = arg0->unk_000.position.y + var_fs0;
+        arg1->z = arg0->unk_000.position.z;
     } else {
-        arg1->x = arg0->unk_000.unk_024.x;
-        arg1->y = BattleAnim_GetOwnerModelHeight(arg0) + arg0->unk_000.unk_024.y + var_fs0;
-        arg1->z = arg0->unk_000.unk_024.z;
+        arg1->x = arg0->unk_000.position.x;
+        arg1->y = BattleAnim_GetOwnerModelHeight(arg0) + arg0->unk_000.position.y + var_fs0;
+        arg1->z = arg0->unk_000.position.z;
     }
 
     if (arg1->y < 0.0f) {
@@ -226,18 +226,18 @@ void BattleAnim_GetOwnerDefaultAnchorPosition(Battler* arg0, Vec3f* arg1) {
 
 void BattleScene_ComputeParticipantModelOffset(Battler* arg0, Vec3f* arg1) {
     if (BattleScene_GetParticipantSideIndex(arg0) == 0) {
-        if (arg0->unk_000.unk_01A == 0x82) {
+        if (arg0->unk_000.objectType == 0x82) {
             Vec3f_SetComponentsDuplicate(arg1, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-        } else if ((arg0->unk_000.unk_01A == 3) || (arg0->unk_000.unk_01A == 0x83)) {
+        } else if ((arg0->unk_000.objectType == 3) || (arg0->unk_000.objectType == 0x83)) {
             Vec3f_SetComponentsDuplicate(arg1, -175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-        } else if (arg0->unk_000.unk_01A == 0x5F) {
+        } else if (arg0->unk_000.objectType == 0x5F) {
             Vec3f_SetComponentsDuplicate(arg1, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 7.5000005f);
         } else {
             Vec3f_SetComponentsDuplicate(arg1, -150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
         }
-    } else if ((arg0->unk_000.unk_01A == 0x82) || (arg0->unk_000.unk_01A == 0x5F)) {
+    } else if ((arg0->unk_000.objectType == 0x82) || (arg0->unk_000.objectType == 0x5F)) {
         Vec3f_SetComponentsDuplicate(arg1, 225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-    } else if ((arg0->unk_000.unk_01A == 3) || (arg0->unk_000.unk_01A == 0x83)) {
+    } else if ((arg0->unk_000.objectType == 3) || (arg0->unk_000.objectType == 0x83)) {
         Vec3f_SetComponentsDuplicate(arg1, 175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
     } else {
         Vec3f_SetComponentsDuplicate(arg1, 150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
@@ -245,23 +245,23 @@ void BattleScene_ComputeParticipantModelOffset(Battler* arg0, Vec3f* arg1) {
 }
 
 void BattleScene_GetParticipantAuxiliaryModelPosition(Battler* arg0, Vec3f* arg1) {
-    arg1->x = arg0->unk_4EC.unk_024.x;
-    arg1->y = arg0->unk_4EC.unk_024.y + 2.5f;
-    arg1->z = arg0->unk_4EC.unk_024.z;
+    arg1->x = arg0->unk_4EC.position.x;
+    arg1->y = arg0->unk_4EC.position.y + 2.5f;
+    arg1->z = arg0->unk_4EC.position.z;
 }
 
 f32 BattleAnim_GetOwnerModelHeight(Battler* arg0) {
     if (arg0->unk_4B4 == 0x10) {
         return BattleScene_GetParticipantModelWidth(arg0);
     }
-    return BattleScene_GetParticipantModelWidth(arg0) * arg0->unk_000.unk_030.y;
+    return BattleScene_GetParticipantModelWidth(arg0) * arg0->unk_000.scale.y;
 }
 
 f32 BattleScene_GetParticipantModelRadiusScaled(Battler* arg0) {
-    return BattleScene_GetParticipantModelRadius(arg0) * arg0->unk_000.unk_030.y;
+    return BattleScene_GetParticipantModelRadius(arg0) * arg0->unk_000.scale.y;
 }
 
-unk_D_86002F58_004_000_004* Battle_GetMoveEffectListEntry(Battler* arg0, s32 arg1) {
+ModelNodeView* Battle_GetMoveEffectListEntry(Battler* arg0, s32 arg1) {
     return arg0->unk_720->unk_14->unk_00[2]->unk_00[arg1];
 }
 
@@ -297,14 +297,14 @@ void Battle_AdvanceSecondaryModelAnimIfFinished(Battler* arg0, Battler* arg1) {
     sp28 = &D_84384570[idx]->unk_AF0;
 
     if (!(sp20->unk_34 & 0x4002)) {
-        if ((BattleAnim_IsSessionBusy(arg0) == 0) && (arg1->unk_000.unk_040.unk_00 != -1) &&
+        if ((BattleAnim_IsSessionBusy(arg0) == 0) && (arg1->unk_000.transformAnim.animationId != -1) &&
             (ModelAnim_IsFinished(&arg1->unk_000) == 1)) {
             if (sp20->unk_34 & 0x200) {
                 ModelAnim_SetAnimation(&arg1->unk_000, sp2C->unk_00);
-            } else if ((sp20->unk_34 & 1) && (BattleScene_ByteArrayContains(arg1->unk_000.unk_01A, D_84384590, 8) != 0)) {
+            } else if ((sp20->unk_34 & 1) && (BattleScene_ByteArrayContains(arg1->unk_000.objectType, D_84384590, 8) != 0)) {
                 ModelAnim_SetAnimation(&arg1->unk_000, sp28->unk_00);
             } else {
-                if (arg1->unk_000.unk_01A == 0x84) {
+                if (arg1->unk_000.objectType == 0x84) {
                     idx = BattleAnim_RandomRange(5);
                     ModelAnim_SetAnimation(&arg1->unk_000, idx + 0xE);
                 } else {
@@ -336,14 +336,14 @@ void Battle_ResetModelToIdleAnim(Battler* arg0) {
     idx = BattleScene_GetParticipantSideIndex(arg0);
     sp2C = &D_84384570[idx]->unk_AF0;
 
-    if (!(sp24->unk_34 & 0x4002) && (BattleAnim_IsSessionBusy(arg0) == 0) && (arg0->unk_000.unk_040.unk_00 != -1)) {
+    if (!(sp24->unk_34 & 0x4002) && (BattleAnim_IsSessionBusy(arg0) == 0) && (arg0->unk_000.transformAnim.animationId != -1)) {
         ModelAnim_SetFrame(&arg0->unk_000, 0);
         if (sp24->unk_34 & 0x200) {
             ModelAnim_SetAnimation(&arg0->unk_000, sp30->unk_00);
-        } else if ((sp24->unk_34 & 1) && (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, D_84384590, 8) != 0)) {
+        } else if ((sp24->unk_34 & 1) && (BattleScene_ByteArrayContains(arg0->unk_000.objectType, D_84384590, 8) != 0)) {
             ModelAnim_SetAnimation(&arg0->unk_000, sp2C->unk_00);
         } else {
-            if (arg0->unk_000.unk_01A == 0x84) {
+            if (arg0->unk_000.objectType == 0x84) {
                 ModelAnim_SetAnimation(&arg0->unk_000, BattleAnim_RandomRange(5) + 0xE);
             } else {
                 ModelAnim_SetAnimation(&arg0->unk_000, sp34->unk_00);
@@ -359,7 +359,7 @@ void Battle_ResetModelToIdleAnim(Battler* arg0) {
 void Battle_SetModelToStatusAnim(Battler* arg0) {
     MovePresentationCue* sp1C = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_A80;
 
-    if (arg0->unk_000.unk_040.unk_00 != -1) {
+    if (arg0->unk_000.transformAnim.animationId != -1) {
         ModelAnim_SetFrame(&arg0->unk_000, 0);
         ModelAnim_SetAnimation(&arg0->unk_000, sp1C->unk_00);
     }
@@ -455,15 +455,15 @@ s32 BattleScene_GetParticipantDisplayPlayerNumber(Battler* arg0) {
 
 void BattleScene_ReinitParticipantBodyModel(Battler* arg0, Battler* arg1, s32 arg2, s32 arg3) {
     UNUSED s32 pad;
-    unk_D_86002F58_004_000_004* sp20 = Battle_GetMoveEffectListEntry(arg0, 0);
+    ModelNodeView* sp20 = Battle_GetMoveEffectListEntry(arg0, 0);
 
     BattleScene_GetParticipantSideIndex(arg0);
     ModelRenderer_ClearDisplayObject(&arg1->unk_000);
 
     if (arg0 == D_84390010[0]) {
-        arg1->unk_000.unk_0A6 = 0;
+        arg1->unk_000.effectSlot = 0;
     } else {
-        arg1->unk_000.unk_0A6 = 1;
+        arg1->unk_000.effectSlot = 1;
     }
 
     Model_InitDisplayObject(&arg1->unk_000, 0, arg2, sp20);
@@ -471,33 +471,33 @@ void BattleScene_ReinitParticipantBodyModel(Battler* arg0, Battler* arg1, s32 ar
     ModelAnim_SetFrame(&arg1->unk_000, 0);
     ModelAnim_SetAnimation(&arg1->unk_000, 0);
 
-    if ((arg1->unk_000.unk_01A == 0x32) || (arg1->unk_000.unk_01A == 0x33)) {
-        arg1->unk_000.unk_000.unk_02 &= 0xFFBF;
+    if ((arg1->unk_000.objectType == 0x32) || (arg1->unk_000.objectType == 0x33)) {
+        arg1->unk_000.node.renderFlags &= 0xFFBF;
     } else {
-        arg1->unk_000.unk_000.unk_02 |= 0x40;
+        arg1->unk_000.node.renderFlags |= 0x40;
     }
 
     if (!(arg0->unk_654.unk_34 & 0x200)) {
         if (arg0 == D_84390010[0]) {
             BattleScene_PositionParticipantModel(arg0);
-            arg1->unk_000.unk_01E.y = 0x4000;
+            arg1->unk_000.rotation.y = 0x4000;
         } else {
             BattleScene_PositionParticipantModel(arg0);
-            arg1->unk_000.unk_01E.y = -0x4000;
+            arg1->unk_000.rotation.y = -0x4000;
         }
     }
 }
 
 void BattleScene_ReinitParticipantOwnerModel(Battler* arg0, PresentationState* arg1, s16 arg2) {
-    unk_D_86002F58_004_000_004* sp24;
+    ModelNodeView* sp24;
 
     sp24 = Battle_GetMoveEffectListEntry(arg0, 0);
     ModelRenderer_ClearDisplayObject(&arg1->unk_000);
 
     if (arg0 == D_84390010[0]) {
-        arg1->unk_000.unk_0A6 = 0xFF;
+        arg1->unk_000.effectSlot = 0xFF;
     } else {
-        arg1->unk_000.unk_0A6 = 0xFF;
+        arg1->unk_000.effectSlot = 0xFF;
     }
 
     if (arg0 == D_84390010[0]) {
@@ -508,12 +508,12 @@ void BattleScene_ReinitParticipantOwnerModel(Battler* arg0, PresentationState* a
 
     ModelAnim_SetFrame(&arg1->unk_000, 0);
     ModelAnim_SetAnimation(&arg1->unk_000, 0);
-    arg1->unk_000.unk_000.unk_02 &= ~0x40;
+    arg1->unk_000.node.renderFlags &= ~0x40;
 }
 
 void BattleScene_ReinitParticipantSecondaryModels(Battler* arg0, s16 arg1) {
     s32 i;
-    unk_D_86002F58_004_000_004* sp58;
+    ModelNodeView* sp58;
     unk_D_84390010_168* var_s0;
 
     sp58 = Battle_GetMoveEffectListEntry(arg0, 0);
@@ -523,26 +523,26 @@ void BattleScene_ReinitParticipantSecondaryModels(Battler* arg0, s16 arg1) {
 
         ModelRenderer_ClearDisplayObject(&var_s0->unk_000);
         if (arg0 == D_84390010[0]) {
-            var_s0->unk_000.unk_0A6 = 0xFF;
+            var_s0->unk_000.effectSlot = 0xFF;
         } else {
-            var_s0->unk_000.unk_0A6 = 0xFF;
+            var_s0->unk_000.effectSlot = 0xFF;
         }
 
         Model_InitDisplayObject(&var_s0->unk_000, 0, arg1, sp58);
         ModelAnim_SetFrame(&var_s0->unk_000, 0);
         ModelAnim_SetAnimation(&var_s0->unk_000, 0);
 
-        var_s0->unk_000.unk_000.unk_02 &= ~0x40;
+        var_s0->unk_000.node.renderFlags &= ~0x40;
 
         if (arg0 == D_84390010[0]) {
-            Vec3f_SetComponentsDuplicate(&var_s0->unk_000.unk_024, -150.0f, 0.0f, 0.0f);
-            var_s0->unk_000.unk_01E.y = 0x4000;
+            Vec3f_SetComponentsDuplicate(&var_s0->unk_000.position, -150.0f, 0.0f, 0.0f);
+            var_s0->unk_000.rotation.y = 0x4000;
         } else {
-            Vec3f_SetComponentsDuplicate(&var_s0->unk_000.unk_024, 150.0f, 0.0f, 0.0f);
-            var_s0->unk_000.unk_01E.y = -0x4000;
+            Vec3f_SetComponentsDuplicate(&var_s0->unk_000.position, 150.0f, 0.0f, 0.0f);
+            var_s0->unk_000.rotation.y = -0x4000;
         }
 
-        var_s0->unk_000.unk_000.unk_01 &= ~1;
+        var_s0->unk_000.node.flags &= ~1;
     }
 }
 
@@ -568,7 +568,7 @@ void Battle_LoadOwnerModelForSpecies(Battler* arg0) {
     BattleScene_ReinitParticipantSecondaryModels(arg0, sp26);
     Battle_ResetEventTrack(arg0);
     ptr->unk_34 &= 0x1800;
-    Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 1.0f, 1.0f, 1.0f);
 }
 
 void Battle_LoadOwnerModelForSwitchIn(Battler* arg0) {
@@ -584,12 +584,12 @@ void Battle_LoadOwnerModelForSwitchIn(Battler* arg0) {
     Battle_ResetEventTrack(arg0);
     ptr->unk_2D = 0;
     ptr->unk_34 &= 0x1800;
-    Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 1.0f, 1.0f, 1.0f);
 }
 
 void Battle_ResetOwnerModelToNeutralPlaceholder(Battler* arg0) {
     Model_SetMaterialColor(&arg0->unk_000, 0xFF, 0xFF, 0xFF, arg0->unk_654.unk_2E = 0xFF);
-    arg0->unk_654.unk_BC = arg0->unk_000.unk_01A;
+    arg0->unk_654.unk_BC = arg0->unk_000.objectType;
     BattleScene_ReinitParticipantBodyModel(arg0, arg0, 0x98, 0);
     BattleScene_ReinitParticipantSecondaryModels(arg0, 0x98);
     Battle_ResetEventTrack(arg0);

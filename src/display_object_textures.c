@@ -188,7 +188,7 @@ s32 Fragment_ProcessGeoLayout(MemoryBlock* arg0, Fragment* arg1, arg1_func_80010
     for (i = 0; i < temp_v0->unk_03; i++) {
         temp_v0_2 = process_geo_layout(arg0, temp_v0->unk_08[i]);
 
-        if (temp_v0_2->unk_00.unk_00 == 0xE) {
+        if (temp_v0_2->node.type == 0xE) {
             temp_v0_2->unk_28 = arg1;
             if (arg2.raw != 0) {
                 func_80018C40(temp_v0_2, arg2);
@@ -286,36 +286,36 @@ void PokeIcon_StartThread(void) {
     osStartThread(&D_800ABE10.unk_000);
 }
 
-unk_D_86002F58_004_000_010* PokeIcon_AllocFramebuffers(u32 arg0) {
+ModelLoadContext* PokeIcon_AllocFramebuffers(u32 arg0) {
     s16 i = 1;
-    unk_D_86002F58_004_000_010* temp_v0 = main_pool_alloc(sizeof(unk_D_86002F58_004_000_010), 1);
+    ModelLoadContext* temp_v0 = main_pool_alloc(sizeof(ModelLoadContext), 1);
 
-    temp_v0->unk_00 = arg0;
-    temp_v0->unk_01 = 0;
-    temp_v0->unk_02 = 0;
-    temp_v0->unk_24 = 0;
-    temp_v0->unk_04[0] = NULL;
-    temp_v0->unk_04[1] = NULL;
-    temp_v0->unk_18 = NULL;
-    temp_v0->unk_2C.raw = 0;
+    temp_v0->flags = arg0;
+    temp_v0->pendingLoads = 0;
+    temp_v0->bufferIndex = 0;
+    temp_v0->loadedModel = 0;
+    temp_v0->modelBuffers[0] = NULL;
+    temp_v0->modelBuffers[1] = NULL;
+    temp_v0->backgroundBuffer = NULL;
+    temp_v0->colorVariant.raw = 0;
 
     if (arg0 & 1) {
-        temp_v0->unk_04[0] = main_pool_alloc(0x3C000, 1);
+        temp_v0->modelBuffers[0] = main_pool_alloc(0x3C000, 1);
         if (arg0 & 4) {
-            temp_v0->unk_04[1] = main_pool_alloc(0x3C000, 1);
+            temp_v0->modelBuffers[1] = main_pool_alloc(0x3C000, 1);
         } else if (arg0 & 8) {
             for (i = 1; i < 5; i++) {
-                temp_v0->unk_04[i] = main_pool_alloc(0x3C000, 1);
+                temp_v0->modelBuffers[i] = main_pool_alloc(0x3C000, 1);
             }
         }
     }
 
     if (arg0 & 2) {
-        temp_v0->unk_18 = main_pool_alloc(0x18000, 1);
+        temp_v0->backgroundBuffer = main_pool_alloc(0x18000, 1);
     }
 
-    osCreateMesgQueue(&temp_v0->unk_30, &temp_v0->unk_48, 2);
-    osCreateMesgQueue(&temp_v0->unk_50, &temp_v0->unk_68, 2);
+    osCreateMesgQueue(&temp_v0->modelQueue, &temp_v0->modelMessage, 2);
+    osCreateMesgQueue(&temp_v0->backgroundQueue, &temp_v0->backgroundMessage, 2);
     return temp_v0;
 }
 
@@ -325,36 +325,36 @@ void PokeIcon_OpenModelArchives(void) {
     D_800ABE10.unk_A04.unk_08 = main_pool_alloc(0x28000, 1);
 }
 
-s32 PokeIcon_RequestFrameLoad(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2) {
+s32 PokeIcon_RequestFrameLoad(ModelLoadContext* arg0, u16 arg1, arg1_func_80010CA8 arg2) {
     s32 sp1C;
     sp18_func_800198E4* sp18;
     s32 var_v1;
 
     sp1C = 0;
-    if ((arg0->unk_00 & 1) && !(arg0->unk_01 & 1)) {
+    if ((arg0->flags & 1) && !(arg0->pendingLoads & 1)) {
         sp18 = Util_Malloc(sizeof(sp18_func_800198E4));
         if (sp18 != NULL) {
-            var_v1 = arg0->unk_02;
-            if (arg0->unk_00 & 4) {
+            var_v1 = arg0->bufferIndex;
+            if (arg0->flags & 4) {
                 var_v1 ^= 1;
             }
 
             sp18->unk_00 = 1;
             sp18->unk_02 = arg1 - 1;
-            sp18->unk_04 = &arg0->unk_30;
+            sp18->unk_04 = &arg0->modelQueue;
             sp18->unk_08 = 0;
             sp18->unk_0C = 0;
-            sp18->unk_10 = arg0->unk_04[var_v1];
+            sp18->unk_10 = arg0->modelBuffers[var_v1];
             sp18->unk_14 = 0x3C000;
             sp18->unk_18 = arg2;
 
-            if ((arg0->unk_24 != NULL) && (arg0->unk_24->unk_00 == arg1) && (arg0->unk_2C.raw == sp18->unk_18.raw)) {
+            if ((arg0->loadedModel != NULL) && (arg0->loadedModel->modelId == arg1) && (arg0->colorVariant.raw == sp18->unk_18.raw)) {
                 osSendMesg(sp18->unk_04, sp18, 1);
             } else {
                 osSendMesg(&D_800ABE10.unk_9D0, sp18, 1);
             }
 
-            arg0->unk_01 |= 1;
+            arg0->pendingLoads |= 1;
             sp1C = 1;
         }
     }
@@ -362,60 +362,60 @@ s32 PokeIcon_RequestFrameLoad(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_f
     return sp1C;
 }
 
-s32 PokeIcon_RequestFrameLoadWithVariant(unk_D_86002F58_004_000_010* arg0, u16 arg1, arg1_func_80010CA8 arg2, s16 arg3) {
-    if ((arg0->unk_00 & 8) && !(arg0->unk_01 & 1)) {
-        arg0->unk_02 = arg3;
+s32 PokeIcon_RequestFrameLoadWithVariant(ModelLoadContext* arg0, u16 arg1, arg1_func_80010CA8 arg2, s16 arg3) {
+    if ((arg0->flags & 8) && !(arg0->pendingLoads & 1)) {
+        arg0->bufferIndex = arg3;
         PokeIcon_RequestFrameLoad(arg0, arg1, arg2);
     }
     return 0;
 }
 
-s32 PokeIcon_RequestBackgroundLoad(unk_D_86002F58_004_000_010* arg0, s32 arg1, s32 arg2) {
+s32 PokeIcon_RequestBackgroundLoad(ModelLoadContext* arg0, s32 arg1, s32 arg2) {
     s32 sp1C = 0;
     sp18_func_800198E4* temp_v0;
 
-    if ((arg0->unk_00 & 2) && !(arg0->unk_01 & 2)) {
+    if ((arg0->flags & 2) && !(arg0->pendingLoads & 2)) {
         temp_v0 = Util_Malloc(sizeof(sp18_func_800198E4));
         if (temp_v0 != NULL) {
             temp_v0->unk_00 = 2;
             temp_v0->unk_02 = 0;
-            temp_v0->unk_04 = &arg0->unk_50;
+            temp_v0->unk_04 = &arg0->backgroundQueue;
             temp_v0->unk_08 = arg2;
             temp_v0->unk_0C = arg1;
-            temp_v0->unk_10 = arg0->unk_18;
+            temp_v0->unk_10 = arg0->backgroundBuffer;
             temp_v0->unk_14 = 0x18000;
 
             osSendMesg(&D_800ABE10.unk_9D0, temp_v0, 1);
 
             sp1C = 1;
-            arg0->unk_01 |= 2;
+            arg0->pendingLoads |= 2;
         }
     }
 
     return sp1C;
 }
 
-s32 PokeIcon_ApplyLoadResult(unk_D_86002F58_004_000_010* arg0, sp18_func_800198E4* arg1) {
+s32 PokeIcon_ApplyLoadResult(ModelLoadContext* arg0, sp18_func_800198E4* arg1) {
     s32 sp1C = 0;
 
     switch (arg1->unk_00) {
         case 1:
-            arg0->unk_01 &= ~1;
+            arg0->pendingLoads &= ~1;
             if (arg1->unk_08 != 0) {
-                if (arg0->unk_00 & 4) {
-                    arg0->unk_02 ^= 1;
+                if (arg0->flags & 4) {
+                    arg0->bufferIndex ^= 1;
                 }
-                arg0->unk_24 = arg1->unk_08;
-                arg0->unk_1C = arg1->unk_14;
-                arg0->unk_2C = arg1->unk_18;
+                arg0->loadedModel = arg1->unk_08;
+                arg0->modelSize = arg1->unk_14;
+                arg0->colorVariant = arg1->unk_18;
             }
             sp1C = 1;
             break;
 
         case 2:
-            arg0->unk_01 &= ~2;
-            arg0->unk_28 = arg1->unk_08;
-            arg0->unk_20 = arg1->unk_14;
+            arg0->pendingLoads &= ~2;
+            arg0->loadedBackground = arg1->unk_08;
+            arg0->backgroundSize = arg1->unk_14;
             sp1C = 1;
             break;
     }
@@ -424,39 +424,39 @@ s32 PokeIcon_ApplyLoadResult(unk_D_86002F58_004_000_010* arg0, sp18_func_800198E
     return sp1C;
 }
 
-s32 PokeIcon_PollFrameLoad(unk_D_86002F58_004_000_010* arg0) {
+s32 PokeIcon_PollFrameLoad(ModelLoadContext* arg0) {
     sp18_func_800198E4* sp1C;
     s32 sp18 = 0;
 
-    if (osRecvMesg(&arg0->unk_30, &sp1C, 0) != -1) {
+    if (osRecvMesg(&arg0->modelQueue, &sp1C, 0) != -1) {
         sp18 = PokeIcon_ApplyLoadResult(arg0, sp1C);
     }
 
     return sp18;
 }
 
-s32 PokeIcon_PollBackgroundLoad(unk_D_86002F58_004_000_010* arg0) {
+s32 PokeIcon_PollBackgroundLoad(ModelLoadContext* arg0) {
     OSMesg sp1C;
     s32 sp18 = 0;
 
-    if (osRecvMesg(&arg0->unk_50, &sp1C, 0) != -1) {
+    if (osRecvMesg(&arg0->backgroundQueue, &sp1C, 0) != -1) {
         sp18 = PokeIcon_ApplyLoadResult(arg0, sp1C);
     }
 
     return sp18;
 }
 
-s32 PokeIcon_WaitFrameLoad(unk_D_86002F58_004_000_010* arg0) {
+s32 PokeIcon_WaitFrameLoad(ModelLoadContext* arg0) {
     OSMesg sp1C;
 
-    osRecvMesg(&arg0->unk_30, &sp1C, 1);
+    osRecvMesg(&arg0->modelQueue, &sp1C, 1);
     return PokeIcon_ApplyLoadResult(arg0, sp1C);
 }
 
-s32 PokeIcon_WaitBackgroundLoad(unk_D_86002F58_004_000_010* arg0) {
+s32 PokeIcon_WaitBackgroundLoad(ModelLoadContext* arg0) {
     OSMesg sp1C;
 
-    osRecvMesg(&arg0->unk_50, &sp1C, 1);
+    osRecvMesg(&arg0->backgroundQueue, &sp1C, 1);
     return PokeIcon_ApplyLoadResult(arg0, sp1C);
 }
 

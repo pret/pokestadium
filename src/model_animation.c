@@ -204,47 +204,47 @@ f32 ModelAnim_EvaluateScaleCurve(unk_D_800ABCC0* arg0, s32 arg1) {
     return var_fv1;
 }
 
-typedef union unk_D_86002F58_004_000_040_raw_08 {
+typedef union AnimFixedFrame {
     struct {
-        s16 unk_00;
-        s16 unk_02;
+        s16 whole;
+        s16 fraction; // low 16 bits; signed declaration retained for matching
     };
     s32 raw;
-} unk_D_86002F58_004_000_040_raw_08; // size = 0x4
+} AnimFixedFrame; // size = 0x4
 
-typedef struct unk_D_86002F58_004_000_040_raw {
-    /* 0x00 */ s16 unk_00;
-    /* 0x04 */ unk_D_86002F58_004_000_040_004* unk_04;
-    /* 0x08 */ unk_D_86002F58_004_000_040_raw_08 unk_08;
-    /* 0x0C */ s32 unk_0C;
+typedef struct TransformAnimRaw {
+    /* 0x00 */ s16 animationId;
+    /* 0x04 */ TransformAnimData* data;
+    /* 0x08 */ AnimFixedFrame frameFixed;
+    /* 0x0C */ s32 speedFixed;
     /* 0x10 */ char unk10[0x2];
-    /* 0x12 */ u16 unk_12;
-} unk_D_86002F58_004_000_040_raw; // size >= 0x14
+    /* 0x12 */ u16 lastRenderFrame;
+} TransformAnimRaw; // size >= 0x14
 
-s32 ModelAnim_AdvanceCurveFrame(unk_D_86002F58_004_000_040_raw* arg0, u16 arg1) {
-    unk_D_86002F58_004_000_040_raw_08 spC;
-    unk_D_86002F58_004_000_040_raw_08* ptr;
-    unk_D_86002F58_004_000_040_004* temp_v0;
+s32 ModelAnim_AdvanceCurveFrame(TransformAnimRaw* arg0, u16 arg1) {
+    AnimFixedFrame spC;
+    AnimFixedFrame* ptr;
+    TransformAnimData* temp_v0;
 
     ptr = &spC;
-    temp_v0 = arg0->unk_04;
-    spC.raw = arg0->unk_08.raw;
-    if (arg0->unk_12 != arg1) {
-        spC.raw += arg0->unk_0C;
-        if (arg0->unk_0C >= 0) {
-            if (ptr->unk_00 >= temp_v0->unk_0A) {
-                if (temp_v0->unk_00 & 2) {
-                    ptr->unk_00 = temp_v0->unk_0A - 1;
+    temp_v0 = arg0->data;
+    spC.raw = arg0->frameFixed.raw;
+    if (arg0->lastRenderFrame != arg1) {
+        spC.raw += arg0->speedFixed;
+        if (arg0->speedFixed >= 0) {
+            if (ptr->whole >= temp_v0->endFrame) {
+                if (temp_v0->flags & 2) {
+                    ptr->whole = temp_v0->endFrame - 1;
                 } else {
-                    ptr->unk_00 = temp_v0->unk_06;
+                    ptr->whole = temp_v0->loopStart;
                 }
             }
         } else {
-            if (ptr->unk_00 < temp_v0->unk_06) {
-                if (temp_v0->unk_00 & 2) {
-                    ptr->unk_00 = temp_v0->unk_06;
+            if (ptr->whole < temp_v0->loopStart) {
+                if (temp_v0->flags & 2) {
+                    ptr->whole = temp_v0->loopStart;
                 } else {
-                    ptr->unk_00 = temp_v0->unk_0A - 1;
+                    ptr->whole = temp_v0->endFrame - 1;
                 }
             }
         }
@@ -257,30 +257,30 @@ void ModelAnim_ResetCurveContext(void) {
     D_800ABCF0 = -1;
 }
 
-void ModelAnim_BeginCurveContext(unk_D_86002F58_004_000_040* arg0, u16 arg1, s32 arg2) {
-    unk_D_86002F58_004_000_040_004* temp_s1;
+void ModelAnim_BeginCurveContext(TransformAnimState* arg0, u16 arg1, s32 arg2) {
+    TransformAnimData* temp_s1;
     unk_D_800ABCC0* temp_s0;
 
-    temp_s1 = arg0->unk_04;
+    temp_s1 = arg0->data;
 
     D_800ABCF0++;
     if (D_800ABCF0 < 2) {
         temp_s0 = &D_800ABCC0[D_800ABCF0];
-        if (arg0->unk_04 != NULL) {
+        if (arg0->data != NULL) {
             if (arg2 != 0) {
-                arg0->unk_08 = ModelAnim_AdvanceCurveFrame(arg0, arg1);
+                arg0->frameFixed = ModelAnim_AdvanceCurveFrame(arg0, arg1);
             }
 
-            arg0->unk_12 = arg1;
+            arg0->lastRenderFrame = arg1;
 
             temp_s0->unk_00 = 1;
-            temp_s0->unk_01 = arg0->unk_04->unk_00;
-            temp_s0->unk_02 = arg0->unk_08 >> 0x10;
+            temp_s0->unk_01 = arg0->data->flags;
+            temp_s0->unk_02 = arg0->frameFixed >> 0x10;
             temp_s0->unk_04 = temp_s1;
-            temp_s0->unk_08 = Util_ConvertAddrToVirtAddr(temp_s1->unk_0C);
-            temp_s0->unk_0C = Util_ConvertAddrToVirtAddr(temp_s1->unk_10);
-            temp_s0->unk_10 = Util_ConvertAddrToVirtAddr(temp_s1->unk_14);
-            temp_s0->unk_14 = Util_ConvertAddrToVirtAddr(temp_s1->unk_18);
+            temp_s0->unk_08 = Util_ConvertAddrToVirtAddr(temp_s1->channelTable);
+            temp_s0->unk_0C = Util_ConvertAddrToVirtAddr(temp_s1->translationData);
+            temp_s0->unk_10 = Util_ConvertAddrToVirtAddr(temp_s1->rotationData);
+            temp_s0->unk_14 = Util_ConvertAddrToVirtAddr(temp_s1->scaleData);
 
             if (temp_s0->unk_02 < 0) {
                 temp_s0->unk_02 = 0;
@@ -301,7 +301,7 @@ void ModelAnim_EvaluateJointTransform(Vec3f* arg0, Vec3s* arg1, Vec3f* arg2, s32
     if ((D_800ABCF0 >= 0) && (D_800ABCF0 < 2)) {
         unk_D_800ABCC0* temp_s0 = &D_800ABCC0[D_800ABCF0];
 
-        if ((temp_s0->unk_00 == 1) && (arg3 >= 0) && (arg3 + 2 < temp_s0->unk_04->unk_08)) {
+        if ((temp_s0->unk_00 == 1) && (arg3 >= 0) && (arg3 + 2 < temp_s0->unk_04->channelCount)) {
             if (temp_s0->unk_01 & 8) {
                 arg0->x = ModelAnim_EvaluateScaleCurve(temp_s0, arg3 + 0);
                 arg0->y = ModelAnim_EvaluateScaleCurve(temp_s0, arg3 + 1);
@@ -331,48 +331,48 @@ void ModelAnim_EvaluateJointTransform(Vec3f* arg0, Vec3s* arg1, Vec3f* arg2, s32
     }
 }
 
-void ModelAnim_ClearTransformChannel(unk_D_86002F58_004_000* arg0) {
-    arg0->unk_040.unk_00 = -1;
-    arg0->unk_040.unk_04 = NULL;
+void ModelAnim_ClearTransformChannel(DisplayObject* arg0) {
+    arg0->transformAnim.animationId = -1;
+    arg0->transformAnim.data = NULL;
 }
 
-s32 ModelAnim_BindTransformCurve(unk_D_86002F58_004_000* arg0, s16 arg1, void* arg2, s32 arg3) {
-    unk_D_86002F58_004_000_040_004* temp_v0 = Util_ConvertAddrToVirtAddr(arg2);
-    unk_D_86002F58_004_000_040* ptr = &arg0->unk_040;
+s32 ModelAnim_BindTransformCurve(DisplayObject* arg0, s16 arg1, void* arg2, s32 arg3) {
+    TransformAnimData* temp_v0 = Util_ConvertAddrToVirtAddr(arg2);
+    TransformAnimState* ptr = &arg0->transformAnim;
 
-    if ((temp_v0 != ptr->unk_04) || (arg1 != ptr->unk_00)) {
-        ptr->unk_00 = arg1;
-        ptr->unk_04 = temp_v0;
-        ptr->unk_08 = (temp_v0->unk_04 << 0x10) - arg3;
+    if ((temp_v0 != ptr->data) || (arg1 != ptr->animationId)) {
+        ptr->animationId = arg1;
+        ptr->data = temp_v0;
+        ptr->frameFixed = (temp_v0->startFrame << 0x10) - arg3;
     }
 
-    ptr->unk_0C = arg3;
-    return ptr->unk_08 >> 0x10;
+    ptr->speedFixed = arg3;
+    return ptr->frameFixed >> 0x10;
 }
 
-s32 ModelAnim_SetSpeed(unk_D_86002F58_004_000* arg0, s32 arg1) {
-    arg0->unk_040.unk_0C = arg1;
-    return arg0->unk_040.unk_08 >> 0x10;
+s32 ModelAnim_SetSpeed(DisplayObject* arg0, s32 arg1) {
+    arg0->transformAnim.speedFixed = arg1;
+    return arg0->transformAnim.frameFixed >> 0x10;
 }
 
-void ModelAnim_SetFrame(unk_D_86002F58_004_000* arg0, s16 arg1) {
-    arg0->unk_040.unk_08 = (arg1 << 0x10) - arg0->unk_040.unk_0C;
+void ModelAnim_SetFrame(DisplayObject* arg0, s16 arg1) {
+    arg0->transformAnim.frameFixed = (arg1 << 0x10) - arg0->transformAnim.speedFixed;
 }
 
-s32 ModelAnim_HasCrossedFrame(unk_D_86002F58_004_000* arg0, s16 arg1) {
-    unk_D_86002F58_004_000_040* ptr = &arg0->unk_040;
-    s32 temp_v0 = ptr->unk_08 + ptr->unk_0C;
+s32 ModelAnim_HasCrossedFrame(DisplayObject* arg0, s16 arg1) {
+    TransformAnimState* ptr = &arg0->transformAnim;
+    s32 temp_v0 = ptr->frameFixed + ptr->speedFixed;
     s32 arg = arg1 << 0x10;
     s32 var_a2;
-    s32 v = ptr->unk_0C;
+    s32 v = ptr->speedFixed;
 
     if (v >= 0) {
-        var_a2 = ptr->unk_08 < arg;
+        var_a2 = ptr->frameFixed < arg;
         if (var_a2 != 0) {
             var_a2 = temp_v0 >= arg;
         }
     } else {
-        var_a2 = (arg < ptr->unk_08);
+        var_a2 = (arg < ptr->frameFixed);
         if (var_a2 != 0) {
             var_a2 = arg >= temp_v0;
         }
@@ -381,10 +381,10 @@ s32 ModelAnim_HasCrossedFrame(unk_D_86002F58_004_000* arg0, s16 arg1) {
     return var_a2;
 }
 
-s32 ModelAnim_IsAnimationDone(unk_D_86002F58_004_000* arg0) {
-    return ModelAnim_HasCrossedFrame(arg0, arg0->unk_040.unk_04->unk_0A - 1);
+s32 ModelAnim_IsAnimationDone(DisplayObject* arg0) {
+    return ModelAnim_HasCrossedFrame(arg0, arg0->transformAnim.data->endFrame - 1);
 }
 
-s32 ModelAnim_IsFinished(unk_D_86002F58_004_000* arg0) {
-    return arg0->unk_040.unk_08 >= ((arg0->unk_040.unk_04->unk_0A - 1) << 0x10);
+s32 ModelAnim_IsFinished(DisplayObject* arg0) {
+    return arg0->transformAnim.frameFixed >= ((arg0->transformAnim.data->endFrame - 1) << 0x10);
 }

@@ -12,7 +12,7 @@
 #include "src/geo_layout.h"
 #include "src/memory.h"
 
-static unk_D_86002F58_004_000* D_800AC830;
+static DisplayObject* D_800AC830;
 static s32 D_800AC834;
 
 s32 PokeIcon_CapturePreviewGeoNode(s32, GraphNode*);
@@ -39,12 +39,12 @@ void PokeIcon_InitRenderScene(unk_func_8001A024* arg0, s16 arg1, s16 arg2) {
     arg0->unk_0C = process_geo_layout(sp20, D_8006F350);
     arg0->unk_10 = D_800ABE10.unk_A04.unk_0C;
     MainPool_FinalizeAllocation(sp20);
-    sp24 = arg0->unk_0C->unk_0C;
+    sp24 = arg0->unk_0C->children;
     GeoCamera_SetViewport(sp24, 0, 0, arg1, arg2);
     GeoCamera_SetPerspective(sp24, 30.0f, 100.0f, 12800.0f);
 }
 
-unk_func_8001A024* PokeIcon_CreateRenderList(unk_D_86002F58_004_000_010* arg0, s16 arg1, s16 arg2, s16 arg3) {
+unk_func_8001A024* PokeIcon_CreateRenderList(ModelLoadContext* arg0, s16 arg1, s16 arg2, s16 arg3) {
     s32 var_s0;
     unk_D_80068BB0* temp_a1;
     s32 i;
@@ -79,7 +79,7 @@ unk_func_8001A024* PokeIcon_CreateRenderList(unk_D_86002F58_004_000_010* arg0, s
     return temp_v0;
 }
 
-void PokeIcon_AttachDepthBuffer(unk_func_8001A024* arg0, unk_D_86002F58_004_000_010* arg1, unk_D_80068BB0* arg2) {
+void PokeIcon_AttachDepthBuffer(unk_func_8001A024* arg0, ModelLoadContext* arg1, unk_D_80068BB0* arg2) {
     s32 i;
 
     arg0->unk_04 = arg1;
@@ -205,11 +205,11 @@ void PokeIcon_RenderSlot(unk_func_8001A024* arg0, s32 arg1) {
     Vec3s sp38;
     unk_D_86002F34_00C* sp34;
     unk_func_8001A024_008* temp_s1;
-    unk_D_86002F58_004_000_004* sp2C;
+    ModelNodeView* sp2C;
 
-    sp34 = arg0->unk_0C->unk_0C;
+    sp34 = arg0->unk_0C->children;
     temp_s1 = &arg0->unk_08[arg1];
-    sp2C = arg0->unk_04->unk_24->unk_08->unk_00[0];
+    sp2C = arg0->unk_04->loadedModel->modelRoot->unk_00[0];
 
     ModelRenderer_ClearDisplayObject(arg0->unk_10);
     ModelAnim_ClearTransformChannel(arg0->unk_10);
@@ -229,10 +229,10 @@ void PokeIcon_RenderSlot(unk_func_8001A024* arg0, s32 arg1) {
         ModelAnim_SetAnimation(arg0->unk_10, 1);
         ModelAnim_SetFrame(arg0->unk_10, arg0->unk_18[temp_s1->unk_14.raw - 1].unk_01);
     }
-    Vec3f_FromVec3s(&arg0->unk_10->unk_024, &sp38);
-    arg0->unk_10->unk_000.unk_02 &= ~0x40;
-    arg0->unk_10->unk_000.unk_02 |= 0x80;
-    Vec3f_SetComponentsDuplicate(&arg0->unk_10->unk_030, temp_s1->unk_08, temp_s1->unk_08, temp_s1->unk_08);
+    Vec3f_FromVec3s(&arg0->unk_10->position, &sp38);
+    arg0->unk_10->node.renderFlags &= ~0x40;
+    arg0->unk_10->node.renderFlags |= 0x80;
+    Vec3f_SetComponentsDuplicate(&arg0->unk_10->scale, temp_s1->unk_08, temp_s1->unk_08, temp_s1->unk_08);
     Camera_ComputeEyeFromAngles(&sp34->unk_60.at, &sp34->unk_60.eye, 1250.0f, 0x71C, temp_s1->unk_04);
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_08[arg1].unk_0C);
     GeoRender_AdvanceFrameCounter();
@@ -481,11 +481,11 @@ void PokeIcon_InitPreviewScene(unk_func_8001B1FC* arg0, s16 arg1, s16 arg2, s16 
     arg0->unk_20 = process_geo_layout(sp24, D_8006F3E0);
     arg0->unk_24 = D_800AC830;
     MainPool_FinalizeAllocation(sp24);
-    GeoCamera_SetViewport(arg0->unk_20->unk_0C, arg1, arg2, arg3, arg4);
-    GeoCamera_SetPerspective(arg0->unk_20->unk_0C, 30.0f, 100.0f, 12800.0f);
+    GeoCamera_SetViewport(arg0->unk_20->children, arg1, arg2, arg3, arg4);
+    GeoCamera_SetPerspective(arg0->unk_20->children, 30.0f, 100.0f, 12800.0f);
 }
 
-unk_func_8001B1FC* PokeIcon_CreateModelPreview(unk_D_86002F58_004_000_010* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5,
+unk_func_8001B1FC* PokeIcon_CreateModelPreview(ModelLoadContext* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5,
                                  s16 arg6, u8* arg7) {
     unk_func_8001B1FC* temp_v0 = main_pool_alloc(sizeof(unk_func_8001B1FC), 0);
 
@@ -519,19 +519,19 @@ void PokeIcon_SetPreviewMon(unk_func_8001B1FC* arg0, BattleMon* arg1, u16 arg2) 
     arg0->unk_02 = arg2;
     arg0->unk_18 = D_8006FF00[arg1->unk_00.unk_00 - 1].unk_02 / 100.0f;
 
-    arg0->unk_24->unk_024.x = tmp1;
-    arg0->unk_24->unk_024.y = tmp2;
-    arg0->unk_24->unk_024.z = tmp3;
+    arg0->unk_24->position.x = tmp1;
+    arg0->unk_24->position.y = tmp2;
+    arg0->unk_24->position.z = tmp3;
 
-    arg0->unk_24->unk_01E = D_8006F05C;
+    arg0->unk_24->rotation = D_8006F05C;
     Model_ComputeSizeVariant(&sp2C, arg1);
     PokeIcon_RequestFrameLoad(arg0->unk_1C, arg1->unk_00.unk_00, sp2C);
     PokeIcon_WaitFrameLoad(arg0->unk_1C);
     ModelRenderer_ClearDisplayObject(arg0->unk_24);
-    Model_InitDisplayObject(arg0->unk_24, 0, arg1->unk_00.unk_00, arg0->unk_1C->unk_24->unk_08->unk_00[0]);
+    Model_InitDisplayObject(arg0->unk_24, 0, arg1->unk_00.unk_00, arg0->unk_1C->loadedModel->modelRoot->unk_00[0]);
     ModelAnim_SetAnimation(arg0->unk_24, 1);
-    arg0->unk_24->unk_000.unk_02 &= ~0x40;
-    arg0->unk_24->unk_000.unk_02 |= 0x80;
+    arg0->unk_24->node.renderFlags &= ~0x40;
+    arg0->unk_24->node.renderFlags |= 0x80;
 }
 
 void PokeIcon_SetPreviewSpecies(unk_func_8001B1FC* arg0, s32 arg1, u16 arg2) {
@@ -547,19 +547,19 @@ void PokeIcon_SetPreviewSpecies(unk_func_8001B1FC* arg0, s32 arg1, u16 arg2) {
     arg0->unk_02 = arg2;
     arg0->unk_18 = D_8006FF00[arg1 - 1].unk_02 / 100.0f;
 
-    arg0->unk_24->unk_024.x = tmp1;
-    arg0->unk_24->unk_024.y = tmp2;
-    arg0->unk_24->unk_024.z = tmp3;
+    arg0->unk_24->position.x = tmp1;
+    arg0->unk_24->position.y = tmp2;
+    arg0->unk_24->position.z = tmp3;
 
-    arg0->unk_24->unk_01E = D_8006F05C;
+    arg0->unk_24->rotation = D_8006F05C;
     sp34.raw = 0;
     PokeIcon_RequestFrameLoad(arg0->unk_1C, arg1, sp34);
     PokeIcon_WaitFrameLoad(arg0->unk_1C);
     ModelRenderer_ClearDisplayObject(arg0->unk_24);
-    Model_InitDisplayObject(arg0->unk_24, 0, arg1, arg0->unk_1C->unk_24->unk_08->unk_00[0]);
+    Model_InitDisplayObject(arg0->unk_24, 0, arg1, arg0->unk_1C->loadedModel->modelRoot->unk_00[0]);
     ModelAnim_SetAnimation(arg0->unk_24, 1);
-    arg0->unk_24->unk_000.unk_02 &= ~0x40;
-    arg0->unk_24->unk_000.unk_02 |= 0x80;
+    arg0->unk_24->node.renderFlags &= ~0x40;
+    arg0->unk_24->node.renderFlags |= 0x80;
 }
 
 s32 PokeIcon_HandlePreviewInput(Vec3s* arg0) {
@@ -594,7 +594,7 @@ s32 func_8001B6BC(Vec3s* arg0) {
 
 void PokeIcon_AdvancePreviewMotion(unk_func_8001B1FC* arg0) {
     s32 var_a0;
-    Vec3s* sp18 = &arg0->unk_24->unk_01E;
+    Vec3s* sp18 = &arg0->unk_24->rotation;
     s16 var_a2;
     s16 temp_lo;
 
@@ -629,9 +629,9 @@ void PokeIcon_UpdatePreview(unk_func_8001B1FC* arg0) {
 
     var_v1 = 0;
     if (arg0->unk_00 & 2) {
-        var_v1 = PokeIcon_HandlePreviewInput(&arg0->unk_24->unk_01E);
+        var_v1 = PokeIcon_HandlePreviewInput(&arg0->unk_24->rotation);
         if (var_v1 == 0) {
-            var_v1 = func_8001B6BC(&arg0->unk_24->unk_01E);
+            var_v1 = func_8001B6BC(&arg0->unk_24->rotation);
         }
     }
 
@@ -646,7 +646,7 @@ void PokeIcon_UpdatePreview(unk_func_8001B1FC* arg0) {
         }
     }
 
-    Vec3f_SetComponentsDuplicate(&D_800AC830->unk_030, arg0->unk_18, arg0->unk_18, arg0->unk_18);
+    Vec3f_SetComponentsDuplicate(&D_800AC830->scale, arg0->unk_18, arg0->unk_18, arg0->unk_18);
 }
 
 void PokeIcon_DrawPreview(unk_func_8001B1FC* arg0) {
@@ -694,16 +694,16 @@ u8* PokeIcon_RenderPreview(unk_func_8001B1FC* arg0) {
 
         switch (D_800AC834) {
             case 1:
-                Font_Printf(0, 0x64, "S:%5.2f  H:%4d", arg0->unk_18, (s32)arg0->unk_24->unk_024.y);
+                Font_Printf(0, 0x64, "S:%5.2f  H:%4d", arg0->unk_18, (s32)arg0->unk_24->position.y);
                 break;
 
             case 2:
-                Font_Printf(0, 0x64, "X:%4d  Z:%4d", (s32)arg0->unk_24->unk_024.x, (s32)arg0->unk_24->unk_024.z);
+                Font_Printf(0, 0x64, "X:%4d  Z:%4d", (s32)arg0->unk_24->position.x, (s32)arg0->unk_24->position.z);
                 break;
 
             case 3:
-                Font_Printf(0, 0x64, "A:%04X  F:%3d", *(u16*)&arg0->unk_24->unk_01E.y,
-                              arg0->unk_24->unk_040.unk_08 >> 0x10);
+                Font_Printf(0, 0x64, "A:%04X  F:%3d", *(u16*)&arg0->unk_24->rotation.y,
+                              arg0->unk_24->transformAnim.frameFixed >> 0x10);
                 break;
         }
         Font_EndTexturedTextRendering();

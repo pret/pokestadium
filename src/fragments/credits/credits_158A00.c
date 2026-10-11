@@ -110,10 +110,10 @@ u32 D_86A025D0[] = {
 };
 
 s32 Credits_BackgroundNodePostCallback(s32 arg0, GraphNode* arg1) {
-    unk_D_86002F58_004_000* ptr = (unk_D_86002F58_004_000*)arg1;
+    DisplayObject* ptr = (DisplayObject*)arg1;
 
     if (arg0 == 2) {
-        ptr->unk_03C.rgba = D_86A061E0.rgba;
+        ptr->textureTint.rgba = D_86A061E0.rgba;
     }
     return 0;
 }
@@ -126,11 +126,11 @@ void Credits_SetBackgroundTint(u8 r, u8 g, u8 b) {
     D_86A061E0.b = b;
 
     if (v == 0xFF) {
-        if (D_86A06170.unk_00.unk_14 == 1) {
-            D_86A06170.unk_00.unk_01 |= 1;
+        if (D_86A06170.node.callbackArg == 1) {
+            D_86A06170.node.flags |= 1;
         }
     } else {
-        D_86A06170.unk_00.unk_01 &= ~1;
+        D_86A06170.node.flags &= ~1;
     }
 }
 
@@ -173,13 +173,13 @@ void Credits_LoadBackgroundScene(s8 arg0, u8 arg1) {
 
     temp_v0_4 = sp28(4, 0);
     if (temp_v0_4 == NULL) {
-        D_86A06170.unk_00.unk_14 = 0;
-        D_86A06170.unk_00.unk_01 &= ~1;
+        D_86A06170.node.callbackArg = 0;
+        D_86A06170.node.flags &= ~1;
     } else {
         D_86A06170.unk_18.unk_00 = temp_v0_4->unk_00;
         D_86A06170.unk_18.unk_02 = temp_v0_4->unk_02;
         D_86A06170.unk_18.unk_04.rgba = temp_v0_4->unk_04.rgba;
-        D_86A06170.unk_00.unk_14 = 1;
+        D_86A06170.node.callbackArg = 1;
     }
 
     Credits_SetBackgroundTint(0xFF, 0xFF, 0xFF);
@@ -358,7 +358,7 @@ void Credits_MainLoop(s32 arg0) {
                     GeoNode_CreateContainer(NULL, &D_86A061A8);
                     GeoNode_CreateContainer(NULL, &D_86A061C0);
 
-                    D_86A06170.unk_00.unk_01 &= ~1;
+                    D_86A06170.node.flags &= ~1;
                     if (D_86A025A0[D_86A025C4].unk_02 == 0) {
                         main_pool_pop_state('BACK');
                     }
@@ -1416,7 +1416,7 @@ void Credits_OutroLoop(void) {
 }
 
 void Credits_InitCamera(void) {
-    D_86A061E8 = D_86A061E4->unk_0C;
+    D_86A061E8 = D_86A061E4->children;
     D_86A061EC = 0x100;
     D_86A061EE = 0;
     D_86A061F0 = 0x78;

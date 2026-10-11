@@ -46,7 +46,7 @@ static u32 D_86301650[] = {
 typedef struct unk_D_86301730 {
     /* 0x000 */ s16 unk_000;
     /* 0x002 */ s16 unk_002;
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+    /* 0x004 */ DisplayObject unk_004;
     /* 0x16C */ Vec3f unk_16C;
     /* 0x178 */ s8 unk_178;
     /* 0x179 */ s8 unk_179;
@@ -68,11 +68,11 @@ static FontContext* D_86301728;
 static unk_D_86301730 D_86301730[4];
 static u32 D_86301D40;
 static unk_D_86301730* D_86301D44;
-static unk_D_86002F58_004_000* D_86301D48;
+static DisplayObject* D_86301D48;
 static s16 D_86301D4C;
 static s16 D_86301D4E;
 static s16 D_86301D50[4];
-static unk_D_86002F58_004_000 D_86301D58;
+static DisplayObject D_86301D58;
 
 void JigglypuffGame_SnapshotInputs(void) {
     s32 i;
@@ -107,7 +107,7 @@ void JigglypuffGame_ReadInputs(void) {
 }
 
 void JigglypuffGame_InitCamera(void) {
-    D_86301718 = D_86301714->unk_00.unk_0C;
+    D_86301718 = D_86301714->node.children;
 
     D_8630171C = 0x600;
     D_8630171E = 0;
@@ -226,8 +226,8 @@ s32 JigglypuffGame_WaitForStart(void) {
 
         ModelAnim_SetAnimation(D_86301D48, 1);
 
-        D_86301D48->unk_040.unk_0C = 0x10000;
-        D_86301D48->unk_040.unk_08 = Rand_Range(0x14) << 0x10;
+        D_86301D48->transformAnim.speedFixed = 0x10000;
+        D_86301D48->transformAnim.frameFixed = Rand_Range(0x14) << 0x10;
 
         D_86301D50[i] = 0;
     }
@@ -271,8 +271,8 @@ void JigglypuffGame_ReadyCountdown(void) {
 
         ModelAnim_SetAnimation(D_86301D48, 1);
 
-        D_86301D48->unk_040.unk_0C = 0x10000;
-        D_86301D48->unk_040.unk_08 = Rand_Range(0x14) << 0x10;
+        D_86301D48->transformAnim.speedFixed = 0x10000;
+        D_86301D48->transformAnim.frameFixed = Rand_Range(0x14) << 0x10;
 
         D_86301D50[i] = 0;
     }
@@ -317,9 +317,9 @@ void JigglypuffGame_ApplySeparationForce(s32 arg0) {
     f32 temp_fs1;
     f32 temp_fs2;
 
-    spA0 = D_86301D48->unk_024.x;
-    sp9C = D_86301D48->unk_024.y;
-    sp98 = D_86301D48->unk_024.z;
+    spA0 = D_86301D48->position.x;
+    sp9C = D_86301D48->position.y;
+    sp98 = D_86301D48->position.z;
 
     var_fs4 = 0.0f;
     var_fs5 = 0.0f;
@@ -327,9 +327,9 @@ void JigglypuffGame_ApplySeparationForce(s32 arg0) {
 
     for (i = 0; i < 4; i++) {
         if (i != arg0) {
-            temp_fs0 = D_86301730[i].unk_004.unk_024.x;
-            temp_fs1 = D_86301730[i].unk_004.unk_024.y;
-            temp_fs2 = D_86301730[i].unk_004.unk_024.z;
+            temp_fs0 = D_86301730[i].unk_004.position.x;
+            temp_fs1 = D_86301730[i].unk_004.position.y;
+            temp_fs2 = D_86301730[i].unk_004.position.z;
 
             temp1 = temp_fs0 - spA0;
             temp2 = temp_fs1 - sp9C;
@@ -346,9 +346,9 @@ void JigglypuffGame_ApplySeparationForce(s32 arg0) {
         }
     }
 
-    temp_fs0 = D_86301D58.unk_024.x;
-    temp_fs1 = D_86301D58.unk_024.y;
-    temp_fs2 = D_86301D58.unk_024.z;
+    temp_fs0 = D_86301D58.position.x;
+    temp_fs1 = D_86301D58.position.y;
+    temp_fs2 = D_86301D58.position.z;
 
     temp1 = temp_fs0 - spA0;
     temp2 = temp_fs1 - sp9C;
@@ -363,9 +363,9 @@ void JigglypuffGame_ApplySeparationForce(s32 arg0) {
         sp60 += (-temp3 / temp_fv0) * temp_fv1;
     }
 
-    D_86301D48->unk_024.x += var_fs4;
-    D_86301D48->unk_024.y += var_fs5;
-    D_86301D48->unk_024.z += sp60;
+    D_86301D48->position.x += var_fs4;
+    D_86301D48->position.y += var_fs5;
+    D_86301D48->position.z += sp60;
 }
 
 void JigglypuffGame_UpdatePlayerPhysics(s32 arg0) {
@@ -380,8 +380,8 @@ void JigglypuffGame_UpdatePlayerPhysics(s32 arg0) {
             break;
 
         case 0:
-            D_86301D48->unk_030.y = ((D_86301D44->unk_179 + 256.0f) * 0.00390625f) + 0.2f;
-            D_86301D48->unk_01E.y = D_86301D44->unk_178 << 8;
+            D_86301D48->scale.y = ((D_86301D44->unk_179 + 256.0f) * 0.00390625f) + 0.2f;
+            D_86301D48->rotation.y = D_86301D44->unk_178 << 8;
 
             D_86301D44->unk_16C.x = 0.0f;
             D_86301D44->unk_16C.y = 0.0f;
@@ -408,25 +408,25 @@ void JigglypuffGame_UpdatePlayerPhysics(s32 arg0) {
 
     JigglypuffGame_ApplySeparationForce(arg0);
 
-    D_86301D48->unk_024.x += D_86301D44->unk_16C.x;
-    D_86301D48->unk_024.y += D_86301D44->unk_16C.y;
+    D_86301D48->position.x += D_86301D44->unk_16C.x;
+    D_86301D48->position.y += D_86301D44->unk_16C.y;
 
-    if (D_86301D48->unk_024.y > 0.0f) {
+    if (D_86301D48->position.y > 0.0f) {
         D_86301D44->unk_16C.y -= 1.0f;
     }
 
-    if (D_86301D48->unk_024.y < 0.0f) {
-        D_86301D48->unk_024.y = 0.0f;
+    if (D_86301D48->position.y < 0.0f) {
+        D_86301D48->position.y = 0.0f;
         D_86301D44->unk_000 = 0;
     }
 
-    if (D_86301D48->unk_024.x < -100.0f) {
-        D_86301D48->unk_024.x = -100.0f;
+    if (D_86301D48->position.x < -100.0f) {
+        D_86301D48->position.x = -100.0f;
         D_86301D44->unk_16C.x *= -1.0f;
     }
 
-    if (D_86301D48->unk_024.x > 100.0f) {
-        D_86301D48->unk_024.x = 100.0f;
+    if (D_86301D48->position.x > 100.0f) {
+        D_86301D48->position.x = 100.0f;
         D_86301D44->unk_16C.x *= -1.0f;
     }
 
@@ -449,7 +449,7 @@ void JigglypuffGame_PlayingLoop(void) {
 
         ModelAnim_SetAnimation(D_86301D48, 1);
 
-        D_86301D48->unk_040.unk_0C = 0x10000;
+        D_86301D48->transformAnim.speedFixed = 0x10000;
 
         D_86301D50[i] = 0;
     }
@@ -537,20 +537,20 @@ void JigglypuffGame_Init(void) {
         ModelRenderer_AttachDisplayObject(D_86301D48);
         Model_InitDisplayObject(D_86301D48, 0, 0x27, D_86301710->unk_08->unk_00[0]);
 
-        D_86301D48->unk_024.x = (i - 1.5f) * 50.0f;
-        D_86301D48->unk_024.y = 0.0f;
-        D_86301D48->unk_024.z = 0.0f;
+        D_86301D48->position.x = (i - 1.5f) * 50.0f;
+        D_86301D48->position.y = 0.0f;
+        D_86301D48->position.z = 0.0f;
 
-        D_86301D48->unk_030.x = 1.2f;
-        D_86301D48->unk_030.y = 1.2f;
-        D_86301D48->unk_030.z = 1.2f;
+        D_86301D48->scale.x = 1.2f;
+        D_86301D48->scale.y = 1.2f;
+        D_86301D48->scale.z = 1.2f;
 
         D_86301D44->unk_16C.y = 0.0f;
 
         ModelAnim_SetAnimation(D_86301D48, 2);
         ModelAnim_ClearEventTrack(D_86301D48);
 
-        D_86301D48->unk_040.unk_08 = Rand_Range(5) << 0x10;
+        D_86301D48->transformAnim.frameFixed = Rand_Range(5) << 0x10;
     }
 
     PokeIcon_OpenModelArchives();
@@ -560,19 +560,19 @@ void JigglypuffGame_Init(void) {
     ModelRenderer_AttachDisplayObject(D_86301D48);
     Model_InitDisplayObject(D_86301D48, 0, 0x9A, D_86301710->unk_08->unk_00[0]);
 
-    D_86301D48->unk_024.x = 0.0f;
-    D_86301D48->unk_024.y = 0.0f;
-    D_86301D48->unk_024.z = 0.0f;
+    D_86301D48->position.x = 0.0f;
+    D_86301D48->position.y = 0.0f;
+    D_86301D48->position.z = 0.0f;
 
-    D_86301D48->unk_030.x = 8.0f;
-    D_86301D48->unk_030.y = 8.0f;
-    D_86301D48->unk_030.z = 8.0f;
+    D_86301D48->scale.x = 8.0f;
+    D_86301D48->scale.y = 8.0f;
+    D_86301D48->scale.z = 8.0f;
 
-    D_86301D48->unk_01E.y = 0;
+    D_86301D48->rotation.y = 0;
 
     ModelAnim_SetAnimation(D_86301D48, 0);
     ModelAnim_ClearEventTrack(D_86301D48);
-    D_86301D48->unk_040.unk_0C = 0;
+    D_86301D48->transformAnim.speedFixed = 0;
     JigglypuffGame_InitCamera();
 }
 

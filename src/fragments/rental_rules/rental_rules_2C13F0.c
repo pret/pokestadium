@@ -131,7 +131,7 @@ s32 RentalRules_ScrollPageUp(unk_D_83079E70* arg0) {
         arg0->unk_0A = -1;
         arg0->unk_0C = -1;
         sp1C = 1;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     return sp1C;
@@ -148,7 +148,7 @@ s32 RentalRules_ScrollPageDown(unk_D_83079E70* arg0) {
         arg0->unk_0A = 1;
         arg0->unk_0C = -1;
         sp1C = 1;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     return sp1C;
@@ -169,7 +169,7 @@ void RentalRules_ListUpdateShown(unk_D_83079E70* arg0) {
         arg0->unk_00 = 4;
         arg0->unk_02 = 5;
         arg0->unk_0C = -1;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     } else if (BTN_IS_DOWN(gPlayer1Controller, BTN_DUP)) {
         RentalRules_ScrollPageUp(arg0);
     } else if (BTN_IS_DOWN(gPlayer1Controller, BTN_DDOWN)) {

@@ -19,7 +19,7 @@ static u32 D_86D00530[] = {
 };
 
 void miniUnkInitCamera(void) {
-    D_87906054 = D_87906050->unk_00.unk_0C;
+    D_87906054 = D_87906050->node.children;
 
     miniCameraXRot = 0xA00;
     miniCameraYRot = 0;
@@ -44,7 +44,7 @@ void miniUnkDrawHUB(UNUSED s32 arg0) {
     BgStage_DrawFrame();
     GfxImage_FillCurrent(&gDisplayListHead, 1);
     GeoRender_AdvanceFrameCounter();
-    Geo_RenderRootNode(&D_87906050->unk_00);
+    Geo_RenderRootNode(&D_87906050->node);
 
     if (miniDebugMode != 0) {
         showDebuggCameraInfo();

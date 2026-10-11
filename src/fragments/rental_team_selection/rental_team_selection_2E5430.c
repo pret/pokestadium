@@ -523,10 +523,10 @@ void TeamSelection_RegisteredTeam_MoveListUp(unk_D_84229EB0* arg0) {
             arg0->unk_0001A = -4;
             arg0->unk_00002 = 2;
             arg0->unk_00001 = 0xB;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if (arg0->unk_0000C > 0) {
             sp24 = TeamSelection_RegisteredTeam_GetNext(arg0->unk_00024, 1);
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             TeamSelection_RegisteredTeam_Load(sp24, arg0->unk_0000D - 1);
             arg0->unk_0000C -= 1;
             arg0->unk_0000D -= 1;
@@ -549,11 +549,11 @@ void TeamSelection_RegisteredTeam_MoveListDown(unk_D_84229EB0* arg0) {
             arg0->unk_0001A = 4;
             arg0->unk_00002 = 2;
             arg0->unk_00001 = 0xB;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if ((arg0->unk_0000C < 7) &&
                    ((TeamSelection_RegisteredTeam_Load(TeamSelection_RegisteredTeam_GetPrevious(arg0->unk_00024, 3), arg0->unk_0000D + 1) != 0) ||
                     (arg0->unk_00000 != 0))) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             arg0->unk_0000C += 1;
             arg0->unk_0000D += 1;
             arg0->unk_00024 = arg0->unk_00024->unk_4D24;
@@ -573,7 +573,7 @@ void TeamSelection_RegisteredTeam_HandleListInput(unk_D_84229EB0* arg0) {
 
     if (BTN_IS_PRESSED(cont, BTN_A)) {
         if (temp_v0->unk_0000[0].unk_004.unk_00.unk_00 != 0) {
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
 
             switch (arg0->unk_00000) {
                 case 0:
@@ -589,10 +589,10 @@ void TeamSelection_RegisteredTeam_HandleListInput(unk_D_84229EB0* arg0) {
                     break;
             }
         } else {
-            Audio_PlaySoundEffectById(8);
+            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         }
     } else if (BTN_IS_PRESSED(cont, BTN_B)) {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         arg0->unk_00020 = 1;
         arg0->unk_00006 = 0;
         arg0->unk_00001 = 4;
@@ -621,7 +621,7 @@ void TeamSelection_RegisteredTeam_MovePokemonLeft(unk_D_84229EB0* arg0) {
             arg0->unk_00006 = 0;
             arg0->unk_00002 = 8;
             arg0->unk_00001 = 9;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
     }
 }
@@ -638,7 +638,7 @@ void TeamSelection_RegisteredTeam_MovePokemonRight(unk_D_84229EB0* arg0) {
             arg0->unk_00006 = 0;
             arg0->unk_00002 = 8;
             arg0->unk_00001 = 9;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
     }
 }
@@ -655,7 +655,7 @@ void TeamSelection_RegisteredTeam_MovePokemonUp(unk_D_84229EB0* arg0) {
             arg0->unk_00006 = 0;
             arg0->unk_00002 = 8;
             arg0->unk_00001 = 0xA;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
     }
 }
@@ -672,7 +672,7 @@ void TeamSelection_RegisteredTeam_MovePokemonDown(unk_D_84229EB0* arg0) {
             arg0->unk_00006 = 0;
             arg0->unk_00002 = 8;
             arg0->unk_00001 = 0xA;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
     }
 }

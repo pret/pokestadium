@@ -139,13 +139,13 @@ s32 BattlePrepBadgeAward_DrawBadgeIcon(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp;
 
     if (arg0 == 5) {
-        temp_v0 = (unk_D_84B25A90*)D_8006F09C->unk_000.unk_14;
-        tmp = (D_8006F09C->unk_0A6 - temp_v0->unk_04->unk_0A6) % 8;
+        temp_v0 = (unk_D_84B25A90*)D_8006F09C->node.callbackArg;
+        tmp = (D_8006F09C->effectSlot - temp_v0->unk_04->effectSlot) % 8;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F,
                    (u32)Memmap_GetSegmentVaddr(*(s32*)(temp_v0->unk_1C + tmp * 4)) & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -157,13 +157,13 @@ s32 BattlePrepBadgeAward_DrawBadgeIconAlt(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp;
 
     if (arg0 == 5) {
-        temp_v0 = (unk_D_84B25A90*)D_8006F09C->unk_000.unk_14;
-        tmp = (D_8006F09C->unk_0A6 - temp_v0->unk_04->unk_0A6) % 8;
+        temp_v0 = (unk_D_84B25A90*)D_8006F09C->node.callbackArg;
+        tmp = (D_8006F09C->effectSlot - temp_v0->unk_04->effectSlot) % 8;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F,
                    (u32)Memmap_GetSegmentVaddr(*(s32*)(temp_v0->unk_20 + tmp * 4)) & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -175,14 +175,14 @@ s32 BattlePrepBadgeAward_DrawSparkle(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp;
 
     if (arg0 == 5) {
-        temp_a3 = (unk_D_84B25A90*)D_8006F09C->unk_000.unk_14;
-        tmp = (D_8006F09C->unk_0A6 - temp_a3->unk_04->unk_0A6) - 0x10;
+        temp_a3 = (unk_D_84B25A90*)D_8006F09C->node.callbackArg;
+        tmp = (D_8006F09C->effectSlot - temp_a3->unk_04->effectSlot) - 0x10;
 
         if (temp_a3->unk_28[tmp] >= 0) {
             gDPPipeSync(gDisplayListHead++);
             gSPSegment(gDisplayListHead++, 0x0F,
                        (u32)Memmap_GetSegmentVaddr(temp_a3->unk_24[temp_a3->unk_28[tmp]]) & 0x1FFFFFFF);
-            gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+            gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
             GeoRender_ApplyMaterialState();
 
@@ -201,15 +201,15 @@ s32 BattlePrepBadgeAward_DrawGlowFade(s32 arg0, unk_func_80011B94* arg1) {
     f32 temp_fv0;
 
     if (arg0 == 5) {
-        temp_fv0 = D_8006F09C->unk_030.x;
+        temp_fv0 = D_8006F09C->scale.x;
         sp1E = (4.5f - temp_fv0) * 255.0f * 0.25f;
         if (temp_fv0 <= 4.0f) {
             temp_fv0 += 0.5f;
-            Vec3f_SetComponentsDuplicate(&D_8006F09C->unk_030, temp_fv0, temp_fv0, temp_fv0);
+            Vec3f_SetComponentsDuplicate(&D_8006F09C->scale, temp_fv0, temp_fv0, temp_fv0);
 
             gDPPipeSync(gDisplayListHead++);
             gDPSetEnvColor(gDisplayListHead++, 0, 0, 255, sp1E);
-            gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+            gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
             GeoRender_ApplyMaterialState();
         }
@@ -230,21 +230,21 @@ void BattlePrepBadgeAward_SlideInStep(unk_D_84B25A90* arg0) {
     arg0->unk_01++;
     if (arg0->unk_01 < 0x10) {
         for (i = 0; i < 4; i++) {
-            arg0->unk_04[0 + i].unk_01E.y -= 0x800;
-            arg0->unk_04[8 + i].unk_01E.y -= 0x800;
+            arg0->unk_04[0 + i].rotation.y -= 0x800;
+            arg0->unk_04[8 + i].rotation.y -= 0x800;
         }
 
         for (i = 4; i < 8; i++) {
-            arg0->unk_04[0 + i].unk_01E.y += 0x800;
-            arg0->unk_04[8 + i].unk_01E.y += 0x800;
+            arg0->unk_04[0 + i].rotation.y += 0x800;
+            arg0->unk_04[8 + i].rotation.y += 0x800;
         }
     } else {
         for (i = 0; i < 8; i++) {
             ModelRenderer_ClearDisplayObject(&arg0->unk_04[i]);
             BattlePrep_ResetDisplayObject(&arg0->unk_04[8 + i]);
             Model_InitDisplayObject(&arg0->unk_04[i], 0, 0, arg0->unk_08);
-            arg0->unk_04[i].unk_01E.y = 0;
-            arg0->unk_04[i].unk_000.unk_14 = arg0;
+            arg0->unk_04[i].rotation.y = 0;
+            arg0->unk_04[i].node.callbackArg = arg0;
         }
 
         for (i = 0; i < 8; i++) {
@@ -283,31 +283,31 @@ void BattlePrepBadgeAward_RevealStep(unk_D_84B25A90* arg0) {
         if ((arg0->unk_01 % var_a0) == 0) {
             Audio_PlayCategory11SoundCommand(0x0110000E, var_s3 + 1, 0);
             Model_InitDisplayObject(&arg0->unk_04[8 + var_s3], 1, 0, arg0->unk_0C);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[8 + var_s3].unk_024, D_84B16390[var_s3], D_84B163A0[var_s3], -289.0f);
-            arg0->unk_04[8 + var_s3].unk_000.unk_14 = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[8 + var_s3].position, D_84B16390[var_s3], D_84B163A0[var_s3], -289.0f);
+            arg0->unk_04[8 + var_s3].node.callbackArg = arg0;
             Model_InitDisplayObject(&arg0->unk_04[16 + var_s3], 0, 0, arg0->unk_10);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].unk_024, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].unk_030, 2.5f, 2.5f, 2.5f);
-            arg0->unk_04[16 + var_s3].unk_000.unk_14 = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].position, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].scale, 2.5f, 2.5f, 2.5f);
+            arg0->unk_04[16 + var_s3].node.callbackArg = arg0;
             arg0->unk_28[var_s3] = 0;
         }
     } else if (var_s3 == D_800AE540.unk_0003 - 1) {
         if (var_a1 == (arg0->unk_01 - (var_s3 * var_a0))) {
             Audio_PlayCategory11SoundCommand(0x0110000F, 0, 0);
             Model_InitDisplayObject(&arg0->unk_04[8 + var_s3], 1, 0, arg0->unk_0C);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[8 + var_s3].unk_024, D_84B16390[var_s3], D_84B163A0[var_s3], -289.0f);
-            arg0->unk_04[8 + var_s3].unk_000.unk_14 = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[8 + var_s3].position, D_84B16390[var_s3], D_84B163A0[var_s3], -289.0f);
+            arg0->unk_04[8 + var_s3].node.callbackArg = arg0;
             Model_InitDisplayObject(&arg0->unk_04[16 + var_s3], 0, 0, arg0->unk_10);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].unk_024, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].unk_030, 6.0f, 6.0f, 6.0f);
-            arg0->unk_04[16 + var_s3].unk_000.unk_14 = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].position, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[16 + var_s3].scale, 6.0f, 6.0f, 6.0f);
+            arg0->unk_04[16 + var_s3].node.callbackArg = arg0;
             arg0->unk_28[var_s3] = 0;
             Model_InitDisplayObject(&arg0->unk_04[24], 0, 0, arg0->unk_14);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[24].unk_024, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
-            arg0->unk_04[24].unk_000.unk_14 = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[24].position, D_84B16390[var_s3], D_84B163A0[var_s3] + 5, -289.0f);
+            arg0->unk_04[24].node.callbackArg = arg0;
 
             for (i = 0; i < D_800AE540.unk_0003 - 1; i++) {
-                arg0->unk_04[8 + i].unk_018 = 0;
+                arg0->unk_04[8 + i].rootId = 0;
             }
         } else {
             if (var_a2 == (arg0->unk_01 - (var_s3 * var_a0))) {
@@ -315,7 +315,7 @@ void BattlePrepBadgeAward_RevealStep(unk_D_84B25A90* arg0) {
                     BattlePrep_ResetDisplayObject(&arg0->unk_04[i]);
                 }
 
-                arg0->unk_04[8 + var_s3].unk_018 = 0;
+                arg0->unk_04[8 + var_s3].rootId = 0;
                 arg0->unk_01 = 0;
                 arg0->unk_00 = 3;
             }
@@ -323,23 +323,23 @@ void BattlePrepBadgeAward_RevealStep(unk_D_84B25A90* arg0) {
     }
 }
 
-void BattlePrepBadgeAward_SpawnSparkleParticle(unk_D_84B25A90* arg0, unk_D_86002F58_004_000* arg1, s16 arg2) {
+void BattlePrepBadgeAward_SpawnSparkleParticle(unk_D_84B25A90* arg0, DisplayObject* arg1, s16 arg2) {
     u16 sp26;
     f32 temp_fv0;
 
     if (arg2 < D_800AE540.unk_0003) {
-        if (arg1->unk_000.unk_0C == NULL) {
+        if (arg1->node.children == NULL) {
             Model_InitDisplayObject(arg1, 2, 0, arg0->unk_18);
         }
 
         sp26 = MathUtil_Random16();
         temp_fv0 = (MathUtil_Random_ZeroOne() * 20.0f) + 15.0f;
 
-        arg1->unk_000.unk_14 = 0;
+        arg1->node.callbackArg = 0;
 
-        arg1->unk_024.x = D_84B16390[arg2] + (COSS(sp26) * temp_fv0);
-        arg1->unk_024.y = (D_84B163A0[arg2] + 5) + (SINS(sp26) * temp_fv0);
-        arg1->unk_024.z = -289.0f;
+        arg1->position.x = D_84B16390[arg2] + (COSS(sp26) * temp_fv0);
+        arg1->position.y = (D_84B163A0[arg2] + 5) + (SINS(sp26) * temp_fv0);
+        arg1->position.z = -289.0f;
     }
 }
 
@@ -351,11 +351,11 @@ void BattlePrepBadgeAward_UpdateSparkleStep(unk_D_84B25A90* arg0) {
     BattlePrepBadgeAward_SpawnSparkleParticle(arg0, &arg0->unk_04[28 + arg0->unk_01], 7 - temp_s0);
 
     for (i = 16; i < 41; i++) {
-        if ((s32)arg0->unk_18 == (s32)arg0->unk_04[i].unk_000.unk_0C) {
-            s32 idx = arg0->unk_04[i].unk_000.unk_14;
+        if ((s32)arg0->unk_18 == (s32)arg0->unk_04[i].node.children) {
+            s32 idx = arg0->unk_04[i].node.callbackArg;
 
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[i].unk_030, D_84B163B0[idx], D_84B163B0[idx], D_84B163B0[idx]);
-            arg0->unk_04[i].unk_000.unk_14 = (idx + 1) % 12;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[i].scale, D_84B163B0[idx], D_84B163B0[idx], D_84B163B0[idx]);
+            arg0->unk_04[i].node.callbackArg = (idx + 1) % 12;
         }
     }
 
@@ -371,23 +371,23 @@ void BattlePrepBadgeAward_ScatterStep(unk_D_84B25A90* arg0) {
     arg0->unk_01++;
     if (arg0->unk_01 < 0x10) {
         for (i = 0; i < 4; i++) {
-            arg0->unk_04[0 + i].unk_01E.x += 0x300;
-            arg0->unk_04[8 + i].unk_01E.x += 0x300;
-            arg0->unk_04[4 + i].unk_01E.x -= 0x300;
-            arg0->unk_04[12 + i].unk_01E.x -= 0x300;
+            arg0->unk_04[0 + i].rotation.x += 0x300;
+            arg0->unk_04[8 + i].rotation.x += 0x300;
+            arg0->unk_04[4 + i].rotation.x -= 0x300;
+            arg0->unk_04[12 + i].rotation.x -= 0x300;
 
-            arg0->unk_04[0 + i].unk_024.y += 2.0f * arg0->unk_01 * 0.5f;
-            arg0->unk_04[8 + i].unk_024.y += 2.0f * arg0->unk_01 * 0.5f;
-            arg0->unk_04[4 + i].unk_024.y -= 2.0f * arg0->unk_01 * 0.5f;
-            arg0->unk_04[12 + i].unk_024.y -= 2.0f * arg0->unk_01 * 0.5f;
+            arg0->unk_04[0 + i].position.y += 2.0f * arg0->unk_01 * 0.5f;
+            arg0->unk_04[8 + i].position.y += 2.0f * arg0->unk_01 * 0.5f;
+            arg0->unk_04[4 + i].position.y -= 2.0f * arg0->unk_01 * 0.5f;
+            arg0->unk_04[12 + i].position.y -= 2.0f * arg0->unk_01 * 0.5f;
         }
 
         for (i = 0; i < 8; i++) {
-            arg0->unk_04[0 + i].unk_01E.z += D_84B16A64[i];
-            arg0->unk_04[8 + i].unk_01E.z += D_84B16A64[i];
+            arg0->unk_04[0 + i].rotation.z += D_84B16A64[i];
+            arg0->unk_04[8 + i].rotation.z += D_84B16A64[i];
 
-            arg0->unk_04[0 + i].unk_024.x += (arg0->unk_01 * D_84B16A74[i] * 0.5f);
-            arg0->unk_04[8 + i].unk_024.x += (arg0->unk_01 * D_84B16A74[i] * 0.5f);
+            arg0->unk_04[0 + i].position.x += (arg0->unk_01 * D_84B16A74[i] * 0.5f);
+            arg0->unk_04[8 + i].position.x += (arg0->unk_01 * D_84B16A74[i] * 0.5f);
         }
     } else {
         arg0->unk_01 = 0;
@@ -415,7 +415,7 @@ void BattlePrepBadgeAward_Update(unk_D_84B25A90* arg0) {
     }
 }
 
-void BattlePrepBadgeAward_InitDisplayObjects(unk_D_84B25A90* arg0, unk_D_86002F58_004_000* arg1) {
+void BattlePrepBadgeAward_InitDisplayObjects(unk_D_84B25A90* arg0, DisplayObject* arg1) {
     s32 i;
 
     arg0->unk_04 = arg1;
@@ -424,18 +424,18 @@ void BattlePrepBadgeAward_InitDisplayObjects(unk_D_84B25A90* arg0, unk_D_86002F5
 
     for (i = 0; i < 8; i++) {
         Model_InitDisplayObject(&arg0->unk_04[8 + i], 0, 0, arg0->unk_08);
-        arg0->unk_04[8 + i].unk_01E.y = -0x8000;
-        arg0->unk_04[8 + i].unk_000.unk_14 = arg0;
+        arg0->unk_04[8 + i].rotation.y = -0x8000;
+        arg0->unk_04[8 + i].node.callbackArg = arg0;
     }
 
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[8].unk_024, -96.0f, 48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[9].unk_024, -32.0f, 48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[10].unk_024, 32.0f, 48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[11].unk_024, 96.0f, 48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[12].unk_024, -96.0f, -48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[13].unk_024, -32.0f, -48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[14].unk_024, 32.0f, -48.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[15].unk_024, 96.0f, -48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[8].position, -96.0f, 48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[9].position, -32.0f, 48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[10].position, 32.0f, 48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[11].position, 96.0f, 48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[12].position, -96.0f, -48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[13].position, -32.0f, -48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[14].position, 32.0f, -48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[15].position, 96.0f, -48.0f, -289.0f);
 }
 
 void BattlePrepBadgeAward_StartScatter(unk_D_84B25A90* arg0) {

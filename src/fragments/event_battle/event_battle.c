@@ -786,7 +786,7 @@ void EventBattle_UpdateNoticeBanner(SlidingPanel* arg0) {
             arg0->unk_02 += 7;
             if (arg0->unk_02 == 0x38) {
                 if (arg0->unk_01 == 0) {
-                    Audio_PlaySoundEffectById(8);
+                    Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                 }
                 arg0->unk_00 = 0;
             }
@@ -995,45 +995,45 @@ void EventBattle_UpdateSettingsPanel(unk_D_82305A40* arg0) {
                 if (arg0->unk_0C == 1) {
                     if (arg0->unk_02 >= 6) {
                         arg0->unk_02 -= 5;
-                        Audio_PlaySoundEffectById(1);
+                        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                     }
                 }
 
                 if (arg0->unk_0C == 2) {
                     if (arg0->unk_04 >= 0xB) {
                         arg0->unk_04 -= 0xA;
-                        Audio_PlaySoundEffectById(1);
+                        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                     }
                 }
             } else if ((temp_v0_2 == 0x100) && (arg0->unk_01 == 1)) {
                 if (arg0->unk_0C == 1) {
                     if (arg0->unk_02 < 0x5A) {
                         arg0->unk_02 += 5;
-                        Audio_PlaySoundEffectById(1);
+                        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                     }
                 }
 
                 if (arg0->unk_0C == 2) {
                     if (arg0->unk_04 < 0x5A) {
                         arg0->unk_04 += 0xA;
-                        Audio_PlaySoundEffectById(1);
+                        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                     }
                 }
             } else {
                 if (gPlayer1Controller->buttonPressed & 0x800) {
                     if (arg0->unk_0C > 0) {
                         arg0->unk_0C--;
-                        Audio_PlaySoundEffectById(1);
+                        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                     }
                 } else if (gPlayer1Controller->buttonPressed & 0x400) {
                     if (arg0->unk_0C < 3) {
                         arg0->unk_0C++;
-                        Audio_PlaySoundEffectById(1);
+                        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                     }
                 } else if (gPlayer1Controller->buttonPressed & 0x8000) {
                     if (arg0->unk_0C == 0) {
                         arg0->unk_01 ^= 1;
-                        Audio_PlaySoundEffectById(2);
+                        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     }
 
                     if (arg0->unk_0C == 3) {
@@ -1049,7 +1049,7 @@ void EventBattle_UpdateSettingsPanel(unk_D_82305A40* arg0) {
                         arg0->unk_02 = D_80075680[1];
                         arg0->unk_04 = D_80075680[2];
                         arg0->unk_00 = 3;
-                        Audio_PlaySoundEffectById(3);
+                        Audio_PlaySoundEffectById(SFX_MENU_BACK);
                     }
                 }
             }
@@ -1087,7 +1087,7 @@ void EventBattle_InitSettingsPanel(unk_D_82305A40* arg0, s16 arg1, s16 arg2, s32
 }
 
 void EventBattle_OpenSettingsPanel(unk_D_82305A40* arg0) {
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
     arg0->unk_00 = 2;
     arg0->unk_0C = 0;
 }
@@ -1166,22 +1166,22 @@ void EventBattle_UpdateModeSelect(unk_D_82305A28* arg0) {
             if (gPlayer1Controller->buttonPressed & 0x800) {
                 if (arg0->unk_02 >= 2) {
                     arg0->unk_02 -= 2;
-                    Audio_PlaySoundEffectById(1);
+                    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x400) {
                 if (arg0->unk_02 < 4) {
                     arg0->unk_02 += 2;
-                    Audio_PlaySoundEffectById(1);
+                    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x200) {
                 if ((arg0->unk_02 & 1) == 1) {
                     arg0->unk_02--;
-                    Audio_PlaySoundEffectById(1);
+                    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x100) {
                 if (!(arg0->unk_02 & 1)) {
                     arg0->unk_02++;
-                    Audio_PlaySoundEffectById(1);
+                    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x8000) {
                 switch (arg0->unk_02) {
@@ -1192,7 +1192,7 @@ void EventBattle_UpdateModeSelect(unk_D_82305A28* arg0) {
 
                     case 5:
                         arg0->unk_00 = 2;
-                        Audio_PlaySoundEffectById(3);
+                        Audio_PlaySoundEffectById(SFX_MENU_BACK);
                         break;
 
                     default:
@@ -1201,7 +1201,7 @@ void EventBattle_UpdateModeSelect(unk_D_82305A28* arg0) {
                         break;
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x4000) {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 arg0->unk_00 = 2;
             }
             EventBattle_DrawFrame(arg0->unk_02);
@@ -1435,12 +1435,12 @@ void EventBattle_UpdateActionMenu(unk_D_82305A28* arg0) {
             if (gPlayer1Controller->buttonPressed & 0x200) {
                 if (temp_s7 < arg0->unk_04) {
                     arg0->unk_04--;
-                    Audio_PlaySoundEffectById(1);
+                    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x100) {
                 if (arg0->unk_04 < 2) {
                     arg0->unk_04++;
-                    Audio_PlaySoundEffectById(1);
+                    Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x8000) {
                 switch (arg0->unk_04) {
@@ -1456,11 +1456,11 @@ void EventBattle_UpdateActionMenu(unk_D_82305A28* arg0) {
 
                     case 2:
                         arg0->unk_00 = 8;
-                        Audio_PlaySoundEffectById(3);
+                        Audio_PlaySoundEffectById(SFX_MENU_BACK);
                         break;
                 }
             } else if (gPlayer1Controller->buttonPressed & 0x4000) {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 arg0->unk_04 = 2;
                 arg0->unk_00 = 8;
             }

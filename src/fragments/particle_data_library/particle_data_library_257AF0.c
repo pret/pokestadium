@@ -26,7 +26,7 @@ void func_81002830(Gfx* gfx, unk_arg1_func_81002830* arg1) {
     s32 var_a3;
     unk_arg1_func_81002830* p;
     p = arg1;
-    if (D_8006F09C->unk_01C == 0) {
+    if (D_8006F09C->textureMode == 0) {
         temp_v0 = 0x4000;
         // FAKE
         if ((arg1 && arg1) && arg1) {}
@@ -67,8 +67,8 @@ void DisplayList_InitSelectedTextureSegment(s32 arg0, TextureState* state) {
     if (arg0 == 2) {
         textures = state->textures;
         state->gfx = (Gfx*)Gfx_AllocDisplayList(0x50);
-        if (D_8006F09C->unk_01A == 0x58) {
-            index = (s32) D_8006F09C->unk_040.unk_08 >> 0x10;
+        if (D_8006F09C->objectType == 0x58) {
+            index = (s32) D_8006F09C->transformAnim.frameFixed >> 0x10;
             if (index >= 0x42) {
                 index = index - 0x42;
             } else {
@@ -77,7 +77,7 @@ void DisplayList_InitSelectedTextureSegment(s32 arg0, TextureState* state) {
             if (index >= 8) {
                 index = 0;
             }
-            if (D_8006F09C->unk_040.unk_00 >= 2) {
+            if (D_8006F09C->transformAnim.animationId >= 2) {
                 index = 0;
             }
         } else {

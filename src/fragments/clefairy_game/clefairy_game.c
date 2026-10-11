@@ -24,7 +24,7 @@ typedef struct unk_D_861054C0 {
     /* 0x000 */ s16 unk_000;
     /* 0x002 */ s16 unk_002;
     /* 0x004 */ char pad4[4];
-    /* 0x008 */ unk_D_86002F58_004_000 unk_008;
+    /* 0x008 */ DisplayObject unk_008;
     /* 0x170 */ s16 unk_170;
     /* 0x172 */ u16 unk_172;
     /* 0x174 */ s16 unk_174[0xC];
@@ -45,14 +45,14 @@ typedef struct unk_D_861054C0 {
 
 typedef struct unk_D_86105EA0 {
     /* 0x000 */ char unk000[0x4];
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+    /* 0x004 */ DisplayObject unk_004;
 } unk_D_86105EA0; // size = 0x16C
 
 typedef struct unk_D_86106450 {
     /* 0x000 */ s16 unk_000;
     /* 0x002 */ s16 unk_002;
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
-    /* 0x16C */ unk_D_86002F58_004_000_004* unk_16C;
+    /* 0x004 */ DisplayObject unk_004;
+    /* 0x16C */ ModelNodeView* unk_16C;
 } unk_D_86106450; // size = 0x170
 
 void ClefairyGame_DespawnPatternIcons(void);
@@ -318,11 +318,11 @@ static s32 D_861054BC;
 static unk_D_861054C0 D_861054C0[4];
 static s32 D_86105BC0;
 static unk_D_861054C0* D_86105BC4;
-static unk_D_86002F58_004_000* D_86105BC8;
+static DisplayObject* D_86105BC8;
 static s16 D_86105BCC;
 static s16 D_86105BCE;
-static unk_D_86002F58_004_000 D_86105BD0;
-static unk_D_86002F58_004_000 D_86105D38;
+static DisplayObject D_86105BD0;
+static DisplayObject D_86105D38;
 static unk_D_86105EA0 D_86105EA0[4];
 static unk_D_86106450 D_86106450[12];
 static s16 D_86107590;
@@ -339,7 +339,7 @@ void ClefairyGame_SetAllPlayerAnimSpeed(s32 arg0) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        D_861054C0[i].unk_008.unk_040.unk_0C = arg0;
+        D_861054C0[i].unk_008.transformAnim.speedFixed = arg0;
     }
 }
 
@@ -522,7 +522,7 @@ void ClefairyGame_PollInputs(void) {
 }
 
 void ClefairyGame_InitCamera(void) {
-    D_86105488 = D_86105484->unk_00.unk_0C;
+    D_86105488 = D_86105484->node.children;
     MiniCam_SetActive(D_86105488);
 
     D_86105490 = 0x600;
@@ -799,7 +799,7 @@ s32 ClefairyGame_WaitForStart(void) {
         D_86105BC8 = &D_86105BC4->unk_008;
         ModelAnim_SetAnimation(D_86105BC8, 0);
         ModelAnim_ClearEventTrack(D_86105BC8);
-        D_86105BC8->unk_040.unk_0C = 0x10000;
+        D_86105BC8->transformAnim.speedFixed = 0x10000;
         D_86105BC4->unk_1AA = 0x64;
         D_86105BC4->unk_1A8 = D_86105BC4->unk_1AA;
         D_86105BC4->unk_1AC = 0;
@@ -828,7 +828,7 @@ s32 ClefairyGame_WaitForStart(void) {
         }
 
         if ((D_8780FA2A == 0) && (temp_v1 & 0x4000) && (D_861054BA == 1)) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             Widget_PauseMenuTrigger(2);
             return -1;
         }
@@ -848,14 +848,14 @@ void ClefairyGame_UpdateStartCountdown(void) {
         if (D_86105BC4->unk_1AC == 0) {
             ModelAnim_SetAnimation(D_86105BC8, 0);
             ModelAnim_ClearEventTrack(D_86105BC8);
-            D_86105BC8->unk_040.unk_0C = 0x10000;
+            D_86105BC8->transformAnim.speedFixed = 0x10000;
         }
     }
 
     ModelAnim_SetAnimation(&D_86105BD0, 0);
     ModelAnim_ClearEventTrack(&D_86105BD0);
 
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
     D_86105BCC = 1;
     D_86105BCE = 0x5A;
 
@@ -910,26 +910,26 @@ void ClefairyGame_BeginPatternDemo(void) {
     MiniSound_DispatchCommand(0x90003, 0, 0);
     ModelAnim_SetAnimation(&D_86105BD0, 1);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
     ModelAnim_SetEventTrack(&D_86105BD0, 0);
 }
 
 void ClefairyGame_BeginDemoPlayerAnims(void) {
     s32 i;
-    unk_D_86002F58_004_000* temp_s0;
+    DisplayObject* temp_s0;
 
     D_86105498 = 4;
     D_8610549C = 0;
     ModelAnim_SetAnimation(&D_86105BD0, 0);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
 
     for (i = 0; i < 4; i++) {
         temp_s0 = &D_861054C0[i].unk_008;
         if (D_861054C0[i].unk_1AC == 0) {
             ModelAnim_SetAnimation(temp_s0, 2);
             ModelAnim_ClearEventTrack(temp_s0);
-            temp_s0->unk_040.unk_0C = 0x20000;
+            temp_s0->transformAnim.speedFixed = 0x20000;
         }
     }
 }
@@ -956,14 +956,14 @@ s32 ClefairyGame_WaitDemoIntro(void) {
 
 s32 ClefairyGame_UpdateDemoPlayerAnims(void) {
     s32 i;
-    unk_D_86002F58_004_000* temp_s0;
+    DisplayObject* temp_s0;
 
     for (i = 0; i < 4; i++) {
         temp_s0 = &D_861054C0[i].unk_008;
         if ((D_861054C0[i].unk_1AC == 0) && (ModelAnim_IsFinished(temp_s0) != 0)) {
             ModelAnim_SetAnimation(temp_s0, 1);
             ModelAnim_ClearEventTrack(temp_s0);
-            temp_s0->unk_040.unk_0C = 0x10000;
+            temp_s0->transformAnim.speedFixed = 0x10000;
         }
     }
 
@@ -982,7 +982,7 @@ void ClefairyGame_AdvancePatternDemo(void) {
     MiniSound_DispatchCommand(0x90006, 0, 0);
     ModelAnim_SetAnimation(&D_86105BD0, 2);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
 }
 
 void ClefairyGame_PreparePatternIconSpawn(void) {
@@ -990,7 +990,7 @@ void ClefairyGame_PreparePatternIconSpawn(void) {
     D_8610549C = 0;
     ModelAnim_SetAnimation(&D_86105BD0, 0);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
 }
 
 s32 ClefairyGame_WaitDemoAdvance(void) {
@@ -1038,7 +1038,7 @@ s32 ClefairyGame_FinishPatternIconSpawn(void) {
 
         ModelAnim_SetAnimation(&D_86105BD0, 1);
         ModelAnim_ClearEventTrack(&D_86105BD0);
-        D_86105BD0.unk_040.unk_08 = 0;
+        D_86105BD0.transformAnim.frameFixed = 0;
         return -1;
     }
 
@@ -1126,7 +1126,7 @@ void ClefairyGame_EndPatternResponse(void) {
     D_8610549C = 0;
     ModelAnim_SetAnimation(&D_86105BD0, 1);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
     MiniSound_DispatchCommand(0x90008, 0, 0);
     MiniSound_DispatchCommand(0x90003, 0, 0);
 }
@@ -1143,8 +1143,8 @@ void ClefairyGame_StartPlaybackTransition(void) {
             D_86105BC8 = &D_86105BC4->unk_008;
             ModelAnim_SetAnimation(D_86105BC8, 2);
             ModelAnim_ClearEventTrack(D_86105BC8);
-            D_86105BC8->unk_040.unk_08 = 0x200000;
-            D_86105BC8->unk_040.unk_0C = 0xFFFE0000;
+            D_86105BC8->transformAnim.frameFixed = 0x200000;
+            D_86105BC8->transformAnim.speedFixed = 0xFFFE0000;
         }
     }
 }
@@ -1230,7 +1230,7 @@ s32 ClefairyGame_WaitPlaybackTransition(void) {
     for (i = 0; i < 4; i++) {
         D_86105BC4 = &D_861054C0[i];
         D_86105BC8 = &D_86105BC4->unk_008;
-        if ((D_86105BC4->unk_1AC == 0) && (D_86105BC8->unk_040.unk_08 == 0)) {
+        if ((D_86105BC4->unk_1AC == 0) && (D_86105BC8->transformAnim.frameFixed == 0)) {
             return -1;
         }
     }
@@ -1253,14 +1253,14 @@ void ClefairyGame_PreparePatternPlayback(void) {
             ModelAnim_SetAnimation(D_86105BC8, 3);
             ModelAnim_ClearEventTrack(D_86105BC8);
             ModelAnim_SetEventTrack(D_86105BC8, 4);
-            D_86105BC8->unk_040.unk_08 = 0;
-            D_86105BC8->unk_040.unk_0C = 0x10000;
+            D_86105BC8->transformAnim.frameFixed = 0;
+            D_86105BC8->transformAnim.speedFixed = 0x10000;
         }
     }
 
     ModelAnim_SetAnimation(&D_86105BD0, 3);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
     ModelAnim_SetEventTrack(&D_86105BD0, 1);
 }
 
@@ -1310,7 +1310,7 @@ void ClefairyGame_BeginPatternPlayback(void) {
     D_8610549C = 0;
     ModelAnim_SetAnimation(&D_86105BD0, 4);
     ModelAnim_ClearEventTrack(&D_86105BD0);
-    D_86105BD0.unk_040.unk_08 = 0;
+    D_86105BD0.transformAnim.frameFixed = 0;
 
     for (i = 0; i < 4; i++) {
         D_86105BC4 = &D_861054C0[i];
@@ -1330,7 +1330,7 @@ s32 ClefairyGame_UpdatePatternPlayback(void) {
     if (temp_lo >= D_861054A0) {
         ModelAnim_SetAnimation(&D_86105BD0, 0);
         ModelAnim_ClearEventTrack(&D_86105BD0);
-        D_86105BD0.unk_040.unk_08 = 0;
+        D_86105BD0.transformAnim.frameFixed = 0;
 
         for (i = 0; i < 4; i++) {
             D_86105BC4 = &D_861054C0[i];
@@ -1338,7 +1338,7 @@ s32 ClefairyGame_UpdatePatternPlayback(void) {
                 D_86105BC8 = &D_86105BC4->unk_008;
                 ModelAnim_SetAnimation(D_86105BC8, 0);
                 ModelAnim_ClearEventTrack(D_86105BC8);
-                D_86105BC8->unk_040.unk_0C = 0x10000;
+                D_86105BC8->transformAnim.speedFixed = 0x10000;
             }
         }
 
@@ -1374,8 +1374,8 @@ s32 ClefairyGame_UpdatePatternPlayback(void) {
                         break;
                 }
 
-                D_86105BC8->unk_040.unk_08 = 0;
-                D_86105BC8->unk_040.unk_0C = 0x10000;
+                D_86105BC8->transformAnim.frameFixed = 0;
+                D_86105BC8->transformAnim.speedFixed = 0x10000;
 
                 if (D_86105BC4->unk_18E[temp_lo] != D_86106450[temp_lo].unk_000) {
                     D_86105BC4->unk_1A6++;
@@ -1397,8 +1397,8 @@ void ClefairyGame_DeductPlayerHealth(void) {
         ModelAnim_SetAnimation(D_86105BC8, 0xA);
         ModelAnim_ClearEventTrack(D_86105BC8);
         ModelAnim_SetEventTrack(D_86105BC8, 1);
-        D_86105BC8->unk_040.unk_08 = 0;
-        D_86105BC8->unk_040.unk_0C = 0x10000;
+        D_86105BC8->transformAnim.frameFixed = 0;
+        D_86105BC8->transformAnim.speedFixed = 0x10000;
         D_86105BC4->unk_1AC = 1;
     }
 }
@@ -1429,7 +1429,7 @@ void ClefairyGame_BeginRoundScoring(void) {
 
 s32 ClefairyGame_UpdateRoundScoring(void) {
     s32 var_v1 = 0;
-    unk_D_86002F58_004_000* temp_s0;
+    DisplayObject* temp_s0;
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -1451,7 +1451,7 @@ s32 ClefairyGame_UpdateRoundScoring(void) {
                 temp_s0 = &D_86105EA0[i].unk_004;
                 ModelAnim_SetAnimation(temp_s0, 0);
                 ModelAnim_ClearEventTrack(temp_s0);
-                temp_s0->unk_040.unk_08 = 0;
+                temp_s0->transformAnim.frameFixed = 0;
             }
         }
     }
@@ -1489,7 +1489,7 @@ s32 ClefairyGame_UpdatePenaltyPhase(void) {
             if (ModelAnim_IsFinished(D_86105BC8) != 0) {
                 ModelAnim_SetAnimation(D_86105BC8, 0);
                 ModelAnim_ClearEventTrack(D_86105BC8);
-                D_86105BC8->unk_040.unk_0C = 0x10000;
+                D_86105BC8->transformAnim.speedFixed = 0x10000;
             }
         }
     }
@@ -1502,7 +1502,7 @@ s32 ClefairyGame_UpdatePenaltyPhase(void) {
             D_86105BC4 = &D_861054C0[i];
             if ((D_86105BC4->unk_1B2 == 0) && (D_86105BC4->unk_1AC == 0)) {
                 D_86105BC8 = &D_86105BC4->unk_008;
-                if (D_86105EA0[i].unk_004.unk_040.unk_08 == 0xD0000) {
+                if (D_86105EA0[i].unk_004.transformAnim.frameFixed == 0xD0000) {
                     if (var_s5 == 0) {
                         MiniSound_DispatchCommand(0x90004, 0, 0);
                         var_s5 = 1;
@@ -1510,8 +1510,8 @@ s32 ClefairyGame_UpdatePenaltyPhase(void) {
                     ModelAnim_SetAnimation(D_86105BC8, 9);
                     ModelAnim_ClearEventTrack(D_86105BC8);
                     ModelAnim_SetEventTrack(D_86105BC8, 0);
-                    D_86105BC8->unk_040.unk_08 = 0;
-                    D_86105BC8->unk_040.unk_0C = 0x10000;
+                    D_86105BC8->transformAnim.frameFixed = 0;
+                    D_86105BC8->transformAnim.speedFixed = 0x10000;
                     D_86105BC4->unk_1B2 = 1;
                 }
             }
@@ -1765,17 +1765,17 @@ void ClefairyGame_LoadAssets(void) {
         ModelRenderer_AttachDisplayObject(D_86105BC8);
         Model_InitDisplayObject(D_86105BC8, 0, 0xB1, D_86105480->unk_08->unk_00[0]);
 
-        D_86105BC8->unk_024.x = (i - 1.5f) * 40.0f;
-        D_86105BC8->unk_024.y = 0.0f;
-        D_86105BC8->unk_024.z = 0.0f;
-        D_86105BC8->unk_030.x = 1.0f;
-        D_86105BC8->unk_030.y = 1.0f;
-        D_86105BC8->unk_030.z = 1.0f;
+        D_86105BC8->position.x = (i - 1.5f) * 40.0f;
+        D_86105BC8->position.y = 0.0f;
+        D_86105BC8->position.z = 0.0f;
+        D_86105BC8->scale.x = 1.0f;
+        D_86105BC8->scale.y = 1.0f;
+        D_86105BC8->scale.z = 1.0f;
 
         ModelAnim_SetAnimation(D_86105BC8, 0);
         ModelAnim_ClearEventTrack(D_86105BC8);
 
-        D_86105BC8->unk_040.unk_08 = 0;
+        D_86105BC8->transformAnim.frameFixed = 0;
         D_86105BC4->unk_1B4 = 0;
         D_86105BC4->unk_1B8 = 0.0f;
         D_86105BC4->unk_1BC = 0.0f;
@@ -1785,12 +1785,12 @@ void ClefairyGame_LoadAssets(void) {
     D_86105BC8 = &D_86105BD0;
     ModelRenderer_AttachDisplayObject(D_86105BC8);
     Model_InitDisplayObject(D_86105BC8, 0, 0xB2, D_86105480->unk_08->unk_00[0]);
-    D_86105BC8->unk_024.x = 0.0f;
-    D_86105BC8->unk_024.y = 10.0f;
-    D_86105BC8->unk_024.z = -145.0f;
-    D_86105BC8->unk_030.x = 1.0f;
-    D_86105BC8->unk_030.y = 1.0f;
-    D_86105BC8->unk_030.z = 1.0f;
+    D_86105BC8->position.x = 0.0f;
+    D_86105BC8->position.y = 10.0f;
+    D_86105BC8->position.z = -145.0f;
+    D_86105BC8->scale.x = 1.0f;
+    D_86105BC8->scale.y = 1.0f;
+    D_86105BC8->scale.z = 1.0f;
     ModelAnim_SetAnimation(D_86105BC8, 0);
     ModelAnim_ClearEventTrack(D_86105BC8);
     D_86105480 = Model_LoadByArchiveIndex(0xB3);
@@ -1811,12 +1811,12 @@ void ClefairyGame_LoadAssets(void) {
         D_86105BC8 = &D_86105EA0[i].unk_004;
         ModelRenderer_AttachDisplayObject(D_86105BC8);
         Model_InitDisplayObject(D_86105BC8, 0, 0xB5, D_86105480->unk_08->unk_00[0]);
-        D_86105BC8->unk_024.x = (i - 1.5f) * 40.0f;
-        D_86105BC8->unk_024.y = 0.0f;
-        D_86105BC8->unk_024.z = 0.0f;
+        D_86105BC8->position.x = (i - 1.5f) * 40.0f;
+        D_86105BC8->position.y = 0.0f;
+        D_86105BC8->position.z = 0.0f;
         ModelAnim_SetAnimation(D_86105BC8, 0);
         ModelAnim_ClearEventTrack(D_86105BC8);
-        D_86105BC8->unk_040.unk_08 = 0x320000;
+        D_86105BC8->transformAnim.frameFixed = 0x320000;
     }
 
     ClefairyGame_InitCamera();
@@ -1834,9 +1834,9 @@ void ClefairyGame_PositionPatternIcons(void) {
     for (i = 0; i < 12; i++) {
         if (GeoRender_FindAnchorPosition(&D_86105D38, (s16)(i + 1), &sp48) != 0) {
             D_86105BC8 = &D_86106450[i].unk_004;
-            D_86105BC8->unk_024.x = sp48.x / 10.0f;
-            D_86105BC8->unk_024.y = sp48.y / 10.0f;
-            D_86105BC8->unk_024.z = sp48.z / 10.0f;
+            D_86105BC8->position.x = sp48.x / 10.0f;
+            D_86105BC8->position.y = sp48.y / 10.0f;
+            D_86105BC8->position.z = sp48.z / 10.0f;
         }
     }
 

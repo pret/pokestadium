@@ -96,8 +96,8 @@ typedef struct unk_D_86807558 {
     /* 0x0DC */ unk_D_868084D8* unk_0DC;
     /* 0x0E0 */ s16 unk_0E0;
     /* 0x0E2 */ s16 unk_0E2;
-    /* 0x0E4 */ unk_D_86002F58_004_000 unk_0E4;
-    /* 0x24C */ unk_D_86002F58_004_000 unk_24C;
+    /* 0x0E4 */ DisplayObject unk_0E4;
+    /* 0x24C */ DisplayObject unk_24C;
     /* 0x3B4 */ u32* unk_3B4;
 } unk_D_86807558; // size = 0x3B8
 
@@ -112,7 +112,7 @@ typedef struct unk_D_86808498 {
 } unk_D_86808498; // size >= 0x38
 
 typedef struct unk_D_86808808_018 {
-    /* 0x000 */ unk_D_86002F58_004_000_000 unk_000;
+    /* 0x000 */ DisplayNodeHeader node;
     /* 0x018 */ char unk018[0xC];
     /* 0x024 */ Vec3f unk_024;
     /* 0x030 */ Vec3f unk_030;

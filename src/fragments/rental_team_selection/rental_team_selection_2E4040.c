@@ -519,11 +519,11 @@ void TeamSelection_RulePrompt_HandleInput(void) {
 
             switch (tmp2 & 7) {
                 case 1:
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                     break;
 
                 case 2:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     break;
 
                 case 3:
@@ -542,23 +542,23 @@ void TeamSelection_RulePrompt_HandleInput(void) {
                     if (Deck_FindFirstFreeTeamSlot() < 0xC) {
                         Audio_PlaySoundEffectById(0x20);
                     } else {
-                        Audio_PlaySoundEffectById(8);
+                        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                     }
                     break;
             }
             D_84211700 = 3;
         } else if (BTN_IS_PRESSED(D_8423E584, BTN_B)) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             D_8423E58A = -1;
             D_84211700 = 3;
         } else if (BTN_IS_PRESSED(D_8423E584, BTN_DUP)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             D_8423E58A -= 1;
             if (D_8423E58A < 0) {
                 D_8423E58A = tmp - 1;
             }
         } else if (BTN_IS_PRESSED(D_8423E584, BTN_DDOWN)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             D_8423E58A += 1;
             if (D_8423E58A >= tmp) {
                 D_8423E58A = 0;
@@ -617,7 +617,7 @@ s32 TeamSelection_RulePrompt_Open(s16 arg0, Controller* arg1) {
                 Audio_PlaySoundEffectById(0x1E);
                 break;
         }
-        Audio_PlaySoundEffectById(4);
+        Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         D_8423E580 = arg0;
         D_8423E58A = D_84211704[arg0].unk_0B;
         D_8423E588 = 0;

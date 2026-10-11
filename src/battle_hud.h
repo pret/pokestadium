@@ -19,7 +19,7 @@ void ModelAnim_UpdateFrameChangeState(void);
 s32 func_800325AC(void);
 u8 ModelRenderer_GetActiveMode(void);
 s16 ModelRenderer_GetObjectType(void);
-void ModelAnim_StartDisplayObjectAnimation(unk_D_86002F58_004_000* arg0);
+void ModelAnim_StartDisplayObjectAnimation(DisplayObject* arg0);
 void ModelAnim_UpdateDisplayObjectAnimation(u32 arg0, u32 arg1);
 void ModelAnim_FinalizeDisplayObjectAnimation(u32 arg0, u32 arg1);
 void Gfx_SetCombineMode(Gfx*, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);

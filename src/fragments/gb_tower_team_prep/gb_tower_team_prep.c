@@ -10,7 +10,7 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 
-static unk_D_86002F58_004_000_010* D_82A00370;
+static ModelLoadContext* D_82A00370;
 static unk_func_8001A024* D_82A00374;
 static BattleMon D_82A00378[6];
 

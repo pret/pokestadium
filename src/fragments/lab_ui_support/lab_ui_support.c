@@ -210,7 +210,7 @@ s32 LabUI_RunConfirmDialog(unk_func_889000C4* arg0, Controller* arg1, s32 arg2) 
         if (!(temp_v0 & 1)) {
             if (arg1->buttonPressed & 0x4000) {
                 if (arg0->unk_30->unk_2C->unk_08 == 3) {
-                    var_s0 = 3;
+                    var_s0 = SFX_MENU_BACK;
                     Audio_PlaySoundEffectById(var_s0);
                 }
             } else if (arg1->buttonPressed & 0x8000) {
@@ -225,7 +225,7 @@ s32 LabUI_RunConfirmDialog(unk_func_889000C4* arg0, Controller* arg1, s32 arg2) 
                             break;
 
                         case 2:
-                            Audio_PlaySoundEffectById(3);
+                            Audio_PlaySoundEffectById(SFX_MENU_BACK);
                             break;
                     }
                 }

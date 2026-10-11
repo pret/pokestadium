@@ -3386,7 +3386,7 @@ s32 Pokedex_FindPrevMapArea(s32 arg0) {
 void Pokedex_BuildMapMarkerDisplayList(void) {
     Gfx* temp_v0 = Gfx_AllocDisplayList(sizeof(Gfx) * 5);
 
-    D_888269C0.unk_18 = temp_v0;
+    D_888269C0.gfx = temp_v0;
 
     if (D_88826A4C == 1) {
         gSPDisplayList(temp_v0++, D_88825648);
@@ -3408,11 +3408,11 @@ void Pokedex_BuildMapMarkersDisplayList(void) {
     Gfx* temp_v0;
     s32 j;
 
-    temp_s2 = D_88826A44->unk_0C;
+    temp_s2 = D_88826A44->children;
     ptr = &temp_s2->unk_60;
 
     temp_v0 = Gfx_AllocDisplayList(sizeof(Gfx) * 36 * 25);
-    D_888269E0.unk_18 = temp_v0;
+    D_888269E0.gfx = temp_v0;
     D_88826CE8 = Gfx_AllocDisplayList(sizeof(Mtx) * 36);
     var_s1 = D_88826CE8;
 
@@ -3491,7 +3491,7 @@ void Pokedex_BuildOverviewMarkersDisplayList(void) {
     Gfx* temp_v0;
 
     temp_v0 = Gfx_AllocDisplayList(sizeof(Gfx) * 170);
-    D_88826A20.unk_18 = temp_v0;
+    D_88826A20.gfx = temp_v0;
 
     if (D_88826A4C == 1) {
         gSPDisplayList(temp_v0++, D_888255B8);
@@ -3698,7 +3698,7 @@ void Pokedex_BuildMapLabelsDisplayList(void) {
     s32 sp2C;
 
     temp_v0 = Gfx_AllocDisplayList(sizeof(Gfx) * 450);
-    D_88826A00.unk_18 = temp_v0;
+    D_88826A00.gfx = temp_v0;
 
     gSPDisplayList(temp_v0++, D_88825510);
 
@@ -3815,7 +3815,7 @@ void Pokedex_EaseVec3Toward(Vec3f* arg0, Vec3f* arg1) {
 
 void Pokedex_UpdateAreaMapFrame(void) {
     UNUSED s32 pad;
-    unk_D_86002F34_00C* node = D_88826A44->unk_0C;
+    unk_D_86002F34_00C* node = D_88826A44->children;
     Vec3f* vec;
     Vec3f sp28;
 
@@ -4045,10 +4045,10 @@ s32 Pokedex_CheckAreaMapExit(void) {
             D_88826A4C = (D_88826A4C + 1) & 1;
             switch (D_88826A4C) {
                 case 0:
-                    Audio_PlaySoundEffectByIdWrapper(3);
+                    Audio_PlaySoundEffectByIdWrapper(SFX_MENU_BACK);
                     break;
                 case 1:
-                    Audio_PlaySoundEffectByIdWrapper(2);
+                    Audio_PlaySoundEffectByIdWrapper(SFX_MENU_CONFIRM);
                     break;
             }
         }
@@ -4057,7 +4057,7 @@ s32 Pokedex_CheckAreaMapExit(void) {
             D_88826A50 = D_88826A4E;
             D_88826A4E = Pokedex_FindNextMapArea(D_88826A4E);
             if (D_88826A50 != D_88826A4E) {
-                Audio_PlaySoundEffectByIdWrapper(1);
+                Audio_PlaySoundEffectByIdWrapper(SFX_MENU_SCROLL);
                 Pokedex_ResetCameraEase();
             }
         }
@@ -4066,7 +4066,7 @@ s32 Pokedex_CheckAreaMapExit(void) {
             D_88826A50 = D_88826A4E;
             D_88826A4E = Pokedex_FindPrevMapArea(D_88826A4E);
             if (D_88826A50 != D_88826A4E) {
-                Audio_PlaySoundEffectByIdWrapper(1);
+                Audio_PlaySoundEffectByIdWrapper(SFX_MENU_SCROLL);
                 Pokedex_ResetCameraEase();
             }
         }
@@ -4079,7 +4079,7 @@ s32 Pokedex_CheckAreaMapExit(void) {
                         D_88826A4C = 0;
                     }
                     D_88826A50 = D_88826A4E;
-                    Audio_PlaySoundEffectByIdWrapper(0x19);
+                    Audio_PlaySoundEffectByIdWrapper(SFX_ZOOM_IN);
                     Pokedex_ResetCameraEase();
                 }
                 break;
@@ -4089,7 +4089,7 @@ s32 Pokedex_CheckAreaMapExit(void) {
                     D_88826A52 = 0;
                     D_88826A80 = 1;
                     D_88826A50 = D_88826A4E;
-                    Audio_PlaySoundEffectByIdWrapper(0x1A);
+                    Audio_PlaySoundEffectByIdWrapper(SFX_ZOOM_OUT);
                     Pokedex_ResetCameraEase();
                 }
                 break;
@@ -4185,7 +4185,7 @@ void func_88807D04(s32 arg0, MainPoolState* arg1, UNUSED s32 arg2, s32 arg3, s32
     GeoNode_CreateDisplayList(NULL, &D_88826A00, 5, NULL);
     GeoNode_CreateDisplayList(NULL, &D_888269E0, 4, NULL);
     D_88826A44 = process_geo_layout(sp4C, D_888265DC);
-    ptr = D_88826A44->unk_0C;
+    ptr = D_88826A44->children;
     ptr->unk_60.at = D_8882627C;
     ptr->unk_60.eye = D_88826288;
 }

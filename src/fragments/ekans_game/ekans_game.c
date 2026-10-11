@@ -1687,7 +1687,7 @@ void EkansGame_PlaySoundEvent(s16 arg0, s16 arg1) {
             break;
 
         case 17:
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             break;
 
         case 18:
@@ -1751,13 +1751,13 @@ void initEkans(MiniActor* ekans, s16 player) {
 
     ModelAnim_SetAnimation(&ekans->unk_000, 0);
 
-    ekans->unk_000.unk_000.unk_01 |= 1;
-    ekans->unk_000.unk_000.unk_02 |= 0x20;
+    ekans->unk_000.node.flags |= 1;
+    ekans->unk_000.node.renderFlags |= 0x20;
 
-    ModelAnim_BindTransformCurve(&ekans->unk_000, 0, ekans->unk_000.unk_040.unk_04, 0x10000);
+    ModelAnim_BindTransformCurve(&ekans->unk_000, 0, ekans->unk_000.transformAnim.data, 0x10000);
     ModelAnim_SetFrame(&ekans->unk_000, ekans->unk_26E);
 
-    ekans->unk_000.unk_000.unk_02 &= ~0x40;
+    ekans->unk_000.node.renderFlags &= ~0x40;
     ekans->isComp = D_879060C4[player];
     ekans->collidingActorId = -1;
 
@@ -2323,7 +2323,7 @@ void ekansFixDirToDiglett(MiniActor* ekans, UNUSED s32 nPlayer, s32 nActiveDigle
     EkansGame_PlaySoundEventGuarded(5, nActiveDiglett);
 
     ekans->unk_298 = 0xC;
-    ekans->unk_000.unk_000.unk_02 &= ~0x20;
+    ekans->unk_000.node.renderFlags &= ~0x20;
     ekans->ySpinSpeed = 0x1000;
 }
 
@@ -2439,7 +2439,7 @@ void EkansGame_CaptureDiglett(MiniActor* ekans, s32 nPlayer) {
     ekans->position_2.x = ekans->position_2.z = 0.0f;
 
     ekans->ySpinSpeed = 0x2000;
-    ekans->unk_000.unk_000.unk_02 &= 0xFFDF;
+    ekans->unk_000.node.renderFlags &= 0xFFDF;
 
     if ((zDist > 15.0f) || (zDist < -15.0f)) {
         ekans->dist2DiglettLevelZ = 4.0f;
@@ -2503,7 +2503,7 @@ void miniGetCloser2Diglett(MiniActor* ekans, s32 nPlayer) {
                 ekans->ySpeed *= -0.5f;
                 EkansGame_PlaySoundEventGuarded(4, nPlayer);
             }
-            ekans->unk_000.unk_000.unk_02 &= ~0x20;
+            ekans->unk_000.node.renderFlags &= ~0x20;
             ekans->ekansScore += ekans->ekansDiglettHitScore;
             ekans->ekansDiglettHitScore = 0;
         }
@@ -2516,11 +2516,11 @@ void miniGetCloser2Diglett(MiniActor* ekans, s32 nPlayer) {
         }
 
         if (ekans->unk_29E < 6) {
-            s16 tmp = ekans->unk_000.unk_01D - 0x40;
+            s16 tmp = ekans->unk_000.lodFraction - 0x40;
             if (tmp < 0) {
                 tmp = 0;
             }
-            ekans->unk_000.unk_01D = tmp;
+            ekans->unk_000.lodFraction = tmp;
         }
 
         ekans->unk_29E--;
@@ -2533,8 +2533,8 @@ void miniGetCloser2Diglett(MiniActor* ekans, s32 nPlayer) {
                 }
             }
 
-            ekans->unk_000.unk_000.unk_01 &= ~1;
-            ekans->unk_000.unk_01D = 0xFF;
+            ekans->unk_000.node.flags &= ~1;
+            ekans->unk_000.lodFraction = 0xFF;
             ekans->yRot_3 = 0;
             ekans->ySpinSpeed = 0;
             ekans->midAirState = 0;
@@ -2593,8 +2593,8 @@ void miniEkansPlayerStateMachine(MiniActor* ekans, s32 nPlayer) {
             break;
 
         case 0x4:
-            ekans->unk_000.unk_000.unk_01 |= 1;
-            ekans->unk_000.unk_000.unk_02 |= 0x20;
+            ekans->unk_000.node.flags |= 1;
+            ekans->unk_000.node.renderFlags |= 0x20;
             ekans->unk_298 = 0;
             ekans->unk_296 = 0;
             ekans->stickMagnitude1 = 0.0f;
@@ -2678,8 +2678,8 @@ void initDiglett(MiniActor* diglett, s32 nDiglett) {
     ModelAnim_SetAnimation(&diglett->unk_000, 1);
     MiniActor_SnapAnimToLastFrame(&diglett->unk_000);
 
-    diglett->unk_000.unk_01C = 0;
-    diglett->unk_000.unk_000.unk_02 &= ~0x40;
+    diglett->unk_000.textureMode = 0;
+    diglett->unk_000.node.renderFlags &= ~0x40;
 }
 
 void initDiglettHole(MiniActor* hole, s32 arg1) {
@@ -2693,7 +2693,7 @@ void initDiglettHole(MiniActor* hole, s32 arg1) {
     hole->position_1.y = diglettActorInfo[arg1].pos.y;
     hole->position_1.z = diglettActorInfo[arg1].pos.z;
 
-    hole->unk_000.unk_000.unk_02 &= ~0x40;
+    hole->unk_000.node.renderFlags &= ~0x40;
 }
 
 void resetActiveDigletts(void) {
@@ -2827,7 +2827,7 @@ void EkansGame_RollDiglettGoldChance(MiniActor* diglett) {
     if (sp18 != 0) {
         D_86C12034 += 1;
         diglett->diglettIsGold = true;
-        diglett->unk_000.unk_01C = 1;
+        diglett->unk_000.textureMode = 1;
     }
 }
 
@@ -2895,7 +2895,7 @@ void miniDiglettStateMachine(void) {
                     activeDigletts[i].timer = 0xD;
                     activeDigletts[i].diglettId = miniEkansChooseRandDiglett(i);
                     miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
-                    miniDiglettPtr->unk_000.unk_000.unk_01 |= 1;
+                    miniDiglettPtr->unk_000.node.flags |= 1;
                     EkansGame_PlaySoundEventGuarded(7, i);
                     EkansGame_RollDiglettGoldChance(miniDiglettPtr);
                     miniChangeActorAnim_alt2(miniDiglettPtr, 1, -1, 1);
@@ -2935,11 +2935,11 @@ void miniDiglettStateMachine(void) {
             case 8:
                 miniDiglettPtr = &miniDigletts[activeDigletts[i].diglettId];
                 if (miniPokeIsIdleCheck(miniDiglettPtr)) {
-                    miniDiglettPtr->unk_000.unk_000.unk_01 &= ~1;
+                    miniDiglettPtr->unk_000.node.flags &= ~1;
                     activeDigletts[i].timer = 1;
                     activeDigletts[i].state = 9;
                     miniDiglettPtr->diglettIsGold = false;
-                    miniDiglettPtr->unk_000.unk_01C = 0;
+                    miniDiglettPtr->unk_000.textureMode = 0;
                 }
                 break;
 
@@ -3123,7 +3123,7 @@ void func_86C034F8(void) {
 }
 
 void miniEkansInitCam(void) {
-    D_87906054 = D_87906050->unk_00.unk_0C;
+    D_87906054 = D_87906050->node.children;
 
     miniCameraXRot = 0x1800;
     miniCameraYRot = 0;
@@ -3312,7 +3312,7 @@ void EkansGame_DrawShadows(void) {
         if (ekans->mainState == 2) {
             gSPDisplayList(gDisplayListHead++, D_8140DD58);
 
-            ParticleGfx_SetPrimColorTextureCombine(playerColors[i].r, playerColors[i].g, playerColors[i].b, (ekans->unk_000.unk_01D / 2) & 0xFF);
+            ParticleGfx_SetPrimColorTextureCombine(playerColors[i].r, playerColors[i].g, playerColors[i].b, (ekans->unk_000.lodFraction / 2) & 0xFF);
             GeoRender_FindAnchorPosition(&ekans->unk_000, 0xA, &sp7C);
 
             sp7C.y = 5.0f;
@@ -3332,7 +3332,7 @@ void EkansGame_DrawFrame(s32 arg0) {
         GeoRender_AdvanceFrameCounter();
     }
 
-    Geo_RenderRootNode(&D_87906050->unk_00);
+    Geo_RenderRootNode(&D_87906050->node);
     MiniFx_DrawParticles();
     EkansGame_DrawShadows();
 
@@ -3472,7 +3472,7 @@ void EkansGame_LoadAssets(void) {
         miniDigletts[i].unk_23C = 0xA4;
         miniDigletts[i].unk_168 = temp_s1;
         Model_InitDisplayObject(&miniDigletts[i].unk_000, 0, miniDigletts[i].unk_23C, temp_s1->unk_08->unk_00[0]);
-        miniDigletts[i].unk_000.unk_000.unk_01 &= ~1;
+        miniDigletts[i].unk_000.node.flags &= ~1;
     }
 
     temp_s1 = Model_LoadByArchiveIndex(0xA3);

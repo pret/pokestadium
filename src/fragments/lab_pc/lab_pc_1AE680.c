@@ -482,7 +482,7 @@ s32 LabPC_BoxTypeSelectorInput(unk_func_8820BE14_02C_078* arg0, Controller* arg1
 
                     ((func88506BFC)Memmap_GetFragmentVaddr(WidgetTree_SetPagedGridSelection))(arg0->unk_34->unk_30, sp20);
 
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
 
                     arg0->unk_00.unk_24(&arg0->unk_00, 0x100);
 
@@ -947,7 +947,7 @@ void LabPC_PerformReleaseOrReceive(unk_func_8820B12C_02C* arg0) {
 
     arg0->unk_44(1, arg0->unk_48);
 
-    Audio_PlaySoundEffectById(2);
+    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
 
     arg0->unk_20[0]->unk_00.unk_00.unk_24(&arg0->unk_20[0]->unk_00.unk_00, 0x100);
 
@@ -991,12 +991,12 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                 case 0:
                     if (!(var_v1 & 2) && (var_v1 & 4)) {
                         if (arg0->unk_20[0]->unk_00.unk_2C->unk_08 == 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(arg0->unk_3C, arg0->unk_5C[0], 0, 0);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_3C, arg1);
                             var_v1 = 1;
                         } else if (arg0->unk_20[1]->unk_00.unk_2C->unk_08 >= arg0->unk_20[1]->unk_00.unk_2C->unk_04) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(arg0->unk_3C, arg0->unk_5C[5], 0, 0);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_3C, arg1);
                             var_v1 = 1;
@@ -1010,7 +1010,7 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                 case 1:
                     if (!(var_v1 & 2) && (var_v1 & 4)) {
                         if (arg0->unk_20[0]->unk_00.unk_2C->unk_08 == 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(arg0->unk_3C, arg0->unk_5C[1], 0, 0);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_3C, arg1);
                             var_v1 = 1;
@@ -1025,7 +1025,7 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                     if (!(var_v1 & 2) && (var_v1 & 4)) {
                         if ((arg0->unk_20[0]->unk_00.unk_2C->unk_08 == 0) ||
                             (arg0->unk_20[1]->unk_00.unk_2C->unk_08 == 0)) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(arg0->unk_3C, arg0->unk_5C[2], 0, 0);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_3C, arg1);
                             var_v1 = 1;
@@ -1039,7 +1039,7 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                 case 3:
                     if (!(var_v1 & 2) && (var_v1 & 4)) {
                         if (arg0->unk_20[0]->unk_00.unk_2C->unk_08 == 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             temp_v1 = ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText));
                             if (arg0->unk_48->unk_18 != 0) {
                                 var_v0 = 4;
@@ -1064,7 +1064,7 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                 LabPC_ScrollableGrid_SetSwapMode(arg0->unk_20[1], 1);
                 var_v1 |= 1;
             } else if (var_v1 & 4) {
-                Audio_PlaySoundEffectById(0x18);
+                Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                 arg0->unk_20[0]->unk_00.unk_34[arg0->unk_20[0]->unk_00.unk_38] |= 0x100;
                 LabPC_PerformMove(arg0, arg1);
                 LabPC_ScrollableGrid_SetSwapMode(arg0->unk_20[1], 2);
@@ -1084,7 +1084,7 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                 if (arg0->unk_30 == arg0->unk_20[arg0->unk_1C]->unk_00.unk_38) {
                     var_v1 = 0x80000101;
                 } else {
-                    Audio_PlaySoundEffectById(0x18);
+                    Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                     arg0->unk_20[arg0->unk_1C]->unk_00.unk_34[arg0->unk_20[arg0->unk_1C]->unk_00.unk_38] |= 2;
                     arg0->unk_20[arg0->unk_1C]->unk_00.unk_34[arg0->unk_30] |= 0x100;
                     arg0->unk_20[arg0->unk_1C]->unk_00.unk_34[arg0->unk_20[arg0->unk_1C]->unk_00.unk_38] |= 0x100;
@@ -1099,7 +1099,7 @@ s32 LabPC_SwapMenuInput(unk_func_8820B12C_02C* arg0, Controller* arg1) {
                 LabPC_SwapMenu_SetPhase(arg0, 0);
                 var_v1 |= 1;
             } else if (var_v1 & 4) {
-                Audio_PlaySoundEffectById(0x18);
+                Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                 arg0->unk_20[1]->unk_00.unk_34[arg0->unk_20[1]->unk_00.unk_38] |= 2;
                 arg0->unk_20[0]->unk_00.unk_34[arg0->unk_20[0]->unk_00.unk_38] |= 0x100;
                 arg0->unk_20[1]->unk_00.unk_34[arg0->unk_20[1]->unk_00.unk_38] |= 0x100;
@@ -2263,7 +2263,7 @@ s32 LabPC_SwapControllerInput(unk_func_8820B12C* arg0, Controller* arg1) {
     if (var_s1 & 2) {
         switch (arg0->unk_00.unk_1C) {
             case 0:
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 var_s1 = 2;
                 if (LabPC_RunConfirmSaveFlow(arg0->unk_00.unk_24, arg1) == 0) {
                     var_s1 = 3;
@@ -2289,7 +2289,7 @@ s32 LabPC_SwapControllerInput(unk_func_8820B12C* arg0, Controller* arg1) {
                         } else {
                             sp64 = 1;
                         }
-                        Audio_PlaySoundEffectById(2);
+                        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                         LabPC_BoxTypeSelector_SetSlotASelection(arg0->unk_00.unk_24->unk_78[sp64],
                                       LabPC_BoxLocationWidget_GetSelection(arg0->unk_00.unk_24->unk_30[sp64]));
                         LabPC_BoxTypeSelector_SetSlotBSelection(arg0->unk_00.unk_24->unk_78[sp64],
@@ -2328,7 +2328,7 @@ s32 LabPC_SwapControllerInput(unk_func_8820B12C* arg0, Controller* arg1) {
                         break;
 
                     case 6:
-                        Audio_PlaySoundEffectById(3);
+                        Audio_PlaySoundEffectById(SFX_MENU_BACK);
                         var_s1 = 2;
                         if (LabPC_RunConfirmSaveFlow(arg0->unk_00.unk_24, arg1) == 0) {
                             var_s1 = 3;

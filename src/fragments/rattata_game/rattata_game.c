@@ -143,8 +143,8 @@ static s32 D_86203E48;
 static s16 D_86203E4C;
 static RattataRacer D_86203E50[4];
 static RattataRacer* D_86204590;
-static unk_D_86002F58_004_000* D_86204594;
-static unk_D_86002F58_004_000 D_86204598;
+static DisplayObject* D_86204594;
+static DisplayObject D_86204598;
 static s16 D_86204700;
 static u32 D_86204704;
 static s16 D_86204708;
@@ -269,7 +269,7 @@ void RattataGame_PollInput(void) {
 
 void RattataGame_InitCamera(void) {
     D_8620829C = 0;
-    D_86203E3C = D_86203E38->unk_00.unk_0C;
+    D_86203E3C = D_86203E38->node.children;
 
     MiniCam_SetActive(D_86203E3C);
     D_86203E40 = 0x1300;
@@ -511,8 +511,8 @@ s32 RattataGame_WaitForStart(void) {
         D_86204594 = &D_86204590->unk_008;
         ModelAnim_SetAnimation(D_86204594, 0);
         ModelAnim_ClearEventTrack(D_86204594);
-        D_86204594->unk_040.unk_0C = 0x10000;
-        D_86204594->unk_040.unk_08 = Rand_Range(0x14) << 0x10;
+        D_86204594->transformAnim.speedFixed = 0x10000;
+        D_86204594->transformAnim.frameFixed = Rand_Range(0x14) << 0x10;
     }
 
     for (i = 0; i < 4; i++) {
@@ -542,7 +542,7 @@ s32 RattataGame_WaitForStart(void) {
             }
 
             if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 Widget_PauseMenuTrigger(2);
                 return -1;
             }
@@ -609,7 +609,7 @@ void RattataGame_UpdateStartCountdown(void) {
 void RattataGame_SyncRacerZPosition(RattataRacer* arg0) {
     f32 temp_fv0 = arg0->unk_178 - 30.0f;
 
-    arg0->unk_008.unk_024.z = temp_fv0;
+    arg0->unk_008.position.z = temp_fv0;
     arg0->unk_194 = temp_fv0 / 3.0f;
 }
 
@@ -636,13 +636,13 @@ s32 RattataGame_CheckHurdleCollision(RattataRacer* arg0, RattataHurdleMarker* ar
         return 0;
     }
 
-    temp_fv0 = 30.0f - (arg1->unk_004.unk_040.unk_08 / 111411.2f);
-    temp_fv1 = arg0->unk_008.unk_024.z / 3.0f;
+    temp_fv0 = 30.0f - (arg1->unk_004.transformAnim.frameFixed / 111411.2f);
+    temp_fv1 = arg0->unk_008.position.z / 3.0f;
 
     arg0->unk_1A8 = temp_fv1;
     arg0->unk_1A4 = temp_fv0;
 
-    if ((temp_fv0 <= temp_fv1 - 3.0f) && (arg0->unk_19C == 1) && (arg0->unk_008.unk_040.unk_08 >= 0xC0001) &&
+    if ((temp_fv0 <= temp_fv1 - 3.0f) && (arg0->unk_19C == 1) && (arg0->unk_008.transformAnim.frameFixed >= 0xC0001) &&
         (arg1->unk_170 == 0)) {
         arg1->unk_170 = 1;
     }
@@ -652,7 +652,7 @@ s32 RattataGame_CheckHurdleCollision(RattataRacer* arg0, RattataHurdleMarker* ar
     }
 
     if (arg0->unk_19C == 1) {
-        if ((arg0->unk_008.unk_040.unk_08 >= 0x20001) && (arg0->unk_008.unk_040.unk_08 < 0x100000)) {
+        if ((arg0->unk_008.transformAnim.frameFixed >= 0x20001) && (arg0->unk_008.transformAnim.frameFixed < 0x100000)) {
             return 0;
         }
     }
@@ -661,17 +661,17 @@ s32 RattataGame_CheckHurdleCollision(RattataRacer* arg0, RattataHurdleMarker* ar
 }
 
 void RattataGame_UpdateRunAnimSpeed(RattataRacer* arg0) {
-    arg0->unk_008.unk_040.unk_0C = (arg0->unk_178 * 196608.0f) / arg0->unk_180;
+    arg0->unk_008.transformAnim.speedFixed = (arg0->unk_178 * 196608.0f) / arg0->unk_180;
 }
 
 void RattataGame_SetRacerAnimState(RattataRacer* arg0, s32 arg1) {
-    unk_D_86002F58_004_000* temp_s0 = &arg0->unk_008;
+    DisplayObject* temp_s0 = &arg0->unk_008;
 
     switch (arg1) {
         case 3:
             arg0->unk_19C = 3;
             ModelAnim_SetAnimation(temp_s0, 0);
-            temp_s0->unk_040.unk_0C = 0x10000;
+            temp_s0->transformAnim.speedFixed = 0x10000;
             break;
 
         case 0:
@@ -683,14 +683,14 @@ void RattataGame_SetRacerAnimState(RattataRacer* arg0, s32 arg1) {
         case 1:
             arg0->unk_19C = 1;
             ModelAnim_SetAnimation(temp_s0, 2);
-            temp_s0->unk_040.unk_0C = 0x10000;
+            temp_s0->transformAnim.speedFixed = 0x10000;
             MiniSound_DispatchCommand(0x60003, arg0->unk_000, 0);
             break;
 
         case 2:
             arg0->unk_19C = 2;
             ModelAnim_SetAnimation(temp_s0, 3);
-            temp_s0->unk_040.unk_0C = 0x10000;
+            temp_s0->transformAnim.speedFixed = 0x10000;
             MiniSound_DispatchCommand(0x60004, arg0->unk_000, 0);
             break;
     }
@@ -700,7 +700,7 @@ void RattataGame_UpdateHurdleMarkers(RattataRacer* arg0) {
     s32 i;
     f32 temp_fs1;
     u32 temp_v0;
-    unk_D_86002F58_004_000* temp_s1;
+    DisplayObject* temp_s1;
     s32 arg0_unk000 = arg0->unk_000;
     f32 unk_190;
 
@@ -752,20 +752,20 @@ void RattataGame_UpdateHurdleMarkers(RattataRacer* arg0) {
             }
 
             temp_v0 = ((unk_190 - temp_fs1) + 30.0f) * 1.7f * 65536.0f;
-            temp_s1->unk_040.unk_08 = (D_86208280->unk_16C + temp_v0) >> 1;
+            temp_s1->transformAnim.frameFixed = (D_86208280->unk_16C + temp_v0) >> 1;
             D_86208280->unk_16C = temp_v0;
 
             if (D_86208280->unk_002 == 1) {
                 ModelAnim_SetAnimation(temp_s1, 0);
-                temp_s1->unk_01D = 0xFF;
+                temp_s1->lodFraction = 0xFF;
             } else if (D_86208280->unk_002 == 3) {
                 ModelAnim_SetAnimation(temp_s1, 0);
-                temp_s1->unk_01D = 0x80;
+                temp_s1->lodFraction = 0x80;
             } else if ((D_86208280->unk_002 == 0) || (D_86208280->unk_002 == 2)) {
-                temp_s1->unk_040.unk_08 = 0x730000;
+                temp_s1->transformAnim.frameFixed = 0x730000;
             }
 
-            temp_s1->unk_040.unk_0C = 0;
+            temp_s1->transformAnim.speedFixed = 0;
             D_86208280->unk_000 = 1;
         }
     }
@@ -893,7 +893,7 @@ s16 RattataGame_UpdateRacers(void) {
                 D_86204590->unk_178 = D_86204590->unk_174;
 
                 ModelAnim_SetAnimation(D_86204594, 2);
-                D_86204594->unk_040.unk_0C = 0x10000;
+                D_86204594->transformAnim.speedFixed = 0x10000;
 
                 switch (D_86208298) {
                     case 0:
@@ -928,8 +928,8 @@ s16 RattataGame_UpdateRacers(void) {
 
             if (ModelAnim_IsFinished(D_86204594) != 0) {
                 ModelAnim_SetAnimation(D_86204594, 0);
-                D_86204594->unk_040.unk_08 = 0;
-                D_86204594->unk_040.unk_0C = 0x10000;
+                D_86204594->transformAnim.frameFixed = 0;
+                D_86204594->transformAnim.speedFixed = 0x10000;
             }
         }
     }
@@ -955,8 +955,8 @@ void RattataGame_AdvanceFinishLineApproach(void) {
 
             if (ModelAnim_IsFinished(D_86204594) != 0) {
                 ModelAnim_SetAnimation(D_86204594, 0);
-                D_86204594->unk_040.unk_08 = 0;
-                D_86204594->unk_040.unk_0C = 0x10000;
+                D_86204594->transformAnim.frameFixed = 0;
+                D_86204594->transformAnim.speedFixed = 0x10000;
             }
         }
     }
@@ -968,7 +968,7 @@ void RattataGame_MainLoop(void) {
     s32 j;
     s16 temp_s1_2;
     s16 var_s3;
-    unk_D_86002F58_004_000* var_s2;
+    DisplayObject* var_s2;
     RattataRacer* temp_s1;
     s16 var_v0_2;
     s16 sp8C;
@@ -984,7 +984,7 @@ void RattataGame_MainLoop(void) {
 
         ModelAnim_SetAnimation(var_s2, 1);
         ModelAnim_ClearEventTrack(var_s2);
-        var_s2->unk_040.unk_08 = (Rand_Range(5) * 0x3) << 0x10;
+        var_s2->transformAnim.frameFixed = (Rand_Range(5) * 0x3) << 0x10;
         RattataGame_ResetRacerState(temp_s1);
         temp_s1->unk_1C8 = 0;
         temp_s1->unk_1B2 = 4;
@@ -1170,12 +1170,12 @@ void RattataGame_UpdatePostRaceIdleAnim(void) {
             continue;
         }
 
-        if ((ModelAnim_IsFinished(D_86204594) == 0) && (D_86204594->unk_040.unk_08 < 0x340000)) {
+        if ((ModelAnim_IsFinished(D_86204594) == 0) && (D_86204594->transformAnim.frameFixed < 0x340000)) {
             continue;
         }
 
         ModelAnim_SetAnimation(D_86204594, 5);
-        D_86204594->unk_040.unk_08 = 0x270000;
+        D_86204594->transformAnim.frameFixed = 0x270000;
     }
 }
 
@@ -1187,11 +1187,11 @@ void RattataGame_PlayResultAnimation(void) {
         D_86204594 = &D_86204590->unk_008;
         if ((D_86204590->unk_19E > 0) && (D_86204590->unk_1C8 == 1)) {
             ModelAnim_SetAnimation(D_86204594, 4);
-            D_86204594->unk_040.unk_0C = 0x10000;
+            D_86204594->transformAnim.speedFixed = 0x10000;
         } else {
             ModelAnim_SetAnimation(D_86204594, 5);
-            D_86204594->unk_040.unk_08 = 0;
-            D_86204594->unk_040.unk_0C = 0x10000;
+            D_86204594->transformAnim.frameFixed = 0;
+            D_86204594->transformAnim.speedFixed = 0x10000;
             ModelAnim_SetEventTrack(D_86204594, 0);
         }
     }
@@ -1270,7 +1270,7 @@ void RattataGame_LoadAssets(void) {
     s32 i;
     s32 j;
     MemoryBlock* temp_v0 = MainPool_AllocState(main_pool_get_available(), 0);
-    unk_D_86002F58_004_000* temp_s0;
+    DisplayObject* temp_s0;
 
     D_86203E38 = process_geo_layout(temp_v0, &D_86203D0C);
     MainPool_FinalizeAllocation(temp_v0);
@@ -1281,7 +1281,7 @@ void RattataGame_LoadAssets(void) {
     D_86203E30 = Model_LoadByArchiveIndex(0xB8);
     ModelRenderer_AttachDisplayObject(&D_86204598);
     Model_InitDisplayObject(&D_86204598, 0, 0xB8, D_86203E30->unk_08->unk_00[0]);
-    D_86204598.unk_024.y = -26.0f;
+    D_86204598.position.y = -26.0f;
     D_86203E30 = Model_LoadByArchiveIndex(0xAF);
 
     for (i = 0; i < 4; i++) {
@@ -1292,15 +1292,15 @@ void RattataGame_LoadAssets(void) {
         RattataGame_InitAIDifficulty(D_86204590);
         ModelRenderer_AttachDisplayObject(temp_s0);
         Model_InitDisplayObject(temp_s0, 0, 0xAF, D_86203E30->unk_08->unk_00[0]);
-        temp_s0->unk_024.x = -(i - 1.5f) * 40.0f;
-        temp_s0->unk_024.y = 0.0f;
-        temp_s0->unk_030.x = 1.0f;
-        temp_s0->unk_030.y = 1.0f;
-        temp_s0->unk_030.z = 1.0f;
+        temp_s0->position.x = -(i - 1.5f) * 40.0f;
+        temp_s0->position.y = 0.0f;
+        temp_s0->scale.x = 1.0f;
+        temp_s0->scale.y = 1.0f;
+        temp_s0->scale.z = 1.0f;
         ModelAnim_SetAnimation(temp_s0, 0);
         ModelAnim_ClearEventTrack(temp_s0);
         RattataGame_ResetRacerState(D_86204590);
-        temp_s0->unk_040.unk_0C = 0x20000;
+        temp_s0->transformAnim.speedFixed = 0x20000;
     }
 
     D_86203E34 = Model_LoadByArchiveIndex(0xB0);
@@ -1314,10 +1314,10 @@ void RattataGame_LoadAssets(void) {
 
             D_86208280->unk_000 = 0;
             D_86208280->unk_002 = 0;
-            temp_s0->unk_024.x = -(i - 1.5f) * 40.0f;
-            temp_s0->unk_024.y = -25.0f;
-            temp_s0->unk_040.unk_08 = 0x730000;
-            temp_s0->unk_040.unk_0C = 0;
+            temp_s0->position.x = -(i - 1.5f) * 40.0f;
+            temp_s0->position.y = -25.0f;
+            temp_s0->transformAnim.frameFixed = 0x730000;
+            temp_s0->transformAnim.speedFixed = 0;
         }
     }
 
@@ -1328,7 +1328,7 @@ void RattataGame_LoadAssets(void) {
 void RattataGame_InitPlayerSlots(void) {
     s32 i;
     s32 j;
-    unk_D_86002F58_004_000* temp_s0;
+    DisplayObject* temp_s0;
 
     D_86208298 = 0;
     D_8620470A = 0;
@@ -1349,12 +1349,12 @@ void RattataGame_InitPlayerSlots(void) {
         D_86204590->unk_1B4 = 0;
         D_86204590->unk_170 = 0;
         RattataGame_ResetRacerState(D_86204590);
-        temp_s0->unk_024.x = -(i - 1.5f) * 40.0f;
-        temp_s0->unk_024.y = 0.0f;
-        temp_s0->unk_030.x = 1.0f;
-        temp_s0->unk_030.y = 1.0f;
-        temp_s0->unk_030.z = 1.0f;
-        temp_s0->unk_040.unk_0C = 0x20000;
+        temp_s0->position.x = -(i - 1.5f) * 40.0f;
+        temp_s0->position.y = 0.0f;
+        temp_s0->scale.x = 1.0f;
+        temp_s0->scale.y = 1.0f;
+        temp_s0->scale.z = 1.0f;
+        temp_s0->transformAnim.speedFixed = 0x20000;
     }
 
     for (i = 0; i < 4; i++) {
@@ -1366,10 +1366,10 @@ void RattataGame_InitPlayerSlots(void) {
             D_86208280->unk_002 = 0;
             D_86208280->unk_178 = 0;
             D_86208280->unk_170 = 0;
-            temp_s0->unk_024.x = -(i - 1.5f) * 40.0f;
-            temp_s0->unk_024.y = -25.0f;
-            temp_s0->unk_040.unk_08 = 0x730000;
-            temp_s0->unk_040.unk_0C = 0;
+            temp_s0->position.x = -(i - 1.5f) * 40.0f;
+            temp_s0->position.y = -25.0f;
+            temp_s0->transformAnim.frameFixed = 0x730000;
+            temp_s0->transformAnim.speedFixed = 0;
         }
     }
 }

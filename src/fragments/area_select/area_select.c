@@ -531,7 +531,7 @@ s32 AreaSelect_HandleInput(void) {
         var_t1 = 3;
     } else if (gPlayer1Controller->buttonPressed & 0x4000) {
         Audio_PlayMusicIfChangedImmediate(0x28);
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         var_t1 = 4;
     } else if (gPlayer1Controller->buttonPressed & 0x800) {
         var_s0 = gAreaSelectEntryConfigs[gAreaSelectSelectedIndex].unk_06;
@@ -544,7 +544,7 @@ s32 AreaSelect_HandleInput(void) {
     }
 
     if (var_s0 != 8) {
-        Audio_PlaySoundEffectById(0x32);
+        Audio_PlaySoundEffectById(SFX_AREA_CURSOR);
         var_t1 = 2;
         gAreaSelectPreviousIndex = gAreaSelectSelectedIndex;
         gAreaSelectSelectedIndex = var_s0;

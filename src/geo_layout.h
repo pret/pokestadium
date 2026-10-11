@@ -72,7 +72,7 @@ typedef struct unk_D_800ABE00_cmd7 {
 
 typedef struct unk_D_800ABE00_cmd8 {
     /* 0x00 */ u8 cmd;
-    /* 0x04 */ func_D_86002F34_000_010 unk_04;
+    /* 0x04 */ GraphNodeCallback unk_04;
     /* 0x08 */ unk_D_86002F34_000_014* unk_08;
 } unk_D_800ABE00_cmd8; // size = 0xC
 

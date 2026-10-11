@@ -1275,7 +1275,7 @@ s32 func_88210380(unk_func_8821421C_038_04C* arg0, Controller* arg1) {
                     case 1:
                         LabItem_SetConfirmDialogText(arg0->unk_00.unk_24->unk_48, Text_GetString(NULL, 0, D_88224FC4, 0x16));
                         ((func8850CB48)Memmap_GetFragmentVaddr(WidgetTree_SetGridMenuSelection))(arg0->unk_00.unk_24->unk_48->unk_30, 1);
-                        Audio_PlaySoundEffectById(2);
+                        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                         arg0->unk_28->unk_14(arg0->unk_28, 0x100);
                         if (LabItem_RunConfirmDialog(arg0->unk_00.unk_24->unk_48, arg1) == 1) var_v1 = 4; else var_v1 = 1;
                         arg0->unk_28->unk_14(arg0->unk_28, 1);
@@ -1848,13 +1848,13 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                         sp24 = new_var;
 
                         if (arg0->unk_2C[0]->unk_00.unk_2C->unk_08 == 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_4C, arg0->unk_78[0].unk_00, arg0->unk_78[0].unk_04, arg0->unk_78[0].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
                             sp2C = 1;
                         } else if ((LabItem_IsQuantitylessItem(sp24[0]) != 0) && ((arg0->unk_2C[1]->unk_8C >> 0x10) == 2)) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_4C, arg0->unk_78[4].unk_00, arg0->unk_78[4].unk_04, arg0->unk_78[4].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
@@ -1862,7 +1862,7 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                         } else {
                             sp28 = LabItem_ComputeMaxTransferQuantity(sp24[0], arg0->unk_2C[1]->unk_00.unk_2C);
                             if (sp28 == 0) {
-                                Audio_PlaySoundEffectById(8);
+                                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                                 ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                     arg0->unk_4C, arg0->unk_78[3].unk_00, arg0->unk_78[3].unk_04,
                                     arg0->unk_78[3].unk_08);
@@ -1886,7 +1886,7 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                 case 1:
                     if (!(sp2C & 2) && (sp2C & 4)) {
                         if (arg0->unk_2C[0]->unk_00.unk_2C->unk_08 == 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_4C, arg0->unk_78[1].unk_00, arg0->unk_78[1].unk_04, arg0->unk_78[1].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
@@ -1906,13 +1906,13 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                                                                               arg0->unk_2C[0]->unk_00.unk_38];
                         if ((arg0->unk_2C[0]->unk_00.unk_2C->unk_08 == 0) ||
                             (arg0->unk_2C[1]->unk_00.unk_2C->unk_08 == 0)) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_4C, arg0->unk_78[2].unk_00, arg0->unk_78[2].unk_04, arg0->unk_78[2].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
                             sp2C = 1;
                         } else if ((LabItem_IsQuantitylessItem(sp24[0]) != 0) && ((arg0->unk_2C[1]->unk_8C >> 0x10) == 2)) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_4C, arg0->unk_78[4].unk_00, arg0->unk_78[4].unk_04, arg0->unk_78[4].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
@@ -1934,7 +1934,7 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                 sp2C |= 1;
             } else if (sp2C & 4) {
                 if (arg0->unk_34->unk_34 < arg0->unk_34->unk_30->unk_30.unk_00) {
-                    Audio_PlaySoundEffectById(8);
+                    Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                     ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                         arg0->unk_4C, arg0->unk_78[3].unk_00, arg0->unk_78[3].unk_04, arg0->unk_78[3].unk_08);
                     ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
@@ -1957,7 +1957,7 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                 LabPC_ScrollableGrid_SetSwapMode(arg0->unk_2C[1], 1);
                 sp2C |= 1;
             } else if (sp2C & 4) {
-                Audio_PlaySoundEffectById(0x18);
+                Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                 arg0->unk_2C[0]->unk_00.unk_34[arg0->unk_2C[0]->unk_00.unk_38] |= 0x100;
                 if (arg0->unk_34->unk_2C->unk_00.unk_28 & 1) {
                     LabItem_QuantitySpinner_Close(arg0->unk_34);
@@ -1976,7 +1976,7 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                 if (arg0->unk_40 == arg0->unk_2C[arg0->unk_1C]->unk_00.unk_38) {
                     sp2C = 0x80000101;
                 } else {
-                    Audio_PlaySoundEffectById(0x18);
+                    Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
 
                     arg0->unk_2C[0]->unk_00.unk_34[arg0->unk_2C[0]->unk_00.unk_38] |= 2;
                     arg0->unk_2C[0]->unk_00.unk_34[arg0->unk_40] |= 0x100;
@@ -1996,13 +1996,13 @@ s32 LabItem_OperationInputHandler(unk_func_8821421C_02C_06C_02C* arg0, Controlle
                 new_var2 = &((u8*)arg0->unk_2C[1]->unk_00.unk_2C->unk_00)[arg0->unk_2C[1]->unk_00.unk_2C->unk_0C *
                                                                           arg0->unk_2C[1]->unk_00.unk_38];
                 if ((LabItem_IsQuantitylessItem(new_var2[0]) != 0) && ((arg0->unk_2C[0]->unk_8C >> 0x10) == 2)) {
-                    Audio_PlaySoundEffectById(8);
+                    Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                     ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                         arg0->unk_4C, arg0->unk_78[4].unk_00, arg0->unk_78[4].unk_04, arg0->unk_78[4].unk_08);
                     ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_4C, arg1);
                     sp2C = 1;
                 } else {
-                    Audio_PlaySoundEffectById(0x18);
+                    Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
 
                     arg0->unk_2C[1]->unk_00.unk_34[arg0->unk_2C[1]->unk_00.unk_38] |= 2;
                     arg0->unk_2C[0]->unk_00.unk_34[arg0->unk_2C[0]->unk_00.unk_38] |= 0x100;
@@ -2730,7 +2730,7 @@ s32 LabItem_BoxPairMenu_HandleInput(unk_func_8821421C_02C_06C* arg0, Controller*
     if (var_s0 & 2) {
         switch (arg0->unk_00.unk_1C) {
             case 0:
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 var_s0 = 2;
                 if (LabItem_RunConfirmSaveFlow(arg0->unk_00.unk_24, arg1) == 0) {
                     var_s0 = 3;
@@ -2752,7 +2752,7 @@ s32 LabItem_BoxPairMenu_HandleInput(unk_func_8821421C_02C_06C* arg0, Controller*
                     } else {
                         sp4C = 1;
                     }
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
 
                     arg0->unk_28->unk_14(arg0->unk_28, 0x100);
 
@@ -2819,7 +2819,7 @@ s32 LabItem_BoxPairMenu_HandleInput(unk_func_8821421C_02C_06C* arg0, Controller*
                     break;
 
                 case 5:
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                     var_s0 = 2;
                     if (LabItem_RunConfirmSaveFlow(arg0->unk_00.unk_24, arg1) == 0) {
                         var_s0 = 3;

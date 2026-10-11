@@ -25,8 +25,8 @@
 
 typedef struct unk_D_82607420 {
     /* 0x000 */ s32 unk_000;
-    /* 0x004 */ unk_D_86002F58_004_000_010_024* unk_004;
-    /* 0x008 */ unk_D_86002F58_004_000 unk_008;
+    /* 0x004 */ ModelLoadResult* unk_004;
+    /* 0x008 */ DisplayObject unk_008;
 } unk_D_82607420; // size = 0x170
 
 typedef struct unk_D_82604180 {
@@ -40,15 +40,15 @@ typedef struct unk_D_82604180 {
 
 static s32 pad_D_82607410[2];
 static GraphNode* D_82607418;
-static unk_D_86002F58_004_000_010* D_8260741C;
+static ModelLoadContext* D_8260741C;
 static unk_D_82607420 D_82607420[5];
 static s16 D_82607B50;
 static s16 D_82607B52;
 static s16 D_82607B54;
 static s32 pad_D_82607B58[2];
-static unk_D_86002F58_004_000 D_82607B60[5];
-static unk_D_86002F58_004_000 D_82608268;
-static unk_D_86002F58_004_000 D_826083D0;
+static DisplayObject D_82607B60[5];
+static DisplayObject D_82608268;
+static DisplayObject D_826083D0;
 static unk_D_86002F30* D_82608538;
 static s16 D_8260853C;
 static s16 D_8260853E;
@@ -1792,7 +1792,7 @@ s32 VictoryPalace_UpdateLeftPillarGlow(s32 arg0, unk_D_86002F34_alt18* arg1) {
         arg1->a = (D_82608550 * 0x28) / 5;
 
         *ptr = (D_82608550 * 0xFF) / 5;
-        D_826083D0.unk_0A6 = *ptr;
+        D_826083D0.effectSlot = *ptr;
     }
     return 0;
 }
@@ -1824,7 +1824,7 @@ void func_82600C08(void) {
 }
 
 void VictoryPalace_InitCamera(void) {
-    D_82608558 = D_82607418->unk_0C;
+    D_82608558 = D_82607418->children;
     D_8260853C = 0x450;
     D_8260853E = 0;
     D_82608540 = 0x578;
@@ -2102,8 +2102,8 @@ void VictoryPalace_InitCarouselModel(s16 arg0) {
         return;
     }
 
-    temp_s0->unk_008.unk_0A6 = 0xFF;
-    Model_InitDisplayObject(&temp_s0->unk_008, 0, temp_s0->unk_000, temp_s0->unk_004->unk_08->unk_00[0]);
+    temp_s0->unk_008.effectSlot = 0xFF;
+    Model_InitDisplayObject(&temp_s0->unk_008, 0, temp_s0->unk_000, temp_s0->unk_004->modelRoot->unk_00[0]);
 
     if (temp_s0->unk_000 == 0x90) {
         ModelAnim_SetAnimation(&temp_s0->unk_008, 0xB);
@@ -2111,19 +2111,19 @@ void VictoryPalace_InitCarouselModel(s16 arg0) {
         ModelAnim_SetAnimation(&temp_s0->unk_008, 1);
     }
 
-    temp_s0->unk_008.unk_000.unk_02 &= ~0x40;
-    Vec3f_SetComponentsDuplicate(&temp_s0->unk_008.unk_030, temp_s1->unk_00, temp_s1->unk_00, temp_s1->unk_00);
+    temp_s0->unk_008.node.renderFlags &= ~0x40;
+    Vec3f_SetComponentsDuplicate(&temp_s0->unk_008.scale, temp_s1->unk_00, temp_s1->unk_00, temp_s1->unk_00);
 
     temp_fs0 = (tmp * 6.283f) / 65536.0f;
-    temp_s0->unk_008.unk_024.x =
+    temp_s0->unk_008.position.x =
         ((-temp_s1->unk_08 * __cosf(temp_fs0)) - (__sinf(temp_fs0) * temp_s1->unk_10)) + (arg0 * 0x258);
-    temp_s0->unk_008.unk_024.y = temp_s1->unk_0C;
-    temp_s0->unk_008.unk_024.z = (temp_s1->unk_08 * __sinf(temp_fs0)) - (__cosf(temp_fs0) * temp_s1->unk_10);
+    temp_s0->unk_008.position.y = temp_s1->unk_0C;
+    temp_s0->unk_008.position.z = (temp_s1->unk_08 * __sinf(temp_fs0)) - (__cosf(temp_fs0) * temp_s1->unk_10);
 
-    temp_s0->unk_008.unk_01E.y = tmp;
-    temp_s0->unk_008.unk_040.unk_08 = temp_s1->unk_04 << 0x10;
-    temp_s0->unk_008.unk_040.unk_0C = 0;
-    temp_s0->unk_008.unk_01C = D_82608546;
+    temp_s0->unk_008.rotation.y = tmp;
+    temp_s0->unk_008.transformAnim.frameFixed = temp_s1->unk_04 << 0x10;
+    temp_s0->unk_008.transformAnim.speedFixed = 0;
+    temp_s0->unk_008.textureMode = D_82608546;
 }
 
 void VictoryPalace_SpawnCarouselEntry(s16 arg0) {
@@ -2168,22 +2168,22 @@ void VictoryPalace_LoadCurrentCarouselIcon(s16 arg0) {
     D_82607420[D_82607B52].unk_000 = temp_s1;
     PokeIcon_RequestFrameLoadWithVariant(D_8260741C, temp_s1, sp54, D_82607B52);
     PokeIcon_WaitFrameLoad(D_8260741C);
-    D_82607420[D_82607B52].unk_004 = D_8260741C->unk_24;
+    D_82607420[D_82607B52].unk_004 = D_8260741C->loadedModel;
 }
 
 void VictoryPalace_ScrollCarousel(f32 arg0) {
     s32 i;
 
     // clang-format off
-    for (i = 0; i < 5; i++) { D_82607B60[i].unk_024.x += arg0; }
+    for (i = 0; i < 5; i++) { D_82607B60[i].position.x += arg0; }
     // clang-format on
-    D_82608268.unk_024.x += arg0;
-    D_826083D0.unk_024.x += arg0;
+    D_82608268.position.x += arg0;
+    D_826083D0.position.x += arg0;
 }
 
 void VictoryPalace_SetBackgroundPositionX(f32 arg0) {
-    D_82608268.unk_024.x = arg0;
-    D_826083D0.unk_024.x = arg0;
+    D_82608268.position.x = arg0;
+    D_826083D0.position.x = arg0;
 }
 
 void func_826028CC(void) {
@@ -2198,28 +2198,28 @@ void VictoryPalace_UpdateCarouselModelRotation(void) {
     temp_s0 = &D_82607420[idx];
     temp_s1 = &D_82604180[temp_s0->unk_000 - 1];
 
-    temp_fs0 = (temp_s0->unk_008.unk_01E.y * 6.283) / 65536.0;
+    temp_fs0 = (temp_s0->unk_008.rotation.y * 6.283) / 65536.0;
 
-    temp_s0->unk_008.unk_030.x = temp_s1->unk_00;
-    temp_s0->unk_008.unk_030.y = temp_s1->unk_00;
-    temp_s0->unk_008.unk_030.z = temp_s1->unk_00;
+    temp_s0->unk_008.scale.x = temp_s1->unk_00;
+    temp_s0->unk_008.scale.y = temp_s1->unk_00;
+    temp_s0->unk_008.scale.z = temp_s1->unk_00;
 
-    temp_s0->unk_008.unk_040.unk_08 = temp_s1->unk_04 << 0x10;
+    temp_s0->unk_008.transformAnim.frameFixed = temp_s1->unk_04 << 0x10;
 
-    temp_s0->unk_008.unk_024.x = (-temp_s1->unk_08 * __cosf(temp_fs0)) - (__sinf(temp_fs0) * temp_s1->unk_10);
-    temp_s0->unk_008.unk_024.y = temp_s1->unk_0C;
-    temp_s0->unk_008.unk_024.z = (temp_s1->unk_08 * __sinf(temp_fs0)) - (__cosf(temp_fs0) * temp_s1->unk_10);
+    temp_s0->unk_008.position.x = (-temp_s1->unk_08 * __cosf(temp_fs0)) - (__sinf(temp_fs0) * temp_s1->unk_10);
+    temp_s0->unk_008.position.y = temp_s1->unk_0C;
+    temp_s0->unk_008.position.z = (temp_s1->unk_08 * __sinf(temp_fs0)) - (__cosf(temp_fs0) * temp_s1->unk_10);
 }
 
 void VictoryPalace_ShowSpeciesInfo(void) {
-    Audio_PlaySoundEffectById(2);
+    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     D_82608542 = 1;
 }
 
 void VictoryPalace_ShowSpeciesGrid(void) {
     s32 i;
 
-    Audio_PlaySoundEffectById(2);
+    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     D_82608544 = 1;
     D_8267E4F4 = 0;
 
@@ -2229,12 +2229,12 @@ void VictoryPalace_ShowSpeciesGrid(void) {
 }
 
 void VictoryPalace_HideSpeciesGrid(void) {
-    Audio_PlaySoundEffectById(3);
+    Audio_PlaySoundEffectById(SFX_MENU_BACK);
     D_82608544 = 0;
 }
 
 void VictoryPalace_HideOverlays(void) {
-    Audio_PlaySoundEffectById(3);
+    Audio_PlaySoundEffectById(SFX_MENU_BACK);
     D_82608542 = 0;
     D_82608544 = 0;
 }
@@ -2243,7 +2243,7 @@ void VictoryPalace_ResetPillarGlow(s32 arg0) {
     if ((D_82608542 != 0) || (D_82608544 != 0)) {
         VictoryPalace_HideOverlays();
     } else {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
     D_8260854C = 0;
     D_8260854E = 5;
@@ -2305,7 +2305,7 @@ s32 VictoryPalace_HandleInput(s16* arg0) {
         if (D_82608542 == 0) {
             if (D_82608544 == 0) {
                 *arg0 = 0;
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 return 1;
             }
         }
@@ -2401,7 +2401,7 @@ s32 HallOfFame_HandleGalleryInput(void) {
         VictoryPalace_UpdateCarouselModelRotation();
         temp_v0 = &D_82607420[D_82607B50 % 5];
         if ((D_8260854C == 1) && (D_8260854A == 1)) {
-            temp_v0->unk_008.unk_01E.y += 0x100;
+            temp_v0->unk_008.rotation.y += 0x100;
         }
         VictoryPalace_DrawFrame();
     }
@@ -2419,7 +2419,7 @@ s32 HallOfFame_ScrollRight(void) {
         VictoryPalace_PollInput();
 
         for (j = 0; j < 5; j++) {
-            D_82607420[j].unk_008.unk_024.x += 50.0f;
+            D_82607420[j].unk_008.position.x += 50.0f;
         }
 
         VictoryPalace_ScrollCarousel(50.0f);
@@ -2441,7 +2441,7 @@ s32 HallOfFame_ScrollLeft(void) {
         VictoryPalace_PollInput();
 
         for (j = 0; j < 5; j++) {
-            D_82607420[j].unk_008.unk_024.x -= 50.0f;
+            D_82607420[j].unk_008.position.x -= 50.0f;
         }
 
         VictoryPalace_ScrollCarousel(-50.0f);
@@ -2463,7 +2463,7 @@ s32 HallOfFame_PageRight(void) {
         VictoryPalace_PollInput();
 
         for (j = 0; j < 5; j++) {
-            D_82607420[j].unk_008.unk_024.x += 100.0f;
+            D_82607420[j].unk_008.position.x += 100.0f;
         }
 
         VictoryPalace_ScrollCarousel(100.0f);
@@ -2485,7 +2485,7 @@ s32 HallOfFame_PageLeft(void) {
         VictoryPalace_PollInput();
 
         for (j = 0; j < 5; j++) {
-            D_82607420[j].unk_008.unk_024.x -= 100.0f;
+            D_82607420[j].unk_008.position.x -= 100.0f;
         }
 
         VictoryPalace_ScrollCarousel(-100.0f);
@@ -2501,7 +2501,7 @@ s32 HallOfFame_WaitFramebuffer(void) {
         VictoryPalace_PollInput();
         VictoryPalace_DrawFrame();
     }
-    D_82607420[D_82607B52].unk_004 = D_8260741C->unk_24;
+    D_82607420[D_82607B52].unk_004 = D_8260741C->loadedModel;
     return 2;
 }
 
@@ -2571,21 +2571,21 @@ void HallOfFame_RunGallery(void) {
 
 void HallOfFame_SpawnPokeIcon(s32 arg0, f32 arg1) {
     if ((D_82607420[arg0].unk_000 != 151) || (VictoryPalace_SpeciesObtained(151) != 0)) {
-        unk_D_86002F58_004_000* temp_s0 = &D_82607B60[arg0];
+        DisplayObject* temp_s0 = &D_82607B60[arg0];
 
-        temp_s0->unk_0A6 = arg0;
+        temp_s0->effectSlot = arg0;
         Model_InitDisplayObject(temp_s0, 0, 0xB6, D_82608538->unk_08->unk_00[0]);
-        temp_s0->unk_000.unk_02 &= ~0x40;
-        temp_s0->unk_01E.x = 0;
-        temp_s0->unk_01E.y = 0;
-        temp_s0->unk_01E.z = 0;
-        temp_s0->unk_030.x = 5.0f;
-        temp_s0->unk_030.y = 5.0f;
-        temp_s0->unk_030.z = 5.0f;
-        temp_s0->unk_024.x = arg1;
-        temp_s0->unk_024.y = 0.0f;
-        temp_s0->unk_024.z = 0.0f;
-        temp_s0->unk_040.unk_0C = 0;
+        temp_s0->node.renderFlags &= ~0x40;
+        temp_s0->rotation.x = 0;
+        temp_s0->rotation.y = 0;
+        temp_s0->rotation.z = 0;
+        temp_s0->scale.x = 5.0f;
+        temp_s0->scale.y = 5.0f;
+        temp_s0->scale.z = 5.0f;
+        temp_s0->position.x = arg1;
+        temp_s0->position.y = 0.0f;
+        temp_s0->position.z = 0.0f;
+        temp_s0->transformAnim.speedFixed = 0;
         *(u8*)Util_ConvertAddrToVirtAddr(&D_800AF770[arg0]) = D_82607420[arg0].unk_000 - 1;
     }
 }
@@ -2595,7 +2595,7 @@ void HallOfFame_InitGallery(void) {
     s16 j;
     MemoryBlock* temp_v0;
     unk_D_86002F30* temp_s0;
-    unk_D_86002F58_004_000* ptr;
+    DisplayObject* ptr;
 
     D_82608546 = 0;
     D_82608548 = 0;
@@ -2636,34 +2636,34 @@ void HallOfFame_InitGallery(void) {
     ModelRenderer_AttachDisplayObject(&D_82608268);
     Model_InitDisplayObject(&D_82608268, 0, 0xB7, temp_s0->unk_08->unk_00[0]);
 
-    ptr->unk_000.unk_02 &= ~0x40;
-    ptr->unk_024.x = 0.0f;
-    ptr->unk_024.y = 0.0f;
-    ptr->unk_024.z = 0.0f;
-    ptr->unk_030.x = 5.0f;
-    ptr->unk_030.y = 5.0f;
-    ptr->unk_030.z = 5.0f;
-    ptr->unk_01E.x = 0;
-    ptr->unk_01E.y = 0;
-    ptr->unk_01E.z = 0;
-    ptr->unk_040.unk_0C = 0;
+    ptr->node.renderFlags &= ~0x40;
+    ptr->position.x = 0.0f;
+    ptr->position.y = 0.0f;
+    ptr->position.z = 0.0f;
+    ptr->scale.x = 5.0f;
+    ptr->scale.y = 5.0f;
+    ptr->scale.z = 5.0f;
+    ptr->rotation.x = 0;
+    ptr->rotation.y = 0;
+    ptr->rotation.z = 0;
+    ptr->transformAnim.speedFixed = 0;
 
     temp_s0 = Model_LoadByArchiveIndex(0xB7);
     ptr = &D_826083D0;
     ModelRenderer_AttachDisplayObject(&D_826083D0);
     Model_InitDisplayObject(&D_826083D0, 0, 0xB7, temp_s0->unk_08->unk_00[1]);
 
-    ptr->unk_000.unk_02 &= ~0x40;
-    ptr->unk_024.x = 0.0f;
-    ptr->unk_024.y = 0.0f;
-    ptr->unk_024.z = 0.0f;
-    ptr->unk_030.x = 5.0f;
-    ptr->unk_030.y = 5.0f;
-    ptr->unk_030.z = 5.0f;
-    ptr->unk_01E.x = 0;
-    ptr->unk_01E.y = 0;
-    ptr->unk_01E.z = 0;
-    ptr->unk_040.unk_0C = 0;
+    ptr->node.renderFlags &= ~0x40;
+    ptr->position.x = 0.0f;
+    ptr->position.y = 0.0f;
+    ptr->position.z = 0.0f;
+    ptr->scale.x = 5.0f;
+    ptr->scale.y = 5.0f;
+    ptr->scale.z = 5.0f;
+    ptr->rotation.x = 0;
+    ptr->rotation.y = 0;
+    ptr->rotation.z = 0;
+    ptr->transformAnim.speedFixed = 0;
 
     for (j = 0; j < 5; j++) {
         ModelRenderer_AttachDisplayObject(&D_82607420[j].unk_008);
@@ -2674,7 +2674,7 @@ void HallOfFame_InitGallery(void) {
     for (j = -2; j < 3; j++) {
         VictoryPalace_RequestCarouselIconLoad(j);
         PokeIcon_WaitFrameLoad(D_8260741C);
-        D_82607420[D_82607B52].unk_004 = D_8260741C->unk_24;
+        D_82607420[D_82607B52].unk_004 = D_8260741C->loadedModel;
     }
 
     for (j = -1; j < 2; j++) {

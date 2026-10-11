@@ -67,7 +67,7 @@ void DynamoGame_DrawCrankIcon(void) {
     sp1C = Gfx_AllocDisplayList(sizeof(Gfx) * 16);
     sp18 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
 
-    D_8650AD80->unk_18 = sp1C;
+    D_8650AD80->gfx = sp1C;
     guScale(sp18, 0.1f, 0.1f, 0.1f);
 
     gSPDisplayList(sp1C++, D_86509210);
@@ -84,6 +84,6 @@ void DynamoGame_InitCrankIconDisplay(void) {
 
     sp1C = MainPool_AllocState(main_pool_get_available(), 0);
     D_8650AD80 = GeoNode_CreateDisplayList(sp1C, NULL, 1, NULL);
-    GraphNode_AppendChild(&D_800AC840, &D_8650AD80->unk_00);
+    GraphNode_AppendChild(&D_800AC840, &D_8650AD80->display_node_header);
     MainPool_FinalizeAllocation(sp1C);
 }

@@ -217,7 +217,7 @@ s32 Options_ConfirmPrompt(s32 arg0) {
     while (var_s2 != 0) {
         Controller_PollInputs();
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP | BTN_DDOWN)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             var_s1 ^= 1;
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
             var_s2 = 0;
@@ -231,12 +231,12 @@ s32 Options_ConfirmPrompt(s32 arg0) {
     temp_s2 = var_s1 == 0;
     if (temp_s2 != 0) {
         if (arg0 == 0) {
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         } else {
             Audio_PlaySoundEffectById(0x1F);
         }
     } else {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 
     if ((arg0 == 1) || (var_s1 == 1)) {
@@ -261,7 +261,7 @@ void Options_ShowEraseCompleteScreen(void) {
         Options_Draw(8, 8, 2, 0);
     } while (!BTN_IS_PRESSED(gPlayer1Controller, BTN_A));
 
-    Audio_PlaySoundEffectById(2);
+    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
 
     for (i = 7; i > 0; i--) {
         Controller_PollInputs();
@@ -335,17 +335,17 @@ s16 Options_ApplySelection(void) {
 
     switch (D_82C01664) {
         case 0:
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             D_82C01666 ^= 1;
             break;
 
         case 1:
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             D_82C01666 ^= 2;
             break;
 
         case 2:
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             if ((Options_ConfirmPrompt(0) != 0) && (Options_ConfirmPrompt(1) != 0)) {
                 Options_EraseSaveData();
                 Options_ShowEraseCompleteScreen();
@@ -381,15 +381,15 @@ void Options_Loop(void) {
         Controller_PollInputs();
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
             D_82C01664 = (D_82C01664 + 3) % 4;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN)) {
             D_82C01664 = (D_82C01664 + 1) % 4;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
             var_s1 = Options_ApplySelection();
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
             var_s1 = 2;
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
         Options_Draw(8, 0, 0, 0);
     }

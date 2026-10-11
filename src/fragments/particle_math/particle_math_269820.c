@@ -131,22 +131,22 @@ Particle* Particle_CreateAtTransform(f32 arg0, Vec3f arg1, Vec3s arg2, ParticleU
     return sp1C;
 }
 
-Particle* Particle_CreateFromObjectTransform(unk_D_86002F58_004_000* arg0, ParticleUpdateCallback arg1, ParticleDescriptor* arg2,
+Particle* Particle_CreateFromObjectTransform(DisplayObject* arg0, ParticleUpdateCallback arg1, ParticleDescriptor* arg2,
                               s16 arg3, s16 arg4, s16 arg5) {
     Particle* sp1C = Particle_New();
 
     if ((u32)sp1C != -1) {
         if (arg4 == 0xFF) {
-            sp1C->unk_38.x = arg0->unk_024.x;
-            sp1C->unk_38.y = arg0->unk_024.y;
-            sp1C->unk_38.z = arg0->unk_024.z;
+            sp1C->unk_38.x = arg0->position.x;
+            sp1C->unk_38.y = arg0->position.y;
+            sp1C->unk_38.z = arg0->position.z;
         } else {
             GeoRender_FindAnchorPosition(arg0, arg4, &sp1C->unk_38);
         }
 
-        sp1C->unk_94.x = arg0->unk_01E.x;
-        sp1C->unk_94.y = arg0->unk_01E.y;
-        sp1C->unk_94.z = arg0->unk_01E.z;
+        sp1C->unk_94.x = arg0->rotation.x;
+        sp1C->unk_94.y = arg0->rotation.y;
+        sp1C->unk_94.z = arg0->rotation.z;
 
         sp1C->unk_08 = arg1;
         sp1C->unk_0C = arg2;
@@ -182,7 +182,7 @@ void Particle_EmitBurstAtTransformWithMetadata(f32 arg0, Vec3f arg1, Vec3s arg2,
     }
 }
 
-void Particle_EmitBurstFromObject(unk_D_86002F58_004_000* arg0, ParticleUpdateCallback arg1, ParticleDescriptor* arg2, s16 arg3,
+void Particle_EmitBurstFromObject(DisplayObject* arg0, ParticleUpdateCallback arg1, ParticleDescriptor* arg2, s16 arg3,
                    s16 arg4) {
     s32 i;
 
@@ -193,7 +193,7 @@ void Particle_EmitBurstFromObject(unk_D_86002F58_004_000* arg0, ParticleUpdateCa
     }
 }
 
-void Particle_EmitBurstFromObjectWithMetadata(unk_D_86002F58_004_000* arg0, ParticleUpdateCallback arg1, ParticleDescriptor* arg2, s16 arg3,
+void Particle_EmitBurstFromObjectWithMetadata(DisplayObject* arg0, ParticleUpdateCallback arg1, ParticleDescriptor* arg2, s16 arg3,
                    s16 arg4, s16 arg5) {
     s32 i;
 
@@ -573,20 +573,20 @@ void Particle_UpdateWorldTransform(Particle* arg0) {
     arg0->unk_2C.z = arg0->unk_68.z + arg0->unk_38.z + arg0->unk_50.z;
 
     if (arg0->unk_14 != NULL) {
-        arg0->unk_14->unk_024.x = arg0->unk_2C.x;
-        arg0->unk_14->unk_024.y = arg0->unk_2C.y;
-        arg0->unk_14->unk_024.z = arg0->unk_2C.z;
+        arg0->unk_14->position.x = arg0->unk_2C.x;
+        arg0->unk_14->position.y = arg0->unk_2C.y;
+        arg0->unk_14->position.z = arg0->unk_2C.z;
 
-        arg0->unk_14->unk_030.x = arg0->unk_1C;
-        arg0->unk_14->unk_030.y = arg0->unk_1C;
-        arg0->unk_14->unk_030.z = arg0->unk_1C;
+        arg0->unk_14->scale.x = arg0->unk_1C;
+        arg0->unk_14->scale.y = arg0->unk_1C;
+        arg0->unk_14->scale.z = arg0->unk_1C;
 
         if (Particle_LacksFlags(arg0, 0x200) != 0) {
-            arg0->unk_14->unk_01E.x = arg0->unk_94.x;
-            arg0->unk_14->unk_01E.y = arg0->unk_94.y;
-            arg0->unk_14->unk_01E.z = arg0->unk_94.z;
+            arg0->unk_14->rotation.x = arg0->unk_94.x;
+            arg0->unk_14->rotation.y = arg0->unk_94.y;
+            arg0->unk_14->rotation.z = arg0->unk_94.z;
         }
-        arg0->unk_14->unk_01D = arg0->prim_a;
+        arg0->unk_14->lodFraction = arg0->prim_a;
     }
 }
 

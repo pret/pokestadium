@@ -34,151 +34,151 @@ Vec3s D_8006F05C = { 0, 0, 0 };
 Vec3f D_8006F064 = { 1.0f, 1.0f, 1.0f };
 u16 D_8006F070[] = { 1, 1, 1 };
 
-Color_RGBA8* Color_SetRGB(Color_RGBA8* arg0, u8 r, u8 g, u8 b) {
-    arg0->r = r;
-    arg0->g = g;
-    arg0->b = b;
+Color_RGBA8* Color_SetRGB(Color_RGBA8* dest, u8 r, u8 g, u8 b) {
+    dest->r = r;
+    dest->g = g;
+    dest->b = b;
 
-    return arg0;
+    return dest;
 }
 
-Color_RGBA8* Color_SetRGBA(Color_RGBA8* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
-    arg0->r = arg1;
-    arg0->g = arg2;
-    arg0->b = arg3;
-    arg0->a = arg4;
+Color_RGBA8* Color_SetRGBA(Color_RGBA8* dest, u8 r, u8 g, u8 b, u8 alpha) {
+    dest->r = r;
+    dest->g = g;
+    dest->b = b;
+    dest->a = alpha;
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_SetComponents(Vec3f* arg0, f32 arg1, f32 arg2, f32 arg3) {
-    arg0->x = arg1;
-    arg0->y = arg2;
-    arg0->z = arg3;
+Vec3f* Vec3f_SetComponents(Vec3f* dest, f32 x, f32 y, f32 z) {
+    dest->x = x;
+    dest->y = y;
+    dest->z = z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_SetComponentsDuplicate(Vec3f* arg0, f32 arg1, f32 arg2, f32 arg3) {
-    arg0->x = arg1;
-    arg0->y = arg2;
-    arg0->z = arg3;
+Vec3f* Vec3f_SetComponentsDuplicate(Vec3f* dest, f32 x, f32 y, f32 z) {
+    dest->x = x;
+    dest->y = y;
+    dest->z = z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_AddInPlace(Vec3f* arg0, Vec3f* arg1) {
-    arg0->x += arg1->x;
-    arg0->y += arg1->y;
-    arg0->z += arg1->z;
+Vec3f* Vec3f_AddInPlace(Vec3f* dest, Vec3f* summand) {
+    dest->x += summand->x;
+    dest->y += summand->y;
+    dest->z += summand->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_Add(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2) {
-    arg0->x = arg1->x + arg2->x;
-    arg0->y = arg1->y + arg2->y;
-    arg0->z = arg1->z + arg2->z;
+Vec3f* Vec3f_Add(Vec3f* dest, Vec3f* a, Vec3f* b) {
+    dest->x = a->x + b->x;
+    dest->y = a->y + b->y;
+    dest->z = a->z + b->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_SubtractInPlace(Vec3f* arg0, Vec3f* arg1) {
-    arg0->x -= arg1->x;
-    arg0->y -= arg1->y;
-    arg0->z -= arg1->z;
+Vec3f* Vec3f_SubtractInPlace(Vec3f* dest, Vec3f* subtrahend) {
+    dest->x -= subtrahend->x;
+    dest->y -= subtrahend->y;
+    dest->z -= subtrahend->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_Subtract(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2) {
-    arg0->x = arg1->x - arg2->x;
-    arg0->y = arg1->y - arg2->y;
-    arg0->z = arg1->z - arg2->z;
+Vec3f* Vec3f_Subtract(Vec3f* out, Vec3f* a, Vec3f* subtrahend) {
+    out->x = a->x - subtrahend->x;
+    out->y = a->y - subtrahend->y;
+    out->z = a->z - subtrahend->z;
 
-    return arg0;
+    return out;
 }
 
-Vec3f* Vec3f_FromVec3s(Vec3f* arg0, Vec3s* arg1) {
-    arg0->x = arg1->x;
-    arg0->y = arg1->y;
-    arg0->z = arg1->z;
+Vec3f* Vec3f_FromVec3s(Vec3f* float_vector, Vec3s* int_vector) {
+    float_vector->x = int_vector->x;
+    float_vector->y = int_vector->y;
+    float_vector->z = int_vector->z;
 
-    return arg0;
+    return float_vector;
 }
 
-Vec3f* Vec3f_CrossProductFromPoints(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3) {
-    arg0->x = ((arg2->y - arg1->y) * (arg3->z - arg2->z)) - ((arg3->y - arg2->y) * (arg2->z - arg1->z));
-    arg0->y = ((arg2->z - arg1->z) * (arg3->x - arg2->x)) - ((arg3->z - arg2->z) * (arg2->x - arg1->x));
-    arg0->z = ((arg2->x - arg1->x) * (arg3->y - arg2->y)) - ((arg3->x - arg2->x) * (arg2->y - arg1->y));
+Vec3f* Vec3f_TriangleNormal(Vec3f* dest, Vec3f* a, Vec3f* b, Vec3f* c) {
+    dest->x = ((b->y - a->y) * (c->z - b->z)) - ((c->y - b->y) * (b->z - a->z));
+    dest->y = ((b->z - a->z) * (c->x - b->x)) - ((c->z - b->z) * (b->x - a->x));
+    dest->z = ((b->x - a->x) * (c->y - b->y)) - ((c->x - b->x) * (b->y - a->y));
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_CrossProduct(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2) {
-    arg0->x = (arg1->y * arg2->z) - (arg2->y * arg1->z);
-    arg0->y = (arg1->z * arg2->x) - (arg2->z * arg1->x);
-    arg0->z = (arg1->x * arg2->y) - (arg2->x * arg1->y);
+Vec3f* Vec3f_CrossProduct(Vec3f* dest, Vec3f* a, Vec3f* b) {
+    dest->x = (a->y * b->z) - (b->y * a->z);
+    dest->y = (a->z * b->x) - (b->z * a->x);
+    dest->z = (a->x * b->y) - (b->x * a->y);
 
-    return arg0;
+    return dest;
 }
 
-Vec3f* Vec3f_Normalize(Vec3f* arg0) {
-    f32 temp_fv1_2 = 1.0f / sqrtf(SQ(arg0->x) + SQ(arg0->y) + SQ(arg0->z));
+Vec3f* Vec3f_Normalize(Vec3f* vector) {
+    f32 temp_fv1_2 = 1.0f / sqrtf(SQ(vector->x) + SQ(vector->y) + SQ(vector->z));
 
-    arg0->x *= temp_fv1_2;
-    arg0->y *= temp_fv1_2;
-    arg0->z *= temp_fv1_2;
+    vector->x *= temp_fv1_2;
+    vector->y *= temp_fv1_2;
+    vector->z *= temp_fv1_2;
 
-    return arg0;
+    return vector;
 }
 
-Vec3s* Vec3s_SetComponents(Vec3s* arg0, s16 arg1, s16 arg2, s16 arg3) {
-    arg0->x = arg1;
-    arg0->y = arg2;
-    arg0->z = arg3;
+Vec3s* Vec3s_SetComponents(Vec3s* dest, s16 a, s16 b, s16 c) {
+    dest->x = a;
+    dest->y = b;
+    dest->z = c;
 
-    return arg0;
+    return dest;
 }
 
-Vec3s* Vec3s_AddInPlace(Vec3s* arg0, Vec3s* arg1) {
-    arg0->x += arg1->x;
-    arg0->y += arg1->y;
-    arg0->z += arg1->z;
+Vec3s* Vec3s_AddInPlace(Vec3s* dest, Vec3s* summand) {
+    dest->x += summand->x;
+    dest->y += summand->y;
+    dest->z += summand->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3s* Vec3s_Add(Vec3s* arg0, Vec3s* arg1, Vec3s* arg2) {
-    arg0->x = arg1->x + arg2->x;
-    arg0->y = arg1->y + arg2->y;
-    arg0->z = arg1->z + arg2->z;
+Vec3s* Vec3s_Add(Vec3s* dest, Vec3s* a, Vec3s* b) {
+    dest->x = a->x + b->x;
+    dest->y = a->y + b->y;
+    dest->z = a->z + b->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3s* Vec3s_SubtractInPlace(Vec3s* arg0, Vec3s* arg1) {
-    arg0->x -= arg1->x;
-    arg0->y -= arg1->y;
-    arg0->z -= arg1->z;
+Vec3s* Vec3s_SubtractInPlace(Vec3s* dest, Vec3s* subtrahend) {
+    dest->x -= subtrahend->x;
+    dest->y -= subtrahend->y;
+    dest->z -= subtrahend->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3s* Vec3s_Subtract(Vec3s* arg0, Vec3s* arg1, Vec3s* arg2) {
-    arg0->x = arg1->x - arg2->x;
-    arg0->y = arg1->y - arg2->y;
-    arg0->z = arg1->z - arg2->z;
+Vec3s* Vec3s_Subtract(Vec3s* dest, Vec3s* a, Vec3s* subtrahend) {
+    dest->x = a->x - subtrahend->x;
+    dest->y = a->y - subtrahend->y;
+    dest->z = a->z - subtrahend->z;
 
-    return arg0;
+    return dest;
 }
 
-Vec3s* Vec3s_FromVec3f(Vec3s* arg0, Vec3f* arg1) {
-    arg0->x = ROUND_MAX(arg1->x);
-    arg0->y = ROUND_MAX(arg1->y);
-    arg0->z = ROUND_MAX(arg1->z);
+Vec3s* Vec3s_FromVec3f(Vec3s* dest, Vec3f* float_vector) {
+    dest->x = ROUND_MAX(float_vector->x);
+    dest->y = ROUND_MAX(float_vector->y);
+    dest->z = ROUND_MAX(float_vector->z);
 
-    return arg0;
+    return dest;
 }
 
 void MtxF_Copy(MtxF* dest, MtxF* src) {
@@ -193,26 +193,26 @@ void MtxF_Copy(MtxF* dest, MtxF* src) {
     }
 }
 
-void MtxF_Identity(MtxF* arg0) {
+void MtxF_Identity(MtxF* dest) {
     s32 i;
-    f32* dest;
+    f32* j;
     // These loops must be one line to match on -O2
     // clang-format off
     
     // initialize everything except the first and last cells to 0
-    for (dest = (f32*)arg0 + 1, i = 0; i < 14; dest++, i++) { *dest = 0.0f; }
+    for (j = (f32*)dest + 1, i = 0; i < 14; j++, i++) { *j = 0.0f; }
 
     // initialize the diagonal cells to 1
-    for (dest = (f32*)arg0, i = 0; i < 4; dest += 5, i++) { *dest = 1.0f; }
+    for (j = (f32*)dest, i = 0; i < 4; j += 5, i++) { *j = 1.0f; }
     // clang-format on
 }
 
-void MtxF_SetTranslation(MtxF* arg0, Vec3f* arg1) {
-    MtxF_Identity(arg0);
+void MtxF_SetTranslation(MtxF* identity, Vec3f* translate) {
+    MtxF_Identity(identity);
 
-    arg0->mf[3][0] = arg1->x;
-    arg0->mf[3][1] = arg1->y;
-    arg0->mf[3][2] = arg1->z;
+    identity->mf[3][0] = translate->x;
+    identity->mf[3][1] = translate->y;
+    identity->mf[3][2] = translate->z;
 }
 
 void MtxF_SetLookAt(MtxF* mtx, Vec3f* from, Vec3f* to, u16 roll) {
@@ -289,7 +289,7 @@ void MtxF_SetLookAt(MtxF* mtx, Vec3f* from, Vec3f* to, u16 roll) {
     mtx->mf[3][3] = 1.0f;
 }
 
-void MtxF_SetRotationTranslation(MtxF* dest, Vec3s* translate, Vec3s* rotate) {
+void MtxF_SetRotationTranslation(MtxF* out, Vec3s* translate, Vec3s* rotate) {
     f32 sx = SINS(rotate->x);
     f32 cx = COSS(rotate->x);
 
@@ -299,28 +299,28 @@ void MtxF_SetRotationTranslation(MtxF* dest, Vec3s* translate, Vec3s* rotate) {
     f32 sz = SINS(rotate->z);
     f32 cz = COSS(rotate->z);
 
-    dest->mf[0][0] = cy * cz + (sx * sy) * sz;
-    dest->mf[0][1] = -cy * sz + (sx * sy) * cz;
-    dest->mf[0][2] = cx * sy;
-    dest->mf[0][3] = translate->x;
+    out->mf[0][0] = cy * cz + (sx * sy) * sz;
+    out->mf[0][1] = -cy * sz + (sx * sy) * cz;
+    out->mf[0][2] = cx * sy;
+    out->mf[0][3] = translate->x;
 
-    dest->mf[1][0] = cx * sz;
-    dest->mf[1][1] = cx * cz;
-    dest->mf[1][2] = -sx;
-    dest->mf[1][3] = translate->y;
+    out->mf[1][0] = cx * sz;
+    out->mf[1][1] = cx * cz;
+    out->mf[1][2] = -sx;
+    out->mf[1][3] = translate->y;
 
-    dest->mf[2][0] = -sy * cz + (sx * cy) * sz;
-    dest->mf[2][1] = sy * sz + (sx * cy) * cz;
-    dest->mf[2][2] = cx * cy;
-    dest->mf[2][3] = translate->z;
+    out->mf[2][0] = -sy * cz + (sx * cy) * sz;
+    out->mf[2][1] = sy * sz + (sx * cy) * cz;
+    out->mf[2][2] = cx * cy;
+    out->mf[2][3] = translate->z;
 
-    dest->mf[3][0] = 0.0f;
-    dest->mf[3][1] = 0.0f;
-    dest->mf[3][2] = 0.0f;
-    dest->mf[3][3] = 1.0f;
+    out->mf[3][0] = 0.0f;
+    out->mf[3][1] = 0.0f;
+    out->mf[3][2] = 0.0f;
+    out->mf[3][3] = 1.0f;
 }
 
-void MtxF_SetRotationTranslationF(MtxF* arg0, Vec3f* arg1, Vec3s* arg2) {
+void MtxF_SetRotationTranslationF(MtxF* out, Vec3f* translate, Vec3s* rotate) {
     f32 temp_fa0;
     f32 temp_fa1;
     f32 temp_ft4;
@@ -329,106 +329,106 @@ void MtxF_SetRotationTranslationF(MtxF* arg0, Vec3f* arg1, Vec3s* arg2) {
     f32 temp_fv1;
     f32 sp0;
 
-    temp_fv0 = SINS(arg2->x);
-    temp_fv1 = COSS(arg2->x);
+    temp_fv0 = SINS(rotate->x);
+    temp_fv1 = COSS(rotate->x);
 
-    temp_fa0 = SINS(arg2->y);
-    temp_fa1 = COSS(arg2->y);
+    temp_fa0 = SINS(rotate->y);
+    temp_fa1 = COSS(rotate->y);
 
-    temp_ft4 = SINS(arg2->z);
-    temp_ft5 = COSS(arg2->z);
+    temp_ft4 = SINS(rotate->z);
+    temp_ft5 = COSS(rotate->z);
 
     sp0 = temp_fv0 * temp_fa0;
-    arg0->mf[0][0] = (temp_fa1 * temp_ft5) + (sp0 * temp_ft4);
-    arg0->mf[1][0] = (-temp_fa1 * temp_ft4) + (sp0 * temp_ft5);
-    arg0->mf[2][0] = temp_fv1 * temp_fa0;
-    arg0->mf[3][0] = arg1->x;
+    out->mf[0][0] = (temp_fa1 * temp_ft5) + (sp0 * temp_ft4);
+    out->mf[1][0] = (-temp_fa1 * temp_ft4) + (sp0 * temp_ft5);
+    out->mf[2][0] = temp_fv1 * temp_fa0;
+    out->mf[3][0] = translate->x;
 
-    arg0->mf[0][1] = temp_fv1 * temp_ft4;
-    arg0->mf[1][1] = temp_fv1 * temp_ft5;
-    arg0->mf[2][1] = -temp_fv0;
-    arg0->mf[3][1] = arg1->y;
+    out->mf[0][1] = temp_fv1 * temp_ft4;
+    out->mf[1][1] = temp_fv1 * temp_ft5;
+    out->mf[2][1] = -temp_fv0;
+    out->mf[3][1] = translate->y;
 
     sp0 = temp_fv0 * temp_fa1;
-    arg0->mf[0][2] = (-temp_fa0 * temp_ft5) + (sp0 * temp_ft4);
-    arg0->mf[1][2] = (temp_fa0 * temp_ft4) + (sp0 * temp_ft5);
-    arg0->mf[2][2] = temp_fv1 * temp_fa1;
-    arg0->mf[3][2] = arg1->z;
+    out->mf[0][2] = (-temp_fa0 * temp_ft5) + (sp0 * temp_ft4);
+    out->mf[1][2] = (temp_fa0 * temp_ft4) + (sp0 * temp_ft5);
+    out->mf[2][2] = temp_fv1 * temp_fa1;
+    out->mf[3][2] = translate->z;
 
-    arg0->mf[0][3] = 0.0f;
-    arg0->mf[1][3] = 0.0f;
-    arg0->mf[2][3] = 0.0f;
-    arg0->mf[3][3] = 1.0f;
+    out->mf[0][3] = 0.0f;
+    out->mf[1][3] = 0.0f;
+    out->mf[2][3] = 0.0f;
+    out->mf[3][3] = 1.0f;
 }
 
-void MtxF_SetRotationAndTransformTranslation(MtxF* arg0, Vec3f* arg1, Vec3s* arg2) {
-    f32 sx = SINS(arg2->x);
-    f32 cx = COSS(arg2->x);
-    f32 sy = SINS(arg2->y);
-    f32 cy = COSS(arg2->y);
-    f32 sz = SINS(arg2->z);
-    f32 cz = COSS(arg2->z);
+void MtxF_SetRotationAndTransformTranslation(MtxF* out, Vec3f* translate, Vec3s* rotate) {
+    f32 sx = SINS(rotate->x);
+    f32 cx = COSS(rotate->x);
+    f32 sy = SINS(rotate->y);
+    f32 cy = COSS(rotate->y);
+    f32 sz = SINS(rotate->z);
+    f32 cz = COSS(rotate->z);
 
-    arg0->mf[0][0] = (cy * cz) + ((sx * sy) * sz);
-    arg0->mf[0][1] = (-cy * sz) + ((sx * sy) * cz);
-    arg0->mf[0][2] = cx * sy;
+    out->mf[0][0] = (cy * cz) + ((sx * sy) * sz);
+    out->mf[0][1] = (-cy * sz) + ((sx * sy) * cz);
+    out->mf[0][2] = cx * sy;
 
-    arg0->mf[1][0] = cx * sz;
-    arg0->mf[1][1] = cx * cz;
-    arg0->mf[1][2] = -sx;
+    out->mf[1][0] = cx * sz;
+    out->mf[1][1] = cx * cz;
+    out->mf[1][2] = -sx;
 
-    arg0->mf[2][0] = (-sy * cz) + ((sx * cy) * sz);
-    arg0->mf[2][1] = (sy * sz) + ((sx * cy) * cz);
-    arg0->mf[2][2] = cx * cy;
+    out->mf[2][0] = (-sy * cz) + ((sx * cy) * sz);
+    out->mf[2][1] = (sy * sz) + ((sx * cy) * cz);
+    out->mf[2][2] = cx * cy;
 
-    arg0->mf[3][0] = (arg0->mf[0][0] * arg1->x) + (arg0->mf[1][0] * arg1->y) + (arg0->mf[2][0] * arg1->z);
-    arg0->mf[3][1] = (arg0->mf[0][1] * arg1->x) + (arg0->mf[1][1] * arg1->y) + (arg0->mf[2][1] * arg1->z);
-    arg0->mf[3][2] = (arg0->mf[0][2] * arg1->x) + (arg0->mf[1][2] * arg1->y) + (arg0->mf[2][2] * arg1->z);
+    out->mf[3][0] = (out->mf[0][0] * translate->x) + (out->mf[1][0] * translate->y) + (out->mf[2][0] * translate->z);
+    out->mf[3][1] = (out->mf[0][1] * translate->x) + (out->mf[1][1] * translate->y) + (out->mf[2][1] * translate->z);
+    out->mf[3][2] = (out->mf[0][2] * translate->x) + (out->mf[1][2] * translate->y) + (out->mf[2][2] * translate->z);
 
-    arg0->mf[0][3] = arg0->mf[1][3] = arg0->mf[2][3] = 0.0f;
-    arg0->mf[3][3] = 1.0f;
+    out->mf[0][3] = out->mf[1][3] = out->mf[2][3] = 0.0f;
+    out->mf[3][3] = 1.0f;
 }
 
-void MtxF_SetRotationScaleTranslation(MtxF* dest, Vec3f* b, Vec3s* c, Vec3f* arg3) {
-    f32 sx = SINS(c->x);
-    f32 cx = COSS(c->x);
+void MtxF_SetRotationScaleTranslation(MtxF* dest, Vec3f* translate, Vec3s* rotate, Vec3f* scale) {
+    f32 sx = SINS(rotate->x);
+    f32 cx = COSS(rotate->x);
 
-    f32 sy = SINS(c->y);
-    f32 cy = COSS(c->y);
+    f32 sy = SINS(rotate->y);
+    f32 cy = COSS(rotate->y);
 
-    f32 sz = SINS(c->z);
-    f32 cz = COSS(c->z);
+    f32 sz = SINS(rotate->z);
+    f32 cz = COSS(rotate->z);
 
-    dest->mf[0][0] = (cy * cz) * arg3->x;
-    dest->mf[0][1] = (cy * sz) * arg3->x;
-    dest->mf[0][2] = (-sy) * arg3->x;
+    dest->mf[0][0] = (cy * cz) * scale->x;
+    dest->mf[0][1] = (cy * sz) * scale->x;
+    dest->mf[0][2] = (-sy) * scale->x;
     dest->mf[0][3] = 0.0f;
 
-    dest->mf[1][0] = (sx * sy * cz - cx * sz) * arg3->y;
-    dest->mf[1][1] = (sx * sy * sz + cx * cz) * arg3->y;
-    dest->mf[1][2] = (sx * cy) * arg3->y;
+    dest->mf[1][0] = (sx * sy * cz - cx * sz) * scale->y;
+    dest->mf[1][1] = (sx * sy * sz + cx * cz) * scale->y;
+    dest->mf[1][2] = (sx * cy) * scale->y;
     dest->mf[1][3] = 0.0f;
 
-    dest->mf[2][0] = (cx * sy * cz + sx * sz) * arg3->z;
-    dest->mf[2][1] = (cx * sy * sz - sx * cz) * arg3->z;
-    dest->mf[2][2] = (cx * cy) * arg3->z;
+    dest->mf[2][0] = (cx * sy * cz + sx * sz) * scale->z;
+    dest->mf[2][1] = (cx * sy * sz - sx * cz) * scale->z;
+    dest->mf[2][2] = (cx * cy) * scale->z;
     dest->mf[2][3] = 0.0f;
 
-    dest->mf[3][0] = b->x;
-    dest->mf[3][1] = b->y;
-    dest->mf[3][2] = b->z;
+    dest->mf[3][0] = translate->x;
+    dest->mf[3][1] = translate->y;
+    dest->mf[3][2] = translate->z;
     dest->mf[3][3] = 1.0f;
 }
 
-void MtxF_SetRotationAndScaledTranslation(MtxF* dest, Vec3f* b, Vec3s* c, Vec3f* arg3) {
-    f32 sx = SINS(c->x);
-    f32 cx = COSS(c->x);
+void MtxF_SetRotationAndScaledTranslation(MtxF* dest, Vec3f* translate, Vec3s* rotate, Vec3f* scale) {
+    f32 sx = SINS(rotate->x);
+    f32 cx = COSS(rotate->x);
 
-    f32 sy = SINS(c->y);
-    f32 cy = COSS(c->y);
+    f32 sy = SINS(rotate->y);
+    f32 cy = COSS(rotate->y);
 
-    f32 sz = SINS(c->z);
-    f32 cz = COSS(c->z);
+    f32 sz = SINS(rotate->z);
+    f32 cz = COSS(rotate->z);
 
     dest->mf[0][0] = cy * cz;
     dest->mf[0][1] = cy * sz;
@@ -445,72 +445,72 @@ void MtxF_SetRotationAndScaledTranslation(MtxF* dest, Vec3f* b, Vec3s* c, Vec3f*
     dest->mf[2][2] = cx * cy;
     dest->mf[2][3] = 0.0f;
 
-    dest->mf[3][0] = b->x * arg3->x;
-    dest->mf[3][1] = b->y * arg3->y;
-    dest->mf[3][2] = b->z * arg3->z;
+    dest->mf[3][0] = translate->x * scale->x;
+    dest->mf[3][1] = translate->y * scale->y;
+    dest->mf[3][2] = translate->z * scale->z;
     dest->mf[3][3] = 1.0f;
 }
 
-void MtxF_ApplyScaleTransform(MtxF* arg0, MtxF* arg1, MtxF* arg2, Vec3f* arg3, f32 arg4) {
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
+void MtxF_ApplyScaleTransform(MtxF* dest, MtxF* basis, MtxF* transform, Vec3f* local_position, f32 scale) {
+    f32 x_norm;
+    f32 y_norm;
+    f32 z_norm;
 
-    sp24 = sqrtf(SQ(arg2->mf[0][0]) + SQ(arg2->mf[0][1]) + SQ(arg2->mf[0][2])) * arg4;
-    sp20 = sqrtf(SQ(arg2->mf[1][0]) + SQ(arg2->mf[1][1]) + SQ(arg2->mf[1][2])) * arg4;
-    sp1C = sqrtf(SQ(arg2->mf[2][0]) + SQ(arg2->mf[2][1]) + SQ(arg2->mf[2][2])) * arg4;
+    x_norm = sqrtf(SQ(transform->mf[0][0]) + SQ(transform->mf[0][1]) + SQ(transform->mf[0][2])) * scale;
+    y_norm = sqrtf(SQ(transform->mf[1][0]) + SQ(transform->mf[1][1]) + SQ(transform->mf[1][2])) * scale;
+    z_norm = sqrtf(SQ(transform->mf[2][0]) + SQ(transform->mf[2][1]) + SQ(transform->mf[2][2])) * scale;
 
-    arg0->mf[0][0] = arg1->mf[0][0] * sp24;
-    arg0->mf[0][1] = arg1->mf[1][0] * sp24;
-    arg0->mf[0][2] = arg1->mf[2][0] * sp24;
-    arg0->mf[0][3] = 0.0f;
+    dest->mf[0][0] = basis->mf[0][0] * x_norm;
+    dest->mf[0][1] = basis->mf[1][0] * x_norm;
+    dest->mf[0][2] = basis->mf[2][0] * x_norm;
+    dest->mf[0][3] = 0.0f;
 
-    arg0->mf[1][0] = arg1->mf[0][1] * sp20;
-    arg0->mf[1][1] = arg1->mf[1][1] * sp20;
-    arg0->mf[1][2] = arg1->mf[2][1] * sp20;
-    arg0->mf[1][3] = 0.0f;
+    dest->mf[1][0] = basis->mf[0][1] * y_norm;
+    dest->mf[1][1] = basis->mf[1][1] * y_norm;
+    dest->mf[1][2] = basis->mf[2][1] * y_norm;
+    dest->mf[1][3] = 0.0f;
 
-    arg0->mf[2][0] = arg1->mf[0][2] * sp1C;
-    arg0->mf[2][1] = arg1->mf[1][2] * sp1C;
-    arg0->mf[2][2] = arg1->mf[2][2] * sp1C;
-    arg0->mf[2][3] = 0.0f;
+    dest->mf[2][0] = basis->mf[0][2] * z_norm;
+    dest->mf[2][1] = basis->mf[1][2] * z_norm;
+    dest->mf[2][2] = basis->mf[2][2] * z_norm;
+    dest->mf[2][3] = 0.0f;
 
-    arg0->mf[3][0] =
-        ((arg2->mf[0][0] * arg3->x) + (arg2->mf[1][0] * arg3->y) + (arg2->mf[2][0] * arg3->z)) + arg2->mf[3][0];
-    arg0->mf[3][1] =
-        ((arg2->mf[0][1] * arg3->x) + (arg2->mf[1][1] * arg3->y) + (arg2->mf[2][1] * arg3->z)) + arg2->mf[3][1];
-    arg0->mf[3][2] =
-        ((arg2->mf[0][2] * arg3->x) + (arg2->mf[1][2] * arg3->y) + (arg2->mf[2][2] * arg3->z)) + arg2->mf[3][2];
-    arg0->mf[3][3] = 1.0f;
+    dest->mf[3][0] =
+        ((transform->mf[0][0] * local_position->x) + (transform->mf[1][0] * local_position->y) + (transform->mf[2][0] * local_position->z)) + transform->mf[3][0];
+    dest->mf[3][1] =
+        ((transform->mf[0][1] * local_position->x) + (transform->mf[1][1] * local_position->y) + (transform->mf[2][1] * local_position->z)) + transform->mf[3][1];
+    dest->mf[3][2] =
+        ((transform->mf[0][2] * local_position->x) + (transform->mf[1][2] * local_position->y) + (transform->mf[2][2] * local_position->z)) + transform->mf[3][2];
+    dest->mf[3][3] = 1.0f;
 }
 
-void MtxF_SetOrthonormalBasis(MtxF* dest, Vec3f* upDir, Vec3f* pos, s16 yaw) {
-    Vec3f lateralDir;
-    Vec3f leftDir;
-    Vec3f forwardDir;
+void MtxF_SetOrthonormalBasis(MtxF* dest, Vec3f* up_direction, Vec3f* pos, s16 yaw) {
+    Vec3f lateral_direction;
+    Vec3f left_direction;
+    Vec3f forward_direction;
 
-    Vec3f_SetComponentsDuplicate(&lateralDir, SINS(yaw), 0, COSS(yaw));
-    Vec3f_Normalize(upDir);
+    Vec3f_SetComponentsDuplicate(&lateral_direction, SINS(yaw), 0, COSS(yaw));
+    Vec3f_Normalize(up_direction);
 
-    Vec3f_CrossProduct(&leftDir, upDir, &lateralDir);
-    Vec3f_Normalize(&leftDir);
+    Vec3f_CrossProduct(&left_direction, up_direction, &lateral_direction);
+    Vec3f_Normalize(&left_direction);
 
-    Vec3f_CrossProduct(&forwardDir, &leftDir, upDir);
-    Vec3f_Normalize(&forwardDir);
+    Vec3f_CrossProduct(&forward_direction, &left_direction, up_direction);
+    Vec3f_Normalize(&forward_direction);
 
-    dest->mf[0][0] = leftDir.x;
-    dest->mf[0][1] = leftDir.y;
-    dest->mf[0][2] = leftDir.z;
+    dest->mf[0][0] = left_direction.x;
+    dest->mf[0][1] = left_direction.y;
+    dest->mf[0][2] = left_direction.z;
     dest->mf[3][0] = pos->x;
 
-    dest->mf[1][0] = upDir->x;
-    dest->mf[1][1] = upDir->y;
-    dest->mf[1][2] = upDir->z;
+    dest->mf[1][0] = up_direction->x;
+    dest->mf[1][1] = up_direction->y;
+    dest->mf[1][2] = up_direction->z;
     dest->mf[3][1] = pos->y;
 
-    dest->mf[2][0] = forwardDir.x;
-    dest->mf[2][1] = forwardDir.y;
-    dest->mf[2][2] = forwardDir.z;
+    dest->mf[2][0] = forward_direction.x;
+    dest->mf[2][1] = forward_direction.y;
+    dest->mf[2][2] = forward_direction.z;
     dest->mf[3][2] = pos->z;
 
     dest->mf[0][3] = 0.0f;
@@ -519,72 +519,72 @@ void MtxF_SetOrthonormalBasis(MtxF* dest, Vec3f* upDir, Vec3f* pos, s16 yaw) {
     dest->mf[3][3] = 1.0f;
 }
 
-void MtxF_Multiply(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
+void MtxF_Multiply(MtxF* dest, MtxF* A, MtxF* B) {
     f32 entry0;
     f32 entry1;
     f32 entry2;
 
-    entry0 = arg1->mf[0][0];
-    entry1 = arg1->mf[0][1];
-    entry2 = arg1->mf[0][2];
+    entry0 = A->mf[0][0];
+    entry1 = A->mf[0][1];
+    entry2 = A->mf[0][2];
 
-    arg0->mf[0][0] = (entry0 * arg2->mf[0][0]) + (entry1 * arg2->mf[1][0]) + (entry2 * arg2->mf[2][0]);
-    arg0->mf[0][1] = (entry0 * arg2->mf[0][1]) + (entry1 * arg2->mf[1][1]) + (entry2 * arg2->mf[2][1]);
-    arg0->mf[0][2] = (entry0 * arg2->mf[0][2]) + (entry1 * arg2->mf[1][2]) + (entry2 * arg2->mf[2][2]);
+    dest->mf[0][0] = (entry0 * B->mf[0][0]) + (entry1 * B->mf[1][0]) + (entry2 * B->mf[2][0]);
+    dest->mf[0][1] = (entry0 * B->mf[0][1]) + (entry1 * B->mf[1][1]) + (entry2 * B->mf[2][1]);
+    dest->mf[0][2] = (entry0 * B->mf[0][2]) + (entry1 * B->mf[1][2]) + (entry2 * B->mf[2][2]);
 
-    entry0 = arg1->mf[1][0];
-    entry1 = arg1->mf[1][1];
-    entry2 = arg1->mf[1][2];
+    entry0 = A->mf[1][0];
+    entry1 = A->mf[1][1];
+    entry2 = A->mf[1][2];
 
-    arg0->mf[1][0] = (entry0 * arg2->mf[0][0]) + (entry1 * arg2->mf[1][0]) + (entry2 * arg2->mf[2][0]);
-    arg0->mf[1][1] = (entry0 * arg2->mf[0][1]) + (entry1 * arg2->mf[1][1]) + (entry2 * arg2->mf[2][1]);
-    arg0->mf[1][2] = (entry0 * arg2->mf[0][2]) + (entry1 * arg2->mf[1][2]) + (entry2 * arg2->mf[2][2]);
+    dest->mf[1][0] = (entry0 * B->mf[0][0]) + (entry1 * B->mf[1][0]) + (entry2 * B->mf[2][0]);
+    dest->mf[1][1] = (entry0 * B->mf[0][1]) + (entry1 * B->mf[1][1]) + (entry2 * B->mf[2][1]);
+    dest->mf[1][2] = (entry0 * B->mf[0][2]) + (entry1 * B->mf[1][2]) + (entry2 * B->mf[2][2]);
 
-    entry0 = arg1->mf[2][0];
-    entry1 = arg1->mf[2][1];
-    entry2 = arg1->mf[2][2];
+    entry0 = A->mf[2][0];
+    entry1 = A->mf[2][1];
+    entry2 = A->mf[2][2];
 
-    arg0->mf[2][0] = (entry0 * arg2->mf[0][0]) + (entry1 * arg2->mf[1][0]) + (entry2 * arg2->mf[2][0]);
-    arg0->mf[2][1] = (entry0 * arg2->mf[0][1]) + (entry1 * arg2->mf[1][1]) + (entry2 * arg2->mf[2][1]);
-    arg0->mf[2][2] = (entry0 * arg2->mf[0][2]) + (entry1 * arg2->mf[1][2]) + (entry2 * arg2->mf[2][2]);
+    dest->mf[2][0] = (entry0 * B->mf[0][0]) + (entry1 * B->mf[1][0]) + (entry2 * B->mf[2][0]);
+    dest->mf[2][1] = (entry0 * B->mf[0][1]) + (entry1 * B->mf[1][1]) + (entry2 * B->mf[2][1]);
+    dest->mf[2][2] = (entry0 * B->mf[0][2]) + (entry1 * B->mf[1][2]) + (entry2 * B->mf[2][2]);
 
-    entry0 = arg1->mf[3][0];
-    entry1 = arg1->mf[3][1];
-    entry2 = arg1->mf[3][2];
+    entry0 = A->mf[3][0];
+    entry1 = A->mf[3][1];
+    entry2 = A->mf[3][2];
 
-    arg0->mf[3][0] = (entry0 * arg2->mf[0][0]) + (entry1 * arg2->mf[1][0]) + (entry2 * arg2->mf[2][0]) + arg2->mf[3][0];
-    arg0->mf[3][1] = (entry0 * arg2->mf[0][1]) + (entry1 * arg2->mf[1][1]) + (entry2 * arg2->mf[2][1]) + arg2->mf[3][1];
-    arg0->mf[3][2] = (entry0 * arg2->mf[0][2]) + (entry1 * arg2->mf[1][2]) + (entry2 * arg2->mf[2][2]) + arg2->mf[3][2];
+    dest->mf[3][0] = (entry0 * B->mf[0][0]) + (entry1 * B->mf[1][0]) + (entry2 * B->mf[2][0]) + B->mf[3][0];
+    dest->mf[3][1] = (entry0 * B->mf[0][1]) + (entry1 * B->mf[1][1]) + (entry2 * B->mf[2][1]) + B->mf[3][1];
+    dest->mf[3][2] = (entry0 * B->mf[0][2]) + (entry1 * B->mf[1][2]) + (entry2 * B->mf[2][2]) + B->mf[3][2];
 
-    arg0->mf[0][3] = arg0->mf[1][3] = arg0->mf[2][3] = 0.0f;
-    arg0->mf[3][3] = 1.0f;
+    dest->mf[0][3] = dest->mf[1][3] = dest->mf[2][3] = 0.0f;
+    dest->mf[3][3] = 1.0f;
 }
 
-void MtxF_ScaleRows(MtxF* dest, MtxF* mtx, Vec3f* s) {
+void MtxF_ScaleRows(MtxF* dest, MtxF* matrix, Vec3f* scale) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        dest->mf[0][i] = mtx->mf[0][i] * s->x;
-        dest->mf[1][i] = mtx->mf[1][i] * s->y;
-        dest->mf[2][i] = mtx->mf[2][i] * s->z;
-        dest->mf[3][i] = mtx->mf[3][i];
+        dest->mf[0][i] = matrix->mf[0][i] * scale->x;
+        dest->mf[1][i] = matrix->mf[1][i] * scale->y;
+        dest->mf[2][i] = matrix->mf[2][i] * scale->z;
+        dest->mf[3][i] = matrix->mf[3][i];
     }
 }
 
-void MtxF_GetScale(MtxF* arg0, Vec3f* arg1) {
-    arg1->x = sqrtf(SQ(arg0->mf[0][0]) + SQ(arg0->mf[0][1]) + SQ(arg0->mf[0][2]));
-    arg1->y = sqrtf(SQ(arg0->mf[1][0]) + SQ(arg0->mf[1][1]) + SQ(arg0->mf[1][2]));
-    arg1->z = sqrtf(SQ(arg0->mf[2][0]) + SQ(arg0->mf[2][1]) + SQ(arg0->mf[2][2]));
+void MtxF_GetScale(MtxF* matrix, Vec3f* dest) {
+    dest->x = sqrtf(SQ(matrix->mf[0][0]) + SQ(matrix->mf[0][1]) + SQ(matrix->mf[0][2]));
+    dest->y = sqrtf(SQ(matrix->mf[1][0]) + SQ(matrix->mf[1][1]) + SQ(matrix->mf[1][2]));
+    dest->z = sqrtf(SQ(matrix->mf[2][0]) + SQ(matrix->mf[2][1]) + SQ(matrix->mf[2][2]));
 }
 
-void MtxF_TransformVec3s(MtxF* arg0, Vec3s* arg1) {
-    f32 entry0 = arg1->x;
-    f32 entry1 = arg1->y;
-    f32 entry2 = arg1->z;
+void MtxF_TransformVec3s(MtxF* matrix, Vec3s* dest) {
+    f32 entry0 = dest->x;
+    f32 entry1 = dest->y;
+    f32 entry2 = dest->z;
 
-    arg1->x = ((entry0 * arg0->mf[0][0]) + (entry1 * arg0->mf[1][0]) + (entry2 * arg0->mf[2][0])) + arg0->mf[3][0];
-    arg1->y = ((entry0 * arg0->mf[0][1]) + (entry1 * arg0->mf[1][1]) + (entry2 * arg0->mf[2][1])) + arg0->mf[3][1];
-    arg1->z = ((entry0 * arg0->mf[0][2]) + (entry1 * arg0->mf[1][2]) + (entry2 * arg0->mf[2][2])) + arg0->mf[3][2];
+    dest->x = ((entry0 * matrix->mf[0][0]) + (entry1 * matrix->mf[1][0]) + (entry2 * matrix->mf[2][0])) + matrix->mf[3][0];
+    dest->y = ((entry0 * matrix->mf[0][1]) + (entry1 * matrix->mf[1][1]) + (entry2 * matrix->mf[2][1])) + matrix->mf[3][1];
+    dest->z = ((entry0 * matrix->mf[0][2]) + (entry1 * matrix->mf[1][2]) + (entry2 * matrix->mf[2][2])) + matrix->mf[3][2];
 }
 
 #define GET_HIGH_S16_OF_32(var) (((s16*)&(var))[0])
@@ -604,24 +604,24 @@ void MtxF_ToFixed(MtxF* dest, MtxF* src) {
     }
 }
 
-void MtxF_BuildTransform(MtxF* arg0, Vec3f* arg1, Vec3s* arg2, Vec3f* arg3, MtxF* arg4, MtxF* arg5) {
+void MtxF_BuildTransform(MtxF* dest, Vec3f* local_position, Vec3s* rotate, Vec3f* scale, MtxF* basis, MtxF* transform) {
     MtxF sp60;
     MtxF sp20;
 
-    MtxF_ApplyScaleTransform(&sp60, arg4, arg5, arg1, 1.0f);
-    MtxF_SetRotationTranslationF(&sp20, &D_8006F050, arg2);
+    MtxF_ApplyScaleTransform(&sp60, basis, transform, local_position, 1.0f);
+    MtxF_SetRotationTranslationF(&sp20, &D_8006F050, rotate);
     MtxF_Multiply(&sp20, &sp20, &sp60);
-    MtxF_ScaleRows(arg0, &sp20, arg3);
+    MtxF_ScaleRows(dest, &sp20, scale);
 }
 
-void Vec3f_CalculateDistanceAngles(Vec3f* arg0, Vec3f* arg1, f32* arg2, s16* arg3, s16* arg4) {
-    f32 sp2C = arg1->x - arg0->x;
-    f32 sp28 = arg1->y - arg0->y;
-    f32 sp24 = arg1->z - arg0->z;
+void Vec3f_CalculateDistanceAngles(Vec3f* to, Vec3f* from, f32* euclidean, s16* angle_x, s16* angle_y) {
+    f32 x_dist = from->x - to->x;
+    f32 y_dist = from->y - to->y;
+    f32 z_dist = from->z - to->z;
 
-    *arg2 = sqrtf(SQ(sp2C) + SQ(sp28) + SQ(sp24));
-    *arg3 = MathUtil_Atan2s(sqrtf(SQ(sp2C) + SQ(sp24)), sp28);
-    *arg4 = MathUtil_Atan2s(sp24, sp2C);
+    *euclidean = sqrtf(SQ(x_dist) + SQ(y_dist) + SQ(z_dist));
+    *angle_x = MathUtil_Atan2s(sqrtf(SQ(x_dist) + SQ(z_dist)), y_dist);
+    *angle_y = MathUtil_Atan2s(z_dist, x_dist);
 }
 
 void Camera_ComputeEyeFromAngles(Vec3f* from, Vec3f* to, f32 dist, s16 pitch, s16 yaw) {
@@ -630,16 +630,16 @@ void Camera_ComputeEyeFromAngles(Vec3f* from, Vec3f* to, f32 dist, s16 pitch, s1
     to->z = from->z + (dist * COSS(pitch) * COSS(yaw));
 }
 
-s16 Math_StepToS(s16 current, s16 target, s16 inc) {
+s16 Math_StepToS(s16 current, s16 target, s16 delta) {
     s16 temp_v0 = target - current;
 
     if (temp_v0 < 0) {
-        temp_v0 += inc;
+        temp_v0 += delta;
         if (temp_v0 > 0) {
             temp_v0 = 0;
         }
     } else {
-        temp_v0 -= inc;
+        temp_v0 -= delta;
         if (temp_v0 < 0) {
             temp_v0 = 0;
         }
@@ -648,17 +648,17 @@ s16 Math_StepToS(s16 current, s16 target, s16 inc) {
     return target - temp_v0;
 }
 
-s32 Math_StepToS32(s32 current, s32 target, s32 inc, s32 dec) {
+s32 Math_StepToS32(s32 current, s32 target, s32 increase, s32 descrease) {
     //! If target is close to the max or min s32, then it's possible to overflow
     // past it without stopping.
 
     if (current < target) {
-        current += inc;
+        current += increase;
         if (current > target) {
             current = target;
         }
     } else {
-        current -= dec;
+        current -= descrease;
         if (current < target) {
             current = target;
         }
@@ -666,14 +666,14 @@ s32 Math_StepToS32(s32 current, s32 target, s32 inc, s32 dec) {
     return current;
 }
 
-f32 Math_StepToF(f32 current, f32 target, f32 inc, f32 dec) {
+f32 Math_StepToF(f32 current, f32 target, f32 increase, f32 decrease) {
     if (current < target) {
-        current += inc;
+        current += increase;
         if (current > target) {
             current = target;
         }
     } else {
-        current -= dec;
+        current -= decrease;
         if (current < target) {
             current = target;
         }
@@ -681,20 +681,20 @@ f32 Math_StepToF(f32 current, f32 target, f32 inc, f32 dec) {
     return current;
 }
 
-s16 PackedBits_ReadSigned(s16* arg0, s32 arg1, s32 arg2) {
+s16 PackedBits_ReadSigned(s16* packed, s32 offset, s32 length) {
     Vec2s_s32 spC;
-    s16* temp_a3 = &arg0[(arg1 * arg2) / 16];
+    s16* temp_a3 = &packed[(offset * length) / 16];
     s16* p_spC = &spC.x;
 
     p_spC[0] = temp_a3[0];
     p_spC[1] = temp_a3[1];
 
-    spC.xy <<= ((arg1 * arg2) % 16);
-    spC.xy >>= -arg2;
+    spC.xy <<= ((offset * length) % 16);
+    spC.xy >>= -length;
     return spC.y;
 }
 
-void Color_RGBToHSV(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3) {
+void Color_RGBToHSV(f32 r, f32 g, f32 b, Vec3f* dest) {
     f32 temp_ft4;
     f32 var_ft5;
     f32 var_fv0;
@@ -702,88 +702,88 @@ void Color_RGBToHSV(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3) {
     s32 var_v0;
 
     var_v0 = 0x47;
-    if (arg1 <= arg0) {
-        var_fv0 = arg0;
+    if (g <= r) {
+        var_fv0 = r;
         var_v0 = 0x52;
     } else {
-        var_fv0 = arg1;
+        var_fv0 = g;
     }
 
-    if (var_fv0 < arg2) {
-        var_fv0 = arg2;
+    if (var_fv0 < b) {
+        var_fv0 = b;
         var_v0 = 0x42;
     }
 
-    if (arg0 <= arg1) {
-        var_fv1 = arg0;
+    if (r <= g) {
+        var_fv1 = r;
     } else {
-        var_fv1 = arg1;
+        var_fv1 = g;
     }
 
-    if (arg2 < var_fv1) {
-        var_fv1 = arg2;
+    if (b < var_fv1) {
+        var_fv1 = b;
     }
 
     temp_ft4 = var_fv0 + var_fv1;
-    arg3->z = temp_ft4 - 1.0f;
+    dest->z = temp_ft4 - 1.0f;
     if (var_fv0 == var_fv1) {
-        arg3->y = 0.0f;
-        arg3->x = 0.0f;
+        dest->y = 0.0f;
+        dest->x = 0.0f;
         return;
     }
 
-    if (arg3->z <= 0.0f) {
+    if (dest->z <= 0.0f) {
         var_ft5 = var_fv0 - var_fv1;
-        arg3->y = var_ft5 / temp_ft4;
+        dest->y = var_ft5 / temp_ft4;
     } else {
         var_ft5 = var_fv0 - var_fv1;
-        arg3->y = var_ft5 / (2.0 - temp_ft4);
+        dest->y = var_ft5 / (2.0 - temp_ft4);
     }
 
     if (var_v0 == 0x52) {
-        arg3->x = (arg1 - arg2) / var_ft5;
+        dest->x = (g - b) / var_ft5;
     } else if (var_v0 == 0x47) {
-        arg3->x = ((arg2 - arg0) / var_ft5) + 2.0;
+        dest->x = ((b - r) / var_ft5) + 2.0;
     } else {
-        arg3->x = ((arg0 - arg1) / var_ft5) + 4.0;
+        dest->x = ((r - g) / var_ft5) + 4.0;
     }
 
-    arg3->x *= 60.0f;
-    if (arg3->x < 0.0f) {
-        arg3->x += 360.0f;
+    dest->x *= 60.0f;
+    if (dest->x < 0.0f) {
+        dest->x += 360.0f;
     }
 }
 
-void Color_RGBA8ToHSV(Color_RGBA8_u32 arg0, Vec3f* arg1) {
-    Color_RGBToHSV((s32)arg0.r / 255.0f, (s32)arg0.g / 255.0f, (s32)arg0.b / 255.0f, arg1);
+void Color_RGBA8ToHSV(Color_RGBA8_u32 color, Vec3f* dest) {
+    Color_RGBToHSV((s32)color.r / 255.0f, (s32)color.g / 255.0f, (s32)color.b / 255.0f, dest);
 }
 
-void Color_RGB5551ToHSV(u16 arg0, Vec3f* arg1) {
-    Color_RGBToHSV(((arg0 & 0xF800) >> 0xB) / 31.0f, ((arg0 & 0x7C0) >> 6) / 31.0f, ((arg0 & 0x3E) >> 1) / 31.0f, arg1);
+void Color_RGB5551ToHSV(u16 color, Vec3f* dest) {
+    Color_RGBToHSV(((color & 0xF800) >> 0xB) / 31.0f, ((color & 0x7C0) >> 6) / 31.0f, ((color & 0x3E) >> 1) / 31.0f, dest);
 }
 
-f32 Color_HSVInterpolate(f32 arg0, f32 arg1, f32 arg2) {
-    f32 ret;
+f32 Color_HSVInterpolate(f32 hue, f32 low, f32 high) {
+    f32 channel;
 
-    if (arg0 < 0.0f) {
-        arg0 += 360.0f;
+    if (hue < 0.0f) {
+        hue += 360.0f;
     } else {
-        while (arg0 >= 360.0f) {
-            arg0 -= 360.0f;
+        while (hue >= 360.0f) {
+            hue -= 360.0f;
         }
     }
 
-    if (arg0 < 60.0f) {
-        ret = (((arg2 - arg1) * arg0) / 60.0f) + arg1;
-    } else if ((arg0 >= 60.0f) && (arg0 < 180.0f)) {
-        ret = arg2;
-    } else if ((arg0 >= 180.0f) && (arg0 < 240.0f)) {
-        ret = arg1 + (((arg2 - arg1) * (240.0 - arg0)) / 60.0);
+    if (hue < 60.0f) {
+        channel = (((high - low) * hue) / 60.0f) + low;
+    } else if ((hue >= 60.0f) && (hue < 180.0f)) {
+        channel = high;
+    } else if ((hue >= 180.0f) && (hue < 240.0f)) {
+        channel = low + (((high - low) * (240.0 - hue)) / 60.0);
     } else {
-        ret = arg1;
+        channel = low;
     }
 
-    return ret;
+    return channel;
 }
 
 void Color_HSVToRGB(f32* arg0, f32* arg1, f32* arg2, Vec3f* arg3) {

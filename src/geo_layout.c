@@ -138,7 +138,7 @@ void register_graph_node(GraphNode* arg0) {
 void geo_layout_cmd_attach_node(void) {
     unk_D_800ABE00_cmd7* cmd = (unk_D_800ABE00_cmd7*)gGeoLayoutCommand;
 
-    register_graph_node(&cmd->unk_04->unk_00);
+    register_graph_node(&cmd->unk_04->node);
 
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmd7);
 }
@@ -179,7 +179,7 @@ void geo_layout_cmd_create_camera(void) {
                       (cmd->unk_14 << 0xF) / 180);
     }
 
-    register_graph_node(&temp_v0->unk_00);
+    register_graph_node(&temp_v0->node);
 
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmdB);
 }
@@ -355,7 +355,7 @@ void geo_layout_cmd_create_model_part(void) {
     Vec3s sp40;
     Vec3f sp34;
     Vec3f sp28;
-    unk_D_86002F58_004_000* tmp;
+    DisplayObject* tmp;
     unk_D_800ABE00_cmd1F* cmd = (unk_D_800ABE00_cmd1F*)gGeoLayoutCommand;
 
     Vec3f_FromVec3s(&sp34, &cmd->unk_0A);
@@ -426,7 +426,7 @@ void geo_layout_cmd_set_node_flag4(void) {
     unk_D_800ABE00_cmd25* cmd = (unk_D_800ABE00_cmd25*)gGeoLayoutCommand;
 
     if (gCurGraphNodeList[gCurGraphNodeIndex] != NULL) {
-        gCurGraphNodeList[gCurGraphNodeIndex]->unk_02 |= 4;
+        gCurGraphNodeList[gCurGraphNodeIndex]->renderFlags |= 4;
     }
 
     gGeoLayoutCommand += sizeof(unk_D_800ABE00_cmd25);

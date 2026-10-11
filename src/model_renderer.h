@@ -12,7 +12,7 @@ typedef struct unk_func_8001C014 {
 } unk_func_8001C014; // size >= 0x24
 
 typedef struct unk_func_8001C248 {
-    /* 0x000 */ unk_D_86002F58_004_000_000 unk_000;
+    /* 0x000 */ DisplayNodeHeader node;
     /* 0x018 */ s16 unk_018;
     /* 0x01A */ s16 unk_01A;
     /* 0x01C */ u8 unk_01C;
@@ -23,16 +23,16 @@ typedef struct unk_func_8001C248 {
 } unk_func_8001C248; // size >= 0x28
 
 void ModelRenderer_InitDisplayRoots(void);
-void ModelRenderer_AttachDisplayObject(unk_D_86002F58_004_000* arg0);
-void ModelRenderer_AttachSecondaryDisplayObject(unk_D_86002F58_004_000* arg0);
-void Model_InitDisplayObject(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, unk_D_86002F58_004_000_004* arg3);
-void ModelRenderer_ClearDisplayObject(unk_D_86002F58_004_000* arg0);
-s32 ModelAnim_SetAnimation(unk_D_86002F58_004_000* arg0, s32 arg1);
-s32 ModelAnim_SetEventTrack(unk_D_86002F58_004_000* arg0, s32 arg1);
-void Model_SetMaterialColor(unk_D_86002F58_004_000* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
-void Model_SetMaterialAlpha(unk_D_86002F58_004_000* arg0, u8 arg1);
-void Model_SetMaterialTextureMode(unk_D_86002F58_004_000* arg0, u8 arg1);
-unk_D_86002F58_004_000_00C_028* ModelAnim_GetAnimationRecord(unk_D_86002F58_004_000* arg0, s32 arg1);
+void ModelRenderer_AttachDisplayObject(DisplayObject* arg0);
+void ModelRenderer_AttachSecondaryDisplayObject(DisplayObject* arg0);
+void Model_InitDisplayObject(DisplayObject* display_object, s16 root_id, s16 object_type, ModelNodeView* child);
+void ModelRenderer_ClearDisplayObject(DisplayObject* arg0);
+s32 ModelAnim_SetAnimation(DisplayObject* arg0, s32 arg1);
+s32 ModelAnim_SetEventTrack(DisplayObject* arg0, s32 arg1);
+void Model_SetMaterialColor(DisplayObject* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
+void Model_SetMaterialAlpha(DisplayObject* arg0, u8 arg1);
+void Model_SetMaterialTextureMode(DisplayObject* arg0, u8 arg1);
+ModelAnimationBank* ModelAnim_GetAnimationRecord(DisplayObject* arg0, s32 arg1);
 arg1_func_80010CA8* Model_ComputeSizeVariant(arg1_func_80010CA8* arg0, BattleMon* arg1);
 void Model_ComputeSizeVariantFromRecord(arg1_func_80010CA8* arg0, unk_func_8001C014* arg1, u16 arg2);
 void Trainer_RequestPokeIcon(BattleSessionTeams* arg0);

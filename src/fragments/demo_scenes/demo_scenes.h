@@ -61,7 +61,7 @@ typedef struct unk_D_86B0C160 {
 
 typedef struct unk_D_86B0E5F0 {
     /* 0x000 */ unk_D_86002F30* unk_000;
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+    /* 0x004 */ DisplayObject unk_004;
     /* 0x16C */ s32 unk_16C;
 } unk_D_86B0E5F0; // size = 0x170
 
@@ -95,7 +95,7 @@ typedef struct unk_D_86B0DAE0 {
 
 typedef struct unk_D_86B0FA78 {
     /* 0x000 */ unk_D_86002F30* unk_000;
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+    /* 0x004 */ DisplayObject unk_004;
     /* 0x16C */ s32 unk_16C;
     /* 0x170 */ s32 unk_170;
     /* 0x174 */ s32 unk_174;
@@ -202,7 +202,7 @@ u16 MathUtil_RandomU16Range(s32);
 Vec3f* Vec3f_Copy(Vec3f*, Vec3f*);
 void Math_EaseTowardF(f32*, f32, f32);
 
-u16 Diorama_IsModelInCameraCone(unk_D_86002F34_00C* arg0, unk_D_86002F58_004_000* arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5);
+u16 Diorama_IsModelInCameraCone(unk_D_86002F34_00C* arg0, DisplayObject* arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5);
 void DioramaCamKeyframe_SetAngles(unk_D_86B0E5D4_04* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
 void DioramaCamKeyframe_SetDistance(unk_D_86B0E5D4_04* arg0, f32 arg1, f32 arg2);
 void DioramaCamKeyframe_SetAtAngles(unk_D_86B0E5D4_04* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
@@ -268,8 +268,8 @@ void Intro_ReplaceShowcaseModel(void);
 void Intro_SetupOrbitCamera(void);
 void Intro_LoadStageModel(void);
 void Intro_SetupStaticCamera(void);
-s32 Intro_StepRotationOvershoot(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2);
-s32 Intro_StepRotationToTarget(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2);
+s32 Intro_StepRotationOvershoot(DisplayObject* arg0, s16 arg1, s16 arg2);
+s32 Intro_StepRotationToTarget(DisplayObject* arg0, s16 arg1, s16 arg2);
 s32 Intro_UpdateModelLanding(void);
 void Intro_EmitLandingParticles(void);
 void Intro_FadeInBackgroundTint(void);

@@ -508,7 +508,7 @@ void SushiGame_UpdateWaitForStart(void) {
             Audio_FadeOutAll(0x3C);
             SushiGame_BroadcastPlayerPhase(0xF, 1);
         } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             D_8680750C = 7;
             D_86807540 = 0x1E;
             StageFade_StartFromTransparent(D_86807540);

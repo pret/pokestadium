@@ -300,7 +300,7 @@ s32 Title_Loop(void) {
         Controller_PollInputs();
 
         if ((gPlayer1Controller->buttonPressed & 0x9000) && (gTitleInputReady != 0)) {
-            Audio_PlaySoundEffectById(0xF);
+            Audio_PlaySoundEffectById(SFX_TITLE_START);
             var_s0 = Title_ResolveStartPressState();
         } else if (Title_ShouldStartAttractDemo() != 0) {
             var_s0 = Title_StartAttractDemo();

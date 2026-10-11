@@ -21,7 +21,7 @@ typedef struct unk_D_86404778 {
     /* 0x01C */ u8 unk_01C;
     /* 0x020 */ s32 unk_020;
     /* 0x024 */ u8 unk_024;
-    /* 0x028 */ unk_D_86002F58_004_000 unk_028;
+    /* 0x028 */ DisplayObject unk_028;
     /* 0x190 */ unk_D_86002F34_alt9* unk_190;
     /* 0x194 */ u16 unk_194[14][8];
     /* 0x274 */ u8 unk_274;
@@ -30,7 +30,7 @@ typedef struct unk_D_86404778 {
 typedef struct unk_D_86405158 {
     /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
-    /* 0x004 */ unk_D_86002F58_004_000 unk_004;
+    /* 0x004 */ DisplayObject unk_004;
     /* 0x16C */ u8 unk_16C;
     /* 0x16D */ u8 unk_16D;
 } unk_D_86405158; // size = 0x170

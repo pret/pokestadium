@@ -212,7 +212,7 @@ s32 Gallery_RentalViewerOpenBoxPicker(s32 arg0, unk_D_83407B18_008* arg1) {
         ptr2 = ptr2->unk_2688;
     }
 
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
     return 1;
 }
 
@@ -249,14 +249,14 @@ void Gallery_RentalViewerConfirmMonSelect(unk_D_838067F0* arg0) {
         }
         Audio_PlaySoundEffectById(0x20);
     } else {
-        Audio_PlaySoundEffectById(8);
+        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
     }
 }
 
 void Gallery_RentalViewerCloseBoxPicker(unk_D_838067F0* arg0) {
     arg0->unk_0000 = 8;
     arg0->unk_0014 = 0;
-    Audio_PlaySoundEffectById(3);
+    Audio_PlaySoundEffectById(SFX_MENU_BACK);
     Gallery_RentalViewerSetFadeCounter(-1);
 }
 
@@ -271,7 +271,7 @@ void Gallery_RentalViewerNextBox(unk_D_838067F0* arg0) {
     }
 
     if (var_s0 != arg0->unk_001C) {
-        Audio_PlaySoundEffectById(0x27);
+        Audio_PlaySoundEffectById(SFX_PAGE_CHANGE);
         arg0->unk_001C = var_s0;
         arg0->unk_0160 = Gallery_RentalViewerGetPage(arg0->unk_0160, 6);
         arg0->unk_0020 = 0;
@@ -299,7 +299,7 @@ void Gallery_RentalViewerPrevBox(unk_D_838067F0* arg0) {
     }
 
     if (var_s0 != arg0->unk_001C) {
-        Audio_PlaySoundEffectById(0x27);
+        Audio_PlaySoundEffectById(SFX_PAGE_CHANGE);
         arg0->unk_001C = var_s0;
         arg0->unk_0160 = Gallery_RentalViewerGetPage(arg0->unk_0160, 6);
         arg0->unk_0020 = 0;
@@ -323,7 +323,7 @@ void Gallery_RentalViewerBoxPickerMoveLeft(unk_D_838067F0* arg0) {
             arg0->unk_002C = -1;
             arg0->unk_0030 = -4;
             arg0->unk_0000 = 5;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_0038 = arg0->unk_0034;
         arg0->unk_0034 = 2;
@@ -337,7 +337,7 @@ void Gallery_RentalViewerBoxPickerMoveRight(unk_D_838067F0* arg0) {
             arg0->unk_002C = 1;
             arg0->unk_0030 = 4;
             arg0->unk_0000 = 5;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_0038 = arg0->unk_0034;
         arg0->unk_0034 = 2;
@@ -351,7 +351,7 @@ void Gallery_RentalViewerBoxPickerMoveUp(unk_D_838067F0* arg0) {
             arg0->unk_002C = -1;
             arg0->unk_0030 = -4;
             arg0->unk_0000 = 6;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if ((arg0->unk_0020 > 0) &&
                    (Gallery_RentalViewerFillPage(arg0, arg0->unk_0160->unk_268C, arg0->unk_0020 - 1, arg0->unk_015C) != 0)) {
             arg0->unk_0020 -= 1;
@@ -359,7 +359,7 @@ void Gallery_RentalViewerBoxPickerMoveUp(unk_D_838067F0* arg0) {
             arg0->unk_002C = -1;
             arg0->unk_0030 = -4;
             arg0->unk_0000 = 4;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_0038 = arg0->unk_0034;
         arg0->unk_0034 = 2;
@@ -373,14 +373,14 @@ void Gallery_RentalViewerBoxPickerMoveDown(unk_D_838067F0* arg0) {
             arg0->unk_002C = 1;
             arg0->unk_0030 = 4;
             arg0->unk_0000 = 6;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if (Gallery_RentalViewerFillPage(arg0, Gallery_RentalViewerGetPage(arg0->unk_0160, 6), arg0->unk_0020 + 6, arg0->unk_015C) != 0) {
             arg0->unk_0020++;
             arg0->unk_0160 = arg0->unk_0160->unk_2688;
             arg0->unk_002C = 1;
             arg0->unk_0030 = 4;
             arg0->unk_0000 = 4;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_0038 = arg0->unk_0034;
         arg0->unk_0034 = 2;

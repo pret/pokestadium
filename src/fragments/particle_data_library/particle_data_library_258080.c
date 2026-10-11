@@ -231,13 +231,12 @@ s32 Util_Strlen(s8* arg0) {
     return var_v1;
 }
 
-#ifdef NON_MATCHING
 void func_81003A54(Gfx* gfx) {
     u16 temp_v1;
     u8 sp4D;
-    s32 pad[3];
-    u8 var_v0 = D_8006F09C->unk_0A6 % 5;
-    u32 temp_t0;
+    s32 pad[4];
+    u8 var_v0 = D_8006F09C->effectSlot % 5;
+    u8 temp_t0;
     char* sp34;
     Mtx* sp30;
     s32 sp2C;
@@ -255,7 +254,7 @@ void func_81003A54(Gfx* gfx) {
         break;
     default:
         {
-        sp34 = Text_GetString(0, 0, D_8267E760, (u32)(u64)(u32)(u64)(u32)(u64)(u32)temp_t0);
+        sp34 = Text_GetString(0, 0, D_8267E760, temp_t0);
         sprintf(D_81004BB8, "%s     ", sp34);
         temp_v1 = D_81004BB0 - 3;
         sp4D = Font_MapGlyphCode((u8) D_81004BB8[temp_v1]);
@@ -266,13 +265,10 @@ void func_81003A54(Gfx* gfx) {
         break;
         }
     }
-    gDPLoadTextureTile(gfx++, Util_ConvertAddrToVirtAddr(D_3000000 + (((sp4D & 0xF) << 4)) + (((((sp4D & 0xF0) & 0xFF) >> 4) << 0xC))), G_IM_FMT_IA, G_IM_SIZ_8b, 256, 17, 0, 0, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureTile(gfx++, Util_ConvertAddrToVirtAddr(D_3000000 + ((sp4D & 0xF) << 4) + ((((sp4D & 0xF0) >> 4) << 4) << 8)), G_IM_FMT_IA, G_IM_SIZ_8b, 256, 17, 0, 0, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPEndDisplayList(gfx++);
     D_81004BB0++;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/particle_data_library/particle_data_library_258080/func_81003A54.s")
-#endif
 
 void DisplayList_InitDigitDisplayBackground(s32 arg0, DisplayListState* state) {
     Gfx* gfx;

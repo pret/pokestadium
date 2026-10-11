@@ -547,11 +547,11 @@ void Rental_CarouselConfirmMon(RentalCarouselState* arg0) {
                              var_t1);
 
         if (tmp1 != 0) {
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             arg0->unk_00001 = 0xB;
         }
     } else {
-        Audio_PlaySoundEffectById(8);
+        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
     }
 }
 
@@ -562,7 +562,7 @@ void Rental_CarouselCursorUp(RentalCarouselState* arg0) {
             arg0->unk_00018 = -1;
             arg0->unk_0001A = -4;
             arg0->unk_00001 = 0xA;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if ((arg0->unk_00006 > 0) &&
                    (Rental_FillPageFromRoster(arg0, arg0->unk_00140->unk_268C, arg0->unk_00006 - 1, arg0->unk_0013C) != 0)) {
             arg0->unk_00006--;
@@ -570,7 +570,7 @@ void Rental_CarouselCursorUp(RentalCarouselState* arg0) {
             arg0->unk_00018 = -1;
             arg0->unk_0001A = -4;
             arg0->unk_00001 = 8;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
 
         arg0->unk_00007 = arg0->unk_00008;
@@ -585,14 +585,14 @@ void Rental_CarouselCursorDown(RentalCarouselState* arg0) {
             arg0->unk_00018 = 1;
             arg0->unk_0001A = 4;
             arg0->unk_00001 = 0xA;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         } else if (Rental_FillPageFromRoster(arg0, Rental_GetPage(arg0->unk_00140, 4), arg0->unk_00006 + 4, arg0->unk_0013C) != 0) {
             arg0->unk_00006++;
             arg0->unk_00140 = arg0->unk_00140->unk_2688;
             arg0->unk_00018 = 1;
             arg0->unk_0001A = 4;
             arg0->unk_00001 = 8;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_00007 = arg0->unk_00008;
         arg0->unk_00008 = 2;
@@ -606,7 +606,7 @@ void Rental_CarouselCursorLeft(RentalCarouselState* arg0) {
             arg0->unk_00018 = -1;
             arg0->unk_0001A = -4;
             arg0->unk_00001 = 9;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_00007 = arg0->unk_00008;
         arg0->unk_00008 = 2;
@@ -620,7 +620,7 @@ void Rental_CarouselCursorRight(RentalCarouselState* arg0) {
             arg0->unk_00018 = 1;
             arg0->unk_0001A = 4;
             arg0->unk_00001 = 9;
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
         arg0->unk_00007 = arg0->unk_00008;
         arg0->unk_00008 = 2;
@@ -638,7 +638,7 @@ void Rental_CarouselNextBox(RentalCarouselState* arg0) {
     }
 
     if (var_s0 != arg0->unk_00005) {
-        Audio_PlaySoundEffectById(0x27);
+        Audio_PlaySoundEffectById(SFX_PAGE_CHANGE);
         arg0->unk_00005 = var_s0;
         arg0->unk_00140 = Rental_GetPage(arg0->unk_00140, 4);
         arg0->unk_00006 = 0;
@@ -666,7 +666,7 @@ void Rental_CarouselPrevBox(RentalCarouselState* arg0) {
     }
 
     if (var_s0 != arg0->unk_00005) {
-        Audio_PlaySoundEffectById(0x27);
+        Audio_PlaySoundEffectById(SFX_PAGE_CHANGE);
         arg0->unk_00005 = var_s0;
         arg0->unk_00140 = Rental_GetPage(arg0->unk_00140, 4);
         arg0->unk_00006 = 0;
@@ -690,13 +690,13 @@ void Rental_CarouselCancel(RentalCarouselState* arg0) {
         if (temp_v0 == 1) {
             arg0->unk_00009 = 2;
             arg0->unk_00001 = 4;
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
     } else {
         arg0->unk_00009 = 2;
         arg0->unk_0000A = 0;
         arg0->unk_00001 = 6;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 
@@ -704,7 +704,7 @@ void Rental_CarouselStartPressed(RentalCarouselState* arg0) {
     if (Rental_ClearCurrentSlotSelection(arg0->unk_13608) != 0) {
         arg0->unk_00009 = 2;
         arg0->unk_00001 = 4;
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     }
 }
 

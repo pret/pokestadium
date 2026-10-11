@@ -22,7 +22,7 @@ typedef struct unk_arg0_func_81002260 {
 
 extern const Gfx D_810041D0[];
 
-void Particle31_ResetAllSlots(unk_D_86002F58_004_000*);
+void Particle31_ResetAllSlots(DisplayObject*);
 void Particle31_ResetCounters(void);
 void Particle31_PackSlotData(u8*);
 void Particle31_UnpackSlotData(unk_arg0_func_81002260*, u8*);

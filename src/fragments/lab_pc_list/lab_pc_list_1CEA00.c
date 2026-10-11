@@ -2511,7 +2511,7 @@ void LabPCList_HandleGridSelectionEntry(unk_func_8830867C_02C_048* arg0, Control
 s32 LabPCList_HandleBackButton(unk_func_8830867C_02C_048* arg0, Controller* arg1) {
     s32 sp1C = 2;
 
-    Audio_PlaySoundEffectById(3);
+    Audio_PlaySoundEffectById(SFX_MENU_BACK);
 
     if (arg0->unk_24->unk_CB4 != 0) {
         LabPCList_RestoreFilterState(arg0->unk_24);
@@ -2529,7 +2529,7 @@ s32 LabPCList_HandlePageSwitchInput(unk_func_8830867C_02C_048* arg0, Controller*
     s32 var_v1 = 0;
 
     if (gPlayer1Controller->buttonPressed & 2) {
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         if (arg0->unk_24->unk_CD0 == 0) {
             arg0->unk_24->unk_CD0 += 3;
         }
@@ -2538,7 +2538,7 @@ s32 LabPCList_HandlePageSwitchInput(unk_func_8830867C_02C_048* arg0, Controller*
         LabPCList_SwitchColumnPage(arg0->unk_24);
         var_v1 = 0x80000005;
     } else if (gPlayer1Controller->buttonPressed & 1) {
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         if (arg0->unk_24->unk_CD0 >= 2) {
             arg0->unk_24->unk_CD0 -= 3;
         }
@@ -2559,16 +2559,16 @@ s32 LabPCList_HandleGridInput(unk_func_8830867C_02C_048* arg0, Controller* arg1,
 
     if (arg0->unk_24->unk_0E0 != 0) {
         if (arg2 & 2) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             LabPCList_ResetGridSelection(arg0);
             LabPCList_HandleGridSelectionEntry(arg0, arg1);
             arg2 = 1;
         } else if (arg2 & 4) {
             if (arg0->unk_24->unk_034->unk_00.unk_34[arg0->unk_24->unk_034->unk_00.unk_38] & 4) {
-                Audio_PlaySoundEffectById(8);
+                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                 arg2 = 1;
             } else {
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                 BattleInfoWidget_SetItemMenuMon(
                     arg0->unk_24->unk_0AC,
                     &arg0->unk_24->unk_034->unk_00.unk_2C->unk_00[arg0->unk_24->unk_034->unk_00.unk_38]->unk_08);
@@ -2597,10 +2597,10 @@ s32 LabPCList_HandleGridInput(unk_func_8830867C_02C_048* arg0, Controller* arg1,
             arg2 = LabPCList_HandleBackButton(arg0, arg1);
         } else if (arg2 & 4) {
             if (arg0->unk_24->unk_034->unk_00.unk_2C->unk_08 == 0) {
-                Audio_PlaySoundEffectById(8);
+                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                 arg2 = 1;
             } else {
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                 temp_v0 = LabPCList_OpenRowMenu(arg0->unk_24, arg1);
                 if (temp_v0 == 1) {
                     sp24 = arg0->unk_24->unk_034->unk_00.unk_2C->unk_00[arg0->unk_24->unk_034->unk_00.unk_38];
@@ -2697,7 +2697,7 @@ s32 LabPCList_HandleColumnMenuInput(unk_func_8830867C_02C_048* arg0, Controller*
             sp34 = LabPCList_GetColumnMenuIndex(arg0->unk_24);
             switch (sp34) {
                 case 0:
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                     arg2 = 2;
                     if (LabPCList_ConfirmExit(arg0->unk_24, arg1, 1) == 0) {
                         arg2 = 3;
@@ -2705,7 +2705,7 @@ s32 LabPCList_HandleColumnMenuInput(unk_func_8830867C_02C_048* arg0, Controller*
                     break;
 
                 case 1:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     temp_v0_2 = LabPCList_OpenListMenu(arg0->unk_24, arg1);
                     if (temp_v0_2 == 1) {
                         sp2C = -1;
@@ -2765,31 +2765,31 @@ s32 LabPCList_HandleColumnMenuInput(unk_func_8830867C_02C_048* arg0, Controller*
                     break;
 
                 case 2:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_058, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 3:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_05C, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 4:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_060, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 5:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_064, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 8:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     if (LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_070, sp34, arg1) == 1) {
                         if (arg0->unk_24->unk_C54.unk_0C != 0) {
                             sp28 = arg0->unk_24->unk_C54.unk_09;
@@ -2843,37 +2843,37 @@ s32 LabPCList_HandleColumnMenuInput(unk_func_8830867C_02C_048* arg0, Controller*
                     break;
 
                 case 9:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_074, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 10:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_078, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 11:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_07C, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 12:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_080, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 13:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     LabPCList_HandleColumnHeaderClick(arg0->unk_24, arg0->unk_24->unk_084, sp34, arg1);
                     arg2 = 1;
                     break;
 
                 case 6:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     BattleInfoWidget_SetTypeEntries(arg0->unk_24->unk_09C, &arg0->unk_24->unk_C54.unk_1C);
 
                     arg0->unk_24->unk_04C->unk_14(arg0->unk_24->unk_04C, 0x100);
@@ -2902,7 +2902,7 @@ s32 LabPCList_HandleColumnMenuInput(unk_func_8830867C_02C_048* arg0, Controller*
                     break;
 
                 case 7:
-                    Audio_PlaySoundEffectById(2);
+                    Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     BattleInfoWidget_SetMoveSlots(arg0->unk_24->unk_0A0, &arg0->unk_24->unk_C54.unk_24);
 
                     arg0->unk_24->unk_04C->unk_14(arg0->unk_24->unk_04C, 0x100);

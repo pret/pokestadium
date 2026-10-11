@@ -91,7 +91,7 @@ void TradeCable_UpdateBallSpinPulse(unk_D_82F211A0* arg0) {
         sp1C = arg0 - D_82F211A0;
         TradeCable_SetBallState(sp1C, 3);
         if (sp1C == 0) {
-            Audio_PlaySoundEffectById(0x01200006);
+            Audio_PlaySoundEffectById(SFX_TRADE_BALL_READY);
         }
     }
 }
@@ -294,12 +294,12 @@ void TradeEvo_BeginSequence(s16 arg0) {
     ptr->unk_30.unk_00 = ptr->unk_30.unk_02 = 0;
     ptr->unk_30.unk_04 = ptr->unk_30.unk_06 = -1;
 
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
     GbSave_SetSeenOwnedBits(ptr->unk_04, ptr->unk_24->unk_00.unk_00, 3);
 }
 
 void TradeEvo_UpdatePreviewModel(unk_D_82F21238* arg0) {
-    unk_D_86002F58_004_000* sp24 = arg0->unk_2C->unk_24;
+    DisplayObject* sp24 = arg0->unk_2C->unk_24;
 
     if ((ModelAnim_IsFinished(sp24) != 0) && (arg0->unk_06 == 2)) {
         arg0->unk_06 = 1;
@@ -364,15 +364,15 @@ void TradeEvo_UpdateWaitForConfirm(unk_D_82F21238* arg0) {
             arg0->unk_18 = 0;
             arg0->unk_1A = 0x800;
             arg0->unk_1C = 0;
-            Audio_PlaySoundEffectById(2);
-            Audio_PlaySoundEffectById(0x01200007);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
+            Audio_PlaySoundEffectById(SFX_EVOLUTION_START);
         } else {
             arg0->unk_02 = 6;
             arg0->unk_0C = 0xA;
             if (arg0->unk_08 != 0) {
                 Audio_PlaySoundEffectById(0x01200009);
             } else {
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             }
         }
     }
@@ -1176,7 +1176,7 @@ void TradeCable_SetSequenceState(s16 arg0) {
         case 1:
             ptr->unk_18 = 0x1E;
             ptr->unk_0C |= 0x20;
-            Audio_PlaySoundEffectById(0x01200002);
+            Audio_PlaySoundEffectById(SFX_TRADE_BEGIN);
             break;
 
         case 2:
@@ -1232,12 +1232,12 @@ void TradeCable_SetSequenceState(s16 arg0) {
 
         case 19:
             TradeCable_SetLightState(0, 1);
-            Audio_PlaySoundEffectById(0x01200004);
+            Audio_PlaySoundEffectById(SFX_TRADE_LIGHT_ON);
             break;
 
         case 20:
             TradeCable_SetLightState(1, 1);
-            Audio_PlaySoundEffectById(0x01200004);
+            Audio_PlaySoundEffectById(SFX_TRADE_LIGHT_ON);
             break;
 
         case 21:
@@ -1413,7 +1413,7 @@ void TradeCable_UpdateSequenceLaunchBalls(unk_D_82F21140* arg0) {
             arg0->unk_0C |= 0x40;
             TradeCable_SetBallState(0, 1);
             TradeCable_SetBallState(1, 1);
-            Audio_PlaySoundEffectById(0x01200005);
+            Audio_PlaySoundEffectById(SFX_TRADE_BALL_APPEAR);
         }
     }
 }
@@ -1498,7 +1498,7 @@ void TradeCable_UpdateSequenceClose(unk_D_82F21140* arg0) {
 
     if (arg0->unk_0C & 0x20) {
         arg0->unk_0C &= ~0x20;
-        Audio_PlaySoundEffectById(0x01200003);
+        Audio_PlaySoundEffectById(SFX_TRADE_END);
     }
 
     arg0->unk_18--;

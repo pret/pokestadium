@@ -69,7 +69,7 @@ s32 Snap_PrintClubIsBackgroundMode(void) {
 
 s32 Snap_PrintClubPrintSeals(s32 arg0, s32 arg1) {
     s32 i;
-    unk_D_86002F58_004_000_010* temp_s0;
+    ModelLoadContext* temp_s0;
     unk_func_80007444* temp_v0;
     unk_D_83403C60* sp60 = (D_83407AE4 != 0) ? D_83407AC0 : D_83407ABC;
     u8 sp50[] = {

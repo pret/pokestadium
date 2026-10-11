@@ -29,8 +29,8 @@ void DisplayList_SetFlagInRange(s32 arg0, unk_arg1_func_81003E00* arg1) {
     if (arg0 == 2) {
         temp_v0 = arg1->unk_14;
         var_v1 = 0;
-        if (D_8006F09C->unk_040.unk_00 == temp_v0->unk_00) {
-            temp_a2 = ((s32) D_8006F09C->unk_040.unk_08 >> 0x10) & 0xFFFF;
+        if (D_8006F09C->transformAnim.animationId == temp_v0->unk_00) {
+            temp_a2 = ((s32) D_8006F09C->transformAnim.frameFixed >> 0x10) & 0xFFFF;
             if ((temp_a2 >= (s32) temp_v0->unk_02) && ((s32) temp_v0->unk_04 >= temp_a2)) {
                 var_v1 = 1;
             }
@@ -54,8 +54,8 @@ void DisplayList_SetFlagOutOfRange(s32 arg0, unk_arg1_func_81003E00* arg1) {
     if (arg0 == 2) {
         temp_v0 = arg1->unk_14;
         var_v1 = 1;
-        if (D_8006F09C->unk_040.unk_00 == temp_v0->unk_00) {
-            temp_a2 = ((s32) D_8006F09C->unk_040.unk_08 >> 0x10) & 0xFFFF;
+        if (D_8006F09C->transformAnim.animationId == temp_v0->unk_00) {
+            temp_a2 = ((s32) D_8006F09C->transformAnim.frameFixed >> 0x10) & 0xFFFF;
             if ((temp_a2 >= (s32) temp_v0->unk_02) && ((s32) temp_v0->unk_04 >= temp_a2)) {
                 var_v1 = 0;
             }
@@ -77,7 +77,7 @@ void DisplayList_InitDitheredPrimColorSegment(s32 arg0, DisplayListState* state)
         gfx = Gfx_AllocDisplayList(0xA0);
         state->gfx = gfx;
         gDPSetAlphaDither(gfx++, G_AD_NOISE);
-        gDPSetPrimColor(gfx++, 0, 0, 10, 10, 10, D_8006F09C->unk_0A6 & 0xFF);
+        gDPSetPrimColor(gfx++, 0, 0, 10, 10, 10, D_8006F09C->effectSlot & 0xFF);
         gDPSetEnvColor(gfx++, 0x37, 0x14, 0x14, 0xB4);
         gDPSetCombineLERP(gfx++, 0, 0, 0, 0, TEXEL0, 1, PRIMITIVE, 1, 0, 0, 0, 0, COMBINED, 0, ENVIRONMENT, 0);
         gSPEndDisplayList(gfx++);

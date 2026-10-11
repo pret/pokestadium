@@ -8,7 +8,7 @@ typedef struct unk_D_86B0DFC0 {
 static unk_D_86B0DFC0 D_86B0DFC0 = { 0x8E };
 
 s16 Intro_GetTrackedModelFacingOffset(void) {
-    return D_86B0FA78->unk_004.unk_01E.y + 0x8000;
+    return D_86B0FA78->unk_004.rotation.y + 0x8000;
 }
 
 s32 Util_ByteInArray(u8 arg0, u8* arg1, s32 arg2) {
@@ -30,13 +30,13 @@ void Intro_ComputeFollowPoint(unk_D_86B0FA78* arg0, Vec3f* arg1) {
     }
 
     if (D_86B10660.unk_08 != 0) {
-        arg1->x = arg0->unk_004.unk_024.x;
-        arg1->y = arg0->unk_004.unk_024.y + sp24;
-        arg1->z = arg0->unk_004.unk_024.z;
+        arg1->x = arg0->unk_004.position.x;
+        arg1->y = arg0->unk_004.position.y + sp24;
+        arg1->z = arg0->unk_004.position.z;
     } else {
-        arg1->x = arg0->unk_004.unk_024.x;
-        arg1->y = arg0->unk_004.unk_024.y + D_86B10660.unk_04;
-        arg1->z = arg0->unk_004.unk_024.z;
+        arg1->x = arg0->unk_004.position.x;
+        arg1->y = arg0->unk_004.position.y + D_86B10660.unk_04;
+        arg1->z = arg0->unk_004.position.z;
     }
 
     if (arg1->y < 0) {

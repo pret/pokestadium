@@ -72,7 +72,7 @@ typedef struct unk_D_82508B30 {
 } unk_D_82508B30; // size = 0x1A4
 
 typedef struct unk_D_8250A308 {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ DisplayObject unk_000;
     /* 0x168 */ s16 unk_168;
     /* 0x16A */ s16 unk_16A;
     /* 0x16C */ s16 unk_16C;
@@ -113,7 +113,7 @@ s32 MiniGameSelect_DrawGameBackdrop(s32 arg0, GraphNode* arg1);
 s32 MiniGameSelect_DrawStaticBackdrop(s32 arg0, GraphNode* arg1);
 s32 MiniGameSelect_DrawLabelStrips(s32 arg0, GraphNode* arg1);
 void MiniGameSelect_CreateCursor(void);
-void MiniGameSelect_UpdateCursor(unk_D_86002F58_004_000* a0);
+void MiniGameSelect_UpdateCursor(DisplayObject* a0);
 s32 MiniGameSelect_CursorNodeCallback(s32 arg0, GraphNode* arg1);
 void MiniGameSelect_ResetInputStates(void);
 void MiniGameSelect_ReadInputsWithRepeat(void);

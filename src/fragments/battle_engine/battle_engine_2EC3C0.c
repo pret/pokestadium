@@ -187,14 +187,14 @@ void BattleAnim_SetOverlayFlagForSpecialMoves(Battler* arg0) {
     BattleMonRuntime* ptr = &arg0->unk_654.unk_38;
 
     if (ptr->unk_5A == 0x46 || ptr->unk_5A == 0x9D || ptr->unk_5A == 0x58) {
-        D_84390010[0]->unk_000.unk_000.unk_02 |= 2;
-        D_84390010[1]->unk_000.unk_000.unk_02 |= 2;
+        D_84390010[0]->unk_000.node.renderFlags |= 2;
+        D_84390010[1]->unk_000.node.renderFlags |= 2;
     }
 }
 
 void BattleAnim_ClearOverlayFlag(Battler* arg0) {
-    D_84390010[0]->unk_000.unk_000.unk_02 &= ~2;
-    D_84390010[1]->unk_000.unk_000.unk_02 &= ~2;
+    D_84390010[0]->unk_000.node.renderFlags &= ~2;
+    D_84390010[1]->unk_000.node.renderFlags &= ~2;
 }
 
 s32 BattleAnim_IsAssetLoadBusy(Battler* arg0) {
@@ -363,12 +363,12 @@ void func_84302658(Battler* arg0, s32 arg1) {
     u32 tmp;
 
     sp68 = BattleScene_GetParticipantSideIndex(arg0);
-    sp66 = arg0->unk_000.unk_01A - 1;
+    sp66 = arg0->unk_000.objectType - 1;
 
     ptr = &arg0->unk_720->unk_08[arg0->unk_654.unk_2C]->unk_01C[arg0->unk_654.unk_18];
 
     var_a1 = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[sp66] & 0xFFFFFF);
-    if ((arg0->unk_000.unk_01A == 0x19) && (ptr->unk_52 & 0x80)) {
+    if ((arg0->unk_000.objectType == 0x19) && (ptr->unk_52 & 0x80)) {
         var_a1 = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[152] & 0xFFFFFF);
     }
     tmp = ((u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (sp66 << 5)) & 0xFFFFFF)) + 0x20;
@@ -451,7 +451,7 @@ void BattleScene_EnterRow3StartMoveAnim(Battler* arg0) {
     s16 sp2A;
     u8 tmp;
 
-    sp2A = arg0->unk_000.unk_01A - 1;
+    sp2A = arg0->unk_000.objectType - 1;
     sp24 = &arg0->unk_654.unk_38;
     sp20 = &arg0->unk_654;
     idx = BattleScene_GetParticipantSideIndex(arg0);
@@ -471,7 +471,7 @@ void BattleScene_EnterRow3StartMoveAnim(Battler* arg0) {
 
         if ((sp20->unk_34 & 0x4000) && ((sp2A == 0x32) || (sp2A == 0x31))) {
             Battle_ClearRuntimeFlags(arg0, 8);
-            arg0->unk_000.unk_000.unk_02 |= 0x20;
+            arg0->unk_000.node.renderFlags |= 0x20;
             Battle_SetRuntimeFlags(arg0, 0x10);
             Battle_ClearRuntimeFlags(arg0, 0x4000);
         }
@@ -492,7 +492,7 @@ void BattleScene_EnterRow3StartMoveAnim(Battler* arg0) {
 
 void BattleScene_TickRow3PlayMoveEffectScript(Battler* arg0) {
     UNUSED s32 pad;
-    s16 sp32 = arg0->unk_000.unk_01A - 1;
+    s16 sp32 = arg0->unk_000.objectType - 1;
     BattleMonRuntime* sp24;
 
     BattleScene_GetParticipantSideIndex(arg0);
@@ -606,14 +606,14 @@ void BattleScene_EnterRow21StartAnimRecord0(Battler* arg0) {
     BattlerState* temp_v1 = &arg0->unk_654;
     s16 sp22;
 
-    sp22 = arg0->unk_000.unk_01A - 1;
+    sp22 = arg0->unk_000.objectType - 1;
     D_84390020 = D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_000;
 
     if (!(temp_v1->unk_34 & 2)) {
         arg0->unk_4C4 = 0;
         if ((temp_v1->unk_34 & 0x4000) && ((sp22 == 0x32) || (sp22 == 0x31))) {
             Battle_ClearRuntimeFlags(arg0, 8);
-            arg0->unk_000.unk_000.unk_02 |= 0x20;
+            arg0->unk_000.node.renderFlags |= 0x20;
             Battle_SetRuntimeFlags(arg0, 0x10);
             Battle_ClearRuntimeFlags(arg0, 0x4000);
         }
@@ -634,7 +634,7 @@ void BattleScene_EnterRow21StartAnimRecord0(Battler* arg0) {
 void BattleScene_TickRow21PlaySpeciesSound(Battler* arg0) {
     D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_000[0];
     if ((arg0->unk_4C4 == (D_84390020->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(arg0) == 0)) {
-        func_800479C0(1, arg0->unk_000.unk_01A, 0);
+        func_800479C0(1, arg0->unk_000.objectType, 0);
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     }
 }
@@ -751,7 +751,7 @@ void BattleScene_EnterRow4StartHitReactionAnim(Battler* arg0) {
     D_84390020 = &D_84384570[sp40]->unk_A80;
 
     if (sp3C->unk_34 & 1) {
-        temp_v0 = BattleScene_ByteArrayContains(temp_a1->unk_000.unk_01A, D_84384598, 2);
+        temp_v0 = BattleScene_ByteArrayContains(temp_a1->unk_000.objectType, D_84384598, 2);
         if (temp_v0 != 0) {
             D_84390020 = &D_84384570[sp40]->unk_B20;
         }
@@ -899,7 +899,7 @@ void BattleScene_EnterRowAnim166WithCry(Battler* arg0) {
 
     if ((temp_a0 == 0) && !(sp24->unk_34 & 0x4000) && (temp_a0 == 0)) {
         if (sp30->unk_05 & 7) {
-            if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, D_84384590, 8) != 0) {
+            if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, D_84384590, 8) != 0) {
                 D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unkA90[0x60];
             } else {
                 D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_A50;
@@ -915,12 +915,12 @@ void BattleScene_EnterRowAnim166WithCry(Battler* arg0) {
             if (BattleScene_IsPartnerPikachu(arg0) != 0) {
                 func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, 0xC8, 0x1A);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.unk_01A, 0x1A);
+                func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.objectType, 0x1A);
             }
         } else if (BattleScene_IsPartnerPikachu(arg0) != 0) {
             func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, 0xC8, 0xA);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.unk_01A, 0xA);
+            func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.objectType, 0xA);
         }
     }
 }
@@ -934,10 +934,10 @@ void BattleScene_TickRow1PlayOwnerCry(Battler* arg0) {
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     } else if (arg0->unk_4C4 == 1) {
         if (BattleAnim_IsAssetLoadBusy(arg0) == 0) {
-            if (arg0->unk_000.unk_01A >= 0x98) {
+            if (arg0->unk_000.objectType >= 0x98) {
                 BattleAnim_PlayOwnerCry(arg0, sp18->unk_BC);
             } else {
-                BattleAnim_PlayOwnerCry(arg0, arg0->unk_000.unk_01A);
+                BattleAnim_PlayOwnerCry(arg0, arg0->unk_000.objectType);
             }
             gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
         }
@@ -952,24 +952,24 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(Battler* arg0) {
     if ((arg0->unk_654.unk_34 & 0x4000) || (sp24->unk_34 & 2) || (ptr->unk_05 & 7)) {
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     } else if ((arg0->unk_4C4 == 1) && (BattleAnim_IsAssetLoadBusy(arg0) == 0)) {
-        if (arg0->unk_000.unk_01A >= 0x98) {
+        if (arg0->unk_000.objectType >= 0x98) {
             Cry_Play(sp24->unk_BC, 3);
         } else if (BattleScene_IsPartnerPikachu(arg0) != 0) {
             Cry_Play(0xC8, 3);
         } else {
-            Cry_Play(arg0->unk_000.unk_01A, 3);
+            Cry_Play(arg0->unk_000.objectType, 3);
         }
 
         if (sp24->unk_34 & 0x200) {
             if (BattleScene_IsPartnerPikachu(arg0) != 0) {
                 func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, 0xC8, 0x1B);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.unk_01A, 0x1B);
+                func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.objectType, 0x1B);
             }
         } else if (BattleScene_IsPartnerPikachu(arg0) != 0) {
             func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, 0xC8, 0xB);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.unk_01A, 0xB);
+            func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.objectType, 0xB);
         }
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     }
@@ -987,24 +987,24 @@ void BattleScene_TickRow18PlayCryAndSpeciesSound(Battler* arg0) {
 
     if ((arg0->unk_4C4 == 1) && (BattleAnim_IsAssetLoadBusy(arg0) == 0)) {
         sp24 = &arg0->unk_654;
-        if (arg0->unk_000.unk_01A >= 0x98) {
+        if (arg0->unk_000.objectType >= 0x98) {
             Cry_Play(sp24->unk_BC, 4);
         } else if (BattleScene_IsPartnerPikachu(arg0) != 0) {
             Cry_Play(0xC8, 4);
         } else {
-            Cry_Play(arg0->unk_000.unk_01A, 4);
+            Cry_Play(arg0->unk_000.objectType, 4);
         }
 
         if (sp24->unk_34 & 0x200) {
             if (BattleScene_IsPartnerPikachu(arg0) != 0) {
                 func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, 0xC8, 0x1B);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.unk_01A, 0x1B);
+                func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.objectType, 0x1B);
             }
         } else if (BattleScene_IsPartnerPikachu(arg0) != 0) {
             func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, 0xC8, 0xB);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.unk_01A, 0xB);
+            func_80048060(BattleScene_GetParticipantSideIndex(arg0) & 0xFF, 0, arg0->unk_000.objectType, 0xB);
         }
 
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
@@ -1078,7 +1078,7 @@ void BattleScene_TickRow8PlayMoveEffectScriptB(Battler* arg0) {
     s16 sp22;
     s16 temp_s1;
 
-    sp22 = arg0->unk_000.unk_01A - 1;
+    sp22 = arg0->unk_000.objectType - 1;
     temp_s1_2 = &arg0->unk_654.unk_38;
     temp_s1 = D_84384670[temp_s1_2->unk_5A - 1];
 
@@ -1112,7 +1112,7 @@ void BattleScene_EnterRow9SetEventTrack(Battler* arg0) {
     arg0->unk_4C4 = 0;
     if (!(arg0->unk_654.unk_34 & 2)) {
         if (ptr->unk_05 & 7) {
-            if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, D_84384590, 8) != 0) {
+            if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, D_84384590, 8) != 0) {
                 sp1C = 0xAF;
             } else {
                 sp1C = 0xA5;
@@ -1168,7 +1168,7 @@ void BattleScene_Row13PlaySequences14And21(Battler* arg0) {
 
 void BattleScene_TickPlaySpeciesSequence33(Battler* arg0) {
     UNUSED s32 pad;
-    u16 sp22 = arg0->unk_000.unk_01A;
+    u16 sp22 = arg0->unk_000.objectType;
 
     D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_A70;
     if ((BattleScene_GetParticipantModelHeight(arg0) != 0.0f) && (sp22 != 0x16) && (sp22 != 0x52) && (sp22 != 0x8E)) {
@@ -1233,17 +1233,15 @@ void BattleScene_TickQueueList3Selector2OrCFromB10(Battler* arg0) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_8430506C(Battler* arg0) {
-    unk_D_8438E7B0* ptr;
+    s32 pad3;
     s32 sp48;
-    s32 pad2[1];
+    s32 sp44;
     s32 sp40;
     BattlerState* sp3C;
     s32 pad[2];
     Battler* sp30;
     BattleMonRuntime* sp28;
-    unk_D_8438E7B0* ptr2;
 
     sp48 = 0xA5;
     sp40 = BattleScene_GetParticipantSideIndex(arg0) == 0;
@@ -1254,12 +1252,12 @@ void func_8430506C(Battler* arg0) {
     D_84390020 = &D_84384570[sp40]->unk_A80;
 
     if (sp3C->unk_34 & 1) {
-        if (BattleScene_ByteArrayContains(sp30->unk_000.unk_01A, D_84384598, 2) != 0) {
+        if (BattleScene_ByteArrayContains(sp30->unk_000.objectType, D_84384598, 2) != 0) {
             D_84390020 = &D_84384570[sp40]->unk_B20;
         }
     }
 
-    if ((sp3C->unk_34 & 1) && BattleScene_ByteArrayContains(sp30->unk_000.unk_01A, D_84384590, 8)) {
+    if ((sp3C->unk_34 & 1) && BattleScene_ByteArrayContains(sp30->unk_000.objectType, D_84384590, 8)) {
         sp48 = 0xAF;
     }
 
@@ -1271,11 +1269,10 @@ void func_8430506C(Battler* arg0) {
         }
 
         if ((D_843C4E44 == 0) || (gBattleMoveFailed != 0)) {
-            ptr = D_84384570[sp40];
-            ptr2 = ptr;
-            D_84390020 = &ptr2->unk_000[sp48];
+            sp44 = 0xB0;
+            D_84390020 = &D_84384570[sp40]->unk_000[sp48];
             if (sp3C->unk_34 & 0x200) {
-                D_84390020 = &ptr2->unk_000[0xB0];
+                D_84390020 = &D_84384570[sp40]->unk_000[sp44];
             }
         } else if (!(sp3C->unk_34 & 1)) {
             BattleAnim_SetModelEventTrackFromRow(D_84390010[sp40], 0xA8);
@@ -1289,9 +1286,6 @@ void func_8430506C(Battler* arg0) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_engine/battle_engine_2EC3C0/func_8430506C.s")
-#endif
 
 void BattleScene_TickRow14PlayMoveEffectEnd(Battler* arg0) {
     s32 sp2C;
@@ -1420,7 +1414,7 @@ void BattleScene_TickStateCallbacks(void) {
 
 void Battle_ResetCryEventIfStruggle(Battler* arg0) {
     if (arg0->unk_654.unk_38.unk_5A == 0x6A) {
-        arg0->unk_000.unk_01C = 0;
+        arg0->unk_000.textureMode = 0;
     }
 }
 
@@ -1432,7 +1426,7 @@ void BattleAnim_SetModelEventTrackFromRow(Battler* arg0, s32 arg1) {
     if (BattleAnim_IsSessionBusy(arg0) == 0) {
         sp30 = D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_000[arg1].unk_01;
         if ((sp30 != 0xFF) && (sp24->unk_36 != 2)) {
-            if ((arg1 == 165) && (arg0->unk_000.unk_01A == 0x33)) {
+            if ((arg1 == 165) && (arg0->unk_000.objectType == 0x33)) {
                 ModelAnim_SetEventFrame(&arg0->unk_000, 0);
                 temp_v0 = BattleAnim_RandomRange(3);
                 if (temp_v0 >= 3) {
@@ -1463,7 +1457,7 @@ s32 BattleAnim_TrySetModelEventTrackFromRow(Battler* arg0, s32 arg1, s32 arg2) {
 
     ModelAnim_SetEventFrame(&arg0->unk_000, 0);
     ModelAnim_SetEventTrack(&arg0->unk_000, sp20);
-    ModelAnim_SetEventFrame(&arg0->unk_000, arg0->unk_000.unk_054.unk_04->unk_0A);
+    ModelAnim_SetEventFrame(&arg0->unk_000, arg0->unk_000.eventTrack.data->endFrame);
 
     arg0->unk_654.unk_36 = arg2;
     return 0;
@@ -1501,7 +1495,7 @@ s32 BattleScene_IsRowWaitComplete(Battler* arg0, s32 arg1) {
         return 0;
     }
 
-    if (arg0->unk_000.unk_040.unk_00 == -1) {
+    if (arg0->unk_000.transformAnim.animationId == -1) {
         return 1;
     }
     return ModelAnim_IsAnimationDone(&arg0->unk_000);
@@ -1519,7 +1513,7 @@ s32 BattleScene_IsRowWaitCompleteWithEventCount(Battler* arg0, s32 arg1) {
     }
 
     if ((D_84390020->unk_0A < 0xB) || (D_84390020->unk_0A == 0xFF)) {
-        if (arg0->unk_000.unk_040.unk_00 == -1) {
+        if (arg0->unk_000.transformAnim.animationId == -1) {
             return 1;
         }
         return ModelAnim_IsAnimationDone(&arg0->unk_000);
@@ -1549,7 +1543,7 @@ s32 Battle_IsRowAnimationSettled(Battler* arg0, s32 arg1) {
         return 0;
     }
 
-    if (arg0->unk_000.unk_040.unk_00 == -1) {
+    if (arg0->unk_000.transformAnim.animationId == -1) {
         return 1;
     }
 
@@ -1604,7 +1598,7 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(Battler* arg0, s32 arg1) {
         return 0;
     }
 
-    if (arg0->unk_000.unk_040.unk_00 == -1) {
+    if (arg0->unk_000.transformAnim.animationId == -1) {
         return 1;
     }
 
@@ -1643,11 +1637,11 @@ s32 BattleScene_IsRowAnimWaitComplete(Battler* arg0, s32 arg1) {
         return 0;
     }
 
-    if (arg0->unk_000.unk_040.unk_00 == -1) {
+    if (arg0->unk_000.transformAnim.animationId == -1) {
         return 1;
     }
 
-    if (arg0->unk_000.unk_040.unk_00 != D_84390020->unk_00) {
+    if (arg0->unk_000.transformAnim.animationId != D_84390020->unk_00) {
         return 1;
     }
 
@@ -1657,10 +1651,10 @@ s32 BattleScene_IsRowAnimWaitComplete(Battler* arg0, s32 arg1) {
 void func_843060EC(Battler* arg0) {
     D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_A50;
     if (BattleAnim_IsSessionBusy(arg0) == 0) {
-        if ((arg0->unk_000.unk_040.unk_00 != -1) && (arg0->unk_000.unk_000.unk_01 & 1) &&
-            (arg0->unk_000.unk_000.unk_02 & 0x20) && (gBattleScene.unk_00->unk_1C == 1) &&
-            (D_84390020->unk_00 == arg0->unk_000.unk_040.unk_00) &&
-            (D_84390020->unk_04 == (arg0->unk_000.unk_040.unk_08 >> 0x10)) && (D_84390020->unk_05 != 0) &&
+        if ((arg0->unk_000.transformAnim.animationId != -1) && (arg0->unk_000.node.flags & 1) &&
+            (arg0->unk_000.node.renderFlags & 0x20) && (gBattleScene.unk_00->unk_1C == 1) &&
+            (D_84390020->unk_00 == arg0->unk_000.transformAnim.animationId) &&
+            (D_84390020->unk_04 == (arg0->unk_000.transformAnim.frameFixed >> 0x10)) && (D_84390020->unk_05 != 0) &&
             (BattleAnim_RandomRange(2) == 1)) {
             BattleAnim_QueueEffectList3(D_84390020->unk_05, &arg0->unk_000, &arg0->unk_000, D_84390020->unk_02, D_84390020->unk_02);
         }
@@ -1680,17 +1674,17 @@ void BattleScene_ResetParticipantAnimationFlags(Battler* arg0) {
 
     if (arg0->unk_4C8 != 0) {
         if (sp24->unk_34 & 0x200) {
-            arg0->unk_000.unk_024.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
+            arg0->unk_000.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
             Battle_ClearRuntimeFlags(arg0, 0x608);
         }
 
         if (sp24->unk_34 & 0x4008) {
-            arg0->unk_000.unk_01D = 0xFF;
+            arg0->unk_000.lodFraction = 0xFF;
             BattleAnim_StopOwnerCategoryParticles(4, arg0);
-            arg0->unk_000.unk_024.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
-            arg0->unk_000.unk_000.unk_02 &= ~2;
-            arg0->unk_000.unk_000.unk_02 |= 0x20;
-            arg0->unk_000.unk_000.unk_01 |= 1;
+            arg0->unk_000.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
+            arg0->unk_000.node.renderFlags &= ~2;
+            arg0->unk_000.node.renderFlags |= 0x20;
+            arg0->unk_000.node.flags |= 1;
             Battle_ClearRuntimeFlags(arg0, 0x4608);
         }
     }
@@ -1709,24 +1703,24 @@ void BattleScene_ResetBothParticipantsAnimationState(void) {
     sp20 = D_84390010[1];
 
     if (sp34->unk_34 & 4) {
-        D_84390010[0]->unk_000.unk_024.y = 200.0f;
+        D_84390010[0]->unk_000.position.y = 200.0f;
         Battle_SetRuntimeFlags(D_84390010[0], 0x200);
         Battle_ClearRuntimeFlags(D_84390010[0], 4);
     }
 
     if (sp30->unk_34 & 4) {
-        D_84390010[1]->unk_000.unk_024.y = 200.0f;
+        D_84390010[1]->unk_000.position.y = 200.0f;
         Battle_SetRuntimeFlags(D_84390010[1], 0x200);
         Battle_ClearRuntimeFlags(D_84390010[1], 4);
     }
 
-    if ((sp34->unk_34 & 0x4000) && (sp24->unk_000.unk_01A == 0x33)) {
+    if ((sp34->unk_34 & 0x4000) && (sp24->unk_000.objectType == 0x33)) {
         D_84390020 = &D_84384570[0]->unk_000[0x5A];
         ModelAnim_SetFrame(&D_84390010[0]->unk_000, 0);
         ModelAnim_SetAnimation(&D_84390010[0]->unk_000, D_84390020->unk_00);
     }
 
-    if ((sp30->unk_34 & 0x4000) && (sp20->unk_000.unk_01A == 0x33)) {
+    if ((sp30->unk_34 & 0x4000) && (sp20->unk_000.objectType == 0x33)) {
         D_84390020 = &D_84384570[1]->unk_000[0x5A];
         ModelAnim_SetFrame(&D_84390010[1]->unk_000, 0);
         ModelAnim_SetAnimation(&D_84390010[1]->unk_000, D_84390020->unk_00);
@@ -1746,7 +1740,7 @@ void Battle_ClearOpponentHopFlagAndSyncMove(Battler* arg0) {
     Battle_ResetCryEventIfStruggle(D_84390010[BattleScene_GetParticipantSideIndex(arg0) == 0]);
 
     if (sp20->unk_34 & 4) {
-        D_84390010[BattleScene_GetParticipantSideIndex(arg0) == 0]->unk_000.unk_024.y = 200.0f;
+        D_84390010[BattleScene_GetParticipantSideIndex(arg0) == 0]->unk_000.position.y = 200.0f;
         Battle_SetRuntimeFlags(D_84390010[BattleScene_GetParticipantSideIndex(arg0) == 0], 0x200);
         Battle_ClearRuntimeFlags(D_84390010[BattleScene_GetParticipantSideIndex(arg0) == 0], 4);
     }
@@ -1758,7 +1752,7 @@ void Battle_ClearOpponentHopFlagAndSyncMove(Battler* arg0) {
 
 void BattleScene_CleanupParticipantHideFlag(Battler* arg0) {
     if (arg0->unk_654.unk_34 & 8) {
-        arg0->unk_000.unk_024.y = BattleScene_GetParticipantModelHeight(arg0);
+        arg0->unk_000.position.y = BattleScene_GetParticipantModelHeight(arg0);
         Battle_ClearRuntimeFlags(arg0, 0x608);
     }
 }
@@ -1768,8 +1762,8 @@ void BattleScene_CleanupOpponentSpecialAnimFlag(Battler* arg0) {
     Battler* sp1C = D_84390010[BattleScene_GetParticipantSideIndex(arg0) == 0];
 
     if (sp1C->unk_654.unk_34 & 0x4000) {
-        sp1C->unk_000.unk_000.unk_02 |= 0x20;
-        sp1C->unk_000.unk_000.unk_01 |= 1;
+        sp1C->unk_000.node.renderFlags |= 0x20;
+        sp1C->unk_000.node.flags |= 1;
         BattleAnim_StopOwnerCategoryParticles(4, sp1C);
         Battle_ClearRuntimeFlags(sp1C, 0x4000);
     }
@@ -1780,14 +1774,14 @@ void BattleScene_CleanupOpponentAnimationFlags(Battler* arg0) {
     BattlerState* ptr = &temp_s0->unk_654;
 
     if (ptr->unk_34 & 0x4000) {
-        temp_s0->unk_000.unk_000.unk_02 |= 0x20;
-        temp_s0->unk_000.unk_000.unk_01 |= 1;
+        temp_s0->unk_000.node.renderFlags |= 0x20;
+        temp_s0->unk_000.node.flags |= 1;
         BattleAnim_StopOwnerCategoryParticles(4, temp_s0);
         Battle_ClearRuntimeFlags(temp_s0, 0x4000);
     }
 
     if (ptr->unk_34 & 8) {
-        temp_s0->unk_000.unk_024.y = BattleScene_GetParticipantModelHeight(arg0);
+        temp_s0->unk_000.position.y = BattleScene_GetParticipantModelHeight(arg0);
         Battle_ClearRuntimeFlags(temp_s0, 0x608);
     }
 }
@@ -1804,30 +1798,30 @@ void BattleScene_CleanupParticipantEffectMode(Battler* arg0) {
         case 16:
             BattleScene_SetParticipantModelFlags(arg0, 0, 0);
             if (arg0->unk_654.unk_38.unk_56 == 0) {
-                Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 1.0f, 1.0f, 1.0f);
             } else {
-                Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 0.8f, 0.8f, 0.8f);
+                Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 0.8f, 0.8f, 0.8f);
             }
             break;
 
         case 12:
             BattleScene_SetParticipantModelFlags(arg0, 0, 0);
             if (arg0->unk_654.unk_38.unk_56 == 0) {
-                Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 1.0f, 1.0f, 1.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 1.0f, 1.0f, 1.0f);
             } else {
-                Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 0.8f, 0.8f, 0.8f);
+                Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 0.8f, 0.8f, 0.8f);
             }
             break;
 
         case 10:
             BattleScene_SetParticipantModelFlags(arg0, 0, 0);
-            arg0->unk_000.unk_024.y = BattleScene_GetParticipantModelHeight(arg0);
-            arg0->unk_000.unk_01E.x = 0;
+            arg0->unk_000.position.y = BattleScene_GetParticipantModelHeight(arg0);
+            arg0->unk_000.rotation.x = 0;
             break;
 
         case 9:
             BattleScene_SetParticipantModelFlags(arg0, 0, 0);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, 0.8f, 0.8f, 0.8f);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, 0.8f, 0.8f, 0.8f);
             BattleScene_HideParticipantSecondaryModels(arg0);
             break;
 
@@ -1840,12 +1834,12 @@ void BattleScene_CleanupParticipantEffectMode(Battler* arg0) {
             BattleScene_SetParticipantModelFlags(arg0, 0, 0);
             BattleScene_HideParticipantSecondaryModels(arg0);
             BattleScene_PositionParticipantModel(arg0);
-            Vec3s_SetComponents(&arg0->unk_000.unk_01E, 0, arg0->unk_4B0 << 0xE, 0);
+            Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg0->unk_4B0 << 0xE, 0);
             break;
 
         case 4:
             BattleScene_SetParticipantModelFlags(arg0, 0, 0);
-            arg0->unk_000.unk_01E.y = arg0->unk_4B0 << 0xE;
+            arg0->unk_000.rotation.y = arg0->unk_4B0 << 0xE;
             BattleScene_HideParticipantSecondaryModels(arg0);
             break;
     }
@@ -1858,7 +1852,7 @@ void BattleAnim_TickParticipantStatusAnimation(Battler* arg0) {
     BattleAnim_UpdateSleepStatusAnimation(arg0);
 
     if (temp_s1->unk_34 & 0x100) {
-        arg0->unk_000.unk_000.unk_02 &= 0xFFDF;
+        arg0->unk_000.node.renderFlags &= 0xFFDF;
     }
 
     if ((temp_s1->unk_2D == 0x10) || (temp_s1->unk_2D == 0x13)) {
@@ -1890,8 +1884,8 @@ void BattleAnim_TickParticipantStatusAnimation(Battler* arg0) {
     }
 
     if (temp_s1->unk_34 & 0x4000) {
-        if ((arg0->unk_000.unk_01A != 0x32) && (arg0->unk_000.unk_01A != 0x33)) {
-            arg0->unk_000.unk_01D = 0;
+        if ((arg0->unk_000.objectType != 0x32) && (arg0->unk_000.objectType != 0x33)) {
+            arg0->unk_000.lodFraction = 0;
         }
     }
 }
@@ -1941,7 +1935,7 @@ void BattleScene_InitializeParticipantController(Battler* arg0) {
 
 void BattleScene_InitializeParticipantModel(Battler* arg0) {
     UNUSED s32 pad[2];
-    unk_D_86002F58_004_000_004* sp24;
+    ModelNodeView* sp24;
     s16 sp22;
 
     BattleScene_GetParticipantSideIndex(arg0);
@@ -1950,9 +1944,9 @@ void BattleScene_InitializeParticipantModel(Battler* arg0) {
     ModelRenderer_AttachDisplayObject(&arg0->unk_000);
 
     if (arg0 == D_84390010[0]) {
-        arg0->unk_000.unk_0A6 = 0;
+        arg0->unk_000.effectSlot = 0;
     } else {
-        arg0->unk_000.unk_0A6 = 1;
+        arg0->unk_000.effectSlot = 1;
     }
 
     Model_InitDisplayObject(&arg0->unk_000, 0, sp22, sp24);
@@ -1961,24 +1955,24 @@ void BattleScene_InitializeParticipantModel(Battler* arg0) {
     ModelAnim_SetFrame(&arg0->unk_000, 0);
 
     arg0->unk_720->unk_04 = arg0->unk_724->unk_01C;
-    if ((arg0->unk_000.unk_01A == 0x32) || (arg0->unk_000.unk_01A == 0x33)) {
-        arg0->unk_000.unk_000.unk_02 &= ~0x40;
+    if ((arg0->unk_000.objectType == 0x32) || (arg0->unk_000.objectType == 0x33)) {
+        arg0->unk_000.node.renderFlags &= ~0x40;
     } else {
-        arg0->unk_000.unk_000.unk_02 |= 0x40;
+        arg0->unk_000.node.renderFlags |= 0x40;
     }
 
     if (arg0 == D_84390010[0]) {
         BattleScene_PositionParticipantModel(arg0);
-        arg0->unk_000.unk_01E.y = 0x4000;
+        arg0->unk_000.rotation.y = 0x4000;
     } else {
         BattleScene_PositionParticipantModel(arg0);
-        arg0->unk_000.unk_01E.y = -0x4000;
+        arg0->unk_000.rotation.y = -0x4000;
     }
 }
 
 void BattleScene_InitializeParticipantOwnerModel(Battler* arg0) {
     PresentationState* ptr = &arg0->unk_728;
-    unk_D_86002F58_004_000_004* sp28;
+    ModelNodeView* sp28;
     s16 sp26;
 
     sp28 = Battle_GetMoveEffectListEntry(arg0, 0);
@@ -1986,21 +1980,21 @@ void BattleScene_InitializeParticipantOwnerModel(Battler* arg0) {
     ModelRenderer_AttachDisplayObject(&ptr->unk_000);
 
     if (arg0 == D_84390010[0]) {
-        ptr->unk_000.unk_0A6 = -1;
+        ptr->unk_000.effectSlot = -1;
         Model_InitDisplayObject(&ptr->unk_000, 1, sp26, sp28);
     } else {
-        ptr->unk_000.unk_0A6 = -1;
+        ptr->unk_000.effectSlot = -1;
         Model_InitDisplayObject(&ptr->unk_000, 2, sp26, sp28);
     }
 
     ModelAnim_SetAnimation(&ptr->unk_000, 0);
     ModelAnim_SetFrame(&ptr->unk_000, 0);
-    ptr->unk_000.unk_000.unk_02 &= ~0x40;
-    Vec3f_SetComponentsDuplicate(&ptr->unk_000.unk_024, 0.0f, 0.0f, 0.0f);
+    ptr->unk_000.node.renderFlags &= ~0x40;
+    Vec3f_SetComponentsDuplicate(&ptr->unk_000.position, 0.0f, 0.0f, 0.0f);
 }
 
 void BattleScene_InitializeParticipantSecondaryModels(Battler* arg0, s32* arg1) {
-    unk_D_86002F58_004_000_004* sp44;
+    ModelNodeView* sp44;
     s16 sp42;
     s32 i;
     unk_D_84390010_168* ptr;
@@ -2014,46 +2008,46 @@ void BattleScene_InitializeParticipantSecondaryModels(Battler* arg0, s32* arg1) 
         ModelRenderer_AttachDisplayObject(ptr);
 
         if (arg0 == D_84390010[0]) {
-            ptr->unk_000.unk_0A6 = 0xFF;
+            ptr->unk_000.effectSlot = 0xFF;
         } else {
-            ptr->unk_000.unk_0A6 = 0xFF;
+            ptr->unk_000.effectSlot = 0xFF;
         }
 
         Model_InitDisplayObject(ptr, 0, sp42, sp44);
         ModelAnim_SetFrame(ptr, 0);
         ModelAnim_SetAnimation(ptr, 0);
 
-        ptr->unk_000.unk_000.unk_02 &= ~0x40;
+        ptr->unk_000.node.renderFlags &= ~0x40;
 
         if (arg0 == D_84390010[0]) {
             BattleScene_PositionParticipantModel(arg0);
         } else {
             BattleScene_PositionParticipantModel(arg0);
         }
-        ptr->unk_000.unk_000.unk_01 &= ~1;
+        ptr->unk_000.node.flags &= ~1;
     }
 }
 
 void BattleScene_InitializeParticipantAuxiliaryModel(Battler* arg0) {
-    unk_D_86002F58_004_000* ptr = &arg0->unk_4EC;
-    unk_D_86002F58_004_000_004* sp20 = arg0->unk_720->unk_18;
+    DisplayObject* ptr = &arg0->unk_4EC;
+    ModelNodeView* sp20 = arg0->unk_720->unk_18;
 
     ModelRenderer_AttachDisplayObject(ptr);
-    ptr->unk_0A6 = 0xFF;
+    ptr->effectSlot = 0xFF;
     Model_InitDisplayObject(ptr, 0, 0x9A, sp20);
     ModelAnim_SetAnimation(ptr, 0);
 
-    ptr->unk_000.unk_02 &= ~0x20;
-    ptr->unk_000.unk_01 &= ~1;
+    ptr->node.renderFlags &= ~0x20;
+    ptr->node.flags &= ~1;
 
     if (arg0 == D_84390010[0]) {
-        Vec3f_SetComponentsDuplicate(&ptr->unk_024, -50.0f, 2.0f, 0.0f);
+        Vec3f_SetComponentsDuplicate(&ptr->position, -50.0f, 2.0f, 0.0f);
     } else {
-        Vec3f_SetComponentsDuplicate(&ptr->unk_024, 50.0f, 2.0f, 0.0f);
+        Vec3f_SetComponentsDuplicate(&ptr->position, 50.0f, 2.0f, 0.0f);
     }
 }
 
-void BattleScene_InitializePresentation(BattleSessionTeams* arg0) {
+void BattleScene_InitializePresentation(UNUSED BattleSessionTeams* arg0) {
     D_84390174 = 0;
     D_84390178.unk_00 = 0;
 
@@ -2102,7 +2096,7 @@ void BattleScene_InitializePresentation(BattleSessionTeams* arg0) {
     BattleScene_ConfigureAudioChannelGroupsByTeam();
 }
 
-void BattleScene_ResetParticipantAuxTransform(Battler* arg0, Battler* arg1, s32 arg2) {
+void BattleScene_ResetParticipantAuxTransform(UNUSED Battler* arg0, Battler* arg1, s32 arg2) {
     Vec3f_SetComponentsDuplicate(&arg1->unk_448, 0.0f, 0.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&arg1->unk_448.unk_0C, 0.0f, 0.0f, 0.0f);
     arg1->unk_4B0 = arg2;

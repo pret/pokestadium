@@ -79,8 +79,8 @@ static s32 D_81004B50;
 static s32 D_81004B54;
 
 
-void Particle31_ResetSlot(unk_D_86002F58_004_000* arg0, s32 arg1) {
-    u8 var_v0 = arg0->unk_0A6;
+void Particle31_ResetSlot(DisplayObject* arg0, s32 arg1) {
+    u8 var_v0 = arg0->effectSlot;
     s32 pad[2];
     Vec3f sp50 = D_8100410C;
     Vec3f sp44 = D_81004118;
@@ -103,7 +103,7 @@ void Particle31_ResetSlot(unk_D_86002F58_004_000* arg0, s32 arg1) {
     D_810047E0[var_v0 & 1][arg1].scale = sp38;
 }
 
-void Particle31_ResetAllSlots(unk_D_86002F58_004_000* arg0) {
+void Particle31_ResetAllSlots(DisplayObject* arg0) {
     s32 i;
 
     for (i = 0; i < 10; i++) {
@@ -133,10 +133,10 @@ void Particle31_SpawnSpeciesEffect(unk_D_810047E0* arg0) {
     var_s1 = 0xA;
     guMtxXFMF(GeoRender_GetRelativeMatrix(-1)->mf, 0, 0, 0, &sp90.x, &sp90.y, &sp90.z);
     guMtxXFMF(GeoRender_GetRelativeMatrix(0)->mf, 0, 0, 0, &sp84.x, &sp84.y, &sp84.z);
-    sp60 = D_8006F09C->unk_030.x;
-    sp5C = D_8006F09C->unk_030.y;
-    sp58 = D_8006F09C->unk_030.z;
-    switch (D_8006F09C->unk_01A) {
+    sp60 = D_8006F09C->scale.x;
+    sp5C = D_8006F09C->scale.y;
+    sp58 = D_8006F09C->scale.z;
+    switch (D_8006F09C->objectType) {
     case 0x6D:
     case 0x6E:
         var_fs0 = 0.5f;
@@ -235,11 +235,11 @@ void Particle31_UpdateSpeciesEffectTrigger(unk_D_810047E0* arg0) {
     s32 var_v0;
     s16* var_v1;
 
-    var_a1 = D_8006F09C->unk_040.unk_08 >> 0x10;
-    switch (D_8006F09C->unk_01A) {
+    var_a1 = D_8006F09C->transformAnim.frameFixed >> 0x10;
+    switch (D_8006F09C->objectType) {
     case 0x6D:
     case 0x6E:
-        temp_v1 = D_8006F09C->unk_040.unk_00;
+        temp_v1 = D_8006F09C->transformAnim.animationId;
         temp_a0 = D_810040B8[D_81004B54 % 18];
         switch(temp_v1) {
         case 4:
@@ -317,18 +317,18 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
     f32 sp104;
     f32 sp100;
     f32 spFC;
-    unk_D_86002F58_004_000* ptr;
+    DisplayObject* ptr;
 
     sp294 = Gfx_AllocDisplayList(0x40);
     MtxF_ExtractScale(&sp14C, &D_8006F088->unk_60.mtxf);
     guMtxF2L(sp14C.mf, &sp1D0);
-    if (D_8006F09C->unk_0A6 == 0xFE) {
-        guScale(&sp250, D_8006F09C->unk_030.x * arg1->scale.x * 0.1f, D_8006F09C->unk_030.y * arg1->scale.y * 0.1f, D_8006F09C->unk_030.z * arg1->scale.z * 0.1f);
+    if (D_8006F09C->effectSlot == 0xFE) {
+        guScale(&sp250, D_8006F09C->scale.x * arg1->scale.x * 0.1f, D_8006F09C->scale.y * arg1->scale.y * 0.1f, D_8006F09C->scale.z * arg1->scale.z * 0.1f);
     } else {
-        guScale(&sp250, D_8006F09C->unk_030.x * arg1->scale.x * 0.1f, D_8006F09C->unk_030.y * arg1->scale.y * 0.1f, D_8006F09C->unk_030.z * arg1->scale.z * 0.1f);
+        guScale(&sp250, D_8006F09C->scale.x * arg1->scale.x * 0.1f, D_8006F09C->scale.y * arg1->scale.y * 0.1f, D_8006F09C->scale.z * arg1->scale.z * 0.1f);
     }
-    if (D_8006F09C->unk_0A6 == 0xFF) {
-        if ((D_8006F09C->unk_01A == 0x5C) || (D_8006F09C->unk_01A == 0x6D) || (D_8006F09C->unk_01A == 0x6E)) {
+    if (D_8006F09C->effectSlot == 0xFF) {
+        if ((D_8006F09C->objectType == 0x5C) || (D_8006F09C->objectType == 0x6D) || (D_8006F09C->objectType == 0x6E)) {
             MtxF_Copy(&sp10C, GeoRender_GetRelativeMatrix(0));
             guMtxXFMF(sp10C.mf, 0, 0, 0, &spFC, &sp100, &sp104);
             guTranslate(&sp190, spFC, sp100, sp104);
@@ -337,7 +337,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
             guTranslate(&sp210, arg1->position.x, arg1->position.y, arg1->position.z);
             guMtxCatL(&sp250, &sp210, sp294);
         }
-    } else if (D_8006F09C->unk_01A == 0x5C) {
+    } else if (D_8006F09C->objectType == 0x5C) {
         MtxF_Copy(&sp10C, GeoRender_GetRelativeMatrix(0));
         guMtxXFMF(sp10C.mf, 0, 0, 0, &spFC, &sp100, &sp104);
         guTranslate(&sp190, spFC, sp100, sp104);
@@ -349,7 +349,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
     guMtxCatL(&sp1D0, sp294, sp294);
     gSPMatrix(gfx++, sp294, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, arg2->unk_00);
-    switch (D_8006F09C->unk_01A) {                              
+    switch (D_8006F09C->objectType) {
     case 0x6D:                                      
     case 0x6E:                                      
         gDPLoadTextureBlock_4b(gfx++, arg2->unk_08[arg1->misc / 2], G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP,
@@ -394,11 +394,11 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     if (func_800325AC() == 0) {
         ptr = D_8006F09C;
-        switch (ptr->unk_01A) {                          
+        switch (ptr->objectType) {
         case 0x6D:                                  
         case 0x6E:                                  
-            if (ptr->unk_0A6 != 0xFF) {
-                arg1->position.y += 0.5f * ptr->unk_030.y;
+            if (ptr->effectSlot != 0xFF) {
+                arg1->position.y += 0.5f * ptr->scale.y;
                 arg1->misc++;
                 arg1->scale.x += 0.1f;
                 arg1->scale.y += 0.1f;
@@ -409,7 +409,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
             }
             break;
         case 0x5C:                                  
-            if (ptr->unk_0A6 == 0xFF) {
+            if (ptr->effectSlot == 0xFF) {
                 arg1->misc += 2;
             } else {
                 arg1->misc++;
@@ -419,7 +419,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
             }
             break;
         case 0x92:                                  
-            arg1->position.y += 1.5f * ptr->unk_030.y;
+            arg1->position.y += 1.5f * ptr->scale.y;
             arg1->misc++;
             arg1->scale.x += 0.005f;
             arg1->scale.y += 0.005f;
@@ -429,7 +429,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
             }
             break;
         case 0x4D:                                  
-            arg1->position.y += 0.75f * ptr->unk_030.y;
+            arg1->position.y += 0.75f * ptr->scale.y;
             arg1->misc++;
             arg1->scale.x += 0.005f;
             arg1->scale.y += 0.005f;
@@ -439,7 +439,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
             }
             break;
         case 0x4E:                                  
-            arg1->position.y += ptr->unk_030.y;
+            arg1->position.y += ptr->scale.y;
             arg1->misc++;
             arg1->scale.x += 0.005f;
             arg1->scale.y += 0.005f;
@@ -449,7 +449,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
             }
             break;
         case 0x90:                                  
-            arg1->position.y -= 0.5f * ptr->unk_030.y;
+            arg1->position.y -= 0.5f * ptr->scale.y;
             arg1->misc++;
             temp_v1 = arg1->misc;
             temp_f0 = D_810040DC[temp_v1 % 12];
@@ -526,10 +526,10 @@ void func_81001E24(s32 arg0, DisplayListState* state) {
             state->gfx = Gfx_AllocDisplayList(0x80);
         }
         gfx = state->gfx;
-        temp_v1 = D_8006F09C->unk_0A6;
+        temp_v1 = D_8006F09C->effectSlot;
         if (temp_v1 == 0xFF) {
-            temp_v0 = D_8006F09C->unk_01A;
-            switch (D_8006F09C->unk_01A) {
+            temp_v0 = D_8006F09C->objectType;
+            switch (D_8006F09C->objectType) {
                 case 0x5C:
                     Particle31_UpdateSpeciesEffectTrigger(&D_810047E0);
                     if (D_81004B54 == 0) {
@@ -539,9 +539,9 @@ void func_81001E24(s32 arg0, DisplayListState* state) {
                 case 0x6D:
                 case 0x6E:
                     var_a3 = 0;
-                    temp_v0_2 = D_8006F09C->unk_040.unk_00;
+                    temp_v0_2 = D_8006F09C->transformAnim.animationId;
                     temp_a2 = D_810040B8[D_81004B54 % 18];
-                    temp_a1 = (s32) D_8006F09C->unk_040.unk_08 >> 0x10;
+                    temp_a1 = (s32) D_8006F09C->transformAnim.frameFixed >> 0x10;
                     switch (temp_v0_2) {
                     case 4:
                         temp_a0 = D_81003FE0[temp_a2].unk_02;

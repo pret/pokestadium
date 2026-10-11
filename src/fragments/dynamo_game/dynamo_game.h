@@ -13,7 +13,7 @@ typedef struct unk_D_8650A528 {
     /* 0x00E */ s8 unk_00E;
     /* 0x010 */ s16 unk_010;
     /* 0x010 */ s16 unk_012;
-    /* 0x014 */ unk_D_86002F58_004_000 unk_014;
+    /* 0x014 */ DisplayObject unk_014;
     /* 0x17C */ unk_D_86002F34_alt9* unk_17C;
 } unk_D_8650A528; // size = 0x180
 

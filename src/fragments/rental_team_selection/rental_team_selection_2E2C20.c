@@ -386,21 +386,21 @@ void TeamSelection_Preview_HandleInput(unk_D_8423D3A8* arg0) {
 
     if (BTN_IS_PRESSED(cont, BTN_A)) {
         if (arg0->unk_01 == 0) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         } else if (arg0->unk_02 == 0) {
             Audio_PlaySoundEffectById(0x22);
         } else {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
         arg0->unk_04 = 0;
         arg0->unk_00 = 3;
     } else if (BTN_IS_PRESSED(cont, BTN_B)) {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         arg0->unk_04 = 0;
         arg0->unk_02 = 1;
         arg0->unk_00 = 3;
     } else if (BTN_IS_PRESSED(cont, BTN_DUP | BTN_DDOWN) && (arg0->unk_01 != 0)) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         arg0->unk_02 ^= 1;
     }
 

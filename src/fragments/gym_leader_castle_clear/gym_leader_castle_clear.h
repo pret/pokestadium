@@ -5,7 +5,7 @@
 #include "src/geo_layout.h"
 
 typedef struct unk_D_83101F00 {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ DisplayObject unk_000;
     /* 0x168 */ s16 unk_168;
     /* 0x16A */ s16 unk_16A;
     /* 0x16C */ s16 unk_16C;
@@ -21,22 +21,22 @@ typedef struct unk_D_83101F00 {
     /* 0x184 */ f32 unk_184;
 } unk_D_83101F00; // size = 0x188
 
-void Glc_UpdateSweepObject(unk_D_86002F58_004_000* arg0);
+void Glc_UpdateSweepObject(DisplayObject* arg0);
 s32 Glc_GeoBannerCallback(s32 arg0, UNUSED GraphNode* arg1);
 void Glc_UpdateColorKeyframe(unk_D_83101F00* arg0);
 s32 Glc_GeoSpriteCallback(s32 arg0, GraphNode* arg1);
 void Glc_InitCircleWipe(void);
 void Glc_UpdateCircleWipe(void);
 void Glc_DrawCircleWipe(void);
-void Glc_StartCircleWipe(s16 arg0);
+void Glc_StartCircleWipe(s16 start);
 void Glc_InitBackgroundFade(void);
 void Glc_UpdateBackgroundFade(void);
-void Glc_DrawFadedBackground(u8* arg0, s16 arg1);
+void Glc_DrawFadedBackground(u8* texture, s16 alpha);
 void Glc_DrawBackground(void);
-void Glc_StartBackgroundFade(s16 arg0);
+void Glc_StartBackgroundFade(s16 mode);
 void Glc_ReadInputs(void);
 void Glc_InitObjectAnimation(unk_D_83101F00* arg0, s16 arg1);
-void Glc_DrawScisRectangle(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7);
+void Glc_DrawScisRectangle(s16 x1, s16 y1, s16 width, s16 height, s16 texture_start_x, s16 texture_start_y, s16 texture_spread_x, s16 texture_spread_y);
 void Glc_DrawTrackingIcon(void);
 void Glc_ClearInitState(void);
 void Glc_ClearDraw(void);

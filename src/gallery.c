@@ -360,7 +360,7 @@ s32 Gallery_SetCameraAngleOffsetsAlternate(s32 arg0, unk_func_8003013C_arg1* arg
     return 0;
 }
 
-s32 Gallery_SetSceneModelNode(s32 arg0, unk_D_86002F58_004_000* arg1) {
+s32 Gallery_SetSceneModelNode(s32 arg0, DisplayObject* arg1) {
     if (arg0 == 0) {
         D_80075F80->unk_20 = arg1;
     }
@@ -378,7 +378,7 @@ s32 Gallery_SetSceneGraphNode(s32 arg0, GraphNode* arg1) {
     s32 temp_v0;
 
     if (arg0 == 0) {
-        temp_v0 = arg1->unk_14;
+        temp_v0 = arg1->callbackArg;
         switch (temp_v0) {                          /* irregular */
         case 0:
             D_80075F80->unk_28 = arg1;
@@ -390,7 +390,7 @@ s32 Gallery_SetSceneGraphNode(s32 arg0, GraphNode* arg1) {
             D_80075F80->unk_30 = arg1;
             break;
         }
-        arg1->unk_14 = 0;
+        arg1->callbackArg = 0;
     }
     return 0;
 }
@@ -547,7 +547,7 @@ void Geo_LoadSceneGraphNode(unk_func_80031270* arg0, UNUSED s16 arg1, UNUSED s16
 }
 
 unk_func_80031270* Geo_CreateSceneInstance(s16 arg0, s16 arg1, unk_D_80068BB0* arg2, unk_D_80068BB0* arg3,
-                                 unk_D_86002F58_004_000_010* arg4, BinArchive* arg5, unk_D_83403C60* arg6) {
+                                 ModelLoadContext* arg4, BinArchive* arg5, unk_D_83403C60* arg6) {
     UNUSED unk_D_80068BB0* var_v0;
     unk_func_80031270* temp_v0 = main_pool_alloc(sizeof(unk_func_80031270), 0);
 
@@ -645,8 +645,8 @@ void Gallery_InitializePhotoModel(unk_func_80031270* arg0) {
 
     temp_s1 = (unk_D_83403C60_raw*)arg0->unk_18;
     Gallery_CopyBattleMonFromPhotoMon(&sp30, &temp_s1->unk_70);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20->unk_024, 0, temp_s1->unk_00.unk_00.raw, 0); //?
-    arg0->unk_20->unk_0A6 = 0xFE;
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20->position, 0, temp_s1->unk_00.unk_00.raw, 0); //?
+    arg0->unk_20->effectSlot = 0xFE;
     sp94 = sp30.unk_00.unk_00;
     if (sp30.unk_00.unk_00 == 0x99) {
         sp30.unk_00.unk_00 = 0x19;
@@ -656,7 +656,7 @@ void Gallery_InitializePhotoModel(unk_func_80031270* arg0) {
     PokeIcon_RequestFrameLoad(arg0->unk_10, sp30.unk_00.unk_00, sp90);
     PokeIcon_WaitFrameLoad(arg0->unk_10);
     ModelRenderer_ClearDisplayObject(arg0->unk_20);
-    Model_InitDisplayObject(arg0->unk_20, 0, sp30.unk_00.unk_00, arg0->unk_10->unk_24->unk_08->unk_00[0]);
+    Model_InitDisplayObject(arg0->unk_20, 0, sp30.unk_00.unk_00, arg0->unk_10->loadedModel->modelRoot->unk_00[0]);
     sp28 = Util_ConvertAddrToVirtAddr(&Particle31_UnpackSlotData);
     sp28(arg0->unk_20, Util_ConvertAddrToVirtAddr(&temp_s1->unk_00.unk_09[1]));
     ModelAnim_SetAnimation(arg0->unk_20, temp_s1->unk_00.unk_05);

@@ -80,7 +80,7 @@ void Gallery_DrawDropShadow(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void Gallery_DrawPhotoThumbnail(u16* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 void Gallery_DrawSelectionCorners(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void Gallery_DrawStatusIcon(s32 arg0, s32 arg1, s32 arg2);
-void Gallery_InitSceneGrid(unk_D_83407B38* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, unk_D_86002F58_004_000_010* arg5,
+void Gallery_InitSceneGrid(unk_D_83407B38* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, ModelLoadContext* arg5,
     BinArchive* arg6, unk_D_83403C60* arg7, s32 arg8, s32 arg9);
 void Gallery_ProcessSceneGrid(unk_D_83407B38* arg0);
 void Gallery_FinishActiveScene(void);
@@ -90,7 +90,7 @@ void Gallery_SavePosition(unk_D_83407B38* arg0, unk_D_83407B00* arg1);
 void Gallery_RestorePosition(unk_D_83407B38* arg0, unk_D_83407B00* arg1);
 void Gallery_IndexToGridPos(unk_D_83407B38* arg0, s32* arg1, s32* arg2, s32 arg3);
 s32 Gallery_GridPosToIndex(unk_D_83407B38* arg0, s32 arg1, s32 arg2);
-void Gallery_RebindSceneGridResources(unk_D_83407B38* arg0, unk_D_86002F58_004_000_010* arg1, BinArchive* arg2);
+void Gallery_RebindSceneGridResources(unk_D_83407B38* arg0, ModelLoadContext* arg1, BinArchive* arg2);
 
 void Gallery_InitStringTables(void);
 char* Gallery_GetUiString(s32 arg0);

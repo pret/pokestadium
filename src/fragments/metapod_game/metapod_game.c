@@ -538,7 +538,7 @@ void MetapodGame_PlaySoundEvent(s16 arg0, s16 arg1) {
             break;
 
         case 13:
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             break;
 
         case 14:
@@ -593,7 +593,7 @@ void miniInitMetapodPlayer(MiniActor* metapod, s32 arg1) {
 
     ModelAnim_SetAnimation(&metapod->unk_000, 0);
     ModelAnim_ClearEventTrack(&metapod->unk_000);
-    metapod->unk_000.unk_01C = 0;
+    metapod->unk_000.textureMode = 0;
     miniActorUpdateTransform(metapod);
     metapod->isComp = D_879060C4[arg1];
 }
@@ -611,7 +611,7 @@ void miniInitMetapodPlayers(void) {
 void MetapodGame_BeginHarden(MiniActor* metapod) {
     metapod->damageTimer++;
     metapod->unk_272 = 4;
-    metapod->unk_000.unk_01C = 1;
+    metapod->unk_000.textureMode = 1;
 }
 
 void miniMetapodHumanControls(MiniActor* metapod) {
@@ -634,12 +634,12 @@ void miniMetapodHumanControls(MiniActor* metapod) {
 
         case 2: //  harden
             if (ModelAnim_HasCrossedFrame(&metapod->unk_000, 5) != 0) {
-                metapod->unk_000.unk_000.unk_02 &= ~0x20;
+                metapod->unk_000.node.renderFlags &= ~0x20;
             }
 
             if (!(BTN_IS_DOWN(miniControllerPtr, BTN_A)) || (metapod->unk_2AA != 0)) {
                 metapod->mainState = 0;
-                metapod->unk_000.unk_000.unk_02 |= 0x20;
+                metapod->unk_000.node.renderFlags |= 0x20;
             } else if (BTN_IS_DOWN(miniControllerPtr, BTN_A)) {
                 MetapodGame_BeginHarden(metapod);
             }
@@ -871,16 +871,16 @@ void miniMetapodCompControls(MiniActor* compMetapod, s32 nPlayer) {
         case 0x2:
             compMetapod->unk_29E--;
             if (compMetapod->unk_29E < 0) {
-                compMetapod->unk_000.unk_000.unk_02 |= 0x20;
+                compMetapod->unk_000.node.renderFlags |= 0x20;
                 compMetapod->compState = 0x64;
                 return;
             }
 
             compMetapod->damageTimer++;
             compMetapod->unk_272 = 4;
-            compMetapod->unk_000.unk_01C = 1;
+            compMetapod->unk_000.textureMode = 1;
             if (ModelAnim_HasCrossedFrame(&compMetapod->unk_000, 5) != 0) {
-                compMetapod->unk_000.unk_000.unk_02 &= ~0x20;
+                compMetapod->unk_000.node.renderFlags &= ~0x20;
             }
             break;
 
@@ -901,7 +901,7 @@ void miniUpdateMetapods(void) {
     miniMetapodPtr = miniMetapods;
 
     for (i = 0; i < 4; i++) {
-        miniMetapodPtr->unk_000.unk_01C = 0;
+        miniMetapodPtr->unk_000.textureMode = 0;
         miniMetapodPtr->unk_272 = 0;
 
         if (minigameInputLock != 0) {
@@ -1022,13 +1022,13 @@ void miniMatapodMinigameChecks(void) {
 void MetapodGame_SyncMetapodModelTransform(void) {
     MiniActor_UpdateAnimation(miniMetapodPtr);
 
-    miniMetapodPtr->unk_000.unk_024.x = miniMetapodPtr->totalPos.x;
-    miniMetapodPtr->unk_000.unk_024.y = miniMetapodPtr->totalPos.y;
-    miniMetapodPtr->unk_000.unk_024.z = miniMetapodPtr->totalPos.z;
+    miniMetapodPtr->unk_000.position.x = miniMetapodPtr->totalPos.x;
+    miniMetapodPtr->unk_000.position.y = miniMetapodPtr->totalPos.y;
+    miniMetapodPtr->unk_000.position.z = miniMetapodPtr->totalPos.z;
 
-    miniMetapodPtr->unk_000.unk_01E.x = miniMetapodPtr->totalRot.x;
-    miniMetapodPtr->unk_000.unk_01E.y = miniMetapodPtr->totalRot.y;
-    miniMetapodPtr->unk_000.unk_01E.z = miniMetapodPtr->totalRot.z;
+    miniMetapodPtr->unk_000.rotation.x = miniMetapodPtr->totalRot.x;
+    miniMetapodPtr->unk_000.rotation.y = miniMetapodPtr->totalRot.y;
+    miniMetapodPtr->unk_000.rotation.z = miniMetapodPtr->totalRot.z;
 }
 
 void MetapodGame_SyncAllMetapodModelTransforms(void) {
@@ -1058,7 +1058,7 @@ void miniInitRock(MiniActor* rock, s32 arg1) {
     rock->scale.y = 0.5f;
     rock->scale.z = 0.5f;
 
-    rock->unk_000.unk_000.unk_01 &= ~1;
+    rock->unk_000.node.flags &= ~1;
 
     miniActorUpdateTransform(rock);
 }
@@ -1145,13 +1145,13 @@ void MetapodGame_LaunchRock(MiniActor* rock) {
         temp_v1;
     rock->unk_270 = 1;
 
-    rock->unk_000.unk_000.unk_01 |= 1;
+    rock->unk_000.node.flags |= 1;
     ModelAnim_SetAnimation(&rock->unk_000, 0);
 }
 
 void MetapodGame_DespawnRock(MiniActor* rock) {
     rock->mainState = 0;
-    rock->unk_000.unk_000.unk_01 &= ~1;
+    rock->unk_000.node.flags &= ~1;
 }
 
 void miniRockStateMachine(MiniActor* rock) {
@@ -1220,7 +1220,7 @@ void miniRockStateMachine(MiniActor* rock) {
             break;
 
         case 0x64:
-            if (ParticleMath_ApproachU8(&rock->unk_000.unk_01D, 0, 0x40) != 0) {
+            if (ParticleMath_ApproachU8(&rock->unk_000.lodFraction, 0, 0x40) != 0) {
                 MetapodGame_DespawnRock(rock);
             }
             break;
@@ -1265,17 +1265,17 @@ void miniUpdateRocks(void) {
 void MetapodGame_SyncRockModelTransform(MiniActor* arg0) {
     MiniActor_UpdateAnimation(arg0);
 
-    arg0->unk_000.unk_030.x = arg0->scale.x;
-    arg0->unk_000.unk_030.y = arg0->scale.y;
-    arg0->unk_000.unk_030.z = arg0->scale.z;
+    arg0->unk_000.scale.x = arg0->scale.x;
+    arg0->unk_000.scale.y = arg0->scale.y;
+    arg0->unk_000.scale.z = arg0->scale.z;
 
-    arg0->unk_000.unk_024.x = arg0->totalPos.x;
-    arg0->unk_000.unk_024.y = arg0->totalPos.y;
-    arg0->unk_000.unk_024.z = arg0->totalPos.z;
+    arg0->unk_000.position.x = arg0->totalPos.x;
+    arg0->unk_000.position.y = arg0->totalPos.y;
+    arg0->unk_000.position.z = arg0->totalPos.z;
 
-    arg0->unk_000.unk_01E.x = arg0->totalRot.x;
-    arg0->unk_000.unk_01E.y = arg0->totalRot.y;
-    arg0->unk_000.unk_01E.z = arg0->totalRot.z;
+    arg0->unk_000.rotation.x = arg0->totalRot.x;
+    arg0->unk_000.rotation.y = arg0->totalRot.y;
+    arg0->unk_000.rotation.z = arg0->totalRot.z;
 }
 
 void miniUpdateRocksPositions(void) {
@@ -1289,7 +1289,7 @@ void miniUpdateRocksPositions(void) {
 }
 
 void MetapodGame_InitCamera(void) {
-    D_87906054 = D_87906050->unk_00.unk_0C;
+    D_87906054 = D_87906050->node.children;
 
     miniCameraXRot = -0x200;
     miniCameraYRot = 0;
@@ -1695,7 +1695,7 @@ void MetapodGame_DrawFrame(s32 arg0) {
         GeoRender_AdvanceFrameCounter();
     }
 
-    Geo_RenderRootNode(&D_87906050->unk_00);
+    Geo_RenderRootNode(&D_87906050->node);
     MiniFx_DrawParticles();
 
     if (miniDebugMode == false) {
@@ -1856,7 +1856,7 @@ void MetapodGame_LoadAssets(void) {
         Model_InitDisplayObject(&miniMetapodRocks[i].unk_000, 0, miniMetapodRocks[i].unk_23C, temp_s1_2->unk_08->unk_00[0]);
         ModelAnim_SetAnimation(&miniMetapodRocks[i].unk_000, 0);
 
-        miniMetapodRocks[i].unk_000.unk_000.unk_01 &= ~1;
+        miniMetapodRocks[i].unk_000.node.flags &= ~1;
     }
 }
 

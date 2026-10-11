@@ -194,90 +194,91 @@ Gfx D_8006F798[] = {
 
 static s32 pad_D_8006F7C0[] = { 0, 0, 0, 0 };
 
-void Ui_DrawTexturedRect8x8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8* arg4) {
-    s32 sp34 = (arg2 < 9) ? 0x400 : 0;
-    s32 sp30 = (arg3 < 9) ? 0x400 : 0;
+void Ui_DrawTexturedRect8x8(s32 x1, s32 y1, s32 width, s32 height, u8* texture) {
+    s32 texture_step_x = (width < 9) ? 0x400 : 0;
+    s32 texture_step_y = (height < 9) ? 0x400 : 0;
 
-    gDPLoadTextureBlock(gDisplayListHead++, arg4, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+    gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(arg0, arg1, arg2, arg3, 0, 0, sp34, sp30, 0);
+    Gfx_DrawTexturedRectClipped(x1, y1, width, height, 0, 0, texture_step_x, texture_step_y, 0);
 }
 
-void Ui_DrawBorderStyleA(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    Ui_DrawTexturedRect8x8(arg0, arg1, 8, 8, D_10027D0);
-    Ui_DrawTexturedRect8x8(arg0, (arg1 + arg3) - 8, 8, 8, D_1002850);
-    Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, (arg1 + arg3) - 8, 8, 8, D_10028D0);
-    Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, arg1, 8, 8, D_1002950);
+void Ui_DrawBorderStyleA(s32 x1, s32 y1, s32 width, s32 height) {
+    Ui_DrawTexturedRect8x8(x1, y1, 8, 8, D_10027D0);
+    Ui_DrawTexturedRect8x8(x1, (y1 + height) - 8, 8, 8, D_1002850);
+    Ui_DrawTexturedRect8x8((x1 + width) - 8, (y1 + height) - 8, 8, 8, D_10028D0);
+    Ui_DrawTexturedRect8x8((x1 + width) - 8, y1, 8, 8, D_1002950);
 
-    if (arg2 > 16) {
-        Ui_DrawTexturedRect8x8(arg0 + 8, arg1, arg2 - 0x10, 8, D_10025D0);
-        Ui_DrawTexturedRect8x8(arg0 + 8, (arg1 + arg3) - 8, arg2 - 0x10, 8, D_1002650);
+    if (width > 16) {
+        Ui_DrawTexturedRect8x8(x1 + 8, y1, width - 0x10, 8, D_10025D0);
+        Ui_DrawTexturedRect8x8(x1 + 8, (y1 + height) - 8, width - 0x10, 8, D_1002650);
     }
 
-    if (arg3 > 16) {
-        Ui_DrawTexturedRect8x8(arg0, arg1 + 8, 8, arg3 - 0x10, D_10026D0);
-        Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, arg1 + 8, 8, arg3 - 0x10, D_1002750);
-    }
-}
-
-void Ui_DrawBorderStyleB(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    Ui_DrawTexturedRect8x8(arg0, arg1, 8, 8, D_1002BD0);
-    Ui_DrawTexturedRect8x8(arg0, (arg1 + arg3) - 8, 8, 8, D_1002C50);
-    Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, (arg1 + arg3) - 8, 8, 8, D_1002CD0);
-    Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, arg1, 8, 8, D_1002D50);
-
-    if (arg2 > 16) {
-        Ui_DrawTexturedRect8x8(arg0 + 8, arg1, arg2 - 0x10, 8, D_10029D0);
-        Ui_DrawTexturedRect8x8(arg0 + 8, (arg1 + arg3) - 8, arg2 - 0x10, 8, D_1002A50);
-    }
-
-    if (arg3 > 16) {
-        Ui_DrawTexturedRect8x8(arg0, arg1 + 8, 8, arg3 - 0x10, D_1002AD0);
-        Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, arg1 + 8, 8, arg3 - 0x10, D_1002B50);
+    if (height > 16) {
+        Ui_DrawTexturedRect8x8(x1, y1 + 8, 8, height - 0x10, D_10026D0);
+        Ui_DrawTexturedRect8x8((x1 + width) - 8, y1 + 8, 8, height - 0x10, D_1002750);
     }
 }
 
-void Ui_DrawBorderStyleC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    Ui_DrawTexturedRect8x8(arg0, arg1, 8, 8, D_1002FD0);
-    Ui_DrawTexturedRect8x8(arg0, (arg1 + arg3) - 8, 8, 8, D_1003050);
-    Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, (arg1 + arg3) - 8, 8, 8, D_10030D0);
-    Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, arg1, 8, 8, D_1003150);
+void Ui_DrawBorderStyleB(s32 x1, s32 y1, s32 width, s32 height) {
+    Ui_DrawTexturedRect8x8(x1, y1, 8, 8, D_1002BD0);
+    Ui_DrawTexturedRect8x8(x1, (y1 + height) - 8, 8, 8, D_1002C50);
+    Ui_DrawTexturedRect8x8((x1 + width) - 8, (y1 + height) - 8, 8, 8, D_1002CD0);
+    Ui_DrawTexturedRect8x8((x1 + width) - 8, y1, 8, 8, D_1002D50);
 
-    if (arg2 > 16) {
-        Ui_DrawTexturedRect8x8(arg0 + 8, arg1, arg2 - 0x10, 8, D_1002DD0);
-        Ui_DrawTexturedRect8x8(arg0 + 8, (arg1 + arg3) - 8, arg2 - 0x10, 8, D_1002E50);
+    if (width > 16) {
+        Ui_DrawTexturedRect8x8(x1 + 8, y1, width - 0x10, 8, D_10029D0);
+        Ui_DrawTexturedRect8x8(x1 + 8, (y1 + height) - 8, width - 0x10, 8, D_1002A50);
     }
 
-    if (arg3 > 16) {
-        Ui_DrawTexturedRect8x8(arg0, arg1 + 8, 8, arg3 - 0x10, D_1002ED0);
-        Ui_DrawTexturedRect8x8((arg0 + arg2) - 8, arg1 + 8, 8, arg3 - 0x10, D_1002F50);
+    if (height > 16) {
+        Ui_DrawTexturedRect8x8(x1, y1 + 8, 8, height - 0x10, D_1002AD0);
+        Ui_DrawTexturedRect8x8((x1 + width) - 8, y1 + 8, 8, height - 0x10, D_1002B50);
     }
 }
 
-void Ui_FillInsetRectangleA(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u16 arg4) {
+void Ui_DrawBorderStyleC(s32 x1, s32 y1, s32 width, s32 height) {
+    Ui_DrawTexturedRect8x8(x1, y1, 8, 8, D_1002FD0);
+    Ui_DrawTexturedRect8x8(x1, (y1 + height) - 8, 8, 8, D_1003050);
+    Ui_DrawTexturedRect8x8((x1 + width) - 8, (y1 + height) - 8, 8, 8, D_10030D0);
+    Ui_DrawTexturedRect8x8((x1 + width) - 8, y1, 8, 8, D_1003150);
+
+    if (width > 16) {
+        Ui_DrawTexturedRect8x8(x1 + 8, y1, width - 0x10, 8, D_1002DD0);
+        Ui_DrawTexturedRect8x8(x1 + 8, (y1 + height) - 8, width - 0x10, 8, D_1002E50);
+    }
+
+    if (height > 16) {
+        Ui_DrawTexturedRect8x8(x1, y1 + 8, 8, height - 0x10, D_1002ED0);
+        Ui_DrawTexturedRect8x8((x1 + width) - 8, y1 + 8, 8, height - 0x10, D_1002F50);
+    }
+}
+
+void Ui_FillInsetRectangleA(s32 x1, s32 y1, s32 width, s32 height, u16 color) {
     gSPDisplayList(gDisplayListHead++, D_8006F4C0);
-    gDPSetFillColor(gDisplayListHead++, (arg4 << 0x10) | arg4);
+    gDPSetFillColor(gDisplayListHead++, (color << 0x10) | color);
 
     if (StageContext_IsHighResolution() != 0) {
-        gDPFillRectangle(gDisplayListHead++, arg0 + 7, arg1 + 7, (arg0 + arg2) - 8, (arg1 + arg3) - 8);
+        gDPFillRectangle(gDisplayListHead++, x1 + 7, y1 + 7, (x1 + width) - 8, (y1 + height) - 8);
     } else {
-        gDPFillRectangle(gDisplayListHead++, arg0 + 3, arg1 + 3, (arg0 + arg2) - 4, (arg1 + arg3) - 4);
+        gDPFillRectangle(gDisplayListHead++, x1 + 3, y1 + 3, (x1 + width) - 4, (y1 + height) - 4);
     }
 }
 
-void Ui_FillInsetRectangleB(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u16 arg4) {
+void Ui_FillInsetRectangleB(s32 x1, s32 y1, s32 width, s32 height, u16 color) {
     gSPDisplayList(gDisplayListHead++, D_8006F4C0);
-    gDPSetFillColor(gDisplayListHead++, (arg4 << 0x10) | arg4);
+    gDPSetFillColor(gDisplayListHead++, (color << 0x10) | color);
 
     if (StageContext_IsHighResolution() != 0) {
-        gDPFillRectangle(gDisplayListHead++, arg0 + 5, arg1 + 5, (arg0 + arg2) - 6, (arg1 + arg3) - 6);
+        gDPFillRectangle(gDisplayListHead++, x1 + 5, y1 + 5, (x1 + width) - 6, (y1 + height) - 6);
     } else {
-        gDPFillRectangle(gDisplayListHead++, arg0 + 3, arg1 + 3, (arg0 + arg2) - 4, (arg1 + arg3) - 4);
+        gDPFillRectangle(gDisplayListHead++, x1 + 3, y1 + 3, (x1 + width) - 4, (y1 + height) - 4);
     }
 }
 
-void Ui_DrawGradientRectangle(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGB8* arg4, Color_RGB8* arg5) {
+void Ui_DrawGradientRectangle(s32 x1, s32 y1, s32 width, s32 height, Color_RGB8* top_color,
+                              Color_RGB8* bottom_color) {
     Vtx* temp_s2;
     unk_D_80068BB0* temp_s1;
     Mtx* sp7C;
@@ -293,10 +294,12 @@ void Ui_DrawGradientRectangle(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGB8
     gSPViewport(gDisplayListHead++, (u32)sp78 & 0x1FFFFFFF);
 
     guOrtho(sp7C, 0.5f, temp_s1->width - 0.5f, temp_s1->height - 0.5f, 0.5f, -2.0f, 2.0f, 1.0f);
-    Gfx_SetVertexAttributes(&temp_s2[0], arg0, arg1, -1, 0, 0, arg4->r, arg4->g, arg4->b, 0xFF);
-    Gfx_SetVertexAttributes(&temp_s2[1], arg0 + arg2, arg1, -1, 0, 0, arg4->r, arg4->g, arg4->b, 0xFF);
-    Gfx_SetVertexAttributes(&temp_s2[2], arg0, arg1 + arg3, -1, 0, 0, arg5->r, arg5->g, arg5->b, 0xFF);
-    Gfx_SetVertexAttributes(&temp_s2[3], arg0 + arg2, arg1 + arg3, -1, 0, 0, arg5->r, arg5->g, arg5->b, 0xFF);
+    Gfx_SetVertexAttributes(&temp_s2[0], x1, y1, -1, 0, 0, top_color->r, top_color->g, top_color->b, 0xFF);
+    Gfx_SetVertexAttributes(&temp_s2[1], x1 + width, y1, -1, 0, 0, top_color->r, top_color->g, top_color->b, 0xFF);
+    Gfx_SetVertexAttributes(&temp_s2[2], x1, y1 + height, -1, 0, 0, bottom_color->r, bottom_color->g,
+                            bottom_color->b, 0xFF);
+    Gfx_SetVertexAttributes(&temp_s2[3], x1 + width, y1 + height, -1, 0, 0, bottom_color->r, bottom_color->g,
+                            bottom_color->b, 0xFF);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -313,91 +316,91 @@ void Ui_DrawGradientRectangle(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGB8
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 }
 
-void Ui_DrawBorderedPanel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u16 arg4) {
+void Ui_DrawBorderedPanel(s32 x1, s32 y1, s32 width, s32 height, u16 color) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     if (StageContext_IsHighResolution() != 0) {
-        Ui_DrawBorderStyleA(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleA(x1, y1, width, height);
     } else {
-        Ui_DrawBorderStyleC(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleC(x1, y1, width, height);
     }
 
-    if ((arg2 >= 0xF) && (arg3 >= 0xF)) {
-        Ui_FillInsetRectangleA(arg0, arg1, arg2, arg3, arg4);
+    if ((width >= 0xF) && (height >= 0xF)) {
+        Ui_FillInsetRectangleA(x1, y1, width, height, color);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void Ui_DrawGradientPanel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGB8* arg4, Color_RGB8* arg5) {
-    if ((arg2 >= 0xF) && (arg3 >= 0xF)) {
+void Ui_DrawGradientPanel(s32 x1, s32 y1, s32 width, s32 height, Color_RGB8* top_color, Color_RGB8* bottom_color) {
+    if ((width >= 0xF) && (height >= 0xF)) {
         if (StageContext_IsHighResolution() != 0) {
-            Ui_DrawGradientRectangle(arg0 + 6, arg1 + 6, arg2 - 0xC, arg3 - 0xC, arg4, arg5);
+            Ui_DrawGradientRectangle(x1 + 6, y1 + 6, width - 0xC, height - 0xC, top_color, bottom_color);
         } else {
-            Ui_DrawGradientRectangle(arg0 + 2, arg1 + 2, arg2 - 4, arg3 - 4, arg4, arg5);
+            Ui_DrawGradientRectangle(x1 + 2, y1 + 2, width - 4, height - 4, top_color, bottom_color);
         }
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     if (StageContext_IsHighResolution() != 0) {
-        Ui_DrawBorderStyleA(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleA(x1, y1, width, height);
     } else {
-        Ui_DrawBorderStyleC(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleC(x1, y1, width, height);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void Ui_DrawBorderedPanelStyleB(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u16 arg4) {
+void Ui_DrawBorderedPanelStyleB(s32 x1, s32 y1, s32 width, s32 height, u16 color) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     if (StageContext_IsHighResolution() != 0) {
-        Ui_DrawBorderStyleB(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleB(x1, y1, width, height);
     } else {
-        Ui_DrawBorderStyleC(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleC(x1, y1, width, height);
     }
 
-    if ((arg2 >= 0xF) && (arg3 >= 0xF)) {
-        Ui_FillInsetRectangleB(arg0, arg1, arg2, arg3, arg4);
+    if ((width >= 0xF) && (height >= 0xF)) {
+        Ui_FillInsetRectangleB(x1, y1, width, height, color);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void Ui_DrawBorderedPanelNoFill(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void Ui_DrawBorderedPanelNoFill(s32 x1, s32 y1, s32 width, s32 height) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     if (StageContext_IsHighResolution() != 0) {
-        Ui_DrawBorderStyleA(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleA(x1, y1, width, height);
     } else {
-        Ui_DrawBorderStyleC(arg0, arg1, arg2, arg3);
+        Ui_DrawBorderStyleC(x1, y1, width, height);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void Ui_DrawTextureMarker(s32 arg0, s32 arg1) {
+void Ui_DrawTextureMarker(s32 x, s32 y) {
     if (StageContext_IsHighResolution() != 0) {
         gSPDisplayList(gDisplayListHead++, D_8006F4E0);
-        Gfx_DrawTextureRgba16(arg0, arg1, 0x20, 0x16, D_10031D0, 0x20, 0x200000);
+        Gfx_DrawTextureRgba16(x, y, 0x20, 0x16, D_10031D0, 0x20, 0x200000);
     } else {
         gSPDisplayList(gDisplayListHead++, D_8006F5A0);
-        Gfx_DrawTextureRgba16Ia8(arg0, arg1, 0xC, 0xA, D_1003750, D_1003890, 0x10, 0x100000);
+        Gfx_DrawTextureRgba16Ia8(x, y, 0xC, 0xA, D_1003750, D_1003890, 0x10, 0x100000);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void Ui_DrawAnimatedTextureMarker(s16 arg0, s16 arg1) {
+void Ui_DrawAnimatedTextureMarker(s16 x, s16 y) {
     static s16 D_8006F7D0 = 0;
 
     if (D_8006F7D0 < 6) {
-        arg0 += D_8006F7D0;
+        x += D_8006F7D0;
     } else {
-        arg0 = (arg0 - D_8006F7D0) + 0xC;
+        x = (x - D_8006F7D0) + 0xC;
     }
-    Ui_DrawTextureMarker(arg0, arg1);
+    Ui_DrawTextureMarker(x, y);
     D_8006F7D0 = (D_8006F7D0 + 1) % 12;
 }
 

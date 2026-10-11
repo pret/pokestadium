@@ -140,10 +140,10 @@ void MiniActor_UpdateAnimation(MiniActor* poke) {
         case 1:
             ModelAnim_SetAnimation(&poke->unk_000, poke->unk_24A);
             if (poke->unk_26C != 0) {
-                ModelAnim_BindTransformCurve(&poke->unk_000, 0, poke->unk_000.unk_040.unk_04, -0x10000);
-                ModelAnim_SetFrame(&poke->unk_000, poke->unk_000.unk_040.unk_04->unk_0A - 1);
+                ModelAnim_BindTransformCurve(&poke->unk_000, 0, poke->unk_000.transformAnim.data, -0x10000);
+                ModelAnim_SetFrame(&poke->unk_000, poke->unk_000.transformAnim.data->endFrame - 1);
             } else {
-                ModelAnim_BindTransformCurve(&poke->unk_000, 0, poke->unk_000.unk_040.unk_04, 0x10000);
+                ModelAnim_BindTransformCurve(&poke->unk_000, 0, poke->unk_000.transformAnim.data, 0x10000);
                 ModelAnim_SetFrame(&poke->unk_000, poke->unk_26E);
                 ModelAnim_ClearEventTrack(&poke->unk_000);
                 if (poke->unk_24C != -1) {
@@ -160,7 +160,7 @@ void MiniActor_UpdateAnimation(MiniActor* poke) {
                     poke->unk_248++;
                 }
             } else {
-                if (poke->unk_000.unk_040.unk_08 == 0) {
+                if (poke->unk_000.transformAnim.frameFixed == 0) {
                     poke->unk_248++;
                 }
             }
@@ -175,8 +175,8 @@ void MiniActor_UpdateAnimation(MiniActor* poke) {
     }
 }
 
-void MiniActor_SnapAnimToLastFrame(unk_D_86002F58_004_000* arg0) {
-    ModelAnim_SetFrame(arg0, arg0->unk_040.unk_04->unk_0A - 1);
+void MiniActor_SnapAnimToLastFrame(DisplayObject* arg0) {
+    ModelAnim_SetFrame(arg0, arg0->transformAnim.data->endFrame - 1);
 }
 
 void MiniActor_ReadControllerInputs(void) {
@@ -292,17 +292,17 @@ void miniActorUpdateTransform(MiniActor* poke) {
 
 //  updates an object's collider ?
 void MiniActor_SyncModelTransform(MiniActor* arg0) {
-    arg0->unk_000.unk_030.x = arg0->scale.x;
-    arg0->unk_000.unk_030.y = arg0->scale.y;
-    arg0->unk_000.unk_030.z = arg0->scale.z;
+    arg0->unk_000.scale.x = arg0->scale.x;
+    arg0->unk_000.scale.y = arg0->scale.y;
+    arg0->unk_000.scale.z = arg0->scale.z;
 
-    arg0->unk_000.unk_024.x = arg0->totalPos.x;
-    arg0->unk_000.unk_024.y = arg0->totalPos.y;
-    arg0->unk_000.unk_024.z = arg0->totalPos.z;
+    arg0->unk_000.position.x = arg0->totalPos.x;
+    arg0->unk_000.position.y = arg0->totalPos.y;
+    arg0->unk_000.position.z = arg0->totalPos.z;
 
-    arg0->unk_000.unk_01E.x = arg0->totalRot.x;
-    arg0->unk_000.unk_01E.y = arg0->totalRot.y;
-    arg0->unk_000.unk_01E.z = arg0->totalRot.z;
+    arg0->unk_000.rotation.x = arg0->totalRot.x;
+    arg0->unk_000.rotation.y = arg0->totalRot.y;
+    arg0->unk_000.rotation.z = arg0->totalRot.z;
 }
 
 void miniResetGlobalState(void) {

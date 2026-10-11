@@ -362,7 +362,7 @@ void Rental_TeamCursorLeft(RentalTeamTray* arg0) {
         arg0->unk_000C = -1;
         arg0->unk_000E = -4;
         arg0->unk_0001 = 0xC;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -372,7 +372,7 @@ void Rental_TeamCursorRight(RentalTeamTray* arg0) {
         arg0->unk_000C = 1;
         arg0->unk_000E = 4;
         arg0->unk_0001 = 0xC;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -382,7 +382,7 @@ void Rental_TeamCursorUp(RentalTeamTray* arg0) {
         arg0->unk_000C = -1;
         arg0->unk_000E = -4;
         arg0->unk_0001 = 0xD;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -392,7 +392,7 @@ void Rental_TeamCursorDown(RentalTeamTray* arg0) {
         arg0->unk_000C = 1;
         arg0->unk_000E = 4;
         arg0->unk_0001 = 0xD;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -405,11 +405,11 @@ void Rental_TeamGridHandleInput(RentalTeamTray* arg0) {
         s32 temp_v0 = arg0->unk_0010 + (arg0->unk_0012 * 3);
 
         if (arg0->unk_0030[temp_v0].unk_004.unk_00.unk_00 != 0) {
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             arg0->unk_0001 = 0xB;
         }
     } else if (BTN_IS_PRESSED(cont, BTN_B)) {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         arg0->unk_0001 = 0x10;
     } else if (BTN_IS_PRESSED(cont, BTN_DUP)) {
         Rental_TeamCursorUp(arg0);

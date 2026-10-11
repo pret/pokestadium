@@ -27,9 +27,9 @@ typedef struct unk_D_8423E518 {
 } unk_D_8423E518; // size = 0x14
 
 GraphNode* D_8423D400;
-unk_D_86002F58_004_000 D_8423D408[2][6];
-unk_D_86002F58_004_000_004* D_8423E4E8[6];
-unk_D_86002F58_004_000_004* D_8423E500;
+DisplayObject D_8423D408[2][6];
+ModelNodeView* D_8423E4E8[6];
+ModelNodeView* D_8423E500;
 u8* D_8423E508[4];
 unk_D_8423E518 D_8423E518[4];
 s16 D_8423E568;
@@ -215,7 +215,7 @@ s32 TeamSelection_TrainerSlots_GraphCallback(s32 arg0, unk_func_80011B94* arg1) 
 
     if (arg0 == 5) {
         // clang-format off
-        switch (D_8006F09C->unk_000.unk_14) {
+        switch (D_8006F09C->node.callbackArg) {
             case 0:
                 var_a0 = D_8423E508[0]; var_a3 = D_201D820;
                 break;
@@ -250,10 +250,10 @@ s32 TeamSelection_TrainerSlots_GraphCallback(s32 arg0, unk_func_80011B94* arg1) 
         // clang-format on
 
         gDPPipeSync(gDisplayListHead++);
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, D_8006F09C->unk_01D);
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, D_8006F09C->lodFraction);
         gSPSegment(gDisplayListHead++, 0x0F, Memmap_GetSegmentVaddr(var_a0));
         gSPSegment(gDisplayListHead++, 0x0E, Memmap_GetSegmentVaddr(var_a3));
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -394,11 +394,11 @@ void TeamSelection_TrainerSlots_UpdateModelScale(s16 arg0, f32 arg1) {
         var_a2 = 0x2000;
     }
 
-    D_8423D408[0][arg0].unk_030.x = ((SINS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
-    D_8423D408[0][arg0].unk_030.y = ((COSS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
+    D_8423D408[0][arg0].scale.x = ((SINS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
+    D_8423D408[0][arg0].scale.y = ((COSS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
 
-    D_8423D408[1][arg0].unk_030.x = ((SINS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
-    D_8423D408[1][arg0].unk_030.y = ((COSS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
+    D_8423D408[1][arg0].scale.x = ((SINS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
+    D_8423D408[1][arg0].scale.y = ((COSS(D_84210DA0[arg0].unk_0A) * var_fa0) + 1.0f) * arg1;
 
     D_84210DA0[arg0].unk_0A += var_a2 + ((MathUtil_Random16() & 0xF) * 0x10);
 }
@@ -415,11 +415,11 @@ void TeamSelection_TrainerSlots_UpdateModelPose(s16 arg0, f32 arg1) {
         var_fv0 = 1.0f;
     }
 
-    D_8423D408[0][arg0].unk_01E.z = SINS(D_84210DA0[arg0].unk_08) * (1536.0f * var_fv0);
+    D_8423D408[0][arg0].rotation.z = SINS(D_84210DA0[arg0].unk_08) * (1536.0f * var_fv0);
 
-    D_8423D408[0][arg0].unk_024.x =
+    D_8423D408[0][arg0].position.x =
         (D_84210DA0[arg0].unk_02 - 320.0f) - (SINS(D_84210DA0[arg0].unk_08) * (6.0f * var_fv0));
-    D_8423D408[1][arg0].unk_024.x =
+    D_8423D408[1][arg0].position.x =
         (D_84210DA0[arg0].unk_02 - 320.0f) - (SINS(D_84210DA0[arg0].unk_08) * (6.0f * var_fv0));
 
     D_84210DA0[arg0].unk_08 += var_v0;
@@ -442,7 +442,7 @@ void TeamSelection_TrainerSlots_MoveFromSpecialUp(void) {
         for (i = 0; i < 4; i++) {
             if (D_84210DA0[var_v1].unk_00 != 0) {
                 D_8423E568 = var_v1;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 break;
             }
             var_v1 = (var_v1 + var_a0) & 3;
@@ -459,7 +459,7 @@ void TeamSelection_TrainerSlots_MoveFromTrainerToSpecial(void) {
         for (i = 0; i < 2; i++) {
             if (D_84210DA0[var_v0].unk_00 != 0) {
                 D_8423E568 = var_v0;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 break;
             }
             var_v0 ^= 1;
@@ -474,13 +474,13 @@ void TeamSelection_TrainerSlots_MovePrevious(void) {
         for (i = D_8423E568 - 1; i >= 0; i--) {
             if (D_84210DA0[i].unk_00 != 0) {
                 D_8423E568 = i;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 break;
             }
         }
     } else if ((D_8423E568 == 5) && (D_84210DA0[4].unk_00 != 0)) {
         D_8423E568 = 4;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -491,13 +491,13 @@ void TeamSelection_TrainerSlots_MoveNext(void) {
         for (i = D_8423E568 + 1; i < 4; i++) {
             if (D_84210DA0[i].unk_00 != 0) {
                 D_8423E568 = i;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 break;
             }
         }
     } else if (D_8423E568 == 4) {
         D_8423E568 = 5;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -509,12 +509,12 @@ void TeamSelection_TrainerSlots_HandleInput(void) {
             Audio_PlaySoundEffectById(0x01100012);
             D_8423E56C = 4;
         } else {
-            Audio_PlaySoundEffectById(8);
+            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
             D_8423E56C = 6;
         }
     } else if ((D_8423E57C != 0) && (BTN_IS_PRESSED(D_8423E570, BTN_B))) {
         D_8423E56C = 5;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     } else if (BTN_IS_PRESSED(D_8423E570, BTN_DUP)) {
         TeamSelection_TrainerSlots_MoveFromSpecialUp();
     } else if (BTN_IS_PRESSED(D_8423E570, BTN_DDOWN)) {
@@ -535,8 +535,8 @@ void TeamSelection_TrainerSlots_AnimateOpen(void) {
     s16 i;
 
     for (i = 0; i < 12; i++) {
-        D_8423D408[0][i].unk_030.x = D_84211544[D_8423E56E] / 100.0f;
-        D_8423D408[0][i].unk_030.y = D_8421155C[D_8423E56E] / 100.0f;
+        D_8423D408[0][i].scale.x = D_84211544[D_8423E56E] / 100.0f;
+        D_8423D408[0][i].scale.y = D_8421155C[D_8423E56E] / 100.0f;
     }
 
     D_8423E574 = ((((D_8423E56E * 0x32) + 0x32) / 12) + 6) & (u16)~1;
@@ -550,13 +550,13 @@ void TeamSelection_TrainerSlots_AnimateOpen(void) {
 
 void TeamSelection_TrainerSlots_AnimateSelected(void) {
     if (D_8423E56E++ < 12) {
-        D_8423D408[0][D_8423E568].unk_030.x = D_84211574[D_8423E56E] / 100.0f;
-        D_8423D408[0][D_8423E568].unk_030.y = D_8421158C[D_8423E56E] / 100.0f;
+        D_8423D408[0][D_8423E568].scale.x = D_84211574[D_8423E56E] / 100.0f;
+        D_8423D408[0][D_8423E568].scale.y = D_8421158C[D_8423E56E] / 100.0f;
 
-        D_8423D408[1][D_8423E568].unk_030.x = D_84211574[D_8423E56E] / 100.0f;
-        D_8423D408[1][D_8423E568].unk_030.y = D_8421158C[D_8423E56E] / 100.0f;
+        D_8423D408[1][D_8423E568].scale.x = D_84211574[D_8423E56E] / 100.0f;
+        D_8423D408[1][D_8423E568].scale.y = D_8421158C[D_8423E56E] / 100.0f;
 
-        D_8423D408[0][D_8423E568].unk_01E.z = 0;
+        D_8423D408[0][D_8423E568].rotation.z = 0;
     } else {
         ModelRenderer_ClearDisplayObject(&D_8423D408[0][D_8423E568]);
         ModelRenderer_ClearDisplayObject(&D_8423D408[1][D_8423E568]);
@@ -723,10 +723,10 @@ void TeamSelection_TrainerSlots_InitializeModels(void) {
         if (D_84210DA0[i].unk_00 != 0) {
             Model_InitDisplayObject(D_8423D408[0] + i, 0, 0, D_8423E4E8[i]);
             Model_InitDisplayObject(D_8423D408[1] + i, 0, 0, D_8423E500);
-            Vec3f_SetComponentsDuplicate(&D_8423D408[0][i].unk_024, D_84210DA0[i].unk_02 - 0x140, 0xF0 - D_84210DA0[i].unk_04, -579.f);
-            Vec3f_SetComponentsDuplicate(&D_8423D408[1][i].unk_024, D_84210DA0[i].unk_02 - 0x140, 0xE4 - D_84210DA0[i].unk_04,
+            Vec3f_SetComponentsDuplicate(&D_8423D408[0][i].position, D_84210DA0[i].unk_02 - 0x140, 0xF0 - D_84210DA0[i].unk_04, -579.f);
+            Vec3f_SetComponentsDuplicate(&D_8423D408[1][i].position, D_84210DA0[i].unk_02 - 0x140, 0xE4 - D_84210DA0[i].unk_04,
                           -579.0f);
-            D_8423D408[1][i].unk_01D = 0xB4;
+            D_8423D408[1][i].lodFraction = 0xB4;
         }
     }
 
@@ -734,8 +734,8 @@ void TeamSelection_TrainerSlots_InitializeModels(void) {
         D_8423E578 = Deck_FindFirstFreeTeamSlot();
         if (D_8423E578 == 0) {
             D_84210DD8[0] = 0;
-            D_8423D408[0][4].unk_01D = 0xA0;
-            D_8423D408[1][4].unk_01D = 0x64;
+            D_8423D408[0][4].lodFraction = 0xA0;
+            D_8423D408[1][4].lodFraction = 0x64;
         }
     }
 
@@ -761,7 +761,7 @@ void TeamSelection_TrainerSlots_PollGameBoySaves(void) {
 s32 TeamSelection_TrainerSlots_Initialize(s16 arg0) {
     s32 i;
     MemoryBlock* temp_v0 = MainPool_AllocState(main_pool_get_available(), 0);
-    unk_D_86002F58_004_000* var_s2;
+    DisplayObject* var_s2;
 
     D_8423D400 = process_geo_layout(temp_v0, D_84210DF4);
     D_8423E56A = arg0;
@@ -776,7 +776,7 @@ s32 TeamSelection_TrainerSlots_Initialize(s16 arg0) {
     var_s2 = &D_8423D408[0][0];
     for (i = 0; i < 12; var_s2++, i++) {
         ModelRenderer_AttachDisplayObject(var_s2);
-        D_8423D408[0][i].unk_000.unk_14 = i;
+        D_8423D408[0][i].node.callbackArg = i;
     }
 
     TeamSelection_TrainerSlots_PollGameBoySaves();

@@ -18,14 +18,14 @@ void miniRankingActorsInit(void) {
         ptr->unk_168 = Model_LoadByArchiveIndex(0xAB);
         Model_InitDisplayObject(&ptr->unk_000, 0, ptr->unk_23C, ptr->unk_168->unk_08->unk_00[0]);
         ModelAnim_SetAnimation(&ptr->unk_000, 0);
-        ptr->unk_000.unk_000.unk_01 &= ~1;
+        ptr->unk_000.node.flags &= ~1;
         miniActorAllToZero(ptr);
     }
 }
 
 void miniRankingActorSpawn(MiniActor* arg0) {
     if (arg0->mainState == 1) {
-        arg0->unk_000.unk_000.unk_01 |= 1;
+        arg0->unk_000.node.flags |= 1;
         miniChangeActorAnim(arg0, 0, -1, 0);
         arg0->mainState++;
     }
@@ -64,21 +64,21 @@ void miniRankingActorSetup1st(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, 
     MiniActor* sp34 = D_87906120;
 
     miniRankingActorSetup(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0);
-    sp34->unk_000.unk_000.unk_14 = 0;
+    sp34->unk_000.node.callbackArg = 0;
 }
 
 void miniRankingActorSetup2nd(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
     MiniActor* sp34 = &D_87906120[1];
 
     miniRankingActorSetup(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 1);
-    sp34->unk_000.unk_000.unk_14 = 1;
+    sp34->unk_000.node.callbackArg = 1;
 }
 
 void miniRankingActorSetup3rd(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s16 arg5, s16 arg6) {
     MiniActor* sp34 = &D_87906120[2];
 
     miniRankingActorSetup(sp34, arg0, arg1, arg2, arg3, arg4, arg5, arg6, 2);
-    sp34->unk_000.unk_000.unk_14 = 2;
+    sp34->unk_000.node.callbackArg = 2;
 }
 
 Gfx* MiniFx_BuildNodeColorRampDisplayList(Gfx* gfx, arg1_func_87903D64_014* arg1) {
@@ -102,8 +102,8 @@ Gfx* MiniFx_BuildNodeColorRampDisplayList(Gfx* gfx, arg1_func_87903D64_014* arg1
     u32 temp_a2;
     u32 temp_a3;
 
-    temp_a2 = D_8006F09C->unk_000.unk_14;
-    temp_a3 = (D_8006F09C->unk_040.unk_08 >> 0x10) + 1;
+    temp_a2 = D_8006F09C->node.callbackArg;
+    temp_a3 = (D_8006F09C->transformAnim.frameFixed >> 0x10) + 1;
 
     pad = arg1->unk_00;
     switch (pad) {

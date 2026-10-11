@@ -73,7 +73,7 @@ void BattleScene_GetOwnerCameraAnchor(Battler* arg0, Vec3f* arg1) {
         0x52, 0x73, 0x59, 0x91, 0x5F, 0x82, 0x58, 0x66, 0x0A,
     };
 
-    if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, sp18, 9) != 0) {
+    if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, sp18, 9) != 0) {
         BattleScene_GetOwnerBoneOrDefaultAnchor(arg0, arg1, 9);
     } else {
         BattleScene_GetOwnerBoneOrDefaultAnchor(arg0, arg1, 0x64);
@@ -270,13 +270,13 @@ void BattleScene_SetCameraSendOutShot(unk_D_86002F34_00C* arg0, s32 arg1) {
         BattleAnim_GetOwnerDefaultAnchorPosition(temp_s0, &sp58);
     } else {
         BattleAnim_Vec3fCopy(&sp58, &temp_s0->unk_448.unk_24.unk_0C);
-        sp58.y += temp_s0->unk_000.unk_024.y - BattleScene_GetParticipantModelHeight(temp_s0);
+        sp58.y += temp_s0->unk_000.position.y - BattleScene_GetParticipantModelHeight(temp_s0);
     }
 
     sp54 = BattleScene_ScaleCameraDistance(temp_s0, 3.0f, 300.0f);
-    if ((BattleScene_ByteArrayContains(temp_s0->unk_000.unk_01A, &sp50, 1) != 0) && (arg1 == 1)) {
+    if ((BattleScene_ByteArrayContains(temp_s0->unk_000.objectType, &sp50, 1) != 0) && (arg1 == 1)) {
         BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->unk_4B0 * 0x6AA4), sp54, 20.0f);
-    } else if (BattleScene_ByteArrayContains(temp_s0->unk_000.unk_01A, (u8*)&sp4C, 2) != 0) {
+    } else if (BattleScene_ByteArrayContains(temp_s0->unk_000.objectType, (u8*)&sp4C, 2) != 0) {
         BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->unk_4B0 * 0x6AA4), sp54, 20.0f);
     } else {
         BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->unk_4B0 * 0x754E), sp54, 0.0f);
@@ -294,19 +294,19 @@ void BattleScene_UpdateCameraModelOffset(Battler* arg0, unk_D_86002F34_00C* arg1
     UNUSED s32 pad[5];
     f32 sp3C = 0.0f;
 
-    if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, &D_843845F0, 1) != 0) {
+    if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, &D_843845F0, 1) != 0) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) / 1.5f;
-    } else if (BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, &D_843845F4, 1) != 0) {
+    } else if (BattleScene_ByteArrayContains(arg0->unk_000.objectType, &D_843845F4, 1) != 0) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 0.5f;
-    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, &D_843845F8, 1) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.objectType, &D_843845F8, 1) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
         sp3C = 2.0f * BattleAnim_GetOwnerModelHeight(arg0);
-    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.unk_01A, D_843845FC, 2) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->unk_000.objectType, D_843845FC, 2) != 0) && (arg0->unk_654.unk_34 & 0x200)) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 
     Vec3f_SetComponentsDuplicate(&arg0->unk_448.unk_18, arg0->unk_448.unk_24.unk_00.x, arg0->unk_448.unk_24.unk_00.y,
                   arg0->unk_448.unk_24.unk_00.z);
-    arg0->unk_448.unk_18.y = (arg0->unk_000.unk_024.y - BattleScene_GetParticipantModelHeight(arg0)) + arg0->unk_448.unk_18.y + sp3C;
+    arg0->unk_448.unk_18.y = (arg0->unk_000.position.y - BattleScene_GetParticipantModelHeight(arg0)) + arg0->unk_448.unk_18.y + sp3C;
     BattleAnim_Vec3fCopy(&gBattleScene.unk_00->unk_B8, &arg1->unk_60.at);
     BattleAnim_Vec3fCopy(&gBattleScene.unk_00->unk_C4, &arg1->unk_60.eye);
     Vec3f_CalculateDistanceAngles(&gBattleScene.unk_00->unk_B8, &gBattleScene.unk_00->unk_C4, &gBattleScene.unk_00->unk_70, &sp38->unk_44,
@@ -392,7 +392,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(unk_D_86002F34_00C* arg0, Battler*
     BattleScene_GetOwnerCameraAnchor(arg1, &sp64);
     Vec3f_CalculateDistanceAngles(&sp64, &arg1->unk_448.unk_18, &sp3C, &sp36, &sp34);
 
-    switch (arg1->unk_000.unk_01A) {
+    switch (arg1->unk_000.objectType) {
         case 0x5F:
             arg0->unk_24.fovy = 50.0f;
             return;
@@ -460,7 +460,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(unk_D_86002F34_00C* arg0, Battler*
     sp4C.y = sp58.y;
     Vec3f_CalculateDistanceAngles(&sp4C, &sp58, &sp3C, &sp36, &sp34);
 
-    switch (arg1->unk_000.unk_01A) {
+    switch (arg1->unk_000.objectType) {
         case 0x58:
         case 0x59:
         case 0x87:
@@ -506,7 +506,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(unk_D_86002F34_00C* arg0, Battler*
 
     if (arg1->unk_4B4 == 0xD) {
         var_fv1 = 0;
-    } else if ((arg1->unk_000.unk_01A == 0x58) || (arg1->unk_000.unk_01A == 0x59)) {
+    } else if ((arg1->unk_000.objectType == 0x58) || (arg1->unk_000.objectType == 0x59)) {
         temp_fv1 = sp3C / BattleScene_GetParticipantModelRadius(arg1);
         if (temp_fv1 <= 0.05f) {
             var_fv1 = sp3C / (BattleScene_GetParticipantModelRadius(arg1) * 90.0f);
@@ -562,7 +562,7 @@ void BattleScene_RecomputeCameraDistance(unk_D_86002F34_00C* arg0, Battler* arg1
 
     temp_lo = sp34 / 182;
     if ((temp_lo == 0x5A) || (temp_lo == -0x5A)) {
-        if (BattleScene_ByteArrayContains(arg1->unk_000.unk_01A, sp2C, sizeof(sp2C)) != 0) {
+        if (BattleScene_ByteArrayContains(arg1->unk_000.objectType, sp2C, sizeof(sp2C)) != 0) {
             sp44 = sp38;
         } else {
             sp44 = Math_StepToF(sp44, sp38, 30.0f, 5.0f);
@@ -651,7 +651,7 @@ s32 BattleScene_FrameCamera(unk_D_86002F34_00C* arg0, Battler* arg1) {
     BattleAnim_Vec3fCopy(&sp6C, &arg0->unk_60.at);
     BattleAnim_Vec3fCopy(&sp60, &arg0->unk_60.eye);
 
-    if ((arg1->unk_000.unk_01A != 0x5F) && (arg1->unk_4B4 != 0xD)) {
+    if ((arg1->unk_000.objectType != 0x5F) && (arg1->unk_4B4 != 0xD)) {
         BattleScene_UpdateCameraTargetFromOwner(arg0, arg1);
     }
 

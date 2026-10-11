@@ -5,8 +5,8 @@
 #include "src/memory.h"
 
 typedef struct unk_func_80011B94 {
-    /* 0x00 */ unk_D_86002F58_004_000_000 unk_00;
-    /* 0x18 */ Gfx* unk_18;
+    /* 0x00 */ DisplayNodeHeader display_node_header;
+    /* 0x18 */ Gfx* gfx;
 } unk_func_80011B94; // size = 0x1C
 
 typedef struct unk_D_8690A610_018 {
@@ -16,12 +16,12 @@ typedef struct unk_D_8690A610_018 {
 } unk_D_8690A610_018; // size = 0x8
 
 typedef struct unk_D_8690A610 {
-    /* 0x00 */ unk_D_86002F58_004_000_000 unk_00;
+    /* 0x00 */ DisplayNodeHeader node;
     /* 0x18 */ unk_D_8690A610_018 unk_18;
 } unk_D_8690A610; // size = 0x20
 
 void GeoNode_Init(GraphNode* arg0, u8 arg1);
-void GeoNode_SetCallback(GraphNode* arg0, func_D_86002F34_000_010 arg1, void* arg2);
+void GeoNode_SetCallback(GraphNode* arg0, GraphNodeCallback arg1, void* arg2);
 GraphNode* GeoNode_CreateContainer(MainPoolState* arg0, GraphNode* arg1);
 unk_D_86002F34_alt2* GeoNode_CreateWithReference(MainPoolState* arg0, unk_D_86002F34_alt2* arg1, GraphNode* arg2);
 unk_D_86002F34_00C* GeoNode_CreateCamera(MemoryBlock* arg0, unk_D_86002F34_00C* arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);
@@ -44,7 +44,7 @@ unk_D_86002F34_alt5* GeoNode_CreateTranslateRotate(MainPoolState* arg0, unk_D_86
 unk_D_86002F34_alt22* GeoNode_CreateTranslate(MainPoolState* arg0, unk_D_86002F34_alt22* arg1, Vec3f* arg2);
 unk_D_86002F34_alt6* GeoNode_CreateAnimatedPart(MainPoolState* arg0, unk_D_86002F34_alt6* arg1, s16 arg2, s16 arg3, s16 arg4, Vec3s* arg5, Vec3s* arg6, Vec3f* arg7);
 unk_D_86002F34_alt7* GeoNode_CreateDisplayListPart(MainPoolState* arg0, unk_D_86002F34_alt7* arg1, s32 arg2, Gfx* arg3, s16 arg4);
-unk_D_86002F58_004_000* GeoNode_CreateModelPart(MainPoolState* arg0, unk_D_86002F58_004_000* arg1, s16 arg2, Vec3f* arg3,
+DisplayObject* GeoNode_CreateModelPart(MainPoolState* arg0, DisplayObject* arg1, s16 arg2, Vec3f* arg3,
                                       Vec3s* arg4, Vec3f* arg5);
 unk_D_86002F34_alt8* GeoNode_CreateDisplayListMatrix(MainPoolState* arg0, unk_D_86002F34_alt8* arg1, s32 arg2, Gfx* arg3, MtxF* arg4);
 unk_D_86002F34_alt8* GeoNode_CreateDisplayListMatrixFromTransform(MainPoolState* arg0, unk_D_86002F34_alt8* arg1, s32 arg2, Gfx* arg3, Vec3f* arg4, Vec3s* arg5);
@@ -59,6 +59,9 @@ void GeoCamera_SetPerspective(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 
 void GeoCamera_SetEyeAtUp(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7);
 void GeoCamera_SetBackground(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg4, u8 arg5);
 void GeoCamera_SetBackgroundTexture(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s32 arg3, u32 arg4);
-void GraphNode_AppendChild(GraphNode* arg0, GraphNode* arg1);
+void GraphNode_AppendChild(GraphNode* parent, GraphNode* child);
+void GraphNode_RemoveChild(GraphNode* arg0, GraphNode* arg1);
+GraphNode* GraphNode_GetChildAtIndex(GraphNode* arg0, s32 arg1);
+
 
 #endif // _11BA0_H_

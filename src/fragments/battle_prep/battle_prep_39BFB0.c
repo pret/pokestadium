@@ -370,8 +370,8 @@ s32 BattlePrepTeamIcons_DrawActiveTeamBadge(s32 arg0, unk_func_80011B94* arg1) {
     u8* var_a3;
 
     if (arg0 == 5) {
-        temp_v1 = (unk_D_84B25A58*)D_8006F09C->unk_000.unk_14;
-        if (temp_v1->unk_04->unk_0A6 == D_8006F09C->unk_0A6) {
+        temp_v1 = (unk_D_84B25A58*)D_8006F09C->node.callbackArg;
+        if (temp_v1->unk_04->effectSlot == D_8006F09C->effectSlot) {
             var_a3 = temp_v1->unk_24->img_p;
         } else {
             var_a3 = temp_v1->unk_28->img_p;
@@ -379,7 +379,7 @@ s32 BattlePrepTeamIcons_DrawActiveTeamBadge(s32 arg0, unk_func_80011B94* arg1) {
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)var_a3 & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -392,8 +392,8 @@ s32 BattlePrepTeamIcons_DrawIconSingle(s32 arg0, unk_func_80011B94* arg1) {
     u8* var_a3;
 
     if (arg0 == 5) {
-        temp_t1 = (unk_D_84B25A58*)D_8006F09C->unk_000.unk_14;
-        temp_t2 = D_8006F09C->unk_0A6 - temp_t1->unk_04->unk_0A6;
+        temp_t1 = (unk_D_84B25A58*)D_8006F09C->node.callbackArg;
+        temp_t2 = D_8006F09C->effectSlot - temp_t1->unk_04->effectSlot;
         if (temp_t2 < 4) {
             var_a3 = D_3006000;
         } else {
@@ -403,14 +403,14 @@ s32 BattlePrepTeamIcons_DrawIconSingle(s32 arg0, unk_func_80011B94* arg1) {
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)PokeIcon_GetImage(temp_t1->unk_1C, temp_t2 - 1) & 0x1FFFFFFF);
         gSPSegment(gDisplayListHead++, 0x0E, (u32)Memmap_GetSegmentVaddr(var_a3) & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
 
         if (temp_t1->unk_2C[temp_t2 - 1] != 0) {
-            arg1->unk_00.unk_08->unk_01 |= 1;
+            arg1->display_node_header.nextSibling->flags |= 1;
         } else {
-            arg1->unk_00.unk_08->unk_01 &= ~1;
+            arg1->display_node_header.nextSibling->flags &= ~1;
         }
     }
     return 0;
@@ -422,8 +422,8 @@ s32 BattlePrepTeamIcons_DrawIconDouble(s32 arg0, unk_func_80011B94* arg1) {
     u8* var_a0;
 
     if (arg0 == 5) {
-        temp_a3 = (unk_D_84B25A58*)D_8006F09C->unk_000.unk_14;
-        temp_t0 = (D_8006F09C->unk_0A6 - temp_a3->unk_04->unk_0A6) % 8;
+        temp_a3 = (unk_D_84B25A58*)D_8006F09C->node.callbackArg;
+        temp_t0 = (D_8006F09C->effectSlot - temp_a3->unk_04->effectSlot) % 8;
         if (temp_t0 < 4) {
             var_a0 = D_3006000;
         } else {
@@ -433,7 +433,7 @@ s32 BattlePrepTeamIcons_DrawIconDouble(s32 arg0, unk_func_80011B94* arg1) {
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a3->unk_20[temp_t0 - 1] & 0x1FFFFFFF);
         gSPSegment(gDisplayListHead++, 0x0E, (u32)Memmap_GetSegmentVaddr(var_a0) & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -446,8 +446,8 @@ s32 BattlePrepTeamIcons_DrawBadgeIconSingle(s32 arg0, unk_func_80011B94* arg1) {
     s32 temp_a1;
 
     if (arg0 == 5) {
-        temp_t1 = (unk_D_84B25A58*)D_8006F09C->unk_000.unk_14;
-        temp_a1 = D_8006F09C->unk_0A6 - temp_t1->unk_04->unk_0A6;
+        temp_t1 = (unk_D_84B25A58*)D_8006F09C->node.callbackArg;
+        temp_a1 = D_8006F09C->effectSlot - temp_t1->unk_04->effectSlot;
 
         if (temp_a1 >= 0x10) {
             temp_a1 = (temp_a1 - 0x10) % 12;
@@ -464,14 +464,14 @@ s32 BattlePrepTeamIcons_DrawBadgeIconSingle(s32 arg0, unk_func_80011B94* arg1) {
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)PokeIcon_GetImage(temp_t1->unk_1C, temp_a1) & 0x1FFFFFFF);
         gSPSegment(gDisplayListHead++, 0x0E, (u32)Memmap_GetSegmentVaddr(var_a3) & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
 
         if (temp_t1->unk_2C[temp_a1] != 0) {
-            arg1->unk_00.unk_08->unk_01 |= 1;
+            arg1->display_node_header.nextSibling->flags |= 1;
         } else {
-            arg1->unk_00.unk_08->unk_01 &= ~1;
+            arg1->display_node_header.nextSibling->flags &= ~1;
         }
     }
     return 0;
@@ -483,8 +483,8 @@ s32 BattlePrepTeamIcons_DrawBadgeIconDouble(s32 arg0, unk_func_80011B94* arg1) {
     u8* var_a0;
 
     if (arg0 == 5) {
-        temp_t1 = (unk_D_84B25A58*)D_8006F09C->unk_000.unk_14;
-        temp_a3 = D_8006F09C->unk_0A6 - temp_t1->unk_04->unk_0A6;
+        temp_t1 = (unk_D_84B25A58*)D_8006F09C->node.callbackArg;
+        temp_a3 = D_8006F09C->effectSlot - temp_t1->unk_04->effectSlot;
 
         if (temp_a3 >= 0x10) {
             temp_a3 = (temp_a3 - 0x10) % 12;
@@ -501,7 +501,7 @@ s32 BattlePrepTeamIcons_DrawBadgeIconDouble(s32 arg0, unk_func_80011B94* arg1) {
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_t1->unk_20[temp_a3] & 0x1FFFFFFF);
         gSPSegment(gDisplayListHead++, 0x0E, (u32)Memmap_GetSegmentVaddr(var_a0) & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -607,17 +607,17 @@ void BattlePrepTeamIcons_InitDisplayObjectsSingleVisible(unk_D_84B25A58* arg0) {
 
     for (i = 1; i < 7; i++) {
         Model_InitDisplayObject(&arg0->unk_04[i], 0, 0, arg0->unk_08);
-        arg0->unk_04[i].unk_000.unk_14 = arg0;
+        arg0->unk_04[i].node.callbackArg = arg0;
     }
 
     for (i = 1; i < 4; i++) {
-        arg0->unk_04[i].unk_01E.y = 0x5800;
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[i].unk_024, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
+        arg0->unk_04[i].rotation.y = 0x5800;
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[i].position, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
     }
 
     for (i = 0; i < 3; i++) {
-        arg0->unk_04[4 + i].unk_01E.y = -0x5800;
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[4 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+        arg0->unk_04[4 + i].rotation.y = -0x5800;
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[4 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
     }
 }
 
@@ -626,16 +626,16 @@ void BattlePrepTeamIcons_InitDisplayObjectsSingleHidden(unk_D_84B25A58* arg0) {
 
     for (i = 1; i < 7; i++) {
         Model_InitDisplayObject(&arg0->unk_04[8 + i], 0, 0, arg0->unk_10);
-        arg0->unk_04[8 + i].unk_000.unk_14 = arg0;
-        arg0->unk_04[8 + i].unk_01E.y = -0x8000;
+        arg0->unk_04[8 + i].node.callbackArg = arg0;
+        arg0->unk_04[8 + i].rotation.y = -0x8000;
     }
 
     for (i = 1; i < 4; i++) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[8 + i].unk_024, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[8 + i].position, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
     }
 
     for (i = 0; i < 3; i++) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[12 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[12 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
     }
 }
 
@@ -645,27 +645,27 @@ void BattlePrepTeamIcons_InitDisplayObjectsDoubleVisible(unk_D_84B25A58* arg0) {
     for (i = 1; i < 4; i++) {
         Model_InitDisplayObject(&arg0->unk_04[15 + i], 0, 0, arg0->unk_08);
         Model_InitDisplayObject(&arg0->unk_04[18 + i], 0, 0, arg0->unk_0C);
-        arg0->unk_04[15 + i].unk_000.unk_14 = arg0;
-        arg0->unk_04[18 + i].unk_000.unk_14 = arg0;
+        arg0->unk_04[15 + i].node.callbackArg = arg0;
+        arg0->unk_04[18 + i].node.callbackArg = arg0;
 
-        arg0->unk_04[15 + i].unk_01E.y = 0x5800;
-        arg0->unk_04[18 + i].unk_01E.y = 0x5800;
+        arg0->unk_04[15 + i].rotation.y = 0x5800;
+        arg0->unk_04[18 + i].rotation.y = 0x5800;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[15 + i].unk_024, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[18 + i].unk_024, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[15 + i].position, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[18 + i].position, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
     }
 
     for (i = 0; i < 3; i++) {
         Model_InitDisplayObject(&arg0->unk_04[22 + i], 0, 0, arg0->unk_08);
         Model_InitDisplayObject(&arg0->unk_04[25 + i], 0, 0, arg0->unk_0C);
-        arg0->unk_04[22 + i].unk_000.unk_14 = arg0;
-        arg0->unk_04[25 + i].unk_000.unk_14 = arg0;
+        arg0->unk_04[22 + i].node.callbackArg = arg0;
+        arg0->unk_04[25 + i].node.callbackArg = arg0;
 
-        arg0->unk_04[22 + i].unk_01E.y = -0x5800;
-        arg0->unk_04[25 + i].unk_01E.y = -0x5800;
+        arg0->unk_04[22 + i].rotation.y = -0x5800;
+        arg0->unk_04[25 + i].rotation.y = -0x5800;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[22 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[25 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[22 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[25 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
     }
 }
 
@@ -676,27 +676,27 @@ void BattlePrepTeamIcons_InitDisplayObjectsDoubleHidden(unk_D_84B25A58* arg0) {
         Model_InitDisplayObject(&arg0->unk_04[27 + i], 0, 0, arg0->unk_10);
         Model_InitDisplayObject(&arg0->unk_04[30 + i], 0, 0, arg0->unk_14);
 
-        arg0->unk_04[27 + i].unk_000.unk_14 = arg0;
-        arg0->unk_04[30 + i].unk_000.unk_14 = arg0;
+        arg0->unk_04[27 + i].node.callbackArg = arg0;
+        arg0->unk_04[30 + i].node.callbackArg = arg0;
 
-        arg0->unk_04[27 + i].unk_01E.y = -0x8000;
-        arg0->unk_04[30 + i].unk_01E.y = -0x8000;
+        arg0->unk_04[27 + i].rotation.y = -0x8000;
+        arg0->unk_04[30 + i].rotation.y = -0x8000;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[27 + i].unk_024, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[30 + i].unk_024, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[27 + i].position, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[30 + i].position, (i * 64.0f) - 96.0f, 48.0f, -289.0f);
     }
 
     for (i = 0; i < 3; i++) {
         Model_InitDisplayObject(&arg0->unk_04[34 + i], 0, 0, arg0->unk_10);
         Model_InitDisplayObject(&arg0->unk_04[37 + i], 0, 0, arg0->unk_14);
-        arg0->unk_04[34 + i].unk_000.unk_14 = arg0;
-        arg0->unk_04[37 + i].unk_000.unk_14 = arg0;
+        arg0->unk_04[34 + i].node.callbackArg = arg0;
+        arg0->unk_04[37 + i].node.callbackArg = arg0;
 
-        arg0->unk_04[34 + i].unk_01E.y = -0x8000;
-        arg0->unk_04[37 + i].unk_01E.y = -0x8000;
+        arg0->unk_04[34 + i].rotation.y = -0x8000;
+        arg0->unk_04[37 + i].rotation.y = -0x8000;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[34 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[37 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[34 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[37 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
     }
 }
 
@@ -709,11 +709,11 @@ void BattlePrepTeamIcons_RevealStepSingle(unk_D_84B25A58* arg0, s16 arg1) {
 
     if (arg1 < 0xB) {
         for (i = 0; i < 4; i++) {
-            arg0->unk_04[i].unk_01E.y -= 0x800;
+            arg0->unk_04[i].rotation.y -= 0x800;
         }
 
         for (i = 4; i < 8; i++) {
-            arg0->unk_04[i].unk_01E.y += 0x800;
+            arg0->unk_04[i].rotation.y += 0x800;
         }
 
         BattlePrepTeamIcons_DrawHpBarsSingle(arg0, 0x64);
@@ -728,15 +728,15 @@ void BattlePrepTeamIcons_RevealStepDouble(unk_D_84B25A58* arg0, s16 arg1) {
     }
 
     if (arg1 < 0xB) {
-        arg0->unk_04[0].unk_01E.y -= 0x800;
-        arg0->unk_04[7].unk_01E.y += 0x800;
+        arg0->unk_04[0].rotation.y -= 0x800;
+        arg0->unk_04[7].rotation.y += 0x800;
 
         for (i = 16; i < 22; i++) {
-            arg0->unk_04[i].unk_01E.y -= 0x800;
+            arg0->unk_04[i].rotation.y -= 0x800;
         }
 
         for (i = 22; i < 28; i++) {
-            arg0->unk_04[i].unk_01E.y += 0x800;
+            arg0->unk_04[i].rotation.y += 0x800;
         }
 
         BattlePrepTeamIcons_DrawHpBarsDouble(arg0, 0x64);
@@ -811,15 +811,15 @@ void BattlePrepTeamIcons_FinalRevealSingle(unk_D_84B25A58* arg0, s16 arg1) {
     if (arg1 < 0x10) {
         for (i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; i++) {
             if (temp_s5[i].unk_25 != 0) {
-                arg0->unk_04[1 + i].unk_01E.y += 0x800;
-                arg0->unk_04[9 + i].unk_01E.y += 0x800;
+                arg0->unk_04[1 + i].rotation.y += 0x800;
+                arg0->unk_04[9 + i].rotation.y += 0x800;
             }
         }
 
         for (i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; i++) {
             if (temp_s6[i].unk_25 != 0) {
-                arg0->unk_04[4 + i].unk_01E.y -= 0x800;
-                arg0->unk_04[12 + i].unk_01E.y -= 0x800;
+                arg0->unk_04[4 + i].rotation.y -= 0x800;
+                arg0->unk_04[12 + i].rotation.y -= 0x800;
             }
         }
     }
@@ -828,7 +828,7 @@ void BattlePrepTeamIcons_FinalRevealSingle(unk_D_84B25A58* arg0, s16 arg1) {
         for (i = 1; i < 7; i++) {
             ModelRenderer_ClearDisplayObject(&arg0->unk_04[i]);
             BattlePrep_ResetDisplayObject(&arg0->unk_04[8 + i]);
-            arg0->unk_04[i].unk_01E.y = 0;
+            arg0->unk_04[i].rotation.y = 0;
         }
 
         for (i = 0; i < 3; i++) {
@@ -871,23 +871,23 @@ void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
     if (arg1 < 0x10) {
         for (i = 0; i < D_800AE540.unk_1194[0].unk_08[0]->unk_002; i++) {
             if (temp_s0[i].unk_25 != 0) {
-                arg0->unk_04[16 + i].unk_01E.y += 0x800;
-                arg0->unk_04[28 + i].unk_01E.y += 0x800;
+                arg0->unk_04[16 + i].rotation.y += 0x800;
+                arg0->unk_04[28 + i].rotation.y += 0x800;
             }
         }
 
         for (i = 0; i < D_800AE540.unk_1194[1].unk_08[0]->unk_002; i++) {
             if (temp_t1[i].unk_25 != 0) {
-                arg0->unk_04[22 + i].unk_01E.y -= 0x800;
-                arg0->unk_04[34 + i].unk_01E.y -= 0x800;
+                arg0->unk_04[22 + i].rotation.y -= 0x800;
+                arg0->unk_04[34 + i].rotation.y -= 0x800;
             }
         }
 
         if (var_a3 != NULL) {
             for (i = 0; i < D_800AE540.unk_1194[0].unk_08[1]->unk_002; i++) {
                 if (var_a3[i].unk_25 != 0) {
-                    arg0->unk_04[19 + i].unk_01E.y += 0x800;
-                    arg0->unk_04[31 + i].unk_01E.y += 0x800;
+                    arg0->unk_04[19 + i].rotation.y += 0x800;
+                    arg0->unk_04[31 + i].rotation.y += 0x800;
                 }
             }
         }
@@ -895,8 +895,8 @@ void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
         if (var_t0 != NULL) {
             for (i = 0; i < D_800AE540.unk_1194[1].unk_08[1]->unk_002; i++) {
                 if (var_t0[i].unk_25 != 0) {
-                    arg0->unk_04[25 + i].unk_01E.y -= 0x800;
-                    arg0->unk_04[37 + i].unk_01E.y -= 0x800;
+                    arg0->unk_04[25 + i].rotation.y -= 0x800;
+                    arg0->unk_04[37 + i].rotation.y -= 0x800;
                 }
             }
         }
@@ -904,43 +904,43 @@ void BattlePrepTeamIcons_FinalRevealDouble(unk_D_84B25A58* arg0, s16 arg1) {
 
     if (arg1 == 0x10) {
         for (i = 0; i < 3; i++) {
-            if (arg0->unk_04[16 + i].unk_01E.y == 0) {
+            if (arg0->unk_04[16 + i].rotation.y == 0) {
                 Model_InitDisplayObject(&arg0->unk_04[1 + i], 0, 0, arg0->unk_08);
             } else {
                 Model_InitDisplayObject(&arg0->unk_04[1 + i], 0, 0, arg0->unk_10);
             }
-            arg0->unk_04[1 + i].unk_000.unk_14 = arg0;
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[1 + i].unk_024, (i * 64.0f) - 32.0f, 48.0f, -289.0f);
+            arg0->unk_04[1 + i].node.callbackArg = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[1 + i].position, (i * 64.0f) - 32.0f, 48.0f, -289.0f);
         }
 
         for (i = 0; i < 3; i++) {
-            if (arg0->unk_04[19 + i].unk_01E.y == 0) {
+            if (arg0->unk_04[19 + i].rotation.y == 0) {
                 Model_InitDisplayObject(&arg0->unk_04[9 + i], 0, 0, arg0->unk_0C);
             } else {
                 Model_InitDisplayObject(&arg0->unk_04[9 + i], 0, 0, arg0->unk_14);
             }
-            arg0->unk_04[9 + i].unk_000.unk_14 = arg0;
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[9 + i].unk_024, (i * 64.0f) - 32.0f, 48.0f, -289.0f);
+            arg0->unk_04[9 + i].node.callbackArg = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[9 + i].position, (i * 64.0f) - 32.0f, 48.0f, -289.0f);
         }
 
         for (i = 0; i < 3; i++) {
-            if (arg0->unk_04[22 + i].unk_01E.y == 0) {
+            if (arg0->unk_04[22 + i].rotation.y == 0) {
                 Model_InitDisplayObject(&arg0->unk_04[4 + i], 0, 0, arg0->unk_08);
             } else {
                 Model_InitDisplayObject(&arg0->unk_04[4 + i], 0, 0, arg0->unk_10);
             }
-            arg0->unk_04[4 + i].unk_000.unk_14 = arg0;
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[4 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+            arg0->unk_04[4 + i].node.callbackArg = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[4 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
         }
 
         for (i = 0; i < 3; i++) {
-            if (arg0->unk_04[25 + i].unk_01E.y == 0) {
+            if (arg0->unk_04[25 + i].rotation.y == 0) {
                 Model_InitDisplayObject(&arg0->unk_04[12 + i], 0, 0, arg0->unk_0C);
             } else {
                 Model_InitDisplayObject(&arg0->unk_04[12 + i], 0, 0, arg0->unk_14);
             }
-            arg0->unk_04[12 + i].unk_000.unk_14 = arg0;
-            Vec3f_SetComponentsDuplicate(&arg0->unk_04[12 + i].unk_024, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
+            arg0->unk_04[12 + i].node.callbackArg = arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_04[12 + i].position, (i * 64.0f) - 96.0f, -48.0f, -289.0f);
         }
 
         for (i = 16; i < 40; i++) {
@@ -1040,7 +1040,7 @@ void BattlePrepTeamIcons_Update(unk_D_84B25A58* arg0) {
 void BattlePrepTeamIcons_LoadDexIdsSingle(unk_D_84B25A58* arg0) {
     s32 i;
     s32 count;
-    unk_D_86002F58_004_000_010* temp_s0;
+    ModelLoadContext* temp_s0;
 
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_1C, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0xC0, 1));
@@ -1057,7 +1057,7 @@ void BattlePrepTeamIcons_LoadDexIdsSingle(unk_D_84B25A58* arg0) {
 void BattlePrepTeamIcons_LoadDexIdsDouble(unk_D_84B25A58* arg0) {
     s32 i;
     s32 count;
-    unk_D_86002F58_004_000_010* temp_s0;
+    ModelLoadContext* temp_s0;
 
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_1C, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0x60, 1));
@@ -1102,19 +1102,19 @@ void BattlePrepTeamIcons_Load(unk_D_84B25A58* arg0, BinArchive* arg1) {
     arg0->unk_00 = 1;
 }
 
-s32 BattlePrepTeamIcons_InitDisplayObjects(unk_D_84B25A58* arg0, unk_D_86002F58_004_000* arg1) {
+s32 BattlePrepTeamIcons_InitDisplayObjects(unk_D_84B25A58* arg0, DisplayObject* arg1) {
     if (arg0->unk_00 == 2) {
         arg0->unk_00 = 3;
         arg0->unk_04 = arg1;
         arg0->unk_01 = 0;
-        arg1->unk_000.unk_14 = arg0;
+        arg1->node.callbackArg = arg0;
 
-        arg0->unk_04[7].unk_000.unk_14 = arg0;
-        arg0->unk_04[0].unk_01E.y = 0x5800;
-        arg0->unk_04[7].unk_01E.y = -0x5800;
+        arg0->unk_04[7].node.callbackArg = arg0;
+        arg0->unk_04[0].rotation.y = 0x5800;
+        arg0->unk_04[7].rotation.y = -0x5800;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[0].unk_024, -96.0f, 48.0f, -289.0f);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[7].unk_024, 96.0f, -48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[0].position, -96.0f, 48.0f, -289.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[7].position, 96.0f, -48.0f, -289.0f);
         Model_InitDisplayObject(&arg0->unk_04[0], 0, 0, arg0->unk_18);
         Model_InitDisplayObject(&arg0->unk_04[7], 0, 0, arg0->unk_18);
 

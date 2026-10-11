@@ -34,62 +34,62 @@ void Text_SetNumberToken(u32 arg0, u32 arg1) {
     }
 }
 
-void Text_SubstituteTokens(char* arg0, u32 arg1, s8* arg2) {
+void Text_SubstituteTokens(char* text, u32 text_length, s8* token) {
     u32 i;
-    s32 var_s2;
-    s32 temp_v0;
-    char sp58[12];
-    s8* var_s4;
+    s32 in_replace_mode;
+    s32 current_char;
+    char text_buffer[12];
+    s8* replacement;
     char* sp54;
-    u32 var_s3;
+    u32 written_count;
 
-    var_s2 = 0;
-    var_s3 = 0;
-    sp54 = var_s4;
-    var_s4 = sp54;
+    in_replace_mode = 0;
+    written_count = 0;
+    sp54 = replacement;
+    replacement = sp54;
     i = 0;
 
-    while (i < arg1 - 1u) {
-        switch (var_s2) {
+    while (i < text_length - 1u) {
+        switch (in_replace_mode) {
             case 0:
-                temp_v0 = *arg2++;
-                if (temp_v0 == '\x00') {
+                current_char = *token++;
+                if (current_char == '\x00') {
                     goto end;
                 }
 
-                if (temp_v0 == '#') {
-                    temp_v0 = *arg2++;
+                if (current_char == '#') {
+                    current_char = *token++;
 
-                    temp_v0 -= '0';
-                    temp_v0 = (*arg2++ + (temp_v0 * 10)) - '0';
-                    if ((temp_v0 > 0) && (temp_v0 < 10)) {
-                        sprintf(sp58, "%d", gTextTokenTable[temp_v0]);
-                        var_s4 = sp58;
-                        var_s2 = 1;
+                    current_char -= '0';
+                    current_char = (*token++ + (current_char * 10)) - '0';
+                    if ((current_char > 0) && (current_char < 10)) {
+                        sprintf(text_buffer, "%d", gTextTokenTable[current_char]);
+                        replacement = text_buffer;
+                        in_replace_mode = 1;
                         continue;
                     }
 
-                    if ((temp_v0 >= 0x14) && (temp_v0 < 0x2A)) {
-                        if (gTextTokenTable[temp_v0] != NULL) {
-                            var_s4 = gTextTokenTable[temp_v0];
-                            var_s2 = 1;
+                    if ((current_char >= 0x14) && (current_char < 0x2A)) {
+                        if (gTextTokenTable[current_char] != NULL) {
+                            replacement = gTextTokenTable[current_char];
+                            in_replace_mode = 1;
                         }
                         continue;
                     }
                 } else {
-                    *arg0++ = temp_v0;
-                    var_s3++;
+                    *text++ = current_char;
+                    written_count++;
                     i++;
                 }
                 break;
 
             case 1:
-                temp_v0 = *var_s4++;
-                if (temp_v0 == '\x00') {
-                    var_s2 = 0;
+                current_char = *replacement++;
+                if (current_char == '\x00') {
+                    in_replace_mode = 0;
                 } else {
-                    *arg0++ = temp_v0;
-                    var_s3++;
+                    *text++ = current_char;
+                    written_count++;
                     i++;
                 }
                 break;
@@ -97,21 +97,21 @@ void Text_SubstituteTokens(char* arg0, u32 arg1, s8* arg2) {
     }
 
 end:
-    *arg0++ = '\x00';
+    *text++ = '\x00';
 }
 
-char* Text_GetString(char* arg0, s32 arg1, char** arg2, u32 file_number) {
-    char* sp1C;
-    char* sp18 = (u32)arg2 + (u32)arg2[file_number + 1];
+char* Text_GetString(char* text, s32 text_length, char** string_array, u32 file_number) {
+    char* string;
+    char* string_array_lookup = (u32)string_array + (u32)string_array[file_number + 1];
 
-    if (arg0 == NULL) {
-        sp1C = sp18;
+    if (text == NULL) {
+        string = string_array_lookup;
     } else {
-        sp1C = arg0;
-        Text_SubstituteTokens(arg0, arg1, sp18);
+        string = text;
+        Text_SubstituteTokens(text, text_length, string_array_lookup);
     }
 
-    return sp1C;
+    return string;
 }
 
 s32 Text_CountLines(s8* arg0) {

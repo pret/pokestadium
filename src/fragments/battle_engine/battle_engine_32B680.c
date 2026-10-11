@@ -1548,11 +1548,11 @@ void BattleAnim_CallbackStartEffect125ModelBurstEmitter(Particle* arg0) {
 }
 
 void BattleAnim_BuildEffect125DisplayList(Gfx* arg0, u16 arg1) {
-    unk_D_86002F58_004_000* tmp = D_8006F09C;
+    DisplayObject* tmp = D_8006F09C;
 
     gDPPipeSync(arg0++);
 
-    gDPSetPrimColor(arg0++, 0, 0x80, 255, 255, 255, tmp->unk_01D);
+    gDPSetPrimColor(arg0++, 0, 0x80, 255, 255, 255, tmp->lodFraction);
 
     ParticleGfx_SetAnimatedTileSizeOnList(arg0++, 1, 1, 0x20, 0x20);
     ParticleGfx_SetAnimatedAuxTileSizeOnList(arg0++, 2, 2, 0x20, 0x20);
@@ -1789,11 +1789,11 @@ void func_84344B04(void) {
     s32 i;
     s32 var_s2 = 0;
     s32 tmp;
-    s32 end = gBattleAnimCurrentOwner->unk_000.unk_0A7;
+    s32 end = gBattleAnimCurrentOwner->unk_000.anchorCount;
 
     if (end != 0) {
         for (i = 0; i < end; i++) {
-            tmp = gBattleAnimCurrentOwner->unk_000.unk_0A8[i].unk_00;
+            tmp = gBattleAnimCurrentOwner->unk_000.anchors[i].id;
             BattleAnim_CreateEffectSlotForCurrentOwner(0, BattleAnim_CallbackMove73EndEffect31SpawnDescriptor42, &gDefaultParticleDescriptor, 0, 1, 0x10, tmp, 0, 0);
             var_s2++;
             if (var_s2 >= 8) {
@@ -3608,7 +3608,7 @@ void func_84349F80(s32 arg0, arg1_func_84344CE8* arg1) {
 }
 
 void func_84349FC8(Gfx* arg0, UNUSED arg1_func_8434E21C* arg1, UNUSED u16 arg2) {
-    unk_D_86002F58_004_000* sp24 = D_8006F09C;
+    DisplayObject* sp24 = D_8006F09C;
     s32 tmp = BattleAnim_GetOwnerContextParticle(D_8006F09C);
     UNUSED u8 sp1F;
     UNUSED u8 sp1E;
@@ -3659,7 +3659,7 @@ void func_84349FC8(Gfx* arg0, UNUSED arg1_func_8434E21C* arg1, UNUSED u16 arg2) 
 
     gDPSetCombineLERP(arg0++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED,
                       0, 0, 0, COMBINED);
-    gDPSetPrimColor(arg0++, 0, 0xFF, sp1D, sp1C, sp1B, sp24->unk_01D);
+    gDPSetPrimColor(arg0++, 0, 0xFF, sp1D, sp1C, sp1B, sp24->lodFraction);
     gDPSetEnvColor(arg0++, sp1A, sp19, sp18, 255);
 
     gSPEndDisplayList(arg0++);

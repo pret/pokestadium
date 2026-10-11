@@ -591,7 +591,7 @@ void MiniFx_BuildParticleRenderListVariantA(Gfx* arg0, unk_D_86002F34_000_014* a
 void MiniFx_GraphNodeBuildParticleRenderListVariantA(s32 arg0, arg1_func_87902F80* arg1) {
     if (arg0 == 2) {
         arg1->unk_18 = Gfx_AllocDisplayList(sizeof(Gfx) * 30);
-        MiniFx_BuildParticleRenderListVariantA(arg1->unk_18, arg1->unk_00.unk_14, D_8006F084);
+        MiniFx_BuildParticleRenderListVariantA(arg1->unk_18, arg1->node.callbackArg, D_8006F084);
     }
 }
 
@@ -619,6 +619,6 @@ void MiniFx_BuildParticleRenderListVariantB(Gfx* arg0, unk_D_86002F34_000_014* a
 void MiniFx_GraphNodeBuildParticleRenderListVariantB(s32 arg0, arg1_func_87902F80* arg1) {
     if (arg0 == 2) {
         arg1->unk_18 = Gfx_AllocDisplayList(sizeof(Gfx) * 30);
-        MiniFx_BuildParticleRenderListVariantB(arg1->unk_18, arg1->unk_00.unk_14, D_8006F084);
+        MiniFx_BuildParticleRenderListVariantB(arg1->unk_18, arg1->node.callbackArg, D_8006F084);
     }
 }

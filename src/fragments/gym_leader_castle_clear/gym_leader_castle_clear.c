@@ -27,24 +27,24 @@ typedef struct unk_D_83101E6C {
     /* 0x12 */ s16 unk_12;
 } unk_D_83101E6C; // size = 0x14
 
-typedef struct unk_D_83102218 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x08 */ f32 unk_08;
-} unk_D_83102218; // size = 0xC
+typedef struct CircleTransition {
+    /* 0x00 */ s16 fade_state;
+    /* 0x02 */ s16 width;
+    /* 0x04 */ s16 circle_height;
+    /* 0x08 */ f32 ratio;
+} CircleTransition; // size = 0xC
 
-typedef struct unk_D_83102224 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-} unk_D_83102224; // size = 0x8
+typedef struct FadeTimer {
+    /* 0x00 */ s16 mode;
+    /* 0x02 */ s16 timer;
+    /* 0x04 */ s16 fade;
+} FadeTimer; // size = 0x8
 
-static BinArchive* D_83101EE0;
-static u8* D_83101EE4;
-static s16 D_83101EE8;
+static BinArchive* background;
+static u8* bin_background;
+static s16 stage_fade_mode;
 static s16 D_83101EEA;
-static s16 D_83101EEC;
+static s16 tracking_icon_on;
 static s16 D_83101EEE;
 static s16 D_83101EF0;
 static GraphNode* D_83101EF4;
@@ -53,8 +53,8 @@ static GraphNode* D_83101EFC;
 static unk_D_83101F00 D_83101F00[2];
 static unk_D_83101F00* D_83102210;
 static unk_D_83101F00* D_83102214;
-static unk_D_83102218 D_83102218;
-static unk_D_83102224 D_83102224;
+static CircleTransition circle_fade;
+static FadeTimer background_fade;
 
 static Vtx D_83101BE0[] = {
     VTX(-100, 14, 0, 0, 0, 0x78, 0x32, 0xFF, 0xFF),      VTX(-100, 0, 0, 0, 448, 0xBB, 0x28, 0x8E, 0xFF),
@@ -118,7 +118,7 @@ static unk_D_83101E6C D_83101E6C[] = {
     { -1, 2.0f, 0xC8, 0xC8, 0x1E, 0, 0, 0 },
 };
 
-void Glc_UpdateSweepObject(unk_D_86002F58_004_000* arg0) {
+void Glc_UpdateSweepObject(DisplayObject* arg0) {
     unk_D_83101F00* ptr = (unk_D_83101F00*)arg0;
     f32 temp_fv0;
     s32 sp1C;
@@ -149,7 +149,7 @@ void Glc_UpdateSweepObject(unk_D_86002F58_004_000* arg0) {
                 var_fv0 = 320.0f;
             }
 
-            ptr->unk_000.unk_024.x = var_fv0 - 320.0f;
+            ptr->unk_000.position.x = var_fv0 - 320.0f;
             D_83101EEE = (s16)var_fv0 + 0xC8;
             D_83101EF0 = 0xAC;
             break;
@@ -186,7 +186,7 @@ s32 Glc_GeoBannerCallback(s32 arg0, UNUSED GraphNode* arg1) {
 void Glc_UpdateColorKeyframe(unk_D_83101F00* arg0) {
     unk_D_83101E6C* ptr1;
     unk_D_83101E6C* ptr2;
-    f32 var_fv1;
+    f32 scale;
 
     switch (arg0->unk_16A) {
         case 1:
@@ -202,7 +202,7 @@ void Glc_UpdateColorKeyframe(unk_D_83101F00* arg0) {
             arg0->unk_17A = ptr2->unk_10 + (((ptr1->unk_10 - ptr2->unk_10) * arg0->unk_16C) / arg0->unk_16E);
             arg0->unk_17C = ptr2->unk_12 + (((ptr1->unk_12 - ptr2->unk_12) * arg0->unk_16C) / arg0->unk_16E);
 
-            var_fv1 = ptr2->unk_04 + (((ptr1->unk_04 - ptr2->unk_04) * arg0->unk_16C) / arg0->unk_16E);
+            scale = ptr2->unk_04 + (((ptr1->unk_04 - ptr2->unk_04) * arg0->unk_16C) / arg0->unk_16E);
 
             if (arg0->unk_16C <= 0) {
                 arg0->unk_170++;
@@ -216,7 +216,7 @@ void Glc_UpdateColorKeyframe(unk_D_83101F00* arg0) {
                 arg0->unk_17A = ptr1->unk_10;
                 arg0->unk_17C = ptr1->unk_12;
 
-                var_fv1 = ptr1->unk_04;
+                scale = ptr1->unk_04;
 
                 if (arg0->unk_16C == -1) {
                     arg0->unk_16E = 0;
@@ -225,7 +225,7 @@ void Glc_UpdateColorKeyframe(unk_D_83101F00* arg0) {
                 }
             }
 
-            Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, var_fv1, var_fv1, var_fv1);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, scale, scale, scale);
             break;
 
         case 0:
@@ -261,24 +261,24 @@ s32 Glc_GeoSpriteCallback(s32 arg0, GraphNode* arg1) {
 }
 
 void Glc_InitCircleWipe(void) {
-    D_83102218.unk_00 = 0;
-    D_83102218.unk_02 = 0;
-    D_83102218.unk_08 = 7.0f;
+    circle_fade.fade_state = 0;
+    circle_fade.width = 0;
+    circle_fade.ratio = 7.0f;
 }
 
 void Glc_UpdateCircleWipe(void) {
-    s32 tmp;
+    s32 width_zero;
 
-    switch (D_83102218.unk_00) {
+    switch (circle_fade.fade_state) {
         case 1:
-            D_83102218.unk_02--;
-            D_83102218.unk_08 = (D_83102218.unk_02 * 7.0f) / D_83102218.unk_04;
+            circle_fade.width--;
+            circle_fade.ratio = (circle_fade.width * 7.0f) / circle_fade.circle_height;
 
-            tmp = D_83102218.unk_02 <= 0;
-            if (tmp) {
-                D_83102218.unk_00 = 2;
-                D_83102218.unk_02 = D_83102218.unk_04 = 0;
-                D_83102218.unk_08 = 0.0f;
+            width_zero = circle_fade.width <= 0;
+            if (width_zero) {
+                circle_fade.fade_state = 2;
+                circle_fade.width = circle_fade.circle_height = 0;
+                circle_fade.ratio = 0.0f;
             }
             break;
 
@@ -289,34 +289,34 @@ void Glc_UpdateCircleWipe(void) {
 }
 
 void Glc_DrawCircleWipe(void) {
-    s16 var_t0;
-    s16 var_t1;
-    s16 var_t3;
-    s16 var_t4;
-    s16 sp9E;
-    s16 sp9C;
-    s16 sp40;
-    s16 sp38;
-    s32 temp_ft2;
+    s16 temp_y1;
+    s16 screen_height;
+    s16 temp_z1;
+    s16 screen_width;
+    s16 width;
+    s16 height;
+    s16 y1;
+    s16 z1;
+    s32 texture_step;
 
-    Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 0x280, 0x1E0);
-    if (D_83102218.unk_00 == 0) {
+    Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 640, 0x1E0);
+    if (circle_fade.fade_state == 0) {
         return;
     }
 
-    if ((D_83102218.unk_08 <= 0.0f) || (D_83102218.unk_00 == 2)) {
+    if ((circle_fade.ratio <= 0.0f) || (circle_fade.fade_state == 2)) {
         gSPDisplayList(gDisplayListHead++, D_8006F4C0);
         gDPSetFillColor(gDisplayListHead++, 0x00010001);
         gDPFillRectangle(gDisplayListHead++, 0, 0, 639, 479);
         return;
     }
 
-    temp_ft2 = ROUND_MAX(1024.0f / D_83102218.unk_08);
-    sp9E = ROUND_MAX(128.0f * D_83102218.unk_08);
-    sp9C = ROUND_MAX(128.0f * D_83102218.unk_08);
+    texture_step = ROUND_MAX(1024.0f / circle_fade.ratio);
+    width = ROUND_MAX(128.0f * circle_fade.ratio);
+    height = ROUND_MAX(128.0f * circle_fade.ratio);
 
-    sp38 = (0x280 - sp9E) / 2;
-    sp40 = (0x1E0 - sp9C) / 2;
+    z1 = (0x280 - width) / 2;
+    y1 = (0x1E0 - height) / 2;
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
     gDPSetCombineLERP(gDisplayListHead++, 1, TEXEL0, ENVIRONMENT, 0, 1, TEXEL0, ENVIRONMENT, 0, 1, TEXEL0, ENVIRONMENT,
@@ -325,73 +325,73 @@ void Glc_DrawCircleWipe(void) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_3002C00, G_IM_FMT_I, 64, 64, 0, G_TX_MIRROR | G_TX_WRAP,
                            G_TX_MIRROR | G_TX_WRAP, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(sp38, sp40, sp9E, sp9C, 0, 0, temp_ft2, temp_ft2, 0);
+    Gfx_DrawTexturedRectClipped(z1, y1, width, height, 0, 0, texture_step, texture_step, 0);
 
-    var_t3 = sp38;
-    var_t0 = sp40;
+    temp_z1 = z1;
+    temp_y1 = y1;
 
     gSPDisplayList(gDisplayListHead++, D_8006F4C0);
     gDPSetFillColor(gDisplayListHead++, 0x00010001);
 
-    var_t4 = sp38 + sp9E;
-    var_t1 = sp40 + sp9C;
+    screen_width = z1 + width;
+    screen_height = y1 + height;
 
-    if (sp38 < 0) {
-        var_t3 = 0;
+    if (z1 < 0) {
+        temp_z1 = 0;
     }
 
-    if (sp40 < 0) {
-        var_t0 = 0;
+    if (y1 < 0) {
+        temp_y1 = 0;
     }
 
-    if (var_t4 >= 0x281) {
-        var_t4 = 0x280;
+    if (screen_width >= 641) {
+        screen_width = 640;
     }
 
-    if (var_t1 >= 0x1E1) {
-        var_t1 = 0x1E0;
+    if (screen_height >= 481) {
+        screen_height = 480;
     }
 
-    if (var_t0 > 0) {
-        gDPFillRectangle(gDisplayListHead++, 0, 0, 639, var_t0 - 1);
+    if (temp_y1 > 0) {
+        gDPFillRectangle(gDisplayListHead++, 0, 0, 639, temp_y1 - 1);
     }
 
-    if (var_t1 < 0x1E0) {
-        gDPFillRectangle(gDisplayListHead++, 0, var_t1, 639, 479);
+    if (screen_height < 480) {
+        gDPFillRectangle(gDisplayListHead++, 0, screen_height, 639, 479);
     }
 
-    if ((var_t3 > 0) && (var_t0 >= 0) && (var_t1 < 0x1E1)) {
-        gDPFillRectangle(gDisplayListHead++, 0, var_t0, var_t3 - 1, var_t1 - 1);
+    if ((temp_z1 > 0) && (temp_y1 >= 0) && (screen_height < 481)) {
+        gDPFillRectangle(gDisplayListHead++, 0, temp_y1, temp_z1 - 1, screen_height - 1);
     }
 
-    if ((var_t4 < 0x281) && (var_t0 >= 0) && (var_t1 < 0x1E1)) {
-        gDPFillRectangle(gDisplayListHead++, var_t4, var_t0, 639, var_t1 - 1);
+    if ((screen_width < 641) && (temp_y1 >= 0) && (screen_height < 481)) {
+        gDPFillRectangle(gDisplayListHead++, screen_width, temp_y1, 639, screen_height - 1);
     }
 }
 
-void Glc_StartCircleWipe(s16 arg0) {
-    if (arg0 > 0) {
-        D_83102218.unk_00 = 1;
-        D_83102218.unk_02 = D_83102218.unk_04 = arg0;
-        D_83102218.unk_08 = 7.0f;
+void Glc_StartCircleWipe(s16 start) {
+    if (start > 0) {
+        circle_fade.fade_state = 1;
+        circle_fade.width = circle_fade.circle_height = start;
+        circle_fade.ratio = 7.0f;
     }
 }
 
 void Glc_InitBackgroundFade(void) {
-    D_83102224.unk_00 = 0;
-    D_83102224.unk_02 = 0;
-    D_83102224.unk_04 = 0xC0;
+    background_fade.mode = 0;
+    background_fade.timer = 0;
+    background_fade.fade = 0xC0;
 }
 
 void Glc_UpdateBackgroundFade(void) {
-    switch (D_83102224.unk_00) {
+    switch (background_fade.mode) {
         case 1:
-            D_83102224.unk_02--;
-            D_83102224.unk_04 = ((D_83102224.unk_02 * -0x3F) / 10) + 0xFF;
-            if (D_83102224.unk_02 <= 0) {
-                D_83102224.unk_00 = 2;
-                D_83102224.unk_02 = 0;
-                D_83102224.unk_04 = 0xFF;
+            background_fade.timer--;
+            background_fade.fade = ((background_fade.timer * -0x3F) / 10) + 0xFF;
+            if (background_fade.timer <= 0) {
+                background_fade.mode = 2;
+                background_fade.timer = 0;
+                background_fade.fade = 0xFF;
             }
             break;
 
@@ -400,7 +400,7 @@ void Glc_UpdateBackgroundFade(void) {
     }
 }
 
-void Glc_DrawFadedBackground(u8* arg0, s16 arg1) {
+void Glc_DrawFadedBackground(u8* texture, s16 alpha) {
     s32 i;
     s32 j;
 
@@ -412,36 +412,36 @@ void Glc_DrawFadedBackground(u8* arg0, s16 arg1) {
     gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, 640, 480);
     gDPSetCombineLERP(gDisplayListHead++, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
                       ENVIRONMENT, 0);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, arg1);
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
 
     gDPPipeSync(gDisplayListHead++);
 
     for (i = 0; i < 0x1E0; i += 0x20) {
         for (j = 0; j < 0x280; j += 0x20) {
-            gDPLoadTextureBlock(gDisplayListHead++, arg0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+            gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                                 G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gDisplayListHead++, j << 2, i << 2, (j + 0x20) << 2, (i + 0x20) << 2, G_TX_RENDERTILE,
                                 0, 0, 0x0200, 0x0200);
 
-            arg0 += 0x200;
+            texture += 0x200;
         }
     }
 }
 
 void Glc_DrawBackground(void) {
-    if (D_83102224.unk_04 < 0xFF) {
-        Glc_DrawFadedBackground(D_83101EE4, D_83102224.unk_04);
+    if (background_fade.fade < 0xFF) {
+        Glc_DrawFadedBackground(bin_background, background_fade.fade);
     } else {
-        Gfx_DrawTiledRgba16Image(D_83101EE4);
+        Gfx_DrawTiledRgba16Image(bin_background);
     }
 }
 
-void Glc_StartBackgroundFade(s16 arg0) {
-    D_83102224.unk_00 = arg0;
-    if (D_83102224.unk_00 == 1) {
-        D_83102224.unk_02 = 0xA;
-        D_83102224.unk_04 = 0xC0;
+void Glc_StartBackgroundFade(s16 mode) {
+    background_fade.mode = mode;
+    if (background_fade.mode == 1) {
+        background_fade.timer = 0xA;
+        background_fade.fade = 0xC0;
     }
 }
 
@@ -475,15 +475,15 @@ void Glc_InitObjectAnimation(unk_D_83101F00* arg0, s16 arg1) {
                 arg0->unk_17A = ptr->unk_10;
                 arg0->unk_17C = ptr->unk_12;
 
-                Vec3f_SetComponentsDuplicate(&arg0->unk_000.unk_030, ptr->unk_04, ptr->unk_04, ptr->unk_04);
+                Vec3f_SetComponentsDuplicate(&arg0->unk_000.scale, ptr->unk_04, ptr->unk_04, ptr->unk_04);
                 break;
         }
     }
 }
 
-void Glc_DrawScisRectangle(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
-    gSPScisTextureRectangle(gDisplayListHead++, arg0 << 2, arg1 << 2, ((arg0 + arg2) - 1) << 2,
-                            ((arg1 + arg3) - 1) << 2, 0, arg4, arg5, arg6, arg7);
+void Glc_DrawScisRectangle(s16 x1, s16 y1, s16 width, s16 height, s16 texture_start_x, s16 texture_start_y, s16 texture_spread_x, s16 texture_spread_y) {
+    gSPScisTextureRectangle(gDisplayListHead++, x1 << 2, y1 << 2, ((x1 + width) - 1) << 2,
+                            ((y1 + height) - 1) << 2, 0, texture_start_x, texture_start_y, texture_spread_x, texture_spread_y);
 }
 
 void Glc_DrawTrackingIcon(void) {
@@ -506,11 +506,11 @@ void Glc_DrawTrackingIcon(void) {
 }
 
 void Glc_ClearInitState(void) {
-    D_83101EE8 = 0;
+    stage_fade_mode = 0;
     if (D_800AE540.unk_11F2 != 0) {
-        D_83101EEC = 1;
+        tracking_icon_on = 1;
     } else {
-        D_83101EEC = 0;
+        tracking_icon_on = 0;
     }
     D_83101EF0 = -0x64;
     D_83101EEE = D_83101EF0;
@@ -522,7 +522,7 @@ void Glc_ClearDraw(void) {
     BgStage_DrawFrame();
     Glc_DrawBackground();
     Geo_RenderRootNode(D_83101EF4);
-    if (D_83101EEC != 0) {
+    if (tracking_icon_on != 0) {
         Glc_DrawTrackingIcon();
     }
     Glc_DrawCircleWipe();
@@ -532,10 +532,10 @@ void Glc_ClearDraw(void) {
 s32 Glc_ClearAdvanceState(void) {
     s32 sp1C = 1;
 
-    switch (D_83101EE8) {
+    switch (stage_fade_mode) {
         case 0:
             if (StageContext_GetFadeMode() == 0) {
-                D_83101EE8 = 1;
+                stage_fade_mode = 1;
                 D_83101EEA = 0;
                 Glc_InitObjectAnimation(D_83102210, 1);
             }
@@ -555,7 +555,7 @@ s32 Glc_ClearAdvanceState(void) {
                         }
 
                         if (D_83101EEA >= 0x1E) {
-                            D_83101EE8 = 2;
+                            stage_fade_mode = 2;
                             D_83101EEA = 0;
                             Glc_StartCircleWipe(0xF);
                             StageContext_SetClearColor(1);
@@ -566,7 +566,7 @@ s32 Glc_ClearAdvanceState(void) {
             break;
 
         case 2:
-            if (D_83102218.unk_00 == 2) {
+            if (circle_fade.fade_state == 2) {
                 sp1C = 0;
             }
             break;
@@ -616,16 +616,16 @@ void Glc_ClearInitGraphics(void) {
 
         switch (i) {
             case 0:
-                Vec3f_SetComponentsDuplicate(&ptr->unk_000.unk_024, -520.0f, 44.0f, -579.0f);
-                Vec3f_SetComponentsDuplicate(&ptr->unk_000.unk_030, 2.0f, 2.0f, 2.0f);
+                Vec3f_SetComponentsDuplicate(&ptr->unk_000.position, -520.0f, 44.0f, -579.0f);
+                Vec3f_SetComponentsDuplicate(&ptr->unk_000.scale, 2.0f, 2.0f, 2.0f);
                 Model_InitDisplayObject(&ptr->unk_000, 0, 0, D_83101EF8);
                 ptr->unk_168 = 1;
                 D_83102210 = ptr;
                 break;
 
             case 1:
-                Vec3f_SetComponentsDuplicate(&ptr->unk_000.unk_024, 0.0, -24.0f, -579.0f);
-                Vec3f_SetComponentsDuplicate(&ptr->unk_000.unk_030, 0.0f, 0.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&ptr->unk_000.position, 0.0, -24.0f, -579.0f);
+                Vec3f_SetComponentsDuplicate(&ptr->unk_000.scale, 0.0f, 0.0f, 0.0f);
                 Model_InitDisplayObject(&ptr->unk_000, 0, 0, D_83101EFC);
                 ptr->unk_168 = 2;
                 D_83102214 = ptr;
@@ -635,21 +635,21 @@ void Glc_ClearInitGraphics(void) {
 }
 
 s32 GymLeaderCastleClear_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    unk_func_80007444* stage_context;
 
     main_pool_push_state('CLRG');
 
     Gfx_InitDisplayListBuffers(0x10000, 0);
-    sp24 = StageContext_Allocate(1, 0, 2, 0, 2, 1);
+    stage_context = StageContext_Allocate(1, 0, 2, 0, 2, 1);
     Font_Init(0x10, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_3000000, gym_leader_castle_clear_gfx, 0);
-    D_83101EE0 = ASSET_LOAD2(backgrounds, 1, 1);
-    D_83101EE4 = BinArchive_GetFile(D_83101EE0, 0xE);
+    background = ASSET_LOAD2(backgrounds, 1, 1);
+    bin_background = BinArchive_GetFile(background, 0xE);
 
     Glc_ClearInitGraphics();
-    StageContext_Activate(sp24);
+    StageContext_Activate(stage_context);
     Glc_ClearRunLoop();
     StageLoader_RunFrames(2);
     StageContext_Deactivate();

@@ -22,7 +22,7 @@ typedef struct unk_D_8423D3A8 {
     /* 0x0E */ unk_D_800A7440 unk_0E;
     /* 0x16 */ unk_D_800A7440 unk_16;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ unk_D_86002F58_004_000_010* unk_24;
+    /* 0x24 */ ModelLoadContext* unk_24;
     /* 0x28 */ unk_func_8001B1FC* unk_28;
     /* 0x2C */ unk_D_838067F0_0168_0000* unk_2C;
 } unk_D_8423D3A8; // size >= 0x30

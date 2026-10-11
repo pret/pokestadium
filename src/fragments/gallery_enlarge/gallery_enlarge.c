@@ -19,7 +19,7 @@ static unk_func_80031270* D_837004B0 = NULL;
 
 void Gallery_EnlargeInit(void) {
     UNUSED s32 pad;
-    unk_D_86002F58_004_000_010* sp28;
+    ModelLoadContext* sp28;
 
     D_837004C0 = 0;
     sp28 = PokeIcon_AllocFramebuffers(1);
@@ -73,7 +73,7 @@ s32 Gallery_EnlargeUpdate(void) {
         case 1:
             if (Gallery_EnlargeCheckExitInput() != 0) {
                 D_837004C0 = 2;
-                Audio_PlaySoundEffectById(0x1A);
+                Audio_PlaySoundEffectById(SFX_ZOOM_OUT);
                 StageFade_StartFromTransparent(1);
             }
             break;

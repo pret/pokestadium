@@ -1355,7 +1355,7 @@ s32 Audio_PlayCategory12SoundCommand(s32 arg0, UNUSED s32 arg1, UNUSED s32 arg2)
     D_80079014 = sp24;
 
     switch (arg0) {
-        case 0x1200001:
+        case SFX_TRADE_TEXT:
             Audio_QueueFadeSoundCommand(D_8007904C, 1);
             var_fv1 = __ull_to_f(__ull_rem(osGetTime(), 8)) - 4.0f;
             sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 7, 0x80, 0x80, -1);
@@ -1363,20 +1363,20 @@ s32 Audio_PlayCategory12SoundCommand(s32 arg0, UNUSED s32 arg1, UNUSED s32 arg2)
             D_8007904C = sp4C;
             break;
 
-        case 0x1200002:
+        case SFX_TRADE_BEGIN:
             sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 1, 0x80, 0x80, -1);
             D_80079050 = sp4C;
             D_80079064 = 0;
             break;
 
-        case 0x1200003:
+        case SFX_TRADE_END:
             Audio_QueueFadeSoundCommand(D_80079050, 0x3C);
             Audio_QueueFadeSoundCommand(D_80079054, 0x3C);
             D_80079060 = 0;
             sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 3, 0x80, 0x80, -1);
             break;
 
-        case 0x1200004:
+        case SFX_TRADE_LIGHT_ON:
             if (D_80079060 == 0) {
                 sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 2, 0x80, 0x80, -1);
                 D_80079054 = sp4C;
@@ -1388,18 +1388,18 @@ s32 Audio_PlayCategory12SoundCommand(s32 arg0, UNUSED s32 arg1, UNUSED s32 arg2)
             Audio_QueueVoiceDetune(D_80079054, var_fv1);
             break;
 
-        case 0x1200005:
+        case SFX_TRADE_BALL_APPEAR:
             sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 4, 0x80, 0x80, -1);
             D_80079058 = sp4C;
             break;
 
-        case 0x1200006:
+        case SFX_TRADE_BALL_READY:
             Audio_QueueFadeSoundCommand(D_80079054, 0x5A);
             Audio_QueueFadeSoundCommand(D_80079058, 1);
             sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 5, 0x80, 0x80, -1);
             break;
 
-        case 0x1200007:
+        case SFX_EVOLUTION_START:
             D_8007905C = sp4C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 6, 0x80, 0x80, -1);
             Audio_FadeOutAll(0x78);
             D_80079064 = 1;
@@ -1415,7 +1415,7 @@ s32 Audio_PlayCategory12SoundCommand(s32 arg0, UNUSED s32 arg1, UNUSED s32 arg2)
             if (D_80079064 != 0) {
                 Audio_StartMusicTrack(0x10);
             }
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             D_80079064 = 0;
             break;
 

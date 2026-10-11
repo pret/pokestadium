@@ -7,7 +7,7 @@ void DisplayList_BuildRotationMatrixSegmentAlt(Gfx* gfx) {
     Mtx* mtx;
     u8 angle;
 
-    angle = D_8006F09C->unk_0A6 & 3;
+    angle = D_8006F09C->effectSlot & 3;
     mtx = Gfx_AllocDisplayList(0x40);
     guRotate(mtx, D_800AF780[angle], 1.0f, 0.0f, 0.0f);
     gSPMatrix(gfx++, mtx, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

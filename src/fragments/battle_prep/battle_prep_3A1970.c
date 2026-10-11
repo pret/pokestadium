@@ -120,7 +120,7 @@ void BattlePrep_TrophyModelGrow(unk_D_84B26640_010* arg0) {
     if (arg0->unk_01 == 8) {
         arg0->unk_00 = 0;
     }
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04->unk_030, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04->scale, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f);
 }
 
 void BattlePrep_TrophyModelShrink(unk_D_84B26640_010* arg0) {
@@ -129,7 +129,7 @@ void BattlePrep_TrophyModelShrink(unk_D_84B26640_010* arg0) {
         arg0->unk_00 = 0;
         ModelRenderer_ClearDisplayObject(arg0->unk_04);
     } else {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04->unk_030, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04->scale, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f, arg0->unk_01 * 0.125f);
     }
 }
 
@@ -149,18 +149,18 @@ void BattlePrep_UpdateTrophyModel(unk_D_84B26640_010* arg0) {
     }
 }
 
-void BattlePrep_StartTrophyModelGrow(unk_D_84B26640_010* arg0, unk_D_86002F58_004_000* arg1) {
+void BattlePrep_StartTrophyModelGrow(unk_D_84B26640_010* arg0, DisplayObject* arg1) {
     arg0->unk_04 = arg1;
     arg0->unk_01 = 0;
     arg0->unk_00 = 2;
     Model_InitDisplayObject(arg1, 1, 0, arg0->unk_08);
-    arg0->unk_04->unk_000.unk_14 = arg0;
+    arg0->unk_04->node.callbackArg = arg0;
     if (arg0->unk_02 == 0) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04->unk_024, 32.0f, 26.0f, -288.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04->position, 32.0f, 26.0f, -288.0f);
     } else {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04->unk_024, -96.0f, 80.0f, -288.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04->position, -96.0f, 80.0f, -288.0f);
     }
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04->unk_030, 0.1f, 0.1f, 0.1f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04->scale, 0.1f, 0.1f, 0.1f);
 }
 
 void BattlePrep_StartTrophyModelShrink(unk_D_84B26640_010* arg0) {

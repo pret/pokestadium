@@ -89,7 +89,7 @@ typedef struct unk_D_82F20A10 {
     /* 0x14 */ BattleMon* unk_14;
     /* 0x18 */ unk_D_82F144D0* unk_18;
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ unk_D_86002F58_004_000_010* unk_20;
+    /* 0x20 */ ModelLoadContext* unk_20;
     /* 0x24 */ unk_func_8001B1FC* unk_24;
 } unk_D_82F20A10; // size >= 0x28
 
@@ -129,7 +129,7 @@ typedef struct unk_D_82F20A88 {
     /* 0x01C */ f32 unk_01C;
     /* 0x020 */ f32 unk_020;
     /* 0x024 */ u8* unk_024;
-    /* 0x028 */ unk_D_86002F58_004_000 unk_028;
+    /* 0x028 */ DisplayObject unk_028;
 } unk_D_82F20A88; // size = 0x190
 
 typedef struct unk_D_82F210E0 {
@@ -217,7 +217,7 @@ typedef struct unk_D_82F21238 {
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ BattleMon* unk_24;
-    /* 0x28 */ unk_D_86002F58_004_000_010* unk_28;
+    /* 0x28 */ ModelLoadContext* unk_28;
     /* 0x2C */ unk_func_8001B1FC* unk_2C;
     /* 0x30 */ unk_D_82F20A40_00E unk_30;
 } unk_D_82F21238; // size = 0x38

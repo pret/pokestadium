@@ -20,19 +20,19 @@
 #include "src/stage_loader.h"
 #include "src/controller.h"
 
-static unk_D_86002F58_004_000 D_865092E0;
-static unk_D_86002F58_004_000 D_86509448;
-static unk_D_86002F58_004_000 D_865095B0;
-static unk_D_86002F58_004_000 D_86509718;
-static unk_D_86002F58_004_000 D_86509880;
-static unk_D_86002F58_004_000 D_865099E8;
-static unk_D_86002F58_004_000 D_86509B50;
-static unk_D_86002F58_004_000 D_86509CB8;
-static unk_D_86002F58_004_000 D_86509E20;
-static unk_D_86002F58_004_000 D_86509F88;
-static unk_D_86002F58_004_000 D_8650A0F0;
-static unk_D_86002F58_004_000 D_8650A258;
-static unk_D_86002F58_004_000 D_8650A3C0;
+static DisplayObject D_865092E0;
+static DisplayObject D_86509448;
+static DisplayObject D_865095B0;
+static DisplayObject D_86509718;
+static DisplayObject D_86509880;
+static DisplayObject D_865099E8;
+static DisplayObject D_86509B50;
+static DisplayObject D_86509CB8;
+static DisplayObject D_86509E20;
+static DisplayObject D_86509F88;
+static DisplayObject D_8650A0F0;
+static DisplayObject D_8650A258;
+static DisplayObject D_8650A3C0;
 
 static unk_D_864027C0 D_86502C20[] = {
     { -60.0f, 7.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0, 0xA00, 0 },
@@ -41,7 +41,7 @@ static unk_D_864027C0 D_86502C20[] = {
     { 60.0f, 7.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0, -0xA00, 0 },
 };
 
-static unk_D_86002F58_004_000* D_86502CA0[] = {
+static DisplayObject* D_86502CA0[] = {
     &D_865092E0, &D_86509448, &D_865095B0, &D_86509718, &D_86509880, &D_865099E8, &D_86509B50,
     &D_86509CB8, &D_86509E20, &D_86509F88, &D_8650A0F0, &D_8650A258, &D_8650A3C0,
 };
@@ -77,7 +77,7 @@ static u8 D_86502E70 = 0;
 
 unk_D_8650A528 D_8650A528[4];
 unk_D_8650A528* D_8650AB28;
-static unk_D_86002F58_004_000* D_8650AB2C;
+static DisplayObject* D_8650AB2C;
 unk_D_8650AB30 D_8650AB30[4];
 unk_D_8650AB30* D_8650AD70;
 
@@ -186,8 +186,8 @@ void DynamoGame_UpdatePlayerAnimState(void) {
                             break;
                     }
                 } else if ((D_8650AB28->unk_008 == 6) &&
-                           (((D_86502E6C != 0) && ((D_8650AB28->unk_014.unk_040.unk_08 >> 0x10) == 0x37)) ||
-                            ((D_86502E70 != 0) && ((D_8650AB28->unk_014.unk_040.unk_08 >> 0x10) == 0x5E)))) {
+                           (((D_86502E6C != 0) && ((D_8650AB28->unk_014.transformAnim.frameFixed >> 0x10) == 0x37)) ||
+                            ((D_86502E70 != 0) && ((D_8650AB28->unk_014.transformAnim.frameFixed >> 0x10) == 0x5E)))) {
                     var_s1 = 1;
                 }
             } else if ((D_86502CD4 == 0) && (D_8650AB28->unk_00E >= 3) &&
@@ -253,9 +253,9 @@ void DynamoGame_UpdatePlayerAnimState(void) {
                         ModelAnim_SetEventFrame(&D_8650AB28->unk_014, 0x4B);
                     }
                 } else if (var_s1 == 2) {
-                    ModelAnim_SetFrame(&D_8650AB28->unk_014, D_8650AB28->unk_014.unk_040.unk_08 >> 0x10);
+                    ModelAnim_SetFrame(&D_8650AB28->unk_014, D_8650AB28->unk_014.transformAnim.frameFixed >> 0x10);
                     if (D_8650AB28->unk_008 != 0) {
-                        ModelAnim_SetEventFrame(&D_8650AB28->unk_014, D_8650AB28->unk_014.unk_040.unk_08 >> 0x10);
+                        ModelAnim_SetEventFrame(&D_8650AB28->unk_014, D_8650AB28->unk_014.transformAnim.frameFixed >> 0x10);
                     }
                 } else {
                     ModelAnim_SetFrame(&D_8650AB28->unk_014, 0);
@@ -287,9 +287,9 @@ void DynamoGame_SyncChainLinkAnimations(void) {
                 if (D_8650A528[i - 1].unk_00C != 1) {
                     var_a0 = 1;
                     if (D_8650A528[i - 1].unk_004 == 0) {
-                        D_86502CA0[i]->unk_024 = D_8650A528[i - 1].unk_014.unk_0EC;
+                        D_86502CA0[i]->position = D_8650A528[i - 1].unk_014.anchors[4].position;
                     } else if (D_8650A528[i - 1].unk_004 == 1) {
-                        D_86502CA0[i]->unk_024 = D_8650A528[i - 1].unk_014.unk_0DC;
+                        D_86502CA0[i]->position = D_8650A528[i - 1].unk_014.anchors[3].position;
                     }
                 }
                 break;
@@ -611,7 +611,7 @@ void DynamoGame_WaitForStart(void) {
             if (gPlayer1Controller->buttonPressed & 0x1000) {
                 var_s2 = 0;
             } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 Widget_PauseMenuTrigger(2);
                 D_87B000D0 = 1;
                 return;
@@ -712,7 +712,7 @@ void DynamoGame_ShowResultText(void) {
 }
 
 void DynamoGame_InitCamera(void) {
-    D_87B000EC = D_87B000E8->unk_00.unk_0C;
+    D_87B000EC = D_87B000E8->node.children;
 
     D_87B000F0 = -0x200;
     D_87B000F2 = 0;
@@ -762,24 +762,24 @@ void DynamoGame_LoadAssets(void) {
 
                 D_8650AB28->unk_008 = 0;
                 ModelAnim_SetAnimation(D_8650AB2C, D_8650AB28->unk_008);
-                ModelAnim_SetFrame(D_8650AB2C, MiniGame_RandomRange(D_8650AB2C->unk_040.unk_04->unk_0A));
+                ModelAnim_SetFrame(D_8650AB2C, MiniGame_RandomRange(D_8650AB2C->transformAnim.data->endFrame));
 
-                D_8650AB2C->unk_024.x = D_86502C20[j].unk_00;
-                D_8650AB2C->unk_024.y = D_86502C20[j].unk_04;
+                D_8650AB2C->position.x = D_86502C20[j].unk_00;
+                D_8650AB2C->position.y = D_86502C20[j].unk_04;
 
                 if (i == 0) {
-                    D_8650AB2C->unk_024.y += 0.15f;
+                    D_8650AB2C->position.y += 0.15f;
                 }
 
-                D_8650AB2C->unk_024.z = D_86502C20[j].unk_08;
+                D_8650AB2C->position.z = D_86502C20[j].unk_08;
 
-                D_8650AB2C->unk_030.x = D_86502C20[j].unk_0C;
-                D_8650AB2C->unk_030.y = D_86502C20[j].unk_10;
-                D_8650AB2C->unk_030.z = D_86502C20[j].unk_14;
+                D_8650AB2C->scale.x = D_86502C20[j].unk_0C;
+                D_8650AB2C->scale.y = D_86502C20[j].unk_10;
+                D_8650AB2C->scale.z = D_86502C20[j].unk_14;
 
-                D_8650AB2C->unk_01E.x = D_86502C20[j].unk_18;
-                D_8650AB2C->unk_01E.y = D_86502C20[j].unk_1A;
-                D_8650AB2C->unk_01E.z = D_86502C20[j].unk_1C;
+                D_8650AB2C->rotation.x = D_86502C20[j].unk_18;
+                D_8650AB2C->rotation.y = D_86502C20[j].unk_1A;
+                D_8650AB2C->rotation.z = D_86502C20[j].unk_1C;
 
                 D_8650AB28->unk_00C = 0;
                 D_8650AB28->unk_00E = 0;
@@ -807,7 +807,7 @@ void DynamoGame_LoadAssets(void) {
             ModelRenderer_AttachDisplayObject(D_8650AB2C);
             Model_InitDisplayObject(D_8650AB2C, 0, sp5C[j], D_87B000E4->unk_08->unk_00[0]);
             ModelAnim_SetAnimation(D_8650AB2C, 0);
-            ModelAnim_SetFrame(D_8650AB2C, D_8650AB2C->unk_040.unk_04->unk_0A);
+            ModelAnim_SetFrame(D_8650AB2C, D_8650AB2C->transformAnim.data->endFrame);
         }
     }
 

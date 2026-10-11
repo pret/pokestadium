@@ -18,7 +18,7 @@ typedef struct unk_D_81304008 {
     /* 0x01C */ u8* unk_01C;
     /* 0x020 */ f32 unk_020;
     /* 0x020 */ f32 unk_024;
-    /* 0x020 */ unk_D_86002F58_004_000 unk_028;
+    /* 0x020 */ DisplayObject unk_028;
 } unk_D_81304008; // size = 0x190
 
 typedef struct unk_D_81303FA8 {

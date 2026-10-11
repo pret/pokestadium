@@ -292,7 +292,7 @@ s32 LabPC_CheckBox_HandleInput(unk_func_88201DA0* arg0, Controller* arg1) {
             if (arg1->buttonPressed & 0x4000) {
                 var_v1 = 0x80000002;
             } else if (arg1->buttonPressed & 0x8000) {
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
 
                 arg0->unk_4C->unk_0C = arg0->unk_34[arg0->unk_30->unk_38].unk_000;
                 arg0->unk_4C->unk_10 = arg0->unk_60 >> 0x10;
@@ -623,14 +623,14 @@ s32 LabPC_BoxPairSelector_HandleInput(unk_func_882025E0_1A9780* arg0, Controller
                 switch (arg0->unk_2C) {
                     case 0:
                         if (LabPC_AllBoxesEmpty(arg0->unk_24[0]->unk_2C) != 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_00.unk_20->unk_60, arg0->unk_3C[0].unk_00, arg0->unk_3C[0].unk_04,
                                 arg0->unk_3C[0].unk_08);
                             ((func8850A3CC)Memmap_GetFragmentVaddr(WidgetTree_RunMessagePanelWithSound))(arg0->unk_00.unk_20->unk_60, arg1);
                             var_a2 = 1;
                         } else if (LabPC_NoEmptyBoxAvailable(arg0->unk_24[1]->unk_2C) != 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_00.unk_20->unk_60, arg0->unk_3C[4].unk_00, arg0->unk_3C[4].unk_04,
                                 arg0->unk_3C[4].unk_08);
@@ -645,7 +645,7 @@ s32 LabPC_BoxPairSelector_HandleInput(unk_func_882025E0_1A9780* arg0, Controller
 
                     case 1:
                         if (LabPC_AllBoxesEmpty(arg0->unk_24[0]->unk_2C) != 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_00.unk_20->unk_60, arg0->unk_3C[1].unk_00, arg0->unk_3C[1].unk_04,
                                 arg0->unk_3C[1].unk_08);
@@ -663,7 +663,7 @@ s32 LabPC_BoxPairSelector_HandleInput(unk_func_882025E0_1A9780* arg0, Controller
                     case 2:
                         if ((LabPC_AllBoxesEmpty(arg0->unk_24[0]->unk_2C) != 0) ||
                             (LabPC_AllBoxesEmpty(arg0->unk_24[1]->unk_2C) != 0)) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_00.unk_20->unk_60, arg0->unk_3C[2].unk_00, arg0->unk_3C[2].unk_04,
                                 arg0->unk_3C[2].unk_08);
@@ -678,7 +678,7 @@ s32 LabPC_BoxPairSelector_HandleInput(unk_func_882025E0_1A9780* arg0, Controller
 
                     case 3:
                         if (LabPC_AllBoxesEmpty(arg0->unk_24[0]->unk_2C) != 0) {
-                            Audio_PlaySoundEffectById(8);
+                            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                             ((func8850A10C)Memmap_GetFragmentVaddr(WidgetTree_SetMessagePanelText))(
                                 arg0->unk_00.unk_20->unk_60, arg0->unk_3C[3].unk_00, arg0->unk_3C[3].unk_04,
                                 arg0->unk_3C[3].unk_08);
@@ -1346,7 +1346,7 @@ s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
     if (sp34 & 2) {
         switch (arg0->unk_00.unk_1C) {
             case 0:
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 sp34 = 2;
                 if (LabPC_ConfirmSaveAndExit(arg0->unk_24, arg1) == 0) {
                     sp34 = 3;
@@ -1387,7 +1387,7 @@ s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
                         break;
 
                     case 4:
-                        Audio_PlaySoundEffectById(3);
+                        Audio_PlaySoundEffectById(SFX_MENU_BACK);
                         sp34 = 2;
                         if (LabPC_ConfirmSaveAndExit(arg0->unk_24, arg1) == 0) {
                             sp34 = 3;
@@ -1400,7 +1400,7 @@ s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
                 switch (arg0->unk_24->unk_68->unk_24) {
                     case 0:
                     case 2:
-                        Audio_PlaySoundEffectById(0x18);
+                        Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                         LabPC_BoxMenu_RefreshBoxLabels(arg0->unk_24);
                         LabPC_BoxPairSelector_ExchangeSwap(arg0->unk_24->unk_6C);
                         LabPC_BoxPairSelector_Reset(arg0->unk_24->unk_6C);
@@ -1408,7 +1408,7 @@ s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
                         break;
 
                     case 1:
-                        Audio_PlaySoundEffectById(0x18);
+                        Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                         LabPC_BoxMenu_RefreshBoxLabels(arg0->unk_24);
                         LabPC_BoxPairSelector_ReorderSwap(arg0->unk_24->unk_6C);
                         LabPC_BoxPairSelector_Reset(arg0->unk_24->unk_6C);
@@ -1416,7 +1416,7 @@ s32 func_882052F4(unk_func_88203ED8_064* arg0, Controller* arg1) {
                         break;
 
                     case 3:
-                        Audio_PlaySoundEffectById(2);
+                        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                         tmp = (arg0->unk_24->unk_6C->unk_38 != 0 ? 1 : 2) << 0x10;
                         LabPC_CheckBox_ShowBox(arg0->unk_24->unk_5C,
                         (unk_func_88205880_00D0*)((s32*)arg0->unk_24->unk_6C->unk_24[0]->unk_2C->unk_00)[arg0->unk_24->unk_6C->unk_24[0]->unk_38],

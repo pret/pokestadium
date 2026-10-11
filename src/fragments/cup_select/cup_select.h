@@ -5,10 +5,11 @@
 #include "src/geo_node.h"
 
 void CupSelect_PollController(void);
-void CupSelect_DrawSelectionCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
-s32 CupSelect_IconGeoPostCallback(s32 arg0, unk_func_80011B94* arg1);
-s32 CupSelect_DividerGeoPostCallback(s32 arg0, unk_func_80011B94* arg1);
-void CupSelect_RenderFrame(s32 arg0, s32 arg1);
+void func_82E00050(void);
+void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8 r, u8 g, u8 b, u8 alpha);
+s32 CupSelect_IconGeoPostCallback(s32 arg0, UNUSED unk_func_80011B94* arg1);
+s32 CupSelect_DividerGeoPostCallback(s32 arg0, UNUSED unk_func_80011B94* arg1);
+void CupSelect_RenderFrame(s32 mode, s32 counter);
 void CupSelect_BuildDivisionList(void);
 s32 CupSelect_HandleInput(void);
 s32 CupSelect_Loop(void);

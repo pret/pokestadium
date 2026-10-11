@@ -235,21 +235,21 @@ void Gallery_UpdateConfirmPromptInput(void) {
             }
 
             if (tmpA != D_83407C0A) {
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             }
         }
 
         if (D_83407C04->buttonPressed & 0x8000) {
             if (temp_a3 == NULL) {
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             } else {
                 switch (temp_a3[D_83407C0A]) {
                     case 1:
-                        Audio_PlaySoundEffectById(3);
+                        Audio_PlaySoundEffectById(SFX_MENU_BACK);
                         break;
 
                     case 2:
-                        Audio_PlaySoundEffectById(2);
+                        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                         break;
 
                     case 3:
@@ -263,7 +263,7 @@ void Gallery_UpdateConfirmPromptInput(void) {
             }
             D_83402E40 = 3;
         } else if (D_83407C04->buttonPressed & 0x4000) {
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
             D_83407C0A = -2;
             D_83402E40 = 3;
         }
@@ -311,7 +311,7 @@ s32 Gallery_UpdateConfirmPrompt(void) {
 
 s32 Gallery_OpenConfirmPrompt(s16 arg0, Controller* arg1) {
     if (D_83402E40 == 0) {
-        Audio_PlaySoundEffectById(4);
+        Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         D_83407C00 = arg0;
         D_83407C0A = D_83402E4C[arg0].unk_09;
         D_83407C08 = 0;

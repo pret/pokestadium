@@ -480,7 +480,7 @@ s32 WidgetTree_UpdateAnimatedPanel(WidgetAnimatedPanel* arg0) {
     if (arg0->unk_2C < 8) {
         arg0->unk_30 = 1;
         if (arg0->unk_2C == 1) {
-            Audio_PlaySoundEffectById(4);
+            Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         }
     } else if (arg0->unk_2C >= 0x14) {
         arg0->unk_2C = -1;
@@ -1107,7 +1107,7 @@ s32 WidgetTree_UpdateAnimatedPanelVariantB(WidgetAnimatedPanelVariantB* arg0) {
         arg0->unk_30++;
     } else if (arg0->unk_30 < 4) {
         if (arg0->unk_30 == 0) {
-            Audio_PlaySoundEffectById(4);
+            Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         }
         arg0->unk_34 = 1;
         arg0->unk_30++;
@@ -2772,19 +2772,19 @@ void Ui_PlayInputActionSound(s32 arg0) {
 
         switch (arg0) {
             case 0x2:
-                var_a1 = 3;
+                var_a1 = SFX_MENU_BACK;
                 break;
 
             case 0x4:
-                var_a1 = 2;
+                var_a1 = SFX_MENU_CONFIRM;
                 break;
 
             case 0x8:
-                var_a1 = 1;
+                var_a1 = SFX_MENU_SCROLL;
                 break;
 
             case 0x800:
-                var_a1 = 0x18;
+                var_a1 = SFX_MOVE_SWAP;
                 break;
 
             case 0x80:
@@ -2792,7 +2792,7 @@ void Ui_PlayInputActionSound(s32 arg0) {
                 break;
 
             case 0x100:
-                var_a1 = 8;
+                var_a1 = SFX_MENU_ERROR;
                 break;
         }
 

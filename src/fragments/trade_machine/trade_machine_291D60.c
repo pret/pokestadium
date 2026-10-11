@@ -136,7 +136,7 @@ void Trade_InitSaveSequence(s32 arg0) {
     if (arg0 != 0) {
         Audio_PlaySoundEffectById(0x1E);
     } else {
-        Audio_PlaySoundEffectById(4);
+        Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
     }
 }
 
@@ -204,7 +204,7 @@ void Trade_UpdateSaveSeqMenuInput(unk_D_82F210E0* arg0) {
 
     if (D_82F21128 != tmp) {
         var_t0 = 0;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
@@ -236,7 +236,7 @@ void Trade_UpdateSaveSeqMenuInput(unk_D_82F210E0* arg0) {
                     arg0->unk_02 = 0xA;
                     arg0->unk_04 &= ~4;
                     D_82F21130 = 0;
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                     break;
             }
         } else {
@@ -245,10 +245,10 @@ void Trade_UpdateSaveSeqMenuInput(unk_D_82F210E0* arg0) {
             arg0->unk_04 &= ~6;
             if (D_82F21128 == 0) {
                 D_82F2112C = 1;
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             } else {
                 D_82F2112C = 0;
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
             }
         }
         arg0->unk_12 = -1;
@@ -630,7 +630,10 @@ void Trade_DrawSaveSeqMessageBackdrop(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     Ui_DrawGradientPanel(arg0, arg1, arg2, arg3, &sp24, &sp20);
 }
 
-#ifdef NON_MATCHING
+// A no-op 64-bit round trip. It changes nothing at runtime, but IDO spends temp registers on it,
+// which this function needs to match.
+#define U64_NOP(x) ((u32)((u64)(x) | 0ULL))
+
 void func_82F0BEF8(unk_D_82F210E0* arg0) {
     static s16 D_82F13F88 = 0;
 
@@ -666,11 +669,10 @@ void func_82F0BEF8(unk_D_82F210E0* arg0) {
             Font_EnableTwoCycleTexturing();
             Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             Gfx_SetPrimColor(0xFF, 0xF1, 0x78, 0xFF);
-            // Text_SetNumberToken(1, (((((((((tmp) & 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) &
-            // 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) &
-            // 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF);
-            Text_SetNumberToken(1, (u64)(sp20.unk_02 + 1));
-            Font_Printf(0xB0, 0x90, Text_GetString(sp38, sizeof(sp38), gTradeStrings, 0x20));
+            Text_SetNumberToken(1, sp20.unk_02 + 1);
+            Font_Printf(0xB0, 0x90,
+                        (char*)U64_NOP(U64_NOP(U64_NOP(
+                            U64_NOP(Text_GetString((char*)U64_NOP(sp38), sizeof(sp38), gTradeStrings, 0x20))))));
             Font_DisableTwoCycleTexturing();
             break;
 
@@ -693,10 +695,6 @@ void func_82F0BEF8(unk_D_82F210E0* arg0) {
     Font_EndTexturedTextRendering();
     D_82F13F88 += 0x800;
 }
-#else
-static s16 D_82F13F88 = 0;
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/trade_machine/trade_machine_291D60/func_82F0BEF8.s")
-#endif
 
 s32 Trade_GetSaveSeqState(void) {
     return D_82F210E0.unk_00;

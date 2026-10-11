@@ -194,7 +194,7 @@ void Trade_UpdateTextPrinter(void) {
         }
 
         if (D_82F1444C->unk_08 <= 0) {
-            Audio_PlaySoundEffectById(0x01200001);
+            Audio_PlaySoundEffectById(SFX_TRADE_TEXT);
             D_82F1444C->unk_08 = D_82F1444C->unk_0A;
 
             D_82F1444C->unk_00++;
@@ -409,11 +409,11 @@ void Trade_UpdateMainMenu(void) {
         } else {
             Trade_SetState(2);
         }
-        Audio_PlaySoundEffectById(2);
-        Audio_PlaySoundEffectById(4);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
+        Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         Trade_SetState(7);
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 

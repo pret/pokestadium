@@ -32,7 +32,7 @@ void Trade_OpenInfoBox(unk_D_82F144D0* arg0, u8* arg1, s16 arg2, s16 arg3) {
     ptr->unk_24 = PokeIcon_CreateModelPreview(ptr->unk_20, 0xE4, 0xA0, 0, 0, 0xE0, 0xA0, D_3014468);
     ptr->unk_24->unk_00 &= ~2;
     PokeIcon_SetPreviewMon(ptr->unk_24, ptr->unk_14, 0x108D);
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
 }
 
 void Trade_UpdateInfoBoxOpenIn(unk_D_82F20A10* arg0) {
@@ -80,7 +80,7 @@ void Trade_UpdateInfoBoxChoose(unk_D_82F20A10* arg0) {
     }
 
     if (D_82F20A38 != tmp) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         var_t0 = 0;
     }
 
@@ -98,10 +98,10 @@ void Trade_UpdateInfoBoxChoose(unk_D_82F20A10* arg0) {
         arg0->unk_1C = 0;
         if (D_82F20A38 == 0) {
             arg0->unk_18->unk_0020 = 1;
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         } else {
             arg0->unk_18->unk_0020 = 0;
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
     }
 }

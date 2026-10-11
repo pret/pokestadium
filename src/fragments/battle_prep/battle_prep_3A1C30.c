@@ -506,11 +506,11 @@ void BattlePrep_RunQuitMenu(BattlePrepRuleWindow* arg0) {
         tmp = sp24->unk_10 >> (arg0->unk_04 * 3);
         switch (tmp & 7) {
             case 1:
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 break;
 
             case 2:
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                 break;
 
             case 3:
@@ -531,7 +531,7 @@ void BattlePrep_RunQuitMenu(BattlePrepRuleWindow* arg0) {
         }
         arg0->unk_00 = 2;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         do {
             arg0->unk_04--;
             if (arg0->unk_04 < 0) {
@@ -539,7 +539,7 @@ void BattlePrep_RunQuitMenu(BattlePrepRuleWindow* arg0) {
             }
         } while (!(sp24->unk_0E & (1 << arg0->unk_04)));
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN)) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         do {
             arg0->unk_04++;
             if (sp22 < arg0->unk_04) {
@@ -591,7 +591,7 @@ void BattlePrep_InitRuleWindow(BattlePrepRuleWindow* arg0, s16 arg1) {
 
     ptr->unk_0E = -1;
 
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
 
     if (arg1 - 1 == 2) {
         if (D_800AE540.unk_11F3 == 0) {

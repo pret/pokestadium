@@ -16,7 +16,7 @@ typedef struct unk_D_832027C8 {
     /* 0x04 */ BattleMon unk_04;
 } unk_D_832027C8; // size = 0x58
 
-s32 PikachuReward_PositionSurfingPikachuModel(s32 arg0, unk_D_86002F58_004_000* arg1);
+s32 PikachuReward_PositionSurfingPikachuModel(s32 arg0, DisplayObject* arg1);
 s32 PikachuReward_CheckNoSpecialMove(BattleMon* arg0);
 s32 PikachuReward_CheckEligibleForSurf(BattleMon* arg0, s16 arg1, s16 arg2, s16 arg3);
 s32 PikachuReward_SearchDeckForPikachu(s16 arg0, s16 arg1, s16 arg2);
@@ -42,7 +42,7 @@ void PikachuReward_ShowSaveStatusScreen(s32 arg0);
 void PikachuReward_SaveToCartridge(void);
 void PikachuReward_TeachSurfToPikachu(s32 arg0);
 void PikachuReward_RunSequence(void);
-void PikachuReward_SetupFollowerModel(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2, s16 arg3);
+void PikachuReward_SetupFollowerModel(DisplayObject* arg0, s16 arg1, s16 arg2, s16 arg3);
 void PikachuReward_SetupScene(void);
 s32 Stadium_BonusPikachuReward(UNUSED s32 arg0, UNUSED s32 arg1);
 

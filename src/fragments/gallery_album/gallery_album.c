@@ -102,7 +102,7 @@ s32 Gallery_AlbumHandleGridInput(unk_D_83407B38* arg0) {
 
     arg0->unk_00 = (sp54 * 3) + sp58;
     if (sp5C != arg0->unk_00) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if ((gPlayer1Controller->buttonPressed & 0x20) || (sp4C != 0)) {
@@ -118,7 +118,7 @@ s32 Gallery_AlbumHandleGridInput(unk_D_83407B38* arg0) {
     }
 
     if (sp60 != arg0->unk_08) {
-        Audio_PlaySoundEffectById(0x27);
+        Audio_PlaySoundEffectById(SFX_PAGE_CHANGE);
 
         for (i = 0; i < arg0->unk_14; i++) {
             sp40 = arg0->unk_20[arg0->unk_08 * arg0->unk_14 + i];
@@ -143,14 +143,14 @@ s32 Gallery_AlbumHandleGridInput(unk_D_83407B38* arg0) {
                         Audio_PlaySoundEffectById(0xD);
                         D_83407B30.unk_04 = arg0->unk_04;
                     } else {
-                        Audio_PlaySoundEffectById(2);
+                        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                     }
                 } else {
-                    Audio_PlaySoundEffectById(8);
+                    Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                 }
             } else {
                 sp64 = 1;
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
             }
         } else if ((sp54 * 3) < 6) {
             if (sp3C != arg0->unk_04) {
@@ -164,7 +164,7 @@ s32 Gallery_AlbumHandleGridInput(unk_D_83407B38* arg0) {
                 arg0->unk_20[arg0->unk_04]->unk_00 = 0;
                 sp38->unk_00 = 0;
             } else {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
             }
             arg0->unk_04 = -1;
         } else {
@@ -181,17 +181,17 @@ s32 Gallery_AlbumHandleGridInput(unk_D_83407B38* arg0) {
         } else {
             arg0->unk_04 = -1;
         }
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     } else if (gPlayer1Controller->buttonPressed & 4) {
         idx = arg0->unk_08 * arg0->unk_14 + arg0->unk_00;
         ptr = arg0->unk_20[idx];
 
         if (((sp54 * 3) < 6) && (arg0->unk_04 == -1) && (Gallery_IsSceneReady(ptr) != 0)) {
             sp64 = 2;
-            Audio_PlaySoundEffectById(0x19);
+            Audio_PlaySoundEffectById(SFX_ZOOM_IN);
             Gallery_SetEnlargeTarget(ptr->unk_18);
         } else {
-            Audio_PlaySoundEffectById(8);
+            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         }
     }
     return sp64;
@@ -200,7 +200,7 @@ s32 Gallery_AlbumHandleGridInput(unk_D_83407B38* arg0) {
 void Gallery_AlbumInit(s32 arg0, s32 arg1) {
     s32 i;
     s32 j;
-    unk_D_86002F58_004_000_010* tmp;
+    ModelLoadContext* tmp;
 
     D_83503FC0 = 0;
     D_8350407C = arg0;

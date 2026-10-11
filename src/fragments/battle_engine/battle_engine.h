@@ -21,7 +21,7 @@ typedef struct unk_D_84390010_654_0AC {
 } unk_D_84390010_654_0AC; // size = 0x10
 
 typedef struct unk_D_84390010_168 {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ DisplayObject unk_000;
     /* 0x168 */ char unk168[0x1];
     /* 0x169 */ u8 unk_169;
     /* 0x16A */ s16 unk_16A;
@@ -62,7 +62,7 @@ typedef struct BattlerState {
 } BattlerState; // size = 0xCC
 
 typedef struct PresentationLayout {
-    /* 0x00 */ unk_D_86002F58_004_000_000 unk_00;
+    /* 0x00 */ DisplayNodeHeader node;
     /* 0x18 */ char unk18[0x4];
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ s16 unk_1E;
@@ -78,7 +78,7 @@ typedef struct PresentationLayout {
 } PresentationLayout; // size >= 0xC0
 
 typedef struct PresentationState {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ DisplayObject unk_000;
     /* 0x168 */ PresentationLayout* unk_168;
     /* 0x16C */ s32 unk_16C;
     /* 0x170 */ s32 unk_170;
@@ -132,7 +132,7 @@ typedef struct SwayState {
 } SwayState; // size >= 0x50
 
 typedef struct Battler {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ DisplayObject unk_000;
     /* 0x168 */ unk_D_84390010_168 unk_168[2];
     /* 0x448 */ SwayState unk_448;
     /* 0x498 */ f32 unk_498;
@@ -154,7 +154,7 @@ typedef struct Battler {
     /* 0x4E4 */ f32 unk_4E4;
     /* 0x4E8 */ u8 unk_4E8;
     /* 0x4E9 */ u8 unk_4E9;
-    /* 0x4EC */ unk_D_86002F58_004_000 unk_4EC;
+    /* 0x4EC */ DisplayObject unk_4EC;
     /* 0x654 */ BattlerState unk_654;
     /* 0x720 */ BattleSessionTeams* unk_720;
     /* 0x724 */ TeamRoster* unk_724;
@@ -1042,7 +1042,7 @@ extern arg1_func_80019420* gBattleAnimResourceTablePointers[40];
 s32 Battle_StageGeoDispatchCallback(s32 arg0, GraphNode* arg1);
 s32 Battle_StageLightAngleCallbackA(s32 arg0, unk_D_86002F34_alt18* arg1);
 s32 Battle_StageLightAngleCallbackB(s32 arg0, unk_D_86002F34_alt18* arg1);
-s32 Battle_StageMaterialTintCallback(s32 arg0, unk_D_86002F58_004_000* arg1);
+s32 Battle_StageMaterialTintCallback(s32 arg0, DisplayObject* arg1);
 void Battle_SetStageTintColor(u8 arg0, u8 arg1, u8 arg2);
 void BattleScene_SetModelUniformScale(f32 arg0);
 u16 Battle_TintTexel16(u16 arg0);
@@ -1240,7 +1240,7 @@ void BattleScene_ComputeParticipantModelOffset(Battler* arg0, Vec3f* arg1);
 void BattleScene_GetParticipantAuxiliaryModelPosition(Battler* arg0, Vec3f* arg1);
 f32 BattleAnim_GetOwnerModelHeight(Battler* arg0);
 f32 BattleScene_GetParticipantModelRadiusScaled(Battler* arg0);
-unk_D_86002F58_004_000_004* Battle_GetMoveEffectListEntry(Battler* arg0, s32 arg1);
+ModelNodeView* Battle_GetMoveEffectListEntry(Battler* arg0, s32 arg1);
 s32 Battle_GetTrainerId(Battler* arg0, UNUSED s32 arg1);
 char* Battle_GetActiveMoveName(Battler* arg0);
 u8* Battle_GetActiveMonNickname(Battler* arg0);
@@ -1824,17 +1824,17 @@ void BattleAnim_LoadModeResourceList(BattleSessionTeams* arg0, s16 arg1);
 void BattleAnim_RegisterAllAssetTables(void);
 void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* arg0);
 void BattleAnim_ResetDisplayContexts(void);
-Particle* BattleAnim_GetOwnerContextParticle(unk_D_86002F58_004_000* arg0);
-unk_D_86002F58_004_000* BattleAnim_AllocOwnerDisplayContext(Particle* arg0);
-void BattleAnim_FreeOwnerDisplayContext(unk_D_86002F58_004_000* arg0);
-unk_D_86002F58_004_000* BattleAnim_AllocParticleDisplayContext(Particle* arg0);
-void BattleAnim_FreeParticleDisplayContext(unk_D_86002F58_004_000* arg0);
-void BattleAnim_InitModelWithAnim(unk_D_86002F58_004_000* arg0, s16 arg1, s16 arg2);
-void BattleAnim_SetModelAnimFrame(unk_D_86002F58_004_000* arg0, s16 arg1);
-void BattleAnim_InitModel(unk_D_86002F58_004_000* arg0, s16 arg1);
-void BattleAnim_BindModelAnim(unk_D_86002F58_004_000* arg0, s16 arg1);
-void BattleAnim_BindModelAnimReversed(unk_D_86002F58_004_000* arg0, s16 arg1);
-s32 BattleAnim_IsModelAnimComplete(unk_D_86002F58_004_000* arg0);
+Particle* BattleAnim_GetOwnerContextParticle(DisplayObject* arg0);
+DisplayObject* BattleAnim_AllocOwnerDisplayContext(Particle* arg0);
+void BattleAnim_FreeOwnerDisplayContext(DisplayObject* arg0);
+DisplayObject* BattleAnim_AllocParticleDisplayContext(Particle* arg0);
+void BattleAnim_FreeParticleDisplayContext(DisplayObject* arg0);
+void BattleAnim_InitModelWithAnim(DisplayObject* arg0, s16 arg1, s16 arg2);
+void BattleAnim_SetModelAnimFrame(DisplayObject* arg0, s16 arg1);
+void BattleAnim_InitModel(DisplayObject* arg0, s16 arg1);
+void BattleAnim_BindModelAnim(DisplayObject* arg0, s16 arg1);
+void BattleAnim_BindModelAnimReversed(DisplayObject* arg0, s16 arg1);
+s32 BattleAnim_IsModelAnimComplete(DisplayObject* arg0);
 void BattleAnim_UpdateEffectCallbacks(UNUSED unk_D_86002F34_00C* arg0);
 void BattleAnim_DrawEffectCallbacks(UNUSED unk_D_86002F34_00C* arg0);
 void BattleAnim_UpdateCamera(unk_D_86002F34_00C* arg0);

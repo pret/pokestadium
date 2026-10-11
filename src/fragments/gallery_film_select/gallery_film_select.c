@@ -181,7 +181,7 @@ s32 Gallery_FilmSelectHandleInput(unk_D_83407B38* arg0) {
     arg0->unk_00 = sp1C + sp48;
     if (sp4C != arg0->unk_00) {
         D_836032F4 = 0;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if ((gPlayer1Controller->buttonPressed & 0x20) || (sp40 != 0)) {
@@ -207,15 +207,15 @@ s32 Gallery_FilmSelectHandleInput(unk_D_83407B38* arg0) {
                         Audio_PlaySoundEffectById(0xD);
                     } else {
                         D_836032F4 = 1;
-                        Audio_PlaySoundEffectById(8);
+                        Audio_PlaySoundEffectById(SFX_MENU_ERROR);
                     }
                 } else {
                     D_83403C00[idx] = 0;
                     D_836033B4--;
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 }
             } else {
-                Audio_PlaySoundEffectById(8);
+                Audio_PlaySoundEffectById(SFX_MENU_ERROR);
             }
         } else if (sp48 == 0) {
             sp54 = 1;
@@ -226,22 +226,22 @@ s32 Gallery_FilmSelectHandleInput(unk_D_83407B38* arg0) {
             Audio_PlaySoundEffectById(0x31);
         } else {
             sp54 = 1;
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
     } else if (gPlayer1Controller->buttonPressed & 4) {
         idx = (arg0->unk_08 * arg0->unk_14) + arg0->unk_00;
         if ((sp1C < 6) && (Gallery_IsSceneReady(arg0->unk_20[idx]) != 0)) {
-            Audio_PlaySoundEffectById(0x19);
+            Audio_PlaySoundEffectById(SFX_ZOOM_IN);
             Gallery_SetEnlargeTarget(arg0->unk_20[idx]->unk_18);
             sp54 = 2;
         } else {
-            Audio_PlaySoundEffectById(8);
+            Audio_PlaySoundEffectById(SFX_MENU_ERROR);
         }
     }
 
     if (sp50 != arg0->unk_08) {
         D_836032F4 = 0;
-        Audio_PlaySoundEffectById(0x27);
+        Audio_PlaySoundEffectById(SFX_PAGE_CHANGE);
         Gallery_FilmSelectUpdatePageAvailability(arg0);
 
         for (i = 0; i < arg0->unk_14; i++) {
@@ -780,7 +780,7 @@ void Gallery_FilmSelectHandleCancelInput(void) {
     } else if (gPlayer1Controller->buttonPressed & 0x4000) {
         D_836032F4 = 0;
         D_836032F0 = 1;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 

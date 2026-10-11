@@ -135,7 +135,7 @@ static s16 D_86002F4C;
 static s32 D_86002F50;
 
 typedef struct unk_D_86002F58_004 {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;
+    /* 0x000 */ DisplayObject unk_000;
     /* 0x168 */ s16 unk_168;
     /* 0x16A */ u16 unk_16A;
     /* 0x16C */ s16 unk_16C;
@@ -171,7 +171,7 @@ static s16 D_86003B70[4];
 static s16 D_86003B78;
 static FontContext* D_86003B7C;
 static s32 D_86003B80;
-static unk_D_86002F58_004_000 D_86003B84[4];
+static DisplayObject D_86003B84[4];
 
 void MagikarpGame_UpdateAIInputBias(void) {
     s32 i;
@@ -215,28 +215,28 @@ void MagikarpGame_UpdateAIInputBias(void) {
                     break;
 
                 case 8:
-                    if ((D_86003B5C->unk_004.unk_000.unk_040.unk_08 > 0x90000) &&
+                    if ((D_86003B5C->unk_004.unk_000.transformAnim.frameFixed > 0x90000) &&
                         (Rand_Range(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
                     break;
 
                 case 9:
-                    if ((D_86003B5C->unk_004.unk_000.unk_040.unk_08 > 0xD0000) &&
+                    if ((D_86003B5C->unk_004.unk_000.transformAnim.frameFixed > 0xD0000) &&
                         (Rand_Range(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
                     break;
 
                 case 10:
-                    if ((D_86003B5C->unk_004.unk_000.unk_040.unk_08 > 0xB0000) &&
+                    if ((D_86003B5C->unk_004.unk_000.transformAnim.frameFixed > 0xB0000) &&
                         (Rand_Range(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
                     break;
 
                 case 11:
-                    if ((D_86003B5C->unk_004.unk_000.unk_040.unk_08 > 0xF0000) &&
+                    if ((D_86003B5C->unk_004.unk_000.transformAnim.frameFixed > 0xF0000) &&
                         (Rand_Range(0x64) < D_86002920[D_8780FA38].unk_08)) {
                         D_86003B5C->unk_17A = 0x8000;
                     }
@@ -285,7 +285,7 @@ s32 MagikarpGame_ReadInputs(void) {
 }
 
 void MagikarpGame_InitCamera(void) {
-    D_86002F38 = D_86002F34->unk_00.unk_0C;
+    D_86002F38 = D_86002F34->node.children;
     MiniCam_SetActive(D_86002F38);
     D_86002F3C = 0x600;
     D_86002F3E = 0;
@@ -487,8 +487,8 @@ void MagikarpGame_DrawScoreMarkers(void) {
 
     for (i = 0; i < 4; i++) {
         D_86003B60 = &D_86002F58[i].unk_004;
-        temp_f20 = (410.0f - D_86003B60->unk_000.unk_0A8[0].unk_04.y) / 510.0f;
-        guTranslate(&sp100, D_86003B60->unk_000.unk_0A8[0].unk_04.x, 0.0f, 0.0f);
+        temp_f20 = (410.0f - D_86003B60->unk_000.anchors[0].position.y) / 510.0f;
+        guTranslate(&sp100, D_86003B60->unk_000.anchors[0].position.x, 0.0f, 0.0f);
         guScale(&spC0, temp_f20, temp_f20, temp_f20);
         guMtxCatL(&spC0, &sp100, var_s1);
 
@@ -531,22 +531,22 @@ void MagikarpGame_UpdateSplashRipple(void) {
     for (i = 0; i < 4; i++) {
         D_86003B60 = D_86003B64 = &D_86003598[i];
 
-        if (D_86003B60->unk_000.unk_024.y > 140.0f) {
-            D_86003B60->unk_000.unk_024.y -= 2.0f;
+        if (D_86003B60->unk_000.position.y > 140.0f) {
+            D_86003B60->unk_000.position.y -= 2.0f;
         }
 
         switch (D_86003B64->unk_16C) {
             case 0:
-                if (D_86003B60->unk_000.unk_01E.y < 0x800) {
-                    D_86003B60->unk_000.unk_01E.y += 0x400;
+                if (D_86003B60->unk_000.rotation.y < 0x800) {
+                    D_86003B60->unk_000.rotation.y += 0x400;
                 } else {
                     D_86003B64->unk_16C = 1;
                 }
                 break;
 
             case 1:
-                if (D_86003B60->unk_000.unk_01E.y > 0) {
-                    D_86003B60->unk_000.unk_01E.y -= 0x200;
+                if (D_86003B60->unk_000.rotation.y > 0) {
+                    D_86003B60->unk_000.rotation.y -= 0x200;
                 } else {
                     D_86003B64->unk_16C = 2;
                 }
@@ -554,7 +554,7 @@ void MagikarpGame_UpdateSplashRipple(void) {
 
             case 2:
             default:
-                D_86003B60->unk_000.unk_01E.y = 0;
+                D_86003B60->unk_000.rotation.y = 0;
                 break;
         }
     }
@@ -571,8 +571,8 @@ s32 MagikarpGame_WaitForStart(void) {
         D_86003B5C = &D_86002F58[i];
         D_86003B60 = &D_86003B5C->unk_004;
         ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
-        D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
-        D_86003B60->unk_000.unk_040.unk_08 = (Rand_Range(0x14) << 0x10);
+        D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
+        D_86003B60->unk_000.transformAnim.frameFixed = (Rand_Range(0x14) << 0x10);
         D_86003B70[i] = 0;
     }
 
@@ -591,7 +591,7 @@ s32 MagikarpGame_WaitForStart(void) {
             }
 
             if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 Widget_PauseMenuTrigger(2);
                 return -1;
             }
@@ -610,8 +610,8 @@ void MagikarpGame_Countdown(void) {
         D_86003B5C = &D_86002F58[i];
         D_86003B60 = &D_86003B5C->unk_004;
         ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
-        D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
-        D_86003B60->unk_000.unk_040.unk_08 = Rand_Range(0x14) << 0x10;
+        D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
+        D_86003B60->unk_000.transformAnim.frameFixed = Rand_Range(0x14) << 0x10;
         D_86003B70[i] = 0;
     }
 
@@ -660,50 +660,50 @@ void MagikarpGame_StartTrickPose(s16 arg0) {
 
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 8);
 
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_AdvanceTrickPoseB(void) {
     D_86003B5C->unk_004.unk_168 = 6;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 9);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_AdvanceTrickPoseC(void) {
     D_86003B5C->unk_004.unk_168 = 7;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0xA);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_AdvanceTrickPoseD(void) {
     D_86003B5C->unk_004.unk_168 = 8;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0xB);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_AdvanceTrickPoseE(void) {
     D_86003B5C->unk_004.unk_168 = 9;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0xC);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_AdvanceTrickPoseF(void) {
     D_86003B5C->unk_004.unk_168 = 0xA;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0xD);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_AdvanceTrickPoseG(void) {
     D_86003B5C->unk_004.unk_168 = 0xB;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0xE);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_FinishTrickOrChain(s32 arg0) {
@@ -720,24 +720,24 @@ void MagikarpGame_FinishTrickOrChain(s32 arg0) {
 
     D_86003B5C->unk_004.unk_168 = 0xC;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 5);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_LandTrick(s32 arg0) {
     D_86003B70[arg0] = 0;
     D_86003B5C->unk_004.unk_168 = 0xD;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 6);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_ResetPlayerState(s32 arg0) {
     D_86003B70[arg0] = 0;
     D_86003B5C->unk_004.unk_168 = 0;
     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
-    D_86003B60->unk_000.unk_040.unk_08 = 0;
-    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 }
 
 void MagikarpGame_UpdatePlayerState(s32 arg0) {
@@ -815,30 +815,30 @@ void MagikarpGame_UpdatePlayerState(s32 arg0) {
             case 1:
                 if (ModelAnim_IsFinished(&D_86003B60->unk_000)) {
                     ModelAnim_SetAnimation(&D_86003B60->unk_000, 7);
-                    D_86003B60->unk_000.unk_040.unk_08 = 0;
-                    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+                    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+                    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
                 }
                 break;
 
             default:
                 if (ModelAnim_IsFinished(&D_86003B60->unk_000)) {
                     ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
-                    D_86003B60->unk_000.unk_040.unk_08 = 0;
-                    D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+                    D_86003B60->unk_000.transformAnim.frameFixed = 0;
+                    D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
                     D_86003B70[arg0] = 0;
                 }
                 break;
         }
 
-        if (((D_86003B5C->unk_004.unk_168 == 9) && ((D_86003B60->unk_000.unk_040.unk_08 >> 0x10) == 2)) ||
-            ((D_86003B5C->unk_004.unk_168 == 10) && ((D_86003B60->unk_000.unk_040.unk_08 >> 0x10) == 2)) ||
-            ((D_86003B5C->unk_004.unk_168 == 11) && ((D_86003B60->unk_000.unk_040.unk_08 >> 0x10) == 2))) {
+        if (((D_86003B5C->unk_004.unk_168 == 9) && ((D_86003B60->unk_000.transformAnim.frameFixed >> 0x10) == 2)) ||
+            ((D_86003B5C->unk_004.unk_168 == 10) && ((D_86003B60->unk_000.transformAnim.frameFixed >> 0x10) == 2)) ||
+            ((D_86003B5C->unk_004.unk_168 == 11) && ((D_86003B60->unk_000.transformAnim.frameFixed >> 0x10) == 2))) {
             if (D_86003B70[arg0] == 0) {
                 D_86003B64->unk_16A++;
                 D_86003B70[arg0] = 1;
                 ModelAnim_SetAnimation(&D_86003B64->unk_000, 0);
-                D_86003B64->unk_000.unk_040.unk_0C = 0x10000;
-                D_86003B64->unk_000.unk_040.unk_08 = 0;
+                D_86003B64->unk_000.transformAnim.speedFixed = 0x10000;
+                D_86003B64->unk_000.transformAnim.frameFixed = 0;
                 MiniSound_DispatchCommand(0x20008, arg0, 4);
             }
         }
@@ -870,7 +870,7 @@ void MagikarpGame_Play(void) {
 
         D_86003B5C->unk_004.unk_168 = 0;
         ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
-        D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+        D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
 
         D_86003B70[i] = 0;
 
@@ -1005,13 +1005,13 @@ void MagikarpGame_ShowWinnerSequence(void) {
         if ((D_86003B80 == D_86003598[i].unk_16A) && (D_86003B80 > 0)) {
             D_86003B5C->unk_004.unk_168 = 1;
             ModelAnim_SetAnimation(&D_86003B60->unk_000, 7);
-            D_86003B60->unk_000.unk_040.unk_08 = 0;
+            D_86003B60->unk_000.transformAnim.frameFixed = 0;
         } else {
             D_86003B5C->unk_004.unk_168 = 2;
             ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
-            D_86003B60->unk_000.unk_040.unk_08 = Rand_Range(5) << 0x10;
+            D_86003B60->unk_000.transformAnim.frameFixed = Rand_Range(5) << 0x10;
         }
-        D_86003B60->unk_000.unk_040.unk_0C = 0x10000;
+        D_86003B60->unk_000.transformAnim.speedFixed = 0x10000;
     }
 
     j = 30;
@@ -1129,13 +1129,13 @@ void MagikarpGame_InitActors(void) {
         ModelRenderer_AttachDisplayObject(&D_86003B60->unk_000);
         Model_InitDisplayObject(&D_86003B60->unk_000, 0, 0xAD, D_86002F30->unk_08->unk_00[0]);
 
-        D_86003B60->unk_000.unk_024.x = (i - 1.5f) * D_86002A94;
+        D_86003B60->unk_000.position.x = (i - 1.5f) * D_86002A94;
 
-        D_86003B60->unk_000.unk_024.y = 0.0f;
-        D_86003B60->unk_000.unk_024.z = 0.0f;
-        D_86003B60->unk_000.unk_030.x = 0.8f;
-        D_86003B60->unk_000.unk_030.y = 0.8f;
-        D_86003B60->unk_000.unk_030.z = 0.8f;
+        D_86003B60->unk_000.position.y = 0.0f;
+        D_86003B60->unk_000.position.z = 0.0f;
+        D_86003B60->unk_000.scale.x = 0.8f;
+        D_86003B60->unk_000.scale.y = 0.8f;
+        D_86003B60->unk_000.scale.z = 0.8f;
 
         D_86003B5C->unk_182 = 0;
         D_86003B5C->unk_184 = 0;
@@ -1151,8 +1151,8 @@ void MagikarpGame_InitActors(void) {
 
         ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
 
-        D_86003B60->unk_000.unk_040.unk_08 = Rand_Range(5) << 0x10;
-        D_86003B60->unk_000.unk_01E.y = -0x2800;
+        D_86003B60->unk_000.transformAnim.frameFixed = Rand_Range(5) << 0x10;
+        D_86003B60->unk_000.rotation.y = -0x2800;
     }
 
     D_86002F30 = (unk_D_86002F30*)Model_LoadByArchiveIndex(0xAE);
@@ -1163,18 +1163,18 @@ void MagikarpGame_InitActors(void) {
 
         ModelRenderer_AttachDisplayObject(&D_86003B60->unk_000);
         Model_InitDisplayObject(&D_86003B60->unk_000, 0, 0xAE, D_86002F30->unk_08->unk_00[0]);
-        D_86003B60->unk_000.unk_024.x = (i - 1.5f) * D_86002A94;
-        D_86003B60->unk_000.unk_024.z = 0.0f;
-        D_86003B60->unk_000.unk_024.y = 200.0f;
-        D_86003B60->unk_000.unk_01E.y = -0x8000;
-        D_86003B60->unk_000.unk_030.x = 1.4f;
-        D_86003B60->unk_000.unk_030.y = 1.4f;
-        D_86003B60->unk_000.unk_030.z = 1.4f;
+        D_86003B60->unk_000.position.x = (i - 1.5f) * D_86002A94;
+        D_86003B60->unk_000.position.z = 0.0f;
+        D_86003B60->unk_000.position.y = 200.0f;
+        D_86003B60->unk_000.rotation.y = -0x8000;
+        D_86003B60->unk_000.scale.x = 1.4f;
+        D_86003B60->unk_000.scale.y = 1.4f;
+        D_86003B60->unk_000.scale.z = 1.4f;
         D_86003B64->unk_168 = 0;
         D_86003B64->unk_16A = 0;
         D_86003B64->unk_16C = 0;
         BattleHud_SetDigitRotationTargets(i, 0);
-        D_86003B64->unk_000.unk_0A6 = i;
+        D_86003B64->unk_000.effectSlot = i;
         ModelAnim_SetAnimation(&D_86003B60->unk_000, 0);
         ModelAnim_ClearTransformChannel(&D_86003B60->unk_000);
     }

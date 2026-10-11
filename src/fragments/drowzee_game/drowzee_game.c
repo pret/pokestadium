@@ -58,9 +58,9 @@ static u32 D_8640290C[] = {
     0x06000000, 0x06000000, 0x06000000, 0x03000000, 0x87806398, 0x06000000, 0x01000000,
 };
 
-static unk_D_86002F58_004_000 D_86404070;
+static DisplayObject D_86404070;
 
-static unk_D_86002F58_004_000 D_864041D8[4];
+static DisplayObject D_864041D8[4];
 
 static unk_D_86404778 D_86404778[4];
 
@@ -68,7 +68,7 @@ static unk_D_86405158 D_86405158;
 
 static unk_D_86404778* D_864052C8;
 static unk_D_86405158* D_864052CC;
-static unk_D_86002F58_004_000* D_864052D0;
+static DisplayObject* D_864052D0;
 static u8 D_864052D4;
 static s16 D_864052D6;
 
@@ -245,7 +245,7 @@ void DrowzeeGame_ProcessElimination(u8 arg0) {
 
     D_864029B4--;
     if (D_864029B4 < 2) {
-        D_864052CC->unk_004.unk_040.unk_0C = 0;
+        D_864052CC->unk_004.transformAnim.speedFixed = 0;
         D_87B000C8 = 1;
 
         Audio_FadeOutAll(0xA);
@@ -293,7 +293,7 @@ void DrowzeeGame_DrawPlayerOverlay(UNUSED s32 arg0) {
         D_864052C8->unk_190->unk_18 = temp_v0;
 
         if ((D_864052C8->unk_010 == 0) || (D_864052C8->unk_00C == 1)) {
-            temp_a3 = D_864052C8->unk_028.unk_040.unk_08 >> 0x10;
+            temp_a3 = D_864052C8->unk_028.transformAnim.frameFixed >> 0x10;
 
             gSPDisplayList(temp_v0++, D_86403F30);
             gDPSetTileSize(temp_v0++, G_TX_RENDERTILE, 0x0000, (0x40 - (D_87B000C0 % 64)) << 2, 0x007C,
@@ -350,7 +350,7 @@ void DrowzeeGame_DrawPlayerOverlay(UNUSED s32 arg0) {
 
         gSPEndDisplayList(temp_v0++);
 
-        D_864052C8->unk_190->unk_1C = D_864052C8->unk_028.unk_0A8[0].unk_04;
+        D_864052C8->unk_190->unk_1C = D_864052C8->unk_028.anchors[0].position;
     }
 }
 
@@ -370,7 +370,7 @@ void DrowzeeGame_UpdateRoundTick(s32 arg0) {
         if (arg0 == 2) {
             static u8 D_864029C0 = 0;
 
-            D_864052D6 = D_864052CC->unk_004.unk_040.unk_08 >> 0x10;
+            D_864052D6 = D_864052CC->unk_004.transformAnim.frameFixed >> 0x10;
             D_864052D4 = 0;
 
             for (i = 0; i < 8; i++) {
@@ -400,7 +400,7 @@ void DrowzeeGame_UpdateRoundTick(s32 arg0) {
 
                 if ((D_87B000C8 != 0) && (D_864052C8->unk_00C == 1) && (D_86402840 >= 0x3C) && (D_87B000D4 == 1) &&
                     (D_864029C0 < 0x10)) {
-                    D_864052C8->unk_028.unk_01E.y += sp24[i];
+                    D_864052C8->unk_028.rotation.y += sp24[i];
                 }
             }
 
@@ -431,7 +431,7 @@ void DrowzeeGame_UpdateRoundTick(s32 arg0) {
                 D_864029C4 = 0.0f;
             }
 
-            D_86405158.unk_004.unk_030.x = D_86405158.unk_004.unk_030.y = D_86405158.unk_004.unk_030.z = D_864029C4;
+            D_86405158.unk_004.scale.x = D_86405158.unk_004.scale.y = D_86405158.unk_004.scale.z = D_864029C4;
         }
     }
 }
@@ -446,7 +446,7 @@ void DrowzeeGame_JudgePlayerTiming(void) {
 
     if ((D_8780FC92 == 0) && (D_8780FC94 == 0)) {
         D_864052CC->unk_16D = D_864052CC->unk_16C;
-        if (D_864052D6 < (D_864052CC->unk_004.unk_040.unk_04->unk_0A / 2)) {
+        if (D_864052D6 < (D_864052CC->unk_004.transformAnim.data->endFrame / 2)) {
             D_864052CC->unk_16C = 0;
         } else {
             D_864052CC->unk_16C = 1;
@@ -693,7 +693,7 @@ void DrowzeeGame_WaitForStart(void) {
             if (gPlayer1Controller->buttonPressed & 0x1000) {
                 var_s2 = 0;
             } else if ((D_8780FA2A == 0) && (gPlayer1Controller->buttonPressed & 0x4000)) {
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 Widget_PauseMenuTrigger(2);
                 D_87B000D0 = 1;
                 return;
@@ -813,7 +813,7 @@ void DrowzeeGame_ShowResultText(void) {
 }
 
 void DrowzeeGame_InitCamera(void) {
-    D_87B000EC = D_87B000E8->unk_00.unk_0C;
+    D_87B000EC = D_87B000E8->node.children;
 
     D_87B000F0 = 0x900;
     D_87B000F2 = 0;
@@ -835,7 +835,7 @@ void DrowzeeGame_InitPlayerOverlays(void) {
     for (i = 0; i < 4; i++) {
         D_864052C8 = &D_86404778[i];
         D_864052C8->unk_190 = GeoNode_CreateScale(temp_s5, NULL, 4, NULL, &D_8006F050, 0.0f);
-        GraphNode_AppendChild(&D_800AC840, &D_864052C8->unk_190->unk_00);
+        GraphNode_AppendChild(&D_800AC840, &D_864052C8->unk_190->node);
     }
 
     MainPool_FinalizeAllocation(temp_s5);
@@ -867,19 +867,19 @@ void DrowzeeGame_LoadAssets(void) {
         Model_InitDisplayObject(D_864052D0, 0, 0xC4, D_87B000E4->unk_08->unk_00[0]);
         D_864052C8->unk_004 = 0;
         ModelAnim_SetAnimation(D_864052D0, D_864052C8->unk_004);
-        ModelAnim_SetFrame(D_864052D0, MiniGame_RandomRange(D_864052D0->unk_040.unk_04->unk_0A));
+        ModelAnim_SetFrame(D_864052D0, MiniGame_RandomRange(D_864052D0->transformAnim.data->endFrame));
 
-        D_864052D0->unk_024.x = D_864027C0[i].unk_00;
-        D_864052D0->unk_024.y = D_864027C0[i].unk_04;
-        D_864052D0->unk_024.z = D_864027C0[i].unk_08;
+        D_864052D0->position.x = D_864027C0[i].unk_00;
+        D_864052D0->position.y = D_864027C0[i].unk_04;
+        D_864052D0->position.z = D_864027C0[i].unk_08;
 
-        D_864052D0->unk_030.x = D_864027C0[i].unk_0C;
-        D_864052D0->unk_030.y = D_864027C0[i].unk_10;
-        D_864052D0->unk_030.z = D_864027C0[i].unk_14;
+        D_864052D0->scale.x = D_864027C0[i].unk_0C;
+        D_864052D0->scale.y = D_864027C0[i].unk_10;
+        D_864052D0->scale.z = D_864027C0[i].unk_14;
 
-        D_864052D0->unk_01E.x = D_864027C0[i].unk_18;
-        D_864052D0->unk_01E.y = D_864027C0[i].unk_1A;
-        D_864052D0->unk_01E.z = D_864027C0[i].unk_1C;
+        D_864052D0->rotation.x = D_864027C0[i].unk_18;
+        D_864052D0->rotation.y = D_864027C0[i].unk_1A;
+        D_864052D0->rotation.z = D_864027C0[i].unk_1C;
 
         D_864052C8->unk_00C = 0;
         D_864052C8->unk_00E = 0x14A;
@@ -907,13 +907,13 @@ void DrowzeeGame_LoadAssets(void) {
     D_864052CC->unk_001 = D_864052CC->unk_000 = 0;
 
     ModelAnim_SetAnimation(D_864052D0, D_864052CC->unk_000);
-    ModelAnim_SetFrame(D_864052D0, D_864052D0->unk_040.unk_04->unk_0A);
+    ModelAnim_SetFrame(D_864052D0, D_864052D0->transformAnim.data->endFrame);
 
-    D_864052D0->unk_024.y = 20.0f;
-    D_864052D0->unk_030.x = 1.0f;
-    D_864052D0->unk_030.y = 1.0f;
-    D_864052D0->unk_030.z = 1.0f;
-    D_864052D0->unk_01E.x = -0xB00;
+    D_864052D0->position.y = 20.0f;
+    D_864052D0->scale.x = 1.0f;
+    D_864052D0->scale.y = 1.0f;
+    D_864052D0->scale.z = 1.0f;
+    D_864052D0->rotation.x = -0xB00;
 
     D_864052CC->unk_16C = 0;
     D_864052CC->unk_16D = 0;
@@ -925,14 +925,14 @@ void DrowzeeGame_LoadAssets(void) {
         ModelRenderer_AttachDisplayObject(D_864052D0);
         Model_InitDisplayObject(D_864052D0, 0, 0xD2, D_87B000E4->unk_08->unk_00[0]);
         ModelAnim_SetAnimation(D_864052D0, 0);
-        ModelAnim_SetFrame(D_864052D0, D_864052D0->unk_040.unk_04->unk_0A);
+        ModelAnim_SetFrame(D_864052D0, D_864052D0->transformAnim.data->endFrame);
 
-        D_864052D0->unk_024.x = D_864027C0[i].unk_00;
-        D_864052D0->unk_024.y = 25.0f;
-        D_864052D0->unk_024.z = D_864027C0[i].unk_08;
-        D_864052D0->unk_01E.x = D_864027C0[i].unk_18;
-        D_864052D0->unk_01E.y = D_864027C0[i].unk_1A;
-        D_864052D0->unk_01E.z = D_864027C0[i].unk_1C;
+        D_864052D0->position.x = D_864027C0[i].unk_00;
+        D_864052D0->position.y = 25.0f;
+        D_864052D0->position.z = D_864027C0[i].unk_08;
+        D_864052D0->rotation.x = D_864027C0[i].unk_18;
+        D_864052D0->rotation.y = D_864027C0[i].unk_1A;
+        D_864052D0->rotation.z = D_864027C0[i].unk_1C;
     }
 
     DrowzeeGame_InitPlayerOverlays();

@@ -7,7 +7,7 @@
 #include "src/controller.h"
 
 typedef struct MiniActor {
-    /* 0x000 */ unk_D_86002F58_004_000 unk_000;		// collider ? model ?
+    /* 0x000 */ DisplayObject unk_000;		// collider ? model ?
     /* 0x168 */ unk_D_86002F30* unk_168;
     /* 0x16C */ Vec3f scale;
     /* 0x178 */ char unk178[0x18];	//	unused
@@ -122,7 +122,7 @@ typedef struct MiniActor {
 // Possibly unk_D_86002F34_alt7, unk_D_86002F34_alt8, 
 // unk_D_86002F34_alt9 or unk_D_86002F34_alt2
 typedef struct arg1_func_87902F80 {
-    /* 0x00 */ struct GraphNode unk_00;
+    /* 0x00 */ struct GraphNode node;
     /* 0x18 */ Gfx* unk_18;
 } arg1_func_87902F80; // size >= 0x1C
 
@@ -210,7 +210,7 @@ void miniChangeActorAnim_alt1(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3, s16
 void miniChangeActorAnim_alt2(MiniActor* arg0, s16 arg1, s16 arg2, s16 arg3);
 s32 miniPokeIsIdleCheck(MiniActor* arg0);
 void MiniActor_UpdateAnimation(MiniActor* poke);
-void MiniActor_SnapAnimToLastFrame(unk_D_86002F58_004_000* arg0);
+void MiniActor_SnapAnimToLastFrame(DisplayObject* arg0);
 void MiniActor_ReadControllerInputs(void);
 void hideMiniGameHUD(void);
 void miniActorAllPositionsToZero(MiniActor* actor);

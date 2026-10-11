@@ -115,9 +115,9 @@ void ModelRenderer_ClearSlotModels(s32 arg0) {
 }
 
 Gfx* ModelRenderer_SetupSlotColors(Gfx* gfx) {
-    u8 temp_v0 = D_8006F09C->unk_01D;
+    u8 temp_v0 = D_8006F09C->lodFraction;
 
-    switch (D_8006F09C->unk_01A) {
+    switch (D_8006F09C->objectType) {
         case 0x92:
             gSPDisplayList(gfx++, D_800762C8);
             gDPSetPrimColor(gfx++, 0, temp_v0, 255, 255, 255, 200);
@@ -149,7 +149,7 @@ void ModelRenderer_UpdateSlotModel(void) {
         ModelRenderer_RebuildSlotMatrix(index);
         ModelRenderer_ApplySlotScale(index);
 
-        if (D_8006F09C->unk_01A == 0x92) {
+        if (D_8006F09C->objectType == 0x92) {
             func_80033B2C(&D_800AFFC8[index][D_800AF7B0[index & 1]].model, D_800B2EA8, D_800AF7C8[index].mtx, &D_80077950);
             return;
         }
@@ -185,7 +185,7 @@ Gfx* ModelRenderer_DrawStaticSegment(Gfx* gfx) {
     Vec3f scale;
     Vec3f translate;
 
-    if (D_8006F09C->unk_01A == 0x92) {
+    if (D_8006F09C->objectType == 0x92) {
         segment = (ModelSegment *)&D_80077950;
     } else {
         segment = (ModelSegment *)&D_800777A8;

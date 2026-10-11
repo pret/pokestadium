@@ -128,19 +128,19 @@ s32 func_800325AC(void) {
 }
 
 u8 ModelRenderer_GetActiveMode(void) {
-    u8 ret = *(u8*)Memmap_GetSegmentVaddr(&D_8006F09C->unk_0A6);
+    u8 ret = *(u8*)Memmap_GetSegmentVaddr(&D_8006F09C->effectSlot);
     return ret;
 }
 
 s16 ModelRenderer_GetObjectType(void) {
-    s16 ret = *(s16*)Util_ConvertAddrToVirtAddr(&D_8006F09C->unk_01A);
+    s16 ret = *(s16*)Util_ConvertAddrToVirtAddr(&D_8006F09C->objectType);
     return ret;
 }
 
-void ModelAnim_StartDisplayObjectAnimation(unk_D_86002F58_004_000* arg0) {
+void ModelAnim_StartDisplayObjectAnimation(DisplayObject* arg0) {
     void (*func)(void*);
-    s32 unk1A = arg0->unk_01A;
-    s32 idx = arg0->unk_0A6;
+    s32 unk1A = arg0->objectType;
+    s32 idx = arg0->effectSlot;
 
     D_800AF7AE = 0;
 

@@ -86,14 +86,14 @@ s32 BattlePrepRoster_DrawIconVariantA(s32 arg0, unk_func_80011B94* arg1) {
     s32 var_a1;
 
     if (arg0 == 5) {
-        temp_a3 = (unk_D_84B25A28*)D_8006F09C->unk_000.unk_14;
+        temp_a3 = (unk_D_84B25A28*)D_8006F09C->node.callbackArg;
 
-        temp_v1 = D_8006F09C->unk_0A6 - temp_a3->unk_04->unk_0A6;
+        temp_v1 = D_8006F09C->effectSlot - temp_a3->unk_04->effectSlot;
         if (temp_v1 < 5) {
-            var_a1 = ((arg1->unk_00.unk_14 * 3) + temp_v1) - 2;
+            var_a1 = ((arg1->display_node_header.callbackArg * 3) + temp_v1) - 2;
             sp30 = D_300C000;
         } else {
-            var_a1 = (arg1->unk_00.unk_14 * 3) + temp_v1 + 1;
+            var_a1 = (arg1->display_node_header.callbackArg * 3) + temp_v1 + 1;
             sp30 = D_300D800;
         }
 
@@ -112,14 +112,14 @@ s32 BattlePrepRoster_DrawIconVariantB(s32 arg0, unk_func_80011B94* arg1) {
     s32 var_a1;
 
     if (arg0 == 5) {
-        temp_a3 = (unk_D_84B25A28*)D_8006F09C->unk_000.unk_14;
+        temp_a3 = (unk_D_84B25A28*)D_8006F09C->node.callbackArg;
 
-        temp_v1 = D_8006F09C->unk_0A6 - temp_a3->unk_04->unk_0A6;
+        temp_v1 = D_8006F09C->effectSlot - temp_a3->unk_04->effectSlot;
         if (temp_v1 < 5) {
-            var_a1 = (arg1->unk_00.unk_14 * 2) + (((temp_v1 - 1) / 2) * 6) + ((temp_v1 - 1) % 2);
+            var_a1 = (arg1->display_node_header.callbackArg * 2) + (((temp_v1 - 1) / 2) * 6) + ((temp_v1 - 1) % 2);
             sp30 = D_300F000;
         } else {
-            var_a1 = (arg1->unk_00.unk_14 * 2) + (((temp_v1 - 5) / 2) * 6) + ((temp_v1 - 5) % 2) + 0xC;
+            var_a1 = (arg1->display_node_header.callbackArg * 2) + (((temp_v1 - 5) / 2) * 6) + ((temp_v1 - 5) % 2) + 0xC;
             sp30 = D_300FC00;
         }
 
@@ -136,8 +136,8 @@ s32 BattlePrepRoster_DrawTrainerBadge(s32 arg0, unk_func_80011B94* arg1) {
     u8* var_a3;
 
     if (arg0 == 5) {
-        temp_v1 = (unk_D_84B25A28*)D_8006F09C->unk_000.unk_14;
-        if (temp_v1->unk_04->unk_0A6 == D_8006F09C->unk_0A6) {
+        temp_v1 = (unk_D_84B25A28*)D_8006F09C->node.callbackArg;
+        if (temp_v1->unk_04->effectSlot == D_8006F09C->effectSlot) {
             var_a3 = temp_v1->unk_24->img_p;
         } else {
             var_a3 = temp_v1->unk_28->img_p;
@@ -145,7 +145,7 @@ s32 BattlePrepRoster_DrawTrainerBadge(s32 arg0, unk_func_80011B94* arg1) {
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)var_a3 & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -714,11 +714,11 @@ s32 BattlePrepRoster_ConvergeIconsStep(unk_D_84B25A28* arg0, s16 arg1) {
 
     if (sp24 >= arg1) {
         for (i = 0; i < 5; i++) {
-            arg0->unk_04[i].unk_01E.x -= sp22;
+            arg0->unk_04[i].rotation.x -= sp22;
         }
 
         for (i = 5; i < 10; i++) {
-            arg0->unk_04[i].unk_01E.x += sp22;
+            arg0->unk_04[i].rotation.x += sp22;
         }
 
         return 0;
@@ -742,7 +742,7 @@ s32 BattlePrepRoster_ZoomStepNTSC(unk_D_84B25A28* arg0, s16 arg1) {
     }
 
     if (arg1 < 0x14) {
-        arg0->unk_04[10].unk_024.z = -80.0f - (arg1 * 30.0f);
+        arg0->unk_04[10].position.z = -80.0f - (arg1 * 30.0f);
         return 0;
     }
 
@@ -763,7 +763,7 @@ s32 BattlePrepRoster_ZoomStepPAL(unk_D_84B25A28* arg0, s16 arg1) {
     }
 
     if (arg1 < 0x10) {
-        arg0->unk_04[10].unk_024.z = -80.0f - (arg1 * 38.0f);
+        arg0->unk_04[10].position.z = -80.0f - (arg1 * 38.0f);
         return 0;
     }
 
@@ -827,7 +827,7 @@ void BattlePrepRoster_Update(unk_D_84B25A28* arg0) {
 void BattlePrepRoster_LoadDexIdsSingle(unk_D_84B25A28* arg0) {
     s32 i;
     s32 count;
-    unk_D_86002F58_004_000_010* temp_s0;
+    ModelLoadContext* temp_s0;
 
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_20, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0x60, 1));
@@ -844,7 +844,7 @@ void BattlePrepRoster_LoadDexIdsSingle(unk_D_84B25A28* arg0) {
 void BattlePrepRoster_LoadDexIdsDouble(unk_D_84B25A28* arg0) {
     s32 i;
     s32 count;
-    unk_D_86002F58_004_000_010* tmp = PokeIcon_AllocFramebuffers(5);
+    ModelLoadContext* tmp = PokeIcon_AllocFramebuffers(5);
 
     PokeIcon_AttachDepthBuffer(arg0->unk_20, tmp, GfxImage_Allocate(0, 2, 0x60, 0x40, 1));
 
@@ -888,33 +888,33 @@ void BattlePrepRoster_Load(unk_D_84B25A28* arg0, BinArchive* arg1) {
 }
 
 void BattlePrepRoster_PositionIconsSingle(unk_D_84B25A28* arg0) {
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[0].unk_024, -96.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[2].unk_024, -32.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[3].unk_024, 32.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[4].unk_024, 96.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[5].unk_024, -96.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[6].unk_024, -32.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[7].unk_024, 32.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[9].unk_024, 96.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[0].position, -96.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[2].position, -32.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[3].position, 32.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[4].position, 96.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[5].position, -96.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[6].position, -32.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[7].position, 32.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[9].position, 96.0f, -96.0f, -289.0f);
 
-    arg0->unk_04[1].unk_000.unk_01 &= ~1;
-    arg0->unk_04[8].unk_000.unk_01 &= ~1;
+    arg0->unk_04[1].node.flags &= ~1;
+    arg0->unk_04[8].node.flags &= ~1;
 }
 
 void BattlePrepRoster_PositionIconsDouble(unk_D_84B25A28* arg0) {
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[0].unk_024, -96.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[1].unk_024, -40.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[2].unk_024, 8.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[3].unk_024, 56.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[4].unk_024, 104.0f, 96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[5].unk_024, -104.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[6].unk_024, -56.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[7].unk_024, -8.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[8].unk_024, 40.0f, -96.0f, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_04[9].unk_024, 96.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[0].position, -96.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[1].position, -40.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[2].position, 8.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[3].position, 56.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[4].position, 104.0f, 96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[5].position, -104.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[6].position, -56.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[7].position, -8.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[8].position, 40.0f, -96.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_04[9].position, 96.0f, -96.0f, -289.0f);
 }
 
-s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, unk_D_86002F58_004_000* arg1) {
+s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, DisplayObject* arg1) {
     s32 i;
     s16 var_a1;
 
@@ -929,15 +929,15 @@ s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, unk_D_86002F58_004
         }
 
         for (i = 0; i < 11; i++) {
-            arg0->unk_04[i].unk_000.unk_14 = arg0;
+            arg0->unk_04[i].node.callbackArg = arg0;
         }
 
         for (i = 0; i < 5; i++) {
-            arg0->unk_04[i].unk_01E.x = var_a1;
+            arg0->unk_04[i].rotation.x = var_a1;
         }
 
         // clang-format off
-        for (i = 5; i < 10; i++) { arg0->unk_04[i].unk_01E.x = -var_a1; }
+        for (i = 5; i < 10; i++) { arg0->unk_04[i].rotation.x = -var_a1; }
         // clang-format on
 
         Model_InitDisplayObject(&arg0->unk_04[0], 1, 0, arg0->unk_14);
@@ -951,7 +951,7 @@ s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, unk_D_86002F58_004
         Model_InitDisplayObject(&arg0->unk_04[8], 1, 0, arg0->unk_10);
         Model_InitDisplayObject(&arg0->unk_04[9], 1, 0, arg0->unk_18);
         Model_InitDisplayObject(&arg0->unk_04[10], 3, 0, arg0->unk_1C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_04[10].unk_024, 0.0f, 0.0f, 1000.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_04[10].position, 0.0f, 0.0f, 1000.0f);
 
         if (arg0->unk_02 == 1) {
             BattlePrepRoster_PositionIconsDouble(arg0);

@@ -800,7 +800,7 @@ s32 MiniGameSelect_DrawMenuBackdrop(s32 arg0, GraphNode* arg1) {
     Gfx* var_a3;
 
     if (arg0 == 5) {
-        tmp = D_8006F09C->unk_000.unk_14;
+        tmp = D_8006F09C->node.callbackArg;
         var_v0 = 0;
         if ((tmp == D_8250A288.unk_00) && (D_8250A26C != 7)) {
             var_v0 = (D_82508AF4 % 30u) / 3;
@@ -827,7 +827,7 @@ s32 MiniGameSelect_DrawMenuBackdrop(s32 arg0, GraphNode* arg1) {
 
 s32 MiniGameSelect_DrawGameBackdrop(s32 arg0, GraphNode* arg1) {
     if (arg0 == 5) {
-        s32 tmp = D_8006F09C->unk_000.unk_14;
+        s32 tmp = D_8006F09C->node.callbackArg;
 
         gDPPipeSync(gDisplayListHead++);
 
@@ -881,7 +881,7 @@ s32 MiniGameSelect_DrawLabelStrips(s32 arg0, GraphNode* arg1) {
     s32 idx3;
 
     if (arg0 == 5) {
-        idx = D_8006F09C->unk_000.unk_14;
+        idx = D_8006F09C->node.callbackArg;
 
         idx2 = D_8250A240[idx]->unk_0A;
         idx3 = D_8250A240[idx]->unk_0C;
@@ -928,7 +928,7 @@ s32 MiniGameSelect_DrawLabelStrips(s32 arg0, GraphNode* arg1) {
 }
 
 void MiniGameSelect_CreateCursor(void) {
-    unk_D_86002F58_004_000_000* ptr = &D_8250A308.unk_000.unk_000;
+    DisplayNodeHeader* ptr = &D_8250A308.unk_000.node;
 
     D_8250A308.unk_16C = 0;
     D_8250A308.unk_168 = 0;
@@ -936,12 +936,12 @@ void MiniGameSelect_CreateCursor(void) {
     D_8250A308.unk_16E = 0;
     D_8250A308.unk_170 = 0;
     ModelRenderer_AttachDisplayObject(&D_8250A308.unk_000);
-    Vec3f_SetComponentsDuplicate(&D_8250A308.unk_000.unk_024, -220.0f, 140.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_8250A308.unk_000.position, -220.0f, 140.0f, -579.0f);
     Model_InitDisplayObject(&D_8250A308.unk_000, 0, 0, D_8250A284);
-    ptr->unk_01 &= ~1;
+    ptr->flags &= ~1;
 }
 
-void MiniGameSelect_UpdateCursor(unk_D_86002F58_004_000* a0) {
+void MiniGameSelect_UpdateCursor(DisplayObject* a0) {
     unk_D_8250A308* arg0 = (unk_D_8250A308*)a0;
     s32 var_v0;
 
@@ -1001,16 +1001,16 @@ void MiniGameSelect_UpdateCursor(unk_D_86002F58_004_000* a0) {
         f32 tmp1;
         f32 tmp2;
 
-        a0->unk_01E.z = ((SINS(arg0->unk_16C) * 0.5f) + 0.5f) * -8192.0f;
+        a0->rotation.z = ((SINS(arg0->unk_16C) * 0.5f) + 0.5f) * -8192.0f;
 
         tmp1 = (((SINS(arg0->unk_16C) * 0.5f) + 0.5f) * 6.0f) + arg0->unk_168 + 32.0f;
         tmp2 = arg0->unk_16A + 22.0f;
 
-        a0->unk_024.x = tmp1 - 320.0f;
-        a0->unk_024.y = 240.0f - tmp2;
-        a0->unk_01D = 0xFF;
+        a0->position.x = tmp1 - 320.0f;
+        a0->position.y = 240.0f - tmp2;
+        a0->lodFraction = 0xFF;
     } else {
-        a0->unk_01D = 0;
+        a0->lodFraction = 0;
     }
     arg0->unk_16C += 0x1000;
 }
@@ -1026,7 +1026,7 @@ s32 MiniGameSelect_CursorNodeCallback(s32 arg0, GraphNode* arg1) {
 
         case 5:
             gDPPipeSync(gDisplayListHead++);
-            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_8006F09C->unk_01D);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_8006F09C->lodFraction);
             gSPDisplayList(gDisplayListHead++, D_82508770);
 
             GeoRender_ApplyMaterialState();
@@ -2039,7 +2039,7 @@ void MiniGameSelect_UpdateMainMenu(void) {
     }
 
     if (tmp != D_8250A288.unk_00) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if (D_82508AF8->unk_04 & 0x8000) {
@@ -2068,7 +2068,7 @@ void MiniGameSelect_UpdateMainMenu(void) {
         StageContext_SetClearColor(1);
         StageFade_StartFromTransparent(0xF);
         Audio_FadeOutAll(0xF);
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 
@@ -2113,7 +2113,7 @@ void MiniGameSelect_PlayerJoinUpdate(void) {
         }
 
         if (var_v1 != D_8250A288.unk_02) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
 
         var_s4 = 0;
@@ -2128,7 +2128,7 @@ void MiniGameSelect_PlayerJoinUpdate(void) {
                         if (D_8780FA30[i] != 1) {
                             var_s4 = 1;
                             D_8780FA30[i] = 1;
-                            Audio_PlaySoundEffectById(3);
+                            Audio_PlaySoundEffectById(SFX_MENU_BACK);
                         }
                     }
                 }
@@ -2159,7 +2159,7 @@ void MiniGameSelect_PlayerJoinUpdate(void) {
             MiniGameSelect_ReturnToIdle();
             KidsClub_SetMatchBannerState(3);
             func_82501B18(D_8250A230[0], 8);
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
 
         if (D_8250A26C == 2) {
@@ -2228,7 +2228,7 @@ void MiniGameSelect_UpdateOptionPanel(void) {
             }
 
             if (tmp != D_8250A288.unk_08) {
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             }
 
             if (D_82508AF8->unk_04 & 0x8000) {
@@ -2244,7 +2244,7 @@ void MiniGameSelect_UpdateOptionPanel(void) {
                 D_8250A2A0.unk_0A = 0x9C;
                 D_8250A2A0.unk_0C = 0x118;
                 D_8250A2A0.unk_0E = 0xA8;
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
             } else if (D_82508AF8->unk_04 & 0x4000) {
                 D_8250A2A0.unk_00 = 3;
                 D_8250A2A0.unk_02 = 0;
@@ -2253,7 +2253,7 @@ void MiniGameSelect_UpdateOptionPanel(void) {
                 D_8250A2A0.unk_0A = 0x9C;
                 D_8250A2A0.unk_0C = 0x118;
                 D_8250A2A0.unk_0E = 0xA8;
-                Audio_PlaySoundEffectById(3);
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
             }
             break;
 
@@ -2301,7 +2301,7 @@ void MiniGameSelect_UpdateRoundSpinner(void) {
                     D_8250A26C = 2;
                     KidsClub_SetMatchBannerState(1);
                     func_82501B18(D_8250A238, 8);
-                    Audio_PlaySoundEffectById(3);
+                    Audio_PlaySoundEffectById(SFX_MENU_BACK);
                 } else if ((D_82508AF8->unk_08 & 0x800) && (D_8250A288.unk_04 < 9)) {
                     D_8250A2FC = 2;
                     D_8250A2FE = 5;
@@ -2426,7 +2426,7 @@ s32 MiniGameSelect_UpdateGridCursor(s16* arg0, s16 arg1) {
     *arg0 = (var_t0 * 3) + var_a3;
     if (sp2C != *arg0) {
         KidsClub_SetRoundBannerLabel(*arg0);
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     return sp1E;
@@ -2476,7 +2476,7 @@ s32 MiniGameSelect_AttractCursorShuffle(s16* arg0, s16 arg1) {
                     MiniGameSelect_SetWidgetTargetState(D_8250A240[i], *arg0, 1);
                 }
             }
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
     }
 
@@ -2522,7 +2522,7 @@ void MiniGameSelect_GameGridUpdate(void) {
             func_82501B18(D_8250A240[0], 8);
             D_8250A26C = 2;
             KidsClub_SetMatchBannerState(1);
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
     }
 }

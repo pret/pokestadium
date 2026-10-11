@@ -1,0 +1,9 @@
+# IDO uses these files as a way to display error and warnings messages, but
+# IDO is hardcoded to read into an offset of the file instead of properly
+# parsing the file this error file. This means that if the file is modified 
+# in any way, then IDO would output incorrect error/warning messages.
+# This kind of issue can happen by git automatically chaninging the line
+# endings depending on user and system configuration. Marking those files as
+# binary overrides this configuration and avoids the issue.
+ido/5.3/usr/lib/err.english.cc binary
+ido/7.1/usr/lib/err.english.cc binary

@@ -88,12 +88,12 @@ s32 Diorama_LogoRotateColorCallback(s32 arg0, GraphNode* arg1) {
 
 s32 Diorama_ScaleRotateCallbackA(s32 arg0, GraphNode* arg1) {
     if (arg0 == 2) {
-        unk_D_86002F58_004_000* ptr = (unk_D_86002F58_004_000*)arg1;
+        DisplayObject* ptr = (DisplayObject*)arg1;
 
-        ptr->unk_030.x = 1.5f;
-        ptr->unk_030.y = 1.5f;
-        ptr->unk_030.z = 1.5f;
-        ptr->unk_01E.x = D_86B0BBF0;
+        ptr->scale.x = 1.5f;
+        ptr->scale.y = 1.5f;
+        ptr->scale.z = 1.5f;
+        ptr->rotation.x = D_86B0BBF0;
     }
 
     return 0;
@@ -101,13 +101,13 @@ s32 Diorama_ScaleRotateCallbackA(s32 arg0, GraphNode* arg1) {
 
 s32 Diorama_ScaleRotateCallbackB(s32 arg0, GraphNode* arg1) {
     if (arg0 == 2) {
-        unk_D_86002F58_004_000* ptr = (unk_D_86002F58_004_000*)arg1;
+        DisplayObject* ptr = (DisplayObject*)arg1;
 
-        ptr->unk_030.x = 1.0f;
-        ptr->unk_030.y = 1.0f;
-        ptr->unk_030.z = 1.0f;
+        ptr->scale.x = 1.0f;
+        ptr->scale.y = 1.0f;
+        ptr->scale.z = 1.0f;
 
-        ptr->unk_01E.x = D_86B0BBF4;
+        ptr->rotation.x = D_86B0BBF4;
     }
     return 0;
 }
@@ -150,19 +150,19 @@ void Diorama_InitModelSlot(unk_D_86B0E5F0* arg0, unk_D_86B0C4C8* arg1) {
     ModelAnim_SetAnimation(&arg0->unk_004, arg1->unk_10);
 
     if (arg1->unk_0C == 6) {
-        arg0->unk_004.unk_0A6 = 0;
+        arg0->unk_004.effectSlot = 0;
     } else {
-        arg0->unk_004.unk_0A6 = 0xFF;
+        arg0->unk_004.effectSlot = 0xFF;
     }
 
     ModelAnim_SetFrame(&arg0->unk_004, 0);
-    arg0->unk_004.unk_000.unk_02 &= ~0x40;
+    arg0->unk_004.node.renderFlags &= ~0x40;
 }
 
 void Diorama_SetModelSlotPosition(unk_D_86B0E5F0* arg0, unk_D_86B0C4C8* arg1) {
-    arg0->unk_004.unk_024.x = arg1->unk_00.x;
-    arg0->unk_004.unk_024.y = arg1->unk_00.y;
-    arg0->unk_004.unk_024.z = arg1->unk_00.z;
+    arg0->unk_004.position.x = arg1->unk_00.x;
+    arg0->unk_004.position.y = arg1->unk_00.y;
+    arg0->unk_004.position.z = arg1->unk_00.z;
 }
 
 void Diorama_SetGlowFromGroup(s32 arg0) {
@@ -275,8 +275,8 @@ s32 Diorama_SlideModelsForward(s32 arg0) {
     s32 var_a1 = 1;
 
     while (var_v1->unk_0C != 0x98) {
-        var_v0->unk_004.unk_024.z += 20.0f;
-        if (var_v0->unk_004.unk_024.z <= 650.0f) {
+        var_v0->unk_004.position.z += 20.0f;
+        if (var_v0->unk_004.position.z <= 650.0f) {
             var_a1 = 0;
         }
         var_v0++;
@@ -295,7 +295,7 @@ void Diorama_BeginGroupTransition(void) {
 void Diorama_FinishSequence(void) {
     D_86B0E5D4->unk_04.unk_4C = 9;
     D_86B0E5D4->unk_04.unk_50 = 0;
-    D_86B0E5F0->unk_004.unk_000.unk_01 &= ~1;
+    D_86B0E5F0->unk_004.node.flags &= ~1;
     D_86B0E5DC = 1;
 }
 
@@ -321,9 +321,9 @@ void Diorama_UpdateProximityHighlight(s32 arg0) {
 
     while (ptr1->unk_0C != 0x98) {
         if (Diorama_IsModelInCameraCone(D_86B0E5D4->unk_00, &ptr2->unk_004, sp88[arg0], sp80[arg0], sp70[arg0], sp60[arg0]) != 0) {
-            ptr2->unk_004.unk_000.unk_01 |= 1;
+            ptr2->unk_004.node.flags |= 1;
         } else {
-            ptr2->unk_004.unk_000.unk_01 &= ~1;
+            ptr2->unk_004.node.flags &= ~1;
         }
         ptr2++;
         ptr1++;
@@ -343,7 +343,7 @@ void Diorama_InitSceneState(void) {
     D_86B0E5D8 = main_pool_alloc(sizeof(unk_D_86B0E5D8), 0);
     bzero(D_86B0E5D8, sizeof(unk_D_86B0E5D8));
 
-    D_86B0E5D4->unk_00 = D_86B0E5D0->unk_0C;
+    D_86B0E5D4->unk_00 = D_86B0E5D0->children;
 
     D_86B0E5D4->unk_00->unk_24.near = 50.0f;
     D_86B0E5D4->unk_00->unk_24.far = 8400.0f;

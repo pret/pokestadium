@@ -116,15 +116,15 @@ static u8* D_82F13F2C[] = {
 
 s32 Trade_DrawBox3DModel(s32 arg0, GraphNode* arg1) {
     if (arg0 == 5) {
-        s32 idx = D_8006F09C->unk_000.unk_14;
+        s32 idx = D_8006F09C->node.callbackArg;
 
         gDPPipeSync(gDisplayListHead++);
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, D_8006F09C->unk_01D);
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, D_8006F09C->lodFraction);
 
         if (D_82F20A88[idx].unk_024 != NULL) {
             gSPSegment(gDisplayListHead++, 0x0F, Memmap_GetSegmentVaddr(D_82F20A88[idx].unk_024));
             gSPSegment(gDisplayListHead++, 0x0E, Memmap_GetSegmentVaddr(D_82F13F2C[D_82F20A88[idx].unk_002]));
-            gSPDisplayList(gDisplayListHead++, arg1->unk_14);
+            gSPDisplayList(gDisplayListHead++, arg1->callbackArg);
         }
         GeoRender_ApplyMaterialState();
     }
@@ -223,23 +223,23 @@ void Trade_SetupBoxSlots(s16 arg0) {
 
     var_s0 = &D_82F20A88[0];
     for (i = 0; i < D_82F210D0; i++, var_s0++) {
-        unk_D_86002F58_004_000* ptr = &var_s0->unk_028;
+        DisplayObject* ptr = &var_s0->unk_028;
 
         ModelRenderer_AttachDisplayObject(ptr);
         Model_InitDisplayObject(ptr, 0, 0, D_82F210CC);
-        ptr->unk_000.unk_14 = i;
-        ptr->unk_000.unk_01 &= ~1;
+        ptr->node.callbackArg = i;
+        ptr->node.flags &= ~1;
     }
 }
 
 void Trade_SetBoxSlotAnimState(unk_D_82F20A88* arg0, s16 arg1) {
-    unk_D_86002F58_004_000* temp_v0 = &arg0->unk_028;
+    DisplayObject* temp_v0 = &arg0->unk_028;
 
     arg0->unk_000 = arg1;
 
     switch (arg0->unk_000) {
         case 0:
-            temp_v0->unk_000.unk_01 &= ~1;
+            temp_v0->node.flags &= ~1;
             break;
 
         case 1:
@@ -262,7 +262,7 @@ void Trade_SetBoxSlotAnimState(unk_D_82F20A88* arg0, s16 arg1) {
             arg0->unk_018 = 1.0f;
             arg0->unk_01C = 1.0f;
             arg0->unk_020 = 1.0f;
-            temp_v0->unk_000.unk_01 |= 1;
+            temp_v0->node.flags |= 1;
             break;
 
         case 2:
@@ -283,7 +283,7 @@ void Trade_SetBoxSlotAnimState(unk_D_82F20A88* arg0, s16 arg1) {
             arg0->unk_01C = 1.0f;
             arg0->unk_020 = 1.0f;
             arg0->unk_018 = 0.0f;
-            temp_v0->unk_000.unk_01 |= 1;
+            temp_v0->node.flags |= 1;
             break;
 
         case 4:
@@ -424,13 +424,13 @@ void Trade_UpdateBoxSlotTransforms(void) {
         }
 
         if (var_s0->unk_000 != 0) {
-            unk_D_86002F58_004_000* ptr = &var_s0->unk_028;
+            DisplayObject* ptr = &var_s0->unk_028;
 
-            Vec3f_SetComponentsDuplicate(&ptr->unk_024, var_s0->unk_006 - 320.0f, 240.0f - var_s0->unk_008, -579.0f);
-            ptr->unk_01E.z = var_s0->unk_012;
-            ptr->unk_01D = var_s0->unk_014;
-            ptr->unk_030.x = var_s0->unk_01C * var_s0->unk_018;
-            ptr->unk_030.y = var_s0->unk_020 * var_s0->unk_018;
+            Vec3f_SetComponentsDuplicate(&ptr->position, var_s0->unk_006 - 320.0f, 240.0f - var_s0->unk_008, -579.0f);
+            ptr->rotation.z = var_s0->unk_012;
+            ptr->lodFraction = var_s0->unk_014;
+            ptr->scale.x = var_s0->unk_01C * var_s0->unk_018;
+            ptr->scale.y = var_s0->unk_020 * var_s0->unk_018;
         }
     }
 }
@@ -538,7 +538,7 @@ void Trade_UpdateBoxMachineFlowSelect(unk_D_82F20A40* arg0) {
     }
 
     if (D_82F210D2 != tmp) {
-        Audio_PlaySoundEffectById(0x25);
+        Audio_PlaySoundEffectById(SFX_PAK_CURSOR);
     }
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A) && (D_82F210D2 != -1)) {
@@ -555,7 +555,7 @@ void Trade_UpdateBoxMachineFlowSelect(unk_D_82F20A40* arg0) {
                     }
                 }
             }
-            Audio_PlaySoundEffectById(2);
+            Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         } else {
             arg0->unk_00 = 3;
             arg0->unk_02 = 0xA;
@@ -596,7 +596,7 @@ void Trade_UpdateBoxMachineFlowSelect(unk_D_82F20A40* arg0) {
             Trade_SetBoxSlotAnimState(&D_82F20A88[i], 0);
         }
 
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 
@@ -702,7 +702,7 @@ void Trade_UpdateBoxMachineFlowConfirmInput(unk_D_82F20A40* arg0) {
     }
 
     if (D_82F210D4 != tmp) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
@@ -723,7 +723,7 @@ void Trade_UpdateBoxMachineFlowConfirmInput(unk_D_82F20A40* arg0) {
             arg0->unk_00 = 9;
             arg0->unk_02 = 0xA;
             Trade_SetBoxSlotAnimState(&D_82F20A88[D_82F210D2 + 1], 5);
-            Audio_PlaySoundEffectById(3);
+            Audio_PlaySoundEffectById(SFX_MENU_BACK);
         }
     }
 }

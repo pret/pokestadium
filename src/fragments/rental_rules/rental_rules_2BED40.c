@@ -382,7 +382,7 @@ void RentalRules_UpdateMainInput(void) {
     }
 
     if (D_83003CA6 != tmp) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
@@ -393,15 +393,15 @@ void RentalRules_UpdateMainInput(void) {
             RentalRules_PopupOpen(D_83003CA0[D_83003CA6]);
         } else {
             RentalRules_ListOpen();
-            Audio_PlaySoundEffectById(4);
+            Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         }
 
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         D_83003C80 = 3;
         D_83003C82 = 0xA;
         D_83003C90 = -1;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 
@@ -704,7 +704,7 @@ void RentalRules_Init(void) {
     D_83003C82 = 0xA;
     D_83003C90 = -1;
     D_83003C92 = 0;
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
     D_83003C98 = 0;
     D_83003C9C = NULL;
     D_83003CA6 = 0;

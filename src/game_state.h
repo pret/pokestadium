@@ -92,9 +92,9 @@ typedef struct BattleSessionTeams {
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ TeamRoster* unk_04;
     /* 0x08 */ TeamRoster* unk_08[2];
-    /* 0x10 */ unk_D_86002F58_004_000_010* unk_10;
-    /* 0x14 */ unk_D_86002F58_004_000_004* unk_14;
-    /* 0x18 */ unk_D_86002F58_004_000_004* unk_18;
+    /* 0x10 */ ModelLoadContext* unk_10;
+    /* 0x14 */ ModelNodeView* unk_14;
+    /* 0x18 */ ModelNodeView* unk_18;
     /* 0x1C */ u8 unk_1C;
     /* 0x1D */ u8 unk_1D;
     /* 0x1E */ u8 unk_1E;

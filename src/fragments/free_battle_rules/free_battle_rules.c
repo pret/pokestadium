@@ -390,14 +390,14 @@ void FreeBattle_UpdateRuleRowSelect(void) {
     s32 sp24 = D_84002D18.unk_00;
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         D_84002D18.unk_02 = 0;
         while (FreeBattle_IsRuleAvailable(D_84002D18.unk_02 + 4) == 0) {
             D_84002D18.unk_02++;
         }
         D_84002D16 = 2;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         D_84002D16 = 8;
     } else {
         do {
@@ -409,7 +409,7 @@ void FreeBattle_UpdateRuleRowSelect(void) {
         } while (FreeBattle_IsRuleAvailable(D_84002D18.unk_00) == 0);
 
         if (sp24 != D_84002D18.unk_00) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         }
     }
 }
@@ -422,7 +422,7 @@ void FreeBattle_UpdateRuleOptionSelect(void) {
     s32 var_s4;
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         if (D_84002D18.unk_02 == 3) {
             D_84002D16 = 5;
         } else {
@@ -434,7 +434,7 @@ void FreeBattle_UpdateRuleOptionSelect(void) {
 
     var_s4 = 0;
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         D_84002D18.unk_02 = -1;
         D_84002D16 = 1;
         return;
@@ -471,7 +471,7 @@ void FreeBattle_UpdateRuleOptionSelect(void) {
     }
 
     if (sp34 != D_84002D18.unk_02) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 }
 
@@ -553,15 +553,15 @@ void FreeBattle_UpdateLevelSelect(void) {
         Audio_PlaySoundEffectById(0x26);
         D_84002D16 = 7;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
         D_84002D20 = -1;
         D_84002D16 = 2;
     } else if (FreeBattle_SelectionHasSubrule() == 0) {
         if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             D_84002D20 = (D_84002D20 + 4) % 5;
         } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN)) {
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             D_84002D20 = (D_84002D20 + 1) % 5;
         }
     }
@@ -633,16 +633,16 @@ void FreeBattle_UpdateConfirmDialog(void) {
         D_84002D28.unk_06 = 3;
         D_84002D20 = 0;
         D_84002D16 = 6;
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         D_84002D28.unk_06 = 2;
         D_84002D16 = 6;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         D_84002D28.unk_08 = (D_84002D28.unk_08 + 2) % 3;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN)) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
         D_84002D28.unk_08 = (D_84002D28.unk_08 + 1) % 3;
     }
 }
@@ -699,7 +699,7 @@ void FreeBattle_SlideInPanel(void) {
     s32 i;
     s16 tmp;
 
-    Audio_PlaySoundEffectById(4);
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
 
     for (i = 0x10; i < 0x170; i += 0x20) {
         FreeBattle_PollInputs();

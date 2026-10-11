@@ -171,7 +171,7 @@ static u32 D_80068CB0[] = {
 };
 
 static unk_D_800A7450 D_800A7450;
-static unk_func_80007444* D_800A7464;
+static unk_func_80007444* stage;
 static Mtx D_800A7468;
 static char pad_D_800A74A8[0x8];
 static Gfx* D_800A74B0;
@@ -185,31 +185,31 @@ void StageFade_Update(void) {
     u8 b;
     u8 g;
     u8 r;
-    unk_func_80007444* v0 = D_800A7464;
+    unk_func_80007444* v0 = stage;
 
-    if (D_800A7464->unk_11 == 0) {
+    if (stage->fade_mode == 0) {
         return;
     }
 
-    r = RGBA16_GET_R(D_800A7464->unk_14);
-    g = RGBA16_GET_G(D_800A7464->unk_14);
-    b = RGBA16_GET_B(D_800A7464->unk_14);
+    r = RGBA16_GET_R(stage->clear_color);
+    g = RGBA16_GET_G(stage->clear_color);
+    b = RGBA16_GET_B(stage->clear_color);
 
     r = (r << 3) | (r >> 2);
     g = (g << 3) | (g >> 2);
     b = (b << 3) | (b >> 2);
 
-    switch (D_800A7464->unk_11) {
+    switch (stage->fade_mode) {
         case 1:
             a = 255;
             break;
 
         case 2:
-            a = (255 - ((D_800A7464->unk_13 * 255) / D_800A7464->unk_12));
+            a = (255 - ((stage->unk_13 * 255) / stage->unk_12));
             break;
 
         case 3:
-            a = ((D_800A7464->unk_13 * 255) / D_800A7464->unk_12);
+            a = ((stage->unk_13 * 255) / stage->unk_12);
             break;
     }
 
@@ -218,16 +218,16 @@ void StageFade_Update(void) {
         gSPDisplayList(gDisplayListHead++, D_80068C68);
     }
 
-    if (D_800A7464->unk_11 == 1) {
+    if (stage->fade_mode == 1) {
         return;
     }
 
-    D_800A7464->unk_13++;
-    if (D_800A7464->unk_13 == D_800A7464->unk_12) {
-        if (D_800A7464->unk_11 == 2) {
-            D_800A7464->unk_11 = 0;
+    stage->unk_13++;
+    if (stage->unk_13 == stage->unk_12) {
+        if (stage->fade_mode == 2) {
+            stage->fade_mode = 0;
         } else {
-            D_800A7464->unk_11 = 1;
+            stage->fade_mode = 1;
         }
     }
 }
@@ -235,16 +235,16 @@ void StageFade_Update(void) {
 s32 StageFade_Start(s32 arg0) {
     s32 ret = 0;
 
-    if ((D_800A7464 != NULL) && ((D_800A7464->unk_11 == 1) || (D_800A7464->unk_11 == 0))) {
-        if (D_800A7464->unk_11 == 1) {
-            D_800A7464->unk_11 = 2;
+    if ((stage != NULL) && ((stage->fade_mode == 1) || (stage->fade_mode == 0))) {
+        if (stage->fade_mode == 1) {
+            stage->fade_mode = 2;
         } else {
-            D_800A7464->unk_11 = 3;
+            stage->fade_mode = 3;
         }
 
         ret = 1;
-        D_800A7464->unk_13 = 0;
-        D_800A7464->unk_12 = arg0;
+        stage->unk_13 = 0;
+        stage->unk_12 = arg0;
     }
 
     return ret;
@@ -253,7 +253,7 @@ s32 StageFade_Start(s32 arg0) {
 s32 StageFade_StartFromOpaque(s32 arg0) {
     s32 ret = 0;
 
-    if ((D_800A7464 != NULL) && (D_800A7464->unk_11 == 1)) {
+    if ((stage != NULL) && (stage->fade_mode == 1)) {
         ret = StageFade_Start(arg0);
     }
 
@@ -263,18 +263,18 @@ s32 StageFade_StartFromOpaque(s32 arg0) {
 s32 StageFade_StartFromTransparent(s32 arg0) {
     s32 ret = 0;
 
-    if ((D_800A7464 != NULL) && (D_800A7464->unk_11 == 0)) {
+    if ((stage != NULL) && (stage->fade_mode == 0)) {
         ret = StageFade_Start(arg0);
     }
 
     return ret;
 }
 
-void StageFade_SetMode(s32 arg0) {
-    if (D_800A7464 != NULL) {
-        D_800A7464->unk_11 = arg0;
-        D_800A7464->unk_13 = 0;
-        D_800A7464->unk_12 = 0;
+void StageFade_SetMode(s32 fade_mode) {
+    if (stage != NULL) {
+        stage->fade_mode = fade_mode;
+        stage->unk_13 = 0;
+        stage->unk_12 = 0;
     }
 }
 
@@ -323,7 +323,7 @@ void StageLoader_ResetGraphicsState(void) {
 }
 
 void StageLoader_SetupFrame(void) {
-    GfxImage_SetRenderTarget(&gDisplayListHead, D_800A7464->unk_18[D_800A7464->unk_16]);
+    GfxImage_SetRenderTarget(&gDisplayListHead, stage->unk_18[stage->unk_16]);
     guOrtho(&D_800A7468, 0.0f, 320.0f, 0.0f, 240.0f, -2.0f, 2.0f, 1.0f);
     Gfx_SetDefaultRenderState();
     Gfx_SetDefaultGeometryState();
@@ -332,13 +332,13 @@ void StageLoader_SetupFrame(void) {
     gSPMatrix(gDisplayListHead++, (u32)&D_800A7468 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
 
-    if (D_800A7464->unk_0C == 1) {
+    if (stage->zoom == 1) {
         gSPViewport(gDisplayListHead++, (u32)&D_80068C18 & 0x1FFFFFFF);
     } else {
         gSPViewport(gDisplayListHead++, (u32)&D_80068C08 & 0x1FFFFFFF);
     }
 
-    Gfx_SetScissorRect(&gDisplayListHead, 0, 0, D_800A7464->unk_00, D_800A7464->unk_02);
+    Gfx_SetScissorRect(&gDisplayListHead, 0, 0, stage->unk_00, stage->unk_02);
     StageFade_Update();
 
     if (gShowCPUProfiler != 0) {
@@ -368,15 +368,15 @@ void StageLoader_SwapDisplayListAndReset(void) {
 
 void StageLoader_BeginFrame(void) {
     StageLoader_SetupFrame();
-    D_800A7450.unk_00 = D_800A7464->unk_10;
-    D_800A7450.unk_01 = D_800A7464->unk_0C;
-    D_800A7450.unk_02 = D_800A7464->unk_0D;
-    D_800A7450.unk_03 = D_800A7464->unk_16;
-    D_800A7450.unk_0C = D_800A7464->unk_18[D_800A7464->unk_16];
+    D_800A7450.unk_00 = stage->unk_10;
+    D_800A7450.zoom = stage->zoom;
+    D_800A7450.unk_02 = stage->unk_0D;
+    D_800A7450.unk_03 = stage->unk_16;
+    D_800A7450.unk_0C = stage->unk_18[stage->unk_16];
     Gfx_GetDisplayListRange(&D_800A7450.unk_04, &D_800A7450.unk_08);
-    D_800A7464->unk_16++;
-    if (D_800A7464->unk_16 == D_800A7464->unk_0E) {
-        D_800A7464->unk_16 = 0;
+    stage->unk_16++;
+    if (stage->unk_16 == stage->unk_0E) {
+        stage->unk_16 = 0;
     }
 }
 
@@ -386,30 +386,30 @@ void StageLoader_FillFrame(void) {
     gDPPipeSync(gDisplayListHead++);
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
-    gDPSetFillColor(gDisplayListHead++, (D_800A7464->unk_14 << 0x10) | D_800A7464->unk_14);
-    gDPFillRectangle(gDisplayListHead++, D_800A7464->unk_04, D_800A7464->unk_08, D_800A7464->unk_06,
-                     D_800A7464->unk_0A);
+    gDPSetFillColor(gDisplayListHead++, (stage->clear_color << 0x10) | stage->clear_color);
+    gDPFillRectangle(gDisplayListHead++, stage->unk_04, stage->unk_08, stage->unk_06,
+                     stage->unk_0A);
     gDPPipeSync(gDisplayListHead++);
     gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
 }
 
-unk_func_80007444* StageContext_Allocate(s8 arg0, s8 arg1, s8 arg2, s8 arg3, s8 arg4, s32 arg5) {
+unk_func_80007444* StageContext_Allocate(s8 zoom, s8 arg1, s8 arg2, s8 arg3, s8 arg4, s32 arg5) {
     unk_func_80007444* temp_v0 = main_pool_alloc(sizeof(unk_func_80007444), 0);
 
     if (temp_v0 != NULL) {
-        if (arg0 == 1) {
+        if (zoom == 1) {
             temp_v0->unk_00 = 0x280, temp_v0->unk_02 = 0x1E0;
         } else {
             temp_v0->unk_00 = 0x140, temp_v0->unk_02 = 0xF0;
         }
 
-        temp_v0->unk_11 = 1;
-        temp_v0->unk_0C = arg0;
+        temp_v0->fade_mode = 1;
+        temp_v0->zoom = zoom;
         temp_v0->unk_0D = arg1;
         temp_v0->unk_0E = arg2;
         temp_v0->unk_0F = arg3;
         temp_v0->unk_10 = arg4;
-        temp_v0->unk_14 = Display_GetFramebufferClearColor();
+        temp_v0->clear_color = Display_GetFramebufferClearColor();
         temp_v0->unk_16 = 0;
         temp_v0->unk_04 = 0;
         temp_v0->unk_06 = temp_v0->unk_00 - 1;
@@ -443,44 +443,44 @@ unk_func_80007444* StageContext_Allocate(s8 arg0, s8 arg1, s8 arg2, s8 arg3, s8 
 }
 
 unk_func_80007444* StageContext_GetCurrent(void) {
-    return D_800A7464;
+    return stage;
 }
 
 s32 StageContext_GetFadeMode(void) {
-    return D_800A7464->unk_11;
+    return stage->fade_mode;
 }
 
 void StageContext_SaveAndSwitch(unk_func_80007444* arg0) {
-    arg0->unk_11 = D_800A7464->unk_11;
-    arg0->unk_12 = D_800A7464->unk_12;
-    arg0->unk_13 = D_800A7464->unk_13;
-    arg0->unk_14 = D_800A7464->unk_14;
+    arg0->fade_mode = stage->fade_mode;
+    arg0->unk_12 = stage->unk_12;
+    arg0->unk_13 = stage->unk_13;
+    arg0->clear_color = stage->clear_color;
 
-    if (D_800A7464->unk_16 < arg0->unk_0E) {
-        arg0->unk_16 = D_800A7464->unk_16;
+    if (stage->unk_16 < arg0->unk_0E) {
+        arg0->unk_16 = stage->unk_16;
     } else {
         arg0->unk_16 = 0;
     }
 
-    D_800A7464 = arg0;
+    stage = arg0;
 }
 
 void StageContext_Activate(unk_func_80007444* arg0) {
-    D_800A7464 = arg0;
+    stage = arg0;
     Display_QueueFramebufferRequest(NULL);
     Display_WaitForCompletion();
-    Display_ClearFramebufferLine(arg0->unk_14);
+    Display_ClearFramebufferLine(arg0->clear_color);
     StageLoader_SwapDisplayListAndReset();
 }
 
 void StageContext_Deactivate(void) {
-    if (D_800A7464 != NULL) {
+    if (stage != NULL) {
         StageLoader_FillFrame();
         StageLoader_BeginFrame();
         Display_QueueFramebufferRequest(&D_800A7450);
         Display_WaitForCompletion();
         Display_WaitForFrames(2);
-        D_800A7464 = NULL;
+        stage = NULL;
     }
 }
 
@@ -499,8 +499,8 @@ s32 BgStage_AdvanceFrame(void) {
     StageLoader_SwapDisplayListAndReset();
 }
 
-void StageLoader_RunFrames(s32 arg0) {
-    while (arg0-- > 0) {
+void StageLoader_RunFrames(s32 timer) {
+    while (timer-- > 0) {
         StageLoader_FillFrame();
         StageLoader_BeginFrame();
         Display_QueueFramebufferRequest(&D_800A7450);
@@ -509,17 +509,17 @@ void StageLoader_RunFrames(s32 arg0) {
     }
 }
 
-s32 BgStage_RunUntilCondition(u32 arg0, s32 (*arg1)(u8)) {
+s32 BgStage_RunUntilCondition(u32 timer, s32 (*f)(u8)) {
     s32 var_s1 = 0;
 
-    if (arg0 == 0) {
+    if (timer == 0) {
         while (var_s1 == 0) {
-            var_s1 = arg1(D_800A7464->unk_11);
+            var_s1 = f(stage->fade_mode);
             BgStage_AdvanceFrame();
         }
     } else {
-        while (arg0-- > 0) {
-            var_s1 = arg1(D_800A7464->unk_11);
+        while (timer-- > 0) {
+            var_s1 = f(stage->fade_mode);
             BgStage_AdvanceFrame();
             if (var_s1 != 0) {
                 break;
@@ -539,13 +539,13 @@ s32 BgStage_WaitForCondition(s32 (*arg0)(u8), s32 arg1, s32 arg2) {
     StageFade_StartFromOpaque(arg1);
 
     while (var_s0 != 0) {
-        temp_v0 = arg0(D_800A7464->unk_11);
+        temp_v0 = arg0(stage->fade_mode);
         if (var_s2 == 0) {
             if (temp_v0 != 0) {
                 var_s2 = temp_v0;
                 StageFade_StartFromTransparent(arg2);
             }
-        } else if (D_800A7464->unk_11 == 1) {
+        } else if (stage->fade_mode == 1) {
             var_s0 = 0;
         }
         BgStage_AdvanceFrame();
@@ -554,16 +554,16 @@ s32 BgStage_WaitForCondition(s32 (*arg0)(u8), s32 arg1, s32 arg2) {
     return var_s2;
 }
 
-void StageContext_SetClearColor(u16 arg0) {
-    if (D_800A7464 != NULL) {
-        D_800A7464->unk_14 = arg0;
-        Display_ClearFramebufferLine(arg0);
+void StageContext_SetClearColor(u16 color) {
+    if (stage != NULL) {
+        stage->clear_color = color;
+        Display_ClearFramebufferLine(color);
     }
 }
 
 void BgStage_DrawFrame(void) {
-    if (D_800A7464 != NULL) {
-        GfxImage_SetRenderTarget(&gDisplayListHead, D_800A7464->unk_18[D_800A7464->unk_16]);
+    if (stage != NULL) {
+        GfxImage_SetRenderTarget(&gDisplayListHead, stage->unk_18[stage->unk_16]);
 
         gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
     }
@@ -572,8 +572,8 @@ void BgStage_DrawFrame(void) {
 unk_D_80068BB0* StageContext_GetCurrentImage(void) {
     unk_D_80068BB0* ret = NULL;
 
-    if (D_800A7464 != NULL) {
-        ret = D_800A7464->unk_18[D_800A7464->unk_16];
+    if (stage != NULL) {
+        ret = stage->unk_18[stage->unk_16];
     }
 
     return ret;
@@ -582,8 +582,8 @@ unk_D_80068BB0* StageContext_GetCurrentImage(void) {
 s32 StageContext_IsHighResolution(void) {
     s32 ret = 0;
 
-    if (D_800A7464 != NULL) {
-        ret = D_800A7464->unk_0C == 1;
+    if (stage != NULL) {
+        ret = stage->zoom == 1;
     }
 
     return ret;

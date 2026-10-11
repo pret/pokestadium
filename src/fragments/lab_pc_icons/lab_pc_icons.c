@@ -1340,7 +1340,7 @@ s32 LabPC_HandleDetailPanelInput(unk_func_88205880_0098_008* arg0, Controller* a
                 arg0->unk_84 = tmp;
                 arg0->unk_40->unk_7C[tmp]->unk_00.unk_28 |= 1;
                 LabPC_SelectDetailPanelPage(arg0, 3);
-                Audio_PlaySoundEffectById(2);
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
                 var_a2 = 1;
             } else if (arg1->buttonPressed & 0x5000) {
                 LabPC_SelectDetailPanelPage(arg0, 0);
@@ -1354,7 +1354,7 @@ s32 LabPC_HandleDetailPanelInput(unk_func_88205880_0098_008* arg0, Controller* a
                 if (arg0->unk_70->unk_00.unk_24 == arg0->unk_84) {
                     var_a2 = 0x80000101;
                 } else {
-                    Audio_PlaySoundEffectById(0x18);
+                    Audio_PlaySoundEffectById(SFX_MOVE_SWAP);
                     arg0->unk_40->unk_7C[arg0->unk_70->unk_00.unk_24]->unk_00.unk_28 |= 1;
                     arg0->unk_70->unk_00.unk_14(&arg0->unk_70->unk_00, 0);
                     LabPC_SwapMovesPanelSlots(arg0->unk_40, arg0->unk_84, arg0->unk_70->unk_00.unk_24);

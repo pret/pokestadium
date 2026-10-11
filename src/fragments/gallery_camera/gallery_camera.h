@@ -117,7 +117,7 @@ s32 GalleryCamera_BgAngleCallbackB(s32 arg0, GraphNode* arg1);
 s32 GalleryCamera_FogColorCallback(s32 arg0, GraphNode* arg1);
 void Gallery_SetBackgroundTint(u8 arg0, u8 arg1, u8 arg2);
 void Gallery_LoadPhotoTextures(void);
-unk_D_86002F58_004_000_010_024* Gallery_LoadSurfingPikachuIcon(BattleMon* arg0);
+ModelLoadResult* Gallery_LoadSurfingPikachuIcon(BattleMon* arg0);
 void Gallery_SetupPhotoModel(void);
 void Gallery_FinalizeBackgroundLoad(void);
 void Gallery_LoadBackgroundSet(s32 arg0);

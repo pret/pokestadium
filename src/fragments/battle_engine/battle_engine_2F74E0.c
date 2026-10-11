@@ -654,24 +654,24 @@ void BattleScene_ForfeitPrompt(Battler* arg0) {
     if ((gBattleScene.unk_00->unk_40 == 0) &&
         (BTN_IS_PRESSED(D_84390148, BTN_DLEFT) || BTN_IS_PRESSED(D_8439014C, BTN_DLEFT))) {
         sp18->unk_2F = 0;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if ((gBattleScene.unk_00->unk_40 == 0) &&
         (BTN_IS_PRESSED(D_84390148, BTN_DRIGHT) || BTN_IS_PRESSED(D_8439014C, BTN_DRIGHT))) {
         sp18->unk_2F = 1;
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if ((sp18->unk_2F == 1) && (BTN_IS_PRESSED(D_84390148, BTN_A) || BTN_IS_PRESSED(D_8439014C, BTN_A)) &&
         (gBattleScene.unk_00->unk_40 == 0)) {
-        Audio_PlaySoundEffectById(2);
+        Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         gBattleScene.unk_00->unk_40 = (BattleScene_GetParticipantSideIndex(arg0) == 0) + 1;
         Audio_FadeOutAll(0x14);
     } else if ((sp18->unk_2F == 0) && (BTN_IS_PRESSED(D_84390148, BTN_A) || BTN_IS_PRESSED(D_8439014C, BTN_A))) {
         sp18->unk_10 = 0;
         sp18->unk_04 = 0;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 
@@ -1122,17 +1122,17 @@ s32 BattleScene_HandlePlayerForcedActionState(Battler* arg0, Battler* arg1) {
 }
 
 void BattleScene_ShowParticipantOwnerAndSecondaryModels(void) {
-    D_84390010[0]->unk_728.unk_168->unk_00.unk_01 |= 1;
-    D_84390010[0]->unk_728.unk_000.unk_000.unk_01 |= 1;
-    D_84390010[1]->unk_728.unk_168->unk_00.unk_01 |= 1;
-    D_84390010[1]->unk_728.unk_000.unk_000.unk_01 |= 1;
+    D_84390010[0]->unk_728.unk_168->node.flags |= 1;
+    D_84390010[0]->unk_728.unk_000.node.flags |= 1;
+    D_84390010[1]->unk_728.unk_168->node.flags |= 1;
+    D_84390010[1]->unk_728.unk_000.node.flags |= 1;
 }
 
 void BattleScene_HideParticipantOwnerAndSecondaryModels(void) {
-    D_84390010[0]->unk_728.unk_168->unk_00.unk_01 &= ~1;
-    D_84390010[0]->unk_728.unk_000.unk_000.unk_01 &= ~1;
-    D_84390010[1]->unk_728.unk_168->unk_00.unk_01 &= ~1;
-    D_84390010[1]->unk_728.unk_000.unk_000.unk_01 &= ~1;
+    D_84390010[0]->unk_728.unk_168->node.flags &= ~1;
+    D_84390010[0]->unk_728.unk_000.node.flags &= ~1;
+    D_84390010[1]->unk_728.unk_168->node.flags &= ~1;
+    D_84390010[1]->unk_728.unk_000.node.flags &= ~1;
 }
 
 void BattleScene_AdvanceAttractInputScript(void) {

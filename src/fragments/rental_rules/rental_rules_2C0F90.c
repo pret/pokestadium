@@ -35,7 +35,7 @@ void RentalRules_PopupUpdateShown(void) {
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A | BTN_B)) {
         D_83003EE0 = 3;
         D_83003EE2 = 5;
-        Audio_PlaySoundEffectById(3);
+        Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 

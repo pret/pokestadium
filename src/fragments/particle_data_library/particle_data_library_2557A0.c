@@ -21,7 +21,7 @@ void DisplayList_InitTwoSegmentChain(s32 arg0, DisplayListState* state) {
 }
 
 void DisplayList_BuildConditionalSegment(Gfx* gfx, s32* address) {
-    if (D_8006F09C->unk_01C == 0) {
+    if (D_8006F09C->textureMode == 0) {
         gSPDisplayList(gfx++, *address);
     }
     gSPEndDisplayList(gfx++);

@@ -5,26 +5,26 @@
 
 void GeoNode_Init(GraphNode* arg0, u8 arg1) {
     if (arg0 != NULL) {
-        arg0->unk_00 = arg1;
-        arg0->unk_01 = 0x11;
-        arg0->unk_02 = 0;
-        arg0->unk_03 = 0;
-        arg0->unk_04 = arg0;
-        arg0->unk_08 = arg0;
-        arg0->unk_0C = NULL;
-        arg0->unk_10 = NULL;
-        arg0->unk_14 = NULL;
+        arg0->type = arg1;
+        arg0->flags = 0x11;
+        arg0->renderFlags = 0;
+        arg0->renderLayer = 0;
+        arg0->prevSibling = arg0;
+        arg0->nextSibling = arg0;
+        arg0->children = NULL;
+        arg0->callback = NULL;
+        arg0->callbackArg = NULL;
     }
 }
 
-void GeoNode_SetCallback(GraphNode* arg0, func_D_86002F34_000_010 arg1, void* arg2) {
+void GeoNode_SetCallback(GraphNode* arg0, GraphNodeCallback arg1, void* arg2) {
     if (arg1 != NULL) {
         arg1 = Util_ConvertAddrToVirtAddr(arg1);
     }
 
     if (arg0 != NULL) {
-        arg0->unk_14 = arg2;
-        arg0->unk_10 = arg1;
+        arg0->callbackArg = arg2;
+        arg0->callback = arg1;
         if (arg1 != NULL) {
             arg1(0, arg0);
         }
@@ -105,7 +105,7 @@ unk_D_86002F34_alt14* GeoNode_CreateOrtho(MainPoolState* arg0, unk_D_86002F34_al
 
     if (arg1 != NULL) {
         GeoNode_Init(arg1, 5);
-        arg1->unk_00.unk_02 |= arg2 & 3;
+        arg1->node.renderFlags |= arg2 & 3;
     }
 
     return arg1;
@@ -118,7 +118,7 @@ unk_D_86002F34_alt15* GeoNode_CreatePerspective(MainPoolState* arg0, unk_D_86002
 
     if (arg1 != NULL) {
         GeoNode_Init(arg1, 6);
-        arg1->unk_00.unk_02 |= arg2 & 3;
+        arg1->node.renderFlags |= arg2 & 3;
     }
 
     return arg1;
@@ -320,40 +320,40 @@ unk_D_86002F34_alt7* GeoNode_CreateDisplayListPart(MainPoolState* arg0, unk_D_86
         arg1->unk_18 = arg3;
         arg1->unk_1C = arg4;
         GeoNode_Init(arg1, 0x15);
-        arg1->unk_00.unk_03 = arg2;
+        arg1->node.renderLayer = arg2;
     }
 
     return arg1;
 }
 
-unk_D_86002F58_004_000* GeoNode_CreateModelPart(MainPoolState* arg0, unk_D_86002F58_004_000* arg1, s16 arg2, Vec3f* arg3,
+DisplayObject* GeoNode_CreateModelPart(MainPoolState* arg0, DisplayObject* arg1, s16 arg2, Vec3f* arg3,
                                       Vec3s* arg4, Vec3f* arg5) {
     if (arg0 != 0) {
-        arg1 = MainPool_AllocAligned(arg0, sizeof(unk_D_86002F58_004_000), 4);
+        arg1 = MainPool_AllocAligned(arg0, sizeof(DisplayObject), 4);
     }
 
     if (arg1 != NULL) {
-        arg1->unk_018 = 0;
-        arg1->unk_01A = arg2;
-        arg1->unk_024 = *arg3;
-        arg1->unk_030 = *arg5;
-        arg1->unk_01E = *arg4;
-        arg1->unk_01D = 0xFF;
-        arg1->unk_01C = 0;
-        arg1->unk_0A6 = 0;
-        arg1->unk_0A0.rgba = 0xFFFFFF00;
-        arg1->unk_03C.rgba = 0xFFFFFF00;
-        arg1->unk_040.unk_00 = 0;
-        arg1->unk_040.unk_04 = NULL;
-        arg1->unk_040.unk_08 = 0;
-        arg1->unk_040.unk_0C = 0x10000;
-        arg1->unk_040.unk_12 = 0;
-        arg1->unk_054.unk_00 = 0;
-        arg1->unk_054.unk_04 = NULL;
-        arg1->unk_054.unk_08 = 0;
-        arg1->unk_054.unk_0A = 0;
-        GeoNode_Init(&arg1->unk_000, 0x16);
-        arg1->unk_000.unk_02 |= 0x60;
+        arg1->rootId = 0;
+        arg1->objectType = arg2;
+        arg1->position = *arg3;
+        arg1->scale = *arg5;
+        arg1->rotation = *arg4;
+        arg1->lodFraction = 0xFF;
+        arg1->textureMode = 0;
+        arg1->effectSlot = 0;
+        arg1->fogColor.rgba = 0xFFFFFF00;
+        arg1->textureTint.rgba = 0xFFFFFF00;
+        arg1->transformAnim.animationId = 0;
+        arg1->transformAnim.data = NULL;
+        arg1->transformAnim.frameFixed = 0;
+        arg1->transformAnim.speedFixed = 0x10000;
+        arg1->transformAnim.lastRenderFrame = 0;
+        arg1->eventTrack.trackId = 0;
+        arg1->eventTrack.data = NULL;
+        arg1->eventTrack.frame = 0;
+        arg1->eventTrack.lastRenderFrame = 0;
+        GeoNode_Init(&arg1->node, 0x16);
+        arg1->node.renderFlags |= 0x60;
     }
 
     return arg1;
@@ -372,7 +372,7 @@ unk_D_86002F34_alt8* GeoNode_CreateDisplayListMatrix(MainPoolState* arg0, unk_D_
             MtxF_Copy(&arg1->unk_1C, arg4);
         }
         GeoNode_Init(arg1, 0x17);
-        arg1->unk_00.unk_03 = arg2;
+        arg1->node.renderLayer = arg2;
     }
 
     return arg1;
@@ -397,7 +397,7 @@ unk_D_86002F34_alt9* GeoNode_CreateScale(MainPoolState* arg0, unk_D_86002F34_alt
         arg1->unk_28 = arg5;
         arg1->unk_18 = arg3;
         GeoNode_Init(arg1, 0x18);
-        arg1->unk_00.unk_03 = arg2;
+        arg1->node.renderLayer = arg2;
     }
 
     return arg1;
@@ -409,9 +409,9 @@ unk_func_80011B94* GeoNode_CreateDisplayList(MainPoolState* arg0, unk_func_80011
     }
 
     if (arg1 != NULL) {
-        arg1->unk_18 = arg3;
+        arg1->gfx = arg3;
         GeoNode_Init(arg1, 0x19);
-        arg1->unk_00.unk_03 = arg2;
+        arg1->display_node_header.renderLayer = arg2;
     }
 
     return arg1;
@@ -465,7 +465,7 @@ unk_D_86002F34_alt24* GeoNode_CreateGroup(MainPoolState* arg0, unk_D_86002F34_al
         arg1->unk_24 = arg9;
         arg1->unk_28.rgba = (r << 0x18) | (g << 0x10) | (b << 8) | a;
         GeoNode_Init(arg1, 0x1C);
-        arg1->unk_00.unk_03 = arg2;
+        arg1->node.renderLayer = arg2;
     }
 
     return arg1;
@@ -546,40 +546,40 @@ void GraphNode_AppendChild(GraphNode* arg0, GraphNode* arg1) {
     GraphNode* temp_v1;
 
     if ((arg0 != NULL) && (arg1 != NULL)) {
-        temp_v0 = arg0->unk_0C;
+        temp_v0 = arg0->children;
         if (temp_v0 == NULL) {
-            arg0->unk_0C = arg1;
-            arg1->unk_04 = arg1;
-            arg1->unk_08 = arg1;
+            arg0->children = arg1;
+            arg1->prevSibling = arg1;
+            arg1->nextSibling = arg1;
         } else {
-            temp_v1 = temp_v0->unk_04;
-            arg1->unk_08 = temp_v0;
-            arg1->unk_04 = temp_v1;
-            temp_v0->unk_04 = arg1;
-            temp_v1->unk_08 = arg1;
+            temp_v1 = temp_v0->prevSibling;
+            arg1->nextSibling = temp_v0;
+            arg1->prevSibling = temp_v1;
+            temp_v0->prevSibling = arg1;
+            temp_v1->nextSibling = arg1;
         }
     }
 }
 
 void GraphNode_RemoveChild(GraphNode* arg0, GraphNode* arg1) {
-    arg1->unk_04->unk_08 = arg1->unk_08;
-    arg1->unk_08->unk_04 = arg1->unk_04;
-    if ((unk_D_86002F34_00C*)arg1 == arg0->unk_0C) {
-        if (arg1 == arg1->unk_08) {
-            arg0->unk_0C = NULL;
+    arg1->prevSibling->nextSibling = arg1->nextSibling;
+    arg1->nextSibling->prevSibling = arg1->prevSibling;
+    if ((unk_D_86002F34_00C*)arg1 == arg0->children) {
+        if (arg1 == arg1->nextSibling) {
+            arg0->children = NULL;
             return;
         }
-        arg0->unk_0C = (unk_D_86002F34_00C*)arg1->unk_08;
+        arg0->children = (unk_D_86002F34_00C*)arg1->nextSibling;
     }
 }
 
 GraphNode* GraphNode_GetChildAtIndex(GraphNode* arg0, s32 arg1) {
     GraphNode* var_v1;
     s32 i;
-    var_v1 = (GraphNode*)arg0->unk_0C;
+    var_v1 = (GraphNode*)arg0->children;
     if (var_v1 != NULL) {
         for (i = 0; i < arg1; i++) {
-            var_v1 = var_v1->unk_08;
+            var_v1 = var_v1->nextSibling;
         }
     }
     return var_v1;

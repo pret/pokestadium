@@ -627,7 +627,7 @@ void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay,
         up[0] = up[1] = 0;
         up[2] = -1.0f;
         x = vy / len;
-        dist = Math_FAbs((dir[2] * up[2]) + (x * up[1]) + (dir[0] * up[0]));
+        dist = Math_FAbs((dir[2] * -1.0f) + ((x * up[1]) + (up[1] * dir[0])));
         vx = up[1];
         vz = up[0];
         if (0.9f < dist) {
@@ -677,8 +677,7 @@ void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay,
             z = mvtx->position.base.z;
             dist = func_80033568(x, y, z, tax, tay, taz, tbx, tby, tbz, &nx, &ny, &nz);
             if (dist > 0.0f) {
-                x = x - nx;
-                x = ((x * radius) / dist) + nx;
+                x = (((x - nx) * radius) / dist) + nx;
                 y = (((y - ny) * radius) / dist) + ny;
                 z = (((z - nz) * radius) / dist) + nz;
             }
@@ -922,9 +921,10 @@ void Model_ApplyVertexTransforms(StadiumModel* model) {
     Model_ApplyTransformCommands(segment, mvtx, model, 1.0f);
 }
 
-#ifdef NON_MATCHING
 void func_80034BD4(u32 modelSegment, StadiumTransform* xf, s32 index, ModelVertex* vertices) {
-    s32 pad0[5];
+    ModelBlendWeight* wt;
+    ModelVertex* vtx;
+    s32 pad0[3];
     f32 sp180;
     f32 sp17C;
     f32 sp178;
@@ -971,7 +971,6 @@ void func_80034BD4(u32 modelSegment, StadiumTransform* xf, s32 index, ModelVerte
     ModelSegment* temp_v0;
     s32 temp_s1_3;
     s32 i;
-    s16* var_s3;
     PosBlend* temp_v0_2;
 
     temp_v0 = Memmap_GetSegmentVaddr(modelSegment);
@@ -983,7 +982,6 @@ void func_80034BD4(u32 modelSegment, StadiumTransform* xf, s32 index, ModelVerte
     guMtxXFMF(mtx->mf, xf->x1, xf->y1, xf->z1, &sp174, &sp170, &sp16C);
     guMtxXFMF(mtx->mf, xf->x2, xf->y2, xf->z2, &sp168, &sp164, &sp160);
     guMtxXFMF(mtx->mf, xf->x3, xf->y3, xf->z3, &sp15C, &sp158, &sp154);
-    var_s3 = temp_s1;
     sp150 = sp174 - sp180;
     sp14C = sp170 - sp17C;
     sp148 = sp16C - sp178;
@@ -993,19 +991,21 @@ void func_80034BD4(u32 modelSegment, StadiumTransform* xf, s32 index, ModelVerte
     sp138 = sp15C - sp180;
     sp134 = sp158 - sp17C;
     sp130 = sp154 - sp178;
+    vtx = vertices;
     for (i = 0; i < spCA; i++) {
-        temp_s1_2 = *var_s3;
+        temp_s1_2 = temp_s1[i];
         if ((Model_GetVertexClass(spC0, temp_s1_2) != 0) && (temp_s1_2 == i)) {
-            temp_fs0 = vertices->position.base.x;
-            temp_fs1 = vertices->position.base.y;
-            temp_fs2 = vertices->position.base.z;
+            temp_fs0 = vtx->position.base.x;
+            temp_fs1 = vtx->position.base.y;
+            temp_fs2 = vtx->position.base.z;
             temp_s1_3 = 1 << index;
             temp_fv0 = func_80033568(temp_fs0, temp_fs1, temp_fs2, sp180, sp17C, sp178, sp174, sp170, sp16C, &sp104, &sp100, &spFC);
-            temp_v0_2 = &vertices->position;
+            temp_v0_2 = &vtx->position;
             if ((temp_fv0 > 0.0f) && (temp_fv0 < xf->maxDist)) {
-                w0 = vertices->cmd.weights[index].w0;
-                w1 = vertices->cmd.weights[index].w1;
-                w2 = vertices->cmd.weights[index].w2;
+                wt = &vtx->cmd.weights[index];
+                w0 = wt->w0;
+                w1 = wt->w1;
+                w2 = wt->w2;
                 x = (w0 * sp150) + sp180 + (w1 * sp144) + (w2 * sp138);
                 y = (w0 * sp14C) + sp17C + (w1 * sp140) + (w2 * sp134);
                 z = (w0 * sp148) + sp178 + (w1 * sp13C) + (w2 * sp130);
@@ -1017,14 +1017,9 @@ void func_80034BD4(u32 modelSegment, StadiumTransform* xf, s32 index, ModelVerte
                 temp_v0_2->disabled &= ~temp_s1_3;
             }
         }
-        var_s3++;
-        vertices++;
+        vtx++;
     }
 }
-#else
-void func_80034BD4(u32, StadiumTransform*, s32, ModelVertex*);
-#pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80034BD4.s")
-#endif
 
 void Model_TransformPoint(MtxF* mtx, Vec3f* out, s16 (*in)[3]) {
     f32 sp34;

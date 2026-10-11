@@ -617,11 +617,11 @@ s32 BattlePrep_BindCarouselSegment0(s32 arg0, unk_func_80011B94* arg1) {
     unk_D_84B259E8* temp_a0;
 
     if (arg0 == 5) {
-        temp_a0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
+        temp_a0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a0->unk_0C & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -632,11 +632,11 @@ s32 BattlePrep_BindCarouselSegment1(s32 arg0, unk_func_80011B94* arg1) {
     unk_D_84B259E8* temp_a0;
 
     if (arg0 == 5) {
-        temp_a0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
+        temp_a0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a0->unk_10[0] & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -647,12 +647,12 @@ s32 BattlePrep_BindCarouselSegment3(s32 arg0, unk_func_80011B94* arg1) {
     unk_D_84B259E8* temp_a0;
 
     if (arg0 == 5) {
-        temp_a0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
+        temp_a0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a0->unk_10[2] & 0x1FFFFFFF);
         gSPSegment(gDisplayListHead++, 0x0E, (u32)temp_a0->unk_10[3] & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -663,11 +663,11 @@ s32 BattlePrep_BindCarouselSegment2(s32 arg0, unk_func_80011B94* arg1) {
     unk_D_84B259E8* temp_a0;
 
     if (arg0 == 5) {
-        temp_a0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
+        temp_a0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a0->unk_10[1] & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -678,9 +678,9 @@ s32 BattlePrep_CarouselDepthCallback(s32 arg0, unk_D_86002F34_alt5* arg1) {
     unk_D_84B259A8* temp_a0;
 
     if (arg0 == 2) {
-        temp_a0 = (unk_D_84B259A8*)D_8006F09C->unk_000.unk_14;
+        temp_a0 = (unk_D_84B259A8*)D_8006F09C->node.callbackArg;
 
-        arg1->unk_24.z = temp_a0->unk_02[(D_8006F09C->unk_0A6 - temp_a0->unk_20->unk_0A6) - 9];
+        arg1->unk_24.z = temp_a0->unk_02[(D_8006F09C->effectSlot - temp_a0->unk_20->effectSlot) - 9];
     }
     return 0;
 }
@@ -691,7 +691,7 @@ void BattlePrep_CarouselStepFirstItem(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     if (arg1 < 0xA) {
-        arg0->unk_20->unk_024.x = (arg1 << 5) - 0x120;
+        arg0->unk_20->position.x = (arg1 << 5) - 0x120;
     }
 }
 
@@ -703,23 +703,23 @@ void BattlePrep_CarouselStepNTSC(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     for (i = 1; i < 7; i += 2) {
-        arg0->unk_20[i].unk_024 = arg0->unk_20[2 + i].unk_024;
-        arg0->unk_20[1 + i].unk_024 = arg0->unk_20[3 + i].unk_024;
+        arg0->unk_20[i].position = arg0->unk_20[2 + i].position;
+        arg0->unk_20[1 + i].position = arg0->unk_20[3 + i].position;
 
-        arg0->unk_20[i].unk_030 = arg0->unk_20[2 + i].unk_030;
-        arg0->unk_20[1 + i].unk_030 = arg0->unk_20[3 + i].unk_030;
+        arg0->unk_20[i].scale = arg0->unk_20[2 + i].scale;
+        arg0->unk_20[1 + i].scale = arg0->unk_20[3 + i].scale;
     }
 
     if (arg1 < 0x12) {
-        arg0->unk_20[7].unk_024.x = (arg1 * 0x14) - 0x154;
+        arg0->unk_20[7].position.x = (arg1 * 0x14) - 0x154;
     }
 
     if (arg1 < 0x10) {
-        arg0->unk_20[8].unk_024.x = (arg1 * 0x14) - 0x12C;
+        arg0->unk_20[8].position.x = (arg1 * 0x14) - 0x12C;
     }
 
     if ((arg1 >= 0x12) && (arg1 < 0x2B)) {
-        arg0->unk_20[7].unk_024.x = SINS((arg1 * 0x1555) + 0xFFFE955B) * (s16)(0x54 - (arg1 * 2));
+        arg0->unk_20[7].position.x = SINS((arg1 * 0x1555) + 0xFFFE955B) * (s16)(0x54 - (arg1 * 2));
     }
 }
 
@@ -731,23 +731,23 @@ void BattlePrep_CarouselStepPAL(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     for (i = 1; i < 7; i += 2) {
-        arg0->unk_20[i].unk_024 = arg0->unk_20[2 + i].unk_024;
-        arg0->unk_20[1 + i].unk_024 = arg0->unk_20[3 + i].unk_024;
+        arg0->unk_20[i].position = arg0->unk_20[2 + i].position;
+        arg0->unk_20[1 + i].position = arg0->unk_20[3 + i].position;
 
-        arg0->unk_20[i].unk_030 = arg0->unk_20[2 + i].unk_030;
-        arg0->unk_20[1 + i].unk_030 = arg0->unk_20[3 + i].unk_030;
+        arg0->unk_20[i].scale = arg0->unk_20[2 + i].scale;
+        arg0->unk_20[1 + i].scale = arg0->unk_20[3 + i].scale;
     }
 
     if (arg1 < 0xF) {
-        arg0->unk_20[7].unk_024.x = (arg1 * 0x18) - 0x150;
+        arg0->unk_20[7].position.x = (arg1 * 0x18) - 0x150;
     }
 
     if (arg1 < 0xD) {
-        arg0->unk_20[8].unk_024.x = (arg1 * 0x18) - 0x120;
+        arg0->unk_20[8].position.x = (arg1 * 0x18) - 0x120;
     }
 
     if ((arg1 >= 0xF) && (arg1 < 0x28)) {
-        arg0->unk_20[7].unk_024.x = SINS((arg1 * 0x1555) + 0xFFFED55A) * (s16)(0x4E - (arg1 * 2));
+        arg0->unk_20[7].position.x = SINS((arg1 * 0x1555) + 0xFFFED55A) * (s16)(0x4E - (arg1 * 2));
     }
 }
 
@@ -764,13 +764,13 @@ void BattlePrep_CarouselStepFinalNTSC(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     for (i = 0; i < 3; i++) {
-        arg0->unk_20[9 + i].unk_024 = arg0->unk_20[10 + i].unk_024;
-        arg0->unk_20[9 + i].unk_030 = arg0->unk_20[10 + i].unk_030;
+        arg0->unk_20[9 + i].position = arg0->unk_20[10 + i].position;
+        arg0->unk_20[9 + i].scale = arg0->unk_20[10 + i].scale;
 
         arg0->unk_02[i] = arg0->unk_02[i + 1];
 
-        arg0->unk_20[13 + i].unk_024 = arg0->unk_20[14 + i].unk_024;
-        arg0->unk_20[13 + i].unk_030 = arg0->unk_20[14 + i].unk_030;
+        arg0->unk_20[13 + i].position = arg0->unk_20[14 + i].position;
+        arg0->unk_20[13 + i].scale = arg0->unk_20[14 + i].scale;
     }
 
     if (arg1 < 0x12) {
@@ -778,22 +778,22 @@ void BattlePrep_CarouselStepFinalNTSC(unk_D_84B259A8* arg0, s16 arg1) {
         s32 sp24 = (arg1 << 0xC) - 0x1000;
 
         arg0->unk_02[3] = sp24;
-        arg0->unk_20[12].unk_024.x = 0.0f;
-        arg0->unk_20[16].unk_024.x = 0.0f;
+        arg0->unk_20[12].position.x = 0.0f;
+        arg0->unk_20[16].position.x = 0.0f;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].unk_030, sp28, sp28, sp28);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].unk_030, sp28, sp28, sp28);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].scale, sp28, sp28, sp28);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].scale, sp28, sp28, sp28);
         if (sp24 >= 0xF000) {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].unk_030, sp28, sp28, sp28);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].unk_030, sp28, sp28, sp28);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].scale, sp28, sp28, sp28);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].scale, sp28, sp28, sp28);
         }
     } else if (arg1 < 0x1F) {
         f32 sp2C = (SINS((arg1 << 0xD) + 0xFFFE0000) * ((0x12C - (arg1 * 0xA)) / 1000.0f)) + 1.0f;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].unk_030, sp2C, sp2C, sp2C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].unk_030, sp2C, sp2C, sp2C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].unk_030, sp2C, sp2C, sp2C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].unk_030, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].scale, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].scale, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].scale, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].scale, sp2C, sp2C, sp2C);
     }
 }
 
@@ -810,13 +810,13 @@ void BattlePrep_CarouselStepFinalPAL(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     for (i = 0; i < 3; i++) {
-        arg0->unk_20[9 + i].unk_024 = arg0->unk_20[10 + i].unk_024;
-        arg0->unk_20[9 + i].unk_030 = arg0->unk_20[10 + i].unk_030;
+        arg0->unk_20[9 + i].position = arg0->unk_20[10 + i].position;
+        arg0->unk_20[9 + i].scale = arg0->unk_20[10 + i].scale;
 
         arg0->unk_02[i] = arg0->unk_02[i + 1];
 
-        arg0->unk_20[13 + i].unk_024 = arg0->unk_20[14 + i].unk_024;
-        arg0->unk_20[13 + i].unk_030 = arg0->unk_20[14 + i].unk_030;
+        arg0->unk_20[13 + i].position = arg0->unk_20[14 + i].position;
+        arg0->unk_20[13 + i].scale = arg0->unk_20[14 + i].scale;
     }
 
     if (arg1 < 0xF) {
@@ -824,23 +824,23 @@ void BattlePrep_CarouselStepFinalPAL(unk_D_84B259A8* arg0, s16 arg1) {
         s32 sp24 = (arg1 * 0x1333) - 0xCCA;
 
         arg0->unk_02[3] = sp24;
-        arg0->unk_20[12].unk_024.x = 0.0f;
-        arg0->unk_20[16].unk_024.x = 0.0f;
+        arg0->unk_20[12].position.x = 0.0f;
+        arg0->unk_20[16].position.x = 0.0f;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].unk_030, sp28, sp28, sp28);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].unk_030, sp28, sp28, sp28);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].scale, sp28, sp28, sp28);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].scale, sp28, sp28, sp28);
 
         if (sp24 >= 0xECCD) {
-            Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].unk_030, sp28, sp28, sp28);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].unk_030, sp28, sp28, sp28);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].scale, sp28, sp28, sp28);
+            Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].scale, sp28, sp28, sp28);
         }
     } else if (arg1 < 0x1C) {
         f32 sp2C = (SINS((arg1 << 0xD) + 0xFFFE6000) * ((0x10E - (arg1 * 0xA)) / 1000.0f)) + 1.0f;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].unk_030, sp2C, sp2C, sp2C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].unk_030, sp2C, sp2C, sp2C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].unk_030, sp2C, sp2C, sp2C);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].unk_030, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[7].scale, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[8].scale, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[12].scale, sp2C, sp2C, sp2C);
+        Vec3f_SetComponentsDuplicate(&arg0->unk_20[16].scale, sp2C, sp2C, sp2C);
     }
 }
 
@@ -875,7 +875,7 @@ void BattlePrep_UpdateCarousel(unk_D_84B259A8* arg0) {
 
     if (arg0->unk_01 == 0xDC) {
         for (i = 0; i < 17; i++) {
-            arg0->unk_20[i].unk_024.x = -320.0f;
+            arg0->unk_20[i].position.x = -320.0f;
         }
     }
 
@@ -890,22 +890,22 @@ void BattlePrep_CarouselExitAnimation(unk_D_84B259A8* arg0) {
     }
 
     for (i = 0; i < 5; i += 2) {
-        arg0->unk_20[1 + i].unk_024 = arg0->unk_20[3 + i].unk_024;
-        arg0->unk_20[2 + i].unk_024 = arg0->unk_20[4 + i].unk_024;
+        arg0->unk_20[1 + i].position = arg0->unk_20[3 + i].position;
+        arg0->unk_20[2 + i].position = arg0->unk_20[4 + i].position;
     }
 
     for (i = 0; i < 3; i++) {
-        arg0->unk_20[9 + i].unk_024 = arg0->unk_20[10 + i].unk_024;
-        arg0->unk_20[13 + i].unk_024 = arg0->unk_20[14 + i].unk_024;
+        arg0->unk_20[9 + i].position = arg0->unk_20[10 + i].position;
+        arg0->unk_20[13 + i].position = arg0->unk_20[14 + i].position;
     }
 
-    arg0->unk_20[0].unk_024.x += 32.0f;
-    arg0->unk_20[7].unk_024.x += 32.0f;
-    arg0->unk_20[8].unk_024.x += 32.0f;
-    arg0->unk_20[12].unk_024.x += 32.0f;
-    arg0->unk_20[16].unk_024.x += 32.0f;
+    arg0->unk_20[0].position.x += 32.0f;
+    arg0->unk_20[7].position.x += 32.0f;
+    arg0->unk_20[8].position.x += 32.0f;
+    arg0->unk_20[12].position.x += 32.0f;
+    arg0->unk_20[16].position.x += 32.0f;
 
-    if (arg0->unk_20->unk_024.x >= 416.0f) {
+    if (arg0->unk_20->position.x >= 416.0f) {
         for (i = 0; i < 17; i++) {
             BattlePrep_ResetDisplayObject(&arg0->unk_20[i]);
         }
@@ -922,19 +922,19 @@ void BattlePrep_CarouselEntryAnimation(unk_D_84B259A8* arg0) {
     }
 
     for (i = 0; i < 5; i += 2) {
-        arg0->unk_20[1 + i].unk_024 = arg0->unk_20[3 + i].unk_024;
-        arg0->unk_20[2 + i].unk_024 = arg0->unk_20[4 + i].unk_024;
+        arg0->unk_20[1 + i].position = arg0->unk_20[3 + i].position;
+        arg0->unk_20[2 + i].position = arg0->unk_20[4 + i].position;
     }
 
     for (i = 0; i < 3; i++) {
-        arg0->unk_20[9 + i].unk_024 = arg0->unk_20[10 + i].unk_024;
+        arg0->unk_20[9 + i].position = arg0->unk_20[10 + i].position;
     }
 
     if (arg0->unk_01 < 0xA) {
-        arg0->unk_20[0].unk_024.x += 32.0f;
-        arg0->unk_20[7].unk_024.x -= 32.0f;
-        arg0->unk_20[8].unk_024.x -= 32.0f;
-        arg0->unk_20[12].unk_024.x -= 32.0f;
+        arg0->unk_20[0].position.x += 32.0f;
+        arg0->unk_20[7].position.x -= 32.0f;
+        arg0->unk_20[8].position.x -= 32.0f;
+        arg0->unk_20[12].position.x -= 32.0f;
     }
 
     if (arg0->unk_01 == 0x20) {
@@ -961,7 +961,7 @@ void BattlePrep_UpdateCarouselState(unk_D_84B259A8* arg0) {
 
 void BattlePrep_InitCarouselBanner(unk_D_84B259A8* arg0, s16 arg1, s16 arg2) {
     Model_InitDisplayObject(arg0->unk_20, 0, 0, arg0->unk_24);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20->unk_024, arg1, arg2, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20->position, arg1, arg2, -289.0f);
 }
 
 void BattlePrep_InitCarouselGymBadgeSlot(unk_D_84B259A8* arg0, s16 arg1, s16 arg2, s16 arg3) {
@@ -978,15 +978,15 @@ void BattlePrep_InitCarouselGymBadgeSlot(unk_D_84B259A8* arg0, s16 arg1, s16 arg
 
     Model_InitDisplayObject(&arg0->unk_20[temp_s0], sp2C, 0, arg0->unk_28);
     Model_InitDisplayObject(&arg0->unk_20[temp_s0 + 1], sp2C, 0, arg0->unk_2C);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_s0].unk_024, arg2, arg3, -289.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_s0 + 1].unk_024, arg2, arg3, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_s0].position, arg2, arg3, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_s0 + 1].position, arg2, arg3, -289.0f);
 
     if (arg1 == 3) {
-        arg0->unk_20[temp_s0].unk_01D = 0xFF;
-        arg0->unk_20[temp_s0 + 1].unk_01D = 0xFF;
+        arg0->unk_20[temp_s0].lodFraction = 0xFF;
+        arg0->unk_20[temp_s0 + 1].lodFraction = 0xFF;
     } else {
-        arg0->unk_20[temp_s0].unk_01D = (arg1 * 0x28) + 0x50;
-        arg0->unk_20[temp_s0 + 1].unk_01D = (arg1 * 0x28) + 0x50;
+        arg0->unk_20[temp_s0].lodFraction = (arg1 * 0x28) + 0x50;
+        arg0->unk_20[temp_s0 + 1].lodFraction = (arg1 * 0x28) + 0x50;
     }
 }
 
@@ -1001,12 +1001,12 @@ void BattlePrep_InitCarouselLeftIcon(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     Model_InitDisplayObject(&arg0->unk_20[temp_v1], var_a1, 0, arg0->unk_30);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_v1].unk_024, -320.0f, 48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_v1].position, -320.0f, 48.0f, -289.0f);
 
     if (arg1 == 3) {
-        arg0->unk_20[temp_v1].unk_01D = 0xFF;
+        arg0->unk_20[temp_v1].lodFraction = 0xFF;
     } else {
-        arg0->unk_20[temp_v1].unk_01D = (arg1 * 0x28) + 0x50;
+        arg0->unk_20[temp_v1].lodFraction = (arg1 * 0x28) + 0x50;
     }
 }
 
@@ -1021,12 +1021,12 @@ void BattlePrep_InitCarouselRightIcon(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     Model_InitDisplayObject(&arg0->unk_20[temp_v1], var_a1, 0, arg0->unk_38);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_v1].unk_024, 320.0f, 0.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_v1].position, 320.0f, 0.0f, -289.0f);
 
     if (arg1 == 3) {
-        arg0->unk_20[temp_v1].unk_01D = 0xFF;
+        arg0->unk_20[temp_v1].lodFraction = 0xFF;
     } else {
-        arg0->unk_20[temp_v1].unk_01D = (arg1 * 0x28) + 0x50;
+        arg0->unk_20[temp_v1].lodFraction = (arg1 * 0x28) + 0x50;
     }
 }
 
@@ -1041,16 +1041,16 @@ void BattlePrep_InitCarouselCupIcon(unk_D_84B259A8* arg0, s16 arg1) {
     }
 
     Model_InitDisplayObject(&arg0->unk_20[temp_v1], var_a1, 0, arg0->unk_34);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_v1].unk_024, -320.0f, 48.0f, -289.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->unk_20[temp_v1].position, -320.0f, 48.0f, -289.0f);
 
     if (arg1 == 3) {
-        arg0->unk_20[temp_v1].unk_01D = 0xFF;
+        arg0->unk_20[temp_v1].lodFraction = 0xFF;
     } else {
-        arg0->unk_20[temp_v1].unk_01D = (arg1 * 0x28) + 0x50;
+        arg0->unk_20[temp_v1].lodFraction = (arg1 * 0x28) + 0x50;
     }
 }
 
-void BattlePrep_InitCarouselEntry(unk_D_84B259A8* arg0, unk_D_86002F58_004_000* arg1) {
+void BattlePrep_InitCarouselEntry(unk_D_84B259A8* arg0, DisplayObject* arg1) {
     s32 i;
 
     arg0->unk_20 = arg1;
@@ -1067,7 +1067,7 @@ void BattlePrep_InitCarouselEntry(unk_D_84B259A8* arg0, unk_D_86002F58_004_000* 
     }
 
     for (i = 0; i < 17; i++) {
-        arg0->unk_20[i].unk_000.unk_14 = arg0;
+        arg0->unk_20[i].node.callbackArg = arg0;
     }
 }
 
@@ -1076,7 +1076,7 @@ void BattlePrep_StartCarouselExit(unk_D_84B259A8* arg0) {
     arg0->unk_00 = 3;
 }
 
-void BattlePrep_InitCarouselExit(unk_D_84B259A8* arg0, unk_D_86002F58_004_000* arg1) {
+void BattlePrep_InitCarouselExit(unk_D_84B259A8* arg0, DisplayObject* arg1) {
     s32 i;
 
     arg0->unk_20 = arg1;
@@ -1090,7 +1090,7 @@ void BattlePrep_InitCarouselExit(unk_D_84B259A8* arg0, unk_D_86002F58_004_000* a
     }
 
     for (i = 0; i < 13; i++) {
-        arg0->unk_20[i].unk_000.unk_14 = arg0;
+        arg0->unk_20[i].node.callbackArg = arg0;
     }
 }
 
@@ -1268,9 +1268,9 @@ s32 BattlePrep_BadgeCarouselGeoCallback(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp2;
 
     if (arg0 == 5) {
-        temp_a0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
-        tmp = ((D_8006F09C->unk_0A6 - temp_a0->unk_08->unk_0A6) % 8) - 4;
-        tmp2 = (arg1->unk_00.unk_14 * 4) + tmp;
+        temp_a0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
+        tmp = ((D_8006F09C->effectSlot - temp_a0->unk_08->effectSlot) % 8) - 4;
+        tmp2 = (arg1->display_node_header.callbackArg * 4) + tmp;
 
         gDPPipeSync(gDisplayListHead++);
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a0->unk_10[tmp2] & 0x1FFFFFFF);
@@ -1290,9 +1290,9 @@ s32 BattlePrep_BadgeCarouselGlowCallback(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp2;
 
     if (arg0 == 5) {
-        temp_v0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
-        tmp = ((D_8006F09C->unk_0A6 - temp_v0->unk_08->unk_0A6) % 8) - 4;
-        tmp2 = tmp + arg1->unk_00.unk_14 * 4;
+        temp_v0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
+        tmp = ((D_8006F09C->effectSlot - temp_v0->unk_08->effectSlot) % 8) - 4;
+        tmp2 = tmp + arg1->display_node_header.callbackArg * 4;
 
         if ((temp_v0->unk_02 != 0) && ((tmp2 + 1) == D_800AE540.unk_0003)) {
             // clang-format off
@@ -1303,7 +1303,7 @@ s32 BattlePrep_BadgeCarouselGlowCallback(s32 arg0, unk_func_80011B94* arg1) {
             // clang-format on
 
             gDPPipeSync(gDisplayListHead++);
-            gDPSetPrimColor(gDisplayListHead++, 0, D_8006F09C->unk_01D, 200, 200, 30, var_t1);
+            gDPSetPrimColor(gDisplayListHead++, 0, D_8006F09C->lodFraction, 200, 200, 30, var_t1);
             gDPSetEnvColor(gDisplayListHead++, 200, 30, 30, var_t1);
             gSPDisplayList(gDisplayListHead++, D_84B114F8);
 
@@ -1319,13 +1319,13 @@ s32 BattlePrep_BadgeCarouselTextureCallback(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp;
 
     if (arg0 == 5) {
-        temp_a0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
-        tmp = ((D_8006F09C->unk_0A6 - temp_a0->unk_08->unk_0A6) % 8) - 4;
+        temp_a0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
+        tmp = ((D_8006F09C->effectSlot - temp_a0->unk_08->effectSlot) % 8) - 4;
 
         gDPPipeSync(gDisplayListHead++);
 
         gSPSegment(gDisplayListHead++, 0x0F, (u32)temp_a0->unk_30[tmp]->img_p & 0x1FFFFFFF);
-        gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+        gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
         GeoRender_ApplyMaterialState();
     }
@@ -1340,8 +1340,8 @@ s32 BattlePrep_BadgeCarouselGlowCallback2(s32 arg0, unk_func_80011B94* arg1) {
     s32 tmp;
 
     if (arg0 == 5) {
-        temp_v0 = (unk_D_84B259E8*)D_8006F09C->unk_000.unk_14;
-        tmp = ((D_8006F09C->unk_0A6 - temp_v0->unk_08->unk_0A6) % 8);
+        temp_v0 = (unk_D_84B259E8*)D_8006F09C->node.callbackArg;
+        tmp = ((D_8006F09C->effectSlot - temp_v0->unk_08->effectSlot) % 8);
         tmp -= 4;
 
         if ((temp_v0->unk_02 != 0) && ((tmp + 1) == D_800AE540.unk_0003)) {
@@ -1353,9 +1353,9 @@ s32 BattlePrep_BadgeCarouselGlowCallback2(s32 arg0, unk_func_80011B94* arg1) {
             // clang-format on
             gDPPipeSync(gDisplayListHead++);
 
-            gDPSetPrimColor(gDisplayListHead++, 0, D_8006F09C->unk_01D, 200, 200, 30, var_t1);
+            gDPSetPrimColor(gDisplayListHead++, 0, D_8006F09C->lodFraction, 200, 200, 30, var_t1);
             gDPSetEnvColor(gDisplayListHead++, 200, 30, 30, var_t1);
-            gSPDisplayList(gDisplayListHead++, arg1->unk_00.unk_14);
+            gSPDisplayList(gDisplayListHead++, arg1->display_node_header.callbackArg);
 
             GeoRender_ApplyMaterialState();
             D_84B11C1C += 0x800;
@@ -1386,8 +1386,8 @@ void BattlePrep_ResetBadgeSlideSlots(unk_D_84B259E8* arg0) {
         ModelRenderer_ClearDisplayObject(&arg0->unk_08[i + 4]);
         BattlePrep_ResetDisplayObject(&arg0->unk_08[i + 12]);
         Model_InitDisplayObject(&arg0->unk_08[i + 4], 1, 0, arg0->unk_0C);
-        arg0->unk_08[i + 4].unk_01E.x = 0;
-        arg0->unk_08[i + 4].unk_000.unk_14 = arg0;
+        arg0->unk_08[i + 4].rotation.x = 0;
+        arg0->unk_08[i + 4].node.callbackArg = arg0;
     }
 }
 
@@ -1397,7 +1397,7 @@ void BattlePrep_BadgeSlideInLeft(unk_D_84B259E8* arg0) {
     arg0->unk_01++;
 
     for (i = 0; i < 4; i++) {
-        arg0->unk_08[4 + i].unk_024.x = (0xE0 + i * 0x40) - (arg0->unk_01 << 5);
+        arg0->unk_08[4 + i].position.x = (0xE0 + i * 0x40) - (arg0->unk_01 << 5);
     }
 
     if (arg0->unk_01 == 0xA) {
@@ -1413,7 +1413,7 @@ void BattlePrep_BadgeSlideInRight(unk_D_84B259E8* arg0) {
     arg0->unk_01++;
 
     for (i = 0, var_v0 = -0x60; i < 4; i++, var_v0 += 0x40) {
-        arg0->unk_08[4 + i].unk_024.x = (s16)var_v0 - (arg0->unk_01 << 5);
+        arg0->unk_08[4 + i].position.x = (s16)var_v0 - (arg0->unk_01 << 5);
     }
 
     if (arg0->unk_01 == 0xA) {
@@ -1432,8 +1432,8 @@ void BattlePrep_BadgeRevealSpin(unk_D_84B259E8* arg0) {
     arg0->unk_01++;
     if (arg0->unk_01 < 0x10) {
         for (i = 0; i < 4; i++) {
-            arg0->unk_08[4 + i].unk_01E.x += 0x800;
-            arg0->unk_08[12 + i].unk_01E.x += 0x800;
+            arg0->unk_08[4 + i].rotation.x += 0x800;
+            arg0->unk_08[12 + i].rotation.x += 0x800;
         }
     } else if (arg0->unk_01 == 0x10) {
         Audio_PlayCategory11SoundCommand(0x0110000C, 0, 0);
@@ -1468,8 +1468,8 @@ void BattlePrep_BadgeHideSpin(unk_D_84B259E8* arg0) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        arg0->unk_08[4 + i].unk_01E.x -= 0x800;
-        arg0->unk_08[12 + i].unk_01E.x -= 0x800;
+        arg0->unk_08[4 + i].rotation.x -= 0x800;
+        arg0->unk_08[12 + i].rotation.x -= 0x800;
     }
 
     arg0->unk_01++;
@@ -1501,7 +1501,7 @@ void BattlePrep_UpdateBadgeCarousel(unk_D_84B259E8* arg0) {
     }
 }
 
-void BattlePrep_InitBadgeCarousel(unk_D_84B259E8* arg0, unk_D_86002F58_004_000* arg1, s16 arg2) {
+void BattlePrep_InitBadgeCarousel(unk_D_84B259E8* arg0, DisplayObject* arg1, s16 arg2) {
     s32 i;
     s16 var_s2;
 
@@ -1511,17 +1511,17 @@ void BattlePrep_InitBadgeCarousel(unk_D_84B259E8* arg0, unk_D_86002F58_004_000* 
     if (arg2 == 0) {
         for (i = 4; i < 8; i++) {
             Model_InitDisplayObject(&arg0->unk_08[i], 1, 0, arg0->unk_0C);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_08[i].unk_024, 320.0f, -48.0f, -289.0f);
-            arg0->unk_08[i].unk_000.unk_14 = (s32)arg0;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_08[i].position, 320.0f, -48.0f, -289.0f);
+            arg0->unk_08[i].node.callbackArg = (s32)arg0;
         }
         arg0->unk_00 = 1;
     } else {
         for (i = 12, var_s2 = -0x60; i < 16; i++) {
             Model_InitDisplayObject(&arg0->unk_08[i], 1, 0, arg0->unk_0C);
-            Vec3f_SetComponentsDuplicate(&arg0->unk_08[i].unk_024, var_s2, -48.0f, -289.0f);
-            arg0->unk_08[i].unk_01E.x = -0x8000;
+            Vec3f_SetComponentsDuplicate(&arg0->unk_08[i].position, var_s2, -48.0f, -289.0f);
+            arg0->unk_08[i].rotation.x = -0x8000;
             var_s2 += 0x40;
-            arg0->unk_08[i].unk_000.unk_14 = arg0;
+            arg0->unk_08[i].node.callbackArg = arg0;
         }
 
         if (arg2 == 1) {

@@ -102,7 +102,7 @@ s32 Ui_AdjustVerticalSelection(unk_func_8002DCB8_arg0* arg0, s32 arg1) {
 
     switch (arg1) {
         case 0x800:
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             if (arg0->unk_04 == 0) {
                 arg0->unk_04 += arg0->unk_08;
             }
@@ -111,7 +111,7 @@ s32 Ui_AdjustVerticalSelection(unk_func_8002DCB8_arg0* arg0, s32 arg1) {
             break;
 
         case 0x400:
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             if (arg0->unk_04 >= (arg0->unk_08 - 1)) {
                 arg0->unk_04 -= arg0->unk_08;
             }
@@ -135,7 +135,7 @@ s32 Ui_AdjustHorizontalSelection(unk_func_8002DD98_arg0* arg0, s32 arg1) {
 
     switch (arg1) {
         case 0x200:
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             if (arg0->unk_04 == 0) {
                 arg0->unk_04 += arg0->unk_08;
             }
@@ -144,7 +144,7 @@ s32 Ui_AdjustHorizontalSelection(unk_func_8002DD98_arg0* arg0, s32 arg1) {
             break;
 
         case 0x100:
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             if (arg0->unk_04 >= (arg0->unk_08 - 1)) {
                 arg0->unk_04 -= arg0->unk_08;
             }
@@ -173,7 +173,7 @@ void Ui_AdjustSteppedScrollSelection(unk_func_8002DE78_arg0* arg0) {
 
     switch (temp_v0) {
         case 0x800:
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             if (arg0->unk_00 - sp18 < arg0->unk_04) {
                 arg0->unk_00 = arg0->unk_04;
             } else {
@@ -182,7 +182,7 @@ void Ui_AdjustSteppedScrollSelection(unk_func_8002DE78_arg0* arg0) {
             break;
 
         case 0x400:
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             if (arg0->unk_08 < arg0->unk_00 + sp18) {
                 arg0->unk_00 = arg0->unk_08;
             } else {
@@ -210,7 +210,7 @@ s32 Ui_AdjustNumericSelection(unk_func_8830867C_044_038_030* arg0, s32 arg1) {
             temp_v0 = arg0->unk_10 + 1;
             if (temp_v0 < arg0->unk_0C) {
                 arg0->unk_10 = temp_v0;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 var_t1 = 9;
             } else {
                 var_t1 = 8;
@@ -220,7 +220,7 @@ s32 Ui_AdjustNumericSelection(unk_func_8830867C_044_038_030* arg0, s32 arg1) {
         case 0x100:
             if (arg0->unk_10 > 0) {
                 arg0->unk_10--;
-                Audio_PlaySoundEffectById(1);
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                 var_t1 = 9;
             } else {
                 var_t1 = 8;
@@ -239,7 +239,7 @@ s32 Ui_AdjustNumericSelection(unk_func_8830867C_044_038_030* arg0, s32 arg1) {
                     arg0->unk_00 = arg0->unk_08;
                 }
             }
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             var_t1 = 9;
             break;
 
@@ -252,7 +252,7 @@ s32 Ui_AdjustNumericSelection(unk_func_8830867C_044_038_030* arg0, s32 arg1) {
                     arg0->unk_00 = arg0->unk_04;
                 }
             }
-            Audio_PlaySoundEffectById(1);
+            Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
             var_t1 = 9;
             break;
     }
@@ -271,7 +271,7 @@ s32 Ui_AdjustSteppedRangeSelection(unk_func_8002E128_arg0* arg0) {
     s32 sp18 = arg0->unk_0C;
 
     if (sp1C != 0) {
-        Audio_PlaySoundEffectById(1);
+        Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
 
         switch (sp1C) {
             case 0x200:
