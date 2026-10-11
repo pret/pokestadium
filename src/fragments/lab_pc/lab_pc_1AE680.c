@@ -2273,29 +2273,26 @@ s32 LabPC_SwapControllerInput(unk_func_8820B12C* arg0, Controller* arg1) {
     return var_s1;
 }
 
-#ifdef NON_MATCHING
 void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, MemoryPool* arg4, s32 arg5, char** arg6,
                    char** arg7, char** arg8, char** arg9, char** argA, char** argB) {
     static Color_RGBA8 D_88217FC0 = { 0x1E, 0x50, 0x50, 0xFF };
     static Color_RGBA8 D_88217FC4 = { 0x00, 0x0A, 0x0A, 0xFF };
 
     WidgetNode* spC4;
-    void* temp_v0;
-    unk_func_882062E4* new_var;
-    unk_func_88200FA0_030_038* var_s0;
+    UNUSED s32 pad0;
+    UNUSED s32 pad1;
+    UNUSED s32 pad2;
     s32 spB4;
-    s32 var_s2;
-    s32 var_s3;
-    s32 var_s2_2;
-    s32 var_s3_2;
-    unk_func_8820BE14_06C_000* spA0;
+    UNUSED s32 pad3;
+    UNUSED s32 pad4;
     unk_func_8820BE14_06C_000* ptr;
     unk_func_88200FA0_030_038* ptr2;
+    unk_func_8820BE14_06C_000* spA0;
     s32 i;
     s32 j;
     unk_func_882062E4* var_s1;
     unk_func_8820BE14_06C_000* var_s4;
-    unk_func_8820BE14_06C_000* var_s4_2;
+    UNUSED s32 pad5;
     s32 count;
     unk_func_88500EE4* temp_s0;
     WidgetNode* temp_s0_4;
@@ -2304,7 +2301,6 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     unk_func_885088F4* temp_s2;
     BattleMon* temp_v0_5;
     FragmentEntry temp_v0_7;
-    void** temp_t0;
 
     spA0 = NULL;
 
@@ -2344,11 +2340,11 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
         GbSave_MarkBoxDataLoaded(spB4);
     }
 
-    var_s4_2 = var_s4 = arg0->unk_6C.unk_00;
-    for (i = 0; i < 1; i++, var_s4_2++, var_s4++) {
-        ptr2 = &var_s4_2->unk_04;
+    ptr = var_s4 = arg0->unk_6C.unk_00;
+    for (i = 0; i < 1; i++, var_s4++) {
         count = LabPC_ReadDeckEntries(var_s1, 6, 0x20, spB4, i);
-        var_s4_2->unk_04.unk_08 = count;
+        ptr2 = &ptr[i].unk_04;
+        ptr2->unk_08 = count;
 
         for (j = 0; j < count; j++) {
             ptr2->unk_00[j] = var_s1++;
@@ -2357,11 +2353,11 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
         var_s4->unk_00 = 0;
     }
 
-    var_s4_2 = var_s4 = arg0->unk_7C.unk_00;
-    for (i = 0; i < 12; i++, var_s4_2++, var_s4++) {
-        ptr2 = &var_s4_2->unk_04;
+    ptr = var_s4 = arg0->unk_7C.unk_00;
+    for (i = 0; i < 12; i++, var_s4++) {
         count = LabPC_ReadDeckEntries(var_s1, 20, 0x21, spB4, i);
-        var_s4_2->unk_04.unk_08 = count;
+        ptr2 = &ptr[i].unk_04;
+        ptr2->unk_08 = count;
 
         for (j = 0; j < count; j++) {
             ptr2->unk_00[j] = var_s1++;
@@ -2370,11 +2366,11 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
         var_s4->unk_00 = 0;
     }
 
-    var_s4_2 = var_s4 = arg0->unk_8C.unk_00;
-    for (i = 0; i < 12; i++, var_s4_2++, var_s4++) {
-        ptr2 = &var_s4_2->unk_04;
+    ptr = var_s4 = arg0->unk_8C.unk_00;
+    for (i = 0; i < 12; i++, var_s4++) {
         count = LabPC_ReadDeckEntries(var_s1, 20, 0x11, 0, i);
-        var_s4_2->unk_04.unk_08 = count;
+        ptr2 = &ptr[i].unk_04;
+        ptr2->unk_08 = count;
 
         for (j = 0; j < count; j++) {
             ptr2->unk_00[j] = var_s1++;
@@ -2400,8 +2396,8 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(arg0, spC4);
 
     temp_s0 = mem_pool_alloc(arg4, sizeof(unk_func_88500EE4));
-    ((func88500EE4)Memmap_GetFragmentVaddr(WidgetTree_InitTintedTexture))(temp_s0, 0, 0, 0x280, 0x1E0, D_88223E48, D_88217FC0,
-                                                           D_88217FC4);
+    ((func88500EE4)Memmap_GetFragmentVaddr(WidgetTree_InitTintedTexture))(temp_s0, 0, 0, 0x280, 0x1E0, D_88223E48,
+                                                                          D_88217FC0, D_88217FC4);
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(spC4, temp_s0);
 
     temp_s2 = mem_pool_alloc(arg4, sizeof(unk_func_885088F4));
@@ -2411,23 +2407,25 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
 
     temp_s1 = mem_pool_alloc(arg4, sizeof(unk_func_88509A2C));
     ((func88509A2C)Memmap_GetFragmentVaddr(WidgetTree_InitSaveSlotLabel))(temp_s1, 0x38, 0x22, GbSave_GetActivePort(),
-                                                           Text_GetString(NULL, 0, D_88224FB0, 0));
+                                                                          Text_GetString(NULL, 0, D_88224FB0, 0));
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(temp_s2, temp_s1);
 
     temp_s1_2 = mem_pool_alloc(arg4, sizeof(unk_func_88509E34));
-    ((func88509E34)Memmap_GetFragmentVaddr(WidgetTree_InitTextMessage))(temp_s1_2, 0, 0, Text_GetString(NULL, 0, D_88224FB4, 0));
+    ((func88509E34)Memmap_GetFragmentVaddr(WidgetTree_InitTextMessage))(temp_s1_2, 0, 0,
+                                                                        Text_GetString(NULL, 0, D_88224FB4, 0));
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(temp_s2, temp_s1_2);
 
     temp_s0_4 = mem_pool_alloc(arg4, sizeof(WidgetNode));
     ((func885031E8)Memmap_GetFragmentVaddr(WidgetTree_InitVisibilityGate))(temp_s0_4, 0, 0, 0x280, 0x1E0);
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(arg0, temp_s0_4);
 
-    temp_v0_7 = Fragment_Load(((((u32) fragment27_TEXT_START) & 0x0FF00000) >> 0x14) - 0x10, fragment27_ROM_START,
-                             fragment28_ROM_START);
+    temp_v0_7 = Fragment_Load(((((u32)fragment27_TEXT_START) & 0x0FF00000) >> 0x14) - 0x10, fragment27_ROM_START,
+                              fragment28_ROM_START);
 
     arg0->unk_30.unk_04 = arg4;
-    arg0->unk_30.unk_00 = 0x38;
-    arg0->unk_30.unk_02 = 0x52;
+    // clang-format off
+    arg0->unk_30.unk_00 = 0x38; arg0->unk_30.unk_02 = 0x52;
+    // clang-format on
     arg0->unk_30.unk_14 = temp_s0_4;
     arg0->unk_30.unk_18 = 0;
 
@@ -2442,7 +2440,8 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     temp_v0_7(0, &arg0->unk_30);
 
     arg0->unk_68 = mem_pool_alloc(arg4, sizeof(unk_func_88509F48));
-    ((func88509F48)Memmap_GetFragmentVaddr(WidgetTree_InitMessagePanel))(arg0->unk_68, 0x2C, 0x4C, 0x228, 0x160, arg4, arg5);
+    ((func88509F48)Memmap_GetFragmentVaddr(WidgetTree_InitMessagePanel))(arg0->unk_68, 0x2C, 0x4C, 0x228, 0x160, arg4,
+                                                                         arg5);
 
     arg0->unk_2C = mem_pool_alloc(arg4, sizeof(unk_func_8820BE14_02C));
     func_88209B54(arg0->unk_2C, 0x2C, 0x4C, spA0, &arg0->unk_6C, spC4, temp_v0_7, &arg0->unk_30, arg0->unk_68, arg6,
@@ -2452,11 +2451,6 @@ void func_8820BE14(unk_func_8820BE14* arg0, s32 arg1, s32 arg2, s32 arg3, Memory
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(&arg0->unk_00, arg0->unk_30.unk_08);
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(temp_s0_4, arg0->unk_68);
 }
-#else
-static Color_RGBA8 D_88217FC0 = { 0x1E, 0x50, 0x50, 0xFF };
-static Color_RGBA8 D_88217FC4 = { 0x00, 0x0A, 0x0A, 0xFF };
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/lab_pc/lab_pc_1AE680/func_8820BE14.s")
-#endif
 
 void LabPC_RunSwapScreenLoop(unk_func_8820BE14* arg0) {
     volatile s32 sp34 = 0;
