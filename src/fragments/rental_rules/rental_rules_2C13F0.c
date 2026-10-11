@@ -349,74 +349,74 @@ void RentalRules_ListUpdate(void) {
 }
 
 void RentalRules_ListDraw(void) {
-    s16 spA6;
-    s16 spA4;
-    QualifyingPokemonDisplay* ptr = &qualifying_species_display;
+    s16 x;
+    s16 y;
+    QualifyingPokemonDisplay* display = &qualifying_species_display;
 
-    if (ptr->unk_04 == 0) {
+    if (display->unk_04 == 0) {
         return;
     }
 
-    spA6 = (((0x400 - ptr->unk_04) * 0x108) / 1024) + 0x38;
-    spA4 = (((0x400 - ptr->unk_04) * 0xA8) / 1024) + 0x5C;
-    RentalRules_DrawWindowFrame(spA6, spA4, (ptr->unk_04 * 0x210) / 1024, (ptr->unk_04 * 0x150) / 1024);
+    x = (((1024 - display->unk_04) * 264) / 1024) + 56;
+    y = (((1024 - display->unk_04) * 168) / 1024) + 92;
+    RentalRules_DrawWindowFrame(x, y, (display->unk_04 * 528) / 1024, (display->unk_04 * 336) / 1024);
 
-    if (ptr->unk_04 >= 0x400) {
+    if (display->unk_04 >= 1024) {
         UNUSED s32 pad;
         s32 i;
-        QualifyingPokemonDisplayRow* var_s0;
+        QualifyingPokemonDisplayRow* node_to_draw;
 
-        RentalRules_DrawFilledPanel(spA6, spA4, 0x210, 0x24, 0x1E, 0x64, 0x64);
-        RentalRules_DrawFilledPanel(spA6, spA4 + 0x24, 0x18, 0x12C, 0x1E, 0x1E, 0x64);
-        RentalRules_DrawScrollbar(spA6 + 4, spA4 + 0x2C, ptr);
+        RentalRules_DrawFilledPanel(x, y, 528, 36, 0x1E, 0x64, 0x64);
+        RentalRules_DrawFilledPanel(x, y + 36, 24, 300, 0x1E, 0x1E, 0x64);
+        RentalRules_DrawScrollbar(x + 4, y + 0x2C, display);
 
         gSPDisplayList(gDisplayListHead++, D_8006F518);
 
-        RentalRules_DrawEligibilityPanelLegend(spA6 + 8, spA4 + 8);
+        RentalRules_DrawEligibilityPanelLegend(x + 8, y + 8);
 
         gSPDisplayList(gDisplayListHead++, D_8006F630);
 
         Font_BeginTranslucentTextRendering();
         Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
         Font_SetActive(8, 0);
-        Text_SetNumberToken(3, ptr->unk_06);
+        Text_SetNumberToken(3, display->unk_06);
         {
             char sp4C[64];
-            Font_Printf(spA6 + 0x2C, spA4 + 8, Text_GetString(sp4C, sizeof(sp4C), D_830039C0, 3));
+            Font_Printf(x + 44, y + 8, Text_GetString(sp4C, sizeof(sp4C), D_830039C0, 3));
         }
         Font_EndTexturedTextRendering();
 
-        if (ptr->unk_0C == 0) {
+        if (display->unk_0C == 0) {
             return;
         }
 
-        if (ptr->qualifying_list_state == SCROLLING) {
-            s16 sp4A = spA4 - ((ptr->unk_0A * 0x3C * (4 - ptr->unk_02)) / 4);
-            Gfx_SetScissorRect(&gDisplayListHead, spA6 + 0x18, spA4 + 0x24, 0x1F8, 0x12C);
-            if (ptr->unk_0A > 0) {
-                var_s0 = ptr->self_node->above_neighbour;
+        if (display->qualifying_list_state == SCROLLING) {
+            s16 sp4A = y - ((display->unk_0A * 0x3C * (4 - display->unk_02)) / 4);
+            Gfx_SetScissorRect(&gDisplayListHead, x + 0x18, y + 0x24, 0x1F8, 0x12C);
+            if (display->unk_0A > 0) {
+                node_to_draw = display->self_node->above_neighbour;
                 for (i = 0; i < 6; i++) {
-                    RentalRules_DrawSpeciesPage(spA6 + 0x18, sp4A + 0x24 + i * 0x3C, var_s0);
-                    var_s0 = var_s0->below_neighbour;
+                    RentalRules_DrawSpeciesPage(x + 24, sp4A + 36 + i * 0x3C, node_to_draw);
+                    node_to_draw = node_to_draw->below_neighbour;
                 }
             } else {
-                var_s0 = ptr->self_node;
+                node_to_draw = display->self_node;
                 for (i = 0; i < 6; i++) {
-                    RentalRules_DrawSpeciesPage(spA6 + 0x18, sp4A - 0x18 + i * 0x3C, var_s0);
-                    var_s0 = var_s0->below_neighbour;
+                    RentalRules_DrawSpeciesPage(x + 24, sp4A - 24 + i * 0x3C, node_to_draw);
+                    node_to_draw = node_to_draw->below_neighbour;
                 }
             }
-            Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 0x280, 0x1E0);
+            Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 640, 480);
         } else {
-            var_s0 = ptr->self_node;
+            node_to_draw = display->self_node;
             for (i = 0; i < 5; i++) {
-                RentalRules_DrawSpeciesPage(spA6 + 0x18, spA4 + 0x24 + i * 0x3C, var_s0);
-                var_s0 = var_s0->below_neighbour;
+                RentalRules_DrawSpeciesPage(x + 24, y + 36 + i * 60, node_to_draw);
+                node_to_draw = node_to_draw->below_neighbour;
             }
         }
 
-        if (ptr->unk_0C > 0) {
-            ptr->unk_0C -= 1;
+        if (display->unk_0C > 0) {
+            display->unk_0C -= 1;
         }
     }
 
