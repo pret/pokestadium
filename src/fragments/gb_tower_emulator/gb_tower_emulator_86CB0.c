@@ -7717,14 +7717,14 @@ u8 GbMem_ReadIoRegister(u16 arg0) {
   return gGbMemoryMap[arg0 & 0xFFFF];
 }
 
-#ifdef NON_MATCHING
 s32 func_81209078(void) {
     u32 aiLen;
-    s32 pad1;
+    s32 n;
     s32 idx;
-    s32 pad2[2];
+    s32 status;
+    s16* queued;
     s16* buf;
-    s32 pad3[2];
+    s32 pad[2];
     s16* len;
     s16** bufPtr;
 
@@ -7740,12 +7740,17 @@ s32 func_81209078(void) {
         if (*len != 0) {
             bufPtr = &D_812346E0[idx];
             if (osGbSetNextBuffer(*bufPtr, *len * 4) == -1) {
-                do {
-                } while (0);
+                status = 0;
             } else {
-                D_8122C790 = (*bufPtr)[*len * 2 - 2];
-                D_8122C792 = (*bufPtr)[*len * 2 - 1];
+                queued = *bufPtr;
+                n = *len;
+                D_8122C790 = queued[n * 2 - 2];
+                D_8122C792 = queued[n * 2 - 1];
+                status = 2;
             }
+            // Discarded reads; they only steer IDO's register allocation.
+            if (status) {}
+            if (bufPtr) {}
         }
     }
 
@@ -7773,13 +7778,10 @@ s32 func_81209078(void) {
         func_81209374(*len, buf);
     }
     osWritebackDCache(buf, *len * 4);
-    D_812346F4 = osGetCount() * (D_812346C8 + D_812346F4);
-    D_812346F4 += (*bufPtr)[D_812346C8 & 0xFF];
+    D_812346F4 = osGetCount() * (D_812346F4 + D_812346C8);
+    D_812346F4 = D_812346E0[idx][D_812346C8 & 0xFF] + D_812346F4;
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/gb_tower_emulator/gb_tower_emulator_86CB0/func_81209078.s")
-#endif
 
 void GbAudio_SetAlternateRendererEnabled(s32 arg0) {
   D_8120EB78 = arg0;
