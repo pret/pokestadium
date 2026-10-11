@@ -133,6 +133,13 @@ if sync_tree /src/src /work/src; then :; fi
 if [ -d /src/hand_asm ]; then
     if sync_tree /src/hand_asm /work/hand_asm; then :; fi
 fi
+# text/ holds tracked edits consumed by the textdata.o recipe
+# (tools/patch_textdata.py text/textdata.json); like hand_asm, most PRs have
+# no reason to touch it, so only sync it when the checkout actually has one
+# -- the baked image predates this directory and sync_tree creates it fresh.
+if [ -d /src/text ]; then
+    if sync_tree /src/text /work/text; then :; fi
+fi
 if sync_tree /src/include /work/include; then headers_changed=1; fi
 
 # The Makefile C_FILES list is `git ls-files -- src`, resolved against the
