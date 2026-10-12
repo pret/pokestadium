@@ -110,9 +110,6 @@ typedef struct GbNoiseEntry {
 
 #define GB_NOISE_TABLE ((GbNoiseEntry(*)[16])D_80078A60)
 
-extern f32 D_8007D4D0;
-extern f32 D_8007D4D4;
-
 void func_80049A60(u32);
 void GbAudio_ClearInterpolationHistory();
 void GbAudio_ClearOutputBuffer();
@@ -726,7 +723,6 @@ s16 func_8004A89C(void) {
     u16 col;
     GbNoiseEntry* entry;
     u8 sampleId;
-    f32 vol;
     s16 sample;
     unk_D_800FC6CC* ent;
 
@@ -773,15 +769,14 @@ s16 func_8004A89C(void) {
 
         nr44 = GB_REG(0x13);
         if (nr44 & 0x80) {
-            vol = D_8007D4D0;
             D_800FCFD8.unk_00 = 0;
             D_800FCFD8.unk_28 = 1;
-            D_800FCFD8.unk_14 = (u8)(GB_REG(0x11) & 0xF0) * vol;
+            D_800FCFD8.unk_14 = (u8)(GB_REG(0x11) & 0xF0) * 0.05f;
             if (GB_REG(0x11) & 7) {
                 if (GB_REG(0x11) & 8) {
-                    D_800FCFD8.unk_18 = vol;
+                    D_800FCFD8.unk_18 = 0.05f;
                 } else {
-                    D_800FCFD8.unk_18 = D_8007D4D4;
+                    D_800FCFD8.unk_18 = -0.05f;
                 }
                 D_800FCFD8.unk_20 = D_800FCFD8.unk_1C = (GB_REG(0x11) & 7) * D_800FD004 * 4;
             } else {
