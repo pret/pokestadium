@@ -1281,187 +1281,150 @@ s32 LabPCList_CheckStatFilterRange(unk_func_8830867C_02C* arg0, unk_func_8830485
     return sp18;
 }
 
-#ifdef NON_MATCHING
-void func_88304850(s32 arg0, s32 arg1, unk_func_88304850_arg2* arg2, s32 arg3, s32 arg4,
-                   unk_func_8830867C_02C_034* arg5) {
-    static Color_RGBA8 D_883172C0[] = {
-        { 0xF0, 0xF0, 0xF0, 0xFF },
-        { 0xB2, 0xFF, 0xC3, 0xFF },
-        { 0xFF, 0xB2, 0xC3, 0xFF },
-    };
-    static Color_RGBA8 D_883172CC[][2] = {
-        {
-            { 0x50, 0x51, 0x54, 0xFF },
-            { 0x59, 0x5B, 0x5E, 0xFF },
-        },
-        {
-            { 0x43, 0x44, 0x46, 0xFF },
-            { 0x4B, 0x4C, 0x4F, 0xFF },
-        },
-    };
-
-    Color_RGBA8 spBC;
-    s32 spA8;
-    s32 sp58;
-    s32 var_s3;
-    s32 var_s1;
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 temp_a3;
-    s32 temp_s7;
-    s32 var_s6;
-    s32 var_s7;
-    unk_func_8830867C_02C* temp_s5;
-    temp_s5 = arg5->unk_70;
-
-    var_s1 = (temp_s5->unk_0AC->unk_2C->unk_30 & 2)
-                 ? temp_s5->unk_0AC->unk_00.unk_10.unk_00 - temp_s5->unk_000.unk_10.unk_00
-                 : arg5->unk_00.unk_00.unk_14.unk_00;
-
+void func_88304850(s32 arg0, s32 arg1, unk_func_88304850_arg2 *arg2, s32 arg3, s32 arg4, unk_func_8830867C_02C_034 *arg5)
+{
+  static Color_RGBA8 D_883172C0[] = {{0xF0, 0xF0, 0xF0, 0xFF}, {0xB2, 0xFF, 0xC3, 0xFF}, {0xFF, 0xB2, 0xC3, 0xFF}};
+  static Color_RGBA8 D_883172CC[][2] = {{{0x50, 0x51, 0x54, 0xFF}, {0x59, 0x5B, 0x5E, 0xFF}}, {{0x43, 0x44, 0x46, 0xFF}, {0x4B, 0x4C, 0x4F, 0xFF}}};
+  Color_RGBA8 spBC;
+  Color_RGBA8 (*tbl)[2];
+  unk_func_88304850_arg2 *mon;
+  s32 var_s1;
+  s32 temp_a0;
+  s32 spA8;
+  s32 temp_a0_2;
+  s32 temp_a3;
+  s32 temp_s7;
+  s32 var_s6;
+  s32 var_s7;
+  unk_func_8830867C_02C *temp_s5;
+  temp_s5 = arg5->unk_70;
+  spA8 = 0x13;
+  tbl = (Color_RGBA8 (*)[2]) D_883171D0;
+  temp_a0 = (arg3 & 1) * 8;
+  var_s7 = ((temp_s5->unk_0AC->unk_2C->unk_30 & 2) ? (temp_s5->unk_0AC->unk_00.unk_10.unk_00 - temp_s5->unk_000.unk_10.unk_00) : (arg5->unk_00.unk_00.unk_14.unk_00)) + arg0;
+  var_s1 = arg0 + 0x84;
+  gDPPipeSync(gDisplayListHead++);
+  gDPSetCycleType(gDisplayListHead++, 3 << 20);
+  gDPSetRenderMode(gDisplayListHead++, (((0 << 30) | (0 << 26)) | (0 << 22)) | (0 << 18), (((0 << 28) | (0 << 24)) | (0 << 20)) | (0 << 16));
+  temp_s7 = arg3 & 1;
+  temp_a3 = ((((tbl[temp_s7][0].r << 8) & 0xF800) | ((tbl[temp_s7][0].g << 3) & 0x7C0)) | ((tbl[temp_s7][0].b >> 2) & 0x3E)) | 1;
+  gDPPipeSync(gDisplayListHead++);
+  gDPSetFillColor(gDisplayListHead++, (temp_a3 << 0x10) | temp_a3);
+  gDPFillRectangle(gDisplayListHead++, arg0, arg1, arg0 + 0x25, arg1 + spA8);
+  temp_a0 = ((((tbl[temp_s7][1].r << 8) & 0xF800) | ((tbl[temp_s7][1].g << 3) & 0x7C0)) | ((tbl[temp_s7][1].b >> 2) & 0x3E)) | 1;
+  gDPPipeSync(gDisplayListHead++);
+  gDPSetFillColor(gDisplayListHead++, (temp_a0 << 0x10) | temp_a0);
+  gDPFillRectangle(gDisplayListHead++, arg0 + 0x26, arg1, arg0 + 0x81, arg1 + spA8);
+  var_s6 = temp_s5->unk_CD4[temp_s5->unk_CD0]; for (var_s1 = arg0 + 0x84; var_s1 < var_s7; var_s1 += ((s32 *) temp_s5->unk_0DC)[var_s6], var_s6++)
+  {
+    temp_a0_2 = ((((((Color_RGBA8 *) (((u8 *) D_883172CC) + (temp_s7 * 8)))[var_s6 & 1].r << 8) & 0xF800) | ((((Color_RGBA8 *) (((u8 *) D_883172CC) + (temp_s7 * 8)))[var_s6 & 1].g << 3) & 0x7C0)) | ((((Color_RGBA8 *) (((u8 *) D_883172CC) + (temp_s7 * 8)))[var_s6 & 1].b >> 2) & 0x3E)) | 1;
     gDPPipeSync(gDisplayListHead++);
+    gDPSetFillColor(gDisplayListHead++, (temp_a0_2 << 0x10) | temp_a0_2);
+    gDPFillRectangle(gDisplayListHead++, var_s1, arg1, (((s32 *) temp_s5->unk_0DC)[var_s6] + var_s1) - 1, arg1 + spA8);
+  }
 
-    gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
-    gDPSetRenderMode(gDisplayListHead++, G_RM_NOOP, G_RM_NOOP2);
-
-    temp_s7 = arg3 & 1;
-    // clang-format off
-    temp_a3 = ((((Color_RGBA8(*)[2])D_883171D0)[temp_s7][0].r << 8) & 0xF800) | ((((Color_RGBA8(*)[2])D_883171D0)[temp_s7][0].g << 3) & 0x7C0) | ((((Color_RGBA8(*)[2])D_883171D0)[temp_s7][0].b >> 2) & 0x3E) | 1; gDPPipeSync(gDisplayListHead++);
-    // clang-format on
-
-    var_s7 = var_s1 + arg0;
-    gDPSetFillColor(gDisplayListHead++, (temp_a3 << 0x10) | temp_a3);
-    gDPFillRectangle(gDisplayListHead++, arg0, arg1, arg0 + 0x25, arg1 + 0x13);
-
-    // clang-format off
-    temp_a0 = ((((Color_RGBA8(*)[2])D_883171D0)[temp_s7][1].r << 8) & 0xF800) | ((((Color_RGBA8(*)[2])D_883171D0)[temp_s7][1].g << 3) & 0x7C0) | ((((Color_RGBA8(*)[2])D_883171D0)[temp_s7][1].b >> 2) & 0x3E) | 1; gDPPipeSync(gDisplayListHead++);
-    // clang-format on
-
-    gDPSetFillColor(gDisplayListHead++, (temp_a0 << 0x10) | temp_a0);
-    gDPFillRectangle(gDisplayListHead++, arg0 + 0x26, arg1, arg0 + 0x81, arg1 + 0x13);
-
+  mon = arg2;
+  if (mon == NULL)
+  {
+    return;
+  }
+    Gfx_DrawNumberDigits(arg0 + 6, arg1 + 4, arg3 + 1, 3);
+    spBC = D_883172C0[LabPCList_CheckStatFilterRange(temp_s5, mon)];
+    if (arg4 & 4)
+    {
+      spBC.a = 0x4D;
+    }
+    else
+    {
+      spBC.a = 0xFF;
+    }
+    Font_BeginTranslucentTextRendering();
+    Gfx_SetEnvColor(spBC.r, spBC.g, spBC.b, spBC.a);
+    Font_SetActive(4, 0);
+    spA8 = (0x5C - Font_MeasureTextExtent(0, 0, "WWWWWWWWWW")) / 2;
+    if ((mon->unk_08 <= 0) || (mon->unk_08 >= 0x98))
+    {
+      Font_Printf((arg0 + spA8) + 0x26, arg1 + 2, "?????");
+    }
+    else
+    {
+      Font_Printf((arg0 + spA8) + 0x26, arg1 + 2, Text_GetString(NULL, 0, D_8831A4D0, mon->unk_08 - 1));
+    }
+    Font_EndTexturedTextRendering();
     var_s6 = temp_s5->unk_CD4[temp_s5->unk_CD0];
+    for (var_s1 = arg0 + 0x84; var_s1 < var_s7; var_s1 += ((s32 *) temp_s5->unk_0DC)[var_s6], var_s6++)
+    {
+      switch (var_s6)
+      {
+        case 0:
+          LabPCList_DrawPlainText(var_s1 + spA8, arg1 + 2, mon->unk_38, 0);
+          break;
 
-    for (var_s3 = arg0 + 0x84; var_s3 < var_s7; var_s3 += ((s32*)temp_s5->unk_0DC)[var_s6], var_s6++) {
-        temp_a0_2 = ((D_883172CC[temp_s7][var_s6 & 1].r << 8) & 0xF800) |
-                    ((D_883172CC[temp_s7][var_s6 & 1].g << 3) & 0x7C0) |
-                    ((D_883172CC[temp_s7][var_s6 & 1].b >> 2) & 0x3E) | 1;
-        gDPPipeSync(gDisplayListHead++);
-        gDPSetFillColor(gDisplayListHead++, (temp_a0_2 << 0x10) | temp_a0_2);
-        gDPFillRectangle(gDisplayListHead++, var_s3, arg1,
-                         (((s32*)temp_s5->unk_0DC)[var_s6] + var_s3) - 1, arg1 + 0x13);
+        case 1:
+          Gfx_DrawNumberDigits(var_s1 + 4, arg1 + 4, (u16) mon->unk_16, 5);
+          break;
+
+        case 2:
+          temp_s7 = (((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "WWWWWWW")) / 2;
+          LabPCList_DrawPlainText(var_s1 + temp_s7, arg1 + 2, mon->unk_43, 0);
+          break;
+
+        case 3:
+          LabPCList_DrawAreaCell(var_s1, arg1, ((s32 *) temp_s5->unk_0DC)[var_s6], mon);
+          break;
+
+        case 4:
+
+        case 5:
+          LabPCList_DrawTypeName(var_s1, arg1 + 2, ((s32 *) temp_s5->unk_0DC)[var_s6], &mon->unk_08, var_s6 - 4);
+          break;
+
+        case 6:
+
+        case 7:
+
+        case 8:
+
+        case 9:
+          LabPCList_DrawMoveNameCell(var_s1, arg1 + 2, ((s32 *) temp_s5->unk_0DC)[var_s6], &mon->unk_08, var_s6 - 6);
+          break;
+
+        case 10:
+          temp_s7 = ((s32 *) temp_s5->unk_0DC)[var_s6] - ((((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2);
+          LabPCList_DrawStatNumber(var_s1 + temp_s7, arg1 + 2, "%3d", mon->unk_2C, &mon->unk_08);
+          break;
+
+        case 11:
+          temp_s7 = ((s32 *) temp_s5->unk_0DC)[var_s6] - ((((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2);
+          LabPCList_DrawStatNumber(var_s1 + temp_s7, arg1 + 2, "%3d", (u16) mon->unk_2E, &mon->unk_08);
+          break;
+
+        case 12:
+          temp_s7 = ((s32 *) temp_s5->unk_0DC)[var_s6] - ((((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2);
+          LabPCList_DrawStatNumber(var_s1 + temp_s7, arg1 + 2, "%3d", (u16) mon->unk_30, &mon->unk_08);
+          break;
+
+        case 13:
+          temp_s7 = ((s32 *) temp_s5->unk_0DC)[var_s6] - ((((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2);
+          LabPCList_DrawStatNumber(var_s1 + temp_s7, arg1 + 2, "%3d", (u16) mon->unk_32, &mon->unk_08);
+          break;
+
+        case 14:
+          temp_s7 = ((s32 *) temp_s5->unk_0DC)[var_s6] - ((((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2);
+          LabPCList_DrawStatNumber(var_s1 + temp_s7, arg1 + 2, "%3d", (u16) mon->unk_34, &mon->unk_08);
+          break;
+
+        case 15:
+          temp_s7 = ((s32 *) temp_s5->unk_0DC)[var_s6] - ((((s32 *) temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2);
+          LabPCList_DrawStatNumber(var_s1 + temp_s7, arg1 + 2, "%3d", (u16) mon->unk_36, &mon->unk_08);
+          break;
+
+      }
+
     }
 
-    if (arg2 != NULL) {
-        Gfx_DrawNumberDigits(arg0 + 6, arg1 + 4, arg3 + 1, 3);
-        spBC = D_883172C0[LabPCList_CheckStatFilterRange(temp_s5, arg2)];
-        if (arg4 & 4) {
-            spBC.a = 0x4D;
-        } else {
-            spBC.a = 0xFF;
-        }
-        Font_BeginTranslucentTextRendering();
-        Gfx_SetEnvColor(spBC.r, spBC.g, spBC.b, spBC.a);
-        Font_SetActive(4, 0);
-        spA8 = (0x5C - Font_MeasureTextExtent(0, 0, "WWWWWWWWWW")) / 2;
 
-        if ((arg2->unk_08 <= 0) || (arg2->unk_08 >= 0x98)) {
-            Font_Printf(arg0 + spA8 + 0x26, arg1 + 2, "?????");
-        } else {
-            Font_Printf(arg0 + spA8 + 0x26, arg1 + 2, Text_GetString(NULL, 0, D_8831A4D0, arg2->unk_08 - 1));
-        }
-
-        Font_EndTexturedTextRendering();
-
-        var_s6 = temp_s5->unk_CD4[temp_s5->unk_CD0];
-
-        for (var_s3 = arg0 + 0x84; var_s3 < var_s7; var_s3 += ((s32*)temp_s5->unk_0DC)[var_s6], var_s6++) {
-            switch (var_s6) {
-                case 0:
-                    LabPCList_DrawPlainText(var_s3 + spA8, arg1 + 2, arg2->unk_40, 0);
-                    break;
-
-                case 1:
-                    Gfx_DrawNumberDigits(var_s3 + 4, arg1 + 4, arg2->unk_16, 5);
-                    break;
-
-                case 2:
-                    LabPCList_DrawPlainText(var_s3 + ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "WWWWWWW")) / 2), arg1 + 2,
-                                  arg2->unk_43, 0);
-                    break;
-
-                case 3:
-                    LabPCList_DrawAreaCell(var_s3, arg1, ((s32*)temp_s5->unk_0DC)[var_s6], arg2);
-                    break;
-
-                case 4:
-                case 5:
-                    LabPCList_DrawTypeName(var_s3, arg1 + 2, ((s32*)temp_s5->unk_0DC)[var_s6], &arg2->unk_08, var_s6 - 4);
-                    break;
-
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    LabPCList_DrawMoveNameCell(var_s3, arg1 + 2, ((s32*)temp_s5->unk_0DC)[var_s6], &arg2->unk_08, var_s6 - 6);
-                    break;
-
-                case 10:
-                    LabPCList_DrawStatNumber(var_s3 + (((s32*)temp_s5->unk_0DC)[var_s6] -
-                                          ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2)),
-                                  arg1 + 2, "%3d", arg2->unk_2C, &arg2->unk_08);
-                    break;
-
-                case 11:
-                    LabPCList_DrawStatNumber(var_s3 + (((s32*)temp_s5->unk_0DC)[var_s6] -
-                                          ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2)),
-                                  arg1 + 2, "%3d", arg2->unk_2E, &arg2->unk_08);
-                    break;
-
-                case 12:
-                    LabPCList_DrawStatNumber(var_s3 + (((s32*)temp_s5->unk_0DC)[var_s6] -
-                                          ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2)),
-                                  arg1 + 2, "%3d", arg2->unk_30, &arg2->unk_08);
-                    break;
-
-                case 13:
-                    LabPCList_DrawStatNumber(var_s3 + (((s32*)temp_s5->unk_0DC)[var_s6] -
-                                          ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2)),
-                                  arg1 + 2, "%3d", arg2->unk_32, &arg2->unk_08);
-                    break;
-
-                case 14:
-                    LabPCList_DrawStatNumber(var_s3 + (((s32*)temp_s5->unk_0DC)[var_s6] -
-                                          ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2)),
-                                  arg1 + 2, "%3d", arg2->unk_34, &arg2->unk_08);
-                    break;
-
-                case 15:
-                    LabPCList_DrawStatNumber(var_s3 + (((s32*)temp_s5->unk_0DC)[var_s6] -
-                                          ((((s32*)temp_s5->unk_0DC)[var_s6] - Font_MeasureTextExtent(0, 0, "000")) / 2)),
-                                  arg1 + 2, "%3d", arg2->unk_36, &arg2->unk_08);
-                    break;
-            }
-        }
-    }
 }
-#else
-static Color_RGBA8 D_883172C0[] = {
-    { 0xF0, 0xF0, 0xF0, 0xFF },
-    { 0xB2, 0xFF, 0xC3, 0xFF },
-    { 0xFF, 0xB2, 0xC3, 0xFF },
-};
-static Color_RGBA8 D_883172CC[][2] = {
-    {
-        { 0x50, 0x51, 0x54, 0xFF },
-        { 0x59, 0x5B, 0x5E, 0xFF },
-    },
-    {
-        { 0x43, 0x44, 0x46, 0xFF },
-        { 0x4B, 0x4C, 0x4F, 0xFF },
-    },
-};
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/lab_pc_list/lab_pc_list_1CEA00/func_88304850.s")
-#endif
 
 void LabPCList_SaveFilterState(unk_func_8830867C_02C* arg0) {
     arg0->unk_C84 = arg0->unk_C54;
