@@ -255,6 +255,9 @@ void BattlePrep_DrawCupRuleSummary(BattlePrepRuleWindow* arg0, BattlePrepRuleWin
     Font_EndTexturedTextRendering();
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_prep/battle_prep_3A1C30/BattlePrep_DrawCastleRuleSummary.s")
+#else
 void BattlePrep_DrawCastleRuleSummary(BattlePrepRuleWindow* arg0, BattlePrepRuleWindowLayout* arg1) {
     s32 sp12C;
     char sp2C[0x100];
@@ -287,6 +290,7 @@ void BattlePrep_DrawCastleRuleSummary(BattlePrepRuleWindow* arg0, BattlePrepRule
     Font_DisableTwoCycleTexturing();
     Font_EndTexturedTextRendering();
 }
+#endif
 
 void BattlePrep_DrawRankBadge(s16 arg0, s16 arg1, BattleSessionTeams* arg2) {
     static u8* D_84B17608[] = { D_3025950, D_30260A0, D_30267F0, D_3026F40 };
@@ -355,6 +359,9 @@ void BattlePrep_DrawTeamPreview(BattlePrepRuleWindow* arg0, BattlePrepRuleWindow
     Font_EndTexturedTextRendering();
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_prep/battle_prep_3A1C30/BattlePrep_DrawStreakGiveUpPrompt.s")
+#else
 void BattlePrep_DrawStreakGiveUpPrompt(BattlePrepRuleWindow* arg0, BattlePrepRuleWindowLayout* arg1) {
     SessionContinueData sp50;
     UNUSED s32 pad;
@@ -420,6 +427,7 @@ void BattlePrep_DrawStreakGiveUpPrompt(BattlePrepRuleWindow* arg0, BattlePrepRul
         gSPDisplayList(gDisplayListHead++, D_8006F630);
     }
 }
+#endif
 
 void BattlePrep_DrawRuleWindow(BattlePrepRuleWindow* arg0) {
     BattlePrepRuleWindowLayout* temp_s0;

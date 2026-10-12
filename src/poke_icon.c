@@ -432,9 +432,13 @@ s32 PokeIcon_AreSlotsIdle(unk_func_8001A024* arg0) {
     return 1;
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/poke_icon/PokeIcon_OpenModelArchive.s")
+#else
 void PokeIcon_OpenModelArchive(void) {
     D_800ABE10.unk_A04.unk_10 = BinArchive_Open(0x820000, NULL, 1, 1);
 }
+#endif
 
 void PokeIcon_LoadModelTexture(u16* arg0, s32 arg1) {
     BinArchive* temp_v1;
@@ -447,6 +451,9 @@ void PokeIcon_LoadModelTexture(u16* arg0, s32 arg1) {
     }
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/poke_icon/PokeIcon_LoadModelTextureForMon.s")
+#else
 void PokeIcon_LoadModelTextureForMon(u16* arg0, s32 arg1, BattleMon* arg2) {
     arg1_func_80010CA8 sp1C;
 
@@ -459,6 +466,7 @@ void PokeIcon_LoadModelTextureForMon(u16* arg0, s32 arg1, BattleMon* arg2) {
     PokeIcon_LoadModelTexture(arg0, arg2->unk_00.unk_00);
     PokeIcon_AdjustImageColors(arg0, 0x640, sp1C);
 }
+#endif
 
 s32 PokeIcon_CapturePreviewGeoNode(s32 arg0, GraphNode* arg1) {
     if (arg0 == 0) {
@@ -681,6 +689,9 @@ void PokeIcon_DrawPreview(unk_func_8001B1FC* arg0) {
     GfxImage_ClearDepthRectangle(&gDisplayListHead, 0, 0, arg0->unk_08, arg0->unk_0A);
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/poke_icon/PokeIcon_RenderPreview.s")
+#else
 u8* PokeIcon_RenderPreview(unk_func_8001B1FC* arg0) {
     PokeIcon_UpdatePreview(arg0);
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_28);
@@ -710,3 +721,4 @@ u8* PokeIcon_RenderPreview(unk_func_8001B1FC* arg0) {
     }
     return arg0->unk_28->img_p;
 }
+#endif

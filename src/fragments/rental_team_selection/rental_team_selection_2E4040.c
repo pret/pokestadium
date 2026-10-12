@@ -552,7 +552,7 @@ void TeamSelection_RulePrompt_HandleInput(void) {
             D_8423E58A = -1;
             D_84211700 = 3;
         } else if (BTN_IS_PRESSED(D_8423E584, BTN_DUP)
-#ifdef VERSION_US_REV1
+#if defined(VERSION_US_REV1) || defined(VERSION_US_REV2)
                    && (tmp >= 2)
 #endif
         ) {
@@ -562,7 +562,7 @@ void TeamSelection_RulePrompt_HandleInput(void) {
                 D_8423E58A = tmp - 1;
             }
         } else if (BTN_IS_PRESSED(D_8423E584, BTN_DDOWN)
-#ifdef VERSION_US_REV1
+#if defined(VERSION_US_REV1) || defined(VERSION_US_REV2)
                    && (tmp >= 2)
 #endif
         ) {

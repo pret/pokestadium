@@ -4028,6 +4028,9 @@ void BattleAI_SelectRandomFallbackOrder(BattleAiTeamState* arg0, u8* arg1, s32 a
     } while (BattleAI_MeetsHpBudgetConstraint(arg0, arg1, arg0->unk_06, arg2) == 0);
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_engine/battle_engine_361050/BattleAI_SelectRandomUsableCandidate.s")
+#else
 s32 BattleAI_SelectRandomUsableCandidate(BattleAiTeamState* arg0) {
     s32 var_v1;
 
@@ -4044,6 +4047,7 @@ s32 BattleAI_SelectRandomUsableCandidate(BattleAiTeamState* arg0) {
 
     return var_v1;
 }
+#endif
 
 s32 BattleAI_SelectRandomUsableMoveSlot(BattleMonRuntime* arg0) {
     u8 i;

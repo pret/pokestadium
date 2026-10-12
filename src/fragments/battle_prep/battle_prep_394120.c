@@ -1229,7 +1229,7 @@ s32 BattlePrep_RunRulesScreen(s32 arg0, UNUSED s32 arg1) {
     D_84B26678 = Text_GetStringTable(0x1B);
     PokeIcon_OpenModelArchive();
 
-    D_84B1A598.unk_B408 = BinArchive_Open(0x898000, NULL, 1, 1);
+    D_84B1A598.unk_B408 = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 1);
     D_84B1A598.unk_B40C = ASSET_LOAD2(battle_portraits, 1, 1);
 
     StageContext_Activate(sp2C);

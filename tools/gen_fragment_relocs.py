@@ -19,7 +19,8 @@ addresses and are resolved by the linker. --whole-archive means the ELF carries 
 for every object, so this filter is what takes 485 down to the ~234 retail has.
 
 The real check is `--check` against the retail segment: on an unmodified build it must
-reproduce the retail table entry for entry. `--selftest` only covers the encoder.
+reproduce the retail table entry for entry. `--selftest` covers the encoder and
+positive/negative relocation-order comparisons, but not an emulator playthrough.
 
 usage:
   gen_fragment_relocs.py <elf> <fragment-number> [--check <segment.bin>] [--write <file>]
@@ -147,6 +148,22 @@ def selftest() -> None:
     hi, lo, w32 = (5 << 24) | 0x10, (6 << 24) | 0x14, (2 << 24) | 0x100
     assert equivalent([w32, hi, lo], [hi, lo, w32]), "32-bit words may move"
     assert not equivalent([hi, lo], [lo, hi]), "hi/lo order matters"
+    content = struct.pack(">IIII", 0x3C088100, 0x25081000, 0x3C088101, 0x25088000)
+    hi1, lo1, hi2, lo2 = 0x05000000, 0x06000004, 0x05000008, 0x0600000C
+    first = [hi1, lo1, hi2, lo2]
+    assert equivalent(first, [hi2, lo2, hi1, lo1], content), "independent pairs may move"
+    assert not equivalent(first, [hi1, hi2, lo1, lo2], content), "changed pairings must fail"
+    assert not equivalent(first, [lo1, hi1, hi2, lo2], content), "unpaired LO must fail"
+    assert not equivalent(first, first[:-1], content), "different multisets must fail"
+    assert relocation_effects([hi1, lo1, hi1], content) is None, "duplicate offsets must fail"
+    assert relocation_effects([0x05000010], content) is None, "out-of-range offsets must fail"
+    assert relocation_effects([0x05000001], content) is None, "unaligned offsets must fail"
+    assert relocation_effects([0x05000004], content) is None, "non-LUI HI must fail"
+    # One LUI can feed multiple low words: the final high-word write must agree.
+    shared = struct.pack(">III", 0x3C088100, 0x25081000, 0x25088000)
+    assert not equivalent(
+        [hi1, lo1, 0x06000008], [hi1, 0x06000008, lo1], shared
+    ), "different final high-word targets must fail"
     print("selftest ok")
 
 
@@ -173,14 +190,69 @@ def merge(entries: list[int], retail_path: str) -> tuple[list[int], list[int], l
     return carried + entries, want, carried, stale
 
 
-def equivalent(a: list[int], b: list[int]) -> bool:
-    """Same effect when Memmap_RelocateFragment applies them: R_MIPS_32/26 entries patch one
-    word each, independently; HI16/LO16 entries pair through per-register state, so only
-    their relative order matters."""
+def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[int, ...]] | None:
+    """Symbolic writes made by the loader, or None for an unsupported ordering.
+
+    Model Memmap_RelocateFragment's saved LUI value/reference per register. Each
+    symbolic target is the input to Memmap_GetFragmentVaddr, so equal targets
+    yield equal patched immediates at any runtime base. Repeated offsets are
+    rejected: they could read instructions already modified by another entry.
+    """
+    offsets = [entry & 0xFFFFFF for entry in entries]
+    if len(set(offsets)) != len(offsets):
+        return None
+    saved: dict[int, tuple[int, int]] = {}
+    writes: dict[int, tuple[int, ...]] = {}
+    for entry, offset in zip(entries, offsets):
+        if offset % 4 or offset + 4 > len(content):
+            return None
+        kind = (entry >> 24) & 0x7F
+        word, = struct.unpack_from(">I", content, offset)
+        if kind in (2, 4):
+            writes[offset] = (kind, word)
+        elif kind == 5:
+            if word >> 26 != 15:  # LUI
+                return None
+            saved[(word >> 16) & 31] = (offset, word)
+        elif kind == 6:
+            register = (word >> 21) & 31
+            if register not in saved:
+                return None
+            high_offset, high_word = saved[register]
+            low = word & 0xFFFF
+            if low & 0x8000:
+                low -= 0x10000
+            target = ((high_word << 16) + low) & 0xFFFFFFFF
+            writes[high_offset] = (5, target)
+            writes[offset] = (6, high_offset, target)
+        else:
+            return None
+    return writes
+
+
+def equivalent(a: list[int], b: list[int], content: bytes | None = None) -> bool:
+    """Conservative equivalence under Memmap_RelocateFragment.
+
+    Without instruction bytes, preserve HI/LO relative order. With instruction
+    bytes, also accept reordered pairs whose symbolic writes and pairings agree.
+    """
     def canon(t: list[int]) -> tuple[list[int], list[int]]:
         return (sorted(w for w in t if (w >> 24) & 0x7F not in (5, 6)),
                 [w for w in t if (w >> 24) & 0x7F in (5, 6)])
-    return canon(a) == canon(b)
+    if canon(a) == canon(b):
+        return True
+    if content is None or sorted(a) != sorted(b):
+        return False
+    # Assembly fallbacks can emit independent HI/LO pairs in another order.
+    # Preserve the retail table only when both orders pair/write identically.
+    effects = relocation_effects(a, content)
+    return effects is not None and effects == relocation_effects(b, content)
+
+
+def fragment_content(elf: str, number: int) -> bytes:
+    data, sections, _ = read_elf(elf)
+    section = next(s for s in sections if s["sname"] == f".fragment{number}")
+    return data[section["off"]:section["off"] + section["size"]]
 
 
 def table_path(n: int) -> str:
@@ -220,7 +292,7 @@ def update_all(elf: str) -> list[int]:
         merged, current, _, _ = merge(entries, path)
         # compare entries, not bytes (retail tables carry trailing padding), and keep the
         # current table when it is only ordered differently, so a matching build stays retail
-        if equivalent(merged, current):
+        if equivalent(merged, current, fragment_content(elf, n)):
             continue
         data = encode(merged, bss_size)
         open(path, "wb").write(data)
@@ -243,7 +315,7 @@ def audit(elf: str) -> list[int]:
         except StopIteration:  # no .rel section: nothing to regenerate from
             continue
         merged, want, _, _ = merge(entries, table_path(n))
-        if equivalent(merged, want):
+        if equivalent(merged, want, fragment_content(elf, n)):
             ok.append(n)
     return ok
 

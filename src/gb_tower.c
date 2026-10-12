@@ -108,6 +108,9 @@ void GbTower_PowerOffAllPaks(void) {
     }
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/gb_tower/GbPak_IsPokemonCartridge.s")
+#else
 s32 GbPak_IsPokemonCartridge(OSGbpakId* header) {
     // make sure its 0 terminated. dont want those dirty hackers abusing a Strcmp exploit
     header->game_title[15] = '\0';
@@ -131,6 +134,7 @@ s32 GbPak_IsPokemonCartridge(OSGbpakId* header) {
     // This is not a supported cartridge.
     return 0;
 }
+#endif
 
 s32 GbTower_ScanPaks(void) {
     s32 i;

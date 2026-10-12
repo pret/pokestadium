@@ -43,8 +43,9 @@ endif
 
 #### Defaults ####
 # Target game version. Supported versions:
-#   us   N64 US (default)
+#   us        N64 US (default)
 #   us_rev1   N64 US revision 1
+#   us_rev2   N64 US revision 2
 VERSION ?= us
 # If COMPARE is 1, check the output md5sum after building
 COMPARE ?= 1
@@ -122,8 +123,8 @@ ULTRALIB_TARGET      := libultra_rom
 ### Output ###
 
 BUILD_DIR := build
-ifeq ($(VERSION),us_rev1)
-BUILD_DIR := build/us_rev1
+ifneq ($(VERSION),us)
+BUILD_DIR := build/$(VERSION)
 endif
 ROM       := $(BUILD_DIR)/$(TARGET)-$(VERSION).z64
 ELF       := $(ROM:.z64=.elf)
@@ -139,8 +140,10 @@ ifeq ($(VERSION),us)
   BUILD_DEFINES   += -DVERSION_US=1
 else ifeq ($(VERSION),us_rev1)
   BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV1=1
+else ifeq ($(VERSION),us_rev2)
+  BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV2=1
 else
-$(error Invalid VERSION variable detected. Please use 'us' or 'us_rev1')
+$(error Invalid VERSION variable detected. Please use 'us', 'us_rev1' or 'us_rev2')
 endif
 
 
@@ -180,7 +183,8 @@ ifeq ($(DETECTED_OS),windows)
   CPP := cpp.exe
 endif
 
-ASM_PROC        := $(PYTHON) tools/asm-processor/build.py
+# GLOBAL_ASM paths are written as asm/us/...; build.py reads them from asm/$(VERSION)/
+ASM_PROC        := $(PYTHON) tools/asm-processor/build.py --asm-version=$(VERSION)
 ifeq ($(DETECTED_OS),windows)
   # On Windows, ido-native-preprocess.py passes the original UTF-8 source to
   # asm-processor, which performs the EUC-JP conversion itself (--output-enc).
