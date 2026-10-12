@@ -51,7 +51,7 @@ REGEN_SAFE = {5, 22, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 40, 43, 48,
 
 # Versions that build changed files from assembly, whose pointers splat may keep as plain
 # numbers: keep every retail table there.
-ASM_VERSIONS = ("jp",)
+ASM_VERSIONS = ("eu", "eu_rev1", "fr", "de", "es", "it", "jp")
 if VERSION in ASM_VERSIONS:
     REGEN_SAFE = set()
 

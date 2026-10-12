@@ -136,9 +136,10 @@ LDSCRIPT  := $(ROM:.z64=.ld)
 
 BUILD_DEFINES ?=
 
+PAL_VERSIONS := eu eu_rev1 fr de es it
 # versions whose files that differ from US 1.0 are built from assembly (see
 # tools/port_version.py --asm-changed)
-ASM_VERSIONS := jp
+ASM_VERSIONS := $(PAL_VERSIONS) jp
 
 ifeq ($(VERSION),us)
   BUILD_DEFINES   += -DVERSION_US=1
@@ -146,12 +147,14 @@ else ifeq ($(VERSION),us_rev1)
   BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV1=1
 else ifeq ($(VERSION),us_rev2)
   BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV2=1
-# Japanese release: files that differ from US 1.0 are built from assembly, so the C it
-# shares is the US 1.0 C
+# PAL and Japanese releases: files that differ from US 1.0 are built from assembly, so the
+# C they share is the US 1.0 C
+else ifneq ($(filter $(VERSION),$(PAL_VERSIONS)),)
+  BUILD_DEFINES   += -DVERSION_PAL=1
 else ifeq ($(VERSION),jp)
   BUILD_DEFINES   += -DVERSION_JP=1
 else
-$(error Invalid VERSION variable detected. Please use 'us', 'us_rev1', 'us_rev2' or 'jp')
+$(error Invalid VERSION variable detected. Please use 'us', 'us_rev1', 'us_rev2', 'eu', 'eu_rev1', 'fr', 'de', 'es', 'it' or 'jp')
 endif
 
 
@@ -310,6 +313,12 @@ endif
 endif
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(ASSET_DIRS),$(wildcard $(dir)/*.bin))
+# ... and only the asset bins it links (unpacked views of assets it lacks can be empty)
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+ifneq ($(wildcard linker_scripts/$(VERSION)/$(TARGET).ld),)
+BIN_FILES     := $(filter $(shell grep -o 'assets/$(VERSION)/[A-Za-z0-9_/]*\.o' linker_scripts/$(VERSION)/$(TARGET).ld | sed 's/\.o$$/.bin/' | sort -u),$(BIN_FILES))
+endif
+endif
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)

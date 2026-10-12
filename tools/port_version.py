@@ -245,6 +245,8 @@ class Porter:
         # placement cannot tell apart from addresses): built from assembly here too
         path = f"yamls/{version}/asm_files.txt"
         self.forced_asm = {l.split("#")[0].strip() for l in open(path)} - {""} if os.path.exists(path) else set()
+        # libleo's boot code is encrypted in the ROM, and this mode does not encrypt
+        self.forced_asm |= {"libleo/bootdisk", "../../src/libleo/bootstrap"}
 
     # -- segment table -------------------------------------------------------------------
 
@@ -1249,7 +1251,7 @@ class Placer:
         while True:
             fixed = []
             for d in rom_subs:
-                if d["sect"] == "pad" or d["end"] <= d["off"] or not d["clean"]:
+                if d["sect"] == "pad" or d["end"] <= d["off"] or not d["clean"] or d["key"] in self.p.forced_asm:
                     continue
                 if d["typ"] in ("c", ".data", ".rodata", "lib") and d["key"] not in keep:
                     continue
