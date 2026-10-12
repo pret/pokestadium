@@ -186,18 +186,18 @@ void RentalRules_QualifyingSpeciesWindowUpdateShown(QualifyingPokemonDisplay* di
 }
 
 void RentalRules_QualifyingSpeciesWindowUpdateScrolling(QualifyingPokemonDisplay* display) {
-    s32 var_v1;
+    s32 scrolling_direction;
 
     display->animation_ticks--;
     if (display->animation_ticks <= 0) {
-        var_v1 = 0;
+        scrolling_direction = 0;
         if (BTN_IS_DOWN(gPlayer1Controller, BTN_DUP)) {
-            var_v1 = RentalRules_ScrollPageUp(display);
+            scrolling_direction = RentalRules_ScrollPageUp(display);
         } else if (BTN_IS_DOWN(gPlayer1Controller, BTN_DDOWN)) {
-            var_v1 = RentalRules_ScrollPageDown(display);
+            scrolling_direction = RentalRules_ScrollPageDown(display);
         }
 
-        if (var_v1 == 0) {
+        if (scrolling_direction == 0) {
             display->qualifying_list_state = AWAITING_INPUT;
             display->animation_ticks = 0;
             display->row_draw_budget = 2;
@@ -266,7 +266,7 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
     Color_RGB8 eligible_panel_color = { 0x3C, 0x3C, 0xA0 };
     Color_RGB8 banned_panel_color = { 0x64, 0x1E, 0x1E };
     Color_RGB8 empty_panel_color = { 0x1E, 0x1E, 0x64 };
-    s16 temp_s0;
+    s16 species;
 
     for (i = 0; i < 6; i++) {
         if (node->species_listed[i].species != 0) {
@@ -284,9 +284,9 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     for (i = 0; i < 6; i++) {
-        temp_s0 = node->species_listed[i].species;
-        if (temp_s0 != NULL) {
-            Gfx_DrawTextureRgba16(x + (i * 0x54) + 0x16, y + 3, 0x28, 0x28, pokemon_list[temp_s0 - 1], 0x28, 0);
+        species = node->species_listed[i].species;
+        if (species != NULL) {
+            Gfx_DrawTextureRgba16(x + (i * 84) + 22, y + 3, 40, 40, pokemon_list[species - 1], 0x28, 0);
         }
     }
 
@@ -297,9 +297,9 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
     for (i = 0; i < 6; i++) {
-        temp_s0 = node->species_listed[i].species;
-        if (temp_s0 != NULL) {
-            Font_Printf(x + (i * 0x54) + 2, y + 0x2A, RentalRules_GetPokemonName(temp_s0));
+        species = node->species_listed[i].species;
+        if (species != NULL) {
+            Font_Printf(x + (i * 0x54) + 2, y + 0x2A, RentalRules_GetPokemonName(species));
         }
     }
 
