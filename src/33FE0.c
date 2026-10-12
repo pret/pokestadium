@@ -591,7 +591,6 @@ void func_80033D1C(StadiumModel* model, MtxF* mtx) {
     func_800357F4(model);
 }
 
-#ifdef NON_MATCHING
 void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz, MtxF* mtx) {
     ModelSegment* segment;
     f32 cx, cy, cz;
@@ -604,7 +603,7 @@ void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay,
     f32 nx, ny, nz;
     f32 dir[3];
     ModelVertex* mvtx;
-    f32 up[3];
+    f32 upX, upY, upZ;
     f32 px, py, pz;
     f32 dist;
     f32 len;
@@ -618,28 +617,24 @@ void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay,
     index = model->unk_02++;
 
     vx = bx - ax;
-    vy = by - ay;
-    vz = bz - az;
-    len = sqrtf((vx * vx) + (vy * vy) + (vz * vz));
+    len = sqrtf((vx * vx) + ((by - ay) * (by - ay)) + ((bz - az) * (bz - az)));
     if (len != 0.0f) {
-        dir[0] = vz / len;
+        upZ = upY = 0;
+        upX = -1.0f;
         dir[2] = vx / len;
-        up[0] = up[1] = 0;
-        up[2] = -1.0f;
-        x = vy / len;
-        dist = Math_FAbs((dir[2] * -1.0f) + ((x * up[1]) + (up[1] * dir[0])));
-        vx = up[1];
-        vz = up[0];
+        dir[0] = (bz - az) / len;
+        x = (by - ay) / len;
+        dist = Math_FAbs((dir[0] * upZ) + ((x * upY) + (dir[2] * upX)));
         if (0.9f < dist) {
-            vx = 1.0f;
-            up[2] = 0.0f;
-            vz = 0.0f;
+            upY = 1.0f;
+            upX = 0.0f;
+            upZ = 0.0f;
             if (0.9f < Math_FAbs(x)) {
-                vz = 1.0f;
-                vx = 0.0f;
+                upZ = 1.0f;
+                upY = 0.0f;
             }
         }
-        Math_CrossProduct(dir[2], x, dir[0], up[2], vx, vz, &px, &py, &pz);
+        Math_CrossProduct(dir[2], x, dir[0], upX, upY, upZ, &px, &py, &pz);
         cx = ax + px;
         cy = ay + py;
         cz = az + pz;
@@ -666,6 +661,7 @@ void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay,
         t->mtx = mtx;
 
         guMtxXFMF(mtx->mf, ax, ay, az, &tax, &tay, &taz);
+        if (ax) {}
         guMtxXFMF(mtx->mf, bx, by, bz, &tbx, &tby, &tbz);
         guMtxXFMF(mtx->mf, cx, cy, cz, &tcx, &tcy, &tcz);
         guMtxXFMF(mtx->mf, dx, dy, dz, &tdx, &tdy, &tdz);
@@ -690,10 +686,6 @@ void func_80033D44(StadiumModel* model, s16 maxDist, f32 radius, f32 ax, f32 ay,
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/33FE0/func_80033D44.s")
-#endif
-
 void func_80034254(StadiumModel* model) {
     u32 pad[2];
     ModelSegment* segment;
