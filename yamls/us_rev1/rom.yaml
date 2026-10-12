@@ -454,7 +454,7 @@
     - [0x7DF80, .rodata, audio_stored_fade]
     - [0x7DFD0, .rodata, audio_sfx]
     - [0x7E0C0, .rodata, libnaudio/n_synthesizer]
-    - [0x7E0D0, rodata]
+    - [0x7E0D0, .rodata, gb_audio_render]
     - [0x7E0E0, .rodata, audio_channel]
     - [0x7E110, .rodata, audio_loop_point]
     - [0x7E2F0, .rodata, audio_commands_category2]
