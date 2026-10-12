@@ -3,8 +3,8 @@
 # pokestadium decompilation coverage
 
 <!-- AUTO_COVERAGE:START -->
-- Functions with C implementations: **7,435 / 7,437 (100.0%)**
-- Remaining decompilable `GLOBAL_ASM` owners: **2** (across 2 source files)
+- Functions with C implementations: **7,436 / 7,437 (100.0%)**
+- Remaining decompilable `GLOBAL_ASM` owners: **1** (across 1 source files)
 - Separately managed `hasm` assembly segments: **9**
 <!-- AUTO_COVERAGE:END -->
 
@@ -16,7 +16,6 @@ The function denominator covers C source owners and `GLOBAL_ASM` stubs. `hasm` e
 | File | Remaining owners | Functions |
 | --- | ---: | --- |
 | `src/fragments/lab_pc_list/lab_pc_list_1CEA00.c` | 1 | `func_88304850` |
-| `src/gb_audio_render.c` | 1 | `func_8004A89C` |
 
 ## Separately managed assembly segments
 
