@@ -33,7 +33,7 @@ python3 -m pip install -r requirements.txt
 ```
 
 # To use
-1. Place the US Pokemon Stadium 1.0 rom into the repository's "/baseroms/us/" folder as "baserom.z64".
+1. Place the supported Pokemon Stadium rom into the repository's "/baseroms/" folder as "baserom.z64", using the correct subfolder for your version.
 2. Set up tools and extract the rom: `make init`
 3. Re-assemble the rom: `make`
 
