@@ -717,18 +717,16 @@ s16 func_8004A474(void) {
     return out;
 }
 
-#ifdef NON_MATCHING
 s16 func_8004A89C(void) {
     s32 i;
+    s32 nr43;
+    s32 row;
     s32 changed;
-    u8 nr43;
-    u32 nr42;
     u32 nr44;
     u16 col;
     GbNoiseEntry* entry;
     u8 sampleId;
     f32 vol;
-    s32 envUp;
     s16 sample;
     unk_D_800FC6CC* ent;
 
@@ -742,31 +740,32 @@ s16 func_8004A89C(void) {
 
     if (changed) {
         nr43 = GB_REG(0x12);
-        col = (nr43 & 0xF0) >> 4;
-        entry = &GB_NOISE_TABLE[nr43 & 7][col];
+        row = nr43 & 7;
+        col = (GB_REG(0x12) & 0xF0) >> 4;
+        entry = &GB_NOISE_TABLE[row][col];
         sampleId = entry->sampleId;
         if (sampleId == 0xFF) {
             D_800FCFD8.unk_28 = 0;
             return 0;
         }
-        if (nr43 & 8) {
+        if (GB_REG(0x12) & 8) {
             sampleId += 0x10;
         }
-        D_800FCFD8.unk_0C = entry->pitchStep;
-        if (D_800FCFD8.unk_04 != sampleId) {
+        D_800FCFD8.unk_0C = GB_NOISE_TABLE[nr43 & 7][col].pitchStep;
+        if (sampleId != D_800FCFD8.unk_04) {
             D_800FCFD8.unk_04 = sampleId;
-            Rom_DmaRead(D_800FC6CC[D_800FCFD8.unk_04].unk_00, (u32)D_800FC6D0, D_800FC6CC[D_800FCFD8.unk_04].unk_04);
+            ent = (unk_D_800FC6CC*)((u32*)D_800FC6CC + (D_800FCFD8.unk_04 << 1));
+            Rom_DmaRead(ent->unk_00, (u32)D_800FC6D0, ent->unk_04);
         }
 
-        nr42 = GB_REG(0x11);
         D_800FCFD8.unk_08 = 0;
-        D_800FCFD8.unk_10 = 0.0f;
-        if (!(nr42 & 8) && !(nr42 & 0xF0)) {
+        D_800FCFD8.unk_10 = 0;
+        if (!(GB_REG(0x11) & 8) && !(GB_REG(0x11) & 0xF0)) {
             D_800FCFD8.unk_28 = 0;
             D_800FD008.unk_2C &= 0xFFF7;
             return 0;
         }
-        if ((nr42 & 8) && !(nr42 & 0xF0) && !(nr42 & 7)) {
+        if ((GB_REG(0x11) & 8) && !(GB_REG(0x11) & 0xF0) && !(GB_REG(0x11) & 7)) {
             D_800FCFD8.unk_28 = 0;
             D_800FD008.unk_2C &= 0xFFF7;
             return 0;
@@ -777,14 +776,14 @@ s16 func_8004A89C(void) {
             vol = D_8007D4D0;
             D_800FCFD8.unk_00 = 0;
             D_800FCFD8.unk_28 = 1;
-            D_800FCFD8.unk_14 = (nr42 & 0xF0) * vol;
-            if (nr42 & 7) {
-                if (nr42 & 8) {
+            D_800FCFD8.unk_14 = (u8)(GB_REG(0x11) & 0xF0) * vol;
+            if (GB_REG(0x11) & 7) {
+                if (GB_REG(0x11) & 8) {
                     D_800FCFD8.unk_18 = vol;
                 } else {
                     D_800FCFD8.unk_18 = D_8007D4D4;
                 }
-                D_800FCFD8.unk_1C = D_800FCFD8.unk_20 = (nr42 & 7) * D_800FD004 * 4;
+                D_800FCFD8.unk_20 = D_800FCFD8.unk_1C = (GB_REG(0x11) & 7) * D_800FD004 * 4;
             } else {
                 D_800FCFD8.unk_1C = -1;
                 D_800FCFD8.unk_20 = -1;
@@ -810,15 +809,14 @@ s16 func_8004A89C(void) {
         return 0;
     }
 
-    envUp = GB_REG(0x11) & 8;
-    sampleId = D_800FCFD8.unk_04;
     if (D_800FCFD8.unk_20 < D_800FCFD8.unk_00) {
         D_800FCFD8.unk_20 += D_800FCFD8.unk_1C;
         D_800FCFD8.unk_14 += D_800FCFD8.unk_18;
     }
 
+    ent = (unk_D_800FC6CC*)((u32*)D_800FC6CC + (D_800FCFD8.unk_04 << 1));
+    if (1) {}
     sample = ((s16*)D_800FC6D0)[D_800FCFD8.unk_08];
-    ent = &D_800FC6CC[sampleId];
     D_800FCFD8.unk_10 += 1.0f;
     if (D_800FCFD8.unk_0C <= D_800FCFD8.unk_10) {
         D_800FCFD8.unk_08++;
@@ -828,7 +826,7 @@ s16 func_8004A89C(void) {
         }
     }
 
-    if (!envUp && (D_800FCFD8.unk_14 < 0.0f)) {
+    if (!(GB_REG(0x11) & 8) && (D_800FCFD8.unk_14 < 0.0f)) {
         D_800FCFD8.unk_28 = 0;
         return 0;
     }
@@ -837,12 +835,10 @@ s16 func_8004A89C(void) {
         D_800FCFD8.unk_18 = 0.0f;
         D_800FCFD8.unk_20 = -1;
     }
+    sample = sample * D_800FCFD8.unk_14;
     D_800FCFD8.unk_00 += 0x100;
-    return sample * D_800FCFD8.unk_14;
+    return sample;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/gb_audio_render/func_8004A89C.s")
-#endif
 
 void GbAudio_ClearInterpolationHistory(void) {
     s32 i;
