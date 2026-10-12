@@ -49,6 +49,12 @@ BUILD_DIR = os.environ.get("BUILD_DIR", "build" if VERSION == "us" else f"build/
 REGEN_SAFE = {5, 22, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 40, 43, 48, 49, 51, 52, 53,
               54, 55, 56, 57, 58, 59, 60, 61, 65, 66, 68, 69, 70, 71, 72, 73, 74, 76, 77}
 
+# Versions that build changed files from assembly, whose pointers splat may keep as plain
+# numbers: keep every retail table there.
+ASM_VERSIONS = ("jp",)
+if VERSION in ASM_VERSIONS:
+    REGEN_SAFE = set()
+
 TYPE_NAMES = {2: "R_MIPS_32", 4: "R_MIPS_26", 5: "R_MIPS_HI16", 6: "R_MIPS_LO16"}
 
 
@@ -280,7 +286,9 @@ def moved_unsafe(elf: str) -> list[int]:
 
 def update_all(elf: str) -> list[int]:
     """-> list of fragment numbers whose table was rewritten"""
-    moved = moved_unsafe(elf)
+    # Those versions take relocations from splat's assembly, which writes some fragment-internal
+    # addresses as symbols the retail table never relocated; their md5 check covers layout.
+    moved = [] if VERSION in ASM_VERSIONS else moved_unsafe(elf)
     if moved:
         sys.exit("code moved inside " + ", ".join(f"fragment{n}" for n in moved) + ", whose reloc table "
                  "cannot be regenerated (not in REGEN_SAFE): the ROM would crash. Keep the change "

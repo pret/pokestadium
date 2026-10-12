@@ -136,14 +136,22 @@ LDSCRIPT  := $(ROM:.z64=.ld)
 
 BUILD_DEFINES ?=
 
+# versions whose files that differ from US 1.0 are built from assembly (see
+# tools/port_version.py --asm-changed)
+ASM_VERSIONS := jp
+
 ifeq ($(VERSION),us)
   BUILD_DEFINES   += -DVERSION_US=1
 else ifeq ($(VERSION),us_rev1)
   BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV1=1
 else ifeq ($(VERSION),us_rev2)
   BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV2=1
+# Japanese release: files that differ from US 1.0 are built from assembly, so the C it
+# shares is the US 1.0 C
+else ifeq ($(VERSION),jp)
+  BUILD_DEFINES   += -DVERSION_JP=1
 else
-$(error Invalid VERSION variable detected. Please use 'us', 'us_rev1' or 'us_rev2')
+$(error Invalid VERSION variable detected. Please use 'us', 'us_rev1', 'us_rev2' or 'jp')
 endif
 
 
@@ -201,6 +209,10 @@ SPLAT           := $(PYTHON) -m splat split
 SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
 ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+# libleo's boot code is assembly of the retail (already encrypted) bytes there
+ENCRYPT_LIBLEO  := true
+endif
 EXTRACT_ASSETS  := tools/extract_assets.sh
 
 IINC := -Iinclude -Isrc -Isrc/libnaudio -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
@@ -275,6 +287,12 @@ ULTRALIB_DIR  := lib/ultralib
 ULTRALIB_LIB  := $(ULTRALIB_DIR)/build/$(ULTRALIB_VERSION)/$(ULTRALIB_TARGET)/$(ULTRALIB_TARGET).a
 LIBULTRA_DIR  := lib/libultra
 LIBULTRA_LIB  := $(BUILD_DIR)/$(LIBULTRA_DIR).a
+# these versions build libultra from assembly too (its objects are linked in another order)
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+LINK_LIBS     :=
+else
+LINK_LIBS     := $(LIBULTRA_LIB)
+endif
 
 SRC_DIRS      := $(shell find src -type d)
 ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*" -not -path "asm/$(VERSION)/matchings*" -not -path "asm/$(VERSION)/lib/*")
@@ -284,6 +302,12 @@ LIB_DIRS      := $(foreach f, $(LIBULTRA_DIR), $f)
 # Build the branch's versioned source tree, excluding local/generated analysis
 # copies that may coexist in a developer checkout after extraction.
 C_FILES       := $(shell git ls-files -- src | sed -n '/\.c$$/p')
+# A version that builds some files from assembly only compiles the C its linker script uses
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+ifneq ($(wildcard linker_scripts/$(VERSION)/$(TARGET).ld),)
+C_FILES       := $(filter $(shell grep -o 'src/[A-Za-z0-9_/]*\.o' linker_scripts/$(VERSION)/$(TARGET).ld | sed 's/\.o$$/.c/' | sort -u),$(C_FILES))
+endif
+endif
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(ASSET_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
@@ -440,13 +464,13 @@ $(ROM): $(ELF)
 	$(V)$(PYTHON) -m ipl3checksum sum --update $@  # IPL3 rejects a stale CRC1/CRC2 at boot
 
 # TODO: avoid using auto/undefined
-$(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
+$(ELF): $(O_FILES) $(LINK_LIBS) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
 	@$(PRINT) "$(GREEN)Linking ELF file:  $(BLUE)$@ $(NO_COL)\n"
 	$(V)$(LD) $(LDFLAGS) -T $(LDSCRIPT) \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld -T $(BUILD_DIR)/linker_scripts/common_undef_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld \
-		-Map $(MAP) $(LIBULTRA_LIB) -o $@
+		-Map $(MAP) $(LINK_LIBS) -o $@
 # Fragment reloc tables are retail bytes; when a fragment's code changes they are regenerated
 # from this ELF (exit 3), which shifts later segments, so relink once.
 	$(V)VERSION="$(VERSION)" BUILD_DIR="$(BUILD_DIR)" $(PYTHON) tools/gen_fragment_relocs.py --all $@ || { [ $$? -eq 3 ] && [ -z "$(RELINKED)" ] && $(MAKE) $@ RELINKED=1; }

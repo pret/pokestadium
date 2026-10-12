@@ -19,7 +19,7 @@ all_args = sys.argv[1:]
 # --asm-version=<VERSION>: GLOBAL_ASM paths in the source name asm/us/; read the
 # assembly extracted for this version instead (sources are shared between versions)
 asm_version = "us"
-ALL_VERSIONS = ["us", "us_rev1", "us_rev2", "eu", "eu_rev1", "fr", "de", "es", "it"]
+ALL_VERSIONS = ["us", "us_rev1", "us_rev2", "eu", "eu_rev1", "fr", "de", "es", "it", "jp"]
 for arg in list(all_args):
     if arg.startswith("--asm-version="):
         asm_version = arg.split("=", 1)[1]

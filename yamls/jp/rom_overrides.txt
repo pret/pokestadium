@@ -1,0 +1,9 @@
+# Reviewed rom.yaml lines that tools/port_version.py cannot generate: files built from
+# version-specific C. Each line is one generated line; the lines after "->" replace it.
+# The porter stops if a generated line is missing, so check overrides after US changes.
+
+# audio_category_fade: the Japanese Audio_FadeCategories only queues the fade
+# (#ifdef VERSION_JP); n_syndelete is unchanged but shares the merged text block.
+- [0x4D4D0, asm, text_4D4D0]
+-> - [0x4D4D0, c, audio_category_fade]
+-> - [0x4D5A0, c, libnaudio/n_syndelete]

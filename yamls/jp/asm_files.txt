@@ -1,0 +1,4 @@
+# C files whose code matches US 1.0 but whose bytes do not in this version: built from
+# assembly (see tools/port_version.py). Found by building and comparing with the baserom.
+fragments/minigame_actor_framework/minigame_actor_framework_1189B0  # minigame variables laid out differently
+fragments/gb_tower_team_prep/gb_tower_team_prep  # a structure offset differs
