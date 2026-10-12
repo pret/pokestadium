@@ -392,7 +392,7 @@ void RentalRules_UpdateMainInput(void) {
         if (D_83003DE0.unk_00[D_83003CA0[D_83003CA6]] != NULL) {
             RentalRules_PopupOpen(D_83003CA0[D_83003CA6]);
         } else {
-            RentalRules_QualifiyingSpeciesWindowOpen();
+            RentalRules_QualifyingSpeciesWindowOpen();
             Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
         }
 
@@ -654,7 +654,7 @@ void RentalRules_DrawFrame(void) {
     }
 
     RentalRules_PopupDraw();
-    RentalRules_ListDraw();
+    RentalRules_QualifyingSpeciesWindowDraw();
     BgStage_AdvanceFrame();
 }
 
@@ -758,7 +758,7 @@ void RentalRules_Init(void) {
 
     RentalRules_PopupReset();
 
-    RentalRules_ListInit((D_83003C84 & 2) ? 1 : 0);
+    RentalRules_QualifyingSpeciesWindowInit((D_83003C84 & 2) ? 1 : 0);
 }
 
 s32 RentalRules_Update(void) {
@@ -795,7 +795,7 @@ void RentalRules_Loop(void) {
     do {
         RentalRules_PollInput();
         RentalRules_PopupUpdate();
-        RentalRules_ListUpdate();
+        RentalRules_QualifyingSpeciesWindowUpdate();
         RentalRules_DrawFrame();
     } while (RentalRules_Update() != 0);
 }
