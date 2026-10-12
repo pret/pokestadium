@@ -59,6 +59,13 @@ if not any(flag == "--output-enc" or flag.startswith("--output-enc=") for flag i
 
 with tempfile.TemporaryDirectory(prefix="asm_processor") as tmpdirname:
     tmpdir_path = Path(tmpdirname)
+    if "-DVERSION_US_REV1=1" in compile_args:
+        # Source is shared, but assembly fallbacks are extracted per revision.
+        version_source = tmpdir_path / in_file.name
+        version_source.write_bytes(
+            in_file.read_bytes().replace(b"asm/us/", b"asm/us_rev1/")
+        )
+        asmproc_flags[asmproc_flags.index(str(in_file))] = str(version_source)
     preprocessed_filename = "preprocessed_" + uuid.uuid4().hex + in_file.suffix
     preprocessed_path = tmpdir_path / preprocessed_filename
 

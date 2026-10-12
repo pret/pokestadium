@@ -18,7 +18,7 @@ def read_32_be_value(file_arr, i):
 # Main program
 # --------------------------
 
-assets_path = "assets/us/"
+assets_path = "assets/" + os.environ.get("VERSION", "us") + "/"
     
 extract_to = None
 if len(sys.argv) == 3:

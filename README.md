@@ -9,6 +9,7 @@ A WIP decomp of Pokemon Stadium (US).
 It builds the following ROMs:
 
 * US 1.0 (`VERSION=us`, default): `build/pokestadium-us.z64`, `md5: ed1378bc12115f71209a77844965ba50`
+* US Rev. 1 / 1.1 (`VERSION=us_rev1`): `build/us_rev1/pokestadium-us_rev1.z64`, `md5: 40e03eda831c01e0a12294287fd240e2`
 
 Note: To use this repository, you must already have a rom for the game.
 
@@ -32,7 +33,7 @@ python3 -m pip install -r requirements.txt
 ```
 
 # To use
-1. Place the US Pokemon Stadium 1.0 rom into the repository's "/baseroms/us/" folder as "baserom.z64".
+1. Place the supported Pokemon Stadium rom into the repository's "/baseroms/" folder as "baserom.z64", using the correct subfolder for your version.
 2. Set up tools and extract the rom: `make init`
 3. Re-assemble the rom: `make`
 
