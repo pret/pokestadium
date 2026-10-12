@@ -1,3 +1,4 @@
+#include "game_state.h"
 #include "rental_rules.h"
 #include "src/poke_icon.h"
 #include "src/graphics_textures.h"
@@ -27,39 +28,39 @@ s32 RentalRules_SpeciesMatchesCategory(s16 species, s16 ruleset) {
 
     is_eligible = 0;
     switch (ruleset) {
-        case 0:
+        case RULE_CATEGORY_ANYTHING_GOES:
             is_eligible = 1;
             break;
 
-        case 1:
+        case RULE_CATEGORY_NINTENDO_CUP_97:
             eligibility_mask = 1;
             break;
 
-        case 2:
+        case RULE_CATEGORY_NINTENDO_CUP_98:
             eligibility_mask = 2;
             break;
 
-        case 3:
+        case RULE_CATEGORY_NINTENDO_CUP_99:
             eligibility_mask = 1;
             break;
 
-        case 4:
+        case RULE_CATEGORY_PETIT_CUP:
             eligibility_mask = 8;
             break;
 
-        case 5:
+        case RULE_CATEGORY_PIKA_CUP:
             eligibility_mask = 0x10;
             break;
 
-        case 6:
+        case RULE_CATEGORY_PRIME_CUP:
             eligibility_mask = 0x20;
             break;
 
-        case 7:
+        case RULE_CATEGORY_GYM_LEADER_CASTLE:
             is_eligible = 1;
             break;
 
-        case 8:
+        case RULE_CATEGORY_VS_MEWTWO:
             is_eligible = 1;
             break;
     }
