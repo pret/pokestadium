@@ -23,7 +23,8 @@ stub landed inside StadiumSelect_ConfirmSelection (bogus FREE BATTLE screen) or 
 baserom, named via symbol_addrs*.txt, and pointed at that symbol's linked address.
 
 usage: fix_fragment_headers.py <elf> <rom> (<fragment> ... | --all)
-  (run from the repo root: reads baseroms/us/baserom.z64 and linker_scripts/us/symbol_addrs*.txt)
+  (run from the repo root: reads baseroms/<VERSION>/baserom.z64 and
+   linker_scripts/<VERSION>/symbol_addrs*.txt; VERSION defaults to us)
 
 Size fields are only rewritten for a fragment whose layout moved (relocOffset or sizeInRom
 differ): sizeInRam does not fit every retail header (fragment50 and fragment73 differ), so
@@ -38,6 +39,8 @@ import subprocess
 import sys
 
 HeaderValues = tuple[int, int, int]  # relocOffset, sizeInRom, sizeInRam
+
+VERSION = os.environ.get("VERSION", "us")
 
 HEADER_OFF = {"headerSize": 0x10, "relocOffset": 0x14, "sizeInRom": 0x18, "sizeInRam": 0x1C}
 MAGIC_OFF = 0x08
@@ -56,7 +59,7 @@ def symbols(elf: str, nm: str = os.environ.get("NM", "mips-linux-gnu-nm")) -> di
 def retail_funcs(paths: list[str] | None = None) -> dict[int, str]:
     """retail address -> function name, from splat's symbol_addrs files"""
     out = {}
-    for path in paths or glob.glob("linker_scripts/us/symbol_addrs*.txt"):
+    for path in paths or glob.glob(f"linker_scripts/{VERSION}/symbol_addrs*.txt"):
         for m in re.finditer(r"^(\w+)\s*=\s*(0x[0-9A-Fa-f]+);.*type:func", open(path).read(), re.M):
             out[int(m.group(2), 16)] = m.group(1)
     return out
@@ -151,9 +154,9 @@ if __name__ == "__main__":
         sys.exit("give fragment names (e.g. fragment59) or --all - see the docstring")
     from gen_fragment_relocs import REGEN_SAFE
     rom = bytearray(open(rom_path, "rb").read())
-    baserom = open("baseroms/us/baserom.z64", "rb").read()
+    baserom = open(f"baseroms/{VERSION}/baserom.z64", "rb").read()
     retail_rom = {m.group(1): int(m.group(2), 16) for m in re.finditer(
-        r"^(fragment\d+)_ROM_START\s*=\s*(0x[0-9A-Fa-f]+);", open("linker_scripts/us/symbol_addrs.txt").read(), re.M)}
+        r"^(fragment\d+)_ROM_START\s*=\s*(0x[0-9A-Fa-f]+);", open(f"linker_scripts/{VERSION}/symbol_addrs.txt").read(), re.M)}
     syms = symbols(elf)
     funcs = retail_funcs()
     if names == ["--all"]:

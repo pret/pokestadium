@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate a fragment's relocation table from the linked ELF.
 
-Fragment reloc tables are extracted retail bytes pinned in yamls/us/rom.yaml, but the
+Fragment reloc tables are extracted retail bytes pinned in yamls/<VERSION>/rom.yaml, but the
 loader patches the words they point at, so they are layout-dependent: grow the fragment
 and every entry is wrong, the fragment corrupts itself and the game hangs. This rebuilds
 the table for the current layout.
@@ -35,6 +35,9 @@ from typing import Any
 
 Section = dict[str, Any]   # section header fields, plus "sname" (its name)
 Symbol = dict[str, Any]    # "name", "value", "shndx"
+
+VERSION = os.environ.get("VERSION", "us")
+BUILD_DIR = os.environ.get("BUILD_DIR", "build" if VERSION == "us" else f"build/{VERSION}")
 
 # Fragments whose retail table this tool reproduces from a matching build: entry for entry,
 # or (22, 27, 34, 43, 55, 57, 61) the same entries in another order that the loader treats
@@ -181,7 +184,7 @@ def equivalent(a: list[int], b: list[int]) -> bool:
 
 
 def table_path(n: int) -> str:
-    return f"assets/us/fragments/{n}/fragment{n}_reloc.rodatabin.bin"
+    return f"assets/{VERSION}/fragments/{n}/fragment{n}_reloc.rodatabin.bin"
 
 
 def moved_unsafe(elf: str) -> list[int]:
@@ -222,7 +225,7 @@ def update_all(elf: str) -> list[int]:
         data = encode(merged, bss_size)
         open(path, "wb").write(data)
         # make does not track the .incbin, so drop the object to force a reassemble
-        obj = f"build/asm/us/data/fragments/{n}/fragment{n}_reloc.o"
+        obj = f"{BUILD_DIR}/asm/{VERSION}/data/fragments/{n}/fragment{n}_reloc.o"
         if os.path.exists(obj):
             os.remove(obj)
         changed.append(n)

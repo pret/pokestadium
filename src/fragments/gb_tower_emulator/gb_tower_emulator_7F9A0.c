@@ -2877,11 +2877,13 @@ void func_81204A84(s32 arg0) {
     }
 }
 
+// Revision 1 lowers the PAL vertical scale and also applies it when a transfer starts.
 #ifdef VERSION_US_REV1
-// Revision 1 changes the emulation state machine. Keep its assembly until
-// the revised function is independently recovered and matched.
-#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/gb_tower_emulator/gb_tower_emulator_7F9A0/func_8120572C.s")
+#define GB_EMU_PAL_Y_SCALE 0.798f
 #else
+#define GB_EMU_PAL_Y_SCALE 0.833f
+#endif
+
 s32 func_8120572C(s32 arg0) {
     unk_D_8122B2C0* emu = (&D_8122B2C0)[arg0];
     s32 i;
@@ -2989,6 +2991,12 @@ s32 func_8120572C(s32 arg0) {
             osSendMesg(&gGbPakServiceQueue, emu, OS_MESG_BLOCK);
             D_8122C4DC = 3;
             osViBlack(FALSE);
+#ifdef VERSION_US_REV1
+            if (osTvType == OS_TV_PAL) {
+                GbEmu_Delay(25);
+                osViSetYScale(GB_EMU_PAL_Y_SCALE);
+            }
+#endif
             goto check_present;
 
         case 3:
@@ -3045,7 +3053,7 @@ s32 func_8120572C(s32 arg0) {
                 GbEmu_ClearFramebuffers();
                 if (osTvType == OS_TV_PAL) {
                     GbEmu_Delay(25);
-                    osViSetYScale(0.833f);
+                    osViSetYScale(GB_EMU_PAL_Y_SCALE);
                 }
                 osViSetXScale(0.888f);
                 D_8122C4DC = 0;
@@ -3132,7 +3140,7 @@ s32 func_8120572C(s32 arg0) {
             osSendMesg(&gGbPakServiceQueue, emu, OS_MESG_BLOCK);
             if (osTvType == OS_TV_PAL) {
                 GbEmu_Delay(25);
-                osViSetYScale(0.833f);
+                osViSetYScale(GB_EMU_PAL_Y_SCALE);
             }
             D_8122C4E8 = 0;
             func_81202210(0, 0);
@@ -3358,8 +3366,6 @@ s32 func_8120572C(s32 arg0) {
     }
     return 0;
 }
-
-#endif
 
 void GbEmu_Init(unk_D_800AA660* arg0) {
   D_8122C4FC = 0;

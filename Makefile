@@ -432,7 +432,7 @@ $(ROM): $(ELF)
 	$(call print,Building ROM:,$<,$@)
 	$(V)$(OBJCOPY) -O binary --gap-fill=0xFF $< $@
 	$(V)$(ENCRYPT_LIBLEO) $@ $(MAP)
-	$(V)NM=$(NM) $(PYTHON) tools/fix_fragment_headers.py $< $@ --all
+	$(V)VERSION="$(VERSION)" NM=$(NM) $(PYTHON) tools/fix_fragment_headers.py $< $@ --all
 	$(V)$(PYTHON) -m ipl3checksum sum --update $@  # IPL3 rejects a stale CRC1/CRC2 at boot
 
 # TODO: avoid using auto/undefined
@@ -445,7 +445,7 @@ $(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VER
 		-Map $(MAP) $(LIBULTRA_LIB) -o $@
 # Fragment reloc tables are retail bytes; when a fragment's code changes they are regenerated
 # from this ELF (exit 3), which shifts later segments, so relink once.
-	$(V)$(PYTHON) tools/gen_fragment_relocs.py --all $@ || { [ $$? -eq 3 ] && [ -z "$(RELINKED)" ] && $(MAKE) $@ RELINKED=1; }
+	$(V)VERSION="$(VERSION)" BUILD_DIR="$(BUILD_DIR)" $(PYTHON) tools/gen_fragment_relocs.py --all $@ || { [ $$? -eq 3 ] && [ -z "$(RELINKED)" ] && $(MAKE) $@ RELINKED=1; }
 
 $(LDSCRIPT): linker_scripts/$(VERSION)/$(TARGET).ld
 	$(call print,Copying linker script to build dir:,$<,$@)
