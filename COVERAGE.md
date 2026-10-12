@@ -5,7 +5,7 @@
 <!-- AUTO_COVERAGE:START -->
 - Functions with C implementations: **7,437 / 7,437 (100.0%)**
 - Remaining decompilable `GLOBAL_ASM` owners: **0** (across 0 source files)
-- Separately managed `hasm` assembly segments: **9**
+- Separately managed `hasm` assembly segments: **18**
 <!-- AUTO_COVERAGE:END -->
 
 The function denominator covers C source owners and `GLOBAL_ASM` stubs. `hasm` entries are deliberately managed assembly segments, not unported C-function owners, so they are reported separately and excluded from the decompilation backlog. Total function count is derived from the retail linker map and retained from the trusted baseline. Regenerate with:
@@ -31,3 +31,12 @@ These YAML `hasm` entries are kept as assembly by design and are not counted as 
 | `yamls/us/rom.yaml` | `0x49190` | `libgsm` |
 | `yamls/us/rom.yaml` | `0x517A0` | `yay0 audio decoder` |
 | `yamls/us/rom.yaml` | `0x89020` | `fragments/gb_tower_emulator/gb_tower_emulator_code_asm` |
+| `yamls/us_rev1/rom.yaml` | `0x40` | `boot` |
+| `yamls/us_rev1/rom.yaml` | `0x1000` | `entry` |
+| `yamls/us_rev1/rom.yaml` | `0xC3D0` | `exception_set` |
+| `yamls/us_rev1/rom.yaml` | `0xC3F0` | `yay0` |
+| `yamls/us_rev1/rom.yaml` | `0xC4A0` | `abs` |
+| `yamls/us_rev1/rom.yaml` | `0xC910` | `../../src/libleo/bootstrap` |
+| `yamls/us_rev1/rom.yaml` | `0x49190` | `libgsm` |
+| `yamls/us_rev1/rom.yaml` | `0x517A0` | `yay0 audio decoder` |
+| `yamls/us_rev1/rom.yaml` | `0x89050` | `fragments/gb_tower_emulator/gb_tower_emulator_code_asm` |
