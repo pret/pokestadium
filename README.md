@@ -1,9 +1,14 @@
+# AI Disclaimer
+This project is was a collaborative effort by humans that used AI. AI was used for for *matching* functions and *annotating widely used structs and globals* where abundant evidence greatly reduced hallucination risk.
+
+The original pret contributors (the first four years of contributions) did not use AI to our knowledge. Pret has no official relationship with us (Team Hippodrome) other sharing some members.
+
 # Pokemon Stadium (US)
 A WIP decomp of Pokemon Stadium (US).
 
 It builds the following ROMs:
 
-* pokestadium.z64: `md5: ed1378bc12115f71209a77844965ba50`
+* US 1.0 (`VERSION=us`, default): `build/pokestadium-us.z64`, `md5: ed1378bc12115f71209a77844965ba50`
 
 Note: To use this repository, you must already have a rom for the game.
 
@@ -32,3 +37,7 @@ python3 -m pip install -r requirements.txt
 3. Re-assemble the rom: `make`
 
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+
+Last mile decomp and annotation work done by [Team Hippodrome](https://discord.gg/8EvuQxbxu8).
+
+Part of the [R.A.I.D. (Retro AI Development)](https://discord.gg/eCvnsvrjnY) community. 
