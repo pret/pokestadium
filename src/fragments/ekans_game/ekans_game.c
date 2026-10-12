@@ -3234,10 +3234,21 @@ void EkansGame_DrawTutorialScreen(void) {
 }
 
 void miniEkansDrawCountdown(void) {
+#ifdef VERSION_US_REV1
+    char countdownText[0x40];
+    UNUSED s32 pad;
+    s32 textPosition;
+#endif
     Gfx_SetEnvColor(0xFF, 0xC8, 0x32, 0xFF);                               // set color
     Font_SetActive(8, 0);                                                 // set style
+#ifdef VERSION_US_REV1
+    sprintf(countdownText, "%s99", Text_GetString(NULL, 0, D_87806330, 0x5D));
+    textPosition = (320 - Font_MeasureTextExtent(0, 0, countdownText)) / 2;
+    Font_Printf(textPosition, 0x14, "%s%2d", Text_GetString(NULL, 0, D_87806330, 0x5D), miniEkansCountdown);
+#else
     Font_Printf(0x80, 0x14, Text_GetString(NULL, 0, D_87806330, 0x5D)); // TIME text
     Font_Printf(0xAA, 0x14, "%d", miniEkansCountdown);
+#endif
 }
 
 void miniEkansDrawHub(void) {
