@@ -45,12 +45,12 @@ typedef struct QualifyingPokemonDisplay {
 extern unk_D_83003CE0 D_83003CE0;
 extern unk_D_83003CE0 D_83003DE0;
 
-extern char** D_830039C0;
+extern char** battle_mode_labels;
 
-char* RentalRules_GetPokemonName(s32 arg0);
+char* RentalRules_GetPokemonName(s32 file_number);
 void RentalRules_LoadBackgroundArchive(void);
 void RentalRules_PollInput(void);
-s16* RentalRules_GetRuleIdList(SessionContext* arg0);
+s16* RentalRules_GetRuleIdList(SessionContext* session_context);
 char* RentalRules_GetModeLabel(s8 arg0);
 char* RentalRules_GetCategoryLabel(s8 arg0);
 s32 RentalRules_RuleListHasEmptyEntry(s16* arg0);

@@ -24,24 +24,24 @@ static char* D_83003C9C;
 static s16* D_83003CA0;
 static s16 D_83003CA4;
 static s16 D_83003CA6;
-static char* D_83003CA8;
-static char* D_83003CAC;
-static char* D_83003CB0;
-static char* D_83003CB4;
-static char* D_83003CB8;
-static char* D_83003CBC;
-static char* D_83003CC0;
-static char* D_83003CC4;
-static char* D_83003CC8;
-static char* D_83003CCC;
-static char* D_83003CD0;
-static char* D_83003CD4;
-static char* D_83003CD8;
-static char* D_83003CDC;
+static char* stadium_mode_label;
+static char* free_battle_mode_label;
+static char* event_battle_mode_label;
+static char* gym_leader_castle_mode_label;
+static char* vs_mewtwo_mode_label;
+static char* anything_goes_label;
+static char* nintendo_cup_97_label;
+static char* nintendo_cup_98_label;
+static char* nintendo_cup_99_label;
+static char* petit_cup_label;
+static char* pika_cup_label;
+static char* prime_cup_label;
+static char* gym_leader_castle_label;
+static char* vs_mewtwo_label;
 unk_D_83003CE0 D_83003CE0;
 unk_D_83003CE0 D_83003DE0;
 
-char** D_830039C0 = NULL;
+char** battle_mode_labels = NULL;
 static char** D_830039C4 = NULL;
 static u8 D_830039C8[] = {
     0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0F,
@@ -103,8 +103,8 @@ static s16 D_83003B54[] = {
     0x0015, 0x001C, 0x001B, 0x0014, 0x0023, 0xFFFF,
 };
 
-char* RentalRules_GetPokemonName(s32 arg0) {
-    return Text_GetString(NULL, 0, D_830039C4, arg0 - 1);
+char* RentalRules_GetPokemonName(s32 file_number) {
+    return Text_GetString(NULL, 0, D_830039C4, file_number - 1);
 }
 
 void RentalRules_LoadBackgroundArchive(void) {
@@ -132,12 +132,12 @@ void RentalRules_PollInput(void) {
     Input_ResetRepeatState();
 }
 
-s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
+s16* RentalRules_GetRuleIdList(SessionContext* session_context) {
     s16* var_v1 = NULL;
 
-    switch (arg0->ruleCategory) {
+    switch (session_context->ruleCategory) {
         case 1:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 1:
                     var_v1 = D_830039D4;
                     break;
@@ -151,7 +151,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 2:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 2:
                     var_v1 = D_83003A10;
                     break;
@@ -165,7 +165,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 3:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 3:
                     var_v1 = D_830039D4;
                     break;
@@ -179,7 +179,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 4:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 4:
                     var_v1 = D_83003A84;
                     break;
@@ -193,7 +193,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 5:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 5:
                     var_v1 = D_83003ACC;
                     break;
@@ -207,7 +207,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 6:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 6:
                     var_v1 = D_83003B04;
                     break;
@@ -221,7 +221,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 0:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 0:
                     var_v1 = D_83003B34;
                     break;
@@ -229,7 +229,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 7:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 7:
                     var_v1 = D_83003B44;
                     break;
@@ -237,7 +237,7 @@ s16* RentalRules_GetRuleIdList(SessionContext* arg0) {
             break;
 
         case 8:
-            switch (arg0->mode) {
+            switch (session_context->mode) {
                 case 8:
                     var_v1 = D_83003B54;
                     break;
@@ -253,7 +253,7 @@ char* RentalRules_GetModeLabel(s8 arg0) {
 
     switch (arg0) {
         case 0:
-            ret = D_83003CAC;
+            ret = free_battle_mode_label;
             break;
 
         case 1:
@@ -262,19 +262,19 @@ char* RentalRules_GetModeLabel(s8 arg0) {
         case 4:
         case 5:
         case 6:
-            ret = D_83003CA8;
+            ret = stadium_mode_label;
             break;
 
         case 7:
-            ret = D_83003CB4;
+            ret = gym_leader_castle_mode_label;
             break;
 
         case 8:
-            ret = D_83003CB8;
+            ret = vs_mewtwo_mode_label;
             break;
 
         case 10:
-            ret = D_83003CB0;
+            ret = event_battle_mode_label;
             break;
 
         default:
@@ -286,51 +286,51 @@ char* RentalRules_GetModeLabel(s8 arg0) {
 }
 
 char* RentalRules_GetCategoryLabel(s8 arg0) {
-    char* ret;
+    char* label;
 
     switch (arg0) {
         case 0:
-            ret = D_83003CBC;
+            label = anything_goes_label;
             break;
 
         case 1:
-            ret = D_83003CC0;
+            label = nintendo_cup_97_label;
             break;
 
         case 2:
-            ret = D_83003CC4;
+            label = nintendo_cup_98_label;
             break;
 
         case 3:
-            ret = D_83003CC8;
+            label = nintendo_cup_99_label;
             break;
 
         case 4:
-            ret = D_83003CCC;
+            label = petit_cup_label;
             break;
 
         case 5:
-            ret = D_83003CD0;
+            label = pika_cup_label;
             break;
 
         case 6:
-            ret = D_83003CD4;
+            label = prime_cup_label;
             break;
 
         case 7:
-            ret = D_83003CD8;
+            label = gym_leader_castle_label;
             break;
 
         case 8:
-            ret = D_83003CDC;
+            label = vs_mewtwo_label;
             break;
 
         default:
-            ret = NULL;
+            label = NULL;
             break;
     }
 
-    return ret;
+    return label;
 }
 
 s32 RentalRules_RuleListHasEmptyEntry(s16* arg0) {
@@ -505,7 +505,7 @@ void RentalRules_DrawHeaderBanner(void) {
 
             Gfx_SetEnvColor(0, 0, 0, 0xFF);
             Text_SetStringToken(0x26, D_83003C98);
-            temp_v0_21 = Text_GetString(sp48, sizeof(sp48), D_830039C0, 0);
+            temp_v0_21 = Text_GetString(sp48, sizeof(sp48), battle_mode_labels, 0);
             Font_Printf(0x6A, temp_s1 + 4, temp_v0_21);
             Gfx_SetEnvColor(0xFF, 0xFF, 0x77, 0xFF);
             Font_Printf(0x68, temp_s1 + 2, temp_v0_21);
@@ -569,15 +569,15 @@ void RentalRules_DrawRuleListText(s16 x, s16 y) {
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
     if (D_83003C9C != NULL) {
-        if (D_83003C9C != D_83003CBC) {
+        if (D_83003C9C != anything_goes_label) {
             Text_SetStringToken(0x27, D_83003C9C);
-            Font_Printf(x + 16, y + 4, Text_GetString(sp48, sizeof(sp48), D_830039C0, 1));
+            Font_Printf(x + 16, y + 4, Text_GetString(sp48, sizeof(sp48), battle_mode_labels, 1));
         } else {
             Font_Printf(x + 16, y + 4, D_83003C9C);
         }
     }
 
-    Font_Printf(x + 0x30, y + 0x134, Text_GetString(NULL, 0, D_830039C0, 2));
+    Font_Printf(x + 0x30, y + 0x134, Text_GetString(NULL, 0, battle_mode_labels, 2));
     Font_SetActive(8, 0);
 
     for (i = 0; i < D_83003CA4; i++) {
@@ -662,7 +662,7 @@ void RentalRules_LoadCategoryStrings(void) {
     s32 i;
 
     for (i = 0; i < 29; i++) {
-        D_83003CE0.unk_00[i] = Text_GetString(NULL, 0, D_830039C0, i + 4);
+        D_83003CE0.unk_00[i] = Text_GetString(NULL, 0, battle_mode_labels, i + 4);
     }
 
     D_83003CE0.unk_74 = D_83003CE0.unk_00[2];
@@ -671,10 +671,10 @@ void RentalRules_LoadCategoryStrings(void) {
     D_83003CE0.unk_80 = D_83003CE0.unk_00[15];
     D_83003CE0.unk_84 = D_83003CE0.unk_00[22];
     D_83003CE0.unk_88 = D_83003CE0.unk_00[27];
-    D_83003CE0.unk_8C = Text_GetString(NULL, 0, D_830039C0, 0x21);
+    D_83003CE0.unk_8C = Text_GetString(NULL, 0, battle_mode_labels, 0x21);
     D_83003CE0.unk_90 = D_83003CE0.unk_00[20];
     D_83003CE0.unk_94 = D_83003CE0.unk_00[4];
-    D_83003CE0.unk_98 = Text_GetString(NULL, 0, D_830039C0, 0x22);
+    D_83003CE0.unk_98 = Text_GetString(NULL, 0, battle_mode_labels, 0x22);
 }
 
 void RentalRules_LoadDescriptionStrings(void) {
@@ -692,7 +692,7 @@ void RentalRules_LoadDescriptionStrings(void) {
                 break;
 
             default:
-                D_83003DE0.unk_00[i] = Text_GetString(NULL, 0, D_830039C0, var_s2 + 0x23);
+                D_83003DE0.unk_00[i] = Text_GetString(NULL, 0, battle_mode_labels, var_s2 + 0x23);
                 var_s2++;
                 break;
         }
@@ -723,21 +723,21 @@ void RentalRules_Init(void) {
     RentalRules_LoadCategoryStrings();
     RentalRules_LoadDescriptionStrings();
 
-    D_83003CA8 = Text_GetString(NULL, 0, D_830039C0, 0x46);
-    D_83003CAC = Text_GetString(NULL, 0, D_830039C0, 0x45);
-    D_83003CB0 = Text_GetString(NULL, 0, D_830039C0, 0x49);
-    D_83003CB4 = Text_GetString(NULL, 0, D_830039C0, 0x47);
-    D_83003CB8 = Text_GetString(NULL, 0, D_830039C0, 0x48);
-    D_83003CBC = Text_GetString(NULL, 0, D_830039C0, 0x4A);
-    D_83003CC0 = Text_GetString(NULL, 0, D_830039C0, 0x4D);
-    D_83003CC4 = Text_GetString(NULL, 0, D_830039C0, 0x4C);
-    D_83003CC8 = Text_GetString(NULL, 0, D_830039C0, 0x4B);
-    D_83003CCC = Text_GetString(NULL, 0, D_830039C0, 0x4E);
-    D_83003CD0 = Text_GetString(NULL, 0, D_830039C0, 0x4F);
-    D_83003CD4 = Text_GetString(NULL, 0, D_830039C0, 0x50);
+    stadium_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x46);
+    free_battle_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x45);
+    event_battle_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x49);
+    gym_leader_castle_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x47);
+    vs_mewtwo_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x48);
+    anything_goes_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4A);
+    nintendo_cup_97_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4D);
+    nintendo_cup_98_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4C);
+    nintendo_cup_99_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4B);
+    petit_cup_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4E);
+    pika_cup_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4F);
+    prime_cup_label = Text_GetString(NULL, 0, battle_mode_labels, 0x50);
 
-    D_83003CD8 = D_83003CB4;
-    D_83003CDC = D_83003CB8;
+    gym_leader_castle_label = gym_leader_castle_mode_label;
+    vs_mewtwo_label = vs_mewtwo_mode_label;
 
     D_83003C98 = RentalRules_GetModeLabel(gSessionContext.mode);
     D_83003C9C = RentalRules_GetCategoryLabel(gSessionContext.ruleCategory);
@@ -813,7 +813,7 @@ s32 RentalRules_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     RentalRules_LoadBackgroundArchive();
     PokeIcon_OpenModelArchive();
     Text_InitStringTables();
-    D_830039C0 = Text_GetStringTable(0x20);
+    battle_mode_labels = Text_GetStringTable(0x20);
     D_830039C4 = Text_GetStringTable(0x24);
     StageLoader_UpdateSegments();
     RentalRules_Loop();

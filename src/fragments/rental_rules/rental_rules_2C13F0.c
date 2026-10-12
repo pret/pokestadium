@@ -382,7 +382,7 @@ void RentalRules_QualifyingSpeciesWindowDraw(void) {
         Text_SetNumberToken(3, display->eligible_count);
         {
             char sp4C[64];
-            Font_Printf(x + 44, y + 8, Text_GetString(sp4C, sizeof(sp4C), D_830039C0, 3));
+            Font_Printf(x + 44, y + 8, Text_GetString(sp4C, sizeof(sp4C), battle_mode_labels, 3));
         }
         Font_EndTexturedTextRendering();
 
