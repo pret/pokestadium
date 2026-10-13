@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
-set -e
 : "${PYTHON:=python3}"
 : "${VERSION:=us}"
 export VERSION
+
+# The US releases share every asset; the others lack some (the Japanese release has no
+# Gallery) or pack them differently, so unpack what they have and go on past the rest.
+case "$VERSION" in
+    us|us_rev1|us_rev2) set -e ;;
+esac
 
 # Unpack assets from ROM extraction.
 
@@ -629,3 +634,5 @@ export VERSION
 "$PYTHON" tools/decompress_yay0.py assets/${VERSION}/rom_parts/50.bin assets/${VERSION}/rom_parts/50.bin
 "$PYTHON" tools/decompress_yay0.py assets/${VERSION}/rom_parts/51.bin assets/${VERSION}/rom_parts/51.bin
 "$PYTHON" tools/decompress_yay0.py assets/${VERSION}/rom_parts/52.bin assets/${VERSION}/rom_parts/52.bin
+
+exit 0

@@ -428,6 +428,9 @@ s16 TeamSelection_RunCategorySelection(void) {
     return TeamSelection_CheckCartRemoved(D_8423D3F8);
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/61/fragment61_2D78B0/TeamSelection_DrawFrame.s")
+#else
 void TeamSelection_DrawFrame(s16 arg0, s16 arg1) {
     Color_RGBA8 sp34;
     Color_RGBA8 sp30;
@@ -473,6 +476,7 @@ void TeamSelection_DrawFrame(s16 arg0, s16 arg1) {
     }
     Font_EndTexturedTextRendering();
 }
+#endif
 
 void TeamSelection_RenderFrame(UNUSED s16 arg0, s16 arg1, s16 arg2) {
     s32 temp_s0 = D_84210D40 > 0;
@@ -1008,7 +1012,7 @@ void Rental_LoadRosterForMode(void) {
     BinArchive* temp_a0;
     s16 var_a1;
 
-    temp_a0 = BinArchive_Open(0x898000, NULL, 1, 0);
+    temp_a0 = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 0);
 
     switch (gSessionContext.ruleCategory) {
         case 0:

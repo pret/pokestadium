@@ -1250,6 +1250,9 @@ void BattleMenu_InitOrderSelectPanels(SessionContext* arg0) {
     }
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_order_select/battle_order_select/BattleMenu_RunOrderSelectScreen.s")
+#else
 s32 BattleMenu_RunOrderSelectScreen(s32 arg0, s32 arg1) {
     unk_func_80007444* sp24;
 
@@ -1284,3 +1287,4 @@ s32 BattleMenu_RunOrderSelectScreen(s32 arg0, s32 arg1) {
     main_pool_pop_state('MSEL');
     return 0;
 }
+#endif

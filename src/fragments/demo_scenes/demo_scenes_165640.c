@@ -109,7 +109,11 @@ static u8 D_86B0DD40[] = {
 
 static unk_D_86B0DD58 D_86B0DD58[20] = {
     { 0xA7, 47.5f, 30.0f }, { 0xA8, 47.5f, 30.0f }, { 0xA9, 47.5f, 30.0f }, { 0xAA, 47.5f, 30.0f },
+#if defined(VERSION_US_REV2)
+    { 0xA5, 66.5f, 85.0f }, { 0xA6, 50.0f, 55.0f }, { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },
+#else
     { 0xA5, 66.5f, 85.0f }, { 0xA5, 66.5f, 85.0f }, { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },
+#endif
     { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },
     { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },
     { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },   { 0xA7, 0.0f, 0.0f },
@@ -960,7 +964,11 @@ void Stage_LoadModels(void) {
             break;
 
         case 4:
+#if defined(VERSION_US_REV2)
+            D_86B0FA44 = 4;
+#else
             D_86B0FA44 = 5;
+#endif
             break;
 
         case 5:

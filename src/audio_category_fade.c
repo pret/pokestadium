@@ -3,6 +3,12 @@
 #include "libnumus/player.h"
 #include "3D140.h"
 
+#ifdef VERSION_JP
+// The Japanese release stops no audio streams here: it only queues the category fade.
+void Audio_FadeCategories(s32 arg0, u32 arg1) {
+    Audio_QueueFadeCategoryCommand(arg0, arg1);
+}
+#else
 void Audio_FadeCategories(s32 arg0, u32 arg1) {
     s32 i;
 
@@ -14,6 +20,7 @@ void Audio_FadeCategories(s32 arg0, u32 arg1) {
     }
     Audio_QueueFadeCategoryCommand(arg0, arg1);
 }
+#endif
 
 void Audio_FadeCategoriesAndStreams(s32 arg0) {
     s32 i;

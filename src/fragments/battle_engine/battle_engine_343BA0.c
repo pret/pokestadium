@@ -21,8 +21,12 @@ static s16 D_843925D6;
 static s16 D_843925D8;
 static s16 D_843925DA;
 
+#if !(defined(VERSION_US_REV2))
 static const char D_8438D3D0[] = "calc_vector_ATtoDM() normal error!!!\n";
+#endif
+#if !(defined(VERSION_US_REV2))
 static const char D_8438D3F8[] = "calc_vector_ATtoDM2() normal error!!!\n";
+#endif
 
 void BattleAnim_NoopUpdateHook(void) {
 }
@@ -115,6 +119,9 @@ f32 BattleAnim_EffectSecondaryOwnerModelScale(void) {
     return BattleAnim_GetSecondaryOwnerModelScale();
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_engine/battle_engine_343BA0/BattleAnim_CalcVectorAtToDm.s")
+#else
 void BattleAnim_CalcVectorAtToDm(f32* arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5) {
     Vec3f sp4C;
     Vec3f sp40;
@@ -148,7 +155,11 @@ void BattleAnim_CalcVectorAtToDm(f32* arg0, f32* arg1, f32* arg2, f32* arg3, f32
     *arg4 = sp20;
     *arg5 = sp1C;
 }
+#endif
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_engine/battle_engine_343BA0/BattleAnim_CalcVectorAtToDm2.s")
+#else
 void BattleAnim_CalcVectorAtToDm2(f32* arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5) {
     Vec3f sp4C;
     Vec3f sp40;
@@ -188,6 +199,7 @@ void BattleAnim_CalcVectorAtToDm2(f32* arg0, f32* arg1, f32* arg2, f32* arg3, f3
     *arg4 = sp20;
     *arg5 = sp1C;
 }
+#endif
 
 void BattleAnim_ResetSharedEffectMatrix(void) {
     guRotateRPY(&D_84392588, 0.0f, 0.0f, 0.0f);

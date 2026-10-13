@@ -44,6 +44,9 @@ const char D_8007C5A4[0x4] = "";
 const char D_8007C5A8[0x4] = "";
 const char D_8007C5AC[0x4] = "";
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/33E30/func_80033230.s")
+#else
 void func_80033230(s32 arg0) {
     s32 i;
     s32 j;
@@ -52,7 +55,12 @@ void func_80033230(s32 arg0) {
         for (j = 0; j < 2; j++) {}
     }
 }
+#endif
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/33E30/func_80033264.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/33E30/func_80033318_us_rev2.s")
+#else
 void func_80033264(s32 arg0) {
     s32 i;
     s32 j;
@@ -61,6 +69,7 @@ void func_80033264(s32 arg0) {
         for (j = 0; j < 0; j++) {}
     }
 }
+#endif
 
 Gfx* Gfx_DrawTriangleMarker(Gfx* arg0, Vec3f* arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, f32 arg6) {
     f32 sp144;

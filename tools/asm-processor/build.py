@@ -5,6 +5,7 @@ import shlex
 import subprocess
 import tempfile
 import uuid
+import re
 import asm_processor
 
 # Boolean for debugging purposes
@@ -15,6 +16,14 @@ dir_path = Path(__file__).resolve().parent
 asm_prelude_path = dir_path / "prelude.inc"
 
 all_args = sys.argv[1:]
+# --asm-version=<VERSION>: GLOBAL_ASM paths in the source name asm/us/; read the
+# assembly extracted for this version instead (sources are shared between versions)
+asm_version = "us"
+ALL_VERSIONS = ["us", "us_rev1", "us_rev2", "eu", "eu_rev1", "fr", "de", "es", "it", "jp"]
+for arg in list(all_args):
+    if arg.startswith("--asm-version="):
+        asm_version = arg.split("=", 1)[1]
+        all_args.remove(arg)
 sep0 = next(index for index, arg in enumerate(all_args) if not arg.startswith("-"))
 sep1 = all_args.index("--")
 sep2 = all_args.index("--", sep1 + 1)
@@ -59,12 +68,22 @@ if not any(flag == "--output-enc" or flag.startswith("--output-enc=") for flag i
 
 with tempfile.TemporaryDirectory(prefix="asm_processor") as tmpdirname:
     tmpdir_path = Path(tmpdirname)
-    if "-DVERSION_US_REV1=1" in compile_args:
-        # Source is shared, but assembly fallbacks are extracted per revision.
+    source = in_file.read_bytes()
+    # Source is shared, but assembly fallbacks are extracted per version.
+    version_bytes = source.replace(b"asm/us/", f"asm/{asm_version}/".encode())
+    # asm-processor reads every GLOBAL_ASM file, even in an inactive #if branch. A function
+    # that only exists in another version is named func_XXXXXXXX_<version> and has no
+    # assembly extracted for this one, so blank its pragma (keeping line numbers).
+    other_versions = [v for v in ALL_VERSIONS if v != asm_version]
+    version_bytes = re.sub(
+        rb'^#pragma GLOBAL_ASM\("[^"]*_(' + b"|".join(v.encode() for v in other_versions) + rb')\.s"\)$',
+        b"",
+        version_bytes,
+        flags=re.M,
+    )
+    if version_bytes != source:
         version_source = tmpdir_path / in_file.name
-        version_source.write_bytes(
-            in_file.read_bytes().replace(b"asm/us/", b"asm/us_rev1/")
-        )
+        version_source.write_bytes(version_bytes)
         asmproc_flags[asmproc_flags.index(str(in_file))] = str(version_source)
     preprocessed_filename = "preprocessed_" + uuid.uuid4().hex + in_file.suffix
     preprocessed_path = tmpdir_path / preprocessed_filename
