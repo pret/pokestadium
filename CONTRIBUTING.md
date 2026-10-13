@@ -9,7 +9,7 @@ Don't act a fool.
 |---|---|
 |`unsigned char`|`u8`|
 |`signed char`|`s8`|
-|`shorr unsigned int`|`u16`|
+|`short unsigned int`|`u16`|
 |`short signed int`|`s16`|
 |`long unsigned int`|`u32`|
 |`long signed int`|`s32`|
