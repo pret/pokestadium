@@ -21,7 +21,7 @@ static Gfx D_843898F0[] = {
     gsDPSetCombineMode(G_CC_BLENDIA, G_CC_BLENDIA),
     gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
     gsDPSetEnvColor(255, 255, 255, 255),
-    gsSPVertex(0x843898B0, 4, 0),
+    gsSPVertex(D_843898B0, 4, 0),
     gsSP2Triangles(0, 2, 1, 0, 2, 3, 1, 0),
     gsSPEndDisplayList(),
 };

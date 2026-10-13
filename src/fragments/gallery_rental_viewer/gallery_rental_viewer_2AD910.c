@@ -263,7 +263,7 @@ s32 Gallery_RentalViewerMain(s32 arg0, s32 arg1) {
     ASSET_LOAD(D_04000000, snap_select_ui, 0);
 
     D_83805658 = BinArchive_GetFile(ASSET_LOAD2(backgrounds, 1, 1), 0x14);
-    D_8380565C = BinArchive_GetFile(BinArchive_Open(0x898000, NULL, 1, 0), 0x1A);
+    D_8380565C = BinArchive_GetFile(BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 0), 0x1A);
 
     PokeIcon_OpenModelArchive();
     Gallery_RentalViewerInit(arg0);

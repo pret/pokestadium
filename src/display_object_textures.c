@@ -319,11 +319,15 @@ ModelLoadContext* PokeIcon_AllocFramebuffers(u32 arg0) {
     return temp_v0;
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/display_object_textures/PokeIcon_OpenModelArchives.s")
+#else
 void PokeIcon_OpenModelArchives(void) {
     D_800ABE10.unk_A04.unk_00 = BinArchive_Open(0x920000, NULL, 1, 1);
     D_800ABE10.unk_A04.unk_04 = BinArchive_Open(0x8CC000, NULL, 1, 1);
     D_800ABE10.unk_A04.unk_08 = main_pool_alloc(0x28000, 1);
 }
+#endif
 
 s32 PokeIcon_RequestFrameLoad(ModelLoadContext* arg0, u16 arg1, arg1_func_80010CA8 arg2) {
     s32 sp1C;

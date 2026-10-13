@@ -231,6 +231,9 @@ s32 Util_Strlen(s8* arg0) {
     return var_v1;
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/particle_data_library/particle_data_library_258080/func_81003A54.s")
+#else
 void func_81003A54(Gfx* gfx) {
     u16 temp_v1;
     u8 sp4D;
@@ -269,6 +272,7 @@ void func_81003A54(Gfx* gfx) {
     gSPEndDisplayList(gfx++);
     D_81004BB0++;
 }
+#endif
 
 void DisplayList_InitDigitDisplayBackground(s32 arg0, DisplayListState* state) {
     Gfx* gfx;

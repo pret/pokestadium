@@ -105,6 +105,9 @@ void Widget_CountdownInit(void) {
     MainPool_FinalizeAllocation(sp1C);
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/widget_toolkit/widget_toolkit_1/Widget_CountdownUpdate.s")
+#else
 void Widget_CountdownUpdate(void) {
     s32 i;
     Gfx* temp_v0;
@@ -178,6 +181,7 @@ void Widget_CountdownUpdate(void) {
         gSPEndDisplayList(temp_v0++);
     }
 }
+#endif
 
 void Widget_CountdownStart(s16 arg0) {
     D_8780FAC6 = arg0;

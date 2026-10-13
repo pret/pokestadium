@@ -1750,7 +1750,7 @@ void SushiGame_InitCamera(void) {
 
     D_86808498.unk_00.x = 0.0f;
     D_86808498.unk_00.y = 0.0f;
-#ifdef VERSION_US_REV1
+#if defined(VERSION_US_REV1) || defined(VERSION_US_REV2)
     D_86808498.unk_00.z = -10.0f;
 #else
     D_86808498.unk_00.z = -7.8f;

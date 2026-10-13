@@ -38,11 +38,17 @@ typedef struct unk_D_84002BE8 {
 
 static char** D_84002D00;
 static char** D_84002D04;
+#if defined(VERSION_US_REV2)
+static s32 pad_D_84002D08_us_rev2;
+#endif
 static BinArchive* D_84002D08;
 static u8* D_84002D0C;
 static s32 pad_D_84002D10;
 static s16 D_84002D14;
 static s16 D_84002D16;
+#if defined(VERSION_US_REV2)
+static s32 pad_D_84002D18_us_rev2;
+#endif
 static unk_D_84002D18 D_84002D18;
 static s32 pad_D_84002D1C;
 static s16 D_84002D20;
@@ -580,6 +586,9 @@ void FreeBattle_DrawConfirmLine(s16 arg0, char* arg1) {
     Font_Printf(D_84002D28.unk_00 + 0x34, D_84002D28.unk_02 + (arg0 * 0x1C) + 0x2B, arg1);
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/free_battle_rules/free_battle_rules/FreeBattle_DrawConfirmPanel.s")
+#else
 void FreeBattle_DrawConfirmPanel(void) {
     if (D_84002D28.unk_04 > 0) {
         s16 tmp = D_84002D28.unk_04 * 0x11;
@@ -603,6 +612,7 @@ void FreeBattle_DrawConfirmPanel(void) {
         }
     }
 }
+#endif
 
 void FreeBattle_InitConfirmPanel(void) {
     D_84002D28.unk_00 = 0x190;
@@ -732,6 +742,9 @@ void FreeBattle_SlideOutPanel(void) {
     }
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/free_battle_rules/free_battle_rules/FreeBattle_ApplyRuleSelection.s")
+#else
 void FreeBattle_ApplyRuleSelection(void) {
     char sp44[12];
     TeamRoster* temp_v0;
@@ -774,6 +787,7 @@ void FreeBattle_ApplyRuleSelection(void) {
         gSessionContext.battleSides[1].unk_08[1]->unk_214->unk_003 = 0x35;
     }
 }
+#endif
 
 s32 FreeBattle_RuleSelectLoop(void) {
     D_84002D16 = 0;
@@ -822,6 +836,9 @@ s32 FreeBattle_RuleSelectLoop(void) {
     return 1;
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/free_battle_rules/free_battle_rules/FreeBattle_RuleSelectMain.s")
+#else
 s32 FreeBattle_RuleSelectMain(s32 arg0, s32 arg1) {
     s32 sp1C;
 
@@ -844,3 +861,4 @@ s32 FreeBattle_RuleSelectMain(s32 arg0, s32 arg1) {
     main_pool_pop_state('RULE');
     return sp1C;
 }
+#endif

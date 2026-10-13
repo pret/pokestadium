@@ -7,6 +7,7 @@
 typedef unsigned int uintptr_t;
 
 #include "macros.h"
+#include "versions.h"
 #include "attributes.h"
 #include "functions.h"
 #include "sections.h"

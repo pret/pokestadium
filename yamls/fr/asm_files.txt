@@ -1,0 +1,4 @@
+# C files whose code matches US 1.0 but whose bytes do not in this version: built from
+# assembly (see tools/port_version.py). Found by building and comparing with the baserom.
+fragments/pokedex/pokedex_2190D0  # .data pointers into data laid out differently
+fragments/lab_pc/lab_pc_1B4EA0  # a .data pointer into data laid out differently

@@ -6,6 +6,9 @@
 
 static MiniActor* D_87906120;
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/minigame_actor_framework/minigame_actor_framework_11BF90/miniRankingActorsInit.s")
+#else
 void miniRankingActorsInit(void) {
     s32 i;
     MiniActor* ptr;
@@ -22,6 +25,7 @@ void miniRankingActorsInit(void) {
         miniActorAllToZero(ptr);
     }
 }
+#endif
 
 void miniRankingActorSpawn(MiniActor* arg0) {
     if (arg0->mainState == 1) {
