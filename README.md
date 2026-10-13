@@ -42,25 +42,12 @@ python3 -m pip install -r requirements.txt
 
 # To use
 1. Place the supported Pokemon Stadium rom into the repository's "/baseroms/" folder as "baserom.z64", using the correct subfolder for your version.
-2. Set up tools and extract the rom: `make init`
-3. Re-assemble the rom: `make`
+2. Set up tools and extract the rom: `make init VERSION={version}`
+3. Re-assemble the rom: `make VERSION={version}`
 
-For US Rev. 2, place your ROM at `baseroms/us_rev2/baserom.z64`, then run
-`make extract VERSION=us_rev2` and `make VERSION=us_rev2` after setting up the
-tools and Python environment. Re-run extraction for each older target after
-updating the shared sources, because new assembly fallbacks need their `.s` files.
-
-For Japan, place the ポケモンスタジアム２ ROM (not the Japan-only first Stadium) at
-`baseroms/jp/baserom.z64`, then run `make extract VERSION=jp` and `make VERSION=jp`.
-Files that differ from US 1.0 are built from the Japanese disassembly; regenerate its
-config with `make VERSION=us` followed by `tools/port_version.py jp --asm-changed`.
-`make extract VERSION=jp` reports errors for US-only unpacked asset views; the build
+For Japanese and European versions: regenerate the config of those versions with `make VERSION=us` followed by `tools/port_version.py {version} --asm-changed`.
+`make extract VERSION={Version}` reports errors for US-only unpacked asset views; the build
 does not use them.
-
-The European releases (`eu`, `eu_rev1`, `fr`, `de`, `es`, `it`) work the same way as
-Japan: place each ROM at `baseroms/<version>/baserom.z64`, then run
-`make extract VERSION=<version>` and `make VERSION=<version>`, and regenerate a config
-with `tools/port_version.py <version> --asm-changed`.
 
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
 
