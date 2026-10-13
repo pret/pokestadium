@@ -42,10 +42,10 @@ void Gfx_DrawTexturedRect(s32 x1, s32 y1, s32 width, s32 height, s32 texture_ste
     Gfx_DrawTexturedRectClipped(x1, y1, (width - x1) + 1, (height - y1) + 1, 0, 0, texture_step_x, texture_step_y, texture_step_x_mode);
 }
 
-void Gfx_FillRectRgb(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6) {
-    gDPSetPrimColor(gDisplayListHead++, 0, 0, arg4, arg5, arg6, 0xFF);
+void Gfx_FillRectRgb(s16 x1, s16 y1, s16 width, s16 height, u8 r, u8 g, u8 b) {
+    gDPSetPrimColor(gDisplayListHead++, 0, 0, r, g, b, 0xFF);
 
-    Gfx_DrawTexturedRectClipped(arg0, arg1, arg2, arg3, 0, 0, 0, 0, 0);
+    Gfx_DrawTexturedRectClipped(x1, y1, width, height, 0, 0, 0, 0, 0);
 }
 
 void Gfx_FillRectRgba(s16 x1, s16 y1, s16 width, s16 height, u8 r, u8 g, u8 b, u8 alpha) {

@@ -7,7 +7,7 @@ extern FontContext* font_context;
 
 void Gfx_DrawTexturedRectClipped(s16 x1, s16 y1, s16 width, s16 height, s16 texture_start_x, s16 texture_start_y, s16 texture_step_x, s16 texture_step_y, s32 texture_spread_x_mode);
 void Gfx_DrawTexturedRect(s32 x1, s32 y1, s32 width, s32 height, s32 texture_step_x, s32 texture_step_y, s32 texture_step_x_mode);
-void Gfx_FillRectRgb(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6);
+void Gfx_FillRectRgb(s16 x1, s16 y1, s16 width, s16 height, u8 r, u8 g, u8 b);
 void Gfx_FillRectRgba(s16 x1, s16 y1, s16 width, s16 height, u8 r, u8 g, u8 b, u8 alpha);
 void Gfx_DrawTextureRgba16(s16 x1, s16 y1, s16 draw_width, s16 height, u8* texture, s16 load_width, s32 texture_spread_x_mode);
 void Gfx_DrawTextureRgba32(s16 x1, s16 y1, s16 draw_width, s16 height, u8* texture, s16 load_width, s32 texture_spread_x_mode);

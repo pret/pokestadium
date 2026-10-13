@@ -263,13 +263,14 @@ extern u8 D_2000C80[];
 extern u8 D_2000D80[];
 extern u8 D_2000E80[];
 extern u8 D_2000F80[];
-
-#define bottom_left_sc_tex D_2000C80
-#define bottom_right_sc_tex D_2000D80
-#define top_right_sc_tex D_2000E80
-#define top_left_sc_tex D_2000F80
+#define BOTTOM_LEFT_SECTION_CORNER D_2000C80
+#define BOTTOM_RIGHT_SECTION_CORNER D_2000D80
+#define TOP_LEFT_SECTION_CORNER D_2000F80
+#define TOP_RIGHT_SECTION_CORNER D_2000E80
 extern u8 D_2006C00[];
+#define POKEBALL_ICON_TOP D_2006C00
 extern u8 D_2007500[];
+#define POKEBALL_ICON_BOTTOM D_2007500
 extern u8 D_20003C0[];
 extern u8 D_20005C0[];
 extern u8 D_20002C0[];
@@ -554,6 +555,7 @@ extern u8 D_2000A60[];
 extern u8 D_3008200[];
 extern u8 D_4000C40[];
 extern u8 D_4000DD0[];
+#define ELIGIBILITY_PANEL_LEGEND D_4000DD0
 extern u8 D_300F780[];
 extern u8 D_3024480[];
 extern u8 D_30256A0[];
@@ -1003,6 +1005,7 @@ typedef struct unk_D_80072338 {
 extern unk_D_80072338 gMoveDisplayInfo[];
 
 extern char D_8006FEE8[][0x1C];
+#define gSpeciesDataById D_8006FEE8
 
 typedef struct unk_rom_70D3A0_offset_72780 {
     /* 0x00 */ char unk00[0x20];

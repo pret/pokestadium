@@ -211,10 +211,10 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
     gSPDisplayList(gDisplayListHead++, D_8006F518);
     gDPSetEnvColor(gDisplayListHead++, r, g, b, alpha);
 
-    Gfx_DrawTextureIa8((left + pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, bottom_left_sc_tex, 0x10, 0);
-    Gfx_DrawTextureIa8((left + pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, top_left_sc_tex, 0x10, 0);
-    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, bottom_right_sc_tex, 0x10, 0);
-    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, top_right_sc_tex, 0x10, 0);
+    Gfx_DrawTextureIa8((left + pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_LEFT_SECTION_CORNER, 0x10, 0);
+    Gfx_DrawTextureIa8((left + pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_LEFT_SECTION_CORNER, 0x10, 0);
+    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_RIGHT_SECTION_CORNER, 0x10, 0);
+    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_RIGHT_SECTION_CORNER, 0x10, 0);
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 

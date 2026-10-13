@@ -2,60 +2,60 @@
 #include "src/graphics_textures.h"
 #include "src/audio_sfx.h"
 
-static s16 D_83003EE0;
-static s16 D_83003EE2;
-static s16 D_83003EE4;
-static s16 D_83003EE6;
-static s16 D_83003EE8;
-static s16 D_83003EEA;
+static s16 rule_popup_status;
+static s16 popup_close_progress;
+static s16 rules_text_index;
+static s16 popup_open_progress;
+static s16 window_bottom;
+static s16 window_top;
 
-s32 RentalRules_CountTextLines(s8* arg0) {
-    s16 var_v1 = 1;
+s32 RentalRules_CountTextLines(s8* text) {
+    s16 num_lines = 1;
 
-    while (*arg0 != 0) {
-        if (*arg0 == '\n') {
-            var_v1++;
+    while (*text != 0) {
+        if (*text == '\n') {
+            num_lines++;
         }
-        arg0++;
+        text++;
     }
 
-    return var_v1;
+    return num_lines;
 }
 
 void RentalRules_PopupUpdateOpen(void) {
-    D_83003EE2--;
-    D_83003EE6 = ((5 - D_83003EE2) << 0xA) / 5;
-    if (D_83003EE2 <= 0) {
-        D_83003EE0 = 2;
-        D_83003EE2 = 0;
+    popup_close_progress--;
+    popup_open_progress = ((5 - popup_close_progress) << 0xA) / 5;
+    if (popup_close_progress <= 0) {
+        rule_popup_status = 2;
+        popup_close_progress = 0;
     }
 }
 
 void RentalRules_PopupUpdateShown(void) {
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A | BTN_B)) {
-        D_83003EE0 = 3;
-        D_83003EE2 = 5;
+        rule_popup_status = 3;
+        popup_close_progress = 5;
         Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
 }
 
 void RentalRules_PopupUpdateClose(void) {
-    D_83003EE2--;
-    D_83003EE6 = (D_83003EE2 << 0xA) / 5;
-    if (D_83003EE2 <= 0) {
-        D_83003EE0 = 0;
-        D_83003EE2 = 0;
+    popup_close_progress--;
+    popup_open_progress = (popup_close_progress << 0xA) / 5;
+    if (popup_close_progress <= 0) {
+        rule_popup_status = 0;
+        popup_close_progress = 0;
     }
 }
 
 void RentalRules_PopupReset(void) {
-    D_83003EE0 = 0;
-    D_83003EE6 = 0;
+    rule_popup_status = 0;
+    popup_open_progress = 0;
 }
 
 void RentalRules_PopupUpdate(void) {
-    if (D_83003EE0 != 0) {
-        switch (D_83003EE0) {
+    if (rule_popup_status != 0) {
+        switch (rule_popup_status) {
             case 1:
                 RentalRules_PopupUpdateOpen();
                 break;
@@ -72,49 +72,49 @@ void RentalRules_PopupUpdate(void) {
 }
 
 void RentalRules_PopupDraw(void) {
-    s16 temp_s0;
+    s16 y;
 
-    if (D_83003EE6 != 0) {
-        temp_s0 = D_83003EE8 + (((D_83003EEA / 2) * (0x400 - D_83003EE6)) / 1024);
-        RentalRules_DrawWindowFrame(0x48, temp_s0, 0x1F0, (D_83003EEA * D_83003EE6) / 1024);
-        if (D_83003EE6 >= 0x400) {
-            RentalRules_DrawFilledPanel(0x48, temp_s0, 0x1F0, 0x20, 0x1E, 0x64, 0x64);
-            RentalRules_DrawFilledPanel(0x48, temp_s0 + 0x20, 0x1F0, D_83003EEA - 0x20, 0x3C, 0x3C, 0xA0);
+    if (popup_open_progress != 0) {
+        y = window_bottom + (((window_top / 2) * (0x400 - popup_open_progress)) / 1024);
+        RentalRules_DrawWindowFrame(0x48, y, 496, (window_top * popup_open_progress) / 1024);
+        if (popup_open_progress >= 0x400) {
+            RentalRules_DrawFilledPanel(72, y, 496, 32, 0x1E, 0x64, 0x64);
+            RentalRules_DrawFilledPanel(72, y + 32, 496, window_top - 32, 0x3C, 0x3C, 0xA0);
             Font_BeginTranslucentTextRendering();
             Font_SetActive(8, 0);
             Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             Font_SetLineHeight(0x18);
-            Font_Printf(0x50, temp_s0 + 6, D_83003CE0.unk_00[D_83003EE4]);
+            Font_Printf(0x50, y + 6, D_83003CE0.unk_00[rules_text_index]);
             Font_SetActive(8, 0);
-            Font_Printf(0x50, temp_s0 + 0x28, D_83003DE0.unk_00[D_83003EE4]);
+            Font_Printf(0x50, y + 40, D_83003DE0.unk_00[rules_text_index]);
             Font_EndTexturedTextRendering();
         }
     }
 }
 
-void RentalRules_PopupOpen(s16 arg0) {
-    s32 tmp;
+void RentalRules_PopupOpen(s16 text_index) {
+    s32 units_for_text_fit;
 
-    D_83003EE0 = 1;
-    D_83003EE2 = 5;
-    D_83003EE6 = 0;
-    D_83003EE4 = arg0;
-    tmp = (RentalRules_CountTextLines(D_83003DE0.unk_00[D_83003EE4]) * 0x18);
-    D_83003EEA = 0x2C + tmp;
-    D_83003EE8 = ((0x1E0 - D_83003EEA) / 2) + 0x14;
+    rule_popup_status = 1;
+    popup_close_progress = 5;
+    popup_open_progress = 0;
+    rules_text_index = text_index;
+    units_for_text_fit = (RentalRules_CountTextLines(D_83003DE0.unk_00[rules_text_index]) * 0x18);
+    window_top = 44 + units_for_text_fit;
+    window_bottom = ((480 - window_top) / 2) + 20;
 }
 
 s32 RentalRules_PopupIsActive(void) {
-    s32 ret;
+    s32 is_active;
 
-    if (D_83003EE0 != 0) {
-        ret = 1;
+    if (rule_popup_status != 0) {
+        is_active = 1;
     } else {
-        ret = 0;
+        is_active = 0;
     }
-    return ret;
+    return is_active;
 }
 
 s32 RentalRules_PopupGetProgress(void) {
-    return D_83003EE6;
+    return popup_open_progress;
 }
