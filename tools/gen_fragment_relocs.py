@@ -129,29 +129,23 @@ def build(elf_path: str, frag_no: int | str) -> tuple[list[int], int, int, int]:
     # Order matters: the retail table follows the linker's emission order, which is mostly
     # ascending by offset but not strictly so (local hi/lo rotations appear), so sorting
     # would break the match. Keep the ELF's order.
-    # The table lives in the fragment's bss space (the loader clears sizeInRam - relocOffset
-    # after applying it), so it may grow as long as it fits there. Growing the segment shifts
-    # later segments, which is harmless: their reloc offsets are relative to their own start.
+    # The table may grow freely, even past the bss (retail fragment37's already is 0x3B8 bytes
+    # against 0x100 of bss): Fragment_Register applies it while the block still holds the whole
+    # ROM image, and only then shrinks the block to sizeInRam. Growing the segment shifts later
+    # segments, which is harmless: their reloc offsets are relative to their own start.
     return entries, dropped, seg["size"], (bss["size"] if bss else 0)
 
 
-def encode(entries: list[int], limit: int) -> bytes:
-    out = struct.pack(">I", len(entries)) + b"".join(struct.pack(">I", w) for w in entries)
-    assert len(out) <= limit, f"table grew to 0x{len(out):X} > 0x{limit:X}"
-    return out
+def encode(entries: list[int]) -> bytes:
+    return struct.pack(">I", len(entries)) + b"".join(struct.pack(">I", w) for w in entries)
 
 
 def selftest() -> None:
-    enc = encode([(5 << 24) | 0x10, (6 << 24) | 0x10], 12)
+    enc = encode([(5 << 24) | 0x10, (6 << 24) | 0x10])
     assert len(enc) == 12, len(enc)
     assert struct.unpack_from(">I", enc, 0)[0] == 2          # count
     assert struct.unpack_from(">I", enc, 4)[0] == (5 << 24) | 0x10
     assert struct.unpack_from(">I", enc, 8)[0] == (6 << 24) | 0x10
-    try:
-        encode([0] * 5, 16)
-        raise AssertionError("oversized table must be rejected")
-    except AssertionError as e:
-        assert "grew to" in str(e)
     hi, lo, w32 = (5 << 24) | 0x10, (6 << 24) | 0x14, (2 << 24) | 0x100
     assert equivalent([w32, hi, lo], [hi, lo, w32]), "32-bit words may move"
     assert not equivalent([hi, lo], [lo, hi]), "hi/lo order matters"
@@ -297,13 +291,13 @@ def update_all(elf: str) -> list[int]:
     changed = []
     for n in sorted(REGEN_SAFE):
         path = table_path(n)
-        entries, _, _, bss_size = build(elf, n)
+        entries, _, _, _ = build(elf, n)
         merged, current, _, _ = merge(entries, path)
         # compare entries, not bytes (retail tables carry trailing padding), and keep the
         # current table when it is only ordered differently, so a matching build stays retail
         if equivalent(merged, current, fragment_content(elf, n)):
             continue
-        data = encode(merged, bss_size)
+        data = encode(merged)
         open(path, "wb").write(data)
         # make does not track the .incbin, so drop the object to force a reassemble
         obj = f"{BUILD_DIR}/asm/{VERSION}/data/fragments/{n}/fragment{n}_reloc.o"
@@ -361,6 +355,6 @@ if __name__ == "__main__":
 
     if "--write" in sys.argv:
         path = sys.argv[sys.argv.index("--write") + 1]
-        data = encode(merged, bss_size)
+        data = encode(merged)
         open(path, "wb").write(data)
         print(f"  wrote {path} ({len(data)} bytes, was {seg_size})")
