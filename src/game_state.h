@@ -123,6 +123,17 @@ typedef struct SessionContext {
     /* 0x11F5 */ u8 sessionFlags;
     /* 0x11F6 */ u16 transitionFlags;
 } SessionContext; // size = 0x11F8
+#define RULE_CATEGORY_ANYTHING_GOES 0
+#define RULE_CATEGORY_NINTENDO_CUP_97 1
+#define RULE_CATEGORY_NINTENDO_CUP_98 2
+#define RULE_CATEGORY_NINTENDO_CUP_99 3
+#define RULE_CATEGORY_PETIT_CUP 4
+#define RULE_CATEGORY_PIKA_CUP 5
+#define RULE_CATEGORY_PRIME_CUP 6
+#define RULE_CATEGORY_GYM_LEADER_CASTLE 7
+#define RULE_CATEGORY_VS_MEWTWO 8
+
+
 
 extern u16 D_80073660[16][256];
 extern s32 gCurrentGameState;
