@@ -9,8 +9,8 @@ Usage:
   bash stadium-function-address.sh FUNCTION LOADED_BASE VERSION
 
 Examples:
-  bash stadium-function-address.sh AreaSelect_AdvanceSparkleTrail 80200000 us
-  bash stadium-function-address.sh AreaSelect_AdvanceSparkleTrail '?' us_rev2
+  bash stadium-function-address.sh AreaSelect_AdvanceMagnemiteTrail 80200000 us
+  bash stadium-function-address.sh AreaSelect_AdvanceMagnemiteTrail '?' us_rev2
 
 LOADED_BASE is the 32-bit VALUE read from the fragment-table slot in
 Project64, not the address of the slot. Hex with or without 0x is accepted.
