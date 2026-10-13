@@ -7,14 +7,14 @@ Don't act a fool.
 ## N64 Type Aliases
 |Type|Alias|
 |---|---|
-|`unsigned char`|`u8`|
-|`signed char`|`s8`|
-|`short unsigned int`|`u16`|
-|`short signed int`|`s16`|
-|`unsigned int`|`u32`|
-|`signed int`|`s32`|
-|`long unsigned int`|`u64`|
-|`long signed int`|`s64`|
+|`short unsigned int`|`u8`|
+|`short signed int`|`s8`|
+|`unsigned int`|`u16`|
+|`signed int`|`s16`|
+|`long unsigned int`|`u32`|
+|`long signed int`|`s32`|
+|`long long unsigned int`|`u64`|
+|`long long signed int`|`s64`|
 |`float`|`f32`|
 |`double`|`f64`|
 
@@ -23,15 +23,15 @@ Don't act a fool.
 |Object|Style|Examples|
 |---|---|---|
 |Global-to-Game "Global" Variables|`gCamelCase`|`gPlayer1Controller`, `gSessionContext`,`gDisplayListHead`|
-|Global-to-Fragment "Global" Variables|`camelCase` |`casteMapNodes`, `side2HpBar`,`ruleDescWindow`|
+|Global-to-Fragment "Global" Variables|`sCamelCase` |`sCasteMapNodes`, `sSide2HpBar`,`sRuleDescWindow`|
 |local function Variables|`snake_case`|`selected_menu_item`,`cpu_pokemon`,`type_effectiveness`|
 |Functions|`{Domain}_{Purpose}`|`RentalHub_MenuLoop`,`Title_FadeOut`,`GraphNode_AppendChild`|
 |Macro Variables|`CAPITAL_CASE`|`PIKACHU_SPECIES`, `CONFIRM_SFX`, `GIOVANNI`|
-|Macro Functions (usually display functions)|`gCamelCase`|`gSPDisplayList`,`gSPSprite2DBase`
+|External Library Functions (e.g. libultra)|Leave as is|`gSPDisplayList`,`gSPSprite2DBase`
 |Structs|`TitleCase`|`QualifyingPokemonDisplay`,`VictoryPalaceSlot`,`GymLeader`|
 
 ## Naming Known Tokens
-As the goal of a decomp is to be readable to a wide variety of people (recomp devs, romhackers, speedrunners, video essayists, AI assistants helping a confused player) our decomp repos tolerate more specific naming than most modern "good practice". Function names can go up to 50 characters, so names like like `RentalRules_QualifyingSpeciesWindowDraw` are acceptable. 
+As the goal of a decomp is to be readable to a wide variety of people (recomp devs, romhackers, speedrunners, video essayists, AI assistants helping a confused player) our decomp repos tolerate more specific naming than most modern "good practice". Function names can go up to 50 characters, so names like `RentalRules_QualifyingSpeciesWindowDraw` are acceptable. 
 
 ## Naming Unknown Tokens
 |Object|Style|Examples|
@@ -56,7 +56,7 @@ It is our philosophy that even the worst, most disgusting match is better than t
 
 That being said, fakes should always be marked as with a `// FAKE` comment when used or encountered so other maintainers can attempt to create matches that does. If you encounter fakes while annotating, please mark them as such even if the original committer didn't (we all sometimes don't fully read the agent's output).
 
-Karodo is acceptable to leave in with a `// karodo` comment if there appears to be no other way to get rid of it. Decomp slop should never have its `// FAKE` label changed.
+Karodo is acceptable to leave in with a `// karodo` comment if there appears to be no other way to get rid of it. Decomp slop should never have its `// FAKE` label changed. Never launder decomp slop as karodo.
 
 ## Terminology
 Never use the name Poke cup, all versions of the game still contain duplicate internal strings for Poke Cup as in the Japanese Version, Poke cup was five different versions called Nintendo Cup.
@@ -64,5 +64,11 @@ Never use the name Poke cup, all versions of the game still contain duplicate in
 Use English names for Pokemon and Characters.
 
 The "Victory Palace"/"Hall of Fame" (the game unhelpfully uses both terms) is called the *Victory Palace*.
+
+Using the term "blackface" to describe Jynx's coloration in the Jp and US 1.0 versions is discouraged. 
+
+Do not use yaw, pitch, and roll to describe rotations about an axis since those terms are body-relative, while most rotations in Pokemon Stadium are world-relative.
 ## Spelling
 Use American English (color, mom, etc.) for all spelling.
+
+Do not include é in Pokémon for variable names. The é is optional for documentation and comments.
