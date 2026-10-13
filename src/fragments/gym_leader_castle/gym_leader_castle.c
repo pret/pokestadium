@@ -396,6 +396,9 @@ void Glc_DrawGymLeaderInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     }
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/gym_leader_castle/gym_leader_castle/Glc_DrawEliteFourRoomInfoPanel.s")
+#else
 void Glc_DrawEliteFourRoomInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     char* string;
 
@@ -436,6 +439,7 @@ void Glc_DrawEliteFourRoomInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     Font_DisableTwoCycleTexturing();
     Font_EndTexturedTextRendering();
 }
+#endif
 
 void Glc_UpdateRoomInfoPanelFade(void) {
     u8 sp1F;
@@ -878,7 +882,7 @@ s32 GymLeaderCastle_Main(s32 arg0, UNUSED s32 arg1) {
     glc_text_trainer_names = Text_GetStringTable(0x22);
     Save_EnsureBankLoaded(2);
     Save_GetModeSettings(&D_84A03180, gSessionContext.unk_11F2);
-    trainer_data_archive = BinArchive_Open(0x898000, NULL, 1, 1);
+    trainer_data_archive = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 1);
     portrait_archive = ASSET_LOAD2(battle_portraits, 1, 1);
     background_archive  = ASSET_LOAD2(backgrounds, 1, 1);
     gym_leader_castle_texture = BinArchive_GetFile(background_archive , 0xD);

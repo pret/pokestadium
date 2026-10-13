@@ -604,6 +604,9 @@ s32 PikachuReward_ResolveMoveSlot(void) {
     return temp_v0;
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/pikachu_reward/pikachu_reward/PikachuReward_ShowSaveStatusScreen.s")
+#else
 void PikachuReward_ShowSaveStatusScreen(s32 arg0) {
     PikachuReward_RenderFrame(0);
     PikachuReward_DrawTextBoxPanel(0x1E, 0x20, 0x104, 0x30);
@@ -641,6 +644,7 @@ void PikachuReward_ShowSaveStatusScreen(s32 arg0) {
     Font_EndTexturedTextRendering();
     BgStage_AdvanceFrame();
 }
+#endif
 
 void PikachuReward_SaveToCartridge(void) {
     s32 var_s0;

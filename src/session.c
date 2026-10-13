@@ -456,7 +456,7 @@ void Team_LoadOpponentPreset(void) {
 
     main_pool_push_state('RIVL');
 
-    D_800AF738 = BinArchive_Open(0x898000, NULL, 1, 0);
+    D_800AF738 = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 0);
 
     switch (gSessionContext.mode) {
         case 1:
@@ -498,7 +498,7 @@ void Team_LoadOpponentPreset(void) {
 void Team_BuildQuickBattleTeams(s16 arg0) {
     main_pool_push_state('RIVL');
 
-    D_800AF738 = BinArchive_Open(0x898000, NULL, 1, 0);
+    D_800AF738 = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 0);
     Session_SetMode(9, 6, 0);
 
     if (arg0 == 1) {

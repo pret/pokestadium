@@ -43,8 +43,9 @@ endif
 
 #### Defaults ####
 # Target game version. Supported versions:
-#   us   N64 US (default)
+#   us        N64 US (default)
 #   us_rev1   N64 US revision 1
+#   us_rev2   N64 US revision 2
 VERSION ?= us
 # If COMPARE is 1, check the output md5sum after building
 COMPARE ?= 1
@@ -122,8 +123,8 @@ ULTRALIB_TARGET      := libultra_rom
 ### Output ###
 
 BUILD_DIR := build
-ifeq ($(VERSION),us_rev1)
-BUILD_DIR := build/us_rev1
+ifneq ($(VERSION),us)
+BUILD_DIR := build/$(VERSION)
 endif
 ROM       := $(BUILD_DIR)/$(TARGET)-$(VERSION).z64
 ELF       := $(ROM:.z64=.elf)
@@ -135,12 +136,25 @@ LDSCRIPT  := $(ROM:.z64=.ld)
 
 BUILD_DEFINES ?=
 
+PAL_VERSIONS := eu eu_rev1 fr de es it
+# versions whose files that differ from US 1.0 are built from assembly (see
+# tools/port_version.py --asm-changed)
+ASM_VERSIONS := $(PAL_VERSIONS) jp
+
 ifeq ($(VERSION),us)
   BUILD_DEFINES   += -DVERSION_US=1
 else ifeq ($(VERSION),us_rev1)
   BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV1=1
+else ifeq ($(VERSION),us_rev2)
+  BUILD_DEFINES   += -DVERSION_US=1 -DVERSION_US_REV2=1
+# PAL and Japanese releases: files that differ from US 1.0 are built from assembly, so the
+# C they share is the US 1.0 C
+else ifneq ($(filter $(VERSION),$(PAL_VERSIONS)),)
+  BUILD_DEFINES   += -DVERSION_PAL=1
+else ifeq ($(VERSION),jp)
+  BUILD_DEFINES   += -DVERSION_JP=1
 else
-$(error Invalid VERSION variable detected. Please use 'us' or 'us_rev1')
+$(error Invalid VERSION variable detected. Please use 'us', 'us_rev1', 'us_rev2', 'eu', 'eu_rev1', 'fr', 'de', 'es', 'it' or 'jp')
 endif
 
 
@@ -180,7 +194,8 @@ ifeq ($(DETECTED_OS),windows)
   CPP := cpp.exe
 endif
 
-ASM_PROC        := $(PYTHON) tools/asm-processor/build.py
+# GLOBAL_ASM paths are written as asm/us/...; build.py reads them from asm/$(VERSION)/
+ASM_PROC        := $(PYTHON) tools/asm-processor/build.py --asm-version=$(VERSION)
 ifeq ($(DETECTED_OS),windows)
   # On Windows, ido-native-preprocess.py passes the original UTF-8 source to
   # asm-processor, which performs the EUC-JP conversion itself (--output-enc).
@@ -197,6 +212,10 @@ SPLAT           := $(PYTHON) -m splat split
 SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
 ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+# libleo's boot code is assembly of the retail (already encrypted) bytes there
+ENCRYPT_LIBLEO  := true
+endif
 EXTRACT_ASSETS  := tools/extract_assets.sh
 
 IINC := -Iinclude -Isrc -Isrc/libnaudio -Iassets/$(VERSION) -I. -I$(BUILD_DIR)
@@ -271,6 +290,12 @@ ULTRALIB_DIR  := lib/ultralib
 ULTRALIB_LIB  := $(ULTRALIB_DIR)/build/$(ULTRALIB_VERSION)/$(ULTRALIB_TARGET)/$(ULTRALIB_TARGET).a
 LIBULTRA_DIR  := lib/libultra
 LIBULTRA_LIB  := $(BUILD_DIR)/$(LIBULTRA_DIR).a
+# these versions build libultra from assembly too (its objects are linked in another order)
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+LINK_LIBS     :=
+else
+LINK_LIBS     := $(LIBULTRA_LIB)
+endif
 
 SRC_DIRS      := $(shell find src -type d)
 ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*" -not -path "asm/$(VERSION)/matchings*" -not -path "asm/$(VERSION)/lib/*")
@@ -280,8 +305,20 @@ LIB_DIRS      := $(foreach f, $(LIBULTRA_DIR), $f)
 # Build the branch's versioned source tree, excluding local/generated analysis
 # copies that may coexist in a developer checkout after extraction.
 C_FILES       := $(shell git ls-files -- src | sed -n '/\.c$$/p')
+# A version that builds some files from assembly only compiles the C its linker script uses
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+ifneq ($(wildcard linker_scripts/$(VERSION)/$(TARGET).ld),)
+C_FILES       := $(filter $(shell grep -o 'src/[A-Za-z0-9_/]*\.o' linker_scripts/$(VERSION)/$(TARGET).ld | sed 's/\.o$$/.c/' | sort -u),$(C_FILES))
+endif
+endif
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(ASSET_DIRS),$(wildcard $(dir)/*.bin))
+# ... and only the asset bins it links (unpacked views of assets it lacks can be empty)
+ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
+ifneq ($(wildcard linker_scripts/$(VERSION)/$(TARGET).ld),)
+BIN_FILES     := $(filter $(shell grep -o 'assets/$(VERSION)/[A-Za-z0-9_/]*\.o' linker_scripts/$(VERSION)/$(TARGET).ld | sed 's/\.o$$/.bin/' | sort -u),$(BIN_FILES))
+endif
+endif
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
@@ -436,13 +473,13 @@ $(ROM): $(ELF)
 	$(V)$(PYTHON) -m ipl3checksum sum --update $@  # IPL3 rejects a stale CRC1/CRC2 at boot
 
 # TODO: avoid using auto/undefined
-$(ELF): $(O_FILES) $(LIBULTRA_LIB) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
+$(ELF): $(O_FILES) $(LINK_LIBS) $(LDSCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld
 	@$(PRINT) "$(GREEN)Linking ELF file:  $(BLUE)$@ $(NO_COL)\n"
 	$(V)$(LD) $(LDFLAGS) -T $(LDSCRIPT) \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/hardware_regs.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/unused_syms.ld -T $(BUILD_DIR)/linker_scripts/common_undef_syms.ld \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld \
-		-Map $(MAP) $(LIBULTRA_LIB) -o $@
+		-Map $(MAP) $(LINK_LIBS) -o $@
 # Fragment reloc tables are retail bytes; when a fragment's code changes they are regenerated
 # from this ELF (exit 3), which shifts later segments, so relink once.
 	$(V)VERSION="$(VERSION)" BUILD_DIR="$(BUILD_DIR)" $(PYTHON) tools/gen_fragment_relocs.py --all $@ || { [ $$? -eq 3 ] && [ -z "$(RELINKED)" ] && $(MAKE) $@ RELINKED=1; }

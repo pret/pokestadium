@@ -1,0 +1,13 @@
+{
+  "_note": "Retail dumps of Pokemon Stadium (N64) per region/revision. 'jp' is the Japanese 'Pocket Monsters Stadium 2' (CP2J), which is this game; the 16 MB Japan-only 'Pokemon Stadium (Japan)' (CPSJ) is a different, earlier game and is not listed. Only md5 checksums live in the repo, never ROMs.",
+  "us":      {"md5": "ed1378bc12115f71209a77844965ba50", "name": "USA"},
+  "us_rev1": {"md5": "40e03eda831c01e0a12294287fd240e2", "name": "USA (Rev 1)"},
+  "us_rev2": {"md5": "6dc6820cef755fc1253d06df45c9bd2a", "name": "USA (Rev 2)"},
+  "eu":      {"md5": "2859090d78581e0925a3af8045e81e4b", "name": "Europe"},
+  "eu_rev1": {"md5": "31ee2de8e65e30f5934c450dbaa924f0", "name": "Europe (Rev 1)"},
+  "fr":      {"md5": "0e85a098d0f0e8a7eb572a69612a6873", "name": "France"},
+  "de":      {"md5": "24be2ccb0dea0755908c02bf67e22fe5", "name": "Germany"},
+  "it":      {"md5": "a81321759af38beb30a40fdaca2ea22a", "name": "Italy"},
+  "es":      {"md5": "d14a499bc4e324974eae3e42dec58625", "name": "Spain"},
+  "jp":      {"md5": "2449bb712a64e3363a6cbd56f5adeda5", "name": "Japan (Pocket Monsters Stadium 2)"}
+}

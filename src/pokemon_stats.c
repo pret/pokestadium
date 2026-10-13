@@ -526,6 +526,9 @@ s32 GbSave_VerifyWriteback(u8* arg0, s32 arg1) {
     return 1;
 }
 
+#if defined(VERSION_US_REV2)
+#pragma GLOBAL_ASM("asm/us/nonmatchings/pokemon_stats/GbCart_IdentifyGame.s")
+#else
 s8 GbCart_IdentifyGame(s32 arg0) {
     // Only part of the rom header,
     // osGbpakReadId reads from 0x100 but this reads from 0x120
@@ -567,6 +570,7 @@ s8 GbCart_IdentifyGame(s32 arg0) {
 
     return var_s0;
 }
+#endif
 
 s32 GbSave_CheckMainDataUnchanged(s32 arg0) {
     UNUSED s32 pad;
