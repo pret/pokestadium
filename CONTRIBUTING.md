@@ -50,7 +50,7 @@ As the goal of a decomp is to be readable to a wide variety of people (recomp de
 	- Arithmetic nops: `arg0 + 1 - 1`, `var++; var--;`, 
 - **Karodo** (from 過労 + code, "overworked code") are debugging idioms that were left in the ROM but have since had their debugging functionality omitted:
 	- Empty if statements `if (1) {}`
-	- Empty enumeration: `for (;;) {}`
+	- Empty enumeration: `for (i=0; i < n; i++) {}`
 
 It is our philosophy that even the worst, most disgusting match is better than the most beautiful non-match: thus, it is not legitimate to reject a new match simple because it contains fakes.
 
@@ -71,4 +71,4 @@ Do not use yaw, pitch, and roll to describe rotations about an axis since those 
 ## Spelling
 Use American English (color, mom, etc.) for all spelling.
 
-Do not include é in Pokémon for variable names. The é is optional for documentation and comments.
+Do not include é in Pokémon for variable names as IDO does not accept non-ASCII characters in indentifiers. The é is optional for documentation and comments.
