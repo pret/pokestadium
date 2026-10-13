@@ -7,10 +7,10 @@ Don't act a fool.
 ## N64 Type Aliases
 |Type|Alias|
 |---|---|
-|`short unsigned int`|`u8`|
-|`short signed int`|`s8`|
-|`unsigned int`|`u16`|
-|`signed int`|`s16`|
+|`unsigned char`|`u8`|
+|`signed char`|`s8`|
+|`shorr unsigned int`|`u16`|
+|`short signed int`|`s16`|
 |`long unsigned int`|`u32`|
 |`long signed int`|`s32`|
 |`long long unsigned int`|`u64`|
