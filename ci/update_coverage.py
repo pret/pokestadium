@@ -16,7 +16,7 @@ HASM = re.compile(r'^\s*-\s*\[(0x[0-9A-Fa-f]+),\s*hasm(?:,\s*([^\]]+?))?\]\s*(?:
 
 def managed_assembly(root: Path):
     segments = []
-    for path in sorted((root / "yamls").rglob("*.yaml")):
+    for path in sorted((root / "yamls" / "us").rglob("*.yaml")):
         for address, name, comment in HASM.findall(path.read_text(encoding="utf-8")):
             label = (name or comment or "managed assembly").strip()
             segments.append((path.relative_to(root).as_posix(), address, label))
@@ -26,6 +26,60 @@ CENTRY = re.compile(r'^\s*-\s*\[0x[0-9A-Fa-f]+,\s*c,\s*([^\],\s]+)', re.MULTILIN
 FUNC = re.compile(r'^[A-Za-z_][\w \t\*]*?\b([A-Za-z_]\w*)\s*\([^;{}]*\)\s*\{', re.MULTILINE)
 MAX_LISTED_FUNCTIONS = 300
 KEYWORDS = {"if", "while", "for", "switch", "return", "sizeof"}
+
+
+COND = re.compile(r"^\s*#\s*(ifdef|ifndef|if|elif|else|endif)\b(.*)$")
+DEFINED = re.compile(r"defined\s*\(\s*(\w+)\s*\)|defined\s+(\w+)")
+
+
+def _condition(kind: str, rest: str, defines):
+    """Truth of one #if/#ifdef/#ifndef/#elif line; None when it cannot be decided."""
+    rest = re.sub(r"/\*.*?\*/|//.*", "", rest).strip()
+    if kind in ("ifdef", "ifndef"):
+        name = rest.split()[0] if rest.split() else ""
+        return (name in defines) == (kind == "ifdef")
+    expr = DEFINED.sub(lambda m: str((m.group(1) or m.group(2)) in defines), rest)
+    expr = re.sub(r"\bVERSION_\w+\b", lambda m: "1" if m.group(0) in defines else "0", expr)
+    if re.fullmatch(r"[\s\d()!&|TrueFals]*", expr):
+        try:
+            return bool(eval(expr.replace("&&", " and ").replace("||", " or ").replace("!", " not "), {"__builtins__": {}}))
+        except Exception:
+            return None
+    return None
+
+
+def active_pragmas(text: str, defines=frozenset({"VERSION_US"})):
+    """GLOBAL_ASM function names that the build for `defines` actually compiles.
+
+    A pragma inside `#if defined(VERSION_US_REV2)` is assembly for Rev. 2 only; the US 1.0 build
+    compiles the C in the #else branch, so it is not an open US function. Conditions that cannot
+    be decided from the VERSION_* macros count as active.
+    """
+    names, stack = [], []  # stack of (this branch active, an earlier branch was taken, parent active)
+    for line in text.splitlines():
+        m = COND.match(line)
+        if m:
+            kind, rest = m.groups()
+            parent = all(a for a, _, _ in stack)
+            if kind in ("if", "ifdef", "ifndef"):
+                cond = _condition(kind, rest, defines)
+                taken = True if cond is None else cond
+                stack.append((taken, taken and cond is not None, parent))
+            elif kind == "elif" and stack:
+                _, done, par = stack[-1]
+                cond = _condition("if", rest, defines)
+                taken = (not done) and (True if cond is None else cond)
+                stack[-1] = (taken, done or (taken and cond is not None), par)
+            elif kind == "else" and stack:
+                _, done, par = stack[-1]
+                stack[-1] = (not done, True, par)
+            elif kind == "endif" and stack:
+                stack.pop()
+            continue
+        if all(a for a, _, _ in stack):
+            found = PRAGMA.findall(line)
+            names.extend(found)
+    return names
 
 
 def c_files(yaml_path: Path):
@@ -68,7 +122,7 @@ def render(root: Path, baseline: Path) -> str:
     total = int(total_match.group(1).replace(",", ""))
     owners = {}
     for path in sorted((root / "src").rglob("*.c")):
-        functions = PRAGMA.findall(path.read_text(encoding="utf-8"))
+        functions = active_pragmas(path.read_text(encoding="utf-8"))
         if functions:
             owners[path.relative_to(root).as_posix()] = functions
     remaining = sum(len(functions) for functions in owners.values()); covered = total - remaining
