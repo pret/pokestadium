@@ -426,6 +426,7 @@ typedef struct unk_func_8821421C {
 } unk_func_8821421C; // size = 0xCC
 
 extern Color_RGBA8 D_882181B0[2];
+extern u32 D_88220CD0[];
 extern Color_RGBA8 D_882181B8[2];
 extern Color_RGBA8 D_882181C0[2];
 extern Color_RGBA8 D_882181C8[2];
