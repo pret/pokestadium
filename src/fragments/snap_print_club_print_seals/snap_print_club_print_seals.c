@@ -104,7 +104,7 @@ s32 Snap_PrintClubPrintSeals(s32 arg0, s32 arg1) {
         D_8FA00A28 = ASSET_LOAD2(stadium_models, 1, 1);
         temp_s0 = PokeIcon_AllocFramebuffers(5);
         Gallery_ClearPhotoRenderTarget();
-        D_8FA00A00 = Geo_CreateSceneInstance(0x280, 0x1E0, D_8FA00A2C->images[0], NULL, temp_s0, D_8FA00A28, sp60);
+        D_8FA00A00 = Geo_CreateSceneInstance(0x280, 0x1E0, D_8FA00A2C->renderTargets[0], NULL, temp_s0, D_8FA00A28, sp60);
     }
 
     StageContext_Activate(temp_v0);

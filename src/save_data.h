@@ -7,8 +7,8 @@
 
 typedef struct GameOptions {
     /* 0x00 */ s16 gbTowerUnlockTier; // 0 = normal, 1 = Doduo, 2 = Dodrio.
-    // Opaque word carried into/out of GB Tower. The inherited pointer type is
-    // preserved; no self-linked GameOptions list has been established.
+    // Word carried into/out of GB Tower by State_GbTower; its pointer role is unknown.
+    //@src/game_state.c
     /* 0x04 */ struct GameOptions* unk_04;
 } GameOptions; // size = 0x8
 

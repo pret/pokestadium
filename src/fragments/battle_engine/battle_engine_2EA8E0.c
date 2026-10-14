@@ -516,7 +516,7 @@ void func_84301430(StageContext* arg0) {
     PokeIcon_OpenModelArchives();
 
     sp2C = main_pool_alloc(0x10, 0);
-    GfxImage_Initialize(sp2C, 0, 2, 0x4C, 0x4C, arg0->images[0]->depth_p->img_p);
+    GfxImage_Initialize(sp2C, 0, 2, 0x4C, 0x4C, arg0->renderTargets[0]->depth_p->img_p);
     D_8438E790 = GfxImage_Allocate(0, 2, 0x4C, 0x4C, 0);
     D_8438E794 = GfxImage_Allocate(0, 2, 0x4C, 0x4C, 0);
 
