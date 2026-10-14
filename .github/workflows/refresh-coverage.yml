@@ -21,10 +21,13 @@ name: Refresh coverage after merge
 # this specific branch name (see the comments there) and arm auto-merge
 # exactly as they would for any other eligible PR.
 on:
-  push:
-    branches: [master]
-    paths-ignore:
-      - COVERAGE.md
+  # Hourly instead of after every merge: each refresh is a PR that needs a
+  # "Validate ROM against master" run on the single self-hosted runner, and a
+  # busy day merges dozens of changes. One refresh per hour (and none when
+  # nothing changed) keeps those runs from queueing behind real PRs.
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -85,6 +88,15 @@ jobs:
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git config user.name 'pokestadium-public-ci[bot]'
           git config user.email 'pokestadium-public-ci[bot]@users.noreply.github.com'
+          # An open refresh PR that already carries this exact content needs no
+          # new commit: pushing one would cancel its queued gate run and send
+          # it to the back of the queue.
+          if git fetch --quiet --depth=1 origin ci/refresh-coverage 2>/dev/null \
+              && git show FETCH_HEAD:COVERAGE.md | cmp -s - COVERAGE.md; then
+            echo 'refresh-coverage: ci/refresh-coverage already has this COVERAGE.md; nothing to push.'
+            exit 0
+          fi
+
           git checkout -B ci/refresh-coverage
           git add COVERAGE.md
           git commit --quiet -m 'ci: refresh COVERAGE.md'
