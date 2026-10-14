@@ -80,7 +80,10 @@ fi
 # `git pull` would merge; this checkout only ever mirrors upstream, so hard
 # reset to whatever ref triggered this build.
 git -C "$ci_checkout" fetch --quiet origin "$target_sha"
-git -C "$ci_checkout" checkout --quiet --detach "$target_sha"
+# --force: this checkout only mirrors upstream, but a build run in it leaves
+# tracked generated files modified, and a plain checkout then aborts with
+# "local changes would be overwritten" and leaves the image stale.
+git -C "$ci_checkout" checkout --quiet --force --detach "$target_sha"
 
 # Re-extract only when yamls/ actually changed since the last extraction --
 # splat's output depends on it, nothing else does. A plain `git diff
@@ -149,6 +152,16 @@ trap cleanup EXIT
 for path in src include tools linker_scripts lib yamls Makefile requirements.txt ci; do
     cp -a "$ci_checkout/$path" "$staging_dir/$path"
 done
+
+# Leave out anything git does not track under tools/ (local venvs, checkouts,
+# scratch scripts the persistent checkout accumulated). gate-pr.sh syncs tools/
+# from the PR checkout, sees those as "only in the image", deletes them, and
+# treats that as a tools change, which forces a full rebuild on every run.
+( cd "$ci_checkout" && git ls-files --others --directory -z -- tools ) \
+    | while IFS= read -r -d '' extra; do
+        case "$extra" in */__pycache__/|tools/vtxdis) continue ;; esac
+        rm -rf "$staging_dir/${extra%/}"
+    done
 mkdir -p "$staging_dir/prebuilt"
 cp -a "$ci_checkout/asm" "$staging_dir/prebuilt/asm"
 cp -a "$ci_checkout/assets" "$staging_dir/prebuilt/assets"
