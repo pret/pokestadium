@@ -17,10 +17,6 @@ Only relocations whose symbol lives inside the fragment are kept: internal refer
 move with the fragment's runtime base and need fixing up, external ones point at fixed
 addresses and are resolved by the linker. --whole-archive means the ELF carries relocs
 for every object, so this filter is what takes 485 down to the ~234 retail has.
-The battle engine's retail table is the exception: it also relocates every external
-address, with bit 31 set (the loader masks it off). A table that has such entries gets
-its external relocs regenerated the same way. Only targets in fragment space matter
-(Memmap_GetFragmentVaddr leaves any other address alone), so equivalent() ignores the rest.
 
 The real check is `--check` against the retail segment: on an unmodified build it must
 reproduce the retail table entry for entry. `--selftest` covers the encoder and
@@ -33,7 +29,6 @@ usage:
       exit 3 when anything changed (relink needed), 0 when all tables are current.
 """
 
-import functools
 import os
 import struct
 import sys
@@ -59,20 +54,10 @@ REGEN_SAFE = {5, 22, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 40, 43, 48,
 ASM_VERSIONS = ("eu", "eu_rev1", "fr", "de", "es", "it", "jp")
 if VERSION in ASM_VERSIONS:
     REGEN_SAFE = set()
-elif VERSION in ("us", "us_rev1", "us_rev2"):
-    # Audited on the three US revisions. gb_tower_emulator's data tables are still raw blobs,
-    # 41's table feeds one LUI from its LO16s in another order than the linker, and 67 has no
-    # relocs at all.
-    REGEN_SAFE = set(range(2, 78)) - {1, 41, 67}
-
-EXTERNAL = 0x80000000
-HEADER_SIZE = 0x20
-FRAGMENT_SPACE = range(0x81000000, 0x90000000)
 
 TYPE_NAMES = {2: "R_MIPS_32", 4: "R_MIPS_26", 5: "R_MIPS_HI16", 6: "R_MIPS_LO16"}
 
 
-@functools.lru_cache(maxsize=1)
 def read_elf(path: str) -> tuple[bytes, list[Section], list[Symbol]]:
     """Minimal ELF reader: section headers and .symtab of the decomp's linked ELF.
 
@@ -110,9 +95,8 @@ def read_elf(path: str) -> tuple[bytes, list[Section], list[Symbol]]:
     return data, sections, symbols
 
 
-def build(elf_path: str, frag_no: int | str, external: bool = False) -> tuple[list[int], int, int, int]:
-    """-> (regenerated entries, external relocs dropped, reloc segment size, bss size)
-    external: keep external relocs too, flagged with EXTERNAL (see the module docstring)"""
+def build(elf_path: str, frag_no: int | str) -> tuple[list[int], int, int, int]:
+    """-> (regenerated entries, external relocs dropped, reloc segment size, bss size)"""
     data, sections, symbols = read_elf(elf_path)
     frag = next(s for s in sections if s["sname"] == f".fragment{frag_no}")
     rel = next(s for s in sections if s["sname"] == f".rel.fragment{frag_no}")
@@ -131,8 +115,7 @@ def build(elf_path: str, frag_no: int | str, external: bool = False) -> tuple[li
         # Only relocations whose symbol lives inside the fragment are regenerated: internal
         # references move with the fragment's runtime base, external ones point at fixed
         # addresses. The retail table's one non-internal entry is handled by merge().
-        inside = base <= sym["value"] < ram_end
-        if not inside and not external:
+        if not (base <= sym["value"] < ram_end):
             dropped += 1
             continue
         if r_type == 10:  # R_MIPS_PC16: branch within the fragment, position-independent
@@ -140,28 +123,34 @@ def build(elf_path: str, frag_no: int | str, external: bool = False) -> tuple[li
         if r_type not in TYPE_NAMES:
             raise AssertionError(f"unhandled reloc type {r_type} on {sym['name']}")
         assert base <= r_offset < base + content, f"reloc outside content at {hex(r_offset)}"
-        entries.append((0 if inside else EXTERNAL) | (r_type << 24) | ((r_offset - base) & 0xFFFFFF))
+        entries.append((r_type << 24) | ((r_offset - base) & 0xFFFFFF))
 
     # Order matters: the retail table follows the linker's emission order, which is mostly
     # ascending by offset but not strictly so (local hi/lo rotations appear), so sorting
     # would break the match. Keep the ELF's order.
-    # The table may grow freely, even past the bss (retail fragment37's already is 0x3B8 bytes
-    # against 0x100 of bss): Fragment_Register applies it while the block still holds the whole
-    # ROM image, and only then shrinks the block to sizeInRam. Growing the segment shifts later
-    # segments, which is harmless: their reloc offsets are relative to their own start.
+    # The table lives in the fragment's bss space (the loader clears sizeInRam - relocOffset
+    # after applying it), so it may grow as long as it fits there. Growing the segment shifts
+    # later segments, which is harmless: their reloc offsets are relative to their own start.
     return entries, dropped, seg["size"], (bss["size"] if bss else 0)
 
 
-def encode(entries: list[int]) -> bytes:
-    return struct.pack(">I", len(entries)) + b"".join(struct.pack(">I", w) for w in entries)
+def encode(entries: list[int], limit: int) -> bytes:
+    out = struct.pack(">I", len(entries)) + b"".join(struct.pack(">I", w) for w in entries)
+    assert len(out) <= limit, f"table grew to 0x{len(out):X} > 0x{limit:X}"
+    return out
 
 
 def selftest() -> None:
-    enc = encode([(5 << 24) | 0x10, (6 << 24) | 0x10])
+    enc = encode([(5 << 24) | 0x10, (6 << 24) | 0x10], 12)
     assert len(enc) == 12, len(enc)
     assert struct.unpack_from(">I", enc, 0)[0] == 2          # count
     assert struct.unpack_from(">I", enc, 4)[0] == (5 << 24) | 0x10
     assert struct.unpack_from(">I", enc, 8)[0] == (6 << 24) | 0x10
+    try:
+        encode([0] * 5, 16)
+        raise AssertionError("oversized table must be rejected")
+    except AssertionError as e:
+        assert "grew to" in str(e)
     hi, lo, w32 = (5 << 24) | 0x10, (6 << 24) | 0x14, (2 << 24) | 0x100
     assert equivalent([w32, hi, lo], [hi, lo, w32]), "32-bit words may move"
     assert not equivalent([hi, lo], [lo, hi]), "hi/lo order matters"
@@ -172,8 +161,6 @@ def selftest() -> None:
     assert not equivalent(first, [hi1, hi2, lo1, lo2], content), "changed pairings must fail"
     assert not equivalent(first, [lo1, hi1, hi2, lo2], content), "unpaired LO must fail"
     assert not equivalent(first, first[:-1], content), "different multisets must fail"
-    outside = struct.pack(">II", 0x3C088100, 0x0303ED80)
-    assert equivalent([0x02000000, 0x02000004], [0x02000000], outside), "targets outside fragment space change nothing"
     assert relocation_effects([hi1, lo1, hi1], content) is None, "duplicate offsets must fail"
     assert relocation_effects([0x05000010], content) is None, "out-of-range offsets must fail"
     assert relocation_effects([0x05000001], content) is None, "unaligned offsets must fail"
@@ -183,17 +170,16 @@ def selftest() -> None:
     assert not equivalent(
         [hi1, lo1, 0x06000008], [hi1, 0x06000008, lo1], shared
     ), "different final high-word targets must fail"
-    assert equivalent([EXTERNAL | w32], [w32]), "the loader ignores bit 31"
     print("selftest ok")
 
 
 def merge(entries: list[int], retail_path: str) -> tuple[list[int], list[int], list[int], int]:
     """Regenerated internal relocs plus any retail entry the linker does not emit.
 
-    A retail entry inside the 0x20-byte header belongs to the decomp's hand-written entry
-    stub: it jumps to a hardcoded address, so the linker emits no reloc for it, but the
-    retail table has one (type 4, offset 0) and the loader applies it. Such entries are
-    layout-independent.
+    A retail entry whose offset is below the first regenerated offset sits before the
+    fragment's first function, where the decomp's hand-written entry stub lives: it jumps
+    to a hardcoded address, so the linker emits no reloc for it, but the retail table has
+    one (type 4, offset 0) and the loader applies it. Such entries are layout-independent.
 
     Every other retail entry is a stale offset from the previous layout and is superseded
     by the regenerated one, so it is dropped rather than carried. A grown fragment yields
@@ -204,8 +190,9 @@ def merge(entries: list[int], retail_path: str) -> tuple[list[int], list[int], l
     want = [struct.unpack_from(">I", retail, 4 + i * 4)[0] for i in range(n)]
     if not entries:
         return want, want, [], 0
-    carried = sorted((w for w in want if w % 0x1000000 < HEADER_SIZE), key=lambda w: w % 0x1000000)
-    stale = len(want) - len(carried)
+    first = min(w % 0x1000000 for w in entries)
+    carried = sorted((w for w in want if (w % 0x1000000) < first), key=lambda w: w % 0x1000000)
+    stale = sum(1 for w in want if (w % 0x1000000) >= first)
     return carried + entries, want, carried, stale
 
 
@@ -216,7 +203,6 @@ def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[in
     symbolic target is the input to Memmap_GetFragmentVaddr, so equal targets
     yield equal patched immediates at any runtime base. Repeated offsets are
     rejected: they could read instructions already modified by another entry.
-    Writes whose target lies outside fragment space change nothing and are left out.
     """
     offsets = [entry & 0xFFFFFF for entry in entries]
     if len(set(offsets)) != len(offsets):
@@ -229,7 +215,7 @@ def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[in
         kind = (entry >> 24) & 0x7F
         word, = struct.unpack_from(">I", content, offset)
         if kind in (2, 4):
-            writes[offset] = (kind, ((word << 2) & 0x0FFFFFFC) | 0x80000000 if kind == 4 else word)
+            writes[offset] = (kind, word)
         elif kind == 5:
             if word >> 26 != 15:  # LUI
                 return None
@@ -247,7 +233,7 @@ def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[in
             writes[offset] = (6, high_offset, target)
         else:
             return None
-    return {offset: w for offset, w in writes.items() if w[-1] in FRAGMENT_SPACE}
+    return writes
 
 
 def equivalent(a: list[int], b: list[int], content: bytes | None = None) -> bool:
@@ -255,18 +241,16 @@ def equivalent(a: list[int], b: list[int], content: bytes | None = None) -> bool
 
     Without instruction bytes, preserve HI/LO relative order. With instruction
     bytes, also accept reordered pairs whose symbolic writes and pairings agree.
-    The loader masks bit 31 off, so it is ignored.
     """
-    a, b = [w & ~EXTERNAL for w in a], [w & ~EXTERNAL for w in b]
     def canon(t: list[int]) -> tuple[list[int], list[int]]:
         return (sorted(w for w in t if (w >> 24) & 0x7F not in (5, 6)),
                 [w for w in t if (w >> 24) & 0x7F in (5, 6)])
     if canon(a) == canon(b):
         return True
-    if content is None:
+    if content is None or sorted(a) != sorted(b):
         return False
-    # Assembly fallbacks can emit independent HI/LO pairs in another order, and a table may
-    # carry entries that patch nothing. Keep the retail table when both write identically.
+    # Assembly fallbacks can emit independent HI/LO pairs in another order.
+    # Preserve the retail table only when both orders pair/write identically.
     effects = relocation_effects(a, content)
     return effects is not None and effects == relocation_effects(b, content)
 
@@ -275,12 +259,6 @@ def fragment_content(elf: str, number: int) -> bytes:
     data, sections, _ = read_elf(elf)
     section = next(s for s in sections if s["sname"] == f".fragment{number}")
     return data[section["off"]:section["off"] + section["size"]]
-
-
-def has_external(path: str) -> bool:
-    retail = open(path, "rb").read()
-    n = struct.unpack_from(">I", retail, 0)[0]
-    return any(struct.unpack_from(">I", retail, 4 + i * 4)[0] & EXTERNAL for i in range(n))
 
 
 def table_path(n: int) -> str:
@@ -306,24 +284,6 @@ def moved_unsafe(elf: str) -> list[int]:
     return moved
 
 
-def pinned(elf: str, n: int) -> list[str]:
-    """Referenced symbols that a linker script assigns inside fragment n. splat lists every
-    symbol another segment references in undefined_syms_auto.ld, and that assignment overrides
-    the C definition, so the symbol keeps its retail address when the fragment's layout moves.
-    Mark them `defined:true` in symbol_addrs."""
-    data, sections, symbols = read_elf(elf)
-    frag = next(s for s in sections if s["sname"] == f".fragment{n}")
-    bss = next((s for s in sections if s["sname"] == f".fragment{n}_bss"), None)
-    end = frag["addr"] + frag["size"] + (bss["size"] if bss else 0)
-    used = set()
-    for sec in sections:
-        if sec["type"] == 9:  # SHT_REL
-            ent = sec["entsize"] or 8
-            used |= {struct.unpack_from(">I", data, sec["off"] + i * ent + 4)[0] >> 8 for i in range(sec["size"] // ent)}
-    return [symbols[i]["name"] for i in sorted(used)
-            if symbols[i]["shndx"] == 0xFFF1 and frag["addr"] <= symbols[i]["value"] <= end]  # SHN_ABS
-
-
 def update_all(elf: str) -> list[int]:
     """-> list of fragment numbers whose table was rewritten"""
     # Those versions take relocations from splat's assembly, which writes some fragment-internal
@@ -336,17 +296,13 @@ def update_all(elf: str) -> list[int]:
     changed = []
     for n in sorted(REGEN_SAFE):
         path = table_path(n)
-        entries, _, _, _ = build(elf, n, has_external(path))
+        entries, _, _, bss_size = build(elf, n)
         merged, current, _, _ = merge(entries, path)
         # compare entries, not bytes (retail tables carry trailing padding), and keep the
         # current table when it is only ordered differently, so a matching build stays retail
         if equivalent(merged, current, fragment_content(elf, n)):
             continue
-        pins = pinned(elf, n)
-        if pins:
-            sys.exit(f"fragment{n} moved, but these stay at their retail address (pinned by a linker "
-                     "script): " + ", ".join(pins))
-        data = encode(merged)
+        data = encode(merged, bss_size)
         open(path, "wb").write(data)
         # make does not track the .incbin, so drop the object to force a reassemble
         obj = f"{BUILD_DIR}/asm/{VERSION}/data/fragments/{n}/fragment{n}_reloc.o"
@@ -363,7 +319,7 @@ def audit(elf: str) -> list[int]:
         if not os.path.exists(table_path(n)):
             continue
         try:
-            entries = build(elf, n, has_external(table_path(n)))[0]
+            entries = build(elf, n)[0]
         except StopIteration:  # no .rel section: nothing to regenerate from
             continue
         merged, want, _, _ = merge(entries, table_path(n))
@@ -386,7 +342,7 @@ if __name__ == "__main__":
         sys.exit(3 if changed else 0)
     elf, frag_no = sys.argv[1], sys.argv[2]
     retail_path = sys.argv[3]
-    entries, dropped, seg_size, bss_size = build(elf, frag_no, has_external(retail_path))
+    entries, dropped, seg_size, bss_size = build(elf, frag_no)
     print(f".fragment{frag_no}: {len(entries)} relocations regenerated, {dropped} dropped "
           f"(external), segment 0x{seg_size:X}, bss 0x{bss_size:X}")
 
@@ -404,6 +360,6 @@ if __name__ == "__main__":
 
     if "--write" in sys.argv:
         path = sys.argv[sys.argv.index("--write") + 1]
-        data = encode(merged)
+        data = encode(merged, bss_size)
         open(path, "wb").write(data)
         print(f"  wrote {path} ({len(data)} bytes, was {seg_size})")

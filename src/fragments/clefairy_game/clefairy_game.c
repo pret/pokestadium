@@ -119,22 +119,11 @@ static unk_D_86104984 D_86104984[4] = {
     { 0xF7, 0xD4, -1, -1, -1, 0xFF },
 };
 
-typedef struct unk_D_861049B4 {
-    /* 0x00 */ u32* unk_00;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-} unk_D_861049B4; // size = 0xC
-
-static unk_D_861049B4 D_861049B4[] = {
-    { D_87A01190, 0x0028, 0x003C, 0x005A, 0x000A },
-    { D_87A01178, 0x0014, 0x0046, 0x005A, 0x0006 },
-    { D_87A01180, 0x001E, 0x004B, 0x005F, 0x0002 },
-    { D_87A011A4, 0x0028, 0x005A, 0x0063, 0x0001 },
+static s16 D_861049B4[5][6] = {
+    { 0x87A0, 0x1190, 0x0028, 0x003C, 0x005A, 0x000A }, { 0x87A0, 0x1178, 0x0014, 0x0046, 0x005A, 0x0006 },
+    { 0x87A0, 0x1180, 0x001E, 0x004B, 0x005F, 0x0002 }, { 0x87A0, 0x11A4, 0x0028, 0x005A, 0x0063, 0x0001 },
+    { 0x0032, 0x001E, 0x0019, 0x0019, 0x000F, 0x0014 },
 };
-
-static s16 D_861049E4[] = { 0x0032, 0x001E, 0x0019, 0x0019, 0x000F, 0x0014 };
 
 static u8 D_861049F0[] = { 0, 5, 0, 10 };
 
@@ -1197,12 +1186,12 @@ s32 ClefairyGame_UpdatePatternResponse(void) {
                     } else {
                         if (((temp_a0 > 0) && (D_86106450[temp_a0].unk_000 == D_86106450[temp_a0 - 1].unk_000)) ||
                             ((temp_a0 < 0xB) && (D_86106450[temp_a0].unk_000 == D_86106450[temp_a0 + 1].unk_000))) {
-                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1].unk_08);
+                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1][4]);
                         } else {
-                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1].unk_06);
+                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1][3]);
                         }
 
-                        D_86105BC4->unk_1B0 = Rand_Range(0xA) + D_861049B4[D_86105BC4->unk_000 - 1].unk_0A + 5;
+                        D_86105BC4->unk_1B0 = Rand_Range(0xA) + D_861049B4[D_86105BC4->unk_000 - 1][5] + 5;
                     }
                 }
 
