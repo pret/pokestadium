@@ -62,6 +62,7 @@ static s16 sAreaSelectStateIds[] = {
     STATE_VICTORY_PALACE, STATE_POKEMON_LAB, STATE_GB_TOWER,          STATE_MENU_SELECT,
 };
 
+// Banner entries 8/9 are Doduo/Dodrio Tower variants, not selectable-area indices.
 static u8* sAreaSelectNameBannerTextures[] = {
     0x03006E60, 0x0300D060, 0x03013260, 0x03019460, 0x0301F660,
     0x03025860, 0x0302BA60, 0x03031C60, 0x03037E60, 0x0303E060,
@@ -90,23 +91,23 @@ static u8* sAreaSelectNameBannerTextures[] = {
 
 static AreaSelectEntryConfig sAreaSelectEntryConfigs[9] = {
     // Stadium
-    { 300, 185, 75, AREA_VS_MEWTWO, AREA_MINIGAMES, AREA_OAKS_LAB, AREA_GB_TOWER, { 50, 80, 150, 0 } },
+    { 300, 185, 75, AREA_VS_MEWTWO, AREA_MINIGAMES, AREA_OAKS_LAB, AREA_GB_TOWER, { 0x32, 0x50, 0x96, 0x00 } },
     // Free Battle
-    { 520, 280, 75, AREA_GB_TOWER, AREA_NONE, AREA_MINIGAMES, AREA_NONE, { 50, 80, 150, 0 } },
+    { 520, 280, 75, AREA_GB_TOWER, AREA_NONE, AREA_MINIGAMES, AREA_NONE, { 0x32, 0x50, 0x96, 0x00 } },
     // Gym Leader Castle
-    { 110, 90, 65, AREA_NONE, AREA_OAKS_LAB, AREA_NONE, AREA_VS_MEWTWO, { 50, 80, 150, 0 } },
+    { 110, 90, 65, AREA_NONE, AREA_OAKS_LAB, AREA_NONE, AREA_VS_MEWTWO, { 0x32, 0x50, 0x96, 0x00 } },
     // VS Mewtwo
-    { 300, 65, 65, AREA_NONE, AREA_STADIUM, AREA_GYM_LEADER_CASTLE, AREA_GB_TOWER, { 50, 80, 150, 0 } },
+    { 300, 65, 65, AREA_NONE, AREA_STADIUM, AREA_GYM_LEADER_CASTLE, AREA_GB_TOWER, { 0x32, 0x50, 0x96, 0x00 } },
     // Minigames
-    { 350, 315, 80, AREA_STADIUM, AREA_NONE, AREA_HALL_OF_FAME, AREA_FREE_BATTLE, { 50, 80, 150, 0 } },
+    { 350, 315, 80, AREA_STADIUM, AREA_NONE, AREA_HALL_OF_FAME, AREA_FREE_BATTLE, { 0x32, 0x50, 0x96, 0x00 } },
     // Hall of Fame
-    { 190, 330, 70, AREA_OAKS_LAB, AREA_NONE, AREA_NONE, AREA_MINIGAMES, { 50, 80, 150, 0 } },
+    { 190, 330, 70, AREA_OAKS_LAB, AREA_NONE, AREA_NONE, AREA_MINIGAMES, { 0x32, 0x50, 0x96, 0x00 } },
     // Professor Oak's Lab
-    { 120, 230, 65, AREA_GYM_LEADER_CASTLE, AREA_HALL_OF_FAME, AREA_NONE, AREA_STADIUM, { 50, 80, 150, 0 } },
+    { 120, 230, 65, AREA_GYM_LEADER_CASTLE, AREA_HALL_OF_FAME, AREA_NONE, AREA_STADIUM, { 0x32, 0x50, 0x96, 0x00 } },
     // GB Tower
-    { 510, 150, 65, AREA_VS_MEWTWO, AREA_FREE_BATTLE, AREA_STADIUM, AREA_NONE, { 50, 80, 150, 0 } },
+    { 510, 150, 65, AREA_VS_MEWTWO, AREA_FREE_BATTLE, AREA_STADIUM, AREA_NONE, { 0x32, 0x50, 0x96, 0x00 } },
     // No selectable area: initial cursor position, blocked neighbor, and B-button exit.
-    { 300, 185, 10, AREA_NONE, AREA_NONE, AREA_NONE, AREA_NONE, { 50, 80, 150, 0 } },
+    { 300, 185, 10, AREA_NONE, AREA_NONE, AREA_NONE, AREA_NONE, { 0x32, 0x50, 0x96, 0x00 } },
 };
 
 static u8* sAreaSelectMagnemiteTextures[] = { 0x03005000, 0x03005A20, 0x03006440, 0x03005A20 };
@@ -151,7 +152,7 @@ void AreaSelect_DrawCrossfadeBackground(u8* fade_out_texture, u8* fade_in_textur
     gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, 640, 480);
     gDPSetCombineLERP(gDisplayListHead++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0,
                       0, COMBINED, 0, 0, 0, COMBINED);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
+    gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, alpha);
     gDPPipeSync(gDisplayListHead++);
 
     for (i = 0; i < 480; i += 0x20) {
@@ -222,7 +223,7 @@ void AreaSelect_DrawExitFade(void) {
 
         gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
         gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER | G_LIGHTING);
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sAreaSelectExitFade.blackBlendAlpha);
+        gDPSetEnvColor(gDisplayListHead++, 0x00, 0x00, 0x00, sAreaSelectExitFade.blackBlendAlpha);
         gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineLERP(gDisplayListHead++, ENVIRONMENT, SHADE, ENV_ALPHA, SHADE, 0, 0, 0, SHADE, ENVIRONMENT, SHADE,
                           ENV_ALPHA, SHADE, 0, 0, 0, SHADE);
@@ -242,14 +243,14 @@ void AreaSelect_DrawExitFade(void) {
         gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
         gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
 
-        gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_ON);
+        gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
 
         // The first 64x32 I8 texture in the currently loaded area_select_ui segment.
         gDPLoadTextureBlock(gDisplayListHead++, D_3000000, G_IM_FMT_I, G_IM_SIZ_8b, 64, 32, 0, G_TX_MIRROR | G_TX_WRAP,
                             G_TX_MIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
         gSPVertex(gDisplayListHead++, (u32)vertex & 0x1FFFFFFF, 4, 0);
         gSP2Triangles(gDisplayListHead++, 0, 1, 2, 0, 0, 2, 3, 0);
-        gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
+        gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
     }
 }
 
@@ -338,9 +339,9 @@ void AreaSelect_DrawMagnemiteTrail(u8* sprite) {
 
             if (diameter != 0) {
                 if (history_index == 0) {
-                    Color_SetRGBA(&color, 255, 255, 255, 255);
+                    Color_SetRGBA(&color, 0xFF, 0xFF, 0xFF, 0xFF);
                 } else {
-                    Color_SetRGBA(&color, 255, 255, 100, 160 - (history_index * 30));
+                    Color_SetRGBA(&color, 0xFF, 0xFF, 0x64, 0xA0 - (history_index * 0x1E));
                 }
                 AreaSelect_DrawMagnemiteQuad(x, y, diameter, sprite, color);
             }
@@ -359,7 +360,7 @@ void AreaSelect_DrawAndAdvanceMagnemites(void) {
         gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIA, G_CC_MODULATEIA);
         gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
         gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-        gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_ON);
+        gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
 
         AreaSelect_DrawMagnemiteTrail(sAreaSelectMagnemiteTextures[sAreaSelectMagnemiteTrails->spriteFrame / 2]);
 
@@ -382,7 +383,7 @@ void AreaSelect_DrawNameBanner(s16 x, s16 y, s16 alpha, s16 area) {
         area_name_banner_texture = sAreaSelectNameBannerTextures[area];
 
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
+        gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, alpha);
 
         for (i = 0; i < 16; i++) {
             Gfx_DrawTextureRgba16(x, y + (i * 4), 196, 4, area_name_banner_texture + (i * 1568), 196, 0);
@@ -410,10 +411,10 @@ void AreaSelect_DrawNameBannerCrossfade(s16 menu_state, s16 x, s16 y) {
 
     if (menu_state == AREA_SELECT_MOVE) {
         crossfade_alpha = (sAreaSelectTransitionFrame * 42) + 3;
-        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerBobOffset / 4)) - 5, 255 - crossfade_alpha, sAreaSelectPreviousIndex);
+        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerBobOffset / 4)) - 5, 0xFF - crossfade_alpha, sAreaSelectPreviousIndex);
         AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerBobOffset / 4)) - 5, crossfade_alpha, sAreaSelectSelectedIndex);
     } else if ((menu_state != AREA_SELECT_REVEAL_MEWTWO) && (menu_state != AREA_SELECT_INTRO)) {
-        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerBobOffset / 4)) - 5, 255, sAreaSelectSelectedIndex);
+        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerBobOffset / 4)) - 5, 0xFF, sAreaSelectSelectedIndex);
     }
 
     sAreaSelectBannerBobOffset += sAreaSelectBannerBobDirection;
@@ -426,7 +427,7 @@ void AreaSelect_DrawNameBannerCrossfade(s16 menu_state, s16 x, s16 y) {
     }
 }
 
-// Animate the marker at Mewtwo's location when that battle has been unlocked.
+// Animate the decoded Mewtwo silhouette when that battle has been unlocked.
 void AreaSelect_DrawMewtwoMarker(s16 x, s16 y) {
     static u32 sAreaSelectMarkerTextures[] = {
         0x03044C60, 0x03045020, 0x030453E0, 0x030457A0, 0x03045B60, 0x03045F20, 0x030462E0,
@@ -441,12 +442,12 @@ void AreaSelect_DrawMewtwoMarker(s16 x, s16 y) {
         gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineLERP(gDisplayListHead++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
-        gDPSetEnvColor(gDisplayListHead++, 0, 100, 255, 255);
+        gDPSetEnvColor(gDisplayListHead++, 0x00, 0x64, 0xFF, 0xFF);
 
         if (gSessionContext.sessionFlags & SESSION_FLAG_REVEAL_MEWTWO) {
-            gDPSetPrimColor(gDisplayListHead++, 0, 255, 255, 255, 255, sAreaSelectBackgroundFadeAlpha);
+            gDPSetPrimColor(gDisplayListHead++, 0, 0xFF, 0xFF, 0xFF, 0xFF, sAreaSelectBackgroundFadeAlpha);
         } else {
-            gDPSetPrimColor(gDisplayListHead++, 0, 255, 255, 255, 255, 255);
+            gDPSetPrimColor(gDisplayListHead++, 0, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
         }
 
         gDPLoadTextureBlock_4b(gDisplayListHead++, sAreaSelectMarkerTextures[sAreaSelectMarkerFrame], G_IM_FMT_I, 48, 40, 0,
@@ -533,7 +534,7 @@ void AreaSelect_DrawInfoPanel(s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u
 }
 
 void AreaSelect_DrawAreaInfoBox(s32 draw_text) {
-    AreaSelect_DrawInfoPanel(56, 380, 528, 60, 30, 30, 130, 150);
+    AreaSelect_DrawInfoPanel(56, 380, 528, 60, 0x1E, 0x1E, 0x82, 0x96);
 
     if (draw_text != 0) {
         Font_BeginTranslucentTextRendering();
@@ -653,13 +654,13 @@ s32 AreaSelect_ShrinkMagnemites(void) {
 s32 AreaSelect_UpdateExitFade(void) {
     s16 next_state = AREA_SELECT_EXIT_FADE;
 
-    if (sAreaSelectExitFade.color.a < 250) {
-        sAreaSelectExitFade.color.a += 25;
-    } else if (sAreaSelectExitFade.blackBlendAlpha < 255) {
-        sAreaSelectExitFade.color.a = 255;
-        sAreaSelectExitFade.blackBlendAlpha += 25;
-        if (sAreaSelectExitFade.blackBlendAlpha >= 255) {
-            sAreaSelectExitFade.blackBlendAlpha = 255;
+    if (sAreaSelectExitFade.color.a < 0xFA) {
+        sAreaSelectExitFade.color.a += 0x19;
+    } else if (sAreaSelectExitFade.blackBlendAlpha < 0xFF) {
+        sAreaSelectExitFade.color.a = 0xFF;
+        sAreaSelectExitFade.blackBlendAlpha += 0x19;
+        if (sAreaSelectExitFade.blackBlendAlpha >= 0xFF) {
+            sAreaSelectExitFade.blackBlendAlpha = 0xFF;
             StageContext_SetClearColor(1);
             StageFade_StartFromTransparent(1);
             next_state = AREA_SELECT_EXIT_FADE;
@@ -677,7 +678,7 @@ s32 AreaSelect_UpdateMewtwoExit(void) {
         sAreaSelectGlowDiameter += 0x40;
     } else if (sAreaSelectGlowDiameter == 0x200) {
         sAreaSelectGlowDiameter += 0x40;
-        StageContext_SetClearColor(65535);
+        StageContext_SetClearColor(0xFFFF);
         StageFade_StartFromTransparent(2);
         next_state = AREA_SELECT_MEWTWO_EXIT;
     } else if (sAreaSelectGlowDiameter < 640) {
@@ -695,7 +696,7 @@ s32 AreaSelect_UpdateCancelFade(void) {
 
     switch (fade_mode) {
         case 0:
-            StageContext_SetClearColor(65535);
+            StageContext_SetClearColor(0xFFFF);
             StageFade_StartFromTransparent(0x10);
             next_state = AREA_SELECT_CANCEL;
             break;
@@ -714,7 +715,7 @@ void AreaSelect_SetupOrthoProjection(void) {
     Gfx_SetViewportDimensions(&sAreaSelectViewport, 640, 480);
 
     gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER | G_LIGHTING);
-    gSPPerspNormalize(gDisplayListHead++, 65535);
+    gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPViewport(gDisplayListHead++, (u32)&sAreaSelectViewport & 0x1FFFFFFF);
     gSPMatrix(gDisplayListHead++, (u32)&sAreaSelectProjectionMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -726,7 +727,7 @@ void AreaSelect_Draw(s16 menu_state) {
 
     if (sAreaSelectBackgroundFadeAlpha == 0) {
         Gfx_DrawTiledRgba16Image(sAreaSelectCurrentBackground);
-    } else if (sAreaSelectBackgroundFadeAlpha == 255) {
+    } else if (sAreaSelectBackgroundFadeAlpha == 0xFF) {
         Gfx_DrawTiledRgba16Image(sAreaSelectNextBackground);
     } else {
         AreaSelect_DrawCrossfadeBackground(sAreaSelectCurrentBackground, sAreaSelectNextBackground, sAreaSelectBackgroundFadeAlpha);
@@ -753,7 +754,7 @@ s32 AreaSelect_RevealMewtwo(void) {
         sAreaSelectBackgroundFadeAlpha += 4;
         if (sAreaSelectBackgroundFadeAlpha == 0x100) {
             gSessionContext.sessionFlags &= (0xFFFF ^ SESSION_FLAG_REVEAL_MEWTWO);
-            sAreaSelectBackgroundFadeAlpha = 255;
+            sAreaSelectBackgroundFadeAlpha = 0xFF;
             sAreaSelectPreviousIndex = AREA_NONE;
             sAreaSelectSelectedIndex = AREA_STADIUM;
             next_state = AREA_SELECT_MOVE;
@@ -878,7 +879,7 @@ s32 AreaSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     if ((sAreaSelectModeSettings.mewtwoUnlocked != 0) &&
         !(gSessionContext.sessionFlags & SESSION_FLAG_REVEAL_MEWTWO) &&
         !(sAreaSelectModeSettings.clearedModes & (1 << RULE_CATEGORY_VS_MEWTWO))) {
-        sAreaSelectBackgroundFadeAlpha = 255;
+        sAreaSelectBackgroundFadeAlpha = 0xFF;
     }
 
     StageContext_Activate(stage_context);
