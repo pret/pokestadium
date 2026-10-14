@@ -741,7 +741,7 @@ void State_N64ddBootUnused(void) {
 
 void State_StubbedDebug(void) {
     s32 temp_v0;
-    unk_func_80007444* temp_s0;
+    StageContext* temp_s0;
 
     main_pool_push_state('DBUG');
 

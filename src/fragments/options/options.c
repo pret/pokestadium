@@ -33,11 +33,11 @@ void Options_DrawBackground(void) {
 
     Gfx_DrawTexturedRectClipped(0, 0, 0x280, 0x1E0, 0, 0, 0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Options_DrawPanelBox(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     Gfx_DrawTextureIa8(arg0, arg1, 8, 8, D_2000B40, 8, 0);
@@ -49,11 +49,11 @@ void Options_DrawPanelBox(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 ar
     Gfx_DrawTexturedRectClipped(arg0 + 8, (arg1 + arg3) - 8, arg2 - 0x10, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - 8, arg1 + 8, 8, arg3 - 0x10, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     Gfx_FillRectRgba(arg0 + 8, arg1 + 8, arg2 - 0x10, arg3 - 0x10, arg4, arg5, arg6, arg7);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Options_DrawValueCapsule(s16 arg0, s16 arg1) {
@@ -83,12 +83,12 @@ void Options_DrawMainPanel(s16 arg0, s32 arg1) {
                 Ui_DrawAnimatedTextureMarker(0x95, sp2C + (D_82C01664 * 0x20) + 0x31);
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Options_DrawValueCapsule(0x168, sp2C + 0x30);
             Options_DrawValueCapsule(0x168, sp2C + 0x50);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             Font_BeginTranslucentTextRendering();
             Font_SetActive(0x10, 0);
@@ -409,7 +409,7 @@ void Options_Loop(void) {
 }
 
 s32 Options_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('PREF');
 

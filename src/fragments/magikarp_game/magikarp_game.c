@@ -324,7 +324,7 @@ void MagikarpGame_DrawOverlay(s32 arg0) {
             break;
 
         default:
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_86002F4C);
 
             for (i = 0; i < 4; i++) {
@@ -337,7 +337,7 @@ void MagikarpGame_DrawOverlay(s32 arg0) {
                 }
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             break;
     }
 
@@ -418,7 +418,7 @@ void MagikarpGame_DrawOverlay(s32 arg0) {
     Font_EndTexturedTextRendering();
 
     if (arg0 == 0) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         Widget_DrawAnimIcon16(0x74, 0xB0, D_86002AC8);
         Widget_DrawAnimIcon16C(0x74, 0xC6, D_86002AF0);
         Widget_DrawSplitBanner(2, 0x19, 0xA6);
@@ -1185,12 +1185,12 @@ void MagikarpGame_InitActors(void) {
 }
 
 void MagikarpGame_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MINI');
 
     Gfx_InitDisplayListBuffers(0x20000, 0);
-    sp24 = (unk_func_80007444*)StageContext_Allocate(0, 1, 3, 1, 2, 1);
+    sp24 = (StageContext*)StageContext_Allocate(0, 1, 3, 1, 2, 1);
     D_86003B7C = Font_Init(0x36, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);

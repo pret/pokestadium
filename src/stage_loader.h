@@ -15,26 +15,29 @@ typedef struct unk_D_800A7450 {
     /* 0x10 */ char unk10[0x4];
 } unk_D_800A7450; // size >= 0x14
 
-typedef struct unk_func_80007444 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s8 zoom;
+typedef struct StageContext {
+    /* 0x00 */ s16 width;
+    /* 0x02 */ s16 height;
+    /* 0x04 */ s16 clearLeft;
+    /* 0x06 */ s16 clearRight;
+    /* 0x08 */ s16 clearTop;
+    /* 0x0A */ s16 clearBottom;
+    /* 0x0C */ s8 zoom; // 1 selects 640x480; other values select 320x240.
     /* 0x0D */ s8 unk_0D;
-    /* 0x0E */ s8 unk_0E;
-    /* 0x0F */ s8 unk_0F;
+    /* 0x0E */ s8 renderTargetCount; // Number of slots used in renderTargets.
+    /* 0x0F */ s8 hasDepthBuffer;
     /* 0x10 */ s8 unk_10;
-    /* 0x11 */ u8 fade_mode;
-    /* 0x12 */ u8 unk_12;
-    /* 0x13 */ u8 unk_13;
-    /* 0x14 */ u16 clear_color;
-    /* 0x16 */ s8 unk_16;
+    /* 0x11 */ u8 fadeMode; // 0 transparent, 1 opaque, 2 fading in, 3 fading out.
+    /* 0x12 */ u8 fadeDuration;
+    /* 0x13 */ u8 fadeFrame;
+    /* 0x14 */ u16 clearColor; // RGBA5551 framebuffer clear/fade color.
+    /* 0x16 */ s8 renderTargetIndex; // Current target; advances after recording the frame request.
     /* 0x17 */ u8 pad17;
-    /* 0x18 */ unk_D_80068BB0* unk_18[3];
-} unk_func_80007444; // size = 0x24
+    // Color-buffer descriptors with optional depth buffers. StageLoader_SetupFrame
+    // selects their img_p as the RDP color destination through gDPSetColorImage.
+    //@src/gfx_rect.c
+    /* 0x18 */ unk_D_80068BB0* renderTargets[3];
+} StageContext; // size = 0x24
 
 void StageFade_Update(void);
 s32 StageFade_Start(s32 arg0);
@@ -49,11 +52,11 @@ void StageLoader_SetupFrame(void);
 void StageLoader_SwapDisplayListAndReset(void);
 void StageLoader_BeginFrame(void);
 void StageLoader_FillFrame(void);
-unk_func_80007444* StageContext_Allocate(s8 zoom, s8 arg1, s8 arg2, s8 arg3, s8 arg4, s32 arg5);
-unk_func_80007444* StageContext_GetCurrent(void);
+StageContext* StageContext_Allocate(s8 zoom, s8 arg1, s8 render_target_count, s8 has_depth_buffer, s8 arg4, s32 allocate_render_targets);
+StageContext* StageContext_GetCurrent(void);
 s32 StageContext_GetFadeMode(void);
-void StageContext_SaveAndSwitch(unk_func_80007444* arg0);
-void StageContext_Activate(unk_func_80007444* arg0);
+void StageContext_SaveAndSwitch(StageContext* arg0);
+void StageContext_Activate(StageContext* arg0);
 void StageContext_Deactivate(void);
 void StageLoader_WaitForRetrace(void);
 void StageLoader_UpdateSegments(void);

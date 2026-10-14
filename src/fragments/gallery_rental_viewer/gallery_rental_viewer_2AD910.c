@@ -47,7 +47,7 @@ void Gallery_RentalViewerDrawTitleBar(void) {
 
     Gallery_DrawHeaderBar(0x48, 0x28, 0x208, &sp28, &sp24);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gallery_RentalViewerDrawIcon(0x28, 0x20);
     Font_BeginTranslucentTextRendering();
@@ -249,7 +249,7 @@ s32 Gallery_RentalViewerGetResult(void) {
 }
 
 s32 Gallery_RentalViewerMain(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('SLCT');
 

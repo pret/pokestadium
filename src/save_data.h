@@ -6,17 +6,19 @@
 #include "game_state.h"
 
 typedef struct GameOptions {
-    /* 0x00 */ s16 gbTowerSpeed;
+    /* 0x00 */ s16 gbTowerUnlockTier; // 0 = normal, 1 = Doduo, 2 = Dodrio.
+    // Word carried into/out of GB Tower by State_GbTower; its pointer role is unknown.
+    //@src/game_state.c
     /* 0x04 */ struct GameOptions* unk_04;
 } GameOptions; // size = 0x8
 
 typedef struct ModeSettings {
-    /* 0x00 */ u16 unk_00;
+    /* 0x00 */ u16 clearedModes; // Bit (1 << session mode); Mewtwo victory is bit 8.
     /* 0x02 */ char unk02[0x2];
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 fadeProgress;
+    /* 0x04 */ u8 castleClears; // Highest completed castle location + 1, capped at 8.
+    /* 0x05 */ u8 nintendoCupClears; // Highest completed division + 1, capped at 4.
+    /* 0x06 */ u8 primeCupClears; // Highest completed division + 1, capped at 4.
+    /* 0x07 */ u8 mewtwoUnlocked; // Set when clearedModes reaches 0xF8.
 } ModeSettings; // size = 0x8
 
 typedef struct SessionContinueData {
@@ -183,9 +185,9 @@ void Deck_SetSaveEntryCount(s32 arg0, s32 arg1, s32 arg2);
 void Deck_IncrementSaveEntryCount(s32 arg0, s32 arg1);
 s32 Deck_ReadSaveEntry(s32 arg0, s32 arg1, s32 arg2, void* arg3);
 s32 Save_WriteTypedRecord(s32 arg0, s32 arg1, s32 arg2, void* arg3);
-void Save_GetOptions(GameOptions* arg0);
+void Save_GetOptions(GameOptions* options);
 void Save_SetOptions(GameOptions* arg0);
-void Save_GetModeSettings(ModeSettings* arg0, s16 arg1);
+void Save_GetModeSettings(ModeSettings* settings, s16 round_index);
 void Save_SetModeSettings(ModeSettings* arg0, s16 arg1);
 void Save_GetOptionsField02(u16* arg0);
 void Save_SetOptionsField02(u16* arg0);

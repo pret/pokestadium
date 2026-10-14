@@ -35,8 +35,8 @@ static char** D_888267AC;
 static char** D_888267B0;
 static DisplayObject D_888267B8;
 static unk_func_8001B1FC* D_88826920;
-static unk_func_80007444* D_88826924;
-static unk_func_80007444* D_88826928;
+static StageContext* D_88826924;
+static StageContext* D_88826928;
 static ModelLoadContext* D_8882692C;
 static s32 D_88826930;
 static s32 D_88826934;
@@ -6274,20 +6274,20 @@ void Pokedex_InitFramebuffers(void) {
 
     sp28 = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
 
-    sp34 = D_88826924->unk_18[0]->img_p;
-    D_88826930 = D_88826924->unk_18[0]->img_p + 0x25800;
-    sp30 = D_88826924->unk_18[1]->img_p;
-    D_88826934 = D_88826924->unk_18[1]->img_p + 0x25800;
-    sp2C = D_88826924->unk_18[1]->img_p + 0x70800;
+    sp34 = D_88826924->renderTargets[0]->img_p;
+    D_88826930 = D_88826924->renderTargets[0]->img_p + 0x25800;
+    sp30 = D_88826924->renderTargets[1]->img_p;
+    D_88826934 = D_88826924->renderTargets[1]->img_p + 0x25800;
+    sp2C = D_88826924->renderTargets[1]->img_p + 0x70800;
 
-    D_88826928->unk_18[0] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
-    D_88826928->unk_18[1] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
+    D_88826928->renderTargets[0] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
+    D_88826928->renderTargets[1] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
 
-    GfxImage_Initialize(D_88826928->unk_18[0], 0, 2, 0x140, 0xF0, sp34);
-    GfxImage_Initialize(D_88826928->unk_18[1], 0, 2, 0x140, 0xF0, sp30);
+    GfxImage_Initialize(D_88826928->renderTargets[0], 0, 2, 0x140, 0xF0, sp34);
+    GfxImage_Initialize(D_88826928->renderTargets[1], 0, 2, 0x140, 0xF0, sp30);
     GfxImage_Initialize(sp28, 0, 2, 0x140, 0xF0, sp2C);
-    GfxImage_AttachDepthBuffer(D_88826928->unk_18[0], sp28);
-    GfxImage_AttachDepthBuffer(D_88826928->unk_18[1], sp28);
+    GfxImage_AttachDepthBuffer(D_88826928->renderTargets[0], sp28);
+    GfxImage_AttachDepthBuffer(D_88826928->renderTargets[1], sp28);
 }
 
 s32 Pokedex_Main(UNUSED s32 arg0, UNUSED s32 arg1) {

@@ -318,7 +318,7 @@ void Glc_DrawCircleWipe(void) {
     z1 = (0x280 - width) / 2;
     y1 = (0x1E0 - height) / 2;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetCombineLERP(gDisplayListHead++, 1, TEXEL0, ENVIRONMENT, 0, 1, TEXEL0, ENVIRONMENT, 0, 1, TEXEL0, ENVIRONMENT,
                       0, 1, TEXEL0, ENVIRONMENT, 0);
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
@@ -491,7 +491,7 @@ void Glc_DrawTrackingIcon(void) {
     s16 temp_fa0;
     s16 temp_ft2;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     temp_ft2 = ROUND_MAX(28 * v);
     temp_fa0 = ROUND_MAX(1024.0f / v);
@@ -502,7 +502,7 @@ void Glc_DrawTrackingIcon(void) {
 
     Glc_DrawScisRectangle(D_83101EEE, D_83101EF0, temp_ft2, temp_ft2, 0, 0, temp_fa0, temp_fa0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Glc_ClearInitState(void) {
@@ -635,7 +635,7 @@ void Glc_ClearInitGraphics(void) {
 }
 
 s32 GymLeaderCastleClear_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* stage_context;
+    StageContext* stage_context;
 
     main_pool_push_state('CLRG');
 

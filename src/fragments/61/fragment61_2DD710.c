@@ -27,11 +27,11 @@ void Rental_DrawTeamTrayFrame(RentalTeamTray* arg0, s16 arg1, s16 arg2) {
         (arg0->unk_0006 < 6)) {
         TeamSelection_DrawColoredFrame(arg1 + 4, arg2 + 4, 0x74, 0x58, 0, 0, 0, 0xFF);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(arg1 + 0x32, arg2 + 0x32, 0x14, 0x14, D_20068E0, 0x14, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     } else {
         TeamSelection_DrawColoredFrame(arg1 + 4, arg2 + 4, 0x74, 0x58, 0x64, 0x64, 0xC8, 0xFF);
     }
@@ -82,7 +82,7 @@ void Rental_DrawTeamTray(RentalTeamTray* arg0, s32 arg1) {
     if ((arg0->unk_0001 != 1) && (arg0->unk_0001 != 0) && ((arg1 != 0) || (arg0->unk_0003 != 0))) {
         Rental_DrawTeamTrayFrame(arg0, arg0->unk_0018, arg0->unk_001A);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         for (i = 0; i < 6; i++) {
             if (arg0->unk_0030[i].unk_004.unk_00.unk_00 != 0) {
@@ -93,7 +93,7 @@ void Rental_DrawTeamTray(RentalTeamTray* arg0, s32 arg1) {
             }
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
 

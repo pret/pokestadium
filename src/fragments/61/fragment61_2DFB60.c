@@ -8,14 +8,14 @@
 #include "src/gfx_rect.h"
 
 void Rental_DrawBoxTabFrame(s16 arg0, s16 arg1, s16 arg2) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
 
     Gfx_DrawTextureI4(arg0, arg1, 0x10, 0x1C, D_20007C0, 0x10, 0);
     Gfx_DrawTextureI4((arg0 + arg2) - 0x10, arg1, 0x10, 0x1C, D_20008A0, 0x10, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 0x10, arg1, arg2 - 0x20, 0x1C, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Rental_DrawBoxTab(s16 arg0, s16 arg1, u8* arg2, s16 arg3) {
@@ -33,7 +33,7 @@ void Rental_DrawBoxTabs(RentalCarouselState* arg0) {
 
     Rental_DrawBoxTabFrame(temp_s0, sp3C, 0x208);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Rental_DrawBoxTab(temp_s0 + 8, sp3C + 4, D_2001A20, arg0->unk_0001C[0].unk_00);
     Rental_DrawBoxTab(temp_s0 + 0x2C, sp3C + 4, D_2002560, arg0->unk_0001C[1].unk_00);
@@ -55,7 +55,7 @@ void Rental_DrawBoxTabs(RentalCarouselState* arg0) {
         Gfx_DrawTextureRgba16(temp_s0 + (arg0->unk_00005 * 0x24) + 4, sp3C + 0xE, 0x2C, 0xE, D_2001550, 0x2C, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 s32 Rental_CountAvailableBoxes(RentalCarouselState* arg0) {
@@ -118,7 +118,7 @@ void Rental_DrawBoxNameBanner(s16 arg0, s16 arg1, unk_D_838067F0_0168* arg2) {
     Gfx_DrawTextureIa8(arg0 + 0x184, arg1, 8, 0x1C, D_2000A60, 8, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 8, arg1, 0x17C, 0x1C, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -184,7 +184,7 @@ void Rental_DrawCarouselScrollbar(s16 arg0, s16 arg1, RentalCarouselState* arg2)
     Gfx_DrawTextureIa8(arg0 + 4, arg1 + 0xC0, 0x10, 8, D_200A280, 0x10, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 4, arg1 + 0x28, 0x10, 0x98, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (D_842115E8 < 4) {
         Gfx_DrawTextureRgba16(arg0, arg1 + sp5E + 0x1C, 0x18, 0x18, D_200A300, 0x18, 0);
@@ -192,7 +192,7 @@ void Rental_DrawCarouselScrollbar(s16 arg0, s16 arg1, RentalCarouselState* arg2)
         Gfx_DrawTextureRgba16(arg0, arg1 + sp5E + 0x1C, 0x18, 0x18, D_200A780, 0x18, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (arg2->unk_00001 == 3) {
         D_842115E8 = (D_842115E8 + 1) % 8;
@@ -211,7 +211,7 @@ void Rental_DrawBoxMonRow(RentalCarouselState* arg0, s16 arg1, s16 arg2, unk_D_8
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 3; i++) {
         if (arg3->unk_0000[i].unk_004.unk_00.unk_00 != 0) {
@@ -230,7 +230,7 @@ void Rental_DrawBoxMonRow(RentalCarouselState* arg0, s16 arg1, s16 arg2, unk_D_8
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
 
@@ -269,7 +269,7 @@ void Rental_CarouselDraw(RentalCarouselState* arg0, s32 arg1) {
         TeamSelection_DrawCornerFrame(spB0, temp_s7, 0x1B4, 0xD4);
         Rental_DrawCarouselScrollbar(spB0 + 4, temp_s7 + 4, arg0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         if (Rental_CountAvailableBoxes(arg0) >= 2) {
             Gfx_DrawTextureRgba16(spB0 - 0x32, temp_s7 + 0x52, 0x30, 0x18, D_2007E00, 0x30, 0);
@@ -282,7 +282,7 @@ void Rental_CarouselDraw(RentalCarouselState* arg0, s32 arg1) {
 
         Gfx_FillRectRgb(spB0 + 0x1C, temp_s7 + 4, 8, 0xCC, 0x32, 0x32, 0x32);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         if (arg0->unk_00001 == 7) {
             s16 sp9E = spB0 - ((arg0->unk_00018 * 0x194) / 8);
@@ -293,7 +293,7 @@ void Rental_CarouselDraw(RentalCarouselState* arg0, s32 arg1) {
             Rental_DrawBoxNameBanner(sp9E + 0x24, temp_s7 + 4, arg0->unk_00140->unk_268C);
             Rental_DrawBoxNameBanner(tmp3 + 0x24, temp_s7 + 4, arg0->unk_00140);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
             gDPLoadTextureBlock(gDisplayListHead++, D_2000C40, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 4, 0,
                                 G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
@@ -301,7 +301,7 @@ void Rental_CarouselDraw(RentalCarouselState* arg0, s32 arg1) {
             Gfx_DrawTexturedRectClipped(sp9E + 0x1B0, temp_s7 + 4, 8, 0xCC, 0, 0, 0x400, 0, 0);
             Gfx_DrawTexturedRectClipped(tmp3 + 0x1B0, temp_s7 + 4, 8, 0xCC, 0, 0, 0x400, 0, 0);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             var_s1_2 = arg0->unk_00140;
             for (i = 0; i < 4; i++) {

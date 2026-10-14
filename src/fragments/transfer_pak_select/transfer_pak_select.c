@@ -128,7 +128,7 @@ s32 TransferPak_GetPresentationMode(void) {
 
     Save_EnsureBankLoaded(2);
     Save_GetOptions(&sp18);
-    return sp18.gbTowerSpeed;
+    return sp18.gbTowerUnlockTier;
 }
 
 void TransferPak_LaunchSelectedPortAnim(void) {
@@ -394,7 +394,7 @@ void TransferPak_DrawPromptPanel(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
     temp_a2 = arg2 - (var_s3 * 2);
     temp_s0_32 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_20288E0, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -418,7 +418,7 @@ void TransferPak_DrawPromptPanel(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x4000 / var_s3,
                   0x4000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((temp_a2 > 0) && (temp_s0_32 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, temp_a2, var_s2, arg4, arg5, arg6, arg7);
@@ -430,7 +430,7 @@ void TransferPak_DrawPromptPanel(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, temp_s0_32, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void TransferPak_DrawPortSelectOverlay(void) {
@@ -794,7 +794,7 @@ void TransferPak_InitScene(void) {
 }
 
 s32 TransferPak_SelectMain(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
     s32 sp20;
 
     main_pool_push_state('GBSL');

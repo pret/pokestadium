@@ -204,7 +204,7 @@ void BattleHud_DrawTranslucentShadowRect(s32 arg0, s32 arg1, s32 arg2, s32 arg3,
     gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)sp84 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)temp_s2 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 }
@@ -236,7 +236,7 @@ void BattleHud_DrawGradientRect(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RG
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)sp7C & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)temp_s2 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 }
@@ -261,7 +261,7 @@ void BattleHud_DrawHpBar(s32 arg0, s32 arg1, f32 arg2, s32 arg3) {
         spCC = D_1003EA0;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPLoadTextureBlock(gDisplayListHead++, D_1003DB0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 5, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -289,7 +289,7 @@ void BattleHud_DrawHpBar(s32 arg0, s32 arg1, f32 arg2, s32 arg3) {
                             ((arg0 + sp14) + temp_ft2 + 0x10) << 2, (arg1 + 5) << 2, G_TX_RENDERTILE, 0, 0, 0, 0x0400);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void func_843109EC(void) {
@@ -305,7 +305,7 @@ void BattleHud_DrawLevelNumber(s32 arg0, s32 arg1, s32 arg2) {
     temp_s4 = Memmap_GetSegmentVaddr(D_300B870);
     sprintf(sp58, "%d", arg2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (arg2 >= 0x64) {
         arg0 -= 2;
@@ -323,7 +323,7 @@ void BattleHud_DrawLevelNumber(s32 arg0, s32 arg1, s32 arg2) {
         var_s2++;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattleHud_DrawHpFractionText(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -337,7 +337,7 @@ void BattleHud_DrawHpFractionText(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     temp_s2 = Memmap_GetSegmentVaddr(D_300B870);
     sprintf(sp70, "%3d/%3d", arg2, arg3);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < sizeof(sp70); i++) {
         switch (sp70[i]) {
@@ -361,7 +361,7 @@ void BattleHud_DrawHpFractionText(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         arg0 += 8;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattleHud_DrawSpeciesNameLabel(s16 arg0, s16 arg1, s32 arg2, char* arg3, s32 arg4) {
@@ -490,7 +490,7 @@ void func_84311420(void) {
 void BattleHud_DrawBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     s32 i;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     BattleHud_DrawBorderTile(arg0, arg1 - 1, 8, 8, D_3008480);
     BattleHud_DrawBorderTile(arg0, (arg1 + arg3) - 6, 8, 8, D_3008400);
@@ -519,7 +519,7 @@ void BattleHud_DrawBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattleHud_DrawParticipantTimer(s16 arg0, s16 arg1) {
@@ -584,7 +584,7 @@ void BattleHud_DrawPartyBallRow(Battler* arg0, s16 arg1, s16 arg2) {
     s32 j;
     s32 var_v0_2;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (arg0 == D_84390010[0]) {
         if (arg0->unk_720->unk_01 == 1) {
@@ -660,7 +660,7 @@ void BattleHud_DrawPartyBallRow(Battler* arg0, s16 arg1, s16 arg2) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattleHud_DrawMonStatusBoxPlayer(Battler* arg0, s16 arg1, s16 arg2, u16 arg3, s32 arg4) {
@@ -684,7 +684,7 @@ void BattleHud_DrawMonStatusBoxPlayer(Battler* arg0, s16 arg1, s16 arg2, u16 arg
                   temp_v0_2->b, 0xB2);
     BattleHud_DrawSpeciesNameLabelAuto(arg0, sp80, arg1 + 1, arg2 + 1, sp80->unk_001, arg3, arg4);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     BattleHud_DrawBorderTile(arg1, arg2, 8, 8, D_3008480);
     BattleHud_DrawBorderTile(arg1, arg2 + 0xF, 8, 8, D_3008200);
@@ -744,7 +744,7 @@ void BattleHud_DrawMonStatusBoxPlayer(Battler* arg0, s16 arg1, s16 arg2, u16 arg
     BattleHud_DrawBorderTile(arg1 + 0x14, arg2 + 0x59, 8, 8, D_3008680);
     BattleHud_DrawBorderTile(arg1 + 0x1C, arg2 + 0x59, 8, 8, D_3008680);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     BattleHud_DrawTranslucentShadowRect(arg1 - 3, arg2 - 2, 0x4E, 0x3F, 0);
     BattleHud_DrawTranslucentShadowRect(arg1 - 3, arg2 + 0x3A, 0x2D, 0x29, 0);
@@ -772,7 +772,7 @@ void BattleHud_DrawMonStatusBoxOpponent(Battler* arg0, s16 arg1, s16 arg2, u16 a
                   0xB2);
     BattleHud_DrawSpeciesNameLabelAuto(arg0, sp80, arg1, arg2 + 0x50, sp80->unk_001, arg3, arg4);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     BattleHud_DrawBorderTile(arg1, arg2 + 0x4C, 8, 8, D_3008200);
     BattleHud_DrawBorderTile(arg1, arg2 + 0x5B, 8, 8, D_3008400);
@@ -831,7 +831,7 @@ void BattleHud_DrawMonStatusBoxOpponent(Battler* arg0, s16 arg1, s16 arg2, u16 a
     BattleHud_DrawBorderTile(arg1 + 0x30, arg2, 8, 8, D_3008700);
     BattleHud_DrawBorderTile(arg1 + 0x37, arg2, 8, 8, D_3008700);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     BattleHud_DrawTranslucentShadowRect(arg1 + 0x1B, arg2 - 2, 0x2F, 0x2A, 0);
     BattleHud_DrawTranslucentShadowRect(arg1 - 4, arg2 + 0x26, 0x4D, 0x3D, 0);
@@ -850,7 +850,7 @@ void BattleHud_DrawThreeOptionLabelBar(Battler* arg0, s16 arg1, s16 arg2, s32 ar
     Gfx_DrawTextureRgba16Ia8(arg1 + 0x46, arg2 + 3, 0x10, 0xC, D_3008E40, D_3008FC0, 0x10, 0x100000);
     Gfx_DrawTextureRgba16Ia8(arg1 + 0x86, arg2 + 3, 0x10, 0xC, D_3009080, D_3009200, 0x10, 0x100000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(1, 0);
@@ -872,7 +872,7 @@ void BattleHud_DrawTwoOptionLabelBar(Battler* arg0, s16 arg1, s16 arg2, s32 arg3
     Gfx_DrawTextureRgba16Ia8(arg1 + 7, arg2 + 3, 0x10, 0xC, D_3008780, D_3008900, 0x10, 0x100000);
     Gfx_DrawTextureRgba16Ia8(arg1 + 0x40, arg2 + 3, 0x10, 0xC, D_30089C0, D_3008B40, 0x10, 0x100000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(1, 0);
@@ -892,7 +892,7 @@ void BattleHud_DrawOneOptionLabelBar(Battler* arg0, s16 arg1, s16 arg2, s32 arg3
 
     Gfx_DrawTextureRgba16Ia8(arg1 + 7, arg2 + 3, 0x10, 0xC, D_30089C0, D_3008B40, 0x10, 0x100000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(1, 0);
@@ -915,7 +915,7 @@ s32 BattleHud_DrawMovePpTextLTR(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     temp_s2 = Memmap_GetSegmentVaddr(D_300B870);
     sprintf(sp70, "%3d/%3d", arg2 & 0x3F, arg3);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 7; i++) {
         s32 c = sp70[i];
@@ -944,7 +944,7 @@ s32 BattleHud_DrawMovePpTextLTR(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     return arg0;
 }
@@ -959,7 +959,7 @@ s32 BattleHud_DrawMovePpTextRTL(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     temp_s2 = Memmap_GetSegmentVaddr(D_300B870);
     sprintf(sp70, "%3d/%3d", arg2 & 0x3F, arg3);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 7; i > 0; i--) {
         s32 c = sp70[i];
@@ -988,7 +988,7 @@ s32 BattleHud_DrawMovePpTextRTL(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     return arg0;
 }
@@ -1064,8 +1064,8 @@ void BattleHud_DrawMoveSelectMenu(Battler* arg0, s16 arg1, s16 arg2, s32 arg3) {
     Gfx_DrawTextureRgba16Ia8(arg1 + 0x5D, arg2 + 0x26, 0x10, 0xE, &D_3006530, &D_30066F0, 0x10, 0x100000);
     Gfx_DrawTextureRgba16Ia8(arg1 + 0x4E, arg2 + 0x16, 0x10, 0xE, &D_30067D0, &D_3006990, 0x10, 0x100000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (temp_s0->unk_4E & 8) {
         if ((temp_s0->unk_1F[0] != 0) && (temp_s0->unk_1F[0] < 0xA6)) {
@@ -1109,7 +1109,7 @@ void BattleHud_DrawMoveSelectMenu(Battler* arg0, s16 arg1, s16 arg2, s32 arg3) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(1, 0);
@@ -1232,7 +1232,7 @@ void BattleHud_DrawForfeitConfirmDialog(s16 arg0, s16 arg1, s16 arg2, s32 arg3) 
 
     Gfx_DrawTextureRgba16Ia8(arg0 + 0x21, arg1 + 0x17, 0x18, 0xE, D_30092C0, D_3009560, 0x18, 0x100000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     BattleHud_DrawBoxBorder(arg0, arg1, 0xC6, 0x28);
     BattleHud_DrawTranslucentShadowRect(arg0 - 3, arg1 - 2, 0xCC, 0x2D, 0);
@@ -1279,7 +1279,7 @@ void BattleHud_DrawDoublesRosterRow(Battler* arg0, TeamRoster* arg1, BattleMon* 
         Gfx_DrawTextureRgba16Ia8(arg3 + 2, arg4 + 0xD, 0x10, 0xC, D_3008C00, D_3008D80, 0x10, 0x100000);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(1, 0);
@@ -1293,10 +1293,10 @@ void BattleHud_DrawDoublesRosterRow(Battler* arg0, TeamRoster* arg1, BattleMon* 
     }
 
     if (var_t0 != 0) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(arg3 + 0x11, arg4 + 0x14, 0x14, 9, D_84385838[var_t0 - 1], 0x14, 0);
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 }
 
@@ -1322,7 +1322,7 @@ void BattleHud_DrawPartyRosterRow(Battler* arg0, TeamRoster* arg1, BattleMon* ar
         Gfx_DrawTextureRgba16Ia8(arg3 + 2, arg4 + 0xD, 0x10, 0xE, D_3006530, D_30066F0, 0x10, 0x100000);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(1, 0);
@@ -1336,11 +1336,11 @@ void BattleHud_DrawPartyRosterRow(Battler* arg0, TeamRoster* arg1, BattleMon* ar
     }
 
     if (var_t0 != 0) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(arg3 + 0x11, arg4 + 0x14, 0x14, 9, D_84385838[var_t0 - 1], 0x14, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 }
 
@@ -1379,11 +1379,11 @@ void BattleHud_DrawTeamStatusList(Battler* arg0, TeamRoster* arg1, s16 arg2, s16
         BattleHud_DrawPartyRosterRow(arg0, arg1, &arg1->unk_01C[2], arg2 + 1, arg3 + 0x4A, 2);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(arg2 + 1, arg3, 0x18, 0x10, D_84385850[arg4], 0x18, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     BattleHud_DrawBoxBorder(arg2, arg3, 0x63, 0x66);
     BattleHud_DrawTranslucentShadowRect(arg2 - 2, arg3 - 2, 0x69, 0x6A, 0);
@@ -1427,11 +1427,11 @@ void BattleHud_DrawDoublesTeamStatusList(Battler* arg0, s16 arg1, s16 arg2, s32 
     tmp = Font_MeasureTextExtent(1, 0, temp_s0->unk_008) / 2;
     BattleHud_DrawPlainText((arg1 - tmp) + 0x32, arg2 + 3, temp_s0->unk_008);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(arg1 + 1, arg2, 0x18, 0x10, *(D_84385850 + arg3), 0x18, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (temp_s0->unk_002 > 0) {
         BattleHud_DrawDoublesRosterRow(arg0, temp_s0, sp5C[5], arg1 + 1, arg2 + 0x10, 0);
@@ -1636,7 +1636,7 @@ void BattleHud_DrawTwoOptionCursorMenu(Battler* arg0, s16 arg1, s16 arg2, s32 ar
     Gfx_DrawTextureRgba16Ia8(arg1 + (arg0->unk_654.unk_2F * 0x49) + 0x1B, arg2 + 0x14, 0x18, 0xE, &D_30092C0, &D_3009560, 0x18,
                   0x100000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     BattleHud_DrawBoxBorder(arg1, arg2, 0xC8, 0x25);
     BattleHud_DrawTranslucentShadowRect(arg1 - 2, arg2 - 1, 0xCD, 0x28, 0);
@@ -1681,13 +1681,13 @@ void Battle_DrawTiledStripSegment(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8* ar
 void Battle_DrawSpectatorModeBackgroundPanel(void) {
     s32 i;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 0x30; i++) {
         Battle_DrawTiledStripSegment(0x1E, i + 0x17, 0x58, 1, &D_3001F70[i * 0x160], 0x58);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     BattleHud_DrawTranslucentShadowRect(0x1C, 0x16, 0x5E, 0x34, 0);
 }
@@ -1729,10 +1729,10 @@ void Battle_DrawGradientTextureRect(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 
 
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)spC0 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)temp_s2 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 

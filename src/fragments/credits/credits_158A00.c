@@ -1448,7 +1448,7 @@ void Credits_InitScene(s32 arg0) {
 }
 
 s32 Credits_Main(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('ROLE');
 

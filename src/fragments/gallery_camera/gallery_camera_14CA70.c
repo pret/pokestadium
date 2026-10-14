@@ -727,14 +727,14 @@ s32 Gallery_HandleBackgroundSwitchInput(void) {
     }
 
     D_8690B38C = 0xF;
-    if (D_8690B378.fadeProgress == 0) {
-        if (D_8690B378.unk_04 == 8) {
+    if (D_8690B378.mewtwoUnlocked == 0) {
+        if (D_8690B378.castleClears == 8) {
             D_8690B38C--;
-        } else if (D_8690B378.unk_04 == 7) {
+        } else if (D_8690B378.castleClears == 7) {
             D_8690B38C -= 2;
         } else {
             D_8690B38C -= 2;
-            D_8690B38C += D_8690B378.unk_04 - 7;
+            D_8690B38C += D_8690B378.castleClears - 7;
         }
     }
 
@@ -1127,7 +1127,7 @@ void Gallery_CameraInit(s32 arg0) {
 }
 
 s32 Gallery_CameraMain(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('SNAP');
 

@@ -1010,14 +1010,14 @@ void PakUi_DrawMenuBackdrop(void) {
 
     Gfx_DrawTexturedRectClipped(0, 0, 0x280, 0x1E0, 0, 0, 0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_BuildFrameBuffer(unk_D_80068BB0* arg0, s16 arg1, s16 arg2) {
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0);
     GfxImage_FillCurrent(&gDisplayListHead, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 128);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
@@ -1031,7 +1031,7 @@ void PakUi_BuildFrameBuffer(unk_D_80068BB0* arg0, s16 arg1, s16 arg2) {
     Gfx_DrawTexturedRectClipped(4, arg2 - 5, arg1 - 8, 8, 0xE0, 0, 0, 0x400, 0);
     Gfx_DrawTextureIa8(arg1 - 5, arg2 - 5, 8, 8, D_2000300, 8, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_DrawThickBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -1053,7 +1053,7 @@ void PakUi_DrawThickBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u
     temp_a2 = arg2 - (var_s3 * 2);
     temp_s0_32 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_300F480, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -1077,7 +1077,7 @@ void PakUi_DrawThickBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x4000 / var_s3,
                   0x4000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((temp_a2 > 0) && (temp_s0_32 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, temp_a2, var_s2, arg4, arg5, arg6, arg7);
@@ -1089,7 +1089,7 @@ void PakUi_DrawThickBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, temp_s0_32, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_DrawThinBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -1111,7 +1111,7 @@ void PakUi_DrawThinBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8
     temp_a2 = arg2 - (var_s3 * 2);
     temp_s0_32 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_3022A20, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -1135,7 +1135,7 @@ void PakUi_DrawThinBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
                   0x2000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((temp_a2 > 0) && (temp_s0_32 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, temp_a2, var_s2, arg4, arg5, arg6, arg7);
@@ -1147,7 +1147,7 @@ void PakUi_DrawThinBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, temp_s0_32, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_DrawRotatingCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -1156,7 +1156,7 @@ void PakUi_DrawRotatingCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, 
     s16 sp56 = SINS(D_82D09EEC) * 2;
     UNUSED s32 pad[2];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     Gfx_DrawTextureIa8((arg0 + sp56) - 8, (arg1 + sp56) - 8, 0x10, 0x10, D_2000C80, 0x10, 0);
@@ -1164,7 +1164,7 @@ void PakUi_DrawRotatingCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, 
     Gfx_DrawTextureIa8(((arg0 + arg2) - sp56) - 8, (arg1 + sp56) - 8, 0x10, 0x10, D_2000D80, 0x10, 0);
     Gfx_DrawTextureIa8(((arg0 + arg2) - sp56) - 8, ((arg1 + arg3) - sp56) - 8, 0x10, 0x10, D_2000E80, 0x10, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     D_82D09EEC += 0x2000;
 }
@@ -1231,7 +1231,7 @@ void PakUi_DrawTitleHeader(s16 arg0) {
 
     Color_RGB8* ptr = &D_82D09EF0[0];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, arg0);
 
     Gfx_DrawTextureRgba16(0x100, 0x20, 0x80, 0x10, D_300A820, 0x80, 0);
@@ -1279,7 +1279,7 @@ void PakUi_DrawTitleHeader(s16 arg0) {
     Gfx_DrawTexturedRectClipped(0x208, 0x74, 8, 0x14, 0, 0xE0, 0x400, 0, 0);
     Gfx_DrawTexturedRectClipped(0x160, 0x6C, 0xA8, 8, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_DrawPartyCardBadge(s32 arg0) {
@@ -1307,16 +1307,16 @@ void PakUi_DrawPartyCardBadge(s32 arg0) {
             break;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(0x26, 8, 0x30, 0x18, var_t0, 0x30, 0);
     Gfx_DrawTextureRgba16(0x26, 0x20, 0x30, 0x18, var_t0 + 0x900, 0x30, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_DrawPartyCardList(u8 arg0) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, arg0);
 
     Gfx_DrawTextureRgba16(0xC, 0x60, 0x64, 0x14, D_3000000, 0x64, 0);
@@ -1325,7 +1325,7 @@ void PakUi_DrawPartyCardList(u8 arg0) {
     Gfx_DrawTextureRgba16(0xC, 0x9C, 0x64, 0x14, D_3002EE0, 0x64, 0);
     Gfx_DrawTextureRgba16(0xC, 0xB0, 0x64, 0x14, D_3003E80, 0x64, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_BuildPartyCard(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s8* arg4) {
@@ -1344,7 +1344,7 @@ void PakUi_BuildPartyCard(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s8* arg4) {
         Gfx_FillRectRgb(4, 4, 0x74, 0xC0, 0x32, 0x32, 0x78);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (arg1 != 0) {
         PakUi_DrawPartyCardBadge(arg0);
@@ -1432,7 +1432,7 @@ void PakUi_BuildIconPanel(void) {
     D_82D0ABC8 = GfxImage_Allocate(0, 2, 0x21A, 0x64, 1);
     PakUi_BuildFrameBuffer(D_82D0ABC8, 0x216, 0x60);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 128);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
@@ -1457,7 +1457,7 @@ void PakUi_BuildIconPanel(void) {
 
     Gfx_FillRectRgb(0x62, 4, 0x1B0, 0x58, 0x64, 0x1E, 0x1E);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(0x10, 0);
@@ -1477,7 +1477,7 @@ void PakUi_BuildBottomBanner(void) {
 
     Gfx_FillRectRgb(4, 4, 0x70, 0x20, 0x1E, 0x64, 0x1E);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     sp28 = Text_GetString(NULL, 0, D_82D0AB9C, 0x24);
     sp2C = Font_MeasureTextExtent(0x10, 0, sp28);
@@ -1622,7 +1622,7 @@ void PakUi_DrawDataPanelBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, 
     temp_a2 = arg2 - (var_s3 * 2);
     temp_s0_32 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_20288E0, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -1646,7 +1646,7 @@ void PakUi_DrawDataPanelBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x4000 / var_s3,
                   0x4000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((temp_a2 > 0) && (temp_s0_32 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, temp_a2, var_s2, arg4, arg5, arg6, arg7);
@@ -1658,7 +1658,7 @@ void PakUi_DrawDataPanelBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, 
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, temp_s0_32, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PakUi_DrawMenuOptionText(s16 arg0, s16 arg1, s16 arg2, s16 arg3, char* arg4) {
@@ -1762,11 +1762,11 @@ void PakUi_DrawDataSummaryPanel(s16 arg0, s16 arg1, SessionContinueData* arg2, s
             if (arg2->unk_03 == 1) {
                 s32 temp_v0_3 = Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_82D0AB9C, arg2->unk_00 - 1));
 
-                gSPDisplayList(gDisplayListHead++, D_8006F518);
+                gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
                 Gfx_DrawTextureRgba16(temp_v0_3 + 0xAB, temp_s0 + 0x2B, 0x1C, 0x1C, &D_3022AA0, 0x1C, 0);
 
-                gSPDisplayList(gDisplayListHead++, D_8006F630);
+                gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             }
         }
     }
@@ -1938,7 +1938,7 @@ void PakUi_DrawStatusPopup(PakUi_StatusPopup* arg0) {
         temp_s0 = arg0->unk_06 + ((0xA6 - sp48) / 2);
         Ui_DrawBorderedPanel(sp4A, temp_s0, 0x19E, sp48, 1);
         if (arg0->unk_02 == 0xA6) {
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Gfx_DrawTextureRgba16(sp4A + 0x1E, temp_s0 + 0x20, 0x48, 0x12, D_3024C80, 0x48, 0);
             Gfx_DrawTextureRgba16(sp4A + 0x1E, temp_s0 + 0x32, 0x48, 0x12, &D_30256A0, 0x48, 0);
@@ -1955,7 +1955,7 @@ void PakUi_DrawStatusPopup(PakUi_StatusPopup* arg0) {
                 Gfx_DrawTextureI4(sp4A + 0x22, temp_s0 + 0x54, 0x40, 0x40, &D_3024480, 0x40, 0);
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             Font_BeginTranslucentTextRendering();
             Font_SetActive(0x10, 0);
@@ -2170,13 +2170,13 @@ void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
         PakUi_DrawThickBoxBorder(0x38, (s16)((0x3C - tmp) / 2) + 0x24, 0x210, tmp, 0x1E, 0x1E, 0x82, 0x96);
         if (arg0 == 10) {
             sp48 = PakUi_ComputeBlinkAlpha();
-            if (D_82D0AB90.unk_00 == 0x1F8) {
-                gSPDisplayList(gDisplayListHead++, D_8006F518);
+            if (D_82D0AB90.clearedModes == 0x1F8) {
+                gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sp48);
 
                 Gfx_DrawTextureRgba16(0x1B8, 0x35, 0x1C, 0x1A, &D_2016010, 0x1C, 0);
 
-                gSPDisplayList(gDisplayListHead++, D_8006F630);
+                gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             }
 
             Font_BeginTranslucentTextRendering();
@@ -2184,7 +2184,7 @@ void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
             tmp = (Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_82D0AB9C, 0x3B)));
             Font_Printf(0x140 - tmp / 2, 0x36, Text_GetString(NULL, 0, D_82D0AB9C, 0x3B));
 
-            if (D_82D0AB90.unk_00 == 0x1F8) {
+            if (D_82D0AB90.clearedModes == 0x1F8) {
                 Font_SetActive(8, 0);
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, sp48);
                 Font_Printf(0x1D6, 0x2D, Text_GetString(NULL, 0, D_82D0AB9C, 0x3C));
@@ -2330,13 +2330,13 @@ unk_D_80068BB0* PakUi_BuildGameIconBuffer(s32 arg0) {
         Gfx_FillRectRgb(4, 4, 0xA0, 0x8C, 0x64, 0x1E, 0x1E);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 8; i++) {
         Gfx_DrawTextureRgba16(0xC, (i * 0xC) + 0xC, 0x90, 0xC, (i * 0xD80) + var_s3, 0x90, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     temp_s0 = Font_MeasureTextExtent(8, 0, Text_GetString(NULL, 0, D_82D0AB9C, 0x3E));
@@ -2357,12 +2357,12 @@ unk_D_80068BB0* PakUi_BuildControllerIconBuffer(void) {
 
     Gfx_FillRectRgb(4, 4, 0xA0, 0x50, 0x1E, 0x1E, 0x82);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(0xC, 0xC, 0x40, 0x20, &D_301E9A0, 0x40, 0);
     Gfx_DrawTextureRgba16(0xC, 0x2C, 0x40, 0x20, &D_301F9A0, 0x40, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -2383,12 +2383,12 @@ unk_D_80068BB0* PakUi_BuildControllerIconBufferAlt(void) {
 
     Gfx_FillRectRgb(4, 4, 0xA0, 0x50, 0x1E, 0x1E, 0x82);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(0xC, 0xC, 0x40, 0x20, &D_30209A0, 0x40, 0);
     Gfx_DrawTextureRgba16(0xC, 0x2C, 0x40, 0x20, &D_30219A0, 0x40, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -2409,12 +2409,12 @@ unk_D_80068BB0* PakUi_BuildMonIconBuffer(void) {
 
     Gfx_FillRectRgb(4, 4, 0xA0, 0x34, 0x1E, 0x1E, 0x82);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(6, 6, 0x30, 0x18, &D_30230C0, 0x30, 0);
     Gfx_DrawTextureRgba16(6, 0x1E, 0x30, 0x18, &D_30239C0, 0x30, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -2437,7 +2437,7 @@ unk_D_80068BB0* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3) 
 
     Gfx_FillRectRgb(4, 4, 0xA0, 0x24, arg1, arg2, arg3);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -2551,7 +2551,7 @@ s32 TransferPak_MenuHandleInput(void) {
         sp24 = D_82D09F1C[D_82D06FA0].unk_0A;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DRIGHT)) {
         sp24 = D_82D09F1C[D_82D06FA0].unk_0B;
-    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) && (D_82D0AB90.unk_00 == 0x1F8)) {
+    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) && (D_82D0AB90.clearedModes == 0x1F8)) {
         Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         var_a3 = -1;
         gSessionContext.inRound2 ^= 1;
@@ -2787,7 +2787,7 @@ void TransferPak_InitMenuGraphics(void) {
 }
 
 s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp54;
+    StageContext* sp54;
     u8 sp53;
     s16 sp50 = 2;
     s32 sp4C = 1;
