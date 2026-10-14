@@ -17,6 +17,9 @@ Only relocations whose symbol lives inside the fragment are kept: internal refer
 move with the fragment's runtime base and need fixing up, external ones point at fixed
 addresses and are resolved by the linker. --whole-archive means the ELF carries relocs
 for every object, so this filter is what takes 485 down to the ~234 retail has.
+The battle engine's retail table is the exception: it also relocates every external
+address, with bit 31 set (the loader masks it off). A table that has such entries gets
+its external relocs regenerated the same way.
 
 The real check is `--check` against the retail segment: on an unmodified build it must
 reproduce the retail table entry for entry. `--selftest` covers the encoder and
@@ -30,6 +33,7 @@ usage:
 """
 from __future__ import annotations
 
+import functools
 import os
 import struct
 import sys
@@ -55,10 +59,19 @@ REGEN_SAFE = {5, 22, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 40, 43, 48,
 ASM_VERSIONS = ("eu", "eu_rev1", "fr", "de", "es", "it", "jp")
 if VERSION in ASM_VERSIONS:
     REGEN_SAFE = set()
+elif VERSION in ("us", "us_rev1", "us_rev2"):  # audited on the three US revisions
+    REGEN_SAFE |= {62, 63, 64}
+
+# Regenerable, but other fragments' data holds raw pointers into their code (the battle
+# engine's alone holds 113 into particle_math), so their code must not move.
+FIXED_LAYOUT = {34}
+
+EXTERNAL = 0x80000000
 
 TYPE_NAMES = {2: "R_MIPS_32", 4: "R_MIPS_26", 5: "R_MIPS_HI16", 6: "R_MIPS_LO16"}
 
 
+@functools.lru_cache(maxsize=1)
 def read_elf(path: str) -> tuple[bytes, list[Section], list[Symbol]]:
     """Minimal ELF reader: section headers and .symtab of the decomp's linked ELF.
 
@@ -96,8 +109,9 @@ def read_elf(path: str) -> tuple[bytes, list[Section], list[Symbol]]:
     return data, sections, symbols
 
 
-def build(elf_path: str, frag_no: int | str) -> tuple[list[int], int, int, int]:
-    """-> (regenerated entries, external relocs dropped, reloc segment size, bss size)"""
+def build(elf_path: str, frag_no: int | str, external: bool = False) -> tuple[list[int], int, int, int]:
+    """-> (regenerated entries, external relocs dropped, reloc segment size, bss size)
+    external: keep external relocs too, flagged with EXTERNAL (see the module docstring)"""
     data, sections, symbols = read_elf(elf_path)
     frag = next(s for s in sections if s["sname"] == f".fragment{frag_no}")
     rel = next(s for s in sections if s["sname"] == f".rel.fragment{frag_no}")
@@ -116,7 +130,8 @@ def build(elf_path: str, frag_no: int | str) -> tuple[list[int], int, int, int]:
         # Only relocations whose symbol lives inside the fragment are regenerated: internal
         # references move with the fragment's runtime base, external ones point at fixed
         # addresses. The retail table's one non-internal entry is handled by merge().
-        if not (base <= sym["value"] < ram_end):
+        inside = base <= sym["value"] < ram_end
+        if not inside and not external:
             dropped += 1
             continue
         if r_type == 10:  # R_MIPS_PC16: branch within the fragment, position-independent
@@ -124,7 +139,7 @@ def build(elf_path: str, frag_no: int | str) -> tuple[list[int], int, int, int]:
         if r_type not in TYPE_NAMES:
             raise AssertionError(f"unhandled reloc type {r_type} on {sym['name']}")
         assert base <= r_offset < base + content, f"reloc outside content at {hex(r_offset)}"
-        entries.append((r_type << 24) | ((r_offset - base) & 0xFFFFFF))
+        entries.append((0 if inside else EXTERNAL) | (r_type << 24) | ((r_offset - base) & 0xFFFFFF))
 
     # Order matters: the retail table follows the linker's emission order, which is mostly
     # ascending by offset but not strictly so (local hi/lo rotations appear), so sorting
@@ -165,6 +180,7 @@ def selftest() -> None:
     assert not equivalent(
         [hi1, lo1, 0x06000008], [hi1, 0x06000008, lo1], shared
     ), "different final high-word targets must fail"
+    assert equivalent([EXTERNAL | w32], [w32]), "the loader ignores bit 31"
     print("selftest ok")
 
 
@@ -236,7 +252,9 @@ def equivalent(a: list[int], b: list[int], content: bytes | None = None) -> bool
 
     Without instruction bytes, preserve HI/LO relative order. With instruction
     bytes, also accept reordered pairs whose symbolic writes and pairings agree.
+    The loader masks bit 31 off, so it is ignored.
     """
+    a, b = [w & ~EXTERNAL for w in a], [w & ~EXTERNAL for w in b]
     def canon(t: list[int]) -> tuple[list[int], list[int]]:
         return (sorted(w for w in t if (w >> 24) & 0x7F not in (5, 6)),
                 [w for w in t if (w >> 24) & 0x7F in (5, 6)])
@@ -256,16 +274,26 @@ def fragment_content(elf: str, number: int) -> bytes:
     return data[section["off"]:section["off"] + section["size"]]
 
 
+def has_external(path: str) -> bool:
+    retail = open(path, "rb").read()
+    n = struct.unpack_from(">I", retail, 0)[0]
+    return any(struct.unpack_from(">I", retail, 4 + i * 4)[0] & EXTERNAL for i in range(n))
+
+
 def table_path(n: int) -> str:
     return f"assets/{VERSION}/fragments/{n}/fragment{n}_reloc.rodatabin.bin"
 
 
 def moved_unsafe(elf: str) -> list[int]:
-    """Fragments outside REGEN_SAFE whose code moved. Their retail table also holds relocs the ELF
-    cannot see, so it is kept, which is only right while every reloc the ELF *does* see is still
-    at its retail offset. A size check alone misses code that moved inside an unchanged total
-    size (padding absorbs it)."""
+    """Fragments outside REGEN_SAFE, or in FIXED_LAYOUT, whose code moved. Their retail table also
+    holds relocs the ELF cannot see, so it is kept, which is only right while every reloc the ELF
+    *does* see is still at its retail offset. A size check alone misses code that moved inside an
+    unchanged total size (padding absorbs it)."""
     moved = []
+    for n in sorted(FIXED_LAYOUT & REGEN_SAFE):
+        merged, current, _, _ = merge(build(elf, n, has_external(table_path(n)))[0], table_path(n))
+        if not equivalent(merged, current, fragment_content(elf, n)):
+            moved.append(n)
     for n in range(1, 100):
         if n in REGEN_SAFE or not os.path.exists(table_path(n)):
             continue
@@ -286,12 +314,12 @@ def update_all(elf: str) -> list[int]:
     moved = [] if VERSION in ASM_VERSIONS else moved_unsafe(elf)
     if moved:
         sys.exit("code moved inside " + ", ".join(f"fragment{n}" for n in moved) + ", whose reloc table "
-                 "cannot be regenerated (not in REGEN_SAFE): the ROM would crash. Keep the change "
-                 "byte-neutral (same instructions at the same offsets).")
+                 "cannot be regenerated (not in REGEN_SAFE) or which others point into (FIXED_LAYOUT): "
+                 "the ROM would crash. Keep the change byte-neutral (same instructions at the same offsets).")
     changed = []
     for n in sorted(REGEN_SAFE):
         path = table_path(n)
-        entries, _, _, _ = build(elf, n)
+        entries, _, _, _ = build(elf, n, has_external(path))
         merged, current, _, _ = merge(entries, path)
         # compare entries, not bytes (retail tables carry trailing padding), and keep the
         # current table when it is only ordered differently, so a matching build stays retail
@@ -314,7 +342,7 @@ def audit(elf: str) -> list[int]:
         if not os.path.exists(table_path(n)):
             continue
         try:
-            entries = build(elf, n)[0]
+            entries = build(elf, n, has_external(table_path(n)))[0]
         except StopIteration:  # no .rel section: nothing to regenerate from
             continue
         merged, want, _, _ = merge(entries, table_path(n))
@@ -337,7 +365,7 @@ if __name__ == "__main__":
         sys.exit(3 if changed else 0)
     elf, frag_no = sys.argv[1], sys.argv[2]
     retail_path = sys.argv[3]
-    entries, dropped, seg_size, bss_size = build(elf, frag_no)
+    entries, dropped, seg_size, bss_size = build(elf, frag_no, has_external(retail_path))
     print(f".fragment{frag_no}: {len(entries)} relocations regenerated, {dropped} dropped "
           f"(external), segment 0x{seg_size:X}, bss 0x{bss_size:X}")
 
