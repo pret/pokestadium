@@ -149,7 +149,7 @@ staging_dir="$(mktemp -d "${TMPDIR:-/tmp}/pokestadium-baseline-build.XXXXXX")"
 cleanup() { rm -rf "$staging_dir"; }
 trap cleanup EXIT
 
-for path in src include tools linker_scripts lib yamls Makefile requirements.txt ci; do
+for path in src include text tools linker_scripts lib yamls Makefile requirements.txt ci; do
     cp -a "$ci_checkout/$path" "$staging_dir/$path"
 done
 
