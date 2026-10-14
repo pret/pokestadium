@@ -105,3 +105,11 @@ Bugs left in the original game code should be label `//!bug`
 
 ### Cross References
 Reference other files with `//@{path}`
+
+## Numbers
+Use Hex only for:
+- One off Powers of 2
+- Addresses
+- Masks
+
+Otherwise, keep numbers in decimal.
