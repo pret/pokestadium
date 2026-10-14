@@ -26,11 +26,32 @@ The table is a transcription of the parent switch and its transition returns, no
 
 - **Entry config**: `x`, `y`, `orbitRadius`, four directional neighbor indices, and `exitColor` follow directly from input dispatch, interpolation, and exit-fade initialization.
 - **Magnemite point**: `diameter` replaces `offset`; the vertex builder divides it by two to position opposite corners.
-- **Magnemite trail**: `centerX`, `centerY`, `orbitRadius`, `scalePercent`, `orbitAngle`, and `spriteFrame` follow the trigonometric orbit, scale calculation, angle decrement, and texture-table index. The parent human annotation already identifies the sprite as Magnemite; this PR retains that identity rather than independently decoding it again.
+- **Magnemite trail**: `centerX`, `centerY`, `orbitRadius`, `scalePercent`, `orbitAngle`, and `spriteFrame` follow the trigonometric orbit, scale calculation, angle decrement, and texture-table index. The parent human annotation identifies the sprite as Magnemite; the follow-up ROM review below independently decodes its three unique frames.
 - **Exit fade**: `AreaSelectExitFade` stores center, `halfExtent`, `blackBlendAlpha`, and color. The eight-vertex builder emits the inner quad and outer surround; the draw function interpolates the shade color toward black. It is separate from the circular Mewtwo glow.
 - **Named operations**: `BuildExitFadeVertices`, `DrawExitFade`, `DrawAndAdvanceMagnemites`, `DrawMewtwoMarker`, `UpdateCursorMove`, `ShrinkMagnemites`, `UpdateExitFade`, `UpdateMewtwoExit`, `UpdateCancelFade`, and `RevealMewtwo` replace misleading or incomplete function names. Definitions, prototypes, callers, and all ten targets' function-symbol lists change together.
 
 These are body-derived annotations of [the parent area-select structures and functions](https://github.com/michiiik/pokestadium/blob/area_select_annotation/src/fragments/area_select/area_select.c). They do not claim original identifier recovery.
+
+## Direct ROM artwork review
+
+The follow-up review decodes the supplied US 1.0 ROM with MD5 `ed1378bc12115f71209a77844965ba50`. The `PERS-SZP` assets at `0x4D1330..0x4EB0C0` (`area_select_ui`) and `0x4BE810..0x4D1330` (`common_menu2_ui`) are Yay0-decompressed and compared byte-for-byte with the repository's extracted assets; formats, dimensions, and offsets are taken from [the parent area-select texture loads](https://github.com/michiiik/pokestadium/blob/area_select_annotation/src/fragments/area_select/area_select.c).
+
+- **Cursor identity**: the 36x36 RGBA16 frames at `0x03005000`, `0x03005A20`, and `0x03006440` visibly show Magnemite.
+- **Round badge**: the 36x36 RGBA16 texture at `0x020144E0` explicitly reads `R-2`; its raw-byte SHA-256 is `f97fd43c8cec7b987d9ead5a1d488f17cd07cc485140bf5d47896defefffff5e`.
+- **Area banners**: the ten 196x64 RGBA16 images read `STADIUM`, `FREE BATTLE`, `GYM LEADER CASTLE`, `VS MEWTWO`, `KIDS CLUB`, `VICTORY PALACE`, `POKEMON LAB`, `GB TOWER`, `DODUO GB TOWER`, and `DODRIO GB TOWER`. Entry 0 at `0x03006E60` therefore independently supports the Stadium name. Banner entries 8/9 are selected by adding Tower unlock tier to area index 7; they are not extra selectable areas, and banner entry 8 is not the meaning of `AREA_NONE`.
+- **Mewtwo marker**: all twenty 48x40 I4 frames in `sAreaSelectMarkerTextures` show the animated long-tailed Mewtwo silhouette, supporting the source-derived location/unlock role.
+- **Glow and exit fade**: `0x03044260` is a 64x64 I4 soft-edged filled circle. The first texture at segment `0x03000000` is a separate 64x32 I8 gradient mask, used with mirroring by the selected-area exit renderer; it is not another Magnemite sprite.
+- **Panel corners**: the four 16x8 I4 images at `0x02028A60`, `0x02028AA0`, `0x020289E0`, and `0x02028A20` visibly match top-left, top-right, bottom-left, and bottom-right orientations.
+
+These are direct decoder and visual-review observations, not runtime screenshots or an RDP compositing recreation. The exact extraction manifest, decoder, native images, and contact sheets are preserved in the Project's area-select handoff artifacts rather than added as new files to this PR.
+
+## Number-formatting follow-up
+
+The updated [CONTRIBUTING.md](https://github.com/michiiik/pokestadium/blob/master/CONTRIBUTING.md) additionally permits colors and one-off power-of-two-minus-one values in hex. The area-select follow-up restores RGBA constants, alpha-channel thresholds/steps, and `0xFF`/`0xFFFF` spellings while leaving ordinary dimensions, counts, indices, and nonqualifying values decimal. A token-normalization comparison verifies that the formatting edit changes no numeric value or nonnumeric code token.
+
+The follow-up is restricted to `src/fragments/area_select/area_select.c` and this evidence note, both already present in PR #259's diff. It does not add or modify `CONTRIBUTING.md`, new repository files, or unrelated fragments.
+
+After the follow-up, all ten targets were rebuilt with the production toolchain and again passed their checksum verifier and direct full-ROM retail comparison. The changed-path audit found no paths outside the original PR diff, and `git diff --check` passed.
 
 ## Shared imports
 
@@ -105,4 +126,4 @@ The actual execution used the Linux sandbox. `cmp` is the GNU utility, not a cla
 
 ## Sanity check
 
-ROM identity establishes output preservation for these ten local Linux builds, not semantic correctness or recovered original names. No emulator, hardware, audio-playback, Windows/macOS, or Docker-overlay validation was performed. Existing compiler warnings remain; successful checks with the default `WERROR=0` do not mean warning-free code. Names for decoded artwork inherit the parent's human annotation and prior project findings, while state/field/command roles above were checked against source consumers and producers.
+ROM identity establishes output preservation for these ten local Linux builds, not semantic correctness or recovered original names. No emulator, hardware, audio-playback, Windows/macOS, or Docker-overlay validation was performed. Existing compiler warnings remain; successful checks with the default `WERROR=0` do not mean warning-free code. The follow-up independently decodes the US 1.0 artwork described above; other-region artwork and live compositing remain unverified, while state/field/command roles were checked against source consumers and producers.
