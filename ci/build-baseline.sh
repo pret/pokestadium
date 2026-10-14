@@ -180,3 +180,14 @@ docker build \
     "$staging_dir"
 
 echo "build-baseline.sh: built $image from $target_sha (persistent checkout at $ci_checkout)"
+
+# Per-version baselines for the gate (see ci/build-region-baselines.sh). Only
+# when the runner has the retail dumps and a cache directory configured; a
+# failure here leaves the image usable (the gate falls back to cold builds).
+# POKESTADIUM_REGION_BASELINES limits it to the listed versions (default: all).
+if [ -n "${POKESTADIUM_BASEROM_DIR:-}" ] && [ -n "${POKESTADIUM_REGION_CACHE_DIR:-}" ]; then
+    echo "build-baseline.sh: building the per-version baselines into $POKESTADIUM_REGION_CACHE_DIR" >&2
+    bash "$ci_checkout/ci/build-region-baselines.sh" "$image" "$POKESTADIUM_BASEROM_DIR" \
+        "$POKESTADIUM_REGION_CACHE_DIR" "$ci_checkout/baseroms" ${POKESTADIUM_REGION_BASELINES:-} \
+        || echo "build-baseline.sh: some per-version baselines failed; the gate builds those cold" >&2
+fi

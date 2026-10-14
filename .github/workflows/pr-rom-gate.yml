@@ -124,6 +124,7 @@ jobs:
           GATE_REGIONS: ${{ steps.regions.outputs.regions }}
           GATE_REQUIRE_ALL_REGIONS: ${{ vars.GATE_REQUIRE_ALL_REGIONS || '0' }}
           POKESTADIUM_BASEROM_DIR: ${{ vars.POKESTADIUM_BASEROM_DIR }}
+          POKESTADIUM_REGION_CACHE_DIR: ${{ vars.POKESTADIUM_REGION_CACHE_DIR }}
         run: bash ci/gate-pr.sh "$GITHUB_WORKSPACE" "$RUNNER_TEMP/pokestadium-gate-out"
 
       - name: Upload gate and proposed coverage

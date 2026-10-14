@@ -13,6 +13,11 @@
 # runner (mounted read-only; never in the repo or the image). A version whose
 # dump is missing is skipped with a warning, or fails the gate when
 # GATE_REQUIRE_ALL_REGIONS=1. ci/affected_versions.py computes the list.
+#
+# POKESTADIUM_REGION_CACHE_DIR holds <version>.tar/.hash written by
+# ci/build-region-baselines.sh (trusted, from master). When a version's
+# digest (ci/region_hash.sh) still matches, the gate restores its split and
+# objects and builds incrementally instead of extracting and compiling cold.
 
 set -euo pipefail
 
@@ -71,6 +76,9 @@ done
 docker_args+=( -e "GATE_REGIONS=$regions" -e "GATE_REQUIRE_ALL_REGIONS=${GATE_REQUIRE_ALL_REGIONS:-0}" )
 if [ -n "${POKESTADIUM_BASEROM_DIR:-}" ] && [ -d "$POKESTADIUM_BASEROM_DIR" ]; then
     docker_args+=( -v "$(cd "$POKESTADIUM_BASEROM_DIR" && pwd):/baseroms-extra:ro" )
+fi
+if [ -n "${POKESTADIUM_REGION_CACHE_DIR:-}" ] && [ -d "$POKESTADIUM_REGION_CACHE_DIR" ]; then
+    docker_args+=( -v "$(cd "$POKESTADIUM_REGION_CACHE_DIR" && pwd):/region-cache:ro" )
 fi
 
 set +e
@@ -310,6 +318,14 @@ echo "gate-pr.sh: building with ${build_jobs} parallel job(s); per-object host s
 # not a checksum mismatch -- the build never even reached the checksum
 # comparison. Treat any linker_scripts diff as tree-wide, the same as
 # split/header/tool/Makefile changes already are.
+# A shared input changed for sure when any of these is set; a restored region
+# baseline must then be rebuilt with -B. Version-specific split and symbol
+# changes are covered by the per-version digest instead.
+region_rebuild_all=0
+if [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${library_changed}" -eq 1 ]; then
+    region_rebuild_all=1
+fi
+
 if [ "${want_us}" -eq 1 ]; then
     full_build=0
     if [ "${split_changed}" -eq 1 ] || [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${linker_changed}" -eq 1 ]; then
@@ -347,9 +363,29 @@ for region in ${GATE_REGIONS}; do
     mkdir -p "/work/baseroms/${region}"
     cp "${dump}" "/work/baseroms/${region}/baserom.z64"
     cp "/src/baseroms/${region}/checksum.md5" "/work/baseroms/${region}/checksum.md5"
-    echo "gate-pr.sh: region ${region}: extracting and building"
-    make VERSION="${region}" extract
-    make VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+    restored=0
+    if [ -f "/region-cache/${region}.tar" ] && [ -f "/region-cache/${region}.hash" ]; then
+        . /src/ci/region_hash.sh
+        if [ "$(region_hash /src "${region}")" = "$(cat "/region-cache/${region}.hash")" ]; then
+            tar -xpf "/region-cache/${region}.tar" --no-same-owner -C /work
+            restored=1
+        else
+            echo "gate-pr.sh: region ${region}: split or symbols changed since its baseline; building cold"
+        fi
+    fi
+    if [ "${restored}" -eq 1 ]; then
+        if [ "${region_rebuild_all}" -eq 1 ]; then
+            echo "gate-pr.sh: region ${region}: restored baseline, forcing a full rebuild (header, tool, library or Makefile change)"
+            make -B VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+        else
+            echo "gate-pr.sh: region ${region}: restored baseline, rebuilding changed inputs"
+            make VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+        fi
+    else
+        echo "gate-pr.sh: region ${region}: extracting and building cold"
+        make VERSION="${region}" extract
+        make VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+    fi
     echo "gate-pr.sh: region ${region} OK"
 done
 ' >"$log_file" 2>&1
