@@ -40,8 +40,8 @@ typedef struct AreaSelectMagnemiteTrail {
     /* 0x06 */ s16 scalePercent;
     /* 0x08 */ s16 orbitAngle;
     /* 0x0A */ s16 spriteFrame;
-    // FAKE: matched declaration has four points, but the loops access six.
-    // Preserve the 0x24 stride and overlapping accesses; this is not a layout repair.
+    // FAKE: AdvanceMagnemiteTrail and DrawAndAdvanceMagnemites access six
+    // afterimages; this four-element declaration gives overlapping 0x24-byte trails.
     /* 0x0C */ AreaSelectMagnemitePoint afterimages[4];
 } AreaSelectMagnemiteTrail; // size = 0x24
 
@@ -130,8 +130,8 @@ static GameOptions sAreaSelectGameOptions;
 s32 AreaSelect_CheckCartRemoved(s32 next_state) {
     u32 saved_interrupt_mask = osSetIntMask(OS_IM_NONE);
 
-    // Preserve the retail cartridge-signature guard. The predicate alone does
-    // not establish that physical cartridge removal is its only trigger.
+    // When PI is idle, a low-halfword mismatch at cartridge address 0xB0000D10
+    // changes the next state to -0x40.
     if (!(HW_REG(PI_STATUS_REG, u32) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) &&
         ((*(u32*)0xB0000D10 & 0xFFFF) != 0x400)) {
         next_state = -0x40;
@@ -398,7 +398,7 @@ void AreaSelect_DrawNameBanner(s16 x, s16 y, s16 alpha, s16 area) {
 }
 
 void func_822014C0(void) {
-    // Empty retail function. Its original purpose is unknown; retain the address name.
+    // Empty function; purpose unknown.
 }
 
 // State 2 interpolates the old/new labels during the six-frame cursor move.
@@ -427,7 +427,7 @@ void AreaSelect_DrawNameBannerCrossfade(s16 menu_state, s16 x, s16 y) {
     }
 }
 
-// Animate the decoded Mewtwo silhouette when that battle has been unlocked.
+// Animate the Mewtwo silhouette when that battle has been unlocked.
 void AreaSelect_DrawMewtwoMarker(s16 x, s16 y) {
     static u32 sAreaSelectMarkerTextures[] = {
         0x03044C60, 0x03045020, 0x030453E0, 0x030457A0, 0x03045B60, 0x03045F20, 0x030462E0,

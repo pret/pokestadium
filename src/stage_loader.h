@@ -24,16 +24,19 @@ typedef struct StageContext {
     /* 0x0A */ s16 clearBottom;
     /* 0x0C */ s8 zoom; // 1 selects 640x480; other values select 320x240.
     /* 0x0D */ s8 unk_0D;
-    /* 0x0E */ s8 imageCount;
+    /* 0x0E */ s8 renderTargetCount; // Number of slots used in renderTargets.
     /* 0x0F */ s8 hasDepthBuffer;
     /* 0x10 */ s8 unk_10;
     /* 0x11 */ u8 fadeMode; // 0 transparent, 1 opaque, 2 fading in, 3 fading out.
     /* 0x12 */ u8 fadeDuration;
     /* 0x13 */ u8 fadeFrame;
     /* 0x14 */ u16 clearColor; // RGBA5551 framebuffer clear/fade color.
-    /* 0x16 */ s8 imageIndex;
+    /* 0x16 */ s8 renderTargetIndex; // Current target; advances after recording the frame request.
     /* 0x17 */ u8 pad17;
-    /* 0x18 */ unk_D_80068BB0* images[3];
+    // Color-buffer descriptors with optional depth buffers. StageLoader_SetupFrame
+    // selects their img_p as the RDP color destination through gDPSetColorImage.
+    //@src/gfx_rect.c
+    /* 0x18 */ unk_D_80068BB0* renderTargets[3];
 } StageContext; // size = 0x24
 
 void StageFade_Update(void);
@@ -49,7 +52,7 @@ void StageLoader_SetupFrame(void);
 void StageLoader_SwapDisplayListAndReset(void);
 void StageLoader_BeginFrame(void);
 void StageLoader_FillFrame(void);
-StageContext* StageContext_Allocate(s8 zoom, s8 arg1, s8 image_count, s8 has_depth_buffer, s8 arg4, s32 allocate_images);
+StageContext* StageContext_Allocate(s8 zoom, s8 arg1, s8 render_target_count, s8 has_depth_buffer, s8 arg4, s32 allocate_render_targets);
 StageContext* StageContext_GetCurrent(void);
 s32 StageContext_GetFadeMode(void);
 void StageContext_SaveAndSwitch(StageContext* arg0);

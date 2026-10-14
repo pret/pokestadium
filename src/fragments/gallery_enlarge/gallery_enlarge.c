@@ -24,7 +24,7 @@ void Gallery_EnlargeInit(void) {
     D_837004C0 = 0;
     sp28 = PokeIcon_AllocFramebuffers(1);
     Gallery_ResetActiveScene();
-    D_837004B0 = Geo_CreateSceneInstance(0x280, 0x1E0, NULL, D_837004C8->images[0], sp28, D_837004C4, Gallery_GetEnlargeTarget(1));
+    D_837004B0 = Geo_CreateSceneInstance(0x280, 0x1E0, NULL, D_837004C8->renderTargets[0], sp28, D_837004C4, Gallery_GetEnlargeTarget(1));
 }
 
 void func_83700090(void) {
