@@ -128,7 +128,7 @@ s32 TransferPak_GetPresentationMode(void) {
 
     Save_EnsureBankLoaded(2);
     Save_GetOptions(&sp18);
-    return sp18.unk_00;
+    return sp18.gbTowerSpeed;
 }
 
 void TransferPak_LaunchSelectedPortAnim(void) {

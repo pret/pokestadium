@@ -1059,7 +1059,7 @@ void Rental_LoadRosterForMode(void) {
     if (var_a1 == 0) {
         D_84211B38 = NULL;
     } else {
-        if (gSessionContext.unk_11F2 != 0) {
+        if (gSessionContext.inRound2 != 0) {
             var_a1 += 0x1F;
         }
         D_84211B38 = BinArchive_GetFile(temp_a0, var_a1);
@@ -1075,7 +1075,7 @@ void Rental_LoadBackgroundImage(void) {
             D_84211B34 = BinArchive_GetFile(D_84211B30, 0xE);
         } else {
             Save_EnsureBankLoaded(2);
-            Save_GetModeSettings(&sp20, gSessionContext.unk_11F2);
+            Save_GetModeSettings(&sp20, gSessionContext.inRound2);
             if (sp20.unk_04 < 8) {
                 D_84211B34 = BinArchive_GetFile(D_84211B30, 0xD);
             } else {

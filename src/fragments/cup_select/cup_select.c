@@ -462,7 +462,7 @@ s32 CupSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
 
         Font_Init(0x10, 0);
         Save_EnsureBankLoaded(2);
-        Save_GetModeSettings(&D_82E023A0, gSessionContext.unk_11F2);
+        Save_GetModeSettings(&D_82E023A0, gSessionContext.inRound2);
         if (gSessionContext.mode == 3) {
             latest_unlocked_division = D_82E023A0.unk_05;
         } else {

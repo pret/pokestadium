@@ -826,8 +826,8 @@ void AreaSelect_Loop(void) {
 */
 #define NIGHT_DODRIO 2
 #define DAY_DODRIO 1 
-#define DODUO 0x12
-#define PLAIN 0x13
+#define DODUO 0x13
+#define PLAIN 0x12
 void AreaSelect_LoadBackgroundArt(void) {
     sAreaSelectBackgroundArchive = ASSET_LOAD2(backgrounds, 1, 1);
 
