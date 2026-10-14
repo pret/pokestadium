@@ -31,6 +31,7 @@ differ): sizeInRam does not fit every retail header (fragment50 and fragment73 d
 untouched fragments keep their retail header. A moved fragment that is not in
 gen_fragment_relocs.REGEN_SAFE is an error: its reloc table could not follow the move.
 """
+from __future__ import annotations
 import glob
 import os
 import re
