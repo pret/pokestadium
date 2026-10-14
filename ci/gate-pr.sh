@@ -5,6 +5,19 @@
 # checkout is mounted read-only into a disposable container. The host-side
 # script is deliberately small and the container has no Docker socket,
 # secrets, or network access.
+#
+# Regions: GATE_REGIONS (space separated, default "us") picks the ROM versions
+# to build and compare. "us" is built incrementally from the baked baseline;
+# every other version is extracted and built cold in the container from the
+# retail dump found in POKESTADIUM_BASEROM_DIR/<version>/baserom.z64 on the
+# runner (mounted read-only; never in the repo or the image). A version whose
+# dump is missing is skipped with a warning, or fails the gate when
+# GATE_REQUIRE_ALL_REGIONS=1. ci/affected_versions.py computes the list.
+#
+# POKESTADIUM_REGION_CACHE_DIR holds <version>.tar/.hash written by
+# ci/build-region-baselines.sh (trusted, from master). When a version's
+# digest (ci/region_hash.sh) still matches, the gate restores its split and
+# objects and builds incrementally instead of extracting and compiling cold.
 
 set -euo pipefail
 
@@ -49,6 +62,25 @@ if [ -n "$coverage_output_dir" ]; then
     docker_args+=( -v "$coverage_output_dir:/out:rw" )
 fi
 
+regions="${GATE_REGIONS:-us}"
+if [ -z "${regions// /}" ]; then
+    echo "gate-pr.sh: no ROM version affected; nothing to build" >&2
+    exit 0
+fi
+for region in $regions; do
+    if [[ ! "$region" =~ ^[a-z0-9_]+$ ]] || [ ! -f "$checkout_dir/yamls/$region/rom.yaml" ]; then
+        echo "gate-pr.sh: unknown or unbuildable region: $region" >&2
+        exit 2
+    fi
+done
+docker_args+=( -e "GATE_REGIONS=$regions" -e "GATE_REQUIRE_ALL_REGIONS=${GATE_REQUIRE_ALL_REGIONS:-0}" )
+if [ -n "${POKESTADIUM_BASEROM_DIR:-}" ] && [ -d "$POKESTADIUM_BASEROM_DIR" ]; then
+    docker_args+=( -v "$(cd "$POKESTADIUM_BASEROM_DIR" && pwd):/baseroms-extra:ro" )
+fi
+if [ -n "${POKESTADIUM_REGION_CACHE_DIR:-}" ] && [ -d "$POKESTADIUM_REGION_CACHE_DIR" ]; then
+    docker_args+=( -v "$(cd "$POKESTADIUM_REGION_CACHE_DIR" && pwd):/region-cache:ro" )
+fi
+
 set +e
 docker "${docker_args[@]}" \
     --entrypoint bash \
@@ -58,6 +90,8 @@ set -euo pipefail
 
 # Overlay all tracked inputs that can affect the public root build. Never
 # overlay baseroms: the baseline image owns the known retail reference.
+want_us=0
+case " ${GATE_REGIONS} " in *" us "*) want_us=1 ;; esac
 library_changed=0
 split_changed=0
 headers_changed=0
@@ -154,7 +188,11 @@ if [ -d /work/.git ]; then
     git -C /work add -A src include
 fi
 
-if sync_tree /src/tools /work/tools --exclude=__pycache__ --exclude=vtxdis; then tools_changed=1; fi
+# libc.so.1 and libC.so.1 are both tracked and collide on a case-insensitive
+# checkout (macOS), and the image rewrites libC.so.1 during make setup; neither
+# is ever a real PR change, but diffing them made every run look like a tools
+# change and forced a full rebuild.
+if sync_tree /src/tools /work/tools --exclude=__pycache__ --exclude=vtxdis --exclude=libc.so.1 --exclude=libC.so.1; then tools_changed=1; fi
 # yamls/us/header.yaml symbol_addrs_path lists these files as direct splat
 # extraction inputs (address->name resolution baked into asm/ at extract
 # time), same as the yamls themselves -- but they live under linker_scripts/,
@@ -198,7 +236,7 @@ fi
 if sync_tree /src/yamls /work/yamls || [ "${symbol_addrs_changed}" -eq 1 ]; then
     split_changed=1
     echo "gate-pr.sh: split inputs changed; re-running extraction" >&2
-    make extract
+    if [ "${want_us}" -eq 1 ]; then make extract; fi
     # extract regenerates linker_scripts/us/*.ld from whatever /work/asm the
     # baked image already had, which can predate this split and disagree
     # with the linker script already synced from /src above and already
@@ -220,14 +258,16 @@ fi
 # overlay: the image contains a retail seed ROM, and timestamp-based make
 # decisions must never be allowed to accept that seed without compiling the
 # checked-out sources.
-if [ "${split_changed}" -eq 1 ]; then
+if [ "${want_us}" -eq 0 ]; then
+    :
+elif [ "${split_changed}" -eq 1 ]; then
     rm -rf /work/build
 elif [ "${linker_changed}" -eq 1 ]; then
     rm -f /work/build/pokestadium-us.map \
         /work/build/pokestadium-us.elf \
         /work/build/pokestadium-us.z64
 fi
-if [ ! -f /work/build/pokestadium-us.map ]; then
+if [ "${want_us}" -eq 1 ] && [ ! -f /work/build/pokestadium-us.map ]; then
     echo "gate-pr.sh: linked map missing; rebuilding direct-IDO seed" >&2
     # CC= on the make command line overrides every target-specific CC
     # assignment in the Makefile, including the one that routes
@@ -282,18 +322,76 @@ echo "gate-pr.sh: building with ${build_jobs} parallel job(s); per-object host s
 # not a checksum mismatch -- the build never even reached the checksum
 # comparison. Treat any linker_scripts diff as tree-wide, the same as
 # split/header/tool/Makefile changes already are.
-full_build=0
-if [ "${split_changed}" -eq 1 ] || [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${linker_changed}" -eq 1 ]; then
-    full_build=1
+# A shared input changed for sure when any of these is set; a restored region
+# baseline must then be rebuilt with -B. Version-specific split and symbol
+# changes are covered by the per-version digest instead.
+region_rebuild_all=0
+if [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${library_changed}" -eq 1 ]; then
+    region_rebuild_all=1
 fi
-if [ "${full_build}" -eq 1 ]; then
-    echo "gate-pr.sh: forcing a full rebuild because split, header, tool, linker-script, or Makefile inputs changed"
-    make -B COMPARE=0 -j"${build_jobs}" rom
-else
-    echo "gate-pr.sh: reusing cached objects and rebuilding changed source inputs"
-    make COMPARE=0 -j"${build_jobs}" rom
+
+if [ "${want_us}" -eq 1 ]; then
+    full_build=0
+    if [ "${split_changed}" -eq 1 ] || [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${linker_changed}" -eq 1 ]; then
+        full_build=1
+    fi
+    if [ "${full_build}" -eq 1 ]; then
+        echo "gate-pr.sh: forcing a full rebuild because split, header, tool, linker-script, or Makefile inputs changed"
+        make -B COMPARE=0 -j"${build_jobs}" rom
+    else
+        echo "gate-pr.sh: reusing cached objects and rebuilding changed source inputs"
+        make COMPARE=0 -j"${build_jobs}" rom
+    fi
+    md5sum -c baseroms/us/checksum.md5
+    echo "gate-pr.sh: region us OK"
 fi
-md5sum -c baseroms/us/checksum.md5
+
+# Every other requested version builds cold from its own retail dump.
+for region in ${GATE_REGIONS}; do
+    [ "${region}" = us ] && continue
+    dump="/baseroms-extra/${region}/baserom.z64"
+    if [ ! -f "${dump}" ]; then
+        if [ "${GATE_REQUIRE_ALL_REGIONS}" = 1 ]; then
+            echo "gate-pr.sh: FAIL -- no retail dump for region ${region} on the runner" >&2
+            exit 1
+        fi
+        echo "gate-pr.sh: region ${region} SKIPPED (no retail dump on the runner)" >&2
+        continue
+    fi
+    want_md5="$(tr -d "\r" < "/src/baseroms/${region}/checksum.md5" | cut -d" " -f1)"
+    have_md5="$(md5sum "${dump}" | cut -d" " -f1)"
+    if [ "${want_md5}" != "${have_md5}" ]; then
+        echo "gate-pr.sh: FAIL -- dump for ${region} is ${have_md5}, expected ${want_md5}" >&2
+        exit 1
+    fi
+    mkdir -p "/work/baseroms/${region}"
+    cp "${dump}" "/work/baseroms/${region}/baserom.z64"
+    cp "/src/baseroms/${region}/checksum.md5" "/work/baseroms/${region}/checksum.md5"
+    restored=0
+    if [ -f "/region-cache/${region}.tar" ] && [ -f "/region-cache/${region}.hash" ]; then
+        . /src/ci/region_hash.sh
+        if [ "$(region_hash /src "${region}")" = "$(cat "/region-cache/${region}.hash")" ]; then
+            tar -xpf "/region-cache/${region}.tar" --no-same-owner -C /work
+            restored=1
+        else
+            echo "gate-pr.sh: region ${region}: split or symbols changed since its baseline; building cold"
+        fi
+    fi
+    if [ "${restored}" -eq 1 ]; then
+        if [ "${region_rebuild_all}" -eq 1 ]; then
+            echo "gate-pr.sh: region ${region}: restored baseline, forcing a full rebuild (header, tool, library or Makefile change)"
+            make -B VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+        else
+            echo "gate-pr.sh: region ${region}: restored baseline, rebuilding changed inputs"
+            make VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+        fi
+    else
+        echo "gate-pr.sh: region ${region}: extracting and building cold"
+        make VERSION="${region}" extract
+        make VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
+    fi
+    echo "gate-pr.sh: region ${region} OK"
+done
 ' >"$log_file" 2>&1
 status=$?
 set -e
@@ -328,9 +426,19 @@ fi
 # md5sum's result. The md5sum exit status above is authoritative; this check
 # is only a readable-log sanity check and therefore must not require the line
 # to start at column zero.
-if ! grep -q 'build/pokestadium-us\.z64: OK' "$log_file"; then
+skipped=""
+for region in $regions; do
+    if grep -q "region $region SKIPPED" "$log_file"; then
+        skipped="$skipped $region"
+        echo "::warning::gate-pr.sh: region $region was NOT checked (no retail dump on the runner)" >&2
+    elif ! grep -q "gate-pr.sh: region $region OK" "$log_file"; then
+        echo "gate-pr.sh: FAIL -- region $region reported no success line" >&2
+        exit 1
+    fi
+done
+if [[ " $regions " == *" us "* ]] && ! grep -q 'build/pokestadium-us\.z64: OK' "$log_file"; then
     echo "gate-pr.sh: FAIL -- expected checksum acceptance line was absent" >&2
     exit 1
 fi
 
-echo "gate-pr.sh: PASS -- build/pokestadium-us.z64: OK" >&2
+echo "gate-pr.sh: PASS -- regions: $regions${skipped:+ (not checked:$skipped)}" >&2

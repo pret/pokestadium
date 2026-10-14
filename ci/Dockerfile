@@ -42,6 +42,8 @@ WORKDIR /work
 # generated/derived state (below) never busts this one, and vice versa.
 COPY src ./src
 COPY include ./include
+# Tracked text edits; every version's textdata.o recipe depends on them.
+COPY text ./text
 
 # Makefile's C_FILES list is `git ls-files -- src`, so /work needs an
 # actual git repository over src/ -- otherwise that command fails with
