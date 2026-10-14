@@ -5,7 +5,7 @@
 <!-- AUTO_COVERAGE:START -->
 - Functions with C implementations: **7,437 / 7,437 (100.0%)**
 - Remaining decompilable `GLOBAL_ASM` owners: **0** (across 0 source files)
-- Separately managed `hasm` assembly segments: **10**
+- Separately managed `hasm` assembly segments: **9**
 - `de`: **242 / 340** shared C files built, **2,197** functions open across 98 files
 - `es`: **238 / 340** shared C files built, **2,359** functions open across 102 files
 - `eu`: **276 / 340** shared C files built, **1,281** functions open across 64 files
@@ -851,4 +851,3 @@ These YAML `hasm` entries are kept as assembly by design and are not counted as 
 | `yamls/us/rom.yaml` | `0x49190` | `libgsm` |
 | `yamls/us/rom.yaml` | `0x517A0` | `yay0 audio decoder` |
 | `yamls/us/rom.yaml` | `0x89020` | `fragments/gb_tower_emulator/gb_tower_emulator_code_asm` |
-| `yamls/us/rom.yaml` | `0x2552E0` | `fragments/31/fragment31_unk_table` |
