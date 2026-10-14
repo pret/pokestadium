@@ -27,10 +27,10 @@ typedef struct StageContext {
     /* 0x0E */ s8 imageCount;
     /* 0x0F */ s8 hasDepthBuffer;
     /* 0x10 */ s8 unk_10;
-    /* 0x11 */ u8 fade_mode; // 0 transparent, 1 opaque, 2 fading in, 3 fading out.
+    /* 0x11 */ u8 fadeMode; // 0 transparent, 1 opaque, 2 fading in, 3 fading out.
     /* 0x12 */ u8 fadeDuration;
     /* 0x13 */ u8 fadeFrame;
-    /* 0x14 */ u16 clear_color; // RGBA5551 framebuffer clear/fade color.
+    /* 0x14 */ u16 clearColor; // RGBA5551 framebuffer clear/fade color.
     /* 0x16 */ s8 imageIndex;
     /* 0x17 */ u8 pad17;
     /* 0x18 */ unk_D_80068BB0* images[3];
