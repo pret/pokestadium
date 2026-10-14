@@ -62,7 +62,7 @@ typedef struct unk_D_84B25A28 {
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x04 */ DisplayObject* unk_04;
-    /* 0x08 */ unk_D_86002F34_00C* unk_08;
+    /* 0x08 */ CameraNode* unk_08;
     /* 0x0C */ GraphNode* unk_0C;
     /* 0x10 */ GraphNode* unk_10;
     /* 0x14 */ GraphNode* unk_14;

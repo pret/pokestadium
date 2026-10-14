@@ -819,13 +819,13 @@ void DrowzeeGame_InitCamera(void) {
     D_87B000F2 = 0;
     D_87B000F4 = 0x190;
 
-    D_87B000EC->unk_24.near = 50.0f;
-    D_87B000EC->unk_24.far = 6400.0f;
-    D_87B000EC->unk_24.fovy = 27.5f;
+    D_87B000EC->perspective.nearPlane = 50.0f;
+    D_87B000EC->perspective.farPlane = 6400.0f;
+    D_87B000EC->perspective.verticalFieldOfView = 27.5f;
 
-    D_87B000EC->unk_60.at.y = 25.0f;
+    D_87B000EC->view.targetPosition.y = 25.0f;
 
-    Camera_ComputeEyeFromAngles(&D_87B000EC->unk_60.at, &D_87B000EC->unk_60.eye, D_87B000F4, D_87B000F0, D_87B000F2);
+    Camera_ComputeEyeFromAngles(&D_87B000EC->view.targetPosition, &D_87B000EC->view.eyePosition, D_87B000F4, D_87B000F0, D_87B000F2);
 }
 
 void DrowzeeGame_InitPlayerOverlays(void) {

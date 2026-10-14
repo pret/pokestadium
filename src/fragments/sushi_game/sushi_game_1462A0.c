@@ -94,7 +94,7 @@ static s16 D_8680847C;
 static s16 D_8680847E;
 static s16 D_86808480;
 static s32 pad_D_86808488[2];
-static unk_D_86002F34_00C* D_86808490;
+static CameraNode* D_86808490;
 unk_D_86808498 D_86808498;
 
 void SushiGame_UpdateNameTagPulse(unk_D_86807558* arg0) {
@@ -1724,9 +1724,9 @@ void SushiGame_UpdateCameraBasis(unk_D_86808498* arg0) {
     f32 temp_fa0;
     Vec3f sp20;
 
-    arg0->unk_20.x = D_86808490->unk_60.at.x - D_86808490->unk_60.eye.x;
+    arg0->unk_20.x = D_86808490->view.targetPosition.x - D_86808490->view.eyePosition.x;
     arg0->unk_20.y = 0.0f;
-    arg0->unk_20.z = D_86808490->unk_60.at.z - D_86808490->unk_60.eye.z;
+    arg0->unk_20.z = D_86808490->view.targetPosition.z - D_86808490->view.eyePosition.z;
 
     temp_fa0 = SQ(arg0->unk_20.x) + SQ(arg0->unk_20.z);
     if (temp_fa0 != 0.0f) {
@@ -1765,13 +1765,13 @@ void SushiGame_InitCamera(void) {
     Camera_ComputeEyeFromAngles(&D_86808498.unk_00, &D_86808498.unk_0C, D_86808498.unk_1C, D_86808498.unk_1A, D_86808498.unk_18);
     SushiGame_UpdateCameraBasis(&D_86808498);
 
-    D_86808490->unk_24.near = 50.0f;
-    D_86808490->unk_24.far = 6400.0f;
+    D_86808490->perspective.nearPlane = 50.0f;
+    D_86808490->perspective.farPlane = 6400.0f;
 }
 
 void SushiGame_UpdateCamera(void) {
     Camera_ComputeEyeFromAngles(&D_86808498.unk_00, &D_86808498.unk_0C, D_86808498.unk_1C, D_86808498.unk_1A, D_86808498.unk_18);
     SushiGame_UpdateCameraBasis(&D_86808498);
-    D_86808490->unk_60.eye = D_86808498.unk_0C;
-    D_86808490->unk_60.at = D_86808498.unk_00;
+    D_86808490->view.eyePosition = D_86808498.unk_0C;
+    D_86808490->view.targetPosition = D_86808498.unk_00;
 }

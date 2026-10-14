@@ -738,7 +738,7 @@ static u32 D_86B0DC5C[] = {
 };
 
 static GraphNode* D_86B0EBC0;
-static unk_D_86002F34_00C* D_86B0EBC4;
+static CameraNode* D_86B0EBC4;
 static s16 D_86B0EBC8;
 static s16 D_86B0EBCA;
 static f32 D_86B0EBCC;
@@ -760,7 +760,7 @@ s32 Completion_LightAngleCallbackA(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = sp26 + 0x2000;
         ptr->unk_1E = sp24 - 0x2000;
     }
@@ -774,7 +774,7 @@ s32 Completion_LightAngleCallbackB(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = -0x2000 - sp26;
         ptr->unk_1E = sp24 + 0x6000;
     }
@@ -897,12 +897,12 @@ void Completion_InitCamera(void) {
     D_86B0EBCA = 0;
     D_86B0EBCC = 120.0f;
 
-    Vec3f_SetComponentsDuplicate(&D_86B0EBC4->unk_60.at, 0.0f, 132.5f, -225.0f);
-    Camera_ComputeEyeFromAngles(&D_86B0EBC4->unk_60.at, &D_86B0EBC4->unk_60.eye, D_86B0EBCC, D_86B0EBC8, D_86B0EBCA);
+    Vec3f_SetComponentsDuplicate(&D_86B0EBC4->view.targetPosition, 0.0f, 132.5f, -225.0f);
+    Camera_ComputeEyeFromAngles(&D_86B0EBC4->view.targetPosition, &D_86B0EBC4->view.eyePosition, D_86B0EBCC, D_86B0EBC8, D_86B0EBCA);
 
-    D_86B0EBC4->unk_24.near = 10.0f;
-    D_86B0EBC4->unk_24.far = 6400.0f;
-    D_86B0EBC4->unk_24.fovy = 41.5f;
+    D_86B0EBC4->perspective.nearPlane = 10.0f;
+    D_86B0EBC4->perspective.farPlane = 6400.0f;
+    D_86B0EBC4->perspective.verticalFieldOfView = 41.5f;
 }
 
 s32 Completion_WrapDialogText(void) {
@@ -1334,17 +1334,17 @@ s32 Completion_MoveCameraToFront(void) {
     tmp.y = 30.0f;
     tmp.z = 100.0f;
 
-    D_86B0EBC4->unk_60.at.y = Math_StepToF(D_86B0EBC4->unk_60.at.y, 45.0f, tmp.x / 65.0f, tmp.x / 65.0f);
-    D_86B0EBC4->unk_60.eye.y = Math_StepToF(D_86B0EBC4->unk_60.eye.y, 50.0f, tmp.y / 65.0f, tmp.y / 65.0f);
-    D_86B0EBC4->unk_60.eye.z = Math_StepToF(D_86B0EBC4->unk_60.eye.z, 190.0f, tmp.z / 60.0f, tmp.z / 60.0f);
+    D_86B0EBC4->view.targetPosition.y = Math_StepToF(D_86B0EBC4->view.targetPosition.y, 45.0f, tmp.x / 65.0f, tmp.x / 65.0f);
+    D_86B0EBC4->view.eyePosition.y = Math_StepToF(D_86B0EBC4->view.eyePosition.y, 50.0f, tmp.y / 65.0f, tmp.y / 65.0f);
+    D_86B0EBC4->view.eyePosition.z = Math_StepToF(D_86B0EBC4->view.eyePosition.z, 190.0f, tmp.z / 60.0f, tmp.z / 60.0f);
 
-    if (D_86B0EBC4->unk_60.eye.z >= 85.0f) {
+    if (D_86B0EBC4->view.eyePosition.z >= 85.0f) {
         D_86B0EBDC->unk_008.node.renderFlags |= 0x20;
         D_86B0EBDC->unk_170.node.flags |= 1;
         Completion_PositionBonusModel();
     }
 
-    if (D_86B0EBC4->unk_60.eye.z >= 190.0f) {
+    if (D_86B0EBC4->view.eyePosition.z >= 190.0f) {
         return 1;
     }
     return 0;
@@ -1477,8 +1477,8 @@ s32 Completion_UpdateSceneSteps(void) {
 
         case 4:
             if (D_86B0EBDC->unk_2E4++ >= 0x1E) {
-                Vec3f_SetComponentsDuplicate(&D_86B0EBC4->unk_60.at, 0.0f, 90.0f, 0.0f);
-                Vec3f_SetComponentsDuplicate(&D_86B0EBC4->unk_60.eye, 0.0f, 80.0f, 90.0f);
+                Vec3f_SetComponentsDuplicate(&D_86B0EBC4->view.targetPosition, 0.0f, 90.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&D_86B0EBC4->view.eyePosition, 0.0f, 80.0f, 90.0f);
 
                 if (D_86B0EBDC->unk_2E4 == 0x1F) {
                     miniRankingActorSetup1st(0.2f, 0.0f, 125.0f, -235.0f, 0x7D2, 0, 0);

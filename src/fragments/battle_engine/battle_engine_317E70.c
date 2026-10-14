@@ -902,7 +902,7 @@ void BattleAnim_GetTertiaryOwnerSpeciesBaseScale(void) {
     BattleAnim_GetOwnerSpeciesBaseScaleAlias(gBattleAnimTertiaryOwner);
 }
 
-unk_D_86002F34_00C* BattleAnim_GetCameraContext(void) {
+CameraNode* BattleAnim_GetCameraContext(void) {
     return gParticleRenderContext.unk_0C;
 }
 

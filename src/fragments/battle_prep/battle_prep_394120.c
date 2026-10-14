@@ -1179,7 +1179,7 @@ s32 BattlePrep_ShowCastleClearOutro(void) {
 
 void BattlePrep_InitScene(void) {
     MemoryBlock* temp_v0;
-    unk_D_86002F34_00C* ptr;
+    CameraNode* ptr;
     DisplayObject* ptr2;
     s32 i;
 
@@ -1203,8 +1203,8 @@ void BattlePrep_InitScene(void) {
     MainPool_FinalizeAllocation(temp_v0);
 
     ptr = D_84B1A598.unk_0004->children;
-    ptr->unk_24.near = 10.0f;
-    ptr->unk_24.far = 6000.0f;
+    ptr->perspective.nearPlane = 10.0f;
+    ptr->perspective.farPlane = 6000.0f;
 
     BattlePrep_InitStarfield(&D_84B19910);
     BattlePrep_CloseRuleWindow(&D_84B26640.unk_1C);

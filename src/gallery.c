@@ -316,7 +316,7 @@ s32 Gallery_GetScenePoseIndex(s32 arg0) {
     return 0;
 }
 
-s32 Gallery_ConfigurePhotoCamera(s32 arg0, unk_D_86002F34_00C* arg1) {
+s32 Gallery_ConfigurePhotoCamera(s32 arg0, CameraNode* arg1) {
     s32 pad;
     unk_D_83403C60_050_00C* src;
 
@@ -331,7 +331,7 @@ s32 Gallery_ConfigurePhotoCamera(s32 arg0, unk_D_86002F34_00C* arg1) {
     return 0;
 }
 
-s32 Gallery_SetScenePoseCamera(s32 arg0, unk_D_86002F34_00C* arg1) {
+s32 Gallery_SetScenePoseCamera(s32 arg0, CameraNode* arg1) {
     if (Gallery_GetScenePoseIndex(arg0) != 0) {
         if (arg0 == 2) {
             GeoCamera_SetViewport(arg1, 0, 0, D_80075F84->unk_04, D_80075F84->unk_06);
@@ -348,7 +348,7 @@ s32 Gallery_SetCameraAngleOffsets(s32 arg0, unk_func_8003013C_arg1* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         arg1->unk_1C = (s16) (sp26 + 0x2000);
         arg1->unk_1E = (s16) (sp24 - 0x2000);
     }
@@ -362,7 +362,7 @@ s32 Gallery_SetCameraAngleOffsetsAlternate(s32 arg0, unk_func_8003013C_arg1* arg
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         arg1->unk_1C = (s16) (-0x2000 - sp26);
         arg1->unk_1E = (s16) (sp24 + 0x6000);
     }

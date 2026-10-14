@@ -33,11 +33,11 @@ static f32 D_84387D60[] = {
 void BattleAnim_SetupReflectiveCamera(void) {
     Mtx* sp3C = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     LookAt* sp38 = Gfx_AllocDisplayList(sizeof(LookAt) * 1);
-    unk_D_86002F34_00C* temp_v0 = BattleAnim_GetCameraContext();
+    CameraNode* temp_v0 = BattleAnim_GetCameraContext();
 
-    guLookAtReflect(sp3C, sp38, temp_v0->unk_60.eye.x, temp_v0->unk_60.eye.y, temp_v0->unk_60.eye.z,
-                    temp_v0->unk_60.at.x, temp_v0->unk_60.at.y, temp_v0->unk_60.at.z, temp_v0->unk_60.up.x,
-                    temp_v0->unk_60.up.y, temp_v0->unk_60.up.z);
+    guLookAtReflect(sp3C, sp38, temp_v0->view.eyePosition.x, temp_v0->view.eyePosition.y, temp_v0->view.eyePosition.z,
+                    temp_v0->view.targetPosition.x, temp_v0->view.targetPosition.y, temp_v0->view.targetPosition.z, temp_v0->view.upDirection.x,
+                    temp_v0->view.upDirection.y, temp_v0->view.upDirection.z);
 }
 
 void BattleAnim_SelectParticleModelFrames(Particle* arg0, s32 arg1) {

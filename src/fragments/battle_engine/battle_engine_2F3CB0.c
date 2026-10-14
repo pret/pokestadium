@@ -591,11 +591,11 @@ void BattleAnim_StatusIdleCase7(Battler* arg0, Battler* arg1) {
 
 void BattleAnim_ResetOwnerFacingAndExitStatusIdle(Battler* arg0) {
     UNUSED s32 pad;
-    unk_D_86002F34_00C* sp18 = gBattleScene.unk_00->unk_DC;
+    CameraNode* sp18 = gBattleScene.unk_00->unk_DC;
 
     BattleScene_PositionParticipantModel(arg0);
     Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg0->unk_4B0 << 0xE, 0);
-    Vec3f_SetComponentsDuplicate(&sp18->unk_60.up, 0.0f, 1.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&sp18->view.upDirection, 0.0f, 1.0f, 0.0f);
     BattleScene_ResetParticipantModelFlags(arg0);
 }
 
@@ -611,7 +611,7 @@ void BattleAnim_StatusIdleCase8Sub0(Battler* arg0, Battler* arg1) {
 }
 
 void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
-    unk_D_86002F34_00C* temp_s0 = gBattleScene.unk_00->unk_DC;
+    CameraNode* temp_s0 = gBattleScene.unk_00->unk_DC;
     f32 temp_fa0;
     f32 temp_fa1_2;
     f32 temp_ft4;
@@ -624,9 +624,9 @@ void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
     BattleAnim_StepToS16(&arg1->unk_4A4, 0x5B0, 0x3C);
     BattleAnim_StepToS16(&arg1->unk_4A8, -0x8000, arg1->unk_4A4);
 
-    sp2C = temp_s0->unk_60.at.x - temp_s0->unk_60.eye.x;
-    sp28 = temp_s0->unk_60.at.y - temp_s0->unk_60.eye.y;
-    sp24 = temp_s0->unk_60.at.z - temp_s0->unk_60.eye.z;
+    sp2C = temp_s0->view.targetPosition.x - temp_s0->view.eyePosition.x;
+    sp28 = temp_s0->view.targetPosition.y - temp_s0->view.eyePosition.y;
+    sp24 = temp_s0->view.targetPosition.z - temp_s0->view.eyePosition.z;
 
     temp_fv0_2 = sqrtf(SQ(sp2C) + SQ(sp28) + SQ(sp24));
 
@@ -636,9 +636,9 @@ void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
 
     temp_ft4 = 1.0 - COSS(arg1->unk_4A8);
 
-    temp_s0->unk_60.up.x = (temp_ft4 * temp_fa0 * temp_fv1_2) - (SINS(arg1->unk_4A8) * temp_fa1_2);
-    temp_s0->unk_60.up.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
-    temp_s0->unk_60.up.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
+    temp_s0->view.upDirection.x = (temp_ft4 * temp_fa0 * temp_fv1_2) - (SINS(arg1->unk_4A8) * temp_fa1_2);
+    temp_s0->view.upDirection.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
+    temp_s0->view.upDirection.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
 
     if (arg1->unk_000.position.y < 0.0f) {
         arg1->unk_000.position.y = 0.0f;

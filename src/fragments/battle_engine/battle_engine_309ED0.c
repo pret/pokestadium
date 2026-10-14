@@ -164,7 +164,7 @@ s32 BattleScene_AdvanceOwnerAnimationAndClearFlags(Battler* arg0) {
         case 2:
             BattleScene_ResetAnimationStep();
             BattleAnim_GetOwnerDefaultAnchorPosition(arg0, &sp34);
-            BattleAnim_Vec3fCopy(&gBattleScene.unk_00->unk_DC->unk_60.at, &sp34);
+            BattleAnim_Vec3fCopy(&gBattleScene.unk_00->unk_DC->view.targetPosition, &sp34);
             break;
     }
     return var_s0;
@@ -329,17 +329,17 @@ void BattleScene_SetPhaseFlag(void) {
     gBattleScene.unk_00->unk_3C = 1;
 }
 
-void BattleScene_SetPhase(UNUSED unk_D_86002F34_00C* arg0, s32 arg1) {
+void BattleScene_SetPhase(UNUSED CameraNode* arg0, s32 arg1) {
     gBattleScene.unk_00->unk_38 = arg1;
     gBattleScene.unk_00->unk_20 = 0;
 }
 
-void BattleScene_SaveCameraFov(unk_D_86002F34_00C* arg0) {
-    gBattleScene.unk_00->unk_60 = arg0->unk_24.fovy;
+void BattleScene_SaveCameraFov(CameraNode* arg0) {
+    gBattleScene.unk_00->unk_60 = arg0->perspective.verticalFieldOfView;
 }
 
-void BattleScene_ResetCameraFov(unk_D_86002F34_00C* arg0) {
-    arg0->unk_24.fovy = 30.0f;
+void BattleScene_ResetCameraFov(CameraNode* arg0) {
+    arg0->perspective.verticalFieldOfView = 30.0f;
     gBattleScene.unk_00->unk_60 = 30.0f;
 }
 
@@ -533,7 +533,7 @@ s32 BattleScene_TransitionToPhaseDuplicate(s32 arg0) {
     return 1;
 }
 
-void BattleScene_SwitchActiveSideAndSetPhase(unk_D_86002F34_00C* arg0) {
+void BattleScene_SwitchActiveSideAndSetPhase(CameraNode* arg0) {
     gBattleScene.unk_00->unk_2C = !gBattleScene.unk_00->unk_2C;
     BattleScene_SetPhase(arg0, 5);
 }
@@ -650,7 +650,7 @@ void BattleScene_CompleteActionPhase(void) {
     }
 }
 
-void BattleScene_ResolveDisplayedHpCompletion(unk_D_86002F34_00C* arg0) {
+void BattleScene_ResolveDisplayedHpCompletion(CameraNode* arg0) {
     if ((D_84390220 == 1) && (D_84390224 == 1)) {
         if (Battle_GetActiveMonHp(D_84390010[gBattleScene.unk_00->unk_2C]) == 0) {
             BattleScene_SwitchActiveSideAndSetPhase(arg0);
@@ -662,7 +662,7 @@ void BattleScene_ResolveDisplayedHpCompletion(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_UpdateDisplayedHpAndTransition(unk_D_86002F34_00C* arg0) {
+void BattleScene_UpdateDisplayedHpAndTransition(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
 
     D_84390220 = BattleScene_AnimateDisplayedHpToRuntime(D_84390010[0]);
@@ -685,7 +685,7 @@ void BattleScene_UpdateDisplayedHpAndTransition(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_WaitForDisplayedHpAnimations(unk_D_86002F34_00C* arg0) {
+void BattleScene_WaitForDisplayedHpAnimations(CameraNode* arg0) {
     if ((D_84390220 == 1) && (D_84390224 == 1)) {
         BattleBox_Close();
         BattleScene_UpdateDisplayedHpAndTransition(arg0);
@@ -781,7 +781,7 @@ void BattleScene_UpdateActiveOwnerPointers(void) {
     D_84390200 = D_84390010[idx];
 }
 
-void BattleScene_InitializeBattlePresentation(unk_D_86002F34_00C* arg0) {
+void BattleScene_InitializeBattlePresentation(CameraNode* arg0) {
     func_8003DB84(0);
     BattleScene_SetCameraClipPlanes(arg0, 20.0f, 12800.0f);
     BattleScene_ResetAnimationStep();
@@ -793,7 +793,7 @@ void BattleScene_InitializeBattlePresentation(unk_D_86002F34_00C* arg0) {
     gBattleScene.unk_00->unk_20++;
 }
 
-void BattleScene_SendOutPresentationFinalize(unk_D_86002F34_00C* arg0) {
+void BattleScene_SendOutPresentationFinalize(CameraNode* arg0) {
     BattlerState* temp_t2 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
     BattlerState* temp_t1 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
     s16 sp2E = D_84390010[gBattleScene.unk_00->unk_2C]->unk_000.objectType;
@@ -804,8 +804,8 @@ void BattleScene_SendOutPresentationFinalize(unk_D_86002F34_00C* arg0) {
         ((temp_t2->unk_2D == 0x10) && (temp_t1->unk_2D == 0x13)) ||
         ((temp_t1->unk_2D == 0x10) && (temp_t2->unk_2D == 0x13))) {
         BattleBox_Open(0xE);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_60.at, 0.0f, 75.0f, 0.0f);
-        Vec3f_SetComponentsDuplicate(&arg0->unk_60.eye, 0.0f, 80.0f, 400.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, 0.0f, 75.0f, 0.0f);
+        Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, 0.0f, 80.0f, 400.0f);
         Audio_StartBattleMusicSequence();
         gBattleScene.unk_00->unk_20 = 8;
         return;
@@ -880,7 +880,7 @@ s32 BattleScene_ResetOwnerStatusPresentation(Battler* arg0) {
     return 0;
 }
 
-void BattleScene_AdvanceSendOutPreparation(unk_D_86002F34_00C* arg0) {
+void BattleScene_AdvanceSendOutPreparation(CameraNode* arg0) {
     if (BattleScene_AdvanceOwnerAnimation(D_84390010[!gBattleScene.unk_00->unk_2C]) == 0) {
         Battle_ClearRuntimeFlags(D_84390010[!gBattleScene.unk_00->unk_2C], 0x1800);
         Audio_FadeAndClearStoredSounds();
@@ -908,7 +908,7 @@ void BattleScene_AdvanceSendOutPreparation(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_AdvanceSendOutCamera(unk_D_86002F34_00C* arg0) {
+void BattleScene_AdvanceSendOutCamera(CameraNode* arg0) {
     UNUSED s32 pad[2];
     BattlerState* sp24 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
     MovePresentationCue* sp20 = &D_84384570[!gBattleScene.unk_00->unk_2C]->unk_A70;
@@ -937,7 +937,7 @@ void BattleScene_AdvanceSendOutCamera(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_AdvanceSendOutCameraClose(unk_D_86002F34_00C* arg0) {
+void BattleScene_AdvanceSendOutCameraClose(CameraNode* arg0) {
     BattleScene_ApproachCameraTarget(arg0, D_84390010[!gBattleScene.unk_00->unk_2C], 1);
     if (BattleScene_AdvanceCameraFrameCounter(0x19) != 0) {
         Audio_FadeAndClearStoredSounds();
@@ -945,7 +945,7 @@ void BattleScene_AdvanceSendOutCameraClose(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_FinishSendOutCameraClose(unk_D_86002F34_00C* arg0) {
+void BattleScene_FinishSendOutCameraClose(CameraNode* arg0) {
     BattlerState* temp_s0 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
 
     BattleScene_ApproachCameraTarget(arg0, D_84390010[!gBattleScene.unk_00->unk_2C], 1);
@@ -966,7 +966,7 @@ void BattleScene_FinishSendOutCameraClose(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_CompleteSendOutPresentation(unk_D_86002F34_00C* arg0) {
+void BattleScene_CompleteSendOutPresentation(CameraNode* arg0) {
     BattlerState* sp24 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
     BattlerState* sp20 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
 
@@ -983,8 +983,8 @@ void BattleScene_CompleteSendOutPresentation(unk_D_86002F34_00C* arg0) {
                 gBattleScene.unk_00->unk_2C = !gBattleScene.unk_00->unk_2C;
             } else if ((sp24->unk_2D == 0x13) || (sp20->unk_2D == 0x13)) {
                 BattleBox_Open(0xE);
-                Vec3f_SetComponentsDuplicate(&arg0->unk_60.at, 0.0f, 75.0f, 0.0f);
-                Vec3f_SetComponentsDuplicate(&arg0->unk_60.eye, 0.0f, 80.0f, 400.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, 0.0f, 75.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, 0.0f, 80.0f, 400.0f);
                 Audio_StartBattleMusicSequence();
                 gBattleScene.unk_00->unk_2C = !gBattleScene.unk_00->unk_2C;
                 gBattleScene.unk_00->unk_20 = 8;
@@ -1003,10 +1003,10 @@ void BattleScene_CompleteSendOutPresentation(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void func_84321D34(UNUSED unk_D_86002F34_00C* arg0) {
+void func_84321D34(UNUSED CameraNode* arg0) {
 }
 
-void BattleScene_SetupSendOutOwnerShot(unk_D_86002F34_00C* arg0) {
+void BattleScene_SetupSendOutOwnerShot(CameraNode* arg0) {
     Battler* temp_s0;
     UNUSED s32 pad;
     f32 sp44;
@@ -1023,7 +1023,7 @@ void BattleScene_SetupSendOutOwnerShot(unk_D_86002F34_00C* arg0) {
         BattleScene_ResetCameraFrameCounter();
         BattleBox_Open(0xE);
         BattleScene_SetCameraClipPlanes(arg0, 10.0f, 12800.0f);
-        arg0->unk_24.fovy = 60.0f;
+        arg0->perspective.verticalFieldOfView = 60.0f;
         if ((D_84390010[gBattleScene.unk_00->unk_2C]->unk_000.objectType == 0x5F) && (gBattleScene.unk_00->unk_2C == 1)) {
             sp3B = 0x97;
         }
@@ -1032,17 +1032,17 @@ void BattleScene_SetupSendOutOwnerShot(unk_D_86002F34_00C* arg0) {
         sp40 = ((D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.z + D_84384C30[sp3B].y) * temp_s0->unk_4B0) +
                temp_s0->unk_000.position.x;
 
-        Vec3f_SetComponentsDuplicate(&arg0->unk_60.at, sp40, sp44, temp_s0->unk_000.position.z);
+        Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, sp40, sp44, temp_s0->unk_000.position.z);
 
         sp40 = D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.x * D_84384C30[sp3B].x;
         sp3E = D_84384580[gBattleScene.unk_00->unk_2C]->unk_0C;
         tmp1 = (temp_s0->unk_4B0 * D_84384580[gBattleScene.unk_00->unk_2C]->unk_0E) + BattleScene_GetParticipantFacingAngle(temp_s0);
-        Camera_ComputeEyeFromAngles(&arg0->unk_60.at, &arg0->unk_60.eye, sp40, sp3E, tmp1);
+        Camera_ComputeEyeFromAngles(&arg0->view.targetPosition, &arg0->view.eyePosition, sp40, sp3E, tmp1);
         gBattleScene.unk_00->unk_20++;
     }
 }
 
-void BattleScene_CompleteSendOutCameraFade(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_CompleteSendOutCameraFade(UNUSED CameraNode* arg0) {
     if (BattleScene_AdvanceCameraFrameCounter(0x50) != 0) {
         gBattleScene.unk_00->unk_40 = gBattleScene.unk_00->unk_2C + 1;
         BattleBox_Close();
@@ -1050,14 +1050,14 @@ void BattleScene_CompleteSendOutCameraFade(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_CompleteSendOutExtendedFade(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_CompleteSendOutExtendedFade(UNUSED CameraNode* arg0) {
     if (BattleScene_AdvanceCameraFrameCounter(0x7D) != 0) {
         gBattleScene.unk_00->unk_40 = gBattleScene.unk_00->unk_2C + 1;
         Audio_FadeOutAll(0x14);
     }
 }
 
-void BattleScene_AdvanceSendOutFollowupCamera(unk_D_86002F34_00C* arg0) {
+void BattleScene_AdvanceSendOutFollowupCamera(CameraNode* arg0) {
     UNUSED s32 pad[2];
     BattlerState* sp24 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
     MovePresentationCue* sp20 = &D_84384570[!gBattleScene.unk_00->unk_2C]->unk_B10;
@@ -1088,7 +1088,7 @@ void BattleScene_AdvanceSendOutFollowupCamera(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseSendOut(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseSendOut(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_AdvanceSendOutPreparation(arg0);
@@ -1132,7 +1132,7 @@ void BattleScene_PhaseSendOut(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_CompleteSendOutFollowup(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_CompleteSendOutFollowup(UNUSED CameraNode* arg0) {
     BattlerState* sp1C = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
 
     if (BattleScene_AdvanceCameraFrameCounter(2) != 0) {
@@ -1150,7 +1150,7 @@ void BattleScene_CompleteSendOutFollowup(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseSendOutAfterFaint(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseSendOutAfterFaint(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_AdvanceSendOutPreparation(arg0);
@@ -1199,7 +1199,7 @@ void BattleScene_ResetOwnerPresentationFlags(Battler* arg0) {
     }
 }
 
-void BattleScene_InitializeIntroCamera(unk_D_86002F34_00C* arg0) {
+void BattleScene_InitializeIntroCamera(CameraNode* arg0) {
     s32 sp24;
     BattlerState* sp20 = &D_84390010[0]->unk_654;
     BattlerState* sp1C = &D_84390010[1]->unk_654;
@@ -1226,13 +1226,13 @@ void BattleScene_InitializeIntroCamera(unk_D_86002F34_00C* arg0) {
     gBattleScene.unk_00->unk_20++;
 }
 
-void BattleScene_AdvanceIntroCamera(unk_D_86002F34_00C* arg0) {
+void BattleScene_AdvanceIntroCamera(CameraNode* arg0) {
     if (BattleScene_AnimateCameraPreset(arg0, D_84390204, 0, 1) != 0) {
         BattleScene_SetPhase(arg0, 2);
     }
 }
 
-void BattleScene_PhaseIntro(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseIntro(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_InitializeIntroCamera(arg0);
@@ -1248,13 +1248,13 @@ void BattleScene_SetMonMoveResourceFlag(Battler* arg0) {
     arg0->unk_654.unk_30 = 0x800;
 }
 
-void BattleScene_PrepareMoveResourcePresentation(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_PrepareMoveResourcePresentation(UNUSED CameraNode* arg0) {
     BattleAnim_CleanupEffects(2);
     BattleScene_SetMonMoveResourceFlag(D_84390204);
     BattleScene_LoadMoveResourceList(D_84390204);
 }
 
-void BattleScene_SelectActionCameraPreset(unk_D_86002F34_00C* arg0) {
+void BattleScene_SelectActionCameraPreset(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     BattlerState* sp18 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
     s32 var_t0;
@@ -1304,13 +1304,13 @@ void BattleScene_SelectActionCameraPreset(unk_D_86002F34_00C* arg0) {
         default:
             BattleScene_SelectCameraPreset(D_84390204, arg0, gBattleScene.unk_00->unk_50 = var_t0, 1);
             if (sp18->unk_34 & 0x4000) {
-                arg0->unk_60.at.y = 0.0f;
+                arg0->view.targetPosition.y = 0.0f;
             }
             break;
     }
 }
 
-s32 BattleScene_AdvanceActionPresentationSetup(unk_D_86002F34_00C* arg0) {
+s32 BattleScene_AdvanceActionPresentationSetup(CameraNode* arg0) {
     UNUSED s32 pad;
     BattlerState* sp20 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
 
@@ -1336,10 +1336,10 @@ s32 BattleScene_AdvanceActionPresentationSetup(unk_D_86002F34_00C* arg0) {
     return 1;
 }
 
-void BattleScene_ActionSetupCameraStep(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupCameraStep(CameraNode* arg0) {
     BattlerState* sp1C = &D_84390204->unk_654;
 
-    BattleAnim_ApproachF(&arg0->unk_24.fovy, 30.0f, 0.05f);
+    BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 30.0f, 0.05f);
 
     switch (gBattleScene.unk_00->unk_3C) {
         case 0:
@@ -1372,7 +1372,7 @@ void BattleScene_ActionSetupCameraStep(unk_D_86002F34_00C* arg0) {
                     }
 
                     if (sp1C->unk_34 & 0x4000) {
-                        arg0->unk_60.at.y = 15.000001f;
+                        arg0->view.targetPosition.y = 15.000001f;
                     }
                     Battle_ResetModelToIdleAnim(D_84390204);
                 } else if ((gBattleScene.unk_00->unk_48 == 0x1C) || (gBattleScene.unk_00->unk_48 == 0x11) ||
@@ -1419,7 +1419,7 @@ void BattleScene_ActionSetupCameraStep(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_RefreshActionCameraPreset(unk_D_86002F34_00C* arg0) {
+void BattleScene_RefreshActionCameraPreset(CameraNode* arg0) {
     s32 temp_v0;
     s32 temp_t0;
 
@@ -1479,7 +1479,7 @@ void BattleScene_RefreshActionCameraPreset(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_SelectActionCameraPresetFromTiming(unk_D_86002F34_00C* arg0, s32 arg1) {
+void BattleScene_SelectActionCameraPresetFromTiming(CameraNode* arg0, s32 arg1) {
     BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     s32 sp18;
 
@@ -1546,13 +1546,13 @@ void BattleScene_SelectActionCameraPresetFromTiming(unk_D_86002F34_00C* arg0, s3
     }
 }
 
-s32 BattleScene_ApplyActionCameraMode(unk_D_86002F34_00C* arg0, s32 arg1) {
+s32 BattleScene_ApplyActionCameraMode(CameraNode* arg0, s32 arg1) {
     UNUSED s32 pad;
     s32 sp18 = 0;
 
     switch (gBattleScene.unk_00->unk_50) {
         case 1:
-            BattleAnim_ApproachF(&arg0->unk_24.fovy, 60.0f, 0.03f);
+            BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 60.0f, 0.03f);
             sp18 = 1;
             break;
 
@@ -1575,7 +1575,7 @@ s32 BattleScene_ApplyActionCameraMode(unk_D_86002F34_00C* arg0, s32 arg1) {
     return sp18;
 }
 
-void BattleScene_CleanupActionPresentation(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_CleanupActionPresentation(UNUSED CameraNode* arg0) {
     BattleScene_CleanupParticipantHideFlag(D_84390204);
     Battle_ClearRuntimeFlags(D_84390204, 0x10);
     if (BattleScene_ActionPresentationCleanupCheck() == 0) {
@@ -1584,14 +1584,14 @@ void BattleScene_CleanupActionPresentation(UNUSED unk_D_86002F34_00C* arg0) {
     BattleAnim_CleanupEffects(1);
 }
 
-s32 BattleScene_WaitForActionCameraDuration(UNUSED unk_D_86002F34_00C* arg0) {
+s32 BattleScene_WaitForActionCameraDuration(UNUSED CameraNode* arg0) {
     if (BattleScene_AdvanceCameraFrameCounter(BattleScene_GetCameraShotDuration(D_84390204)) != 0) {
         return 1;
     }
     return 0;
 }
 
-void BattleScene_ActionSetupAnimationDefault(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupAnimationDefault(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_3C) {
         case 0:
             BattleScene_ApplyActionCameraMode(arg0, 1);
@@ -1613,7 +1613,7 @@ void BattleScene_ActionSetupAnimationDefault(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_ActionSetupAnimationVariantA(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupAnimationVariantA(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_3C) {
         case 0:
             BattleScene_ReframeAndRecomputeDistance(arg0, D_84390204);
@@ -1644,7 +1644,7 @@ void BattleScene_ActionSetupAnimationVariantA(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_ActionSetupAnimationVariantB(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupAnimationVariantB(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_3C) {
         case 0:
             if (BattleScene_AdvanceCameraFrameCounter(0xF) != 0) {
@@ -1666,7 +1666,7 @@ void BattleScene_ActionSetupAnimationVariantB(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_ActionSetupAnimationVariantC(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupAnimationVariantC(CameraNode* arg0) {
     UNUSED s32 pad;
     BattleMonRuntime* sp18 = &D_84390204->unk_654.unk_38;
 
@@ -1693,7 +1693,7 @@ void BattleScene_ActionSetupAnimationVariantC(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_ActionSetupAnimationVariantD(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupAnimationVariantD(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_3C) {
         case 0:
             BattleScene_ResetCameraFrameCounter();
@@ -1713,7 +1713,7 @@ void BattleScene_ActionSetupAnimationVariantD(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_ActionSetupAnimationStep(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupAnimationStep(CameraNode* arg0) {
     BattlerState* temp_a2 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
     u32 var_v1 = 0;
 
@@ -1769,7 +1769,7 @@ s32 BattleScene_IsSpecialOwnerAnimation(Battler* arg0) {
     return 0;
 }
 
-void BattleScene_CompleteHpUpdateTransition(unk_D_86002F34_00C* arg0, s32* arg1, s32* arg2) {
+void BattleScene_CompleteHpUpdateTransition(CameraNode* arg0, s32* arg1, s32* arg2) {
     if ((*arg1 == 1) && (*arg2 == 1)) {
         BattleBox_Close();
         Battle_ResetModelToIdleAnim(D_84390204);
@@ -1782,7 +1782,7 @@ void BattleScene_CompleteHpUpdateTransition(unk_D_86002F34_00C* arg0, s32* arg1,
     }
 }
 
-void BattleScene_RunBasicHpTransition(unk_D_86002F34_00C* arg0) {
+void BattleScene_RunBasicHpTransition(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_3C) {
         case 0:
             if (BattleScene_AdvanceOwnerAnimation98(D_84390200) == 0) {
@@ -1807,7 +1807,7 @@ void BattleScene_RunBasicHpTransition(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_RunConditionalHpTransition(unk_D_86002F34_00C* arg0) {
+void BattleScene_RunConditionalHpTransition(CameraNode* arg0) {
     s32 sp1C;
 
     switch (gBattleScene.unk_00->unk_3C) {
@@ -1837,7 +1837,7 @@ void BattleScene_RunConditionalHpTransition(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_RunMoveEffectEndHpTransition(unk_D_86002F34_00C* arg0) {
+void BattleScene_RunMoveEffectEndHpTransition(CameraNode* arg0) {
     BattleMonRuntime* sp34 = &D_84390204->unk_654.unk_38;
     UNUSED s32 pad;
     UNUSED s16 pad2;
@@ -1869,7 +1869,7 @@ void BattleScene_RunMoveEffectEndHpTransition(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_RunActionEffectHpTransition(unk_D_86002F34_00C* arg0) {
+void BattleScene_RunActionEffectHpTransition(CameraNode* arg0) {
     BattleMonRuntime* sp24 = &D_84390200->unk_654.unk_38;
     UNUSED s32 pad;
     s32 sp1C;
@@ -1973,7 +1973,7 @@ void func_84324404(void) {
 void func_8432440C(void) {
 }
 
-void BattleScene_RunRepeatedHitHpTransition(unk_D_86002F34_00C* arg0) {
+void BattleScene_RunRepeatedHitHpTransition(CameraNode* arg0) {
     BattleMonRuntime* sp24 = &D_84390204->unk_654.unk_38;
     MovePresentationCue* temp_v1 = &D_84384570[BattleScene_GetParticipantSideIndex(D_84390200)]->unk_000[sp24->unk_5A - 1];
     volatile s32 sp1C;
@@ -2088,7 +2088,7 @@ void BattleScene_RunRepeatedHitHpTransition(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_ActionSetupFinalizeStep(unk_D_86002F34_00C* arg0) {
+void BattleScene_ActionSetupFinalizeStep(CameraNode* arg0) {
     BattleScene_ResetCameraFov(arg0);
     func_84370ADC(D_84390010[!gBattleScene.unk_00->unk_2C]);
     if (gBattleScene.unk_00->unk_48 == 0x16) {
@@ -2104,7 +2104,7 @@ void BattleScene_ActionSetupFinalizeStep(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase2(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase2(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_ActionSetupCameraStep(arg0);
@@ -2120,7 +2120,7 @@ void BattleScene_Phase2(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase3(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase3(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_ActionSetupCameraStep(arg0);
@@ -2201,7 +2201,7 @@ s32 BattleScene_PhaseSelectMoveAnim(void) {
     return 0;
 }
 
-void BattleScene_Phase7(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase7(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390204->unk_654.unk_38;
     MovePresentationCue* sp18 = &D_84384570[BattleScene_GetParticipantSideIndex(D_84390204)]->unk_000[sp1C->unk_5A - 1];
 
@@ -2257,7 +2257,7 @@ void BattleScene_Phase7(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase38(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase38(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SaveCameraFov(arg0);
@@ -2288,7 +2288,7 @@ void BattleScene_Phase38(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase27(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase27(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SaveCameraFov(arg0);
@@ -2319,7 +2319,7 @@ void BattleScene_Phase27(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase30(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase30(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390200->unk_654.unk_38;
 
     switch (gBattleScene.unk_00->unk_20) {
@@ -2405,7 +2405,7 @@ void BattleScene_Phase30(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase28(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase28(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SaveCameraFov(arg0);
@@ -2434,7 +2434,7 @@ void BattleScene_Phase28(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase15(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase15(CameraNode* arg0) {
     UNUSED s32 pad[3];
     BattleMonRuntime* sp30 = &D_84390204->unk_654.unk_38;
     BattleMonRuntime* sp2C = &D_84390200->unk_654.unk_38;
@@ -2497,7 +2497,7 @@ void BattleScene_Phase15(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase25(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase25(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     BattlerState* sp18 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
 
@@ -2555,7 +2555,7 @@ s32 BattleScene_EndStatusAnimationsAndCommit(Battler* arg0) {
     func_84370ADC(arg0);
 }
 
-void BattleScene_Phase29(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase29(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SaveCameraFov(arg0);
@@ -2590,7 +2590,7 @@ void BattleScene_Phase29(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase12(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase12(CameraNode* arg0) {
     MovePresentationCue* sp4C = &D_84384570[gBattleScene.unk_00->unk_2C]->unk_B00;
     UNUSED s32 pad;
     Vec3f sp3C;
@@ -2613,10 +2613,10 @@ void BattleScene_Phase12(unk_D_86002F34_00C* arg0) {
                 BattleScene_SetCameraEyeFromPosition(arg0, sp3C, 0x11C6, BattleScene_GetParticipantFacingAngle(D_84390204) - (D_84390204->unk_4B0 * 0x754E),
                               D_84390208, BattleAnim_GetOwnerModelHeight(D_84390204));
                 Vec3f_SetComponentsDuplicate(&sp3C, 0.0f, 200.0f, 0.0f);
-                BattleAnim_Vec3fCopy(&arg0->unk_60.at, &sp3C);
+                BattleAnim_Vec3fCopy(&arg0->view.targetPosition, &sp3C);
                 BattleAnim_CleanupEffects(2);
                 ModelAnim_SetAnimation(&D_84390204->unk_000, sp4C->unk_00);
-                arg0->unk_24.fovy = 60.0f;
+                arg0->perspective.verticalFieldOfView = 60.0f;
                 gBattleScene.unk_00->unk_20 += 1;
             } else {
                 BattleScene_ApproachCameraTargetFromOwner(arg0, D_84390204);
@@ -2624,7 +2624,7 @@ void BattleScene_Phase12(unk_D_86002F34_00C* arg0) {
             break;
 
         case 2:
-            BattleAnim_ApproachF(&arg0->unk_24.fovy, 60.0f, 0.2f);
+            BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 60.0f, 0.2f);
             if (D_84390204->unk_000.position.y >= 200.0f) {
                 gBattleScene.unk_00->unk_20 += 1;
             }
@@ -2644,7 +2644,7 @@ void BattleScene_Phase12(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase13(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase13(CameraNode* arg0) {
     UNUSED s32 pad;
     f32 sp28;
     UNUSED s16 pad2;
@@ -2700,7 +2700,7 @@ void BattleScene_Phase13(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase14(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase14(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SelectActionCameraPresetFromTiming(arg0, 1);
@@ -2723,7 +2723,7 @@ void BattleScene_Phase14(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase17(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase17(CameraNode* arg0) {
     BattlerState* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
 
     switch (gBattleScene.unk_00->unk_20) {
@@ -2754,7 +2754,7 @@ void BattleScene_Phase17(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseFaint(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseFaint(CameraNode* arg0) {
     BattleScene_ResetCameraFov(arg0);
 
     switch (gBattleScene.unk_00->unk_20) {
@@ -2804,7 +2804,7 @@ void BattleScene_PhaseFaint(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase31(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase31(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SaveCameraFov(arg0);
@@ -2834,7 +2834,7 @@ void BattleScene_Phase31(unk_D_86002F34_00C* arg0) {
 void func_84326A70(void) {
 }
 
-void BattleScene_Phase4(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase4(UNUSED CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_BeginBattlePhase();
@@ -2844,7 +2844,7 @@ void BattleScene_Phase4(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase16(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase16(CameraNode* arg0) {
     UNUSED s32 pad;
     s32 idx = gBattleScene.unk_00->unk_2C;
     MovePresentationCue* sp1C = &D_84384570[idx]->unk_A80;
@@ -2895,7 +2895,7 @@ void BattleScene_Phase16(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseMoveFailedMessage(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseMoveFailedMessage(CameraNode* arg0) {
     BattlerState* sp1C = &D_84390200->unk_654;
 
     switch (gBattleScene.unk_00->unk_20) {
@@ -2941,7 +2941,7 @@ void BattleScene_PhaseMoveFailedMessage(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseAttackHit(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseAttackHit(CameraNode* arg0) {
     BattleMonRuntime* sp24 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     BattleMonRuntime* sp20 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
 
@@ -3036,7 +3036,7 @@ void BattleScene_PhaseAttackHit(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseDrainDamage(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseDrainDamage(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     BattleMonRuntime* sp18 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
 
@@ -3092,7 +3092,7 @@ void BattleScene_PhaseDrainDamage(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_Phase10(unk_D_86002F34_00C* arg0) {
+void BattleScene_Phase10(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_CleanupParticipantEffectMode(D_84390204);
@@ -3122,7 +3122,7 @@ void BattleScene_Phase10(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseAttackHitRecoil(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseAttackHitRecoil(CameraNode* arg0) {
     BattleMonRuntime* sp24 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     BattleMonRuntime* sp20 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
 
@@ -3209,7 +3209,7 @@ void BattleScene_PhaseAttackHitRecoil(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseCheckFaintedEndTurn(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseCheckFaintedEndTurn(CameraNode* arg0) {
     BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
     BattleMonRuntime* sp18 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
 
@@ -3255,7 +3255,7 @@ void BattleScene_ClearMonStatusAnimations(Battler* arg0) {
     BattleAnim_ClearSleepStatusAnimation(arg0);
 }
 
-void BattleScene_PhaseWithdrawFainted(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseWithdrawFainted(CameraNode* arg0) {
     BattlerState* sp34 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
     Battler* temp_s0 = D_84390010[gBattleScene.unk_00->unk_2C];
     BattleMonRuntime* sp2C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
@@ -3286,9 +3286,9 @@ void BattleScene_PhaseWithdrawFainted(unk_D_86002F34_00C* arg0) {
         case 2:
             BattleScene_ApproachCameraZoom(arg0, temp_s0);
             if (BattleScene_AdvanceCameraFrameCounter(0x69) != 0) {
-                Vec3f_SetComponentsDuplicate(&arg0->unk_60.at, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
                 if (gBattleScene.unk_00 && gBattleScene.unk_00) {}
-                Vec3f_SetComponentsDuplicate(&arg0->unk_60.eye, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
                 BattleScene_SetParticipantModelFlags(temp_s0, 2, 0);
                 BattleAnim_QueueEffectList3(0xD, temp_s0, temp_s0, 0xFF, 0xFF);
                 gBattleScene.unk_00->unk_20 += 1;
@@ -3321,7 +3321,7 @@ void BattleScene_PhaseWithdrawFainted(unk_D_86002F34_00C* arg0) {
                 BattleAnim_QueueEffectList3(3, temp_s0, temp_s0, 0xFF, 0xFF);
                 Audio_PlayCommand(2, 0, 0);
                 BattleScene_RebindParticipantToSide(temp_s0, sp34->unk_2C);
-                arg0->unk_24.fovy = 40.0f;
+                arg0->perspective.verticalFieldOfView = 40.0f;
                 BattleBox_Open(0xC);
                 Battle_TriggerTrainerPresentationCue(temp_s0);
                 gBattleDamage = 0;
@@ -3355,7 +3355,7 @@ void BattleScene_PhaseWithdrawFainted(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_PhaseWithdrawSwitch(unk_D_86002F34_00C* arg0) {
+void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
     BattlerState* sp3C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654;
     BattlerState* sp38 = &D_84390010[!gBattleScene.unk_00->unk_2C]->unk_654;
     UNUSED s32 pad;
@@ -3369,12 +3369,12 @@ void BattleScene_PhaseWithdrawSwitch(unk_D_86002F34_00C* arg0) {
                 BattleScene_ResetCameraFrameCounter();
                 BattleBox_Open(0xB);
                 BattleAnim_LoadModeResourceList(temp_s0->unk_720, 3);
-                Vec3f_SetComponentsDuplicate(&arg0->unk_60.at, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
-                Vec3f_SetComponentsDuplicate(&arg0->unk_60.eye, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
                 Vec3f_SetComponentsDuplicate(&temp_s0->unk_000.position, temp_s0->unk_4B0 * -150.0f, 25.0f, 0.0f);
                 gBattleScene.unk_00->unk_20 += 1;
             } else {
-                BattleAnim_ApproachF(&arg0->unk_24.fovy, 30.0f, 0.05f);
+                BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 30.0f, 0.05f);
                 if (BattleScene_AnimateCameraIntro(arg0, temp_s0) != 0) {
                     BattleScene_ResetCameraFov(arg0);
                     BattleScene_ResetCameraFrameCounter();
@@ -3421,7 +3421,7 @@ void BattleScene_PhaseWithdrawSwitch(unk_D_86002F34_00C* arg0) {
                 BattleScene_RebindParticipantToSide(temp_s0, sp3C->unk_2C);
                 BattleScene_ResetCameraFrameCounter();
                 BattleAnim_QueueEffectList3(3, temp_s0, temp_s0, 0xFF, 0xFF);
-                arg0->unk_24.fovy = 40.0f;
+                arg0->perspective.verticalFieldOfView = 40.0f;
                 Battle_TriggerTrainerPresentationCue(temp_s0);
                 gBattleDamage = 0;
                 gBattleScene.unk_00->unk_20 += 1;
@@ -3456,7 +3456,7 @@ void BattleScene_PhaseWithdrawSwitch(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_UpdatePhase(unk_D_86002F34_00C* arg0) {
+void BattleScene_UpdatePhase(CameraNode* arg0) {
     BattleScene_UpdateActiveOwnerPointers();
 
     switch (gBattleScene.unk_00->unk_38) {

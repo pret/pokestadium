@@ -728,8 +728,8 @@ s32 BattlePrepRoster_ConvergeIconsStep(unk_D_84B25A28* arg0, s16 arg1) {
 }
 
 void BattlePrepRoster_UpdateCameraSwoop(unk_D_84B25A28* arg0, s16 arg1) {
-    arg0->unk_08->unk_60.at.y = SINS(arg1 << 0xE) * SQ((0x10 - arg1) / 12.0f);
-    Camera_ComputeEyeFromAngles(&arg0->unk_08->unk_60.at, &arg0->unk_08->unk_60.eye, 289.0f, 0, 0);
+    arg0->unk_08->view.targetPosition.y = SINS(arg1 << 0xE) * SQ((0x10 - arg1) / 12.0f);
+    Camera_ComputeEyeFromAngles(&arg0->unk_08->view.targetPosition, &arg0->unk_08->view.eyePosition, 289.0f, 0, 0);
 }
 
 s32 BattlePrepRoster_ZoomStepNTSC(unk_D_84B25A28* arg0, s16 arg1) {
@@ -963,7 +963,7 @@ s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, DisplayObject* arg
     return arg0->unk_00 == 3;
 }
 
-void BattlePrepRoster_Init(unk_D_84B25A28* arg0, unk_D_86002F34_00C* arg1) {
+void BattlePrepRoster_Init(unk_D_84B25A28* arg0, CameraNode* arg1) {
     MemoryBlock* temp_s1;
 
     arg0->unk_08 = arg1;

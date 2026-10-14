@@ -1062,31 +1062,31 @@ void ParticleGfx_PushTransformMatrixXYScaled(Vec3f arg0, Vec3s arg1, f32 arg2, f
     ParticleGfx_PushMatrix(&sp28);
 }
 
-void ParticleGfx_PushBillboardMatrix(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4) {
+void ParticleGfx_PushBillboardMatrix(CameraNode* arg0, Vec3f arg1, f32 arg4) {
     MtxF sp20;
 
-    ParticleGfx_BuildBillboardMatrix(&sp20, &arg0->unk_60.mtxf, arg1, arg4);
+    ParticleGfx_BuildBillboardMatrix(&sp20, &arg0->view.floatMatrix, arg1, arg4);
     ParticleGfx_PushMatrix(&sp20);
 }
 
-void ParticleGfx_PushBillboardRotatedMatrix(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
+void ParticleGfx_PushBillboardRotatedMatrix(CameraNode* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
     MtxF sp28;
 
-    ParticleGfx_BuildBillboardRotatedMatrix(&sp28, &arg0->unk_60.mtxf, arg1, arg4, arg5);
+    ParticleGfx_BuildBillboardRotatedMatrix(&sp28, &arg0->view.floatMatrix, arg1, arg4, arg5);
     ParticleGfx_PushMatrix(&sp28);
 }
 
-void ParticleGfx_PushBillboardMatrixYScaled(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4) {
+void ParticleGfx_PushBillboardMatrixYScaled(CameraNode* arg0, Vec3f arg1, f32 arg4) {
     MtxF sp20;
 
-    ParticleGfx_BuildBillboardMatrixYScaled(&sp20, &arg0->unk_60.mtxf, arg1, arg4);
+    ParticleGfx_BuildBillboardMatrixYScaled(&sp20, &arg0->view.floatMatrix, arg1, arg4);
     ParticleGfx_PushMatrix(&sp20);
 }
 
-void ParticleGfx_PushBillboardRotatedMatrixYScaled(unk_D_86002F34_00C* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
+void ParticleGfx_PushBillboardRotatedMatrixYScaled(CameraNode* arg0, Vec3f arg1, f32 arg4, s16 arg5) {
     MtxF sp28;
 
-    ParticleGfx_BuildBillboardRotatedMatrixYScaled(&sp28, &arg0->unk_60.mtxf, arg1, arg4, arg5);
+    ParticleGfx_BuildBillboardRotatedMatrixYScaled(&sp28, &arg0->view.floatMatrix, arg1, arg4, arg5);
     ParticleGfx_PushMatrix(&sp28);
 }
 

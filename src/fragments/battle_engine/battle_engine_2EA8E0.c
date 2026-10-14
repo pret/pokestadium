@@ -16,13 +16,13 @@
 #include "src/memmap.h"
 #include "src/memory.h"
 
-static unk_D_86002F34_00C D_8438E440;
+static CameraNode D_8438E440;
 static unk_D_8690A610 D_8438E530;
 static GraphNode D_8438E550;
 static GraphNode D_8438E568;
 static GraphNode D_8438E580;
-static unk_D_86002F34_00C D_8438E598;
-static unk_D_86002F34_00C D_8438E688;
+static CameraNode D_8438E598;
+static CameraNode D_8438E688;
 u8* D_8438E778;
 u8* D_8438E77C;
 static void* D_8438E780;
@@ -80,7 +80,7 @@ s32 Battle_StageLightAngleCallbackA(s32 arg0, unk_D_86002F34_alt18* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         arg1->unk_1C = sp26 + 0x2000;
         arg1->unk_1E = sp24 - 0x2000;
     }
@@ -94,7 +94,7 @@ s32 Battle_StageLightAngleCallbackB(s32 arg0, unk_D_86002F34_alt18* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         arg1->unk_1C = -0x2000 - sp26;
         arg1->unk_1E = sp24 + 0x6000;
     }
@@ -162,14 +162,14 @@ void Battle_DrawStageBackdrop(void) {
         return;
     }
 
-    sp4E = D_8438E440.unk_18.x;
-    sp4A = D_8438E440.unk_18.y;
-    sp4C = D_8438E440.unk_18.width + sp4E;
-    sp48 = (D_8438E440.unk_18.height / 2) + sp4A;
-    sp46 = D_8438E440.unk_18.height + sp4A;
-    sp44 = 0x10000 / (D_8438E440.unk_18.height / 2);
+    sp4E = D_8438E440.viewport.x;
+    sp4A = D_8438E440.viewport.y;
+    sp4C = D_8438E440.viewport.width + sp4E;
+    sp48 = (D_8438E440.viewport.height / 2) + sp4A;
+    sp46 = D_8438E440.viewport.height + sp4A;
+    sp44 = 0x10000 / (D_8438E440.viewport.height / 2);
 
-    if ((D_8438E440.unk_18.width < 0x140) || (D_8438E440.unk_18.height < 0xF0)) {
+    if ((D_8438E440.viewport.width < 0x140) || (D_8438E440.viewport.height < 0xF0)) {
         GfxImage_FillCurrent(&gDisplayListHead, 1);
     } else {
         GfxImage_ClearDepthRectangle(&gDisplayListHead, 0, 0, 0x140, 0xF0);
@@ -191,16 +191,16 @@ void Battle_DrawStageBackdrop(void) {
 }
 
 void Battle_RenderStageThumbnail(GraphNode* arg0, unk_D_80068BB0* arg1) {
-    unk_D_86002F34_00C* sp2C = arg0->children;
-    unk_D_86002F34_00C_018 sp20;
+    CameraNode* sp2C = arg0->children;
+    CameraViewport sp20;
 
     if (sp2C->node.flags & 0x10) {
-        sp20 = sp2C->unk_18;
+        sp20 = sp2C->viewport;
 
-        sp2C->unk_18.x = 0;
-        sp2C->unk_18.y = 0;
-        sp2C->unk_18.width = 0x4C;
-        sp2C->unk_18.height = 0x4C;
+        sp2C->viewport.x = 0;
+        sp2C->viewport.y = 0;
+        sp2C->viewport.width = 0x4C;
+        sp2C->viewport.height = 0x4C;
 
         GfxImage_SetRenderTarget(&gDisplayListHead, arg1);
         GfxImage_FillCurrent(&gDisplayListHead, 0x10D);
@@ -208,7 +208,7 @@ void Battle_RenderStageThumbnail(GraphNode* arg0, unk_D_80068BB0* arg1) {
 
         sp2C->node.flags &= ~0x10;
 
-        sp2C->unk_18 = sp20;
+        sp2C->viewport = sp20;
     }
 }
 
@@ -246,8 +246,8 @@ void Battle_DrawTexturedRectSegment(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8* 
 void Battle_DrawFaintOrderMarker(GraphNode* arg0, unk_D_80068BB0* arg1) {
     s32 temp_s2;
     s32 temp_s3;
-    unk_D_86002F34_00C* temp_v1 = arg0->children;
-    unk_D_86002F34_00C_018* ptr = &arg0->children->unk_18;
+    CameraNode* temp_v1 = arg0->children;
+    CameraViewport* ptr = &arg0->children->viewport;
     s32 img;
 
     temp_s2 = ptr->x;

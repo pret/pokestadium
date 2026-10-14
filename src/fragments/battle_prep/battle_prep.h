@@ -282,7 +282,7 @@ void BattlePrepRoster_Load(unk_D_84B25A28* arg0, BinArchive* arg1);
 void BattlePrepRoster_PositionIconsSingle(unk_D_84B25A28* arg0);
 void BattlePrepRoster_PositionIconsDouble(unk_D_84B25A28* arg0);
 s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, DisplayObject* arg1);
-void BattlePrepRoster_Init(unk_D_84B25A28* arg0, unk_D_86002F34_00C* arg1);
+void BattlePrepRoster_Init(unk_D_84B25A28* arg0, CameraNode* arg1);
 
 s32 BattlePrepTeamIcons_DrawActiveTeamBadge(s32 arg0, unk_func_80011B94* arg1);
 s32 BattlePrepTeamIcons_DrawIconSingle(s32 arg0, unk_func_80011B94* arg1);

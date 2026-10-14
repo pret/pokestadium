@@ -7,21 +7,21 @@
 #include "src/memory.h"
 #include "src/util.h"
 
-void BattleScene_IntroSetupCamera(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroSetupCamera(CameraNode* arg0) {
     BattleScene_ResetCameraFrameCounter();
     BattleScene_SetCameraClipPlanes(arg0, 20.0f, 12800.0f);
     BattleAnim_LoadModeResourceList(D_84390010[0]->unk_720, 3);
-    arg0->unk_24.fovy = 40.0f;
+    arg0->perspective.verticalFieldOfView = 40.0f;
     D_84390010[0]->unk_000.node.flags &= ~1;
     D_84390010[1]->unk_000.node.flags &= ~1;
-    Vec3f_SetComponentsDuplicate(&arg0->unk_60.at, 0.0f, 75.0f, 0.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_60.eye, -1.79f, 0.075f, 155.2f);
+    Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, 0.0f, 75.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, -1.79f, 0.075f, 155.2f);
     gBattleScene.unk_00->unk_54 = 1;
     BattleScene_StartBattleMusic();
     gBattleScene.unk_00->unk_20 += 1;
 }
 
-void BattleScene_IntroSendOutFirstMon(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroSendOutFirstMon(UNUSED CameraNode* arg0) {
     if ((BattleScene_AdvanceCameraFrameCounterUntil(0xA) != 0) && (BattleAnim_TryRegisterAssetTables(D_84390010[0]) != 0)) {
         D_84390010[0]->unk_000.node.flags &= ~1;
         D_84390010[1]->unk_000.node.flags &= ~1;
@@ -32,7 +32,7 @@ void BattleScene_IntroSendOutFirstMon(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroSendOutSecondMon(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroSendOutSecondMon(UNUSED CameraNode* arg0) {
     D_84390010[0]->unk_000.node.flags &= ~1;
     D_84390010[1]->unk_000.node.flags &= ~1;
     if (D_84390010[0]->unk_4EC.position.y == 0.0f) {
@@ -44,14 +44,14 @@ void BattleScene_IntroSendOutSecondMon(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroNarrowFov(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroNarrowFov(CameraNode* arg0) {
     Vec3f sp3C;
 
     D_84390010[0]->unk_000.node.flags &= ~1;
     D_84390010[1]->unk_000.node.flags &= ~1;
 
     if (D_84390010[1]->unk_4EC.position.y == 0.0f) {
-        arg0->unk_24.fovy = 30.0f;
+        arg0->perspective.verticalFieldOfView = 30.0f;
         BattleScene_SetParticipantModelFlags(D_84390010[0], 2, 0);
         BattleAnim_QueueEffectList3(0xB, D_84390010[0], D_84390010[0], 0xFF, 0xFF);
         Vec3f_SetComponentsDuplicate(&sp3C, -150.0f, 5.0f, 0.0f);
@@ -61,7 +61,7 @@ void BattleScene_IntroNarrowFov(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroPanCamera(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroPanCamera(CameraNode* arg0) {
     Vec3f sp2C;
 
     Vec3f_SetComponentsDuplicate(&sp2C, -150.0f, 5.0f, 0.0f);
@@ -78,7 +78,7 @@ void BattleScene_IntroPanCamera(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroWaitFirstMonAnim(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroWaitFirstMonAnim(UNUSED CameraNode* arg0) {
     D_84390010[0]->unk_000.node.flags &= ~1;
     D_84390010[1]->unk_000.node.flags &= ~1;
     if (ModelAnim_IsAnimationDone(&D_84390010[0]->unk_4EC) == 1) {
@@ -86,7 +86,7 @@ void BattleScene_IntroWaitFirstMonAnim(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroRevealFirstMon(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroRevealFirstMon(CameraNode* arg0) {
     BattlerState* sp2C = &D_84390010[0]->unk_654;
     TeamRoster* sp28 = D_84390010[0]->unk_720->unk_08[sp2C->unk_2C];
 
@@ -109,7 +109,7 @@ void BattleScene_IntroRevealFirstMon(unk_D_86002F34_00C* arg0) {
     gBattleScene.unk_00->unk_20 += 1;
 }
 
-void BattleScene_IntroFirstMonSettle(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroFirstMonSettle(CameraNode* arg0) {
     if (gBattleScene.unk_00->unk_10++ == 1) {
         BattleScene_SelectCameraFollowPreset(D_84390010[0], arg0, 3);
     }
@@ -124,7 +124,7 @@ void BattleScene_IntroFirstMonSettle(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroRevealSecondMon(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroRevealSecondMon(CameraNode* arg0) {
     BattlerState* sp2C = &D_84390010[1]->unk_654;
     TeamRoster* sp28 = D_84390010[1]->unk_720->unk_08[sp2C->unk_2C];
 
@@ -148,7 +148,7 @@ void BattleScene_IntroRevealSecondMon(unk_D_86002F34_00C* arg0) {
     gBattleScene.unk_00->unk_20 += 1;
 }
 
-void BattleScene_IntroSecondMonSettle(unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroSecondMonSettle(CameraNode* arg0) {
     if (gBattleScene.unk_00->unk_10++ == 1) {
         BattleScene_SelectCameraFollowPreset(D_84390010[1], arg0, 3);
     }
@@ -162,13 +162,13 @@ void BattleScene_IntroSecondMonSettle(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleScene_IntroStepNop(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleScene_IntroStepNop(UNUSED CameraNode* arg0) {
 }
 
 void BattleScene_IntroInitNop(void) {
 }
 
-void BattleScene_UpdateIntroSequence(unk_D_86002F34_00C* arg0) {
+void BattleScene_UpdateIntroSequence(CameraNode* arg0) {
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_IntroSetupCamera(arg0);

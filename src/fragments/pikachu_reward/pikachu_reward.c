@@ -507,14 +507,14 @@ void PikachuReward_ShowSuccessEnding(void) {
 
 void PikachuReward_PlayIntroCamera(void) {
     s32 i;
-    unk_D_86002F34_00C* temp_s1 = D_83202010->children;
+    CameraNode* temp_s1 = D_83202010->children;
 
     D_83202028->rotation.y = 0x1000;
 
     for (i = 0; i < 120; i++) {
         Controller_PollInputs();
-        temp_s1->unk_60.at.y = 0x320 - ((i * 0x1E0) / 120);
-        temp_s1->unk_60.eye.y = 0x320 - ((i * 0x1E0) / 120);
+        temp_s1->view.targetPosition.y = 0x320 - ((i * 0x1E0) / 120);
+        temp_s1->view.eyePosition.y = 0x320 - ((i * 0x1E0) / 120);
         D_83202028->rotation.y += 0x200;
         PikachuReward_RenderFrame(0);
         BgStage_AdvanceFrame();

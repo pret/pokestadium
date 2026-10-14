@@ -97,7 +97,7 @@ void BattleScene_TickOwnerCameraFraming(Battler* arg0) {
     BattleScene_ApplyOwnerCameraFraming(arg0);
 }
 
-void BattleScene_InitializeOwnerCameraFraming(unk_D_86002F34_00C* arg0, Battler* arg1, unk_D_86002F34_00C* arg2, Battler* arg3) {
+void BattleScene_InitializeOwnerCameraFraming(CameraNode* arg0, Battler* arg1, CameraNode* arg2, Battler* arg3) {
     arg1->unk_728.unk_168 = arg0;
     arg3->unk_728.unk_168 = arg2;
     BattleScene_SetupOwnerCameraFraming(arg1, arg3);
@@ -173,7 +173,7 @@ void BattleScene_TickBothOwnerSlideAnimations(Battler* arg0, Battler* arg1) {
     }
 }
 
-s32 BattleScene_DispatchOwnerCameraLifecycle(s32 arg0, unk_D_86002F34_00C* arg1, unk_D_86002F34_00C* arg2) {
+s32 BattleScene_DispatchOwnerCameraLifecycle(s32 arg0, CameraNode* arg1, CameraNode* arg2) {
     switch (arg0) {
         case 0:
             BattleScene_OwnerCameraLifecycleNop();

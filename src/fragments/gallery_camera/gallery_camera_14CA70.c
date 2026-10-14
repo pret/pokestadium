@@ -346,7 +346,7 @@ s32 GalleryCamera_BgAngleCallbackA(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = sp26 + 0x2000;
         ptr->unk_1E = sp24 - 0x2000;
     }
@@ -360,7 +360,7 @@ s32 GalleryCamera_BgAngleCallbackB(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = -0x2000 - sp26;
         ptr->unk_1E = sp24 + 0x6000;
     }
@@ -648,10 +648,10 @@ void Gallery_CapturePhoto(void) {
         Audio_PlaySoundEffectById(SFX_PHOTO_CAPTURE);
         D_8690B340 = 0xA;
         if (D_8690A70C != 1) {
-            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_50, D_87906054->unk_60.eye.x, D_87906054->unk_60.eye.y,
-                          D_87906054->unk_60.eye.z);
-            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_5C, D_87906054->unk_60.at.x, D_87906054->unk_60.at.y,
-                          D_87906054->unk_60.at.z);
+            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_50, D_87906054->view.eyePosition.x, D_87906054->view.eyePosition.y,
+                          D_87906054->view.eyePosition.z);
+            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_5C, D_87906054->view.targetPosition.x, D_87906054->view.targetPosition.y,
+                          D_87906054->view.targetPosition.z);
             D_83402EE0[D_8690B344].unk_6C = 0;
 
             D_83402EE0[D_8690B344].unk_6C = D_8690A710->unk_014 * 4;
