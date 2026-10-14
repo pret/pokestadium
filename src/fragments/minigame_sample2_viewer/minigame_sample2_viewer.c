@@ -103,7 +103,7 @@ void Minigame2SampleViewer_Init(void) {
 }
 
 s32 func_82900390(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MTWO');
 

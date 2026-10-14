@@ -1537,3 +1537,15 @@ D_812297C0 = 0x812297C0; // force_not_migration:True size:0x9E4
 D_8122A1A4 = 0x8122A1A4; // force_not_migration:True size:0xBC
 D_8122A260 = 0x8122A260; // force_not_migration:True size:0xA40
 D_8122ACA0 = 0x8122ACA0; // force_not_migration:True size:0xB0
+
+gRound2BadgeTexture = 0x020144E0; // type:u8
+
+gUiPanelTopLeftTexture = 0x02028A60; // type:u8
+
+gUiPanelTopRightTexture = 0x02028AA0; // type:u8
+
+gUiPanelBottomLeftTexture = 0x020289E0; // type:u8
+
+gUiPanelBottomRightTexture = 0x02028A20; // type:u8
+
+sAreaSelectGlowCircleTexture = 0x03044260; // type:u8

@@ -700,7 +700,7 @@ void SushiGame_LoadAssets(void) {
 }
 
 void SushiGame_Main(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     if (arg0 == 1) {
         D_8680753E = 1;

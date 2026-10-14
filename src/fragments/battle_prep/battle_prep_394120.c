@@ -79,18 +79,18 @@ void BattlePrep_MarkFirstClearBonus(void) {
 
     Save_GetOptions(&sp20);
 
-    if ((gSessionContext.mode == 3) && (gSessionContext.modeSelection == 3) && !(D_84B26670.unk_00 & 8)) {
+    if ((gSessionContext.mode == 3) && (gSessionContext.modeSelection == 3) && !(D_84B26670.clearedModes & 8)) {
         sp1C = 1;
     }
 
-    if ((gSessionContext.mode == 6) && (gSessionContext.modeSelection == 3) && !(D_84B26670.unk_00 & 0x40)) {
+    if ((gSessionContext.mode == 6) && (gSessionContext.modeSelection == 3) && !(D_84B26670.clearedModes & 0x40)) {
         sp1C = 1;
     }
 
-    if ((sp1C != 0) && (sp20.gbTowerSpeed < 2)) {
-        sp20.gbTowerSpeed++;
+    if ((sp1C != 0) && (sp20.gbTowerUnlockTier < 2)) {
+        sp20.gbTowerUnlockTier++;
         Save_SetOptions(&sp20);
-        if (sp20.gbTowerSpeed == 1) {
+        if (sp20.gbTowerUnlockTier == 1) {
             gSessionContext.transitionFlags |= 8;
         } else {
             gSessionContext.transitionFlags |= 0x10;
@@ -102,10 +102,10 @@ void BattlePrep_MarkCupCleared(void) {
     if (((gSessionContext.mode != 3) || (gSessionContext.modeSelection >= 3)) &&
         ((gSessionContext.mode != 6) || (gSessionContext.modeSelection >= 3)) &&
         ((gSessionContext.mode != 7) || (gSessionContext.modeSelection >= 9))) {
-        D_84B26670.unk_00 |= (1 << gSessionContext.mode);
-        if (D_84B26670.unk_00 == 0xF8) {
-            D_84B26670.fadeProgress = 1;
-            gSessionContext.sessionFlags |= 4;
+        D_84B26670.clearedModes |= (1 << gSessionContext.mode);
+        if (D_84B26670.clearedModes == 0xF8) {
+            D_84B26670.mewtwoUnlocked = 1;
+            gSessionContext.sessionFlags |= SESSION_FLAG_REVEAL_MEWTWO;
         }
         Save_SetModeSettings(&D_84B26670, gSessionContext.inRound2);
     }
@@ -113,17 +113,17 @@ void BattlePrep_MarkCupCleared(void) {
 
 void BattlePrep_MarkNewRoundRecord(void) {
     if (gSessionContext.mode == 7) {
-        if ((gSessionContext.modeSelection >= D_84B26670.unk_04) && (gSessionContext.modeSelection < 8)) {
-            D_84B26670.unk_04 = gSessionContext.modeSelection + 1;
+        if ((gSessionContext.modeSelection >= D_84B26670.castleClears) && (gSessionContext.modeSelection < 8)) {
+            D_84B26670.castleClears = gSessionContext.modeSelection + 1;
             gSessionContext.transitionFlags |= 0x400;
         }
     } else if (gSessionContext.mode == 3) {
-        if ((gSessionContext.modeSelection >= D_84B26670.unk_05) && (gSessionContext.modeSelection < 4)) {
-            D_84B26670.unk_05 = gSessionContext.modeSelection + 1;
+        if ((gSessionContext.modeSelection >= D_84B26670.nintendoCupClears) && (gSessionContext.modeSelection < 4)) {
+            D_84B26670.nintendoCupClears = gSessionContext.modeSelection + 1;
             gSessionContext.transitionFlags |= 0x400;
         }
-    } else if ((gSessionContext.mode == 6) && (gSessionContext.modeSelection >= D_84B26670.unk_06) && (gSessionContext.modeSelection < 4)) {
-        D_84B26670.unk_06 = gSessionContext.modeSelection + 1;
+    } else if ((gSessionContext.mode == 6) && (gSessionContext.modeSelection >= D_84B26670.primeCupClears) && (gSessionContext.modeSelection < 4)) {
+        D_84B26670.primeCupClears = gSessionContext.modeSelection + 1;
         gSessionContext.transitionFlags |= 0x400;
     }
     Save_SetModeSettings(&D_84B26670, gSessionContext.inRound2);
@@ -1026,7 +1026,7 @@ s32 BattlePrep_ConfirmMewtwoRules(void) {
 
     BattlePrep_RunNormalRoundIntro();
     if (gSessionContext.battleSides[0].unk_1C == 1) {
-        s32 tmp1 = !!(D_84B26670.unk_00 & 0x100);
+        s32 tmp1 = !!(D_84B26670.clearedModes & 0x100);
 
         if ((gSessionContext.inRound2 == 0) & !tmp1) {
             Save_GetOptionsField02(&sp2A);
@@ -1212,7 +1212,7 @@ void BattlePrep_InitScene(void) {
 }
 
 s32 BattlePrep_RunRulesScreen(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp2C;
+    StageContext* sp2C;
 
     main_pool_push_state('EYEC');
     Save_EnsureBankLoaded(2);

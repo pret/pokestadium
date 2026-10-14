@@ -115,7 +115,7 @@ void RentalRules_LoadBackgroundArchive(void) {
         if (gSessionContext.mode == 7) {
             Save_EnsureBankLoaded(2);
             Save_GetModeSettings(&sp20, gSessionContext.inRound2);
-            if (sp20.unk_04 < 8) {
+            if (sp20.castleClears < 8) {
                 D_83003C8C = BinArchive_GetFile(D_83003C88, 0xD);
             } else {
                 D_83003C8C = BinArchive_GetFile(D_83003C88, 0x10);

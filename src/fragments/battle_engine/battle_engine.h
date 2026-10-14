@@ -1062,7 +1062,7 @@ s32 Battle_FrameCallback(s32 arg0);
 void func_8430123C(u8* arg0, s32 arg1);
 void func_8430128C(void);
 void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* arg0, unk_D_86002F30* arg1);
-void func_84301430(unk_func_80007444* arg0);
+void func_84301430(StageContext* arg0);
 void func_84301A24(void);
 s32 Battle_Main(s32 arg0, SessionContext* arg1);
 

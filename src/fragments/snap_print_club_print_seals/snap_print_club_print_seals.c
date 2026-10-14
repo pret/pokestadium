@@ -13,7 +13,7 @@
 static BinArchive* D_8FA00A20;
 static u8* D_8FA00A24;
 static BinArchive* D_8FA00A28;
-static unk_func_80007444* D_8FA00A2C;
+static StageContext* D_8FA00A2C;
 
 static u8 D_8FA009F0[] = {
     0x00, 0x11, 0x01, 0x02, 0x04, 0x06, 0x03, 0x0A, 0x0B, 0x07, 0x08, 0x09, 0x0C, 0x10, 0x0F, 0x14,
@@ -70,7 +70,7 @@ s32 Snap_PrintClubIsBackgroundMode(void) {
 s32 Snap_PrintClubPrintSeals(s32 arg0, s32 arg1) {
     s32 i;
     ModelLoadContext* temp_s0;
-    unk_func_80007444* temp_v0;
+    StageContext* temp_v0;
     unk_D_83403C60* sp60 = (D_83407AE4 != 0) ? D_83407AC0 : D_83407ABC;
     u8 sp50[] = {
         0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x02, 0x02, 0x03, 0x03,
@@ -104,7 +104,7 @@ s32 Snap_PrintClubPrintSeals(s32 arg0, s32 arg1) {
         D_8FA00A28 = ASSET_LOAD2(stadium_models, 1, 1);
         temp_s0 = PokeIcon_AllocFramebuffers(5);
         Gallery_ClearPhotoRenderTarget();
-        D_8FA00A00 = Geo_CreateSceneInstance(0x280, 0x1E0, D_8FA00A2C->unk_18[0], NULL, temp_s0, D_8FA00A28, sp60);
+        D_8FA00A00 = Geo_CreateSceneInstance(0x280, 0x1E0, D_8FA00A2C->images[0], NULL, temp_s0, D_8FA00A28, sp60);
     }
 
     StageContext_Activate(temp_v0);

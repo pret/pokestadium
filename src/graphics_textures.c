@@ -291,15 +291,15 @@ void Gfx_SetVertexAttributes(Vtx* vertex, s16 x, s16 y, s16 z, s16 texture_x, s1
     vertex->v.cn[3] = alpha;
 }
 
-void Gfx_SetViewportDimensions(Vp* arg0, s16 arg1, s16 arg2) {
-    arg0->vp.vtrans[0] = arg1 * 2;
-    arg0->vp.vtrans[1] = arg2 * 2;
-    arg0->vp.vtrans[2] = 0x1FF;
-    arg0->vp.vtrans[3] = 0;
-    arg0->vp.vscale[0] = arg1 * 2;
-    arg0->vp.vscale[1] = arg2 * 2;
-    arg0->vp.vscale[2] = 0x1FF;
-    arg0->vp.vscale[3] = 0;
+void Gfx_SetViewportDimensions(Vp* viewport, s16 width, s16 height) {
+    viewport->vp.vtrans[0] = width * 2;
+    viewport->vp.vtrans[1] = height * 2;
+    viewport->vp.vtrans[2] = 0x1FF;
+    viewport->vp.vtrans[3] = 0;
+    viewport->vp.vscale[0] = width * 2;
+    viewport->vp.vscale[1] = height * 2;
+    viewport->vp.vscale[2] = 0x1FF;
+    viewport->vp.vscale[3] = 0;
 }
 
 u8 Font_MapGlyphCode(u16 arg0) {

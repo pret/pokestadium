@@ -490,7 +490,7 @@ void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* arg0, unk
     Trainer_RequestPokeIcon(arg0);
 }
 
-void func_84301430(unk_func_80007444* arg0) {
+void func_84301430(StageContext* arg0) {
     MemoryBlock* sp44;
     u32* temp_v0_4;
     FragmentEntry sp3C;
@@ -516,7 +516,7 @@ void func_84301430(unk_func_80007444* arg0) {
     PokeIcon_OpenModelArchives();
 
     sp2C = main_pool_alloc(0x10, 0);
-    GfxImage_Initialize(sp2C, 0, 2, 0x4C, 0x4C, arg0->unk_18[0]->depth_p->img_p);
+    GfxImage_Initialize(sp2C, 0, 2, 0x4C, 0x4C, arg0->images[0]->depth_p->img_p);
     D_8438E790 = GfxImage_Allocate(0, 2, 0x4C, 0x4C, 0);
     D_8438E794 = GfxImage_Allocate(0, 2, 0x4C, 0x4C, 0);
 
@@ -611,7 +611,7 @@ void func_84301A24(void) {
 }
 
 s32 Battle_Main(s32 arg0, SessionContext* arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     D_8438E798 = gSessionContext.battleSides;
     D_8438E7AC = -2;

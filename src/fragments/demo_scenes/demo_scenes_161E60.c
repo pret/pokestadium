@@ -1634,7 +1634,7 @@ void Completion_InitScene(void) {
 }
 
 s32 Stage_ShowCompletionScene(void) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('DEMO');
 

@@ -1254,7 +1254,7 @@ void BattleMenu_InitOrderSelectPanels(SessionContext* arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/fragments/battle_order_select/battle_order_select/BattleMenu_RunOrderSelectScreen.s")
 #else
 s32 BattleMenu_RunOrderSelectScreen(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MSEL');
 

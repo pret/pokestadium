@@ -132,6 +132,7 @@ typedef struct SessionContext {
 #define RULE_CATEGORY_PRIME_CUP 6
 #define RULE_CATEGORY_GYM_LEADER_CASTLE 7
 #define RULE_CATEGORY_VS_MEWTWO 8
+#define SESSION_FLAG_REVEAL_MEWTWO 0x04
 
 
 

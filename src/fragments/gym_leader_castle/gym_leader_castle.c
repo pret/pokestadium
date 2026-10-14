@@ -725,7 +725,7 @@ s32 Glc_ShowIntro(void) {
         }
         Glc_ClearTrainerPanels();
 
-        if (D_84A03180.unk_04 < 8) {
+        if (D_84A03180.castleClears < 8) {
             Audio_PlayMusicIfChanged(0x2A);
         } else {
             Audio_PlayMusicIfChanged(0x27);
@@ -767,10 +767,10 @@ s32 Glc_AdvanceRoom(void) {
     if (gSessionContext.modeSelection == 8) {
         castle_map_nodes[11].node_state = 0x3C;
     } else {
-        castle_map_nodes[D_84A03180.unk_04].node_state = 0x3C;
+        castle_map_nodes[D_84A03180.castleClears].node_state = 0x3C;
     }
 
-    if (D_84A03180.unk_04 == 8) {
+    if (D_84A03180.castleClears == 8) {
         castle_map_nodes[9].node_state = 0x3C;
         castle_map_nodes[10].node_state = 0x3C;
     }
@@ -826,7 +826,7 @@ s16 Glc_RunMenu(s16 action) {
 s16 Glc_InitMenu(s16 arg0) {
     s16 i;
     s16 sp2C = 2;
-    s16 var_v1 = D_84A03180.unk_04;
+    s16 var_v1 = D_84A03180.castleClears;
 
     if (gSessionContext.modeSelection < 8) {
         selected_map_node = gSessionContext.modeSelection;
@@ -891,7 +891,7 @@ s32 GymLeaderCastle_Main(s32 arg0, UNUSED s32 arg1) {
     StageLoader_UpdateSegments();
 
     sp1E = Glc_InitMenu(arg0);
-    if (D_84A03180.unk_04 < 8) {
+    if (D_84A03180.castleClears < 8) {
         Audio_PlayMusicIfChanged(0x2A);
     } else {
         Audio_PlayMusicIfChanged(0x27);

@@ -635,7 +635,7 @@ void Glc_ClearInitGraphics(void) {
 }
 
 s32 GymLeaderCastleClear_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* stage_context;
+    StageContext* stage_context;
 
     main_pool_push_state('CLRG');
 
