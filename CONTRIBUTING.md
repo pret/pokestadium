@@ -109,6 +109,8 @@ Reference other files with `//@{path}`
 ## Numbers
 Use Hex only for:
 - One off Powers of 2
+- One off (power of 2 - 1) (`0xFF` and such)
+- Colors
 - Addresses
 - Masks
 
