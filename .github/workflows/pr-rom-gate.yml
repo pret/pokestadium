@@ -33,13 +33,17 @@ jobs:
     # workflow ever pushes to. Its content is always deterministically
     # regenerated from master's own already-trusted source, never from
     # PR-supplied input.
+    # Draft PRs are skipped; marking one ready runs the gate (ready_for_review).
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.pull_request.author_association) ||
+      (github.event_name != 'pull_request' || github.event.pull_request.draft == false) &&
       (
-        github.event.pull_request.user.login == 'pokestadium-public-ci[bot]' &&
-        github.event.pull_request.head.repo.full_name == github.repository &&
-        github.event.pull_request.head.ref == 'ci/refresh-coverage'
+        github.event_name == 'workflow_dispatch' ||
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.pull_request.author_association) ||
+        (
+          github.event.pull_request.user.login == 'pokestadium-public-ci[bot]' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          github.event.pull_request.head.ref == 'ci/refresh-coverage'
+        )
       )
     # This label is intentionally different from the private repository's
     # Stadium 1 label. Register it only on a dedicated, credential-free Mac
