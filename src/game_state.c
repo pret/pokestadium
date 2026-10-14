@@ -667,7 +667,7 @@ void State_RunCredits(void) {
     FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
     FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         FRAGMENT_LOAD_AND_CALL(FRAGMENT_CREDITS, 0, 0);
     } else {
         FRAGMENT_LOAD_AND_CALL(FRAGMENT_CREDITS, 0, 1);
@@ -1331,7 +1331,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
 
     main_pool_push_state('GAME');
 
-    gSessionContext.unk_11F2 = 0;
+    gSessionContext.inRound2 = 0;
 
     // is this game connected to a Sticker Station?
     if (Controller_CheckAccessoryEeprom() != 0) {

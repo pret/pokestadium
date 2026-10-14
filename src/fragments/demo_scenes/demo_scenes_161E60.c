@@ -1601,7 +1601,7 @@ void Completion_FadeOutAndSave(void) {
             Save_SetSelectedPokemonId(D_86B0EBDC->unk_2EC, 1);
             Save_SetOptionsField1F(1);
         } else {
-            Save_SetSelectedPokemonId(D_86B0EBDC->unk_2EC, gSessionContext.unk_11F2);
+            Save_SetSelectedPokemonId(D_86B0EBDC->unk_2EC, gSessionContext.inRound2);
         }
         Save_CommitTypedRecord(0x14, 0);
         Save_FlushBank(2);

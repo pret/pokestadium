@@ -727,7 +727,7 @@ s32 Gallery_HandleBackgroundSwitchInput(void) {
     }
 
     D_8690B38C = 0xF;
-    if (D_8690B378.unk_07 == 0) {
+    if (D_8690B378.fadeProgress == 0) {
         if (D_8690B378.unk_04 == 8) {
             D_8690B38C--;
         } else if (D_8690B378.unk_04 == 7) {

@@ -515,7 +515,7 @@ void Glc_Draw(void) {
         glc_to_e4_transition = 0xFF;
     }
 
-    if (gSessionContext.unk_11F2 == 1) {
+    if (gSessionContext.inRound2 == 1) {
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(0x22C, 0x28, 0x24, 0x24, D_3019C38, 0x24, 0);
@@ -623,7 +623,7 @@ void Glc_LoadTrainerPanels(void) {
         trainer_file_index = selected_map_node + 10;
     }
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         trainer_file_index += 0x1F;
     }
 
@@ -881,7 +881,7 @@ s32 GymLeaderCastle_Main(s32 arg0, UNUSED s32 arg1) {
     glc_text_ui = Text_GetStringTable(0x19);
     glc_text_trainer_names = Text_GetStringTable(0x22);
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_84A03180, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&D_84A03180, gSessionContext.inRound2);
     trainer_data_archive = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 1);
     portrait_archive = ASSET_LOAD2(battle_portraits, 1, 1);
     background_archive  = ASSET_LOAD2(backgrounds, 1, 1);

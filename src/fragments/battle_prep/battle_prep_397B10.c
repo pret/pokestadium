@@ -1184,7 +1184,7 @@ void BattlePrep_LoadBannerGeoLayouts(unk_D_84B259A8* arg0) {
     arg0->unk_24 = process_geo_layout(temp_v0, D_84B10378);
     arg0->unk_38 = process_geo_layout(temp_v0, D_84B10E78);
     arg0->unk_34 = process_geo_layout(temp_v0, D_84B109F0);
-    if (gSessionContext.unk_11F2 == 0) {
+    if (gSessionContext.inRound2 == 0) {
         arg0->unk_28 = process_geo_layout(temp_v0, D_84B10568);
         arg0->unk_2C = process_geo_layout(temp_v0, D_84B105A8);
     } else {
@@ -1626,7 +1626,7 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
             break;
     }
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         sp44 += 0x1F;
     }
 

@@ -295,7 +295,7 @@ void Options_EraseSaveData(void) {
     Save_ResetAndCommitTypedRecord(0x16, 0);
     Save_ResetAndCommitTypedRecord(0x17, 0);
     Save_FlushDirtyBanks();
-    gSessionContext.unk_11F2 = 0;
+    gSessionContext.inRound2 = 0;
     Audio_SetMonoOutput(0);
     Audio_SetVoiceEnabled(1);
     D_82C01666 = 0;

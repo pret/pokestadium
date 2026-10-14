@@ -251,7 +251,7 @@ s32 RentalHub_MenuMain(void) {
     main_pool_push_state('menu');
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&sp1C, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&sp1C, gSessionContext.inRound2);
     Font_Init(0x10, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);

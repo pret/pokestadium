@@ -114,7 +114,7 @@ void RentalRules_LoadBackgroundArchive(void) {
         D_83003C88 = BinArchive_Open(backgrounds_ROM_START, battle_headers_ROM_START, 1, 1);
         if (gSessionContext.mode == 7) {
             Save_EnsureBankLoaded(2);
-            Save_GetModeSettings(&sp20, gSessionContext.unk_11F2);
+            Save_GetModeSettings(&sp20, gSessionContext.inRound2);
             if (sp20.unk_04 < 8) {
                 D_83003C8C = BinArchive_GetFile(D_83003C88, 0xD);
             } else {
@@ -742,7 +742,7 @@ void RentalRules_Init(void) {
     D_83003C98 = RentalRules_GetModeLabel(gSessionContext.mode);
     D_83003C9C = RentalRules_GetCategoryLabel(gSessionContext.ruleCategory);
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         D_83003C84 |= 1;
     }
 

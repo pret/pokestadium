@@ -750,7 +750,7 @@ void StadiumSelect_DrawCupInfoPanel(s16 arg0) {
         Font_Printf(0x48, 0x182, Text_GetString(NULL, 0, D_84103440, D_84103CC8 + 6));
         Font_EndTexturedTextRendering();
 
-        if (gSessionContext.unk_11F2 == 1) {
+        if (gSessionContext.inRound2 == 1) {
             temp_v0 = Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_84103440, D_84103CC8));
 
             gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
@@ -1017,7 +1017,7 @@ s32 StadiumSelect_Main(s32 arg0, s32 arg1) {
     main_pool_push_state('PSSL');
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_84103CF0, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&D_84103CF0, gSessionContext.inRound2);
     Font_Init(0x18, 0);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);
