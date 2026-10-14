@@ -4,22 +4,22 @@
 #include "global.h"
 
 s32 AreaSelect_CheckCartRemoved(s32 arg0);
-void AreaSelect_DrawCrossfadeBackground(u8* arg0, u8* arg1, u8 arg2);
+void AreaSelect_DrawCrossfadeBackground(u8* fade_out_texture, u8* fade_in_texture, u8 alpha);
 Vtx* AreaSelect_BuildGlowQuadVerts(void);
 void AreaSelect_DrawCursorGlow(void);
 void AreaSelect_AdvanceMagnemiteTrail(void);
 void AreaSelect_InitMagnemiteTrail(s32 arg0);
-Vtx* AreaSelect_BuildMagnemiteQuadVerts(s16 arg0, s16 arg1, s16 arg2, Color_RGBA8 arg3);
-void AreaSelect_DrawMagnemiteQuad(s16 arg0, s16 arg1, s16 arg2, u8* arg3, Color_RGBA8 arg4);
-void AreaSelect_DrawMagnemiteTrail(u8* arg0);
+Vtx* AreaSelect_BuildMagnemiteQuadVerts(s16 x, s16 y, s16 offset, Color_RGBA8 color);
+void AreaSelect_DrawMagnemiteQuad(s16 x, s16 y, s16 offset, u8* sprite, Color_RGBA8 color);
+void AreaSelect_DrawMagnemiteTrail(u8* sprite);
 void AreaSelect_UpdateMagnemites(void);
-void AreaSelect_DrawNameBanner(s16 arg0, s16 arg1, s16 arg2, s16 arg3);
+void AreaSelect_DrawNameBanner(s16 x, s16 y, s16 alpha, s16 area);
 void func_822014C0(void);
-void AreaSelect_DrawNameBannerCrossfade(s16 arg0, s16 arg1, s16 arg2);
-void AreaSelect_DrawPulsingMarker(s16 arg0, s16 arg1);
-void AreaSelect_DrawGlowCircle(s16 arg0, s16 arg1, s16 arg2);
-void AreaSelect_DrawInfoPanel(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
-void AreaSelect_DrawAreaInfoBox(s32 arg0);
+void AreaSelect_DrawNameBannerCrossfade(s16 area, s16 x, s16 y);
+void AreaSelect_DrawPulsingMarker(s16 x, s16 y);
+void AreaSelect_DrawGlowCircle(s16 x, s16 y, s16 diameter);
+void AreaSelect_DrawInfoPanel(s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 alpha);
+void AreaSelect_DrawAreaInfoBox(s32 draw_text);
 void AreaSelect_PollInput(void);
 s32 AreaSelect_HandleInput(void);
 s16 AreaSelect_CursorMoveAnim(void);

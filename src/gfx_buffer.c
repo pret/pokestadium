@@ -44,12 +44,12 @@ void Gfx_GetDisplayListRange(Gfx** arg0, Gfx** arg1) {
     *arg0 = (Gfx*)(ptr[D_800A7428.unk10]);
 }
 
-void* Gfx_AllocDisplayList(s32 arg0) {
+void* Gfx_AllocDisplayList(s32 size) {
     u32 temp_v0;
     u32 ret;
 
-    arg0 = ALIGN8(arg0);
-    temp_v0 = (D_800A7428.unk8 - arg0);
+    size = ALIGN8(size);
+    temp_v0 = (D_800A7428.unk8 - size);
     ret = NULL;
     if (temp_v0 >= (uintptr_t)gDisplayListHead) {
         D_800A7428.unk8 = temp_v0;

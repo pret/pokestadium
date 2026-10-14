@@ -6,7 +6,7 @@
 #include "game_state.h"
 
 typedef struct GameOptions {
-    /* 0x00 */ s16 unk_00;
+    /* 0x00 */ s16 gbTowerSpeed;
     /* 0x04 */ struct GameOptions* unk_04;
 } GameOptions; // size = 0x8
 
@@ -16,7 +16,7 @@ typedef struct ModeSettings {
     /* 0x04 */ u8 unk_04;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 unk_07;
+    /* 0x07 */ u8 fadeProgress;
 } ModeSettings; // size = 0x8
 
 typedef struct SessionContinueData {
