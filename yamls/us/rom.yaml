@@ -1408,7 +1408,7 @@
     vram: 0x81000000
     subsegments:
     - [0x2552C0, textbin,   fragments/particle_data_library/particle_data_library_header]
-    - [0x2552E0, hasm,       fragments/31/fragment31_unk_table]
+    - [0x2552E0, textbin,    fragments/31/fragment31_unk_table] # what is this?
     - [0x2554C0, c,      fragments/particle_data_library/particle_data_library_2554C0]
     - [0x2557A0, c,      fragments/particle_data_library/particle_data_library_2557A0]
     - [0x2558B0, c,      fragments/particle_data_library/particle_data_library_2558B0]
