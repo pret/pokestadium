@@ -15,6 +15,12 @@ on:
         description: Same-repository branch or SHA when no PR number is supplied
         required: false
         default: master
+      regions:
+        description: >-
+          Space-separated ROM versions to build (e.g. "jp eu"), or "all".
+          Empty = the versions the PR/ref actually affects (US for a bare ref).
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -49,7 +55,7 @@ jobs:
     # Stadium 1 label. Register it only on a dedicated, credential-free Mac
     # runner after the public baseline image has been built.
     runs-on: [self-hosted, macOS, ARM64, pokestadium-decomp-public]
-    timeout-minutes: 30
+    timeout-minutes: 150
     steps:
       - name: Mask self-hosted runner paths
         shell: bash
@@ -91,9 +97,34 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Select the affected ROM versions
+        id: regions
+        if: steps.coverage-only.outputs.skip != 'true'
+        shell: bash
+        env:
+          INPUT_REGIONS: ${{ inputs.regions }}
+        run: |
+          set -euo pipefail
+          if [ "$INPUT_REGIONS" = "all" ]; then
+            regions="$(python3 ci/affected_versions.py <<< "Makefile" | tr '\n' ' ')"
+          elif [ -n "$INPUT_REGIONS" ]; then
+            regions="$INPUT_REGIONS"
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            regions="$(git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | python3 ci/affected_versions.py | tr '\n' ' ')"
+          else
+            regions="us"
+          fi
+          echo "regions=${regions}" >> "$GITHUB_OUTPUT"
+          echo "pr-rom-gate: versions to build: ${regions:-none}" >&2
+
       - name: Build and compare against the retail checksum
         if: steps.coverage-only.outputs.skip != 'true'
         shell: bash
+        env:
+          GATE_REGIONS: ${{ steps.regions.outputs.regions }}
+          GATE_REQUIRE_ALL_REGIONS: ${{ vars.GATE_REQUIRE_ALL_REGIONS || '0' }}
+          POKESTADIUM_BASEROM_DIR: ${{ vars.POKESTADIUM_BASEROM_DIR }}
+          POKESTADIUM_REGION_CACHE_DIR: ${{ vars.POKESTADIUM_REGION_CACHE_DIR }}
         run: bash ci/gate-pr.sh "$GITHUB_WORKSPACE" "$RUNNER_TEMP/pokestadium-gate-out"
 
       - name: Upload gate and proposed coverage
