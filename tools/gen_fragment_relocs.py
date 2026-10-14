@@ -32,6 +32,7 @@ usage:
       regenerates every REGEN_SAFE fragment's table in assets/ and deletes its stale object;
       exit 3 when anything changed (relink needed), 0 when all tables are current.
 """
+from __future__ import annotations
 
 import functools
 import os
