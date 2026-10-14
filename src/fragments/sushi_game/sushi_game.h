@@ -163,7 +163,6 @@ s32 func_86801884(void);
 void SushiGame_MainLoop(void);
 void SushiGame_LoadAssets(void);
 void SushiGame_Main(s32 arg0, UNUSED s32 arg1);
-void SushiGame_NameTagGeoCallback(s32 arg0, UNUSED s32 arg1);
 
 
 void SushiGame_BroadcastPlayerPhase(u16, s32);
