@@ -14,6 +14,7 @@
 #include "src/memory.h"
 #include "src/stage_loader.h"
 #include "src/math_util.h"
+#include "variables.h"
 
 typedef struct AreaSelectEntryConfig {
     /* 0x00 */ s16 unk_00;
@@ -27,9 +28,9 @@ typedef struct AreaSelectEntryConfig {
 } AreaSelectEntryConfig; // size = 0xE
 
 typedef struct AreaSelectMagnemitePoint {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
+    /* 0x00 */ s16 x;
+    /* 0x02 */ s16 y;
+    /* 0x04 */ s16 offset;
 } AreaSelectMagnemitePoint; // size = 0x6
 
 typedef struct AreaSelectMagnemiteTrail {
@@ -39,7 +40,7 @@ typedef struct AreaSelectMagnemiteTrail {
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ AreaSelectMagnemitePoint unk_0C[4];
+    /* 0x0C */ AreaSelectMagnemitePoint afterimages[4];
 } AreaSelectMagnemiteTrail; // size = 0x24
 
 typedef struct AreaSelectCursorGlow {
@@ -63,6 +64,15 @@ static u8* sAreaSelectNameBannerTextures[] = {
     0x03006E60, 0x0300D060, 0x03013260, 0x03019460, 0x0301F660,
     0x03025860, 0x0302BA60, 0x03031C60, 0x03037E60, 0x0303E060,
 };
+
+#define AREA_FREE_BATTLE 1
+#define AREA_GYM_LEADER_CASTLE 2
+#define AREA_VS_MEWTWO 3
+#define AREA_MINIGAMES 4
+#define AREA_HALL_OF_FAME 5
+#define AREA_OAKS_LAB 6
+#define AREA_GB_TOWER 7
+#define AREA_STADIUM 8
 
 static AreaSelectEntryConfig sAreaSelectEntryConfigs[9] = {
     // unused?
@@ -231,6 +241,9 @@ void AreaSelect_DrawCursorGlow(void) {
     }
 }
 
+/*
+    Loops the Magnemite icons around in a circle
+*/
 void AreaSelect_AdvanceMagnemiteTrail(void) {
     s32 i;
     s32 j;
@@ -239,14 +252,14 @@ void AreaSelect_AdvanceMagnemiteTrail(void) {
 
     for (i = 0; i < 3; i++) {
         for (j = 4; j >= 0; j--) {
-            sAreaSelectMagnemiteTrails[i].unk_0C[j + 1] = sAreaSelectMagnemiteTrails[i].unk_0C[j];
+            sAreaSelectMagnemiteTrails[i].afterimages[j + 1] = sAreaSelectMagnemiteTrails[i].afterimages[j];
         }
 
         temp_fv0 = (sAreaSelectMagnemiteTrails[0].unk_06 * sAreaSelectMagnemiteTrails[0].unk_04) / 100;
 
-        sAreaSelectMagnemiteTrails[i].unk_0C[0].unk_00 = sAreaSelectMagnemiteTrails[0].unk_00 + (COSS((var_v0)) * temp_fv0);
-        sAreaSelectMagnemiteTrails[i].unk_0C[0].unk_02 = sAreaSelectMagnemiteTrails[0].unk_02 + (SINS((var_v0)) * temp_fv0);
-        sAreaSelectMagnemiteTrails[i].unk_0C[0].unk_04 = (sAreaSelectMagnemiteTrails[0].unk_06 * 0x48) / 100;
+        sAreaSelectMagnemiteTrails[i].afterimages[0].x = sAreaSelectMagnemiteTrails[0].unk_00 + (COSS((var_v0)) * temp_fv0);
+        sAreaSelectMagnemiteTrails[i].afterimages[0].y = sAreaSelectMagnemiteTrails[0].unk_02 + (SINS((var_v0)) * temp_fv0);
+        sAreaSelectMagnemiteTrails[i].afterimages[0].offset = (sAreaSelectMagnemiteTrails[0].unk_06 * 0x48) / 100;
 
         var_v0 -= 0x5555;
     }
@@ -268,28 +281,28 @@ void AreaSelect_InitMagnemiteTrail(s32 arg0) {
     }
 }
 
-Vtx* AreaSelect_BuildMagnemiteQuadVerts(s16 arg0, s16 arg1, s16 arg2, Color_RGBA8 arg3) {
-    s16 sp44;
-    Vtx* temp_v0;
+Vtx* AreaSelect_BuildMagnemiteQuadVerts(s16 x, s16 y, s16 offset, Color_RGBA8 color) {
+    s16 scaled_offset;
+    Vtx* display_address;
 
-    temp_v0 = Gfx_AllocDisplayList(sizeof(Vtx) * 8);
-    if (temp_v0 != NULL) {
-        sp44 = arg2 / 2;
+    display_address = Gfx_AllocDisplayList(sizeof(Vtx) * 8);
+    if (display_address != NULL) {
+        scaled_offset = offset / 2;
 
-        Gfx_SetVertexAttributes(&temp_v0[0], arg0 - sp44, arg1 - sp44, -1, 0, 0, arg3.r, arg3.g, arg3.b, arg3.a);
-        Gfx_SetVertexAttributes(&temp_v0[1], arg0 - sp44, arg1 + sp44, -1, 0, 0x480, arg3.r, arg3.g, arg3.b, arg3.a);
-        Gfx_SetVertexAttributes(&temp_v0[2], arg0 + sp44, arg1 + sp44, -1, 0x480, 0x480, arg3.r, arg3.g, arg3.b, arg3.a);
-        Gfx_SetVertexAttributes(&temp_v0[3], arg0 + sp44, arg1 - sp44, -1, 0x480, 0, arg3.r, arg3.g, arg3.b, arg3.a);
+        Gfx_SetVertexAttributes(&display_address[0], x - scaled_offset, y - scaled_offset, -1, 0, 0, color.r, color.g, color.b, color.a);
+        Gfx_SetVertexAttributes(&display_address[1], x - scaled_offset, y + scaled_offset, -1, 0, 1152, color.r, color.g, color.b, color.a);
+        Gfx_SetVertexAttributes(&display_address[2], x + scaled_offset, y + scaled_offset, -1, 1152, 1152, color.r, color.g, color.b, color.a);
+        Gfx_SetVertexAttributes(&display_address[3], x + scaled_offset, y - scaled_offset, -1, 1152, 0, color.r, color.g, color.b, color.a);
     }
 
-    return temp_v0;
+    return display_address;
 }
 
-void AreaSelect_DrawMagnemiteQuad(s16 arg0, s16 arg1, s16 arg2, u8* arg3, Color_RGBA8 arg4) {
-    Vtx* temp_v0 = AreaSelect_BuildMagnemiteQuadVerts(arg0, arg1, arg2, arg4);
+void AreaSelect_DrawMagnemiteQuad(s16 x, s16 y, s16 offset, u8* sprite, Color_RGBA8 color) {
+    Vtx* temp_v0 = AreaSelect_BuildMagnemiteQuadVerts(x, y, offset, color);
 
     if (temp_v0 != NULL) {
-        gDPLoadTextureBlock(gDisplayListHead++, arg3, G_IM_FMT_RGBA, G_IM_SIZ_16b, 36, 36, 0,
+        gDPLoadTextureBlock(gDisplayListHead++, sprite, G_IM_FMT_RGBA, G_IM_SIZ_16b, 36, 36, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
         gSPVertex(gDisplayListHead++, (u32)temp_v0 & 0x1FFFFFFF, 4, 0);
@@ -297,34 +310,34 @@ void AreaSelect_DrawMagnemiteQuad(s16 arg0, s16 arg1, s16 arg2, u8* arg3, Color_
     }
 }
 
-void AreaSelect_DrawMagnemiteTrail(u8* arg0) {
-    Color_RGBA8 sp5C;
+void AreaSelect_DrawMagnemiteTrail(u8* sprite) {
+    Color_RGBA8 color;
     s16 i;
     s16 j;
-    s16 temp_s1;
-    s16 temp_s3;
-    s16 temp_s4;
+    s16 offset;
+    s16 x;
+    s16 y;
 
     for (i = 5; i >= 0; i--) {
         for (j = 0; j < 3; j++) {
-            temp_s1 = sAreaSelectMagnemiteTrails[j].unk_0C[i].unk_04;
-            temp_s3 = sAreaSelectMagnemiteTrails[j].unk_0C[i].unk_00;
-            temp_s4 = sAreaSelectMagnemiteTrails[j].unk_0C[i].unk_02;
+            offset = sAreaSelectMagnemiteTrails[j].afterimages[i].offset;
+            x = sAreaSelectMagnemiteTrails[j].afterimages[i].x;
+            y = sAreaSelectMagnemiteTrails[j].afterimages[i].y;
 
-            if (temp_s1 != 0) {
+            if (offset != 0) {
                 if (i == 0) {
-                    Color_SetRGBA(&sp5C, 0xFF, 0xFF, 0xFF, 0xFF);
+                    Color_SetRGBA(&color, 0xFF, 0xFF, 0xFF, 0xFF);
                 } else {
-                    Color_SetRGBA(&sp5C, 0xFF, 0xFF, 0x64, 0xA0 - (i * 30));
+                    Color_SetRGBA(&color, 0xFF, 0xFF, 0x64, 0xA0 - (i * 0x1E));
                 }
-                AreaSelect_DrawMagnemiteQuad(temp_s3, temp_s4, temp_s1, arg0, sp5C);
+                AreaSelect_DrawMagnemiteQuad(x, y, offset, sprite, color);
             }
         }
     }
 }
 
 void AreaSelect_UpdateMagnemites(void) {
-    if (sAreaSelectSelectedIndex != 8) {
+    if (sAreaSelectSelectedIndex != AREA_STADIUM) {
         AreaSelect_AdvanceMagnemiteTrail();
 
         gDPPipeSync(gDisplayListHead++);
@@ -346,25 +359,25 @@ void AreaSelect_UpdateMagnemites(void) {
     }
 }
 
-void AreaSelect_DrawNameBanner(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
+void AreaSelect_DrawNameBanner(s16 x, s16 y, s16 alpha, s16 area) {
     s32 i;
-    u8* var_s2;
+    u8* area_name_banner_texture;
 
-    if (arg3 != 8) {
-        if (arg3 == 7) {
-            arg3 += sAreaSelectGameOptions.unk_00;
+    if (area != AREA_STADIUM) {
+        if (area == AREA_GB_TOWER) {
+            area += sAreaSelectGameOptions.gbTowerSpeed;
         }
-        var_s2 = sAreaSelectNameBannerTextures[arg3];
+        area_name_banner_texture = sAreaSelectNameBannerTextures[area];
 
         gSPDisplayList(gDisplayListHead++, D_8006F518);
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, arg2);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
 
         for (i = 0; i < 16; i++) {
-            Gfx_DrawTextureRgba16(arg0, arg1 + (i * 4), 0xC4, 4, var_s2 + (i * 0x620), 0xC4, 0);
+            Gfx_DrawTextureRgba16(x, y + (i * 4), 0xC4, 4, area_name_banner_texture + (i * 0x620), 0xC4, 0);
         }
 
-        if ((gSessionContext.unk_11F2 != 0) && ((arg3 == 0) || (arg3 == 2) || (arg3 == 3))) {
-            Gfx_DrawTextureRgba16(arg0 - 0x20, arg1 + 0xD, 0x24, 0x24, D_20144E0, 0x24, 0);
+        if ((gSessionContext.inRound2 != 0) && ((area == 0) || (area == AREA_GYM_LEADER_CASTLE) || (area == AREA_VS_MEWTWO))) {
+            Gfx_DrawTextureRgba16(x - 32, y + 13, 36, 36, D_20144E0, 36, 0);
         }
 
         gSPDisplayList(gDisplayListHead++, D_8006F630);
@@ -374,39 +387,46 @@ void AreaSelect_DrawNameBanner(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 void func_822014C0(void) {
 }
 
-void AreaSelect_DrawNameBannerCrossfade(s16 arg0, s16 arg1, s16 arg2) {
-    static s16 areaSelectBannerScrollFrame = 1;
-    static s16 areaSelectBannerScrollDirection = 1;
+/*
+    Handle Transition between labels. The Gym Leader Castle has a faster transition for some reason
+*/
+void AreaSelect_DrawNameBannerCrossfade(s16 area, s16 x, s16 y) {
+    static s16 sAreaSelectBannerScrollFrame = 1;
+    static s16 sAreaSelectBannerScrollDirection = 1;
 
-    s16 sp1E;
+    s16 gym_leader_castle_fade_quicken;
 
-    if (arg0 == 2) {
-        sp1E = (sAreaSelectTransitionFrame * 0x2A) + 3;
-        AreaSelect_DrawNameBanner(arg1, (arg2 + (areaSelectBannerScrollFrame / 4)) - 5, 0xFF - sp1E, sAreaSelectPreviousIndex);
-        AreaSelect_DrawNameBanner(arg1, (arg2 + (areaSelectBannerScrollFrame / 4)) - 5, sp1E, sAreaSelectSelectedIndex);
-    } else if ((arg0 != 8) && (arg0 != 0)) {
-        AreaSelect_DrawNameBanner(arg1, (arg2 + (areaSelectBannerScrollFrame / 4)) - 5, 0xFF, sAreaSelectSelectedIndex);
+    if (area == AREA_GYM_LEADER_CASTLE) {
+        gym_leader_castle_fade_quicken = (sAreaSelectTransitionFrame * 42) + 3;
+        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerScrollFrame / 4)) - 5, 0xFF - gym_leader_castle_fade_quicken, sAreaSelectPreviousIndex);
+        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerScrollFrame / 4)) - 5, gym_leader_castle_fade_quicken, sAreaSelectSelectedIndex);
+    } else if ((area != 8) && (area != 0)) {
+        AreaSelect_DrawNameBanner(x, (y + (sAreaSelectBannerScrollFrame / 4)) - 5, 0xFF, sAreaSelectSelectedIndex);
     }
 
-    areaSelectBannerScrollFrame += areaSelectBannerScrollDirection;
-    if (areaSelectBannerScrollFrame == 0) {
-        areaSelectBannerScrollDirection = 1;
+    sAreaSelectBannerScrollFrame += sAreaSelectBannerScrollDirection;
+    if (sAreaSelectBannerScrollFrame == 0) {
+        sAreaSelectBannerScrollDirection = 1;
     }
 
-    if (areaSelectBannerScrollFrame == 0x2B) {
-        areaSelectBannerScrollDirection = -1;
+    if (sAreaSelectBannerScrollFrame == 0x2B) {
+        sAreaSelectBannerScrollDirection = -1;
     }
 }
 
-void AreaSelect_DrawPulsingMarker(s16 arg0, s16 arg1) {
-    static u32 areaSelectMarkerTextures[] = {
+/*
+    Makes the label bop up and down.
+    Suggested rename: AreaSelect_NameBannerBopAdvance
+*/
+void AreaSelect_DrawPulsingMarker(s16 x, s16 y) {
+    static u32 sAreaSelectMarkerTextures[] = {
         0x03044C60, 0x03045020, 0x030453E0, 0x030457A0, 0x03045B60, 0x03045F20, 0x030462E0,
         0x030466A0, 0x03046A60, 0x03046E20, 0x030471E0, 0x030475A0, 0x03047960, 0x03047D20,
         0x030480E0, 0x030484A0, 0x03048860, 0x030493A0, 0x03048FE0, 0x03048C20,
     };
-    static s16 areaSelectMarkerFrame = 0;
+    static s16 sAreaSelectMarkerFrame = 0;
 
-    if (sAreaSelectModeSettings.unk_07 != 0) {
+    if (sAreaSelectModeSettings.fadeProgress != 0) {
         gDPPipeSync(gDisplayListHead++);
         gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
         gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
@@ -420,18 +440,18 @@ void AreaSelect_DrawPulsingMarker(s16 arg0, s16 arg1) {
             gDPSetPrimColor(gDisplayListHead++, 0, 0xFF, 255, 255, 255, 255);
         }
 
-        gDPLoadTextureBlock_4b(gDisplayListHead++, areaSelectMarkerTextures[areaSelectMarkerFrame], G_IM_FMT_I, 48, 40, 0,
+        gDPLoadTextureBlock_4b(gDisplayListHead++, sAreaSelectMarkerTextures[sAreaSelectMarkerFrame], G_IM_FMT_I, 48, 40, 0,
                                G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                                G_TX_NOLOD, G_TX_NOLOD);
 
-        Gfx_DrawTexturedRectClipped(arg0 - 0x28, arg1 - 0x28, 0x50, 0x50, 0, 0, 0x200, 0x200, 0);
+        Gfx_DrawTexturedRectClipped(x - 40, y - 40, 80, 80, 0, 0, 0x200, 0x200, 0);
 
-        areaSelectMarkerFrame = (areaSelectMarkerFrame + 1) % 20;
+        sAreaSelectMarkerFrame = (sAreaSelectMarkerFrame + 1) % 20;
     }
 }
 
-void AreaSelect_DrawGlowCircle(s16 arg0, s16 arg1, s16 arg2) {
-    if ((sAreaSelectModeSettings.unk_07 == 0) || (arg2 <= 0)) {
+void AreaSelect_DrawGlowCircle(s16 x, s16 y, s16 diameter) {
+    if ((sAreaSelectModeSettings.fadeProgress == 0) || (diameter <= 0)) {
         return;
     }
 
@@ -441,76 +461,76 @@ void AreaSelect_DrawGlowCircle(s16 arg0, s16 arg1, s16 arg2) {
 
     if (1) {}
 
-    Gfx_DrawTexturedRectClipped(arg0 - (arg2 / 2), arg1 - (arg2 / 2), arg2, arg2, 0, 0, 0x10000 / arg2, 0x10000 / arg2, 0);
+    Gfx_DrawTexturedRectClipped(x - (diameter / 2), y - (diameter / 2), diameter, diameter, 0, 0, 0x10000 / diameter, 0x10000 / diameter, 0);
 }
 
-void AreaSelect_DrawInfoPanel(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
-    s16 sp54;
-    s16 sp50;
-    s16 var_s2;
-    s16 var_s3;
+void AreaSelect_DrawInfoPanel(s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 alpha) {
+    s16 inner_height;
+    s16 inner_width;
+    s16 corner_height;
+    s16 corner_width;
 
-    if (arg2 >= 0x10) {
-        var_s3 = 8;
+    if (width >= 16) {
+        corner_width = 8;
     } else {
-        var_s3 = arg2 / 2;
+        corner_width = width / 2;
     }
 
-    if (arg3 >= 0x10) {
-        var_s2 = 8;
+    if (height >= 16) {
+        corner_height = 8;
     } else {
-        var_s2 = arg3 / 2;
+        corner_height = height / 2;
     }
 
-    sp50 = arg2 - (var_s3 * 2);
-    sp54 = arg3 - (var_s2 * 2);
+    inner_width = width - (corner_width * 2);
+    inner_height = height - (corner_height * 2);
 
     gSPDisplayList(gDisplayListHead++, D_8006F518);
-    gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
+    gDPSetEnvColor(gDisplayListHead++, r, g, b, alpha);
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(arg0, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
+    Gfx_DrawTexturedRectClipped(x, y, corner_width, corner_height, 0, 0, 0x2000 / corner_width, 0x2000 / corner_height, 0);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028AA0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
+    Gfx_DrawTexturedRectClipped((x + width) - corner_width, y, corner_width, corner_height, 0, 0, 0x2000 / corner_width, 0x2000 / corner_height, 0);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_20289E0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(arg0, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
+    Gfx_DrawTexturedRectClipped(x, (y + height) - corner_height, corner_width, corner_height, 0, 0, 0x2000 / corner_width, 0x2000 / corner_height, 0);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A20, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
-                  0x2000 / var_s2, 0);
+    Gfx_DrawTexturedRectClipped((x + width) - corner_width, (y + height) - corner_height, corner_width, corner_height, 0, 0, 0x2000 / corner_width,
+                  0x2000 / corner_height, 0);
 
     gSPDisplayList(gDisplayListHead++, D_8006F498);
 
-    if ((sp50 > 0) && (sp54 > 0)) {
-        Gfx_FillRectRgba(arg0 + var_s3, arg1, sp50, var_s2, arg4, arg5, arg6, arg7);
-        Gfx_FillRectRgba(arg0, arg1 + var_s3, arg2, sp54, arg4, arg5, arg6, arg7);
-        Gfx_FillRectRgba(arg0 + var_s3, arg1 + var_s3 + sp54, sp50, var_s2, arg4, arg5, arg6, arg7);
-    } else if (sp50 > 0) {
-        Gfx_FillRectRgba(arg0 + var_s3, arg1, sp50, arg3, arg4, arg5, arg6, arg7);
-    } else if (sp54 > 0) {
-        Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, sp54, arg4, arg5, arg6, arg7);
+    if ((inner_width > 0) && (inner_height > 0)) {
+        Gfx_FillRectRgba(x + corner_width, y, inner_width, corner_height, r, g, b, alpha);
+        Gfx_FillRectRgba(x, y + corner_width, width, inner_height, r, g, b, alpha);
+        Gfx_FillRectRgba(x + corner_width, y + corner_width + inner_height, inner_width, corner_height, r, g, b, alpha);
+    } else if (inner_width > 0) {
+        Gfx_FillRectRgba(x + corner_width, y, inner_width, height, r, g, b, alpha);
+    } else if (inner_height > 0) {
+        Gfx_FillRectRgba(x, y + corner_height, width, inner_height, r, g, b, alpha);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void AreaSelect_DrawAreaInfoBox(s32 arg0) {
-    AreaSelect_DrawInfoPanel(0x38, 0x17C, 0x210, 0x3C, 0x1E, 0x1E, 0x82, 0x96);
+void AreaSelect_DrawAreaInfoBox(s32 draw_text) {
+    AreaSelect_DrawInfoPanel(56, 380, 528, 60, 0x1E, 0x1E, 0x82, 0x96);
 
-    if (arg0 != 0) {
+    if (draw_text != 0) {
         Font_BeginTranslucentTextRendering();
         Font_SetActive(8, 0);
-        Font_SetLineHeight(0x18);
-        Font_Printf(0x5B, 0x182, Text_GetString(NULL, 0, sAreaSelectStrings, sAreaSelectSelectedIndex));
+        Font_SetLineHeight(24);
+        Font_Printf(91, 386, Text_GetString(NULL, 0, sAreaSelectStrings, sAreaSelectSelectedIndex));
         Font_EndTexturedTextRendering();
     }
 }
@@ -608,11 +628,11 @@ s32 AreaSelect_ConfirmSelection(void) {
         sAreaSelectMagnemiteTrails->unk_06 -= 5;
     } else {
         sAreaSelectMagnemiteTrails->unk_06 = 0;
-        if (sAreaSelectSelectedIndex == 3) {
+        if (sAreaSelectSelectedIndex == AREA_VS_MEWTWO) {
             Audio_StopMusic(0x20);
             var_v1 = 6;
         } else {
-            if (sAreaSelectSelectedIndex != 7) {
+            if (sAreaSelectSelectedIndex != AREA_GB_TOWER) {
                 Audio_StopMusic(0x28);
             }
             var_v1 = 5;
@@ -719,7 +739,7 @@ void AreaSelect_Draw(s16 arg0) {
 s32 AreaSelect_FadeInFromBattle(void) {
     s16 var_v1 = 8;
 
-    sAreaSelectSelectedIndex = 8;
+    sAreaSelectSelectedIndex = AREA_STADIUM;
     if (StageContext_GetFadeMode() == 0) {
         sAreaSelectBackgroundFadeAlpha += 4;
         if (sAreaSelectBackgroundFadeAlpha == 0x100) {
@@ -744,16 +764,19 @@ void AreaSelect_Intro(void) {
     }
 }
 
+/*
+    Handles dispatch on selecting an area
+*/
 void AreaSelect_Loop(void) {
-    s16 i;
+    s16 action;
 
-    i = 2;
+    action = 2;
     if (gSessionContext.sessionFlags & 4) {
-        Cry_Play(0x96, 7);
-        i = 8;
+        Cry_Play(150, 7);
+        action = 8;
     }
 
-    if (sAreaSelectModeSettings.unk_07 == 0) {
+    if (sAreaSelectModeSettings.fadeProgress == 0) {
         sAreaSelectEntryConfigs[0].unk_06 = 8;
         sAreaSelectEntryConfigs[2].unk_09 = 8;
         sAreaSelectEntryConfigs[7].unk_06 = 8;
@@ -762,56 +785,63 @@ void AreaSelect_Loop(void) {
     sAreaSelectPreviousIndex = 8;
     sAreaSelectSelectedIndex = 0;
 
-    while (i != 7) {
+    while (action != 7) {
         AreaSelect_PollInput();
 
-        switch (i) {
+        switch (action) {
             case 1:
-                i = AreaSelect_HandleInput();
+                action = AreaSelect_HandleInput();
                 break;
             case 2:
-                i = AreaSelect_CursorMoveAnim();
+                action = AreaSelect_CursorMoveAnim();
                 break;
 
             case 3:
-                i = AreaSelect_ConfirmSelection();
+                action = AreaSelect_ConfirmSelection();
                 break;
 
             case 4:
-                i = AreaSelect_WaitFragmentUnload();
+                action = AreaSelect_WaitFragmentUnload();
                 break;
 
             case 5:
-                i = AreaSelect_FadeToBattle();
+                action = AreaSelect_FadeToBattle();
                 break;
 
             case 6:
-                i = AreaSelect_MusicFadeWait();
+                action = AreaSelect_MusicFadeWait();
                 break;
 
             case 8:
-                i = AreaSelect_FadeInFromBattle();
+                action = AreaSelect_FadeInFromBattle();
                 break;
         }
 
-        AreaSelect_Draw(i);
+        AreaSelect_Draw(action);
     }
 }
 
+/*
+    Handles if the Night or Day time textures load and what Pokemon shows up in the GB Tower depending on Speed settings
+*/
+#define NIGHT_DODRIO 2
+#define DAY_DODRIO 1 
+#define DODUO 0x12
+#define PLAIN 0x13
 void AreaSelect_LoadBackgroundArt(void) {
     sAreaSelectBackgroundArchive = ASSET_LOAD2(backgrounds, 1, 1);
 
-    if (sAreaSelectGameOptions.unk_00 == 2) {
-        if (gSessionContext.unk_11F2 == 0) {
-            sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, 1);
-            sAreaSelectNextBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, 2);
+    if (sAreaSelectGameOptions.gbTowerSpeed == 2) {
+        if (gSessionContext.inRound2 == 0) {
+            sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, DAY_DODRIO);
+            sAreaSelectNextBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, NIGHT_DODRIO);
         } else {
-            sAreaSelectNextBackground = sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, 2);
+            sAreaSelectNextBackground = sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, NIGHT_DODRIO);
         }
-    } else if (sAreaSelectGameOptions.unk_00 == 1) {
-        sAreaSelectNextBackground = sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, 0x13);
+    } else if (sAreaSelectGameOptions.gbTowerSpeed == 1) {
+        sAreaSelectNextBackground = sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, DODUO);
     } else {
-        sAreaSelectNextBackground = sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, 0x12);
+        sAreaSelectNextBackground = sAreaSelectCurrentBackground = BinArchive_GetFile(sAreaSelectBackgroundArchive, PLAIN);
     }
 }
 
@@ -832,11 +862,11 @@ s32 AreaSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     sAreaSelectStrings = Text_GetStringTable(0x17);
     Save_EnsureBankLoaded(2);
     Save_GetOptions(&sAreaSelectGameOptions);
-    Save_GetModeSettings(&sAreaSelectModeSettings, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&sAreaSelectModeSettings, gSessionContext.inRound2);
     AreaSelect_LoadBackgroundArt();
     sAreaSelectSelectedIndex = 8;
 
-    if ((sAreaSelectModeSettings.unk_07 != 0) && !(gSessionContext.sessionFlags & 4) && !(sAreaSelectModeSettings.unk_00 & 0x100)) {
+    if ((sAreaSelectModeSettings.fadeProgress != 0) && !(gSessionContext.sessionFlags & 4) && !(sAreaSelectModeSettings.unk_00 & 0x100)) {
         sAreaSelectBackgroundFadeAlpha = 0xFF;
     }
 
