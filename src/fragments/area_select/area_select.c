@@ -78,7 +78,7 @@ static u8* sAreaSelectNameBannerTextures[] = {
 #define AREA_GB_TOWER 7
 #define AREA_NONE 8
 
-// Menu-loop states, not area indices. In particular, state 2 crossfades banners.
+// Menu-loop states.
 #define AREA_SELECT_INTRO 0
 #define AREA_SELECT_INPUT 1
 #define AREA_SELECT_MOVE 2

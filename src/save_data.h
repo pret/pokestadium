@@ -6,7 +6,7 @@
 #include "game_state.h"
 
 typedef struct GameOptions {
-    /* 0x00 */ s16 gbTowerUnlockTier; // 0 = normal, 1 = Doduo, 2 = Dodrio; not the active speed.
+    /* 0x00 */ s16 gbTowerUnlockTier; // 0 = normal, 1 = Doduo, 2 = Dodrio.
     // Opaque word carried into/out of GB Tower. The inherited pointer type is
     // preserved; no self-linked GameOptions list has been established.
     /* 0x04 */ struct GameOptions* unk_04;
@@ -18,7 +18,7 @@ typedef struct ModeSettings {
     /* 0x04 */ u8 castleClears; // Highest completed castle location + 1, capped at 8.
     /* 0x05 */ u8 nintendoCupClears; // Highest completed division + 1, capped at 4.
     /* 0x06 */ u8 primeCupClears; // Highest completed division + 1, capped at 4.
-    /* 0x07 */ u8 mewtwoUnlocked; // Set when clearedModes reaches 0xF8; not fade progress.
+    /* 0x07 */ u8 mewtwoUnlocked; // Set when clearedModes reaches 0xF8.
 } ModeSettings; // size = 0x8
 
 typedef struct SessionContinueData {
