@@ -43,7 +43,9 @@ jobs:
     # (never pushed to a registry), so the rebuild has to happen where the
     # gate will actually use it.
     runs-on: [self-hosted, macOS, ARM64, pokestadium-decomp-public]
-    timeout-minutes: 30
+    # Cold per-version baselines (nine versions built in the Linux container)
+    # take over an hour; later refreshes reuse the cache and are incremental.
+    timeout-minutes: 180
     steps:
       - name: Mask self-hosted runner paths
         shell: bash
@@ -60,6 +62,9 @@ jobs:
 
       - name: Rebuild the baseline image
         shell: bash
+        env:
+          POKESTADIUM_BASEROM_DIR: ${{ vars.POKESTADIUM_BASEROM_DIR }}
+          POKESTADIUM_REGION_CACHE_DIR: ${{ vars.POKESTADIUM_REGION_CACHE_DIR }}
         run: bash ci/build-baseline.sh
 
       - name: Confirm the image's yamls/ now match this commit
