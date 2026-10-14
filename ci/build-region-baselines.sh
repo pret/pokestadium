@@ -24,7 +24,8 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ "$#" -gt 0 ]; then
     versions=("$@")
 else
-    mapfile -t versions < <(python3 -c 'import json,sys; print("\n".join(k for k in json.load(open(sys.argv[1])) if not k.startswith("_") and k != "us"))' "$here/regions.json")
+    versions=()
+    while IFS= read -r v; do versions+=("$v"); done < <(python3 -c 'import json,sys; print("\n".join(k for k in json.load(open(sys.argv[1])) if not k.startswith("_") and k != "us"))' "$here/regions.json")
 fi
 
 failed=()
