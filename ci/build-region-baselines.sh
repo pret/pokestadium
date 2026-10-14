@@ -52,7 +52,10 @@ else
     make VERSION="$REGION" extract
 fi
 make VERSION="$REGION" COMPARE=1 -j"$(nproc)" rom
-tar -cpf "/cache/$REGION.tar.tmp" "asm/$REGION" "assets/$REGION" "build/$REGION"
+# Everything make extract generates for this version (the shared .splat/ is not
+# needed to build) plus its build tree.
+tar -cpf "/cache/$REGION.tar.tmp" "asm/$REGION" "assets/$REGION" "build/$REGION" \
+    "linker_scripts/$REGION/pokestadium.ld" "linker_scripts/$REGION/auto" "pokestadium-$REGION.yaml"
 mv "/cache/$REGION.tar.tmp" "/cache/$REGION.tar"
 echo "$want" > "/cache/$REGION.hash"
 echo "build-region-baselines.sh: $REGION: cached ($(du -h "/cache/$REGION.tar" | cut -f1))"

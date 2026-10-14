@@ -6,7 +6,10 @@
 # the checkout under test equals the one recorded when the cache was built.
 region_hash() {
     ( cd "$1" && {
-        find "yamls/$2" "linker_scripts/$2" -type f -not -path '*/auto/*' 2>/dev/null
-        find linker_scripts -maxdepth 1 -type f
-    } | LC_ALL=C sort | xargs md5sum | md5sum | cut -d' ' -f1 )
+        {
+            find "yamls/$2" "linker_scripts/$2" -type f -not -path '*/auto/*' -not -name pokestadium.ld 2>/dev/null
+            find linker_scripts -maxdepth 1 -type f
+        } | LC_ALL=C sort | xargs md5sum
+        echo "cache-format-2"
+    } | md5sum | cut -d' ' -f1 )
 }

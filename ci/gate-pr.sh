@@ -188,7 +188,11 @@ if [ -d /work/.git ]; then
     git -C /work add -A src include
 fi
 
-if sync_tree /src/tools /work/tools --exclude=__pycache__ --exclude=vtxdis; then tools_changed=1; fi
+# libc.so.1 and libC.so.1 are both tracked and collide on a case-insensitive
+# checkout (macOS), and the image rewrites libC.so.1 during make setup; neither
+# is ever a real PR change, but diffing them made every run look like a tools
+# change and forced a full rebuild.
+if sync_tree /src/tools /work/tools --exclude=__pycache__ --exclude=vtxdis --exclude=libc.so.1 --exclude=libC.so.1; then tools_changed=1; fi
 # yamls/us/header.yaml symbol_addrs_path lists these files as direct splat
 # extraction inputs (address->name resolution baked into asm/ at extract
 # time), same as the yamls themselves -- but they live under linker_scripts/,
