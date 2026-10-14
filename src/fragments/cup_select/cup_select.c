@@ -208,7 +208,7 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
     s16 pulse = SINS(pulsing_timer) * 2;
     UNUSED s32 pad[2];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, r, g, b, alpha);
 
     Gfx_DrawTextureIa8((left + pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_LEFT_SECTION_CORNER, 0x10, 0);
@@ -216,7 +216,7 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
     Gfx_DrawTextureIa8(((left + right) - pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_RIGHT_SECTION_CORNER, 0x10, 0);
     Gfx_DrawTextureIa8(((left + right) - pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_RIGHT_SECTION_CORNER, 0x10, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     pulsing_timer += 0x2000;
 }
@@ -464,9 +464,9 @@ s32 CupSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
         Save_EnsureBankLoaded(2);
         Save_GetModeSettings(&D_82E023A0, gSessionContext.inRound2);
         if (gSessionContext.mode == 3) {
-            latest_unlocked_division = D_82E023A0.unk_05;
+            latest_unlocked_division = D_82E023A0.nintendoCupClears;
         } else {
-            latest_unlocked_division = D_82E023A0.unk_06;
+            latest_unlocked_division = D_82E023A0.primeCupClears;
         }
         if (latest_unlocked_division == 4) {
             latest_unlocked_division -= 1;

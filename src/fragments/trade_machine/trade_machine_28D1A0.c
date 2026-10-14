@@ -128,7 +128,7 @@ void Trade_DrawSolidFillRect(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8
 }
 
 void Trade_DrawFilledFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, 255);
 
@@ -145,7 +145,7 @@ void Trade_DrawFilledFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 a
 
     Trade_DrawSolidFillRect(arg0 + 8, arg1 + 8, arg2 - 0x10, arg3 - 0x10, arg4, arg5, arg6);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Trade_DrawMovingSheen(s16 arg0, s16 arg1, s32 arg2) {
@@ -273,7 +273,7 @@ void Trade_DrawInfoBox(unk_D_82F20A10* arg0) {
 
         Trade_DrawMovingSheen(arg0->unk_04, arg0->unk_06 + 0x24, arg0->unk_1C);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         for (i = 0; i < 4; i++) {
             if (sp11C->unk_09[i] == 0) {
@@ -394,7 +394,7 @@ void Trade_DrawInfoBox(unk_D_82F20A10* arg0) {
 
             Font_EndTexturedTextRendering();
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             {
                 s16 sp60[2];
@@ -408,7 +408,7 @@ void Trade_DrawInfoBox(unk_D_82F20A10* arg0) {
             }
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         if (arg0->unk_02 > 0) {
             arg0->unk_02--;

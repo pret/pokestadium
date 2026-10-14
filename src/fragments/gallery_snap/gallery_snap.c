@@ -144,7 +144,7 @@ static s16 D_83303268[2] = { 0x7A, 0x3D };
 static s32 D_8330326C[] = { 5, 3, 3, 0, 0, 7, 8 };
 
 void Gallery_SnapDrawRoundedFrame(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, arg7);
 
     Gfx_DrawTextureIa8(arg0 - 7, arg1 - 7, 8, 8, &D_300BE40, 8, 0);
@@ -156,11 +156,11 @@ void Gallery_SnapDrawRoundedFrame(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8 arg
     Gfx_DrawTexturedRectClipped(arg0 + 1, (arg1 + arg3) - 1, arg2 - 2, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - 1, arg1 + 1, 8, arg3 - 2, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     Gfx_FillRectRgba(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 unk_D_83407B38* Gallery_SnapGetActiveGrid(void) {
@@ -546,7 +546,7 @@ void func_83301090(void) {
 
     Gallery_SnapDrawCursor(Gallery_SnapGetActiveGrid());
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 7; i++) {
         temp_t0 = -D_833031B4[i].unk_04 + 0xC;
@@ -610,7 +610,7 @@ void Gallery_SnapDrawTitleBar(s32 arg0, s32 arg1, s32 arg2) {
     }
 
     if (sp20->unk_00 != NULL) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gallery_DrawImageStrips(sp20->unk_00, arg0 + 0x10, arg1 - 1, sp20->unk_04, sp20->unk_06, 0);
     }
@@ -766,7 +766,7 @@ void Gallery_SnapDrawGradientQuad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_
     gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)sp84 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)temp_s2 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 }
@@ -791,7 +791,7 @@ void Gallery_SnapDrawBackgroundWipe(void) {
         var_ra = 0x280;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetCombineLERP(gDisplayListHead++, ENVIRONMENT, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0, ENVIRONMENT,
                       PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0);
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
@@ -803,11 +803,11 @@ void Gallery_SnapDrawBackgroundWipe(void) {
 
     Gfx_DrawTexturedRectClipped(D_833032A0, 0, var_ra - D_833032A0, 0x1E0, 0, 0, 0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     gSPDisplayList(gDisplayListHead++, D_8006F4C0);
     gDPSetFillColor(gDisplayListHead++, 0x00000001);
     gDPFillRectangle(gDisplayListHead++, 0, 0, D_833032A0 - 1, 479);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Gallery_SnapDrawGradientQuad(D_833032A0, 0, D_833032A4 - D_833032A0, 0x1E0, &sp80, &sp7C);
 }
@@ -896,12 +896,12 @@ void Gallery_SnapDrawCursor(unk_D_83407B38* arg0) {
 
     switch (D_833032E0) {
         case 0:
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
             Gallery_DrawSelectionCorners(0x3E, (D_83402E28 * 0x36) + 0x46, 0x8F, 0x28);
             break;
 
         case 2:
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             if (arg0->unk_04 == -1) {
                 var_v0 = 0;
@@ -921,7 +921,7 @@ void Gallery_SnapDrawCursor(unk_D_83407B38* arg0) {
 
         case 1:
             if ((arg0->unk_04 != -1) && (Gallery_IsSceneReady(temp_s0) != 0) && (temp_s0->unk_00 == 2)) {
-                gSPDisplayList(gDisplayListHead++, D_8006F518);
+                gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
                 if (D_83407AE4 == 0) {
                     var_a2 = (temp_s0->unk_04 * 2) + 0x18;
@@ -943,7 +943,7 @@ void Gallery_SnapDrawBackPrompt(s32 arg0) {
     sp2C = Gallery_GetUiString(0x3C);
     temp_v1 = ((0x186 - Font_MeasureTextExtent(0, 0, sp2C)) / 2) + 0xD5;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(temp_v1 - 0x20, arg0 - 2, 0x18, 0x18, D_30099B8, 0x18, 0);
     Font_BeginTranslucentTextRendering();
@@ -1242,7 +1242,7 @@ s32 Gallery_SnapGetResult(void) {
 }
 
 void Gallery_SnapMain(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('SNAP');
 

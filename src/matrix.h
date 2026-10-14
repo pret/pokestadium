@@ -3,6 +3,7 @@
 
 #include "global.h"
 
+extern Mtx gIdentityMtx;
 extern Vec3f D_8006F050;
 extern Vec3s D_8006F05C;
 extern Vec3f D_8006F064;

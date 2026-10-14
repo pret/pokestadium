@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void Gfx_InitDisplayListBuffers(u32 arg0, s32 arg1);
+void Gfx_InitDisplayListBuffers(u32 buffer_size, s32 pool_side);
 void Gfx_FreeDisplayListBuffers(void);
 void Gfx_SwapDisplayListBuffer(void);
 void Gfx_GetDisplayListRange(Gfx** arg0, Gfx** arg1);

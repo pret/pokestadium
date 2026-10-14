@@ -313,7 +313,7 @@ aspMainTextStart = 0x800674E0;
 aspMainDataStart = 0x8007EB40;
 D_8006873C = 0x800687FC; // bogus branch target inside gspF3DEX2.fifo, named so the inline data at 0x8004873C links
 audDMAMessageQ = 0x800FCD80;
-D_8006F010 = 0x8006F0D0; //
+gIdentityMtx = 0x8006F0D0; //
 D_8006F050 = 0x8006F110; //
 D_8006F05C = 0x8006F11C; //
 D_8006F064 = 0x8006F124; //
@@ -1537,3 +1537,15 @@ gBattleTarget = 0x843C523C;
 D_8122A1A4 = 0x8122A184; // force_not_migration:True
 // D_8122A260 = 0x8122A260; // force_not_migration:True size:0xA40 // not found in eu
 // D_8122ACA0 = 0x8122ACA0; // force_not_migration:True size:0xB0 // not found in eu
+
+gRound2BadgeTexture = 0x20144E0; // type:u8
+
+gUiPanelTopLeftTexture = 0x2028A60; // type:u8
+
+gUiPanelTopRightTexture = 0x2028AA0; // type:u8
+
+gUiPanelBottomLeftTexture = 0x20289E0; // type:u8
+
+gUiPanelBottomRightTexture = 0x2028A20; // type:u8
+
+sAreaSelectGlowCircleTexture = 0x3044260; // type:u8

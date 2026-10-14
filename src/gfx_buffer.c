@@ -15,11 +15,11 @@ unk_D_800A7440 D_800A7440;
 
 void Gfx_SwapDisplayListBuffer(void);
 
-void Gfx_InitDisplayListBuffers(u32 arg0, s32 arg1) {
+void Gfx_InitDisplayListBuffers(u32 buffer_size, s32 pool_side) {
     D_800A7428.unk10 = 0;
-    D_800A7428.unkC = arg0;
-    D_800A7428.unk0 = main_pool_alloc_with_func(arg0, arg1, 'DYN0', NULL);
-    D_800A7428.unk4 = main_pool_alloc_with_func(arg0, arg1, 'DYN1', NULL);
+    D_800A7428.unkC = buffer_size;
+    D_800A7428.unk0 = main_pool_alloc_with_func(buffer_size, pool_side, 'DYN0', NULL);
+    D_800A7428.unk4 = main_pool_alloc_with_func(buffer_size, pool_side, 'DYN1', NULL);
     Gfx_SwapDisplayListBuffer();
 }
 
