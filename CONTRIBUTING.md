@@ -89,6 +89,9 @@ Nidoqueen's animation did change between JP and US 1.0 so potentially we do in f
 That said: out of code use of these sensitives terms is none of our business.
 
 ## Comments 
+### Documentation
+All functions must have a `/**/` comment above them describing their function.
+
 ### Fakes: Decomp Slop and Karodo 
 "Fakes" refer to a variety of coding anti-patterns that enable a function match through register coloring, but serve no other purpose. There are two types of fakes:
 - **Decomp Slop:** are fakes that no programmer would ever write, such as 
