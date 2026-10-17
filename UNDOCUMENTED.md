@@ -7,352 +7,403 @@
 - Functions with a real name: **7,029 / 7,794 (90.2%)** (765 still `func_XXXXXXXX`)
 - Variables with a real name: **1,234 / 6,519 (18.9%)** (5,285 still `D_XXXXXXXX` / `jtbl_XXXXXXXX`)
 - Functions still using m2c `temp_*` / `var_*` locals: **1,861**
+- Functions with generic `arg0`, `arg1`, ... parameters: **4,941 / 7,446 (66.4%)**
+- Structs with generic fields (`unk_XX`, `pad`, `field_XX`): **823 / 1,029**
+- Struct fields with a real name: **1,409 / 6,637 (21.2%)**
+- Raw `*(T *)(base + 0xNN)` offset accesses that bypass a struct field: **0**
 <!-- AUTO_UNDOCUMENTED:END -->
 
 A function counts as commented when a `/* ... */` block ends on the line directly above its definition.
 A global is named once it is renamed in `linker_scripts/us/symbol_addrs*.txt`.
-In the table, `func_` and `D_/jtbl_` count the distinct placeholder names that file references.
+In the table, `func_` and `D_/jtbl_` count the distinct placeholder names that file references;
+`arg{n}` counts functions with generic parameters; raw offsets are `*(T *)(base + 0xNN)` accesses.
+Generic fields are named unk/pad/field/filler with an optional hex suffix; nested structs are counted in their parent and on their own.
 
 ## By source file
 
-| File | Defined | No comment | `func_` | `D_/jtbl_` | `temp_/var_` locals |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| `src/fragments/battle_engine/battle_engine_315D50.c` | 69 | 69 | 177 | 343 | 9 |
-| `src/fragments/battle_engine/battle_engine_32B680.c` | 280 | 280 | 147 | 6 | 26 |
-| `src/fragments/credits/credits_158A00.c` | 18 | 17 | 3 | 408 | 8 |
-| `src/fragments/credits/credits_15AD80.c` | 2 | 2 | 0 | 378 | 0 |
-| `src/fragments/pokedex/pokedex_2190D0.c` | 17 | 17 | 2 | 339 | 8 |
-| `src/fragments/lab_pc_list/lab_pc_list_1D7B40.c` | 148 | 148 | 5 | 111 | 68 |
-| `src/fragments/particle_math/particle_math_269820.c` | 286 | 286 | 14 | 4 | 24 |
-| `src/fragments/minigame_select/minigame_select_27BCC0.c` | 49 | 49 | 2 | 172 | 25 |
-| `src/3D140_2.c` | 32 | 30 | 8 | 177 | 11 |
-| `src/fragments/lab_pc/lab_pc_1B4EA0.c` | 99 | 99 | 4 | 74 | 38 |
-| `src/fragments/widget_tree/widget_tree.c` | 148 | 148 | 4 | 12 | 49 |
-| `src/fragments/battle_engine/battle_engine_2EC3C0.c` | 121 | 121 | 14 | 53 | 21 |
-| `src/fragments/transfer_pak_check/transfer_pak_check.c` | 50 | 50 | 0 | 134 | 24 |
-| `src/fragments/battle_engine/battle_engine_339CA0.c` | 153 | 153 | 52 | 1 | 1 |
-| `src/fragments/battle_engine/battle_engine_361050.c` | 91 | 91 | 7 | 37 | 59 |
-| `src/fragments/lab_pc_list/lab_pc_list_1CEA00.c` | 92 | 92 | 3 | 59 | 33 |
-| `src/fragments/battle_engine/battle_engine_309ED0.c` | 118 | 118 | 14 | 34 | 19 |
-| `src/fragments/battle_engine/battle_engine_343BA0.c` | 126 | 126 | 13 | 40 | 4 |
-| `src/fragments/gb_tower_emulator/gb_tower_emulator_7F9A0.c` | 43 | 43 | 20 | 106 | 13 |
-| `src/fragments/lab_pc/lab_pc_1AE680.c` | 70 | 70 | 3 | 68 | 28 |
-| `src/fragments/lab_pc_icons/lab_pc_icons.c` | 61 | 61 | 1 | 90 | 12 |
-| `src/fragments/battle_engine/battle_engine_359F90.c` | 54 | 54 | 29 | 56 | 24 |
-| `src/fragments/ekans_game/ekans_game.c` | 68 | 68 | 6 | 76 | 12 |
-| `src/fragments/particle_math/particle_math_264380.c` | 100 | 100 | 1 | 46 | 9 |
-| `src/fragments/clefairy_game/clefairy_game.c` | 58 | 58 | 1 | 75 | 14 |
-| `src/fragments/sandshrew_game/sandshrew_game.c` | 41 | 41 | 0 | 101 | 5 |
-| `src/pokemon_stats.c` | 91 | 91 | 4 | 14 | 32 |
-| `src/fragments/metapod_game/metapod_game.c` | 58 | 58 | 2 | 56 | 16 |
-| `src/fragments/trade_machine/trade_machine_2942C0.c` | 75 | 75 | 2 | 23 | 31 |
-| `src/fragments/lab_pc/lab_pc_1A9780.c` | 55 | 55 | 5 | 45 | 24 |
-| `src/fragments/victory_palace/victory_palace.c` | 44 | 44 | 7 | 69 | 9 |
-| `src/geo_render.c` | 72 | 72 | 2 | 27 | 24 |
-| `src/fragments/battle_prep/battle_prep_397B10.c` | 44 | 44 | 0 | 55 | 24 |
-| `src/fragments/widget_toolkit/widget_toolkit_2.c` | 17 | 16 | 4 | 97 | 6 |
-| `src/fragments/gallery_camera/gallery_camera_14CA70.c` | 35 | 35 | 1 | 81 | 4 |
-| `src/fragments/particle_math/particle_math_261F90.c` | 83 | 83 | 0 | 0 | 37 |
-| `src/fragments/battle_engine/battle_engine_317E70.c` | 98 | 98 | 0 | 8 | 11 |
-| `src/fragments/demo_scenes/demo_scenes_161E60.c` | 38 | 38 | 0 | 74 | 5 |
-| `src/fragments/battle_engine/battle_engine_3223B0.c` | 91 | 91 | 21 | 0 | 4 |
-| `src/gb_data.c` | 23 | 23 | 1 | 91 | 1 |
-| `src/fragments/battle_engine/battle_engine_2FA4D0.c` | 56 | 56 | 6 | 30 | 23 |
-| `src/fragments/sushi_game/sushi_game_1462A0.c` | 41 | 41 | 2 | 50 | 22 |
-| `src/33FE0.c` | 44 | 44 | 20 | 28 | 20 |
-| `src/fragments/battle_engine/battle_engine_2F3CB0.c` | 74 | 74 | 2 | 23 | 13 |
-| `src/fragments/gb_tower_emulator/gb_tower_emulator_86CB0.c` | 29 | 29 | 14 | 63 | 6 |
-| `src/fragments/battle_engine/battle_engine_3055E0.c` | 81 | 81 | 0 | 13 | 11 |
-| `src/fragments/battle_engine/battle_engine_31D9F0.c` | 77 | 77 | 19 | 1 | 3 |
-| `src/fragments/rattata_game/rattata_game.c` | 30 | 30 | 2 | 58 | 10 |
-| `src/audio_commands_category2.c` | 28 | 28 | 0 | 57 | 14 |
-| `src/fragments/gallery_album/gallery_album.c` | 30 | 30 | 2 | 52 | 15 |
-| `src/gb_audio.c` | 44 | 44 | 1 | 38 | 15 |
-| `src/fragments/pokedex/pokedex_214920.c` | 47 | 47 | 3 | 38 | 9 |
-| `src/3D140.c` | 12 | 12 | 3 | 78 | 1 |
-| `src/fragments/battle_order_select/battle_order_select.c` | 36 | 36 | 0 | 36 | 22 |
-| `src/fragments/event_battle/event_battle.c` | 56 | 56 | 0 | 23 | 15 |
-| `src/fragments/battle_engine/battle_engine_2F74E0.c` | 54 | 54 | 1 | 19 | 19 |
-| `src/fragments/gallery_snap/gallery_snap.c` | 27 | 27 | 2 | 50 | 14 |
-| `src/fragments/stadium_select/stadium_select.c` | 17 | 17 | 2 | 63 | 11 |
-| `src/fragments/61/fragment61_2D78B0.c` | 43 | 43 | 0 | 26 | 20 |
-| `src/fragments/lab_pc_list/lab_pc_list_1E46B0.c` | 41 | 41 | 0 | 20 | 28 |
-| `src/save_data.c` | 64 | 64 | 1 | 3 | 21 |
-| `src/status_icons.c` | 2 | 2 | 0 | 87 | 0 |
-| `src/fragments/magikarp_game/magikarp_game.c` | 30 | 30 | 2 | 47 | 7 |
-| `src/fragments/dynamo_game/dynamo_game.c` | 17 | 17 | 0 | 60 | 8 |
-| `src/fragments/battle_engine/battle_engine_35DF70.c` | 38 | 38 | 3 | 30 | 12 |
-| `src/fragments/battle_prep/battle_prep_39BFB0.c` | 31 | 31 | 1 | 37 | 13 |
-| `src/fragments/drowzee_game/drowzee_game.c` | 20 | 20 | 0 | 54 | 8 |
-| `src/fragments/gallery_backgrounds/gallery_backgrounds_2A1B50.c` | 38 | 38 | 1 | 31 | 12 |
-| `src/fragments/widget_toolkit/widget_toolkit.c` | 21 | 21 | 0 | 55 | 6 |
-| `src/fragments/demo_scenes/demo_scenes_165640.c` | 35 | 35 | 0 | 41 | 5 |
-| `src/fragments/pokemon_lab/pokemon_lab.c` | 24 | 24 | 0 | 52 | 5 |
-| `src/libnumus/player.c` | 104 | 68 | 0 | 0 | 13 |
-| `src/fragments/battle_prep/battle_prep_394120.c` | 41 | 41 | 0 | 21 | 16 |
-| `src/fragments/sushi_game/sushi_game_144300.c` | 14 | 14 | 2 | 53 | 8 |
-| `src/fragments/trade_machine/trade_machine_28ED00.c` | 36 | 36 | 0 | 30 | 11 |
-| `src/fragments/battle_engine/battle_engine_2F23A0.c` | 59 | 59 | 1 | 10 | 6 |
-| `src/fragments/gallery_film_select/gallery_film_select.c` | 26 | 26 | 0 | 38 | 11 |
-| `src/fragments/rental_rules/rental_rules_2BED40.c` | 26 | 26 | 0 | 41 | 7 |
-| `src/fragments/transfer_pak_select/transfer_pak_select.c` | 24 | 24 | 2 | 37 | 10 |
-| `src/fragments/battle_engine/battle_engine_2EA8E0.c` | 26 | 26 | 10 | 29 | 6 |
-| `src/fragments/rental_team_selection/rental_team_selection_2DB900.c` | 25 | 25 | 0 | 36 | 10 |
-| `src/fragments/gallery_rental_viewer/gallery_rental_viewer_2AE1F0.c` | 25 | 25 | 0 | 32 | 11 |
-| `src/fragments/rental_team_selection/rental_team_selection_2E5430.c` | 43 | 43 | 1 | 8 | 14 |
-| `src/gb_audio_render.c` | 12 | 12 | 6 | 45 | 2 |
-| `src/fragments/battle_prep/battle_prep_39AC50.c` | 18 | 18 | 1 | 38 | 7 |
-| `src/fragments/gallery_camera/gallery_camera_150AC0.c` | 20 | 20 | 3 | 36 | 5 |
-| `src/fragments/pikachu_reward/pikachu_reward.c` | 29 | 29 | 2 | 21 | 12 |
-| `src/matrix.c` | 50 | 50 | 0 | 6 | 8 |
-| `src/fragments/61/fragment61_2DFB60.c` | 41 | 41 | 1 | 8 | 13 |
-| `src/graphics_textures.c` | 46 | 46 | 1 | 7 | 9 |
-| `src/fragments/demo_scenes/demo_scenes_15FA60.c` | 30 | 30 | 2 | 26 | 4 |
-| `src/fragments/particle_math/particle_math_26E6D0.c` | 52 | 52 | 0 | 10 | 0 |
-| `src/fragments/free_battle_rules/free_battle_rules.c` | 34 | 34 | 1 | 19 | 6 |
-| `src/fragments/trade_machine/trade_machine_289240.c` | 29 | 29 | 1 | 19 | 11 |
-| `src/gb_save.c` | 29 | 29 | 0 | 23 | 8 |
-| `src/stage_loader.c` | 39 | 39 | 0 | 12 | 6 |
-| `src/fragments/sushi_game/sushi_game_14A030.c` | 17 | 17 | 1 | 29 | 9 |
-| `src/fragments/trade_machine/trade_machine_287ED0.c` | 31 | 31 | 1 | 20 | 4 |
-| `src/gallery.c` | 29 | 29 | 4 | 13 | 10 |
-| `src/fragments/61/fragment61_2DD710.c` | 39 | 39 | 0 | 4 | 12 |
-| `src/poke_icon.c` | 31 | 31 | 3 | 7 | 12 |
-| `src/fragments/area_select/area_select.c` | 31 | 31 | 1 | 4 | 16 |
-| `src/fragments/gallery_rental_viewer/gallery_rental_viewer_2AFDB0.c` | 30 | 30 | 1 | 9 | 11 |
-| `src/jpeg_stream.c` | 35 | 35 | 0 | 3 | 13 |
-| `src/fragments/jigglypuff_doodle/jigglypuff_doodle.c` | 18 | 18 | 2 | 25 | 5 |
-| `src/fragments/lab_pc/lab_pc_882181B0.c` | 0 | 0 | 0 | 50 | 0 |
-| `src/audio_commands.c` | 6 | 6 | 2 | 40 | 1 |
-| `src/fragments/battle_engine/battle_engine_31AA30.c` | 31 | 31 | 0 | 18 | 0 |
-| `src/fragments/gym_leader_castle_clear/gym_leader_castle_clear.c` | 23 | 23 | 0 | 22 | 4 |
-| `src/fragments/minigame_actor_framework/minigame_actor_framework_1189B0.c` | 23 | 23 | 3 | 19 | 2 |
-| `src/fragments/minigame_actor_framework/minigame_actor_framework_119FB0.c` | 34 | 34 | 4 | 4 | 5 |
-| `src/game_state.c` | 38 | 38 | 1 | 7 | 1 |
-| `src/fragments/battle_prep/battle_prep_3A0010.c` | 25 | 25 | 0 | 12 | 8 |
-| `src/display_object_textures.c` | 31 | 31 | 1 | 1 | 11 |
-| `src/fragments/battle_engine/battle_engine_2F6930.c` | 22 | 22 | 0 | 19 | 3 |
-| `src/fragments/battle_engine/battle_engine_359F80.c` | 1 | 1 | 1 | 42 | 0 |
-| `src/fragments/battle_prep/battle_prep_39ED60.c` | 14 | 14 | 1 | 21 | 8 |
-| `src/fragments/trade_machine/trade_machine_291D60.c` | 24 | 24 | 1 | 11 | 8 |
-| `src/fragments/demo_scenes/demo_scenes_16A0E0.c` | 18 | 18 | 2 | 20 | 3 |
-| `src/geo_node.c` | 38 | 38 | 0 | 0 | 4 |
-| `src/fragments/battle_engine/battle_engine_3020D0.c` | 23 | 23 | 3 | 10 | 5 |
-| `src/fragments/lab_pc/lab_pc_1BCF10.c` | 28 | 28 | 2 | 3 | 8 |
-| `src/geo_layout.c` | 41 | 38 | 0 | 1 | 2 |
-| `src/audio_loop_point.c` | 6 | 6 | 1 | 31 | 2 |
-| `src/fragments/battle_engine/battle_engine_34A420.c` | 14 | 14 | 1 | 14 | 11 |
-| `src/fragments/minigame_actor_framework/minigame_actor_framework_1193E0.c` | 6 | 6 | 0 | 34 | 0 |
-| `src/table_view.c` | 24 | 24 | 0 | 2 | 14 |
-| `src/ui_graphics.c` | 17 | 17 | 0 | 18 | 5 |
-| `src/fragments/battle_engine/battle_engine_31C660.c` | 38 | 38 | 1 | 0 | 0 |
-| `src/fragments/gallery_camera/gallery_camera_14EC80.c` | 17 | 17 | 1 | 18 | 3 |
-| `src/audio_stream.c` | 12 | 12 | 1 | 19 | 6 |
-| `src/fragments/credits/credits_15A2B0.c` | 5 | 5 | 1 | 30 | 2 |
-| `src/fragments/battle_engine/battle_engine_304060.c` | 23 | 23 | 0 | 10 | 4 |
-| `src/gb_tower.c` | 19 | 19 | 0 | 9 | 9 |
-| `src/fragments/battle_engine/battle_engine_347330.c` | 14 | 14 | 0 | 13 | 9 |
-| `src/fragments/gym_leader_castle/gym_leader_castle.c` | 24 | 24 | 2 | 8 | 2 |
-| `src/fragments/particle_data_library/particle_data_library_2558B0.c` | 10 | 10 | 3 | 16 | 7 |
-| `src/fragments/trade_machine/trade_machine_28D1A0.c` | 14 | 14 | 0 | 17 | 5 |
-| `src/fragments/cup_select/cup_select.c` | 11 | 11 | 1 | 21 | 2 |
-| `src/fragments/particle_data_library/particle_data_library_258080.c` | 15 | 15 | 1 | 15 | 4 |
-| `src/model_animation.c` | 20 | 20 | 0 | 2 | 13 |
-| `src/fragments/battle_engine/battle_engine_313D60.c` | 23 | 23 | 3 | 7 | 1 |
-| `src/fragments/battle_engine/battle_engine_3274D0.c` | 28 | 28 | 5 | 0 | 0 |
-| `src/fragments/title_screen/title_screen.c` | 19 | 19 | 3 | 4 | 7 |
-| `src/scheduler.c` | 24 | 24 | 1 | 1 | 7 |
-| `src/fragments/rental_team_selection/rental_team_selection_2E4040.c` | 22 | 22 | 0 | 8 | 1 |
-| `src/model_renderer_callbacks.c` | 11 | 11 | 3 | 13 | 4 |
-| `src/session.c` | 19 | 19 | 0 | 4 | 8 |
-| `src/fragments/gb_tower_emulator/gb_tower_emulator_86920.c` | 4 | 4 | 1 | 22 | 3 |
-| `src/fragments/lab_ui_support/lab_ui_support.c` | 11 | 11 | 0 | 14 | 5 |
-| `src/fragments/minigame_select/minigame_select_2804C0.c` | 19 | 19 | 1 | 8 | 2 |
-| `src/model_renderer.c` | 18 | 18 | 0 | 7 | 5 |
-| `src/dp_intro.c` | 20 | 19 | 0 | 9 | 1 |
-| `src/fragments/battle_prep/battle_prep_3A1C30.c` | 21 | 21 | 0 | 5 | 3 |
-| `src/fragments/battle_engine/battle_engine_3438B0.c` | 4 | 4 | 0 | 24 | 0 |
-| `src/fragments/gallery_rental_viewer/gallery_rental_viewer_2AD910.c` | 12 | 12 | 1 | 14 | 1 |
-| `src/fragments/lab_pc/lab_pc_1A8800.c` | 13 | 13 | 0 | 12 | 3 |
-| `src/fragments/gallery_backgrounds/gallery_backgrounds_2A3F60.c` | 13 | 13 | 0 | 10 | 4 |
-| `src/rsp.c` | 20 | 20 | 0 | 5 | 2 |
-| `src/battle_hud.c` | 10 | 10 | 1 | 15 | 0 |
-| `src/fragments/battle_engine/battle_engine_328F10.c` | 24 | 24 | 0 | 0 | 2 |
-| `src/leo.c` | 16 | 16 | 1 | 7 | 2 |
-| `src/DDC0.c` | 14 | 14 | 4 | 7 | 0 |
-| `src/dma.c` | 12 | 12 | 0 | 2 | 11 |
-| `src/fragments/rental_hub/rental_hub.c` | 17 | 17 | 0 | 6 | 2 |
-| `src/fragments/rental_team_selection/rental_team_selection_2E2C20.c` | 15 | 15 | 1 | 6 | 3 |
-| `src/fragments/battle_engine/battle_engine_3591E0.c` | 9 | 9 | 3 | 8 | 4 |
-| `src/fragments/gallery_debugger/gallery_debugger.c` | 12 | 12 | 1 | 9 | 2 |
-| `src/fragments/minigame_shared_graphics/minigame_shared_graphics.c` | 9 | 9 | 2 | 11 | 2 |
-| `src/fragments/battle_engine/battle_engine_2F1D60.c` | 17 | 17 | 0 | 3 | 3 |
-| `src/fragments/dynamo_game/dynamo_game_1.c` | 2 | 2 | 0 | 19 | 2 |
-| `src/fragments/options/options.c` | 14 | 14 | 0 | 6 | 3 |
-| `src/fragments/rental_rules/rental_rules_2C13F0.c` | 19 | 19 | 0 | 4 | 0 |
-| `src/fragments/snap_print_club_background_select/snap_print_club_background_select.c` | 10 | 10 | 1 | 10 | 2 |
-| `src/fragments/demo_scenes/demo_scenes_169A40.c` | 9 | 9 | 0 | 11 | 2 |
-| `src/libleo/leomecha.c` | 22 | 22 | 0 | 0 | 0 |
-| `src/fragments/minigame_sample7_viewer/minigame_sample7_viewer.c` | 10 | 10 | 0 | 10 | 1 |
-| `src/fragments/minigame_sample8_viewer/minigame_sample8_viewer.c` | 10 | 10 | 0 | 10 | 1 |
-| `src/33E30.c` | 3 | 3 | 2 | 14 | 0 |
-| `src/fragments/battle_engine/battle_engine_32A640.c` | 14 | 14 | 5 | 0 | 0 |
-| `src/fragments/battle_engine/battle_engine_356730.c` | 8 | 8 | 3 | 2 | 6 |
-| `src/fragments/battle_engine/battle_engine_357C30.c` | 9 | 9 | 0 | 3 | 7 |
-| `src/fragments/dynamo_game/dynamo_game_2.c` | 3 | 3 | 0 | 16 | 0 |
-| `src/fragments/minigame_actor_framework/minigame_actor_framework_11BBF0.c` | 6 | 6 | 0 | 12 | 1 |
-| `src/fragments/widget_toolkit/widget_toolkit_1.c` | 5 | 5 | 0 | 11 | 3 |
-| `src/fragments/battle_engine/battle_engine_3597B0.c` | 5 | 5 | 0 | 11 | 2 |
-| `src/fragments/demo_scenes/demo_scenes_1687E0.c` | 9 | 9 | 0 | 8 | 1 |
-| `src/model_animation_events.c` | 12 | 12 | 0 | 2 | 4 |
-| `src/fragments/demo_scenes/demo_scenes_168110.c` | 12 | 12 | 0 | 4 | 1 |
-| `src/audio_stored_fade.c` | 2 | 2 | 1 | 12 | 1 |
-| `src/flash.c` | 10 | 10 | 0 | 6 | 0 |
-| `src/fragments/battle_engine/battle_engine_34F1A0.c` | 7 | 7 | 0 | 4 | 5 |
-| `src/fragments/battle_engine/battle_engine_354CD0.c` | 6 | 6 | 0 | 4 | 6 |
-| `src/fragments/battle_engine/battle_engine_355A00.c` | 6 | 6 | 0 | 4 | 6 |
-| `src/fragments/gallery_enlarge/gallery_enlarge.c` | 8 | 8 | 1 | 7 | 0 |
-| `src/fragments/minigame_sample2_viewer/minigame_sample2_viewer.c` | 6 | 6 | 2 | 8 | 0 |
-| `src/fragments/minigame_select/minigame_select_281C40.c` | 4 | 4 | 0 | 11 | 1 |
-| `src/fragments/snap_print_club_print_seals/snap_print_club_print_seals.c` | 4 | 4 | 0 | 10 | 2 |
-| `src/vector_math.c` | 10 | 10 | 0 | 2 | 4 |
-| `src/audio_channel.c` | 5 | 5 | 0 | 7 | 3 |
-| `src/audio_fade.c` | 2 | 2 | 1 | 12 | 0 |
-| `src/fragments/battle_engine/battle_engine_3512D0.c` | 6 | 6 | 0 | 4 | 5 |
-| `src/fragments/battle_engine/battle_engine_352570.c` | 6 | 6 | 0 | 4 | 5 |
-| `src/fragments/minigame_shared_library/minigame_shared_library.c` | 2 | 2 | 0 | 13 | 0 |
-| `src/fragments/particle_data_library/particle_data_library_2554C0.c` | 4 | 4 | 0 | 10 | 1 |
-| `src/gfx_rect.c` | 13 | 13 | 0 | 2 | 0 |
-| `src/crash_screen.c` | 14 | 14 | 0 | 0 | 0 |
-| `src/fragments/battle_engine/battle_engine_313250.c` | 13 | 13 | 0 | 1 | 0 |
-| `src/fragments/battle_engine/battle_engine_34E1A0.c` | 6 | 6 | 0 | 4 | 4 |
-| `src/fragments/battle_engine/battle_engine_3502D0.c` | 6 | 6 | 0 | 4 | 4 |
-| `src/fragments/battle_engine/battle_engine_353370.c` | 6 | 6 | 0 | 3 | 5 |
-| `src/fragments/battle_engine/battle_engine_3540B0.c` | 6 | 6 | 0 | 3 | 5 |
-| `src/fragments/ranking_debug_test/ranking_debug_test.c` | 8 | 8 | 0 | 5 | 1 |
-| `src/audio_sfx.c` | 1 | 1 | 0 | 11 | 1 |
-| `src/fragments/battle_prep/battle_prep_3A1970.c` | 7 | 7 | 0 | 6 | 0 |
-| `src/fragments/fatal_error_screen/fatal_error_screen.c` | 6 | 6 | 0 | 6 | 1 |
-| `src/fragments/drowzee_game/drowzee_game_1.c` | 1 | 1 | 0 | 10 | 1 |
-| `src/fragments/minigame_actor_framework/minigame_actor_framework_11BF90.c` | 9 | 9 | 0 | 2 | 1 |
-| `src/fragments/rental_rules/rental_rules_2C0F90.c` | 10 | 10 | 0 | 2 | 0 |
-| `src/fragments/gb_tower_team_prep/gb_tower_team_prep.c` | 4 | 4 | 1 | 4 | 2 |
-| `src/gb_tower_audio.c` | 5 | 5 | 0 | 5 | 1 |
-| `src/fragments/demo_scenes/demo_scenes_161000.c` | 9 | 9 | 0 | 0 | 1 |
-| `src/fragments/demo_scenes/demo_scenes_161590.c` | 3 | 3 | 0 | 5 | 2 |
-| `src/fragments/particle_data_library/particle_data_library_257AF0.c` | 4 | 4 | 1 | 3 | 2 |
-| `src/gfx_buffer.c` | 6 | 6 | 0 | 2 | 2 |
-| `src/profiler.c` | 14 | 9 | 0 | 1 | 0 |
-| `src/cry.c` | 2 | 2 | 0 | 6 | 1 |
-| `src/fragments/battle_engine/battle_engine_315830.c` | 8 | 8 | 0 | 1 | 0 |
-| `src/fragments/particle_data_library/particle_data_library_2577F0.c` | 2 | 2 | 2 | 4 | 1 |
-| `src/libleo/leoc2ecc.c` | 7 | 7 | 0 | 2 | 0 |
-| `src/memory.c` | 10 | 7 | 0 | 0 | 2 |
-| `src/audio_data.c` | 2 | 2 | 0 | 6 | 0 |
-| `src/fragments/battle_prep/battle_prep_3974E0.c` | 4 | 4 | 0 | 0 | 4 |
-| `src/jpegutils.c` | 8 | 8 | 0 | 0 | 0 |
-| `src/audio_category_fade.c` | 5 | 5 | 1 | 1 | 0 |
-| `src/controller_ram.c` | 4 | 4 | 0 | 3 | 0 |
-| `src/fragments/demo_scenes/demo_scenes_160CB0.c` | 7 | 7 | 0 | 0 | 0 |
-| `src/fragments/n64_logo/n64_logo.c` | 5 | 5 | 0 | 0 | 2 |
-| `src/fragments/pokemon_lab_support/pokemon_lab_support.c` | 3 | 3 | 0 | 3 | 1 |
-| `src/libnaudio/n_mainbus.c` | 1 | 1 | 0 | 6 | 0 |
-| `src/libnaudio/n_synthesizer.c` | 9 | 7 | 0 | 0 | 0 |
-| `src/text_system.c` | 7 | 7 | 0 | 0 | 0 |
-| `src/audio_sound_state.c` | 5 | 5 | 0 | 0 | 1 |
-| `src/fragments/battle_engine/battle_engine_351F20.c` | 1 | 1 | 1 | 3 | 1 |
-| `src/fragments/demo_scenes/demo_scenes_164B00.c` | 2 | 2 | 0 | 2 | 2 |
-| `src/fragments/gallery_backgrounds/gallery_backgrounds_2A3E70.c` | 5 | 5 | 0 | 1 | 0 |
-| `src/fragments/lab_pc/lab_pc_1A8590.c` | 4 | 4 | 0 | 1 | 1 |
-| `src/fragments/particle_data_library/particle_data_library_2590C0.c` | 3 | 3 | 0 | 1 | 2 |
-| `src/libnaudio/n_env.c` | 7 | 6 | 0 | 0 | 0 |
-| `src/rom_device.c` | 2 | 2 | 0 | 3 | 1 |
-| `src/fragments/1/fragment1_89010.c` | 1 | 1 | 1 | 3 | 0 |
-| `src/fragments/battle_engine/battle_engine_31A7E0.c` | 5 | 5 | 0 | 0 | 0 |
-| `src/fragments/demo_scenes/demo_scenes_169510.c` | 3 | 3 | 1 | 0 | 1 |
-| `src/fragments/particle_data_library/particle_data_library_2557A0.c` | 4 | 4 | 0 | 1 | 0 |
-| `src/gb_mbc.c` | 3 | 3 | 0 | 1 | 1 |
-| `src/input.c` | 3 | 3 | 0 | 2 | 0 |
-| `src/libleo/leocmdex.c` | 2 | 2 | 0 | 2 | 1 |
-| `src/libleo/leofunc.c` | 5 | 5 | 0 | 0 | 0 |
-| `src/libleo/leoint.c` | 5 | 5 | 0 | 0 | 0 |
-| `src/libleo/leotimer.c` | 4 | 4 | 0 | 0 | 1 |
-| `src/reset.c` | 5 | 1 | 1 | 2 | 1 |
-| `src/fragments/particle_data_library/particle_data_library_257DE0.c` | 2 | 2 | 0 | 2 | 0 |
-| `src/fragments/particle_data_library/particle_data_library_257EC0.c` | 2 | 2 | 0 | 2 | 0 |
-| `src/fragments/particle_data_library/particle_data_library_257FA0.c` | 2 | 2 | 0 | 2 | 0 |
-| `src/gsm_decoder.c` | 4 | 4 | 0 | 0 | 0 |
-| `src/jpeg_decoder.c` | 4 | 4 | 0 | 0 | 0 |
-| `src/libnaudio/n_reverb.c` | 6 | 4 | 0 | 0 | 0 |
-| `src/audio_sfx_wrapper.c` | 2 | 2 | 1 | 0 | 0 |
-| `src/fragments/particle_data_library/particle_data_library_257750.c` | 2 | 2 | 0 | 1 | 0 |
-| `src/fragments/pokemon_lab_unused/pokemon_lab_unused.c` | 1 | 1 | 1 | 1 | 0 |
-| `src/libleo/bootdisk.c` | 2 | 2 | 0 | 0 | 1 |
-| `src/libleo/leointerrupt.c` | 3 | 3 | 0 | 0 | 0 |
-| `src/libnaudio/n_load.c` | 3 | 3 | 0 | 0 | 0 |
-| `src/main.c` | 2 | 0 | 0 | 3 | 0 |
-| `src/minigame_dispatch.c` | 1 | 1 | 0 | 1 | 1 |
-| `src/audio_cache.c` | 1 | 1 | 1 | 0 | 0 |
-| `src/fragments/battle_prep/battle_prep_data.c` | 0 | 0 | 0 | 2 | 0 |
-| `src/fragments/debug_menu_slot76/debug_menu_slot76.c` | 1 | 1 | 1 | 0 | 0 |
-| `src/fragments/debug_menu_slot77/debug_menu_slot77.c` | 1 | 1 | 1 | 0 | 0 |
-| `src/fragments/particle_data_library/particle_data_library_259030.c` | 1 | 1 | 0 | 1 | 0 |
-| `src/fragments/particle_math/particle_math_26E540.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/fragments/particle_math/particle_math_26F9B0.c` | 1 | 1 | 1 | 0 | 0 |
-| `src/libleo/driverominit.c` | 1 | 1 | 0 | 1 | 0 |
-| `src/libleo/leord_diskid.c` | 1 | 1 | 0 | 0 | 1 |
-| `src/libleo/leoread.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/libleo/leoreset.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/libleo/leoutil.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/libnaudio/n_drvrNew.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/libnaudio/n_sl.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/libnaudio/n_synallocvoice.c` | 2 | 2 | 0 | 0 | 0 |
-| `src/fragments/credits/credits_15A2A0.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_exit/debug_menu_exit.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot68/debug_menu_slot68.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot69/debug_menu_slot69.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot70/debug_menu_slot70.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot71/debug_menu_slot71.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot72/debug_menu_slot72.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot73/debug_menu_slot73.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/debug_menu_slot74/debug_menu_slot74.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/demo_scenes/demo_scenes_15F9B0.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/gb_tower_emulator/gb_tower_emulator_86C30.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/fragments/gb_tower_unused/gb_tower_unused.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/bytetolba.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/cjcreateleomanager.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/driveexist.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/lbatobyte.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leodiskinit.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leoinquiry.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leomode_sel.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leomotor.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leomseq_tbl.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leord_capa.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leorezero.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leoseek.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leotestunit.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leotranslat.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/leowrite.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/readdiskid.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/readrtc.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/readwrite.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/seek.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/setrtc.c` | 2 | 1 | 0 | 0 | 0 |
-| `src/libleo/spdlmotor.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libleo/testunitready.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_auxbus.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_resample.c` | 2 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_save.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synaddplayer.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synallocfx.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_syndelete.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synfreevoice.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synsetfxmix.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synsetpan.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synsetpitch.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synsetpriority.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synsetvol.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synstartvoiceparam.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/libnaudio/n_synstopvoice.c` | 1 | 1 | 0 | 0 | 0 |
-| `src/memmap.c` | 13 | 0 | 0 | 0 | 1 |
+| File | Defined | No comment | `func_` | `D_/jtbl_` | `temp_/var_` locals | `arg{n}` | Raw offsets |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `src/fragments/battle_engine/battle_engine_315D50.c` | 69 | 69 | 177 | 343 | 9 | 52 | 0 |
+| `src/fragments/battle_engine/battle_engine_32B680.c` | 280 | 280 | 147 | 6 | 26 | 173 | 0 |
+| `src/fragments/particle_math/particle_math_269820.c` | 286 | 286 | 14 | 4 | 24 | 282 | 0 |
+| `src/fragments/lab_pc_list/lab_pc_list_1D7B40.c` | 148 | 148 | 5 | 111 | 68 | 142 | 0 |
+| `src/fragments/credits/credits_158A00.c` | 18 | 17 | 3 | 408 | 8 | 9 | 0 |
+| `src/fragments/credits/credits_15AD80.c` | 2 | 2 | 0 | 378 | 0 | 2 | 0 |
+| `src/fragments/pokedex/pokedex_2190D0.c` | 17 | 17 | 2 | 339 | 8 | 8 | 0 |
+| `src/fragments/widget_tree/widget_tree.c` | 148 | 148 | 4 | 12 | 49 | 148 | 0 |
+| `src/fragments/battle_engine/battle_engine_2EC3C0.c` | 121 | 121 | 14 | 53 | 21 | 118 | 0 |
+| `src/fragments/lab_pc/lab_pc_1B4EA0.c` | 99 | 99 | 4 | 74 | 38 | 98 | 0 |
+| `src/fragments/battle_engine/battle_engine_339CA0.c` | 153 | 153 | 52 | 1 | 1 | 97 | 0 |
+| `src/fragments/battle_engine/battle_engine_309ED0.c` | 118 | 118 | 14 | 34 | 19 | 96 | 0 |
+| `src/fragments/lab_pc_list/lab_pc_list_1CEA00.c` | 92 | 92 | 3 | 59 | 33 | 91 | 0 |
+| `src/fragments/battle_engine/battle_engine_361050.c` | 91 | 91 | 7 | 37 | 59 | 82 | 0 |
+| `src/fragments/minigame_select/minigame_select_27BCC0.c` | 49 | 49 | 2 | 172 | 25 | 25 | 0 |
+| `src/3D140_2.c` | 32 | 30 | 8 | 177 | 11 | 23 | 0 |
+| `src/fragments/transfer_pak_check/transfer_pak_check.c` | 50 | 50 | 0 | 134 | 24 | 33 | 0 |
+| `src/fragments/lab_pc/lab_pc_1AE680.c` | 70 | 70 | 3 | 68 | 28 | 68 | 0 |
+| `src/pokemon_stats.c` | 91 | 91 | 4 | 14 | 32 | 88 | 0 |
+| `src/fragments/lab_pc_icons/lab_pc_icons.c` | 61 | 61 | 1 | 90 | 12 | 60 | 0 |
+| `src/fragments/gb_tower_emulator/gb_tower_emulator_7F9A0.c` | 43 | 43 | 20 | 106 | 13 | 35 | 0 |
+| `src/fragments/particle_math/particle_math_261F90.c` | 83 | 83 | 0 | 0 | 37 | 81 | 0 |
+| `src/fragments/battle_engine/battle_engine_343BA0.c` | 126 | 126 | 13 | 40 | 4 | 8 | 0 |
+| `src/fragments/trade_machine/trade_machine_2942C0.c` | 75 | 75 | 2 | 23 | 31 | 59 | 0 |
+| `src/fragments/battle_engine/battle_engine_317E70.c` | 98 | 98 | 0 | 8 | 11 | 71 | 0 |
+| `src/fragments/particle_math/particle_math_264380.c` | 100 | 100 | 1 | 46 | 9 | 32 | 0 |
+| `src/geo_render.c` | 72 | 72 | 2 | 27 | 24 | 62 | 0 |
+| `src/fragments/battle_engine/battle_engine_2F3CB0.c` | 74 | 74 | 2 | 23 | 13 | 74 | 0 |
+| `src/fragments/lab_pc/lab_pc_1A9780.c` | 55 | 55 | 5 | 45 | 24 | 55 | 0 |
+| `src/fragments/battle_engine/battle_engine_3223B0.c` | 91 | 91 | 21 | 0 | 4 | 67 | 0 |
+| `src/fragments/battle_engine/battle_engine_359F90.c` | 54 | 54 | 29 | 56 | 24 | 20 | 0 |
+| `src/fragments/battle_engine/battle_engine_3055E0.c` | 81 | 81 | 0 | 13 | 11 | 77 | 0 |
+| `src/fragments/ekans_game/ekans_game.c` | 68 | 68 | 6 | 76 | 12 | 11 | 0 |
+| `src/fragments/battle_prep/battle_prep_397B10.c` | 44 | 44 | 0 | 55 | 24 | 44 | 0 |
+| `src/fragments/battle_engine/battle_engine_31D9F0.c` | 77 | 77 | 19 | 1 | 3 | 62 | 0 |
+| `src/fragments/battle_engine/battle_engine_2FA4D0.c` | 56 | 56 | 6 | 30 | 23 | 46 | 0 |
+| `src/fragments/clefairy_game/clefairy_game.c` | 58 | 58 | 1 | 75 | 14 | 10 | 0 |
+| `src/fragments/sandshrew_game/sandshrew_game.c` | 41 | 41 | 0 | 101 | 5 | 10 | 0 |
+| `src/fragments/sushi_game/sushi_game_1462A0.c` | 41 | 41 | 2 | 50 | 22 | 36 | 0 |
+| `src/fragments/event_battle/event_battle.c` | 56 | 56 | 0 | 23 | 15 | 52 | 0 |
+| `src/fragments/victory_palace/victory_palace.c` | 44 | 44 | 7 | 69 | 9 | 17 | 0 |
+| `src/fragments/metapod_game/metapod_game.c` | 58 | 58 | 2 | 56 | 16 | 12 | 0 |
+| `src/save_data.c` | 64 | 64 | 1 | 3 | 21 | 49 | 0 |
+| `src/gb_audio.c` | 44 | 44 | 1 | 38 | 15 | 39 | 0 |
+| `src/gb_data.c` | 23 | 23 | 1 | 91 | 1 | 20 | 0 |
+| `src/fragments/battle_engine/battle_engine_2F23A0.c` | 59 | 59 | 1 | 10 | 6 | 59 | 0 |
+| `src/fragments/pokedex/pokedex_214920.c` | 47 | 47 | 3 | 38 | 9 | 37 | 0 |
+| `src/fragments/gallery_camera/gallery_camera_14CA70.c` | 35 | 35 | 1 | 81 | 4 | 12 | 0 |
+| `src/fragments/widget_toolkit/widget_toolkit_2.c` | 17 | 16 | 4 | 97 | 6 | 9 | 0 |
+| `src/fragments/lab_pc_list/lab_pc_list_1E46B0.c` | 41 | 41 | 0 | 20 | 28 | 40 | 0 |
+| `src/fragments/battle_engine/battle_engine_2F74E0.c` | 54 | 54 | 1 | 19 | 19 | 35 | 0 |
+| `src/audio_commands_category2.c` | 28 | 28 | 0 | 57 | 14 | 26 | 0 |
+| `src/fragments/battle_order_select/battle_order_select.c` | 36 | 36 | 0 | 36 | 22 | 30 | 0 |
+| `src/fragments/gallery_album/gallery_album.c` | 30 | 30 | 2 | 52 | 15 | 25 | 0 |
+| `src/fragments/gb_tower_emulator/gb_tower_emulator_86CB0.c` | 29 | 29 | 14 | 63 | 6 | 12 | 0 |
+| `src/33FE0.c` | 44 | 44 | 20 | 28 | 20 | 11 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_161E60.c` | 38 | 38 | 0 | 74 | 5 | 5 | 0 |
+| `src/fragments/61/fragment61_2D78B0.c` | 43 | 43 | 0 | 26 | 20 | 29 | 0 |
+| `src/fragments/gallery_backgrounds/gallery_backgrounds_2A1B50.c` | 38 | 38 | 1 | 31 | 12 | 33 | 0 |
+| `src/fragments/particle_math/particle_math_26E6D0.c` | 52 | 52 | 0 | 10 | 0 | 52 | 0 |
+| `src/fragments/battle_prep/battle_prep_39BFB0.c` | 31 | 31 | 1 | 37 | 13 | 31 | 0 |
+| `src/fragments/rattata_game/rattata_game.c` | 30 | 30 | 2 | 58 | 10 | 11 | 0 |
+| `src/fragments/rental_team_selection/rental_team_selection_2E5430.c` | 43 | 43 | 1 | 8 | 14 | 43 | 0 |
+| `src/fragments/trade_machine/trade_machine_28ED00.c` | 36 | 36 | 0 | 30 | 11 | 30 | 0 |
+| `src/fragments/gallery_snap/gallery_snap.c` | 27 | 27 | 2 | 50 | 14 | 12 | 0 |
+| `src/fragments/pokemon_lab/pokemon_lab.c` | 24 | 24 | 0 | 52 | 5 | 23 | 0 |
+| `src/fragments/stadium_select/stadium_select.c` | 17 | 17 | 2 | 63 | 11 | 11 | 0 |
+| `src/fragments/61/fragment61_2DFB60.c` | 41 | 41 | 1 | 8 | 13 | 40 | 0 |
+| `src/3D140.c` | 12 | 12 | 3 | 78 | 1 | 7 | 0 |
+| `src/fragments/widget_toolkit/widget_toolkit.c` | 21 | 21 | 0 | 55 | 6 | 18 | 0 |
+| `src/libnumus/player.c` | 104 | 68 | 0 | 0 | 13 | 18 | 0 |
+| `src/fragments/magikarp_game/magikarp_game.c` | 30 | 30 | 2 | 47 | 7 | 9 | 0 |
+| `src/fragments/gallery_film_select/gallery_film_select.c` | 26 | 26 | 0 | 38 | 11 | 19 | 0 |
+| `src/fragments/61/fragment61_2DD710.c` | 39 | 39 | 0 | 4 | 12 | 38 | 0 |
+| `src/fragments/drowzee_game/drowzee_game.c` | 20 | 20 | 0 | 54 | 8 | 9 | 0 |
+| `src/fragments/dynamo_game/dynamo_game.c` | 17 | 17 | 0 | 60 | 8 | 6 | 0 |
+| `src/status_icons.c` | 2 | 2 | 0 | 87 | 0 | 2 | 0 |
+| `src/fragments/battle_engine/battle_engine_2EA8E0.c` | 26 | 26 | 10 | 29 | 6 | 18 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_165640.c` | 35 | 35 | 0 | 41 | 5 | 8 | 0 |
+| `src/fragments/battle_prep/battle_prep_394120.c` | 41 | 41 | 0 | 21 | 16 | 10 | 0 |
+| `src/gb_save.c` | 29 | 29 | 0 | 23 | 8 | 26 | 0 |
+| `src/fragments/battle_engine/battle_engine_35DF70.c` | 38 | 38 | 3 | 30 | 12 | 1 | 0 |
+| `src/fragments/trade_machine/trade_machine_289240.c` | 29 | 29 | 1 | 19 | 11 | 24 | 0 |
+| `src/fragments/transfer_pak_select/transfer_pak_select.c` | 24 | 24 | 2 | 37 | 10 | 11 | 0 |
+| `src/poke_icon.c` | 31 | 31 | 3 | 7 | 12 | 30 | 0 |
+| `src/fragments/battle_prep/battle_prep_39AC50.c` | 18 | 18 | 1 | 38 | 7 | 18 | 0 |
+| `src/fragments/sushi_game/sushi_game_144300.c` | 14 | 14 | 2 | 53 | 8 | 5 | 0 |
+| `src/fragments/pikachu_reward/pikachu_reward.c` | 29 | 29 | 2 | 21 | 12 | 17 | 0 |
+| `src/fragments/battle_engine/battle_engine_31AA30.c` | 31 | 31 | 0 | 18 | 0 | 31 | 0 |
+| `src/geo_node.c` | 38 | 38 | 0 | 0 | 4 | 38 | 0 |
+| `src/jpeg_stream.c` | 35 | 35 | 0 | 3 | 13 | 29 | 0 |
+| `src/fragments/gallery_rental_viewer/gallery_rental_viewer_2AFDB0.c` | 30 | 30 | 1 | 9 | 11 | 28 | 0 |
+| `src/fragments/rental_rules/rental_rules_2BED40.c` | 26 | 26 | 0 | 41 | 7 | 5 | 0 |
+| `src/fragments/rental_team_selection/rental_team_selection_2DB900.c` | 25 | 25 | 0 | 36 | 10 | 8 | 0 |
+| `src/gallery.c` | 29 | 29 | 4 | 13 | 10 | 23 | 0 |
+| `src/graphics_textures.c` | 46 | 46 | 1 | 7 | 9 | 16 | 0 |
+| `src/fragments/gallery_camera/gallery_camera_150AC0.c` | 20 | 20 | 3 | 36 | 5 | 13 | 0 |
+| `src/fragments/battle_engine/battle_engine_31C660.c` | 38 | 38 | 1 | 0 | 0 | 37 | 0 |
+| `src/fragments/minigame_actor_framework/minigame_actor_framework_119FB0.c` | 34 | 34 | 4 | 4 | 5 | 29 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_15FA60.c` | 30 | 30 | 2 | 26 | 4 | 13 | 0 |
+| `src/fragments/gallery_rental_viewer/gallery_rental_viewer_2AE1F0.c` | 25 | 25 | 0 | 32 | 11 | 7 | 0 |
+| `src/display_object_textures.c` | 31 | 31 | 1 | 1 | 11 | 29 | 0 |
+| `src/fragments/free_battle_rules/free_battle_rules.c` | 34 | 34 | 1 | 19 | 6 | 11 | 0 |
+| `src/gb_audio_render.c` | 12 | 12 | 6 | 45 | 2 | 6 | 0 |
+| `src/fragments/battle_prep/battle_prep_3A0010.c` | 25 | 25 | 0 | 12 | 8 | 25 | 0 |
+| `src/fragments/lab_pc/lab_pc_1BCF10.c` | 28 | 28 | 2 | 3 | 8 | 28 | 0 |
+| `src/matrix.c` | 50 | 50 | 0 | 6 | 8 | 5 | 0 |
+| `src/stage_loader.c` | 39 | 39 | 0 | 12 | 6 | 12 | 0 |
+| `src/fragments/sushi_game/sushi_game_14A030.c` | 17 | 17 | 1 | 29 | 9 | 11 | 0 |
+| `src/fragments/area_select/area_select.c` | 31 | 31 | 1 | 4 | 16 | 14 | 0 |
+| `src/fragments/battle_engine/battle_engine_2F6930.c` | 22 | 22 | 0 | 19 | 3 | 22 | 0 |
+| `src/fragments/trade_machine/trade_machine_287ED0.c` | 31 | 31 | 1 | 20 | 4 | 10 | 0 |
+| `src/fragments/trade_machine/trade_machine_291D60.c` | 24 | 24 | 1 | 11 | 8 | 18 | 0 |
+| `src/table_view.c` | 24 | 24 | 0 | 2 | 14 | 22 | 0 |
+| `src/fragments/battle_engine/battle_engine_304060.c` | 23 | 23 | 0 | 10 | 4 | 22 | 0 |
+| `src/fragments/minigame_actor_framework/minigame_actor_framework_1189B0.c` | 23 | 23 | 3 | 19 | 2 | 11 | 0 |
+| `src/fragments/battle_prep/battle_prep_39ED60.c` | 14 | 14 | 1 | 21 | 8 | 13 | 0 |
+| `src/game_state.c` | 38 | 38 | 1 | 7 | 1 | 10 | 0 |
+| `src/fragments/gym_leader_castle_clear/gym_leader_castle_clear.c` | 23 | 23 | 0 | 22 | 4 | 6 | 0 |
+| `src/fragments/jigglypuff_doodle/jigglypuff_doodle.c` | 18 | 18 | 2 | 25 | 5 | 5 | 0 |
+| `src/fragments/battle_engine/battle_engine_3274D0.c` | 28 | 28 | 5 | 0 | 0 | 21 | 0 |
+| `src/audio_commands.c` | 6 | 6 | 2 | 40 | 1 | 4 | 0 |
+| `src/model_animation.c` | 20 | 20 | 0 | 2 | 13 | 18 | 0 |
+| `src/fragments/battle_engine/battle_engine_3020D0.c` | 23 | 23 | 3 | 10 | 5 | 11 | 0 |
+| `src/gb_tower.c` | 19 | 19 | 0 | 9 | 9 | 15 | 0 |
+| `src/fragments/battle_engine/battle_engine_313D60.c` | 23 | 23 | 3 | 7 | 1 | 17 | 0 |
+| `src/fragments/battle_engine/battle_engine_34A420.c` | 14 | 14 | 1 | 14 | 11 | 10 | 0 |
+| `src/fragments/battle_prep/battle_prep_3A1C30.c` | 21 | 21 | 0 | 5 | 3 | 21 | 0 |
+| `src/fragments/lab_pc/lab_pc_882181B0.c` | 0 | 0 | 0 | 50 | 0 | 0 | 0 |
+| `src/audio_stream.c` | 12 | 12 | 1 | 19 | 6 | 11 | 0 |
+| `src/fragments/gallery_camera/gallery_camera_14EC80.c` | 17 | 17 | 1 | 18 | 3 | 10 | 0 |
+| `src/fragments/rental_team_selection/rental_team_selection_2E4040.c` | 22 | 22 | 0 | 8 | 1 | 18 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_258080.c` | 15 | 15 | 1 | 15 | 4 | 13 | 0 |
+| `src/scheduler.c` | 24 | 24 | 1 | 1 | 7 | 15 | 0 |
+| `src/fragments/battle_engine/battle_engine_347330.c` | 14 | 14 | 0 | 13 | 9 | 10 | 0 |
+| `src/fragments/trade_machine/trade_machine_28D1A0.c` | 14 | 14 | 0 | 17 | 5 | 10 | 0 |
+| `src/model_renderer.c` | 18 | 18 | 0 | 7 | 5 | 16 | 0 |
+| `src/audio_loop_point.c` | 6 | 6 | 1 | 31 | 2 | 5 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_16A0E0.c` | 18 | 18 | 2 | 20 | 3 | 2 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_2558B0.c` | 10 | 10 | 3 | 16 | 7 | 9 | 0 |
+| `src/session.c` | 19 | 19 | 0 | 4 | 8 | 14 | 0 |
+| `src/fragments/battle_engine/battle_engine_359F80.c` | 1 | 1 | 1 | 42 | 0 | 0 | 0 |
+| `src/fragments/minigame_select/minigame_select_2804C0.c` | 19 | 19 | 1 | 8 | 2 | 13 | 0 |
+| `src/ui_graphics.c` | 17 | 17 | 0 | 18 | 5 | 3 | 0 |
+| `src/geo_layout.c` | 41 | 38 | 0 | 1 | 2 | 1 | 0 |
+| `src/fragments/credits/credits_15A2B0.c` | 5 | 5 | 1 | 30 | 2 | 3 | 0 |
+| `src/fragments/lab_pc/lab_pc_1A8800.c` | 13 | 13 | 0 | 12 | 3 | 13 | 0 |
+| `src/fragments/lab_ui_support/lab_ui_support.c` | 11 | 11 | 0 | 14 | 5 | 11 | 0 |
+| `src/fragments/title_screen/title_screen.c` | 19 | 19 | 3 | 4 | 7 | 8 | 0 |
+| `src/rsp.c` | 20 | 20 | 0 | 5 | 2 | 14 | 0 |
+| `src/fragments/battle_engine/battle_engine_328F10.c` | 24 | 24 | 0 | 0 | 2 | 14 | 0 |
+| `src/fragments/minigame_actor_framework/minigame_actor_framework_1193E0.c` | 6 | 6 | 0 | 34 | 0 | 0 | 0 |
+| `src/fragments/rental_team_selection/rental_team_selection_2E2C20.c` | 15 | 15 | 1 | 6 | 3 | 15 | 0 |
+| `src/fragments/cup_select/cup_select.c` | 11 | 11 | 1 | 21 | 2 | 3 | 0 |
+| `src/fragments/gym_leader_castle/gym_leader_castle.c` | 24 | 24 | 2 | 8 | 2 | 2 | 0 |
+| `src/fragments/battle_engine/battle_engine_2F1D60.c` | 17 | 17 | 0 | 3 | 3 | 14 | 0 |
+| `src/dma.c` | 12 | 12 | 0 | 2 | 11 | 11 | 0 |
+| `src/dp_intro.c` | 20 | 19 | 0 | 9 | 1 | 7 | 0 |
+| `src/fragments/gallery_backgrounds/gallery_backgrounds_2A3F60.c` | 13 | 13 | 0 | 10 | 4 | 8 | 0 |
+| `src/model_renderer_callbacks.c` | 11 | 11 | 3 | 13 | 4 | 4 | 0 |
+| `src/fragments/gallery_rental_viewer/gallery_rental_viewer_2AD910.c` | 12 | 12 | 1 | 14 | 1 | 5 | 0 |
+| `src/fragments/gb_tower_emulator/gb_tower_emulator_86920.c` | 4 | 4 | 1 | 22 | 3 | 3 | 0 |
+| `src/battle_hud.c` | 10 | 10 | 1 | 15 | 0 | 6 | 0 |
+| `src/fragments/minigame_shared_graphics/minigame_shared_graphics.c` | 9 | 9 | 2 | 11 | 2 | 8 | 0 |
+| `src/fragments/options/options.c` | 14 | 14 | 0 | 6 | 3 | 9 | 0 |
+| `src/fragments/battle_engine/battle_engine_3438B0.c` | 4 | 4 | 0 | 24 | 0 | 2 | 0 |
+| `src/leo.c` | 16 | 16 | 1 | 7 | 2 | 4 | 0 |
+| `src/DDC0.c` | 14 | 14 | 4 | 7 | 0 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_32A640.c` | 14 | 14 | 5 | 0 | 0 | 10 | 0 |
+| `src/fragments/battle_engine/battle_engine_3591E0.c` | 9 | 9 | 3 | 8 | 4 | 5 | 0 |
+| `src/model_animation_events.c` | 12 | 12 | 0 | 2 | 4 | 10 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_168110.c` | 12 | 12 | 0 | 4 | 1 | 10 | 0 |
+| `src/fragments/rental_hub/rental_hub.c` | 17 | 17 | 0 | 6 | 2 | 2 | 0 |
+| `src/fragments/battle_engine/battle_engine_313250.c` | 13 | 13 | 0 | 1 | 0 | 12 | 0 |
+| `src/fragments/battle_engine/battle_engine_357C30.c` | 9 | 9 | 0 | 3 | 7 | 7 | 0 |
+| `src/fragments/snap_print_club_background_select/snap_print_club_background_select.c` | 10 | 10 | 1 | 10 | 2 | 3 | 0 |
+| `src/fragments/battle_engine/battle_engine_356730.c` | 8 | 8 | 3 | 2 | 6 | 6 | 0 |
+| `src/fragments/gallery_debugger/gallery_debugger.c` | 12 | 12 | 1 | 9 | 2 | 1 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_1687E0.c` | 9 | 9 | 0 | 8 | 1 | 6 | 0 |
+| `src/fragments/dynamo_game/dynamo_game_1.c` | 2 | 2 | 0 | 19 | 2 | 1 | 0 |
+| `src/fragments/minigame_sample7_viewer/minigame_sample7_viewer.c` | 10 | 10 | 0 | 10 | 1 | 3 | 0 |
+| `src/fragments/minigame_sample8_viewer/minigame_sample8_viewer.c` | 10 | 10 | 0 | 10 | 1 | 3 | 0 |
+| `src/fragments/rental_rules/rental_rules_2C13F0.c` | 19 | 19 | 0 | 4 | 0 | 1 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_169A40.c` | 9 | 9 | 0 | 11 | 2 | 1 | 0 |
+| `src/vector_math.c` | 10 | 10 | 0 | 2 | 4 | 7 | 0 |
+| `src/33E30.c` | 3 | 3 | 2 | 14 | 0 | 3 | 0 |
+| `src/fragments/minigame_actor_framework/minigame_actor_framework_11BBF0.c` | 6 | 6 | 0 | 12 | 1 | 3 | 0 |
+| `src/libleo/leomecha.c` | 22 | 22 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/battle_engine/battle_engine_34F1A0.c` | 7 | 7 | 0 | 4 | 5 | 5 | 0 |
+| `src/fragments/widget_toolkit/widget_toolkit_1.c` | 5 | 5 | 0 | 11 | 3 | 2 | 0 |
+| `src/gfx_rect.c` | 13 | 13 | 0 | 2 | 0 | 6 | 0 |
+| `src/fragments/battle_engine/battle_engine_354CD0.c` | 6 | 6 | 0 | 4 | 6 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_355A00.c` | 6 | 6 | 0 | 4 | 6 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_3597B0.c` | 5 | 5 | 0 | 11 | 2 | 2 | 0 |
+| `src/fragments/battle_prep/battle_prep_3A1970.c` | 7 | 7 | 0 | 6 | 0 | 7 | 0 |
+| `src/audio_channel.c` | 5 | 5 | 0 | 7 | 3 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_3512D0.c` | 6 | 6 | 0 | 4 | 5 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_352570.c` | 6 | 6 | 0 | 4 | 5 | 4 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_161000.c` | 9 | 9 | 0 | 0 | 1 | 9 | 0 |
+| `src/fragments/dynamo_game/dynamo_game_2.c` | 3 | 3 | 0 | 16 | 0 | 0 | 0 |
+| `src/fragments/fatal_error_screen/fatal_error_screen.c` | 6 | 6 | 0 | 6 | 1 | 6 | 0 |
+| `src/fragments/minigame_actor_framework/minigame_actor_framework_11BF90.c` | 9 | 9 | 0 | 2 | 1 | 7 | 0 |
+| `src/fragments/snap_print_club_print_seals/snap_print_club_print_seals.c` | 4 | 4 | 0 | 10 | 2 | 3 | 0 |
+| `src/flash.c` | 10 | 10 | 0 | 6 | 0 | 2 | 0 |
+| `src/fragments/battle_engine/battle_engine_34E1A0.c` | 6 | 6 | 0 | 4 | 4 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_3502D0.c` | 6 | 6 | 0 | 4 | 4 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_353370.c` | 6 | 6 | 0 | 3 | 5 | 4 | 0 |
+| `src/fragments/battle_engine/battle_engine_3540B0.c` | 6 | 6 | 0 | 3 | 5 | 4 | 0 |
+| `src/fragments/minigame_sample2_viewer/minigame_sample2_viewer.c` | 6 | 6 | 2 | 8 | 0 | 2 | 0 |
+| `src/fragments/minigame_select/minigame_select_281C40.c` | 4 | 4 | 0 | 11 | 1 | 2 | 0 |
+| `src/audio_stored_fade.c` | 2 | 2 | 1 | 12 | 1 | 1 | 0 |
+| `src/fragments/battle_engine/battle_engine_315830.c` | 8 | 8 | 0 | 1 | 0 | 8 | 0 |
+| `src/fragments/gallery_enlarge/gallery_enlarge.c` | 8 | 8 | 1 | 7 | 0 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_2554C0.c` | 4 | 4 | 0 | 10 | 1 | 2 | 0 |
+| `src/audio_fade.c` | 2 | 2 | 1 | 12 | 0 | 1 | 0 |
+| `src/fragments/minigame_shared_library/minigame_shared_library.c` | 2 | 2 | 0 | 13 | 0 | 1 | 0 |
+| `src/fragments/ranking_debug_test/ranking_debug_test.c` | 8 | 8 | 0 | 5 | 1 | 2 | 0 |
+| `src/fragments/gb_tower_team_prep/gb_tower_team_prep.c` | 4 | 4 | 1 | 4 | 2 | 4 | 0 |
+| `src/gb_tower_audio.c` | 5 | 5 | 0 | 5 | 1 | 4 | 0 |
+| `src/crash_screen.c` | 14 | 14 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_160CB0.c` | 7 | 7 | 0 | 0 | 0 | 7 | 0 |
+| `src/audio_sfx.c` | 1 | 1 | 0 | 11 | 1 | 0 | 0 |
+| `src/fragments/drowzee_game/drowzee_game_1.c` | 1 | 1 | 0 | 10 | 1 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_257AF0.c` | 4 | 4 | 1 | 3 | 2 | 3 | 0 |
+| `src/gfx_buffer.c` | 6 | 6 | 0 | 2 | 2 | 3 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_161590.c` | 3 | 3 | 0 | 5 | 2 | 2 | 0 |
+| `src/fragments/rental_rules/rental_rules_2C0F90.c` | 10 | 10 | 0 | 2 | 0 | 0 | 0 |
+| `src/audio_category_fade.c` | 5 | 5 | 1 | 1 | 0 | 4 | 0 |
+| `src/cry.c` | 2 | 2 | 0 | 6 | 1 | 2 | 0 |
+| `src/fragments/battle_prep/battle_prep_3974E0.c` | 4 | 4 | 0 | 0 | 4 | 3 | 0 |
+| `src/fragments/battle_engine/battle_engine_31A7E0.c` | 5 | 5 | 0 | 0 | 0 | 5 | 0 |
+| `src/fragments/gallery_backgrounds/gallery_backgrounds_2A3E70.c` | 5 | 5 | 0 | 1 | 0 | 4 | 0 |
+| `src/fragments/n64_logo/n64_logo.c` | 5 | 5 | 0 | 0 | 2 | 3 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_2577F0.c` | 2 | 2 | 2 | 4 | 1 | 1 | 0 |
+| `src/fragments/pokemon_lab_support/pokemon_lab_support.c` | 3 | 3 | 0 | 3 | 1 | 3 | 0 |
+| `src/memory.c` | 10 | 7 | 0 | 0 | 2 | 1 | 0 |
+| `src/profiler.c` | 14 | 9 | 0 | 1 | 0 | 0 | 0 |
+| `src/text_system.c` | 7 | 7 | 0 | 0 | 0 | 3 | 0 |
+| `src/audio_data.c` | 2 | 2 | 0 | 6 | 0 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_2590C0.c` | 3 | 3 | 0 | 1 | 2 | 3 | 0 |
+| `src/libleo/leoc2ecc.c` | 7 | 7 | 0 | 2 | 0 | 0 | 0 |
+| `src/audio_sound_state.c` | 5 | 5 | 0 | 0 | 1 | 2 | 0 |
+| `src/controller_ram.c` | 4 | 4 | 0 | 3 | 0 | 1 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_164B00.c` | 2 | 2 | 0 | 2 | 2 | 2 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_169510.c` | 3 | 3 | 1 | 0 | 1 | 3 | 0 |
+| `src/fragments/lab_pc/lab_pc_1A8590.c` | 4 | 4 | 0 | 1 | 1 | 2 | 0 |
+| `src/jpegutils.c` | 8 | 8 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/battle_engine/battle_engine_351F20.c` | 1 | 1 | 1 | 3 | 1 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_2557A0.c` | 4 | 4 | 0 | 1 | 0 | 2 | 0 |
+| `src/libnaudio/n_mainbus.c` | 1 | 1 | 0 | 6 | 0 | 0 | 0 |
+| `src/libnaudio/n_synthesizer.c` | 9 | 7 | 0 | 0 | 0 | 0 | 0 |
+| `src/rom_device.c` | 2 | 2 | 0 | 3 | 1 | 1 | 0 |
+| `src/fragments/1/fragment1_89010.c` | 1 | 1 | 1 | 3 | 0 | 1 | 0 |
+| `src/gsm_decoder.c` | 4 | 4 | 0 | 0 | 0 | 2 | 0 |
+| `src/input.c` | 3 | 3 | 0 | 2 | 0 | 1 | 0 |
+| `src/libleo/leocmdex.c` | 2 | 2 | 0 | 2 | 1 | 1 | 0 |
+| `src/libnaudio/n_env.c` | 7 | 6 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_257DE0.c` | 2 | 2 | 0 | 2 | 0 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_257EC0.c` | 2 | 2 | 0 | 2 | 0 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_257FA0.c` | 2 | 2 | 0 | 2 | 0 | 1 | 0 |
+| `src/gb_mbc.c` | 3 | 3 | 0 | 1 | 1 | 0 | 0 |
+| `src/libleo/leofunc.c` | 5 | 5 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leoint.c` | 5 | 5 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leotimer.c` | 4 | 4 | 0 | 0 | 1 | 0 | 0 |
+| `src/reset.c` | 5 | 1 | 1 | 2 | 1 | 0 | 0 |
+| `src/audio_sfx_wrapper.c` | 2 | 2 | 1 | 0 | 0 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_257750.c` | 2 | 2 | 0 | 1 | 0 | 1 | 0 |
+| `src/fragments/pokemon_lab_unused/pokemon_lab_unused.c` | 1 | 1 | 1 | 1 | 0 | 1 | 0 |
+| `src/jpeg_decoder.c` | 4 | 4 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_reverb.c` | 6 | 4 | 0 | 0 | 0 | 0 | 0 |
+| `src/audio_cache.c` | 1 | 1 | 1 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot76/debug_menu_slot76.c` | 1 | 1 | 1 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot77/debug_menu_slot77.c` | 1 | 1 | 1 | 0 | 0 | 1 | 0 |
+| `src/fragments/particle_data_library/particle_data_library_259030.c` | 1 | 1 | 0 | 1 | 0 | 1 | 0 |
+| `src/libleo/bootdisk.c` | 2 | 2 | 0 | 0 | 1 | 0 | 0 |
+| `src/libleo/leointerrupt.c` | 3 | 3 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_load.c` | 3 | 3 | 0 | 0 | 0 | 0 | 0 |
+| `src/main.c` | 2 | 0 | 0 | 3 | 0 | 0 | 0 |
+| `src/minigame_dispatch.c` | 1 | 1 | 0 | 1 | 1 | 0 | 0 |
+| `src/fragments/battle_prep/battle_prep_data.c` | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
+| `src/fragments/debug_menu_exit/debug_menu_exit.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot68/debug_menu_slot68.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot69/debug_menu_slot69.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot70/debug_menu_slot70.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot71/debug_menu_slot71.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot72/debug_menu_slot72.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot73/debug_menu_slot73.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/debug_menu_slot74/debug_menu_slot74.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/demo_scenes/demo_scenes_15F9B0.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/gb_tower_unused/gb_tower_unused.c` | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| `src/fragments/particle_math/particle_math_26E540.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/particle_math/particle_math_26F9B0.c` | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
+| `src/libleo/driverominit.c` | 1 | 1 | 0 | 1 | 0 | 0 | 0 |
+| `src/libleo/leord_diskid.c` | 1 | 1 | 0 | 0 | 1 | 0 | 0 |
+| `src/libleo/leoread.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leoreset.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leoutil.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_drvrNew.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_sl.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synallocvoice.c` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/credits/credits_15A2A0.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/fragments/gb_tower_emulator/gb_tower_emulator_86C30.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/bytetolba.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/cjcreateleomanager.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/driveexist.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/lbatobyte.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leodiskinit.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leoinquiry.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leomode_sel.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leomotor.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leomseq_tbl.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leord_capa.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leorezero.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leoseek.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leotestunit.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leotranslat.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/leowrite.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/readdiskid.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/readrtc.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/readwrite.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/seek.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/setrtc.c` | 2 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/spdlmotor.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libleo/testunitready.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_auxbus.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_resample.c` | 2 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_save.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synaddplayer.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synallocfx.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_syndelete.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synfreevoice.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synsetfxmix.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synsetpan.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synsetpitch.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synsetpriority.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synsetvol.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synstartvoiceparam.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/libnaudio/n_synstopvoice.c` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `src/memmap.c` | 13 | 0 | 0 | 0 | 1 | 0 | 0 |
+
+## Structs with generic fields (top 40)
+
+| Struct | File | Fields | Generic |
+| --- | --- | ---: | ---: |
+| `unk_D_8122B2C0` | `include/global.h` | 80 | 74 |
+| `unk_func_8830867C_02C` | `src/fragments/lab_pc_list/lab_pc_list.h` | 63 | 63 |
+| `BattleMonRuntime` | `src/3D140.h` | 50 | 50 |
+| `BattleScene` | `src/fragments/battle_engine/battle_engine.h` | 46 | 46 |
+| `MiniActor` | `src/fragments/minigame_actor_framework/minigame_actor_framework.h` | 102 | 45 |
+| `Particle` | `src/fragments/particle_math/particle_math.h` | 54 | 45 |
+| `unk_D_86807558` | `src/fragments/sushi_game/sushi_game.h` | 41 | 41 |
+| `Battler` | `src/fragments/battle_engine/battle_engine.h` | 34 | 34 |
+| `GbApuChannelState` | `src/fragments/gb_tower_emulator/gb_tower_emulator_86CB0.c` | 34 | 34 |
+| `BattleMon` | `src/game_state.h` | 31 | 31 |
+| `GbSaveMainData` | `src/gb_data.h` | 31 | 31 |
+| `RattataRacer` | `src/fragments/rattata_game/rattata_game.h` | 30 | 30 |
+| `BattlerState` | `src/fragments/battle_engine/battle_engine.h` | 29 | 29 |
+| `unk_D_84229EB0` | `src/fragments/rental_team_selection/rental_team_selection.h` | 29 | 29 |
+| `unk_func_80026268_arg0_raw` | `src/gallery.c` | 29 | 29 |
+| `unk_D_86B0E5D4_04` | `src/fragments/demo_scenes/demo_scenes.h` | 28 | 28 |
+| `RentalCarouselState` | `src/fragments/rental_team_selection/rental_team_selection.h` | 27 | 27 |
+| `unk_func_88205880_0098_008` | `src/fragments/widget_tree/widget_tree.h` | 26 | 26 |
+| `BattleAiScoredMove` | `src/fragments/battle_engine/battle_engine.h` | 23 | 23 |
+| `RentalTeamTray` | `src/fragments/rental_team_selection/rental_team_selection.h` | 23 | 23 |
+| `RibbonMesh` | `src/fragments/battle_engine/battle_engine.h` | 23 | 23 |
+| `DoubleTextureTrail` | `src/fragments/battle_engine/battle_engine.h` | 22 | 22 |
+| `unk_D_843901A0` | `src/fragments/battle_engine/battle_engine.h` | 22 | 22 |
+| `unk_func_8820B12C_02C` | `src/fragments/lab_pc/lab_pc.h` | 22 | 22 |
+| `unk_func_8821421C_02C_06C_02C` | `src/fragments/lab_pc/lab_pc.h` | 22 | 22 |
+| `unk_func_8830867C_02C_0CC_000_008` | `src/table_view.h` | 22 | 22 |
+| `unk_D_800FCED8` | `src/gsm_decoder.h` | 21 | 21 |
+| `unk_D_82F144D0` | `src/fragments/trade_machine/trade_machine.h` | 21 | 21 |
+| `unk_D_82F21238` | `src/fragments/trade_machine/trade_machine.h` | 21 | 21 |
+| `unk_D_843C4DA0` | `src/fragments/battle_engine/battle_engine_359F90.c` | 21 | 21 |
+| `unk_D_848037A0` | `src/fragments/battle_order_select/battle_order_select.h` | 21 | 21 |
+| `unk_D_86B0FA7C` | `src/fragments/demo_scenes/demo_scenes.h` | 21 | 21 |
+| `unk_func_8821421C_02C` | `src/fragments/lab_pc/lab_pc.h` | 21 | 21 |
+| `UnkStruct80083CA0_2` | `src/scheduler.h` | 21 | 20 |
+| `unk_D_838067F0` | `src/fragments/gallery_rental_viewer/gallery_rental_viewer.h` | 20 | 20 |
+| `unk_D_843C3508` | `src/fragments/battle_engine/battle_engine.h` | 20 | 20 |
+| `unk_D_861054C0` | `src/fragments/clefairy_game/clefairy_game.c` | 20 | 20 |
+| `unk_func_8830867C` | `src/fragments/lab_pc_list/lab_pc_list.h` | 20 | 20 |
+| `unk_D_86404778` | `src/fragments/drowzee_game/drowzee_game.h` | 19 | 19 |
+| `unk_D_843901B0` | `src/fragments/battle_engine/battle_engine.h` | 18 | 18 |
