@@ -19,7 +19,8 @@ addresses and are resolved by the linker. --whole-archive means the ELF carries 
 for every object, so this filter is what takes 485 down to the ~234 retail has.
 The battle engine's retail table is the exception: it also relocates every external
 address, with bit 31 set (the loader masks it off). A table that has such entries gets
-its external relocs regenerated the same way.
+its external relocs regenerated the same way. Only targets in fragment space matter
+(Memmap_GetFragmentVaddr leaves any other address alone), so equivalent() ignores the rest.
 
 The real check is `--check` against the retail segment: on an unmodified build it must
 reproduce the retail table entry for entry. `--selftest` covers the encoder and
@@ -58,14 +59,18 @@ REGEN_SAFE = {5, 22, 25, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 40, 43, 48,
 ASM_VERSIONS = ("eu", "eu_rev1", "fr", "de", "es", "it", "jp")
 if VERSION in ASM_VERSIONS:
     REGEN_SAFE = set()
-elif VERSION in ("us", "us_rev1", "us_rev2"):  # audited on the three US revisions
-    REGEN_SAFE |= {62, 63, 64}
+elif VERSION in ("us", "us_rev1", "us_rev2"):
+    # Audited on the three US revisions. gb_tower_emulator's data tables are still raw blobs,
+    # 41's table feeds one LUI from its LO16s in another order than the linker, and 67 has no
+    # relocs at all.
+    REGEN_SAFE = set(range(2, 78)) - {1, 41, 67}
 
 # Regenerable, but other fragments' data holds raw pointers into their code (the battle
 # engine's alone holds 113 into particle_math), so their code must not move.
 FIXED_LAYOUT = {34}
 
 EXTERNAL = 0x80000000
+FRAGMENT_SPACE = range(0x81000000, 0x90000000)
 
 TYPE_NAMES = {2: "R_MIPS_32", 4: "R_MIPS_26", 5: "R_MIPS_HI16", 6: "R_MIPS_LO16"}
 
@@ -170,6 +175,8 @@ def selftest() -> None:
     assert not equivalent(first, [hi1, hi2, lo1, lo2], content), "changed pairings must fail"
     assert not equivalent(first, [lo1, hi1, hi2, lo2], content), "unpaired LO must fail"
     assert not equivalent(first, first[:-1], content), "different multisets must fail"
+    outside = struct.pack(">II", 0x3C088100, 0x0303ED80)
+    assert equivalent([0x02000000, 0x02000004], [0x02000000], outside), "targets outside fragment space change nothing"
     assert relocation_effects([hi1, lo1, hi1], content) is None, "duplicate offsets must fail"
     assert relocation_effects([0x05000010], content) is None, "out-of-range offsets must fail"
     assert relocation_effects([0x05000001], content) is None, "unaligned offsets must fail"
@@ -213,6 +220,7 @@ def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[in
     symbolic target is the input to Memmap_GetFragmentVaddr, so equal targets
     yield equal patched immediates at any runtime base. Repeated offsets are
     rejected: they could read instructions already modified by another entry.
+    Writes whose target lies outside fragment space change nothing and are left out.
     """
     offsets = [entry & 0xFFFFFF for entry in entries]
     if len(set(offsets)) != len(offsets):
@@ -225,7 +233,7 @@ def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[in
         kind = (entry >> 24) & 0x7F
         word, = struct.unpack_from(">I", content, offset)
         if kind in (2, 4):
-            writes[offset] = (kind, word)
+            writes[offset] = (kind, ((word << 2) & 0x0FFFFFFC) | 0x80000000 if kind == 4 else word)
         elif kind == 5:
             if word >> 26 != 15:  # LUI
                 return None
@@ -243,7 +251,7 @@ def relocation_effects(entries: list[int], content: bytes) -> dict[int, tuple[in
             writes[offset] = (6, high_offset, target)
         else:
             return None
-    return writes
+    return {offset: w for offset, w in writes.items() if w[-1] in FRAGMENT_SPACE}
 
 
 def equivalent(a: list[int], b: list[int], content: bytes | None = None) -> bool:
@@ -259,10 +267,10 @@ def equivalent(a: list[int], b: list[int], content: bytes | None = None) -> bool
                 [w for w in t if (w >> 24) & 0x7F in (5, 6)])
     if canon(a) == canon(b):
         return True
-    if content is None or sorted(a) != sorted(b):
+    if content is None:
         return False
-    # Assembly fallbacks can emit independent HI/LO pairs in another order.
-    # Preserve the retail table only when both orders pair/write identically.
+    # Assembly fallbacks can emit independent HI/LO pairs in another order, and a table may
+    # carry entries that patch nothing. Keep the retail table when both write identically.
     effects = relocation_effects(a, content)
     return effects is not None and effects == relocation_effects(b, content)
 
