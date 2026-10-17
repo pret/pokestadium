@@ -258,7 +258,7 @@ void PikachuReward_DrawSelectionCursor(s16 arg0, s16 arg1) {
 
     Gfx_DrawTextureRgba16(arg0, arg1, 0x18, 0xE, Util_ConvertAddrToVirtAddr(D_8C200090), 0x18, 0x200000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void PikachuReward_ShowTextForFrames(char* arg0, s32 arg1) {

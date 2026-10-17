@@ -580,13 +580,13 @@ void DrowzeeGame_DrawTutorialScreen(s32 arg0) {
         Ui_DrawBorderedPanel(0x18, 0x16, 0x110, 0x90, 0x15);
         Ui_DrawBorderedPanel(0x18, 0xA5, 0x110, 0x36, 0x14B);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Widget_DrawSplitBanner(2, 0x19, 0xA6);
         Widget_DrawAnimIcon16(0x74, 0xB0, D_864028BC);
         Widget_DrawAnimIcon16C(0x74, 0xC6, D_864028E4);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     } else if ((arg0 == 1) || (arg0 == 2) || ((arg0 == 3) && (D_87B000D0 == 0))) {
         u8 i;
@@ -603,7 +603,7 @@ void DrowzeeGame_DrawTutorialScreen(s32 arg0) {
             0x00BA,
         };
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 
         for (i = 0; i < 4; i++) {
@@ -614,7 +614,7 @@ void DrowzeeGame_DrawTutorialScreen(s32 arg0) {
             }
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 
     Font_BeginTranslucentTextRendering();

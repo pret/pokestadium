@@ -454,7 +454,7 @@ void RattataGame_DrawTutorialScreen(s32 arg0) {
 
     Font_EndTexturedTextRendering();
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (arg0 == 0) {
         Widget_DrawAnimIcon24(0x56, 0xAC, D_86203CC4);
