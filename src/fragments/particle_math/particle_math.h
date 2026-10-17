@@ -5,7 +5,7 @@
 
 struct Particle;
 struct ParticleDescriptorChild;
-struct Battler;
+struct ActivePokemon;
 struct BattleAnimEffectSlot;
 
 typedef void (*ParticleUpdateCallback)(struct Particle*);
@@ -64,7 +64,7 @@ typedef struct Particle {
     /* 0x04 */ struct Particle* prev;
     /* 0x08 */ ParticleUpdateCallback unk_08;
     /* 0x0C */ ParticleDescriptor* unk_0C;
-    /* 0x10 */ struct Battler* unk_10;
+    /* 0x10 */ struct ActivePokemon* unk_10;
     /* 0x14 */ DisplayObject* unk_14;
     /* 0x18 */ u32 unk_18;
     /* 0x1C */ f32 unk_1C;
@@ -121,7 +121,7 @@ typedef void (*func_unk_D_8140E724)(struct Particle*);
 typedef struct BattleAnimEffectSlot {
     /* 0x00 */ func_unk_D_8140E724 unk_00;
     /* 0x04 */ ParticleDescriptor* unk_04;
-    /* 0x08 */ struct Battler* unk_08;
+    /* 0x08 */ struct ActivePokemon* unk_08;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s16 unk_10;

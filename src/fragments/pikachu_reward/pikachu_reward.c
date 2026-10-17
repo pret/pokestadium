@@ -122,15 +122,15 @@ s32 PikachuReward_FindPikachuOnCart(void) {
     s32 i;
     TeamRoster* var_v1;
 
-    var_v1 = gSessionContext.battleSides[0].unk_08[0];
+    var_v1 = gSessionContext.battleSides[0].teamMember[0];
 
-    for (i = 0; i < var_v1->unk_002; i++) {
-        if (var_v1->unk_01C[i].unk_00.unk_00 == 0x19) {
-            D_832027C8.unk_00 = (var_v1->unk_01C[i].unk_52 & 0x70) >> 4;
-            D_832027C8.unk_01 = var_v1->unk_01C[i].unk_52 & 0xF;
+    for (i = 0; i < var_v1->numberOfPokemonChosen; i++) {
+        if (var_v1->pokemonPicked[i].unk_00.unk_00 == 0x19) {
+            D_832027C8.unk_00 = (var_v1->pokemonPicked[i].unk_52 & 0x70) >> 4;
+            D_832027C8.unk_01 = var_v1->pokemonPicked[i].unk_52 & 0xF;
             if ((D_832027C8.unk_00 < 4) && (D_832027C8.unk_01 < 0xD)) {
                 if (GbSave_LoadPort(D_832027C8.unk_00) != 0) {
-                    D_832027C8.unk_02 = PikachuReward_SearchDeckForPikachu(D_832027C8.unk_00, D_832027C8.unk_01, var_v1->unk_01C[i].unk_53);
+                    D_832027C8.unk_02 = PikachuReward_SearchDeckForPikachu(D_832027C8.unk_00, D_832027C8.unk_01, var_v1->pokemonPicked[i].unk_53);
                     if (D_832027C8.unk_02 >= 0) {
                         return 1;
                     }

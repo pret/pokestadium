@@ -244,11 +244,11 @@ void Intro_LoadPokemonTextures(void) {
 }
 
 void Intro_LoadShowcaseModel(void) {
-    D_86B0FA78->unk_174 = D_86B10690->unk_01C[D_86B0FA78->unk_17C].unk_00.unk_00;
+    D_86B0FA78->unk_174 = D_86B10690->pokemonPicked[D_86B0FA78->unk_17C].unk_00.unk_00;
     ModelRenderer_AttachDisplayObject(&D_86B0FA78->unk_004);
     PokeIcon_OpenModelArchives();
 
-    D_86B0FA78->unk_000 = Model_LoadForPokemon(&D_86B10690->unk_01C[D_86B0FA78->unk_17C]);
+    D_86B0FA78->unk_000 = Model_LoadForPokemon(&D_86B10690->pokemonPicked[D_86B0FA78->unk_17C]);
     Model_InitDisplayObject(&D_86B0FA78->unk_004, 0, D_86B0FA78->unk_174, D_86B0FA78->unk_000->unk_08->unk_00[0]);
     ModelAnim_SetAnimation(&D_86B0FA78->unk_004, 0);
     D_86B0FA78->unk_004.effectSlot = 0;
@@ -528,10 +528,10 @@ void Intro_TriggerTextPanelExit(void) {
 
 void Intro_SelectPartyRoster(void) {
     if (gSessionContext.battleSides[0].unk_1C == 1) {
-        D_86B10690 = gSessionContext.battleSides[0].unk_08[0];
+        D_86B10690 = gSessionContext.battleSides[0].teamMember[0];
         D_86B10694 = &gSessionContext.battleSides[0];
     } else {
-        D_86B10690 = gSessionContext.battleSides[1].unk_08[0];
+        D_86B10690 = gSessionContext.battleSides[1].teamMember[0];
         D_86B10694 = &gSessionContext.battleSides[1];
     }
 }
@@ -797,7 +797,7 @@ void Intro_DrawTextPanels(void) {
                 D_86B0FA50->unk_9C = 0xB4;
                 D_86B0FA50->unk_A4 = 0.0f;
                 D_86B0FA50->unk_AC = 0.0f;
-                sprintf(D_86B0FA50->unk00, "%s", D_86B10690->unk_01C[D_86B0FA78->unk_17C].unk_30);
+                sprintf(D_86B0FA50->unk00, "%s", D_86B10690->pokemonPicked[D_86B0FA78->unk_17C].unk_30);
                 D_86B0FA50->unk_90++;
                 break;
 

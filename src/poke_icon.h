@@ -21,8 +21,8 @@ typedef struct unk_func_8001B1FC {
     /* 0x1C */ ModelLoadContext* unk_1C;
     /* 0x20 */ GraphNode* unk_20;
     /* 0x24 */ DisplayObject* unk_24;
-    /* 0x28 */ unk_D_80068BB0* unk_28;
-    /* 0x2C */ unk_D_80068BB0* unk_2C;
+    /* 0x28 */ DepthBuffer* unk_28;
+    /* 0x2C */ DepthBuffer* unk_2C;
 } unk_func_8001B1FC; // size = 0x30
 
 typedef union unk_func_8001A024_008_014 {
@@ -39,7 +39,7 @@ typedef struct unk_func_8001A024_008 {
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ s16 unk_04;
     /* 0x08 */ f32 unk_08;
-    /* 0x0C */ unk_D_80068BB0* unk_0C;
+    /* 0x0C */ DepthBuffer* unk_0C;
     /* 0x10 */ arg1_func_80010CA8 unk_10;
     /* 0x14 */ unk_func_8001A024_008_014 unk_14;
 } unk_func_8001A024_008; // size = 0x18
@@ -53,7 +53,7 @@ typedef struct unk_func_8001A024 {
     /* 0x08 */ unk_func_8001A024_008* unk_08;
     /* 0x0C */ GraphNode* unk_0C;
     /* 0x10 */ DisplayObject* unk_10;
-    /* 0x14 */ unk_D_80068BB0* unk_14;
+    /* 0x14 */ DepthBuffer* unk_14;
     /* 0x18 */ unk_D_8006FF00* unk_18;
 } unk_func_8001A024; // size = 0x1C
 
@@ -69,13 +69,13 @@ typedef struct unk_D_84B25A28 {
     /* 0x18 */ GraphNode* unk_18;
     /* 0x1C */ GraphNode* unk_1C;
     /* 0x20 */ unk_func_8001A024* unk_20;
-    /* 0x24 */ unk_D_80068BB0* unk_24;
-    /* 0x28 */ unk_D_80068BB0* unk_28;
+    /* 0x24 */ DepthBuffer* unk_24;
+    /* 0x28 */ DepthBuffer* unk_28;
     /* 0x2C */ char unk2C[0x4];
 } unk_D_84B25A28; // size = 0x30
 
 unk_func_8001A024* PokeIcon_CreateRenderList(ModelLoadContext*, s16, s16, s16);
-void PokeIcon_AttachDepthBuffer(unk_func_8001A024*, ModelLoadContext*, unk_D_80068BB0*);
+void PokeIcon_AttachDepthBuffer(unk_func_8001A024*, ModelLoadContext*, DepthBuffer*);
 void PokeIcon_SetNameTable(unk_func_8001A024*, unk_D_8006FF00*);
 void PokeIcon_ResetRenderList(unk_func_8001A024*);
 void func_8001A324(unk_func_8001A024*, s32, s32, u16);

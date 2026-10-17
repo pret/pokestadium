@@ -46,7 +46,7 @@ void PokeIcon_InitRenderScene(unk_func_8001A024* arg0, s16 arg1, s16 arg2) {
 
 unk_func_8001A024* PokeIcon_CreateRenderList(ModelLoadContext* arg0, s16 arg1, s16 arg2, s16 arg3) {
     s32 var_s0;
-    unk_D_80068BB0* temp_a1;
+    DepthBuffer* temp_a1;
     s32 i;
     unk_func_8001A024* temp_v0 = main_pool_alloc(sizeof(unk_func_8001A024), 0);
 
@@ -79,7 +79,7 @@ unk_func_8001A024* PokeIcon_CreateRenderList(ModelLoadContext* arg0, s16 arg1, s
     return temp_v0;
 }
 
-void PokeIcon_AttachDepthBuffer(unk_func_8001A024* arg0, ModelLoadContext* arg1, unk_D_80068BB0* arg2) {
+void PokeIcon_AttachDepthBuffer(unk_func_8001A024* arg0, ModelLoadContext* arg1, DepthBuffer* arg2) {
     s32 i;
 
     arg0->unk_04 = arg1;
@@ -100,7 +100,7 @@ void PokeIcon_ResetRenderList(unk_func_8001A024* arg0) {
     u16 w;
     u16 h;
     unk_func_8001A024_008* tempImg_p;
-    unk_D_80068BB0* tempDepth_p;
+    DepthBuffer* tempDepth_p;
 
     if (arg0->unk_00 & 1) {
         PokeIcon_WaitFrameLoad(arg0->unk_04);
@@ -195,7 +195,7 @@ void PokeIcon_AdjustImageColors(u16* arg0, s32 a1, arg1_func_80010CA8 arg2) {
     // clang-format on
 }
 
-void PokeIcon_AdjustImageColorBuffer(unk_D_80068BB0* arg0, arg1_func_80010CA8 arg1) {
+void PokeIcon_AdjustImageColorBuffer(DepthBuffer* arg0, arg1_func_80010CA8 arg1) {
     s32 size = arg0->width * arg0->height;
 
     PokeIcon_AdjustImageColors(arg0->img_p, size, arg1);

@@ -54,8 +54,8 @@ void BattlePrep_SaveVictoryPalaceRecords(void) {
     ExtendedRosterInfo* temp_v0;
     BattleMon* var_s1;
 
-    temp_v0 = gSessionContext.battleSides[0].unk_08[0]->unk_214;
-    temp_s0 = temp_v0->unk_002;
+    temp_v0 = gSessionContext.battleSides[0].teamMember[0]->rosterInfo;
+    temp_s0 = temp_v0->numberOfPokemonCanBePicked;
     var_s1 = temp_v0->unk_028;
 
     if ((gSessionContext.mode == 3) || (gSessionContext.mode == 6)) {
@@ -227,7 +227,7 @@ void BattlePrep_DrawBorderedRect(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void BattlePrep_DrawTrainerStatusIcon(unk_D_80068BB0* arg0, s16 arg1, u8* arg2, u8* arg3) {
+void BattlePrep_DrawTrainerStatusIcon(DepthBuffer* arg0, s16 arg1, u8* arg2, u8* arg3) {
     BattleSessionTeams* temp_v1 = &gSessionContext.battleSides[arg1];
 
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0);
@@ -241,31 +241,31 @@ void BattlePrep_DrawTrainerStatusIcon(unk_D_80068BB0* arg0, s16 arg1, u8* arg2, 
     Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, arg2 + 0x1008, 0x40, 0x200000);
 
     if (gSessionContext.mode == 0 || gSessionContext.mode == 9) {
-        if (temp_v1->unk_08[0]->unk_000 & 2) {
+        if (temp_v1->teamMember[0]->unk_000 & 2) {
             Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, &D_3016900, 0x30, 0x200000);
         } else if (temp_v1->unk_01 == 1) {
-            Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->unk_08[0]->unk_001], 0x30, 0x200000);
+            Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->teamMember[0]->unk_001], 0x30, 0x200000);
         } else {
-            if (temp_v1->unk_08[0]->unk_001 < temp_v1->unk_08[1]->unk_001) {
-                Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->unk_08[0]->unk_001], 0x30, 0x200000);
-                Gfx_DrawTextureRgba16(8, 0x14, 0x30, 0x10, D_84B0FB10[temp_v1->unk_08[1]->unk_001], 0x30, 0x200000);
+            if (temp_v1->teamMember[0]->unk_001 < temp_v1->teamMember[1]->unk_001) {
+                Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->teamMember[0]->unk_001], 0x30, 0x200000);
+                Gfx_DrawTextureRgba16(8, 0x14, 0x30, 0x10, D_84B0FB10[temp_v1->teamMember[1]->unk_001], 0x30, 0x200000);
             } else {
-                Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->unk_08[1]->unk_001], 0x30, 0x200000);
-                Gfx_DrawTextureRgba16(8, 0x14, 0x30, 0x10, D_84B0FB10[temp_v1->unk_08[0]->unk_001], 0x30, 0x200000);
+                Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->teamMember[1]->unk_001], 0x30, 0x200000);
+                Gfx_DrawTextureRgba16(8, 0x14, 0x30, 0x10, D_84B0FB10[temp_v1->teamMember[0]->unk_001], 0x30, 0x200000);
             }
         }
 
         gSPDisplayList(gDisplayListHead++, D_8006F630);
     } else if ((arg1 == 0) || (gSessionContext.mode == 0xA)) {
-        Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->unk_08[0]->unk_001], 0x30, 0x200000);
+        Gfx_DrawTextureRgba16(8, 4, 0x30, 0x10, D_84B0FB10[temp_v1->teamMember[0]->unk_001], 0x30, 0x200000);
 
         gSPDisplayList(gDisplayListHead++, D_8006F630);
 
-        BattlePrep_DrawCenteredText(arg1, 0x14, temp_v1->unk_08[0]->unk_214->unk_014);
+        BattlePrep_DrawCenteredText(arg1, 0x14, temp_v1->teamMember[0]->rosterInfo->unk_014);
     } else {
         gSPDisplayList(gDisplayListHead++, D_8006F630);
 
-        BattlePrep_DrawCenteredText(arg1, 6, temp_v1->unk_08[0]->unk_214->unk_220);
+        BattlePrep_DrawCenteredText(arg1, 6, temp_v1->teamMember[0]->rosterInfo->unk_220);
     }
 }
 
@@ -465,10 +465,10 @@ void BattlePrep_CheckPikachuNeedsSurf(void) {
 
     if (!(gSessionContext.sessionFlags & 2) && (gSessionContext.unk_11F2 == 1) && (gSessionContext.mode == 6) &&
         (gSessionContext.modeSelection == 3)) {
-        var_a1 = gSessionContext.battleSides[0].unk_08[0];
-        temp_v1 = var_a1->unk_214;
+        var_a1 = gSessionContext.battleSides[0].teamMember[0];
+        temp_v1 = var_a1->rosterInfo;
 
-        for (i = 0; i < temp_v1->unk_002; i++) {
+        for (i = 0; i < temp_v1->numberOfPokemonCanBePicked; i++) {
             s32 tmp = (temp_v1->unk_028[i].unk_52 & 0x70) >> 4;
             s32 tmp2 = temp_v1->unk_028[i].unk_52 & 0xF;
 
@@ -477,8 +477,8 @@ void BattlePrep_CheckPikachuNeedsSurf(void) {
             }
         }
 
-        for (i = 0; i < var_a1->unk_002; i++) {
-            BattleMon* ptr = &var_a1->unk_01C[i];
+        for (i = 0; i < var_a1->numberOfPokemonChosen; i++) {
+            BattleMon* ptr = &var_a1->pokemonPicked[i];
 
             if (ptr->unk_00.unk_00 == 0x19) {
                 for (j = 0; j < 4; j++) {
@@ -539,7 +539,7 @@ void BattlePrep_RunNormalRoundIntro(void) {
         BattlePrep_UpdateRoundIntroScene();
     }
 
-    if (gSessionContext.battleSides[1].unk_08[0]->unk_000 & 2) {
+    if (gSessionContext.battleSides[1].teamMember[0]->unk_000 & 2) {
         if (gSessionContext.battleSides[0].unk_1C == 1) {
             Audio_PlayMusicIfChanged(0x32);
         } else {
@@ -1079,7 +1079,7 @@ u8 BattlePrep_CheckTeamChosen(void) {
         if (gSessionContext.battleSides[0].unk_1C == 1) {
             var_v1 = 1;
             for (i = 0; i < 3; i++) {
-                if (gSessionContext.battleSides[0].unk_08[0]->unk_01C[i].unk_02 == 0) {
+                if (gSessionContext.battleSides[0].teamMember[0]->pokemonPicked[i].unk_02 == 0) {
                     var_v1 = 0;
                 }
             }
