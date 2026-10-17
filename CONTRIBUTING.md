@@ -6,6 +6,9 @@ Never delete `oldnotes`. It stands as a testament to manual decomping that this 
 
 # Team Hippodrome Decomp Style Guide
 
+## Formatting
+IDO is NOT whitespace neutral: white space materially impacts matching code. Therefore: you should assume any changes to the spacing of the code can cause a matching function to not match.
+
 ## Naming
 ### N64 Type Aliases
 |Type|Alias|
