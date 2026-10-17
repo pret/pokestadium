@@ -119,8 +119,8 @@ void Gallery_Dispatch(void) {
     main_pool_push_state('SNPM');
     Audio_StartMusicTrack(0x4B);
 
-    FRAGMENT_LOAD(fragment43)();
-    FRAGMENT_LOAD(fragment34);
+    FRAGMENT_LOAD(FRAGMENT_GALLERY_BACKGROUNDS)();
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
 
     do {
         temp_s0 = Util_ConvertAddrToVirtAddr((u32)val);
@@ -148,17 +148,17 @@ void Gallery_Dispatch(void) {
                             break;
                     }
                 }
-                sp64 = FRAGMENT_LOAD_AND_CALL(fragment42, var_s0, var_v0);
+                sp64 = FRAGMENT_LOAD_AND_CALL(FRAGMENT_GALLERY_SNAP, var_s0, var_v0);
                 break;
 
             case 1:
             case 6:
-                FRAGMENT_LOAD(fragment2)();
+                FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT)();
                 // loaded, but doesnt use any GFX from it. speculated to have intended using the
                 // button GFX for How to Snap, but it doesnt use them.
                 ASSET_LOAD(D_3000000, kids_club_game_ui, 0);
-                FRAGMENT_LOAD(fragment3);
-                FRAGMENT_LOAD(fragment31);
+                FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
+                FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
                 // determine if this is "How to Snap" or regular Snap Mode.
                 if (var_s5 == 1) {
@@ -167,7 +167,7 @@ void Gallery_Dispatch(void) {
                     var_s0 = 1;
                 }
 
-                switch (FRAGMENT_LOAD_AND_CALL(fragment15, var_s0, 0)) {
+                switch (FRAGMENT_LOAD_AND_CALL(FRAGMENT_GALLERY_CAMERA, var_s0, 0)) {
                     case 1:
                         sp64 = 5;
                         break;
@@ -192,7 +192,7 @@ void Gallery_Dispatch(void) {
                 } else {
                     var_s0 = 1;
                 }
-                sp64 = FRAGMENT_LOAD_AND_CALL(fragment45, var_s0, 0);
+                sp64 = FRAGMENT_LOAD_AND_CALL(FRAGMENT_GALLERY_FILM_SELECT, var_s0, 0);
                 break;
 
             case 3:
@@ -216,19 +216,19 @@ void Gallery_Dispatch(void) {
                         break;
                 }
 
-                sp64 = FRAGMENT_LOAD_AND_CALL(fragment44, var_s0, var_v0);
+                sp64 = FRAGMENT_LOAD_AND_CALL(FRAGMENT_GALLERY_ALBUM, var_s0, var_v0);
                 if (sp64 == 4) {
                     sp5C = var_s0;
                 }
                 break;
 
             case 4:
-                FRAGMENT_LOAD_AND_CALL(fragment46, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_GALLERY_ENLARGE, 0, 0);
                 sp64 = var_s2;
                 break;
 
             case 5:
-                FRAGMENT_LOAD(fragment61);
+                FRAGMENT_LOAD(FRAGMENT_RENTAL_TEAM_SELECTION);
                 switch (var_s2) {
                     case 1:
                         var_s0 = 1;
@@ -242,11 +242,11 @@ void Gallery_Dispatch(void) {
                         var_s0 = 0;
                         break;
                 }
-                sp64 = FRAGMENT_LOAD_AND_CALL(fragment47, var_s0, 0);
+                sp64 = FRAGMENT_LOAD_AND_CALL(FRAGMENT_GALLERY_RENTAL_VIEWER, var_s0, 0);
                 break;
 
             case 7:
-                FRAGMENT_LOAD_AND_CALL(fragment49, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_SNAP_PRINT_CLUB_BACKGROUND_SELECT, 0, 0);
                 sp64 = 0;
                 break;
 

@@ -68,7 +68,7 @@ s32 GbTower_TeamPrep(s32 arg0, UnkInputStruct8000D738* arg1) {
     sp24 = StageContext_Allocate(0, 1, 2, 0, 1, 1);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     D_82A00370 = PokeIcon_AllocFramebuffers(1);
     D_82A00374 = PokeIcon_CreateRenderList(D_82A00370, 6, 0x28, 0x28);

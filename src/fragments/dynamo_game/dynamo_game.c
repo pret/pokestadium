@@ -830,7 +830,7 @@ void DynamoGame_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     D_87B000E0 = Font_Init(0x16, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     DynamoGame_LoadAssets();
     StageContext_Activate(sp24);

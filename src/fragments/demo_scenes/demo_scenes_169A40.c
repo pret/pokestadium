@@ -146,7 +146,7 @@ s32 Stage_ShowMewtwoIntro(void) {
     Font_Init(6, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     Save_EnsureBankLoaded(2);
     Save_GetModeSettings(&D_86B10830, gSessionContext.unk_11F2);

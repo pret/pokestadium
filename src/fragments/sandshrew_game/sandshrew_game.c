@@ -2517,7 +2517,7 @@ s32 sandshrewMinigameLoad(s32 arg0, UNUSED s32 arg1) {
     D_86F0D264 = Font_Init(0x16, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
     Fragment_Load((((u32)D_8D000000 & 0x0FF00000) >> 0x14) - 0x10, _5C7A70_ROM_START, pokedex_area_model_ROM_START);
 
     SandshrewGame_LoadAssets();

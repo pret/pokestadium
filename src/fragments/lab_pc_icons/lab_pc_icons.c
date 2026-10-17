@@ -1465,7 +1465,7 @@ unk_func_88205880_0098_008* LabPC_CreateMonDetailPanel(unk_func_88205880_0098* a
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     sp38 = PokeIcon_CreateModelPreview(PokeIcon_AllocFramebuffers(1), 228, 160, 0, 0, 0xE0, 0xA0, D_8860A6D0);
     PokeIcon_OpenModelArchives();
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     D_8861C510 = arg0->unk_1C;
     D_8861C514 = arg0->unk_20;

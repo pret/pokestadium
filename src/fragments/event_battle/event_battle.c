@@ -1654,7 +1654,7 @@ s32 EventBattle_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     while (temp_v0 == STATE_EVENT_BATTLE) {
         temp_v0 = EventBattle_ShowSelect();
         if (temp_v0 == STATE_EVENT_BATTLE) {
-            FRAGMENT_LOAD_AND_CALL(fragment55, 0, 0);
+            FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_RULES, 0, 0);
         }
     }
 

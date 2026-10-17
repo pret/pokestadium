@@ -952,7 +952,7 @@ void DrowzeeGame_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     sp24 = StageContext_Allocate(0, 1, 3, 1, 2, 1);
     D_87B000E0 = Font_Init(0x16, 0);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
     DrowzeeGame_LoadAssets();
     StageContext_Activate(sp24);
     DrowzeeGame_WaitForStart();

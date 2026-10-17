@@ -647,13 +647,13 @@ s32 Stage_RunDemoScene(s16 arg0) {
 
     main_pool_push_state('Demo');
 
-    FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD(fragment2);
-    FRAGMENT_LOAD(fragment3);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
+    FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
 
     gSessionContext.mode = arg0;
 
-    sp24 = FRAGMENT_LOAD_AND_CALL(fragment17, arg0, 0);
+    sp24 = FRAGMENT_LOAD_AND_CALL(FRAGMENT_DEMO_SCENES, arg0, 0);
 
     main_pool_pop_state('Demo');
 
@@ -663,21 +663,21 @@ s32 Stage_RunDemoScene(s16 arg0) {
 void State_RunCredits(void) {
     main_pool_push_state('demo');
 
-    FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD(fragment2);
-    FRAGMENT_LOAD(fragment3);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
+    FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
 
     if (gSessionContext.unk_11F2 != 0) {
-        FRAGMENT_LOAD_AND_CALL(fragment16, 0, 0);
+        FRAGMENT_LOAD_AND_CALL(FRAGMENT_CREDITS, 0, 0);
     } else {
-        FRAGMENT_LOAD_AND_CALL(fragment16, 0, 1);
+        FRAGMENT_LOAD_AND_CALL(FRAGMENT_CREDITS, 0, 1);
     }
 
     main_pool_pop_state('demo');
 }
 
 void State_N64LogoIntro(void) {
-    FRAGMENT_LOAD_AND_CALL(fragment35, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_N64_LOGO, 0, 0);
 
     main_pool_push_state('TITL');
 
@@ -693,33 +693,33 @@ void State_N64LogoIntro(void) {
 }
 
 void State_TitleScreen(void) {
-    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(fragment36, 0, &D_8007567C);
+    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(FRAGMENT_TITLE_SCREEN, 0, &D_8007567C);
 
     if (gCurrentGameState == STATE_TITLE_SCREEN) {
         main_pool_push_state('DEMO');
 
         if (gSessionContext.mode == 0x10) {
-            FRAGMENT_LOAD(fragment34);
-            FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+            FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+            FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
         } else {
             ASSET_LOAD(D_3000000, kids_club_game_ui, 0); // borrows the Stadium logo from it
-            FRAGMENT_LOAD(fragment2);
-            FRAGMENT_LOAD(fragment34);
+            FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
+            FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
 
             switch (gSessionContext.roundOrDemoId) {
                 case 3:
-                    FRAGMENT_LOAD(fragment4);
-                    FRAGMENT_LOAD_AND_CALL(fragment8, 1, 0);
+                    FRAGMENT_LOAD(FRAGMENT_MINIGAME_SHARED_GRAPHICS);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_RATTATA_GAME, 1, 0);
                     break;
 
                 case 9:
-                    FRAGMENT_LOAD(fragment3);
-                    FRAGMENT_LOAD_AND_CALL(fragment14, 1, 0);
+                    FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_SUSHI_GAME, 1, 0);
                     break;
 
                 case 13:
-                    FRAGMENT_LOAD(fragment3);
-                    FRAGMENT_LOAD_AND_CALL(fragment18, 1, 0);
+                    FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_EKANS_GAME, 1, 0);
                     break;
             }
         }
@@ -748,9 +748,9 @@ void State_StubbedDebug(void) {
     Gfx_InitDisplayListBuffers(0x10000, 0);
     temp_s0 = StageContext_Allocate(1, 1, 2, 0, 2, 1);
 
-    FRAGMENT_LOAD(fragment34);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
     StageContext_Activate(temp_s0);
-    FRAGMENT_LOAD_AND_CALL2(fragment67, 1, 0);
+    FRAGMENT_LOAD_AND_CALL2(FRAGMENT_DEBUG_MENU_EXIT, 1, 0);
 
     while ((gCurrentGameState == STATE_STUBBED_DEBUG) && (D_800AE520.unk_00 != 0)) {
         D_800AE520.unk_00 = 0;
@@ -765,22 +765,22 @@ void State_StubbedDebug(void) {
 }
 
 void State_AreaSelect(void) {
-    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(fragment37, 0, 0);
+    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(FRAGMENT_AREA_SELECT, 0, 0);
     D_80075674 = -1;
 }
 
 void State_EventBattle(void) {
-    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(fragment38, 0, 0);
+    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(FRAGMENT_EVENT_BATTLE, 0, 0);
 }
 
 void State_Options(void) {
-    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(fragment56, 0, 0);
+    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(FRAGMENT_OPTIONS, 0, 0);
 }
 
 void State_MenuSelect(void) {
     s32 from_title_screen = gLastGameState == STATE_TITLE_SCREEN;
 
-    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(fragment57, 0, from_title_screen);
+    gCurrentGameState = FRAGMENT_LOAD_AND_CALL(FRAGMENT_TRANSFER_PAK_CHECK, 0, from_title_screen);
 }
 
 s16 RuleWizard_StadiumMenu(s16 arg0) {
@@ -792,7 +792,7 @@ s16 RuleWizard_StadiumMenu(s16 arg0) {
     while ((arg0 > 0) && (arg0 < 5)) {
         switch (arg0) {
             case 1:
-                if (FRAGMENT_LOAD_AND_CALL(fragment59, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_STADIUM_SELECT, 0, 0) != 0) {
                     arg0 = 2;
                 } else {
                     arg0 = 0;
@@ -800,7 +800,7 @@ s16 RuleWizard_StadiumMenu(s16 arg0) {
                 break;
 
             case 2:
-                if (FRAGMENT_LOAD_AND_CALL(fragment60, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_CUP_SELECT, 0, 0) != 0) {
                     arg0 = 3;
                 } else {
                     arg0 = 1;
@@ -808,7 +808,7 @@ s16 RuleWizard_StadiumMenu(s16 arg0) {
                 break;
 
             case 3:
-                if (FRAGMENT_LOAD_AND_CALL(fragment54, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_HUB, 0, 0) != 0) {
                     arg0 = 4;
                 } else {
                     arg0 = 1;
@@ -816,7 +816,7 @@ s16 RuleWizard_StadiumMenu(s16 arg0) {
                 break;
 
             case 4:
-                if (FRAGMENT_LOAD_AND_CALL(fragment61, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_TEAM_SELECTION, 0, 0) != 0) {
                     arg0 = 5;
                 } else {
                     arg0 = 3;
@@ -845,19 +845,19 @@ void State_StadiumMenu(void) {
 
         if (sp4E == 5) {
             gSessionContext.transitionFlags = 0;
-            FRAGMENT_LOAD_AND_CALL(fragment63, 1, 0);
+            FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 1, 0);
 
             while (!(gSessionContext.transitionFlags & 1)) {
-                FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ORDER_SELECT, 0, 0);
 
                 main_pool_push_state('STAD');
 
-                FRAGMENT_LOAD(fragment34);
-                FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+                FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
                 main_pool_pop_state('STAD');
 
-                FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 2, 0);
             }
 
             if (gSessionContext.transitionFlags & 0x20) {
@@ -873,7 +873,7 @@ void State_StadiumMenu(void) {
             }
 
             if (gSessionContext.transitionFlags & 0x1000) {
-                FRAGMENT_LOAD_AND_CALL(fragment66, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_PIKACHU_REWARD, 0, 0);
             }
 
             if (gSessionContext.transitionFlags & 8) {
@@ -902,7 +902,7 @@ s32 RuleWizard_FreeBattle(s16 arg0) {
     while ((arg0 > 0) && (arg0 < 4)) {
         switch (arg0) {
             case 1:
-                if (FRAGMENT_LOAD_AND_CALL(fragment58, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_FREE_BATTLE_RULES, 0, 0) != 0) {
                     arg0 = 2;
                 } else {
                     arg0 = 0;
@@ -910,7 +910,7 @@ s32 RuleWizard_FreeBattle(s16 arg0) {
                 break;
 
             case 2:
-                if (FRAGMENT_LOAD_AND_CALL(fragment54, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_HUB, 0, 0) != 0) {
                     arg0 = 3;
                 } else {
                     arg0 = 1;
@@ -918,7 +918,7 @@ s32 RuleWizard_FreeBattle(s16 arg0) {
                 break;
 
             case 3:
-                if (FRAGMENT_LOAD_AND_CALL(fragment61, 0, 1) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_TEAM_SELECTION, 0, 1) != 0) {
                     arg0 = 4;
                 } else {
                     arg0 = 2;
@@ -943,19 +943,19 @@ void State_FreeBattle(void) {
         switch (sp4E) {
             case 4:
                 gSessionContext.transitionFlags = 0;
-                FRAGMENT_LOAD_AND_CALL(fragment63, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 0, 0);
 
                 while (!(gSessionContext.transitionFlags & 1)) {
-                    FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ORDER_SELECT, 0, 0);
 
                     main_pool_push_state('FREE');
 
-                    FRAGMENT_LOAD(fragment34);
-                    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+                    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
                     main_pool_pop_state('FREE');
 
-                    FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 2, 0);
                 }
 
                 if (gSessionContext.transitionFlags & 0x20) {
@@ -981,7 +981,7 @@ s16 RuleWizard_VsMewtwo(s16 arg0) {
     while ((arg0 > 0) && (arg0 < 3)) {
         switch (arg0) {
             case 1:
-                if (FRAGMENT_LOAD_AND_CALL(fragment54, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_HUB, 0, 0) != 0) {
                     arg0 = 2;
                 } else {
                     arg0 = 0;
@@ -989,7 +989,7 @@ s16 RuleWizard_VsMewtwo(s16 arg0) {
                 break;
 
             case 2:
-                if (FRAGMENT_LOAD_AND_CALL(fragment61, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_TEAM_SELECTION, 0, 0) != 0) {
                     arg0 = 3;
                 } else {
                     arg0 = 1;
@@ -1019,19 +1019,19 @@ void State_VsMewtwo(void) {
         switch (sp4E) {
             case 3:
                 gSessionContext.transitionFlags = 0;
-                FRAGMENT_LOAD_AND_CALL(fragment63, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 0, 0);
 
                 while (!(gSessionContext.transitionFlags & 1)) {
-                    FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ORDER_SELECT, 0, 0);
 
                     main_pool_push_state('STAD');
 
-                    FRAGMENT_LOAD(fragment34);
-                    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+                    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
                     main_pool_pop_state('STAD');
 
-                    FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 2, 0);
                 }
 
                 if (gSessionContext.transitionFlags & 0x20) {
@@ -1061,7 +1061,7 @@ void State_Gallery(void) {
 }
 
 void State_VictoryPalace(void) {
-    if (FRAGMENT_LOAD_AND_CALL(fragment50, 0, 0) == 1) {
+    if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_HALL_OF_FAME, 0, 0) == 1) {
         Stage_RunDemoScene(0x1A);
     }
     gCurrentGameState = STATE_AREA_SELECT;
@@ -1074,7 +1074,7 @@ void State_GbTower(void) {
 
     main_pool_push_state('EMU0');
 
-    if ((FRAGMENT_LOAD_AND_CALL(fragment33, 0, 0) == 0) && (D_80075674 >= 0) && (D_80075674 < 4)) {
+    if ((FRAGMENT_LOAD_AND_CALL(FRAGMENT_TRANSFER_PAK_SELECT, 0, 0) == 0) && (D_80075674 >= 0) && (D_80075674 < 4)) {
         Audio_StopMusic(4);
         Audio_WaitForIdle(1);
         Display_WaitForFrames(2);
@@ -1082,7 +1082,7 @@ void State_GbTower(void) {
 
         sp2C.unk_04 = main_pool_alloc(sizeof(*sp2C.unk_04), 0);
 
-        FRAGMENT_LOAD_AND_CALL(fragment53, D_80075674, &sp2C);
+        FRAGMENT_LOAD_AND_CALL(FRAGMENT_GB_TOWER_TEAM_PREP, D_80075674, &sp2C);
         GbTower_Start(&sp2C);
 
         sp34 = GbTower_RecvExitMesg();
@@ -1120,7 +1120,7 @@ s16 RuleWizard_GymLeaderCastle(s16 arg0, s16 arg1) {
     while ((arg0 > 0) && (arg0 < 4)) {
         switch (arg0) {
             case 1:
-                if (FRAGMENT_LOAD_AND_CALL(fragment54, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_HUB, 0, 0) != 0) {
                     arg0 = 2;
                 } else {
                     arg0 = 0;
@@ -1128,7 +1128,7 @@ s16 RuleWizard_GymLeaderCastle(s16 arg0, s16 arg1) {
                 break;
 
             case 2:
-                if (FRAGMENT_LOAD_AND_CALL(fragment65, arg1, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_GYM_LEADER_CASTLE, arg1, 0) != 0) {
                     arg0 = 3;
                 } else {
                     arg0 = 1;
@@ -1136,7 +1136,7 @@ s16 RuleWizard_GymLeaderCastle(s16 arg0, s16 arg1) {
                 break;
 
             case 3:
-                if (FRAGMENT_LOAD_AND_CALL(fragment61, 0, 0) != 0) {
+                if (FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_TEAM_SELECTION, 0, 0) != 0) {
                     arg0 = 4;
                 } else {
                     arg0 = 2;
@@ -1176,23 +1176,23 @@ void State_GymLeaderCastle(void) {
             sp4C = 0;
             gSessionContext.transitionFlags = 0;
 
-            FRAGMENT_LOAD_AND_CALL(fragment63, 1, 0);
+            FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 1, 0);
 
             while (!(gSessionContext.transitionFlags & 1)) {
-                FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ORDER_SELECT, 0, 0);
 
                 main_pool_push_state('STAD');
 
-                FRAGMENT_LOAD(fragment34);
-                FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+                FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
                 main_pool_pop_state('STAD');
 
-                FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 2, 0);
             }
 
             if (gSessionContext.transitionFlags & 0x200) {
-                FRAGMENT_LOAD_AND_CALL(fragment40, 0, 0);
+                FRAGMENT_LOAD_AND_CALL(FRAGMENT_GYM_LEADER_CASTLE_CLEAR, 0, 0);
                 Stage_RunDemoScene(0x11);
                 Stage_RunDemoScene(0x15);
             }
@@ -1226,17 +1226,17 @@ void State_BattleNow(s32 arg0) {
     main_pool_push_state('QUIK');
     Team_BuildQuickBattleTeams(arg0);
 
-    FRAGMENT_LOAD_AND_CALL(fragment63, 0, 0);
-    FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ORDER_SELECT, 0, 0);
 
     main_pool_push_state('FIGT');
 
-    FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
     main_pool_pop_state('FIGT');
 
-    FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 2, 0);
 
     main_pool_pop_state('QUIK');
 
@@ -1246,17 +1246,17 @@ void State_BattleNow(s32 arg0) {
 void State_BattleFromEvent(void) {
     main_pool_push_state('EVNT');
 
-    FRAGMENT_LOAD_AND_CALL(fragment63, 0, 0);
-    FRAGMENT_LOAD_AND_CALL(fragment64, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ORDER_SELECT, 0, 0);
 
     main_pool_push_state('FIGT');
 
-    FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
     main_pool_pop_state('FIGT');
 
-    FRAGMENT_LOAD_AND_CALL(fragment63, 2, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_PREP, 2, 0);
 
     main_pool_pop_state('EVNT');
 
@@ -1266,15 +1266,15 @@ void State_BattleFromEvent(void) {
 void State_FastN64Logo(void) {
     void (*frag_43_entry)(void);
 
-    FRAGMENT_LOAD_AND_CALL(fragment35, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_N64_LOGO, 0, 0);
 
     main_pool_push_state('DOSE');
 
-    frag_43_entry = FRAGMENT_LOAD(fragment43);
+    frag_43_entry = FRAGMENT_LOAD(FRAGMENT_GALLERY_BACKGROUNDS);
     frag_43_entry();
 
-    FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment75, 0, 0);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_SNAP_PRINT_CLUB_PRINT_SEALS, 0, 0);
 
     gCurrentGameState = STATE_TITLE_SCREEN;
 
@@ -1287,8 +1287,8 @@ void State_FastBattle(void) {
     Team_BuildDeckOpponents(1, 0, 2, 0);
     Audio_PlayCommand(0xA0, 0xA, 0);
 
-    FRAGMENT_LOAD(fragment34);
-    FRAGMENT_LOAD_AND_CALL(fragment62, 0, &gSessionContext);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_MATH);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_BATTLE_ENGINE, 0, &gSessionContext);
 
     main_pool_pop_state('STAD');
 
@@ -1314,7 +1314,7 @@ void Game_ShutdownAndLoadFragment(s32 arg0, s32 arg1) {
 
     main_pool_pop_state('GAME');
 
-    FRAGMENT_LOAD_AND_CALL(fragment32, arg0, arg1);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_FATAL_ERROR_SCREEN, arg0, arg1);
 }
 
 void Game_ResetStorageDevice(void) {
