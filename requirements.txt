@@ -2,7 +2,6 @@
 PyYAML
 pylibyaml
 pypng
-Pillow>=10
 colorama
 rabbitizer>=1.2.0
 pygfxd
