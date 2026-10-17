@@ -1039,31 +1039,31 @@ extern arg1_func_80019420* gBattleAnimResourceTablePointers[40];
 
 
 
-//@src/fragments/battle_engine/battle_engine_2EA8E0.c
-s32 Battle_StageGeoDispatchCallback(s32 arg0, GraphNode* arg1);
-s32 Battle_StageLightAngleCallbackA(s32 arg0, unk_D_86002F34_alt18* arg1);
-s32 Battle_StageLightAngleCallbackB(s32 arg0, unk_D_86002F34_alt18* arg1);
-s32 Battle_StageMaterialTintCallback(s32 arg0, DisplayObject* arg1);
-void Battle_SetStageTintColor(u8 arg0, u8 arg1, u8 arg2);
-void BattleScene_SetModelUniformScale(f32 arg0);
-u16 Battle_TintTexel16(u16 arg0);
+//@src/fragments/battle_engine/battle_engine_main.c
+s32 Battle_StageGeoDispatchCallback(s32 event, GraphNode* node);
+s32 Battle_StageLightAngleCallbackA(s32 event, unk_D_86002F34_alt18* light);
+s32 Battle_StageLightAngleCallbackB(s32 event, unk_D_86002F34_alt18* light);
+s32 Battle_StageMaterialTintCallback(s32 event, DisplayObject* object);
+void Battle_SetStageTintColor(u8 r, u8 g, u8 b);
+void Battle_SetStageScale(f32 scale);
+u16 Battle_TintTexel16(u16 color);
 void Battle_DrawStageBackdrop(void);
-void Battle_RenderActivePokemonThumbnail(GraphNode* arg0, DepthBuffer* arg1);
-void Battle_DrawClippedTextureRect(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void Battle_DrawTexturedRectSegment(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8* arg4, s32 arg5);
-void Battle_FillActivePokemonThumbnail(GraphNode* arg0, DepthBuffer* arg1);
-void func_84300D44(void);
-void func_84300DC0(void);
+void Battle_RenderActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnail);
+void Battle_DrawClippedTextureRect(s32 x1, s32 y1, s32 x2, s32 y2);
+void Battle_DrawTexturedRectSegment(s32 x1, s32 y1, s32 draw_width, s32 height, u8* texture, s32 load_width);
+void Battle_FillActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnail);
+void Battle_ResetFaintBatches(void);
+void Battle_UpdateFaintBatches(void);
 void func_84300E78(void);
 void func_84300E80(void);
-s32 BattleScene_UpdateFrame(s32 arg0);
-s32 BattleScene_UpdatePausedFrame(s32 arg0);
+s32 BattleScene_UpdateFrame(s32 fade_mode);
+s32 BattleScene_UpdatePausedFrame(s32 fade_mode);
 void Battle_UpdateCompletionGate(void);
-s32 Battle_FrameCallback(s32 arg0);
-void Battle_SelectComRosterOrder(u8* arg0, s32 arg1);
-void Battle_CompleteComRosterOrder(void);
-void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* arg0, unk_D_86002F30* arg1);
-void BattleScene_Init(unk_func_80007444* arg0);
+s32 Battle_FrameCallback(s32 fade_mode);
+void Battle_CompleteRosterOrder(u8* roster_order, s32 number_of_pokemon_picked);
+void Battle_SelectComRoster(void);
+void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* side, unk_D_86002F30* model);
+void BattleScene_Init(unk_func_80007444* stage_context);
 void func_84301A24(void);
 s32 Battle_Main(s32 arg0, SessionContext* arg1);
 

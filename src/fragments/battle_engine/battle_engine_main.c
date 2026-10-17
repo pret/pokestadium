@@ -17,28 +17,36 @@
 #include "src/memmap.h"
 #include "src/memory.h"
 
-static CameraNode D_8438E440;
-static unk_D_8690A610 D_8438E530;
-static GraphNode D_8438E550;
-static GraphNode D_8438E568;
-static GraphNode D_8438E580;
-static CameraNode D_8438E598;
-static CameraNode D_8438E688;
+// Battle fragment entry, scene construction, and per-frame rendering.
+// Stage archive entries provide layouts 0/1/3, backdrop 2, and optional fog 4.
+// Thumbnail cameras render to separate 76 x 76 images before the main scene.
+
+static CameraNode sStageCamera;
+static unk_D_8690A610 sStageFog;
+static GraphNode sStageLayout0;
+static GraphNode sStageLayout1;
+static GraphNode sStageLayout3;
+static CameraNode sSide1ThumbnailCamera;
+static CameraNode sSide2ThumbnailCamera;
+// Exported: battle_engine_32B680.c reads these to texture the HUD thumbnails.
 u8* sSide1PokemonThumbnailImage;
 u8* sSide2PokemonThumbnailImage;
-static void* D_8438E780;
-static GraphNode* D_8438E784;
-static GraphNode* D_8438E788;
-static GraphNode* D_8438E78C;
+static void* sStageBackdrop;
+static GraphNode* sStageRoot;
+static GraphNode* sSide1ThumbnailRoot;
+static GraphNode* sSide2ThumbnailRoot;
 static DepthBuffer* sSide1PokemonThumbnail;
 static DepthBuffer* sSide2PokemonThumbnail;
 static BattleSessionTeams* sBattleSides;
 static s32 sIsPaused;
-static s32 D_8438E7A0;
+static s32 sNextFaintBatch;
 static Color_RGBA8_u32 sTintColor;
-static f32 D_8438E7A8;
-static s32 D_8438E7AC;
+static f32 sStageScale;
+// Initial countdown -2 -> 0, completion latch 1, audio-shutdown latch 2.
+static s32 sCompletionGate;
 
+// Indexed by mode or ruleCategory. Castle locations advance from the base at key 7.
+// Values are stadium_models archive indices; the labels name the indexing mode.
 static u8 sBattleModeDispatch[] = {
     SESSION_MODE_ANYTHING_GOES, // SESSION_MODE_ANYTHING_GOES
     SESSION_MODE_NINTENDO_CUP_97, // SESSION_MODE_NINTENDO_CUP_97
@@ -56,100 +64,109 @@ static u8 sBattleModeDispatch[] = {
     SESSION_MODE_NINTENDO_CUP_97, SESSION_MODE_NINTENDO_CUP_97, // 17-18: Cutscenes
     SESSION_MODE_NINTENDO_CUP_97, // 19: Unknown
     // The ROM table ends here at 20 bytes. Modes 20-26 index past it into the
-    // first bytes of D_84384364 (0x0C, 0x00, 0xFF, 0xFF, 0x05, 0x00, 0x00).
+    // first bytes of sStageGeoLayout (0x0C, 0x00, 0xFF, 0xFF, 0x05, 0x00, 0x00).
     // Adding entries would shift .data and break ROM identity.
 };
-static u32 D_84384364[] = {
-    0x0C00FFFF,  0x05000000,  0x07000000,    &D_8438E440,   0x05000000, 0x0D000000,    0x05000000,  0x07000000,
-    &D_8438E530, 0x14000000,  0x002D0019,    0xFFFFFF28,    0x08000000, Battle_StageLightAngleCallbackA, 0x00000000,  0x14000000,
+static u32 sStageGeoLayout[] = {
+    0x0C00FFFF,  0x05000000,  0x07000000,    &sStageCamera,   0x05000000, 0x0D000000,    0x05000000,  0x07000000,
+    &sStageFog, 0x14000000,  0x002D0019,    0xFFFFFF28,    0x08000000, Battle_StageLightAngleCallbackA, 0x00000000,  0x14000000,
     0x002D0019,  0x80808028,  0x08000000,    Battle_StageLightAngleCallbackB, 0x00000000, 0x16646464,    0x0F000002,  0x05000000,
     0x1F00FFFF,  0x00000000,  0x00000000,    0x00000000,    0x00640064, 0x00640000,    0x08000000,  Battle_StageMaterialTintCallback,
-    0x00000000,  0x05000000,  0x07000000,    &D_8438E550,   0x06000000, 0x06000000,    0x0F000003,  0x05000000,
+    0x00000000,  0x05000000,  0x07000000,    &sStageLayout0,   0x06000000, 0x06000000,    0x0F000003,  0x05000000,
     0x1F00FFFF,  0x00000000,  0x00000000,    0x00000000,    0x00640064, 0x00640000,    0x08000000,  Battle_StageMaterialTintCallback,
-    0x00000000,  0x05000000,  0x07000000,    &D_8438E568,   0x06000000, 0x06000000,    0x0F000002,  0x05000000,
+    0x00000000,  0x05000000,  0x07000000,    &sStageLayout1,   0x06000000, 0x06000000,    0x0F000002,  0x05000000,
     0x1F00FFFF,  0x00000000,  0x00000000,    0x00000000,    0x00640064, 0x00640000,    0x08000000,  Battle_StageMaterialTintCallback,
-    0x00000000,  0x05000000,  0x07000000,    &D_8438E580,   0x06000000, 0x06000000,    0x0F000003,  0x05000000,
+    0x00000000,  0x05000000,  0x07000000,    &sStageLayout3,   0x06000000, 0x06000000,    0x0F000003,  0x05000000,
     0x0A000000,  &D_800AC840, 0x06000000,    0x0F000002,    0x05000000, 0x0A000000,    &D_800AC858, 0x06000000,
     0x09000000,  0x08000000,  Battle_StageGeoDispatchCallback, 0x00000000,    0x06000000, 0x06000000,    0x06000000,  0x01000000,
 };
-static u32 D_843844C4[] = {
-    0x0C00FFFF,  0x05000000, 0x07000000, &D_8438E598, 0x05000000, 0x0D000001, 0x05000000,
+static u32 sSide1ThumbnailLayout[] = {
+    0x0C00FFFF,  0x05000000, 0x07000000, &sSide1ThumbnailCamera, 0x05000000, 0x0D000001, 0x05000000,
     0x14000000,  0x002D0019, 0xFFFFFF28, 0x16FFFFFF,  0x0F000003, 0x05000000, 0x0A000000,
     &D_800AC840, 0x06000000, 0x06000000, 0x06000000,  0x06000000, 0x01000000,
 };
-static u32 D_84384514[] = {
-    0x0C00FFFF,  0x05000000, 0x07000000, &D_8438E688, 0x05000000, 0x0D000002, 0x05000000,
+static u32 sSide2ThumbnailLayout[] = {
+    0x0C00FFFF,  0x05000000, 0x07000000, &sSide2ThumbnailCamera, 0x05000000, 0x0D000002, 0x05000000,
     0x14000000,  0x002D0019, 0xFFFFFF28, 0x16FFFFFF,  0x0F000003, 0x05000000, 0x0A000000,
     &D_800AC840, 0x06000000, 0x06000000, 0x06000000,  0x06000000, 0x01000000,
 };
 
 // called every frame: bug boy in GLC
-s32 Battle_StageGeoDispatchCallback(s32 arg0, GraphNode* arg1) {
-    if (arg0 == 2) {
-        BattleAnim_DispatchPresentation(5, &D_8438E440);
+// Geo_ProcessNodeChildren invokes render callbacks with event 2.
+//@src/geo_render.c
+s32 Battle_StageGeoDispatchCallback(s32 event, GraphNode* node) {
+    if (event == 2) {
+        BattleAnim_DispatchPresentation(5, &sStageCamera);
     }
     return 0;
 }
 // called every frame: bug boy in GLC
-s32 Battle_StageLightAngleCallbackA(s32 arg0, unk_D_86002F34_alt18* arg1) {
+// Orient the first stage light relative to the current camera's viewing axis.
+s32 Battle_StageLightAngleCallbackA(s32 event, unk_D_86002F34_alt18* light) {
     UNUSED s32 pad;
     f32 distance;
     s16 angle_x;
     s16 angle_y;
 
-    if (arg0 == 2) {
+    if (event == 2) {
         Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &distance, &angle_x, &angle_y);
-        arg1->unk_1C = angle_x + 0x2000;
-        arg1->unk_1E = angle_y - 0x2000;
+        light->unk_1C = angle_x + 0x2000;
+        light->unk_1E = angle_y - 0x2000;
     }
     return 0;
 }
 
 // called every frame: bug boy in GLC
-s32 Battle_StageLightAngleCallbackB(s32 arg0, unk_D_86002F34_alt18* arg1) {
+// The second light uses the opposite elevation and an azimuth offset of 135 degrees.
+s32 Battle_StageLightAngleCallbackB(s32 event, unk_D_86002F34_alt18* light) {
     UNUSED s32 pad;
-    f32 sp28;
-    s16 sp26;
-    s16 sp24;
+    f32 distance;
+    s16 angle_x;
+    s16 angle_y;
 
-    if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
-        arg1->unk_1C = -0x2000 - sp26;
-        arg1->unk_1E = sp24 + 0x6000;
+    if (event == 2) {
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &distance, &angle_x, &angle_y);
+        light->unk_1C = -0x2000 - angle_x;
+        light->unk_1E = angle_y + 0x6000;
     }
     return 0;
 }
 
 // called every frame: bug boy in GLC
-s32 Battle_StageMaterialTintCallback(s32 arg0, DisplayObject* arg1) {
-    if (arg0 == 2) {
-        Vec3f_SetComponentsDuplicate(&arg1->scale, D_8438E7A8, D_8438E7A8, D_8438E7A8);
-        arg1->textureTint.rgba = sTintColor.rgba;
+// Apply presentation effects to each of the three stage-layout containers.
+s32 Battle_StageMaterialTintCallback(s32 event, DisplayObject* object) {
+    if (event == 2) {
+        Vec3f_SetComponentsDuplicate(&object->scale, sStageScale, sStageScale, sStageScale);
+        object->textureTint.rgba = sTintColor.rgba;
     }
     return 0;
 }
 
 // called every frame: bug boy in GLC
+// A nonwhite tint disables fog. White re-enables it only when archive entry 4
+// supplied fog parameters; without parameters, white leaves the flags unchanged.
 void Battle_SetStageTintColor(u8 r, u8 g, u8 b) {
     sTintColor.r = r;
     sTintColor.g = g;
     sTintColor.b = b;
 
     if (((r & g & b) & 0xFF) == 0xFF) {
-        if (D_8438E530.node.callbackArg == 1) {
-            D_8438E530.node.flags |= 1;
+        if (sStageFog.node.callbackArg == 1) {
+            sStageFog.node.flags |= 1;
         }
     } else {
-        D_8438E530.node.flags &= ~1;
+        sStageFog.node.flags &= ~1;
     }
 }
 
 // Called at the start of battles
-void BattleScene_SetModelUniformScale(f32 arg0) {
-    D_8438E7A8 = arg0;
+// Uniform scale consumed by the stage material callbacks, not the Pokemon models.
+void Battle_SetStageScale(f32 scale) {
+    sStageScale = scale;
 }
 
 // called every frame: bug boy in GLC
+// Expand RGBA5551 channels to eight bits for tinting, then repack with alpha set.
 u16 Battle_TintTexel16(u16 color) {
     s32 r;
     s32 g;
@@ -163,37 +180,40 @@ u16 Battle_TintTexel16(u16 color) {
 }
 
 // called every frame: bug boy in GLC
+// Archive entry 2 returns a tagged backdrop value: NULL clears depth, -1 fills
+// black, a value below 0x10000 is RGBA5551, and larger values address a texture.
+// The 4 x 64 RGBA32 texture stretches over the upper half; its last row fills below.
 void Battle_DrawStageBackdrop(void) {
-    s16 sp4E;
-    s16 sp4C;
-    s16 sp4A;
-    s16 sp48;
-    s16 sp46;
-    s16 sp44;
+    s16 left;
+    s16 right;
+    s16 top;
+    s16 middle;
+    s16 bottom;
+    s16 texture_step_y;
 
-    if ((u32)D_8438E780 == NULL) {
+    if ((u32)sStageBackdrop == NULL) {
         GfxImage_ClearDepthRectangle(&gDisplayListHead, 0, 0, 0x140, 0xF0);
         return;
     }
 
-    if ((u32)D_8438E780 == -1) {
+    if ((u32)sStageBackdrop == -1) {
         GfxImage_FillCurrent(&gDisplayListHead, 1);
         return;
     }
 
-    if ((u32)D_8438E780 < 0x10000) {
-        GfxImage_FillCurrent(&gDisplayListHead, Battle_TintTexel16(D_8438E780));
+    if ((u32)sStageBackdrop < 0x10000) {
+        GfxImage_FillCurrent(&gDisplayListHead, Battle_TintTexel16(sStageBackdrop));
         return;
     }
 
-    sp4E = D_8438E440.viewport.x;
-    sp4A = D_8438E440.viewport.y;
-    sp4C = D_8438E440.viewport.width + sp4E;
-    sp48 = (D_8438E440.viewport.height / 2) + sp4A;
-    sp46 = D_8438E440.viewport.height + sp4A;
-    sp44 = 0x10000 / (D_8438E440.viewport.height / 2);
+    left = sStageCamera.viewport.x;
+    top = sStageCamera.viewport.y;
+    right = sStageCamera.viewport.width + left;
+    middle = (sStageCamera.viewport.height / 2) + top;
+    bottom = sStageCamera.viewport.height + top;
+    texture_step_y = 0x10000 / (sStageCamera.viewport.height / 2);
 
-    if ((D_8438E440.viewport.width < 0x140) || (D_8438E440.viewport.height < 0xF0)) {
+    if ((sStageCamera.viewport.width < 0x140) || (sStageCamera.viewport.height < 0xF0)) {
         GfxImage_FillCurrent(&gDisplayListHead, 1);
     } else {
         GfxImage_ClearDepthRectangle(&gDisplayListHead, 0, 0, 0x140, 0xF0);
@@ -205,11 +225,11 @@ void Battle_DrawStageBackdrop(void) {
     gDPSetPrimColor(gDisplayListHead++, 0, 0, sTintColor.r, sTintColor.g, sTintColor.b, 255);
     gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER | G_LIGHTING);
 
-    gDPLoadTextureBlock(gDisplayListHead++, Memmap_GetFragmentVaddr(D_8438E780), G_IM_FMT_RGBA, G_IM_SIZ_32b, 4, 64, 0,
+    gDPLoadTextureBlock(gDisplayListHead++, Memmap_GetFragmentVaddr(sStageBackdrop), G_IM_FMT_RGBA, G_IM_SIZ_32b, 4, 64, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
-    gSPTextureRectangle(gDisplayListHead++, sp4E << 2, sp4A << 2, sp4C << 2, sp48 << 2, G_TX_RENDERTILE, 0, 0, 0, sp44);
-    gSPTextureRectangle(gDisplayListHead++, sp4E << 2, sp48 << 2, sp4C << 2, sp46 << 2, G_TX_RENDERTILE, 0, 0x07E0, 0,
+    gSPTextureRectangle(gDisplayListHead++, left << 2, top << 2, right << 2, middle << 2, G_TX_RENDERTILE, 0, 0, 0, texture_step_y);
+    gSPTextureRectangle(gDisplayListHead++, left << 2, middle << 2, right << 2, bottom << 2, G_TX_RENDERTILE, 0, 0x07E0, 0,
                         0);
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
@@ -217,6 +237,8 @@ void Battle_DrawStageBackdrop(void) {
 /*
     Makes and Freezes the thumbnail of active pokemon
 */
+// Capture only when camera flag 0x10 requests a refresh. Restoring the viewport
+// keeps the camera's on-screen placement separate from its off-screen render size.
 void Battle_RenderActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnail) {
     CameraNode* camera_node = pokemon->children;
     CameraViewport viewport;
@@ -240,6 +262,9 @@ void Battle_RenderActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbn
 }
 
 // called every frame: bug boy in GLC
+// Rectangle's legacy field order is left/right/bottom/top (x1/y1/x2/y2).
+// Use clipped destination offsets as 10.5 texture coordinates with a half-texel bias.
+//@src/gfx_rect.c
 void Battle_DrawClippedTextureRect(s32 x1, s32 y1, s32 x2, s32 y2) {
     struct Rectangle dest;
     u16 texture_spread_x;
@@ -248,7 +273,7 @@ void Battle_DrawClippedTextureRect(s32 x1, s32 y1, s32 x2, s32 y2) {
     GfxRect_SetBounds(&dest, x1, y1, x2, y2);
 
     if (GfxRect_ClipToScissor(&dest) != 0) {
-        if (!x2) {}
+        if (!x2) {} // FAKE: empty condition retained for matching (karodo).
 
         texture_spread_x = ((dest.x1 - x1) << 5);
         texture_spread_y = ((dest.y2 - y1) << 5);
@@ -259,11 +284,12 @@ void Battle_DrawClippedTextureRect(s32 x1, s32 y1, s32 x2, s32 y2) {
         gSPTextureRectangle(gDisplayListHead++, dest.x1 << 2, dest.y2 << 2, ((dest.y1 + 1) ^ 0) << 2,
                             ((dest.x2 + 1) ^ 0) << 2, G_TX_RENDERTILE, texture_spread_x, texture_spread_y, 0x0800, 0x0800);
 
-        if ((x2 && x2) ^ 0) {}// karodo
+        if ((x2 && x2) ^ 0) {} // FAKE: empty condition retained for matching (karodo).
     }
 }
 
 // called every frame: bug boy in GLC
+// Load full-width source rows and draw at half size using the clipped rectangle helper.
 void Battle_DrawTexturedRectSegment(s32 x1, s32 y1, s32 draw_width, s32 height, u8* texture, s32 load_width) {
     gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, load_width, (height * 2) + 2, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -275,6 +301,7 @@ void Battle_DrawTexturedRectSegment(s32 x1, s32 y1, s32 draw_width, s32 height, 
 /*
     Fills in the texture of the pokemon thumbnail
 */
+// Blit the captured side image as four strips, producing a 37 x 37 thumbnail.
 void Battle_FillActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnail) {
     s32 x;
     s32 y;
@@ -310,9 +337,9 @@ void Battle_FillActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnai
     gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
 }
 
-// trigger unknown
-// preliminary guess: initialization for Tag Team in free battle
-void func_84300D44(void) {
+// Clear the faint-batch stamps for every picked Pokemon, including teammate rosters.
+// BattleMon.unk_25 is written by Battle_UpdateFaintBatches when its current HP reaches zero.
+void Battle_ResetFaintBatches(void) {
     s32 i;
     s32 j;
     s32 x;
@@ -330,7 +357,9 @@ void func_84300D44(void) {
 }
 
 // called every frame: bug boy in GLC
-void func_84300DC0(void) {
+// Stamp newly observed zero-HP Pokemon with the same batch number this frame.
+// Increment once per nonempty batch, so simultaneous faints share a stamp.
+void Battle_UpdateFaintBatches(void) {
     s32 i;
     s32 j;
     s32 x;
@@ -344,52 +373,55 @@ void func_84300DC0(void) {
             for (x = 0; x < temp_a3->numberOfPokemonChosen; x++) {
                 if ((temp_a3->pokemonPicked[x].unk_25 == 0) && (temp_a3->pokemonPicked[x].unk_02 == 0)) {
                     var_v0 = 1;
-                    temp_a3->pokemonPicked[x].unk_25 = D_8438E7A0;
+                    temp_a3->pokemonPicked[x].unk_25 = sNextFaintBatch;
                 }
             }
         }
     }
 
     if (var_v0 != 0) {
-        D_8438E7A0 += 1;
+        sNextFaintBatch += 1;
     }
 }
 
+// Empty retail hook; its intended purpose is not established.
 void func_84300E78(void) {
 }
 
+// Empty retail hook; its intended purpose is not established.
 void func_84300E80(void) {
 }
 
 // called every frame: bug boy in GLC
-s32 BattleScene_UpdateFrame(s32 arg0) {
-    s32 sp1C;
+// Advance simulation/presentation, capture dirty thumbnails, then draw the scene and UI.
+s32 BattleScene_UpdateFrame(s32 fade_mode) {
+    s32 battle_result;
 
     GeoRender_AdvanceFrameCounter();
     ModelAnim_UpdateFrameChangeState();
     BattleScene_DispatchLifecycle(2, sBattleSides);
-    BattleScene_DispatchOwnerCameraLifecycle(2, &D_8438E598, &D_8438E688);
-    sp1C = BattleScene_Dispatch(2, &D_8438E440);
-    BattleAnim_DispatchPresentation(2, &D_8438E440);
-    Battle_RenderActivePokemonThumbnail(D_8438E788, sSide1PokemonThumbnail);
-    Battle_RenderActivePokemonThumbnail(D_8438E78C, sSide2PokemonThumbnail);
+    BattleScene_DispatchOwnerCameraLifecycle(2, &sSide1ThumbnailCamera, &sSide2ThumbnailCamera);
+    battle_result = BattleScene_Dispatch(2, &sStageCamera);
+    BattleAnim_DispatchPresentation(2, &sStageCamera);
+    Battle_RenderActivePokemonThumbnail(sSide1ThumbnailRoot, sSide1PokemonThumbnail);
+    Battle_RenderActivePokemonThumbnail(sSide2ThumbnailRoot, sSide2PokemonThumbnail);
     BgStage_DrawFrame();
     Battle_DrawStageBackdrop();
-    Geo_RenderRootNode(D_8438E784);
+    Geo_RenderRootNode(sStageRoot);
     BattleScene_DispatchLifecycle(5, sBattleSides);
-    Battle_FillActivePokemonThumbnail(D_8438E788, sSide1PokemonThumbnail);
-    Battle_FillActivePokemonThumbnail(D_8438E78C, sSide2PokemonThumbnail);
-    func_84300DC0();
+    Battle_FillActivePokemonThumbnail(sSide1ThumbnailRoot, sSide1PokemonThumbnail);
+    Battle_FillActivePokemonThumbnail(sSide2ThumbnailRoot, sSide2PokemonThumbnail);
+    Battle_UpdateFaintBatches();
 
-    if (sp1C == 1) {
+    if (battle_result == 1) {
         sBattleSides[0].unk_1C = 1;
     }
 
-    if (sp1C == 2) {
+    if (battle_result == 2) {
         sBattleSides[1].unk_1C = 1;
     }
 
-    return sp1C;
+    return battle_result;
 }
 
 /*
@@ -397,39 +429,46 @@ s32 BattleScene_UpdateFrame(s32 arg0) {
     Stadium doesn't have pausing so it's not that either
     preliminary guess: unused pausing debug option, sIsPaused can never be 1 through the current code
 */
-s32 BattleScene_UpdatePausedFrame(s32 arg0) {
-    s32 sp1C = 0;
+// Dormant frame-step path: this translation unit initializes the selector to zero
+// and never sets it to one. A steps and Start resumes only while fade_mode is zero.
+s32 BattleScene_UpdatePausedFrame(s32 fade_mode) {
+    s32 battle_result = 0;
 
-    if ((arg0 == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
-        sp1C = BattleScene_UpdateFrame(arg0);
+    if ((fade_mode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
+        battle_result = BattleScene_UpdateFrame(fade_mode);
     } else {
         ModelAnim_UpdateFrameChangeState();
         BgStage_DrawFrame();
         Battle_DrawStageBackdrop();
-        Geo_RenderRootNode(D_8438E784);
+        Geo_RenderRootNode(sStageRoot);
         BattleScene_DispatchLifecycle(5, sBattleSides);
-        Battle_FillActivePokemonThumbnail(D_8438E788, sSide1PokemonThumbnail);
-        Battle_FillActivePokemonThumbnail(D_8438E78C, sSide2PokemonThumbnail);
+        Battle_FillActivePokemonThumbnail(sSide1ThumbnailRoot, sSide1PokemonThumbnail);
+        Battle_FillActivePokemonThumbnail(sSide2ThumbnailRoot, sSide2PokemonThumbnail);
     }
 
-    if ((arg0 == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
+    if ((fade_mode == 0) && BTN_IS_PRESSED(gPlayer1Controller, BTN_START)) {
         sIsPaused = 0;
     }
-    return sp1C;
+    return battle_result;
 }
 
 // triggers every frame: bug boy in GLC
+// Count the initial two callbacks toward zero; once the gate is zero, mode 16
+// can request exit on a button press. The normal path waits for the scene result.
 void Battle_UpdateCompletionGate(void) {
-    if (D_8438E7AC < 0) {
-        D_8438E7AC++;
-    } else if ((D_8438E7AC == 0) && (gSessionContext.mode == 0x10) && gPlayer1Controller->buttonPressed) {
-        D_8438E7AC = 1;
+    if (sCompletionGate < 0) {
+        sCompletionGate++;
+    } else if ((sCompletionGate == 0) && (gSessionContext.mode == 0x10) && gPlayer1Controller->buttonPressed) {
+        sCompletionGate = 1;
     }
 }
 
 // triggers every frame: bug boy in GLC
-s32 Battle_FrameCallback(s32 arg0) {
-    s32 sp1C = 0;
+// BgStage_WaitForCondition passes the current fade mode and starts the exit fade
+// after a nonzero return. Latch 2 prevents repeating the audio shutdown request.
+//@src/stage_loader.c
+s32 Battle_FrameCallback(s32 fade_mode) {
+    s32 battle_result = 0;
 
     Cont_StartReadInputs();
     Trainer_RequestPokeIcon(&sBattleSides[0]);
@@ -441,24 +480,24 @@ s32 Battle_FrameCallback(s32 arg0) {
 
     switch (sIsPaused) {
         case 0:
-            sp1C = BattleScene_UpdateFrame(arg0);
+            battle_result = BattleScene_UpdateFrame(fade_mode);
             break;
 
         case 1:
-            sp1C = BattleScene_UpdatePausedFrame(arg0);
+            battle_result = BattleScene_UpdatePausedFrame(fade_mode);
             break;
     }
 
-    if ((sp1C != 0) && (D_8438E7AC <= 0)) {
-        D_8438E7AC = 1;
+    if ((battle_result != 0) && (sCompletionGate <= 0)) {
+        sCompletionGate = 1;
     }
 
     Battle_UpdateCompletionGate();
     PokeIcon_RequestBackgroundForObject(&sBattleSides[0]);
     PokeIcon_RequestBackgroundForObject(&sBattleSides[1]);
 
-    if ((arg0 != 2) && (D_8438E7AC == 1)) {
-        D_8438E7AC = 2;
+    if ((fade_mode != 2) && (sCompletionGate == 1)) {
+        sCompletionGate = 2;
         func_8003DB84(0);
         if (gSessionContext.mode != 0x11) {
             Audio_FadeOutAll(0x1E);
@@ -469,25 +508,30 @@ s32 Battle_FrameCallback(s32 arg0) {
 }
 
 // triggers on battle start: bug boy in glc
-void Battle_SelectComRosterOrder(u8* com_roster, s32 number_of_pokemon_picked) {
-    s32 i;
-    s32 j;
+// Preserve the picked prefix and append missing roster indices 0..5 in order.
+// This completes the copy order; it does not choose additional battle participants.
+void Battle_CompleteRosterOrder(u8* roster_order, s32 number_of_pokemon_picked) {
+    s32 roster_index;
+    s32 picked_index;
 
-    for (i = 0; i < 6; i++) {
-        for (j = 0; j < number_of_pokemon_picked; j++) {
-            if (i == com_roster[j]) {
+    for (roster_index = 0; roster_index < 6; roster_index++) {
+        for (picked_index = 0; picked_index < number_of_pokemon_picked; picked_index++) {
+            if (roster_index == roster_order[picked_index]) {
                 break;
             }
         }
 
-        if (j == number_of_pokemon_picked) {
-            com_roster[number_of_pokemon_picked++] = i;
+        if (picked_index == number_of_pokemon_picked) {
+            roster_order[number_of_pokemon_picked++] = roster_index;
         }
     }
 }
 
 // triggers on battle start: bug boy in glc
-void Battle_CompleteComRosterOrder(void) {
+// Ask the COM selection routine for the picked prefix, then copy the brought
+// roster in that order. numberOfPokemonChosen keeps only the prefix length.
+//@src/fragments/battle_engine/battle_engine_361050.c
+void Battle_SelectComRoster(void) {
     TeamRoster* com_roster;
     TeamRoster* player_roster;
     u8 order_of_picked_pokemon[8];
@@ -496,11 +540,12 @@ void Battle_CompleteComRosterOrder(void) {
     s32 number_of_pokemon_picked;
 
     player_roster = gSessionContext.battleSides[0].teamMember[0];
-    // Free battle does let two players play against the AI
+    // Side zero can contain a second trainer; this is not a second active Pokemon.
     player_teammate_roster = gSessionContext.battleSides[0].teamMember[1];
     com_roster = gSessionContext.battleSides[1].teamMember[0];
 
     if (com_roster->unk_000 & 2) {
+        // Free Battle can consider both allied trainers; other modes pass only one.
         if (gSessionContext.mode == 0) {
             if (gSessionContext.ruleCategory == RULE_CATEGORY_ANYTHING_GOES) {
                 number_of_pokemon_picked = com_roster->rosterInfo->numberOfPokemonCanBePicked;
@@ -516,7 +561,7 @@ void Battle_CompleteComRosterOrder(void) {
             }
             func_843831A0(player_roster, NULL, com_roster, com_roster->unk_018 & 0xFF, order_of_picked_pokemon, gSessionContext.ruleCategory, number_of_pokemon_picked);
         }
-        Battle_SelectComRosterOrder(order_of_picked_pokemon, number_of_pokemon_picked);
+        Battle_CompleteRosterOrder(order_of_picked_pokemon, number_of_pokemon_picked);
         com_roster->numberOfPokemonChosen = number_of_pokemon_picked;
 
         for (i = 0; i < com_roster->rosterInfo->numberOfPokemonCanBePicked; i++) {
@@ -526,30 +571,32 @@ void Battle_CompleteComRosterOrder(void) {
 }
 
 // triggers at the start of battle: bug boy in glc
-void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* arg0, unk_D_86002F30* arg1) {
-    TeamRoster* temp_v0 = arg0->teamMember[0];
+// Seed icon/presentation state from the side's first trainer and first picked Pokemon.
+void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* side, unk_D_86002F30* model) {
+    TeamRoster* first_trainer = side->teamMember[0];
 
-    arg0->unk_18 = arg1->unk_08->unk_00[0];
-    arg0->unk_00 |= 0xA0;
-    arg0->unk_1C = 0;
-    arg0->unk_02 = temp_v0->pokemonPicked[0].unk_00.unk_00;
-    arg0->unk_04 = temp_v0->pokemonPicked;
-    Trainer_RequestPokeIcon(arg0);
+    side->unk_18 = model->unk_08->unk_00[0];
+    side->unk_00 |= 0xA0;
+    side->unk_1C = 0;
+    side->unk_02 = first_trainer->pokemonPicked[0].unk_00.unk_00;
+    side->unk_04 = first_trainer->pokemonPicked;
+    Trainer_RequestPokeIcon(side);
 }
 
 // triggers at the start of battle: bug boy in glc
-void BattleScene_Init(unk_func_80007444* arg0) {
-    MemoryBlock* sp44;
-    u32* temp_v0_4;
-    FragmentEntry sp3C;
-    unk_D_8690A610_018* temp_v0_7;
+// Allocate thumbnail targets, load the mode/ruleset arena, and construct all three roots.
+void BattleScene_Init(unk_func_80007444* stage_context) {
+    MemoryBlock* layout_pool;
+    u32* stage_layout;
+    FragmentEntry arena_entry;
+    unk_D_8690A610_018* fog_parameters;
     s32 pad;
-    s16 sp32;
-    DepthBuffer* sp2C;
-    unk_D_86002F30* sp28;
+    s16 arena_index;
+    DepthBuffer* thumbnail_depth;
+    unk_D_86002F30* model;
 
     Battle_SetStageTintColor(0xFF, 0xFF, 0xFF);
-    BattleScene_SetModelUniformScale(1.0f);
+    Battle_SetStageScale(1.0f);
 
     if (gSessionContext.mode == 0x11) {
         Font_Init(4, 0);
@@ -563,13 +610,13 @@ void BattleScene_Init(unk_func_80007444* arg0) {
     sBattleSides[1].unk_10 = PokeIcon_AllocFramebuffers(3);
     PokeIcon_OpenModelArchives();
 
-    sp2C = main_pool_alloc(0x10, 0);
-    GfxImage_Initialize(sp2C, 0, 2, 0x4C, 0x4C, arg0->unk_18[0]->depth_p->img_p);
+    thumbnail_depth = main_pool_alloc(0x10, 0);
+    GfxImage_Initialize(thumbnail_depth, 0, 2, 0x4C, 0x4C, stage_context->unk_18[0]->depth_p->img_p);
     sSide1PokemonThumbnail = GfxImage_Allocate(0, 2, 0x4C, 0x4C, 0);
     sSide2PokemonThumbnail = GfxImage_Allocate(0, 2, 0x4C, 0x4C, 0);
 
-    GfxImage_AttachDepthBuffer(sSide1PokemonThumbnail, sp2C);
-    GfxImage_AttachDepthBuffer(sSide2PokemonThumbnail, sp2C);
+    GfxImage_AttachDepthBuffer(sSide1PokemonThumbnail, thumbnail_depth);
+    GfxImage_AttachDepthBuffer(sSide2PokemonThumbnail, thumbnail_depth);
 
     sSide1PokemonThumbnailImage = sSide1PokemonThumbnail->img_p;
     sSide2PokemonThumbnailImage = sSide2PokemonThumbnail->img_p;
@@ -578,99 +625,106 @@ void BattleScene_Init(unk_func_80007444* arg0) {
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_3000000, battle_ui, 0);
 
+    // Modes 16/10 use the ruleset as the arena key; other modes use the mode itself.
+    // Castle key 7 adds the selected location to the table's base entry.
     if ((gSessionContext.mode == SESSION_MODE_ATTRACT_DEMO_BATTLE) || (gSessionContext.mode == SESSION_MODE_EVENT_BATTLE)) {
-        sp32 = sBattleModeDispatch[gSessionContext.ruleCategory];
+        arena_index = sBattleModeDispatch[gSessionContext.ruleCategory];
         if (gSessionContext.ruleCategory == SESSION_MODE_GYM_LEADER_CASTLE) {
-            sp32 += gSessionContext.modeSelection;
+            arena_index += gSessionContext.modeSelection;
         }
     } else {
-        sp32 = sBattleModeDispatch[gSessionContext.mode];
+        arena_index = sBattleModeDispatch[gSessionContext.mode];
         if (gSessionContext.mode == SESSION_MODE_GYM_LEADER_CASTLE) {
-            sp32 += gSessionContext.modeSelection;
+            arena_index += gSessionContext.modeSelection;
         }
     }
 
-    sp3C = BinArchive_GetFile(ASSET_LOAD2(stadium_models, 1, 1), sp32);
-    D_8438E780 = sp3C(2, 0);
+    arena_entry = BinArchive_GetFile(ASSET_LOAD2(stadium_models, 1, 1), arena_index);
+    sStageBackdrop = arena_entry(2, 0);
 
-    sp28 = Model_LoadByArchiveIndex(0x9A);
-    Battle_CompleteComRosterOrder();
-    BattleScene_InitializeParticipantPresentation(&sBattleSides[0], sp28);
-    BattleScene_InitializeParticipantPresentation(&sBattleSides[1], sp28);
+    model = Model_LoadByArchiveIndex(0x9A);
+    Battle_SelectComRoster();
+    BattleScene_InitializeParticipantPresentation(&sBattleSides[0], model);
+    BattleScene_InitializeParticipantPresentation(&sBattleSides[1], model);
 
-    func_84300D44();
-    GeoNode_CreateCamera(NULL, &D_8438E440, 0, 0, 0x140, 0xF0);
-    GeoNode_CreateCamera(NULL, &D_8438E598, 0x1E, 0x50, 0x4C, 0x4C);
-    GeoNode_CreateCamera(NULL, &D_8438E688, 0xE2, 0x50, 0x4C, 0x4C);
-    GeoNode_CreateFog(0, &D_8438E530, 0x3C0, 0x3E8, 0xFF, 0xFF, 0xFF, 0xFF);
-    GeoNode_CreateContainer(NULL, &D_8438E550);
-    GeoNode_CreateContainer(NULL, &D_8438E568);
-    GeoNode_CreateContainer(NULL, &D_8438E580);
-    GeoCamera_SetPerspective(&D_8438E440, 30.0f, 192.0f, 24576.0f);
+    Battle_ResetFaintBatches();
+    GeoNode_CreateCamera(NULL, &sStageCamera, 0, 0, 0x140, 0xF0);
+    GeoNode_CreateCamera(NULL, &sSide1ThumbnailCamera, 0x1E, 0x50, 0x4C, 0x4C);
+    GeoNode_CreateCamera(NULL, &sSide2ThumbnailCamera, 0xE2, 0x50, 0x4C, 0x4C);
+    GeoNode_CreateFog(0, &sStageFog, 0x3C0, 0x3E8, 0xFF, 0xFF, 0xFF, 0xFF);
+    GeoNode_CreateContainer(NULL, &sStageLayout0);
+    GeoNode_CreateContainer(NULL, &sStageLayout1);
+    GeoNode_CreateContainer(NULL, &sStageLayout3);
+    GeoCamera_SetPerspective(&sStageCamera, 30.0f, 192.0f, 24576.0f);
     ModelRenderer_InitDisplayRoots();
     BattleScene_DispatchLifecycle(0, sBattleSides);
-    BattleScene_DispatchOwnerCameraLifecycle(0, &D_8438E598, &D_8438E688);
-    BattleScene_Dispatch(0, &D_8438E440);
-    BattleAnim_DispatchPresentation(0, &D_8438E440);
+    BattleScene_DispatchOwnerCameraLifecycle(0, &sSide1ThumbnailCamera, &sSide2ThumbnailCamera);
+    BattleScene_Dispatch(0, &sStageCamera);
+    BattleAnim_DispatchPresentation(0, &sStageCamera);
 
-    sp44 = MainPool_AllocState(main_pool_get_available(), 0);
-    D_8438E784 = process_geo_layout(sp44, D_84384364);
-    D_8438E788 = process_geo_layout(sp44, D_843844C4);
-    D_8438E78C = process_geo_layout(sp44, D_84384514);
+    layout_pool = MainPool_AllocState(main_pool_get_available(), 0);
+    sStageRoot = process_geo_layout(layout_pool, sStageGeoLayout);
+    sSide1ThumbnailRoot = process_geo_layout(layout_pool, sSide1ThumbnailLayout);
+    sSide2ThumbnailRoot = process_geo_layout(layout_pool, sSide2ThumbnailLayout);
 
-    temp_v0_4 = sp3C(0, 0);
-    if (temp_v0_4 != NULL) {
-        GraphNode_AppendChild(&D_8438E550, process_geo_layout(sp44, temp_v0_4));
+    // Selectors 0, 1, and 3 each attach geometry beneath a stage tint/scale callback.
+    stage_layout = arena_entry(0, 0);
+    if (stage_layout != NULL) {
+        GraphNode_AppendChild(&sStageLayout0, process_geo_layout(layout_pool, stage_layout));
     }
 
-    temp_v0_4 = sp3C(1, 0);
-    if (temp_v0_4 != NULL) {
-        GraphNode_AppendChild(&D_8438E568, process_geo_layout(sp44, temp_v0_4));
+    stage_layout = arena_entry(1, 0);
+    if (stage_layout != NULL) {
+        GraphNode_AppendChild(&sStageLayout1, process_geo_layout(layout_pool, stage_layout));
     }
 
-    temp_v0_4 = sp3C(3, 0);
-    if (temp_v0_4 != NULL) {
-        GraphNode_AppendChild(&D_8438E580, process_geo_layout(sp44, temp_v0_4));
+    stage_layout = arena_entry(3, 0);
+    if (stage_layout != NULL) {
+        GraphNode_AppendChild(&sStageLayout3, process_geo_layout(layout_pool, stage_layout));
     }
 
-    MainPool_FinalizeAllocation(sp44);
+    MainPool_FinalizeAllocation(layout_pool);
 
-    temp_v0_7 = sp3C(4, 0);
-    if (temp_v0_7 == NULL) {
-        D_8438E530.node.callbackArg = 0;
-        D_8438E530.node.flags &= ~1;
+    // callbackArg records whether this arena supplied fog, for Battle_SetStageTintColor.
+    fog_parameters = arena_entry(4, 0);
+    if (fog_parameters == NULL) {
+        sStageFog.node.callbackArg = 0;
+        sStageFog.node.flags &= ~1;
     } else {
-        D_8438E530.unk_18.unk_00 = temp_v0_7->unk_00;
-        D_8438E530.unk_18.unk_02 = temp_v0_7->unk_02;
-        D_8438E530.unk_18.unk_04.rgba = temp_v0_7->unk_04.rgba;
-        D_8438E530.node.callbackArg = 1;
+        sStageFog.unk_18.unk_00 = fog_parameters->unk_00;
+        sStageFog.unk_18.unk_02 = fog_parameters->unk_02;
+        sStageFog.unk_18.unk_04.rgba = fog_parameters->unk_04.rgba;
+        sStageFog.node.callbackArg = 1;
     }
 
     BattleScene_DispatchLifecycle(3, sBattleSides);
-    BattleScene_DispatchOwnerCameraLifecycle(3, &D_8438E598, &D_8438E688);
-    BattleScene_Dispatch(3, &D_8438E440);
-    BattleAnim_DispatchPresentation(3, &D_8438E440);
+    BattleScene_DispatchOwnerCameraLifecycle(3, &sSide1ThumbnailCamera, &sSide2ThumbnailCamera);
+    BattleScene_Dispatch(3, &sStageCamera);
+    BattleAnim_DispatchPresentation(3, &sStageCamera);
 
-    D_8438E7A0 = 1;
+    sNextFaintBatch = 1;
     sIsPaused = 0;
 }
 
+// Empty retail hook; no purpose is established by callers in this fragment.
 void func_84301A24(void) {
 }
 
 // triggers at the start of battle, battle init
+// The fragment entry uses global session state; both entry arguments are unused.
+// Pool state BATL owns the scene allocations until the fade-driven loop completes.
 s32 Battle_Main(s32 arg0, SessionContext* arg1) {
-    unk_func_80007444* sp24;
+    unk_func_80007444* stage_context;
 
     sBattleSides = gSessionContext.battleSides;
-    D_8438E7AC = -2;
+    sCompletionGate = -2;
 
     main_pool_push_state('BATL');
 
     Gfx_InitDisplayListBuffers(0x20000, 0);
-    sp24 = StageContext_Allocate(0, 1, 3, 1, 2, 1);
-    BattleScene_Init(sp24);
-    StageContext_Activate(sp24);
+    stage_context = StageContext_Allocate(0, 1, 3, 1, 2, 1);
+    BattleScene_Init(stage_context);
+    StageContext_Activate(stage_context);
     StageLoader_RunFrames(1);
     BgStage_WaitForCondition(Battle_FrameCallback, 0x20, 0x10);
     StageLoader_RunFrames(2);
