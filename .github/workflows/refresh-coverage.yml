@@ -79,9 +79,10 @@ jobs:
           set -euo pipefail
 
           python3 ci/update_coverage.py --repo-root .
+          python3 ci/update_undocumented.py --repo-root .
 
-          if git diff --quiet -- COVERAGE.md; then
-            echo 'refresh-coverage: COVERAGE.md is already current on master.'
+          if git diff --quiet -- COVERAGE.md UNDOCUMENTED.md && [ -z "$(git ls-files --others --exclude-standard -- UNDOCUMENTED.md)" ]; then
+            echo 'refresh-coverage: COVERAGE.md and UNDOCUMENTED.md are already current on master.'
             exit 0
           fi
 
@@ -92,13 +93,14 @@ jobs:
           # new commit: pushing one would cancel its queued gate run and send
           # it to the back of the queue.
           if git fetch --quiet --depth=1 origin ci/refresh-coverage 2>/dev/null \
-              && git show FETCH_HEAD:COVERAGE.md | cmp -s - COVERAGE.md; then
-            echo 'refresh-coverage: ci/refresh-coverage already has this COVERAGE.md; nothing to push.'
+              && git show FETCH_HEAD:COVERAGE.md | cmp -s - COVERAGE.md \
+              && git show FETCH_HEAD:UNDOCUMENTED.md 2>/dev/null | cmp -s - UNDOCUMENTED.md; then
+            echo 'refresh-coverage: ci/refresh-coverage already has these files; nothing to push.'
             exit 0
           fi
 
           git checkout -B ci/refresh-coverage
-          git add COVERAGE.md
+          git add COVERAGE.md UNDOCUMENTED.md
           git commit --quiet -m 'ci: refresh COVERAGE.md'
           git push --force origin ci/refresh-coverage
 
@@ -106,7 +108,7 @@ jobs:
           if [ -z "$existing" ]; then
             gh pr create --repo "$GITHUB_REPOSITORY" --base master --head ci/refresh-coverage \
               --title 'ci: refresh COVERAGE.md' \
-              --body 'Automated, whole-tree coverage regeneration from ci/update_coverage.py. Touches only COVERAGE.md.'
+              --body 'Automated, whole-tree regeneration from ci/update_coverage.py and ci/update_undocumented.py. Touches only COVERAGE.md and UNDOCUMENTED.md.'
             echo 'refresh-coverage: opened a new PR; pr-rom-gate.yml and the integrate job take it from here.'
           else
             echo "refresh-coverage: updated the existing PR #$existing; its gate will re-run automatically."
