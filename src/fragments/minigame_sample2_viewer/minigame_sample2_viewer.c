@@ -52,7 +52,7 @@ void Minigame2SampleViewer_DrawBackgroundTiles(u8* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Minigame2SampleViewer_DrawFrame(void) {

@@ -97,7 +97,7 @@ void Widget_DrawProgressBar(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_lo = ((arg4 - arg3) * spF0) / arg4;
     s32 sp1C = (arg2 - temp_lo) - 2;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPPipeSync(gDisplayListHead++);
     gDPSetPrimColor(gDisplayListHead++, 0, 0, 0, 0, 0, 0);
@@ -138,7 +138,7 @@ void Widget_DrawProgressBar(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
                             (((arg0 + 2) + sp1C) + temp_lo) << 2, (arg1 + 0xC) << 2, G_TX_RENDERTILE, 0, 0, 0, 0x0400);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Widget_DrawMeterBar(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -154,7 +154,7 @@ void Widget_DrawMeterBar(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         spCC = D_878065B0;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPLoadTextureBlock(gDisplayListHead++, D_878064F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 5, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -183,7 +183,7 @@ void Widget_DrawMeterBar(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
                             ((arg0 + sp14) + temp_lo + 0x10) << 2, (arg1 + 5) << 2, G_TX_RENDERTILE, 0, 0, 0, 0x0400);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 s16 D_87806338 = -1;

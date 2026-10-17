@@ -871,8 +871,8 @@ extern u8 D_3007D48[];
 
 extern LEODiskID D_800818E0;
 
-extern Gfx D_8006F518[];
-extern Gfx D_8006F630[];
+extern Gfx gUiEnvTintTextureDL[];
+extern Gfx gUiRestoreTextureDL[];
 extern u8 D_82000000;
 extern u8 D_81400000;
 extern u8 D_86B00000;
@@ -930,7 +930,7 @@ typedef struct FontContext {
     /* 0x53 */ u8 line_break_flag;
 } FontContext; // size = 0x54
 
-extern Gfx D_8006F498[];
+extern Gfx gUiTranslucentFillDL[];
 
 extern s32 D_80078E60;
 extern s32 D_80078E64;
@@ -958,7 +958,7 @@ typedef struct unk_D_800A6CF4 {
 extern unk_D_800A6CF4 D_800A6CF4;
 extern u8 gAudioData[];
 
-extern Mtx D_8006F010;
+extern Mtx gIdentityMtx;
 extern u32 D_1003E78[];
 extern u32 D_304F120[];
 

@@ -498,7 +498,7 @@ s32 func_800303C8(s32 arg0, UNUSED GraphNode* arg1) {
         gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         gDPSetRenderMode(gDisplayListHead++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
         gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-        gSPMatrix(gDisplayListHead++, &D_8006F010, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gDisplayListHead++, &gIdentityMtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPVertex(gDisplayListHead++, D_800761B0, 12, 0);
         for (i = 0; i < 10; i += 2) {
             gDPLoadMultiTile(gDisplayListHead++, D_80075F90->img_p, 0, 0, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_80075F94, D_80075F98, 0, i * 5, D_80075F94 - 1, (i + 2) * 5 - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
