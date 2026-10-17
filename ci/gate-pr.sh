@@ -174,7 +174,20 @@ fi
 if [ -d /src/text ]; then
     if sync_tree /src/text /work/text; then :; fi
 fi
-if sync_tree /src/include /work/include; then headers_changed=1; fi
+# A plain .h edit only has to rebuild the files that include it. The baked US
+# baseline carries no .d files (it is built on macOS, where the host syntax
+# check cannot run), so make cannot see those dependencies itself; find them
+# by scanning #include lines and touch just those sources. Anything the scan
+# cannot follow (macro.inc, *.inc.c) still forces the full rebuild.
+headers_touched=0
+changed_headers="$(python3 /src/ci/header_dependents.py changes /src/include /work/include)"
+if sync_tree /src/include /work/include; then
+    if python3 /src/ci/header_dependents.py needs-full ${changed_headers}; then
+        headers_changed=1
+    else
+        headers_touched=1
+    fi
+fi
 
 # The Makefile C_FILES list is `git ls-files -- src`, resolved against the
 # git repository baked into the image at build time (see ci/Dockerfile).
@@ -325,6 +338,10 @@ echo "gate-pr.sh: building with ${build_jobs} parallel job(s); per-object host s
 # A shared input changed for sure when any of these is set; a restored region
 # baseline must then be rebuilt with -B. Version-specific split and symbol
 # changes are covered by the per-version digest instead.
+if [ "${headers_touched}" -eq 1 ]; then
+    python3 /src/ci/header_dependents.py touch /work ${changed_headers}
+fi
+
 region_rebuild_all=0
 if [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${library_changed}" -eq 1 ]; then
     region_rebuild_all=1
