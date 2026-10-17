@@ -236,7 +236,7 @@ void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* display) 
         y_offset = (((display->top_row_index * 4) + display->animation_ticks) * 0x10C) / 84;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (D_83003B70 < 4) {
         Gfx_DrawTextureRgba16(x - 4, (y + y_offset) - 4, 24, 24, D_200A300, 0x18, 0);
@@ -244,7 +244,7 @@ void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* display) 
         Gfx_DrawTextureRgba16(x - 4, (y + y_offset) - 4, 24, 24, D_200A780, 0x18, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     D_83003B70 = (D_83003B70 + 1) % 8;
@@ -281,7 +281,7 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
         RentalRules_DrawFilledPanel(x + i * 0x54, y, 0x54, 0x3C, current_panel_color->r, current_panel_color->g, current_panel_color->b);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 6; i++) {
         species = node->species_listed[i].species;
@@ -290,7 +290,7 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(4, 0);
@@ -371,11 +371,11 @@ void RentalRules_QualifyingSpeciesWindowDraw(void) {
         RentalRules_DrawFilledPanel(x, y + 36, 24, 300, 0x1E, 0x1E, 0x64);
         RentalRules_DrawScrollbar(x + 4, y + 0x2C, display);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         RentalRules_DrawEligibilityPanelLegend(x + 8, y + 8);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);

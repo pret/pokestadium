@@ -957,7 +957,7 @@ void Completion_DrawSpeciesRewardText(s16 arg0, s16 arg1) {
         Gfx_DrawTextureRgba16Ia8(arg0 + 0x55, arg1 + 0x19, 0x18, 0xE, D_300B6E0, D_300B980, 0x18, 0x100000);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Completion_DrawWrappedDialogText(s16 arg0, s16 arg1) {
@@ -1294,12 +1294,12 @@ Gfx* Completion_DrawBlinkingCursorIcon(void) {
             D_86B0EBE0->unk_1A = D_86B0DB98[D_86B0EBE0->unk_1C].unk_04;
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba32(D_86B0EBE0->unk_16 + 0x9E, D_86B0EBE0->unk_14 + 9, 0x10, 0x10,
                       D_86B0DB98[D_86B0EBE0->unk_1C].unk_00, 0x10, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 }
 

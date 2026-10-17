@@ -1587,7 +1587,7 @@ void miniDrawMetapodHeads(void) {
     s32 i;
     s32 tmp;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     for (i = 0, tmp = 0x26; i < 4; tmp += 0x4A, i++) {
@@ -1598,7 +1598,7 @@ void miniDrawMetapodHeads(void) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void MetapodGame_DrawTutorialText(void) {
@@ -1647,13 +1647,13 @@ void MetapodGame_DrawTutorialScreen(void) {
         case 3:
             MetapodGame_DrawTutorialText();
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Widget_DrawSplitBanner(2, 0x19, 0xA6);
             Widget_DrawAnimIcon16(0x74, 0xB0, D_86E04C5C);
             Widget_DrawAnimIcon16C(0x74, 0xC6, D_86E04C84);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             break;
 
         case 5:

@@ -132,7 +132,7 @@ void BattlePrep_DrawCursorArrow(BattlePrepRuleWindow* arg0, s16 arg1, s16 arg2) 
         arg1 = ((arg1 - (D_84B17604 / 2)) + 6);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPLoadTextureBlock(gDisplayListHead++, D_10031D0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 22, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -140,7 +140,7 @@ void BattlePrep_DrawCursorArrow(BattlePrepRuleWindow* arg0, s16 arg1, s16 arg2) 
 
     Gfx_DrawTexturedRectClipped(arg1, arg2 + (arg0->unk_04 * 0xE) + 1, 0x10, 0xB, 0, 0, 0x800, 0x800, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     D_84B17604 = (D_84B17604 + 1) % 12;
 }
@@ -295,7 +295,7 @@ void BattlePrep_DrawCastleRuleSummary(BattlePrepRuleWindow* arg0, BattlePrepRule
 void BattlePrep_DrawRankBadge(s16 arg0, s16 arg1, BattleSessionTeams* arg2) {
     static u8* D_84B17608[] = { D_3025950, D_30260A0, D_30267F0, D_3026F40 };
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (arg2->unk_01 == 1) {
         if (arg2->unk_08[0]->unk_000 & 2) {
@@ -305,7 +305,7 @@ void BattlePrep_DrawRankBadge(s16 arg0, s16 arg1, BattleSessionTeams* arg2) {
             Gfx_DrawTextureRgba16(arg0 + 0x1A, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[0]->unk_001], 0x24, 0);
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         return;
     }
 
@@ -317,7 +317,7 @@ void BattlePrep_DrawRankBadge(s16 arg0, s16 arg1, BattleSessionTeams* arg2) {
         Gfx_DrawTextureRgba16(arg0 + 0x30, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[0]->unk_001], 0x24, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(4, 0);
@@ -420,11 +420,11 @@ void BattlePrep_DrawStreakGiveUpPrompt(BattlePrepRuleWindow* arg0, BattlePrepRul
     if (sp50.unk_03 == 1) {
         temp_v0 = Font_MeasureTextExtent(1, 0, BattlePrep_GetString(sp50.unk_00 - 1));
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(arg1->unk_00 + temp_v0 + 0x20, arg1->unk_02 + 0x15, 0x10, 0x10, D_3027690, 0x10, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 }
 #endif

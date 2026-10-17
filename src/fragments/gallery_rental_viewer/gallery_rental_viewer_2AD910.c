@@ -47,7 +47,7 @@ void Gallery_RentalViewerDrawTitleBar(void) {
 
     Gallery_DrawHeaderBar(0x48, 0x28, 0x208, &sp28, &sp24);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gallery_RentalViewerDrawIcon(0x28, 0x20);
     Font_BeginTranslucentTextRendering();

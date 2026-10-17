@@ -56,7 +56,7 @@ void GalleryUI_DrawGradientQuad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
     gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)sp84 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)temp_s2 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 }
@@ -85,7 +85,7 @@ void Gallery_DrawHelpBalloonFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg
     sp4C = arg2 - (var_s3 * 2);
     sp48 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -109,7 +109,7 @@ void Gallery_DrawHelpBalloonFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
                   0x2000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((sp4C > 0) && (sp48 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, sp4C, var_s2, arg4, arg5, arg6, arg7);
@@ -121,7 +121,7 @@ void Gallery_DrawHelpBalloonFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, sp48, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void func_86904BFC(void) {
@@ -171,7 +171,7 @@ void Gallery_DrawHelpBalloonBubble(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 a
 
     Gallery_DrawHelpBalloonScrollTexture(arg1, arg2, arg3, arg4, arg0, arg3);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void GalleryUI_DrawRotatedSprite(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
@@ -211,7 +211,7 @@ void GalleryUI_DrawRotatedSprite(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg
     Gfx_SetVertexAttributes(&spB4[2], -(arg3 / 2), 0, -1, 0, arg4 << 5, 0xFF, 0xFF, 0xFF, 0xFF);
     Gfx_SetVertexAttributes(&spB4[3], (arg3 / 2), 0, -1, arg3 << 5, arg4 << 5, 0xFF, 0xFF, 0xFF, 0xFF);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER | G_LIGHTING);
 
     if (D_8690B360.unk_06 == 0) {
@@ -234,7 +234,7 @@ void GalleryUI_DrawRotatedSprite(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg
     gSPMatrix(gDisplayListHead++, (u32)spB0 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)spB4 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
@@ -284,7 +284,7 @@ void func_86905734(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u
                             G_TX_NOLOD, G_TX_NOLOD);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -302,12 +302,12 @@ void func_86905734(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u
 
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)spE4 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPVertex(gDisplayListHead++, (u32)spE8 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
@@ -359,7 +359,7 @@ void GalleryUI_DrawRotateArrowIcon(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 a
                             G_TX_NOLOD, G_TX_NOLOD);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -377,12 +377,12 @@ void GalleryUI_DrawRotateArrowIcon(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 a
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
 
     gSPMatrix(gDisplayListHead++, (u32)spCC & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPVertex(gDisplayListHead++, (u32)spD0 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
@@ -434,7 +434,7 @@ void GalleryUI_DrawRotateArrowIconMirrored(u8* arg0, s16 arg1, s16 arg2, s16 arg
                             G_TX_NOLOD, G_TX_NOLOD);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -452,12 +452,12 @@ void GalleryUI_DrawRotateArrowIconMirrored(u8* arg0, s16 arg1, s16 arg2, s16 arg
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
 
     gSPMatrix(gDisplayListHead++, (u32)spCC & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPVertex(gDisplayListHead++, (u32)spD0 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
@@ -479,7 +479,7 @@ void GalleryUI_DrawNicknameRibbonSegment(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     Gfx_SetVertexAttributes(&temp_s2[2], arg1, arg2 + arg4, -1, argC << 5, arg6 << 5, 0xFF, 0xFF, 0xFF, 0xFF);
     Gfx_SetVertexAttributes(&temp_s2[3], arg1 + arg3, arg2 + arg4, -1, argB << 5, arg6 << 5, 0xFF, 0xFF, 0xFF, 0xFF);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
     gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
@@ -491,10 +491,10 @@ void GalleryUI_DrawNicknameRibbonSegment(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
 
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
     gSPMatrix(gDisplayListHead++, (u32)spAC & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, (u32)&D_8006F010 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gDisplayListHead++, (u32)&gIdentityMtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gDisplayListHead++, (u32)temp_s2 & 0x1FFFFFFF, 4, 0);
     gSP2Triangles(gDisplayListHead++, 0, 2, 3, 0, 0, 3, 1, 0);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
@@ -550,7 +550,7 @@ void Gallery_DrawBackgroundSelectMenu(UNUSED s32 arg0) {
     if (D_8690B380 != 0) {
         Gallery_DrawHelpBalloonFrame(0x55, 0x20, 0x96, 0x8C, 0, 0, 0x8C, 0x64);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         if (D_8690B384 != 0) {
             var_v1 = 0xFF;
@@ -572,12 +572,12 @@ void Gallery_DrawBackgroundSelectMenu(UNUSED s32 arg0) {
 
         Gfx_DrawTextureIa8(0x93, 0x9C, 0x18, 0xF, &D_5001680, 0x18, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         gSPDisplayList(gDisplayListHead++, D_8006F5A0);
 
         Gfx_DrawTextureRgba16Ia8(0x59, (D_8690B388 * 0x14) + 0x35, 0x18, 0xE, D_5000000, &D_50002A0, 0x18, 0x100000);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         Font_SetActive(4, 0);

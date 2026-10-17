@@ -306,7 +306,7 @@ u8 Font_MapGlyphCode(u16 arg0) {
     u8 var_v1 = 0;
 
     if ((arg0 >= 0x20) && (arg0 < 0x80)) {
-        var_v1 = ((u8*)D_8006F630)[arg0];
+        var_v1 = ((u8*)gUiRestoreTextureDL)[arg0];
     } else if ((arg0 >= 0xA0) && (arg0 < 0x100)) {
         var_v1 = ((u8*)D_8006F608)[sizeof(Gfx) + arg0];
     }
@@ -597,11 +597,11 @@ void Font_DisableTwoCycleTexturing(void) {
 }
 
 void Gfx_FillRectWithDisplayState(s32 x1, s32 y1, s32 width, s32 length, s32 r, s32 g, s32 b, s32 alpha) {
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     Gfx_FillRectRgba(x1, y1, width, length, r, g, b, alpha);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 s32 Font_MeasureTextExtent(s32 x, s32 y, const char* fmt, ...) {

@@ -2,7 +2,7 @@
 #include "src/game_state.h"
 #include "src/math_util.h"
 
-Mtx D_8006F010 = { {
+Mtx gIdentityMtx = { {
     {
         0x00010000,
         0x00000000,

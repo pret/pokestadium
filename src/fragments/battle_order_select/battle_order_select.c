@@ -111,7 +111,7 @@ void BattleMenu_DrawBottomActionButtons(void) {
     Gfx_DrawTextureRgba16(0x71, 0x1A8, 0x20, 0x18, D_3002220, 0x20, 0x200000);
     Gfx_DrawTextureRgba16(0x162, 0x1A8, 0x20, 0x18, D_3002820, 0x20, 0x200000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -290,7 +290,7 @@ void BattleMenu_DrawTeamOrderSidebarTeam0(void) {
         temp_v0->unk_02[i] = BattleMenu_DrawSidebarRowTypeIcon(0x2D, var_s1 - i * 0x17, temp_v0->unk_02[i], temp_v0->unk_08[i]);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattleMenu_DrawTeamOrderSidebarTeam1(void) {
@@ -325,7 +325,7 @@ void BattleMenu_DrawTeamOrderSidebarTeam1(void) {
         temp_v0->unk_02[i] = BattleMenu_DrawSidebarRowTypeIcon(0x2D, var_s1 + i * 0x17, temp_v0->unk_02[i], temp_v0->unk_08[i]);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattleMenu_AppendOrderSlotIcon(s32 arg0, s32 arg1) {
@@ -372,7 +372,7 @@ void BattleMenu_DrawOrderSelectPanel_PartyGrid(unk_D_848037A0* arg0) {
     Gfx_DrawTextureRgba16(temp_s7 + 0xA1, temp_fp + 0x35, 0x1A, 0x1A, &D_3000B60, 0x1C, 0x200000);
     Gfx_DrawTextureRgba16(temp_s7 + 0x13B, temp_fp + 0x35, 0x1A, 0x1A, &D_30016C0, 0x1C, 0x200000);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(temp_s7 + 0x23, temp_fp + 6, 0x28, 0x28, arg0->unk_0020[0], 0x28, 0);
     Gfx_DrawTextureRgba16(temp_s7 + 0xBD, temp_fp + 6, 0x28, 0x28, arg0->unk0CA0, 0x28, 0);
@@ -381,7 +381,7 @@ void BattleMenu_DrawOrderSelectPanel_PartyGrid(unk_D_848037A0* arg0) {
     Gfx_DrawTextureRgba16(temp_s7 + 0xBD, temp_fp + 0x30, 0x28, 0x28, &arg0->unk0CA0[0x2580], 0x28, 0);
     Gfx_DrawTextureRgba16(temp_s7 + 0x157, temp_fp + 0x30, 0x28, 0x28, &arg0->unk0CA0[0x3200], 0x28, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(4, 0);
@@ -602,11 +602,11 @@ void BattleMenu_DrawOrderSelectPanel_MonDetail(unk_D_848037A0* arg0) {
 
     BattleMenu_DrawBorderedPanel(temp_fp, sp7C, 0x1D7, 0x5E, arg0->unk_0001);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(temp_fp + 8, sp7C + 7, 0x28, 0x28, &arg0->unk_0020[temp_s1], 0x28, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(4, 0);
@@ -657,7 +657,7 @@ void BattleMenu_DrawOrderSelectPanel_MonDetail(unk_D_848037A0* arg0) {
 
     Font_EndTexturedTextRendering();
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 4; i++) {
         if (sp78->unk_09[i] == 0) {
@@ -667,7 +667,7 @@ void BattleMenu_DrawOrderSelectPanel_MonDetail(unk_D_848037A0* arg0) {
                       D_848035FC[gMoveDisplayInfo[sp78->unk_09[i] - 1].unk_01].unk_04, 0x14, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (arg0->unk_0007 > 0) {
         if (arg0->unk_0003 == 0) {

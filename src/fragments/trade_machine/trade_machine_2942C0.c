@@ -638,7 +638,7 @@ void TradeEvo_DrawGlowBackdrop(s16 arg0, s16 arg1, s16 arg2) {
 void TradeEvo_DrawPreviewFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     s16 tmp = (arg1 + (arg3 / 2)) - 8;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(arg0 - 0xD, arg1 - 0xD, 0x10, 0x10, D_3026568, 0x10, 0);
     Gfx_DrawTexturedRectClipped(arg0 - 0xD, arg1 + 3, 0x10, (arg3 / 2) - 3, 0, 0x1E0, 0x400, 0, 0);
@@ -657,7 +657,7 @@ void TradeEvo_DrawPreviewFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
         Gfx_DrawTextureRgba16((arg0 + arg2) - 3, tmp, 0x10, 0x10, D_3026B68, 0x10, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void TradeEvo_DrawPreviewStrips(unk_D_82F21238* arg0) {
@@ -673,7 +673,7 @@ void TradeEvo_DrawPreviewStrips(unk_D_82F21238* arg0) {
         sp5C = 1;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, arg0->unk_16);
 
     if (sp5C != 0) {
@@ -1925,7 +1925,7 @@ void TradeCable_DrawSequence(void) {
         ptr->unk_0E--;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetEnvColor(gDisplayListHead++, ptr->unk_14, ptr->unk_14, ptr->unk_14, 255);
 
@@ -1994,7 +1994,7 @@ void TradeCable_DrawSequence(void) {
         }
         TradeCable_DrawTubeSparkBandBright(ptr->unk_02, ptr->unk_04, ptr->unk_10, 0x81, 0xE5, 0, var_v0_2);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sp83);
 
         if (!(ptr->unk_0C & 0x40)) {
@@ -2011,7 +2011,7 @@ void TradeCable_DrawSequence(void) {
     }
 
     TradeEvo_Draw();
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 s32 TradeCable_CheckSequenceCondition(s16 arg0) {

@@ -3208,14 +3208,14 @@ void EkansGame_DrawTutorialScreen(void) {
         case 3:
             EkansGame_DrawTutorialText();
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Widget_DrawSplitBanner(1, 0x19, 0xA6);
             Widget_DrawAnimIcon24(0x56, 0xAC, D_86C0E33C);
             Widget_DrawAnimIcon28(1, 0xC2, 0xA8, D_86C0E314);
             Widget_DrawAnimIcon16C(0x74, 0xC6, D_86C0E2A4);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             break;
 
         case 4:
@@ -3261,7 +3261,7 @@ void miniEkansDrawHub(void) {
     }
     Font_EndTexturedTextRendering();
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     if (ekansMinigameCountdownStarted) {
@@ -3283,7 +3283,7 @@ void miniEkansDrawHub(void) {
         Font_Printf(tmp + 0x14, 0xCC, "  %d", miniEkanses[i].ekansScore);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EkansGame_DrawTutorial(void) {

@@ -2272,14 +2272,14 @@ void SandshrewGame_DrawTutorialScreen(void) {
         case 3:
             SandshrewGame_DrawTutorialText();
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Widget_DrawSplitBanner(2, 0x19, 0xA6);
             Widget_DrawAnimIcon40x20(0x63, 0xAB, D_86F0B100);
             Widget_DrawAnimIcon40x20B(0x8B, 0xAB, D_86F0B128);
             Widget_DrawAnimIcon16C(0x74, 0xC6, D_86F0B0D8);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             break;
 
         case 5:
@@ -2299,7 +2299,7 @@ void SandshrewGame_DrawTutorialScreen(void) {
 void fixSandshrewMinigameHUD(void) {
     s32 i;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, miniHudTransparency);
 
     for (i = 0; i < 4; i++) {
@@ -2313,7 +2313,7 @@ void fixSandshrewMinigameHUD(void) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void SandshrewGame_DrawTutorial(void) {

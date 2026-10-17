@@ -98,7 +98,7 @@ void Snap_PrintClubDrawBackgroundSelectFrame(void) {
         D_83A00B78 = BinArchive_GetFile(D_83A00B74, D_83A00B58[D_83A00B7C]);
         GfxImage_SetRenderTarget(&gDisplayListHead, D_83A00B80);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
 
         Snap_PrintClubDrawBackgroundMosaic(D_83A00B7C, D_83A00B78);

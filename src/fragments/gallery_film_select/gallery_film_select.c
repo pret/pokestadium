@@ -302,12 +302,12 @@ void Gallery_FilmSelectDrawBandedStrip(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     tmp_s6 = var_s6;
 
     if (arg3 == 0) {
-        gSPDisplayList(gDisplayListHead++, D_8006F498);
+        gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
         Gfx_FillRectRgba(arg0, arg1, arg2, 4, 0, 0, 0, 0x80);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPLoadTextureBlock(gDisplayListHead++, var_s6, G_IM_FMT_IA, G_IM_SIZ_8b, 40, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 128);
@@ -333,7 +333,7 @@ void Gallery_FilmSelectFillRectSolid(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     gSPDisplayList(gDisplayListHead++, D_8006F4C0);
     gDPSetFillColor(gDisplayListHead++, 0x00000001);
     gDPFillRectangle(gDisplayListHead++, arg0, arg1, (arg0 + arg2) - 1, (arg1 + arg3) - 1);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Gallery_FilmSelectDrawPhotoBadge(s32 arg0, s32 arg1, s16 arg2) {
@@ -347,7 +347,7 @@ void Gallery_FilmSelectDrawPhotoBadge(s32 arg0, s32 arg1, s16 arg2) {
     spC0 = 0x30;
     spBC = (s32)ROUND_MAX((SINS(arg2) + 1.0f) * 255.0f * 0.5f) & 0xFF;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < spC0; i += end) {
         temp_v0_2 = CLAMP_MIN(spC0 - i, end);
@@ -385,7 +385,7 @@ void Gallery_FilmSelectDrawCounterBadge(s32 arg0, s32 arg1, s16 arg2) {
     spC0 = 0x20;
     spBC = (s32)ROUND_MAX((SINS(arg2) + 1.0f) * 255.0f * 0.5f) & 0xFF;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < spC0; i += end) {
         temp_v0_2 = CLAMP_MIN(spC0 - i, end);
@@ -451,7 +451,7 @@ void Gallery_FilmSelectDrawSelectionCursor(unk_D_83407B38* arg0) {
     s32 temp_lo = arg0->unk_00 / 3;
     s32 var_a0;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (temp_lo < 2) {
         Gallery_DrawSelectionCorners((temp_hi * 0xA4) + 0x58, (temp_lo * 0x6E) + 0x6E, 0x88, 0x66);
@@ -493,7 +493,7 @@ void Gallery_FilmSelectDrawBanner(s32 arg0, s32 arg1) {
     sp7C = SINS(D_8360328C) * 4.0f;
     Gallery_DrawHeaderBar(arg0, arg1, 0x1B6, &sp74, &sp70);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPLoadTextureTile(gDisplayListHead++, D_4003A38, G_IM_FMT_IA, G_IM_SIZ_8b, 100, 36, 0, 0, 99, 35, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -563,7 +563,7 @@ void Gallery_FilmSelectDrawActionPanel(int arg0, int arg1, s32 arg2, f32 arg3) {
         return;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < spF8; i += iter) {
         s32 temp_v0_2 = CLAMP_MIN(spF8 - i, iter);
@@ -607,7 +607,7 @@ void Gallery_FilmSelectDrawBackgroundGradient(void) {
     s32 end = 0x1E0;
     s32 idx;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetCombineMode(gDisplayListHead++, G_CC_BLENDPEDECALA, G_CC_BLENDPEDECALA);
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_4007448, G_IM_FMT_I, 128, 64, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -704,7 +704,7 @@ void Gallery_FilmSelectDrawIconLabel(s32 arg0, s32 arg1) {
     sp2C = Gallery_GetUiString(0x3C);
     sp28 = -Font_MeasureTextExtent(8, 0, sp2C) / 2;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16((arg0 + sp28) - 0x20, arg1 - 2, 0x18, 0x18, D_30099B8, 0x18, 0);
     Font_BeginTranslucentTextRendering();
