@@ -2,6 +2,8 @@
 
 Don't act a fool.
 
+Never delete `oldnotes`. It stands as a testament to manual decomping that this project stands on.
+
 # Team Hippodrome Decomp Style Guide
 
 ## Formatting
