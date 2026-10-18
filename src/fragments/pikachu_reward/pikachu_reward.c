@@ -767,7 +767,7 @@ s32 Stadium_BonusPikachuReward(UNUSED s32 arg0, UNUSED s32 arg1) {
         sp20 = StageContext_Allocate(0, 1, 3, 1, 2, 1);
         Font_Init(6, 0);
 
-        FRAGMENT_LOAD(fragment31);
+        FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
         Fragment_Load(FRAGMENT_ID(_798CD0), _798CD0_ROM_START, _798CD0_ROM_END);
         ASSET_LOAD(D_1000000, common_menu1_ui, 0);
 

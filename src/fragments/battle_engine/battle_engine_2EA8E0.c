@@ -526,7 +526,7 @@ void func_84301430(unk_func_80007444* arg0) {
     D_8438E778 = D_8438E790->img_p;
     D_8438E77C = D_8438E794->img_p;
 
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_3000000, battle_ui, 0);
 

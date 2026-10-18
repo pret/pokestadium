@@ -1560,7 +1560,7 @@ void LabPC_BuildBoxScreenWidget(unk_func_88205880* arg0, s32 arg1, s32 arg2, Fon
     ((func885031E8)Memmap_GetFragmentVaddr(WidgetTree_InitVisibilityGate))(sp74, 0, 0, 0x280, 0x1E0);
     ((func8850068C)Memmap_GetFragmentVaddr(WidgetTree_AppendChild))(arg0, sp74);
 
-    sp70 = FRAGMENT_LOAD(fragment27);
+    sp70 = FRAGMENT_LOAD(FRAGMENT_LAB_PC_ICONS);
 
     arg0->unk_0098.unk_04 = arg4;
     // clang-format off
@@ -1635,7 +1635,7 @@ void LabPC_ShowBoxes(FontContext* arg0) {
 
     main_pool_push_state('BXPC');
 
-    FRAGMENT_LOAD(fragment25);
+    FRAGMENT_LOAD(FRAGMENT_POKEMON_LAB_SUPPORT);
 
     PokeIcon_OpenModelArchive();
     sp64 = main_pool_alloc(0x1000, 0);

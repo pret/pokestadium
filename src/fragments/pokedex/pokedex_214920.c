@@ -6307,13 +6307,13 @@ s32 Pokedex_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     D_8882692C = PokeIcon_AllocFramebuffers(1);
     PokeIcon_OpenModelArchives();
 
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_04000000, fragment29_misc_1, 0);
 
-    FRAGMENT_LOAD(fragment26);
-    FRAGMENT_LOAD(fragment25);
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TREE);
+    FRAGMENT_LOAD(FRAGMENT_POKEMON_LAB_SUPPORT);
 
     sp28 = ASSET_LOAD(0, fragment29_misc_3, 0);
 
@@ -6345,7 +6345,7 @@ s32 Pokedex_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
 
     main_pool_pop_state('BOOK');
 
-    FRAGMENT_LOAD_AND_CALL2(fragment22, 4, 0);
+    FRAGMENT_LOAD_AND_CALL2(FRAGMENT_PROFESSOR_OAK_LAB, 4, 0);
 
     return 0x25;
 }

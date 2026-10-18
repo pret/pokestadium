@@ -2527,7 +2527,7 @@ void LabPC_ShowPokemon(FontContext* arg0, s32 arg1) {
 
     main_pool_push_state('OTPC');
 
-    FRAGMENT_LOAD(fragment25);
+    FRAGMENT_LOAD(FRAGMENT_POKEMON_LAB_SUPPORT);
 
     PokeIcon_OpenModelArchive();
 

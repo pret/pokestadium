@@ -1205,7 +1205,7 @@ void Gallery_AlbumMain(s32 arg0, s32 arg1) {
     ASSET_LOAD(D_3000000, gallery_ui, 0);
     ASSET_LOAD(D_04000000, album_ui, 0);
 
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     PokeIcon_OpenModelArchives();
     D_83504084 = ASSET_LOAD2(stadium_models, 1, 1);

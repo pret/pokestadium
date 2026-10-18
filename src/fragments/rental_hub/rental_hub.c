@@ -281,12 +281,12 @@ s32 RentalHub_MenuMain(void) {
 }
 
 s32 RentalHub_LoadRentalPicker(void) {
-    FRAGMENT_LOAD_AND_CALL(fragment61, 1, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_TEAM_SELECTION, 1, 0);
     return 4;
 }
 
 s32 RentalHub_LoadRentalRules(void) {
-    FRAGMENT_LOAD_AND_CALL(fragment55, 0, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_RENTAL_RULES, 0, 0);
     return 4;
 }
 
