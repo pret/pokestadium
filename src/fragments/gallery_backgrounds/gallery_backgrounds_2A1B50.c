@@ -477,8 +477,8 @@ void Gallery_DrawStatusIcon(s32 arg0, s32 arg1, s32 arg2) {
 void Gallery_InitSceneGrid(unk_D_83407B38* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, ModelLoadContext* arg5,
                    BinArchive* arg6, unk_D_83403C60* arg7, s32 arg8, s32 arg9) {
     UNUSED s32 pad;
-    unk_D_80068BB0* sp168;
-    unk_D_80068BB0* sp68[64];
+    DepthBuffer* sp168;
+    DepthBuffer* sp68[64];
     UNUSED s32 pad2;
     s32 i;
 

@@ -34,7 +34,7 @@ void Diorama_DrawEndBackgroundTiles(u8* arg0) {
 }
 
 void Diorama_DrawFullscreenTexture(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5, u8 arg6) {
-    unk_D_80068BB0* temp_s1 = GfxImage_GetCurrent();
+    DepthBuffer* temp_s1 = GfxImage_GetCurrent();
     Vtx* temp_s2 = Gfx_AllocDisplayList(sizeof(Vtx) * 4);
     Mtx* spCC = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     Vp* spC8 = Gfx_AllocDisplayList(sizeof(Vp));

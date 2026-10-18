@@ -177,7 +177,7 @@ s32 Intro_LightAngleCallbackA(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = sp26 + 0x2000;
         ptr->unk_1E = sp24 - 0x2000;
     }
@@ -192,7 +192,7 @@ s32 Intro_LightAngleCallbackB(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = -0x2000 - sp26;
         ptr->unk_1E = sp24 + 0x6000;
     }
@@ -244,11 +244,11 @@ void Intro_LoadPokemonTextures(void) {
 }
 
 void Intro_LoadShowcaseModel(void) {
-    D_86B0FA78->unk_174 = D_86B10690->unk_01C[D_86B0FA78->unk_17C].unk_00.unk_00;
+    D_86B0FA78->unk_174 = D_86B10690->pokemonPicked[D_86B0FA78->unk_17C].unk_00.unk_00;
     ModelRenderer_AttachDisplayObject(&D_86B0FA78->unk_004);
     PokeIcon_OpenModelArchives();
 
-    D_86B0FA78->unk_000 = Model_LoadForPokemon(&D_86B10690->unk_01C[D_86B0FA78->unk_17C]);
+    D_86B0FA78->unk_000 = Model_LoadForPokemon(&D_86B10690->pokemonPicked[D_86B0FA78->unk_17C]);
     Model_InitDisplayObject(&D_86B0FA78->unk_004, 0, D_86B0FA78->unk_174, D_86B0FA78->unk_000->unk_08->unk_00[0]);
     ModelAnim_SetAnimation(&D_86B0FA78->unk_004, 0);
     D_86B0FA78->unk_004.effectSlot = 0;
@@ -270,9 +270,9 @@ void Intro_ReplaceShowcaseModel(void) {
 }
 
 void Intro_SetupOrbitCamera(void) {
-    D_86B0FA7C->unk_00->unk_24.fovy = 30.0f;
-    D_86B0FA7C->unk_00->unk_24.near = 30.0f;
-    D_86B0FA7C->unk_00->unk_24.far = 6400.0f;
+    D_86B0FA7C->unk_00->perspective.verticalFieldOfView = 30.0f;
+    D_86B0FA7C->unk_00->perspective.nearPlane = 30.0f;
+    D_86B0FA7C->unk_00->perspective.farPlane = 6400.0f;
     Intro_ComputeFollowPoint(D_86B0FA78, &D_86B0FA7C->unk_04);
     Intro_LoadCameraKeyframe(&D_86B0E040[D_86B0FA78->unk_17C], D_86B0FA7C->unk_00);
     Intro_UpdateOrbitCamera();
@@ -297,17 +297,17 @@ void Intro_LoadStageModel(void) {
 void Intro_SetupStaticCamera(void) {
     D_86B0FA46 = 0;
     D_86B0FA48 = 0.0f;
-    D_86B0FA7C->unk_00->unk_24.fovy = 40.0f;
-    D_86B0FA7C->unk_00->unk_24.near = 30.0f;
-    D_86B0FA7C->unk_00->unk_24.far = 6400.0f;
+    D_86B0FA7C->unk_00->perspective.verticalFieldOfView = 40.0f;
+    D_86B0FA7C->unk_00->perspective.nearPlane = 30.0f;
+    D_86B0FA7C->unk_00->perspective.farPlane = 6400.0f;
 
-    Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->unk_60.at, D_86B0FA78->unk_004.position.x,
+    Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->view.targetPosition, D_86B0FA78->unk_004.position.x,
                   D_86B0DD58[D_86B0FA44].unk_04 + D_86B0FA78->unk_004.position.y, D_86B0FA78->unk_004.position.z);
 
     if ((D_86B0FA44 == 4) || (D_86B0FA44 == 5)) {
-        Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->unk_60.eye, 0, 100.0f, 328.0f);
+        Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->view.eyePosition, 0, 100.0f, 328.0f);
     } else {
-        Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->unk_60.eye, 0, 100.0f, 250.0f);
+        Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->view.eyePosition, 0, 100.0f, 250.0f);
     }
 }
 
@@ -362,7 +362,7 @@ s32 Intro_UpdateModelLanding(void) {
         D_86B0FA78->unk_004.position.y = 0.0f;
     }
 
-    Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->unk_60.at, D_86B0FA78->unk_004.position.x,
+    Vec3f_SetComponentsDuplicate(&D_86B0FA7C->unk_00->view.targetPosition, D_86B0FA78->unk_004.position.x,
                   D_86B0DD58[D_86B0FA44].unk_04 + D_86B0FA78->unk_004.position.y, D_86B0FA78->unk_004.position.z);
 
     if (D_86B0FA78->unk_004.position.y <= 0.5f) {
@@ -528,10 +528,10 @@ void Intro_TriggerTextPanelExit(void) {
 
 void Intro_SelectPartyRoster(void) {
     if (gSessionContext.battleSides[0].unk_1C == 1) {
-        D_86B10690 = gSessionContext.battleSides[0].unk_08[0];
+        D_86B10690 = gSessionContext.battleSides[0].teamMember[0];
         D_86B10694 = &gSessionContext.battleSides[0];
     } else {
-        D_86B10690 = gSessionContext.battleSides[1].unk_08[0];
+        D_86B10690 = gSessionContext.battleSides[1].teamMember[0];
         D_86B10694 = &gSessionContext.battleSides[1];
     }
 }
@@ -627,7 +627,7 @@ s32 Intro_UpdateShowcaseSequence(void) {
             }
             if (D_86B0FA78->unk_178++ >= 0x41) {
                 D_86B0FA64 = 0;
-                Vec3f_CalculateDistanceAngles(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, &D_86B0FA6C, &D_86B0FA66, &D_86B0FA68);
+                Vec3f_CalculateDistanceAngles(&D_87906054->view.targetPosition, &D_87906054->view.eyePosition, &D_86B0FA6C, &D_86B0FA66, &D_86B0FA68);
                 D_86B0FA78->unk_16C++;
             }
             break;
@@ -649,7 +649,7 @@ s32 Intro_UpdateShowcaseSequence(void) {
 
             D_86B0FA64 = Math_StepToS32(D_86B0FA64, 0x3C, 1, 1);
             D_86B0FA68 += D_86B0FA64;
-            Camera_ComputeEyeFromAngles(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, D_86B0FA6C, D_86B0FA66, D_86B0FA68);
+            Camera_ComputeEyeFromAngles(&D_87906054->view.targetPosition, &D_87906054->view.eyePosition, D_86B0FA6C, D_86B0FA66, D_86B0FA68);
             break;
     }
 
@@ -797,7 +797,7 @@ void Intro_DrawTextPanels(void) {
                 D_86B0FA50->unk_9C = 0xB4;
                 D_86B0FA50->unk_A4 = 0.0f;
                 D_86B0FA50->unk_AC = 0.0f;
-                sprintf(D_86B0FA50->unk00, "%s", D_86B10690->unk_01C[D_86B0FA78->unk_17C].unk_30);
+                sprintf(D_86B0FA50->unk00, "%s", D_86B10690->pokemonPicked[D_86B0FA78->unk_17C].unk_30);
                 D_86B0FA50->unk_90++;
                 break;
 

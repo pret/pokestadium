@@ -4,6 +4,23 @@ Don't act a fool.
 
 Never delete `oldnotes`. It stands as a testament to manual decomping that this project stands on.
 
+# Editor setup and cross-file renaming
+
+For VS Code, install the recommended **clangd** extension and run:
+
+```sh
+python3 tools/clangd_config.py
+```
+
+Then restart the clangd language server and let background indexing finish before
+using F2 on shared symbols. The workspace task can keep the database current
+automatically, including source-file additions and moves; ordinary identifier
+renames do not require regenerating it. No ROM, IDO compiler, or custom VS Code
+extension is needed for this editor setup.
+
+See [docs/clangd.md](docs/clangd.md) for automatic-task permissions, regional
+analysis views, verification, and the limits of C-aware rename.
+
 # Team Hippodrome Decomp Style Guide
 
 ## Formatting
@@ -62,6 +79,11 @@ Do not include non-alphanumeric or non-ASCII symbols in variable names even if l
 
 Consequently: Do not include é in Pokémon for variable names as IDO does not accept non-ASCII characters in indentifiers. The é is optional for documentation and comments.
 
+#### Mechanics
+The format stadium uses is commonly called "bring 6, pick 3." To disambiguate between Pokemon in the party and Pokemon chosen to for a particular battle, we say "brought Pokemon" and "picked Pokemon".
+
+As AI is now a term to refer to a technology, use the term "COM" to refer to the non-player trainers since that is the label in Free Battle. Battle AI procedures may still be called `BattleAi` as a function domain.
+
 #### Game
 
 Use English names for Pokemon and Characters.
@@ -89,6 +111,9 @@ Nidoqueen's animation did change between JP and US 1.0 so potentially we do in f
 That said: out of code use of these sensitives terms is none of our business.
 
 ## Comments 
+### Documentation
+All functions must have a `/**/` comment above them describing their function.
+
 ### Fakes: Decomp Slop and Karodo 
 "Fakes" refer to a variety of coding anti-patterns that enable a function match through register coloring, but serve no other purpose. There are two types of fakes:
 - **Decomp Slop:** are fakes that no programmer would ever write, such as 

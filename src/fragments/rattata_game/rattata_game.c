@@ -134,7 +134,7 @@ const char D_86203DC8[] = "%s";
 static unk_D_86002F30* D_86203E30;
 static unk_D_86002F30* D_86203E34;
 static unk_D_86002F34* D_86203E38;
-static unk_D_86002F34_00C* D_86203E3C;
+static CameraNode* D_86203E3C;
 static s16 D_86203E40;
 static s16 D_86203E42;
 static s16 D_86203E44;
@@ -174,7 +174,7 @@ void RattataGame_DrawRankBanners(void) {
     s32 i;
     UNUSED s32 pad2[1];
 
-    MtxF_ExtractScale(&spDC, &D_86203E3C->unk_60.mtxf);
+    MtxF_ExtractScale(&spDC, &D_86203E3C->view.floatMatrix);
     guMtxF2L(spDC.mf, &sp98);
 
     for (i = 0; i < 4; i++) {
@@ -276,15 +276,15 @@ void RattataGame_InitCamera(void) {
     D_86203E42 = -0x6700;
     D_86203E44 = 0x14A;
 
-    D_86203E3C->unk_24.near = 50.0f;
-    D_86203E3C->unk_24.far = 6400.0f;
-    D_86203E3C->unk_24.fovy = 30.0f;
+    D_86203E3C->perspective.nearPlane = 50.0f;
+    D_86203E3C->perspective.farPlane = 6400.0f;
+    D_86203E3C->perspective.verticalFieldOfView = 30.0f;
 
-    D_86203E3C->unk_60.at.x = 0.0f;
-    D_86203E3C->unk_60.at.y = 0.0f;
-    D_86203E3C->unk_60.at.z = 5.0f;
+    D_86203E3C->view.targetPosition.x = 0.0f;
+    D_86203E3C->view.targetPosition.y = 0.0f;
+    D_86203E3C->view.targetPosition.z = 5.0f;
 
-    Camera_ComputeEyeFromAngles(&D_86203E3C->unk_60.at, &D_86203E3C->unk_60.eye, D_86203E44, D_86203E40, D_86203E42);
+    Camera_ComputeEyeFromAngles(&D_86203E3C->view.targetPosition, &D_86203E3C->view.eyePosition, D_86203E44, D_86203E40, D_86203E42);
 }
 
 void RattataGame_UpdateCamera(void) {
@@ -369,7 +369,7 @@ void RattataGame_UpdateCamera(void) {
         D_86203E44 = 0x32;
     }
 
-    Camera_ComputeEyeFromAngles(&D_86203E3C->unk_60.at, &D_86203E3C->unk_60.eye, D_86203E44, D_86203E40, D_86203E42);
+    Camera_ComputeEyeFromAngles(&D_86203E3C->view.targetPosition, &D_86203E3C->view.eyePosition, D_86203E44, D_86203E40, D_86203E42);
 }
 
 void func_86200938(void) {

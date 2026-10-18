@@ -80,7 +80,7 @@ void ModelRenderer_ApplySlotScale(u8 index) {
     MtxF sp1C;
 
     temp_a1 = &D_800AF7C8[index];
-    MtxF_ExtractScale(&sp1C, &D_8006F088->unk_60.mtxf);
+    MtxF_ExtractScale(&sp1C, &D_8006F088->view.floatMatrix);
     guMtxCatF(sp1C.mf, temp_a1->mf, temp_a1->mf);
 }
 
@@ -190,7 +190,7 @@ Gfx* ModelRenderer_DrawStaticSegment(Gfx* gfx) {
     } else {
         segment = (ModelSegment *)&D_800777A8;
     }
-    MtxF_ExtractScale(&modelMtx, &D_8006F088->unk_60.mtxf);
+    MtxF_ExtractScale(&modelMtx, &D_8006F088->view.floatMatrix);
     guMtxF2L(&modelMtx.mf[0], &tempMtx);
     MtxF_Copy(&tempCatMtx, GeoRender_GetRelativeMatrix(0));
     MtxF_GetScaleVector(&tempCatMtx, &scale);

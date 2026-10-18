@@ -6270,9 +6270,9 @@ void Pokedex_InitFramebuffers(void) {
     u32 sp34;
     u32 sp30;
     u32 sp2C;
-    unk_D_80068BB0* sp28;
+    DepthBuffer* sp28;
 
-    sp28 = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
+    sp28 = main_pool_alloc(sizeof(DepthBuffer), 0);
 
     sp34 = D_88826924->renderTargets[0]->img_p;
     D_88826930 = D_88826924->renderTargets[0]->img_p + 0x25800;
@@ -6280,8 +6280,8 @@ void Pokedex_InitFramebuffers(void) {
     D_88826934 = D_88826924->renderTargets[1]->img_p + 0x25800;
     sp2C = D_88826924->renderTargets[1]->img_p + 0x70800;
 
-    D_88826928->renderTargets[0] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
-    D_88826928->renderTargets[1] = main_pool_alloc(sizeof(unk_D_80068BB0), 0);
+    D_88826928->renderTargets[0] = main_pool_alloc(sizeof(DepthBuffer), 0);
+    D_88826928->renderTargets[1] = main_pool_alloc(sizeof(DepthBuffer), 0);
 
     GfxImage_Initialize(D_88826928->renderTargets[0], 0, 2, 0x140, 0xF0, sp34);
     GfxImage_Initialize(D_88826928->renderTargets[1], 0, 2, 0x140, 0xF0, sp30);

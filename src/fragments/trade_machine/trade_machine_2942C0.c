@@ -14,7 +14,7 @@
 #include "src/stage_loader.h"
 
 static unk_D_82F21140 D_82F21140;
-static unk_D_80068BB0* D_82F2115C;
+static DepthBuffer* D_82F2115C;
 static unk_D_82F21160 D_82F21160[2];
 static unk_D_82F211A0 D_82F211A0[2];
 static unk_D_82F21238 D_82F21238;

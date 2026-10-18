@@ -45,9 +45,13 @@ static Gfx D_86807010[] = {
     gsSPEndDisplayList(),
 };
 
+void SushiGame_NameTagGeoCallback(s32 arg0, UNUSED s32 arg1);
+
 static u32 D_86807078[] = {
-    0x17000000, 0x00000000, 0x00000000, 0x00000000, 0x86806FD0, 0x05000000, 0x22040000,
-    0x00000000, 0x08000000, 0x86802084, 0x00000000, 0x06000000, 0x01000000,
+    // The two addresses are the US ones written out; naming the symbols instead lets the
+    // linker place them per region (the Japanese build has both 0x1A0 lower).
+    0x17000000, 0x00000000, 0x00000000, 0x00000000, (u32)D_86806FD0, 0x05000000, 0x22040000,
+    0x00000000, 0x08000000, (u32)SushiGame_NameTagGeoCallback, 0x00000000, 0x06000000, 0x01000000,
 };
 static Controller** D_868070AC[] = {
     &gPlayer1Controller,
@@ -94,7 +98,7 @@ static s16 D_8680847C;
 static s16 D_8680847E;
 static s16 D_86808480;
 static s32 pad_D_86808488[2];
-static unk_D_86002F34_00C* D_86808490;
+static CameraNode* D_86808490;
 unk_D_86808498 D_86808498;
 
 void SushiGame_UpdateNameTagPulse(unk_D_86807558* arg0) {
@@ -1724,9 +1728,9 @@ void SushiGame_UpdateCameraBasis(unk_D_86808498* arg0) {
     f32 temp_fa0;
     Vec3f sp20;
 
-    arg0->unk_20.x = D_86808490->unk_60.at.x - D_86808490->unk_60.eye.x;
+    arg0->unk_20.x = D_86808490->view.targetPosition.x - D_86808490->view.eyePosition.x;
     arg0->unk_20.y = 0.0f;
-    arg0->unk_20.z = D_86808490->unk_60.at.z - D_86808490->unk_60.eye.z;
+    arg0->unk_20.z = D_86808490->view.targetPosition.z - D_86808490->view.eyePosition.z;
 
     temp_fa0 = SQ(arg0->unk_20.x) + SQ(arg0->unk_20.z);
     if (temp_fa0 != 0.0f) {
@@ -1752,6 +1756,11 @@ void SushiGame_InitCamera(void) {
     D_86808498.unk_00.y = 0.0f;
 #if defined(VERSION_US_REV1) || defined(VERSION_US_REV2)
     D_86808498.unk_00.z = -10.0f;
+#elif defined(VERSION_JP)
+    // The Japanese release pulls the camera back 1.3 units less; -6.5 is exactly representable in
+    // the high half of a float word, so IDO materialises it with lui/mtc1 instead of loading the
+    // -7.8 constant from .rodata as the US 1.0 build does.
+    D_86808498.unk_00.z = -6.5f;
 #else
     D_86808498.unk_00.z = -7.8f;
 #endif
@@ -1765,13 +1774,13 @@ void SushiGame_InitCamera(void) {
     Camera_ComputeEyeFromAngles(&D_86808498.unk_00, &D_86808498.unk_0C, D_86808498.unk_1C, D_86808498.unk_1A, D_86808498.unk_18);
     SushiGame_UpdateCameraBasis(&D_86808498);
 
-    D_86808490->unk_24.near = 50.0f;
-    D_86808490->unk_24.far = 6400.0f;
+    D_86808490->perspective.nearPlane = 50.0f;
+    D_86808490->perspective.farPlane = 6400.0f;
 }
 
 void SushiGame_UpdateCamera(void) {
     Camera_ComputeEyeFromAngles(&D_86808498.unk_00, &D_86808498.unk_0C, D_86808498.unk_1C, D_86808498.unk_1A, D_86808498.unk_18);
     SushiGame_UpdateCameraBasis(&D_86808498);
-    D_86808490->unk_60.eye = D_86808498.unk_0C;
-    D_86808490->unk_60.at = D_86808498.unk_00;
+    D_86808490->view.eyePosition = D_86808498.unk_0C;
+    D_86808490->view.targetPosition = D_86808498.unk_00;
 }

@@ -3207,11 +3207,11 @@ static f32 D_86A06234;
 static Vec3f D_86A06238;
 static f32 D_86A06244;
 Vec3f D_86A06248;
-static unk_D_86002F34_00C* D_86A06254;
+static CameraNode* D_86A06254;
 static s16 D_86A06258;
 static s16* D_86A0625C;
 
-void Credits_InitCameraKeyframeBlend(unk_D_86002F34_00C* arg0, u16 arg1, s8 arg2, u8 arg3) {
+void Credits_InitCameraKeyframeBlend(CameraNode* arg0, u16 arg1, s8 arg2, u8 arg3) {
     f32 scale = 1.0f;
     unk_D_86A04328* ptr = &D_86A04328[arg2 - 1][arg3 - 3];
     Vec3f sp3C;
@@ -3223,12 +3223,12 @@ void Credits_InitCameraKeyframeBlend(unk_D_86002F34_00C* arg0, u16 arg1, s8 arg2
     Camera_ComputeEyeFromAngles(&ptr->unk_00, &sp3C, 720.0f, (((s32) D_86A04328[arg2 - 1][arg3 - 3].unk_0C) << 0xF) / 180, (((s32) D_86A04328[arg2 - 1][arg3 - 3].unk_10) << 0xF) / 180);
     Camera_ComputeEyeFromAngles(&ptr->unk_14, &sp30, 720.0f, (((s32) D_86A04328[arg2 - 1][arg3 - 3].unk_20) << 0xF) / 180, (((s32) D_86A04328[arg2 - 1][arg3 - 3].unk_24) << 0xF) / 180);
 
-    D_86A06254->unk_60.eye = ptr->unk_00;
-    D_86A06254->unk_60.at = sp3C;
+    D_86A06254->view.eyePosition = ptr->unk_00;
+    D_86A06254->view.targetPosition = sp3C;
 
-    D_86A06254->unk_24.fovy = ptr->unk_28;
-    D_86A06254->unk_24.near = ptr->unk_30;
-    D_86A06254->unk_24.far = ptr->unk_34;
+    D_86A06254->perspective.verticalFieldOfView = ptr->unk_28;
+    D_86A06254->perspective.nearPlane = ptr->unk_30;
+    D_86A06254->perspective.farPlane = ptr->unk_34;
 
     D_86A06228.x = ((ptr->unk_14.x - ptr->unk_00.x) * scale) / arg1;
     D_86A06228.y = ((ptr->unk_14.y - ptr->unk_00.y) * scale) / arg1;
@@ -3246,17 +3246,17 @@ void Credits_StepCameraKeyframeBlend(void) {
         s8 tmp = D_86A06210;
 
         D_86A06220 += tmp;
-        D_86A06254->unk_60.eye.x += D_86A06228.x * tmp;
-        D_86A06254->unk_60.eye.y += D_86A06228.y * tmp;
-        D_86A06254->unk_60.eye.z += D_86A06228.z * tmp;
-        D_86A06254->unk_60.at.x += D_86A06238.x * tmp;
-        D_86A06254->unk_60.at.y += D_86A06238.y * tmp;
-        D_86A06254->unk_60.at.z += D_86A06238.z * tmp;
-        D_86A06254->unk_24.fovy += D_86A06244 * tmp;
+        D_86A06254->view.eyePosition.x += D_86A06228.x * tmp;
+        D_86A06254->view.eyePosition.y += D_86A06228.y * tmp;
+        D_86A06254->view.eyePosition.z += D_86A06228.z * tmp;
+        D_86A06254->view.targetPosition.x += D_86A06238.x * tmp;
+        D_86A06254->view.targetPosition.y += D_86A06238.y * tmp;
+        D_86A06254->view.targetPosition.z += D_86A06238.z * tmp;
+        D_86A06254->perspective.verticalFieldOfView += D_86A06244 * tmp;
     }
 }
 
-void func_86A01CF0(s16* arg0, s16* arg1, s16* arg2, unk_D_86002F34_00C* arg3, u16 arg4, s8 arg5, u8 arg6) {
+void func_86A01CF0(s16* arg0, s16* arg1, s16* arg2, CameraNode* arg3, u16 arg4, s8 arg5, u8 arg6) {
     D_86A0625C = arg1;
     D_86A06254 = arg3;
     D_86A06220 = 0;
@@ -3286,13 +3286,13 @@ void func_86A01CF0(s16* arg0, s16* arg1, s16* arg2, unk_D_86002F34_00C* arg3, u1
         *arg0 = temp_v1->unk_06;
         *arg2 = temp_v1->unk_08;
 
-        D_86A06254->unk_60.at.x = 0.0f;
-        D_86A06254->unk_60.at.y = temp_v1->unk_10;
-        D_86A06254->unk_60.at.z = 0.0f;
+        D_86A06254->view.targetPosition.x = 0.0f;
+        D_86A06254->view.targetPosition.y = temp_v1->unk_10;
+        D_86A06254->view.targetPosition.z = 0.0f;
 
-        D_86A06254->unk_24.fovy = temp_v1->unk_0C;
-        D_86A06254->unk_24.near = temp_v1->unk_14;
-        D_86A06254->unk_24.far = temp_v1->unk_18;
+        D_86A06254->perspective.verticalFieldOfView = temp_v1->unk_0C;
+        D_86A06254->perspective.nearPlane = temp_v1->unk_14;
+        D_86A06254->perspective.farPlane = temp_v1->unk_18;
     } else if (arg6 < 9) {
         if (D_86A03D40[arg5 - 2][(s32)arg6].unk_04 == 1) {
             if (D_86A03D40[arg5 - 2][(s32)arg6].unk_00 < D_86A03D40[arg5 - 2][(s32)arg6].unk_02) {
@@ -3313,9 +3313,9 @@ void func_86A01CF0(s16* arg0, s16* arg1, s16* arg2, unk_D_86002F34_00C* arg3, u1
         D_86A06248.y = D_86A03D40[arg5 - 2][(s32)arg6].unk_10;
         D_86A06248.z = 0.0f;
 
-        D_86A06254->unk_24.fovy = D_86A03D40[arg5 - 2][(s32)arg6].unk_0C;
-        D_86A06254->unk_24.near = D_86A03D40[arg5 - 2][(s32)arg6].unk_14;
-        D_86A06254->unk_24.far = D_86A03D40[arg5 - 2][(s32)arg6].unk_18;
+        D_86A06254->perspective.verticalFieldOfView = D_86A03D40[arg5 - 2][(s32)arg6].unk_0C;
+        D_86A06254->perspective.nearPlane = D_86A03D40[arg5 - 2][(s32)arg6].unk_14;
+        D_86A06254->perspective.farPlane = D_86A03D40[arg5 - 2][(s32)arg6].unk_18;
     }
 }
 

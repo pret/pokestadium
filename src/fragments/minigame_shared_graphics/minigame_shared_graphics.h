@@ -9,7 +9,7 @@ extern u32 D_87A01180[];
 extern u32 D_87A01190[];
 extern u32 D_87A011A4[];
 
-void MiniCam_SetActive(unk_D_86002F34_00C*);
+void MiniCam_SetActive(CameraNode*);
 Gfx* MiniCam_ApplyProjection(Gfx*);
 Gfx* MiniGfx_DrawTexturedQuad(Gfx*, Mtx*, f32, f32, f32, f32, void*, s32, s32);
 void func_87A00DB8(s32);

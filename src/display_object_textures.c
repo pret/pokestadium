@@ -286,11 +286,11 @@ void PokeIcon_StartThread(void) {
     osStartThread(&D_800ABE10.unk_000);
 }
 
-ModelLoadContext* PokeIcon_AllocFramebuffers(u32 arg0) {
+ModelLoadContext* PokeIcon_AllocFramebuffers(u32 flags) {
     s16 i = 1;
     ModelLoadContext* temp_v0 = main_pool_alloc(sizeof(ModelLoadContext), 1);
 
-    temp_v0->flags = arg0;
+    temp_v0->flags = flags;
     temp_v0->pendingLoads = 0;
     temp_v0->bufferIndex = 0;
     temp_v0->loadedModel = 0;
@@ -299,18 +299,18 @@ ModelLoadContext* PokeIcon_AllocFramebuffers(u32 arg0) {
     temp_v0->backgroundBuffer = NULL;
     temp_v0->colorVariant.raw = 0;
 
-    if (arg0 & 1) {
+    if (flags & 1) {
         temp_v0->modelBuffers[0] = main_pool_alloc(0x3C000, 1);
-        if (arg0 & 4) {
+        if (flags & 4) {
             temp_v0->modelBuffers[1] = main_pool_alloc(0x3C000, 1);
-        } else if (arg0 & 8) {
+        } else if (flags & 8) {
             for (i = 1; i < 5; i++) {
                 temp_v0->modelBuffers[i] = main_pool_alloc(0x3C000, 1);
             }
         }
     }
 
-    if (arg0 & 2) {
+    if (flags & 2) {
         temp_v0->backgroundBuffer = main_pool_alloc(0x18000, 1);
     }
 
@@ -324,7 +324,16 @@ ModelLoadContext* PokeIcon_AllocFramebuffers(u32 arg0) {
 #else
 void PokeIcon_OpenModelArchives(void) {
     D_800ABE10.unk_A04.unk_00 = BinArchive_Open(0x920000, NULL, 1, 1);
+    // The second archive's ROM offset moved between releases: 0x8CC000 in US 1.0, 0x8C8000 in
+    // the Japanese release (yamls/<version>/rom.yaml, the unnamed bin segment that keeps the US
+    // offset 8CC000 as its name). European releases place it elsewhere again (Spain: 0x8A8000)
+    // and still build this file from assembly, so they need their own value here before the file
+    // can be C for them.
+#if defined(VERSION_JP)
+    D_800ABE10.unk_A04.unk_04 = BinArchive_Open(0x8C8000, NULL, 1, 1);
+#else
     D_800ABE10.unk_A04.unk_04 = BinArchive_Open(0x8CC000, NULL, 1, 1);
+#endif
     D_800ABE10.unk_A04.unk_08 = main_pool_alloc(0x28000, 1);
 }
 #endif

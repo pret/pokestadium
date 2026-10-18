@@ -1365,7 +1365,7 @@ s32 BattlePrep_BadgeCarouselGlowCallback2(s32 arg0, unk_func_80011B94* arg1) {
 }
 
 void BattlePrep_RenderBadgeGlowTexture(s32 arg0) {
-    unk_D_80068BB0 sp40;
+    DepthBuffer sp40;
     u32 sp3C = Util_ConvertAddrToVirtAddr(&D_3017F00);
 
     GfxImage_Initialize(&sp40, 0, 2, 0x40, 0x40, arg0);

@@ -5,14 +5,14 @@
 
 static f32 D_84384600[] = { 1.0f, 2.0f };
 
-void BattleAnim_InitSwayOffset(Battler* arg0, f32 arg1, s16 arg2) {
+void BattleAnim_InitSwayOffset(ActivePokemon* arg0, f32 arg1, s16 arg2) {
     arg0->unk_498 = arg1;
     arg0->unk_448.unk_0C.z = COSS(arg2) * arg1;
     arg0->unk_448.unk_0C.y = SINS(arg2) * arg1;
     arg0->unk_49C = 0.01f;
 }
 
-void BattleAnim_UpdateSwayPhysicsToOwner(Battler* arg0, Battler* arg1, f32 arg2, f32 arg3, s32 arg4) {
+void BattleAnim_UpdateSwayPhysicsToOwner(ActivePokemon* arg0, ActivePokemon* arg1, f32 arg2, f32 arg3, s32 arg4) {
     f32 sp54;
     f32 sp50;
     f32 sp4C;
@@ -50,7 +50,7 @@ void BattleAnim_UpdateSwayPhysicsToOwner(Battler* arg0, Battler* arg1, f32 arg2,
     Vec3f_AddInPlace(&arg0->unk_000.position, &sp3C);
 }
 
-void BattleAnim_UpdateSwayPhysicsToTarget(UNUSED Battler* arg0, Battler* arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5) {
+void BattleAnim_UpdateSwayPhysicsToTarget(UNUSED ActivePokemon* arg0, ActivePokemon* arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5) {
     f32 sp54;
     f32 sp50;
     f32 sp4C;
@@ -87,7 +87,7 @@ void BattleAnim_UpdateSwayPhysicsToTarget(UNUSED Battler* arg0, Battler* arg1, f
     Vec3f_AddInPlace(&arg1->unk_4EC.position, &sp3C);
 }
 
-void BattleScene_HideParticipantSecondaryModels(Battler* arg0) {
+void BattleScene_HideParticipantSecondaryModels(ActivePokemon* arg0) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
@@ -97,7 +97,7 @@ void BattleScene_HideParticipantSecondaryModels(Battler* arg0) {
     }
 }
 
-void BattleScene_ShowSecondaryModelsAtMainTransform(Battler* arg0) {
+void BattleScene_ShowSecondaryModelsAtMainTransform(ActivePokemon* arg0) {
     s32 i;
     s16 sp64[] = { 0x0, 0xE38, 0xF1C8 }; // D_84384608
 
@@ -112,7 +112,7 @@ void BattleScene_ShowSecondaryModelsAtMainTransform(Battler* arg0) {
     }
 }
 
-void BattleScene_UpdateSecondaryModelOrbit(Battler* arg0) {
+void BattleScene_UpdateSecondaryModelOrbit(ActivePokemon* arg0) {
     s32 i;
     f32 tmp;
     Vec3f sp5C = { 0.0f, 0.0f, 0.0f };         // D_84384610
@@ -136,7 +136,7 @@ void BattleScene_UpdateSecondaryModelOrbit(Battler* arg0) {
     }
 }
 
-void BattleScene_ShowSecondaryModelsAtMainPose(Battler* arg0) {
+void BattleScene_ShowSecondaryModelsAtMainPose(ActivePokemon* arg0) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
@@ -149,7 +149,7 @@ void BattleScene_ShowSecondaryModelsAtMainPose(Battler* arg0) {
     }
 }
 
-s32 BattleScene_ShrinkSecondaryModelsToScale(Battler* arg0) {
+s32 BattleScene_ShrinkSecondaryModelsToScale(ActivePokemon* arg0) {
     s32 i;
     f32 temp_fv0_2;
     f32 sp5C[] = { 0.007f, 0.005f, 0.039f }; // D_8438462C
@@ -173,7 +173,7 @@ s32 BattleScene_ShrinkSecondaryModelsToScale(Battler* arg0) {
     return 0;
 }
 
-void BattleScene_ShowSecondaryModelsStaggeredFrame(Battler* arg0) {
+void BattleScene_ShowSecondaryModelsStaggeredFrame(ActivePokemon* arg0) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
@@ -190,7 +190,7 @@ void BattleScene_ShowSecondaryModelsStaggeredFrame(Battler* arg0) {
     }
 }
 
-void BattleScene_UpdateSecondaryModelTrailPosition(Battler* arg0, s16 arg1) {
+void BattleScene_UpdateSecondaryModelTrailPosition(ActivePokemon* arg0, s16 arg1) {
     s32 i;
     f32 sp90;
     s16 sp8E;
@@ -208,13 +208,13 @@ void BattleScene_UpdateSecondaryModelTrailPosition(Battler* arg0, s16 arg1) {
     }
 }
 
-void BattleScene_ResetParticipantModelFlags(Battler* arg0) {
+void BattleScene_ResetParticipantModelFlags(ActivePokemon* arg0) {
     BattleScene_SetParticipantModelFlags(arg0, 0, 0);
 }
 
-void BattleAnim_StatusIdleCase1Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase1Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4EC.node.flags |= 1;
-    if (arg1 == D_84390010[0]) {
+    if (arg1 == sActivePokemon[0]) {
         Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, 35.0f, 50.0f, -250.0f);
     } else {
         Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, -35.0f, 50.0f, -250.0f);
@@ -225,7 +225,7 @@ void BattleAnim_StatusIdleCase1Sub0(UNUSED Battler* arg0, Battler* arg1) {
     ModelAnim_SetFrame(&arg1->unk_4EC, 0);
 }
 
-void BattleAnim_StatusIdleCase1Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase1Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     if (arg1 == D_84390018) {
         BattleAnim_UpdateSwayPhysicsToTarget(arg0, arg1, 0, 0, 0x1FFE, 0x4440);
     } else {
@@ -243,7 +243,7 @@ void BattleAnim_StatusIdleCase1Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase1(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase1Sub0(arg0, arg1);
@@ -254,7 +254,7 @@ void BattleAnim_StatusIdleCase1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase2Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase2Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, arg1->unk_4B0 * -150.0f, 100.0f, 0.0f);
     arg1->unk_4B8++;
     BattleAnim_InitSwayOffset(arg1, 0.0f, 0x3FFC);
@@ -263,7 +263,7 @@ void BattleAnim_StatusIdleCase2Sub0(UNUSED Battler* arg0, Battler* arg1) {
     ModelAnim_SetFrame(&arg1->unk_4EC, 0);
 }
 
-void BattleAnim_StatusIdleCase2Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase2Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4EC.rotation.x += 0x1555;
     arg1->unk_4EC.rotation.z += 0xE38;
 
@@ -283,7 +283,7 @@ void BattleAnim_StatusIdleCase2Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase2(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase2(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase2Sub0(arg0, arg1);
@@ -294,7 +294,7 @@ void BattleAnim_StatusIdleCase2(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase3Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase3Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     Vec3f_SetComponentsDuplicate(&arg1->unk_448, 0.0f, 0.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&arg1->unk_448.unk_0C, 0.0f, 0.0f, 0.0f);
     BattleAnim_InitSwayOffset(arg1, D_84384600[0], 0x4000);
@@ -302,7 +302,7 @@ void BattleAnim_StatusIdleCase3Sub0(UNUSED Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase3Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase3Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleAnim_UpdateSwayPhysicsToOwner(arg0, arg1, 1.45f, 0.015f, 0x4000);
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, 0);
     if (arg0->unk_000.position.y >= 200.0f) {
@@ -312,7 +312,7 @@ void BattleAnim_StatusIdleCase3Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase3(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase3(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase3Sub0(arg0, arg1);
@@ -323,14 +323,14 @@ void BattleAnim_StatusIdleCase3(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase14Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase14Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     Vec3f_SetComponentsDuplicate(&arg1->unk_448, 0.0f, 0.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&arg1->unk_448.unk_0C, 0.0f, 0.0f, 0.0f);
     BattleAnim_InitSwayOffset(arg1, D_84384600[0], 0x4000);
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase14Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase14Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleAnim_UpdateSwayPhysicsToOwner(arg0, arg1, 2.0f, 0.002f, 0x4000);
     if ((arg0->unk_000.position.y - BattleScene_GetParticipantModelHeight(arg1)) >= 90.0f) {
         arg1->unk_4B8++;
@@ -338,10 +338,10 @@ void BattleAnim_StatusIdleCase14Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void func_8430A4E0(UNUSED Battler* arg0, UNUSED Battler* arg1) {
+void func_8430A4E0(UNUSED ActivePokemon* arg0, UNUSED ActivePokemon* arg1) {
 }
 
-void BattleAnim_StatusIdleCase14(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase14(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase14Sub0(arg0, arg1);
@@ -356,7 +356,7 @@ void BattleAnim_StatusIdleCase14(Battler* arg0, Battler* arg1) {
     }
 }
 
-s32 BattleAnim_ApproachAngleAndCheckThreshold(Battler* arg0, s16 arg1, s16 arg2) {
+s32 BattleAnim_ApproachAngleAndCheckThreshold(ActivePokemon* arg0, s16 arg1, s16 arg2) {
     arg0->unk_000.rotation.y -= arg1;
 
     if (arg1 > 0) {
@@ -370,7 +370,7 @@ s32 BattleAnim_ApproachAngleAndCheckThreshold(Battler* arg0, s16 arg1, s16 arg2)
     return 0;
 }
 
-void BattleAnim_StatusIdleCase4Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase4Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleScene_ShowSecondaryModelsStaggeredFrame(arg1);
     arg1->unk_4A6 = 0;
     arg1->unk_4A4 = 0;
@@ -378,7 +378,7 @@ void BattleAnim_StatusIdleCase4Sub0(UNUSED Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase4Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase4Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = Math_StepToS32(arg1->unk_4A6, 0x3330, 0x16C, 0x16C);
 
     if (BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->unk_4B0 << 0xE) != 0) {
@@ -392,7 +392,7 @@ void BattleAnim_StatusIdleCase4Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase4Sub2(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase4Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 tmp = 0x4000 - arg0->unk_000.rotation.y;
     f32 var_fa1;
     s16 sp26;
@@ -417,7 +417,7 @@ void BattleAnim_StatusIdleCase4Sub2(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase4(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase4(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase4Sub0(arg0, arg1);
@@ -432,14 +432,14 @@ void BattleAnim_StatusIdleCase4(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase5Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase5Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = 0;
     arg1->unk_4A4 = 0;
     arg1->unk_4C0 = 0;
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase5Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase5Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = Math_StepToS32(arg1->unk_4A6, 0x3FFC, 0x16C, 0x16C);
 
     if (BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->unk_4B0 << 0xE) != 0) {
@@ -452,7 +452,7 @@ void BattleAnim_StatusIdleCase5Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase5Sub2(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase5Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 sp34;
     f32 sp30;
     f32 sp2C;
@@ -481,7 +481,7 @@ void BattleAnim_StatusIdleCase5Sub2(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase5(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase5(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase5Sub0(arg0, arg1);
@@ -496,7 +496,7 @@ void BattleAnim_StatusIdleCase5(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase6Sub0(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase6Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = 0;
     arg1->unk_4A4 = 0;
     arg1->unk_4C0 = 0;
@@ -507,7 +507,7 @@ void BattleAnim_StatusIdleCase6Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase6Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase6Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 tmp;
     Vec3f sp20 = { 0.0f, 0.0f, 0.0f }; // D_84384654
 
@@ -524,7 +524,7 @@ void BattleAnim_StatusIdleCase6Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase6Sub2(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase6Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 tmp;
     Vec3f sp20 = { 0.0f, 0.0f, 0.0f };
 
@@ -546,7 +546,7 @@ void BattleAnim_StatusIdleCase6Sub2(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase6(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase6(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase6Sub0(arg0, arg1);
@@ -561,7 +561,7 @@ void BattleAnim_StatusIdleCase6(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase7Sub0(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase7Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleScene_ShowSecondaryModelsAtMainTransform(arg1);
     arg1->unk_4AC = 0;
     BattleScene_PositionParticipantModel(arg1);
@@ -569,7 +569,7 @@ void BattleAnim_StatusIdleCase7Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase7Sub1(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase7Sub1(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleScene_UpdateSecondaryModelOrbit(arg1);
     arg1->unk_4AC++;
     if (arg1->unk_4AC == 0x3C) {
@@ -578,7 +578,7 @@ void BattleAnim_StatusIdleCase7Sub1(UNUSED Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase7(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase7(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase7Sub0(arg0, arg1);
@@ -589,17 +589,17 @@ void BattleAnim_StatusIdleCase7(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_ResetOwnerFacingAndExitStatusIdle(Battler* arg0) {
+void BattleAnim_ResetOwnerFacingAndExitStatusIdle(ActivePokemon* arg0) {
     UNUSED s32 pad;
-    unk_D_86002F34_00C* sp18 = gBattleScene.unk_00->unk_DC;
+    CameraNode* sp18 = gBattleScene.unk_00->unk_DC;
 
     BattleScene_PositionParticipantModel(arg0);
     Vec3s_SetComponents(&arg0->unk_000.rotation, 0, arg0->unk_4B0 << 0xE, 0);
-    Vec3f_SetComponentsDuplicate(&sp18->unk_60.up, 0.0f, 1.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&sp18->view.upDirection, 0.0f, 1.0f, 0.0f);
     BattleScene_ResetParticipantModelFlags(arg0);
 }
 
-void BattleAnim_StatusIdleCase8Sub0(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase8Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = 0;
     arg1->unk_4A8 = 0;
     arg1->unk_4A4 = 0;
@@ -610,8 +610,8 @@ void BattleAnim_StatusIdleCase8Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
-    unk_D_86002F34_00C* temp_s0 = gBattleScene.unk_00->unk_DC;
+void BattleAnim_StatusIdleCase8Sub1(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
+    CameraNode* temp_s0 = gBattleScene.unk_00->unk_DC;
     f32 temp_fa0;
     f32 temp_fa1_2;
     f32 temp_ft4;
@@ -624,9 +624,9 @@ void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
     BattleAnim_StepToS16(&arg1->unk_4A4, 0x5B0, 0x3C);
     BattleAnim_StepToS16(&arg1->unk_4A8, -0x8000, arg1->unk_4A4);
 
-    sp2C = temp_s0->unk_60.at.x - temp_s0->unk_60.eye.x;
-    sp28 = temp_s0->unk_60.at.y - temp_s0->unk_60.eye.y;
-    sp24 = temp_s0->unk_60.at.z - temp_s0->unk_60.eye.z;
+    sp2C = temp_s0->view.targetPosition.x - temp_s0->view.eyePosition.x;
+    sp28 = temp_s0->view.targetPosition.y - temp_s0->view.eyePosition.y;
+    sp24 = temp_s0->view.targetPosition.z - temp_s0->view.eyePosition.z;
 
     temp_fv0_2 = sqrtf(SQ(sp2C) + SQ(sp28) + SQ(sp24));
 
@@ -636,16 +636,16 @@ void BattleAnim_StatusIdleCase8Sub1(UNUSED Battler* arg0, Battler* arg1) {
 
     temp_ft4 = 1.0 - COSS(arg1->unk_4A8);
 
-    temp_s0->unk_60.up.x = (temp_ft4 * temp_fa0 * temp_fv1_2) - (SINS(arg1->unk_4A8) * temp_fa1_2);
-    temp_s0->unk_60.up.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
-    temp_s0->unk_60.up.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
+    temp_s0->view.upDirection.x = (temp_ft4 * temp_fa0 * temp_fv1_2) - (SINS(arg1->unk_4A8) * temp_fa1_2);
+    temp_s0->view.upDirection.y = COSS(arg1->unk_4A8) + ((temp_ft4 * temp_fv1_2) * temp_fv1_2);
+    temp_s0->view.upDirection.z = (SINS(arg1->unk_4A8) * temp_fa0) + ((temp_ft4 * temp_fv1_2) * temp_fa1_2);
 
     if (arg1->unk_000.position.y < 0.0f) {
         arg1->unk_000.position.y = 0.0f;
     }
 }
 
-void BattleAnim_StatusIdleCase8(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase8(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase8Sub0(arg0, arg1);
@@ -656,7 +656,7 @@ void BattleAnim_StatusIdleCase8(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase9Sub0(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase9Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     if (arg0->unk_000.scale.y != 1.0f) {
         BattleScene_ResetParticipantModelFlags(arg1);
     } else {
@@ -665,7 +665,7 @@ void BattleAnim_StatusIdleCase9Sub0(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase9Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase9Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 temp_fv0;
 
     temp_fv0 = Math_StepToF(arg0->unk_000.scale.x, 0.8f, 0.01f, 0.01f);
@@ -681,7 +681,7 @@ void BattleAnim_StatusIdleCase9Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase9(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase9(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase9Sub0(arg0, arg1);
@@ -692,11 +692,11 @@ void BattleAnim_StatusIdleCase9(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase12Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase12Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase12Sub1(Battler* arg0, UNUSED Battler* arg1) {
+void BattleAnim_StatusIdleCase12Sub1(ActivePokemon* arg0, UNUSED ActivePokemon* arg1) {
     arg0->unk_000.scale.x = Math_StepToF(arg0->unk_000.scale.x, 0.0f, 0.05f, 0.05f);
     arg0->unk_000.scale.y = Math_StepToF(arg0->unk_000.scale.y, 0.0f, 0.05f, 0.05f);
     arg0->unk_000.scale.z = Math_StepToF(arg0->unk_000.scale.z, 0.0f, 0.05f, 0.05f);
@@ -706,7 +706,7 @@ void BattleAnim_StatusIdleCase12Sub1(Battler* arg0, UNUSED Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase12(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase12(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase12Sub0(arg0, arg1);
@@ -717,7 +717,7 @@ void BattleAnim_StatusIdleCase12(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase13Sub0(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase13Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A4 = 0x16C;
     arg1->unk_4A6 = 0;
     arg1->unk_4A8 = 0;
@@ -728,7 +728,7 @@ void BattleAnim_StatusIdleCase13Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase13Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase13Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 var_fv0;
 
     // clang-format off
@@ -741,7 +741,7 @@ void BattleAnim_StatusIdleCase13Sub1(Battler* arg0, Battler* arg1) {
         arg1->unk_4A6 += arg1->unk_4A8;
     }
 
-    if (arg1->unk_654.unk_38.unk_56 == 0) {
+    if (arg1->unk_654.runtime.unk_56 == 0) {
         var_fv0 = 1.0f;
     } else {
         var_fv0 = 0.8f;
@@ -757,7 +757,7 @@ void BattleAnim_StatusIdleCase13Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase13Sub2(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase13Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 var_fv0;
     f32 var_fv1;
 
@@ -770,7 +770,7 @@ void BattleAnim_StatusIdleCase13Sub2(Battler* arg0, Battler* arg1) {
         var_fv1 = SINS(arg1->unk_4A6) * arg1->unk_4A0;
     }
 
-    if (arg1->unk_654.unk_38.unk_56 == 0) {
+    if (arg1->unk_654.runtime.unk_56 == 0) {
         var_fv0 = 1.0f;
     } else {
         var_fv0 = 0.8f;
@@ -788,7 +788,7 @@ void BattleAnim_StatusIdleCase13Sub2(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase13(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase13(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase13Sub0(arg0, arg1);
@@ -803,7 +803,7 @@ void BattleAnim_StatusIdleCase13(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase15Sub0(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase15Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A8 = 0x71C;
     arg1->unk_4A0 = 0.4f;
     arg1->unk_448.unk_0C.x = arg0->unk_000.scale.x;
@@ -812,8 +812,8 @@ void BattleAnim_StatusIdleCase15Sub0(Battler* arg0, Battler* arg1) {
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase15Sub1(Battler* arg0, Battler* arg1) {
-    BattleMonRuntime* temp_a0 = &arg1->unk_654.unk_38;
+void BattleAnim_StatusIdleCase15Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
+    BattleMonRuntime* temp_a0 = &arg1->unk_654.runtime;
     s16 sp22;
 
     arg1->unk_4A8 += 0xCCC;
@@ -845,7 +845,7 @@ void BattleAnim_StatusIdleCase15Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase15(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase15(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase15Sub0(arg0, arg1);
@@ -856,13 +856,13 @@ void BattleAnim_StatusIdleCase15(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase16Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase16Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4AC = 0;
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase16Sub1(Battler* arg0, Battler* arg1) {
-    BattleMonRuntime* ptr = &arg1->unk_654.unk_38;
+void BattleAnim_StatusIdleCase16Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
+    BattleMonRuntime* ptr = &arg1->unk_654.runtime;
     UNUSED s32 pad;
     f32 temp_fs0;
 
@@ -879,7 +879,7 @@ void BattleAnim_StatusIdleCase16Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase16(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase16(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase16Sub0(arg0, arg1);
@@ -890,12 +890,12 @@ void BattleAnim_StatusIdleCase16(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase10Sub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase10Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4C0 = 0;
     arg1->unk_4B8++;
 }
 
-void BattleAnim_StatusIdleCase10Sub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase10Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     f32 sp24;
     f32 sp20;
 
@@ -911,7 +911,7 @@ void BattleAnim_StatusIdleCase10Sub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase10(Battler* arg0, Battler* arg1) {
+void BattleAnim_StatusIdleCase10(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4B8) {
         case 0:
             BattleAnim_StatusIdleCase10Sub0(arg0, arg1);
@@ -922,14 +922,14 @@ void BattleAnim_StatusIdleCase10(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StatusIdleCase0(UNUSED Battler* arg0, UNUSED Battler* arg1) {
+void BattleAnim_StatusIdleCase0(UNUSED ActivePokemon* arg0, UNUSED ActivePokemon* arg1) {
 }
 
 void BattleAnim_UpdateOwnerStatusIdleAnimation(s32 arg0) {
-    Battler* temp_a1 = D_84390010[arg0];
-    Battler* temp_a2 = D_84390010[arg0];
+    ActivePokemon* temp_a1 = sActivePokemon[arg0];
+    ActivePokemon* temp_a2 = sActivePokemon[arg0];
 
-    switch (D_84390010[arg0]->unk_4B4) {
+    switch (sActivePokemon[arg0]->unk_4B4) {
         case 0:
             BattleAnim_StatusIdleCase0(temp_a1, temp_a2);
             break;
@@ -1000,23 +1000,23 @@ void BattleAnim_UpdateOwnerStatusIdleAnimation(s32 arg0) {
     }
 }
 
-void BattleAnim_SetOwnerSecondaryStatusFlags(Battler* arg0, u8 arg1, u8 arg2) {
+void BattleAnim_SetOwnerSecondaryStatusFlags(ActivePokemon* arg0, u8 arg1, u8 arg2) {
     arg0->unk_4E8 = arg1;
     arg0->unk_4E9 = arg2;
 }
 
-void BattleAnim_ClearOwnerSecondaryStatusFlags(Battler* arg0) {
+void BattleAnim_ClearOwnerSecondaryStatusFlags(ActivePokemon* arg0) {
     arg0->unk_4E8 = 0;
     arg0->unk_4E9 = 0;
 }
 
-void BattleAnim_InitSecondarySwayOffset(Battler* arg0, f32 arg1, s16 arg2) {
+void BattleAnim_InitSecondarySwayOffset(ActivePokemon* arg0, f32 arg1, s16 arg2) {
     arg0->unk_4E4 = arg1;
     arg0->unk_4D8.z = COSS(arg2) * arg1;
     arg0->unk_4D8.y = SINS(arg2) * arg1;
 }
 
-void BattleAnim_UpdateSecondarySwayPhysics(Battler* arg0, Battler* arg1, UNUSED f32 arg2, UNUSED f32 arg3, UNUSED s32 arg4) {
+void BattleAnim_UpdateSecondarySwayPhysics(ActivePokemon* arg0, ActivePokemon* arg1, UNUSED f32 arg2, UNUSED f32 arg3, UNUSED s32 arg4) {
     f32 tmp1 = 0.01f;
     f32 tmp2 = 18.0f;
     Vec3f sp2C;
@@ -1035,14 +1035,14 @@ void BattleAnim_UpdateSecondarySwayPhysics(Battler* arg0, Battler* arg1, UNUSED 
     Vec3f_AddInPlace(&arg0->unk_000.position, &sp2C);
 }
 
-void BattleAnim_SecondaryStatusCaseBSub0(UNUSED Battler* arg0, Battler* arg1) {
+void BattleAnim_SecondaryStatusCaseBSub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
     Vec3f_SetComponentsDuplicate(&arg1->unk_4CC, 0.0f, 0.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&arg1->unk_4D8, 0.0f, 0.0f, 0.0f);
     BattleAnim_InitSecondarySwayOffset(arg1, 23.0f, 0x2E36);
     arg1->unk_4E9++;
 }
 
-void BattleAnim_SecondaryStatusCaseBSub1(Battler* arg0, Battler* arg1) {
+void BattleAnim_SecondaryStatusCaseBSub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleAnim_UpdateSecondarySwayPhysics(arg0, arg1, 0, 0, 0x2E36);
     if (arg1->unk_000.position.y < BattleScene_GetParticipantModelHeight(arg1)) {
         arg1->unk_4D8.y = 0.0f;
@@ -1051,7 +1051,7 @@ void BattleAnim_SecondaryStatusCaseBSub1(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_SecondaryStatusCaseB(Battler* arg0, Battler* arg1) {
+void BattleAnim_SecondaryStatusCaseB(ActivePokemon* arg0, ActivePokemon* arg1) {
     switch (arg1->unk_4E9) {
         case 0:
             BattleAnim_SecondaryStatusCaseBSub0(arg0, arg1);
@@ -1062,12 +1062,12 @@ void BattleAnim_SecondaryStatusCaseB(Battler* arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_SecondaryStatusDefault(UNUSED Battler* arg0, UNUSED Battler* arg1) {
+void BattleAnim_SecondaryStatusDefault(UNUSED ActivePokemon* arg0, UNUSED ActivePokemon* arg1) {
 }
 
 void BattleAnim_UpdateOwnerSecondaryStatusAnimation(s32 arg0) {
-    Battler* temp_v0 = D_84390010[arg0];
-    Battler* temp_v1 = D_84390010[arg0];
+    ActivePokemon* temp_v0 = sActivePokemon[arg0];
+    ActivePokemon* temp_v1 = sActivePokemon[arg0];
 
     if (temp_v1->unk_4E8 == 0xB) {
         BattleAnim_SecondaryStatusCaseB(temp_v0, temp_v1);

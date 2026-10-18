@@ -204,9 +204,9 @@ void MiniFx_UpdateParticles(void) {
 }
 
 void MiniFx_DrawParticles(void) {
-    gSPPerspNormalize(gDisplayListHead++, D_87906054->unk_24.perspNorm);
-    gSPMatrix(gDisplayListHead++, D_87906054->unk_24.mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gDisplayListHead++, D_87906054->unk_60.p_mtxf, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    gSPPerspNormalize(gDisplayListHead++, D_87906054->perspective.unk_04);
+    gSPMatrix(gDisplayListHead++, D_87906054->perspective.projectionMatrix, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gDisplayListHead++, D_87906054->view.fixedMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
     gParticleMatrixPool = Gfx_AllocDisplayList(sizeof(ParticleMatrixPool));
     gParticleMatrixPoolIndex = 0;

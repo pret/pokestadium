@@ -13,7 +13,7 @@ static s32 D_83A00B70;
 static BinArchive* D_83A00B74;
 static u8* D_83A00B78;
 static s32 D_83A00B7C;
-static unk_D_80068BB0* D_83A00B80;
+static DepthBuffer* D_83A00B80;
 
 void Snap_PrintClubInitBackgroundSelect(void) {
     D_83A00B70 = 0;

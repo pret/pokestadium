@@ -18,8 +18,8 @@ void Team_ClearTrainerSlot(BattleSessionTeams* arg0) {
     arg0->unk_02 = 0;
     arg0->unk_04 = 0;
     arg0->unk_14 = 0;
-    arg0->unk_08[0] = 0;
-    arg0->unk_08[1] = 0;
+    arg0->teamMember[0] = 0;
+    arg0->teamMember[1] = 0;
     arg0->unk_1D = 0;
     arg0->unk_20 = 0;
     arg0->unk_1E = 0;
@@ -98,11 +98,11 @@ TeamRoster* Trainer_Create(s32 arg0, s16 arg1, char* arg2, char* arg3) {
         }
 
         sp1C->unk_018 = 0;
-        sp1C->unk_214 = sp20;
-        sp1C->unk_002 = 0;
+        sp1C->rosterInfo = sp20;
+        sp1C->numberOfPokemonChosen = 0;
 
         sp20->unk_000 = 0;
-        sp20->unk_002 = 0;
+        sp20->numberOfPokemonCanBePicked = 0;
         sp20->unk_003 = 1;
 
         HAL_Strcpy(sp1C->unk_008, arg2);
@@ -117,21 +117,21 @@ void Team_AddTrainer(s32 arg0, TeamRoster* arg1) {
     u8 idx = temp_v0->unk_01;
 
     if (idx < 2) {
-        temp_v0->unk_08[idx] = arg1;
+        temp_v0->teamMember[idx] = arg1;
         temp_v0->unk_01++;
     }
 }
 
 void Trainer_AddPokemon(TeamRoster* arg0, BattleMon* arg1) {
-    ExtendedRosterInfo* ptr = arg0->unk_214;
-    s32 tmp = arg0->unk_002;
+    ExtendedRosterInfo* ptr = arg0->rosterInfo;
+    s32 tmp = arg0->numberOfPokemonChosen;
 
     if (tmp < 6) {
-        arg0->unk_01C[tmp] = *arg1;
+        arg0->pokemonPicked[tmp] = *arg1;
         ptr->unk_028[tmp] = *arg1;
 
-        arg0->unk_002 = tmp + 1;
-        ptr->unk_002 = tmp + 1;
+        arg0->numberOfPokemonChosen = tmp + 1;
+        ptr->numberOfPokemonCanBePicked = tmp + 1;
     }
 }
 
@@ -327,9 +327,9 @@ s16 Team_GetHighestPartyLevel(void) {
     s16 var_v1 = 0;
     BattleMon* var_v0;
 
-    var_v0 = &gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_028[0];
+    var_v0 = &gSessionContext.battleSides[0].teamMember[0]->rosterInfo->unk_028[0];
 
-    for (i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_002; i++, var_v0++) {
+    for (i = 0; i < gSessionContext.battleSides[0].teamMember[0]->rosterInfo->numberOfPokemonCanBePicked; i++, var_v0++) {
         if (var_v1 < var_v0->unk_24) {
             var_v1 = var_v0->unk_24;
         }
@@ -347,10 +347,10 @@ void Team_ScaleOpponentToLevel(s16 arg0) {
         return;
     }
 
-    var_s0 = gSessionContext.battleSides[1].unk_08[0]->unk_01C;
-    var_s1 = gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_028;
+    var_s0 = gSessionContext.battleSides[1].teamMember[0]->pokemonPicked;
+    var_s1 = gSessionContext.battleSides[1].teamMember[0]->rosterInfo->unk_028;
 
-    for (i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_002; i++, var_s1++, var_s0++) {
+    for (i = 0; i < gSessionContext.battleSides[1].teamMember[0]->numberOfPokemonChosen; i++, var_s1++, var_s0++) {
         var_s0->unk_24 = arg0;
         var_s0->unk_10 = Pokemon_ExpForLevel(var_s0->unk_00.unk_00, arg0);
         Pokemon_RecalcStats(var_s0);
@@ -386,7 +386,7 @@ void Team_LoadPresetTrainer(s16 arg0, s16 arg1, s16 arg2, s32 arg3) {
     PresetTrainerSlot* ptr;
     PresetTrainerSlot* temp_v1;
 
-    temp_s3 = gSessionContext.battleSides[arg0].unk_08[0];
+    temp_s3 = gSessionContext.battleSides[arg0].teamMember[0];
     if (gSessionContext.inRound2 != 0) {
         arg1 += 0x1F;
     }
@@ -399,17 +399,17 @@ void Team_LoadPresetTrainer(s16 arg0, s16 arg1, s16 arg2, s32 arg3) {
     gSessionContext.opponentHistory[0][gSessionContext.roundOrDemoId - 1] = arg2;
 
     temp_s3->unk_018 = temp_s2->unk_34;
-    temp_s3->unk_002 = 0;
+    temp_s3->numberOfPokemonChosen = 0;
 
     for (i = 0; i < temp_s2->unk_36; i++) {
         Trainer_AddPokemon(temp_s3, &temp_s2->unk_38[i]);
     }
 
     HAL_Strcpy(temp_s3->unk_008, temp_s2->unk_00);
-    HAL_Strcpy(temp_s3->unk_214->unk_014, temp_s2->unk_00);
-    HAL_Strcpy(temp_s3->unk_214->unk_220, temp_s2->unk_0C);
+    HAL_Strcpy(temp_s3->rosterInfo->unk_014, temp_s2->unk_00);
+    HAL_Strcpy(temp_s3->rosterInfo->unk_220, temp_s2->unk_0C);
 
-    temp_s3->unk_214->unk_003 = (temp_s2->unk_34 >> 8) & 0xFF;
+    temp_s3->rosterInfo->unk_003 = (temp_s2->unk_34 >> 8) & 0xFF;
 
     if (arg3 != 0) {
         Team_ScaleOpponentToLevel(Team_GetHighestPartyLevel());
@@ -524,7 +524,7 @@ void Team_BuildQuickBattleTeams(s16 arg0) {
 
 void Session_SaveContinueData(void) {
     SessionContinueData sp20;
-    ExtendedRosterInfo* sp1C = gSessionContext.battleSides[0].unk_08[0]->unk_214;
+    ExtendedRosterInfo* sp1C = gSessionContext.battleSides[0].teamMember[0]->rosterInfo;
 
     sp20.unk_00 = gSessionContext.mode;
     sp20.unk_01 = gSessionContext.modeSelection;
@@ -533,11 +533,11 @@ void Session_SaveContinueData(void) {
     sp20.unk_03 = gSessionContext.inRound2;
 
     sp20.unk_0D = gSessionContext.gbStarterChoice;
-    sp20.unk_0E = gSessionContext.battleSides[0].unk_08[0]->unk_018;
+    sp20.unk_0E = gSessionContext.battleSides[0].teamMember[0]->unk_018;
 
     _bcopy(gSessionContext.opponentHistory[0], &sp20.unk_05, 8);
-    Text_TranscodeNameWrapper(&sp20.unk_10, &gSessionContext.battleSides[0].unk_08[0]->unk_008);
-    Session_SaveContinueRecord(&sp20, sp1C->unk_028, sp1C->unk_002);
+    Text_TranscodeNameWrapper(&sp20.unk_10, &gSessionContext.battleSides[0].teamMember[0]->unk_008);
+    Session_SaveContinueRecord(&sp20, sp1C->unk_028, sp1C->numberOfPokemonCanBePicked);
     Save_CommitTypedRecord(0x15, 0);
 }
 
@@ -565,7 +565,7 @@ s32 Session_LoadContinueData(void) {
         Team_AddTrainer(1, Trainer_Create(-1, tmp, "COM", Text_GetPlayerLabel(3)));
 
         for (i = 0; i < temp_v0; i++) {
-            Trainer_AddPokemon(gSessionContext.battleSides[0].unk_08[0], &sp58[i]);
+            Trainer_AddPokemon(gSessionContext.battleSides[0].teamMember[0], &sp58[i]);
         }
 
         gSessionContext.sessionFlags |= 3;

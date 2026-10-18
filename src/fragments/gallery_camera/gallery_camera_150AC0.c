@@ -32,7 +32,7 @@ extern u8 D_5001680[];
 extern u8 D_50017E8[];
 
 void GalleryUI_DrawGradientQuad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    unk_D_80068BB0* temp_s1 = GfxImage_GetCurrent();
+    DepthBuffer* temp_s1 = GfxImage_GetCurrent();
     Vtx* temp_s2 = Gfx_AllocDisplayList(sizeof(Vtx) * 4);
     Mtx* sp84 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     Vp* sp80 = Gfx_AllocDisplayList(sizeof(Vp) * 1);
@@ -179,7 +179,7 @@ void GalleryUI_DrawRotatedSprite(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg
     Vec3f spCC;
     Vec3f spC0;
     UNUSED s32 pad;
-    unk_D_80068BB0* spB8;
+    DepthBuffer* spB8;
     Vtx* spB4;
     MtxF* spB0;
     Mtx* spAC;
@@ -243,7 +243,7 @@ void func_86905734(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, u
     s32 a2;
     s16 spF8[4];
     s16 spF0[4];
-    unk_D_80068BB0* spEC;
+    DepthBuffer* spEC;
     Vtx* spE8;
     Mtx* spE4;
     Vp* spE0;
@@ -317,7 +317,7 @@ void GalleryUI_DrawRotateArrowIcon(u8* arg0, s16 arg1, s16 arg2, s16 arg3, s16 a
     f32 a2;
     s16 spE0[4];
     s16 spD8[4];
-    unk_D_80068BB0* spD4;
+    DepthBuffer* spD4;
     Vtx* spD0;
     Mtx* spCC;
     Vp* spC8;
@@ -392,7 +392,7 @@ void GalleryUI_DrawRotateArrowIconMirrored(u8* arg0, s16 arg1, s16 arg2, s16 arg
     f32 temp_fv1;
     s16 spE0[4];
     s16 spD8[4];
-    unk_D_80068BB0* spD4;
+    DepthBuffer* spD4;
     Vtx* spD0;
     Mtx* spCC;
     Vp* spC8;
@@ -463,7 +463,7 @@ void GalleryUI_DrawRotateArrowIconMirrored(u8* arg0, s16 arg1, s16 arg2, s16 arg
 
 void GalleryUI_DrawNicknameRibbonSegment(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9,
                    u8 argA, u8 argB, u8 argC) {
-    unk_D_80068BB0* temp_s1 = GfxImage_GetCurrent();
+    DepthBuffer* temp_s1 = GfxImage_GetCurrent();
     Vtx* temp_s2 = Gfx_AllocDisplayList(sizeof(Vtx) * 4);
     Mtx* spAC = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     Vp* spA8 = Gfx_AllocDisplayList(sizeof(Vp));

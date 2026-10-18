@@ -831,13 +831,8 @@ void LabItem_DrawGamePakInfoCard(s32 arg0, s32 arg1, unk_func_8820EFD8* arg2, s3
             0x0,
             0x3C,
         },
-        {
-            0x88,
-            0x22,
-            0xC,
-            0xD0,
-        },
     };
+    static u32* D_88218040 = D_88220CD0;
 
     Color_RGBA8 sp6C;
     UNUSED s32 pad;

@@ -33,7 +33,7 @@ static u8 D_86A061D9;
 static BinArchive* D_86A061DC;
 static Color_RGBA8_u32 D_86A061E0;
 static GraphNode* D_86A061E4;
-static unk_D_86002F34_00C* D_86A061E8;
+static CameraNode* D_86A061E8;
 static s16 D_86A061EC;
 static s16 D_86A061EE;
 static s16 D_86A061F0;
@@ -195,7 +195,7 @@ void Credits_LoadBackgroundScene(s8 arg0, u8 arg1) {
             Credits_InitCameraKeyframeBlend(D_86A061E8, D_86A025A0[D_86A025C4].unk_02, arg0, arg1);
         }
     } else {
-        D_86A061E8->unk_60.at.y = D_86A03170[arg0][D_86A061D9].unk_10;
+        D_86A061E8->view.targetPosition.y = D_86A03170[arg0][D_86A061D9].unk_10;
         D_86A061F0 = D_86A03170[arg0][D_86A061D9].unk_08;
     }
 }
@@ -208,10 +208,10 @@ void Credits_PollInput(void) {
 
 void Credits_UpdateCamera(void) {
     if (D_86A061D9 < 6) {
-        Camera_ComputeEyeFromAngles(&D_86A061E8->unk_60.at, &D_86A061E8->unk_60.eye, D_86A061F0, D_86A061EC, D_86A061EE);
+        Camera_ComputeEyeFromAngles(&D_86A061E8->view.targetPosition, &D_86A061E8->view.eyePosition, D_86A061F0, D_86A061EC, D_86A061EE);
     } else if (D_86A061D9 < 9) {
-        Camera_ComputeEyeFromAngles(&D_86A06248, &D_86A061E8->unk_60.eye, D_86A061F0, D_86A061EC, D_86A061EE);
-        Camera_ComputeEyeFromAngles(&D_86A06248, &D_86A061E8->unk_60.at, D_86A061F0 + 500.0f, D_86A061EC, D_86A061EE);
+        Camera_ComputeEyeFromAngles(&D_86A06248, &D_86A061E8->view.eyePosition, D_86A061F0, D_86A061EC, D_86A061EE);
+        Camera_ComputeEyeFromAngles(&D_86A06248, &D_86A061E8->view.targetPosition, D_86A061F0 + 500.0f, D_86A061EC, D_86A061EE);
     }
 }
 
@@ -1421,9 +1421,9 @@ void Credits_InitCamera(void) {
     D_86A061EE = 0;
     D_86A061F0 = 0x78;
 
-    D_86A061E8->unk_24.near = 50.0f;
-    D_86A061E8->unk_24.far = 6400.0f;
-    Camera_ComputeEyeFromAngles(&D_86A061E8->unk_60.at, &D_86A061E8->unk_60.eye, D_86A061F0, D_86A061EC, D_86A061EE);
+    D_86A061E8->perspective.nearPlane = 50.0f;
+    D_86A061E8->perspective.farPlane = 6400.0f;
+    Camera_ComputeEyeFromAngles(&D_86A061E8->view.targetPosition, &D_86A061E8->view.eyePosition, D_86A061F0, D_86A061EC, D_86A061EE);
 }
 
 void Credits_InitScene(s32 arg0) {

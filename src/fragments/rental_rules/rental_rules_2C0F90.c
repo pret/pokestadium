@@ -85,7 +85,13 @@ void RentalRules_PopupDraw(void) {
             Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             Font_SetLineHeight(0x18);
             Font_Printf(0x50, y + 6, D_83003CE0.unk_00[rules_text_index]);
+#if defined(VERSION_JP)
+            // The Japanese build clears the active index with -1 here (the call before the
+            // first Font_Printf still passes 0).
+            Font_SetActive(8, -1);
+#else
             Font_SetActive(8, 0);
+#endif
             Font_Printf(0x50, y + 40, D_83003DE0.unk_00[rules_text_index]);
             Font_EndTexturedTextRendering();
         }
