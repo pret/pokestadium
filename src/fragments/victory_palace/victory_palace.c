@@ -2701,7 +2701,7 @@ void HallOfFame_InitGallery(void) {
 }
 
 s32 HallOfFame_Main(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     D_8267E750 = 0;
 

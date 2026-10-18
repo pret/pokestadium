@@ -52,7 +52,7 @@ void Minigame2SampleViewer_DrawBackgroundTiles(u8* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Minigame2SampleViewer_DrawFrame(void) {
@@ -103,7 +103,7 @@ void Minigame2SampleViewer_Init(void) {
 }
 
 s32 func_82900390(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MTWO');
 

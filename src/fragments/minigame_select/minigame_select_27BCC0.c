@@ -3,8 +3,8 @@
 #include "src/model_renderer.h"
 #include "src/graphics_textures.h"
 #include "src/input.h"
-extern Gfx D_8006F518[];
-extern Gfx D_8006F630[];
+extern Gfx gUiEnvTintTextureDL[];
+extern Gfx gUiRestoreTextureDL[];
 void Ui_DrawGradientPanel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGB8* arg4, Color_RGB8* arg5);
 extern void Ui_DrawTextureMarker();
 #include "src/save_data.h"
@@ -1216,7 +1216,7 @@ void MiniGameSelect_RenderPlayerPanel(unk_D_82508B30* arg0) {
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_038);
     GfxImage_FillCurrent(&gDisplayListHead, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 128);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
 
@@ -1230,8 +1230,8 @@ void MiniGameSelect_RenderPlayerPanel(unk_D_82508B30* arg0) {
         var_s2 += 0xBB8;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 4; i++) {
         if (D_8780FA30[i] == 0) {
@@ -1244,7 +1244,7 @@ void MiniGameSelect_RenderPlayerPanel(unk_D_82508B30* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 const char D_82508A20[] = "コンピュータのつよさ";
@@ -1259,7 +1259,7 @@ void MiniGameSelect_RenderNumberSpinner(unk_D_82508B30* arg0) {
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_038);
     GfxImage_FillCurrent(&gDisplayListHead, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 128);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
 
@@ -1273,7 +1273,7 @@ void MiniGameSelect_RenderNumberSpinner(unk_D_82508B30* arg0) {
         var_s2 += 0xBB8;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if ((D_8250A2FC == 1) || (D_8250A2FC == 2)) {
         var_v1 = D_8250A288.unk_04 - 1;
@@ -1890,7 +1890,7 @@ void func_8250281C(void) {
             ptr = (s32)&D_8780FA48;
 
             if (*(s16*)ptr >= 0) {
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 
             sp44 = *(s16*)ptr;
@@ -1900,7 +1900,7 @@ void func_8250281C(void) {
                 Widget_DrawPlayerIcon(-1 - sp44, (sp40 + var_a2) - 0x20, sp38 - 2, 1.0f);
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         }
         }
     }
@@ -2646,7 +2646,7 @@ void MiniGameSelect_LoadScene(void) {
 }
 
 s32 MiniGameSelect_Entry(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
     BinArchive* temp_v0;
 
     main_pool_push_state('KIDC');

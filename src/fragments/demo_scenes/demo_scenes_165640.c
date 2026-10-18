@@ -443,7 +443,7 @@ void Intro_SetupTextPanel(unk_D_86B0FA50* arg0, u8* arg1, f32 arg2, s16 arg3, s1
 }
 
 void Intro_ConfigureTextPanels(void) {
-    if (gSessionContext.unk_11F2 == 1) {
+    if (gSessionContext.inRound2 == 1) {
         Intro_SetupTextPanel(D_86B0FA60, &D_300C6D0, -250.0f, 0xC8, 0x18, 0x18);
     }
 
@@ -725,7 +725,7 @@ void Intro_DrawTextPanels(void) {
                 UI_DrawGradientTexture(D_86B0FA58->unk_80, D_86B0FA58->unk_98, D_86B0FA58->unk_9C, D_86B0FA58->unk_9E,
                               D_86B0FA58->unk_A0, &D_86B0FA54->unk_B0);
 
-                if (gSessionContext.unk_11F2 == 1) {
+                if (gSessionContext.inRound2 == 1) {
                     UI_DrawTextureRgba16(D_86B0FA60->unk_80, (s16)D_86B0FA58->unk_98 + D_86B0FA58->unk_9E,
                                   D_86B0FA58->unk_9C - 2, D_86B0FA60->unk_9E, D_86B0FA60->unk_A0);
                 }
@@ -776,7 +776,7 @@ void Intro_DrawTextPanels(void) {
                 UI_DrawGradientTexture(D_86B0FA58->unk_80, D_86B0FA58->unk_98, D_86B0FA58->unk_9C, D_86B0FA58->unk_9E,
                               D_86B0FA58->unk_A0, D_86B0DD40);
 
-                if (gSessionContext.unk_11F2 == 1) {
+                if (gSessionContext.inRound2 == 1) {
                     UI_DrawTextureRgba16(D_86B0FA60->unk_80, (s16)D_86B0FA58->unk_98 + D_86B0FA58->unk_9E,
                                   D_86B0FA58->unk_9C - 2, D_86B0FA60->unk_9E, D_86B0FA60->unk_A0);
                 }
@@ -1079,7 +1079,7 @@ void Stage_LoadModels(void) {
 }
 
 s32 Stage_ShowIntro(void) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('DEMO');
 

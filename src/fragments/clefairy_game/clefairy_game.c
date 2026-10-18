@@ -566,7 +566,7 @@ void ClefairyGame_DrawOverlay(s32 arg0) {
             break;
 
         default:
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_861054A8);
 
             for (i = 0; i < 4; i++) {
@@ -579,7 +579,7 @@ void ClefairyGame_DrawOverlay(s32 arg0) {
                 }
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             break;
     }
 
@@ -677,7 +677,7 @@ void ClefairyGame_DrawOverlay(s32 arg0) {
     Font_EndTexturedTextRendering();
 
     if (arg0 == 0) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Widget_DrawAnimIcon24(0x56, 0xAC, D_86104A1C);
         Widget_DrawAnimIcon16C(0x74, 0xC6, D_861049F4);
@@ -1892,7 +1892,7 @@ s32 ClefairyGame_DetermineWinner(void) {
 }
 
 void ClefairyGame_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MINI');
 
