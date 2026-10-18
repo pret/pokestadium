@@ -1033,9 +1033,9 @@ extern s16 D_8439039C;
 extern s16 D_8439039E;
 extern s16 D_843903A0;
 extern f32 D_84392058[26];
-extern u8* gBattleAnimAssetPointers[256];
-extern s16 gBattleAnimResourceList[0x10];
-extern arg1_func_80019420* gBattleAnimResourceTablePointers[40];
+extern u8* sBattleAnimAssetPointers[256];
+extern s16 sBattleAnimResourceList[0x10];
+extern arg1_func_80019420* sBattleAnimResourceTablePointers[40];
 
 
 
@@ -1835,10 +1835,10 @@ void BattleAnim_StopOwnerCategoryParticles(u8 arg0, ActivePokemon* arg1);
 void BattleAnim_RegisterAssetTable(arg1_func_80019420* arg0);
 void BattleAnim_ResetAssetTable(void);
 void BattleAnim_BuildResourceListForMove(s16 arg0);
-void BattleAnim_LoadMoveResourceList(BattleSessionTeams* arg0, s16 move);
+void BattleAnim_LoadMoveResourceList(BattleSessionTeams* battle_session_teams, s16 move_id);
 void BattleAnim_LoadModeResourceList(BattleSessionTeams* arg0, s16 arg1);
 void BattleAnim_RegisterAllAssetTables(void);
-void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* arg0);
+void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* battle_session_teams);
 void BattleAnim_ResetDisplayContexts(void);
 Particle* BattleAnim_GetOwnerContextParticle(DisplayObject* arg0);
 DisplayObject* BattleAnim_AllocOwnerDisplayContext(Particle* arg0);

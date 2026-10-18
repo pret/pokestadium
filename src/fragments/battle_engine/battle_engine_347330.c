@@ -615,10 +615,10 @@ Gfx* RibbonMesh_DrawPool(Gfx* arg0) {
 
     gSPDisplayList(arg0++, D_84388E88);
     gDPPipeSync(arg0++);
-    gDPLoadTextureTile_4b(arg0++, gBattleAnimAssetPointers[0x43], G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureTile_4b(arg0++, sBattleAnimAssetPointers[0x43], G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPSetTileSize(arg0++, G_TX_RENDERTILE, D_843951C0, 0, (D_843951C0 + 0x1F), 0x001F);
-    gDPLoadMultiTile_4b(arg0++, gBattleAnimAssetPointers[0x44], 0x0100, 1, G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0,
+    gDPLoadMultiTile_4b(arg0++, sBattleAnimAssetPointers[0x44], 0x0100, 1, G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPSetTileSize(arg0++, 1, D_843951C2, 0, (D_843951C2 + 0x1F), 0x001F);
 
@@ -1072,11 +1072,11 @@ Gfx* TerrainGrid_Draw(Gfx* arg0) {
     gDPSetEnvColor(arg0++, 0, 0x64, 0xC8, var_a2);
     gDPSetBlendColor(arg0++, 255, 255, 255, 255);
 
-    gDPLoadTextureTile_4b(arg0++, gBattleAnimAssetPointers[0xB8], G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureTile_4b(arg0++, sBattleAnimAssetPointers[0xB8], G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 1, 1);
     gDPSetTileSize(arg0++, G_TX_RENDERTILE, D_843975E0, -D_843975E0, D_843975E0 + 0x1F, 0x1F - D_843975E0);
 
-    gDPLoadMultiTile_4b(arg0++, gBattleAnimAssetPointers[0xB9], 0x0100, 1, G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0,
+    gDPLoadMultiTile_4b(arg0++, sBattleAnimAssetPointers[0xB9], 0x0100, 1, G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 1, 1);
     gDPSetTileSize(arg0++, 1, D_843975E2, D_843975E2, D_843975E2 + 0x1F, D_843975E2 + 0x1F);
 
@@ -1131,10 +1131,10 @@ Gfx* TerrainGrid_Draw(Gfx* arg0) {
         temp_v0[3].v.tc[1] = 0x3E0;
 
         gSPDisplayList(arg0++, D_84388FF8);
-        gDPLoadTextureTile_4b(arg0++, gBattleAnimAssetPointers[0xBA], G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
+        gDPLoadTextureTile_4b(arg0++, sBattleAnimAssetPointers[0xBA], G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
                               G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 15, G_TX_NOLOD);
         gDPSetTileSize(arg0++, G_TX_RENDERTILE, D_843975E4, 0, D_843975E4 + 0x1F, 0x001F);
-        gDPLoadMultiTile_4b(arg0++, gBattleAnimAssetPointers[0xBA], 0x0100, 1, G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0,
+        gDPLoadMultiTile_4b(arg0++, sBattleAnimAssetPointers[0xBA], 0x0100, 1, G_IM_FMT_I, 32, 0, 0, 0, 31, 31, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 14, G_TX_NOLOD);
         gDPSetTileSize(arg0++, 1, -D_843975E4, 0, 0x1F - D_843975E4, 0x001F);
         gSPVertex(arg0++, temp_v0, 4, 0);

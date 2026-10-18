@@ -323,7 +323,7 @@ Gfx* Trail40_Draw(Gfx* arg0) {
 
     Trail40_Reset();
 
-    gDPLoadTextureBlock(arg0++, gBattleAnimAssetPointers[0xA8], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(arg0++, sBattleAnimAssetPointers[0xA8], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPDisplayList(arg0++, D_84389328);
     gDPSetPrimColor(arg0++, 0, 0, 255, 255, 255, D_8439CA60.unk_0004);

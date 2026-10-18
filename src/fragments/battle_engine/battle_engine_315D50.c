@@ -148,7 +148,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod4_32x32,
         ParticleGfx_DrawBillboardPrim,
-        &gBattleAnimAssetPointers[4],
+        &sBattleAnimAssetPointers[4],
     },
     {
         0x00,
@@ -156,7 +156,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod8_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[5],
+        &sBattleAnimAssetPointers[5],
     },
     {
         0x00,
@@ -164,7 +164,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod10_32x64,
         ParticleGfx_DrawBillboardPrimEnvQuadVariantA,
-        &gBattleAnimAssetPointers[20],
+        &sBattleAnimAssetPointers[20],
     },
     {
         0x00,
@@ -172,7 +172,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod10_32x64,
         ParticleGfx_DrawBillboardPrimEnvQuadVariantC,
-        &gBattleAnimAssetPointers[20],
+        &sBattleAnimAssetPointers[20],
     },
     {
         0x00,
@@ -180,7 +180,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod8_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[5],
+        &sBattleAnimAssetPointers[5],
     },
     {
         0x00,
@@ -188,7 +188,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod8_32x32,
         ParticleGfx_DrawBillboardTextureAlphaRotatedQuad,
-        &gBattleAnimAssetPointers[5],
+        &sBattleAnimAssetPointers[5],
     },
     {
         0x00,
@@ -196,7 +196,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod10_32x64,
         ParticleGfx_DrawBillboardPrimEnvQuadVariantC,
-        &gBattleAnimAssetPointers[20],
+        &sBattleAnimAssetPointers[20],
     },
     {
         0x00,
@@ -204,7 +204,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x64,
         ParticleGfx_DrawBillboardPrimEnvQuadVariantA,
-        &gBattleAnimAssetPointers[9],
+        &sBattleAnimAssetPointers[9],
     },
     {
         0x00,
@@ -212,7 +212,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4_32x32,
         ParticleGfx_DrawBillboardPrim,
-        &gBattleAnimAssetPointers[3],
+        &sBattleAnimAssetPointers[3],
     },
     {
         0x00,
@@ -220,7 +220,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[23],
+        &sBattleAnimAssetPointers[23],
     },
     {
         0x00,
@@ -228,7 +228,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[14],
+        &sBattleAnimAssetPointers[14],
     },
     {
         0x00,
@@ -236,7 +236,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[17],
+        &sBattleAnimAssetPointers[17],
     },
     {
         0x00,
@@ -244,7 +244,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[14],
+        &sBattleAnimAssetPointers[14],
     },
     {
         0x00,
@@ -252,7 +252,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4TileParticleFrame_24x24,
         ParticleGfx_DrawBillboardPrimEnv,
-        &gBattleAnimAssetPointers[8],
+        &sBattleAnimAssetPointers[8],
     },
     {
         0x00,
@@ -260,7 +260,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4TileParticleFrame_24x24,
         ParticleGfx_DrawBillboardPrimEnv,
-        &gBattleAnimAssetPointers[8],
+        &sBattleAnimAssetPointers[8],
     },
     {
         0x00,
@@ -268,7 +268,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4TileParticleFrame_24x24,
         ParticleGfx_DrawBillboardDoubleSided,
-        &gBattleAnimAssetPointers[8],
+        &sBattleAnimAssetPointers[8],
     },
     {
         0x00,
@@ -276,7 +276,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod8_64x64,
         ParticleGfx_DrawBillboardPrimEnvComposite,
-        &gBattleAnimAssetPointers[18],
+        &sBattleAnimAssetPointers[18],
     },
     {
         0x00,
@@ -284,7 +284,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[17],
+        &sBattleAnimAssetPointers[17],
     },
     {
         0x00,
@@ -292,7 +292,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[17],
+        &sBattleAnimAssetPointers[17],
     },
     {
         0x00,
@@ -300,7 +300,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod8_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[5],
+        &sBattleAnimAssetPointers[5],
     },
     {
         0x00,
@@ -308,7 +308,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod8_64x64,
         ParticleGfx_DrawBillboardPrimEnvComposite,
-        &gBattleAnimAssetPointers[18],
+        &sBattleAnimAssetPointers[18],
     },
     {
         0x00,
@@ -316,7 +316,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[23],
+        &sBattleAnimAssetPointers[23],
     },
     {
         0x00,
@@ -324,7 +324,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameMod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[13],
+        &sBattleAnimAssetPointers[13],
     },
     {
         0x00,
@@ -332,7 +332,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv4Mod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[13],
+        &sBattleAnimAssetPointers[13],
     },
     {
         0x00,
@@ -340,7 +340,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod8_64x64,
         ParticleGfx_DrawBillboardPrimEnvComposite,
-        &gBattleAnimAssetPointers[18],
+        &sBattleAnimAssetPointers[18],
     },
     {
         0x00,
@@ -348,7 +348,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[23],
+        &sBattleAnimAssetPointers[23],
     },
     {
         0x00,
@@ -356,7 +356,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4_64x64,
         ParticleGfx_DrawBillboardPrimEnvTriangleDoubleSided,
-        &gBattleAnimAssetPointers[11],
+        &sBattleAnimAssetPointers[11],
     },
     {
         0x00,
@@ -364,7 +364,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[82],
+        &sBattleAnimAssetPointers[82],
     },
     {
         0x00,
@@ -372,7 +372,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4_32x32,
         ParticleGfx_DrawBillboardPrimEnvRotatedQuad,
-        &gBattleAnimAssetPointers[16],
+        &sBattleAnimAssetPointers[16],
     },
     {
         0x00,
@@ -380,7 +380,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[84],
+        &sBattleAnimAssetPointers[84],
     },
     {
         0x00,
@@ -388,7 +388,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[169],
+        &sBattleAnimAssetPointers[169],
     },
     {
         0x00,
@@ -396,7 +396,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[172],
+        &sBattleAnimAssetPointers[172],
     },
     {
         0x00,
@@ -404,7 +404,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[166],
+        &sBattleAnimAssetPointers[166],
     },
     {
         0x00,
@@ -412,7 +412,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[167],
+        &sBattleAnimAssetPointers[167],
     },
     {
         0x00,
@@ -420,7 +420,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -428,7 +428,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -436,7 +436,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_64x64,
         ParticleGfx_DrawBillboardPrimEnvComposite,
-        &gBattleAnimAssetPointers[89],
+        &sBattleAnimAssetPointers[89],
     },
     {
         0x00,
@@ -444,7 +444,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8_32x32,
         ParticleGfx_DrawBillboardPrimEnvRotatedQuad,
-        &gBattleAnimAssetPointers[95],
+        &sBattleAnimAssetPointers[95],
     },
     {
         0x01,
@@ -452,7 +452,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8_32x32,
         BattleAnim_DrawAsset95Ia8Billboard,
-        &gBattleAnimAssetPointers[95],
+        &sBattleAnimAssetPointers[95],
     },
     {
         0x00,
@@ -460,7 +460,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[2],
+        &sBattleAnimAssetPointers[2],
     },
     {
         0x00,
@@ -468,7 +468,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[100],
+        &sBattleAnimAssetPointers[100],
     },
     {
         0x00,
@@ -476,7 +476,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvNoiseQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -484,7 +484,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvNoiseQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -492,7 +492,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[101],
+        &sBattleAnimAssetPointers[101],
     },
     {
         0x00,
@@ -500,7 +500,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -508,7 +508,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4WrapST_64x64,
         ParticleGfx_DrawBillboardPrimEnvTransformedQuad,
-        &gBattleAnimAssetPointers[63],
+        &sBattleAnimAssetPointers[63],
     },
     {
         0x00,
@@ -516,7 +516,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8WrapST_64x64,
         ParticleGfx_DrawBillboardPrimEnvTransformedQuad,
-        &gBattleAnimAssetPointers[112],
+        &sBattleAnimAssetPointers[112],
     },
     {
         0x00,
@@ -524,7 +524,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardOffsetQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -532,7 +532,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x64,
         ParticleGfx_DrawBillboardPrimEnvQuadVariantB,
-        &gBattleAnimAssetPointers[117],
+        &sBattleAnimAssetPointers[117],
     },
     {
         0x00,
@@ -540,7 +540,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[122],
+        &sBattleAnimAssetPointers[122],
     },
     {
         0x00,
@@ -548,7 +548,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[82],
+        &sBattleAnimAssetPointers[82],
     },
     {
         0x00,
@@ -556,7 +556,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8_32x32,
         ParticleGfx_DrawBillboardPrimEnvRotatedQuad,
-        &gBattleAnimAssetPointers[95],
+        &sBattleAnimAssetPointers[95],
     },
     {
         0x00,
@@ -564,7 +564,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0001,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvRotatedQuad,
-        &gBattleAnimAssetPointers[82],
+        &sBattleAnimAssetPointers[82],
     },
     {
         0x00,
@@ -572,7 +572,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardPrimEnvRotatedQuad,
-        &gBattleAnimAssetPointers[82],
+        &sBattleAnimAssetPointers[82],
     },
     {
         0x00,
@@ -580,7 +580,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4ParticleFrame_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[83],
+        &sBattleAnimAssetPointers[83],
     },
     {
         0x00,
@@ -588,7 +588,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackI4FrameDiv2Mod4_32x32,
         ParticleGfx_DrawBillboardPrimEnvQuad,
-        &gBattleAnimAssetPointers[14],
+        &sBattleAnimAssetPointers[14],
     },
     {
         0x00,
@@ -596,7 +596,7 @@ ParticleDescriptorChild gParticleDescriptorChildren[] = {
         0x0000,
         ParticleGfx_LoadTextureCallbackIa8Frame_32x32,
         ParticleGfx_DrawBillboardTextureAlphaRotatedQuad,
-        &gBattleAnimAssetPointers[17],
+        &sBattleAnimAssetPointers[17],
     },
 };
 
@@ -4832,7 +4832,7 @@ void BattleAnim_RegisterAssetTable(arg1_func_80019420* arg0) {
     if (arg0 != NULL) {
         do {
             if (arg0->unk_02 != 0) {
-                gBattleAnimAssetPointers[arg0->unk_02] = arg0->unk_04;
+                sBattleAnimAssetPointers[arg0->unk_02] = arg0->unk_04;
                 arg0++;
             }
         } while (arg0->unk_00 != 0);
@@ -4843,7 +4843,7 @@ void BattleAnim_ResetAssetTable(void) {
     s32 i;
 
     // clang-format off
-    for (i = 0; i < 256; i++) { gBattleAnimAssetPointers[i] = NULL; }
+    for (i = 0; i < 256; i++) { sBattleAnimAssetPointers[i] = NULL; }
     // clang-format on
 
     BattleAnim_RegisterAssetTable(BattleAnim_LoadResourceTable(0));
@@ -4854,50 +4854,50 @@ void BattleAnim_BuildResourceListForMove(s16 arg0) {
     u8* temp_a1 = gMoveAnimEffectScripts[arg0][3];
 
     while (*temp_a1 != 0x3F) {
-        gBattleAnimResourceList[var_v0] = *temp_a1;
+        sBattleAnimResourceList[var_v0] = *temp_a1;
         temp_a1++;
         var_v0++;
     }
 
     temp_a1 = gMoveAnimEffectScripts[arg0][4];
     while (*temp_a1 != 0x3F) {
-        gBattleAnimResourceList[var_v0] = *temp_a1;
+        sBattleAnimResourceList[var_v0] = *temp_a1;
         temp_a1++;
         var_v0++;
     }
 
-    gBattleAnimResourceList[var_v0] = -1;
+    sBattleAnimResourceList[var_v0] = -1;
 }
 
-void BattleAnim_LoadMoveResourceList(BattleSessionTeams* arg0, s16 move) {
-    if (move != 0xFF) {
-        BattleAnim_BuildResourceListForMove(move);
-        arg0->isBusy |= 0x80;
-        arg0->unk_20 = gBattleAnimResourceList;
-        arg0->unk_24 = gBattleAnimResourceTablePointers;
+void BattleAnim_LoadMoveResourceList(BattleSessionTeams* battle_session_teams, s16 move_id) {
+    if (move_id != 0xFF) {
+        BattleAnim_BuildResourceListForMove(move_id);
+        battle_session_teams->assetIsBusy |= 0x80;
+        battle_session_teams->unk_20 = sBattleAnimResourceList;
+        battle_session_teams->unk_24 = sBattleAnimResourceTablePointers;
     }
 }
 
-void BattleAnim_LoadModeResourceList(BattleSessionTeams* arg0, s16 arg1) {
-    s32 var_v0 = 0;
-    u8* var_v1 = D_84386D44[arg1][1];
+void BattleAnim_LoadModeResourceList(BattleSessionTeams* battle_session_teams, s16 mode) {
+    s32 index = 0;
+    u8* var_v1 = D_84386D44[mode][1];
 
     while (*var_v1 != 0x3F) {
-        gBattleAnimResourceList[var_v0] = *var_v1;
+        sBattleAnimResourceList[index] = *var_v1;
         var_v1++;
-        var_v0++;
+        index++;
     }
 
-    gBattleAnimResourceList[var_v0] = -1;
-    arg0->unk_20 = gBattleAnimResourceList;
-    arg0->isBusy |= 0x80;
-    arg0->unk_24 = gBattleAnimResourceTablePointers;
+    sBattleAnimResourceList[index] = -1;
+    battle_session_teams->unk_20 = sBattleAnimResourceList;
+    battle_session_teams->assetIsBusy |= 0x80;
+    battle_session_teams->unk_24 = sBattleAnimResourceTablePointers;
 }
 
 void BattleAnim_RegisterAllAssetTables(void) {
     s32 i = 0;
     arg1_func_80019420* var_v0;
-    arg1_func_80019420** var_s1 = gBattleAnimResourceTablePointers;
+    arg1_func_80019420** var_s1 = sBattleAnimResourceTablePointers;
 
     while (*var_s1 != NULL) {
         var_v0 = *var_s1;
@@ -4908,8 +4908,8 @@ void BattleAnim_RegisterAllAssetTables(void) {
     }
 }
 
-void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* arg0) {
-    arg0->isBusy &= ~0x10;
+void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* battle_session_teams) {
+    battle_session_teams->assetIsBusy &= ~0x10;
     BattleAnim_RegisterAllAssetTables();
 }
 
@@ -5007,8 +5007,8 @@ void BattleAnim_FreeParticleDisplayContext(DisplayObject* arg0) {
 }
 
 void BattleAnim_InitModelWithAnim(DisplayObject* arg0, s16 arg1, s16 arg2) {
-    Model_InitDisplayObject(arg0, 0, 0, gBattleAnimAssetPointers[arg1]);
-    ModelAnim_BindTransformCurve(arg0, 0, gBattleAnimAssetPointers[arg2], 0x10000);
+    Model_InitDisplayObject(arg0, 0, 0, sBattleAnimAssetPointers[arg1]);
+    ModelAnim_BindTransformCurve(arg0, 0, sBattleAnimAssetPointers[arg2], 0x10000);
 }
 
 void BattleAnim_SetModelAnimFrame(DisplayObject* arg0, s16 arg1) {
@@ -5016,15 +5016,15 @@ void BattleAnim_SetModelAnimFrame(DisplayObject* arg0, s16 arg1) {
 }
 
 void BattleAnim_InitModel(DisplayObject* arg0, s16 arg1) {
-    Model_InitDisplayObject(arg0, 0, 0, gBattleAnimAssetPointers[arg1]);
+    Model_InitDisplayObject(arg0, 0, 0, sBattleAnimAssetPointers[arg1]);
 }
 
 void BattleAnim_BindModelAnim(DisplayObject* arg0, s16 arg1) {
-    ModelAnim_BindTransformCurve(arg0, 0, gBattleAnimAssetPointers[arg1], 0x10000);
+    ModelAnim_BindTransformCurve(arg0, 0, sBattleAnimAssetPointers[arg1], 0x10000);
 }
 
 void BattleAnim_BindModelAnimReversed(DisplayObject* arg0, s16 arg1) {
-    ModelAnim_BindTransformCurve(arg0, 0, gBattleAnimAssetPointers[arg1], -0x10000);
+    ModelAnim_BindTransformCurve(arg0, 0, sBattleAnimAssetPointers[arg1], -0x10000);
     ModelAnim_SetFrame(arg0, arg0->transformAnim.data->endFrame - 1);
 }
 

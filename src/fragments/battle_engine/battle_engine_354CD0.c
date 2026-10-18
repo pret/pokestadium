@@ -235,7 +235,7 @@ Gfx* Trail50Effect_Draw(Gfx* arg0) {
     s16 var_s3;
     f32 tmp;
 
-    gDPLoadTextureBlock(arg0++, gBattleAnimAssetPointers[0x1E], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(arg0++, sBattleAnimAssetPointers[0x1E], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     var_s5 = &D_843ADA80[0];
