@@ -1,6 +1,7 @@
-# Diagnostics/indexing only; compile flags live in compile_flags.txt
-# so include paths resolve relative to the repo root.
+# Editor analysis only; see docs/clangd.md. A compilation database enumerates
+# every game translation unit so unopened files can be background-indexed.
 CompileFlags:
+  CompilationDatabase: build/clangd
   Compiler: cc
 
 Diagnostics:

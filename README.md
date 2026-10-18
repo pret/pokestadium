@@ -40,6 +40,23 @@ To install them simply run in a terminal:
 python3 -m pip install -r requirements.txt
 ```
 
+# Editor setup and cross-file renaming
+
+For VS Code, install the recommended **clangd** extension and run:
+
+```sh
+python3 tools/clangd_config.py
+```
+
+Then restart the clangd language server and let background indexing finish before
+using F2 on shared symbols. The workspace task can keep the database current
+automatically, including source-file additions and moves; ordinary identifier
+renames do not require regenerating it. No ROM, IDO compiler, or custom VS Code
+extension is needed for this editor setup.
+
+See [docs/clangd.md](docs/clangd.md) for automatic-task permissions, regional
+analysis views, verification, and the limits of C-aware rename.
+
 # To use
 1. Place the supported Pokemon Stadium rom into the repository's "/baseroms/" folder as "baserom.z64", using the correct subfolder for your version.
 2. Set up tools and extract the rom: `make init VERSION={version}`
