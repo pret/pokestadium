@@ -5,14 +5,14 @@
 <!-- AUTO_COVERAGE:START -->
 - Functions with C implementations: **7,437 / 7,437 (100.0%)**
 - Remaining decompilable `GLOBAL_ASM` owners: **0** (across 0 source files)
-- Separately managed `hasm` assembly segments: **9**
+- Separately managed `hasm` assembly segments: **10**
 - `de`: **242 / 340** shared C files built, **2,197** functions open across 98 files
 - `es`: **238 / 340** shared C files built, **2,359** functions open across 102 files
 - `eu`: **276 / 340** shared C files built, **1,281** functions open across 64 files
 - `eu_rev1`: **245 / 340** shared C files built, **1,891** functions open across 95 files
 - `fr`: **238 / 340** shared C files built, **2,359** functions open across 102 files
 - `it`: **236 / 340** shared C files built, **2,381** functions open across 104 files
-- `jp`: **157 / 340** shared C files built, **4,552** functions open across 183 files
+- `jp`: **169 / 340** shared C files built, **4,418** functions open across 171 files
 - `us_rev1`: **340 / 340** shared C files built, **0** functions open across 0 files
 - `us_rev2`: **340 / 340** shared C files built, **0** functions open across 0 files
 <!-- AUTO_COVERAGE:END -->
@@ -644,7 +644,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/audio_sfx.c` | 1 |
 | `src/audio_stream.c` | 12 |
 | `src/battle_hud.c` | 10 |
-| `src/controller.c` | 12 |
 | `src/controller_ram.c` | 4 |
 | `src/cry.c` | 2 |
 | `src/display_object_textures.c` | 1 |
@@ -654,7 +653,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/61/fragment61_2DD710.c` | 39 |
 | `src/fragments/61/fragment61_2DFB60.c` | 41 |
 | `src/fragments/area_select/area_select.c` | 31 |
-| `src/fragments/battle_engine/battle_engine_2EA8E0.c` | 26 |
 | `src/fragments/battle_engine/battle_engine_2EC3C0.c` | 121 |
 | `src/fragments/battle_engine/battle_engine_2F23A0.c` | 59 |
 | `src/fragments/battle_engine/battle_engine_2F74E0.c` | 54 |
@@ -671,6 +669,7 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/battle_engine/battle_engine_359F90.c` | 54 |
 | `src/fragments/battle_engine/battle_engine_35DF70.c` | 38 |
 | `src/fragments/battle_engine/battle_engine_361050.c` | 1 |
+| `src/fragments/battle_engine/battle_engine_main.c` | 26 |
 | `src/fragments/battle_order_select/battle_order_select.c` | 1 |
 | `src/fragments/battle_prep/battle_prep_394120.c` | 41 |
 | `src/fragments/battle_prep/battle_prep_397B10.c` | 44 |
@@ -689,11 +688,9 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/cup_select/cup_select.c` | 11 |
 | `src/fragments/demo_scenes/demo_scenes_15F9B0.c` | 1 |
 | `src/fragments/demo_scenes/demo_scenes_15FA60.c` | 30 |
-| `src/fragments/demo_scenes/demo_scenes_160CB0.c` | 7 |
 | `src/fragments/demo_scenes/demo_scenes_161590.c` | 3 |
 | `src/fragments/demo_scenes/demo_scenes_161E60.c` | 38 |
 | `src/fragments/demo_scenes/demo_scenes_165640.c` | 35 |
-| `src/fragments/demo_scenes/demo_scenes_168110.c` | 12 |
 | `src/fragments/demo_scenes/demo_scenes_169A40.c` | 9 |
 | `src/fragments/demo_scenes/demo_scenes_16A0E0.c` | 18 |
 | `src/fragments/drowzee_game/drowzee_game.c` | 20 |
@@ -724,7 +721,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/gb_tower_team_prep/gb_tower_team_prep.c` | 4 |
 | `src/fragments/gym_leader_castle/gym_leader_castle.c` | 1 |
 | `src/fragments/gym_leader_castle_clear/gym_leader_castle_clear.c` | 23 |
-| `src/fragments/jigglypuff_doodle/jigglypuff_doodle.c` | 18 |
 | `src/fragments/lab_pc/lab_pc_1A8800.c` | 13 |
 | `src/fragments/lab_pc/lab_pc_1A9780.c` | 55 |
 | `src/fragments/lab_pc/lab_pc_1AE680.c` | 70 |
@@ -741,8 +737,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/minigame_actor_framework/minigame_actor_framework_1193E0.c` | 6 |
 | `src/fragments/minigame_actor_framework/minigame_actor_framework_11BBF0.c` | 6 |
 | `src/fragments/minigame_sample2_viewer/minigame_sample2_viewer.c` | 6 |
-| `src/fragments/minigame_sample7_viewer/minigame_sample7_viewer.c` | 10 |
-| `src/fragments/minigame_sample8_viewer/minigame_sample8_viewer.c` | 10 |
 | `src/fragments/minigame_select/minigame_select_27BCC0.c` | 49 |
 | `src/fragments/minigame_select/minigame_select_2804C0.c` | 19 |
 | `src/fragments/n64_logo/n64_logo.c` | 5 |
@@ -762,7 +756,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/rattata_game/rattata_game.c` | 30 |
 | `src/fragments/rental_hub/rental_hub.c` | 17 |
 | `src/fragments/rental_rules/rental_rules_2BED40.c` | 26 |
-| `src/fragments/rental_rules/rental_rules_2C0F90.c` | 10 |
 | `src/fragments/rental_rules/rental_rules_2C13F0.c` | 19 |
 | `src/fragments/rental_team_selection/rental_team_selection_2DB900.c` | 25 |
 | `src/fragments/rental_team_selection/rental_team_selection_2E2C20.c` | 15 |
@@ -773,7 +766,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/fragments/snap_print_club_print_seals/snap_print_club_print_seals.c` | 4 |
 | `src/fragments/stadium_select/stadium_select.c` | 17 |
 | `src/fragments/sushi_game/sushi_game_144300.c` | 14 |
-| `src/fragments/sushi_game/sushi_game_1462A0.c` | 41 |
 | `src/fragments/title_screen/title_screen.c` | 19 |
 | `src/fragments/trade_machine/trade_machine_287ED0.c` | 31 |
 | `src/fragments/trade_machine/trade_machine_289240.c` | 29 |
@@ -802,11 +794,8 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/libleo/leocmdex.c` | 2 |
 | `src/libleo/leofunc.c` | 5 |
 | `src/libleo/leomecha.c` | 22 |
-| `src/libleo/leord_diskid.c` | 1 |
 | `src/libnaudio/n_drvrNew.c` | 2 |
-| `src/libnaudio/n_resample.c` | 2 |
 | `src/libnaudio/n_reverb.c` | 6 |
-| `src/libnaudio/n_sl.c` | 2 |
 | `src/minigame_dispatch.c` | 1 |
 | `src/model_renderer.c` | 18 |
 | `src/model_renderer_callbacks.c` | 11 |
@@ -820,7 +809,6 @@ Shared C files the US build compiles that `jp` still builds from its own disasse
 | `src/table_view.c` | 24 |
 | `src/text_system.c` | 7 |
 | `src/ui_graphics.c` | 17 |
-| `src/util.c` | 9 |
 
 ## Open candidates for `us_rev1`
 
@@ -851,3 +839,4 @@ These YAML `hasm` entries are kept as assembly by design and are not counted as 
 | `yamls/us/rom.yaml` | `0x49190` | `libgsm` |
 | `yamls/us/rom.yaml` | `0x517A0` | `yay0 audio decoder` |
 | `yamls/us/rom.yaml` | `0x89020` | `fragments/gb_tower_emulator/gb_tower_emulator_code_asm` |
+| `yamls/us/rom.yaml` | `0x2552E0` | `fragments/31/fragment31_unk_table` |
