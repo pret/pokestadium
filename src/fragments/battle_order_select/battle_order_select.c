@@ -128,7 +128,7 @@ void BattleMenu_DrawScrollingRulesText(void) {
     s32 var_s4;
     s8 temp_v0;
     s8* var_v0;
-    unk_D_80068BB0* sp58;
+    DepthBuffer* sp58;
     Color_RGB8 sp54;
     Color_RGB8 sp50;
 
@@ -189,15 +189,15 @@ void BattleMenu_InitTeamOrderState(unk_D_84803760* arg0, BattleSessionTeams* arg
     }
 
     if (arg1->unk_01 == 1) {
-        arg0->unk_0E = arg1->unk_08[0]->unk_001;
+        arg0->unk_0E = arg1->teamMember[0]->unk_001;
         arg0->unk_0F = -1;
-        arg0->unk_01 = (arg1->unk_08[0]->unk_000 & 2) != 0;
-    } else if (arg1->unk_08[0]->unk_001 < arg1->unk_08[1]->unk_001) {
-        arg0->unk_0E = arg1->unk_08[0]->unk_001;
-        arg0->unk_0F = arg1->unk_08[1]->unk_001;
+        arg0->unk_01 = (arg1->teamMember[0]->unk_000 & 2) != 0;
+    } else if (arg1->teamMember[0]->unk_001 < arg1->teamMember[1]->unk_001) {
+        arg0->unk_0E = arg1->teamMember[0]->unk_001;
+        arg0->unk_0F = arg1->teamMember[1]->unk_001;
     } else {
-        arg0->unk_0E = arg1->unk_08[1]->unk_001;
-        arg0->unk_0F = arg1->unk_08[0]->unk_001;
+        arg0->unk_0E = arg1->teamMember[1]->unk_001;
+        arg0->unk_0F = arg1->teamMember[0]->unk_001;
     }
 }
 
@@ -1126,10 +1126,10 @@ void BattleMenu_RearrangeLeadPokemon(BattleSessionTeams* arg0, unk_D_84803760* a
 
     if (arg0->unk_01 == 2) {
         tmp = ((arg1->unk_02[0] >> 4) & 0xF) - 1;
-        if (tmp == arg0->unk_08[1]->unk_001) {
-            temp_v0 = arg0->unk_08[0];
-            arg0->unk_08[0] = arg0->unk_08[1];
-            arg0->unk_08[1] = temp_v0;
+        if (tmp == arg0->teamMember[1]->unk_001) {
+            temp_v0 = arg0->teamMember[0];
+            arg0->teamMember[0] = arg0->teamMember[1];
+            arg0->teamMember[1] = temp_v0;
         }
     }
 }
@@ -1164,14 +1164,14 @@ void BattleMenu_CommitOrderSelection(void) {
     while (var_s4-- > 0) {
         temp_s1 = var_s2->unk_001C;
         if (temp_s1->unk_000 & 2) {
-            temp_s1->unk_002 = temp_s1->unk_214->unk_002;
-            _bcopy(temp_s1->unk_214->unk_028, temp_s1->unk_01C, 0x1F8);
+            temp_s1->numberOfPokemonChosen = temp_s1->rosterInfo->numberOfPokemonCanBePicked;
+            _bcopy(temp_s1->rosterInfo->unk_028, temp_s1->pokemonPicked, 0x1F8);
         } else {
             BattleMenu_FillDefaultOrder(var_s2->unk_000C, var_s2->unk_000B);
-            temp_s1->unk_002 = var_s2->unk_000B;
+            temp_s1->numberOfPokemonChosen = var_s2->unk_000B;
 
-            for (i = 0; i < temp_s1->unk_214->unk_002; i++) {
-                temp_s1->unk_01C[i] = var_s2->unk_0018[var_s2->unk_000C[i]];
+            for (i = 0; i < temp_s1->rosterInfo->numberOfPokemonCanBePicked; i++) {
+                temp_s1->pokemonPicked[i] = var_s2->unk_0018[var_s2->unk_000C[i]];
             }
         }
         var_s2++;
@@ -1199,12 +1199,12 @@ void BattleMenu_AddOrderSelectPanel(s16 arg0, s16 arg1, TeamRoster* arg2, s32 ar
     temp_v1->unk_000A = 0;
     temp_v1->unk_0012 = arg0;
     temp_v1->unk_0014 = arg1;
-    temp_v1->unk_0017 = arg2->unk_214->unk_002;
-    temp_v1->unk_0018 = arg2->unk_214->unk_028;
+    temp_v1->unk_0017 = arg2->rosterInfo->numberOfPokemonCanBePicked;
+    temp_v1->unk_0018 = arg2->rosterInfo->unk_028;
     temp_v1->unk_001C = arg2;
 
-    for (i = 0; i < arg2->unk_214->unk_002; i++) {
-        temp_s0 = &arg2->unk_214->unk_028[i];
+    for (i = 0; i < arg2->rosterInfo->numberOfPokemonCanBePicked; i++) {
+        temp_s0 = &arg2->rosterInfo->unk_028[i];
         Pokemon_PrepareBattleMon(temp_s0);
         temp_s0->unk_06 = D_80070FA0[temp_s0->unk_00.unk_00 - 1].unk_06;
         temp_s0->unk_07 = D_80070FA0[temp_s0->unk_00.unk_00 - 1].unk_07;
@@ -1229,24 +1229,24 @@ void BattleMenu_InitOrderSelectPanels(SessionContext* arg0) {
     BattleMenu_InitTeamOrderState(&D_84803760[1], &D_84816420->battleSides[1], D_84816420->ruleCategory);
 
     if (temp_s0->unk_01 == 1) {
-        BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->unk_08[0], 0, -1);
-    } else if (temp_s0->unk_08[0]->unk_001 < temp_s0->unk_08[1]->unk_001) {
-        BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->unk_08[0], 0, D_8480379C + 1);
-        BattleMenu_AddOrderSelectPanel(0x50, 0x81, temp_s0->unk_08[1], 0, D_8480379C - 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->teamMember[0], 0, -1);
+    } else if (temp_s0->teamMember[0]->unk_001 < temp_s0->teamMember[1]->unk_001) {
+        BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->teamMember[0], 0, D_8480379C + 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x81, temp_s0->teamMember[1], 0, D_8480379C - 1);
     } else {
-        BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->unk_08[1], 0, D_8480379C + 1);
-        BattleMenu_AddOrderSelectPanel(0x50, 0x81, temp_s0->unk_08[0], 0, D_8480379C - 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x21, temp_s0->teamMember[1], 0, D_8480379C + 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x81, temp_s0->teamMember[0], 0, D_8480379C - 1);
     }
 
     temp_s0++;
     if (temp_s0->unk_01 == 1) {
-        BattleMenu_AddOrderSelectPanel(0x50, 0x146, temp_s0->unk_08[0], 1, -1);
-    } else if (temp_s0->unk_08[0]->unk_001 < temp_s0->unk_08[1]->unk_001) {
-        BattleMenu_AddOrderSelectPanel(0x50, 0xE6, temp_s0->unk_08[0], 1, D_8480379C + 1);
-        BattleMenu_AddOrderSelectPanel(0x50, 0x146, temp_s0->unk_08[1], 1, D_8480379C - 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x146, temp_s0->teamMember[0], 1, -1);
+    } else if (temp_s0->teamMember[0]->unk_001 < temp_s0->teamMember[1]->unk_001) {
+        BattleMenu_AddOrderSelectPanel(0x50, 0xE6, temp_s0->teamMember[0], 1, D_8480379C + 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x146, temp_s0->teamMember[1], 1, D_8480379C - 1);
     } else {
-        BattleMenu_AddOrderSelectPanel(0x50, 0xE6, temp_s0->unk_08[1], 1, D_8480379C + 1);
-        BattleMenu_AddOrderSelectPanel(0x50, 0x146, temp_s0->unk_08[0], 1, D_8480379C - 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0xE6, temp_s0->teamMember[1], 1, D_8480379C + 1);
+        BattleMenu_AddOrderSelectPanel(0x50, 0x146, temp_s0->teamMember[0], 1, D_8480379C - 1);
     }
 }
 

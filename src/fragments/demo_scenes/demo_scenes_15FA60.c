@@ -221,13 +221,13 @@ void Diorama_SwitchModelGroup(s32 arg0) {
 
 void Diorama_SetGroupCamera(s32 arg0) {
     if (arg0 == 4) {
-        D_86B0E5D4->unk_00->unk_60.at.x = -0.04f;
-        D_86B0E5D4->unk_00->unk_60.at.y = 24.2f;
-        D_86B0E5D4->unk_00->unk_60.at.z = -4.08f;
-        D_86B0E5D4->unk_00->unk_60.eye.x = 0.04f;
-        D_86B0E5D4->unk_00->unk_60.eye.y = 24.2f;
-        D_86B0E5D4->unk_00->unk_60.eye.z = 177.41f;
-        D_86B0E5D4->unk_00->unk_24.fovy = 25.0f;
+        D_86B0E5D4->unk_00->view.targetPosition.x = -0.04f;
+        D_86B0E5D4->unk_00->view.targetPosition.y = 24.2f;
+        D_86B0E5D4->unk_00->view.targetPosition.z = -4.08f;
+        D_86B0E5D4->unk_00->view.eyePosition.x = 0.04f;
+        D_86B0E5D4->unk_00->view.eyePosition.y = 24.2f;
+        D_86B0E5D4->unk_00->view.eyePosition.z = 177.41f;
+        D_86B0E5D4->unk_00->perspective.verticalFieldOfView = 25.0f;
     } else {
         D_86B0E5D4->unk_04.unk_00.x = D_86B0C264[arg0].unk_00.x;
         D_86B0E5D4->unk_04.unk_00.y = D_86B0C264[arg0].unk_00.y;
@@ -345,15 +345,15 @@ void Diorama_InitSceneState(void) {
 
     D_86B0E5D4->unk_00 = D_86B0E5D0->children;
 
-    D_86B0E5D4->unk_00->unk_24.near = 50.0f;
-    D_86B0E5D4->unk_00->unk_24.far = 8400.0f;
-    D_86B0E5D4->unk_00->unk_24.fovy = 30.0f;
-    D_86B0E5D4->unk_00->unk_60.at.x = 50.0f;
-    D_86B0E5D4->unk_00->unk_60.at.y = 50.0f;
-    D_86B0E5D4->unk_00->unk_60.at.z = 50.0f;
-    D_86B0E5D4->unk_00->unk_60.eye.x = 0.0f;
-    D_86B0E5D4->unk_00->unk_60.eye.y = 0.0f;
-    D_86B0E5D4->unk_00->unk_60.eye.z = 0.0f;
+    D_86B0E5D4->unk_00->perspective.nearPlane = 50.0f;
+    D_86B0E5D4->unk_00->perspective.farPlane = 8400.0f;
+    D_86B0E5D4->unk_00->perspective.verticalFieldOfView = 30.0f;
+    D_86B0E5D4->unk_00->view.targetPosition.x = 50.0f;
+    D_86B0E5D4->unk_00->view.targetPosition.y = 50.0f;
+    D_86B0E5D4->unk_00->view.targetPosition.z = 50.0f;
+    D_86B0E5D4->unk_00->view.eyePosition.x = 0.0f;
+    D_86B0E5D4->unk_00->view.eyePosition.y = 0.0f;
+    D_86B0E5D4->unk_00->view.eyePosition.z = 0.0f;
     D_86B0E5D4->unk_04.unk_4C = 8;
     D_86B0E5D4->unk_04.unk_50 = 0;
     D_86B0E5D4->unk_04.unk_48 = 0;

@@ -1884,7 +1884,7 @@
     vram: 0x84300000
     subsegments:
     - [0x2DD410, textbin,   fragments/battle_engine/battle_engine_header]
-    - [0x2DD430, c,      fragments/battle_engine/battle_engine_2EA8E0]
+    - [0x2DD430, c,      fragments/battle_engine/battle_engine_main]
     - [0x2DEF10, asm, fragments/battle_engine/battle_engine_2EC3C0]
     - [0x2E48B0, c,      fragments/battle_engine/battle_engine_2F1D60]
     - [0x2E4EF0, c,      fragments/battle_engine/battle_engine_2F23A0]
@@ -1933,7 +1933,7 @@
     - [0x34CB50, asm, fragments/battle_engine/battle_engine_359F90]
     - [0x350B30, c,      fragments/battle_engine/battle_engine_35DF70]
     - [0x353C10, asm, fragments/battle_engine/battle_engine_361050]
-    - [0x361800, .data,   fragments/battle_engine/battle_engine_2EA8E0]
+    - [0x361800, .data,   fragments/battle_engine/battle_engine_main]
     - [0x361A20, data, fragments/battle_engine/battle_engine_2EC3C0]
     - [0x361AB0, data, fragments/battle_engine/battle_engine_2F3CB0]
     - [0x362C00, data, fragments/battle_engine/battle_engine_2F74E0]
@@ -2004,7 +2004,7 @@
     - [0x36B0A0, rodata, fragments/battle_engine/battle_engine_359F90]
     - [0x36B120, .rodata, fragments/battle_engine/battle_engine_35DF70]
     - [0x36B290, rodata, fragments/battle_engine/battle_engine_361050]
-    - {vram: 0x8438E4D0, type:  .bss, name: fragments/battle_engine/battle_engine_2EA8E0}
+    - {vram: 0x8438E4D0, type:  .bss, name: fragments/battle_engine/battle_engine_main}
     - {vram: 0x8438E840, type:  bss, name: fragments/battle_engine/battle_engine_2EC3C0}
     - {vram: 0x84390160, type:  .bss, name: fragments/battle_engine/battle_engine_2F6930}
     - {vram: 0x843901B0, type:  bss, name: fragments/battle_engine/battle_engine_2F74E0}

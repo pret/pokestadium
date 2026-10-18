@@ -114,7 +114,7 @@ void BattleAnim_SixSlotTrail_Spawn(s16 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
 void BattleAnim_SixSlotTrail_ComputeCameraRelativeOffset(s32 arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, UNUSED f32 arg5, UNUSED f32 arg6,
                    UNUSED f32 arg7) {
     UNUSED s32 pad[36];
-    unk_D_86002F34_00C* temp_v0 = BattleAnim_GetCameraContext();
+    CameraNode* temp_v0 = BattleAnim_GetCameraContext();
     f32 sp6C;
     f32 sp68;
     f32 sp64;
@@ -125,9 +125,9 @@ void BattleAnim_SixSlotTrail_ComputeCameraRelativeOffset(s32 arg0, Vec3f* arg1, 
     f32 sp5C;
     f32 sp58;
 
-    sp60 = arg2->x - temp_v0->unk_60.eye.x;
-    sp5C = arg2->y - temp_v0->unk_60.eye.y;
-    sp58 = arg2->z - temp_v0->unk_60.eye.z;
+    sp60 = arg2->x - temp_v0->view.eyePosition.x;
+    sp5C = arg2->y - temp_v0->view.eyePosition.y;
+    sp58 = arg2->z - temp_v0->view.eyePosition.z;
 
     sp6C = arg1->x;
     sp68 = arg1->y;

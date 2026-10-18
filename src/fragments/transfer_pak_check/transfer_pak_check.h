@@ -40,7 +40,7 @@ typedef struct unk_D_82D09F1C {
 
 s32 Pak_CheckPiIntegrity(s32 arg0);
 void PakUi_DrawMenuBackdrop(void);
-void PakUi_BuildFrameBuffer(unk_D_80068BB0* arg0, s16 arg1, s16 arg2);
+void PakUi_BuildFrameBuffer(DepthBuffer* arg0, s16 arg1, s16 arg2);
 void PakUi_DrawThickBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
 void PakUi_DrawThinBoxBorder(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
 void PakUi_DrawRotatingCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
@@ -75,11 +75,11 @@ s32 PakUi_ComputeBlinkAlpha(void);
 void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1);
 void PakUi_DrawBodyProgressBar(s32 arg0, s32 arg1);
 void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1);
-unk_D_80068BB0* PakUi_BuildGameIconBuffer(s32 arg0);
-unk_D_80068BB0* PakUi_BuildControllerIconBuffer(void);
-unk_D_80068BB0* PakUi_BuildControllerIconBufferAlt(void);
-unk_D_80068BB0* PakUi_BuildMonIconBuffer(void);
-unk_D_80068BB0* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3);
+DepthBuffer* PakUi_BuildGameIconBuffer(s32 arg0);
+DepthBuffer* PakUi_BuildControllerIconBuffer(void);
+DepthBuffer* PakUi_BuildControllerIconBufferAlt(void);
+DepthBuffer* PakUi_BuildMonIconBuffer(void);
+DepthBuffer* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3);
 void TransferPak_MenuIconsInit(void);
 void TransferPak_MenuIconsFree(void);
 s32 TransferPak_MenuHandleInput(void);

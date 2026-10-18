@@ -124,17 +124,17 @@ void ParticleGfx_LoadTextureCallbackIa8WrapST_64x64(UNUSED Particle* arg0, u8* t
     ParticleGfx_LoadTextureIa8WrapST(texture, 64, 64);
 }
 
-void ParticleGfx_DrawBillboardPrim(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrim(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimColorTextureCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E018);
 }
 
-void ParticleGfx_DrawBillboardPrimEnv(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnv(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140DFD8);
 }
 
-s32 ParticleGfx_DrawBillboardDoubleSided(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+s32 ParticleGfx_DrawBillboardDoubleSided(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
@@ -143,60 +143,60 @@ s32 ParticleGfx_DrawBillboardDoubleSided(Particle* arg0, UNUSED unk_D_86002F34_0
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void ParticleGfx_DrawBillboardDefaultQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardDefaultQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E018);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E018);
 }
 
-void ParticleGfx_DrawBillboardTextureAlphaRotatedQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardTextureAlphaRotatedQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetTextureAlphaCombine(arg0->prim_a);
     ParticleGfx_DrawModelQuadRotated(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E108, arg0->unk_94.z);
 }
 
-void ParticleGfx_DrawBillboardOffsetQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardOffsetQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E058);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvNoiseQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvNoiseQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvNoiseCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E018);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvRotatedQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvRotatedQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuadRotated(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E018, arg0->unk_94.z);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvRotatedTriangle(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvRotatedTriangle(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelTriangleRotated(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E0D8, arg0->unk_94.z);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvQuadVariantA(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvQuadVariantA(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E178);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvQuadVariantB(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvQuadVariantB(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E1F8);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvQuadVariantC(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvQuadVariantC(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E1B8);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvComposite(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvComposite(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E2B8);
 }
 
-s32 ParticleGfx_DrawBillboardPrimEnvTriangleDoubleSided(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+s32 ParticleGfx_DrawBillboardPrimEnvTriangleDoubleSided(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
@@ -205,7 +205,7 @@ s32 ParticleGfx_DrawBillboardPrimEnvTriangleDoubleSided(Particle* arg0, UNUSED u
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void ParticleGfx_DrawBillboardPrimEnvTransformedQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void ParticleGfx_DrawBillboardPrimEnvTransformedQuad(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_DrawTransformedQuad(arg0->unk_2C, arg0->unk_94, arg0->unk_1C, D_8140E378);
 }

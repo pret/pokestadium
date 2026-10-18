@@ -1961,7 +1961,7 @@ void Particle_SetFieldOffsetB0IfNotSentinel(Particle* arg0, s16 arg1) {
     }
 }
 
-void Particle_RenderWorldChains(unk_D_86002F34_00C* arg0) {
+void Particle_RenderWorldChains(CameraNode* arg0) {
     s32 i;
     Particle* var_s0;
     Particle* var_s2 = gParticlePool;
@@ -1980,7 +1980,7 @@ void Particle_RenderWorldChains(unk_D_86002F34_00C* arg0) {
     }
 }
 
-void Particle_RenderOrthoParticles(unk_D_86002F34_00C* arg0) {
+void Particle_RenderOrthoParticles(CameraNode* arg0) {
     s32 i;
     Particle* var_s0 = gParticlePool;
 
@@ -2038,7 +2038,7 @@ void Particle_PrepareRender(Particle* arg0) {
     }
 }
 
-void Particle_DispatchDraw(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void Particle_DispatchDraw(Particle* arg0, CameraNode* arg1) {
     UNUSED s32 pad;
     ParticleDescriptorChild* sp18 = arg0->unk_0C->unk_04.a;
 
@@ -2056,5 +2056,5 @@ void Particle_DispatchDraw(Particle* arg0, unk_D_86002F34_00C* arg1) {
     }
 }
 
-void Particle_NoopDraw(UNUSED Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void Particle_NoopDraw(UNUSED Particle* arg0, UNUSED CameraNode* arg1) {
 }

@@ -56,9 +56,9 @@ unk_D_86002F34_alt2* GeoNode_CreateWithReference(MainPoolState* arg0, unk_D_8600
     return arg1;
 }
 
-unk_D_86002F34_00C* GeoNode_CreateCamera(MemoryBlock* arg0, unk_D_86002F34_00C* arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5) {
+CameraNode* GeoNode_CreateCamera(MemoryBlock* arg0, CameraNode* arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5) {
     if (arg0 != NULL) {
-        arg1 = MainPool_AllocAligned(arg0, sizeof(unk_D_86002F34_00C), 4);
+        arg1 = MainPool_AllocAligned(arg0, sizeof(CameraNode), 4);
     }
 
     if (arg1 != NULL) {
@@ -471,31 +471,31 @@ unk_D_86002F34_alt24* GeoNode_CreateGroup(MainPoolState* arg0, unk_D_86002F34_al
     return arg1;
 }
 
-void GeoCamera_SetViewport(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
-    arg0->unk_18.x = arg1;
-    arg0->unk_18.y = arg2;
-    arg0->unk_18.width = arg3;
-    arg0->unk_18.height = arg4;
+void GeoCamera_SetViewport(CameraNode* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
+    arg0->viewport.x = arg1;
+    arg0->viewport.y = arg2;
+    arg0->viewport.width = arg3;
+    arg0->viewport.height = arg4;
 
-    arg0->unk_40.l = -arg3 * 0.5f;
-    arg0->unk_40.r = arg3 * 0.5f;
-    arg0->unk_40.t = arg4 * 0.5f;
-    arg0->unk_40.b = -arg4 * 0.5f;
-    arg0->unk_40.n = -2.0f;
-    arg0->unk_40.f = 2.0f;
-    arg0->unk_40.scale = 1.0f;
+    arg0->orthographic.unk_04 = -arg3 * 0.5f;
+    arg0->orthographic.unk_08 = arg3 * 0.5f;
+    arg0->orthographic.unk_10 = arg4 * 0.5f;
+    arg0->orthographic.unk_0C = -arg4 * 0.5f;
+    arg0->orthographic.unk_14 = -2.0f;
+    arg0->orthographic.unk_18 = 2.0f;
+    arg0->orthographic.unk_1C = 1.0f;
 }
 
-void GeoCamera_SetPerspective(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3) {
-    arg0->unk_24.aspect = (f32)arg0->unk_18.width / arg0->unk_18.height;
-    arg0->unk_24.fovy = arg1;
-    arg0->unk_24.near = arg2;
-    arg0->unk_24.far = arg3;
-    arg0->unk_24.scale = 1.0f;
+void GeoCamera_SetPerspective(CameraNode* arg0, f32 arg1, f32 arg2, f32 arg3) {
+    arg0->perspective.unk_0C = (f32)arg0->viewport.width / arg0->viewport.height;
+    arg0->perspective.verticalFieldOfView = arg1;
+    arg0->perspective.nearPlane = arg2;
+    arg0->perspective.farPlane = arg3;
+    arg0->perspective.unk_18 = 1.0f;
 }
 
-void GeoCamera_SetEyeAtUp(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7) {
-    unk_D_86002F34_00C_060* sp1C = &arg0->unk_60;
+void GeoCamera_SetEyeAtUp(CameraNode* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7) {
+    CameraView* sp1C = &arg0->view;
     f32 sp28 = arg4 - arg1;
     f32 sp24 = arg6 - arg3;
     f32 temp_fv1_2 = -1.0 / sqrtf(SQ(sp28) + SQ(sp24));
@@ -503,32 +503,32 @@ void GeoCamera_SetEyeAtUp(unk_D_86002F34_00C* arg0, f32 arg1, f32 arg2, f32 arg3
     sp28 *= temp_fv1_2;
     sp24 *= temp_fv1_2;
 
-    Vec3f_SetComponentsDuplicate(&sp1C->eye, arg1, arg2, arg3);
-    Vec3f_SetComponentsDuplicate(&sp1C->at, arg4, arg5, arg6);
-    Vec3f_SetComponentsDuplicate(&sp1C->up, SINS(arg7) * sp24, COSS(arg7), -SINS(arg7) * sp28);
+    Vec3f_SetComponentsDuplicate(&sp1C->eyePosition, arg1, arg2, arg3);
+    Vec3f_SetComponentsDuplicate(&sp1C->targetPosition, arg4, arg5, arg6);
+    Vec3f_SetComponentsDuplicate(&sp1C->upDirection, SINS(arg7) * sp24, COSS(arg7), -SINS(arg7) * sp28);
 }
 
-void GeoCamera_SetBackground(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg4, u8 arg5) {
-    unk_D_86002F34_00C_0CC* ptr = &arg0->unk_CC;
+void GeoCamera_SetBackground(CameraNode* arg0, s16 arg1, s16 arg2, u8 arg3, u8 arg4, u8 arg5) {
+    CameraOverlay* ptr = &arg0->overlay;
 
     if (arg2 < 2) {
         if ((arg1 == 2) || (arg1 == 4)) {
-            ptr->unk_00 = 0;
+            ptr->mode = 0;
         } else {
-            ptr->unk_00 = 1;
+            ptr->mode = 1;
         }
     } else {
-        ptr->unk_00 = arg1;
-        ptr->unk_08 = arg2;
-        ptr->unk_0A = 1;
+        ptr->mode = arg1;
+        ptr->stepCount = arg2;
+        ptr->stepIndex = 1;
         ptr->color.r = arg3;
         ptr->color.g = arg4;
         ptr->color.b = arg5;
     }
 }
 
-void GeoCamera_SetBackgroundTexture(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2, s32 arg3, u32 arg4) {
-    unk_D_86002F34_00C_0CC* ptr = &arg0->unk_CC;
+void GeoCamera_SetBackgroundTexture(CameraNode* arg0, s16 arg1, s16 arg2, s32 arg3, u32 arg4) {
+    CameraOverlay* ptr = &arg0->overlay;
     ptr->unk_0C = arg1;
     ptr->unk_0E = arg2;
     ptr->unk_10 = 0;
@@ -538,7 +538,7 @@ void GeoCamera_SetBackgroundTexture(unk_D_86002F34_00C* arg0, s16 arg1, s16 arg2
     ptr->unk_18 = 0;
     ptr->unk_1A = 0;
     ptr->unk_02 = 0;
-    ptr->texture = D_1000800;
+    ptr->unk_1C = D_1000800;
 }
 
 void GraphNode_AppendChild(GraphNode* arg0, GraphNode* arg1) {
@@ -564,12 +564,12 @@ void GraphNode_AppendChild(GraphNode* arg0, GraphNode* arg1) {
 void GraphNode_RemoveChild(GraphNode* arg0, GraphNode* arg1) {
     arg1->prevSibling->nextSibling = arg1->nextSibling;
     arg1->nextSibling->prevSibling = arg1->prevSibling;
-    if ((unk_D_86002F34_00C*)arg1 == arg0->children) {
+    if ((CameraNode*)arg1 == arg0->children) {
         if (arg1 == arg1->nextSibling) {
             arg0->children = NULL;
             return;
         }
-        arg0->children = (unk_D_86002F34_00C*)arg1->nextSibling;
+        arg0->children = (CameraNode*)arg1->nextSibling;
     }
 }
 

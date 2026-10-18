@@ -43,7 +43,7 @@ typedef struct unk_func_80031660_sp24 {
 unk_func_80031270* D_80075F80 = NULL;
 unk_func_80031270* D_80075F84 = NULL;
 f32 D_80075F88[2] = { 40.0f, 25.0f };
-unk_D_80068BB0* D_80075F90 = NULL;
+DepthBuffer* D_80075F90 = NULL;
 s32 D_80075F94 = 0xC8;
 s32 D_80075F98 = 0x2B;
 s32 D_80075F9C = 0;
@@ -316,7 +316,7 @@ s32 Gallery_GetScenePoseIndex(s32 arg0) {
     return 0;
 }
 
-s32 Gallery_ConfigurePhotoCamera(s32 arg0, unk_D_86002F34_00C* arg1) {
+s32 Gallery_ConfigurePhotoCamera(s32 arg0, CameraNode* arg1) {
     s32 pad;
     unk_D_83403C60_050_00C* src;
 
@@ -331,7 +331,7 @@ s32 Gallery_ConfigurePhotoCamera(s32 arg0, unk_D_86002F34_00C* arg1) {
     return 0;
 }
 
-s32 Gallery_SetScenePoseCamera(s32 arg0, unk_D_86002F34_00C* arg1) {
+s32 Gallery_SetScenePoseCamera(s32 arg0, CameraNode* arg1) {
     if (Gallery_GetScenePoseIndex(arg0) != 0) {
         if (arg0 == 2) {
             GeoCamera_SetViewport(arg1, 0, 0, D_80075F84->unk_04, D_80075F84->unk_06);
@@ -348,7 +348,7 @@ s32 Gallery_SetCameraAngleOffsets(s32 arg0, unk_func_8003013C_arg1* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         arg1->unk_1C = (s16) (sp26 + 0x2000);
         arg1->unk_1E = (s16) (sp24 - 0x2000);
     }
@@ -362,7 +362,7 @@ s32 Gallery_SetCameraAngleOffsetsAlternate(s32 arg0, unk_func_8003013C_arg1* arg
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         arg1->unk_1C = (s16) (-0x2000 - sp26);
         arg1->unk_1E = (s16) (sp24 + 0x6000);
     }
@@ -555,9 +555,9 @@ void Geo_LoadSceneGraphNode(unk_func_80031270* arg0, UNUSED s16 arg1, UNUSED s16
     MainPool_FinalizeAllocation(sp18);
 }
 
-unk_func_80031270* Geo_CreateSceneInstance(s16 arg0, s16 arg1, unk_D_80068BB0* arg2, unk_D_80068BB0* arg3,
+unk_func_80031270* Geo_CreateSceneInstance(s16 arg0, s16 arg1, DepthBuffer* arg2, DepthBuffer* arg3,
                                  ModelLoadContext* arg4, BinArchive* arg5, unk_D_83403C60* arg6) {
-    UNUSED unk_D_80068BB0* var_v0;
+    UNUSED DepthBuffer* var_v0;
     unk_func_80031270* temp_v0 = main_pool_alloc(sizeof(unk_func_80031270), 0);
 
     if (temp_v0 != NULL) {

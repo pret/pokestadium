@@ -1,13 +1,13 @@
 #include "battle_engine.h"
 
-s32 BattleAnim_DrawAsset95Ia8Billboard(Particle* arg0, unk_D_86002F34_00C* arg1) {
+s32 BattleAnim_DrawAsset95Ia8Billboard(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_SetPrimEnvColorCombine(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->env_r, arg0->env_g, arg0->env_b, arg0->prim_a);
     ParticleGfx_PushBillboardMatrix(arg1, arg0->unk_2C, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140E418);
 }
 
-void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4Overlay(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4Overlay(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_LoadTextureIa8(gBattleAnimAssetPointers[0x76] + (arg0->unk_C7 << 0xB), 0x20, 0x40);
     ParticleGfx_LoadTextureI4MultiBlockWrapSTWithShift(gBattleAnimAssetPointers[0x77], 0x40, 0x40, 2, 1);
     ParticleGfx_SetAnimatedAuxTileSize(0, 0xA, 0x40, 0x40);
@@ -15,19 +15,19 @@ void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4Overlay(Particle* arg0, unk_D_86
     ParticleGfx_DrawModelQuad(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E1F8);
 }
 
-void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4OverlayPipelineA(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4OverlayPipelineA(Particle* arg0, CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
 
     BattleAnim_DrawAsset76Ia8FrameWithAsset77I4Overlay(arg0, arg1);
 }
 
-void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4OverlayPipelineB(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset76Ia8FrameWithAsset77I4OverlayPipelineB(Particle* arg0, CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
 
     BattleAnim_DrawAsset76Ia8FrameWithAsset77I4Overlay(arg0, arg1);
 }
 
-void BattleAnim_DrawAsset1FAnimatedI4WithAsset20DisplayList(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1FAnimatedI4WithAsset20DisplayList(Particle* arg0, CameraNode* arg1) {
     ParticleGfx_PushBillboardMatrix(arg1, arg0->unk_2C, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
@@ -40,7 +40,7 @@ void BattleAnim_DrawAsset1FAnimatedI4WithAsset20DisplayList(Particle* arg0, unk_
     gSPDisplayList(gDisplayListHead++, gBattleAnimAssetPointers[0x20]);
 }
 
-s32 BattleAnim_DrawAssetBcRgba16WithAssetBdDisplayList(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+s32 BattleAnim_DrawAssetBcRgba16WithAssetBdDisplayList(Particle* arg0, UNUSED CameraNode* arg1) {
     ParticleGfx_PushTransformMatrix(arg0->unk_2C, arg0->unk_94, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140DBA8);
@@ -50,7 +50,7 @@ s32 BattleAnim_DrawAssetBcRgba16WithAssetBdDisplayList(Particle* arg0, UNUSED un
     gSPDisplayList(gDisplayListHead++, gBattleAnimAssetPointers[0xBD]);
 }
 
-void BattleAnim_DrawAssets27And28LayeredI4QuadVariantA(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAssets27And28LayeredI4QuadVariantA(Particle* arg0, UNUSED CameraNode* arg1) {
     ParticleGfx_Push2DTransform(arg0->unk_2C.x, arg0->unk_2C.y, arg0->unk_94.z, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
@@ -63,7 +63,7 @@ void BattleAnim_DrawAssets27And28LayeredI4QuadVariantA(Particle* arg0, UNUSED un
     ParticleGfx_DrawQuadVertices(D_84385DC0);
 }
 
-void BattleAnim_DrawAssets27And28LayeredI4QuadVariantB(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAssets27And28LayeredI4QuadVariantB(Particle* arg0, UNUSED CameraNode* arg1) {
     ParticleGfx_Push2DTransform(arg0->unk_2C.x, arg0->unk_2C.y, arg0->unk_94.z, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
@@ -76,7 +76,7 @@ void BattleAnim_DrawAssets27And28LayeredI4QuadVariantB(Particle* arg0, UNUSED un
     ParticleGfx_DrawQuadVertices(D_84385E00);
 }
 
-void BattleAnim_DrawAsset29DualI4LayeredQuad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset29DualI4LayeredQuad(Particle* arg0, UNUSED CameraNode* arg1) {
     ParticleGfx_Push2DTransform(arg0->unk_2C.x, arg0->unk_2C.y, arg0->unk_94.z, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
@@ -89,7 +89,7 @@ void BattleAnim_DrawAsset29DualI4LayeredQuad(Particle* arg0, UNUSED unk_D_86002F
     ParticleGfx_DrawQuadVertices(D_8140E3B8);
 }
 
-void BattleAnim_DrawAsset87AnimatedI4Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset87AnimatedI4Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     ParticleGfx_Push2DTransform(arg0->unk_2C.x, arg0->unk_2C.y, arg0->unk_94.z, arg0->unk_1C);
 
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
@@ -109,15 +109,15 @@ void BattleAnim_DrawI4AtlasYScaled(Particle* arg0, u8* arg1) {
     ParticleGfx_DrawI4TextureAtlas(arg1, D_84385C80, 0x40, 0x40, 0x40, 0x40);
 }
 
-void BattleAnim_DrawAsset19I4AtlasYScaled(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset19I4AtlasYScaled(Particle* arg0, UNUSED CameraNode* arg1) {
     BattleAnim_DrawI4AtlasYScaled(arg0, gBattleAnimAssetPointers[0x19]);
 }
 
-void BattleAnim_DrawAsset5EI4AtlasYScaled(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset5EI4AtlasYScaled(Particle* arg0, UNUSED CameraNode* arg1) {
     BattleAnim_DrawI4AtlasYScaled(arg0, gBattleAnimAssetPointers[0x5E]);
 }
 
-void BattleAnim_DrawAsset1AFrameI4Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1AFrameI4Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -128,7 +128,7 @@ void BattleAnim_DrawAsset1AFrameI4Quad(Particle* arg0, UNUSED unk_D_86002F34_00C
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset1CRgba16Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1CRgba16Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DC00);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -138,7 +138,7 @@ void BattleAnim_DrawAsset1CRgba16Quad(Particle* arg0, UNUSED unk_D_86002F34_00C*
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset1ERgba16Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1ERgba16Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DC00);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -148,7 +148,7 @@ void BattleAnim_DrawAsset1ERgba16Quad(Particle* arg0, UNUSED unk_D_86002F34_00C*
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAssetC3Rgba16Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAssetC3Rgba16Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DC00);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -158,7 +158,7 @@ void BattleAnim_DrawAssetC3Rgba16Quad(Particle* arg0, UNUSED unk_D_86002F34_00C*
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset1DRotatedI4Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1DRotatedI4Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     Vec3s sp40;
 
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
@@ -174,10 +174,10 @@ void BattleAnim_DrawAsset1DRotatedI4Quad(Particle* arg0, UNUSED unk_D_86002F34_0
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawParticleNoop(UNUSED Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawParticleNoop(UNUSED Particle* arg0, UNUSED CameraNode* arg1) {
 }
 
-void BattleAnim_DrawAsset13FrameI4YScaledQuadA(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameI4YScaledQuadA(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
 
     ParticleGfx_LoadTextureI4Alias(gBattleAnimAssetPointers[0x13] + (gParticleFrameMod8 * 0x600), 0x20, 0x60);
@@ -190,7 +190,7 @@ void BattleAnim_DrawAsset13FrameI4YScaledQuadA(Particle* arg0, UNUSED unk_D_8600
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset13FrameI4YScaledQuadB(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameI4YScaledQuadB(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -201,7 +201,7 @@ void BattleAnim_DrawAsset13FrameI4YScaledQuadB(Particle* arg0, UNUSED unk_D_8600
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset13FrameI4YScaledQuadC(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameI4YScaledQuadC(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -212,7 +212,7 @@ void BattleAnim_DrawAsset13FrameI4YScaledQuadC(Particle* arg0, UNUSED unk_D_8600
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset13FrameI4ModelQuadA(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameI4ModelQuadA(Particle* arg0, CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -223,7 +223,7 @@ void BattleAnim_DrawAsset13FrameI4ModelQuadA(Particle* arg0, unk_D_86002F34_00C*
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset13FrameI4ModelQuadB(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameI4ModelQuadB(Particle* arg0, CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -234,7 +234,7 @@ void BattleAnim_DrawAsset13FrameI4ModelQuadB(Particle* arg0, unk_D_86002F34_00C*
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset13FrameI4ModelQuadC(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameI4ModelQuadC(Particle* arg0, CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -245,7 +245,7 @@ void BattleAnim_DrawAsset13FrameI4ModelQuadC(Particle* arg0, unk_D_86002F34_00C*
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset1BI4TriangleA(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1BI4TriangleA(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -256,7 +256,7 @@ void BattleAnim_DrawAsset1BI4TriangleA(Particle* arg0, UNUSED unk_D_86002F34_00C
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset1BI4TriangleB(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset1BI4TriangleB(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -267,7 +267,7 @@ void BattleAnim_DrawAsset1BI4TriangleB(Particle* arg0, UNUSED unk_D_86002F34_00C
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset13FrameDiv2I4Quad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset13FrameDiv2I4Quad(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DCD8);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -278,7 +278,7 @@ void BattleAnim_DrawAsset13FrameDiv2I4Quad(Particle* arg0, UNUSED unk_D_86002F34
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawAsset18FrameI4ModelQuad(Particle* arg0, unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAsset18FrameI4ModelQuad(Particle* arg0, CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
 
     ParticleGfx_LoadTextureI4Alias(gBattleAnimAssetPointers[0x18] + (arg0->unk_C7 << 9), 0x20, 0x20);
@@ -286,7 +286,7 @@ void BattleAnim_DrawAsset18FrameI4ModelQuad(Particle* arg0, unk_D_86002F34_00C* 
     ParticleGfx_DrawModelQuadRotated(arg1, arg0->unk_2C, arg0->unk_1C, D_8140E018, arg0->unk_94.z);
 }
 
-void BattleAnim_DrawAssetA9I4XYScaledQuad(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawAssetA9I4XYScaledQuad(Particle* arg0, UNUSED CameraNode* arg1) {
     gSPDisplayList(gDisplayListHead++, D_8140DD58);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
 
@@ -297,6 +297,6 @@ void BattleAnim_DrawAssetA9I4XYScaledQuad(Particle* arg0, UNUSED unk_D_86002F34_
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
 }
 
-void BattleAnim_DrawParticleFullScreenColorOverlay(Particle* arg0, UNUSED unk_D_86002F34_00C* arg1) {
+void BattleAnim_DrawParticleFullScreenColorOverlay(Particle* arg0, UNUSED CameraNode* arg1) {
     BattleAnim_DrawFullScreenColorOverlay(arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
 }

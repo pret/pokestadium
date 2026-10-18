@@ -437,9 +437,9 @@ void Credits_DrawRoleList(void);
 
 u16 Credits_GetRoleCount(void);
 
-void Credits_InitCameraKeyframeBlend(unk_D_86002F34_00C*, u16, s8, u8);
+void Credits_InitCameraKeyframeBlend(CameraNode*, u16, s8, u8);
 void Credits_StepCameraKeyframeBlend(void);
-void func_86A01CF0(s16*, s16*, s16*, unk_D_86002F34_00C*, u16, s8, u8);
+void func_86A01CF0(s16*, s16*, s16*, CameraNode*, u16, s8, u8);
 void Credits_StepCameraYawBlend(void);
 void Credits_SelectNextScene(s8*, u8*);
 

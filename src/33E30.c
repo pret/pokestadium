@@ -86,7 +86,7 @@ Gfx* Gfx_DrawTriangleMarker(Gfx* arg0, Vec3f* arg1, u8 arg2, u8 arg3, u8 arg4, u
     sp140 = arg1->y;
     sp13C = arg1->z;
 
-    MtxF_ExtractScale(&sp34, &D_8006F088->unk_60.mtxf);
+    MtxF_ExtractScale(&sp34, &D_8006F088->view.floatMatrix);
     guMtxF2L(&sp34, &sp78);
     guScale(&spB8, arg6, arg6, arg6);
     guTranslate(&spF8, sp144, sp140, sp13C);

@@ -3403,21 +3403,21 @@ void Pokedex_BuildMapMarkersDisplayList(void) {
     Mtx spE0;
     Mtx* var_s1;
     s32 var_t5;
-    unk_D_86002F34_00C* temp_s2;
-    unk_D_86002F34_00C_060* ptr;
+    CameraNode* temp_s2;
+    CameraView* ptr;
     Gfx* temp_v0;
     s32 j;
 
     temp_s2 = D_88826A44->children;
-    ptr = &temp_s2->unk_60;
+    ptr = &temp_s2->view;
 
     temp_v0 = Gfx_AllocDisplayList(sizeof(Gfx) * 36 * 25);
     D_888269E0.gfx = temp_v0;
     D_88826CE8 = Gfx_AllocDisplayList(sizeof(Mtx) * 36);
     var_s1 = D_88826CE8;
 
-    MtxF_SetLookAt(&ptr->mtxf, &ptr->eye, &ptr->at, 0);
-    MtxF_ExtractScale(&sp124, &temp_s2->unk_60.mtxf);
+    MtxF_SetLookAt(&ptr->floatMatrix, &ptr->eyePosition, &ptr->targetPosition, 0);
+    MtxF_ExtractScale(&sp124, &temp_s2->view.floatMatrix);
     guMtxF2L(sp124.mf, &spE0);
 
     gSPDisplayList(temp_v0++, D_88825248);
@@ -3815,14 +3815,14 @@ void Pokedex_EaseVec3Toward(Vec3f* arg0, Vec3f* arg1) {
 
 void Pokedex_UpdateAreaMapFrame(void) {
     UNUSED s32 pad;
-    unk_D_86002F34_00C* node = D_88826A44->children;
+    CameraNode* node = D_88826A44->children;
     Vec3f* vec;
     Vec3f sp28;
 
     switch (D_88826A52) {
         case 0:
-            Pokedex_EaseVec3Toward(&node->unk_60.at, &D_8882627C);
-            Pokedex_EaseVec3Toward(&node->unk_60.eye, &D_88826288);
+            Pokedex_EaseVec3Toward(&node->view.targetPosition, &D_8882627C);
+            Pokedex_EaseVec3Toward(&node->view.eyePosition, &D_88826288);
             break;
 
         case 1:
@@ -3832,14 +3832,14 @@ void Pokedex_UpdateAreaMapFrame(void) {
             sp28.y = vec->y + 1000.0f;
             sp28.z = vec->z + 700.0f;
 
-            Pokedex_EaseVec3Toward(&node->unk_60.at, vec);
-            Pokedex_EaseVec3Toward(&node->unk_60.eye, &sp28);
+            Pokedex_EaseVec3Toward(&node->view.targetPosition, vec);
+            Pokedex_EaseVec3Toward(&node->view.eyePosition, &sp28);
             break;
     }
 
     Pokedex_UpdateCameraEaseSpeed();
-    node->unk_24.near = 100.0f;
-    node->unk_24.far = 12800.0f;
+    node->perspective.nearPlane = 100.0f;
+    node->perspective.farPlane = 12800.0f;
     D_88826A7E++;
 
     Pokedex_BuildMapMarkerDisplayList();
@@ -4100,7 +4100,7 @@ s32 Pokedex_CheckAreaMapExit(void) {
 
 void func_88807D04(s32 arg0, MainPoolState* arg1, UNUSED s32 arg2, s32 arg3, s32 arg4, char* arg5, char** arg6) {
     s32 i;
-    unk_D_86002F34_00C* ptr;
+    CameraNode* ptr;
     MemoryBlock* sp4C;
     unk_D_88826CF0_004* var_v1_2;
 
@@ -4186,8 +4186,8 @@ void func_88807D04(s32 arg0, MainPoolState* arg1, UNUSED s32 arg2, s32 arg3, s32
     GeoNode_CreateDisplayList(NULL, &D_888269E0, 4, NULL);
     D_88826A44 = process_geo_layout(sp4C, D_888265DC);
     ptr = D_88826A44->children;
-    ptr->unk_60.at = D_8882627C;
-    ptr->unk_60.eye = D_88826288;
+    ptr->view.targetPosition = D_8882627C;
+    ptr->view.eyePosition = D_88826288;
 }
 
 void Pokedex_ExitAreaMapPool(void) {

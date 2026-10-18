@@ -49,7 +49,7 @@ static char** D_86B10840;
 static unk_D_86002F30* D_86B10844;
 static GraphNode* D_86B10848;
 static DisplayObject D_86B10850;
-static unk_D_86002F34_00C* D_86B109B8;
+static CameraNode* D_86B109B8;
 static BinArchive* D_86B109BC;
 static u8* D_86B109C0;
 static s8 D_86B109C8[0x100];
@@ -67,10 +67,10 @@ void FirstClearBonus_InitCamera(void) {
     D_86B10BCA = 0;
     D_86B10BCC = 0x78;
 
-    Camera_ComputeEyeFromAngles(&D_86B109B8->unk_60.at, &D_86B109B8->unk_60.eye, D_86B10BCC, D_86B10BC8, D_86B10BCA);
+    Camera_ComputeEyeFromAngles(&D_86B109B8->view.targetPosition, &D_86B109B8->view.eyePosition, D_86B10BCC, D_86B10BC8, D_86B10BCA);
 
-    D_86B109B8->unk_24.near = 50.0f;
-    D_86B109B8->unk_24.far = 6400.0f;
+    D_86B109B8->perspective.nearPlane = 50.0f;
+    D_86B109B8->perspective.farPlane = 6400.0f;
 }
 
 void FirstClearBonus_InitState(void) {
