@@ -184,7 +184,7 @@ void Snap_PrintClubBackgroundSelectLoop(void) {
 }
 
 s32 Snap_PrintClubBackgroundSelect(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('BNVW');
 

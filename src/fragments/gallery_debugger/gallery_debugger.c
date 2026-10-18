@@ -193,7 +193,7 @@ void GalleryDebugger_MenuLoop(void) {
 }
 
 s32 GalleryDebugger_Main(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('GLDB');
 

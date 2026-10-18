@@ -587,19 +587,19 @@ void StadiumSelect_UpdateSparkles(s16 arg0) {
 void StadiumSelect_InitSparkleFlags(void) {
     s32 i;
 
-    for (i = 0; i < D_84103CF0.unk_05; i++) {
+    for (i = 0; i < D_84103CF0.nintendoCupClears; i++) {
         D_84102498[i].unk_00 = 1;
     }
 
-    for (i = 0; i < D_84103CF0.unk_06; i++) {
+    for (i = 0; i < D_84103CF0.primeCupClears; i++) {
         D_84102498[i + 6].unk_00 = 1;
     }
 
-    if (D_84103CF0.unk_00 & 0x10) {
+    if (D_84103CF0.clearedModes & 0x10) {
         D_84102510[0] = 1;
     }
 
-    if (D_84103CF0.unk_00 & 0x20) {
+    if (D_84103CF0.clearedModes & 0x20) {
         D_8410251C[0] = 1;
     }
 }
@@ -646,22 +646,22 @@ void StadiumSelect_DrawBlurbBackdrop(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
     gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelTopLeftTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped(arg0, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028AA0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelTopRightTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_20289E0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelBottomLeftTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped(arg0, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A20, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelBottomRightTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
@@ -750,7 +750,7 @@ void StadiumSelect_DrawCupInfoPanel(s16 arg0) {
         Font_Printf(0x48, 0x182, Text_GetString(NULL, 0, D_84103440, D_84103CC8 + 6));
         Font_EndTexturedTextRendering();
 
-        if (gSessionContext.unk_11F2 == 1) {
+        if (gSessionContext.inRound2 == 1) {
             temp_v0 = Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_84103440, D_84103CC8));
 
             gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
@@ -824,9 +824,9 @@ DepthBuffer* StadiumSelect_BuildDivisionCupIcon(u8* arg0, s16 arg1) {
     s32 var_s3;
 
     if (arg1 == 3) {
-        var_s3 = D_84103CF0.unk_05;
+        var_s3 = D_84103CF0.nintendoCupClears;
     } else {
-        var_s3 = D_84103CF0.unk_06;
+        var_s3 = D_84103CF0.primeCupClears;
     }
     StadiumSelect_DrawIconFrame(sp40, 0xA0, 0x7A);
 
@@ -860,7 +860,7 @@ DepthBuffer* StadiumSelect_BuildSimpleCupIcon(u8* arg0, s16 arg1) {
         Gfx_DrawTextureRgba16(4, (i * 0x10) + 4, 0x80, 0x10, (i << 0xC) + arg0, 0x80, 0);
     }
 
-    if (D_84103CF0.unk_00 & (1 << arg1)) {
+    if (D_84103CF0.clearedModes & (1 << arg1)) {
         if (arg1 == 4) {
             var_v0 = 5;
         } else {
@@ -1017,7 +1017,7 @@ s32 StadiumSelect_Main(s32 arg0, s32 arg1) {
     main_pool_push_state('PSSL');
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_84103CF0, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&D_84103CF0, gSessionContext.inRound2);
     Font_Init(0x18, 0);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);

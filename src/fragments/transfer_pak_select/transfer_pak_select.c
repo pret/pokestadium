@@ -128,7 +128,7 @@ s32 TransferPak_GetPresentationMode(void) {
 
     Save_EnsureBankLoaded(2);
     Save_GetOptions(&sp18);
-    return sp18.unk_00;
+    return sp18.gbTowerUnlockTier;
 }
 
 void TransferPak_LaunchSelectedPortAnim(void) {
@@ -794,7 +794,7 @@ void TransferPak_InitScene(void) {
 }
 
 s32 TransferPak_SelectMain(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
     s32 sp20;
 
     main_pool_push_state('GBSL');

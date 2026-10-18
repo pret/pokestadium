@@ -102,7 +102,7 @@ s32 FatalError_DrawFrame(u8 arg0) {
 }
 
 void FatalError_Main(s32 arg0, s32 arg1) {
-    unk_func_80007444* temp_s0;
+    StageContext* temp_s0;
 
     D_81100930 = arg0;
     D_81100934 = arg1;

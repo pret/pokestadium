@@ -2028,7 +2028,7 @@ s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* arg1) {
     if (arg0 == 5) {
         var_a3 = D_8006F09C->node.callbackArg;
         var_a2 = var_a3;
-        if ((var_a3 == 0) && (gSessionContext.unk_11F2 == 1)) {
+        if ((var_a3 == 0) && (gSessionContext.inRound2 == 1)) {
             var_a2 = 7;
         }
 
@@ -2170,7 +2170,7 @@ void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
         PakUi_DrawThickBoxBorder(0x38, (s16)((0x3C - tmp) / 2) + 0x24, 0x210, tmp, 0x1E, 0x1E, 0x82, 0x96);
         if (arg0 == 10) {
             sp48 = PakUi_ComputeBlinkAlpha();
-            if (D_82D0AB90.unk_00 == 0x1F8) {
+            if (D_82D0AB90.clearedModes == 0x1F8) {
                 gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sp48);
 
@@ -2184,7 +2184,7 @@ void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
             tmp = (Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_82D0AB9C, 0x3B)));
             Font_Printf(0x140 - tmp / 2, 0x36, Text_GetString(NULL, 0, D_82D0AB9C, 0x3B));
 
-            if (D_82D0AB90.unk_00 == 0x1F8) {
+            if (D_82D0AB90.clearedModes == 0x1F8) {
                 Font_SetActive(8, 0);
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, sp48);
                 Font_Printf(0x1D6, 0x2D, Text_GetString(NULL, 0, D_82D0AB9C, 0x3C));
@@ -2551,10 +2551,10 @@ s32 TransferPak_MenuHandleInput(void) {
         sp24 = D_82D09F1C[D_82D06FA0].unk_0A;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DRIGHT)) {
         sp24 = D_82D09F1C[D_82D06FA0].unk_0B;
-    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) && (D_82D0AB90.unk_00 == 0x1F8)) {
+    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) && (D_82D0AB90.clearedModes == 0x1F8)) {
         Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         var_a3 = -1;
-        gSessionContext.unk_11F2 ^= 1;
+        gSessionContext.inRound2 ^= 1;
     }
 
     if ((sp24 != -1) && (sp22 != sp24)) {
@@ -2787,7 +2787,7 @@ void TransferPak_InitMenuGraphics(void) {
 }
 
 s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
-    unk_func_80007444* sp54;
+    StageContext* sp54;
     u8 sp53;
     s16 sp50 = 2;
     s32 sp4C = 1;
@@ -2800,7 +2800,7 @@ s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
     Save_GetModeSettings(&D_82D0AB90, 0);
     Save_GetOptionsField02(&D_82D0AB98);
     sp53 = (D_82D0AB98 & 4) != 0;
-    gSessionContext.unk_11F2 = sp53;
+    gSessionContext.inRound2 = sp53;
     Gfx_InitDisplayListBuffers(0x10000, 0);
     sp54 = StageContext_Allocate(1, 0, 2, 0, 2, 1);
     Font_Init(0x1C, 0);
@@ -2836,8 +2836,8 @@ s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
 
     StageContext_Deactivate();
 
-    if (gSessionContext.unk_11F2 != sp53) {
-        if (gSessionContext.unk_11F2 == 0) {
+    if (gSessionContext.inRound2 != sp53) {
+        if (gSessionContext.inRound2 == 0) {
             D_82D0AB98 &= ~4;
         } else {
             D_82D0AB98 |= 4;

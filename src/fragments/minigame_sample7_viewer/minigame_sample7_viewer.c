@@ -214,7 +214,7 @@ void Minigame_Sample7Viewer_Init(void) {
 }
 
 s32 Minigame_Sample7Viewer(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MINI');
 

@@ -233,7 +233,7 @@ void RentalHub_LoadBackgroundImage(ModeSettings* arg0) {
     background_bin_archive = BinArchive_Open(backgrounds_ROM_START, battle_headers_ROM_START, 1, 1);
 
     if (gSessionContext.mode == 7) {
-        if (arg0->unk_04 < 8) {
+        if (arg0->castleClears < 8) {
             D_82B01148 = BinArchive_GetFile(background_bin_archive, 0xD);
         } else {
             D_82B01148 = BinArchive_GetFile(background_bin_archive, 0x10);
@@ -251,7 +251,7 @@ s32 RentalHub_MenuMain(void) {
     main_pool_push_state('menu');
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&sp1C, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&sp1C, gSessionContext.inRound2);
     Font_Init(0x10, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
@@ -264,7 +264,7 @@ s32 RentalHub_MenuMain(void) {
     hovered_menu_item = 0;
 
     if (gSessionContext.mode == 7) {
-        if (sp1C.unk_04 < 8) {
+        if (sp1C.castleClears < 8) {
             Audio_PlayMusicIfChanged(0x2A);
         } else {
             Audio_PlayMusicIfChanged(0x27);

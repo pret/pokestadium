@@ -295,7 +295,7 @@ void Options_EraseSaveData(void) {
     Save_ResetAndCommitTypedRecord(0x16, 0);
     Save_ResetAndCommitTypedRecord(0x17, 0);
     Save_FlushDirtyBanks();
-    gSessionContext.unk_11F2 = 0;
+    gSessionContext.inRound2 = 0;
     Audio_SetMonoOutput(0);
     Audio_SetVoiceEnabled(1);
     D_82C01666 = 0;
@@ -409,7 +409,7 @@ void Options_Loop(void) {
 }
 
 s32 Options_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('PREF');
 

@@ -117,7 +117,7 @@ typedef struct SessionContext {
     /* 0x11EF */ u8 moveLimitSeconds;
     /* 0x11F0 */ u8 gbStarterChoice;
     /* 0x11F1 */ char unk11F1[0x1];
-    /* 0x11F2 */ u8 unk_11F2;
+    /* 0x11F2 */ u8 inRound2;
     /* 0x11F3 */ u8 continueCount;
     /* 0x11F4 */ u8 unk_11F4;
     /* 0x11F5 */ u8 sessionFlags;
@@ -150,6 +150,7 @@ typedef struct SessionContext {
 // 21-24: Cutscenes
 #define SESSION_MODE_ATTRACT_DEMO_MINIGAME 25
 // 26: Cutscene
+#define SESSION_FLAG_REVEAL_MEWTWO 0x04
 
 
 

@@ -758,7 +758,7 @@ void PikachuReward_SetupScene(void) {
 
 s32 Stadium_BonusPikachuReward(UNUSED s32 arg0, UNUSED s32 arg1) {
     UNUSED s32 pad;
-    unk_func_80007444* sp20;
+    StageContext* sp20;
 
     main_pool_push_state('PIKA');
 

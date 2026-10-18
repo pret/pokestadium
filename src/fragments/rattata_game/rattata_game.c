@@ -1375,7 +1375,7 @@ void RattataGame_InitPlayerSlots(void) {
 }
 
 void RattataGame_Main(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     if (arg0 == 1) {
         D_86204718 = 1;
