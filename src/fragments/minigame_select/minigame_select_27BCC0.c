@@ -784,7 +784,9 @@ static u8* D_825088A8[] = {
 static s16 D_825088D0[] = { 2, 1, 0, 0 };
 static s16 D_825088D8[] = { 3, 2, 1, 0 };
 static s16 D_825088E0[] = { 4, 0, 1, 6, 3, 2, 7, 8, 5, 0 };
-static s16 D_825088F4[] = { 2, 0, 1, 4, 5, 3, 8, 6, 7, 0, 0x8250, 0x8A20 };
+static s16 D_825088F4[] = { 2, 0, 1, 4, 5, 3, 8, 6, 7, 0 };
+extern const char D_82508A20[];
+static const char* D_82508908 = D_82508A20;
 static u8* D_8250890C[] = { D_0300BB80, D_03017700 };
 static u8* D_82508914[9][4] = {
     D_0308B290, D_0308D290, D_0308F290, D_0308D290, D_03091290, D_03093290, D_03095290, D_03093290, D_03097290,
@@ -1245,7 +1247,7 @@ void MiniGameSelect_RenderPlayerPanel(unk_D_82508B30* arg0) {
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
-static const char D_82508A20[] = "コンピュータのつよさ";
+const char D_82508A20[] = "コンピュータのつよさ";
 
 void MiniGameSelect_RenderNumberSpinner(unk_D_82508B30* arg0) {
     s32 var_v1;
