@@ -657,7 +657,7 @@ s32 Team_CommitSelectionToTrainer(unk_D_8423D3D8* arg0, s16 arg1) {
     unk_D_84229EB0_00024* sp34;
     s32 i;
 
-    arg0->unk_04->unk_002 = 0;
+    arg0->unk_04->numberOfPokemonChosen = 0;
     if (arg1 == 4) {
         temp_s3 = RegisteredTeam_LoadSelected(&D_84229EB0, &sp34);
         if (sp34 != NULL) {
@@ -665,7 +665,7 @@ s32 Team_CommitSelectionToTrainer(unk_D_8423D3D8* arg0, s16 arg1) {
             if (gSessionContext.mode != 0) {
                 HAL_Strcpy(arg0->unk_04->unk_008, sp34->unk_4D12);
             }
-            HAL_Strcpy(arg0->unk_04->unk_214->unk_014, sp34->unk_4D12);
+            HAL_Strcpy(arg0->unk_04->rosterInfo->unk_014, sp34->unk_4D12);
 
             for (i = 0; i < temp_s3; i++) {
                 Trainer_AddPokemon(arg0->unk_04, &sp34->unk_0000[i].unk_004);
@@ -677,7 +677,7 @@ s32 Team_CommitSelectionToTrainer(unk_D_8423D3D8* arg0, s16 arg1) {
         if (gSessionContext.mode != 0) {
             HAL_Strcpy(arg0->unk_04->unk_008, D_84211B50.unk_001E);
         }
-        HAL_Strcpy(arg0->unk_04->unk_214->unk_014, D_84211B50.unk_001E);
+        HAL_Strcpy(arg0->unk_04->rosterInfo->unk_014, D_84211B50.unk_001E);
 
         if (D_84211B50.unk_0006 > 0) {
             for (i = 0; i < D_84211B50.unk_0006; i++) {
@@ -727,11 +727,11 @@ void TeamSelection_FadeIn(void) {
 void TeamSelection_ApplySlotSelection(s16 arg0, s16 arg1) {
     TeamRoster* temp_v1 = D_8423D3D8[arg0].unk_04;
 
-    if (temp_v1->unk_002 != 0) {
+    if (temp_v1->numberOfPokemonChosen != 0) {
         if (arg1 == 4) {
-            TeamSelection_RegisteredTeam_ApplySelection(&D_84229EB0, temp_v1->unk_214->unk_028[0].unk_53);
+            TeamSelection_RegisteredTeam_ApplySelection(&D_84229EB0, temp_v1->rosterInfo->unk_028[0].unk_53);
         } else {
-            Rental_CopyRosterToTeam(&D_84211B50, &temp_v1->unk_214->unk_028, temp_v1->unk_214->unk_002);
+            Rental_CopyRosterToTeam(&D_84211B50, &temp_v1->rosterInfo->unk_028, temp_v1->rosterInfo->numberOfPokemonCanBePicked);
         }
     }
 }
@@ -773,13 +773,13 @@ s32 Team_SelectTeams(void) {
     while (var_s1 >= 0 && var_s1 < 4) {
         if (D_8423D3D8[var_s1].unk_00 != 0) {
             var_s2 = TeamSelection_RunModal(D_8423D3D8[var_s1].unk_02, 0, D_8423D3D8[var_s1].unk_01, 1);
-            D_8423D3D8[var_s1].unk_04->unk_002 = 0;
+            D_8423D3D8[var_s1].unk_04->numberOfPokemonChosen = 0;
 
             if (var_s2 < 0) {
                 var_s1 -= 1;
                 while (var_s1 >= 0) {
                     if (D_8423D3D8[var_s1].unk_00 != 0) {
-                        var_s2 = (D_8423D3D8[var_s1].unk_04->unk_01C[0].unk_52 & 0x70) >> 4;
+                        var_s2 = (D_8423D3D8[var_s1].unk_04->pokemonPicked[0].unk_52 & 0x70) >> 4;
                         break;
                     }
                     var_s1--;
@@ -854,10 +854,10 @@ s32 Team_SelectRegisteredTeams(void) {
 
     while ((var_s1 >= 0) && (var_s1 < 4)) {
         if (D_8423D3D8[var_s1].unk_00 != 0) {
-            if (D_8423D3D8[var_s1].unk_04->unk_002 == 0) {
+            if (D_8423D3D8[var_s1].unk_04->numberOfPokemonChosen == 0) {
                 var_s2 = TeamSelection_RunModal(D_8423D3D8[var_s1].unk_02, 0, D_8423D3D8[var_s1].unk_01, 1);
             } else {
-                var_s2 = ((D_8423D3D8[var_s1].unk_04->unk_01C[0].unk_52 & 0x70) >> 4);
+                var_s2 = ((D_8423D3D8[var_s1].unk_04->pokemonPicked[0].unk_52 & 0x70) >> 4);
             }
 
             if (var_s2 < 0) {
@@ -865,7 +865,7 @@ s32 Team_SelectRegisteredTeams(void) {
 
                 while (var_s1 >= 0) {
                     if (D_8423D3D8[var_s1].unk_00 != 0) {
-                        var_s2 = (D_8423D3D8[var_s1].unk_04->unk_01C[0].unk_52 & 0x70) >> 4;
+                        var_s2 = (D_8423D3D8[var_s1].unk_04->pokemonPicked[0].unk_52 & 0x70) >> 4;
                         break;
                     }
                     var_s1--;

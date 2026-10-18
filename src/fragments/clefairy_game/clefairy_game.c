@@ -307,7 +307,7 @@ u32 D_861052C8[] = {
 
 static unk_D_86002F30* D_86105480;
 static unk_D_86002F34* D_86105484;
-static unk_D_86002F34_00C* D_86105488;
+static CameraNode* D_86105488;
 static unk_D_86002F30* D_8610548C;
 static s16 D_86105490;
 static s16 D_86105492;
@@ -540,17 +540,17 @@ void ClefairyGame_InitCamera(void) {
     D_86105492 = 0;
     D_86105494 = 0xBB8;
 
-    D_86105488->unk_24.near = 100.0f;
-    D_86105488->unk_24.far = 12800.0f;
-    D_86105488->unk_24.fovy = 30.0f;
+    D_86105488->perspective.nearPlane = 100.0f;
+    D_86105488->perspective.farPlane = 12800.0f;
+    D_86105488->perspective.verticalFieldOfView = 30.0f;
 
-    D_86105488->unk_60.at.x = 0.0f;
-    D_86105488->unk_60.at.y = 371.2f;
-    D_86105488->unk_60.at.z = -732.6f;
+    D_86105488->view.targetPosition.x = 0.0f;
+    D_86105488->view.targetPosition.y = 371.2f;
+    D_86105488->view.targetPosition.z = -732.6f;
 
-    D_86105488->unk_60.eye.x = 0.0f;
-    D_86105488->unk_60.eye.y = 990.0f;
-    D_86105488->unk_60.eye.z = 2659.0f;
+    D_86105488->view.eyePosition.x = 0.0f;
+    D_86105488->view.eyePosition.y = 990.0f;
+    D_86105488->view.eyePosition.z = 2659.0f;
 }
 
 void func_86100C28(void) {

@@ -33,7 +33,7 @@ void PokeIcon_InitRenderScene(unk_func_8001A024* arg0, s16 arg1, s16 arg2) {
         PokeIcon_CaptureGeoNode, 0x00000000, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000, 0x00000000, 0x00000000,
     };
 
-    unk_D_86002F34_00C* sp24;
+    CameraNode* sp24;
     MemoryBlock* sp20 = MainPool_AllocState(main_pool_get_available(), 0);
 
     arg0->unk_0C = process_geo_layout(sp20, D_8006F350);
@@ -46,7 +46,7 @@ void PokeIcon_InitRenderScene(unk_func_8001A024* arg0, s16 arg1, s16 arg2) {
 
 unk_func_8001A024* PokeIcon_CreateRenderList(ModelLoadContext* arg0, s16 arg1, s16 arg2, s16 arg3) {
     s32 var_s0;
-    unk_D_80068BB0* temp_a1;
+    DepthBuffer* temp_a1;
     s32 i;
     unk_func_8001A024* temp_v0 = main_pool_alloc(sizeof(unk_func_8001A024), 0);
 
@@ -79,7 +79,7 @@ unk_func_8001A024* PokeIcon_CreateRenderList(ModelLoadContext* arg0, s16 arg1, s
     return temp_v0;
 }
 
-void PokeIcon_AttachDepthBuffer(unk_func_8001A024* arg0, ModelLoadContext* arg1, unk_D_80068BB0* arg2) {
+void PokeIcon_AttachDepthBuffer(unk_func_8001A024* arg0, ModelLoadContext* arg1, DepthBuffer* arg2) {
     s32 i;
 
     arg0->unk_04 = arg1;
@@ -100,7 +100,7 @@ void PokeIcon_ResetRenderList(unk_func_8001A024* arg0) {
     u16 w;
     u16 h;
     unk_func_8001A024_008* tempImg_p;
-    unk_D_80068BB0* tempDepth_p;
+    DepthBuffer* tempDepth_p;
 
     if (arg0->unk_00 & 1) {
         PokeIcon_WaitFrameLoad(arg0->unk_04);
@@ -195,7 +195,7 @@ void PokeIcon_AdjustImageColors(u16* arg0, s32 a1, arg1_func_80010CA8 arg2) {
     // clang-format on
 }
 
-void PokeIcon_AdjustImageColorBuffer(unk_D_80068BB0* arg0, arg1_func_80010CA8 arg1) {
+void PokeIcon_AdjustImageColorBuffer(DepthBuffer* arg0, arg1_func_80010CA8 arg1) {
     s32 size = arg0->width * arg0->height;
 
     PokeIcon_AdjustImageColors(arg0->img_p, size, arg1);
@@ -203,7 +203,7 @@ void PokeIcon_AdjustImageColorBuffer(unk_D_80068BB0* arg0, arg1_func_80010CA8 ar
 
 void PokeIcon_RenderSlot(unk_func_8001A024* arg0, s32 arg1) {
     Vec3s sp38;
-    unk_D_86002F34_00C* sp34;
+    CameraNode* sp34;
     unk_func_8001A024_008* temp_s1;
     ModelNodeView* sp2C;
 
@@ -233,7 +233,7 @@ void PokeIcon_RenderSlot(unk_func_8001A024* arg0, s32 arg1) {
     arg0->unk_10->node.renderFlags &= ~0x40;
     arg0->unk_10->node.renderFlags |= 0x80;
     Vec3f_SetComponentsDuplicate(&arg0->unk_10->scale, temp_s1->unk_08, temp_s1->unk_08, temp_s1->unk_08);
-    Camera_ComputeEyeFromAngles(&sp34->unk_60.at, &sp34->unk_60.eye, 1250.0f, 0x71C, temp_s1->unk_04);
+    Camera_ComputeEyeFromAngles(&sp34->view.targetPosition, &sp34->view.eyePosition, 1250.0f, 0x71C, temp_s1->unk_04);
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0->unk_08[arg1].unk_0C);
     GeoRender_AdvanceFrameCounter();
     GeoRender_SetMode(3);
