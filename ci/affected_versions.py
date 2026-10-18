@@ -8,7 +8,9 @@ version per line; nothing is printed when no build is affected (docs only).
   - files under yamls/, linker_scripts/, baseroms/, asm/, assets/ in a version
     directory affect only that version
   - src/<name>.c affects the versions whose rom.yaml builds <name> from C
-  - documentation and COVERAGE.md affect nothing
+  - documentation, COVERAGE.md and editor-only files (.vscode/, .clangd, its workflow,
+    .gitignore, compile_flags.txt, the clangd helper and tool unit tests)
+    affect nothing: neither the Makefile nor any build tool reads them
   - everything else (Makefile, tools, include, lib, ci, shared linker scripts)
     affects every buildable version
 """
@@ -19,7 +21,11 @@ import sys
 from pathlib import Path
 
 VERSIONED = {"yamls", "linker_scripts", "baseroms", "asm", "assets"}
-DOCS = re.compile(r"(^docs/|\.md$|^COVERAGE\.md$|^LICENSE)")
+DOCS = re.compile(
+    r"(^docs/|\.md$|^COVERAGE\.md$|^LICENSE"
+    r"|^\.vscode/|^\.github/workflows/clangd\.yml$|^\.clangd$|^\.gitignore$|^compile_flags\.txt$"
+    r"|^tools/clangd_config\.py$|^tools/test_[^/]*\.py$)"
+)
 CENTRY = re.compile(r"^\s*-\s*\[0x[0-9A-Fa-f]+,\s*c,\s*([^\],\s]+)", re.MULTILINE)
 
 
