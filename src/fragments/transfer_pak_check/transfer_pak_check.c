@@ -32,11 +32,11 @@ static s32 D_82D0ABA8;
 static GraphNode* D_82D0ABAC;
 static GraphNode* D_82D0ABB0;
 static GraphNode* D_82D0ABB4;
-static unk_D_80068BB0* D_82D0ABB8[4];
-static unk_D_80068BB0* D_82D0ABC8;
-static unk_D_80068BB0* D_82D0ABCC;
+static DepthBuffer* D_82D0ABB8[4];
+static DepthBuffer* D_82D0ABC8;
+static DepthBuffer* D_82D0ABCC;
 static PakUi_StatusPopup D_82D0ABD0;
-static unk_D_80068BB0* D_82D0ABE0[8];
+static DepthBuffer* D_82D0ABE0[8];
 static GraphNode* D_82D0AC00;
 static GraphNode* D_82D0AC04;
 static GraphNode* D_82D0AC08;
@@ -1013,7 +1013,7 @@ void PakUi_DrawMenuBackdrop(void) {
     gSPDisplayList(gDisplayListHead++, D_8006F630);
 }
 
-void PakUi_BuildFrameBuffer(unk_D_80068BB0* arg0, s16 arg1, s16 arg2) {
+void PakUi_BuildFrameBuffer(DepthBuffer* arg0, s16 arg1, s16 arg2) {
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0);
     GfxImage_FillCurrent(&gDisplayListHead, 0);
 
@@ -2306,10 +2306,10 @@ void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1) {
     BgStage_AdvanceFrame();
 }
 
-unk_D_80068BB0* PakUi_BuildGameIconBuffer(s32 arg0) {
+DepthBuffer* PakUi_BuildGameIconBuffer(s32 arg0) {
     UNUSED s32 pad;
     s16 i;
-    unk_D_80068BB0* sp3C;
+    DepthBuffer* sp3C;
     u8* var_s3;
     s16 temp_s0;
 
@@ -2347,8 +2347,8 @@ unk_D_80068BB0* PakUi_BuildGameIconBuffer(s32 arg0) {
     return sp3C;
 }
 
-unk_D_80068BB0* PakUi_BuildControllerIconBuffer(void) {
-    unk_D_80068BB0* sp34;
+DepthBuffer* PakUi_BuildControllerIconBuffer(void) {
+    DepthBuffer* sp34;
 
     sp34 = GfxImage_Allocate(0, 2, 0xAC, 0x5C, 1);
     PakUi_BuildFrameBuffer(sp34, 0xA8, 0x58);
@@ -2373,8 +2373,8 @@ unk_D_80068BB0* PakUi_BuildControllerIconBuffer(void) {
     return sp34;
 }
 
-unk_D_80068BB0* PakUi_BuildControllerIconBufferAlt(void) {
-    unk_D_80068BB0* sp34;
+DepthBuffer* PakUi_BuildControllerIconBufferAlt(void) {
+    DepthBuffer* sp34;
 
     sp34 = GfxImage_Allocate(0, 2, 0xAC, 0x5C, 1);
     PakUi_BuildFrameBuffer(sp34, 0xA8, 0x58);
@@ -2399,8 +2399,8 @@ unk_D_80068BB0* PakUi_BuildControllerIconBufferAlt(void) {
     return sp34;
 }
 
-unk_D_80068BB0* PakUi_BuildMonIconBuffer(void) {
-    unk_D_80068BB0* sp34;
+DepthBuffer* PakUi_BuildMonIconBuffer(void) {
+    DepthBuffer* sp34;
 
     sp34 = GfxImage_Allocate(0, 2, 0xAC, 0x40, 1);
     PakUi_BuildFrameBuffer(sp34, 0xA8, 0x3C);
@@ -2425,9 +2425,9 @@ unk_D_80068BB0* PakUi_BuildMonIconBuffer(void) {
     return sp34;
 }
 
-unk_D_80068BB0* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3) {
+DepthBuffer* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3) {
     s32 sp2C;
-    unk_D_80068BB0* sp28;
+    DepthBuffer* sp28;
 
     sp2C = Font_MeasureTextExtent(8, 0, arg0);
     sp28 = GfxImage_Allocate(0, 2, 0xAC, 0x30, 1);

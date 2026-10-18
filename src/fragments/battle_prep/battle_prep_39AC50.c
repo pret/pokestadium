@@ -728,8 +728,8 @@ s32 BattlePrepRoster_ConvergeIconsStep(unk_D_84B25A28* arg0, s16 arg1) {
 }
 
 void BattlePrepRoster_UpdateCameraSwoop(unk_D_84B25A28* arg0, s16 arg1) {
-    arg0->unk_08->unk_60.at.y = SINS(arg1 << 0xE) * SQ((0x10 - arg1) / 12.0f);
-    Camera_ComputeEyeFromAngles(&arg0->unk_08->unk_60.at, &arg0->unk_08->unk_60.eye, 289.0f, 0, 0);
+    arg0->unk_08->view.targetPosition.y = SINS(arg1 << 0xE) * SQ((0x10 - arg1) / 12.0f);
+    Camera_ComputeEyeFromAngles(&arg0->unk_08->view.targetPosition, &arg0->unk_08->view.eyePosition, 289.0f, 0, 0);
 }
 
 s32 BattlePrepRoster_ZoomStepNTSC(unk_D_84B25A28* arg0, s16 arg1) {
@@ -832,12 +832,12 @@ void BattlePrepRoster_LoadDexIdsSingle(unk_D_84B25A28* arg0) {
     temp_s0 = PokeIcon_AllocFramebuffers(5);
     PokeIcon_AttachDepthBuffer(arg0->unk_20, temp_s0, GfxImage_Allocate(0, 2, 0x80, 0x60, 1));
 
-    for (count = 0, i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (count = 0, i = 0; i < gSessionContext.battleSides[0].teamMember[0]->rosterInfo->numberOfPokemonCanBePicked; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].teamMember[0]->rosterInfo->unk_028[i].unk_00.unk_00, 0);
     }
 
-    for (count = 6, i = 0; i < gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (count = 6, i = 0; i < gSessionContext.battleSides[1].teamMember[0]->rosterInfo->numberOfPokemonCanBePicked; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].teamMember[0]->rosterInfo->unk_028[i].unk_00.unk_00, 0);
     }
 }
 
@@ -848,30 +848,30 @@ void BattlePrepRoster_LoadDexIdsDouble(unk_D_84B25A28* arg0) {
 
     PokeIcon_AttachDepthBuffer(arg0->unk_20, tmp, GfxImage_Allocate(0, 2, 0x60, 0x40, 1));
 
-    for (count = 0, i = 0; i < gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (count = 0, i = 0; i < gSessionContext.battleSides[0].teamMember[0]->rosterInfo->numberOfPokemonCanBePicked; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].teamMember[0]->rosterInfo->unk_028[i].unk_00.unk_00, 0);
     }
 
-    if (gSessionContext.battleSides[0].unk_08[1] != NULL) {
-        for (i = 0, count = 6; i < gSessionContext.battleSides[0].unk_08[1]->unk_214->unk_002; count++, i++) {
-            func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].unk_08[1]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    if (gSessionContext.battleSides[0].teamMember[1] != NULL) {
+        for (i = 0, count = 6; i < gSessionContext.battleSides[0].teamMember[1]->rosterInfo->numberOfPokemonCanBePicked; count++, i++) {
+            func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[0].teamMember[1]->rosterInfo->unk_028[i].unk_00.unk_00, 0);
         }
     }
 
-    for (i = 0, count = 12; i < gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_002; count++, i++) {
-        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    for (i = 0, count = 12; i < gSessionContext.battleSides[1].teamMember[0]->rosterInfo->numberOfPokemonCanBePicked; count++, i++) {
+        func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].teamMember[0]->rosterInfo->unk_028[i].unk_00.unk_00, 0);
     }
 
-    if (gSessionContext.battleSides[1].unk_08[1] != NULL) {
-        for (count = 18, i = 0; i < gSessionContext.battleSides[1].unk_08[1]->unk_214->unk_002; count++, i++) {
-            func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].unk_08[1]->unk_214->unk_028[i].unk_00.unk_00, 0);
+    if (gSessionContext.battleSides[1].teamMember[1] != NULL) {
+        for (count = 18, i = 0; i < gSessionContext.battleSides[1].teamMember[1]->rosterInfo->numberOfPokemonCanBePicked; count++, i++) {
+            func_8001A324(arg0->unk_20, count, gSessionContext.battleSides[1].teamMember[1]->rosterInfo->unk_028[i].unk_00.unk_00, 0);
         }
     }
 }
 
 void BattlePrepRoster_Load(unk_D_84B25A28* arg0, BinArchive* arg1) {
-    u8* sp24 = BinArchive_GetFile(arg1, gSessionContext.battleSides[0].unk_08[0]->unk_214->unk_003);
-    u8* sp20 = BinArchive_GetFile(arg1, gSessionContext.battleSides[1].unk_08[0]->unk_214->unk_003);
+    u8* sp24 = BinArchive_GetFile(arg1, gSessionContext.battleSides[0].teamMember[0]->rosterInfo->unk_003);
+    u8* sp20 = BinArchive_GetFile(arg1, gSessionContext.battleSides[1].teamMember[0]->rosterInfo->unk_003);
 
     PokeIcon_OpenModelArchives();
     FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
@@ -963,7 +963,7 @@ s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, DisplayObject* arg
     return arg0->unk_00 == 3;
 }
 
-void BattlePrepRoster_Init(unk_D_84B25A28* arg0, unk_D_86002F34_00C* arg1) {
+void BattlePrepRoster_Init(unk_D_84B25A28* arg0, CameraNode* arg1) {
     MemoryBlock* temp_s1;
 
     arg0->unk_08 = arg1;

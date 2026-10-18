@@ -26,7 +26,7 @@ static u32 D_86600850[] = {
 
 static unk_D_86002F30* D_86600940;
 static GraphNode* D_86600944;
-static unk_D_86002F34_00C* D_86600948;
+static CameraNode* D_86600948;
 static DisplayObject D_86600950;
 static s16 D_86600AB8;
 static s16 D_86600ABA;
@@ -45,10 +45,10 @@ void Minigame_Sample7Viewer_InitCamera(void) {
     D_86600ABA = 0;
     D_86600ABC = 0x78;
 
-    D_86600948->unk_24.near = 10.0f;
-    D_86600948->unk_24.far = 6400.0f;
+    D_86600948->perspective.nearPlane = 10.0f;
+    D_86600948->perspective.farPlane = 6400.0f;
 
-    Camera_ComputeEyeFromAngles(&D_86600948->unk_60.at, &D_86600948->unk_60.eye, D_86600ABC, D_86600AB8, D_86600ABA);
+    Camera_ComputeEyeFromAngles(&D_86600948->view.targetPosition, &D_86600948->view.eyePosition, D_86600ABC, D_86600AB8, D_86600ABA);
 }
 
 void Minigame_Sample7Viewer_UpdateCameraControls(void) {
@@ -92,7 +92,7 @@ void Minigame_Sample7Viewer_UpdateCameraControls(void) {
         D_86600ABC = 2000;
     }
 
-    Camera_ComputeEyeFromAngles(&D_86600948->unk_60.at, &D_86600948->unk_60.eye, D_86600ABC, D_86600AB8, D_86600ABA);
+    Camera_ComputeEyeFromAngles(&D_86600948->view.targetPosition, &D_86600948->view.eyePosition, D_86600ABC, D_86600AB8, D_86600ABA);
 }
 
 void Minigame_Sample7Viewer_DrawDebugText(s32 arg0) {

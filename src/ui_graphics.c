@@ -294,7 +294,7 @@ void Ui_FillInsetRectangleB(s32 x1, s32 y1, s32 width, s32 height, u16 color) {
 void Ui_DrawGradientRectangle(s32 x1, s32 y1, s32 width, s32 height, Color_RGB8* top_color,
                               Color_RGB8* bottom_color) {
     Vtx* temp_s2;
-    unk_D_80068BB0* temp_s1;
+    DepthBuffer* temp_s1;
     Mtx* sp7C;
     Vp* sp78;
 

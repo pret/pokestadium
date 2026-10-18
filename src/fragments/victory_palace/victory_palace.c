@@ -64,7 +64,7 @@ static s16 D_82608550;
 static s16 D_82608552;
 static s16 D_82608554;
 static s16 D_82608556;
-static unk_D_86002F34_00C* D_82608558;
+static CameraNode* D_82608558;
 static s32 pad_D_82608560[2];
 static u16 D_82608568[151][0x640];
 static s16 D_8267E4E8;
@@ -1772,7 +1772,7 @@ s32 VictoryPalace_UpdateLeftPillarGlow(s32 arg0, unk_D_86002F34_alt18* arg1) {
 
     if (arg0 == 2) {
 
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp30, &sp2E, &sp2C);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp30, &sp2E, &sp2C);
         arg1->unk_1C = sp2E + 0x2000;
         arg1->unk_1E = sp2C - 0x2000;
 
@@ -1805,7 +1805,7 @@ s32 VictoryPalace_UpdateRightPillarGlow(s32 arg0, unk_D_86002F34_alt18* arg1) {
     s16 sp2C;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp30, &sp2E, &sp2C);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp30, &sp2E, &sp2C);
 
         arg1->unk_1C = -0x2000 - sp2E;
         arg1->unk_1E = sp2C + 0x6000;
@@ -1829,13 +1829,13 @@ void VictoryPalace_InitCamera(void) {
     D_8260853C = 0x450;
     D_8260853E = 0;
     D_82608540 = 0x578;
-    D_82608558->unk_24.near = 100.0f;
-    D_82608558->unk_24.far = 12800.0f;
-    D_82608558->unk_24.fovy = 30.0f;
-    D_82608558->unk_60.at.x = 0.0f;
-    D_82608558->unk_60.at.y = 20.0f;
-    D_82608558->unk_60.at.z = 0.0f;
-    Camera_ComputeEyeFromAngles(&D_82608558->unk_60.at, &D_82608558->unk_60.eye, D_82608540, D_8260853C, D_8260853E);
+    D_82608558->perspective.nearPlane = 100.0f;
+    D_82608558->perspective.farPlane = 12800.0f;
+    D_82608558->perspective.verticalFieldOfView = 30.0f;
+    D_82608558->view.targetPosition.x = 0.0f;
+    D_82608558->view.targetPosition.y = 20.0f;
+    D_82608558->view.targetPosition.z = 0.0f;
+    Camera_ComputeEyeFromAngles(&D_82608558->view.targetPosition, &D_82608558->view.eyePosition, D_82608540, D_8260853C, D_8260853E);
     D_8006F088 = D_82608558;
 }
 

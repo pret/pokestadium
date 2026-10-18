@@ -128,7 +128,7 @@ static u32 D_86002B18[] = {
 
 static unk_D_86002F30* D_86002F30;
 static unk_D_86002F34* D_86002F34;
-static unk_D_86002F34_00C* D_86002F38;
+static CameraNode* D_86002F38;
 static s16 D_86002F3C;
 static s16 D_86002F3E;
 static s16 D_86002F40;
@@ -295,19 +295,19 @@ void MagikarpGame_InitCamera(void) {
     D_86002F3E = 0;
     D_86002F40 = 1000;
 
-    D_86002F38->unk_24.near = 100.0f;
-    D_86002F38->unk_24.far = 12800.0f;
-    D_86002F38->unk_24.fovy = 10.0f;
+    D_86002F38->perspective.nearPlane = 100.0f;
+    D_86002F38->perspective.farPlane = 12800.0f;
+    D_86002F38->perspective.verticalFieldOfView = 10.0f;
 
-    D_86002F38->unk_60.at.x = 0.0f;
-    D_86002F38->unk_60.at.y = 70.0f;
-    D_86002F38->unk_60.at.z = 0.0f;
+    D_86002F38->view.targetPosition.x = 0.0f;
+    D_86002F38->view.targetPosition.y = 70.0f;
+    D_86002F38->view.targetPosition.z = 0.0f;
 
-    Camera_ComputeEyeFromAngles(&D_86002F38->unk_60.at, &D_86002F38->unk_60.eye, D_86002F40, D_86002F3C, D_86002F3E);
+    Camera_ComputeEyeFromAngles(&D_86002F38->view.targetPosition, &D_86002F38->view.eyePosition, D_86002F40, D_86002F3C, D_86002F3E);
 }
 
 void MagikarpGame_UpdateCameraLookAt(void) {
-    Camera_ComputeEyeFromAngles(&D_86002F38->unk_60.at, &D_86002F38->unk_60.eye, D_86002F40, D_86002F3C, D_86002F3E);
+    Camera_ComputeEyeFromAngles(&D_86002F38->view.targetPosition, &D_86002F38->view.eyePosition, D_86002F40, D_86002F3C, D_86002F3E);
 }
 
 void MagikarpGame_DrawOverlay(s32 arg0) {

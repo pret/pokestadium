@@ -67,7 +67,7 @@ typedef struct unk_D_84B259E8 {
     /* 0x0C */ GraphNode* unk_0C;
     /* 0x10 */ u8* unk_10[4];
     /* 0x20 */ char unk20[0x10];
-    /* 0x30 */ unk_D_80068BB0* unk_30[4];
+    /* 0x30 */ DepthBuffer* unk_30[4];
 } unk_D_84B259E8; // size >= 0x40
 
 typedef struct unk_D_84B25A58 {
@@ -82,8 +82,8 @@ typedef struct unk_D_84B25A58 {
     /* 0x18 */ unk_D_86002F34* unk_18;
     /* 0x1C */ unk_func_8001A024* unk_1C;
     /* 0x20 */ u16 (*unk_20)[0x640];
-    /* 0x24 */ unk_D_80068BB0* unk_24;
-    /* 0x28 */ unk_D_80068BB0* unk_28;
+    /* 0x24 */ DepthBuffer* unk_24;
+    /* 0x28 */ DepthBuffer* unk_28;
     /* 0x2C */ u8 unk_2C[12];
 } unk_D_84B25A58; // size = 0x38
 
@@ -184,7 +184,7 @@ s32 BattlePrep_StarfieldGeoCallback(s32 arg0, unk_D_86002F34_alt8* arg1);
 void BattlePrep_ResetDisplayObject(DisplayObject* arg0);
 void BattlePrep_ResetAllDisplayObjects(void);
 void BattlePrep_DrawBorderedRect(s16, s16, s16, s16, u8, u8, u8, u8);
-void BattlePrep_DrawTrainerStatusIcon(unk_D_80068BB0*, s16, u8*, u8*);
+void BattlePrep_DrawTrainerStatusIcon(DepthBuffer*, s16, u8*, u8*);
 void BattlePrep_AnimateBallBurstEffect(s16 arg0);
 void BattlePrep_FadeInBallBurstObjects(s16 arg0);
 void BattlePrep_RenderFrame(void);
@@ -282,7 +282,7 @@ void BattlePrepRoster_Load(unk_D_84B25A28* arg0, BinArchive* arg1);
 void BattlePrepRoster_PositionIconsSingle(unk_D_84B25A28* arg0);
 void BattlePrepRoster_PositionIconsDouble(unk_D_84B25A28* arg0);
 s32 BattlePrepRoster_InitDisplayObjects(unk_D_84B25A28* arg0, DisplayObject* arg1);
-void BattlePrepRoster_Init(unk_D_84B25A28* arg0, unk_D_86002F34_00C* arg1);
+void BattlePrepRoster_Init(unk_D_84B25A28* arg0, CameraNode* arg1);
 
 s32 BattlePrepTeamIcons_DrawActiveTeamBadge(s32 arg0, unk_func_80011B94* arg1);
 s32 BattlePrepTeamIcons_DrawIconSingle(s32 arg0, unk_func_80011B94* arg1);

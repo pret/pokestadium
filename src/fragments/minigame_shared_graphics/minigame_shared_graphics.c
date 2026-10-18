@@ -79,16 +79,16 @@ static Gfx D_87A012A8[] = {
 
 // Is this real?
 static u8 pad_D_87A01300[0x30];
-static unk_D_86002F34_00C* D_87A01330;
+static CameraNode* D_87A01330;
 
-void MiniCam_SetActive(unk_D_86002F34_00C* arg0) {
+void MiniCam_SetActive(CameraNode* arg0) {
     D_87A01330 = arg0;
 }
 
 Gfx* MiniCam_ApplyProjection(Gfx* arg0) {
-    gSPPerspNormalize(arg0++, D_87A01330->unk_24.perspNorm);
-    gSPMatrix(arg0++, (u32)D_87A01330->unk_24.mtx & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(arg0++, (u32)D_87A01330->unk_60.p_mtxf & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    gSPPerspNormalize(arg0++, D_87A01330->perspective.unk_04);
+    gSPMatrix(arg0++, (u32)D_87A01330->perspective.projectionMatrix & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(arg0++, (u32)D_87A01330->view.fixedMatrix & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
     return arg0;
 }

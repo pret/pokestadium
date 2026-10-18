@@ -79,6 +79,11 @@ Do not include non-alphanumeric or non-ASCII symbols in variable names even if l
 
 Consequently: Do not include é in Pokémon for variable names as IDO does not accept non-ASCII characters in indentifiers. The é is optional for documentation and comments.
 
+#### Mechanics
+The format stadium uses is commonly called "bring 6, pick 3." To disambiguate between Pokemon in the party and Pokemon chosen to for a particular battle, we say "brought Pokemon" and "picked Pokemon".
+
+As AI is now a term to refer to a technology, use the term "COM" to refer to the non-player trainers since that is the label in Free Battle. Battle AI procedures may still be called `BattleAi` as a function domain.
+
 #### Game
 
 Use English names for Pokemon and Characters.

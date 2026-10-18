@@ -181,55 +181,68 @@ typedef struct GraphNode {
     /* 0x03 */ u8 renderLayer; // Material/render-slot selector; may be remapped by material state.
     /* 0x04 */ struct GraphNode* prevSibling;
     /* 0x08 */ struct GraphNode* nextSibling;
-    /* 0x0C */ struct unk_D_86002F34_00C* children; // Circular child-list head; retain legacy pointer type.
+    /* 0x0C */ struct CameraNode* children; // Circular list of graph nodes through a legacy camera view.
     /* 0x10 */ GraphNodeCallback callback; // Events: 0 on installation, 2 on traversal, 5 on DL submission.
     /* 0x14 */ void* callbackArg; // Callback-owned data or selector, accessed through the node.
 } GraphNode; // size = 0x18
 
-typedef struct unk_D_86002F34_00C_018 {
-    /* 0x00 */ Vp* vp;
+// Geo_NodeCamera converts this pixel rectangle into an RSP viewport and RDP scissor.
+//@src/geo_render.c
+typedef struct CameraViewport {
+    /* 0x00 */ Vp* rspViewport;
     /* 0x04 */ s16 x;
     /* 0x06 */ s16 y;
     /* 0x08 */ s16 width;
     /* 0x0A */ s16 height;
-} unk_D_86002F34_00C_018; // size = 0xC
+} CameraViewport; // size = 0xC
 
-typedef struct unk_D_86002F34_00C_024 {
-    /* 0x00 */ Mtx* mtx;
-    /* 0x04 */ u16 perspNorm;
-    /* 0x08 */ f32 fovy;
-    /* 0x0C */ f32 aspect;
-    /* 0x10 */ f32 near;
-    /* 0x14 */ f32 far;
-    /* 0x18 */ f32 scale;
-} unk_D_86002F34_00C_024; // size = 0x1C
+// Geo_NodeCamera passes these projection parameters to guPerspective.
+//@src/geo_render.c
+typedef struct CameraPerspective {
+    /* 0x00 */ Mtx* projectionMatrix;
+    /* 0x04 */ u16 unk_04;
+    /* 0x08 */ f32 verticalFieldOfView; // Degrees; guPerspective converts to radians.
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 nearPlane;
+    /* 0x14 */ f32 farPlane;
+    /* 0x18 */ f32 unk_18;
+} CameraPerspective; // size = 0x1C
 
-typedef struct unk_D_86002F34_00C_040 {
-    /* 0x00 */ Mtx* mtx;
-    /* 0x04 */ f32 l;
-    /* 0x08 */ f32 r;
-    /* 0x0C */ f32 b;
-    /* 0x10 */ f32 t;
-    /* 0x14 */ f32 n;
-    /* 0x18 */ f32 f;
-    /* 0x1C */ f32 scale;
-} unk_D_86002F34_00C_040; // size = 0x20
+// Orthographic projection block consumed by Geo_NodeCamera and GeoOverlay_Draw.
+//@src/geo_render.c
+typedef struct CameraOrthographic {
+    /* 0x00 */ Mtx* unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+} CameraOrthographic; // size = 0x20
 
-typedef struct unk_D_86002F34_00C_060 {
-    /* 0x00 */ MtxF* p_mtxf;
-    /* 0x04 */ MtxF mtxf;
-    /* 0x44 */ LookAt* lookat;
-    /* 0x48 */ Vec3f eye;
-    /* 0x54 */ Vec3f at;
-    /* 0x60 */ Vec3f up;
-} unk_D_86002F34_00C_060; // size >= 0x6C
+// guLookAtReflectF builds floatMatrix from these eye, target and up vectors.
+// MtxF_ToFixed writes packed 16.16 words through fixedMatrix's legacy MtxF* type.
+//@src/geo_render.c
+//@src/matrix.c
+typedef struct CameraView {
+    /* 0x00 */ MtxF* fixedMatrix;
+    /* 0x04 */ MtxF floatMatrix;
+    /* 0x44 */ LookAt* unk_44;
+    /* 0x48 */ Vec3f eyePosition;
+    /* 0x54 */ Vec3f targetPosition;
+    /* 0x60 */ Vec3f upDirection;
+} CameraView; // size >= 0x6C
 
-typedef struct unk_D_86002F34_00C_0CC {
-    /* 0x00 */ u16 unk_00;
+// GeoOverlay_Draw renders solid/fading color quads or textured transition quads.
+// Transition progress advances once per overlay draw, rather than from a clock.
+//@src/geo_render.c
+typedef struct CameraOverlay {
+    /* 0x00 */ u16 mode; // 0 = disabled, 1 = solid, 2/3 = fade, 4/5 = textured transition.
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ Color_RGBA8_u32 color;
-    /* 0x08 */ u16 unk_08;
-    /* 0x0A */ u16 unk_0A;
+    /* 0x08 */ u16 stepCount;
+    /* 0x0A */ u16 stepIndex; // Starts at 1; reaching stepCount selects the terminal mode.
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s16 unk_10;
@@ -238,18 +251,22 @@ typedef struct unk_D_86002F34_00C_0CC {
     /* 0x16 */ s16 unk_16;
     /* 0x18 */ s16 unk_18;
     /* 0x1A */ s16 unk_1A;
-    /* 0x1C */ u8* texture;
-} unk_D_86002F34_00C_0CC; // size >= 0x20
+    /* 0x1C */ u8* unk_1C;
+} CameraOverlay; // size >= 0x20
 
-typedef struct unk_D_86002F34_00C {
+// Camera scene-graph node (type 2), initialized by GeoNode_CreateCamera.
+// Geo_NodeCamera prepares projection/view state, traverses children and draws the overlay.
+//@src/geo_node.c
+//@src/geo_render.c
+typedef struct CameraNode {
     /* 0x00 */ GraphNode node;
-    /* 0x18 */ unk_D_86002F34_00C_018 unk_18;	//	viewPort
-    /* 0x24 */ unk_D_86002F34_00C_024 unk_24;	//	projection
-    /* 0x40 */ unk_D_86002F34_00C_040 unk_40;
-    /* 0x60 */ unk_D_86002F34_00C_060 unk_60;	//	camera
-    /* 0xCC */ unk_D_86002F34_00C_0CC unk_CC;
-    /* 0xEC */ char unkEC[0x4];
-} unk_D_86002F34_00C; // size = 0xF0
+    /* 0x18 */ CameraViewport viewport;
+    /* 0x24 */ CameraPerspective perspective;
+    /* 0x40 */ CameraOrthographic orthographic;
+    /* 0x60 */ CameraView view;
+    /* 0xCC */ CameraOverlay overlay;
+    /* 0xEC */ char unk_EC[0x4];
+} CameraNode; // size = 0xF0
 
 typedef struct unk_D_86002F34_alt1 {
     /* 0x00 */ GraphNode node;
