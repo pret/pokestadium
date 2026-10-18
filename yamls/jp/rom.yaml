@@ -26,10 +26,10 @@
     - [0x2850, c, memmap]
     - [0x2E30, c, memory_main] # handles the main global pool
     - [0x35B0, c, memory] # memory_pool
-    - [0x39F0, asm, util]
+    - [0x39F0, c, util]
     - [0x3F20, c, jpeg_stream] # PRES-JPEG stream/asset loader
     - [0x54F0, asm, text_54F0]
-    - [0x63D0, asm, controller]
+    - [0x63D0, c, controller]
     - [0x69E0, c, gfx_buffer]
     - [0x6B60, asm, text_6B60]
     - [0x7580, c, stage_loader] # stage loader
@@ -71,7 +71,7 @@
     - [0x35CC0, c, libnumus/player]
     - [0x3A250, c, 3D140]  # music code
     - [0x3B280, asm, text_3B280]
-    - [0x40530, asm, libnaudio/n_sl]
+    - [0x40530, c, libnaudio/n_sl]
     - [0x405C0, c, libnaudio/n_synsetpriority]
     - [0x405E0, asm, gb_audio]
     - [0x42730, asm, audio_stream]
@@ -95,7 +95,7 @@
     - [0x4CA20, c, libnaudio/n_auxbus]
     - [0x4CAD0, c, libnaudio/n_synsetfxmix]
     - [0x4CB60, c, libnaudio/n_synaddplayer]
-    - [0x4CBC0, asm, libnaudio/n_resample]
+    - [0x4CBC0, c, libnaudio/n_resample]
     - [0x4CD90, c, libnaudio/n_load]
     - [0x4D4D0, c, audio_category_fade]
     - [0x4D5A0, c, libnaudio/n_syndelete]
@@ -111,6 +111,7 @@
     - [0x4E730, c, libnaudio/n_synsetvol]
     - [0x4E7D0, c, libleo/readwrite]
     - [0x4E860, asm, libleo/leofunc]
+    - [0x4ECD0, asm, libleo/leofunc_tail]
     - [0x4ECE0, c, libleo/leoint]
     - [0x4F6D0, pad]
     - [0x4F6E0, asm, libleo/leocmdex]
@@ -120,7 +121,8 @@
     - [0x501E0, c, libleo/leoinquiry]
     - [0x50290, c, libleo/leodiskinit]
     - [0x50330, c, libleo/readdiskid]
-    - [0x50390, asm, libleo/leord_diskid]
+    - [0x50390, c, libleo/leord_diskid]
+    - [0x50520, asm, libleo/leomecha]
     - [0x50E70, c, libleo/spdlmotor]
     - [0x50F30, c, libleo/leoc2ecc]
     - [0x52020, c, libleo/setrtc]
@@ -245,6 +247,9 @@
     - [0x64BE0, textbin, rsp/aspMain]
     - [0x65840, textbin, rsp/3DEX2.fifo] # v2.06
     - [0x66330, asm, text_66330]
+    - [0x66340, .data, util]
+    - [0x66350, .data, controller]
+    - [0x66360, data, text_66360]
     - [0x66370, .data, stage_loader]
     - [0x66D60, .data, crash_screen]
     - [0x66F60, .data, profiler]
@@ -268,6 +273,7 @@
     - [0x7C4E0, .data, libnumus/player]
     - [0x7C5E0, .data, 3D140]
     - [0x7C640, data, 3D140_2]
+    - [0x7CDD0, .data, libnaudio/n_sl]
     - [0x7CDE0, data, gb_audio]
     - [0x7CE40, data, audio_stream]
     - [0x7CE50, .data, libnaudio/n_env]
@@ -278,7 +284,7 @@
     - [0x7D720, data, text_7D720]
     - [0x7DBB0, data, audio_commands_category2]
     - [0x7DD40, data, libleo/leocmdex]
-    - [0x7DDB0, data, libleo/leord_diskid]
+    - [0x7DDB0, .data, libleo/leord_diskid]
     - [0x7DDD0, .data, libleo/cjcreateleomanager]
     - [0x7DDE0, pad]
     - [0x7DDF0, data, lib/thread]
@@ -306,7 +312,7 @@
     - [0x7F5C0, data, lib/vimgr]
     - [0x7F5E0, data, lib/aisetnextbuf]
     - [0x7F5F0, .rodata, rsp]
-    - [0x7F640, rodata, util]
+    - [0x7F640, .rodata, util]
     - [0x7F670, .rodata, jpeg_stream]
     - [0x7F6E0, rodata, scheduler]
     - [0x7F700, .rodata, crash_screen]
@@ -334,6 +340,10 @@
     - [0x84D30, .rodata, audio_channel]
     - [0x84D60, rodata, text_84D60]
     - [0x84FC0, rodata, audio_commands_category2]
+    - [0x85200, .rodata, libnaudio/n_resample]
+    - [0x85210, rodata, audio_commands_category2_b]
+    - [0x85300, .rodata, libleo/leord_diskid]
+    - [0x85310, rodata, audio_commands_category2_c]
     - [0x85380, .rodata, libleo/leo_tbl]
     - [0x85560, .rodata, libleo/leoc2ecc]
     - [0x85980, .rodata, libleo/leomseq_tbl]
@@ -361,11 +371,11 @@
     - {vram: 0x8008A8B0, type: bss, name: dp_intro}
     - {vram: 0x800AC480, type: .bss, name: memmap}
     - {vram: 0x800ACC80, type: .bss, name: memory_main}
-    - {vram: 0x800ACCC0, type: bss, name: util}
+    - {vram: 0x800ACCC0, type: .bss, name: util}
     - {vram: 0x800ACCD0, type: .bss, name: jpeg_stream}
     - {vram: 0x800ACEF0, type: bss, name: scheduler}
     - {vram: 0x800AD930, type: bss, name: reset}
-    - {vram: 0x800ADF30, type: bss, name: controller}
+    - {vram: 0x800ADF30, type: .bss, name: controller}
     - {vram: 0x800AE030, type: .bss, name: gfx_buffer}
     - {vram: 0x800AE060, type: .bss, name: stage_loader}
     - {vram: 0x800AE0D0, type: .bss, name: crash_screen}
@@ -639,10 +649,10 @@
     vram: 0x86300000
     subsegments:
     - [0x1541E0, textbin,   fragments/jigglypuff_doodle/jigglypuff_doodle_header]
-    - [0x154200, asm, fragments/jigglypuff_doodle/jigglypuff_doodle]
-    - [0x1557E0, data, fragments/jigglypuff_doodle/jigglypuff_doodle]
-    - [0x1558A0, rodata, fragments/jigglypuff_doodle/jigglypuff_doodle]
-    - {vram: 0x86301710, type:  bss, name: fragments/jigglypuff_doodle/jigglypuff_doodle}
+    - [0x154200, c, fragments/jigglypuff_doodle/jigglypuff_doodle]
+    - [0x1557E0, .data, fragments/jigglypuff_doodle/jigglypuff_doodle]
+    - [0x1558A0, .rodata, fragments/jigglypuff_doodle/jigglypuff_doodle]
+    - {vram: 0x86301710, type:  .bss, name: fragments/jigglypuff_doodle/jigglypuff_doodle}
   - name: fragment9_relocs
     type: code
     bss_size: 0x0
@@ -707,10 +717,10 @@
     vram: 0x86600000
     subsegments:
     - [0x1643A0, textbin,   fragments/minigame_sample7_viewer/minigame_sample7_viewer_header]
-    - [0x1643C0, asm, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
-    - [0x164BF0, data, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
-    - [0x164C90, rodata, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
-    - {vram: 0x86600940, type:  bss, name: fragments/minigame_sample7_viewer/minigame_sample7_viewer}
+    - [0x1643C0, c, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+    - [0x164BF0, .data, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+    - [0x164C90, .rodata, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+    - {vram: 0x86600940, type:  .bss, name: fragments/minigame_sample7_viewer/minigame_sample7_viewer}
   - name: fragment12_relocs
     type: code
     bss_size: 0x0
@@ -726,10 +736,10 @@
     vram: 0x86700000
     subsegments:
     - [0x164F90, textbin,   fragments/minigame_sample8_viewer/minigame_sample8_viewer_header]
-    - [0x164FB0, asm, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
-    - [0x1657D0, data, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
-    - [0x165870, rodata, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
-    - {vram: 0x86700930, type:  bss, name: fragments/minigame_sample8_viewer/minigame_sample8_viewer}
+    - [0x164FB0, c, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+    - [0x1657D0, .data, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+    - [0x165870, .rodata, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+    - {vram: 0x86700930, type:  .bss, name: fragments/minigame_sample8_viewer/minigame_sample8_viewer}
   - name: fragment13_relocs
     type: code
     bss_size: 0x0
@@ -747,16 +757,16 @@
     subsegments:
     - [0x165B70, textbin,   fragments/sushi_game/sushi_game_header]
     - [0x165B90, asm, fragments/sushi_game/sushi_game_144300]
-    - [0x167990, asm, fragments/sushi_game/sushi_game_1462A0]
+    - [0x167990, c, fragments/sushi_game/sushi_game_1462A0]
     - [0x16B720, c,      fragments/sushi_game/sushi_game_14A030]
     - [0x16C6A0, data, fragments/sushi_game/sushi_game_144300]
-    - [0x16C960, data, fragments/sushi_game/sushi_game_1462A0]
+    - [0x16C960, .data, fragments/sushi_game/sushi_game_1462A0]
     - [0x16CB10, .data,   fragments/sushi_game/sushi_game_14A030]
     - [0x16CD50, data, fragment14_16CD50]
-    - [0x16CEA0, rodata, fragments/sushi_game/sushi_game_1462A0]
+    - [0x16CEA0, .rodata, fragments/sushi_game/sushi_game_1462A0]
     - [0x16CF80, .rodata, fragments/sushi_game/sushi_game_14A030]
     - {vram: 0x86807460, type:  bss, name: fragments/sushi_game/sushi_game_144300}
-    - {vram: 0x868074B0, type:  bss, name: fragments/sushi_game/sushi_game_1462A0}
+    - {vram: 0x868074B0, type:  .bss, name: fragments/sushi_game/sushi_game_1462A0}
     - {vram: 0x86808430, type:  .bss, name: fragments/sushi_game/sushi_game_14A030}
   - name: fragment14_relocs
     type: code
@@ -815,12 +825,12 @@
     - [0x1783A0, textbin,   fragments/demo_scenes/demo_scenes_header]
     - [0x1783C0, asm, fragments/demo_scenes/demo_scenes_15F9B0]
     - [0x178470, asm, fragments/demo_scenes/demo_scenes_15FA60]
-    - [0x179690, asm, fragments/demo_scenes/demo_scenes_160CB0]
+    - [0x179690, c, fragments/demo_scenes/demo_scenes_160CB0]
     - [0x1799E0, c,      fragments/demo_scenes/demo_scenes_161000]
     - [0x179F70, asm, fragments/demo_scenes/demo_scenes_161590]
     - [0x17D1C0, c,      fragments/demo_scenes/demo_scenes_164B00]
     - [0x17DD00, asm, fragment17_17DD00]
-    - [0x1807B0, asm, fragments/demo_scenes/demo_scenes_168110]
+    - [0x1807B0, c, fragments/demo_scenes/demo_scenes_168110]
     - [0x180E80, c,      fragments/demo_scenes/demo_scenes_1687E0]
     - [0x181BB0, c,      fragments/demo_scenes/demo_scenes_169510]
     - [0x1820E0, asm, fragments/demo_scenes/demo_scenes_169A40]
@@ -828,10 +838,13 @@
     - [0x183BF0, data, fragments/demo_scenes/demo_scenes_15FA60]
     - [0x183D50, data, fragments/demo_scenes/demo_scenes_161E60]
     - [0x185E80, data, fragments/demo_scenes/demo_scenes_165640]
+    - [0x186160, .data, fragments/demo_scenes/demo_scenes_168110]
     - [0x186170, .data,   fragments/demo_scenes/demo_scenes_1687E0]
     - [0x1863F0, data, fragments/demo_scenes/demo_scenes_169A40]
     - [0x186450, data, fragments/demo_scenes/demo_scenes_16A0E0]
     - [0x1865B0, rodata, fragments/demo_scenes/demo_scenes_15FA60]
+    - [0x1865E0, .rodata, fragments/demo_scenes/demo_scenes_160CB0]
+    - [0x186600, rodata, fragments/demo_scenes/demo_scenes_15FA60_b]
     - [0x186620, rodata, fragments/demo_scenes/demo_scenes_161E60]
     - [0x1866D0, rodata, fragments/demo_scenes/demo_scenes_165640]
     - [0x186760, rodata, fragments/demo_scenes/demo_scenes_16A0E0]
@@ -1462,10 +1475,11 @@
     subsegments:
     - [0x2BCEA0, textbin,   fragments/rental_rules/rental_rules_header]
     - [0x2BCEC0, asm, fragment55_2BCEC0]
-    - [0x2BED10, asm, fragments/rental_rules/rental_rules_2C0F90]
+    - [0x2BED10, c, fragments/rental_rules/rental_rules_2C0F90]
+    - [0x2BF170, asm, fragments/rental_rules/rental_rules_tail_2BF170]
     - [0x2C0470, data, fragments/rental_rules/rental_rules_2BED40]
     - {vram: 0x83005100, type:  bss, name: fragments/rental_rules/rental_rules_2BED40}
-    - {vram: 0x83005130, type:  bss, name: fragments/rental_rules/rental_rules_2C0F90}
+    - {vram: 0x83005130, type:  .bss, name: fragments/rental_rules/rental_rules_2C0F90}
     - {vram: 0x83005140, type:  bss, name: fragments/rental_rules/rental_rules_2C13F0}
   - name: fragment55_relocs
     type: code

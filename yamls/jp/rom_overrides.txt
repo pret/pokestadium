@@ -2,8 +2,188 @@
 # version-specific C. Each line is one generated line; the lines after "->" replace it.
 # The porter stops if a generated line is missing, so check overrides after US changes.
 
+# n_resample and leord_diskid: both compile to the Japanese bytes, and both were reverted for
+# one missing .rodata each - the two sit inside the porter's audio_commands_category2 rodata blob
+# (0x84FC0..0x85380), at 0x85200 and 0x85300. Cutting it attributes both.
+- [0x84FC0, rodata, audio_commands_category2]
+-> - [0x84FC0, rodata, audio_commands_category2]
+-> - [0x85200, .rodata, libnaudio/n_resample]
+-> - [0x85210, rodata, audio_commands_category2_b]
+-> - [0x85300, .rodata, libleo/leord_diskid]
+-> - [0x85310, rodata, audio_commands_category2_c]
+
+# demo_scenes fragments: 168110's 0x10 .data sits at 0x186160 inside the porter's
+# demo_scenes_165640 data blob, and 160CB0's 0x20 .rodata at 0x1865E0 inside demo_scenes_15FA60's.
+# Both compile to the Japanese bytes; the blobs are cut so each owns its section.
+- [0x185E80, data, fragments/demo_scenes/demo_scenes_165640]
+-> - [0x185E80, data, fragments/demo_scenes/demo_scenes_165640]
+-> - [0x186160, .data, fragments/demo_scenes/demo_scenes_168110]
+- [0x1865B0, rodata, fragments/demo_scenes/demo_scenes_15FA60]
+-> - [0x1865B0, rodata, fragments/demo_scenes/demo_scenes_15FA60]
+-> - [0x1865E0, .rodata, fragments/demo_scenes/demo_scenes_160CB0]
+-> - [0x186600, rodata, fragments/demo_scenes/demo_scenes_15FA60_b]
+
 # audio_category_fade: the Japanese Audio_FadeCategories only queues the fade
 # (#ifdef VERSION_JP); n_syndelete is unchanged but shares the merged text block.
 - [0x4D4D0, asm, text_4D4D0]
 -> - [0x4D4D0, c, audio_category_fade]
 -> - [0x4D5A0, c, libnaudio/n_syndelete]
+
+# Files whose C already compiles to the Japanese bytes: text, and every data/rodata blob that is
+# exactly this file's section, move to the file's own subsegments (see the per-file notes above).
+- [0x154200, asm, fragments/jigglypuff_doodle/jigglypuff_doodle]
+-> - [0x154200, c, fragments/jigglypuff_doodle/jigglypuff_doodle]
+- [0x1557E0, data, fragments/jigglypuff_doodle/jigglypuff_doodle]
+-> - [0x1557E0, .data, fragments/jigglypuff_doodle/jigglypuff_doodle]
+- [0x1558A0, rodata, fragments/jigglypuff_doodle/jigglypuff_doodle]
+-> - [0x1558A0, .rodata, fragments/jigglypuff_doodle/jigglypuff_doodle]
+
+- [0x1643C0, asm, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+-> - [0x1643C0, c, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+- [0x164BF0, data, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+-> - [0x164BF0, .data, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+- [0x164C90, rodata, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+-> - [0x164C90, .rodata, fragments/minigame_sample7_viewer/minigame_sample7_viewer]
+
+- [0x164FB0, asm, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+-> - [0x164FB0, c, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+- [0x1657D0, data, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+-> - [0x1657D0, .data, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+- [0x165870, rodata, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+-> - [0x165870, .rodata, fragments/minigame_sample8_viewer/minigame_sample8_viewer]
+
+# redundant: check_flips.py shows this file's C matches the region's bytes word for word
+# (0/words differ), and the regeneration flips it on its own. The block stays commented so
+# the applier cannot abort on a generated line that has already become `c`.
+# - [0x1820E0, asm, fragments/demo_scenes/demo_scenes_169A40]
+# -> - [0x1820E0, c, fragments/demo_scenes/demo_scenes_169A40]
+- [0x1863F0, data, fragments/demo_scenes/demo_scenes_169A40]
+-> - [0x1863F0, .data, fragments/demo_scenes/demo_scenes_169A40]
+
+# redundant: check_flips.py shows this file's C matches the region's bytes word for word
+# (0/words differ), and the regeneration flips it on its own. The block stays commented so
+# the applier cannot abort on a generated line that has already become `c`.
+# - [0x29B8F0, asm, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+# -> - [0x29B8F0, c, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+- [0x29D4B0, data, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+-> - [0x29D4B0, .data, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+- [0x29D790, rodata, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+-> - [0x29D790, .rodata, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+
+# redundant: check_flips.py shows this file's C matches the region's bytes word for word
+# (0/words differ), and the regeneration flips it on its own. The block stays commented so
+# the applier cannot abort on a generated line that has already become `c`.
+# - [0x2BB7F0, asm, fragments/gb_tower_team_prep/gb_tower_team_prep]
+# -> - [0x2BB7F0, c, fragments/gb_tower_team_prep/gb_tower_team_prep]
+- [0x2BBB30, data, fragments/gb_tower_team_prep/gb_tower_team_prep]
+-> - [0x2BBB30, .data, fragments/gb_tower_team_prep/gb_tower_team_prep]
+
+- [0x63D0, asm, controller]
+-> - [0x63D0, c, controller]
+
+- [0x39F0, asm, util]
+-> - [0x39F0, c, util]
+- [0x7F640, rodata, util]
+-> - [0x7F640, .rodata, util]
+
+- [0x50080, asm, libleo/driverominit]
+-> - [0x50080, c, libleo/driverominit]
+
+- [0x405E0, asm, gb_audio]
+-> - [0x405E0, c, gb_audio]
+- [0x7CDE0, data, gb_audio]
+-> - [0x7CDE0, .data, gb_audio]
+
+- [0x4D8D0, asm, libnaudio/n_reverb]
+-> - [0x4D8D0, c, libnaudio/n_reverb]
+- [0x85B40, rodata, libnaudio/n_reverb]
+-> - [0x85B40, .rodata, libnaudio/n_reverb]
+
+- [0x4CBC0, asm, libnaudio/n_resample]
+-> - [0x4CBC0, c, libnaudio/n_resample]
+
+- [0x1807B0, asm, fragments/demo_scenes/demo_scenes_168110]
+-> - [0x1807B0, c, fragments/demo_scenes/demo_scenes_168110]
+
+- [0x179690, asm, fragments/demo_scenes/demo_scenes_160CB0]
+-> - [0x179690, c, fragments/demo_scenes/demo_scenes_160CB0]
+
+- [0x1783C0, asm, fragments/demo_scenes/demo_scenes_15F9B0]
+-> - [0x1783C0, c, fragments/demo_scenes/demo_scenes_15F9B0]
+
+- [0x15C750, asm, fragments/dynamo_game/dynamo_game_1]
+-> - [0x15C750, c, fragments/dynamo_game/dynamo_game_1]
+- [0x15D590, data, fragments/dynamo_game/dynamo_game_1]
+-> - [0x15D590, .data, fragments/dynamo_game/dynamo_game_1]
+
+- [0x1982B0, asm, fragments/ranking_debug_test/ranking_debug_test]
+-> - [0x1982B0, c, fragments/ranking_debug_test/ranking_debug_test]
+
+- [0x201A40, asm, fragments/pokemon_lab_support/pokemon_lab_support]
+-> - [0x201A40, c, fragments/pokemon_lab_support/pokemon_lab_support]
+
+- [0x26AAB0, asm, fragments/particle_data_library/particle_data_library_2554C0]
+-> - [0x26AAB0, c, fragments/particle_data_library/particle_data_library_2554C0]
+- [0x26E210, data, fragments/particle_data_library/particle_data_library_2554C0]
+-> - [0x26E210, .data, fragments/particle_data_library/particle_data_library_2554C0]
+
+- [0x2D4F80, asm, fragments/cup_select/cup_select]
+-> - [0x2D4F80, c, fragments/cup_select/cup_select]
+
+# controller: its four gPlayerNController pointers are the 16 bytes at rom 0x66350, which the
+# porter had left inside the text_66330 blob. The blob is cut so they get their own .data
+# subsegment; the remainder of the blob is kept as a raw data segment, so that the generated
+# linker script keeps both data objects contiguous (a text/data/text sequence would shift them).
+- [0x66330, asm, text_66330]
+-> - [0x66330, asm, text_66330]
+-> - [0x66340, .data, util]
+-> - [0x66350, .data, controller]
+-> - [0x66360, data, text_66360]
+- {vram: 0x800ADF30, type: bss, name: controller}
+-> - {vram: 0x800ADF30, type: .bss, name: controller}
+# fragments/sushi_game/sushi_game_1462A0: only SushiGame_InitCamera differs (the Japanese release
+# uses -6.5 for the camera's z offset where US 1.0 uses -7.8, expressed with VERSION_JP in the
+# shared C). The file's data and rodata blobs are exactly this file's sections, so both move from
+# raw splat blobs to the file's own .data/.rodata subsegments.
+- [0x167990, asm, fragments/sushi_game/sushi_game_1462A0]
+-> - [0x167990, c, fragments/sushi_game/sushi_game_1462A0]
+- [0x16C960, data, fragments/sushi_game/sushi_game_1462A0]
+-> - [0x16C960, .data, fragments/sushi_game/sushi_game_1462A0]
+- [0x16CEA0, rodata, fragments/sushi_game/sushi_game_1462A0]
+-> - [0x16CEA0, .rodata, fragments/sushi_game/sushi_game_1462A0]
+
+# fragments/rental_rules/rental_rules_2C0F90: only RentalRules_PopupDraw differs (the Japanese build
+# clears the font's active index with -1 where US 1.0 passes 0, expressed with VERSION_JP in the
+# shared C). The file's bss is its own, so its entry becomes the file's own section.
+# The porter's blob covers this file's code (0x460, verified 0/280 words) and the
+# qualifying-species functions of another file; the tail stays assembly so those keep
+# their definitions.
+- [0x2BED10, asm, fragments/rental_rules/rental_rules_2C0F90]
+-> - [0x2BED10, c, fragments/rental_rules/rental_rules_2C0F90]
+-> - [0x2BF170, asm, fragments/rental_rules/rental_rules_tail_2BF170]
+- {vram: 0x83005130, type:  bss, name: fragments/rental_rules/rental_rules_2C0F90}
+-> - {vram: 0x83005130, type:  .bss, name: fragments/rental_rules/rental_rules_2C0F90}
+
+# libleo: these files compile to the Japanese bytes with IDO 5.3 (the Makefile builds
+# src/libleo with CC_OLD; a screener using 7.1 reports false differences here). The flips
+# below are inert until their .data/.rodata is attributed - each of them has a small
+# section (0x10-0xb0) with no named blob in this region, so fix_consistency.py reverts the
+# code again. The porter's blobs also cover more than one file each: leofunc's has a 0x10
+# tail, and leord_diskid's holds leomecha (0x950, exactly its US size).
+- [0x4E860, asm, libleo/leofunc]
+-> - [0x4E860, c, libleo/leofunc]
+-> - [0x4ECD0, asm, libleo/leofunc_tail]
+- [0x4F6E0, asm, libleo/leocmdex]
+-> - [0x4F6E0, c, libleo/leocmdex]
+- [0x50390, asm, libleo/leord_diskid]
+-> - [0x50390, c, libleo/leord_diskid]
+-> - [0x50520, c, libleo/leomecha]
+# libnaudio/n_sl: the shared C compiles to the Japanese bytes unchanged (n_alInit, n_alClose
+# and both zero-initialised globals), so the porter's "build it from assembly" placement was
+# not needed. The file's .data is the last 16 bytes of the coarse 3D140_2 data blob, so that
+# blob is cut at 0x7CDD0 to give the file its own .data subsegment.
+- [0x40530, asm, libnaudio/n_sl]
+-> - [0x40530, c, libnaudio/n_sl]
+- [0x7C640, data, 3D140_2]
+-> - [0x7C640, data, 3D140_2]
+-> - [0x7CDD0, .data, libnaudio/n_sl]
