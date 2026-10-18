@@ -298,23 +298,23 @@ void BattlePrep_DrawRankBadge(s16 arg0, s16 arg1, BattleSessionTeams* arg2) {
     gSPDisplayList(gDisplayListHead++, D_8006F518);
 
     if (arg2->unk_01 == 1) {
-        if (arg2->unk_08[0]->unk_000 & 2) {
+        if (arg2->teamMember[0]->unk_000 & 2) {
             Gfx_DrawTextureRgba16(arg0 + 0x1A, arg1 + 3, 0x24, 0x1A, D_3025200, 0x24, 0);
             if (0) {}
         } else {
-            Gfx_DrawTextureRgba16(arg0 + 0x1A, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[0]->unk_001], 0x24, 0);
+            Gfx_DrawTextureRgba16(arg0 + 0x1A, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->teamMember[0]->unk_001], 0x24, 0);
         }
 
         gSPDisplayList(gDisplayListHead++, D_8006F630);
         return;
     }
 
-    if (arg2->unk_08[0]->unk_001 < arg2->unk_08[1]->unk_001) {
-        Gfx_DrawTextureRgba16(arg0 + 6, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[0]->unk_001], 0x24, 0);
-        Gfx_DrawTextureRgba16(arg0 + 0x30, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[1]->unk_001], 0x24, 0);
+    if (arg2->teamMember[0]->unk_001 < arg2->teamMember[1]->unk_001) {
+        Gfx_DrawTextureRgba16(arg0 + 6, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->teamMember[0]->unk_001], 0x24, 0);
+        Gfx_DrawTextureRgba16(arg0 + 0x30, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->teamMember[1]->unk_001], 0x24, 0);
     } else {
-        Gfx_DrawTextureRgba16(arg0 + 6, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[1]->unk_001], 0x24, 0);
-        Gfx_DrawTextureRgba16(arg0 + 0x30, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->unk_08[0]->unk_001], 0x24, 0);
+        Gfx_DrawTextureRgba16(arg0 + 6, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->teamMember[1]->unk_001], 0x24, 0);
+        Gfx_DrawTextureRgba16(arg0 + 0x30, arg1 + 3, 0x24, 0x1A, D_84B17608[arg2->teamMember[0]->unk_001], 0x24, 0);
     }
 
     gSPDisplayList(gDisplayListHead++, D_8006F630);

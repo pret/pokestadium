@@ -169,13 +169,13 @@ void geo_layout_cmd_create_reference(void) {
 
 void geo_layout_cmd_create_camera(void) {
     unk_D_800ABE00_cmdB* cmd = (unk_D_800ABE00_cmdB*)gGeoLayoutCommand;
-    unk_D_86002F34_00C* temp_v0 =
+    CameraNode* temp_v0 =
         GeoNode_CreateCamera(gGraphNodePool, NULL, cmd->unk_04, cmd->unk_06, cmd->unk_08, cmd->unk_0A);
 
     if (temp_v0 != NULL) {
-        temp_v0->unk_24.fovy = cmd->unk_02;
-        Vec3f_FromVec3s(&temp_v0->unk_60.at, &cmd->unk_0C);
-        Camera_ComputeEyeFromAngles(&temp_v0->unk_60.at, &temp_v0->unk_60.eye, cmd->unk_16, (cmd->unk_12 << 0xF) / 180,
+        temp_v0->perspective.verticalFieldOfView = cmd->unk_02;
+        Vec3f_FromVec3s(&temp_v0->view.targetPosition, &cmd->unk_0C);
+        Camera_ComputeEyeFromAngles(&temp_v0->view.targetPosition, &temp_v0->view.eyePosition, cmd->unk_16, (cmd->unk_12 << 0xF) / 180,
                       (cmd->unk_14 << 0xF) / 180);
     }
 

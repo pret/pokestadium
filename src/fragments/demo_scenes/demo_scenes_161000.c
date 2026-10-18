@@ -1,7 +1,7 @@
 #include "demo_scenes.h"
 #include "src/matrix.h"
 
-u16 Diorama_IsModelInCameraCone(unk_D_86002F34_00C* arg0, DisplayObject* arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5) {
+u16 Diorama_IsModelInCameraCone(CameraNode* arg0, DisplayObject* arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5) {
     UNUSED s32 pad[6];
     f32 sp6C;
     f32 sp68;
@@ -20,9 +20,9 @@ u16 Diorama_IsModelInCameraCone(unk_D_86002F34_00C* arg0, DisplayObject* arg1, s
     f32 sp38;
     s32 sp34 = 0;
 
-    Vec3f_CalculateDistanceAngles(&arg0->unk_60.at, &arg0->unk_60.eye, &sp48, &sp46, &sp44);
-    sp40 = (COSS(sp44 + 0x8000) * arg5) + arg0->unk_60.eye.z;
-    sp38 = (SINS(sp44 + 0x8000) * arg5) + arg0->unk_60.eye.x;
+    Vec3f_CalculateDistanceAngles(&arg0->view.targetPosition, &arg0->view.eyePosition, &sp48, &sp46, &sp44);
+    sp40 = (COSS(sp44 + 0x8000) * arg5) + arg0->view.eyePosition.z;
+    sp38 = (SINS(sp44 + 0x8000) * arg5) + arg0->view.eyePosition.x;
 
     sp54 = (COSS((sp44 - arg3) + 0x8000) * arg4) + sp40;
     sp60 = (SINS((sp44 - arg3) + 0x8000) * arg4) + sp38;
@@ -78,7 +78,7 @@ void DioramaCamKeyframe_SetTransitionSpeed(unk_D_86B0E5D4_04* arg0, f32 arg1, f3
 
 void Diorama_LoadCameraKeyframe(unk_D_86B0C160* arg0, unk_D_86B0E5D4* arg1) {
     unk_D_86B0E5D4_04* ptr = &arg1->unk_04;
-    unk_D_86002F34_00C* ptr2 = arg1->unk_00;
+    CameraNode* ptr2 = arg1->unk_00;
     f32 sp34;
     f32 sp30;
     f32 sp2C;
@@ -88,7 +88,7 @@ void Diorama_LoadCameraKeyframe(unk_D_86B0C160* arg0, unk_D_86B0E5D4* arg1) {
     ptr->unk_68 = 0;
 
     if (arg0->unk_30 != 255.0f) {
-        ptr2->unk_24.fovy = ptr->unk_3C = arg0->unk_30;
+        ptr2->perspective.verticalFieldOfView = ptr->unk_3C = arg0->unk_30;
     } else {
         ptr->unk_3C = arg0->unk_30;
     }
@@ -106,14 +106,14 @@ void Diorama_LoadCameraKeyframe(unk_D_86B0C160* arg0, unk_D_86B0E5D4* arg1) {
 }
 
 void Diorama_SetCameraToKeyframeStart(unk_D_86B0E5D4_04* arg0, unk_D_86B0E5D4* arg1) {
-    unk_D_86002F34_00C* sp2C = arg1->unk_00;
+    CameraNode* sp2C = arg1->unk_00;
 
-    Camera_ComputeEyeFromAngles(&arg0->unk_00, &sp2C->unk_60.at, arg0->unk_18, arg0->unk_0C, arg0->unk_0E);
-    Camera_ComputeEyeFromAngles(&sp2C->unk_60.at, &sp2C->unk_60.eye, arg0->unk_1C, arg0->unk_12, arg0->unk_14);
+    Camera_ComputeEyeFromAngles(&arg0->unk_00, &sp2C->view.targetPosition, arg0->unk_18, arg0->unk_0C, arg0->unk_0E);
+    Camera_ComputeEyeFromAngles(&sp2C->view.targetPosition, &sp2C->view.eyePosition, arg0->unk_1C, arg0->unk_12, arg0->unk_14);
 }
 
 s32 Diorama_UpdateCameraKeyframe(unk_D_86B0E5D4_04* arg0, unk_D_86B0E5D4* arg1) {
-    unk_D_86002F34_00C* temp_s2 = arg1->unk_00;
+    CameraNode* temp_s2 = arg1->unk_00;
     Vec3f sp58;
     Vec3f sp4C;
     UNUSED s32 pad[3];
@@ -122,9 +122,9 @@ s32 Diorama_UpdateCameraKeyframe(unk_D_86B0E5D4_04* arg0, unk_D_86B0E5D4* arg1) 
     s16 sp38;
 
     if (arg0->unk_3C != 255.0f) {
-        temp_s2->unk_24.fovy = arg0->unk_3C;
+        temp_s2->perspective.verticalFieldOfView = arg0->unk_3C;
     } else {
-        Math_EaseTowardF(&temp_s2->unk_24.fovy, 30.0f, 0.06f);
+        Math_EaseTowardF(&temp_s2->perspective.verticalFieldOfView, 30.0f, 0.06f);
     }
 
     Camera_ComputeEyeFromAngles(&arg0->unk_00, &sp58, arg0->unk_18, arg0->unk_0C, arg0->unk_0E);
@@ -133,8 +133,8 @@ s32 Diorama_UpdateCameraKeyframe(unk_D_86B0E5D4_04* arg0, unk_D_86B0E5D4* arg1) 
 
     arg1->unk_04.unk_68 = Math_StepToF(arg1->unk_04.unk_68, sp3C, arg0->unk_34, arg0->unk_34);
 
-    Camera_ComputeEyeFromAngles(&sp58, &temp_s2->unk_60.at, arg1->unk_04.unk_68, sp3A, sp38);
-    Camera_ComputeEyeFromAngles(&temp_s2->unk_60.at, &temp_s2->unk_60.eye, arg0->unk_1C, arg0->unk_12, arg0->unk_14);
+    Camera_ComputeEyeFromAngles(&sp58, &temp_s2->view.targetPosition, arg1->unk_04.unk_68, sp3A, sp38);
+    Camera_ComputeEyeFromAngles(&temp_s2->view.targetPosition, &temp_s2->view.eyePosition, arg0->unk_1C, arg0->unk_12, arg0->unk_14);
 
     arg1->unk_04.unk_6C = sp3C - arg1->unk_04.unk_68;
     if (arg1->unk_04.unk_6C <= 5.0f) {

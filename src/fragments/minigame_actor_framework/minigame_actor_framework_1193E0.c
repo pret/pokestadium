@@ -10,8 +10,8 @@ s16 miniDifficulty;
 s16 D_87906048; //  unused?
 s16 D_8790604A;
 s32 pad_D_8790604C; //	unused?
-unk_D_86002F34_00C* D_87906050;
-unk_D_86002F34_00C* D_87906054;
+CameraNode* D_87906050;
+CameraNode* D_87906054;
 s32 pad_D_87906058[2]; //	unused?
 s16 miniCameraXRot;
 s16 miniCameraYRot;
@@ -75,15 +75,15 @@ void miniApplyCameraDebugOffset(void) {
 }
 
 void miniUpdateCamera(void) {
-    D_87906054->unk_24.fovy = miniCameraFov;
-    D_87906054->unk_24.near = miniCameraNear;
-    D_87906054->unk_24.far = miniCameraFar;
+    D_87906054->perspective.verticalFieldOfView = miniCameraFov;
+    D_87906054->perspective.nearPlane = miniCameraNear;
+    D_87906054->perspective.farPlane = miniCameraFar;
 
-    D_87906054->unk_60.at.x = miniCameraCoords.x;
-    D_87906054->unk_60.at.y = miniCameraCoords.y;
-    D_87906054->unk_60.at.z = miniCameraCoords.z;
+    D_87906054->view.targetPosition.x = miniCameraCoords.x;
+    D_87906054->view.targetPosition.y = miniCameraCoords.y;
+    D_87906054->view.targetPosition.z = miniCameraCoords.z;
 
-    Camera_ComputeEyeFromAngles(&D_87906054->unk_60.at, &D_87906054->unk_60.eye, miniCameraDistance, miniCameraXRot, miniCameraYRot);
+    Camera_ComputeEyeFromAngles(&D_87906054->view.targetPosition, &D_87906054->view.eyePosition, miniCameraDistance, miniCameraXRot, miniCameraYRot);
 }
 
 s32 minigameDebuggModeControl(void) {

@@ -317,7 +317,7 @@ Gfx* DoubleTextureTrail_DrawAll(Gfx* arg0) {
     Vec3f spF4;
     Vec3f spE8;
     Vec3f spDC;
-    unk_D_86002F34_00C* spD8;
+    CameraNode* spD8;
     UNUSED s32 pad[3];
     Vtx* var_s0;
 
@@ -360,9 +360,9 @@ Gfx* DoubleTextureTrail_DrawAll(Gfx* arg0) {
             if ((var_fp->unk_086.r | var_fp->unk_086.g | var_fp->unk_086.b | var_fp->unk_086.a) != 0) {
                 spE8 = var_fp->unk_0B0[9].unk_10;
                 spF4 = var_fp->unk_0B0[0].unk_10;
-                spDC.x = spD8->unk_60.eye.x;
-                spDC.y = spD8->unk_60.eye.y;
-                spDC.z = spD8->unk_60.eye.z;
+                spDC.x = spD8->view.eyePosition.x;
+                spDC.y = spD8->view.eyePosition.y;
+                spDC.z = spD8->view.eyePosition.z;
                 arg0 = func_84367660(arg0, &spF4, &spE8, &spDC, 20.0f, var_fp->unk_086.r, var_fp->unk_086.g,
                                      var_fp->unk_086.b, var_fp->unk_086.a * var_fp->unk_08C);
             }

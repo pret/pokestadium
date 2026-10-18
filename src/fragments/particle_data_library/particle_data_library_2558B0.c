@@ -320,7 +320,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
     DisplayObject* ptr;
 
     sp294 = Gfx_AllocDisplayList(0x40);
-    MtxF_ExtractScale(&sp14C, &D_8006F088->unk_60.mtxf);
+    MtxF_ExtractScale(&sp14C, &D_8006F088->view.floatMatrix);
     guMtxF2L(sp14C.mf, &sp1D0);
     if (D_8006F09C->effectSlot == 0xFE) {
         guScale(&sp250, D_8006F09C->scale.x * arg1->scale.x * 0.1f, D_8006F09C->scale.y * arg1->scale.y * 0.1f, D_8006F09C->scale.z * arg1->scale.z * 0.1f);

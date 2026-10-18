@@ -16,7 +16,7 @@ void BattleAnim_DrawFullScreenColorOverlay(u8 arg0, u8 arg1, u8 arg2, u8 arg3) {
     gSPDisplayList(gDisplayListHead++, D_8140DDD8);
 }
 
-void BattleAnim_RenderEffectsFrame(unk_D_86002F34_00C* arg0) {
+void BattleAnim_RenderEffectsFrame(CameraNode* arg0) {
     BattleAnim_DrawEffectCallbacks(arg0);
     gParticleMatrixPool = Gfx_AllocDisplayList(sizeof(ParticleMatrixPool));
     gParticleMatrixPoolIndex = 0;
