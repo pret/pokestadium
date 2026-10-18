@@ -45,7 +45,11 @@ static Gfx D_86807010[] = {
     gsSPEndDisplayList(),
 };
 
+void SushiGame_NameTagGeoCallback(s32 arg0, UNUSED s32 arg1);
+
 static u32 D_86807078[] = {
+    // The two addresses are the US ones written out; naming the symbols instead lets the
+    // linker place them per region (the Japanese build has both 0x1A0 lower).
     0x17000000, 0x00000000, 0x00000000, 0x00000000, (u32)D_86806FD0, 0x05000000, 0x22040000,
     0x00000000, 0x08000000, (u32)SushiGame_NameTagGeoCallback, 0x00000000, 0x06000000, 0x01000000,
 };
@@ -1752,6 +1756,11 @@ void SushiGame_InitCamera(void) {
     D_86808498.unk_00.y = 0.0f;
 #if defined(VERSION_US_REV1) || defined(VERSION_US_REV2)
     D_86808498.unk_00.z = -10.0f;
+#elif defined(VERSION_JP)
+    // The Japanese release pulls the camera back 1.3 units less; -6.5 is exactly representable in
+    // the high half of a float word, so IDO materialises it with lui/mtc1 instead of loading the
+    // -7.8 constant from .rodata as the US 1.0 build does.
+    D_86808498.unk_00.z = -6.5f;
 #else
     D_86808498.unk_00.z = -7.8f;
 #endif
