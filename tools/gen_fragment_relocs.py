@@ -71,6 +71,7 @@ elif VERSION in ("us", "us_rev1", "us_rev2"):
 FIXED_LAYOUT = {34}
 
 EXTERNAL = 0x80000000
+HEADER_SIZE = 0x20
 FRAGMENT_SPACE = range(0x81000000, 0x90000000)
 
 TYPE_NAMES = {2: "R_MIPS_32", 4: "R_MIPS_26", 5: "R_MIPS_HI16", 6: "R_MIPS_LO16"}
@@ -194,10 +195,10 @@ def selftest() -> None:
 def merge(entries: list[int], retail_path: str) -> tuple[list[int], list[int], list[int], int]:
     """Regenerated internal relocs plus any retail entry the linker does not emit.
 
-    A retail entry whose offset is below the first regenerated offset sits before the
-    fragment's first function, where the decomp's hand-written entry stub lives: it jumps
-    to a hardcoded address, so the linker emits no reloc for it, but the retail table has
-    one (type 4, offset 0) and the loader applies it. Such entries are layout-independent.
+    A retail entry inside the 0x20-byte header belongs to the decomp's hand-written entry
+    stub: it jumps to a hardcoded address, so the linker emits no reloc for it, but the
+    retail table has one (type 4, offset 0) and the loader applies it. Such entries are
+    layout-independent.
 
     Every other retail entry is a stale offset from the previous layout and is superseded
     by the regenerated one, so it is dropped rather than carried. A grown fragment yields
@@ -208,9 +209,8 @@ def merge(entries: list[int], retail_path: str) -> tuple[list[int], list[int], l
     want = [struct.unpack_from(">I", retail, 4 + i * 4)[0] for i in range(n)]
     if not entries:
         return want, want, [], 0
-    first = min(w % 0x1000000 for w in entries)
-    carried = sorted((w for w in want if (w % 0x1000000) < first), key=lambda w: w % 0x1000000)
-    stale = sum(1 for w in want if (w % 0x1000000) >= first)
+    carried = sorted((w for w in want if w % 0x1000000 < HEADER_SIZE), key=lambda w: w % 0x1000000)
+    stale = len(want) - len(carried)
     return carried + entries, want, carried, stale
 
 
@@ -315,6 +315,24 @@ def moved_unsafe(elf: str) -> list[int]:
     return moved
 
 
+def pinned(elf: str, n: int) -> list[str]:
+    """Referenced symbols that a linker script assigns inside fragment n. splat lists every
+    symbol another segment references in undefined_syms_auto.ld, and that assignment overrides
+    the C definition, so the symbol keeps its retail address when the fragment's layout moves.
+    Mark them `defined:true` in symbol_addrs."""
+    data, sections, symbols = read_elf(elf)
+    frag = next(s for s in sections if s["sname"] == f".fragment{n}")
+    bss = next((s for s in sections if s["sname"] == f".fragment{n}_bss"), None)
+    end = frag["addr"] + frag["size"] + (bss["size"] if bss else 0)
+    used = set()
+    for sec in sections:
+        if sec["type"] == 9:  # SHT_REL
+            ent = sec["entsize"] or 8
+            used |= {struct.unpack_from(">I", data, sec["off"] + i * ent + 4)[0] >> 8 for i in range(sec["size"] // ent)}
+    return [symbols[i]["name"] for i in sorted(used)
+            if symbols[i]["shndx"] == 0xFFF1 and frag["addr"] <= symbols[i]["value"] <= end]  # SHN_ABS
+
+
 def update_all(elf: str) -> list[int]:
     """-> list of fragment numbers whose table was rewritten"""
     # Those versions take relocations from splat's assembly, which writes some fragment-internal
@@ -333,6 +351,10 @@ def update_all(elf: str) -> list[int]:
         # current table when it is only ordered differently, so a matching build stays retail
         if equivalent(merged, current, fragment_content(elf, n)):
             continue
+        pins = pinned(elf, n)
+        if pins:
+            sys.exit(f"fragment{n} moved, but these stay at their retail address (pinned by a linker "
+                     "script): " + ", ".join(pins))
         data = encode(merged)
         open(path, "wb").write(data)
         # make does not track the .incbin, so drop the object to force a reassemble
