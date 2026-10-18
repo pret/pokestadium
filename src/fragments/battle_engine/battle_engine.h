@@ -132,7 +132,7 @@ typedef struct SwayState {
 } SwayState; // size >= 0x50
 
 typedef struct ActivePokemon {
-    /* 0x000 */ DisplayObject display_object;
+    /* 0x000 */ DisplayObject displayObject;
     /* 0x168 */ unk_D_84390010_168 unk_168[2];
     /* 0x448 */ SwayState unk_448;
     /* 0x498 */ f32 unk_498;

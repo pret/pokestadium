@@ -4211,7 +4211,7 @@ void BattleAnim_PlayOwnerCry(ActivePokemon* arg0, s16 arg1) {
 }
 
 void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon) {
-    s16 sp1E = active_pokemon->display_object.objectType;
+    s16 sp1E = active_pokemon->displayObject.objectType;
 
     BattleScene_GetParticipantModelWidth(active_pokemon);
     Audio_PlayCommand(0x33, sp1E, 0);
@@ -4222,8 +4222,8 @@ void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon) {
 }
 
 void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2) {
-    func_800479C0(arg1->usedMove, arg0->display_object.objectType, arg2);
-    func_80040A70(arg1, arg1->usedMove, arg0->display_object.objectType, arg2);
+    func_800479C0(arg1->usedMove, arg0->displayObject.objectType, arg2);
+    func_80040A70(arg1, arg1->usedMove, arg0->displayObject.objectType, arg2);
 }
 
 void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
@@ -4598,7 +4598,7 @@ void BattleScene_StartBattleMusic(void) {
 }
 
 void BattleAnim_PlayBattleSequenceById(ActivePokemon* arg0, s32 arg1) {
-    s16 sp1E = arg0->display_object.objectType;
+    s16 sp1E = arg0->displayObject.objectType;
 
     if ((BattleScene_IsPartnerPikachu(arg0) != 0) && (arg1 == 0x32)) {
         Audio_PlayCommand(0x32, 0xC8, 0);
