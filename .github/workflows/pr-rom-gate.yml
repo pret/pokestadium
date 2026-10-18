@@ -68,6 +68,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.pr_number && format('refs/pull/{0}/merge', inputs.pr_number) || inputs.ref }}
+          # The merge commit and its first parent, for the diffs below.
+          fetch-depth: 2
           persist-credentials: false
           set-safe-directory: false
 
@@ -88,8 +90,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch --quiet --depth=1 origin "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
-          changed="$(git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")"
+          # The checkout is the PR merge commit, so its first parent is the
+          # base tip and HEAD^1..HEAD is exactly what this PR adds. Diffing
+          # base.sha against head.sha directly would also list, reversed,
+          # every file master changed since the PR branched.
+          changed="$(git diff --name-only HEAD^1 HEAD)"
           if [ "$changed" = "COVERAGE.md" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "pr-rom-gate: PR diff touches only COVERAGE.md; skipping the full rebuild" >&2
@@ -110,7 +115,7 @@ jobs:
           elif [ -n "$INPUT_REGIONS" ]; then
             regions="$INPUT_REGIONS"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
-            regions="$(git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | python3 ci/affected_versions.py | tr '\n' ' ')"
+            regions="$(git diff --name-only HEAD^1 HEAD | python3 ci/affected_versions.py | tr '\n' ' ')"
           else
             regions="us"
           fi
