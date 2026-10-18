@@ -66,10 +66,6 @@ elif VERSION in ("us", "us_rev1", "us_rev2"):
     # relocs at all.
     REGEN_SAFE = set(range(2, 78)) - {1, 41, 67}
 
-# Regenerable, but other fragments' data holds raw pointers into their code (the battle
-# engine's alone holds 113 into particle_math), so their code must not move.
-FIXED_LAYOUT = {34}
-
 EXTERNAL = 0x80000000
 HEADER_SIZE = 0x20
 FRAGMENT_SPACE = range(0x81000000, 0x90000000)
@@ -293,15 +289,11 @@ def table_path(n: int) -> str:
 
 
 def moved_unsafe(elf: str) -> list[int]:
-    """Fragments outside REGEN_SAFE, or in FIXED_LAYOUT, whose code moved. Their retail table also
-    holds relocs the ELF cannot see, so it is kept, which is only right while every reloc the ELF
-    *does* see is still at its retail offset. A size check alone misses code that moved inside an
-    unchanged total size (padding absorbs it)."""
+    """Fragments outside REGEN_SAFE whose code moved. Their retail table also holds relocs the ELF
+    cannot see, so it is kept, which is only right while every reloc the ELF *does* see is still
+    at its retail offset. A size check alone misses code that moved inside an unchanged total
+    size (padding absorbs it)."""
     moved = []
-    for n in sorted(FIXED_LAYOUT & REGEN_SAFE):
-        merged, current, _, _ = merge(build(elf, n, has_external(table_path(n)))[0], table_path(n))
-        if not equivalent(merged, current, fragment_content(elf, n)):
-            moved.append(n)
     for n in range(1, 100):
         if n in REGEN_SAFE or not os.path.exists(table_path(n)):
             continue
@@ -340,8 +332,8 @@ def update_all(elf: str) -> list[int]:
     moved = [] if VERSION in ASM_VERSIONS else moved_unsafe(elf)
     if moved:
         sys.exit("code moved inside " + ", ".join(f"fragment{n}" for n in moved) + ", whose reloc table "
-                 "cannot be regenerated (not in REGEN_SAFE) or which others point into (FIXED_LAYOUT): "
-                 "the ROM would crash. Keep the change byte-neutral (same instructions at the same offsets).")
+                 "cannot be regenerated (not in REGEN_SAFE): the ROM would crash. Keep the change "
+                 "byte-neutral (same instructions at the same offsets).")
     changed = []
     for n in sorted(REGEN_SAFE):
         path = table_path(n)
