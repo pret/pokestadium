@@ -2893,7 +2893,7 @@ s32 Lab_HandleMainMenuInput(WidgetMainMenu* arg0) {
                         var_s1 |= 0x80000101;
                     } else {
                         Audio_PlaySoundEffectById(0x1C);
-                        FRAGMENT_LOAD_AND_CALL2(fragment23, 0, 0);
+                        FRAGMENT_LOAD_AND_CALL2(FRAGMENT_LAB_PC, 0, 0);
                         var_s6 = 0x26;
                         var_s1 = 1;
                     }
@@ -2916,7 +2916,7 @@ s32 Lab_HandleMainMenuInput(WidgetMainMenu* arg0) {
                         var_s1 |= 0x80000101;
                     } else {
                         Audio_PlaySoundEffectById(0x1C);
-                        FRAGMENT_LOAD_AND_CALL2(fragment28, 1, 0);
+                        FRAGMENT_LOAD_AND_CALL2(FRAGMENT_POKEDEX, 1, 0);
                         var_s6 = 0x26;
                         var_s1 = 1;
                     }
@@ -2965,7 +2965,7 @@ s32 Lab_HandleMainMenuInput(WidgetMainMenu* arg0) {
                         var_s1 |= 0x80000101;
                     } else {
                         Audio_PlaySoundEffectById(0x1C);
-                        FRAGMENT_LOAD_AND_CALL2(fragment23, 5, 0);
+                        FRAGMENT_LOAD_AND_CALL2(FRAGMENT_LAB_PC, 5, 0);
                         var_s6 = 0x26;
                         var_s1 = 1;
                     }
@@ -3095,8 +3095,8 @@ s32 Lab_Main(s32 arg0, UNUSED s32 arg1) {
     sp2C = Font_Init(0x1C, 0);
 
     ASSET_LOAD(D_04000000, fragment29_misc_1, 0);
-    FRAGMENT_LOAD(fragment26);
-    FRAGMENT_LOAD(fragment25);
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TREE);
+    FRAGMENT_LOAD(FRAGMENT_POKEMON_LAB_SUPPORT);
     sp40 = ASSET_LOAD(0, fragment29_misc_2, 0);
 
     Save_EnsureBankLoaded(2);

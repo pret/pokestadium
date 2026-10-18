@@ -112,7 +112,7 @@ s32 func_82900390(UNUSED s32 arg0, UNUSED s32 arg1) {
     Font_Init(6, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     D_828006A0 = ASSET_LOAD2(backgrounds, 1, 1);
     D_828006A4 = BinArchive_GetFile(D_828006A0, 2);

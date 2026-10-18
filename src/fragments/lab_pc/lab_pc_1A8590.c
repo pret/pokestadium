@@ -13,8 +13,8 @@ FontContext* LabPC_Enter(void) {
     sp1C = Font_Init(0x1C, 0);
 
     ASSET_LOAD(D_04000000, fragment29_misc_1, 0);
-    FRAGMENT_LOAD(fragment26);
-    FRAGMENT_LOAD(fragment29);
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TREE);
+    FRAGMENT_LOAD(FRAGMENT_LAB_UI_SUPPORT);
 
     StageLoader_UpdateSegments();
     return sp1C;
@@ -32,7 +32,7 @@ s32 LabPC_ExitToLabMain(UNUSED s32 arg0, UNUSED s32 arg1) {
     StageFade_StartFromTransparent(0xA);
     LabPC_Exit();
 
-    FRAGMENT_LOAD_AND_CALL2(fragment22, 1, 0);
+    FRAGMENT_LOAD_AND_CALL2(FRAGMENT_PROFESSOR_OAK_LAB, 1, 0);
     return 0x25;
 }
 

@@ -324,12 +324,12 @@ s32 LabPC_ShowMenu(s32 arg0, UNUSED s32 arg1) {
     main_pool_pop_state('SLTM');
 
     if (sp20 == 1) {
-        FRAGMENT_LOAD_AND_CALL2(fragment22, 1, 0);
+        FRAGMENT_LOAD_AND_CALL2(FRAGMENT_PROFESSOR_OAK_LAB, 1, 0);
         return 0;
     }
 
     if (sp20 == 5) {
-        FRAGMENT_LOAD_AND_CALL2(fragment24, 1, 0);
+        FRAGMENT_LOAD_AND_CALL2(FRAGMENT_LAB_PC_LIST, 1, 0);
         return 0;
     }
 

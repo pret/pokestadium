@@ -427,7 +427,7 @@ s32 Stage_ShowFirstClearBonusScene(void) {
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     Text_InitStringTables();
     D_86B10840 = Text_GetStringTable(0x1E);

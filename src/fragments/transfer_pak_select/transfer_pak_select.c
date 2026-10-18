@@ -809,7 +809,7 @@ s32 TransferPak_SelectMain(s32 arg0, UNUSED s32 arg1) {
     ASSET_LOAD(D_3000000, trade_select_ui, 0);
     ASSET_LOAD(D_3000000_2, gb_pak_select_ui, 0);
 
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     PokeIcon_OpenModelArchives();
     PokeIcon_OpenModelArchive();

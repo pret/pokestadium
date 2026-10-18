@@ -1254,7 +1254,7 @@ void Gallery_SnapMain(s32 arg0, s32 arg1) {
     ASSET_LOAD(D_3000000, gallery_ui, 0);
     ASSET_LOAD(D_5000000, snap_mode_ui, 0);
 
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     PokeIcon_OpenModelArchives();
     D_8330339C = ASSET_LOAD2(stadium_models, 1, 1);

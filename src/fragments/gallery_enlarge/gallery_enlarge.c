@@ -123,7 +123,7 @@ s32 Gallery_EnlargeMain(UNUSED s32 arg0, UNUSED s32 arg1) {
     ASSET_LOAD(D_3000000, gallery_ui, 0);
     ASSET_LOAD(D_04000000, album_ui, 0);
 
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     PokeIcon_OpenModelArchives();
 

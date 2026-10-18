@@ -892,7 +892,7 @@ void Gallery_FilmSelectMain(s32 arg0, UNUSED s32 arg1) {
     ASSET_LOAD(D_5000000, snap_mode_ui, 0);
     ASSET_LOAD(D_3000000, gallery_ui, 0);
     ASSET_LOAD(D_04000000, _6A9750, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     PokeIcon_OpenModelArchives();
     D_836032F8 = BinArchive_Open(stadium_models_ROM_START, stadium_models_ROM_END, 1, 1);

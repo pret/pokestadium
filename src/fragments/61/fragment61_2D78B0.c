@@ -1095,7 +1095,7 @@ s32 Rental_Main(s32 arg0, UNUSED s32 arg1) {
     Font_Init(0x1C, 0);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
     PokeIcon_OpenModelArchives();
     Text_InitStringTables();
 

@@ -1,6 +1,8 @@
 #ifndef _MACROS_H_
 #define _MACROS_H_
 
+#include "fragments.h"
+
 #define true 1
 #define false 0
 
@@ -54,19 +56,23 @@
 
 #define ABS_NORMALIZED(x) ((ABS_ALT((x)) < (0.000001f)) ? 0.0f : (x))
 
-#define FRAGMENT_ID(fragment) ((((u32)fragment##_TEXT_START & 0x0FF00000) >> 0x14) - 0x10)
+// Expand semantic fragment aliases before pasting the linker-symbol suffix.
+#define FRAGMENT_SYMBOL(fragment, suffix) FRAGMENT_SYMBOL_IMPL(fragment, suffix)
+#define FRAGMENT_SYMBOL_IMPL(fragment, suffix) fragment##suffix
+
+#define FRAGMENT_ID(fragment) ((((u32)FRAGMENT_SYMBOL(fragment, _TEXT_START) & 0x0FF00000) >> 0x14) - 0x10)
 #define ASSET_ID(asset) (((u32)asset & 0x0F000000) >> 0x18)
 
 #define FRAGMENT_LOAD(fragment) ( \
-    Fragment_Load(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END) \
+    Fragment_Load(FRAGMENT_ID(fragment), FRAGMENT_SYMBOL(fragment, _ROM_START), FRAGMENT_SYMBOL(fragment, _relocs_ROM_END)) \
 )
 
 #define FRAGMENT_LOAD_AND_CALL(fragment, arg0, arg1) (\
-    Fragment_LoadAndCall(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END, arg0, arg1) \
+    Fragment_LoadAndCall(FRAGMENT_ID(fragment), FRAGMENT_SYMBOL(fragment, _ROM_START), FRAGMENT_SYMBOL(fragment, _relocs_ROM_END), arg0, arg1) \
 )
 
 #define FRAGMENT_LOAD_AND_CALL2(fragment, arg0, arg1) (\
-    Fragment_QueueCall(FRAGMENT_ID(fragment), fragment##_ROM_START, fragment##_relocs_ROM_END, arg0, arg1) \
+    Fragment_QueueCall(FRAGMENT_ID(fragment), FRAGMENT_SYMBOL(fragment, _ROM_START), FRAGMENT_SYMBOL(fragment, _relocs_ROM_END), arg0, arg1) \
 )
 
 #define ASSET_LOAD(vram, rom, arg0) (\

@@ -57,7 +57,7 @@ void GbTower_Start(UnkInputStruct8000D738* arg0) {
     D_800AA660 = main_pool_alloc(0x2210, 0);
     D_800AA664 = main_pool_alloc(0x21E0, 0);
 
-    FRAGMENT_LOAD(fragment1);
+    FRAGMENT_LOAD(FRAGMENT_GB_TOWER_EMULATOR);
     temp_v0 = ASSET_LOAD2(fonts, 1, 1);
 
     D_800AA660->font1 = BinArchive_GetFile(temp_v0, 0);

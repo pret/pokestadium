@@ -3020,7 +3020,7 @@ void LabPCList_BuildWidget(unk_func_8830867C* arg0, s32 arg1, s32 arg2, MemoryPo
 
     ((func889000C4)Memmap_GetFragmentVaddr(LabUI_BuildConfirmDialog))(arg0->unk_50, 0, 0, 0, arg5, arg3);
 
-    sp84 = FRAGMENT_LOAD(fragment27);
+    sp84 = FRAGMENT_LOAD(FRAGMENT_LAB_PC_ICONS);
 
     arg0->unk_54.unk_04 = arg3;
     // clang-format off
@@ -3115,9 +3115,9 @@ s32 LabPCList_ShowListScreen(UNUSED s32 arg0, UNUSED s32 arg1) {
     sp54 = Font_Init(0x1C, 0);
 
     ASSET_LOAD(D_04000000, fragment29_misc_1, 0);
-    FRAGMENT_LOAD(fragment26);
-    FRAGMENT_LOAD(fragment25);
-    FRAGMENT_LOAD(fragment29);
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TREE);
+    FRAGMENT_LOAD(FRAGMENT_POKEMON_LAB_SUPPORT);
+    FRAGMENT_LOAD(FRAGMENT_LAB_UI_SUPPORT);
 
     Text_InitStringTables();
 
@@ -3159,7 +3159,7 @@ s32 LabPCList_ShowListScreen(UNUSED s32 arg0, UNUSED s32 arg1) {
 
     main_pool_pop_state('PCHK');
 
-    FRAGMENT_LOAD_AND_CALL2(fragment23, 4, 0);
+    FRAGMENT_LOAD_AND_CALL2(FRAGMENT_LAB_PC, 4, 0);
 
     return 0x25;
 }

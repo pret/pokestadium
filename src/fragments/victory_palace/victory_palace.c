@@ -2712,7 +2712,7 @@ s32 HallOfFame_Main(s32 arg0, s32 arg1) {
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_3000000, victory_palace_plate_text, 0);
-    FRAGMENT_LOAD(fragment31);
+    FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     Save_EnsureBankLoaded(2);
     HallOfFame_InitGallery();

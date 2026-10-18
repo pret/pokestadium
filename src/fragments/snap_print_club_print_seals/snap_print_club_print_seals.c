@@ -97,7 +97,7 @@ s32 Snap_PrintClubPrintSeals(s32 arg0, s32 arg1) {
 
     if (Snap_PrintClubIsBackgroundMode() == 0) {
         ASSET_LOAD(D_5000000, snap_mode_ui, 0);
-        FRAGMENT_LOAD(fragment31);
+        FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
         PokeIcon_OpenModelArchives();
 

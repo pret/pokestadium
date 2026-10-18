@@ -518,7 +518,7 @@ void State_PokemonLab(void) {
     s32 game_state;
     s32 var_s4;
 
-    FRAGMENT_LOAD_AND_CALL(fragment33, 1, 0);
+    FRAGMENT_LOAD_AND_CALL(FRAGMENT_TRANSFER_PAK_SELECT, 1, 0);
 
     if (GbSave_GetActivePort() == -1) {
         gCurrentGameState = STATE_AREA_SELECT;
@@ -540,7 +540,7 @@ void State_PokemonLab(void) {
             Gfx_InitDisplayListBuffers(0x16000, 0);
             StageContext_Activate(StageContext_Allocate(1, 1, 2, 0, 2, 1));
 
-            FRAGMENT_LOAD_AND_CALL2(fragment22, var_s4, 0);
+            FRAGMENT_LOAD_AND_CALL2(FRAGMENT_PROFESSOR_OAK_LAB, var_s4, 0);
 
             while ((game_state == STATE_POKEMON_LAB) && (D_800AE520.unk_00 != 0)) {
                 D_800AE520.unk_00 = 0;
@@ -555,13 +555,13 @@ void State_PokemonLab(void) {
         } else {
             switch (game_state) {
                 case 0x10000:
-                    FRAGMENT_LOAD_AND_CALL(fragment41, 0, 0);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_TRADE_MACHINE, 0, 0);
                     var_s4 = 2;
                     game_state = STATE_POKEMON_LAB;
                     break;
 
                 case 0x10001:
-                    FRAGMENT_LOAD_AND_CALL(fragment33, 0, 0);
+                    FRAGMENT_LOAD_AND_CALL(FRAGMENT_TRANSFER_PAK_SELECT, 0, 0);
                     var_s4 = 1;
                     game_state = STATE_POKEMON_LAB;
                     break;
