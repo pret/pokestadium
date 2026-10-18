@@ -15,7 +15,7 @@ static s16 D_80075684 = 0;
 void Team_ClearTrainerSlot(BattleSessionTeams* arg0) {
     arg0->sessionIsBusy = 0;
     arg0->unk_01 = 0;
-    arg0->unk_02 = 0;
+    arg0->cry = 0;
     arg0->unk_04 = 0;
     arg0->unk_14 = 0;
     arg0->teamMember[0] = 0;

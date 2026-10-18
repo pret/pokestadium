@@ -80,7 +80,7 @@ s32 BattleScene_AdvanceOwnerAnimation(ActivePokemon* arg0) {
 
     switch (gBattleScene.unk_00->unk_24) {
         case 0:
-            BattleAnim_BeginSessionRequestForActiveMon(arg0);
+            BattleScene_DestroySubstitute(arg0);
             sp1C = 1;
             gBattleScene.unk_00->unk_24++;
             break;
@@ -112,7 +112,7 @@ s32 BattleScene_AdvanceOwnerAnimation98(ActivePokemon* arg0) {
 
     switch (gBattleScene.unk_00->unk_24) {
         case 0:
-            BattleAnim_BeginSessionRequest(arg0);
+            Battle_MakeSubstitute(arg0);
             sp1C = 1;
             gBattleScene.unk_00->unk_24++;
             break;
@@ -144,7 +144,7 @@ s32 BattleScene_AdvanceOwnerAnimationAndClearFlags(ActivePokemon* arg0) {
 
     switch (gBattleScene.unk_00->unk_24) {
         case 0:
-            BattleAnim_BeginSessionRequestForActiveMon(arg0);
+            BattleScene_DestroySubstitute(arg0);
             var_s0 = 1;
             gBattleScene.unk_00->unk_24++;
             break;
@@ -188,7 +188,7 @@ s32 BattleScene_AdvanceDoublesOwnerAnimation(ActivePokemon* arg0) {
 
     switch (gBattleScene.unk_00->unk_24) {
         case 0:
-            BattleAnim_BeginSessionRequestForActiveMon(arg0);
+            BattleScene_DestroySubstitute(arg0);
             sp1C = 1;
             gBattleScene.unk_00->unk_24 += 1;
             break;
@@ -227,7 +227,7 @@ s32 BattleScene_AdvanceBothOwnerAnimations(void) {
     switch (gBattleScene.unk_00->unk_24) {
         case 0:
             if (temp_a1->unk_34 & 0x800) {
-                BattleAnim_BeginSessionRequest(sActivePokemon[0]);
+                Battle_MakeSubstitute(sActivePokemon[0]);
             }
             sp1C = 1;
             gBattleScene.unk_00->unk_24 = gBattleScene.unk_00->unk_24 + 1;
@@ -248,7 +248,7 @@ s32 BattleScene_AdvanceBothOwnerAnimations(void) {
 
         case 2:
             if (temp_a2->unk_34 & 0x800) {
-                BattleAnim_BeginSessionRequest(sActivePokemon[1]);
+                Battle_MakeSubstitute(sActivePokemon[1]);
             }
             sp1C = 1;
             gBattleScene.unk_00->unk_24 = gBattleScene.unk_00->unk_24 + 1;
@@ -2447,18 +2447,18 @@ void BattleScene_Phase15(CameraNode* arg0) {
             BattleScene_RecenterCameraOnOwner(arg0, D_84390204);
             if (sp30->unk_4D & 0x10) {
                 if (sp2C->unk_4E & 8) {
-                    sp28->unk_BC = D_84390204->sessionTeams->unk_02 = sp24->unk_BE;
-                } else if (D_84390200->sessionTeams->unk_02 == 0x98) {
-                    sp28->unk_BC = D_84390204->sessionTeams->unk_02 = sp2C->unk_0B;
+                    sp28->unk_BC = D_84390204->sessionTeams->cry = sp24->unk_BE;
+                } else if (D_84390200->sessionTeams->cry == 0x98) {
+                    sp28->unk_BC = D_84390204->sessionTeams->cry = sp2C->unk_0B;
                 } else {
-                    sp28->unk_BC = D_84390204->sessionTeams->unk_02 = D_84390200->sessionTeams->unk_02;
+                    sp28->unk_BC = D_84390204->sessionTeams->cry = D_84390200->sessionTeams->cry;
                 }
             } else if (sp2C->unk_4E & 8) {
-                D_84390204->sessionTeams->unk_02 = sp24->unk_BE;
-            } else if (D_84390200->sessionTeams->unk_02 == 0x98) {
-                D_84390204->sessionTeams->unk_02 = sp2C->unk_0B;
+                D_84390204->sessionTeams->cry = sp24->unk_BE;
+            } else if (D_84390200->sessionTeams->cry == 0x98) {
+                D_84390204->sessionTeams->cry = sp2C->unk_0B;
             } else {
-                D_84390204->sessionTeams->unk_02 = D_84390200->sessionTeams->unk_02;
+                D_84390204->sessionTeams->cry = D_84390200->sessionTeams->cry;
             }
             D_84390204->sessionTeams->unk_04 = &D_84390204->unk_724->pokemonPicked[D_84390204->state.unk_08];
             D_84390204->sessionTeams->sessionIsBusy |= 0x80;
@@ -2507,7 +2507,7 @@ void BattleScene_Phase25(CameraNode* arg0) {
             BattleAnim_PlayMoveEffectScriptA(D_84390204, sp1C->usedMove);
             BattleScene_SelectActionCameraPresetFromTiming(arg0, 0);
             if (!(sp18->unk_34 & 0x800)) {
-                BattleAnim_BeginSessionRequest(D_84390204);
+                Battle_MakeSubstitute(D_84390204);
             }
             gBattleScene.unk_00->unk_20 += 1;
             break;
@@ -3387,7 +3387,7 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
 
         case 1:
             if (BattleAnim_TryRegisterAssetTables(temp_s0) != 0) {
-                temp_s0->sessionTeams->unk_02 = sp2C->unk_0B;
+                temp_s0->sessionTeams->cry = sp2C->unk_0B;
                 BattleScene_SetParticipantModelFlags(temp_s0, 2, 0);
                 BattleAnim_QueueEffectList3(0xD, temp_s0, temp_s0, 0xFF, 0xFF);
                 gBattleScene.unk_00->unk_20 += 1;

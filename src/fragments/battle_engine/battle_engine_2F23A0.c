@@ -266,7 +266,7 @@ ModelNodeView* Battle_GetMoveEffectListEntry(ActivePokemon* arg0, s32 arg1) {
 }
 
 s32 Battle_GetTrainerId(ActivePokemon* arg0, UNUSED s32 arg1) {
-    return arg0->sessionTeams->unk_02;
+    return arg0->sessionTeams->cry;
 }
 
 char* Battle_GetActiveMoveName(ActivePokemon* active_pokemon) {

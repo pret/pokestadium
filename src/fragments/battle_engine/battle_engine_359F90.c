@@ -326,7 +326,7 @@ s32 func_8436FD54(u8 arg0, u8* arg1, s32 arg2) {
 }
 
 void Battle_SetActiveMoveFromSlotIndex(void) {
-    D_843C5240[0].usedMove = D_843C5240[0].unk_1F[D_843C4DC2];
+    D_843C5240[0].usedMove = D_843C5240[0].moves[D_843C4DC2];
 }
 
 s32 func_8436FDBC(void) {
@@ -731,10 +731,10 @@ void func_84370B7C(ActivePokemon* arg0) {
     sp24->unk_16[7] = sp34->unk_07;
     sp24->unk_16[8] = sp34->unk_08;
 
-    sp24->unk_1F[0] = sp34->unk_09[0];
-    sp24->unk_1F[1] = sp34->unk_09[1];
-    sp24->unk_1F[2] = sp34->unk_09[2];
-    sp24->unk_1F[3] = sp34->unk_09[3];
+    sp24->moves[0] = sp34->unk_09[0];
+    sp24->moves[1] = sp34->unk_09[1];
+    sp24->moves[2] = sp34->unk_09[2];
+    sp24->moves[3] = sp34->unk_09[3];
     sp24->unk_24 = sp34->unk_1E;
 
     sp24->unk_32[0] = sp34->unk_20[0];
@@ -762,7 +762,7 @@ void func_84370B7C(ActivePokemon* arg0) {
         if (sp34->unk_09[i] == 0) {
             for (j = i; j < 4; j++) {
                 sp24->unk_32[j] = 0;
-                sp24->unk_1F[j] = sp34->unk_09[j] = 0;
+                sp24->moves[j] = sp34->unk_09[j] = 0;
             }
             break;
         }

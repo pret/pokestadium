@@ -209,7 +209,7 @@ void Battle_Effect_SecondaryStatusChance(void) {
         if ((gBattleTarget->unk_15 & 0x20) && (gBattleUser->unk_44.unk_03 == 0x14)) {
             gBattleTarget->unk_15 = 0;
             if (temp_a0->unk_14 != 4) {
-                temp_a2->usedMove = temp_a2->unk_1F[temp_a0->unk_0C];
+                temp_a2->usedMove = temp_a2->moves[temp_a0->unk_0C];
             } else {
                 temp_a0->unk_14 = 0;
                 temp_a0->unk_0C = 0;
@@ -872,11 +872,11 @@ void Battle_Effect_Mimic(void) {
             if (var_t0 >= 4) {
                 var_t0 = 3;
             }
-            temp_v0 = gBattleTarget->unk_1F[var_t0];
+            temp_v0 = gBattleTarget->moves[var_t0];
         } while (temp_v0 == 0);
 
-        gBattleUser->unk_1F[sp24->unk_0C] = temp_v0;
-        Text_SetStringToken(0x1E, Text_GetString(NULL, 0, sMoveNameTable, gBattleTarget->unk_1F[var_t0] - 1));
+        gBattleUser->moves[sp24->unk_0C] = temp_v0;
+        Text_SetStringToken(0x1E, Text_GetString(NULL, 0, sMoveNameTable, gBattleTarget->moves[var_t0] - 1));
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x40);
         return;
     }
@@ -917,10 +917,10 @@ void Battle_Effect_Disable(void) {
         if (gBattleTarget->unk_52 == 0) {
             do {
                 sp24 = Battle_Random() & 3;
-            } while (gBattleTarget->unk_1F[sp24] == 0);
+            } while (gBattleTarget->moves[sp24] == 0);
             temp_v1 = (Battle_Random() & 7) + 1;
             gBattleTarget->unk_52 = (sp24 * 0x10) + temp_v1;
-            gBattleTarget->unk_57 = gBattleTarget->unk_1F[sp24];
+            gBattleTarget->unk_57 = gBattleTarget->moves[sp24];
             Text_SetStringToken(0x1E, Text_GetString(NULL, 0, sMoveNameTable, gBattleTarget->unk_57 - 1));
             Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x3B);
             return;
@@ -1057,7 +1057,7 @@ void Battle_Effect_Transform(void) {
 
     ptr = gBattleUser;
     if (!(ptr->unk_4C & 0x40) &&
-        ((D_8438AC60[0] != 1) || (gBattleTarget->unk_1F[0] != 0x90) || (gBattleTarget->unk_1F[1] != 0))) {
+        ((D_8438AC60[0] != 1) || (gBattleTarget->moves[0] != 0x90) || (gBattleTarget->moves[1] != 0))) {
         gBattleScene.unk_00->unk_48 = 0xF;
         Text_SetStringToken(0x1B, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
         Battle_QueueMessage(gBattleMessageQueues->unk_148, -0x31);
@@ -1071,10 +1071,10 @@ void Battle_Effect_Transform(void) {
 
         gBattleUser->unk_16[6] = gBattleTarget->unk_16[6];
         gBattleUser->unk_16[7] = gBattleTarget->unk_16[7];
-        gBattleUser->unk_1F[0] = gBattleTarget->unk_1F[0];
-        gBattleUser->unk_1F[1] = gBattleTarget->unk_1F[1];
-        gBattleUser->unk_1F[2] = gBattleTarget->unk_1F[2];
-        gBattleUser->unk_1F[3] = gBattleTarget->unk_1F[3];
+        gBattleUser->moves[0] = gBattleTarget->moves[0];
+        gBattleUser->moves[1] = gBattleTarget->moves[1];
+        gBattleUser->moves[2] = gBattleTarget->moves[2];
+        gBattleUser->moves[3] = gBattleTarget->moves[3];
         gBattleUser->unk_24 = gBattleTarget->unk_24;
         gBattleUser->unk_2A = gBattleTarget->unk_2A;
         gBattleUser->unk_2C = gBattleTarget->unk_2C;
@@ -1082,7 +1082,7 @@ void Battle_Effect_Transform(void) {
         gBattleUser->unk_30 = gBattleTarget->unk_30;
 
         for (i = 0; i < 4; i++) {
-            if (gBattleTarget->unk_1F[i] == 0) {
+            if (gBattleTarget->moves[i] == 0) {
                 break;
             }
             gBattleUser->unk_32[i] = 5;

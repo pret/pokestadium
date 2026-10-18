@@ -263,7 +263,7 @@ typedef struct BattleSceneStateRow {
     /* 0x00 */ s16 unk_00;
     /* 0x04 */ BattleSceneStateCallback unk_04[7];
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
+    /* 0x24 */ s32 mode;
     /* 0x28 */ s32 unk_28;
 } BattleSceneStateRow; // size = 0x2C
 
@@ -1087,8 +1087,8 @@ s32 BattleAnim_TryRegisterAssetTables(ActivePokemon* active_pokemon);
 void BattleScene_LoadMoveResourceList(ActivePokemon* active_pokemon);
 void BattleScene_LoadRowResourceList(ActivePokemon* active_pokemon);
 void BattleScene_ReloadMoveResourceList(ActivePokemon* active_pokemon);
-void BattleAnim_BeginSessionRequest(ActivePokemon* active_pokemon);
-void BattleAnim_BeginSessionRequestForActiveMon(ActivePokemon* active_pokemon);
+void Battle_MakeSubstitute(ActivePokemon* active_pokemon);
+void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon);
 s32 BattleScene_FindU16InByteArray(u16 arg0, u8* arg1, s32 arg2);
 void Battle_FilterUnusableMoves(ActivePokemon* arg0, u16 arg1, SpeciesLearnsetBuffer* arg2, SpeciesLearnsetBuffer* arg3);
 void Battle_InitializeMoveUsabilityMask(ActivePokemon* active_pokemon);

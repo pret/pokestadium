@@ -579,7 +579,7 @@ void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* side, unk
     side->unk_18 = model->unk_08->unk_00[0];
     side->sessionIsBusy |= 0xA0;
     side->unk_1C = 0;
-    side->unk_02 = first_trainer->pokemonPicked[0].unk_00.unk_00;
+    side->cry = first_trainer->pokemonPicked[0].unk_00.unk_00;
     side->unk_04 = first_trainer->pokemonPicked;
     Trainer_RequestPokeIcon(side);
 }

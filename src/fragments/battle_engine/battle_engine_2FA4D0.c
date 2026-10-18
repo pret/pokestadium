@@ -1009,11 +1009,11 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
 
     for (i = 0; i < 4; i++) {
         if (temp_s0->unk_4E & 8) {
-            sp60[i] = gMoveData[temp_s0->unk_1F[i] - 1].unk_05 / 5;
+            sp60[i] = gMoveData[temp_s0->moves[i] - 1].unk_05 / 5;
             if (sp60[i] >= 8) {
                 sp60[i] = 7;
             }
-            sp60[i] = gMoveData[temp_s0->unk_1F[i] - 1].unk_05 + (((temp_s0->unk_32[i] & 0xC0) >> 6) * sp60[i]);
+            sp60[i] = gMoveData[temp_s0->moves[i] - 1].unk_05 + (((temp_s0->unk_32[i] & 0xC0) >> 6) * sp60[i]);
         } else {
             sp60[i] = gMoveData[sp58->unk_09[i] - 1].unk_05 / 5;
             if (sp60[i] >= 8) {
@@ -1024,19 +1024,19 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
     }
 
     if (temp_s0->unk_4E & 8) {
-        if ((temp_s0->unk_1F[0] != 0) && (temp_s0->unk_1F[0] < 0xA6)) {
+        if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
             sp64[0] = BattleHud_DrawMovePpTextRTL(arg1 + 0x52, arg2 + 0xF, temp_s0->unk_32[0], sp60[0]);
         }
 
-        if ((temp_s0->unk_1F[1] != 0) && (temp_s0->unk_1F[1] < 0xA6)) {
+        if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
             sp64[1] = BattleHud_DrawMovePpTextLTR(arg1 + 0x7C, arg2 + 0x1C, temp_s0->unk_32[1], sp60[1]);
         }
 
-        if ((temp_s0->unk_1F[2] != 0) && (temp_s0->unk_1F[2] < 0xA6)) {
+        if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
             sp64[2] = BattleHud_DrawMovePpTextLTR(arg1 + 0x70, arg2 + 0x30, temp_s0->unk_32[2], sp60[2]);
         }
 
-        if ((temp_s0->unk_1F[3] != 0) && (temp_s0->unk_1F[3] < 0xA6)) {
+        if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
             sp64[3] = BattleHud_DrawMovePpTextRTL(arg1 + 0x44, arg2 + 0x23, temp_s0->unk_32[3], sp60[3]);
         }
     } else {
@@ -1068,43 +1068,43 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
     gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (temp_s0->unk_4E & 8) {
-        if ((temp_s0->unk_1F[0] != 0) && (temp_s0->unk_1F[0] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[0] - 0x19, arg2 + 0xE, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[0] - 1].unk_03],
+        if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[0] - 0x19, arg2 + 0xE, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[0] - 1].unk_03],
                           0x20, 0);
         }
 
-        if ((temp_s0->unk_1F[1] != 0) && (temp_s0->unk_1F[1] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[1], arg2 + 0x1B, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[1] - 1].unk_03], 0x20,
+        if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[1], arg2 + 0x1B, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[1] - 1].unk_03], 0x20,
                           0);
         }
 
-        if ((temp_s0->unk_1F[2] != 0) && (temp_s0->unk_1F[2] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[2], arg2 + 0x2F, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[2] - 1].unk_03], 0x20,
+        if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[2], arg2 + 0x2F, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[2] - 1].unk_03], 0x20,
                           0);
         }
 
-        if ((temp_s0->unk_1F[3] != 0) && (temp_s0->unk_1F[3] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[3] - 0x18, arg2 + 0x22, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[3] - 1].unk_03],
+        if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[3] - 0x18, arg2 + 0x22, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[3] - 1].unk_03],
                           0x20, 0);
         }
     } else {
-        if ((temp_s0->unk_1F[0] != 0) && (temp_s0->unk_1F[0] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[0] - 0x19, arg2 + 0xE, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[0] - 1].unk_03],
+        if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[0] - 0x19, arg2 + 0xE, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[0] - 1].unk_03],
                           0x20, 0);
         }
 
-        if ((temp_s0->unk_1F[1] != 0) && (temp_s0->unk_1F[1] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[1], arg2 + 0x1B, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[1] - 1].unk_03], 0x20,
+        if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[1], arg2 + 0x1B, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[1] - 1].unk_03], 0x20,
                           0);
         }
 
-        if ((temp_s0->unk_1F[2] != 0) && (temp_s0->unk_1F[2] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[2], arg2 + 0x2F, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[2] - 1].unk_03], 0x20,
+        if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[2], arg2 + 0x2F, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[2] - 1].unk_03], 0x20,
                           0);
         }
 
-        if ((temp_s0->unk_1F[3] != 0) && (temp_s0->unk_1F[3] < 0xA6)) {
-            Gfx_DrawTextureRgba16(sp64[3] - 0x18, arg2 + 0x22, 0x20, 9, D_843857C8[gMoveData[temp_s0->unk_1F[3] - 1].unk_03],
+        if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
+            Gfx_DrawTextureRgba16(sp64[3] - 0x18, arg2 + 0x22, 0x20, 9, D_843857C8[gMoveData[temp_s0->moves[3] - 1].unk_03],
                           0x20, 0);
         }
     }
@@ -1115,94 +1115,94 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
     Font_SetActive(1, 0);
 
     if (temp_s0->unk_4E & 8) {
-        if ((temp_s0->unk_1F[0] != 0) && (temp_s0->unk_1F[0] < 0xA6)) {
+        if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
             if (arg0->state.unk_C1[0] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Battle_DrawRightAlignedText(arg1 + 0x5A, arg2 + 4, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[0] - 1));
+            Battle_DrawRightAlignedText(arg1 + 0x5A, arg2 + 4, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[0] - 1));
         }
 
-        if ((temp_s0->unk_1F[1] != 0) && (temp_s0->unk_1F[1] < 0xA6)) {
+        if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
             if (arg0->state.unk_C1[1] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Font_Printf(arg1 + 0x7C, arg2 + 0x11, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[1] - 1));
+            Font_Printf(arg1 + 0x7C, arg2 + 0x11, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[1] - 1));
         }
 
-        if ((temp_s0->unk_1F[2] != 0) && (temp_s0->unk_1F[2] < 0xA6)) {
+        if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
             if (arg0->state.unk_C1[2] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Font_Printf(arg1 + 0x6E, arg2 + 0x25, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[2] - 1));
+            Font_Printf(arg1 + 0x6E, arg2 + 0x25, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[2] - 1));
         }
 
-        if ((temp_s0->unk_1F[3] != 0) && (temp_s0->unk_1F[3] < 0xA6)) {
+        if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
             if (arg0->state.unk_C1[3] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Battle_DrawRightAlignedText(arg1 + 0x4C, arg2 + 0x18, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[3] - 1));
+            Battle_DrawRightAlignedText(arg1 + 0x4C, arg2 + 0x18, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[3] - 1));
         }
     } else {
-        if ((temp_s0->unk_1F[0] != 0) && (temp_s0->unk_1F[0] < 0xA6)) {
+        if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
             if (arg0->state.unk_C1[0] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Battle_DrawRightAlignedText(arg1 + 0x5A, arg2 + 4, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[0] - 1));
+            Battle_DrawRightAlignedText(arg1 + 0x5A, arg2 + 4, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[0] - 1));
         }
 
-        if ((temp_s0->unk_1F[1] != 0) && (temp_s0->unk_1F[1] < 0xA6)) {
+        if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
             if (arg0->state.unk_C1[1] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Font_Printf(arg1 + 0x7C, arg2 + 0x11, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[1] - 1));
+            Font_Printf(arg1 + 0x7C, arg2 + 0x11, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[1] - 1));
         }
 
-        if ((temp_s0->unk_1F[2] != 0) && (temp_s0->unk_1F[2] < 0xA6)) {
+        if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
             if (arg0->state.unk_C1[2] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Font_Printf(arg1 + 0x6E, arg2 + 0x25, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[2] - 1));
+            Font_Printf(arg1 + 0x6E, arg2 + 0x25, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[2] - 1));
         }
 
-        if ((temp_s0->unk_1F[3] != 0) && (temp_s0->unk_1F[3] < 0xA6)) {
+        if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
             if (arg0->state.unk_C1[3] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
             }
-            Battle_DrawRightAlignedText(arg1 + 0x4C, arg2 + 0x18, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->unk_1F[3] - 1));
+            Battle_DrawRightAlignedText(arg1 + 0x4C, arg2 + 0x18, Text_GetString(NULL, 0, sMoveNameTable, temp_s0->moves[3] - 1));
         }
     }
 
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
-    if (temp_s0->unk_1F[0] >= 0xA6) {
+    if (temp_s0->moves[0] >= 0xA6) {
         Battle_DrawRightAlignedText(arg1 + 0x5A, arg2 + 4, "？？？？？");
     }
 
-    if (temp_s0->unk_1F[1] >= 0xA6) {
+    if (temp_s0->moves[1] >= 0xA6) {
         Font_Printf(arg1 + 0x7C, arg2 + 0x11, "？？？？？");
     }
 
-    if (temp_s0->unk_1F[2] >= 0xA6) {
+    if (temp_s0->moves[2] >= 0xA6) {
         Font_Printf(arg1 + 0x6E, arg2 + 0x25, "？？？？？");
     }
 
-    if (temp_s0->unk_1F[3] >= 0xA6) {
+    if (temp_s0->moves[3] >= 0xA6) {
         Battle_DrawRightAlignedText(arg1 + 0x4C, arg2 + 0x18, "？？？？？");
     }
 

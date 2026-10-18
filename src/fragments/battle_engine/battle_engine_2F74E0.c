@@ -264,13 +264,13 @@ s32 BattleScene_SelectFallbackWhenNoUsableMoves(ActivePokemon* arg0) {
 
     if (arg0->state.runtime.unk_52 != 0) {
         for (i = 0; i < 4; i++) {
-            if (((temp_v0->unk_52 >> 4) != i) && (temp_v0->unk_1F[i] != 0)) {
+            if (((temp_v0->unk_52 >> 4) != i) && (temp_v0->moves[i] != 0)) {
                 var_v1 |= temp_v0->unk_32[i] & 0x3F;
             }
         }
     } else {
         for (i = 0; i < 4; i++) {
-            if (temp_v0->unk_1F[i] != 0) {
+            if (temp_v0->moves[i] != 0) {
                 var_v1 |= temp_v0->unk_32[i] & 0x3F;
             }
         }
@@ -391,13 +391,13 @@ s32 BattleScene_CpuHasNoUsableMoves(ActivePokemon* arg0) {
 
     if (temp_v0->unk_52 != 0) {
         for (i = 0; i < 4; i++) {
-            if (((temp_v0->unk_52 >> 4) != i) && (temp_v0->unk_1F[i] != 0)) {
+            if (((temp_v0->unk_52 >> 4) != i) && (temp_v0->moves[i] != 0)) {
                 var_v1 |= temp_v0->unk_32[i] & 0x3F;
             }
         }
     } else {
         for (i = 0; i < 4; i++) {
-            if (temp_v0->unk_1F[i] != 0) {
+            if (temp_v0->moves[i] != 0) {
                 var_v1 |= temp_v0->unk_32[i] & 0x3F;
             }
         }
@@ -839,7 +839,7 @@ void BattleScene_CommitSelectedMoveAction(ActivePokemon* arg0) {
     if (arg0->state.unk_14 != 4) {
         temp_v0->unk_0C = temp_v0->unk_14;
         if (temp_v0->unk_2A == 0) {
-            temp_v1->usedMove = temp_v1->unk_1F[temp_v0->unk_0C];
+            temp_v1->usedMove = temp_v1->moves[temp_v0->unk_0C];
         }
     } else {
         if (temp_v1->unk_4C & 0x20) {
@@ -871,13 +871,13 @@ s32 BattleScene_HandleNoUsableMoveSelection(ActivePokemon* arg0) {
     if (temp_a0->unk_52 != 0) {
         temp_a1 = temp_a0->unk_52 >> 4;
         for (i = 0; i < 4; i++) {
-            if ((temp_a1 != i) && (temp_a0->unk_1F[i] != 0)) {
+            if ((temp_a1 != i) && (temp_a0->moves[i] != 0)) {
                 var_v1 |= temp_a0->unk_32[i] & 0x3F;
             }
         }
     } else {
         for (i = 0; i < 4; i++) {
-            if (temp_a0->unk_1F[i] != 0) {
+            if (temp_a0->moves[i] != 0) {
                 var_v1 |= temp_a0->unk_32[i] & 0x3F;
             }
         }
@@ -935,7 +935,7 @@ void BattleScene_SelectMoveFromButtons(ActivePokemon* arg0) {
     Controller* cont = arg0->state.unk_C8;
 
     if ((cont->buttonPressed & 8) != 0) {
-        if ((arg0->state.runtime.unk_1F[0] != 0) && (arg0->state.runtime.unk_1F[0] < 0xA6)) {
+        if ((arg0->state.runtime.moves[0] != 0) && (arg0->state.runtime.moves[0] < 0xA6)) {
             arg0->state.unk_14 = 0;
             BattleScene_ValidateSelectedMove(arg0);
             return;
@@ -943,7 +943,7 @@ void BattleScene_SelectMoveFromButtons(ActivePokemon* arg0) {
     }
 
     if ((cont->buttonPressed & 1) != 0) {
-        if ((arg0->state.runtime.unk_1F[1] != 0) && (arg0->state.runtime.unk_1F[1] < 0xA6)) {
+        if ((arg0->state.runtime.moves[1] != 0) && (arg0->state.runtime.moves[1] < 0xA6)) {
             arg0->state.unk_14 = 1;
             BattleScene_ValidateSelectedMove(arg0);
             return;
@@ -951,7 +951,7 @@ void BattleScene_SelectMoveFromButtons(ActivePokemon* arg0) {
     }
 
     if ((cont->buttonPressed & 4) != 0) {
-        if ((arg0->state.runtime.unk_1F[2] != 0) && (arg0->state.runtime.unk_1F[2] < 0xA6)) {
+        if ((arg0->state.runtime.moves[2] != 0) && (arg0->state.runtime.moves[2] < 0xA6)) {
             arg0->state.unk_14 = 2;
             BattleScene_ValidateSelectedMove(arg0);
             return;
@@ -959,7 +959,7 @@ void BattleScene_SelectMoveFromButtons(ActivePokemon* arg0) {
     }
 
     if ((cont->buttonPressed & 2) != 0) {
-        if ((arg0->state.runtime.unk_1F[3] != 0) && (arg0->state.runtime.unk_1F[3] < 0xA6)) {
+        if ((arg0->state.runtime.moves[3] != 0) && (arg0->state.runtime.moves[3] < 0xA6)) {
             arg0->state.unk_14 = 3;
             BattleScene_ValidateSelectedMove(arg0);
             return;
