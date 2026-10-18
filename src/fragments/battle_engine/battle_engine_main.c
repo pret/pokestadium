@@ -45,24 +45,25 @@ static f32 sStageScale;
 // Initial countdown -2 -> 0, completion latch 1, audio-shutdown latch 2.
 static s32 sCompletionGate;
 
-// Indexed by mode or ruleCategory. Castle locations advance from the base at key 7.
-// Values are stadium_models archive indices; the labels name the indexing mode.
+// Indexed by gSessionContext.mode, or by ruleCategory for Event and attract-demo battles.
+// Values are stadium_models arena file indices, not session modes. Gym Leader Castle
+// adds modeSelection (0-9) to its base value 7, reaching Castle arenas 7-16.
 static u8 sBattleModeDispatch[] = {
-    SESSION_MODE_ANYTHING_GOES, // SESSION_MODE_ANYTHING_GOES
-    SESSION_MODE_NINTENDO_CUP_97, // SESSION_MODE_NINTENDO_CUP_97
-    SESSION_MODE_NINTENDO_CUP_98, // SESSION_MODE_NINTENDO_CUP_98
-    SESSION_MODE_NINTENDO_CUP_99, // SESSION_MODE_NINTENDO_CUP_99
-    SESSION_MODE_PETIT_CUP, // SESSION_MODE_PETIT_CUP
-    SESSION_MODE_PIKA_CUP, // SESSION_MODE_PIKA_CUP
-    SESSION_MODE_PRIME_CUP, // SESSION_MODE_PRIME_CUP
-    SESSION_MODE_GYM_LEADER_CASTLE, // SESSION_MODE_GYM_LEADER_CASTLE
-    17, // SESSION_MODE_VS_MEWTWO
-    SESSION_MODE_NINTENDO_CUP_97, // SESSION_MODE_BATTLE_NOW
-    SESSION_MODE_ANYTHING_GOES, // SESSION_MODE_EVENT_BATTLE
+    0,     // [SESSION_MODE_ANYTHING_GOES]       -> arena 0 (Free Battle)
+    1,     // [SESSION_MODE_NINTENDO_CUP_97]     -> arena 1 (Nintendo Cup '97 / Poke Cup R1)
+    2,     // [SESSION_MODE_NINTENDO_CUP_98]     -> arena 2 (Nintendo Cup '98 / Poke Cup R2)
+    3,     // [SESSION_MODE_NINTENDO_CUP_99]     -> arena 3 (Nintendo Cup '99 / Poke Cup R3)
+    4,     // [SESSION_MODE_PETIT_CUP]           -> arena 4 (Petit Cup)
+    5,     // [SESSION_MODE_PIKA_CUP]            -> arena 5 (Pika Cup)
+    6,     // [SESSION_MODE_PRIME_CUP]           -> arena 6 (Prime Cup)
+    7,     // [SESSION_MODE_GYM_LEADER_CASTLE]   -> arenas 7..16 (7 + modeSelection)
+    17,    // [SESSION_MODE_VS_MEWTWO]           -> arena 17 (Vs. Mewtwo)
+    1,     // [SESSION_MODE_BATTLE_NOW]          -> arena 1
+    0,     // [SESSION_MODE_EVENT_BATTLE]        -> not read; BattleScene_Init indexes by ruleCategory
     0, 0, 0, 0, 0, // 11-15: Unknown
-    SESSION_MODE_NINTENDO_CUP_97, // SESSION_MODE_ATTRACT_DEMO_BATTLE
-    SESSION_MODE_NINTENDO_CUP_97, SESSION_MODE_NINTENDO_CUP_97, // 17-18: Cutscenes
-    SESSION_MODE_NINTENDO_CUP_97, // 19: Unknown
+    1,     // [SESSION_MODE_ATTRACT_DEMO_BATTLE] -> not read; BattleScene_Init indexes by ruleCategory
+    1, 1,  // 17-18: Cutscenes
+    1,     // 19: Unknown
     // The ROM table ends here at 20 bytes. Modes 20-26 index past it into the
     // first bytes of sStageGeoLayout (0x0C, 0x00, 0xFF, 0xFF, 0x05, 0x00, 0x00).
     // Adding entries would shift .data and break ROM identity.
@@ -239,8 +240,8 @@ void Battle_DrawStageBackdrop(void) {
 */
 // Capture only when camera flag 0x10 requests a refresh. Restoring the viewport
 // keeps the camera's on-screen placement separate from its off-screen render size.
-void Battle_RenderActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnail) {
-    CameraNode* camera_node = pokemon->children;
+void Battle_RenderActivePokemonThumbnail(GraphNode* thumbnail_root, DepthBuffer* thumbnail) {
+    CameraNode* camera_node = thumbnail_root->children;
     CameraViewport viewport;
 
     if (camera_node->node.flags & 0x10) {
@@ -253,7 +254,7 @@ void Battle_RenderActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbn
 
         GfxImage_SetRenderTarget(&gDisplayListHead, thumbnail);
         GfxImage_FillCurrent(&gDisplayListHead, 0x10D);
-        Geo_RenderRootNode(pokemon);
+        Geo_RenderRootNode(thumbnail_root);
 
         camera_node->node.flags &= ~0x10;
 
@@ -266,25 +267,25 @@ void Battle_RenderActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbn
 // Use clipped destination offsets as 10.5 texture coordinates with a half-texel bias.
 //@src/gfx_rect.c
 void Battle_DrawClippedTextureRect(s32 x1, s32 y1, s32 x2, s32 y2) {
-    struct Rectangle dest;
+    struct Rectangle destination;
     u16 texture_spread_x;
     u16 texture_spread_y;
 
-    GfxRect_SetBounds(&dest, x1, y1, x2, y2);
+    GfxRect_SetBounds(&destination, x1, y1, x2, y2);
 
-    if (GfxRect_ClipToScissor(&dest) != 0) {
-        if (!x2) {} // FAKE: empty condition retained for matching (karodo).
+    if (GfxRect_ClipToScissor(&destination) != 0) {
+        if (!x2) {}
 
-        texture_spread_x = ((dest.x1 - x1) << 5);
-        texture_spread_y = ((dest.y2 - y1) << 5);
+        texture_spread_x = ((destination.x1 - x1) << 5);
+        texture_spread_y = ((destination.y2 - y1) << 5);
 
         texture_spread_x += 0x10;
         texture_spread_y += 0x10;
 
-        gSPTextureRectangle(gDisplayListHead++, dest.x1 << 2, dest.y2 << 2, ((dest.y1 + 1) ^ 0) << 2,
-                            ((dest.x2 + 1) ^ 0) << 2, G_TX_RENDERTILE, texture_spread_x, texture_spread_y, 0x0800, 0x0800);
+        gSPTextureRectangle(gDisplayListHead++, destination.x1 << 2, destination.y2 << 2, ((destination.y1 + 1) ^ 0) << 2,
+                            ((destination.x2 + 1) ^ 0) << 2, G_TX_RENDERTILE, texture_spread_x, texture_spread_y, 0x0800, 0x0800);
 
-        if ((x2 && x2) ^ 0) {} // FAKE: empty condition retained for matching (karodo).
+        if ((x2 && x2) ^ 0) {} // karodo
     }
 }
 
@@ -302,17 +303,17 @@ void Battle_DrawTexturedRectSegment(s32 x1, s32 y1, s32 draw_width, s32 height, 
     Fills in the texture of the pokemon thumbnail
 */
 // Blit the captured side image as four strips, producing a 37 x 37 thumbnail.
-void Battle_FillActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnail) {
+void Battle_FillActivePokemonThumbnail(GraphNode* thumbnail_root, DepthBuffer* thumbnail) {
     s32 x;
     s32 y;
-    CameraNode* camera_child_node = pokemon->children;
-    CameraViewport* viewport = &pokemon->children->viewport;
-    s32 img;
+    CameraNode* camera_node = thumbnail_root->children;
+    CameraViewport* viewport = &thumbnail_root->children->viewport;
+    s32 image_address;
 
     x = viewport->x;
     y = viewport->y;
 
-    camera_child_node++;
+    camera_node++;
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -322,14 +323,14 @@ void Battle_FillActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnai
     gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
     gDPSetTextureFilter(gDisplayListHead++, G_TF_AVERAGE);
 
-    img = thumbnail->img_p;
-    Battle_DrawTexturedRectSegment(x, y, 37, 10, img, 76);
-    img = thumbnail->img_p + 0xBE0;
-    Battle_DrawTexturedRectSegment(x, y + 10, 37, 10, img, 76);
-    img = thumbnail->img_p + 0x17C0;
-    Battle_DrawTexturedRectSegment(x, y + 20, 37, 10, img, 76);
-    img = thumbnail->img_p + 0x23A0;
-    Battle_DrawTexturedRectSegment(x, y + 30, 37, 7, img, 76);
+    image_address = thumbnail->img_p;
+    Battle_DrawTexturedRectSegment(x, y, 37, 10, image_address, 76);
+    image_address = thumbnail->img_p + 0xBE0;
+    Battle_DrawTexturedRectSegment(x, y + 10, 37, 10, image_address, 76);
+    image_address = thumbnail->img_p + 0x17C0;
+    Battle_DrawTexturedRectSegment(x, y + 20, 37, 10, image_address, 76);
+    image_address = thumbnail->img_p + 0x23A0;
+    Battle_DrawTexturedRectSegment(x, y + 30, 37, 7, image_address, 76);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -340,17 +341,17 @@ void Battle_FillActivePokemonThumbnail(GraphNode* pokemon, DepthBuffer* thumbnai
 // Clear the faint-batch stamps for every picked Pokemon, including teammate rosters.
 // BattleMon.unk_25 is written by Battle_UpdateFaintBatches when its current HP reaches zero.
 void Battle_ResetFaintBatches(void) {
-    s32 i;
-    s32 j;
-    s32 x;
-    TeamRoster* current_team_member;
-    BattleSessionTeams* player_tag_team = &sBattleSides[0];
+    s32 side_index;
+    s32 trainer_index;
+    s32 pokemon_index;
+    TeamRoster* roster;
+    BattleSessionTeams* side = &sBattleSides[0];
 
-    for (i = 0; i < 2; i++, player_tag_team++) {
-        for (j = 0; j < player_tag_team->unk_01; j++) {
-            current_team_member = player_tag_team->teamMember[j];
-            for (x = 0; x < current_team_member->numberOfPokemonChosen; x++) {
-                current_team_member->pokemonPicked[x].unk_25 = 0;
+    for (side_index = 0; side_index < 2; side_index++, side++) {
+        for (trainer_index = 0; trainer_index < side->unk_01; trainer_index++) {
+            roster = side->teamMember[trainer_index];
+            for (pokemon_index = 0; pokemon_index < roster->numberOfPokemonChosen; pokemon_index++) {
+                roster->pokemonPicked[pokemon_index].unk_25 = 0;
             }
         }
     }
@@ -360,26 +361,26 @@ void Battle_ResetFaintBatches(void) {
 // Stamp newly observed zero-HP Pokemon with the same batch number this frame.
 // Increment once per nonempty batch, so simultaneous faints share a stamp.
 void Battle_UpdateFaintBatches(void) {
-    s32 i;
-    s32 j;
-    s32 x;
-    s32 var_v0 = 0;
-    TeamRoster* temp_a3;
-    BattleSessionTeams* player_side = &sBattleSides[0];
+    s32 side_index;
+    s32 trainer_index;
+    s32 pokemon_index;
+    s32 found_faint = 0;
+    TeamRoster* roster;
+    BattleSessionTeams* side = &sBattleSides[0];
 
-    for (i = 0; i < 2; i++, player_side++) {
-        for (j = 0; j < player_side->unk_01; j++) {
-            temp_a3 = player_side->teamMember[j];
-            for (x = 0; x < temp_a3->numberOfPokemonChosen; x++) {
-                if ((temp_a3->pokemonPicked[x].unk_25 == 0) && (temp_a3->pokemonPicked[x].unk_02 == 0)) {
-                    var_v0 = 1;
-                    temp_a3->pokemonPicked[x].unk_25 = sNextFaintBatch;
+    for (side_index = 0; side_index < 2; side_index++, side++) {
+        for (trainer_index = 0; trainer_index < side->unk_01; trainer_index++) {
+            roster = side->teamMember[trainer_index];
+            for (pokemon_index = 0; pokemon_index < roster->numberOfPokemonChosen; pokemon_index++) {
+                if ((roster->pokemonPicked[pokemon_index].unk_25 == 0) && (roster->pokemonPicked[pokemon_index].unk_02 == 0)) {
+                    found_faint = 1;
+                    roster->pokemonPicked[pokemon_index].unk_25 = sNextFaintBatch;
                 }
             }
         }
     }
 
-    if (var_v0 != 0) {
+    if (found_faint != 0) {
         sNextFaintBatch += 1;
     }
 }
@@ -453,12 +454,12 @@ s32 BattleScene_UpdatePausedFrame(s32 fade_mode) {
 }
 
 // triggers every frame: bug boy in GLC
-// Count the initial two callbacks toward zero; once the gate is zero, mode 16
-// can request exit on a button press. The normal path waits for the scene result.
+// Count the initial two callbacks toward zero; once the gate is zero, the attract
+// demo battle (mode 16) can request exit on a button press. The normal path waits for the scene result.
 void Battle_UpdateCompletionGate(void) {
     if (sCompletionGate < 0) {
         sCompletionGate++;
-    } else if ((sCompletionGate == 0) && (gSessionContext.mode == 0x10) && gPlayer1Controller->buttonPressed) {
+    } else if ((sCompletionGate == 0) && (gSessionContext.mode == SESSION_MODE_ATTRACT_DEMO_BATTLE) && gPlayer1Controller->buttonPressed) {
         sCompletionGate = 1;
     }
 }
@@ -540,13 +541,13 @@ void Battle_SelectComRoster(void) {
     s32 number_of_pokemon_picked;
 
     player_roster = gSessionContext.battleSides[0].teamMember[0];
-    // Side zero can contain a second trainer; this is not a second active Pokemon.
+    // In Free Battle Team Battle, side 0 can have a second allied trainer in teamMember[1].
     player_teammate_roster = gSessionContext.battleSides[0].teamMember[1];
     com_roster = gSessionContext.battleSides[1].teamMember[0];
 
     if (com_roster->unk_000 & 2) {
         // Free Battle can consider both allied trainers; other modes pass only one.
-        if (gSessionContext.mode == 0) {
+        if (gSessionContext.mode == SESSION_MODE_ANYTHING_GOES) {
             if (gSessionContext.ruleCategory == RULE_CATEGORY_ANYTHING_GOES) {
                 number_of_pokemon_picked = com_roster->rosterInfo->numberOfPokemonCanBePicked;
             } else {
@@ -600,7 +601,7 @@ void BattleScene_Init(unk_func_80007444* stage_context) {
 
     if (gSessionContext.mode == 0x11) {
         Font_Init(4, 0);
-    } else if (gSessionContext.mode == 0x10) {
+    } else if (gSessionContext.mode == SESSION_MODE_ATTRACT_DEMO_BATTLE) {
         Font_Init(7, 0);
     } else {
         Font_Init(3, 0);
@@ -629,7 +630,7 @@ void BattleScene_Init(unk_func_80007444* stage_context) {
     // Castle key 7 adds the selected location to the table's base entry.
     if ((gSessionContext.mode == SESSION_MODE_ATTRACT_DEMO_BATTLE) || (gSessionContext.mode == SESSION_MODE_EVENT_BATTLE)) {
         arena_index = sBattleModeDispatch[gSessionContext.ruleCategory];
-        if (gSessionContext.ruleCategory == SESSION_MODE_GYM_LEADER_CASTLE) {
+        if (gSessionContext.ruleCategory == RULE_CATEGORY_GYM_LEADER_CASTLE) {
             arena_index += gSessionContext.modeSelection;
         }
     } else {
