@@ -13,7 +13,7 @@ s32 Credits_RandomRange(s32 arg0) {
 void Credits_DrawContinuePrompt(u8 arg0) {
     static u8 D_86A05B54 = 0;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (!arg0) {
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
@@ -27,7 +27,7 @@ void Credits_DrawContinuePrompt(u8 arg0) {
 
     Widget_DrawStripedBar(0x6E, 0x5C);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 s32 pad_D_86A05B58[2] = { 0, 0 };

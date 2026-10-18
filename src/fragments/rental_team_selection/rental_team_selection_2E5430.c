@@ -105,7 +105,7 @@ void TeamSelection_RegisteredTeam_DrawCard(unk_D_84229EB0* arg0, s16 arg1, s16 a
 
     Gfx_FillRectRgb(arg1, arg2 + 0x58, 0x200, 4, 0x32, 0x32, 0x32);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (arg3->unk_4D20 != 0) {
         if (arg3->unk_4D20 > 0) {
@@ -133,7 +133,7 @@ void TeamSelection_RegisteredTeam_DrawCard(unk_D_84229EB0* arg0, s16 arg1, s16 a
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -183,7 +183,7 @@ void TeamSelection_RegisteredTeam_DrawHeader(s16 arg0, s16 arg1) {
     Gfx_DrawTextureIa8(arg0 + 0x218, arg1, 8, 0x1C, D_2000A60, 8, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 4, arg1, 0x218, 0x1C, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -232,7 +232,7 @@ void TeamSelection_RegisteredTeam_DrawScrollbar(unk_D_84229EB0* arg0) {
         Gfx_DrawTextureIa8(sp62 + 4, temp_s2 + 0x104, 0x10, 8, D_200A280, 0x10, 0);
         Gfx_DrawTexturedRectClipped(sp62 + 4, temp_s2 + 0xC, 0x10, 0xF8, 0, 0, 0x400, 0, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         if (D_84211888 < 4) {
             Gfx_DrawTextureRgba16(sp62, temp_s2 + sp66, 0x18, 0x18, D_200A300, 0x18, 0);
@@ -241,7 +241,7 @@ void TeamSelection_RegisteredTeam_DrawScrollbar(unk_D_84229EB0* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (arg0->unk_00001 == 2) {
         D_84211888 = (D_84211888 + 1) % 8;

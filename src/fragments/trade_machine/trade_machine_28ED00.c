@@ -782,11 +782,11 @@ void Trade_DrawBoxMachineTopBar(unk_D_82F20A40* arg0) {
     Trade_DrawPickScreenFrame(temp_s4->unk_00, temp_s4->unk_02, temp_s4->unk_04, temp_s4->unk_06);
 
     if ((temp_s4->unk_04 == 0x200) && (temp_s4->unk_06 == 0x88)) {
-        gSPDisplayList(gDisplayListHead++, D_8006F498);
+        gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
         Gfx_FillRectRgba(temp_s4->unk_00, temp_s4->unk_02, temp_s4->unk_04, temp_s4->unk_06, 0x32, 0x32, 0x96, 0xFF);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         for (i = 0; i < 2; i++) {
             Color_RGB8 sp5C = { 0x1E, 0x1E, 0x64 };
@@ -1033,7 +1033,7 @@ void Trade_DrawBoxMachineTransferArrows(s16 arg0, s16 arg1) {
 
     s16 sp86 = ROUND_MAX(2.0f * SINS(D_82F13F5C));
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPLoadTextureBlock(gDisplayListHead++, D_302AC68, G_IM_FMT_RGBA, G_IM_SIZ_16b, 48, 24, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
@@ -1048,7 +1048,7 @@ void Trade_DrawBoxMachineTransferArrows(s16 arg0, s16 arg1) {
     Gfx_DrawTexturedRectClipped(arg0 + sp86, arg1 + 0x18, 0x30, 0x18, 0, 0, 0x400, 0x400, 0);
     Gfx_DrawTexturedRectClipped((arg0 - sp86) + 0x10, arg1 + 0x40, 0x30, 0x18, 0x600, 0, -0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     D_82F13F5C += 0x1000;
 }

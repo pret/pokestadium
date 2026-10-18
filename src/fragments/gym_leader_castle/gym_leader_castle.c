@@ -197,7 +197,7 @@ void Glc_DrawTrainerIntroPanels(void) {
         if (current_node_trainers[i].loaded != 0) {
             s16 trainer_portrait_x = current_node_trainers[i].portrait_x;
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Glc_DrawScaledTextureRgba(trainer_portrait_x, 240, 128, 64, 128, D_3009290, 2.0f);
             Glc_DrawScaledTextureRgba(trainer_portrait_x, 304, 128, 64, 128, D_300A290, 2.0f);
@@ -205,7 +205,7 @@ void Glc_DrawTrainerIntroPanels(void) {
             Glc_DrawScaledTextureRgba(trainer_portrait_x + 8, 312, 112, 56, 128, current_node_trainers[i].portrait + 0x208, 2.0f);
             Glc_DrawScaledTextureRgba(trainer_portrait_x + 8, 368, 112, 56, 128, current_node_trainers[i].portrait + 0x1008, 2.0f);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             Font_BeginTranslucentTextRendering();
             // special titles for Gym leaders
@@ -245,14 +245,14 @@ void Glc_DrawMapBorder(void) {
     s16 i;
     s16 var_s1 = (D_84A030F4 / 4) + 0x22;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 9; i++) {
         Gfx_DrawTextureRgba16(0x24, var_s1, 0xE4, 8, D_3011A30 + i * 0xE40, 0xE4, 0);
         var_s1 += 8;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     D_84A030F4 += D_84A030F8;
     if (D_84A030F4 == 0) {
@@ -310,7 +310,7 @@ void Glc_DrawRoomMarkers(void) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Glc_DrawRoomLabels(void) {
@@ -354,7 +354,7 @@ void Glc_DrawGymLeaderInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     char* string;
 
     if (node->info_panel_texture != NULL) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha1);
 
         Glc_DrawScaledTextureRgba(502, 352, 96, 48, 96, node->info_panel_texture, 1.5f);
@@ -366,7 +366,7 @@ void Glc_DrawGymLeaderInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
         Gfx_DrawTextureIa16(358, 372, 16, 76, D_300C290, 0x10, 0);
         Gfx_DrawTexturedRectClipped(374, 372, 128, 76, 480, 0, 0, 0x400, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         Font_EnableTwoCycleTexturing();
@@ -402,7 +402,7 @@ void Glc_DrawGymLeaderInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
 void Glc_DrawEliteFourRoomInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     char* string;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha1);
 
     Glc_DrawScaledTextureRgba(470, 318, 128, 26, 128, node->info_panel_texture, 1.28f);
@@ -419,7 +419,7 @@ void Glc_DrawEliteFourRoomInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     Gfx_DrawTexturedRectClipped(346, 372, 16, 76, 0, 0, 0x400, 0x400, 0);
     Gfx_DrawTexturedRectClipped(362, 0x174, 108, 76, 480, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_EnableTwoCycleTexturing();
@@ -516,11 +516,11 @@ void Glc_Draw(void) {
     }
 
     if (gSessionContext.unk_11F2 == 1) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(0x22C, 0x28, 0x24, 0x24, D_3019C38, 0x24, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 
     Glc_DrawRoomMarkers();

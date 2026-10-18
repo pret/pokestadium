@@ -481,14 +481,14 @@ void Gallery_RentalViewerUpdateBoxPicker(void) {
 }
 
 void Gallery_RentalViewerDrawTitleBarStrip(s16 arg0, s16 arg1, s16 arg2) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
 
     Gfx_DrawTextureI4(arg0, arg1, 0x10, 0x1C, D_20007C0, 0x10, 0);
     Gfx_DrawTextureI4((arg0 + arg2) - 0x10, arg1, 0x10, 0x1C, D_20008A0, 0x10, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 0x10, arg1, arg2 - 0x20, 0x1C, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Gallery_RentalViewerDrawBoxTabIcon(s16 arg0, s16 arg1, u8* arg2, s16 arg3) {
@@ -506,7 +506,7 @@ void Gallery_RentalViewerDrawBoxTabBar(unk_D_838067F0* arg0) {
 
     Gallery_RentalViewerDrawTitleBarStrip(temp_s0, sp40, 0x208);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gallery_RentalViewerDrawBoxTabIcon(temp_s0 + 8, sp40 + 4, D_2001A20, arg0->unk_003C[0].unk_00);
     Gallery_RentalViewerDrawBoxTabIcon(temp_s0 + 0x2C, sp40 + 4, D_2002560, arg0->unk_003C[1].unk_00);
@@ -569,7 +569,7 @@ void Gallery_RentalViewerDrawScrollbar(s32 arg0, s32 arg1, unk_D_838067F0* arg2)
     Gfx_DrawTextureIa8(arg0 + 4, arg1 + 0x118, 0x10, 8, D_200A280, 0x10, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 4, arg1 + 0x28, 0x10, 0xF0, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (D_83805540 < 4) {
         Gfx_DrawTextureRgba16(arg0, arg1 + sp5C + 0x1C, 0x18, 0x18, D_200A300, 0x18, 0);
@@ -639,7 +639,7 @@ void Gallery_RentalViewerDrawPageHeader(s32 arg0, s32 arg1, unk_D_838067F0_0168*
     Gfx_DrawTextureIa8(arg0 + 0x184, arg1, 8, 0x1C, &D_2000A60, 8, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 8, arg1, 0x17C, 0x1C, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
@@ -675,7 +675,7 @@ void Gallery_RentalViewerDrawMonRow(s32 arg0, s32 arg1, unk_D_838067F0_0168* arg
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 3; i++) {
         if (arg2->unk_0000[i].unk_004.unk_00.unk_00 != 0) {
@@ -713,7 +713,7 @@ void func_838043F8(s32 arg0) {
     TeamSelection_DrawCornerFrame(spC4, spC0, 0x1B4, 0x12C);
     Gallery_RentalViewerDrawScrollbar(spC4 + 4, spC0 + 4, &D_838067F0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (Gallery_RentalViewerCountBoxes(&D_838067F0) >= 2) {
         Gfx_DrawTextureRgba16(spC4 - 0x32, spC0 + 8, 0x30, 0x18, D_2007E00, 0x30, 0);
@@ -726,7 +726,7 @@ void func_838043F8(s32 arg0) {
 
     Gfx_FillRectRgb(spC4 + 0x1C, spC0 + 4, 8, 0x124, 0x32, 0x32, 0x32);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (ptr->unk_0000 == 3) {
         s32 var_s0;
@@ -743,7 +743,7 @@ void func_838043F8(s32 arg0) {
         Gallery_RentalViewerDrawPageHeader(temp_s2_2 + 0x24, spC0 + 4, ptr->unk_0160->unk_268C);
         Gallery_RentalViewerDrawPageHeader((var_s0 + temp_s2_2) + 0x24, spC0 + 4, ptr->unk_0160);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         gDPLoadTextureBlock(gDisplayListHead++, D_2000C40, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 4, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
@@ -751,7 +751,7 @@ void func_838043F8(s32 arg0) {
         Gfx_DrawTexturedRectClipped(temp_s2_2 + 0x1B0, spC0 + 4, 8, 0x124, 0, 0, 0x400, 0, 0);
         Gfx_DrawTexturedRectClipped((var_s0 + temp_s2_2) + 0x1B0, spC0 + 4, 8, 0x124, 0, 0, 0x400, 0, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         var_s2 = ptr->unk_0160;
         for (i = 0; i < 6; i++) {
