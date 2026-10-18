@@ -106,9 +106,9 @@ void BattleScene_ShowSecondaryModelsAtMainTransform(ActivePokemon* arg0) {
         arg0->unk_168[i].unk_16A = sp64[i];
         arg0->unk_168[i].unk_000.lodFraction = 0;
         arg0->unk_168[i].unk_000.node.flags |= 1;
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].display_object.position, &arg0->displayObject.position);
-        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->unk_000.rotation);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].display_object.scale, &arg0->unk_000.scale);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->displayObject.position);
+        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->displayObject.rotation);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.scale, &arg0->displayObject.scale);
     }
 }
 
@@ -127,12 +127,12 @@ void BattleScene_UpdateSecondaryModelOrbit(ActivePokemon* arg0) {
         tmp = SINS(arg0->unk_168[i].unk_16A) * (BattleScene_GetParticipantModelRadiusScaled(arg0) * sp4C[i]);
         BattleAnim_Vec3fSetPolarXZ(&sp5C, tmp, arg0->displayObject.rotation.y);
 
-        arg0->unk_168[i].display_object.position.x = arg0->displayObject.position.x + sp5C.x;
+        arg0->unk_168[i].unk_000.position.x = arg0->displayObject.position.x + sp5C.x;
         arg0->unk_168[i].unk_000.position.y = arg0->displayObject.position.y + sp5C.y;
-        arg0->unk_168[i].unk_000.position.z = arg0->unk_000.position.z + sp5C.z;
+        arg0->unk_168[i].unk_000.position.z = arg0->displayObject.position.z + sp5C.z;
 
-        ModelAnim_SetFrame(&arg0->unk_168[i].display_object, arg0->unk_000.transformAnim.frameFixed >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].display_object, arg0->unk_000.transformAnim.animationId);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->displayObject.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->displayObject.transformAnim.animationId);
     }
 }
 
@@ -144,7 +144,7 @@ void BattleScene_ShowSecondaryModelsAtMainPose(ActivePokemon* arg0) {
         arg0->unk_168[i].unk_000.lodFraction = 0x3C;
         arg0->unk_168[i].unk_000.node.flags |= 1;
         Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].display_object.position, &arg0->displayObject.position);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->displayObject.position);
         BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->displayObject.rotation);
     }
 }
@@ -155,15 +155,15 @@ s32 BattleScene_ShrinkSecondaryModelsToScale(ActivePokemon* arg0) {
     f32 sp5C[] = { 0.007f, 0.005f, 0.039f }; // D_8438462C
 
     for (i = 0; i < 2; i++) {
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->unk_000.position);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->displayObject.position);
 
         temp_fv0_2 = Math_StepToF(arg0->unk_168[i].unk_000.scale.x, 0.8f, sp5C[i], sp5C[i]);
         arg0->unk_168[i].unk_000.scale.x = temp_fv0_2;
         arg0->unk_168[i].unk_000.scale.y = temp_fv0_2;
         arg0->unk_168[i].unk_000.scale.z = temp_fv0_2;
 
-        ModelAnim_SetFrame(&arg0->unk_168[i].display_object, arg0->unk_000.transformAnim.frameFixed >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].display_object, arg0->unk_000.transformAnim.animationId);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->displayObject.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->displayObject.transformAnim.animationId);
 
         if (arg0->unk_168[i].unk_000.scale.y < 0.8) {
             arg0->unk_168[i].unk_169 = 1;
@@ -181,11 +181,11 @@ void BattleScene_ShowSecondaryModelsStaggeredFrame(ActivePokemon* arg0) {
         arg0->unk_168[i].unk_000.lodFraction = 0x41 - i * 4;
         arg0->unk_168[i].unk_000.node.flags |= 1;
 
-        ModelAnim_SetFrame(&arg0->unk_168[i].display_object, arg0->unk_000.transformAnim.frameFixed >> 0x10);
-        ModelAnim_SetAnimation(&arg0->unk_168[i].display_object, arg0->unk_000.transformAnim.animationId);
+        ModelAnim_SetFrame(&arg0->unk_168[i].unk_000, arg0->displayObject.transformAnim.frameFixed >> 0x10);
+        ModelAnim_SetAnimation(&arg0->unk_168[i].unk_000, arg0->displayObject.transformAnim.animationId);
         Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
-        BattleAnim_Vec3fCopy(&arg0->unk_168[i].display_object.position, &arg0->displayObject.position);
-        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->unk_000.rotation);
+        BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.position, &arg0->displayObject.position);
+        BattleAnim_Vec3sCopy(&arg0->unk_168[i].unk_000.rotation, &arg0->displayObject.rotation);
         BattleAnim_Vec3fCopy(&arg0->unk_168[i].unk_000.scale, &arg0->displayObject.scale);
     }
 }
@@ -1601,7 +1601,7 @@ Vec3f D_84384C30[] = {
     { 0.0f, 0.0f, 0.0f },
 };
 BattleSceneStateCallback gBattleSceneStateTickSentinel = BattleScene_StateCallbackNop;
-BattleSceneStateRow gBattleSceneStateRowTable[] = {
+BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         0,
         {

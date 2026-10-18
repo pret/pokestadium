@@ -158,7 +158,7 @@ void BattleScene_TickClearAnimRecordIfLoaded(ActivePokemon* active_pokemon) {
 void BattleScene_TickStartRowAnimRecord(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
     s32 idx = active_pokemon->animationState;
-    s32 sp24 = gBattleSceneStateRowTable[idx].unk_20;
+    s32 sp24 = sBattleSceneStateRowTable[idx].unk_20;
 
     D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp24];
     if (BattleAnim_TryRegisterAssetTables(active_pokemon) != 0) {
@@ -173,13 +173,13 @@ void BattleScene_TickStartRowAnimRecord(ActivePokemon* active_pokemon) {
 // trigger unknown
 void BattleScene_TickQueueRowEffectList3AtAnimEnd(ActivePokemon* active_pokemon) {
     s32 idx = active_pokemon->animationState;
-    s32 sp28 = gBattleSceneStateRowTable[idx].unk_20;
+    s32 sp28 = sBattleSceneStateRowTable[idx].unk_20;
 
     D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp28];
     if (BattleScene_GetParticipantModelHeight(active_pokemon) != 0.0f) {
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     } else if ((active_pokemon->unk_4C4 == (D_84390020->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
-        BattleScene_QueueRowEffectList3(active_pokemon, gBattleSceneStateRowTable[idx].unk_24);
+        BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[idx].unk_24);
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     }
 }
@@ -247,7 +247,7 @@ void BattleScene_LoadMoveResourceList(ActivePokemon* active_pokemon) {
 void BattleScene_LoadRowResourceList(ActivePokemon* active_pokemon) {
     s32 idx = active_pokemon->animationState;
 
-    BattleAnim_LoadModeResourceList(active_pokemon->sessionTeams, gBattleSceneStateRowTable[idx].unk_24);
+    BattleAnim_LoadModeResourceList(active_pokemon->sessionTeams, sBattleSceneStateRowTable[idx].unk_24);
 }
 
 void BattleScene_ReloadMoveResourceList(ActivePokemon* active_pokemon) {
@@ -909,7 +909,7 @@ void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
     BattleMon* sp30;
     ActivePokemonState* sp24;
 
-    sp34 = gBattleSceneStateRowTable[idx].unk_20;
+    sp34 = sBattleSceneStateRowTable[idx].unk_20;
     sp30 = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
     sp24 = &active_pokemon->state;
     D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp34];
@@ -1037,7 +1037,7 @@ void BattleScene_TickAssetLoadQueueRowEffectList3(ActivePokemon* active_pokemon)
     if (BattleAnim_TryRegisterAssetTables(active_pokemon) != 0) {
         active_pokemon->sessionTeams->unk_02 = active_pokemon->state.runtime.unk_0B;
         active_pokemon->unk_4C4 = 0;
-        BattleScene_QueueRowEffectList3(active_pokemon, gBattleSceneStateRowTable[sp24].unk_24);
+        BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[sp24].unk_24);
         Audio_PlayCommand(3, 0, 0);
         active_pokemon->sessionTeams->unk_04 = &active_pokemon->sessionTeams->teamMember[temp_v1->unk_2B]->pokemonPicked[temp_v1->unk_18];
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
@@ -1049,7 +1049,7 @@ void func_843046BC(ActivePokemon* active_pokemon) {
     if ((active_pokemon->unk_4C4 == 1) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         s32 idx = active_pokemon->animationState;
 
-        BattleScene_QueueRowEffectList3(active_pokemon, gBattleSceneStateRowTable[idx].unk_24);
+        BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[idx].unk_24);
         Audio_PlayCommand(3, 0, 0);
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     }
@@ -1411,14 +1411,14 @@ void BattleScene_SetOpponentEventTrackA6(ActivePokemon* active_pokemon) {
 void BattleScene_EnterStateRow(ActivePokemon* arg0, s32 arg1) {
     arg0->animationState = arg1;
 
-    gBattleSceneStateRowTable[arg1].unk_04[0](arg0);
-    gBattleSceneStateRowTable[arg1].unk_04[1](arg0);
-    gBattleSceneStateRowTable[arg1].unk_04[2](arg0);
+    sBattleSceneStateRowTable[arg1].unk_04[0](arg0);
+    sBattleSceneStateRowTable[arg1].unk_04[1](arg0);
+    sBattleSceneStateRowTable[arg1].unk_04[2](arg0);
 
-    BattleScene_RegisterStateTickCallback(arg0, gBattleSceneStateRowTable[arg1].unk_04[3]);
-    BattleScene_RegisterStateTickCallback(arg0, gBattleSceneStateRowTable[arg1].unk_04[4]);
-    BattleScene_RegisterStateTickCallback(arg0, gBattleSceneStateRowTable[arg1].unk_04[5]);
-    BattleScene_RegisterStateTickCallback(arg0, gBattleSceneStateRowTable[arg1].unk_04[6]);
+    BattleScene_RegisterStateTickCallback(arg0, sBattleSceneStateRowTable[arg1].unk_04[3]);
+    BattleScene_RegisterStateTickCallback(arg0, sBattleSceneStateRowTable[arg1].unk_04[4]);
+    BattleScene_RegisterStateTickCallback(arg0, sBattleSceneStateRowTable[arg1].unk_04[5]);
+    BattleScene_RegisterStateTickCallback(arg0, sBattleSceneStateRowTable[arg1].unk_04[6]);
 }
 
 void BattleScene_TickStateCallbacks(void) {

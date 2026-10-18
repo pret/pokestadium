@@ -100,12 +100,12 @@ void Battle_QueueMessage(s8* arg0, s8 arg1) {
 
     if (tmp >= 0x80) {
         if ((tmp - 0x80) >= 0xB) {
-            Text_GetString(arg0 + 1, 0x40, D_843900B0, tmp - 0x48);
+            Text_GetString(arg0 + 1, 0x40, sBattleMessagesTable, tmp - 0x48);
         } else {
-            Text_GetString(arg0 + 1, 0x40, D_843900B0, tmp - 0x49);
+            Text_GetString(arg0 + 1, 0x40, sBattleMessagesTable, tmp - 0x49);
         }
     } else {
-        Text_GetString(arg0 + 1, 0x40, D_843900B0, D_84385BC0[arg1]);
+        Text_GetString(arg0 + 1, 0x40, sBattleMessagesTable, D_84385BC0[arg1]);
     }
 }
 
@@ -500,8 +500,8 @@ void BattleBox_DrawMessage(unk_D_843901A0_4C8* arg0, s16 arg1, s16 arg2) {
             break;
 
         case 13:
-            temp_s1 = Font_MeasureTextExtent(1, 0, Text_GetString(NULL, 0, D_843900B0, 0xA4)) / 2;
-            Battle_DrawTextIfNonEmpty(Text_GetString(NULL, 0, D_843900B0, 0xA4), 0xA1 - temp_s1, 0x71);
+            temp_s1 = Font_MeasureTextExtent(1, 0, Text_GetString(NULL, 0, sBattleMessagesTable, 0xA4)) / 2;
+            Battle_DrawTextIfNonEmpty(Text_GetString(NULL, 0, sBattleMessagesTable, 0xA4), 0xA1 - temp_s1, 0x71);
             break;
 
         case 14:
@@ -699,7 +699,7 @@ void BattleScene_BuildParticipantMessage(ActivePokemon* arg0, s32 arg1) {
     gBattleMessageQueues->unk_000 = arg0->sessionTeams->teamMember[arg0->state.unk_2C]->unk_001;
     arg0->unk_8C4.unk_00 = 1;
     Text_SetStringToken(0x19, arg0->unk_724->pokemonPicked[arg0->state.unk_08].unk_30);
-    Text_GetString(arg0->unk_8C4.unk_48, 0x40, D_843900B0, arg1);
+    Text_GetString(arg0->unk_8C4.unk_48, 0x40, sBattleMessagesTable, arg1);
 }
 
 void BattleScene_RevealParticipantMessageChars(ActivePokemon* arg0) {

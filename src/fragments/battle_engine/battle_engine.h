@@ -934,7 +934,7 @@ extern unk_D_86B0C160 D_84384AF8;
 extern unk_D_86B0C160 D_84384B2C[];
 extern Vec3f D_84384C30[];
 extern BattleSceneStateCallback gBattleSceneStateTickSentinel;
-extern BattleSceneStateRow gBattleSceneStateRowTable[];
+extern BattleSceneStateRow sBattleSceneStateRowTable[];
 extern Vec3f D_84385B90;
 extern Vec3f D_84385B9C;
 extern u32 D_84385BC0[];

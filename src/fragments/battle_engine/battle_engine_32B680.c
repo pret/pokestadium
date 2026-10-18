@@ -1789,11 +1789,11 @@ void func_84344B04(void) {
     s32 i;
     s32 var_s2 = 0;
     s32 tmp;
-    s32 end = gBattleAnimCurrentOwner->display_object.anchorCount;
+    s32 end = gBattleAnimCurrentOwner->displayObject.anchorCount;
 
     if (end != 0) {
         for (i = 0; i < end; i++) {
-            tmp = gBattleAnimCurrentOwner->display_object.anchors[i].id;
+            tmp = gBattleAnimCurrentOwner->displayObject.anchors[i].id;
             BattleAnim_CreateEffectSlotForCurrentOwner(0, BattleAnim_CallbackMove73EndEffect31SpawnDescriptor42, &gDefaultParticleDescriptor, 0, 1, 0x10, tmp, 0, 0);
             var_s2++;
             if (var_s2 >= 8) {

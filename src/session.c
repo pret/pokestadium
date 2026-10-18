@@ -20,7 +20,7 @@ void Team_ClearTrainerSlot(BattleSessionTeams* arg0) {
     arg0->unk_14 = 0;
     arg0->teamMember[0] = 0;
     arg0->teamMember[1] = 0;
-    arg0->isBusy = 0;
+    arg0->assetIsBusy = 0;
     arg0->unk_20 = 0;
     arg0->unk_1E = 0;
 }

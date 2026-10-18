@@ -876,7 +876,7 @@ void Battle_Effect_Mimic(void) {
         } while (temp_v0 == 0);
 
         gBattleUser->unk_1F[sp24->unk_0C] = temp_v0;
-        Text_SetStringToken(0x1E, Text_GetString(NULL, 0, D_843900B8, gBattleTarget->unk_1F[var_t0] - 1));
+        Text_SetStringToken(0x1E, Text_GetString(NULL, 0, sMoveNameTable, gBattleTarget->unk_1F[var_t0] - 1));
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x40);
         return;
     }
@@ -921,7 +921,7 @@ void Battle_Effect_Disable(void) {
             temp_v1 = (Battle_Random() & 7) + 1;
             gBattleTarget->unk_52 = (sp24 * 0x10) + temp_v1;
             gBattleTarget->unk_57 = gBattleTarget->unk_1F[sp24];
-            Text_SetStringToken(0x1E, Text_GetString(NULL, 0, D_843900B8, gBattleTarget->unk_57 - 1));
+            Text_SetStringToken(0x1E, Text_GetString(NULL, 0, sMoveNameTable, gBattleTarget->unk_57 - 1));
             Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x3B);
             return;
         }
