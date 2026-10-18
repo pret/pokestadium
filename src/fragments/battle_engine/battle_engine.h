@@ -155,8 +155,8 @@ typedef struct ActivePokemon {
     /* 0x4E8 */ u8 unk_4E8;
     /* 0x4E9 */ u8 unk_4E9;
     /* 0x4EC */ DisplayObject unk_4EC;
-    /* 0x654 */ ActivePokemonState unk_654;
-    /* 0x720 */ BattleSessionTeams* unk_720;
+    /* 0x654 */ ActivePokemonState state;
+    /* 0x720 */ BattleSessionTeams* sessionTeams;
     /* 0x724 */ TeamRoster* unk_724;
     /* 0x728 */ PresentationState unk_728;
     /* 0x8C4 */ MonCaptionState unk_8C4;
@@ -975,8 +975,8 @@ extern BattleMonRuntime* gBattleTarget;
 
 
 extern ActivePokemon* sActivePokemon[2];
-extern ActivePokemon* D_84390018;
-extern ActivePokemon* D_8439001C;
+extern ActivePokemon* sSide1ActivePokemon;
+extern ActivePokemon* sSide2ActivePokemon;
 extern unk_D_84390028 D_84390028[2];
 extern f32 D_843900A8[];
 extern char** sBattleMessagesTable;

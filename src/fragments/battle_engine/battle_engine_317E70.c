@@ -533,10 +533,10 @@ void BattleAnim_CleanupEffectsRetainingCategory4(void) {
         }
     }
 
-    Model_SetMaterialColor(&sActivePokemon[0]->display_object, 0xFF, 0xFF, 0xFF, 0);
-    Model_SetMaterialColor(&sActivePokemon[1]->display_object, 0xFF, 0xFF, 0xFF, 0);
-    Model_SetMaterialAlpha(&sActivePokemon[0]->display_object, 0xFF);
-    Model_SetMaterialAlpha(&sActivePokemon[1]->display_object, 0xFF);
+    Model_SetMaterialColor(&sActivePokemon[0]->displayObject, 0xFF, 0xFF, 0xFF, 0);
+    Model_SetMaterialColor(&sActivePokemon[1]->displayObject, 0xFF, 0xFF, 0xFF, 0);
+    Model_SetMaterialAlpha(&sActivePokemon[0]->displayObject, 0xFF);
+    Model_SetMaterialAlpha(&sActivePokemon[1]->displayObject, 0xFF);
 
     D_8439037E = 0xFF;
     D_8439037C = D_8439037E;
@@ -821,14 +821,14 @@ void BattleAnim_GetOwnerBonePosition(ActivePokemon* arg0, s16 arg1, Vec3f* arg2)
 
     if (arg0 != NULL) {
         if (arg1 == 0x64) {
-            if (GeoRender_FindAnchorPosition(&arg0->display_object, 0xA, arg2) != NULL) {
+            if (GeoRender_FindAnchorPosition(&arg0->displayObject, 0xA, arg2) != NULL) {
                 sp24 = 1;
-            } else if (GeoRender_FindAnchorPosition(&arg0->display_object, 0x64, arg2) != NULL) {
+            } else if (GeoRender_FindAnchorPosition(&arg0->displayObject, 0x64, arg2) != NULL) {
                 sp24 = 2;
             }
         } else {
-            if (GeoRender_FindAnchorPosition(&arg0->display_object, arg1, arg2) == NULL) {
-                if (GeoRender_FindAnchorPosition(&arg0->display_object, 0x64, arg2) != NULL) {
+            if (GeoRender_FindAnchorPosition(&arg0->displayObject, arg1, arg2) == NULL) {
+                if (GeoRender_FindAnchorPosition(&arg0->displayObject, 0x64, arg2) != NULL) {
                     sp24 = 3;
                 }
             } else {
@@ -873,7 +873,7 @@ void BattleAnim_GetOwnerModelBoundsScaled(ActivePokemon* arg0, Vec3f* arg1) {
 }
 
 f32 BattleAnim_GetSpeciesBaseScale(ActivePokemon* arg0) {
-    f32 ret = D_80075E40[arg0->display_object.objectType] * 0.01f;
+    f32 ret = D_80075E40[arg0->displayObject.objectType] * 0.01f;
 
     return ret;
 }

@@ -192,9 +192,9 @@ void func_8436F838(s32 arg0, s32 arg1) {
     ActivePokemonState* temp_v1;
     s32 sp18;
 
-    temp_v1 = &sActivePokemon[arg0]->unk_654;
-    temp_a2_2 = &sActivePokemon[arg1]->unk_654.runtime;
-    temp_a3 = sActivePokemon[arg0]->unk_720->teamMember[temp_v1->unk_2C];
+    temp_v1 = &sActivePokemon[arg0]->state;
+    temp_a2_2 = &sActivePokemon[arg1]->state.runtime;
+    temp_a3 = sActivePokemon[arg0]->sessionTeams->teamMember[temp_v1->unk_2C];
 
     if (temp_a2_2->unk_0C == 0) {
         Text_SetStringToken(0x19, temp_a3->pokemonPicked[temp_v1->unk_18].unk_30);
@@ -219,8 +219,8 @@ void func_8436F838(s32 arg0, s32 arg1) {
 }
 
 void Battle_ResetTransientRuntimeState(s32 arg0, s32 arg1) {
-    BattleMonRuntime* sp1C = &sActivePokemon[arg0]->unk_654.runtime;
-    BattleMonRuntime* sp18 = &sActivePokemon[arg1]->unk_654.runtime;
+    BattleMonRuntime* sp1C = &sActivePokemon[arg0]->state.runtime;
+    BattleMonRuntime* sp18 = &sActivePokemon[arg1]->state.runtime;
 
     func_8436F838(arg0, arg1);
     D_843C4DC2 = 0;
@@ -241,10 +241,10 @@ void Battle_ResetTransientRuntimeState(s32 arg0, s32 arg1) {
 }
 
 void func_8436FA80(ActivePokemon* arg0) {
-    ActivePokemonState* sp1C = &sActivePokemon[0]->unk_654;
-    ActivePokemonState* sp18 = &sActivePokemon[1]->unk_654;
-    BattleMonRuntime* temp_a1 = &sActivePokemon[0]->unk_654.runtime;
-    BattleMonRuntime* temp_a2 = &sActivePokemon[1]->unk_654.runtime;
+    ActivePokemonState* sp1C = &sActivePokemon[0]->state;
+    ActivePokemonState* sp18 = &sActivePokemon[1]->state;
+    BattleMonRuntime* temp_a1 = &sActivePokemon[0]->state.runtime;
+    BattleMonRuntime* temp_a2 = &sActivePokemon[1]->state.runtime;
     s32 var_v0;
 
     if (arg0 == sActivePokemon[0]) {
@@ -281,8 +281,8 @@ void Battle_ApplyDamageRandomFactor(void) {
 }
 
 u16 Battle_DetermineMoveOrder(ActivePokemon* arg0, ActivePokemon* arg1) {
-    BattleMonRuntime* ptr1 = &arg0->unk_654.runtime;
-    BattleMonRuntime* ptr2 = &arg1->unk_654.runtime;
+    BattleMonRuntime* ptr1 = &arg0->state.runtime;
+    BattleMonRuntime* ptr2 = &arg1->state.runtime;
 
     if (ptr1->usedMove == 0x62) {
         if (ptr2->usedMove != 0x62) {
@@ -581,8 +581,8 @@ void Battle_DecrementPP(s32 arg0) {
     ActivePokemonState* temp_a1;
     BattleMon* temp_a2;
 
-    temp_v0 = &sActivePokemon[arg0]->unk_654.runtime;
-    temp_a1 = &sActivePokemon[arg0]->unk_654;
+    temp_v0 = &sActivePokemon[arg0]->state.runtime;
+    temp_a1 = &sActivePokemon[arg0]->state;
     temp_a2 = &sActivePokemon[arg0]->unk_724->pokemonPicked[temp_a1->unk_08];
 
     if ((temp_v0->usedMove != 0xA5) && !(temp_v0->unk_4C & 7) && !(temp_v0->unk_4D & 0x40)) {
@@ -685,15 +685,15 @@ void func_843708CC(void) {
 }
 
 void func_84370ADC(ActivePokemon* arg0) {
-    BattleMon* ptr = &arg0->unk_724->pokemonPicked[arg0->unk_654.unk_08];
+    BattleMon* ptr = &arg0->unk_724->pokemonPicked[arg0->state.unk_08];
 
-    ptr->unk_05 = arg0->unk_654.runtime.unk_15;
+    ptr->unk_05 = arg0->state.runtime.unk_15;
 }
 
 void func_84370B0C(ActivePokemon* arg0) {
-    BattleMonRuntime* temp_v0 = &arg0->unk_654.runtime;
+    BattleMonRuntime* temp_v0 = &arg0->state.runtime;
 
-    if (arg0->unk_654.runtime.unk_15 & 0x40) {
+    if (arg0->state.runtime.unk_15 & 0x40) {
         temp_v0->unk_2E >>= 2;
         if (temp_v0->unk_2E == 0) {
             temp_v0->unk_2E = 1;
@@ -702,9 +702,9 @@ void func_84370B0C(ActivePokemon* arg0) {
 }
 
 void func_84370B44(ActivePokemon* arg0) {
-    BattleMonRuntime* temp_v0 = &arg0->unk_654.runtime;
+    BattleMonRuntime* temp_v0 = &arg0->state.runtime;
 
-    if (arg0->unk_654.runtime.unk_15 & 0x10) {
+    if (arg0->state.runtime.unk_15 & 0x10) {
         temp_v0->unk_2A >>= 1;
         if (temp_v0->unk_2A == 0) {
             temp_v0->unk_2A = 1;
@@ -719,9 +719,9 @@ void func_84370B7C(ActivePokemon* arg0) {
     s32 i;
     s32 j;
 
-    sp28 = &arg0->unk_654;
-    sp24 = &arg0->unk_654.runtime;
-    sp34 = &arg0->unk_720->teamMember[sp28->unk_2C]->pokemonPicked[sp28->unk_18];
+    sp28 = &arg0->state;
+    sp24 = &arg0->state.runtime;
+    sp34 = &arg0->sessionTeams->teamMember[sp28->unk_2C]->pokemonPicked[sp28->unk_18];
 
     sp24->unk_14 = sp28->unk_08;
     sp24->unk_0B = sp34->unk_00.unk_00;
@@ -790,7 +790,7 @@ void func_84370B7C(ActivePokemon* arg0) {
 }
 
 s32 Battle_IsPartyMemberAlive(ActivePokemon* arg0) {
-    if (arg0->unk_724->pokemonPicked[arg0->unk_654.unk_18 - 1].unk_02 != 0) {
+    if (arg0->unk_724->pokemonPicked[arg0->state.unk_18 - 1].unk_02 != 0) {
         return 1;
     }
     return 0;
@@ -842,7 +842,7 @@ void func_84371010(void) {
 }
 
 void func_84371080(void) {
-    BattleMonRuntime* sp1C = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_654.runtime;
+    BattleMonRuntime* sp1C = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->state.runtime;
 
     switch (gBattleCritFlag) {
         case 1:
@@ -962,10 +962,10 @@ void func_843714D8(void) {
     BattleMon* temp_a0;
     ActivePokemonState* temp_a1;
 
-    ptr = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
+    ptr = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state.runtime;
     temp_a0 =
-        &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_724->pokemonPicked[sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.unk_08];
-    temp_a1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654;
+        &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_724->pokemonPicked[sActivePokemon[gBattleScene.unk_00->unk_2C]->state.unk_08];
+    temp_a1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state;
 
     gBattleUser->unk_32[temp_a1->unk_0C]++;
     if (!(ptr->unk_4E & 8)) {
@@ -1264,8 +1264,8 @@ s32 Battle_CheckMonCanAct(void) {
     u8 sp25;
     BattleMonRuntime* temp_v1;
 
-    temp_v0 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654;
-    temp_v1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
+    temp_v0 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state;
+    temp_v1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state.runtime;
 
     if (gBattleUser->unk_15 & 7) {
         gBattleUser->unk_15 = (gBattleUser->unk_15 & 7) - 1;
@@ -1608,9 +1608,9 @@ void Battle_HandleFaint(ActivePokemon* arg0) {
     BattleMonRuntime* temp_a11;
     BattleMonRuntime* temp_a01;
 
-    temp_a10 = &sActivePokemon[sp1C]->unk_654;
-    temp_a11 = &sActivePokemon[sp1C]->unk_654.runtime;
-    temp_a01 = &sActivePokemon[!sp1C]->unk_654.runtime;
+    temp_a10 = &sActivePokemon[sp1C]->state;
+    temp_a11 = &sActivePokemon[sp1C]->state.runtime;
+    temp_a01 = &sActivePokemon[!sp1C]->state.runtime;
 
     temp_a01->unk_54 = 0;
     temp_a01->unk_58 = 0;
@@ -1636,23 +1636,23 @@ void Battle_HandleFaint(ActivePokemon* arg0) {
 }
 
 void func_84372C40(ActivePokemon* arg0) {
-    ActivePokemonState* ptr1 = &arg0->unk_654;
+    ActivePokemonState* ptr1 = &arg0->state;
     BattleMon* temp_v0;
     s32 i;
     s32 var_s2 = 0;
 
     for (i = 0; i < BattleScene_GetSelectedSideTeamSize(arg0); i++) {
         if (i == ptr1->unk_08) {
-            var_s2 += arg0->unk_654.runtime.unk_0E;
+            var_s2 += arg0->state.runtime.unk_0E;
         } else {
             temp_v0 = &arg0->unk_724->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
 
-    if (arg0->unk_720->unk_01 == 2) {
+    if (arg0->sessionTeams->unk_01 == 2) {
         for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(arg0); i++) {
-            temp_v0 = &arg0->unk_720->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
+            temp_v0 = &arg0->sessionTeams->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
@@ -1666,23 +1666,23 @@ void func_84372C40(ActivePokemon* arg0) {
 }
 
 void func_84372D88(ActivePokemon* arg0) {
-    ActivePokemonState* ptr1 = &arg0->unk_654;
+    ActivePokemonState* ptr1 = &arg0->state;
     BattleMon* temp_v0;
     s32 i;
     s32 var_s2 = 0;
 
     for (i = 0; i < BattleScene_GetSelectedSideTeamSize(arg0); i++) {
         if (i == ptr1->unk_08) {
-            var_s2 += arg0->unk_654.runtime.unk_10;
+            var_s2 += arg0->state.runtime.unk_10;
         } else {
             temp_v0 = &arg0->unk_724->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
 
-    if (arg0->unk_720->unk_01 == 2) {
+    if (arg0->sessionTeams->unk_01 == 2) {
         for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(arg0); i++) {
-            temp_v0 = &arg0->unk_720->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
+            temp_v0 = &arg0->sessionTeams->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
@@ -1696,23 +1696,23 @@ void func_84372D88(ActivePokemon* arg0) {
 }
 
 void func_84372ED0(ActivePokemon* arg0) {
-    ActivePokemonState* ptr1 = &arg0->unk_654;
+    ActivePokemonState* ptr1 = &arg0->state;
     BattleMon* temp_v0;
     s32 i;
     s32 var_s2 = 0;
 
     for (i = 0; i < BattleScene_GetSelectedSideTeamSize(arg0); i++) {
         if (i == ptr1->unk_08) {
-            var_s2 += arg0->unk_654.runtime.unk_12;
+            var_s2 += arg0->state.runtime.unk_12;
         } else {
             temp_v0 = &arg0->unk_724->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
 
-    if (arg0->unk_720->unk_01 == 2) {
+    if (arg0->sessionTeams->unk_01 == 2) {
         for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(arg0); i++) {
-            temp_v0 = &arg0->unk_720->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
+            temp_v0 = &arg0->sessionTeams->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
@@ -1726,23 +1726,23 @@ void func_84372ED0(ActivePokemon* arg0) {
 }
 
 void func_84373018(ActivePokemon* arg0) {
-    ActivePokemonState* ptr1 = &arg0->unk_654;
+    ActivePokemonState* ptr1 = &arg0->state;
     BattleMon* temp_v0;
     s32 i;
     s32 var_s2 = 0;
 
     for (i = 0; i < BattleScene_GetSelectedSideTeamSize(arg0); i++) {
         if (i == ptr1->unk_08) {
-            var_s2 += arg0->unk_654.runtime.unk_0C;
+            var_s2 += arg0->state.runtime.unk_0C;
         } else {
             temp_v0 = &arg0->unk_724->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
 
-    if (arg0->unk_720->unk_01 == 2) {
+    if (arg0->sessionTeams->unk_01 == 2) {
         for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(arg0); i++) {
-            temp_v0 = &arg0->unk_720->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
+            temp_v0 = &arg0->sessionTeams->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
             var_s2 += temp_v0->unk_02;
         }
     }
@@ -1756,22 +1756,22 @@ void func_84373018(ActivePokemon* arg0) {
 }
 
 s32 Battle_CheckSideDefeatAfterResidualStatus(ActivePokemon* arg0) {
-    ActivePokemonState* ptr1 = &arg0->unk_654;
+    ActivePokemonState* ptr1 = &arg0->state;
     BattleMon* temp_v0;
     s32 i;
     s32 var_s2;
 
-    if (arg0->unk_654.runtime.unk_15 & 0x18) {
+    if (arg0->state.runtime.unk_15 & 0x18) {
         var_s2 = 0;
-        if (arg0->unk_654.runtime.unk_0E == 0) {
+        if (arg0->state.runtime.unk_0E == 0) {
             for (i = 0; i < BattleScene_GetSelectedSideTeamSize(arg0); i++) {
                 temp_v0 = &arg0->unk_724->pokemonPicked[i];
                 var_s2 += temp_v0->unk_02;
             }
 
-            if (arg0->unk_720->unk_01 == 2) {
+            if (arg0->sessionTeams->unk_01 == 2) {
                 for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(arg0); i++) {
-                    temp_v0 = &arg0->unk_720->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
+                    temp_v0 = &arg0->sessionTeams->teamMember[!ptr1->unk_2B]->pokemonPicked[i];
                     var_s2 += temp_v0->unk_02;
                 }
             }
@@ -1811,10 +1811,10 @@ s32 Battle_CheckFaintAfterMove(void) {
 }
 
 void Battle_ResolveMonAction(void) {
-    BattleMonRuntime* sp1C = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
-    BattleMonRuntime* sp18 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_654.runtime;
-    ActivePokemonState* ptr1 = &sActivePokemon[0]->unk_654;
-    ActivePokemonState* ptr2 = &sActivePokemon[1]->unk_654;
+    BattleMonRuntime* sp1C = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state.runtime;
+    BattleMonRuntime* sp18 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->state.runtime;
+    ActivePokemonState* ptr1 = &sActivePokemon[0]->state;
+    ActivePokemonState* ptr2 = &sActivePokemon[1]->state;
 
     ptr1->unk_2A = 0;
     ptr2->unk_2A = 0;
@@ -1852,12 +1852,12 @@ void func_84373570(ActivePokemon* arg0) {
     BattleMonRuntime* ptr1;
     BattleMonRuntime* ptr2;
 
-    ptr1 = &arg0->unk_654.runtime;
+    ptr1 = &arg0->state.runtime;
 
-    sp24 = &sActivePokemon[0]->unk_654;
-    sp20 = &sActivePokemon[1]->unk_654;
+    sp24 = &sActivePokemon[0]->state;
+    sp20 = &sActivePokemon[1]->state;
 
-    ptr2 = &sActivePokemon[BattleScene_GetParticipantSideIndex(arg0) == 0]->unk_654.runtime;
+    ptr2 = &sActivePokemon[BattleScene_GetParticipantSideIndex(arg0) == 0]->state.runtime;
 
     sp24->unk_2A = 0;
     sp20->unk_2A = 0;

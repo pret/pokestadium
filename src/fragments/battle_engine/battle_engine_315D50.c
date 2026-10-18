@@ -4218,7 +4218,7 @@ void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon) {
 }
 
 void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon) {
-    func_8003EB40(BattleScene_GetParticipantDisplayPlayerNumber(active_pokemon), &active_pokemon->unk_654.runtime);
+    func_8003EB40(BattleScene_GetParticipantDisplayPlayerNumber(active_pokemon), &active_pokemon->state.runtime);
 }
 
 void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2) {
@@ -4237,13 +4237,13 @@ void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
     sp20[2] = 0xA;
     sp20[3] = 0xA;
 
-    sp20[ptr1->unk_720->teamMember[0]->unk_001] = 1;
-    if (ptr1->unk_720->unk_01 == 2) {
-        sp20[ptr1->unk_720->teamMember[1]->unk_001] = 1;
+    sp20[ptr1->sessionTeams->teamMember[0]->unk_001] = 1;
+    if (ptr1->sessionTeams->unk_01 == 2) {
+        sp20[ptr1->sessionTeams->teamMember[1]->unk_001] = 1;
     }
-    sp20[ptr2->unk_720->teamMember[0]->unk_001] = 2;
-    if (ptr2->unk_720->unk_01 == 2) {
-        sp20[ptr2->unk_720->teamMember[1]->unk_001] = 2;
+    sp20[ptr2->sessionTeams->teamMember[0]->unk_001] = 2;
+    if (ptr2->sessionTeams->unk_01 == 2) {
+        sp20[ptr2->sessionTeams->teamMember[1]->unk_001] = 2;
     }
 
     for (i = 0; i < 4; i++) {
@@ -4265,14 +4265,14 @@ void BattleScene_ConfigureAudioChannelGroupCounts(void) {
     sp24[2] = 0;
     sp24[3] = 0;
 
-    sp24[ptr1->unk_720->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->unk_720->teamMember[0]);
-    if (ptr1->unk_720->unk_01 == 2) {
-        sp24[ptr1->unk_720->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->unk_720->teamMember[1]);
+    sp24[ptr1->sessionTeams->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->sessionTeams->teamMember[0]);
+    if (ptr1->sessionTeams->unk_01 == 2) {
+        sp24[ptr1->sessionTeams->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->sessionTeams->teamMember[1]);
     }
 
-    sp24[ptr2->unk_720->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->unk_720->teamMember[0]);
-    if (ptr2->unk_720->unk_01 == 2) {
-        sp24[ptr2->unk_720->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->unk_720->teamMember[1]);
+    sp24[ptr2->sessionTeams->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->sessionTeams->teamMember[0]);
+    if (ptr2->sessionTeams->unk_01 == 2) {
+        sp24[ptr2->sessionTeams->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->sessionTeams->teamMember[1]);
     }
     Audio_SetChannelGroupCounts(sp24[0], sp24[1], sp24[2], sp24[3]);
 }
@@ -4872,7 +4872,7 @@ void BattleAnim_BuildResourceListForMove(s16 arg0) {
 void BattleAnim_LoadMoveResourceList(BattleSessionTeams* arg0, s16 move) {
     if (move != 0xFF) {
         BattleAnim_BuildResourceListForMove(move);
-        arg0->unk_1D |= 0x80;
+        arg0->isBusy |= 0x80;
         arg0->unk_20 = gBattleAnimResourceList;
         arg0->unk_24 = gBattleAnimResourceTablePointers;
     }
@@ -4890,7 +4890,7 @@ void BattleAnim_LoadModeResourceList(BattleSessionTeams* arg0, s16 arg1) {
 
     gBattleAnimResourceList[var_v0] = -1;
     arg0->unk_20 = gBattleAnimResourceList;
-    arg0->unk_1D |= 0x80;
+    arg0->isBusy |= 0x80;
     arg0->unk_24 = gBattleAnimResourceTablePointers;
 }
 
@@ -4909,7 +4909,7 @@ void BattleAnim_RegisterAllAssetTables(void) {
 }
 
 void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* arg0) {
-    arg0->unk_1D &= ~0x10;
+    arg0->isBusy &= ~0x10;
     BattleAnim_RegisterAllAssetTables();
 }
 

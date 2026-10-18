@@ -226,7 +226,7 @@ void BattleAnim_StatusIdleCase1Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* a
 }
 
 void BattleAnim_StatusIdleCase1Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
-    if (arg1 == D_84390018) {
+    if (arg1 == sSide1ActivePokemon) {
         BattleAnim_UpdateSwayPhysicsToTarget(arg0, arg1, 0, 0, 0x1FFE, 0x4440);
     } else {
         BattleAnim_UpdateSwayPhysicsToTarget(arg0, arg1, 0, 0, 0x1FFE, 0x3BB8);
@@ -272,7 +272,7 @@ void BattleAnim_StatusIdleCase2Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     if (arg1->unk_4EC.position.y < 0) {
         arg1->unk_4EC.rotation.x = 0;
         arg1->unk_4EC.rotation.z = 0;
-        if (arg1 == D_84390018) {
+        if (arg1 == sSide1ActivePokemon) {
             arg1->unk_4EC.rotation.y = 0x4000;
         } else {
             arg1->unk_4EC.rotation.y = -0x4000;
@@ -741,7 +741,7 @@ void BattleAnim_StatusIdleCase13Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
         arg1->unk_4A6 += arg1->unk_4A8;
     }
 
-    if (arg1->unk_654.runtime.unk_56 == 0) {
+    if (arg1->state.runtime.unk_56 == 0) {
         var_fv0 = 1.0f;
     } else {
         var_fv0 = 0.8f;
@@ -770,7 +770,7 @@ void BattleAnim_StatusIdleCase13Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
         var_fv1 = SINS(arg1->unk_4A6) * arg1->unk_4A0;
     }
 
-    if (arg1->unk_654.runtime.unk_56 == 0) {
+    if (arg1->state.runtime.unk_56 == 0) {
         var_fv0 = 1.0f;
     } else {
         var_fv0 = 0.8f;
@@ -813,7 +813,7 @@ void BattleAnim_StatusIdleCase15Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
 }
 
 void BattleAnim_StatusIdleCase15Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
-    BattleMonRuntime* temp_a0 = &arg1->unk_654.runtime;
+    BattleMonRuntime* temp_a0 = &arg1->state.runtime;
     s16 sp22;
 
     arg1->unk_4A8 += 0xCCC;
@@ -862,7 +862,7 @@ void BattleAnim_StatusIdleCase16Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* 
 }
 
 void BattleAnim_StatusIdleCase16Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
-    BattleMonRuntime* ptr = &arg1->unk_654.runtime;
+    BattleMonRuntime* ptr = &arg1->state.runtime;
     UNUSED s32 pad;
     f32 temp_fs0;
 

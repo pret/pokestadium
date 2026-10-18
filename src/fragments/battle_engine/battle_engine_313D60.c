@@ -386,20 +386,20 @@ void BattleScene_HideFaintedOwners(void) {
     ActivePokemon* ptr1 = sActivePokemon[0];
     ActivePokemon* ptr2 = sActivePokemon[1];
 
-    if ((ptr1->unk_654.unk_2D == 0x10) || ((ptr1 = sActivePokemon[0])->unk_654.unk_2D == 0x13)) {
+    if ((ptr1->state.unk_2D == 0x10) || ((ptr1 = sActivePokemon[0])->state.unk_2D == 0x13)) {
         ptr1->display_object.node.flags &= ~1;
     }
 
-    if ((ptr2->unk_654.unk_2D == 0x10) || (ptr2->unk_654.unk_2D == 0x13)) {
+    if ((ptr2->state.unk_2D == 0x10) || (ptr2->state.unk_2D == 0x13)) {
         ptr2->display_object.node.flags &= ~1;
     }
 }
 
 void BattleScene_UpdateOwnerVisibilitySingle(CameraNode* arg0) {
     UNUSED s32 pad;
-    ActivePokemonState* sp40 = &D_84390204->unk_654;
+    ActivePokemonState* sp40 = &D_84390204->state;
     s32 temp_lo;
-    ActivePokemonState* sp38 = &D_84390200->unk_654;
+    ActivePokemonState* sp38 = &D_84390200->state;
     f32 sp34;
     s16 sp32;
     s16 sp30;
@@ -719,8 +719,8 @@ void BattleScene_Update(CameraNode* arg0) {
 
     BattleScene_UpdateOwnerVisibilityDouble(arg0);
     BattleScene_TickStateCallbacks();
-    BattleAnim_TickParticipantStatusAnimation(D_84390018);
-    BattleAnim_TickParticipantStatusAnimation(D_8439001C);
+    BattleAnim_TickParticipantStatusAnimation(sSide1ActivePokemon);
+    BattleAnim_TickParticipantStatusAnimation(sSide2ActivePokemon);
     BattleScene_ApplyCameraShake(arg0);
     BattleScene_ClampCameraEyeFloor(arg0);
     BattleScene_CameraHelperNop(arg0);

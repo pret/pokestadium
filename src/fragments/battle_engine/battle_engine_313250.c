@@ -10,7 +10,7 @@
 void BattleScene_IntroSetupCamera(CameraNode* arg0) {
     BattleScene_ResetCameraFrameCounter();
     BattleScene_SetCameraClipPlanes(arg0, 20.0f, 12800.0f);
-    BattleAnim_LoadModeResourceList(sActivePokemon[0]->unk_720, 3);
+    BattleAnim_LoadModeResourceList(sActivePokemon[0]->sessionTeams, 3);
     arg0->perspective.verticalFieldOfView = 40.0f;
     sActivePokemon[0]->displayObject.node.flags &= ~1;
     sActivePokemon[1]->displayObject.node.flags &= ~1;
@@ -87,8 +87,8 @@ void BattleScene_IntroWaitFirstMonAnim(UNUSED CameraNode* arg0) {
 }
 
 void BattleScene_IntroRevealFirstMon(CameraNode* arg0) {
-    ActivePokemonState* sp2C = &sActivePokemon[0]->unk_654;
-    TeamRoster* sp28 = sActivePokemon[0]->unk_720->teamMember[sp2C->unk_2C];
+    ActivePokemonState* sp2C = &sActivePokemon[0]->state;
+    TeamRoster* sp28 = sActivePokemon[0]->sessionTeams->teamMember[sp2C->unk_2C];
 
     sActivePokemon[0]->unk_728.unk_168->node.flags |= 1;
     sActivePokemon[0]->unk_728.unk_000.node.flags |= 1;
@@ -125,8 +125,8 @@ void BattleScene_IntroFirstMonSettle(CameraNode* arg0) {
 }
 
 void BattleScene_IntroRevealSecondMon(CameraNode* arg0) {
-    ActivePokemonState* sp2C = &sActivePokemon[1]->unk_654;
-    TeamRoster* sp28 = sActivePokemon[1]->unk_720->teamMember[sp2C->unk_2C];
+    ActivePokemonState* sp2C = &sActivePokemon[1]->state;
+    TeamRoster* sp28 = sActivePokemon[1]->sessionTeams->teamMember[sp2C->unk_2C];
 
     sActivePokemon[1]->unk_728.unk_168->node.flags |= 1;
     sActivePokemon[1]->unk_728.unk_000.node.flags |= 1;

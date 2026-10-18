@@ -198,8 +198,8 @@ void Battle_Effect_Explosion(void) {
 }
 
 void Battle_Effect_SecondaryStatusChance(void) {
-    BattleMonRuntime* temp_a2 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_654.runtime;
-    ActivePokemonState* temp_a0 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_654;
+    BattleMonRuntime* temp_a2 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->state.runtime;
+    ActivePokemonState* temp_a0 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->state;
 
     if (gBattleTarget->unk_4D & 0x10) {
         return;
@@ -858,7 +858,7 @@ void Battle_Effect_Rage(void) {
 }
 
 void Battle_Effect_Mimic(void) {
-    ActivePokemonState* sp24 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654;
+    ActivePokemonState* sp24 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state;
     s32 var_t0;
     u8 temp_v0;
 
@@ -949,8 +949,8 @@ void Battle_Effect_Conversion(void) {
 
 void Battle_Effect_Haze(void) {
     s32 i;
-    BattleMonRuntime* temp_t0 = &sActivePokemon[0]->unk_654.runtime;
-    BattleMonRuntime* temp_a3 = &sActivePokemon[1]->unk_654.runtime;
+    BattleMonRuntime* temp_t0 = &sActivePokemon[0]->state.runtime;
+    BattleMonRuntime* temp_a3 = &sActivePokemon[1]->state.runtime;
 
     gBattleScene.unk_00->unk_48 = 0x1D;
 
@@ -996,8 +996,8 @@ void Battle_Effect_Heal(void) {
     ActivePokemonState* temp_a1;
     BattleMonRuntime* temp_a2;
 
-    temp_a1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654;
-    temp_a2 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
+    temp_a1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state;
+    temp_a2 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state.runtime;
 
     gBattleScene.unk_00->unk_48 = 0x15;
     if (gBattleUser->unk_0C != gBattleUser->unk_28) {
@@ -1044,8 +1044,8 @@ void Battle_Effect_Transform(void) {
     ActivePokemonState* sp1C;
     BattleMonRuntime* ptr;
 
-    sp20 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654;
-    sp1C = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_654;
+    sp20 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state;
+    sp1C = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->state;
 
     if ((D_8438AC60[0] == 1) && ((((gBattleTarget->unk_4E & 8) == 0) && (gBattleTarget->unk_0B == 0x84)) ||
                                  (((gBattleTarget->unk_4E & 8) != 0) && (sp1C->unk_BE == 0x84)))) {
@@ -1123,7 +1123,7 @@ void Battle_Effect_ReflectLightScreen(void) {
 }
 
 void Battle_RunMoveEffect(void) {
-    BattleMonRuntime* ptr = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
+    BattleMonRuntime* ptr = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state.runtime;
     s32 idx = ptr->unk_44.unk_01;
 
     if (gMoveEffectHandlers[idx - 1] != NULL) {
