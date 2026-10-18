@@ -880,7 +880,7 @@ s32 Gallery_FilmSelectFinalize(unk_D_83407B38* arg0) {
 }
 
 void Gallery_FilmSelectMain(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('FILM');
 

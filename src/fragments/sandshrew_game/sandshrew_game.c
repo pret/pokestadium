@@ -2502,7 +2502,7 @@ void SandshrewGame_LoadAssets(void) {
 }
 
 s32 sandshrewMinigameLoad(s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     if (arg0 == 1) {
         D_86F0D260 = 1;

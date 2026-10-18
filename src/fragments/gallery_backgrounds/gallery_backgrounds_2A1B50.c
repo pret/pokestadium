@@ -56,7 +56,7 @@ void Gallery_LoadUnlockedBackgrounds(void) {
     }
 
     Save_GetModeSettings(&D_83407AF0, 1);
-    if (D_83407AF0.unk_00 == 0x1F8) {
+    if (D_83407AF0.clearedModes == 0x1F8) {
         D_83407AEC = 1;
     } else {
         D_83407AEC = 0;

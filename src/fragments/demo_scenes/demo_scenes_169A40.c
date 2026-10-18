@@ -137,7 +137,7 @@ void MewtwoIntro_InitScene(void) {
 }
 
 s32 Stage_ShowMewtwoIntro(void) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('MTWO');
 
@@ -149,12 +149,12 @@ s32 Stage_ShowMewtwoIntro(void) {
     FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_86B10830, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&D_86B10830, gSessionContext.inRound2);
 
-    if (gSessionContext.unk_11F2 == 1) {
+    if (gSessionContext.inRound2 == 1) {
         D_86B10824 = ASSET_LOAD2(backgrounds, 1, 1);
         D_86B10828 = BinArchive_GetFile(D_86B10824, 2);
-    } else if (D_86B10830.unk_00 & 0x100) {
+    } else if (D_86B10830.clearedModes & 0x100) {
         D_86B10824 = ASSET_LOAD2(backgrounds, 1, 1);
         D_86B10828 = BinArchive_GetFile(D_86B10824, 1);
     } else {

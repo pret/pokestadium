@@ -46,7 +46,7 @@ void GbTower_BuildPartyResult(UnkInputStruct8000D738* arg0) {
     u16(*var_s1)[0x640] = arg0->unk_04[0];
 
     Save_GetOptions(&sp34);
-    arg0->unk_02 = sp34.unk_00;
+    arg0->unk_02 = sp34.gbTowerUnlockTier;
     arg0->unk_00 = sp34.unk_04;
     arg0->unk_03 = D_82A00360;
 
@@ -60,7 +60,7 @@ void GbTower_BuildPartyResult(UnkInputStruct8000D738* arg0) {
 }
 
 s32 GbTower_TeamPrep(s32 arg0, UnkInputStruct8000D738* arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('PREP');
 

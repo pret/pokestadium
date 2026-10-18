@@ -515,7 +515,7 @@ void Glc_Draw(void) {
         glc_to_e4_transition = 0xFF;
     }
 
-    if (gSessionContext.unk_11F2 == 1) {
+    if (gSessionContext.inRound2 == 1) {
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(0x22C, 0x28, 0x24, 0x24, D_3019C38, 0x24, 0);
@@ -623,7 +623,7 @@ void Glc_LoadTrainerPanels(void) {
         trainer_file_index = selected_map_node + 10;
     }
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         trainer_file_index += 0x1F;
     }
 
@@ -725,7 +725,7 @@ s32 Glc_ShowIntro(void) {
         }
         Glc_ClearTrainerPanels();
 
-        if (D_84A03180.unk_04 < 8) {
+        if (D_84A03180.castleClears < 8) {
             Audio_PlayMusicIfChanged(0x2A);
         } else {
             Audio_PlayMusicIfChanged(0x27);
@@ -767,10 +767,10 @@ s32 Glc_AdvanceRoom(void) {
     if (gSessionContext.modeSelection == 8) {
         castle_map_nodes[11].node_state = 0x3C;
     } else {
-        castle_map_nodes[D_84A03180.unk_04].node_state = 0x3C;
+        castle_map_nodes[D_84A03180.castleClears].node_state = 0x3C;
     }
 
-    if (D_84A03180.unk_04 == 8) {
+    if (D_84A03180.castleClears == 8) {
         castle_map_nodes[9].node_state = 0x3C;
         castle_map_nodes[10].node_state = 0x3C;
     }
@@ -826,7 +826,7 @@ s16 Glc_RunMenu(s16 action) {
 s16 Glc_InitMenu(s16 arg0) {
     s16 i;
     s16 sp2C = 2;
-    s16 var_v1 = D_84A03180.unk_04;
+    s16 var_v1 = D_84A03180.castleClears;
 
     if (gSessionContext.modeSelection < 8) {
         selected_map_node = gSessionContext.modeSelection;
@@ -881,7 +881,7 @@ s32 GymLeaderCastle_Main(s32 arg0, UNUSED s32 arg1) {
     glc_text_ui = Text_GetStringTable(0x19);
     glc_text_trainer_names = Text_GetStringTable(0x22);
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_84A03180, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&D_84A03180, gSessionContext.inRound2);
     trainer_data_archive = BinArchive_Open(TRAINER_DATA_ROM_START, NULL, 1, 1);
     portrait_archive = ASSET_LOAD2(battle_portraits, 1, 1);
     background_archive  = ASSET_LOAD2(backgrounds, 1, 1);
@@ -891,7 +891,7 @@ s32 GymLeaderCastle_Main(s32 arg0, UNUSED s32 arg1) {
     StageLoader_UpdateSegments();
 
     sp1E = Glc_InitMenu(arg0);
-    if (D_84A03180.unk_04 < 8) {
+    if (D_84A03180.castleClears < 8) {
         Audio_PlayMusicIfChanged(0x2A);
     } else {
         Audio_PlayMusicIfChanged(0x27);

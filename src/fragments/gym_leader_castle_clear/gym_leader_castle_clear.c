@@ -507,7 +507,7 @@ void Glc_DrawTrackingIcon(void) {
 
 void Glc_ClearInitState(void) {
     stage_fade_mode = 0;
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         tracking_icon_on = 1;
     } else {
         tracking_icon_on = 0;
@@ -635,7 +635,7 @@ void Glc_ClearInitGraphics(void) {
 }
 
 s32 GymLeaderCastleClear_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* stage_context;
+    StageContext* stage_context;
 
     main_pool_push_state('CLRG');
 
