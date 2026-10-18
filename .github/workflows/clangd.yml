@@ -1,0 +1,32 @@
+name: Check clangd editor setup
+
+on:
+  pull_request:
+    paths:
+      - ".clangd"
+      - "compile_flags.txt"
+      - ".vscode/**"
+      - "tools/clangd_config.py"
+      - "tools/test_clangd*.py"
+      - ".github/workflows/clangd.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the standard language server
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y clangd clang
+      - name: Test source coverage and real cross-file rename
+        run: python3 -m unittest discover -s tools -p 'test_clangd*.py' -v
+      - name: Check the generated database
+        run: |
+          python3 tools/clangd_config.py
+          python3 tools/clangd_config.py --check

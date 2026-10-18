@@ -28,8 +28,10 @@
 -std=gnu89
 -fno-builtin
 -funsigned-char
+-m32
 -Wno-int-conversion
 -Wno-incompatible-function-pointer-types
 -Wno-incompatible-pointer-types
 -Wno-return-mismatch
+-Wno-return-type
 -Wno-unknown-pragmas
