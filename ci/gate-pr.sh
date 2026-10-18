@@ -163,6 +163,42 @@ sync_tree() {
     return 0
 }
 
+# Re-run `make extract` for one version without throwing away the build:
+# extract rewrites every generated asm/assets file, which would make every
+# object look stale. Copy the old output aside, extract, then give each
+# byte-identical file its old mtime back (ci/preserve_extract_mtimes.py) so
+# make only rebuilds what really changed. Sets extract_needs_full to 1 when
+# generated headers changed, which the baked baseline cannot track.
+extract_needs_full=0
+incremental_extract() {
+    local ver="$1"
+    local old
+    local rc=0
+    local rel
+    local paths=()
+    old="$(mktemp -d)"
+    for rel in "asm/${ver}" "assets/${ver}" "linker_scripts/${ver}/auto" \
+        "linker_scripts/${ver}/pokestadium.ld" "pokestadium-${ver}.yaml"; do
+        if [ -e "/work/${rel}" ]; then
+            mkdir -p "${old}/$(dirname "${rel}")"
+            cp -a "/work/${rel}" "${old}/${rel}"
+        fi
+    done
+    make VERSION="${ver}" extract
+    for rel in "asm/${ver}" "assets/${ver}" "linker_scripts/${ver}/auto" \
+        "linker_scripts/${ver}/pokestadium.ld" "pokestadium-${ver}.yaml"; do
+        [ -e "/work/${rel}" ] && paths+=("${rel}")
+    done
+    python3 /src/ci/preserve_extract_mtimes.py --old "${old}" --root /work \
+        --version "${ver}" "${paths[@]}" || rc=$?
+    rm -rf "${old}"
+    if [ "${rc}" -eq 3 ]; then
+        extract_needs_full=1
+    elif [ "${rc}" -ne 0 ]; then
+        return "${rc}"
+    fi
+}
+
 if sync_tree /src/src /work/src; then :; fi
 if [ -d /src/hand_asm ]; then
     if sync_tree /src/hand_asm /work/hand_asm; then :; fi
@@ -249,7 +285,7 @@ fi
 if sync_tree /src/yamls /work/yamls || [ "${symbol_addrs_changed}" -eq 1 ]; then
     split_changed=1
     echo "gate-pr.sh: split inputs changed; re-running extraction" >&2
-    if [ "${want_us}" -eq 1 ]; then make extract; fi
+    if [ "${want_us}" -eq 1 ]; then incremental_extract us; fi
     # extract regenerates linker_scripts/us/*.ld from whatever /work/asm the
     # baked image already had, which can predate this split and disagree
     # with the linker script already synced from /src above and already
@@ -265,43 +301,29 @@ if [ "${library_changed}" -eq 1 ]; then
     make libclean
 fi
 
-# Rebuild a direct-IDO seed when extraction or libclean removed the baked map.
-# The coalescing wrapper needs that map to resolve dlabels before it can safely
-# apply an opted-in fold. The final ROM build is always forced after the PR
-# overlay: the image contains a retail seed ROM, and timestamp-based make
-# decisions must never be allowed to accept that seed without compiling the
-# checked-out sources.
-if [ "${want_us}" -eq 0 ]; then
-    :
-elif [ "${split_changed}" -eq 1 ]; then
-    rm -rf /work/build
-elif [ "${linker_changed}" -eq 1 ]; then
+# The gate verdict is always the real build below. A split change keeps the
+# baked build tree: incremental_extract restored the mtimes of unchanged
+# generated files, so make recompiles exactly the objects whose input moved.
+# (This repo has no coalescing wrapper, so no direct-IDO seed map is needed;
+# the linked map comes from the real link and feeds the coverage snapshot.)
+if [ "${want_us}" -eq 1 ] && [ "${linker_changed}" -eq 1 ]; then
     rm -f /work/build/pokestadium-us.map \
         /work/build/pokestadium-us.elf \
         /work/build/pokestadium-us.z64
 fi
-if [ "${want_us}" -eq 1 ] && [ ! -f /work/build/pokestadium-us.map ]; then
-    echo "gate-pr.sh: linked map missing; rebuilding direct-IDO seed" >&2
-    # CC= on the make command line overrides every target-specific CC
-    # assignment in the Makefile, including the one that routes
-    # still-unmatched GLOBAL_ASM files through asm-processor. That turns
-    # those files into empty stubs for this seed build, which can fail to
-    # link if anything (for example an aliases.ld entry) references one of
-    # the now-missing symbols. This seed build only exists to hand the
-    # coalescing wrapper a reference map; it is not the gate verdict, and
-    # the real, correctly-compiled build always runs next regardless of
-    # whether this step produced a map. Tolerate its failure here.
-    make CC=tools/ido/linux/7.1/cc COMPARE=0 -j2 rom || true
-fi
 
-# Produce the proposed coverage snapshot even when the ROM build later
-# fails, so reviewers can inspect the exact PR delta in the artifact.
-if [ -d /out ]; then
-    python3 /src/ci/update_coverage.py \
-        --repo-root /src \
-        --baseline /src/COVERAGE.md \
-        --output /out/COVERAGE.md
-fi
+# Produce the proposed coverage snapshot even when the ROM build fails, so
+# reviewers can inspect the exact PR delta in the artifact. It reads the
+# linked map, so it runs on exit, after the build had its chance to link.
+write_coverage() {
+    if [ -d /out ] && [ -d /src/ci ]; then
+        python3 /src/ci/update_coverage.py \
+            --repo-root /src \
+            --baseline /src/COVERAGE.md \
+            --output /out/COVERAGE.md || true
+    fi
+}
+trap write_coverage EXIT
 
 # Force every root object through its recipe. Each C-object recipe performs the
 # host syntax check before invoking IDO, so this forced build covers the whole
@@ -349,11 +371,11 @@ fi
 
 if [ "${want_us}" -eq 1 ]; then
     full_build=0
-    if [ "${split_changed}" -eq 1 ] || [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ] || [ "${linker_changed}" -eq 1 ]; then
+    if [ "${extract_needs_full}" -eq 1 ] || [ "${headers_changed}" -eq 1 ] || [ "${tools_changed}" -eq 1 ] || [ "${makefile_changed}" -eq 1 ]; then
         full_build=1
     fi
     if [ "${full_build}" -eq 1 ]; then
-        echo "gate-pr.sh: forcing a full rebuild because split, header, tool, linker-script, or Makefile inputs changed"
+        echo "gate-pr.sh: forcing a full rebuild because generated headers, shared headers, tool, or Makefile inputs changed"
         make -B COMPARE=0 -j"${build_jobs}" rom
     else
         echo "gate-pr.sh: reusing cached objects and rebuilding changed source inputs"
@@ -385,17 +407,22 @@ for region in ${GATE_REGIONS}; do
     cp "${dump}" "/work/baseroms/${region}/baserom.z64"
     cp "/src/baseroms/${region}/checksum.md5" "/work/baseroms/${region}/checksum.md5"
     restored=0
+    rebuild_this="${region_rebuild_all}"
     if [ -f "/region-cache/${region}.tar" ] && [ -f "/region-cache/${region}.hash" ]; then
         . /src/ci/region_hash.sh
-        if [ "$(region_hash /src "${region}")" = "$(cat "/region-cache/${region}.hash")" ]; then
-            tar -xpf "/region-cache/${region}.tar" --no-same-owner -C /work
-            restored=1
-        else
-            echo "gate-pr.sh: region ${region}: split or symbols changed since its baseline; building cold"
+        tar -xpf "/region-cache/${region}.tar" --no-same-owner -C /work
+        restored=1
+        if [ "$(region_hash /src "${region}")" != "$(cat "/region-cache/${region}.hash")" ]; then
+            # The baseline is still the best starting point: re-extract and
+            # let make rebuild only what the new split or symbols changed.
+            echo "gate-pr.sh: region ${region}: split or symbols changed since its baseline; re-extracting incrementally"
+            extract_needs_full=0
+            incremental_extract "${region}"
+            if [ "${extract_needs_full}" -eq 1 ]; then rebuild_this=1; fi
         fi
     fi
     if [ "${restored}" -eq 1 ]; then
-        if [ "${region_rebuild_all}" -eq 1 ]; then
+        if [ "${rebuild_this}" -eq 1 ]; then
             echo "gate-pr.sh: region ${region}: restored baseline, forcing a full rebuild (header, tool, library or Makefile change)"
             make -B VERSION="${region}" COMPARE=1 -j"${build_jobs}" rom
         else
