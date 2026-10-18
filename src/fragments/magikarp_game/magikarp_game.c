@@ -328,7 +328,7 @@ void MagikarpGame_DrawOverlay(s32 arg0) {
             break;
 
         default:
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_86002F4C);
 
             for (i = 0; i < 4; i++) {
@@ -341,7 +341,7 @@ void MagikarpGame_DrawOverlay(s32 arg0) {
                 }
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
             break;
     }
 
@@ -422,7 +422,7 @@ void MagikarpGame_DrawOverlay(s32 arg0) {
     Font_EndTexturedTextRendering();
 
     if (arg0 == 0) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         Widget_DrawAnimIcon16(0x74, 0xB0, D_86002AC8);
         Widget_DrawAnimIcon16C(0x74, 0xC6, D_86002AF0);
         Widget_DrawSplitBanner(2, 0x19, 0xA6);

@@ -25,12 +25,12 @@ static s8 rental_hub_text_offsets[] = {
 };
 
 void RentalHub_DrawHeaderIcon(s16 x, s16 y) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(x, y, 48, 24, POKEBALL_ICON_TOP, 0x30, 0);
     Gfx_DrawTextureRgba16(x, y + 24, 48, 24, POKEBALL_ICON_BOTTOM, 0x30, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalHub_DrawHeaderBar(s16 x, s16 y, s16 clip_width, Color_RGBA8* fill_color, Color_RGBA8* border_color) {
@@ -43,7 +43,7 @@ void RentalHub_DrawHeaderBar(s16 x, s16 y, s16 clip_width, Color_RGBA8* fill_col
     Gfx_DrawTextureIa8((x + clip_width) - 16, y, 16, 32, D_20005C0, 0x10, 0);
     Gfx_DrawTexturedRectClipped(x + 16, y, clip_width - 32, 32, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalHub_DrawHeader(void) {
@@ -69,7 +69,7 @@ void RentalHub_DrawSelectionCursor(s16 x, s16 y, s16 width, s16 height) {
     s16 pulse = SINS(pulsing_timer) * 2;
     UNUSED s32 pad[2];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 240, 212, 104, 255);
 
     Gfx_DrawTextureIa8(x + pulse, y + pulse, 16, 16, BOTTOM_LEFT_SECTION_CORNER, 16, 0);
@@ -77,13 +77,13 @@ void RentalHub_DrawSelectionCursor(s16 x, s16 y, s16 width, s16 height) {
     Gfx_DrawTextureIa8(((x + width) - pulse) - 16, y + pulse, 16, 16, BOTTOM_RIGHT_SECTION_CORNER, 16, 0);
     Gfx_DrawTextureIa8(((x + width) - pulse) - 16, ((y + height) - pulse) - 16, 16, 16, TOP_RIGHT_SECTION_CORNER, 0x10, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     pulsing_timer += 0x2000;
 }
 
 void RentalHub_DrawMenuItemBorder(s16 x, s16 y, s16 width, s16 height) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureIa8(x - 3, y - 3, 8, 8, D_2000340, 8, 0);
     Gfx_DrawTextureIa8((x + width) - 5, y - 3, 8, 8, D_2000380, 8, 0);
@@ -94,7 +94,7 @@ void RentalHub_DrawMenuItemBorder(s16 x, s16 y, s16 width, s16 height) {
     Gfx_DrawTexturedRectClipped(x + 4, (y + height) - 5, width - 8, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((x + width) - 5, y + 4, 8, height - 8, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalHub_DrawMenuItemBox(s16 x, s16 y, s16 height, char* text) {
@@ -108,7 +108,7 @@ void RentalHub_DrawMenuItemBox(s16 x, s16 y, s16 height, char* text) {
 
         Gfx_FillRectRgb(x + 4, y + 4, 144, height - 8, 0x1E, 0x1E, 0x82);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         if ((height - 8) == 0x28) {
             Font_BeginTranslucentTextRendering();

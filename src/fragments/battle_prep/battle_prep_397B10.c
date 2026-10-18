@@ -1371,12 +1371,12 @@ void BattlePrep_RenderBadgeGlowTexture(s32 arg0) {
     GfxImage_Initialize(&sp40, 0, 2, 0x40, 0x40, arg0);
     GfxImage_SetRenderTarget(&gDisplayListHead, &sp40);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 50, 20, 160);
 
     Gfx_DrawTextureI4(0, 0, 0x40, 0x40, sp3C, 0x40, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattlePrep_ResetBadgeSlideSlots(unk_D_84B259E8* arg0) {
@@ -1456,7 +1456,7 @@ void BattlePrep_BadgeRevealSpin(unk_D_84B259E8* arg0) {
             Gfx_DrawTextureRgba16(4, 0x24, 0x38, 0x1C, &arg0->unk_10[gSessionContext.roundOrDemoId - 1][0x208], 0x40, 0x200000);
             Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, &arg0->unk_10[gSessionContext.roundOrDemoId - 1][0x1008], 0x40, 0x200000);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         }
 
         arg0->unk_01 = 0;
@@ -1548,7 +1548,7 @@ void BattlePrep_RenderBadgeBackground(unk_D_84B259E8* arg0, s16 arg1, char* arg2
         Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, arg0->unk_10[arg1] + 0x1008, 0x40, 0x200000);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if ((gSessionContext.modeSelection < 9) || (arg1 == 0)) {
         s32 sp34 = Font_MeasureTextExtent(2, 0, arg2);
