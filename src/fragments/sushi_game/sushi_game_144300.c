@@ -268,7 +268,7 @@ void func_86800B38(void) {
     Color_RGB8 spB4 = D_86806F40;
     s32 var_v0;
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (D_8680753C & 2) {
         SushiGame_DrawAllPlateStacks();
@@ -291,7 +291,7 @@ void func_86800B38(void) {
         Widget_DrawStripedBar(0x1E, 0x17);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if (D_8680753C & 1) {
         Ui_DrawBorderedPanel(0x18, 0x16, 0x110, 0x90, 0x15);
@@ -445,7 +445,7 @@ void func_86800B38(void) {
     Font_EndTexturedTextRendering();
 
     if (D_8680753C & 1) {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         for (i = 0; i < 8; i++) {
             if ((i % 4) >= 2) {

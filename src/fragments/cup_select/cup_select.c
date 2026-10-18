@@ -208,7 +208,7 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
     s16 pulse = SINS(pulsing_timer) * 2;
     UNUSED s32 pad[2];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, r, g, b, alpha);
 
     Gfx_DrawTextureIa8((left + pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_LEFT_SECTION_CORNER, 0x10, 0);
@@ -216,7 +216,7 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
     Gfx_DrawTextureIa8(((left + right) - pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_RIGHT_SECTION_CORNER, 0x10, 0);
     Gfx_DrawTextureIa8(((left + right) - pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_RIGHT_SECTION_CORNER, 0x10, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     pulsing_timer += 0x2000;
 }

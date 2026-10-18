@@ -104,7 +104,7 @@ void FirstClearBonus_DrawDialogFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
     sp48 = arg2 - (var_s3 * 2);
     sp44 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -128,7 +128,7 @@ void FirstClearBonus_DrawDialogFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
                   0x2000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((sp48 > 0) && (sp44 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, sp48, var_s2, arg4, arg5, arg6, arg7);
@@ -140,7 +140,7 @@ void FirstClearBonus_DrawDialogFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, sp44, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void FirstClearBonus_ShowDialogBox(void) {
@@ -296,7 +296,7 @@ void FirstClearBonus_DrawBackgroundTiles(u8* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void FirstClearBonus_RenderFrame(void) {

@@ -456,7 +456,7 @@ void RentalRules_DrawBackgroundFallback(void) {
 
     Gfx_DrawTexturedRectClipped(0, 0, 0x280, 0x1E0, 0, 0, 0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalRules_DrawHeaderBanner(void) {
@@ -487,14 +487,14 @@ void RentalRules_DrawHeaderBanner(void) {
     Gfx_DrawTexturedRectClipped(0x48, temp_s1, 0x1F8, spD8, 0, 0, 0, 0x8000 / spD8, 0);
 
     if (D_83003C94 < 0x400) {
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     } else {
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(0x30, temp_s1 - 8, 0x30, 0x18, D_2006C00, 0x30, 0);
         Gfx_DrawTextureRgba16(0x30, temp_s1 + 0x10, 0x30, 0x18, D_2007500, 0x30, 0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         Font_SetActive(0x10, 0);
@@ -516,7 +516,7 @@ void RentalRules_DrawHeaderBanner(void) {
 }
 
 void RentalRules_DrawWindowFrame(s16 left, s16 bottom, s16 arg2, s16 arg3) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureIa8(left - 7, bottom - 7, 8, 8, D_2000340, 8, 0);
     Gfx_DrawTextureIa8((left + arg2) - 1, bottom - 7, 8, 8, D_2000380, 8, 0);
@@ -527,11 +527,11 @@ void RentalRules_DrawWindowFrame(s16 left, s16 bottom, s16 arg2, s16 arg3) {
     Gfx_DrawTexturedRectClipped(left + 1, (bottom + arg3) - 1, arg2 - 2, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((left + arg2) - 1, bottom + 1, 8, arg3 - 2, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalRules_DrawFilledPanel(s16 x1, s16 y1, s16 width, s16 height, u8 r, u8 g, u8 b) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2);
     gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
@@ -545,11 +545,11 @@ void RentalRules_DrawFilledPanel(s16 x1, s16 y1, s16 width, s16 height, u8 r, u8
     Gfx_DrawTexturedRectClipped(x1 + 8, (y1 + height) - 8, width - 16, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((x1 + width) - 8, y1 + 8, 8, height - 16, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     Gfx_FillRectRgba(x1 + 8, y1 + 8, width - 16, height - 16, r, g, b, 0xFF);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalRules_DrawBulletIcon(s16 x, s16 y) {
@@ -617,7 +617,7 @@ void RentalRules_DrawRuleListPanel(void) {
             D_83003B60 += 0x1000;
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(0x48, temp_s3 + 0x132, 0x1C, 0x1C, D_04000000, 0x1C, 0);
 
@@ -625,7 +625,7 @@ void RentalRules_DrawRuleListPanel(void) {
             RentalRules_DrawBulletIcon(0x74, temp_s3 + 0x28 + i * 0x18);
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         RentalRules_DrawRuleListText(0x38, temp_s3);

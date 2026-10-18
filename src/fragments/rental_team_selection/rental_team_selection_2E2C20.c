@@ -230,7 +230,7 @@ void TeamSelection_Preview_DrawMovePanel(s16 arg0, s16 arg1, s32 arg2) {
             Gfx_DrawTextureRgba16(arg0, arg1 + i, 0x64, var_a3, (i * 0xC8) + arg2, 0x64, 0x200000);
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     }
 }
 
@@ -278,7 +278,7 @@ void TeamSelection_Preview_DrawPokemonDetails(unk_D_8423D3A8* arg0, s32 arg1) {
             TeamSelection_DrawColoredFrame(temp_s4 + 0x194, temp_s5 + 4, 0x90, 0x78, 0x32, 0x32, 0x82, 0xFF);
             TeamSelection_DrawColoredFrame(temp_s4 + 4, temp_s5 + 0x74, 0x220, 0x54, 0xA0, 0x96, 0x32, 0xFF);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Gfx_DrawTextureRgba16(temp_s4 + 0x108, temp_s5 + 0x77, 0x1C, 0x1A, D_2014F00, 0x1C, 0);
             Gfx_DrawTextureRgba16(temp_s4 + 0xF0, temp_s5 + 0x90, 0x1C, 0x1A, D_20154B0, 0x1C, 0);
@@ -298,7 +298,7 @@ void TeamSelection_Preview_DrawPokemonDetails(unk_D_8423D3A8* arg0, s32 arg1) {
                 TeamSelection_Preview_DrawTypeIcon(temp_s4 + 0xBA, temp_s5 + 0x26, temp_s6->unk_07);
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             TeamSelection_Preview_DrawMovePanel(temp_s4 + 4, temp_s5 + 0x20, arg0->unk_20);
             TeamSelection_Preview_DrawHeader(temp_s4, temp_s5, arg0->unk_01, arg0->unk_02);
@@ -358,7 +358,7 @@ void TeamSelection_Preview_DrawPokemonDetails(unk_D_8423D3A8* arg0, s32 arg1) {
 
                 Font_EndTexturedTextRendering();
 
-                gSPDisplayList(gDisplayListHead++, D_8006F518);
+                gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
                 for (i = 0; i < 4; i++) {
                     if (temp_s6->unk_09[i] == 0) {
@@ -371,7 +371,7 @@ void TeamSelection_Preview_DrawPokemonDetails(unk_D_8423D3A8* arg0, s32 arg1) {
                 }
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             arg0->unk_20 = 0;
         }
