@@ -187,3 +187,8 @@
 - [0x7C640, data, 3D140_2]
 -> - [0x7C640, data, 3D140_2]
 -> - [0x7CDD0, .data, libnaudio/n_sl]
+# display_object_textures: everything in the file compiles to the Japanese bytes unchanged except
+# PokeIcon_OpenModelArchives, whose second BinArchive_Open takes the release's own ROM offset
+# (0x8C8000 here, 0x8CC000 in US 1.0) - expressed with VERSION_JP in the shared C.
+- [0x19480, asm, display_object_textures]
+-> - [0x19480, c, display_object_textures]
