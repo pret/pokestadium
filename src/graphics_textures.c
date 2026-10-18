@@ -209,7 +209,7 @@ void Gfx_DrawTiledImageMesh(s16 arg0, s16 arg1, s16 arg2, f32 arg3, Vtx* arg4, u
     Vec3f spC0;
     Vec3f spB4;
     MtxF* temp_s4;
-    unk_D_80068BB0* temp_s1;
+    DepthBuffer* temp_s1;
     Vp* temp_s2;
     MtxF* temp_s0;
     MtxF* temp_s3;

@@ -569,8 +569,8 @@ void BgStage_DrawFrame(void) {
     }
 }
 
-unk_D_80068BB0* StageContext_GetCurrentImage(void) {
-    unk_D_80068BB0* ret = NULL;
+DepthBuffer* StageContext_GetCurrentImage(void) {
+    DepthBuffer* ret = NULL;
 
     if (stage != NULL) {
         ret = stage->unk_18[stage->unk_16];

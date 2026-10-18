@@ -58,7 +58,7 @@ typedef struct unk_D_86301730 {
 
 static unk_D_86002F30* D_86301710;
 static unk_D_86002F34* D_86301714;
-static unk_D_86002F34_00C* D_86301718;
+static CameraNode* D_86301718;
 static s16 D_8630171C;
 static s16 D_8630171E;
 static s16 D_86301720;
@@ -113,15 +113,15 @@ void JigglypuffGame_InitCamera(void) {
     D_8630171E = 0;
     D_86301720 = 0x15E;
 
-    D_86301718->unk_24.near = 100.0f;
-    D_86301718->unk_24.far = 12800.0f;
-    D_86301718->unk_24.fovy = 30.0f;
+    D_86301718->perspective.nearPlane = 100.0f;
+    D_86301718->perspective.farPlane = 12800.0f;
+    D_86301718->perspective.verticalFieldOfView = 30.0f;
 
-    D_86301718->unk_60.at.x = 0.0f;
-    D_86301718->unk_60.at.y = 70.0f;
-    D_86301718->unk_60.at.z = 0.0f;
+    D_86301718->view.targetPosition.x = 0.0f;
+    D_86301718->view.targetPosition.y = 70.0f;
+    D_86301718->view.targetPosition.z = 0.0f;
 
-    Camera_ComputeEyeFromAngles(&D_86301718->unk_60.at, &D_86301718->unk_60.eye, D_86301720, D_8630171C, D_8630171E);
+    Camera_ComputeEyeFromAngles(&D_86301718->view.targetPosition, &D_86301718->view.eyePosition, D_86301720, D_8630171C, D_8630171E);
 }
 
 void JigglypuffGame_UpdateEffects(void) {

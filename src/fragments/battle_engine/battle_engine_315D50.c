@@ -39,9 +39,9 @@ static s8 gBattleAnimCurrentEffectList;
 s16 gBattleAnimCurrentAnchor;
 s16 gBattleAnimDefaultAnchor;
 static s16 gBattleAnimAlternateAnchor;
-Battler* gBattleAnimCurrentOwner;
-Battler* gBattleAnimSecondaryOwner;
-Battler* gBattleAnimTertiaryOwner;
+ActivePokemon* gBattleAnimCurrentOwner;
+ActivePokemon* gBattleAnimSecondaryOwner;
+ActivePokemon* gBattleAnimTertiaryOwner;
 s32 D_843902F4;
 s32 D_843902F8;
 static s8 gBattleAnimEffectCallbackIndex;
@@ -4199,7 +4199,7 @@ void BattleAnim_PlaySoundEffect8(void) {
     Audio_PlaySoundEffectById(SFX_MENU_ERROR);
 }
 
-void BattleAnim_PlayOwnerCry(Battler* arg0, s16 arg1) {
+void BattleAnim_PlayOwnerCry(ActivePokemon* arg0, s16 arg1) {
     if (BattleScene_IsPartnerPikachu(arg0) != 0) {
         Cry_Play(0xC8, 2);
     } else {
@@ -4207,25 +4207,25 @@ void BattleAnim_PlayOwnerCry(Battler* arg0, s16 arg1) {
     }
 }
 
-void BattleAnim_PlaySpeciesSequence33(Battler* arg0) {
-    s16 sp1E = arg0->unk_000.objectType;
+void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon) {
+    s16 sp1E = active_pokemon->unk_000.objectType;
 
-    BattleScene_GetParticipantModelWidth(arg0);
+    BattleScene_GetParticipantModelWidth(active_pokemon);
     Audio_PlayCommand(0x33, sp1E, 0);
 }
 
-void Battle_TriggerTrainerPresentationCue(Battler* arg0) {
-    func_8003EB40(BattleScene_GetParticipantDisplayPlayerNumber(arg0), &arg0->unk_654.unk_38);
+void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon) {
+    func_8003EB40(BattleScene_GetParticipantDisplayPlayerNumber(active_pokemon), &active_pokemon->unk_654.runtime);
 }
 
-void BattleAnim_PlaySpeciesReactionSound(Battler* arg0, BattleMonRuntime* arg1, s32 arg2) {
-    func_800479C0(arg1->unk_5A, arg0->unk_000.objectType, arg2);
-    func_80040A70(arg1, arg1->unk_5A, arg0->unk_000.objectType, arg2);
+void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2) {
+    func_800479C0(arg1->usedMove, arg0->unk_000.objectType, arg2);
+    func_80040A70(arg1, arg1->usedMove, arg0->unk_000.objectType, arg2);
 }
 
 void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
-    Battler* ptr1 = D_84390010[0];
-    Battler* ptr2 = D_84390010[1];
+    ActivePokemon* ptr1 = sActivePokemon[0];
+    ActivePokemon* ptr2 = sActivePokemon[1];
     u8 i;
     u8 sp20[4];
 
@@ -4234,13 +4234,13 @@ void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
     sp20[2] = 0xA;
     sp20[3] = 0xA;
 
-    sp20[ptr1->unk_720->unk_08[0]->unk_001] = 1;
+    sp20[ptr1->unk_720->teamMember[0]->unk_001] = 1;
     if (ptr1->unk_720->unk_01 == 2) {
-        sp20[ptr1->unk_720->unk_08[1]->unk_001] = 1;
+        sp20[ptr1->unk_720->teamMember[1]->unk_001] = 1;
     }
-    sp20[ptr2->unk_720->unk_08[0]->unk_001] = 2;
+    sp20[ptr2->unk_720->teamMember[0]->unk_001] = 2;
     if (ptr2->unk_720->unk_01 == 2) {
-        sp20[ptr2->unk_720->unk_08[1]->unk_001] = 2;
+        sp20[ptr2->unk_720->teamMember[1]->unk_001] = 2;
     }
 
     for (i = 0; i < 4; i++) {
@@ -4253,8 +4253,8 @@ void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
 }
 
 void BattleScene_ConfigureAudioChannelGroupCounts(void) {
-    Battler* ptr1 = D_84390010[0];
-    Battler* ptr2 = D_84390010[1];
+    ActivePokemon* ptr1 = sActivePokemon[0];
+    ActivePokemon* ptr2 = sActivePokemon[1];
     u8 sp24[4];
 
     sp24[0] = 0;
@@ -4262,14 +4262,14 @@ void BattleScene_ConfigureAudioChannelGroupCounts(void) {
     sp24[2] = 0;
     sp24[3] = 0;
 
-    sp24[ptr1->unk_720->unk_08[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->unk_720->unk_08[0]);
+    sp24[ptr1->unk_720->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->unk_720->teamMember[0]);
     if (ptr1->unk_720->unk_01 == 2) {
-        sp24[ptr1->unk_720->unk_08[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->unk_720->unk_08[1]);
+        sp24[ptr1->unk_720->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->unk_720->teamMember[1]);
     }
 
-    sp24[ptr2->unk_720->unk_08[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->unk_720->unk_08[0]);
+    sp24[ptr2->unk_720->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->unk_720->teamMember[0]);
     if (ptr2->unk_720->unk_01 == 2) {
-        sp24[ptr2->unk_720->unk_08[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->unk_720->unk_08[1]);
+        sp24[ptr2->unk_720->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->unk_720->teamMember[1]);
     }
     Audio_SetChannelGroupCounts(sp24[0], sp24[1], sp24[2], sp24[3]);
 }
@@ -4594,7 +4594,7 @@ void BattleScene_StartBattleMusic(void) {
     }
 }
 
-void BattleAnim_PlayBattleSequenceById(Battler* arg0, s32 arg1) {
+void BattleAnim_PlayBattleSequenceById(ActivePokemon* arg0, s32 arg1) {
     s16 sp1E = arg0->unk_000.objectType;
 
     if ((BattleScene_IsPartnerPikachu(arg0) != 0) && (arg1 == 0x32)) {
@@ -4721,7 +4721,7 @@ void BattleAnim_ProcessQueuedEffects(void) {
     }
 }
 
-void BattleAnim_UpdateFrame(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleAnim_UpdateFrame(UNUSED CameraNode* arg0) {
     Particle_UpdateFrameCounters();
     BattleAnim_ProcessQueuedEffects();
     BattleAnim_UpdateEffects();
@@ -4748,7 +4748,7 @@ s16 BattleAnim_GetQueuedMoveId(void) {
     return gBattleAnimQueuedMoveId;
 }
 
-void BattleAnim_QueueMoveEffect(s32 arg0, Battler* arg1, Battler* arg2, s16 arg3, s16 arg4) {
+void BattleAnim_QueueMoveEffect(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
     BattleAnim_SetQueuedEffectList(0);
     gBattleAnimQueuedEffectListMode = 1;
     gBattleAnimQueuedMoveId = arg0;
@@ -4760,28 +4760,28 @@ void BattleAnim_QueueMoveEffect(s32 arg0, Battler* arg1, Battler* arg2, s16 arg3
     gBattleAnimTertiaryOwner = arg2;
 }
 
-void BattleAnim_QueueMoveEffectScriptA(s32 arg0, Battler* arg1, Battler* arg2, s16 arg3, s16 arg4) {
+void BattleAnim_QueueMoveEffectScriptA(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
     BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
 }
 
-void BattleAnim_QueueMoveEffectEnd(s32 arg0, Battler* arg1, Battler* arg2, s16 arg3, s16 arg4) {
+void BattleAnim_QueueMoveEffectEnd(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
     BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
     BattleAnim_SetQueuedEffectList(2);
     gBattleAnimCurrentOwner = arg2;
     gBattleAnimQueuedEffectListMode = 2;
 }
 
-void BattleAnim_QueueMoveEffectScriptB(s32 arg0, Battler* arg1, Battler* arg2, s16 arg3, s16 arg4) {
+void BattleAnim_QueueMoveEffectScriptB(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
     BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
     BattleAnim_SetQueuedEffectList(1);
 }
 
-void BattleAnim_QueueEffectList3(s32 arg0, Battler* arg1, Battler* arg2, s16 arg3, s16 arg4) {
+void BattleAnim_QueueEffectList3(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
     BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
     BattleAnim_SetQueuedEffectList(3);
 }
 
-void BattleAnim_QueueEffectList6(s32 arg0, Battler* arg1) {
+void BattleAnim_QueueEffectList6(s32 arg0, ActivePokemon* arg1) {
     gBattleAnimQueuedAlternatePending = 2;
     gBattleAnimQueuedAlternateMoveId = arg0;
     gBattleAnimQueuedAlternateList = 6;
@@ -4792,13 +4792,13 @@ void BattleAnim_QueueEffectList6(s32 arg0, Battler* arg1) {
     gBattleAnimTertiaryOwner = arg1;
 }
 
-void BattleAnim_QueueEffectList5(s32 arg0, Battler* arg1) {
+void BattleAnim_QueueEffectList5(s32 arg0, ActivePokemon* arg1) {
     BattleAnim_QueueEffectList6(arg0, arg1);
     gBattleAnimQueuedAlternatePending = 1;
     gBattleAnimQueuedAlternateList = 5;
 }
 
-void BattleAnim_QueueEffectList6Alt(s32 arg0, Battler* arg1) {
+void BattleAnim_QueueEffectList6Alt(s32 arg0, ActivePokemon* arg1) {
     BattleAnim_QueueEffectList6(arg0, arg1);
 }
 
@@ -4810,7 +4810,7 @@ void BattleAnim_QueueEffectList9(s32 arg0) {
     gBattleAnimAlternateAnchor = 0xFF;
 }
 
-void BattleAnim_QueueEffectList(u8 arg0, Battler* arg1) {
+void BattleAnim_QueueEffectList(u8 arg0, ActivePokemon* arg1) {
     gBattleAnimQueuedResourceListPending = 1;
     BattleAnim_SetQueuedResourceListId(arg0);
     gBattleAnimCurrentOwner = arg1;
@@ -4821,7 +4821,7 @@ void BattleAnim_QueueEffectList(u8 arg0, Battler* arg1) {
     }
 }
 
-void BattleAnim_StopOwnerCategoryParticles(u8 arg0, Battler* arg1) {
+void BattleAnim_StopOwnerCategoryParticles(u8 arg0, ActivePokemon* arg1) {
     BattleAnim_StopParticlesForOwnerCategory(arg0, arg1);
 }
 
@@ -4866,9 +4866,9 @@ void BattleAnim_BuildResourceListForMove(s16 arg0) {
     gBattleAnimResourceList[var_v0] = -1;
 }
 
-void BattleAnim_LoadMoveResourceList(BattleSessionTeams* arg0, s16 arg1) {
-    if (arg1 != 0xFF) {
-        BattleAnim_BuildResourceListForMove(arg1);
+void BattleAnim_LoadMoveResourceList(BattleSessionTeams* arg0, s16 move) {
+    if (move != 0xFF) {
+        BattleAnim_BuildResourceListForMove(move);
         arg0->unk_1D |= 0x80;
         arg0->unk_20 = gBattleAnimResourceList;
         arg0->unk_24 = gBattleAnimResourceTablePointers;
@@ -5034,7 +5034,7 @@ s32 BattleAnim_IsModelAnimComplete(DisplayObject* arg0) {
     return ret;
 }
 
-void BattleAnim_UpdateEffectCallbacks(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleAnim_UpdateEffectCallbacks(UNUSED CameraNode* arg0) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
@@ -5045,7 +5045,7 @@ void BattleAnim_UpdateEffectCallbacks(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleAnim_DrawEffectCallbacks(UNUSED unk_D_86002F34_00C* arg0) {
+void BattleAnim_DrawEffectCallbacks(UNUSED CameraNode* arg0) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
@@ -5055,20 +5055,20 @@ void BattleAnim_DrawEffectCallbacks(UNUSED unk_D_86002F34_00C* arg0) {
     }
 }
 
-void BattleAnim_UpdateCamera(unk_D_86002F34_00C* arg0) {
+void BattleAnim_UpdateCamera(CameraNode* arg0) {
     gParticleRenderContext.unk_0C = arg0;
     gParticleCameraState = &gParticleRenderContext.unk_10;
 
-    MtxF_Copy(&gParticleCameraState->unk_00, &arg0->unk_60.mtxf);
-    ParticleMath_CopyVec3f(&gParticleCameraState->unk_40, &arg0->unk_60.eye);
-    ParticleMath_CopyVec3f(&gParticleCameraState->unk_4C, &arg0->unk_60.at);
+    MtxF_Copy(&gParticleCameraState->unk_00, &arg0->view.floatMatrix);
+    ParticleMath_CopyVec3f(&gParticleCameraState->unk_40, &arg0->view.eyePosition);
+    ParticleMath_CopyVec3f(&gParticleCameraState->unk_4C, &arg0->view.targetPosition);
     BattleAnim_GetCameraLookAngles(&gParticleCameraState->unk_70, &gParticleCameraState->unk_72);
     BattleAnim_GetCameraEyeAngles(&gParticleCameraState->unk_76, &gParticleCameraState->unk_78);
     ParticleMath_NormalizedDirection(&gParticleCameraState->unk_58, gParticleCameraState->unk_40, gParticleCameraState->unk_4C);
     ParticleMath_NormalizedDirection(&gParticleCameraState->unk_64, gParticleCameraState->unk_4C, gParticleCameraState->unk_40);
 }
 
-s32 BattleAnim_DispatchPresentation(s32 arg0, unk_D_86002F34_00C* arg1) {
+s32 BattleAnim_DispatchPresentation(s32 arg0, CameraNode* arg1) {
     switch (arg0) {
         case 1:
         case 3:
@@ -5150,37 +5150,37 @@ void BattleAnim_GetPointAlongCameraRay(Vec3f* arg0, f32 arg1) {
 }
 
 void BattleAnim_GetCameraEyeAngles(s16* arg0, s16* arg1) {
-    unk_D_86002F34_00C* temp_v0 = BattleAnim_GetCameraContext();
-    f32 sp20 = temp_v0->unk_60.eye.x - temp_v0->unk_60.at.x;
-    f32 sp1C = temp_v0->unk_60.eye.y - temp_v0->unk_60.at.y;
-    f32 sp18 = temp_v0->unk_60.eye.z - temp_v0->unk_60.at.z;
+    CameraNode* temp_v0 = BattleAnim_GetCameraContext();
+    f32 sp20 = temp_v0->view.eyePosition.x - temp_v0->view.targetPosition.x;
+    f32 sp1C = temp_v0->view.eyePosition.y - temp_v0->view.targetPosition.y;
+    f32 sp18 = temp_v0->view.eyePosition.z - temp_v0->view.targetPosition.z;
 
     *arg0 = MathUtil_Atan2s(sqrtf(SQ(sp20) + SQ(sp18)), sp1C);
     *arg1 = MathUtil_Atan2s(sp18, sp20);
 }
 
 void BattleAnim_GetCameraEyeYaw(s16* arg0) {
-    unk_D_86002F34_00C* temp_v0 = BattleAnim_GetCameraContext();
-    f32 x = temp_v0->unk_60.eye.x - temp_v0->unk_60.at.x;
-    f32 z = temp_v0->unk_60.eye.z - temp_v0->unk_60.at.z;
+    CameraNode* temp_v0 = BattleAnim_GetCameraContext();
+    f32 x = temp_v0->view.eyePosition.x - temp_v0->view.targetPosition.x;
+    f32 z = temp_v0->view.eyePosition.z - temp_v0->view.targetPosition.z;
 
     *arg0 = MathUtil_Atan2s(z, x);
 }
 
 void BattleAnim_GetCameraLookAngles(s16* arg0, s16* arg1) {
-    unk_D_86002F34_00C* temp_v0 = BattleAnim_GetCameraContext();
-    f32 sp20 = temp_v0->unk_60.at.x - temp_v0->unk_60.eye.x;
-    f32 sp1C = temp_v0->unk_60.at.y - temp_v0->unk_60.eye.y;
-    f32 sp18 = temp_v0->unk_60.at.z - temp_v0->unk_60.eye.z;
+    CameraNode* temp_v0 = BattleAnim_GetCameraContext();
+    f32 sp20 = temp_v0->view.targetPosition.x - temp_v0->view.eyePosition.x;
+    f32 sp1C = temp_v0->view.targetPosition.y - temp_v0->view.eyePosition.y;
+    f32 sp18 = temp_v0->view.targetPosition.z - temp_v0->view.eyePosition.z;
 
     *arg0 = MathUtil_Atan2s(sqrtf(SQ(sp20) + SQ(sp18)), sp1C);
     *arg1 = MathUtil_Atan2s(sp18, sp20);
 }
 
 void BattleAnim_GetCameraLookYaw(s16* arg0) {
-    unk_D_86002F34_00C* temp_v0 = BattleAnim_GetCameraContext();
-    f32 x = temp_v0->unk_60.at.x - temp_v0->unk_60.eye.x;
-    f32 z = temp_v0->unk_60.at.z - temp_v0->unk_60.eye.z;
+    CameraNode* temp_v0 = BattleAnim_GetCameraContext();
+    f32 x = temp_v0->view.targetPosition.x - temp_v0->view.eyePosition.x;
+    f32 z = temp_v0->view.targetPosition.z - temp_v0->view.eyePosition.z;
 
     *arg0 = MathUtil_Atan2s(z, x);
 }

@@ -742,7 +742,7 @@ void Gallery_SnapInit(s32 arg0, s32 arg1) {
 }
 
 void Gallery_SnapDrawGradientQuad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Color_RGBA8* arg4, Color_RGBA8* arg5) {
-    unk_D_80068BB0* temp_s1 = GfxImage_GetCurrent();
+    DepthBuffer* temp_s1 = GfxImage_GetCurrent();
     Vtx* temp_s2 = Gfx_AllocDisplayList(sizeof(Vtx) * 4);
     Mtx* sp84 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     Vp* sp80 = Gfx_AllocDisplayList(sizeof(Vp) * 1);

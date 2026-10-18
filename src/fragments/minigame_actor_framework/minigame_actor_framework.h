@@ -160,8 +160,8 @@ extern s16 miniShowHUB;
 extern s16 miniDifficulty;
 extern s16 D_87906048;
 extern s16 D_8790604A;
-extern unk_D_86002F34_00C* D_87906050;      // geo layout
-extern unk_D_86002F34_00C* D_87906054;
+extern CameraNode* D_87906050;      // geo layout
+extern CameraNode* D_87906054;
 extern s16 miniCameraXRot;
 extern s16 miniCameraYRot;
 extern s16 miniCameraDistance;
