@@ -25,7 +25,7 @@ static u32 D_86B0E250[] = {
 static unk_D_86002F30* D_86B106B0;
 static GraphNode* D_86B106B4;
 static DisplayObject D_86B106B8;
-static unk_D_86002F34_00C* D_86B10820;
+static CameraNode* D_86B10820;
 static BinArchive* D_86B10824;
 static u8* D_86B10828;
 static u8 D_86B1082C;
@@ -36,11 +36,11 @@ void MewtwoIntro_DrawOverlay(void) {
 
 void MewtwoIntro_InitCamera(void) {
     D_86B10820 = D_86B106B4->children;
-    Vec3f_SetComponentsDuplicate(&D_86B10820->unk_60.at, 0.0f, 0.0f, 0.0f);
-    Vec3f_SetComponentsDuplicate(&D_86B10820->unk_60.eye, 0.0f, 0.0f, 200.0f);
-    D_86B10820->unk_24.near = 16.0f;
-    D_86B10820->unk_24.far = 32768.0f;
-    D_86B10820->unk_24.fovy = 45.0f;
+    Vec3f_SetComponentsDuplicate(&D_86B10820->view.targetPosition, 0.0f, 0.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&D_86B10820->view.eyePosition, 0.0f, 0.0f, 200.0f);
+    D_86B10820->perspective.nearPlane = 16.0f;
+    D_86B10820->perspective.farPlane = 32768.0f;
+    D_86B10820->perspective.verticalFieldOfView = 45.0f;
 }
 
 void MewtwoIntro_ReadControllerInput(void) {

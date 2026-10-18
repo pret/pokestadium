@@ -344,7 +344,7 @@ void BattleAnim_UpdateParticlePool(void) {
     }
 }
 
-void BattleAnim_InitializeParticleFromEffect(Particle* arg0, Battler* arg1, BattleAnimEffectSlot* arg2, s16 arg3) {
+void BattleAnim_InitializeParticleFromEffect(Particle* arg0, ActivePokemon* arg1, BattleAnimEffectSlot* arg2, s16 arg3) {
     if ((u32)arg0 == -1) {
         return;
     }
@@ -388,7 +388,7 @@ void BattleAnim_SpawnEffectParticles(BattleAnimEffectSlot* arg0, s32 arg1) {
     s16 var_s2;
     ParticleDescriptor* temp_a2 = arg0->unk_04;
     ParticleDescriptorChild* temp_a3 = arg0->unk_04->unk_04.a;
-    Battler* tmp08 = arg0->unk_08;
+    ActivePokemon* tmp08 = arg0->unk_08;
     s16 tmp12 = arg0->unk_12;
 
     switch (arg1) {
@@ -422,7 +422,7 @@ void BattleAnim_SpawnBatchedParticles(BattleAnimEffectSlot* arg0) {
 
 void BattleAnim_SpawnSingleParticle(BattleAnimEffectSlot* arg0) {
     UNUSED s32 pad;
-    Battler* sp18 = arg0->unk_08;
+    ActivePokemon* sp18 = arg0->unk_08;
 
     BattleAnim_InitializeParticleFromEffect(Particle_New(), sp18, arg0, 0);
 }
@@ -533,10 +533,10 @@ void BattleAnim_CleanupEffectsRetainingCategory4(void) {
         }
     }
 
-    Model_SetMaterialColor(&D_84390010[0]->unk_000, 0xFF, 0xFF, 0xFF, 0);
-    Model_SetMaterialColor(&D_84390010[1]->unk_000, 0xFF, 0xFF, 0xFF, 0);
-    Model_SetMaterialAlpha(&D_84390010[0]->unk_000, 0xFF);
-    Model_SetMaterialAlpha(&D_84390010[1]->unk_000, 0xFF);
+    Model_SetMaterialColor(&sActivePokemon[0]->unk_000, 0xFF, 0xFF, 0xFF, 0);
+    Model_SetMaterialColor(&sActivePokemon[1]->unk_000, 0xFF, 0xFF, 0xFF, 0);
+    Model_SetMaterialAlpha(&sActivePokemon[0]->unk_000, 0xFF);
+    Model_SetMaterialAlpha(&sActivePokemon[1]->unk_000, 0xFF);
 
     D_8439037E = 0xFF;
     D_8439037C = D_8439037E;
@@ -608,7 +608,7 @@ void BattleAnim_CleanupEffects(s32 arg0) {
     }
 }
 
-void BattleAnim_StopParticlesForOwnerCategory(u8 arg0, Battler* arg1) {
+void BattleAnim_StopParticlesForOwnerCategory(u8 arg0, ActivePokemon* arg1) {
     s32 i;
     Particle* var_s0 = gParticlePool;
 
@@ -637,7 +637,7 @@ void BattleAnim_ResetSpawnDelayAlias(void) {
 }
 
 BattleAnimEffectSlot* BattleAnim_CreateEffectSlot(s32 arg0, s32 arg1, s8 arg2, func_unk_D_8140E724 arg3, ParticleDescriptor* arg4,
-                              Battler* arg5, s16 arg6, s16 arg7, u8 arg8, u8 arg9, u8 argA, u8 argB) {
+                              ActivePokemon* arg5, s16 arg6, s16 arg7, u8 arg8, u8 arg9, u8 argA, u8 argB) {
     BattleAnimEffectSlot* sp1C = BattleAnim_AllocEffectSlot();
 
     if ((u32)sp1C != -1) {
@@ -816,7 +816,7 @@ s32 BattleAnim_GetTertiaryOwnerSpecies(void) {
     return BattleAnim_GetOwnerSpecies(gBattleAnimTertiaryOwner);
 }
 
-void BattleAnim_GetOwnerBonePosition(Battler* arg0, s16 arg1, Vec3f* arg2) {
+void BattleAnim_GetOwnerBonePosition(ActivePokemon* arg0, s16 arg1, Vec3f* arg2) {
     s32 sp24 = 0;
 
     if (arg0 != NULL) {
@@ -868,21 +868,21 @@ void BattleAnim_GetTertiaryOwnerBone9Position(Vec3f* arg0) {
     BattleAnim_GetOwnerBonePosition(gBattleAnimTertiaryOwner, 9, arg0);
 }
 
-void BattleAnim_GetOwnerModelBoundsScaled(Battler* arg0, Vec3f* arg1) {
+void BattleAnim_GetOwnerModelBoundsScaled(ActivePokemon* arg0, Vec3f* arg1) {
     BattleScene_GetParticipantModelBoundsScaled(arg0, arg1);
 }
 
-f32 BattleAnim_GetSpeciesBaseScale(Battler* arg0) {
+f32 BattleAnim_GetSpeciesBaseScale(ActivePokemon* arg0) {
     f32 ret = D_80075E40[arg0->unk_000.objectType] * 0.01f;
 
     return ret;
 }
 
-f32 BattleAnim_GetOwnerModelScale(Battler* arg0) {
+f32 BattleAnim_GetOwnerModelScale(ActivePokemon* arg0) {
     return BattleAnim_GetSpeciesBaseScale(arg0);
 }
 
-void BattleAnim_GetOwnerSpeciesBaseScaleAlias(Battler* arg0) {
+void BattleAnim_GetOwnerSpeciesBaseScaleAlias(ActivePokemon* arg0) {
     BattleAnim_GetSpeciesBaseScale(arg0);
 }
 
@@ -902,7 +902,7 @@ void BattleAnim_GetTertiaryOwnerSpeciesBaseScale(void) {
     BattleAnim_GetOwnerSpeciesBaseScaleAlias(gBattleAnimTertiaryOwner);
 }
 
-unk_D_86002F34_00C* BattleAnim_GetCameraContext(void) {
+CameraNode* BattleAnim_GetCameraContext(void) {
     return gParticleRenderContext.unk_0C;
 }
 

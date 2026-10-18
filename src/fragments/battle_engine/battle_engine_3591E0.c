@@ -229,7 +229,7 @@ Gfx* AuxiliaryEffect_Draw(s16 arg0, Gfx* arg1) {
         return arg1;
     }
 
-    MtxF_ExtractScale(sp78.mf, &D_8006F088->unk_60.mtxf);
+    MtxF_ExtractScale(sp78.mf, &D_8006F088->view.floatMatrix);
     guMtxF2L(sp78.mf, sp38.mf);
 
     var_s0 = &temp_s3->unk_004;

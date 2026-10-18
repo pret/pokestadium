@@ -650,7 +650,7 @@ Gfx* RibbonMesh_DrawPool(Gfx* arg0) {
 }
 
 void TerrainGrid_BuildCameraBounds(unk_D_843975E8* arg0, f32 arg1) {
-    unk_D_86002F34_00C* spB4 = BattleAnim_GetCameraContext();
+    CameraNode* spB4 = BattleAnim_GetCameraContext();
     f32 spB0;
     f32 spAC;
     f32 spA8;
@@ -679,21 +679,21 @@ void TerrainGrid_BuildCameraBounds(unk_D_843975E8* arg0, f32 arg1) {
     f32 sp4C;
     f32 sp48;
 
-    spB0 = spB4->unk_60.eye.x;
-    spAC = spB4->unk_60.eye.y;
-    spA8 = spB4->unk_60.eye.z;
+    spB0 = spB4->view.eyePosition.x;
+    spAC = spB4->view.eyePosition.y;
+    spA8 = spB4->view.eyePosition.z;
 
-    sp9C = spB4->unk_60.at.x;
-    spA0 = spB4->unk_60.at.y;
-    spA4 = spB4->unk_60.at.z;
+    sp9C = spB4->view.targetPosition.x;
+    spA0 = spB4->view.targetPosition.y;
+    spA4 = spB4->view.targetPosition.z;
 
-    sp78 = spB4->unk_60.up.x;
-    sp74 = spB4->unk_60.up.y;
-    sp70 = spB4->unk_60.up.z;
+    sp78 = spB4->view.upDirection.x;
+    sp74 = spB4->view.upDirection.y;
+    sp70 = spB4->view.upDirection.z;
 
-    sp4C = spB4->unk_24.fovy;
+    sp4C = spB4->perspective.verticalFieldOfView;
     sp48 = sp4C / 30.0f;
-    sp8C = spB4->unk_24.near;
+    sp8C = spB4->perspective.nearPlane;
 
     sp84 = sp9C - spB0;
     sp80 = spA0 - spAC;
@@ -716,7 +716,7 @@ void TerrainGrid_BuildCameraBounds(unk_D_843975E8* arg0, f32 arg1) {
     }
 
     var_fs0 = Math_AbsF32(var_fs0);
-    sp94 = spB4->unk_24.aspect * var_fs0 * sp48 * 1.2f;
+    sp94 = spB4->perspective.unk_0C * var_fs0 * sp48 * 1.2f;
 
     Vec3f_CrossProductComponents(sp84, sp80, sp7C, sp78, sp74, sp70, &sp68, &sp64, &sp60);
     Vec3f_CrossProductComponents(sp84, sp80, sp7C, sp68, sp64, sp60, &sp5C, &sp58, &sp54);

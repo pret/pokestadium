@@ -288,7 +288,7 @@ s32 Trail40Variant_AdvanceTimer(void) {
 }
 
 void Trail40Variant_SetupCameraTransform(void) {
-    unk_D_86002F34_00C* temp_v0;
+    CameraNode* temp_v0;
     f32 tmp1;
     f32 tmp2;
     f32 tmp3;
@@ -307,15 +307,15 @@ void Trail40Variant_SetupCameraTransform(void) {
     D_8439E680.unk_0010 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     temp_v0 = BattleAnim_GetCameraContext();
 
-    tmp4 = temp_v0->unk_60.at.x;
-    tmp5 = temp_v0->unk_60.at.y;
-    tmp6 = temp_v0->unk_60.at.z;
+    tmp4 = temp_v0->view.targetPosition.x;
+    tmp5 = temp_v0->view.targetPosition.y;
+    tmp6 = temp_v0->view.targetPosition.z;
 
-    tmp1 = temp_v0->unk_60.eye.x;
-    tmp2 = temp_v0->unk_60.eye.y;
-    tmp3 = temp_v0->unk_60.eye.z;
+    tmp1 = temp_v0->view.eyePosition.x;
+    tmp2 = temp_v0->view.eyePosition.y;
+    tmp3 = temp_v0->view.eyePosition.z;
 
-    sp5C = temp_v0->unk_24.fovy;
+    sp5C = temp_v0->perspective.verticalFieldOfView;
     sp68 = tmp4 - tmp1;
     sp64 = tmp5 - tmp2;
     sp60 = tmp6 - tmp3;

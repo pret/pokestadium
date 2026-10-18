@@ -47,7 +47,7 @@ typedef struct unk_D_8250A228 {
     /* 0x2C */ struct unk_D_8250A228* unk_2C;
     /* 0x30 */ struct unk_D_8250A228* unk_30;
     /* 0x34 */ struct unk_D_8250A228* unk_34;
-    /* 0x38 */ unk_D_80068BB0* unk_38;
+    /* 0x38 */ DepthBuffer* unk_38;
     /* 0x3C */ unk_D_82508B30_03C unk_3C;
 } unk_D_8250A228; // size >= 0x78
 
