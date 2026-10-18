@@ -4,6 +4,23 @@ Don't act a fool.
 
 Never delete `oldnotes`. It stands as a testament to manual decomping that this project stands on.
 
+# Editor setup and cross-file renaming
+
+For VS Code, install the recommended **clangd** extension and run:
+
+```sh
+python3 tools/clangd_config.py
+```
+
+Then restart the clangd language server and let background indexing finish before
+using F2 on shared symbols. The workspace task can keep the database current
+automatically, including source-file additions and moves; ordinary identifier
+renames do not require regenerating it. No ROM, IDO compiler, or custom VS Code
+extension is needed for this editor setup.
+
+See [docs/clangd.md](docs/clangd.md) for automatic-task permissions, regional
+analysis views, verification, and the limits of C-aware rename.
+
 # Team Hippodrome Decomp Style Guide
 
 ## Formatting

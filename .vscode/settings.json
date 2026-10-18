@@ -1,0 +1,6 @@
+{
+    "clangd.arguments": [
+        "--background-index",
+        "--rename-file-limit=0"
+    ]
+}
