@@ -156,7 +156,7 @@ static unk_D_843859E0 D_843859E0[] = {
 s32 BattleScene_AreBothParticipantModelsCompact(void) {
     if (((BattleScene_GetParticipantModelWidth(sActivePokemon[0]) + BattleScene_GetParticipantModelWidth(sActivePokemon[1])) <= 85.0f) &&
         (BattleScene_GetParticipantModelHeight(sActivePokemon[0]) == 0.0f) && (BattleScene_GetParticipantModelHeight(sActivePokemon[1]) == 0.0f) &&
-        (sActivePokemon[0]->unk_000.position.y == 0.0f) && (sActivePokemon[1]->unk_000.position.y == 0.0f)) {
+        (sActivePokemon[0]->display_object.position.y == 0.0f) && (sActivePokemon[1]->display_object.position.y == 0.0f)) {
         return 1;
     }
     return 0;
@@ -252,7 +252,7 @@ void BattleScene_IntroCameraStep4Or6(CameraNode* arg0, s32 arg1) {
         BattleScene_CameraPresetNop(arg0);
         BattleScene_UpdateCameraModelOffset(temp_s0, arg0);
 
-        if (temp_s0->unk_000.objectType == 0x5F) {
+        if (temp_s0->display_object.objectType == 0x5F) {
             arg0->perspective.verticalFieldOfView = 50.0f;
         } else {
             arg0->perspective.verticalFieldOfView = 30.0f;
@@ -358,21 +358,21 @@ void BattleScene_IntroCameraStep22Or24(CameraNode* arg0, s32 arg1) {
     temp_s0 = sActivePokemon[arg1];
 
     if (BattleScene_SkipIntroIfFainted(temp_s0, arg0) == 0) {
-        if ((temp_s0->unk_000.objectType == 0x98) || (temp_s0->unk_654.unk_34 & 2)) {
+        if ((temp_s0->display_object.objectType == 0x98) || (temp_s0->unk_654.unk_34 & 2)) {
             BattleScene_SelectNextIntroCameraShot(arg0);
             return;
         }
 
-        if ((temp_s0->unk_000.objectType == 0x5F) && (arg1 == 1)) {
+        if ((temp_s0->display_object.objectType == 0x5F) && (arg1 == 1)) {
             var_v1 = 0x97;
         } else {
-            var_v1 = (temp_s0->unk_000.objectType - 1) & 0xFF;
+            var_v1 = (temp_s0->display_object.objectType - 1) & 0xFF;
         }
 
-        tmp2 = (D_84384580[arg1]->unk_00.y + temp_s0->unk_000.position.y) + D_84384C30[var_v1].z;
-        tmp1 = ((D_84384580[arg1]->unk_00.z + D_84384C30[var_v1].y) * temp_s0->unk_4B0) + temp_s0->unk_000.position.x;
+        tmp2 = (D_84384580[arg1]->unk_00.y + temp_s0->display_object.position.y) + D_84384C30[var_v1].z;
+        tmp1 = ((D_84384580[arg1]->unk_00.z + D_84384C30[var_v1].y) * temp_s0->unk_4B0) + temp_s0->display_object.position.x;
 
-        Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, tmp1, tmp2, temp_s0->unk_000.position.z);
+        Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, tmp1, tmp2, temp_s0->display_object.position.z);
 
         tmp1 = D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.x * D_84384C30[var_v1].x;
         tmp4 = D_84384580[gBattleScene.unk_00->unk_2C]->unk_0C;
@@ -491,11 +491,11 @@ void BattleScene_IntroCameraAnimationHoldStep(CameraNode* arg0) {
         BattleScene_ApplyOwnerFramingOnly(arg0, sActivePokemon[gBattleScene.unk_00->unk_2C]);
     }
 
-    if ((sp18->unk_34 & 1) || (sp18->unk_34 & 2) || (sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.objectType == 0x98)) {
+    if ((sp18->unk_34 & 1) || (sp18->unk_34 & 2) || (sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.objectType == 0x98)) {
         if (BattleScene_AdvanceCameraFrameCounter(0x5A) != 0) {
             BattleScene_SelectNextIntroCameraShot(arg0);
         }
-    } else if (ModelAnim_IsAnimationDone(&sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000) != 0) {
+    } else if (ModelAnim_IsAnimationDone(&sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object) != 0) {
         BattleScene_SelectNextIntroCameraShot(arg0);
     }
 }

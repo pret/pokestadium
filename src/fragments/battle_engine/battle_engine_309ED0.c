@@ -49,11 +49,11 @@ Vec3f D_84385B9C = { 0.0f, 10.0f, 0.0f };
 void BattleScene_ApplyModelAnimationSlot5A(ActivePokemon* arg0) {
     ActivePokemonState* ptr = &arg0->unk_654;
 
-    if ((arg0->unk_000.objectType == 0x32) && (ptr->unk_34 & 0x4000)) {
+    if ((arg0->display_object.objectType == 0x32) && (ptr->unk_34 & 0x4000)) {
         MovePresentationCue* tmp = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_000[0x5A];
 
-        ModelAnim_SetAnimation(&arg0->unk_000, tmp->unk_00);
-        arg0->unk_000.node.renderFlags &= ~0x20;
+        ModelAnim_SetAnimation(&arg0->display_object, tmp->unk_00);
+        arg0->display_object.node.renderFlags &= ~0x20;
     }
 }
 
@@ -313,7 +313,7 @@ s32 BattleScene_AnimateDisplayedHpToRuntime(ActivePokemon* arg0) {
     if (temp_s2->unk_02 == temp_s1->unk_0C) {
         temp_fs0 = D_843900A8[BattleScene_GetParticipantSideIndex(arg0)] - temp_s2->unk_02;
         D_843900A8[BattleScene_GetParticipantSideIndex(arg0)] -= temp_fs0;
-        if (arg0->unk_000.objectType == 0x98) {
+        if (arg0->display_object.objectType == 0x98) {
             return 1;
         }
         return 1;
@@ -796,7 +796,7 @@ void BattleScene_InitializeBattlePresentation(CameraNode* arg0) {
 void BattleScene_SendOutPresentationFinalize(CameraNode* arg0) {
     ActivePokemonState* temp_t2 = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_654;
     ActivePokemonState* temp_t1 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654;
-    s16 sp2E = sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.objectType;
+    s16 sp2E = sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.objectType;
     MovePresentationCue* sp28 = &D_84384570[gBattleScene.unk_00->unk_2C]->unk_A50;
     ActivePokemon* sp24 = sActivePokemon[gBattleScene.unk_00->unk_2C];
 
@@ -812,12 +812,12 @@ void BattleScene_SendOutPresentationFinalize(CameraNode* arg0) {
     }
 
     if (temp_t1->unk_34 & 0x4008) {
-        sp24->unk_000.lodFraction = 0xFF;
+        sp24->display_object.lodFraction = 0xFF;
         BattleAnim_StopOwnerCategoryParticles(4, sp24);
-        sp24->unk_000.position.y = D_84390028[gBattleScene.unk_00->unk_2C].unk_08;
-        sp24->unk_000.node.renderFlags &= ~0x2;
-        sp24->unk_000.node.renderFlags |= 0x20;
-        sp24->unk_000.node.flags |= 1;
+        sp24->display_object.position.y = D_84390028[gBattleScene.unk_00->unk_2C].unk_08;
+        sp24->display_object.node.renderFlags &= ~0x2;
+        sp24->display_object.node.renderFlags |= 0x20;
+        sp24->display_object.node.flags |= 1;
         Battle_ClearRuntimeFlags(sp24, 0x4608);
     }
 
@@ -833,16 +833,16 @@ void BattleScene_SendOutPresentationFinalize(CameraNode* arg0) {
         BattleScene_SetParticipantModelFlags(sActivePokemon[gBattleScene.unk_00->unk_2C], 0, 0);
     }
 
-    sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.rotation.x = 0;
+    sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.rotation.x = 0;
     if ((sp2E == 0x32) || (sp2E == 0x33)) {
-        sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.node.renderFlags |= 0x20;
-        sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.node.flags |= 1;
-        ModelAnim_SetAnimation(&sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000, sp28->unk_00);
+        sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.node.renderFlags |= 0x20;
+        sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.node.flags |= 1;
+        ModelAnim_SetAnimation(&sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object, sp28->unk_00);
     }
 
     Battle_ResetModelToIdleAnim(sActivePokemon[gBattleScene.unk_00->unk_2C]);
-    Vec3f_SetComponentsDuplicate(&sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.scale, 1.0f, 1.0f, 1.0f);
-    sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.position.y = BattleScene_GetParticipantModelHeight(sActivePokemon[gBattleScene.unk_00->unk_2C]);
+    Vec3f_SetComponentsDuplicate(&sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.scale, 1.0f, 1.0f, 1.0f);
+    sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.position.y = BattleScene_GetParticipantModelHeight(sActivePokemon[gBattleScene.unk_00->unk_2C]);
     BattleAnim_GetOwnerDefaultAnchorPosition(sActivePokemon[gBattleScene.unk_00->unk_2C], &D_843901B0.unk_00);
     BattleScene_LoadCameraPreset(&D_84384AF8, arg0, sActivePokemon[gBattleScene.unk_00->unk_2C]);
     BattleScene_ApplyCameraPreset(arg0, sActivePokemon[gBattleScene.unk_00->unk_2C], 1);
@@ -863,20 +863,20 @@ s32 BattleScene_ResetOwnerStatusPresentation(ActivePokemon* arg0) {
     }
 
     if (sp28->unk_34 & 0x4008) {
-        arg0->unk_000.lodFraction = 0xFF;
+        arg0->display_object.lodFraction = 0xFF;
         BattleAnim_StopOwnerCategoryParticles(4, arg0);
-        arg0->unk_000.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
-        arg0->unk_000.node.renderFlags &= ~0x2;
-        arg0->unk_000.node.renderFlags |= 0x20;
-        arg0->unk_000.node.flags |= 1;
+        arg0->display_object.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
+        arg0->display_object.node.renderFlags &= ~0x2;
+        arg0->display_object.node.renderFlags |= 0x20;
+        arg0->display_object.node.flags |= 1;
         Battle_ClearRuntimeFlags(arg0, 0x4608);
     }
 
     BattleAnim_EndSleepStatusAnimation(arg0);
     sp28->unk_2E = 0xFF;
-    Model_SetMaterialColor(&arg0->unk_000, 0xFF, 0xFF, 0xFF, sp28->unk_2E);
+    Model_SetMaterialColor(&arg0->display_object, 0xFF, 0xFF, 0xFF, sp28->unk_2E);
     BattleScene_CleanupParticipantEffectMode(arg0);
-    arg0->unk_000.rotation.x = 0;
+    arg0->display_object.rotation.x = 0;
     return 0;
 }
 
@@ -903,7 +903,7 @@ void BattleScene_AdvanceSendOutPreparation(CameraNode* arg0) {
         if (BattleScene_IsPartnerPikachu(sActivePokemon[!gBattleScene.unk_00->unk_2C]) != 0) {
             Cry_Play(0xC8, 1);
         } else {
-            Cry_Play(sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.objectType, 1);
+            Cry_Play(sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.objectType, 1);
         }
     }
 }
@@ -922,13 +922,13 @@ void BattleScene_AdvanceSendOutCamera(CameraNode* arg0) {
             BattleScene_ApproachCameraZoom(arg0, sActivePokemon[!gBattleScene.unk_00->unk_2C]);
         }
 
-        if (((sp20->unk_04 >> 1) == (sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.transformAnim.frameFixed >> 0x10)) &&
+        if (((sp20->unk_04 >> 1) == (sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.transformAnim.frameFixed >> 0x10)) &&
             (sp24->unk_2D != 0x12)) {
             BattleBox_Open(9);
         }
 
-        if (sp20->unk_0A == ((sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.transformAnim.frameFixed >> 0x10) + 3)) {
-            sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.node.renderFlags &= ~0x20;
+        if (sp20->unk_0A == ((sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.transformAnim.frameFixed >> 0x10) + 3)) {
+            sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.node.renderFlags &= ~0x20;
             Battle_SetRuntimeFlags(sActivePokemon[!gBattleScene.unk_00->unk_2C], 0x100);
             BattleScene_ResetCameraFrameCounter();
             gBattleScene.unk_00->unk_20 += 1;
@@ -1017,22 +1017,22 @@ void BattleScene_SetupSendOutOwnerShot(CameraNode* arg0) {
     s16 tmp1;
 
     temp_s0 = sActivePokemon[gBattleScene.unk_00->unk_2C];
-    sp3B = temp_s0->unk_000.objectType - 1;
+    sp3B = temp_s0->display_object.objectType - 1;
 
     if (BattleScene_AnimateCameraPreset(arg0, temp_s0, 1, 0) != 0) {
         BattleScene_ResetCameraFrameCounter();
         BattleBox_Open(0xE);
         BattleScene_SetCameraClipPlanes(arg0, 10.0f, 12800.0f);
         arg0->perspective.verticalFieldOfView = 60.0f;
-        if ((sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_000.objectType == 0x5F) && (gBattleScene.unk_00->unk_2C == 1)) {
+        if ((sActivePokemon[gBattleScene.unk_00->unk_2C]->display_object.objectType == 0x5F) && (gBattleScene.unk_00->unk_2C == 1)) {
             sp3B = 0x97;
         }
 
-        sp44 = (D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.y + temp_s0->unk_000.position.y) + D_84384C30[sp3B].z;
+        sp44 = (D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.y + temp_s0->display_object.position.y) + D_84384C30[sp3B].z;
         sp40 = ((D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.z + D_84384C30[sp3B].y) * temp_s0->unk_4B0) +
-               temp_s0->unk_000.position.x;
+               temp_s0->display_object.position.x;
 
-        Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, sp40, sp44, temp_s0->unk_000.position.z);
+        Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, sp40, sp44, temp_s0->display_object.position.z);
 
         sp40 = D_84384580[gBattleScene.unk_00->unk_2C]->unk_00.x * D_84384C30[sp3B].x;
         sp3E = D_84384580[gBattleScene.unk_00->unk_2C]->unk_0C;
@@ -1071,13 +1071,13 @@ void BattleScene_AdvanceSendOutFollowupCamera(CameraNode* arg0) {
             BattleScene_ApproachCameraZoom(arg0, sActivePokemon[!gBattleScene.unk_00->unk_2C]);
         }
 
-        if (((sp20->unk_04 >> 1) == (sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.transformAnim.frameFixed >> 0x10)) &&
+        if (((sp20->unk_04 >> 1) == (sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.transformAnim.frameFixed >> 0x10)) &&
             (sp24->unk_2D != 0x12)) {
             BattleBox_Open(9);
         }
 
-        if (sp20->unk_0A == ((sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.transformAnim.frameFixed >> 0x10) + 3)) {
-            sActivePokemon[!gBattleScene.unk_00->unk_2C]->unk_000.node.renderFlags &= ~0x20;
+        if (sp20->unk_0A == ((sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.transformAnim.frameFixed >> 0x10) + 3)) {
+            sActivePokemon[!gBattleScene.unk_00->unk_2C]->display_object.node.renderFlags &= ~0x20;
             Battle_SetRuntimeFlags(sActivePokemon[!gBattleScene.unk_00->unk_2C], 0x100);
             BattleScene_ResetCameraFrameCounter();
             BattleScene_UpdateCameraModelOffset(sActivePokemon[!gBattleScene.unk_00->unk_2C], arg0);
@@ -1186,15 +1186,15 @@ void BattleScene_ResetOwnerPresentationFlags(ActivePokemon* arg0) {
     ActivePokemonState* ptr = &arg0->unk_654;
 
     if (ptr->unk_34 & 0x200) {
-        arg0->unk_000.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
+        arg0->display_object.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
         Battle_ClearRuntimeFlags(arg0, 0x608);
     } else if (ptr->unk_34 & 0x4008) {
-        arg0->unk_000.lodFraction = 0xFF;
+        arg0->display_object.lodFraction = 0xFF;
         BattleAnim_StopOwnerCategoryParticles(4, arg0);
-        arg0->unk_000.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
-        arg0->unk_000.node.renderFlags &= ~0x2;
-        arg0->unk_000.node.renderFlags |= 0x20;
-        arg0->unk_000.node.flags |= 1;
+        arg0->display_object.position.y = D_84390028[BattleScene_GetParticipantSideIndex(arg0)].unk_08;
+        arg0->display_object.node.renderFlags &= ~0x2;
+        arg0->display_object.node.renderFlags |= 0x20;
+        arg0->display_object.node.flags |= 1;
         Battle_ClearRuntimeFlags(arg0, 0x4608);
     }
 }
@@ -1678,7 +1678,7 @@ void BattleScene_ActionSetupAnimationVariantC(CameraNode* arg0) {
             BattleScene_SetPhaseFlag();
             Vec3f_SetComponentsDuplicate(&D_843901B0.unk_00, D_84390204->unk_4B0 * -175.0f, 25.0f, 0.0f);
             BattleScene_LoadCameraPreset(&D_84384958, arg0, D_84390204);
-            if ((D_84390204->unk_000.objectType != 0x33) && (D_84390204->unk_000.objectType != 0x32)) {
+            if ((D_84390204->display_object.objectType != 0x33) && (D_84390204->display_object.objectType != 0x32)) {
                 BattleAnim_PlayMoveEffectScriptA(D_84390204, sp18->usedMove);
             }
             break;
@@ -1979,10 +1979,10 @@ void BattleScene_RunRepeatedHitHpTransition(CameraNode* arg0) {
     volatile s32 sp1C;
     s32 temp_v0_2;
 
-    if (D_84390200->unk_000.objectType == 0x98) {
+    if (D_84390200->display_object.objectType == 0x98) {
         sp1C = 0xF;
     } else if (temp_v1->unk_0A == 0xFF) {
-        sp1C = D_84390204->unk_000.transformAnim.data->endFrame - temp_v1->unk_06;
+        sp1C = D_84390204->display_object.transformAnim.data->endFrame - temp_v1->unk_06;
     } else {
         sp1C = temp_v1->unk_0A - temp_v1->unk_06;
     }
@@ -2581,8 +2581,8 @@ void BattleScene_Phase29(CameraNode* arg0) {
             if ((D_84390200->unk_654.runtime.usedMove & 0xF0) == 0xF0) {
                 gBattleScene.unk_00->unk_34 = 3;
             }
-            Vec3f_SetComponentsDuplicate(&D_84390204->unk_000.scale, 1.0f, 1.0f, 1.0f);
-            Vec3f_SetComponentsDuplicate(&D_84390200->unk_000.scale, 1.0f, 1.0f, 1.0f);
+            Vec3f_SetComponentsDuplicate(&D_84390204->display_object.scale, 1.0f, 1.0f, 1.0f);
+            Vec3f_SetComponentsDuplicate(&D_84390200->display_object.scale, 1.0f, 1.0f, 1.0f);
             BattleScene_ResetCameraFrameCounter();
             BattleScene_ResetAnimationStep();
             BattleScene_WaitForDisplayedHpAnimations(arg0);
@@ -2606,7 +2606,7 @@ void BattleScene_Phase12(CameraNode* arg0) {
             break;
 
         case 1:
-            if (D_84390204->unk_000.position.y >= 100.0f) {
+            if (D_84390204->display_object.position.y >= 100.0f) {
                 BattleAnim_GetOwnerDefaultAnchorPosition(D_84390204, &sp3C);
                 sp3C.y += BattleAnim_GetOwnerModelHeight(D_84390204);
                 D_84390208 = BattleScene_ScaleCameraDistance(D_84390204, 3.0f, 500.0f);
@@ -2615,7 +2615,7 @@ void BattleScene_Phase12(CameraNode* arg0) {
                 Vec3f_SetComponentsDuplicate(&sp3C, 0.0f, 200.0f, 0.0f);
                 BattleAnim_Vec3fCopy(&arg0->view.targetPosition, &sp3C);
                 BattleAnim_CleanupEffects(2);
-                ModelAnim_SetAnimation(&D_84390204->unk_000, sp4C->unk_00);
+                ModelAnim_SetAnimation(&D_84390204->display_object, sp4C->unk_00);
                 arg0->perspective.verticalFieldOfView = 60.0f;
                 gBattleScene.unk_00->unk_20 += 1;
             } else {
@@ -2625,7 +2625,7 @@ void BattleScene_Phase12(CameraNode* arg0) {
 
         case 2:
             BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 60.0f, 0.2f);
-            if (D_84390204->unk_000.position.y >= 200.0f) {
+            if (D_84390204->display_object.position.y >= 200.0f) {
                 gBattleScene.unk_00->unk_20 += 1;
             }
             break;
@@ -2662,34 +2662,34 @@ void BattleScene_Phase13(CameraNode* arg0) {
         case 1:
             if (D_84390204->unk_4B8 == 2) {
                 BattleScene_UpdateCameraVerticalFraming(arg0, D_84390204);
-                D_84390204->unk_000.node.renderFlags &= 0xFFBF;
+                D_84390204->display_object.node.renderFlags &= 0xFFBF;
             }
 
-            if ((D_84390204->unk_000.objectType == 0x32) || (D_84390204->unk_000.objectType == 0x33)) {
+            if ((D_84390204->display_object.objectType == 0x32) || (D_84390204->display_object.objectType == 0x33)) {
                 if (BattleScene_IsRowWaitComplete(D_84390204, 0x1E) != 0) {
                     BattleBox_Close();
                     Battle_SetRuntimeFlags(D_84390204, 0x4000);
-                    D_84390204->unk_000.node.renderFlags &= 0xFFDF;
+                    D_84390204->display_object.node.renderFlags &= 0xFFDF;
                     gBattleScene.unk_00->unk_20 += 1;
                 }
             } else if (BattleAnim_IsAssetLoadBusy(D_84390204) == 0) {
-                if (BattleScene_ByteArrayContains(D_84390204->unk_000.objectType, (u8*)&sp24, 2) != 0) {
+                if (BattleScene_ByteArrayContains(D_84390204->display_object.objectType, (u8*)&sp24, 2) != 0) {
                     sp28 = 10.0f;
                 } else {
                     sp28 = 3.5f;
                 }
 
-                if (D_84390204->unk_000.position.y <= (-BattleAnim_GetOwnerModelHeight(D_84390204) * sp28)) {
+                if (D_84390204->display_object.position.y <= (-BattleAnim_GetOwnerModelHeight(D_84390204) * sp28)) {
                     Battle_SetRuntimeFlags(D_84390204, 0x4000);
-                    D_84390204->unk_000.node.renderFlags &= 0xFFDF;
+                    D_84390204->display_object.node.renderFlags &= 0xFFDF;
                     gBattleScene.unk_00->unk_20 += 1;
                 }
             }
             break;
 
         case 2:
-            if ((D_84390204->unk_000.objectType != 0x32) && (D_84390204->unk_000.objectType != 0x33)) {
-                D_84390204->unk_000.node.renderFlags |= 0x40;
+            if ((D_84390204->display_object.objectType != 0x32) && (D_84390204->display_object.objectType != 0x33)) {
+                D_84390204->display_object.node.renderFlags |= 0x40;
             }
             BattleScene_UpdateCameraVerticalFraming(arg0, D_84390204);
             D_84390220 = BattleScene_AnimateDisplayedHpToRuntime(sActivePokemon[gBattleScene.unk_00->unk_2C]);
@@ -2866,7 +2866,7 @@ void BattleScene_Phase16(CameraNode* arg0) {
                 BattleScene_SelectCameraShot(D_84390204, arg0, 3);
                 BattleScene_SetDamageShakeAmplitude(D_84390204);
                 BattleScene_ResetAnimationStep();
-                ModelAnim_SetAnimation(&D_84390204->unk_000, sp1C->unk_00);
+                ModelAnim_SetAnimation(&D_84390204->display_object, sp1C->unk_00);
                 gBattleScene.unk_00->unk_20 += 1;
             }
             break;
@@ -2909,7 +2909,7 @@ void BattleScene_PhaseMoveFailedMessage(CameraNode* arg0) {
                 if (sp1C->unk_34 & 0x200) {
                     BattleScene_SelectCameraShot(D_84390200, arg0, D_84390228 = 2);
                 } else {
-                    if (D_84390200->unk_000.objectType == 0xF) {
+                    if (D_84390200->display_object.objectType == 0xF) {
                         BattleScene_SelectCameraShot(D_84390200, arg0, 0);
                     }
                     BattleScene_SelectCameraShot(D_84390200, arg0, D_84390228 = BattleAnim_RandomRange(2));
@@ -2924,7 +2924,7 @@ void BattleScene_PhaseMoveFailedMessage(CameraNode* arg0) {
             break;
 
         case 1:
-            if ((D_84390200->unk_000.objectType == 0xF) && !(sp1C->unk_34 & 0x200)) {
+            if ((D_84390200->display_object.objectType == 0xF) && !(sp1C->unk_34 & 0x200)) {
                 BattleScene_FrameCamera(arg0, D_84390200);
             }
 
@@ -3342,7 +3342,7 @@ void BattleScene_PhaseWithdrawFainted(CameraNode* arg0) {
                 Audio_FadeAndClearStoredSounds();
                 BattleAnim_CleanupEffects(2);
                 BattleScene_ResetCameraFrameCounter();
-                Vec3f_SetComponentsDuplicate(&temp_s0->unk_000.scale, 1.0f, 1.0f, 1.0f);
+                Vec3f_SetComponentsDuplicate(&temp_s0->display_object.scale, 1.0f, 1.0f, 1.0f);
                 if (sp2C->usedMove == 0xFE) {
                     sp2C->usedMove = 0xA5;
                 }
@@ -3371,7 +3371,7 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
                 BattleAnim_LoadModeResourceList(temp_s0->unk_720, 3);
                 Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
                 Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
-                Vec3f_SetComponentsDuplicate(&temp_s0->unk_000.position, temp_s0->unk_4B0 * -150.0f, 25.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&temp_s0->display_object.position, temp_s0->unk_4B0 * -150.0f, 25.0f, 0.0f);
                 gBattleScene.unk_00->unk_20 += 1;
             } else {
                 BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 30.0f, 0.05f);
@@ -3443,7 +3443,7 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
                 Audio_FadeAndClearStoredSounds();
                 BattleAnim_CleanupEffects(2);
                 BattleScene_ResetCameraFrameCounter();
-                Vec3f_SetComponentsDuplicate(&temp_s0->unk_000.scale, 1.0f, 1.0f, 1.0f);
+                Vec3f_SetComponentsDuplicate(&temp_s0->display_object.scale, 1.0f, 1.0f, 1.0f);
                 if (sp38->unk_2D != 0x10) {
                     gBattleScene.unk_00->unk_34 = 3;
                 }

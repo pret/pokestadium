@@ -24,6 +24,9 @@ s32 gBattleAnimFrameCounter;
 s32 gBattleAnimSpawnDelay;
 static s32 gBattleAnimQueuedMoveId;
 static s32 gBattleAnimQueuedEffectListMode;
+#define BATTLE_ANIMATION_QUEUE_INACTIVE 0
+#define BATTLE_ANIMATION_QUEUE_START 1
+#define BATTLE_ANIMATION_QUEUE_END 2
 static s32 D_843902B4;
 static s32 gBattleAnimQueuedEffectList;
 static s32 D_843902BC;
@@ -4208,7 +4211,7 @@ void BattleAnim_PlayOwnerCry(ActivePokemon* arg0, s16 arg1) {
 }
 
 void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon) {
-    s16 sp1E = active_pokemon->unk_000.objectType;
+    s16 sp1E = active_pokemon->display_object.objectType;
 
     BattleScene_GetParticipantModelWidth(active_pokemon);
     Audio_PlayCommand(0x33, sp1E, 0);
@@ -4219,8 +4222,8 @@ void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon) {
 }
 
 void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2) {
-    func_800479C0(arg1->usedMove, arg0->unk_000.objectType, arg2);
-    func_80040A70(arg1, arg1->usedMove, arg0->unk_000.objectType, arg2);
+    func_800479C0(arg1->usedMove, arg0->display_object.objectType, arg2);
+    func_80040A70(arg1, arg1->usedMove, arg0->display_object.objectType, arg2);
 }
 
 void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
@@ -4595,7 +4598,7 @@ void BattleScene_StartBattleMusic(void) {
 }
 
 void BattleAnim_PlayBattleSequenceById(ActivePokemon* arg0, s32 arg1) {
-    s16 sp1E = arg0->unk_000.objectType;
+    s16 sp1E = arg0->display_object.objectType;
 
     if ((BattleScene_IsPartnerPikachu(arg0) != 0) && (arg1 == 0x32)) {
         Audio_PlayCommand(0x32, 0xC8, 0);
@@ -4699,10 +4702,10 @@ void BattleAnim_RunEffectList(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void BattleAnim_ProcessQueuedEffects(void) {
-    if (gBattleAnimQueuedEffectListMode != 0) {
+    if (gBattleAnimQueuedEffectListMode != BATTLE_ANIMATION_QUEUE_INACTIVE) {
         BattleAnim_ResetSpawnDelayAlias();
         BattleAnim_RunEffectList(gBattleAnimQueuedMoveId, gBattleAnimQueuedEffectList, gBattleAnimQueuedEffectListMode);
-        gBattleAnimQueuedEffectListMode = 0;
+        gBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_INACTIVE;
     }
 
     if (gBattleAnimQueuedAlternatePending != 0) {
@@ -4728,8 +4731,8 @@ void BattleAnim_UpdateFrame(UNUSED CameraNode* arg0) {
     BattleAnim_NoopUpdateHook();
 }
 
-void BattleAnim_SetQueuedEffectList(u8 arg0) {
-    gBattleAnimQueuedEffectList = arg0;
+void BattleAnim_SetQueuedEffectList(u8 effect_list_index) {
+    gBattleAnimQueuedEffectList = effect_list_index;
 }
 
 u8 BattleAnim_GetCurrentEffectList(void) {
@@ -4748,36 +4751,36 @@ s16 BattleAnim_GetQueuedMoveId(void) {
     return gBattleAnimQueuedMoveId;
 }
 
-void BattleAnim_QueueMoveEffect(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
+void BattleAnim_QueueMoveEffect(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
     BattleAnim_SetQueuedEffectList(0);
-    gBattleAnimQueuedEffectListMode = 1;
-    gBattleAnimQueuedMoveId = arg0;
+    gBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_START;
+    gBattleAnimQueuedMoveId = move_id;
     gBattleAnimFrameCounter = 0;
-    gBattleAnimDefaultAnchor = arg3;
-    gBattleAnimAlternateAnchor = arg4;
-    gBattleAnimCurrentOwner = arg1;
-    gBattleAnimSecondaryOwner = arg1;
-    gBattleAnimTertiaryOwner = arg2;
+    gBattleAnimDefaultAnchor = default_anchor;
+    gBattleAnimAlternateAnchor = alternate_anchor;
+    gBattleAnimCurrentOwner = user;
+    gBattleAnimSecondaryOwner = user;
+    gBattleAnimTertiaryOwner = user_fallback;
 }
 
 void BattleAnim_QueueMoveEffectScriptA(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
     BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
 }
 
-void BattleAnim_QueueMoveEffectEnd(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
-    BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
+void BattleAnim_QueueMoveEffectEnd(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
+    BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternate_anchor);
     BattleAnim_SetQueuedEffectList(2);
-    gBattleAnimCurrentOwner = arg2;
-    gBattleAnimQueuedEffectListMode = 2;
+    gBattleAnimCurrentOwner = user_fallback;
+    gBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_END;
 }
 
-void BattleAnim_QueueMoveEffectScriptB(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
-    BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
+void BattleAnim_QueueMoveEffectScriptB(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
+    BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternate_anchor);
     BattleAnim_SetQueuedEffectList(1);
 }
 
-void BattleAnim_QueueEffectList3(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
-    BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
+void BattleAnim_QueueEffectList3(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternative_anchor) {
+    BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternative_anchor);
     BattleAnim_SetQueuedEffectList(3);
 }
 
