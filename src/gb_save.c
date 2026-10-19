@@ -451,12 +451,12 @@ s32 Species_GetMoveSlot(BattleMon* arg0, s32 arg1) {
     s32 var_v1;
 
     if (arg1 == 1) {
-        if (D_80070FA0[temp_v0].unk_06 == D_80070FA0[temp_v0].unk_07) {
+        if (gSpeciesData[temp_v0].type1 == gSpeciesData[temp_v0].type2) {
             return -1;
         }
-        var_v1 = D_80070FA0[temp_v0].unk_07;
+        var_v1 = gSpeciesData[temp_v0].type2;
     } else {
-        var_v1 = D_80070FA0[temp_v0].unk_06;
+        var_v1 = gSpeciesData[temp_v0].type1;
     }
     return var_v1;
 }

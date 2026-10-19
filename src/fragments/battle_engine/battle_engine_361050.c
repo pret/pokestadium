@@ -114,9 +114,9 @@ u8 BattleAI_EstimateCriticalHitChance(BattleMonRuntime* arg0, BattleMonRuntime* 
     s32 var_v1;
 
     if (D_8438AC60[0] == 1) {
-        var_v1 = (D_80070FA0[arg0->unk_0B - 1].unk_04 + 0x4C) >> 2;
+        var_v1 = (gSpeciesData[arg0->unk_0B - 1].baseSpeed + 0x4C) >> 2;
     } else {
-        var_v1 = D_80070FA0[arg0->unk_0B - 1].unk_04 >> 1;
+        var_v1 = gSpeciesData[arg0->unk_0B - 1].baseSpeed >> 1;
     }
 
     if (D_8438AC60[0] != 1) {
@@ -534,7 +534,7 @@ s32 BattleAI_IsTypeMatchupAllowed(u8 arg0, u8 arg1) {
         return 0;
     }
 
-    var_a0 = D_80070FA0[temp_a0].unk_0F[temp_a1 / 8];
+    var_a0 = gSpeciesData[temp_a0].tmHmLearnset[temp_a1 / 8];
 
     switch (arg0) {
         case 0x6:
@@ -616,15 +616,15 @@ u8 BattleAI_ClassifyMoveAvailability(BattleAiMonState* arg0, BattleAiMonState* a
 
     if (((arg1->unk_01 | (arg1->unk_01 >> 4)) ^ 0xF) != 0) {
         for (i = 0; i < 4; i++) {
-            if (arg2 == D_80070FA0[sp30->unk_0B - 1].unk_0A[i]) {
+            if (arg2 == gSpeciesData[sp30->unk_0B - 1].startingMoves[i]) {
                 return 1;
             }
 
-            if ((D_84384588[sp36]->unk_00 != 0) && (arg2 == D_80070FA0[D_84384588[sp36]->unk_00 - 1].unk_0A[i])) {
+            if ((D_84384588[sp36]->unk_00 != 0) && (arg2 == gSpeciesData[D_84384588[sp36]->unk_00 - 1].startingMoves[i])) {
                 return 1;
             }
 
-            if ((D_84384588[sp36]->unk_01 != 0) && (arg2 == D_80070FA0[D_84384588[sp36]->unk_01 - 1].unk_0A[i])) {
+            if ((D_84384588[sp36]->unk_01 != 0) && (arg2 == gSpeciesData[D_84384588[sp36]->unk_01 - 1].startingMoves[i])) {
                 return 1;
             }
         }
@@ -1358,7 +1358,7 @@ s32 BattleAI_ScoreAllCandidateMoves(BattleAiMonState* arg0, BattleAiMonState* ar
         }
 
         if (spD6 == 0) {
-            for (i = 0; i < 4 && (tmp = D_80070FA0[temp_s2->unk_0B - 1].unk_0A[i]); i++) {
+            for (i = 0; i < 4 && (tmp = gSpeciesData[temp_s2->unk_0B - 1].startingMoves[i]); i++) {
                 BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
             }
 
@@ -1369,13 +1369,13 @@ s32 BattleAI_ScoreAllCandidateMoves(BattleAiMonState* arg0, BattleAiMonState* ar
             }
 
             if (D_84384588[var_v0_2]->unk_00 != 0) {
-                for (i = 0; i < 4 && (tmp = D_80070FA0[D_84384588[var_v0_2]->unk_00 - 1].unk_0A[i]); i++) {
+                for (i = 0; i < 4 && (tmp = gSpeciesData[D_84384588[var_v0_2]->unk_00 - 1].startingMoves[i]); i++) {
                     BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
                 }
             }
 
             if (D_84384588[var_v0_2]->unk_01 != 0) {
-                for (i = 0; i < 4 && (tmp = D_80070FA0[D_84384588[var_v0_2]->unk_01 - 1].unk_0A[i]) != 0; i++) {
+                for (i = 0; i < 4 && (tmp = gSpeciesData[D_84384588[var_v0_2]->unk_01 - 1].startingMoves[i]) != 0; i++) {
                     BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
                 }
             }
@@ -3537,7 +3537,7 @@ void BattleAI_InitTeamContext(TeamRoster* arg0, TeamRoster* arg1, BattleAiTeamSt
     u8 i;
     u8 var_v1;
     u8 sp73;
-    PokemonStats* sp6C;
+    SpeciesData* sp6C;
     BattleMon* sp64[2];
     BattleMon* temp_s7;
 
@@ -3558,7 +3558,7 @@ void BattleAI_InitTeamContext(TeamRoster* arg0, TeamRoster* arg1, BattleAiTeamSt
 
         for (j = 0; j < arg2->unk_01[i]; j++) {
             sp73 = temp_s7[j].unk_24;
-            sp6C = &D_80070FA0[temp_s7[j].unk_00.unk_00 - 1];
+            sp6C = &gSpeciesData[temp_s7[j].unk_00.unk_00 - 1];
 
             arg2->unk_14[j + var_v1].unk_00 = j;
             arg2->unk_14[j + var_v1].unk_04 = 0;
@@ -3589,31 +3589,31 @@ void BattleAI_InitTeamContext(TeamRoster* arg0, TeamRoster* arg1, BattleAiTeamSt
             }
 
             if (arg3) {
-                arg2->unk_14[j + var_v1].unk_12.unk_28 = BattleAI_ComputeDifficultyThreshold(sp6C->unk_01, sp73) + sp73 + 5;
+                arg2->unk_14[j + var_v1].unk_12.unk_28 = BattleAI_ComputeDifficultyThreshold(sp6C->baseHitPoints, sp73) + sp73 + 5;
             } else {
                 arg2->unk_14[j + var_v1].unk_12.unk_28 = temp_s7[j].unk_26;
             }
 
             if (arg3) {
-                arg2->unk_14[j + var_v1].unk_12.unk_2A = BattleAI_ComputeDifficultyThreshold(sp6C->unk_02, sp73);
+                arg2->unk_14[j + var_v1].unk_12.unk_2A = BattleAI_ComputeDifficultyThreshold(sp6C->baseAttack, sp73);
             } else {
                 arg2->unk_14[j + var_v1].unk_12.unk_2A = temp_s7[j].unk_28;
             }
 
             if (arg3) {
-                arg2->unk_14[j + var_v1].unk_12.unk_2C = BattleAI_ComputeDifficultyThreshold(sp6C->unk_03, sp73);
+                arg2->unk_14[j + var_v1].unk_12.unk_2C = BattleAI_ComputeDifficultyThreshold(sp6C->baseDefense, sp73);
             } else {
                 arg2->unk_14[j + var_v1].unk_12.unk_2C = temp_s7[j].unk_2A;
             }
 
             if (arg3) {
-                arg2->unk_14[j + var_v1].unk_12.unk_2E = BattleAI_ComputeDifficultyThreshold(sp6C->unk_04, sp73);
+                arg2->unk_14[j + var_v1].unk_12.unk_2E = BattleAI_ComputeDifficultyThreshold(sp6C->baseSpeed, sp73);
             } else {
                 arg2->unk_14[j + var_v1].unk_12.unk_2E = temp_s7[j].unk_2C;
             }
 
             if (arg3) {
-                arg2->unk_14[j + var_v1].unk_12.unk_30 = BattleAI_ComputeDifficultyThreshold(sp6C->unk_05, sp73);
+                arg2->unk_14[j + var_v1].unk_12.unk_30 = BattleAI_ComputeDifficultyThreshold(sp6C->baseSpecial, sp73);
             } else {
                 arg2->unk_14[j + var_v1].unk_12.unk_30 = temp_s7[j].unk_2E;
             }
@@ -5098,15 +5098,15 @@ s32 BattleAI_IsMoveExcludedForSpecies(BattleMonRuntime* arg0, s32 arg1, u8 arg2,
     u8 i;
 
     for (i = 0; i < 4; i++) {
-        if (arg3 == D_80070FA0[arg1 - 1].unk_0A[i]) {
+        if (arg3 == gSpeciesData[arg1 - 1].startingMoves[i]) {
             return 0;
         }
 
-        if ((D_84384588[arg2]->unk_00 != 0) && (arg3 == D_80070FA0[D_84384588[arg2]->unk_00 - 1].unk_0A[i])) {
+        if ((D_84384588[arg2]->unk_00 != 0) && (arg3 == gSpeciesData[D_84384588[arg2]->unk_00 - 1].startingMoves[i])) {
             return 0;
         }
 
-        if ((D_84384588[arg2]->unk_01 != 0) && (arg3 == D_80070FA0[D_84384588[arg2]->unk_01 - 1].unk_0A[i])) {
+        if ((D_84384588[arg2]->unk_01 != 0) && (arg3 == gSpeciesData[D_84384588[arg2]->unk_01 - 1].startingMoves[i])) {
             return 0;
         }
     }

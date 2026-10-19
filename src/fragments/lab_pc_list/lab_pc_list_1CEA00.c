@@ -2091,10 +2091,10 @@ s32 LabPCList_OpenRowMenu(unk_func_8830867C_02C* arg0, Controller* arg1) {
 
                 arg0->unk_C54.unk_14.unk_00 = 1;
 
-                arg0->unk_C54.unk_14.unk_04[0] = D_80070FA0[sp2C].unk_06;
+                arg0->unk_C54.unk_14.unk_04[0] = gSpeciesData[sp2C].type1;
 
-                if (D_80070FA0[sp2C].unk_06 != D_80070FA0[sp2C].unk_07) {
-                    arg0->unk_C54.unk_14.unk_04[1] = D_80070FA0[sp2C].unk_07;
+                if (gSpeciesData[sp2C].type1 != gSpeciesData[sp2C].type2) {
+                    arg0->unk_C54.unk_14.unk_04[1] = gSpeciesData[sp2C].type2;
                     arg0->unk_C54.unk_14.unk_00++;
                 }
             }
