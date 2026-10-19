@@ -539,7 +539,7 @@ void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon) {
         } else {
             if (pokemon_runtime->moveCache.lastMove == WITHDRAW) {
                 // Special Withdraw Animations
-                if ((species != SQUIRTLE_OB1) && (species != WARTORTLE_OB1) && (species != CLOYSTER_OB1) && (species != BLASTOISE_OB1)) {
+                if ((species != WARTORTLE_OB1) && (species != BLASTOISE_OB1) && (species != CLOYSTER_OB1) && (species != SQUIRTLE_OB1)) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 0xC, 0);
                     BattleAnim_PlayMoveEffectScriptA(active_pokemon, pokemon_runtime->usedMove);
                 }
