@@ -178,7 +178,7 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
     s16 sp2A;
     TeamRoster* temp_a1;
 
-    sp2A = arg0->cry;
+    sp2A = arg0->displayModel;
     sp2C.raw = 0;
     if (!(arg0->uniqueStatusFlags & 0x40) && (arg0->uniqueStatusFlags & 0x80)) {
         temp_a1 = arg0->unk_04;

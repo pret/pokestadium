@@ -89,7 +89,7 @@ typedef struct TeamRoster {
 typedef struct BattleSessionTeams {
     /* 0x00 */ u8 uniqueStatusFlags;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s16 cry;
+    /* 0x02 */ s16 displayModel;
     /* 0x04 */ TeamRoster* unk_04;
     /* 0x08 */ TeamRoster* teamMember[2];
     /* 0x10 */ ModelLoadContext* unk_10;

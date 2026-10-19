@@ -266,7 +266,7 @@ ModelNodeView* Battle_GetMoveEffectListEntry(ActivePokemon* arg0, s32 arg1) {
 }
 
 s32 Battle_GetTrainerId(ActivePokemon* arg0, UNUSED s32 arg1) {
-    return arg0->sessionTeams->cry;
+    return arg0->sessionTeams->displayModel;
 }
 
 char* Battle_GetActiveMoveName(ActivePokemon* active_pokemon) {
@@ -589,7 +589,7 @@ void Battle_LoadOwnerModelForSwitchIn(ActivePokemon* active_pokemon) {
 
 void Battle_ResetOwnerModelToNeutralPlaceholder(ActivePokemon* active_pokemon) {
     Model_SetMaterialColor(&active_pokemon->displayObject, 0xFF, 0xFF, 0xFF, active_pokemon->state.unk_2E = 0xFF);
-    active_pokemon->state.unk_BC = active_pokemon->displayObject.objectType;
+    active_pokemon->state.model = active_pokemon->displayObject.objectType;
     BattleScene_ReinitParticipantBodyModel(active_pokemon, active_pokemon, 0x98, 0);
     BattleScene_ReinitParticipantSecondaryModels(active_pokemon, 0x98);
     Battle_ResetEventTrack(active_pokemon);

@@ -54,7 +54,7 @@ typedef struct ActivePokemonState {
     /* 0x38 */ BattleMonRuntime runtime;
     /* 0x9C */ unk_D_84390010_654_09C unk_9C;
     /* 0xAC */ unk_D_84390010_654_0AC unk_AC;
-    /* 0xBC */ s16 unk_BC;
+    /* 0xBC */ s16 model;
     /* 0xBE */ s16 unk_BE;
     /* 0xC0 */ char unkC0[1];
     /* 0xC1 */ u8 moveSlotIllegality[4];

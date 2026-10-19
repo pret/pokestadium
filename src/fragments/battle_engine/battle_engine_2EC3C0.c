@@ -257,14 +257,14 @@ void BattleScene_ReloadMoveResourceList(ActivePokemon* active_pokemon) {
 }
 
 void Battle_MakeSubstitute(ActivePokemon* active_pokemon) {
-    active_pokemon->sessionTeams->cry = SUBSTITUTE_DOLL;
+    active_pokemon->sessionTeams->displayModel = SUBSTITUTE_DOLL;
     active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
 }
 
 void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon) {
     active_pokemon->sessionTeams->unk_04 = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
     active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
-    active_pokemon->sessionTeams->cry = active_pokemon->state.unk_BC;
+    active_pokemon->sessionTeams->displayModel = active_pokemon->state.model;
 }
 
 s32 BattleScene_FindU16InByteArray(u16 lookup_value, u8* array, s32 array_length) {
@@ -955,7 +955,7 @@ void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
     } else if (active_pokemon->unk_4C4 == 1) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             if (active_pokemon->displayObject.objectType >= 0x98) {
-                BattleAnim_PlayOwnerCry(active_pokemon, sp18->unk_BC);
+                BattleAnim_PlayOwnerCry(active_pokemon, sp18->model);
             } else {
                 BattleAnim_PlayOwnerCry(active_pokemon, active_pokemon->displayObject.objectType);
             }
@@ -973,7 +973,7 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     } else if ((active_pokemon->unk_4C4 == 1) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         if (active_pokemon->displayObject.objectType >= 0x98) {
-            Cry_Play(sp24->unk_BC, 3);
+            Cry_Play(sp24->model, 3);
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
             Cry_Play(0xC8, 3);
         } else {
@@ -1008,7 +1008,7 @@ void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
     if ((active_pokemon->unk_4C4 == 1) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         sp24 = &active_pokemon->state;
         if (active_pokemon->displayObject.objectType >= 0x98) {
-            Cry_Play(sp24->unk_BC, 4);
+            Cry_Play(sp24->model, 4);
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
             Cry_Play(0xC8, 4);
         } else {
@@ -1037,7 +1037,7 @@ void BattleScene_TickAssetLoadQueueRowEffectList3(ActivePokemon* active_pokemon)
     ActivePokemonState* temp_v1 = &active_pokemon->state;
 
     if (BattleAnim_TryRegisterAssetTables(active_pokemon) != 0) {
-        active_pokemon->sessionTeams->cry = active_pokemon->state.runtime.id;
+        active_pokemon->sessionTeams->displayModel = active_pokemon->state.runtime.id;
         active_pokemon->unk_4C4 = 0;
         BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[sp24].mode);
         Audio_PlayCommand(3, 0, 0);
