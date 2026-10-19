@@ -30,6 +30,16 @@ typedef struct unk_D_86B10BE0 {
     /* 0x10 */ s32 unk_10;
 } unk_D_86B10BE0; // size >= 0x14
 
+#if !defined(VERSION_JP)
+static u32 D_86B0E2B0[] = {
+    0xA4AAA4E1, 0xA4C7A4C8, 0xA4A6A1AA, 0x20A5C9A1, 0xBCA5C9A1, 0xBCA4CE0A, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4,
+    0xA4F2A5B2, 0xA5C3A5C8, 0xA4C0A1AA, 0x00000000, 0x4742A5D3, 0xA5EBA4CE, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4,
+    0xA4AC0A20, 0x20A5B9A5, 0xD4A1BCA5, 0xC9A5A2A5, 0xC3A5D7A1, 0xAA000000, 0xA4B9A4B4, 0xA4A4A4BE, 0xA1AA20A5,
+    0xC9A1BCA5, 0xC9A5EAA5, 0xAAA4CE0A, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4, 0xA4F2A5B2, 0xA5C3A5C8, 0xA4C0A1AA,
+    0x00000000, 0x4742A5D3, 0xA5EBA4CE, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4, 0xA4AC0AA4, 0xB5A4E9A4, 0xCBA5B9A5,
+    0xD4A1BCA5, 0xC9A5A2A5, 0xC3A5D7A4, 0xC0A1AA00,
+};
+#else
 // EUC-JP dialog lines. The Japanese FirstClearBonus_UpdateDialogSequence formats them directly;
 // the other builds read entries 0x91..0x94 of string table 0x1E instead and leave these unused.
 // Mode 0x16 (Doduo Game Boy):
@@ -38,6 +48,7 @@ static char D_86B0E2E4[] = "GBビルのゲームボーイが\n  スピードア�
 // Other modes (Dodrio Game Boy):
 static char D_86B0E310[] = "すごいぞ！ ドードリオの\nゲームボーイをゲットだ！";
 static char D_86B0E344[] = "GBビルのゲームボーイが\nさらにスピードアップだ！";
+#endif
 
 static u32 D_86B0E374[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E,  0x00000000, 0x014000F0, 0x00000000, 0x00000000, 0x00000118,

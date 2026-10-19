@@ -39,12 +39,21 @@ static s16 D_81304A60;
 static s16 D_81304A62;
 static s32 D_81304A64;
 
+#if !defined(VERSION_JP)
+static u32 D_81303C20[] = {
+    0xA4B3A4CE, 0xA5ABA1BC, 0xA5C8A5EA, 0x0AA5C3A5, 0xB8A4CFA1, 0xA2A4C4A4, 0xAB0AA4A8, 0xA4DEA4BB, 0xA4F3A1A3,
+    0x00000000, 0xA5ECA5DD, 0xA1BCA5C8, 0xA4ACA1A2, 0x0AA4DFA4, 0xC4A4ABA4, 0xEAA4DEA4, 0xBB0AA4F3, 0xA1A30000,
+    0xA5DDA5B1, 0xA5E2A5F3, 0xA5BBA5F3, 0x0AA5BFA1, 0xBCA4C7A1, 0xA2A5ECA5, 0xDD0AA1BC, 0xA5C8A4B5, 0xA4ECA4C6,
+    0xA4A40AA4, 0xDEA4BBA4, 0xF3A1A300, 0xA4BAA4AB, 0xA4F3A4AC, 0xA1A20AA4, 0xA2A4EAA4, 0xDEA4BBA4, 0xF3A1A300,
+};
+#else
 // Port messages for TransferPak_GetPortMessageIndex results 1-4. The JP TransferPak_DrawPortBox prints these
-// directly; the other builds print entries 0x0E-0x11 of string table 0x1F and leave these unreferenced.
+// directly; the other builds print entries 0x0E-0x11 of string table 0x1F and keep the raw blob above.
 static char D_81303C20[] = "このカートリ\nッジは、つか\nえません。";
 static char D_81303C48[] = "レポートが、\nみつかりませ\nん。";
 static char D_81303C68[] = "ポケモンセン\nターで、レポ\nートされてい\nません。";
 static char D_81303C98[] = "ずかんが、\nありません。";
+#endif
 
 static s16 D_81303CB0 = 0;
 
@@ -52,6 +61,9 @@ static u32 D_81303CB4[] = {
     0x0C000000,  0x05000000, 0x0B00002D, 0x00000000, 0x028001E0, 0x00000000, 0xFDBD0000, 0x00000243, 0x05000000,
     0x0D000000,  0x05000000, 0x14000000, 0x002D013B, 0xFFFFFF32, 0x16FFFFFF, 0x0F000002, 0x05000000, 0x0A000000,
     &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000,
+#if !defined(VERSION_JP)
+    0x00000000,
+#endif
 };
 
 #if defined(VERSION_JP)
