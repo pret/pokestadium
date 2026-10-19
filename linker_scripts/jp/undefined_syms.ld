@@ -101,8 +101,9 @@ D_20002C0 = 0x020002C0;
 D_2000300 = 0x02000300;
 D_2000340 = 0x02000340;
 D_2000380 = 0x02000380;
-D_3024C80 = 0x03024C80;
+D_3024C80 = 0x03023A80;
 D_30260C0 = 0x03024EC0;
+D_03004E20_jp = 0x03004E20;
 D_2000B40 = 0x02000B40;
 D_2000B80 = 0x02000B80;
 D_2000BC0 = 0x02000BC0;
@@ -521,8 +522,15 @@ D_3008238 = 0x03008238;
 // D_8006FEE8 = &sPokemonNames[150] = (char*)D_8006FF00 - 0x18.
 // gBaseStats/D_80070F8A point into D_8006FF00[151].
 D_8006FEE8 = 0x80070580;
-// gBaseStats = 0x80070F84; // not found in jp
+gBaseStats = 0x80071624;
 D_80070F8A = 0x8007162A;
+// Fields of the 1-based gBaseStats alias (0x80071624, gb_data .data - 0x1C), addressed
+// by gb_data and fragment assembly: +0x08 baseSpeed, +0x09 baseDefense, +0x13 unk_13.
+// D_8007162A_jp is D_80070F8A (+0x06 baseHP).
+D_8007162A_jp = 0x8007162A;
+D_8007162C_jp = 0x8007162C;
+D_8007162D_jp = 0x8007162D;
+D_80071637_jp = 0x80071637;
 D_800786FD = 0x8007C34D;
 D_3008380 = 0x03007F30;
 D_3008400 = 0x03007FB0;
@@ -609,12 +617,12 @@ D_8006873C = 0x800652FC;
 // D_81229580 = 0x81229580; // not found in jp
 
 // Interior aliases into pokemon_stats.c's D_80073230 packed table.
-// gDexToInternalIndex = 0x80073267; // not found in jp
-// gInternalIndexToDex = 0x800732FF; // not found in jp
+gDexToInternalIndex = 0x8007720B;
+gInternalIndexToDex = 0x800772A3;
 D_800733BF = 0x80077363;
 D_80073457 = 0x800773FB;
-// D_800734EF = 0x800734EF; // not found in jp
-// D_80073597 = 0x80073597; // not found in jp
+D_800734EF = 0x80077493;
+D_80073597 = 0x8007753B;
 D_80073640 = 0x800775F0;
 D_8007364C = 0x800775FC;
 
@@ -647,8 +655,8 @@ D_81229370 = 0x8121EB70;
 // D_812294E0 = 0x812294E0; // not found in jp
 
 // Interior aliases into gb_tower_emulator_86CB0.c's sGbApuRegs.
-// D_8120EA80 = 0x8120EA80; // not found in jp
-// D_8120EA86 = 0x8120EA86; // not found in jp
+D_8120EA80 = 0x8123BF00;
+D_8120EA86 = 0x8123BF06;
 
 // Interior aliases into gb_tower_emulator_7F9A0.c's D_8120D820.
 // D_8120D8FD = 0x8120D8FD; // not found in jp
@@ -1121,9 +1129,9 @@ PROVIDE(D_30239C0 = 0x30239C0);
 PROVIDE(D_3024000 = 0x3024000);
 PROVIDE(D_30242C0 = 0x30230C0);
 PROVIDE(D_30243A0 = 0x30231A0);
-PROVIDE(D_3024480 = 0x3024480);
+PROVIDE(D_3024480 = 0x3023280);
 PROVIDE(D_3024A00 = 0x3029000);
-PROVIDE(D_3024C80 = 0x3024C80);
+PROVIDE(D_3024C80 = 0x3023A80);
 PROVIDE(D_3025200 = 0x3029800);
 PROVIDE(D_30256A0 = 0x30244A0);
 PROVIDE(D_30260C0 = 0x3024EC0);
@@ -1317,12 +1325,8 @@ PROVIDE(D_80072AFB = 0x80076A9B);
 PROVIDE(D_80072AFD = 0x80076A9D);
 PROVIDE(D_80072AFE = 0x80076A9E);
 PROVIDE(D_80072AFF = 0x80076A9F);
-PROVIDE(gDexToInternalIndex = 0x80073267);
-PROVIDE(gInternalIndexToDex = 0x800732FF);
 PROVIDE(D_800733BF = 0x80077363);
 PROVIDE(D_80073457 = 0x800773FB);
-PROVIDE(D_800734EF = 0x800734EF);
-PROVIDE(D_80073597 = 0x80073597);
 PROVIDE(D_80075896 = 0x80075896);
 PROVIDE(D_800758E0 = 0x80079680);
 PROVIDE(D_800758F0 = 0x80079690);
@@ -1366,7 +1370,7 @@ PROVIDE(D_80103834 = 0x80109DF4);
 PROVIDE(gHeap = 0x8010B170);
 PROVIDE(D_81000000 = 0x81000000);
 PROVIDE(D_81100000 = 0x81100000);
-PROVIDE(gGbMemoryMap = 0x811FEB60);
+PROVIDE(gGbMemoryMap = 0x8122BFE0);
 PROVIDE(D_81200000 = 0x81200000);
 PROVIDE(D_81209FBC = 0x81209FBC);
 PROVIDE(D_8120A1CC = 0x8120A1CC);
@@ -1755,7 +1759,6 @@ osMemSize = 0x80000318;
 osAppNMIBuffer = 0x8000031C;
 
 // US names at an address another name has in jp
-PROVIDE(PokeIcon_StartThread = 0x8000E32C);
 PROVIDE(Text_UntranscodeNameWrapper = 0x80021680);
 PROVIDE(Text_TranscodeNameWrapper = 0x80021754);
 PROVIDE(State_N64ddBootUnused = 0x80028870);
@@ -1865,3 +1868,7 @@ func_8C000078 = 0x8C000078;
 // &D_80075BD0[-1] (lab_item.c), which demo_scenes_161590 and fragment17_17DD00 assembly
 // index with a 1-based id; the es/eu/it configs define the same alias.
 D_80075BCC = 0x80079B0C;
+// D_800ABE10.unk_A04.unk_0C and .unk_10 (src/display_object_textures.h), which the
+// Japanese poke_icon assembly addresses directly; the C struct places them at +0xA10/+0xA14.
+D_800B3410_jp = 0x800B3410;
+D_800B3414_jp = 0x800B3414;

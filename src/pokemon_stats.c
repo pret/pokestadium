@@ -6,6 +6,10 @@
 #include "src/hal_libc.h"
 #include "src/util.h"
 
+#if defined(VERSION_JP)
+// The Japanese packed index/flag table (0x42C bytes) is in asm/jp/data/gb_data.data.s.
+extern u8 D_80073230[];
+#else
 // Packed index/flag tables. IDO 4-aligns every global array, so the sub-tables
 // the ROM stores at odd offsets cannot be separate C objects; the other eight
 // symbols are declared as interior aliases in undefined_syms.ld.
@@ -111,28 +115,47 @@ u8 D_80073230[0x420] = {
     /* +0x41C D_8007364C */
     0x00, 0x00, 0x00, 0x00,
 };
+#endif
 
 
 typedef struct unk_func_800228F0_sp24 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u16 unk_02;
+#if defined(VERSION_JP)
+    // Two 6-byte Game Boy names, read with Text_UntranscodeFixedName.
+    /* 0x04 */ char unk_04[0xC];
+} unk_func_800228F0_sp24; // size = 0x10
+#else
     /* 0x04 */ char unk_04[0x10];
     /* 0x14 */ char unk_14[0x8];
 } unk_func_800228F0_sp24; // size >= 0x1C
+#endif
 
 
 extern u8 gDexToInternalIndex[];
 extern u8 gInternalIndexToDex[];
 
+#if !defined(POKEMON_STATS_HEAD_ONLY)
+#if !defined(VERSION_JP)
 static char D_800AC890[4][0x20];
+#endif
 static GbSavePort D_800AC910[4];
 static u32 D_800ACA70;
 static u8 D_800ACA74;
 static u8 D_800ACA75;
 static GbSaveMainData D_800ACA78;
+#if defined(VERSION_JP)
+static u8 D_800ADA38[0x588]; // unreferenced bss
+#else
 static u8 D_800ADA38[0xAA8]; // unreferenced bss
+#endif
+#endif
 
+// The Japanese build compiles the functions from here through Deck_WriteEntries into the
+// gb_data object (gb_data.c includes this file with POKEMON_STATS_HEAD_ONLY defined); the
+// Japanese pokemon_stats object starts at GbSave_HasPlayerNameMarker.
+#if !defined(VERSION_JP) || defined(POKEMON_STATS_HEAD_ONLY)
 u16 Pokemon_LevelFromExp(s32 arg0, u32 arg1) {
     s32 i;
 
@@ -171,6 +194,16 @@ void Pokemon_PrepareBattleMon(BattleMon* arg0) {
     }
 }
 
+#if defined(VERSION_JP)
+// The transcoded name is split across the 3 bytes after each 12-byte name.
+void Pokemon_SetDisplayNameFromOt(BattleMon* arg0) {
+    char sp18[16];
+
+    Text_TranscodeName(sp18, arg0->unk_40);
+    _bcopy(sp18, arg0->unk_3D, 3);
+    _bcopy(sp18 + 3, arg0->unk_4D, 3);
+}
+#else
 void Pokemon_SetDisplayNameFromOt(BattleMon* arg0) {
     UNUSED s32 pad;
     char sp18[11];
@@ -178,6 +211,7 @@ void Pokemon_SetDisplayNameFromOt(BattleMon* arg0) {
     Text_TranscodeName(&sp18, &arg0->unk_3B);
     _bcopy(&sp18, arg0->unk_46, 0xB);
 }
+#endif
 
 s32 VictoryPalace_LoadSpeciesRecord(unk_func_800228F0* arg0, u16 arg1) {
     unk_func_800228F0_sp24 sp24;
@@ -189,7 +223,11 @@ s32 VictoryPalace_LoadSpeciesRecord(unk_func_800228F0* arg0, u16 arg1) {
         arg0->unk_01 = sp24.unk_01;
         arg0->unk_02 = sp24.unk_02;
         Text_UntranscodeFixedName(arg0->unk_04, &sp24.unk_04[0]);
+#if defined(VERSION_JP)
+        Text_UntranscodeFixedName(arg0->unk_14, &sp24.unk_04[6]);
+#else
         Text_UntranscodeFixedName(arg0->unk_14, &sp24.unk_04[0xB]);
+#endif
         var_v1 = 1;
     }
     return var_v1;
@@ -206,13 +244,19 @@ void VictoryPalace_SaveSpeciesRecord(BattleMon* arg0, s16 arg1, u8 arg2) {
     sp24.unk_01 = arg0->unk_24;
     sp24.unk_02 = arg0->unk_0E;
     Text_TranscodeName(sp24.unk_04, arg0->unk_30);
+#if defined(VERSION_JP)
+    Text_TranscodeName(sp24.unk_0A, arg0->unk_40);
+#else
     Text_TranscodeName(sp24.unk_0F, arg0->unk_3B);
+#endif
     Save_WriteTypedRecord(0x13, 0, arg0->unk_00.unk_00 - 1, &sp24);
 }
 
+#if !defined(VERSION_JP)
 s32 GbSave_PlayerIdentityMatches(u16* arg0, GbSavePlayerIdentity* arg1) {
     return !bcmp(arg0, arg1, 0xD);
 }
+#endif
 
 u8 Move_GetIdFromTableIndex(s32 arg0) {
     extern u8 D_80073230[];
@@ -464,7 +508,11 @@ s32 Deck_WriteEntries(u8* arg0, s32 arg1, DeckHandle* arg2) {
 
     return var_s5;
 }
+#endif // !defined(VERSION_JP) || defined(POKEMON_STATS_HEAD_ONLY)
 
+#if !defined(POKEMON_STATS_HEAD_ONLY)
+
+#if !defined(VERSION_JP)
 void Text_LoadPlayerLabels(void) {
     char** sp1C = Text_GetStringTable(0x11);
 
@@ -473,11 +521,27 @@ void Text_LoadPlayerLabels(void) {
     HAL_Strcpy(D_800AC890[2], Text_GetString(NULL, 0, sp1C, 2));
     HAL_Strcpy(D_800AC890[3], Text_GetString(NULL, 0, sp1C, 3));
 }
+#endif
 
+#if !defined(VERSION_JP)
 char* Text_GetPlayerLabel(s32 arg0) {
     return D_800AC890[arg0];
 }
+#endif
 
+#if defined(VERSION_JP)
+s32 GbSave_HasPlayerNameMarker(u8* arg0) {
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        if (*arg0++ == 'P') {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+#else
 s32 GbSave_HasPlayerNameMarker(u8* arg0) {
     s32 i;
 
@@ -489,6 +553,7 @@ s32 GbSave_HasPlayerNameMarker(u8* arg0) {
 
     return 0;
 }
+#endif
 
 s32 GbSave_VerifyChecksum(u8* arg0, u8* arg1) {
     s32 sp1C = 0;
@@ -551,7 +616,12 @@ s8 GbCart_IdentifyGame(s32 arg0) {
     RomHeader sp28;
     s8 var_s0 = POKEMON_ROM_NONE;
 
+#if defined(VERSION_JP)
+    // Japanese build: accepts only Japanese cartridges (country code 0).
+    if ((GbPak_ReadRom(arg0, &sp28, 0x120, sizeof(RomHeader)) == 0) && (sp28.country_code == 0)) {
+#else
     if ((GbPak_ReadRom(arg0, &sp28, 0x120, sizeof(RomHeader)) == 0) && (sp28.country_code == 1)) {
+#endif
         sp28.game_title[7] = '\x0';
         sp28.game_title[16] = '\x0';
 
@@ -577,8 +647,16 @@ s32 GbSave_CheckMainDataUnchanged(s32 arg0) {
     s32 sp18 = 0;
 
     if ((GbPak_MbcRead(arg0, &D_800ACA78, 0x2580, sizeof(GbSaveMainData)) == 0) &&
+#if defined(VERSION_JP)
+        (GbSave_VerifyChecksum(&D_800ACA78.unk_018, &D_800ACA78.unk_1000.unk_14) != 0)) {
+#else
         (GbSave_VerifyChecksum(&D_800ACA78.unk_018, &D_800ACA78.unk_FA0.unk_03) != 0)) {
+#endif
+#if defined(VERSION_JP)
+        sp18 = D_800ACA78.unk_1000.unk_14 == D_800AC910[arg0].unk_04;
+#else
         sp18 = D_800ACA78.unk_FA0.unk_03 == D_800AC910[arg0].unk_04;
+#endif
     }
     return sp18;
 }
@@ -586,19 +664,35 @@ s32 GbSave_CheckMainDataUnchanged(s32 arg0) {
 s32 GbSave_ReadMainData(s32 arg0) {
     s32 i;
     s32 sp30;
+#if defined(VERSION_JP)
+    GbSaveMainData* temp_s4 = D_800AC910[arg0].unk_48;
+#else
     GbSaveMainData* temp_s4 = D_800AC910[arg0].unk_50;
+#endif
 
     sp30 = NULL;
 
     if (GbPak_MbcRead(arg0, temp_s4, 0x2580, sizeof(GbSaveMainData)) == 0) {
         for (i = 0; i < 3; i++) {
+#if defined(VERSION_JP)
+            sp30 = GbSave_VerifyChecksum(&temp_s4->unk_018, &temp_s4->unk_1000.unk_14);
+#else
             sp30 = GbSave_VerifyChecksum(&temp_s4->unk_018, &temp_s4->unk_FA0.unk_03);
+#endif
             if (sp30 != 0) {
                 if (D_800AC910[arg0].unk_00 & 0x20) {
+#if defined(VERSION_JP)
+                    D_800AC910[arg0].unk_04 = temp_s4->unk_1000.unk_14;
+#else
                     D_800AC910[arg0].unk_04 = temp_s4->unk_FA0.unk_03;
+#endif
                     D_800AC910[arg0].unk_00 = D_800AC910[arg0].unk_00 & ~0x20;
                 } else {
+#if defined(VERSION_JP)
+                    sp30 = D_800AC910[arg0].unk_04 == temp_s4->unk_1000.unk_14;
+#else
                     sp30 = D_800AC910[arg0].unk_04 == temp_s4->unk_FA0.unk_03;
+#endif
                 }
                 return sp30;
             }
@@ -611,10 +705,22 @@ s32 GbSave_ReadMainData(s32 arg0) {
 s32 GbSave_WriteMainData(s32 arg0) {
     s32 i;
     GbSavePort* temp_s3;
+#if defined(VERSION_JP)
+    GbSaveMainData* temp_s1 = D_800AC910[arg0].unk_48;
+#else
     GbSaveMainData* temp_s1 = D_800AC910[arg0].unk_50;
+#endif
 
+#if defined(VERSION_JP)
+    GbSave_ComputeChecksum(temp_s1->unk_018, &temp_s1->unk_1000.unk_14);
+#else
     GbSave_ComputeChecksum(temp_s1->unk_018, &temp_s1->unk_FA0.unk_03);
+#endif
+#if defined(VERSION_JP)
+    D_800AC910[arg0].unk_04 = temp_s1->unk_1000.unk_14;
+#else
     D_800AC910[arg0].unk_04 = temp_s1->unk_FA0.unk_03;
+#endif
 
     for (i = 0; i < 4; i++) {
         if ((GbPak_MbcWrite(arg0, temp_s1, 0x2580, sizeof(GbSaveMainData)) == 0) &&
@@ -627,16 +733,40 @@ s32 GbSave_WriteMainData(s32 arg0) {
 }
 
 s32 GbSave_InvalidateMainDataChecksum(s32 arg0) {
+#if defined(VERSION_JP)
+    GbSaveMainData* temp_s3 = D_800AC910[arg0].unk_48;
+#else
     GbSaveMainData* temp_s3 = D_800AC910[arg0].unk_50;
+#endif
     s32 i;
 
+#if defined(VERSION_JP)
+    GbSave_ComputeChecksum(&temp_s3->unk_018, &temp_s3->unk_1000.unk_14);
+#else
     GbSave_ComputeChecksum(&temp_s3->unk_018, &temp_s3->unk_FA0.unk_03);
+#endif
+#if defined(VERSION_JP)
+    temp_s3->unk_1000.unk_14 ^= 0xFF;
+#else
     temp_s3->unk_FA0.unk_03 ^= 0xFF;
+#endif
 
     for (i = 0; i < 4; i++) {
+#if defined(VERSION_JP)
+        if ((GbPak_MbcWrite(arg0, &temp_s3->unk_1000, 0x3580, sizeof(GbSaveChecksumBlock)) == 0) &&
+#else
         if ((GbPak_MbcWrite(arg0, &temp_s3->unk_FA0, 0x3520, sizeof(GbSaveChecksumBlock)) == 0) &&
+#endif
+#if defined(VERSION_JP)
+            (GbPak_MbcRead(arg0, &D_800ACA78, 0x3580, sizeof(GbSaveChecksumBlock)) == 0) &&
+#else
             (GbPak_MbcRead(arg0, &D_800ACA78, 0x3520, sizeof(GbSaveChecksumBlock)) == 0) &&
+#endif
+#if defined(VERSION_JP)
+            (GbSave_VerifyWriteback(&temp_s3->unk_1000, sizeof(GbSaveChecksumBlock)) != 0)) {
+#else
             (GbSave_VerifyWriteback(&temp_s3->unk_FA0, sizeof(GbSaveChecksumBlock)) != 0)) {
+#endif
             return 1;
         }
     }
@@ -645,14 +775,26 @@ s32 GbSave_InvalidateMainDataChecksum(s32 arg0) {
 
 s32 GbSave_ReadBoxBank(s32 arg0, s32 arg1) {
     UNUSED s32 pad[2];
+#if defined(VERSION_JP)
+    GbSaveBoxPair* sp1C = &D_800AC910[arg0].unk_4C->unk_0000[arg1];
+#else
     GbSaveBoxPair* sp1C = &D_800AC910[arg0].unk_54->unk_0000[arg1];
+#endif
 
+#if defined(VERSION_JP)
+    return GbPak_MbcRead(arg0, sp1C, (arg1 == 0) ? 0x4000 : 0x6000, 0x15A0) == 0;
+#else
     return GbPak_MbcRead(arg0, sp1C, (arg1 == 0) ? 0x4000 : 0x6000, 0x1A60) == 0;
+#endif
 }
 
 s32 GbSave_WriteBoxBank(s32 arg0, s32 arg1) {
     s32 var_v0;
+#if defined(VERSION_JP)
+    GbSaveBoxBank* temp_s2 = &D_800AC910[arg0].unk_4C->unk_0000[arg1];
+#else
     GbSaveBoxBank* temp_s2 = &D_800AC910[arg0].unk_54->unk_0000[arg1];
+#endif
     s32 i;
 
     if (arg1 == 0) {
@@ -664,8 +806,16 @@ s32 GbSave_WriteBoxBank(s32 arg0, s32 arg1) {
     var_v0 &= 0xFFFF;
 
     for (i = 0; i < 4; i++) {
+#if defined(VERSION_JP)
+        if ((GbPak_MbcWrite(arg0, temp_s2, var_v0, 0x15A0) == 0) &&
+#else
         if ((GbPak_MbcWrite(arg0, temp_s2, var_v0, 0x1A60) == 0) &&
+#endif
+#if defined(VERSION_JP)
+            (GbPak_MbcRead(arg0, &D_800ACA78, var_v0, 0x15A0) == 0) && (GbSave_VerifyWriteback(temp_s2, 0x15A0) != 0)) {
+#else
             (GbPak_MbcRead(arg0, &D_800ACA78, var_v0, 0x1A60) == 0) && (GbSave_VerifyWriteback(temp_s2, 0x1A60) != 0)) {
+#endif
             return 1;
         }
     }
@@ -678,12 +828,20 @@ void GbSave_ReleasePortBuffers(UNUSED MainPoolBlock* arg0, u32 arg1) {
     if ((arg1 >= 'DAT0') && (arg1 < 'DAT4')) {
         ptr = D_800AC910 + (arg1 - 'DAT0');
 
+#if defined(VERSION_JP)
+        ptr->unk_48 = NULL;
+#else
         ptr->unk_50 = NULL;
+#endif
         ptr->unk_00 &= ~0x9;
     } else if ((arg1 >= 'BOX0') && (arg1 < 'BOX4')) {
         ptr = D_800AC910 + (arg1 - 'BOX0');
 
+#if defined(VERSION_JP)
+        ptr->unk_4C = NULL;
+#else
         ptr->unk_54 = NULL;
+#endif
         ptr->unk_00 &= ~0x12;
     }
 }
@@ -692,7 +850,11 @@ void GbSave_CheckLocationFlag(s32 arg0) {
     extern u8 D_80073640[12];
 
     s32 i;
+#if defined(VERSION_JP)
+    s32 temp_t1 = D_800AC910[arg0].unk_48->unk_080;
+#else
     s32 temp_t1 = D_800AC910[arg0].unk_50->unk_08A;
+#endif
 
     D_800AC910[arg0].unk_00 &= ~0x4000;
 
@@ -712,9 +874,17 @@ s32 GbSave_OpenMainData(s32 arg0) {
         return 1;
     }
 
+#if defined(VERSION_JP)
+    D_800AC910[arg0].unk_48 = main_pool_alloc_with_func(0x1020, 0, arg0 + 'DAT0', GbSave_ReleasePortBuffers);
+#else
     D_800AC910[arg0].unk_50 = main_pool_alloc_with_func(0xFC0, 0, arg0 + 'DAT0', GbSave_ReleasePortBuffers);
+#endif
 
+#if defined(VERSION_JP)
+    if (D_800AC910[arg0].unk_48 != NULL) {
+#else
     if (D_800AC910[arg0].unk_50 != NULL) {
+#endif
         D_800AC910[arg0].unk_00 |= 1;
         if (GbTower_ProbePak(arg0, &sp2F, D_800AC910[arg0].unk_19) == 0) {
             Game_ShutdownAndLoadFragment(arg0, 2);
@@ -726,7 +896,11 @@ s32 GbSave_OpenMainData(s32 arg0) {
         }
 
         if (sp28 == 0) {
+#if defined(VERSION_JP)
+            main_pool_try_free(D_800AC910[arg0].unk_48);
+#else
             main_pool_try_free(D_800AC910[arg0].unk_50);
+#endif
         }
     }
 
@@ -761,9 +935,17 @@ s32 GbSave_OpenBoxData(s32 arg0) {
         return 1;
     }
 
+#if defined(VERSION_JP)
+    D_800AC910[arg0].unk_4C = main_pool_alloc_with_func(sizeof(GbSaveBoxData), 0, arg0 + 'BOX0', GbSave_ReleasePortBuffers);
+#else
     D_800AC910[arg0].unk_54 = main_pool_alloc_with_func(sizeof(GbSaveBoxData), 0, arg0 + 'BOX0', GbSave_ReleasePortBuffers);
+#endif
 
+#if defined(VERSION_JP)
+    if (D_800AC910[arg0].unk_4C != NULL) {
+#else
     if (D_800AC910[arg0].unk_54 != NULL) {
+#endif
         D_800AC910[arg0].unk_00 |= 2;
         if (GbSave_GetBoxCount(arg0) > 0) {
             if (GbTower_ProbePak(arg0, &sp37, D_800AC910[arg0].unk_19) == 0) {
@@ -779,14 +961,34 @@ s32 GbSave_OpenBoxData(s32 arg0) {
             }
 
             if (sp2C == 0) {
+#if defined(VERSION_JP)
+                main_pool_try_free(D_800AC910[arg0].unk_4C);
+#else
                 main_pool_try_free(D_800AC910[arg0].unk_54);
+#endif
             }
         } else {
+#if defined(VERSION_JP)
+            HAL_Memset(D_800AC910[arg0].unk_4C, 0xFF, sizeof(GbSaveBoxData));
+#else
             HAL_Memset(D_800AC910[arg0].unk_54, 0xFF, sizeof(GbSaveBoxData));
+#endif
 
+#if defined(VERSION_JP)
+            for (i = 0; i < 4; i++) {
+#else
             for (i = 0; i < 6; i++) {
+#endif
+#if defined(VERSION_JP)
+                D_800AC910[arg0].unk_4C->unk_0000[0].unk_0000[i].unk_000.unk_000 = 0;
+#else
                 D_800AC910[arg0].unk_54->unk_0000[0].unk_0000[i].unk_000.unk_000 = 0;
+#endif
+#if defined(VERSION_JP)
+                D_800AC910[arg0].unk_4C->unk_0000[1].unk_0000[i].unk_000.unk_000 = 0;
+#else
                 D_800AC910[arg0].unk_54->unk_0000[1].unk_0000[i].unk_000.unk_000 = 0;
+#endif
             }
 
             sp2C = 1;
@@ -866,13 +1068,25 @@ void GbSave_RefreshPortState(s32 arg0) {
     if (GbSave_OpenMainData(arg0) != 0) {
         GbSave_RefreshPlayerIdentity(arg0);
         GbSave_CheckLocationFlag(arg0);
+#if defined(VERSION_JP)
+        D_800AC910[arg0].unk_05 = D_800AC910[arg0].unk_48->unk_955.unk_000;
+#else
         D_800AC910[arg0].unk_05 = D_800AC910[arg0].unk_50->unk_9AC.unk_000;
+#endif
 
+#if defined(VERSION_JP)
+        if (D_800AC910[arg0].unk_48->unk_46D & 0x20) {
+#else
         if (D_800AC910[arg0].unk_50->unk_477 & 0x20) {
+#endif
             D_800AC910[arg0].unk_00 |= 0x2000;
         }
 
+#if defined(VERSION_JP)
+        if (D_800AC910[arg0].unk_48->unk_513 & 1) {
+#else
         if (D_800AC910[arg0].unk_50->unk_51D & 1) {
+#endif
             D_800AC910[arg0].unk_00 |= 0x1000;
         }
 
@@ -903,15 +1117,25 @@ s32 GbSave_ScanAllPorts(void) {
         u64* temp;
 
         var_s0->unk_00 = 0x20;
+#if defined(VERSION_JP)
+        var_s0->unk_48 = NULL;
+#else
         var_s0->unk_50 = NULL;
+#endif
+#if defined(VERSION_JP)
+        var_s0->unk_4C = NULL;
+#else
         var_s0->unk_54 = NULL;
+#endif
         var_s0->unk_03 = 1;
         var_s0->unk_02 = 0;
         var_s0->unk_05 = 0;
 
         temp = &var_s0->unk_40;
         *temp++ = 0x500000000000;
+#if !defined(VERSION_JP)
         *temp++ = 0;
+#endif
 
         if (D_800ACA75 & (1 << i)) {
             var_s0->unk_03 = 2;
@@ -935,10 +1159,18 @@ s32 GbSave_ScanAllPorts(void) {
 }
 
 void GbSave_MarkBoxDataLoaded(s32 arg0) {
+#if defined(VERSION_JP)
+    u16 temp_v0 = GbData_ReadU16BE(&D_800AC910[arg0].unk_48->unk_2C2);
+#else
     u16 temp_v0 = GbData_ReadU16BE(&D_800AC910[arg0].unk_50->unk_2CC);
+#endif
 
     if (!(temp_v0 & 0x8000)) {
+#if defined(VERSION_JP)
+        GbData_WriteU16BE(&D_800AC910[arg0].unk_48->unk_2C2, temp_v0 | 0x8000);
+#else
         GbData_WriteU16BE(&D_800AC910[arg0].unk_50->unk_2CC, temp_v0 | 0x8000);
+#endif
     }
 }
 
@@ -975,7 +1207,11 @@ s32 GbSave_CommitMainData(s32 arg0) {
 
         if (sp28 != 0) {
             GbSave_RefreshPlayerIdentity(arg0);
+#if defined(VERSION_JP)
+            D_800AC910[arg0].unk_05 = D_800AC910[arg0].unk_48->unk_955.unk_000;
+#else
             D_800AC910[arg0].unk_05 = D_800AC910[arg0].unk_50->unk_9AC.unk_000;
+#endif
         }
     }
     return sp28;
@@ -1020,6 +1256,23 @@ void GbSave_RequirePakPresent(s32 arg0) {
     }
 }
 
+#if defined(VERSION_JP)
+GbSaveBoxEntry* GbSave_GetBoxEntry(s32 arg0, s32 arg1) {
+    GbSaveBoxEntry* sp1C = NULL;
+    s32 temp_v0 = GbSave_GetBoxCount(arg0);
+
+    if (temp_v0 > 0) {
+        if (arg1 == (temp_v0 - 1)) {
+            sp1C = &D_800AC910[arg0].unk_48[0].unk_AAD;
+        } else if (arg1 < 4) {
+            sp1C = &D_800AC910[arg0].unk_4C->unk_0000[0].unk_0000[arg1].unk_000;
+        } else {
+            sp1C = &D_800AC910[arg0].unk_4C->unk_0000[0].unk_0000[arg1].unk_008;
+        }
+    }
+    return sp1C;
+}
+#else
 GbSaveBoxEntry* GbSave_GetBoxEntry(s32 arg0, s32 arg1) {
     GbSaveBoxEntry* sp1C = NULL;
     s32 temp_v0 = GbSave_GetBoxCount(arg0);
@@ -1035,7 +1288,26 @@ GbSaveBoxEntry* GbSave_GetBoxEntry(s32 arg0, s32 arg1) {
     }
     return sp1C;
 }
+#endif
 
+#if defined(VERSION_JP)
+// The raw 6-byte Game Boy trainer name is kept in the 3-byte tails at 0x3D and 0x4D.
+void GbSave_LoadMainPokemon(BattleMon* arg0, s32 arg1, s32 arg2) {
+    GbSaveParty* ptr2 = &D_800AC910[arg1].unk_48->unk_955;
+
+    Pokemon_FromGbRecordExt(arg0, &ptr2->unk_008[arg2]);
+    Pokemon_RecalcStats(arg0);
+
+    arg0->unk_3C = 0;
+    arg0->unk_4C = 0;
+    arg0->unk_25 = 0;
+
+    _bcopy(ptr2->unk_110[arg2], arg0->unk_3D, 3);
+    _bcopy(ptr2->unk_110[arg2] + 3, arg0->unk_4D, 3);
+    Text_UntranscodeFixedName(arg0->unk_30, ptr2->unk_134[arg2]);
+    Text_UntranscodeFixedName(arg0->unk_40, ptr2->unk_110[arg2]);
+}
+#else
 void GbSave_LoadMainPokemon(BattleMon* arg0, s32 arg1, s32 arg2) {
     GbSaveParty* ptr2 = &D_800AC910[arg1].unk_50->unk_9AC;
 
@@ -1050,7 +1322,19 @@ void GbSave_LoadMainPokemon(BattleMon* arg0, s32 arg1, s32 arg2) {
     Text_UntranscodeFixedName(arg0->unk_30, ptr2->unk_152[arg2]);
     Text_UntranscodeFixedName(arg0->unk_3B, ptr2->unk_110[arg2]);
 }
+#endif
 
+#if defined(VERSION_JP)
+void GbSave_SaveMainPokemon(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2) {
+    GbSaveParty* sp24 = &D_800AC910[arg1].unk_48->unk_955;
+
+    Pokemon_ToGbRecordExt(arg0, &sp24->unk_008[arg2]);
+    Text_TranscodeName(sp24->unk_134[arg2], arg0->unk_000[0].unk_30);
+    _bcopy(arg0->unk_000[0].unk_3D, sp24->unk_110[arg2], 3);
+    _bcopy(arg0->unk_000[0].unk_4D, sp24->unk_110[arg2] + 3, 3);
+    sp24->unk_001[arg2] = sp24->unk_008[arg2].unk_00.unk_00;
+}
+#else
 void GbSave_SaveMainPokemon(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2) {
     GbSaveParty* sp24 = &D_800AC910[arg1].unk_50->unk_9AC;
 
@@ -1059,7 +1343,27 @@ void GbSave_SaveMainPokemon(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2) {
     _bcopy(arg0->unk_000[0].unk_46, sp24->unk_110[arg2], 0xB);
     sp24->unk_001[arg2] = sp24->unk_008[arg2].unk_00.unk_00;
 }
+#endif
 
+#if defined(VERSION_JP)
+void GbSave_LoadBoxPokemon(BattleMon* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    GbSaveCurrentBox* sp2C = (GbSaveCurrentBox*)GbSave_GetBoxEntry(arg1, arg2);
+
+    if (sp2C != NULL) {
+        Pokemon_FromGbRecord(arg0, &sp2C->unk_020[arg3]);
+        Pokemon_RecalcStats(arg0);
+
+        arg0->unk_3C = 0;
+        arg0->unk_4C = 0;
+        arg0->unk_25 = 0;
+
+        _bcopy(sp2C->unk_3FE[arg3], arg0->unk_3D, 3);
+        _bcopy(sp2C->unk_3FE[arg3] + 3, arg0->unk_4D, 3);
+        Text_UntranscodeFixedName(arg0->unk_30, sp2C->unk_4B2[arg3]);
+        Text_UntranscodeFixedName(arg0->unk_40, sp2C->unk_3FE[arg3]);
+    }
+}
+#else
 void GbSave_LoadBoxPokemon(BattleMon* arg0, s32 arg1, s32 arg2, s32 arg3) {
     GbSaveCurrentBox* sp2C = (GbSaveCurrentBox*)GbSave_GetBoxEntry(arg1, arg2);
 
@@ -1076,7 +1380,22 @@ void GbSave_LoadBoxPokemon(BattleMon* arg0, s32 arg1, s32 arg2, s32 arg3) {
         Text_UntranscodeFixedName(arg0->unk_3B, sp2C->unk_2AA[arg3]);
     }
 }
+#endif
 
+#if defined(VERSION_JP)
+void GbSave_SaveBoxPokemon(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    GbSaveCurrentBox* sp2C = GbSave_GetBoxEntry(arg1, arg2);
+
+    if (sp2C != NULL) {
+        arg0->unk_000[0].unk_04 = arg0->unk_000[0].unk_24;
+        Pokemon_ToGbRecord(arg0->unk_000, &sp2C->unk_020[arg3]);
+        Text_TranscodeName(sp2C->unk_4B2[arg3], arg0->unk_000[0].unk_30);
+        _bcopy(arg0->unk_000[0].unk_3D, sp2C->unk_3FE[arg3], 3);
+        _bcopy(arg0->unk_000[0].unk_4D, sp2C->unk_3FE[arg3] + 3, 3);
+        sp2C->unk_000.unk_001[arg3] = sp2C->unk_020[arg3].unk_00;
+    }
+}
+#else
 void GbSave_SaveBoxPokemon(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2, s32 arg3) {
     GbSaveCurrentBox* sp2C = GbSave_GetBoxEntry(arg1, arg2);
 
@@ -1088,6 +1407,7 @@ void GbSave_SaveBoxPokemon(unk_func_88205880_00D0* arg0, s32 arg1, s32 arg2, s32
         sp2C->unk_000.unk_001[arg3] = sp2C->unk_016[arg3].unk_00;
     }
 }
+#endif
 
 s32 GbSave_GetBoxEntryCount(s32 arg0, s32 arg1) {
     s32 sp1C = 0;
@@ -1137,10 +1457,18 @@ s32 Deck_GetEntrySize(s32 arg0) {
 
     switch (arg0) {
         case 32:
+#if defined(VERSION_JP)
+            ret = 0x50;
+#else
             ret = 0x54;
+#endif
             break;
         case 33:
+#if defined(VERSION_JP)
+            ret = 0x50;
+#else
             ret = 0x54;
+#endif
             break;
         case 34:
             ret = 2;
@@ -1154,11 +1482,19 @@ s32 Deck_GetEntrySize(s32 arg0) {
 
 s32 Deck_GetCount(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1 = 0;
+#if defined(VERSION_JP)
+    GbSaveMainData* ptr = D_800AC910[arg1].unk_48;
+#else
     GbSaveMainData* ptr = D_800AC910[arg1].unk_50;
+#endif
 
     switch (arg0) {
         case 32:
+#if defined(VERSION_JP)
+            var_v1 = ptr->unk_955.unk_000;
+#else
             var_v1 = ptr->unk_9AC.unk_000;
+#endif
             break;
 
         case 33:
@@ -1166,24 +1502,44 @@ s32 Deck_GetCount(s32 arg0, s32 arg1, s32 arg2) {
             break;
 
         case 34:
+#if defined(VERSION_JP)
+            var_v1 = ptr->unk_25C;
+#else
             var_v1 = ptr->unk_266;
+#endif
             break;
 
         case 35:
+#if defined(VERSION_JP)
+            var_v1 = ptr->unk_044;
+#else
             var_v1 = ptr->unk_049;
+#endif
             break;
     }
     return var_v1;
 }
 
 void Deck_DeleteEntry(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+#if defined(VERSION_JP)
+    GbSaveMainData* sp1C = D_800AC910[arg1].unk_48;
+#else
     GbSaveMainData* sp1C = D_800AC910[arg1].unk_50;
+#endif
 
     if (arg3 < Deck_GetCount(arg0, arg1, arg2)) {
         switch (arg0) {
             case 32:
+#if defined(VERSION_JP)
+                sp1C->unk_955.unk_000 = arg3;
+#else
                 sp1C->unk_9AC.unk_000 = arg3;
+#endif
+#if defined(VERSION_JP)
+                sp1C->unk_955.unk_001[arg3] = 0xFF;
+#else
                 sp1C->unk_9AC.unk_001[arg3] = 0xFF;
+#endif
                 break;
 
             case 33:
@@ -1191,20 +1547,40 @@ void Deck_DeleteEntry(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
                 break;
 
             case 34:
+#if defined(VERSION_JP)
+                sp1C->unk_25C = arg3;
+#else
                 sp1C->unk_266 = arg3;
+#endif
+#if defined(VERSION_JP)
+                sp1C->unk_25D[arg3].unk_00 = 0xFF;
+#else
                 sp1C->unk_267[arg3].unk_00 = 0xFF;
+#endif
                 break;
 
             case 35:
+#if defined(VERSION_JP)
+                sp1C->unk_044 = arg3;
+#else
                 sp1C->unk_049 = arg3;
+#endif
+#if defined(VERSION_JP)
+                sp1C->unk_045[arg3].unk_00 = 0xFF;
+#else
                 sp1C->unk_04A[arg3].unk_00 = 0xFF;
+#endif
                 break;
         }
     }
 }
 
 void Deck_AppendEntry(s32 arg0, s32 arg1, s32 arg2) {
+#if defined(VERSION_JP)
+    GbSaveMainData* sp1C = D_800AC910[arg1].unk_48;
+#else
     GbSaveMainData* sp1C = D_800AC910[arg1].unk_50;
+#endif
     s32 sp18 = Deck_GetCount(arg0, arg1, arg2);
 
     if (sp18 < Deck_GetCapacity(arg0)) {
@@ -1212,8 +1588,16 @@ void Deck_AppendEntry(s32 arg0, s32 arg1, s32 arg2) {
 
         switch (arg0) {
             case 32:
+#if defined(VERSION_JP)
+                sp1C->unk_955.unk_000 = sp18;
+#else
                 sp1C->unk_9AC.unk_000 = sp18;
+#endif
+#if defined(VERSION_JP)
+                sp1C->unk_955.unk_001[sp18] = 0xFF;
+#else
                 sp1C->unk_9AC.unk_001[sp18] = 0xFF;
+#endif
                 break;
 
             case 33:
@@ -1221,13 +1605,29 @@ void Deck_AppendEntry(s32 arg0, s32 arg1, s32 arg2) {
                 break;
 
             case 34:
+#if defined(VERSION_JP)
+                sp1C->unk_25C = sp18;
+#else
                 sp1C->unk_266 = sp18;
+#endif
+#if defined(VERSION_JP)
+                sp1C->unk_25D[sp18].unk_00 = 0xFF;
+#else
                 sp1C->unk_267[sp18].unk_00 = 0xFF;
+#endif
                 break;
 
             case 35:
+#if defined(VERSION_JP)
+                sp1C->unk_044 = sp18;
+#else
                 sp1C->unk_049 = sp18;
+#endif
+#if defined(VERSION_JP)
+                sp1C->unk_045[sp18].unk_00 = 0xFF;
+#else
                 sp1C->unk_04A[sp18].unk_00 = 0xFF;
+#endif
                 break;
         }
     }
@@ -1237,7 +1637,11 @@ s32 Deck_ReadEntry(s32 arg0, s32 arg1, s32 arg2, s32 arg3, BattleMon* arg4) {
     s32 sp1C = 0;
 
     if (arg3 < Deck_GetCount(arg0, arg1, arg2)) {
+#if defined(VERSION_JP)
+        GbSaveMainData* temp_v0 = D_800AC910[arg1].unk_48;
+#else
         GbSaveMainData* temp_v0 = D_800AC910[arg1].unk_50;
+#endif
 
         switch (arg0) {
             case 32:
@@ -1249,11 +1653,19 @@ s32 Deck_ReadEntry(s32 arg0, s32 arg1, s32 arg2, s32 arg3, BattleMon* arg4) {
                 break;
 
             case 35:
+#if defined(VERSION_JP)
+                arg4->unk_00 = temp_v0->unk_045[arg3];
+#else
                 arg4->unk_00 = temp_v0->unk_04A[arg3];
+#endif
                 break;
 
             case 34:
+#if defined(VERSION_JP)
+                arg4->unk_00 = temp_v0->unk_25D[arg3];
+#else
                 arg4->unk_00 = temp_v0->unk_267[arg3];
+#endif
                 break;
         }
         sp1C = 1;
@@ -1267,7 +1679,11 @@ s32 Deck_WriteEntry(s32 arg0, s32 arg1, s32 arg2, s32 arg3, unk_func_88205880_00
     s32 sp24 = Deck_GetCount(arg0, arg1, arg2);
 
     if ((arg3 < sp24) || ((arg3 == sp24) && (arg3 < sp28))) {
+#if defined(VERSION_JP)
+        GbSaveMainData* ptr = D_800AC910[arg1].unk_48;
+#else
         GbSaveMainData* ptr = D_800AC910[arg1].unk_50;
+#endif
 
         switch (arg0) {
             case 32:
@@ -1279,11 +1695,19 @@ s32 Deck_WriteEntry(s32 arg0, s32 arg1, s32 arg2, s32 arg3, unk_func_88205880_00
                 break;
 
             case 35:
+#if defined(VERSION_JP)
+                ptr->unk_045[arg3] = arg4->unk_000[0].unk_00;
+#else
                 ptr->unk_04A[arg3] = arg4->unk_000[0].unk_00;
+#endif
                 break;
 
             case 34:
+#if defined(VERSION_JP)
+                ptr->unk_25D[arg3] = arg4->unk_000[0].unk_00;
+#else
                 ptr->unk_267[arg3] = arg4->unk_000[0].unk_00;
+#endif
                 break;
         }
 
@@ -1326,6 +1750,17 @@ s32 GbSave_GetPartyCount(s32 arg0) {
     return D_800AC910[arg0].unk_05;
 }
 
+#if defined(VERSION_JP)
+s32 GbSave_RefreshPlayerIdentity(s32 arg0) {
+    if (!(D_800AC910[arg0].unk_00 & 1)) {
+        return 0;
+    }
+
+    D_800AC910[arg0].unk_40.unk_00 = GbData_ReadU16BE(&D_800AC910[arg0].unk_48->unk_07B);
+    _bcopy(&D_800AC910[arg0].unk_48->unk_018, &D_800AC910[arg0].unk_40.unk_02, 6);
+    return 1;
+}
+#else
 s32 GbSave_RefreshPlayerIdentity(s32 arg0) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return 0;
@@ -1336,7 +1771,16 @@ s32 GbSave_RefreshPlayerIdentity(s32 arg0) {
     bzero(D_800AC910[arg0].unk_40.unk_0D, 3);
     return 1;
 }
+#endif
 
+#if defined(VERSION_JP)
+void GbSave_CopyPlayerIdentity(s32 arg0, GbSavePlayerIdentity* arg1) {
+    u64* ptr = &D_800AC910[arg0].unk_40;
+    u64* ptr2 = arg1;
+
+    *ptr2++ = *ptr++;
+}
+#else
 void GbSave_CopyPlayerIdentity(s32 arg0, GbSavePlayerIdentity* arg1) {
     u64* ptr = &D_800AC910[arg0].unk_40;
     u64* ptr2 = arg1;
@@ -1344,17 +1788,26 @@ void GbSave_CopyPlayerIdentity(s32 arg0, GbSavePlayerIdentity* arg1) {
     *ptr2++ = *ptr++;
     *ptr2++ = *ptr++;
 }
+#endif
 
 s32 GbSave_GetTrainerId(s32 arg0) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return -1;
     }
+#if defined(VERSION_JP)
+    return GbData_ReadU16BE(&D_800AC910[arg0].unk_48->unk_07B);
+#else
     return GbData_ReadU16BE(&D_800AC910[arg0].unk_50->unk_085);
+#endif
 }
 
 void GbSave_SetTrainerId(s32 arg0, u16 arg1) {
     if (D_800AC910[arg0].unk_00 & 1) {
+#if defined(VERSION_JP)
+        GbData_WriteU16BE(&D_800AC910[arg0].unk_48->unk_07B, arg1);
+#else
         GbData_WriteU16BE(&D_800AC910[arg0].unk_50->unk_085, arg1);
+#endif
     }
 }
 
@@ -1363,7 +1816,11 @@ s32 GbSave_GetBoxCount(s32 arg0) {
     s32 phi_v1 = -1;
 
     if (D_800AC910[arg0].unk_00 & 1) {
+#if defined(VERSION_JP)
+        temp_a0 = GbData_ReadU16BE(&D_800AC910[arg0].unk_48->unk_2C2) >> 8;
+#else
         temp_a0 = GbData_ReadU16BE(&D_800AC910[arg0].unk_50->unk_2CC) >> 8;
+#endif
         if (temp_a0 & 0x80) {
             phi_v1 = (temp_a0 & 0x7F) + 1;
         } else {
@@ -1377,35 +1834,55 @@ char* GbSave_GetPlayerName(s32 arg0, char* arg1) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return NULL;
     }
+#if defined(VERSION_JP)
+    return Text_UntranscodeFixedName(arg1, &D_800AC910[arg0].unk_48->unk_018);
+#else
     return Text_UntranscodeFixedName(arg1, &D_800AC910[arg0].unk_50->unk_018);
+#endif
 }
 
 char* GbSave_SetPlayerName(s32 arg0, char* arg1) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return NULL;
     }
+#if defined(VERSION_JP)
+    return Text_TranscodeName(&D_800AC910[arg0].unk_48->unk_018, arg1);
+#else
     return Text_TranscodeName(&D_800AC910[arg0].unk_50->unk_018, arg1);
+#endif
 }
 
 char* GbSave_GetSecondaryName(s32 arg0, char* arg1) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return NULL;
     }
+#if defined(VERSION_JP)
+    return Text_UntranscodeFixedName(arg1, &D_800AC910[arg0].unk_48->unk_071);
+#else
     return Text_UntranscodeFixedName(arg1, &D_800AC910[arg0].unk_50->unk_076);
+#endif
 }
 
 char* GbSave_SetSecondaryName(s32 arg0, char* arg1) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return NULL;
     }
+#if defined(VERSION_JP)
+    return Text_TranscodeName(&D_800AC910[arg0].unk_48->unk_071, arg1);
+#else
     return Text_TranscodeName(&D_800AC910[arg0].unk_50->unk_076, arg1);
+#endif
 }
 
 s32 GbSave_GetStarterChoice(s32 arg0) {
     if (!(D_800AC910[arg0].unk_00 & 1)) {
         return -1;
     }
+#if defined(VERSION_JP)
+    return D_800AC910[arg0].unk_48->unk_437;
+#else
     return D_800AC910[arg0].unk_50->unk_441;
+#endif
 }
 
 s32 GbSave_SavedAtPokemonCenter(s32 arg0) {
@@ -1420,6 +1897,21 @@ s32 GbSave_HasProgressFlag1000(s32 arg0) {
     return (D_800AC910[arg0].unk_00 & 0x1000) != 0;
 }
 
+#if defined(VERSION_JP)
+s32 GbSave_CopyPortSnapshot(s32 arg0, GbSavePortSnapshot* arg1) {
+    s32 temp_v1 = (D_800AC910[arg0].unk_00 & 1) != 0;
+
+    if (temp_v1 != 0) {
+        arg1->unk_000 = D_800AC910[arg0].unk_02;
+        arg1->unk_001 = D_800AC910[arg0].unk_04;
+        arg1->unk_002 = D_800AC910[arg0].unk_40.unk_00;
+
+        _bcopy(D_800AC910[arg0].unk_40.unk_02, arg1->unk_004, sizeof(arg1->unk_004));
+        _bcopy(&D_800AC910[arg0].unk_48->unk_955, (u8*)arg1 + 0xA, sizeof(GbSaveParty));
+    }
+    return temp_v1;
+}
+#else
 s32 GbSave_CopyPortSnapshot(s32 arg0, GbSavePortSnapshot* arg1) {
     s32 temp_v1 = (D_800AC910[arg0].unk_00 & 1) != 0;
 
@@ -1433,6 +1925,7 @@ s32 GbSave_CopyPortSnapshot(s32 arg0, GbSavePortSnapshot* arg1) {
     }
     return temp_v1;
 }
+#endif
 
 void GbSave_MarkSeenBits(char* arg0, s32 arg1, u8* arg2) {
     s32 temp_v0;
@@ -1452,20 +1945,44 @@ void GbSave_MarkSeenBits(char* arg0, s32 arg1, u8* arg2) {
 
 void GbSave_RebuildSeenBitfield(s32 arg0) {
     GbSavePort* ptr = &D_800AC910[arg0];
+#if defined(VERSION_JP)
+    GbSaveMainData* temp_s0 = ptr->unk_48;
+#else
     GbSaveMainData* temp_s0 = ptr->unk_50;
+#endif
     u8* ptr6 = ptr->unk_06;
+#if defined(VERSION_JP)
+    GbSaveBoxBank* ptr541 = &ptr->unk_4C->unk_0000[0];
+#else
     GbSaveBoxBank* ptr541 = &ptr->unk_54->unk_0000[0];
+#endif
+#if defined(VERSION_JP)
+    GbSaveBoxBank* ptr542 = &ptr->unk_4C->unk_0000[1];
+#else
     GbSaveBoxBank* ptr542 = &ptr->unk_54->unk_0000[1];
+#endif
     s32 i;
 
     for (i = 0; i < 19; i++) {
         ptr6[i] = 0;
     }
 
+#if defined(VERSION_JP)
+    GbSave_MarkSeenBits(ptr6, temp_s0->unk_955.unk_000, temp_s0->unk_955.unk_001);
+#else
     GbSave_MarkSeenBits(ptr6, temp_s0->unk_9AC.unk_000, temp_s0->unk_9AC.unk_001);
+#endif
+#if defined(VERSION_JP)
+    GbSave_MarkSeenBits(ptr6, temp_s0->unk_AAD.unk_000.unk_000, temp_s0->unk_AAD.unk_000.unk_001);
+#else
     GbSave_MarkSeenBits(ptr6, temp_s0->unk_B40.unk_000.unk_000, temp_s0->unk_B40.unk_000.unk_001);
+#endif
 
+#if defined(VERSION_JP)
+    for (i = 0; i < 4; i++) {
+#else
     for (i = 0; i < 6; i++) {
+#endif
         GbSave_MarkSeenBits(ptr6, ptr541->unk_0000[i].unk_000.unk_000, ptr541->unk_0000[i].unk_000.unk_001);
         GbSave_MarkSeenBits(ptr6, ptr542->unk_0000[i].unk_000.unk_000, ptr542->unk_0000[i].unk_000.unk_001);
     }
@@ -1478,8 +1995,16 @@ s32 GbSave_GetSpeciesProgressLevel(s32 arg0, s32 arg1) {
     u8* ptr36;
 
     if ((arg1 > 0) && (arg1 < 0x98)) {
+#if defined(VERSION_JP)
+        ptr23 = D_800AC910[arg0].unk_48->unk_01E;
+#else
         ptr23 = D_800AC910[arg0].unk_50->unk_023;
+#endif
+#if defined(VERSION_JP)
+        ptr36 = D_800AC910[arg0].unk_48->unk_031;
+#else
         ptr36 = D_800AC910[arg0].unk_50->unk_036;
+#endif
 
         temp_t1 = (arg1 - 1) / 8;
         temp_t2 = (arg1 - 1) % 8;
@@ -1498,8 +2023,16 @@ void GbSave_SetSeenOwnedBits(s32 arg0, s32 arg1, s32 arg2) {
     u8* temp_v1;
 
     if ((arg1 > 0) && (arg1 < 0x98)) {
+#if defined(VERSION_JP)
+        temp_v0 = D_800AC910[arg0].unk_48->unk_01E;
+#else
         temp_v0 = D_800AC910[arg0].unk_50->unk_023;
+#endif
+#if defined(VERSION_JP)
+        temp_a3 = D_800AC910[arg0].unk_48->unk_031;
+#else
         temp_a3 = D_800AC910[arg0].unk_50->unk_036;
+#endif
         temp_v1 = &D_800AC910[arg0].unk_06;
 
         var_a2 = (arg1 - 1) / 8;
@@ -1530,7 +2063,11 @@ s32 GbSave_CountSpeciesProgressField036(s32 arg0) {
     s32 temp_v1 = 0;
 
     for (i = 0; i < 0x97; i++) {
+#if defined(VERSION_JP)
+        temp_v1 += (D_800AC910[arg0].unk_48->unk_031[i / 8] >> (i % 8)) & 1;
+#else
         temp_v1 += (D_800AC910[arg0].unk_50->unk_036[i / 8] >> (i % 8)) & 1;
+#endif
     }
 
     return temp_v1;
@@ -1541,7 +2078,11 @@ s32 GbSave_CountSpeciesProgressField023(s32 arg0) {
     s32 temp_v1 = 0;
 
     for (i = 0; i < 0x97; i++) {
+#if defined(VERSION_JP)
+        temp_v1 += (D_800AC910[arg0].unk_48->unk_01E[i / 8] >> (i % 8)) & 1;
+#else
         temp_v1 += (D_800AC910[arg0].unk_50->unk_023[i / 8] >> (i % 8)) & 1;
+#endif
     }
 
     return temp_v1;
@@ -1557,3 +2098,6 @@ s32 GbSave_CountSpeciesProgressField06(s32 arg0) {
 
     return temp_v1;
 }
+
+
+#endif // !defined(POKEMON_STATS_HEAD_ONLY)

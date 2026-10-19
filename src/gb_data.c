@@ -6,7 +6,11 @@
 #include "src/gb_tower.h"
 #include "src/hal_libc.h"
 #include "src/util.h"
+#if defined(VERSION_JP)
+#include "src/pokemon_stats.h"
+#endif
 
+#if !defined(VERSION_JP)
 // Name strings for these tables live in status_icons.c.
 extern const char sStatusNames[7][4];
 extern const char sTypeNames[17][4];
@@ -629,6 +633,17 @@ u8 D_80073130[0x100] = {
     197, 0, 0, 0,
 #endif
 };
+#else
+// The Japanese .data (EUC-JP move comments and name tables) is assembled from
+// asm/jp/data/gb_data.data.s; these are the tables the code below reads.
+extern char* D_80072EE0[84];
+// The trainer name "トレーナー" substituted for the Game Boy name code 0x5D.
+// D_80076FD0_jp in the .data blob points here.
+const char D_80080CC0_jp[] = "トレーナー";
+extern char* D_80076FD0_jp;
+// EUC-JP code for each Game Boy character code.
+extern u16 D_80076FD4_jp[0x100];
+#endif
 
 
 u16 GbData_ReadU16BE(u8* arg0) {
@@ -650,6 +665,90 @@ void GbData_WriteU24BE(u8* arg0, s32 arg1) {
     arg0[2] = (arg1) & 0xFF;
 }
 
+#if defined(VERSION_JP)
+// Converts a Game Boy name (terminated by 0x50) to EUC-JP; code 0x5D expands to the
+// 10-byte trainer name D_80076FD0_jp points at.
+char* Text_UntranscodeName(char* arg0, char* arg1) {
+    char* sp34 = arg0;
+
+    while (*arg1 != 'P') {
+        if (*arg1 == ']') {
+            memcpy(arg0, D_80076FD0_jp, 10);
+            arg0 += 10;
+        } else {
+            *arg0++ = (D_80076FD4_jp[*arg1] >> 8) & 0xFF;
+            *arg0++ = D_80076FD4_jp[*arg1] & 0xFF;
+        }
+        arg1++;
+    }
+
+    *arg0++ = '\x0';
+
+    return sp34;
+}
+
+// Converts an EUC-JP name back to Game Boy character codes by searching D_80076FD4_jp;
+// the full-width space 0xA1A1 becomes 0x7F.
+char* Text_TranscodeName(char* arg0, char* arg1) {
+    char* sp1C = arg0;
+    s32 i;
+    u16 c;
+
+    if (HAL_Strcmp(arg1, D_80076FD0_jp) == 0) {
+        *arg0++ = ']';
+    } else {
+        while (*(s8*)arg1 != 0) {
+            c = (((u8*)arg1)[0] << 8) | ((u8*)arg1)[1];
+            if (c == 0xA1A1) {
+                *arg0++ = 0x7F;
+            } else {
+                for (i = 0; i < 0x100; i++) {
+                    if (c == D_80076FD4_jp[i]) {
+                        *arg0++ = i;
+                        break;
+                    }
+                }
+            }
+            arg1 += 2;
+        }
+    }
+
+    *arg0++ = 'P';
+
+    return sp1C;
+}
+
+char* Text_UntranscodeFixedName(char* arg0, char* arg1) {
+    char sp18[6];
+
+    _bcopy(arg1, sp18, 5);
+
+    sp18[5] = 'P';
+
+    return Text_UntranscodeName(arg0, sp18);
+}
+
+// Copies a two-byte EUC-JP string, clearing bit 0 of the first byte of katakana ヘ, ベ, ペ
+// (0xA5D8-0xA5DA) and リ (0xA5EA), which turns them into hiragana へ, べ, ぺ, り.
+s8* Text_CopyString(s8* arg0, s8* arg1) {
+    s8* ret = arg0;
+    u16 c;
+
+    while (*arg1 != 0) {
+        c = (((u8*)arg1)[0] << 8) | ((u8*)arg1)[1];
+        if ((c == 0xA5EA) || ((c >= 0xA5D8) && (c < 0xA5DB))) {
+            *arg0++ = *arg1++ & 0xFE;
+        } else {
+            *arg0++ = *arg1++;
+        }
+        *arg0++ = *arg1++;
+    }
+
+    *arg0 = 0;
+
+    return ret;
+}
+#else
 char* Text_UntranscodeName(char* arg0, char* arg1) {
 
     char* sp34 = arg0;
@@ -712,6 +811,8 @@ char* Text_CopyString(char* arg0, char* arg1) {
     return arg0;
 }
 
+#endif
+
 char* Text_CopySpeciesName(char* arg0, s32 arg1) {
     Text_CopyString(arg0, (char*)*(u32*)D_8006FEE8[arg1]);
     return arg0;
@@ -765,11 +866,11 @@ void Pokemon_FromGbRecord(BattleMon* arg0, GbPokemonRecord* arg1) {
 void Pokemon_FromGbRecordExt(BattleMon* arg0, GbPokemonRecordExt* arg1) {
     Pokemon_FromGbRecord(arg0, &arg1->unk_00);
     arg0->unk_24 = arg1->unk_21;
-    arg0->unk_26 = GbData_ReadU16BE(&arg1->unk_22);
-    arg0->unk_28 = GbData_ReadU16BE(&arg1->unk_24);
-    arg0->unk_2A = GbData_ReadU16BE(&arg1->unk_26);
-    arg0->unk_2C = GbData_ReadU16BE(&arg1->unk_28);
-    arg0->unk_2E = GbData_ReadU16BE(&arg1->unk_2A);
+    arg0->unk_26 = GbData_ReadU16BE(arg1->unk_22);
+    arg0->unk_28 = GbData_ReadU16BE(arg1->unk_24);
+    arg0->unk_2A = GbData_ReadU16BE(arg1->unk_26);
+    arg0->unk_2C = GbData_ReadU16BE(arg1->unk_28);
+    arg0->unk_2E = GbData_ReadU16BE(arg1->unk_2A);
 }
 
 void Pokemon_ToGbRecord(BattleMon* arg0, GbPokemonRecord* arg1) {
@@ -803,11 +904,11 @@ void Pokemon_ToGbRecord(BattleMon* arg0, GbPokemonRecord* arg1) {
 void Pokemon_ToGbRecordExt(unk_func_88205880_00D0* arg0, GbPokemonRecordExt* arg1) {
     Pokemon_ToGbRecord(arg0->unk_000, arg1);
     arg1->unk_21 = arg0->unk_000[0].unk_24;
-    GbData_WriteU16BE(&arg1->unk_22, arg0->unk_000[0].unk_26);
-    GbData_WriteU16BE(&arg1->unk_24, arg0->unk_000[0].unk_28);
-    GbData_WriteU16BE(&arg1->unk_26, arg0->unk_000[0].unk_2A);
-    GbData_WriteU16BE(&arg1->unk_28, arg0->unk_000[0].unk_2C);
-    GbData_WriteU16BE(&arg1->unk_2A, arg0->unk_000[0].unk_2E);
+    GbData_WriteU16BE(arg1->unk_22, arg0->unk_000[0].unk_26);
+    GbData_WriteU16BE(arg1->unk_24, arg0->unk_000[0].unk_28);
+    GbData_WriteU16BE(arg1->unk_26, arg0->unk_000[0].unk_2A);
+    GbData_WriteU16BE(arg1->unk_28, arg0->unk_000[0].unk_2C);
+    GbData_WriteU16BE(arg1->unk_2A, arg0->unk_000[0].unk_2E);
 }
 
 u16 StatExpSqrt(u16 square) {
@@ -953,3 +1054,14 @@ u32 Pokemon_ExpForLevel(s32 arg0, u16 arg1) {
 
     return sp4;
 }
+
+#if defined(VERSION_JP)
+// The Japanese gb_data object continues with pokemon_stats.c's functions from
+// Pokemon_LevelFromExp through Deck_WriteEntries: Pokemon_LevelFromExp starts at ROM 0x22F18
+// and the packed table D_80073230 at 0x77DD4, neither 16-byte aligned, so they cannot start an
+// object. The JP pokemon_stats object starts at GbSave_HasPlayerNameMarker (ROM 0x238B0), and
+// its .rodata (the cartridge title strings) at 0x81930.
+//@src/pokemon_stats.c
+#define POKEMON_STATS_HEAD_ONLY
+#include "pokemon_stats.c"
+#endif

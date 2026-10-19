@@ -52,6 +52,21 @@ typedef struct BattleMon {
     /* 0x2A */ u16 unk_2A;
     /* 0x2C */ u16 unk_2C;
     /* 0x2E */ u16 unk_2E;
+#if defined(VERSION_JP)
+    // Japanese layout: GbSave_LoadBattleMonRecord clears 0x3C and 0x4C, copies 3 bytes of the
+    // GB record to 0x3D and 0x4D each, and untranscodes names into 0x30 and 0x40.
+    // BattleScene_IntroRevealFirstMon also indexes pokemonPicked in 0x50-byte steps and passes
+    // pokemonPicked + 0x30 as the name.
+    //@src/save_data.c
+    //@src/fragments/battle_engine/battle_engine_313250.c
+    /* 0x30 */ u8 unk_30[12];
+    /* 0x3C */ u8 unk_3C;
+    /* 0x3D */ u8 unk_3D[3];
+    /* 0x40 */ u8 unk_40[12];
+    /* 0x4C */ u8 unk_4C;
+    /* 0x4D */ u8 unk_4D[3];
+} BattleMon; // size = 0x50
+#else
     /* 0x30 */ u8 unk_30[11];
     /* 0x3B */ u8 unk_3B[11];
     /* 0x46 */ u8 unk_46[11];
@@ -59,6 +74,7 @@ typedef struct BattleMon {
     /* 0x52 */ u8 unk_52;
     /* 0x53 */ u8 unk_53;
 } BattleMon; // size = 0x54
+#endif
 
 typedef struct ExtendedRosterInfo {
     /* 0x000 */ u16 unk_000;
@@ -68,10 +84,17 @@ typedef struct ExtendedRosterInfo {
     /* 0x014 */ char unk_014[4];
     /* 0x018 */ char unk018[0x10];
     /* 0x028 */ BattleMon unk_028[1];
+#if defined(VERSION_JP)
+    /* 0x078 */ char unk078[0x190];
+    /* 0x208 */ char unk_208[0x4];
+    /* 0x20C */ char unk20C[0x24];
+} ExtendedRosterInfo; // size = 0x230
+#else
     /* 0x07C */ char unk07C[0x1A4];
     /* 0x220 */ char unk_220[0x4];
     /* 0x224 */ char unk224[0x24];
 } ExtendedRosterInfo; // size = 0x248
+#endif
 
 typedef struct TeamRoster {
     /* 0x000 */ u8 unk_000;
@@ -82,9 +105,15 @@ typedef struct TeamRoster {
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;
     /* 0x01C */ BattleMon pokemonPicked[6];
+#if defined(VERSION_JP)
+    /* 0x1FC */ ExtendedRosterInfo* rosterInfo;
+    /* 0x200 */ char unk200[0x4];
+} TeamRoster; // size = 0x204
+#else
     /* 0x214 */ ExtendedRosterInfo* rosterInfo;
     /* 0x218 */ char unk218[0x4];
 } TeamRoster; // size = 0x21C
+#endif
 
 typedef struct BattleSessionTeams {
     /* 0x00 */ u8 uniqueStatusFlags;
@@ -102,22 +131,15 @@ typedef struct BattleSessionTeams {
     /* 0x24 */ arg1_func_80019420* unk_24;
 } BattleSessionTeams; // size = 0x28
 
+// Offsets are for US 1.0. In VERSION_JP, TeamRoster and ExtendedRosterInfo are 0x18 bytes shorter,
+// so rosterInfo starts at 0x0814, battleSides at 0x10D4, and the struct is 0x1138 bytes.
 typedef struct SessionContext {
     /* 0x0000 */ s8 mode;
     /* 0x0001 */ s8 ruleCategory;
     /* 0x0002 */ s8 modeSelection; // Cup division or castle location, depending on mode.
     /* 0x0003 */ s8 roundOrDemoId; // One-based battle round; scene ID in non-battle attract demos.
-#if defined(VERSION_JP)
-    // The Japanese roster structs are 0x18 bytes shorter each: Session_SetMode (asm/jp/status_icons.s)
-    // walks trainerSlots in 0x204-byte steps up to gSessionContext + 0x810, and battleSides starts at
-    // +0x10D4 (D_800B5CA4_jp), leaving 0x230 per rosterInfo entry. Their internal Japanese layouts
-    // are unmapped, so both arrays are raw bytes here. Every later field sits 0xC0 lower in JP.
-    /* 0x0004 */ u8 trainerSlots[4][0x204];
-    /* 0x0814 */ u8 rosterInfo[4][0x230];
-#else
     /* 0x0004 */ TeamRoster trainerSlots[4];
     /* 0x0874 */ ExtendedRosterInfo rosterInfo[4];
-#endif
     /* 0x1194 */ BattleSessionTeams battleSides[2];
     /* 0x11E4 */ u8 opponentHistory[2][4]; // Eight contiguous entries; the first subscript is not a battle side.
     /* 0x11EC */ u8 aiDifficulty; // Free Battle: 0 = Hard, 1 = Normal, 2 = Easy.

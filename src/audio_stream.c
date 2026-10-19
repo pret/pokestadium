@@ -219,11 +219,21 @@ void AudioStream_DmaReadChunk(u32 arg0, u32 arg1, u32 arg2, OSMesgQueue* arg3) {
             var_s1 = arg2;
         }
 
+#if defined(VERSION_JP)
+        sp48.hdr.pri = OS_MESG_PRI_HIGH;
+#else
         sp48.hdr.pri = 0;
+#endif
         sp48.hdr.retQueue = &D_800FCF40;
         sp48.dramAddr = var_s3;
         sp48.devAddr = var_s2;
+#if defined(VERSION_JP)
+        // Each Japanese request spans from the current position to the end of the transfer instead
+        // of one 0x1000-byte chunk, so later iterations reread bytes the previous ones copied.
+        sp48.size = arg2;
+#else
         sp48.size = var_s1;
+#endif
 
         osInvalDCache(arg1, arg2);
         osEPiStartDma(D_800FCF24, &sp48, 0);
@@ -235,118 +245,4 @@ void AudioStream_DmaReadChunk(u32 arg0, u32 arg1, u32 arg2, OSMesgQueue* arg3) {
     }
 
     osSendMesg(arg3, NULL, 1);
-}
-
-void AudioStream_OpenChannel(unk_D_800FCED8* arg0, s32 arg1, s32 arg2) {
-    bzero(&arg0->unk_0000, sizeof(unk_D_800FCED8_0000));
-
-    arg0->unk_0000.gsm.nrp = 0x28;
-    arg0->unk_0190 = arg2;
-    arg0->unk_0194 = arg1;
-
-    osCreateMesgQueue(&arg0->unk_25A0, &arg0->unk_25B8, 1);
-
-    if ((arg1 == 0) || (arg2 == 0)) {
-        arg0->unk_25D1 = 0;
-    } else {
-        arg0->unk_25D1 = 1;
-    }
-
-    arg0->unk_25D0 = 0;
-    arg0->unk_2598 = arg0->unk_259C = arg0->unk_259A = 0;
-    arg0->unk_25BC = 0;
-    arg0->unk_25C4 = 0;
-    arg0->unk_25C0 = 0;
-    arg0->unk_25CC = 0;
-    arg0->unk_25C8 = 0;
-    arg0->unk_25D2 = 2;
-}
-
-void AudioStream_RefillAndDecode(unk_D_800FCED8* arg0) {
-    s32 var_a2;
-    s32 var_s2;
-    u32 var_v1;
-
-    var_s2 = arg0->unk_25D2;
-
-    if ((arg0->unk_25D0 != 0) && (osRecvMesg(&arg0->unk_25A0, NULL, 0) >= 0)) {
-        if (arg0->unk_25C4 == 0) {
-            arg0->unk_2598 = (arg0->unk_1598[0].unk_04 >> 0x10) & 0xFFFF;
-            arg0->unk_259A = arg0->unk_1598[0].unk_04 & 0xFFFF;
-            arg0->unk_259C = arg0->unk_15A0 & 0xFFFFFF;
-            arg0->unk_25BC = 0x60;
-        }
-
-        arg0->unk_25C4 += 0x400;
-        if (arg0->unk_259C >= 0x100) {
-            arg0->unk_259C -= 0x100;
-        } else {
-            arg0->unk_259C = 0;
-        }
-        arg0->unk_25D0 = 0;
-    }
-
-    if ((arg0->unk_25D0 == 0) && ((arg0->unk_25D1 == 1) || (arg0->unk_25D1 == 2) || (arg0->unk_25D1 == 3))) {
-        if ((arg0->unk_25C4 - arg0->unk_25C0) < 0xC01) {
-            if (arg0->unk_25C4 == 0) {
-                var_a2 = 0x400;
-            } else if (arg0->unk_259C >= 0x101) {
-                var_a2 = 0x400;
-            } else {
-                var_a2 = arg0->unk_259C * 4;
-            }
-
-            if (var_a2 > 0) {
-                arg0->unk_25D0 = 1;
-                arg0->unk_0190(arg0->unk_0194 + arg0->unk_25C4, &arg0->unk_1598[(arg0->unk_25C4 & 0xFFF) >> 3], var_a2,
-                               &arg0->unk_25A0);
-            }
-        }
-    }
-
-    var_v1 = arg0->unk_25CC - arg0->unk_25C8;
-    while ((var_v1 < 0x960) && ((arg0->unk_25D1 == 1) || (arg0->unk_2598 > 0)) &&
-           ((arg0->unk_25C4 - arg0->unk_25C0) >= 0x25) && (var_s2 > 0)) {
-        Gsm_Decode_Stream(arg0, arg0->unk_0198.unk_0000 + (((arg0->unk_25CC % 2560) >> 2) * 8));
-        arg0->unk_25C0 = (arg0->unk_25BC >> 3) & ~3;
-        arg0->unk_25CC += 0xA0;
-        arg0->unk_2598--;
-        var_v1 = arg0->unk_25CC - arg0->unk_25C8;
-        var_s2--;
-    }
-
-    if ((arg0->unk_25D1 == 1) && (var_v1 >= 0x8C0)) {
-        arg0->unk_25D1 = 2;
-    }
-}
-
-u32 AudioStream_ConsumeSamples(unk_D_800FCED8* arg0, u32 arg1) {
-    u32 temp_v0;
-    u32 var_a2;
-
-    if (arg0->unk_25D1 == 3) {
-        temp_v0 = arg0->unk_25CC - arg0->unk_25C8;
-        if (arg1 < temp_v0) {
-            var_a2 = arg1;
-        } else {
-            var_a2 = temp_v0;
-            if (arg0->unk_2598 <= 0) {
-                arg0->unk_25D1 = 4;
-            }
-        }
-        arg0->unk_25C8 += var_a2;
-        return var_a2;
-    }
-
-    return 0;
-}
-
-void AudioStream_MarkLoaded(unk_D_800FCED8* arg0) {
-    if (arg0->unk_25D1 == 2) {
-        arg0->unk_25D1 = 3;
-    }
-}
-
-void AudioStream_Abort(unk_D_800FCED8* arg0) {
-    arg0->unk_25D1 = 4;
 }

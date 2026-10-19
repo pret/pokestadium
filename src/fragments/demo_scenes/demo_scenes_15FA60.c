@@ -60,7 +60,11 @@ static GraphNode* D_86B0E5D0;
 static unk_D_86B0E5D4* D_86B0E5D4;
 static unk_D_86B0E5D8* D_86B0E5D8;
 s32 D_86B0E5DC;
+#if !defined(VERSION_JP)
+// String table 0x14, read by Diorama_DrawEndCaption. The Japanese build has neither, and its .bss
+// places D_86B0E5E4 directly after D_86B0E5DC.
 char** D_86B0E5E0;
+#endif
 static BinArchive* D_86B0E5E4;
 static u8* D_86B0E5E8;
 static unk_D_86B0E5F0 D_86B0E5F0[4];
@@ -360,9 +364,16 @@ void Diorama_InitSceneState(void) {
 }
 
 s32 Diorama_UpdateStateMachine(void) {
+    // The Japanese build skips the diorama with A (0x8000) or B (0x4000) only; Start (0x1000) is
+    // not tested (its code has no andi 0x1000 before the A/B tests).
+#if defined(VERSION_JP)
+    if (((gPlayer1Controller->buttonPressed & 0x8000) || (gPlayer1Controller->buttonPressed & 0x4000)) &&
+        (D_86B0E5D4->unk_04.unk_48 == 0)) {
+#else
     if (((gPlayer1Controller->buttonPressed & 0x1000) || (gPlayer1Controller->buttonPressed & 0x8000) ||
          (gPlayer1Controller->buttonPressed & 0x4000)) &&
         (D_86B0E5D4->unk_04.unk_48 == 0)) {
+#endif
         if ((D_86B0E5D4->unk_04.unk_4C != 8) && (D_86B0E5D4->unk_04.unk_4C != 5)) {
             D_86B0E5D4->unk_04.unk_48 = 1;
             Audio_FadeOutAll(0xA);
@@ -478,7 +489,11 @@ void Diorama_RenderFrame(void) {
     Diorama_DrawEndBackgroundTiles(D_86B0E5E8);
     Geo_RenderRootNode(D_86B0E5D0);
     Diorama_DrawFadeOverlay();
+#if !defined(VERSION_JP)
+    // The Japanese build has no Diorama_DrawEndCaption.
+    //@src/fragments/demo_scenes/demo_scenes_161590.c
     Diorama_DrawEndCaption();
+#endif
     BgStage_AdvanceFrame();
 }
 
@@ -536,14 +551,22 @@ s32 Stage_ShowBootDiorama(void) {
     Save_GetModeSettings(&D_86B0EBB8, 0);
     D_86B0E5E4 = ASSET_LOAD2(backgrounds, 1, 1);
 
+    // The Japanese build compares the mode settings with 0x1FE instead of 0x1F8 when choosing
+    // background file 0x11, and loads no string table (no Text_* calls before Diorama_InitScene).
+#if defined(VERSION_JP)
+    if (D_86B0EBB8 == 0x1FE) {
+#else
     if (D_86B0EBB8 == 0x1F8) {
+#endif
         D_86B0E5E8 = BinArchive_GetFile(D_86B0E5E4, 0x11);
     } else {
         D_86B0E5E8 = BinArchive_GetFile(D_86B0E5E4, 0);
     }
 
+#if !defined(VERSION_JP)
     Text_InitStringTables();
     D_86B0E5E0 = Text_GetStringTable(0x14);
+#endif
     Diorama_InitScene();
     StageLoader_UpdateSegments();
     Diorama_RunLoop();

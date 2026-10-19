@@ -115,8 +115,13 @@ s32 GbPak_IsPokemonCartridge(OSGbpakId* header) {
     // make sure its 0 terminated. dont want those dirty hackers abusing a Strcmp exploit
     header->game_title[15] = '\0';
 
+#if defined(VERSION_JP)
+    // Accept only Japanese cartridges (header country code 0).
+    if (header->country_code == 0) {
+#else
     // is the cartridge non-Japanese?
     if (header->country_code == 1) {
+#endif
         // Which supported POKeMON version is this?
         if (HAL_Strcmp((char*)header->game_title, "POKEMON RED") == 0) {
             return 1;
@@ -149,7 +154,12 @@ s32 GbTower_ScanPaks(void) {
     osPfsIsPlug(&gSIEventMesgQueue, &D_800A82A6);
 
     for (i = 0; i < 4; i++) {
+#if defined(VERSION_JP)
+        // Port 3 is probed like the others; there is no Controller_CheckAccessoryEeprom gate.
+        if (D_800A82A6 & (1 << i)) {
+#else
         if ((D_800A82A6 & (1 << i)) && ((i != 3) || (Controller_CheckAccessoryEeprom() == 0))) {
+#endif
             if (osGbpakInit(&gSIEventMesgQueue, &D_800A8100[i], i) == 0) {
                 D_800A82A4 |= (1 << i);
                 temp_v0 = osGbpakReadId(&D_800A8100[i], &sp4C, &status);
@@ -158,9 +168,11 @@ s32 GbTower_ScanPaks(void) {
                         Game_ShutdownAndLoadFragment(i, 2);
                     }
                     if (GbPak_IsPokemonCartridge(&sp4C) != 0) {
+#if !defined(VERSION_JP)
                         if (temp_v0 == 4) {
                             // what. the redundant temp_v0 functionless check is apparently needed to match.
                         }
+#endif
                         if (osGbpakCheckConnector(&D_800A8100[i], &status) == 0) {
                             osGbmbcRamEnable(&D_800A8100[i]);
                             D_800A82A0[i] = 1;
@@ -355,6 +367,42 @@ u8 GbTower_SetPollMask(u8 arg0) {
     return temp_v0;
 }
 
+#if defined(VERSION_JP)
+// Polls one Game Boy pak per call, rotating through ports 0-3. The first
+// osGbpakGetStatus failure on a port enabled by GbTower_SetPollMask latches
+// D_800A82A8 and calls Game_ShutdownAndLoadFragment(port, 1); the per-port
+// failure counter D_800A82AC is not used.
+void GbTower_PollPakConnection(void) {
+    u8 sp1F;
+    static s32 D_800697D0 = 0; // .data
+
+    if (D_800A82A8 == 0) {
+        if (D_800A82A7 & (1 << D_800697D0)) {
+            if (osGbpakGetStatus(&D_800A8100[D_800697D0], &sp1F) != 0) {
+                D_800A82A8 = 1;
+                Game_ShutdownAndLoadFragment(D_800697D0, 1);
+            }
+        }
+        D_800697D0 = (D_800697D0 + 1) & 3;
+    }
+}
+
+// Checks every pak enabled by GbTower_SetPollMask in one call, using the same
+// failure handling as GbTower_PollPakConnection.
+void func_8000B340_jp(void) {
+    s32 i;
+    u8 status;
+
+    for (i = 0; i < 4; i++) {
+        if (D_800A82A7 & (1 << i)) {
+            if (osGbpakGetStatus(&D_800A8100[i], &status) != 0) {
+                D_800A82A8 = 1;
+                Game_ShutdownAndLoadFragment(i, 1);
+            }
+        }
+    }
+}
+#else
 void GbTower_PollPakConnection(void) {
     u8 sp1F;
     static s32 D_800697D0 = 0; // .data
@@ -374,3 +422,4 @@ void GbTower_PollPakConnection(void) {
         D_800697D0 = (D_800697D0 + 1) & 3;
     }
 }
+#endif

@@ -27,7 +27,11 @@ void MiniGame_Dispatch(void) {
     u32 sp60;
     void (*func)(void);
     s32 sp58;
+#if defined(VERSION_JP)
+    UNUSED s32 pad;
+#else
     UNUSED s32 pad[2];
+#endif
 
     main_pool_push_state('KDCM');
 
@@ -35,8 +39,13 @@ void MiniGame_Dispatch(void) {
     var_s0 = 0;
     sp58 = 1;
 
+#if defined(VERSION_JP)
+    // The Japanese build loads the widget toolkit fragment without calling its entry point.
+    FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
+#else
     func = FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
     func();
+#endif
 
     while (sp58 != 0) {
         if ((var_s0 == 0) || (var_s0 == 1) || (var_s0 == 4)) {

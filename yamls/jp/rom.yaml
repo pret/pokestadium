@@ -37,7 +37,7 @@
     - [0x9CA0, c, profiler]
     - [0xAE80, c, math_util]
     - [0xB0B0, c, hal_libc]
-    - [0xB1B0, asm, text_B1B0]
+    - [0xB1B0, c, gb_tower]
     - [0xC010, hasm, exception_set] # exception functions
     - [0xC030, hasm, yay0] # Yay0 decoder
     - [0xC0E0, hasm, abs] # fabsf function; keep the data-section marker distinct from the code symbol
@@ -56,18 +56,24 @@
     - [0x16F40, c, model_animation] #
     - [0x17D80, c, model_animation_events] # dp model animations
     - [0x180C0, c, geo_layout] # dp model animations
-    - [0x19480, asm, display_object_textures]
+    - [0x19480, c, display_object_textures]
     - [0x1A7B0, asm, poke_icon]
     - [0x1CB80, asm, graphics_textures]
     - [0x200E0, c, ui_graphics]
-    - [0x22190, asm, status_icons]
+    - [0x22190, c, status_icons]
+    - [0x22220, c, gb_data]
+    - [0x238B0, c, pokemon_stats]
+    - [0x26150, asm, save_data]
+    - [0x29100, asm, game_state]
+    - [0x2B580, asm, session]
     - [0x2C700, c, table_view]
     - [0x2D400, c, gb_save]
     - [0x2ED60, c, lab_item]
-    - [0x2EEA0, asm, minigame_dispatch]
+    - [0x2EEA0, c, minigame_dispatch]
+    - [0x2F630, asm, gallery]
     - [0x2F650, c, vector_math] # vector/matrix math
     - [0x2FE50, c, battle_hud]
-    - [0x305F0, asm, model_renderer_callbacks]
+    - [0x305F0, c, model_renderer_callbacks]
     - [0x30F40, c, 33E30]
     - [0x310F0, c, 33FE0]
     - [0x34480, c, audio_sfx_wrapper]
@@ -78,7 +84,8 @@
     - [0x40530, c, libnaudio/n_sl]
     - [0x405C0, c, libnaudio/n_synsetpriority]
     - [0x405E0, c, gb_audio]
-    - [0x42730, asm, audio_stream]
+    - [0x42730, c, audio_stream]
+    - [0x432F0, c, audio_stream_channel]
     - [0x436A0, c, gsm_decoder]  # speech code
     - [0x44B10, c, libnaudio/n_synstopvoice]
     - [0x44B80, c, libnaudio/n_env]  # sound code
@@ -107,26 +114,26 @@
     - [0x4D610, c, audio_data]
     - [0x4D750, c, libnaudio/n_synstartvoiceparam]
     - [0x4D830, c, libnaudio/n_synfreevoice]
-    - [0x4D8D0, asm, libnaudio/n_reverb]
+    - [0x4D8D0, c, libnaudio/n_reverb]
     - [0x4E350, c, audio_cache]
     - [0x4E3B0, hasm, 517A0] # yay0 audio decoder
     - [0x4E460, c, libnaudio/n_save]
     - [0x4E4B0, c, libnaudio/n_mainbus]
     - [0x4E730, c, libnaudio/n_synsetvol]
     - [0x4E7D0, c, libleo/readwrite]
-    - [0x4E860, asm, libleo/leofunc]
+    - [0x4E860, c, libleo/leofunc]
     - [0x4ECD0, asm, libleo/leofunc_tail]
     - [0x4ECE0, c, libleo/leoint]
     - [0x4F6D0, pad]
-    - [0x4F6E0, asm, libleo/leocmdex]
+    - [0x4F6E0, c, libleo/leocmdex]
     - [0x4FD70, c, libleo/leoread]
     - [0x4FF30, c, libleo/lbatobyte]
-    - [0x50080, asm, libleo/driverominit]
+    - [0x50080, c, libleo/driverominit]
     - [0x501E0, c, libleo/leoinquiry]
     - [0x50290, c, libleo/leodiskinit]
     - [0x50330, c, libleo/readdiskid]
     - [0x50390, c, libleo/leord_diskid]
-    - [0x50520, asm, libleo/leomecha]
+    - [0x50520, c, libleo/leomecha]
     - [0x50E70, c, libleo/spdlmotor]
     - [0x50F30, c, libleo/leoc2ecc]
     - [0x52020, c, libleo/setrtc]
@@ -257,7 +264,7 @@
     - [0x66370, .data, stage_loader]
     - [0x66D60, .data, crash_screen]
     - [0x66F60, .data, profiler]
-    - [0x66F80, data, gb_tower]
+    - [0x66F80, .data, gb_tower]
     - [0x66F90, .data, math_util]
     - [0x6C7A0, .data, leo]
     - [0x6C7B0, .data, matrix]
@@ -265,14 +272,15 @@
     - [0x6CA50, .data, geo_layout]
     - [0x6CAF0, data, poke_icon]
     - [0x6CC10, .data, ui_graphics]
-    - [0x6CFD0, data, ui_graphics_b]
+    - [0x6CFD0, .data, status_icons]
     - [0x72240, data, gb_data]
+    - [0x78200, data, save_data]
     - [0x78210, data, game_state]
     - [0x7A230, data, session]
     - [0x7A240, .data, gb_save]
     - [0x7A2F0, .data, lab_item]
-    - [0x7A980, data, minigame_dispatch]
-    - [0x7AAC0, data, model_renderer_callbacks]
+    - [0x7A980, .data, minigame_dispatch]
+    - [0x7AAC0, .data, model_renderer_callbacks]
     - [0x7AB40, .data, 33E30]
     - [0x7AC00, .data, 33FE0]
     - [0x7C1C0, .data, audio_commands]
@@ -281,7 +289,7 @@
     - [0x7C640, data, 3D140_2]
     - [0x7CDD0, .data, libnaudio/n_sl]
     - [0x7CDE0, .data, gb_audio]
-    - [0x7CE40, data, audio_stream]
+    - [0x7CE40, .data, audio_stream]
     - [0x7CE50, .data, libnaudio/n_env]
     - [0x7CF50, .data, audio_fade]
     - [0x7D260, .data, audio_stored_fade]
@@ -289,7 +297,10 @@
     - [0x7D2A0, .data, gb_audio_render]
     - [0x7D720, data, text_7D720]
     - [0x7DBB0, data, audio_commands_category2]
-    - [0x7DD40, data, libleo/leocmdex]
+    - [0x7DD20, .data, libnaudio/n_reverb]
+    - [0x7DD30, .data, libleo/leofunc]
+    - [0x7DD40, .data, libleo/leocmdex]
+    - [0x7DDA0, .data, libleo/driverominit]
     - [0x7DDB0, .data, libleo/leord_diskid]
     - [0x7DDD0, .data, libleo/cjcreateleomanager]
     - [0x7DDE0, pad]
@@ -323,15 +334,17 @@
     - [0x7F6E0, rodata, scheduler]
     - [0x7F700, .rodata, crash_screen]
     - [0x7FAC0, .rodata, profiler]
-    - [0x7FAE0, rodata, gb_tower]
+    - [0x7FAE0, .rodata, gb_tower]
     - [0x7FB20, .rodata, leo]
     - [0x7FCA0, .rodata, matrix]
     - [0x7FCB0, rodata, poke_icon]
-    - [0x80DE0, rodata, status_icons]
-    - [0x81930, rodata, pokemon_stats]
+    - [0x7FCE0, .rodata, status_icons]
+    - [0x818C0, .rodata, gb_data]
+    - [0x81930, .rodata, pokemon_stats]
+    - [0x81960, rodata, save_data]
     - [0x81BE0, .rodata, gb_save]
     - [0x81C30, .rodata, lab_item]
-    - [0x83D00, rodata, minigame_dispatch]
+    - [0x83D00, .rodata, minigame_dispatch]
     - [0x83D60, .rodata, vector_math]
     - [0x83DD0, .rodata, 33E30]
     - [0x83E00, .rodata, 33FE0]
@@ -340,7 +353,7 @@
     - [0x84010, .rodata, 3D140]
     - [0x84030, rodata, 3D140_2]
     - [0x84450, .rodata, gb_audio]
-    - [0x844B0, rodata, audio_stream]
+    - [0x844B0, .rodata, audio_stream]
     - [0x844D0, .rodata, libnaudio/n_env]
     - [0x84520, .rodata, audio_fade]
     - [0x84BD0, .rodata, audio_stored_fade]
@@ -351,9 +364,11 @@
     - [0x84D60, rodata, text_84D60]
     - [0x84FC0, rodata, audio_commands_category2]
     - [0x85200, .rodata, libnaudio/n_resample]
-    - [0x85210, rodata, audio_commands_category2_b]
+    - [0x85210, .rodata, libnaudio/n_reverb]
+    - [0x85240, .rodata, libleo/leofunc]
+    - [0x85250, .rodata, libleo/leocmdex]
     - [0x85300, .rodata, libleo/leord_diskid]
-    - [0x85310, rodata, audio_commands_category2_c]
+    - [0x85310, .rodata, libleo/leomecha]
     - [0x85380, .rodata, libleo/leo_tbl]
     - [0x85560, .rodata, libleo/leoc2ecc]
     - [0x85980, .rodata, libleo/leomseq_tbl]
@@ -361,7 +376,7 @@
     - [0x85A20, rodata, lib/setintmask]
     - [0x85AA0, rodata, lib/sinf]
     - [0x85AF0, rodata, lib/exceptasm]
-    - [0x85B40, rodata, libnaudio/n_reverb]
+    - [0x85B40, rodata, lib/reverb]
     - [0x85B70, rodata, lib/perspective]
     - [0x85B80, rodata, lib/devmgr]
     - [0x85BA0, rodata, lib/xprintf]
@@ -390,7 +405,7 @@
     - {vram: 0x800AE060, type: .bss, name: stage_loader}
     - {vram: 0x800AE0D0, type: .bss, name: crash_screen}
     - {vram: 0x800AEAB0, type: .bss, name: profiler}
-    - {vram: 0x800AED10, type: bss, name: gb_tower}
+    - {vram: 0x800AED10, type: .bss, name: gb_tower}
     - {vram: 0x800AEEC0, type: .bss, name: jpeg_decoder}
     - {vram: 0x800AEED0, type: .bss, name: flash}
     - {vram: 0x800AEF90, type: .bss, name: DDC0}
@@ -401,32 +416,32 @@
     - {vram: 0x800B28B0, type: .bss, name: model_animation}
     - {vram: 0x800B28F0, type: .bss, name: model_animation_events}
     - {vram: 0x800B2920, type: .bss, name: geo_layout}
-    - {vram: 0x800B2A00, type: bss, name: display_object_textures}
-    - {vram: 0x800B3400, type: bss, name: pokemon_stats}
+    - {vram: 0x800B2A00, type: .bss, name: display_object_textures}
     - {vram: 0x800B3420, type: bss, name: poke_icon}
     - {vram: 0x800B3430, type: bss, name: model_renderer}
     - {vram: 0x800B3460, type: bss, name: graphics_textures}
     - {vram: 0x800B3470, type: bss, name: input}
+    - {vram: 0x800B3480, type: .bss, name: pokemon_stats}
     - {vram: 0x800B4B70, type: bss, name: save_data}
     - {vram: 0x800B4BB0, type: bss, name: game_state}
     - {vram: 0x800B5D10, type: .bss, name: gb_save}
     - {vram: 0x800B5D30, type: .bss, name: battle_hud}
-    - {vram: 0x800B5D80, type: bss, name: model_renderer_callbacks}
+    - {vram: 0x800B5D80, type: .bss, name: model_renderer_callbacks}
     - {vram: 0x800B9510, type: .bss, name: 33FE0}
     - {vram: 0x800B9860, type: .bss, name: audio_commands}
     - {vram: 0x80102D60, type: .bss, name: libnumus/player}
     - {vram: 0x80102DE0, type: .bss, name: 3D140}
     - {vram: 0x80103300, type: .bss, name: gb_audio}
-    - {vram: 0x80103490, type: bss, name: audio_stream}
+    - {vram: 0x80103490, type: .bss, name: audio_stream}
     - {vram: 0x80103520, type: .bss, name: gb_audio_render}
     - {vram: 0x80105F50, type: .bss, name: rom_device}
     - {vram: 0x80105F70, type: bss, name: audio_loop_point}
     - {vram: 0x80105F80, type: .bss, name: audio_data}
-    - {vram: 0x80105F90, type: bss, name: libleo/leofunc}
-    - {vram: 0x80106C80, type: bss, name: libleo/leocmdex}
+    - {vram: 0x80105F90, type: .bss, name: libleo/leofunc}
+    - {vram: 0x80106C80, type: .bss, name: libleo/leocmdex}
     - {vram: 0x80106CA0, type: .bss, name: libleo/leoint}
-    - {vram: 0x80106CF0, type: bss, name: libleo/leomecha}
-    - {vram: 0x80106D00, type: bss, name: libleo/driverominit}
+    - {vram: 0x80106CF0, type: .bss, name: libleo/leomecha}
+    - {vram: 0x80106D00, type: .bss, name: libleo/driverominit}
     - {vram: 0x80106D80, type: .bss, name: libleo/leodiskinit}
     - {vram: 0x80106E00, type: .bss, name: libleo/leoc2ecc}
     - {vram: 0x80107650, type: .bss, name: libleo/leomseq_tbl}
@@ -473,14 +488,21 @@
     subsegments:
     - [0x86590,  textbin,   fragments/gb_tower_emulator/gb_tower_emulator_header]
     - [0x865B0, asm, fragment1_865B0]
-    - [0x96D20, asm, fragments/gb_tower_emulator/gb_tower_emulator_86C30]
-    - [0x9C320, asm, fragments/gb_tower_emulator/gb_tower_emulator_86CB0]
+    - [0x96D20, c, fragments/gb_tower_emulator/gb_tower_emulator_86C30]
+    - [0x96DA0, asm, fragments/gb_tower_emulator/gb_tower_emulator_96DA0]
+    - [0x9C130, c, fragments/gb_tower_emulator/gb_tower_emulator_86CB0]
+    - [0x9E6A0, asm, fragments/gb_tower_emulator/gb_tower_emulator_9E6A0]
     - [0xA4500, data, fragments/gb_tower_emulator/gb_tower_emulator_data_asm]
-    - [0xDC0C0, data, fragments/1/fragment1_89010]
-    - [0xDE2F0, rodata, fragments/gb_tower_emulator/gb_tower_emulator_86CB0]
+    - [0xC1D50, .data, fragments/gb_tower_emulator/gb_tower_emulator_86C30]
+    - [0xC1D60, data, fragments/gb_tower_emulator/gb_tower_emulator_data_C1D60]
+    - [0xC2470, .data, fragments/gb_tower_emulator/gb_tower_emulator_86CB0]
+    - [0xDC0B0, data, fragments/1/fragment1_89010]
+    - [0xDE2F0, .rodata, fragments/gb_tower_emulator/gb_tower_emulator_86CB0]
     - {vram: 0x81257FC0, type: bss, name: fragments/gb_tower_emulator/gb_tower_emulator_7F9A0}
-    - {vram: 0x81259570, type: bss, name: fragments/gb_tower_emulator/gb_tower_emulator_86CB0}
+    - {vram: 0x81259570, type: bss, name: fragments/gb_tower_emulator/gb_tower_emulator_bss_81259570}
     - {vram: 0x8125E230, type: bss, name: fragments/gb_tower_emulator/gb_tower_emulator_86920}
+    - {vram: 0x81283BA0, type: .bss, name: fragments/gb_tower_emulator/gb_tower_emulator_86CB0}
+    - {vram: 0x812875A0, type: bss, name: fragments/gb_tower_emulator/gb_tower_emulator_bss_812875A0}
   - name: fragment1_relocs
     type: code
     bss_size: 0x0
@@ -703,12 +725,13 @@
     subsegments:
     - [0x15A7A0, textbin,   fragments/dynamo_game/dynamo_game_header]
     - [0x15A7C0, asm, fragments/dynamo_game/dynamo_game]
-    - [0x15C750, asm, fragments/dynamo_game/dynamo_game_1]
+    - [0x15C750, c, fragments/dynamo_game/dynamo_game_1]
     - [0x15D000, c,      fragments/dynamo_game/dynamo_game_2]
     - [0x15D260, data, fragments/dynamo_game/dynamo_game]
-    - [0x15D590, data, fragments/dynamo_game/dynamo_game_1]
+    - [0x15D590, .data, fragments/dynamo_game/dynamo_game_1]
     - [0x163810, .data,   fragments/dynamo_game/dynamo_game_2]
     - [0x1638B0, data, fragment11_1638B0]
+    - [0x163A40, .rodata, fragments/dynamo_game/dynamo_game_1]
     - [0x163A50, .rodata, fragments/dynamo_game/dynamo_game_2]
     - {vram: 0x865092D0, type:  bss, name: fragments/dynamo_game/dynamo_game}
     - {vram: 0x8650AD70, type:  .bss, name: fragments/dynamo_game/dynamo_game_2}
@@ -834,8 +857,8 @@
     vram: 0x86B00000
     subsegments:
     - [0x1783A0, textbin,   fragments/demo_scenes/demo_scenes_header]
-    - [0x1783C0, asm, fragments/demo_scenes/demo_scenes_15F9B0]
-    - [0x178470, asm, fragments/demo_scenes/demo_scenes_15FA60]
+    - [0x1783C0, c, fragments/demo_scenes/demo_scenes_15F9B0]
+    - [0x178470, c, fragments/demo_scenes/demo_scenes_15FA60]
     - [0x179690, c, fragments/demo_scenes/demo_scenes_160CB0]
     - [0x1799E0, c,      fragments/demo_scenes/demo_scenes_161000]
     - [0x179F70, c, fragments/demo_scenes/demo_scenes_161590]
@@ -845,27 +868,28 @@
     - [0x1807B0, c, fragments/demo_scenes/demo_scenes_168110]
     - [0x180E80, c,      fragments/demo_scenes/demo_scenes_1687E0]
     - [0x181BB0, c,      fragments/demo_scenes/demo_scenes_169510]
-    - [0x1820E0, asm, fragments/demo_scenes/demo_scenes_169A40]
-    - [0x182780, asm, fragments/demo_scenes/demo_scenes_16A0E0]
-    - [0x183BF0, data, fragments/demo_scenes/demo_scenes_15FA60]
+    - [0x1820E0, c, fragments/demo_scenes/demo_scenes_169A40]
+    - [0x182780, c, fragments/demo_scenes/demo_scenes_16A0E0]
+    - [0x183BF0, .data, fragments/demo_scenes/demo_scenes_15FA60]
     - [0x183D50, data, fragments/demo_scenes/demo_scenes_161E60]
     - [0x185E80, data, fragments/demo_scenes/demo_scenes_165640]
     - [0x186160, .data, fragments/demo_scenes/demo_scenes_168110]
     - [0x186170, .data,   fragments/demo_scenes/demo_scenes_1687E0]
-    - [0x1863F0, data, fragments/demo_scenes/demo_scenes_169A40]
-    - [0x186450, data, fragments/demo_scenes/demo_scenes_16A0E0]
-    - [0x1865B0, rodata, fragments/demo_scenes/demo_scenes_15FA60]
+    - [0x1863F0, .data, fragments/demo_scenes/demo_scenes_169A40]
+    - [0x186450, .data, fragments/demo_scenes/demo_scenes_16A0E0]
+    - [0x186580, .rodata, fragments/demo_scenes/demo_scenes_15F9B0]
+    - [0x1865B0, .rodata, fragments/demo_scenes/demo_scenes_15FA60]
     - [0x1865E0, .rodata, fragments/demo_scenes/demo_scenes_160CB0]
     - [0x186600, rodata, fragments/demo_scenes/demo_scenes_15FA60_b]
     - [0x186620, rodata, fragments/demo_scenes/demo_scenes_161E60]
     - [0x1866D0, rodata, fragments/demo_scenes/demo_scenes_165640]
-    - [0x186760, rodata, fragments/demo_scenes/demo_scenes_16A0E0]
-    - {vram: 0x86B0E3F0, type: bss, name: fragments/demo_scenes/demo_scenes_15FA60}
+    - [0x186760, .rodata, fragments/demo_scenes/demo_scenes_16A0E0]
+    - {vram: 0x86B0E3F0, type: .bss, name: fragments/demo_scenes/demo_scenes_15FA60}
     - {vram: 0x86B0E9E0, type: bss, name: fragments/demo_scenes/demo_scenes_161E60}
     - {vram: 0x86B0F7F0, type: bss, name: fragments/demo_scenes/demo_scenes_165640}
     - {vram: 0x86B104C0, type: .bss, name: fragments/demo_scenes/demo_scenes_1687E0}
-    - {vram: 0x86B104D0, type: bss, name: fragments/demo_scenes/demo_scenes_169A40}
-    - {vram: 0x86B10650, type: bss, name: fragments/demo_scenes/demo_scenes_16A0E0}
+    - {vram: 0x86B104D0, type: .bss, name: fragments/demo_scenes/demo_scenes_169A40}
+    - {vram: 0x86B10660, type: .bss, name: fragments/demo_scenes/demo_scenes_16A0E0}
   - name: fragment17_relocs
     type: code
     bss_size: 0x0
@@ -900,8 +924,10 @@
     vram: 0x86D00000
     subsegments:
     - [0x198290, textbin,   fragments/ranking_debug_test/ranking_debug_test_header]
-    - [0x1982B0, asm, fragments/ranking_debug_test/ranking_debug_test]
-    - [0x1987C0, data, fragments/ranking_debug_test/ranking_debug_test]
+    - [0x1982B0, c, fragments/ranking_debug_test/ranking_debug_test]
+    - [0x1987C0, .data, fragments/ranking_debug_test/ranking_debug_test]
+    - [0x198850, .rodata, fragments/ranking_debug_test/ranking_debug_test]
+    - {vram: 0x86D005D0, type: .bss, name: fragments/ranking_debug_test/ranking_debug_test}
   - name: fragment19_relocs
     type: code
     bss_size: 0x0
@@ -1019,8 +1045,9 @@
     vram: 0x88400000
     subsegments:
     - [0x201A20, textbin, fragments/pokemon_lab_support/pokemon_lab_support_header]
-    - [0x201A40, asm, fragments/pokemon_lab_support/pokemon_lab_support]
-    - [0x201B20, data, fragments/pokemon_lab_support/pokemon_lab_support]
+    - [0x201A40, c, fragments/pokemon_lab_support/pokemon_lab_support]
+    - [0x201B20, .data, fragments/pokemon_lab_support/pokemon_lab_support]
+    - [0x201C20, .rodata, fragments/pokemon_lab_support/pokemon_lab_support]
   - name: fragment25_relocs
     type: code
     bss_size: 0x0
@@ -1152,7 +1179,7 @@
     subsegments:
     - [0x26A8B0, textbin,   fragments/particle_data_library/particle_data_library_header]
     - [0x26A8D0, textbin,    fragments/31/fragment31_unk_table] # what is this?
-    - [0x26AAB0, asm, fragments/particle_data_library/particle_data_library_2554C0]
+    - [0x26AAB0, c, fragments/particle_data_library/particle_data_library_2554C0]
     - [0x26AD90, c,      fragments/particle_data_library/particle_data_library_2557A0]
     - [0x26AEA0, asm, fragment31_26AEA0]
     - [0x26C6C0, c,      fragments/particle_data_library/particle_data_library_257750]
@@ -1164,11 +1191,12 @@
     - [0x26CFF0, c, fragments/particle_data_library/particle_data_library_258080]
     - [0x26DFB0, c,      fragments/particle_data_library/particle_data_library_259030]
     - [0x26E040, c,      fragments/particle_data_library/particle_data_library_2590C0]
-    - [0x26E210, data, fragments/particle_data_library/particle_data_library_2554C0]
+    - [0x26E210, .data, fragments/particle_data_library/particle_data_library_2554C0]
     - [0x26E220, data, fragments/particle_data_library/particle_data_library_2558B0]
     - [0x26E350, .data,  fragments/particle_data_library/particle_data_library_2577F0]
     - [0x26E370, .data, fragments/particle_data_library/particle_data_library_258080]
-    - [0x26E3A0, rodata, fragments/particle_data_library/particle_data_library_2554C0]
+    - [0x26E3A0, .rodata, fragments/particle_data_library/particle_data_library_2554C0]
+    - [0x26E3F0, rodata, fragments/particle_data_library/particle_data_library_2558B0]
     - [0x26E890, .rodata, fragments/particle_data_library/particle_data_library_258080]
     - {vram: 0x81003FF0, type: bss, name: fragments/particle_data_library/particle_data_library_2558B0}
     - {vram: 0x81004370, type: .bss, name: fragments/particle_data_library/particle_data_library_2577F0}
@@ -1207,8 +1235,10 @@
     vram: 0x81300000
     subsegments:
     - [0x26FE30, textbin,   fragments/transfer_pak_select/transfer_pak_select_header]
-    - [0x26FE50, asm, fragment33_26FE50]
-    - {vram: 0x81303EC0, type:  bss, name: fragments/transfer_pak_select/transfer_pak_select}
+    - [0x26FE50, c,       fragments/transfer_pak_select/transfer_pak_select]
+    - [0x2738D0, .data,   fragments/transfer_pak_select/transfer_pak_select]
+    - [0x273C10, .rodata, fragments/transfer_pak_select/transfer_pak_select]
+    - {vram: 0x81303EC0, type:  .bss, name: fragments/transfer_pak_select/transfer_pak_select}
   - name: fragment33_relocs
     type: code
     bss_size: 0x0
@@ -1451,9 +1481,9 @@
     vram: 0x82A00000
     subsegments:
     - [0x2BB7D0, textbin, fragments/gb_tower_team_prep/gb_tower_team_prep_header]
-    - [0x2BB7F0, asm, fragments/gb_tower_team_prep/gb_tower_team_prep]
-    - [0x2BBB30, data, fragments/gb_tower_team_prep/gb_tower_team_prep]
-    - {vram: 0x82A00370, type:  bss, name: fragments/gb_tower_team_prep/gb_tower_team_prep}
+    - [0x2BB7F0, c, fragments/gb_tower_team_prep/gb_tower_team_prep]
+    - [0x2BBB30, .data, fragments/gb_tower_team_prep/gb_tower_team_prep]
+    - {vram: 0x82A00370, type:  .bss, name: fragments/gb_tower_team_prep/gb_tower_team_prep}
   - name: fragment53_relocs
     type: code
     bss_size: 0x0
@@ -1527,10 +1557,10 @@
     vram: 0x82D00000
     subsegments:
     - [0x2C3FC0, textbin,   fragments/transfer_pak_check/transfer_pak_check_header]
-    - [0x2C3FE0, asm, fragment57_2C3FE0]
-    - [0x2CA600, data, fragments/transfer_pak_check/transfer_pak_check]
-    - [0x2CD110, rodata, fragments/transfer_pak_check/transfer_pak_check]
-    - {vram: 0x82D09900, type:  bss, name: fragments/transfer_pak_check/transfer_pak_check}
+    - [0x2C3FE0, c, fragments/transfer_pak_check/transfer_pak_check]
+    - [0x2CA590, .data, fragments/transfer_pak_check/transfer_pak_check]
+    - [0x2CD180, .rodata, fragments/transfer_pak_check/transfer_pak_check]
+    - {vram: 0x82D09900, type: .bss, name: fragments/transfer_pak_check/transfer_pak_check}
   - name: fragment57_relocs
     type: code
     bss_size: 0x0
@@ -1583,9 +1613,10 @@
     vram: 0x82E00000
     subsegments:
     - [0x2D4F60, textbin,   fragments/cup_select/cup_select_header]
-    - [0x2D4F80, asm, fragments/cup_select/cup_select]
-    - [0x2D6070, data, fragments/cup_select/cup_select]
-    - {vram: 0x82E019B0, type:  bss, name: fragments/cup_select/cup_select}
+    - [0x2D4F80, c, fragments/cup_select/cup_select]
+    - [0x2D6070, .data, fragments/cup_select/cup_select]
+    - [0x2D6900, .rodata, fragments/cup_select/cup_select]
+    - {vram: 0x82E019B0, type:  .bss, name: fragments/cup_select/cup_select}
   - name: fragment60_relocs
     type: code
     bss_size: 0x0
@@ -1635,7 +1666,7 @@
     - [0x2F9960, asm, fragments/battle_engine/battle_engine_2FA4D0]
     - [0x303600, c,      fragments/battle_engine/battle_engine_304060]
     - [0x304B80, asm, fragment62_304B80]
-    - [0x3127B0, asm, fragments/battle_engine/battle_engine_313250]
+    - [0x3127B0, c, fragments/battle_engine/battle_engine_313250]
     - [0x3132B0, c,      fragments/battle_engine/battle_engine_313D60]
     - [0x314D80, asm, fragment62_314D80]
     - [0x3173B0, c,      fragments/battle_engine/battle_engine_317E70]
@@ -1706,7 +1737,7 @@
     - [0x376610, .rodata, fragments/battle_engine/battle_engine_304060]
     - [0x376760, rodata, fragments/battle_engine/battle_engine_3055E0]
     - [0x3769C0, rodata, fragments/battle_engine/battle_engine_309ED0]
-    - [0x376D70, rodata, fragments/battle_engine/battle_engine_313250]
+    - [0x376D70, .rodata, fragments/battle_engine/battle_engine_313250]
     - [0x376DA0, .rodata, fragments/battle_engine/battle_engine_313D60]
     - [0x376F10, rodata, fragments/battle_engine/battle_engine_315D50]
     - [0x377050, .rodata, fragments/battle_engine/battle_engine_317E70]

@@ -65,15 +65,24 @@ void PakUi_DrawRulesPanel(s16 arg0, s16 arg1);
 void PakUi_DrawDataSummaryPanel(s16 arg0, s16 arg1, SessionContinueData* arg2, s32 arg3);
 void PakUi_UpdateConfirmDisplayFrame(s16 arg0, s16 arg1, SessionContinueData* arg2, s16 arg3, s16 arg4);
 s32 TransferPak_ConfirmPrompt(SessionContinueData* arg0);
+#if defined(VERSION_JP)
+s16 TransferPak_MainMenu(void);
+#else
 s16 TransferPak_MainMenu(SessionContinueData* arg0);
+#endif
 void PakUi_DrawStatusPopup(PakUi_StatusPopup* arg0);
 s32 PakUi_UpdateStatusPopup(PakUi_StatusPopup* arg0);
 void PakUi_InitStatusPopup(PakUi_StatusPopup* arg0, s16 arg1, s16 arg2);
 void PakUi_OpenStatusPopup(PakUi_StatusPopup* arg0, s16 arg1, s16 arg2);
 s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* a1);
 s32 PakUi_ComputeBlinkAlpha(void);
+#if defined(VERSION_JP)
+void PakUi_DrawHeaderProgressBar(s32 arg0);
+void PakUi_DrawBodyProgressBar(s32 arg0);
+#else
 void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1);
 void PakUi_DrawBodyProgressBar(s32 arg0, s32 arg1);
+#endif
 void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1);
 DepthBuffer* PakUi_BuildGameIconBuffer(s32 arg0);
 DepthBuffer* PakUi_BuildControllerIconBuffer(void);
