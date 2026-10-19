@@ -92,10 +92,10 @@ As the goal of a decomp is to be readable to a wide variety of people (recomp de
 |Function Arguments|`arg{index}`|`arg0`,`arg4`|
 |Local variables|`var_{register}`|`var_v0`,`var_s1`|
 
-Leave functions without a body in the style 
+Leave functions without a body in the style of `func_{address}` since we can't make any claims about what their original purpose was.
 
 ### Spelling
-Use American English (color, mom, etc.) for all spelling. `func_{address}`
+Use American English (color, mom, etc.) for all spelling.
 
 ### Terminology
 #### Technical 
