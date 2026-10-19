@@ -13,7 +13,7 @@ u8 D_80075680[3] = { 1, 15, 30 };
 static s16 D_80075684 = 0;
 
 void Team_ClearTrainerSlot(BattleSessionTeams* arg0) {
-    arg0->sessionIsBusy = 0;
+    arg0->uniqueStatusFlags = 0;
     arg0->unk_01 = 0;
     arg0->cry = 0;
     arg0->unk_04 = 0;

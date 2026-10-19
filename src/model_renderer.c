@@ -180,7 +180,7 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
 
     sp2A = arg0->cry;
     sp2C.raw = 0;
-    if (!(arg0->sessionIsBusy & 0x40) && (arg0->sessionIsBusy & 0x80)) {
+    if (!(arg0->uniqueStatusFlags & 0x40) && (arg0->uniqueStatusFlags & 0x80)) {
         temp_a1 = arg0->unk_04;
         if ((temp_a1 != NULL) && (sp2A == arg0->unk_04->unk_000)) {
             Model_ComputeSizeVariant(&sp2C, (BattleMon*)arg0->unk_04);
@@ -192,13 +192,13 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
             while (Display_IsFrameReady() == 0) {}
         }
         PokeIcon_RequestFrameLoad(arg0->unk_10, (u16) sp2A, sp2C);
-        arg0->sessionIsBusy |= 0x40;
-        arg0->sessionIsBusy &= ~0x10;
+        arg0->uniqueStatusFlags |= 0x40;
+        arg0->uniqueStatusFlags &= ~0x10;
 
-        if (arg0->sessionIsBusy & 0x20) {
+        if (arg0->uniqueStatusFlags & 0x20) {
             PokeIcon_WaitFrameLoad(arg0->unk_10);
             arg0->unk_14 = arg0->unk_10->loadedModel;
-            arg0->sessionIsBusy &= ~0xE0;
+            arg0->uniqueStatusFlags &= ~0xE0;
         }
     }
 }

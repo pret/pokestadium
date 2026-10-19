@@ -87,8 +87,8 @@ s32 BattleScene_AdvanceOwnerAnimation(ActivePokemon* arg0) {
 
         case 1:
             sp1C = 1;
-            if (arg0->sessionTeams->sessionIsBusy & 0x10) {
-                arg0->sessionTeams->sessionIsBusy &= ~0x90;
+            if (arg0->sessionTeams->uniqueStatusFlags & 0x10) {
+                arg0->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_ReloadModelForActiveMove(arg0);
                 BattleScene_ApplyModelAnimationSlot5A(arg0);
                 gBattleScene.unk_00->unk_24++;
@@ -119,8 +119,8 @@ s32 BattleScene_AdvanceOwnerAnimation98(ActivePokemon* arg0) {
 
         case 1:
             sp1C = 1;
-            if (arg0->sessionTeams->sessionIsBusy & 0x10) {
-                arg0->sessionTeams->sessionIsBusy &= ~0x90;
+            if (arg0->sessionTeams->uniqueStatusFlags & 0x10) {
+                arg0->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_ReloadNeutralPlaceholderModel(arg0);
                 gBattleScene.unk_00->unk_24++;
             }
@@ -151,8 +151,8 @@ s32 BattleScene_AdvanceOwnerAnimationAndClearFlags(ActivePokemon* arg0) {
 
         case 1:
             var_s0 = 1;
-            if (arg0->sessionTeams->sessionIsBusy & 0x10) {
-                arg0->sessionTeams->sessionIsBusy &= ~0x90;
+            if (arg0->sessionTeams->uniqueStatusFlags & 0x10) {
+                arg0->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_ReloadModelForActiveMove(arg0);
                 Battle_ClearRuntimeFlags(arg0, 0x1800);
                 var_s0 = 0;
@@ -195,8 +195,8 @@ s32 BattleScene_AdvanceDoublesOwnerAnimation(ActivePokemon* arg0) {
 
         case 1:
             sp1C = 1;
-            if (arg0->sessionTeams->sessionIsBusy & 0x10) {
-                arg0->sessionTeams->sessionIsBusy &= ~0x90;
+            if (arg0->sessionTeams->uniqueStatusFlags & 0x10) {
+                arg0->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_ReloadModelForActiveMove(arg0);
                 BattleScene_ApplyModelAnimationSlot5A(arg0);
                 gBattleScene.unk_00->unk_24 += 1;
@@ -236,8 +236,8 @@ s32 BattleScene_AdvanceBothOwnerAnimations(void) {
         case 1:
             sp1C = 1;
             if (temp_a1->unk_34 & 0x800) {
-                if (sActivePokemon[0]->sessionTeams->sessionIsBusy & 0x10) {
-                    sActivePokemon[0]->sessionTeams->sessionIsBusy &= ~0x90;
+                if (sActivePokemon[0]->sessionTeams->uniqueStatusFlags & 0x10) {
+                    sActivePokemon[0]->sessionTeams->uniqueStatusFlags &= ~0x90;
                     Battle_ReloadNeutralPlaceholderModel(sActivePokemon[0]);
                     gBattleScene.unk_00->unk_24 += 1;
                 }
@@ -257,8 +257,8 @@ s32 BattleScene_AdvanceBothOwnerAnimations(void) {
         case 3:
             sp1C = 1;
             if (temp_a2->unk_34 & 0x800) {
-                if (sActivePokemon[1]->sessionTeams->sessionIsBusy & 0x10) {
-                    sActivePokemon[1]->sessionTeams->sessionIsBusy &= ~0x90;
+                if (sActivePokemon[1]->sessionTeams->uniqueStatusFlags & 0x10) {
+                    sActivePokemon[1]->sessionTeams->uniqueStatusFlags &= ~0x90;
                     Battle_ReloadNeutralPlaceholderModel(sActivePokemon[1]);
                     gBattleScene.unk_00->unk_24 += 1;
                 }
@@ -2461,14 +2461,14 @@ void BattleScene_Phase15(CameraNode* arg0) {
                 D_84390204->sessionTeams->cry = D_84390200->sessionTeams->cry;
             }
             D_84390204->sessionTeams->unk_04 = &D_84390204->unk_724->pokemonPicked[D_84390204->state.unk_08];
-            D_84390204->sessionTeams->sessionIsBusy |= 0x80;
+            D_84390204->sessionTeams->uniqueStatusFlags |= 0x80;
             gBattleScene.unk_00->unk_20 += 1;
             break;
 
         case 1:
             BattleScene_RecenterCameraOnOwner(arg0, D_84390204);
-            if (D_84390204->sessionTeams->sessionIsBusy & 0x10) {
-                D_84390204->sessionTeams->sessionIsBusy &= ~0x90;
+            if (D_84390204->sessionTeams->uniqueStatusFlags & 0x10) {
+                D_84390204->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_LoadOwnerModelForSpecies(D_84390204);
                 BattleScene_TickOwnerCameraFraming(D_84390204);
                 BattleAnim_PlayMoveEffectScriptA(D_84390204, sp30->usedMove);
@@ -3308,13 +3308,13 @@ void BattleScene_PhaseWithdrawFainted(CameraNode* arg0) {
         case 4:
             temp_s0->unk_4EC.node.flags &= ~1;
             temp_s0->sessionTeams->unk_04 = &temp_s0->sessionTeams->teamMember[sp34->unk_2C]->pokemonPicked[sp34->unk_18];
-            temp_s0->sessionTeams->sessionIsBusy |= 0x80;
+            temp_s0->sessionTeams->uniqueStatusFlags |= 0x80;
             gBattleScene.unk_00->unk_20 += 1;
             break;
 
         case 5:
-            if (temp_s0->sessionTeams->sessionIsBusy & 0x10) {
-                temp_s0->sessionTeams->sessionIsBusy &= ~0x90;
+            if (temp_s0->sessionTeams->uniqueStatusFlags & 0x10) {
+                temp_s0->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_LoadOwnerModelForSwitchIn(temp_s0);
                 BattleScene_TickOwnerCameraFraming(temp_s0);
                 D_843900A8[gBattleScene.unk_00->unk_2C] = temp_s0->state.runtime.unk_0C;
@@ -3406,14 +3406,14 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
 
         case 3:
             temp_s0->unk_4EC.node.flags &= ~1;
-            temp_s0->sessionTeams->sessionIsBusy |= 0x80;
+            temp_s0->sessionTeams->uniqueStatusFlags |= 0x80;
             temp_s0->sessionTeams->unk_04 = &temp_s0->sessionTeams->teamMember[sp3C->unk_2C]->pokemonPicked[sp3C->unk_18];
             gBattleScene.unk_00->unk_20 += 1;
             break;
 
         case 4:
-            if (temp_s0->sessionTeams->sessionIsBusy & 0x10) {
-                temp_s0->sessionTeams->sessionIsBusy &= ~0x90;
+            if (temp_s0->sessionTeams->uniqueStatusFlags & 0x10) {
+                temp_s0->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_LoadOwnerModelForSwitchIn(temp_s0);
                 BattleScene_TickOwnerCameraFraming(temp_s0);
                 D_843900A8[BattleScene_GetParticipantSideIndex(temp_s0)] = temp_s0->state.runtime.unk_0C;

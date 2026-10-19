@@ -87,7 +87,7 @@ typedef struct TeamRoster {
 } TeamRoster; // size = 0x21C
 
 typedef struct BattleSessionTeams {
-    /* 0x00 */ u8 sessionIsBusy;
+    /* 0x00 */ u8 uniqueStatusFlags;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s16 cry;
     /* 0x04 */ TeamRoster* unk_04;

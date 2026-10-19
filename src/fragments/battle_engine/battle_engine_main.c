@@ -577,7 +577,7 @@ void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* side, unk
     TeamRoster* first_trainer = side->teamMember[0];
 
     side->unk_18 = model->unk_08->unk_00[0];
-    side->sessionIsBusy |= 0xA0;
+    side->uniqueStatusFlags |= 0xA0;
     side->unk_1C = 0;
     side->cry = first_trainer->pokemonPicked[0].unk_00.unk_00;
     side->unk_04 = first_trainer->pokemonPicked;

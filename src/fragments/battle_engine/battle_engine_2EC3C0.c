@@ -226,7 +226,7 @@ s32 BattleAnim_PollAssetLoadBusyFlags(ActivePokemon* active_pokemon) {
 }
 
 s32 BattleAnim_IsSessionBusy(ActivePokemon* active_pokemon) {
-    return active_pokemon->sessionTeams->sessionIsBusy & 0xD0;
+    return active_pokemon->sessionTeams->uniqueStatusFlags & 0xD0;
 }
 
 s32 BattleAnim_TryRegisterAssetTables(ActivePokemon* active_pokemon) {
@@ -258,12 +258,12 @@ void BattleScene_ReloadMoveResourceList(ActivePokemon* active_pokemon) {
 
 void Battle_MakeSubstitute(ActivePokemon* active_pokemon) {
     active_pokemon->sessionTeams->cry = SUBSTITUTE_DOLL;
-    active_pokemon->sessionTeams->sessionIsBusy |= 0x80;
+    active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
 }
 
 void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon) {
     active_pokemon->sessionTeams->unk_04 = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
-    active_pokemon->sessionTeams->sessionIsBusy |= 0x80;
+    active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
     active_pokemon->sessionTeams->cry = active_pokemon->state.unk_BC;
 }
 
@@ -451,11 +451,11 @@ void func_84302658(ActivePokemon* pokemon, s32 mark_move_illegality) {
 
 void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon) {
     if (active_pokemon->unk_4C4 == 0x14) {
-        active_pokemon->sessionTeams->sessionIsBusy |= 0x80;
+        active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
     }
 
-    if (active_pokemon->sessionTeams->sessionIsBusy & 0x10) {
-        active_pokemon->sessionTeams->sessionIsBusy &= ~0x90;
+    if (active_pokemon->sessionTeams->uniqueStatusFlags & 0x10) {
+        active_pokemon->sessionTeams->uniqueStatusFlags &= ~0x90;
         Battle_LoadOwnerModelForSwitchIn(active_pokemon);
         BattleScene_TickOwnerCameraFraming(active_pokemon);
         Audio_PlayCommand(2, 0, 0);
@@ -1059,11 +1059,11 @@ void func_843046BC(ActivePokemon* active_pokemon) {
 
 void BattleScene_TickRow20CleanupAndEnterState18(ActivePokemon* active_pokemon) {
     if (active_pokemon->unk_4C4 == 0x4F) {
-        active_pokemon->sessionTeams->sessionIsBusy |= 0x80;
+        active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
     }
 
-    if (active_pokemon->sessionTeams->sessionIsBusy & 0x10) {
-        active_pokemon->sessionTeams->sessionIsBusy &= ~0x90;
+    if (active_pokemon->sessionTeams->uniqueStatusFlags & 0x10) {
+        active_pokemon->sessionTeams->uniqueStatusFlags &= ~0x90;
 
         Battle_LoadOwnerModelForSwitchIn(active_pokemon);
         BattleScene_TickOwnerCameraFraming(active_pokemon);
@@ -1076,8 +1076,8 @@ void BattleScene_TickRow20CleanupAndEnterState18(ActivePokemon* active_pokemon) 
 }
 
 void func_84304800(ActivePokemon* active_pokemon) {
-    if (active_pokemon->sessionTeams->sessionIsBusy & 0x10) {
-        active_pokemon->sessionTeams->sessionIsBusy &= ~0x90;
+    if (active_pokemon->sessionTeams->uniqueStatusFlags & 0x10) {
+        active_pokemon->sessionTeams->uniqueStatusFlags &= ~0x90;
         Battle_ResetOwnerModelToNeutralPlaceholder(active_pokemon);
     }
 }
