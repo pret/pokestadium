@@ -117,7 +117,7 @@ u8 Battle_GetCameraShotFieldB(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
     UNUSED s16 pad2;
     s16 sp18 = active_pokemon->state.runtime.usedMove - 1;
-    MovePresentationCue* ptr = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp18];
+    MovePresentationCue* ptr = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[sp18];
 
     return ptr->unk_02;
 }
@@ -126,19 +126,19 @@ u8 Battle_GetCameraShotFieldC(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
     UNUSED s16 pad2;
     s16 sp18 = active_pokemon->state.runtime.usedMove - 1;
-    MovePresentationCue* ptr = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp18];
+    MovePresentationCue* ptr = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[sp18];
 
     return ptr->unk_03;
 }
 
 s16 Battle_GetSideAnimTableFieldB(ActivePokemon* active_pokemon) {
-    MovePresentationCue* ptr = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_A80;
+    MovePresentationCue* ptr = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->hitCue;
 
     return ptr->unk_02;
 }
 
 s32 Battle_GetSideAnimTableFieldC(ActivePokemon* active_pokemon) {
-    MovePresentationCue* ptr = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_A80;
+    MovePresentationCue* ptr = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->hitCue;
 
     return ptr->unk_03;
 }
@@ -203,9 +203,9 @@ void BattleAnim_GetOwnerDefaultAnchorPosition(ActivePokemon* arg0, Vec3f* arg1) 
         var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) / 1.5f;
     } else if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F4, 1) != 0) {
         var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) * 0.5f;
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F8, 1) != 0) && (arg0->state.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F8, 1) != 0) && (arg0->state.diggingStageMask & 0x200)) {
         var_fs0 = 2.0f * BattleAnim_GetOwnerModelHeight(arg0);
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, D_843845FC, 2) != 0) && (arg0->state.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, D_843845FC, 2) != 0) && (arg0->state.diggingStageMask & 0x200)) {
         var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 
@@ -251,7 +251,7 @@ void BattleScene_GetParticipantAuxiliaryModelPosition(ActivePokemon* arg0, Vec3f
 }
 
 f32 BattleAnim_GetOwnerModelHeight(ActivePokemon* active_pokemon) {
-    if (active_pokemon->unk_4B4 == 0x10) {
+    if (active_pokemon->animationFlags1 == 0x10) {
         return BattleScene_GetParticipantModelWidth(active_pokemon);
     }
     return BattleScene_GetParticipantModelWidth(active_pokemon) * active_pokemon->displayObject.scale.y;
@@ -277,9 +277,9 @@ u8* Battle_GetActiveMonNickname(ActivePokemon* active_pokemon) {
     return active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08].unk_30;
 }
 
-void BattleScene_SetParticipantModelFlags(ActivePokemon* arg0, s32 arg1, s32 arg2) {
-    arg0->unk_4B4 = arg1;
-    arg0->unk_4B8 = arg2;
+void BattleScene_SetParticipantModelFlags(ActivePokemon* active_pokemon, s32 animation_flags1, s32 animation_flags2) {
+    active_pokemon->animationFlags1 = animation_flags1;
+    active_pokemon->animationFlags2 = animation_flags2;
 }
 
 void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* arg0, ActivePokemon* arg1) {
@@ -290,18 +290,18 @@ void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* arg0, ActivePokem
     ActivePokemonState* sp20 = &arg0->state;
 
     idx = BattleScene_GetParticipantSideIndex(arg0);
-    sp30 = &D_84384570[idx]->unk_A50;
+    sp30 = &sSideBattleCues[idx]->idleCues;
     idx = BattleScene_GetParticipantSideIndex(arg0);
-    sp2C = &D_84384570[idx]->unk_B00;
+    sp2C = &sSideBattleCues[idx]->unk_B00;
     idx = BattleScene_GetParticipantSideIndex(arg0);
-    sp28 = &D_84384570[idx]->unk_AF0;
+    sp28 = &sSideBattleCues[idx]->sleepIdleCue;
 
-    if (!(sp20->unk_34 & 0x4002)) {
+    if (!(sp20->diggingStageMask & 0x4002)) {
         if ((BattleAnim_IsSessionBusy(arg0) == 0) && (arg1->displayObject.transformAnim.animationId != -1) &&
             (ModelAnim_IsFinished(&arg1->displayObject) == 1)) {
-            if (sp20->unk_34 & 0x200) {
+            if (sp20->diggingStageMask & 0x200) {
                 ModelAnim_SetAnimation(&arg1->displayObject, sp2C->id);
-            } else if ((sp20->unk_34 & 1) && (BattleScene_ByteArrayContains(arg1->displayObject.objectType, D_84384590, 8) != 0)) {
+            } else if ((sp20->diggingStageMask & 1) && (BattleScene_ByteArrayContains(arg1->displayObject.objectType, D_84384590, 8) != 0)) {
                 ModelAnim_SetAnimation(&arg1->displayObject, sp28->id);
             } else {
                 if (arg1->displayObject.objectType == 0x84) {
@@ -311,7 +311,7 @@ void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* arg0, ActivePokem
                     ModelAnim_SetAnimation(&arg1->displayObject, sp30->id);
                 }
 
-                if (!(sp20->unk_34 & 1)) {
+                if (!(sp20->diggingStageMask & 1)) {
                     BattleAnim_SetModelEventTrackAndState(arg0, 0xA5, 1);
                 }
             }
@@ -330,17 +330,17 @@ void Battle_ResetModelToIdleAnim(ActivePokemon* active_pokemon) {
 
     sp24 = &active_pokemon->state;
     idx = BattleScene_GetParticipantSideIndex(active_pokemon);
-    sp34 = &D_84384570[idx]->unk_A50;
+    sp34 = &sSideBattleCues[idx]->idleCues;
     idx = BattleScene_GetParticipantSideIndex(active_pokemon);
-    sp30 = &D_84384570[idx]->unk_B00;
+    sp30 = &sSideBattleCues[idx]->unk_B00;
     idx = BattleScene_GetParticipantSideIndex(active_pokemon);
-    sp2C = &D_84384570[idx]->unk_AF0;
+    sp2C = &sSideBattleCues[idx]->sleepIdleCue;
 
-    if (!(sp24->unk_34 & 0x4002) && (BattleAnim_IsSessionBusy(active_pokemon) == 0) && (active_pokemon->displayObject.transformAnim.animationId != -1)) {
+    if (!(sp24->diggingStageMask & 0x4002) && (BattleAnim_IsSessionBusy(active_pokemon) == 0) && (active_pokemon->displayObject.transformAnim.animationId != -1)) {
         ModelAnim_SetFrame(&active_pokemon->displayObject, 0);
-        if (sp24->unk_34 & 0x200) {
+        if (sp24->diggingStageMask & 0x200) {
             ModelAnim_SetAnimation(&active_pokemon->displayObject, sp30->id);
-        } else if ((sp24->unk_34 & 1) && (BattleScene_ByteArrayContains(active_pokemon->displayObject.objectType, D_84384590, 8) != 0)) {
+        } else if ((sp24->diggingStageMask & 1) && (BattleScene_ByteArrayContains(active_pokemon->displayObject.objectType, D_84384590, 8) != 0)) {
             ModelAnim_SetAnimation(&active_pokemon->displayObject, sp2C->id);
         } else {
             if (active_pokemon->displayObject.objectType == 0x84) {
@@ -349,7 +349,7 @@ void Battle_ResetModelToIdleAnim(ActivePokemon* active_pokemon) {
                 ModelAnim_SetAnimation(&active_pokemon->displayObject, sp34->id);
             }
 
-            if (!(sp24->unk_34 & 1)) {
+            if (!(sp24->diggingStageMask & 1)) {
                 BattleAnim_SetModelEventTrackAndState(active_pokemon, 0xA5, 1);
             }
         }
@@ -357,7 +357,7 @@ void Battle_ResetModelToIdleAnim(ActivePokemon* active_pokemon) {
 }
 
 void Battle_SetModelToStatusAnim(ActivePokemon* active_pokemon) {
-    MovePresentationCue* sp1C = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_A80;
+    MovePresentationCue* sp1C = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->hitCue;
 
     if (active_pokemon->displayObject.transformAnim.animationId != -1) {
         ModelAnim_SetFrame(&active_pokemon->displayObject, 0);
@@ -477,7 +477,7 @@ void BattleScene_ReinitParticipantBodyModel(ActivePokemon* arg0, ActivePokemon* 
         arg1->displayObject.node.renderFlags |= 0x40;
     }
 
-    if (!(arg0->state.unk_34 & 0x200)) {
+    if (!(arg0->state.diggingStageMask & 0x200)) {
         if (arg0 == sActivePokemon[0]) {
             BattleScene_PositionParticipantModel(arg0);
             arg1->displayObject.rotation.y = 0x4000;
@@ -547,7 +547,7 @@ void BattleScene_ReinitParticipantSecondaryModels(ActivePokemon* arg0, s16 arg1)
 }
 
 void Battle_ResetEventTrack(ActivePokemon* active_pokemon) {
-    if (active_pokemon->state.unk_34 & 1) {
+    if (active_pokemon->state.diggingStageMask & 1) {
         BattleAnim_TrySetModelEventTrackFromRow(active_pokemon, 0xAF, 2);
     } else {
         active_pokemon->state.unk_36 = 0;
@@ -567,7 +567,7 @@ void Battle_LoadOwnerModelForSpecies(ActivePokemon* active_pokemon) {
     BattleScene_ReinitParticipantOwnerModel(active_pokemon, &active_pokemon->unk_728, sp26);
     BattleScene_ReinitParticipantSecondaryModels(active_pokemon, sp26);
     Battle_ResetEventTrack(active_pokemon);
-    ptr->unk_34 &= 0x1800;
+    ptr->diggingStageMask &= 0x1800;
     Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.scale, 1.0f, 1.0f, 1.0f);
 }
 
@@ -583,7 +583,7 @@ void Battle_LoadOwnerModelForSwitchIn(ActivePokemon* active_pokemon) {
     BattleScene_ReinitParticipantSecondaryModels(active_pokemon, sp26);
     Battle_ResetEventTrack(active_pokemon);
     ptr->unk_2D = 0;
-    ptr->unk_34 &= 0x1800;
+    ptr->diggingStageMask &= 0x1800;
     Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.scale, 1.0f, 1.0f, 1.0f);
 }
 

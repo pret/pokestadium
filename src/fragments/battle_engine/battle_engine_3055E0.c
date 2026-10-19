@@ -256,13 +256,13 @@ void BattleScene_SetCameraSendOutShot(CameraNode* arg0, s32 arg1) {
     BattleAnim_GetOwnerDefaultAnchorPosition(temp_s0, &sp58);
 
     sp58.y /= 3.0f;
-    if (temp_s0->state.unk_34 & 0x4000) {
+    if (temp_s0->state.diggingStageMask & 0x4000) {
         sp58.y = 0.0f;
     }
 
     BattleScene_SetCameraAtFromAnchor(temp_s0, arg0, sp58, 0, 0, 0.0f, 0.0f);
 
-    if ((sp6C->unk_2D != 0x10) && !(sp6C->unk_34 & 0x4000)) {
+    if ((sp6C->unk_2D != 0x10) && !(sp6C->diggingStageMask & 0x4000)) {
         BattleScene_EnterStateRow(temp_s0, 1);
     }
 
@@ -299,9 +299,9 @@ void BattleScene_UpdateCameraModelOffset(ActivePokemon* arg0, CameraNode* arg1) 
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) / 1.5f;
     } else if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F4, 1) != 0) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 0.5f;
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F8, 1) != 0) && (arg0->state.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F8, 1) != 0) && (arg0->state.diggingStageMask & 0x200)) {
         sp3C = 2.0f * BattleAnim_GetOwnerModelHeight(arg0);
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, D_843845FC, 2) != 0) && (arg0->state.unk_34 & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, D_843845FC, 2) != 0) && (arg0->state.diggingStageMask & 0x200)) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 
@@ -505,7 +505,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
         sp3C *= -1.0f;
     }
 
-    if (arg1->unk_4B4 == 0xD) {
+    if (arg1->animationFlags1 == 0xD) {
         var_fv1 = 0;
     } else if ((arg1->displayObject.objectType == 0x58) || (arg1->displayObject.objectType == 0x59)) {
         temp_fv1 = sp3C / BattleScene_GetParticipantModelRadius(arg1);
@@ -640,7 +640,7 @@ s32 BattleScene_FrameCamera(CameraNode* arg0, ActivePokemon* arg1) {
 
     temp_v1 = &sActivePokemon[BattleScene_GetParticipantSideIndex(arg1) == 0]->state.runtime;
 
-    if (arg1->state.unk_34 & 0x4000) {
+    if (arg1->state.diggingStageMask & 0x4000) {
         return 1;
     }
 
@@ -652,7 +652,7 @@ s32 BattleScene_FrameCamera(CameraNode* arg0, ActivePokemon* arg1) {
     BattleAnim_Vec3fCopy(&sp6C, &arg0->view.targetPosition);
     BattleAnim_Vec3fCopy(&sp60, &arg0->view.eyePosition);
 
-    if ((arg1->displayObject.objectType != 0x5F) && (arg1->unk_4B4 != 0xD)) {
+    if ((arg1->displayObject.objectType != 0x5F) && (arg1->animationFlags1 != 0xD)) {
         BattleScene_UpdateCameraTargetFromOwner(arg0, arg1);
     }
 

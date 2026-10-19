@@ -108,8 +108,13 @@ void Model_SetMaterialAlpha(DisplayObject* arg0, u8 arg1) {
     arg0->lodFraction = arg1;
 }
 
-void Model_SetMaterialTextureMode(DisplayObject* arg0, u8 arg1) {
-    arg0->textureMode = arg1;
+/*
+    known modes:
+    - 1 = Gold (Harden)
+
+*/
+void Model_SetMaterialTextureMode(DisplayObject* display_object, u8 texture_mode) {
+    display_object->textureMode = texture_mode;
 }
 
 ModelAnimationBank* ModelAnim_GetAnimationRecord(DisplayObject* arg0, s32 arg1) {

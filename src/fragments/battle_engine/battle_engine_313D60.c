@@ -458,21 +458,21 @@ void BattleScene_UpdateOwnerVisibilitySingle(CameraNode* arg0) {
 
                         case 1:
                             sBattleScene.unk_00->unk_08 = 0;
-                            if (!(sp40->unk_34 & 0x4400)) {
+                            if (!(sp40->diggingStageMask & 0x4400)) {
                                 BattleScene_HideOpponentOwner();
                             }
                             break;
 
                         case 2:
                             if ((sBattleScene.unk_00->unk_3C == 0) && (sBattleScene.unk_00->unk_24 >= 0) &&
-                                (sBattleScene.unk_00->unk_24 < 2) && (sp38->unk_34 & 0x800)) {
+                                (sBattleScene.unk_00->unk_24 < 2) && (sp38->diggingStageMask & 0x800)) {
                                 BattleScene_HideOpponentOwner();
                             } else if (((sBattleScene.unk_00->unk_3C == 0) || (sBattleScene.unk_00->unk_3C == 1)) &&
                                        (sBattleScene.unk_00->unk_48 == 0) && (sBattleScene.unk_00->unk_1A != 1)) {
                                 Battle_ResetModelToIdleAnim(D_84390204);
                                 D_84390204->displayObject.lodFraction = 0;
                             } else {
-                                if (sp40->unk_34 & 0x4000) {
+                                if (sp40->diggingStageMask & 0x4000) {
                                     if ((D_84390204->displayObject.objectType != 0x32) &&
                                         (D_84390204->displayObject.objectType != 0x33)) {
                                         D_84390204->displayObject.lodFraction = 0;

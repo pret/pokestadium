@@ -49,7 +49,7 @@ typedef struct ActivePokemonState {
     /* 0x2F */ u8 unk_2F;
     /* 0x30 */ u16 unk_30;
     /* 0x32 */ char unk32[0x2];
-    /* 0x34 */ u16 unk_34;
+    /* 0x34 */ u16 diggingStageMask;
     /* 0x36 */ u16 unk_36;
     /* 0x38 */ BattleMonRuntime runtime;
     /* 0x9C */ unk_D_84390010_654_09C unk_9C;
@@ -143,8 +143,8 @@ typedef struct ActivePokemon {
     /* 0x4A8 */ s16 unk_4A8;
     /* 0x4AC */ s32 unk_4AC;
     /* 0x4B0 */ s32 unk_4B0;
-    /* 0x4B4 */ s32 unk_4B4;
-    /* 0x4B8 */ s32 unk_4B8;
+    /* 0x4B4 */ s32 animationFlags1;
+    /* 0x4B8 */ s32 animationFlags2;
     /* 0x4BC */ char unk4BC[0x4];
     /* 0x4C0 */ s32 animationState;
     /* 0x4C4 */ s32 animationTimer;
@@ -173,8 +173,8 @@ typedef struct MovePresentationCue {
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
+    /* 0x04 */ u8 animationDuration;
+    /* 0x05 */ u8 flags1;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
@@ -188,20 +188,20 @@ typedef struct MovePresentationCue {
 } MovePresentationCue; // size = 0x10
 
 typedef struct unk_D_8438E7B0 {
-    /* 0x000 */ MovePresentationCue unk_000[165];
-    /* 0xA50 */ MovePresentationCue unk_A50;
+    /* 0x000 */ MovePresentationCue moveCues[165];
+    /* 0xA50 */ MovePresentationCue idleCues;
     /* 0xA60 */ char unkA60[0x10];
-    /* 0xA70 */ MovePresentationCue unk_A70;
-    /* 0xA80 */ MovePresentationCue unk_A80;
-    /* 0xA90 */ char unkA90[0x60];
-    /* 0xAF0 */ MovePresentationCue unk_AF0;
+    /* 0xA70 */ MovePresentationCue faintCue;
+    /* 0xA80 */ MovePresentationCue hitCue;
+    /* 0xA90 */ char chargeCues[0x60];
+    /* 0xAF0 */ MovePresentationCue sleepIdleCue;
     /* 0xB00 */ MovePresentationCue unk_B00;
     /* 0xB10 */ MovePresentationCue unk_B10;
     /* 0xB20 */ MovePresentationCue unk_B20;
     /* 0xB30 */ char unkB30[0x51];
-    /* 0xB81 */ u8 unk_B81;
+    /* 0xB81 */ u8 wakeUpEventTrack;
     /* 0xB82 */ char unkB82[0x5E];
-} unk_D_8438E7B0; // size = 0xBE0
+} PokemonBattleCues; // size = 0xBE0
 
 typedef struct BattleScene {
     /* 0x00 */ char unk00[0x8];
@@ -912,7 +912,7 @@ typedef struct unk_func_8437F85C_arg3 {
     /* 0x00 */ u8 unk_00[3][3];
 } unk_func_8437F85C_arg3; // size = 0x3
 
-extern unk_D_8438E7B0* D_84384570[];
+extern PokemonBattleCues* sSideBattleCues[];
 extern SpeciesModelTransform* D_84384578[];
 extern SpeciesModelTransform* D_84384580[];
 extern TagTeamPartners* sPlayerTagTeam[];
@@ -921,7 +921,7 @@ extern u8 D_843845F0;
 extern u8 D_843845F4;
 extern u8 D_843845F8;
 extern u8 D_843845FC[];
-extern s16 D_84384670[];
+extern s16 sChargeMoveCues[];
 extern unk_D_843847BC D_843847BC[2];
 extern unk_D_86B0C160 D_843847EC[3];
 extern unk_D_86B0C160 D_84384888[2];
@@ -1099,8 +1099,8 @@ void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon);
 void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon);
 void BattleScene_TickRow3PostEffectCamera(ActivePokemon* active_pokemon);
-void BattleScene_TickRow3QueueEffectList6(ActivePokemon* active_pokemon);
-void func_843031A0(ActivePokemon* active_pokemon);
+void Battle_HandleStatBoostingMoveAnimation(ActivePokemon* active_pokemon);
+void BattleScene_MakeGoldenWhenHarden(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow21StartAnimRecord0(ActivePokemon* active_pokemon);
 void BattleScene_TickRow21PlaySpeciesSound(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow19StartMoveAnimMidFrame(ActivePokemon* active_pokemon);
@@ -1248,7 +1248,7 @@ ModelNodeView* Battle_GetMoveEffectListEntry(ActivePokemon* arg0, s32 arg1);
 s32 Battle_GetTrainerId(ActivePokemon* arg0, UNUSED s32 arg1);
 char* Battle_GetActiveMoveName(ActivePokemon* active_pokemon);
 u8* Battle_GetActiveMonNickname(ActivePokemon* active_pokemon);
-void BattleScene_SetParticipantModelFlags(ActivePokemon* arg0, s32 arg1, s32 arg2);
+void BattleScene_SetParticipantModelFlags(ActivePokemon* active_pokemon, s32 animation_flags1, s32 animation_flags2);
 void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* arg0, ActivePokemon* arg1);
 void Battle_ResetModelToIdleAnim(ActivePokemon* active_pokemon);
 void Battle_SetModelToStatusAnim(ActivePokemon* active_pokemon);
