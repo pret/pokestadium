@@ -74,7 +74,7 @@ void BattleAnim_UpdateSleepStatusAnimation(ActivePokemon* arg0) {
     BattleMonRuntime* sp28 = &sp24->runtime;
     BattleMon* sp2C = &arg0->unk_724->pokemonPicked[arg0->state.unk_08];
 
-    if ((gBattleScene.unk_00->unk_38 != 0xB) || (gBattleScene.unk_00->unk_20 >= 6)) {
+    if ((sBattleScene.unk_00->unk_38 != 0xB) || (sBattleScene.unk_00->unk_20 >= 6)) {
         if ((sp2C->unk_05 & 7) && (sp28->unk_15 & 7) && !(arg0->state.unk_34 & 1)) {
             BattleAnim_SetModelEventTrackAndState(arg0, 0xAF, 2);
             BattleAnim_QueueEffectList(3, arg0);

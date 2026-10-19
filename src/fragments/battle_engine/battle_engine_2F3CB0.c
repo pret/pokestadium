@@ -591,7 +591,7 @@ void BattleAnim_StatusIdleCase7(ActivePokemon* arg0, ActivePokemon* arg1) {
 
 void BattleAnim_ResetOwnerFacingAndExitStatusIdle(ActivePokemon* arg0) {
     UNUSED s32 pad;
-    CameraNode* sp18 = gBattleScene.unk_00->unk_DC;
+    CameraNode* sp18 = sBattleScene.unk_00->unk_DC;
 
     BattleScene_PositionParticipantModel(arg0);
     Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg0->unk_4B0 << 0xE, 0);
@@ -611,7 +611,7 @@ void BattleAnim_StatusIdleCase8Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
 }
 
 void BattleAnim_StatusIdleCase8Sub1(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
-    CameraNode* temp_s0 = gBattleScene.unk_00->unk_DC;
+    CameraNode* temp_s0 = sBattleScene.unk_00->unk_DC;
     f32 temp_fa0;
     f32 temp_fa1_2;
     f32 temp_ft4;

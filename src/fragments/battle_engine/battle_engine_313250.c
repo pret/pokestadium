@@ -16,9 +16,9 @@ void BattleScene_IntroSetupCamera(CameraNode* arg0) {
     sActivePokemon[1]->displayObject.node.flags &= ~1;
     Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, 0.0f, 75.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, -1.79f, 0.075f, 155.2f);
-    gBattleScene.unk_00->unk_54 = 1;
+    sBattleScene.unk_00->unk_54 = 1;
     BattleScene_StartBattleMusic();
-    gBattleScene.unk_00->unk_20 += 1;
+    sBattleScene.unk_00->unk_20 += 1;
 }
 
 void BattleScene_IntroSendOutFirstMon(UNUSED CameraNode* arg0) {
@@ -28,7 +28,7 @@ void BattleScene_IntroSendOutFirstMon(UNUSED CameraNode* arg0) {
         BattleScene_SetParticipantModelFlags(sActivePokemon[0], 1, 0);
         Audio_PlayCommand(1, 0xFE, 0);
         BattleAnim_QueueEffectList3(8, sActivePokemon[0], sActivePokemon[0], 0xFF, 0xFF);
-        gBattleScene.unk_00->unk_20 += 1;
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -40,7 +40,7 @@ void BattleScene_IntroSendOutSecondMon(UNUSED CameraNode* arg0) {
         Audio_PlayCommand(1, 1, 0);
         BattleScene_SetParticipantModelFlags(sActivePokemon[1], 1, 0);
         BattleAnim_QueueEffectList3(0xA, sActivePokemon[1], sActivePokemon[1], 0xFF, 0xFF);
-        gBattleScene.unk_00->unk_20 += 1;
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -56,8 +56,8 @@ void BattleScene_IntroNarrowFov(CameraNode* arg0) {
         BattleAnim_QueueEffectList3(0xB, sActivePokemon[0], sActivePokemon[0], 0xFF, 0xFF);
         Vec3f_SetComponentsDuplicate(&sp3C, -150.0f, 5.0f, 0.0f);
         BattleScene_SetCameraAtFromAnchor(sActivePokemon[0], arg0, sp3C, 0, 0, 0.0f, 0.0f);
-        BattleScene_SetCameraEyeFromPosition(arg0, sp3C, gBattleScene.unk_00->unk_56 = 0x71C, 0x4000, gBattleScene.unk_00->unk_84 = 300.0f, 0.0f);
-        gBattleScene.unk_00->unk_20 += 1;
+        BattleScene_SetCameraEyeFromPosition(arg0, sp3C, sBattleScene.unk_00->unk_56 = 0x71C, 0x4000, sBattleScene.unk_00->unk_84 = 300.0f, 0.0f);
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -67,14 +67,14 @@ void BattleScene_IntroPanCamera(CameraNode* arg0) {
     Vec3f_SetComponentsDuplicate(&sp2C, -150.0f, 5.0f, 0.0f);
     sActivePokemon[0]->displayObject.node.flags &= ~1;
     sActivePokemon[1]->displayObject.node.flags &= ~1;
-    BattleAnim_ApproachF(&gBattleScene.unk_00->unk_84, 40.0f, 0.1f);
-    BattleAnim_StepToS16(&gBattleScene.unk_00->unk_56, 0xB6, 0x1E);
-    BattleScene_SetCameraEyeFromPosition(arg0, sp2C, gBattleScene.unk_00->unk_56, 0x4000, gBattleScene.unk_00->unk_84, 0.0f);
+    BattleAnim_ApproachF(&sBattleScene.unk_00->unk_84, 40.0f, 0.1f);
+    BattleAnim_StepToS16(&sBattleScene.unk_00->unk_56, 0xB6, 0x1E);
+    BattleScene_SetCameraEyeFromPosition(arg0, sp2C, sBattleScene.unk_00->unk_56, 0x4000, sBattleScene.unk_00->unk_84, 0.0f);
 
-    if ((gBattleScene.unk_00->unk_56 >= 0x2E) && (sActivePokemon[0]->unk_4EC.position.y == 2.5f)) {
+    if ((sBattleScene.unk_00->unk_56 >= 0x2E) && (sActivePokemon[0]->unk_4EC.position.y == 2.5f)) {
         Audio_PlayCommand(2, 0, 0);
         sActivePokemon[0]->unk_4EC.node.renderFlags |= 0x20;
-        gBattleScene.unk_00->unk_20 += 1;
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -82,7 +82,7 @@ void BattleScene_IntroWaitFirstMonAnim(UNUSED CameraNode* arg0) {
     sActivePokemon[0]->displayObject.node.flags &= ~1;
     sActivePokemon[1]->displayObject.node.flags &= ~1;
     if (ModelAnim_IsAnimationDone(&sActivePokemon[0]->unk_4EC) == 1) {
-        gBattleScene.unk_00->unk_20 += 1;
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -100,17 +100,17 @@ void BattleScene_IntroRevealFirstMon(CameraNode* arg0) {
     sActivePokemon[0]->unk_4EC.node.flags &= ~1;
     BattleScene_SelectCameraFollowPreset(sActivePokemon[0], arg0, 3);
     BattleScene_EnterStateRow(sActivePokemon[0], 0x10);
-    gBattleScene.unk_00->unk_2C = 0;
+    sBattleScene.unk_00->unk_2C = 0;
     Text_SetStringToken(0x19, (u32)sp28->pokemonPicked[sp2C->unk_18].unk_30);
     Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x21);
     BattleBox_Open(0xC);
     Battle_TriggerTrainerPresentationCue(sActivePokemon[0]);
-    gBattleScene.unk_00->unk_10 = 0;
-    gBattleScene.unk_00->unk_20 += 1;
+    sBattleScene.unk_00->unk_10 = 0;
+    sBattleScene.unk_00->unk_20 += 1;
 }
 
 void BattleScene_IntroFirstMonSettle(CameraNode* arg0) {
-    if (gBattleScene.unk_00->unk_10++ == 1) {
+    if (sBattleScene.unk_00->unk_10++ == 1) {
         BattleScene_SelectCameraFollowPreset(sActivePokemon[0], arg0, 3);
     }
 
@@ -120,7 +120,7 @@ void BattleScene_IntroFirstMonSettle(CameraNode* arg0) {
     BattleScene_ReframeAndRecomputeDistanceForSwitch(arg0, sActivePokemon[0]);
 
     if (BattleScene_IsRowWaitCompleteWithEventCount(sActivePokemon[0], 0x3C) != 0) {
-        gBattleScene.unk_00->unk_20 += 1;
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -137,19 +137,19 @@ void BattleScene_IntroRevealSecondMon(CameraNode* arg0) {
     sActivePokemon[1]->displayObject.node.flags |= 1;
     BattleScene_SelectCameraFollowPreset(sActivePokemon[1], arg0, 3);
     BattleScene_EnterStateRow(sActivePokemon[1], 0x10);
-    gBattleScene.unk_00->unk_10 = 0;
-    gBattleScene.unk_00->unk_2C = 1;
+    sBattleScene.unk_00->unk_10 = 0;
+    sBattleScene.unk_00->unk_2C = 1;
     Text_SetStringToken(0x19, (u32)sp28->pokemonPicked[sp2C->unk_18].unk_30);
     Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x21);
     if (gSessionContext.mode != 8) {
         BattleBox_Open(0xC);
     }
     Battle_TriggerTrainerPresentationCue(sActivePokemon[1]);
-    gBattleScene.unk_00->unk_20 += 1;
+    sBattleScene.unk_00->unk_20 += 1;
 }
 
 void BattleScene_IntroSecondMonSettle(CameraNode* arg0) {
-    if (gBattleScene.unk_00->unk_10++ == 1) {
+    if (sBattleScene.unk_00->unk_10++ == 1) {
         BattleScene_SelectCameraFollowPreset(sActivePokemon[1], arg0, 3);
     }
     sActivePokemon[1]->unk_728.unk_168->node.flags &= ~1;
@@ -158,7 +158,7 @@ void BattleScene_IntroSecondMonSettle(CameraNode* arg0) {
     BattleScene_ReframeAndRecomputeDistanceForSwitch(arg0, sActivePokemon[1]);
     if (BattleScene_IsRowWaitCompleteWithEventCount(sActivePokemon[1], 0x3C) != 0) {
         BattleScene_BeginBattlePhase();
-        gBattleScene.unk_00->unk_20 += 1;
+        sBattleScene.unk_00->unk_20 += 1;
     }
 }
 
@@ -169,7 +169,7 @@ void BattleScene_IntroInitNop(void) {
 }
 
 void BattleScene_UpdateIntroSequence(CameraNode* arg0) {
-    switch (gBattleScene.unk_00->unk_20) {
+    switch (sBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_IntroSetupCamera(arg0);
 

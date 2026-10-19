@@ -997,7 +997,7 @@ extern ActivePokemon* D_84390204;
 extern s32 D_8439022C;
 extern s32 D_84390230;
 extern s32 D_84390234;
-extern unk_D_84390240 gBattleScene;
+extern unk_D_84390240 sBattleScene;
 extern s32 D_84390288;
 extern s32 gBattleAnimFrameCounter;
 extern s32 gBattleAnimSpawnDelay;
