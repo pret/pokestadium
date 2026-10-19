@@ -266,23 +266,23 @@ s32 Flash_EraseSectorByIndex(s16 arg0) {
     return Flash_EraseSector(arg0 << 7);
 }
 
-void Dma_WriteChunks(u32 arg0, u32 arg1, u32 arg2, s32 arg3) {
-    s32 var_s0;
-    s32 var_s1;
+void Dma_WriteChunks(u32 write_start, u32 buffer_start, u32 buffer_end, s32 arg3) {
+    s32 chunk_size;
+    s32 buffer;
     OSMesgQueue* mesq = &D_800A62C0;
 
-    for (var_s1 = arg2 - arg1; var_s1 > 0; var_s1 -= var_s0) {
-        if (var_s1 >= 0x1000) {
-            var_s0 = 0x1000;
+    for (buffer = buffer_end - buffer_start; buffer > 0; buffer -= chunk_size) {
+        if (buffer >= 0x1000) {
+            chunk_size = 0x1000;
         } else {
-            var_s0 = var_s1;
+            chunk_size = buffer;
         }
 
-        Storage_QueueRomRead(arg3, arg0, arg1, var_s0, mesq, 0);
+        Storage_QueueRomRead(arg3, write_start, buffer_start, chunk_size, mesq, 0);
         osRecvMesg(mesq, NULL, 1);
 
-        arg0 += var_s0;
-        arg1 += var_s0;
+        write_start += chunk_size;
+        buffer_start += chunk_size;
     }
 }
 

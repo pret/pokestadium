@@ -13,14 +13,14 @@ u8 D_80075680[3] = { 1, 15, 30 };
 static s16 D_80075684 = 0;
 
 void Team_ClearTrainerSlot(BattleSessionTeams* arg0) {
-    arg0->unk_00 = 0;
+    arg0->uniqueStatusFlags = 0;
     arg0->unk_01 = 0;
-    arg0->unk_02 = 0;
+    arg0->displayModel = 0;
     arg0->unk_04 = 0;
     arg0->unk_14 = 0;
     arg0->teamMember[0] = 0;
     arg0->teamMember[1] = 0;
-    arg0->unk_1D = 0;
+    arg0->assetIsBusy = 0;
     arg0->unk_20 = 0;
     arg0->unk_1E = 0;
 }
@@ -140,8 +140,8 @@ BattleMon* Pokemon_CreateDefault(BattleMon* arg0, u8 arg1, s16 arg2) {
     arg0->unk_04 = 0;
     arg0->unk_05 = 0;
 
-    arg0->unk_06 = D_80070FA0[arg1 - 1].unk_06;
-    arg0->unk_07 = D_80070FA0[arg1 - 1].unk_07;
+    arg0->unk_06 = gSpeciesData[arg1 - 1].type1;
+    arg0->unk_07 = gSpeciesData[arg1 - 1].type2;
 
     arg0->unk_14 = 0x6400;
     arg0->unk_16 = 0x6400;
@@ -387,7 +387,7 @@ void Team_LoadPresetTrainer(s16 arg0, s16 arg1, s16 arg2, s32 arg3) {
     PresetTrainerSlot* temp_v1;
 
     temp_s3 = gSessionContext.battleSides[arg0].teamMember[0];
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         arg1 += 0x1F;
     }
 
@@ -420,7 +420,7 @@ void Team_LoadOpponentPreset(void) {
     s16 var_s0 = gSessionContext.roundOrDemoId - 1;
     s16 sp24 = gSessionContext.modeSelection;
 
-    if ((gSessionContext.mode == 2) && (gSessionContext.unk_11F2 != 0)) {
+    if ((gSessionContext.mode == 2) && (gSessionContext.inRound2 != 0)) {
         var_s0 = Team_PickRandomOpponentIndex(8);
     } else if ((gSessionContext.mode == 7) && (sp24 == 9)) {
         switch (gSessionContext.gbStarterChoice) {
@@ -530,7 +530,7 @@ void Session_SaveContinueData(void) {
     sp20.unk_01 = gSessionContext.modeSelection;
     sp20.unk_02 = gSessionContext.roundOrDemoId;
     sp20.unk_04 = gSessionContext.continueCount;
-    sp20.unk_03 = gSessionContext.unk_11F2;
+    sp20.unk_03 = gSessionContext.inRound2;
 
     sp20.unk_0D = gSessionContext.gbStarterChoice;
     sp20.unk_0E = gSessionContext.battleSides[0].teamMember[0]->unk_018;
@@ -556,7 +556,7 @@ s32 Session_LoadContinueData(void) {
         _bcopy(sp250.unk_05, gSessionContext.opponentHistory[0], 8);
         gSessionContext.roundOrDemoId = sp250.unk_02;
         gSessionContext.continueCount = sp250.unk_04;
-        gSessionContext.unk_11F2 = sp250.unk_03;
+        gSessionContext.inRound2 = sp250.unk_03;
         gSessionContext.gbStarterChoice = sp250.unk_0D;
         tmp = sp250.unk_0E;
 

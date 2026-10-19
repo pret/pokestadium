@@ -27,7 +27,7 @@ void ModelRenderer_AttachDisplayObject(DisplayObject* arg0);
 void ModelRenderer_AttachSecondaryDisplayObject(DisplayObject* arg0);
 void Model_InitDisplayObject(DisplayObject* display_object, s16 root_id, s16 object_type, ModelNodeView* child);
 void ModelRenderer_ClearDisplayObject(DisplayObject* arg0);
-s32 ModelAnim_SetAnimation(DisplayObject* arg0, s32 arg1);
+s32 ModelAnim_SetAnimation(DisplayObject* display_object, s32 id);
 s32 ModelAnim_SetEventTrack(DisplayObject* arg0, s32 arg1);
 void Model_SetMaterialColor(DisplayObject* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
 void Model_SetMaterialAlpha(DisplayObject* arg0, u8 arg1);
@@ -40,5 +40,6 @@ void PokeIcon_PollFrameLoadForObject(unk_func_8001C248* arg0);
 void PokeIcon_WaitFrameLoadForObject(unk_func_8001C248* arg0);
 void PokeIcon_RequestBackgroundForObject(unk_func_8001C248* arg0);
 void PokeIcon_PollBackgroundForObject(unk_func_8001C248* arg0);
+
 
 #endif // _1C720_H_

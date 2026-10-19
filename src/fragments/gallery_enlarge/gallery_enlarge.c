@@ -13,7 +13,7 @@
 
 static s32 D_837004C0;
 static BinArchive* D_837004C4;
-static unk_func_80007444* D_837004C8;
+static StageContext* D_837004C8;
 
 static unk_func_80031270* D_837004B0 = NULL;
 
@@ -24,7 +24,7 @@ void Gallery_EnlargeInit(void) {
     D_837004C0 = 0;
     sp28 = PokeIcon_AllocFramebuffers(1);
     Gallery_ResetActiveScene();
-    D_837004B0 = Geo_CreateSceneInstance(0x280, 0x1E0, NULL, D_837004C8->unk_18[0], sp28, D_837004C4, Gallery_GetEnlargeTarget(1));
+    D_837004B0 = Geo_CreateSceneInstance(0x280, 0x1E0, NULL, D_837004C8->renderTargets[0], sp28, D_837004C4, Gallery_GetEnlargeTarget(1));
 }
 
 void func_83700090(void) {
@@ -107,7 +107,7 @@ void Gallery_EnlargeLoop(void) {
 }
 
 s32 Gallery_EnlargeMain(UNUSED s32 arg0, UNUSED s32 arg1) {
-    unk_func_80007444* sp24;
+    StageContext* sp24;
 
     main_pool_push_state('ELRG');
 

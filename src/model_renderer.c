@@ -72,14 +72,14 @@ void ModelRenderer_ClearDisplayObject(DisplayObject* arg0) {
     arg0->node.flags &= ~1;
 }
 
-s32 ModelAnim_SetAnimation(DisplayObject* arg0, s32 arg1) {
-    ModelAssetNode* tmp = arg0->node.children;
+s32 ModelAnim_SetAnimation(DisplayObject* display_object, s32 id) {
+    ModelAssetNode* tmp = display_object->node.children;
     ModelAnimationBank* temp_v0 = tmp->getAnimationBank(0, 0);
 
-    if (arg1 == -1) {
-        ModelAnim_ClearTransformChannel(arg0);
-    } else if (arg1 < temp_v0->transformCount) {
-        ModelAnim_BindTransformCurve(arg0, arg1, temp_v0->transformTracks[arg1], 0x10000);
+    if (id == -1) {
+        ModelAnim_ClearTransformChannel(display_object);
+    } else if (id < temp_v0->transformCount) {
+        ModelAnim_BindTransformCurve(display_object, id, temp_v0->transformTracks[id], 0x10000);
         return 1;
     }
 
@@ -182,9 +182,9 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
     s16 sp2A;
     TeamRoster* temp_a1;
 
-    sp2A = arg0->unk_02;
+    sp2A = arg0->displayModel;
     sp2C.raw = 0;
-    if (!(arg0->unk_00 & 0x40) && (arg0->unk_00 & 0x80)) {
+    if (!(arg0->uniqueStatusFlags & 0x40) && (arg0->uniqueStatusFlags & 0x80)) {
         temp_a1 = arg0->unk_04;
         if ((temp_a1 != NULL) && (sp2A == arg0->unk_04->unk_000)) {
             Model_ComputeSizeVariant(&sp2C, (BattleMon*)arg0->unk_04);
@@ -196,13 +196,13 @@ void Trainer_RequestPokeIcon(BattleSessionTeams* arg0) {
             while (Display_IsFrameReady() == 0) {}
         }
         PokeIcon_RequestFrameLoad(arg0->unk_10, (u16) sp2A, sp2C);
-        arg0->unk_00 |= 0x40;
-        arg0->unk_00 &= ~0x10;
+        arg0->uniqueStatusFlags |= 0x40;
+        arg0->uniqueStatusFlags &= ~0x10;
 
-        if (arg0->unk_00 & 0x20) {
+        if (arg0->uniqueStatusFlags & 0x20) {
             PokeIcon_WaitFrameLoad(arg0->unk_10);
             arg0->unk_14 = arg0->unk_10->loadedModel;
-            arg0->unk_00 &= ~0xE0;
+            arg0->uniqueStatusFlags &= ~0xE0;
         }
     }
 }

@@ -50,7 +50,7 @@ void BattleAnim_CallbackOwnerModelTintRampDetach(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -88,7 +88,7 @@ void BattleAnim_CallbackOwnerModelTintPulseDetach(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -117,7 +117,7 @@ void BattleAnim_CallbackOwnerModelTintHoldFadeDetach(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -146,7 +146,7 @@ void BattleAnim_CallbackOwnerModelTintPaletteApproachInactive(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -174,7 +174,7 @@ void BattleAnim_CallbackOwnerModelTintPaletteApproach(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -210,7 +210,7 @@ void BattleAnim_CallbackOwnerModelTintPaletteCycle(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -242,7 +242,7 @@ void BattleAnim_CallbackOwnerModelTintPaletteApproachRampDown(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -276,7 +276,7 @@ void BattleAnim_CallbackOwnerModelTintPaletteFade(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
+        Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->unk_AE);
     }
 }
 
@@ -305,7 +305,7 @@ void BattleAnim_CallbackOwnerModelTintRandomPaletteCycle(Particle* arg0) {
                 Particle_FieldA6_SetS16_0BCA8(arg0, 0xFF / arg0->unk_AA);
                 Particle_FieldCF_SetU8_0BEEC(arg0, gParticlePaletteSetA[ParticleMath_RandomRange(6)]);
             }
-            Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
+            Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
             break;
     }
 }
@@ -338,14 +338,14 @@ void BattleAnim_CallbackOwnerModelTintPaletteRotateFadeDetach(Particle* arg0) {
                 Particle_FieldCF_SetU8_0BEEC(arg0, gParticlePaletteSetA[arg0->unk_AE]);
             }
             ParticleGfx_ApproachPrimPalette(arg0, arg0->unk_CF, arg0->unk_AA);
-            Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
+            Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
             break;
 
         case 3:
             if (Particle_PrimAlpha_Approach_0BC2C(arg0, 0, 8) != 0) {
                 Particle_AdvanceLifecycle(arg0);
             }
-            Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
+            Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
             break;
 
         case 4:
@@ -377,7 +377,7 @@ void BattleAnim_CallbackOwnerModelAlphaFade(Particle* arg0) {
     }
 
     if (Particle_IsRunning(arg0) != 0) {
-        Model_SetMaterialAlpha(&arg0->unk_10->unk_000, arg0->prim_a);
+        Model_SetMaterialAlpha(&arg0->unk_10->displayObject, arg0->prim_a);
     }
 }
 
@@ -404,7 +404,7 @@ void BattleAnim_CallbackStartEffect125OwnerColorAlphaFade(Particle* arg0) {
             break;
     }
 
-    Model_SetMaterialColor(&arg0->unk_10->unk_000, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
+    Model_SetMaterialColor(&arg0->unk_10->displayObject, arg0->prim_r, arg0->prim_g, arg0->prim_b, arg0->prim_a);
 }
 
 void BattleAnim_SetupDescriptor25AlphaFadeInHoldOut(Particle* arg0) {

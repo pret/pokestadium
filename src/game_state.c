@@ -667,7 +667,7 @@ void State_RunCredits(void) {
     FRAGMENT_LOAD(FRAGMENT_WIDGET_TOOLKIT);
     FRAGMENT_LOAD(FRAGMENT_MINIGAME_ACTOR_FRAMEWORK);
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         FRAGMENT_LOAD_AND_CALL(FRAGMENT_CREDITS, 0, 0);
     } else {
         FRAGMENT_LOAD_AND_CALL(FRAGMENT_CREDITS, 0, 1);
@@ -741,7 +741,7 @@ void State_N64ddBootUnused(void) {
 
 void State_StubbedDebug(void) {
     s32 temp_v0;
-    unk_func_80007444* temp_s0;
+    StageContext* temp_s0;
 
     main_pool_push_state('DBUG');
 
@@ -1331,7 +1331,7 @@ void Game_Thread(UNUSED LEODiskID* arg) {
 
     main_pool_push_state('GAME');
 
-    gSessionContext.unk_11F2 = 0;
+    gSessionContext.inRound2 = 0;
 
     // is this game connected to a Sticker Station?
     if (Controller_CheckAccessoryEeprom() != 0) {

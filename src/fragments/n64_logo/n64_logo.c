@@ -62,7 +62,7 @@ void N64Logo_ScanGbSavePorts(void) {
 
 s32 N64Logo_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     u64 sp30;
-    unk_func_80007444* sp2C;
+    StageContext* sp2C;
     u16 sp2A;
 
     main_pool_push_state('LOGO');

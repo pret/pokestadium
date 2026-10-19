@@ -4,14 +4,14 @@
 #include "global.h"
 
 extern Gfx D_8006F470[];
-extern Gfx D_8006F498[];
+extern Gfx gUiTranslucentFillDL[];
 extern Gfx D_8006F4C0[];
 extern Gfx D_8006F4E0[];
-extern Gfx D_8006F518[];
+extern Gfx gUiEnvTintTextureDL[];
 extern Gfx D_8006F558[];
 extern Gfx D_8006F5A0[];
 extern Gfx D_8006F608[];
-extern Gfx D_8006F630[];
+extern Gfx gUiRestoreTextureDL[];
 extern Gfx D_8006F710[];
 extern Gfx D_8006F750[];
 extern Gfx D_8006F768[];

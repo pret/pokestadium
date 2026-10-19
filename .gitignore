@@ -26,6 +26,10 @@ ctx.c.m2c
 
 .vscode/*
 !.vscode/c_cpp_properties.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+.cache/clangd/
 tools/vtxdis
 tools/permuter
 tools/n64

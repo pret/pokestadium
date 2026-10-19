@@ -544,7 +544,7 @@ void func_84100020(s16 arg0, s16 arg1, s16 arg2) {
     gDPLoadTextureBlock(gDisplayListHead++, D_302E440, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, sp8, spC, sp10, sp14, G_TX_RENDERTILE, 0, 0, sp4, sp4);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void StadiumSelect_UpdateSparkles(s16 arg0) {
@@ -587,19 +587,19 @@ void StadiumSelect_UpdateSparkles(s16 arg0) {
 void StadiumSelect_InitSparkleFlags(void) {
     s32 i;
 
-    for (i = 0; i < D_84103CF0.unk_05; i++) {
+    for (i = 0; i < D_84103CF0.nintendoCupClears; i++) {
         D_84102498[i].unk_00 = 1;
     }
 
-    for (i = 0; i < D_84103CF0.unk_06; i++) {
+    for (i = 0; i < D_84103CF0.primeCupClears; i++) {
         D_84102498[i + 6].unk_00 = 1;
     }
 
-    if (D_84103CF0.unk_00 & 0x10) {
+    if (D_84103CF0.clearedModes & 0x10) {
         D_84102510[0] = 1;
     }
 
-    if (D_84103CF0.unk_00 & 0x20) {
+    if (D_84103CF0.clearedModes & 0x20) {
         D_8410251C[0] = 1;
     }
 }
@@ -608,7 +608,7 @@ void StadiumSelect_DrawIconFrame(DepthBuffer* arg0, s16 arg1, s16 arg2) {
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0);
     GfxImage_FillCurrent(&gDisplayListHead, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 128);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
 
@@ -621,7 +621,7 @@ void StadiumSelect_DrawIconFrame(DepthBuffer* arg0, s16 arg1, s16 arg2) {
     Gfx_DrawTexturedRectClipped(4, arg2 - 5, arg1 - 8, 8, 0xE0, 0, 0, 0x400, 0);
     Gfx_DrawTextureIa8(arg1 - 5, arg2 - 5, 8, 8, D_2000300, 8, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void StadiumSelect_DrawBlurbBackdrop(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -643,31 +643,31 @@ void StadiumSelect_DrawBlurbBackdrop(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
     temp_a2 = arg2 - (var_s3 * 2);
     temp_s0_32 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelTopLeftTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped(arg0, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028AA0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelTopRightTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_20289E0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelBottomLeftTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped(arg0, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A20, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelBottomRightTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
                   0x2000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((temp_a2 > 0) && (temp_s0_32 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, temp_a2, var_s2, arg4, arg5, arg6, arg7);
@@ -679,7 +679,7 @@ void StadiumSelect_DrawBlurbBackdrop(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, temp_s0_32, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void StadiumSelect_DrawSelectionCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -688,7 +688,7 @@ void StadiumSelect_DrawSelectionCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, 
     s16 sp56 = SINS(D_8410342C) * 2;
     UNUSED s32 pad[2];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     Gfx_DrawTextureIa8((arg0 + sp56) - 8, (arg1 + sp56) - 8, 0x10, 0x10, D_2000C80, 0x10, 0);
@@ -696,7 +696,7 @@ void StadiumSelect_DrawSelectionCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3, 
     Gfx_DrawTextureIa8(((arg0 + arg2) - sp56) - 8, (arg1 + sp56) - 8, 0x10, 0x10, D_2000D80, 0x10, 0);
     Gfx_DrawTextureIa8(((arg0 + arg2) - sp56) - 8, ((arg1 + arg3) - sp56) - 8, 0x10, 0x10, D_2000E80, 0x10, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     D_8410342C += 0x2000;
 }
@@ -750,14 +750,14 @@ void StadiumSelect_DrawCupInfoPanel(s16 arg0) {
         Font_Printf(0x48, 0x182, Text_GetString(NULL, 0, D_84103440, D_84103CC8 + 6));
         Font_EndTexturedTextRendering();
 
-        if (gSessionContext.unk_11F2 == 1) {
+        if (gSessionContext.inRound2 == 1) {
             temp_v0 = Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_84103440, D_84103CC8));
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Gfx_DrawTextureRgba16(temp_v0 + 0x4C, 0x160, 0x1C, 0x1C, &D_302E840, 0x1C, 0);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         }
     }
 }
@@ -824,13 +824,13 @@ DepthBuffer* StadiumSelect_BuildDivisionCupIcon(u8* arg0, s16 arg1) {
     s32 var_s3;
 
     if (arg1 == 3) {
-        var_s3 = D_84103CF0.unk_05;
+        var_s3 = D_84103CF0.nintendoCupClears;
     } else {
-        var_s3 = D_84103CF0.unk_06;
+        var_s3 = D_84103CF0.primeCupClears;
     }
     StadiumSelect_DrawIconFrame(sp40, 0xA0, 0x7A);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 9; i++) {
         Gfx_DrawTextureRgba16(4, (i * 0xC) + 4, 0x98, 0xC, (i * 0xE40) + arg0, 0x98, 0);
@@ -842,7 +842,7 @@ DepthBuffer* StadiumSelect_BuildDivisionCupIcon(u8* arg0, s16 arg1) {
         Gfx_DrawTextureRgba16((i * 0x26) + 5, 0x46, 0x24, 0x30, D_84102534[i], 0x24, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     return sp40;
 }
@@ -854,13 +854,13 @@ DepthBuffer* StadiumSelect_BuildSimpleCupIcon(u8* arg0, s16 arg1) {
 
     StadiumSelect_DrawIconFrame(sp30, 0x88, 0x68);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 6; i++) {
         Gfx_DrawTextureRgba16(4, (i * 0x10) + 4, 0x80, 0x10, (i << 0xC) + arg0, 0x80, 0);
     }
 
-    if (D_84103CF0.unk_00 & (1 << arg1)) {
+    if (D_84103CF0.clearedModes & (1 << arg1)) {
         if (arg1 == 4) {
             var_v0 = 5;
         } else {
@@ -869,7 +869,7 @@ DepthBuffer* StadiumSelect_BuildSimpleCupIcon(u8* arg0, s16 arg1) {
         Gfx_DrawTextureRgba16(0x54, 0x3A, 0x30, 0x2A, D_84102534[var_v0], 0x30, 0);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     return sp30;
 }
@@ -1017,7 +1017,7 @@ s32 StadiumSelect_Main(s32 arg0, s32 arg1) {
     main_pool_push_state('PSSL');
 
     Save_EnsureBankLoaded(2);
-    Save_GetModeSettings(&D_84103CF0, gSessionContext.unk_11F2);
+    Save_GetModeSettings(&D_84103CF0, gSessionContext.inRound2);
     Font_Init(0x18, 0);
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);

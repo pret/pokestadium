@@ -361,7 +361,7 @@ Gfx* Trail40Variant_BuildGfx(Gfx* arg0) {
 
     Trail40Variant_SetupCameraTransform();
 
-    gDPLoadTextureBlock(arg0++, gBattleAnimAssetPointers[0x48], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(arg0++, sBattleAnimAssetPointers[0x48], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPDisplayList(arg0++, D_84389458);
     gDPSetPrimColor(arg0++, 0, 0, 255, 255, 255, D_8439E680.unk_0004);

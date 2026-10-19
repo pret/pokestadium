@@ -132,7 +132,7 @@ void EventBattle_DrawSelectionCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     s16 temp_ft3 = SINS(D_823059AC) * 2;
     UNUSED s32 pad[2];
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 240, 212, 104, 255);
 
     Gfx_DrawTextureIa8(arg0 + temp_ft3, arg1 + temp_ft3, 0x10, 0x10, D_2000C80, 0x10, 0);
@@ -140,13 +140,13 @@ void EventBattle_DrawSelectionCorners(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     Gfx_DrawTextureIa8(((arg0 + arg2) - temp_ft3) - 0x10, arg1 + temp_ft3, 0x10, 0x10, D_2000D80, 0x10, 0);
     Gfx_DrawTextureIa8(((arg0 + arg2) - temp_ft3) - 0x10, ((arg1 + arg3) - temp_ft3) - 0x10, 0x10, 0x10, D_2000E80, 0x10, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     D_823059AC += 0x2000;
 }
 
 void EventBattle_DrawPanelFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureIa8(arg0 - 3, arg1 - 3, 8, 8, D_2000340, 8, 0);
     Gfx_DrawTextureIa8((arg0 + arg2) - 5, arg1 - 3, 8, 8, D_2000380, 8, 0);
@@ -157,7 +157,7 @@ void EventBattle_DrawPanelFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
     Gfx_DrawTexturedRectClipped(arg0 + 4, (arg1 + arg3) - 5, arg2 - 8, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - 5, arg1 + 4, 8, arg3 - 8, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -181,7 +181,7 @@ void EventBattle_DrawSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
     temp_a2 = arg2 - (var_s3 * 2);
     temp_s0_32 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_20288E0, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
@@ -204,7 +204,7 @@ void EventBattle_DrawSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x4000 / var_s3,
                   0x4000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((temp_a2 > 0) && (temp_s0_32 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, temp_a2, var_s2, arg4, arg5, arg6, arg7);
@@ -216,7 +216,7 @@ void EventBattle_DrawSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, temp_s0_32, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawThinSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
@@ -240,30 +240,30 @@ void EventBattle_DrawThinSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
     sp48 = arg2 - (var_s3 * 2);
     sp44 = arg3 - (var_s2 * 2);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A60, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelTopLeftTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped(arg0, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028AA0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelTopRightTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, arg1, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_20289E0, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelBottomLeftTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped(arg0, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3, 0x2000 / var_s2, 0);
 
-    gDPLoadTextureBlock_4b(gDisplayListHead++, D_2028A20, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, gUiPanelBottomRightTexture, G_IM_FMT_I, 16, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - var_s3, (arg1 + arg3) - var_s2, var_s3, var_s2, 0, 0, 0x2000 / var_s3,
                   0x2000 / var_s2, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     if ((sp48 > 0) && (sp44 > 0)) {
         Gfx_FillRectRgba(arg0 + var_s3, arg1, sp48, var_s2, arg4, arg5, arg6, arg7);
@@ -275,11 +275,11 @@ void EventBattle_DrawThinSlicedFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 
         Gfx_FillRectRgba(arg0, arg1 + var_s2, arg2, sp44, arg4, arg5, arg6, arg7);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawSmallFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, arg4, arg5, arg6, arg7);
 
     Gfx_DrawTextureIa8(arg0, arg1, 8, 8, D_2000B40, 8, 0);
@@ -291,20 +291,20 @@ void EventBattle_DrawSmallFrame(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4,
     Gfx_DrawTexturedRectClipped(arg0 + 8, (arg1 + arg3) - 8, arg2 - 0x10, 8, 0, 0, 0, 0x400, 0);
     Gfx_DrawTexturedRectClipped((arg0 + arg2) - 8, arg1 + 8, 8, arg3 - 0x10, 0, 0, 0x400, 0, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F498);
+    gSPDisplayList(gDisplayListHead++, gUiTranslucentFillDL);
 
     Gfx_FillRectRgba(arg0 + 8, arg1 + 8, arg2 - 0x10, arg3 - 0x10, arg4, arg5, arg6, arg7);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawHeaderImage(s16 arg0, s16 arg1) {
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     Gfx_DrawTextureRgba16(arg0, arg1, 0x30, 0x18, D_2006C00, 0x30, 0);
     Gfx_DrawTextureRgba16(arg0, arg1 + 0x18, 0x30, 0x18, D_2007500, 0x30, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawTintedBar(s16 arg0, s16 arg1, s16 arg2, Color_RGBA8* arg3, Color_RGBA8* arg4) {
@@ -317,7 +317,7 @@ void EventBattle_DrawTintedBar(s16 arg0, s16 arg1, s16 arg2, Color_RGBA8* arg3, 
     Gfx_DrawTextureIa8((arg0 + arg2) - 0x10, arg1, 0x10, 0x20, D_20005C0, 0x10, 0);
     Gfx_DrawTexturedRectClipped(arg0 + 0x10, arg1, arg2 - 0x20, 0x20, 0, 0, 0, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawTitleBar(void) {
@@ -403,14 +403,14 @@ void EventBattle_DrawRuleCard(unk_D_82305A50* arg0) {
                 Gfx_FillRectRgb(temp_s1 + 4, temp_s2 + 4, 0xF0, 0x30, 0x64, 0x1E, 0x1E);
             }
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             Gfx_DrawTextureRgba16(temp_s1 + 8, temp_s2 + 8, 0x28, 0x28, arg0->unk_0C, 0x28, 0);
         } else {
             Gfx_FillRectRgb(temp_s1 + 4, temp_s2 + 4, 0xF0, 0x30, 0x1E, 0x5A, 0x1E);
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         if (arg0->unk_0C != NULL) {
@@ -567,7 +567,7 @@ void EventBattle_DrawTrainerCard(unk_D_82305AF8* arg0) {
 
         EventBattle_DrawTeamPanel(arg0, sp58, sp56);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         Gfx_DrawTextureRgba16(sp58 + 0x1A, sp56 + 8, 0x48, 0x12, var_s0, 0x48, 0);
         Gfx_DrawTextureRgba16(sp58 + 0x1A, sp56 + 0x1A, 0x48, 0x12, var_s0 + 0xA20, 0x48, 0);
@@ -578,7 +578,7 @@ void EventBattle_DrawTrainerCard(unk_D_82305AF8* arg0) {
             Gfx_DrawTextureRgba16(tmp1, tmp2, 0x28, 0x28, arg0->unk_0218[i], 0x28, 0);
         }
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
         Font_SetActive(8, 0);
@@ -754,7 +754,7 @@ void EventBattle_DrawNoticeBanner(SlidingPanel* arg0) {
         temp_s3 = arg0->unk_04;
         sp58 = arg0->unk_06 + ((0x38 - arg0->unk_02) / 2);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F518);
+        gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
         for (i = 0; i < 4; i++) {
             gDPLoadTextureBlock(gDisplayListHead++, &D_302C000[i * 0xAF0], G_IM_FMT_RGBA, G_IM_SIZ_16b, 100, 14, 0,
@@ -767,7 +767,7 @@ void EventBattle_DrawNoticeBanner(SlidingPanel* arg0) {
         if ((arg0->unk_01 == 0) && (arg0->unk_02 == 0x38)) {
             EventBattle_DrawSlicedFrame(0x70, sp58 + 8, 0x1A0, 0x28, 0, 0, 0, 0x96);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             Font_BeginTranslucentTextRendering();
             Font_SetActive(0x10, 0);
@@ -775,7 +775,7 @@ void EventBattle_DrawNoticeBanner(SlidingPanel* arg0) {
             Font_Printf(0x90, sp58 + 0xE, Text_GetString(NULL, 0, D_82305A20, 0xA));
             Font_EndTexturedTextRendering();
         } else {
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         }
     }
 }
@@ -829,7 +829,7 @@ void EventBattle_DrawOptionLabel(unk_D_8230F528* arg0) {
 
         Gfx_FillRectRgb(sp38 + 4, sp36 + 4, 0x90, sp3A - 8, 0x3C, 0x3C, 0xA0);
 
-        gSPDisplayList(gDisplayListHead++, D_8006F630);
+        gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         if (arg0->unk_02 == 0x30) {
             Font_BeginTranslucentTextRendering();
@@ -945,7 +945,7 @@ void EventBattle_DrawSettingsPanel(unk_D_82305A40* arg0) {
             EventBattle_DrawSmallFrame(temp_s2 + 7, temp_s1 + 0x27, 0x1B0, 0x8C, 0x1E, 0x1E, 0x64, 0xFF);
             Ui_DrawAnimatedTextureMarker(temp_s2 + 0xE, temp_s1 + (arg0->unk_0C * 0x21) + 0x31);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F518);
+            gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
             if (arg0->unk_01 == 1) {
                 if (arg0->unk_0C == 1) {
@@ -961,7 +961,7 @@ void EventBattle_DrawSettingsPanel(unk_D_82305A40* arg0) {
             EventBattle_DrawSettingBar(temp_s2 + 0x11C, temp_s1 + 0x4F, arg0->unk_01);
             EventBattle_DrawSettingBar(temp_s2 + 0x11C, temp_s1 + 0x70, arg0->unk_01);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             Font_BeginTranslucentTextRendering();
             Font_SetActive(0x10, 0);
@@ -1109,7 +1109,7 @@ void EventBattle_DrawBackground(void) {
 
     Gfx_DrawTexturedRectClipped(0, 0, 0x280, 0x1E0, 0, 0, 0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void EventBattle_DrawFrame(s16 arg0) {

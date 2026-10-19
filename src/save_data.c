@@ -876,8 +876,8 @@ s32 Save_WriteTypedRecord(s32 arg0, s32 arg1, s32 arg2, void* arg3) {
     return sp34;
 }
 
-void Save_GetOptions(GameOptions* arg0) {
-    *arg0 = D_800AE4E8[2].unk_04.unk2->unk_1EA0.unk_04;
+void Save_GetOptions(GameOptions* options) {
+    *options = D_800AE4E8[2].unk_04.unk2->unk_1EA0.unk_04;
 }
 
 void Save_SetOptions(GameOptions* arg0) {
@@ -887,8 +887,8 @@ void Save_SetOptions(GameOptions* arg0) {
     }
 }
 
-void Save_GetModeSettings(ModeSettings* arg0, s16 arg1) {
-    *arg0 = D_800AE4E8[2].unk_04.unk2->unk_1EA0.unk_0C[arg1];
+void Save_GetModeSettings(ModeSettings* settings, s16 round_index) {
+    *settings = D_800AE4E8[2].unk_04.unk2->unk_1EA0.unk_0C[round_index];
 }
 
 void Save_SetModeSettings(ModeSettings* arg0, s16 arg1) {

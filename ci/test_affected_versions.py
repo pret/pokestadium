@@ -31,6 +31,16 @@ class Affected(unittest.TestCase):
     def test_docs_gate_nothing(self):
         self.assertEqual(affected(self.root, ["COVERAGE.md", "docs/regions/x.md"]), [])
 
+    def test_editor_and_tool_test_files_gate_nothing(self):
+        files = [".vscode/settings.json", ".github/workflows/clangd.yml", ".clangd", ".gitignore", "compile_flags.txt",
+                 "tools/clangd_config.py", "tools/test_clangd_config.py", "CONTRIBUTING.md"]
+        self.assertEqual(affected(self.root, files), [])
+
+    def test_other_tools_and_workflows_still_gate_everything(self):
+        self.assertEqual(affected(self.root, ["tools/port_version.py"]), ["jp", "us"])
+        self.assertEqual(affected(self.root, [".github/workflows/pr-rom-gate.yml"]), ["jp", "us"])
+        self.assertEqual(affected(self.root, [".vscode/settings.json", "tools/port_version.py"]), ["jp", "us"])
+
     def test_build_system_gates_everything(self):
         self.assertEqual(affected(self.root, ["Makefile"]), ["jp", "us"])
         self.assertEqual(affected(self.root, ["linker_scripts/common_undef_syms.ld"]), ["jp", "us"])

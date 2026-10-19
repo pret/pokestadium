@@ -320,7 +320,7 @@ aspMainTextStart = 0x80067420;
 aspMainDataStart = 0x8007EA70;
 D_8006873C = 0x8006873C; // bogus branch target inside gspF3DEX2.fifo, named so the inline data at 0x8004873C links
 audDMAMessageQ = 0x800FCAE0;
-D_8006F010 = 0x8006F010; // size:0x40
+gIdentityMtx = 0x8006F010; // size:0x40
 D_8006F050 = 0x8006F050; // size:0xC
 D_8006F05C = 0x8006F05C; // size:0x6
 D_8006F064 = 0x8006F064; // size:0xC
@@ -1096,7 +1096,7 @@ gBattleSceneStateTickSlots = 0x84390068; // size:0x38
 sActivePokemon = 0x84390010; // size:0x8
 D_84390028 = 0x84390028; // size:0x20
 D_843901F0 = 0x843901F0; // size:0xC
-D_84390048 = 0x84390048; // size:0x20
+sDefaultSwayLayout = 0x84390048; // size:0x20
 D_3008380 = 0x3008380;
 D_3008400 = 0x3008400;
 D_3008480 = 0x3008480;
@@ -1514,7 +1514,7 @@ D_843903A0 = 0x843903A0; // size:0x2
 BattleAnim_EffectStartNop = 0x8432F998; // type:func
 func_843378CC = 0x843378CC; // type:func
 BattleAnim_EffectEndNop = 0x8432F9A0; // type:func
-gBattleAnimAssetPointers = 0x843920C0; // size:0x400
+sBattleAnimAssetPointers = 0x843920C0; // size:0x400
 func_8433765C = 0x8433765C; // type:func
 func_84337664 = 0x84337664; // type:func
 BattleAnim_DefaultEndEffect_Draw = 0x843593C8; // type:func
@@ -1549,8 +1549,8 @@ gGbApuWave = 0x8122C838;
 gGbApuNoise = 0x8122C888;
 gTradeStrings = 0x82F13B70;
 gBattleMessageQueues = 0x843901A0;
-gBattleScene = 0x84390240;
-gBattleMoveFailed = 0x843C4DA4;
+sBattleScene = 0x84390240;
+sBattleMoveFailed = 0x843C4DA4;
 gBattleDamage = 0x843C4DC4;
 gBattleUser = 0x843C5238;
 gBattleTarget = 0x843C523C;
@@ -1561,3 +1561,15 @@ D_812297C0 = 0x812297C0; // force_not_migration:True size:0x9E4
 D_8122A1A4 = 0x8122A1A4; // force_not_migration:True size:0xBC
 D_8122A260 = 0x8122A260; // force_not_migration:True size:0xA40
 D_8122ACA0 = 0x8122ACA0; // force_not_migration:True size:0xB0
+
+gRound2BadgeTexture = 0x020144E0; // type:u8
+
+gUiPanelTopLeftTexture = 0x02028A60; // type:u8
+
+gUiPanelTopRightTexture = 0x02028AA0; // type:u8
+
+gUiPanelBottomLeftTexture = 0x020289E0; // type:u8
+
+gUiPanelBottomRightTexture = 0x02028A20; // type:u8
+
+sAreaSelectGlowCircleTexture = 0x03044260; // type:u8

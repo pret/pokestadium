@@ -376,7 +376,7 @@ void miniDrawResultIcons(MiniActor* arg0) {
     Font_Printf(158, 110, "%s", D_87903D48_jp);
 #endif
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 
     for (i = 0; i < 4; i++, arg0++) {
@@ -391,7 +391,7 @@ void miniDrawResultIcons(MiniActor* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void miniShowDifficultyText(void) {

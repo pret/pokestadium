@@ -232,7 +232,7 @@ void Battle_DrawStageBackdrop(void) {
     gSPTextureRectangle(gDisplayListHead++, left << 2, top << 2, right << 2, middle << 2, G_TX_RENDERTILE, 0, 0, 0, texture_step_y);
     gSPTextureRectangle(gDisplayListHead++, left << 2, middle << 2, right << 2, bottom << 2, G_TX_RENDERTILE, 0, 0x07E0, 0,
                         0);
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 /*
@@ -577,9 +577,9 @@ void BattleScene_InitializeParticipantPresentation(BattleSessionTeams* side, unk
     TeamRoster* first_trainer = side->teamMember[0];
 
     side->unk_18 = model->unk_08->unk_00[0];
-    side->unk_00 |= 0xA0;
+    side->uniqueStatusFlags |= 0xA0;
     side->unk_1C = 0;
-    side->unk_02 = first_trainer->pokemonPicked[0].unk_00.unk_00;
+    side->displayModel = first_trainer->pokemonPicked[0].unk_00.unk_00;
     side->unk_04 = first_trainer->pokemonPicked;
     Trainer_RequestPokeIcon(side);
 }

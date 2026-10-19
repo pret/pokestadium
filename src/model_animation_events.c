@@ -102,18 +102,18 @@ s16 ModelAnim_BindEventTrack(DisplayObject* arg0, s16 arg1, s32 arg2) {
     return ptr->frame;
 }
 
-void ModelAnim_SetEventFrame(DisplayObject* arg0, s16 arg1) {
-    arg0->eventTrack.frame = arg1 - 1;
+void ModelAnim_SetEventFrame(DisplayObject* display_object, s16 frame_number) {
+    display_object->eventTrack.frame = frame_number - 1;
 }
 
-s32 ModelAnim_IsEventFrame(DisplayObject* arg0, s16 arg1) {
-    return (arg0->eventTrack.frame + 1) == arg1;
+s32 ModelAnim_IsEventFrame(DisplayObject* display_object, s16 frame_number) {
+    return (display_object->eventTrack.frame + 1) == frame_number;
 }
 
-s32 ModelAnim_IsEventTrackNearEnd(DisplayObject* arg0) {
-    return (arg0->eventTrack.frame + 2) == arg0->eventTrack.data->endFrame;
+s32 ModelAnim_IsEventTrackNearEnd(DisplayObject* display_object) {
+    return (display_object->eventTrack.frame + 2) == display_object->eventTrack.data->endFrame;
 }
 
-s32 ModelAnim_IsEventTrackDone(DisplayObject* arg0) {
-    return (arg0->eventTrack.frame + 1) == arg0->eventTrack.data->endFrame;
+s32 ModelAnim_IsEventTrackDone(DisplayObject* display_object) {
+    return (display_object->eventTrack.frame + 1) == display_object->eventTrack.data->endFrame;
 }

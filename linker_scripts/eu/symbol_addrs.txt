@@ -313,7 +313,7 @@ aspMainTextStart = 0x800674E0;
 aspMainDataStart = 0x8007EB40;
 D_8006873C = 0x800687FC; // bogus branch target inside gspF3DEX2.fifo, named so the inline data at 0x8004873C links
 audDMAMessageQ = 0x800FCD80;
-D_8006F010 = 0x8006F0D0; //
+gIdentityMtx = 0x8006F0D0; //
 D_8006F050 = 0x8006F110; //
 D_8006F05C = 0x8006F11C; //
 D_8006F064 = 0x8006F124; //
@@ -1083,7 +1083,7 @@ gBattleSceneStateTickSlots = 0x84390068; //
 sActivePokemon = 0x84390010; //
 D_84390028 = 0x84390028; //
 D_843901F0 = 0x843901F0; //
-D_84390048 = 0x84390048; //
+sDefaultSwayLayout = 0x84390048; //
 D_3008380 = 0x03008380;
 D_3008400 = 0x03008400;
 D_3008480 = 0x03008480;
@@ -1490,7 +1490,7 @@ D_843903A0 = 0x843903A0; //
 BattleAnim_EffectStartNop = 0x8432F9A8; // type:func
 func_843378CC = 0x843378DC; // type:func
 BattleAnim_EffectEndNop = 0x8432F9B0; // type:func
-gBattleAnimAssetPointers = 0x843920C0; //
+sBattleAnimAssetPointers = 0x843920C0; //
 func_8433765C = 0x8433766C; // type:func
 func_84337664 = 0x84337674; // type:func
 BattleAnim_DefaultEndEffect_Draw = 0x843593D8; // type:func
@@ -1525,8 +1525,8 @@ gGbApuWave = 0x8122C818;
 gGbApuNoise = 0x8122C868;
 gTradeStrings = 0x82F13B70;
 gBattleMessageQueues = 0x843901A0;
-gBattleScene = 0x84390240;
-gBattleMoveFailed = 0x843C4DA4;
+sBattleScene = 0x84390240;
+sBattleMoveFailed = 0x843C4DA4;
 gBattleDamage = 0x843C4DC4;
 gBattleUser = 0x843C5238;
 gBattleTarget = 0x843C523C;
@@ -1537,3 +1537,15 @@ gBattleTarget = 0x843C523C;
 D_8122A1A4 = 0x8122A184; // force_not_migration:True
 // D_8122A260 = 0x8122A260; // force_not_migration:True size:0xA40 // not found in eu
 // D_8122ACA0 = 0x8122ACA0; // force_not_migration:True size:0xB0 // not found in eu
+
+gRound2BadgeTexture = 0x20144E0; // type:u8
+
+gUiPanelTopLeftTexture = 0x2028A60; // type:u8
+
+gUiPanelTopRightTexture = 0x2028AA0; // type:u8
+
+gUiPanelBottomLeftTexture = 0x20289E0; // type:u8
+
+gUiPanelBottomRightTexture = 0x2028A20; // type:u8
+
+sAreaSelectGlowCircleTexture = 0x3044260; // type:u8

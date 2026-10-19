@@ -97,7 +97,7 @@ void Title_DrawPressStartBlink(s16 arg0, s16 arg1) {
         titlePressStartBlinkFrame = 0x30;
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, var_s0);
 
     gDPLoadTextureTile(gDisplayListHead++, D_2000000, G_IM_FMT_IA, G_IM_SIZ_8b, 100, 0, 0, 0, 100 - 1, 15 - 1, 0,
@@ -106,7 +106,7 @@ void Title_DrawPressStartBlink(s16 arg0, s16 arg1) {
 
     Gfx_DrawTexturedRectClipped(arg0, arg1, 100, 15, 0, 0, 0x400, 0x400, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Title_DrawNoControllerWarning(void) {
@@ -159,7 +159,7 @@ void Title_DrawBackgroundImage(u8* arg0) {
         }
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void Title_DrawFrame(void) {
@@ -352,7 +352,7 @@ void Title_LoadAssets(void) {
 
     gTitleBackgroundArchive = ASSET_LOAD2(backgrounds, 1, 1);
 
-    if (gTitleModeSettings.unk_00 == 0x1F8) {
+    if (gTitleModeSettings.clearedModes == 0x1F8) {
         gTitleBackgroundImage = BinArchive_GetFile(gTitleBackgroundArchive, 0x11);
     } else {
         gTitleBackgroundImage = BinArchive_GetFile(gTitleBackgroundArchive, 0);

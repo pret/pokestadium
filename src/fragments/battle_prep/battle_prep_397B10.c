@@ -1184,7 +1184,7 @@ void BattlePrep_LoadBannerGeoLayouts(unk_D_84B259A8* arg0) {
     arg0->unk_24 = process_geo_layout(temp_v0, D_84B10378);
     arg0->unk_38 = process_geo_layout(temp_v0, D_84B10E78);
     arg0->unk_34 = process_geo_layout(temp_v0, D_84B109F0);
-    if (gSessionContext.unk_11F2 == 0) {
+    if (gSessionContext.inRound2 == 0) {
         arg0->unk_28 = process_geo_layout(temp_v0, D_84B10568);
         arg0->unk_2C = process_geo_layout(temp_v0, D_84B105A8);
     } else {
@@ -1371,12 +1371,12 @@ void BattlePrep_RenderBadgeGlowTexture(s32 arg0) {
     GfxImage_Initialize(&sp40, 0, 2, 0x40, 0x40, arg0);
     GfxImage_SetRenderTarget(&gDisplayListHead, &sp40);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F518);
+    gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 50, 20, 160);
 
     Gfx_DrawTextureI4(0, 0, 0x40, 0x40, sp3C, 0x40, 0);
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void BattlePrep_ResetBadgeSlideSlots(unk_D_84B259E8* arg0) {
@@ -1456,7 +1456,7 @@ void BattlePrep_BadgeRevealSpin(unk_D_84B259E8* arg0) {
             Gfx_DrawTextureRgba16(4, 0x24, 0x38, 0x1C, &arg0->unk_10[gSessionContext.roundOrDemoId - 1][0x208], 0x40, 0x200000);
             Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, &arg0->unk_10[gSessionContext.roundOrDemoId - 1][0x1008], 0x40, 0x200000);
 
-            gSPDisplayList(gDisplayListHead++, D_8006F630);
+            gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
         }
 
         arg0->unk_01 = 0;
@@ -1548,7 +1548,7 @@ void BattlePrep_RenderBadgeBackground(unk_D_84B259E8* arg0, s16 arg1, char* arg2
         Gfx_DrawTextureRgba16(4, 0x40, 0x38, 0x1C, arg0->unk_10[arg1] + 0x1008, 0x40, 0x200000);
     }
 
-    gSPDisplayList(gDisplayListHead++, D_8006F630);
+    gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     if ((gSessionContext.modeSelection < 9) || (arg1 == 0)) {
         s32 sp34 = Font_MeasureTextExtent(2, 0, arg2);
@@ -1626,7 +1626,7 @@ void BattlePrep_LoadBadgeTextures(unk_D_84B259E8* arg0, BinArchive* arg1, BinArc
             break;
     }
 
-    if (gSessionContext.unk_11F2 != 0) {
+    if (gSessionContext.inRound2 != 0) {
         sp44 += 0x1F;
     }
 
