@@ -961,8 +961,8 @@ extern u8 gTypeEffects[];
 extern u8* sSide1PokemonThumbnailImage;
 extern u8* sSide2PokemonThumbnailImage;
 
-extern u8 gBattleMoveFailed;
-extern u8 gBattleCritFlag;
+extern u8 sBattleMoveFailed;
+extern u8 sBattleCritFlag;
 extern u8 D_843C4DA9;
 extern u8 D_843C4DAA;
 extern s32 D_843C4DEC;

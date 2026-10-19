@@ -757,7 +757,7 @@ s32 BattleScene_ActionPresentationCleanupCheck(void) {
         return BattleScene_TransitionToPhaseFull(0x10);
     }
 
-    if ((gBattleMoveFailed != 0) || (gBattleScene.unk_00->unk_48 == 8)) {
+    if ((sBattleMoveFailed != 0) || (gBattleScene.unk_00->unk_48 == 8)) {
         return BattleScene_TransitionToPhaseFull(8);
     }
     return 0;
@@ -1621,7 +1621,7 @@ void BattleScene_ActionSetupAnimationVariantA(CameraNode* arg0) {
                 BattleScene_SaveCameraFov(arg0);
                 D_84390230--;
                 BattleScene_RefreshActionCameraPreset(arg0);
-                if ((D_84390230 < 0) || (gBattleMoveFailed != 0)) {
+                if ((D_84390230 < 0) || (sBattleMoveFailed != 0)) {
                     D_84390230 = D_8439022C;
                     gBattleScene.unk_00->unk_3C++;
                 } else {
@@ -1944,7 +1944,7 @@ void BattleScene_RunActionEffectHpTransition(CameraNode* arg0) {
             D_84390220 = BattleScene_AnimateDisplayedHpToRuntime(D_84390200);
             D_84390224 = BattleScene_AnimateDisplayedHpToRuntime(D_84390204);
             sp1C = BattleScene_FrameCamera(arg0, D_84390200);
-            if ((BattleScene_IsSpecialOwnerAnimation(D_84390204) != 0) && ((D_843C4DEC < 0xA) || (gBattleMoveFailed != 0)) &&
+            if ((BattleScene_IsSpecialOwnerAnimation(D_84390204) != 0) && ((D_843C4DEC < 0xA) || (sBattleMoveFailed != 0)) &&
                 !(sp24->unk_15 & 0x20)) {
                 var_a0 = 0x5A;
             } else {

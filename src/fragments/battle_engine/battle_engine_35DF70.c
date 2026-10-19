@@ -73,13 +73,13 @@ void Battle_Effect_Sleep(void) {
 
         if (gBattleTarget->unk_15 == 0) {
             func_843708CC();
-            if ((gBattleMoveFailed == 0) &&
+            if ((sBattleMoveFailed == 0) &&
                 ((Battle_HasUsableMajorStatusTarget(sActivePokemon[!gBattleScene.unk_00->unk_2C]) == 0) || (D_8438AC60[0] == 2))) {
                 goto block_9;
             }
         }
         gBattleDamage = 0;
-        gBattleMoveFailed = 1;
+        sBattleMoveFailed = 1;
         D_843C4E44 = 0;
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x7F);
@@ -102,7 +102,7 @@ block_9:
                 var_v1 = Battle_Random() & 3;
             }
         } while (var_v1 == 0);
-        gBattleMoveFailed = 0;
+        sBattleMoveFailed = 0;
         gBattleTarget->unk_15 = var_v1;
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x7E);
@@ -140,7 +140,7 @@ void Battle_Effect_Poison(void) {
                 gBattleScene.unk_00->unk_48 = 0x16;
                 D_843C4DEC = 0xA;
                 func_843708CC();
-                if (gBattleMoveFailed != 0) {
+                if (sBattleMoveFailed != 0) {
                     Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
                     Battle_QueueMessage(sp1C, -0x7D);
                     return;
@@ -149,7 +149,7 @@ void Battle_Effect_Poison(void) {
         }
 
         gBattleTarget->unk_15 |= 8;
-        if (gBattleUser->moveCache.unk_00 == 0x5C) {
+        if (gBattleUser->moveCache.lastMove == 0x5C) {
             gBattleTarget->unk_4E |= 1;
             gBattleTarget->unk_51 = 0;
             Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
@@ -160,7 +160,7 @@ void Battle_Effect_Poison(void) {
         }
     } else if (gBattleUser->moveCache.unk_01 == 0x42) {
         if (gBattleScene.unk_00->unk_48 != 0x18) {
-            gBattleMoveFailed = 1;
+            sBattleMoveFailed = 1;
             gBattleScene.unk_00->unk_48 = 0x16;
             D_843C4E44 = 0;
         }
@@ -223,7 +223,7 @@ void Battle_Effect_SecondaryStatusChance(void) {
 
     if ((gBattleTarget->unk_16[6] != (*gBattleUser).moveCache.unk_03) &&
         (gBattleTarget->unk_16[7] != (*gBattleUser).moveCache.unk_03)) {
-        if ((gBattleUser->moveCache.unk_01 < 7) || ((D_8438AC60[0] != 2) && (gBattleUser->moveCache.unk_00 == 0x3B))) {
+        if ((gBattleUser->moveCache.unk_01 < 7) || ((D_8438AC60[0] != 2) && (gBattleUser->moveCache.lastMove == 0x3B))) {
             if (Battle_Random() >= 0x1A) {
                 return;
             }
@@ -324,7 +324,7 @@ void Battle_ApplyRageStatBoost(void) {
             }
         }
 
-        if (gBattleUser->moveCache.unk_00 == 0x6B) {
+        if (gBattleUser->moveCache.lastMove == 0x6B) {
             gBattleUser->unk_56 = 1;
         }
 
@@ -357,7 +357,7 @@ void Battle_Effect_RaiseOwnStat(void) {
     u16* sp1C;
     u16* sp18;
 
-    if (gBattleUser->moveCache.unk_00 == 0x6E) {
+    if (gBattleUser->moveCache.lastMove == 0x6E) {
         gBattleScene.unk_00->unk_48 = 0x26;
     } else {
         gBattleScene.unk_00->unk_48 = 7;
@@ -415,7 +415,7 @@ void Battle_Effect_RaiseOwnStat(void) {
             }
         }
 
-        if (gBattleUser->moveCache.unk_00 == 0x6B) {
+        if (gBattleUser->moveCache.lastMove == 0x6B) {
             gBattleUser->unk_56 = 1;
         }
 
@@ -470,7 +470,7 @@ void Battle_Effect_LowerStat(void) {
     } else {
         func_843708CC();
 
-        if (gBattleMoveFailed != 0) {
+        if (sBattleMoveFailed != 0) {
             goto end;
         }
 
@@ -584,7 +584,7 @@ void Battle_Effect_Thrash(void) {
 }
 
 void Battle_Effect_ForceSwitchOrFlee(void) {
-    if (gBattleUser->moveCache.unk_00 == 0x64) {
+    if (gBattleUser->moveCache.lastMove == 0x64) {
         gBattleScene.unk_00->unk_48 = 0x27;
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x53);
         return;
@@ -649,22 +649,22 @@ void Battle_Effect_Flinch(void) {
 
 void Battle_Effect_OHKO(void) {
     gBattleDamage = 0;
-    gBattleCritFlag = 0xFF;
+    sBattleCritFlag = 0xFF;
     if (gBattleUser->unk_2E < gBattleTarget->unk_2E) {
-        gBattleMoveFailed = 1;
+        sBattleMoveFailed = 1;
         return;
     }
     gBattleDamage = 0xFFFF;
-    gBattleCritFlag = 2;
+    sBattleCritFlag = 2;
 }
 
 void Battle_Effect_TwoTurnMove(void) {
     gBattleScene.unk_00->unk_48 = 0xE;
     gBattleUser->unk_4C |= 0x10;
 
-    if ((gBattleUser->moveCache.unk_01 == 0x2B) || (gBattleUser->moveCache.unk_00 == 0x5B)) {
+    if ((gBattleUser->moveCache.unk_01 == 0x2B) || (gBattleUser->moveCache.lastMove == 0x5B)) {
         gBattleUser->unk_4C |= 0x40;
-        if (gBattleUser->moveCache.unk_00 == 0x5B) {
+        if (gBattleUser->moveCache.lastMove == 0x5B) {
             gBattleScene.unk_00->unk_48 = 0xD;
         }
 
@@ -675,7 +675,7 @@ void Battle_Effect_TwoTurnMove(void) {
 
     Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
-    switch (gBattleUser->moveCache.unk_00) {
+    switch (gBattleUser->moveCache.lastMove) {
         case 0xD:
             Battle_QueueMessage(gBattleMessageQueues->unk_0C8, -0x51);
             break;
@@ -745,7 +745,7 @@ void Battle_Effect_Recoil(void) {
 
     gBattleUser->unk_12 = gBattleUser->unk_0C;
 
-    if (gBattleUser->moveCache.unk_00 == 0xA5) {
+    if (gBattleUser->moveCache.lastMove == 0xA5) {
         var_v1 = gBattleDamage >> 1;
     } else {
         var_v1 = gBattleDamage >> 2;
@@ -784,7 +784,7 @@ void Battle_Effect_Confuse(void) {
 
     if (!(gBattleTarget->unk_4D & 0x10)) {
         func_843708CC();
-        if ((gBattleMoveFailed == 0) && !(gBattleTarget->unk_4C & 0x80)) {
+        if ((sBattleMoveFailed == 0) && !(gBattleTarget->unk_4C & 0x80)) {
             D_843C4E44 = 1;
             gBattleTarget->unk_4C |= 0x80;
             gBattleTarget->unk_50 = (Battle_Random() & 3) + 2;
@@ -804,7 +804,7 @@ void Battle_Effect_Paralyze(void) {
     if (gBattleTarget->unk_15 == 0) {
         if ((gBattleUser->moveCache.unk_03 != 0x17) || ((gBattleTarget->unk_16[6] != 4) && (gBattleTarget->unk_16[7] != 4))) {
             func_843708CC();
-            if (gBattleMoveFailed == 0) {
+            if (sBattleMoveFailed == 0) {
                 gBattleTarget->unk_15 |= 0x40;
                 func_84370B0C(sActivePokemon[!gBattleScene.unk_00->unk_2C]);
                 Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
@@ -865,7 +865,7 @@ void Battle_Effect_Mimic(void) {
     gBattleScene.unk_00->unk_48 = 7;
     func_843708CC();
 
-    if ((gBattleMoveFailed == 0) && !(gBattleTarget->unk_4C & 0x40)) {
+    if ((sBattleMoveFailed == 0) && !(gBattleTarget->unk_4C & 0x40)) {
         D_843C4DAA = 1;
         do {
             var_t0 = BattleAnim_RandomRange(4);
@@ -887,7 +887,7 @@ void Battle_Effect_Mimic(void) {
 void Battle_Effect_LeechSeed(void) {
     func_843708CC();
 
-    if ((gBattleMoveFailed == 0) && (gBattleTarget->unk_16[6] != 0x16) && (gBattleTarget->unk_16[7] != 0x16)) {
+    if ((sBattleMoveFailed == 0) && (gBattleTarget->unk_16[6] != 0x16) && (gBattleTarget->unk_16[7] != 0x16)) {
         if (!(gBattleTarget->unk_4D & 0x80)) {
             gBattleTarget->unk_4D |= 0x80;
             Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
@@ -912,7 +912,7 @@ void Battle_Effect_Disable(void) {
 
     func_843708CC();
 
-    if (gBattleMoveFailed == 0) {
+    if (sBattleMoveFailed == 0) {
         gBattleScene.unk_00->unk_48 = 0x20;
         if (gBattleTarget->unk_52 == 0) {
             do {
@@ -1001,7 +1001,7 @@ void Battle_Effect_Heal(void) {
 
     gBattleScene.unk_00->unk_48 = 0x15;
     if (gBattleUser->unk_0C != gBattleUser->unk_28) {
-        if (gBattleUser->moveCache.unk_00 == 0x9C) {
+        if (gBattleUser->moveCache.lastMove == 0x9C) {
             temp_v0 = gBattleUser->unk_15;
 
             gBattleUser->unk_15 = 2;
@@ -1034,7 +1034,7 @@ void Battle_Effect_Heal(void) {
     }
 
     gBattleScene.unk_00->unk_48 = 0x1C;
-    gBattleMoveFailed = 1;
+    sBattleMoveFailed = 1;
     Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x32);
 }
 

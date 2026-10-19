@@ -4,7 +4,7 @@
 #include "global.h"
 
 typedef struct CachedMoveData {
-    /* 0x00 */ u8 unk_00;
+    /* 0x00 */ u8 lastMove;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03;

@@ -548,7 +548,7 @@ s32 BattleAnim_GetMoveFailedFlag(void) {
 }
 
 void BattleAnim_UpdateMoveFailedFlag(void) {
-    if (gBattleMoveFailed != 0) {
+    if (sBattleMoveFailed != 0) {
         D_84390340 = 1;
     } else {
         D_84390340 = 0;
