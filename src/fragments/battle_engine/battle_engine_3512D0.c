@@ -213,7 +213,7 @@ Gfx* TexturedRibbonSheet_Draw(Gfx* arg0) {
     Vtx* vtx2;
     f32 tmp;
 
-    gDPLoadTextureBlock_4b(arg0++, gBattleAnimAssetPointers[0x10], G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock_4b(arg0++, sBattleAnimAssetPointers[0x10], G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     var_s5 = &D_843A22C0[0];

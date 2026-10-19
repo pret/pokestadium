@@ -1155,7 +1155,7 @@ void func_8003EB40(s32 arg0, BattleMonRuntime* arg1) {
     D_800FCB48[side].unk_24++;
     D_800FCB48[side].unk_00[D_800FCB48[side].unk_24 & 0xF] = D_800FCB18[side]->unk_0C;
 
-    value = D_800FCB18[side]->unk_0B;
+    value = D_800FCB18[side]->id;
     if ((value <= 0) || (value >= 0x98)) {
         return;
     }

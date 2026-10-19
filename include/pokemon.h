@@ -149,7 +149,7 @@
 #define DRAGONITE   149
 #define MEWTWO      150
 #define MEW         151
-#define PKMN_152    152
+#define SUBSTITUTE_DOLL    152
 
 #define RGBY_RHYDON      0x01
 #define RGBY_KANGASKHAN  0x02

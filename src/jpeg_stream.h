@@ -95,7 +95,7 @@ void Yay0_DecompressAndRelocate(u8* in_header, u8* memory);
 void Dma_ReadChunks(u8* arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 Flash_ProgramPages(u8* arg0, s16 arg1, s16 arg2, s32 arg3);
 s32 Flash_EraseSectorByIndex(s16 arg0);
-void Dma_WriteChunks(u32 arg0, u32 arg1, u32 arg2, s32 arg3);
+void Dma_WriteChunks(u32 write_start, u32 buffer_start, u32 buffer_end, s32 arg3);
 void Dma_CopyChunks(u8* arg0, u8* arg1, u8* arg2);
 void* Jpeg_LoadDecodedImage(u8* addr, PRESJPEG* arg1, s32 side);
 s32 Yay0_LoadDecompressedAsset(s32 arg0, PERSSZP* arg1, s32 side);

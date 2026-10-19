@@ -163,8 +163,8 @@ void func_88206110(BattleMon* arg0) {
 
     arg0->unk_1E = (s16)(u16)guRandom();
 
-    arg0->unk_06 = D_80070FA0[arg0->unk_00.unk_00 - 1].unk_06;
-    arg0->unk_07 = D_80070FA0[arg0->unk_00.unk_00 - 1].unk_07;
+    arg0->unk_06 = gSpeciesData[arg0->unk_00.unk_00 - 1].type1;
+    arg0->unk_07 = gSpeciesData[arg0->unk_00.unk_00 - 1].type2;
 
     Pokemon_PrepareBattleMon(arg0);
 

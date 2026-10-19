@@ -13,14 +13,14 @@ u8 D_80075680[3] = { 1, 15, 30 };
 static s16 D_80075684 = 0;
 
 void Team_ClearTrainerSlot(BattleSessionTeams* arg0) {
-    arg0->unk_00 = 0;
+    arg0->uniqueStatusFlags = 0;
     arg0->unk_01 = 0;
-    arg0->unk_02 = 0;
+    arg0->displayModel = 0;
     arg0->unk_04 = 0;
     arg0->unk_14 = 0;
     arg0->teamMember[0] = 0;
     arg0->teamMember[1] = 0;
-    arg0->unk_1D = 0;
+    arg0->assetIsBusy = 0;
     arg0->unk_20 = 0;
     arg0->unk_1E = 0;
 }
@@ -140,8 +140,8 @@ BattleMon* Pokemon_CreateDefault(BattleMon* arg0, u8 arg1, s16 arg2) {
     arg0->unk_04 = 0;
     arg0->unk_05 = 0;
 
-    arg0->unk_06 = D_80070FA0[arg1 - 1].unk_06;
-    arg0->unk_07 = D_80070FA0[arg1 - 1].unk_07;
+    arg0->unk_06 = gSpeciesData[arg1 - 1].type1;
+    arg0->unk_07 = gSpeciesData[arg1 - 1].type2;
 
     arg0->unk_14 = 0x6400;
     arg0->unk_16 = 0x6400;

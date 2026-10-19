@@ -87,16 +87,16 @@ typedef struct TeamRoster {
 } TeamRoster; // size = 0x21C
 
 typedef struct BattleSessionTeams {
-    /* 0x00 */ u8 unk_00;
+    /* 0x00 */ u8 uniqueStatusFlags;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 displayModel;
     /* 0x04 */ TeamRoster* unk_04;
     /* 0x08 */ TeamRoster* teamMember[2];
     /* 0x10 */ ModelLoadContext* unk_10;
     /* 0x14 */ ModelNodeView* unk_14;
     /* 0x18 */ ModelNodeView* unk_18;
     /* 0x1C */ u8 unk_1C;
-    /* 0x1D */ u8 unk_1D;
+    /* 0x1D */ u8 assetIsBusy;
     /* 0x1E */ u8 unk_1E;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ arg1_func_80019420* unk_24;

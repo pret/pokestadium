@@ -4,9 +4,9 @@
 #include "include/math.h"
 #include "src/math_util.h"
 
-u8* gBattleAnimAssetPointers[256];
-s16 gBattleAnimResourceList[0x10];
-arg1_func_80019420* gBattleAnimResourceTablePointers[40];
+u8* sBattleAnimAssetPointers[256];
+s16 sBattleAnimResourceList[0x10];
+arg1_func_80019420* sBattleAnimResourceTablePointers[40];
 static s16 D_84392580;
 static s16 D_84392582;
 static Mtx D_84392588;

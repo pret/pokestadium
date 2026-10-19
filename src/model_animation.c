@@ -331,17 +331,17 @@ void ModelAnim_EvaluateJointTransform(Vec3f* arg0, Vec3s* arg1, Vec3f* arg2, s32
     }
 }
 
-void ModelAnim_ClearTransformChannel(DisplayObject* arg0) {
-    arg0->transformAnim.animationId = -1;
-    arg0->transformAnim.data = NULL;
+void ModelAnim_ClearTransformChannel(DisplayObject* display_object) {
+    display_object->transformAnim.animationId = -1;
+    display_object->transformAnim.data = NULL;
 }
 
-s32 ModelAnim_BindTransformCurve(DisplayObject* arg0, s16 arg1, void* arg2, s32 arg3) {
+s32 ModelAnim_BindTransformCurve(DisplayObject* display_object, s16 animation_id, void* arg2, s32 arg3) {
     TransformAnimData* temp_v0 = Util_ConvertAddrToVirtAddr(arg2);
-    TransformAnimState* ptr = &arg0->transformAnim;
+    TransformAnimState* ptr = &display_object->transformAnim;
 
-    if ((temp_v0 != ptr->data) || (arg1 != ptr->animationId)) {
-        ptr->animationId = arg1;
+    if ((temp_v0 != ptr->data) || (animation_id != ptr->animationId)) {
+        ptr->animationId = animation_id;
         ptr->data = temp_v0;
         ptr->frameFixed = (temp_v0->startFrame << 0x10) - arg3;
     }
@@ -350,13 +350,13 @@ s32 ModelAnim_BindTransformCurve(DisplayObject* arg0, s16 arg1, void* arg2, s32 
     return ptr->frameFixed >> 0x10;
 }
 
-s32 ModelAnim_SetSpeed(DisplayObject* arg0, s32 arg1) {
-    arg0->transformAnim.speedFixed = arg1;
-    return arg0->transformAnim.frameFixed >> 0x10;
+s32 ModelAnim_SetSpeed(DisplayObject* display_object, s32 speed) {
+    display_object->transformAnim.speedFixed = speed;
+    return display_object->transformAnim.frameFixed >> 0x10;
 }
 
-void ModelAnim_SetFrame(DisplayObject* arg0, s16 arg1) {
-    arg0->transformAnim.frameFixed = (arg1 << 0x10) - arg0->transformAnim.speedFixed;
+void ModelAnim_SetFrame(DisplayObject* display_object, s16 animation_timer) {
+    display_object->transformAnim.frameFixed = (animation_timer << 0x10) - display_object->transformAnim.speedFixed;
 }
 
 s32 ModelAnim_HasCrossedFrame(DisplayObject* arg0, s16 arg1) {

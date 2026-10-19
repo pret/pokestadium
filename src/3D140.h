@@ -4,7 +4,7 @@
 #include "global.h"
 
 typedef struct CachedMoveData {
-    /* 0x00 */ u8 unk_00;
+    /* 0x00 */ u8 lastMove;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03;
@@ -19,7 +19,7 @@ typedef struct BattleMonRuntime {
     /* 0x04 */ u8 unk_04;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ char unk06[0x5];
-    /* 0x0B */ u8 unk_0B;
+    /* 0x0B */ u8 id;
     /* 0x0C */ u16 unk_0C;
     /* 0x0E */ u16 unk_0E;
     /* 0x10 */ u16 unk_10;
@@ -27,7 +27,7 @@ typedef struct BattleMonRuntime {
     /* 0x14 */ u8 unk_14;
     /* 0x15 */ u8 unk_15;
     /* 0x16 */ u8 unk_16[9];
-    /* 0x1F */ u8 unk_1F[4];
+    /* 0x1F */ u8 moves[4];
     /* 0x23 */ char unk23[0x1];
     /* 0x24 */ u16 unk_24;
     /* 0x26 */ u8 unk_26;
@@ -43,7 +43,7 @@ typedef struct BattleMonRuntime {
     /* 0x3C */ u16 unk_3C;
     /* 0x3E */ u16 unk_3E;
     /* 0x40 */ char unk40[0x4];
-    /* 0x44 */ CachedMoveData unk_44;
+    /* 0x44 */ CachedMoveData moveCache;
     /* 0x4A */ u8 unk_4A;
     /* 0x4B */ u8 unk_4B;
     /* 0x4C */ u8 unk_4C;
