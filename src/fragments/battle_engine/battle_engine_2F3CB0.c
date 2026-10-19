@@ -1600,7 +1600,7 @@ Vec3f D_84384C30[] = {
     { 0.4000000059604645f, 0.0f, 0.0f },
     { 0.0f, 0.0f, 0.0f },
 };
-BattleSceneStateCallback gBattleSceneStateTickSentinel = BattleScene_StateCallbackNop;
+BattleSceneStateCallback sBattleSceneStateTickSentinel = BattleScene_StateCallbackNop;
 BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         0,
