@@ -124,7 +124,7 @@ typedef struct SwayState {
     /* 0x00 */ Vec3f unk_00;
     /* 0x0C */ Vec3f unk_0C;
     /* 0x18 */ Vec3f unk_18;
-    /* 0x24 */ SwayLayoutConfig unk_24;
+    /* 0x24 */ SwayLayoutConfig layoutConfig;
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;
     /* 0x48 */ char unk48[0x4];
@@ -134,7 +134,7 @@ typedef struct SwayState {
 typedef struct ActivePokemon {
     /* 0x000 */ DisplayObject displayObject;
     /* 0x168 */ unk_D_84390010_168 unk_168[2];
-    /* 0x448 */ SwayState unk_448;
+    /* 0x448 */ SwayState swayState;
     /* 0x498 */ f32 unk_498;
     /* 0x49C */ f32 unk_49C;
     /* 0x4A0 */ f32 unk_4A0;

@@ -1874,8 +1874,8 @@ void func_84373570(ActivePokemon* arg0) {
     gBattleTarget = ptr2;
 
     func_8436FA80(arg0);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_448.unk_00, 0.0f, 0.0f, 0.0f);
-    Vec3f_SetComponentsDuplicate(&arg0->unk_448.unk_0C, 0.0f, 0.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->swayState.unk_00, 0.0f, 0.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg0->swayState.unk_0C, 0.0f, 0.0f, 0.0f);
     func_84370B7C(arg0);
 
     if (arg0 == sActivePokemon[0]) {

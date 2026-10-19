@@ -266,10 +266,10 @@ void BattleScene_SetCameraSendOutShot(CameraNode* arg0, s32 arg1) {
     }
 
     temp_s0 = sActivePokemon[arg1];
-    if (temp_s0->unk_448.unk_24.unk_0C.x == 0.0f) {
+    if (temp_s0->swayState.layoutConfig.unk_0C.x == 0.0f) {
         BattleAnim_GetOwnerDefaultAnchorPosition(temp_s0, &sp58);
     } else {
-        BattleAnim_Vec3fCopy(&sp58, &temp_s0->unk_448.unk_24.unk_0C);
+        BattleAnim_Vec3fCopy(&sp58, &temp_s0->swayState.layoutConfig.unk_0C);
         sp58.y += temp_s0->displayObject.position.y - BattleScene_GetParticipantModelHeight(temp_s0);
     }
 
@@ -290,7 +290,7 @@ void BattleScene_ClampCameraEyeFloor(CameraNode* arg0) {
 }
 
 void BattleScene_UpdateCameraModelOffset(ActivePokemon* arg0, CameraNode* arg1) {
-    SwayState* sp38 = &arg0->unk_448;
+    SwayState* sp38 = &arg0->swayState;
     UNUSED s32 pad[5];
     f32 sp3C = 0.0f;
 
@@ -304,14 +304,14 @@ void BattleScene_UpdateCameraModelOffset(ActivePokemon* arg0, CameraNode* arg1) 
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 
-    Vec3f_SetComponentsDuplicate(&arg0->unk_448.unk_18, arg0->unk_448.unk_24.unk_00.x, arg0->unk_448.unk_24.unk_00.y,
-                  arg0->unk_448.unk_24.unk_00.z);
-    arg0->unk_448.unk_18.y = (arg0->displayObject.position.y - BattleScene_GetParticipantModelHeight(arg0)) + arg0->unk_448.unk_18.y + sp3C;
+    Vec3f_SetComponentsDuplicate(&arg0->swayState.unk_18, arg0->swayState.layoutConfig.unk_00.x, arg0->swayState.layoutConfig.unk_00.y,
+                  arg0->swayState.layoutConfig.unk_00.z);
+    arg0->swayState.unk_18.y = (arg0->displayObject.position.y - BattleScene_GetParticipantModelHeight(arg0)) + arg0->swayState.unk_18.y + sp3C;
     BattleAnim_Vec3fCopy(&gBattleScene.unk_00->unk_B8, &arg1->view.targetPosition);
     BattleAnim_Vec3fCopy(&gBattleScene.unk_00->unk_C4, &arg1->view.eyePosition);
     Vec3f_CalculateDistanceAngles(&gBattleScene.unk_00->unk_B8, &gBattleScene.unk_00->unk_C4, &gBattleScene.unk_00->unk_70, &sp38->unk_44,
                   &sp38->unk_46);
-    Vec3f_CalculateDistanceAngles(&arg0->unk_448.unk_18, &arg1->view.targetPosition, &sp38->unk_4C, &sp38->unk_44, &sp38->unk_46);
+    Vec3f_CalculateDistanceAngles(&arg0->swayState.unk_18, &arg1->view.targetPosition, &sp38->unk_4C, &sp38->unk_44, &sp38->unk_46);
     gBattleScene.unk_00->unk_6C = 0.0f;
     gBattleScene.unk_00->unk_74 = 0.0f;
 }
@@ -376,7 +376,7 @@ void BattleScene_SnapFloatPair(f32* arg0, f32* arg1) {
 }
 
 void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* arg1, UNUSED f32 arg2) {
-    SwayState* sp2C = &arg1->unk_448;
+    SwayState* sp2C = &arg1->swayState;
     f32 var_fv1;
     Vec3f sp64;
     Vec3f sp58;
@@ -390,7 +390,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
     BattleAnim_Vec3fCopy(&sp4C, &arg0->view.targetPosition);
     BattleAnim_Vec3fCopy(&sp40, &arg0->view.targetPosition);
     BattleScene_GetOwnerCameraAnchor(arg1, &sp64);
-    Vec3f_CalculateDistanceAngles(&sp64, &arg1->unk_448.unk_18, &sp3C, &sp36, &sp34);
+    Vec3f_CalculateDistanceAngles(&sp64, &arg1->swayState.unk_18, &sp3C, &sp36, &sp34);
 
     switch (arg1->displayObject.objectType) {
         case 0x5F:
@@ -400,7 +400,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
         case 0x82:
             arg0->perspective.verticalFieldOfView = 50.0f;
             if (sp3C < (BattleScene_GetParticipantModelRadius(arg1) * 0.5f)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
 
@@ -410,13 +410,13 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
         case 0x33:
         case 0x5B:
             if (sp3C < (BattleScene_GetParticipantModelRadius(arg1) * 5.0f)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
 
         case 0x12:
             if (sp3C < (BattleScene_GetParticipantModelRadius(arg1) * 1.5f)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
 
@@ -425,7 +425,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
         case 0x59:
         case 0x96:
             if (sp3C < BattleScene_GetParticipantModelRadius(arg1)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
 
@@ -433,7 +433,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
         case 0x65:
         case 0x67:
             if (sp3C < (BattleScene_GetParticipantModelRadius(arg1) / 1.2f)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
 
@@ -444,18 +444,18 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
         case 0x5C:
         case 0x83:
             if (sp3C < (BattleScene_GetParticipantModelRadius(arg1) / 3.0f)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
 
         default:
             if (sp3C < (BattleScene_GetParticipantModelRadius(arg1) * 0.5f)) {
-                BattleAnim_Vec3fCopy(&sp64, &arg1->unk_448.unk_18);
+                BattleAnim_Vec3fCopy(&sp64, &arg1->swayState.unk_18);
             }
             break;
     }
 
-    sp64.y = arg1->unk_448.unk_18.y;
+    sp64.y = arg1->swayState.unk_18.y;
     Camera_ComputeEyeFromAngles(&sp64, &sp58, sp2C->unk_4C, sp2C->unk_44, sp2C->unk_46);
     sp4C.y = sp58.y;
     Vec3f_CalculateDistanceAngles(&sp4C, &sp58, &sp3C, &sp36, &sp34);
@@ -595,7 +595,7 @@ void BattleScene_ApplyOwnerFramingOnly(CameraNode* arg0, ActivePokemon* arg1) {
 }
 
 void BattleScene_UpdateCameraTargetFromOwner(CameraNode* arg0, ActivePokemon* arg1) {
-    SwayState* ptr = &arg1->unk_448;
+    SwayState* ptr = &arg1->swayState;
     UNUSED s32 pad;
     Vec3f sp54;
     Vec3f sp48;
@@ -607,10 +607,10 @@ void BattleScene_UpdateCameraTargetFromOwner(CameraNode* arg0, ActivePokemon* ar
 
     BattleAnim_Vec3fCopy(&sp3C, &arg0->view.targetPosition);
     BattleScene_GetOwnerCameraAnchor(arg1, &sp54);
-    Vec3f_CalculateDistanceAngles(&sp54, &arg1->unk_448.unk_18, &sp38, &sp32, &sp30);
+    Vec3f_CalculateDistanceAngles(&sp54, &arg1->swayState.unk_18, &sp38, &sp32, &sp30);
 
     if (sp38 < (BattleScene_GetParticipantModelRadius(arg1) * 1.1f)) {
-        BattleAnim_Vec3fCopy(&sp54, &arg1->unk_448.unk_18);
+        BattleAnim_Vec3fCopy(&sp54, &arg1->swayState.unk_18);
     }
 
     Camera_ComputeEyeFromAngles(&sp54, &sp48, ptr->unk_4C, ptr->unk_44, ptr->unk_46);
@@ -678,7 +678,7 @@ s32 BattleScene_FrameCamera(CameraNode* arg0, ActivePokemon* arg1) {
 }
 
 void BattleScene_ApproachCameraTargetFromOwner(CameraNode* arg0, ActivePokemon* arg1) {
-    SwayState* ptr = &arg1->unk_448;
+    SwayState* ptr = &arg1->swayState;
     Vec3f sp58;
     Vec3f sp4C;
     UNUSED s32 pad[3];
@@ -697,7 +697,7 @@ void BattleScene_ApproachCameraTargetFromOwner(CameraNode* arg0, ActivePokemon* 
 }
 
 void BattleScene_UpdateCameraVerticalFraming(CameraNode* arg0, ActivePokemon* arg1) {
-    SwayState* ptr = &arg1->unk_448;
+    SwayState* ptr = &arg1->swayState;
     Vec3f sp60;
     Vec3f sp54;
     UNUSED s32 pad[3];
@@ -743,7 +743,7 @@ void BattleScene_RecenterCameraOnOwner(CameraNode* arg0, ActivePokemon* arg1) {
 }
 
 void BattleScene_ApproachCameraTarget(CameraNode* arg0, ActivePokemon* arg1, UNUSED s32 arg2) {
-    SwayState* ptr = &arg1->unk_448;
+    SwayState* ptr = &arg1->swayState;
     Vec3f sp50;
     Vec3f sp44;
     Vec3f sp38;

@@ -29,7 +29,7 @@ ActivePokemon* sSide1ActivePokemon;
 ActivePokemon* sSide2ActivePokemon;
 static MovePresentationCue* D_84390020;
 unk_D_84390028 D_84390028[2];
-static SwayLayoutConfig D_84390048;
+static SwayLayoutConfig sDefaultSwayLayout;
 static BattleSceneStateTickSlot gBattleSceneStateTickSlots[7];
 static s32 gBattleSceneStateTickSlotIndex;
 static s32 D_843900A4;
@@ -371,80 +371,80 @@ void Battle_DmaLoadAnimRecordPair(s32 arg0, SpeciesLearnsetBuffer* arg1, Species
     Dma_WriteChunks(arg2, temp_a1, temp_a1 + 0x20, 0);
 }
 
-void func_84302658(ActivePokemon* arg0, s32 arg1) {
+void func_84302658(ActivePokemon* pokemon, s32 mark_move_illegality) {
     s16 sp6E;
-    s32 sp68;
-    s16 sp66;
+    s32 side_index;
+    s16 object_type_index;
     u32 var_a1;
     s32 pad[8];
     BattleMon* ptr;
     SpeciesModelTransform* ptr2;
     u32 tmp;
 
-    sp68 = BattleScene_GetParticipantSideIndex(arg0);
-    sp66 = arg0->displayObject.objectType - 1;
+    side_index = BattleScene_GetParticipantSideIndex(pokemon);
+    object_type_index = pokemon->displayObject.objectType - 1;
 
-    ptr = &arg0->sessionTeams->teamMember[arg0->state.unk_2C]->pokemonPicked[arg0->state.unk_18];
+    ptr = &pokemon->sessionTeams->teamMember[pokemon->state.unk_2C]->pokemonPicked[pokemon->state.unk_18];
 
-    var_a1 = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[sp66] & 0xFFFFFF);
-    if ((arg0->displayObject.objectType == 0x19) && (ptr->unk_52 & 0x80)) {
+    var_a1 = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[object_type_index] & 0xFFFFFF);
+    if ((pokemon->displayObject.objectType == 0x19) && (ptr->unk_52 & 0x80)) {
         var_a1 = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[152] & 0xFFFFFF);
     }
-    tmp = ((u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (sp66 << 5)) & 0xFFFFFF)) + 0x20;
-    Dma_WriteChunks(D_84384570[sp68], var_a1, var_a1 + 0xBC0, 0);
+    tmp = ((u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF)) + 0x20;
+    Dma_WriteChunks(D_84384570[side_index], var_a1, var_a1 + 0xBC0, 0);
 
-    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (sp66 << 5)) & 0xFFFFFF);
-    Dma_WriteChunks(D_84384580[sp68], var_a1, tmp, 0);
+    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF);
+    Dma_WriteChunks(D_84384580[side_index], var_a1, tmp, 0);
 
-    if (sp68 == 1) {
-        var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (sp66 << 5)) & 0xFFFFFF);
-        Dma_WriteChunks(D_84384578[sp68], var_a1, var_a1 + 0x20, 0);
+    if (side_index == 1) {
+        var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF);
+        Dma_WriteChunks(D_84384578[side_index], var_a1, var_a1 + 0x20, 0);
 
-        ptr2 = D_84384578[sp68];
+        ptr2 = D_84384578[side_index];
         if (ptr2->unk_10 != 0xFF) {
             sp6E = ptr2->unk_10;
 
             var_a1 = ((u32)_70D3A0_ROM_START) + (((u32)(D_6E910 + ((ptr2->unk_10 - (tmp = 2)) * 0x20))) & 0xFFFFFF);
             Dma_WriteChunks(ptr2, var_a1, var_a1 + 0x20, 0);
 
-            D_84384578[sp68]->unk_10 = sp6E;
+            D_84384578[side_index]->unk_10 = sp6E;
         }
     } else {
-        var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (sp66 << 5)) & 0xFFFFFF);
-        Dma_WriteChunks(D_84384578[sp68], var_a1, var_a1 + 0x20, 0);
+        var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF);
+        Dma_WriteChunks(D_84384578[side_index], var_a1, var_a1 + 0x20, 0);
     }
 
-    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (sp66 * 0x20)) & 0xFFFFFF);
-    Dma_WriteChunks(&D_84390048, var_a1, var_a1 + 0x20, 0);
+    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (object_type_index * 0x20)) & 0xFFFFFF);
+    Dma_WriteChunks(&sDefaultSwayLayout, var_a1, var_a1 + 0x20, 0);
 
-    BattleAnim_Vec3fCopy(&arg0->unk_448.unk_24.unk_00, &D_84390048.unk_00);
-    BattleAnim_Vec3fCopy(&arg0->unk_448.unk_24.unk_0C, &D_84390048.unk_0C);
+    BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.unk_00, &sDefaultSwayLayout.unk_00);
+    BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.unk_0C, &sDefaultSwayLayout.unk_0C);
 
-    arg0->unk_448.unk_24.unk_18 = D_84390048.unk_18;
-    arg0->unk_448.unk_24.unk_19 = D_84390048.unk_19;
-    arg0->unk_448.unk_24.unk_1A = D_84390048.unk_1A;
-    arg0->unk_448.unk_24.unk_1B = D_84390048.unk_1B;
-    arg0->unk_448.unk_24.unk_00.x *= arg0->unk_4B0;
-    arg0->unk_448.unk_24.unk_0C.x *= arg0->unk_4B0;
+    pokemon->swayState.layoutConfig.unk_18 = sDefaultSwayLayout.unk_18;
+    pokemon->swayState.layoutConfig.unk_19 = sDefaultSwayLayout.unk_19;
+    pokemon->swayState.layoutConfig.unk_1A = sDefaultSwayLayout.unk_1A;
+    pokemon->swayState.layoutConfig.unk_1B = sDefaultSwayLayout.unk_1B;
+    pokemon->swayState.layoutConfig.unk_00.x *= pokemon->unk_4B0;
+    pokemon->swayState.layoutConfig.unk_0C.x *= pokemon->unk_4B0;
 
-    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (sp66 << 4)) & 0xFFFFFF);
-    Dma_WriteChunks(&D_84390028[sp68], var_a1, var_a1 + 0x10, 0);
+    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (object_type_index << 4)) & 0xFFFFFF);
+    Dma_WriteChunks(&D_84390028[side_index], var_a1, var_a1 + 0x10, 0);
 
-    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (sp66 * 0x10)) & 0xFFFFFF);
-    Dma_WriteChunks(sPlayerTagTeam[sp68], var_a1, var_a1 + 0x10, 0);
+    var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (object_type_index * 0x10)) & 0xFFFFFF);
+    Dma_WriteChunks(sPlayerTagTeam[side_index], var_a1, var_a1 + 0x10, 0);
 
-    Battle_DmaLoadAnimRecordPair(sp66, &arg0->unk_94C, &arg0->unk_9AC);
+    Battle_DmaLoadAnimRecordPair(object_type_index, &pokemon->unk_94C, &pokemon->unk_9AC);
 
-    if (sPlayerTagTeam[sp68]->firstPartner != 0) {
-        Battle_DmaLoadAnimRecordPair(sPlayerTagTeam[sp68]->firstPartner - 1, &arg0->unk_96C, &arg0->unk_9CC);
+    if (sPlayerTagTeam[side_index]->firstPartner != 0) {
+        Battle_DmaLoadAnimRecordPair(sPlayerTagTeam[side_index]->firstPartner - 1, &pokemon->unk_96C, &pokemon->unk_9CC);
     }
 
-    if (sPlayerTagTeam[sp68]->secondPartner != 0) {
-        Battle_DmaLoadAnimRecordPair(sPlayerTagTeam[sp68]->secondPartner - 1, &arg0->unk_98C, &arg0->unk_9EC);
+    if (sPlayerTagTeam[side_index]->secondPartner != 0) {
+        Battle_DmaLoadAnimRecordPair(sPlayerTagTeam[side_index]->secondPartner - 1, &pokemon->unk_98C, &pokemon->unk_9EC);
     }
 
-    if (arg1 == 1) {
-        Battle_InitializeMoveIllegalityMask(arg0);
+    if (mark_move_illegality == 1) {
+        Battle_InitializeMoveIllegalityMask(pokemon);
     }
 }
 
@@ -2116,8 +2116,8 @@ void BattleScene_InitializePresentation(UNUSED BattleSessionTeams* arg0) {
 }
 
 void BattleScene_ResetParticipantAuxTransform(UNUSED ActivePokemon* arg0, ActivePokemon* arg1, s32 arg2) {
-    Vec3f_SetComponentsDuplicate(&arg1->unk_448, 0.0f, 0.0f, 0.0f);
-    Vec3f_SetComponentsDuplicate(&arg1->unk_448.unk_0C, 0.0f, 0.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg1->swayState, 0.0f, 0.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg1->swayState.unk_0C, 0.0f, 0.0f, 0.0f);
     arg1->unk_4B0 = arg2;
 }
 
