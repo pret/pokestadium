@@ -1416,7 +1416,7 @@
     vram: 0x81000000
     subsegments:
     - [0x255350, textbin,   fragments/particle_data_library/particle_data_library_header]
-    - [0x255370, textbin,    fragments/31/fragment31_unk_table] # what is this?
+    - [0x255370, hasm,       fragments/31/fragment31_unk_table]
     - [0x255550, c,      fragments/particle_data_library/particle_data_library_2554C0]
     - [0x255830, c,      fragments/particle_data_library/particle_data_library_2557A0]
     - [0x255940, c,      fragments/particle_data_library/particle_data_library_2558B0]
@@ -2185,7 +2185,7 @@
     vram: 0x84300000
     subsegments:
     - [0x2EA960, textbin,   fragments/battle_engine/battle_engine_header]
-    - [0x2EA980, c,      fragments/battle_engine/battle_engine_2EA8E0]
+    - [0x2EA980, c,      fragments/battle_engine/battle_engine_main]
     - [0x2EC460, c,      fragments/battle_engine/battle_engine_2EC3C0]
     - [0x2F1E00, c,      fragments/battle_engine/battle_engine_2F1D60]
     - [0x2F2440, c,      fragments/battle_engine/battle_engine_2F23A0]
@@ -2235,7 +2235,7 @@
     - [0x35E010, c,      fragments/battle_engine/battle_engine_35DF70]
     - [0x3610F0, c,      fragments/battle_engine/battle_engine_361050]
 
-    - [0x36ECB0, .data,   fragments/battle_engine/battle_engine_2EA8E0]
+    - [0x36ECB0, .data,   fragments/battle_engine/battle_engine_main]
     - [0x36EED0, .data,   fragments/battle_engine/battle_engine_2EC3C0]
     - [0x36EF60, .data,   fragments/battle_engine/battle_engine_2F3CB0]
     - [0x3700B0, .data,   fragments/battle_engine/battle_engine_2F74E0]
@@ -2309,7 +2309,7 @@
     - [0x3785E0, .rodata, fragments/battle_engine/battle_engine_35DF70]
     - [0x378750, .rodata, fragments/battle_engine/battle_engine_361050]
 
-    - {vram: 0x8438E440, type:  .bss, name: fragments/battle_engine/battle_engine_2EA8E0}
+    - {vram: 0x8438E440, type:  .bss, name: fragments/battle_engine/battle_engine_main}
     - {vram: 0x8438E7B0, type:  .bss, name: fragments/battle_engine/battle_engine_2EC3C0}
     - {vram: 0x843900D0, type:  .bss, name: fragments/battle_engine/battle_engine_2F6930}
     - {vram: 0x84390120, type:  .bss, name: fragments/battle_engine/battle_engine_2F74E0}

@@ -64,15 +64,20 @@ static u8 D_86908A80[] = {
 
 static s32 gCameraTutorialTextIds[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xB, 0xFF };
 
+static unk_D_8690A610 D_8690A610;
+static DisplayNodeHeader D_8690A630;
+static DisplayNodeHeader D_8690A648;
+static DisplayNodeHeader D_8690A660;
+
 static u32 D_86908ABC[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E, 0x00000000, 0x014000F0, 0x0000000F, 0x00000000, 0x00000000, 0x05000000,
-    0x0D000000, 0x05000000, 0x07000000, 0x8690A610, 0x14000000, 0x002D0019, 0xFFFFFF28, 0x08000000, 0x86900020,
-    0x00000000, 0x14000000, 0x002D0019, 0x80808028, 0x08000000, 0x86900088, 0x00000000, 0x16646464, 0x0F000002,
-    0x05000000, 0x1F00FFFF, 0x00000000, 0x00000000, 0x00000000, 0x00640064, 0x00640000, 0x08000000, 0x869000F4,
-    0x00000000, 0x05000000, 0x07000000, 0x8690A630, 0x06000000, 0x06000000, 0x0F000003, 0x05000000, 0x1F00FFFF,
-    0x00000000, 0x00000000, 0x00000000, 0x00640064, 0x00640000, 0x08000000, 0x869000F4, 0x00000000, 0x05000000,
-    0x07000000, 0x8690A648, 0x06000000, 0x06000000, 0x0F000002, 0x05000000, 0x1F00FFFF, 0x00000000, 0x00000000,
-    0x00000000, 0x00640064, 0x00640000, 0x08000000, 0x869000F4, 0x00000000, 0x05000000, 0x07000000, 0x8690A660,
+    0x0D000000, 0x05000000, 0x07000000, &D_8690A610, 0x14000000, 0x002D0019, 0xFFFFFF28, 0x08000000, GalleryCamera_BgAngleCallbackA,
+    0x00000000, 0x14000000, 0x002D0019, 0x80808028, 0x08000000, GalleryCamera_BgAngleCallbackB, 0x00000000, 0x16646464, 0x0F000002,
+    0x05000000, 0x1F00FFFF, 0x00000000, 0x00000000, 0x00000000, 0x00640064, 0x00640000, 0x08000000, GalleryCamera_FogColorCallback,
+    0x00000000, 0x05000000, 0x07000000, &D_8690A630, 0x06000000, 0x06000000, 0x0F000003, 0x05000000, 0x1F00FFFF,
+    0x00000000, 0x00000000, 0x00000000, 0x00640064, 0x00640000, 0x08000000, GalleryCamera_FogColorCallback, 0x00000000, 0x05000000,
+    0x07000000, &D_8690A648, 0x06000000, 0x06000000, 0x0F000002, 0x05000000, 0x1F00FFFF, 0x00000000, 0x00000000,
+    0x00000000, 0x00640064, 0x00640000, 0x08000000, GalleryCamera_FogColorCallback, 0x00000000, 0x05000000, 0x07000000, &D_8690A660,
     0x06000000, 0x06000000, 0x0F000003, 0x05000000, 0x0A000000, &D_800AC840, 0x06000000, 0x0F000002, 0x05000000,
     0x0A000000, &D_800AC858, 0x06000000, 0x09000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000,
 };
@@ -292,10 +297,6 @@ static unk_D_869091B8 D_869091B8[] = {
     { 1, 0x1000, 0.0f, 0.0f, 0.0f, 0xFF, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 };
 
-static unk_D_8690A610 D_8690A610;
-static DisplayNodeHeader D_8690A630;
-static DisplayNodeHeader D_8690A648;
-static DisplayNodeHeader D_8690A660;
 char** gCameraHelpText;
 static s32 D_8690A67C;
 static s32 D_8690A680;
@@ -346,7 +347,7 @@ s32 GalleryCamera_BgAngleCallbackA(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = sp26 + 0x2000;
         ptr->unk_1E = sp24 - 0x2000;
     }
@@ -360,7 +361,7 @@ s32 GalleryCamera_BgAngleCallbackB(s32 arg0, GraphNode* arg1) {
     s16 sp24;
 
     if (arg0 == 2) {
-        Vec3f_CalculateDistanceAngles(&D_8006F088->unk_60.at, &D_8006F088->unk_60.eye, &sp28, &sp26, &sp24);
+        Vec3f_CalculateDistanceAngles(&D_8006F088->view.targetPosition, &D_8006F088->view.eyePosition, &sp28, &sp26, &sp24);
         ptr->unk_1C = -0x2000 - sp26;
         ptr->unk_1E = sp24 + 0x6000;
     }
@@ -648,10 +649,10 @@ void Gallery_CapturePhoto(void) {
         Audio_PlaySoundEffectById(SFX_PHOTO_CAPTURE);
         D_8690B340 = 0xA;
         if (D_8690A70C != 1) {
-            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_50, D_87906054->unk_60.eye.x, D_87906054->unk_60.eye.y,
-                          D_87906054->unk_60.eye.z);
-            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_5C, D_87906054->unk_60.at.x, D_87906054->unk_60.at.y,
-                          D_87906054->unk_60.at.z);
+            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_50, D_87906054->view.eyePosition.x, D_87906054->view.eyePosition.y,
+                          D_87906054->view.eyePosition.z);
+            Vec3f_SetComponentsDuplicate(&D_83402EE0[D_8690B344].unk_5C, D_87906054->view.targetPosition.x, D_87906054->view.targetPosition.y,
+                          D_87906054->view.targetPosition.z);
             D_83402EE0[D_8690B344].unk_6C = 0;
 
             D_83402EE0[D_8690B344].unk_6C = D_8690A710->unk_014 * 4;

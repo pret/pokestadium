@@ -122,15 +122,15 @@ s32 PikachuReward_FindPikachuOnCart(void) {
     s32 i;
     TeamRoster* var_v1;
 
-    var_v1 = gSessionContext.battleSides[0].unk_08[0];
+    var_v1 = gSessionContext.battleSides[0].teamMember[0];
 
-    for (i = 0; i < var_v1->unk_002; i++) {
-        if (var_v1->unk_01C[i].unk_00.unk_00 == 0x19) {
-            D_832027C8.unk_00 = (var_v1->unk_01C[i].unk_52 & 0x70) >> 4;
-            D_832027C8.unk_01 = var_v1->unk_01C[i].unk_52 & 0xF;
+    for (i = 0; i < var_v1->numberOfPokemonChosen; i++) {
+        if (var_v1->pokemonPicked[i].unk_00.unk_00 == 0x19) {
+            D_832027C8.unk_00 = (var_v1->pokemonPicked[i].unk_52 & 0x70) >> 4;
+            D_832027C8.unk_01 = var_v1->pokemonPicked[i].unk_52 & 0xF;
             if ((D_832027C8.unk_00 < 4) && (D_832027C8.unk_01 < 0xD)) {
                 if (GbSave_LoadPort(D_832027C8.unk_00) != 0) {
-                    D_832027C8.unk_02 = PikachuReward_SearchDeckForPikachu(D_832027C8.unk_00, D_832027C8.unk_01, var_v1->unk_01C[i].unk_53);
+                    D_832027C8.unk_02 = PikachuReward_SearchDeckForPikachu(D_832027C8.unk_00, D_832027C8.unk_01, var_v1->pokemonPicked[i].unk_53);
                     if (D_832027C8.unk_02 >= 0) {
                         return 1;
                     }
@@ -507,14 +507,14 @@ void PikachuReward_ShowSuccessEnding(void) {
 
 void PikachuReward_PlayIntroCamera(void) {
     s32 i;
-    unk_D_86002F34_00C* temp_s1 = D_83202010->children;
+    CameraNode* temp_s1 = D_83202010->children;
 
     D_83202028->rotation.y = 0x1000;
 
     for (i = 0; i < 120; i++) {
         Controller_PollInputs();
-        temp_s1->unk_60.at.y = 0x320 - ((i * 0x1E0) / 120);
-        temp_s1->unk_60.eye.y = 0x320 - ((i * 0x1E0) / 120);
+        temp_s1->view.targetPosition.y = 0x320 - ((i * 0x1E0) / 120);
+        temp_s1->view.eyePosition.y = 0x320 - ((i * 0x1E0) / 120);
         D_83202028->rotation.y += 0x200;
         PikachuReward_RenderFrame(0);
         BgStage_AdvanceFrame();

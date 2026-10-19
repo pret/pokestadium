@@ -119,11 +119,22 @@ static unk_D_86104984 D_86104984[4] = {
     { 0xF7, 0xD4, -1, -1, -1, 0xFF },
 };
 
-static s16 D_861049B4[5][6] = {
-    { 0x87A0, 0x1190, 0x0028, 0x003C, 0x005A, 0x000A }, { 0x87A0, 0x1178, 0x0014, 0x0046, 0x005A, 0x0006 },
-    { 0x87A0, 0x1180, 0x001E, 0x004B, 0x005F, 0x0002 }, { 0x87A0, 0x11A4, 0x0028, 0x005A, 0x0063, 0x0001 },
-    { 0x0032, 0x001E, 0x0019, 0x0019, 0x000F, 0x0014 },
+typedef struct unk_D_861049B4 {
+    /* 0x00 */ u32* unk_00;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ s16 unk_0A;
+} unk_D_861049B4; // size = 0xC
+
+static unk_D_861049B4 D_861049B4[] = {
+    { D_87A01190, 0x0028, 0x003C, 0x005A, 0x000A },
+    { D_87A01178, 0x0014, 0x0046, 0x005A, 0x0006 },
+    { D_87A01180, 0x001E, 0x004B, 0x005F, 0x0002 },
+    { D_87A011A4, 0x0028, 0x005A, 0x0063, 0x0001 },
 };
+
+static s16 D_861049E4[] = { 0x0032, 0x001E, 0x0019, 0x0019, 0x000F, 0x0014 };
 
 static u8 D_861049F0[] = { 0, 5, 0, 10 };
 
@@ -296,7 +307,7 @@ u32 D_861052C8[] = {
 
 static unk_D_86002F30* D_86105480;
 static unk_D_86002F34* D_86105484;
-static unk_D_86002F34_00C* D_86105488;
+static CameraNode* D_86105488;
 static unk_D_86002F30* D_8610548C;
 static s16 D_86105490;
 static s16 D_86105492;
@@ -529,17 +540,17 @@ void ClefairyGame_InitCamera(void) {
     D_86105492 = 0;
     D_86105494 = 0xBB8;
 
-    D_86105488->unk_24.near = 100.0f;
-    D_86105488->unk_24.far = 12800.0f;
-    D_86105488->unk_24.fovy = 30.0f;
+    D_86105488->perspective.nearPlane = 100.0f;
+    D_86105488->perspective.farPlane = 12800.0f;
+    D_86105488->perspective.verticalFieldOfView = 30.0f;
 
-    D_86105488->unk_60.at.x = 0.0f;
-    D_86105488->unk_60.at.y = 371.2f;
-    D_86105488->unk_60.at.z = -732.6f;
+    D_86105488->view.targetPosition.x = 0.0f;
+    D_86105488->view.targetPosition.y = 371.2f;
+    D_86105488->view.targetPosition.z = -732.6f;
 
-    D_86105488->unk_60.eye.x = 0.0f;
-    D_86105488->unk_60.eye.y = 990.0f;
-    D_86105488->unk_60.eye.z = 2659.0f;
+    D_86105488->view.eyePosition.x = 0.0f;
+    D_86105488->view.eyePosition.y = 990.0f;
+    D_86105488->view.eyePosition.z = 2659.0f;
 }
 
 void func_86100C28(void) {
@@ -1186,12 +1197,12 @@ s32 ClefairyGame_UpdatePatternResponse(void) {
                     } else {
                         if (((temp_a0 > 0) && (D_86106450[temp_a0].unk_000 == D_86106450[temp_a0 - 1].unk_000)) ||
                             ((temp_a0 < 0xB) && (D_86106450[temp_a0].unk_000 == D_86106450[temp_a0 + 1].unk_000))) {
-                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1][4]);
+                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1].unk_08);
                         } else {
-                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1][3]);
+                            var_s0 = ClefairyGame_ChooseCpuMove(D_861049B4[D_86105BC4->unk_000 - 1].unk_06);
                         }
 
-                        D_86105BC4->unk_1B0 = Rand_Range(0xA) + D_861049B4[D_86105BC4->unk_000 - 1][5] + 5;
+                        D_86105BC4->unk_1B0 = Rand_Range(0xA) + D_861049B4[D_86105BC4->unk_000 - 1].unk_0A + 5;
                     }
                 }
 

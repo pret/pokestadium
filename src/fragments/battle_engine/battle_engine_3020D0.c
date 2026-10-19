@@ -111,11 +111,11 @@ void Battle_QueueMessage(s8* arg0, s8 arg1) {
 
 void Battle_QueueStatusText(char* arg0, s32 arg1) {
     UNUSED s32 pad[3];
-    BattlerState* sp28 = &D_84390010[arg1]->unk_654;
+    ActivePokemonState* sp28 = &sActivePokemon[arg1]->unk_654;
     UNUSED s32 pad2[2];
 
     Battle_ClearMessageCursor();
-    gBattleMessageQueues->unk_000 = D_84390010[arg1]->unk_720->unk_08[sp28->unk_2B]->unk_001;
+    gBattleMessageQueues->unk_000 = sActivePokemon[arg1]->unk_720->teamMember[sp28->unk_2B]->unk_001;
     func_84317940(gBattleMessageQueues->unk_048, arg0 + 1);
     *arg0 = 0;
 }
@@ -124,18 +124,18 @@ void func_84317B38(void) {
 }
 
 void Battle_DrawCompactStatusBoxesIfVisible(void) {
-    Battler* ptr1 = D_84390010[0];
-    Battler* ptr2 = D_84390010[1];
+    ActivePokemon* ptr1 = sActivePokemon[0];
+    ActivePokemon* ptr2 = sActivePokemon[1];
 
     if ((gSessionContext.mode != 0x10) && (gBattleScene.unk_00->unk_30 == 0)) {
-        BattleHud_DrawCompactMonStatusBox(ptr1, 0x15, 0xF, ptr1->unk_720->unk_08[ptr1->unk_728.unk_16C]->unk_001);
-        BattleHud_DrawCompactMonStatusBox(ptr2, 0xE1, 0xF, ptr2->unk_720->unk_08[ptr2->unk_728.unk_16C]->unk_001);
+        BattleHud_DrawCompactMonStatusBox(ptr1, 0x15, 0xF, ptr1->unk_720->teamMember[ptr1->unk_728.unk_16C]->unk_001);
+        BattleHud_DrawCompactMonStatusBox(ptr2, 0xE1, 0xF, ptr2->unk_720->teamMember[ptr2->unk_728.unk_16C]->unk_001);
     }
 }
 
 void Battle_QueueMoveCategoryUsedMessage(void) {
     u32 sp1C;
-    BattleMonRuntime* sp18 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
+    BattleMonRuntime* sp18 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
 
     sp18->unk_58 = sp18->unk_44.unk_00;
 
@@ -152,8 +152,8 @@ void Battle_QueueMoveCategoryUsedMessage(void) {
     }
 
     if ((sp18->unk_44.unk_00 == 0x76) || (sp18->unk_44.unk_00 == 0x77)) {
-        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(D_84390010[gBattleScene.unk_00->unk_2C]));
-        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(D_84390010[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
         switch (sp1C) {
             case 0:
@@ -177,8 +177,8 @@ void Battle_QueueMoveCategoryUsedMessage(void) {
                 break;
         }
     } else {
-        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(D_84390010[gBattleScene.unk_00->unk_2C]));
-        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(D_84390010[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
         switch (sp1C) {
             case 0:
@@ -207,22 +207,22 @@ void Battle_QueueMoveCategoryUsedMessage(void) {
 void Battle_QueueMoveCategoryMessage(void) {
     u32 sp24;
     UNUSED s32 pad;
-    BattleMonRuntime* sp1C = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
+    BattleMonRuntime* sp1C = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
 
-    if (BattleScene_ByteArrayContains(sp1C->unk_5A, D_84385990, 2) != 0) {
+    if (BattleScene_ByteArrayContains(sp1C->usedMove, D_84385990, 2) != 0) {
         sp24 = 0;
-    } else if (BattleScene_ByteArrayContains(sp1C->unk_5A, D_84385994, 5) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp1C->usedMove, D_84385994, 5) != 0) {
         sp24 = 1;
-    } else if (BattleScene_ByteArrayContains(sp1C->unk_5A, D_8438599C, 5) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp1C->usedMove, D_8438599C, 5) != 0) {
         sp24 = 2;
-    } else if (BattleScene_ByteArrayContains(sp1C->unk_5A, D_843859A4, 0x2E) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp1C->usedMove, D_843859A4, 0x2E) != 0) {
         sp24 = 3;
     } else {
         sp24 = 4;
     }
 
-    Text_SetStringToken(0x19, Battle_GetActiveMonNickname(D_84390010[gBattleScene.unk_00->unk_2C]));
-    Text_SetStringToken(0x1D, Battle_GetActiveMoveName(D_84390010[gBattleScene.unk_00->unk_2C]));
+    Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
+    Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
     switch (sp24) {
         case 0:
@@ -252,29 +252,29 @@ void Battle_QueueMetronomeMoveMessage(void) {
     s32 tmp;
     BattleMonRuntime* sp24;
 
-    sp24 = &D_84390010[gBattleScene.unk_00->unk_2C]->unk_654.unk_38;
+    sp24 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->unk_654.runtime;
 
-    if (BattleScene_ByteArrayContains(sp24->unk_5A, D_84385990, 2) != 0) {
+    if (BattleScene_ByteArrayContains(sp24->usedMove, D_84385990, 2) != 0) {
         sp2C = 0;
-    } else if (BattleScene_ByteArrayContains(sp24->unk_5A, D_84385994, 5) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp24->usedMove, D_84385994, 5) != 0) {
         sp2C = 1;
-    } else if (BattleScene_ByteArrayContains(sp24->unk_5A, D_8438599C, 5) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp24->usedMove, D_8438599C, 5) != 0) {
         sp2C = 2;
-    } else if (BattleScene_ByteArrayContains(sp24->unk_5A, D_843859A4, 0x2E) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp24->usedMove, D_843859A4, 0x2E) != 0) {
         sp2C = 3;
     } else {
         sp2C = 4;
     }
 
-    if (sp24->unk_5A == 0x76) {
+    if (sp24->usedMove == 0x76) {
         do {
             tmp = Battle_Random();
         } while ((tmp == 0) || (tmp >= 0xA5) || tmp == 0x76);
 
-        sp24->unk_5A = tmp;
+        sp24->usedMove = tmp;
 
-        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(D_84390010[gBattleScene.unk_00->unk_2C]));
-        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(D_84390010[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
         switch (sp2C) {
             case 0:
@@ -298,10 +298,10 @@ void Battle_QueueMetronomeMoveMessage(void) {
                 break;
         }
 
-        sp24->unk_5A = 0x76;
+        sp24->usedMove = 0x76;
 
-        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(D_84390010[gBattleScene.unk_00->unk_2C]));
-        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(D_84390010[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
         switch (sp2C) {
             case 0:
@@ -325,8 +325,8 @@ void Battle_QueueMetronomeMoveMessage(void) {
                 break;
         }
     } else {
-        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(D_84390010[gBattleScene.unk_00->unk_2C]));
-        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(D_84390010[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
+        Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
         switch (sp2C) {
             case 0:
@@ -651,11 +651,11 @@ void BattleBox_Update(s16 arg0, s16 arg1) {
                 }
             } else {
                 if (temp_s0->unk_04 == 0xE) {
-                    func_8003F660(BattleScene_GetParticipantDisplayPlayerNumber(D_84390010[temp_s0->unk_0C]));
+                    func_8003F660(BattleScene_GetParticipantDisplayPlayerNumber(sActivePokemon[temp_s0->unk_0C]));
                     BattleBox_DrawMessage(temp_s0, temp_s0->unk_14.x, temp_s0->unk_14.y);
                     temp_s0->unk_00++;
                 } else if (BattleHud_UpdateCaptionBoxPopup(temp_s0, arg0, arg1) != 0) {
-                    func_8003F660(BattleScene_GetParticipantDisplayPlayerNumber(D_84390010[temp_s0->unk_0C]));
+                    func_8003F660(BattleScene_GetParticipantDisplayPlayerNumber(sActivePokemon[temp_s0->unk_0C]));
                     BattleBox_DrawMessage(temp_s0, temp_s0->unk_14.x, temp_s0->unk_14.y);
                     temp_s0->unk_00++;
                 }
@@ -688,22 +688,22 @@ void BattleBox_Update(s16 arg0, s16 arg1) {
     }
 }
 
-void BattleScene_ClearParticipantMessageBuffer(Battler* arg0) {
+void BattleScene_ClearParticipantMessageBuffer(ActivePokemon* arg0) {
     arg0->unk_8C4.unk_00 = 0;
     arg0->unk_8C4.unk_04 = 0;
     arg0->unk_8C4.unk_48[0] = 0;
     arg0->unk_8C4.unk_08[0] = 0;
 }
 
-void BattleScene_BuildParticipantMessage(Battler* arg0, s32 arg1) {
-    gBattleMessageQueues->unk_000 = arg0->unk_720->unk_08[arg0->unk_654.unk_2C]->unk_001;
+void BattleScene_BuildParticipantMessage(ActivePokemon* arg0, s32 arg1) {
+    gBattleMessageQueues->unk_000 = arg0->unk_720->teamMember[arg0->unk_654.unk_2C]->unk_001;
     arg0->unk_8C4.unk_00 = 1;
-    Text_SetStringToken(0x19, arg0->unk_724->unk_01C[arg0->unk_654.unk_08].unk_30);
+    Text_SetStringToken(0x19, arg0->unk_724->pokemonPicked[arg0->unk_654.unk_08].unk_30);
     Text_GetString(arg0->unk_8C4.unk_48, 0x40, D_843900B0, arg1);
 }
 
-void BattleScene_RevealParticipantMessageChars(Battler* arg0) {
-    TeamRoster* temp_t0 = arg0->unk_720->unk_08[arg0->unk_654.unk_2C];
+void BattleScene_RevealParticipantMessageChars(ActivePokemon* arg0) {
+    TeamRoster* temp_t0 = arg0->unk_720->teamMember[arg0->unk_654.unk_2C];
 
     if (arg0->unk_8C4.unk_48[arg0->unk_8C4.unk_04] != '\x00') {
         arg0->unk_8C4.unk_08[arg0->unk_8C4.unk_04] = arg0->unk_8C4.unk_48[arg0->unk_8C4.unk_04];
@@ -727,11 +727,11 @@ void BattleScene_RevealParticipantMessageChars(Battler* arg0) {
 }
 
 void BattleScene_TickHudTimers(void) {
-    BattlerState* sp1C = &D_84390010[0]->unk_654;
-    BattlerState* sp18 = &D_84390010[1]->unk_654;
+    ActivePokemonState* sp1C = &sActivePokemon[0]->unk_654;
+    ActivePokemonState* sp18 = &sActivePokemon[1]->unk_654;
 
-    if ((gSessionContext.timeLimitsEnabled != 0) && (D_84390010[1]->unk_728.unk_168->unk_1C == 0x103) &&
-        (D_84390010[0]->unk_728.unk_168->unk_1C == 0x17)) {
+    if ((gSessionContext.timeLimitsEnabled != 0) && (sActivePokemon[1]->unk_728.unk_168->unk_1C == 0x103) &&
+        (sActivePokemon[0]->unk_728.unk_168->unk_1C == 0x17)) {
         BattleHud_DrawBattleTimer(0x101, 0x64);
         if (D_84390134 == 0) {
             if (sp1C->unk_10 != 3) {
@@ -757,8 +757,8 @@ void BattleScene_ResetMessageQueue(void) {
 }
 
 void Battle_RenderHud(void) {
-    BattlerState* sp1C = &D_84390010[0]->unk_654;
-    BattlerState* sp18 = &D_84390010[1]->unk_654;
+    ActivePokemonState* sp1C = &sActivePokemon[0]->unk_654;
+    ActivePokemonState* sp18 = &sActivePokemon[1]->unk_654;
 
     if (1) {}
 
@@ -771,10 +771,10 @@ void Battle_RenderHud(void) {
 
     switch (gBattleScene.unk_00->unk_1C) {
         case 1:
-            BattleHud_DrawOwnSideStatus(D_84390010[0], sp1C);
-            BattleHud_DrawOpponentSideStatus(D_84390010[1], sp18);
-            BattleScene_RevealParticipantMessageChars(D_84390010[0]);
-            BattleScene_RevealParticipantMessageChars(D_84390010[1]);
+            BattleHud_DrawOwnSideStatus(sActivePokemon[0], sp1C);
+            BattleHud_DrawOpponentSideStatus(sActivePokemon[1], sp18);
+            BattleScene_RevealParticipantMessageChars(sActivePokemon[0]);
+            BattleScene_RevealParticipantMessageChars(sActivePokemon[1]);
             BattleScene_TickHudTimers();
             BattleScene_DrawStripWipeIfActive();
             break;

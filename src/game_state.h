@@ -62,7 +62,7 @@ typedef struct BattleMon {
 
 typedef struct ExtendedRosterInfo {
     /* 0x000 */ u16 unk_000;
-    /* 0x002 */ u8 unk_002;
+    /* 0x002 */ u8 numberOfPokemonCanBePicked; // Only changes for Free Battle and VS Mewtwo, see @src/fragments/battle_engine/battle_engine_main.c
     /* 0x003 */ u8 unk_003;
     /* 0x004 */ char unk004[0x10];
     /* 0x014 */ char unk_014[4];
@@ -76,13 +76,13 @@ typedef struct ExtendedRosterInfo {
 typedef struct TeamRoster {
     /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
-    /* 0x002 */ u8 unk_002;
+    /* 0x002 */ u8 numberOfPokemonChosen;
     /* 0x004 */ Controller* controller;
     /* 0x008 */ char unk_008[4];
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;
-    /* 0x01C */ BattleMon unk_01C[6];
-    /* 0x214 */ ExtendedRosterInfo* unk_214;
+    /* 0x01C */ BattleMon pokemonPicked[6];
+    /* 0x214 */ ExtendedRosterInfo* rosterInfo;
     /* 0x218 */ char unk218[0x4];
 } TeamRoster; // size = 0x21C
 
@@ -91,7 +91,7 @@ typedef struct BattleSessionTeams {
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ TeamRoster* unk_04;
-    /* 0x08 */ TeamRoster* unk_08[2];
+    /* 0x08 */ TeamRoster* teamMember[2];
     /* 0x10 */ ModelLoadContext* unk_10;
     /* 0x14 */ ModelNodeView* unk_14;
     /* 0x18 */ ModelNodeView* unk_18;
@@ -141,6 +141,24 @@ typedef struct SessionContext {
 #define RULE_CATEGORY_PRIME_CUP 6
 #define RULE_CATEGORY_GYM_LEADER_CASTLE 7
 #define RULE_CATEGORY_VS_MEWTWO 8
+#define SESSION_MODE_ANYTHING_GOES 0
+#define SESSION_MODE_NINTENDO_CUP_97 1
+#define SESSION_MODE_NINTENDO_CUP_98 2
+#define SESSION_MODE_NINTENDO_CUP_99 3
+#define SESSION_MODE_PETIT_CUP 4
+#define SESSION_MODE_PIKA_CUP 5
+#define SESSION_MODE_PRIME_CUP 6
+#define SESSION_MODE_GYM_LEADER_CASTLE 7
+#define SESSION_MODE_VS_MEWTWO 8
+#define SESSION_MODE_BATTLE_NOW 9
+#define SESSION_MODE_EVENT_BATTLE 10
+// 11-15 Unknown
+#define SESSION_MODE_ATTRACT_DEMO_BATTLE 16
+// 17, 18: Cutscenes
+// 19, 20: Unknown
+// 21-24: Cutscenes
+#define SESSION_MODE_ATTRACT_DEMO_MINIGAME 25
+// 26: Cutscene
 
 
 

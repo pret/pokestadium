@@ -45,7 +45,7 @@ static Vtx* D_84103450;
 static GraphNode* D_84103454;
 static DisplayObject D_84103458[6];
 static s16 D_84103CC8;
-static unk_D_80068BB0* D_84103CD0[6];
+static DepthBuffer* D_84103CD0[6];
 static GraphNode* D_84103CE8;
 static GraphNode* D_84103CEC;
 static ModeSettings D_84103CF0;
@@ -604,7 +604,7 @@ void StadiumSelect_InitSparkleFlags(void) {
     }
 }
 
-void StadiumSelect_DrawIconFrame(unk_D_80068BB0* arg0, s16 arg1, s16 arg2) {
+void StadiumSelect_DrawIconFrame(DepthBuffer* arg0, s16 arg1, s16 arg2) {
     GfxImage_SetRenderTarget(&gDisplayListHead, arg0);
     GfxImage_FillCurrent(&gDisplayListHead, 0);
 
@@ -818,9 +818,9 @@ void StadiumSelect_RenderFrame(s32 arg0, s32 arg1, f32 arg2) {
     BgStage_AdvanceFrame();
 }
 
-unk_D_80068BB0* StadiumSelect_BuildDivisionCupIcon(u8* arg0, s16 arg1) {
+DepthBuffer* StadiumSelect_BuildDivisionCupIcon(u8* arg0, s16 arg1) {
     s16 i;
-    unk_D_80068BB0* sp40 = GfxImage_Allocate(0, 2, 0xA4, 0x7E, 1);
+    DepthBuffer* sp40 = GfxImage_Allocate(0, 2, 0xA4, 0x7E, 1);
     s32 var_s3;
 
     if (arg1 == 3) {
@@ -847,9 +847,9 @@ unk_D_80068BB0* StadiumSelect_BuildDivisionCupIcon(u8* arg0, s16 arg1) {
     return sp40;
 }
 
-unk_D_80068BB0* StadiumSelect_BuildSimpleCupIcon(u8* arg0, s16 arg1) {
+DepthBuffer* StadiumSelect_BuildSimpleCupIcon(u8* arg0, s16 arg1) {
     s16 i;
-    unk_D_80068BB0* sp30 = GfxImage_Allocate(0, 2, 0x8C, 0x6C, 1);
+    DepthBuffer* sp30 = GfxImage_Allocate(0, 2, 0x8C, 0x6C, 1);
     s32 var_v0;
 
     StadiumSelect_DrawIconFrame(sp30, 0x88, 0x68);
