@@ -147,7 +147,7 @@ typedef struct ActivePokemon {
     /* 0x4B8 */ s32 unk_4B8;
     /* 0x4BC */ char unk4BC[0x4];
     /* 0x4C0 */ s32 animationState;
-    /* 0x4C4 */ s32 unk_4C4;
+    /* 0x4C4 */ s32 animationTimer;
     /* 0x4C8 */ s32 unk_4C8;
     /* 0x4CC */ Vec3f unk_4CC;
     /* 0x4D8 */ Vec3f unk_4D8;
@@ -169,7 +169,7 @@ typedef struct ActivePokemon {
 } ActivePokemon; // size = 0xA0C
 
 typedef struct MovePresentationCue {
-    /* 0x00 */ u8 unk_00;
+    /* 0x00 */ u8 id;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03;
@@ -180,7 +180,7 @@ typedef struct MovePresentationCue {
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ u8 unk_0B;
+    /* 0x0B */ u8 animationTimer;
     /* 0x0C */ u8 unk_0C;
     /* 0x0D */ u8 unk_0D;
     /* 0x0E */ u8 unk_0E;
@@ -1094,7 +1094,7 @@ void Battle_MarkIllegalMoves(ActivePokemon* arg0, u16 arg1, SpeciesLearnsetBuffe
 void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon);
 void Battle_DmaLoadAnimRecord(u8 arg0, u32 arg1);
 void Battle_DmaLoadAnimRecordPair(s32 arg0, SpeciesLearnsetBuffer* arg1, SpeciesLearnsetBuffer* arg2);
-void func_84302658(ActivePokemon* arg0, s32 arg1);
+void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* arg0, s32 arg1);
 void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon);
 void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon);
@@ -1140,7 +1140,7 @@ void BattleScene_RegisterStateTickCallback(ActivePokemon* arg0, BattleSceneState
 void BattleScene_SetOpponentEventTrackA6(ActivePokemon* active_pokemon);
 void BattleScene_EnterStateRow(ActivePokemon* arg0, s32 arg1);
 void BattleScene_TickStateCallbacks(void);
-void Battle_ResetCryEventIfStruggle(ActivePokemon* active_pokemon);
+void Battle_StopBeingGoldAfterHarden(ActivePokemon* active_pokemon);
 void BattleAnim_SetModelEventTrackFromRow(ActivePokemon* arg0, s32 arg1);
 s32 BattleAnim_TrySetModelEventTrackFromRow(ActivePokemon* arg0, s32 arg1, s32 arg2);
 void BattleAnim_SetModelEventTrackAndState(ActivePokemon* arg0, s32 arg1, s32 arg2);

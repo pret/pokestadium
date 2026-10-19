@@ -52,7 +52,7 @@ void BattleScene_ApplyModelAnimationSlot5A(ActivePokemon* arg0) {
     if ((arg0->displayObject.objectType == 0x32) && (ptr->unk_34 & 0x4000)) {
         MovePresentationCue* tmp = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_000[0x5A];
 
-        ModelAnim_SetAnimation(&arg0->displayObject, tmp->unk_00);
+        ModelAnim_SetAnimation(&arg0->displayObject, tmp->id);
         arg0->displayObject.node.renderFlags &= ~0x20;
     }
 }
@@ -837,7 +837,7 @@ void BattleScene_SendOutPresentationFinalize(CameraNode* arg0) {
     if ((sp2E == 0x32) || (sp2E == 0x33)) {
         sActivePokemon[gBattleScene.unk_00->unk_2C]->displayObject.node.renderFlags |= 0x20;
         sActivePokemon[gBattleScene.unk_00->unk_2C]->displayObject.node.flags |= 1;
-        ModelAnim_SetAnimation(&sActivePokemon[gBattleScene.unk_00->unk_2C]->displayObject, sp28->unk_00);
+        ModelAnim_SetAnimation(&sActivePokemon[gBattleScene.unk_00->unk_2C]->displayObject, sp28->id);
     }
 
     Battle_ResetModelToIdleAnim(sActivePokemon[gBattleScene.unk_00->unk_2C]);
@@ -2219,16 +2219,16 @@ void BattleScene_Phase7(CameraNode* arg0) {
 
         case 1:
             BattleScene_ApplyActionCameraMode(arg0, 1);
-            if (D_84390204->unk_4C4 == (sp18->unk_04 + 1)) {
+            if (D_84390204->animationTimer == (sp18->unk_04 + 1)) {
                 func_84370ADC(D_84390204);
             }
 
-            if (D_84390204->unk_4C4 >= (sp18->unk_04 + 0xA)) {
+            if (D_84390204->animationTimer >= (sp18->unk_04 + 0xA)) {
                 D_84390220 = BattleScene_AnimateDisplayedHpToRuntime(sActivePokemon[gBattleScene.unk_00->unk_2C]);
                 D_84390224 = BattleScene_AnimateDisplayedHpToRuntime(sActivePokemon[!gBattleScene.unk_00->unk_2C]);
             }
 
-            if ((D_84390204->unk_4C4 == (sp18->unk_04 + 0x12)) && (sp1C->usedMove == 0x64)) {
+            if ((D_84390204->animationTimer == (sp18->unk_04 + 0x12)) && (sp1C->usedMove == 0x64)) {
                 BattleBox_Open(0xF);
             }
 
@@ -2239,7 +2239,7 @@ void BattleScene_Phase7(CameraNode* arg0) {
             break;
 
         case 2:
-            if (D_84390204->unk_4C4 == (sp18->unk_04 + 1)) {
+            if (D_84390204->animationTimer == (sp18->unk_04 + 1)) {
                 func_84370ADC(D_84390204);
             }
             BattleScene_ApplyActionCameraMode(arg0, 1);
@@ -2615,7 +2615,7 @@ void BattleScene_Phase12(CameraNode* arg0) {
                 Vec3f_SetComponentsDuplicate(&sp3C, 0.0f, 200.0f, 0.0f);
                 BattleAnim_Vec3fCopy(&arg0->view.targetPosition, &sp3C);
                 BattleAnim_CleanupEffects(2);
-                ModelAnim_SetAnimation(&D_84390204->displayObject, sp4C->unk_00);
+                ModelAnim_SetAnimation(&D_84390204->displayObject, sp4C->id);
                 arg0->perspective.verticalFieldOfView = 60.0f;
                 gBattleScene.unk_00->unk_20 += 1;
             } else {
@@ -2866,7 +2866,7 @@ void BattleScene_Phase16(CameraNode* arg0) {
                 BattleScene_SelectCameraShot(D_84390204, arg0, 3);
                 BattleScene_SetDamageShakeAmplitude(D_84390204);
                 BattleScene_ResetAnimationStep();
-                ModelAnim_SetAnimation(&D_84390204->displayObject, sp1C->unk_00);
+                ModelAnim_SetAnimation(&D_84390204->displayObject, sp1C->id);
                 gBattleScene.unk_00->unk_20 += 1;
             }
             break;
@@ -2947,7 +2947,7 @@ void BattleScene_PhaseAttackHit(CameraNode* arg0) {
 
     switch (gBattleScene.unk_00->unk_20) {
         case 0:
-            Battle_ResetCryEventIfStruggle(D_84390204);
+            Battle_StopBeingGoldAfterHarden(D_84390204);
             BattleScene_SetCameraOwnerStandardShot(arg0, sActivePokemon[gBattleScene.unk_00->unk_2C]);
             BattleScene_ResetAnimationStep();
             BattleScene_CleanupParticipantEffectMode(D_84390204);

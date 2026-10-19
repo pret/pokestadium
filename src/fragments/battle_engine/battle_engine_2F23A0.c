@@ -300,15 +300,15 @@ void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* arg0, ActivePokem
         if ((BattleAnim_IsSessionBusy(arg0) == 0) && (arg1->displayObject.transformAnim.animationId != -1) &&
             (ModelAnim_IsFinished(&arg1->displayObject) == 1)) {
             if (sp20->unk_34 & 0x200) {
-                ModelAnim_SetAnimation(&arg1->displayObject, sp2C->unk_00);
+                ModelAnim_SetAnimation(&arg1->displayObject, sp2C->id);
             } else if ((sp20->unk_34 & 1) && (BattleScene_ByteArrayContains(arg1->displayObject.objectType, D_84384590, 8) != 0)) {
-                ModelAnim_SetAnimation(&arg1->displayObject, sp28->unk_00);
+                ModelAnim_SetAnimation(&arg1->displayObject, sp28->id);
             } else {
                 if (arg1->displayObject.objectType == 0x84) {
                     idx = BattleAnim_RandomRange(5);
                     ModelAnim_SetAnimation(&arg1->displayObject, idx + 0xE);
                 } else {
-                    ModelAnim_SetAnimation(&arg1->displayObject, sp30->unk_00);
+                    ModelAnim_SetAnimation(&arg1->displayObject, sp30->id);
                 }
 
                 if (!(sp20->unk_34 & 1)) {
@@ -339,14 +339,14 @@ void Battle_ResetModelToIdleAnim(ActivePokemon* active_pokemon) {
     if (!(sp24->unk_34 & 0x4002) && (BattleAnim_IsSessionBusy(active_pokemon) == 0) && (active_pokemon->displayObject.transformAnim.animationId != -1)) {
         ModelAnim_SetFrame(&active_pokemon->displayObject, 0);
         if (sp24->unk_34 & 0x200) {
-            ModelAnim_SetAnimation(&active_pokemon->displayObject, sp30->unk_00);
+            ModelAnim_SetAnimation(&active_pokemon->displayObject, sp30->id);
         } else if ((sp24->unk_34 & 1) && (BattleScene_ByteArrayContains(active_pokemon->displayObject.objectType, D_84384590, 8) != 0)) {
-            ModelAnim_SetAnimation(&active_pokemon->displayObject, sp2C->unk_00);
+            ModelAnim_SetAnimation(&active_pokemon->displayObject, sp2C->id);
         } else {
             if (active_pokemon->displayObject.objectType == 0x84) {
                 ModelAnim_SetAnimation(&active_pokemon->displayObject, BattleAnim_RandomRange(5) + 0xE);
             } else {
-                ModelAnim_SetAnimation(&active_pokemon->displayObject, sp34->unk_00);
+                ModelAnim_SetAnimation(&active_pokemon->displayObject, sp34->id);
             }
 
             if (!(sp24->unk_34 & 1)) {
@@ -361,7 +361,7 @@ void Battle_SetModelToStatusAnim(ActivePokemon* active_pokemon) {
 
     if (active_pokemon->displayObject.transformAnim.animationId != -1) {
         ModelAnim_SetFrame(&active_pokemon->displayObject, 0);
-        ModelAnim_SetAnimation(&active_pokemon->displayObject, sp1C->unk_00);
+        ModelAnim_SetAnimation(&active_pokemon->displayObject, sp1C->id);
     }
 }
 
@@ -467,7 +467,7 @@ void BattleScene_ReinitParticipantBodyModel(ActivePokemon* arg0, ActivePokemon* 
     }
 
     Model_InitDisplayObject(&arg1->displayObject, 0, arg2, sp20);
-    func_84302658(arg0, arg3);
+    Battle_LoadAnimationAndMarkMoveIllegality(arg0, arg3);
     ModelAnim_SetFrame(&arg1->displayObject, 0);
     ModelAnim_SetAnimation(&arg1->displayObject, 0);
 

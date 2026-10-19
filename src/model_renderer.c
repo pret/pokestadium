@@ -68,14 +68,14 @@ void ModelRenderer_ClearDisplayObject(DisplayObject* arg0) {
     arg0->node.flags &= ~1;
 }
 
-s32 ModelAnim_SetAnimation(DisplayObject* arg0, s32 arg1) {
-    ModelAssetNode* tmp = arg0->node.children;
+s32 ModelAnim_SetAnimation(DisplayObject* display_object, s32 id) {
+    ModelAssetNode* tmp = display_object->node.children;
     ModelAnimationBank* temp_v0 = tmp->getAnimationBank(0, 0);
 
-    if (arg1 == -1) {
-        ModelAnim_ClearTransformChannel(arg0);
-    } else if (arg1 < temp_v0->transformCount) {
-        ModelAnim_BindTransformCurve(arg0, arg1, temp_v0->transformTracks[arg1], 0x10000);
+    if (id == -1) {
+        ModelAnim_ClearTransformChannel(display_object);
+    } else if (id < temp_v0->transformCount) {
+        ModelAnim_BindTransformCurve(display_object, id, temp_v0->transformTracks[id], 0x10000);
         return 1;
     }
 

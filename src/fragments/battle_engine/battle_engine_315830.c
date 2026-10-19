@@ -22,7 +22,7 @@ void BattleAnim_StartFreezeStatusAnimation(ActivePokemon* arg0) {
 
     if ((sp28->unk_15 & 0x20) && (ptr->unk_05 & 0x20) && !(sp2C->unk_34 & 2) &&
         ((arg0->displayObject.transformAnim.frameFixed >> 0x10) >= 3)) {
-        ModelAnim_SetAnimation(&arg0->displayObject, sp20->unk_00);
+        ModelAnim_SetAnimation(&arg0->displayObject, sp20->id);
         ModelAnim_SetFrame(&arg0->displayObject, 4);
         ModelAnim_SetEventTrack(&arg0->displayObject, sp20->unk_01);
         ModelAnim_SetEventFrame(&arg0->displayObject, 3);
@@ -36,7 +36,7 @@ void BattleAnim_StartFreezeStatusAnimation(ActivePokemon* arg0) {
 void BattleAnim_RestoreBaseModelAnimation(ActivePokemon* arg0) {
     MovePresentationCue* ptr = &D_84384570[BattleScene_GetParticipantSideIndex(arg0)]->unk_A50;
 
-    ModelAnim_SetAnimation(&arg0->displayObject, ptr->unk_00);
+    ModelAnim_SetAnimation(&arg0->displayObject, ptr->id);
 }
 
 void BattleAnim_ClearFreezeStatusAnimation(ActivePokemon* arg0) {

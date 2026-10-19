@@ -130,8 +130,8 @@ void BattleScene_TickCameraSubstateDefault(CameraNode* arg0) {
                     BattleAnim_CleanupEffects(2);
                     BattleScene_QuantizePresentationTimer();
                 }
-                Battle_ResetCryEventIfStruggle(sActivePokemon[0]);
-                Battle_ResetCryEventIfStruggle(sActivePokemon[1]);
+                Battle_StopBeingGoldAfterHarden(sActivePokemon[0]);
+                Battle_StopBeingGoldAfterHarden(sActivePokemon[1]);
                 gBattleScene.unk_00->unk_18 = 2;
                 GeoCamera_SetBackgroundTexture(arg0, 0xA, 0x12C, 2, Util_ConvertAddrToVirtAddr((u32)D_1000000));
                 GeoCamera_SetBackground(arg0, 4, 0xA, 0, 0, 0);
@@ -214,8 +214,8 @@ void BattleScene_TickCameraSubstateStripWipe(CameraNode* arg0) {
                     BattleAnim_CleanupEffects(2);
                     BattleScene_QuantizePresentationTimer();
                 }
-                Battle_ResetCryEventIfStruggle(sActivePokemon[0]);
-                Battle_ResetCryEventIfStruggle(sActivePokemon[1]);
+                Battle_StopBeingGoldAfterHarden(sActivePokemon[0]);
+                Battle_StopBeingGoldAfterHarden(sActivePokemon[1]);
                 gBattleScene.unk_00->unk_18 = 2;
                 BattleScene_SetStripWipeState(2, 0x1E);
                 BattleScene_UpdateStripWipe();
