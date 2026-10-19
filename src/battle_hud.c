@@ -132,11 +132,33 @@ u8 ModelRenderer_GetActiveMode(void) {
     return ret;
 }
 
+#if !defined(VERSION_JP)
 s16 ModelRenderer_GetObjectType(void) {
     s16 ret = *(s16*)Util_ConvertAddrToVirtAddr(&D_8006F09C->objectType);
     return ret;
 }
+#endif
 
+#if defined(VERSION_JP)
+// The Japanese Model_InitDisplayObject passes DisplayObject::effectSlot instead of the object.
+// 0xFF leaves the slot state untouched; slots 0 and 1 also clear their models and pass the
+// slot index to Particle31_ResetAllSlots, whose Japanese parameter type is unresolved.
+//@src/model_renderer.c
+void ModelAnim_StartDisplayObjectAnimation(u32 arg0) {
+    void (*func)(u32);
+
+    D_800AF7AE = 0;
+
+    if (arg0 != 0xFF) {
+        D_800AF7C0[arg0 & 1] = 0;
+        if (arg0 < 2) {
+            ModelRenderer_ClearSlotModels(arg0);
+            func = Util_ConvertAddrToVirtAddr(Particle31_ResetAllSlots);
+            func(arg0);
+        }
+    }
+}
+#else
 void ModelAnim_StartDisplayObjectAnimation(DisplayObject* arg0) {
     void (*func)(void*);
     s32 unk1A = arg0->objectType;
@@ -151,6 +173,7 @@ void ModelAnim_StartDisplayObjectAnimation(DisplayObject* arg0) {
         func(arg0);
     }
 }
+#endif
 
 void ModelAnim_UpdateDisplayObjectAnimation(u32 arg0, u32 arg1) {
     s32 (*func)(void);
