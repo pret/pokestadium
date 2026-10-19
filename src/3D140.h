@@ -43,7 +43,7 @@ typedef struct BattleMonRuntime {
     /* 0x3C */ u16 unk_3C;
     /* 0x3E */ u16 unk_3E;
     /* 0x40 */ char unk40[0x4];
-    /* 0x44 */ CachedMoveData unk_44;
+    /* 0x44 */ CachedMoveData moveCache;
     /* 0x4A */ u8 unk_4A;
     /* 0x4B */ u8 unk_4B;
     /* 0x4C */ u8 unk_4C;

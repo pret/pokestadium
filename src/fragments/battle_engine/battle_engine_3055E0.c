@@ -1105,7 +1105,7 @@ void BattleScene_SetCameraOwnerShot(CameraNode* arg0, ActivePokemon* arg1) {
     gBattleScene.unk_00->unk_D0.x = BattleScene_GetParticipantModelXOffset(arg1);
     gBattleScene.unk_00->unk_D0.z = 0.0f;
 
-    if (arg1->state.runtime.unk_44.unk_00 == 0x6E) {
+    if (arg1->state.runtime.moveCache.unk_00 == 0x6E) {
         D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 4.5f, 300.0f);
         if (D_843901F0 <= 100.0f) {
             D_843901F0 = 100.0f;

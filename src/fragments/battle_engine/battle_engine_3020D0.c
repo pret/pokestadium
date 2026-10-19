@@ -137,21 +137,21 @@ void Battle_QueueMoveCategoryUsedMessage(void) {
     u32 sp1C;
     BattleMonRuntime* sp18 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state.runtime;
 
-    sp18->unk_58 = sp18->unk_44.unk_00;
+    sp18->unk_58 = sp18->moveCache.unk_00;
 
-    if (BattleScene_ByteArrayContains(sp18->unk_44.unk_00, D_84385990, 2) != 0) {
+    if (BattleScene_ByteArrayContains(sp18->moveCache.unk_00, D_84385990, 2) != 0) {
         sp1C = 0;
-    } else if (BattleScene_ByteArrayContains(sp18->unk_44.unk_00, D_84385994, 5) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp18->moveCache.unk_00, D_84385994, 5) != 0) {
         sp1C = 1;
-    } else if (BattleScene_ByteArrayContains(sp18->unk_44.unk_00, D_8438599C, 5) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp18->moveCache.unk_00, D_8438599C, 5) != 0) {
         sp1C = 2;
-    } else if (BattleScene_ByteArrayContains(sp18->unk_44.unk_00, D_843859A4, 0x2E) != 0) {
+    } else if (BattleScene_ByteArrayContains(sp18->moveCache.unk_00, D_843859A4, 0x2E) != 0) {
         sp1C = 3;
     } else {
         sp1C = 4;
     }
 
-    if ((sp18->unk_44.unk_00 == 0x76) || (sp18->unk_44.unk_00 == 0x77)) {
+    if ((sp18->moveCache.unk_00 == 0x76) || (sp18->moveCache.unk_00 == 0x77)) {
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[gBattleScene.unk_00->unk_2C]));
         Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[gBattleScene.unk_00->unk_2C]));
 
