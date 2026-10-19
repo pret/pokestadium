@@ -126,6 +126,7 @@ void BattleAnim_PlayMoveEffectScriptA(ActivePokemon* user, s32 move_id) {
 }
 
 // guess: plays during changing moves like skull base
+// but for some reason connected to fury swipes too?
 void BattleAnim_PlayMoveEffectScriptB(ActivePokemon* user, s32 move_id) {
     UNUSED s16 pad;
     s16 camera_shot;
@@ -355,20 +356,20 @@ void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon) {
     }
 }
 
-void Battle_DmaLoadAnimRecord(u8 arg0, u32 arg1) {
-    u32 temp_a1 = (u32)_70D3A0_ROM_START + ((u32)&D_72780[arg0 - 1] & 0xFFFFFF);
+void Battle_DmaLoadAnimRecord(u8 read_end, u32 write_start) {
+    u32 temp_a1 = (u32)_70D3A0_ROM_START + ((u32)&D_72780[read_end - 1] & 0xFFFFFF);
 
-    Dma_WriteChunks(arg1, temp_a1, temp_a1 + 0x20, 0);
+    Dma_WriteChunks(write_start, temp_a1, temp_a1 + 0x20, 0);
 }
 
-void Battle_DmaLoadAnimRecordPair(s32 arg0, SpeciesLearnsetBuffer* arg1, SpeciesLearnsetBuffer* arg2) {
+void Battle_DmaLoadAnimRecordPair(s32 read_end, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer) {
     UNUSED s32 pad[3];
-    u32 temp_a1;
+    u32 buffer_start;
 
-    temp_a1 = (u32)_70D3A0_ROM_START + ((u32)&D_72780[arg0] & 0xFFFFFF);
-    Dma_WriteChunks(arg1, temp_a1, temp_a1 + 0x20, 0);
-    temp_a1 = (u32)_70D3A0_ROM_START + ((u32)&D_73A60[arg0] & 0xFFFFFF);
-    Dma_WriteChunks(arg2, temp_a1, temp_a1 + 0x20, 0);
+    buffer_start = (u32)_70D3A0_ROM_START + ((u32)&D_72780[read_end] & 0xFFFFFF);
+    Dma_WriteChunks(first_learnset_buffer, buffer_start, buffer_start + 0x20, 0);
+    buffer_start = (u32)_70D3A0_ROM_START + ((u32)&D_73A60[read_end] & 0xFFFFFF);
+    Dma_WriteChunks(second_learnset_buffer, buffer_start, buffer_start + 0x20, 0);
 }
 
 void func_84302658(ActivePokemon* pokemon, s32 mark_move_illegality) {
@@ -512,44 +513,44 @@ void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon) {
 void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
     s16 sp32 = active_pokemon->displayObject.objectType - 1;
-    BattleMonRuntime* sp24;
+    BattleMonRuntime* pokemon_runtime;
 
     BattleScene_GetParticipantSideIndex(active_pokemon);
-    sp24 = &active_pokemon->state.runtime;
-    D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp24->usedMove - 1];
+    pokemon_runtime = &active_pokemon->state.runtime;
+    D_84390020 = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[pokemon_runtime->usedMove - 1];
 
-    if ((sp24->usedMove == 0x19) && (sp32 == 0x64)) {
+    if ((pokemon_runtime->usedMove == 0x19) && (sp32 == 0x64)) {
         gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
     } else if ((active_pokemon->unk_4C4 == (D_84390020->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         if (gBattleScene.unk_00->unk_48 == 0x14) {
             gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
-        } else if (sp24->unk_44.unk_00 == 0x5B) {
+        } else if (pokemon_runtime->unk_44.unk_00 == 0x5B) {
             gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
         } else {
-            if (sp24->unk_44.unk_00 == 0x6E) {
+            if (pokemon_runtime->unk_44.unk_00 == 0x6E) {
                 if ((sp32 != 7) && (sp32 != 8) && (sp32 != 0x5A) && (sp32 != 6)) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 0xC, 0);
-                    BattleAnim_PlayMoveEffectScriptA(active_pokemon, sp24->usedMove);
+                    BattleAnim_PlayMoveEffectScriptA(active_pokemon, pokemon_runtime->usedMove);
                 }
             } else {
-                if (sp24->unk_44.unk_00 == 0x45) {
+                if (pokemon_runtime->unk_44.unk_00 == 0x45) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 8, 0);
-                } else if (sp24->unk_44.unk_00 == 0x39) {
+                } else if (pokemon_runtime->unk_44.unk_00 == 0x39) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 0xA, 0);
-                } else if (sp24->unk_44.unk_00 == 0x60) {
+                } else if (pokemon_runtime->unk_44.unk_00 == 0x60) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 0xD, 0);
-                } else if (sp24->unk_44.unk_00 == 0x7F) {
+                } else if (pokemon_runtime->unk_44.unk_00 == 0x7F) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 0xE, 0);
-                } else if (sp24->unk_44.unk_00 == 0x6B) {
+                } else if (pokemon_runtime->unk_44.unk_00 == 0x6B) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 9, 0);
                 } else {
                     BattleScene_SetParticipantModelFlags(active_pokemon, D_84390020->unk_05, 0);
                 }
 
-                if ((sp24->usedMove == 0x9A) && (D_84390230 == D_8439022C)) {
-                    BattleAnim_PlayMoveEffectScriptB(active_pokemon, sp24->usedMove);
+                if ((pokemon_runtime->usedMove == FURY_SWIPES) && (D_84390230 == D_8439022C)) {
+                    BattleAnim_PlayMoveEffectScriptB(active_pokemon, pokemon_runtime->usedMove);
                 } else {
-                    BattleAnim_PlayMoveEffectScriptA(active_pokemon, sp24->usedMove);
+                    BattleAnim_PlayMoveEffectScriptA(active_pokemon, pokemon_runtime->usedMove);
                 }
             }
             gBattleSceneStateTickSlots[gBattleSceneStateTickSlotIndex].unk_04 = gBattleSceneStateTickSentinel;
@@ -701,7 +702,7 @@ void BattleScene_TickRow19PlayMoveEffectScript(ActivePokemon* active_pokemon) {
             return;
         }
 
-        if ((sp20->usedMove == 0x9A) && (D_84390230 == D_8439022C)) {
+        if ((sp20->usedMove == FURY_SWIPES) && (D_84390230 == D_8439022C)) {
             BattleAnim_PlayMoveEffectScriptB(active_pokemon, sp20->usedMove);
         } else {
             BattleAnim_PlayMoveEffectScriptA(active_pokemon, sp20->usedMove);
