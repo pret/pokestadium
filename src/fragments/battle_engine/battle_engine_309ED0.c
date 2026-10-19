@@ -2449,14 +2449,14 @@ void BattleScene_Phase15(CameraNode* arg0) {
                 if (sp2C->unk_4E & 8) {
                     sp28->unk_BC = D_84390204->sessionTeams->cry = sp24->unk_BE;
                 } else if (D_84390200->sessionTeams->cry == 0x98) {
-                    sp28->unk_BC = D_84390204->sessionTeams->cry = sp2C->unk_0B;
+                    sp28->unk_BC = D_84390204->sessionTeams->cry = sp2C->id;
                 } else {
                     sp28->unk_BC = D_84390204->sessionTeams->cry = D_84390200->sessionTeams->cry;
                 }
             } else if (sp2C->unk_4E & 8) {
                 D_84390204->sessionTeams->cry = sp24->unk_BE;
             } else if (D_84390200->sessionTeams->cry == 0x98) {
-                D_84390204->sessionTeams->cry = sp2C->unk_0B;
+                D_84390204->sessionTeams->cry = sp2C->id;
             } else {
                 D_84390204->sessionTeams->cry = D_84390200->sessionTeams->cry;
             }
@@ -3387,7 +3387,7 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
 
         case 1:
             if (BattleAnim_TryRegisterAssetTables(temp_s0) != 0) {
-                temp_s0->sessionTeams->cry = sp2C->unk_0B;
+                temp_s0->sessionTeams->cry = sp2C->id;
                 BattleScene_SetParticipantModelFlags(temp_s0, 2, 0);
                 BattleAnim_QueueEffectList3(0xD, temp_s0, temp_s0, 0xFF, 0xFF);
                 gBattleScene.unk_00->unk_20 += 1;

@@ -412,7 +412,7 @@ void BattleHud_DrawSpeciesNameLabelAuto(ActivePokemon* arg0, TeamRoster* arg1, s
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (ptr->unk_C1[i] == 1) {
+        if (ptr->moveSlotIllegality[i] == 1) {
             var_t0 = 1;
         }
     }
@@ -1116,7 +1116,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
 
     if (temp_s0->unk_4E & 8) {
         if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
-            if (arg0->state.unk_C1[0] == 1) {
+            if (arg0->state.moveSlotIllegality[0] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1125,7 +1125,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
 
         if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
-            if (arg0->state.unk_C1[1] == 1) {
+            if (arg0->state.moveSlotIllegality[1] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1134,7 +1134,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
 
         if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
-            if (arg0->state.unk_C1[2] == 1) {
+            if (arg0->state.moveSlotIllegality[2] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1143,7 +1143,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
 
         if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
-            if (arg0->state.unk_C1[3] == 1) {
+            if (arg0->state.moveSlotIllegality[3] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1152,7 +1152,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
     } else {
         if ((temp_s0->moves[0] != 0) && (temp_s0->moves[0] < 0xA6)) {
-            if (arg0->state.unk_C1[0] == 1) {
+            if (arg0->state.moveSlotIllegality[0] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1161,7 +1161,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
 
         if ((temp_s0->moves[1] != 0) && (temp_s0->moves[1] < 0xA6)) {
-            if (arg0->state.unk_C1[1] == 1) {
+            if (arg0->state.moveSlotIllegality[1] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1170,7 +1170,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
 
         if ((temp_s0->moves[2] != 0) && (temp_s0->moves[2] < 0xA6)) {
-            if (arg0->state.unk_C1[2] == 1) {
+            if (arg0->state.moveSlotIllegality[2] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
@@ -1179,7 +1179,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
         }
 
         if ((temp_s0->moves[3] != 0) && (temp_s0->moves[3] < 0xA6)) {
-            if (arg0->state.unk_C1[3] == 1) {
+            if (arg0->state.moveSlotIllegality[3] == 1) {
                 Gfx_SetEnvColor(0xFF, 0x64, 0xFF, 0xFF);
             } else {
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);

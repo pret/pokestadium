@@ -1047,7 +1047,7 @@ void Battle_Effect_Transform(void) {
     sp20 = &sActivePokemon[gBattleScene.unk_00->unk_2C]->state;
     sp1C = &sActivePokemon[!gBattleScene.unk_00->unk_2C]->state;
 
-    if ((D_8438AC60[0] == 1) && ((((gBattleTarget->unk_4E & 8) == 0) && (gBattleTarget->unk_0B == 0x84)) ||
+    if ((D_8438AC60[0] == 1) && ((((gBattleTarget->unk_4E & 8) == 0) && (gBattleTarget->id == 0x84)) ||
                                  (((gBattleTarget->unk_4E & 8) != 0) && (sp1C->unk_BE == 0x84)))) {
         gBattleScene.unk_00->unk_48 = 0x1C;
         Text_SetStringToken(0x1B, Battle_GetActiveMonNickname(sActivePokemon[!gBattleScene.unk_00->unk_2C]));
@@ -1066,7 +1066,7 @@ void Battle_Effect_Transform(void) {
         if (gBattleTarget->unk_4E & 8) {
             sp20->unk_BE = sp1C->unk_BE;
         } else {
-            sp20->unk_BE = gBattleTarget->unk_0B;
+            sp20->unk_BE = gBattleTarget->id;
         }
 
         gBattleUser->unk_16[6] = gBattleTarget->unk_16[6];

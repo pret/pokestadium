@@ -44,7 +44,7 @@ SpeciesModelTransform* D_84384580[] = {
     &D_8438FFB0,
     &D_8438FFD0,
 };
-TagTeamPartners* D_84384588[] = { &D_8438FFF0, &D_84390000 };
+TagTeamPartners* sPlayerTagTeam[] = { &D_8438FFF0, &D_84390000 };
 u8 D_84384590[] = { 0x39, 0x67, 0x64, 0x6D, 0x28, 0x6E, 0x2A, 0x47 };
 static u8 D_84384598[] = { 0x64, 0x6E };
 static u8 D_8438459C[] = {
@@ -297,21 +297,21 @@ void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 arg1, SpeciesLearnsetBu
 
             for (i = 0; i < ARRAY_COUNT(species_data->startingMoves); i++) {
                 if ((species_data->startingMoves[i] != 0) && (species_data->startingMoves[i] == pokemon_runtime->moves[move_index])) {
-                    pokemon->state.unk_C1[move_index] = 0;
+                    pokemon->state.moveSlotIllegality[move_index] = 0;
                 }
             }
 
             for (i = 0; i < 10; i++) {
                 if ((arg2->unk_00[i] != 0) && (pokemon_runtime->unk_26 >= arg2->unk_00[i]) &&
                     (arg2->unk_0A[i] == pokemon_runtime->moves[move_index])) {
-                    pokemon->state.unk_C1[move_index] = 0;
+                    pokemon->state.moveSlotIllegality[move_index] = 0;
                 }
             }
 
             for (i = 0; i < 10; i++) {
                 if ((arg3->unk_00[i] != 0) && (pokemon_runtime->unk_26 >= arg3->unk_00[i]) &&
                     (arg3->unk_0A[i] == pokemon_runtime->moves[move_index])) {
-                    pokemon->state.unk_C1[move_index] = 0;
+                    pokemon->state.moveSlotIllegality[move_index] = 0;
                 }
             }
 
@@ -329,29 +329,29 @@ void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 arg1, SpeciesLearnsetBu
                 }
 
                 if (((var_a0 >> (i % 8)) & 1) && (Move_GetIdFromTableIndex(i) == pokemon_runtime->moves[move_index])) {
-                    pokemon->state.unk_C1[move_index] = 0;
+                    pokemon->state.moveSlotIllegality[move_index] = 0;
                 }
             }
         } else {
-            pokemon->state.unk_C1[move_index] = 0;
+            pokemon->state.moveSlotIllegality[move_index] = 0;
         }
     }
 }
 
-void Battle_InitializeMoveUsabilityMask(ActivePokemon* active_pokemon) {
-    active_pokemon->state.unk_C1[0] = 1;
-    active_pokemon->state.unk_C1[1] = 1;
-    active_pokemon->state.unk_C1[2] = 1;
-    active_pokemon->state.unk_C1[3] = 1;
+void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon) {
+    active_pokemon->state.moveSlotIllegality[0] = 1;
+    active_pokemon->state.moveSlotIllegality[1] = 1;
+    active_pokemon->state.moveSlotIllegality[2] = 1;
+    active_pokemon->state.moveSlotIllegality[3] = 1;
 
-    Battle_MarkIllegalMoves(active_pokemon, active_pokemon->state.runtime.unk_0B - 1, &active_pokemon->unk_94C, &active_pokemon->unk_9AC);
+    Battle_MarkIllegalMoves(active_pokemon, active_pokemon->state.runtime.id - 1, &active_pokemon->unk_94C, &active_pokemon->unk_9AC);
 
-    if (D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_00 != 0) {
-        Battle_MarkIllegalMoves(active_pokemon, D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_00 - 1, &active_pokemon->unk_96C, &active_pokemon->unk_9CC);
+    if (sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->firstPartner != 0) {
+        Battle_MarkIllegalMoves(active_pokemon, sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->firstPartner - 1, &active_pokemon->unk_96C, &active_pokemon->unk_9CC);
     }
 
-    if (D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_01 != 0) {
-        Battle_MarkIllegalMoves(active_pokemon, D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_01 - 1, &active_pokemon->unk_98C, &active_pokemon->unk_9EC);
+    if (sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->secondPartner != 0) {
+        Battle_MarkIllegalMoves(active_pokemon, sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->secondPartner - 1, &active_pokemon->unk_98C, &active_pokemon->unk_9EC);
     }
 }
 
@@ -431,20 +431,20 @@ void func_84302658(ActivePokemon* arg0, s32 arg1) {
     Dma_WriteChunks(&D_84390028[sp68], var_a1, var_a1 + 0x10, 0);
 
     var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (sp66 * 0x10)) & 0xFFFFFF);
-    Dma_WriteChunks(D_84384588[sp68], var_a1, var_a1 + 0x10, 0);
+    Dma_WriteChunks(sPlayerTagTeam[sp68], var_a1, var_a1 + 0x10, 0);
 
     Battle_DmaLoadAnimRecordPair(sp66, &arg0->unk_94C, &arg0->unk_9AC);
 
-    if (D_84384588[sp68]->unk_00 != 0) {
-        Battle_DmaLoadAnimRecordPair(D_84384588[sp68]->unk_00 - 1, &arg0->unk_96C, &arg0->unk_9CC);
+    if (sPlayerTagTeam[sp68]->firstPartner != 0) {
+        Battle_DmaLoadAnimRecordPair(sPlayerTagTeam[sp68]->firstPartner - 1, &arg0->unk_96C, &arg0->unk_9CC);
     }
 
-    if (D_84384588[sp68]->unk_01 != 0) {
-        Battle_DmaLoadAnimRecordPair(D_84384588[sp68]->unk_01 - 1, &arg0->unk_98C, &arg0->unk_9EC);
+    if (sPlayerTagTeam[sp68]->secondPartner != 0) {
+        Battle_DmaLoadAnimRecordPair(sPlayerTagTeam[sp68]->secondPartner - 1, &arg0->unk_98C, &arg0->unk_9EC);
     }
 
     if (arg1 == 1) {
-        Battle_InitializeMoveUsabilityMask(arg0);
+        Battle_InitializeMoveIllegalityMask(arg0);
     }
 }
 
@@ -1036,7 +1036,7 @@ void BattleScene_TickAssetLoadQueueRowEffectList3(ActivePokemon* active_pokemon)
     ActivePokemonState* temp_v1 = &active_pokemon->state;
 
     if (BattleAnim_TryRegisterAssetTables(active_pokemon) != 0) {
-        active_pokemon->sessionTeams->cry = active_pokemon->state.runtime.unk_0B;
+        active_pokemon->sessionTeams->cry = active_pokemon->state.runtime.id;
         active_pokemon->unk_4C4 = 0;
         BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[sp24].mode);
         Audio_PlayCommand(3, 0, 0);
@@ -2140,8 +2140,8 @@ void BattleScene_InitializeRuntime(BattleSessionTeams* arg0) {
     BattleScene_ResetParticipantAuxTransform(sActivePokemon[1], sActivePokemon[1], -1);
     BattleScene_InitializePresentation(arg0);
     Battle_InitializeActiveRuntimeState();
-    Battle_InitializeMoveUsabilityMask(sActivePokemon[0]);
-    Battle_InitializeMoveUsabilityMask(sActivePokemon[1]);
+    Battle_InitializeMoveIllegalityMask(sActivePokemon[0]);
+    Battle_InitializeMoveIllegalityMask(sActivePokemon[1]);
     BattleBox_Close();
 }
 

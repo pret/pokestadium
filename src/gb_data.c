@@ -810,11 +810,11 @@ void Pokemon_ToGbRecordExt(unk_func_88205880_00D0* arg0, GbPokemonRecordExt* arg
     GbData_WriteU16BE(&arg1->unk_2A, arg0->unk_000[0].unk_2E);
 }
 
-u16 StatExpSqrt(u16 arg0) {
+u16 StatExpSqrt(u16 square) {
     u16 i;
 
     for (i = 1; i < 255; i++) {
-        if (SQ(i) >= arg0) {
+        if (SQ(i) >= square) {
             break;
         }
     }

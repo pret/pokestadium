@@ -19,7 +19,7 @@ typedef struct BattleMonRuntime {
     /* 0x04 */ u8 unk_04;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ char unk06[0x5];
-    /* 0x0B */ u8 unk_0B;
+    /* 0x0B */ u8 id;
     /* 0x0C */ u16 unk_0C;
     /* 0x0E */ u16 unk_0E;
     /* 0x10 */ u16 unk_10;

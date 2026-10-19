@@ -724,7 +724,7 @@ void func_84370B7C(ActivePokemon* arg0) {
     sp34 = &arg0->sessionTeams->teamMember[sp28->unk_2C]->pokemonPicked[sp28->unk_18];
 
     sp24->unk_14 = sp28->unk_08;
-    sp24->unk_0B = sp34->unk_00.unk_00;
+    sp24->id = sp34->unk_00.unk_00;
     sp24->unk_0C = sp34->unk_02;
     sp24->unk_15 = sp34->unk_05;
     sp24->unk_16[6] = sp34->unk_06;
@@ -778,7 +778,7 @@ void func_84370B7C(ActivePokemon* arg0) {
     func_84370B0C(arg0);
     func_84370B44(arg0);
 
-    sp24->unk_36 = gBaseStats[sp24->unk_0B].baseHP;
+    sp24->unk_36 = gBaseStats[sp24->id].baseHP;
     sp24->unk_38 = sp34->unk_28;
     sp24->unk_3A = sp34->unk_2A;
     sp24->unk_3C = sp34->unk_2C;
@@ -1200,9 +1200,9 @@ s32 Battle_CheckCriticalHit(void) {
 
     gBattleCritFlag = 0;
     if (D_8438AC60[0] == 1) {
-        sp18 = (gBaseStats[gBattleUser->unk_0B].baseDefense + 0x4C) >> 2;
+        sp18 = (gBaseStats[gBattleUser->id].baseDefense + 0x4C) >> 2;
     } else {
-        sp18 = gBaseStats[gBattleUser->unk_0B].baseDefense >> 1;
+        sp18 = gBaseStats[gBattleUser->id].baseDefense >> 1;
     }
 
     if (gBattleUser->unk_44.unk_02 == 0) {

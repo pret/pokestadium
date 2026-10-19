@@ -57,7 +57,7 @@ typedef struct ActivePokemonState {
     /* 0xBC */ s16 unk_BC;
     /* 0xBE */ s16 unk_BE;
     /* 0xC0 */ char unkC0[1];
-    /* 0xC1 */ u8 unk_C1[4];
+    /* 0xC1 */ u8 moveSlotIllegality[4];
     /* 0xC8 */ Controller* unk_C8;
 } ActivePokemonState; // size = 0xCC
 
@@ -284,9 +284,9 @@ typedef struct BattleSceneStateTickSlot {
 } BattleSceneStateTickSlot; // size = 0x8
 
 typedef struct TagTeamPartners {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk02[0xE];
+    /* 0x00 */ u8 firstPartner;
+    /* 0x01 */ u8 secondPartner;
+    /* 0x02 */ char names[14];
 } TagTeamPartners; // size = 0x10
 
 typedef struct unk_D_84390178 {
@@ -915,7 +915,7 @@ typedef struct unk_func_8437F85C_arg3 {
 extern unk_D_8438E7B0* D_84384570[];
 extern SpeciesModelTransform* D_84384578[];
 extern SpeciesModelTransform* D_84384580[];
-extern TagTeamPartners* D_84384588[];
+extern TagTeamPartners* sPlayerTagTeam[];
 extern u8 D_84384590[];
 extern u8 D_843845F0;
 extern u8 D_843845F4;
@@ -1091,7 +1091,7 @@ void Battle_MakeSubstitute(ActivePokemon* active_pokemon);
 void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon);
 s32 BattleScene_FindU16InByteArray(u16 arg0, u8* arg1, s32 arg2);
 void Battle_MarkIllegalMoves(ActivePokemon* arg0, u16 arg1, SpeciesLearnsetBuffer* arg2, SpeciesLearnsetBuffer* arg3);
-void Battle_InitializeMoveUsabilityMask(ActivePokemon* active_pokemon);
+void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon);
 void Battle_DmaLoadAnimRecord(u8 arg0, u32 arg1);
 void Battle_DmaLoadAnimRecordPair(s32 arg0, SpeciesLearnsetBuffer* arg1, SpeciesLearnsetBuffer* arg2);
 void func_84302658(ActivePokemon* arg0, s32 arg1);

@@ -114,9 +114,9 @@ u8 BattleAI_EstimateCriticalHitChance(BattleMonRuntime* arg0, BattleMonRuntime* 
     s32 var_v1;
 
     if (D_8438AC60[0] == 1) {
-        var_v1 = (gSpeciesData[arg0->unk_0B - 1].baseSpeed + 0x4C) >> 2;
+        var_v1 = (gSpeciesData[arg0->id - 1].baseSpeed + 0x4C) >> 2;
     } else {
-        var_v1 = gSpeciesData[arg0->unk_0B - 1].baseSpeed >> 1;
+        var_v1 = gSpeciesData[arg0->id - 1].baseSpeed >> 1;
     }
 
     if (D_8438AC60[0] != 1) {
@@ -606,7 +606,7 @@ u8 BattleAI_ClassifyMoveAvailability(BattleAiMonState* arg0, BattleAiMonState* a
         return 0;
     }
 
-    temp_v0 = BattleAI_FindSpeciesIndex(sp30->unk_0B);
+    temp_v0 = BattleAI_FindSpeciesIndex(sp30->id);
 
     for (i = 0; i < 4; i++) {
         if ((arg1->unk_01 | (arg1->unk_01 >> 4)) & (1 << i) && (arg2 == sp30->moves[i])) {
@@ -616,15 +616,15 @@ u8 BattleAI_ClassifyMoveAvailability(BattleAiMonState* arg0, BattleAiMonState* a
 
     if (((arg1->unk_01 | (arg1->unk_01 >> 4)) ^ 0xF) != 0) {
         for (i = 0; i < 4; i++) {
-            if (arg2 == gSpeciesData[sp30->unk_0B - 1].startingMoves[i]) {
+            if (arg2 == gSpeciesData[sp30->id - 1].startingMoves[i]) {
                 return 1;
             }
 
-            if ((D_84384588[sp36]->unk_00 != 0) && (arg2 == gSpeciesData[D_84384588[sp36]->unk_00 - 1].startingMoves[i])) {
+            if ((sPlayerTagTeam[sp36]->firstPartner != 0) && (arg2 == gSpeciesData[sPlayerTagTeam[sp36]->firstPartner - 1].startingMoves[i])) {
                 return 1;
             }
 
-            if ((D_84384588[sp36]->unk_01 != 0) && (arg2 == gSpeciesData[D_84384588[sp36]->unk_01 - 1].startingMoves[i])) {
+            if ((sPlayerTagTeam[sp36]->secondPartner != 0) && (arg2 == gSpeciesData[sPlayerTagTeam[sp36]->secondPartner - 1].startingMoves[i])) {
                 return 1;
             }
         }
@@ -636,7 +636,7 @@ u8 BattleAI_ClassifyMoveAvailability(BattleAiMonState* arg0, BattleAiMonState* a
         }
 
         for (i = 1; i < 0x38; i++) {
-            if ((BattleAI_IsTypeMatchupAllowed(sp30->unk_0B, i) != 0) && (arg2 == D_8438AFB4[i - 1])) {
+            if ((BattleAI_IsTypeMatchupAllowed(sp30->id, i) != 0) && (arg2 == D_8438AFB4[i - 1])) {
                 return 1;
             }
         }
@@ -1290,7 +1290,7 @@ s32 BattleAI_ScoreAllCandidateMoves(BattleAiMonState* arg0, BattleAiMonState* ar
     spD6 = 0;
     *arg2 = 0;
     temp_s2 = &arg0->unk_12;
-    spDE = BattleAI_FindSpeciesIndex(temp_s2->unk_0B);
+    spDE = BattleAI_FindSpeciesIndex(temp_s2->id);
 
     if (temp_s2->unk_4C & 1) {
         *arg2 = 0x75;
@@ -1358,7 +1358,7 @@ s32 BattleAI_ScoreAllCandidateMoves(BattleAiMonState* arg0, BattleAiMonState* ar
         }
 
         if (spD6 == 0) {
-            for (i = 0; i < 4 && (tmp = gSpeciesData[temp_s2->unk_0B - 1].startingMoves[i]); i++) {
+            for (i = 0; i < 4 && (tmp = gSpeciesData[temp_s2->id - 1].startingMoves[i]); i++) {
                 BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
             }
 
@@ -1368,14 +1368,14 @@ s32 BattleAI_ScoreAllCandidateMoves(BattleAiMonState* arg0, BattleAiMonState* ar
                 var_v0_2 = 1;
             }
 
-            if (D_84384588[var_v0_2]->unk_00 != 0) {
-                for (i = 0; i < 4 && (tmp = gSpeciesData[D_84384588[var_v0_2]->unk_00 - 1].startingMoves[i]); i++) {
+            if (sPlayerTagTeam[var_v0_2]->firstPartner != 0) {
+                for (i = 0; i < 4 && (tmp = gSpeciesData[sPlayerTagTeam[var_v0_2]->firstPartner - 1].startingMoves[i]); i++) {
                     BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
                 }
             }
 
-            if (D_84384588[var_v0_2]->unk_01 != 0) {
-                for (i = 0; i < 4 && (tmp = gSpeciesData[D_84384588[var_v0_2]->unk_01 - 1].startingMoves[i]) != 0; i++) {
+            if (sPlayerTagTeam[var_v0_2]->secondPartner != 0) {
+                for (i = 0; i < 4 && (tmp = gSpeciesData[sPlayerTagTeam[var_v0_2]->secondPartner - 1].startingMoves[i]) != 0; i++) {
                     BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
                 }
             }
@@ -1388,7 +1388,7 @@ s32 BattleAI_ScoreAllCandidateMoves(BattleAiMonState* arg0, BattleAiMonState* ar
             }
 
             for (i = 1; i < 0x38; i++) {
-                if ((BattleAI_IsTypeMatchupAllowed(temp_s2->unk_0B, i) != 0) &&
+                if ((BattleAI_IsTypeMatchupAllowed(temp_s2->id, i) != 0) &&
                     (BattleAI_IsThresholdMet((D_843C5564->unk_00 & 0xC000u) >> 0xE, i) != 0)) {
                     tmp = D_8438AFB4[i - 1];
                     BattleAI_PickBestMove(temp_s2, &arg1->unk_12, &spD6, arg2, tmp, arg3);
@@ -2234,7 +2234,7 @@ void func_8437B0CC(BattleAiTeamState* arg0, BattleAiTeamState* arg1, u8 arg2, Ba
         temp_s7 = &arg3[i];
         sp9C = &gMoveData[temp_s7->unk_00] - 1;
         var_s5 = 1;
-        temp_s0 = BattleAI_IsPriorityTableMove(temp_s6->unk_0B, temp_s7->unk_00);
+        temp_s0 = BattleAI_IsPriorityTableMove(temp_s6->id, temp_s7->unk_00);
         var_s1 = (((BattleAI_RandomBelowInclusive(4) * temp_s0) * sp78) * 3) / 2;
         switch (temp_s7->unk_03) {
             case 0x0:
@@ -3156,7 +3156,7 @@ void func_8437B0CC(BattleAiTeamState* arg0, BattleAiTeamState* arg1, u8 arg2, Ba
 
             case 0x39:
                 temp_s3 = oppMon;
-                if (((temp_s3->unk_4E & 8) != 0) || (temp_s3->unk_0B == 0x84)) {
+                if (((temp_s3->unk_4E & 8) != 0) || (temp_s3->id == 0x84)) {
                     if ((temp_s3->unk_4E & 8) != 0) {
                         if (((temp_s3 == D_843C60B8) ? ((sActivePokemon[0]->state.unk_BE ^ 0x84) != 0)
                                                      : ((sActivePokemon[1]->state.unk_BE ^ 0x84) != 0)) == 0) {
@@ -3350,7 +3350,7 @@ void func_8437B0CC(BattleAiTeamState* arg0, BattleAiTeamState* arg1, u8 arg2, Ba
             if (temp_s3->unk_4D & 0x12) {
                 var_s1 = 0;
             }
-            if ((temp_s3->unk_2E < temp_s6->unk_2E) && (temp_s3->unk_0B == 0x84)) {
+            if ((temp_s3->unk_2E < temp_s6->unk_2E) && (temp_s3->id == 0x84)) {
                 var_s1 = 1;
             }
         }
@@ -3562,7 +3562,7 @@ void BattleAI_InitTeamContext(TeamRoster* arg0, TeamRoster* arg1, BattleAiTeamSt
 
             arg2->unk_14[j + var_v1].unk_00 = j;
             arg2->unk_14[j + var_v1].unk_04 = 0;
-            arg2->unk_14[j + var_v1].unk_12.unk_0B = temp_s7[j].unk_00.unk_00;
+            arg2->unk_14[j + var_v1].unk_12.id = temp_s7[j].unk_00.unk_00;
             arg2->unk_14[j + var_v1].unk_12.unk_16[6] = temp_s7[j].unk_06;
             arg2->unk_14[j + var_v1].unk_12.unk_16[7] = temp_s7[j].unk_07;
             arg2->unk_14[j + var_v1].unk_12.unk_26 = temp_s7[j].unk_24;
@@ -5102,11 +5102,11 @@ s32 BattleAI_IsMoveExcludedForSpecies(BattleMonRuntime* arg0, s32 arg1, u8 arg2,
             return 0;
         }
 
-        if ((D_84384588[arg2]->unk_00 != 0) && (arg3 == gSpeciesData[D_84384588[arg2]->unk_00 - 1].startingMoves[i])) {
+        if ((sPlayerTagTeam[arg2]->firstPartner != 0) && (arg3 == gSpeciesData[sPlayerTagTeam[arg2]->firstPartner - 1].startingMoves[i])) {
             return 0;
         }
 
-        if ((D_84384588[arg2]->unk_01 != 0) && (arg3 == gSpeciesData[D_84384588[arg2]->unk_01 - 1].startingMoves[i])) {
+        if ((sPlayerTagTeam[arg2]->secondPartner != 0) && (arg3 == gSpeciesData[sPlayerTagTeam[arg2]->secondPartner - 1].startingMoves[i])) {
             return 0;
         }
     }
@@ -5204,7 +5204,7 @@ s32 BattleAI_IsMoveIneffective(BattleMonRuntime* arg0, BattleMonRuntime* arg1, u
             break;
 
         case 0x39:
-            if (arg1->unk_0B == 0x84) {
+            if (arg1->id == 0x84) {
                 sp24 = 1;
             }
             break;
@@ -5675,7 +5675,7 @@ void BattleAI_InitTrainerRecords(void) {
 
     for (i = 0; i < 2; i++) {
         D_843C6138[i] = 0;
-        temp_a0 = sActivePokemon[i]->state.runtime.unk_0B;
+        temp_a0 = sActivePokemon[i]->state.runtime.id;
         D_843C5550[i] = temp_a0;
         Battle_DmaLoadAnimRecord(temp_a0, &D_843C5310[i]);
     }
@@ -5695,7 +5695,7 @@ s32 BattleAI_ResolveRandomMove(s32 arg0, s32 arg1) {
     if (temp_s4->unk_4E & 8) {
         var_s3 = sActivePokemon[arg0]->state.unk_BE;
     } else {
-        var_s3 = temp_s4->unk_0B;
+        var_s3 = temp_s4->id;
     }
 
     while (true) {
