@@ -30,8 +30,14 @@ typedef struct SessionContinueData {
     /* 0x05 */ u8 unk_05[2][4];
     /* 0x0D */ u8 unk_0D;
     /* 0x0E */ u16 unk_0E;
+#if defined(VERSION_JP)
+    // JP Session_LoadContinueRecord copies 0x18 bytes and then reads the record count at 0x1A.
+    /* 0x10 */ char unk_10[8];
+} SessionContinueData; // size = 0x18
+#else
     /* 0x10 */ char unk_10[16];
 } SessionContinueData; // size = 0x20
+#endif
 
 typedef struct DeckRecordHeader {
     /* 0x00 */ u8 unk_00;
@@ -67,9 +73,17 @@ typedef struct unk_D_800AE4E8_004_2_0DC0_002 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u16 unk_02;
+#if defined(VERSION_JP)
+    // VictoryPalace_SaveSpeciesRecord transcodes the two names into 0x04 and 0x0A.
+    //@src/pokemon_stats.c
+    /* 0x04 */ char unk_04[6];
+    /* 0x0A */ char unk_0A[6];
+} unk_D_800AE4E8_004_2_0DC0_002; // size = 0x10
+#else
     /* 0x04 */ char unk_04[11];
     /* 0x0F */ char unk_0F[11];
 } unk_D_800AE4E8_004_2_0DC0_002; // size = 0x1A
+#endif
 
 typedef struct unk_D_800AE4E8_004_2_0DC0 {
     /* 0x000 */ u8 unk_000;

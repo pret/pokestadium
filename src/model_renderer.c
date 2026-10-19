@@ -59,7 +59,11 @@ void Model_InitDisplayObject(DisplayObject* display_object, s16 root_id, s16 obj
     display_object->node.renderFlags &= ~0x8;
 
     if (object_type > 0) {
+#if defined(VERSION_JP)
+        ModelAnim_StartDisplayObjectAnimation(display_object->effectSlot);
+#else
         ModelAnim_StartDisplayObjectAnimation(display_object);
+#endif
     }
 }
 

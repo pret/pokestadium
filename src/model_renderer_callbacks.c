@@ -216,7 +216,11 @@ Gfx* ModelRenderer_RenderActiveSlot(Gfx* gfx) {
     s16* var_v1;
 
     mode = ModelRenderer_GetActiveMode();
+#if defined(VERSION_JP)
+    if (mode == 0xFF) {
+#else
     if ((mode == 0xFF) || (mode == 0xFE)) {
+#endif
         return ModelRenderer_DrawStaticSegment(gfx);
     }
     if (mode >= 4) {

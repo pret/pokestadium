@@ -212,8 +212,9 @@ SPLAT           := $(PYTHON) -m splat split
 SPLAT_YAML      := $(TARGET)-$(VERSION).yaml
 
 ENCRYPT_LIBLEO  := $(PYTHON) tools/encrypt_libleo.py
-ifneq ($(filter $(VERSION),$(ASM_VERSIONS)),)
-# libleo's boot code is assembly of the retail (already encrypted) bytes there
+ifneq ($(filter $(VERSION),$(PAL_VERSIONS)),)
+# libleo's boot code is assembly of the retail (already encrypted) bytes there; jp builds it from
+# src/libleo/bootdisk.c and bootstrap.s, so its ROM is scrambled after linking like us
 ENCRYPT_LIBLEO  := true
 endif
 EXTRACT_ASSETS  := tools/extract_assets.sh

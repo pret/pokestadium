@@ -30,14 +30,14 @@ typedef struct unk_D_86B10BE0 {
     /* 0x10 */ s32 unk_10;
 } unk_D_86B10BE0; // size >= 0x14
 
-static u32 D_86B0E2B0[] = {
-    0xA4AAA4E1, 0xA4C7A4C8, 0xA4A6A1AA, 0x20A5C9A1, 0xBCA5C9A1, 0xBCA4CE0A, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4,
-    0xA4F2A5B2, 0xA5C3A5C8, 0xA4C0A1AA, 0x00000000, 0x4742A5D3, 0xA5EBA4CE, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4,
-    0xA4AC0A20, 0x20A5B9A5, 0xD4A1BCA5, 0xC9A5A2A5, 0xC3A5D7A1, 0xAA000000, 0xA4B9A4B4, 0xA4A4A4BE, 0xA1AA20A5,
-    0xC9A1BCA5, 0xC9A5EAA5, 0xAAA4CE0A, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4, 0xA4F2A5B2, 0xA5C3A5C8, 0xA4C0A1AA,
-    0x00000000, 0x4742A5D3, 0xA5EBA4CE, 0xA5B2A1BC, 0xA5E0A5DC, 0xA1BCA5A4, 0xA4AC0AA4, 0xB5A4E9A4, 0xCBA5B9A5,
-    0xD4A1BCA5, 0xC9A5A2A5, 0xC3A5D7A4, 0xC0A1AA00,
-};
+// EUC-JP dialog lines. The Japanese FirstClearBonus_UpdateDialogSequence formats them directly;
+// the other builds read entries 0x91..0x94 of string table 0x1E instead and leave these unused.
+// Mode 0x16 (Doduo Game Boy):
+static char D_86B0E2B0[] = "おめでとう！ ドードーの\nゲームボーイをゲットだ！";
+static char D_86B0E2E4[] = "GBビルのゲームボーイが\n  スピードアップ！";
+// Other modes (Dodrio Game Boy):
+static char D_86B0E310[] = "すごいぞ！ ドードリオの\nゲームボーイをゲットだ！";
+static char D_86B0E344[] = "GBビルのゲームボーイが\nさらにスピードアップだ！";
 
 static u32 D_86B0E374[] = {
     0x0C00FFFF, 0x05000000, 0x0B00001E,  0x00000000, 0x014000F0, 0x00000000, 0x00000000, 0x00000118,
@@ -45,7 +45,9 @@ static u32 D_86B0E374[] = {
     0x05000000, 0x0A000000, &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000,
 };
 
+#if !defined(VERSION_JP)
 static char** D_86B10840;
+#endif
 static unk_D_86002F30* D_86B10844;
 static GraphNode* D_86B10848;
 static DisplayObject D_86B10850;
@@ -151,6 +153,30 @@ void FirstClearBonus_HideDialogBox(void) {
     D_86B10BE0.unk_00 = 0;
 }
 
+#if defined(VERSION_JP)
+// Reveals one character of the dialog text per call: a leading newline or space is copied first,
+// then one byte if it is 0x21..0x3F, otherwise two bytes (an EUC-JP character).
+s32 FirstClearBonus_RevealNextChar(void) {
+    if (D_86B109C8[D_86B10BE0.unk_04] == 0) {
+        return 1;
+    }
+
+    if ((D_86B109C8[D_86B10BE0.unk_04] == '\n') || (D_86B109C8[D_86B10BE0.unk_04] == ' ')) {
+        D_86B10AC8[D_86B10BE0.unk_04] = D_86B109C8[D_86B10BE0.unk_04];
+        D_86B10BE0.unk_04++;
+    }
+
+    if ((D_86B109C8[D_86B10BE0.unk_04] > 0x20) && (D_86B109C8[D_86B10BE0.unk_04] < 0x40)) {
+        D_86B10AC8[D_86B10BE0.unk_04] = D_86B109C8[D_86B10BE0.unk_04];
+        D_86B10BE0.unk_04++;
+    } else {
+        D_86B10AC8[D_86B10BE0.unk_04] = D_86B109C8[D_86B10BE0.unk_04];
+        D_86B10AC8[D_86B10BE0.unk_04 + 1] = D_86B109C8[D_86B10BE0.unk_04 + 1];
+        D_86B10BE0.unk_04 += 2;
+    }
+    return 0;
+}
+#else
 s32 FirstClearBonus_RevealNextChar(void) {
     if (D_86B109C8[D_86B10BE0.unk_04] == 0) {
         return 1;
@@ -165,6 +191,7 @@ s32 FirstClearBonus_RevealNextChar(void) {
     D_86B10AC8[D_86B10BE0.unk_04++] = D_86B109C8[D_86B10BE0.unk_04];
     return 0;
 }
+#endif
 
 void FirstClearBonus_DrawDialogBox(void) {
     FirstClearBonus_DrawDialogFrame(0x3C, 0xBE - (D_86B10BE0.unk_10 / 2), D_86B10BE0.unk_0C, D_86B10BE0.unk_10, 0x50, 0x50, 0xF0, 0x80);
@@ -183,11 +210,19 @@ void FirstClearBonus_UpdateDialogSequence(void) {
 
     switch (D_86B10BE0.unk_00) {
         case 0x0:
+#if defined(VERSION_JP)
+            if (gSessionContext.mode == 0x16) {
+                sprintf(D_86B109C8, D_86B0E2B0);
+            } else {
+                sprintf(D_86B109C8, D_86B0E310);
+            }
+#else
             if (gSessionContext.mode == 0x16) {
                 sprintf(D_86B109C8, Text_GetString(NULL, 0, D_86B10840, 0x91));
             } else {
                 sprintf(D_86B109C8, Text_GetString(NULL, 0, D_86B10840, 0x93));
             }
+#endif
 
             D_86B10BE0.unk_04 = 0;
             D_86B10BE0.unk_08 = 0;
@@ -223,11 +258,19 @@ void FirstClearBonus_UpdateDialogSequence(void) {
             FirstClearBonus_DrawDialogText();
 
             if (D_86B10BE0.unk_08++ == 0x3C) {
+#if defined(VERSION_JP)
+                if (gSessionContext.mode == 0x16) {
+                    sprintf(D_86B109C8, D_86B0E2E4);
+                } else {
+                    sprintf(D_86B109C8, D_86B0E344);
+                }
+#else
                 if (gSessionContext.mode == 0x16) {
                     sprintf(D_86B109C8, Text_GetString(NULL, 0, D_86B10840, 0x92));
                 } else {
                     sprintf(D_86B109C8, Text_GetString(NULL, 0, D_86B10840, 0x94));
                 }
+#endif
 
                 D_86B10BE0.unk_04 = 0;
                 D_86B10BE0.unk_08 = 0;
@@ -429,8 +472,10 @@ s32 Stage_ShowFirstClearBonusScene(void) {
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);
     FRAGMENT_LOAD(FRAGMENT_PARTICLE_DATA_LIBRARY);
 
+#if !defined(VERSION_JP)
     Text_InitStringTables();
     D_86B10840 = Text_GetStringTable(0x1E);
+#endif
 
     if (gSessionContext.mode == 0x16) {
         D_86B109BC = ASSET_LOAD2(backgrounds, 1, 1);

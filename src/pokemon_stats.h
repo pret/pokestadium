@@ -19,9 +19,16 @@ typedef struct GbSavePortSnapshot {
     /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
     /* 0x002 */ u16 unk_002;
+#if defined(VERSION_JP)
+    // GbSave_CopyPortSnapshot copies the 6-byte trainer name and then the 0x158-byte party.
+    /* 0x004 */ char unk_004[6];
+    /* 0x00A */ GbSaveParty unk_00A;
+} GbSavePortSnapshot; // size = 0x162
+#else
     /* 0x004 */ char unk_004[11];
     /* 0x00F */ GbSaveParty unk_00F;
 } GbSavePortSnapshot; // size >= 0x1A3
+#endif
 
 typedef struct unk_func_800228F0 {
     /* 0x00 */ u8 unk_00;

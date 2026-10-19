@@ -20,11 +20,31 @@
 #include "src/stage_loader.h"
 #include "PR/rcp.h"
 
+#if defined(VERSION_JP)
+extern u8 D_03004E20_jp[];
+#endif
+
 static GraphNode* D_82D09FF0;
 static DisplayObject D_82D09FF8[8];
 static Pak_PortStatus D_82D0AB38[4];
 static ModeSettings D_82D0AB90;
 static u16 D_82D0AB98;
+#if defined(VERSION_JP)
+// JP .bss order (ROM addresses 0x82D0A4AC-0x82D0A50C). D_82D0AB9C is unused in JP (no string
+// table is loaded) but its slot remains; D_82D0ABA0-D_82D0ABA8 and D_82D0AC0C are absent.
+static char** D_82D0AB9C;
+static PakUi_StatusPopup D_82D0ABD0;
+static DepthBuffer* D_82D0ABE0[8];
+static GraphNode* D_82D0AC00;
+static GraphNode* D_82D0AC04;
+static GraphNode* D_82D0AC08;
+static GraphNode* D_82D0ABAC;
+static GraphNode* D_82D0ABB0;
+static GraphNode* D_82D0ABB4;
+static DepthBuffer* D_82D0ABB8[4];
+static DepthBuffer* D_82D0ABC8;
+static DepthBuffer* D_82D0ABCC;
+#else
 static char** D_82D0AB9C;
 static s32 D_82D0ABA0;
 static s32 D_82D0ABA4;
@@ -41,12 +61,56 @@ static GraphNode* D_82D0AC00;
 static GraphNode* D_82D0AC04;
 static GraphNode* D_82D0AC08;
 static GraphNode* D_82D0AC0C;
+#endif
+
+// ModeSettings.clearedModes value that unlocks the Round 2 toggle (C-Right) and its header prompt.
+#if defined(VERSION_JP)
+#define PAKUI_ALL_MODES_CLEARED 0x1FE
+#else
+#define PAKUI_ALL_MODES_CLEARED 0x1F8
+#endif
 
 static s16 D_82D06FA0 = 7;
+#if defined(VERSION_JP)
+// JP text for message IDs 0-28 of string table 0xE (cup, ball, round and Gym names), which
+// the other versions read with Text_GetString. PakUi_DrawDataSummaryPanel indexes it with
+// the same IDs: unk_00 - 1, unk_01 + 7, unk_02 + 10 and unk_01 + 19.
+static char* D_82D065D4_jp[] = {
+    "ニンテンドウカップ‘９７",
+    "ニンテンドウカップ‘９８",
+    "ニンテンドウカップ‘９９",
+    "ファンシーカップ",
+    "イエローカップ",
+    "ウルトラカップ",
+    "ジムリーダーのしろ",
+    "モンスターボール",
+    "スーパーボール",
+    "ハイパーボール",
+    "マスターボール",
+    "バトル１",
+    "バトル２",
+    "バトル３",
+    "バトル４",
+    "バトル５",
+    "バトル６",
+    "セミファイナル",
+    "ファイナルバトル",
+    "ニビジム",
+    "ハナダジム",
+    "クチバジム",
+    "タマムシジム",
+    "セキチクジム",
+    "ヤマブキジム",
+    "グレンジム",
+    "トキワジム",
+    "してんのう",
+    "ライバル",
+};
+#endif
 static u32 D_82D06FA4[] = {
     0x0C000000,  0x05000000, 0x0B00002D, 0x00000000, 0x028001E0, 0x00000000, 0xFDBD0000, 0x00000243, 0x05000000,
     0x0D000000,  0x05000000, 0x14000000, 0x00000000, 0xFFFFFF32, 0x16FFFFFF, 0x0F000002, 0x05000000, 0x0A000000,
-    &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000, 0x00000000,
+    &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000,
 };
 static Vtx D_82D07008[] = {
     VTX(-64, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -627,6 +691,9 @@ static Vtx D_82D08C30[] = {
 };
 static Gfx D_82D08C70[] = {
     gsSPSetGeometryMode(G_CULL_BACK),
+#if defined(VERSION_JP)
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+#endif
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPLoadTextureTile(0x0F000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 172, 0, 0, 0, 99, 19, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
@@ -705,6 +772,7 @@ static u32 D_82D09108[] = {
     0x17000000, 0x00000000, 0x00000000,    0x00000000, D_82D08870, 0x05000000, 0x22040000,
     0x00000000, 0x08000000, PakUi_RenderMenuIconTexture, 0x00000000, 0x06000000, 0x01000000, 0x00000000,
 };
+#if !defined(VERSION_JP)
 static Vtx D_82D09140[] = {
     VTX(0, 32, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(0, 16, 0, 0, 512, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -797,6 +865,7 @@ static u32 D_82D09598[] = {
     0x17000000, 0x00000000, 0x00000000,    0x00000000, D_82D09140, 0x05000000, 0x22040000,
     0x00000000, 0x08000000, PakUi_RenderMenuIconTexture, 0x00000000, 0x06000000, 0x01000000, 0x00000000,
 };
+#endif
 static Vtx D_82D095D0[] = {
     VTX(0, 46, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(0, 26, 0, 0, 640, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -859,6 +928,9 @@ static Vtx D_82D09810[] = {
 };
 static Gfx D_82D09850[] = {
     gsSPSetGeometryMode(G_CULL_BACK),
+#if defined(VERSION_JP)
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+#endif
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPLoadTextureTile(0x0F000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 172, 0, 0, 0, 99, 19, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
@@ -948,6 +1020,9 @@ static Vtx D_82D09CB0[] = {
 };
 static Gfx D_82D09CF0[] = {
     gsSPSetGeometryMode(G_CULL_BACK),
+#if defined(VERSION_JP)
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+#endif
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPLoadTextureTile(0x0F000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 172, 0, 0, 0, 99, 19, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
@@ -1209,9 +1284,22 @@ s32 PakUi_RenderBannerTexture(s32 arg0, unk_func_80011B94* arg1) {
 
 void PakUi_DrawPartyProgressBar(s32 arg0) {
     s16 temp_lo_2;
+#if !defined(VERSION_JP)
     char* sp30;
+#endif
 
     if (arg0 > 0) {
+#if defined(VERSION_JP)
+        temp_lo_2 = (arg0 * 0x3C) / 10;
+        PakUi_DrawThickBoxBorder(0x34, (s16)((0x3C - temp_lo_2) / 2) + 0x28, 0xB0, temp_lo_2, 0x1E, 0x1E, 0x82, 0x96);
+        if ((arg0 * 0x3C) == 600) {
+            Font_BeginTranslucentTextRendering();
+            Font_SetActive(0x10, 0);
+            Font_Printf(0x44, 0x2C, "カートリッジ");
+            Font_Printf(0x44, 0x48, "チェック");
+            Font_EndTexturedTextRendering();
+        }
+#else
         temp_lo_2 = (arg0 * 0x3C) / 10;
         PakUi_DrawThickBoxBorder(0x34, (s16)((0x3C - temp_lo_2) / 2) + 0x28, 0xB0, temp_lo_2, 0x1E, 0x1E, 0x82, 0x96);
         if (arg0 == 10) {
@@ -1223,6 +1311,7 @@ void PakUi_DrawPartyProgressBar(s32 arg0) {
             Font_Printf(0x8C - (Font_MeasureTextExtent(0x10, 0, sp30) / 2), 0x48, sp30);
             Font_EndTexturedTextRendering();
         }
+#endif
     }
 }
 
@@ -1299,7 +1388,12 @@ void PakUi_DrawPartyCardBadge(s32 arg0) {
             break;
 
         case 3:
+#if defined(VERSION_JP)
+            // Segment 3 holds a different asset at 0x3004E20 than the one fragment17 names D_3004E20.
+            var_t0 = D_03004E20_jp;
+#else
             var_t0 = D_3004E20;
+#endif
             break;
 
         case 7:
@@ -1329,14 +1423,20 @@ void PakUi_DrawPartyCardList(u8 arg0) {
 }
 
 void PakUi_BuildPartyCard(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s8* arg4) {
+#if !defined(VERSION_JP)
     s32 sp2C;
     char* sp40;
+#endif
 
     PakUi_BuildFrameBuffer(D_82D0ABB8[arg0], 0x7C, 0xC8);
 
     gSPDisplayList(gDisplayListHead++, D_8006F470);
 
+#if defined(VERSION_JP)
+#define sp2C (arg2 & 0x10)
+#else
     sp2C = arg2 & 0x10;
+#endif
     if (sp2C != 0) {
         Gfx_FillRectRgb(4, 4, 0x74, 0x64, 0x64, 0x1E, 0x1E);
         Gfx_FillRectRgb(4, 0x68, 0x74, 0x5C, 0, 0, 0);
@@ -1363,6 +1463,48 @@ void PakUi_BuildPartyCard(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s8* arg4) {
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
     Font_DrawCharAt(8, 8, arg0 + 0x31);
 
+#if defined(VERSION_JP)
+    // JP prints fixed-position EUC-JP strings instead of centering string-table text.
+    if (arg1 != 0) {
+        if (arg4 != NULL) {
+            Font_SetActive(4, 0);
+            Font_Printf(0x16, 0x3C, arg4);
+        }
+
+        Font_SetActive(4, -6);
+        Font_Printf(0x12, 0x50, "ID");
+        Font_SetActive(4, -4);
+
+        if (arg3 >= 0) {
+            Font_Printf(0x32, 0x50, "%05d", arg3);
+        } else {
+            Font_Printf(0x32, 0x50, "＊＊＊＊＊");
+        }
+    } else {
+        Font_SetActive(4, 0);
+        Font_Printf(0xE, 0x24, "カートリッジ");
+        Font_Printf(0x2E, 0x38, "なし");
+    }
+
+    if (sp2C != 0) {
+        Font_SetActive(4, 0);
+        Font_SetLineHeight(0x14);
+
+        switch (arg2) {
+            case 20:
+                Font_Printf(0xE, 0x70, "レポートが、\nみつかりませ\nん。");
+                break;
+
+            case 19:
+                Font_Printf(0xE, 0x70, "ポケモンセン\nターで、レポ\nートされてい\nません。");
+                break;
+
+            case 21:
+                Font_Printf(0xE, 0x70, "このカートリ\nッジは、つか\nえません。");
+                break;
+        }
+    }
+#else
     if (arg1 != 0) {
         if (arg4 != NULL) {
             Font_SetActive(4, 0);
@@ -1402,8 +1544,17 @@ void PakUi_BuildPartyCard(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s8* arg4) {
                 break;
         }
     }
+#endif
     Font_EndTexturedTextRendering();
 }
+
+// Placeholder trainer name PakUi_InitPartyCard passes for card states 0x14 and 0x15.
+#if defined(VERSION_JP)
+#define PAKUI_UNKNOWN_NAME "？？？？？"
+#else
+#define PAKUI_UNKNOWN_NAME "?????"
+#endif
+#undef sp2C
 
 void PakUi_InitPartyCard(s32 arg0) {
     Pak_PortStatus* temp_v1;
@@ -1417,10 +1568,10 @@ void PakUi_InitPartyCard(s32 arg0) {
                 PakUi_BuildPartyCard(arg0, 1, 0x13, (u16)D_82D0AB38[arg0].unk_06, D_82D0AB38[arg0].unk_08);
             }
         } else {
-            PakUi_BuildPartyCard(arg0, 1, 0x14, -1, "?????");
+            PakUi_BuildPartyCard(arg0, 1, 0x14, -1, PAKUI_UNKNOWN_NAME);
         }
     } else if (D_82D0AB38[arg0].unk_00 == 2) {
-        PakUi_BuildPartyCard(arg0, 1, 0x15, -1, "?????");
+        PakUi_BuildPartyCard(arg0, 1, 0x15, -1, PAKUI_UNKNOWN_NAME);
     } else if (D_82D0AB38[arg0].unk_04 != 0) {
         PakUi_BuildPartyCard(arg0, 0, 1, -1, NULL);
     } else {
@@ -1461,8 +1612,14 @@ void PakUi_BuildIconPanel(void) {
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(0x10, 0);
+#if defined(VERSION_JP)
+    Font_Printf(0x6E, 8, "GBカートリッジ、64GBパック、");
+    Font_Printf(0x6E, 0x24, "コントローラのぬきさしは、でんげん");
+    Font_Printf(0x6E, 0x40, "をきってからおこなってください。");
+#else
     Font_SetLineHeight(0x1C);
     Font_Printf(0x6E, 8, Text_GetString(NULL, 0, D_82D0AB9C, 0x23));
+#endif
     Font_EndTexturedTextRendering();
 }
 
@@ -1479,11 +1636,17 @@ void PakUi_BuildBottomBanner(void) {
 
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
+#if defined(VERSION_JP)
+    Font_BeginTranslucentTextRendering();
+    Font_SetActive(0x10, 0);
+    Font_Printf(0x14, 7, "ＯＫ？");
+#else
     sp28 = Text_GetString(NULL, 0, D_82D0AB9C, 0x24);
     sp2C = Font_MeasureTextExtent(0x10, 0, sp28);
     Font_BeginTranslucentTextRendering();
     Font_SetActive(0x10, 0);
     Font_Printf(0x3C - (sp2C / 2), 7, sp28);
+#endif
     Font_EndTexturedTextRendering();
 }
 
@@ -1670,6 +1833,32 @@ void PakUi_DrawMenuOptionText(s16 arg0, s16 arg1, s16 arg2, s16 arg3, char* arg4
     Font_Printf(arg0, arg1 + (arg2 * 0x1C), arg4);
 }
 
+#if defined(VERSION_JP)
+void PakUi_DrawRulesPanel(s16 arg0, s16 arg1) {
+    s32 var_v0;
+    s16 sp24;
+
+    if (arg0 > 0) {
+        var_v0 = (arg0 * 0x11) + 2;
+        sp24 = ((0x8A - (s16)var_v0) / 2) + 0xFA;
+        Ui_DrawBorderedPanel(0x87, sp24, 0x172, (s16)var_v0, 0x6109);
+        if (var_v0 == 0x8A) {
+            var_v0 = arg1 * 0x1C;
+            Ui_DrawAnimatedTextureMarker(0xFF, sp24 + var_v0 + 0x48);
+            Font_BeginTranslucentTextRendering();
+            Font_SetActive(0x10, -2);
+            Gfx_SetEnvColor(0xFF, 0xFF, 0x64, 0xFF);
+            Font_Printf(0x9B, sp24 + 0xC, "ちゅうだんデータを　けします。");
+            Font_Printf(0x9B, sp24 + 0x28, "いいですか？");
+            Gfx_SetEnvColor(0xFF, 0xFF, (var_v0 == 0) ? 0 : 0xFF, 0xFF);
+            Font_Printf(0x127, sp24 + 0x48, "はい");
+            Gfx_SetEnvColor(0xFF, 0xFF, (var_v0 == 0x1C) ? 0 : 0xFF, 0xFF);
+            Font_Printf(0x127, sp24 + 0x64, "いいえ");
+            Font_EndTexturedTextRendering();
+        }
+    }
+}
+#else
 void PakUi_DrawRulesPanel(s16 arg0, s16 arg1) {
     UNUSED s32 pad;
     s16 sp28;
@@ -1697,7 +1886,79 @@ void PakUi_DrawRulesPanel(s16 arg0, s16 arg1) {
         }
     }
 }
+#endif
 
+#if defined(VERSION_JP)
+void PakUi_DrawDataSummaryPanel(s16 arg0, s16 arg1, SessionContinueData* arg2, s32 arg3) {
+    UNUSED s32 pad;
+    s16 temp_s0;
+
+    if ((s16)((arg0 * 0x2C) + 2) >= 0x10) {
+        temp_s0 = ((0x162 - (s16)((arg0 * 0x2C) + 2)) / 2) + 0x3C;
+        Ui_DrawBorderedPanel(0x79, temp_s0, 0x18E, (s16)((arg0 * 0x2C) + 2), 0x2349);
+        if ((s16)((arg0 * 0x2C) + 2) == 0x162) {
+            PakUi_DrawDataPanelBorder(0x98, temp_s0 + 0x27, 0x150, 0x78, 0, 0, 0, 0xFF);
+            PakUi_DrawDataPanelBorder(0x98, temp_s0 + 0xBF, 0x150, 0x60, 0, 0, 0, 0xFF);
+            if (arg3 != 0) {
+                Ui_DrawAnimatedTextureMarker(0x9D, temp_s0 + (arg1 * 0x1C) + 0xC7);
+            }
+            Font_BeginTranslucentTextRendering();
+            Font_SetActive(0x10, -2);
+            Font_Printf(0x99, temp_s0 + 0xD, "ちゅうだんデータがあります");
+            Font_Printf(0x99, temp_s0 + 0xA5, "つづきをしますか？");
+            PakUi_DrawMenuOptionText(0xC5, temp_s0 + 0xC7, 0, arg1, "つづきをする");
+            PakUi_DrawMenuOptionText(0xC5, temp_s0 + 0xC7, 1, arg1, "つづきをしない");
+            PakUi_DrawMenuOptionText(0xC5, temp_s0 + 0xC7, 2, arg1, "ちゅうだんデータをけす");
+            Gfx_SetEnvColor(0xFF, 0x64, 0x64, 0xFF);
+
+            if (arg2->unk_00 == 7) {
+                Font_Printf(0xA9, temp_s0 + 0x2D, D_82D065D4_jp[arg2->unk_00 - 1]);
+                Font_Printf(0xA9, temp_s0 + 0x4B, D_82D065D4_jp[arg2->unk_01 + 0x13]);
+
+                if (arg2->unk_01 < 8) {
+                    if (arg2->unk_02 < 4) {
+                        Font_Printf(0xA9, temp_s0 + 0x69, "トレーナー%d", arg2->unk_02);
+                    } else {
+                        Font_Printf(0xA9, temp_s0 + 0x69, "ジムリーダー");
+                    }
+                } else {
+                    Font_Printf(0xA9, temp_s0 + 0x69, "してんのう%d", arg2->unk_02);
+                }
+            } else if ((arg2->unk_00 == 3) || (arg2->unk_00 == 6)) {
+                Font_Printf(0xA9, temp_s0 + 0x2D, D_82D065D4_jp[arg2->unk_00 - 1]);
+                Font_Printf(0xA9, temp_s0 + 0x4B, D_82D065D4_jp[arg2->unk_01 + 7]);
+                Font_Printf(0xA9, temp_s0 + 0x69, D_82D065D4_jp[arg2->unk_02 + 0xA]);
+            } else {
+                Font_Printf(0xA9, temp_s0 + 0x2D, D_82D065D4_jp[arg2->unk_00 - 1]);
+                Font_Printf(0xA9, temp_s0 + 0x4B, D_82D065D4_jp[arg2->unk_02 + 0xA]);
+            }
+
+            if (arg2->unk_00 != 7) {
+                Font_SetActive(8, -2);
+                Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
+                Font_Printf(0x12D, temp_s0 + 0x85, "コンティニュー＝%d", arg2->unk_04);
+            }
+
+            Font_SetActive(8, -3);
+            Gfx_SetEnvColor(0xFF, 0xFF, 0, 0xFF);
+            Font_Printf(0xA1, temp_s0 + 0x124, "ちゅうだんデータは「つづきをする」を");
+            Font_Printf(0xA1, temp_s0 + 0x13E, "えらぶと　なくなります。");
+            Font_EndTexturedTextRendering();
+
+            if (arg2->unk_03 == 1) {
+                // Two bytes per EUC-JP glyph, 22 pixels per glyph.
+                s32 temp_v0_3 = (strlen(D_82D065D4_jp[arg2->unk_00 - 1]) / 2) * 0x16;
+
+                gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
+
+                Gfx_DrawTextureRgba16(temp_v0_3 + 0xAB, temp_s0 + 0x2B, 0x1C, 0x1C, &D_3022AA0, 0x1C, 0);
+
+                gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
+            }
+        }
+    }
+}
+#else
 void PakUi_DrawDataSummaryPanel(s16 arg0, s16 arg1, SessionContinueData* arg2, s32 arg3) {
     char sp50[0x100];
     UNUSED s32 pad;
@@ -1771,6 +2032,7 @@ void PakUi_DrawDataSummaryPanel(s16 arg0, s16 arg1, SessionContinueData* arg2, s
         }
     }
 }
+#endif
 
 void PakUi_UpdateConfirmDisplayFrame(s16 arg0, s16 arg1, SessionContinueData* arg2, s16 arg3, s16 arg4) {
     BgStage_DrawFrame();
@@ -1818,6 +2080,116 @@ s32 TransferPak_ConfirmPrompt(SessionContinueData* arg0) {
     return var_s1 == 0;
 }
 
+#if defined(VERSION_JP)
+s16 TransferPak_MainMenu(void) {
+    s16 i;
+    SessionContinueData sp54;
+    s16 var_s1;
+    s32 var_s6;
+    s16 var_s0;
+    s16 sp44;
+
+    var_s6 = 1;
+    var_s0 = 0;
+    sp44 = 4;
+
+    // JP loads the suspended-session record here; TransferPak_CheckMain calls this menu
+    // before TransferPak_MenuLoop instead of after it.
+    if (Session_LoadContinueRecord(&sp54, NULL) == -1) {
+        return 4;
+    }
+
+    Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
+
+    for (i = 1; i < 8; i++) {
+        Controller_PollInputs();
+        PakUi_UpdateConfirmDisplayFrame(i, 0, &sp54, 0, 0);
+    }
+
+    while (var_s6 != 0) {
+        var_s1 = -1;
+        while (var_s1 == -1) {
+            Controller_PollInputs();
+
+            if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
+                var_s1 = var_s0;
+            } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
+                var_s1 = 3;
+            } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
+                var_s0 -= 1;
+                if (var_s0 < 0) {
+                    var_s0 = 2;
+                }
+            } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN)) {
+                Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
+                var_s0 += 1;
+                if (var_s0 >= 3) {
+                    var_s0 = 0;
+                }
+            }
+            PakUi_UpdateConfirmDisplayFrame(i, var_s0, &sp54, 0, 0);
+        }
+
+        switch (var_s1) {
+            case 0:
+                var_s6 = 0;
+                Audio_PlaySoundEffectById(0x20);
+                break;
+
+            case 1:
+                var_s6 = 0;
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
+                break;
+
+            case 2:
+                Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
+                if (TransferPak_ConfirmPrompt(&sp54) != 0) {
+                    var_s6 = 0;
+                }
+                break;
+
+            case 3:
+                var_s6 = 0;
+                Audio_PlaySoundEffectById(SFX_MENU_BACK);
+                break;
+        }
+    }
+
+    for (i = 7; i >= 0; i--) {
+        Controller_PollInputs();
+        PakUi_UpdateConfirmDisplayFrame(i, var_s0, &sp54, 0, 0);
+    }
+
+    PakUi_UpdateConfirmDisplayFrame(0, var_s0, &sp54, 0, 0);
+
+    if (var_s1 == 0) {
+        Session_LoadContinueData();
+        Audio_StopMusic(0x10);
+        StageContext_SetClearColor(1);
+        StageFade_StartFromTransparent(8);
+
+        while (StageContext_GetFadeMode() != 1) {
+            Controller_PollInputs();
+            PakUi_UpdateConfirmDisplayFrame(0, 0, &sp54, 0, 0);
+        }
+
+        StageLoader_RunFrames(2);
+
+        if (gSessionContext.mode == 7) {
+            sp44 = 0x27;
+        } else {
+            sp44 = 0x20;
+        }
+    } else if (var_s1 == 2) {
+        Save_ResetAndCommitTypedRecord(0x15, 0);
+        Save_FlushBank(2);
+    }
+
+    return sp44;
+}
+
+#else
 s16 TransferPak_MainMenu(SessionContinueData* arg0) {
     s16 i;
     s16 var_s1;
@@ -1926,8 +2298,18 @@ s16 TransferPak_MainMenu(SessionContinueData* arg0) {
     }
     return sp44;
 }
+#endif
 
 void PakUi_DrawStatusPopup(PakUi_StatusPopup* arg0) {
+#if defined(VERSION_JP)
+    // Indexed by status code - 1; the other versions print message ID status code + 0x32.
+    static char* D_82D09120_jp[] = {
+        "カートリッジがセットされ\nていません。",
+        "このカートリッジはつかえ\nません。",
+        "てもちのポケモンが６ぴき\nそろっていません。",
+        "コントローラがセットされ\nていません。",
+    };
+#endif
     s16 temp_s0;
     s16 sp48;
     s16 sp4A;
@@ -1958,10 +2340,23 @@ void PakUi_DrawStatusPopup(PakUi_StatusPopup* arg0) {
             gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
             Font_BeginTranslucentTextRendering();
+#if defined(VERSION_JP)
+            Font_SetActive(0x10, -2);
+#else
             Font_SetActive(0x10, 0);
+#endif
             Gfx_SetEnvColor(0xFF, 0x64, 0x32, 0xFF);
             Font_SetLineHeight(0x1C);
 
+#if defined(VERSION_JP)
+            if (arg0->unk_08 != 0) {
+                Font_Printf(sp4A + 0x76, temp_s0 + 0x18, D_82D09120_jp[arg0->unk_08 - 1]);
+            }
+
+            if (arg0->unk_0A != 0) {
+                Font_Printf(sp4A + 0x76, temp_s0 + 0x5A, D_82D09120_jp[arg0->unk_0A - 1]);
+            }
+#else
             if (arg0->unk_08 != 0) {
                 Font_Printf(sp4A + 0x76, temp_s0 + 0x18, Text_GetString(NULL, 0, D_82D0AB9C, arg0->unk_08 + 0x32));
             }
@@ -1969,6 +2364,7 @@ void PakUi_DrawStatusPopup(PakUi_StatusPopup* arg0) {
             if (arg0->unk_0A != 0) {
                 Font_Printf(sp4A + 0x76, temp_s0 + 0x5A, Text_GetString(NULL, 0, D_82D0AB9C, arg0->unk_0A + 0x32));
             }
+#endif
 
             Font_EndTexturedTextRendering();
         }
@@ -2019,7 +2415,11 @@ void PakUi_OpenStatusPopup(PakUi_StatusPopup* arg0, s16 arg1, s16 arg2) {
 
 s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* arg1) {
     static Gfx* D_82D09EF8[] = {
+#if defined(VERSION_JP)
+        D_82D08C70, D_82D09850, D_82D09CF0, D_82D09CF0, D_82D09850, D_82D09CF0, D_82D09CF0,
+#else
         D_82D08C70, D_82D09850, D_82D09CF0, D_82D09340, D_82D09850, D_82D09CF0, D_82D09CF0,
+#endif
     };
 
     s32 var_a2;
@@ -2036,6 +2436,8 @@ s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* arg1) {
 
         gSPSegment(gDisplayListHead++, 0x0F, (u32)D_82D0ABE0[var_a2]->img_p & 0x1FFFFFFF);
 
+#if !defined(VERSION_JP)
+        // JP sets this combine mode in the icon display lists instead (D_82D08C70 and others).
         if (D_8006F09C->lodFraction < 0xFF) {
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, D_8006F09C->lodFraction);
             gDPSetCombineLERP(gDisplayListHead++, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED, 0, 0,
@@ -2043,6 +2445,7 @@ s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* arg1) {
         } else {
             gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_PASS2);
         }
+#endif
 
         gSPDisplayList(gDisplayListHead++, D_82D09EF8[var_a3]);
 
@@ -2051,10 +2454,24 @@ s32 PakUi_RenderMenuIconTexture(s32 arg0, UNUSED unk_func_80011B94* arg1) {
     return 0;
 }
 
+#if !defined(VERSION_JP)
 static u8 D_82D09F14[] = {
     0x37, 0x38, 0x39, 0x45, 0x3A, 0x3A, 0x3A,
 };
+#endif
 
+#if defined(VERSION_JP)
+// Entry 3 has no neighbours: JP has no menu icon in that slot.
+static unk_D_82D09F1C D_82D09F1C[] = {
+    { 240, 120, 160, 140, 0xFF, 0x02, 0x04, 0x01 },
+    { 424, 180, 160, 80, 0xFF, 0xFF, 0x00, 0xFF },
+    { 240, 284, 160, 36, 0x00, 0xFF, 0xFF, 0xFF },
+    { 424, 284, 160, 36, 0xFF, 0xFF, 0xFF, 0xFF },
+    { 56, 180, 160, 80, 0xFF, 0xFF, 0xFF, 0x00 },
+    { 56, 224, 160, 36, 0xFF, 0x06, 0xFF, 0xFF },
+    { 56, 276, 160, 36, 0x05, 0xFF, 0xFF, 0xFF },
+};
+#else
 static unk_D_82D09F1C D_82D09F1C[] = {
     {
         240,
@@ -2127,6 +2544,19 @@ static unk_D_82D09F1C D_82D09F1C[] = {
         0xFF,
     },
 };
+#endif
+
+#if defined(VERSION_JP)
+// Description printed under the highlighted menu entry; PakUi_DrawBodyProgressBar maps
+// cursor positions 4-6 to entry 4. The other versions print message IDs from D_82D09F14.
+static char* D_82D091A0_jp[] = {
+    "スタジアムは　ここにあります。\nバトルかいじょう、ポケモンけんきゅうじょ\nミニゲームなど　いろいろ　あります。",
+    "コントローラ１と２に　セットされた\nカートリッジの　てもちのポケモンどうしの\nバトルです。",
+    "サウンドのせってい、６４カセットのセーブ\nデータのクリア　などが　できます。",
+    "ERROR",
+    "とにかく１びょうでも　はやくバトルを\nやってみたい　というひとは　ここで\nあそんでみて　ください。",
+};
+#endif
 
 s32 PakUi_ComputeBlinkAlpha(void) {
     static s16 D_82D09F70 = 0;
@@ -2145,6 +2575,76 @@ s32 PakUi_ComputeBlinkAlpha(void) {
     return var_a0;
 }
 
+#if defined(VERSION_JP)
+void PakUi_DrawHeaderProgressBar(s32 arg0) {
+    s32 progress;
+    s16 sp3A;
+    s16 tmp;
+
+    if (arg0 > 0) {
+        if (arg0 >= 0xB) {
+            arg0 = 0xA;
+        }
+
+        progress = arg0 * 0x3C;
+        tmp = progress / 10;
+        PakUi_DrawThickBoxBorder(0x38, (s16)((0x3C - tmp) / 2) + 0x24, 0x210, tmp, 0x1E, 0x1E, 0x82, 0x96);
+        if (progress == 600) {
+            sp3A = PakUi_ComputeBlinkAlpha();
+            if (D_82D0AB90.clearedModes == PAKUI_ALL_MODES_CLEARED) {
+                gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sp3A);
+
+                Gfx_DrawTextureRgba16(0x1B8, 0x35, 0x1C, 0x1A, &D_2016010, 0x1C, 0);
+
+                gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
+            }
+
+            Font_BeginTranslucentTextRendering();
+            Font_SetActive(0x10, -1);
+            Font_Printf(0xE0, 0x36, "えらんでください");
+
+            if (D_82D0AB90.clearedModes == PAKUI_ALL_MODES_CLEARED) {
+                Font_SetActive(8, -2);
+                Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, sp3A);
+                Font_Printf(0x1D6, 0x2D, "スタジアム");
+                Font_Printf(0x1D6, 0x43, "きりかえ");
+            }
+
+            Font_EndTexturedTextRendering();
+        }
+    }
+}
+
+void PakUi_DrawBodyProgressBar(s32 arg0) {
+    s32 progress;
+    s16 sp32;
+    s16 temp_lo_2;
+
+    if (arg0 > 0) {
+        if (arg0 >= 0xB) {
+            arg0 = 0xA;
+        }
+
+        progress = arg0 * 0x64;
+        temp_lo_2 = progress / 10;
+        PakUi_DrawThinBoxBorder(0x38, (s16)((0x64 - temp_lo_2) / 2) + 0x154, 0x210, temp_lo_2, 0x1E, 0x1E, 0x82,
+                                0x96);
+        if ((progress == 1000) && (D_82D06FA0 < 7)) {
+            if (D_82D06FA0 < 5) {
+                sp32 = D_82D06FA0;
+            } else {
+                sp32 = 4;
+            }
+            Font_BeginTranslucentTextRendering();
+            Font_SetActive(0x10, 0);
+            Font_SetLineHeight(0x1C);
+            Font_Printf(0x50, 0x15E, D_82D091A0_jp[sp32]);
+            Font_EndTexturedTextRendering();
+        }
+    }
+}
+#else
 void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
     UNUSED s32 pad;
     s16 tmp;
@@ -2170,7 +2670,7 @@ void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
         PakUi_DrawThickBoxBorder(0x38, (s16)((0x3C - tmp) / 2) + 0x24, 0x210, tmp, 0x1E, 0x1E, 0x82, 0x96);
         if (arg0 == 10) {
             sp48 = PakUi_ComputeBlinkAlpha();
-            if (D_82D0AB90.clearedModes == 0x1F8) {
+            if (D_82D0AB90.clearedModes == PAKUI_ALL_MODES_CLEARED) {
                 gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sp48);
 
@@ -2184,7 +2684,7 @@ void PakUi_DrawHeaderProgressBar(s32 arg0, s32 arg1) {
             tmp = (Font_MeasureTextExtent(0x10, 0, Text_GetString(NULL, 0, D_82D0AB9C, 0x3B)));
             Font_Printf(0x140 - tmp / 2, 0x36, Text_GetString(NULL, 0, D_82D0AB9C, 0x3B));
 
-            if (D_82D0AB90.clearedModes == 0x1F8) {
+            if (D_82D0AB90.clearedModes == PAKUI_ALL_MODES_CLEARED) {
                 Font_SetActive(8, 0);
                 Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, sp48);
                 Font_Printf(0x1D6, 0x2D, Text_GetString(NULL, 0, D_82D0AB9C, 0x3C));
@@ -2229,6 +2729,7 @@ void PakUi_DrawBodyProgressBar(s32 arg0, s32 arg1) {
         }
     }
 }
+#endif
 
 void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1) {
     s16 i;
@@ -2267,6 +2768,13 @@ void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1) {
         temp_lo_4 = (arg0 * 0x5000) + 0xFFF7E000;
         var_a0 = temp_lo_4 / 10;
         for (i = 0; i < 7; i++) {
+#if defined(VERSION_JP)
+            if ((i != D_82D06FA0) && (D_82D09FF8[i].rotation.x >= 0)) {
+                if (D_82D09FF8[i].rotation.x < var_a0) {
+                    D_82D09FF8[i].rotation.x = var_a0;
+                }
+            }
+#else
             if ((D_82D0ABA8 == 0) || (D_82D06FA0 != 0)) {
                 if ((i != D_82D06FA0) && (D_82D09FF8[i].rotation.x >= 0)) {
                     if (D_82D09FF8[i].rotation.x < var_a0) {
@@ -2278,6 +2786,7 @@ void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1) {
                     D_82D09FF8[i].rotation.x = var_a0;
                 }
             }
+#endif
         }
 
         if (D_82D06FA0 >= 5) {
@@ -2285,6 +2794,13 @@ void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1) {
         }
     }
 
+#if defined(VERSION_JP)
+    BgStage_DrawFrame();
+    PakUi_DrawMenuBackdrop();
+    Geo_RenderRootNode(D_82D09FF0);
+    PakUi_DrawHeaderProgressBar(arg0);
+    PakUi_DrawBodyProgressBar(arg0);
+#else
     if ((D_82D0ABA8 == 0) || (D_82D06FA0 != 0)) {
         sp30 = 0;
     } else {
@@ -2296,6 +2812,7 @@ void PakUi_UpdateMenuDisplayFrame(s32 arg0, s32 arg1) {
     Geo_RenderRootNode(D_82D09FF0);
     PakUi_DrawHeaderProgressBar(arg0, sp30);
     PakUi_DrawBodyProgressBar(arg0, sp30);
+#endif
 
     if (arg1 != 0) {
         unk_D_82D09F1C* ptr = &D_82D09F1C[D_82D06FA0];
@@ -2339,9 +2856,16 @@ DepthBuffer* PakUi_BuildGameIconBuffer(s32 arg0) {
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
     Font_BeginTranslucentTextRendering();
+#if defined(VERSION_JP)
+    Font_SetActive(8, -4);
+    Font_Printf(0xA, 0x74, "ポケモンスタジアム");
+    // EUC-JP code 0xA5B8, sign-extended as an s16.
+    Font_DrawCharAt(0x6A, 0x74, (s16)0xA5B8);
+#else
     temp_s0 = Font_MeasureTextExtent(8, 0, Text_GetString(NULL, 0, D_82D0AB9C, 0x3E));
     Font_SetActive(8, 0);
     Font_Printf(0x54 - (temp_s0 / 2), 0x74, Text_GetString(NULL, 0, D_82D0AB9C, 0x3E));
+#endif
     Font_EndTexturedTextRendering();
 
     return sp3C;
@@ -2366,8 +2890,14 @@ DepthBuffer* PakUi_BuildControllerIconBuffer(void) {
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
+#if defined(VERSION_JP)
+    Font_Printf(0x50, 0xA, "とにかく");
+    Font_Printf(0x50, 0x22, "バトルが");
+    Font_Printf(0x50, 0x3A, "したい！");
+#else
     Font_SetLineHeight(0x16);
     Font_Printf(0x50, 0x17, Text_GetString(NULL, 0, D_82D0AB9C, 0x3F));
+#endif
     Font_EndTexturedTextRendering();
 
     return sp34;
@@ -2392,13 +2922,19 @@ DepthBuffer* PakUi_BuildControllerIconBufferAlt(void) {
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
+#if defined(VERSION_JP)
+    Font_Printf(0x50, 0x17, "イベント");
+    Font_Printf(0x5A, 0x2D, "バトル");
+#else
     Font_SetLineHeight(0x16);
     Font_Printf(0x50, 0x17, Text_GetString(NULL, 0, D_82D0AB9C, 0x40));
+#endif
     Font_EndTexturedTextRendering();
 
     return sp34;
 }
 
+#if !defined(VERSION_JP)
 DepthBuffer* PakUi_BuildMonIconBuffer(void) {
     DepthBuffer* sp34;
 
@@ -2424,12 +2960,17 @@ DepthBuffer* PakUi_BuildMonIconBuffer(void) {
 
     return sp34;
 }
+#endif
 
 DepthBuffer* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3) {
+#if !defined(VERSION_JP)
     s32 sp2C;
+#endif
     DepthBuffer* sp28;
 
+#if !defined(VERSION_JP)
     sp2C = Font_MeasureTextExtent(8, 0, arg0);
+#endif
     sp28 = GfxImage_Allocate(0, 2, 0xAC, 0x30, 1);
     PakUi_BuildFrameBuffer(sp28, 0xA8, 0x2C);
 
@@ -2441,12 +2982,56 @@ DepthBuffer* PakUi_BuildTextLabelBuffer(s8* arg0, u8 arg1, u8 arg2, u8 arg3) {
 
     Font_BeginTranslucentTextRendering();
     Font_SetActive(8, 0);
+#if defined(VERSION_JP)
+    Font_Printf(0xE, 0xC, arg0);
+#else
     Font_Printf(0x54 - (sp2C / 2), 0xC, arg0);
+#endif
     Font_EndTexturedTextRendering();
 
     return sp28;
 }
 
+#if defined(VERSION_JP)
+void TransferPak_MenuIconsInit(void) {
+    s32 i;
+
+    main_pool_push_state('msel');
+
+    // JP has no icon for slot 3 and no D_82D0AC0C model; see D_82D09EF8.
+    D_82D0ABE0[0] = PakUi_BuildGameIconBuffer(0);
+    D_82D0ABE0[7] = PakUi_BuildGameIconBuffer(1);
+    D_82D0ABE0[1] = PakUi_BuildControllerIconBufferAlt();
+    D_82D0ABE0[2] = PakUi_BuildTextLabelBuffer("　オプション", 0x1E, 0x64, 0x1E);
+    D_82D0ABE0[4] = PakUi_BuildControllerIconBuffer();
+    D_82D0ABE0[5] = PakUi_BuildTextLabelBuffer("ひとりでバトル", 0x1E, 0x64, 0x1E);
+    D_82D0ABE0[6] = PakUi_BuildTextLabelBuffer("ふたりでバトル", 0x1E, 0x64, 0x1E);
+
+    Model_InitDisplayObject(&D_82D09FF8[0], 0, 0, D_82D0AC00);
+    Model_InitDisplayObject(&D_82D09FF8[1], 0, 0, D_82D0AC04);
+    Model_InitDisplayObject(&D_82D09FF8[2], 0, 0, D_82D0AC08);
+    Model_InitDisplayObject(&D_82D09FF8[4], 0, 0, D_82D0AC04);
+    Model_InitDisplayObject(&D_82D09FF8[5], 0, 0, D_82D0AC08);
+    Model_InitDisplayObject(&D_82D09FF8[6], 0, 0, D_82D0AC08);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[0].position, -84.0f, 48.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[1].position, 100.0f, 18.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[2].position, -84.0f, -64.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[3].position, 100.0f, -64.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[4].position, -268.0f, 18.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[5].position, -268.0f, -4.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&D_82D09FF8[6].position, -268.0f, -56.0f, -579.0f);
+
+    for (i = 0; i < 6; i++) {
+        D_82D09FF8[i].rotation.x = 0;
+        D_82D09FF8[i].rotation.y = 0;
+    }
+
+    D_82D09FF8[5].rotation.x = -0x5000;
+    D_82D09FF8[6].rotation.x = -0x5000;
+
+    PakUi_InitStatusPopup(&D_82D0ABD0, 0x71, 0x84);
+}
+#else
 void TransferPak_MenuIconsInit(void) {
     s32 i;
     u8 sp1B = Cont_GetControllerBits();
@@ -2512,6 +3097,7 @@ void TransferPak_MenuIconsInit(void) {
 
     PakUi_InitStatusPopup(&D_82D0ABD0, 0x71, 0x84);
 }
+#endif
 
 void TransferPak_MenuIconsFree(void) {
     s32 i;
@@ -2526,14 +3112,21 @@ void TransferPak_MenuIconsFree(void) {
 s32 TransferPak_MenuHandleInput(void) {
     s16 var_a3;
     s16 sp24;
+#if !defined(VERSION_JP)
     s16 sp22;
+#endif
     s16 var_a1;
     s16 var_a2;
 
     sp24 = -1;
+#if !defined(VERSION_JP)
     sp22 = D_82D06FA0;
+#endif
     var_a3 = -1;
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
+#if defined(VERSION_JP)
+        var_a3 = D_82D06FA0;
+#else
         if (D_82D09FF8[D_82D06FA0].lodFraction == 0xFF) {
             var_a3 = D_82D06FA0;
         } else {
@@ -2541,6 +3134,7 @@ s32 TransferPak_MenuHandleInput(void) {
             Audio_PlaySoundEffectById(SFX_MENU_ERROR);
             var_a3 = -1;
         }
+#endif
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         var_a3 = 7;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
@@ -2551,15 +3145,18 @@ s32 TransferPak_MenuHandleInput(void) {
         sp24 = D_82D09F1C[D_82D06FA0].unk_0A;
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DRIGHT)) {
         sp24 = D_82D09F1C[D_82D06FA0].unk_0B;
-    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) && (D_82D0AB90.clearedModes == 0x1F8)) {
+    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_CRIGHT) &&
+               (D_82D0AB90.clearedModes == PAKUI_ALL_MODES_CLEARED)) {
         Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
         var_a3 = -1;
         gSessionContext.inRound2 ^= 1;
     }
 
+#if !defined(VERSION_JP)
     if ((sp24 != -1) && (sp22 != sp24)) {
         D_82D0ABA4 = 0;
     }
+#endif
 
     if (var_a3 == 1) {
         var_a1 = 0;
@@ -2625,7 +3222,11 @@ s32 TransferPak_MenuCursorToCode(void) {
             break;
 
         case 3:
+#if defined(VERSION_JP)
+            sp4 = 2;
+#else
             sp4 = 0x11;
+#endif
             break;
 
         case 4:
@@ -2653,7 +3254,9 @@ s16 TransferPak_MenuLoop(void) {
     s16 var_s0;
 
     var_s0 = -1;
+#if !defined(VERSION_JP)
     D_82D0ABA4 = 0;
+#endif
     TransferPak_MenuIconsInit();
     D_82D06FA0 = 0;
     if (StageContext_GetFadeMode() != 0) {
@@ -2725,7 +3328,12 @@ s16 TransferPak_MenuLoop(void) {
         Audio_StopMusic(0x10);
     }
 
-    if ((D_82D0ABA8 == 0) || (D_82D06FA0 != 0)) {
+    // JP has already shown the continue prompt (TransferPak_MainMenu) before this menu, so it
+    // always fades out here.
+#if !defined(VERSION_JP)
+    if ((D_82D0ABA8 == 0) || (D_82D06FA0 != 0))
+#endif
+    {
         StageContext_SetClearColor(0xFFFF);
         StageFade_StartFromTransparent(8);
         while (StageContext_GetFadeMode() != 1) {
@@ -2765,7 +3373,9 @@ void TransferPak_InitMenuGraphics(void) {
     D_82D0ABB0 = process_geo_layout(temp_v0, &D_82D08648);
     D_82D0ABB4 = process_geo_layout(temp_v0, &D_82D08838);
     D_82D0AC00 = process_geo_layout(temp_v0, &D_82D09108);
+#if !defined(VERSION_JP)
     D_82D0AC0C = process_geo_layout(temp_v0, &D_82D09598);
+#endif
     D_82D0AC04 = process_geo_layout(temp_v0, &D_82D09B38);
     D_82D0AC08 = process_geo_layout(temp_v0, &D_82D09EB8);
 
@@ -2779,13 +3389,75 @@ void TransferPak_InitMenuGraphics(void) {
 
     Pak_PollPortStatus();
 
+#if !defined(VERSION_JP)
     if (Controller_CheckAccessoryEeprom() != 0) {
         D_82D0ABA0 = 1;
     } else {
         D_82D0ABA0 = 0;
     }
+#endif
 }
 
+#if defined(VERSION_JP)
+s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
+    StageContext* sp54;
+    u8 sp53;
+    s16 sp50 = 2;
+    s32 sp4C = 1;
+
+    main_pool_push_state('GBCK');
+
+    Save_EnsureBankLoaded(2);
+    Save_GetModeSettings(&D_82D0AB90, 0);
+    Save_GetOptionsField02(&D_82D0AB98);
+    sp53 = (D_82D0AB98 & 4) != 0;
+    gSessionContext.inRound2 = sp53;
+    Gfx_InitDisplayListBuffers(0x10000, 0);
+    sp54 = StageContext_Allocate(1, 0, 2, 0, 2, 1);
+    Font_Init(0x1C, 0);
+
+    ASSET_LOAD(D_1000000, common_menu1_ui, 0);
+    ASSET_LOAD(D_2000000, common_menu2_ui, 0);
+    ASSET_LOAD(D_3000000, menu_select_ui, 0);
+
+    TransferPak_InitMenuGraphics();
+    Audio_PlayMusicIfChanged(0x28);
+    StageContext_Activate(sp54);
+
+    if (arg1 != 0) {
+        sp4C = TransferPak_ShowRulesPrompt();
+        if (sp4C != 0) {
+            sp50 = TransferPak_MainMenu();
+            if (sp50 != 4) {
+                sp4C = 0;
+            }
+        }
+    }
+
+    if (sp4C != 0) {
+        sp50 = Pak_CheckPiIntegrity(TransferPak_MenuLoop());
+    }
+
+    StageContext_Deactivate();
+
+    if (gSessionContext.inRound2 != sp53) {
+        if (gSessionContext.inRound2 == 0) {
+            D_82D0AB98 &= ~4;
+        } else {
+            D_82D0AB98 |= 4;
+        }
+        Save_SetOptionsField02(&D_82D0AB98);
+        Save_CommitTypedRecord(0x14, 0);
+    }
+
+    Save_FlushBank(2);
+    Gfx_FreeDisplayListBuffers();
+
+    main_pool_pop_state('GBCK');
+
+    return sp50;
+}
+#else
 s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
     StageContext* sp54;
     u8 sp53;
@@ -2853,3 +3525,4 @@ s32 TransferPak_CheckMain(s32 arg0, s32 arg1) {
 
     return sp50;
 }
+#endif

@@ -7,6 +7,12 @@
 #include "src/memory.h"
 #include "src/util.h"
 
+#if defined(VERSION_JP)
+// Points to the EUC-JP format "ゆけっ！ %s" ("Go! %s"); one of the adjacent format pointers from
+// D_84386D80_jp in battle_engine_309ED0 data. The send-out messages pass the name for %s.
+extern char* D_84386D84_jp;
+#endif
+
 void BattleScene_IntroSetupCamera(CameraNode* arg0) {
     BattleScene_ResetCameraFrameCounter();
     BattleScene_SetCameraClipPlanes(arg0, 20.0f, 12800.0f);
@@ -101,8 +107,13 @@ void BattleScene_IntroRevealFirstMon(CameraNode* arg0) {
     BattleScene_SelectCameraFollowPreset(sActivePokemon[0], arg0, 3);
     BattleScene_EnterStateRow(sActivePokemon[0], 0x10);
     sBattleScene.unk_00->unk_2C = 0;
+#if defined(VERSION_JP)
+    Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x21, D_84386D84_jp,
+                        sp28->pokemonPicked[sp2C->unk_18].unk_30);
+#else
     Text_SetStringToken(0x19, (u32)sp28->pokemonPicked[sp2C->unk_18].unk_30);
     Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x21);
+#endif
     BattleBox_Open(0xC);
     Battle_TriggerTrainerPresentationCue(sActivePokemon[0]);
     sBattleScene.unk_00->unk_10 = 0;
@@ -139,8 +150,13 @@ void BattleScene_IntroRevealSecondMon(CameraNode* arg0) {
     BattleScene_EnterStateRow(sActivePokemon[1], 0x10);
     sBattleScene.unk_00->unk_10 = 0;
     sBattleScene.unk_00->unk_2C = 1;
+#if defined(VERSION_JP)
+    Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x21, D_84386D84_jp,
+                        sp28->pokemonPicked[sp2C->unk_18].unk_30);
+#else
     Text_SetStringToken(0x19, (u32)sp28->pokemonPicked[sp2C->unk_18].unk_30);
     Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x21);
+#endif
     if (gSessionContext.mode != 8) {
         BattleBox_Open(0xC);
     }

@@ -129,6 +129,14 @@ typedef struct GbApuRegs {
 
 #define GB_APU_REGS (*(GbApuRegs*)D_8120EA70)
 
+// Capacity of the APU register-write queue (D_8122EEB0, created in GbApu_ResetChannels) and of
+// the D_8122C8D8 buffer that func_81208828 drains it into.
+#if defined(VERSION_JP)
+#define GB_APU_WRITE_QUEUE_LEN 1800
+#else
+#define GB_APU_WRITE_QUEUE_LEN 2400
+#endif
+
 // A queued APU register write, packed into an OSMesg as (reg << 24) | (value << 16) | time.
 typedef struct GbApuWrite {
     /* 0x0 */ u8 reg;
@@ -153,7 +161,7 @@ GbApuChannelState gGbApuSquare1;
 GbApuChannelState gGbApuSquare2;
 GbApuChannelState gGbApuWave;
 GbApuChannelState gGbApuNoise;
-GbApuWrite D_8122C8D8[0x960];
+GbApuWrite D_8122C8D8[GB_APU_WRITE_QUEUE_LEN];
 u8 D_8122EE58[0x40];
 s32 D_8122EE98;
 s32 D_8122EE9C;
@@ -161,7 +169,7 @@ s32 D_8122EEA0;
 s32 D_8122EEA4;
 unk_D_8122EEA8 D_8122EEA8;
 OSMesgQueue D_8122EEB0;
-OSMesg D_8122EEC8[0x961];
+OSMesg D_8122EEC8[GB_APU_WRITE_QUEUE_LEN + 1];
 typedef struct unk_D_81234690 {
     /* 0x00 */ u8 pad0[2];
     /* 0x02 */ u16 unk_02;
@@ -184,6 +192,31 @@ extern volatile u32 D_812346FC;
 
 void func_81209374(s32 numSamples, s16* out);
 
+#if defined(VERSION_JP)
+// Japanese-only audio code linked between osGbSetNextBuffer and this file
+// (asm/jp/fragments/gb_tower_emulator/gb_tower_emulator_96DA0.s; its .data holds the
+// "Audio: setvol" and "Dim voice-Alloc" debug strings). The first argument of
+// func_8121036C_jp / func_81210390_jp is a packed command word. D_81287B08_jp is that code's
+// 0x15C-byte channel table (func_81209D64_jp walks it with the same stride).
+typedef struct unk_D_81287B08_jp {
+    /* 0x000 */ u8 unk_000;
+    /* 0x001 */ u8 unk_001;
+    /* 0x002 */ char unk002[0x10];
+    /* 0x012 */ s16 unk_012;
+    /* 0x014 */ char unk014[0x8];
+    /* 0x01C */ f32 unk_01C;
+    /* 0x020 */ f32 unk_020;
+    /* 0x024 */ f32 unk_024;
+    /* 0x028 */ char unk028[0x134];
+} unk_D_81287B08_jp; // size = 0x15C
+
+extern unk_D_81287B08_jp D_81287B08_jp[];
+extern OSMesgQueue* D_812896A0_jp;
+void func_8121036C_jp(s32 cmd, s32 arg1);
+void func_81210390_jp(s32 cmd, s8 arg1);
+void func_812103F0_jp(void);
+#endif
+
 s32 D_8120EA60 = 0;
 u8 D_8120EA64[0xC] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -198,8 +231,13 @@ u8 sGbApuRegs[0x40] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
+#if !defined(VERSION_JP)
+// Set by GbApu_SelectRegionClock: the divisor in GbApu_FreqToStep / GbApu_FreqToStep2x and the
+// time span func_81208828 spreads over one buffer. The Japanese build has no
+// GbApu_SelectRegionClock and uses the constants 1500.0f and 17784.0f instead.
 f32 D_8120EAC0 = 1500.0f;
 s32 D_8120EAC4 = 17784;
+#endif
 s32 D_8120EAC8 = 2048;
 s32 D_8120EACC = 16384;
 s32 D_8120EAD0 = 0;
@@ -227,6 +265,77 @@ u32 D_8120EB48[9] = {
     0x12345678,
 };
 
+#if defined(VERSION_JP)
+void func_81207330(void) {
+    func_812103F0_jp();
+}
+
+void GbApu_SetActiveFlag(void) {
+    func_8121036C_jp(0xF1000000, 0);
+    D_8120EA60 = 1;
+}
+
+void GbApu_ClearActiveFlag(void) {
+    func_8121036C_jp(0xF2000000, 0);
+    D_8120EA60 = 0;
+}
+
+// Scales channel arg0's unk_01C by arg2 percent: at once when arg1 == 0, otherwise as a ramp
+// of unk_020 per step over unk_012 = arg1 steps. unk_024 keeps the value before the change.
+void func_81215C14_jp(s32 arg0, s32 arg1, u8 arg2) {
+    unk_D_81287B08_jp* ch = &D_81287B08_jp[arg0];
+    f32 target;
+
+    ch->unk_012 = 0;
+    target = ((s32)arg2 / 100.0f) * ch->unk_01C;
+    ch->unk_024 = ch->unk_01C;
+    if (arg1 == 0) {
+        ch->unk_01C = target;
+        return;
+    }
+    ch->unk_001 = 0;
+    ch->unk_012 = arg1;
+    ch->unk_020 = (target - ch->unk_01C) / arg1;
+}
+
+// Returns channel arg0's unk_01C to the unk_024 value saved by func_81215C14_jp, at once or
+// as a ramp over arg1 steps.
+void func_81215C9C_jp(s32 arg0, s32 arg1) {
+    unk_D_81287B08_jp* ch = &D_81287B08_jp[arg0];
+
+    ch->unk_012 = 0;
+    if (arg1 == 0) {
+        ch->unk_01C = ch->unk_024;
+        return;
+    }
+    ch->unk_001 = 0;
+    ch->unk_012 = arg1;
+    ch->unk_020 = (ch->unk_024 - ch->unk_01C) / arg1;
+}
+
+void func_81207354(void) {
+}
+
+void func_81215D0C_jp(s32 arg0, s32 arg1, s32 arg2) {
+    func_81210390_jp(((arg0 & 0xFF) << 16) | 0x08000000 | ((arg1 & 0xFF) << 8), arg2);
+}
+
+void func_81215D50_jp(void) {
+    func_8121036C_jp(0x82020100, 0);
+    func_812103F0_jp();
+    func_8121036C_jp(0xF8000000, 0);
+}
+
+void func_81215D8C_jp(s32 arg0, s32 arg1, s32 arg2) {
+    func_81210390_jp(0x06020002, arg1);
+    func_81210390_jp(0x06020001, arg0);
+    func_81210390_jp(0x06020000, arg2);
+}
+
+void func_81215DDC_jp(void) {
+    func_81210390_jp(0x06020004, -1);
+}
+#else
 void func_81207330(void) {
 }
 
@@ -250,6 +359,7 @@ void GbApu_SelectRegionClock(s32 arg0) {
     D_8120EAC4 = 0x8AF0;
     D_8120EAC0 = 1500.0f;
 }
+#endif
 
 void GbApu_SetNoisePeriodBounds(s32 arg0, s32 arg1) {
     D_8120EAC8 = arg0;
@@ -261,7 +371,11 @@ u32 GbApu_FreqToStep(u16 arg0) {
   if (arg0 == 0) {
       return 0;
   }
+#if defined(VERSION_JP)
+  temp = ((65536.0f / (0x800 - arg0)) / 1500.0f) * 65536;
+#else
   temp = ((65536.0f / (0x800 - arg0)) / D_8120EAC0) * 65536;
+#endif
   return temp;
 }
 
@@ -279,7 +393,11 @@ u32 func_81207494(u16 arg0, u16 arg1, u16 arg2) {
 
 u32 GbApu_FreqToStep2x(u16 arg0) {
   u32 temp;
+#if defined(VERSION_JP)
+  temp = ((131072.0f / (0x800 - arg0)) / 1500.0f) * 65536;
+#else
   temp = ((131072.0f / (0x800 - arg0)) / D_8120EAC0) * 65536;
+#endif
   return temp;
 }
 
@@ -7238,6 +7356,10 @@ u8 D_81228654[0x24] = {
     0x81, 0x22, 0x86, 0x7C, 0x81, 0x22, 0x86, 0x7C, 0x81, 0x20, 0xEB, 0xC4, 0x81, 0x21, 0x57, 0x04,
     0x81, 0x21, 0xB1, 0xF4, 0x81, 0x21, 0xDA, 0xC4, 0x81, 0x21, 0xF5, 0xA4, 0x81, 0x22, 0x37, 0x34,
     0x81, 0x22, 0x69, 0x94,
+#elif defined(VERSION_JP)
+    0x81, 0x25, 0x5A, 0xC4, 0x81, 0x25, 0x5A, 0xC4, 0x81, 0x23, 0xC0, 0x0C, 0x81, 0x24, 0x2B, 0x4C,
+    0x81, 0x24, 0x86, 0x3C, 0x81, 0x24, 0xAF, 0x0C, 0x81, 0x24, 0xC9, 0xEC, 0x81, 0x25, 0x0B, 0x7C,
+    0x81, 0x25, 0x3D, 0xDC,
 #else
     0x81, 0x22, 0x86, 0x4C, 0x81, 0x22, 0x86, 0x4C, 0x81, 0x20, 0xEB, 0x94, 0x81, 0x21, 0x56, 0xD4,
     0x81, 0x21, 0xB1, 0xC4, 0x81, 0x21, 0xDA, 0x94, 0x81, 0x21, 0xF5, 0x74, 0x81, 0x22, 0x37, 0x04,
@@ -7515,7 +7637,11 @@ void func_81208828(s32 numSamples, s16* out) {
     }
 
     pos = 0.0f;
+#if defined(VERSION_JP)
+    step = 17784.0f / (f32)numSamples;
+#else
     step = (f32)D_8120EAC4 / (f32)numSamples;
+#endif
     if (numSamples < count) {
         flush = TRUE;
     } else {
@@ -7642,7 +7768,7 @@ void GbApu_ResetChannels(void) {
   OSMesg sp20;
 
   osCreateMesgQueue(&sp24, &sp20, 1);
-  osCreateMesgQueue(&D_8122EEB0, D_8122EEC8, 0x960);
+  osCreateMesgQueue(&D_8122EEB0, D_8122EEC8, GB_APU_WRITE_QUEUE_LEN);
   for (i = 0x50; i > 0xF; i--) {
       func_8120806C(i, 0);
   }
@@ -7732,6 +7858,9 @@ s32 func_81209078(void) {
     s16** bufPtr;
 
     D_812346C8++;
+#if defined(VERSION_JP)
+    osSendMesg(D_812896A0_jp, (OSMesg)D_812346C8, OS_MESG_NOBLOCK);
+#endif
     D_812346D0 ^= 1;
     D_812346D4++;
     D_812346D4 %= 3;
@@ -7860,3 +7989,9 @@ void func_81209374(s32 numSamples, s16* out) {
 
 void func_81209688(UNUSED s32 arg0) {
 }
+
+#if defined(VERSION_JP)
+// Second empty handler; in the Japanese build this file's .text ends here (0x81218110).
+void func_81218104_jp(UNUSED s32 arg0) {
+}
+#endif

@@ -1490,7 +1490,12 @@ void BattleHud_DrawOpponentSideStatus(ActivePokemon* arg0, ActivePokemonState* a
 void Battle_ClearAllMessageQueues(void);
 void Battle_ClearMessageCursor(void);
 void func_84317940(s8* arg0, s8* arg1, ...);
+#if defined(VERSION_JP)
+// The Japanese build formats the message: %s in fmt copies the next char* argument.
+void Battle_QueueMessage(s8* arg0, s8 arg1, const char* fmt, ...);
+#else
 void Battle_QueueMessage(s8* arg0, s8 arg1);
+#endif
 void Battle_QueueStatusText(char* arg0, s32 arg1);
 void func_84317B38(void);
 void Battle_DrawCompactStatusBoxesIfVisible(void);

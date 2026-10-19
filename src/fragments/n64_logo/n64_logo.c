@@ -77,9 +77,12 @@ s32 N64Logo_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     StageContext_Activate(sp2C);
     StageFade_Start(1);
     BgStage_RunUntilCondition(3, N64Logo_DrawFrame);
+#if !defined(VERSION_JP)
+    // JP N64Logo_Main goes straight from the fade-in to Save_GetOptionsField02 without loading text tables.
     Text_InitStringTables();
     Text_LoadPlayerLabels();
     Text_LoadNameTable();
+#endif
     Save_GetOptionsField02(&sp2A);
 
     if (sp2A & 1) {

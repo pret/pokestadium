@@ -31,26 +31,35 @@ static GraphNode* D_81304648;
 static GraphNode* D_8130464C;
 static s16 D_81304650;
 static s32 D_81304654;
+#if !defined(VERSION_JP)
 static char** D_81304658;
 static char D_81304660[0x400];
+#endif
 static s16 D_81304A60;
 static s16 D_81304A62;
 static s32 D_81304A64;
 
-static u32 D_81303C20[] = {
-    0xA4B3A4CE, 0xA5ABA1BC, 0xA5C8A5EA, 0x0AA5C3A5, 0xB8A4CFA1, 0xA2A4C4A4, 0xAB0AA4A8, 0xA4DEA4BB, 0xA4F3A1A3,
-    0x00000000, 0xA5ECA5DD, 0xA1BCA5C8, 0xA4ACA1A2, 0x0AA4DFA4, 0xC4A4ABA4, 0xEAA4DEA4, 0xBB0AA4F3, 0xA1A30000,
-    0xA5DDA5B1, 0xA5E2A5F3, 0xA5BBA5F3, 0x0AA5BFA1, 0xBCA4C7A1, 0xA2A5ECA5, 0xDD0AA1BC, 0xA5C8A4B5, 0xA4ECA4C6,
-    0xA4A40AA4, 0xDEA4BBA4, 0xF3A1A300, 0xA4BAA4AB, 0xA4F3A4AC, 0xA1A20AA4, 0xA2A4EAA4, 0xDEA4BBA4, 0xF3A1A300,
-};
+// Port messages for TransferPak_GetPortMessageIndex results 1-4. The JP TransferPak_DrawPortBox prints these
+// directly; the other builds print entries 0x0E-0x11 of string table 0x1F and leave these unreferenced.
+static char D_81303C20[] = "このカートリ\nッジは、つか\nえません。";
+static char D_81303C48[] = "レポートが、\nみつかりませ\nん。";
+static char D_81303C68[] = "ポケモンセン\nターで、レポ\nートされてい\nません。";
+static char D_81303C98[] = "ずかんが、\nありません。";
 
 static s16 D_81303CB0 = 0;
 
 static u32 D_81303CB4[] = {
     0x0C000000,  0x05000000, 0x0B00002D, 0x00000000, 0x028001E0, 0x00000000, 0xFDBD0000, 0x00000243, 0x05000000,
     0x0D000000,  0x05000000, 0x14000000, 0x002D013B, 0xFFFFFF32, 0x16FFFFFF, 0x0F000002, 0x05000000, 0x0A000000,
-    &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000, 0x00000000,
+    &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000,
 };
+
+#if defined(VERSION_JP)
+// Prompt texts that the other builds read from string table 0x1F (entries 0x12 and 0x13) in
+// TransferPak_DrawPortSelectOverlay.
+static char* D_81303B94_jp = "ゲームボーイのカートリッジをえらんでください。";
+static char* D_81303B98_jp = "ポケモンの カートリッジが セット\nされていません。 でんげんをきってから\nカートリッジを セットしてください。";
+#endif
 
 static Vtx D_81303D18[] = {
     VTX(-32, 64, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),      VTX(-32, 32, 0, 0, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -222,11 +231,32 @@ void TransferPak_DrawPortBox(s32 arg0, s32 arg1, s32 arg2) {
 
     Font_BeginTranslucentTextRendering();
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
+#if defined(VERSION_JP)
+    Font_SetActive(8, -2);
+#else
     Font_SetActive(8, 0);
+#endif
     Font_SetLineHeight(0x18);
 
     if ((arg0 == D_81304000) && (D_81304650 == 1)) {
         switch (TransferPak_GetPortMessageIndex(arg0)) {
+#if defined(VERSION_JP)
+            case 1:
+                Font_Printf(arg1 + 5, arg2 + 0xAC, D_81303C20);
+                break;
+
+            case 2:
+                Font_Printf(arg1 + 5, arg2 + 0xAC, D_81303C48);
+                break;
+
+            case 3:
+                Font_Printf(arg1 + 5, arg2 + 0xAC, D_81303C68);
+                break;
+
+            case 4:
+                Font_Printf(arg1 + 5, arg2 + 0xAC, D_81303C98);
+                break;
+#else
             case 1:
                 Font_Printf(arg1 + 5, arg2 + 0xAC, Text_GetString(NULL, 0, D_81304658, 0xE));
                 break;
@@ -242,11 +272,26 @@ void TransferPak_DrawPortBox(s32 arg0, s32 arg1, s32 arg2) {
             case 4:
                 Font_Printf(arg1 + 5, arg2 + 0xAC, Text_GetString(NULL, 0, D_81304658, 0x11));
                 break;
+#endif
         }
     }
 
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
+#if defined(VERSION_JP)
+    // Left-aligned name and ID; Font_Printf formats the ID itself, so no sprintf buffer is used.
+    if (D_81303FA8[arg0].unk_00 == 0) {
+        Font_SetActive(8, -2);
+        Font_Printf(arg1 + 0xA, arg2 + 0xA, D_81303FA8[arg0].unk_08);
+        Font_SetActive(4, -3);
+        Font_Printf(arg1 + 2, arg2 + 0x1E, "ID %05d", D_81303FA8[arg0].unk_06);
+    } else if (D_81303FA8[arg0].unk_00 != 1) {
+        Font_SetActive(8, -2);
+        Font_Printf(arg1 + 0xA, arg2 + 0xA, "？？？？？");
+        Font_SetActive(4, -3);
+        Font_Printf(arg1 + 2, arg2 + 0x1E, "ID ＊＊＊＊＊");
+    }
+#else
     if (D_81303FA8[arg0].unk_00 == 0) {
         Font_SetActive(8, 0);
         Font_Printf((arg1 - (Font_MeasureTextExtent(0, 0, D_81303FA8[arg0].unk_08) / 2)) + 0x3C, arg2 + 0xA,
@@ -260,6 +305,7 @@ void TransferPak_DrawPortBox(s32 arg0, s32 arg1, s32 arg2) {
         Font_SetActive(4, 0);
         Font_Printf((arg1 - (Font_MeasureTextExtent(0, 0, "ID ?????") / 2)) + 0x3C, arg2 + 0x1E, "ID ?????");
     }
+#endif
 
     Font_EndTexturedTextRendering();
 }
@@ -451,9 +497,14 @@ void TransferPak_DrawPortSelectOverlay(void) {
     if (D_81304000 >= 0) {
         TransferPak_DrawPromptPanel(0x38, 0x19A, 0x210, 0x28, 0x1E, 0x1E, 0x82, 0x80);
         Font_BeginTranslucentTextRendering();
+#if defined(VERSION_JP)
+        Font_SetActive(0x10, -1);
+        Font_Printf(0x3B, 0x1A1, D_81303B94_jp);
+#else
         Font_SetActive(0x10, 0);
         Font_Printf(0x132 - (Font_MeasureTextExtent(0, 0, Text_GetString(NULL, 0, D_81304658, 0x12)) / 2), 0x1A1,
                       Text_GetString(NULL, 0, D_81304658, 0x12));
+#endif
         Font_EndTexturedTextRendering();
         TransferPak_DrawPortBox(0, 0x38, 0x2E);
         TransferPak_DrawPortBox(1, 0xBC, 0x2E);
@@ -465,9 +516,15 @@ void TransferPak_DrawPortSelectOverlay(void) {
     } else {
         TransferPak_DrawPromptPanel(0x46, 0x146, 0x1F4, 0x78, 0x82, 0x1E, 0x1E, 0x80);
         Font_BeginTranslucentTextRendering();
+#if defined(VERSION_JP)
+        Font_SetActive(0x10, -2);
+        Font_SetLineHeight(0x1C);
+        Font_Printf(0x5A, 0x15A, D_81303B98_jp);
+#else
         Font_SetActive(0x10, 0);
         Font_SetLineHeight(0x1C);
         Font_Printf(0x5A, 0x15A, Text_GetString(NULL, 0, D_81304658, 0x13));
+#endif
         Font_EndTexturedTextRendering();
     }
     D_81303CB0 += 0xB80;
@@ -815,8 +872,10 @@ s32 TransferPak_SelectMain(s32 arg0, UNUSED s32 arg1) {
     PokeIcon_OpenModelArchive();
     TransferPak_ScanAllPorts();
     TransferPak_AutoSelectPort();
+#if !defined(VERSION_JP)
     Text_InitStringTables();
     D_81304658 = Text_GetStringTable(0x1F);
+#endif
     TransferPak_InitScene();
     D_81304654 = TransferPak_GetPresentationMode();
 

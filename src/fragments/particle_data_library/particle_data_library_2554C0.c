@@ -4,8 +4,11 @@
 #include "src/battle_hud.h"
 #include "src/model_renderer_callbacks.h"
 
+// The Japanese .rodata starts with D_810041D0; it has no "DUMMY NAME" string.
+#if !defined(VERSION_JP)
 const char D_810041C0[0xC] = "DUMMY NAME";
 const char D_810041CC[0x4] = "";
+#endif
 
 const Gfx D_810041D0[] = {
     gsDPPipeSync(),

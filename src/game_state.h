@@ -52,6 +52,21 @@ typedef struct BattleMon {
     /* 0x2A */ u16 unk_2A;
     /* 0x2C */ u16 unk_2C;
     /* 0x2E */ u16 unk_2E;
+#if defined(VERSION_JP)
+    // Japanese layout: GbSave_LoadBattleMonRecord clears 0x3C and 0x4C, copies 3 bytes of the
+    // GB record to 0x3D and 0x4D each, and untranscodes names into 0x30 and 0x40.
+    // BattleScene_IntroRevealFirstMon also indexes pokemonPicked in 0x50-byte steps and passes
+    // pokemonPicked + 0x30 as the name.
+    //@src/save_data.c
+    //@src/fragments/battle_engine/battle_engine_313250.c
+    /* 0x30 */ u8 unk_30[12];
+    /* 0x3C */ u8 unk_3C;
+    /* 0x3D */ u8 unk_3D[3];
+    /* 0x40 */ u8 unk_40[12];
+    /* 0x4C */ u8 unk_4C;
+    /* 0x4D */ u8 unk_4D[3];
+} BattleMon; // size = 0x50
+#else
     /* 0x30 */ u8 unk_30[11];
     /* 0x3B */ u8 unk_3B[11];
     /* 0x46 */ u8 unk_46[11];
@@ -59,6 +74,7 @@ typedef struct BattleMon {
     /* 0x52 */ u8 unk_52;
     /* 0x53 */ u8 unk_53;
 } BattleMon; // size = 0x54
+#endif
 
 typedef struct ExtendedRosterInfo {
     /* 0x000 */ u16 unk_000;
@@ -68,10 +84,17 @@ typedef struct ExtendedRosterInfo {
     /* 0x014 */ char unk_014[4];
     /* 0x018 */ char unk018[0x10];
     /* 0x028 */ BattleMon unk_028[1];
+#if defined(VERSION_JP)
+    /* 0x078 */ char unk078[0x190];
+    /* 0x208 */ char unk_208[0x4];
+    /* 0x20C */ char unk20C[0x24];
+} ExtendedRosterInfo; // size = 0x230
+#else
     /* 0x07C */ char unk07C[0x1A4];
     /* 0x220 */ char unk_220[0x4];
     /* 0x224 */ char unk224[0x24];
 } ExtendedRosterInfo; // size = 0x248
+#endif
 
 typedef struct TeamRoster {
     /* 0x000 */ u8 unk_000;
@@ -82,9 +105,15 @@ typedef struct TeamRoster {
     /* 0x00C */ char unk00C[0xC];
     /* 0x018 */ s32 unk_018;
     /* 0x01C */ BattleMon pokemonPicked[6];
+#if defined(VERSION_JP)
+    /* 0x1FC */ ExtendedRosterInfo* rosterInfo;
+    /* 0x200 */ char unk200[0x4];
+} TeamRoster; // size = 0x204
+#else
     /* 0x214 */ ExtendedRosterInfo* rosterInfo;
     /* 0x218 */ char unk218[0x4];
 } TeamRoster; // size = 0x21C
+#endif
 
 typedef struct BattleSessionTeams {
     /* 0x00 */ u8 uniqueStatusFlags;
@@ -102,6 +131,8 @@ typedef struct BattleSessionTeams {
     /* 0x24 */ arg1_func_80019420* unk_24;
 } BattleSessionTeams; // size = 0x28
 
+// Offsets are for US 1.0. In VERSION_JP, TeamRoster and ExtendedRosterInfo are 0x18 bytes shorter,
+// so rosterInfo starts at 0x0814, battleSides at 0x10D4, and the struct is 0x1138 bytes.
 typedef struct SessionContext {
     /* 0x0000 */ s8 mode;
     /* 0x0001 */ s8 ruleCategory;
@@ -122,7 +153,7 @@ typedef struct SessionContext {
     /* 0x11F4 */ u8 unk_11F4;
     /* 0x11F5 */ u8 sessionFlags;
     /* 0x11F6 */ u16 transitionFlags;
-} SessionContext; // size = 0x11F8
+} SessionContext; // size = 0x11F8 (JP: 0x1138)
 #define RULE_CATEGORY_ANYTHING_GOES 0
 #define RULE_CATEGORY_NINTENDO_CUP_97 1
 #define RULE_CATEGORY_NINTENDO_CUP_98 2
