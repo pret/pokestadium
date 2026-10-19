@@ -349,10 +349,12 @@ def update_all(elf: str) -> list[int]:
                      "script): " + ", ".join(pins))
         data = encode(merged)
         open(path, "wb").write(data)
-        # make does not track the .incbin, so drop the object to force a reassemble
+        # make does not track the .incbin, so age the object to force a reassemble. Deleting it
+        # instead breaks the relink: GNU Make 3.81 (macOS) treats the nested make's missing
+        # object as pruned and never rebuilds it, so ld fails with "cannot find ...o".
         obj = f"{BUILD_DIR}/asm/{VERSION}/data/fragments/{n}/fragment{n}_reloc.o"
         if os.path.exists(obj):
-            os.remove(obj)
+            os.utime(obj, (0, 0))
         changed.append(n)
     return changed
 
