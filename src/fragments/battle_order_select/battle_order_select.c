@@ -1206,8 +1206,8 @@ void BattleMenu_AddOrderSelectPanel(s16 arg0, s16 arg1, TeamRoster* arg2, s32 ar
     for (i = 0; i < arg2->rosterInfo->numberOfPokemonCanBePicked; i++) {
         temp_s0 = &arg2->rosterInfo->unk_028[i];
         Pokemon_PrepareBattleMon(temp_s0);
-        temp_s0->unk_06 = D_80070FA0[temp_s0->unk_00.unk_00 - 1].unk_06;
-        temp_s0->unk_07 = D_80070FA0[temp_s0->unk_00.unk_00 - 1].unk_07;
+        temp_s0->unk_06 = gSpeciesData[temp_s0->unk_00.unk_00 - 1].type1;
+        temp_s0->unk_07 = gSpeciesData[temp_s0->unk_00.unk_00 - 1].type2;
         PokeIcon_LoadModelTextureForMon(temp_v1->unk_0020[i], 0, temp_s0);
     }
 

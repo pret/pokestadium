@@ -53,7 +53,7 @@ void BattleScene_LoadOwnerCameraFramingConstants(ActivePokemon* arg0) {
 }
 
 void BattleScene_SetupOwnerCameraFraming(ActivePokemon* arg0, ActivePokemon* arg1) {
-    if (gBattleScene.unk_00->unk_1C == 1) {
+    if (sBattleScene.unk_00->unk_1C == 1) {
         BattleScene_SetBothOwnerActiveFlags();
     } else {
         BattleScene_ClearBothOwnerActiveFlags();
@@ -113,7 +113,7 @@ void BattleScene_TickOwnerSlideIn(ActivePokemon* arg0, s32 arg1) {
     arg0->unk_728.unk_000.node.flags |= 1;
 
     if (arg0->unk_728.unk_178 == 1) {
-        if ((arg0->unk_728.unk_168->unk_1C == -0x48) && !(arg0->unk_654.unk_34 & 0x800)) {
+        if ((arg0->unk_728.unk_168->unk_1C == -0x48) && !(arg0->state.unk_34 & 0x800)) {
             BattleScene_TriggerOwnerModelAnimation(arg0);
         }
 
@@ -123,7 +123,7 @@ void BattleScene_TickOwnerSlideIn(ActivePokemon* arg0, s32 arg1) {
         }
         arg0->unk_728.unk_168->unk_1C = Math_StepToS32(arg0->unk_728.unk_168->unk_1C, 0x17, arg1, arg1);
     } else {
-        if ((arg0->unk_728.unk_168->unk_1C == 0x15F) && !(arg0->unk_654.unk_34 & 0x800)) {
+        if ((arg0->unk_728.unk_168->unk_1C == 0x15F) && !(arg0->state.unk_34 & 0x800)) {
             BattleScene_TriggerOwnerModelAnimation(arg0);
         }
 

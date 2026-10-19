@@ -12,6 +12,8 @@
 #define STAT_DEFENSE 4
 #define STAT_ATTACK 5
 
+// Shifted, one-based view used by gBaseStats. Its named stat fields and
+// unk_13 address the same bytes as SpeciesData's stats and growthRate.
 typedef struct PokemonStats {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
@@ -31,27 +33,27 @@ typedef struct PokemonStats {
     /* 0x14 */ char unk14[0x3];
 } PokemonStats; // size = 0x17
 
-typedef struct unk_D_80070F84 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ u8 unk_08;
-    /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A[4];
-    /* 0x0E */ char unk0E[1];
-    /* 0x0F */ u8 unk_0F[1];
-    /* 0x10 */ char unk10[0x3];
-    /* 0x13 */ u8 unk_13;
-    /* 0x14 */ char unk14[0x3];
-} unk_D_80070F84; // size = 0x17
+// Red/Blue base data without the sprite dimensions and sprite pointers.
+typedef struct SpeciesData {
+    /* 0x00 */ u8 speciesId;
+    /* 0x01 */ u8 baseHitPoints;
+    /* 0x02 */ u8 baseAttack;
+    /* 0x03 */ u8 baseDefense;
+    /* 0x04 */ u8 baseSpeed;
+    /* 0x05 */ u8 baseSpecial;
+    /* 0x06 */ u8 type1;
+    /* 0x07 */ u8 type2;
+    /* 0x08 */ u8 catchRate;
+    /* 0x09 */ u8 baseExperience;
+    /* 0x0A */ u8 startingMoves[4];
+    /* 0x0E */ u8 growthRate;
+    /* 0x0F */ u8 tmHmLearnset[7]; // TM01-TM50, then HM01-HM05, least-significant bit first.
+    /* 0x16 */ u8 padding;
+} SpeciesData; // size = 0x17
 
 extern PokemonStats gBaseStats[];
-extern unk_D_80070F84 D_80070FA0[]; //TODO: is this typed correctly?
+// Indexed by species ID - 1: Bulbasaur through Mew, then the Substitute doll.
+extern SpeciesData gSpeciesData[152];
 
 typedef struct unk_D_80071D88 {
     /* 0x00 */ char* type_name;
