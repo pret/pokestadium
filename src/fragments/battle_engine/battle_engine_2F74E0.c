@@ -155,7 +155,7 @@ s32 BattleScene_UpdateResultPresentation(void) {
                 D_84390120 += 1.0f;
 
                 if (var_v0 != 0) {
-                    gBattleScene.unk_00->unk_40 = BattleScene_DetermineWinner();
+                    sBattleScene.unk_00->unk_40 = BattleScene_DetermineWinner();
                     Audio_FadeOutAll(0x14);
                 }
                 break;
@@ -651,22 +651,22 @@ void BattleScene_ForfeitPrompt(ActivePokemon* arg0) {
 
     sp18->unk_10 = 4;
 
-    if ((gBattleScene.unk_00->unk_40 == 0) &&
+    if ((sBattleScene.unk_00->unk_40 == 0) &&
         (BTN_IS_PRESSED(D_84390148, BTN_DLEFT) || BTN_IS_PRESSED(D_8439014C, BTN_DLEFT))) {
         sp18->unk_2F = 0;
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
-    if ((gBattleScene.unk_00->unk_40 == 0) &&
+    if ((sBattleScene.unk_00->unk_40 == 0) &&
         (BTN_IS_PRESSED(D_84390148, BTN_DRIGHT) || BTN_IS_PRESSED(D_8439014C, BTN_DRIGHT))) {
         sp18->unk_2F = 1;
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
 
     if ((sp18->unk_2F == 1) && (BTN_IS_PRESSED(D_84390148, BTN_A) || BTN_IS_PRESSED(D_8439014C, BTN_A)) &&
-        (gBattleScene.unk_00->unk_40 == 0)) {
+        (sBattleScene.unk_00->unk_40 == 0)) {
         Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
-        gBattleScene.unk_00->unk_40 = (BattleScene_GetParticipantSideIndex(arg0) == 0) + 1;
+        sBattleScene.unk_00->unk_40 = (BattleScene_GetParticipantSideIndex(arg0) == 0) + 1;
         Audio_FadeOutAll(0x14);
     } else if ((sp18->unk_2F == 0) && (BTN_IS_PRESSED(D_84390148, BTN_A) || BTN_IS_PRESSED(D_8439014C, BTN_A))) {
         sp18->unk_10 = 0;
@@ -1222,7 +1222,7 @@ void BattleScene_TickAttractModeInput(void) {
     }
 
     if (cont->buttonPressed & 0x8000) {
-        gBattleScene.unk_00->unk_40 = 3;
+        sBattleScene.unk_00->unk_40 = 3;
     }
 }
 

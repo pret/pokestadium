@@ -53,7 +53,7 @@ void BattleScene_LoadOwnerCameraFramingConstants(ActivePokemon* arg0) {
 }
 
 void BattleScene_SetupOwnerCameraFraming(ActivePokemon* arg0, ActivePokemon* arg1) {
-    if (gBattleScene.unk_00->unk_1C == 1) {
+    if (sBattleScene.unk_00->unk_1C == 1) {
         BattleScene_SetBothOwnerActiveFlags();
     } else {
         BattleScene_ClearBothOwnerActiveFlags();
