@@ -280,7 +280,7 @@ s32 BattleScene_FindU16InByteArray(u16 lookup_value, u8* array, s32 array_length
     return -1;
 }
 
-void Battle_FilterUnusableMoves(ActivePokemon* pokemon, u16 arg1, SpeciesLearnsetBuffer* arg2, SpeciesLearnsetBuffer* arg3) {
+void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 arg1, SpeciesLearnsetBuffer* arg2, SpeciesLearnsetBuffer* arg3) {
     s32 move_index;
     s32 i;
     s32 temp_v0_3;
@@ -344,14 +344,14 @@ void Battle_InitializeMoveUsabilityMask(ActivePokemon* active_pokemon) {
     active_pokemon->state.unk_C1[2] = 1;
     active_pokemon->state.unk_C1[3] = 1;
 
-    Battle_FilterUnusableMoves(active_pokemon, active_pokemon->state.runtime.unk_0B - 1, &active_pokemon->unk_94C, &active_pokemon->unk_9AC);
+    Battle_MarkIllegalMoves(active_pokemon, active_pokemon->state.runtime.unk_0B - 1, &active_pokemon->unk_94C, &active_pokemon->unk_9AC);
 
     if (D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_00 != 0) {
-        Battle_FilterUnusableMoves(active_pokemon, D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_00 - 1, &active_pokemon->unk_96C, &active_pokemon->unk_9CC);
+        Battle_MarkIllegalMoves(active_pokemon, D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_00 - 1, &active_pokemon->unk_96C, &active_pokemon->unk_9CC);
     }
 
     if (D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_01 != 0) {
-        Battle_FilterUnusableMoves(active_pokemon, D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_01 - 1, &active_pokemon->unk_98C, &active_pokemon->unk_9EC);
+        Battle_MarkIllegalMoves(active_pokemon, D_84384588[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_01 - 1, &active_pokemon->unk_98C, &active_pokemon->unk_9EC);
     }
 }
 

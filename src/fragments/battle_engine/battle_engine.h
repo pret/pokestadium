@@ -1090,7 +1090,7 @@ void BattleScene_ReloadMoveResourceList(ActivePokemon* active_pokemon);
 void Battle_MakeSubstitute(ActivePokemon* active_pokemon);
 void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon);
 s32 BattleScene_FindU16InByteArray(u16 arg0, u8* arg1, s32 arg2);
-void Battle_FilterUnusableMoves(ActivePokemon* arg0, u16 arg1, SpeciesLearnsetBuffer* arg2, SpeciesLearnsetBuffer* arg3);
+void Battle_MarkIllegalMoves(ActivePokemon* arg0, u16 arg1, SpeciesLearnsetBuffer* arg2, SpeciesLearnsetBuffer* arg3);
 void Battle_InitializeMoveUsabilityMask(ActivePokemon* active_pokemon);
 void Battle_DmaLoadAnimRecord(u8 arg0, u32 arg1);
 void Battle_DmaLoadAnimRecordPair(s32 arg0, SpeciesLearnsetBuffer* arg1, SpeciesLearnsetBuffer* arg2);
