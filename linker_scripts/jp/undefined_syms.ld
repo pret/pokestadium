@@ -123,6 +123,9 @@ D_03002F60 = 0x03002F60;
 D_03003F28 = 0x03003F28;
 D_3000000 = 0x03000000;
 D_3000000_2 = 0x03000000;
+// IA8 glyph texture address that the Japanese func_81003A54 passes to Util_ConvertAddrToVirtAddr
+// (src/fragments/particle_data_library/particle_data_library_258080.c).
+D_3000210 = 0x03000210;
 D_30C1290 = 0x030A9B90;
 D_0302EE00 = 0x0302EE00;
 D_03034580 = 0x03034580;
@@ -1859,3 +1862,6 @@ _binary_assets_us_audio_main_archive_bin_start = 0x91000000;
 _binary_assets_us_pokemon_models_bin_start = 0x90000000;
 gallery_ui_ROM_START = 0x006AEBE0;
 func_8C000078 = 0x8C000078;
+// &D_80075BD0[-1] (lab_item.c), which demo_scenes_161590 and fragment17_17DD00 assembly
+// index with a 1-based id; the es/eu/it configs define the same alias.
+D_80075BCC = 0x80079B0C;

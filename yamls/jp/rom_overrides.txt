@@ -69,6 +69,8 @@
 -> - [0x29D4B0, .data, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
 - [0x29D790, rodata, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
 -> - [0x29D790, .rodata, fragments/gym_leader_castle_clear/gym_leader_castle_clear]
+- {vram: 0x83101EE0, type:  bss, name: fragments/gym_leader_castle_clear/gym_leader_castle_clear}
+-> - {vram: 0x83101EE0, type:  .bss, name: fragments/gym_leader_castle_clear/gym_leader_castle_clear}
 
 # redundant: check_flips.py shows this file's C matches the region's bytes word for word
 # (0/words differ), and the regeneration flips it on its own. The block stays commented so
@@ -89,10 +91,20 @@
 - [0x50080, asm, libleo/driverominit]
 -> - [0x50080, c, libleo/driverominit]
 
+# gb_audio: the shared C compiles to the Japanese code unchanged. Its 0x60-byte .data is the
+# porter's gb_audio data blob; its 0x60-byte .rodata (jump tables into gb_audio code at
+# 0x8003FDE4..0x8003FEB4) starts 0x420 into the 3D140_2 rodata blob, and the blob's last 0x20
+# bytes are audio_stream's jump table (targets 0x80042498..0x800425A4), kept raw under that name.
 - [0x405E0, asm, gb_audio]
 -> - [0x405E0, c, gb_audio]
 - [0x7CDE0, data, gb_audio]
 -> - [0x7CDE0, .data, gb_audio]
+- [0x84030, rodata, 3D140_2]
+-> - [0x84030, rodata, 3D140_2]
+-> - [0x84450, .rodata, gb_audio]
+-> - [0x844B0, rodata, audio_stream]
+- {vram: 0x80103300, type: bss, name: gb_audio}
+-> - {vram: 0x80103300, type: .bss, name: gb_audio}
 
 - [0x4D8D0, asm, libnaudio/n_reverb]
 -> - [0x4D8D0, c, libnaudio/n_reverb]
@@ -107,6 +119,11 @@
 
 - [0x179690, asm, fragments/demo_scenes/demo_scenes_160CB0]
 -> - [0x179690, c, fragments/demo_scenes/demo_scenes_160CB0]
+
+# n64_logo: the Japanese N64Logo_Main skips the three Text_* table loads after the fade-in
+# (#if !defined(VERSION_JP)); the file has no .data or .rodata.
+- [0x285ED0, asm, fragments/n64_logo/n64_logo]
+-> - [0x285ED0, c, fragments/n64_logo/n64_logo]
 
 - [0x1783C0, asm, fragments/demo_scenes/demo_scenes_15F9B0]
 -> - [0x1783C0, c, fragments/demo_scenes/demo_scenes_15F9B0]
@@ -192,3 +209,104 @@
 # (0x8C8000 here, 0x8CC000 in US 1.0) - expressed with VERSION_JP in the shared C.
 - [0x19480, asm, display_object_textures]
 -> - [0x19480, c, display_object_textures]
+# fragments/particle_math/particle_math_264380: only func_81407590 differs (the Japanese build
+# has neither the full-scale gSPTexture used when unk_1C is NULL and unk_04 is set nor the
+# G_TT_NONE gDPSetTextureLUT for unk_04 != 0, expressed with VERSION_JP in the shared C). The porter already
+# gives the file its own data blob (0xA10, the US .data size), so it becomes the file's .data.
+- [0x278F90, asm, fragments/particle_math/particle_math_264380]
+-> - [0x278F90, c, fragments/particle_math/particle_math_264380]
+- [0x284610, data, fragments/particle_math/particle_math_264380]
+-> - [0x284610, .data, fragments/particle_math/particle_math_264380]
+
+# ui_graphics: the Japanese build has no Text_LoadNameTable (#if !defined(VERSION_JP)) and a
+# 0x110-byte glyph table D_8006F650 in place of the 0xC0-byte one, so its .data is 0x3C0 bytes.
+# That .data is the start of the porter's ui_graphics data blob; the rest of the blob (from
+# 0x6CFD0, the data of the files that follow) stays raw under its own name.
+- [0x200E0, asm, ui_graphics]
+-> - [0x200E0, c, ui_graphics]
+- [0x6CC10, data, ui_graphics]
+-> - [0x6CC10, .data, ui_graphics]
+-> - [0x6CFD0, data, ui_graphics_b]
+
+# gb_save and lab_item: the Japanese lab_item.c adds func_8002E160_jp (copies a Generation I
+# item description from its 256-entry string table, or an empty string) and keeps one zero
+# entry of D_8007596C; the Japanese State_PokemonLab sizes its display list buffers at 0x11000
+# instead of 0x16000 (all under VERSION_JP in the shared C). The porter's text blob also held
+# minigame_dispatch's code, which stays assembly. The files' .data starts 0x10 into the
+# porter's session data blob and their .rodata (gb_save's jump table, then lab_item's strings)
+# is the tail of the pokemon_stats rodata blob; both blobs are cut there. The 0x20-byte bss
+# blob named text_system is gb_save's message queue and counter.
+- [0x2D400, asm, gb_save]
+-> - [0x2D400, c, gb_save]
+-> - [0x2ED60, c, lab_item]
+-> - [0x2EEA0, asm, minigame_dispatch]
+- [0x7A230, data, session]
+-> - [0x7A230, data, session]
+-> - [0x7A240, .data, gb_save]
+-> - [0x7A2F0, .data, lab_item]
+- [0x7A3E0, data, gb_save]
+- [0x81930, rodata, pokemon_stats]
+-> - [0x81930, rodata, pokemon_stats]
+-> - [0x81BE0, .rodata, gb_save]
+-> - [0x81C30, .rodata, lab_item]
+- {vram: 0x800B5D10, type: bss, name: text_system}
+-> - {vram: 0x800B5D10, type: .bss, name: gb_save}
+
+# demo_scenes_161590: the Japanese build has no Diorama_DrawEndCaption (#if !defined(VERSION_JP)),
+# so the file is Diorama_DrawEndBackgroundTiles and Diorama_DrawFullscreenTexture only and has no
+# .data (the caption scroll counter D_86B0BD50 is the whole US .data). The porter segment also held
+# demo_scenes_161E60 code from 0x17A6C0 (Completion_LightAngleCallbackA onward), which stays assembly.
+- [0x179F70, asm, fragments/demo_scenes/demo_scenes_161590]
+-> - [0x179F70, c, fragments/demo_scenes/demo_scenes_161590]
+-> - [0x17A6C0, asm, fragments/demo_scenes/demo_scenes_161E60]
+# table_view: the Japanese build has no Text_ExpandGlyphCodes or its glyph table; its
+# Text_CompareGlyphCodes compares two-byte strings directly, folding the 0xA5 katakana row
+# onto 0xA4 hiragana in the first pass (VERSION_JP branch in the shared C). The file has
+# no .data, .rodata or .bss in this build.
+- [0x2C700, asm, table_view]
+-> - [0x2C700, c, table_view]
+# libleo/bootdisk: LeoBootGame and __LeoBootGame2 compile to the Japanese bytes once the retail
+# scrambling is undone (tools/encrypt_libleo.py, key 0x62 from __LeoBootGame2 = 0x8000B62C). The
+# porter window also held __LeoBootGame3 (0xC550), which is the shared src/libleo/bootstrap.s.
+- [0xC0F0, asm, libleo/bootdisk]
+-> - [0xC0F0, c, libleo/bootdisk]
+-> - [0xC550, hasm, ../../src/libleo/bootstrap]
+# particle_data_library_258080: the Japanese func_81003A54 takes the species name from
+# D_8006FF00, reads it as two-byte EUC-JP characters for Font_MapGlyphCode, spaces them by 22
+# instead of 32 and loads glyphs from D_3000210; DisplayList_BuildDigitDisplayBackground uses
+# another environment color (all under VERSION_JP in the shared C). The file's 0x30-byte .data
+# runs 0x10 past the porter's data blob into the particle_data_library_2554C0 rodata blob, whose
+# start moves to 0x26E3A0 (D_810041D0); the file's 0x10-byte .rodata is that blob's last 0x10 bytes.
+- [0x26CFF0, asm, fragments/particle_data_library/particle_data_library_258080]
+-> - [0x26CFF0, c, fragments/particle_data_library/particle_data_library_258080]
+- [0x26E370, data, fragments/particle_data_library/particle_data_library_258080]
+-> - [0x26E370, .data, fragments/particle_data_library/particle_data_library_258080]
+- [0x26E390, rodata, fragments/particle_data_library/particle_data_library_2554C0]
+-> - [0x26E3A0, rodata, fragments/particle_data_library/particle_data_library_2554C0]
+-> - [0x26E890, .rodata, fragments/particle_data_library/particle_data_library_258080]
+- {vram: 0x81004380, type: bss, name: fragments/particle_data_library/particle_data_library_258080}
+-> - {vram: 0x81004380, type: .bss, name: fragments/particle_data_library/particle_data_library_258080}
+# battle_hud: the Japanese build has no ModelRenderer_GetObjectType, and its
+# ModelAnim_StartDisplayObjectAnimation takes the display object effectSlot (Model_InitDisplayObject
+# loads it from offset 0xA6) instead of the DisplayObject pointer (all under VERSION_JP in the
+# shared C). The file is 0x7A0 bytes, so the porter battle_hud text blob also held
+# model_renderer_callbacks, which stays assembly from 0x305F0. Its 0x50-byte bss blob is the file .bss.
+- [0x2FE50, asm, battle_hud]
+-> - [0x2FE50, c, battle_hud]
+-> - [0x305F0, asm, model_renderer_callbacks]
+- {vram: 0x800B5D30, type: bss, name: battle_hud}
+-> - {vram: 0x800B5D30, type: .bss, name: battle_hud}
+# minigame_actor_framework_11BBF0: the Japanese miniDrawResultIcons first prints entry 26 of
+# minigame_actor_framework_1189B0's Japanese string pointer table (D_87903D48_jp) with "%s"
+# (under VERSION_JP in the shared C). The file's .data is the first 0x2080 bytes of the porter's
+# data blob (the US .data size). The rest of the blob stays raw under its own name: from 0x140360
+# it holds the EUC-JP strings that the 1189B0 pointer table addresses, then the Japanese
+# counterpart of the US minigame_actor_framework_1193E0 .rodata (debug format strings and
+# doubles). The file's .rodata is the "%s" and difficulty strings the porter named fragment3_140680.
+- [0x13D6A0, asm, fragments/minigame_actor_framework/minigame_actor_framework_11BBF0]
+-> - [0x13D6A0, c, fragments/minigame_actor_framework/minigame_actor_framework_11BBF0]
+- [0x13E2E0, data, fragments/minigame_actor_framework/minigame_actor_framework_11BBF0]
+-> - [0x13E2E0, .data, fragments/minigame_actor_framework/minigame_actor_framework_11BBF0]
+-> - [0x140360, data, fragments/minigame_actor_framework/minigame_actor_framework_11BBF0_b]
+- [0x140680, rodata, fragment3_140680]
+-> - [0x140680, .rodata, fragments/minigame_actor_framework/minigame_actor_framework_11BBF0]

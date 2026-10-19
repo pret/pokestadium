@@ -76,6 +76,7 @@
     - [0x2D340, c, table_view] # pkm lab pc code
     - [0x2E110, c, text_system] # stack cleaner
     - [0x2E460, c, gb_save] # pkm lab pokedex code
+    - [0x2FDC0, c, lab_item]
     - [0x2FEA0, c, minigame_dispatch] # minigames code
     - [0x30640, c, gallery] # gallery code
     - [0x32510, c, vector_math] # vector/matrix math
@@ -357,6 +358,7 @@
     - [0x76280, .data, session]
     - [0x76290, .data, table_view]
     - [0x764A0, .data, gb_save]
+    - [0x76550, .data, lab_item]
     - [0x76A40, .data, minigame_dispatch]
     - [0x76B80, .data, gallery]
     - [0x76E70, .data, model_renderer_callbacks]
