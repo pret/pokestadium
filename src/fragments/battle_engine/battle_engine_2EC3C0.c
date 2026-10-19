@@ -286,17 +286,17 @@ void Battle_FilterUnusableMoves(ActivePokemon* pokemon, u16 arg1, SpeciesLearnse
     s32 temp_v0_3;
     s32 temp_v1_2;
     u8 var_a0;
-    unk_D_80070F84* temp_s4; //TODO: this is definitely typed wrong
+    SpeciesData* temp_s4;
     BattleMonRuntime* pokemon_runtime;
 
     pokemon_runtime = &pokemon->state.runtime;
 
     for (move_index = 0; move_index < 4; move_index++) {
         if (pokemon_runtime->moves[move_index] != 0) {
-            temp_s4 = &D_80070FA0[arg1];
+            temp_s4 = &gSpeciesData[arg1];
 
-            for (i = 0; i < ARRAY_COUNT(temp_s4->unk_0A); i++) {
-                if ((temp_s4->unk_0A[i] != 0) && (temp_s4->unk_0A[i] == pokemon_runtime->moves[move_index])) {
+            for (i = 0; i < ARRAY_COUNT(temp_s4->startingMoves); i++) {
+                if ((temp_s4->startingMoves[i] != 0) && (temp_s4->startingMoves[i] == pokemon_runtime->moves[move_index])) {
                     pokemon->state.unk_C1[move_index] = 0;
                 }
             }
@@ -320,12 +320,12 @@ void Battle_FilterUnusableMoves(ActivePokemon* pokemon, u16 arg1, SpeciesLearnse
                 if (temp_v0_3 >= 0) {
                     temp_v1_2 = i / 8;
                     if (temp_v1_2 == D_843845CC[temp_v0_3][0]) {
-                        var_a0 = temp_s4->unk_0F[temp_v1_2] | D_843845CC[temp_v0_3][1];
+                        var_a0 = temp_s4->tmHmLearnset[temp_v1_2] | D_843845CC[temp_v0_3][1];
                     } else {
-                        var_a0 = temp_s4->unk_0F[temp_v1_2];
+                        var_a0 = temp_s4->tmHmLearnset[temp_v1_2];
                     }
                 } else {
-                    var_a0 = temp_s4->unk_0F[i / 8];
+                    var_a0 = temp_s4->tmHmLearnset[i / 8];
                 }
 
                 if (((var_a0 >> (i % 8)) & 1) && (Move_GetIdFromTableIndex(i) == pokemon_runtime->moves[move_index])) {

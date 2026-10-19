@@ -348,27 +348,27 @@ void func_8436FDF4(s32 arg0, BattleMon* arg1) {
 
     switch (arg0) {
         case 1:
-            spA = D_80070FA0[arg1->unk_24].unk_01;
+            spA = gSpeciesData[arg1->unk_24].baseHitPoints;
             spC = arg1->unk_14;
             break;
 
         case 2:
-            spA = D_80070FA0[arg1->unk_24].unk_02;
+            spA = gSpeciesData[arg1->unk_24].baseAttack;
             spC = arg1->unk_16;
             break;
 
         case 3:
-            spA = D_80070FA0[arg1->unk_24].unk_03;
+            spA = gSpeciesData[arg1->unk_24].baseDefense;
             spC = arg1->unk_18;
             break;
 
         case 4:
-            spA = D_80070FA0[arg1->unk_24].unk_04;
+            spA = gSpeciesData[arg1->unk_24].baseSpeed;
             spC = arg1->unk_1A;
             break;
 
         case 5:
-            spA = D_80070FA0[arg1->unk_24].unk_05;
+            spA = gSpeciesData[arg1->unk_24].baseSpecial;
             spC = arg1->unk_1C;
             break;
     }

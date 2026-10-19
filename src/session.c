@@ -140,8 +140,8 @@ BattleMon* Pokemon_CreateDefault(BattleMon* arg0, u8 arg1, s16 arg2) {
     arg0->unk_04 = 0;
     arg0->unk_05 = 0;
 
-    arg0->unk_06 = D_80070FA0[arg1 - 1].unk_06;
-    arg0->unk_07 = D_80070FA0[arg1 - 1].unk_07;
+    arg0->unk_06 = gSpeciesData[arg1 - 1].type1;
+    arg0->unk_07 = gSpeciesData[arg1 - 1].type2;
 
     arg0->unk_14 = 0x6400;
     arg0->unk_16 = 0x6400;
