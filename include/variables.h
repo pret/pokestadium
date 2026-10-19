@@ -106,6 +106,7 @@ extern Gfx D_1002590[];
 extern u8 D_2000000[];
 extern u8 D_3000000[];
 extern u8 D_3000000_2[];
+extern u8 D_3000210[];
 extern u8 D_04000000[];
 extern u8 D_4000008[];
 extern u8 D_4000810[];

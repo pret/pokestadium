@@ -107,8 +107,17 @@ typedef struct SessionContext {
     /* 0x0001 */ s8 ruleCategory;
     /* 0x0002 */ s8 modeSelection; // Cup division or castle location, depending on mode.
     /* 0x0003 */ s8 roundOrDemoId; // One-based battle round; scene ID in non-battle attract demos.
+#if defined(VERSION_JP)
+    // The Japanese roster structs are 0x18 bytes shorter each: Session_SetMode (asm/jp/status_icons.s)
+    // walks trainerSlots in 0x204-byte steps up to gSessionContext + 0x810, and battleSides starts at
+    // +0x10D4 (D_800B5CA4_jp), leaving 0x230 per rosterInfo entry. Their internal Japanese layouts
+    // are unmapped, so both arrays are raw bytes here. Every later field sits 0xC0 lower in JP.
+    /* 0x0004 */ u8 trainerSlots[4][0x204];
+    /* 0x0814 */ u8 rosterInfo[4][0x230];
+#else
     /* 0x0004 */ TeamRoster trainerSlots[4];
     /* 0x0874 */ ExtendedRosterInfo rosterInfo[4];
+#endif
     /* 0x1194 */ BattleSessionTeams battleSides[2];
     /* 0x11E4 */ u8 opponentHistory[2][4]; // Eight contiguous entries; the first subscript is not a battle side.
     /* 0x11EC */ u8 aiDifficulty; // Free Battle: 0 = Hard, 1 = Normal, 2 = Easy.
@@ -122,7 +131,7 @@ typedef struct SessionContext {
     /* 0x11F4 */ u8 unk_11F4;
     /* 0x11F5 */ u8 sessionFlags;
     /* 0x11F6 */ u16 transitionFlags;
-} SessionContext; // size = 0x11F8
+} SessionContext; // size = 0x11F8 (JP: 0x1138)
 #define RULE_CATEGORY_ANYTHING_GOES 0
 #define RULE_CATEGORY_NINTENDO_CUP_97 1
 #define RULE_CATEGORY_NINTENDO_CUP_98 2

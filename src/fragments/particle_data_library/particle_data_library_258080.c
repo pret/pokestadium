@@ -203,7 +203,11 @@ void DisplayList_BuildDigitDisplayBackground(Gfx* gfx) {
     {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xDE000000;    _gfx->words.w1 = &D_810041D0;    }
     temp_a3 = ((s32) ((D_800AF770[5]) * 0x55) / 255) + 0xAA;
     {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = ((temp_a3 & 0xFF) | 0xFA000000);    _gfx->words.w1 = -0x3701;    }
+#if defined(VERSION_JP)
+    {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xFB000000;    _gfx->words.w1 = 0x64320AFF;    }
+#else
     {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xFB000000;    _gfx->words.w1 = 0x501E0AFF;    }
+#endif
     {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xFD700000;    _gfx->words.w1 = Util_ConvertAddrToVirtAddr(&D_3008000);    }
     {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xF5700000;    _gfx->words.w1 = 0x07094260;    }
     {    Gfx *_gfx = (Gfx *)(gfx++);    _gfx->words.w0 = 0xE6000000;    _gfx->words.w1 = 0;    }
@@ -257,18 +261,37 @@ void func_81003A54(Gfx* gfx) {
         break;
     default:
         {
+#if defined(VERSION_JP)
+        sp34 = D_8006FF00[temp_t0].name;
+#else
         sp34 = Text_GetString(0, 0, D_8267E760, temp_t0);
+#endif
         sprintf(D_81004BB8, "%s     ", sp34);
         temp_v1 = D_81004BB0 - 3;
+#if defined(VERSION_JP)
+        // Japanese names are two-byte EUC-JP characters; masking the pair with 0x7F7F gives
+        // the JIS code that this build's Font_MapGlyphCode maps to a glyph index.
+        //@asm/jp/graphics_textures.s
+        sp4D = Font_MapGlyphCode((u16) (((D_81004BB8[temp_v1 * 2] << 8) + D_81004BB8[temp_v1 * 2 + 1]) & 0x7F7F));
+#else
         sp4D = Font_MapGlyphCode((u8) D_81004BB8[temp_v1]);
+#endif
         sp2C = 0xA - Util_Strlen((s8*)sp34);
         sp30 = Gfx_AllocDisplayList(sizeof(Mtx));
+#if defined(VERSION_JP)
+        guTranslate(sp30, (f32) sp2C * 22.0f, 0.0f, 0.0f);
+#else
         guTranslate(sp30, (f32) sp2C * 32.0f, 0.0f, 0.0f);
+#endif
         gSPMatrix(gfx++, sp30, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         break;
         }
     }
+#if defined(VERSION_JP)
+    gDPLoadTextureTile(gfx++, Util_ConvertAddrToVirtAddr(D_3000210 + ((sp4D & 0xF) << 4) + ((((sp4D & 0xF0) >> 4) << 4) << 8)), G_IM_FMT_IA, G_IM_SIZ_8b, 256, 17, 0, 0, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#else
     gDPLoadTextureTile(gfx++, Util_ConvertAddrToVirtAddr(D_3000000 + ((sp4D & 0xF) << 4) + ((((sp4D & 0xF0) >> 4) << 4) << 8)), G_IM_FMT_IA, G_IM_SIZ_8b, 256, 17, 0, 0, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#endif
     gSPEndDisplayList(gfx++);
     D_81004BB0++;
 }

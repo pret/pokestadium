@@ -79,6 +79,10 @@ void Diorama_DrawFullscreenTexture(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 a
     gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
+// The Japanese build has no scrolling end caption: its Diorama_RenderFrame goes from
+// Diorama_DrawFadeOverlay straight to BgStage_AdvanceFrame, and this file ends after
+// Diorama_DrawFullscreenTexture (ROM 0x179F70-0x17A6C0).
+#if !defined(VERSION_JP)
 void Diorama_DrawEndCaption(void) {
     static s32 D_86B0BD50 = 0;
 
@@ -111,3 +115,4 @@ void Diorama_DrawEndCaption(void) {
         }
     }
 }
+#endif

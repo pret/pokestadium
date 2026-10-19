@@ -402,6 +402,63 @@ s32 Text_CompareU16Terminated(u16* a0, u16* a1) {
     return 0;
 }
 
+#if defined(VERSION_JP)
+// Compares two zero-terminated two-byte (EUC-JP) strings. The first pass
+// subtracts 0x100 from every code whose lead byte is 0xA5 (katakana row), which
+// maps it onto the matching 0xA4 hiragana code so both kana scripts sort
+// together; ties are then broken by an exact code comparison.
+s32 Text_CompareGlyphCodes(u8* a0, u8* a1) {
+    u16* arg0 = (u16*)a0;
+    u16* arg1 = (u16*)a1;
+    s32 tmpa;
+    s32 tmpb;
+    s32 tmp;
+    s32 tmpc;
+    s32 tmpd;
+
+    while (true) {
+        tmpa = *arg0;
+        tmpb = *arg1;
+        if (*(u8*)arg0 == 0xA5) {
+            tmpa -= 0x100;
+        }
+        if (*(u8*)arg1 == 0xA5) {
+            tmpb -= 0x100;
+        }
+
+        tmp = tmpa - tmpb;
+        if (tmp != 0) {
+            return tmp;
+        }
+
+        if (tmpa == 0) {
+            arg0 = (u16*)a0;
+            arg1 = (u16*)a1;
+            break;
+        }
+
+        arg0++;
+        arg1++;
+    }
+
+    while (true) {
+        tmpc = *arg0++;
+
+        tmpd = tmpc - *arg1;
+        if (tmpd != 0) {
+            return tmpd;
+        }
+
+        if (tmpc == 0) {
+            break;
+        }
+
+        arg1++;
+    }
+
+    return 0;
+}
+#else
 static u16 D_80075690[0x100] = {
     0,      0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
@@ -486,6 +543,7 @@ s32 Text_CompareGlyphCodes(u8* arg0, u8* arg1) {
 
     return 0;
 }
+#endif
 
 void Vec2f_Normalize(f32* arg0) {
     f32 temp_fv0_2 = sqrtf(SQ(arg0[1]) + SQ(arg0[0]));

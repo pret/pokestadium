@@ -1161,13 +1161,18 @@ Gfx* func_81407590(Gfx* arg0, arg1_func_81407874_014* arg1) {
         if (var_a3->unk_1C != NULL) {
             gSPSetGeometryMode(arg0++, G_TEXTURE_GEN);
             gSPTexture(arg0++, var_a3->unk_1C->unk_00, var_a3->unk_1C->unk_02, 0, G_TX_RENDERTILE, G_ON);
-        } else if (var_a3->unk_04 != 0) {
+        }
+#if !defined(VERSION_JP)
+        // JP has neither the full-scale gSPTexture used when unk_1C is NULL and unk_04 is
+        // set, nor the G_TT_NONE TLUT reset for unk_04 != 0.
+        else if (var_a3->unk_04 != 0) {
             gSPTexture(arg0++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
         }
 
         if (var_a3->unk_04 != 0) {
             gDPSetTextureLUT(arg0++, G_TT_NONE);
         }
+#endif
 
         arg0 = ParticleGfx_LoadPrimaryDescriptorTexture(arg0, arg1);
     }
