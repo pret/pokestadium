@@ -588,7 +588,7 @@ void BattleScene_TickRow3PostEffectCamera(ActivePokemon* active_pokemon) {
             } else if (sBattleMoveFailed != 0) {
                 BattleAnim_PlaySpeciesReactionSound(active_pokemon, sp24, 2);
             } else {
-                if ((sp24->usedMove == 0x2D) || (sp24->usedMove == 0x2E) || (sp24->usedMove == 0x59)) {
+                if ((sp24->usedMove == GROWL) || (sp24->usedMove == ROAR) || (sp24->usedMove == EARTHQUAKE)) {
                     BattleScene_StartCameraShake(active_pokemon);
                 }
                 BattleAnim_PlaySpeciesReactionSound(active_pokemon, sp24, 0);
@@ -627,7 +627,7 @@ void func_843031A0(ActivePokemon* active_pokemon) {
 
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[temp_v1->usedMove - 1];
 
-    if (temp_v1->usedMove == 0x6A) {
+    if (temp_v1->usedMove == HARDEN) {
         Model_SetMaterialTextureMode(&active_pokemon->displayObject, 1);
     }
 }
@@ -701,7 +701,7 @@ void BattleScene_TickRow19PlayMoveEffectScript(ActivePokemon* active_pokemon) {
 
     sp20 = &active_pokemon->state.runtime;
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp20->usedMove - 1];
-    if (sp20->usedMove == 0x9A) {
+    if (sp20->usedMove == FURY_SWIPES) {
         var_v0 = sCurrentAnimation->unk_04 + 0x1E;
     } else {
         var_v0 = sCurrentAnimation->unk_04 + 1;
@@ -808,7 +808,7 @@ void BattleScene_EnterRow4StartHitReactionAnim(ActivePokemon* active_pokemon) {
             Cry_Play(0xC8, 5);
         }
 
-        if ((sBattleMoveFailed == 0) && (sp28->usedMove == 0x49)) {
+        if ((sBattleMoveFailed == 0) && (sp28->usedMove == LEECH_SEED)) {
             sCurrentAnimation = &D_84384570[sp40]->unk_A80;
         }
 
@@ -1120,11 +1120,11 @@ void BattleScene_TickRow8PlayMoveEffectScriptB(ActivePokemon* active_pokemon) {
     if ((active_pokemon->animationTimer == (sCurrentAnimation->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         BattleAnim_PlayMoveEffectScriptB(active_pokemon, temp_s1_2->usedMove);
 
-        if (temp_s1_2->usedMove == 0x13) {
+        if (temp_s1_2->usedMove == FLY) {
             BattleScene_SetParticipantModelFlags(active_pokemon, 3, 0);
         }
 
-        if ((temp_s1_2->usedMove == 0x5B) && (sp22 != 0x31) && (sp22 != 0x32)) {
+        if ((temp_s1_2->usedMove == DIG) && (sp22 != 0x31) && (sp22 != 0x32)) {
             BattleScene_SetParticipantModelFlags(active_pokemon, 5, 0);
             BattleAnim_QueueEffectList(4, active_pokemon);
         }
@@ -1160,7 +1160,7 @@ void BattleScene_EnterRow9QueueEffectList6(ActivePokemon* active_pokemon) {
     BattleMonRuntime* ptr = &sActivePokemon[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->state.runtime;
 
     if (ptr->unk_4C & 0x20) {
-        if ((ptr->usedMove == 0x14) || (ptr->usedMove == 0x23) || (ptr->usedMove == 0x51)) {
+        if ((ptr->usedMove == BIND) || (ptr->usedMove == WRAP) || (ptr->usedMove == STRING_SHOT)) {
             BattleAnim_QueueEffectList6(2, active_pokemon);
             BattleScene_SetParticipantModelFlags(active_pokemon, 0x10, 0);
         }
@@ -1295,7 +1295,7 @@ void func_8430506C(ActivePokemon* active_pokemon) {
     sActivePokemon[sp40]->animationTimer = 0;
 
     if (!(sp3C->unk_34 & 0x4000) && !(sp3C->unk_34 & 2)) {
-        if ((sp28->usedMove == 0x91) && (D_843C4DEC < 0xA)) {
+        if ((sp28->usedMove == BUBBLE) && (D_843C4DEC < 0xA)) {
             sCurrentAnimation = &D_84384570[sp40]->unk_000[sp48];
         }
 
@@ -1332,7 +1332,7 @@ void BattleScene_TickRow14PlayMoveEffectEnd(ActivePokemon* active_pokemon) {
 
     if ((sActivePokemon[sp2C == 0]->animationTimer == (sCurrentAnimation->unk_07 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         BattleAnim_CleanupEffects(1);
-        if (((sp1C->usedMove == 0x30) || (sp1C->usedMove == 0x6D)) && (sp24->unk_4C & 0x80) && (sBattleMoveFailed == 0) &&
+        if (((sp1C->usedMove == SUPERSONIC) || (sp1C->usedMove == CONFUSE_RAY)) && (sp24->unk_4C & 0x80) && (sBattleMoveFailed == 0) &&
             (D_843C4E44 == 1)) {
             BattleAnim_PlayBattleSequenceById(sActivePokemon[sp2C == 0], 0x12);
         }

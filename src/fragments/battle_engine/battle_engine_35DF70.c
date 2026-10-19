@@ -1,4 +1,5 @@
 #include "battle_engine.h"
+#include "moves.h"
 #include "src/text_system.h"
 
 typedef void (*func_D_8438AE50)(void);
@@ -149,7 +150,7 @@ void Battle_Effect_Poison(void) {
         }
 
         gBattleTarget->unk_15 |= 8;
-        if (gBattleUser->moveCache.lastMove == 0x5C) {
+        if (gBattleUser->moveCache.lastMove == TOXIC) {
             gBattleTarget->unk_4E |= 1;
             gBattleTarget->unk_51 = 0;
             Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
@@ -223,7 +224,7 @@ void Battle_Effect_SecondaryStatusChance(void) {
 
     if ((gBattleTarget->unk_16[6] != (*gBattleUser).moveCache.unk_03) &&
         (gBattleTarget->unk_16[7] != (*gBattleUser).moveCache.unk_03)) {
-        if ((gBattleUser->moveCache.unk_01 < 7) || ((D_8438AC60[0] != 2) && (gBattleUser->moveCache.lastMove == 0x3B))) {
+        if ((gBattleUser->moveCache.unk_01 < 7) || ((D_8438AC60[0] != 2) && (gBattleUser->moveCache.lastMove == BLIZZARD))) {
             if (Battle_Random() >= 0x1A) {
                 return;
             }
@@ -324,7 +325,7 @@ void Battle_ApplyRageStatBoost(void) {
             }
         }
 
-        if (gBattleUser->moveCache.lastMove == 0x6B) {
+        if (gBattleUser->moveCache.lastMove == MINIMIZE) {
             gBattleUser->unk_56 = 1;
         }
 
@@ -357,7 +358,7 @@ void Battle_Effect_RaiseOwnStat(void) {
     u16* sp1C;
     u16* sp18;
 
-    if (gBattleUser->moveCache.lastMove == 0x6E) {
+    if (gBattleUser->moveCache.lastMove == WITHDRAW) {
         sBattleScene.unk_00->unk_48 = 0x26;
     } else {
         sBattleScene.unk_00->unk_48 = 7;
@@ -415,7 +416,7 @@ void Battle_Effect_RaiseOwnStat(void) {
             }
         }
 
-        if (gBattleUser->moveCache.lastMove == 0x6B) {
+        if (gBattleUser->moveCache.lastMove == MINIMIZE) {
             gBattleUser->unk_56 = 1;
         }
 
@@ -584,7 +585,7 @@ void Battle_Effect_Thrash(void) {
 }
 
 void Battle_Effect_ForceSwitchOrFlee(void) {
-    if (gBattleUser->moveCache.lastMove == 0x64) {
+    if (gBattleUser->moveCache.lastMove == TELEPORT) {
         sBattleScene.unk_00->unk_48 = 0x27;
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x53);
         return;
@@ -662,9 +663,9 @@ void Battle_Effect_TwoTurnMove(void) {
     sBattleScene.unk_00->unk_48 = 0xE;
     gBattleUser->unk_4C |= 0x10;
 
-    if ((gBattleUser->moveCache.unk_01 == 0x2B) || (gBattleUser->moveCache.lastMove == 0x5B)) {
+    if ((gBattleUser->moveCache.unk_01 == 0x2B) || (gBattleUser->moveCache.lastMove == DIG)) {
         gBattleUser->unk_4C |= 0x40;
-        if (gBattleUser->moveCache.lastMove == 0x5B) {
+        if (gBattleUser->moveCache.lastMove == DIG) {
             sBattleScene.unk_00->unk_48 = 0xD;
         }
 
@@ -745,7 +746,7 @@ void Battle_Effect_Recoil(void) {
 
     gBattleUser->unk_12 = gBattleUser->unk_0C;
 
-    if (gBattleUser->moveCache.lastMove == 0xA5) {
+    if (gBattleUser->moveCache.lastMove == STRUGGLE) {
         var_v1 = gBattleDamage >> 1;
     } else {
         var_v1 = gBattleDamage >> 2;
@@ -1001,7 +1002,7 @@ void Battle_Effect_Heal(void) {
 
     sBattleScene.unk_00->unk_48 = 0x15;
     if (gBattleUser->unk_0C != gBattleUser->unk_28) {
-        if (gBattleUser->moveCache.lastMove == 0x9C) {
+        if (gBattleUser->moveCache.lastMove == REST) {
             temp_v0 = gBattleUser->unk_15;
 
             gBattleUser->unk_15 = 2;

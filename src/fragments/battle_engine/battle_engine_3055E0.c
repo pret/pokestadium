@@ -1,4 +1,5 @@
 #include "battle_engine.h"
+#include "moves.h"
 #include "src/geo_render.h"
 #include "src/matrix.h"
 
@@ -1105,7 +1106,7 @@ void BattleScene_SetCameraOwnerShot(CameraNode* arg0, ActivePokemon* arg1) {
     sBattleScene.unk_00->unk_D0.x = BattleScene_GetParticipantModelXOffset(arg1);
     sBattleScene.unk_00->unk_D0.z = 0.0f;
 
-    if (arg1->state.runtime.moveCache.lastMove == 0x6E) {
+    if (arg1->state.runtime.moveCache.lastMove == WITHDRAW) {
         D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 4.5f, 300.0f);
         if (D_843901F0 <= 100.0f) {
             D_843901F0 = 100.0f;
