@@ -350,7 +350,7 @@ void Battle_ResetFaintBatches(void) {
     for (side_index = 0; side_index < 2; side_index++, side++) {
         for (trainer_index = 0; trainer_index < side->unk_01; trainer_index++) {
             roster = side->teamMember[trainer_index];
-            for (pokemon_index = 0; pokemon_index < roster->numberOfPokemonChosen; pokemon_index++) {
+            for (pokemon_index = 0; pokemon_index < roster->numberOfPokemonBrought; pokemon_index++) {
                 roster->pokemonPicked[pokemon_index].unk_25 = 0;
             }
         }
@@ -371,7 +371,7 @@ void Battle_UpdateFaintBatches(void) {
     for (side_index = 0; side_index < 2; side_index++, side++) {
         for (trainer_index = 0; trainer_index < side->unk_01; trainer_index++) {
             roster = side->teamMember[trainer_index];
-            for (pokemon_index = 0; pokemon_index < roster->numberOfPokemonChosen; pokemon_index++) {
+            for (pokemon_index = 0; pokemon_index < roster->numberOfPokemonBrought; pokemon_index++) {
                 if ((roster->pokemonPicked[pokemon_index].unk_25 == 0) && (roster->pokemonPicked[pokemon_index].unk_02 == 0)) {
                     found_faint = 1;
                     roster->pokemonPicked[pokemon_index].unk_25 = sNextFaintBatch;
@@ -563,7 +563,7 @@ void Battle_SelectComRoster(void) {
             func_843831A0(player_roster, NULL, com_roster, com_roster->unk_018 & 0xFF, order_of_picked_pokemon, gSessionContext.ruleCategory, number_of_pokemon_picked);
         }
         Battle_CompleteRosterOrder(order_of_picked_pokemon, number_of_pokemon_picked);
-        com_roster->numberOfPokemonChosen = number_of_pokemon_picked;
+        com_roster->numberOfPokemonBrought = number_of_pokemon_picked;
 
         for (i = 0; i < com_roster->rosterInfo->numberOfPokemonCanBePicked; i++) {
             com_roster->pokemonPicked[i] = com_roster->rosterInfo->unk_028[order_of_picked_pokemon[i]];

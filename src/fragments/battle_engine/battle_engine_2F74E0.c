@@ -320,7 +320,7 @@ void BattleScene_AutoSelectReplacementMon(ActivePokemon* arg0) {
     s32 i;
     ActivePokemonState* sp1C = &arg0->state;
 
-    for (i = 0; i < arg0->sessionTeams->teamMember[0]->numberOfPokemonChosen; i++) {
+    for (i = 0; i < arg0->sessionTeams->teamMember[0]->numberOfPokemonBrought; i++) {
         if ((arg0->sessionTeams->teamMember[0]->pokemonPicked[i].unk_02 != 0) && (i != sp1C->unk_08)) {
             BattleAnim_PlaySoundEffect2();
             sp1C->unk_1C = 0;
@@ -743,7 +743,7 @@ void BattleScene_HandlePartySlotCursorInput(ActivePokemon* arg0, Controller* arg
     temp_a1 = arg0->sessionTeams->teamMember[sp1C->unk_2C];
     arg1 = sp1C->unk_C8;
 
-    if (temp_a1->numberOfPokemonChosen < 4) {
+    if (temp_a1->numberOfPokemonBrought < 4) {
         if (BTN_IS_PRESSED(arg1, BTN_CUP)) {
             sp1C->unk_18 = 0;
         } else if (BTN_IS_PRESSED(arg1, BTN_CRIGHT)) {
@@ -785,7 +785,7 @@ void BattleScene_HandlePartySlotCursorInput(ActivePokemon* arg0, Controller* arg
                 BattleAnim_PlaySoundEffect8();
                 BattleScene_QueuePartySelectionConfirmMessage(arg0);
             }
-        } else if (((temp_a1->numberOfPokemonChosen - 1) >= sp1C->unk_18) && (BattleScene_ValidateSelectedPartyMember(arg0) != 0)) {
+        } else if (((temp_a1->numberOfPokemonBrought - 1) >= sp1C->unk_18) && (BattleScene_ValidateSelectedPartyMember(arg0) != 0)) {
             BattleAnim_PlaySoundEffect2();
             sp1C->unk_1C = 0;
             sp1C->unk_1E = 0;

@@ -124,7 +124,7 @@ s32 PikachuReward_FindPikachuOnCart(void) {
 
     var_v1 = gSessionContext.battleSides[0].teamMember[0];
 
-    for (i = 0; i < var_v1->numberOfPokemonChosen; i++) {
+    for (i = 0; i < var_v1->numberOfPokemonBrought; i++) {
         if (var_v1->pokemonPicked[i].unk_00.unk_00 == 0x19) {
             D_832027C8.unk_00 = (var_v1->pokemonPicked[i].unk_52 & 0x70) >> 4;
             D_832027C8.unk_01 = var_v1->pokemonPicked[i].unk_52 & 0xF;

@@ -304,7 +304,7 @@ void Battle_ApplyRageStatBoost(void) {
 
                 case 2:
                     sp18 = &gBattleUser->unk_3C;
-                    sp1C = &gBattleUser->unk_2E;
+                    sp1C = &gBattleUser->speed;
                     sp28 = 1;
                     break;
 
@@ -395,7 +395,7 @@ void Battle_Effect_RaiseOwnStat(void) {
 
                 case 2:
                     sp18 = &gBattleUser->unk_3C;
-                    sp1C = &gBattleUser->unk_2E;
+                    sp1C = &gBattleUser->speed;
                     sp28 = 1;
                     break;
 
@@ -511,7 +511,7 @@ void Battle_Effect_LowerStat(void) {
                     case 2:
                         sp28 = 1;
                         sp18 = &gBattleTarget->unk_3C;
-                        sp1C = &gBattleTarget->unk_2E;
+                        sp1C = &gBattleTarget->speed;
                         break;
 
                     case 3:
@@ -651,7 +651,7 @@ void Battle_Effect_Flinch(void) {
 void Battle_Effect_OHKO(void) {
     gBattleDamage = 0;
     sBattleCritFlag = 0xFF;
-    if (gBattleUser->unk_2E < gBattleTarget->unk_2E) {
+    if (gBattleUser->speed < gBattleTarget->speed) {
         sBattleMoveFailed = 1;
         return;
     }
@@ -962,11 +962,11 @@ void Battle_Effect_Haze(void) {
 
     temp_t0->unk_2A = temp_t0->unk_38;
     temp_t0->unk_2C = temp_t0->unk_3A;
-    temp_t0->unk_2E = temp_t0->unk_3C;
+    temp_t0->speed = temp_t0->unk_3C;
     temp_t0->unk_30 = temp_t0->unk_3E;
     temp_a3->unk_2A = temp_a3->unk_38;
     temp_a3->unk_2C = temp_a3->unk_3A;
-    temp_a3->unk_2E = temp_a3->unk_3C;
+    temp_a3->speed = temp_a3->unk_3C;
     temp_a3->unk_30 = temp_a3->unk_3E;
 
     if ((gBattleTarget->unk_15 & 0x27) && !(gBattleTarget->unk_4C & 0x10)) {
@@ -1012,7 +1012,7 @@ void Battle_Effect_Heal(void) {
                 if (D_8438AC60[0] == 1) {
                     gBattleUser->unk_4E &= ~1;
                     Battle_ApplyStatStageMultiplier(&gBattleUser->unk_2A, gBattleUser->unk_38, gBattleUser->unk_5C[0]);
-                    Battle_ApplyStatStageMultiplier(&gBattleUser->unk_2E, gBattleUser->unk_3C, gBattleUser->unk_5C[2]);
+                    Battle_ApplyStatStageMultiplier(&gBattleUser->speed, gBattleUser->unk_3C, gBattleUser->unk_5C[2]);
                 }
                 Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[sBattleScene.unk_00->unk_2C]));
                 Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x35);
@@ -1079,7 +1079,7 @@ void Battle_Effect_Transform(void) {
         gBattleUser->unk_24 = gBattleTarget->unk_24;
         gBattleUser->unk_2A = gBattleTarget->unk_2A;
         gBattleUser->unk_2C = gBattleTarget->unk_2C;
-        gBattleUser->unk_2E = gBattleTarget->unk_2E;
+        gBattleUser->speed = gBattleTarget->speed;
         gBattleUser->unk_30 = gBattleTarget->unk_30;
 
         for (i = 0; i < 4; i++) {

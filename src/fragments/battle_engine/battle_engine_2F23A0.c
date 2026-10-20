@@ -4,6 +4,7 @@
 #include "src/model_renderer.h"
 #include "src/text_system.h"
 #include "src/matrix.h"
+#include "pokemon.h"
 
 s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_length) {
     while (array_length--) {
@@ -23,9 +24,9 @@ BattleMon* BattleScene_GetParticipantSessionMon(ActivePokemon* active_pokemon) {
 }
 
 s32 BattleScene_IsPartnerPikachu(ActivePokemon* active_pokemon) {
-    BattleMon* temp_v0 = BattleScene_GetParticipantSessionMon(active_pokemon);
+    BattleMon* pokemon = BattleScene_GetParticipantSessionMon(active_pokemon);
 
-    if ((active_pokemon->displayObject.objectType == 0x19) && (temp_v0->unk_52 & 0x80)) {
+    if ((active_pokemon->displayObject.objectType == PIKACHU) && (pokemon->unk_52 & 0x80)) {
         return 1;
     }
     return 0;
@@ -49,18 +50,18 @@ f32 BattleScene_GetParticipantEyeHeight(ActivePokemon* active_pokemon) {
 
 void BattleScene_PositionParticipantModel(ActivePokemon* active_pokemon) {
     if (BattleScene_GetParticipantSideIndex(active_pokemon) == 0) {
-        if (active_pokemon->displayObject.objectType == 0x82) {
+        if (active_pokemon->displayObject.objectType == GYARADOS) {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -225.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
-        } else if ((active_pokemon->displayObject.objectType == 3) || (active_pokemon->displayObject.objectType == 0x83)) {
+        } else if ((active_pokemon->displayObject.objectType == CHARIZARD) || (active_pokemon->displayObject.objectType == LAPRAS)) {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -175.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
-        } else if (active_pokemon->displayObject.objectType == 0x5F) {
+        } else if (active_pokemon->displayObject.objectType == ONIX) {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -225.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 7.5000005f);
         } else {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -150.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
         }
-    } else if ((active_pokemon->displayObject.objectType == 0x82) || (active_pokemon->displayObject.objectType == 0x5F)) {
+    } else if ((active_pokemon->displayObject.objectType == GYARADOS) || (active_pokemon->displayObject.objectType == ONIX)) {
         Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, 225.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
-    } else if ((active_pokemon->displayObject.objectType == 3) || (active_pokemon->displayObject.objectType == 0x83)) {
+    } else if ((active_pokemon->displayObject.objectType == 3) || (active_pokemon->displayObject.objectType == LAPRAS)) {
         Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, 175.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
     } else {
         Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, 150.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
@@ -69,41 +70,41 @@ void BattleScene_PositionParticipantModel(ActivePokemon* active_pokemon) {
 
 f32 BattleScene_GetParticipantModelXOffset(ActivePokemon* active_pokemon) {
     if (BattleScene_GetParticipantSideIndex(active_pokemon) == 0) {
-        if ((active_pokemon->displayObject.objectType == 0x82) || (active_pokemon->displayObject.objectType == 0x5F)) {
+        if ((active_pokemon->displayObject.objectType == GYARADOS) || (active_pokemon->displayObject.objectType == ONIX)) {
             return -200.0f;
         }
 
-        if ((active_pokemon->displayObject.objectType == 3) || (active_pokemon->displayObject.objectType == 0x83)) {
+        if ((active_pokemon->displayObject.objectType == CHARIZARD) || (active_pokemon->displayObject.objectType == LAPRAS)) {
             return -175.0f;
         }
         return -150.0f;
     }
 
-    if ((active_pokemon->displayObject.objectType == 0x82) || (active_pokemon->displayObject.objectType == 0x5F)) {
+    if ((active_pokemon->displayObject.objectType == GYARADOS) || (active_pokemon->displayObject.objectType == ONIX)) {
         return 200.0f;
     }
 
-    if ((active_pokemon->displayObject.objectType == 3) || (active_pokemon->displayObject.objectType == 0x83)) {
+    if ((active_pokemon->displayObject.objectType == CHARIZARD) || (active_pokemon->displayObject.objectType == LAPRAS)) {
         return 175.0f;
     }
 
     return 150.0f;
 }
 
-void BattleScene_SetParticipantModelScale(ActivePokemon* arg0, f32 arg1) {
-    arg0->displayObject.scale.x = arg1;
-    arg0->displayObject.scale.y = arg1;
-    arg0->displayObject.scale.z = arg1;
+void BattleScene_SetParticipantModelScale(ActivePokemon* active_pokemon, f32 scale) {
+    active_pokemon->displayObject.scale.x = scale;
+    active_pokemon->displayObject.scale.y = scale;
+    active_pokemon->displayObject.scale.z = scale;
 }
 
 s32 BattleScene_GetSelectedSideTeamSize(ActivePokemon* active_pokemon) {
-    return active_pokemon->sessionTeams->teamMember[active_pokemon->state.unk_2B]->numberOfPokemonChosen;
+    return active_pokemon->sessionTeams->teamMember[active_pokemon->state.unk_2B]->numberOfPokemonBrought;
 }
 
 s32 BattleScene_GetOpposingSelectedSideTeamSize(ActivePokemon* active_pokemon) {
     s32 idx = active_pokemon->state.unk_2B == 0;
 
-    return active_pokemon->sessionTeams->teamMember[idx]->numberOfPokemonChosen;
+    return active_pokemon->sessionTeams->teamMember[idx]->numberOfPokemonBrought;
 }
 
 s32 BattleScene_GetParticipantSideIndex(ActivePokemon* active_pokemon) {
@@ -440,13 +441,13 @@ s32 Battle_HasUsableMajorStatusTarget(ActivePokemon* active_pokemon) {
 
 s32 BattleScene_GetCombinedTeamSize(ActivePokemon* active_pokemon) {
     if (active_pokemon->sessionTeams->unk_01 != 2) {
-        return active_pokemon->sessionTeams->teamMember[0]->numberOfPokemonChosen;
+        return active_pokemon->sessionTeams->teamMember[0]->numberOfPokemonBrought;
     }
-    return active_pokemon->sessionTeams->teamMember[1]->numberOfPokemonChosen + active_pokemon->sessionTeams->teamMember[0]->numberOfPokemonChosen;
+    return active_pokemon->sessionTeams->teamMember[1]->numberOfPokemonBrought + active_pokemon->sessionTeams->teamMember[0]->numberOfPokemonBrought;
 }
 
 u8 BattleScene_GetRosterTeamSize(TeamRoster* arg0) {
-    return arg0->numberOfPokemonChosen;
+    return arg0->numberOfPokemonBrought;
 }
 
 s32 BattleScene_GetParticipantDisplayPlayerNumber(ActivePokemon* active_pokemon) {

@@ -99,7 +99,7 @@ typedef struct ExtendedRosterInfo {
 typedef struct TeamRoster {
     /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
-    /* 0x002 */ u8 numberOfPokemonChosen;
+    /* 0x002 */ u8 numberOfPokemonBrought;
     /* 0x004 */ Controller* controller;
     /* 0x008 */ char unk_008[4];
     /* 0x00C */ char unk00C[0xC];

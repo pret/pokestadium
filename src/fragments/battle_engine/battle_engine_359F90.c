@@ -2,6 +2,7 @@
 #include "src/gb_data.h"
 #include "src/text_system.h"
 #include "src/matrix.h"
+#include "moves.h"
 
 typedef struct unk_D_843C4DA0 {
     /* 0x00 */ u16 unk_00;
@@ -144,7 +145,7 @@ static s32 D_8438AE3C = 0x4D2;
 static u32 D_8438AE40 = 0x1A85;
 static u32 D_8438AE44 = 0x3039;
 static u32 D_8438AE48 = 0x10932;
-static u8 gHighCritMoves[] = { 2, 0x4B, 0x98, 0xA3 };
+static u8 sHighCritMoves[] = { KARATE_CHOP, RAZOR_LEAF, CRABHAMMER, SLASH };
 
 void func_8436F6D0(void) {
 }
@@ -240,14 +241,14 @@ void Battle_ResetTransientRuntimeState(s32 arg0, s32 arg1) {
     D_843C4DA3 = 1;
 }
 
-void func_8436FA80(ActivePokemon* arg0) {
+void func_8436FA80(ActivePokemon* active_pokemon) {
     ActivePokemonState* sp1C = &sActivePokemon[0]->state;
     ActivePokemonState* sp18 = &sActivePokemon[1]->state;
     BattleMonRuntime* temp_a1 = &sActivePokemon[0]->state.runtime;
     BattleMonRuntime* temp_a2 = &sActivePokemon[1]->state.runtime;
     s32 var_v0;
 
-    if (arg0 == sActivePokemon[0]) {
+    if (active_pokemon == sActivePokemon[0]) {
         var_v0 = ((sp1C->unk_28 - temp_a2->unk_0C) * 0x19) / (temp_a2->unk_28 >> 2);
     } else {
         var_v0 = ((sp18->unk_28 - temp_a1->unk_0C) * 0x19) / (temp_a1->unk_28 >> 2);
@@ -280,31 +281,31 @@ void Battle_ApplyDamageRandomFactor(void) {
     }
 }
 
-u16 Battle_DetermineMoveOrder(ActivePokemon* arg0, ActivePokemon* arg1) {
-    BattleMonRuntime* ptr1 = &arg0->state.runtime;
-    BattleMonRuntime* ptr2 = &arg1->state.runtime;
+u16 Battle_DetermineMoveOrder(ActivePokemon* pokemon, ActivePokemon* other_pokemon) {
+    BattleMonRuntime* runtime = &pokemon->state.runtime;
+    BattleMonRuntime* other_runtime = &other_pokemon->state.runtime;
 
-    if (ptr1->usedMove == 0x62) {
-        if (ptr2->usedMove != 0x62) {
+    if (runtime->usedMove == QUICK_ATTACK) {
+        if (other_runtime->usedMove != QUICK_ATTACK) {
             return 0;
         }
-    } else if (ptr2->usedMove == 0x62) {
+    } else if (other_runtime->usedMove == QUICK_ATTACK) {
         return 1;
     }
 
-    if (ptr1->usedMove == 0x44) {
-        if (ptr2->usedMove != 0x44) {
+    if (runtime->usedMove == COUNTER) {
+        if (other_runtime->usedMove != COUNTER) {
             return 1;
         }
-    } else if (ptr2->usedMove == 0x44) {
+    } else if (other_runtime->usedMove == COUNTER) {
         return 0;
     }
 
-    if (ptr2->unk_2E < ptr1->unk_2E) {
+    if (other_runtime->speed < runtime->speed) {
         return 0;
     }
 
-    if (ptr1->unk_2E < ptr2->unk_2E) {
+    if (runtime->speed < other_runtime->speed) {
         return 1;
     }
 
@@ -314,12 +315,12 @@ u16 Battle_DetermineMoveOrder(ActivePokemon* arg0, ActivePokemon* arg1) {
     return 1;
 }
 
-s32 func_8436FD54(u8 arg0, u8* arg1, s32 arg2) {
-    while (arg2--) {
-        if (arg0 == *arg1) {
+s32 func_8436FD54(u8 lookup, u8* array, s32 array_length) {
+    while (array_length--) {
+        if (lookup == *array) {
             return 1;
         }
-        arg1++;
+        array++;
     }
 
     return 0;
@@ -694,9 +695,9 @@ void func_84370B0C(ActivePokemon* arg0) {
     BattleMonRuntime* temp_v0 = &arg0->state.runtime;
 
     if (arg0->state.runtime.unk_15 & 0x40) {
-        temp_v0->unk_2E >>= 2;
-        if (temp_v0->unk_2E == 0) {
-            temp_v0->unk_2E = 1;
+        temp_v0->speed >>= 2;
+        if (temp_v0->speed == 0) {
+            temp_v0->speed = 1;
         }
     }
 }
@@ -772,7 +773,7 @@ void func_84370B7C(ActivePokemon* arg0) {
     sp24->unk_28 = sp34->unk_26;
     sp24->unk_2A = sp34->unk_28;
     sp24->unk_2C = sp34->unk_2A;
-    sp24->unk_2E = sp34->unk_2C;
+    sp24->speed = sp34->unk_2C;
     sp24->unk_30 = sp34->unk_2E;
 
     func_84370B0C(arg0);
@@ -1216,7 +1217,7 @@ s32 Battle_CheckCriticalHit(void) {
             sp18 *= 2;
         }
 
-        if (func_8436FD54(gBattleUser->moveCache.lastMove, gHighCritMoves, 4) != 0) {
+        if (func_8436FD54(gBattleUser->moveCache.lastMove, sHighCritMoves, 4) != 0) {
             sp18 *= 4;
         } else {
             sp18 >>= 1;
@@ -1231,7 +1232,7 @@ s32 Battle_CheckCriticalHit(void) {
             }
         }
 
-        if (func_8436FD54(gBattleUser->moveCache.lastMove, gHighCritMoves, 4) != 0) {
+        if (func_8436FD54(gBattleUser->moveCache.lastMove, sHighCritMoves, 4) != 0) {
             sp18 *= 4;
             if (sp18 >= 0x100) {
                 sp18 = 0xFF;
