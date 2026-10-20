@@ -75,7 +75,7 @@ static s32 pad_D_843C4DE4;
 static s32 pad_D_843C4DE8;
 s32 D_843C4DEC;
 static s32 pad_D_843C4DF0[21];
-u8 D_843C4E44;
+u8 sConfused;
 u8 D_843C4E45;
 static s32 pad_D_843C4E48[252];
 BattleMonRuntime* gBattleUser;
@@ -1819,7 +1819,7 @@ void Battle_ResolveMonAction(void) {
     ptr1->unk_2A = 0;
     ptr2->unk_2A = 0;
 
-    D_843C4E44 = 1;
+    sConfused = 1;
     D_843C4E45 = 1;
 
     sBattleScene.unk_00->unk_1A = 0;
@@ -1864,7 +1864,7 @@ void func_84373570(ActivePokemon* arg0) {
     ptr1->unk_12 = 0xFFFF;
     ptr2->unk_12 = 0xFFFF;
 
-    D_843C4E44 = 1;
+    sConfused = 1;
     D_843C4E45 = 1;
 
     sBattleScene.unk_00->unk_48 = 0;

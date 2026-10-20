@@ -5,12 +5,12 @@
 #include "src/text_system.h"
 #include "src/matrix.h"
 
-s32 BattleScene_ByteArrayContains(u8 arg0, u8* arg1, s32 arg2) {
-    while (arg2--) {
-        if (arg0 == *arg1) {
+s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_length) {
+    while (array_length--) {
+        if (lookup == *array) {
             return 1;
         }
-        arg1++;
+        array++;
     }
 
     return 0;

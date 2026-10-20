@@ -967,7 +967,7 @@ extern u8 D_843C4DA9;
 extern u8 D_843C4DAA;
 extern s32 D_843C4DEC;
 //extern unk_D_843C4E44 D_843C4E44;
-extern u8 D_843C4E44;
+extern u8 sConfused;
 extern u8 D_843C4E45;
 extern u16 gBattleDamage;
 extern BattleMonRuntime* gBattleUser;
@@ -1211,7 +1211,7 @@ void BattleScene_TickBothOwnerSlideAnimations(ActivePokemon* arg0, ActivePokemon
 s32 BattleScene_DispatchOwnerCameraLifecycle(s32 arg0, CameraNode* arg1, CameraNode* arg2);
 
 //@src/fragments/battle_engine/battle_engine_2F23A0.c
-s32 BattleScene_ByteArrayContains(u8 arg0, u8* arg1, s32 arg2);
+s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_size);
 BattleMon* BattleScene_GetParticipantSessionMon(ActivePokemon* active_pokemon);
 s32 BattleScene_IsPartnerPikachu(ActivePokemon* active_pokemon);
 f32 BattleScene_GetParticipantModelHeight(ActivePokemon* active_pokemon);
