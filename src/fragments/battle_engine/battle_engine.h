@@ -160,12 +160,8 @@ typedef struct ActivePokemon {
     /* 0x724 */ TeamRoster* unk_724;
     /* 0x728 */ PresentationState unk_728;
     /* 0x8C4 */ MonCaptionState unk_8C4;
-    /* 0x94C */ SpeciesLearnsetBuffer unk_94C;
-    /* 0x96C */ SpeciesLearnsetBuffer unk_96C;
-    /* 0x98C */ SpeciesLearnsetBuffer unk_98C;
-    /* 0x9AC */ SpeciesLearnsetBuffer unk_9AC;
-    /* 0x9CC */ SpeciesLearnsetBuffer unk_9CC;
-    /* 0x9EC */ SpeciesLearnsetBuffer unk_9EC;
+    /* 0x94C */ SpeciesLearnsetBuffer redBlueLearnsets[3];
+    /* 0x9AC */ SpeciesLearnsetBuffer yellowLearnsets[3];
 } ActivePokemon; // size = 0xA0C
 
 typedef struct MovePresentationCue {

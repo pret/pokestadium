@@ -435,14 +435,14 @@ void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon) {
     active_pokemon->state.moveSlotIllegality[2] = 1;
     active_pokemon->state.moveSlotIllegality[3] = 1;
 
-    Battle_MarkIllegalMoves(active_pokemon, active_pokemon->state.runtime.id - 1, &active_pokemon->unk_94C, &active_pokemon->unk_9AC);
+    Battle_MarkIllegalMoves(active_pokemon, active_pokemon->state.runtime.id - 1, &active_pokemon->redBlueLearnsets[0], &active_pokemon->yellowLearnsets[0]);
 
     if (sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->firstPartner != 0) {
-        Battle_MarkIllegalMoves(active_pokemon, sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->firstPartner - 1, &active_pokemon->unk_96C, &active_pokemon->unk_9CC);
+        Battle_MarkIllegalMoves(active_pokemon, sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->firstPartner - 1, &active_pokemon->redBlueLearnsets[1], &active_pokemon->yellowLearnsets[1]);
     }
 
     if (sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->secondPartner != 0) {
-        Battle_MarkIllegalMoves(active_pokemon, sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->secondPartner - 1, &active_pokemon->unk_98C, &active_pokemon->unk_9EC);
+        Battle_MarkIllegalMoves(active_pokemon, sPlayerTagTeam[BattleScene_GetParticipantSideIndex(active_pokemon)]->secondPartner - 1, &active_pokemon->redBlueLearnsets[2], &active_pokemon->yellowLearnsets[2]);
     }
 }
 
@@ -542,14 +542,14 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
     rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (object_type_index * 0x10)) & 0xFFFFFF);
     Dma_WriteChunks(sPlayerTagTeam[side_index], rom_address, rom_address + 0x10, 0);
 
-    Battle_DmaLoadSpeciesLearnsets(object_type_index, &pokemon->unk_94C, &pokemon->unk_9AC);
+    Battle_DmaLoadSpeciesLearnsets(object_type_index, &pokemon->redBlueLearnsets[0], &pokemon->yellowLearnsets[0]);
 
     if (sPlayerTagTeam[side_index]->firstPartner != 0) {
-        Battle_DmaLoadSpeciesLearnsets(sPlayerTagTeam[side_index]->firstPartner - 1, &pokemon->unk_96C, &pokemon->unk_9CC);
+        Battle_DmaLoadSpeciesLearnsets(sPlayerTagTeam[side_index]->firstPartner - 1, &pokemon->redBlueLearnsets[1], &pokemon->yellowLearnsets[1]);
     }
 
     if (sPlayerTagTeam[side_index]->secondPartner != 0) {
-        Battle_DmaLoadSpeciesLearnsets(sPlayerTagTeam[side_index]->secondPartner - 1, &pokemon->unk_98C, &pokemon->unk_9EC);
+        Battle_DmaLoadSpeciesLearnsets(sPlayerTagTeam[side_index]->secondPartner - 1, &pokemon->redBlueLearnsets[2], &pokemon->yellowLearnsets[2]);
     }
 
     if (mark_move_illegality == 1) {
