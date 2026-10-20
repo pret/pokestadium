@@ -4763,7 +4763,7 @@ void BattleAnim_QueueMoveEffect(s32 move_id, ActivePokemon* user, ActivePokemon*
     gBattleAnimTertiaryOwner = user_fallback;
 }
 
-void BattleAnim_QueueMoveEffectScriptA(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
+void BattleAnim_QueueMoveEffectScript(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
     BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternate_anchor);
 }
 
@@ -4774,7 +4774,7 @@ void BattleAnim_QueueMoveEffectEnd(s32 move_id, ActivePokemon* user, ActivePokem
     sBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_END;
 }
 
-void BattleAnim_QueueMoveEffectScriptB(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
+void BattleAnim_QueueChargingMoveEffectScript(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
     BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternate_anchor);
     BattleAnim_SetQueuedEffectList(1);
 }

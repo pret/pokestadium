@@ -134,12 +134,12 @@ void BattleAnim_PlayMoveEffectScript(ActivePokemon* user, s32 move_id) {
 
     target_side_index = BattleScene_GetParticipantSideIndex(user) == 0;
     camera_shot = Battle_GetCameraShotFieldB(user);
-    BattleAnim_QueueMoveEffectScriptA(move_id, user, sActivePokemon[target_side_index], camera_shot, Battle_GetCameraShotFieldC(user));
+    BattleAnim_QueueMoveEffectScript(move_id, user, sActivePokemon[target_side_index], camera_shot, Battle_GetCameraShotFieldC(user));
 }
 
 /**
- * Same as BattleAnim_PlayMoveEffectScript, but also switches the queued
- * effect list to the alternate list (1).
+ * Handles charing moves by routing to BattleAnim_SetQueuedEffectList in @src/fragments/battle_engine/battle_engine_309ED0.c
+ * to qu
  */
 // guess: plays during changing moves like skull base
 // but for some reason connected to fury swipes too?
@@ -150,7 +150,7 @@ void BattleAnim_PlayChargingMoveEffectScript(ActivePokemon* user, s32 move_id) {
 
     target_side_index = BattleScene_GetParticipantSideIndex(user) == 0;
     camera_shot = Battle_GetCameraShotFieldB(user);
-    BattleAnim_QueueMoveEffectScriptB(move_id, user, sActivePokemon[target_side_index], camera_shot, Battle_GetCameraShotFieldC(user));
+    BattleAnim_QueueChargingMoveEffectScript(move_id, user, sActivePokemon[target_side_index], camera_shot, Battle_GetCameraShotFieldC(user));
 }
 
 /**
