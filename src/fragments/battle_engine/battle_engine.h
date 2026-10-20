@@ -160,12 +160,8 @@ typedef struct ActivePokemon {
     /* 0x724 */ TeamRoster* unk_724;
     /* 0x728 */ PresentationState unk_728;
     /* 0x8C4 */ MonCaptionState unk_8C4;
-    /* 0x94C */ SpeciesLearnsetBuffer unk_94C;
-    /* 0x96C */ SpeciesLearnsetBuffer unk_96C;
-    /* 0x98C */ SpeciesLearnsetBuffer unk_98C;
-    /* 0x9AC */ SpeciesLearnsetBuffer unk_9AC;
-    /* 0x9CC */ SpeciesLearnsetBuffer unk_9CC;
-    /* 0x9EC */ SpeciesLearnsetBuffer unk_9EC;
+    /* 0x94C */ SpeciesLearnsetBuffer redBlueLearnsets[3];
+    /* 0x9AC */ SpeciesLearnsetBuffer yellowLearnsets[3];
 } ActivePokemon; // size = 0xA0C
 
 typedef struct MovePresentationCue {
@@ -1105,10 +1101,10 @@ void BattleScene_ReloadMoveResourceList(ActivePokemon* active_pokemon);
 void Battle_MakeSubstitute(ActivePokemon* active_pokemon);
 void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon);
 s32 BattleScene_FindU16InByteArray(u16 lookup_value, u8* array, s32 array_length);
-void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 pokemon_id, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer);
+void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 pokemon_id, SpeciesLearnsetBuffer* red_blue_learnset, SpeciesLearnsetBuffer* yellow_learnset);
 void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon);
 void Battle_DmaLoadLevelUpLearnset(u8 species, u32 destination);
-void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer);
+void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* red_blue_learnset, SpeciesLearnsetBuffer* yellow_learnset);
 void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_move_illegality);
 void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon);
