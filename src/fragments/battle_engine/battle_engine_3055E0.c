@@ -306,8 +306,8 @@ void BattleScene_UpdateCameraModelOffset(ActivePokemon* arg0, CameraNode* arg1) 
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 
-    Vec3f_SetComponentsDuplicate(&arg0->swayState.unk_18, arg0->swayState.layoutConfig.unk_00.x, arg0->swayState.layoutConfig.unk_00.y,
-                  arg0->swayState.layoutConfig.unk_00.z);
+    Vec3f_SetComponentsDuplicate(&arg0->swayState.unk_18, arg0->swayState.layoutConfig.frontCameraShotOffset.x, arg0->swayState.layoutConfig.frontCameraShotOffset.y,
+                  arg0->swayState.layoutConfig.frontCameraShotOffset.z);
     arg0->swayState.unk_18.y = (arg0->displayObject.position.y - BattleScene_GetParticipantModelHeight(arg0)) + arg0->swayState.unk_18.y + sp3C;
     BattleAnim_Vec3fCopy(&sBattleScene.unk_00->unk_B8, &arg1->view.targetPosition);
     BattleAnim_Vec3fCopy(&sBattleScene.unk_00->unk_C4, &arg1->view.eyePosition);

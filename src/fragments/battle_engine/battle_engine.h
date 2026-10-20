@@ -111,7 +111,7 @@ typedef struct SpeciesLearnsetBuffer {
 } SpeciesLearnsetBuffer; // size = 0x20
 
 typedef struct SwayLayoutConfig {
-    /* 0x00 */ Vec3f unk_00;
+    /* 0x00 */ Vec3f frontCameraShotOffset;
     /* 0x0C */ Vec3f unk_0C;
     /* 0x18 */ u8 unk_18;
     /* 0x19 */ u8 unk_19;

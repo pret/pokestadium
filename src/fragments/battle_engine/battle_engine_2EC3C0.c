@@ -478,6 +478,8 @@ void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* fi
  * (the partner Pikachu bank when applicable), model transforms, sway layout,
  * side position record, tag-team partners and learnsets. Optionally rebuilds
  * the move illegality mask.
+ *
+ * Also triggers on using Transform
  */
 void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_move_illegality) {
     s16 linked_record_id;
@@ -526,14 +528,14 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
     rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (object_type_index * 0x20)) & 0xFFFFFF);
     Dma_WriteChunks(&sDefaultSwayLayout, rom_address, rom_address + 0x20, 0);
 
-    BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.unk_00, &sDefaultSwayLayout.unk_00);
+    BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.frontCameraShotOffset, &sDefaultSwayLayout.frontCameraShotOffset);
     BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.unk_0C, &sDefaultSwayLayout.unk_0C);
 
     pokemon->swayState.layoutConfig.unk_18 = sDefaultSwayLayout.unk_18;
     pokemon->swayState.layoutConfig.unk_19 = sDefaultSwayLayout.unk_19;
     pokemon->swayState.layoutConfig.unk_1A = sDefaultSwayLayout.unk_1A;
     pokemon->swayState.layoutConfig.unk_1B = sDefaultSwayLayout.unk_1B;
-    pokemon->swayState.layoutConfig.unk_00.x *= pokemon->unk_4B0;
+    pokemon->swayState.layoutConfig.frontCameraShotOffset.x *= pokemon->unk_4B0;
     pokemon->swayState.layoutConfig.unk_0C.x *= pokemon->unk_4B0;
 
     rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (object_type_index << 4)) & 0xFFFFFF);
