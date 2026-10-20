@@ -139,7 +139,9 @@ void BattleAnim_PlayMoveEffectScript(ActivePokemon* user, s32 move_id) {
 
 /**
  * Handles charing moves by routing to BattleAnim_SetQueuedEffectList in @src/fragments/battle_engine/battle_engine_309ED0.c
- * to qu
+ * to which calls BattleAnim_SetQueuedEffectList unlike BattleAnim_QueueMoveEffectScript
+ * Fury Swipes uses this function as a hack to allow it to both spawn the "slashing" animation of other slashing moves
+ * while also being a mulithit attack.
  */
 // guess: plays during changing moves like skull base
 // but for some reason connected to fury swipes too?
@@ -240,7 +242,7 @@ void BattleScene_ResetOpponentStateFrameCounter(ActivePokemon* active_pokemon) {
  */
 // trigger on up on the dialogue box disappearing after move use
 // used to animate moves that throw rocks
-void BattleAnim_SetOverlayFlagForSpecialMoves(ActivePokemon* active_pokemon) {
+void BattleAnim_SetFlagForRockThrowingMoves(ActivePokemon* active_pokemon) {
     BattleMonRuntime* active_pokemon_runtime = &active_pokemon->state.runtime;
 
     if (active_pokemon_runtime->usedMove == STRENGTH || active_pokemon_runtime->usedMove == ROCK_SLIDE || active_pokemon_runtime->usedMove == ROCK_THROW) {
@@ -253,7 +255,7 @@ void BattleAnim_SetOverlayFlagForSpecialMoves(ActivePokemon* active_pokemon) {
  * Clears render flag 0x2 on both participants.
  */
 // triggers at the end of move animations and at the end of damage animation of using a rock throwing move
-void BattleAnim_ClearOverlayFlag(ActivePokemon* active_pokemon) {
+void BattleAnim_ClearRockThrowingMoveFlag(ActivePokemon* active_pokemon) {
     sActivePokemon[0]->displayObject.node.renderFlags &= ~2;
     sActivePokemon[1]->displayObject.node.renderFlags &= ~2;
 }
@@ -613,7 +615,7 @@ void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon) {
             Battle_ClearRuntimeFlags(active_pokemon, 0x4000);
         }
 
-        BattleAnim_SetOverlayFlagForSpecialMoves(active_pokemon);
+        BattleAnim_SetFlagForRockThrowingMoves(active_pokemon);
         ModelAnim_SetAnimation(&active_pokemon->displayObject, sCurrentAnimation->id);
         BattleAnim_SetModelEventTrackFromRow(active_pokemon, runtime->usedMove - 1);
 
@@ -828,7 +830,7 @@ void BattleScene_EnterRow19StartMoveAnimMidFrame(ActivePokemon* active_pokemon) 
 
     active_pokemon->animationTimer = sCurrentAnimation->unk_06;
     if (!(pokemon_state->flags & 0x4000)) {
-        BattleAnim_SetOverlayFlagForSpecialMoves(active_pokemon);
+        BattleAnim_SetFlagForRockThrowingMoves(active_pokemon);
         ModelAnim_SetAnimation(&active_pokemon->displayObject, sCurrentAnimation->id);
         ModelAnim_SetFrame(&active_pokemon->displayObject, sCurrentAnimation->unk_06);
         if (sCurrentAnimation->unk_01 != 0xFF) {

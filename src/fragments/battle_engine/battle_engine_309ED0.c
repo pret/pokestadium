@@ -568,7 +568,7 @@ void BattleScene_CleanupActionAndAdvance(void) {
     ActivePokemonState* sp1C;
 
     if (sBattleScene.unk_00->unk_34 == 0) {
-        BattleAnim_ClearOverlayFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+        BattleAnim_ClearRockThrowingMoveFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         Audio_FadeAndClearStoredSounds();
         BattleScene_ResetAnimationStep();
 
@@ -598,7 +598,7 @@ void BattleScene_CleanupActionAndAdvance(void) {
         sp24 = &sActivePokemon[sBattleScene.unk_00->unk_2C]->state.runtime;
         sp20 = &sActivePokemon[!sBattleScene.unk_00->unk_2C]->state.runtime;
 
-        BattleAnim_ClearOverlayFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+        BattleAnim_ClearRockThrowingMoveFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         Audio_FadeAndClearStoredSounds();
         BattleScene_ResetAnimationStep();
 
@@ -620,7 +620,7 @@ s32 BattleScene_HandleFaintStatusCompletion(void) {
     BattleMonRuntime* temp_v0 = &D_84390200->state.runtime;
 
     if (((temp_v0->unk_4D & 0x80) || (temp_v0->unk_15 & 0x18)) && ((temp_v0->usedMove & 0xF0) == 0xF0)) {
-        BattleAnim_ClearOverlayFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+        BattleAnim_ClearRockThrowingMoveFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         Audio_FadeAndClearStoredSounds();
         BattleScene_ResetAnimationStep();
         Battle_ActSecondAttacker(3);
@@ -634,14 +634,14 @@ s32 BattleScene_HandleFaintStatusCompletion(void) {
 
 void BattleScene_CompleteActionPhase(void) {
     if ((sBattleScene.unk_00->unk_34 == 0) && ((D_84390200->state.runtime.usedMove & 0xF0) != 0xF0)) {
-        BattleAnim_ClearOverlayFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+        BattleAnim_ClearRockThrowingMoveFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         Audio_FadeAndClearStoredSounds();
         BattleScene_ResetAnimationStep();
         Battle_ActSecondAttacker(3);
         sBattleScene.unk_00->unk_20 = 0;
         sBattleScene.unk_00->unk_14 = 0;
     } else if (BattleScene_HandleFaintStatusCompletion() == 0) {
-        BattleAnim_ClearOverlayFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+        BattleAnim_ClearRockThrowingMoveFlag(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         Audio_FadeAndClearStoredSounds();
         BattleScene_ResetAnimationStep();
         sBattleScene.unk_00->unk_20 = 0;
