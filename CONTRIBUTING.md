@@ -1,8 +1,34 @@
 # Code of Conduct
 
+## General
+
 Don't act a fool.
 
+## Making a PR
+Please read the style guide in full before making a PR.
+
+
+Human and AI-made PRs are evaluated equally, but you must specify in your PR if it is:
+1. Majority Human-produced (0%-20% written by AI)
+2. Ai-assisted (20%-80% written by AI)
+3. Ai-generated (>80% written by AI)
+
+Do **not** merge your PR until the CI-romgate check passes and confirms all versions still match. The only exception is if you PR only touches documenation
+
+### Matching PR
+Please see formatting for unknown tokens and Fakes section in the style guide and conform to them. Beyond that: if it matches, it matches
+
+### Annotation PR
+Please specify broadly what evidence you have for your annotations: either Gameplay evidence, prior knowledge, or hints from the rest of the decomp.
+
+## Documention
+Please do not include excessively long AI-generated `.md` files in your PRs. They will go stale quickly and give other agents undo confidence.
+
+## Respect for the ones who came before
 Never delete `oldnotes`. It stands as a testament to manual decomping that this project stands on.
+
+
+
 
 # Editor setup and cross-file renaming
 
@@ -65,6 +91,8 @@ As the goal of a decomp is to be readable to a wide variety of people (recomp de
 |Struct attributes|`unk_{offset}`|`unk_0A`,`unk_C0`|
 |Function Arguments|`arg{index}`|`arg0`,`arg4`|
 |Local variables|`var_{register}`|`var_v0`,`var_s1`|
+
+Leave functions without a body in the style of `func_{address}` since we can't make any claims about what their original purpose was.
 
 ### Spelling
 Use American English (color, mom, etc.) for all spelling.
