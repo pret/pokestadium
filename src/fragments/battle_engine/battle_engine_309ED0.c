@@ -1029,14 +1029,14 @@ void BattleScene_SetupSendOutOwnerShot(CameraNode* arg0) {
         }
 
         sp44 = (D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.y + temp_s0->displayObject.position.y) + D_84384C30[sp3B].z;
-        sp40 = ((D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.z + D_84384C30[sp3B].y) * temp_s0->unk_4B0) +
+        sp40 = ((D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.z + D_84384C30[sp3B].y) * temp_s0->cameraOffsetScaleFactor) +
                temp_s0->displayObject.position.x;
 
         Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, sp40, sp44, temp_s0->displayObject.position.z);
 
         sp40 = D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.x * D_84384C30[sp3B].x;
         sp3E = D_84384580[sBattleScene.unk_00->unk_2C]->unk_0C;
-        tmp1 = (temp_s0->unk_4B0 * D_84384580[sBattleScene.unk_00->unk_2C]->unk_0E) + BattleScene_GetParticipantFacingAngle(temp_s0);
+        tmp1 = (temp_s0->cameraOffsetScaleFactor * D_84384580[sBattleScene.unk_00->unk_2C]->unk_0E) + BattleScene_GetParticipantFacingAngle(temp_s0);
         Camera_ComputeEyeFromAngles(&arg0->view.targetPosition, &arg0->view.eyePosition, sp40, sp3E, tmp1);
         sBattleScene.unk_00->unk_20++;
     }
@@ -1676,7 +1676,7 @@ void BattleScene_ActionSetupAnimationVariantC(CameraNode* arg0) {
         case 0:
             BattleScene_ResetCameraFrameCounter();
             BattleScene_SetPhaseFlag();
-            Vec3f_SetComponentsDuplicate(&D_843901B0.unk_00, D_84390204->unk_4B0 * -175.0f, 25.0f, 0.0f);
+            Vec3f_SetComponentsDuplicate(&D_843901B0.unk_00, D_84390204->cameraOffsetScaleFactor * -175.0f, 25.0f, 0.0f);
             BattleScene_LoadCameraPreset(&D_84384958, arg0, D_84390204);
             if ((D_84390204->displayObject.objectType != 0x33) && (D_84390204->displayObject.objectType != 0x32)) {
                 BattleAnim_PlayMoveEffectScript(D_84390204, sp18->usedMove);
@@ -2610,7 +2610,7 @@ void BattleScene_Phase12(CameraNode* arg0) {
                 BattleAnim_GetOwnerDefaultAnchorPosition(D_84390204, &sp3C);
                 sp3C.y += BattleAnim_GetOwnerModelHeight(D_84390204);
                 D_84390208 = BattleScene_ScaleCameraDistance(D_84390204, 3.0f, 500.0f);
-                BattleScene_SetCameraEyeFromPosition(arg0, sp3C, 0x11C6, BattleScene_GetParticipantFacingAngle(D_84390204) - (D_84390204->unk_4B0 * 0x754E),
+                BattleScene_SetCameraEyeFromPosition(arg0, sp3C, 0x11C6, BattleScene_GetParticipantFacingAngle(D_84390204) - (D_84390204->cameraOffsetScaleFactor * 0x754E),
                               D_84390208, BattleAnim_GetOwnerModelHeight(D_84390204));
                 Vec3f_SetComponentsDuplicate(&sp3C, 0.0f, 200.0f, 0.0f);
                 BattleAnim_Vec3fCopy(&arg0->view.targetPosition, &sp3C);
@@ -3286,9 +3286,9 @@ void BattleScene_PhaseWithdrawFainted(CameraNode* arg0) {
         case 2:
             BattleScene_ApproachCameraZoom(arg0, temp_s0);
             if (BattleScene_AdvanceCameraFrameCounter(0x69) != 0) {
-                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->cameraOffsetScaleFactor * -150.0f, 0.0, 0.0f);
                 if (sBattleScene.unk_00 && sBattleScene.unk_00) {}
-                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->cameraOffsetScaleFactor * -50.0f, 5.0f, 0.0f);
                 BattleScene_SetParticipantModelFlags(temp_s0, 2, 0);
                 BattleAnim_QueueEffectList3(0xD, temp_s0, temp_s0, 0xFF, 0xFF);
                 sBattleScene.unk_00->unk_20 += 1;
@@ -3369,9 +3369,9 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
                 BattleScene_ResetCameraFrameCounter();
                 BattleBox_Open(0xB);
                 BattleAnim_LoadModeResourceList(temp_s0->sessionTeams, 3);
-                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->unk_4B0 * -150.0f, 0.0, 0.0f);
-                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->unk_4B0 * -50.0f, 5.0f, 0.0f);
-                Vec3f_SetComponentsDuplicate(&temp_s0->displayObject.position, temp_s0->unk_4B0 * -150.0f, 25.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, temp_s0->cameraOffsetScaleFactor * -150.0f, 0.0, 0.0f);
+                Vec3f_SetComponentsDuplicate(&arg0->view.eyePosition, temp_s0->cameraOffsetScaleFactor * -50.0f, 5.0f, 0.0f);
+                Vec3f_SetComponentsDuplicate(&temp_s0->displayObject.position, temp_s0->cameraOffsetScaleFactor * -150.0f, 25.0f, 0.0f);
                 sBattleScene.unk_00->unk_20 += 1;
             } else {
                 BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 30.0f, 0.05f);

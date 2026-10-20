@@ -370,13 +370,13 @@ void BattleScene_IntroCameraStep22Or24(CameraNode* arg0, s32 arg1) {
         }
 
         tmp2 = (D_84384580[arg1]->unk_00.y + temp_s0->displayObject.position.y) + D_84384C30[var_v1].z;
-        tmp1 = ((D_84384580[arg1]->unk_00.z + D_84384C30[var_v1].y) * temp_s0->unk_4B0) + temp_s0->displayObject.position.x;
+        tmp1 = ((D_84384580[arg1]->unk_00.z + D_84384C30[var_v1].y) * temp_s0->cameraOffsetScaleFactor) + temp_s0->displayObject.position.x;
 
         Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, tmp1, tmp2, temp_s0->displayObject.position.z);
 
         tmp1 = D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.x * D_84384C30[var_v1].x;
         tmp4 = D_84384580[sBattleScene.unk_00->unk_2C]->unk_0C;
-        tmp3 = (temp_s0->unk_4B0 * D_84384580[sBattleScene.unk_00->unk_2C]->unk_0E) + BattleScene_GetParticipantFacingAngle(temp_s0);
+        tmp3 = (temp_s0->cameraOffsetScaleFactor * D_84384580[sBattleScene.unk_00->unk_2C]->unk_0E) + BattleScene_GetParticipantFacingAngle(temp_s0);
 
         Camera_ComputeEyeFromAngles(&arg0->view.targetPosition, &arg0->view.eyePosition, tmp1, tmp4, tmp3);
         sBattleScene.unk_00->unk_20++;

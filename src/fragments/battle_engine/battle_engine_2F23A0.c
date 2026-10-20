@@ -175,7 +175,7 @@ u16 Battle_GetActiveMonHp(ActivePokemon* active_pokemon) {
 }
 
 s16 BattleScene_GetParticipantFacingAngle(ActivePokemon* active_pokemon) {
-    return active_pokemon->unk_4B0 << 0xE;
+    return active_pokemon->cameraOffsetScaleFactor << 0xE;
 }
 
 s32 BattleAnim_GetSpeciesBySideIndex(s32 arg0) {
@@ -227,18 +227,18 @@ void BattleAnim_GetOwnerDefaultAnchorPosition(ActivePokemon* arg0, Vec3f* arg1) 
 
 void BattleScene_ComputeParticipantModelOffset(ActivePokemon* arg0, Vec3f* arg1) {
     if (BattleScene_GetParticipantSideIndex(arg0) == 0) {
-        if (arg0->displayObject.objectType == 0x82) {
+        if (arg0->displayObject.objectType == GYARADOS) {
             Vec3f_SetComponentsDuplicate(arg1, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-        } else if ((arg0->displayObject.objectType == 3) || (arg0->displayObject.objectType == 0x83)) {
+        } else if ((arg0->displayObject.objectType == VENUSAUR) || (arg0->displayObject.objectType == LAPRAS)) {
             Vec3f_SetComponentsDuplicate(arg1, -175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-        } else if (arg0->displayObject.objectType == 0x5F) {
+        } else if (arg0->displayObject.objectType == ONIX) {
             Vec3f_SetComponentsDuplicate(arg1, -225.0f, BattleScene_GetParticipantModelHeight(arg0), 7.5000005f);
         } else {
             Vec3f_SetComponentsDuplicate(arg1, -150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
         }
-    } else if ((arg0->displayObject.objectType == 0x82) || (arg0->displayObject.objectType == 0x5F)) {
+    } else if ((arg0->displayObject.objectType == GYARADOS) || (arg0->displayObject.objectType == 0x5F)) {
         Vec3f_SetComponentsDuplicate(arg1, 225.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
-    } else if ((arg0->displayObject.objectType == 3) || (arg0->displayObject.objectType == 0x83)) {
+    } else if ((arg0->displayObject.objectType == VENUSAUR) || (arg0->displayObject.objectType == LAPRAS)) {
         Vec3f_SetComponentsDuplicate(arg1, 175.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);
     } else {
         Vec3f_SetComponentsDuplicate(arg1, 150.0f, BattleScene_GetParticipantModelHeight(arg0), 0.0f);

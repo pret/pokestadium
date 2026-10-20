@@ -485,7 +485,7 @@ void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* re
 void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_move_illegality) {
     s16 linked_record_id;
     s32 side_index;
-    s16 object_type_index;
+    s16 species;
     u32 rom_address;
     UNUSED s32 pad[8];
     BattleMon* battle_mon;
@@ -493,22 +493,22 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
     u32 transform_end;
 
     side_index = BattleScene_GetParticipantSideIndex(pokemon);
-    object_type_index = pokemon->displayObject.objectType - 1;
+    species = pokemon->displayObject.objectType - 1;
 
     battle_mon = &pokemon->sessionTeams->teamMember[pokemon->state.unk_2C]->pokemonPicked[pokemon->state.unk_18];
 
-    rom_address = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[object_type_index] & 0xFFFFFF);
+    rom_address = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[species] & 0xFFFFFF);
     if ((pokemon->displayObject.objectType == PIKACHU) && (battle_mon->unk_52 & 0x80)) {
         rom_address = (u32)_70D3A0_ROM_START + ((u32)D_80075BD0[PARTNER_PIKACHU_CUE_BANK] & 0xFFFFFF);
     }
-    transform_end = ((u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF)) + 0x20;
+    transform_end = ((u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (species << 5)) & 0xFFFFFF)) + 0x20;
     Dma_WriteChunks(sSideBattleCues[side_index], rom_address, rom_address + 0xBC0, 0);
 
-    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF);
+    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (species << 5)) & 0xFFFFFF);
     Dma_WriteChunks(D_84384580[side_index], rom_address, transform_end, 0);
 
     if (side_index == 1) {
-        rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF);
+        rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (species << 5)) & 0xFFFFFF);
         Dma_WriteChunks(D_84384578[side_index], rom_address, rom_address + 0x20, 0);
 
         model_transform = D_84384578[side_index];
@@ -522,30 +522,31 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
             D_84384578[side_index]->unk_10 = linked_record_id;
         }
     } else {
-        rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (object_type_index << 5)) & 0xFFFFFF);
+        rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (species << 5)) & 0xFFFFFF);
         Dma_WriteChunks(D_84384578[side_index], rom_address, rom_address + 0x20, 0);
     }
 
-    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (object_type_index * 0x20)) & 0xFFFFFF);
+    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (species * 0x20)) & 0xFFFFFF);
     Dma_WriteChunks(&sDefaultSwayLayout, rom_address, rom_address + 0x20, 0);
 
     BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.frontCameraShotOffset, &sDefaultSwayLayout.frontCameraShotOffset);
-    BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.unk_0C, &sDefaultSwayLayout.unk_0C);
+    BattleAnim_Vec3fCopy(&pokemon->swayState.layoutConfig.backCameraShotOffset, &sDefaultSwayLayout.backCameraShotOffset);
 
+    // If you zero these 4 attributes out the game soft locks
     pokemon->swayState.layoutConfig.unk_18 = sDefaultSwayLayout.unk_18;
     pokemon->swayState.layoutConfig.unk_19 = sDefaultSwayLayout.unk_19;
     pokemon->swayState.layoutConfig.unk_1A = sDefaultSwayLayout.unk_1A;
     pokemon->swayState.layoutConfig.unk_1B = sDefaultSwayLayout.unk_1B;
-    pokemon->swayState.layoutConfig.frontCameraShotOffset.x *= pokemon->unk_4B0;
-    pokemon->swayState.layoutConfig.unk_0C.x *= pokemon->unk_4B0;
+    pokemon->swayState.layoutConfig.frontCameraShotOffset.x *= pokemon->cameraOffsetScaleFactor;
+    pokemon->swayState.layoutConfig.backCameraShotOffset.x *= pokemon->cameraOffsetScaleFactor;
 
-    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (object_type_index << 4)) & 0xFFFFFF);
+    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (species << 4)) & 0xFFFFFF);
     Dma_WriteChunks(&D_84390028[side_index], rom_address, rom_address + 0x10, 0);
 
-    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (object_type_index * 0x10)) & 0xFFFFFF);
+    rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (species * 0x10)) & 0xFFFFFF);
     Dma_WriteChunks(sPlayerTagTeam[side_index], rom_address, rom_address + 0x10, 0);
 
-    Battle_DmaLoadSpeciesLearnsets(object_type_index, &pokemon->redBlueLearnsets[0], &pokemon->yellowLearnsets[0]);
+    Battle_DmaLoadSpeciesLearnsets(species, &pokemon->redBlueLearnsets[0], &pokemon->yellowLearnsets[0]);
 
     if (sPlayerTagTeam[side_index]->firstPartner != 0) {
         Battle_DmaLoadSpeciesLearnsets(sPlayerTagTeam[side_index]->firstPartner - 1, &pokemon->redBlueLearnsets[1], &pokemon->yellowLearnsets[1]);
@@ -590,10 +591,10 @@ void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon) {
     BattleMonRuntime* runtime;
     ActivePokemonState* pokemon_state;
     s32 side_index;
-    s16 object_type_index;
+    s16 species_ob1;
     u8 side_byte;
 
-    object_type_index = active_pokemon->displayObject.objectType - 1;
+    species_ob1 = active_pokemon->displayObject.objectType - 1;
     runtime = &active_pokemon->state.runtime;
     pokemon_state = &active_pokemon->state;
     side_index = BattleScene_GetParticipantSideIndex(active_pokemon);
@@ -608,10 +609,10 @@ void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon) {
             func_80048060(side_byte, runtime->usedMove, PARTNER_PIKACHU, 0);
         } else {
             side_byte = BattleScene_GetParticipantSideIndex(active_pokemon);
-            func_80048060(side_byte, runtime->usedMove, object_type_index + 1, 0);
+            func_80048060(side_byte, runtime->usedMove, species_ob1 + 1, 0);
         }
 
-        if ((pokemon_state->flags & 0x4000) && ((object_type_index == DUGTRIO_OB1) || (object_type_index == DIGLETT_OB1))) {
+        if ((pokemon_state->flags & 0x4000) && ((species_ob1 == DUGTRIO_OB1) || (species_ob1 == DIGLETT_OB1))) {
             Battle_ClearRuntimeFlags(active_pokemon, 8);
             active_pokemon->displayObject.node.renderFlags |= 0x20;
             Battle_SetRuntimeFlags(active_pokemon, 0x10);
@@ -928,7 +929,7 @@ void BattleScene_TickRow19PostEffectCamera(ActivePokemon* active_pokemon) {
  * type effectiveness and status (idle when resisted or failed, variants for
  * flags 0x1/0x200), and plays the partner Pikachu effectiveness cries.
  */
-void BattleScene_EnterRow4StartHitReactionAnim(ActivePokemon* active_pokemon) {
+void BattleScene_StartHitReactionAnim(ActivePokemon* active_pokemon) {
     UNUSED s32 pad[3];
     s32 target_side;
     ActivePokemonState* target_state;
@@ -946,13 +947,14 @@ void BattleScene_EnterRow4StartHitReactionAnim(ActivePokemon* active_pokemon) {
     if (target_state->flags & 1) {
         has_alternate_hit = BattleScene_ByteArrayContains(target->displayObject.objectType, sPokemonWithAlternateSleepHitReactions, 2);
         if (has_alternate_hit != 0) {
-            sCurrentAnimation = &sSideBattleCues[target_side]->unk_B20;
+            sCurrentAnimation = &sSideBattleCues[target_side]->hitReactionOverride;
         }
     }
 
     sActivePokemon[target_side]->animationTimer = 0;
 
     if (!(target_state->flags & 0x200) && !(target_state->flags & 0x4000) && !(target_state->flags & 2)) {
+        // no battle reaction for week hits
         if (((sTypeEffectiveness < TYPE_EFFECTIVENESS_NEUTRAL) || (sBattleMoveFailed != 0)) && ((runtime->unk_15 & 0x20) == 0)) {
             sCurrentAnimation = &sSideBattleCues[target_side]->idleCues;
             if (target_state->flags & 0x200) {
@@ -978,7 +980,7 @@ void BattleScene_EnterRow4StartHitReactionAnim(ActivePokemon* active_pokemon) {
         ModelAnim_SetAnimation(&sActivePokemon[target_side]->displayObject, sCurrentAnimation->id);
 
         if ((runtime->moveCache.lastMove == STOMP) || (runtime->moveCache.lastMove == BODY_SLAM) || (runtime->moveCache.lastMove == SEISMIC_TOSS)) {
-            BattleScene_SetParticipantModelFlags(sActivePokemon[target_side], 15, 0);
+            BattleScene_SetParticipantModelFlags(sActivePokemon[target_side], 0x0F, 0);
         }
     }
 }
@@ -1540,7 +1542,7 @@ void BattleScene_EnterRow11StartHitReactionAnim(ActivePokemon* active_pokemon) {
 
     if (target_state->flags & 1) {
         if (BattleScene_ByteArrayContains(target->displayObject.objectType, sPokemonWithAlternateSleepHitReactions, 2) != 0) {
-            sCurrentAnimation = &sSideBattleCues[target_side]->unk_B20;
+            sCurrentAnimation = &sSideBattleCues[target_side]->hitReactionOverride;
         }
     }
 
@@ -2227,12 +2229,12 @@ void BattleScene_CleanupParticipantEffectMode(ActivePokemon* active_pokemon) {
             BattleScene_SetParticipantModelFlags(active_pokemon, 0, 0);
             BattleScene_HideParticipantSecondaryModels(active_pokemon);
             BattleScene_PositionParticipantModel(active_pokemon);
-            Vec3s_SetComponents(&active_pokemon->displayObject.rotation, 0, active_pokemon->unk_4B0 << 0xE, 0);
+            Vec3s_SetComponents(&active_pokemon->displayObject.rotation, 0, active_pokemon->cameraOffsetScaleFactor << 0xE, 0);
             break;
 
         case 4:
             BattleScene_SetParticipantModelFlags(active_pokemon, 0, 0);
-            active_pokemon->displayObject.rotation.y = active_pokemon->unk_4B0 << 0xE;
+            active_pokemon->displayObject.rotation.y = active_pokemon->cameraOffsetScaleFactor << 0xE;
             BattleScene_HideParticipantSecondaryModels(active_pokemon);
             break;
     }
@@ -2529,7 +2531,7 @@ void BattleScene_InitializePresentation(UNUSED BattleSessionTeams* session_teams
 void BattleScene_ResetParticipantAuxTransform(UNUSED ActivePokemon* owner, ActivePokemon* active_pokemon, s32 facing_direction) {
     Vec3f_SetComponentsDuplicate(&active_pokemon->swayState, 0.0f, 0.0f, 0.0f);
     Vec3f_SetComponentsDuplicate(&active_pokemon->swayState.unk_0C, 0.0f, 0.0f, 0.0f);
-    active_pokemon->unk_4B0 = facing_direction;
+    active_pokemon->cameraOffsetScaleFactor = facing_direction;
 }
 
 /**

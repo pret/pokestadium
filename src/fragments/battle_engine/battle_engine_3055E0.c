@@ -268,20 +268,20 @@ void BattleScene_SetCameraSendOutShot(CameraNode* arg0, s32 arg1) {
     }
 
     temp_s0 = sActivePokemon[arg1];
-    if (temp_s0->swayState.layoutConfig.unk_0C.x == 0.0f) {
+    if (temp_s0->swayState.layoutConfig.backCameraShotOffset.x == 0.0f) {
         BattleAnim_GetOwnerDefaultAnchorPosition(temp_s0, &sp58);
     } else {
-        BattleAnim_Vec3fCopy(&sp58, &temp_s0->swayState.layoutConfig.unk_0C);
+        BattleAnim_Vec3fCopy(&sp58, &temp_s0->swayState.layoutConfig.backCameraShotOffset);
         sp58.y += temp_s0->displayObject.position.y - BattleScene_GetParticipantModelHeight(temp_s0);
     }
 
     sp54 = BattleScene_ScaleCameraDistance(temp_s0, 3.0f, 300.0f);
     if ((BattleScene_ByteArrayContains(temp_s0->displayObject.objectType, &sp50, 1) != 0) && (arg1 == 1)) {
-        BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->unk_4B0 * 0x6AA4), sp54, 20.0f);
+        BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->cameraOffsetScaleFactor * 0x6AA4), sp54, 20.0f);
     } else if (BattleScene_ByteArrayContains(temp_s0->displayObject.objectType, (u8*)&sp4C, 2) != 0) {
-        BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->unk_4B0 * 0x6AA4), sp54, 20.0f);
+        BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->cameraOffsetScaleFactor * 0x6AA4), sp54, 20.0f);
     } else {
-        BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->unk_4B0 * 0x754E), sp54, 0.0f);
+        BattleScene_SetCameraEyeFromPosition(arg0, sp58, 0, BattleScene_GetParticipantFacingAngle(temp_s0) - (temp_s0->cameraOffsetScaleFactor * 0x754E), sp54, 0.0f);
     }
 }
 
@@ -955,12 +955,12 @@ void BattleScene_LoadCameraPreset(unk_D_86B0C160* arg0, CameraNode* arg1, Active
     sp28 = BattleScene_ScaleCameraDistance(arg2, arg0->unk_24, 500.0f);
     sp20 = BattleScene_GetParticipantFacingAngle(arg2);
 
-    BattleScene_SetCameraPresetAtAngles(arg0->unk_00, sp20 - (arg0->unk_02 * arg2->unk_4B0), arg0->unk_14,
-                  BattleScene_GetParticipantFacingAngle(arg2) - (arg0->unk_16 * arg2->unk_4B0));
+    BattleScene_SetCameraPresetAtAngles(arg0->unk_00, sp20 - (arg0->unk_02 * arg2->cameraOffsetScaleFactor), arg0->unk_14,
+                  BattleScene_GetParticipantFacingAngle(arg2) - (arg0->unk_16 * arg2->cameraOffsetScaleFactor));
     BattleScene_SetCameraPresetAtDistances(sp34, sp30);
     sp20 = BattleScene_GetParticipantFacingAngle(arg2);
-    BattleScene_SetCameraPresetEyeAngles(arg0->unk_06, sp20 - (arg0->unk_08 * arg2->unk_4B0), arg0->unk_1A,
-                  BattleScene_GetParticipantFacingAngle(arg2) - (arg0->unk_1C * arg2->unk_4B0));
+    BattleScene_SetCameraPresetEyeAngles(arg0->unk_06, sp20 - (arg0->unk_08 * arg2->cameraOffsetScaleFactor), arg0->unk_1A,
+                  BattleScene_GetParticipantFacingAngle(arg2) - (arg0->unk_1C * arg2->cameraOffsetScaleFactor));
     BattleScene_SetCameraPresetEyeDistances(sp2C, sp28);
     BattleScene_SetCameraPresetSmoothing(arg0->unk_28, arg0->unk_2C);
 }
@@ -1006,7 +1006,7 @@ s32 BattleScene_AnimateCameraIntro(CameraNode* arg0, ActivePokemon* arg1) {
     s16 sp28;
 
     BattleAnim_ApproachF(&arg0->perspective.verticalFieldOfView, 30.0f, 0.06f);
-    Vec3f_SetComponentsDuplicate(&sp64, arg1->unk_4B0 * -150.0f, 5.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&sp64, arg1->cameraOffsetScaleFactor * -150.0f, 5.0f, 0.0f);
     BattleAnim_ApproachF(&sBattleScene.unk_00->unk_94.z, 0.2f, 0.06f);
     Camera_ComputeEyeFromAngles(&sp64, &sp4C, 100.0f, 0, BattleScene_GetParticipantFacingAngle(arg1));
     BattleAnim_Vec3fCopy(&sp40, &arg0->view.eyePosition);
@@ -1054,7 +1054,7 @@ void BattleScene_SetCameraActivePokemonHeightShot(CameraNode* arg0, s32 arg1) {
 
     sp40 = sActivePokemon[arg1];
     BattleAnim_GetOwnerDefaultAnchorPosition(sp40, &sp60);
-    BattleScene_SetCameraEyeFromPosition(arg0, sp60, 0, sp40->unk_4B0 << 0xE, 100.0f, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sp60, 0, sp40->cameraOffsetScaleFactor << 0xE, 100.0f, 0.0f);
     BattleAnim_GetOwnerDefaultAnchorPosition(sActivePokemon[arg1], &sp54);
 
     BattleAnim_GetOwnerDefaultAnchorPosition(sActivePokemon[arg1 == 0], &sp48);
@@ -1130,7 +1130,7 @@ void BattleScene_SetCameraOwnerWideShot(CameraNode* arg0, ActivePokemon* arg1) {
     BattleAnim_GetOwnerDefaultAnchorPosition(arg1, &sBattleScene.unk_00->unk_D0);
     sp3C = BattleScene_ScaleCameraDistance(arg1, 8.0f, 300.0f);
     BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1), 0.0f, 0.0f);
-    BattleScene_SetCameraEyeFromAt(arg0, 0, arg1->unk_4B0 << 0xE, sp3C, 0.0f);
+    BattleScene_SetCameraEyeFromAt(arg0, 0, arg1->cameraOffsetScaleFactor << 0xE, sp3C, 0.0f);
 }
 
 void BattleScene_SetCameraPresetClose(CameraNode* arg0, ActivePokemon* arg1, s32 arg2) {
@@ -1138,7 +1138,7 @@ void BattleScene_SetCameraPresetClose(CameraNode* arg0, ActivePokemon* arg1, s32
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 0.5f, 100.0f);
     D_843901F4 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 300.0f);
     BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1), D_843901F0, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1) - (arg1->unk_4B0 * 0x31C7), D_843901F4, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1) - (arg1->cameraOffsetScaleFactor * 0x31C7), D_843901F4, 0.0f);
 
     if (arg2 == 1) {
         BattleScene_UpdateCameraModelOffset(arg1, arg0);
@@ -1155,7 +1155,7 @@ void BattleScene_SetCameraPresetAngledClose(CameraNode* arg0, ActivePokemon* arg
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 0.5f, 100.0f);
     D_843901F4 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 300.0f);
     BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1), D_843901F0, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0x71C, BattleScene_GetParticipantFacingAngle(arg1) - (arg1->unk_4B0 * 0x1555), D_843901F4,
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0x71C, BattleScene_GetParticipantFacingAngle(arg1) - (arg1->cameraOffsetScaleFactor * 0x1555), D_843901F4,
                   0.0f);
     if (arg2 == 1) {
         BattleScene_UpdateCameraModelOffset(arg1, arg0);
@@ -1190,7 +1190,7 @@ void BattleScene_SetCameraPresetLowClose(CameraNode* arg0, ActivePokemon* arg1, 
     D_843901F4 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 300.0f);
     BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1), D_843901F0, 0.0f);
     sp3E = BattleScene_GetParticipantFacingAngle(arg1);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, sp3E - (arg1->unk_4B0 * 0x1555), D_843901F4,
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, sp3E - (arg1->cameraOffsetScaleFactor * 0x1555), D_843901F4,
                   -BattleAnim_GetOwnerModelHeight(arg1) * 0.8);
     if (arg2 == 1) {
         BattleScene_UpdateCameraModelOffset(arg1, arg0);
@@ -1239,8 +1239,8 @@ void BattleScene_CameraShotTargetStandard(CameraNode* arg0, ActivePokemon* arg1)
     BattleScene_ClearCameraOffsetVectors();
     BattleAnim_GetOwnerDefaultAnchorPosition(arg1, &sBattleScene.unk_00->unk_D0);
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 400.0f);
-    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 << 0xE, 0.0f, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 * 0xE38, D_843901F0, 0.0f);
+    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor << 0xE, 0.0f, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor * 0xE38, D_843901F0, 0.0f);
     BattleScene_UpdateCameraModelOffset(arg1, arg0);
 }
 
@@ -1248,24 +1248,24 @@ void BattleScene_CameraShotTargetAngled(CameraNode* arg0, ActivePokemon* arg1) {
     BattleScene_ClearCameraOffsetVectors();
     BattleAnim_GetOwnerDefaultAnchorPosition(arg1, &sBattleScene.unk_00->unk_D0);
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 400.0f);
-    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 << 0xE, 0.0f, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0x1555, arg1->unk_4B0 * 0xE38, D_843901F0, 0.0f);
+    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor << 0xE, 0.0f, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0x1555, arg1->cameraOffsetScaleFactor * 0xE38, D_843901F0, 0.0f);
     BattleScene_UpdateCameraModelOffset(arg1, arg0);
 }
 
 void BattleScene_CameraShotTargetHigh(CameraNode* arg0, ActivePokemon* arg1) {
     BattleAnim_GetOwnerDefaultAnchorPosition(arg1, &sBattleScene.unk_00->unk_D0);
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 400.0f);
-    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 << 0xE, 0.0f, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 * 0xE38, D_843901F0, 2.0f * BattleAnim_GetOwnerModelHeight(arg1));
+    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor << 0xE, 0.0f, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor * 0xE38, D_843901F0, 2.0f * BattleAnim_GetOwnerModelHeight(arg1));
     BattleScene_UpdateCameraModelOffset(arg1, arg0);
 }
 
 void BattleScene_CameraShotTargetLow(CameraNode* arg0, ActivePokemon* arg1) {
     BattleAnim_GetOwnerDefaultAnchorPosition(arg1, &sBattleScene.unk_00->unk_D0);
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 5.0f, 400.0f);
-    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 << 0xE, 0.0f, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, arg1->unk_4B0 * 0xE38, D_843901F0, -BattleAnim_GetOwnerModelHeight(arg1) * 0.8f);
+    BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor << 0xE, 0.0f, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, arg1->cameraOffsetScaleFactor * 0xE38, D_843901F0, -BattleAnim_GetOwnerModelHeight(arg1) * 0.8f);
     if (arg0->view.eyePosition.y <= 15.0f) {
         arg0->view.eyePosition.y = 15.0f;
     }
@@ -1285,7 +1285,7 @@ void BattleScene_SetCameraFollowPresetNear(CameraNode* arg0, ActivePokemon* arg1
     D_843901F0 = BattleScene_ScaleCameraDistance(arg1, 3.5f, 300.0f);
     D_843901F4 = BattleScene_ScaleCameraDistance(arg1, 0.5f, 100.0f);
     BattleScene_SetCameraAtFromAnchor(arg1, arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1), D_843901F4, 0.0f);
-    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1) - (arg1->unk_4B0 * 0x1555), D_843901F0, 0.0f);
+    BattleScene_SetCameraEyeFromPosition(arg0, sBattleScene.unk_00->unk_D0, 0, BattleScene_GetParticipantFacingAngle(arg1) - (arg1->cameraOffsetScaleFactor * 0x1555), D_843901F0, 0.0f);
     if (arg2 == 1) {
         BattleScene_UpdateCameraModelOffset(arg1, arg0);
     }

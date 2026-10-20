@@ -255,7 +255,7 @@ void BattleAnim_StatusIdleCase1(ActivePokemon* arg0, ActivePokemon* arg1) {
 }
 
 void BattleAnim_StatusIdleCase2Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* arg1) {
-    Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, arg1->unk_4B0 * -150.0f, 100.0f, 0.0f);
+    Vec3f_SetComponentsDuplicate(&arg1->unk_4EC.position, arg1->cameraOffsetScaleFactor * -150.0f, 100.0f, 0.0f);
     arg1->animationFlags2++;
     BattleAnim_InitSwayOffset(arg1, 0.0f, 0x3FFC);
     arg1->unk_4EC.node.flags |= 1;
@@ -381,7 +381,7 @@ void BattleAnim_StatusIdleCase4Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* a
 void BattleAnim_StatusIdleCase4Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = Math_StepToS32(arg1->unk_4A6, 0x3330, 0x16C, 0x16C);
 
-    if (BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->unk_4B0 << 0xE) != 0) {
+    if (BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->cameraOffsetScaleFactor << 0xE) != 0) {
         arg1->animationState += 1;
     }
 
@@ -407,11 +407,11 @@ void BattleAnim_StatusIdleCase4Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     if (sp26 < 0xE38) {
         sp26 = 0xE38;
     }
-    sp20 = BattleAnim_ApproachAngleAndCheckThreshold(arg0, sp26, arg1->unk_4B0 << 0xE);
+    sp20 = BattleAnim_ApproachAngleAndCheckThreshold(arg0, sp26, arg1->cameraOffsetScaleFactor << 0xE);
     BattleScene_UpdateSecondaryModelTrailPosition(arg1, sp26);
 
     if (sp20 != 0) {
-        arg0->displayObject.rotation.y = arg1->unk_4B0 << 0xE;
+        arg0->displayObject.rotation.y = arg1->cameraOffsetScaleFactor << 0xE;
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -442,7 +442,7 @@ void BattleAnim_StatusIdleCase5Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* a
 void BattleAnim_StatusIdleCase5Sub1(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->unk_4A6 = Math_StepToS32(arg1->unk_4A6, 0x3FFC, 0x16C, 0x16C);
 
-    if (BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->unk_4B0 << 0xE) != 0) {
+    if (BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->cameraOffsetScaleFactor << 0xE) != 0) {
         arg1->animationState += 1;
     }
 
@@ -459,7 +459,7 @@ void BattleAnim_StatusIdleCase5Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     UNUSED s16 pad;
     u8 sp28[] = { 0x5F, 0x92 }; // D_84384650
 
-    BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->unk_4B0 << 0xE);
+    BattleAnim_ApproachAngleAndCheckThreshold(arg0, arg1->unk_4A6, arg1->cameraOffsetScaleFactor << 0xE);
 
     if (BattleScene_ByteArrayContains(arg1->displayObject.objectType, sp28, sizeof(sp28)) != 0) {
         sp30 = 10.3f;
@@ -475,7 +475,7 @@ void BattleAnim_StatusIdleCase5Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleAnim_ApproachF(&arg0->displayObject.position.y, -(BattleAnim_GetOwnerModelHeight(arg1) * sp30), sp2C);
 
     if (arg0->displayObject.position.y <= -(BattleAnim_GetOwnerModelHeight(arg1) * sp34)) {
-        Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->unk_4B0 << 0xE, 0);
+        Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->cameraOffsetScaleFactor << 0xE, 0);
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -502,7 +502,7 @@ void BattleAnim_StatusIdleCase6Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->animationState = 0;
     arg1->unk_4A0 = 0.0f;
     BattleScene_PositionParticipantModel(arg1);
-    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->cameraOffsetScaleFactor << 0xE, 0);
     BattleScene_ShowSecondaryModelsStaggeredFrame(arg1);
     arg1->animationFlags2++;
 }
@@ -540,7 +540,7 @@ void BattleAnim_StatusIdleCase6Sub2(ActivePokemon* arg0, ActivePokemon* arg1) {
 
     if (arg1->unk_4A0 <= 0.5f) {
         BattleScene_PositionParticipantModel(arg1);
-        Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->unk_4B0 << 0xE, 0);
+        Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->cameraOffsetScaleFactor << 0xE, 0);
         BattleScene_ResetParticipantModelFlags(arg1);
         BattleScene_HideParticipantSecondaryModels(arg1);
     }
@@ -565,7 +565,7 @@ void BattleAnim_StatusIdleCase7Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     BattleScene_ShowSecondaryModelsAtMainTransform(arg1);
     arg1->unk_4AC = 0;
     BattleScene_PositionParticipantModel(arg1);
-    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->cameraOffsetScaleFactor << 0xE, 0);
     arg1->animationFlags2++;
 }
 
@@ -594,7 +594,7 @@ void BattleAnim_ResetOwnerFacingAndExitStatusIdle(ActivePokemon* arg0) {
     CameraNode* sp18 = sBattleScene.unk_00->unk_DC;
 
     BattleScene_PositionParticipantModel(arg0);
-    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg0->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg0->cameraOffsetScaleFactor << 0xE, 0);
     Vec3f_SetComponentsDuplicate(&sp18->view.upDirection, 0.0f, 1.0f, 0.0f);
     BattleScene_ResetParticipantModelFlags(arg0);
 }
@@ -606,7 +606,7 @@ void BattleAnim_StatusIdleCase8Sub0(ActivePokemon* arg0, ActivePokemon* arg1) {
     arg1->animationState = 0;
     arg1->unk_4A0 = 0.0f;
     BattleScene_PositionParticipantModel(arg1);
-    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->unk_4B0 << 0xE, 0);
+    Vec3s_SetComponents(&arg0->displayObject.rotation, 0, arg1->cameraOffsetScaleFactor << 0xE, 0);
     arg1->animationFlags2++;
 }
 
@@ -1665,7 +1665,7 @@ BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         4,
         {
-            BattleScene_EnterRow4StartHitReactionAnim,
+            BattleScene_StartHitReactionAnim,
             BattleScene_StateCallbackNop,
             BattleScene_StateCallbackNop,
             BattleScene_TickPlayMoveEffectEnd,

@@ -112,7 +112,7 @@ typedef struct SpeciesLearnsetBuffer {
 
 typedef struct SwayLayoutConfig {
     /* 0x00 */ Vec3f frontCameraShotOffset;
-    /* 0x0C */ Vec3f unk_0C;
+    /* 0x0C */ Vec3f backCameraShotOffset;
     /* 0x18 */ u8 unk_18;
     /* 0x19 */ u8 unk_19;
     /* 0x1A */ u8 unk_1A;
@@ -142,7 +142,7 @@ typedef struct ActivePokemon {
     /* 0x4A6 */ s16 unk_4A6;
     /* 0x4A8 */ s16 unk_4A8;
     /* 0x4AC */ s32 unk_4AC;
-    /* 0x4B0 */ s32 unk_4B0;
+    /* 0x4B0 */ s32 cameraOffsetScaleFactor;
     /* 0x4B4 */ s32 animationFlags1;
     /* 0x4B8 */ s32 animationFlags2;
     /* 0x4BC */ char unk4BC[0x4];
@@ -193,7 +193,7 @@ typedef struct unk_D_8438E7B0 {
     /* 0xAF0 */ MovePresentationCue sleepIdleCue;
     /* 0xB00 */ MovePresentationCue unk_B00;
     /* 0xB10 */ MovePresentationCue unk_B10;
-    /* 0xB20 */ MovePresentationCue unk_B20;
+    /* 0xB20 */ MovePresentationCue hitReactionOverride;
     /* 0xB30 */ char unkB30[0x51];
     /* 0xB81 */ u8 wakeUpEventTrack;
     /* 0xB82 */ char unkB82[0x5E];
@@ -1117,7 +1117,7 @@ void BattleScene_TickRow21PlaySpeciesSound(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow19StartMoveAnimMidFrame(ActivePokemon* active_pokemon);
 void BattleScene_TickRow19PlayMoveEffectScript(ActivePokemon* active_pokemon);
 void BattleScene_TickRow19PostEffectCamera(ActivePokemon* active_pokemon);
-void BattleScene_EnterRow4StartHitReactionAnim(ActivePokemon* active_pokemon);
+void BattleScene_StartHitReactionAnim(ActivePokemon* active_pokemon);
 void BattleScene_TickPlayMoveEffectEnd(ActivePokemon* active_pokemon);
 void BattleScene_TickRow4PostEndCamera(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow15StartAnimA80Seq30(ActivePokemon* active_pokemon);
