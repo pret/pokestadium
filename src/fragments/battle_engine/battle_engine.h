@@ -970,8 +970,8 @@ extern s32 D_843C4DEC;
 extern u8 sConfused;
 extern u8 D_843C4E45;
 extern u16 gBattleDamage;
-extern BattleMonRuntime* gBattleUser;
-extern BattleMonRuntime* gBattleTarget;
+extern BattleMonRuntime* sBattleUser;
+extern BattleMonRuntime* sBattleTarget;
 
 
 extern ActivePokemon* sActivePokemon[2];
