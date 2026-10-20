@@ -363,10 +363,11 @@ s32 BattleScene_FindU16InByteArray(u16 lookup_value, u8* array, s32 array_length
 
 /**
  * Clears the illegality flag of every move slot that species `pokemon_id`
- * can legally know: starting moves, both level-up learnsets (at or below the
- * current level) and TM/HM compatibility, including the Yellow HM additions.
+ * can legally know: starting moves, the Red/Blue-based and Yellow-based
+ * learnsets (at or below the current level) and TM/HM compatibility, including
+ * the Yellow HM additions.
  */
-void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 pokemon_id, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer) {
+void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 pokemon_id, SpeciesLearnsetBuffer* red_blue_learnset, SpeciesLearnsetBuffer* yellow_learnset) {
     s32 move_index;
     s32 i;
     s32 lookup;
@@ -388,15 +389,15 @@ void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 pokemon_id, SpeciesLear
             }
 
             for (i = 0; i < 10; i++) {
-                if ((first_learnset_buffer->unk_00[i] != 0) && (pokemon_runtime->unk_26 >= first_learnset_buffer->unk_00[i]) &&
-                    (first_learnset_buffer->unk_0A[i] == pokemon_runtime->moves[move_index])) {
+                if ((red_blue_learnset->unk_00[i] != 0) && (pokemon_runtime->unk_26 >= red_blue_learnset->unk_00[i]) &&
+                    (red_blue_learnset->unk_0A[i] == pokemon_runtime->moves[move_index])) {
                     pokemon->state.moveSlotIllegality[move_index] = 0;
                 }
             }
 
             for (i = 0; i < 10; i++) {
-                if ((second_learnset_buffer->unk_00[i] != 0) && (pokemon_runtime->unk_26 >= second_learnset_buffer->unk_00[i]) &&
-                    (second_learnset_buffer->unk_0A[i] == pokemon_runtime->moves[move_index])) {
+                if ((yellow_learnset->unk_00[i] != 0) && (pokemon_runtime->unk_26 >= yellow_learnset->unk_00[i]) &&
+                    (yellow_learnset->unk_0A[i] == pokemon_runtime->moves[move_index])) {
                     pokemon->state.moveSlotIllegality[move_index] = 0;
                 }
             }
@@ -448,7 +449,7 @@ void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon) {
 
 /**
  * DMAs the 0x20-byte level-up learnset record for 1-based `species` from the
- * first learnset table into `destination`.
+ * Red/Blue-based learnset table into `destination`.
  */
 void Battle_DmaLoadLevelUpLearnset(u8 species, u32 destination) {
     u32 buffer_start = (u32)_70D3A0_ROM_START + ((u32)&D_72780[species - 1] & 0xFFFFFF);
@@ -457,17 +458,17 @@ void Battle_DmaLoadLevelUpLearnset(u8 species, u32 destination) {
 }
 
 /**
- * DMAs both 0x20-byte learnset records for 0-based `species_index` into the
- * two learnset buffers.
+ * DMAs the Red/Blue-based and Yellow-based 0x20-byte learnset records for
+ * 0-based `species_index` into their corresponding buffers.
  */
-void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer) {
+void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* red_blue_learnset, SpeciesLearnsetBuffer* yellow_learnset) {
     UNUSED s32 pad[3];
     u32 buffer_start;
 
     buffer_start = (u32)_70D3A0_ROM_START + ((u32)&D_72780[species_index] & 0xFFFFFF);
-    Dma_WriteChunks(first_learnset_buffer, buffer_start, buffer_start + 0x20, 0);
+    Dma_WriteChunks(red_blue_learnset, buffer_start, buffer_start + 0x20, 0);
     buffer_start = (u32)_70D3A0_ROM_START + ((u32)&D_73A60[species_index] & 0xFFFFFF);
-    Dma_WriteChunks(second_learnset_buffer, buffer_start, buffer_start + 0x20, 0);
+    Dma_WriteChunks(yellow_learnset, buffer_start, buffer_start + 0x20, 0);
 }
 
 // D_80075BD0 holds one PokemonBattleCues ROM offset per species (indexed species - 1);
