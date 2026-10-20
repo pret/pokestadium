@@ -49,7 +49,7 @@ typedef struct ActivePokemonState {
     /* 0x2F */ u8 unk_2F;
     /* 0x30 */ u16 unk_30;
     /* 0x32 */ char unk32[0x2];
-    /* 0x34 */ u16 diggingStageMask;
+    /* 0x34 */ u16 unk_34;
     /* 0x36 */ u16 unk_36;
     /* 0x38 */ BattleMonRuntime runtime;
     /* 0x9C */ unk_D_84390010_654_09C unk_9C;
