@@ -127,7 +127,7 @@ void BattleScene_QueueRowEffectList3(ActivePokemon* actor, s32 effect_entry) {
  * cue anchors and the opposing participant as the fallback owner.
  */
 // played on gengar using thunderbolt in bug boy glc fight
-void BattleAnim_PlayMoveEffectScriptA(ActivePokemon* user, s32 move_id) {
+void BattleAnim_PlayMoveEffectScript(ActivePokemon* user, s32 move_id) {
     UNUSED s16 pad;
     s16 camera_shot;
     s32 target_side_index;
@@ -138,12 +138,12 @@ void BattleAnim_PlayMoveEffectScriptA(ActivePokemon* user, s32 move_id) {
 }
 
 /**
- * Same as BattleAnim_PlayMoveEffectScriptA, but also switches the queued
+ * Same as BattleAnim_PlayMoveEffectScript, but also switches the queued
  * effect list to the alternate list (1).
  */
 // guess: plays during changing moves like skull base
 // but for some reason connected to fury swipes too?
-void BattleAnim_PlayMoveEffectScriptB(ActivePokemon* user, s32 move_id) {
+void BattleAnim_PlayChargingMoveEffectScript(ActivePokemon* user, s32 move_id) {
     UNUSED s16 pad;
     s16 camera_shot;
     s32 target_side_index;
@@ -661,7 +661,7 @@ void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon) {
                 // Special Withdraw Animations
                 if ((species != WARTORTLE_OB1) && (species != BLASTOISE_OB1) && (species != CLOYSTER_OB1) && (species != SQUIRTLE_OB1)) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, 12, 0);
-                    BattleAnim_PlayMoveEffectScriptA(active_pokemon, pokemon_runtime->usedMove);
+                    BattleAnim_PlayMoveEffectScript(active_pokemon, pokemon_runtime->usedMove);
                 }
             } else {
                 if (pokemon_runtime->moveCache.lastMove == SEISMIC_TOSS) {
@@ -678,10 +678,11 @@ void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon) {
                     BattleScene_SetParticipantModelFlags(active_pokemon, sCurrentAnimation->flags1, 0);
                 }
 
-                if ((pokemon_runtime->usedMove == FURY_SWIPES) && (D_84390230 == D_8439022C)) {
-                    BattleAnim_PlayMoveEffectScriptB(active_pokemon, pokemon_runtime->usedMove);
+                // If Fury Swipe uses BattleAnim_PlayMoveEffectScript instead, the "screen slashing" animation of the move doesn't play
+                if ((pokemon_runtime->usedMove == FURY_SWIPES) && (sMultihitCountdown == sMultihitCount)) {
+                    BattleAnim_PlayChargingMoveEffectScript(active_pokemon, pokemon_runtime->usedMove);
                 } else {
-                    BattleAnim_PlayMoveEffectScriptA(active_pokemon, pokemon_runtime->usedMove);
+                    BattleAnim_PlayMoveEffectScript(active_pokemon, pokemon_runtime->usedMove);
                 }
             }
             sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
@@ -860,10 +861,10 @@ void BattleScene_TickRow19PlayMoveEffectScript(ActivePokemon* active_pokemon) {
             return;
         }
 
-        if ((runtime->usedMove == FURY_SWIPES) && (D_84390230 == D_8439022C)) {
-            BattleAnim_PlayMoveEffectScriptB(active_pokemon, runtime->usedMove);
+        if ((runtime->usedMove == FURY_SWIPES) && (sMultihitCountdown == sMultihitCount)) {
+            BattleAnim_PlayChargingMoveEffectScript(active_pokemon, runtime->usedMove);
         } else {
-            BattleAnim_PlayMoveEffectScriptA(active_pokemon, runtime->usedMove);
+            BattleAnim_PlayMoveEffectScript(active_pokemon, runtime->usedMove);
         }
 
         if (runtime->moveCache.lastMove == SEISMIC_TOSS) {
@@ -1338,7 +1339,7 @@ void BattleScene_TickRow8PlayMoveEffectScriptB(ActivePokemon* active_pokemon) {
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[move];
 
     if ((active_pokemon->animationTimer == (sCurrentAnimation->animationDuration + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
-        BattleAnim_PlayMoveEffectScriptB(active_pokemon, runtime->usedMove);
+        BattleAnim_PlayChargingMoveEffectScript(active_pokemon, runtime->usedMove);
 
         if (runtime->usedMove == FLY) {
             BattleScene_SetParticipantModelFlags(active_pokemon, 3, 0);

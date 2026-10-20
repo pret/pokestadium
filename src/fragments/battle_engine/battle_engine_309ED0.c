@@ -15,8 +15,8 @@ static s32 pad_D_84390210[4];
 static s32 D_84390220;
 static s32 D_84390224;
 static s32 D_84390228;
-s32 D_8439022C;
-s32 D_84390230;
+s32 sMultihitCount;
+s32 sMultihitCountdown;
 s32 D_84390234;
 
 u8 D_84385B70[] = {
@@ -1386,7 +1386,7 @@ void BattleScene_ActionSetupCameraStep(CameraNode* arg0) {
 
         case 1:
             if (BattleAnim_TryRegisterAssetTables(D_84390204) != 0) {
-                D_84390234 = D_84390230 = D_8439022C;
+                D_84390234 = sMultihitCountdown = sMultihitCount;
                 BattleBox_Open(0);
                 BattleScene_ResetCameraFrameCounter();
                 sBattleScene.unk_00->unk_3C += 1;
@@ -1423,7 +1423,7 @@ void BattleScene_RefreshActionCameraPreset(CameraNode* arg0) {
     s32 temp_v0;
     s32 temp_t0;
 
-    if (D_84390230 != D_8439022C) {
+    if (sMultihitCountdown != sMultihitCount) {
         temp_v0 = BattleScene_GetAnimationTimingField0E(sActivePokemon[sBattleScene.unk_00->unk_2C]) & 0xFFFFFFFF;
         switch (temp_v0) {
             case 20:
@@ -1619,10 +1619,10 @@ void BattleScene_ActionSetupAnimationVariantA(CameraNode* arg0) {
             BattleScene_ReframeAndRecomputeDistance(arg0, D_84390204);
             if (Battle_IsRowAnimationSettled(D_84390204, 0x32) != 0) {
                 BattleScene_SaveCameraFov(arg0);
-                D_84390230--;
+                sMultihitCountdown--;
                 BattleScene_RefreshActionCameraPreset(arg0);
-                if ((D_84390230 < 0) || (sBattleMoveFailed != 0)) {
-                    D_84390230 = D_8439022C;
+                if ((sMultihitCountdown < 0) || (sBattleMoveFailed != 0)) {
+                    sMultihitCountdown = sMultihitCount;
                     sBattleScene.unk_00->unk_3C++;
                 } else {
                     BattleScene_EnterStateRow(sActivePokemon[sBattleScene.unk_00->unk_2C], 0x13);
@@ -1679,7 +1679,7 @@ void BattleScene_ActionSetupAnimationVariantC(CameraNode* arg0) {
             Vec3f_SetComponentsDuplicate(&D_843901B0.unk_00, D_84390204->unk_4B0 * -175.0f, 25.0f, 0.0f);
             BattleScene_LoadCameraPreset(&D_84384958, arg0, D_84390204);
             if ((D_84390204->displayObject.objectType != 0x33) && (D_84390204->displayObject.objectType != 0x32)) {
-                BattleAnim_PlayMoveEffectScriptA(D_84390204, sp18->usedMove);
+                BattleAnim_PlayMoveEffectScript(D_84390204, sp18->usedMove);
             }
             break;
 
@@ -1993,10 +1993,10 @@ void BattleScene_RunRepeatedHitHpTransition(CameraNode* arg0) {
                 BattleScene_ResetAnimationStep();
                 BattleScene_SetDamageShakeAmplitude(D_84390200);
                 BattleScene_EnterStateRow(D_84390204, 4);
-                D_84390230--;
-                BattleScene_SelectCameraShot(D_84390200, arg0, D_84390230 + 1);
-                if (D_84390230 < 0) {
-                    BattleScene_SelectCameraShot(D_84390200, arg0, D_84390230 + 1);
+                sMultihitCountdown--;
+                BattleScene_SelectCameraShot(D_84390200, arg0, sMultihitCountdown + 1);
+                if (sMultihitCountdown < 0) {
+                    BattleScene_SelectCameraShot(D_84390200, arg0, sMultihitCountdown + 1);
                     BattleScene_FrameCamera(arg0, D_84390200);
                     func_84370ADC(D_84390200);
                     BattleScene_ResetCameraFrameCounter();
@@ -2471,7 +2471,7 @@ void BattleScene_Phase15(CameraNode* arg0) {
                 D_84390204->sessionTeams->uniqueStatusFlags &= ~0x90;
                 Battle_LoadOwnerModelForSpecies(D_84390204);
                 BattleScene_TickOwnerCameraFraming(D_84390204);
-                BattleAnim_PlayMoveEffectScriptA(D_84390204, sp30->usedMove);
+                BattleAnim_PlayMoveEffectScript(D_84390204, sp30->usedMove);
                 BattleAnim_PlaySpeciesReactionSound(D_84390204, sp30, 0);
                 sBattleScene.unk_00->unk_20 += 1;
             }
@@ -2504,7 +2504,7 @@ void BattleScene_Phase25(CameraNode* arg0) {
     switch (sBattleScene.unk_00->unk_20) {
         case 0:
             BattleScene_SaveCameraFov(arg0);
-            BattleAnim_PlayMoveEffectScriptA(D_84390204, sp1C->usedMove);
+            BattleAnim_PlayMoveEffectScript(D_84390204, sp1C->usedMove);
             BattleScene_SelectActionCameraPresetFromTiming(arg0, 0);
             if (!(sp18->flags & 0x800)) {
                 Battle_MakeSubstitute(D_84390204);

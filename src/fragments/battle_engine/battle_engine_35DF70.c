@@ -619,7 +619,7 @@ void Battle_Effect_MultiHit(void) {
                 break;
         }
 
-        D_8439022C = sBattleUser->unk_54 - 1;
+        sMultihitCount = sBattleUser->unk_54 - 1;
         sBattleScene.unk_00->unk_48 = 0x18;
     }
 }
