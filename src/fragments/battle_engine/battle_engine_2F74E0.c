@@ -1268,17 +1268,17 @@ void BattleScene_CollectActions(void) {
     BattleMonRuntime* sp18 = &sActivePokemon[1]->state.runtime;
 
     if (sActivePokemon[0]->unk_724->unk_000 & 2) {
-        D_84390144 = gBattleDamage;
+        D_84390144 = sBattleDamage;
         BattleScene_CollectCpuAction(sActivePokemon[0], sActivePokemon[1]);
-        gBattleDamage = D_84390144;
+        sBattleDamage = D_84390144;
     } else {
         BattleScene_CollectPlayerAction(sActivePokemon[0], sActivePokemon[1]);
     }
 
     if (sActivePokemon[1]->unk_724->unk_000 & 2) {
-        D_84390144 = gBattleDamage;
+        D_84390144 = sBattleDamage;
         BattleScene_CollectCpuAction(sActivePokemon[1], sActivePokemon[0]);
-        gBattleDamage = D_84390144;
+        sBattleDamage = D_84390144;
     } else {
         BattleScene_CollectPlayerAction(sActivePokemon[1], sActivePokemon[0]);
     }

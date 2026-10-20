@@ -79,7 +79,7 @@ void Battle_Effect_Sleep(void) {
                 goto block_9;
             }
         }
-        gBattleDamage = 0;
+        sBattleDamage = 0;
         sBattleMoveFailed = 1;
         sConfused = 0;
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
@@ -171,15 +171,15 @@ void Battle_Effect_Poison(void) {
 }
 
 void Battle_Effect_DrainHP(void) {
-    gBattleDamage /= 2;
-    if (gBattleDamage == 0) {
-        gBattleDamage = 1;
+    sBattleDamage /= 2;
+    if (sBattleDamage == 0) {
+        sBattleDamage = 1;
     }
 
-    if (sBattleUser->unk_28 < sBattleUser->unk_0C + gBattleDamage) {
+    if (sBattleUser->unk_28 < sBattleUser->unk_0C + sBattleDamage) {
         sBattleUser->unk_0C = sBattleUser->unk_28;
     } else {
-        sBattleUser->unk_0C += gBattleDamage;
+        sBattleUser->unk_0C += sBattleDamage;
     }
 
     if (sBattleUser->moveCache.unk_01 == 8) {
@@ -649,13 +649,13 @@ void Battle_Effect_Flinch(void) {
 }
 
 void Battle_Effect_OHKO(void) {
-    gBattleDamage = 0;
+    sBattleDamage = 0;
     sBattleCritFlag = 0xFF;
     if (sBattleUser->speed < sBattleTarget->speed) {
         sBattleMoveFailed = 1;
         return;
     }
-    gBattleDamage = 0xFFFF;
+    sBattleDamage = 0xFFFF;
     sBattleCritFlag = 2;
 }
 
@@ -747,9 +747,9 @@ void Battle_Effect_Recoil(void) {
     sBattleUser->unk_12 = sBattleUser->unk_0C;
 
     if (sBattleUser->moveCache.lastMove == STRUGGLE) {
-        var_v1 = gBattleDamage >> 1;
+        var_v1 = sBattleDamage >> 1;
     } else {
-        var_v1 = gBattleDamage >> 2;
+        var_v1 = sBattleDamage >> 2;
     }
 
     if (var_v1 == 0) {

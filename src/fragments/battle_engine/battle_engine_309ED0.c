@@ -3324,7 +3324,7 @@ void BattleScene_PhaseWithdrawFainted(CameraNode* arg0) {
                 arg0->perspective.verticalFieldOfView = 40.0f;
                 BattleBox_Open(0xC);
                 Battle_TriggerTrainerPresentationCue(temp_s0);
-                gBattleDamage = 0;
+                sBattleDamage = 0;
                 sBattleScene.unk_00->unk_20 += 1;
             }
             break;
@@ -3423,7 +3423,7 @@ void BattleScene_PhaseWithdrawSwitch(CameraNode* arg0) {
                 BattleAnim_QueueEffectList3(3, temp_s0, temp_s0, 0xFF, 0xFF);
                 arg0->perspective.verticalFieldOfView = 40.0f;
                 Battle_TriggerTrainerPresentationCue(temp_s0);
-                gBattleDamage = 0;
+                sBattleDamage = 0;
                 sBattleScene.unk_00->unk_20 += 1;
             }
             break;

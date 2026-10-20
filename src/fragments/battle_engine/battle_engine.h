@@ -969,7 +969,7 @@ extern s32 D_843C4DEC;
 //extern unk_D_843C4E44 D_843C4E44;
 extern u8 sConfused;
 extern u8 D_843C4E45;
-extern u16 gBattleDamage;
+extern u16 sBattleDamage;
 extern BattleMonRuntime* sBattleUser;
 extern BattleMonRuntime* sBattleTarget;
 
