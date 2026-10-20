@@ -1697,24 +1697,24 @@ void func_843060EC(ActivePokemon* active_pokemon) {
     }
 }
 
-void Battle_SetRuntimeFlags(ActivePokemon* arg0, u16 arg1) {
-    arg0->state.flags |= arg1;
+void Battle_SetRuntimeFlags(ActivePokemon* active_pokemon, u16 flag) {
+    active_pokemon->state.flags |= flag;
 }
 
-s32 Battle_ClearRuntimeFlags(ActivePokemon* arg0, u16 arg1) {
-    arg0->state.flags &= ~arg1;
+s32 Battle_ClearRuntimeFlags(ActivePokemon* active_pokemon, u16 flag) {
+    active_pokemon->state.flags &= ~flag;
 }
 
 void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon) {
-    ActivePokemonState* sp24 = &active_pokemon->state;
+    ActivePokemonState* pokemon_state = &active_pokemon->state;
 
     if (active_pokemon->unk_4C8 != 0) {
-        if (sp24->flags & 0x200) {
+        if (pokemon_state->flags & 0x200) {
             active_pokemon->displayObject.position.y = D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
             Battle_ClearRuntimeFlags(active_pokemon, 0x608);
         }
 
-        if (sp24->flags & 0x4008) {
+        if (pokemon_state->flags & 0x4008) {
             active_pokemon->displayObject.lodFraction = 0xFF;
             BattleAnim_StopOwnerCategoryParticles(4, active_pokemon);
             active_pokemon->displayObject.position.y = D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
@@ -1727,36 +1727,36 @@ void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon) {
 }
 
 void BattleScene_ResetBothParticipantsAnimationState(void) {
-    ActivePokemonState* sp34;
-    ActivePokemonState* sp30;
+    ActivePokemonState* side1_pokemon_state;
+    ActivePokemonState* side2_pokemon_state;
     UNUSED s32 pad[2];
-    ActivePokemon* sp24;
-    ActivePokemon* sp20;
+    ActivePokemon* side1_pokemon;
+    ActivePokemon* side2_pokemon;
 
-    sp34 = &sActivePokemon[0]->state;
-    sp30 = &sActivePokemon[1]->state;
-    sp24 = sActivePokemon[0];
-    sp20 = sActivePokemon[1];
+    side1_pokemon_state = &sActivePokemon[0]->state;
+    side2_pokemon_state = &sActivePokemon[1]->state;
+    side1_pokemon = sActivePokemon[0];
+    side2_pokemon = sActivePokemon[1];
 
-    if (sp34->flags & 4) {
+    if (side1_pokemon_state->flags & 4) {
         sActivePokemon[0]->displayObject.position.y = 200.0f;
         Battle_SetRuntimeFlags(sActivePokemon[0], 0x200);
         Battle_ClearRuntimeFlags(sActivePokemon[0], 4);
     }
 
-    if (sp30->flags & 4) {
+    if (side2_pokemon_state->flags & 4) {
         sActivePokemon[1]->displayObject.position.y = 200.0f;
         Battle_SetRuntimeFlags(sActivePokemon[1], 0x200);
         Battle_ClearRuntimeFlags(sActivePokemon[1], 4);
     }
 
-    if ((sp34->flags & 0x4000) && (sp24->displayObject.objectType == 0x33)) {
+    if ((side1_pokemon_state->flags & 0x4000) && (side1_pokemon->displayObject.objectType == 0x33)) {
         sCurrentAnimation = &sSideBattleCues[0]->moveCues[0x5A];
         ModelAnim_SetFrame(&sActivePokemon[0]->displayObject, 0);
         ModelAnim_SetAnimation(&sActivePokemon[0]->displayObject, sCurrentAnimation->id);
     }
 
-    if ((sp30->flags & 0x4000) && (sp20->displayObject.objectType == 0x33)) {
+    if ((side2_pokemon_state->flags & 0x4000) && (side2_pokemon->displayObject.objectType == 0x33)) {
         sCurrentAnimation = &sSideBattleCues[1]->moveCues[0x5A];
         ModelAnim_SetFrame(&sActivePokemon[1]->displayObject, 0);
         ModelAnim_SetAnimation(&sActivePokemon[1]->displayObject, sCurrentAnimation->id);
@@ -1882,25 +1882,25 @@ void BattleScene_CleanupParticipantEffectMode(ActivePokemon* active_pokemon) {
 }
 
 void BattleAnim_TickParticipantStatusAnimation(ActivePokemon* active_pokemon) {
-    ActivePokemonState* temp_s1 = &active_pokemon->state;
+    ActivePokemonState* state = &active_pokemon->state;
 
     BattleAnim_StartFreezeStatusAnimation(active_pokemon);
     BattleAnim_UpdateSleepStatusAnimation(active_pokemon);
 
-    if (temp_s1->flags & 0x100) {
+    if (state->flags & 0x100) {
         active_pokemon->displayObject.node.renderFlags &= 0xFFDF;
     }
 
-    if ((temp_s1->unk_2D == 0x10) || (temp_s1->unk_2D == 0x13)) {
+    if ((state->unk_2D == 0x10) || (state->unk_2D == 0x13)) {
         Battle_ClearRuntimeFlags(active_pokemon, 0x100);
     }
 
-    temp_s1->unk_2E = Math_StepToS32(temp_s1->unk_2E, 0, 0x1E, 0x1E);
-    if (temp_s1->unk_2E != 0) {
-        Model_SetMaterialColor(&active_pokemon->displayObject, 0xFF, 0xFF, 0xFF, temp_s1->unk_2E);
+    state->unk_2E = Math_StepToS32(state->unk_2E, 0, 0x1E, 0x1E);
+    if (state->unk_2E != 0) {
+        Model_SetMaterialColor(&active_pokemon->displayObject, 0xFF, 0xFF, 0xFF, state->unk_2E);
     }
 
-    switch (temp_s1->unk_36) {
+    switch (state->unk_36) {
         case 2:
             break;
 
@@ -1914,12 +1914,12 @@ void BattleAnim_TickParticipantStatusAnimation(ActivePokemon* active_pokemon) {
             if (ModelAnim_IsEventTrackNearEnd(&active_pokemon->displayObject) == 1) {
                 ModelAnim_SetEventTrack(&active_pokemon->displayObject, -1);
                 ModelAnim_SetEventFrame(&active_pokemon->displayObject, 0);
-                temp_s1->unk_36 = 0;
+                state->unk_36 = 0;
             }
             break;
     }
 
-    if (temp_s1->flags & 0x4000) {
+    if (state->flags & 0x4000) {
         if ((active_pokemon->displayObject.objectType != 0x32) && (active_pokemon->displayObject.objectType != 0x33)) {
             active_pokemon->displayObject.lodFraction = 0;
         }

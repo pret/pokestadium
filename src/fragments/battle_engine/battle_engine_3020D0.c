@@ -12,6 +12,7 @@
 #include "src/memmap.h"
 #include "src/memory.h"
 #include "stdarg.h"
+#include "moves.h"
 
 unk_D_843901A0* gBattleMessageQueues;
 
