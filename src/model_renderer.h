@@ -23,15 +23,15 @@ typedef struct unk_func_8001C248 {
 } unk_func_8001C248; // size >= 0x28
 
 void ModelRenderer_InitDisplayRoots(void);
-void ModelRenderer_AttachDisplayObject(DisplayObject* arg0);
+void ModelRenderer_AttachDisplayObject(DisplayObject* display_object);
 void ModelRenderer_AttachSecondaryDisplayObject(DisplayObject* arg0);
 void Model_InitDisplayObject(DisplayObject* display_object, s16 root_id, s16 object_type, ModelNodeView* child);
 void ModelRenderer_ClearDisplayObject(DisplayObject* arg0);
 s32 ModelAnim_SetAnimation(DisplayObject* display_object, s32 id);
-s32 ModelAnim_SetEventTrack(DisplayObject* arg0, s32 arg1);
-void Model_SetMaterialColor(DisplayObject* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
+s32 ModelAnim_SetEventTrack(DisplayObject* display_object, s32 track_id);
+void Model_SetMaterialColor(DisplayObject* display_object, u8 r, u8 g, u8 b, u8 alpha);
 void Model_SetMaterialAlpha(DisplayObject* arg0, u8 arg1);
-void Model_SetMaterialTextureMode(DisplayObject* arg0, u8 arg1);
+void Model_SetMaterialTextureMode(DisplayObject* display_object, u8 texture_mode);
 ModelAnimationBank* ModelAnim_GetAnimationRecord(DisplayObject* arg0, s32 arg1);
 arg1_func_80010CA8* Model_ComputeSizeVariant(arg1_func_80010CA8* arg0, BattleMon* arg1);
 void Model_ComputeSizeVariantFromRecord(arg1_func_80010CA8* arg0, unk_func_8001C014* arg1, u16 arg2);

@@ -30,11 +30,11 @@ void BattleAnim_Vec3fSetPolarXZ(Vec3f* arg0, f32 arg1, s16 arg2) {
     arg0->z = SINS(arg2) * arg1;
 }
 
-Vec3f* BattleAnim_Vec3fCopy(Vec3f* arg0, Vec3f* arg1) {
-    arg0->x = arg1->x;
-    arg0->y = arg1->y;
-    arg0->z = arg1->z;
-    return arg0;
+Vec3f* BattleAnim_Vec3fCopy(Vec3f* dest, Vec3f* src) {
+    dest->x = src->x;
+    dest->y = src->y;
+    dest->z = src->z;
+    return dest;
 }
 
 Vec3s* BattleAnim_Vec3sCopy(Vec3s* arg0, Vec3s* arg1) {
@@ -89,10 +89,10 @@ s32 BattleAnim_RandomIntWithWarmup(f32 arg0) {
     return var_v1;
 }
 
-u16 BattleAnim_RandomRange(s32 arg0) {
-    f32 tmp = (u32)MathUtil_Random16();
+u16 BattleAnim_RandomRange(s32 range) {
+    f32 random_value = (u32)MathUtil_Random16();
 
-    return (tmp / 65535.0) * arg0;
+    return (random_value / 65535.0) * range;
 }
 
 s32 BattleAnim_StepToS16(s16* arg0, s16 arg1, s16 arg2) {

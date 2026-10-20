@@ -425,7 +425,7 @@ void BattleAI_AppendTrainerTeamSpecies(TeamRoster* arg0) {
         }
         temp_a0 = arg0->pokemonPicked[j].unk_00.unk_00;
         D_843C5550[temp_v0] = temp_a0;
-        Battle_DmaLoadAnimRecord(temp_a0, &D_843C5310[temp_v0]);
+        Battle_DmaLoadLevelUpLearnset(temp_a0, &D_843C5310[temp_v0]);
     }
 }
 
@@ -5677,7 +5677,7 @@ void BattleAI_InitTrainerRecords(void) {
         D_843C6138[i] = 0;
         temp_a0 = sActivePokemon[i]->state.runtime.id;
         D_843C5550[i] = temp_a0;
-        Battle_DmaLoadAnimRecord(temp_a0, &D_843C5310[i]);
+        Battle_DmaLoadLevelUpLearnset(temp_a0, &D_843C5310[i]);
     }
 }
 

@@ -361,9 +361,9 @@ void BattleBox_Open(s32 arg0) {
 }
 
 void BattleBox_Close(void) {
-    unk_D_843901A0_4C8* ptr = &gBattleMessageQueues->unk_4C8;
+    unk_D_843901A0_4C8* battle_box = &gBattleMessageQueues->unk_4C8;
 
-    ptr->unk_00 = 0xFF;
+    battle_box->unk_00 = 0xFF;
 }
 
 void BattleBox_PlayTextBlip(s8* arg0) {
@@ -689,11 +689,11 @@ void BattleBox_Update(s16 arg0, s16 arg1) {
     }
 }
 
-void BattleScene_ClearParticipantMessageBuffer(ActivePokemon* arg0) {
-    arg0->unk_8C4.unk_00 = 0;
-    arg0->unk_8C4.unk_04 = 0;
-    arg0->unk_8C4.unk_48[0] = 0;
-    arg0->unk_8C4.unk_08[0] = 0;
+void BattleScene_ClearParticipantMessageBuffer(ActivePokemon* active_pokemon) {
+    active_pokemon->unk_8C4.unk_00 = 0;
+    active_pokemon->unk_8C4.unk_04 = 0;
+    active_pokemon->unk_8C4.unk_48[0] = 0;
+    active_pokemon->unk_8C4.unk_08[0] = 0;
 }
 
 void BattleScene_BuildParticipantMessage(ActivePokemon* arg0, s32 arg1) {
@@ -758,22 +758,22 @@ void BattleScene_ResetMessageQueue(void) {
 }
 
 void Battle_RenderHud(void) {
-    ActivePokemonState* sp1C = &sActivePokemon[0]->state;
-    ActivePokemonState* sp18 = &sActivePokemon[1]->state;
+    ActivePokemonState* side1_state = &sActivePokemon[0]->state;
+    ActivePokemonState* side2_state = &sActivePokemon[1]->state;
 
     if (1) {}
 
     BattleBox_Update(0xA0, 0xC8);
 
-    if (gSessionContext.mode == 0x10) {
+    if (gSessionContext.mode == SESSION_MODE_ATTRACT_DEMO_BATTLE) {
         Battle_DrawSpectatorModeScrollingText();
         Battle_DrawSpectatorModeBackgroundPanel();
     }
 
     switch (sBattleScene.unk_00->unk_1C) {
         case 1:
-            BattleHud_DrawOwnSideStatus(sActivePokemon[0], sp1C);
-            BattleHud_DrawOpponentSideStatus(sActivePokemon[1], sp18);
+            BattleHud_DrawOwnSideStatus(sActivePokemon[0], side1_state);
+            BattleHud_DrawOpponentSideStatus(sActivePokemon[1], side2_state);
             BattleScene_RevealParticipantMessageChars(sActivePokemon[0]);
             BattleScene_RevealParticipantMessageChars(sActivePokemon[1]);
             BattleScene_TickHudTimers();

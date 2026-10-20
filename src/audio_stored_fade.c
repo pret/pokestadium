@@ -13,39 +13,39 @@ u8 D_80078A1C[4] = { 0 };
 u8 D_80078A20[16] = { 0 };
 
 // Related to Partner Pikachu, probably makes it go Pika Pika
-s32 func_80048060(s32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+s32 func_80048060(UNUSED s32 side_index, u32 move_id, u32 species, u32 sound_kind) {
     u32 i;
     u32 temp_v0;
     u32 slot;
     s32 romAddr;
     s32 size;
     MoveSoundEntry* var_a0;
-    u8 var_v1;
+    u8 sound_kind_flags;
     u32* seq;
     u8* entry;
-    u8 flag;
+    u8 is_partner_pikachu;
 
-    flag = 0;
+    is_partner_pikachu = 0;
     D_80078A20[0] = 0;
     Audio_QueueFadeSoundCommand(D_80078A18, 0xA);
 
-    if (arg2 == 0xC8) {
-        flag = 1;
-    } else if ((arg2 == 0) || (arg2 >= 0x98U)) {
+    if (species == 0xC8) {
+        is_partner_pikachu = 1;
+    } else if ((species == 0) || (species >= 0x98U)) {
         return 0;
     }
-    if ((arg2 == 0) || (arg1 >= 0xA6U)) {
+    if ((species == 0) || (move_id >= 0xA6U)) {
         return 0;
     }
 
-    var_v1 = ((arg3 & 0xFF00) >> 8) & 0xFF;
-    arg3 &= 0xFF;
-    if (((arg3 == 0xA) || (arg3 == 0xB)) && ((var_v1 == 0x10) || (var_v1 == 0x20))) {
+    sound_kind_flags = ((sound_kind & 0xFF00) >> 8) & 0xFF;
+    sound_kind &= 0xFF;
+    if (((sound_kind == 0xA) || (sound_kind == 0xB)) && ((sound_kind_flags == 0x10) || (sound_kind_flags == 0x20))) {
         return 0;
     }
 
     for (i = 0; i < 3; i++) {
-        if (arg2 == D_80078A10[i]) {
+        if (species == D_80078A10[i]) {
             slot = i;
             goto found;
         }
@@ -53,33 +53,33 @@ s32 func_80048060(s32 arg0, u32 arg1, u32 arg2, u32 arg3) {
 
     slot = D_80078A14 % 3;
     D_80078A14++;
-    D_80078A10[slot] = arg2;
-    if (flag) {
-        arg2 = 0x97;
+    D_80078A10[slot] = species;
+    if (is_partner_pikachu) {
+        species = 0x97;
     }
-    arg2--;
-    if (arg2 < (D_800FC6FC->num_files - 1)) {
-        romAddr = ((u32*)D_800FC6FC)[arg2 + 3];
-        size = ((u32*)D_800FC6FC)[arg2 + 4] - romAddr;
+    species--;
+    if (species < (D_800FC6FC->num_files - 1)) {
+        romAddr = ((u32*)D_800FC6FC)[species + 3];
+        size = ((u32*)D_800FC6FC)[species + 4] - romAddr;
     } else {
-        romAddr = ((u32*)D_800FC6FC)[arg2 + 3];
+        romAddr = ((u32*)D_800FC6FC)[species + 3];
         size = D_800FC6E8->seqArray[3].offset - romAddr;
     }
     Rom_DmaRead(romAddr, D_800FC6DC, size);
     Audio_CopyDataWithCacheSync(D_800FC6DC, D_800FC6B0[slot], 0x3E8);
     Audio_RelocateSoundBankTable(D_800FC6B0[slot]);
-    if (flag) {
-        arg2 = 0x97;
+    if (is_partner_pikachu) {
+        species = 0x97;
     }
-    size = D_800FC700->seqArray[arg2].len;
+    size = D_800FC700->seqArray[species].len;
     if (size & 1) {
         size++;
     }
-    Rom_DmaRead((u32)D_800FC700->seqArray[arg2].offset, D_800FC6DC, size);
+    Rom_DmaRead((u32)D_800FC700->seqArray[species].offset, D_800FC6DC, size);
     Audio_CopyDataWithCacheSync(D_800FC6DC, D_800FC6C0[slot], 0x44C);
 
 found:
-    switch (arg3) {
+    switch (sound_kind) {
     case 0:
     case 2:
     case 3:
@@ -95,35 +95,35 @@ found:
         size = 0;
         break;
     case 16:
-        arg2 = arg1;
+        species = move_id;
         goto block_38;
     default:
         return 0;
     }
-    if (arg3 == 0xB) {
-        arg1 = 0;
+    if (sound_kind == 0xB) {
+        move_id = 0;
     }
     var_a0 = D_800FC6C0[slot]->entries;
-    entry = &(var_a0 + arg1)->unk0[size];
-    arg2 = entry[0];
+    entry = &(var_a0 + move_id)->unk0[size];
+    species = entry[0];
     D_80078A1C[0] = entry[1];
 
 block_38:
     seq = D_800FC6B0[slot];
     temp_v0 = *seq;
-    if (!flag && (arg2 >= temp_v0)) {
+    if (!is_partner_pikachu && (species >= temp_v0)) {
         return 0;
     }
-    if (flag) {
-        if ((arg1 == 0x2D) || (arg1 == 0x2E)) {
+    if (is_partner_pikachu) {
+        if ((move_id == 0x2D) || (move_id == 0x2E)) {
             D_80078A20[0] = 1;
         }
-        if (arg2 != 0) {
-            Cry_Play(arg2, 0xA);
+        if (species != 0) {
+            Cry_Play(species, 0xA);
         }
         return 0;
     }
-    temp_v0 = Audio_PlaySoundEffect(D_800FC6AC, seq, arg2, 0x80, 0x80, -1);
+    temp_v0 = Audio_PlaySoundEffect(D_800FC6AC, seq, species, 0x80, 0x80, -1);
     D_80078A18 = temp_v0;
     return temp_v0;
 }

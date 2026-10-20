@@ -203,6 +203,21 @@ typedef struct unk_D_8438E7B0 {
     /* 0xB82 */ char unkB82[0x5E];
 } PokemonBattleCues; // size = 0xBE0
 
+// moveCues[] has one entry per move, so cue indices past the last move alias the
+// named cues that follow it (each MovePresentationCue is 0x10 bytes).
+#define BATTLE_CUE_IDLE 165       // idleCues (0xA50)
+#define BATTLE_CUE_A60 166        // unkA60 (0xA60)
+#define BATTLE_CUE_FAINT 167      // faintCue (0xA70)
+#define BATTLE_CUE_HIT 168        // hitCue (0xA80)
+#define BATTLE_CUE_SLEEP_IDLE 175 // sleepIdleCue (0xAF0)
+#define BATTLE_CUE_B00 176        // unk_B00 (0xB00)
+
+// Gen 1 type-effectiveness multipliers, in tenths; see sTypeEffectiveness.
+#define TYPE_EFFECTIVENESS_NONE 0
+#define TYPE_EFFECTIVENESS_NOT_VERY 5
+#define TYPE_EFFECTIVENESS_NEUTRAL 10
+#define TYPE_EFFECTIVENESS_SUPER 20
+
 typedef struct BattleScene {
     /* 0x00 */ char unk00[0x8];
     /* 0x08 */ s8 unk_08;
@@ -965,7 +980,7 @@ extern u8 sBattleMoveFailed;
 extern u8 sBattleCritFlag;
 extern u8 D_843C4DA9;
 extern u8 D_843C4DAA;
-extern s32 D_843C4DEC;
+extern s32 sTypeEffectiveness;
 //extern unk_D_843C4E44 D_843C4E44;
 extern u8 sConfused;
 extern u8 D_843C4E45;
@@ -1069,7 +1084,7 @@ s32 Battle_Main(s32 arg0, SessionContext* arg1);
 
 //@src/fragments/battle_engine/battle_engine_2EC3C0.c
 void BattleScene_ClearStateTickCallbacks(void);
-void BattleScene_QueueRowEffectList3(ActivePokemon* actor, s32 move_id);
+void BattleScene_QueueRowEffectList3(ActivePokemon* actor, s32 effect_entry);
 void BattleAnim_PlayMoveEffectScriptA(ActivePokemon* user, s32 move_id);
 void BattleAnim_PlayMoveEffectScriptB(ActivePokemon* user, s32 move_id);
 void BattleAnim_PlayMoveEffectEnd(ActivePokemon* user, s32 move_id);
@@ -1092,8 +1107,8 @@ void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon);
 s32 BattleScene_FindU16InByteArray(u16 lookup_value, u8* array, s32 array_length);
 void Battle_MarkIllegalMoves(ActivePokemon* pokemon, u16 pokemon_id, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer);
 void Battle_InitializeMoveIllegalityMask(ActivePokemon* active_pokemon);
-void Battle_DmaLoadAnimRecord(u8 read_end, u32 write_start);
-void Battle_DmaLoadAnimRecordPair(s32 read_end, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer);
+void Battle_DmaLoadLevelUpLearnset(u8 species, u32 destination);
+void Battle_DmaLoadSpeciesLearnsets(s32 species_index, SpeciesLearnsetBuffer* first_learnset_buffer, SpeciesLearnsetBuffer* second_learnset_buffer);
 void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_move_illegality);
 void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon);
@@ -1112,15 +1127,15 @@ void BattleScene_TickRow4PostEndCamera(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow15StartAnimA80Seq30(ActivePokemon* active_pokemon);
 s32 BattleScene_IsOpponentRowCheckpointReached(ActivePokemon* active_pokemon);
 s32 BattleScene_IsRowZeroCheckpointReached(ActivePokemon* active_pokemon);
-void func_84303E58(ActivePokemon* active_pokemon);
+void BattleScene_StartHitCueAnimation(ActivePokemon* active_pokemon);
 void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon);
 void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon);
 void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon);
 void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon);
 void BattleScene_TickAssetLoadQueueRowEffectList3(ActivePokemon* active_pokemon);
-void func_843046BC(ActivePokemon* active_pokemon);
+void BattleScene_TickQueueRowEffectList3OnFirstFrame(ActivePokemon* active_pokemon);
 void BattleScene_TickRow20CleanupAndEnterState18(ActivePokemon* active_pokemon);
-void func_84304800(ActivePokemon* active_pokemon);
+void BattleScene_ResetOwnerModelIfLoaded(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow8StartMappedMoveAnim(ActivePokemon* active_pokemon);
 void BattleScene_TickRow8PlayMoveEffectScriptB(ActivePokemon* active_pokemon);
 void BattleScene_EnterRow9SetEventTrack(ActivePokemon* active_pokemon);
@@ -1130,27 +1145,27 @@ void BattleScene_Row13PlaySequences14And21(ActivePokemon* active_pokemon);
 void BattleScene_TickPlaySpeciesSequence33(ActivePokemon* active_pokemon);
 void BattleScene_TickQueueList3Selector2OrC(ActivePokemon* active_pokemon);
 void BattleScene_TickQueueList3Selector2OrCFromB10(ActivePokemon* active_pokemon);
-void func_8430506C(ActivePokemon* active_pokemon);
+void BattleScene_EnterRow11StartHitReactionAnim(ActivePokemon* active_pokemon);
 void BattleScene_TickRow14PlayMoveEffectEnd(ActivePokemon* active_pokemon);
-s32 func_84305458(ActivePokemon* active_pokemon);
+s32 BattleScene_GetOpponentEffectCheckpoint(ActivePokemon* active_pokemon);
 void BattleScene_TickRow11QueueEffectList6(ActivePokemon* active_pokemon);
 void BattleScene_TickRow11PostEndCamera(ActivePokemon* active_pokemon);
 void BattleScene_StateCallbackNop(ActivePokemon* active_pokemon);
-void BattleScene_RegisterStateTickCallback(ActivePokemon* arg0, BattleSceneStateCallback arg1);
+void BattleScene_RegisterStateTickCallback(ActivePokemon* active_pokemon, BattleSceneStateCallback callback);
 void BattleScene_SetOpponentEventTrackA6(ActivePokemon* active_pokemon);
-void BattleScene_EnterStateRow(ActivePokemon* arg0, s32 arg1);
+void BattleScene_EnterStateRow(ActivePokemon* active_pokemon, s32 row_index);
 void BattleScene_TickStateCallbacks(void);
 void Battle_StopBeingGoldAfterHarden(ActivePokemon* active_pokemon);
-void BattleAnim_SetModelEventTrackFromRow(ActivePokemon* pokemon, s32 event);
-s32 BattleAnim_TrySetModelEventTrackFromRow(ActivePokemon* active_pokemon, s32 move, s32 arg2);
-void BattleAnim_SetModelEventTrackAndState(ActivePokemon* arg0, s32 arg1, s32 arg2);
+void BattleAnim_SetModelEventTrackFromRow(ActivePokemon* pokemon, s32 cue_index);
+s32 BattleAnim_TrySetModelEventTrackFromRow(ActivePokemon* active_pokemon, s32 cue_index, s32 event_state);
+void BattleAnim_SetModelEventTrackAndState(ActivePokemon* active_pokemon, s32 cue_index, s32 event_state);
 s32 BattleScene_IsParticipantIncapacitated(ActivePokemon* active_pokemon);
-s32 BattleScene_IsRowWaitComplete(ActivePokemon* arg0, s32 arg1);
-s32 BattleScene_IsRowWaitCompleteWithEventCount(ActivePokemon* arg0, s32 arg1);
-s32 Battle_IsRowAnimationSettled(ActivePokemon* arg0, s32 arg1);
-s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 delta);
-s32 BattleScene_IsRowAnimWaitComplete(ActivePokemon* active_pokemon, s32 delta);
-void func_843060EC(ActivePokemon* active_pokemon);
+s32 BattleScene_IsRowWaitComplete(ActivePokemon* active_pokemon, s32 frame_limit);
+s32 BattleScene_IsRowWaitCompleteWithEventCount(ActivePokemon* active_pokemon, s32 frame_limit);
+s32 Battle_IsRowAnimationSettled(ActivePokemon* active_pokemon, s32 frame_limit);
+s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 frame_limit);
+s32 BattleScene_IsRowAnimWaitComplete(ActivePokemon* active_pokemon, s32 frame_limit);
+void BattleScene_TryQueueIdleCueEffect(ActivePokemon* active_pokemon);
 void Battle_SetRuntimeFlags(ActivePokemon* active_pokemon, u16 flag);
 s32 Battle_ClearRuntimeFlags(ActivePokemon* active_pokemon, u16 flag);
 void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon);
@@ -1162,18 +1177,18 @@ void BattleScene_CleanupOpponentAnimationFlags(ActivePokemon* active_pokemon);
 void BattleScene_CleanupParticipantEffectMode(ActivePokemon* active_pokemon);
 void BattleAnim_TickParticipantStatusAnimation(ActivePokemon* active_pokemon);
 void BattleAnim_TriggerStatusAfflictionCry(ActivePokemon* active_pokemon);
-void BattleScene_AllocateParticipantRecord(BattleSessionTeams* arg0, s32 arg1);
+void BattleScene_AllocateParticipantRecord(BattleSessionTeams* session_teams, s32 side_index);
 void BattleScene_AllocateParticipants(BattleSessionTeams* battle_teams);
 void BattleScene_InitializeParticipantController(ActivePokemon* active_pokemon);
 void BattleScene_InitializeParticipantModel(ActivePokemon* active_pokemon);
 void BattleScene_InitializeParticipantOwnerModel(ActivePokemon* active_pokemon);
-void BattleScene_InitializeParticipantSecondaryModels(ActivePokemon* arg0, s32* arg1);
+void BattleScene_InitializeParticipantSecondaryModels(ActivePokemon* active_pokemon, UNUSED s32* secondary_models);
 void BattleScene_InitializeParticipantAuxiliaryModel(ActivePokemon* active_pokemon);
-void BattleScene_InitializePresentation(UNUSED BattleSessionTeams* arg0);
-void BattleScene_ResetParticipantAuxTransform(UNUSED ActivePokemon* arg0, ActivePokemon* arg1, s32 arg2);
-void BattleScene_InitializeRuntime(BattleSessionTeams* arg0);
-void BattleScene_UpdateParticipantsAndQueueEffects(ActivePokemon* arg0, ActivePokemon* arg1);
-s32 BattleScene_DispatchLifecycle(s32 arg0, BattleSessionTeams* arg1);
+void BattleScene_InitializePresentation(UNUSED BattleSessionTeams* session_teams);
+void BattleScene_ResetParticipantAuxTransform(UNUSED ActivePokemon* owner, ActivePokemon* active_pokemon, s32 facing_direction);
+void BattleScene_InitializeRuntime(BattleSessionTeams* session_teams);
+void BattleScene_UpdateParticipantsAndQueueEffects(UNUSED ActivePokemon* side1_pokemon, UNUSED ActivePokemon* side2_pokemon);
+s32 BattleScene_DispatchLifecycle(s32 lifecycle_stage, BattleSessionTeams* session_teams);
 void func_84307414(ActivePokemon* active_pokemon);
 void BattleScene_StateRow56EnterNop(ActivePokemon* active_pokemon);
 void BattleScene_StateRow5Slot3Nop(ActivePokemon* active_pokemon);
@@ -1186,8 +1201,8 @@ void BattleScene_StateRow6Slot5Nop(ActivePokemon* active_pokemon);
 void BattleScene_StateRow6Slot4Nop(ActivePokemon* active_pokemon);
 void BattleScene_StateRow6Slot3Nop(ActivePokemon* active_pokemon);
 void func_8430746C(ActivePokemon* active_pokemon);
-void func_84307474(ActivePokemon* arg0, s32 arg1);
-void func_84307480(ActivePokemon* arg0, s32 arg1);
+void func_84307474(UNUSED ActivePokemon* active_pokemon, UNUSED s32 unused);
+void func_84307480(UNUSED ActivePokemon* active_pokemon, UNUSED s32 unused);
 void BattleScene_StateRow7Slot4Nop(ActivePokemon* active_pokemon);
 
 
@@ -1211,7 +1226,7 @@ void BattleScene_TickBothOwnerSlideAnimations(ActivePokemon* arg0, ActivePokemon
 s32 BattleScene_DispatchOwnerCameraLifecycle(s32 arg0, CameraNode* arg1, CameraNode* arg2);
 
 //@src/fragments/battle_engine/battle_engine_2F23A0.c
-s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_size);
+s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_length);
 BattleMon* BattleScene_GetParticipantSessionMon(ActivePokemon* active_pokemon);
 s32 BattleScene_IsPartnerPikachu(ActivePokemon* active_pokemon);
 f32 BattleScene_GetParticipantModelHeight(ActivePokemon* active_pokemon);
@@ -1244,17 +1259,17 @@ void BattleScene_ComputeParticipantModelOffset(ActivePokemon* arg0, Vec3f* arg1)
 void BattleScene_GetParticipantAuxiliaryModelPosition(ActivePokemon* arg0, Vec3f* arg1);
 f32 BattleAnim_GetOwnerModelHeight(ActivePokemon* active_pokemon);
 f32 BattleScene_GetParticipantModelRadiusScaled(ActivePokemon* active_pokemon);
-ModelNodeView* Battle_GetMoveEffectListEntry(ActivePokemon* arg0, s32 arg1);
-s32 Battle_GetTrainerId(ActivePokemon* arg0, UNUSED s32 arg1);
+ModelNodeView* Battle_GetMoveEffectListEntry(ActivePokemon* active_pokemon, s32 entry_index);
+s32 Battle_GetDisplayModelId(ActivePokemon* active_pokemon, UNUSED s32 unused);
 char* Battle_GetActiveMoveName(ActivePokemon* active_pokemon);
 u8* Battle_GetActiveMonNickname(ActivePokemon* active_pokemon);
 void BattleScene_SetParticipantModelFlags(ActivePokemon* active_pokemon, s32 animation_flags1, s32 animation_flags2);
-void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* arg0, ActivePokemon* arg1);
+void Battle_AdvanceSecondaryModelAnimIfFinished(ActivePokemon* active_pokemon, ActivePokemon* animated_pokemon);
 void Battle_ResetModelToIdleAnim(ActivePokemon* active_pokemon);
 void Battle_SetModelToStatusAnim(ActivePokemon* active_pokemon);
-void BattleScene_BindParticipantRosterForSide(ActivePokemon* arg0, s32 arg1);
-void BattleScene_SetParticipantSelectedSide(ActivePokemon* arg0, s32 arg1);
-void BattleScene_SetParticipantController(ActivePokemon* arg0, Controller* arg1);
+void BattleScene_BindParticipantRosterForSide(ActivePokemon* active_pokemon, s32 team_member_index);
+void BattleScene_SetParticipantSelectedSide(ActivePokemon* active_pokemon, s32 team_member_index);
+void BattleScene_SetParticipantController(ActivePokemon* active_pokemon, Controller* controller);
 void BattleScene_RebindParticipantToSide(ActivePokemon* arg0, s32 arg1);
 s32 Battle_HasUsableSleepStatusTarget(ActivePokemon* active_pokemon);
 s32 Battle_HasUsableMajorStatusTarget(ActivePokemon* active_pokemon);
@@ -1337,7 +1352,7 @@ void BattleAnim_StatusIdleCase10Sub0(UNUSED ActivePokemon* arg0, ActivePokemon* 
 void BattleAnim_StatusIdleCase10Sub1(ActivePokemon* arg0, ActivePokemon* arg1);
 void BattleAnim_StatusIdleCase10(ActivePokemon* arg0, ActivePokemon* arg1);
 void BattleAnim_StatusIdleCase0(UNUSED ActivePokemon* arg0, UNUSED ActivePokemon* arg1);
-void BattleAnim_UpdateOwnerStatusIdleAnimation(s32 arg0);
+void BattleAnim_UpdateOwnerStatusIdleAnimation(s32 side_index);
 void BattleAnim_SetOwnerSecondaryStatusFlags(ActivePokemon* arg0, u8 arg1, u8 arg2);
 void BattleAnim_ClearOwnerSecondaryStatusFlags(ActivePokemon* active_pokemon);
 void BattleAnim_InitSecondarySwayOffset(ActivePokemon* arg0, f32 arg1, s16 arg2);
@@ -1354,14 +1369,14 @@ void BattleAnim_CalculateDistanceAngles(Vec3f* arg0, Vec3f* arg1, f32* arg2, s16
 Vec3f* BattleAnim_Vec3fSetZero(Vec3f* arg0);
 Vec3f* BattleAnim_Vec3fOffsetByPolarXZ(Vec3f* arg0, Vec3f* arg1, f32 arg2, s16 arg3);
 void BattleAnim_Vec3fSetPolarXZ(Vec3f* arg0, f32 arg1, s16 arg2);
-Vec3f* BattleAnim_Vec3fCopy(Vec3f* arg0, Vec3f* arg1);
+Vec3f* BattleAnim_Vec3fCopy(Vec3f* dest, Vec3f* src);
 Vec3s* BattleAnim_Vec3sCopy(Vec3s* arg0, Vec3s* arg1);
 Vec3f* BattleAnim_Vec3fScaleComponents(Vec3f* arg0, f32 arg1, f32 arg2, f32 arg3);
 s16 BattleAnim_Atan2sFromPoints(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
 f32 BattleAnim_Vec3fDistance(Vec3f arg0, Vec3f arg1);
 f32 BattleAnim_Distance2D(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
 s32 BattleAnim_RandomIntWithWarmup(f32 arg0);
-u16 BattleAnim_RandomRange(s32 arg0);
+u16 BattleAnim_RandomRange(s32 range);
 s32 BattleAnim_StepToS16(s16* arg0, s16 arg1, s16 arg2);
 s32 BattleAnim_StepToS16VariableRate(s16* arg0, s16 arg1, f32 arg2);
 void BattleAnim_ApproachF(f32* arg0, f32 arg1, f32 arg2);
@@ -1546,7 +1561,7 @@ void BattleScene_UpdateIntroCameraSequence(CameraNode* arg0);
 //@src/fragments/battle_engine/battle_engine_3055E0.c
 f32 BattleScene_ScaleCameraDistance(ActivePokemon* arg0, f32 arg1, f32 arg2);
 s32 BattleScene_AdvanceCameraSubstepCounter(s32 arg0);
-s32 BattleScene_AdvanceCameraFrameCounter(s32 arg0);
+s32 BattleScene_AdvanceCameraFrameCounter(s32 frame_limit);
 s32 BattleScene_AdvanceCameraFrameCounterUntil(s32 arg0);
 s32 BattleScene_IsCameraFrameCounterAtLeast(s32 arg0);
 void BattleScene_SetActivePokemonIndex(s32 arg0);
@@ -1555,13 +1570,13 @@ void BattleScene_ResetCameraSubstepCounter(void);
 void BattleScene_SetCameraAtAndEyeFromAngles(CameraNode* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6);
 void BattleScene_GetOwnerCameraAnchor(ActivePokemon* arg0, Vec3f* arg1);
 void BattleScene_GetOwnerBoneOrDefaultAnchor(ActivePokemon* arg0, Vec3f* arg1, s32 arg2);
-void BattleScene_SetCameraModeAndStep(s32 arg0, s32 arg1);
+void BattleScene_SetCameraModeAndStep(s32 camera_mode, s32 camera_step);
 void BattleScene_SetCameraClipPlanes(CameraNode* arg0, f32 arg1, f32 arg2);
 void BattleScene_SetCameraSubstate(s32 arg0, u16 arg1);
 void BattleScene_ApplyCameraPhaseDefaults(void);
 void BattleScene_SetDamageShakeAmplitude(ActivePokemon* active_pokemon);
 void BattleScene_ApplyCameraShake(CameraNode* arg0);
-void BattleScene_StartCameraShake(UNUSED ActivePokemon* arg0);
+void BattleScene_StartCameraShake(UNUSED ActivePokemon* active_pokemon);
 s32 BattleScene_IsCameraAngleSettled(s16 arg0, s16 arg1);
 s32 BattleScene_ApproachCameraRoll(CameraNode* arg0, s16 arg1, s16 arg2);
 s32 BattleScene_ApproachCameraRollNoEyeUpdate(UNUSED CameraNode* arg0, s16 arg1, s16 arg2);
@@ -1806,15 +1821,15 @@ void BattleAnim_PlaySoundEffect1(void);
 void BattleAnim_PlaySoundEffect2(void);
 void BattleAnim_PlaySoundEffect3(void);
 void BattleAnim_PlaySoundEffect8(void);
-void BattleAnim_PlayOwnerCry(ActivePokemon* arg0, s16 arg1);
+void BattleAnim_PlayOwnerCry(ActivePokemon* active_pokemon, s16 species);
 void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon);
 void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon);
-void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2);
+void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* active_pokemon, BattleMonRuntime* runtime, s32 reaction_kind);
 void BattleScene_ConfigureAudioChannelGroupsByTeam(void);
 void BattleScene_ConfigureAudioChannelGroupCounts(void);
 void BattleScene_SelectBattleMusic(void);
 void BattleScene_StartBattleMusic(void);
-void BattleAnim_PlayBattleSequenceById(ActivePokemon* arg0, s32 arg1);
+void BattleAnim_PlayBattleSequenceById(ActivePokemon* active_pokemon, s32 sequence_id);
 void BattleAnim_RunEffectInitStart(s16 arg0);
 void BattleAnim_RunEffectInitEnd(s16 arg0);
 void BattleAnim_RegisterEffectSlot(func_D_84390300 arg0, func_D_84390320 arg1);
@@ -1827,21 +1842,21 @@ void BattleAnim_SetQueuedResourceListId(u8 arg0);
 u8 BattleAnim_GetQueuedResourceListId(void);
 s16 BattleAnim_GetQueuedMoveId(void);
 void BattleAnim_QueueMoveEffect(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor);
-void BattleAnim_QueueMoveEffectScriptA(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4);
+void BattleAnim_QueueMoveEffectScriptA(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor);
 void BattleAnim_QueueMoveEffectEnd(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor);
 void BattleAnim_QueueMoveEffectScriptB(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor);
 void BattleAnim_QueueEffectList3(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternative_anchor);
-void BattleAnim_QueueEffectList6(s32 arg0, ActivePokemon* arg1);
+void BattleAnim_QueueEffectList6(s32 move_id, ActivePokemon* owner);
 void BattleAnim_QueueEffectList5(s32 arg0, ActivePokemon* arg1);
 void BattleAnim_QueueEffectList6Alt(s32 arg0, ActivePokemon* arg1);
 void BattleAnim_QueueEffectList9(s32 arg0);
-void BattleAnim_QueueEffectList(u8 arg0, ActivePokemon* arg1);
-void BattleAnim_StopOwnerCategoryParticles(u8 arg0, ActivePokemon* arg1);
+void BattleAnim_QueueEffectList(u8 resource_list_id, ActivePokemon* owner);
+void BattleAnim_StopOwnerCategoryParticles(u8 category, ActivePokemon* owner);
 void BattleAnim_RegisterAssetTable(arg1_func_80019420* arg0);
 void BattleAnim_ResetAssetTable(void);
 void BattleAnim_BuildResourceListForMove(s16 arg0);
 void BattleAnim_LoadMoveResourceList(BattleSessionTeams* battle_session_teams, s16 move_id);
-void BattleAnim_LoadModeResourceList(BattleSessionTeams* arg0, s16 arg1);
+void BattleAnim_LoadModeResourceList(BattleSessionTeams* battle_session_teams, s16 mode);
 void BattleAnim_RegisterAllAssetTables(void);
 void BattleAnim_RegisterAssetTablesForSession(BattleSessionTeams* battle_session_teams);
 void BattleAnim_ResetDisplayContexts(void);
@@ -1906,7 +1921,7 @@ s32 BattleAnim_IsEffectSpawningEnabled(void);
 void BattleAnim_DisableEffectSpawning(void);
 void BattleAnim_EnableEffectSpawning(void);
 void BattleAnim_DisableEffectSpawningAlias(void);
-void BattleAnim_CleanupEffects(s32 arg0);
+void BattleAnim_CleanupEffects(s32 cleanup_mode);
 void BattleAnim_StopParticlesForOwnerCategory(u8 arg0, ActivePokemon* arg1);
 void BattleAnim_ResetSpawnDelay(void);
 void BattleAnim_SetSpawnDelay(s32 arg0);

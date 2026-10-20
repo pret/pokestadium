@@ -87,13 +87,13 @@ void BattleAnim_UpdateSwayPhysicsToTarget(UNUSED ActivePokemon* arg0, ActivePoke
     Vec3f_AddInPlace(&arg1->unk_4EC.position, &sp3C);
 }
 
-void BattleScene_HideParticipantSecondaryModels(ActivePokemon* arg0) {
+void BattleScene_HideParticipantSecondaryModels(ActivePokemon* active_pokemon) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
-        Vec3f_SetComponentsDuplicate(&arg0->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
-        arg0->unk_168[i].unk_000.node.flags &= ~1;
-        arg0->unk_168[i].unk_169 = 0;
+        Vec3f_SetComponentsDuplicate(&active_pokemon->unk_168[i].unk_000.scale, 1.0f, 1.0f, 1.0f);
+        active_pokemon->unk_168[i].unk_000.node.flags &= ~1;
+        active_pokemon->unk_168[i].unk_169 = 0;
     }
 }
 
@@ -925,77 +925,77 @@ void BattleAnim_StatusIdleCase10(ActivePokemon* arg0, ActivePokemon* arg1) {
 void BattleAnim_StatusIdleCase0(UNUSED ActivePokemon* arg0, UNUSED ActivePokemon* arg1) {
 }
 
-void BattleAnim_UpdateOwnerStatusIdleAnimation(s32 arg0) {
-    ActivePokemon* temp_a1 = sActivePokemon[arg0];
-    ActivePokemon* temp_a2 = sActivePokemon[arg0];
+void BattleAnim_UpdateOwnerStatusIdleAnimation(s32 side_index) {
+    ActivePokemon* owner = sActivePokemon[side_index];
+    ActivePokemon* animated_pokemon = sActivePokemon[side_index];
 
-    switch (sActivePokemon[arg0]->animationFlags1) {
+    switch (sActivePokemon[side_index]->animationFlags1) {
         case 0:
-            BattleAnim_StatusIdleCase0(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase0(owner, animated_pokemon);
             break;
 
         case 1:
-            BattleAnim_StatusIdleCase1(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase1(owner, animated_pokemon);
             break;
 
         case 2:
-            BattleAnim_StatusIdleCase2(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase2(owner, animated_pokemon);
             break;
 
         case 3:
-            BattleAnim_StatusIdleCase3(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase3(owner, animated_pokemon);
             break;
 
         case 4:
-            BattleAnim_StatusIdleCase4(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase4(owner, animated_pokemon);
             break;
 
         case 5:
-            BattleAnim_StatusIdleCase5(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase5(owner, animated_pokemon);
             break;
 
         case 6:
-            BattleAnim_StatusIdleCase6(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase6(owner, animated_pokemon);
             break;
 
         case 7:
-            BattleAnim_StatusIdleCase7(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase7(owner, animated_pokemon);
             break;
 
         case 8:
-            BattleAnim_StatusIdleCase8(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase8(owner, animated_pokemon);
             break;
 
         case 9:
-            BattleAnim_StatusIdleCase9(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase9(owner, animated_pokemon);
             break;
 
         case 10:
-            BattleAnim_StatusIdleCase10(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase10(owner, animated_pokemon);
             break;
 
         case 12:
-            BattleAnim_StatusIdleCase12(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase12(owner, animated_pokemon);
             break;
 
         case 13:
-            BattleAnim_StatusIdleCase13(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase13(owner, animated_pokemon);
             break;
 
         case 14:
-            BattleAnim_StatusIdleCase14(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase14(owner, animated_pokemon);
             break;
 
         case 15:
-            BattleAnim_StatusIdleCase15(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase15(owner, animated_pokemon);
             break;
 
         case 16:
-            BattleAnim_StatusIdleCase16(temp_a1, temp_a2);
+            BattleAnim_StatusIdleCase16(owner, animated_pokemon);
             break;
 
         default:
-            BattleScene_ResetParticipantModelFlags(temp_a2);
+            BattleScene_ResetParticipantModelFlags(animated_pokemon);
             break;
     }
 }
@@ -1770,7 +1770,7 @@ BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         11,
         {
-            func_8430506C,
+            BattleScene_EnterRow11StartHitReactionAnim,
             BattleScene_StateCallbackNop,
             BattleScene_StateCallbackNop,
             BattleScene_TickPlayMoveEffectEnd,
@@ -1815,7 +1815,7 @@ BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         14,
         {
-            func_8430506C,
+            BattleScene_EnterRow11StartHitReactionAnim,
             BattleScene_StateCallbackNop,
             BattleScene_StateCallbackNop,
             BattleScene_TickRow14PlayMoveEffectEnd,

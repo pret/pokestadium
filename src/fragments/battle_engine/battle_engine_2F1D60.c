@@ -93,8 +93,8 @@ void BattleScene_ApplyOwnerCameraFraming(ActivePokemon* active_pokemon) {
                   active_pokemon->unk_728.unk_000.position.z, active_pokemon->unk_728.unk_188, active_pokemon->unk_728.unk_184, active_pokemon->unk_728.unk_186);
 }
 
-void BattleScene_TickOwnerCameraFraming(ActivePokemon* arg0) {
-    BattleScene_ApplyOwnerCameraFraming(arg0);
+void BattleScene_TickOwnerCameraFraming(ActivePokemon* active_pokemon) {
+    BattleScene_ApplyOwnerCameraFraming(active_pokemon);
 }
 
 void BattleScene_InitializeOwnerCameraFraming(CameraNode* arg0, ActivePokemon* arg1, CameraNode* arg2, ActivePokemon* arg3) {

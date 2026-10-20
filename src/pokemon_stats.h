@@ -44,7 +44,7 @@ void Pokemon_SetDisplayNameFromOt(BattleMon* arg0);
 s32 VictoryPalace_LoadSpeciesRecord(unk_func_800228F0*, u16);
 void VictoryPalace_SaveSpeciesRecord(BattleMon* arg0, s16 arg1, u8 arg2);
 s32 GbSave_PlayerIdentityMatches(u16* arg0, GbSavePlayerIdentity* arg1);
-u8 Move_GetIdFromTableIndex(s32 arg0);
+u8 Move_GetIdFromTableIndex(s32 tm_hm_index);
 u8 Species_ToInternalIndex(s32 arg0);
 s32 Species_FromInternalIndex(s32 arg0);
 u8 func_80022A88(s32 arg0);

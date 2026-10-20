@@ -1827,7 +1827,7 @@ void BattleScene_RunConditionalHpTransition(CameraNode* arg0) {
             BattleScene_FrameCamera(arg0, D_84390200);
             D_84390220 = BattleScene_AnimateDisplayedHpToRuntime(D_84390200);
             D_84390224 = BattleScene_AnimateDisplayedHpToRuntime(D_84390204);
-            sp1C = func_84305458(D_84390204);
+            sp1C = BattleScene_GetOpponentEffectCheckpoint(D_84390204);
             if ((sp1C == 2) && ((BattleScene_IsOpponentRowCheckpointReached(D_84390200) != 0) || (BattleScene_AdvanceCameraFrameCounter(0x64) != 0))) {
                 BattleScene_CompleteHpUpdateTransition(arg0, &D_84390220, &D_84390224);
             } else if (sp1C == 1) {
@@ -1944,7 +1944,7 @@ void BattleScene_RunActionEffectHpTransition(CameraNode* arg0) {
             D_84390220 = BattleScene_AnimateDisplayedHpToRuntime(D_84390200);
             D_84390224 = BattleScene_AnimateDisplayedHpToRuntime(D_84390204);
             sp1C = BattleScene_FrameCamera(arg0, D_84390200);
-            if ((BattleScene_IsSpecialOwnerAnimation(D_84390204) != 0) && ((D_843C4DEC < 0xA) || (sBattleMoveFailed != 0)) &&
+            if ((BattleScene_IsSpecialOwnerAnimation(D_84390204) != 0) && ((sTypeEffectiveness < 0xA) || (sBattleMoveFailed != 0)) &&
                 !(sp24->unk_15 & 0x20)) {
                 var_a0 = 0x5A;
             } else {
@@ -2515,7 +2515,7 @@ void BattleScene_Phase25(CameraNode* arg0) {
         case 1:
             BattleScene_ApplyActionCameraMode(arg0, 0);
             if (!(sp18->flags & 0x800)) {
-                func_84304800(D_84390204);
+                BattleScene_ResetOwnerModelIfLoaded(D_84390204);
             }
             if (BattleAnim_IsSessionBusy(D_84390204) == 0) {
                 BattleAnim_PlaySpeciesReactionSound(D_84390204, sp1C, 0);
@@ -3066,7 +3066,7 @@ void BattleScene_PhaseDrainDamage(CameraNode* arg0) {
         case 2:
             if (BattleScene_ApproachCloseCameraShot(arg0, sActivePokemon[sBattleScene.unk_00->unk_2C]) != 0) {
                 BattleScene_SelectCameraShot(D_84390204, arg0, 3);
-                func_84303E58(D_84390204);
+                BattleScene_StartHitCueAnimation(D_84390204);
                 BattleAnim_PlayBattleSequenceById(D_84390204, 0x1F);
                 BattleScene_SetDamageShakeAmplitude(D_84390204);
                 sBattleScene.unk_00->unk_20 += 1;

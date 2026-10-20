@@ -28,9 +28,9 @@ s32 BattleScene_AdvanceCameraSubstepCounter(s32 arg0) {
     return 0;
 }
 
-s32 BattleScene_AdvanceCameraFrameCounter(s32 arg0) {
+s32 BattleScene_AdvanceCameraFrameCounter(s32 frame_limit) {
     sBattleScene.unk_00->unk_14++;
-    if (sBattleScene.unk_00->unk_14 >= arg0) {
+    if (sBattleScene.unk_00->unk_14 >= frame_limit) {
         sBattleScene.unk_00->unk_14 = 0;
         return 1;
     }
@@ -90,9 +90,9 @@ void BattleScene_GetOwnerBoneOrDefaultAnchor(ActivePokemon* arg0, Vec3f* arg1, s
     }
 }
 
-void BattleScene_SetCameraModeAndStep(s32 arg0, s32 arg1) {
-    sBattleScene.unk_00->unk_1C = arg0;
-    sBattleScene.unk_00->unk_20 = arg1;
+void BattleScene_SetCameraModeAndStep(s32 camera_mode, s32 camera_step) {
+    sBattleScene.unk_00->unk_1C = camera_mode;
+    sBattleScene.unk_00->unk_20 = camera_step;
 }
 
 void BattleScene_SetCameraClipPlanes(CameraNode* arg0, f32 arg1, f32 arg2) {
@@ -157,7 +157,7 @@ void BattleScene_ApplyCameraShake(CameraNode* arg0) {
     arg0->view.targetPosition.x += temp_fv0 * SINS(sp2A + 0x4000);
 }
 
-void BattleScene_StartCameraShake(UNUSED ActivePokemon* arg0) {
+void BattleScene_StartCameraShake(UNUSED ActivePokemon* active_pokemon) {
     sBattleScene.unk_00->unk_68 = 30.0f;
     sBattleScene.unk_00->unk_7A = 0;
 }

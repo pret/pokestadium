@@ -258,10 +258,10 @@ s32 GbSave_PlayerIdentityMatches(u16* arg0, GbSavePlayerIdentity* arg1) {
 }
 #endif
 
-u8 Move_GetIdFromTableIndex(s32 arg0) {
+u8 Move_GetIdFromTableIndex(s32 tm_hm_index) {
     extern u8 D_80073230[];
 
-    return D_80073230[arg0];
+    return D_80073230[tm_hm_index];
 }
 
 u8 Species_ToInternalIndex(s32 arg0) {
