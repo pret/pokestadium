@@ -957,7 +957,7 @@ extern Gfx D_8438A980[];
 extern u8 D_8438AC60[];
 extern StatStageMultiplier gStatStageMultipliers[];
 extern u8 D_8438ACD4[];
-extern u8 gTypeEffects[];
+extern u8 sTypeEffects[];
 extern u8* sSide1PokemonThumbnailImage;
 extern u8* sSide2PokemonThumbnailImage;
 

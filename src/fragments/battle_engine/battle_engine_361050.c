@@ -217,7 +217,7 @@ void BattleAI_ApplyTypeEffectAndStab(BattleMonRuntime* arg0, BattleMonRuntime* a
             D_843C613A += D_843C613A >> 1;
         }
 
-        var_v0 = gTypeEffects;
+        var_v0 = sTypeEffects;
         while (var_v0->unk_00 != 0xFF) {
             if ((var_v0->unk_00 == tmp3) && ((var_v0->unk_01 == tmp11) || (var_v0->unk_01 == tmp21))) {
                 D_843C613A = (D_843C613A * var_v0->unk_02) / 10;
@@ -477,7 +477,7 @@ u16 BattleAI_ScaleStatLow(BattleMonRuntime* arg0) {
 }
 
 f32 Battle_GetTypeEffectiveness(u8 arg0, BattleMonRuntime* arg1) {
-    TypeEffectivenessEntry* var_v0 = &gTypeEffects[0];
+    TypeEffectivenessEntry* var_v0 = &sTypeEffects[0];
     u8 temp_v1 = arg1->unk_16[6];
     u8 temp_a2 = arg1->unk_16[7];
     f32 var_fv1 = 1.0f;
@@ -3769,7 +3769,7 @@ s32 BattleAI_GroupSharesTypeWeakness(BattleAiTeamState* arg0, u8* arg1, u8 arg2)
         for (j = 0; j < arg2; j++) {
             var_fv0 = 1.0f;
 
-            var_a3 = &gTypeEffects[0];
+            var_a3 = &sTypeEffects[0];
             while (var_a3->unk_00 != 0xFF) {
                 if ((var_a3->unk_00 == i) &&
                     ((var_a3->unk_01 == sp28[j].unk_00) || (var_a3->unk_01 == sp28[j].unk_01))) {
@@ -3798,7 +3798,7 @@ s32 BattleAI_GroupSharesTypeWeakness(BattleAiTeamState* arg0, u8* arg1, u8 arg2)
         for (j = 0; j < arg2; j++) {
             var_fv0 = 1.0f;
 
-            var_a3 = &gTypeEffects[0];
+            var_a3 = &sTypeEffects[0];
             while (var_a3->unk_00 != 0xFF) {
                 if ((var_a3->unk_00 == i) &&
                     ((var_a3->unk_01 == sp28[j].unk_00) || (var_a3->unk_01 == sp28[j].unk_01))) {
