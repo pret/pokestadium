@@ -28,9 +28,9 @@ ActivePokemon* sActivePokemon[2];
 ActivePokemon* sSide1ActivePokemon;
 ActivePokemon* sSide2ActivePokemon;
 static MovePresentationCue* sCurrentAnimation;
-unk_D_84390028 D_84390028[2];
+unk_D_84390028 gPokemonModelDimensions[2];
 static SwayLayoutConfig sDefaultSwayLayout;
-static BattleSceneStateTickSlot gBattleSceneStateTickSlots[7];
+static BattleSceneStateTickSlot sBattleSceneStateTickSlots[7];
 static s32 sBattleSceneStateTickSlotIndex;
 static s32 D_843900A4;
 f32 D_843900A8[2];
@@ -105,7 +105,7 @@ void BattleScene_ClearStateTickCallbacks(void) {
     s32 i;
 
     for (i = 0; i < 7; i++) {
-        gBattleSceneStateTickSlots[i].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[i].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -152,7 +152,7 @@ void BattleAnim_PlayMoveEffectEnd(ActivePokemon* user, s32 move_id) {
 void BattleScene_TickClearAnimRecordIfLoaded(ActivePokemon* active_pokemon) {
     if (BattleAnim_TryRegisterAssetTables(active_pokemon) != 0) {
         active_pokemon->animationTimer = 0;
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -166,7 +166,7 @@ void BattleScene_TickStartRowAnimRecord(ActivePokemon* active_pokemon) {
     if (BattleAnim_TryRegisterAssetTables(active_pokemon) != 0) {
         BattleAnim_SetModelEventTrackAndState(active_pokemon, sp24, 2);
         active_pokemon->animationTimer = 0;
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         ModelAnim_SetFrame(&active_pokemon->displayObject, 0);
         ModelAnim_SetAnimation(&active_pokemon->displayObject, sCurrentAnimation->id);
     }
@@ -179,10 +179,10 @@ void BattleScene_TickQueueRowEffectList3AtAnimEnd(ActivePokemon* active_pokemon)
 
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[sp28];
     if (BattleScene_GetParticipantModelHeight(active_pokemon) != 0.0f) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     } else if ((active_pokemon->animationTimer == (sCurrentAnimation->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[idx].mode);
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -429,7 +429,7 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
     pokemon->swayState.layoutConfig.unk_0C.x *= pokemon->unk_4B0;
 
     var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (object_type_index << 4)) & 0xFFFFFF);
-    Dma_WriteChunks(&D_84390028[side_index], var_a1, var_a1 + 0x10, 0);
+    Dma_WriteChunks(&gPokemonModelDimensions[side_index], var_a1, var_a1 + 0x10, 0);
 
     var_a1 = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (object_type_index * 0x10)) & 0xFFFFFF);
     Dma_WriteChunks(sPlayerTagTeam[side_index], var_a1, var_a1 + 0x10, 0);
@@ -459,7 +459,7 @@ void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon) 
         Battle_LoadOwnerModelForSwitchIn(active_pokemon);
         BattleScene_TickOwnerCameraFraming(active_pokemon);
         Audio_PlayCommand(2, 0, 0);
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         BattleScene_EnterStateRow(active_pokemon, 0x12);
     }
 }
@@ -484,10 +484,10 @@ void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon) {
 
         if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
             tmp = BattleScene_GetParticipantSideIndex(active_pokemon);
-            func_80048060(tmp, runtime->usedMove, 0xC8, 0);
+            PlayMoveSoundEffect(tmp, runtime->usedMove, 0xC8, 0);
         } else {
             tmp = BattleScene_GetParticipantSideIndex(active_pokemon);
-            func_80048060(tmp, runtime->usedMove, object_type_index + 1, 0);
+            PlayMoveSoundEffect(tmp, runtime->usedMove, object_type_index + 1, 0);
         }
 
         if ((pokemon_state->unk_34 & 0x4000) && ((object_type_index == 0x32) || (object_type_index == 0x31))) {
@@ -530,12 +530,12 @@ void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon) {
     // Electrode just headbutts (might be a unique animation?)
     // Note: Electrode can't actually learn Mega Kick, might be for in case it uses Mimic
     if ((pokemon_runtime->usedMove == MEGA_KICK) && (species == ELECTRODE_OB1)) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     } else if ((active_pokemon->animationTimer == (sCurrentAnimation->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         if (sBattleScene.unk_00->unk_48 == 0x14) {
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         } else if (pokemon_runtime->moveCache.lastMove == DIG) {
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         } else {
             if (pokemon_runtime->moveCache.lastMove == WITHDRAW) {
                 // Special Withdraw Animations
@@ -564,7 +564,7 @@ void BattleScene_TickRow3PlayMoveEffectScript(ActivePokemon* active_pokemon) {
                     BattleAnim_PlayMoveEffectScriptA(active_pokemon, pokemon_runtime->usedMove);
                 }
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -592,9 +592,9 @@ void BattleScene_TickRow3PostEffectCamera(ActivePokemon* active_pokemon) {
                     BattleScene_StartCameraShake(active_pokemon);
                 }
                 BattleAnim_PlaySpeciesReactionSound(active_pokemon, sp24, 0);
-                func_843031A0(active_pokemon);
+                BattleScene_MakeGoldenWhenHarden(active_pokemon);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -617,12 +617,12 @@ void BattleScene_TickRow3QueueEffectList6(ActivePokemon* active_pokemon) {
                 BattleAnim_QueueEffectList6(3, active_pokemon);
                 Audio_PlayCommand(0x23, 0, 0);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
 
-void func_843031A0(ActivePokemon* active_pokemon) {
+void BattleScene_MakeGoldenWhenHarden(ActivePokemon* active_pokemon) {
     BattleMonRuntime* temp_v1 = &active_pokemon->state.runtime;
 
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[temp_v1->usedMove - 1];
@@ -665,8 +665,8 @@ void BattleScene_EnterRow21StartAnimRecord0(ActivePokemon* active_pokemon) {
 void BattleScene_TickRow21PlaySpeciesSound(ActivePokemon* active_pokemon) {
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_000[0];
     if ((active_pokemon->animationTimer == (sCurrentAnimation->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
-        func_800479C0(1, active_pokemon->displayObject.objectType, 0);
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        Effect_TriggerMoveVisual(1, active_pokemon->displayObject.objectType, 0);
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -709,7 +709,7 @@ void BattleScene_TickRow19PlayMoveEffectScript(ActivePokemon* active_pokemon) {
 
     if ((var_v0 == active_pokemon->animationTimer) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         if (sBattleScene.unk_00->unk_48 == 0x14) {
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
             return;
         }
 
@@ -726,7 +726,7 @@ void BattleScene_TickRow19PlayMoveEffectScript(ActivePokemon* active_pokemon) {
         } else {
             BattleScene_SetParticipantModelFlags(active_pokemon, sCurrentAnimation->unk_05, 0);
         }
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -761,7 +761,7 @@ void BattleScene_TickRow19PostEffectCamera(ActivePokemon* active_pokemon) {
             } else {
                 BattleAnim_PlaySpeciesReactionSound(active_pokemon, sp18, 0);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -844,7 +844,7 @@ void BattleScene_TickPlayMoveEffectEnd(ActivePokemon* active_pokemon) {
                     BattleScene_SetParticipantModelFlags(sActivePokemon[sp28 == 0], 0x10, 0);
                 }
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -865,7 +865,7 @@ void BattleScene_TickRow4PostEndCamera(ActivePokemon* active_pokemon) {
             } else {
                 BattleAnim_PlaySpeciesReactionSound(sActivePokemon[sp28], sp20, 5);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -907,7 +907,7 @@ s32 BattleScene_IsRowZeroCheckpointReached(ActivePokemon* active_pokemon) {
     return 0;
 }
 
-void func_84303E58(ActivePokemon* active_pokemon) {
+void Pokemon_ResetAnimAndTrigger(ActivePokemon* active_pokemon) {
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_A80;
     BattleAnim_SetModelEventTrackFromRow(active_pokemon, 0xA8);
     active_pokemon->animationTimer = 0;
@@ -944,14 +944,14 @@ void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
 
         if (sp24->unk_34 & 0x200) {
             if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0x1A);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0x1A);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0x1A);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0x1A);
             }
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0xA);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0xA);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0xA);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0xA);
         }
     }
 }
@@ -962,7 +962,7 @@ void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
     BattleMon* ptr = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
 
     if ((sp18->unk_34 & 0x4000) || (sp18->unk_34 & 2) || (ptr->unk_05 & 7)) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     } else if (active_pokemon->animationTimer == 1) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             if (active_pokemon->displayObject.objectType >= 0x98) {
@@ -970,7 +970,7 @@ void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
             } else {
                 BattleAnim_PlayOwnerCry(active_pokemon, active_pokemon->displayObject.objectType);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -981,7 +981,7 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
     ActivePokemonState* sp24 = &active_pokemon->state;
 
     if ((active_pokemon->state.unk_34 & 0x4000) || (sp24->unk_34 & 2) || (ptr->unk_05 & 7)) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     } else if ((active_pokemon->animationTimer == 1) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         if (active_pokemon->displayObject.objectType >= 0x98) {
             Cry_Play(sp24->model, 3);
@@ -993,16 +993,16 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
 
         if (sp24->unk_34 & 0x200) {
             if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0x1B);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0x1B);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0x1B);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0x1B);
             }
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0xB);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0xB);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0xB);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0xB);
         }
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -1012,7 +1012,7 @@ void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
     ActivePokemonState* sp24;
 
     if ((active_pokemon->state.unk_34 & 0x4000) || (ptr->unk_05 & 0x20) || (ptr->unk_05 & 7)) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         return;
     }
 
@@ -1028,17 +1028,17 @@ void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
 
         if (sp24->unk_34 & 0x200) {
             if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0x1B);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0x1B);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0x1B);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0x1B);
             }
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0xB);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, 0xC8, 0xB);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0xB);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 0xB);
         }
 
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -1053,18 +1053,18 @@ void BattleScene_TickAssetLoadQueueRowEffectList3(ActivePokemon* active_pokemon)
         BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[sp24].mode);
         Audio_PlayCommand(3, 0, 0);
         active_pokemon->sessionTeams->unk_04 = &active_pokemon->sessionTeams->teamMember[temp_v1->unk_2B]->pokemonPicked[temp_v1->unk_18];
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
-void func_843046BC(ActivePokemon* active_pokemon) {
+void Pokemon_HandleMoveHitSimple(ActivePokemon* active_pokemon) {
     BattleScene_GetParticipantSideIndex(active_pokemon);
     if ((active_pokemon->animationTimer == 1) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         s32 idx = active_pokemon->animationState;
 
         BattleScene_QueueRowEffectList3(active_pokemon, sBattleSceneStateRowTable[idx].mode);
         Audio_PlayCommand(3, 0, 0);
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -1080,13 +1080,13 @@ void BattleScene_TickRow20CleanupAndEnterState18(ActivePokemon* active_pokemon) 
         BattleScene_TickOwnerCameraFraming(active_pokemon);
         Audio_PlayCommand(2, 0, 0);
 
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
 
         BattleScene_EnterStateRow(active_pokemon, 0x12);
     }
 }
 
-void func_84304800(ActivePokemon* active_pokemon) {
+void Pokemon_ClearTransformFlag(ActivePokemon* active_pokemon) {
     if (active_pokemon->sessionTeams->uniqueStatusFlags & 0x10) {
         active_pokemon->sessionTeams->uniqueStatusFlags &= ~0x90;
         Battle_ResetOwnerModelToNeutralPlaceholder(active_pokemon);
@@ -1129,7 +1129,7 @@ void BattleScene_TickRow8PlayMoveEffectScriptB(ActivePokemon* active_pokemon) {
             BattleAnim_QueueEffectList(4, active_pokemon);
         }
 
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
 
         BattleAnim_PlaySpeciesReactionSound(active_pokemon, temp_s1_2, 4);
     }
@@ -1178,7 +1178,7 @@ void BattleScene_Row12Slot1CameraCleanup(ActivePokemon* active_pokemon) {
     if ((sCurrentAnimation->unk_07 + 1) == sActivePokemon[sp28]->animationTimer) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             BattleAnim_PlaySpeciesReactionSound(active_pokemon, sp20, 5);
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -1194,7 +1194,7 @@ void BattleScene_Row13PlaySequences14And21(ActivePokemon* active_pokemon) {
         BattleAnim_PlayBattleSequenceById(active_pokemon, 0x21);
     }
 
-    gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+    sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
 }
 
 void BattleScene_TickPlaySpeciesSequence33(ActivePokemon* active_pokemon) {
@@ -1203,10 +1203,10 @@ void BattleScene_TickPlaySpeciesSequence33(ActivePokemon* active_pokemon) {
 
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_A70;
     if ((BattleScene_GetParticipantModelHeight(active_pokemon) != 0.0f) && (sp22 != 0x16) && (sp22 != 0x52) && (sp22 != 0x8E)) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     } else if ((active_pokemon->animationTimer == (sCurrentAnimation->unk_04 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         BattleAnim_PlaySpeciesSequence33(active_pokemon);
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
@@ -1229,7 +1229,7 @@ void BattleScene_TickQueueList3Selector2OrC(ActivePokemon* active_pokemon) {
                     BattleAnim_QueueEffectList3(0xC, active_pokemon, active_pokemon, 0xFF, 0xFF);
                 }
                 Audio_PlayCommand(3, 0, 0);
-                gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+                sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
             }
         } else if ((sp24 <= 0) || (sp24 == active_pokemon->animationTimer)) {
             if (sCurrentAnimation->unk_09 == 1) {
@@ -1238,7 +1238,7 @@ void BattleScene_TickQueueList3Selector2OrC(ActivePokemon* active_pokemon) {
                 BattleAnim_QueueEffectList3(0xC, active_pokemon, active_pokemon, 0xFF, 0xFF);
             }
             Audio_PlayCommand(3, 0, 0);
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -1260,11 +1260,11 @@ void BattleScene_TickQueueList3Selector2OrCFromB10(ActivePokemon* active_pokemon
             BattleAnim_QueueEffectList3(0xC, active_pokemon, active_pokemon, 0xFF, 0xFF);
         }
         Audio_PlayCommand(3, 0, 0);
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
-void func_8430506C(ActivePokemon* active_pokemon) {
+void Battle_UpdateAnimChannelForEntity(ActivePokemon* active_pokemon) {
     s32 pad3;
     s32 sp48;
     s32 sp44;
@@ -1342,11 +1342,11 @@ void BattleScene_TickRow14PlayMoveEffectEnd(ActivePokemon* active_pokemon) {
             BattleAnim_PlaySpeciesReactionSound(sActivePokemon[sp2C == 0], &active_pokemon->state.runtime, 1);
         }
 
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
     }
 }
 
-s32 func_84305458(ActivePokemon* active_pokemon) {
+s32 Battle_GetAnimStateResultCode(ActivePokemon* active_pokemon) {
     BattleMonRuntime* ptr = &active_pokemon->state.runtime;
     s32 temp_v1;
 
@@ -1376,7 +1376,7 @@ void BattleScene_TickRow11QueueEffectList6(ActivePokemon* active_pokemon) {
                 BattleAnim_QueueEffectList6(1, sActivePokemon[sp28]);
                 BattleAnim_PlayBattleSequenceById(active_pokemon, 0x20);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -1396,7 +1396,7 @@ void BattleScene_TickRow11PostEndCamera(ActivePokemon* active_pokemon) {
             } else {
                 BattleAnim_PlaySpeciesReactionSound(sActivePokemon[sp28], sp20, 5);
             }
-            gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
+            sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
         }
     }
 }
@@ -1409,9 +1409,9 @@ void BattleScene_RegisterStateTickCallback(ActivePokemon* arg0, BattleSceneState
     s32 i;
 
     for (i = 0; i < 7; i++) {
-        if (sBattleSceneStateTickSentinel == gBattleSceneStateTickSlots[i].unk_04) {
-            gBattleSceneStateTickSlots[i].unk_04 = arg1;
-            gBattleSceneStateTickSlots[i].unk_00 = arg0;
+        if (sBattleSceneStateTickSentinel == sBattleSceneStateTickSlots[i].unk_04) {
+            sBattleSceneStateTickSlots[i].unk_04 = arg1;
+            sBattleSceneStateTickSlots[i].unk_00 = arg0;
             break;
         }
     }
@@ -1439,7 +1439,7 @@ void BattleScene_TickStateCallbacks(void) {
     sActivePokemon[1]->animationTimer++;
 
     for (sBattleSceneStateTickSlotIndex = 0; sBattleSceneStateTickSlotIndex < 7; sBattleSceneStateTickSlotIndex++) {
-        gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04(gBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_00);
+        sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04(sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_00);
     }
 }
 
@@ -1679,7 +1679,7 @@ s32 BattleScene_IsRowAnimWaitComplete(ActivePokemon* arg0, s32 arg1) {
     return ModelAnim_IsAnimationDone(&arg0->displayObject);
 }
 
-void func_843060EC(ActivePokemon* active_pokemon) {
+void Battle_MaybeTriggerSpecialAnimEffect(ActivePokemon* active_pokemon) {
     sCurrentAnimation = &D_84384570[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_A50;
     if (BattleAnim_IsSessionBusy(active_pokemon) == 0) {
         if ((active_pokemon->displayObject.transformAnim.animationId != -1) && (active_pokemon->displayObject.node.flags & 1) &&
@@ -1705,14 +1705,14 @@ void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon) {
 
     if (active_pokemon->unk_4C8 != 0) {
         if (sp24->unk_34 & 0x200) {
-            active_pokemon->displayObject.position.y = D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
+            active_pokemon->displayObject.position.y = gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
             Battle_ClearRuntimeFlags(active_pokemon, 0x608);
         }
 
         if (sp24->unk_34 & 0x4008) {
             active_pokemon->displayObject.lodFraction = 0xFF;
             BattleAnim_StopOwnerCategoryParticles(4, active_pokemon);
-            active_pokemon->displayObject.position.y = D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
+            active_pokemon->displayObject.position.y = gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
             active_pokemon->displayObject.node.renderFlags &= ~2;
             active_pokemon->displayObject.node.renderFlags |= 0x20;
             active_pokemon->displayObject.node.flags |= 1;
@@ -2145,7 +2145,7 @@ void BattleScene_InitializeRuntime(BattleSessionTeams* arg0) {
     sBattleControllerDisconnectedMessage = Text_GetStringTable(0x14);
 
     for (i = 0; i < 7; i++) {
-        gBattleSceneStateTickSlots[i].unk_04 = sBattleSceneStateTickSentinel;
+        sBattleSceneStateTickSlots[i].unk_04 = sBattleSceneStateTickSentinel;
     }
 
     BattleScene_ResetParticipantAuxTransform(sActivePokemon[0], sActivePokemon[0], 1);
@@ -2162,8 +2162,8 @@ void BattleScene_UpdateParticipantsAndQueueEffects(ActivePokemon* arg0, ActivePo
     Battle_AdvanceSecondaryModelAnimIfFinished(sActivePokemon[1], sActivePokemon[1]);
     BattleAnim_UpdateOwnerStatusIdleAnimation(0);
     BattleAnim_UpdateOwnerStatusIdleAnimation(1);
-    func_843060EC(sActivePokemon[0]);
-    func_843060EC(sActivePokemon[1]);
+    Battle_MaybeTriggerSpecialAnimEffect(sActivePokemon[0]);
+    Battle_MaybeTriggerSpecialAnimEffect(sActivePokemon[1]);
 }
 
 s32 BattleScene_DispatchLifecycle(s32 arg0, BattleSessionTeams* arg1) {

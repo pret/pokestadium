@@ -31,8 +31,8 @@ typedef struct Strip400Node {
     /* 0x0C */ f32 unk_0C;
 } Strip400Node; // size = 0x10
 
-static Strip400State D_84397610;
-static Strip400Node D_84397648[400];
+static Strip400State sTrailState;
+static Strip400Node sTrailPoints[400];
 static s32 pad_D_84398F48[2];
 static Radial20 D_84398F50[10];
 
@@ -48,7 +48,7 @@ static u32 D_84389068[] = {
 };
 
 void Radial20_Init(f32 arg0, f32 arg1, f32 arg2, f32 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9) {
-    Strip400State* ptr1 = &D_84397610;
+    Strip400State* ptr1 = &sTrailState;
     Strip400Node* ptr2;
     s32 i;
 
@@ -73,7 +73,7 @@ void Radial20_Init(f32 arg0, f32 arg1, f32 arg2, f32 arg3, u8 arg4, u8 arg5, u8 
     ptr1->unk_33.g = arg8;
     ptr1->unk_33.b = arg9;
 
-    ptr2 = &D_84397648[0];
+    ptr2 = &sTrailPoints[0];
     for (i = 0; i < 400; i++, ptr2++) {
         ptr2->unk_00 = arg0;
         ptr2->unk_04 = arg1;
@@ -83,7 +83,7 @@ void Radial20_Init(f32 arg0, f32 arg1, f32 arg2, f32 arg3, u8 arg4, u8 arg5, u8 
 }
 
 f32 Strip400_GetTailFadeRatio(void) {
-    Strip400State* ptr = &D_84397610;
+    Strip400State* ptr = &sTrailState;
     f32 tmp;
     s32 tmp2 = ptr->unk_00;
 
@@ -95,7 +95,7 @@ f32 Strip400_GetTailFadeRatio(void) {
         return 1.0f;
     }
 
-    tmp = (D_84397648[ptr->unk_06 * 0].unk_0C * 2.0f) / (ptr->unk_14 + ptr->unk_18);
+    tmp = (sTrailPoints[ptr->unk_06 * 0].unk_0C * 2.0f) / (ptr->unk_14 + ptr->unk_18);
     return tmp;
 }
 
@@ -108,7 +108,7 @@ s32 Radial20_Update(void) {
     f32 temp_ft0;
     f32 var_fs1;
     Strip400Node* var_s0;
-    Strip400State* ptr = &D_84397610;
+    Strip400State* ptr = &sTrailState;
     f32 sp98;
     f32 sp94;
     f32 sp90;
@@ -151,7 +151,7 @@ s32 Radial20_Update(void) {
         }
     }
 
-    var_s0 = &D_84397648[0];
+    var_s0 = &sTrailPoints[0];
 
     for (i = 0; i < ptr->unk_28; i++) {
         tmp00 = ptr->unk_00;
@@ -225,14 +225,14 @@ Gfx* Strip400_Draw(Gfx* arg0) {
     Vtx* vtx;
     s32 i;
     Strip400Node* var_a0;
-    Strip400State* ptr = &D_84397610;
+    Strip400State* ptr = &sTrailState;
 
     if (ptr->unk_28 < 2) {
         return arg0;
     }
     ptr->unk_2C = Gfx_AllocDisplayList(ptr->unk_28 * 2 * sizeof(Vtx));
     vtx = ptr->unk_2C;
-    var_a0 = &D_84397648[0];
+    var_a0 = &sTrailPoints[0];
 
     for (i = 0; i < ptr->unk_28; i++) {
         vtx->v.ob[0] = var_a0->unk_00;
@@ -810,7 +810,7 @@ static u32 D_84389188[] = {
     0x6F6F6F6F, 0x6F6F6F6F, 0x2F2F2F2F, 0x2F2F2F2F, 0x0D0D0D0D, 0x0D0D0D0D, 0x08080808, 0x08080808,
 };
 
-Gfx* func_84362084(Gfx* arg0) {
+Gfx* Radial20_Draw(Gfx* arg0) {
     static Gfx D_84389208[] = {
         gsDPPipeSync(),
         gsDPSetCycleType(G_CYC_1CYCLE),

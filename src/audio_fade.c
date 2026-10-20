@@ -27,7 +27,7 @@ typedef struct {
     /* 0x04 */ u8 unk_04;
 } unk_D_80078700;  // size = 0x05
 
-// func_800479C0 reads unk_02 through the biased symbol D_800786FD (= D_80078700 - 3).
+// Effect_TriggerMoveVisual reads unk_02 through the biased symbol D_800786FD (= D_80078700 - 3).
 unk_D_80078700 D_80078700[151] = {
     /*   1 */ { 0x01, 0x01, 0x00, 0x52, 0x04 },
     /*   2 */ { 0x01, 0x01, 0x00, 0x58, 0x36 },
@@ -187,7 +187,7 @@ s32 D_800789F8 = 0;
 u8 D_800789FC[4] = { 0 };
 u8 D_80078A00[16] = { 0 };
 
-s32 func_800479C0(u32 arg0, u32 arg1, u32 arg2) {
+s32 Effect_TriggerMoveVisual(u32 arg0, u32 arg1, u32 arg2) {
     s32 var;
     unk_D_800FC6F0* sp;
     s32 ret;

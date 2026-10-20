@@ -392,7 +392,7 @@ Gfx* func_810010BC(Gfx* gfx, unk_D_810047E0* arg1, unk_arg2_func_81001D80* arg2,
     }
     gSPDisplayList(gfx++, arg2->unk_04);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
-    if (func_800325AC() == 0) {
+    if (ModelPhase_IsIdle() == 0) {
         ptr = D_8006F09C;
         switch (ptr->objectType) {
         case 0x6D:                                  

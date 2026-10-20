@@ -32,19 +32,19 @@ s32 BattleScene_IsPartnerPikachu(ActivePokemon* active_pokemon) {
 }
 
 f32 BattleScene_GetParticipantModelHeight(ActivePokemon* active_pokemon) {
-    return D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
+    return gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
 }
 
 f32 BattleScene_GetParticipantModelRadius(ActivePokemon* active_pokemon) {
-    return D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_00;
+    return gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_00;
 }
 
 f32 BattleScene_GetParticipantModelWidth(ActivePokemon* active_pokemon) {
-    return D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_04;
+    return gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_04;
 }
 
 f32 BattleScene_GetParticipantEyeHeight(ActivePokemon* active_pokemon) {
-    return D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_0C;
+    return gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_0C;
 }
 
 void BattleScene_PositionParticipantModel(ActivePokemon* active_pokemon) {

@@ -499,7 +499,7 @@ s32 Battle_FrameCallback(s32 fade_mode) {
 
     if ((fade_mode != 2) && (sCompletionGate == 1)) {
         sCompletionGate = 2;
-        func_8003DB84(0);
+        AudioFrameUpdate(0);
         if (gSessionContext.mode != 0x11) {
             Audio_FadeOutAll(0x1E);
         }

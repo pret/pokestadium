@@ -1770,7 +1770,7 @@ BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         11,
         {
-            func_8430506C,
+            Battle_UpdateAnimChannelForEntity,
             BattleScene_StateCallbackNop,
             BattleScene_StateCallbackNop,
             BattleScene_TickPlayMoveEffectEnd,
@@ -1815,7 +1815,7 @@ BattleSceneStateRow sBattleSceneStateRowTable[] = {
     {
         14,
         {
-            func_8430506C,
+            Battle_UpdateAnimChannelForEntity,
             BattleScene_StateCallbackNop,
             BattleScene_StateCallbackNop,
             BattleScene_TickRow14PlayMoveEffectEnd,

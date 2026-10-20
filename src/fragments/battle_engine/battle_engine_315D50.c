@@ -22,32 +22,32 @@ s32 D_843902A0;
 #include "prevent_bss_reordering.h"
 s32 gBattleAnimFrameCounter;
 s32 gBattleAnimSpawnDelay;
-static s32 gBattleAnimQueuedMoveId;
-static s32 gBattleAnimQueuedEffectListMode;
+static s32 sBattleAnimQueuedMoveId;
+static s32 sBattleAnimQueuedEffectListMode;
 #define BATTLE_ANIMATION_QUEUE_INACTIVE 0
 #define BATTLE_ANIMATION_QUEUE_START 1
 #define BATTLE_ANIMATION_QUEUE_END 2
 static s32 D_843902B4;
-static s32 gBattleAnimQueuedEffectList;
+static s32 sBattleAnimQueuedEffectList;
 static s32 D_843902BC;
-static s32 gBattleAnimQueuedResourceListPending;
-static s32 gBattleAnimQueuedResourceListId;
-static s32 gBattleAnimQueuedAlternatePending;
-static s32 gBattleAnimQueuedAlternateMoveId;
-static s32 gBattleAnimQueuedAlternateList;
-static s32 gBattleAnimQueuedExtraPending;
-static s32 gBattleAnimQueuedExtraMoveId;
-static s32 gBattleAnimQueuedExtraList;
-static s8 gBattleAnimCurrentEffectList;
+static s32 sBattleAnimQueuedResourceListPending;
+static s32 sBattleAnimQueuedResourceListId;
+static s32 sBattleAnimQueuedAlternatePending;
+static s32 sBattleAnimQueuedAlternateMoveId;
+static s32 sBattleAnimQueuedAlternateList;
+static s32 sBattleAnimQueuedExtraPending;
+static s32 sBattleAnimQueuedExtraMoveId;
+static s32 sBattleAnimQueuedExtraList;
+static s8 sBattleAnimCurrentEffectList;
 s16 gBattleAnimCurrentAnchor;
 s16 gBattleAnimDefaultAnchor;
-static s16 gBattleAnimAlternateAnchor;
+static s16 sBattleAnimAlternateAnchor;
 ActivePokemon* gBattleAnimCurrentOwner;
 ActivePokemon* gBattleAnimSecondaryOwner;
 ActivePokemon* gBattleAnimTertiaryOwner;
 s32 D_843902F4;
 s32 D_843902F8;
-static s8 gBattleAnimEffectCallbackIndex;
+static s8 sBattleAnimEffectCallbackIndex;
 func_D_84390300 gBattleAnimEffectUpdateFuncs[8];
 func_D_84390320 gBattleAnimEffectDrawFuncs[8];
 s32 D_84390340;
@@ -57,26 +57,26 @@ static Vec3s D_84390354;
 static Vec3f D_84390360;
 static Vec3s D_8439036C;
 static Vec3s D_84390374;
-s16 D_8439037A;
-s16 D_8439037C;
-s16 D_8439037E;
-s16 D_84390380;
-s16 D_84390382;
-s16 D_84390384;
-s16 D_84390386;
-s16 D_84390388;
-s16 D_8439038A;
-s16 D_8439038C;
-s16 D_8439038E;
-s16 D_84390390;
-s16 D_84390392;
-s16 D_84390394;
-s16 D_84390396;
-s16 D_84390398;
-s16 D_8439039A;
-s16 D_8439039C;
-s16 D_8439039E;
-s16 D_843903A0;
+s16 gSavedPrimColorR;
+s16 gSavedPrimColorG;
+s16 gSavedPrimColorB;
+s16 gSavedPrimColorA;
+s16 gPrimColorR;
+s16 gPrimColorG;
+s16 gPrimColorB;
+s16 gPrimColorA;
+s16 gEnvColorR;
+s16 gEnvColorG;
+s16 gEnvColorB;
+s16 gEnvColorA;
+s16 gFogColorR;
+s16 gFogColorG;
+s16 gFogColorB;
+s16 gFogColorA;
+s16 gBlendColorR;
+s16 gBlendColorG;
+s16 gBlendColorB;
+s16 gBlendColorA;
 s32 pad_D_843903A8[2];
 static s32 D_843903B0;
 static s32 D_843903B4;
@@ -947,195 +947,195 @@ ParticleDescriptor gBattleAnimParticleDescriptors[] = {
     },
 };
 
-static func_D_84390320 gMoveAnimEffectStartInitFuncs[] = {
+static func_D_84390320 sMoveAnimEffectStartInitFuncs[] = {
     BattleAnim_EffectStartNop, BattleAnim_StartEffect1Descriptor2FPhaseFadeOut, BattleAnim_StartEffect2Descriptor08IndexedScaleDelayFade, BattleAnim_StartEffect3ModelTintAndVerticalFade, BattleAnim_StartEffect4TintDescriptor53ScalePulse, BattleAnim_EffectStartNop, BattleAnim_StartEffect6AnimatedScaleAndBurstEmitter,
     BattleAnim_StartEffect7GlobalTintFade, BattleAnim_StartEffect8ModelBurstAndVerticalFade, BattleAnim_EffectStartNop, BattleAnim_StartEffect10Model60AndModelAnimWait, BattleAnim_StartEffect11GlobalTintFade, BattleAnim_StartEffect12DelayedModelAnim, BattleAnim_StartEffect13SecondaryOwnerSpeciesBranch,
     BattleAnim_StartEffect14ModelAnimAndMoveKeyedTintParticles, BattleAnim_StartEffect15Descriptor08IndexedScaleDelayFade, BattleAnim_StartEffect16TintDescriptor34Sequence, BattleAnim_StartEffect17ModelAnimFinish, BattleAnim_StartEffect18ScatterRadialAndColumnSequence, BattleAnim_EffectStartNop, func_843378CC,
-    func_8434C590, func_84336B8C, func_84336EE8, func_8434BF2C, BattleAnim_EffectStartNop, func_8433BC38, BattleAnim_EffectStartNop,
-    func_843443E0, func_84358DE4, func_84358F6C, func_84357E60, BattleAnim_EffectStartNop, BattleAnim_EffectStartNop, func_84345038,
-    func_843371C0, func_8434CE14, func_8434A898, func_84342808, func_8433BD08, func_84345D74, func_84356254,
-    BattleAnim_EffectStartNop, BattleAnim_EffectStartNop, BattleAnim_EffectStartNop, func_8434ED48, BattleAnim_EffectStartNop, func_8433B988, func_8433B374,
-    func_8434D8D8, func_84348630, BattleAnim_EffectStartNop, func_84349628, func_84344508, BattleAnim_EffectStartNop, func_84349830,
-    func_843579C0, func_84357B80, func_8433B6FC, func_8433E124, func_84358DE4, func_84356DBC, BattleAnim_EffectStartNop,
-    func_84346B58, func_84346EEC, func_84344248, func_84346F40, BattleAnim_EffectStartNop, func_84349384, func_84349504,
-    func_8433BDFC, func_84349058, func_84347448, func_8433E46C, func_84349108, func_84346DC4, func_84344474,
-    func_8433BB78, func_8433BECC, func_843498D8, func_84349A14, func_84358034, func_84348630, func_8434A7DC,
-    func_843374A4, func_84358288, func_84345EC0, func_8434A9EC, func_8434AA6C, func_84358A5C, func_8434AC8C,
-    func_8434AD1C, func_8434AD70, func_8434C618, func_8434B000, func_8434BA70, func_8434C070, func_8434C0C4,
-    BattleAnim_EffectStartNop, func_8434CAD8, func_8434D0F8, func_8434D448, BattleAnim_DisableEffectSpawningAlias, func_8434E0CC, func_8434E02C,
-    func_8434E74C, func_8434DA94, func_8434DB40, func_8435674C, func_84358EA0, func_84358EDC, func_843490A8,
-    func_8434ACEC, func_8434E8E0, func_8435839C, func_843584C0, func_84358538, func_84357700, func_8434EBA0,
-    func_8434EC08, func_8433BB78, func_8434E9A0, BattleAnim_StartEffect122GlobalAndOwnerTintFade, func_8435727C, func_8435742C, func_84344094,
-    func_8433765C, func_8434EF68, func_8434EFBC, func_8434F010, func_8434F060, func_8434F0B8, func_8434F350,
-    BattleAnim_StartEffect133ModeOrbitBurstAndEffect135Followup, BattleAnim_StartEffect134ModeOrbitAndMetadataBurst, BattleAnim_StartEffect135ExpandingFlashAndRisingScaleFade, BattleAnim_EffectStartNop, BattleAnim_StartEffect137Descriptor3FRisingFade, func_84356D04, BattleAnim_StartEffect139DualRepeatingSparks,
+    ParticleEffect_WaterAnimBurst, ParticleEffect_InitSetRotatingPaletteNoTint, ParticleEffect_InitSmokeSetWithMarker, ParticleEffect_PaletteScriptBurst, BattleAnim_EffectStartNop, BattleAnim_StartEffect26TintDescriptor53ScalePulse, BattleAnim_EffectStartNop,
+    ParticleEffect_RegisterEffectE0, ParticleEffect_GroupSetupTintAndDefaultBurst, ParticleEffect_FinalGroupSetup, ParticleEffect_ComplexNodeSetup, BattleAnim_EffectStartNop, BattleAnim_EffectStartNop, ParticleEffect_RegisterSparkle,
+    ParticleEffect_InitSmokeSetTexture1, ParticleEffect_BasicMultiBurstDelayedSprayOnly, ParticleEffect_SimpleBurstScript, ParticleEffect_RegisterExplosion, InitParticleEffectSet_WithFade, ParticleEffect_RegisterLargeExplosion, ParticleEffect_TextureSetup,
+    BattleAnim_EffectStartNop, BattleAnim_EffectStartNop, BattleAnim_EffectStartNop, ParticleEffect_SetMode, BattleAnim_EffectStartNop, BattleAnim_StartEffect47TintDescriptor53ScalePulseAndDescriptor4AFade, BattleAnim_SpawnTimedFireballEffect,
+    ParticleEffect_SimpleNodeEntry, BattleAnim_StartEffects50And82TintRampAndModelScaleFade, BattleAnim_EffectStartNop, BattleAnim_StartEffect52ModelAnim, BattleAnim_StartEffect53Descriptor33FadeAndDescriptor47ScaleMotion, BattleAnim_EffectStartNop, BattleAnim_StartEffect55ModelAnimWaitMarkerSlotAndScaleFall,
+    ParticleEffect_AdditionalNodeSetup, ParticleEffect_SmallNodeSetupGlobalTintFade17, InitExplosionEffectSet, BattleAnim_CreateStreamSprayColumnEffect, ParticleEffect_GroupSetupTintAndDefaultBurst, ParticleEffect_HandleStateSetup, BattleAnim_EffectStartNop,
+    ParticleEffect_RegisterHandlers_Default, BattleAnim_StartEffect64ModelAnimWait, ParticleEffect_RegisterParticleNodes, ParticleEffect_RegisterMultipleHandlers, BattleAnim_EffectStartNop, BattleAnim_StartEffect68ModelAnimWaitAndDescriptor42ScaleFall, BattleAnim_StartEffect69ModelPhaseWaitAndFallingParticles,
+    InitParticleEffectSet_WithDifferentTiming, BattleAnim_StartEffect71SpecialModelColorCycle, BattleAnim_StartEffect72ModelAnimWait, BattleAnim_CreateCollisionRandomEffect, BattleAnim_StartEffect74SpecialModelColorCycle, ParticleEffect_RegisterHandlers_Alternate, BattleAnim_StartEffect76Descriptor33FadeAndDescriptor47ScaleMotion,
+    InitSmallGlowEffectSet, InitParticleEffectSet_Single, BattleAnim_StartEffect79ModelAnimWaitAndDescriptor25AlphaFade, ParticleEffect_RegisterDefaultTexture, ParticleEffect_AdvancedModeSetup, BattleAnim_StartEffects50And82TintRampAndModelScaleFade, ParticleEffect_SimpleBurst,
+    ParticleEffect_InitSmokeSetLongDuration, ParticleEffect_FinalSetupSpiralAndVerticalFade, ParticleEffect_RegisterLargeExplosionAndEffects, BattleAnim_StartEffect87ModelTintAlphaFadeAndVerticalFade, ParticleEffect_MultiNodeEffect88Palette7, ParticleEffect_MultiNodeD, ParticleEffect_PortraitBurst,
+    ParticleEffect_PortraitBurstNode, ParticleEffect_PortraitBurstCheck, ParticleEffect_WaterAnimFirework, ParticleEffect_SimpleBurstAnimWaitDelayedTintFade, ParticleEffect_PaletteMultiBurstCleanupWithTintFade, ParticleEffect_PaletteBurstVariant4Model8D, ParticleEffect_PaletteBurstVariant2Model8EDelayedFadeOut,
+    BattleAnim_EffectStartNop, ParticleEffect_BasicMultiBurst, ParticleEffect_SimpleBurstAnimWaitDelayedAlphaFadeOut, ParticleEffect_RotationEntry, BattleAnim_DisableEffectSpawningAlias, ParticleEffect_InitSmoke, ParticleEffect_InitFire,
+    ParticleEffect_TriggerSpecial, ParticleEffect_AlphaBurst, ParticleEffect_AlphaBurstPalette17, ParticleEffect_AdditionalSetupDualRiseFade, ParticleEffect_SimpleGroupSetup, ParticleEffect_ComplexGroupSetup, BattleAnim_StartEffect111GlobalTintAndSpecialModelColorCycle,
+    ParticleEffect_PortraitBurstInit, ParticleEffect_TriggerDefaultPalette1B, ParticleEffect_FinalSetupRiseAndVerticalFade, ParticleEffect_FinalSetupPortraitBurst, ParticleEffect_AdditionalNodeSingleRiseFade, ParticleEffect_StateCollisionSetupDesc29ScaleAnimFade, ParticleEffect_CreateWithCallback,
+    ParticleEffect_CreateCallback, InitSmallGlowEffectSet, ParticleEffect_TriggerDefaultPalette1BWithTintFade, BattleAnim_StartEffect122GlobalAndOwnerTintFade, ParticleEffect_ConditionalStateSetup, ParticleEffect_CollisionResponseSwitch, ParticleEffect_RegisterCallbacks,
+    func_8433765C, BattleAnim_StartEffect127Descriptor39ScaleFade, BattleAnim_StartEffect128Descriptor39ScaleFade, ParticleEffect_CreateTypeX, ParticleEffect_CreateSmoke, ParticleEffect_CreateSmokeHighPriority, ParticleEffect_CreateDual,
+    BattleAnim_StartEffect133ModeOrbitBurstAndEffect135Followup, BattleAnim_StartEffect134ModeOrbitAndMetadataBurst, BattleAnim_StartEffect135ExpandingFlashAndRisingScaleFade, BattleAnim_EffectStartNop, BattleAnim_StartEffect137Descriptor3FRisingFade, ParticleEffect_TextureNodeSetup, BattleAnim_StartEffect139DualRepeatingSparks,
     BattleAnim_StartEffect140StartEffect139Alias, BattleAnim_StartEffect141GridRiseAndFallingBurst, BattleAnim_StartEffect142StartEffect141Alias, BattleAnim_StartEffect143ModeOrbitAndMetadataBurst, BattleAnim_EffectStartNop,
 };
-static func_D_84390320 gMoveAnimEffectEndInitFuncs[] = {
-    BattleAnim_EffectEndNop, BattleAnim_EffectEndNop, func_8433B58C, func_84357A64, func_84357AE0, func_84357110, func_8434575C,
-    func_8434A384, func_8433DECC, BattleAnim_EffectEndNop, func_84346BE0, BattleAnim_EffectEndNop, BattleAnim_EffectEndNop, func_84344BDC,
-    func_84355E58, func_843372D8, func_8434CF64, func_84342908, func_84357CC8, BattleAnim_EffectEndNop, func_8433BF54,
-    func_84345B84, func_84337000, func_843450B4, BattleAnim_EffectEndNop, func_8434E1B8, func_84340CB0, func_8433B7E4,
-    func_8433E33C, func_843375B0, func_84356EF4, func_84344B04, BattleAnim_EffectEndNop, BattleAnim_EffectEndNop, func_8433B3D8,
-    func_84355EF0, func_84355F88, func_84356148, func_843561A0, func_843567F4, func_8433766C, func_8434915C,
-    func_8435643C, func_843565DC, func_84356020, func_843568C8, func_843569A0, func_843561F8, BattleAnim_EffectEndNop,
-    func_84345B28, func_84346E50, func_8434C5F0, func_84356AF0, func_8433C3A0, func_84336DD8, func_84357F64,
-    func_84336C80, func_843581FC, func_8434A930, func_843378D4, func_8434C720, func_8434B064, func_8434BCD4,
-    func_8434C144, func_8434CC68, func_8434D5EC, func_8434D938, func_8433C06C, func_8433C284, func_8433C4EC,
-    func_8433C604, func_8433C784, func_8433DFF4, func_8434DD08, func_8434DBEC, func_8434A9CC, func_8434E870,
-    func_8434E940, func_8434967C, func_8434ECF4, func_843560B4, func_843489FC, func_843489FC, func_8434917C,
-    func_8434EA10, func_8435783C, func_8433CAFC, func_84340D14, func_843574FC, BattleAnim_EffectEndNop,
+static func_D_84390320 sMoveAnimEffectEndInitFuncs[] = {
+    BattleAnim_EffectEndNop, BattleAnim_EffectEndNop, InitComplexParticleSequence, ParticleEffect_SpecialCollisionSetup, ParticleEffect_MultiTextureSetup, ParticleEffect_DynamicCollisionSetup, ParticleEffect_RegisterPaletteVariants,
+    ParticleEffect_PaletteMultiBurst, BattleAnim_CreateSprayColumnEffect, BattleAnim_EffectEndNop, ParticleEffect_RegisterAnimationCallbacks, BattleAnim_EffectEndNop, BattleAnim_EffectEndNop, ParticleEffect_RegisterSpecific,
+    ParticleEffect_InitializeGroup, ParticleEffect_InitExplosionSetTintPalette35, ParticleEffect_AdvancedMultiBurst, ParticleEffect_RegisterSmoke, ParticleEffect_ModeSpecificSetup, BattleAnim_EffectEndNop, InitParticleComboVariant,
+    ParticleEffect_RegisterModeSpecific, ParticleEffect_InitExplosionSet, ParticleEffect_RegisterAll, BattleAnim_EffectEndNop, ParticleEffect_PlaySoundAndReset, RegisterParticleEffect_ComplexMovement, InitAdvancedParticleCombo,
+    BattleAnim_CreateBurstStreamEffect, ParticleEffect_InitFireSet, ParticleEffect_HandleCollisionSetup, ParticleEffect_RegisterMultiple, BattleAnim_EffectEndNop, BattleAnim_EffectEndNop, InitParticleEffectGroup_Basic,
+    ParticleEffect_ConfigTexture7Palette1, ParticleEffect_ConfigTexture9Palette2, ParticleEffect_SpecialSetupBurstPalette3, ParticleEffect_SpecialSetupBurstPalette4, ParticleEffect_AdditionalSetupBurstAndRiseFade, ParticleEffect_InitSparkleSet, BattleAnim_EndEffect41Descriptor34Burst,
+    ParticleEffect_ModeSetup, ParticleEffect_CollisionSetup, ParticleEffect_ConfigVariantMotion6, ParticleEffect_CombinedSetupBurst3DRandom, ParticleEffect_CombinedSetupBurstHorizontalRandom, ParticleEffect_SpecialSetupDelayedScatterPalette1, BattleAnim_EffectEndNop,
+    ParticleEffect_RegisterColorAnim, ParticleEffect_RegisterHandler_WithParticleData, ParticleEffect_WaterAnimBurstTintFadeOnly, ParticleEffect_MultiHandleSetup, InitParticleEffectSet_WithCustomCallback, ParticleEffect_InitSetTintRampDelayedColorFade, ParticleEffect_SimpleNodeSetup,
+    ParticleEffect_InitSetTintRampRisingSpread, ParticleEffect_FullSetupTintFadeOutAndRestore, BattleAnim_EndEffect58ModelAnimAndDescriptorSequence, ParticleEffect_InitCombinedSet, ParticleEffect_WaterAnimFireworkModel42RotationFollow, ParticleEffect_SimpleBurstTintPulseAnimWaitPaletteC, ParticleEffect_PaletteMultiBurstNoCleanupNoTintFade,
+    ParticleEffect_FireworkBurst, ParticleEffect_FireballBurst, ParticleEffect_FireworkEntry, ParticleEffect_SimpleNodeBurst, InitParticleEffectSet_WithMultiple, InitParticleEffectSet_WithTimedFireball, BattleAnim_EndEffect69PaletteRotateWithExpandingHoldFade,
+    InitParticleEffectSet_WithComplex, BattleAnim_EndEffect71PaletteApproachWithExpandingScaleFades, BattleAnim_CreateSprayColumnEffectTrigger, ParticleEffect_AlphaFireworkPalette17, ParticleEffect_AlphaFirework, ParticleEffect_MultiNodeAEntry, ParticleEffect_TriggerAnother,
+    ParticleEffect_TriggerDefaultPalette1C, BattleAnim_EndEffect78ModelAnimDelayedMotionAndFallingParticles, ParticleEffect_CreateColorVariant, ParticleEffect_ConfigVariantMotion16, BattleAnim_EndEffects81And82TintRampAndModelScaleFade, BattleAnim_EndEffects81And82TintRampAndModelScaleFade, BattleAnim_EndEffect83TintRampAndDescriptor34Burst,
+    ParticleEffect_TriggerDefaultPalette1CWithTintRamps, ParticleEffect_StateCollisionSetupDesc2BGravityFall, InitParticleEffectSet_ThreeInstances, RegisterParticleEffect_Burst, ParticleEffect_CollisionAndBurstSetup, BattleAnim_EffectEndNop,
 };
-static u8 D_8438682C[] = {
+static u8 sBattleScript_LoadGfxEmpty[] = {
     0x3F, 0x00, 0x00, 0x00, 0x3F, 0x00, 0x00, 0x00, 0x3F, 0x00, 0x00, 0x00,
     0x3F, 0x00, 0x00, 0x00, 0x01, 0x3F, 0x00, 0x00, 0x3F, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386844[] = {
+static u8 sBattleScript_LoadGfx03[] = {
     0x03,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386848[] = {
+static u8 sBattleScript_LoadGfxSkullBash[] = {
     0x04,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438684C[] = {
+static u8 sBattleScript_LoadGfxGrowth[] = {
     0x05,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386850[] = {
+static u8 sBattleScript_LoadGfx06[] = {
     0x06,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386854[] = {
+static u8 sBattleScript_LoadGfxGustAndWhirlwind[] = {
     0x09,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386858[] = {
+static u8 sBattleScript_LoadGfxVineWhipFamily[] = {
     0x0A,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438685C[] = {
+static u8 sBattleScript_LoadGfx0B[] = {
     0x0B,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386860[] = {
+static u8 sBattleScript_LoadGfxHazeAndLightScreen[] = {
     0x0C, 0x3F, 0x00, 0x00, 0x0D, 0x3F, 0x00, 0x00,
 
 };
-static u8 D_84386868[] = {
+static u8 sBattleScript_LoadGfx0E[] = {
     0x0E,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438686C[] = {
+static u8 sBattleScript_LoadGfxThunderFamily[] = {
     0x0F,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386870[] = {
+static u8 sBattleScript_LoadGfx10[] = {
     0x10,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386874[] = {
+static u8 sBattleScript_LoadGfx11[] = {
     0x11,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386878[] = {
+static u8 sBattleScript_LoadGfxThunderShock[] = {
     0x11,
     0x3D,
     0x3F,
     0x00,
 
 };
-static u8 D_8438687C[] = {
+static u8 sBattleScript_LoadGfxAbsorbAndEarthquakeAndHyperFang[] = {
     0x12,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386880[] = {
+static u8 sBattleScript_LoadGfxLeechSeedAndLovelyKissAndMegaDrain[] = {
     0x13,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386884[] = {
+static u8 sBattleScript_LoadGfxBarrageAndConfuseRayAndSludge[] = {
     0x14, 0x3F, 0x00, 0x00, 0x15, 0x3F, 0x00, 0x00,
 
 };
-static u8 D_8438688C[] = {
+static u8 sBattleScript_LoadGfxSandAttack[] = {
     0x16, 0x3F, 0x00, 0x00, 0x17, 0x3F, 0x00, 0x00,
 
 };
-static u8 D_84386894[] = {
+static u8 sBattleScript_LoadGfx18[] = {
     0x18,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386898[] = {
+static u8 sBattleScript_LoadGfxPsybeam[] = {
     0x19,
     0x32,
     0x3F,
     0x00,
 
 };
-static u8 D_8438689C[] = {
+static u8 sBattleScript_LoadGfxIceBeam[] = {
     0x1A,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868A0[] = {
+static u8 sBattleScript_LoadGfxDigAndFissure[] = {
     0x1B,
     0x27,
     0x3F,
     0x00,
 
 };
-static u8 D_843868A4[] = {
+static u8 sBattleScript_LoadGfxThunder[] = {
     0x1C,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868A8[] = {
+static u8 sBattleScript_LoadGfxPeck[] = {
     0x27,
     0x3F,
     0x00,
@@ -1149,1803 +1149,1803 @@ static u8 D_843868AC[] = {
     0x00,
 
 };
-static u8 D_843868B0[] = {
+static u8 sBattleScript_AnimAttack[] = {
     0x1F,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868B4[] = {
+static u8 sBattleScript_LoadGfxDoubleTeamAndMeditate[] = {
     0x20,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868B8[] = {
+static u8 sBattleScript_AnimHit[] = {
     0x21,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868BC[] = {
+static u8 sBattleScript_AnimMiss[] = {
     0x22,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868C0[] = {
+static u8 sBattleScript_AnimFaint[] = {
     0x23, 0x3F, 0x00, 0x00, 0x24, 0x3F, 0x00, 0x00,
 
 };
-static u8 D_843868C8[] = {
+static u8 sBattleScript_LoadGfxPowderFamily[] = {
     0x25,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868CC[] = {
+static u8 sBattleScript_LoadGfx26_11[] = {
     0x26,
     0x11,
     0x3F,
     0x00,
 
 };
-static u8 D_843868D0[] = {
+static u8 sBattleScript_LoadGfxEggBombAndFurySwipes[] = {
     0x27,
     0x32,
     0x3F,
     0x00,
 
 };
-static u8 D_843868D4[] = {
+static u8 sBattleScript_LoadGfxToxic[] = {
     0x28,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868D8[] = {
+static u8 sBattleScript_LoadGfx29_03[] = {
     0x29,
     0x03,
     0x3F,
     0x00,
 
 };
-static u8 D_843868DC[] = {
+static u8 sBattleScript_LoadGfxSoftBoiled[] = {
     0x2A,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868E0[] = {
+static u8 sBattleScript_LoadGfxTransform[] = {
     0x2B,
     0x11,
     0x3F,
     0x00,
 
 };
-static u8 D_843868E4[] = {
+static u8 sBattleScript_LoadGfxPayDay[] = {
     0x17,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868E8[] = {
+static u8 sBattleScript_LoadGfxRazorWindAlt[] = {
     0x09,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868EC[] = {
+static u8 sBattleScript_LoadGfxRazorWindAlt2[] = {
     0x0B, 0x3F, 0x00, 0x00, 0x0E, 0x3F, 0x00, 0x00,
 
 };
-static u8 D_843868F4[] = {
+static u8 sBattleScript_LoadGfxWaterGunAlt[] = {
     0x14,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868F8[] = {
+static u8 sBattleScript_LoadGfxPoisonPowder[] = {
     0x15,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_843868FC[] = {
+static u8 sBattleScript_LoadGfxNightShade[] = {
     0x1E,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386900[] = {
+static u8 sBattleScript_LoadGfxWithdrawAlt[] = {
     0x10,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386904[] = {
+static u8 sBattleScript_LoadGfxReflectAlt2[] = {
     0x14,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386908[] = {
+static u8 sBattleScript_LoadGfxFocusEnergyAlt[] = {
     0x0C,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438690C[] = {
+static u8 sBattleScript_LoadGfxHighJumpKickAndLick[] = {
     0x07,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386910[] = {
+static u8 sBattleScript_LoadGfxPoisonGas[] = {
     0x36,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386914[] = {
+static u8 sBattleScript_LoadGfxSpore[] = {
     0x18,
     0x0D,
     0x3F,
     0x00,
 
 };
-static u8 D_84386918[] = {
+static u8 sBattleScript_LoadGfxSuperFangAlt[] = {
     0x03, 0x3F, 0x00, 0x00, 0x14, 0x3F, 0x00, 0x00,
 
 };
-static u8 D_84386920[] = {
+static u8 sBattleScript_LoadGfx2C[] = {
     0x2C,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386924[] = {
+static u8 sBattleScript_LoadGfx2C_Alt[] = {
     0x2C,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386928[] = {
+static u8 sBattleScript_LoadGfx3C[] = {
     0x3C,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438692C[] = {
+static u8 sBattleScript_LoadGfx2D[] = {
     0x2D,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386930[] = {
+static u8 sBattleScript_LoadGfx08[] = {
     0x08,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386934[] = {
+static u8 sBattleScript_LoadGfxSwordsDance[] = {
     0x2E,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386938[] = {
+static u8 sBattleScript_LoadGfxFireBlastAndRest[] = {
     0x2F,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438693C[] = {
+static u8 sBattleScript_LoadGfxDreamEaterAndLeer[] = {
     0x30,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386940[] = {
+static u8 sBattleScript_LoadGfxBarrierAndConversion[] = {
     0x31,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386944[] = {
+static u8 sBattleScript_LoadGfx32[] = {
     0x32,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386948[] = {
+static u8 sBattleScript_LoadGfxDefenseCurl[] = {
     0x33,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438694C[] = {
+static u8 sBattleScript_LoadGfxSmog[] = {
     0x34,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386950[] = {
+static u8 sBattleScript_LoadGfxSkyAttack[] = {
     0x35,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386954[] = {
+static u8 sBattleScript_LoadGfxAgility[] = {
     0x37,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386958[] = {
+static u8 sBattleScript_LoadGfxMimic[] = {
     0x38,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_8438695C[] = {
+static u8 sBattleScript_LoadGfxClamp[] = {
     0x39,
     0x3F,
     0x00,
     0x00,
 
 };
-static u8 D_84386960[] = {
+static u8 sBattleScript_LoadGfxExplosion[] = {
     0x3A,
     0x0B,
     0x3F,
     0x00,
 
 };
-static u8 D_84386964[] = {
+static u8 sBattleScript_LoadGfxLeechLife[] = {
     0x3B,
     0x2C,
     0x3F,
     0x00,
 
 };
-static u8 D_84386968[] = {
+static u8 sBattleScript_StartEmpty[] = {
     0x00, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386970[] = {
+static u8 sBattleScript_Start90Nop[] = {
     0x90,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386974[] = {
+static u8 sBattleScript_Start01Descriptor2FPhaseFadeOut[] = {
     0x01,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386978[] = {
+static u8 sBattleScript_Start02Descriptor08IndexedScaleDelayFade[] = {
     0x02,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_8438697C[] = {
+static u8 sBattleScript_Start03ModelTintAndVerticalFade[] = {
     0x03,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386980[] = {
+static u8 sBattleScript_NoSpawnThen04TintDescriptor53ScalePulse[] = {
     0x66, 0x04, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386988[] = {
+static u8 sBattleScript_Start06AnimatedScaleAndBurstEmitter[] = {
     0x06,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_8438698C[] = {
+static u8 sBattleScript_Start3AInitExplosionEffectSet[] = {
     0x3A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386990[] = {
+static u8 sBattleScript_NoSpawnThen07TexturedRibbonSheet[] = {
     0x66,
     0x07,
     0x00,
     0x00,
 
 };
-static u8 D_84386994[] = {
+static u8 sBattleScript_Start08ModelBurstAndVerticalFade[] = {
     0x08, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00,
 
 };
-static u8 D_8438699C[] = {
+static u8 sBattleScript_Start0AModel60AndModelAnimWait[] = {
     0x0A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869A0[] = {
+static u8 sBattleScript_NoSpawnThen0BGlobalTintFade[] = {
     0x66, 0x0B, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00,
 
 };
-static u8 D_843869A8[] = {
+static u8 sBattleScript_Start0DSecondaryOwnerSpeciesBranch[] = {
     0x0D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869AC[] = {
+static u8 sBattleScript_Start7BConditionalStateSetup[] = {
     0x7B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869B0[] = {
+static u8 sBattleScript_Start7CCollisionResponseSwitch[] = {
     0x7C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869B4[] = {
+static u8 sBattleScript_Start0EModelAnimAndMoveKeyedTintParticles[] = {
     0x0E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869B8[] = {
+static u8 sBattleScript_Start0FDescriptor08IndexedScaleDelayFade[] = {
     0x0F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869BC[] = {
+static u8 sBattleScript_Start10TintDescriptor34Sequence[] = {
     0x10,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869C0[] = {
+static u8 sBattleScript_Start11ModelAnimFinish[] = {
     0x11,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869C4[] = {
+static u8 sBattleScript_Start12ScatterRadialAndColumnSequence[] = {
     0x12,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869C8[] = {
+static u8 sBattleScript_Start13Radial20[] = {
     0x13, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00,
 
 };
-static u8 D_843869D0[] = {
+static u8 sBattleScript_Start15WaterAnimBurst[] = {
     0x15,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869D4[] = {
+static u8 sBattleScript_Start16InitSetA[] = {
     0x16,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869D8[] = {
+static u8 sBattleScript_Start17InitSmokeSetA[] = {
     0x17,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869DC[] = {
+static u8 sBattleScript_Start18PaletteScriptBurst[] = {
     0x18,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869E0[] = {
+static u8 sBattleScript_Start19Nop[] = {
     0x19, 0x00, 0x00, 0x00, 0x1B, 0x00, 0x00, 0x00,
 
 };
-static u8 D_843869E8[] = {
+static u8 sBattleScript_Start1CRegisterEffectE0[] = {
     0x1C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869EC[] = {
+static u8 sBattleScript_Start4CRegisterEffectE0Alt[] = {
     0x4C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869F0[] = {
+static u8 sBattleScript_Start1DGroupSetupA[] = {
     0x1D, 0x00, 0x00, 0x00, 0x1E, 0x00, 0x00, 0x00,
 
 };
-static u8 D_843869F8[] = {
+static u8 sBattleScript_Start1FComplexNodeSetup[] = {
     0x1F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_843869FC[] = {
+static u8 sBattleScript_Start20Nop[] = {
     0x20,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A00[] = {
+static u8 sBattleScript_Start21Radial20[] = {
     0x21,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A04[] = {
+static u8 sBattleScript_Start22RegisterSparkle[] = {
     0x22,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A08[] = {
+static u8 sBattleScript_Start23InitSmokeSetB[] = {
     0x23,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A0C[] = {
+static u8 sBattleScript_NoSpawnThen24TerrainGrid[] = {
     0x66,
     0x24,
     0x00,
     0x00,
 
 };
-static u8 D_84386A10[] = {
+static u8 sBattleScript_Start25SimpleBurstScript[] = {
     0x25,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A14[] = {
+static u8 sBattleScript_Start26RegisterExplosion[] = {
     0x26,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A18[] = {
+static u8 sBattleScript_NoSpawnThen27InitSetWithFade[] = {
     0x66,
     0x27,
     0x00,
     0x00,
 
 };
-static u8 D_84386A1C[] = {
+static u8 sBattleScript_Start28RegisterLargeExplosion[] = {
     0x28,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A20[] = {
+static u8 sBattleScript_Start29TextureSetup[] = {
     0x29,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A24[] = {
+static u8 sBattleScript_NoSpawnThen2ATrail40[] = {
     0x66,
     0x2A,
     0x00,
     0x00,
 
 };
-static u8 D_84386A28[] = {
+static u8 sBattleScript_Start2BTrail40Variant[] = {
     0x2B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A2C[] = {
+static u8 sBattleScript_Start2CTrail40GridAlt[] = {
     0x2C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A30[] = {
+static u8 sBattleScript_NoSpawnThen2DSetMode[] = {
     0x66, 0x2D, 0x00, 0x00, 0x2E, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386A38[] = {
+static u8 sBattleScript_NoSpawnThen2FInitSetWithTexture53[] = {
     0x66,
     0x2F,
     0x00,
     0x00,
 
 };
-static u8 D_84386A3C[] = {
+static u8 sBattleScript_Start30TimedFireball[] = {
     0x30,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A40[] = {
+static u8 sBattleScript_Start31SimpleNodeEntry[] = {
     0x31,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A44[] = {
+static u8 sBattleScript_Start32RegisterAll48630[] = {
     0x32,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A48[] = {
+static u8 sBattleScript_Start52RegisterAll48630[] = {
     0x52,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A4C[] = {
+static u8 sBattleScript_Start59MultiNodeD[] = {
     0x59,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A50[] = {
+static u8 sBattleScript_Start34RegisterHandler49628[] = {
     0x34, 0x00, 0x00, 0x00, 0x35, 0x00, 0x00, 0x00, 0x36, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386A5C[] = {
+static u8 sBattleScript_Start37RegisterHandler49830[] = {
     0x37,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A60[] = {
+static u8 sBattleScript_Start35RegisterEffectE0Alt2_05RibbonMesh[] = {
     0x35,
     0x05,
     0x00,
     0x00,
 
 };
-static u8 D_84386A64[] = {
+static u8 sBattleScript_Start6AAlphaBurst[] = {
     0x6A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A68[] = {
+static u8 sBattleScript_Start6BAlphaBurst2[] = {
     0x6B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A6C[] = {
+static u8 sBattleScript_Start1BNop[] = {
     0x1B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A70[] = {
+static u8 sBattleScript_Start56RegisterLargeExplosionAndEffects[] = {
     0x56,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A74[] = {
+static u8 sBattleScript_Start1EFinalGroupSetup[] = {
     0x1E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A78[] = {
+static u8 sBattleScript_Start5DWaterAnimFirework[] = {
     0x5D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A7C[] = {
+static u8 sBattleScript_Start1CRegisterEffectE0_36RibbonMesh[] = {
     0x1C,
     0x36,
     0x00,
     0x00,
 
 };
-static u8 D_84386A80[] = {
+static u8 sBattleScript_Start0EModelAnimAndMoveKeyedTintParticles_Alt[] = {
     0x0E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A84[] = {
+static u8 sBattleScript_Start40RegisterHandler416B0[] = {
     0x40,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A88[] = {
+static u8 sBattleScript_Start0CDelayedModelAnim[] = {
     0x0C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A8C[] = {
+static u8 sBattleScript_Start42RegisterMultipleHandlers[] = {
     0x42,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A90[] = {
+static u8 sBattleScript_Start5FPaletteMultiBurst2[] = {
     0x5F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A94[] = {
+static u8 sBattleScript_NoSpawnThen4EInitSetSingle[] = {
     0x66,
     0x4E,
     0x00,
     0x00,
 
 };
-static u8 D_84386A98[] = {
+static u8 sBattleScript_Start3BCreateStreamSprayColumnEffect[] = {
     0x3B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386A9C[] = {
+static u8 sBattleScript_Start38AdditionalNodeSetup[] = {
     0x38,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AA0[] = {
+static u8 sBattleScript_NoSpawnThen39SmallNodeSetupB[] = {
     0x66,
     0x39,
     0x00,
     0x00,
 
 };
-static u8 D_84386AA4[] = {
+static u8 sBattleScript_Start3DHandleStateSetup[] = {
     0x3D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AA8[] = {
+static u8 sBattleScript_Start3EOwnerLinkedFourStream[] = {
     0x3E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AAC[] = {
+static u8 sBattleScript_Start7DRegisterCallbacks[] = {
     0x7D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AB0[] = {
+static u8 sBattleScript_Start7ESpecial[] = {
     0x7E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AB4[] = {
+static u8 sBattleScript_Start7FCreateVariant45[] = {
     0x7F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AB8[] = {
+static u8 sBattleScript_Start80CreateVariant47[] = {
     0x80,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386ABC[] = {
+static u8 sBattleScript_Start81CreateTypeX[] = {
     0x81,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AC0[] = {
+static u8 sBattleScript_Start82CreateSmoke[] = {
     0x82,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AC4[] = {
+static u8 sBattleScript_Start83CreateSmokeHighPriority[] = {
     0x83,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AC8[] = {
+static u8 sBattleScript_Start84CreateDual[] = {
     0x84,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386ACC[] = {
+static u8 sBattleScript_Start8BDualRepeatingSparks[] = {
     0x8B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AD0[] = {
+static u8 sBattleScript_Start8CDualRepeatingSparksAlias[] = {
     0x8C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AD4[] = {
+static u8 sBattleScript_Start8DGridRiseAndFallingBurst[] = {
     0x8D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AD8[] = {
+static u8 sBattleScript_Start8EGridRiseAndFallingBurstAlias[] = {
     0x8E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386ADC[] = {
+static u8 sBattleScript_Start85ModeOrbitBurstAndFollowup[] = {
     0x85,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AE0[] = {
+static u8 sBattleScript_Start86ModeOrbitAndMetadataBurst[] = {
     0x86,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AE4[] = {
+static u8 sBattleScript_Start8FModeOrbitAndMetadataBurst[] = {
     0x8F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AE8[] = {
+static u8 sBattleScript_Start87ExpandingFlashAndRisingScaleFade[] = {
     0x87,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AEC[] = {
+static u8 sBattleScript_Start88Nop[] = {
     0x88,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AF0[] = {
+static u8 sBattleScript_Start89Descriptor3FRisingFade[] = {
     0x89,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AF4[] = {
+static u8 sBattleScript_Start8ATextureNodeSetup[] = {
     0x8A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AF8[] = {
+static u8 sBattleScript_Start3FRegisterHandlersDefault[] = {
     0x3F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386AFC[] = {
+static u8 sBattleScript_Start41RegisterParticleNodes[] = {
     0x41,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B00[] = {
+static u8 sBattleScript_Start43OwnerAnchoredFourStream[] = {
     0x43,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B04[] = {
+static u8 sBattleScript_Start71TriggerDefault1[] = {
     0x71,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B08[] = {
+static u8 sBattleScript_Start79TriggerDefault3[] = {
     0x79,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B0C[] = {
+static u8 sBattleScript_Start44RegisterHandler49384[] = {
     0x44,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B10[] = {
+static u8 sBattleScript_Start45RegisterHandlers49504[] = {
     0x45,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B14[] = {
+static u8 sBattleScript_NoSpawnThen46InitSetWithDifferentTiming[] = {
     0x66,
     0x46,
     0x00,
     0x00,
 
 };
-static u8 D_84386B18[] = {
+static u8 sBattleScript_Start47RegisterHandler49058[] = {
     0x47,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B1C[] = {
+static u8 sBattleScript_Start6FRegisterHandler490A8[] = {
     0x6F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B20[] = {
+static u8 sBattleScript_Start48RegisterHandler47448[] = {
     0x48,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B24[] = {
+static u8 sBattleScript_Start49CreateCollisionRandomEffect[] = {
     0x49,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B28[] = {
+static u8 sBattleScript_Start4ARegisterHandler49108[] = {
     0x4A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B2C[] = {
+static u8 sBattleScript_Start4BRegisterHandlersAlternate[] = {
     0x4B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B30[] = {
+static u8 sBattleScript_NoSpawnThen78InitSmallGlowEffectSet[] = {
     0x66,
     0x78,
     0x00,
     0x00,
 
 };
-static u8 D_84386B34[] = {
+static u8 sBattleScript_Start4FRegisterHandler498D8[] = {
     0x4F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B38[] = {
+static u8 sBattleScript_Start50RegisterDefaultTexture[] = {
     0x50,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B3C[] = {
+static u8 sBattleScript_Start51AdvancedModeSetup[] = {
     0x51,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B40[] = {
+static u8 sBattleScript_Start53SimpleBurst[] = {
     0x53,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B44[] = {
+static u8 sBattleScript_Start54InitSmokeSetC[] = {
     0x54,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B48[] = {
+static u8 sBattleScript_Start55FinalSetupA[] = {
     0x55,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B4C[] = {
+static u8 sBattleScript_Start72FinalSetupB[] = {
     0x72,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B50[] = {
+static u8 sBattleScript_Start73FinalSetupC[] = {
     0x73,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B54[] = {
+static u8 sBattleScript_Start74AdditionalNodeA[] = {
     0x74,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B58[] = {
+static u8 sBattleScript_Start57_ModelTintAlphaFade[] = {
     0x57,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B5C[] = {
+static u8 sBattleScript_Start58MultiNodeC2[] = {
     0x58,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B60[] = {
+static u8 sBattleScript_Start59MultiNodeD_Alt[] = {
     0x59,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B64[] = {
+static u8 sBattleScript_Start5APortraitBurst[] = {
     0x5A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B68[] = {
+static u8 sBattleScript_Start5BPortraitBurstNode[] = {
     0x5B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B6C[] = {
+static u8 sBattleScript_Start5CPortraitBurstCheck[] = {
     0x5C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B70[] = {
+static u8 sBattleScript_Start5ESimpleBurst2[] = {
     0x5E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B74[] = {
+static u8 sBattleScript_Start60PaletteBurst4[] = {
     0x60,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B78[] = {
+static u8 sBattleScript_Start61PaletteBurst5[] = {
     0x61,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B7C[] = {
+static u8 sBattleScript_Start62Radial20[] = {
     0x62,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B80[] = {
+static u8 sBattleScript_Start63BasicMultiBurst[] = {
     0x63,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B84[] = {
+static u8 sBattleScript_Start64SimpleBurst4[] = {
     0x64,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B88[] = {
+static u8 sBattleScript_Start65RotationEntry[] = {
     0x65,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B8C[] = {
+static u8 sBattleScript_NoSpawnThen1AInitSetAlt2[] = {
     0x66,
     0x1A,
     0x00,
     0x00,
 
 };
-static u8 D_84386B90[] = {
+static u8 sBattleScript_Start67InitSmoke[] = {
     0x67,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B94[] = {
+static u8 sBattleScript_Start68InitFire[] = {
     0x68,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B98[] = {
+static u8 sBattleScript_Start69TriggerSpecial[] = {
     0x69,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386B9C[] = {
+static u8 sBattleScript_Start6CAdditionalSetupA[] = {
     0x6C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BA0[] = {
+static u8 sBattleScript_Start6DSimpleGroupSetup[] = {
     0x6D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BA4[] = {
+static u8 sBattleScript_Start6EComplexGroupSetup[] = {
     0x6E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BA8[] = {
+static u8 sBattleScript_Start70PortraitBurstInit[] = {
     0x70,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BAC[] = {
+static u8 sBattleScript_Start75StateCollisionSetupA[] = {
     0x75,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BB0[] = {
+static u8 sBattleScript_Start76CreateWithCallback[] = {
     0x76,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BB4[] = {
+static u8 sBattleScript_Start77CreateCallback[] = {
     0x77,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BB8[] = {
+static u8 sBattleScript_Start7AGlobalAndOwnerTintFade[] = {
     0x7A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BBC[] = {
+static u8 sBattleScript_EndEmpty[] = {
     0x00, 0x00, 0x00, 0x00, 0x59, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386BC4[] = {
+static u8 sBattleScript_MsgStart[] = {
     0x01,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BC8[] = {
+static u8 sBattleScript_MsgEnd[] = {
     0x30, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386BD0[] = {
+static u8 gBattleScript_End04_MultiTextureSetup[] = {
     0x04,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BD4[] = {
+static u8 gBattleScript_End05_DynamicCollisionSetup[] = {
     0x05,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BD8[] = {
+static u8 gBattleScript_End58_CollisionAndBurstSetup[] = {
     0x58, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386BE0[] = {
+static u8 gBattleScript_End07_PaletteMultiBurst[] = {
     0x07,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BE4[] = {
+static u8 gBattleScript_End08_SprayColumnEffect[] = {
     0x08,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BE8[] = {
+static u8 gBattleScript_End48_SprayColumnEffectTrigger[] = {
     0x48,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BEC[] = {
+static u8 gBattleScript_End09_Radial20[] = {
     0x09,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386BF0[] = {
+static u8 gBattleScript_End0A_RegisterAnimationCallbacks[] = {
     0x0A, 0x00, 0x00, 0x00, 0x0B, 0x00, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x0D, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386C00[] = {
+static u8 gBattleScript_End0E_InitializeGroup[] = {
     0x0E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C04[] = {
+static u8 gBattleScript_End23_ConfigTexture7Palette1[] = {
     0x23,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C08[] = {
+static u8 gBattleScript_End24_ConfigTexture9Palette2[] = {
     0x24,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C0C[] = {
+static u8 gBattleScript_End25_SpecialSetupBurstPalette3[] = {
     0x25,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C10[] = {
+static u8 gBattleScript_End_TintRampsWithBurstEmitter[] = {
     0x54,
     0x25,
     0x00,
     0x00,
 
 };
-static u8 D_84386C14[] = {
+static u8 gBattleScript_End_PaletteTintWithMotionGroup[] = {
     0x4D,
     0x0E,
     0x00,
     0x00,
 
 };
-static u8 D_84386C18[] = {
+static u8 gBattleScript_End26_SpecialSetupBurstPalette4[] = {
     0x26,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C1C[] = {
+static u8 gBattleScript_End0F_ExplosionSetTintPalette35[] = {
     0x0F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C20[] = {
+static u8 gBattleScript_End10_AdvancedMultiBurst[] = {
     0x10,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C24[] = {
+static u8 gBattleScript_End11_RegisterSmoke[] = {
     0x11,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C28[] = {
+static u8 gBattleScript_End12_ModeSpecificSetup[] = {
     0x12, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386C34[] = {
+static u8 gBattleScript_End15_RegisterModeSpecific[] = {
     0x15,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C38[] = {
+static u8 gBattleScript_End16_ExplosionSet[] = {
     0x16,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C3C[] = {
+static u8 gBattleScript_End17_RegisterAll[] = {
     0x17,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C40[] = {
+static u8 gBattleScript_End18_NoOp[] = {
     0x18,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C44[] = {
+static u8 gBattleScript_End19_PlaySoundAndReset[] = {
     0x19,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C48[] = {
+static u8 gBattleScript_End_SpecificEffectWithMotionGroup[] = {
     0x0D,
     0x0E,
     0x00,
     0x00,
 
 };
-static u8 D_84386C4C[] = {
+static u8 gBattleScript_End03_SpecialCollisionSetup[] = {
     0x03,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C50[] = {
+static u8 gBattleScript_End07_PaletteMultiBurst_Alt[] = {
     0x07,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C54[] = {
+static u8 gBattleScript_End22_InitParticleGroupBasic[] = {
     0x22,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C58[] = {
+static u8 gBattleScript_End35_SetWithCustomCallback[] = {
     0x35,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C5C[] = {
+static u8 gBattleScript_End45_SetVariant2[] = {
     0x45, 0x00, 0x00, 0x00, 0x0E, 0x04, 0x00, 0x00,
 
 };
-static u8 D_84386C64[] = {
+static u8 gBattleScript_End1A_ComplexMovement[] = {
     0x1A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C68[] = {
+static u8 gBattleScript_End09_Radial20_Alt[] = {
     0x09,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C6C[] = {
+static u8 gBattleScript_End_PaletteVariantsWithMotionGroup[] = {
     0x06,
     0x0E,
     0x00,
     0x00,
 
 };
-static u8 D_84386C70[] = {
+static u8 gBattleScript_End1B_AdvancedParticleCombo[] = {
     0x1B, 0x00, 0x00, 0x00, 0x1C, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386C78[] = {
+static u8 gBattleScript_End1D_FireSet[] = {
     0x1D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C7C[] = {
+static u8 gBattleScript_End1E_HandleCollisionSetup[] = {
     0x1E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C80[] = {
+static u8 gBattleScript_End55_StateCollisionSetupDesc2BGravityFall[] = {
     0x55,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C84[] = {
+static u8 gBattleScript_End1F_RegisterMultiple[] = {
     0x1F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C88[] = {
+static u8 gBattleScript_End20_Radial20[] = {
     0x20,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C8C[] = {
+static u8 gBattleScript_End21_Radial20[] = {
     0x21,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C90[] = {
+static u8 gBattleScript_End_ColorVariantWithBurstAndRiseFade[] = {
     0x4F,
     0x27,
     0x00,
     0x00,
 
 };
-static u8 D_84386C94[] = {
+static u8 gBattleScript_End28_SparkleSet[] = {
     0x28,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C98[] = {
+static u8 gBattleScript_End29_Trigger56A74[] = {
     0x29,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386C9C[] = {
+static u8 gBattleScript_End2A_ModeSetup[] = {
     0x2A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CA0[] = {
+static u8 gBattleScript_End2B_CollisionSetup[] = {
     0x2B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CA4[] = {
+static u8 gBattleScript_End2C_ConfigVariantMotion6[] = {
     0x2C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CA8[] = {
+static u8 gBattleScript_End2D_CombinedSetupBurst3DRandom[] = {
     0x2D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CAC[] = {
+static u8 gBattleScript_End_ColorVariantWithCombinedSetup[] = {
     0x4F,
     0x2D,
     0x00,
     0x00,
 
 };
-static u8 D_84386CB0[] = {
+static u8 gBattleScript_End2E_CombinedSetupBurstHorizontalRandom[] = {
     0x2E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CB4[] = {
+static u8 gBattleScript_End2F_SpecialSetupDelayedScatterPalette1[] = {
     0x2F,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CB8[] = {
+static u8 gBattleScript_End31_RegisterColorAnim[] = {
     0x31,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CBC[] = {
+static u8 gBattleScript_End32_RegisterHandlerWithParticleData[] = {
     0x32,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CC0[] = {
+static u8 gBattleScript_End_FireworkWithConfigB[] = {
     0x3F, 0x23, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386CC8[] = {
+static u8 gBattleScript_End34_MultiHandleSetup[] = {
     0x34,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CCC[] = {
+static u8 gBattleScript_End36_InitSetTintRampDelayedColorFade[] = {
     0x36,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CD0[] = {
+static u8 gBattleScript_End37_SimpleNodeSetup[] = {
     0x37,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CD4[] = {
+static u8 gBattleScript_End39_FullSetupTintFadeOutAndRestore[] = {
     0x39,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CD8[] = {
+static u8 gBattleScript_End49_AlphaFirework2[] = {
     0x49,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CDC[] = {
+static u8 gBattleScript_End4A_AlphaFirework[] = {
     0x4A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CE0[] = {
+static u8 gBattleScript_End3A_ModelAnimAndDescriptorSequence[] = {
     0x3A,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CE4[] = {
+static u8 gBattleScript_End4B_MultiNodeAEntry[] = {
     0x4B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CE8[] = {
+static u8 gBattleScript_End3B_InitCombinedSet[] = {
     0x3B,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CEC[] = {
+static u8 gBattleScript_End3C_WaterAnimFirework2[] = {
     0x3C,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CF0[] = {
+static u8 gBattleScript_End3D_SimpleBurst3[] = {
     0x3D,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CF4[] = {
+static u8 gBattleScript_End3E_PaletteMultiBurst3[] = {
     0x3E,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CF8[] = {
+static u8 gBattleScript_End40_FireballBurst[] = {
     0x40,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386CFC[] = {
+static u8 gBattleScript_End_CombinedSetupWithCollision[] = {
     0x2D,
     0x1E,
     0x00,
     0x00,
 
 };
-static u8 D_84386D00[] = {
+static u8 gBattleScript_End41_FireworkEntry[] = {
     0x41,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D04[] = {
+static u8 gBattleScript_End42_SimpleNodeBurst[] = {
     0x42,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D08[] = {
+static u8 gBattleScript_End43_SetWithMultiple[] = {
     0x43,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D0C[] = {
+static u8 gBattleScript_End44_SetWithTimedFireball[] = {
     0x44,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D10[] = {
+static u8 gBattleScript_End46_SetWithComplex[] = {
     0x46,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D14[] = {
+static u8 gBattleScript_End47_SetVariant3[] = {
     0x47,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D18[] = {
+static u8 gBattleScript_End_ConfigVariantWithFollowup[] = {
     0x50,
     0x4C,
     0x00,
     0x00,
 
 };
-static u8 D_84386D1C[] = {
+static u8 gBattleScript_End38_InitSetTintRampRisingSpread[] = {
     0x38, 0x00, 0x00, 0x00, 0x4D, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386D24[] = {
+static u8 gBattleScript_End4E_RegisterModelAnimAndFallingParticles[] = {
     0x4E, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00,
 
 };
-static u8 D_84386D2C[] = {
+static u8 gBattleScript_End51_RegisterAllTintRampAndModelScaleFade[] = {
     0x51,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D30[] = {
+static u8 gBattleScript_End52_RegisterAllTintRampAndModelScaleFade[] = {
     0x52,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D34[] = {
+static u8 gBattleScript_End02_ComplexParticleSequence[] = {
     0x02,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D38[] = {
+static u8 gBattleScript_End56_ThreeInstanceSet[] = {
     0x56,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D3C[] = {
+static u8 gBattleScript_End53_TintRampAndDescriptorBurst[] = {
     0x53,
     0x00,
     0x00,
     0x00,
 
 };
-static u8 D_84386D40[] = {
+static u8 gBattleScript_End_ModelTintWithConfigB[] = {
     0x57,
     0x23,
     0x00,
@@ -2953,1236 +2953,1236 @@ static u8 D_84386D40[] = {
 };
 static u8* D_84386D44[][2] = {
     {
-        D_84386968,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386ADC,
-        D_84386920,
+        sBattleScript_Start85ModeOrbitBurstAndFollowup,
+        sBattleScript_LoadGfx2C,
     },
     {
-        D_84386AE0,
-        D_84386920,
+        sBattleScript_Start86ModeOrbitAndMetadataBurst,
+        sBattleScript_LoadGfx2C,
     },
     {
-        D_84386AE8,
-        D_84386924,
+        sBattleScript_Start87ExpandingFlashAndRisingScaleFade,
+        sBattleScript_LoadGfx2C_Alt,
     },
     {
-        D_84386AEC,
-        D_84386924,
+        sBattleScript_Start88Nop,
+        sBattleScript_LoadGfx2C_Alt,
     },
     {
-        D_84386AF0,
-        D_8438692C,
+        sBattleScript_Start89Descriptor3FRisingFade,
+        sBattleScript_LoadGfx2D,
     },
     {
-        D_84386AF4,
-        D_8438682C,
+        sBattleScript_Start8ATextureNodeSetup,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386ACC,
-        D_84386924,
+        sBattleScript_Start8BDualRepeatingSparks,
+        sBattleScript_LoadGfx2C_Alt,
     },
     {
-        D_843869D0,
-        D_84386870,
+        sBattleScript_Start15WaterAnimBurst,
+        sBattleScript_LoadGfx10,
     },
     {
-        D_84386AD0,
-        D_84386928,
+        sBattleScript_Start8CDualRepeatingSparksAlias,
+        sBattleScript_LoadGfx3C,
     },
     {
-        D_84386AD4,
-        D_84386928,
+        sBattleScript_Start8DGridRiseAndFallingBurst,
+        sBattleScript_LoadGfx3C,
     },
     {
-        D_84386AE4,
-        D_84386920,
+        sBattleScript_Start8FModeOrbitAndMetadataBurst,
+        sBattleScript_LoadGfx2C,
     },
     {
-        D_84386AD8,
-        D_84386928,
+        sBattleScript_Start8EGridRiseAndFallingBurstAlias,
+        sBattleScript_LoadGfx3C,
     },
     {
-        D_84386BB8,
-        D_8438682C,
+        sBattleScript_Start7AGlobalAndOwnerTintFade,
+        sBattleScript_LoadGfxEmpty,
     },
 };
-static u8* gBattleAnimMode4StartEffectLists[] = {
-    D_84386968, D_84386AAC, D_84386AB0, D_84386974, D_84386B10, D_84386AB4,
-    D_84386AB8, D_84386ABC, D_84386AC0, D_84386AC4, D_84386AC8, D_84386970,
+static u8* sBattleAnimMode4StartEffectLists[] = {
+    sBattleScript_StartEmpty, sBattleScript_Start7DRegisterCallbacks, sBattleScript_Start7ESpecial, sBattleScript_Start01Descriptor2FPhaseFadeOut, sBattleScript_Start45RegisterHandlers49504, sBattleScript_Start7FCreateVariant45,
+    sBattleScript_Start80CreateVariant47, sBattleScript_Start81CreateTypeX, sBattleScript_Start82CreateSmoke, sBattleScript_Start83CreateSmokeHighPriority, sBattleScript_Start84CreateDual, sBattleScript_Start90Nop,
 };
 static u8* D_84386DEC[] = {
-    D_84386BBC, D_84386BC4, D_84386BEC, D_84386BC8, D_84386CB8,
+    sBattleScript_EndEmpty, sBattleScript_MsgStart, gBattleScript_End09_Radial20, sBattleScript_MsgEnd, gBattleScript_End31_RegisterColorAnim,
 };
-static u8* gBattleAnimMode9StartEffectLists[] = { D_84386968, D_84386A2C };
-static u8* gMoveAnimEffectScripts[][5] = {
+static u8* sBattleAnimMode9StartEffectLists[] = { sBattleScript_StartEmpty, sBattleScript_Start2CTrail40GridAlt };
+static u8* sMoveAnimEffectScripts[][5] = {
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C00,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End0E_InitializeGroup,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C04,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End23_ConfigTexture7Palette1,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869B8,
-        D_84386968,
-        D_84386D18,
-        D_84386844,
-        D_84386894,
+        sBattleScript_Start0FDescriptor08IndexedScaleDelayFade,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ConfigVariantWithFollowup,
+        sBattleScript_LoadGfx03,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C48,
-        D_8438682C,
-        D_843868E4,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_SpecificEffectWithMotionGroup,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxPayDay,
     },
     {
-        D_84386A9C,
-        D_84386968,
-        D_84386CCC,
-        D_84386874,
-        D_84386894,
+        sBattleScript_Start38AdditionalNodeSetup,
+        sBattleScript_StartEmpty,
+        gBattleScript_End36_InitSetTintRampDelayedColorFade,
+        sBattleScript_LoadGfx11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A20,
-        D_84386968,
-        D_84386C9C,
-        D_843868B0,
-        D_84386894,
+        sBattleScript_Start29TextureSetup,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2A_ModeSetup,
+        sBattleScript_AnimAttack,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B24,
-        D_84386968,
-        D_84386CA0,
-        D_8438686C,
-        D_84386894,
+        sBattleScript_Start49CreateCollisionRandomEffect,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2B_CollisionSetup,
+        sBattleScript_LoadGfxThunderFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869A8,
-        D_84386968,
-        D_84386BD4,
-        D_8438685C,
-        D_8438682C,
+        sBattleScript_Start0DSecondaryOwnerSpeciesBranch,
+        sBattleScript_StartEmpty,
+        gBattleScript_End05_DynamicCollisionSetup,
+        sBattleScript_LoadGfx0B,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B18,
-        D_84386968,
-        D_84386C98,
-        D_84386930,
-        D_84386894,
+        sBattleScript_Start47RegisterHandler49058,
+        sBattleScript_StartEmpty,
+        gBattleScript_End29_Trigger56A74,
+        sBattleScript_LoadGfx08,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B1C,
-        D_84386968,
-        D_84386D3C,
-        D_84386930,
-        D_84386894,
+        sBattleScript_Start6FRegisterHandler490A8,
+        sBattleScript_StartEmpty,
+        gBattleScript_End53_TintRampAndDescriptorBurst,
+        sBattleScript_LoadGfx08,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_8438699C,
-        D_84386B20,
-        D_84386C4C,
-        D_843868E8,
-        D_843868EC,
+        sBattleScript_Start0AModel60AndModelAnimWait,
+        sBattleScript_Start48RegisterHandler47448,
+        gBattleScript_End03_SpecialCollisionSetup,
+        sBattleScript_LoadGfxRazorWindAlt,
+        sBattleScript_LoadGfxRazorWindAlt2,
     },
     {
-        D_84386B0C,
-        D_84386968,
-        D_84386BBC,
-        D_84386934,
-        D_8438682C,
+        sBattleScript_Start44RegisterHandler49384,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxSwordsDance,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386AA4,
-        D_84386968,
-        D_84386C7C,
-        D_8438685C,
-        D_8438682C,
+        sBattleScript_Start3DHandleStateSetup,
+        sBattleScript_StartEmpty,
+        gBattleScript_End1E_HandleCollisionSetup,
+        sBattleScript_LoadGfx0B,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_8438699C,
-        D_84386968,
-        D_84386CB4,
-        D_84386854,
-        D_84386894,
+        sBattleScript_Start0AModel60AndModelAnimWait,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2F_SpecialSetupDelayedScatterPalette1,
+        sBattleScript_LoadGfxGustAndWhirlwind,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386D40,
-        D_84386858,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ModelTintWithConfigB,
+        sBattleScript_LoadGfxVineWhipFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_8438699C,
-        D_84386968,
-        D_84386BBC,
-        D_84386854,
-        D_8438682C,
+        sBattleScript_Start0AModel60AndModelAnimWait,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxGustAndWhirlwind,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_84386A1C,
-        D_84386CAC,
+        sBattleScript_StartEmpty,
+        sBattleScript_Start28RegisterLargeExplosion,
+        gBattleScript_End_ColorVariantWithCombinedSetup,
         D_843868AC,
-        D_84386894,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869C8,
-        D_84386968,
-        D_84386BEC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start13Radial20,
+        sBattleScript_StartEmpty,
+        gBattleScript_End09_Radial20,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA8,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2D_CombinedSetupBurst3DRandom,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386BAC,
-        D_84386968,
-        D_84386C80,
-        D_8438685C,
-        D_84386858,
+        sBattleScript_Start75StateCollisionSetupA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End55_StateCollisionSetupDesc2BGravityFall,
+        sBattleScript_LoadGfx0B,
+        sBattleScript_LoadGfxVineWhipFamily,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C90,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ColorVariantWithBurstAndRiseFade,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C04,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End23_ConfigTexture7Palette1,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386978,
-        D_84386968,
-        D_84386D18,
-        D_84386844,
-        D_84386894,
+        sBattleScript_Start02Descriptor08IndexedScaleDelayFade,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ConfigVariantWithFollowup,
+        sBattleScript_LoadGfx03,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869F8,
-        D_84386968,
-        D_84386CD0,
-        D_8438688C,
-        D_84386894,
+        sBattleScript_Start1FComplexNodeSetup,
+        sBattleScript_StartEmpty,
+        gBattleScript_End37_SimpleNodeSetup,
+        sBattleScript_LoadGfxSandAttack,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C00,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End0E_InitializeGroup,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386BB4,
-        D_84386968,
-        D_84386C0C,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start77CreateCallback,
+        sBattleScript_StartEmpty,
+        gBattleScript_End25_SpecialSetupBurstPalette3,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386BB0,
-        D_84386968,
-        D_84386CB4,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start76CreateWithCallback,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2F_SpecialSetupDelayedScatterPalette1,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B08,
-        D_84386968,
-        D_84386C10,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start79TriggerDefault3,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_TintRampsWithBurstEmitter,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B54,
-        D_84386968,
-        D_84386CAC,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_Start74AdditionalNodeA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ColorVariantWithCombinedSetup,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869C8,
-        D_84386968,
-        D_84386BEC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start13Radial20,
+        sBattleScript_StartEmpty,
+        gBattleScript_End09_Radial20,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B50,
-        D_84386968,
-        D_84386CA4,
-        D_84386944,
-        D_84386894,
+        sBattleScript_Start73FinalSetupC,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfx32,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B4C,
-        D_84386968,
-        D_84386CA8,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_Start72FinalSetupB,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2D_CombinedSetupBurst3DRandom,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B50,
-        D_84386968,
-        D_84386CA8,
-        D_84386944,
-        D_84386894,
+        sBattleScript_Start73FinalSetupC,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2D_CombinedSetupBurst3DRandom,
+        sBattleScript_LoadGfx32,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B00,
-        D_84386968,
-        D_84386C18,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start43OwnerAnchoredFourStream,
+        sBattleScript_StartEmpty,
+        gBattleScript_End26_SpecialSetupBurstPalette4,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B00,
-        D_84386968,
-        D_84386C18,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start43OwnerAnchoredFourStream,
+        sBattleScript_StartEmpty,
+        gBattleScript_End26_SpecialSetupBurstPalette4,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B00,
-        D_84386968,
-        D_84386C0C,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start43OwnerAnchoredFourStream,
+        sBattleScript_StartEmpty,
+        gBattleScript_End25_SpecialSetupBurstPalette3,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B40,
-        D_84386968,
-        D_84386BBC,
-        D_8438693C,
-        D_8438682C,
+        sBattleScript_Start53SimpleBurst,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxDreamEaterAndLeer,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B28,
-        D_84386968,
-        D_84386C98,
-        D_84386930,
-        D_84386894,
+        sBattleScript_Start4ARegisterHandler49108,
+        sBattleScript_StartEmpty,
+        gBattleScript_End29_Trigger56A74,
+        sBattleScript_LoadGfx08,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A28,
-        D_84386968,
-        D_84386BBC,
-        D_843868B8,
-        D_8438682C,
+        sBattleScript_Start2BTrail40Variant,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_AnimHit,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A2C,
-        D_84386968,
-        D_84386BBC,
-        D_843868BC,
-        D_8438682C,
+        sBattleScript_Start2CTrail40GridAlt,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_AnimMiss,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A30,
-        D_84386968,
-        D_84386C04,
-        D_843868C0,
-        D_84386894,
+        sBattleScript_NoSpawnThen2DSetMode,
+        sBattleScript_StartEmpty,
+        gBattleScript_End23_ConfigTexture7Palette1,
+        sBattleScript_AnimFaint,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B7C,
-        D_84386968,
-        D_84386C8C,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start62Radial20,
+        sBattleScript_StartEmpty,
+        gBattleScript_End21_Radial20,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869C0,
-        D_84386968,
-        D_84386C50,
-        D_84386868,
-        D_8438682C,
+        sBattleScript_Start11ModelAnimFinish,
+        sBattleScript_StartEmpty,
+        gBattleScript_End07_PaletteMultiBurst_Alt,
+        sBattleScript_LoadGfx0E,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869D4,
-        D_84386968,
-        D_84386D1C,
-        D_84386874,
-        D_84386894,
+        sBattleScript_Start16InitSetA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End38_InitSetTintRampRisingSpread,
+        sBattleScript_LoadGfx11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869D8,
-        D_84386968,
-        D_84386C38,
-        D_84386874,
-        D_84386894,
+        sBattleScript_Start17InitSmokeSetA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End16_ExplosionSet,
+        sBattleScript_LoadGfx11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A60,
-        D_84386968,
-        D_84386BBC,
-        D_843868F4,
-        D_8438682C,
+        sBattleScript_Start35RegisterEffectE0Alt2_05RibbonMesh,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxWaterGunAlt,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386988,
-        D_84386968,
-        D_84386D34,
-        D_84386844,
-        D_84386868,
+        sBattleScript_Start06AnimatedScaleAndBurstEmitter,
+        sBattleScript_StartEmpty,
+        gBattleScript_End02_ComplexParticleSequence,
+        sBattleScript_LoadGfx03,
+        sBattleScript_LoadGfx0E,
     },
     {
-        D_8438698C,
-        D_84386968,
-        D_84386C70,
-        D_84386844,
-        D_84386868,
+        sBattleScript_Start3AInitExplosionEffectSet,
+        sBattleScript_StartEmpty,
+        gBattleScript_End1B_AdvancedParticleCombo,
+        sBattleScript_LoadGfx03,
+        sBattleScript_LoadGfx0E,
     },
     {
-        D_84386A0C,
-        D_84386968,
-        D_84386C20,
-        D_8438689C,
-        D_84386844,
+        sBattleScript_NoSpawnThen24TerrainGrid,
+        sBattleScript_StartEmpty,
+        gBattleScript_End10_AdvancedMultiBurst,
+        sBattleScript_LoadGfxIceBeam,
+        sBattleScript_LoadGfx03,
     },
     {
-        D_84386A38,
-        D_84386968,
-        D_84386D08,
-        D_843868D8,
-        D_8438682C,
+        sBattleScript_NoSpawnThen2FInitSetWithTexture53,
+        sBattleScript_StartEmpty,
+        gBattleScript_End43_SetWithMultiple,
+        sBattleScript_LoadGfx29_03,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A04,
-        D_84386968,
-        D_84386C3C,
-        D_84386898,
-        D_84386844,
+        sBattleScript_Start22RegisterSparkle,
+        sBattleScript_StartEmpty,
+        gBattleScript_End17_RegisterAll,
+        sBattleScript_LoadGfxPsybeam,
+        sBattleScript_LoadGfx03,
     },
     {
-        D_84386980,
-        D_84386968,
-        D_84386D0C,
-        D_8438682C,
-        D_843868D8,
+        sBattleScript_NoSpawnThen04TintDescriptor53ScalePulse,
+        sBattleScript_StartEmpty,
+        gBattleScript_End44_SetWithTimedFireball,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx29_03,
     },
     {
-        D_84386B30,
-        D_84386968,
-        D_84386C58,
-        D_8438682C,
-        D_843868D8,
+        sBattleScript_NoSpawnThen78InitSmallGlowEffectSet,
+        sBattleScript_StartEmpty,
+        gBattleScript_End35_SetWithCustomCallback,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx29_03,
     },
     {
-        D_84386B8C,
-        D_84386968,
-        D_84386C5C,
-        D_8438682C,
-        D_843868D8,
+        sBattleScript_NoSpawnThen1AInitSetAlt2,
+        sBattleScript_StartEmpty,
+        gBattleScript_End45_SetVariant2,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx29_03,
     },
     {
-        D_84386A18,
-        D_84386968,
-        D_84386D10,
-        D_843868A8,
-        D_843868D8,
+        sBattleScript_NoSpawnThen27InitSetWithFade,
+        sBattleScript_StartEmpty,
+        gBattleScript_End46_SetWithComplex,
+        sBattleScript_LoadGfxPeck,
+        sBattleScript_LoadGfx29_03,
     },
     {
-        D_84386BB0,
-        D_84386968,
-        D_84386C0C,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start76CreateWithCallback,
+        sBattleScript_StartEmpty,
+        gBattleScript_End25_SpecialSetupBurstPalette3,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B04,
-        D_84386968,
-        D_84386C14,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start71TriggerDefault1,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_PaletteTintWithMotionGroup,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B9C,
-        D_84386968,
-        D_84386CB0,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_Start6CAdditionalSetupA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2E_CombinedSetupBurstHorizontalRandom,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C08,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End24_ConfigTexture9Palette2,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869E0,
-        D_84386968,
-        D_84386CAC,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_Start19Nop,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ColorVariantWithCombinedSetup,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B2C,
-        D_84386968,
-        D_84386CBC,
-        D_8438687C,
-        D_8438682C,
+        sBattleScript_Start4BRegisterHandlersAlternate,
+        sBattleScript_StartEmpty,
+        gBattleScript_End32_RegisterHandlerWithParticleData,
+        sBattleScript_LoadGfxAbsorbAndEarthquakeAndHyperFang,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869DC,
-        D_84386968,
-        D_84386C34,
-        D_84386880,
-        D_843868CC,
+        sBattleScript_Start18PaletteScriptBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End15_RegisterModeSpecific,
+        sBattleScript_LoadGfxLeechSeedAndLovelyKissAndMegaDrain,
+        sBattleScript_LoadGfx26_11,
     },
     {
-        D_843869DC,
-        D_84386968,
-        D_84386C34,
-        D_84386880,
-        D_843868CC,
+        sBattleScript_Start18PaletteScriptBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End15_RegisterModeSpecific,
+        sBattleScript_LoadGfxLeechSeedAndLovelyKissAndMegaDrain,
+        sBattleScript_LoadGfx26_11,
     },
     {
-        D_84386994,
-        D_84386968,
-        D_84386C84,
-        D_8438684C,
-        D_8438682C,
+        sBattleScript_Start08ModelBurstAndVerticalFade,
+        sBattleScript_StartEmpty,
+        gBattleScript_End1F_RegisterMultiple,
+        sBattleScript_LoadGfxGrowth,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386BA0,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start6DSimpleGroupSetup,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869A0,
-        D_84386968,
-        D_84386BD0,
-        D_84386858,
-        D_84386894,
+        sBattleScript_NoSpawnThen0BGlobalTintFade,
+        sBattleScript_StartEmpty,
+        gBattleScript_End04_MultiTextureSetup,
+        sBattleScript_LoadGfxVineWhipFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B14,
-        D_84386B98,
-        D_84386D14,
-        D_843868F8,
-        D_843868D8,
+        sBattleScript_NoSpawnThen46InitSetWithDifferentTiming,
+        sBattleScript_Start69TriggerSpecial,
+        gBattleScript_End47_SetVariant3,
+        sBattleScript_LoadGfxPoisonPowder,
+        sBattleScript_LoadGfx29_03,
     },
     {
-        D_84386AFC,
-        D_84386968,
-        D_84386C28,
-        D_843868C8,
-        D_84386894,
+        sBattleScript_Start41RegisterParticleNodes,
+        sBattleScript_StartEmpty,
+        gBattleScript_End12_ModeSpecificSetup,
+        sBattleScript_LoadGfxPowderFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386AFC,
-        D_84386968,
-        D_84386C28,
-        D_843868C8,
-        D_84386894,
+        sBattleScript_Start41RegisterParticleNodes,
+        sBattleScript_StartEmpty,
+        gBattleScript_End12_ModeSpecificSetup,
+        sBattleScript_LoadGfxPowderFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386AFC,
-        D_84386968,
-        D_84386C28,
-        D_843868C8,
-        D_84386894,
+        sBattleScript_Start41RegisterParticleNodes,
+        sBattleScript_StartEmpty,
+        gBattleScript_End12_ModeSpecificSetup,
+        sBattleScript_LoadGfxPowderFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386AA0,
-        D_84386968,
-        D_84386C64,
-        D_84386858,
-        D_84386894,
+        sBattleScript_NoSpawnThen39SmallNodeSetupB,
+        sBattleScript_StartEmpty,
+        gBattleScript_End1A_ComplexMovement,
+        sBattleScript_LoadGfxVineWhipFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A00,
-        D_84386968,
-        D_84386C88,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start21Radial20,
+        sBattleScript_StartEmpty,
+        gBattleScript_End20_Radial20,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A08,
-        D_84386968,
-        D_84386C1C,
-        D_84386874,
-        D_84386894,
+        sBattleScript_Start23InitSmokeSetB,
+        sBattleScript_StartEmpty,
+        gBattleScript_End0F_ExplosionSetTintPalette35,
+        sBattleScript_LoadGfx11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B44,
-        D_84386968,
-        D_84386C78,
-        D_84386878,
-        D_84386894,
+        sBattleScript_Start54InitSmokeSetC,
+        sBattleScript_StartEmpty,
+        gBattleScript_End1D_FireSet,
+        sBattleScript_LoadGfxThunderShock,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A98,
-        D_84386968,
-        D_84386BE4,
-        D_8438686C,
-        D_8438682C,
+        sBattleScript_Start3BCreateStreamSprayColumnEffect,
+        sBattleScript_StartEmpty,
+        gBattleScript_End08_SprayColumnEffect,
+        sBattleScript_LoadGfxThunderFamily,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869C4,
-        D_84386968,
-        D_84386BE4,
-        D_8438686C,
-        D_8438682C,
+        sBattleScript_Start12ScatterRadialAndColumnSequence,
+        sBattleScript_StartEmpty,
+        gBattleScript_End08_SprayColumnEffect,
+        sBattleScript_LoadGfxThunderFamily,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A14,
-        D_84386968,
-        D_84386C24,
-        D_843868A4,
-        D_8438682C,
+        sBattleScript_Start26RegisterExplosion,
+        sBattleScript_StartEmpty,
+        gBattleScript_End11_RegisterSmoke,
+        sBattleScript_LoadGfxThunder,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869C4,
-        D_84386968,
-        D_84386BE8,
-        D_8438686C,
-        D_8438682C,
+        sBattleScript_Start12ScatterRadialAndColumnSequence,
+        sBattleScript_StartEmpty,
+        gBattleScript_End48_SprayColumnEffectTrigger,
+        sBattleScript_LoadGfxThunderFamily,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386AF8,
-        D_84386968,
-        D_84386BF0,
-        D_8438682C,
-        D_8438687C,
+        sBattleScript_Start3FRegisterHandlersDefault,
+        sBattleScript_StartEmpty,
+        gBattleScript_End0A_RegisterAnimationCallbacks,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxAbsorbAndEarthquakeAndHyperFang,
     },
     {
-        D_84386A10,
-        D_84386968,
-        D_84386CE4,
-        D_843868A0,
-        D_84386894,
+        sBattleScript_Start25SimpleBurstScript,
+        sBattleScript_StartEmpty,
+        gBattleScript_End4B_MultiNodeAEntry,
+        sBattleScript_LoadGfxDigAndFissure,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A10,
-        D_84386968,
-        D_84386CE0,
-        D_843868A0,
-        D_84386894,
+        sBattleScript_Start25SimpleBurstScript,
+        sBattleScript_StartEmpty,
+        gBattleScript_End3A_ModelAnimAndDescriptorSequence,
+        sBattleScript_LoadGfxDigAndFissure,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A50,
-        D_84386968,
-        D_84386D24,
-        D_843868D4,
-        D_84386894,
+        sBattleScript_Start34RegisterHandler49628,
+        sBattleScript_StartEmpty,
+        gBattleScript_End4E_RegisterModelAnimAndFallingParticles,
+        sBattleScript_LoadGfxToxic,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869C0,
-        D_84386968,
-        D_84386BE0,
-        D_84386868,
-        D_8438682C,
+        sBattleScript_Start11ModelAnimFinish,
+        sBattleScript_StartEmpty,
+        gBattleScript_End07_PaletteMultiBurst,
+        sBattleScript_LoadGfx0E,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A68,
-        D_84386968,
-        D_84386CD8,
-        D_843868CC,
-        D_84386894,
+        sBattleScript_Start6BAlphaBurst2,
+        sBattleScript_StartEmpty,
+        gBattleScript_End49_AlphaFirework2,
+        sBattleScript_LoadGfx26_11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A64,
-        D_84386968,
-        D_84386CDC,
-        D_843868CC,
-        D_84386894,
+        sBattleScript_Start6AAlphaBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End4A_AlphaFirework,
+        sBattleScript_LoadGfx26_11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A24,
-        D_84386968,
-        D_84386BBC,
-        D_843868B4,
-        D_8438682C,
+        sBattleScript_NoSpawnThen2ATrail40,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxDoubleTeamAndMeditate,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B74,
-        D_84386968,
-        D_84386BBC,
-        D_84386954,
-        D_8438682C,
+        sBattleScript_Start60PaletteBurst4,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxAgility,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A6C,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start1BNop,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B64,
-        D_84386968,
-        D_84386CA4,
-        D_84386944,
-        D_84386894,
+        sBattleScript_Start5APortraitBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfx32,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B48,
-        D_84386968,
-        D_84386CA4,
-        D_843868CC,
-        D_84386894,
+        sBattleScript_Start55FinalSetupA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfx26_11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A70,
-        D_84386968,
-        D_84386BBC,
-        D_843868FC,
-        D_8438682C,
+        sBattleScript_Start56RegisterLargeExplosionAndEffects,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxNightShade,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B78,
-        D_84386968,
-        D_84386CC0,
-        D_84386958,
-        D_84386894,
+        sBattleScript_Start61PaletteBurst5,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_FireworkWithConfigB,
+        sBattleScript_LoadGfxMimic,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869F0,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start1DGroupSetupA,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A24,
-        D_84386968,
-        D_84386BBC,
-        D_843868B4,
-        D_8438682C,
+        sBattleScript_NoSpawnThen2ATrail40,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxDoubleTeamAndMeditate,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A6C,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start1BNop,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386BA4,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start6EComplexGroupSetup,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A74,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start1EFinalGroupSetup,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869E8,
-        D_84386968,
-        D_84386BBC,
-        D_84386884,
-        D_84386894,
+        sBattleScript_Start1CRegisterEffectE0,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxBarrageAndConfuseRayAndSludge,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A78,
-        D_84386968,
-        D_84386CEC,
-        D_84386900,
-        D_84386894,
+        sBattleScript_Start5DWaterAnimFirework,
+        sBattleScript_StartEmpty,
+        gBattleScript_End3C_WaterAnimFirework2,
+        sBattleScript_LoadGfxWithdrawAlt,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B68,
-        D_84386968,
-        D_84386BBC,
-        D_84386948,
-        D_8438682C,
+        sBattleScript_Start5BPortraitBurstNode,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxDefenseCurl,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B58,
-        D_84386968,
-        D_84386BBC,
-        D_84386940,
-        D_84386894,
+        sBattleScript_Start57_ModelTintAlphaFade,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxBarrierAndConversion,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869B4,
-        D_84386968,
-        D_84386BBC,
-        D_84386860,
-        D_8438682C,
+        sBattleScript_Start0EModelAnimAndMoveKeyedTintParticles,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxHazeAndLightScreen,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869B4,
-        D_84386968,
-        D_84386BBC,
-        D_84386860,
-        D_8438682C,
+        sBattleScript_Start0EModelAnimAndMoveKeyedTintParticles,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxHazeAndLightScreen,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A7C,
-        D_84386968,
-        D_84386BBC,
-        D_84386904,
-        D_8438682C,
+        sBattleScript_Start1CRegisterEffectE0_36RibbonMesh,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxReflectAlt2,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A80,
-        D_84386968,
-        D_84386BBC,
-        D_84386908,
-        D_8438682C,
+        sBattleScript_Start0EModelAnimAndMoveKeyedTintParticles_Alt,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxFocusEnergyAlt,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_8438697C,
-        D_84386968,
-        D_84386BBC,
-        D_843868CC,
-        D_8438682C,
+        sBattleScript_Start03ModelTintAndVerticalFade,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfx26_11,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B48,
-        D_84386968,
-        D_84386CA4,
-        D_843868CC,
-        D_84386894,
+        sBattleScript_Start55FinalSetupA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfx26_11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869FC,
-        D_84386968,
-        D_84386C40,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start20Nop,
+        sBattleScript_StartEmpty,
+        gBattleScript_End18_NoOp,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C40,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End18_NoOp,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A44,
-        D_84386968,
-        D_84386D2C,
-        D_843868D0,
-        D_84386874,
+        sBattleScript_Start32RegisterAll48630,
+        sBattleScript_StartEmpty,
+        gBattleScript_End51_RegisterAllTintRampAndModelScaleFade,
+        sBattleScript_LoadGfxEggBombAndFurySwipes,
+        sBattleScript_LoadGfx11,
     },
     {
-        D_84386A84,
-        D_84386968,
-        D_84386C94,
-        D_8438690C,
-        D_84386874,
+        sBattleScript_Start40RegisterHandler416B0,
+        sBattleScript_StartEmpty,
+        gBattleScript_End28_SparkleSet,
+        sBattleScript_LoadGfxHighJumpKickAndLick,
+        sBattleScript_LoadGfx11,
     },
     {
-        D_84386B6C,
-        D_84386968,
-        D_84386BE0,
-        D_8438694C,
-        D_84386868,
+        sBattleScript_Start5CPortraitBurstCheck,
+        sBattleScript_StartEmpty,
+        gBattleScript_End07_PaletteMultiBurst,
+        sBattleScript_LoadGfxSmog,
+        sBattleScript_LoadGfx0E,
     },
     {
-        D_843869EC,
-        D_84386968,
-        D_84386C28,
-        D_84386884,
-        D_84386894,
+        sBattleScript_Start4CRegisterEffectE0Alt,
+        sBattleScript_StartEmpty,
+        gBattleScript_End12_ModeSpecificSetup,
+        sBattleScript_LoadGfxBarrageAndConfuseRayAndSludge,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869C0,
-        D_84386968,
-        D_84386BE0,
-        D_84386868,
-        D_8438682C,
+        sBattleScript_Start11ModelAnimFinish,
+        sBattleScript_StartEmpty,
+        gBattleScript_End07_PaletteMultiBurst,
+        sBattleScript_LoadGfx0E,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B34,
-        D_84386968,
-        D_84386C00,
-        D_84386938,
-        D_84386894,
+        sBattleScript_Start4FRegisterHandler498D8,
+        sBattleScript_StartEmpty,
+        gBattleScript_End0E_InitializeGroup,
+        sBattleScript_LoadGfxFireBlastAndRest,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869D8,
-        D_84386968,
-        D_84386CE8,
-        D_84386874,
-        D_84386894,
+        sBattleScript_Start17InitSmokeSetA,
+        sBattleScript_StartEmpty,
+        gBattleScript_End3B_InitCombinedSet,
+        sBattleScript_LoadGfx11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B80,
-        D_84386968,
-        D_84386CF8,
-        D_8438695C,
-        D_84386844,
+        sBattleScript_Start63BasicMultiBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End40_FireballBurst,
+        sBattleScript_LoadGfxClamp,
+        sBattleScript_LoadGfx03,
     },
     {
-        D_84386B18,
-        D_84386968,
-        D_84386C98,
-        D_84386930,
-        D_84386894,
+        sBattleScript_Start47RegisterHandler49058,
+        sBattleScript_StartEmpty,
+        gBattleScript_End29_Trigger56A74,
+        sBattleScript_LoadGfx08,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386990,
-        D_84386968,
-        D_84386CC8,
-        D_84386848,
-        D_84386894,
+        sBattleScript_NoSpawnThen07TexturedRibbonSheet,
+        sBattleScript_StartEmpty,
+        gBattleScript_End34_MultiHandleSetup,
+        sBattleScript_LoadGfxSkullBash,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386BA8,
-        D_84386968,
-        D_84386D18,
-        D_84386944,
-        D_84386894,
+        sBattleScript_Start70PortraitBurstInit,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_ConfigVariantWithFollowup,
+        sBattleScript_LoadGfx32,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386AA8,
-        D_84386968,
-        D_84386C0C,
-        D_84386850,
-        D_84386894,
+        sBattleScript_Start3EOwnerLinkedFourStream,
+        sBattleScript_StartEmpty,
+        gBattleScript_End25_SpecialSetupBurstPalette3,
+        sBattleScript_LoadGfx06,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869C8,
-        D_84386968,
-        D_84386C68,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start13Radial20,
+        sBattleScript_StartEmpty,
+        gBattleScript_End09_Radial20_Alt,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A88,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start0CDelayedModelAnim,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A5C,
-        D_84386A2C,
-        D_84386BBC,
-        D_843868DC,
-        D_843868BC,
+        sBattleScript_Start37RegisterHandler49830,
+        sBattleScript_Start2CTrail40GridAlt,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxSoftBoiled,
+        sBattleScript_AnimMiss,
     },
     {
-        D_84386A8C,
-        D_84386968,
-        D_84386BBC,
-        D_8438690C,
-        D_8438682C,
+        sBattleScript_Start42RegisterMultipleHandlers,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxHighJumpKickAndLick,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B64,
-        D_84386968,
-        D_84386CA4,
-        D_84386944,
-        D_84386894,
+        sBattleScript_Start5APortraitBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfx32,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B40,
-        D_84386968,
-        D_84386BBC,
-        D_8438693C,
-        D_8438682C,
+        sBattleScript_Start53SimpleBurst,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxDreamEaterAndLeer,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A90,
-        D_84386968,
-        D_84386CF4,
-        D_84386910,
-        D_8438682C,
+        sBattleScript_Start5FPaletteMultiBurst2,
+        sBattleScript_StartEmpty,
+        gBattleScript_End3E_PaletteMultiBurst3,
+        sBattleScript_LoadGfxPoisonGas,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_843869E8,
-        D_84386968,
-        D_84386C28,
-        D_84386884,
-        D_84386894,
+        sBattleScript_Start1CRegisterEffectE0,
+        sBattleScript_StartEmpty,
+        gBattleScript_End12_ModeSpecificSetup,
+        sBattleScript_LoadGfxBarrageAndConfuseRayAndSludge,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B88,
-        D_84386968,
-        D_84386D00,
-        D_84386964,
-        D_84386894,
+        sBattleScript_Start65RotationEntry,
+        sBattleScript_StartEmpty,
+        gBattleScript_End41_FireworkEntry,
+        sBattleScript_LoadGfxLeechLife,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869DC,
-        D_84386968,
-        D_84386C34,
-        D_84386880,
-        D_843868CC,
+        sBattleScript_Start18PaletteScriptBurst,
+        sBattleScript_StartEmpty,
+        gBattleScript_End15_RegisterModeSpecific,
+        sBattleScript_LoadGfxLeechSeedAndLovelyKissAndMegaDrain,
+        sBattleScript_LoadGfx26_11,
     },
     {
-        D_84386B70,
-        D_84386968,
-        D_84386CF0,
-        D_84386950,
-        D_8438682C,
+        sBattleScript_Start5ESimpleBurst2,
+        sBattleScript_StartEmpty,
+        gBattleScript_End3D_SimpleBurst3,
+        sBattleScript_LoadGfxSkyAttack,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B90,
-        D_84386B94,
-        D_84386C44,
-        D_843868E0,
-        D_843868D8,
+        sBattleScript_Start67InitSmoke,
+        sBattleScript_Start68InitFire,
+        gBattleScript_End19_PlaySoundAndReset,
+        sBattleScript_LoadGfxTransform,
+        sBattleScript_LoadGfx29_03,
     },
     {
-        D_84386B60,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start59MultiNodeD_Alt,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A3C,
-        D_84386968,
-        D_84386C54,
-        D_84386844,
-        D_84386894,
+        sBattleScript_Start30TimedFireball,
+        sBattleScript_StartEmpty,
+        gBattleScript_End22_InitParticleGroupBasic,
+        sBattleScript_LoadGfx03,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386C6C,
-        D_8438682C,
-        D_84386914,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_PaletteVariantsWithMotionGroup,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxSpore,
     },
     {
-        D_84386AFC,
-        D_84386968,
-        D_84386C28,
-        D_843868C8,
-        D_84386894,
+        sBattleScript_Start41RegisterParticleNodes,
+        sBattleScript_StartEmpty,
+        gBattleScript_End12_ModeSpecificSetup,
+        sBattleScript_LoadGfxPowderFamily,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869BC,
-        D_84386968,
-        D_84386CD4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_Start10TintDescriptor34Sequence,
+        sBattleScript_StartEmpty,
+        gBattleScript_End39_FullSetupTintFadeOutAndRestore,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A40,
-        D_84386968,
-        D_84386D04,
-        D_843868CC,
-        D_84386894,
+        sBattleScript_Start31SimpleNodeEntry,
+        sBattleScript_StartEmpty,
+        gBattleScript_End42_SimpleNodeBurst,
+        sBattleScript_LoadGfx26_11,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B3C,
-        D_84386968,
-        D_84386BBC,
-        D_84386868,
-        D_84386894,
+        sBattleScript_Start51AdvancedModeSetup,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfx0E,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B84,
-        D_84386968,
-        D_84386CFC,
-        D_84386960,
-        D_84386894,
+        sBattleScript_Start64SimpleBurst4,
+        sBattleScript_StartEmpty,
+        gBattleScript_End_CombinedSetupWithCollision,
+        sBattleScript_LoadGfxExplosion,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386A48,
-        D_84386968,
-        D_84386D30,
-        D_843868D0,
-        D_84386874,
+        sBattleScript_Start52RegisterAll48630,
+        sBattleScript_StartEmpty,
+        gBattleScript_End52_RegisterAllTintRampAndModelScaleFade,
+        sBattleScript_LoadGfxEggBombAndFurySwipes,
+        sBattleScript_LoadGfx11,
     },
     {
-        D_843869B0,
-        D_843869AC,
-        D_84386BD8,
-        D_8438685C,
-        D_8438682C,
+        sBattleScript_Start7CCollisionResponseSwitch,
+        sBattleScript_Start7BConditionalStateSetup,
+        gBattleScript_End58_CollisionAndBurstSetup,
+        sBattleScript_LoadGfx0B,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B38,
-        D_84386968,
-        D_84386CA4,
-        D_84386938,
-        D_84386894,
+        sBattleScript_Start50RegisterDefaultTexture,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxFireBlastAndRest,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386968,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_StartEmpty,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386AF8,
-        D_84386968,
-        D_84386BF0,
-        D_8438682C,
-        D_8438687C,
+        sBattleScript_Start3FRegisterHandlersDefault,
+        sBattleScript_StartEmpty,
+        gBattleScript_End0A_RegisterAnimationCallbacks,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxAbsorbAndEarthquakeAndHyperFang,
     },
     {
-        D_84386B28,
-        D_84386968,
-        D_84386C98,
-        D_84386930,
-        D_84386894,
+        sBattleScript_Start4ARegisterHandler49108,
+        sBattleScript_StartEmpty,
+        gBattleScript_End29_Trigger56A74,
+        sBattleScript_LoadGfx08,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B5C,
-        D_84386968,
-        D_84386BBC,
-        D_84386940,
-        D_84386894,
+        sBattleScript_Start58MultiNodeC2,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxBarrierAndConversion,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869F0,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start1DGroupSetupA,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A94,
-        D_84386968,
-        D_84386D38,
-        D_84386918,
-        D_84386894,
+        sBattleScript_NoSpawnThen4EInitSetSingle,
+        sBattleScript_StartEmpty,
+        gBattleScript_End56_ThreeInstanceSet,
+        sBattleScript_LoadGfxSuperFangAlt,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_84386B28,
-        D_84386968,
-        D_84386C98,
-        D_84386930,
-        D_84386894,
+        sBattleScript_Start4ARegisterHandler49108,
+        sBattleScript_StartEmpty,
+        gBattleScript_End29_Trigger56A74,
+        sBattleScript_LoadGfx08,
+        sBattleScript_LoadGfx18,
     },
     {
-        D_843869A8,
-        D_84386968,
-        D_84386BD4,
-        D_8438685C,
-        D_8438682C,
+        sBattleScript_Start0DSecondaryOwnerSpeciesBranch,
+        sBattleScript_StartEmpty,
+        gBattleScript_End05_DynamicCollisionSetup,
+        sBattleScript_LoadGfx0B,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386A4C,
-        D_84386968,
-        D_84386BBC,
-        D_8438682C,
-        D_8438682C,
+        sBattleScript_Start59MultiNodeD,
+        sBattleScript_StartEmpty,
+        sBattleScript_EndEmpty,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfxEmpty,
     },
     {
-        D_84386B4C,
-        D_84386968,
-        D_84386CA4,
-        D_8438682C,
-        D_84386894,
+        sBattleScript_Start72FinalSetupB,
+        sBattleScript_StartEmpty,
+        gBattleScript_End2C_ConfigVariantMotion6,
+        sBattleScript_LoadGfxEmpty,
+        sBattleScript_LoadGfx18,
     },
 };
 
@@ -4218,12 +4218,12 @@ void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon) {
 }
 
 void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon) {
-    func_8003EB40(BattleScene_GetParticipantDisplayPlayerNumber(active_pokemon), &active_pokemon->state.runtime);
+    ProcessAudioInfo(BattleScene_GetParticipantDisplayPlayerNumber(active_pokemon), &active_pokemon->state.runtime);
 }
 
 void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2) {
-    func_800479C0(arg1->usedMove, arg0->displayObject.objectType, arg2);
-    func_80040A70(arg1, arg1->usedMove, arg0->displayObject.objectType, arg2);
+    Effect_TriggerMoveVisual(arg1->usedMove, arg0->displayObject.objectType, arg2);
+    HandleMoveEvent(arg1, arg1->usedMove, arg0->displayObject.objectType, arg2);
 }
 
 void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
@@ -4623,43 +4623,43 @@ void BattleAnim_PlayBattleSequenceById(ActivePokemon* arg0, s32 arg1) {
 
 void BattleAnim_RunEffectInitStart(s16 arg0) {
     gBattleAnimCurrentAnchor = gBattleAnimDefaultAnchor;
-    gMoveAnimEffectStartInitFuncs[arg0]();
-    if (gBattleAnimAlternateAnchor != 0xFF) {
-        gBattleAnimCurrentAnchor = gBattleAnimAlternateAnchor;
-        gMoveAnimEffectStartInitFuncs[arg0]();
+    sMoveAnimEffectStartInitFuncs[arg0]();
+    if (sBattleAnimAlternateAnchor != 0xFF) {
+        gBattleAnimCurrentAnchor = sBattleAnimAlternateAnchor;
+        sMoveAnimEffectStartInitFuncs[arg0]();
     }
 }
 
 void BattleAnim_RunEffectInitEnd(s16 arg0) {
     gBattleAnimCurrentAnchor = gBattleAnimDefaultAnchor;
-    gMoveAnimEffectEndInitFuncs[arg0]();
+    sMoveAnimEffectEndInitFuncs[arg0]();
 }
 
 void BattleAnim_RegisterEffectSlot(func_D_84390300 arg0, func_D_84390320 arg1) {
-    if (gBattleAnimEffectCallbackIndex >= 8) {
-        gBattleAnimEffectCallbackIndex = 0;
+    if (sBattleAnimEffectCallbackIndex >= 8) {
+        sBattleAnimEffectCallbackIndex = 0;
     }
 
-    if (gBattleAnimEffectUpdateFuncs[gBattleAnimEffectCallbackIndex]) {}
+    if (gBattleAnimEffectUpdateFuncs[sBattleAnimEffectCallbackIndex]) {}
 
-    gBattleAnimEffectUpdateFuncs[gBattleAnimEffectCallbackIndex] = arg0;
-    gBattleAnimEffectDrawFuncs[gBattleAnimEffectCallbackIndex] = arg1;
-    gBattleAnimEffectCallbackIndex++;
+    gBattleAnimEffectUpdateFuncs[sBattleAnimEffectCallbackIndex] = arg0;
+    gBattleAnimEffectDrawFuncs[sBattleAnimEffectCallbackIndex] = arg1;
+    sBattleAnimEffectCallbackIndex++;
 }
 
 void BattleAnim_RunEffectList(s32 arg0, s32 arg1, s32 arg2) {
     u8* sp2C;
 
-    gBattleAnimCurrentEffectList = arg1;
+    sBattleAnimCurrentEffectList = arg1;
 
     if (arg2 == 1) {
         switch (arg1) {
             case 0:
-                sp2C = gMoveAnimEffectScripts[arg0][0];
+                sp2C = sMoveAnimEffectScripts[arg0][0];
                 break;
 
             case 1:
-                sp2C = gMoveAnimEffectScripts[arg0][1];
+                sp2C = sMoveAnimEffectScripts[arg0][1];
                 break;
 
             case 3:
@@ -4667,11 +4667,11 @@ void BattleAnim_RunEffectList(s32 arg0, s32 arg1, s32 arg2) {
                 break;
 
             case 4:
-                sp2C = gBattleAnimMode4StartEffectLists[arg0];
+                sp2C = sBattleAnimMode4StartEffectLists[arg0];
                 break;
 
             case 9:
-                sp2C = gBattleAnimMode9StartEffectLists[arg0];
+                sp2C = sBattleAnimMode9StartEffectLists[arg0];
                 break;
         }
 
@@ -4684,7 +4684,7 @@ void BattleAnim_RunEffectList(s32 arg0, s32 arg1, s32 arg2) {
     } else {
         switch (arg1) {
             case 2:
-                sp2C = gMoveAnimEffectScripts[arg0][2];
+                sp2C = sMoveAnimEffectScripts[arg0][2];
                 break;
 
             case 6:
@@ -4702,25 +4702,25 @@ void BattleAnim_RunEffectList(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void BattleAnim_ProcessQueuedEffects(void) {
-    if (gBattleAnimQueuedEffectListMode != BATTLE_ANIMATION_QUEUE_INACTIVE) {
+    if (sBattleAnimQueuedEffectListMode != BATTLE_ANIMATION_QUEUE_INACTIVE) {
         BattleAnim_ResetSpawnDelayAlias();
-        BattleAnim_RunEffectList(gBattleAnimQueuedMoveId, gBattleAnimQueuedEffectList, gBattleAnimQueuedEffectListMode);
-        gBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_INACTIVE;
+        BattleAnim_RunEffectList(sBattleAnimQueuedMoveId, sBattleAnimQueuedEffectList, sBattleAnimQueuedEffectListMode);
+        sBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_INACTIVE;
     }
 
-    if (gBattleAnimQueuedAlternatePending != 0) {
-        BattleAnim_RunEffectList(gBattleAnimQueuedAlternateMoveId, gBattleAnimQueuedAlternateList, gBattleAnimQueuedAlternatePending);
-        gBattleAnimQueuedAlternatePending = 0;
+    if (sBattleAnimQueuedAlternatePending != 0) {
+        BattleAnim_RunEffectList(sBattleAnimQueuedAlternateMoveId, sBattleAnimQueuedAlternateList, sBattleAnimQueuedAlternatePending);
+        sBattleAnimQueuedAlternatePending = 0;
     }
 
-    if (gBattleAnimQueuedExtraPending != 0) {
-        BattleAnim_RunEffectList(gBattleAnimQueuedExtraMoveId, gBattleAnimQueuedExtraList, gBattleAnimQueuedExtraPending);
-        gBattleAnimQueuedExtraPending = 0;
+    if (sBattleAnimQueuedExtraPending != 0) {
+        BattleAnim_RunEffectList(sBattleAnimQueuedExtraMoveId, sBattleAnimQueuedExtraList, sBattleAnimQueuedExtraPending);
+        sBattleAnimQueuedExtraPending = 0;
     }
 
-    if (gBattleAnimQueuedResourceListPending != 0) {
-        BattleAnim_RunEffectList(gBattleAnimQueuedResourceListId, 4, gBattleAnimQueuedResourceListPending);
-        gBattleAnimQueuedResourceListPending = 0;
+    if (sBattleAnimQueuedResourceListPending != 0) {
+        BattleAnim_RunEffectList(sBattleAnimQueuedResourceListId, 4, sBattleAnimQueuedResourceListPending);
+        sBattleAnimQueuedResourceListPending = 0;
     }
 }
 
@@ -4732,32 +4732,32 @@ void BattleAnim_UpdateFrame(UNUSED CameraNode* arg0) {
 }
 
 void BattleAnim_SetQueuedEffectList(u8 effect_list_index) {
-    gBattleAnimQueuedEffectList = effect_list_index;
+    sBattleAnimQueuedEffectList = effect_list_index;
 }
 
 u8 BattleAnim_GetCurrentEffectList(void) {
-    return gBattleAnimCurrentEffectList;
+    return sBattleAnimCurrentEffectList;
 }
 
 void BattleAnim_SetQueuedResourceListId(u8 arg0) {
-    gBattleAnimQueuedResourceListId = arg0;
+    sBattleAnimQueuedResourceListId = arg0;
 }
 
 u8 BattleAnim_GetQueuedResourceListId(void) {
-    return gBattleAnimQueuedResourceListId;
+    return sBattleAnimQueuedResourceListId;
 }
 
 s16 BattleAnim_GetQueuedMoveId(void) {
-    return gBattleAnimQueuedMoveId;
+    return sBattleAnimQueuedMoveId;
 }
 
 void BattleAnim_QueueMoveEffect(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
     BattleAnim_SetQueuedEffectList(0);
-    gBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_START;
-    gBattleAnimQueuedMoveId = move_id;
+    sBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_START;
+    sBattleAnimQueuedMoveId = move_id;
     gBattleAnimFrameCounter = 0;
     gBattleAnimDefaultAnchor = default_anchor;
-    gBattleAnimAlternateAnchor = alternate_anchor;
+    sBattleAnimAlternateAnchor = alternate_anchor;
     gBattleAnimCurrentOwner = user;
     gBattleAnimSecondaryOwner = user;
     gBattleAnimTertiaryOwner = user_fallback;
@@ -4771,7 +4771,7 @@ void BattleAnim_QueueMoveEffectEnd(s32 move_id, ActivePokemon* user, ActivePokem
     BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternate_anchor);
     BattleAnim_SetQueuedEffectList(2);
     gBattleAnimCurrentOwner = user_fallback;
-    gBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_END;
+    sBattleAnimQueuedEffectListMode = BATTLE_ANIMATION_QUEUE_END;
 }
 
 void BattleAnim_QueueMoveEffectScriptB(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
@@ -4785,11 +4785,11 @@ void BattleAnim_QueueEffectList3(s32 move_id, ActivePokemon* user, ActivePokemon
 }
 
 void BattleAnim_QueueEffectList6(s32 arg0, ActivePokemon* arg1) {
-    gBattleAnimQueuedAlternatePending = 2;
-    gBattleAnimQueuedAlternateMoveId = arg0;
-    gBattleAnimQueuedAlternateList = 6;
+    sBattleAnimQueuedAlternatePending = 2;
+    sBattleAnimQueuedAlternateMoveId = arg0;
+    sBattleAnimQueuedAlternateList = 6;
     gBattleAnimDefaultAnchor = 0xFF;
-    gBattleAnimAlternateAnchor = 0xFF;
+    sBattleAnimAlternateAnchor = 0xFF;
     gBattleAnimCurrentOwner = arg1;
     gBattleAnimSecondaryOwner = arg1;
     gBattleAnimTertiaryOwner = arg1;
@@ -4797,8 +4797,8 @@ void BattleAnim_QueueEffectList6(s32 arg0, ActivePokemon* arg1) {
 
 void BattleAnim_QueueEffectList5(s32 arg0, ActivePokemon* arg1) {
     BattleAnim_QueueEffectList6(arg0, arg1);
-    gBattleAnimQueuedAlternatePending = 1;
-    gBattleAnimQueuedAlternateList = 5;
+    sBattleAnimQueuedAlternatePending = 1;
+    sBattleAnimQueuedAlternateList = 5;
 }
 
 void BattleAnim_QueueEffectList6Alt(s32 arg0, ActivePokemon* arg1) {
@@ -4806,19 +4806,19 @@ void BattleAnim_QueueEffectList6Alt(s32 arg0, ActivePokemon* arg1) {
 }
 
 void BattleAnim_QueueEffectList9(s32 arg0) {
-    gBattleAnimQueuedExtraPending = 1;
-    gBattleAnimQueuedExtraList = 9;
-    gBattleAnimQueuedExtraMoveId = arg0;
+    sBattleAnimQueuedExtraPending = 1;
+    sBattleAnimQueuedExtraList = 9;
+    sBattleAnimQueuedExtraMoveId = arg0;
     gBattleAnimDefaultAnchor = 0xFF;
-    gBattleAnimAlternateAnchor = 0xFF;
+    sBattleAnimAlternateAnchor = 0xFF;
 }
 
 void BattleAnim_QueueEffectList(u8 arg0, ActivePokemon* arg1) {
-    gBattleAnimQueuedResourceListPending = 1;
+    sBattleAnimQueuedResourceListPending = 1;
     BattleAnim_SetQueuedResourceListId(arg0);
     gBattleAnimCurrentOwner = arg1;
     gBattleAnimDefaultAnchor = 0xFF;
-    gBattleAnimAlternateAnchor = 0xFF;
+    sBattleAnimAlternateAnchor = 0xFF;
     if (arg0 == 3) {
         gBattleAnimDefaultAnchor = 7;
     }
@@ -4851,7 +4851,7 @@ void BattleAnim_ResetAssetTable(void) {
 
 void BattleAnim_BuildResourceListForMove(s16 arg0) {
     s32 var_v0 = 0;
-    u8* temp_a1 = gMoveAnimEffectScripts[arg0][3];
+    u8* temp_a1 = sMoveAnimEffectScripts[arg0][3];
 
     while (*temp_a1 != 0x3F) {
         sBattleAnimResourceList[var_v0] = *temp_a1;
@@ -4859,7 +4859,7 @@ void BattleAnim_BuildResourceListForMove(s16 arg0) {
         var_v0++;
     }
 
-    temp_a1 = gMoveAnimEffectScripts[arg0][4];
+    temp_a1 = sMoveAnimEffectScripts[arg0][4];
     while (*temp_a1 != 0x3F) {
         sBattleAnimResourceList[var_v0] = *temp_a1;
         temp_a1++;
@@ -5112,26 +5112,26 @@ void BattleAnim_Reset(void) {
     D_843902F4 = 0;
     D_84392040.unk_0C = 1.0f;
     D_84392040.unk_10 = 1.0f;
-    gBattleAnimEffectCallbackIndex = 0;
+    sBattleAnimEffectCallbackIndex = 0;
 
     for (i = 0; i < 8; i++) {
         gBattleAnimEffectUpdateFuncs[i] = NULL;
         gBattleAnimEffectDrawFuncs[i] = NULL;
     }
 
-    D_8439037A = 0xFF;
-    D_8439037C = 0xFF;
-    D_8439037E = 0xFF;
-    D_84390388 = 0xFF;
-    D_84390382 = 0xFF;
-    D_84390384 = 0xFF;
-    D_84390386 = 0xFF;
-    D_8439038A = 0xFF;
-    D_8439038C = 0xFF;
-    D_8439038E = 0x64;
-    D_84390392 = 0;
-    D_84390394 = 0;
-    D_84390396 = 0;
+    gSavedPrimColorR = 0xFF;
+    gSavedPrimColorG = 0xFF;
+    gSavedPrimColorB = 0xFF;
+    gPrimColorA = 0xFF;
+    gPrimColorR = 0xFF;
+    gPrimColorG = 0xFF;
+    gPrimColorB = 0xFF;
+    gEnvColorR = 0xFF;
+    gEnvColorG = 0xFF;
+    gEnvColorB = 0x64;
+    gFogColorR = 0;
+    gFogColorG = 0;
+    gFogColorB = 0;
     D_84390344 = 1.0f;
 
     Vec3f_SetComponentsDuplicate(&D_84390360, 0.0f, 0.0f, 0.0f);

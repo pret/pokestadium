@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-s32 func_800479C0(u32, u32, u32);
+s32 Effect_TriggerMoveVisual(u32, u32, u32);
 void Audio_FadeAndClearStoredSounds(void);
 
 #endif // _485C0_H_

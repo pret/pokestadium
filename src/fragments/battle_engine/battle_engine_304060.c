@@ -282,7 +282,7 @@ void BattleScene_IntroCameraStep8Or10(CameraNode* arg0, s32 arg1) {
             sp24 = &D_843847EC[var_a0];
         }
         arg0->perspective.verticalFieldOfView = sp24->unk_30;
-        BattleAnim_GetOwnerDefaultAnchorPosition(temp_s0, &D_843901B0.unk_00);
+        BattleAnim_GetOwnerDefaultAnchorPosition(temp_s0, &gCameraPreset.unk_00);
         BattleScene_LoadCameraPreset(sp24, arg0, temp_s0);
         BattleScene_ApplyCameraPreset(arg0, temp_s0, 1);
         BattleScene_CameraPresetNop(arg0);

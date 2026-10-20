@@ -37,7 +37,7 @@ void func_81002530(Gfx* gfx, DisplayListAddresses* addresses) {
         gDPSetTileSize(gfx++, 1, temp_t3, temp_t4, temp_t3, temp_t4 + 0x1F);
 
         if (D_800AF7B0[temp_v0 & 1] == 0) {
-            if (func_800325AC() == 0) {
+            if (ModelPhase_IsIdle() == 0) {
                 D_81004B60--;
             }
         }

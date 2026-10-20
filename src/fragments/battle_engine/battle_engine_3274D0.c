@@ -462,7 +462,7 @@ void BattleAnim_StartEffect18ScatterRadialAndColumnSequence(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(8, 4, 2, BattleAnim_CallbackSharedDirectionalSprayFade, &gBattleAnimParticleDescriptors[0x13], 0x14, 4, 7, 0, 0x25, 0);
 }
 
-void func_8433DECC(void) {
+void BattleAnim_CreateSprayColumnEffect(void) {
     BattleAnim_SpawnDescriptor25AlphaHoldFadeOut(0x2C, 4, 0x10, 0xA, 0xFF);
     BattleAnim_SpawnGlobalTintColorFadeDetach(0x30, 0x20, 0xA);
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 8, 5, BattleAnim_CallbackSharedDirectionalSprayFade, &gBattleAnimParticleDescriptors[0x12], 8, 3, 3, 0, 0x25, 0);
@@ -470,7 +470,7 @@ void func_8433DECC(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 4, 2, BattleAnim_CallbackSharedDescriptor0FDelayedRisingColumnRandomScale, &gBattleAnimParticleDescriptors[0xF], 0x14, 4, 3, 0, 0x25, 0);
 }
 
-void func_8433DFF4(void) {
+void BattleAnim_CreateSprayColumnEffectTrigger(void) {
     BattleAnim_SpawnDescriptor25AlphaHoldFadeOut(0, 4, 8, 0xA, 0xC8);
     BattleAnim_SpawnGlobalTintColorFadeDetach(0x30, 0x20, 0xA);
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 8, 5, BattleAnim_CallbackSharedDirectionalSprayFade, &gBattleAnimParticleDescriptors[0x12], 8, 3, 3, 0, 0x25, 0);
@@ -479,7 +479,7 @@ void func_8433DFF4(void) {
     BattleAnim_EndEffect72Descriptor20ModelAnimWaitSequence();
 }
 
-void func_8433E124(void) {
+void BattleAnim_CreateStreamSprayColumnEffect(void) {
     BattleAnim_SpawnCategory17MarkerSlot(0x64, 1);
     BattleAnim_SpawnGlobalTintColorFadeDetach(0, 0x10, 3);
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 8, 3, BattleAnim_CallbackStartEffect59EndEffect28DirectionalStreamFade, &gBattleAnimParticleDescriptors[0x14], 2, 1, 2, 0, 0x25, 0);
@@ -492,7 +492,7 @@ void func_8433E124(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 4, 2, BattleAnim_CallbackSharedDescriptor0FDelayedRisingColumnRandomScale, &gBattleAnimParticleDescriptors[0xF], 0x14, 2, 1, 0, 0x25, 0);
 }
 
-void func_8433E33C(void) {
+void BattleAnim_CreateBurstStreamEffect(void) {
     BattleAnim_SpawnDescriptor25AlphaHoldFadeOutFullAlpha(0x22, 4, 0x10, 0xA);
     BattleAnim_SpawnGlobalTintColorFadeDetach(0, 0x20, 3);
     BattleAnim_SpawnGlobalTintColorFadeDetach(0x30, 0x20, 0xA);
@@ -501,7 +501,7 @@ void func_8433E33C(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 8, 2, BattleAnim_CallbackStartEffect59EndEffect28DirectionalStreamFade, &gBattleAnimParticleDescriptors[0x13], 0xC, 3, 3, 0, 0x25, 0);
 }
 
-void func_8433E46C(void) {
+void BattleAnim_CreateCollisionRandomEffect(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 4, 5, BattleAnim_CallbackStartEffects18And73Descriptor11ScatterRiseFade, &gBattleAnimParticleDescriptors[0x11], 8, 4, 0x10, gBattleAnimCurrentAnchor, 0x25, 0);
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 1, 0x24, BattleAnim_CallbackStartEffect73Descriptor15AnimatedColorImpulseFade, &gBattleAnimParticleDescriptors[0x15], 0, 1, 0x11, gBattleAnimCurrentAnchor, 0, 0);
 }

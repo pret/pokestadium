@@ -13,7 +13,7 @@ u8 D_80078A1C[4] = { 0 };
 u8 D_80078A20[16] = { 0 };
 
 // Related to Partner Pikachu, probably makes it go Pika Pika
-s32 func_80048060(s32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+s32 PlayMoveSoundEffect(s32 arg0, u32 arg1, u32 arg2, u32 arg3) {
     u32 i;
     u32 temp_v0;
     u32 slot;

@@ -538,9 +538,9 @@ void BattleAnim_CleanupEffectsRetainingCategory4(void) {
     Model_SetMaterialAlpha(&sActivePokemon[0]->displayObject, 0xFF);
     Model_SetMaterialAlpha(&sActivePokemon[1]->displayObject, 0xFF);
 
-    D_8439037E = 0xFF;
-    D_8439037C = D_8439037E;
-    D_8439037A = D_8439037C;
+    gSavedPrimColorB = 0xFF;
+    gSavedPrimColorG = gSavedPrimColorB;
+    gSavedPrimColorR = gSavedPrimColorG;
 }
 
 s32 BattleAnim_GetMoveFailedFlag(void) {
@@ -873,7 +873,7 @@ void BattleAnim_GetOwnerModelBoundsScaled(ActivePokemon* arg0, Vec3f* arg1) {
 }
 
 f32 BattleAnim_GetSpeciesBaseScale(ActivePokemon* arg0) {
-    f32 ret = D_80075E40[arg0->displayObject.objectType] * 0.01f;
+    f32 ret = gCamDistances[arg0->displayObject.objectType] * 0.01f;
 
     return ret;
 }
@@ -943,13 +943,13 @@ s16 BattleAnim_GetParticleAngleYToTertiaryOwner(Particle* arg0) {
 }
 
 void BattleAnim_SetGlobalTintFromParticle(Particle* arg0) {
-    D_8439037A = arg0->prim_r;
-    D_8439037C = arg0->prim_g;
-    D_8439037E = arg0->prim_b;
+    gSavedPrimColorR = arg0->prim_r;
+    gSavedPrimColorG = arg0->prim_g;
+    gSavedPrimColorB = arg0->prim_b;
 }
 
 void BattleAnim_LoadGlobalTintToParticle(Particle* arg0) {
-    arg0->prim_r = D_8439037A;
-    arg0->prim_g = D_8439037C;
-    arg0->prim_b = D_8439037E;
+    arg0->prim_r = gSavedPrimColorR;
+    arg0->prim_g = gSavedPrimColorG;
+    arg0->prim_b = gSavedPrimColorB;
 }

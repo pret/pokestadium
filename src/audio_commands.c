@@ -400,27 +400,27 @@ s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
             break;
 
         case 0x1E:
-            sp2C = func_800479C0(0xA6, 1, 0);
+            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 0);
             break;
 
         case 0x1F:
-            sp2C = func_800479C0(0xA6, 1, 1);
+            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 1);
             break;
 
         case 0x20:
-            sp2C = func_800479C0(0xA6, 1, 2);
+            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 2);
             break;
 
         case 0x21:
-            sp2C = func_800479C0(0xA6, 1, 3);
+            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 3);
             break;
 
         case 0x22:
-            sp2C = func_800479C0(0xA6, 1, 4);
+            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 4);
             break;
 
         case 0x23:
-            sp2C = func_800479C0(0xA6, 1, 5);
+            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 5);
             break;
 
         default:

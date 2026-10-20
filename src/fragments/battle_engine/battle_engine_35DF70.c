@@ -26,7 +26,7 @@ static const char D_8438DDAC[] = "!!!! SPATTACK Num %d!!!!\n";
 static const char D_8438DDC8[] = "******** spAttackMainEnd ********\n";
 
 static char* D_8438AE50 = D_8438DC80;
-static func_D_8438AE50 gMoveEffectHandlers[] = {
+static func_D_8438AE50 sMoveEffectHandlers[] = {
     Battle_Effect_Sleep, Battle_Effect_Poison, Battle_Effect_DrainHP, Battle_Effect_SecondaryStatusChance, Battle_Effect_SecondaryStatusChance, Battle_Effect_SecondaryStatusChance, Battle_Effect_Explosion,
     Battle_Effect_DrainHP, NULL,          Battle_Effect_RaiseOwnStat, Battle_Effect_RaiseOwnStat, Battle_Effect_RaiseOwnStat, Battle_Effect_RaiseOwnStat, Battle_Effect_RaiseOwnStat,
     Battle_Effect_RaiseOwnStat, Battle_Effect_PayDay, NULL,          Battle_Effect_LowerStat, Battle_Effect_LowerStat, Battle_Effect_LowerStat, Battle_Effect_LowerStat,
@@ -73,7 +73,7 @@ void Battle_Effect_Sleep(void) {
         }
 
         if (gBattleTarget->unk_15 == 0) {
-            func_843708CC();
+            HandleMoveEffectFlags();
             if ((sBattleMoveFailed == 0) &&
                 ((Battle_HasUsableMajorStatusTarget(sActivePokemon[!sBattleScene.unk_00->unk_2C]) == 0) || (D_8438AC60[0] == 2))) {
                 goto block_9;
@@ -140,7 +140,7 @@ void Battle_Effect_Poison(void) {
             default:
                 sBattleScene.unk_00->unk_48 = 0x16;
                 D_843C4DEC = 0xA;
-                func_843708CC();
+                HandleMoveEffectFlags();
                 if (sBattleMoveFailed != 0) {
                     Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
                     Battle_QueueMessage(sp1C, -0x7D);
@@ -236,7 +236,7 @@ void Battle_Effect_SecondaryStatusChance(void) {
             case 4:
             case 34:
                 gBattleTarget->unk_15 = 0x10;
-                func_84370B44(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+                ApplyBurnAttackCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
                 Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
                 Battle_QueueMessage(gBattleMessageQueues->unk_208, -0x76);
                 break;
@@ -254,7 +254,7 @@ void Battle_Effect_SecondaryStatusChance(void) {
             case 6:
             case 36:
                 gBattleTarget->unk_15 = 0x40;
-                func_84370B0C(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+                ApplyParalysisSpeedCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
                 Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
                 Battle_QueueMessage(gBattleMessageQueues->unk_208, -0x74);
                 break;
@@ -338,11 +338,11 @@ void Battle_ApplyRageStatBoost(void) {
         }
 
         if ((sp28 != 0) || (D_8438AC60[0] != 1)) {
-            func_84370B0C(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+            ApplyParalysisSpeedCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
         }
 
         if ((sp2C != 0) || (D_8438AC60[0] != 1)) {
-            func_84370B44(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+            ApplyBurnAttackCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
         }
     } else {
     block_29:
@@ -429,11 +429,11 @@ void Battle_Effect_RaiseOwnStat(void) {
         }
 
         if ((sp28 != 0) || (D_8438AC60[0] != 1)) {
-            func_84370B0C(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+            ApplyParalysisSpeedCut(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         }
 
         if ((sp2C != 0) || (D_8438AC60[0] != 1)) {
-            func_84370B44(sActivePokemon[sBattleScene.unk_00->unk_2C]);
+            ApplyBurnAttackCut(sActivePokemon[sBattleScene.unk_00->unk_2C]);
         }
     } else {
     block_32:
@@ -469,7 +469,7 @@ void Battle_Effect_LowerStat(void) {
             goto block_14;
         }
     } else {
-        func_843708CC();
+        HandleMoveEffectFlags();
 
         if (sBattleMoveFailed != 0) {
             goto end;
@@ -540,11 +540,11 @@ void Battle_Effect_LowerStat(void) {
             }
 
             if ((sp28 != 0) || (D_8438AC60[0] != 1)) {
-                func_84370B0C(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+                ApplyParalysisSpeedCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
             }
 
             if ((sp2C != 0) || (D_8438AC60[0] != 1)) {
-                func_84370B44(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+                ApplyBurnAttackCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
             }
             return;
         }
@@ -784,7 +784,7 @@ void Battle_Effect_Confuse(void) {
     D_843C4E44 = 0;
 
     if (!(gBattleTarget->unk_4D & 0x10)) {
-        func_843708CC();
+        HandleMoveEffectFlags();
         if ((sBattleMoveFailed == 0) && !(gBattleTarget->unk_4C & 0x80)) {
             D_843C4E44 = 1;
             gBattleTarget->unk_4C |= 0x80;
@@ -804,10 +804,10 @@ void Battle_Effect_Paralyze(void) {
     sBattleScene.unk_00->unk_48 = 0x16;
     if (gBattleTarget->unk_15 == 0) {
         if ((gBattleUser->moveCache.unk_03 != 0x17) || ((gBattleTarget->unk_16[6] != 4) && (gBattleTarget->unk_16[7] != 4))) {
-            func_843708CC();
+            HandleMoveEffectFlags();
             if (sBattleMoveFailed == 0) {
                 gBattleTarget->unk_15 |= 0x40;
-                func_84370B0C(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
+                ApplyParalysisSpeedCut(sActivePokemon[!sBattleScene.unk_00->unk_2C]);
                 Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
                 Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x43);
                 return;
@@ -864,7 +864,7 @@ void Battle_Effect_Mimic(void) {
     u8 temp_v0;
 
     sBattleScene.unk_00->unk_48 = 7;
-    func_843708CC();
+    HandleMoveEffectFlags();
 
     if ((sBattleMoveFailed == 0) && !(gBattleTarget->unk_4C & 0x40)) {
         D_843C4DAA = 1;
@@ -886,7 +886,7 @@ void Battle_Effect_Mimic(void) {
 }
 
 void Battle_Effect_LeechSeed(void) {
-    func_843708CC();
+    HandleMoveEffectFlags();
 
     if ((sBattleMoveFailed == 0) && (gBattleTarget->unk_16[6] != 0x16) && (gBattleTarget->unk_16[7] != 0x16)) {
         if (!(gBattleTarget->unk_4D & 0x80)) {
@@ -911,7 +911,7 @@ void Battle_Effect_Disable(void) {
     s32 sp24;
     s32 temp_v1;
 
-    func_843708CC();
+    HandleMoveEffectFlags();
 
     if (sBattleMoveFailed == 0) {
         sBattleScene.unk_00->unk_48 = 0x20;
@@ -1127,8 +1127,8 @@ void Battle_RunMoveEffect(void) {
     BattleMonRuntime* ptr = &sActivePokemon[sBattleScene.unk_00->unk_2C]->state.runtime;
     s32 idx = ptr->moveCache.unk_01;
 
-    if (gMoveEffectHandlers[idx - 1] != NULL) {
-        gMoveEffectHandlers[idx - 1]();
+    if (sMoveEffectHandlers[idx - 1] != NULL) {
+        sMoveEffectHandlers[idx - 1]();
     }
 }
 

@@ -292,7 +292,7 @@ void BattleHud_DrawHpBar(s32 arg0, s32 arg1, f32 arg2, s32 arg3) {
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
-void func_843109EC(void) {
+void BattleHud_Noop(void) {
 }
 
 void BattleHud_DrawLevelNumber(s32 arg0, s32 arg1, s32 arg2) {

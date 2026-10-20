@@ -374,8 +374,8 @@ void BattleScene_HandleActionSelectionCancel(s32 arg0) {
 
 void Battle_InitializeActiveRuntimeState(void) {
     BattleScene_InitializePresentationTimers();
-    func_84370B7C(sActivePokemon[0]);
-    func_84370B7C(sActivePokemon[1]);
+    Battle_InitPokemonRuntimeState(sActivePokemon[0]);
+    Battle_InitPokemonRuntimeState(sActivePokemon[1]);
 
     D_843900A8[0] = sActivePokemon[0]->state.runtime.unk_0C;
     D_843900A8[1] = sActivePokemon[1]->state.runtime.unk_0C;
