@@ -916,7 +916,7 @@ extern PokemonBattleCues* sSideBattleCues[];
 extern SpeciesModelTransform* D_84384578[];
 extern SpeciesModelTransform* D_84384580[];
 extern TagTeamPartners* sPlayerTagTeam[];
-extern u8 D_84384590[];
+extern u8 sPokemonWithAlternateSleepIdle[];
 extern u8 D_843845F0;
 extern u8 D_843845F4;
 extern u8 D_843845F8;

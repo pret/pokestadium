@@ -845,7 +845,7 @@ void Pokemon_FromGbRecord(BattleMon* arg0, GbPokemonRecord* arg1) {
     arg0->unk_02 = GbData_ReadU16BE(arg1->unk_01);
 
     arg0->unk_04 = arg1->unk_03;
-    arg0->unk_05 = arg1->unk_04;
+    arg0->statusCondition = arg1->unk_04;
     arg0->unk_06 = arg1->unk_05;
     arg0->unk_07 = arg1->unk_06;
     arg0->unk_08 = arg1->unk_07;
@@ -883,7 +883,7 @@ void Pokemon_ToGbRecord(BattleMon* arg0, GbPokemonRecord* arg1) {
     GbData_WriteU16BE(arg1->unk_01, (u16)arg0->unk_02);
 
     arg1->unk_03 = arg0->unk_04;
-    arg1->unk_04 = arg0->unk_05;
+    arg1->unk_04 = arg0->statusCondition;
     arg1->unk_05 = arg0->unk_06;
     arg1->unk_06 = arg0->unk_07;
     arg1->unk_07 = arg0->unk_08;

@@ -175,7 +175,7 @@ void Pokemon_PrepareBattleMon(BattleMon* arg0) {
     s32 idx;
 
     Pokemon_RecalcStats(arg0);
-    arg0->unk_05 = 0;
+    arg0->statusCondition = 0;
     arg0->unk_02 = arg0->unk_26;
 
     for (i = 0; i < 4; i++) {

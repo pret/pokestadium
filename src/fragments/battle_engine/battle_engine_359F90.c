@@ -687,7 +687,7 @@ void func_843708CC(void) {
 void func_84370ADC(ActivePokemon* arg0) {
     BattleMon* ptr = &arg0->unk_724->pokemonPicked[arg0->state.unk_08];
 
-    ptr->unk_05 = arg0->state.runtime.unk_15;
+    ptr->statusCondition = arg0->state.runtime.unk_15;
 }
 
 void func_84370B0C(ActivePokemon* arg0) {
@@ -726,7 +726,7 @@ void func_84370B7C(ActivePokemon* arg0) {
     sp24->unk_14 = sp28->unk_08;
     sp24->id = sp34->unk_00.unk_00;
     sp24->unk_0C = sp34->unk_02;
-    sp24->unk_15 = sp34->unk_05;
+    sp24->unk_15 = sp34->statusCondition;
     sp24->unk_16[6] = sp34->unk_06;
     sp24->unk_16[7] = sp34->unk_07;
     sp24->unk_16[8] = sp34->unk_08;

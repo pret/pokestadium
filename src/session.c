@@ -138,7 +138,7 @@ void Trainer_AddPokemon(TeamRoster* arg0, BattleMon* arg1) {
 BattleMon* Pokemon_CreateDefault(BattleMon* arg0, u8 arg1, s16 arg2) {
     arg0->unk_00.unk_00 = arg1;
     arg0->unk_04 = 0;
-    arg0->unk_05 = 0;
+    arg0->statusCondition = 0;
 
     arg0->unk_06 = gSpeciesData[arg1 - 1].type1;
     arg0->unk_07 = gSpeciesData[arg1 - 1].type2;

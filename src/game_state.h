@@ -30,7 +30,7 @@ typedef struct BattleMon {
     /* 0x00 */ BattleMonSpecies unk_00;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
+    /* 0x05 */ u8 statusCondition;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
