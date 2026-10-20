@@ -4202,79 +4202,79 @@ void BattleAnim_PlaySoundEffect8(void) {
     Audio_PlaySoundEffectById(SFX_MENU_ERROR);
 }
 
-void BattleAnim_PlayOwnerCry(ActivePokemon* arg0, s16 arg1) {
-    if (BattleScene_IsPartnerPikachu(arg0) != 0) {
+void BattleAnim_PlayOwnerCry(ActivePokemon* active_pokemon, s16 species) {
+    if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
         Cry_Play(0xC8, 2);
     } else {
-        Cry_Play(arg1, 2);
+        Cry_Play(species, 2);
     }
 }
 
 void BattleAnim_PlaySpeciesSequence33(ActivePokemon* active_pokemon) {
-    s16 sp1E = active_pokemon->displayObject.objectType;
+    s16 species = active_pokemon->displayObject.objectType;
 
     BattleScene_GetParticipantModelWidth(active_pokemon);
-    Audio_PlayCommand(0x33, sp1E, 0);
+    Audio_PlayCommand(0x33, species, 0);
 }
 
 void Battle_TriggerTrainerPresentationCue(ActivePokemon* active_pokemon) {
     func_8003EB40(BattleScene_GetParticipantDisplayPlayerNumber(active_pokemon), &active_pokemon->state.runtime);
 }
 
-void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* arg0, BattleMonRuntime* arg1, s32 arg2) {
-    func_800479C0(arg1->usedMove, arg0->displayObject.objectType, arg2);
-    func_80040A70(arg1, arg1->usedMove, arg0->displayObject.objectType, arg2);
+void BattleAnim_PlaySpeciesReactionSound(ActivePokemon* active_pokemon, BattleMonRuntime* runtime, s32 reaction_kind) {
+    func_800479C0(runtime->usedMove, active_pokemon->displayObject.objectType, reaction_kind);
+    func_80040A70(runtime, runtime->usedMove, active_pokemon->displayObject.objectType, reaction_kind);
 }
 
 void BattleScene_ConfigureAudioChannelGroupsByTeam(void) {
-    ActivePokemon* ptr1 = sActivePokemon[0];
-    ActivePokemon* ptr2 = sActivePokemon[1];
+    ActivePokemon* side1_pokemon = sActivePokemon[0];
+    ActivePokemon* side2_pokemon = sActivePokemon[1];
     u8 i;
-    u8 sp20[4];
+    u8 port_groups[4];
 
-    sp20[0] = 0xA;
-    sp20[1] = 0xA;
-    sp20[2] = 0xA;
-    sp20[3] = 0xA;
+    port_groups[0] = 0xA;
+    port_groups[1] = 0xA;
+    port_groups[2] = 0xA;
+    port_groups[3] = 0xA;
 
-    sp20[ptr1->sessionTeams->teamMember[0]->unk_001] = 1;
-    if (ptr1->sessionTeams->unk_01 == 2) {
-        sp20[ptr1->sessionTeams->teamMember[1]->unk_001] = 1;
+    port_groups[side1_pokemon->sessionTeams->teamMember[0]->unk_001] = 1;
+    if (side1_pokemon->sessionTeams->unk_01 == 2) {
+        port_groups[side1_pokemon->sessionTeams->teamMember[1]->unk_001] = 1;
     }
-    sp20[ptr2->sessionTeams->teamMember[0]->unk_001] = 2;
-    if (ptr2->sessionTeams->unk_01 == 2) {
-        sp20[ptr2->sessionTeams->teamMember[1]->unk_001] = 2;
+    port_groups[side2_pokemon->sessionTeams->teamMember[0]->unk_001] = 2;
+    if (side2_pokemon->sessionTeams->unk_01 == 2) {
+        port_groups[side2_pokemon->sessionTeams->teamMember[1]->unk_001] = 2;
     }
 
     for (i = 0; i < 4; i++) {
-        if (sp20[i] == 0xA) {
-            sp20[i] = 0;
+        if (port_groups[i] == 0xA) {
+            port_groups[i] = 0;
         }
     }
 
-    Audio_ConfigureChannelGroups(sp20[0], sp20[1], sp20[2], sp20[3]);
+    Audio_ConfigureChannelGroups(port_groups[0], port_groups[1], port_groups[2], port_groups[3]);
 }
 
 void BattleScene_ConfigureAudioChannelGroupCounts(void) {
-    ActivePokemon* ptr1 = sActivePokemon[0];
-    ActivePokemon* ptr2 = sActivePokemon[1];
-    u8 sp24[4];
+    ActivePokemon* side1_pokemon = sActivePokemon[0];
+    ActivePokemon* side2_pokemon = sActivePokemon[1];
+    u8 port_team_sizes[4];
 
-    sp24[0] = 0;
-    sp24[1] = 0;
-    sp24[2] = 0;
-    sp24[3] = 0;
+    port_team_sizes[0] = 0;
+    port_team_sizes[1] = 0;
+    port_team_sizes[2] = 0;
+    port_team_sizes[3] = 0;
 
-    sp24[ptr1->sessionTeams->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->sessionTeams->teamMember[0]);
-    if (ptr1->sessionTeams->unk_01 == 2) {
-        sp24[ptr1->sessionTeams->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr1->sessionTeams->teamMember[1]);
+    port_team_sizes[side1_pokemon->sessionTeams->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(side1_pokemon->sessionTeams->teamMember[0]);
+    if (side1_pokemon->sessionTeams->unk_01 == 2) {
+        port_team_sizes[side1_pokemon->sessionTeams->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(side1_pokemon->sessionTeams->teamMember[1]);
     }
 
-    sp24[ptr2->sessionTeams->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->sessionTeams->teamMember[0]);
-    if (ptr2->sessionTeams->unk_01 == 2) {
-        sp24[ptr2->sessionTeams->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(ptr2->sessionTeams->teamMember[1]);
+    port_team_sizes[side2_pokemon->sessionTeams->teamMember[0]->unk_001] = BattleScene_GetRosterTeamSize(side2_pokemon->sessionTeams->teamMember[0]);
+    if (side2_pokemon->sessionTeams->unk_01 == 2) {
+        port_team_sizes[side2_pokemon->sessionTeams->teamMember[1]->unk_001] = BattleScene_GetRosterTeamSize(side2_pokemon->sessionTeams->teamMember[1]);
     }
-    Audio_SetChannelGroupCounts(sp24[0], sp24[1], sp24[2], sp24[3]);
+    Audio_SetChannelGroupCounts(port_team_sizes[0], port_team_sizes[1], port_team_sizes[2], port_team_sizes[3]);
 }
 
 void BattleScene_SelectBattleMusic(void) {
@@ -4597,26 +4597,26 @@ void BattleScene_StartBattleMusic(void) {
     }
 }
 
-void BattleAnim_PlayBattleSequenceById(ActivePokemon* arg0, s32 arg1) {
-    s16 sp1E = arg0->displayObject.objectType;
+void BattleAnim_PlayBattleSequenceById(ActivePokemon* active_pokemon, s32 sequence_id) {
+    s16 species = active_pokemon->displayObject.objectType;
 
-    if ((BattleScene_IsPartnerPikachu(arg0) != 0) && (arg1 == 0x32)) {
+    if ((BattleScene_IsPartnerPikachu(active_pokemon) != 0) && (sequence_id == 0x32)) {
         Audio_PlayCommand(0x32, 0xC8, 0);
-    } else if (arg1 == 0x14) {
+    } else if (sequence_id == 0x14) {
         Audio_PlayCommand(0x14, 0, 0);
-    } else if (arg1 == 0x12) {
+    } else if (sequence_id == 0x12) {
         Audio_PlayCommand(0x12, 0, 0);
-    } else if (arg1 == 0x32) {
-        Audio_PlayCommand(0x32, sp1E, 0);
-    } else if (arg1 == 0x21) {
+    } else if (sequence_id == 0x32) {
+        Audio_PlayCommand(0x32, species, 0);
+    } else if (sequence_id == 0x21) {
         Audio_PlayCommand(0x21, 0, 0);
-    } else if (arg1 == 0x13) {
+    } else if (sequence_id == 0x13) {
         Audio_PlayCommand(0x13, 0, 0);
-    } else if (arg1 == 0x1E) {
+    } else if (sequence_id == 0x1E) {
         Audio_PlayCommand(0x1E, 0, 0);
-    } else if (arg1 == 0x1F) {
+    } else if (sequence_id == 0x1F) {
         Audio_PlayCommand(0x1F, 0, 0);
-    } else if (arg1 == 0x20) {
+    } else if (sequence_id == 0x20) {
         Audio_PlayCommand(0x20, 0, 0);
     }
 }
@@ -4763,8 +4763,8 @@ void BattleAnim_QueueMoveEffect(s32 move_id, ActivePokemon* user, ActivePokemon*
     gBattleAnimTertiaryOwner = user_fallback;
 }
 
-void BattleAnim_QueueMoveEffectScriptA(s32 arg0, ActivePokemon* arg1, ActivePokemon* arg2, s16 arg3, s16 arg4) {
-    BattleAnim_QueueMoveEffect(arg0, arg1, arg2, arg3, arg4);
+void BattleAnim_QueueMoveEffectScriptA(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
+    BattleAnim_QueueMoveEffect(move_id, user, user_fallback, default_anchor, alternate_anchor);
 }
 
 void BattleAnim_QueueMoveEffectEnd(s32 move_id, ActivePokemon* user, ActivePokemon* user_fallback, s16 default_anchor, s16 alternate_anchor) {
@@ -4784,15 +4784,15 @@ void BattleAnim_QueueEffectList3(s32 move_id, ActivePokemon* user, ActivePokemon
     BattleAnim_SetQueuedEffectList(3);
 }
 
-void BattleAnim_QueueEffectList6(s32 arg0, ActivePokemon* arg1) {
+void BattleAnim_QueueEffectList6(s32 move_id, ActivePokemon* owner) {
     sBattleAnimQueuedAlternatePending = 2;
-    sBattleAnimQueuedAlternateMoveId = arg0;
+    sBattleAnimQueuedAlternateMoveId = move_id;
     sBattleAnimQueuedAlternateList = 6;
     gBattleAnimDefaultAnchor = 0xFF;
     sBattleAnimAlternateAnchor = 0xFF;
-    gBattleAnimCurrentOwner = arg1;
-    gBattleAnimSecondaryOwner = arg1;
-    gBattleAnimTertiaryOwner = arg1;
+    gBattleAnimCurrentOwner = owner;
+    gBattleAnimSecondaryOwner = owner;
+    gBattleAnimTertiaryOwner = owner;
 }
 
 void BattleAnim_QueueEffectList5(s32 arg0, ActivePokemon* arg1) {
@@ -4813,19 +4813,19 @@ void BattleAnim_QueueEffectList9(s32 arg0) {
     sBattleAnimAlternateAnchor = 0xFF;
 }
 
-void BattleAnim_QueueEffectList(u8 arg0, ActivePokemon* arg1) {
+void BattleAnim_QueueEffectList(u8 resource_list_id, ActivePokemon* owner) {
     sBattleAnimQueuedResourceListPending = 1;
-    BattleAnim_SetQueuedResourceListId(arg0);
-    gBattleAnimCurrentOwner = arg1;
+    BattleAnim_SetQueuedResourceListId(resource_list_id);
+    gBattleAnimCurrentOwner = owner;
     gBattleAnimDefaultAnchor = 0xFF;
     sBattleAnimAlternateAnchor = 0xFF;
-    if (arg0 == 3) {
+    if (resource_list_id == 3) {
         gBattleAnimDefaultAnchor = 7;
     }
 }
 
-void BattleAnim_StopOwnerCategoryParticles(u8 arg0, ActivePokemon* arg1) {
-    BattleAnim_StopParticlesForOwnerCategory(arg0, arg1);
+void BattleAnim_StopOwnerCategoryParticles(u8 category, ActivePokemon* owner) {
+    BattleAnim_StopParticlesForOwnerCategory(category, owner);
 }
 
 void BattleAnim_RegisterAssetTable(arg1_func_80019420* arg0) {

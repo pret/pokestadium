@@ -139,7 +139,7 @@ void Battle_Effect_Poison(void) {
 
             default:
                 sBattleScene.unk_00->unk_48 = 0x16;
-                D_843C4DEC = 0xA;
+                sTypeEffectiveness = 0xA;
                 func_843708CC();
                 if (sBattleMoveFailed != 0) {
                     Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));

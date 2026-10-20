@@ -20,11 +20,11 @@ void ModelRenderer_InitDisplayRoots(void) {
     GeoNode_CreateContainer(0, &D_800AC858);
 }
 
-void ModelRenderer_AttachDisplayObject(DisplayObject* arg0) {
-    GeoNode_CreateModelPart(NULL, arg0, 0, &D_8006F050, &D_8006F05C, &D_8006F064);
-    GraphNode_AppendChild(&D_800AC840, &arg0->node);
-    arg0->effectSlot = 0;
-    arg0->node.flags &= ~1;
+void ModelRenderer_AttachDisplayObject(DisplayObject* display_object) {
+    GeoNode_CreateModelPart(NULL, display_object, 0, &D_8006F050, &D_8006F05C, &D_8006F064);
+    GraphNode_AppendChild(&D_800AC840, &display_object->node);
+    display_object->effectSlot = 0;
+    display_object->node.flags &= ~1;
 }
 
 void ModelRenderer_AttachSecondaryDisplayObject(DisplayObject* arg0) {
@@ -73,35 +73,35 @@ void ModelRenderer_ClearDisplayObject(DisplayObject* arg0) {
 }
 
 s32 ModelAnim_SetAnimation(DisplayObject* display_object, s32 id) {
-    ModelAssetNode* tmp = display_object->node.children;
-    ModelAnimationBank* temp_v0 = tmp->getAnimationBank(0, 0);
+    ModelAssetNode* asset_node = display_object->node.children;
+    ModelAnimationBank* animation_bank = asset_node->getAnimationBank(0, 0);
 
     if (id == -1) {
         ModelAnim_ClearTransformChannel(display_object);
-    } else if (id < temp_v0->transformCount) {
-        ModelAnim_BindTransformCurve(display_object, id, temp_v0->transformTracks[id], 0x10000);
+    } else if (id < animation_bank->transformCount) {
+        ModelAnim_BindTransformCurve(display_object, id, animation_bank->transformTracks[id], 0x10000);
         return 1;
     }
 
     return 0;
 }
 
-s32 ModelAnim_SetEventTrack(DisplayObject* arg0, s32 arg1) {
-    ModelAssetNode* temp_v0 = arg0->node.children;
-    ModelAnimationBank* temp_v1 = temp_v0->getAnimationBank(0, 0);
+s32 ModelAnim_SetEventTrack(DisplayObject* display_object, s32 track_id) {
+    ModelAssetNode* asset_node = display_object->node.children;
+    ModelAnimationBank* animation_bank = asset_node->getAnimationBank(0, 0);
 
-    if (arg1 == -1) {
-        ModelAnim_ClearEventTrack(arg0);
-    } else if (arg1 < temp_v1->eventTrackCount) {
-        ModelAnim_BindEventTrack(arg0, arg1, temp_v1->eventTracks[arg1]);
+    if (track_id == -1) {
+        ModelAnim_ClearEventTrack(display_object);
+    } else if (track_id < animation_bank->eventTrackCount) {
+        ModelAnim_BindEventTrack(display_object, track_id, animation_bank->eventTracks[track_id]);
         return 1;
     }
 
     return 0;
 }
 
-void Model_SetMaterialColor(DisplayObject* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4) {
-    Color_SetRGBA(&arg0->fogColor, arg1, arg2, arg3, arg4);
+void Model_SetMaterialColor(DisplayObject* display_object, u8 r, u8 g, u8 b, u8 alpha) {
+    Color_SetRGBA(&display_object->fogColor, r, g, b, alpha);
 }
 
 void Model_SetMaterialAlpha(DisplayObject* arg0, u8 arg1) {

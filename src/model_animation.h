@@ -40,7 +40,7 @@ s32 ModelAnim_BindTransformCurve(DisplayObject* arg0, s16 arg1, void* arg2, s32 
 s32 ModelAnim_SetSpeed(DisplayObject* display_object, s32 speed);
 void ModelAnim_SetFrame(DisplayObject* display_object, s16 animation_timer);
 s32 ModelAnim_HasCrossedFrame(DisplayObject* arg0, s16 arg1);
-s32 ModelAnim_IsAnimationDone(DisplayObject* arg0);
+s32 ModelAnim_IsAnimationDone(DisplayObject* display_object);
 s32 ModelAnim_IsFinished(DisplayObject* arg0);
 
 

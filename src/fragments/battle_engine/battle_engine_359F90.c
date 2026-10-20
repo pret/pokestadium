@@ -74,7 +74,7 @@ static s32 pad_D_843C4DDC;
 static s32 pad_D_843C4DE0;
 static s32 pad_D_843C4DE4;
 static s32 pad_D_843C4DE8;
-s32 D_843C4DEC;
+s32 sTypeEffectiveness;
 static s32 pad_D_843C4DF0[21];
 u8 sConfused;
 u8 D_843C4E45;
@@ -834,10 +834,10 @@ void Battle_ApplyRageContinuation(void) {
 }
 
 void func_84371010(void) {
-    D_843C4DEC = D_843C4DB3 & 0x7F;
-    if (D_843C4DEC >= 0xB) {
+    sTypeEffectiveness = D_843C4DB3 & 0x7F;
+    if (sTypeEffectiveness >= 0xB) {
         Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x29);
-    } else if (D_843C4DEC < 0xA) {
+    } else if (sTypeEffectiveness < 0xA) {
         Battle_QueueMessage(gBattleMessageQueues->unk_088, 0x2A);
     }
 }
