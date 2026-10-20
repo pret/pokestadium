@@ -267,7 +267,7 @@ void Battle_QueueMetronomeMoveMessage(void) {
         sp2C = 4;
     }
 
-    if (sp24->usedMove == 0x76) {
+    if (sp24->usedMove == METRONOME) {
         do {
             tmp = Battle_Random();
         } while ((tmp == 0) || (tmp >= 0xA5) || tmp == 0x76);
@@ -299,7 +299,7 @@ void Battle_QueueMetronomeMoveMessage(void) {
                 break;
         }
 
-        sp24->usedMove = 0x76;
+        sp24->usedMove = METRONOME;
 
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[sBattleScene.unk_00->unk_2C]));
         Text_SetStringToken(0x1D, Battle_GetActiveMoveName(sActivePokemon[sBattleScene.unk_00->unk_2C]));

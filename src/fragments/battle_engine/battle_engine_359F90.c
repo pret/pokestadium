@@ -826,7 +826,7 @@ void Battle_ApplyRageContinuation(void) {
         Battle_QueueMessage(gBattleMessageQueues->unk_348, 0x1F);
         Battle_ApplyRageStatBoost();
 
-        sBattleUser->moveCache.lastMove = 0x63;
+        sBattleUser->moveCache.lastMove = RAGE;
         sBattleUser->moveCache.unk_01 = 0;
 
         sBattleUser = sp24;
@@ -1118,7 +1118,7 @@ void Battle_ApplyTypeEffectAndSTAB(void) {
 
     temp_t1 = sBattleUser->moveCache.unk_03;
 
-    if ((D_8438AC60[0] != 1) || (sBattleUser->moveCache.lastMove != 0xA5)) {
+    if ((D_8438AC60[0] != 1) || (sBattleUser->moveCache.lastMove != STRUGGLE)) {
         if ((temp_t1 == temp_a1) || (temp_t1 == temp_a3)) {
             sBattleDamage += sBattleDamage >> 1;
             D_843C4DB3 |= 0x80;
@@ -1417,12 +1417,12 @@ s32 Battle_CheckMonCanAct(void) {
         }
 
         sBattleUser->unk_54 = 0;
-        sBattleUser->moveCache.lastMove = 0x75;
+        sBattleUser->moveCache.lastMove = BIDE;
         return 5;
     }
 
     if (sBattleUser->unk_4C & 2) {
-        sBattleUser->moveCache.lastMove = 0x25;
+        sBattleUser->moveCache.lastMove = THRASH;
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[sBattleScene.unk_00->unk_2C]));
         Battle_QueueMessage(gBattleMessageQueues->unk_0C8, 0x12);
         sBattleUser->unk_4F -= 1;

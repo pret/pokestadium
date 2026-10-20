@@ -2,6 +2,7 @@
 #include "moves.h"
 #include "src/geo_render.h"
 #include "src/matrix.h"
+#include "pokemon.h"
 
 unk_D_843901B0 D_843901B0;
 f32 D_843901F0;
@@ -462,15 +463,15 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
     Vec3f_CalculateDistanceAngles(&sp4C, &sp58, &sp3C, &sp36, &sp34);
 
     switch (arg1->displayObject.objectType) {
-        case 0x58:
-        case 0x59:
-        case 0x87:
+        case GRIMER:
+        case MUK:
+        case JOLTEON:
             var_fv1 = sp3C / (BattleScene_GetParticipantModelRadius(arg1) * 50.0f);
             break;
 
-        case 0x16:
-        case 0x4C:
-        case 0x96:
+        case FEAROW:
+        case GOLEM:
+        case MEWTWO:
             var_fv1 = sp3C / (BattleScene_GetParticipantModelRadius(arg1) * 1.5f);
             break;
 
@@ -507,7 +508,7 @@ void BattleScene_ApplyOwnerFramingAdjustments(CameraNode* arg0, ActivePokemon* a
 
     if (arg1->animationFlags1 == 0xD) {
         var_fv1 = 0;
-    } else if ((arg1->displayObject.objectType == 0x58) || (arg1->displayObject.objectType == 0x59)) {
+    } else if ((arg1->displayObject.objectType == GRIMER) || (arg1->displayObject.objectType == MUK)) {
         temp_fv1 = sp3C / BattleScene_GetParticipantModelRadius(arg1);
         if (temp_fv1 <= 0.05f) {
             var_fv1 = sp3C / (BattleScene_GetParticipantModelRadius(arg1) * 90.0f);
