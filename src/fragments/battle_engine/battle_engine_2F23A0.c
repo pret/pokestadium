@@ -52,7 +52,7 @@ void BattleScene_PositionParticipantModel(ActivePokemon* active_pokemon) {
     if (BattleScene_GetParticipantSideIndex(active_pokemon) == 0) {
         if (active_pokemon->displayObject.objectType == GYARADOS) {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -225.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
-        } else if ((active_pokemon->displayObject.objectType == CHARIZARD) || (active_pokemon->displayObject.objectType == LAPRAS)) {
+        } else if ((active_pokemon->displayObject.objectType == VENUSAUR) || (active_pokemon->displayObject.objectType == LAPRAS)) {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -175.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
         } else if (active_pokemon->displayObject.objectType == ONIX) {
             Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, -225.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 7.5000005f);
@@ -61,7 +61,7 @@ void BattleScene_PositionParticipantModel(ActivePokemon* active_pokemon) {
         }
     } else if ((active_pokemon->displayObject.objectType == GYARADOS) || (active_pokemon->displayObject.objectType == ONIX)) {
         Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, 225.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
-    } else if ((active_pokemon->displayObject.objectType == 3) || (active_pokemon->displayObject.objectType == LAPRAS)) {
+    } else if ((active_pokemon->displayObject.objectType == VENUSAUR) || (active_pokemon->displayObject.objectType == LAPRAS)) {
         Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, 175.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
     } else {
         Vec3f_SetComponentsDuplicate(&active_pokemon->displayObject.position, 150.0f, BattleScene_GetParticipantModelHeight(active_pokemon), 0.0f);
@@ -74,7 +74,7 @@ f32 BattleScene_GetParticipantModelXOffset(ActivePokemon* active_pokemon) {
             return -200.0f;
         }
 
-        if ((active_pokemon->displayObject.objectType == CHARIZARD) || (active_pokemon->displayObject.objectType == LAPRAS)) {
+        if ((active_pokemon->displayObject.objectType == VENUSAUR) || (active_pokemon->displayObject.objectType == LAPRAS)) {
             return -175.0f;
         }
         return -150.0f;
@@ -84,7 +84,7 @@ f32 BattleScene_GetParticipantModelXOffset(ActivePokemon* active_pokemon) {
         return 200.0f;
     }
 
-    if ((active_pokemon->displayObject.objectType == CHARIZARD) || (active_pokemon->displayObject.objectType == LAPRAS)) {
+    if ((active_pokemon->displayObject.objectType == VENUSAUR) || (active_pokemon->displayObject.objectType == LAPRAS)) {
         return 175.0f;
     }
 

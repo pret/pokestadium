@@ -1709,9 +1709,9 @@ gGbApuNoise = 0x81283C98;
 gBattleMessageQueues = 0x84391470;
 sBattleScene = 0x84391510;
 sBattleMoveFailed = 0x843C6074;
-gBattleDamage = 0x843C6094;
-gBattleUser = 0x843C6508;
-gBattleTarget = 0x843C650C;
+sBattleDamage = 0x843C6094;
+sBattleUser = 0x843C6508;
+sBattleTarget = 0x843C650C;
 
 // GB recompiler code templates: defined in gb_tower_emulator_7F9A0.c, so keep
 // splat from migrating them back into func_8120572C.s.
