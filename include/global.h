@@ -635,7 +635,7 @@ typedef struct unk_D_8122B2C0 {
 
 #define GB_HEADER(emu, offset) (((u8*)(emu)->unk_53BC)[offset])
 
-extern s16 D_80075E40[];
+extern s16 gCamDistances[];
 
 #include "variables.h"
 

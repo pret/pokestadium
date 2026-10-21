@@ -76,10 +76,10 @@ void BattleScene_AllocateMemory(void) {
     bzero(sBattleScene.unk_00, sizeof(BattleScene));
 }
 
-void func_843297E8(UNUSED CameraNode* arg0) {
+void BattleScene_UpdateCameraDefaultModeNoop(UNUSED CameraNode* arg0) {
 }
 
-void func_843297F0(UNUSED CameraNode* arg0) {
+void BattleScene_UpdateCameraOwner0FramingModeNoop(UNUSED CameraNode* arg0) {
 }
 
 void BattleScene_AvoidDegenerateCameraLookAt(CameraNode* arg0) {
@@ -692,7 +692,7 @@ void BattleScene_Update(CameraNode* arg0) {
 
     switch (sBattleScene.unk_00->unk_1C) {
         case 0:
-            func_843297E8(arg0);
+            BattleScene_UpdateCameraDefaultModeNoop(arg0);
             break;
 
         case 1:
@@ -705,7 +705,7 @@ void BattleScene_Update(CameraNode* arg0) {
             break;
 
         case 3:
-            func_843297F0(arg0);
+            BattleScene_UpdateCameraOwner0FramingModeNoop(arg0);
             break;
 
         case 4:

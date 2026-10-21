@@ -3,7 +3,7 @@
 #include "src/gallery.h"
 #include "src/gfx_buffer.h"
 
-static Trail40 D_8439CA60;
+static Trail40 sWaterSurface;
 
 static Lights2 D_84389300 = gdSPDefLights2(255, 255, 255, 255, 255, 255, 30, 30, 10, 255, 255, 255, 226, 30, 10);
 static Gfx D_84389328[] = {
@@ -48,12 +48,12 @@ void Trail40_Init(s16 arg0) {
     s16 tmp1;
     s16 tmp2;
     s16 tmp3;
-    Trail40Node* var_v0 = &D_8439CA60.unk_0014[0][0];
+    Trail40Node* var_v0 = &sWaterSurface.unk_0014[0][0];
 
-    D_8439CA60.unk_0000 = 0;
-    D_8439CA60.unk_0002 = arg0;
-    D_8439CA60.unk_0004 = 0;
-    D_8439CA60.unk_0008 = 0.01f;
+    sWaterSurface.unk_0000 = 0;
+    sWaterSurface.unk_0002 = arg0;
+    sWaterSurface.unk_0004 = 0;
+    sWaterSurface.unk_0008 = 0.01f;
 
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++) {
@@ -92,22 +92,22 @@ void Trail40_Start(s32 arg0, s32 arg1) {
     UNUSED s32 pad;
     s16 sp46;
 
-    sp6C = D_8439CA60.unk_0014[arg0][arg1].unk_00;
-    sp68 = D_8439CA60.unk_0014[arg0][arg1].unk_04;
-    sp64 = D_8439CA60.unk_0014[arg0][arg1].unk_08;
+    sp6C = sWaterSurface.unk_0014[arg0][arg1].unk_00;
+    sp68 = sWaterSurface.unk_0014[arg0][arg1].unk_04;
+    sp64 = sWaterSurface.unk_0014[arg0][arg1].unk_08;
     sp84 = 0.0f;
     sp80 = 0.0f;
     sp7C = 0.0f;
     sp46 = 0;
 
     if ((arg0 > 0) && (arg1 >= 1)) {
-        sp60 = D_8439CA60.unk_0014[arg0 - 1][arg1].unk_00 - sp6C;
-        sp5C = D_8439CA60.unk_0014[arg0 - 1][arg1].unk_04 - sp68;
-        sp58 = D_8439CA60.unk_0014[arg0 - 1][arg1].unk_08 - sp64;
+        sp60 = sWaterSurface.unk_0014[arg0 - 1][arg1].unk_00 - sp6C;
+        sp5C = sWaterSurface.unk_0014[arg0 - 1][arg1].unk_04 - sp68;
+        sp58 = sWaterSurface.unk_0014[arg0 - 1][arg1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp60, &sp5C, &sp58);
-        sp54 = D_8439CA60.unk_0014[arg0][arg1 - 1].unk_00 - sp6C;
-        sp50 = D_8439CA60.unk_0014[arg0][arg1 - 1].unk_04 - sp68;
-        sp4C = D_8439CA60.unk_0014[arg0][arg1 - 1].unk_08 - sp64;
+        sp54 = sWaterSurface.unk_0014[arg0][arg1 - 1].unk_00 - sp6C;
+        sp50 = sWaterSurface.unk_0014[arg0][arg1 - 1].unk_04 - sp68;
+        sp4C = sWaterSurface.unk_0014[arg0][arg1 - 1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp54, &sp50, &sp4C);
         Vec3f_CrossProductComponents(sp60, sp5C, sp58, sp54, sp50, sp4C, &sp78, &sp74, &sp70);
         Vec3f_NormalizeComponents(&sp78, &sp74, &sp70);
@@ -118,13 +118,13 @@ void Trail40_Start(s32 arg0, s32 arg1) {
     }
 
     if ((0 < arg0) && (arg1 < 15)) {
-        sp60 = D_8439CA60.unk_0014[arg0 - 1][arg1].unk_00 - sp6C;
-        sp5C = D_8439CA60.unk_0014[arg0 - 1][arg1].unk_04 - sp68;
-        sp58 = D_8439CA60.unk_0014[arg0 - 1][arg1].unk_08 - sp64;
+        sp60 = sWaterSurface.unk_0014[arg0 - 1][arg1].unk_00 - sp6C;
+        sp5C = sWaterSurface.unk_0014[arg0 - 1][arg1].unk_04 - sp68;
+        sp58 = sWaterSurface.unk_0014[arg0 - 1][arg1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp60, &sp5C, &sp58);
-        sp54 = D_8439CA60.unk_0014[arg0][arg1 + 1].unk_00 - sp6C;
-        sp50 = D_8439CA60.unk_0014[arg0][arg1 + 1].unk_04 - sp68;
-        sp4C = D_8439CA60.unk_0014[arg0][arg1 + 1].unk_08 - sp64;
+        sp54 = sWaterSurface.unk_0014[arg0][arg1 + 1].unk_00 - sp6C;
+        sp50 = sWaterSurface.unk_0014[arg0][arg1 + 1].unk_04 - sp68;
+        sp4C = sWaterSurface.unk_0014[arg0][arg1 + 1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp54, &sp50, &sp4C);
         Vec3f_CrossProductComponents(sp60, sp5C, sp58, sp54, sp50, sp4C, &sp78, &sp74, &sp70);
         Vec3f_NormalizeComponents(&sp78, &sp74, &sp70);
@@ -135,13 +135,13 @@ void Trail40_Start(s32 arg0, s32 arg1) {
     }
 
     if ((arg0 < 15) && (arg1 >= 1)) {
-        sp60 = D_8439CA60.unk_0014[arg0 + 1][arg1].unk_00 - sp6C;
-        sp5C = D_8439CA60.unk_0014[arg0 + 1][arg1].unk_04 - sp68;
-        sp58 = D_8439CA60.unk_0014[arg0 + 1][arg1].unk_08 - sp64;
+        sp60 = sWaterSurface.unk_0014[arg0 + 1][arg1].unk_00 - sp6C;
+        sp5C = sWaterSurface.unk_0014[arg0 + 1][arg1].unk_04 - sp68;
+        sp58 = sWaterSurface.unk_0014[arg0 + 1][arg1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp60, &sp5C, &sp58);
-        sp54 = D_8439CA60.unk_0014[arg0][arg1 - 1].unk_00 - sp6C;
-        sp50 = D_8439CA60.unk_0014[arg0][arg1 - 1].unk_04 - sp68;
-        sp4C = D_8439CA60.unk_0014[arg0][arg1 - 1].unk_08 - sp64;
+        sp54 = sWaterSurface.unk_0014[arg0][arg1 - 1].unk_00 - sp6C;
+        sp50 = sWaterSurface.unk_0014[arg0][arg1 - 1].unk_04 - sp68;
+        sp4C = sWaterSurface.unk_0014[arg0][arg1 - 1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp54, &sp50, &sp4C);
         Vec3f_CrossProductComponents(sp60, sp5C, sp58, sp54, sp50, sp4C, &sp78, &sp74, &sp70);
         Vec3f_NormalizeComponents(&sp78, &sp74, &sp70);
@@ -152,13 +152,13 @@ void Trail40_Start(s32 arg0, s32 arg1) {
     }
 
     if ((arg0 < 15) && (arg1 < 15)) {
-        sp60 = D_8439CA60.unk_0014[arg0 + 1][arg1].unk_00 - sp6C;
-        sp5C = D_8439CA60.unk_0014[arg0 + 1][arg1].unk_04 - sp68;
-        sp58 = D_8439CA60.unk_0014[arg0 + 1][arg1].unk_08 - sp64;
+        sp60 = sWaterSurface.unk_0014[arg0 + 1][arg1].unk_00 - sp6C;
+        sp5C = sWaterSurface.unk_0014[arg0 + 1][arg1].unk_04 - sp68;
+        sp58 = sWaterSurface.unk_0014[arg0 + 1][arg1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp60, &sp5C, &sp58);
-        sp54 = D_8439CA60.unk_0014[arg0][arg1 + 1].unk_00 - sp6C;
-        sp50 = D_8439CA60.unk_0014[arg0][arg1 + 1].unk_04 - sp68;
-        sp4C = D_8439CA60.unk_0014[arg0][arg1 + 1].unk_08 - sp64;
+        sp54 = sWaterSurface.unk_0014[arg0][arg1 + 1].unk_00 - sp6C;
+        sp50 = sWaterSurface.unk_0014[arg0][arg1 + 1].unk_04 - sp68;
+        sp4C = sWaterSurface.unk_0014[arg0][arg1 + 1].unk_08 - sp64;
         Vec3f_NormalizeComponents(&sp54, &sp50, &sp4C);
         Vec3f_CrossProductComponents(sp60, sp5C, sp58, sp54, sp50, sp4C, &sp78, &sp74, &sp70);
         Vec3f_NormalizeComponents(&sp78, &sp74, &sp70);
@@ -174,9 +174,9 @@ void Trail40_Start(s32 arg0, s32 arg1) {
         } else {
             Vec3f_NormalizeComponents(&sp84, &sp80, &sp7C);
         }
-        D_8439CA60.unk_0014[arg0][arg1].unk_0C = sp84;
-        D_8439CA60.unk_0014[arg0][arg1].unk_10 = sp80;
-        D_8439CA60.unk_0014[arg0][arg1].unk_14 = sp7C;
+        sWaterSurface.unk_0014[arg0][arg1].unk_0C = sp84;
+        sWaterSurface.unk_0014[arg0][arg1].unk_10 = sp80;
+        sWaterSurface.unk_0014[arg0][arg1].unk_14 = sp7C;
     }
 }
 
@@ -199,7 +199,7 @@ void Trail40Node_FillVertex(Trail40Node* arg0, Vtx* arg1) {
     arg1->v.cn[0] = (s32)(r * 120.0);
     arg1->v.cn[1] = (s32)(g * 120.0);
     arg1->v.cn[2] = (s32)(b * 120.0);
-    arg1->v.cn[3] = D_8439CA60.unk_0004;
+    arg1->v.cn[3] = sWaterSurface.unk_0004;
 }
 
 s32 Trail40_IsComplete(void) {
@@ -209,32 +209,32 @@ s32 Trail40_IsComplete(void) {
     f32 temp_fv1_2;
     f32 tmp;
 
-    D_8439CA60.unk_0000 = D_8439CA60.unk_0000 + 1;
-    if (D_8439CA60.unk_0002 < D_8439CA60.unk_0000) {
+    sWaterSurface.unk_0000 = sWaterSurface.unk_0000 + 1;
+    if (sWaterSurface.unk_0002 < sWaterSurface.unk_0000) {
         return -1;
     }
-    if (D_8439CA60.unk_0000 < 0x1E) {
-        D_8439CA60.unk_0004 += 0xA;
-        if (D_8439CA60.unk_0004 >= 0x81) {
-            D_8439CA60.unk_0004 = 0x80;
+    if (sWaterSurface.unk_0000 < 0x1E) {
+        sWaterSurface.unk_0004 += 0xA;
+        if (sWaterSurface.unk_0004 >= 0x81) {
+            sWaterSurface.unk_0004 = 0x80;
         }
-    } else if ((D_8439CA60.unk_0002 - 0x1E) < D_8439CA60.unk_0000) {
-        D_8439CA60.unk_0004 -= 0xA;
-        if (D_8439CA60.unk_0004 < 0) {
-            D_8439CA60.unk_0004 = 0;
+    } else if ((sWaterSurface.unk_0002 - 0x1E) < sWaterSurface.unk_0000) {
+        sWaterSurface.unk_0004 -= 0xA;
+        if (sWaterSurface.unk_0004 < 0) {
+            sWaterSurface.unk_0004 = 0;
         }
     }
 
-    if (D_8439CA60.unk_0008 < 1.0) {
-        D_8439CA60.unk_0008 += 0.05;
+    if (sWaterSurface.unk_0008 < 1.0) {
+        sWaterSurface.unk_0008 += 0.05;
     }
 
-    var_s1 = &D_8439CA60.unk_0014[0][0];
+    var_s1 = &sWaterSurface.unk_0014[0][0];
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++) {
             temp_fv1_2 = 1.0 - (sqrtf(SQ(var_s1->unk_00) + SQ(var_s1->unk_08)) / 101.8224f);
-            tmp = __sinf((((f32)(D_8439CA60.unk_0000 % 20) / 20.0) + (3.0 * temp_fv1_2)) * 6.2831854820251465) *
-                  ((f64)D_8439CA60.unk_0008 * temp_fv1_2);
+            tmp = __sinf((((f32)(sWaterSurface.unk_0000 % 20) / 20.0) + (3.0 * temp_fv1_2)) * 6.2831854820251465) *
+                  ((f64)sWaterSurface.unk_0008 * temp_fv1_2);
             var_s1->unk_04 = tmp;
             var_s1++;
         }
@@ -266,7 +266,7 @@ void Trail40_Reset(void) {
     f32 temp_fv0;
     f32 temp_fv1;
 
-    D_8439CA60.unk_0010 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
+    sWaterSurface.unk_0010 = Gfx_AllocDisplayList(sizeof(Mtx) * 1);
     temp_v0 = BattleAnim_GetCameraContext();
 
     tmp4 = temp_v0->view.targetPosition.x;
@@ -297,7 +297,7 @@ void Trail40_Reset(void) {
     tmp2 += temp_fa0;
     tmp3 += temp_fa1;
 
-    Mtx_BuildTranslatedDirectionRotation(D_8439CA60.unk_0010, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6);
+    Mtx_BuildTranslatedDirectionRotation(sWaterSurface.unk_0010, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6);
 }
 
 Gfx* Trail40_Draw(Gfx* arg0) {
@@ -309,10 +309,10 @@ Gfx* Trail40_Draw(Gfx* arg0) {
     s32 idx;
 
     var_s4 = 0;
-    D_8439CA60.unk_000C = Gfx_AllocDisplayList(sizeof(Vtx) * 16 * 16);
+    sWaterSurface.unk_000C = Gfx_AllocDisplayList(sizeof(Vtx) * 16 * 16);
 
-    vtx = D_8439CA60.unk_000C;
-    var_s2 = &D_8439CA60.unk_0014[0][0];
+    vtx = sWaterSurface.unk_000C;
+    var_s2 = &sWaterSurface.unk_0014[0][0];
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++) {
             Trail40Node_FillVertex(var_s2, vtx);
@@ -326,10 +326,10 @@ Gfx* Trail40_Draw(Gfx* arg0) {
     gDPLoadTextureBlock(arg0++, sBattleAnimAssetPointers[0xA8], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPDisplayList(arg0++, D_84389328);
-    gDPSetPrimColor(arg0++, 0, 0, 255, 255, 255, D_8439CA60.unk_0004);
-    gSPMatrix(arg0++, D_8439CA60.unk_0010, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(arg0++, 0, 0, 255, 255, 255, sWaterSurface.unk_0004);
+    gSPMatrix(arg0++, sWaterSurface.unk_0010, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    vtx = D_8439CA60.unk_000C;
+    vtx = sWaterSurface.unk_000C;
     for (i = 0; i < 15; i++) {
         for (j = 0; j < 15; j++) {
             idx = (i + 0) * 16 + j;

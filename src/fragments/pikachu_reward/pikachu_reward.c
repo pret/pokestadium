@@ -496,7 +496,7 @@ void PikachuReward_ShowDeclinedEnding(void) {
 void PikachuReward_ShowSuccessEnding(void) {
     ModelAnim_SetAnimation(D_83202028, 0xA);
     ModelAnim_SetEventTrack(D_83202028, 7);
-    func_80048060(0, 0x39, 0x19, 0);
+    PlayMoveSoundEffect(0, 0x39, 0x19, 0);
     D_83201F50 = 1;
     Audio_PlayMusicIfChanged(0x4A);
     PikachuReward_ScrollTextIn(Text_GetString(NULL, 0, D_83202020, 0xF));
@@ -577,7 +577,7 @@ s32 PikachuReward_ResolveMoveSlot(void) {
                     PikachuReward_ShowTextForFrames(Text_GetString(NULL, 0, D_83202020, 0xA), 0x1E);
                     ModelAnim_SetAnimation(D_83202028, 9);
                     D_83201F54 = 0;
-                    func_800479C0(0x85, 0x19, 0);
+                    Effect_TriggerMoveVisual(0x85, 0x19, 0);
                     PikachuReward_ShowTextWaitForA(Text_GetString(NULL, 0, D_83202020, 0xB), 1);
                     Text_SetStringToken(0x1D, Text_GetString(NULL, 0, D_8320201C, D_832027C8.unk_04.unk_09[spAC] - 1));
                     Text_GetString(sp2C, sizeof(sp2C), D_83202020, 0xC);

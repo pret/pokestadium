@@ -123,7 +123,7 @@ void ModelAnim_UpdateFrameChangeState(void) {
     D_800AF7A8 = D_8006F084;
 }
 
-s32 func_800325AC(void) {
+s32 ModelPhase_IsIdle(void) {
     return 0;
 }
 
@@ -203,7 +203,7 @@ void ModelAnim_UpdateDisplayObjectAnimation(u32 arg0, u32 arg1) {
 }
 
 void ModelAnim_FinalizeDisplayObjectAnimation(u32 arg0, u32 arg1) {
-    if (func_800325AC() == 0) {
+    if (ModelPhase_IsIdle() == 0) {
         D_800AF7AE++;
     }
 

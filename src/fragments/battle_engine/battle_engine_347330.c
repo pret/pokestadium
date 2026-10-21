@@ -26,7 +26,7 @@ static RibbonMesh D_843925E0[4];
 static s16 D_843951C0;
 static s16 D_843951C2;
 static s32 pad_D_843951C8[2];
-static unk_D_843951D0 D_843951D0;
+static unk_D_843951D0 sWaterHeightMap;
 static s16 D_843975E0;
 static s16 D_843975E2;
 static s16 D_843975E4;
@@ -778,21 +778,21 @@ f32 TerrainGrid_SampleHeightAndSlope(f32 arg0, f32 arg1, f32* arg2) {
         var_a0 = 0xE;
     }
 
-    spC0 = D_843951D0.unk_1010[var_v1][var_a0].unk_00;
-    spBC = D_843951D0.unk_1010[var_v1][var_a0].unk_04;
-    spB8 = D_843951D0.unk_1010[var_v1][var_a0].unk_08;
-    spB4 = D_843951D0.unk_1010[var_v1 + 1][var_a0].unk_00;
-    spB0 = D_843951D0.unk_1010[var_v1 + 1][var_a0].unk_04;
-    spAC = D_843951D0.unk_1010[var_v1 + 1][var_a0].unk_08;
-    spA8 = D_843951D0.unk_1010[var_v1][var_a0 + 1].unk_00;
-    spA4 = D_843951D0.unk_1010[var_v1][var_a0 + 1].unk_04;
-    spA0 = D_843951D0.unk_1010[var_v1][var_a0 + 1].unk_08;
-    sp9C = D_843951D0.unk_1010[var_v1 + 1][var_a0 + 1].unk_00;
-    sp98 = D_843951D0.unk_1010[var_v1 + 1][var_a0 + 1].unk_04;
-    sp94 = D_843951D0.unk_1010[var_v1 + 1][var_a0 + 1].unk_08;
+    spC0 = sWaterHeightMap.unk_1010[var_v1][var_a0].unk_00;
+    spBC = sWaterHeightMap.unk_1010[var_v1][var_a0].unk_04;
+    spB8 = sWaterHeightMap.unk_1010[var_v1][var_a0].unk_08;
+    spB4 = sWaterHeightMap.unk_1010[var_v1 + 1][var_a0].unk_00;
+    spB0 = sWaterHeightMap.unk_1010[var_v1 + 1][var_a0].unk_04;
+    spAC = sWaterHeightMap.unk_1010[var_v1 + 1][var_a0].unk_08;
+    spA8 = sWaterHeightMap.unk_1010[var_v1][var_a0 + 1].unk_00;
+    spA4 = sWaterHeightMap.unk_1010[var_v1][var_a0 + 1].unk_04;
+    spA0 = sWaterHeightMap.unk_1010[var_v1][var_a0 + 1].unk_08;
+    sp9C = sWaterHeightMap.unk_1010[var_v1 + 1][var_a0 + 1].unk_00;
+    sp98 = sWaterHeightMap.unk_1010[var_v1 + 1][var_a0 + 1].unk_04;
+    sp94 = sWaterHeightMap.unk_1010[var_v1 + 1][var_a0 + 1].unk_08;
 
     temp_fv0 = spB4 - arg0;
-    spBC = D_843951D0.unk_1010[var_v1][var_a0].unk_04;
+    spBC = sWaterHeightMap.unk_1010[var_v1][var_a0].unk_04;
     temp_fv1 = spAC - arg1;
     temp_fa0 = sp9C - arg0;
     temp_fa1 = sp94 - arg1;
@@ -837,21 +837,21 @@ s32 TerrainGrid_UpdateWaves(void) {
     s32 temp_v0;
     f32 tmp;
 
-    D_843951D0.unk_0000++;
-    if (D_843951D0.unk_000A < D_843951D0.unk_0000) {
+    sWaterHeightMap.unk_0000++;
+    if (sWaterHeightMap.unk_000A < sWaterHeightMap.unk_0000) {
         return -1;
     }
 
-    if (D_843951D0.unk_0000 < 0x3C) {
-        ptr = &D_843951D0.unk_1010[0][0];
+    if (sWaterHeightMap.unk_0000 < 0x3C) {
+        ptr = &sWaterHeightMap.unk_1010[0][0];
         for (j = 0; j < 16; j++) {
-            ptr->unk_04 += (30.0 * __sinf((((D_843951D0.unk_0000 + j) % 15) * TWO_PI_F) / 15.0f)) + 10.0;
+            ptr->unk_04 += (30.0 * __sinf((((sWaterHeightMap.unk_0000 + j) % 15) * TWO_PI_F) / 15.0f)) + 10.0;
             ptr++;
         }
-        D_843951D0.unk_0004 += 0.001;
+        sWaterHeightMap.unk_0004 += 0.001;
     } else {
-        if (((D_843951D0.unk_0000 - 0x3C) % 90) < 0x46) {
-            ptr = &D_843951D0.unk_1010[0][2];
+        if (((sWaterHeightMap.unk_0000 - 0x3C) % 90) < 0x46) {
+            ptr = &sWaterHeightMap.unk_1010[0][2];
             for (j = 0; j < 13; j++) {
                 if (0) {}
                 if (ptr->unk_04 > 0.0) {
@@ -863,20 +863,20 @@ s32 TerrainGrid_UpdateWaves(void) {
                 ptr++;
             }
         } else {
-            ptr = &D_843951D0.unk_1010[0][2];
+            ptr = &sWaterHeightMap.unk_1010[0][2];
             for (j = 0; j < 13; j++) {
                 ptr->unk_04 += 30.0;
                 ptr++;
             }
         }
 
-        D_843951D0.unk_0004 += 0.04;
-        if (D_843951D0.unk_0004 > 0.3) {
-            D_843951D0.unk_0004 = 0.3f;
+        sWaterHeightMap.unk_0004 += 0.04;
+        if (sWaterHeightMap.unk_0004 > 0.3) {
+            sWaterHeightMap.unk_0004 = 0.3f;
         }
     }
 
-    ptr = &D_843951D0.unk_1010[0][0];
+    ptr = &sWaterHeightMap.unk_1010[0][0];
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++) {
             temp_v0 = 1;
@@ -885,29 +885,29 @@ s32 TerrainGrid_UpdateWaves(void) {
             var_fv0 = 0.0f;
             if (i > 0) {
                 temp_v0 = 2;
-                var_fv0 += D_843951D0.unk_1010[i - 1][j].unk_04 - tmp;
+                var_fv0 += sWaterHeightMap.unk_1010[i - 1][j].unk_04 - tmp;
             }
 
             if ((!ptr) && (!ptr)) {}
 
             if (j > 0) {
-                var_fv0 += D_843951D0.unk_1010[i][j - 1].unk_04 - tmp;
+                var_fv0 += sWaterHeightMap.unk_1010[i][j - 1].unk_04 - tmp;
             }
 
             if (j < 0xF) {
-                var_fv0 += D_843951D0.unk_1010[i][j + 1].unk_04 - tmp;
+                var_fv0 += sWaterHeightMap.unk_1010[i][j + 1].unk_04 - tmp;
             }
 
             temp_v0++;
             temp_v0++;
             if (temp_v0) {}
 
-            ptr->unk_0C = (var_fv0 * D_843951D0.unk_0004) + tmp;
+            ptr->unk_0C = (var_fv0 * sWaterHeightMap.unk_0004) + tmp;
             ptr++;
         }
     }
 
-    ptr = &D_843951D0.unk_1010[0][0];
+    ptr = &sWaterHeightMap.unk_1010[0][0];
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++, ptr++) {
             ptr->unk_04 = ptr->unk_0C;
@@ -925,12 +925,12 @@ void TerrainGrid_Init(s32 arg0, s16 arg1, s16 arg2) {
     s32 j;
     unk_D_843951D0_1010* ptr;
 
-    D_843951D0.unk_000A = arg2;
-    D_843951D0.unk_0000 = 0;
-    D_843951D0.unk_0004 = 0.0f;
-    D_843951D0.unk_0008 = arg1;
+    sWaterHeightMap.unk_000A = arg2;
+    sWaterHeightMap.unk_0000 = 0;
+    sWaterHeightMap.unk_0004 = 0.0f;
+    sWaterHeightMap.unk_0008 = arg1;
 
-    ptr = &D_843951D0.unk_1010[0][0];
+    ptr = &sWaterHeightMap.unk_1010[0][0];
 
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++, ptr++) {
@@ -1037,9 +1037,9 @@ Gfx* TerrainGrid_Draw(Gfx* arg0) {
     s32 idx1;
     s32 idx2;
 
-    D_843951D0.unk_000C = Gfx_AllocDisplayList(sizeof(Vtx) * 16 * 16);
-    vtx = D_843951D0.unk_000C;
-    var_v1 = &D_843951D0.unk_1010[0][0];
+    sWaterHeightMap.unk_000C = Gfx_AllocDisplayList(sizeof(Vtx) * 16 * 16);
+    vtx = sWaterHeightMap.unk_000C;
+    var_v1 = &sWaterHeightMap.unk_1010[0][0];
 
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++) {
@@ -1057,11 +1057,11 @@ Gfx* TerrainGrid_Draw(Gfx* arg0) {
     gSPDisplayList(arg0++, D_84388F80);
     gDPPipeSync(arg0++);
 
-    if (D_843951D0.unk_0000 < 0xA) {
+    if (sWaterHeightMap.unk_0000 < 0xA) {
         var_a2 = 0;
-        var_t0 = (D_843951D0.unk_0000 * 0xFF) / 10;
-    } else if (D_843951D0.unk_0000 < 0x14) {
-        var_a2 = ((D_843951D0.unk_0000 * 0xFF) - 0x9F6) / 10;
+        var_t0 = (sWaterHeightMap.unk_0000 * 0xFF) / 10;
+    } else if (sWaterHeightMap.unk_0000 < 0x14) {
+        var_a2 = ((sWaterHeightMap.unk_0000 * 0xFF) - 0x9F6) / 10;
         var_t0 = 0xFF;
     } else {
         var_a2 = 0xFF;
@@ -1080,7 +1080,7 @@ Gfx* TerrainGrid_Draw(Gfx* arg0) {
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 1, 1);
     gDPSetTileSize(arg0++, 1, D_843975E2, D_843975E2, D_843975E2 + 0x1F, D_843975E2 + 0x1F);
 
-    vtx = D_843951D0.unk_000C;
+    vtx = sWaterHeightMap.unk_000C;
     for (i = 0; i < 15; i++) {
         for (j = 0; j < 15; j++) {
             idx1 = (i + 0) * 16 + j;

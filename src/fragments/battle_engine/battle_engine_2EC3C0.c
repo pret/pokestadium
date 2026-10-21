@@ -29,7 +29,7 @@ ActivePokemon* sActivePokemon[2];
 ActivePokemon* sSide1ActivePokemon;
 ActivePokemon* sSide2ActivePokemon;
 static MovePresentationCue* sCurrentAnimation;
-unk_D_84390028 D_84390028[2];
+unk_D_84390028 gPokemonModelDimensions[2];
 static SwayLayoutConfig sDefaultSwayLayout;
 static BattleSceneStateTickSlot sBattleSceneStateTickSlots[7];
 static s32 sBattleSceneStateTickSlotIndex;
@@ -542,7 +542,7 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
     pokemon->swayState.layoutConfig.backCameraShotOffset.x *= pokemon->cameraOffsetScaleFactor;
 
     rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70110 + (species << 4)) & 0xFFFFFF);
-    Dma_WriteChunks(&D_84390028[side_index], rom_address, rom_address + 0x10, 0);
+    Dma_WriteChunks(&gPokemonModelDimensions[side_index], rom_address, rom_address + 0x10, 0);
 
     rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_71E10 + (species * 0x10)) & 0xFFFFFF);
     Dma_WriteChunks(sPlayerTagTeam[side_index], rom_address, rom_address + 0x10, 0);
@@ -607,10 +607,10 @@ void BattleScene_EnterRow3StartMoveAnim(ActivePokemon* active_pokemon) {
 
         if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
             side_byte = BattleScene_GetParticipantSideIndex(active_pokemon);
-            func_80048060(side_byte, runtime->usedMove, PARTNER_PIKACHU, 0);
+            PlayMoveSoundEffect(side_byte, runtime->usedMove, PARTNER_PIKACHU, 0);
         } else {
             side_byte = BattleScene_GetParticipantSideIndex(active_pokemon);
-            func_80048060(side_byte, runtime->usedMove, species_ob1 + 1, 0);
+            PlayMoveSoundEffect(side_byte, runtime->usedMove, species_ob1 + 1, 0);
         }
 
         if ((pokemon_state->flags & ACTIVE_UNDERGROUND) && ((species_ob1 == DUGTRIO_OB1) || (species_ob1 == DIGLETT_OB1))) {
@@ -812,7 +812,7 @@ void BattleScene_EnterRow21StartAnimRecord0(ActivePokemon* active_pokemon) {
 void BattleScene_TickRow21PlaySpeciesSound(ActivePokemon* active_pokemon) {
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[0];
     if ((active_pokemon->animationTimer == (sCurrentAnimation->animationDuration + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
-        func_800479C0(1, active_pokemon->displayObject.objectType, 0);
+        Effect_TriggerMoveVisual(1, active_pokemon->displayObject.objectType, 0);
         sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].callback = sBattleSceneStateTickSentinel;
     }
 }
@@ -1136,14 +1136,14 @@ void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
 
         if (pokemon_state->flags & ACTIVE_AIRBORNE) {
             if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 26);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 26);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 26);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 26);
             }
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 10);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 10);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 10);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 10);
         }
     }
 }
@@ -1195,14 +1195,14 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
 
         if (state->flags & ACTIVE_AIRBORNE) {
             if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 27);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 27);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 27);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 27);
             }
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 11);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 11);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 11);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 11);
         }
         sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].callback = sBattleSceneStateTickSentinel;
     }
@@ -1235,14 +1235,14 @@ void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
 
         if (state->flags & ACTIVE_AIRBORNE) {
             if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 27);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 27);
             } else {
-                func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 27);
+                PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 27);
             }
         } else if (BattleScene_IsPartnerPikachu(active_pokemon) != 0) {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 11);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, PARTNER_PIKACHU, 11);
         } else {
-            func_80048060(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 11);
+            PlayMoveSoundEffect(BattleScene_GetParticipantSideIndex(active_pokemon) & 0xFF, 0, active_pokemon->displayObject.objectType, 11);
         }
 
         sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].callback = sBattleSceneStateTickSentinel;
@@ -2050,14 +2050,14 @@ void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon) {
 
     if (active_pokemon->unk_4C8 != 0) {
         if (pokemon_state->flags & ACTIVE_AIRBORNE) {
-            active_pokemon->displayObject.position.y = D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
+            active_pokemon->displayObject.position.y = gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
             Battle_ClearRuntimeFlags(active_pokemon, 0x608);
         }
 
         if (pokemon_state->flags & 0x4008) {
             active_pokemon->displayObject.lodFraction = 0xFF;
             BattleAnim_StopOwnerCategoryParticles(4, active_pokemon);
-            active_pokemon->displayObject.position.y = D_84390028[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
+            active_pokemon->displayObject.position.y = gPokemonModelDimensions[BattleScene_GetParticipantSideIndex(active_pokemon)].unk_08;
             active_pokemon->displayObject.node.renderFlags &= ~2;
             active_pokemon->displayObject.node.renderFlags |= 0x20;
             active_pokemon->displayObject.node.flags |= 1;

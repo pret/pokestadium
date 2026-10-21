@@ -713,7 +713,7 @@ void Audio_SelectModeMusic(u32 arg0, u32 arg1) {
     }
 }
 
-void func_8003DB84(s32 arg0) {
+void AudioFrameUpdate(s32 arg0) {
     s8 var_t0;
     s8 var_t2;
     s8 var_t4;
@@ -1112,7 +1112,7 @@ block_53:
     }
 }
 
-void func_8003EB40(s32 arg0, BattleMonRuntime* arg1) {
+void ProcessAudioInfo(s32 arg0, BattleMonRuntime* arg1) {
     u8 pad;
     u8 value;
     u8 side;
@@ -1289,7 +1289,7 @@ found_value:
     }
 }
 
-void func_8003F1AC(u32 arg0) {
+void RemovePlayer(u32 arg0) {
     u8 sp1F;
 
     if (arg0 == 0 || arg0 >= 5) {
@@ -1347,7 +1347,7 @@ void func_8003F1AC(u32 arg0) {
     }
 }
 
-void func_8003F4C0(u32 arg0) {
+void PlayerDefeated(u32 arg0) {
     u8 temp_v0;
     
     if (arg0 == 0 || arg0 >= 5) {
@@ -1403,7 +1403,7 @@ void Audio_QueuePendingSoundId(u32 arg0) {
     }
 }
 
-void func_8003F660(s32 arg0) {
+void ProcessAudioCommandQueue(s32 arg0) {
     u32 mask;
     u32 sp40;
     s32 sp3C;
@@ -1964,7 +1964,7 @@ void func_8003F660(s32 arg0) {
     }
 }
 
-void func_80040A70(BattleMonRuntime* arg0, s32 arg1, s32 arg2, s32 arg3) {
+void HandleMoveEvent(BattleMonRuntime* arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 i;
     s32 sp40;
     u32 temp_lo;
@@ -2225,7 +2225,7 @@ void func_80040A70(BattleMonRuntime* arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-void func_800414B8(s32 arg0) {
+void QueuePlayerDefeatMessage(s32 arg0) {
     u8 temp_v0;
 
     if (arg0 == 0 || arg0 >= 5U) {

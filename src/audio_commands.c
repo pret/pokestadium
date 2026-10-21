@@ -400,27 +400,27 @@ s32 Audio_PlayCommand(u32 command, s32 parameter, UNUSED s32 unused) {
             break;
 
         case 0x1E:
-            sound_handle = func_800479C0(0xA6, 1, 0);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 0);
             break;
 
         case 0x1F:
-            sound_handle = func_800479C0(0xA6, 1, 1);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 1);
             break;
 
         case 0x20:
-            sound_handle = func_800479C0(0xA6, 1, 2);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 2);
             break;
 
         case 0x21:
-            sound_handle = func_800479C0(0xA6, 1, 3);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 3);
             break;
 
         case 0x22:
-            sound_handle = func_800479C0(0xA6, 1, 4);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 4);
             break;
 
         case 0x23:
-            sound_handle = func_800479C0(0xA6, 1, 5);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 5);
             break;
 
         default:

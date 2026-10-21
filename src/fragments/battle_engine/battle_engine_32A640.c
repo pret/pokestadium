@@ -238,16 +238,16 @@ void BattleAnim_SetupEndEffects85And87GravityFallDelay(Particle* arg0) {
             Particle_Field1C_SetScaled_0B938(arg0, 0.12f);
             arg0->unk_5C.y = -((ParticleMath_RandomRange(0xA) * 0.1f) + 0.5f);
             Particle_Field38_AddYScaled_08E90(arg0, ParticleMath_RandomRange(0x28) + 0x1E);
-            func_81409404(arg0, 0x1E, 0);
-            func_81409514(arg0, 0x1E, 0);
+            Particle_SetRandomVelocityXSymmetric(arg0, 0x1E, 0);
+            Particle_SetRandomVelocityZSymmetric(arg0, 0x1E, 0);
             break;
 
         case 1:
             Particle_Field1C_SetScaled_0B938(arg0, 0.2f);
             arg0->unk_5C.y = -((ParticleMath_RandomRange(4) * 0.1f) + 0.2f);
             Particle_Field38_AddYScaled_08E90(arg0, ParticleMath_RandomSigned(0x14) + 0x1E);
-            func_81409404(arg0, 0xF, 5);
-            func_81409514(arg0, 0x14, 5);
+            Particle_SetRandomVelocityXSymmetric(arg0, 0xF, 5);
+            Particle_SetRandomVelocityZSymmetric(arg0, 0x14, 5);
             break;
     }
 
@@ -327,12 +327,12 @@ void BattleAnim_OrphanDescriptor2BAnd2EEmitterSequence(void) {
     BattleAnim_CreateEffectSlotForCurrentOwner(0, BattleAnim_CallbackOrphanDescriptor2EScatterFade, &gBattleAnimParticleDescriptors[0x2E], 0, 0x10, 2, 0, 0, 0);
 }
 
-void func_84340CB0(void) {
+void RegisterParticleEffect_ComplexMovement(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 2, 0x14, BattleAnim_CallbackEndEffect26Descriptor2CGravityScatterFall, &gBattleAnimParticleDescriptors[0x2C], 0, 4, 0xE, 0, 0, 0);
     BattleAnim_EndEffect26DelayedDescriptor29ScatterSequence();
 }
 
-void func_84340D14(void) {
+void RegisterParticleEffect_Burst(void) {
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 2, 5, BattleAnim_CallbackEndEffects85And87GravityFallDelay, &gBattleAnimParticleDescriptors[0x2D], 0, 1, 0xE, 0, 0, 1);
     BattleAnim_CreateRepeatingEffectSlotForCurrentOwner(0, 4, 5, BattleAnim_CallbackEndEffects85And87GravityFallDelay, &gBattleAnimParticleDescriptors[0x2D], 0, 1, 0xE, 0, 0, 1);
 }

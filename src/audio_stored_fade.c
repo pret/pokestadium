@@ -13,7 +13,7 @@ u8 D_80078A1C[4] = { 0 };
 u8 D_80078A20[16] = { 0 };
 
 // Related to Partner Pikachu, probably makes it go Pika Pika
-s32 func_80048060(UNUSED s32 side_index, u32 move_id, u32 species, u32 sound_kind) {
+s32 PlayMoveSoundEffect(UNUSED s32 side_index, u32 move_id, u32 species, u32 sound_kind) {
     u32 i;
     u32 temp_v0;
     u32 slot;
