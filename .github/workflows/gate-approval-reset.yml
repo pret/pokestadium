@@ -1,0 +1,28 @@
+name: Reset gate approval on new commits
+
+# A maintainer approves an outside contributor's PR for the ROM gate by adding
+# the `gate-approved` label (see pr-rom-gate.yml). The approval covers the
+# commit that was reviewed, so any new push removes the label and the
+# maintainer has to review again.
+#
+# pull_request_target runs from the base branch with a write token, which is
+# only safe because this workflow never checks out or executes PR code.
+on:
+  pull_request_target:
+    types: [synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  reset:
+    name: Remove the gate approval label
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    if: contains(github.event.pull_request.labels.*.name, 'gate-approved')
+    steps:
+      - name: Remove the label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: gh api -X DELETE "repos/${GITHUB_REPOSITORY}/issues/${PR}/labels/gate-approved" --silent
