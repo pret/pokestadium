@@ -1028,13 +1028,13 @@ void BattleScene_SetupSendOutOwnerShot(CameraNode* arg0) {
             sp3B = 0x97;
         }
 
-        sp44 = (D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.y + temp_s0->displayObject.position.y) + D_84384C30[sp3B].z;
-        sp40 = ((D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.z + D_84384C30[sp3B].y) * temp_s0->cameraOffsetScaleFactor) +
+        sp44 = (D_84384580[sBattleScene.unk_00->unk_2C]->coordinates.y + temp_s0->displayObject.position.y) + D_84384C30[sp3B].z;
+        sp40 = ((D_84384580[sBattleScene.unk_00->unk_2C]->coordinates.z + D_84384C30[sp3B].y) * temp_s0->cameraOffsetScaleFactor) +
                temp_s0->displayObject.position.x;
 
         Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, sp40, sp44, temp_s0->displayObject.position.z);
 
-        sp40 = D_84384580[sBattleScene.unk_00->unk_2C]->unk_00.x * D_84384C30[sp3B].x;
+        sp40 = D_84384580[sBattleScene.unk_00->unk_2C]->coordinates.x * D_84384C30[sp3B].x;
         sp3E = D_84384580[sBattleScene.unk_00->unk_2C]->unk_0C;
         tmp1 = (temp_s0->cameraOffsetScaleFactor * D_84384580[sBattleScene.unk_00->unk_2C]->unk_0E) + BattleScene_GetParticipantFacingAngle(temp_s0);
         Camera_ComputeEyeFromAngles(&arg0->view.targetPosition, &arg0->view.eyePosition, sp40, sp3E, tmp1);

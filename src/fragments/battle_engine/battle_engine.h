@@ -86,12 +86,12 @@ typedef struct PresentationState {
     /* 0x178 */ s32 unk_178;
     /* 0x17C */ s32 idleAnimation;
     /* 0x180 */ s32 idleTimer;
-    /* 0x184 */ s16 unk_184;
-    /* 0x186 */ s16 unk_186;
-    /* 0x188 */ f32 unk_188;
+    /* 0x184 */ s16 rotationX;
+    /* 0x186 */ s16 rotationY;
+    /* 0x188 */ f32 x;
     /* 0x18C */ s32 unk_18C;
-    /* 0x190 */ f32 unk_190;
-    /* 0x194 */ f32 unk_194;
+    /* 0x190 */ f32 z;
+    /* 0x194 */ f32 y;
     /* 0x198 */ char unk198[0x4];
 } PresentationState; // size = 0x19C
 
@@ -306,11 +306,11 @@ typedef struct unk_D_84390178 {
 } unk_D_84390178; // size >= 0x18
 
 typedef struct SpeciesModelTransform {
-    /* 0x00 */ Vec3f unk_00;
+    /* 0x00 */ Vec3f coordinates;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s16 unk_10;
-    /* 0x12 */ u16 unk_12;
+    /* 0x12 */ u16 idleTimer;
     /* 0x14 */ char unk14[0xC];
 } SpeciesModelTransform; // size = 0x20
 
@@ -924,7 +924,7 @@ typedef struct unk_func_8437F85C_arg3 {
 } unk_func_8437F85C_arg3; // size = 0x3
 
 extern PokemonBattleCues* sSideBattleCues[];
-extern SpeciesModelTransform* D_84384578[];
+extern SpeciesModelTransform* sSidePresentationTransform[];
 extern SpeciesModelTransform* D_84384580[];
 extern TagTeamPartners* sPlayerTagTeam[];
 extern u8 sPokemonWithAlternateSleepIdle[];
@@ -1563,7 +1563,7 @@ s32 BattleScene_IsCameraFrameCounterAtLeast(s32 arg0);
 void BattleScene_SetActivePokemonIndex(s32 arg0);
 void BattleScene_ResetCameraFrameCounter(void);
 void BattleScene_ResetCameraSubstepCounter(void);
-void BattleScene_SetCameraAtAndEyeFromAngles(CameraNode* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6);
+void BattleScene_SetCameraAtAndEyeFromAngles(CameraNode* camera, f32 x, f32 y, f32 z, f32 distance, s16 rotation_x, s16 rotation_y);
 void BattleScene_GetOwnerCameraAnchor(ActivePokemon* arg0, Vec3f* arg1);
 void BattleScene_GetOwnerBoneOrDefaultAnchor(ActivePokemon* arg0, Vec3f* arg1, s32 arg2);
 void BattleScene_SetCameraModeAndStep(s32 camera_mode, s32 camera_step);

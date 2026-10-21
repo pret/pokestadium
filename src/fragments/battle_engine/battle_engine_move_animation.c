@@ -19,8 +19,8 @@
 
 static PokemonBattleCues sSide1BattleCues;
 static PokemonBattleCues sSide2BattleCues;
-static SpeciesModelTransform D_8438FF70;
-static SpeciesModelTransform D_8438FF90;
+static SpeciesModelTransform sSide1PresentationTransform;
+static SpeciesModelTransform sSide2PresentationTransform;
 static SpeciesModelTransform D_8438FFB0;
 static SpeciesModelTransform D_8438FFD0;
 static TagTeamPartners D_8438FFF0;
@@ -37,9 +37,9 @@ static s32 D_843900A4;
 f32 D_843900A8[2];
 
 PokemonBattleCues* sSideBattleCues[] = { &sSide1BattleCues, &sSide2BattleCues };
-SpeciesModelTransform* D_84384578[] = {
-    &D_8438FF70,
-    &D_8438FF90,
+SpeciesModelTransform* sSidePresentationTransform[] = {
+    &sSide1PresentationTransform,
+    &sSide2PresentationTransform,
 };
 SpeciesModelTransform* D_84384580[] = {
     &D_8438FFB0,
@@ -510,9 +510,9 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
 
     if (side_index == 1) {
         rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (species << 5)) & 0xFFFFFF);
-        Dma_WriteChunks(D_84384578[side_index], rom_address, rom_address + 0x20, 0);
+        Dma_WriteChunks(sSidePresentationTransform[side_index], rom_address, rom_address + 0x20, 0);
 
-        model_transform = D_84384578[side_index];
+        model_transform = sSidePresentationTransform[side_index];
         if (model_transform->unk_10 != 0xFF) {
             linked_record_id = model_transform->unk_10;
 
@@ -520,11 +520,11 @@ void Battle_LoadAnimationAndMarkMoveIllegality(ActivePokemon* pokemon, s32 mark_
             rom_address = ((u32)_70D3A0_ROM_START) + (((u32)(D_6E910 + ((model_transform->unk_10 - (transform_end = 2)) * 0x20))) & 0xFFFFFF);
             Dma_WriteChunks(model_transform, rom_address, rom_address + 0x20, 0);
 
-            D_84384578[side_index]->unk_10 = linked_record_id;
+            sSidePresentationTransform[side_index]->unk_10 = linked_record_id;
         }
     } else {
         rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_6E910 + (species << 5)) & 0xFFFFFF);
-        Dma_WriteChunks(D_84384578[side_index], rom_address, rom_address + 0x20, 0);
+        Dma_WriteChunks(sSidePresentationTransform[side_index], rom_address, rom_address + 0x20, 0);
     }
 
     rom_address = (u32)_70D3A0_ROM_START + ((u32)(D_70B10 + (species * 0x20)) & 0xFFFFFF);

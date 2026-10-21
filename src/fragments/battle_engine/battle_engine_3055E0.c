@@ -64,9 +64,9 @@ void BattleScene_ResetCameraSubstepCounter(void) {
     sBattleScene.unk_00->unk_10 = 0;
 }
 
-void BattleScene_SetCameraAtAndEyeFromAngles(CameraNode* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6) {
-    Vec3f_SetComponentsDuplicate(&arg0->view.targetPosition, arg1, arg2, arg3);
-    Camera_ComputeEyeFromAngles(&arg0->view.targetPosition, &arg0->view.eyePosition, arg4, arg5, arg6);
+void BattleScene_SetCameraAtAndEyeFromAngles(CameraNode* camera, f32 x, f32 y, f32 z, f32 distance, s16 rotation_x, s16 rotation_y) {
+    Vec3f_SetComponentsDuplicate(&camera->view.targetPosition, x, y, z);
+    Camera_ComputeEyeFromAngles(&camera->view.targetPosition, &camera->view.eyePosition, distance, rotation_x, rotation_y);
 }
 
 void BattleScene_GetOwnerCameraAnchor(ActivePokemon* arg0, Vec3f* arg1) {
@@ -95,9 +95,9 @@ void BattleScene_SetCameraModeAndStep(s32 camera_mode, s32 camera_step) {
     sBattleScene.unk_00->unk_20 = camera_step;
 }
 
-void BattleScene_SetCameraClipPlanes(CameraNode* arg0, f32 arg1, f32 arg2) {
-    arg0->perspective.nearPlane = arg1;
-    arg0->perspective.farPlane = arg2;
+void BattleScene_SetCameraClipPlanes(CameraNode* camera_node, f32 near_plane, f32 far_plane) {
+    camera_node->perspective.nearPlane = near_plane;
+    camera_node->perspective.farPlane = far_plane;
 }
 
 void BattleScene_SetCameraSubstate(s32 arg0, u16 arg1) {

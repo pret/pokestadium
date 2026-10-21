@@ -45,7 +45,7 @@ void MtxF_TransformVec3s(MtxF* matrix, Vec3s* dest);
 void MtxF_ToFixed(MtxF* dest, MtxF* src);
 void MtxF_BuildTransform(MtxF* dest, Vec3f* local_position, Vec3s* rotate, Vec3f* scale, MtxF* basis, MtxF* transform);
 void Vec3f_CalculateDistanceAngles(Vec3f* to, Vec3f* from, f32* euclidean, s16* angle_x, s16* angle_y);
-void Camera_ComputeEyeFromAngles(Vec3f* from, Vec3f* to, f32 dist, s16 pitch, s16 yaw);
+void Camera_ComputeEyeFromAngles(Vec3f* from, Vec3f* to, f32 dist, s16 rotation_x, s16 rotation_y);
 s16 Math_StepToS(s16 current, s16 target, s16 delta);
 s32 Math_StepToS32(s32 current, s32 target, s32 increase, s32 descrease);
 f32 Math_StepToF(f32 current, f32 target, f32 increase, f32 decrease);
