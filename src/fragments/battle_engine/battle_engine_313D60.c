@@ -96,13 +96,13 @@ void BattleScene_TickCameraSubstateDefault(CameraNode* arg0) {
 
         case 1:
             if (sBattleScene.unk_00->unk_44 == 2) {
-                BattleScene_ClearBothOwnerActiveFlags();
+                BattleScene_ClearBothOwnerIdleFlags();
             }
             sBattleScene.unk_00->unk_30++;
             break;
 
         case 2:
-            if (sActivePokemon[0]->presentationState.unk_168->unk_1C == -0x48) {
+            if (sActivePokemon[0]->presentationState.layout->unk_1C == -0x48) {
                 sBattleScene.unk_00->unk_30++;
             }
             break;
@@ -149,7 +149,7 @@ void BattleScene_TickCameraSubstateDefault(CameraNode* arg0) {
             if (arg0->overlay.stepIndex == 0xA) {
                 sBattleScene.unk_00->unk_30 = 0;
                 if (sBattleScene.unk_00->unk_44 == 1) {
-                    BattleScene_SetBothOwnerActiveFlags();
+                    BattleScene_SetBothOwnerIdleFlags();
                 }
             }
             break;
@@ -164,13 +164,13 @@ void BattleScene_TickCameraSubstateStripWipe(CameraNode* arg0) {
 
         case 1:
             if (sBattleScene.unk_00->unk_44 == 2) {
-                BattleScene_ClearBothOwnerActiveFlags();
+                BattleScene_ClearBothOwnerIdleFlags();
             }
             sBattleScene.unk_00->unk_30++;
             break;
 
         case 2:
-            if (sActivePokemon[0]->presentationState.unk_168->unk_1C == -0x48) {
+            if (sActivePokemon[0]->presentationState.layout->unk_1C == -0x48) {
                 sBattleScene.unk_00->unk_30++;
             }
             break;
@@ -234,7 +234,7 @@ void BattleScene_TickCameraSubstateStripWipe(CameraNode* arg0) {
             if (BattleScene_GetStripWipeState() == 0) {
                 sBattleScene.unk_00->unk_30 = 0;
                 if (sBattleScene.unk_00->unk_44 == 1) {
-                    BattleScene_SetBothOwnerActiveFlags();
+                    BattleScene_SetBothOwnerIdleFlags();
                 }
             }
             break;

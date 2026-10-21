@@ -79,13 +79,13 @@ typedef struct PresentationLayout {
 
 typedef struct PresentationState {
     /* 0x000 */ DisplayObject displayObject;
-    /* 0x168 */ PresentationLayout* unk_168;
+    /* 0x168 */ PresentationLayout* layout;
     /* 0x16C */ s32 unk_16C;
-    /* 0x170 */ s32 unk_170;
+    /* 0x170 */ s32 isIdle;
     /* 0x174 */ char unk174[0x4];
     /* 0x178 */ s32 unk_178;
-    /* 0x17C */ s32 unk_17C;
-    /* 0x180 */ s32 unk_180;
+    /* 0x17C */ s32 idleAnimation;
+    /* 0x180 */ s32 idleTimer;
     /* 0x184 */ s16 unk_184;
     /* 0x186 */ s16 unk_186;
     /* 0x188 */ f32 unk_188;
@@ -928,10 +928,10 @@ extern SpeciesModelTransform* D_84384578[];
 extern SpeciesModelTransform* D_84384580[];
 extern TagTeamPartners* sPlayerTagTeam[];
 extern u8 sPokemonWithAlternateSleepIdle[];
-extern u8 D_843845F0;
-extern u8 D_843845F4;
-extern u8 D_843845F8;
-extern u8 D_843845FC[];
+extern u8 sAerodactyl;
+extern u8 sFearow;
+extern u8 sFarfetchD;
+extern u8 sDoduoEvoLine[];
 extern s16 sChargeMoveCues[];
 extern unk_D_843847BC D_843847BC[2];
 extern unk_D_86B0C160 D_843847EC[3];
@@ -1204,11 +1204,11 @@ void BattleScene_StateRow7Slot4Nop(ActivePokemon* active_pokemon);
 
 //@src/fragments/battle_engine/battle_engine_2F1D60.c
 void BattleScene_TriggerOwnerModelAnimation(ActivePokemon* active_pokemon);
-void BattleScene_ClearParticipantOwnerActiveFlag(ActivePokemon* active_pokemon);
-void BattleScene_SetParticipantOwnerActiveFlag(ActivePokemon* active_pokemon);
-void BattleScene_ClearBothOwnerActiveFlags(void);
-void BattleScene_SetBothOwnerActiveFlags(void);
-void BattleScene_SetOwnerPoseFlag(PresentationLayout* arg0);
+void BattleScene_ClearParticipantOwnerIdleFlags(ActivePokemon* active_pokemon);
+void BattleScene_SetParticipantOwnerIdleFlags(ActivePokemon* active_pokemon);
+void BattleScene_ClearBothOwnerIdleFlags(void);
+void BattleScene_SetBothOwnerIdleFlags(void);
+void BattleScene_SetFlagToUpdatePokemonThumbnail(PresentationLayout* arg0);
 void BattleScene_LoadOwnerCameraFramingConstants(ActivePokemon* active_pokemon);
 void BattleScene_SetupOwnerCameraFraming(ActivePokemon* arg0, ActivePokemon* arg1);
 void BattleScene_OwnerCameraLifecycleNop(void);

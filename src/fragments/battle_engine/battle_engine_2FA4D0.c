@@ -1781,14 +1781,14 @@ void BattleHud_DrawOwnSideStatus(ActivePokemon* arg0, ActivePokemonState* arg1) 
 
     if (gSessionContext.mode != 0x10) {
         if (arg1->unk_10 == 3) {
-            BattleHud_DrawMonStatusBoxPlayer(arg0, arg0->presentationState.unk_168->unk_1C - 2, arg0->presentationState.unk_168->unk_1E - 0x3A, arg1->unk_1E,
+            BattleHud_DrawMonStatusBoxPlayer(arg0, arg0->presentationState.layout->unk_1C - 2, arg0->presentationState.layout->unk_1E - 0x3A, arg1->unk_1E,
                           1);
         } else {
-            BattleHud_DrawMonStatusBoxPlayer(arg0, arg0->presentationState.unk_168->unk_1C - 2, arg0->presentationState.unk_168->unk_1E - 0x3A, arg1->unk_1E,
+            BattleHud_DrawMonStatusBoxPlayer(arg0, arg0->presentationState.layout->unk_1C - 2, arg0->presentationState.layout->unk_1E - 0x3A, arg1->unk_1E,
                           0);
         }
 
-        if ((arg1->unk_10 != 3) && (arg0->presentationState.unk_168->unk_1C == 0x17)) {
+        if ((arg1->unk_10 != 3) && (arg0->presentationState.layout->unk_1C == 0x17)) {
             switch (arg1->unk_10) {
                 case 2:
                     if (arg1->unk_1C == 1) {
@@ -1840,14 +1840,14 @@ void BattleHud_DrawOpponentSideStatus(ActivePokemon* arg0, ActivePokemonState* a
 
     if (gSessionContext.mode != 0x10) {
         if (arg1->unk_10 == 3) {
-            BattleHud_DrawMonStatusBoxOpponent(arg0, arg0->presentationState.unk_168->unk_1C - 0x20, arg0->presentationState.unk_168->unk_1E - 2, arg1->unk_1E,
+            BattleHud_DrawMonStatusBoxOpponent(arg0, arg0->presentationState.layout->unk_1C - 0x20, arg0->presentationState.layout->unk_1E - 2, arg1->unk_1E,
                           1);
         } else {
-            BattleHud_DrawMonStatusBoxOpponent(arg0, arg0->presentationState.unk_168->unk_1C - 0x20, arg0->presentationState.unk_168->unk_1E - 2, arg1->unk_1E,
+            BattleHud_DrawMonStatusBoxOpponent(arg0, arg0->presentationState.layout->unk_1C - 0x20, arg0->presentationState.layout->unk_1E - 2, arg1->unk_1E,
                           0);
         }
 
-        if ((arg1->unk_10 != 3) && (arg0->presentationState.unk_168->unk_1C == 0x103)) {
+        if ((arg1->unk_10 != 3) && (arg0->presentationState.layout->unk_1C == 0x103)) {
             switch (arg1->unk_10) {
                 case 2:
                     if (arg1->unk_1C == 1) {

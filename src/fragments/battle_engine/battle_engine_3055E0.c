@@ -72,20 +72,20 @@ void BattleScene_SetCameraAtAndEyeFromAngles(CameraNode* arg0, f32 arg1, f32 arg
 void BattleScene_GetOwnerCameraAnchor(ActivePokemon* arg0, Vec3f* arg1) {
     UNUSED s32 pad;
     u8 sp18[] = {
-        0x52, 0x73, 0x59, 0x91, 0x5F, 0x82, 0x58, 0x66, 0x0A,
+        MAGNETON, KANGASKHAN, MUK, ZAPDOS, ONIX, GYARADOS, GRIMER, EXEGGCUTE, CATERPIE,
     };
 
     if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, sp18, 9) != 0) {
         BattleScene_GetOwnerBoneOrDefaultAnchor(arg0, arg1, 9);
     } else {
-        BattleScene_GetOwnerBoneOrDefaultAnchor(arg0, arg1, 0x64);
+        BattleScene_GetOwnerBoneOrDefaultAnchor(arg0, arg1, 100);
     }
 }
 
-void BattleScene_GetOwnerBoneOrDefaultAnchor(ActivePokemon* arg0, Vec3f* arg1, s32 arg2) {
-    if (GeoRender_FindAnchorPosition(&arg0->displayObject, arg2, arg1) == NULL) {
-        BattleAnim_GetOwnerDefaultAnchorPosition(arg0, arg1);
-        arg1->x = BattleScene_GetParticipantModelXOffset(arg0);
+void BattleScene_GetOwnerBoneOrDefaultAnchor(ActivePokemon* pokemon, Vec3f* arg1, s32 arg2) {
+    if (GeoRender_FindAnchorPosition(&pokemon->displayObject, arg2, arg1) == NULL) {
+        BattleAnim_GetOwnerDefaultAnchorPosition(pokemon, arg1);
+        arg1->x = BattleScene_GetParticipantModelXOffset(pokemon);
         arg1->z = 0.0f;
     }
 }
@@ -296,13 +296,13 @@ void BattleScene_UpdateCameraModelOffset(ActivePokemon* arg0, CameraNode* arg1) 
     UNUSED s32 pad[5];
     f32 sp3C = 0.0f;
 
-    if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F0, 1) != 0) {
+    if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &sAerodactyl, 1) != 0) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) / 1.5f;
-    } else if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F4, 1) != 0) {
+    } else if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &sFearow, 1) != 0) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 0.5f;
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F8, 1) != 0) && (arg0->state.flags & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &sFarfetchD, 1) != 0) && (arg0->state.flags & 0x200)) {
         sp3C = 2.0f * BattleAnim_GetOwnerModelHeight(arg0);
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, D_843845FC, 2) != 0) && (arg0->state.flags & 0x200)) {
+    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, sDoduoEvoLine, 2) != 0) && (arg0->state.flags & 0x200)) {
         sp3C = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
     }
 

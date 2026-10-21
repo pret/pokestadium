@@ -5,6 +5,7 @@
 #include "src/text_system.h"
 #include "src/matrix.h"
 #include "pokemon.h"
+#include "status.h"
 
 s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_length) {
     while (array_length--) {
@@ -197,31 +198,32 @@ void BattleScene_GetParticipantModelPosition(ActivePokemon* arg0, Vec3f* arg1) {
     arg1->z = arg0->displayObject.position.z;
 }
 
-void BattleAnim_GetOwnerDefaultAnchorPosition(ActivePokemon* arg0, Vec3f* arg1) {
-    f32 var_fs0 = 0.0f;
+void BattleAnim_GetOwnerDefaultAnchorPosition(ActivePokemon* pokemon, Vec3f* anchor_position) {
+    f32 y_offset = 0.0f;
 
-    if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F0, 1) != 0) {
-        var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) / 1.5f;
-    } else if (BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F4, 1) != 0) {
-        var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) * 0.5f;
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, &D_843845F8, 1) != 0) && (arg0->state.flags & 0x200)) {
-        var_fs0 = 2.0f * BattleAnim_GetOwnerModelHeight(arg0);
-    } else if ((BattleScene_ByteArrayContains(arg0->displayObject.objectType, D_843845FC, 2) != 0) && (arg0->state.flags & 0x200)) {
-        var_fs0 = BattleAnim_GetOwnerModelHeight(arg0) * 1.5f;
+    //guess: these are pokemon where their wins are higher than their head in their idle animation
+    if (BattleScene_ByteArrayContains(pokemon->displayObject.objectType, &sAerodactyl, 1) != 0) {
+        y_offset = BattleAnim_GetOwnerModelHeight(pokemon) / 1.5f;
+    } else if (BattleScene_ByteArrayContains(pokemon->displayObject.objectType, &sFearow, 1) != 0) {
+        y_offset = BattleAnim_GetOwnerModelHeight(pokemon) * 0.5f;
+    } else if ((BattleScene_ByteArrayContains(pokemon->displayObject.objectType, &sFarfetchD, 1) != 0) && (pokemon->state.flags & ACTIVE_AIRBORNE)) {
+        y_offset = 2.0f * BattleAnim_GetOwnerModelHeight(pokemon);
+    } else if ((BattleScene_ByteArrayContains(pokemon->displayObject.objectType, sDoduoEvoLine, 2) != 0) && (pokemon->state.flags & ACTIVE_AIRBORNE)) {
+        y_offset = BattleAnim_GetOwnerModelHeight(pokemon) * 1.5f;
     }
 
-    if (BattleScene_GetParticipantModelHeight(arg0) != 0.0f) {
-        arg1->x = arg0->displayObject.position.x;
-        arg1->y = arg0->displayObject.position.y + var_fs0;
-        arg1->z = arg0->displayObject.position.z;
+    if (BattleScene_GetParticipantModelHeight(pokemon) != 0.0f) {
+        anchor_position->x = pokemon->displayObject.position.x;
+        anchor_position->y = pokemon->displayObject.position.y + y_offset;
+        anchor_position->z = pokemon->displayObject.position.z;
     } else {
-        arg1->x = arg0->displayObject.position.x;
-        arg1->y = BattleAnim_GetOwnerModelHeight(arg0) + arg0->displayObject.position.y + var_fs0;
-        arg1->z = arg0->displayObject.position.z;
+        anchor_position->x = pokemon->displayObject.position.x;
+        anchor_position->y = BattleAnim_GetOwnerModelHeight(pokemon) + pokemon->displayObject.position.y + y_offset;
+        anchor_position->z = pokemon->displayObject.position.z;
     }
 
-    if (arg1->y < 0.0f) {
-        arg1->y = BattleAnim_GetOwnerModelHeight(arg0);
+    if (anchor_position->y < 0.0f) {
+        anchor_position->y = BattleAnim_GetOwnerModelHeight(pokemon);
     }
 }
 

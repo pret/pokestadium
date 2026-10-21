@@ -1085,18 +1085,19 @@ s32 GeoRender_IsModelFrameCurrent(void) {
     return var_v1;
 }
 
-Vec3f* GeoRender_FindAnchorPosition(DisplayObject* arg0, s16 arg1, Vec3f* arg2) {
+Vec3f* GeoRender_FindAnchorPosition(DisplayObject* display_object, s16 lookup_id, Vec3f* dest) {
     s32 i;
+    // FAKE
     s32 var_v0;
     u8 temp_v1;
     DisplayObject* var_a2;
 
-    for (i = 0; i < arg0->anchorCount; i++) {
-        if (arg1 == arg0->anchors[i].id) {
-            if (arg2 != NULL) {
-                *arg2 = arg0->anchors[i].position;
+    for (i = 0; i < display_object->anchorCount; i++) {
+        if (lookup_id == display_object->anchors[i].id) {
+            if (dest != NULL) {
+                *dest = display_object->anchors[i].position;
             }
-            return &arg0->anchors[i].position;
+            return &display_object->anchors[i].position;
         }
     }
 

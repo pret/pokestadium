@@ -91,10 +91,10 @@ static u8 sMewLearnsNothingNewInYellow[] = {
 static u8* sPokemonYellowHmAdditions[] = {
     sCharizardLearnsFlyInYellow, sButterfreeLearnsFlashInYellow, sVenonatLearnsFlashInYellow, sVenomothLearnsFlashInYellow, sDiglettLearnsCutInYellow, sDugtrioLearnsCutInYellow, sKabutopsLearnsCutInYellow, sMewtwoLearnsNothingNewInYellow, sMewLearnsNothingNewInYellow,
 };
-u8 D_843845F0 = 0x8E;
-u8 D_843845F4 = 0x16;
-u8 D_843845F8 = 0x53;
-u8 D_843845FC[] = { 0x55, 0x54 };
+u8 sAerodactyl = AERODACTYL;
+u8 sFearow = FEAROW;
+u8 sFarfetchD = FARFETCH_D;
+u8 sDoduoEvoLine[] = { DODRIO, DODUO };
 
 char** sBattleMessagesTable;
 char** sPokemonNameTable;
