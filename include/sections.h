@@ -574,7 +574,7 @@ extern u8 _7820E0_ROM_START[];
 extern u8 _7820E0_ROM_END[];
 
 
-extern u8 D_124570[];
+extern u8 fragment6_misc_ROM_START[];
 
 extern u8 textdata_ROM_START[];     // 783760
 extern u8 textdata_ROM_END[];       // 783760
