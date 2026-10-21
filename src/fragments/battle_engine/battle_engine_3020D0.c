@@ -699,7 +699,7 @@ void BattleScene_ClearParticipantMessageBuffer(ActivePokemon* active_pokemon) {
 void BattleScene_BuildParticipantMessage(ActivePokemon* arg0, s32 arg1) {
     gBattleMessageQueues->unk_000 = arg0->sessionTeams->teamMember[arg0->state.unk_2C]->unk_001;
     arg0->unk_8C4.unk_00 = 1;
-    Text_SetStringToken(0x19, arg0->unk_724->pokemonPicked[arg0->state.unk_08].unk_30);
+    Text_SetStringToken(0x19, arg0->teamRoster->pokemonPicked[arg0->state.rosterIndex].unk_30);
     Text_GetString(arg0->unk_8C4.unk_48, 0x40, sBattleMessagesTable, arg1);
 }
 

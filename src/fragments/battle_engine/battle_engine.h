@@ -32,7 +32,7 @@ typedef struct unk_D_84390010_168 {
 typedef struct ActivePokemonState {
     /* 0x00 */ char unk00[0x4];
     /* 0x04 */ u32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x08 */ s32 rosterIndex;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ u32 unk_10;
     /* 0x14 */ s32 unk_14;
@@ -157,7 +157,7 @@ typedef struct ActivePokemon {
     /* 0x4EC */ DisplayObject unk_4EC;
     /* 0x654 */ ActivePokemonState state;
     /* 0x720 */ BattleSessionTeams* sessionTeams;
-    /* 0x724 */ TeamRoster* unk_724;
+    /* 0x724 */ TeamRoster* teamRoster;
     /* 0x728 */ PresentationState unk_728;
     /* 0x8C4 */ MonCaptionState unk_8C4;
     /* 0x94C */ SpeciesLearnsetBuffer redBlueLearnsets[3];

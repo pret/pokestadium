@@ -293,7 +293,7 @@ void func_8431FCC4(void) {
 
 s32 BattleScene_AnimateDisplayedHpToRuntime(ActivePokemon* arg0) {
     BattleMonRuntime* temp_s1 = &arg0->state.runtime;
-    BattleMon* temp_s2 = &arg0->unk_724->pokemonPicked[arg0->state.unk_08];
+    BattleMon* temp_s2 = &arg0->teamRoster->pokemonPicked[arg0->state.rosterIndex];
     f32 temp_fs0;
     UNUSED s16 pad;
     s16 sp30;
@@ -398,17 +398,17 @@ void Battle_StartTurn(void) {
         sBattleScene.unk_00->unk_2C = !sBattleScene.unk_00->unk_2C;
     }
 
-    if (sActivePokemon[0]->unk_724->unk_000 & 2) {
+    if (sActivePokemon[0]->teamRoster->unk_000 & 2) {
         if (sBattleScene.unk_00->unk_2C == 0) {
-            BattleAI_RecordUsedMove(temp_s0->unk_08, temp_s1->unk_08, 0);
+            BattleAI_RecordUsedMove(temp_s0->rosterIndex, temp_s1->rosterIndex, 0);
         } else {
-            BattleAI_RecordUsedMove(temp_s0->unk_08, temp_s1->unk_08, 1);
+            BattleAI_RecordUsedMove(temp_s0->rosterIndex, temp_s1->rosterIndex, 1);
         }
-    } else if (sActivePokemon[1]->unk_724->unk_000 & 2) {
+    } else if (sActivePokemon[1]->teamRoster->unk_000 & 2) {
         if (sBattleScene.unk_00->unk_2C == 1) {
-            BattleAI_RecordUsedMove(temp_s1->unk_08, temp_s0->unk_08, 0);
+            BattleAI_RecordUsedMove(temp_s1->rosterIndex, temp_s0->rosterIndex, 0);
         } else {
-            BattleAI_RecordUsedMove(temp_s1->unk_08, temp_s0->unk_08, 1);
+            BattleAI_RecordUsedMove(temp_s1->rosterIndex, temp_s0->rosterIndex, 1);
         }
     }
 
@@ -433,8 +433,8 @@ void BattleScene_InitializeSwitchActions(void) {
     sp2C = sBattleScene.unk_00->unk_2C;
 
     if ((sp28->unk_2D == 0xF) || (sp28->unk_2D == 0x10)) {
-        if (sActivePokemon[0]->unk_724->unk_000 & 2) {
-            BattleAI_RecordUsedMove(sp28->unk_08, sp24->unk_08, 2);
+        if (sActivePokemon[0]->teamRoster->unk_000 & 2) {
+            BattleAI_RecordUsedMove(sp28->rosterIndex, sp24->rosterIndex, 2);
         }
         sBattleScene.unk_00->unk_2C = 0;
         sBattleScene.unk_00->unk_2A = 0;
@@ -443,8 +443,8 @@ void BattleScene_InitializeSwitchActions(void) {
         func_84373570(sActivePokemon[0]);
         sBattleScene.unk_00->unk_2C = sp2C;
     } else {
-        if (sActivePokemon[0]->unk_724->unk_000 & 2) {
-            BattleAI_RecordUsedMove(sp24->unk_08, sp28->unk_08, 2);
+        if (sActivePokemon[0]->teamRoster->unk_000 & 2) {
+            BattleAI_RecordUsedMove(sp24->rosterIndex, sp28->rosterIndex, 2);
         }
         sBattleScene.unk_00->unk_2C = 1;
         sBattleScene.unk_00->unk_2A = 1;
@@ -461,8 +461,8 @@ s32 BattleScene_PrepareReplacementTransition(void) {
     ActivePokemonState* sp20 = &sActivePokemon[!sBattleScene.unk_00->unk_2C]->state;
 
     if ((sActivePokemon[sBattleScene.unk_00->unk_2C]->state.unk_2D == 0xF) || (sp24->unk_2D == 0x10)) {
-        if (sActivePokemon[sBattleScene.unk_00->unk_2C]->unk_724->unk_000 & 2) {
-            BattleAI_RecordUsedMove(temp_a3->unk_08, sp20->unk_08, 2);
+        if (sActivePokemon[sBattleScene.unk_00->unk_2C]->teamRoster->unk_000 & 2) {
+            BattleAI_RecordUsedMove(temp_a3->rosterIndex, sp20->rosterIndex, 2);
         }
         Battle_ClearRuntimeFlags(sActivePokemon[sBattleScene.unk_00->unk_2C], 0x1800);
         sBattleScene.unk_00->unk_20 = 0;
@@ -2460,7 +2460,7 @@ void BattleScene_Phase15(CameraNode* arg0) {
             } else {
                 D_84390204->sessionTeams->displayModel = D_84390200->sessionTeams->displayModel;
             }
-            D_84390204->sessionTeams->unk_04 = &D_84390204->unk_724->pokemonPicked[D_84390204->state.unk_08];
+            D_84390204->sessionTeams->unk_04 = &D_84390204->teamRoster->pokemonPicked[D_84390204->state.rosterIndex];
             D_84390204->sessionTeams->uniqueStatusFlags |= 0x80;
             sBattleScene.unk_00->unk_20 += 1;
             break;

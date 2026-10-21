@@ -5244,7 +5244,7 @@ void BattleAI_SyncTeamStateFromRuntime(void) {
             var_v1 = 0;
         }
 
-        var_s3->unk_012 = sActivePokemon[i]->state.unk_08 + var_v1;
+        var_s3->unk_012 = sActivePokemon[i]->state.rosterIndex + var_v1;
         temp_s0 = &var_s3->unk_016[var_s3->unk_012].unk_12;
 
         temp_s0->unk_0C = temp_s2->unk_0C;
@@ -5305,7 +5305,7 @@ void BattleAI_SyncTeamStateFromRuntime(void) {
 
         for (j = 0; j < D_843C5568[i].unk_008; j++) {
             temp_s0 = &D_843C5568[i].unk_016[j].unk_12;
-            temp_s0->unk_0C = sActivePokemon[i]->unk_724->pokemonPicked[j].unk_02;
+            temp_s0->unk_0C = sActivePokemon[i]->teamRoster->pokemonPicked[j].unk_02;
 
             if ((temp_s0->unk_0C > 0) && (D_843C5568[i].unk_012 != j)) {
                 BattleAI_ResetTeamState(&D_843C5568[i].unk_016[j]);
@@ -5588,7 +5588,7 @@ s32 BattleAI_ChooseAction(UNUSED s32 arg0) {
             var_v1 = 0;
         }
 
-        if (D_843C60A8->unk_10 != (sActivePokemon[0]->state.unk_08 + var_v1)) {
+        if (D_843C60A8->unk_10 != (sActivePokemon[0]->state.rosterIndex + var_v1)) {
             D_8438AFB0 += 1;
             goto label1;
         }

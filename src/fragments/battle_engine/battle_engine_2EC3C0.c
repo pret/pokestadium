@@ -15,6 +15,7 @@
 #include "src/memory.h"
 #include "moves.h"
 #include "pokemon.h"
+#include "status.h"
 
 static PokemonBattleCues sSide1BattleCues;
 static PokemonBattleCues sSide2BattleCues;
@@ -339,7 +340,7 @@ void Battle_MakeSubstitute(ActivePokemon* active_pokemon) {
  * and flags the session for a model reload (0x80).
  */
 void BattleScene_DestroySubstitute(ActivePokemon* active_pokemon) {
-    active_pokemon->sessionTeams->unk_04 = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    active_pokemon->sessionTeams->unk_04 = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
     active_pokemon->sessionTeams->uniqueStatusFlags |= 0x80;
     active_pokemon->sessionTeams->displayModel = active_pokemon->state.model;
 }
@@ -1114,7 +1115,7 @@ void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
     ActivePokemonState* pokemon_state;
 
     cue_index = sBattleSceneStateRowTable[row_index].unk_20;
-    party_pokemon = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    party_pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
     pokemon_state = &active_pokemon->state;
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[cue_index];
     frozen_flag = pokemon_state->flags & 2;
@@ -1155,7 +1156,7 @@ void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
 void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
     ActivePokemonState* state = &active_pokemon->state;
-    BattleMon* party_pokemon_ptr = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* party_pokemon_ptr = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
     if ((state->flags & 0x4000) || (state->flags & 2) || (party_pokemon_ptr->statusCondition & 7)) {
         sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
@@ -1178,7 +1179,7 @@ void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
  */
 void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
-    BattleMon* party_pokemon_ptr = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* party_pokemon_ptr = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
     ActivePokemonState* state = &active_pokemon->state;
 
     if ((active_pokemon->state.flags & 0x4000) || (state->flags & 2) || (party_pokemon_ptr->statusCondition & 7)) {
@@ -1214,7 +1215,7 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
  */
 void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
-    BattleMon* party_pokemon_ptr = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* party_pokemon_ptr = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
     ActivePokemonState* state;
 
     if ((active_pokemon->state.flags & 0x4000) || (party_pokemon_ptr->statusCondition & 0x20) || (party_pokemon_ptr->statusCondition & 7)) {
@@ -1369,7 +1370,7 @@ void BattleScene_TickRow8PlayMoveEffectScriptB(ActivePokemon* active_pokemon) {
  */
 void BattleScene_EnterRow9SetEventTrack(ActivePokemon* active_pokemon) {
     UNUSED s32 pad[3];
-    BattleMon* party_pokemon = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* party_pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
     s32 cue_index;
 
     active_pokemon->animationTimer = 0;
@@ -1819,7 +1820,7 @@ void BattleAnim_SetModelEventTrackAndState(ActivePokemon* active_pokemon, s32 cu
  */
 s32 BattleScene_IsParticipantIncapacitated(ActivePokemon* active_pokemon) {
     ActivePokemonState* state = &active_pokemon->state;
-    BattleMon* pokemon = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
     if ((state->flags & 2) || (pokemon->statusCondition & 7) || ((state->flags & 0x200) && !(state->flags & 0x400)) ||
         (state->flags & 0x4000)) {
@@ -1941,7 +1942,7 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 fr
     s32 charge_move;
     MovePresentationCue* move_cue;
 
-    party_pokemon = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    party_pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
     charge_move = sChargeMoveCues[active_pokemon->state.runtime.usedMove - 1];
     move_cue = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[charge_move];
     idle_cue = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->idleCues;
@@ -2295,7 +2296,7 @@ void BattleAnim_TickParticipantStatusAnimation(ActivePokemon* active_pokemon) {
  * participant whose sleep animation is not running.
  */
 void BattleAnim_TriggerStatusAfflictionCry(ActivePokemon* active_pokemon) {
-    BattleMon* party_pokemon = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* party_pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
     if ((party_pokemon->statusCondition & 7) && !(active_pokemon->state.flags & 1)) {
         BattleAnim_SetModelEventTrackAndState(active_pokemon, BATTLE_CUE_SLEEP_IDLE, 2);
@@ -2371,7 +2372,7 @@ void BattleScene_InitializeParticipantModel(ActivePokemon* active_pokemon) {
     ModelAnim_SetAnimation(&active_pokemon->displayObject, 0);
     ModelAnim_SetFrame(&active_pokemon->displayObject, 0);
 
-    active_pokemon->sessionTeams->unk_04 = active_pokemon->unk_724->pokemonPicked;
+    active_pokemon->sessionTeams->unk_04 = active_pokemon->teamRoster->pokemonPicked;
     if ((active_pokemon->displayObject.objectType == DIGLETT) || (active_pokemon->displayObject.objectType == DUGTRIO)) {
         active_pokemon->displayObject.node.renderFlags &= ~0x40;
     } else {

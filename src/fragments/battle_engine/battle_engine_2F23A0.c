@@ -18,7 +18,7 @@ s32 BattleScene_ByteArrayContains(u8 lookup, u8* array, s32 array_length) {
 }
 
 BattleMon* BattleScene_GetParticipantSessionMon(ActivePokemon* active_pokemon) {
-    BattleMon* ptr = &active_pokemon->sessionTeams->teamMember[active_pokemon->state.unk_2C]->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* ptr = &active_pokemon->sessionTeams->teamMember[active_pokemon->state.unk_2C]->pokemonPicked[active_pokemon->state.rosterIndex];
 
     return ptr;
 }
@@ -169,7 +169,7 @@ void BattleScene_GetParticipantModelRotation(ActivePokemon* arg0, Vec3s* arg1) {
 }
 
 u16 Battle_GetActiveMonHp(ActivePokemon* active_pokemon) {
-    BattleMon* ptr = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* ptr = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
     return ptr->unk_02;
 }
@@ -275,7 +275,7 @@ char* Battle_GetActiveMoveName(ActivePokemon* active_pokemon) {
 }
 
 u8* Battle_GetActiveMonNickname(ActivePokemon* active_pokemon) {
-    return active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08].unk_30;
+    return active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex].unk_30;
 }
 
 void BattleScene_SetParticipantModelFlags(ActivePokemon* active_pokemon, s32 animation_flags1, s32 animation_flags2) {
@@ -367,7 +367,7 @@ void Battle_SetModelToStatusAnim(ActivePokemon* active_pokemon) {
 }
 
 void BattleScene_BindParticipantRosterForSide(ActivePokemon* active_pokemon, s32 team_member_index) {
-    active_pokemon->unk_724 = active_pokemon->sessionTeams->teamMember[team_member_index];
+    active_pokemon->teamRoster = active_pokemon->sessionTeams->teamMember[team_member_index];
 }
 
 void BattleScene_SetParticipantSelectedSide(ActivePokemon* active_pokemon, s32 team_member_index) {
@@ -383,7 +383,7 @@ void BattleScene_RebindParticipantToSide(ActivePokemon* arg0, s32 arg1) {
 
     BattleScene_BindParticipantRosterForSide(arg0, arg1);
     BattleScene_SetParticipantSelectedSide(arg0, arg1);
-    temp_v0->unk_08 = temp_v0->unk_18;
+    temp_v0->rosterIndex = temp_v0->unk_18;
     arg0->unk_728.unk_16C = temp_v0->unk_2B;
 }
 
@@ -395,8 +395,8 @@ s32 Battle_HasUsableSleepStatusTarget(ActivePokemon* active_pokemon) {
     temp_s0 = &active_pokemon->state;
 
     for (i = 0; i < BattleScene_GetSelectedSideTeamSize(active_pokemon); i++) {
-        ptr = &active_pokemon->unk_724->pokemonPicked[i];
-        if ((ptr->statusCondition & 0x20) && (active_pokemon->state.runtime.unk_16[temp_s0->unk_08 + temp_s0->unk_2B * 3] == 0)) {
+        ptr = &active_pokemon->teamRoster->pokemonPicked[i];
+        if ((ptr->statusCondition & 0x20) && (active_pokemon->state.runtime.unk_16[temp_s0->rosterIndex + temp_s0->unk_2B * 3] == 0)) {
             return 1;
         }
     }
@@ -405,7 +405,7 @@ s32 Battle_HasUsableSleepStatusTarget(ActivePokemon* active_pokemon) {
         for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(active_pokemon); i++) {
             ptr = &active_pokemon->sessionTeams->teamMember[temp_s0->unk_2B == 0]->pokemonPicked[i];
             if ((ptr->statusCondition & 0x20) &&
-                (active_pokemon->state.runtime.unk_16[temp_s0->unk_08 + (temp_s0->unk_2B == 0) * 3] == 0)) {
+                (active_pokemon->state.runtime.unk_16[temp_s0->rosterIndex + (temp_s0->unk_2B == 0) * 3] == 0)) {
                 return 1;
             }
         }
@@ -422,8 +422,8 @@ s32 Battle_HasUsableMajorStatusTarget(ActivePokemon* active_pokemon) {
     temp_s0 = &active_pokemon->state;
 
     for (i = 0; i < BattleScene_GetSelectedSideTeamSize(active_pokemon); i++) {
-        ptr = &active_pokemon->unk_724->pokemonPicked[i];
-        if ((ptr->statusCondition & 7) && (active_pokemon->state.runtime.unk_16[temp_s0->unk_08 + temp_s0->unk_2B * 3] == 0)) {
+        ptr = &active_pokemon->teamRoster->pokemonPicked[i];
+        if ((ptr->statusCondition & 7) && (active_pokemon->state.runtime.unk_16[temp_s0->rosterIndex + temp_s0->unk_2B * 3] == 0)) {
             return 1;
         }
     }
@@ -431,7 +431,7 @@ s32 Battle_HasUsableMajorStatusTarget(ActivePokemon* active_pokemon) {
     if (active_pokemon->sessionTeams->unk_01 == 2) {
         for (i = 0; i < BattleScene_GetOpposingSelectedSideTeamSize(active_pokemon); i++) {
             ptr = &active_pokemon->sessionTeams->teamMember[temp_s0->unk_2B == 0]->pokemonPicked[i];
-            if ((ptr->statusCondition & 7) && (active_pokemon->state.runtime.unk_16[temp_s0->unk_08 + (temp_s0->unk_2B == 0) * 3] == 0)) {
+            if ((ptr->statusCondition & 7) && (active_pokemon->state.runtime.unk_16[temp_s0->rosterIndex + (temp_s0->unk_2B == 0) * 3] == 0)) {
                 return 1;
             }
         }

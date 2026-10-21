@@ -13,7 +13,7 @@ void BattleAnim_StartFreezeStatusAnimation(ActivePokemon* active_pokemon) {
 
     runtime = &active_pokemon->state.runtime;
     pokemon_state = &active_pokemon->state;
-    party_pokemon = &active_pokemon->unk_724->pokemonPicked[pokemon_state->unk_08];
+    party_pokemon = &active_pokemon->teamRoster->pokemonPicked[pokemon_state->rosterIndex];
     hit_cue = &sSideBattleCues[side_index]->hitCue;
 
     if ((party_pokemon->statusCondition & 0x20) && (pokemon_state->flags & 2)) {
@@ -49,7 +49,7 @@ void BattleAnim_ClearFreezeStatusAnimation(ActivePokemon* arg0) {
 }
 
 void BattleAnim_ResetFreezeStatusAndRestoreAnimation(ActivePokemon* arg0) {
-    BattleMon* ptr = &arg0->unk_724->pokemonPicked[arg0->state.unk_08];
+    BattleMon* ptr = &arg0->teamRoster->pokemonPicked[arg0->state.rosterIndex];
 
     if (arg0->state.flags & 2) {
         ptr->statusCondition = 0;
@@ -72,7 +72,7 @@ void BattleAnim_ClearFreezeStatusAnimationIfThawed(ActivePokemon* arg0) {
 void BattleAnim_UpdateSleepStatusAnimation(ActivePokemon* active_pokemon) {
     ActivePokemonState* pokemon_state = &active_pokemon->state;
     BattleMonRuntime* runtime = &pokemon_state->runtime;
-    BattleMon* party_pokemon = &active_pokemon->unk_724->pokemonPicked[active_pokemon->state.unk_08];
+    BattleMon* party_pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
     if ((sBattleScene.unk_00->unk_38 != 0xB) || (sBattleScene.unk_00->unk_20 >= 6)) {
         if ((party_pokemon->statusCondition & 7) && (runtime->unk_15 & 7) && !(active_pokemon->state.flags & 1)) {
@@ -96,7 +96,7 @@ void BattleAnim_UpdateSleepStatusAnimation(ActivePokemon* active_pokemon) {
 }
 
 void BattleAnim_EndSleepStatusAnimation(ActivePokemon* arg0) {
-    BattleMon* ptr = &arg0->unk_724->pokemonPicked[arg0->state.unk_08];
+    BattleMon* ptr = &arg0->teamRoster->pokemonPicked[arg0->state.rosterIndex];
 
     if (arg0->state.flags & 1) {
         ptr->statusCondition = 0;

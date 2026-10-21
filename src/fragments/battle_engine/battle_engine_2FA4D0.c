@@ -671,7 +671,7 @@ void BattleHud_DrawMonStatusBoxPlayer(ActivePokemon* arg0, s16 arg1, s16 arg2, u
     u32 var_v1;
 
     sp80 = arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C];
-    sp7C = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.unk_08];
+    sp7C = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.rosterIndex];
 
     if (sp7C->unk_02 == 0) {
         var_v1 = 1;
@@ -759,7 +759,7 @@ void BattleHud_DrawMonStatusBoxOpponent(ActivePokemon* arg0, s16 arg1, s16 arg2,
     u32 var_v1;
 
     sp80 = arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C];
-    sp7C = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.unk_08];
+    sp7C = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.rosterIndex];
 
     if (sp7C->unk_02 == 0) {
         var_v1 = 1;
@@ -1001,7 +1001,7 @@ void BattleHud_DrawMoveSelectMenu(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 a
     BattleMon* sp58;
     UNUSED s32 pad;
 
-    sp58 = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.unk_08];
+    sp58 = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.rosterIndex];
     temp_s0 = &arg0->state.runtime;
 
     Battle_DrawGradientRectWrapper(arg1 + 1, arg2 + 1, 0xC7, 0x38, &D_84385860[arg3], &D_84385870[arg3]);
@@ -1392,7 +1392,7 @@ void BattleHud_DrawTeamStatusList(ActivePokemon* arg0, TeamRoster* arg1, s16 arg
 void BattleHud_DrawDoublesTeamStatusList(ActivePokemon* arg0, s16 arg1, s16 arg2, s32 arg3) {
     TeamRoster* temp_s0;
     TeamRoster* temp_s1;
-    BattleMon* ptr = &arg0->unk_724->pokemonPicked[0];
+    BattleMon* ptr = &arg0->teamRoster->pokemonPicked[0];
     s32 i;
     Color_RGB8* sp88[] = {
         D_84385888,
@@ -1410,7 +1410,7 @@ void BattleHud_DrawDoublesTeamStatusList(ActivePokemon* arg0, s16 arg1, s16 arg2
     BattleMon* sp5C[6];
 
     temp_s0 = arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C];
-    temp_s1 = arg0->unk_724;
+    temp_s1 = arg0->teamRoster;
 
     sp5C[5] = &temp_s1->pokemonPicked[0];
     sp5C[5] = &temp_s1->pokemonPicked[0];
@@ -1469,7 +1469,7 @@ void BattleHud_DrawCompactMonStatusBox(ActivePokemon* arg0, s16 arg1, s16 arg2, 
     u16 tmp;
     BattleMon* sp40;
 
-    sp40 = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.unk_08];
+    sp40 = &arg0->sessionTeams->teamMember[arg0->unk_728.unk_16C]->pokemonPicked[arg0->state.rosterIndex];
     temp_v0 = &arg0->state;
 
     if (sp40->unk_02 == 0) {
@@ -1802,7 +1802,7 @@ void BattleHud_DrawOwnSideStatus(ActivePokemon* arg0, ActivePokemonState* arg1) 
                                           arg0->sessionTeams->teamMember[var_v1]->unk_001);
                             BattleHud_DrawTeamStatusList(arg0, arg0->sessionTeams->teamMember[var_v1 == 0], 0xC6, 0xF,
                                           arg0->sessionTeams->teamMember[var_v1 == 0]->unk_001);
-                        } else if (arg0->unk_724->numberOfPokemonBrought < 4) {
+                        } else if (arg0->teamRoster->numberOfPokemonBrought < 4) {
                             BattleHud_DrawTeamStatusList(arg0, arg0->sessionTeams->teamMember[0], 0x60, 0xF, sp34->unk_001);
                         } else {
                             BattleHud_DrawDoublesTeamStatusList(arg0, 0x60, 0xF, sp34->unk_001);
@@ -1861,7 +1861,7 @@ void BattleHud_DrawOpponentSideStatus(ActivePokemon* arg0, ActivePokemonState* a
                                           arg0->sessionTeams->teamMember[sp20 == 0]->unk_001);
                             BattleHud_DrawTeamStatusList(arg0, arg0->sessionTeams->teamMember[sp20], 0x7C, 0x79,
                                           arg0->sessionTeams->teamMember[sp20]->unk_001);
-                        } else if (arg0->unk_724->numberOfPokemonBrought < 4) {
+                        } else if (arg0->teamRoster->numberOfPokemonBrought < 4) {
                             BattleHud_DrawTeamStatusList(arg0, arg0->sessionTeams->teamMember[0], 0x7C, 0x79, sp24->unk_001);
                         } else {
                             BattleHud_DrawDoublesTeamStatusList(arg0, 0x18, 0x79, sp24->unk_001);
