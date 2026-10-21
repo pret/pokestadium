@@ -16,7 +16,7 @@ typedef struct unk_D_83003CE0 {
     /* 0x90 */ char* unk_90;
     /* 0x94 */ char* unk_94;
     /* 0x98 */ char* unk_98;
-    /* 0x9C */ char unk9C[0x64];
+    /* 0x9C */ char unk_9C[100];
 } unk_D_83003CE0; // size = 0x100
 
 typedef struct SpeciesQualificationStatus {
@@ -26,8 +26,8 @@ typedef struct SpeciesQualificationStatus {
 
 typedef struct QualifyingPokemonDisplayRow {
     /* 0x00 */ SpeciesQualificationStatus species_listed[6];
-    /* 0x18 */ struct QualifyingPokemonDisplayRow* below_neighbour;
-    /* 0x1C */ struct QualifyingPokemonDisplayRow* above_neighbour;
+    /* 0x18 */ struct QualifyingPokemonDisplayRow* below_neighbor;
+    /* 0x1C */ struct QualifyingPokemonDisplayRow* above_neighbor;
 } QualifyingPokemonDisplayRow; // size = 0x20
 
 typedef struct QualifyingPokemonDisplay {
@@ -40,12 +40,12 @@ typedef struct QualifyingPokemonDisplay {
     /* 0x0C */ s16 row_draw_budget;  // -1 = continuous, 0 = skip rows, positive = row draws remaining.
     /* 0x10 */ QualifyingPokemonDisplayRow* top_row;
     /* 0x14 */ QualifyingPokemonDisplayRow row_buffer[6]; // Circular buffer: 5 visible rows plus 1 scroll row.
-} QualifyingPokemonDisplay; // size = 0xD4
+} QualifyingPokemonDisplay;                               // size = 0xD4
 
 extern unk_D_83003CE0 D_83003CE0;
 extern unk_D_83003CE0 D_83003DE0;
 
-extern char** battle_mode_labels;
+extern char** sBattleModeLabels;
 
 char* RentalRules_GetPokemonName(s32 file_number);
 void RentalRules_LoadBackgroundArchive(void);
@@ -103,7 +103,6 @@ void RentalRules_QualifyingSpeciesWindowUpdate(void);
 void RentalRules_QualifyingSpeciesWindowDraw(void);
 void RentalRules_QualifyingSpeciesWindowOpen(void);
 s32 RentalRules_QualifyingSpeciesWindowIsActive(void);
-s32 RentalRules_GetQualifyingSpeciesDisplayOpeningProgress(void);
-
+s32 RentalRules_GetSpeciesWindowOpeningProgress(void);
 
 #endif // _FRAGMENT55_H_

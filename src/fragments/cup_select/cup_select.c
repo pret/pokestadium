@@ -18,18 +18,18 @@
 #define SELECTING_DIVISION 1
 #define SELECTED_DIVISION 2
 
-static BinArchive* cup_background_bin;
-static void* cup_background;
-static GraphNode* render_node;
-static GraphNode* division_render;
-static GraphNode* arrow_render;
-static DisplayObject division_listings[4];
-static DisplayObject arrows[3];
+static BinArchive* sCupBackgroundBin;
+static void* sCupBackground;
+static GraphNode* sRenderNode;
+static GraphNode* sDivisionRender;
+static GraphNode* sArrowRender;
+static DisplayObject sDivisionListings[4];
+static DisplayObject sArrows[3];
 static ModeSettings D_82E023A0;
-static s16 hovered_division;
-static s16 latest_unlocked_division;
+static s16 sHoveredDivision;
+static s16 sLatestUnlockedDivision;
 
-static u32 render_block[] = {
+static u32 sRenderBlock[] = {
     0x0C000000, 0x05000000, 0x0B00002D,  0x00000000, 0x028001E0, 0x00000000, 0xFDBD0000, 0x00000243,
     0x05000000, 0x0D000000, 0x05000000,  0x14000000, 0x00000000, 0xFFFFFF32, 0x16FFFFFF, 0x0F000002,
     0x05000000, 0x0A000000, &D_800AC840, 0x06000000, 0x06000000, 0x06000000, 0x06000000, 0x01000000,
@@ -165,9 +165,10 @@ static Gfx D_82E01480[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
-static u32 division_block[] = {
-    0x17000000, 0x00000000, 0x00000000,    0x00000000, D_82E01180, 0x05000000, 0x22050000,
-    0x00000000, 0x08000000, CupSelect_IconGeoPostCallback, 0x00000000, 0x06000000, 0x01000000, 0x00000000,
+static u32 sDivisionBlock[] = {
+    0x17000000, 0x00000000, 0x00000000, 0x00000000, D_82E01180,
+    0x05000000, 0x22050000, 0x00000000, 0x08000000, CupSelect_IconGeoPostCallback,
+    0x00000000, 0x06000000, 0x01000000, 0x00000000,
 };
 static Vtx D_82E01838[] = {
     VTX(-38, 18, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),      VTX(-38, 0, 0, 0, 576, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -188,9 +189,10 @@ static Gfx D_82E018B8[] = {
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
 };
-static u32 arrow_block[] = {
-    0x17000000, 0x00000000, 0x00000000,    0x00000000, D_82E01838, 0x05000000, 0x22050000,
-    0x00000000, 0x08000000, CupSelect_DividerGeoPostCallback, 0x00000000, 0x06000000, 0x01000000,
+static u32 sArrowBlock[] = {
+    0x17000000, 0x00000000, 0x00000000, 0x00000000, D_82E01838,
+    0x05000000, 0x22050000, 0x00000000, 0x08000000, CupSelect_DividerGeoPostCallback,
+    0x00000000, 0x06000000, 0x01000000,
 };
 
 void CupSelect_PollController(void) {
@@ -213,8 +215,10 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
 
     Gfx_DrawTextureIa8((left + pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_LEFT_SECTION_CORNER, 0x10, 0);
     Gfx_DrawTextureIa8((left + pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_LEFT_SECTION_CORNER, 0x10, 0);
-    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_RIGHT_SECTION_CORNER, 0x10, 0);
-    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_RIGHT_SECTION_CORNER, 0x10, 0);
+    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, (bottom + pulse) - 8, 0x10, 0x10, BOTTOM_RIGHT_SECTION_CORNER,
+                       0x10, 0);
+    Gfx_DrawTextureIa8(((left + right) - pulse) - 8, ((bottom + top) - pulse) - 8, 0x10, 0x10, TOP_RIGHT_SECTION_CORNER,
+                       0x10, 0);
 
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
@@ -222,12 +226,12 @@ void CupSelect_DrawSelectionCorners(s16 left, s16 bottom, s16 right, s16 top, u8
 }
 
 s32 CupSelect_IconGeoPostCallback(s32 arg0, UNUSED unk_func_80011B94* arg1) {
-    s32 temp_a3;
+    s32 var_a3_2;
     s32 var_t0;
 
     if (arg0 == 5) {
-        temp_a3 = D_8006F09C->node.callbackArg;
-        if (latest_unlocked_division >= temp_a3) {
+        var_a3_2 = D_8006F09C->node.callbackArg;
+        if (sLatestUnlockedDivision >= var_a3_2) {
             var_t0 = 0xFF;
         } else {
             var_t0 = 0x80;
@@ -235,7 +239,7 @@ s32 CupSelect_IconGeoPostCallback(s32 arg0, UNUSED unk_func_80011B94* arg1) {
 
         gDPPipeSync(gDisplayListHead++);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, var_t0);
-        gSPSegment(gDisplayListHead++, 0x0F, Memmap_GetSegmentVaddr(D_82E01170[temp_a3]));
+        gSPSegment(gDisplayListHead++, 0x0F, Memmap_GetSegmentVaddr(D_82E01170[var_a3_2]));
         gSPDisplayList(gDisplayListHead++, D_82E01480);
 
         GeoRender_ApplyMaterialState();
@@ -249,7 +253,7 @@ s32 CupSelect_DividerGeoPostCallback(s32 arg0, UNUSED unk_func_80011B94* arg1) {
     if (arg0 == 5) {
         s32 tmp = D_8006F09C->node.callbackArg;
 
-        if (tmp < latest_unlocked_division) {
+        if (tmp < sLatestUnlockedDivision) {
             var_a3 = 0xFF;
         } else {
             var_a3 = 0x80;
@@ -267,71 +271,71 @@ s32 CupSelect_DividerGeoPostCallback(s32 arg0, UNUSED unk_func_80011B94* arg1) {
 
 void CupSelect_RenderFrame(s32 mode, s32 counter) {
     BgStage_DrawFrame();
-    Gfx_DrawTiledRgba16Image(cup_background);
-    Geo_RenderRootNode(render_node);
- 
+    Gfx_DrawTiledRgba16Image(sCupBackground);
+    Geo_RenderRootNode(sRenderNode);
+
     if (mode == SELECTED_CUP) {
         if ((counter >= 0) && (counter < 11)) {
-            division_listings[0].rotation.y = ((10 - counter) * -0x5000) / 10;
+            sDivisionListings[0].rotation.y = ((10 - counter) * -20480) / 10;
         }
 
         if ((counter >= 2) && (counter < 13)) {
-            arrows[0].rotation.y = ((12 - counter) * -0x5000) / 10;
+            sArrows[0].rotation.y = ((12 - counter) * -20480) / 10;
         }
 
         if ((counter >= 4) && (counter < 15)) {
-            division_listings[1].rotation.y = ((14 - counter) * -0x5000) / 10;
+            sDivisionListings[1].rotation.y = ((14 - counter) * -20480) / 10;
         }
 
         if ((counter >= 6) && (counter < 17)) {
-            arrows[1].rotation.y = ((16 - counter) * -0x5000) / 10;
+            sArrows[1].rotation.y = ((16 - counter) * -20480) / 10;
         }
 
         if ((counter >= 8) && (counter < 19)) {
-            division_listings[2].rotation.y = ((18 - counter) * -0x5000) / 10;
+            sDivisionListings[2].rotation.y = ((18 - counter) * -20480) / 10;
         }
 
         if ((counter >= 10) && (counter < 21)) {
-            arrows[2].rotation.y = ((20 - counter) * -0x5000) / 10;
+            sArrows[2].rotation.y = ((20 - counter) * -20480) / 10;
         }
 
         if ((counter >= 12) && (counter < 23)) {
-            division_listings[3].rotation.y = ((22 - counter) * -0x5000) / 10;
+            sDivisionListings[3].rotation.y = ((22 - counter) * -20480) / 10;
         }
     }
 
     if (mode == SELECTED_DIVISION) {
         if ((counter >= 0) && (counter < 11)) {
-            division_listings[0].rotation.y = ((counter - 0) * 0x5000) / 10;
+            sDivisionListings[0].rotation.y = ((counter - 0) * 20480) / 10;
         }
 
         if ((counter >= 2) && (counter < 13)) {
-            arrows[0].rotation.y = (((counter - 2) * 0x5000)) / 10;
+            sArrows[0].rotation.y = (((counter - 2) * 20480)) / 10;
         }
 
         if ((counter >= 4) && (counter < 15)) {
-            division_listings[1].rotation.y = (((counter - 4) * 0x5000)) / 10;
+            sDivisionListings[1].rotation.y = (((counter - 4) * 20480)) / 10;
         }
 
         if ((counter >= 6) && (counter < 17)) {
-            arrows[1].rotation.y = (((counter - 6) * 0x5000)) / 10;
+            sArrows[1].rotation.y = (((counter - 6) * 20480)) / 10;
         }
 
         if ((counter >= 8) && (counter < 19)) {
-            division_listings[2].rotation.y = (((counter - 8) * 0x5000)) / 10;
+            sDivisionListings[2].rotation.y = (((counter - 8) * 20480)) / 10;
         }
 
         if ((counter >= 10) && (counter < 21)) {
-            arrows[2].rotation.y = (((counter - 10) * 0x5000)) / 10;
+            sArrows[2].rotation.y = (((counter - 10) * 20480)) / 10;
         }
 
         if ((counter >= 12) && (counter < 23)) {
-            division_listings[3].rotation.y = (((counter - 12) * 0x5000)) / 10;
+            sDivisionListings[3].rotation.y = (((counter - 12) * 20480)) / 10;
         }
     }
 
     if (mode == SELECTING_DIVISION) {
-        CupSelect_DrawSelectionCorners(208, (hovered_division * 108) + 50, 224, 56, 0xFF, 0xF0, 0x64, 0xFF);
+        CupSelect_DrawSelectionCorners(208, (sHoveredDivision * 108) + 50, 224, 56, 0xFF, 240, 100, 0xFF);
     }
     BgStage_AdvanceFrame();
 }
@@ -341,44 +345,44 @@ void CupSelect_BuildDivisionList(void) {
     DisplayObject* division_listing;
     DisplayObject* arrow;
 
-    for (division_listing = &division_listings[0], i = 0; i < 4; i++, division_listing++) {
-        Model_InitDisplayObject(division_listing, 0, 0, division_render);
-        division_listings[i].rotation.y = -0x5000;
+    for (division_listing = &sDivisionListings[0], i = 0; i < 4; i++, division_listing++) {
+        Model_InitDisplayObject(division_listing, 0, 0, sDivisionRender);
+        sDivisionListings[i].rotation.y = -20480;
     }
 
-    Vec3f_SetComponentsDuplicate(&division_listings[0].position, 0.0f, 162.0f, -579.0f);
-    Vec3f_SetComponentsDuplicate(&division_listings[1].position, 0.0f, 54.0f, -579.0f);
-    Vec3f_SetComponentsDuplicate(&division_listings[2].position, 0.0f, -54.0f, -579.0f);
-    Vec3f_SetComponentsDuplicate(&division_listings[3].position, 0.0f, -162.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sDivisionListings[0].position, 0.0f, 162.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sDivisionListings[1].position, 0.0f, 54.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sDivisionListings[2].position, 0.0f, -54.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sDivisionListings[3].position, 0.0f, -162.0f, -579.0f);
 
-    for (arrow = &arrows[0], i = 0; i < 3; i++, arrow++) {
-        Model_InitDisplayObject(arrow, 0, 0, arrow_render);
-        arrows[i].rotation.y = -0x5000;
+    for (arrow = &sArrows[0], i = 0; i < 3; i++, arrow++) {
+        Model_InitDisplayObject(arrow, 0, 0, sArrowRender);
+        sArrows[i].rotation.y = -20480;
     }
 
-    Vec3f_SetComponentsDuplicate(&arrows[0].position, 0.0f, 108.0f, -579.0f);
-    Vec3f_SetComponentsDuplicate(&arrows[1].position, 0.0f, 0, -579.0f);
-    Vec3f_SetComponentsDuplicate(&arrows[2].position, 0.0f, -108.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sArrows[0].position, 0.0f, 108.0f, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sArrows[1].position, 0.0f, 0, -579.0f);
+    Vec3f_SetComponentsDuplicate(&sArrows[2].position, 0.0f, -108.0f, -579.0f);
 }
 
 s32 CupSelect_HandleInput(void) {
     s32 action = 'exec';
 
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A)) {
-        Audio_PlaySoundEffectById(0x26);
-        gSessionContext.modeSelection = hovered_division;
+        Audio_PlaySoundEffectById(38);
+        gSessionContext.modeSelection = sHoveredDivision;
         action = 'slct';
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         Audio_PlaySoundEffectById(SFX_MENU_BACK);
         action = 'quit';
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP)) {
-        if (hovered_division > 0) {
+        if (sHoveredDivision > 0) {
             Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
-            hovered_division--;
+            sHoveredDivision--;
         }
-    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN) && (hovered_division < latest_unlocked_division)) {
+    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN) && (sHoveredDivision < sLatestUnlockedDivision)) {
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
-        hovered_division++;
+        sHoveredDivision++;
     }
     return action;
 }
@@ -389,7 +393,7 @@ s32 CupSelect_Loop(void) {
     s32 selected_division;
 
     CupSelect_BuildDivisionList();
-    hovered_division = latest_unlocked_division;
+    sHoveredDivision = sLatestUnlockedDivision;
 
     for (i = 0; i < 23; i++) {
         CupSelect_PollController();
@@ -408,7 +412,7 @@ s32 CupSelect_Loop(void) {
             CupSelect_PollController();
             CupSelect_RenderFrame(2, i);
         }
-    // quit out
+        // quit out
     } else {
         StageContext_SetClearColor(0xFFFF);
         StageFade_StartFromTransparent(8);
@@ -426,20 +430,20 @@ void CupSelect_InitGeoLayouts(void) {
     s32 i;
     DisplayObject* cursor;
 
-    render_node = process_geo_layout(memory_block, &render_block);
-    division_render = process_geo_layout(memory_block, &division_block);
-    arrow_render = process_geo_layout(memory_block, &arrow_block);
+    sRenderNode = process_geo_layout(memory_block, &sRenderBlock);
+    sDivisionRender = process_geo_layout(memory_block, &sDivisionBlock);
+    sArrowRender = process_geo_layout(memory_block, &sArrowBlock);
     MainPool_FinalizeAllocation(memory_block);
     ModelRenderer_InitDisplayRoots();
 
-    for (cursor = &division_listings[0], i = 0; i < 4; cursor++, i++) {
+    for (cursor = &sDivisionListings[0], i = 0; i < 4; cursor++, i++) {
         ModelRenderer_AttachDisplayObject(cursor);
-        division_listings[i].node.callbackArg = i;
+        sDivisionListings[i].node.callbackArg = i;
     }
 
-    for (cursor = &arrows[0], i = 0; i < 3; cursor++, i++) {
+    for (cursor = &sArrows[0], i = 0; i < 3; cursor++, i++) {
         ModelRenderer_AttachDisplayObject(cursor);
-        arrows[i].node.callbackArg = i;
+        sArrows[i].node.callbackArg = i;
     }
 }
 
@@ -453,7 +457,7 @@ s32 CupSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
             break;
 
         case 6:
-            background_file = 0xC;
+            background_file = 12;
             break;
     }
 
@@ -464,20 +468,20 @@ s32 CupSelect_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
         Save_EnsureBankLoaded(2);
         Save_GetModeSettings(&D_82E023A0, gSessionContext.inRound2);
         if (gSessionContext.mode == 3) {
-            latest_unlocked_division = D_82E023A0.nintendoCupClears;
+            sLatestUnlockedDivision = D_82E023A0.nintendoCupClears;
         } else {
-            latest_unlocked_division = D_82E023A0.primeCupClears;
+            sLatestUnlockedDivision = D_82E023A0.primeCupClears;
         }
-        if (latest_unlocked_division == 4) {
-            latest_unlocked_division -= 1;
+        if (sLatestUnlockedDivision == 4) {
+            sLatestUnlockedDivision -= 1;
         }
 
         ASSET_LOAD(D_1000000, common_menu1_ui, 0);
         ASSET_LOAD(D_2000000, common_menu2_ui, 0);
         ASSET_LOAD(D_3000000, cup_ball_select_ui, 0);
 
-        cup_background_bin = ASSET_LOAD2(backgrounds, 1, 1);
-        cup_background = BinArchive_GetFile(cup_background_bin, background_file);
+        sCupBackgroundBin = ASSET_LOAD2(backgrounds, 1, 1);
+        sCupBackground = BinArchive_GetFile(sCupBackgroundBin, background_file);
 
         CupSelect_InitGeoLayouts();
         StageLoader_UpdateSegments();
