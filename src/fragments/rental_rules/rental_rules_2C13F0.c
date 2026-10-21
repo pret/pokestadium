@@ -11,12 +11,12 @@
 
 #define INACTIVE 0
 #define OPENING 1
-#define AWAITING_INPUT 2 
+#define AWAITING_INPUT 2
 #define SCROLLING 3
 #define CLOSING 4
 
-static u16 pokemon_list[151][0x640];
-static QualifyingPokemonDisplay qualifying_species_display;
+static u16 sPokemonList[151][1600];
+static QualifyingPokemonDisplay sQualifyingSpeciesDisplay;
 
 s32 RentalRules_SpeciesMatchesCategory(s16 species, s16 ruleset) {
     s32 is_eligible;
@@ -95,8 +95,8 @@ s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* row, s16 current_r
     s32 number_processed;
 
     for (i = 0; i < 6; i++) {
-        row->species_listed[i].species = 0;
-        row->species_listed[i].is_eligible = 0;
+        row->speciesListed[i].species = 0;
+        row->speciesListed[i].isEligible = 0;
     }
 
     number_processed = 0;
@@ -108,12 +108,12 @@ s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* row, s16 current_r
         } else {
             number_processed++;
         }
-        row->species_listed[i].species = species;
+        row->speciesListed[i].species = species;
 
         if (RentalRules_SpeciesMatchesCategory(species, ruleset) != 0) {
-            row->species_listed[i].is_eligible = 1;
+            row->speciesListed[i].isEligible = 1;
         } else {
-            row->species_listed[i].is_eligible = 0;
+            row->speciesListed[i].isEligible = 0;
         }
     }
 
@@ -122,7 +122,7 @@ s32 RentalRules_BuildSpeciesPage(QualifyingPokemonDisplayRow* row, s16 current_r
 
 QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDisplayRow* row, s32 advance_amount) {
     while (advance_amount-- > 0) {
-        row = row->below_neighbour;
+        row = row->belowNeighbor;
     }
 
     return row;
@@ -131,13 +131,14 @@ QualifyingPokemonDisplayRow* RentalRules_AdvancePageNode(QualifyingPokemonDispla
 s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* display) {
     s32 scroll_successful = 0;
 
-    if (RentalRules_BuildSpeciesPage(display->top_row->above_neighbour, display->top_row_index - 1, gSessionContext.ruleCategory) > 0) {
-        display->qualifying_list_state = 3;
-        display->animation_ticks = 4;
-        display->top_row_index--;
-        display->top_row = display->top_row->above_neighbour;
-        display->scroll_direction = -1;
-        display->row_draw_budget = -1;
+    if (RentalRules_BuildSpeciesPage(display->topRow->aboveNeighbor, display->topRowIndex - 1,
+                                     gSessionContext.ruleCategory) > 0) {
+        display->qualifyingListState = 3;
+        display->animationTicks = 4;
+        display->topRowIndex--;
+        display->topRow = display->topRow->aboveNeighbor;
+        display->scrollDirection = -1;
+        display->rowDrawBudget = -1;
         scroll_successful = 1;
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
@@ -148,13 +149,14 @@ s32 RentalRules_ScrollPageUp(QualifyingPokemonDisplay* display) {
 s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* display) {
     s32 scroll_successful = 0;
 
-    if (RentalRules_BuildSpeciesPage(RentalRules_AdvancePageNode(display->top_row, 5), display->top_row_index + 5, gSessionContext.ruleCategory) > 0) {
-        display->qualifying_list_state = SCROLLING;
-        display->animation_ticks = 4;
-        display->top_row_index++;
-        display->top_row = display->top_row->below_neighbour;
-        display->scroll_direction = 1;
-        display->row_draw_budget = -1;
+    if (RentalRules_BuildSpeciesPage(RentalRules_AdvancePageNode(display->topRow, 5), display->topRowIndex + 5,
+                                     gSessionContext.ruleCategory) > 0) {
+        display->qualifyingListState = SCROLLING;
+        display->animationTicks = 4;
+        display->topRowIndex++;
+        display->topRow = display->topRow->belowNeighbor;
+        display->scrollDirection = 1;
+        display->rowDrawBudget = -1;
         scroll_successful = 1;
         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
     }
@@ -163,20 +165,20 @@ s32 RentalRules_ScrollPageDown(QualifyingPokemonDisplay* display) {
 }
 
 void RentalRules_QualifyingSpeciesWindowUpdateOpen(QualifyingPokemonDisplay* display) {
-    display->animation_ticks--;
-    display->window_openness = ((5 - display->animation_ticks) << 0xA) / 5;
-    if (display->animation_ticks <= 0) {
-        display->qualifying_list_state = AWAITING_INPUT;
-        display->animation_ticks = 0;
-        display->row_draw_budget = 2;
+    display->animationTicks--;
+    display->windowOpenness = ((5 - display->animationTicks) << 10) / 5;
+    if (display->animationTicks <= 0) {
+        display->qualifyingListState = AWAITING_INPUT;
+        display->animationTicks = 0;
+        display->rowDrawBudget = 2;
     }
 }
 
 void RentalRules_QualifyingSpeciesWindowUpdateShown(QualifyingPokemonDisplay* display) {
     if (BTN_IS_PRESSED(gPlayer1Controller, BTN_A | BTN_B)) {
-        display->qualifying_list_state = CLOSING;
-        display->animation_ticks = 5;
-        display->row_draw_budget = -1;
+        display->qualifyingListState = CLOSING;
+        display->animationTicks = 5;
+        display->rowDrawBudget = -1;
         Audio_PlaySoundEffectById(SFX_MENU_BACK);
     } else if (BTN_IS_DOWN(gPlayer1Controller, BTN_DUP)) {
         RentalRules_ScrollPageUp(display);
@@ -188,8 +190,8 @@ void RentalRules_QualifyingSpeciesWindowUpdateShown(QualifyingPokemonDisplay* di
 void RentalRules_QualifyingSpeciesWindowUpdateScrolling(QualifyingPokemonDisplay* display) {
     s32 scrolling_direction;
 
-    display->animation_ticks--;
-    if (display->animation_ticks <= 0) {
+    display->animationTicks--;
+    if (display->animationTicks <= 0) {
         scrolling_direction = 0;
         if (BTN_IS_DOWN(gPlayer1Controller, BTN_DUP)) {
             scrolling_direction = RentalRules_ScrollPageUp(display);
@@ -198,20 +200,20 @@ void RentalRules_QualifyingSpeciesWindowUpdateScrolling(QualifyingPokemonDisplay
         }
 
         if (scrolling_direction == 0) {
-            display->qualifying_list_state = AWAITING_INPUT;
-            display->animation_ticks = 0;
-            display->row_draw_budget = 2;
+            display->qualifyingListState = AWAITING_INPUT;
+            display->animationTicks = 0;
+            display->rowDrawBudget = 2;
         }
     }
 }
 
 void RentalRules_QualifyingSpeciesWindowUpdateClose(QualifyingPokemonDisplay* display) {
-    display->animation_ticks--;
-    display->window_openness = (display->animation_ticks << 0xA) / 5;
-    if (display->animation_ticks <= 0) {
-        display->qualifying_list_state = INACTIVE;
-        display->animation_ticks = 0;
-        display->row_draw_budget = -1;
+    display->animationTicks--;
+    display->windowOpenness = (display->animationTicks << 10) / 5;
+    if (display->animationTicks <= 0) {
+        display->qualifyingListState = INACTIVE;
+        display->animationTicks = 0;
+        display->rowDrawBudget = -1;
     }
 }
 
@@ -226,22 +228,22 @@ void RentalRules_DrawScrollbar(s16 x, s16 y, QualifyingPokemonDisplay* display) 
 
     Gfx_DrawTextureIa8(x, y, 16, 8, D_200A200, 0x10, 0);
     Gfx_DrawTextureIa8(x, y + 276, 0x10, 8, D_200A280, 0x10, 0);
-    Gfx_DrawTexturedRectClipped(x, y + 8, 0x10, 0x10C, 0, 0, 0x400, 0, 0);
+    Gfx_DrawTexturedRectClipped(x, y + 8, 0x10, 268, 0, 0, 0x400, 0, 0);
 
-    if (display->qualifying_list_state != SCROLLING) {
-        y_offset = (display->top_row_index * 0x10C) / 21;
-    } else if (display->scroll_direction > 0) {
-        y_offset = (((display->top_row_index * 4) - display->animation_ticks) * 0x10C) / 84;
+    if (display->qualifyingListState != SCROLLING) {
+        y_offset = (display->topRowIndex * 268) / 21;
+    } else if (display->scrollDirection > 0) {
+        y_offset = (((display->topRowIndex * 4) - display->animationTicks) * 268) / 84;
     } else {
-        y_offset = (((display->top_row_index * 4) + display->animation_ticks) * 0x10C) / 84;
+        y_offset = (((display->topRowIndex * 4) + display->animationTicks) * 268) / 84;
     }
 
     gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     if (D_83003B70 < 4) {
-        Gfx_DrawTextureRgba16(x - 4, (y + y_offset) - 4, 24, 24, D_200A300, 0x18, 0);
+        Gfx_DrawTextureRgba16(x - 4, (y + y_offset) - 4, 24, 24, D_200A300, 24, 0);
     } else {
-        Gfx_DrawTextureRgba16(x - 4, (y + y_offset) - 4, 24, 24, D_200A780, 0x18, 0);
+        Gfx_DrawTextureRgba16(x - 4, (y + y_offset) - 4, 24, 24, D_200A780, 24, 0);
     }
 
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
@@ -269,8 +271,8 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
     s16 species;
 
     for (i = 0; i < 6; i++) {
-        if (node->species_listed[i].species != 0) {
-            if (node->species_listed[i].is_eligible != 0) {
+        if (node->speciesListed[i].species != 0) {
+            if (node->speciesListed[i].isEligible != 0) {
                 current_panel_color = &eligible_panel_color;
             } else {
                 current_panel_color = &banned_panel_color;
@@ -278,15 +280,16 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
         } else {
             current_panel_color = &empty_panel_color;
         }
-        RentalRules_DrawFilledPanel(x + i * 0x54, y, 0x54, 0x3C, current_panel_color->r, current_panel_color->g, current_panel_color->b);
+        RentalRules_DrawFilledPanel(x + i * 84, y, 84, 60, current_panel_color->r, current_panel_color->g,
+                                    current_panel_color->b);
     }
 
     gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
     for (i = 0; i < 6; i++) {
-        species = node->species_listed[i].species;
+        species = node->speciesListed[i].species;
         if (species != NULL) {
-            Gfx_DrawTextureRgba16(x + (i * 84) + 22, y + 3, 40, 40, pokemon_list[species - 1], 0x28, 0);
+            Gfx_DrawTextureRgba16(x + (i * 84) + 22, y + 3, 40, 40, sPokemonList[species - 1], 40, 0);
         }
     }
 
@@ -297,9 +300,9 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
     for (i = 0; i < 6; i++) {
-        species = node->species_listed[i].species;
+        species = node->speciesListed[i].species;
         if (species != NULL) {
-            Font_Printf(x + (i * 0x54) + 2, y + 0x2A, RentalRules_GetPokemonName(species));
+            Font_Printf(x + (i * 84) + 2, y + 42, RentalRules_GetPokemonName(species));
         }
     }
 
@@ -307,43 +310,43 @@ void RentalRules_DrawSpeciesPage(s16 x, s16 y, QualifyingPokemonDisplayRow* node
 }
 
 void RentalRules_QualifyingSpeciesWindowInit(s32 arg0) {
-    QualifyingPokemonDisplay* ptr = &qualifying_species_display;
+    QualifyingPokemonDisplay* ptr = &sQualifyingSpeciesDisplay;
     s32 i;
 
-    ptr->qualifying_list_state = INACTIVE;
-    ptr->window_openness = 0;
+    ptr->qualifyingListState = INACTIVE;
+    ptr->windowOpenness = 0;
 
     for (i = 0; i < 6; i++) {
-        ptr->row_buffer[i].below_neighbour = &ptr->row_buffer[(i + 1) % 6];
-        ptr->row_buffer[i].above_neighbour = &ptr->row_buffer[(i + 5) % 6];
+        ptr->rowBuffer[i].belowNeighbor = &ptr->rowBuffer[(i + 1) % 6];
+        ptr->rowBuffer[i].aboveNeighbor = &ptr->rowBuffer[(i + 5) % 6];
     }
 
     if (arg0 != 0) {
         for (i = 0; i < 151; i++) {
-            PokeIcon_LoadModelTextureForMon(pokemon_list[i], i + 1, NULL);
+            PokeIcon_LoadModelTextureForMon(sPokemonList[i], i + 1, NULL);
         }
     }
 }
 
 void RentalRules_QualifyingSpeciesWindowUpdate(void) {
-    QualifyingPokemonDisplay* ptr = &qualifying_species_display;
+    QualifyingPokemonDisplay* ptr = &sQualifyingSpeciesDisplay;
 
-    if (ptr->qualifying_list_state != INACTIVE) {
-        switch (ptr->qualifying_list_state) {
+    if (ptr->qualifyingListState != INACTIVE) {
+        switch (ptr->qualifyingListState) {
             case OPENING:
-                RentalRules_QualifyingSpeciesWindowUpdateOpen(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateOpen(&sQualifyingSpeciesDisplay);
                 break;
 
             case AWAITING_INPUT:
-                RentalRules_QualifyingSpeciesWindowUpdateShown(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateShown(&sQualifyingSpeciesDisplay);
                 break;
 
             case SCROLLING:
-                RentalRules_QualifyingSpeciesWindowUpdateScrolling(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateScrolling(&sQualifyingSpeciesDisplay);
                 break;
 
             case CLOSING:
-                RentalRules_QualifyingSpeciesWindowUpdateClose(&qualifying_species_display);
+                RentalRules_QualifyingSpeciesWindowUpdateClose(&sQualifyingSpeciesDisplay);
                 break;
         }
     }
@@ -352,24 +355,24 @@ void RentalRules_QualifyingSpeciesWindowUpdate(void) {
 void RentalRules_QualifyingSpeciesWindowDraw(void) {
     s16 x;
     s16 y;
-    QualifyingPokemonDisplay* display = &qualifying_species_display;
+    QualifyingPokemonDisplay* display = &sQualifyingSpeciesDisplay;
 
-    if (display->window_openness == 0) {
+    if (display->windowOpenness == 0) {
         return;
     }
 
-    x = (((1024 - display->window_openness) * 264) / 1024) + 56;
-    y = (((1024 - display->window_openness) * 168) / 1024) + 92;
-    RentalRules_DrawWindowFrame(x, y, (display->window_openness * 528) / 1024, (display->window_openness * 336) / 1024);
+    x = (((1024 - display->windowOpenness) * 264) / 1024) + 56;
+    y = (((1024 - display->windowOpenness) * 168) / 1024) + 92;
+    RentalRules_DrawWindowFrame(x, y, (display->windowOpenness * 528) / 1024, (display->windowOpenness * 336) / 1024);
 
-    if (display->window_openness >= 1024) {
+    if (display->windowOpenness >= 1024) {
         UNUSED s32 pad;
         s32 i;
         QualifyingPokemonDisplayRow* node_to_draw;
 
         RentalRules_DrawFilledPanel(x, y, 528, 36, 0x1E, 0x64, 0x64);
         RentalRules_DrawFilledPanel(x, y + 36, 24, 300, 0x1E, 0x1E, 0x64);
-        RentalRules_DrawScrollbar(x + 4, y + 0x2C, display);
+        RentalRules_DrawScrollbar(x + 4, y + 44, display);
 
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
@@ -380,72 +383,73 @@ void RentalRules_QualifyingSpeciesWindowDraw(void) {
         Font_BeginTranslucentTextRendering();
         Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
         Font_SetActive(8, 0);
-        Text_SetNumberToken(3, display->eligible_count);
+        Text_SetNumberToken(3, display->eligibleCount);
         {
-            char sp4C[64];
-            Font_Printf(x + 44, y + 8, Text_GetString(sp4C, sizeof(sp4C), battle_mode_labels, 3));
+            char var_sp4C[64];
+            Font_Printf(x + 44, y + 8, Text_GetString(var_sp4C, sizeof(var_sp4C), sBattleModeLabels, 3));
         }
         Font_EndTexturedTextRendering();
 
-        if (display->row_draw_budget == 0) {
+        if (display->rowDrawBudget == 0) {
             return;
         }
 
-        if (display->qualifying_list_state == SCROLLING) {
-            s16 sp4A = y - ((display->scroll_direction * 0x3C * (4 - display->animation_ticks)) / 4);
-            Gfx_SetScissorRect(&gDisplayListHead, x + 0x18, y + 0x24, 0x1F8, 0x12C);
-            if (display->scroll_direction > 0) {
-                node_to_draw = display->top_row->above_neighbour;
+        if (display->qualifyingListState == SCROLLING) {
+            s16 var_sp4A = y - ((display->scrollDirection * 60 * (4 - display->animationTicks)) / 4);
+            Gfx_SetScissorRect(&gDisplayListHead, x + 24, y + 36, 504, 300);
+            if (display->scrollDirection > 0) {
+                node_to_draw = display->topRow->aboveNeighbor;
                 for (i = 0; i < 6; i++) {
-                    RentalRules_DrawSpeciesPage(x + 24, sp4A + 36 + i * 0x3C, node_to_draw);
-                    node_to_draw = node_to_draw->below_neighbour;
+                    RentalRules_DrawSpeciesPage(x + 24, var_sp4A + 36 + i * 60, node_to_draw);
+                    node_to_draw = node_to_draw->belowNeighbor;
                 }
             } else {
-                node_to_draw = display->top_row;
+                node_to_draw = display->topRow;
                 for (i = 0; i < 6; i++) {
-                    RentalRules_DrawSpeciesPage(x + 24, sp4A - 24 + i * 0x3C, node_to_draw);
-                    node_to_draw = node_to_draw->below_neighbour;
+                    RentalRules_DrawSpeciesPage(x + 24, var_sp4A - 24 + i * 60, node_to_draw);
+                    node_to_draw = node_to_draw->belowNeighbor;
                 }
             }
             Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 640, 480);
         } else {
-            node_to_draw = display->top_row;
+            node_to_draw = display->topRow;
             for (i = 0; i < 5; i++) {
                 RentalRules_DrawSpeciesPage(x + 24, y + 36 + i * 60, node_to_draw);
-                node_to_draw = node_to_draw->below_neighbour;
+                node_to_draw = node_to_draw->belowNeighbor;
             }
         }
 
-        if (display->row_draw_budget > 0) {
-            display->row_draw_budget -= 1;
+        if (display->rowDrawBudget > 0) {
+            display->rowDrawBudget -= 1;
         }
     }
 
+    // karodo
     if (1) {}
 }
 
 void RentalRules_QualifyingSpeciesWindowOpen(void) {
-    QualifyingPokemonDisplay* ptr = &qualifying_species_display;
+    QualifyingPokemonDisplay* ptr = &sQualifyingSpeciesDisplay;
     s32 i;
 
-    ptr->qualifying_list_state = OPENING;
-    ptr->animation_ticks = 5;
-    ptr->window_openness = 0;
-    ptr->top_row_index = 0;
-    ptr->scroll_direction = 0;
-    ptr->row_draw_budget = -1;
-    ptr->eligible_count = RentalRules_CountMatchingSpecies(gSessionContext.ruleCategory);
-    ptr->top_row = &ptr->row_buffer[0];
+    ptr->qualifyingListState = OPENING;
+    ptr->animationTicks = 5;
+    ptr->windowOpenness = 0;
+    ptr->topRowIndex = 0;
+    ptr->scrollDirection = 0;
+    ptr->rowDrawBudget = -1;
+    ptr->eligibleCount = RentalRules_CountMatchingSpecies(gSessionContext.ruleCategory);
+    ptr->topRow = &ptr->rowBuffer[0];
 
     for (i = 0; i < 5; i++) {
-        RentalRules_BuildSpeciesPage(&ptr->row_buffer[i], i, gSessionContext.ruleCategory);
+        RentalRules_BuildSpeciesPage(&ptr->rowBuffer[i], i, gSessionContext.ruleCategory);
     }
 }
 
 s32 RentalRules_QualifyingSpeciesWindowIsActive(void) {
     s32 is_active;
 
-    if (qualifying_species_display.qualifying_list_state != INACTIVE) {
+    if (sQualifyingSpeciesDisplay.qualifyingListState != INACTIVE) {
         is_active = 1;
     } else {
         is_active = 0;
@@ -453,6 +457,6 @@ s32 RentalRules_QualifyingSpeciesWindowIsActive(void) {
     return is_active;
 }
 
-s32 RentalRules_GetQualifyingSpeciesDisplayOpeningProgress(void) {
-    return qualifying_species_display.window_openness;
+s32 RentalRules_GetSpeciesWindowOpeningProgress(void) {
+    return sQualifyingSpeciesDisplay.windowOpenness;
 }

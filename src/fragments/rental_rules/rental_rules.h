@@ -16,36 +16,36 @@ typedef struct unk_D_83003CE0 {
     /* 0x90 */ char* unk_90;
     /* 0x94 */ char* unk_94;
     /* 0x98 */ char* unk_98;
-    /* 0x9C */ char unk9C[0x64];
+    /* 0x9C */ char unk_9C[100];
 } unk_D_83003CE0; // size = 0x100
 
 typedef struct SpeciesQualificationStatus {
     /* 0x00 */ s16 species;
-    /* 0x02 */ s16 is_eligible;
+    /* 0x02 */ s16 isEligible;
 } SpeciesQualificationStatus; // size = 0x4
 
 typedef struct QualifyingPokemonDisplayRow {
-    /* 0x00 */ SpeciesQualificationStatus species_listed[6];
-    /* 0x18 */ struct QualifyingPokemonDisplayRow* below_neighbour;
-    /* 0x1C */ struct QualifyingPokemonDisplayRow* above_neighbour;
+    /* 0x00 */ SpeciesQualificationStatus speciesListed[6];
+    /* 0x18 */ struct QualifyingPokemonDisplayRow* belowNeighbor;
+    /* 0x1C */ struct QualifyingPokemonDisplayRow* aboveNeighbor;
 } QualifyingPokemonDisplayRow; // size = 0x20
 
 typedef struct QualifyingPokemonDisplay {
-    /* 0x00 */ s16 qualifying_list_state;
-    /* 0x02 */ s16 animation_ticks;  // Updates remaining: 5 for opening/closing, 4 for scrolling.
-    /* 0x04 */ s16 window_openness;  // 0 = closed, 1024 = fully open.
-    /* 0x06 */ s16 eligible_count;   // Species accepted by the current category predicate.
-    /* 0x08 */ s16 top_row_index;    // Row index; its first species is top_row_index * 6 + 1.
-    /* 0x0A */ s16 scroll_direction; // -1 = up, +1 = down, 0 = initial position.
-    /* 0x0C */ s16 row_draw_budget;  // -1 = continuous, 0 = skip rows, positive = row draws remaining.
-    /* 0x10 */ QualifyingPokemonDisplayRow* top_row;
-    /* 0x14 */ QualifyingPokemonDisplayRow row_buffer[6]; // Circular buffer: 5 visible rows plus 1 scroll row.
-} QualifyingPokemonDisplay; // size = 0xD4
+    /* 0x00 */ s16 qualifyingListState;
+    /* 0x02 */ s16 animationTicks;  // Updates remaining: 5 for opening/closing, 4 for scrolling.
+    /* 0x04 */ s16 windowOpenness;  // 0 = closed, 1024 = fully open.
+    /* 0x06 */ s16 eligibleCount;   // Species accepted by the current category predicate.
+    /* 0x08 */ s16 topRowIndex;     // Row index; its first species is topRowIndex * 6 + 1.
+    /* 0x0A */ s16 scrollDirection; // -1 = up, +1 = down, 0 = initial position.
+    /* 0x0C */ s16 rowDrawBudget;   // -1 = continuous, 0 = skip rows, positive = row draws remaining.
+    /* 0x10 */ QualifyingPokemonDisplayRow* topRow;
+    /* 0x14 */ QualifyingPokemonDisplayRow rowBuffer[6]; // Circular buffer: 5 visible rows plus 1 scroll row.
+} QualifyingPokemonDisplay;                              // size = 0xD4
 
 extern unk_D_83003CE0 D_83003CE0;
 extern unk_D_83003CE0 D_83003DE0;
 
-extern char** battle_mode_labels;
+extern char** sBattleModeLabels;
 
 char* RentalRules_GetPokemonName(s32 file_number);
 void RentalRules_LoadBackgroundArchive(void);
@@ -103,7 +103,6 @@ void RentalRules_QualifyingSpeciesWindowUpdate(void);
 void RentalRules_QualifyingSpeciesWindowDraw(void);
 void RentalRules_QualifyingSpeciesWindowOpen(void);
 s32 RentalRules_QualifyingSpeciesWindowIsActive(void);
-s32 RentalRules_GetQualifyingSpeciesDisplayOpeningProgress(void);
-
+s32 RentalRules_GetSpeciesWindowOpeningProgress(void);
 
 #endif // _FRAGMENT55_H_
