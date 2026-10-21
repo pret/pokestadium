@@ -28,9 +28,9 @@ typedef struct unk_D_83101E6C {
 } unk_D_83101E6C; // size = 0x14
 
 typedef struct CircleTransition {
-    /* 0x00 */ s16 fade_state;
+    /* 0x00 */ s16 fadeState;
     /* 0x02 */ s16 width;
-    /* 0x04 */ s16 circle_height;
+    /* 0x04 */ s16 circleHeight;
     /* 0x08 */ f32 ratio;
 } CircleTransition; // size = 0xC
 
@@ -263,7 +263,7 @@ s32 GymLeaderCastleClear_GeoSpriteCallback(s32 arg0, GraphNode* arg1) {
 }
 
 void GymLeaderCastleClear_InitCircleWipe(void) {
-    sCircleFade.fade_state = 0;
+    sCircleFade.fadeState = 0;
     sCircleFade.width = 0;
     sCircleFade.ratio = 7.0f;
 }
@@ -271,15 +271,15 @@ void GymLeaderCastleClear_InitCircleWipe(void) {
 void GymLeaderCastleClear_UpdateCircleWipe(void) {
     s32 width_zero;
 
-    switch (sCircleFade.fade_state) {
+    switch (sCircleFade.fadeState) {
         case 1:
             sCircleFade.width--;
-            sCircleFade.ratio = (sCircleFade.width * 7.0f) / sCircleFade.circle_height;
+            sCircleFade.ratio = (sCircleFade.width * 7.0f) / sCircleFade.circleHeight;
 
             width_zero = sCircleFade.width <= 0;
             if (width_zero) {
-                sCircleFade.fade_state = 2;
-                sCircleFade.width = sCircleFade.circle_height = 0;
+                sCircleFade.fadeState = 2;
+                sCircleFade.width = sCircleFade.circleHeight = 0;
                 sCircleFade.ratio = 0.0f;
             }
             break;
@@ -302,11 +302,11 @@ void GymLeaderCastleClear_DrawCircleWipe(void) {
     s32 texture_step;
 
     Gfx_SetScissorRect(&gDisplayListHead, 0, 0, 640, 480);
-    if (sCircleFade.fade_state == 0) {
+    if (sCircleFade.fadeState == 0) {
         return;
     }
 
-    if ((sCircleFade.ratio <= 0.0f) || (sCircleFade.fade_state == 2)) {
+    if ((sCircleFade.ratio <= 0.0f) || (sCircleFade.fadeState == 2)) {
         gSPDisplayList(gDisplayListHead++, D_8006F4C0);
         gDPSetFillColor(gDisplayListHead++, 0x00010001);
         gDPFillRectangle(gDisplayListHead++, 0, 0, 639, 479);
@@ -373,8 +373,8 @@ void GymLeaderCastleClear_DrawCircleWipe(void) {
 
 void GymLeaderCastleClear_StartCircleWipe(s16 start) {
     if (start > 0) {
-        sCircleFade.fade_state = 1;
-        sCircleFade.width = sCircleFade.circle_height = start;
+        sCircleFade.fadeState = 1;
+        sCircleFade.width = sCircleFade.circleHeight = start;
         sCircleFade.ratio = 7.0f;
     }
 }
@@ -569,7 +569,7 @@ s32 GymLeaderCastleClear_AdvanceState(void) {
             break;
 
         case 2:
-            if (sCircleFade.fade_state == 2) {
+            if (sCircleFade.fadeState == 2) {
                 var_sp1C = 0;
             }
             break;

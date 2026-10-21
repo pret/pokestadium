@@ -164,7 +164,7 @@ void GymLeaderCastle_DrawRoomDescription(void) {
             } else if (sSelectedMapNode == ELITE_4) {
                 Font_Printf(136, y1 + 16, Text_GetString(NULL, 0, sUiText, 13));
             } else {
-                current_node_file_number = sCastleMapNodes[sSelectedMapNode].file_number;
+                current_node_file_number = sCastleMapNodes[sSelectedMapNode].fileNumber;
                 if (current_node_file_number >= 30) {
                     Text_SetStringToken(36, Text_GetString(NULL, 0, sTrainerNameText, current_node_file_number));
                 } else if (current_node_file_number >= 0) {
@@ -173,7 +173,7 @@ void GymLeaderCastle_DrawRoomDescription(void) {
                     Text_SetStringToken(36, " ");
                 }
 
-                current_node_file_number = sCastleMapNodes[sSelectedMapNode + 1].file_number;
+                current_node_file_number = sCastleMapNodes[sSelectedMapNode + 1].fileNumber;
                 if (current_node_file_number >= 30) {
                     Text_SetStringToken(41, Text_GetString(NULL, 0, sTrainerNameText, current_node_file_number));
                 } else if (current_node_file_number >= 0) {
@@ -196,7 +196,7 @@ void GymLeaderCastle_DrawTrainerIntroPanels(void) {
 
     for (i = 0; i < 4; i++) {
         if (sCurrentNodeTrainers[i].loaded != 0) {
-            s16 trainer_portrait_x = sCurrentNodeTrainers[i].portrait_x;
+            s16 trainer_portrait_x = sCurrentNodeTrainers[i].portraitX;
 
             gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
@@ -216,8 +216,8 @@ void GymLeaderCastle_DrawTrainerIntroPanels(void) {
             if ((sSelectedMapNode >= GLC_TO_ELITE_4) || (i == 3)) {
                 Font_SetActive(8, 0);
 
-                if (hovered_map_node->boss_title >= 0) {
-                    boss_title = Text_GetString(NULL, 0, sUiText, hovered_map_node->boss_title);
+                if (hovered_map_node->bossTitle >= 0) {
+                    boss_title = Text_GetString(NULL, 0, sUiText, hovered_map_node->bossTitle);
                 } else {
                     boss_title = " ";
                 }
@@ -291,15 +291,15 @@ void GymLeaderCastle_DrawRoomMarkers(void) {
     gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER | G_LIGHTING);
 
     for (; backwards_index > 0; backwards_index--, node++) {
-        if (node->node_state != 0) {
+        if (node->nodeState != 0) {
             node_alpha = 0xFF;
-            if (node->node_state == 1) {
+            if (node->nodeState == 1) {
                 node_alpha = (s32)((COSS(node->pulsing) + 1.0f) * 96.0f);
                 node_alpha += 63;
                 node->pulsing += 0x200;
             } else {
                 node->pulsing = 0;
-                node->node_state--;
+                node->nodeState--;
             }
 
             gDPSetEnvColor(gDisplayListHead++, node->color.r, node->color.g, node->color.b, node_alpha);
@@ -310,8 +310,8 @@ void GymLeaderCastle_DrawRoomMarkers(void) {
                 gDPSetPrimColor(gDisplayListHead++, 0, 0, 255, 255, 255, 255);
             }
 
-            GymLeaderCastle_DrawScaledTextureIa8(node->marker_x, node->marker_y, node->marker_width * 2,
-                                                 node->marker_height * 2, node->texture, 2.0f);
+            GymLeaderCastle_DrawScaledTextureIa8(node->markerX, node->markerY, node->markerWidth * 2,
+                                                 node->markerHeight * 2, node->texture, 2.0f);
         }
     }
 
@@ -338,16 +338,16 @@ void GymLeaderCastle_DrawRoomLabels(void) {
     Gfx_SetPrimColor(0x50, 0x64, 0xDC, 0xFF);
 
     for (; backwards_index > 0; backwards_index--, node++) {
-        if (node->node_state != 0) {
-            if (node->file_number >= 30) {
-                label = Text_GetString(NULL, 0, sTrainerNameText, node->file_number);
-            } else if (node->file_number >= 0) {
-                label = Text_GetString(NULL, 0, sUiText, node->file_number);
+        if (node->nodeState != 0) {
+            if (node->fileNumber >= 30) {
+                label = Text_GetString(NULL, 0, sTrainerNameText, node->fileNumber);
+            } else if (node->fileNumber >= 0) {
+                label = Text_GetString(NULL, 0, sUiText, node->fileNumber);
             } else {
                 label = " ";
             }
-            tmp = node->label_x - (Font_MeasureTextExtent(4, 0, label) / 2);
-            Font_Printf(tmp, node->label_y, label);
+            tmp = node->labelX - (Font_MeasureTextExtent(4, 0, label) / 2);
+            Font_Printf(tmp, node->labelY, label);
         }
     }
 
@@ -358,12 +358,12 @@ void GymLeaderCastle_DrawRoomLabels(void) {
 void GymLeaderCastle_DrawGymLeaderInfoPanel(CastleMapNode* node, u8 alpha1, u8 alpha2) {
     char* string;
 
-    if (node->info_panel_texture != NULL) {
+    if (node->infoPanelTexture != NULL) {
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha1);
 
-        GymLeaderCastle_DrawScaledTextureRgba(502, 352, 96, 48, 96, node->info_panel_texture, 1.5f);
-        GymLeaderCastle_DrawScaledTextureRgba(502, 400, 96, 48, 96, node->info_panel_texture + 0x1000, 1.5f);
+        GymLeaderCastle_DrawScaledTextureRgba(502, 352, 96, 48, 96, node->infoPanelTexture, 1.5f);
+        GymLeaderCastle_DrawScaledTextureRgba(502, 400, 96, 48, 96, node->infoPanelTexture + 0x1000, 1.5f);
 
         gSPDisplayList(gDisplayListHead++, D_8006F558);
         gDPSetEnvColor(gDisplayListHead++, node->color.r, node->color.g, node->color.b, (alpha2 * 0x96) / 255);
@@ -379,18 +379,18 @@ void GymLeaderCastle_DrawGymLeaderInfoPanel(CastleMapNode* node, u8 alpha1, u8 a
         Gfx_SetPrimColor(0xFF, 0xFF, 0xFF, alpha2);
         Font_SetActive(8, 0);
 
-        if (node->boss_title >= 0) {
-            string = Text_GetString(NULL, 0, sUiText, node->boss_title);
+        if (node->bossTitle >= 0) {
+            string = Text_GetString(NULL, 0, sUiText, node->bossTitle);
         } else {
             string = " ";
         }
         Font_Printf(430 - (Font_MeasureTextExtent(8, 0, string) / 2), 378, string);
         Font_SetActive(0x20, 0);
 
-        if (node->file_number >= 30) {
-            string = Text_GetString(NULL, 0, sTrainerNameText, node->file_number);
-        } else if (node->file_number >= 0) {
-            string = Text_GetString(NULL, 0, sUiText, node->file_number);
+        if (node->fileNumber >= 30) {
+            string = Text_GetString(NULL, 0, sTrainerNameText, node->fileNumber);
+        } else if (node->fileNumber >= 0) {
+            string = Text_GetString(NULL, 0, sUiText, node->fileNumber);
         } else {
             string = " ";
         }
@@ -412,11 +412,11 @@ void GymLeaderCastle_DrawEliteFourRoomInfoPanel(CastleMapNode* node, u8 alpha1, 
     gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha1);
 
-    GymLeaderCastle_DrawScaledTextureRgba(470, 318, 128, 26, 128, node->info_panel_texture, 1.28f);
-    GymLeaderCastle_DrawScaledTextureRgba(470, 344, 128, 26, 128, node->info_panel_texture + 4000, 1.28f);
-    GymLeaderCastle_DrawScaledTextureRgba(470, 370, 128, 26, 128, node->info_panel_texture + 8000, 1.28f);
-    GymLeaderCastle_DrawScaledTextureRgba(470, 396, 128, 26, 128, node->info_panel_texture + 12000, 1.28f);
-    GymLeaderCastle_DrawScaledTextureRgba(470, 422, 128, 26, 128, node->info_panel_texture + 16000, 1.28f);
+    GymLeaderCastle_DrawScaledTextureRgba(470, 318, 128, 26, 128, node->infoPanelTexture, 1.28f);
+    GymLeaderCastle_DrawScaledTextureRgba(470, 344, 128, 26, 128, node->infoPanelTexture + 4000, 1.28f);
+    GymLeaderCastle_DrawScaledTextureRgba(470, 370, 128, 26, 128, node->infoPanelTexture + 8000, 1.28f);
+    GymLeaderCastle_DrawScaledTextureRgba(470, 396, 128, 26, 128, node->infoPanelTexture + 12000, 1.28f);
+    GymLeaderCastle_DrawScaledTextureRgba(470, 422, 128, 26, 128, node->infoPanelTexture + 16000, 1.28f);
 
     gSPDisplayList(gDisplayListHead++, D_8006F558);
     gDPSetEnvColor(gDisplayListHead++, node->color.r, node->color.g, node->color.b, (alpha2 * 0x96) / 255);
@@ -434,10 +434,10 @@ void GymLeaderCastle_DrawEliteFourRoomInfoPanel(CastleMapNode* node, u8 alpha1, 
     Gfx_SetPrimColor(0xFF, 0xFF, 0xFF, alpha2);
     Font_SetActive(0x10, 0);
 
-    if (node->file_number >= 30) {
-        string = Text_GetString(NULL, 0, sTrainerNameText, node->file_number);
-    } else if (node->file_number >= 0) {
-        string = Text_GetString(NULL, 0, sUiText, node->file_number);
+    if (node->fileNumber >= 30) {
+        string = Text_GetString(NULL, 0, sTrainerNameText, node->fileNumber);
+    } else if (node->fileNumber >= 0) {
+        string = Text_GetString(NULL, 0, sUiText, node->fileNumber);
     } else {
         string = " ";
     }
@@ -488,14 +488,14 @@ void GymLeaderCastle_UpdateMapCursor(void) {
     CastleMapNode* node = &sCastleMapNodes[sSelectedMapNode];
 
     if (sCursorMoveTimer == 0) {
-        x = node->cursor_x - 0x20;
-        y = node->cursor_y - 13;
+        x = node->cursorX - 0x20;
+        y = node->cursorY - 13;
     } else {
-        x = ((((sCastleMapNodes[sCurrentHoverNodeIndex].cursor_x - node->cursor_x) * sCursorMoveTimer) / 4) +
-             node->cursor_x) -
+        x = ((((sCastleMapNodes[sCurrentHoverNodeIndex].cursorX - node->cursorX) * sCursorMoveTimer) / 4) +
+             node->cursorX) -
             0x20;
-        y = ((((sCastleMapNodes[sCurrentHoverNodeIndex].cursor_y - node->cursor_y) * sCursorMoveTimer) / 4) +
-             node->cursor_y) -
+        y = ((((sCastleMapNodes[sCurrentHoverNodeIndex].cursorY - node->cursorY) * sCursorMoveTimer) / 4) +
+             node->cursorY) -
             13;
 
         sCursorMoveTimer--;
@@ -584,17 +584,17 @@ s32 GymLeaderCastle_SelectRoom(void) {
                         } else {
                             changed = 1;
                         }
-                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP) && (node->up_neighbor != 0)) {
-                        node_to_move_to = node->up_neighbor - 1;
-                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN) && (node->down_neighbor != 0)) {
-                        node_to_move_to = node->down_neighbor - 1;
-                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DLEFT) && (node->left_neighbor != 0)) {
-                        node_to_move_to = node->left_neighbor - 1;
-                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DRIGHT) && (node->right_neighbor != 0)) {
-                        node_to_move_to = node->right_neighbor - 1;
+                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DUP) && (node->upNeighbor != 0)) {
+                        node_to_move_to = node->upNeighbor - 1;
+                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DDOWN) && (node->downNeighbor != 0)) {
+                        node_to_move_to = node->downNeighbor - 1;
+                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DLEFT) && (node->leftNeighbor != 0)) {
+                        node_to_move_to = node->leftNeighbor - 1;
+                    } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_DRIGHT) && (node->rightNeighbor != 0)) {
+                        node_to_move_to = node->rightNeighbor - 1;
                     }
 
-                    if ((node_to_move_to >= 0) && (sCastleMapNodes[node_to_move_to].node_state != 0)) {
+                    if ((node_to_move_to >= 0) && (sCastleMapNodes[node_to_move_to].nodeState != 0)) {
                         Audio_PlaySoundEffectById(SFX_MENU_SCROLL);
                         sSelectedMapNode = node_to_move_to;
                         sCursorMoveTimer = 3;
@@ -644,7 +644,7 @@ void GymLeaderCastle_LoadTrainerPanels(void) {
     for (i = 0; i < trainer_count; i++) {
         portrait_file_index = (trainer_data[i].gfx_file_index >> 8) & 0xFF;
         sCurrentNodeTrainers[i].loaded = 1;
-        sCurrentNodeTrainers[i].portrait_x = 640;
+        sCurrentNodeTrainers[i].portraitX = 640;
         sCurrentNodeTrainers[i].name = trainer_data[i].name1;
         sCurrentNodeTrainers[i].portrait = BinArchive_GetFile(sPortraitArchive, portrait_file_index);
     }
@@ -663,7 +663,7 @@ void GymLeaderCastle_SlideTrainerPanels(s16 panels_start, s16 panels_end, s16 ti
 
     while (timer-- > 0) {
         for (i = panels_start; i <= panels_end; i++) {
-            sCurrentNodeTrainers[i].portrait_x += x_delta;
+            sCurrentNodeTrainers[i].portraitX += x_delta;
         }
         Controller_PollInputs();
         GymLeaderCastle_Draw();
@@ -777,14 +777,14 @@ s32 GymLeaderCastle_AdvanceRoom(void) {
     Audio_PlaySoundEffectById(0x01100011);
 
     if (gSessionContext.modeSelection == 8) {
-        sCastleMapNodes[11].node_state = 60;
+        sCastleMapNodes[11].nodeState = 60;
     } else {
-        sCastleMapNodes[D_84A03180.castleClears].node_state = 60;
+        sCastleMapNodes[D_84A03180.castleClears].nodeState = 60;
     }
 
     if (D_84A03180.castleClears == 8) {
-        sCastleMapNodes[9].node_state = 60;
-        sCastleMapNodes[10].node_state = 60;
+        sCastleMapNodes[9].nodeState = 60;
+        sCastleMapNodes[10].nodeState = 60;
     }
 
     for (i = 3; i >= 0; i--) {
@@ -860,12 +860,12 @@ s16 GymLeaderCastle_InitMenu(s16 arg0) {
     }
 
     for (i = 0; i <= var_v1; i++) {
-        sCastleMapNodes[i].node_state = 1;
+        sCastleMapNodes[i].nodeState = 1;
     }
 
-    if (sCastleMapNodes[8].node_state != 0) {
-        sCastleMapNodes[9].node_state = 1;
-        sCastleMapNodes[10].node_state = 1;
+    if (sCastleMapNodes[8].nodeState != 0) {
+        sCastleMapNodes[9].nodeState = 1;
+        sCastleMapNodes[10].nodeState = 1;
     }
 
     for (i = 0; i < 4; i++) {
@@ -873,11 +873,11 @@ s16 GymLeaderCastle_InitMenu(s16 arg0) {
     }
 
     for (i = 0; i < 8; i++) {
-        sCastleMapNodes[i].info_panel_texture = BinArchive_GetFile(sPortraitArchive, i + 2);
+        sCastleMapNodes[i].infoPanelTexture = BinArchive_GetFile(sPortraitArchive, i + 2);
     }
 
-    sCastleMapNodes[10].info_panel_texture = D_300CC10;
-    sCastleMapNodes[11].info_panel_texture = BinArchive_GetFile(sPortraitArchive, 14);
+    sCastleMapNodes[10].infoPanelTexture = D_300CC10;
+    sCastleMapNodes[11].infoPanelTexture = BinArchive_GetFile(sPortraitArchive, 14);
     return var_sp2C;
 }
 
