@@ -1947,8 +1947,8 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 fr
     move_cue = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[charge_move];
     idle_cue = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->idleCues;
 
-    if ((active_pokemon->state.flags & 2) || (party_pokemon->statusCondition & 7) ||
-        ((active_pokemon->state.flags & 0x200) && !(active_pokemon->state.flags & 0x400)) || (active_pokemon->state.flags & ACTIVE_UNDERGROUND)) {
+    if ((active_pokemon->state.flags & ACTIVE_FREEZE) || (party_pokemon->statusCondition & STATUS_SLEEP_MASK) ||
+        ((active_pokemon->state.flags & ACTIVE_AIRBORNE) && !(active_pokemon->state.flags & ACTIVE_AIR_ACTION)) || (active_pokemon->state.flags & ACTIVE_UNDERGROUND)) {
         if (BattleScene_AdvanceCameraFrameCounter(frame_limit) != 0) {
             return 1;
         }
@@ -1992,7 +1992,7 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 fr
 s32 BattleScene_IsRowAnimWaitComplete(ActivePokemon* active_pokemon, s32 frame_limit) {
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->hitCue;
 
-    if ((active_pokemon->state.flags & 2) || ((active_pokemon->state.flags & 0x200) && !(active_pokemon->state.flags & 0x400))) {
+    if ((active_pokemon->state.flags & ACTIVE_FREEZE) || ((active_pokemon->state.flags & ACTIVE_AIRBORNE) && !(active_pokemon->state.flags & ACTIVE_AIR_ACTION))) {
         if (BattleScene_AdvanceCameraFrameCounter(frame_limit) != 0) {
             return 1;
         }
@@ -2083,16 +2083,16 @@ void BattleScene_ResetBothParticipantsAnimationState(void) {
     side1_pokemon = sActivePokemon[0];
     side2_pokemon = sActivePokemon[1];
 
-    if (side1_pokemon_state->flags & 4) {
+    if (side1_pokemon_state->flags & ACTIVE_AIR_SETTLE) {
         sActivePokemon[0]->displayObject.position.y = 200.0f;
-        Battle_SetRuntimeFlags(sActivePokemon[0], 0x200);
-        Battle_ClearRuntimeFlags(sActivePokemon[0], 4);
+        Battle_SetRuntimeFlags(sActivePokemon[0], ACTIVE_AIRBORNE);
+        Battle_ClearRuntimeFlags(sActivePokemon[0], ACTIVE_AIR_SETTLE);
     }
 
-    if (side2_pokemon_state->flags & 4) {
+    if (side2_pokemon_state->flags & ACTIVE_AIR_SETTLE) {
         sActivePokemon[1]->displayObject.position.y = 200.0f;
-        Battle_SetRuntimeFlags(sActivePokemon[1], 0x200);
-        Battle_ClearRuntimeFlags(sActivePokemon[1], 4);
+        Battle_SetRuntimeFlags(sActivePokemon[1], ACTIVE_AIRBORNE);
+        Battle_ClearRuntimeFlags(sActivePokemon[1], ACTIVE_AIR_SETTLE);
     }
 
     if ((side1_pokemon_state->flags & ACTIVE_UNDERGROUND) && (side1_pokemon->displayObject.objectType == DUGTRIO)) {
@@ -2131,7 +2131,7 @@ void Battle_ClearOpponentHopFlagAndSyncMove(ActivePokemon* active_pokemon) {
         Battle_ClearRuntimeFlags(sActivePokemon[BattleScene_GetParticipantSideIndex(active_pokemon) == 0], 4);
     }
 
-    if (active_pokemon->state.flags & 0x200) {
+    if (active_pokemon->state.flags & ACTIVE_AIRBORNE) {
         Battle_SetRuntimeFlags(active_pokemon, 0x400);
     }
 }

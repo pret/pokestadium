@@ -5,8 +5,8 @@
 #include "src/matrix.h"
 
 void BattleScene_TriggerOwnerModelAnimation(ActivePokemon* active_pokemon) {
-    ModelAnim_SetFrame(&active_pokemon->presentationState.unk_000, active_pokemon->presentationState.unk_180);
-    ModelAnim_SetAnimation(&active_pokemon->presentationState.unk_000, active_pokemon->presentationState.unk_17C);
+    ModelAnim_SetFrame(&active_pokemon->presentationState.displayObject, active_pokemon->presentationState.unk_180);
+    ModelAnim_SetAnimation(&active_pokemon->presentationState.displayObject, active_pokemon->presentationState.unk_17C);
     BattleScene_SetOwnerPoseFlag(active_pokemon->presentationState.unk_168);
 }
 
@@ -89,8 +89,8 @@ void BattleScene_ApplyOwnerCameraFraming(ActivePokemon* active_pokemon) {
     tmp2 = D_84384578[temp_v0]->unk_00.y;
     active_pokemon->presentationState.unk_194 = tmp2;
 
-    BattleScene_SetCameraAtAndEyeFromAngles(sp30, active_pokemon->presentationState.unk_000.position.x + active_pokemon->presentationState.unk_190, active_pokemon->presentationState.unk_000.position.y + tmp2,
-                  active_pokemon->presentationState.unk_000.position.z, active_pokemon->presentationState.unk_188, active_pokemon->presentationState.unk_184, active_pokemon->presentationState.unk_186);
+    BattleScene_SetCameraAtAndEyeFromAngles(sp30, active_pokemon->presentationState.displayObject.position.x + active_pokemon->presentationState.unk_190, active_pokemon->presentationState.displayObject.position.y + tmp2,
+                  active_pokemon->presentationState.displayObject.position.z, active_pokemon->presentationState.unk_188, active_pokemon->presentationState.unk_184, active_pokemon->presentationState.unk_186);
 }
 
 void BattleScene_TickOwnerCameraFraming(ActivePokemon* active_pokemon) {
@@ -110,7 +110,7 @@ void BattleScene_TickOwnerSlideIn(ActivePokemon* arg0, s32 arg1) {
     PresentationLayout* temp_v0;
 
     arg0->presentationState.unk_168->node.flags |= 1;
-    arg0->presentationState.unk_000.node.flags |= 1;
+    arg0->presentationState.displayObject.node.flags |= 1;
 
     if (arg0->presentationState.unk_178 == 1) {
         if ((arg0->presentationState.unk_168->unk_1C == -0x48) && !(arg0->state.flags & 0x800)) {
@@ -142,14 +142,14 @@ void BattleScene_TickOwnerSlideOut(ActivePokemon* arg0, s32 arg1) {
         arg0->presentationState.unk_168->unk_1C = Math_StepToS32(arg0->presentationState.unk_168->unk_1C, -0x48, arg1, arg1);
         if (arg0->presentationState.unk_168->unk_1C == -0x48) {
             arg0->presentationState.unk_168->node.flags &= ~1;
-            arg0->presentationState.unk_000.node.flags &= ~1;
+            arg0->presentationState.displayObject.node.flags &= ~1;
         }
     } else {
         arg0->presentationState.unk_18C = 0;
         arg0->presentationState.unk_168->unk_1C = Math_StepToS32(arg0->presentationState.unk_168->unk_1C, 0x15F, arg1, arg1);
         if (arg0->presentationState.unk_168->unk_1C == 0x15F) {
             arg0->presentationState.unk_168->node.flags &= ~1;
-            arg0->presentationState.unk_000.node.flags &= ~1;
+            arg0->presentationState.displayObject.node.flags &= ~1;
         }
     }
 }
@@ -167,7 +167,7 @@ void BattleScene_TickOwnerSlideAnimation(ActivePokemon* active_pokemon) {
 }
 
 void BattleScene_TickBothOwnerSlideAnimations(ActivePokemon* arg0, ActivePokemon* arg1) {
-    if (gSessionContext.mode != 0x10) {
+    if (gSessionContext.mode != SESSION_MODE_EVENT_BATTLE) {
         BattleScene_TickOwnerSlideAnimation(arg0);
         BattleScene_TickOwnerSlideAnimation(arg1);
     }
