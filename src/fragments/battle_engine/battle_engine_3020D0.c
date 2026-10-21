@@ -66,7 +66,7 @@ void Battle_ClearMessageCursor(void) {
     gBattleMessageQueues->unk_008[1] = 0;
 }
 
-void func_84317940(s8* arg0, s8* arg1, ...) {
+void Battle_SimpleStringFormat(s8* arg0, s8* arg1, ...) {
     va_list args;
     s8* src;
     s8* fmt;
@@ -117,7 +117,7 @@ void Battle_QueueStatusText(char* arg0, s32 arg1) {
 
     Battle_ClearMessageCursor();
     gBattleMessageQueues->unk_000 = sActivePokemon[arg1]->sessionTeams->teamMember[sp28->unk_2B]->unk_001;
-    func_84317940(gBattleMessageQueues->unk_048, arg0 + 1);
+    Battle_SimpleStringFormat(gBattleMessageQueues->unk_048, arg0 + 1);
     *arg0 = 0;
 }
 
@@ -652,11 +652,11 @@ void BattleBox_Update(s16 arg0, s16 arg1) {
                 }
             } else {
                 if (temp_s0->unk_04 == 0xE) {
-                    func_8003F660(BattleScene_GetParticipantDisplayPlayerNumber(sActivePokemon[temp_s0->unk_0C]));
+                    ProcessAudioCommandQueue(BattleScene_GetParticipantDisplayPlayerNumber(sActivePokemon[temp_s0->unk_0C]));
                     BattleBox_DrawMessage(temp_s0, temp_s0->unk_14.x, temp_s0->unk_14.y);
                     temp_s0->unk_00++;
                 } else if (BattleHud_UpdateCaptionBoxPopup(temp_s0, arg0, arg1) != 0) {
-                    func_8003F660(BattleScene_GetParticipantDisplayPlayerNumber(sActivePokemon[temp_s0->unk_0C]));
+                    ProcessAudioCommandQueue(BattleScene_GetParticipantDisplayPlayerNumber(sActivePokemon[temp_s0->unk_0C]));
                     BattleBox_DrawMessage(temp_s0, temp_s0->unk_14.x, temp_s0->unk_14.y);
                     temp_s0->unk_00++;
                 }

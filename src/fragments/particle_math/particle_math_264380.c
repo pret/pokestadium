@@ -55,7 +55,7 @@ static Gfx D_8140DB80[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8140DBA8[] = {
+Gfx gDL_ItemIcon[] = {
     gsSPDisplayList(D_8140DB80),
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_PASS2),
@@ -152,7 +152,7 @@ Gfx D_8140DD58[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8140DD78[] = {
+Gfx gDL_BeginUIOverlay[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsDPSetTextureLUT(G_TT_NONE),
@@ -167,14 +167,14 @@ Gfx D_8140DD78[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8140DDD8[] = {
+Gfx gDL_EndColorFill[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsDPSetAlphaCompare(G_AC_NONE),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8140DDF8[] = {
+Gfx gDL_BeginColorFill[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPSetTexturePersp(G_TP_NONE),
@@ -216,13 +216,13 @@ Vtx D_8140DEF8[] = {
     VTX(7, 7, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),       VTX(-8, 7, 0, 480, 0, 0xFF, 0xFF, 0xFF, 0xFF),
 };
 
-Vtx D_8140DF78[] = {
+Vtx gVtx_UI_TriangleSmall[] = {
     VTX(0, 0, 0, 224, 0, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(7, 255, 0, 480, 8160, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(-8, 255, 0, 0, 8160, 0xFF, 0xFF, 0xFF, 0xFF),
 };
 
-Vtx D_8140DFA8[] = {
+Vtx gVtx_UI_TriangleLarge[] = {
     VTX(0, 0, 0, 224, 0, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(31, 255, 0, 480, 8160, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(-32, 255, 0, 0, 8160, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -249,7 +249,7 @@ Vtx D_8140E058[] = {
     VTX(-16, 31, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
 };
 
-Vtx D_8140E098[] = {
+Vtx gVtx_UI_RectVertical[] = {
     VTX(0, -16, 0, 0, 992, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(31, -16, 0, 992, 992, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(31, 15, 0, 992, 0, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -296,7 +296,7 @@ Vtx D_8140E1F8[] = {
     VTX(-16, 15, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
 };
 
-Vtx D_8140E238[] = {
+Vtx gVtx_UI_ComplexQuad[] = {
     VTX(-16, -48, 0, 0, 3040, 0xFF, 0xFF, 0xFF, 0xFF), VTX(15, -48, 0, 992, 3040, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(15, 47, 0, 992, 0, 0xFF, 0xFF, 0xFF, 0xFF),    VTX(-16, 47, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
     VTX(-32, -16, 0, 0, 992, 0xFF, 0xFF, 0xFF, 0xFF),  VTX(31, -16, 0, 2016, 992, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -319,7 +319,7 @@ Vtx D_8140E378[] = {
     VTX(-64, 0, -64, 0, 4064, 0x00, 0x00, 0x78, 0xFF),
 };
 
-Vtx D_8140E3B8[] = {
+Vtx gFullscreenQuadVtx[] = {
     VTX(-160, -120, 0, 0, 1024, 0x00, 0x00, 0x78, 0xFF),
     VTX(160, -120, 0, 1024, 1024, 0x00, 0x00, 0x78, 0xFF),
     VTX(160, 120, 0, 1024, 0, 0x00, 0x00, 0x78, 0xFF),
@@ -336,7 +336,7 @@ static Gfx D_8140E408[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8140E418[] = {
+Gfx gDL_PanelBackground[] = {
     gsSPVertex(D_8140E148, 4, 0),
     gsSPDisplayList(D_8140E3F8),
     gsSPEndDisplayList(),

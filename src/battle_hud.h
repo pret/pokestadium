@@ -16,7 +16,7 @@ extern s16 D_800AF7B0[2];
 void BattleHud_SetDigitRotationTargets(u8 arg0, s16 arg1);
 void BattleHud_ApproachDigitRotations(u8 arg0, s16 arg1);
 void ModelAnim_UpdateFrameChangeState(void);
-s32 func_800325AC(void);
+s32 ModelPhase_IsIdle(void);
 u8 ModelRenderer_GetActiveMode(void);
 #if defined(VERSION_JP)
 void ModelAnim_StartDisplayObjectAnimation(u32 arg0);

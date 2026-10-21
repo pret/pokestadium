@@ -484,7 +484,7 @@ void Audio_FadeOutAll(s32 arg0) {
     D_8007840C = 0;
     Audio_QueueFadeSoundCommand(D_80078FA8, arg0);
     AudioStream_SetEnabled(0);
-    func_8003DB84(0);
+    AudioFrameUpdate(0);
 
     if (D_800FF9B4 != 0x50) {
         for (i = 0; i < 2; i++) {

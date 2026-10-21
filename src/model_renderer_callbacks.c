@@ -163,7 +163,7 @@ void ModelRenderer_UpdateSlotVertices(void) {
 
     mode = ModelRenderer_GetActiveMode();
     index = (u8)mode;
-    if ((mode < 2) && (func_800325AC() == 0) && (D_800AF7C0[index] >= 2)) {
+    if ((mode < 2) && (ModelPhase_IsIdle() == 0) && (D_800AF7C0[index] >= 2)) {
         ModelRenderer_CacheSlotMatrices(index);
         ModelRenderer_RebuildSlotMatrix(index);
         ModelRenderer_ApplySlotScale(index);

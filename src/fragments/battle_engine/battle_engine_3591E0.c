@@ -248,6 +248,6 @@ void func_8436EED4(void) {
 void func_8436EEDC(void) {
 }
 
-s32 func_8436EEE4(s32 arg0) {
+s32 AuxEffect_GetId(s32 arg0) {
     return arg0;
 }

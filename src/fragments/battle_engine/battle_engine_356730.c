@@ -236,7 +236,7 @@ s32 DoubleTextureTrail_UpdateAll(void) {
                               (j * 4) + (k + 10), (j * 4) + (k + 1), 0);                                      \
     }
 
-Gfx* func_8436C6A4(Gfx* arg0, DoubleTextureTrail* arg1, s16 arg2, s16 arg3) {
+Gfx* WaterParticle_DrawPass(Gfx* arg0, DoubleTextureTrail* arg1, s16 arg2, s16 arg3) {
     s32 i;
     s32 j;
     Vtx* sp44;
@@ -326,7 +326,7 @@ Gfx* DoubleTextureTrail_DrawAll(Gfx* arg0) {
 
     for (i = 0; i < 4; i++, var_fp++) {
         if (var_fp->unk_000 == 1) {
-            if (func_800325AC() == 0) {
+            if (ModelPhase_IsIdle() == 0) {
                 var_fp->unk_064.unk_00 += var_fp->unk_064.unk_04;
                 var_fp->unk_064.unk_02 += var_fp->unk_064.unk_06;
                 var_fp->unk_070.unk_00 += var_fp->unk_070.unk_04;
@@ -363,7 +363,7 @@ Gfx* DoubleTextureTrail_DrawAll(Gfx* arg0) {
                 spDC.x = spD8->view.eyePosition.x;
                 spDC.y = spD8->view.eyePosition.y;
                 spDC.z = spD8->view.eyePosition.z;
-                arg0 = func_84367660(arg0, &spF4, &spE8, &spDC, 20.0f, var_fp->unk_086.r, var_fp->unk_086.g,
+                arg0 = Gfx_DrawThickLine(arg0, &spF4, &spE8, &spDC, 20.0f, var_fp->unk_086.r, var_fp->unk_086.g,
                                      var_fp->unk_086.b, var_fp->unk_086.a * var_fp->unk_08C);
             }
 
@@ -385,13 +385,13 @@ Gfx* DoubleTextureTrail_DrawAll(Gfx* arg0) {
             gSPSetGeometryMode(arg0++, G_CULL_FRONT);
             gDPPipeSync(arg0++);
 
-            arg0 = func_8436C6A4(arg0, var_fp, i, 0);
+            arg0 = WaterParticle_DrawPass(arg0, var_fp, i, 0);
 
             gSPClearGeometryMode(arg0++, G_CULL_BOTH);
             gSPSetGeometryMode(arg0++, G_CULL_BACK);
             gDPPipeSync(arg0++);
 
-            arg0 = func_8436C6A4(arg0, var_fp, i, 1);
+            arg0 = WaterParticle_DrawPass(arg0, var_fp, i, 1);
         }
     }
 
