@@ -43,6 +43,10 @@ jobs:
     # regenerated from master's own already-trusted source, never from
     # PR-supplied input.
     # Draft PRs are skipped; marking one ready runs the gate (ready_for_review).
+    # An outside contributor's PR also runs once a maintainer reviewed the diff
+    # and added the gate-approved label. Only the `labeled` event for that label
+    # counts, so a later push (synchronize) never runs on a stale approval; the
+    # guard step below pins the exact commit and refuses build-tooling changes.
     if: >-
       (github.event_name != 'pull_request' || github.event.pull_request.draft == false) &&
       (
@@ -54,10 +58,6 @@ jobs:
           github.event.pull_request.head.ref == 'ci/refresh-coverage'
         ) ||
         (
-          # A maintainer reviewed an outside contributor's diff and added the
-          # approval label. Only the `labeled` event for that label counts, so
-          # a later push (synchronize) never runs on a stale approval; the
-          # steps below pin the exact commit and refuse build-tooling changes.
           github.event.action == 'labeled' &&
           github.event.label.name == 'gate-approved' &&
           contains(github.event.pull_request.labels.*.name, 'gate-approved')
