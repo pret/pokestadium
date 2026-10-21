@@ -749,7 +749,7 @@ void Battle_HandleStatBoostingMoveAnimation(ActivePokemon* active_pokemon) {
             if (((move == GROWTH) || (move == MEDITATE) || (move == AGILITY) || (move == HARDEN) || (move == WITHDRAW) ||
                  (move == SWORDS_DANCE) || (move == DOUBLE_TEAM) || (move == MINIMIZE) || (move == DEFENSE_CURL) || (move == BARRIER) ||
                  (move == AMNESIA) || (move == ACID_ARMOR) || (move == SHARPEN)) &&
-                (D_843C4E45 == 1)) {
+                (sStatCanBeLoweredFurther == 1)) {
                 BattleAnim_QueueEffectList6(3, active_pokemon);
                 Audio_PlayCommand(35, 0, 0);
             }
@@ -954,7 +954,7 @@ void BattleScene_StartHitReactionAnim(ActivePokemon* active_pokemon) {
     sActivePokemon[target_side]->animationTimer = 0;
 
     if (!(target_state->flags & 0x200) && !(target_state->flags & 0x4000) && !(target_state->flags & 2)) {
-        // no battle reaction for week hits
+        // no battle reaction for weak hits
         if (((sTypeEffectiveness < TYPE_EFFECTIVENESS_NEUTRAL) || (sBattleMoveFailed != 0)) && ((runtime->unk_15 & 0x20) == 0)) {
             sCurrentAnimation = &sSideBattleCues[target_side]->idleCues;
             if (target_state->flags & 0x200) {
@@ -979,6 +979,7 @@ void BattleScene_StartHitReactionAnim(ActivePokemon* active_pokemon) {
         ModelAnim_SetFrame(&sActivePokemon[target_side]->displayObject, 0);
         ModelAnim_SetAnimation(&sActivePokemon[target_side]->displayObject, sCurrentAnimation->id);
 
+        // These moves distort the target's body a bit
         if ((runtime->moveCache.lastMove == STOMP) || (runtime->moveCache.lastMove == BODY_SLAM) || (runtime->moveCache.lastMove == SEISMIC_TOSS)) {
             BattleScene_SetParticipantModelFlags(sActivePokemon[target_side], 0x0F, 0);
         }
@@ -986,10 +987,10 @@ void BattleScene_StartHitReactionAnim(ActivePokemon* active_pokemon) {
 }
 
 /**
- * State tick: when the target reaches the move cue's end frame (unk_07),
+ * Handles animation for "lasso" moves
  * cleans up effects and queues the end-of-move effect on the target.
  */
-void BattleScene_TickPlayMoveEffectEnd(ActivePokemon* active_pokemon) {
+void BattleScene_HandleLassoMoves(ActivePokemon* active_pokemon) {
     BattleMonRuntime* runtime;
     s32 side;
 
@@ -998,11 +999,11 @@ void BattleScene_TickPlayMoveEffectEnd(ActivePokemon* active_pokemon) {
 
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->moveCues[runtime->usedMove - 1];
 
-    if (sActivePokemon[side == 0]->animationTimer == (sCurrentAnimation->unk_07 + 1)) {
+    if (sActivePokemon[side == 0]->animationTimer == (sCurrentAnimation->endFrame + 1)) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             BattleAnim_CleanupEffects(1);
             if (runtime->moveCache.lastMove == STRING_SHOT) {
-                if ((D_843C4E45 != 0) && (sConfused != 0)) {
+                if ((sStatCanBeLoweredFurther != 0) && (sConfused != 0)) {
                     BattleAnim_PlayMoveEffectEnd(sActivePokemon[side == 0], runtime->usedMove);
                     BattleScene_SetParticipantModelFlags(sActivePokemon[side == 0], 16, 0);
                 }
@@ -1030,7 +1031,7 @@ void BattleScene_TickRow4PostEndCamera(ActivePokemon* active_pokemon) {
 
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->moveCues[runtime->usedMove - 1];
 
-    if ((sCurrentAnimation->unk_07 + 1) == sActivePokemon[side]->animationTimer) {
+    if ((sCurrentAnimation->endFrame + 1) == sActivePokemon[side]->animationTimer) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             if (sConfused == 1) {
                 BattleAnim_PlaySpeciesReactionSound(sActivePokemon[side], runtime, 1);
@@ -1066,8 +1067,8 @@ s32 BattleScene_IsOpponentRowCheckpointReached(ActivePokemon* active_pokemon) {
 
     opponent_runtime = &sActivePokemon[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->state.runtime;
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[opponent_runtime->usedMove - 1];
-    if (sCurrentAnimation->unk_0C != 0) {
-        if (active_pokemon->animationTimer == sCurrentAnimation->unk_0C) {
+    if (sCurrentAnimation->checkpointFrame != 0) {
+        if (active_pokemon->animationTimer == sCurrentAnimation->checkpointFrame) {
             return 1;
         }
         return 0;
@@ -1081,8 +1082,8 @@ s32 BattleScene_IsOpponentRowCheckpointReached(ActivePokemon* active_pokemon) {
 s32 BattleScene_IsRowZeroCheckpointReached(ActivePokemon* active_pokemon) {
     BattleScene_GetParticipantSideIndex(active_pokemon);
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->moveCues[0];
-    if (sCurrentAnimation->unk_0C != 0) {
-        if (active_pokemon->animationTimer == sCurrentAnimation->unk_0C) {
+    if (sCurrentAnimation->checkpointFrame != 0) {
+        if (active_pokemon->animationTimer == sCurrentAnimation->checkpointFrame) {
             return 1;
         }
         return 0;
@@ -1414,7 +1415,7 @@ void BattleScene_Row12Slot1CameraCleanup(ActivePokemon* active_pokemon) {
     runtime = &active_pokemon->state.runtime;
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->moveCues[runtime->usedMove - 1];
 
-    if ((sCurrentAnimation->unk_07 + 1) == sActivePokemon[side]->animationTimer) {
+    if ((sCurrentAnimation->endFrame + 1) == sActivePokemon[side]->animationTimer) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             BattleAnim_PlaySpeciesReactionSound(active_pokemon, runtime, 5);
             sBattleSceneStateTickSlots[sBattleSceneStateTickSlotIndex].unk_04 = sBattleSceneStateTickSentinel;
@@ -1593,7 +1594,7 @@ void BattleScene_TickRow14PlayMoveEffectEnd(ActivePokemon* active_pokemon) {
 
     sCurrentAnimation = &sSideBattleCues[side == 0]->moveCues[runtime_temp->usedMove - 1];
 
-    if ((sActivePokemon[side == 0]->animationTimer == (sCurrentAnimation->unk_07 + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
+    if ((sActivePokemon[side == 0]->animationTimer == (sCurrentAnimation->endFrame + 1)) && (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0)) {
         BattleAnim_CleanupEffects(1);
         if (((runtime_temp->usedMove == SUPERSONIC) || (runtime_temp->usedMove == CONFUSE_RAY)) && (runtime->unk_4C & 0x80) && (sBattleMoveFailed == 0) &&
             (sConfused == 1)) {
@@ -1620,7 +1621,7 @@ s32 BattleScene_GetOpponentEffectCheckpoint(ActivePokemon* active_pokemon) {
     target_side = BattleScene_GetParticipantSideIndex(active_pokemon) == 0;
     sCurrentAnimation = &sSideBattleCues[target_side]->moveCues[runtime->usedMove - 1];
 
-    if (D_843C4E45 != 1) {
+    if (sStatCanBeLoweredFurther != 1) {
         return 2;
     }
 
@@ -1643,7 +1644,7 @@ void BattleScene_TickRow11QueueEffectList6(ActivePokemon* active_pokemon) {
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->moveCues[runtime->usedMove - 1];
     if (sActivePokemon[target_side]->animationTimer == (sCurrentAnimation->unk_08 + 1)) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
-            if (D_843C4E45 == 1) {
+            if (sStatCanBeLoweredFurther == 1) {
                 BattleAnim_QueueEffectList6(1, sActivePokemon[target_side]);
                 BattleAnim_PlayBattleSequenceById(active_pokemon, 32);
             }
@@ -1664,7 +1665,7 @@ void BattleScene_TickRow11PostEndCamera(ActivePokemon* active_pokemon) {
     runtime = &active_pokemon->state.runtime;
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon) == 0]->moveCues[runtime->usedMove - 1];
 
-    if ((sCurrentAnimation->unk_07 + 1) == sActivePokemon[target_side]->animationTimer) {
+    if ((sCurrentAnimation->endFrame + 1) == sActivePokemon[target_side]->animationTimer) {
         if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
             if (sConfused == 1) {
                 BattleAnim_PlaySpeciesReactionSound(sActivePokemon[target_side], runtime, 1);

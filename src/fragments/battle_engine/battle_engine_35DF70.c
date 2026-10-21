@@ -437,7 +437,7 @@ void Battle_Effect_RaiseOwnStat(void) {
         }
     } else {
     block_32:
-        D_843C4E45 = 0;
+        sStatCanBeLoweredFurther = 0;
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x67);
     }
 }
@@ -553,7 +553,7 @@ void Battle_Effect_LowerStat(void) {
 block_39:
     if (sBattleUser->moveCache.unk_01 < 0x44) {
         sConfused = 0;
-        D_843C4E45 = 0;
+        sStatCanBeLoweredFurther = 0;
         Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x5A);
         return;
     }
@@ -561,12 +561,12 @@ block_39:
 end:
     if (sBattleUser->moveCache.unk_01 < 0x44) {
         sConfused = 0;
-        D_843C4E45 = 0;
+        sStatCanBeLoweredFurther = 0;
         if (D_843C4DA9 == 0) {
             Battle_QueueMessage(gBattleMessageQueues->unk_088, -0x59);
         }
     } else {
-        D_843C4E45 = 0;
+        sStatCanBeLoweredFurther = 0;
     }
 }
 
@@ -771,7 +771,7 @@ void Battle_Effect_Recoil(void) {
 void Battle_Effect_ConfuseChance(void) {
     if (!(sBattleTarget->unk_4D & 0x10) && (Battle_Random() < 0x1A) && !(sBattleTarget->unk_4C & 0x80)) {
         sBattleScene.unk_00->unk_1A = 3;
-        D_843C4E45 = 0;
+        sStatCanBeLoweredFurther = 0;
         sBattleTarget->unk_4C |= 0x80;
         sBattleTarget->unk_50 = (Battle_Random() & 3) + 2;
         Text_SetStringToken(0x19, Battle_GetActiveMonNickname(sActivePokemon[!sBattleScene.unk_00->unk_2C]));
