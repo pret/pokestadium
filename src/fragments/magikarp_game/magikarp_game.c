@@ -1183,7 +1183,7 @@ void MagikarpGame_InitActors(void) {
         ModelAnim_ClearTransformChannel(&D_86003B60->unk_000);
     }
 
-    D_86002F50 = Asset_LoadToSegment(0, (void*)&D_124570, (void*)fragment7_ROM_START, 0);
+    D_86002F50 = Asset_LoadToSegment(0, (void*)fragment6_misc_ROM_START, (void*)fragment7_ROM_START, 0);
     MagikarpGame_InitCamera();
     Widget_CountdownInit();
 }
