@@ -167,7 +167,7 @@ void BattleScene_TickOwnerSlideAnimation(ActivePokemon* active_pokemon) {
 }
 
 void BattleScene_TickBothOwnerSlideAnimations(ActivePokemon* arg0, ActivePokemon* arg1) {
-    if (gSessionContext.mode != SESSION_MODE_EVENT_BATTLE) {
+    if (gSessionContext.mode != SESSION_MODE_ATTRACT_DEMO_BATTLE) {
         BattleScene_TickOwnerSlideAnimation(arg0);
         BattleScene_TickOwnerSlideAnimation(arg1);
     }
