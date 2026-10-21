@@ -477,7 +477,7 @@ void BattlePrep_CheckPikachuNeedsSurf(void) {
             }
         }
 
-        for (i = 0; i < var_a1->numberOfPokemonChosen; i++) {
+        for (i = 0; i < var_a1->numberOfPokemonBrought; i++) {
             BattleMon* ptr = &var_a1->pokemonPicked[i];
 
             if (ptr->unk_00.unk_00 == 0x19) {

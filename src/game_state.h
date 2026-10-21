@@ -30,7 +30,7 @@ typedef struct BattleMon {
     /* 0x00 */ BattleMonSpecies unk_00;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
+    /* 0x05 */ u8 statusCondition;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
     /* 0x08 */ u8 unk_08;
@@ -99,7 +99,7 @@ typedef struct ExtendedRosterInfo {
 typedef struct TeamRoster {
     /* 0x000 */ u8 unk_000;
     /* 0x001 */ u8 unk_001;
-    /* 0x002 */ u8 numberOfPokemonChosen;
+    /* 0x002 */ u8 numberOfPokemonBrought;
     /* 0x004 */ Controller* controller;
     /* 0x008 */ char unk_008[4];
     /* 0x00C */ char unk00C[0xC];

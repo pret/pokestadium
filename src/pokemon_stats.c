@@ -175,7 +175,7 @@ void Pokemon_PrepareBattleMon(BattleMon* arg0) {
     s32 idx;
 
     Pokemon_RecalcStats(arg0);
-    arg0->unk_05 = 0;
+    arg0->statusCondition = 0;
     arg0->unk_02 = arg0->unk_26;
 
     for (i = 0; i < 4; i++) {
@@ -258,10 +258,10 @@ s32 GbSave_PlayerIdentityMatches(u16* arg0, GbSavePlayerIdentity* arg1) {
 }
 #endif
 
-u8 Move_GetIdFromTableIndex(s32 arg0) {
+u8 Move_GetIdFromTableIndex(s32 tm_hm_index) {
     extern u8 D_80073230[];
 
-    return D_80073230[arg0];
+    return D_80073230[tm_hm_index];
 }
 
 u8 Species_ToInternalIndex(s32 arg0) {

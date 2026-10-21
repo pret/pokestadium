@@ -1076,17 +1076,17 @@ static unk_D_80079070 D_80079070[151] = {
 
 u8 D_80079364 = 0;
 
-void Cry_Play(u32 arg0, u32 arg1) {
+void Cry_Play(u32 species, u32 cry_mode) {
     UNUSED s32 pad[2];
     u32 sp24;
     u32 var_a3;
-    u8 var_v0;
+    u8 is_partner_pikachu;
 
     var_a3 = 0;
-    var_v0 = 0;
-    if (arg0 == 0xC8) {
-        var_v0 = 1;
-    } else if (((arg0 == 0) || (arg0 >= 0x98)) && (arg1 != 0xA)) {
+    is_partner_pikachu = 0;
+    if (species == 0xC8) {
+        is_partner_pikachu = 1;
+    } else if (((species == 0) || (species >= 0x98)) && (cry_mode != 0xA)) {
         return;
     }
 
@@ -1096,67 +1096,67 @@ void Cry_Play(u32 arg0, u32 arg1) {
         D_80079364 = 0;
     }
 
-    switch (arg1) {
+    switch (cry_mode) {
         case 0:
-            if (var_v0 != 0) {
-                arg0 = 0x9D;
+            if (is_partner_pikachu != 0) {
+                species = 0x9D;
             }
             sp24 = 0x70;
             break;
 
         case 7:
-            if (var_v0 != 0) {
-                arg0 = 0x9D;
+            if (is_partner_pikachu != 0) {
+                species = 0x9D;
             }
             sp24 = 0x10;
             var_a3 = 0xA;
             break;
 
         case 8:
-            if (var_v0 != 0) {
-                arg0 = 0x9D;
+            if (is_partner_pikachu != 0) {
+                species = 0x9D;
             }
             sp24 = 0x50;
             var_a3 = 0x14;
             break;
 
         case 2:
-            if (var_v0 != 0) {
-                arg0 = 0x9D;
+            if (is_partner_pikachu != 0) {
+                species = 0x9D;
                 var_a3 = 0x3C;
             } else {
-                var_a3 = D_80079070[arg0 - 1].unk_03;
+                var_a3 = D_80079070[species - 1].unk_03;
             }
             sp24 = 0x30;
             break;
 
         case 3:
-            if (var_v0 != 0) {
-                arg0 = 0x9D;
+            if (is_partner_pikachu != 0) {
+                species = 0x9D;
                 var_a3 = 0x3C;
             } else {
-                var_a3 = D_80079070[arg0 - 1].unk_03;
+                var_a3 = D_80079070[species - 1].unk_03;
             }
             sp24 = 0x60;
             Audio_PlayCommand(0x15, D_80078400, 0);
             break;
 
         case 4:
-            if (var_v0 != 0) {
-                arg0 = 0x9C;
+            if (is_partner_pikachu != 0) {
+                species = 0x9C;
                 var_a3 = 0x32;
             } else {
-                var_a3 = D_80079070[arg0 - 1].unk_03;
+                var_a3 = D_80079070[species - 1].unk_03;
             }
             sp24 = 0x70;
             Audio_PlayCommand(0x15, D_80078400, 0);
             break;
 
         case 5:
-            if ((var_v0 != 0) && ((D_800FCB18[0] == NULL) || (D_800FCB18[1] == NULL) ||
+            if ((is_partner_pikachu != 0) && ((D_800FCB18[0] == NULL) || (D_800FCB18[1] == NULL) ||
                                   (((D_800FCB18[0]->unk_15 & 7) == 0) && ((D_800FCB18[1]->unk_15 & 7) == 0) &&
                                    !(D_800FCB18[0]->unk_15 & 0x20) && !(D_800FCB18[1]->unk_15 & 0x20)))) {
-                arg0 = 0x9A;
+                species = 0x9A;
                 sp24 = 0x70;
             } else {
                 return;
@@ -1164,10 +1164,10 @@ void Cry_Play(u32 arg0, u32 arg1) {
             break;
 
         case 6:
-            if ((var_v0 != 0) && (((D_800FCB18[0] == NULL) || (D_800FCB18[1] == NULL)) ||
+            if ((is_partner_pikachu != 0) && (((D_800FCB18[0] == NULL) || (D_800FCB18[1] == NULL)) ||
                                   (!(D_800FCB18[0]->unk_15 & 7) && !(D_800FCB18[1]->unk_15 & 7) &&
                                    !(D_800FCB18[0]->unk_15 & 0x20) && !(D_800FCB18[1]->unk_15 & 0x20)))) {
-                arg0 = 0x9B;
+                species = 0x9B;
                 sp24 = 0x70;
             } else {
                 return;
@@ -1175,18 +1175,18 @@ void Cry_Play(u32 arg0, u32 arg1) {
             break;
 
         case 1:
-            if (var_v0 != 0) {
-                arg0 = 0x98;
+            if (is_partner_pikachu != 0) {
+                species = 0x98;
                 sp24 = 0x70;
             } else {
                 sp24 = 0x60;
-                var_a3 = D_80079070[arg0 - 1].unk_04;
+                var_a3 = D_80079070[species - 1].unk_04;
             }
             break;
 
         case 10:
             sp24 = 0x70;
-            switch (arg0) {
+            switch (species) {
                 case 0x9C:
                     var_a3 = 0x32;
                     break;
@@ -1228,14 +1228,14 @@ void Cry_Play(u32 arg0, u32 arg1) {
             break;
 
         default:
-            if (var_v0 != 0) {
-                arg0 = 0x9D;
+            if (is_partner_pikachu != 0) {
+                species = 0x9D;
             }
             sp24 = 0x60;
             break;
     }
 
-    AudioStream_Start(0, D_800FC708->seqArray[arg0 - 1].offset, sp24, var_a3);
+    AudioStream_Start(0, D_800FC708->seqArray[species - 1].offset, sp24, var_a3);
 }
 
 void Cry_PlayVariant4(u32 arg0) {

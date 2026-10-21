@@ -92,7 +92,7 @@ unk_D_88400100* LabPC_GetMonStatusIcon(BattleMon* arg0) {
     if (arg0->unk_02 == 0) {
         var_v1 = 1;
     } else {
-        var_v1 = LabPC_StatusToIconIndex(arg0->unk_05);
+        var_v1 = LabPC_StatusToIconIndex(arg0->statusCondition);
     }
     return &D_88400100[var_v1];
 }

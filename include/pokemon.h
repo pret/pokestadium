@@ -150,6 +150,7 @@
 #define MEWTWO      150
 #define MEW         151
 #define SUBSTITUTE_DOLL    152
+#define PARTNER_PIKACHU 200
 
 #define RGBY_RHYDON      0x01
 #define RGBY_KANGASKHAN  0x02

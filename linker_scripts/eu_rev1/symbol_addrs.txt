@@ -1527,9 +1527,9 @@ gTradeStrings = 0x82F13C50;
 gBattleMessageQueues = 0x84390230;
 sBattleScene = 0x843902D0;
 sBattleMoveFailed = 0x843C4E34;
-gBattleDamage = 0x843C4E54;
-gBattleUser = 0x843C52C8;
-gBattleTarget = 0x843C52CC;
+sBattleDamage = 0x843C4E54;
+sBattleUser = 0x843C52C8;
+sBattleTarget = 0x843C52CC;
 
 // GB recompiler code templates: defined in gb_tower_emulator_7F9A0.c, so keep
 // splat from migrating them back into func_8120572C.s.
