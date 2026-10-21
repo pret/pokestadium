@@ -381,8 +381,8 @@ s32 ModelAnim_HasCrossedFrame(DisplayObject* arg0, s16 arg1) {
     return var_a2;
 }
 
-s32 ModelAnim_IsAnimationDone(DisplayObject* arg0) {
-    return ModelAnim_HasCrossedFrame(arg0, arg0->transformAnim.data->endFrame - 1);
+s32 ModelAnim_IsAnimationDone(DisplayObject* display_object) {
+    return ModelAnim_HasCrossedFrame(display_object, display_object->transformAnim.data->endFrame - 1);
 }
 
 s32 ModelAnim_IsFinished(DisplayObject* arg0) {

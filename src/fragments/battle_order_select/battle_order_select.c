@@ -1164,11 +1164,11 @@ void BattleMenu_CommitOrderSelection(void) {
     while (var_s4-- > 0) {
         temp_s1 = var_s2->unk_001C;
         if (temp_s1->unk_000 & 2) {
-            temp_s1->numberOfPokemonChosen = temp_s1->rosterInfo->numberOfPokemonCanBePicked;
+            temp_s1->numberOfPokemonBrought = temp_s1->rosterInfo->numberOfPokemonCanBePicked;
             _bcopy(temp_s1->rosterInfo->unk_028, temp_s1->pokemonPicked, 0x1F8);
         } else {
             BattleMenu_FillDefaultOrder(var_s2->unk_000C, var_s2->unk_000B);
-            temp_s1->numberOfPokemonChosen = var_s2->unk_000B;
+            temp_s1->numberOfPokemonBrought = var_s2->unk_000B;
 
             for (i = 0; i < temp_s1->rosterInfo->numberOfPokemonCanBePicked; i++) {
                 temp_s1->pokemonPicked[i] = var_s2->unk_0018[var_s2->unk_000C[i]];

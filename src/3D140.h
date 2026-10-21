@@ -34,7 +34,7 @@ typedef struct BattleMonRuntime {
     /* 0x28 */ u16 unk_28;
     /* 0x2A */ u16 unk_2A;
     /* 0x2C */ u16 unk_2C;
-    /* 0x2E */ u16 unk_2E;
+    /* 0x2E */ u16 speed;
     /* 0x30 */ u16 unk_30;
     /* 0x32 */ u8 unk_32[4];
     /* 0x36 */ u16 unk_36;

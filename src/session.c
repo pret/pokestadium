@@ -99,7 +99,7 @@ TeamRoster* Trainer_Create(s32 arg0, s16 arg1, char* arg2, char* arg3) {
 
         sp1C->unk_018 = 0;
         sp1C->rosterInfo = sp20;
-        sp1C->numberOfPokemonChosen = 0;
+        sp1C->numberOfPokemonBrought = 0;
 
         sp20->unk_000 = 0;
         sp20->numberOfPokemonCanBePicked = 0;
@@ -124,13 +124,13 @@ void Team_AddTrainer(s32 arg0, TeamRoster* arg1) {
 
 void Trainer_AddPokemon(TeamRoster* arg0, BattleMon* arg1) {
     ExtendedRosterInfo* ptr = arg0->rosterInfo;
-    s32 tmp = arg0->numberOfPokemonChosen;
+    s32 tmp = arg0->numberOfPokemonBrought;
 
     if (tmp < 6) {
         arg0->pokemonPicked[tmp] = *arg1;
         ptr->unk_028[tmp] = *arg1;
 
-        arg0->numberOfPokemonChosen = tmp + 1;
+        arg0->numberOfPokemonBrought = tmp + 1;
         ptr->numberOfPokemonCanBePicked = tmp + 1;
     }
 }
@@ -138,7 +138,7 @@ void Trainer_AddPokemon(TeamRoster* arg0, BattleMon* arg1) {
 BattleMon* Pokemon_CreateDefault(BattleMon* arg0, u8 arg1, s16 arg2) {
     arg0->unk_00.unk_00 = arg1;
     arg0->unk_04 = 0;
-    arg0->unk_05 = 0;
+    arg0->statusCondition = 0;
 
     arg0->unk_06 = gSpeciesData[arg1 - 1].type1;
     arg0->unk_07 = gSpeciesData[arg1 - 1].type2;
@@ -350,7 +350,7 @@ void Team_ScaleOpponentToLevel(s16 arg0) {
     var_s0 = gSessionContext.battleSides[1].teamMember[0]->pokemonPicked;
     var_s1 = gSessionContext.battleSides[1].teamMember[0]->rosterInfo->unk_028;
 
-    for (i = 0; i < gSessionContext.battleSides[1].teamMember[0]->numberOfPokemonChosen; i++, var_s1++, var_s0++) {
+    for (i = 0; i < gSessionContext.battleSides[1].teamMember[0]->numberOfPokemonBrought; i++, var_s1++, var_s0++) {
         var_s0->unk_24 = arg0;
         var_s0->unk_10 = Pokemon_ExpForLevel(var_s0->unk_00.unk_00, arg0);
         Pokemon_RecalcStats(var_s0);
@@ -399,7 +399,7 @@ void Team_LoadPresetTrainer(s16 arg0, s16 arg1, s16 arg2, s32 arg3) {
     gSessionContext.opponentHistory[0][gSessionContext.roundOrDemoId - 1] = arg2;
 
     temp_s3->unk_018 = temp_s2->unk_34;
-    temp_s3->numberOfPokemonChosen = 0;
+    temp_s3->numberOfPokemonBrought = 0;
 
     for (i = 0; i < temp_s2->unk_36; i++) {
         Trainer_AddPokemon(temp_s3, &temp_s2->unk_38[i]);

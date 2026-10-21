@@ -589,9 +589,9 @@ void BattleAnim_DisableEffectSpawningAlias(void) {
     BattleAnim_DisableEffectSpawning();
 }
 
-void BattleAnim_CleanupEffects(s32 arg0) {
+void BattleAnim_CleanupEffects(s32 cleanup_mode) {
     BattleAnim_ResetSpawnDelay();
-    switch (arg0) {
+    switch (cleanup_mode) {
         case 1:
             BattleAnim_CleanupEffectsRetainingCategories47();
             if (BattleAnim_IsEffectSpawningEnabled() != 0) {

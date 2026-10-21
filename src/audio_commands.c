@@ -100,25 +100,25 @@ ALSeqFile* D_800FC714;
 u8 pad_D_800FC718[0x80];
 u32* D_800FC798;
 
-s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
+s32 Audio_PlayCommand(u32 command, s32 parameter, UNUSED s32 unused) {
     static s32 D_80077C7C = 0;
 
     UNUSED s32 pad;
-    u32 sp40;
-    u32 var_v0;
-    s32 sp38;
-    s32 sp34;
+    u32 bank_offset;
+    u32 sweep_amount;
+    s32 effect_priority;
+    s32 effect_id;
     UNUSED s32 pad2;
-    volatile s32 sp2C;
-    u32 sp20;
+    volatile s32 sound_handle;
+    u32 command_bank;
 
-    sp20 = arg0 & 0xFFFF0000;
-    sp38 = 0x80;
+    command_bank = command & 0xFFFF0000;
+    effect_priority = 0x80;
 
-    if (sp20 != D_80079014) {
-        sp40 = D_800FC6F4->seqArray[0].offset;
-        Rom_DmaRead(sp40, D_800FC798, 0xC);
-        Audio_RelocateOffsets(D_800FC798, sp40, 3);
+    if (command_bank != D_80079014) {
+        bank_offset = D_800FC6F4->seqArray[0].offset;
+        Rom_DmaRead(bank_offset, D_800FC798, 0xC);
+        Audio_RelocateOffsets(D_800FC798, bank_offset, 3);
         Rom_DmaRead(D_800FC798[0], D_800FC6DC, D_800FC798[1] - D_800FC798[0]);
         Audio_CopyDataWithCacheSync(D_800FC6DC, D_800FC6A8, 0xBB8);
         Audio_RelocateSoundBankTable(D_800FC6A8);
@@ -127,46 +127,46 @@ s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
         Audio_RelocateSoundBankWrapper(D_800FC6A4, D_800FC798[2]);
     }
 
-    D_80079014 = sp20;
+    D_80079014 = command_bank;
 
-    switch (arg0) {
+    switch (command) {
         case 0x0:
             if (Audio_IsSoundPlaying(D_80077C64) != 0) {
                 return 0;
             }
 
-            switch (arg1) {
+            switch (parameter) {
                 case 1:
-                    sp34 = 1;
+                    effect_id = 1;
                     break;
 
                 case 2:
-                    sp34 = 2;
+                    effect_id = 2;
                     break;
 
                 default:
                     return 0;
             }
 
-            D_80077C64 = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, 0x70, 0x80, -1);
-            sp2C = D_80077C64;
+            D_80077C64 = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, 0x70, 0x80, -1);
+            sound_handle = D_80077C64;
             break;
 
         case 0x1:
-            if (arg1 < -0x5A) {
-                arg1 = -0x5A;
-            } else if (arg1 >= 0x5B) {
-                arg1 = 0x5A;
+            if (parameter < -0x5A) {
+                parameter = -0x5A;
+            } else if (parameter >= 0x5B) {
+                parameter = 0x5A;
             }
 
             do {
-                var_v0 = (arg1 + 0x5A) * 1.4111111f;
+                sweep_amount = (parameter + 0x5A) * 1.4111111f;
             } while (0);
 
-            if (var_v0 > 0xFE) {
-                var_v0 = 0xFE;
+            if (sweep_amount > 0xFE) {
+                sweep_amount = 0xFE;
             }
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 3, 0x80, var_v0, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 3, 0x80, sweep_amount, -1);
             break;
 
         case 0x2:
@@ -174,62 +174,62 @@ s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
                 Audio_QueueFadeSoundCommand(D_80077C6C, 0x14);
                 D_80077C6C = 0;
             }
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 4, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 4, 0x80, 0x80, -1);
             break;
 
         case 0x3:
             D_80077C6C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 5, 0x80, 0x80, -1);
-            sp2C = D_80077C6C;
+            sound_handle = D_80077C6C;
             break;
 
         case 0x4:
-            switch (arg1) {
+            switch (parameter) {
                 case 1:
-                    sp34 = 1;
+                    effect_id = 1;
                     break;
                 case 2:
-                    sp34 = 2;
+                    effect_id = 2;
                     break;
 
                 default:
                     return 0;
             }
-            D_80077C68 = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, 0x80, 0x80, -1);
-            sp2C = D_80077C68;
+            D_80077C68 = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, 0x80, 0x80, -1);
+            sound_handle = D_80077C68;
             break;
 
         case 0x6:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 6, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 6, 0x80, 0x80, -1);
             break;
 
         case 0x7:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 7, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 7, 0x80, 0x80, -1);
             break;
 
         case 0x8:
             return 0;
 
         case 0x33:
-            if (arg1 >= 0x98) {
-                arg1 = 3;
+            if (parameter >= 0x98) {
+                parameter = 3;
             }
 
-            if ((arg1 > 0) && (arg1 < 0x98)) {
-                arg1--;
+            if ((parameter > 0) && (parameter < 0x98)) {
+                parameter--;
             } else {
-                arg1 = 0;
+                parameter = 0;
             }
 
-            switch (D_80077970[arg1].unk_00) {
+            switch (D_80077970[parameter].unk_00) {
                 case 0:
                     return 0;
 
                 case 1:
-                    sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 7, 0x80, 0x80, -1);
+                    sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 7, 0x80, 0x80, -1);
                     break;
 
                 case 2:
-                    sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 6, 0x80, 0x80, -1);
+                    sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 6, 0x80, 0x80, -1);
                     break;
 
                 default:
@@ -238,70 +238,70 @@ s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
             break;
 
         case 0x32:
-            if (arg1 == 0xC8) {
+            if (parameter == 0xC8) {
                 return Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0x20, 0x80, 0x80, -1);
             }
 
-            if (arg1 >= 0x98) {
-                arg1 = 2;
+            if (parameter >= 0x98) {
+                parameter = 2;
             }
 
-            if ((arg1 > 0) && (arg1 < 0x98)) {
-                arg1--;
+            if ((parameter > 0) && (parameter < 0x98)) {
+                parameter--;
             } else {
-                arg1 = 0;
+                parameter = 0;
             }
 
-            switch (D_80077970[arg1].unk_01) {
+            switch (D_80077970[parameter].unk_01) {
                 case 0:
-                    sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xB, 0x80, 0x80, -1);
+                    sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xB, 0x80, 0x80, -1);
                     break;
 
                 case 1:
-                    sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xA, 0x80, 0x80, -1);
+                    sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xA, 0x80, 0x80, -1);
                     break;
 
                 case 2:
-                    sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 9, 0x80, 0x80, -1);
+                    sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 9, 0x80, 0x80, -1);
                     break;
             }
             break;
 
         case 0x12:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xC, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xC, 0x80, 0x80, -1);
             break;
 
         case 0x13:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xD, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xD, 0x80, 0x80, -1);
             break;
 
         case 0x14:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xE, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xE, 0x80, 0x80, -1);
             break;
 
         case 0x28:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xF, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0xF, 0x80, 0x80, -1);
             break;
 
         case 0x5A:
-            switch (arg1) {
+            switch (parameter) {
                 case 1:
-                    sp34 = 0x12;
+                    effect_id = 0x12;
                     break;
 
                 case 2:
-                    sp34 = 0x13;
+                    effect_id = 0x13;
                     break;
 
                 default:
                     return 0;
             }
 
-            D_80077C74 = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, 0x80, 0x80, -1);
+            D_80077C74 = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, 0x80, 0x80, -1);
             break;
 
         case 0x5B:
-            switch (arg1) {
+            switch (parameter) {
                 case 1:
                     break;
 
@@ -315,29 +315,29 @@ s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
             break;
 
         case 0x15:
-            switch (arg1) {
+            switch (parameter) {
                 case 1:
-                    sp34 = 0x10;
+                    effect_id = 0x10;
                     break;
 
                 case 2:
-                    sp34 = 0x11;
+                    effect_id = 0x11;
                     break;
 
                 default:
                     return 0;
             }
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, 0x80, 0x80, 0x80);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, 0x80, 0x80, 0x80);
             break;
 
         case 0x16:
-            switch (arg1) {
+            switch (parameter) {
                 case 1:
-                    sp34 = 0x16;
+                    effect_id = 0x16;
                     break;
 
                 case 2:
-                    sp34 = 0x17;
+                    effect_id = 0x17;
                     break;
 
                 default:
@@ -346,88 +346,88 @@ s32 Audio_PlayCommand(u32 arg0, s32 arg1, s32 arg2) {
 
             if (Audio_IsSoundPlaying(D_80077C7C) != 0) {
                 D_80077C7C = 0;
-                sp2C = D_80077C7C;
+                sound_handle = D_80077C7C;
             } else {
-                D_80077C7C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, 0x80, 0x80, 0x80);
-                sp2C = D_80077C7C;
+                D_80077C7C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, 0x80, 0x80, 0x80);
+                sound_handle = D_80077C7C;
             }
             break;
 
         case 0x3C:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0x18, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0x18, 0x80, 0x80, -1);
             break;
 
         case 0x3D:
-            switch (arg1) {
+            switch (parameter) {
                 case 3:
-                    sp34 = 0x19;
+                    effect_id = 0x19;
                     break;
 
                 case 2:
-                    sp34 = 0x1A;
+                    effect_id = 0x1A;
                     break;
 
                 case 1:
-                    sp34 = 0x1B;
+                    effect_id = 0x1B;
                     break;
 
                 case 0:
-                    sp34 = 0x1C;
-                    sp38 = 0xFF;
+                    effect_id = 0x1C;
+                    effect_priority = 0xFF;
                     break;
 
                 default:
                     return 0;
             }
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, sp38, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, effect_priority, 0x80, -1);
             break;
 
         case 0x3E:
-            if (arg1 < 11) {
-                if (arg1 == 1 || arg1 == 2) {
-                    sp34 = 0x1D;
+            if (parameter < 11) {
+                if (parameter == 1 || parameter == 2) {
+                    effect_id = 0x1D;
                 } else {
-                    sp34 = 0x1E;
+                    effect_id = 0x1E;
                 }
             } else {
                 return 0;
             }
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, sp34, 0xFF, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, effect_id, 0xFF, 0x80, -1);
             break;
 
         case 0x3F:
-            sp2C = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0x1F, 0x80, 0x80, -1);
+            sound_handle = Audio_PlaySoundEffect(D_800FC6A4, D_800FC6A8, 0x1F, 0x80, 0x80, -1);
             break;
 
         case 0x1E:
-            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 0);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 0);
             break;
 
         case 0x1F:
-            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 1);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 1);
             break;
 
         case 0x20:
-            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 2);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 2);
             break;
 
         case 0x21:
-            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 3);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 3);
             break;
 
         case 0x22:
-            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 4);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 4);
             break;
 
         case 0x23:
-            sp2C = Effect_TriggerMoveVisual(0xA6, 1, 5);
+            sound_handle = Effect_TriggerMoveVisual(0xA6, 1, 5);
             break;
 
         default:
             return 0;
     }
 
-    return sp2C;
+    return sound_handle;
 }
 
 s32 Audio_FadeCommand(s32 arg0, u32 arg1) {

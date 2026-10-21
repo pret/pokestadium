@@ -25,19 +25,19 @@ void Audio_SetMusicLoopPoint(s32 arg0) {
     D_80078EC8 = arg0;
 }
 
-s32 Audio_StartMusicTrack(s32 arg0) {
-    u32 sp2C;
-    s32 var_a2;
+s32 Audio_StartMusicTrack(s32 track_id) {
+    u32 file_index;
+    s32 file_size;
     UNUSED s32 pad;
-    s32 sp20;
-    s32 sp1C;
+    s32 volume_scale;
+    s32 voice_volume;
 
-    sp20 = arg0;
-    sp1C = 0x80;
+    volume_scale = track_id;
+    voice_volume = 0x80;
     AudioStream_SetEnabled(1);
     Audio_SetVoiceStartTimingMode(1);
-    D_800FF9B4 = arg0;
-    if (arg0 == 0x50) {
+    D_800FF9B4 = track_id;
+    if (track_id == 0x50) {
         D_80078E78 = 0;
         D_80078E7C = 0;
         if (D_80078ED0 == 1) {
@@ -50,9 +50,9 @@ s32 Audio_StartMusicTrack(s32 arg0) {
         Audio_QueueFadeSoundCommand(D_80078ECC, 1);
         D_80078ED0 = 0;
         D_80078ECC = Audio_PlayDirectSoundCommand(0x01000003, 0, 0);
-        arg0 = 0x28;
+        track_id = 0x28;
         D_80078ED0 = 2;
-    } else if (arg0 == 0x28) {
+    } else if (track_id == 0x28) {
         D_80078E78 = 0;
         if (D_80078ED0 == 2) {
             Audio_StartVolumeTransition(D_80078ECC, 0x80, 0, 0x50);
@@ -73,232 +73,232 @@ s32 Audio_StartMusicTrack(s32 arg0) {
         D_80078ED0 = 0;
     }
 
-    if (arg0 == 0x32) {
+    if (track_id == 0x32) {
         if ((D_80078404 < 0xC) && (D_80078390[0] > 0) && (D_80078390[1] == 0) && (D_80078408 == 8)) {
-            arg0 = 0x3C;
+            track_id = 0x3C;
         } else if ((D_80078404 == 0xD) && (D_80078390[0] > 0) && (D_80078390[1] == 0) && (D_80078408 == 5)) {
-            arg0 = 0x3E;
+            track_id = 0x3E;
             D_800FF9B4 = 0x3E;
         } else if ((D_80078404 == 0xF) && (D_80078390[0] > 0) && (D_80078390[1] == 0)) {
-            arg0 = 0x40;
+            track_id = 0x40;
         }
     }
 
-    if ((arg0 == 0x3F) && (D_80078404 == 0xD) && (D_80078408 == 5)) {
-        arg0 = 0x41;
+    if ((track_id == 0x3F) && (D_80078404 == 0xD) && (D_80078408 == 5)) {
+        track_id = 0x41;
     }
 
-    if ((arg0 == 0x31) && (D_80078E78 != 0)) {
-        arg0 = 0x46;
+    if ((track_id == 0x31) && (D_80078E78 != 0)) {
+        track_id = 0x46;
     }
 
-    if ((arg0 == 0x3A) && (D_80078E7C != 0)) {
-        arg0 = 0x48;
+    if ((track_id == 0x3A) && (D_80078E7C != 0)) {
+        track_id = 0x48;
     }
 
-    sp2C = arg0;
-    switch (arg0) {
+    file_index = track_id;
+    switch (track_id) {
         case 0x0:
             D_80078E78 = 0;
             D_80078E7C = 0;
             D_80078E80 = 1;
-            sp20 = 0x98;
+            volume_scale = 0x98;
             break;
 
         case 0x1:
-            sp20 = 0x68;
+            volume_scale = 0x68;
             D_80078E80 = 1;
             Audio_SelectModeMusic(0, 0xF);
             break;
 
         case 0x9:
-            sp20 = 0x50;
+            volume_scale = 0x50;
             break;
 
         case 0x7:
-            sp20 = 0x78;
+            volume_scale = 0x78;
             break;
 
         case 0x8:
-            sp20 = 0xA0;
+            volume_scale = 0xA0;
             break;
 
         case 0xF:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0xA:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x11:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x17:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x18:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x19:
-            sp20 = 0x58;
+            volume_scale = 0x58;
             break;
 
         case 0x1C:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x1D:
-            sp20 = D_80078E74;
+            volume_scale = D_80078E74;
             break;
 
         case 0x1E:
-            sp20 = 0x65;
+            volume_scale = 0x65;
             break;
 
         case 0x1F:
-            sp20 = 0x70;
+            volume_scale = 0x70;
             break;
 
         case 0x20:
-            sp20 = 0x70;
+            volume_scale = 0x70;
             break;
 
         case 0x21:
-            sp20 = 0x50;
+            volume_scale = 0x50;
             break;
 
         case 0x1A:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             Audio_ResetVolumeTransition();
             break;
 
         case 0x1B:
-            sp20 = 0x58;
+            volume_scale = 0x58;
             Audio_ResetVolumeTransition();
             break;
 
         case 0x2C:
-            sp20 = 0x70;
+            volume_scale = 0x70;
             break;
 
         case 0x13:
-            sp20 = 0x68;
+            volume_scale = 0x68;
             break;
 
         case 0x38:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x15:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x2D:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x16:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x10:
-            sp20 = 0x68;
+            volume_scale = 0x68;
             break;
 
         case 0x2A:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x27:
-            sp20 = 0x58;
+            volume_scale = 0x58;
             break;
 
         case 0x2B:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x30:
             D_80078E78 = 1;
-            sp20 = 0x64;
+            volume_scale = 0x64;
             break;
 
         case 0x28:
             D_80078E78 = 0;
             D_80078E7C = 0;
-            sp20 = 0x48;
+            volume_scale = 0x48;
             break;
 
         case 0x29:
             D_80078E78 = 0;
             D_80078E7C = 0;
-            sp20 = 0x78;
-            sp1C = 0x87;
+            volume_scale = 0x78;
+            voice_volume = 0x87;
             break;
 
         case 0x31:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x33:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x46:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x32:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x3C:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x3D:
-            sp20 = 0x88;
+            volume_scale = 0x88;
             break;
 
         case 0x3E:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x3F:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x40:
-            sp20 = 0x50;
+            volume_scale = 0x50;
             break;
 
         case 0x41:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x45:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x44:
-            sp20 = 0x90;
+            volume_scale = 0x90;
             break;
 
         case 0x47:
-            sp20 = 0x88;
+            volume_scale = 0x88;
             D_80078E7C = 1;
             break;
 
         case 0x5B:
-            sp20 = 0x78;
-            sp2C = 1;
+            volume_scale = 0x78;
+            file_index = 1;
             break;
 
         case 0x3A:
-            sp20 = 0x68;
+            volume_scale = 0x68;
             Audio_SelectModeMusic(0, 0xF);
             Audio_PlayCategory11SoundCommand(0x01100016, 0, 0);
             break;
@@ -306,148 +306,148 @@ s32 Audio_StartMusicTrack(s32 arg0) {
         case 0x48:
             Audio_SelectModeMusic(0, 0xF);
             Audio_PlayCategory11SoundCommand(0x01100016, 0, 0);
-            sp20 = 0x70;
+            volume_scale = 0x70;
             break;
 
         case 0x49:
-            sp20 = 0x68;
+            volume_scale = 0x68;
             break;
 
         case 0x4A:
-            sp20 = 0xA8;
+            volume_scale = 0xA8;
             break;
 
         case 0x4B:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x42:
             D_80078E78 = 0;
             D_80078E7C = 0;
-            sp20 = 0x80;
+            volume_scale = 0x80;
             break;
 
         case 0x43:
             D_80078E78 = 0;
             D_80078E7C = 0;
-            sp20 = 0x80;
+            volume_scale = 0x80;
             break;
 
         case 0x22:
-            sp20 = 0x48;
+            volume_scale = 0x48;
             break;
 
         case 0x24:
-            sp20 = 0x48;
+            volume_scale = 0x48;
             break;
 
         case 0x26:
-            sp20 = 0x40;
+            volume_scale = 0x40;
             break;
 
         case 0x23:
-            sp20 = 0x50;
+            volume_scale = 0x50;
             break;
 
         case 0x25:
-            sp20 = 0x50;
+            volume_scale = 0x50;
             break;
 
         case 0xE:
-            sp20 = 0x64;
+            volume_scale = 0x64;
             break;
 
         case 0xD:
-            sp20 = 0x48;
+            volume_scale = 0x48;
             break;
 
         case 0xB:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0xC:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0x12:
-            sp20 = 0x2E;
+            volume_scale = 0x2E;
             break;
 
         case 0x36:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0x6:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0x37:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0x3B:
-            sp20 = 0x3C;
+            volume_scale = 0x3C;
             break;
 
         case 0x39:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0x34:
-            sp20 = 0x60;
+            volume_scale = 0x60;
             break;
 
         case 0x2F:
-            sp20 = 0x58;
+            volume_scale = 0x58;
             break;
 
         case 0x2E:
-            sp20 = 0x54;
+            volume_scale = 0x54;
             break;
 
         case 0x35:
-            sp20 = 0x54;
+            volume_scale = 0x54;
             break;
 
         case 0x14:
-            sp20 = 0x58;
+            volume_scale = 0x58;
             break;
 
         case 0x2:
-            sp20 = 0x34;
+            volume_scale = 0x34;
             break;
 
         case 0x3:
-            sp20 = 0x44;
+            volume_scale = 0x44;
             break;
 
         case 0x4:
-            sp20 = 0x38;
+            volume_scale = 0x38;
             break;
 
         case 0x5:
-            sp20 = 0x34;
+            volume_scale = 0x34;
             break;
 
         case 0x5A:
-            sp20 = 0x50;
+            volume_scale = 0x50;
             D_80078E80 = 0;
-            sp2C = 2;
+            file_index = 2;
             break;
 
         default:
             return 0;
     }
 
-    if (sp2C < D_800FC6E4->num_files - 1) {
-        var_a2 = D_800FC6E4->files[sp2C + 1] - D_800FC6E4->files[sp2C];
-    } else if (sp2C == D_800FC6E4->num_files - 1) {
-        var_a2 = gAudioRegions[2] - D_800FC6E4->files[sp2C];
+    if (file_index < D_800FC6E4->num_files - 1) {
+        file_size = D_800FC6E4->files[file_index + 1] - D_800FC6E4->files[file_index];
+    } else if (file_index == D_800FC6E4->num_files - 1) {
+        file_size = gAudioRegions[2] - D_800FC6E4->files[file_index];
     } else {
         return 0;
     }
 
-    Rom_DmaRead(D_800FC6E4->files[sp2C], D_800FC6DC, var_a2);
+    Rom_DmaRead(D_800FC6E4->files[file_index], D_800FC6DC, file_size);
     Audio_CopyDataWithCacheSync(D_800FC6DC, D_800FC680, 0x98D8);
 
     if (D_80078EC8 <= 0) {
@@ -457,13 +457,13 @@ s32 Audio_StartMusicTrack(s32 arg0) {
     }
 
     D_80078EC8 = -1;
-    Audio_QueueVoiceVolumeScale(D_80078E70, sp20);
+    Audio_QueueVoiceVolumeScale(D_80078E70, volume_scale);
 
-    if (sp1C != 0x80) {
-        Audio_QueueVoiceVolume(D_80078E70, sp1C);
+    if (voice_volume != 0x80) {
+        Audio_QueueVoiceVolume(D_80078E70, voice_volume);
     }
 
-    if (arg0 == 0x1D) {
+    if (track_id == 0x1D) {
         D_800FF9B0 = D_80078E70;
     }
 

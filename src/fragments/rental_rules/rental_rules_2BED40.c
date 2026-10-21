@@ -24,83 +24,83 @@ static char* D_83003C9C;
 static s16* D_83003CA0;
 static s16 D_83003CA4;
 static s16 D_83003CA6;
-static char* stadium_mode_label;
-static char* free_battle_mode_label;
-static char* event_battle_mode_label;
-static char* gym_leader_castle_mode_label;
-static char* vs_mewtwo_mode_label;
-static char* anything_goes_label;
-static char* nintendo_cup_97_label;
-static char* nintendo_cup_98_label;
-static char* nintendo_cup_99_label;
-static char* petit_cup_label;
-static char* pika_cup_label;
-static char* prime_cup_label;
-static char* gym_leader_castle_label;
-static char* vs_mewtwo_label;
+static char* sStadiumModeLabel;
+static char* sFreeBattleModeLabel;
+static char* sEventBattleModeLabel;
+static char* sGymLeaderCastleModeLabel;
+static char* sVsMewtwoModeLabel;
+static char* sAnythingGoesLabel;
+static char* sNintendoCup97Label;
+static char* sNintendoCup98Label;
+static char* sNintendoCup99Label;
+static char* sPetitCupLabel;
+static char* sPikaCupLabel;
+static char* sPrimeCupLabel;
+static char* sGymLeaderCastleLabel;
+static char* sVsMewtwoLabel;
 unk_D_83003CE0 D_83003CE0;
 unk_D_83003CE0 D_83003DE0;
 
-char** battle_mode_labels = NULL;
+char** sBattleModeLabels = NULL;
 static char** D_830039C4 = NULL;
 static u8 D_830039C8[] = {
-    0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0F,
+    6, 0x07, 0x08, 9, 10, 11, 12, 13, 0x0F,
 };
 static s16 D_830039D4[] = {
-    0x0007, 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0023, 0xFFFF,
+    0x0007, 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 5, 6, 35, 0xFFFF,
 };
 static s16 D_830039E8[] = {
-    0x0007, 0x0000, 0x0001, 0x001D, 0x0003, 0x0004, 0x0005, 0x0009, 0x0023, 0xFFFF,
+    0x0007, 0x0000, 0x0001, 29, 0x0003, 0x0004, 5, 9, 35, 0xFFFF,
 };
 static s16 D_830039FC[] = {
-    0x0007, 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0023, 0xFFFF, 0x0000,
+    0x0007, 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 5, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003A10[] = {
-    0x000B, 0x0000, 0x0001, 0x000A, 0x0004, 0x0005, 0x0006, 0x0023, 0xFFFF, 0x0000,
+    11, 0x0000, 0x0001, 10, 0x0004, 5, 6, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003A24[] = {
-    0x000B, 0x0000, 0x0001, 0x001E, 0x0004, 0x0005, 0x0009, 0x0023, 0xFFFF, 0x0000,
+    11, 0x0000, 0x0001, 30, 0x0004, 5, 9, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003A38[] = {
-    0x000B, 0x0000, 0x0001, 0x000A, 0x0004, 0x0005, 0x0023, 0xFFFF, 0x000E, 0x0000, 0x0001, 0x000C, 0x000D,
-    0x0004, 0x0005, 0x0006, 0x0023, 0xFFFF, 0x000E, 0x0000, 0x0001, 0x001F, 0x000D, 0x0004, 0x0005, 0x0009,
-    0x0023, 0xFFFF, 0x000E, 0x0000, 0x0001, 0x000C, 0x000D, 0x0004, 0x0005, 0x0023, 0xFFFF, 0x0000,
+    11,     0x0000, 0x0001, 10,     0x0004, 5,  35,     0xFFFF, 14,     0x0000, 0x0001, 12,     13,
+    0x0004, 5,      6,      35,     0xFFFF, 14, 0x0000, 0x0001, 0x001F, 13,     0x0004, 5,      9,
+    35,     0xFFFF, 14,     0x0000, 0x0001, 12, 13,     0x0004, 5,      35,     0xFFFF, 0x0000,
 };
 static s16 D_83003A84[] = {
-    0x0013, 0x0000, 0x0001, 0x000F, 0x0010, 0x0011, 0x0012, 0x0004, 0x0005, 0x0006, 0x0023, 0xFFFF,
+    19, 0x0000, 0x0001, 0x000F, 0x0010, 17, 18, 0x0004, 5, 6, 35, 0xFFFF,
 };
 static s16 D_83003A9C[] = {
-    0x0013, 0x0000, 0x0001, 0x0020, 0x0010, 0x0011, 0x0012, 0x0004, 0x0005, 0x0009, 0x0023, 0xFFFF,
+    19, 0x0000, 0x0001, 0x0020, 0x0010, 17, 18, 0x0004, 5, 9, 35, 0xFFFF,
 };
 static s16 D_83003AB4[] = {
-    0x0013, 0x0000, 0x0001, 0x000F, 0x0010, 0x0011, 0x0012, 0x0004, 0x0005, 0x0023, 0xFFFF, 0x0000,
+    19, 0x0000, 0x0001, 0x000F, 0x0010, 17, 18, 0x0004, 5, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003ACC[] = {
-    0x0000, 0x0001, 0x0016, 0x0017, 0x0004, 0x0005, 0x0006, 0x0023, 0xFFFF, 0x0000,
+    0x0000, 0x0001, 22, 23, 0x0004, 5, 6, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003AE0[] = {
-    0x0000, 0x0001, 0x0021, 0x0017, 0x0004, 0x0005, 0x0009, 0x0023, 0xFFFF, 0x0000,
+    0x0000, 0x0001, 33, 23, 0x0004, 5, 9, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003AF4[] = {
-    0x0000, 0x0001, 0x0016, 0x0017, 0x0004, 0x0005, 0x0023, 0xFFFF,
+    0x0000, 0x0001, 22, 23, 0x0004, 5, 35, 0xFFFF,
 };
 static s16 D_83003B04[] = {
-    0x0015, 0x0000, 0x0001, 0x0024, 0x0004, 0x0006, 0x0023, 0xFFFF,
+    21, 0x0000, 0x0001, 36, 0x0004, 6, 35, 0xFFFF,
 };
 static s16 D_83003B14[] = {
-    0x0015, 0x0000, 0x0001, 0x0014, 0x0004, 0x0009, 0x0023, 0xFFFF,
+    21, 0x0000, 0x0001, 20, 0x0004, 9, 35, 0xFFFF,
 };
 static s16 D_83003B24[] = {
-    0x0015, 0x0000, 0x0001, 0x0014, 0x0004, 0x0023, 0xFFFF, 0x0000,
+    21, 0x0000, 0x0001, 20, 0x0004, 35, 0xFFFF, 0x0000,
 };
 static s16 D_83003B34[] = {
-    0x0015, 0x001A, 0x0014, 0x0025, 0x0022, 0x0026, 0x0023, 0xFFFF,
+    21, 26, 20, 37, 34, 38, 35, 0xFFFF,
 };
 static s16 D_83003B44[] = {
-    0x0015, 0x0000, 0x0001, 0x0014, 0x0019, 0x0004, 0x0023, 0xFFFF,
+    21, 0x0000, 0x0001, 20, 25, 0x0004, 35, 0xFFFF,
 };
 static s16 D_83003B54[] = {
-    0x0015, 0x001C, 0x001B, 0x0014, 0x0023, 0xFFFF,
+    21, 28, 27, 20, 35, 0xFFFF,
 };
 
 char* RentalRules_GetPokemonName(s32 file_number) {
@@ -108,15 +108,15 @@ char* RentalRules_GetPokemonName(s32 file_number) {
 }
 
 void RentalRules_LoadBackgroundArchive(void) {
-    ModeSettings sp20;
+    ModeSettings var_sp20;
 
-    if (gSessionContext.mode != 0xA) {
+    if (gSessionContext.mode != 10) {
         D_83003C88 = BinArchive_Open(backgrounds_ROM_START, battle_headers_ROM_START, 1, 1);
         if (gSessionContext.mode == 7) {
             Save_EnsureBankLoaded(2);
-            Save_GetModeSettings(&sp20, gSessionContext.inRound2);
-            if (sp20.castleClears < 8) {
-                D_83003C8C = BinArchive_GetFile(D_83003C88, 0xD);
+            Save_GetModeSettings(&var_sp20, gSessionContext.inRound2);
+            if (var_sp20.castleClears < 8) {
+                D_83003C8C = BinArchive_GetFile(D_83003C88, 13);
             } else {
                 D_83003C8C = BinArchive_GetFile(D_83003C88, 0x10);
             }
@@ -253,7 +253,7 @@ char* RentalRules_GetModeLabel(s8 arg0) {
 
     switch (arg0) {
         case 0:
-            ret = free_battle_mode_label;
+            ret = sFreeBattleModeLabel;
             break;
 
         case 1:
@@ -262,19 +262,19 @@ char* RentalRules_GetModeLabel(s8 arg0) {
         case 4:
         case 5:
         case 6:
-            ret = stadium_mode_label;
+            ret = sStadiumModeLabel;
             break;
 
         case 7:
-            ret = gym_leader_castle_mode_label;
+            ret = sGymLeaderCastleModeLabel;
             break;
 
         case 8:
-            ret = vs_mewtwo_mode_label;
+            ret = sVsMewtwoModeLabel;
             break;
 
         case 10:
-            ret = event_battle_mode_label;
+            ret = sEventBattleModeLabel;
             break;
 
         default:
@@ -290,39 +290,39 @@ char* RentalRules_GetCategoryLabel(s8 arg0) {
 
     switch (arg0) {
         case 0:
-            label = anything_goes_label;
+            label = sAnythingGoesLabel;
             break;
 
         case 1:
-            label = nintendo_cup_97_label;
+            label = sNintendoCup97Label;
             break;
 
         case 2:
-            label = nintendo_cup_98_label;
+            label = sNintendoCup98Label;
             break;
 
         case 3:
-            label = nintendo_cup_99_label;
+            label = sNintendoCup99Label;
             break;
 
         case 4:
-            label = petit_cup_label;
+            label = sPetitCupLabel;
             break;
 
         case 5:
-            label = pika_cup_label;
+            label = sPikaCupLabel;
             break;
 
         case 6:
-            label = prime_cup_label;
+            label = sPrimeCupLabel;
             break;
 
         case 7:
-            label = gym_leader_castle_label;
+            label = sGymLeaderCastleLabel;
             break;
 
         case 8:
-            label = vs_mewtwo_label;
+            label = sVsMewtwoLabel;
             break;
 
         default:
@@ -348,14 +348,14 @@ s32 RentalRules_RuleListHasEmptyEntry(s16* arg0) {
 }
 
 void RentalRules_UpdateFadeIn(void) {
-    s32 temp_lo;
+    s32 var_lo;
 
     D_83003C82--;
 
-    D_83003C92 = temp_lo = ((0xA - D_83003C82) << 0xA) / 10;
+    D_83003C92 = var_lo = ((10 - D_83003C82) << 10) / 10;
 
     if (D_83003C84 & 4) {
-        D_83003C94 = temp_lo;
+        D_83003C94 = var_lo;
     }
 
     if (D_83003C82 <= 0) {
@@ -399,7 +399,7 @@ void RentalRules_UpdateMainInput(void) {
         Audio_PlaySoundEffectById(SFX_MENU_CONFIRM);
     } else if (BTN_IS_PRESSED(gPlayer1Controller, BTN_B)) {
         D_83003C80 = 3;
-        D_83003C82 = 0xA;
+        D_83003C82 = 10;
         D_83003C90 = -1;
         Audio_PlaySoundEffectById(SFX_MENU_BACK);
     }
@@ -412,14 +412,14 @@ void RentalRules_UpdateWaitPopupClose(void) {
 }
 
 void RentalRules_UpdateFadeOut(void) {
-    s32 temp_lo;
+    s32 var_lo;
 
     D_83003C82--;
-    temp_lo = (D_83003C82 << 0xA) / 10;
+    var_lo = (D_83003C82 << 10) / 10;
 
-    D_83003C92 = temp_lo;
+    D_83003C92 = var_lo;
     if (D_83003C84 & 4) {
-        D_83003C94 = temp_lo;
+        D_83003C94 = var_lo;
     }
 
     if (D_83003C82 <= 0) {
@@ -454,22 +454,22 @@ void RentalRules_DrawBackgroundFallback(void) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, D_302EBC0, G_IM_FMT_I, 128, 64, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, 7, 6, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(0, 0, 0x280, 0x1E0, 0, 0, 0x400, 0x400, 0);
+    Gfx_DrawTexturedRectClipped(0, 0, 640, 480, 0, 0, 0x400, 0x400, 0);
 
     gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 }
 
 void RentalRules_DrawHeaderBanner(void) {
     UNUSED s32 pad;
-    s16 temp_s1;
-    s16 spD8;
+    s16 var_s1;
+    s16 var_spD8;
 
     if (D_83003C94 == 0) {
         return;
     }
 
-    temp_s1 = (((-D_83003C94 * 0x10) + 0x4000) / 1024) + 0x28;
-    spD8 = (D_83003C94 << 5) / 1024;
+    var_s1 = (((-D_83003C94 * 0x10) + 0x4000) / 1024) + 40;
+    var_spD8 = (D_83003C94 << 5) / 1024;
 
     gSPDisplayList(gDisplayListHead++, D_8006F558);
     gDPSetEnvColor(gDisplayListHead++, 100, 100, 200, 255);
@@ -478,21 +478,21 @@ void RentalRules_DrawHeaderBanner(void) {
     gDPLoadTextureBlock(gDisplayListHead++, D_20003C0, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(0x38, temp_s1, 0x10, spD8, 0, 0, 0x3F0, 0x8000 / spD8, 0);
+    Gfx_DrawTexturedRectClipped(56, var_s1, 0x10, var_spD8, 0, 0, 1008, 0x8000 / var_spD8, 0);
 
     gDPLoadTextureBlock(gDisplayListHead++, D_20005C0, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    Gfx_DrawTexturedRectClipped(0x240, temp_s1, 0x10, spD8, 0, 0, 0x400, 0x8000 / spD8, 0);
-    Gfx_DrawTexturedRectClipped(0x48, temp_s1, 0x1F8, spD8, 0, 0, 0, 0x8000 / spD8, 0);
+    Gfx_DrawTexturedRectClipped(576, var_s1, 0x10, var_spD8, 0, 0, 0x400, 0x8000 / var_spD8, 0);
+    Gfx_DrawTexturedRectClipped(72, var_s1, 504, var_spD8, 0, 0, 0, 0x8000 / var_spD8, 0);
 
     if (D_83003C94 < 0x400) {
         gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
     } else {
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
-        Gfx_DrawTextureRgba16(0x30, temp_s1 - 8, 0x30, 0x18, D_2006C00, 0x30, 0);
-        Gfx_DrawTextureRgba16(0x30, temp_s1 + 0x10, 0x30, 0x18, D_2007500, 0x30, 0);
+        Gfx_DrawTextureRgba16(48, var_s1 - 8, 48, 24, D_2006C00, 48, 0);
+        Gfx_DrawTextureRgba16(48, var_s1 + 0x10, 48, 24, D_2007500, 48, 0);
 
         gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
@@ -500,15 +500,15 @@ void RentalRules_DrawHeaderBanner(void) {
         Font_SetActive(0x10, 0);
 
         if (D_83003C98 != 0) {
-            char sp48[0x40];
-            char* temp_v0_21;
+            char var_sp48[0x40];
+            char* var_v0_21;
 
             Gfx_SetEnvColor(0, 0, 0, 0xFF);
-            Text_SetStringToken(0x26, D_83003C98);
-            temp_v0_21 = Text_GetString(sp48, sizeof(sp48), battle_mode_labels, 0);
-            Font_Printf(0x6A, temp_s1 + 4, temp_v0_21);
+            Text_SetStringToken(38, D_83003C98);
+            var_v0_21 = Text_GetString(var_sp48, sizeof(var_sp48), sBattleModeLabels, 0);
+            Font_Printf(106, var_s1 + 4, var_v0_21);
             Gfx_SetEnvColor(0xFF, 0xFF, 0x77, 0xFF);
-            Font_Printf(0x68, temp_s1 + 2, temp_v0_21);
+            Font_Printf(104, var_s1 + 2, var_v0_21);
         }
 
         Font_EndTexturedTextRendering();
@@ -563,21 +563,21 @@ void RentalRules_DrawBulletIcon(s16 x, s16 y) {
 void RentalRules_DrawRuleListText(s16 x, s16 y) {
     s16 tmp;
     s32 i;
-    char sp48[0x40];
+    char var_sp48[0x40];
 
     Font_SetActive(0x10, 0);
     Gfx_SetEnvColor(0xFF, 0xFF, 0xFF, 0xFF);
 
     if (D_83003C9C != NULL) {
-        if (D_83003C9C != anything_goes_label) {
-            Text_SetStringToken(0x27, D_83003C9C);
-            Font_Printf(x + 16, y + 4, Text_GetString(sp48, sizeof(sp48), battle_mode_labels, 1));
+        if (D_83003C9C != sAnythingGoesLabel) {
+            Text_SetStringToken(39, D_83003C9C);
+            Font_Printf(x + 16, y + 4, Text_GetString(var_sp48, sizeof(var_sp48), sBattleModeLabels, 1));
         } else {
             Font_Printf(x + 16, y + 4, D_83003C9C);
         }
     }
 
-    Font_Printf(x + 0x30, y + 0x134, Text_GetString(NULL, 0, battle_mode_labels, 2));
+    Font_Printf(x + 48, y + 308, Text_GetString(NULL, 0, sBattleModeLabels, 2));
     Font_SetActive(8, 0);
 
     for (i = 0; i < D_83003CA4; i++) {
@@ -595,40 +595,40 @@ void RentalRules_DrawRuleListPanel(void) {
     static s16 D_83003B60 = 0;
 
     s32 i;
-    s16 temp_s3;
-    s16 temp_s2;
+    s16 var_s3;
+    s16 var_s2_2;
 
     if (D_83003C92 == 0) {
         return;
     }
 
-    temp_s3 = (((-D_83003C92 * 0xA8) + 0x2A000) / 1024) + 0x5C;
-    temp_s2 = (D_83003C92 * 0x150) / 1024;
-    RentalRules_DrawWindowFrame(0x38, temp_s3, 0x210, temp_s2);
+    var_s3 = (((-D_83003C92 * 168) + 172032) / 1024) + 92;
+    var_s2_2 = (D_83003C92 * 336) / 1024;
+    RentalRules_DrawWindowFrame(56, var_s3, 528, var_s2_2);
 
     if (D_83003C92 >= 0x400) {
-        RentalRules_DrawFilledPanel(0x38, temp_s3, 0x210, 0x20, 0x3C, 0x3C, 0xA0);
-        RentalRules_DrawFilledPanel(0x38, temp_s3 + 0x20, 0x210, 0x110, 0x1E, 0x1E, 0x64);
-        RentalRules_DrawFilledPanel(0x38, temp_s3 + 0x130, 0x210, 0x20, 0x3C, 0x3C, 0xA0);
-        if ((RentalRules_PopupGetProgress() == 0) && (RentalRules_GetQualifyingSpeciesDisplayOpeningProgress() == 0)) {
+        RentalRules_DrawFilledPanel(56, var_s3, 528, 0x20, 0x3C, 0x3C, 0xA0);
+        RentalRules_DrawFilledPanel(56, var_s3 + 0x20, 528, 272, 0x1E, 0x1E, 0x64);
+        RentalRules_DrawFilledPanel(56, var_s3 + 304, 528, 0x20, 0x3C, 0x3C, 0xA0);
+        if ((RentalRules_PopupGetProgress() == 0) && (RentalRules_GetSpeciesWindowOpeningProgress() == 0)) {
             s16 sins = SINS(D_83003B60) * 3.0f;
 
-            Ui_DrawTextureMarker(sins + 0x48, temp_s3 + (D_83003CA6 * 0x18) + 0x2A);
+            Ui_DrawTextureMarker(sins + 72, var_s3 + (D_83003CA6 * 24) + 42);
             D_83003B60 += 0x1000;
         }
 
         gSPDisplayList(gDisplayListHead++, gUiEnvTintTextureDL);
 
-        Gfx_DrawTextureRgba16(0x48, temp_s3 + 0x132, 0x1C, 0x1C, D_04000000, 0x1C, 0);
+        Gfx_DrawTextureRgba16(72, var_s3 + 306, 28, 28, D_04000000, 28, 0);
 
         for (i = 0; i < D_83003CA4; i++) {
-            RentalRules_DrawBulletIcon(0x74, temp_s3 + 0x28 + i * 0x18);
+            RentalRules_DrawBulletIcon(116, var_s3 + 40 + i * 24);
         }
 
         gSPDisplayList(gDisplayListHead++, gUiRestoreTextureDL);
 
         Font_BeginTranslucentTextRendering();
-        RentalRules_DrawRuleListText(0x38, temp_s3);
+        RentalRules_DrawRuleListText(56, var_s3);
         Font_EndTexturedTextRendering();
     }
 }
@@ -636,7 +636,7 @@ void RentalRules_DrawRuleListPanel(void) {
 void RentalRules_DrawFrame(void) {
     BgStage_DrawFrame();
     if (D_83003C90 != 0) {
-        if (gSessionContext.mode == 0xA) {
+        if (gSessionContext.mode == 10) {
             RentalRules_DrawBackgroundFallback();
         } else {
             Gfx_DrawTiledRgba16Image(D_83003C8C);
@@ -649,7 +649,7 @@ void RentalRules_DrawFrame(void) {
         }
     }
 
-    if ((RentalRules_PopupGetProgress() < 0x400) && (RentalRules_GetQualifyingSpeciesDisplayOpeningProgress() < 0x400)) {
+    if ((RentalRules_PopupGetProgress() < 0x400) && (RentalRules_GetSpeciesWindowOpeningProgress() < 0x400)) {
         RentalRules_DrawRuleListPanel();
     }
 
@@ -662,7 +662,7 @@ void RentalRules_LoadCategoryStrings(void) {
     s32 i;
 
     for (i = 0; i < 29; i++) {
-        D_83003CE0.unk_00[i] = Text_GetString(NULL, 0, battle_mode_labels, i + 4);
+        D_83003CE0.unk_00[i] = Text_GetString(NULL, 0, sBattleModeLabels, i + 4);
     }
 
     D_83003CE0.unk_74 = D_83003CE0.unk_00[2];
@@ -671,10 +671,10 @@ void RentalRules_LoadCategoryStrings(void) {
     D_83003CE0.unk_80 = D_83003CE0.unk_00[15];
     D_83003CE0.unk_84 = D_83003CE0.unk_00[22];
     D_83003CE0.unk_88 = D_83003CE0.unk_00[27];
-    D_83003CE0.unk_8C = Text_GetString(NULL, 0, battle_mode_labels, 0x21);
+    D_83003CE0.unk_8C = Text_GetString(NULL, 0, sBattleModeLabels, 33);
     D_83003CE0.unk_90 = D_83003CE0.unk_00[20];
     D_83003CE0.unk_94 = D_83003CE0.unk_00[4];
-    D_83003CE0.unk_98 = Text_GetString(NULL, 0, battle_mode_labels, 0x22);
+    D_83003CE0.unk_98 = Text_GetString(NULL, 0, sBattleModeLabels, 34);
 }
 
 void RentalRules_LoadDescriptionStrings(void) {
@@ -692,7 +692,7 @@ void RentalRules_LoadDescriptionStrings(void) {
                 break;
 
             default:
-                D_83003DE0.unk_00[i] = Text_GetString(NULL, 0, battle_mode_labels, var_s2 + 0x23);
+                D_83003DE0.unk_00[i] = Text_GetString(NULL, 0, sBattleModeLabels, var_s2 + 35);
                 var_s2++;
                 break;
         }
@@ -701,7 +701,7 @@ void RentalRules_LoadDescriptionStrings(void) {
 
 void RentalRules_Init(void) {
     D_83003C80 = 0;
-    D_83003C82 = 0xA;
+    D_83003C82 = 10;
     D_83003C90 = -1;
     D_83003C92 = 0;
     Audio_PlaySoundEffectById(SFX_PANEL_OPEN);
@@ -723,21 +723,21 @@ void RentalRules_Init(void) {
     RentalRules_LoadCategoryStrings();
     RentalRules_LoadDescriptionStrings();
 
-    stadium_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x46);
-    free_battle_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x45);
-    event_battle_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x49);
-    gym_leader_castle_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x47);
-    vs_mewtwo_mode_label = Text_GetString(NULL, 0, battle_mode_labels, 0x48);
-    anything_goes_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4A);
-    nintendo_cup_97_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4D);
-    nintendo_cup_98_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4C);
-    nintendo_cup_99_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4B);
-    petit_cup_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4E);
-    pika_cup_label = Text_GetString(NULL, 0, battle_mode_labels, 0x4F);
-    prime_cup_label = Text_GetString(NULL, 0, battle_mode_labels, 0x50);
+    sStadiumModeLabel = Text_GetString(NULL, 0, sBattleModeLabels, 70);
+    sFreeBattleModeLabel = Text_GetString(NULL, 0, sBattleModeLabels, 69);
+    sEventBattleModeLabel = Text_GetString(NULL, 0, sBattleModeLabels, 73);
+    sGymLeaderCastleModeLabel = Text_GetString(NULL, 0, sBattleModeLabels, 71);
+    sVsMewtwoModeLabel = Text_GetString(NULL, 0, sBattleModeLabels, 72);
+    sAnythingGoesLabel = Text_GetString(NULL, 0, sBattleModeLabels, 74);
+    sNintendoCup97Label = Text_GetString(NULL, 0, sBattleModeLabels, 77);
+    sNintendoCup98Label = Text_GetString(NULL, 0, sBattleModeLabels, 76);
+    sNintendoCup99Label = Text_GetString(NULL, 0, sBattleModeLabels, 75);
+    sPetitCupLabel = Text_GetString(NULL, 0, sBattleModeLabels, 78);
+    sPikaCupLabel = Text_GetString(NULL, 0, sBattleModeLabels, 79);
+    sPrimeCupLabel = Text_GetString(NULL, 0, sBattleModeLabels, 80);
 
-    gym_leader_castle_label = gym_leader_castle_mode_label;
-    vs_mewtwo_label = vs_mewtwo_mode_label;
+    sGymLeaderCastleLabel = sGymLeaderCastleModeLabel;
+    sVsMewtwoLabel = sVsMewtwoModeLabel;
 
     D_83003C98 = RentalRules_GetModeLabel(gSessionContext.mode);
     D_83003C9C = RentalRules_GetCategoryLabel(gSessionContext.ruleCategory);
@@ -762,7 +762,7 @@ void RentalRules_Init(void) {
 }
 
 s32 RentalRules_Update(void) {
-    s32 sp1C = 1;
+    s32 var_sp1C = 1;
 
     switch (D_83003C80) {
         case 0:
@@ -783,11 +783,11 @@ s32 RentalRules_Update(void) {
 
         case 4:
             if (RentalRules_UpdateExitDelay() != 0) {
-                sp1C = 0;
+                var_sp1C = 0;
             }
             break;
     }
-    return sp1C;
+    return var_sp1C;
 }
 
 void RentalRules_Loop(void) {
@@ -803,7 +803,7 @@ void RentalRules_Loop(void) {
 s32 RentalRules_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     main_pool_push_state('EXPL');
 
-    Font_Init(0x1C, 0);
+    Font_Init(28, 0);
 
     ASSET_LOAD(D_1000000, common_menu1_ui, 0);
     ASSET_LOAD(D_2000000, common_menu2_ui, 0);
@@ -813,8 +813,8 @@ s32 RentalRules_Main(UNUSED s32 arg0, UNUSED s32 arg1) {
     RentalRules_LoadBackgroundArchive();
     PokeIcon_OpenModelArchive();
     Text_InitStringTables();
-    battle_mode_labels = Text_GetStringTable(0x20);
-    D_830039C4 = Text_GetStringTable(0x24);
+    sBattleModeLabels = Text_GetStringTable(0x20);
+    D_830039C4 = Text_GetStringTable(36);
     StageLoader_UpdateSegments();
     RentalRules_Loop();
     StageLoader_WaitForRetrace();
