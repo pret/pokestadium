@@ -291,7 +291,7 @@ typedef struct unk_D_843C4DEC {
 
 typedef struct BattleSceneStateTickSlot {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ BattleSceneStateCallback unk_04;
+    /* 0x04 */ BattleSceneStateCallback callback;
 } BattleSceneStateTickSlot; // size = 0x8
 
 typedef struct TagTeamPartners {
