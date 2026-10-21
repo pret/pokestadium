@@ -584,7 +584,7 @@ void BattleScene_TickRow10CleanupAndEnterState18(ActivePokemon* active_pokemon) 
 #define DIGLETT_OB1 (DIGLETT - 1)
 #define DUGTRIO_OB1 (DUGTRIO - 1)
 /**
- * State row 3 enter: plays the move's species sound, clears flag 0x4000
+ * State row 3 enter: plays the move's species sound, clears ACTIVE_UNDERGROUND
  * for Diglett/Dugtrio (showing the model), and starts the move cue animation and event track.
  */
 // Think this has to do with Surf's Animation
@@ -773,7 +773,7 @@ void BattleScene_MakeGoldenWhenHarden(ActivePokemon* active_pokemon) {
 }
 
 /**
- * State row 21 enter: clears flag 0x4000 for Diglett/Dugtrio and starts move
+ * State row 21 enter: clears ACTIVE_UNDERGROUND for Diglett/Dugtrio and starts move
  * cue 0 with its event track.
  */
 void BattleScene_EnterRow21StartAnimRecord0(ActivePokemon* active_pokemon) {
@@ -928,7 +928,7 @@ void BattleScene_TickRow19PostEffectCamera(ActivePokemon* active_pokemon) {
 /**
  * State row 4 enter: picks and starts the target's hit reaction cue from
  * type effectiveness and status (idle when resisted or failed, variants for
- * flags 0x1/0x200), and plays the partner Pikachu effectiveness cries.
+ * flags ACTIVE_SLEEP/ACTIVE_AIRBORNE), and plays the partner Pikachu effectiveness cries.
  */
 void BattleScene_StartHitReactionAnim(ActivePokemon* active_pokemon) {
     UNUSED s32 pad[3];
@@ -1104,7 +1104,7 @@ void BattleScene_StartHitCueAnimation(ActivePokemon* active_pokemon) {
 }
 
 /**
- * State row enter: starts the row's cue (sleep or flag 0x200 variants
+ * State row enter: starts the row's cue (sleep or ACTIVE_AIRBORNE variants
  * when applicable) and plays the matching species sound.
  */
 void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
@@ -1150,8 +1150,8 @@ void BattleScene_EnterRowAnim166WithCry(ActivePokemon* active_pokemon) {
 
 /**
  * State row 1 tick: on frame 1 plays the cry (the real species while behind
- * a Substitute), unless flag 0x4000 or the freeze flag (0x2) is set
- * or the Pokemon is asleep (status & 7).
+ * a Substitute), unless ACTIVE_UNDERGROUND or ACTIVE_FREEZE is set
+ * or the Pokemon has STATUS_SLEEP_MASK bits set.
  */
 void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
@@ -1174,8 +1174,8 @@ void BattleScene_TickRow1PlayOwnerCry(ActivePokemon* active_pokemon) {
 
 /**
  * State row 16 tick: on frame 1 plays cry mode 3 and the matching species
- * sound, unless flag 0x4000 or the freeze flag (0x2) is set
- * or the Pokemon is asleep (status & 7).
+ * sound, unless ACTIVE_UNDERGROUND or ACTIVE_FREEZE is set
+ * or the Pokemon has STATUS_SLEEP_MASK bits set.
  */
 void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
@@ -1210,8 +1210,8 @@ void BattleScene_TickRow16PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) 
 
 /**
  * State row 18 tick: on frame 1 plays cry mode 4 and the matching species
- * sound, unless flag 0x4000 is set or the Pokemon is frozen
- * (status & 0x20) or asleep (status & 7).
+ * sound, unless ACTIVE_UNDERGROUND is set or the Pokemon has
+ * STATUS_FREEZE or STATUS_SLEEP_MASK bits set.
  */
 void BattleScene_TickRow18PlayCryAndSpeciesSound(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
@@ -1468,9 +1468,9 @@ void BattleScene_TickQueueList3Selector2OrC(ActivePokemon* active_pokemon) {
 
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->faintCue;
     if (sCurrentAnimation->unk_09 == 1) {
-        first_effect_frame = sCurrentAnimation->unk_0A - 76;
+        first_effect_frame = sCurrentAnimation->frameCounter - 76;
     } else {
-        first_effect_frame = sCurrentAnimation->unk_0A - 49;
+        first_effect_frame = sCurrentAnimation->frameCounter - 49;
     }
 
     if (BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) {
@@ -1504,9 +1504,9 @@ void BattleScene_TickQueueList3Selector2OrCFromB10(ActivePokemon* active_pokemon
 
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->unk_B10;
     if (sCurrentAnimation->unk_09 == 1) {
-        first_effect_frame = sCurrentAnimation->unk_0A - 76;
+        first_effect_frame = sCurrentAnimation->frameCounter - 76;
     } else {
-        first_effect_frame = sCurrentAnimation->unk_0A - 49;
+        first_effect_frame = sCurrentAnimation->frameCounter - 49;
     }
 
     if ((BattleAnim_IsAssetLoadBusy(active_pokemon) == 0) && ((first_effect_frame <= 0) || (first_effect_frame == active_pokemon->animationTimer))) {
@@ -1815,14 +1815,14 @@ void BattleAnim_SetModelEventTrackAndState(ActivePokemon* active_pokemon, s32 cu
 }
 
 /**
- * Returns 1 while the freeze flag (0x2), sleep (status & 7), flag 0x200 without
- * 0x400, or flag 0x4000 is set.
+ * Returns 1 while ACTIVE_FREEZE, STATUS_SLEEP_MASK, ACTIVE_AIRBORNE without
+ * ACTIVE_AIR_ACTION, or ACTIVE_UNDERGROUND is set.
  */
 s32 BattleScene_IsParticipantIncapacitated(ActivePokemon* active_pokemon) {
     ActivePokemonState* state = &active_pokemon->state;
     BattleMon* pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
-    if ((state->flags & ACTIVE_FREEZE) || (pokemon->statusCondition & 7) || ((state->flags & ACTIVE_AIRBORNE) && !(state->flags & 0x400)) ||
+    if ((state->flags & ACTIVE_FREEZE) || (pokemon->statusCondition & STATUS_SLEEP_MASK) || ((state->flags & ACTIVE_AIRBORNE) && !(state->flags & 0x400)) ||
         (state->flags & ACTIVE_UNDERGROUND)) {
         return 1;
     }
@@ -1862,14 +1862,14 @@ s32 BattleScene_IsRowWaitCompleteWithEventCount(ActivePokemon* active_pokemon, s
         return 0;
     }
 
-    if ((sCurrentAnimation->unk_0A < 11) || (sCurrentAnimation->unk_0A == 0xFF)) {
+    if ((sCurrentAnimation->frameCounter < 11) || (sCurrentAnimation->frameCounter == 0xFF)) {
         if (active_pokemon->displayObject.transformAnim.animationId == -1) {
             return 1;
         }
         return ModelAnim_IsAnimationDone(&active_pokemon->displayObject);
     }
 
-    if (BattleScene_AdvanceCameraFrameCounter(sCurrentAnimation->unk_0A + 1) != 0) {
+    if (BattleScene_AdvanceCameraFrameCounter(sCurrentAnimation->frameCounter + 1) != 0) {
         return 1;
     }
 
@@ -1906,9 +1906,9 @@ s32 Battle_IsRowAnimationSettled(ActivePokemon* active_pokemon, s32 frame_limit)
     }
 
     if (move_cue->id == idle_cue->id) {
-        if (move_cue->unk_0A != 0xFF) {
+        if (move_cue->frameCounter != 0xFF) {
             sBattleScene.unk_00->unk_14++;
-            if (move_cue->unk_0A == active_pokemon->animationTimer) {
+            if (move_cue->frameCounter == active_pokemon->animationTimer) {
                 return 1;
             }
             return 0;
@@ -1922,8 +1922,8 @@ s32 Battle_IsRowAnimationSettled(ActivePokemon* active_pokemon, s32 frame_limit)
 
     sBattleScene.unk_00->unk_14++;
 
-    if (move_cue->unk_0A != 0xFF) {
-        if (move_cue->unk_0A == active_pokemon->animationTimer) {
+    if (move_cue->frameCounter != 0xFF) {
+        if (move_cue->frameCounter == active_pokemon->animationTimer) {
             return 1;
         }
         return 0;
@@ -1960,9 +1960,9 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 fr
     }
 
     if (move_cue->id == idle_cue->id) {
-        if (move_cue->unk_0A != 0xFF) {
+        if (move_cue->frameCounter != 0xFF) {
             sBattleScene.unk_00->unk_14++;
-            if (move_cue->unk_0A == active_pokemon->animationTimer) {
+            if (move_cue->frameCounter == active_pokemon->animationTimer) {
                 return 1;
             }
             return 0;
@@ -1975,8 +1975,8 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 fr
 
     sBattleScene.unk_00->unk_14++;
 
-    if (move_cue->unk_0A != 0xFF) {
-        if (move_cue->unk_0A == active_pokemon->animationTimer) {
+    if (move_cue->frameCounter != 0xFF) {
+        if (move_cue->frameCounter == active_pokemon->animationTimer) {
             return 1;
         }
         return 0;
@@ -1986,7 +1986,8 @@ s32 BattleScene_IsMoveKeyedRowWaitComplete(ActivePokemon* active_pokemon, s32 fr
 
 /**
  * Returns 1 when the hit cue animation is done or replaced, or after
- * `frame_limit` frames while flag 0x2 or 0x200 (without 0x400) is set.
+ * `frame_limit` frames while ACTIVE_FREEZE or ACTIVE_AIRBORNE (without
+ * ACTIVE_AIR_ACTION) is set.
  */
 s32 BattleScene_IsRowAnimWaitComplete(ActivePokemon* active_pokemon, s32 frame_limit) {
     sCurrentAnimation = &sSideBattleCues[BattleScene_GetParticipantSideIndex(active_pokemon)]->hitCue;
@@ -2041,8 +2042,8 @@ s32 Battle_ClearRuntimeFlags(ActivePokemon* active_pokemon, u16 flag) {
 }
 
 /**
- * When unk_4C8 is set, restores the model height and clears the 0x200 and
- * 0x4000 flag groups.
+ * When unk_4C8 is set, restores the model height and clears the
+ * ACTIVE_AIRBORNE and ACTIVE_UNDERGROUND flag groups.
  */
 void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon) {
     ActivePokemonState* pokemon_state = &active_pokemon->state;
@@ -2066,8 +2067,9 @@ void BattleScene_ResetParticipantAnimationFlags(ActivePokemon* active_pokemon) {
 }
 
 /**
- * Moves participants with flag 0x4 to y = 200 (setting 0x200), restarts the
- * Dig cue for Dugtrio with flag 0x4000, then resets both participants' animation flags.
+ * Moves participants with ACTIVE_AIR_SETTLE to y = 200 (setting
+ * ACTIVE_AIRBORNE), restarts the Dig cue for Dugtrio with ACTIVE_UNDERGROUND,
+ * then resets both participants' animation flags.
  */
 void BattleScene_ResetBothParticipantsAnimationState(void) {
     ActivePokemonState* side1_pokemon_state;
@@ -2110,8 +2112,9 @@ void BattleScene_ResetBothParticipantsAnimationState(void) {
 }
 
 /**
- * Ends the opponent's Harden material, converts its flag 0x4 to 0x200 at
- * y = 200, and sets 0x400 on a user with flag 0x200.
+ * Ends the opponent's Harden material, converts ACTIVE_AIR_SETTLE to
+ * ACTIVE_AIRBORNE at y = 200, and sets ACTIVE_AIR_ACTION on a user with
+ * ACTIVE_AIRBORNE.
  */
 void Battle_ClearOpponentHopFlagAndSyncMove(ActivePokemon* active_pokemon) {
     UNUSED s32 pad;
@@ -2144,7 +2147,7 @@ void BattleScene_CleanupParticipantHideFlag(ActivePokemon* active_pokemon) {
 }
 
 /**
- * Clears the opponent's flag 0x4000, showing its model and stopping category
+ * Clears the opponent's ACTIVE_UNDERGROUND flag, showing its model and stopping category
  * 4 particles.
  */
 void BattleScene_CleanupOpponentSpecialAnimFlag(ActivePokemon* active_pokemon) {
@@ -2160,7 +2163,8 @@ void BattleScene_CleanupOpponentSpecialAnimFlag(ActivePokemon* active_pokemon) {
 }
 
 /**
- * Clears the opponent's flag 0x4000 (as above) and its hide flag (0x8).
+ * Clears the opponent's ACTIVE_UNDERGROUND flag (as above) and its
+ * ACTIVE_RETURN_RESET flag.
  */
 void BattleScene_CleanupOpponentAnimationFlags(ActivePokemon* active_pokemon) {
     ActivePokemon* target = sActivePokemon[BattleScene_GetParticipantSideIndex(active_pokemon) == 0];
@@ -2173,7 +2177,7 @@ void BattleScene_CleanupOpponentAnimationFlags(ActivePokemon* active_pokemon) {
         Battle_ClearRuntimeFlags(target, 0x4000);
     }
 
-    if (target_state->flags & 8) {
+    if (target_state->flags & ACTIVE_RETURN_RESET) {
         target->displayObject.position.y = BattleScene_GetParticipantModelHeight(active_pokemon);
         Battle_ClearRuntimeFlags(target, 0x608);
     }
@@ -2244,7 +2248,7 @@ void BattleScene_CleanupParticipantEffectMode(ActivePokemon* active_pokemon) {
 
 /**
  * Per-frame status presentation: freeze and sleep animations, the fade-in
- * flash, random idle event tracks and hiding models with flag 0x4000.
+ * flash, random idle event tracks and hiding models with ACTIVE_UNDERGROUND.
  */
 void BattleAnim_TickParticipantStatusAnimation(ActivePokemon* active_pokemon) {
     ActivePokemonState* state = &active_pokemon->state;
@@ -2298,7 +2302,7 @@ void BattleAnim_TickParticipantStatusAnimation(ActivePokemon* active_pokemon) {
 void BattleAnim_TriggerStatusAfflictionCry(ActivePokemon* active_pokemon) {
     BattleMon* party_pokemon = &active_pokemon->teamRoster->pokemonPicked[active_pokemon->state.rosterIndex];
 
-    if ((party_pokemon->statusCondition & 7) && !(active_pokemon->state.flags & 1)) {
+    if ((party_pokemon->statusCondition & STATUS_SLEEP_MASK) && !(active_pokemon->state.flags & ACTIVE_SLEEP)) {
         BattleAnim_SetModelEventTrackAndState(active_pokemon, BATTLE_CUE_SLEEP_IDLE, 2);
         BattleAnim_QueueEffectList(3, active_pokemon);
         BattleAnim_PlayBattleSequenceById(active_pokemon, 50);
@@ -2316,11 +2320,11 @@ void BattleScene_AllocateParticipantRecord(BattleSessionTeams* session_teams, s3
     bzero(active_pokemon, sizeof(ActivePokemon));
     bzero(&sActivePokemon[side_index]->state, sizeof(ActivePokemonState));
     bzero(&sActivePokemon[side_index]->state.runtime, sizeof(BattleMonRuntime));
-    bzero(&sActivePokemon[side_index]->unk_728, sizeof(PresentationState));
+    bzero(&sActivePokemon[side_index]->presentationState, sizeof(PresentationState));
     bzero(&sActivePokemon[side_index]->state.runtime.moveCache, sizeof(CachedMoveData));
     bzero(&sActivePokemon[side_index]->state.unk_9C, sizeof(unk_D_84390010_654_09C));
     bzero(&sActivePokemon[side_index]->state.unk_AC, sizeof(unk_D_84390010_654_0AC));
-    bzero(&sActivePokemon[side_index]->unk_8C4, sizeof(MonCaptionState));
+    bzero(&sActivePokemon[side_index]->captionState, sizeof(MonCaptionState));
     sActivePokemon[side_index]->sessionTeams = session_teams;
 }
 
@@ -2344,7 +2348,7 @@ void BattleScene_InitializeParticipantController(ActivePokemon* active_pokemon) 
     BattleScene_BindParticipantRosterForSide(active_pokemon, 0);
     BattleScene_SetParticipantSelectedSide(active_pokemon, 0);
     BattleScene_SetParticipantController(active_pokemon, controller);
-    active_pokemon->unk_728.unk_16C = 0;
+    active_pokemon->presentationState.unk_16C = 0;
 }
 
 /**
@@ -2392,30 +2396,31 @@ void BattleScene_InitializeParticipantModel(ActivePokemon* active_pokemon) {
  * Creates the participant's owner (trainer) model.
  */
 void BattleScene_InitializeParticipantOwnerModel(ActivePokemon* active_pokemon) {
-    PresentationState* presentation = &active_pokemon->unk_728;
+    PresentationState* presentation = &active_pokemon->presentationState;
     ModelNodeView* model_view;
     s16 model_id;
 
     model_view = Battle_GetMoveEffectListEntry(active_pokemon, 0);
     model_id = Battle_GetDisplayModelId(active_pokemon, 0);
-    ModelRenderer_AttachDisplayObject(&presentation->unk_000);
+    ModelRenderer_AttachDisplayObject(&presentation->displayObject);
 
     if (active_pokemon == sActivePokemon[0]) {
-        presentation->unk_000.effectSlot = -1;
-        Model_InitDisplayObject(&presentation->unk_000, 1, model_id, model_view);
+        presentation->displayObject.effectSlot = -1;
+        Model_InitDisplayObject(&presentation->displayObject, 1, model_id, model_view);
     } else {
-        presentation->unk_000.effectSlot = -1;
-        Model_InitDisplayObject(&presentation->unk_000, 2, model_id, model_view);
+        presentation->displayObject.effectSlot = -1;
+        Model_InitDisplayObject(&presentation->displayObject, 2, model_id, model_view);
     }
 
-    ModelAnim_SetAnimation(&presentation->unk_000, 0);
-    ModelAnim_SetFrame(&presentation->unk_000, 0);
-    presentation->unk_000.node.renderFlags &= ~0x40;
-    Vec3f_SetComponentsDuplicate(&presentation->unk_000.position, 0.0f, 0.0f, 0.0f);
+    ModelAnim_SetAnimation(&presentation->displayObject, 0);
+    ModelAnim_SetFrame(&presentation->displayObject, 0);
+    presentation->displayObject.node.renderFlags &= ~0x40;
+    Vec3f_SetComponentsDuplicate(&presentation->displayObject.position, 0.0f, 0.0f, 0.0f);
 }
 
 /**
  * Creates the participant's two hidden secondary models.
+ * ^?????? this annotation seems like a hallucination
  */
 void BattleScene_InitializeParticipantSecondaryModels(ActivePokemon* active_pokemon, UNUSED s32* secondary_models) {
     ModelNodeView* model_view;
@@ -2432,23 +2437,23 @@ void BattleScene_InitializeParticipantSecondaryModels(ActivePokemon* active_poke
         ModelRenderer_AttachDisplayObject(secondary_model);
 
         if (active_pokemon == sActivePokemon[0]) {
-            secondary_model->unk_000.effectSlot = 0xFF;
+            secondary_model->displayObject.effectSlot = 0xFF;
         } else {
-            secondary_model->unk_000.effectSlot = 0xFF;
+            secondary_model->displayObject.effectSlot = 0xFF;
         }
 
         Model_InitDisplayObject(secondary_model, 0, model_id, model_view);
         ModelAnim_SetFrame(secondary_model, 0);
         ModelAnim_SetAnimation(secondary_model, 0);
 
-        secondary_model->unk_000.node.renderFlags &= ~0x40;
+        secondary_model->displayObject.node.renderFlags &= ~0x40;
 
         if (active_pokemon == sActivePokemon[0]) {
             BattleScene_PositionParticipantModel(active_pokemon);
         } else {
             BattleScene_PositionParticipantModel(active_pokemon);
         }
-        secondary_model->unk_000.node.flags &= ~1;
+        secondary_model->displayObject.node.flags &= ~1;
     }
 }
 

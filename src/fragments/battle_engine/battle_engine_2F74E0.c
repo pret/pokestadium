@@ -809,7 +809,7 @@ void BattleScene_HandlePlayerPartySelection(ActivePokemon* arg0) {
         D_8439014C = &gControllers[arg0->sessionTeams->teamMember[idx]->unk_001];
     }
 
-    if (arg0->unk_8C4.unk_00 != 0) {
+    if (arg0->captionState.unk_00 != 0) {
         if (sp18->unk_C8->buttonPressed & 0xE03F) {
             BattleScene_ClearParticipantMessageBuffer(arg0);
         }
@@ -884,7 +884,7 @@ s32 BattleScene_HandleNoUsableMoveSelection(ActivePokemon* arg0) {
     }
 
     if (var_v1 == 0) {
-        if (arg0->unk_8C4.unk_00 == 0) {
+        if (arg0->captionState.unk_00 == 0) {
             if (temp_v0->unk_10 == 0) {
                 temp_v0->unk_10 = 1;
             }
@@ -978,7 +978,7 @@ void BattleScene_HandlePlayerMoveSelection(ActivePokemon* arg0) {
     ActivePokemonState* temp_v0 = &arg0->state;
 
     if ((temp_v0->unk_04 == 1) && (BattleScene_HandleNoUsableMoveSelection(arg0) == 0)) {
-        if (arg0->unk_8C4.unk_00 != 0) {
+        if (arg0->captionState.unk_00 != 0) {
             if (BTN_IS_PRESSED(sp1C,
                                BTN_A | BTN_B | BTN_Z | BTN_L | BTN_R | BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT)) {
                 BattleScene_ClearParticipantMessageBuffer(arg0);
@@ -1122,17 +1122,17 @@ s32 BattleScene_HandlePlayerForcedActionState(ActivePokemon* arg0, ActivePokemon
 }
 
 void BattleScene_ShowParticipantOwnerAndSecondaryModels(void) {
-    sActivePokemon[0]->unk_728.unk_168->node.flags |= 1;
-    sActivePokemon[0]->unk_728.unk_000.node.flags |= 1;
-    sActivePokemon[1]->unk_728.unk_168->node.flags |= 1;
-    sActivePokemon[1]->unk_728.unk_000.node.flags |= 1;
+    sActivePokemon[0]->presentationState.unk_168->node.flags |= 1;
+    sActivePokemon[0]->presentationState.unk_000.node.flags |= 1;
+    sActivePokemon[1]->presentationState.unk_168->node.flags |= 1;
+    sActivePokemon[1]->presentationState.unk_000.node.flags |= 1;
 }
 
 void BattleScene_HideParticipantOwnerAndSecondaryModels(void) {
-    sActivePokemon[0]->unk_728.unk_168->node.flags &= ~1;
-    sActivePokemon[0]->unk_728.unk_000.node.flags &= ~1;
-    sActivePokemon[1]->unk_728.unk_168->node.flags &= ~1;
-    sActivePokemon[1]->unk_728.unk_000.node.flags &= ~1;
+    sActivePokemon[0]->presentationState.unk_168->node.flags &= ~1;
+    sActivePokemon[0]->presentationState.unk_000.node.flags &= ~1;
+    sActivePokemon[1]->presentationState.unk_168->node.flags &= ~1;
+    sActivePokemon[1]->presentationState.unk_000.node.flags &= ~1;
 }
 
 void BattleScene_AdvanceAttractInputScript(void) {

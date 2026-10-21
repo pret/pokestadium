@@ -384,7 +384,7 @@ void BattleScene_RebindParticipantToSide(ActivePokemon* arg0, s32 arg1) {
     BattleScene_BindParticipantRosterForSide(arg0, arg1);
     BattleScene_SetParticipantSelectedSide(arg0, arg1);
     temp_v0->rosterIndex = temp_v0->unk_18;
-    arg0->unk_728.unk_16C = temp_v0->unk_2B;
+    arg0->presentationState.unk_16C = temp_v0->unk_2B;
 }
 
 s32 Battle_HasUsableSleepStatusTarget(ActivePokemon* active_pokemon) {
@@ -451,7 +451,7 @@ u8 BattleScene_GetRosterTeamSize(TeamRoster* arg0) {
 }
 
 s32 BattleScene_GetParticipantDisplayPlayerNumber(ActivePokemon* active_pokemon) {
-    return active_pokemon->sessionTeams->teamMember[active_pokemon->unk_728.unk_16C]->unk_001 + 1;
+    return active_pokemon->sessionTeams->teamMember[active_pokemon->presentationState.unk_16C]->unk_001 + 1;
 }
 
 void BattleScene_ReinitParticipantBodyModel(ActivePokemon* arg0, ActivePokemon* arg1, s32 arg2, s32 arg3) {
@@ -493,23 +493,23 @@ void BattleScene_ReinitParticipantOwnerModel(ActivePokemon* arg0, PresentationSt
     ModelNodeView* sp24;
 
     sp24 = Battle_GetMoveEffectListEntry(arg0, 0);
-    ModelRenderer_ClearDisplayObject(&arg1->unk_000);
+    ModelRenderer_ClearDisplayObject(&arg1->displayObject);
 
     if (arg0 == sActivePokemon[0]) {
-        arg1->unk_000.effectSlot = 0xFF;
+        arg1->displayObject.effectSlot = 0xFF;
     } else {
-        arg1->unk_000.effectSlot = 0xFF;
+        arg1->displayObject.effectSlot = 0xFF;
     }
 
     if (arg0 == sActivePokemon[0]) {
-        Model_InitDisplayObject(&arg1->unk_000, 1, arg2, sp24);
+        Model_InitDisplayObject(&arg1->displayObject, 1, arg2, sp24);
     } else {
-        Model_InitDisplayObject(&arg1->unk_000, 2, arg2, sp24);
+        Model_InitDisplayObject(&arg1->displayObject, 2, arg2, sp24);
     }
 
-    ModelAnim_SetFrame(&arg1->unk_000, 0);
-    ModelAnim_SetAnimation(&arg1->unk_000, 0);
-    arg1->unk_000.node.renderFlags &= ~0x40;
+    ModelAnim_SetFrame(&arg1->displayObject, 0);
+    ModelAnim_SetAnimation(&arg1->displayObject, 0);
+    arg1->displayObject.node.renderFlags &= ~0x40;
 }
 
 void BattleScene_ReinitParticipantSecondaryModels(ActivePokemon* arg0, s16 arg1) {
@@ -522,28 +522,28 @@ void BattleScene_ReinitParticipantSecondaryModels(ActivePokemon* arg0, s16 arg1)
     for (i = 0; i < 2; i++) {
         var_s0 = &arg0->unk_168[i];
 
-        ModelRenderer_ClearDisplayObject(&var_s0->unk_000);
+        ModelRenderer_ClearDisplayObject(&var_s0->displayObject);
         if (arg0 == sActivePokemon[0]) {
-            var_s0->unk_000.effectSlot = 0xFF;
+            var_s0->displayObject.effectSlot = 0xFF;
         } else {
-            var_s0->unk_000.effectSlot = 0xFF;
+            var_s0->displayObject.effectSlot = 0xFF;
         }
 
-        Model_InitDisplayObject(&var_s0->unk_000, 0, arg1, sp58);
-        ModelAnim_SetFrame(&var_s0->unk_000, 0);
-        ModelAnim_SetAnimation(&var_s0->unk_000, 0);
+        Model_InitDisplayObject(&var_s0->displayObject, 0, arg1, sp58);
+        ModelAnim_SetFrame(&var_s0->displayObject, 0);
+        ModelAnim_SetAnimation(&var_s0->displayObject, 0);
 
-        var_s0->unk_000.node.renderFlags &= ~0x40;
+        var_s0->displayObject.node.renderFlags &= ~0x40;
 
         if (arg0 == sActivePokemon[0]) {
-            Vec3f_SetComponentsDuplicate(&var_s0->unk_000.position, -150.0f, 0.0f, 0.0f);
-            var_s0->unk_000.rotation.y = 0x4000;
+            Vec3f_SetComponentsDuplicate(&var_s0->displayObject.position, -150.0f, 0.0f, 0.0f);
+            var_s0->displayObject.rotation.y = 0x4000;
         } else {
-            Vec3f_SetComponentsDuplicate(&var_s0->unk_000.position, 150.0f, 0.0f, 0.0f);
-            var_s0->unk_000.rotation.y = -0x4000;
+            Vec3f_SetComponentsDuplicate(&var_s0->displayObject.position, 150.0f, 0.0f, 0.0f);
+            var_s0->displayObject.rotation.y = -0x4000;
         }
 
-        var_s0->unk_000.node.flags &= ~1;
+        var_s0->displayObject.node.flags &= ~1;
     }
 }
 
@@ -565,7 +565,7 @@ void Battle_LoadOwnerModelForSpecies(ActivePokemon* active_pokemon) {
     Battle_GetMoveEffectListEntry(active_pokemon, 0);
     sp26 = Battle_GetDisplayModelId(active_pokemon, 0);
     BattleScene_ReinitParticipantBodyModel(active_pokemon, active_pokemon, sp26, 0);
-    BattleScene_ReinitParticipantOwnerModel(active_pokemon, &active_pokemon->unk_728, sp26);
+    BattleScene_ReinitParticipantOwnerModel(active_pokemon, &active_pokemon->presentationState, sp26);
     BattleScene_ReinitParticipantSecondaryModels(active_pokemon, sp26);
     Battle_ResetEventTrack(active_pokemon);
     ptr->flags &= 0x1800;
@@ -580,7 +580,7 @@ void Battle_LoadOwnerModelForSwitchIn(ActivePokemon* active_pokemon) {
     Battle_GetMoveEffectListEntry(active_pokemon, 0);
     model_id = Battle_GetDisplayModelId(active_pokemon, 0);
     BattleScene_ReinitParticipantBodyModel(active_pokemon, active_pokemon, model_id, 1);
-    BattleScene_ReinitParticipantOwnerModel(active_pokemon, &active_pokemon->unk_728, model_id);
+    BattleScene_ReinitParticipantOwnerModel(active_pokemon, &active_pokemon->presentationState, model_id);
     BattleScene_ReinitParticipantSecondaryModels(active_pokemon, model_id);
     Battle_ResetEventTrack(active_pokemon);
     pokemon_state->unk_2D = 0;

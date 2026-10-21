@@ -557,11 +557,11 @@ void BattleScene_UpdateIntroCameraSequence(CameraNode* arg0) {
     if ((gSessionContext.mode == 0x10) && (sBattleScene.unk_00->unk_1C == 1)) {
         BattleScene_UpdateActionSelectPhase();
     } else if (sBattleScene.unk_00->unk_1C == 1) {
-        if ((sBattleScene.unk_00->unk_30 == 0) && (sActivePokemon[0]->unk_728.unk_168->unk_1C == 0x17) &&
-            (sActivePokemon[1]->unk_728.unk_168->unk_1C == 0x103)) {
+        if ((sBattleScene.unk_00->unk_30 == 0) && (sActivePokemon[0]->presentationState.unk_168->unk_1C == 0x17) &&
+            (sActivePokemon[1]->presentationState.unk_168->unk_1C == 0x103)) {
             BattleScene_UpdateActionSelectPhase();
-        } else if ((sBattleScene.unk_00->unk_30 == 0) && (sActivePokemon[0]->unk_728.unk_168->unk_1C < 0xE) &&
-                   (sActivePokemon[1]->unk_728.unk_168->unk_1C >= 0x10D)) {
+        } else if ((sBattleScene.unk_00->unk_30 == 0) && (sActivePokemon[0]->presentationState.unk_168->unk_1C < 0xE) &&
+                   (sActivePokemon[1]->presentationState.unk_168->unk_1C >= 0x10D)) {
             BattleScene_ResetActionSelectionTimers();
         }
     }

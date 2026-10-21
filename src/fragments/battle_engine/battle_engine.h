@@ -21,7 +21,7 @@ typedef struct unk_D_84390010_654_0AC {
 } unk_D_84390010_654_0AC; // size = 0x10
 
 typedef struct unk_D_84390010_168 {
-    /* 0x000 */ DisplayObject unk_000;
+    /* 0x000 */ DisplayObject displayObject;
     /* 0x168 */ char unk168[0x1];
     /* 0x169 */ u8 unk_169;
     /* 0x16A */ s16 unk_16A;
@@ -78,7 +78,7 @@ typedef struct PresentationLayout {
 } PresentationLayout; // size >= 0xC0
 
 typedef struct PresentationState {
-    /* 0x000 */ DisplayObject unk_000;
+    /* 0x000 */ DisplayObject displayObject;
     /* 0x168 */ PresentationLayout* unk_168;
     /* 0x16C */ s32 unk_16C;
     /* 0x170 */ s32 unk_170;
@@ -158,8 +158,8 @@ typedef struct ActivePokemon {
     /* 0x654 */ ActivePokemonState state;
     /* 0x720 */ BattleSessionTeams* sessionTeams;
     /* 0x724 */ TeamRoster* teamRoster;
-    /* 0x728 */ PresentationState unk_728;
-    /* 0x8C4 */ MonCaptionState unk_8C4;
+    /* 0x728 */ PresentationState presentationState;
+    /* 0x8C4 */ MonCaptionState captionState;
     /* 0x94C */ SpeciesLearnsetBuffer redBlueLearnsets[3];
     /* 0x9AC */ SpeciesLearnsetBuffer yellowLearnsets[3];
 } ActivePokemon; // size = 0xA0C
@@ -175,7 +175,7 @@ typedef struct MovePresentationCue {
     /* 0x07 */ u8 endFrame;
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
+    /* 0x0A */ u8 frameCounter;
     /* 0x0B */ u8 animationTimer;
     /* 0x0C */ u8 checkpointFrame;
     /* 0x0D */ u8 unk_0D;

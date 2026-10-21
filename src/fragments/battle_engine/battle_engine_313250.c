@@ -96,8 +96,8 @@ void BattleScene_IntroRevealFirstMon(CameraNode* arg0) {
     ActivePokemonState* sp2C = &sActivePokemon[0]->state;
     TeamRoster* sp28 = sActivePokemon[0]->sessionTeams->teamMember[sp2C->unk_2C];
 
-    sActivePokemon[0]->unk_728.unk_168->node.flags |= 1;
-    sActivePokemon[0]->unk_728.unk_000.node.flags |= 1;
+    sActivePokemon[0]->presentationState.unk_168->node.flags |= 1;
+    sActivePokemon[0]->presentationState.unk_000.node.flags |= 1;
     BattleScene_TriggerOwnerModelAnimation(sActivePokemon[0]);
     sActivePokemon[0]->displayObject.node.flags &= ~1;
     sActivePokemon[1]->displayObject.node.flags &= ~1;
@@ -125,8 +125,8 @@ void BattleScene_IntroFirstMonSettle(CameraNode* arg0) {
         BattleScene_SelectCameraFollowPreset(sActivePokemon[0], arg0, 3);
     }
 
-    sActivePokemon[0]->unk_728.unk_168->node.flags &= ~1;
-    sActivePokemon[0]->unk_728.unk_000.node.flags &= ~1;
+    sActivePokemon[0]->presentationState.unk_168->node.flags &= ~1;
+    sActivePokemon[0]->presentationState.unk_000.node.flags &= ~1;
     sActivePokemon[1]->displayObject.node.flags &= ~1;
     BattleScene_ReframeAndRecomputeDistanceForSwitch(arg0, sActivePokemon[0]);
 
@@ -139,8 +139,8 @@ void BattleScene_IntroRevealSecondMon(CameraNode* arg0) {
     ActivePokemonState* sp2C = &sActivePokemon[1]->state;
     TeamRoster* sp28 = sActivePokemon[1]->sessionTeams->teamMember[sp2C->unk_2C];
 
-    sActivePokemon[1]->unk_728.unk_168->node.flags |= 1;
-    sActivePokemon[1]->unk_728.unk_000.node.flags |= 1;
+    sActivePokemon[1]->presentationState.unk_168->node.flags |= 1;
+    sActivePokemon[1]->presentationState.unk_000.node.flags |= 1;
     BattleScene_TriggerOwnerModelAnimation(sActivePokemon[1]);
     Audio_PlayCommand(2, 0, 0);
     BattleAnim_QueueEffectList3(3, sActivePokemon[1], sActivePokemon[1], 0xFF, 0xFF);
@@ -168,8 +168,8 @@ void BattleScene_IntroSecondMonSettle(CameraNode* arg0) {
     if (sBattleScene.unk_00->unk_10++ == 1) {
         BattleScene_SelectCameraFollowPreset(sActivePokemon[1], arg0, 3);
     }
-    sActivePokemon[1]->unk_728.unk_168->node.flags &= ~1;
-    sActivePokemon[1]->unk_728.unk_000.node.flags &= ~1;
+    sActivePokemon[1]->presentationState.unk_168->node.flags &= ~1;
+    sActivePokemon[1]->presentationState.unk_000.node.flags &= ~1;
     sActivePokemon[0]->displayObject.node.flags &= ~1;
     BattleScene_ReframeAndRecomputeDistanceForSwitch(arg0, sActivePokemon[1]);
     if (BattleScene_IsRowWaitCompleteWithEventCount(sActivePokemon[1], 0x3C) != 0) {

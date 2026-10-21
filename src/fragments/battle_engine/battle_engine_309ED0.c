@@ -927,7 +927,7 @@ void BattleScene_AdvanceSendOutCamera(CameraNode* arg0) {
             BattleBox_Open(9);
         }
 
-        if (sp20->unk_0A == ((sActivePokemon[!sBattleScene.unk_00->unk_2C]->displayObject.transformAnim.frameFixed >> 0x10) + 3)) {
+        if (sp20->frameCounter == ((sActivePokemon[!sBattleScene.unk_00->unk_2C]->displayObject.transformAnim.frameFixed >> 0x10) + 3)) {
             sActivePokemon[!sBattleScene.unk_00->unk_2C]->displayObject.node.renderFlags &= ~0x20;
             Battle_SetRuntimeFlags(sActivePokemon[!sBattleScene.unk_00->unk_2C], 0x100);
             BattleScene_ResetCameraFrameCounter();
@@ -1076,7 +1076,7 @@ void BattleScene_AdvanceSendOutFollowupCamera(CameraNode* arg0) {
             BattleBox_Open(9);
         }
 
-        if (sp20->unk_0A == ((sActivePokemon[!sBattleScene.unk_00->unk_2C]->displayObject.transformAnim.frameFixed >> 0x10) + 3)) {
+        if (sp20->frameCounter == ((sActivePokemon[!sBattleScene.unk_00->unk_2C]->displayObject.transformAnim.frameFixed >> 0x10) + 3)) {
             sActivePokemon[!sBattleScene.unk_00->unk_2C]->displayObject.node.renderFlags &= ~0x20;
             Battle_SetRuntimeFlags(sActivePokemon[!sBattleScene.unk_00->unk_2C], 0x100);
             BattleScene_ResetCameraFrameCounter();
@@ -1981,10 +1981,10 @@ void BattleScene_RunRepeatedHitHpTransition(CameraNode* arg0) {
 
     if (D_84390200->displayObject.objectType == 0x98) {
         sp1C = 0xF;
-    } else if (temp_v1->unk_0A == 0xFF) {
+    } else if (temp_v1->frameCounter == 0xFF) {
         sp1C = D_84390204->displayObject.transformAnim.data->endFrame - temp_v1->unk_06;
     } else {
-        sp1C = temp_v1->unk_0A - temp_v1->unk_06;
+        sp1C = temp_v1->frameCounter - temp_v1->unk_06;
     }
 
     switch (sBattleScene.unk_00->unk_3C) {
@@ -2486,8 +2486,8 @@ void BattleScene_Phase15(CameraNode* arg0) {
 
         case 3:
             BattleScene_RecenterCameraOnOwner(arg0, D_84390204);
-            D_84390204->unk_728.unk_168->node.flags |= 1;
-            D_84390204->unk_728.unk_000.node.flags |= 1;
+            D_84390204->presentationState.unk_168->node.flags |= 1;
+            D_84390204->presentationState.displayObject.node.flags |= 1;
             BattleScene_TriggerOwnerModelAnimation(D_84390204);
             if (BattleScene_IsRowWaitComplete(D_84390204, 0x32) != 0) {
                 BattleScene_ResetAnimationStep();
